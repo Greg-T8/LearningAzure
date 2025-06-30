@@ -76,4 +76,6 @@ Bicep CLI version 0.36.1 (a727ed087a)
 
 ### Bicep Quickstart
 - [Create Bicep files - VS Code](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/quickstart-create-bicep-use-visual-studio-code?tabs=azure-cli)
+- [Bicep Playground](https://azure.github.io/bicep/) - lets you view Bicep and JSON side by side
+
 

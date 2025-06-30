@@ -15,7 +15,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2024-01-01' = {
   kind: 'StorageV2'
 }
 
-resource virtualNetwork 'Microsoft.Network/virtualNetworks@' = {
+resource virtualNetwork 'Microsoft.Network/virtualNetworks@2024-07-01' = {
   name: 'exampleVNet'
   location: location
   properties: {
