@@ -164,3 +164,79 @@ Outputs                 :
 DeploymentDebugLogLevel : 
 ```
 <img src="images/1751968314823.png" alt="Bicep Deployment Output" width="800">
+
+
+**Add an App Service Plan**
+
+```bicep
+resource storageAccount 'Microsoft.Storage/storageAccounts@2023-05-01' = {
+  name: '20250708toylaunchstorage'
+  location: 'eastus'
+  sku: {
+    name: 'Standard_LRS'
+  }
+  kind: 'StorageV2'
+  properties: {
+    accessTier: 'Hot'
+  }
+}
+
+resource appServicePlan 'Microsoft.Web/serverfarms@2024-04-01' = {
+  name: '20250708toy-product-launch-plan-starter'
+  location: 'eastus'
+  sku: {
+    name: 'F1'
+  }
+}
+
+resource appServiceApp 'Microsoft.Web/sites@2024-04-01' = {
+  name: '20250708toy-product-launch-1'
+  location: 'eastus'
+  properties: {
+    serverFarmId: appServicePlan.id
+    httpsOnly: true
+  }
+}
+```
+Deployment results:
+
+<img src="images/1751968819100.png" alt="Bicep Deployment Output" width="600">
+
+#### Using Parameters and Variables
+
+Parameters allow you to bring in values from outside the Bicep file. When deploying, you can provide the parameter values in the command line.
+
+You can also create a *parameter file*, which lists all teh parameters and values you want to use for the deployment.
+
+A variable is defined and set within the Bicep file.
+
+Use parameters for things that will change between each deployment:
+- Resource names that need to be unique
+- Locations into which resources are deployed
+- Settings that affect the pricing of resources, like SKUs, pricing tiers, and instance counts
+- Credentials and information needed to access other systems that aren't defined in the Bicep file
+
+Use variables when (1) you want to make a value resusable in the file or (2) you want to use expressions to create a complex value.
+
+##### Add a parameter
+
+Parameters are defined like this:
+
+```bicep
+param appServiceAppName string
+```
+
+How this works:
+- `param` is the keyword to define a parameter.
+- `appServiceAppName` is the symbolic name of the parameter.
+- `string` is the type of the parameter. Other types include `int`, `bool`, `array`, and `object`.
+
+###### Provide default values
+
+You can provide a default value for a parameter, which is used if no value is provided during deployment:
+
+```bicep
+param appServiceAppName string = '20250708toy-product-launch-1'
+```
+
+
