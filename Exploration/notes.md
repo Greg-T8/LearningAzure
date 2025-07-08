@@ -61,6 +61,8 @@ Bicep CLI version 0.36.1 (a727ed087a)
 
 https://learn.microsoft.com/en-us/training/modules/build-first-bicep-file/
 
+#### Defining a Resource
+
 When you submit a Bicep file, it is transpiled to an ARM template. The Bicep file is then validated and deployed to Azure.
 
 <img src="images/1751967045419.png" alt="Bicep Deployment Flow" width="400">
@@ -85,3 +87,80 @@ Things to note:
 - The *symbolic name* is `storageAccount`. Symbolic names are used within Bicep but do not show up in the ARM template.
 - `'Microsoft.Storage/storageAccounts@2023-05-01'` is the *resource type* and *API version*.
 - You have to declare a *resource name*, which is the name of the storage account to be assigned in Azure.
+
+#### Resource Dependencies
+
+Often, you need a resource to depend on another resource, e.g. to deploy an App Service, you need and App Service Plan.
+
+Declaring the app service plan:
+
+```bicep
+resource appServicePlan 'Microsoft.Web/serverFarms@2023-12-01' = {
+  name: 'toy-product-launch-plan'
+  location: 'westus3'
+  sku: {
+    name: 'F1'
+  }
+}
+```
+Declaring the app:  
+```bicep
+resource appServiceApp 'Microsoft.Web/sites@2023-12-01' = {
+  name: 'toy-product-launch-1'
+  location: 'westus3'
+  properties: {
+    serverFarmId: appServicePlan.id             // Reference the app service plan; implicit dependency
+    httpsOnly: true
+  }
+}
+```
+
+#### Exercise: Define resources in a Bicep file
+
+Create the following `main.bicep` file:
+
+```bicep
+resource storageAccount 'Microsoft.Storage/storageAccounts@2023-05-01' = {
+  name: '20250708toylaunchstorage'
+  location: 'eastus'
+  sku: {
+    name: 'Standard_LRS'
+  }
+  kind: 'StorageV2'
+  properties: {
+    accessTier: 'Hot'
+  }
+}
+```
+
+Deploy the Bicep file to Azure:
+
+```pwsh
+Set-AzDefault -ResourceGroupName 'BicepDeployment'
+
+New-AzResourceGroupDeployment -Name main -TemplateFile main.bicep
+
+DeploymentName          : main
+ResourceGroupName       : BicepDeployment
+ProvisioningState       : Succeeded
+Timestamp               : 7/8/2025 9:49:16 AM
+Mode                    : Incremental
+TemplateLink            : 
+Parameters              : 
+Outputs                 : 
+DeploymentDebugLogLevel : 
+
+
+Get-AzResourceGroupDeployment -ResourceGroupName BicepDeployment
+
+DeploymentName          : main
+ResourceGroupName       : BicepDeployment
+ProvisioningState       : Succeeded
+Timestamp               : 7/8/2025 9:49:16 AM
+Mode                    : Incremental
+TemplateLink            : 
+Parameters              : 
+Outputs                 : 
+DeploymentDebugLogLevel : 
+```
+<img src="images/1751968314823.png" alt="Bicep Deployment Output" width="800">
