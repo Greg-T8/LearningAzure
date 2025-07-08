@@ -7,7 +7,12 @@ The following notes are based on the Azure documentation and personal exploratio
 - [Azure Bicep Documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Bicep GitHub Page](https://github.com/Azure/bicep) - Interesting read
 
+### Bicep Command Reference
 
+```pwsh
+New-AzResourceGroupDeployment -ResourceGroupName BicepDeployment -TemplateFile .\main.bicep
+```
+### Install the Bicep CLI
 
 Use the following command to install the self-contained version of the Bicep CLI from `az`:
 
@@ -51,3 +56,32 @@ Bicep CLI version 0.36.1 (a727ed087a)
 ### Bicep Quickstart
 - [Create Bicep files - VS Code](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/quickstart-create-bicep-use-visual-studio-code?tabs=azure-cli)
 - [Bicep Playground](https://azure.github.io/bicep/) - lets you view Bicep and JSON side by side
+
+### Learning Module - Build your first Bicep file
+
+https://learn.microsoft.com/en-us/training/modules/build-first-bicep-file/
+
+When you submit a Bicep file, it is transpiled to an ARM template. The Bicep file is then validated and deployed to Azure.
+
+<img src="images/1751967045419.png" alt="Bicep Deployment Flow" width="400">
+
+Example of a Bicep file:
+
+```bicep
+resource storageAccount 'Microsoft.Storage/storageAccounts@2023-05-01' = {
+  name: 'toylaunchstorage'
+  location: 'westus3'
+  sku: {
+    name: 'Standard_LRS'
+  }
+  kind: 'StorageV2'
+  properties: {
+    accessTier: 'Hot'
+  }
+}
+```
+Things to note:
+- The `resource` keyword is used to define a resource.
+- The *symbolic name* is `storageAccount`. Symbolic names are used within Bicep but do not show up in the ARM template.
+- `'Microsoft.Storage/storageAccounts@2023-05-01'` is the *resource type* and *API version*.
+- You have to declare a *resource name*, which is the name of the storage account to be assigned in Azure.
