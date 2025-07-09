@@ -1,6 +1,9 @@
+param appServiceAppName string = '20250708toy-product-launch-1'
+param location string = resourceGroup().location
+
 resource storageAccount 'Microsoft.Storage/storageAccounts@2023-05-01' = {
   name: '20250708toylaunchstorage'
-  location: 'eastus'
+  location: location
   sku: {
     name: 'Standard_LRS'
   }
@@ -11,8 +14,8 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-05-01' = {
 }
 
 resource appServicePlan 'Microsoft.Web/serverfarms@2024-04-01' = {
-  name: '20250708toy-product-launch-plan-starter'
-  location: 'eastus'
+  name: appServiceAppName
+  location: location
   sku: {
     name: 'F1'
   }
@@ -20,7 +23,7 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2024-04-01' = {
 
 resource appServiceApp 'Microsoft.Web/sites@2024-04-01' = {
   name: '20250708toy-product-launch-1'
-  location: 'eastus'
+  location: location
   properties: {
     serverFarmId: appServicePlan.id
     httpsOnly: true
