@@ -59,7 +59,7 @@ Bicep CLI version 0.36.1 (a727ed087a)
 
 ### Learning Module - Build your first Bicep file
 
-https://learn.microsoft.com/en-us/training/modules/build-first-bicep-file/
+[Module: Build your first Bicep file](https://learn.microsoft.com/en-us/training/modules/build-first-bicep-file/)
 
 #### Defining a Resource
 
@@ -239,4 +239,79 @@ You can provide a default value for a parameter, which is used if no value is pr
 param appServiceAppName string = '20250708toy-product-launch-1'
 ```
 
+###### Use parameters in Bicep files
 
+```bicep
+param appServiceAppName string = '20250708toy-product-launch-1'
+
+resource appServicePlan 'Microsoft.Web/serverfarms@2024-04-01' = {
+  name: appServiceAppName       // Use the parameter value for the name
+  location: 'eastus'
+  sku: {
+    name: 'F1'
+  }
+}
+```
+
+#### Add a variable
+
+You can define a variable like this:
+
+```bicep
+var appServicePlanName = 'toy-product-launch-plan'
+```
+
+Requirements for defining variables:
+- Use the `var` keyword.
+- You must provide a value for a variable.
+- Variables don't need types. Bicep infers the type from the value.
+
+#### Expressions
+
+##### Resource Locations
+
+When writing a template, you don't want to specify the location of each resource individually. Instead, you can have a rule that says, *by default all resources into the same location in which the resource group was created.*
+
+```bicep
+param location string = resourceGroup().location
+```
+
+The default value of this parameter uses a function instead of a literal value.
+
+**Note:** Some resources can be deployed only into certain locations. For these cases, you may need to create separate parameters to set the location of these resources.
+
+You can now use the `location` parameter in your resources:
+
+```bicep
+param appServiceAppName string = '20250708toy-product-launch-1'
+param location string = resourceGroup().location
+
+resource storageAccount 'Microsoft.Storage/storageAccounts@2023-05-01' = {
+  name: '20250708toylaunchstorage'
+  location: location                // Use the location parameter
+  sku: {
+    name: 'Standard_LRS'
+  }
+  kind: 'StorageV2'
+  properties: {
+    accessTier: 'Hot'
+  }
+}
+
+resource appServicePlan 'Microsoft.Web/serverfarms@2024-04-01' = {
+  name: appServiceAppName
+  location: location                // Use the location parameter
+  sku: {
+    name: 'F1'
+  }
+}
+
+resource appServiceApp 'Microsoft.Web/sites@2024-04-01' = {
+  name: '20250708toy-product-launch-1'
+  location: location                // Use the location parameter
+  properties: {
+    serverFarmId: appServicePlan.id
+    httpsOnly: true
+  }
+}
+```
