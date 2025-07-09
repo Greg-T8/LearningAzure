@@ -19,6 +19,7 @@ The following notes are based on the Azure documentation and personal exploratio
       - [Resource Locations](#resource-locations)
       - [Resource Names](#resource-names)
       - [Combined strings](#combined-strings)
+      - [Selecting SKUs for resources](#selecting-skus-for-resources)
 
 
 ## Azure Bicep
@@ -363,4 +364,25 @@ Bicep uses *string interpolation* to combine strings and variables into a single
 
 ```bicep
 param storageAccountName string = 'toylaunch${uniqueString(resourceGroup().id)}'
+```
+
+##### Selecting SKUs for resources
+
+You can embed business rules into the file by using a combination of parameters, variables, and expressions.
+
+```bicep
+@allowed([
+  'nonprod'
+  'prod'
+])
+param environmentType string
+```
+
+With these allowed values, Bicep won't let anyone deploy the Bicep file unless they provide one of these values.
+
+Now you can create variables that determine the SKUs to use:
+
+```bicep
+var storageAccountSkuName = (environmentType == 'prod') ? 'Standard_GRS' : 'Standard_LRS'
+var appServicePlanSkuName = (environmentType == 'prod') ? 'P2V3' : 'F1'
 ```
