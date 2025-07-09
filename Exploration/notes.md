@@ -2,6 +2,25 @@
 
 The following notes are based on the Azure documentation and personal exploration of Azure services.
 
+<!-- omit in toc -->
+## Contents
+- [Azure Bicep](#azure-bicep)
+  - [Bicep Command Reference](#bicep-command-reference)
+  - [Install the Bicep CLI](#install-the-bicep-cli)
+  - [Bicep Quickstart](#bicep-quickstart)
+  - [Learning Module - Build your first Bicep file](#learning-module---build-your-first-bicep-file)
+    - [Defining a Resource](#defining-a-resource)
+    - [Resource Dependencies](#resource-dependencies)
+    - [Exercise: Define resources in a Bicep file](#exercise-define-resources-in-a-bicep-file)
+    - [Using Parameters and Variables](#using-parameters-and-variables)
+      - [Add a parameter](#add-a-parameter)
+      - [Add a variable](#add-a-variable)
+    - [Expressions](#expressions)
+      - [Resource Locations](#resource-locations)
+      - [Resource Names](#resource-names)
+      - [Combined strings](#combined-strings)
+
+
 ## Azure Bicep
 
 - [Azure Bicep Documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
@@ -253,7 +272,7 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2024-04-01' = {
 }
 ```
 
-#### Add a variable
+##### Add a variable
 
 You can define a variable like this:
 
@@ -314,4 +333,34 @@ resource appServiceApp 'Microsoft.Web/sites@2024-04-01' = {
     httpsOnly: true
   }
 }
+```
+
+##### Resource Names
+
+Bicep has the built-in function `uniqueString()` that helps you build unique names for resources. You provide a *seed* value, which allows for uniqueness and consistency across deployments.
+
+```bicep
+param storageAccountName string = uniqueString(resourceGroup().id)
+```
+
+Here's what `resourceGroup().id` looks like:
+
+```
+/subscriptions/aaaa0a0a-bb1b-cc2c-dd3d-eeeeee4e4e4e/resourceGroups/MyResourceGroup
+```
+
+The `uniqueString()` function is deterministic, meaning it will always return the same value for the same seed. An example value returned from `resourceGroup().id` might be `7c6b2a3d61a4b`.
+
+`resourceGroup().id` is a good candidate for resource names because:
+- The `uniqueString()` function returns the same value every time you deploy resources into the same resource group.
+- The `uniqueString()` function returns different values for different resource groups and subscriptions, which helps ensure that resource names are unique across your Azure environment.
+
+##### Combined strings
+
+If you just use the `uniqueString()` function to set resource names, you'll get unique names, but they won't be very descriptive. 
+
+Bicep uses *string interpolation* to combine strings and variables into a single string. You can use this to create more descriptive resource names.
+
+```bicep
+param storageAccountName string = 'toylaunch${uniqueString(resourceGroup().id)}'
 ```
