@@ -23,6 +23,14 @@
   - [Group related resources by using modules](#group-related-resources-by-using-modules)
     - [Outputs](#outputs)
     - [Define a module](#define-a-module)
+    - [Design your modules](#design-your-modules)
+  - [Exercise: Refactor your Bicep file to use modules](#exercise-refactor-your-bicep-file-to-use-modules)
+    - [Add a new module file](#add-a-new-module-file)
+    - [Add a reference to the module in `main.bicep`](#add-a-reference-to-the-module-in-mainbicep)
+    - [Add the host name as an output](#add-the-host-name-as-an-output)
+    - [Verify your Bicep files](#verify-your-bicep-files)
+    - [Deploy the updated Bicep file](#deploy-the-updated-bicep-file)
+  - [Module Assessment](#module-assessment)
 
 
 
@@ -484,3 +492,169 @@ module myModule 'modules/mymodule.bicep' = {
 - `'modules/mymodule.bicep'` is the path to the Bicep file that defines the module.
 - The `name` property is mandatory as Azure uses this property to create a separate deployment for each module within the Bicep file. These deployments have names you can use to identify them.
 - The `params` property is used to pass parameters to the module.
+
+#### Design your modules
+
+Key principles:
+- A module should have a clear purpose.
+- Don't put every resource into its own module. Group related resources together.
+- A module should have clear parameters and outputs that make sense.
+- A module should be as self-contained as possible. It should not depend on resources defined outside the module.
+- A module shouldn't output secrets. 
+
+### Exercise: Refactor your Bicep file to use modules
+
+#### Add a new module file
+
+Create a new `modules` directory and add `appService.bicep` file:
+
+```cmd
+C:.
+│   main.bicep
+│   
+└───modules
+        appService.bicep
+```
+
+[appService.bicep](./Bicep/LP1-Build_your_first/modules/appService.bicep):
+```bicep
+param location string                       // Parameters copied from main.bicep
+param appServiceAppName string              
+
+@allowed([
+  'nonprod'
+  'prod'
+])
+param environmentType string
+
+var appServicePlanName = 'toy-product-launch-plan'
+var appServicePlanSkuName = (environmentType == 'prod') ? 'P2v3' : 'F1'
+
+resource appServicePlan 'Microsoft.Web/serverfarms@2024-04-01' = {
+  name: appServicePlanName
+  location: location
+  sku: {
+    name: appServicePlanSkuName
+  }
+}
+
+resource appServiceApp 'Microsoft.Web/sites@2024-04-01' = {
+  name: appServiceAppName
+  location: location
+  properties: {
+    serverFarmId: appServicePlan.id
+    httpsOnly: true
+  }
+}
+```
+
+#### Add a reference to the module in `main.bicep`
+
+[main.bicep](./Bicep/LP1-Build_your_first/main.bicep):
+```bicep
+module appService 'modules/appService.bicep' = {            // added at the bottom
+  name: 'appService'
+  params: {
+    location: location                                      // Specifying parameters to pass to the module
+    appServiceAppName: appServiceAppName                    // Referencing paraemters already defined in main.bicep
+    environmentType: environmentType
+  }
+}
+```
+
+Delete the App Service resources and the `appServicePlanName` and the `appServicePlanSkuName` variable definitions from `main.bicep`, since they are now defined in the `appService.bicep` module.
+
+#### Add the host name as an output
+
+[appService.bicep](./Bicep/LP1-Build_your_first/modules/appService.bicep):
+```bicep
+output appServiceAppHostName string = appServiceApp.properties.defaultHostName      // Added at the bottom
+```
+The output takes its value from the `defaultHostName` property of the `appServiceApp` resource.
+
+#### Verify your Bicep files
+
+[main.bicep](./Bicep/LP1-Build_your_first/main.bicep):
+```bicep
+param location string = resourceGroup().location
+param storageAccountName string = 'toylaunch${uniqueString(resourceGroup().id)}'
+param appServiceAppName string = 'toylaunch${uniqueString(resourceGroup().id)}'
+@allowed([
+  'nonprod'
+  'prod'
+])
+param environmentType string
+
+var storageAccountSkuName = (environmentType == 'prod') ? 'Standard_GRS' : 'Standard_LRS'
+
+resource storageAccount 'Microsoft.Storage/storageAccounts@2023-05-01' = {
+  name: storageAccountName
+  location: location
+  sku: {
+    name: storageAccountSkuName
+  }
+  kind: 'StorageV2'
+  properties: {
+    accessTier: 'Hot'
+  }
+}
+
+module appService 'modules/appService.bicep' = {
+  name: 'appService'
+  params: {
+    location: location
+    appServiceAppName: appServiceAppName
+    environmentType: environmentType
+  }
+}
+
+output appServiceAppHostName string = appService.outputs.appServiceAppHostName          // references output from the appService module
+```
+[appService.bicep](./Bicep/LP1-Build_your_first/modules/appService.bicep):
+```bicep
+param location string
+param appServiceAppName string
+
+@allowed([
+  'nonprod'
+  'prod'
+])
+param environmentType string
+
+var appServicePlanName = 'toy-product-launch-plan'
+var appServicePlanSkuName = (environmentType == 'prod') ? 'P2v3' : 'F1'
+
+resource appServicePlan 'Microsoft.Web/serverfarms@2024-04-01' = {
+  name: appServicePlanName
+  location: location
+  sku: {
+    name: appServicePlanSkuName
+  }
+}
+
+resource appServiceApp 'Microsoft.Web/sites@2024-04-01' = {
+  name: appServiceAppName
+  location: location
+  properties: {
+    serverFarmId: appServicePlan.id
+    httpsOnly: true
+  }
+}
+
+output appServiceAppHostName string = appServiceApp.properties.defaultHostName
+```
+
+#### Deploy the updated Bicep file
+
+```pwsh
+╭─( ~\LocalCode\LearningAzure\...\Bicep\LP1-Build_your_first [main ≡ +1 ~2 -0 !]
+╰╴> New-AzResourceGroupDeployment `
+     -Name main `
+     -TemplateFile main.bicep `
+     -environmentType nonprod
+```
+<img src='images/1753872562236.png' width='750'>
+
+<img src='images/1753872653125.png' width='750'>
+
+### Module Assessment
