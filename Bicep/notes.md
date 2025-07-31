@@ -36,6 +36,9 @@
       - [Add descriptions to parameters](#add-descriptions-to-parameters)
     - [Exercise - Add parameters and decorators](#exercise---add-parameters-and-decorators)
       - [Add parameter descriptions](#add-parameter-descriptions)
+      - [Limit input values](#limit-input-values)
+      - [Limit input lengths](#limit-input-lengths)
+      - [Limit numeric values](#limit-numeric-values)
 
 
 
@@ -910,3 +913,44 @@ param appServicePlanSku object = {
 @description('The Azure region into which the resources should be deployed.')
 param location string = 'eastus'
 ```
+
+##### Limit input values
+
+You can use the `@allowed` decorator to limit the values that can be used for a parameter:
+
+[main.bicep](LP1%20-%20Fundamentals/LM2/main.bicep)
+```bicep
+@description('The name of the environment. This must be dev, test, or prod.')
+@allowed([
+  'dev'
+  'test'
+  'prod'
+])
+param environmentName string = 'dev'
+```
+
+##### Limit input lengths
+
+You can use the `@minLength` and `@maxLength` decorators to limit the length of a string parameter:
+
+[main.bicep](LP1%20-%20Fundamentals/LM2/main.bicep)
+```bicep
+@description('The unique name of the solution. This is used to ensure that resource names are unique.')
+@minLength(5)
+@maxLength(30)
+param solutionName string = 'toyhr${uniqueString(resourceGroup().id)}'
+```
+
+##### Limit numeric values
+
+You can use the `@minValue` and `@maxValue` decorators to limit the range of an integer parameter:
+
+[main.bicep](LP1%20-%20Fundamentals/LM2/main.bicep)
+```bicep
+@description('The number of App Service plan instances.')
+@minValue(1)
+@maxValue(10)
+param appServicePlanInstanceCount int = 1
+```
+
+Verify your bicep file...
