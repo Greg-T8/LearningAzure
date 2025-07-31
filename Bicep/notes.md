@@ -5,32 +5,32 @@
 - [Bicep Command Reference](#bicep-command-reference)
 - [Install the Bicep CLI](#install-the-bicep-cli)
   - [Bicep Quickstart](#bicep-quickstart)
-- [Learning Module - Build your first Bicep file](#learning-module---build-your-first-bicep-file)
-  - [Defining resources](#defining-resources)
-    - [Resource Dependencies](#resource-dependencies)
-  - [Exercise: Define resources in a Bicep file](#exercise-define-resources-in-a-bicep-file)
-  - [Add flexibility by using parameters and variables](#add-flexibility-by-using-parameters-and-variables)
-    - [Add a parameter](#add-a-parameter)
-      - [Provide default values](#provide-default-values)
-  - [Exercise: Add parameters and variables to your Bicep file](#exercise-add-parameters-and-variables-to-your-bicep-file)
-    - [Add a variable](#add-a-variable)
-    - [Expressions](#expressions)
-      - [Resource Locations](#resource-locations)
-      - [Resource Names](#resource-names)
-      - [Combined strings](#combined-strings)
-      - [Selecting SKUs for resources](#selecting-skus-for-resources)
-    - [Deploying the updated Bicep file](#deploying-the-updated-bicep-file)
-  - [Group related resources by using modules](#group-related-resources-by-using-modules)
-    - [Outputs](#outputs)
-    - [Define a module](#define-a-module)
-    - [Design your modules](#design-your-modules)
-  - [Exercise: Refactor your Bicep file to use modules](#exercise-refactor-your-bicep-file-to-use-modules)
-    - [Add a new module file](#add-a-new-module-file)
-    - [Add a reference to the module in `main.bicep`](#add-a-reference-to-the-module-in-mainbicep)
-    - [Add the host name as an output](#add-the-host-name-as-an-output)
-    - [Verify your Bicep files](#verify-your-bicep-files)
-    - [Deploy the updated Bicep file](#deploy-the-updated-bicep-file)
-  - [Module Assessment](#module-assessment)
+- [Learning Path - Part 1: Fundamentals of Bicep](#learning-path---part-1-fundamentals-of-bicep)
+  - [Module: Build your first Bicep file](#module-build-your-first-bicep-file)
+    - [Defining resources](#defining-resources)
+      - [Resource Dependencies](#resource-dependencies)
+    - [Exercise: Define resources in a Bicep file](#exercise-define-resources-in-a-bicep-file)
+      - [Add flexibility by using parameters and variables](#add-flexibility-by-using-parameters-and-variables)
+      - [Add a parameter](#add-a-parameter)
+    - [Exercise: Add parameters and variables to your Bicep file](#exercise-add-parameters-and-variables-to-your-bicep-file)
+      - [Add a variable](#add-a-variable)
+      - [Expressions](#expressions)
+      - [Deploying the updated Bicep file](#deploying-the-updated-bicep-file)
+    - [Group related resources by using modules](#group-related-resources-by-using-modules)
+      - [Outputs](#outputs)
+      - [Define a module](#define-a-module)
+      - [Design your modules](#design-your-modules)
+    - [Exercise: Refactor your Bicep file to use modules](#exercise-refactor-your-bicep-file-to-use-modules)
+      - [Add a new module file](#add-a-new-module-file)
+      - [Add a reference to the module in `main.bicep`](#add-a-reference-to-the-module-in-mainbicep)
+      - [Add the host name as an output](#add-the-host-name-as-an-output)
+      - [Verify your Bicep files](#verify-your-bicep-files)
+      - [Deploy the updated Bicep file](#deploy-the-updated-bicep-file)
+  - [Module: Build reusable Bicep files by using parameters](#module-build-reusable-bicep-files-by-using-parameters)
+    - [Understand parameters](#understand-parameters)
+      - [Declare a parameter](#declare-a-parameter)
+      - [Add a default value](#add-a-default-value)
+      - [Understand parameter types](#understand-parameter-types)
 
 
 
@@ -89,11 +89,15 @@ Bicep CLI version 0.36.1 (a727ed087a)
 - [Create Bicep files - VS Code](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/quickstart-create-bicep-use-visual-studio-code?tabs=azure-cli)
 - [Bicep Playground](https://azure.github.io/bicep/) - lets you view Bicep and JSON side by side
 
-## Learning Module - Build your first Bicep file
+## Learning Path - Part 1: Fundamentals of Bicep
 
-[Module: Build your first Bicep file](https://learn.microsoft.com/en-us/training/modules/build-first-bicep-file/)
+[Part 1: Fundamentals of Bicep](https://learn.microsoft.com/en-us/training/paths/fundamentals-bicep/)
 
-### Defining resources
+### Module: Build your first Bicep file
+
+[Build your first Bicep file](https://learn.microsoft.com/en-us/training/modules/build-first-bicep-file/)
+
+#### Defining resources
 
 When you submit a Bicep file, it is transpiled to an ARM template. The Bicep file is then validated and deployed to Azure.
 
@@ -120,7 +124,7 @@ Things to note:
 - `'Microsoft.Storage/storageAccounts@2023-05-01'` is the *resource type* and *API version*.
 - You have to declare a *resource name*, which is the name of the storage account to be assigned in Azure.
 
-#### Resource Dependencies
+##### Resource Dependencies
 
 Often, you need a resource to depend on another resource, e.g. to deploy an App Service, you need and App Service Plan.
 
@@ -147,7 +151,7 @@ resource appServiceApp 'Microsoft.Web/sites@2023-12-01' = {
 }
 ```
 
-### Exercise: Define resources in a Bicep file
+#### Exercise: Define resources in a Bicep file
 
 Create the following `main.bicep` file:
 
@@ -234,7 +238,7 @@ Deployment results:
 
 <img src="images/1751968819100.png" alt="Bicep Deployment Output" width="600">
 
-### Add flexibility by using parameters and variables
+##### Add flexibility by using parameters and variables
 
 Parameters allow you to bring in values from outside the Bicep file. When deploying, you can provide the parameter values in the command line.
 
@@ -250,7 +254,7 @@ Use parameters for things that will change between each deployment:
 
 Use variables when (1) you want to make a value resusable in the file or (2) you want to use expressions to create a complex value.
 
-#### Add a parameter
+##### Add a parameter
 
 Parameters are defined like this:
 
@@ -263,7 +267,7 @@ How this works:
 - `appServiceAppName` is the symbolic name of the parameter.
 - `string` is the type of the parameter. Other types include `int`, `bool`, `array`, and `object`.
 
-##### Provide default values
+###### Provide default values
 
 You can provide a default value for a parameter, which is used if no value is provided during deployment:
 
@@ -271,7 +275,7 @@ You can provide a default value for a parameter, which is used if no value is pr
 param appServiceAppName string = '20250708toy-product-launch-1'
 ```
 
-### Exercise: Add parameters and variables to your Bicep file
+#### Exercise: Add parameters and variables to your Bicep file
 
 ```bicep
 param appServiceAppName string = '20250708toy-product-launch-1'
@@ -285,7 +289,7 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2024-04-01' = {
 }
 ```
 
-#### Add a variable
+##### Add a variable
 
 You can define a variable like this:
 
@@ -298,9 +302,9 @@ Requirements for defining variables:
 - You must provide a value for a variable.
 - Variables don't need types. Bicep infers the type from the value.
 
-#### Expressions
+##### Expressions
 
-##### Resource Locations
+###### Resource Locations
 
 When writing a template, you don't want to specify the location of each resource individually. Instead, you can have a rule that says, *by default all resources into the same location in which the resource group was created.*
 
@@ -348,7 +352,7 @@ resource appServiceApp 'Microsoft.Web/sites@2024-04-01' = {
 }
 ```
 
-##### Resource Names
+###### Resource Names
 
 Bicep has the built-in function `uniqueString()` that helps you build unique names for resources. You provide a *seed* value, which allows for uniqueness and consistency across deployments.
 
@@ -368,7 +372,7 @@ The `uniqueString()` function is deterministic, meaning it will always return th
 - The `uniqueString()` function returns the same value every time you deploy resources into the same resource group.
 - The `uniqueString()` function returns different values for different resource groups and subscriptions, which helps ensure that resource names are unique across your Azure environment.
 
-##### Combined strings
+###### Combined strings
 
 If you just use the `uniqueString()` function to set resource names, you'll get unique names, but they won't be very descriptive. 
 
@@ -378,7 +382,7 @@ Bicep uses *string interpolation* to combine strings and variables into a single
 param storageAccountName string = 'toylaunch${uniqueString(resourceGroup().id)}'
 ```
 
-##### Selecting SKUs for resources
+###### Selecting SKUs for resources
 
 You can embed business rules into the file by using a combination of parameters, variables, and expressions.
 
@@ -399,7 +403,7 @@ var storageAccountSkuName = (environmentType == 'prod') ? 'Standard_GRS' : 'Stan
 var appServicePlanSkuName = (environmentType == 'prod') ? 'P2V3' : 'F1'
 ```
 
-#### Deploying the updated Bicep file
+##### Deploying the updated Bicep file
 
 Here's the complete Bicep file with parameters and variables:
 
@@ -458,13 +462,13 @@ Result of running the deployment:
 
 <img src="images/1752056489132.png" alt="alt text" width="700">
 
-### Group related resources by using modules
+#### Group related resources by using modules
 
 As your Bicep has an increasing number of resources, it can become difficult to manage. You can use *modules* to group related resources together.
 
 Bicep modules are individual Bicep files that can be deployed as part of a larger Bicep file. 
 
-#### Outputs
+##### Outputs
 
 Use the `output` keyword to define outputs in a Bicep file:
 
@@ -473,7 +477,7 @@ output appServiceAppName string = appServiceAppName
 output ipFqdn string = publicIPaddress.properties.dnsSettings.fqdn
 ```
 
-#### Define a module
+##### Define a module
 
 <img src='images/1753869997093.png' width='400'>
 
@@ -493,7 +497,7 @@ module myModule 'modules/mymodule.bicep' = {
 - The `name` property is mandatory as Azure uses this property to create a separate deployment for each module within the Bicep file. These deployments have names you can use to identify them.
 - The `params` property is used to pass parameters to the module.
 
-#### Design your modules
+##### Design your modules
 
 Key principles:
 - A module should have a clear purpose.
@@ -502,9 +506,9 @@ Key principles:
 - A module should be as self-contained as possible. It should not depend on resources defined outside the module.
 - A module shouldn't output secrets. 
 
-### Exercise: Refactor your Bicep file to use modules
+#### Exercise: Refactor your Bicep file to use modules
 
-#### Add a new module file
+##### Add a new module file
 
 Create a new `modules` directory and add `appService.bicep` file:
 
@@ -548,7 +552,7 @@ resource appServiceApp 'Microsoft.Web/sites@2024-04-01' = {
 }
 ```
 
-#### Add a reference to the module in `main.bicep`
+##### Add a reference to the module in `main.bicep`
 
 [main.bicep](./Bicep/LP1-Build_your_first/main.bicep):
 ```bicep
@@ -564,7 +568,7 @@ module appService 'modules/appService.bicep' = {            // added at the bott
 
 Delete the App Service resources and the `appServicePlanName` and the `appServicePlanSkuName` variable definitions from `main.bicep`, since they are now defined in the `appService.bicep` module.
 
-#### Add the host name as an output
+##### Add the host name as an output
 
 [appService.bicep](./Bicep/LP1-Build_your_first/modules/appService.bicep):
 ```bicep
@@ -572,7 +576,7 @@ output appServiceAppHostName string = appServiceApp.properties.defaultHostName  
 ```
 The output takes its value from the `defaultHostName` property of the `appServiceApp` resource.
 
-#### Verify your Bicep files
+##### Verify your Bicep files
 
 [main.bicep](./Bicep/LP1-Build_your_first/main.bicep):
 ```bicep
@@ -644,7 +648,7 @@ resource appServiceApp 'Microsoft.Web/sites@2024-04-01' = {
 output appServiceAppHostName string = appServiceApp.properties.defaultHostName
 ```
 
-#### Deploy the updated Bicep file
+##### Deploy the updated Bicep file
 
 ```pwsh
 ╭─( ~\LocalCode\LearningAzure\...\Bicep\LP1-Build_your_first [main ≡ +1 ~2 -0 !]
@@ -657,4 +661,47 @@ output appServiceAppHostName string = appServiceApp.properties.defaultHostName
 
 <img src='images/1753872653125.png' width='750'>
 
-### Module Assessment
+### Module: Build reusable Bicep files by using parameters
+
+[Build reusable Bicep files by using parameters](https://learn.microsoft.com/en-us/training/modules/build-reusable-bicep-files-parameters/)
+
+#### Understand parameters
+
+You can use parameters to pass information into a Bicep template when you deploy it. This makes your template more flexible and reusable, since it can work with different values each time it's used.
+
+Decorators let you add rules and extra details to parameters—like limits or helpful descriptions—so that anyone using the template knows exactly what kind of input is expected.
+
+##### Declare a parameter
+
+Use the `param` keyword to declare a parameter:
+
+```bicep
+param environmentName string
+```
+
+Parts:
+- `param` is the keyword to declare a parameter.
+- `environmentName` is the name of the parameter. Parameter names must be unique; they can't have the same name as a variable or resource in the same Bicep file.
+- `string` is the type of the parameter. Other types include `int`, `bool`, `array`, and `object`.
+
+##### Add a default value
+
+You can provide a default value for a parameter, which is used if no value is provided during deployment:
+
+```bicep
+param environmentName string = 'dev'
+```
+
+You can also use expressions to set a default value:
+
+```bicep
+param location string = resourceGroup().location
+```
+
+##### Understand parameter types
+
+Bicep supports several parameter types, including:
+- `string`: A sequence of characters, like text.
+- `int`: An integer number, like 42.
+- `bool`: A boolean value, which can be either `true` or `false`.
+- `object` and `array`: Represent structured data and lists.
