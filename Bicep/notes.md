@@ -31,6 +31,10 @@
       - [Declare a parameter](#declare-a-parameter)
       - [Add a default value](#add-a-default-value)
       - [Understand parameter types](#understand-parameter-types)
+      - [Specify a list of allowed values](#specify-a-list-of-allowed-values)
+      - [Restrict parameter length and values](#restrict-parameter-length-and-values)
+      - [Add descriptions to parameters](#add-descriptions-to-parameters)
+    - [Exercise - Add parameters and decorators](#exercise---add-parameters-and-decorators)
 
 
 
@@ -520,7 +524,7 @@ C:.
         appService.bicep
 ```
 
-[appService.bicep](./Bicep/LP1-Build_your_first/modules/appService.bicep):
+[appService.bicep](<./LP1 - Fundamentals/LM1/modules/appService.bicep>):
 ```bicep
 param location string                       // Parameters copied from main.bicep
 param appServiceAppName string              
@@ -554,7 +558,7 @@ resource appServiceApp 'Microsoft.Web/sites@2024-04-01' = {
 
 ##### Add a reference to the module in `main.bicep`
 
-[main.bicep](./Bicep/LP1-Build_your_first/main.bicep):
+[main.bicep](<./LP1 - Fundamentals/main.bicep>):
 ```bicep
 module appService 'modules/appService.bicep' = {            // added at the bottom
   name: 'appService'
@@ -570,7 +574,7 @@ Delete the App Service resources and the `appServicePlanName` and the `appServic
 
 ##### Add the host name as an output
 
-[appService.bicep](./Bicep/LP1-Build_your_first/modules/appService.bicep):
+[appService.bicep](<./LP1 - Fundamentals/LM1/modules/appService.bicep>):
 ```bicep
 output appServiceAppHostName string = appServiceApp.properties.defaultHostName      // Added at the bottom
 ```
@@ -578,7 +582,7 @@ The output takes its value from the `defaultHostName` property of the `appServic
 
 ##### Verify your Bicep files
 
-[main.bicep](./Bicep/LP1-Build_your_first/main.bicep):
+[main.bicep](<./LP1 - Fundamentals/main.bicep>):
 ```bicep
 param location string = resourceGroup().location
 param storageAccountName string = 'toylaunch${uniqueString(resourceGroup().id)}'
@@ -661,6 +665,7 @@ output appServiceAppHostName string = appServiceApp.properties.defaultHostName
 
 <img src='images/1753872653125.png' width='750'>
 
+
 ### Module: Build reusable Bicep files by using parameters
 
 [Build reusable Bicep files by using parameters](https://learn.microsoft.com/en-us/training/modules/build-reusable-bicep-files-parameters/)
@@ -705,3 +710,153 @@ Bicep supports several parameter types, including:
 - `int`: An integer number, like 42.
 - `bool`: A boolean value, which can be either `true` or `false`.
 - `object` and `array`: Represent structured data and lists.
+
+###### Objects
+
+An `object` is a collection of key-value pairs, similar to a dictionary or JSON object. You can define an object parameter like this:
+
+```bicep
+param appServicePlanSku object = {
+  name: 'F1'
+  tier: 'Free'
+  capacity: 1
+}
+```
+
+When you reference this parameter in a template, you can access its properties using dot notation:
+
+```bicep
+resource appServicePlan 'Microsoft.Web/serverfarms@2024-04-01' = {
+  name: appServicePlanName
+  location: location
+  sku: {
+    name: appServicePlanSku.name                // Reference the name property of the appServicePlanSku object
+    tier: appServicePlanSku.tier
+    capacity: appServicePlanSku.capacity
+  }
+}
+```
+
+You  also use parameters to specify resource tags:
+
+```bicep
+param resourceTags object = {
+  EnvironmentName: 'Test'
+  CostCenter: '1000100'
+  Team: 'Human Resources'
+}
+```
+
+Then you can reuse it whereever you defin the `tags` property:
+
+```bicep
+resource appServicePlan 'Microsoft.Web/serverfarms@2024-04-01' = {
+  name: appServicePlanName
+  location: location
+  tags: resourceTags            // Use the resourceTags parameter
+  sku: {
+    name: 'S1'
+  }
+}
+
+resource appServiceApp 'Microsoft.Web/sites@' = {
+  name: appServiceAppName
+  location: location
+  tags: resourceTags
+  kind: 'app'
+  properties: {
+    serverFarmId: appServicePlan.id
+  }
+}
+```
+
+###### Arrays
+
+An array is a list of items. In Bicep, you can't specify the type of individual items in an array. 
+
+You can create an array parameter like this:
+
+```bicep
+param cosmosDBAccountLocations array = [
+  {
+    locationName: 'australiaeast'
+  }
+  {
+    locationName: 'southcentralus'
+  }
+  {
+    locationName: 'westeurope'
+  }
+]
+```
+
+You can then use this array parameter to define resources in your Bicep file:
+
+```bicep
+resource account 'Microsoft.DocumentDB/databaseAccounts@2024-11-15' = {
+  name: accountName
+  location: location
+  properties: {
+    locations: cosmosDBAccountLocations             // Use the cosmosDBAccountLocations array parameter
+  }
+}
+```
+
+##### Specify a list of allowed values
+
+You can use the `@allowed` decorator to specify a list of allowed values for a parameter. This helps ensure that only valid values are used when deploying the Bicep file.
+
+```bicep
+@allowed([
+  'P1v3'
+  'P2v3'
+  'P3v3'
+])
+param appServicePlanSkuName string
+```
+
+##### Restrict parameter length and values
+
+You can use the `@minLength` and `@maxLength` decorators to restrict the length of a string parameter:
+
+```bicep
+@minLength(5)
+@maxLength(24)
+param storageAccountName string
+```
+
+You can also use the `@minValue` and `@maxValue` decorators to restrict the range of an integer parameter:
+
+```bicep
+@minValue(1)
+@maxValue(10)
+param appServicePlanInstanceCount int
+```
+
+##### Add descriptions to parameters
+
+You can add descriptions to parameters to provide more context for users:
+
+```bicep
+@description('The locations into which this Cosmos DB account should be configured. This parameter needs to be a list of objects, each of which has a locationName property.')
+param cosmosDBAccountLocations array
+```
+
+#### Exercise - Add parameters and decorators
+
+Create a new Bicep file called `main.bicep` with the following content:
+
+[main.bicep](./
+```bicep
+param environmentName string = 'dev'
+param solutionName string = 'toyhr${uniqueString(resourceGroup().id)}'
+param appServicePlanInstanceCount int = 1
+param appServicePlanSku object = {
+  name: 'F1'
+  tier: 'Free'
+}
+param location string = 'eastus'
+
+var appServicePlanName = '${environmentName}-${solutionName}-plan'
+var appServiceAppName = '${environmentName}-${solutionName}-app'
+```
