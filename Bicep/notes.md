@@ -35,6 +35,7 @@
       - [Restrict parameter length and values](#restrict-parameter-length-and-values)
       - [Add descriptions to parameters](#add-descriptions-to-parameters)
     - [Exercise - Add parameters and decorators](#exercise---add-parameters-and-decorators)
+      - [Add parameter descriptions](#add-parameter-descriptions)
 
 
 
@@ -846,10 +847,10 @@ param cosmosDBAccountLocations array
 
 Create a new Bicep file called `main.bicep` with the following content:
 
-[main.bicep](./
+[main.bicep](LP1%20-%20Fundamentals/LM2/main.bicep)
 ```bicep
 param environmentName string = 'dev'
-param solutionName string = 'toyhr${uniqueString(resourceGroup().id)}'
+param solutionName string = 'toyhr${uniqueString(resourceGroup().id)}'      // Use uniqueString to create globally unique resource names
 param appServicePlanInstanceCount int = 1
 param appServicePlanSku object = {
   name: 'F1'
@@ -859,4 +860,53 @@ param location string = 'eastus'
 
 var appServicePlanName = '${environmentName}-${solutionName}-plan'
 var appServiceAppName = '${environmentName}-${solutionName}-app'
+```
+
+Then introduce the following code to the file:
+
+[main.bicep](LP1%20-%20Fundamentals/LM2/main.bicep)
+```bicep
+resource appServicePlan 'Microsoft.Web/serverfarms@2024-04-01' = {
+  name: appServicePlanName
+  location: location                                    // Note use of the location parameter
+  sku: {
+    name: appServicePlanSku.name                        // Reference the appServicePlanSku object parameter
+    tier: appServicePlanSku.tier
+    capacity: appServicePlanInstanceCount
+  }
+}
+
+resource appServiceApp 'Microsoft.Web/sites@2024-04-01' = {
+  name: appServiceAppName
+  location: location
+  properties: {
+    serverFarmId: appServicePlan.id
+    httpsOnly: true
+  }
+}
+```
+
+##### Add parameter descriptions
+
+Add descriptions to the parameters to provide more context for users:
+
+[main.bicep](LP1%20-%20Fundamentals/LM2/main.bicep)
+```bicep
+@description('The name of the environment. This must be dev, test, or prod.')
+param environmentName string = 'dev'
+
+@description('The unique name of the solution. This is used to ensure that resource names are unique.')
+param solutionName string = 'toyhr${uniqueString(resourceGroup().id)}'
+
+@description('The number of App Service plan instances.')
+param appServicePlanInstanceCount int = 1
+
+@description('The name and tier of the App Service plan SKU.')
+param appServicePlanSku object = {
+  name: 'F1'
+  tier: 'Free'
+}
+
+@description('The Azure region into which the resources should be deployed.')
+param location string = 'eastus'
 ```
