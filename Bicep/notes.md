@@ -42,6 +42,13 @@
       - [Run the deployment](#run-the-deployment)
     - [Provide values using parameter files](#provide-values-using-parameter-files)
       - [Create parameter files](#create-parameter-files)
+      - [Use parameter files at deployment time](#use-parameter-files-at-deployment-time)
+      - [Override parameter values](#override-parameter-values)
+    - [Secure your parameters](#secure-your-parameters)
+      - [Define secure parameters](#define-secure-parameters)
+      - [Avoid using parameter files for secrets](#avoid-using-parameter-files-for-secrets)
+      - [Integrate with Azure Key Vault](#integrate-with-azure-key-vault)
+      - [Use Key Vault with modules](#use-key-vault-with-modules)
 
 
 
@@ -989,7 +996,7 @@ DeploymentDebugLogLevel :
 
 Parameter files let you group and define values for your Bicep template's parameters. 
 
-These files can use the `.bicepparam` extension or be in JSON format. You provide a parameter file when deploying your Bicep template to simplify the process.
+These files can use the `.bicepparam` extension or be in JSON format. 
 
 Example JSON parameter file:
 
@@ -1028,3 +1035,142 @@ Here's a breakdown of the key parts of a parameters file:
 * `$schema` tells Azure Resource Manager that the file is a parameters file.
 * `contentVersion` helps track changes to the file. It's optional and usually set to "1.0.0.0".
 * `parameters` lists each parameter and its value. Each parameter is defined as an object with a **value** property that holds the actual value to use.
+
+It's common to create a separate parameters file for each environment. A good practice is to include the environment name in the file name. For example:
+
+* `main.parameters.dev.json` for development
+* `main.parameters.production.json` for production
+
+##### Use parameter files at deployment time
+
+When using the `New-AzResourceGroupDeployment` cmdlet to start a new deployment, you can specify the parameters file with the `-TemplateParameterFile` argument.
+
+```pwsh
+New-AzResourceGroupDeployment -Name main -TemplateFile main.bicep -TemplateParameterFile main.parameters.json
+```
+
+##### Override parameter values
+
+There are three ways to set parameter values: default values, command-line input, and parameters files. It's common to use more than one method for the same parameter. 
+
+If you define a default value but provide a different one through the command line, the command-line value overrides the default. 
+
+Parameters files also follow this order of precedence:
+
+<img src="images/1754041692186.png" width="450">
+
+The following Bicep file defines three parameters with default values:
+
+```bicep
+param location string = resourceGroup().location
+param appServicePlanInstanceCount int = 1
+param appServicePlanSku object = {
+  name: 'F1'
+  tier: 'Free'
+}
+```
+
+The following parameters file overrides the value of two of the parameters but doesn't specify a value for the `location` parameter:
+
+```json
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "appServicePlanInstanceCount": {                // Override the default value of appServicePlanInstanceCount
+      "value": 3
+    },
+    "appServicePlanSku": {                          // Override the default value of appServicePlanSku
+      "value": {
+        "name": "P1v3",
+        "tier": "PremiumV3"
+      }
+    }
+  }
+}
+```
+
+When you create the deployment, you override one of the parameter values:
+
+```pwsh
+New-AzResourceGroupDeployment `
+  -Name main ` 
+  -TemplateFile main.bicep `
+  -TemplateParameterFile main.parameters.json `
+  -appServicePlanInstanceCount 5                    # Override the appServicePlanInstanceCount parameter
+```
+
+#### Secure your parameters
+
+Sometimes deployments require sensitive values, like passwords or API keys. These need to be protected. 
+
+In some cases, the person running the deployment shouldn't see the secrets. In others, they may enter the values, but those values must not be logged. 
+
+##### Define secure parameters
+
+The `@secure` decorator is used for string and object parameters that may contain secrets. When a parameter is marked as `@secure`, its value won't appear in deployment logs. If you're entering the value interactively through Azure CLI or PowerShell, it also won't be shown on the screen.
+
+```bicep
+@secure()
+param sqlServerAdministratorLogin string
+
+@secure()
+param sqlServerAdministratorPassword string
+```
+Neither parameter has a default value, which is intentional. It's best not to set defaults for usernames, passwords, or other secrets. 
+
+##### Avoid using parameter files for secrets
+
+As covered earlier, parameter files are useful for setting values for different environments. However, you should avoid using them to store secrets. These files are often checked into version control systems like Git, which may be accessible to many people. Version control isn't meant for storing sensitive information, so keeping secrets out of these files is important for security.
+
+##### Integrate with Azure Key Vault
+
+Azure Key Vault is built to store and manage secrets securely. You can connect your Bicep templates to Key Vault by referencing secrets in a parameters file.
+
+Instead of storing the actual value, you reference the Key Vault and the secret name. This keeps the secret hidden. During deployment, Azure Resource Manager retrieves the secret directly from Key Vault.
+
+<img src=images/1754042755156.png width="450">
+
+Here's an example of a parameters file that uses Key Vault references to retrieve the SQL logical server admin login and password:
+
+```json
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "sqlServerAdministratorLogin": {
+      "reference": {                        // Uses reference object instead of value
+        "keyVault": {
+          "id": "/subscriptions/f0750bbe-ea75-4ae5-b24d-a92ca601da2c/resourceGroups/PlatformResources/providers/Microsoft.KeyVault/vaults/toysecrets"
+        },
+        "secretName": "sqlAdminLogin"
+      }
+    },
+    "sqlServerAdministratorPassword": {
+      "reference": {
+        "keyVault": {
+          "id": "/subscriptions/f0750bbe-ea75-4ae5-b24d-a92ca601da2c/resourceGroups/PlatformResources/providers/Microsoft.KeyVault/vaults/toysecrets"
+        },
+        "secretName": "sqlAdminLoginPassword"
+      }
+    }
+  }
+}
+```
+
+##### Use Key Vault with modules
+
+Modules let you reuse Bicep files to deploy specific parts of your solution. They can take parameters, including secrets. To pass secret values securely, you can use Key Vault integration.
+
+```bicep
+resource keyVault 'Microsoft.KeyVault/vaults@2023-07-01' existing = {       // Use of existing keyword to tell Bicep this Key Vault already exists and not to redeploy it
+  name: keyVaultName
+}
+
+module applicationModule 'application.bicep' = {
+  name: 'application-module'
+  params: {
+    apiKey: keyVault.getSecret('ApiKey')                                    // Use the getSecret() function to retrieve the secret value from Key Vault
+  }
+}
+```
