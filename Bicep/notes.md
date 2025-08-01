@@ -39,6 +39,7 @@
       - [Limit input values](#limit-input-values)
       - [Limit input lengths](#limit-input-lengths)
       - [Limit numeric values](#limit-numeric-values)
+      - [Run the deployment](#run-the-deployment)
 
 
 
@@ -953,4 +954,29 @@ You can use the `@minValue` and `@maxValue` decorators to limit the range of an 
 param appServicePlanInstanceCount int = 1
 ```
 
-Verify your bicep file...
+##### Run the deployment
+
+```pwsh
+New-AzResourceGroup -Name BicepDeployment -Location eastu
+Set-AzDefault -ResourceGroupName BicepDeployment
+
+New-AzResourceGroupDeployment -Name main -TemplateFile main.bicep
+
+DeploymentName          : main
+ResourceGroupName       : BicepDeployment
+ProvisioningState       : Succeeded
+Timestamp               : 8/1/2025 9:36:45 AM
+Mode                    : Incremental
+TemplateLink            : 
+Parameters              : 
+                          Name                           Type                       Value
+                          =============================  =========================  ==========
+                          environmentName                String                     "dev"
+                          solutionName                   String                     "toyhrfce5rpzidzts4"
+                          appServicePlanInstanceCount    Int                        1
+                          appServicePlanSku              Object                     {"name":"F1","tier":"Free"}
+                          location                       String                     "eastus"
+
+Outputs                 : 
+DeploymentDebugLogLevel : 
+```
