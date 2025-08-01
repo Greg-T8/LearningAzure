@@ -40,6 +40,8 @@
       - [Limit input lengths](#limit-input-lengths)
       - [Limit numeric values](#limit-numeric-values)
       - [Run the deployment](#run-the-deployment)
+    - [Provide values using parameter files](#provide-values-using-parameter-files)
+      - [Create parameter files](#create-parameter-files)
 
 
 
@@ -980,3 +982,49 @@ Parameters              :
 Outputs                 : 
 DeploymentDebugLogLevel : 
 ```
+
+#### Provide values using parameter files
+
+##### Create parameter files
+
+Parameter files let you group and define values for your Bicep template's parameters. 
+
+These files can use the `.bicepparam` extension or be in JSON format. You provide a parameter file when deploying your Bicep template to simplify the process.
+
+Example JSON parameter file:
+
+```json
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "appServicePlanInstanceCount": {
+      "value": 3
+    },
+    "appServicePlanSku": {
+      "value": {
+        "name": "P1v3",
+        "tier": "PremiumV3"
+      }
+    },
+    "cosmosDBAccountLocations": {
+      "value": [
+        {
+          "locationName": "australiaeast"
+        },
+        {
+          "locationName": "southcentralus"
+        },
+        {
+          "locationName": "westeurope"
+        }
+      ]
+    }
+  }
+}
+```
+Here's a breakdown of the key parts of a parameters file:
+
+* `$schema` tells Azure Resource Manager that the file is a parameters file.
+* `contentVersion` helps track changes to the file. It's optional and usually set to "1.0.0.0".
+* `parameters` lists each parameter and its value. Each parameter is defined as an object with a **value** property that holds the actual value to use.
