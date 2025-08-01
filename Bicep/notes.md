@@ -49,6 +49,7 @@
       - [Avoid using parameter files for secrets](#avoid-using-parameter-files-for-secrets)
       - [Integrate with Azure Key Vault](#integrate-with-azure-key-vault)
       - [Use Key Vault with modules](#use-key-vault-with-modules)
+    - [Exercise - Add a parameter file and secure parameters](#exercise---add-a-parameter-file-and-secure-parameters)
 
 
 
@@ -1174,3 +1175,5 @@ module applicationModule 'application.bicep' = {
   }
 }
 ```
+
+#### Exercise - Add a parameter file and secure parameters
