@@ -1,18 +1,17 @@
 # Azure Bicep
 
-<!-- omit in toc -->
-## Contents
-- [Bicep Command Reference](#bicep-command-reference)
-- [Install the Bicep CLI](#install-the-bicep-cli)
-  - [Bicep Quickstart](#bicep-quickstart)
-
 ## Bicep Command Reference
 
 ```pwsh
 New-AzResourceGroupDeployment -ResourceGroupName BicepDeployment -TemplateFile .\main.bicep
 ```
 - [Azure Bicep Documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Bicep GitHub Page](https://github.com/Azure/bicep) - Interesting read
+- [Bicep GitHub Page](https://github.com/Azure/bicep) (Interesting read)
+
+## Microsoft Learning Paths
+- [Part 1: Fundamentals of Bicep](https://learn.microsoft.com/en-us/training/paths/fundamentals-bicep/)
+    - [Learning Module 1: Build your first Bicep file (Notes)](./LP1%20-%20Fundamentals/LM1/notes.md)
+    - [Learning Module 2: Build reusable Bicep files by using parameters (Notes)](LP1%20-%20Fundamentals/LM2/notes.md)
 
 ## Install the Bicep CLI
 

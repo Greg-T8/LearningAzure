@@ -1,14 +1,41 @@
-### Learning Module 2: Build reusable Bicep files by using parameters
+[Microsoft Learn - Build reusable Bicep files by using parameters](https://learn.microsoft.com/en-us/training/modules/build-reusable-bicep-files-parameters/)
 
-[Build reusable Bicep files by using parameters](https://learn.microsoft.com/en-us/training/modules/build-reusable-bicep-files-parameters/)
+<!-- omit in toc -->
+# Learning Module 2: Build reusable Bicep files by using parameters
+- [Understand parameters](#understand-parameters)
+  - [Declare a parameter](#declare-a-parameter)
+  - [Add a default value](#add-a-default-value)
+  - [Understand parameter types](#understand-parameter-types)
+    - [Objects](#objects)
+    - [Arrays](#arrays)
+  - [Specify a list of allowed values](#specify-a-list-of-allowed-values)
+  - [Restrict parameter length and values](#restrict-parameter-length-and-values)
+  - [Add descriptions to parameters](#add-descriptions-to-parameters)
+- [Exercise - Add parameters and decorators](#exercise---add-parameters-and-decorators)
+  - [Add parameter descriptions](#add-parameter-descriptions)
+  - [Limit input values](#limit-input-values)
+  - [Limit input lengths](#limit-input-lengths)
+  - [Limit numeric values](#limit-numeric-values)
+  - [Run the deployment](#run-the-deployment)
+- [Provide values using parameter files](#provide-values-using-parameter-files)
+  - [Create parameter files](#create-parameter-files)
+  - [Use parameter files at deployment time](#use-parameter-files-at-deployment-time)
+  - [Override parameter values](#override-parameter-values)
+- [Secure your parameters](#secure-your-parameters)
+  - [Define secure parameters](#define-secure-parameters)
+  - [Avoid using parameter files for secrets](#avoid-using-parameter-files-for-secrets)
+  - [Integrate with Azure Key Vault](#integrate-with-azure-key-vault)
+  - [Use Key Vault with modules](#use-key-vault-with-modules)
+    - [Exercise - Add a parameter file and secure parameters](#exercise---add-a-parameter-file-and-secure-parameters)
 
-#### Understand parameters
+
+## Understand parameters
 
 You can use parameters to pass information into a Bicep template when you deploy it. This makes your template more flexible and reusable, since it can work with different values each time it's used.
 
 Decorators let you add rules and extra details to parameters—like limits or helpful descriptions—so that anyone using the template knows exactly what kind of input is expected.
 
-##### Declare a parameter
+### Declare a parameter
 
 Use the `param` keyword to declare a parameter:
 
@@ -21,7 +48,7 @@ Parts:
 - `environmentName` is the name of the parameter. Parameter names must be unique; they can't have the same name as a variable or resource in the same Bicep file.
 - `string` is the type of the parameter. Other types include `int`, `bool`, `array`, and `object`.
 
-##### Add a default value
+### Add a default value
 
 You can provide a default value for a parameter, which is used if no value is provided during deployment:
 
@@ -35,7 +62,7 @@ You can also use expressions to set a default value:
 param location string = resourceGroup().location
 ```
 
-##### Understand parameter types
+### Understand parameter types
 
 Bicep supports several parameter types, including:
 - `string`: A sequence of characters, like text.
@@ -43,7 +70,7 @@ Bicep supports several parameter types, including:
 - `bool`: A boolean value, which can be either `true` or `false`.
 - `object` and `array`: Represent structured data and lists.
 
-###### Objects
+#### Objects
 
 An `object` is a collection of key-value pairs, similar to a dictionary or JSON object. You can define an object parameter like this:
 
@@ -102,7 +129,7 @@ resource appServiceApp 'Microsoft.Web/sites@' = {
 }
 ```
 
-###### Arrays
+#### Arrays
 
 An array is a list of items. In Bicep, you can't specify the type of individual items in an array. 
 
@@ -134,7 +161,7 @@ resource account 'Microsoft.DocumentDB/databaseAccounts@2024-11-15' = {
 }
 ```
 
-##### Specify a list of allowed values
+### Specify a list of allowed values
 
 You can use the `@allowed` decorator to specify a list of allowed values for a parameter. This helps ensure that only valid values are used when deploying the Bicep file.
 
@@ -147,7 +174,7 @@ You can use the `@allowed` decorator to specify a list of allowed values for a p
 param appServicePlanSkuName string
 ```
 
-##### Restrict parameter length and values
+### Restrict parameter length and values
 
 You can use the `@minLength` and `@maxLength` decorators to restrict the length of a string parameter:
 
@@ -165,7 +192,7 @@ You can also use the `@minValue` and `@maxValue` decorators to restrict the rang
 param appServicePlanInstanceCount int
 ```
 
-##### Add descriptions to parameters
+### Add descriptions to parameters
 
 You can add descriptions to parameters to provide more context for users:
 
@@ -174,7 +201,7 @@ You can add descriptions to parameters to provide more context for users:
 param cosmosDBAccountLocations array
 ```
 
-#### Exercise - Add parameters and decorators
+## Exercise - Add parameters and decorators
 
 Create a new Bicep file called `main.bicep` with the following content:
 
@@ -217,7 +244,7 @@ resource appServiceApp 'Microsoft.Web/sites@2024-04-01' = {
 }
 ```
 
-##### Add parameter descriptions
+### Add parameter descriptions
 
 Add descriptions to the parameters to provide more context for users:
 
@@ -242,7 +269,7 @@ param appServicePlanSku object = {
 param location string = 'eastus'
 ```
 
-##### Limit input values
+### Limit input values
 
 You can use the `@allowed` decorator to limit the values that can be used for a parameter:
 
@@ -257,7 +284,7 @@ You can use the `@allowed` decorator to limit the values that can be used for a 
 param environmentName string = 'dev'
 ```
 
-##### Limit input lengths
+### Limit input lengths
 
 You can use the `@minLength` and `@maxLength` decorators to limit the length of a string parameter:
 
@@ -269,7 +296,7 @@ You can use the `@minLength` and `@maxLength` decorators to limit the length of 
 param solutionName string = 'toyhr${uniqueString(resourceGroup().id)}'
 ```
 
-##### Limit numeric values
+### Limit numeric values
 
 You can use the `@minValue` and `@maxValue` decorators to limit the range of an integer parameter:
 
@@ -281,7 +308,7 @@ You can use the `@minValue` and `@maxValue` decorators to limit the range of an 
 param appServicePlanInstanceCount int = 1
 ```
 
-##### Run the deployment
+### Run the deployment
 
 ```pwsh
 New-AzResourceGroup -Name BicepDeployment -Location eastu
@@ -308,9 +335,9 @@ Outputs                 :
 DeploymentDebugLogLevel : 
 ```
 
-#### Provide values using parameter files
+## Provide values using parameter files
 
-##### Create parameter files
+### Create parameter files
 
 Parameter files let you group and define values for your Bicep template's parameters. 
 
@@ -359,7 +386,7 @@ It's common to create a separate parameters file for each environment. A good pr
 * `main.parameters.dev.json` for development
 * `main.parameters.production.json` for production
 
-##### Use parameter files at deployment time
+### Use parameter files at deployment time
 
 When using the `New-AzResourceGroupDeployment` cmdlet to start a new deployment, you can specify the parameters file with the `-TemplateParameterFile` argument.
 
@@ -367,7 +394,7 @@ When using the `New-AzResourceGroupDeployment` cmdlet to start a new deployment,
 New-AzResourceGroupDeployment -Name main -TemplateFile main.bicep -TemplateParameterFile main.parameters.json
 ```
 
-##### Override parameter values
+### Override parameter values
 
 There are three ways to set parameter values: default values, command-line input, and parameters files. It's common to use more than one method for the same parameter. 
 
@@ -375,7 +402,7 @@ If you define a default value but provide a different one through the command li
 
 Parameters files also follow this order of precedence:
 
-<img src="images/1754041692186.png" width="450">
+<img src="../../images/1754041692186.png" width="450">
 
 The following Bicep file defines three parameters with default values:
 
@@ -418,13 +445,13 @@ New-AzResourceGroupDeployment `
   -appServicePlanInstanceCount 5                    # Override the appServicePlanInstanceCount parameter
 ```
 
-#### Secure your parameters
+## Secure your parameters
 
 Sometimes deployments require sensitive values, like passwords or API keys. These need to be protected. 
 
 In some cases, the person running the deployment shouldn't see the secrets. In others, they may enter the values, but those values must not be logged. 
 
-##### Define secure parameters
+### Define secure parameters
 
 The `@secure` decorator is used for string and object parameters that may contain secrets. When a parameter is marked as `@secure`, its value won't appear in deployment logs. If you're entering the value interactively through Azure CLI or PowerShell, it also won't be shown on the screen.
 
@@ -437,17 +464,17 @@ param sqlServerAdministratorPassword string
 ```
 Neither parameter has a default value, which is intentional. It's best not to set defaults for usernames, passwords, or other secrets. 
 
-##### Avoid using parameter files for secrets
+### Avoid using parameter files for secrets
 
 As covered earlier, parameter files are useful for setting values for different environments. However, you should avoid using them to store secrets. These files are often checked into version control systems like Git, which may be accessible to many people. Version control isn't meant for storing sensitive information, so keeping secrets out of these files is important for security.
 
-##### Integrate with Azure Key Vault
+### Integrate with Azure Key Vault
 
 Azure Key Vault is built to store and manage secrets securely. You can connect your Bicep templates to Key Vault by referencing secrets in a parameters file.
 
 Instead of storing the actual value, you reference the Key Vault and the secret name. This keeps the secret hidden. During deployment, Azure Resource Manager retrieves the secret directly from Key Vault.
 
-<img src=images/1754042755156.png width="450">
+<img src="../../images/1754042755156.png" width=450>
 
 Here's an example of a parameters file that uses Key Vault references to retrieve the SQL logical server admin login and password:
 
@@ -476,7 +503,7 @@ Here's an example of a parameters file that uses Key Vault references to retriev
 }
 ```
 
-##### Use Key Vault with modules
+### Use Key Vault with modules
 
 Modules let you reuse Bicep files to deploy specific parts of your solution. They can take parameters, including secrets. To pass secret values securely, you can use Key Vault integration.
 
