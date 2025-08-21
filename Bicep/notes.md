@@ -1,11 +1,5 @@
 # Azure Bicep
 
-## Bicep Command Reference
-
-```pwsh
-New-AzResourceGroupDeployment -ResourceGroupName BicepDeployment -TemplateFile .\main.bicep
-```
-
 ## Microsoft Learning Paths
 - [Part 1: Fundamentals of Bicep](https://learn.microsoft.com/en-us/training/paths/fundamentals-bicep/)
     - [Learning Module 1: Build your first Bicep file (Notes)](./LP1%20-%20Fundamentals/LM1/notes.md)
@@ -17,6 +11,11 @@ New-AzResourceGroupDeployment -ResourceGroupName BicepDeployment -TemplateFile .
 - [Bicep GitHub Page](https://github.com/Azure/bicep) (Interesting read)
 - [Bicep Playground](https://azure.github.io/bicep/) - lets you view Bicep and JSON side by side
 
+## Bicep Command Reference
+
+```pwsh
+New-AzResourceGroupDeployment -ResourceGroupName BicepDeployment -TemplateFile .\main.bicep
+```
 ## Install the Bicep CLI
 
 Use the following command to install the self-contained version of the Bicep CLI from `az`:

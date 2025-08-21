@@ -26,7 +26,14 @@
   - [Avoid using parameter files for secrets](#avoid-using-parameter-files-for-secrets)
   - [Integrate with Azure Key Vault](#integrate-with-azure-key-vault)
   - [Use Key Vault with modules](#use-key-vault-with-modules)
-    - [Exercise - Add a parameter file and secure parameters](#exercise---add-a-parameter-file-and-secure-parameters)
+- [Exercise - Add a parameter file and secure parameters](#exercise---add-a-parameter-file-and-secure-parameters)
+  - [Remove the default value for the App Service plan SKU](#remove-the-default-value-for-the-app-service-plan-sku)
+  - [Add new parameters](#add-new-parameters)
+  - [Add new variables](#add-new-variables)
+  - [Add SQL Server and database resources](#add-sql-server-and-database-resources)
+  - [Create a parameters file](#create-a-parameters-file)
+  - [Deploy the Bicep template with the parameters file](#deploy-the-bicep-template-with-the-parameters-file)
+  - [Create a Key Vault and add secrets](#create-a-key-vault-and-add-secrets)
 
 
 ## Understand parameters
@@ -520,4 +527,306 @@ module applicationModule 'application.bicep' = {
 }
 ```
 
-#### Exercise - Add a parameter file and secure parameters
+## Exercise - Add a parameter file and secure parameters
+
+In this exercise, you’ll create a parameters file to supply values for the Bicep template you built earlier. In the same file, you’ll also add Azure Key Vault references to securely handle sensitive data.
+
+**Steps:**
+
+* Define secure parameters
+* Create the parameters file
+* Test the deployment to confirm the file is valid
+* Create a key vault and add secrets
+* Update the parameters file to reference those secrets
+* Test the deployment again to ensure validity
+
+### Remove the default value for the App Service plan SKU
+
+To make the template environment-agnostic, move the App Service plan SKU details into a parameters file instead of setting a default.
+
+In **main.bicep**, remove the default value from the `appServicePlanSku` parameter:
+
+```bicep
+// Before
+@description('The name and tier of the App Service plan SKU.')
+param appServicePlanSku object = {
+  name: 'F1'
+  tier: 'Free'
+}
+
+// After
+@description('The name and tier of the App Service plan SKU.')
+param appServicePlanSku object
+```
+
+### Add new parameters
+
+Add parameters for the SQL server and database under the existing ones in **main.bicep**. Do not assign default values to secure parameters or to the database SKU.
+
+```bicep
+@description('The name of the environment. This must be dev, test, or prod.')
+@allowed([
+  'dev'
+  'test'
+  'prod'
+])
+param environmentName string = 'dev'
+
+@description('The unique name of the solution. This is used to ensure that resource names are unique.')
+@minLength(5)
+@maxLength(30)
+param solutionName string = 'toyhr${uniqueString(resourceGroup().id)}'
+
+@description('The number of App Service plan instances.')
+@minValue(1)
+@maxValue(10)
+param appServicePlanInstanceCount int = 1
+
+@description('The name and tier of the App Service plan SKU.')
+param appServicePlanSku object
+
+@description('The Azure region into which the resources should be deployed.')
+param location string = 'eastus'
+
+// New parameters for SQL server and database
+
+// The @secure() decorator tells Azure that this parameter should be treated as a secret, meaning it won't be logged or displayed in plain text.
+@secure()
+@description('The administrator login username for the SQL server.')
+param sqlServerAdministratorLogin string
+
+@secure()
+@description('The administrator login password for the SQL server.')
+param sqlServerAdministratorPassword string
+
+@description('The name and tier of the SQL database SKU.')
+param sqlDatabaseSku object
+```
+
+This way, sensitive information like the login and password will be provided securely through a parameters file or Key Vault reference.
+
+### Add new variables
+
+Add the SQL-related variables beneath the existing ones in **main.bicep**:
+
+```bicep
+var appServicePlanName = '${environmentName}-${solutionName}-plan'
+var appServiceAppName  = '${environmentName}-${solutionName}-app'
+// New variables for SQL server and database
+var sqlServerName      = '${environmentName}-${solutionName}-sql'
+var sqlDatabaseName    = 'Employees'
+```
+
+This defines consistent names for the SQL server and database alongside your other resources.
+
+
+### Add SQL Server and database resources
+
+At the bottom of **main.bicep**, add the SQL server and database resources:
+
+```bicep
+resource sqlServer 'Microsoft.Sql/servers@2024-05-01-preview' = {
+  name: sqlServerName
+  location: location
+  properties: {
+    administratorLogin: sqlServerAdministratorLogin
+    administratorLoginPassword: sqlServerAdministratorPassword
+  }
+}
+
+resource sqlDatabase 'Microsoft.Sql/servers/databases@2024-05-01-preview' = {
+  parent: sqlServer
+  name: sqlDatabaseName
+  location: location
+  sku: {
+    name: sqlDatabaseSku.name
+    tier: sqlDatabaseSku.tier
+  }
+}
+```
+Save the file after adding these resources.
+
+### Create a parameters file
+
+In the same folder as **main.bicep**, create **main.parameters.dev.json** and add:
+
+```json
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "appServicePlanSku": {
+      "value": {
+        "name": "F1",
+        "tier": "Free"
+      }
+    },
+    "sqlDatabaseSku": {
+      "value": {
+        "name": "Standard",
+        "tier": "Standard"
+      }
+    }
+  }
+}
+```
+
+Save the file after adding this code.
+
+### Deploy the Bicep template with the parameters file
+
+Run the deployment with the parameters file using Azure PowerShell:
+
+```powershell
+New-AzResourceGroupDeployment `
+  -Name main `
+  -TemplateFile main.bicep `
+  -TemplateParameterFile main.parameters.dev.json
+```
+
+You’ll be prompted for `sqlServerAdministratorLogin` and `sqlServerAdministratorPassword`.
+
+Rules:
+
+* The login must start with a letter, contain only letters and numbers, and cannot be obvious names like `admin` or `root`.
+* The password must be at least 8 characters long and include lowercase, uppercase, numbers, and symbols.
+
+If the values don’t meet these rules, the SQL server deployment will fail.
+
+Keep a note of the login and password you use — they’ll be needed later. The deployment may take a few minutes.
+
+
+```pwsh
+> New-AzResourceGroupDeployment -Name main -TemplateFile .\main.bicep -TemplateParameterFile .\main.parameters.dev.json
+
+cmdlet New-AzResourceGroupDeployment at command pipeline position 1
+Supply values for the following parameters:
+(Type !? for Help.)
+sqlServerAdministratorLogin: ********
+sqlServerAdministratorPassword: ***********
+
+DeploymentName          : main
+ResourceGroupName       : BicepDeployment
+ProvisioningState       : Succeeded
+Timestamp               : 8/21/2025 9:44:38 AM
+Mode                    : Incremental
+TemplateLink            : 
+Parameters              : 
+                          Name                              Type                       Value
+                          ================================  =========================  ==========
+                          environmentName                   String                     "dev"
+                          solutionName                      String                     "toyhrfce5rpzidzts4"
+                          appServicePlanInstanceCount       Int                        1
+                          appServicePlanSku                 Object                     {"name":"F1","tier":"Free"}
+                          location                          String                     "centralus"
+                          sqlServerAdministratorLogin       SecureString               null
+                          sqlServerAdministratorPassword    SecureString               null
+                          sqlDatabaseSku                    Object                     {"name":"Standard","tier":"Standard"}
+
+Outputs                 : 
+DeploymentDebugLogLevel : 
+```
+
+### Create a Key Vault and add secrets
+
+Define variables for the key vault, login, and password, then create the key vault and add secrets. Run each step in the terminal:
+
+```powershell
+$keyVaultName = 'YOUR-KEY-VAULT-NAME'
+$login        = Read-Host "Enter the login name" -AsSecureString
+$password     = Read-Host "Enter the password" -AsSecureString
+```
+
+Then create the key vault and store the secrets:
+
+```powershell
+# The -EnabledForTemplateDeployment flag allows Azure Resource Manager to access the secrets during deployments.
+New-AzKeyVault -VaultName $keyVaultName -Location centralus -EnabledForTemplateDeployment
+Set-AzKeyVaultSecret -VaultName $keyVaultName -Name 'sqlServerAdministratorLogin' -SecretValue $login
+Set-AzKeyVaultSecret -VaultName $keyVaultName -Name 'sqlServerAdministratorPassword' -SecretValue $password
+```
+
+**Notes:**
+
+* Use the same login and password you entered during the earlier deployment step. Otherwise, the next deployment will fail.
+* Key vault names must be globally unique, 3–24 characters long, and can include letters, numbers, and hyphens.
+* The `-EnabledForTemplateDeployment` flag ensures deployments can access secrets.
+* As the creator of the vault, you already have access permissions. In real scenarios, permissions must be granted explicitly.
+
+```pwsh
+> $keyVaultName = 'labkeyvault20250821'
+
+> $login        = Read-Host "Enter the login name" -AsSecureString
+Enter the login name: ********
+
+> $password     = Read-Host "Enter the password" -AsSecureString
+Enter the password: ***********
+
+> New-AzKeyVault -VaultName $keyVaultName -Location centralus -EnabledForTemplateDeployment
+
+Vault Name                          : labkeyvault20250821
+Resource Group Name                 : BicepDeployment                                                                                                                                          
+Location                            : centralus                                                                                                                                                
+Resource ID                         : /subscriptions/e091f6e7-031a-4924-97bb-8c983ca5d21a/resourceGroups/BicepDeployment/providers/Microsoft.KeyVault/vaults/labkeyvault20250821               
+Vault URI                           : https://labkeyvault20250821.vault.azure.net/                                                                                                             
+Tenant ID                           : 547b168b-bd3f-4cfc-ae2b-665f52672fae                                                                                                                     
+SKU                                 : Standard                                                                                                                                                 
+Enabled For Deployment?             : False                                                                                                                                                    
+Enabled For Template Deployment?    : True                                                                                                                                                     
+Enabled For Disk Encryption?        : 
+Enabled For RBAC Authorization?     : True
+Soft Delete Enabled?                : True
+Soft Delete Retention Period (days) : 90
+Purge Protection Enabled?           : 
+Public Network Access               : Enabled
+Access Policies                     : 
+                                      Tenant ID                                  : 547b168b-bd3f-4cfc-ae2b-665f52672fae
+                                      Object ID                                  : 1441d598-b3c1-461e-8bdb-12ec864891e5
+                                      Application ID                             :
+                                      Display Name                               : Tenant Admin (tenantadmin@637djb.onmicrosoft.com)
+                                      Permissions to Keys                        : all
+                                      Permissions to Secrets                     : all
+                                      Permissions to Certificates                : all
+                                      Permissions to (Key Vault Managed) Storage : all
+
+
+Network Rule Set                    : 
+                                      Default Action                             : Allow
+                                      Bypass                                     : AzureServices
+                                      IP Rules                                   :
+                                      Virtual Network Rules                      :
+
+Tags                                : 
+
+
+# Note: I had to add my account to the Key Vault Administrator RBAC role to be able to add secrets.
+> Set-AzKeyVaultSecret -VaultName $keyVaultName -Name 'sqlServerAdministratorLogin' -SecretValue $login
+
+Vault Name   : labkeyvault20250821
+Name         : sqlServerAdministratorLogin
+Version      : 8ab6375963db420188d8e24567c3adac
+Id           : https://labkeyvault20250821.vault.azure.net:443/secrets/sqlServerAdministratorLogin/8ab6375963db420188d8e24567c3adac
+Enabled      : True
+Expires      : 
+Not Before   : 
+Created      : 8/21/2025 10:04:26 AM
+Updated      : 8/21/2025 10:04:26 AM
+Content Type : 
+Tags         : 
+
+> Set-AzKeyVaultSecret -VaultName $keyVaultName -Name 'sqlServerAdministratorPassword' -SecretValue $password
+
+Vault Name   : labkeyvault20250821
+Name         : sqlServerAdministratorPassword                                                                                                                                                  
+Version      : 448aaa5da81246f8ac4e354f1f8df585                                                                                                                                                
+Id           : https://labkeyvault20250821.vault.azure.net:443/secrets/sqlServerAdministratorPassword/448aaa5da81246f8ac4e354f1f8df585                                                         
+Enabled      : True                                                                                                                                                                            
+Expires      :                                                                                                                                                                                 
+Not Before   :                                                                                                                                                                                 
+Created      : 8/21/2025 10:05:15 AM                                                                                                                                                           
+Updated      : 8/21/2025 10:05:15 AM                                                                                                                                                           
+Content Type : 
+Tags         : 
+```
+
+#### Get the key vault's resource ID
