@@ -13,6 +13,22 @@
         "name": "Standard",
         "tier": "Standard"
       }
+    },
+    "sqlServerAdministratorLogin": {
+      "reference": {
+        "keyVault": {
+          "id": "/subscriptions/e091f6e7-031a-4924-97bb-8c983ca5d21a/resourceGroups/BicepDeployment/providers/Microsoft.KeyVault/vaults/labkeyvault20250821"
+        },
+        "secretName": "sqlServerAdministratorLogin"
+      }
+    },
+    "sqlServerAdministratorPassword": {
+      "reference": {
+        "keyVault": {
+          "id": "/subscriptions/e091f6e7-031a-4924-97bb-8c983ca5d21a/resourceGroups/BicepDeployment/providers/Microsoft.KeyVault/vaults/labkeyvault20250821"
+        },
+        "secretName": "sqlServerAdministratorPassword"
+      }
     }
   }
 }

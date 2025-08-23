@@ -34,6 +34,10 @@
   - [Create a parameters file](#create-a-parameters-file)
   - [Deploy the Bicep template with the parameters file](#deploy-the-bicep-template-with-the-parameters-file)
   - [Create a Key Vault and add secrets](#create-a-key-vault-and-add-secrets)
+    - [Get the key vault's resource ID](#get-the-key-vaults-resource-id)
+  - [Add a key vault reference to a parameters file](#add-a-key-vault-reference-to-a-parameters-file)
+  - [Deploy the Bicep template with parameters file and Azure Key Vault references](#deploy-the-bicep-template-with-parameters-file-and-azure-key-vault-references)
+  - [Check your deployment](#check-your-deployment)
 
 
 ## Understand parameters
@@ -830,3 +834,115 @@ Tags         :
 ```
 
 #### Get the key vault's resource ID
+
+To use Key Vault secrets in a deployment, you first need the vault’s resource ID. You can retrieve it with this PowerShell command:
+
+```pwsh
+> (Get-AzKeyVault -Name $keyVaultName).ResourceId
+/subscriptions/e091f6e7-031a-4924-97bb-8c983ca5d21a/resourceGroups/BicepDeployment/providers/Microsoft.KeyVault/vaults/labkeyvault20250821      
+```
+
+Copy the resource ID—you’ll need it in the next step of your deployment setup.
+
+### Add a key vault reference to a parameters file
+
+Open your `main.parameters.dev.json` file and locate the `sqlDatabaseSku` parameter. After its closing brace, add the two new parameters that reference your Key Vault secrets. Replace `YOUR-KEY-VAULT-RESOURCE-ID` with the actual resource ID you retrieved earlier.
+
+The file should look like this:
+
+```json
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "appServicePlanSku": {
+      "value": {
+        "name": "F1",
+        "tier": "Free"
+      }
+    },
+    "sqlDatabaseSku": {
+      "value": {
+        "name": "Standard",
+        "tier": "Standard"
+      }
+    },
+    "sqlServerAdministratorLogin": {
+      "reference": {
+        "keyVault": {
+          "id": "YOUR-KEY-VAULT-RESOURCE-ID"
+        },
+        "secretName": "sqlServerAdministratorLogin"
+      }
+    },
+    "sqlServerAdministratorPassword": {
+      "reference": {
+        "keyVault": {
+          "id": "YOUR-KEY-VAULT-RESOURCE-ID"
+        },
+        "secretName": "sqlServerAdministratorPassword"
+      }
+    }
+  }
+}
+```
+Save the file once you’ve updated it with your vault’s resource ID.
+
+### Deploy the Bicep template with parameters file and Azure Key Vault references
+
+Run this command in your terminal to deploy using the Bicep template and the parameters file:
+
+```powershell
+New-AzResourceGroupDeployment `
+  -Name main `
+  -TemplateFile main.bicep `
+  -TemplateParameterFile main.parameters.dev.json
+```
+
+This time, you won’t be asked for the `sqlServerAdministratorLogin` or `sqlServerAdministratorPassword` values—Azure pulls them directly from your Key Vault.
+
+Because the resources were already created in the previous run, the deployment finishes much faster.
+
+```pwsh
+> New-AzResourceGroupDeployment -Name main -TemplateFile .\main.bicep -TemplateParameterFile .\main.parameters.dev.json
+
+DeploymentName          : main
+ResourceGroupName       : BicepDeployment
+ProvisioningState       : Succeeded
+Timestamp               : 8/23/2025 9:26:55 AM
+Mode                    : Incremental
+TemplateLink            : 
+Parameters              : 
+                          Name                              Type                       Value     
+                          ================================  =========================  ==========
+                          environmentName                   String                     "dev"     
+                          solutionName                      String                     "toyhrfce5rpzidzts4"
+                          appServicePlanInstanceCount       Int                        1
+                          appServicePlanSku                 Object                     {"name":"F1","tier":"Free"}
+                          location                          String                     "centralus"
+                          sqlServerAdministratorLogin       SecureString               null      
+                          sqlServerAdministratorPassword    SecureString               null      
+                          sqlDatabaseSku                    Object                     {"name":"Standard","tier":"Standard"}
+
+Outputs                 : 
+DeploymentDebugLogLevel : 
+```
+
+### Check your deployment
+
+In the Azure portal, navigate back to your resource group. You’ll still see only one successful deployment, because the second run reused the same deployment name (`main`).
+
+1. Click the **1 Succeeded** link.
+2. Select the deployment named **main**.
+3. In the left menu, choose **Inputs**.
+
+Here you’ll notice:
+
+* **appServicePlanSku** and **sqlDatabaseSku** show the values from your `main.parameters.dev.json` file.
+* **sqlServerAdministratorLogin** and **sqlServerAdministratorPassword** do not display, because you marked them with the `@secure()` decorator.
+
+This confirms that the secrets were pulled securely from Key Vault during deployment, without being exposed in the portal.
+
+<img src='images/1755941395591.png' width=600>
+
+
