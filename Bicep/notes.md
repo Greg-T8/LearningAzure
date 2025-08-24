@@ -4,6 +4,7 @@
 - [Part 1: Fundamentals of Bicep](https://learn.microsoft.com/en-us/training/paths/fundamentals-bicep/)
     - [Learning Module 1: Build your first Bicep file (Notes)](./LP1%20-%20Fundamentals/LM1/notes.md)
     - [Learning Module 2: Build reusable Bicep files by using parameters (Notes)](LP1%20-%20Fundamentals/LM2/notes.md)
+    - [Learning Module 3: Build flexible Bicep files by using conditions and loops (Notes)](./LP1%20-%20Fundamentals/LM3/notes.md)
 
 ## References
 - [Create Bicep files - VS Code](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/quickstart-create-bicep-use-visual-studio-code?tabs=azure-cli)
