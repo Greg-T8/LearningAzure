@@ -20,7 +20,17 @@
   - [Verify the production deployment](#verify-the-production-deployment)
 - [Deploy multiple resources by using loops](#deploy-multiple-resources-by-using-loops)
   - [Use copy loops](#use-copy-loops)
+  - [Loop based on a count](#loop-based-on-a-count)
   - [Access the iteration index](#access-the-iteration-index)
+  - [Filter items with loops](#filter-items-with-loops)
+- [Exercise - Deploy multiple resources by using loops](#exercise---deploy-multiple-resources-by-using-loops)
+  - [Mmove resources into a module](#mmove-resources-into-a-module)
+  - [Deply multiple instances by using a copy loop](#deply-multiple-instances-by-using-a-copy-loop)
+  - [Deploy the Bicep file to Azure](#deploy-the-bicep-file-to-azure)
+  - [Verify the deployment](#verify-the-deployment-1)
+  - [Update and redeploy the Bicep file with an additional location](#update-and-redeploy-the-bicep-file-with-an-additional-location)
+  - [Verify the deployment](#verify-the-deployment-2)
+- [Control loop execution and nest loops](#control-loop-execution-and-nest-loops)
 
 
 ## Introduction
@@ -479,5 +489,239 @@ Note the required brackets: `[` before `for` and `]` after the resource definiti
 
 If you deploy this code, three storage accounts are created with names from the array.
 
+### Loop based on a count
+
+Sometimes you need to loop to create a set number of resources without using an existing array. Bicep provides the range() function, which generates an array of numbers.
+
+For example, to create four storage accounts named sa1 through sa4, you could write:
+
+```bicep
+resource storageAccountResources 'Microsoft.Storage/storageAccounts@2023-05-01' = [for i in range(1, 4): {
+  name: 'sa${i}'
+  location: resourceGroup().location
+  kind: 'StorageV2'
+  sku: {
+    name: 'Standard_LRS'
+  }
+}]
+```
+
+The range() function takes two arguments: the starting value and the number of values to generate.
+
+For instance:
+
+* `range(0, 3)` creates `[0, 1, 2]`, so the accounts would be sa0, sa1, and sa2.
+* `range(3, 4)` creates `[3, 4, 5, 6]`.
+
+**Note:** Be careful with the second argument—it specifies how many values to return, not the ending value. This is especially important if you start at 0.
+
 ### Access the iteration index
 
+In Bicep, you can loop through arrays and access both the element and its index.
+
+For example, if you want to create a logical server in each location from an array, and name them sqlserver-1, sqlserver-2, and so on, you could write:
+
+```bicep
+param locations array = [
+  'westeurope'
+  'eastus2'
+  'eastasia'
+]
+
+resource sqlServers 'Microsoft.Sql/servers@2024-05-01-preview' = [for (location, i) in locations: {
+  name: 'sqlserver-${i+1}'
+  location: location
+  properties: {
+    administratorLogin: administratorLogin
+    administratorLoginPassword: administratorLoginPassword
+  }
+}]
+```
+
+Here, the index variable `i` starts at 0. To make server names begin with 1, you add `+1`.
+
+By convention, the index variable is usually named `i`, but you can choose any name you prefer.
+
+### Filter items with loops
+
+You can combine `for` loops with `if` conditions in Bicep to control which resources get deployed.
+
+In the example below, an array parameter defines several logical servers. The loop includes a condition so that only servers with `environmentName` set to `Production` are deployed:
+
+```bicep
+param sqlServerDetails array = [
+  {
+    name: 'sqlserver-we'
+    location: 'westeurope'
+    environmentName: 'Production'
+  }
+  {
+    name: 'sqlserver-eus2'
+    location: 'eastus2'
+    environmentName: 'Development'
+  }
+  {
+    name: 'sqlserver-eas'
+    location: 'eastasia'
+    environmentName: 'Production'
+  }
+]
+
+resource sqlServers 'Microsoft.Sql/servers@2024-05-01-preview' = [for sqlServer in sqlServerDetails: if (sqlServer.environmentName == 'Production') {
+  name: sqlServer.name
+  location: sqlServer.location
+  properties: {
+    administratorLogin: administratorLogin
+    administratorLoginPassword: administratorLoginPassword
+  }
+  tags: {
+    environment: sqlServer.environmentName
+  }
+}]
+```
+
+When deployed, this creates `sqlserver-we` and `sqlserver-eas`, but not `sqlserver-eus2`, since that server’s environment is set to `Development` instead of `Production`.
+
+## Exercise - Deploy multiple resources by using loops
+
+Your current Bicep file deploys one Azure SQL logical server with auditing for production. Now you need one server per region where the smart teddy bear is launching.
+
+Extend your existing Bicep to deploy databases across multiple regions.
+
+Do the following:
+
+1. Move the existing Bicep code into a module.
+2. Create a new Bicep file that uses a copy loop to deploy the module multiple times.
+3. Deploy the new Bicep file and verify the resources.
+4. Add another location to the parameter, redeploy, and verify the new resources are created.
+
+### Mmove resources into a module
+
+In Visual Studio Code:
+
+1. In the same folder where your current `main.bicep` file is located, create a new folder named `modules`.
+2. Move `main.bicep` into the `modules` folder.
+3. Rename `main.bicep` to `database.bicep`.
+
+### Deply multiple instances by using a copy loop
+
+Create a new `main.bicep` file in the root folder (next to the `modules` folder).
+
+Add the parameters and module declaration:
+
+```bicep
+@description('The Azure regions into which the resources should be deployed.')
+param locations array = [
+  'westus'
+  'eastus2'
+]
+
+@secure()
+@description('The administrator login username for the SQL server.')
+param sqlServerAdministratorLogin string
+
+@secure()
+@description('The administrator login password for the SQL server.')
+param sqlServerAdministratorLoginPassword string
+
+module databases 'modules/database.bicep' = [for location in locations: {
+  name: 'database-${location}'
+  params: {
+    location: location
+    sqlServerAdministratorLogin: sqlServerAdministratorLogin
+    sqlServerAdministratorLoginPassword: sqlServerAdministratorLoginPassword
+  }
+}]
+```
+
+This loops through every location in the `locations` array and deploys the `database.bicep` module for each one.
+
+### Deploy the Bicep file to Azure
+
+In the Visual Studio Code terminal, run:
+
+```powershell
+New-AzResourceGroupDeployment -Name main -TemplateFile main.bicep
+```
+
+When prompted, enter the same SQL administrator login and password you used before. Using different credentials will cause the deployment to fail.
+
+Wait for the deployment to complete before continuing.
+
+### Verify the deployment
+
+1. In the Azure portal, switch to the sandbox subscription.
+2. Open the sandbox resource group.
+3. Confirm the new logical server and database exist and are in East US 2 (from the `locations` default).
+4. Leave the page open for later verification.
+
+<img src='images/2025-08-26-04-25-58.png' width=500> 
+
+### Update and redeploy the Bicep file with an additional location
+
+Update `main.bicep` to include East Asia and redeploy.
+
+Add East Asia to the `locations` parameter:
+
+```bicep
+@description('The Azure regions into which the resources should be deployed.')
+param locations array = [
+  'westus'
+  'eastus2'
+  'eastasia'
+]
+```
+
+Save the file, then redeploy from the terminal:
+
+```powershell
+New-AzResourceGroupDeployment -Name main -TemplateFile main.bicep
+```
+
+Use the same SQL admin login and password you used previously, or the deployment will fail.
+
+### Verify the deployment
+
+After redeploying, confirm the new logical server and database exist in East Asia.
+In the Azure portal, open the sandbox resource group. Select Refresh if needed.
+Verify both resources show the East Asia region.
+
+```pwsh
+> New-AzResourceGroupDeployment -Name main -TemplateFile .\main.bicep 
+
+cmdlet New-AzResourceGroupDeployment at command pipeline position 1
+Supply values for the following parameters:
+(Type !? for Help.)
+sqlServerAdministratorLogin: ********
+sqlServerAdministratorLoginPassword: ********************
+
+DeploymentName          : main
+ResourceGroupName       : BicepDeployment
+ProvisioningState       : Succeeded
+Timestamp               : 8/26/2025 9:30:07 AM
+Mode                    : Incremental
+TemplateLink            : 
+Parameters              : 
+                          Name                                   Type                       Value
+                          =====================================  =========================  ==========
+                          locations                              Array                      ["westus","eastus2","eastasia"]
+                          sqlServerAdministratorLogin            SecureString               null
+                          sqlServerAdministratorLoginPassword    SecureString               null
+
+Outputs                 : 
+DeploymentDebugLogLevel : 
+```
+
+<img src='images/2025-08-26-04-30-26.png' width=500> 
+
+## Control loop execution and nest loops
+
+Copy loops in Bicep let you create resources dynamically and with flexibility. You can control how these loops execute, use them to set resource properties, and even nest them.
+
+In this unit, you'll explore:
+
+* How to manage execution of copy loops
+* How to apply loops to resource properties
+* How to work with nested loops
+
+Note: The commands shown here are for illustration only. Don’t run them yet—you’ll practice later.
