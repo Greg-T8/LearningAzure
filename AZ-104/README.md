@@ -1,6 +1,5 @@
 # AZ-104: Microsoft Azure Administrator — Hands-On Lab Series
 
-**Author:** Greg Tate  
 **Objective:** Build real-world, exam-aligned proficiency for the **AZ-104: Microsoft Azure Administrator** certification through a sequence of medium-to-hard, scenario-driven labs.
 
 ---
@@ -32,6 +31,7 @@ Average lab duration: **1.5–2 hours**
 
 > Source: [Microsoft Official Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104)
 
+
 ---
 
 ## 🧭 Learning Approach
@@ -52,11 +52,56 @@ Average lab duration: **1.5–2 hours**
 | **B** | **3** | **Storage and Data Management** | [Lab 5 – Secure Azure Storage Accounts](./labs/Lab05_StorageAccounts.md)  <br>[Lab 6 – Azure Files & Blob Management](./labs/Lab06_StorageData.md) |
 | **C** | **4–5** | **Compute and Automation** | [Lab 7 – Infrastructure as Code (Bicep & Terraform)](./labs/Lab07_IaC.md)  <br>[Lab 8 – Virtual Machines & Disks](./labs/Lab08_VMs.md)  <br>[Lab 9 – Scale Sets & Containers](./labs/Lab09_VMSS_Containers.md)  <br>[Lab 10 – App Services & Web Apps](./labs/Lab10_AppServices.md) |
 | **D** | **6–7** | **Networking and Hybrid Connectivity** | [Lab 11 – Virtual Networks & Routing](./labs/Lab11_VNetRouting.md)  <br>[Lab 12 – Network Security (NSG, Private Endpoint)](./labs/Lab12_NetworkSecurity.md)  <br>[Lab 13 – VPN, ExpressRoute, Virtual WAN](./labs/Lab13_HybridConnectivity.md)  <br>[Lab 14 – Load Balancing & Front Door](./labs/Lab14_LoadBalancing.md)  <br>[Lab 15 – Azure DNS Zones](./labs/Lab15_DNS.md) |
-| **E** | **8** | **Monitoring & Resilience** | [Lab 16 – Monitoring & Diagnostics](./labs/Lab16_Monitoring.md)  <br>[Lab 17 – Backup & Recovery](./labs/Lab17_Bac_) <br>[Lab 18 - Final Integration / Scenario Lab](tbd)
+| **E** | **8** | **Monitoring & Resilience** | [Lab 16 – Monitoring & Diagnostics](./labs/Lab16_Monitoring.md)  <br> [Lab 17 – Backup & Recovery](./labs/Lab17_Bac_) <br>[Lab 18 - Final Integration / Scenario Lab](tbd)
 
----
+### Artifact Index
 
-## Lab Modules
+💡 Each lab folder contains:  
+
+* A markdown guide (`Lab##_Name.md`)  
+* IaC templates (`/bicep`, `/terraform`)  
+* Automation scripts (`/powershell`, `/cli`)  
+* Artifacts (`/artifacts/configs`, `/logs`, `/outputs`)
+
+
+| Category    | Folder                     | Description                |
+| ----------- | -------------------------- | -------------------------- |
+| Logs        | `./artifacts/logs/`        | CLI/PowerShell transcripts |
+| Configs     | `./artifacts/configs/`     | JSON/YAML exports          |
+| Outputs     | `./artifacts/outputs/`     | Deployment results         |
+| Exports     | `./artifacts/exports/`     | Downloaded reports         |
+
+
+### Exam Readiness Tips
+
+[AZ-104 Exam Readiness Zone](https://learn.microsoft.com/en-us/shows/exam-readiness-zone/?terms=az-104)
+- [Manage Azure identities and governance](https://learn.microsoft.com/en-us/shows/exam-readiness-zone/preparing-for-az-104-manage-azure-identities-and-governance-1-of-5)
+    - Know license feature differences in Free, P1, P2, and Governance
+    - Managing external users
+    - Built-in roles and custom roles
+    - Scoping permissions and policies (can't break inheritance)
+    - Policy initiative vs policy definition
+    - Two types of resource locks
+    - Resource groups can't be nested
+
+<img src='images/2025-10-08-10-35-22.png' width=500>
+<img src='images/2025-10-08-10-36-24.png' width=500>
+<img src='images/2025-10-08-10-37-46.png' width=500>
+<img src='images/2025-10-08-10-39-22.png' width=500>
+<img src='images/2025-10-08-10-40-16.png' width=500>
+<img src='images/2025-10-08-10-40-26.png' width=500>
+<img src='images/2025-10-08-10-40-56.png' width=500>
+<img src='images/2025-10-08-10-41-16.png' width=500>
+
+
+
+
+
+
+
+
+
+### Lab Modules
 
 | Lab #      | Title / Focus                             | Covered Subskills (bullets)                                                                                                             | Dependencies / Notes                                            |
 | ---------- | ----------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
