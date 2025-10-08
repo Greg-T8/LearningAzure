@@ -60,14 +60,37 @@ Each lab folder includes:
 - `Lab##_Name.md` – Step-by-step guide  
 - `/bicep` and `/terraform` – IaC templates  
 - `/powershell` and `/cli` – Automation scripts  
-- `/artifacts` – logs, configs, and outputs  
+- `/artifacts` – logs, configs, and outputs
+- `/docs` – Supporting documentation and study materials
 
-| Category | Folder | Description |
-|-----------|---------|-------------|
-| Logs | `./artifacts/logs/` | CLI / PowerShell transcripts |
-| Configs | `./artifacts/configs/` | JSON / YAML exports |
-| Outputs | `./artifacts/outputs/` | Deployment results |
-| Reports | `./artifacts/reports/` | Downloaded reports or cost exports |
+| **Category** | **Folder**             | **Description**                                                                                      |
+| ------------ | ---------------------- | ---------------------------------------------------------------------------------------------------- |
+| **Logs**     | `./artifacts/logs/`    | Command-line transcripts (CLI / PowerShell)                                                          |
+| **Configs**  | `./artifacts/configs/` | JSON, YAML, or exported policy/config data                                                           |
+| **Outputs**  | `./artifacts/outputs/` | Deployment results, state files, or verification exports                                             |
+| **Reports**  | `./artifacts/reports/` | Downloaded reports, cost exports, or audit outputs                                                   |
+| **Docs**     | `./docs/`              | Reference sheets (e.g., License Matrix, Feature Comparison, Concept Notes, Exam Readiness summaries) |
+
+Example Lab 
+
+```
+/labs/
+  lab01-setup-identity-baseline/
+    Lab01_Setup-Identity-Baseline.md
+    /bicep/
+    /terraform/
+    /powershell/
+    /cli/
+    /artifacts/
+      /logs/
+      /configs/
+      /outputs/
+      /reports/
+    /docs/
+      License-Feature-Matrix.md
+      SSPR-Troubleshooting.md
+      Exam-Readiness-Notes.md
+```
 
 ---
 
