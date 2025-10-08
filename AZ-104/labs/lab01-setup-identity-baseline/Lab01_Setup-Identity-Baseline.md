@@ -30,7 +30,7 @@ You will:
 
 ## 🧠 **Scenario**
 
-You’ve been asked to prepare a clean Entra ID tenant for a project team called **Project Nebula**.
+You’ve been asked to prepare a clean Entra ID tenant for a project team called **Project AZ104**.
 You’ll configure users, groups, and identity features to establish a governance baseline and verify tier-based feature differences.
 
 ---
@@ -39,9 +39,9 @@ You’ll configure users, groups, and identity features to establish a governanc
 
 | Component | Example                                            |
 | --------- | -------------------------------------------------- |
-| Tenant    | `nebula-lab.onmicrosoft.com`                       |
+| Tenant    | `637djb.onmicrosoft.com`                           |
 | Users     | 3 internal users, 1 guest                          |
-| Groups    | `Nebula-Admins`, `Nebula-Users`                    |
+| Groups    | `Lab-Admins`, `Lab-Users`                          |
 | Licenses  | M365 E5 or Entra ID Premium P1/P2                  |
 | Tools     | Azure Portal, Azure CLI, VS Code (Bicep/Terraform) |
 
@@ -60,29 +60,33 @@ You’ll configure users, groups, and identity features to establish a governanc
 1. **In Portal:**
    Create the following users:
 
-   | UPN                                                                         | Display Name | Department | Job Title  |
-   | --------------------------------------------------------------------------- | ------------ | ---------- | ---------- |
-   | [user1@nebula-lab.onmicrosoft.com](mailto:user1@nebula-lab.onmicrosoft.com) | Alex Smith   | Finance    | Analyst    |
-   | [user2@nebula-lab.onmicrosoft.com](mailto:user2@nebula-lab.onmicrosoft.com) | Dana White   | IT         | Admin      |
-   | [user3@nebula-lab.onmicrosoft.com](mailto:user3@nebula-lab.onmicrosoft.com) | Jamie Cruz   | HR         | Specialist |
+   | UPN                                                                 | Display Name | Department | Job Title  |
+   | ------------------------------------------------------------------- | ------------ | ---------- | ---------- |
+   | [user1@637djb.onmicrosoft.com](mailto:user1@637djb.onmicrosoft.com) | Alex Smith   | Finance    | Analyst    |
+   | [user2@637djb.onmicrosoft.com](mailto:user2@637djb.onmicrosoft.com) | Dana White   | IT         | Admin      |
+   | [user3@637djb.onmicrosoft.com](mailto:user3@637djb.onmicrosoft.com) | Jamie Cruz   | HR         | Specialist |
 
 2. **In CLI:**
 
-   ```bash
-   az ad user create \
-     --display-name "Alex Smith" \
-     --user-principal-name user1@nebula-lab.onmicrosoft.com \
-     --password "P@ssword123!" \
-     --force-change-password-next-login true
+   ```pwsh
+   az ad user create `
+     --display-name "Alex Smith" `
+     --user-principal-name 'user1@637djb.onmicrosoft.com' `
+     --password "P@ssword123!" `
+     --force-change-password-next-sign-in
    ```
+
+   <img src='images/2025-10-08-16-17-04.png' width=500>
 
 3. Verify users:
 
-   ```bash
-   az ad user list --query "[].{Name:displayName, Department:department}"
+   ```pwsh
+    az ad user list --query "[?contains(displayName, 'Alex')].{Name: displayName, UPN: userPrincipalName}"
    ```
 
-📘 **Lookup Task:** Identify which CLI flag enforces password reset on first login.
+   <img src='images/2025-10-08-16-26-06.png' width=700>
+
+   See [JMESPath Examples](https://jmespath.org/examples.html) for query syntax.
 
 ---
 
@@ -119,12 +123,12 @@ You’ll configure users, groups, and identity features to establish a governanc
 2. Set **UsageLocation** before assigning:
 
    ```bash
-   az ad user update --id user1@nebula-lab.onmicrosoft.com --usage-location US
+   az ad user update --id user1@637djb.onmicrosoft.com --usage-location US
    ```
 3. Validate:
 
    ```bash
-   az ad user show --id user1@nebula-lab.onmicrosoft.com --query assignedLicenses
+   az ad user show --id user1@637djb.onmicrosoft.com --query assignedLicenses
    ```
 
 ---
@@ -192,7 +196,7 @@ Create the following groups and assign appropriate licenses:
 
 ```bicep
 resource user1 'Microsoft.Entra/users@2023-01-01-preview' = {
-  name: 'user1@nebula-lab.onmicrosoft.com'
+  name: 'user1@637djb.onmicrosoft.com'
   properties: {
     displayName: 'Alex Smith'
     mailNickname: 'user1'
@@ -204,7 +208,7 @@ resource user1 'Microsoft.Entra/users@2023-01-01-preview' = {
 
 ```hcl
 resource "azuread_user" "alex" {
-  user_principal_name = "user1@nebula-lab.onmicrosoft.com"
+  user_principal_name = "user1@637djb.onmicrosoft.com"
   display_name        = "Alex Smith"
   password            = "P@ssword123!"
 }
@@ -240,7 +244,7 @@ Be able to answer:
 ## 🧹 **Cleanup**
 
 ```bash
-az ad user delete --id user1@nebula-lab.onmicrosoft.com
+az ad user delete --id user1@637djb.onmicrosoft.com
 az ad group delete --group "Nebula-Admins"
 az ad group delete --group "Tier-P1"
 az ad group delete --group "Tier-P2"
