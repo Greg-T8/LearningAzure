@@ -83,6 +83,8 @@ Average lab duration: **1.5–2 hours**
     - Policy initiative vs policy definition
     - Two types of resource locks
     - Resource groups can't be nested
+    - Management groups for multiple subscriptions
+    - Tagging
 
 <img src='images/2025-10-08-10-35-22.png' width=500>
 <img src='images/2025-10-08-10-36-24.png' width=500>
@@ -92,8 +94,8 @@ Average lab duration: **1.5–2 hours**
 <img src='images/2025-10-08-10-40-26.png' width=500>
 <img src='images/2025-10-08-10-40-56.png' width=500>
 <img src='images/2025-10-08-10-41-16.png' width=500>
-
-
+<img src='images/2025-10-08-10-41-51.png' width=500>
+<img src='images/2025-10-08-10-42-08.png' width=500>
 
 
 
