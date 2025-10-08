@@ -15,6 +15,7 @@ Use it to reinforce concepts, review domain summaries, and quickly recall high-v
 ## 🧠 Domain 1: Manage Azure Identities and Governance (20–25%)
 
 **Key Topics**
+
 - Create and manage users, groups, and administrative units.
 - Manage user and group properties.
 - Configure and manage license assignments (Free, P1, P2).
@@ -33,6 +34,7 @@ Use it to reinforce concepts, review domain summaries, and quickly recall high-v
 - Apply and scope **policies**, **budgets**, and **cost alerts**.
 
 **Common Pitfalls**
+
 - Forgetting that **resource groups cannot be nested**.
 - Misunderstanding the order of **scope inheritance** (cannot break it).
 - Confusing **policy definitions** (individual) vs. **initiatives** (grouped).
@@ -40,6 +42,7 @@ Use it to reinforce concepts, review domain summaries, and quickly recall high-v
 - Missing the need for **Azure AD roles** to manage licenses, not just RBAC roles.
 
 **References**
+
 - [Exam Readiness Zone – Identities & Governance](https://learn.microsoft.com/en-us/shows/exam-readiness-zone/preparing-for-az-104-manage-azure-identities-and-governance-1-of-5)
 - [Microsoft Learn – Manage Azure identities and governance](https://learn.microsoft.com/en-us/training/modules/azure-manage-identities-governance/)
 
