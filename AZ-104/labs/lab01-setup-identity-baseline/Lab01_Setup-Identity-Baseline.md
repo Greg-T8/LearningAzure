@@ -1,7 +1,7 @@
-# **Lab 1 – Setup and Identity Baseline**
+# Lab 1 – Setup and Identity Baseline
 
-**Domain:** Manage Azure identities and governance
-**Difficulty:** Medium-High (≈1.5–2 hrs)
+**Domain:** Manage Azure identities and governance  
+**Difficulty:** Medium-High (≈1.5–2 hrs)  
 **Dependencies:** None – requires only an Azure subscription
 
 ---
@@ -78,7 +78,7 @@ You’ll configure users, groups, and identity features to establish a governanc
 
    <img src='images/2025-10-08-16-17-04.png' width=500>
 
-    See [Using the `az` command](./Lab01_Deep-Dive.md#using-the-az-command) for a deep dive on creating users via the CLI.
+    🥽 Deep Dive: [Using the `az` command](./Lab01_Deep-Dive.md#using-the-az-command).
 
 
 3. Verify users:
