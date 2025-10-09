@@ -64,5 +64,22 @@ az rest `
 
 **References:**  
 
-* [Quoting differences in Azure CLI](https://learn.microsoft.com/en-us/cli/azure/use-azure-cli-successfully-quoting?view=azure-cli-latest&tabs=bash1%2Cbash2%2Cbash3#json-strings)
+* [Tips for using Azure CLI effectively](https://learn.microsoft.com/en-us/cli/azure/use-azure-cli-successfully-tips?view=azure-cli-latest&tabs=bash%2Ccmd2)
 * [Error: Failed to parse string as JSON](https://learn.microsoft.com/en-us/cli/azure/use-azure-cli-successfully-troubleshooting?view=azure-cli-latest#error-failed-to-parse-string-as-json)
+* [How to use shorthand syntax with Azure CLI](https://learn.microsoft.com/en-us/cli/azure/use-azure-cli-successfully-shorthand?view=azure-cli-latest)
+
+* [Error: Failed to parse string as JSON](https://learn.microsoft.com/en-us/cli/azure/use-azure-cli-successfully-troubleshooting?view=azure-cli-latest#error-failed-to-parse-string-as-json)
+
+    <img src='images/2025-10-09-05-07-10.png' width=700>
+
+* [Quoting differences in Azure CLI](https://learn.microsoft.com/en-us/cli/azure/use-azure-cli-successfully-quoting?view=azure-cli-latest&tabs=bash1%2Cbash2%2Cbash3#json-strings)
+
+    <img src='images/2025-10-09-05-09-29.png' width=700>
+
+* [Scripting language rules](https://learn.microsoft.com/en-us/cli/azure/use-azure-cli-successfully-quoting?view=azure-cli-latest&tabs=bash1%2Cpowershell2%2Cbash3#scripting-language-rules)
+
+    <img src='images/2025-10-09-05-11-23.png' width=700>
+
+* [Considerations for running the Azure CLI in a PowerShell scripting language](https://learn.microsoft.com/en-us/cli/azure/use-azure-cli-successfully-powershell?view=azure-cli-latest&tabs=read%2Cwin2%2CBash2#pass-parameters-containing-json)
+
+    <img src='images/2025-10-09-05-13-43.png' width=700>
