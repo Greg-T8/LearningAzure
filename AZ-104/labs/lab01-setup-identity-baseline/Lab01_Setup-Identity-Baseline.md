@@ -78,6 +78,9 @@ You’ll configure users, groups, and identity features to establish a governanc
 
    <img src='images/2025-10-08-16-17-04.png' width=500>
 
+    See [Using the `az` command](./Lab01_Deep-Dive.md#using-the-az-command) for a deep dive on creating users via the CLI.
+
+
 3. Verify users:
 
    ```pwsh
