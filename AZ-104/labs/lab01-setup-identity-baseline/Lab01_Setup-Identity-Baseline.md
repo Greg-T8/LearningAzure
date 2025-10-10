@@ -49,7 +49,7 @@ You’ll configure users, groups, and identity features to establish a governanc
 
 ## ⏱ **Estimated Duration**
 
-**90–120 minutes**
+**90–120 minutes**  
 
 ---
 
@@ -57,8 +57,9 @@ You’ll configure users, groups, and identity features to establish a governanc
 
 **Goal:** Create baseline users with key identity attributes.
 
-1. **In Portal:**
-   Create the following users:
+### Azure Portal
+
+Create the following users:
 
    | UPN                                                                 | Display Name | Department | Job Title  |
    | ------------------------------------------------------------------- | ------------ | ---------- | ---------- |
@@ -66,30 +67,45 @@ You’ll configure users, groups, and identity features to establish a governanc
    | [user2@637djb.onmicrosoft.com](mailto:user2@637djb.onmicrosoft.com) | Dana White   | IT         | Admin      |
    | [user3@637djb.onmicrosoft.com](mailto:user3@637djb.onmicrosoft.com) | Jamie Cruz   | HR         | Specialist |
 
-2. **In CLI:**
+### Using `Az` CLI
 
-   ```pwsh
-   az ad user create `
-     --display-name "Alex Smith" `
-     --user-principal-name 'user1@637djb.onmicrosoft.com' `
-     --password "P@ssword123!" `
-     --force-change-password-next-sign-in
-   ```
+#### Create user
 
-   <img src='images/2025-10-08-16-17-04.png' width=500>
+```pwsh
+az ad user create `
+ --display-name "Alex Smith" `
+ --user-principal-name 'user1@637djb.onmicrosoft.com' `
+ --password "P@ssword123!" `
+ --force-change-password-next-sign-in
+```
 
-    🥽 Deep Dive: [Using the `az` command](./Lab01_Deep-Dive.md#using-the-az-command).
+<img src='images/2025-10-08-16-17-04.png' width=500>
 
+The built-in `az ad user create` command does not support `givenName` and `surname` directly. For that, use the `az rest` method as shown in the Deep Dive link below.
 
-3. Verify users:
+🥽 Deep Dive: [Using the `az` command](./Lab01_Deep-Dive.md#using-the-az-command).
 
-   ```pwsh
-    az ad user list --query "[?contains(displayName, 'Alex')].{Name: displayName, UPN: userPrincipalName}"
-   ```
+**Reference:**
 
-   <img src='images/2025-10-08-16-26-06.png' width=700>
+* [az ad user](https://learn.microsoft.com/en-us/cli/azure/ad/user?view=azure-cli-latest)
 
-   See [JMESPath Examples](https://jmespath.org/examples.html) for query syntax.
+#### Verify user
+
+```pwsh
+az ad user list --query "[?contains(displayName, 'Alex')].{Name: displayName, UPN: userPrincipalName}"
+```
+
+<img src='images/2025-10-08-16-26-06.png' width=700>
+
+See [JMESPath Examples](https://jmespath.org/examples.html) for query syntax.
+
+### Using PowerShell
+
+#### Create user
+
+```pwsh
+
+```
 
 ---
 
