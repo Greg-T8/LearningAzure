@@ -85,9 +85,7 @@ The built-in `az ad user create` command does not support `givenName` and `surna
 
 🥽 Deep Dive: [Using the `az` command](./Lab01_Deep-Dive.md#using-the-az-command).
 
-**Reference:**
-
-* [az ad user](https://learn.microsoft.com/en-us/cli/azure/ad/user?view=azure-cli-latest)
+See [az ad user](https://learn.microsoft.com/en-us/cli/azure/ad/user?view=azure-cli-latest)
 
 #### Verify user
 
@@ -129,6 +127,8 @@ Remove-AzADUser -UPNOrObjectId 'user1@637djb.onmicrosoft.com'
 ```
 
 <img src='images/2025-10-10-04-31-46.png' width=700>
+
+See [New-AzADUser](https://learn.microsoft.com/en-us/powershell/module/az.resources/new-azaduser?view=azps-14.4.0).
 
 ---
 
