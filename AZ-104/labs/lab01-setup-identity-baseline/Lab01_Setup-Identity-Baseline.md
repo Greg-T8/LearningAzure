@@ -143,7 +143,7 @@ See [New-AzADUser](https://learn.microsoft.com/en-us/powershell/module/az.resour
 
 2. **Dynamic Group** – `Nebula-Finance`:
 
-   ```
+   ```text
    (user.department -eq "Finance")
    ```
 
@@ -167,6 +167,7 @@ See [New-AzADUser](https://learn.microsoft.com/en-us/powershell/module/az.resour
    ```bash
    az ad user update --id user1@637djb.onmicrosoft.com --usage-location US
    ```
+
 3. Validate:
 
    ```bash
@@ -186,6 +187,7 @@ See [New-AzADUser](https://learn.microsoft.com/en-us/powershell/module/az.resour
      --user-principal-name externaluser@gmail.com \
      --invite-redirect-url "https://portal.azure.com"
    ```
+
 2. Add the guest to `Nebula-Users`.
 3. Verify with:
 
