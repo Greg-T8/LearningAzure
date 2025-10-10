@@ -104,8 +104,31 @@ See [JMESPath Examples](https://jmespath.org/examples.html) for query syntax.
 #### Create user
 
 ```pwsh
-
+New-AzADUser `
+   -UserPrincipalName "user1@637djb.onmicrosoft.com" `
+   -MailNickname "asmith" `
+   -DisplayName "Alex Smith" `
+   -GivenName "Alex" `
+   -Surname "Smith" `
+   -Department "Finance" `
+   -JobTitle "Analyst" `
+   -AccountEnabled $true `
+   -PasswordProfile @{ Password = "P@ssword123!"; ForceChangePasswordNextSignIn = $true }
 ```
+
+<img src='images/2025-10-10-04-29-02.png' width=500>
+
+**Note:** The PowerShell version supports `givenName` and `surname` directly, among other properties.
+
+#### Verify and Remove User
+
+```pwsh
+Get-AzADUser -ObjectId 'user1@637djb.onmicrosoft.com'
+
+Remove-AzADUser -UPNOrObjectId 'user1@637djb.onmicrosoft.com'
+```
+
+<img src='images/2025-10-10-04-31-46.png' width=700>
 
 ---
 
