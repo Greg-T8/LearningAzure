@@ -6,6 +6,36 @@
 
 ---
 
+<!-- omit in toc -->
+## 🧾 Contents
+
+* [🎯 **Lab Objective**](#-lab-objective)
+* [🧱 **Skills Measured (Exam Outline)**](#-skills-measured-exam-outline)
+* [🧠 **Scenario**](#-scenario)
+* [⚙️ **Environment Setup**](#️-environment-setup)
+* [⏱ **Estimated Duration**](#-estimated-duration)
+* [🔹 **Exercise 1 – Create Internal Users**](#-exercise-1--create-internal-users)
+  * [Azure Portal](#azure-portal)
+  * [Using `Az` CLI](#using-az-cli)
+    * [Create user](#create-user)
+    * [Verify user](#verify-user)
+  * [Using PowerShell](#using-powershell)
+    * [Create user](#create-user-1)
+    * [Verify and Remove User](#verify-and-remove-user)
+  * [Using Infrastructure as Code (IaC)](#using-infrastructure-as-code-iac)
+    * [Terraform Example](#terraform-example)
+* [🔹 Exercise 2 – Create and Configure Groups](#-exercise-2--create-and-configure-groups)
+  * [Static Groups](#static-groups)
+* [🔹 **Exercise 3 – Assign Licenses**](#-exercise-3--assign-licenses)
+* [🔹 **Exercise 4 – Invite and Manage a Guest User**](#-exercise-4--invite-and-manage-a-guest-user)
+* [🔹 **Exercise 5 – Enable and Validate SSPR**](#-exercise-5--enable-and-validate-sspr)
+* [🔹 **Exercise 6 – Explore License Tier Differences**](#-exercise-6--explore-license-tier-differences)
+* [🔹 **Optional – Automate via IaC**](#-optional--automate-via-iac)
+* [🧩 **Validation Checklist**](#-validation-checklist)
+* [🧭 **Reflection \& Readiness**](#-reflection--readiness)
+* [🧹 **Cleanup**](#-cleanup)
+* [📚 **References**](#-references)
+
 ## 🎯 **Lab Objective**
 
 Establish a secure and well-organized Microsoft Entra ID (Azure AD) identity baseline for a new Azure environment.
@@ -81,11 +111,11 @@ az ad user create `
 
 <img src='images/2025-10-08-16-17-04.png' width=500>
 
-The built-in `az ad user create` command does not support `givenName` and `surname` directly. For that, use the `az rest` method as shown in the Deep Dive link below.
+The built-in `az ad user create` command does not support other attributes, such as `givenName` and `surname`, directly. For that, use the `az rest` method as shown in the Deep Dive link below.
 
-🥽 Deep Dive: [Using the `az` command](./Lab01_Deep-Dive.md#using-the-az-command).
+🥽 Deep Dive: [Using the `az` command](./Lab01_Deep-Dive-Users.md#using-the-az-command).
 
-See [az ad user](https://learn.microsoft.com/en-us/cli/azure/ad/user?view=azure-cli-latest)
+Documentation: [az ad user](https://learn.microsoft.com/en-us/cli/azure/ad/user?view=azure-cli-latest)
 
 #### Verify user
 
@@ -128,13 +158,30 @@ Remove-AzADUser -UPNOrObjectId 'user1@637djb.onmicrosoft.com'
 
 <img src='images/2025-10-10-04-31-46.png' width=700>
 
-See [New-AzADUser](https://learn.microsoft.com/en-us/powershell/module/az.resources/new-azaduser?view=azps-14.4.0).
+Documentation: [New-AzADUser](https://learn.microsoft.com/en-us/powershell/module/az.resources/new-azaduser?view=azps-14.4.0)
+
+### Using Infrastructure as Code (IaC)
+
+#### Terraform Example
+
+For production scenarios, avoid using Terraform to create users because Terraform stores the passwords in plain text within the state file.
+
+*terraform.tfstate*:  
+
+<img src='images/2025-10-10-08-40-40.png' width=300>
+
+```hcl
+
+
+```
 
 ---
 
-## 🔹 **Exercise 2 – Create and Configure Groups**
+## 🔹 Exercise 2 – Create and Configure Groups
 
 **Goal:** Organize users using static and dynamic membership.
+
+### Static Groups
 
 1. **Static Group** – `Nebula-Admins`:
 

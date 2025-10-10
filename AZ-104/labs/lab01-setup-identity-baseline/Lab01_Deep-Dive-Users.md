@@ -1,7 +1,7 @@
-# Lab 1 – Deep Dive: Setup Identity Baseline
+# Lab 1 – Deep Dive: Managing Users
 
 <!-- omit in toc -->
-## Contents
+## 🧾 Contents
 
 * [🔹 **Exercise 1 – Create Internal Users**](#-exercise-1--create-internal-users)
   * [Using the `az` command](#using-the-az-command)
@@ -9,6 +9,7 @@
     * [Create user (simple)](#create-user-simple)
     * [Remove user](#remove-user)
     * [Create user (advanced)](#create-user-advanced)
+  * [Using Terraform](#using-terraform)
 
 ## 🔹 **Exercise 1 – Create Internal Users**
 
@@ -155,3 +156,9 @@ See the following references for more information on the quoting issue in PowerS
 * [Considerations for running the Azure CLI in a PowerShell scripting language](https://learn.microsoft.com/en-us/cli/azure/use-azure-cli-successfully-powershell?view=azure-cli-latest&tabs=read%2Cwin2%2CBash2#pass-parameters-containing-json)
 
     <img src='images/2025-10-09-05-13-43.png' width=600>
+
+### Using Terraform
+
+Documentation: 
+- [Azure Active Directory Provider](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs)
+- [Resource: azuread_user](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/resources/user)
