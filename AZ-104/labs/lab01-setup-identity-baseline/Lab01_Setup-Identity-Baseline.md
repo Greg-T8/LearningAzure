@@ -23,6 +23,7 @@
     * [Create user](#create-user-1)
     * [Verify and Remove User](#verify-and-remove-user)
   * [Using Infrastructure as Code (IaC)](#using-infrastructure-as-code-iac)
+    * [Bicep Example](#bicep-example)
     * [Terraform Example](#terraform-example)
 * [🔹 Exercise 2 – Create and Configure Groups](#-exercise-2--create-and-configure-groups)
   * [Static Groups](#static-groups)
@@ -162,6 +163,10 @@ Documentation: [New-AzADUser](https://learn.microsoft.com/en-us/powershell/modul
 
 ### Using Infrastructure as Code (IaC)
 
+#### Bicep Example
+
+Azure Bicep cannot directly create Azure AD (Entra ID) user accounts, because Bicep operates through the Azure Resource Manager (ARM), and user objects live in Microsoft Entra ID, which is managed by the Microsoft Graph API, not ARM.
+
 #### Terraform Example
 
 For production scenarios, avoid using Terraform to create users because Terraform stores the passwords in plain text within the state file.
@@ -170,10 +175,11 @@ For production scenarios, avoid using Terraform to create users because Terrafor
 
 <img src='images/2025-10-10-08-40-40.png' width=300>
 
-```hcl
+See [main.tf](./terraform/users/main.tf) for a working example. This example uses the [users.yaml](./terraform/users/users.yaml) file for user definitions.
 
+<img src='images/2025-10-12-04-35-30.png' width=400>
 
-```
+<img src='images/2025-10-12-04-37-27.png' width=500>
 
 ---
 
