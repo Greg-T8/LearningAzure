@@ -231,6 +231,21 @@ Use `az ad group member list` to verify members:
 
 #### Using PowerShell
 
+The following command creates a dynamic M365 security group:
+
+```pwsh
+New-AzADGroup `                                                   
+   -DisplayName "Marketing Team" `
+   -MailNickname "marketing-team" `
+   -Description "Dynamic M365 group for Marketing department" `
+   -MailEnabled `
+   -SecurityEnabled `
+   -GroupType "Unified", "DynamicMembership" `
+   -MembershipRule 'user.department -eq "Marketing"' `
+   -MembershipRuleProcessingState "On"
+```
+
+<img src='images/2025-10-12-05-30-18.png' width=600>
 
 
 #### Using Infrastructure as Code (IaC)
