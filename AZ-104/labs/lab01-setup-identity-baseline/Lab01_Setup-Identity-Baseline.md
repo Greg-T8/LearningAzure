@@ -26,12 +26,15 @@
     * [Bicep Example](#bicep-example)
     * [Terraform Example](#terraform-example)
 * [🔹 Exercise 2 – Create and Configure Groups](#-exercise-2--create-and-configure-groups)
-  * [Static Groups](#static-groups)
+  * [Static Group – `Lab-Admins`](#static-group--lab-admins)
+    * [Using `Az` CLI](#using-az-cli-1)
+    * [Using PowerShell](#using-powershell-1)
+    * [Using Infrastructure as Code (IaC)](#using-infrastructure-as-code-iac-1)
+  * [Dynamic Group – `Lab-Finance`](#dynamic-group--lab-finance)
 * [🔹 **Exercise 3 – Assign Licenses**](#-exercise-3--assign-licenses)
 * [🔹 **Exercise 4 – Invite and Manage a Guest User**](#-exercise-4--invite-and-manage-a-guest-user)
 * [🔹 **Exercise 5 – Enable and Validate SSPR**](#-exercise-5--enable-and-validate-sspr)
 * [🔹 **Exercise 6 – Explore License Tier Differences**](#-exercise-6--explore-license-tier-differences)
-* [🔹 **Optional – Automate via IaC**](#-optional--automate-via-iac)
 * [🧩 **Validation Checklist**](#-validation-checklist)
 * [🧭 **Reflection \& Readiness**](#-reflection--readiness)
 * [🧹 **Cleanup**](#-cleanup)
@@ -187,14 +190,52 @@ See [main.tf](./terraform/users/main.tf) for a working example. This example use
 
 **Goal:** Organize users using static and dynamic membership.
 
-### Static Groups
+### Static Group – `Lab-Admins`
 
-1. **Static Group** – `Nebula-Admins`:
+* Members: `user2`
+* Owner: `user2`
 
-   * Members: `user2`
-   * Owner: `user2`
+#### Using `Az` CLI
 
-2. **Dynamic Group** – `Nebula-Finance`:
+The `az ad group` command provides limited functionality for group management. For fuller functionality, use either `az rest` or Microsoft Graph PowerShell.
+
+The following command creates an Azure security group.
+
+```pwsh
+az ad group create --display-name 'Lab-Admins' --mail-nickname 'lab-admins'
+```
+
+Run the following command to list and verify the group:
+
+```pwsh
+az ad group list | cfj | select displayname, groupTypes
+```
+
+**Note:** `cfj` is a custom alias for `ConvertFrom-Json` in PowerShell.
+
+<img src='images/2025-10-12-04-51-40.png' width=400>
+
+**Note:** The `az ad group` command is limited to creating static security groups.
+
+To add a member:
+
+```pwsh
+az ad group member add -g 'Lab-Admins' --member-id 'bcbb55f1-814b-44c8-9963-1f7eeb7d2679'
+```
+
+You must use the user's **object ID** (not UPN) to add them as a member. Use `az ad user list` to find the object ID.
+
+Use `az ad group member list` to verify members:
+
+<img src='images/2025-10-12-05-05-38.png' width=400>
+
+#### Using PowerShell
+
+
+
+#### Using Infrastructure as Code (IaC)
+
+### Dynamic Group – `Lab-Finance`
 
    ```text
    (user.department -eq "Finance")
@@ -214,7 +255,7 @@ See [main.tf](./terraform/users/main.tf) for a working example. This example use
 
 **Goal:** Enable features through license assignment.
 
-1. Assign **Entra ID Premium P1** to `Nebula-Admins`.
+1. Assign **Entra ID Premium P1** to `Lab-Admins`.
 2. Set **UsageLocation** before assigning:
 
    ```bash
@@ -241,7 +282,7 @@ See [main.tf](./terraform/users/main.tf) for a working example. This example use
      --invite-redirect-url "https://portal.azure.com"
    ```
 
-2. Add the guest to `Nebula-Users`.
+2. Add the guest to `Lab-Users`.
 3. Verify with:
 
    ```bash
@@ -257,9 +298,9 @@ See [main.tf](./terraform/users/main.tf) for a working example. This example use
 **Goal:** Enable and test self-service password reset for a group.
 
 1. Go to **Entra ID → Password Reset → Properties**.
-2. Enable SSPR for **Selected users** → `Nebula-Admins`.
+2. Enable SSPR for **Selected users** → `Lab-Admins`.
 3. Configure **authentication methods** (Email + Authenticator).
-4. Test with a user from `Nebula-Admins`.
+4. Test with a user from `Lab-Admins`.
 5. Review reset events under **Audit Logs → Password reset activity**.
 
 ---
@@ -284,32 +325,6 @@ Create the following groups and assign appropriate licenses:
 * Try creating an **Entitlement Management catalog** (Governance only).
 
 📄 See `/docs/License-Feature-Matrix.md` for detailed feature comparison.
-
----
-
-## 🔹 **Optional – Automate via IaC**
-
-**Bicep Example:**
-
-```bicep
-resource user1 'Microsoft.Entra/users@2023-01-01-preview' = {
-  name: 'user1@637djb.onmicrosoft.com'
-  properties: {
-    displayName: 'Alex Smith'
-    mailNickname: 'user1'
-  }
-}
-```
-
-**Terraform Example:**
-
-```hcl
-resource "azuread_user" "alex" {
-  user_principal_name = "user1@637djb.onmicrosoft.com"
-  display_name        = "Alex Smith"
-  password            = "P@ssword123!"
-}
-```
 
 ---
 
@@ -342,7 +357,7 @@ Be able to answer:
 
 ```bash
 az ad user delete --id user1@637djb.onmicrosoft.com
-az ad group delete --group "Nebula-Admins"
+az ad group delete --group "Lab-Admins"
 az ad group delete --group "Tier-P1"
 az ad group delete --group "Tier-P2"
 az ad group delete --group "Tier-Gov"
