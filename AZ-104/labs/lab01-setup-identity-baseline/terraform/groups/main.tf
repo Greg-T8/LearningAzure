@@ -64,10 +64,7 @@ variable "member_user_principal_names" {
 locals {
   // Remove characters not allowed by mailNickname policy and lowercase it
   // Use regexall to select only allowed characters, then join them back together
-  nickname_from_display   = lower(join("", regexall(var.display_name, "[0-9A-Za-z._-]")))
-
-  // Prefer provided mail_nickname when non-null and non-empty (after trim); otherwise use cleaned display name; fallback to a simple default
-  mail_nickname_effective = length(trimspace(var.mail_nickname != null ? var.mail_nickname : "")) > 0 ? var.mail_nickname : (length(local.nickname_from_display) > 0 ? local.nickname_from_display : "group")
+  nickname_from_display   = lower(join("", regexall("[0-9A-Za-z._-]", var.display_name)))
 }
 
 # Create a Microsoft 365 (Unified) group
@@ -75,7 +72,7 @@ resource "azuread_group" "m365_group" {
   display_name     = var.display_name
   description      = var.description
   mail_enabled     = true
-  mail_nickname    = local.mail_nickname_effective
+  mail_nickname    = local.nickname_from_display
   security_enabled = false
   types            = ["Unified"]
   visibility       = var.visibility

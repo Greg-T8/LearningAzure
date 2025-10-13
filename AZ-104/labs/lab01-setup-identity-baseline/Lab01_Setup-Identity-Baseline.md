@@ -30,7 +30,7 @@
     * [Using `Az` CLI](#using-az-cli-1)
     * [Using PowerShell](#using-powershell-1)
     * [Using Infrastructure as Code (IaC)](#using-infrastructure-as-code-iac-1)
-  * [Dynamic Group – `Lab-Finance`](#dynamic-group--lab-finance)
+      * [Terraform Example](#terraform-example-1)
 * [🔹 **Exercise 3 – Assign Licenses**](#-exercise-3--assign-licenses)
 * [🔹 **Exercise 4 – Invite and Manage a Guest User**](#-exercise-4--invite-and-manage-a-guest-user)
 * [🔹 **Exercise 5 – Enable and Validate SSPR**](#-exercise-5--enable-and-validate-sspr)
@@ -244,21 +244,18 @@ New-AzADGroup `
 
 <img src='images/2025-10-12-05-30-18.png' width=600>
 
+💡 **Exam Insight:** Understand propagation latency of dynamic membership updates.
+
+
+
+
 #### Using Infrastructure as Code (IaC)
 
-### Dynamic Group – `Lab-Finance`
+##### Terraform Example
 
-   ```text
-   (user.department -eq "Finance")
-   ```
+See [main.tf](./terraform/groups/main.tf) for a working example. 
 
-3. Verify configuration:
-
-   ```bash
-   az ad group list --query "[].{Name:displayName, MembershipRule:membershipRule}"
-   ```
-
-💡 **Exam Insight:** Understand propagation latency of dynamic membership updates.
+<img src='images/2025-10-13-04-59-16.png' width=600>
 
 ---
 
