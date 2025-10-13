@@ -192,12 +192,7 @@ See [main.tf](./terraform/users/main.tf) for a working example. This example use
 
 ### Static Group – `Lab-Admins`
 
-* Members: `user2`
-* Owner: `user2`
-
 #### Using `Az` CLI
-
-The `az ad group` command provides limited functionality for group management. For fuller functionality, use either `az rest` or Microsoft Graph PowerShell.
 
 The following command creates an Azure security group.
 
@@ -229,6 +224,8 @@ Use `az ad group member list` to verify members:
 
 <img src='images/2025-10-12-05-05-38.png' width=400>
 
+The `az ad group` command provides limited functionality for group management. For fuller functionality, use either `az rest` or Microsoft Graph PowerShell.
+
 #### Using PowerShell
 
 The following command creates a dynamic M365 security group:
@@ -246,7 +243,6 @@ New-AzADGroup `
 ```
 
 <img src='images/2025-10-12-05-30-18.png' width=600>
-
 
 #### Using Infrastructure as Code (IaC)
 
