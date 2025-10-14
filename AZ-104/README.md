@@ -141,6 +141,7 @@ Each lab folder includes:
   - Create users and groups
     - [Types of users](https://learn.microsoft.com/en-us/entra/fundamentals/how-to-create-delete-users#types-of-users)
     - [Default user permissions](https://learn.microsoft.com/en-us/entra/fundamentals/users-default-permissions)
+    - [Create users in bulk](https://learn.microsoft.com/en-us/entra/identity/users/users-bulk-add)
   - Manage user and group properties
   - Manage licenses in Microsoft Entra ID
     - [Microsoft Entra Licensing](https://learn.microsoft.com/en-us/entra/fundamentals/licensing)

@@ -15,7 +15,7 @@
 * [⚙️ **Environment Setup**](#️-environment-setup)
 * [⏱ **Estimated Duration**](#-estimated-duration)
 * [🔹 **Exercise 1 – Create Internal Users**](#-exercise-1--create-internal-users)
-  * [Azure Portal](#azure-portal)
+  * [Azure Portal (Bulk Users)](#azure-portal-bulk-users)
   * [Using `Az` CLI](#using-az-cli)
     * [Create user](#create-user)
     * [Verify user](#verify-user)
@@ -25,12 +25,13 @@
   * [Using Infrastructure as Code (IaC)](#using-infrastructure-as-code-iac)
     * [Bicep Example](#bicep-example)
     * [Terraform Example](#terraform-example)
-* [🔹 Exercise 2 – Create and Configure Groups](#-exercise-2--create-and-configure-groups)
+    * [Exam Insights](#exam-insights)
+* [🔹 **Exercise 2 – Create and Configure Groups**](#-exercise-2--create-and-configure-groups)
   * [Static Group – `Lab-Admins`](#static-group--lab-admins)
     * [Using `Az` CLI](#using-az-cli-1)
+    * [Using Terraform](#using-terraform)
+  * [Dynamic Group - `Marketing Team`](#dynamic-group---marketing-team)
     * [Using PowerShell](#using-powershell-1)
-    * [Using Infrastructure as Code (IaC)](#using-infrastructure-as-code-iac-1)
-      * [Terraform Example](#terraform-example-1)
 * [🔹 **Exercise 3 – Assign Licenses**](#-exercise-3--assign-licenses)
 * [🔹 **Exercise 4 – Invite and Manage a Guest User**](#-exercise-4--invite-and-manage-a-guest-user)
 * [🔹 **Exercise 5 – Enable and Validate SSPR**](#-exercise-5--enable-and-validate-sspr)
@@ -91,7 +92,7 @@ You’ll configure users, groups, and identity features to establish a governanc
 
 **Goal:** Create baseline users with key identity attributes.
 
-### Azure Portal
+### Azure Portal (Bulk Users)
 
 Create the following users:
 
@@ -100,6 +101,25 @@ Create the following users:
    | [user1@637djb.onmicrosoft.com](mailto:user1@637djb.onmicrosoft.com) | Alex Smith   | Finance    | Analyst    |
    | [user2@637djb.onmicrosoft.com](mailto:user2@637djb.onmicrosoft.com) | Dana White   | IT         | Admin      |
    | [user3@637djb.onmicrosoft.com](mailto:user3@637djb.onmicrosoft.com) | Jamie Cruz   | HR         | Specialist |
+
+<img src='images/2025-10-14-05-40-15.png' width=600>
+
+Notes on the .csv template:
+
+* The first two rows of the upload template must not be removed or modified, or the upload can't be processed.
+* The required columns are listed first.
+* We don't recommend adding new columns to the template. Any additional columns you add are ignored and not processed.
+* We recommend that you download the latest version of the CSV template as often as possible.
+* Make sure to check there is no unintended whitespace before/after any field. For User principal name, having such whitespace would cause import failure.
+* Ensure that values in Initial password comply with the currently active password policy.
+
+<img src='images/2025-10-14-05-45-44.png' width=800>
+
+The process will create other users even if some rows have errors.
+
+<img src='images/2025-10-14-05-48-57.png' width=800>
+
+See [Create users in bulk](https://learn.microsoft.com/en-us/entra/identity/users/users-bulk-add)
 
 ### Using `Az` CLI
 
@@ -184,9 +204,19 @@ See [main.tf](./terraform/users/main.tf) for a working example. This example use
 
 <img src='images/2025-10-12-04-37-27.png' width=500>
 
+#### Exam Insights
+
+💡 Know the difference between creating users via Portal, CLI, PowerShell, and Graph API—each method has different attribute support.
+
+💡 Understand that `ForceChangePasswordNextSignIn` is a security best practice for initial passwords and is commonly tested.
+
+💡 Remember that user accounts require a valid `UsageLocation` before licenses can be assigned—this is a frequent exam scenario.
+
+💡 Be familiar with bulk user operations using CSV files in the Portal—the exam may ask about the most efficient way to create multiple users.
+
 ---
 
-## 🔹 Exercise 2 – Create and Configure Groups
+## 🔹 **Exercise 2 – Create and Configure Groups**
 
 **Goal:** Organize users using static and dynamic membership.
 
@@ -226,6 +256,14 @@ Use `az ad group member list` to verify members:
 
 The `az ad group` command provides limited functionality for group management. For fuller functionality, use either `az rest` or Microsoft Graph PowerShell.
 
+#### Using Terraform
+
+See [main.tf](./terraform/groups/main.tf) for a working example.
+
+<img src='images/2025-10-13-04-59-16.png' width=600>
+
+### Dynamic Group - `Marketing Team`
+
 #### Using PowerShell
 
 The following command creates a dynamic M365 security group:
@@ -245,17 +283,6 @@ New-AzADGroup `
 <img src='images/2025-10-12-05-30-18.png' width=600>
 
 💡 **Exam Insight:** Understand propagation latency of dynamic membership updates.
-
-
-
-
-#### Using Infrastructure as Code (IaC)
-
-##### Terraform Example
-
-See [main.tf](./terraform/groups/main.tf) for a working example. 
-
-<img src='images/2025-10-13-04-59-16.png' width=600>
 
 ---
 
