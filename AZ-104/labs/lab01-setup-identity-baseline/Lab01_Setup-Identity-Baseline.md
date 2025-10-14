@@ -32,7 +32,11 @@
     * [Using Terraform](#using-terraform)
   * [Dynamic Group - `Marketing Team`](#dynamic-group---marketing-team)
     * [Using PowerShell](#using-powershell-1)
+    * [Exam Insights](#exam-insights-1)
 * [🔹 **Exercise 3 – Assign Licenses**](#-exercise-3--assign-licenses)
+  * [Licensing Assignment through PowerShell](#licensing-assignment-through-powershell)
+  * [Group-Based Licensing](#group-based-licensing)
+    * [Exam Insights](#exam-insights-2)
 * [🔹 **Exercise 4 – Invite and Manage a Guest User**](#-exercise-4--invite-and-manage-a-guest-user)
 * [🔹 **Exercise 5 – Enable and Validate SSPR**](#-exercise-5--enable-and-validate-sspr)
 * [🔹 **Exercise 6 – Explore License Tier Differences**](#-exercise-6--explore-license-tier-differences)
@@ -135,7 +139,7 @@ az ad user create `
 
 <img src='images/2025-10-08-16-17-04.png' width=500>
 
-The built-in `az ad user create` command does not support other attributes, such as `givenName` and `surname`, directly. For that, use the `az rest` method as shown in the Deep Dive link below.
+The built-in `az ad user create` command only supports required attributes. It does does not support other attributes, such as `givenName` and `surname`, directly. For that, use the `az rest` method as shown in the Deep Dive link below.
 
 🥽 Deep Dive: [Using the `az` command](./Lab01_Deep-Dive-Users.md#using-the-az-command).
 
@@ -284,24 +288,82 @@ New-AzADGroup `
 
 💡 **Exam Insight:** Understand propagation latency of dynamic membership updates.
 
+#### Exam Insights
+
+💡 Know the difference between Security Groups and Microsoft 365 Groups—Security Groups are for access control, M365 Groups include collaboration features like shared mailbox and Teams.
+
+💡 Understand that dynamic groups require Entra ID Premium P1 or P2 licenses and are based on user or device attributes using membership rules.
+
+💡 Remember that nested groups are supported for security groups but not for dynamic groups—this is a common exam scenario question.
+
+💡 Be familiar with the membership rule syntax for dynamic groups (e.g., `user.department -eq "Marketing"`)—the exam may ask you to identify correct or incorrect rule syntax.
+
+💡 Know that group-based license assignment is only available with Entra ID Premium P1 or higher and requires groups to be security-enabled—this is frequently tested.
+
 ---
 
 ## 🔹 **Exercise 3 – Assign Licenses**
 
 **Goal:** Enable features through license assignment.
 
-1. Assign **Entra ID Premium P1** to `Lab-Admins`.
-2. Set **UsageLocation** before assigning:
+### Licensing Assignment through PowerShell
 
-   ```bash
-   az ad user update --id user1@637djb.onmicrosoft.com --usage-location US
+Use the following PowerShell commands to assign licenses to individual users:
+
+```pwsh
+# Set the UsageLocation property for the user (required for license assignment)
+Set-AzADUser -ObjectId "user1@637djb.onmicrosoft.com" -UsageLocation "US"
+
+# Assign a license to the user
+Set-AzADUserLicense -ObjectId "user1@637djb.onmicrosoft.com" -AddLicenses "ENTERPRISEPREMIUM"
+```
+
+💡 **Note:** Replace `"ENTERPRISEPREMIUM"` with the appropriate SKU ID for the license you want to assign. Use `Get-AzADSubscribedSku` to list available SKUs.
+
+### Group-Based Licensing
+
+Group-based licensing simplifies license management by assigning licenses to groups instead of individual users. Follow these steps:
+
+1. **Create a Security Group**  
+   Use the following command to create a security group for licensing:
+
+   ```pwsh
+   New-AzADGroup `
+      -DisplayName "License-Group-P1" `
+      -MailNickname "license-group-p1" `
+      -SecurityEnabled $true
    ```
 
-3. Validate:
+2. **Assign Licenses to the Group**  
+   Assign a license to the group using the Azure Portal or Microsoft Graph API. Group-based licensing requires Entra ID Premium P1 or higher.
 
-   ```bash
-   az ad user show --id user1@637djb.onmicrosoft.com --query assignedLicenses
+3. **Add Users to the Group**  
+   Add users to the group to inherit the assigned licenses:
+
+   ```pwsh
+   Add-AzADGroupMember -GroupObjectId "<GroupObjectId>" -MemberObjectId "<UserObjectId>"
    ```
+
+4. **Verify License Assignment**  
+   Verify that the users in the group have inherited the licenses:
+
+   ```pwsh
+   Get-AzADUser -ObjectId "user1@637djb.onmicrosoft.com" | Select-Object DisplayName, AssignedLicenses
+   ```
+
+💡 **Exam Insight:** Group-based licensing is a key feature of Entra ID Premium P1 and is often tested in scenarios involving license management at scale.
+
+#### Exam Insights
+
+💡 Understand that `UsageLocation` is a required property for license assignment—this is a common exam scenario.
+
+💡 Know the difference between assigning licenses to individual users versus groups—group-based licensing simplifies management at scale.
+
+💡 Be familiar with the PowerShell cmdlets for license assignment, such as `Set-AzADUserLicense`, and their required parameters.
+
+💡 Remember that group-based licensing requires the group to be security-enabled and is only available with Entra ID Premium P1 or higher.
+
+💡 Understand how to verify license assignments using commands like `Get-AzADUser` and the `AssignedLicenses` property—this is frequently tested.
 
 ---
 

@@ -143,8 +143,10 @@ Each lab folder includes:
     - [Default user permissions](https://learn.microsoft.com/en-us/entra/fundamentals/users-default-permissions)
     - [Create users in bulk](https://learn.microsoft.com/en-us/entra/identity/users/users-bulk-add)
   - Manage user and group properties
+    - [Restore a deleted user](https://learn.microsoft.com/en-us/entra/fundamentals/users-restore?toc=%2Fentra%2Fidentity%2Fusers%2Ftoc.json&bc=%2Fentra%2Fidentity%2Fusers%2Fbreadcrumb%2Ftoc.json)
   - Manage licenses in Microsoft Entra ID
     - [Microsoft Entra Licensing](https://learn.microsoft.com/en-us/entra/fundamentals/licensing)
+    - [Group-based licensing limitations](https://learn.microsoft.com/en-us/entra/identity/users/licensing-group-advanced#limitations-and-known-issues)
   - Manage external users
   - Configure self-service password reset
 - **Manage access to Azure resources**
