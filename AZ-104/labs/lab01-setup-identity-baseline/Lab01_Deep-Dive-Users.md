@@ -3,7 +3,7 @@
 <!-- omit in toc -->
 ## 🧾 Contents
 
-* [🔹 **Exercise 1 – Create Internal Users**](#-exercise-1--create-internal-users)
+* [🔹 Exercise 1 – Create Internal Users](#-exercise-1--create-internal-users)
   * [Using the `az` command](#using-the-az-command)
     * [Show login context](#show-login-context)
     * [Create user (simple)](#create-user-simple)
@@ -11,7 +11,7 @@
     * [Create user (advanced)](#create-user-advanced)
   * [Using Terraform](#using-terraform)
 
-## 🔹 **Exercise 1 – Create Internal Users**
+## 🔹 Exercise 1 – Create Internal Users
 
 ### Using the `az` command
 

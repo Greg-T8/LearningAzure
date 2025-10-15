@@ -22,21 +22,20 @@
   * [Using PowerShell](#using-powershell)
     * [Create user](#create-user-1)
     * [Verify and Remove User](#verify-and-remove-user)
-  * [Using Infrastructure as Code (IaC)](#using-infrastructure-as-code-iac)
-    * [Bicep Example](#bicep-example)
-    * [Terraform Example](#terraform-example)
-    * [Exam Insights](#exam-insights)
+  * [Using Bicep](#using-bicep)
+  * [Using Terraform](#using-terraform)
+  * [Exam Insights](#exam-insights)
 * [🔹 Exercise 2 – Create and Configure Groups](#-exercise-2--create-and-configure-groups)
   * [Static Group – `Lab-Admins`](#static-group--lab-admins)
     * [Using `Az` CLI](#using-az-cli-1)
-    * [Using Terraform](#using-terraform)
+    * [Using Terraform](#using-terraform-1)
   * [Dynamic Group - `Marketing Team`](#dynamic-group---marketing-team)
     * [Using PowerShell](#using-powershell-1)
-    * [Exam Insights](#exam-insights-1)
+  * [Exam Insights](#exam-insights-1)
 * [🔹 Exercise 3 – Assign Licenses](#-exercise-3--assign-licenses)
-  * [Licensing Assignment through PowerShell](#licensing-assignment-through-powershell)
+  * [Using PowerShell](#using-powershell-2)
   * [Group-Based Licensing](#group-based-licensing)
-    * [Exam Insights](#exam-insights-2)
+  * [Exam Insights](#exam-insights-2)
 * [🔹 Exercise 4 – Invite and Manage a Guest User](#-exercise-4--invite-and-manage-a-guest-user)
 * [🔹 Exercise 5 – Enable and Validate SSPR](#-exercise-5--enable-and-validate-sspr)
 * [🔹 Exercise 6 – Explore License Tier Differences](#-exercise-6--explore-license-tier-differences)
@@ -188,13 +187,11 @@ Remove-AzADUser -UPNOrObjectId 'user1@637djb.onmicrosoft.com'
 
 Documentation: [New-AzADUser](https://learn.microsoft.com/en-us/powershell/module/az.resources/new-azaduser?view=azps-14.4.0)
 
-### Using Infrastructure as Code (IaC)
-
-#### Bicep Example
+### Using Bicep
 
 Azure Bicep cannot directly create Azure AD (Entra ID) user accounts, because Bicep operates through the Azure Resource Manager (ARM), and user objects live in Microsoft Entra ID, which is managed by the Microsoft Graph API, not ARM.
 
-#### Terraform Example
+### Using Terraform
 
 For production scenarios, avoid using Terraform to create users because Terraform stores the passwords in plain text within the state file.
 
@@ -208,7 +205,7 @@ See [main.tf](./terraform/users/main.tf) for a working example. This example use
 
 <img src='images/2025-10-12-04-37-27.png' width=500>
 
-#### Exam Insights
+### Exam Insights
 
 💡 Know the difference between creating users via Portal, CLI, PowerShell, and Graph API—each method has different attribute support.
 
@@ -286,9 +283,11 @@ New-AzADGroup `
 
 <img src='images/2025-10-12-05-30-18.png' width=600>
 
-💡 **Exam Insight:** Understand propagation latency of dynamic membership updates.
+### Exam Insights
 
-#### Exam Insights
+💡 Understand propagation latency of dynamic membership updates.
+
+- [Troubleshoot dynamic membership groups](https://learn.microsoft.com/en-us/entra/identity/users/groups-troubleshooting#troubleshoot-dynamic-membership-groups)
 
 💡 Know the difference between Security Groups and Microsoft 365 Groups—Security Groups are for access control, M365 Groups include collaboration features like shared mailbox and Teams.
 
@@ -306,7 +305,7 @@ New-AzADGroup `
 
 **Goal:** Enable features through license assignment.
 
-### Licensing Assignment through PowerShell
+### Using PowerShell
 
 Use the following PowerShell commands to assign licenses to individual users:
 
@@ -353,7 +352,7 @@ Group-based licensing simplifies license management by assigning licenses to gro
 
 💡 **Exam Insight:** Group-based licensing is a key feature of Entra ID Premium P1 and is often tested in scenarios involving license management at scale.
 
-#### Exam Insights
+### Exam Insights
 
 💡 Understand that `UsageLocation` is a required property for license assignment—this is a common exam scenario.
 
