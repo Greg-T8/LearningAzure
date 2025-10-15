@@ -9,12 +9,12 @@
 <!-- omit in toc -->
 ## 🧾 Contents
 
-* [🎯 **Lab Objective**](#-lab-objective)
-* [🧱 **Skills Measured (Exam Outline)**](#-skills-measured-exam-outline)
-* [🧠 **Scenario**](#-scenario)
-* [⚙️ **Environment Setup**](#️-environment-setup)
-* [⏱ **Estimated Duration**](#-estimated-duration)
-* [🔹 **Exercise 1 – Create Internal Users**](#-exercise-1--create-internal-users)
+* [🎯 Lab Objective](#-lab-objective)
+* [🧱 Skills Measured (Exam Outline)](#-skills-measured-exam-outline)
+* [🧠 Scenario](#-scenario)
+* [⚙️ Environment Setup](#️-environment-setup)
+* [⏱ Estimated Duration](#-estimated-duration)
+* [🔹 Exercise 1 – Create Internal Users](#-exercise-1--create-internal-users)
   * [Azure Portal (Bulk Users)](#azure-portal-bulk-users)
   * [Using `Az` CLI](#using-az-cli)
     * [Create user](#create-user)
@@ -26,26 +26,26 @@
     * [Bicep Example](#bicep-example)
     * [Terraform Example](#terraform-example)
     * [Exam Insights](#exam-insights)
-* [🔹 **Exercise 2 – Create and Configure Groups**](#-exercise-2--create-and-configure-groups)
+* [🔹 Exercise 2 – Create and Configure Groups](#-exercise-2--create-and-configure-groups)
   * [Static Group – `Lab-Admins`](#static-group--lab-admins)
     * [Using `Az` CLI](#using-az-cli-1)
     * [Using Terraform](#using-terraform)
   * [Dynamic Group - `Marketing Team`](#dynamic-group---marketing-team)
     * [Using PowerShell](#using-powershell-1)
     * [Exam Insights](#exam-insights-1)
-* [🔹 **Exercise 3 – Assign Licenses**](#-exercise-3--assign-licenses)
+* [🔹 Exercise 3 – Assign Licenses](#-exercise-3--assign-licenses)
   * [Licensing Assignment through PowerShell](#licensing-assignment-through-powershell)
   * [Group-Based Licensing](#group-based-licensing)
     * [Exam Insights](#exam-insights-2)
-* [🔹 **Exercise 4 – Invite and Manage a Guest User**](#-exercise-4--invite-and-manage-a-guest-user)
-* [🔹 **Exercise 5 – Enable and Validate SSPR**](#-exercise-5--enable-and-validate-sspr)
-* [🔹 **Exercise 6 – Explore License Tier Differences**](#-exercise-6--explore-license-tier-differences)
-* [🧩 **Validation Checklist**](#-validation-checklist)
-* [🧭 **Reflection \& Readiness**](#-reflection--readiness)
-* [🧹 **Cleanup**](#-cleanup)
-* [📚 **References**](#-references)
+* [🔹 Exercise 4 – Invite and Manage a Guest User](#-exercise-4--invite-and-manage-a-guest-user)
+* [🔹 Exercise 5 – Enable and Validate SSPR](#-exercise-5--enable-and-validate-sspr)
+* [🔹 Exercise 6 – Explore License Tier Differences](#-exercise-6--explore-license-tier-differences)
+* [🧩 Validation Checklist](#-validation-checklist)
+* [🧭 Reflection \& Readiness](#-reflection--readiness)
+* [🧹 Cleanup](#-cleanup)
+* [📚 References](#-references)
 
-## 🎯 **Lab Objective**
+## 🎯 Lab Objective
 
 Establish a secure and well-organized Microsoft Entra ID (Azure AD) identity baseline for a new Azure environment.
 You will:
@@ -57,7 +57,7 @@ You will:
 
 ---
 
-## 🧱 **Skills Measured (Exam Outline)**
+## 🧱 Skills Measured (Exam Outline)
 
 * Create users and groups
 * Manage user and group properties
@@ -67,14 +67,14 @@ You will:
 
 ---
 
-## 🧠 **Scenario**
+## 🧠 Scenario
 
 You’ve been asked to prepare a clean Entra ID tenant for a project team called **Project AZ104**.
 You’ll configure users, groups, and identity features to establish a governance baseline and verify tier-based feature differences.
 
 ---
 
-## ⚙️ **Environment Setup**
+## ⚙️ Environment Setup
 
 | Component | Example                                            |
 | --------- | -------------------------------------------------- |
@@ -86,13 +86,13 @@ You’ll configure users, groups, and identity features to establish a governanc
 
 ---
 
-## ⏱ **Estimated Duration**
+## ⏱ Estimated Duration
 
 **90–120 minutes**  
 
 ---
 
-## 🔹 **Exercise 1 – Create Internal Users**
+## 🔹 Exercise 1 – Create Internal Users
 
 **Goal:** Create baseline users with key identity attributes.
 
@@ -220,7 +220,7 @@ See [main.tf](./terraform/users/main.tf) for a working example. This example use
 
 ---
 
-## 🔹 **Exercise 2 – Create and Configure Groups**
+## 🔹 Exercise 2 – Create and Configure Groups
 
 **Goal:** Organize users using static and dynamic membership.
 
@@ -302,7 +302,7 @@ New-AzADGroup `
 
 ---
 
-## 🔹 **Exercise 3 – Assign Licenses**
+## 🔹 Exercise 3 – Assign Licenses
 
 **Goal:** Enable features through license assignment.
 
@@ -367,7 +367,7 @@ Group-based licensing simplifies license management by assigning licenses to gro
 
 ---
 
-## 🔹 **Exercise 4 – Invite and Manage a Guest User**
+## 🔹 Exercise 4 – Invite and Manage a Guest User
 
 **Goal:** Enable secure collaboration.
 
@@ -390,7 +390,7 @@ Group-based licensing simplifies license management by assigning licenses to gro
 
 ---
 
-## 🔹 **Exercise 5 – Enable and Validate SSPR**
+## 🔹 Exercise 5 – Enable and Validate SSPR
 
 **Goal:** Enable and test self-service password reset for a group.
 
@@ -402,7 +402,7 @@ Group-based licensing simplifies license management by assigning licenses to gro
 
 ---
 
-## 🔹 **Exercise 6 – Explore License Tier Differences**
+## 🔹 Exercise 6 – Explore License Tier Differences
 
 **Goal:** Compare capabilities across Free, P1, P2, and Governance tiers.
 
@@ -419,13 +419,13 @@ Create the following groups and assign appropriate licenses:
 
 * Attempt to create Conditional Access policy (fails on Free).
 * Open **Identity Governance** → Access Reviews (only visible on P2+).
-* Try creating an **Entitlement Management catalog** (Governance only).
+* Try creating an **Entitlement Management catalog* (Governance only).
 
 📄 See `/docs/License-Feature-Matrix.md` for detailed feature comparison.
 
 ---
 
-## 🧩 **Validation Checklist**
+## 🧩 Validation Checklist
 
 | Task                      | Verification Command / Location                   |
 | ------------------------- | ------------------------------------------------- |
@@ -438,7 +438,7 @@ Create the following groups and assign appropriate licenses:
 
 ---
 
-## 🧭 **Reflection & Readiness**
+## 🧭 Reflection & Readiness
 
 Be able to answer:
 
@@ -450,7 +450,7 @@ Be able to answer:
 
 ---
 
-## 🧹 **Cleanup**
+## 🧹 Cleanup
 
 ```bash
 az ad user delete --id user1@637djb.onmicrosoft.com
@@ -462,7 +462,7 @@ az ad group delete --group "Tier-Gov"
 
 ---
 
-## 📚 **References**
+## 📚 References
 
 * [Compare Microsoft Entra ID Free, P1, P2, Governance](https://learn.microsoft.com/en-us/entra/fundamentals/licensing-comparison)
 * [Enable and test self-service password reset](https://learn.microsoft.com/en-us/entra/identity/authentication/tutorial-enable-sspr)
