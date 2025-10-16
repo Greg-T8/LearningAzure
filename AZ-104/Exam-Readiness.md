@@ -44,13 +44,14 @@ Use it to reinforce concepts, review domain summaries, and quickly recall high-v
 **References**
 
 - [Exam Readiness Zone – Identities & Governance](https://learn.microsoft.com/en-us/shows/exam-readiness-zone/preparing-for-az-104-manage-azure-identities-and-governance-1-of-5)
-- [Microsoft Learn – Manage Azure identities and governance](https://learn.microsoft.com/en-us/training/modules/azure-manage-identities-governance/)
+- [Microsoft Learning Path - AZ-104: Manage identities and governance in Azure](https://learn.microsoft.com/en-us/training/paths/az-104-manage-identities-governance/)
 
 ---
 
 ## 💾 Domain 2: Implement and Manage Storage (15–20%)
 
 **Key Topics**
+
 - Create and configure storage accounts.
 - Configure redundancy (LRS, ZRS, GRS, RA-GRS, GZRS).
 - Configure Azure Storage firewalls and VNets.
@@ -62,6 +63,7 @@ Use it to reinforce concepts, review domain summaries, and quickly recall high-v
 - Configure **lifecycle management**, soft delete, snapshots, and versioning.
 
 **Common Pitfalls**
+
 - Forgetting that **shared access signatures (SAS)** can be revoked only via policy.
 - Misconfiguring **network rules** that block access unintentionally.
 - Confusing **Azure File Sync** with **Azure Files share** identity integration.
@@ -71,6 +73,7 @@ Use it to reinforce concepts, review domain summaries, and quickly recall high-v
 ## ☁️ Domain 3: Deploy and Manage Azure Compute Resources (20–25%)
 
 **Key Topics**
+
 - Create and configure VMs (size, disks, images).
 - Configure VM availability (sets, zones).
 - Configure and manage VM extensions.
@@ -82,6 +85,7 @@ Use it to reinforce concepts, review domain summaries, and quickly recall high-v
 - Apply VM encryption and secure boot.
 
 **Common Pitfalls**
+
 - Confusing **availability sets** (within a datacenter) vs. **zones** (across datacenters).
 - Forgetting to update **NSG rules** when using custom VMs.
 - Not linking **diagnostic settings** for boot diagnostics.
@@ -91,6 +95,7 @@ Use it to reinforce concepts, review domain summaries, and quickly recall high-v
 ## 🌐 Domain 4: Implement and Manage Virtual Networking (15–20%)
 
 **Key Topics**
+
 - Create and configure VNets, subnets, and peering.
 - Configure and manage public/private IPs.
 - Configure routing and **user-defined routes (UDR)**.
@@ -101,6 +106,7 @@ Use it to reinforce concepts, review domain summaries, and quickly recall high-v
 - Configure load balancing using **Load Balancer**, **Application Gateway**, **Front Door**, and **Traffic Manager**.
 
 **Common Pitfalls**
+
 - Misunderstanding that **NSG rules are stateful**.
 - Forgetting to disable **private endpoint network policies**.
 - Confusing **service endpoints** vs. **private endpoints**.
@@ -110,6 +116,7 @@ Use it to reinforce concepts, review domain summaries, and quickly recall high-v
 ## 🩺 Domain 5: Monitor and Maintain Azure Resources (10–15%)
 
 **Key Topics**
+
 - Configure diagnostic settings and **Azure Monitor**.
 - Query and analyze data in **Log Analytics**.
 - Create and manage **alerts** and **action groups**.
@@ -120,6 +127,7 @@ Use it to reinforce concepts, review domain summaries, and quickly recall high-v
 - Manage updates and apply **Azure Automation Update Management**.
 
 **Common Pitfalls**
+
 - Forgetting to connect resources to a **Log Analytics workspace**.
 - Overlooking **monitoring inheritance** (diagnostic settings per resource).
 - Not validating recovery jobs after backup configuration.
@@ -172,13 +180,13 @@ Use the following reference images to reinforce identity and governance concepts
 
 ---
 
-**Recommended Resources**
+## Recommended Resources
+
 - [Exam Readiness Zone (Official Microsoft Series)](https://learn.microsoft.com/en-us/shows/exam-readiness-zone/?terms=az-104)
-- [Microsoft Learn – AZ-104 Learning Path](https://learn.microsoft.com/en-us/training/paths/azure-administrator/)
-- [John Savill’s AZ-104 Study Cram (YouTube)](https://www.youtube.com/watch?v=tQp1YxR0h1Y)
+- [John Savill’s AZ-104 Study Cram (YouTube)](https://youtu.be/0Knf9nub4-k?si=x4pnDZFYRTkfZ0UE)
 - [Microsoft Docs Hub](https://learn.microsoft.com/en-us/azure/)
 - [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 
 ---
 
-*Last updated: 2025-10-08*
+*Last updated: 2025-10-08*  

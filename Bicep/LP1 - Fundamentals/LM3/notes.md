@@ -2,36 +2,36 @@
 
 <!-- omit in toc -->
 # Learning Module 3: Build flexible Bicep files by using conditions and loops
-- [Introduction](#introduction)
-  - [Example scenario](#example-scenario)
-  - [What we will learn?](#what-we-will-learn)
-  - [What is the main goal?](#what-is-the-main-goal)
-- [Deploy resources conditionally](#deploy-resources-conditionally)
-  - [Use basic conditions](#use-basic-conditions)
-  - [Use expressions as conditions](#use-expressions-as-conditions)
-  - [Depend on condtionally deployed resources](#depend-on-condtionally-deployed-resources)
-- [Exercise - Deploy resources conditionally](#exercise---deploy-resources-conditionally)
-  - [Create a Bicep file that defines a logical server and database](#create-a-bicep-file-that-defines-a-logical-server-and-database)
-  - [Add a storage account](#add-a-storage-account)
-  - [Add auditing settings](#add-auditing-settings)
-  - [Deploy the Bicep file to Azure (Development environment)](#deploy-the-bicep-file-to-azure-development-environment)
-  - [Verify the deployment](#verify-the-deployment)
-  - [Redeploy for the production environment](#redeploy-for-the-production-environment)
-  - [Verify the production deployment](#verify-the-production-deployment)
-- [Deploy multiple resources by using loops](#deploy-multiple-resources-by-using-loops)
-  - [Use copy loops](#use-copy-loops)
-  - [Loop based on a count](#loop-based-on-a-count)
-  - [Access the iteration index](#access-the-iteration-index)
-  - [Filter items with loops](#filter-items-with-loops)
-- [Exercise - Deploy multiple resources by using loops](#exercise---deploy-multiple-resources-by-using-loops)
-  - [Mmove resources into a module](#mmove-resources-into-a-module)
-  - [Deply multiple instances by using a copy loop](#deply-multiple-instances-by-using-a-copy-loop)
-  - [Deploy the Bicep file to Azure](#deploy-the-bicep-file-to-azure)
-  - [Verify the deployment](#verify-the-deployment-1)
-  - [Update and redeploy the Bicep file with an additional location](#update-and-redeploy-the-bicep-file-with-an-additional-location)
-  - [Verify the deployment](#verify-the-deployment-2)
-- [Control loop execution and nest loops](#control-loop-execution-and-nest-loops)
 
+* [Introduction](#introduction)
+  * [Example scenario](#example-scenario)
+  * [What we will learn?](#what-we-will-learn)
+  * [What is the main goal?](#what-is-the-main-goal)
+* [Deploy resources conditionally](#deploy-resources-conditionally)
+  * [Use basic conditions](#use-basic-conditions)
+  * [Use expressions as conditions](#use-expressions-as-conditions)
+  * [Depend on condtionally deployed resources](#depend-on-condtionally-deployed-resources)
+* [Exercise - Deploy resources conditionally](#exercise---deploy-resources-conditionally)
+  * [Create a Bicep file that defines a logical server and database](#create-a-bicep-file-that-defines-a-logical-server-and-database)
+  * [Add a storage account](#add-a-storage-account)
+  * [Add auditing settings](#add-auditing-settings)
+  * [Deploy the Bicep file to Azure (Development environment)](#deploy-the-bicep-file-to-azure-development-environment)
+  * [Verify the deployment](#verify-the-deployment)
+  * [Redeploy for the production environment](#redeploy-for-the-production-environment)
+  * [Verify the production deployment](#verify-the-production-deployment)
+* [Deploy multiple resources by using loops](#deploy-multiple-resources-by-using-loops)
+  * [Use copy loops](#use-copy-loops)
+  * [Loop based on a count](#loop-based-on-a-count)
+  * [Access the iteration index](#access-the-iteration-index)
+  * [Filter items with loops](#filter-items-with-loops)
+* [Exercise - Deploy multiple resources by using loops](#exercise---deploy-multiple-resources-by-using-loops)
+  * [Mmove resources into a module](#mmove-resources-into-a-module)
+  * [Deply multiple instances by using a copy loop](#deply-multiple-instances-by-using-a-copy-loop)
+  * [Deploy the Bicep file to Azure](#deploy-the-bicep-file-to-azure)
+  * [Verify the deployment](#verify-the-deployment-1)
+  * [Update and redeploy the Bicep file with an additional location](#update-and-redeploy-the-bicep-file-with-an-additional-location)
+  * [Verify the deployment](#verify-the-deployment-2)
+* [Control loop execution and nest loops](#control-loop-execution-and-nest-loops)
 
 ## Introduction
 
@@ -45,17 +45,17 @@ For production environments, you must ensure auditing is enabled on all Azure SQ
 
 Because the toy will launch in multiple countries/regions, each location needs its own database server and virtual network. Resources must be deployed in specific regions to comply with local laws. You’ve been tasked with deploying these logical servers and virtual networks and making the process scalable, so new ones can be added easily as the product expands to more countries/regions.
 
-<img src='images/2025-08-24-05-34-55.png' width=500> 
+<img src='images/2025-08-24-05-34-55.png' width=500>
 
 ### What we will learn?
 
 In this module, you'll extend a Bicep file by using conditions and loops. You'll:
 
-- Use conditions to deploy Azure resources only when they're required.
-- Use loops to deploy multiple instances of Azure resources.
-- Learn how to control loop parallelism.
-- Learn how to create nested loops.
-- Combine loops with variables and outputs.
+* Use conditions to deploy Azure resources only when they're required.
+* Use loops to deploy multiple instances of Azure resources.
+* Learn how to control loop parallelism.
+* Learn how to create nested loops.
+* Combine loops with variables and outputs.
 
 ### What is the main goal?
 
@@ -191,10 +191,11 @@ Deploy resources to multiple environments by using parameters and conditions.
 In this exercise, you’ll create an Azure SQL logical server and database. You’ll add auditing settings that are enabled only in production. You’ll also deploy a storage account solely for production to support auditing.
 
 You will:
-- Create a Bicep file that defines a logical server and database.
-- Add a storage account and SQL auditing settings, each guarded by a condition.
-- Deploy to the development environment and verify the result.
-- Redeploy to production and review the changes.
+
+* Create a Bicep file that defines a logical server and database.
+* Add a storage account and SQL auditing settings, each guarded by a condition.
+* Deploy to the development environment and verify the result.
+* Redeploy to production and review the changes.
 
 ### Create a Bicep file that defines a logical server and database
 
@@ -239,6 +240,7 @@ resource sqlDatabase 'Microsoft.Sql/servers/databases@2024-05-01-preview' = {
   sku: sqlDatabaseSku
 }
 ```
+
 Each parameter includes a `@description` to make them easier to understand in tooling. The `@secure` decorator on the login and password ensures these values are treated as sensitive, so they won’t be printed in logs.
 
 ### Add a storage account
@@ -280,6 +282,7 @@ resource auditStorageAccount 'Microsoft.Storage/storageAccounts@2023-05-01' = if
   kind: 'StorageV2'
 }
 ```
+
 This resource uses the `if` keyword so it is deployed only in production.
 
 ### Add auditing settings
@@ -361,7 +364,7 @@ DeploymentDebugLogLevel :
 
 In the Azure portal, confirm what was deployed. Note: only the development environment was deployed, so auditing resources and the storage account won’t be present.
 
-<img src='images/2025-08-25-04-18-24.png' width=800> 
+<img src='images/2025-08-25-04-18-24.png' width=800>
 
 In the **Overview** pane, you’ll see:
 
@@ -376,7 +379,7 @@ Select **1 Succeeded** next to *Deployments*.
 
 You’ll see only the SQL server and database. The storage account and auditing settings don’t appear because the deployment used the default environment of **Development**.
 
-<img src='images/2025-08-25-04-19-08.png' width=800> 
+<img src='images/2025-08-25-04-19-08.png' width=800>
 
 Keep this page open; you’ll revisit it after deploying to production.
 
@@ -446,7 +449,7 @@ Next:
 
 Confirm that **auditing is enabled** for this logical server.
 
-<img src='images/2025-08-25-04-25-13.png' width=600> 
+<img src='images/2025-08-25-04-25-13.png' width=600>
 
 This verifies that the redeployment with `environmentName = Production` successfully added the audit storage account and turned on auditing.
 
@@ -655,7 +658,7 @@ Wait for the deployment to complete before continuing.
 3. Confirm the new logical server and database exist and are in East US 2 (from the `locations` default).
 4. Leave the page open for later verification.
 
-<img src='images/2025-08-26-04-25-58.png' width=500> 
+<img src='images/2025-08-26-04-25-58.png' width=500>
 
 ### Update and redeploy the Bicep file with an additional location
 
@@ -712,7 +715,7 @@ Outputs                 :
 DeploymentDebugLogLevel : 
 ```
 
-<img src='images/2025-08-26-04-30-26.png' width=500> 
+<img src='images/2025-08-26-04-30-26.png' width=500>
 
 ## Control loop execution and nest loops
 
