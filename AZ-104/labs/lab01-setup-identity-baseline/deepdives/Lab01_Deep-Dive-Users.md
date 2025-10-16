@@ -126,9 +126,9 @@ if ($exit -ne 0) {
 
 See the following scripts for adding and deleting multiple users:
 
-* [CreateUsersAzCli.ps1](../powershell/CreateUsersAzCli.ps1)
-* [DeleteUsersAzCli.ps1](../powershell/DeleteUsersAzCli.ps1)
-* [AzCliUsers.json](../powershell/AzCliUsers.json)
+* [CreateUsersAzCli.ps1](../../powershell/CreateUsersAzCli.ps1)
+* [DeleteUsersAzCli.ps1](../../powershell/DeleteUsersAzCli.ps1)
+* [AzCliUsers.json](../../powershell/AzCliUsers.json)
 
 See the following references for more information on the quoting issue in PowerShell:  
 
