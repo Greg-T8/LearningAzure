@@ -16,6 +16,23 @@ jobs:
           args: "--no-progress --verbose **/*.md "
           failifempty: false
 
+  # Dedicated link-check job using lychee (checks for broken links)
+  link-check:
+    name: Link check (lychee)
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout repository so lychee can scan files
+      - uses: actions/checkout@v4
+
+      # Run lychee to detect broken links in markdown files
+      - name: Check links with lychee
+        uses: lycheeverse/lychee-action@v2
+        with:
+          # Recursively scan markdown files; verbose output helps debug broken links
+          args: "--no-progress --verbose **/*.md"
+          # Do not fail if no files are found (keeps job stable for repos without markdown)
+          failifempty: false
+
   powershell:
     runs-on: ubuntu-latest
     steps:
