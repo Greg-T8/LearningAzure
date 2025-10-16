@@ -1,21 +1,19 @@
-# Lab 1 – Deep Dive: Managing Users
+# Lab 1 – Deep Dive: Advanced User Management with the `az` Command
 
 <!-- omit in toc -->
 ## 🧾 Contents
 
-* [🔹 Exercise 1 – Create Internal Users](#-exercise-1--create-internal-users)
-  * [Using the `az` command](#using-the-az-command)
-    * [Show login context](#show-login-context)
+* [Overview](#overview)
+* [Show login context](#show-login-context)
     * [Create user (simple)](#create-user-simple)
-    * [Remove user](#remove-user)
-    * [Create user (advanced)](#create-user-advanced)
-  * [Using Terraform](#using-terraform)
+* [Remove user](#remove-user)
+* [Create user (advanced)](#create-user-advanced)
 
-## 🔹 Exercise 1 – Create Internal Users
+## Overview
 
-### Using the `az` command
+This deep dive explores advanced user management with the Azure CLI (`az` command). It covers limitations of using double quotes in PowerShell with the `az` command executable.
 
-#### Show login context
+## Show login context
 
 ```pwsh
 az account show
@@ -33,13 +31,13 @@ az ad user create `
  --force-change-password-next-sign-in
 ```
 
-#### Remove user
+## Remove user
 
 ```pwsh
 az ad user delete --id 'user1@637djb.onmicrosoft.com'
 ```
 
-#### Create user (advanced)
+## Create user (advanced)
 
 To create a new Azure AD user with both `givenName` and `surname` using the
 Azure CLI, you’ll need to use the Microsoft Graph REST API via `az rest`,
@@ -68,8 +66,7 @@ az rest --method post --url 'https://graph.microsoft.com/v1.0/users' --body $jso
 ```
 
 However, this command fails due to a known quoting issue in PowerShell. See
-[Double quotes `"` are
-lost](https://github.com/Azure/azure-cli/blob/dev/doc/quoting-issues-with-powershell.md#double-quotes--are-lost).
+ [Double quotes `""` are lost](https://github.com/Azure/azure-cli/blob/dev/doc/quoting-issues-with-powershell.md#double-quotes--are-lost).
 
 As a result, the best practice is to use Azure CLI's `@<file>` convention to
 load from a file to bypass the shell's interpretation.
@@ -156,9 +153,3 @@ See the following references for more information on the quoting issue in PowerS
 * [Considerations for running the Azure CLI in a PowerShell scripting language](https://learn.microsoft.com/en-us/cli/azure/use-azure-cli-successfully-powershell?view=azure-cli-latest&tabs=read%2Cwin2%2CBash2#pass-parameters-containing-json)
 
     <img src='images/2025-10-09-05-13-43.png' width=600>
-
-### Using Terraform
-
-Documentation: 
-- [Azure Active Directory Provider](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs)
-- [Resource: azuread_user](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/resources/user)
