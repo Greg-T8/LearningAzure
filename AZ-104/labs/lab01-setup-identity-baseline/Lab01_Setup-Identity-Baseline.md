@@ -287,7 +287,7 @@ New-AzADGroup `
 
 💡 Understand propagation latency of dynamic membership updates.
 
-- [Troubleshoot dynamic membership groups](https://learn.microsoft.com/en-us/entra/identity/users/groups-troubleshooting#troubleshoot-dynamic-membership-groups)
+* [Troubleshoot dynamic membership groups](https://learn.microsoft.com/en-us/entra/identity/users/groups-troubleshooting#troubleshoot-dynamic-membership-groups)
 
 💡 Know the difference between Security Groups and Microsoft 365 Groups—Security Groups are for access control, M365 Groups include collaboration features like shared mailbox and Teams.
 

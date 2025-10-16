@@ -129,7 +129,6 @@ Each lab folder includes:
 ## 🧠 Additional Resources
 
 - [Exam Readiness Zone](https://learn.microsoft.com/en-us/shows/exam-readiness-zone/?terms=az-104)  
-- [Microsoft Learn: AZ-104 Learning Path](https://learn.microsoft.com/en-us/training/paths/azure-administrator/)  
 - [Official Exam Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104)  
 - [Exam-Readiness.md →](./Exam-Readiness.md)
 

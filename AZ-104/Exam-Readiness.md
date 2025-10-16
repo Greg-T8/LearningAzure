@@ -14,7 +14,7 @@ Use it to reinforce concepts, review domain summaries, and quickly recall high-v
 
 ## 🧠 Domain 1: Manage Azure Identities and Governance (20–25%)
 
-**Key Topics**
+**Key Topics**  
 
 - Create and manage users, groups, and administrative units.
 - Manage user and group properties.
@@ -33,7 +33,7 @@ Use it to reinforce concepts, review domain summaries, and quickly recall high-v
 - Manage **management groups** for multiple subscriptions.
 - Apply and scope **policies**, **budgets**, and **cost alerts**.
 
-**Common Pitfalls**
+**Common Pitfalls**  
 
 - Forgetting that **resource groups cannot be nested**.
 - Misunderstanding the order of **scope inheritance** (cannot break it).
@@ -41,7 +41,7 @@ Use it to reinforce concepts, review domain summaries, and quickly recall high-v
 - Confusing **P1 vs P2** feature sets in Entra ID.
 - Missing the need for **Azure AD roles** to manage licenses, not just RBAC roles.
 
-**References**
+**References**  
 
 - [Exam Readiness Zone – Identities & Governance](https://learn.microsoft.com/en-us/shows/exam-readiness-zone/preparing-for-az-104-manage-azure-identities-and-governance-1-of-5)
 - [Microsoft Learning Path - AZ-104: Manage identities and governance in Azure](https://learn.microsoft.com/en-us/training/paths/az-104-manage-identities-governance/)
@@ -50,7 +50,7 @@ Use it to reinforce concepts, review domain summaries, and quickly recall high-v
 
 ## 💾 Domain 2: Implement and Manage Storage (15–20%)
 
-**Key Topics**
+**Key Topics**  
 
 - Create and configure storage accounts.
 - Configure redundancy (LRS, ZRS, GRS, RA-GRS, GZRS).
@@ -62,7 +62,7 @@ Use it to reinforce concepts, review domain summaries, and quickly recall high-v
 - Manage data using **AzCopy** and **Storage Explorer**.
 - Configure **lifecycle management**, soft delete, snapshots, and versioning.
 
-**Common Pitfalls**
+**Common Pitfalls**  
 
 - Forgetting that **shared access signatures (SAS)** can be revoked only via policy.
 - Misconfiguring **network rules** that block access unintentionally.
@@ -72,7 +72,7 @@ Use it to reinforce concepts, review domain summaries, and quickly recall high-v
 
 ## ☁️ Domain 3: Deploy and Manage Azure Compute Resources (20–25%)
 
-**Key Topics**
+**Key Topics**  
 
 - Create and configure VMs (size, disks, images).
 - Configure VM availability (sets, zones).
@@ -84,7 +84,7 @@ Use it to reinforce concepts, review domain summaries, and quickly recall high-v
 - Manage VM moving between subscriptions and regions.
 - Apply VM encryption and secure boot.
 
-**Common Pitfalls**
+**Common Pitfalls**  
 
 - Confusing **availability sets** (within a datacenter) vs. **zones** (across datacenters).
 - Forgetting to update **NSG rules** when using custom VMs.
@@ -94,7 +94,7 @@ Use it to reinforce concepts, review domain summaries, and quickly recall high-v
 
 ## 🌐 Domain 4: Implement and Manage Virtual Networking (15–20%)
 
-**Key Topics**
+**Key Topics**  
 
 - Create and configure VNets, subnets, and peering.
 - Configure and manage public/private IPs.
@@ -105,7 +105,7 @@ Use it to reinforce concepts, review domain summaries, and quickly recall high-v
 - Configure and manage **VPN Gateway**, **ExpressRoute**, and **Virtual WAN**.
 - Configure load balancing using **Load Balancer**, **Application Gateway**, **Front Door**, and **Traffic Manager**.
 
-**Common Pitfalls**
+**Common Pitfalls**  
 
 - Misunderstanding that **NSG rules are stateful**.
 - Forgetting to disable **private endpoint network policies**.
@@ -115,7 +115,7 @@ Use it to reinforce concepts, review domain summaries, and quickly recall high-v
 
 ## 🩺 Domain 5: Monitor and Maintain Azure Resources (10–15%)
 
-**Key Topics**
+**Key Topics**  
 
 - Configure diagnostic settings and **Azure Monitor**.
 - Query and analyze data in **Log Analytics**.
@@ -126,7 +126,7 @@ Use it to reinforce concepts, review domain summaries, and quickly recall high-v
 - Monitor cost and resource utilization.
 - Manage updates and apply **Azure Automation Update Management**.
 
-**Common Pitfalls**
+**Common Pitfalls**  
 
 - Forgetting to connect resources to a **Log Analytics workspace**.
 - Overlooking **monitoring inheritance** (diagnostic settings per resource).
