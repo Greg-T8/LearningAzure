@@ -366,7 +366,7 @@ Group-based licensing simplifies license management by assigning licenses to gro
 
 ---
 
-[broken link](https://blah.com/ckdkdkdkddkdk)
+[broken link](https://ksdjfkdjflskdjfskdjf.com)
 
 ## 🔹 Exercise 4 – Invite and Manage a Guest User
 
