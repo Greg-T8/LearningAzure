@@ -140,7 +140,7 @@ az ad user create `
 
 The built-in `az ad user create` command only supports required attributes. It does does not support other attributes, such as `givenName` and `surname`, directly. For that, use the `az rest` method as shown in the Deep Dive link below.
 
-🥽 Deep Dive: [Using the `az` command](./Lab01_Deep-Dive-Users.md#using-the-az-command).
+🥽 Deep Dive: [Using the `az` command](./deepdives/Lab01_Deep-Dive-Users.md#using-the-az-command).
 
 Documentation: [az ad user](https://learn.microsoft.com/en-us/cli/azure/ad/user?view=azure-cli-latest)
 
