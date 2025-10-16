@@ -5,7 +5,7 @@
 
 * [Overview](#overview)
 * [Show login context](#show-login-context)
-    * [Create user (simple)](#create-user-simple)
+* [Create user (simple)](#create-user-simple)
 * [Remove user](#remove-user)
 * [Create user (advanced)](#create-user-advanced)
 
@@ -21,7 +21,7 @@ az account show
 
 <img src='images/2025-10-09-03-38-58.png' width=400>
 
-#### Create user (simple)
+## Create user (simple)
 
 ```pwsh
 az ad user create `
