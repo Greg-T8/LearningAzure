@@ -178,8 +178,8 @@ Remove-AzResourceGroup -Name "LabRG01" -Force
 
 | Topic | URL |
 |-------|-----|
-| {{Doc Title 1}} | https://learn.microsoft.com/en-us/... |
-| {{Doc Title 2}} | https://learn.microsoft.com/en-us/... |
+| {{Doc Title 1}} | [https://learn.microsoft.com/en-us/](tbd)... |
+| {{Doc Title 2}} | [https://learn.microsoft.com/en-us/](tbd)... |
 
 ---
 
