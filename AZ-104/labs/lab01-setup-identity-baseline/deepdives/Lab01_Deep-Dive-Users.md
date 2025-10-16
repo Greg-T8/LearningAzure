@@ -19,7 +19,7 @@ This deep dive explores advanced user management with the Azure CLI (`az` comman
 az account show
 ```
 
-<img src='images/2025-10-09-03-38-58.png' width=400>
+<img src='../images/2025-10-09-03-38-58.png' width=400>
 
 ## Create user (simple)
 
@@ -126,9 +126,9 @@ if ($exit -ne 0) {
 
 See the following scripts for adding and deleting multiple users:
 
-* [CreateUsersAzCli.ps1](./powershell/CreateUsersAzCli.ps1)
-* [DeleteUsersAzCli.ps1](./powershell/DeleteUsersAzCli.ps1)
-* [AzCliUsers.json](./powershell/AzCliUsers.json)
+* [CreateUsersAzCli.ps1](../powershell/CreateUsersAzCli.ps1)
+* [DeleteUsersAzCli.ps1](../powershell/DeleteUsersAzCli.ps1)
+* [AzCliUsers.json](../powershell/AzCliUsers.json)
 
 See the following references for more information on the quoting issue in PowerShell:  
 
@@ -140,16 +140,16 @@ See the following references for more information on the quoting issue in PowerS
 
 * [Error: Failed to parse string as JSON](https://learn.microsoft.com/en-us/cli/azure/use-azure-cli-successfully-troubleshooting?view=azure-cli-latest#error-failed-to-parse-string-as-json)
 
-    <img src='images/2025-10-09-05-07-10.png' width=600>
+    <img src='../images/2025-10-09-05-07-10.png' width=600>
 
 * [Quoting differences in Azure CLI](https://learn.microsoft.com/en-us/cli/azure/use-azure-cli-successfully-quoting?view=azure-cli-latest&tabs=bash1%2Cbash2%2Cbash3#json-strings)
 
-    <img src='images/2025-10-09-05-09-29.png' width=600>
+    <img src='../images/2025-10-09-05-09-29.png' width=600>
 
 * [Scripting language rules](https://learn.microsoft.com/en-us/cli/azure/use-azure-cli-successfully-quoting?view=azure-cli-latest&tabs=bash1%2Cpowershell2%2Cbash3#scripting-language-rules)
 
-    <img src='images/2025-10-09-05-11-23.png' width=600>
+    <img src='../images/2025-10-09-05-11-23.png' width=600>
 
 * [Considerations for running the Azure CLI in a PowerShell scripting language](https://learn.microsoft.com/en-us/cli/azure/use-azure-cli-successfully-powershell?view=azure-cli-latest&tabs=read%2Cwin2%2CBash2#pass-parameters-containing-json)
 
-    <img src='images/2025-10-09-05-13-43.png' width=600>
+    <img src='../images/2025-10-09-05-13-43.png' width=600>
