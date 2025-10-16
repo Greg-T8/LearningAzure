@@ -7,4 +7,5 @@ This is my learning space for Microsoft Azure.
 
 ## Certifications
 
-* [AZ-104: Microsoft Azure Administrator](AZ-104/README.md)
+- [AI-900: Microsoft Azure AI Fundamentals](AI-900/README.md)
+- [AZ-104: Microsoft Azure Administrator](AZ-104/README.md)
