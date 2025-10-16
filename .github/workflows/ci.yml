@@ -1,10 +1,23 @@
+# -------------------------------------------------------------------------
+# Program: ci.yml
+# Description: GitHub Actions CI — lint markdown, check for broken links (lychee), and run PSScriptAnalyzer
+# Context: Learning Azure - repository continuous integration for docs (AZ-104) and scripts
+# Author: Greg Tate
+# -------------------------------------------------------------------------
+
+# Workflow name
 name: ci
+
+# Workflow triggers: run on all branches, PRs, and weekday schedule for link checks
 on:
   push: { branches: ["**"] }
   pull_request:
   schedule: [{ cron: "0 12 * * 1-5" }] # weekday link check
 
+# CI jobs
 jobs:
+
+  # Markdown lint job (markdownlint) and inline link check (lychee)
   markdown:
     runs-on: ubuntu-latest
     steps:
@@ -14,7 +27,8 @@ jobs:
       - uses: lycheeverse/lychee-action@v2
         with:
           args: "--no-progress --verbose **/*.md "
-          failifempty: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   # Dedicated link-check job using lychee (checks for broken links)
   link-check:
@@ -30,9 +44,11 @@ jobs:
         with:
           # Recursively scan markdown files; verbose output helps debug broken links
           args: "--no-progress --verbose **/*.md"
-          # Do not fail if no files are found (keeps job stable for repos without markdown)
-          failifempty: false
+        env:
+          # Provide token to increase rate limits for external link checks
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+  # PowerShell static analysis job (PSScriptAnalyzer)
   powershell:
     runs-on: ubuntu-latest
     steps:
