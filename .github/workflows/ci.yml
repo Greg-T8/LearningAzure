@@ -1,0 +1,28 @@
+name: ci
+on:
+  push: { branches: ["**"] }
+  pull_request:
+  schedule: [{ cron: "0 12 * * 1-5" }] # weekday link check
+
+jobs:
+  markdown:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DavidAnson/markdownlint-cli2-action@v16
+        with: { globs: "**/*.md" }
+      - uses: lycheeverse/lychee-action@v2
+        with:
+          args: "--no-progress --verbose **/*.md "
+          failifempty: false
+
+  powershell:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: PSScriptAnalyzer
+        if: hashFiles('**/*.ps1') != ''
+        shell: pwsh
+        run: |
+          Install-Module PSScriptAnalyzer -Scope CurrentUser -Force
+          Invoke-ScriptAnalyzer -Path . -Recurse -ReportSummary
