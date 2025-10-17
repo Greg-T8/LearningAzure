@@ -35,10 +35,42 @@ By the end of this lab, you will be able to:
    - Review sample scenarios: image classification, object detection, OCR, facial analysis
    - Identify use cases (e.g., retail inventory, security cameras, document processing)
 
+        [Azure AI Vision Studio](https://portal.vision.cognitive.azure.com/gallery/featured)
+
+        <img src='images/2025-10-17-05-21-06.png' width=700>
+
+    **References:**  
+
+    - [What is Azure AI Vision?](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview)
+    - [Vision Studio](https://portal.vision.cognitive.azure.com/gallery/featured)
+    - [What is Image Analysis?](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview-image-analysis?tabs=4-0)
+
 2. **Natural Language Processing (NLP) Workloads:**
    - Explore Azure AI Language service capabilities
    - Review scenarios: sentiment analysis, entity recognition, key phrase extraction
    - Identify use cases (e.g., customer feedback analysis, chatbots, content moderation)
+
+    **Features:**
+
+
+    - *Named Entity Recognition (NER)* — Identifies and categorizes named entities in text (people, organizations, locations, dates, quantities).
+    - *Key Phrase Extraction* — Extracts main concepts and topics from unstructured text to summarize subject matter.
+    - *Sentiment Analysis* — Determines overall sentiment of text (positive, negative, neutral, mixed) and returns confidence scores.
+    - *Language Detection* — Automatically detects the language of input text from supported languages.
+    - *Entity Linking* — Disambiguates entities by linking them to entries in knowledge bases (provides contextual references).
+    - *Personally Identifiable Information (PII) Detection* — Identifies and redacts sensitive data (credit cards, SSNs, emails, phone numbers).
+    - *Text Analytics for Health* — Extracts clinical and medical entities (medications, diagnoses, symptoms, treatments) from health documents.
+    - *Conversational Language Understanding (CLU)* — Builds custom NLU models to extract intents and entities for chatbots and voice assistants.
+    - *Question Answering* — Creates knowledge bases from documents/FAQs to answer user questions (QA and retrieval-augmented scenarios).
+    - *Custom Named Entity Recognition (Custom NER)* — Trains domain-specific entity extractors for business- or industry-specific entities.
+    - *Custom Text Classification* — Builds models to categorize text into user-defined labels for routing or organization.
+    - *Text Summarization* — Generates concise summaries from long documents (extractive or abstractive approaches).
+    - *Opinion Mining* — Analyzes sentiment at a granular level by identifying aspects (targets) and opinions expressed about them.
+
+    **References:**  
+
+    - [What is Azure AI Language?](https://learn.microsoft.com/en-us/azure/ai-services/language-service/overview)
+    - [AI Language Feautures](https://learn.microsoft.com/en-us/azure/ai-services/language-service/concepts/developer-guide?tabs=language-studio)
 
 3. **Document Processing Workloads:**
    - Review Azure AI Document Intelligence (formerly Form Recognizer)
@@ -55,6 +87,11 @@ By the end of this lab, you will be able to:
 - Document at least 2 use cases for each workload type
 - Create a comparison table showing differences between workload types
 
+**References:**  
+
+- [Microsoft Learn Module: Introduction to AI concepts](https://learn.microsoft.com/en-us/training/modules/get-started-ai-fundamentals/)
+- [AI Foundry](https://ai.azure.com/)
+  
 ---
 
 ### Exercise 2: Understand Responsible AI Principles

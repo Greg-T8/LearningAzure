@@ -30,6 +30,10 @@ The AI-900 exam covers five main skill areas:
 | **4. NLP Workloads** | 15–20% | Text analysis, speech, translation, language understanding |
 | **5. Generative AI Workloads** | 20–25% | Azure OpenAI, Azure AI Foundry, model catalog |
 
+Reference
+
+- [Study guide for Exam AI-900: Microsoft Azure AI Fundamentals](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/ai-900)
+
 ---
 
 ## 🧪 Lab Series
@@ -37,8 +41,10 @@ The AI-900 exam covers five main skill areas:
 Hands-on labs organized by exam domain:
 
 ### Lab 1: AI Workloads and Responsible AI
+
 **Location:** `labs/lab01-ai-workloads-responsible-ai/`  
 **Objectives:**
+
 - Explore common AI workload scenarios (computer vision, NLP, document processing, generative AI)
 - Review and apply responsible AI principles (fairness, reliability, privacy, inclusiveness, transparency, accountability)
 - Analyze case studies demonstrating responsible AI implementation
@@ -48,8 +54,10 @@ Hands-on labs organized by exam domain:
 ---
 
 ### Lab 2: Machine Learning Fundamentals
+
 **Location:** `labs/lab02-machine-learning-fundamentals/`  
 **Objectives:**
+
 - Identify regression, classification, and clustering scenarios
 - Explore deep learning and Transformer architecture concepts
 - Use Azure Machine Learning automated ML to train and deploy a model
@@ -60,8 +68,10 @@ Hands-on labs organized by exam domain:
 ---
 
 ### Lab 3: Computer Vision on Azure
+
 **Location:** `labs/lab03-computer-vision/`  
 **Objectives:**
+
 - Use Azure AI Vision service for image classification and object detection
 - Perform optical character recognition (OCR) on documents
 - Explore Azure AI Face detection and facial analysis capabilities
@@ -72,8 +82,10 @@ Hands-on labs organized by exam domain:
 ---
 
 ### Lab 4: Natural Language Processing
+
 **Location:** `labs/lab04-natural-language-processing/`  
 **Objectives:**
+
 - Use Azure AI Language service for key phrase extraction, entity recognition, and sentiment analysis
 - Implement speech recognition and synthesis with Azure AI Speech service
 - Perform language translation
@@ -84,8 +96,10 @@ Hands-on labs organized by exam domain:
 ---
 
 ### Lab 5: Generative AI with Azure OpenAI
+
 **Location:** `labs/lab05-generative-ai/`  
 **Objectives:**
+
 - Explore Azure OpenAI Service capabilities (GPT, DALL-E, Whisper)
 - Use Azure AI Foundry to build and deploy generative AI solutions
 - Explore Azure AI Foundry model catalog

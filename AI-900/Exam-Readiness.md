@@ -14,7 +14,7 @@ Use it to reinforce concepts, review domain summaries, and quickly recall high-v
 
 ## 🧠 Domain 1: Describe AI Workloads and Considerations (15–20%)
 
-**Key Topics**
+**Key Topics**  
 
 - **Identify features of common AI workloads:**
   - **Computer vision workloads:** image classification, object detection, facial recognition, OCR
