@@ -39,6 +39,48 @@ By the end of this lab, you will be able to:
 
         <img src='images/2025-10-17-05-21-06.png' width=700>
 
+    **Features:**
+
+    - **Image Analysis**
+
+        - Object detection and classification
+        - Tag generation for images
+        - Image captioning and descriptions
+        - Scene and activity detection
+        - Brand and logo detection
+        - Adult/racy/gory content detection
+
+    - **Optical Character Recognition (OCR)**
+
+        - Text extraction from images
+        - Read API for printed and handwritten text
+        - Support for multiple languages
+        - Document intelligence capabilities
+
+    - **Face Detection**
+
+        - Face detection and attributes
+        - Face verification and identification
+        - Face grouping and similarity detection
+
+    - **Spatial Analysis**
+
+        - People counting and tracking
+        - Social distancing monitoring
+        - Zone occupancy detection
+
+    - **Custom Vision**
+
+        - Custom image classification models
+        - Custom object detection models
+        - Model training and deployment
+
+    - **Video Analysis**
+
+        - Video indexing
+        - Scene and shot detection
+        - Motion detection
+
     **References:**  
 
     - [What is Azure AI Vision?](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview)
@@ -46,12 +88,12 @@ By the end of this lab, you will be able to:
     - [What is Image Analysis?](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview-image-analysis?tabs=4-0)
 
 2. **Natural Language Processing (NLP) Workloads:**
-   - Explore Azure AI Language service capabilities
-   - Review scenarios: sentiment analysis, entity recognition, key phrase extraction
-   - Identify use cases (e.g., customer feedback analysis, chatbots, content moderation)
+
+    - Explore Azure AI Language service capabilities
+    - Review scenarios: sentiment analysis, entity recognition, key phrase extraction
+    - Identify use cases (e.g., customer feedback analysis, chatbots, content moderation)
 
     **Features:**
-
 
     - *Named Entity Recognition (NER)* — Identifies and categorizes named entities in text (people, organizations, locations, dates, quantities).
     - *Key Phrase Extraction* — Extracts main concepts and topics from unstructured text to summarize subject matter.
@@ -73,9 +115,10 @@ By the end of this lab, you will be able to:
     - [AI Language Feautures](https://learn.microsoft.com/en-us/azure/ai-services/language-service/concepts/developer-guide?tabs=language-studio)
 
 3. **Document Processing Workloads:**
-   - Review Azure AI Document Intelligence (formerly Form Recognizer)
-   - Explore prebuilt models for invoices, receipts, business cards
-   - Identify use cases (e.g., invoice automation, receipt scanning)
+
+- Review Azure AI Document Intelligence (formerly Form Recognizer)
+- Explore prebuilt models for invoices, receipts, business cards
+- Identify use cases (e.g., invoice automation, receipt scanning)
 
 4. **Generative AI Workloads:**
    - Explore Azure OpenAI Service overview
