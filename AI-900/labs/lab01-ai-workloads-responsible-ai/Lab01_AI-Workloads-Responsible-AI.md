@@ -35,57 +35,57 @@ By the end of this lab, you will be able to:
    - Review sample scenarios: image classification, object detection, OCR, facial analysis
    - Identify use cases (e.g., retail inventory, security cameras, document processing)
 
-        [Azure AI Vision Studio](https://portal.vision.cognitive.azure.com/gallery/featured)
+        [Azure AI Vision Studio](https://portal.vision.cognitive.azure.com/gallery/featured):  
 
         <img src='images/2025-10-17-05-21-06.png' width=700>
 
-    **Features:**
+        **Features:**
 
-    - **Image Analysis**
+        - **Image Analysis**
 
-        - Object detection and classification
-        - Tag generation for images
-        - Image captioning and descriptions
-        - Scene and activity detection
-        - Brand and logo detection
-        - Adult/racy/gory content detection
+            - Object detection and classification
+            - Tag generation for images
+            - Image captioning and descriptions
+            - Scene and activity detection
+            - Brand and logo detection
+            - Adult/racy/gory content detection
 
-    - **Optical Character Recognition (OCR)**
+        - **Optical Character Recognition (OCR)**
 
-        - Text extraction from images
-        - Read API for printed and handwritten text
-        - Support for multiple languages
-        - Document intelligence capabilities
+            - Text extraction from images
+            - Read API for printed and handwritten text
+            - Support for multiple languages
+            - Document intelligence capabilities
 
-    - **Face Detection**
+        - **Face Detection**
 
-        - Face detection and attributes
-        - Face verification and identification
-        - Face grouping and similarity detection
+            - Face detection and attributes
+            - Face verification and identification
+            - Face grouping and similarity detection
 
-    - **Spatial Analysis**
+        - **Spatial Analysis**
 
-        - People counting and tracking
-        - Social distancing monitoring
-        - Zone occupancy detection
+            - People counting and tracking
+            - Social distancing monitoring
+            - Zone occupancy detection
 
-    - **Custom Vision**
+        - **Custom Vision**
 
-        - Custom image classification models
-        - Custom object detection models
-        - Model training and deployment
+            - Custom image classification models
+            - Custom object detection models
+            - Model training and deployment
 
-    - **Video Analysis**
+        - **Video Analysis**
 
-        - Video indexing
-        - Scene and shot detection
-        - Motion detection
+            - Video indexing
+            - Scene and shot detection
+            - Motion detection
 
-    **References:**  
+        **References:**  
 
-    - [What is Azure AI Vision?](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview)
-    - [Vision Studio](https://portal.vision.cognitive.azure.com/gallery/featured)
-    - [What is Image Analysis?](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview-image-analysis?tabs=4-0)
+        - [What is Azure AI Vision?](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview)
+        - [Vision Studio](https://portal.vision.cognitive.azure.com/gallery/featured)
+        - [What is Image Analysis?](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview-image-analysis?tabs=4-0)
 
 2. **Natural Language Processing (NLP) Workloads:**
 
@@ -93,26 +93,26 @@ By the end of this lab, you will be able to:
     - Review scenarios: sentiment analysis, entity recognition, key phrase extraction
     - Identify use cases (e.g., customer feedback analysis, chatbots, content moderation)
 
-    **Features:**
+        **Features:**
 
-    - *Named Entity Recognition (NER)* — Identifies and categorizes named entities in text (people, organizations, locations, dates, quantities).
-    - *Key Phrase Extraction* — Extracts main concepts and topics from unstructured text to summarize subject matter.
-    - *Sentiment Analysis* — Determines overall sentiment of text (positive, negative, neutral, mixed) and returns confidence scores.
-    - *Language Detection* — Automatically detects the language of input text from supported languages.
-    - *Entity Linking* — Disambiguates entities by linking them to entries in knowledge bases (provides contextual references).
-    - *Personally Identifiable Information (PII) Detection* — Identifies and redacts sensitive data (credit cards, SSNs, emails, phone numbers).
-    - *Text Analytics for Health* — Extracts clinical and medical entities (medications, diagnoses, symptoms, treatments) from health documents.
-    - *Conversational Language Understanding (CLU)* — Builds custom NLU models to extract intents and entities for chatbots and voice assistants.
-    - *Question Answering* — Creates knowledge bases from documents/FAQs to answer user questions (QA and retrieval-augmented scenarios).
-    - *Custom Named Entity Recognition (Custom NER)* — Trains domain-specific entity extractors for business- or industry-specific entities.
-    - *Custom Text Classification* — Builds models to categorize text into user-defined labels for routing or organization.
-    - *Text Summarization* — Generates concise summaries from long documents (extractive or abstractive approaches).
-    - *Opinion Mining* — Analyzes sentiment at a granular level by identifying aspects (targets) and opinions expressed about them.
+        - *Named Entity Recognition (NER)* — Identifies and categorizes named entities in text (people, organizations, locations, dates, quantities).
+        - *Key Phrase Extraction* — Extracts main concepts and topics from unstructured text to summarize subject matter.
+        - *Sentiment Analysis* — Determines overall sentiment of text (positive, negative, neutral, mixed) and returns confidence scores.
+        - *Language Detection* — Automatically detects the language of input text from supported languages.
+        - *Entity Linking* — Disambiguates entities by linking them to entries in knowledge bases (provides contextual references).
+        - *Personally Identifiable Information (PII) Detection* — Identifies and redacts sensitive data (credit cards, SSNs, emails, phone numbers).
+        - *Text Analytics for Health* — Extracts clinical and medical entities (medications, diagnoses, symptoms, treatments) from health documents.
+        - *Conversational Language Understanding (CLU)* — Builds custom NLU models to extract intents and entities for chatbots and voice assistants.
+        - *Question Answering* — Creates knowledge bases from documents/FAQs to answer user questions (QA and retrieval-augmented scenarios).
+        - *Custom Named Entity Recognition (Custom NER)* — Trains domain-specific entity extractors for business- or industry-specific entities.
+        - *Custom Text Classification* — Builds models to categorize text into user-defined labels for routing or organization.
+        - *Text Summarization* — Generates concise summaries from long documents (extractive or abstractive approaches).
+        - *Opinion Mining* — Analyzes sentiment at a granular level by identifying aspects (targets) and opinions expressed about them.
 
-    **References:**  
+        **References:**  
 
-    - [What is Azure AI Language?](https://learn.microsoft.com/en-us/azure/ai-services/language-service/overview)
-    - [AI Language Feautures](https://learn.microsoft.com/en-us/azure/ai-services/language-service/concepts/developer-guide?tabs=language-studio)
+        - [What is Azure AI Language?](https://learn.microsoft.com/en-us/azure/ai-services/language-service/overview)
+        - [AI Language Feautures](https://learn.microsoft.com/en-us/azure/ai-services/language-service/concepts/developer-guide?tabs=language-studio)
 
 3. **Document Processing Workloads:**
 
