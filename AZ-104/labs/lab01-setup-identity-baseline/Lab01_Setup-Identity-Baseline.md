@@ -26,14 +26,20 @@
   * [Using Terraform](#using-terraform)
   * [Exam Insights](#exam-insights)
 * [🔹 Exercise 2 – Create and Configure Groups](#-exercise-2--create-and-configure-groups)
-  * [Static Group – `Lab-Admins`](#static-group--lab-admins)
+  * [Static Group](#static-group)
     * [Using `Az` CLI](#using-az-cli-1)
     * [Using Terraform](#using-terraform-1)
-  * [Dynamic Group - `Marketing Team`](#dynamic-group---marketing-team)
+  * [Dynamic Group](#dynamic-group)
     * [Using PowerShell](#using-powershell-1)
   * [Exam Insights](#exam-insights-1)
 * [🔹 Exercise 3 – Assign Licenses](#-exercise-3--assign-licenses)
-  * [Using PowerShell](#using-powershell-2)
+  * [Retrieve user license details](#retrieve-user-license-details)
+  * [Set the `UsageLocation` property for the user](#set-the-usagelocation-property-for-the-user)
+  * [Review available user license plans](#review-available-user-license-plans)
+  * [Verify permissions to assign license](#verify-permissions-to-assign-license)
+  * [Assign a license to the user](#assign-a-license-to-the-user)
+    * [Using the Microsoft Entra PowerShell module](#using-the-microsoft-entra-powershell-module)
+    * [Using the Microsoft Graph PowerShell module](#using-the-microsoft-graph-powershell-module)
   * [Group-Based Licensing](#group-based-licensing)
   * [Exam Insights](#exam-insights-2)
 * [🔹 Exercise 4 – Invite and Manage a Guest User](#-exercise-4--invite-and-manage-a-guest-user)
@@ -221,7 +227,7 @@ See [main.tf](./terraform/users/main.tf) for a working example. This example use
 
 **Goal:** Organize users using static and dynamic membership.
 
-### Static Group – `Lab-Admins`
+### Static Group
 
 #### Using `Az` CLI
 
@@ -263,7 +269,7 @@ See [main.tf](./terraform/groups/main.tf) for a working example.
 
 <img src='images/2025-10-13-04-59-16.png' width=600>
 
-### Dynamic Group - `Marketing Team`
+### Dynamic Group
 
 #### Using PowerShell
 
@@ -305,19 +311,103 @@ New-AzADGroup `
 
 **Goal:** Enable features through license assignment.
 
-### Using PowerShell
-
-Use the following PowerShell commands to assign licenses to individual users:
+### Retrieve user license details
 
 ```pwsh
-# Set the UsageLocation property for the user (required for license assignment)
-Set-AzADUser -ObjectId "user1@637djb.onmicrosoft.com" -UsageLocation "US"
-
-# Assign a license to the user
-Set-AzADUserLicense -ObjectId "user1@637djb.onmicrosoft.com" -AddLicenses "ENTERPRISEPREMIUM"
+Get-EntraUserLicenseDetail -UserId user1@637djb.onmicrosoft.com
 ```
 
-💡 **Note:** Replace `"ENTERPRISEPREMIUM"` with the appropriate SKU ID for the license you want to assign. Use `Get-AzADSubscribedSku` to list available SKUs.
+<img src='images/2025-10-17-03-21-00.png' width=700>
+
+```pwsh
+Get-MgUserLicenseDetail -UserId user1@637djb.onmicrosoft.com
+```
+
+<img src='images/2025-10-17-03-20-43.png' width=700>
+
+You can also use `Get-MgUser`, but you have to explicitly specify the `AssignedLicenses` property:
+
+<img src='images/2025-10-17-03-22-37.png' width=700>
+
+With `Get-EntraUser`, you do not need to specify the `AssignedLicenses` property:
+
+<img src='images/2025-10-17-03-23-33.png' width=700>
+
+Unfortunately, neither `Get-AzADUser` nor the `az ad user` command provide license details.
+
+### Set the `UsageLocation` property for the user
+
+```pwsh
+Update-AzADUser -UPNOrObjectId user1@637djb.onmicrosoft.com -UsageLocation GB
+```
+
+```pwsh
+Set-EntraUser -UserId user1@637djb.onmicrosoft.com -UsageLocation US
+```
+
+```pwsh
+Set-MgUser -UserId user1@637djb.onmicrosoft.com -UsageLocation GB
+```
+
+The `az ad user` command does not support setting `UsageLocation`.
+
+### Review available user license plans
+
+```pwsh
+Get-EntraSubscribedSku | select *
+Get-MgSubscribedSku | select *      # Returns same info
+```
+
+<img src='images/2025-10-17-03-43-37.png' width=700>
+
+### Verify permissions to assign license
+
+Both your account and the Microsoft Graph PowerShell SDK application needs permissions.
+
+```pwsh
+Find-MgGraphCommand Set-MgUserLicense | select -ExpandProperty Permissions
+```
+
+<img src='images/2025-10-17-03-54-47.png' width=800>
+
+```pwsh
+Get-MgContext | select -ExpandProperty scopes
+```
+
+<img src='images/2025-10-17-03-55-44.png' width=300>
+
+### Assign a license to the user
+
+#### Using the Microsoft Entra PowerShell module
+
+```pwsh
+$license = New-Object -TypeName Microsoft.Open.AzureAD.Model.AssignedLicense
+$license.SkuId = (Get-EntraSubscribedSku | Where-Object { $_.SkuPartNumber -eq 'DEVELOPERPACK_E5' }).SkuId
+$licenses = New-Object -TypeName Microsoft.Open.AzureAD.Model.AssignedLicenses
+$licenses.AddLicenses = $license
+Set-EntraUserLicense -UserId user1@637djb.onmicrosoft.com -AssignedLicenses $licenses
+```
+
+<img src='images/2025-10-17-04-08-28.png' width=600>
+
+References:  
+
+* [Managing user licenses using Microsoft Entra PowerShell](https://learn.microsoft.com/en-us/powershell/entra-powershell/how-to-manage-user-licenses?view=entra-powershell)
+* [Set-EntraUserLicense](https://learn.microsoft.com/en-us/powershell/module/microsoft.entra.users/set-entrauserlicense?view=entra-powershell)
+
+#### Using the Microsoft Graph PowerShell module
+
+```pwsh
+$skuID = (Get-MgSubscribedSku | Where-Object { $_.SkuPartNumber -eq 'DEVELOPERPACK_E5' }).SkuId
+Set-MgUserLicense -UserId user1@637djb.onmicrosoft.com -AddLicenses @{SkuId = $skuID} -RemoveLicenses @()
+```
+
+<img src='images/2025-10-17-04-16-43.png' width=600>
+
+References:  
+
+* [Assign Microsoft 365 licenses to user accounts with PowerShell](https://learn.microsoft.com/en-us/microsoft-365/enterprise/assign-licenses-to-user-accounts-with-microsoft-365-powershell?view=o365-worldwide)
+* [Set-MgUserLicense](https://learn.microsoft.com/en-us/powershell/module/microsoft.graph.users.actions/set-mguserlicense?view=graph-powershell-1.0)
 
 ### Group-Based Licensing
 
@@ -355,10 +445,6 @@ Group-based licensing simplifies license management by assigning licenses to gro
 ### Exam Insights
 
 💡 Understand that `UsageLocation` is a required property for license assignment—this is a common exam scenario.
-
-💡 Know the difference between assigning licenses to individual users versus groups—group-based licensing simplifies management at scale.
-
-💡 Be familiar with the PowerShell cmdlets for license assignment, such as `Set-AzADUserLicense`, and their required parameters.
 
 💡 Remember that group-based licensing requires the group to be security-enabled and is only available with Entra ID Premium P1 or higher.
 
