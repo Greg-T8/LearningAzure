@@ -532,11 +532,9 @@ New-MgGroupMember -GroupId $groupID -DirectoryObjectId $userId
 
 (pick up here next)
 
-
-
 ### Exam Insights
 
-💡 **Exam Insight:** Group-based licensing is a key feature of Entra ID Premium P1 and is often tested in scenarios involving license management at scale.
+💡 Group-based licensing is a key feature of Entra ID Premium P1 and is often tested in scenarios involving license management at scale.
 
 💡 Understand that `UsageLocation` is a required property for license assignment—this is a common exam scenario.
 
