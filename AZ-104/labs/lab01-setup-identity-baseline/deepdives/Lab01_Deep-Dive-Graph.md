@@ -1,4 +1,4 @@
-# Lab 1 – Deep Dive: Using the Microsoft Graph and Entra PowerShell Commands
+# Lab 1 – Deep Dive: Using the Microsoft Graph Commands
 
 ## Overview
 

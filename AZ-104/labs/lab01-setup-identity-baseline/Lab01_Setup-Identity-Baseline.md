@@ -30,7 +30,7 @@
     * [Using `Az` CLI](#using-az-cli-1)
     * [Using Terraform](#using-terraform-1)
   * [Dynamic Group](#dynamic-group)
-    * [Using PowerShell](#using-powershell-1)
+    * [Using PowerShell (`New-AzADGroup`)](#using-powershell-new-azadgroup)
   * [Exam Insights](#exam-insights-1)
 * [🔹 Exercise 3 – Assign Licenses](#-exercise-3--assign-licenses)
   * [Retrieve user license details](#retrieve-user-license-details)
@@ -41,6 +41,13 @@
     * [Using the Microsoft Entra PowerShell module](#using-the-microsoft-entra-powershell-module)
     * [Using the Microsoft Graph PowerShell module](#using-the-microsoft-graph-powershell-module)
   * [Group-Based Licensing](#group-based-licensing)
+    * [1. Create a Security Group (`New-MgGroup`)](#1-create-a-security-group-new-mggroup)
+    * [2. Identify the License SKU ID](#2-identify-the-license-sku-id)
+    * [3. Assign Licenses to the Group (`Set-MgGroupLicense`)](#3-assign-licenses-to-the-group-set-mggrouplicense)
+    * [4. Add Users to the Group](#4-add-users-to-the-group)
+      * [Using the `Az` command](#using-the-az-command)
+      * [Using `Add-AzADGroupMember`](#using-add-azadgroupmember)
+      * [Using `New-MgGroupMemberByRef`](#using-new-mggroupmemberbyref)
   * [Exam Insights](#exam-insights-2)
 * [🔹 Exercise 4 – Invite and Manage a Guest User](#-exercise-4--invite-and-manage-a-guest-user)
 * [🔹 Exercise 5 – Enable and Validate SSPR](#-exercise-5--enable-and-validate-sspr)
@@ -271,7 +278,7 @@ See [main.tf](./terraform/groups/main.tf) for a working example.
 
 ### Dynamic Group
 
-#### Using PowerShell
+#### Using PowerShell (`New-AzADGroup`)
 
 The following command creates a dynamic M365 security group:
 
@@ -310,6 +317,8 @@ New-AzADGroup `
 ## 🔹 Exercise 3 – Assign Licenses
 
 **Goal:** Enable features through license assignment.
+
+See [🥽 Deep Dive: Using Microsoft Graph Commands](./deepdives/Lab01_Deep-Dive-Graph.md) for additional guidance on finding the right command and permissions.
 
 ### Retrieve user license details
 
@@ -413,27 +422,99 @@ References:
 
 Group-based licensing simplifies license management by assigning licenses to groups instead of individual users. Follow these steps:
 
-1. **Create a Security Group**  
-   Use the following command to create a security group for licensing:
+#### 1. Create a Security Group (`New-MgGroup`)
 
-   ```pwsh
-   New-AzADGroup `
-      -DisplayName "License-Group-P1" `
-      -MailNickname "license-group-p1" `
-      -SecurityEnabled $true
-   ```
+Use the following command to create a security group for licensing:
 
-2. **Assign Licenses to the Group**  
-   Assign a license to the group using the Azure Portal or Microsoft Graph API. Group-based licensing requires Entra ID Premium P1 or higher.
+```pwsh
+New-MgGroup `
+ -DisplayName 'MDE Licensed Users' `
+ -GroupTypes @('Unified') `
+ -MailNickname "mde-licensed-users" `
+ -MailEnabled:$true `
+ -SecurityEnabled:$true `
+ -Description "Users licensed with Microsoft Defender for Endpoint"
+```
 
-3. **Add Users to the Group**  
-   Add users to the group to inherit the assigned licenses:
+<img src='images/2025-10-18-04-09-03.png' width=800>
 
-   ```pwsh
-   Add-AzADGroupMember -GroupObjectId "<GroupObjectId>" -MemberObjectId "<UserObjectId>"
-   ```
+By default, this command creates a security group. Specify the `-GroupTypes` parameter as shown to create a Microsoft 365 group.
 
-4. **Verify License Assignment**  
+The `-SecurityEnabled` flag must be set to `$true` for group-based licensing to work. Otherwise, you will get an error when assigning licenses.
+
+<img src='images/2025-10-18-04-37-57.png' width=800>
+
+References:  
+
+* [New-MgGroup](https://learn.microsoft.com/en-us/powershell/module/microsoft.graph.groups/new-mggroup?view=graph-powershell-1.0#-grouptypes)
+* [Graph API: Create group](https://learn.microsoft.com/en-us/graph/api/group-post-groups?view=graph-rest-1.0&tabs=powershell)
+
+#### 2. Identify the License SKU ID
+
+Run `Get-MgSubscribedSku` to find the SKU ID for the license you want to assign (e.g., Microsoft Defender for Endpoint).
+
+```pwsh
+$MDESkuId = (Get-MgSubscribedSku | ? SkuPartNumber -eq 'WIN_DEF_ATP').SkuId
+$MDESkuId
+111046dd-295b-4d6d-9724-d52ac90bd1f2
+```
+
+<img src='images/2025-10-18-04-16-12.png' width=700>
+
+#### 3. Assign Licenses to the Group (`Set-MgGroupLicense`)
+
+```pwsh
+$groupID = (Get-MgGroup | ? DisplayName -eq 'MDE Licensed Users').Id
+Set-MgGroupLicense -GroupId $groupID -AddLicenses @(@{ skuId=$MDESkuId; disabledPlans=@() }) -RemoveLicenses @()
+```
+
+<img src='images/2025-10-18-04-38-51.png' width=800>
+
+Verify the license assignment:
+
+```pwsh
+Get-MgGroup -Property DisplayName, AssignedLicenses | ? DisplayName -eq 'MDE Licensed Users' | Select DisplayName, AssignedLicenses
+```
+
+<img src='images/2025-10-18-04-42-44.png' width=800>
+
+References:  
+
+* [Set-MgGroupLicense](https://learn.microsoft.com/en-us/powershell/module/microsoft.graph.groups/set-mggrouplicense?view=graph-powershell-1.0)
+* [Graph API: Assign licenses to a group](https://learn.microsoft.com/en-us/graph/api/group-assignlicense?view=graph-rest-1.0&tabs=http)
+* [Graph API: Assigned license resource type](https://learn.microsoft.com/en-us/graph/api/resources/assignedlicense?view=graph-rest-1.0)
+
+#### 4. Add Users to the Group
+
+##### Using the `Az` command
+
+```pwsh
+az ad group member add -g 'MDE Licensed Users' --member-id '5dd8c7a4-ecc1-47a1-8d01-20b1b145476f'
+```
+
+##### Using `Add-AzADGroupMember`
+
+```pwsh
+$groupId = (Get-AzADGroup -DisplayName 'MDE Licensed Users').Id
+$members += (Get-AzADUser -UserPrincipalName 'user1@637djb.onmicrosoft.com').Id
+Add-AzADGroupMember -TargetGroupObjectId $groupID -MemberObjectId $members
+```
+
+References:  
+
+* [Add-AzADGroupMember](https://learn.microsoft.com/en-us/powershell/module/az.resources/add-azadgroupmember?view=azps-14.4.0)
+
+##### Using `New-MgGroupMemberByRef`
+
+```pwsh
+
+```
+
+References:  
+
+* [New-MgGroupMemberByRef](https://learn.microsoft.com/en-us/powershell/module/microsoft.graph.groups/new-mggroupmemberbyref?view=graph-powershell-1.0)
+
+1. **Verify License Assignment**  
    Verify that the users in the group have inherited the licenses:
 
    ```pwsh
