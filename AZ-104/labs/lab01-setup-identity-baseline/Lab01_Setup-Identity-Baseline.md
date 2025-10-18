@@ -47,7 +47,9 @@
     * [4. Add Users to the Group](#4-add-users-to-the-group)
       * [Using the `Az` command](#using-the-az-command)
       * [Using `Add-AzADGroupMember`](#using-add-azadgroupmember)
-      * [Using `New-MgGroupMemberByRef`](#using-new-mggroupmemberbyref)
+      * [Using `Add-EntraGroupMember`](#using-add-entragroupmember)
+      * [Using `New-MgGroupMember`](#using-new-mggroupmember)
+    * [Notes on Group-Based Licensing](#notes-on-group-based-licensing)
   * [Exam Insights](#exam-insights-2)
 * [🔹 Exercise 4 – Invite and Manage a Guest User](#-exercise-4--invite-and-manage-a-guest-user)
 * [🔹 Exercise 5 – Enable and Validate SSPR](#-exercise-5--enable-and-validate-sspr)
@@ -496,44 +498,51 @@ az ad group member add -g 'MDE Licensed Users' --member-id '5dd8c7a4-ecc1-47a1-8
 
 ```pwsh
 $groupId = (Get-AzADGroup -DisplayName 'MDE Licensed Users').Id
+$members = @()
 $members += (Get-AzADUser -UserPrincipalName 'user1@637djb.onmicrosoft.com').Id
+$members += (Get-AzADUser -UserPrincipalName 'user2@637djb.onmicrosoft.com').Id
 Add-AzADGroupMember -TargetGroupObjectId $groupID -MemberObjectId $members
 ```
 
-References:  
+Reference: [Add-AzADGroupMember](https://learn.microsoft.com/en-us/powershell/module/az.resources/add-azadgroupmember?view=azps-14.4.0)
 
-* [Add-AzADGroupMember](https://learn.microsoft.com/en-us/powershell/module/az.resources/add-azadgroupmember?view=azps-14.4.0)
-
-##### Using `New-MgGroupMemberByRef`
+##### Using `Add-EntraGroupMember`
 
 ```pwsh
-
+$memberId = (Get-EntraUser -UserId 'user1@637djb.onmicrosoft.com').Id
+$groupID = (Get-EntraGroup | ? DisplayName -eq 'MDE Licensed Users').Id
+Add-EntraGroupMember -GroupId $groupId -MemberId $memberId
 ```
 
-References:  
+Unlike `Add-AzADGroupMember`, `Add-EntraGroupMember` only supports adding one member at a time.
 
-* [New-MgGroupMemberByRef](https://learn.microsoft.com/en-us/powershell/module/microsoft.graph.groups/new-mggroupmemberbyref?view=graph-powershell-1.0)
+<img src='images/2025-10-18-05-21-03.png' width=800>
 
-1. **Verify License Assignment**  
-   Verify that the users in the group have inherited the licenses:
+Reference: [Add-EntraGroupMember](https://learn.microsoft.com/en-us/powershell/module/microsoft.entra.groups/add-entragroupmember?view=entra-powershell)
 
-   ```pwsh
-   Get-AzADUser -ObjectId "user1@637djb.onmicrosoft.com" | Select-Object DisplayName, AssignedLicenses
-   ```
+##### Using `New-MgGroupMember`
 
-💡 **Exam Insight:** Group-based licensing is a key feature of Entra ID Premium P1 and is often tested in scenarios involving license management at scale.
+```pwsh
+$groupId = (Get-MgGroup -Filter "displayName eq 'MDE Licensed Users'").Id
+$userId = (Get-MgUSer -Filter "userPrincipalName eq 'user1@637djb.onmicrosoft.com'").Id
+New-MgGroupMember -GroupId $groupID -DirectoryObjectId $userId
+```
+
+#### Notes on Group-Based Licensing
+
+(pick up here next)
+
+
 
 ### Exam Insights
 
-💡 Understand that `UsageLocation` is a required property for license assignment—this is a common exam scenario.
+💡 **Exam Insight:** Group-based licensing is a key feature of Entra ID Premium P1 and is often tested in scenarios involving license management at scale.
 
-💡 Remember that group-based licensing requires the group to be security-enabled and is only available with Entra ID Premium P1 or higher.
+💡 Understand that `UsageLocation` is a required property for license assignment—this is a common exam scenario.
 
 💡 Understand how to verify license assignments using commands like `Get-AzADUser` and the `AssignedLicenses` property—this is frequently tested.
 
 ---
-
-[broken link](https://ksdjfkdjflskdjfskdjf.com)
 
 ## 🔹 Exercise 4 – Invite and Manage a Guest User
 
