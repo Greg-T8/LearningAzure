@@ -31,61 +31,62 @@ By the end of this lab, you will be able to:
 **Objective:** Understand the four main categories of AI workloads.
 
 1. **Computer Vision Workloads:**
-   - Navigate to Azure AI Vision service in the portal
-   - Review sample scenarios: image classification, object detection, OCR, facial analysis
-   - Identify use cases (e.g., retail inventory, security cameras, document processing)
+    - Navigate to Azure AI Vision service in the portal
+    - Review sample scenarios: image classification, object detection, OCR, facial analysis
+    - Identify use cases (e.g., retail inventory, security cameras, document processing)
 
-        [Azure AI Vision Studio](https://portal.vision.cognitive.azure.com/gallery/featured):  
+    **Description:**
 
-        <img src='images/2025-10-17-05-21-06.png' width=700>
+    Azure AI Vision is a cloud-based Azure AI service that provides advanced algorithms for processing images and extracting information from visual content. It enables developers to build intelligent applications that can understand and interpret the visual world through computer vision capabilities.
 
-        **Features:**
+    **Key Information:**
 
-        - **Image Analysis**
+    - Service Renamed: Part of Azure AI Services (formerly Azure Cognitive Services)
+    - Original Name: Computer Vision API / Azure Cognitive Services Vision
+    - Current Version: API v4.0 (GA) as of 2024
+    - Part of Azure AI Services unified platform
 
-            - Object detection and classification
-            - Tag generation for images
-            - Image captioning and descriptions
-            - Scene and activity detection
-            - Brand and logo detection
-            - Adult/racy/gory content detection
+    **What It Does:**
 
-        - **Optical Character Recognition (OCR)**
+    The service enables organizations to:
 
-            - Text extraction from images
-            - Read API for printed and handwritten text
-            - Support for multiple languages
-            - Document intelligence capabilities
+    - Analyze images and videos to extract insights and detect objects, people, and activities
+    - Extract printed and handwritten text from images using industry-leading OCR technology
+    - Detect and analyze faces with attributes like age, emotion, and facial features
+    - Generate captions and tags for images automatically
+    - Moderate content to detect inappropriate or unsafe visual content
+    - Build custom vision models for specialized image classification and object detection scenarios
 
-        - **Face Detection**
+    **Technology:**
 
-            - Face detection and attributes
-            - Face verification and identification
-            - Face grouping and similarity detection
+    Azure AI Vision combines:
 
-        - **Spatial Analysis**
+    - Deep learning models trained on millions of images for robust visual understanding
+    - Pre-trained models for common computer vision tasks (object detection, OCR, face analysis)
+    - Custom Vision capabilities for training domain-specific models without deep ML expertise
+    - Spatial analysis for real-time people tracking and zone monitoring
+    - Video analysis capabilities for scene detection and activity recognition
 
-            - People counting and tracking
-            - Social distancing monitoring
-            - Zone occupancy detection
+    **Use Cases:**
 
-        - **Custom Vision**
+    Common scenarios include retail shelf monitoring, manufacturing quality inspection, security and surveillance, accessibility tools for visually impaired users, document digitization, and automated image tagging for content management systems.
 
-            - Custom image classification models
-            - Custom object detection models
-            - Model training and deployment
+    [Azure AI Vision Studio](https://portal.vision.cognitive.azure.com/gallery/featured):  
 
-        - **Video Analysis**
+    <img src='images/2025-10-17-05-21-06.png' width=700>
 
-            - Video indexing
-            - Scene and shot detection
-            - Motion detection
+    **Features:**
 
-        **References:**  
+    - **Image Analysis**
 
-        - [What is Azure AI Vision?](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview)
-        - [Vision Studio](https://portal.vision.cognitive.azure.com/gallery/featured)
-        - [What is Image Analysis?](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview-image-analysis?tabs=4-0)
+        - Object detection and classification
+        - Tag generation for images
+        - Image captioning and descriptions
+        - Scene and activity detection
+
+    **References:**  
+
+    - [What is Image Analysis?](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview-image-analysis?tabs=4-0)
 
 2. **Natural Language Processing (NLP) Workloads:**
 
@@ -93,37 +94,187 @@ By the end of this lab, you will be able to:
     - Review scenarios: sentiment analysis, entity recognition, key phrase extraction
     - Identify use cases (e.g., customer feedback analysis, chatbots, content moderation)
 
-        **Features:**
+    **Description:**
 
-        - *Named Entity Recognition (NER)* — Identifies and categorizes named entities in text (people, organizations, locations, dates, quantities).
-        - *Key Phrase Extraction* — Extracts main concepts and topics from unstructured text to summarize subject matter.
-        - *Sentiment Analysis* — Determines overall sentiment of text (positive, negative, neutral, mixed) and returns confidence scores.
-        - *Language Detection* — Automatically detects the language of input text from supported languages.
-        - *Entity Linking* — Disambiguates entities by linking them to entries in knowledge bases (provides contextual references).
-        - *Personally Identifiable Information (PII) Detection* — Identifies and redacts sensitive data (credit cards, SSNs, emails, phone numbers).
-        - *Text Analytics for Health* — Extracts clinical and medical entities (medications, diagnoses, symptoms, treatments) from health documents.
-        - *Conversational Language Understanding (CLU)* — Builds custom NLU models to extract intents and entities for chatbots and voice assistants.
-        - *Question Answering* — Creates knowledge bases from documents/FAQs to answer user questions (QA and retrieval-augmented scenarios).
-        - *Custom Named Entity Recognition (Custom NER)* — Trains domain-specific entity extractors for business- or industry-specific entities.
-        - *Custom Text Classification* — Builds models to categorize text into user-defined labels for routing or organization.
-        - *Text Summarization* — Generates concise summaries from long documents (extractive or abstractive approaches).
-        - *Opinion Mining* — Analyzes sentiment at a granular level by identifying aspects (targets) and opinions expressed about them.
+    Azure AI Language is a cloud-based Azure AI service that provides Natural Language Processing (NLP) capabilities for understanding and analyzing text. It enables developers to build intelligent applications that can extract meaning, identify entities, analyze sentiment, and understand the intent behind human language.
 
-        **References:**  
+    **Key Information:**
 
-        - [What is Azure AI Language?](https://learn.microsoft.com/en-us/azure/ai-services/language-service/overview)
-        - [AI Language Feautures](https://learn.microsoft.com/en-us/azure/ai-services/language-service/concepts/developer-guide?tabs=language-studio)
+    - Service Renamed: Part of Azure AI Services (formerly Azure Cognitive Services Text Analytics)
+    - Original Name: Text Analytics API / Azure Cognitive Services Language Understanding (LUIS)
+    - Current Version: API v2024-11-01 (GA) as of 2024
+    - Part of Azure AI Services unified platform
+
+    **What It Does:**
+
+    The service enables organizations to:
+
+    - Analyze sentiment and opinions expressed in customer feedback, reviews, and social media
+    - Extract key information such as entities, key phrases, and important concepts from unstructured text
+    - Detect and redact personally identifiable information (PII) for compliance and privacy protection
+    - Build conversational AI applications with natural language understanding capabilities
+    - Create question answering systems from knowledge bases and documents
+    - Summarize long documents automatically to extract key points
+    - Classify text into custom categories for content organization and routing
+    - Process medical and healthcare documents to extract clinical information
+
+    **Technology:**
+
+    Azure AI Language combines:
+
+    - Advanced transformer-based models (including BERT-like architectures) for deep language understanding
+    - Pre-trained models for common NLP tasks (sentiment analysis, entity recognition, language detection)
+    - Custom model training capabilities for domain-specific language understanding without deep ML expertise
+    - Multi-lingual support for processing text in 100+ languages
+    - Conversational AI frameworks for building intelligent chatbots and virtual assistants
+
+    **Use Cases:**
+
+    Common scenarios include customer feedback analysis, social media monitoring, content moderation, intelligent search, chatbot development, document summarization, call center analytics, and automated email routing.
+
+    [Azure AI Language Studio](https://language.cognitive.azure.com/):  
+
+    <img src='images/2025-10-18-06-30-00.png' width=700>
+
+    **Features:**
+
+    - *Named Entity Recognition (NER)* — Identifies and categorizes named entities in text (people, organizations, locations, dates, quantities).
+    - *Key Phrase Extraction* — Extracts main concepts and topics from unstructured text to summarize subject matter.
+    - *Sentiment Analysis* — Determines overall sentiment of text (positive, negative, neutral, mixed) and returns confidence scores.
+    - *Language Detection* — Automatically detects the language of input text from supported languages.
+    - *Entity Linking* — Disambiguates entities by linking them to entries in knowledge bases (provides contextual references).
+    - *Personally Identifiable Information (PII) Detection* — Identifies and redacts sensitive data (credit cards, SSNs, emails, phone numbers).
+    - *Text Analytics for Health* — Extracts clinical and medical entities (medications, diagnoses, symptoms, treatments) from health documents.
+    - *Conversational Language Understanding (CLU)* — Builds custom NLU models to extract intents and entities for chatbots and voice assistants.
+    - *Question Answering* — Creates knowledge bases from documents/FAQs to answer user questions (QA and retrieval-augmented scenarios).
+    - *Custom Named Entity Recognition (Custom NER)* — Trains domain-specific entity extractors for business- or industry-specific entities.
+    - *Custom Text Classification* — Builds models to categorize text into user-defined labels for routing or organization.
+    - *Text Summarization* — Generates concise summaries from long documents (extractive or abstractive approaches).
+    - *Opinion Mining* — Analyzes sentiment at a granular level by identifying aspects (targets) and opinions expressed about them.
+
+    **References:**  
+
+    - [What is Azure AI Language?](https://learn.microsoft.com/en-us/azure/ai-services/language-service/overview)
+    - [AI Language Feautures](https://learn.microsoft.com/en-us/azure/ai-services/language-service/concepts/developer-guide?tabs=language-studio)
 
 3. **Document Processing Workloads:**
 
-- Review Azure AI Document Intelligence (formerly Form Recognizer)
-- Explore prebuilt models for invoices, receipts, business cards
-- Identify use cases (e.g., invoice automation, receipt scanning)
+    - Review Azure AI Document Intelligence (formerly Form Recognizer)
+    - Explore prebuilt models for invoices, receipts, business cards
+    - Identify use cases (e.g., invoice automation, receipt scanning)
+
+    **Description:**
+
+    Azure AI Document Intelligence (formerly known as Azure Form Recognizer) is a cloud-based Azure AI service that uses machine learning to automatically extract and analyze text, key-value pairs, tables, and structured data from documents.
+
+    **Key Information:**  
+
+    - Service Renamed: July 2023 (from "Azure Form Recognizer" to "Azure AI Document Intelligence")
+    - Original Name: Azure Cognitive Services Form Recognizer / Azure Form Recognizer
+    - Current Version: v4.0 (GA) as of 2024
+
+    **What It Does:**  
+    The service enables organizations to:
+
+    - Automate document processing at scale using industry-leading OCR (Optical Character Recognition)
+    - Extract structured data from forms, invoices, receipts, contracts, tax documents, and other business documents
+    - Build custom models trained on your specific document types without requiring deep machine learning expertise
+    - Classify documents automatically to route them to appropriate workflows
+    - Process both structured and unstructured documents including handwritten and printed text
+
+    **Technology:**  
+    Document Intelligence combines:
+
+    - Advanced OCR technology for text extraction
+    - Machine learning models for understanding document structure
+    - Pre-trained models for common document types (invoices, receipts, IDs, tax forms)
+    - Custom model training capabilities for organization-specific documents
+
+    **Use Cases:**  
+    Common scenarios include accounts payable automation, mortgage document processing, tax form extraction, identity verification, and robotic process automation (RPA) workflows.
+
+    [Azure AI Document Intelligence Studio](https://documentintelligence.ai.azure.com/studio):
+
+    <img src='images/2025-10-18-06-24-48.png' width=700>
+
+    **Features:**  
+
+    - **Document Analysis Models**
+
+        - **Read Model** — Extracts printed and handwritten text from documents with industry-leading OCR
+        - **Layout Model** — Extracts text, tables, selection marks, document structure, paragraphs, sections, and figures with markdown output support
+        - **General Document Model** — Extracts text, structure, and key-value pairs from documents (deprecated in newer versions)
+
+    - **Prebuilt Models for Financial Services & Legal**
+
+        - Invoice processing — Extracts customer and vendor details, line items, totals, and payment information
+        - Receipt processing — Extracts merchant details, transaction amounts, dates, and tax information
+        - Bank statement analysis — Extracts account information, transactions, and balance details
+        - Check processing — Extracts routing numbers, account numbers, check amounts, and payee information
+        - Contract analysis — Extracts agreement details, party information, and key clauses
+        - Credit card extraction — Extracts payment card information and details
+        - Pay stub processing — Extracts employee compensation details, deductions, and employer information
+
+    - **Prebuilt Models for US Tax Forms**
+
+        - Unified US Tax processing — Extracts data from any supported US tax form
+        - W-2 forms — Extracts taxable compensation details
+        - 1098 forms (and variations) — Extracts mortgage interest, tuition, and other 1098 form data
+        - 1099 forms (and variations) — Extracts income reporting details from various 1099 forms
+        - 1040 forms (and variations) — Extracts individual income tax return information
+
+    - **Prebuilt Models for US Mortgage Documents**
+
+        - Form 1003 (URLA) — Extracts loan application details
+        - Form 1004 (URAR) — Extracts property appraisal information
+        - Form 1005 — Extracts verification of employment details
+        - Form 1008 — Extracts underwriting and transmittal summary data
+        - Closing Disclosure — Extracts final mortgage loan terms and closing details
+
+    - **Prebuilt Models for Personal Identification**
+
+        - Identity document (ID) processing — Extracts information from passports, driver's licenses, and ID cards with support for endorsements and restrictions
+        - Health insurance card — Extracts insurance coverage details, policy numbers, group numbers, and Medicare/Medicaid information
+        - Marriage certificate — Extracts certified marriage information and party details
+        - Business card — Extracts contact information, company details, and communication data
+
+    - **Custom Models**
+
+        - **Custom Neural Model** — Extracts data from mixed-type documents (structured, semi-structured, and unstructured) using deep learning
+        - **Custom Template Model** — Extracts labeled fields from documents with consistent layouts
+        - **Custom Composed Model** — Combines multiple custom models to handle various document types in a single workflow
+        - **Custom Classification Model** — Identifies and classifies document types before extraction
+
+    - **Add-on Capabilities**
+
+        - High-resolution OCR — Enhanced extraction for high-resolution documents
+        - Formula extraction — Detects and extracts mathematical formulas
+        - Font property extraction — Identifies font styles and properties
+        - Barcode extraction — Detects and extracts barcode information
+        - Language detection — Identifies languages in multilingual documents
+        - Searchable PDF generation — Creates searchable PDFs from scanned documents
+        - Query fields — Extracts specific fields using natural language queries
+        - Key-value pair extraction — Identifies and extracts key-value relationships
+
+    - **Document Structure Analysis**
+
+        - Table extraction with row and cell confidence scores
+        - Paragraph detection and role identification
+        - Selection mark recognition (checkboxes and radio buttons)
+        - Section and subsection hierarchical analysis
+        - Figure detection and extraction
+        - Document page and region analysis
+
+    **References:**  
+
+    - [What is Azure AI Document Intelligence?](https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/overview?view=doc-intel-4.0.0)
+    - [Azure AI Document Intelligence Studio](https://documentintelligence.ai.azure.com/studio)
 
 4. **Generative AI Workloads:**
-   - Explore Azure OpenAI Service overview
-   - Review capabilities: text generation, code generation, image generation
-   - Identify use cases (e.g., content creation, code assistance, virtual assistants)
+
+- Explore Azure OpenAI Service overview
+- Review capabilities: text generation, code generation, image generation
+- Identify use cases (e.g., content creation, code assistance, virtual assistants)
 
 **Deliverables:**
 

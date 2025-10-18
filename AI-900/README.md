@@ -30,9 +30,7 @@ The AI-900 exam covers five main skill areas:
 | **4. NLP Workloads** | 15–20% | Text analysis, speech, translation, language understanding |
 | **5. Generative AI Workloads** | 20–25% | Azure OpenAI, Azure AI Foundry, model catalog |
 
-Reference
-
-- [Study guide for Exam AI-900: Microsoft Azure AI Fundamentals](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/ai-900)
+Reference: [Study guide for Exam AI-900: Microsoft Azure AI Fundamentals](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/ai-900)
 
 ---
 
