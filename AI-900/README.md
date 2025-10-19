@@ -51,7 +51,7 @@ Hands-on labs organized by exam domain:
 
 ---
 
-### Lab 2: Machine Learning Fundamentals
+### [Lab 2: Machine Learning Fundamentals](labs/lab02-machine-learning-fundamentals/Lab02_Machine-Learning-Fundamentals.md)
 
 **Location:** `labs/lab02-machine-learning-fundamentals/`  
 **Objectives:**
