@@ -29,10 +29,11 @@ Use it to reinforce concepts, review domain summaries, and quickly recall high-v
   - **Transparency:** AI should be understandable (explainable AI)
   - **Accountability:** People should be accountable for AI systems
 
-**Common Pitfalls**
+**Common Pitfalls**  
 
 - Confusing **computer vision** vs. **NLP** scenarios
 - Not understanding the difference between **classification** (categorize) vs. **object detection** (locate + identify)
+  - Classification assigns one label to the entire image (e.g., "this is a dog"), while object detection finds and labels multiple objects within the image with their specific locations using bounding boxes (e.g., "there's a dog here, a person there, and a car over there").
 - Missing the **six responsible AI principles** — these are heavily tested
 - Forgetting that **transparency** means making AI decisions understandable to users
 
