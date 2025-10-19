@@ -128,8 +128,6 @@ By the end of this lab, you will be able to:
 
     [Azure AI Language Studio](https://language.cognitive.azure.com/):  
 
-    <img src='images/2025-10-18-06-30-00.png' width=700>
-
     **Features:**
 
     - *Named Entity Recognition (NER)* — Identifies and categorizes named entities in text (people, organizations, locations, dates, quantities).
@@ -393,19 +391,54 @@ By the end of this lab, you will be able to:
     - [Introduction to Generative AI Concepts](https://learn.microsoft.com/en-us/training/modules/fundamentals-generative-ai/)
     - [Generative AI for Developers](https://learn.microsoft.com/en-us/azure/developer/ai/introduction-build-generative-ai-solutions)
 
-
-
-
 **Deliverables:**
 
-- Document at least 2 use cases for each workload type
+- Document at least 2 use cases for each workload type using the table below:
+
+| Workload Type | Use Case | Description | Industry |
+|---------------|----------|-------------|----------|
+| **Computer Vision** | Retail Shelf Monitoring | Automatically detect out-of-stock items and planogram compliance using cameras and object detection | Retail |
+| **Computer Vision** | Manufacturing Quality Inspection | Identify product defects on assembly lines by analyzing images for anomalies and quality issues | Manufacturing |
+| **Computer Vision** | Security and Surveillance | Monitor premises for unauthorized access, detect suspicious behavior, and identify individuals using facial recognition | Security |
+| **Computer Vision** | Medical Imaging Analysis | Assist radiologists in detecting tumors, fractures, and abnormalities in X-rays, CT scans, and MRIs | Healthcare |
+| **Computer Vision** | Accessibility Tools | Enable visually impaired users to navigate environments through scene description and object identification | Accessibility |
+| **Computer Vision** | Autonomous Vehicles | Enable self-driving cars to detect pedestrians, traffic signs, lanes, and obstacles in real-time | Transportation |
+| **NLP** | Customer Feedback Analysis | Analyze customer reviews, surveys, and social media posts to extract sentiment and identify trending issues | Customer Service |
+| **NLP** | Intelligent Chatbots | Build conversational AI assistants that understand user intent and provide contextual responses | Customer Service |
+| **NLP** | Email Routing and Categorization | Automatically classify and route support emails to appropriate departments based on content analysis | IT Operations |
+| **NLP** | Call Center Analytics | Transcribe and analyze customer service calls to identify pain points, agent performance, and compliance issues | Customer Service |
+| **NLP** | Content Moderation | Detect and filter harmful, offensive, or inappropriate content in user-generated posts and comments | Social Media |
+| **NLP** | Legal Document Review | Extract key clauses, entities, and obligations from contracts and legal documents to accelerate review processes | Legal |
+| **Document Processing** | Invoice Automation | Extract vendor details, line items, totals, and payment information from invoices to automate accounts payable workflows | Finance |
+| **Document Processing** | Receipt Scanning for Expense Reports | Automatically capture merchant names, dates, amounts, and tax information from receipts for expense reimbursement | Finance |
+| **Document Processing** | Mortgage Document Processing | Extract applicant information, property details, and loan terms from mortgage applications and supporting documents | Financial Services |
+| **Document Processing** | Identity Verification | Extract information from driver's licenses, passports, and ID cards to verify customer identities during onboarding | Banking/Insurance |
+| **Document Processing** | Medical Records Digitization | Convert handwritten and printed medical records into structured, searchable digital formats | Healthcare |
+| **Document Processing** | Tax Form Processing | Extract taxpayer information and financial data from W-2s, 1099s, and other tax documents for automated filing | Accounting |
+| **Generative AI** | Content Creation for Marketing | Generate blog posts, product descriptions, social media content, and advertising copy at scale | Marketing |
+| **Generative AI** | Code Generation and Assistance | Help developers write code faster by generating functions, classes, and complete programs from natural language descriptions | Software Development |
+| **Generative AI** | Customer Service Virtual Assistants | Build intelligent chatbots that can handle complex customer inquiries with natural, human-like conversations | Customer Service |
+| **Generative AI** | Document Summarization | Automatically summarize long reports, research papers, and legal documents into concise executive summaries | Business Operations |
+| **Generative AI** | Image Generation for Design | Create original images, product mockups, and marketing materials from text descriptions | Design/Creative |
+| **Generative AI** | Language Translation | Translate content between languages with contextual understanding and cultural sensitivity | Localization |
+| **Generative AI** | Educational Tutoring | Provide personalized learning assistance by answering student questions and explaining complex concepts | Education |
+| **Generative AI** | Knowledge Base Q&A | Answer employee or customer questions by querying organizational knowledge bases and documentation | Enterprise IT |
+
 - Create a comparison table showing differences between workload types
 
-**References:**  
+| Criteria | Computer Vision | NLP | Document Processing | Generative AI |
+|----------|----------------|-----|---------------------|---------------|
+| **Primary Input** | Images, videos | Text, speech | Documents (PDFs, scanned images, forms) | Text prompts, images (for multimodal) |
+| **Primary Output** | Labels, objects, text (OCR), insights | Entities, sentiment, intent, summaries | Structured data (key-value pairs, tables) | Original content (text, code, images) |
+| **Key Technology** | Convolutional Neural Networks (CNNs), object detection | Transformer models (BERT, GPT), NLU | OCR + Machine Learning, layout analysis | Large Language Models (LLMs), diffusion models |
+| **Common Use Cases** | Object detection, facial recognition, OCR | Sentiment analysis, chatbots, translation | Invoice processing, form extraction, ID verification | Content creation, code generation, virtual assistants |
+| **Azure Services** | Azure AI Vision, Custom Vision | Azure AI Language, Azure OpenAI (NLU) | Azure AI Document Intelligence | Azure OpenAI Service |
+| **Complexity** | Medium-High (requires labeled image data) | Medium (requires training data for custom models) | Medium (pre-built models available) | Variable (pre-trained models to fine-tuning) |
+| **Training Requirement** | Yes (for custom models) | Yes (for custom models) | Minimal (many pre-built models) | Minimal (use pre-trained models) |
+| **Explainability** | Moderate (can visualize detections) | Moderate (can explain extracted entities) | High (shows extracted fields and confidence) | Low-Moderate (reasoning traces available in some models) |
+| **Responsible AI Concerns** | Bias in facial recognition, privacy | Bias in language models, fairness | Data privacy (PII in documents) | Content safety, misinformation, bias |
+| **Typical Latency** | Real-time to seconds | Real-time to seconds | Seconds to minutes | Seconds (varies by model size) |
 
-- [Microsoft Learn Module: Introduction to AI concepts](https://learn.microsoft.com/en-us/training/modules/get-started-ai-fundamentals/)
-- [AI Foundry](https://ai.azure.com/)
-  
 ---
 
 ### Exercise 2: Understand Responsible AI Principles
@@ -513,7 +546,7 @@ Test your understanding:
 
 - [Microsoft Responsible AI Principles](https://learn.microsoft.com/en-us/azure/machine-learning/concept-responsible-ai)
 - [Azure AI Services Overview](https://learn.microsoft.com/en-us/azure/ai-services/)
-- [Responsible AI Transparency Note Examples](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/transparency-note)
+- [Responsible AI Transparency Note Examples](tbd)
 
 ---
 
