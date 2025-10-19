@@ -159,7 +159,7 @@ By the end of this lab, you will be able to:
 
     **Description:**
 
-    Azure AI Document Intelligence (formerly known as Azure Form Recognizer) is a cloud-based Azure AI service that uses machine learning to automatically extract and analyze text, key-value pairs, tables, and structured data from documents.
+    [Azure AI Document Intelligence](https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/?view=doc-intel-4.0.0&branch=release-build-cogserv-forms-recognizer) (formerly known as Azure Form Recognizer) is a cloud-based Azure AI service that uses machine learning to automatically extract and analyze text, key-value pairs, tables, and structured data from documents.
 
     **Key Information:**  
 
@@ -266,9 +266,135 @@ By the end of this lab, you will be able to:
 
 4. **Generative AI Workloads:**
 
-- Explore Azure OpenAI Service overview
-- Review capabilities: text generation, code generation, image generation
-- Identify use cases (e.g., content creation, code assistance, virtual assistants)
+    - Explore Azure OpenAI Service overview
+    - Review capabilities: text generation, code generation, image generation
+    - Identify use cases (e.g., content creation, code assistance, virtual assistants)
+
+    **Description:**
+
+    [Azure OpenAI Service](https://learn.microsoft.com/en-us/azure/ai-services/openai/overview) is a cloud-based service that provides REST API access to OpenAI's powerful generative AI models, enabling developers to build intelligent applications that can create original content, understand and generate natural language, generate code, and create images from text prompts.
+
+    **Key Information:**
+
+    - Service Type: Azure AI Services (partnership with OpenAI)
+    - Current Models: GPT-5 series, GPT-4.1, O3, O3-mini, O1, O1-mini, GPT-4o, GPT-4o mini, GPT-4 Turbo with Vision, GPT-3.5-Turbo, DALL-E 3, DALL-E 2, Embeddings series
+    - API Access: REST API, Python, C#, JavaScript, Java, Go SDKs
+    - Part of Azure AI Services unified platform
+
+    **What It Does:**
+
+    The service enables organizations to:
+
+    - Generate human-like text for content creation, summarization, and writing assistance
+    - Build conversational AI applications (chatbots, virtual assistants) with natural dialogue capabilities
+    - Transform natural language into code or convert between programming languages
+    - Create images and artwork from text descriptions using DALL-E models
+    - Analyze and understand images with multimodal vision capabilities (GPT-4 Turbo with Vision)
+    - Perform semantic search, text classification, entity extraction, and sentiment analysis
+    - Translate content between languages with contextual understanding
+    - Generate embeddings for similarity search and recommendation systems
+
+    **Technology:**
+
+    Azure OpenAI Service combines:
+
+    - Large Language Models (LLMs) trained on massive datasets from the internet, books, and other sources
+    - Generative Pre-trained Transformers (GPT) using deep neural network architectures with billions of parameters
+    - Multimodal models that can process and generate both text and images
+    - Fine-tuning capabilities to customize models for domain-specific tasks
+    - Enterprise-grade security features including content filtering, private networking, and regional availability
+    - Responsible AI safeguards with content moderation to detect and filter harmful content
+
+    **Use Cases:**
+
+    Common scenarios include content creation for marketing and sales, customer service chatbots, code generation and assistance for developers, document summarization and analysis, language translation, creative writing assistance, image generation for design and advertising, educational tutoring systems, and knowledge base question-answering.
+
+    [Azure OpenAI Studio](https://oai.azure.com/):  
+
+    **Key Capabilities:**
+
+    - **Text Generation (Chat Completions)**
+
+        - Natural language text generation for any purpose (articles, emails, stories, reports)
+        - Conversational AI with context-aware multi-turn dialogue
+        - Question answering from knowledge bases and documents
+        - Content summarization (extractive and abstractive)
+        - Text classification and categorization
+        - Sentiment analysis and opinion mining
+        - Language translation with contextual understanding
+        - Text rewriting and paraphrasing
+        - Creative writing assistance (poetry, stories, scripts)
+
+    - **Code Generation and Assistance**
+
+        - Code generation from natural language descriptions
+        - Code completion and suggestions
+        - Converting code between programming languages
+        - Generating documentation and comments for existing code
+        - Debugging assistance and error explanation
+        - Code review and optimization suggestions
+        - Natural language to SQL query generation
+        - API and function generation
+
+    - **Image Generation (DALL-E)**
+
+        - Text-to-image generation from natural language prompts
+        - Creative artwork and design creation
+        - Product visualization and mockups
+        - Marketing and advertising imagery
+        - Concept art for games and entertainment
+        - Educational illustrations and diagrams
+        - Style transfer and artistic variations
+        - Content moderation filtering for generated images
+
+    - **Vision Capabilities (GPT-4 Turbo with Vision, GPT-4o)**
+
+        - Image understanding and analysis
+        - Image captioning and description
+        - Visual question answering (ask questions about images)
+        - Object and scene detection in images
+        - OCR and text extraction from images
+        - Diagram and chart interpretation
+        - Multimodal reasoning (combining text and image inputs)
+
+    - **Embeddings**
+
+        - Convert text into vector representations for semantic search
+        - Document similarity and clustering
+        - Recommendation systems
+        - Anomaly detection in text data
+        - Information retrieval and ranking
+        - Topic modeling and categorization
+
+    - **Advanced Reasoning (O-series Models)**
+
+        - Complex problem-solving with chain-of-thought reasoning
+        - Mathematical and scientific reasoning
+        - Multi-step logical inference
+        - Code reasoning and algorithm design
+        - Research and deep analysis tasks
+
+    **Enterprise Features:**
+
+    - Content filtering and moderation (configurable safety filters)
+    - Private networking with Azure Virtual Networks
+    - Customer-managed encryption keys
+    - Regional availability and data residency
+    - Azure Active Directory authentication
+    - Role-based access control (RBAC)
+    - Audit logging and monitoring
+    - SLA-backed reliability and availability
+    - Quota and rate limiting management
+
+    **References:**  
+
+    - [What is Azure OpenAI Service?](https://learn.microsoft.com/en-us/azure/ai-services/openai/overview)
+    - [Azure OpenAI Service Models](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models)
+    - [Introduction to Generative AI Concepts](https://learn.microsoft.com/en-us/training/modules/fundamentals-generative-ai/)
+    - [Generative AI for Developers](https://learn.microsoft.com/en-us/azure/developer/ai/introduction-build-generative-ai-solutions)
+
+
+
 
 **Deliverables:**
 
