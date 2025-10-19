@@ -56,6 +56,7 @@
       * [Force user licensing processing to resolve errors (`Invoke-MgUserLicense`)](#force-user-licensing-processing-to-resolve-errors-invoke-mguserlicense)
   * [Exam Insights](#exam-insights-2)
 * [🔹 Exercise 4 – Invite and Manage a Guest User](#-exercise-4--invite-and-manage-a-guest-user)
+  * [Using PowerShell to invite a guest user (`New-MgInvitation`)](#using-powershell-to-invite-a-guest-user-new-mginvitation)
 * [🔹 Exercise 5 – Enable and Validate SSPR](#-exercise-5--enable-and-validate-sspr)
 * [🔹 Exercise 6 – Explore License Tier Differences](#-exercise-6--explore-license-tier-differences)
 * [🧩 Validation Checklist](#-validation-checklist)
@@ -624,22 +625,53 @@ References:
 
 **Goal:** Enable secure collaboration.
 
-1. Invite an external user:
+### Using PowerShell to invite a guest user (`New-MgInvitation`)
 
-   ```bash
-   az ad user invite \
-     --user-principal-name externaluser@gmail.com \
-     --invite-redirect-url "https://portal.azure.com"
-   ```
+```pwsh
+New-MgInvitation `          
+ -InvitedUserDisplayName 'Henry Ross' `
+ -InvitedUserEmailAddress 'henry@contoso.com' `
+ -InviteRedirectURL 'https://myapplications.microsoft.com' `
+ -SendInvitationMessage:$true
+```
 
-2. Add the guest to `Lab-Users`.
-3. Verify with:
+<img src='images/2025-10-19-04-48-35.png' width=700>
 
-   ```bash
-   az ad user list --filter "userType eq 'Guest'"
-   ```
+You can also use `New-EntraInvitation`.
+
+To verify:
+
+```pwsh
+Get-EntraUser -Filter "Mail eq 'henry@contoso.com'" | select *
+```
+
+<img src='images/2025-10-19-04-55-47.png' width=600>
+
+The commands `Get-AzADUser` and `Get-MgUser` don't return sufficient details to understand guest invitation state.
+
+The `az ad user invite` command doesn't exist, so you would need to use `az rest` to call the Graph API directly.
+
+```bash
+az rest --method POST \
+  --uri 'https://graph.microsoft.com/v1.0/invitations' \
+  --headers 'Content-Type=application/json' \
+  --body '{
+    "invitedUserEmailAddress": "henry@contoso.com",
+    "invitedUserDisplayName": "Henry Ross",
+    "inviteRedirectUrl": "https://myapplications.microsoft.com",
+    "sendInvitationMessage": true
+  }'
+```
+
+Licensing consideration for guests: workforce tenants allow for 50,000 Monthly Active Users (MAU) for free. Beyond that, you need to assign licenses.
 
 🔍 **Exam Tip:** Guests need explicit RBAC assignments to access resources.
+
+References:  
+
+* [Introduction to Microsoft Entra External ID](https://learn.microsoft.com/en-us/entra/external-id/external-identities-overview)
+* [Workforce tenants: Invite a guest user using PowerShell](https://learn.microsoft.com/en-us/entra/external-id/b2b-quickstart-invite-powershell)
+* [External ID Pricing](https://learn.microsoft.com/en-us/entra/external-id/external-identities-pricing#external-id-pricing)
 
 ---
 
