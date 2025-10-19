@@ -37,7 +37,7 @@ By the end of this lab, you will be able to:
 
     **Description:**
 
-    Azure AI Vision is a cloud-based Azure AI service that provides advanced algorithms for processing images and extracting information from visual content. It enables developers to build intelligent applications that can understand and interpret the visual world through computer vision capabilities.
+    [Azure AI Vision](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/) is a cloud-based Azure AI service that provides advanced algorithms for processing images and extracting information from visual content. It enables developers to build intelligent applications that can understand and interpret the visual world through computer vision capabilities.
 
     **Key Information:**
 
@@ -75,18 +75,12 @@ By the end of this lab, you will be able to:
 
     <img src='images/2025-10-17-05-21-06.png' width=700>
 
-    **Features:**
-
-    - **Image Analysis**
-
-        - Object detection and classification
-        - Tag generation for images
-        - Image captioning and descriptions
-        - Scene and activity detection
-
     **References:**  
 
-    - [What is Image Analysis?](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview-image-analysis?tabs=4-0)
+    - [What is Azure AI Vision?](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview)
+    - [Image Analysis Overview](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview-image-analysis?tabs=4-0)
+    - [Face Overview](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview-identity)
+    - [OCR Overview](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview-ocr)
 
 2. **Natural Language Processing (NLP) Workloads:**
 
@@ -96,7 +90,7 @@ By the end of this lab, you will be able to:
 
     **Description:**
 
-    Azure AI Language is a cloud-based Azure AI service that provides Natural Language Processing (NLP) capabilities for understanding and analyzing text. It enables developers to build intelligent applications that can extract meaning, identify entities, analyze sentiment, and understand the intent behind human language.
+    [Azure AI Language](https://learn.microsoft.com/en-us/azure/ai-services/language-service/) is a cloud-based Azure AI service that provides Natural Language Processing (NLP) capabilities for understanding and analyzing text. It enables developers to build intelligent applications that can extract meaning, identify entities, analyze sentiment, and understand the intent behind human language.
 
     **Key Information:**
 
