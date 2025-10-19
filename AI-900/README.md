@@ -38,7 +38,7 @@ Reference: [Study guide for Exam AI-900: Microsoft Azure AI Fundamentals](https:
 
 Hands-on labs organized by exam domain:
 
-### Lab 1: AI Workloads and Responsible AI
+### [Lab 1: AI Workloads and Responsible AI](labs/lab01-ai-workloads-responsible-ai/Lab01_AI-Workloads-Responsible-AI.md)
 
 **Location:** `labs/lab01-ai-workloads-responsible-ai/`  
 **Objectives:**
