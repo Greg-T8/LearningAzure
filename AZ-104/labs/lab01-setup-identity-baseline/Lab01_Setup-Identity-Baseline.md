@@ -49,7 +49,11 @@
       * [Using `Add-AzADGroupMember`](#using-add-azadgroupmember)
       * [Using `Add-EntraGroupMember`](#using-add-entragroupmember)
       * [Using `New-MgGroupMember`](#using-new-mggroupmember)
-    * [Notes on Group-Based Licensing](#notes-on-group-based-licensing)
+    * [Group-based licensing features](#group-based-licensing-features)
+    * [Limitations with group-based licensing](#limitations-with-group-based-licensing)
+      * [Deleting a licensed group](#deleting-a-licensed-group)
+    * [Issues with group-based licensing](#issues-with-group-based-licensing)
+      * [Force user licensing processing to resolve errors (`Invoke-MgUserLicense`)](#force-user-licensing-processing-to-resolve-errors-invoke-mguserlicense)
   * [Exam Insights](#exam-insights-2)
 * [🔹 Exercise 4 – Invite and Manage a Guest User](#-exercise-4--invite-and-manage-a-guest-user)
 * [🔹 Exercise 5 – Enable and Validate SSPR](#-exercise-5--enable-and-validate-sspr)
@@ -528,9 +532,83 @@ $userId = (Get-MgUSer -Filter "userPrincipalName eq 'user1@637djb.onmicrosoft.co
 New-MgGroupMember -GroupId $groupID -DirectoryObjectId $userId
 ```
 
-#### Notes on Group-Based Licensing
+#### Group-based licensing features
 
-(pick up here next)
+Features:
+
+* **Automatic license assignment**: When a user is added to a group with assigned licenses, the appropriate licenses are automatically assigned to the user.
+
+* **Automatic license removal**: When a user is removed from a group with assigned licenses, the licenses are automatically removed from the user.
+
+* **Service plan control**: You can disable specific service plans within a license. For example, you can assign an Office 365 Enterprise E3 license but disable the SharePoint Online service.
+
+* **Multiple license support**: A user can be a member of multiple groups, each with different licenses assigned. The user will receive all the licenses from all groups they belong to.
+
+* **License conflict resolution**: If a user is assigned conflicting licenses through multiple groups, you can see and resolve these conflicts in the Azure portal.
+
+* **Error handling and monitoring**: If license assignment fails (for example, due to insufficient licenses), the system logs the error and allows you to review and resolve issues through the Azure portal.
+
+* **Inherited licensing**: Licenses assigned to a group are inherited by all members of that group, simplifying license management for large organizations.
+
+* **Azure portal integration**: All group-based licensing operations can be managed through the Azure portal, providing a centralized interface for license administration.
+
+* **PowerShell and Graph API support**: You can automate group-based licensing operations using PowerShell cmdlets or the Microsoft Graph API.
+
+* **Audit logging**: All license assignment and removal operations are logged in Azure AD audit logs, providing visibility into licensing changes.
+
+* **License usage reporting**: You can view which licenses are assigned through groups and track license consumption across your organization.
+
+#### Limitations with group-based licensing
+
+* Group-based licensing doesn’t support nested groups. When a license is applied to a nested group, only the direct, first-level user members receive the licenses.
+* This feature works only with security groups and Microsoft 365 groups where `securityEnabled=TRUE`.
+* Assigning or modifying licenses for large groups (for example, 100,000 users) can affect performance. The volume of changes from Microsoft Entra automation may slow down directory synchronization between Microsoft Entra ID and on-premises systems.
+* If you use dynamic membership groups, ensure that the user is a confirmed member of the group before assigning licenses. If the user isn’t included, check the processing status of the dynamic group’s membership rule.
+* Under heavy load, processing license or membership changes may take longer. If updates for a group with 60,000 users or fewer take more than 24 hours, open a support ticket for investigation.
+
+##### Deleting a licensed group
+
+When deleting a licensed group, all assigned licenses must be removed first. Removing licenses from all users can take time.
+
+License removal may fail if a user has a dependent license or a proxy address conflict. If a user holds a dependent license tied to one being removed during group deletion, all licenses assigned by that group enter an error state. These licenses can’t be removed until the dependency issue is resolved.
+
+After resolving the dependency, reprocess the user’s licensing using Graph for PowerShell.
+
+#### Issues with group-based licensing
+
+Common issues with group licensing:  
+
+* An insufficient number of licenses
+* Conflict between two service plans that can't be assigned at the same time
+* Missing dependent service plans
+* Usage location not specified
+* Duplicate proxy addresses
+
+Resolving issues with licensing:
+
+1. Use the Audit Logs to monitor group licensing activity
+2. Monitor status and update license features in the M365 Admin Center
+
+    <img src='images/2025-10-19-04-16-51.png' width=400>
+
+##### Force user licensing processing to resolve errors (`Invoke-MgUserLicense`)
+
+```pwsh
+Invoke-MgLicenseUser -UserId user1@637djb.onmicrosoft.com
+```
+
+In the Microsoft 365 Admin Center, you can reprocess user licenses per here:
+
+> For example, after you resolve a dependency violation error for an affected user, you need to trigger the reprocessing of the user. To reprocess a user, navigate back to the M365 Admin Portal > Billing > Licenses. Select the license and navigate to the group where one or more affected users show in error, select the user(s) and then select the Reprocess button on the toolbar.
+
+However, I was unable to locate this feauture in the portal during testing, so using `Invoke-MgLicenseUser` is the recommended approach.
+
+References:  
+
+* [Troubleshoot group licensing features](https://learn.microsoft.com/en-us/entra/fundamentals/concept-group-based-licensing#features)
+* [Resolve group license assignment problems](https://learn.microsoft.com/en-us/entra/fundamentals/licensing-groups-resolve-problems)
+* [Additional scenarios for group-based licensing](https://learn.microsoft.com/en-us/entra/identity/users/licensing-group-advanced#multiple-groups-and-multiple-licenses)
+* [Invoke-MgLicenseUser](https://learn.microsoft.com/en-us/powershell/module/microsoft.graph.users.actions/invoke-mglicenseuser?view=graph-powershell-1.0)
 
 ### Exam Insights
 
