@@ -219,7 +219,7 @@ By the end of this lab, you will be able to:
 
 **Objective:** Apply responsible AI principles to real-world scenarios.
 
-**Case Study 1: Healthcare Diagnosis AI**
+**Case Study 1: Healthcare Diagnosis AI**  
 
 A hospital wants to deploy an AI system to assist doctors in diagnosing diseases from medical images.
 

@@ -30,7 +30,19 @@ By the end of this lab, you will be able to:
 
 **Objective:** Learn to identify different types of machine learning problems.
 
-**1. Regression (Predict a Numeric Value)**
+Types of machine learning models:
+
+<img src='images/2025-10-20-05-07-55.png' width=700>
+
+**Overview of Machine Learning Types:**
+
+- **Supervised Learning:** The model learns from labeled data where both input features and correct outputs (labels) are provided. The algorithm learns patterns to map inputs to outputs. Used for regression and classification tasks.
+
+- **Unsupervised Learning:** The model finds patterns and structure in unlabeled data without predefined outputs. The algorithm discovers hidden relationships on its own. Used for clustering and dimensionality reduction.
+
+- **Reinforcement Learning:** The model learns through trial and error by interacting with an environment. It receives rewards or penalties for actions and learns to maximize cumulative rewards. Used in robotics, game AI, and autonomous systems.
+
+**1. Regression (Predict a Numeric Value)**  
 
 - **Goal:** Predict a continuous numeric value
 - **Examples:**
@@ -39,7 +51,7 @@ By the end of this lab, you will be able to:
   - Estimate patient recovery time based on treatment and demographics
 - **Output:** A number (e.g., $250,000, 15 days, 42.5 units)
 
-**2. Classification (Predict a Category)**
+**2. Classification (Predict a Category)**  
 
 - **Goal:** Predict which category or class something belongs to
 - **Examples:**
@@ -47,15 +59,31 @@ By the end of this lab, you will be able to:
   - Which animal is in this image: cat, dog, or bird? (multi-class classification)
   - Will a customer churn? (yes/no)
 - **Output:** A category or label (e.g., "spam", "cat", "yes")
-
-**3. Clustering (Group Similar Items)**
-
+  
 - **Goal:** Find groups of similar items without predefined labels (unsupervised learning)
 - **Examples:**
   - Customer segmentation based on purchase behavior
   - Group similar articles or documents
   - Anomaly detection (items that don't fit any cluster)
 - **Output:** Cluster assignments (e.g., Cluster 1, Cluster 2, Cluster 3)
+
+**🔍 Key Difference: Clustering vs. Multiclass Classification**
+
+While both clustering and multiclass classification group items into categories, they differ fundamentally:
+
+- **Multiclass Classification (Supervised):**
+  - You already know the classes/categories beforehand (e.g., cat, dog, bird)
+  - Training data includes labeled examples showing which class each item belongs to
+  - The algorithm learns the relationship between features and known labels
+  - Used to predict which predefined class a new item belongs to
+
+- **Clustering (Unsupervised):**
+  - No predefined classes or labels exist
+  - The algorithm discovers natural groupings based purely on similarity of features
+  - Groups are formed without prior knowledge of what the groups should be
+  - Often used to discover what categories exist before building a classification model
+
+**Example:** If you have photos labeled as "cat," "dog," or "bird," you'd use **classification**. If you have unlabeled photos and want to discover natural groupings (without knowing what those groups are), you'd use **clustering**.
 
 **Activity:**
 
@@ -66,6 +94,17 @@ For each scenario below, identify if it's regression, classification, or cluster
 3. Determine if a transaction is fraudulent
 4. Estimate delivery time for a package
 5. Segment website visitors into personas
+
+**📚 Related Documentation:**
+
+- [Introduction to Machine Learning Concepts](https://learn.microsoft.com/en-us/training/modules/fundamentals-machine-learning/) - Main learning module covering all ML techniques
+- [Types of Machine Learning](https://learn.microsoft.com/en-us/training/modules/fundamentals-machine-learning/3-types-of-machine-learning) - Supervised vs. unsupervised learning
+- [Regression](https://learn.microsoft.com/en-us/training/modules/fundamentals-machine-learning/4-regression) - Predicting numeric values
+- [Binary Classification](https://learn.microsoft.com/en-us/training/modules/fundamentals-machine-learning/5-binary-classification) - Two-class classification problems
+- [Multiclass Classification](https://learn.microsoft.com/en-us/training/modules/fundamentals-machine-learning/6-multiclass-classification) - Multiple category predictions
+- [Clustering](https://learn.microsoft.com/en-us/training/modules/fundamentals-machine-learning/7-clustering) - Grouping similar items
+- [AI-900 Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/ai-900) - Official exam study guide
+- [Machine Learning Algorithm Cheat Sheet](https://learn.microsoft.com/en-us/azure/machine-learning/algorithm-cheat-sheet) - Supervised vs. unsupervised learning explained
 
 ---
 
