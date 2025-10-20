@@ -230,6 +230,10 @@ A hospital wants to deploy an AI system to assist doctors in diagnosing diseases
 3. How can transparency be achieved in this context?
 4. Who should be accountable if the AI makes an incorrect diagnosis?
 
+<img src='images/2025-10-20-12-07-37.png' width=600>
+
+Source [@Mayhem4Markets](https://x.com/Mayhem4Markets/status/1980001528464175463)
+
 **Answers:**
 
 1. **Most Critical Principles:**
