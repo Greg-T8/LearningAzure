@@ -58,6 +58,9 @@
 * [🔹 Exercise 4 – Invite and Manage a Guest User](#-exercise-4--invite-and-manage-a-guest-user)
   * [Using PowerShell to invite a guest user (`New-MgInvitation`)](#using-powershell-to-invite-a-guest-user-new-mginvitation)
 * [🔹 Exercise 5 – Enable and Validate SSPR](#-exercise-5--enable-and-validate-sspr)
+  * [SSPR Authentication Methods](#sspr-authentication-methods)
+  * [Important SSPR Configuration Notes](#important-sspr-configuration-notes)
+  * [SSPR Registration](#sspr-registration)
 * [🔹 Exercise 6 – Explore License Tier Differences](#-exercise-6--explore-license-tier-differences)
 * [🧩 Validation Checklist](#-validation-checklist)
 * [🧭 Reflection \& Readiness](#-reflection--readiness)
@@ -684,6 +687,77 @@ References:
 3. Configure **authentication methods** (Email + Authenticator).
 4. Test with a user from `Lab-Admins`.
 5. Review reset events under **Audit Logs → Password reset activity**.
+
+**Prerequisites:**
+
+1. Entra ID P1 license
+2. Authentication Administrator role to configure
+
+### SSPR Authentication Methods
+
+The following authentication methods are available for Self-Service Password Reset (SSPR):
+
+| Method | Description | Display Name in Portal | Supported for SSPR | Notes |
+|--------|-------------|----------------------|-------------------|-------|
+| **Microsoft Authenticator** | Mobile app notification or code | Mobile app notification / Mobile app code | ✅ Yes | Users can approve push notifications or enter TOTP codes. Requires at least one additional method when configured. |
+| **Software OATH token** | Third-party authenticator apps (e.g., Google Authenticator) | Mobile app code | ✅ Yes | Generates time-based one-time passcodes (TOTP). |
+| **Hardware OATH token** | Physical hardware tokens | Hardware OATH token | ✅ Yes | Physical devices that generate TOTP codes. Must be imported into Entra ID. |
+| **Email** | Email sent to alternate address | Email | ✅ Yes | User must have alternate email address registered (not their work email). |
+| **Mobile phone (SMS)** | Text message with verification code | Mobile phone | ✅ Yes | SMS sent to user's mobile number. |
+| **Mobile phone (Voice)** | Voice call to mobile number | Mobile phone | ✅ Yes | Automated voice call with verification code. |
+| **Office phone** | Voice call to office number | Office phone | ✅ Yes (Paid only) | Only available for tenants with paid subscriptions (not Free tier). |
+| **Security questions** | Predefined or custom security questions | Security questions | ✅ Yes | **Not recommended** due to weak security (answers are guessable). Admins cannot use this method. |
+| **Passkey (FIDO2)** | Passwordless FIDO2 security key | Passkey (FIDO2) | ❌ No | Only for authentication, not password reset. |
+| **Windows Hello for Business** | Biometric or PIN on Windows devices | Windows Hello for Business | ❌ No | Only for authentication, not password reset. |
+| **Certificate-based authentication** | X.509 certificates | Certificate-based authentication | ❌ No | Only for authentication, not password reset. |
+| **Temporary Access Pass** | Time-limited passcode | Temporary Access Pass | ❌ No | Used for initial device registration, not SSPR. |
+
+### Important SSPR Configuration Notes
+
+**Number of Methods Required:**
+
+* You can configure SSPR to require **1 or 2** authentication methods.
+* Users must register **at least** the minimum number of required methods.
+* **Best practice:** Require 2 methods and encourage users to register multiple options for redundancy.
+
+**Administrator Policy Differences:**
+
+* **Admins** assigned Azure administrator roles are **always required to use 2 methods** for SSPR (two-gate policy).
+* **Admins cannot use** security questions or office phone (in Free/Trial tenants).
+* Common admin methods: Mobile phone, Email, Authenticator app, Software OATH token.
+
+**Microsoft Authenticator Considerations:**
+
+* When **1 method** is required: Only **verification code** is available (not push notification).
+* When **2 methods** are required: Users can use **notification OR code** in addition to other methods.
+
+| Required Methods | Authenticator Features Available |
+|-----------------|----------------------------------|
+| 1 method | Code only |
+| 2 methods | Code **or** Notification |
+
+**Security Questions:**
+
+* **Not recommended** for security reasons (answers are guessable, phishable, or discoverable via OSINT).
+* Should only be used as a backup method alongside stronger authentication.
+* Admins **cannot** use security questions for SSPR.
+
+**Office Phone:**
+
+* Only available in **paid subscriptions** (not available in Free or Trial tenants).
+
+### SSPR Registration
+
+Users can register for SSPR at:
+
+* **<https://aka.ms/ssprsetup>** (dedicated SSPR registration)
+* **<https://aka.ms/setupsecurityinfo>** (combined security info registration - recommended)
+
+**References:**
+
+* [Enable self-service password reset](https://learn.microsoft.com/en-us/entra/identity/authentication/tutorial-enable-sspr)
+* [How it works: Microsoft Entra self-service password reset](https://learn.microsoft.com/en-us/entra/identity/authentication/concept-sspr-howitworks)
+* [Authentication methods in Microsoft Entra ID](https://learn.microsoft.com/en-us/entra/identity/authentication/concept-authentication-methods)
 
 ---
 
