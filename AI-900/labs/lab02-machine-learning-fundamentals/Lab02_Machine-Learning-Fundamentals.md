@@ -89,11 +89,20 @@ While both clustering and multiclass classification group items into categories,
 
 For each scenario below, identify if it's regression, classification, or clustering:
 
-1. Predict tomorrow's temperature
-2. Group customers by purchasing patterns
-3. Determine if a transaction is fraudulent
-4. Estimate delivery time for a package
-5. Segment website visitors into personas
+1. Predict tomorrow's temperature - **regression** ✅
+   - *Correct! Temperature is a continuous numeric value (e.g., 72.5°F). Regression predicts numbers.*
+
+2. Group customers by purchasing patterns - **clustering** ✅
+   - *Correct! This is unsupervised learning discovering natural groupings without predefined categories.*
+
+3. Determine if a transaction is fraudulent - **classification** ✅
+   - *Correct! Binary classification with two categories: fraudulent or not fraudulent (yes/no).*
+
+4. Estimate delivery time for a package - **regression** ✅
+   - *Correct! Delivery time is a numeric value (e.g., 2.5 days, 48 hours). Regression predicts continuous values.*
+
+5. Segment website visitors into personas - **clustering** ✅
+   - *Correct! Unsupervised learning discovering visitor segments based on behavior without predefined personas.*
 
 **📚 Related Documentation:**
 
