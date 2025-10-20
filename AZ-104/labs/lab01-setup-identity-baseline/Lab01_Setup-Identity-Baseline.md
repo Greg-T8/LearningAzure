@@ -62,9 +62,10 @@
   * [Important SSPR Configuration Notes](#important-sspr-configuration-notes)
   * [SSPR Registration](#sspr-registration)
 * [🔹 Exercise 6 – Explore License Tier Differences](#-exercise-6--explore-license-tier-differences)
-* [🧩 Validation Checklist](#-validation-checklist)
+  * [Microsoft Entra ID License Feature Comparison](#microsoft-entra-id-license-feature-comparison)
+  * [Key Differences for AZ-104 Exam](#key-differences-for-az-104-exam)
+  * [Common Exam Scenarios](#common-exam-scenarios)
 * [🧭 Reflection \& Readiness](#-reflection--readiness)
-* [🧹 Cleanup](#-cleanup)
 * [📚 References](#-references)
 
 ## 🎯 Lab Objective
@@ -765,35 +766,107 @@ Users can register for SSPR at:
 
 **Goal:** Compare capabilities across Free, P1, P2, and Governance tiers.
 
-Create the following groups and assign appropriate licenses:
+### Microsoft Entra ID License Feature Comparison
 
-| Group     | License             | Features to Test                            |
-| --------- | ------------------- | ------------------------------------------- |
-| Tier-Free | None                | Basic SSPR (cloud users only)               |
-| Tier-P1   | Entra ID Premium P1 | Conditional Access, group-based licensing   |
-| Tier-P2   | Entra ID Premium P2 | Risk-based CA, Access Reviews               |
-| Tier-Gov  | Entra ID Governance | Entitlement Management, Lifecycle Workflows |
+The following table compares key features across Microsoft Entra ID license tiers relevant for the AZ-104 exam:
 
-🔬 Perform quick validation:
+| Feature Category | Free | P1 | P2 | Governance | Suite |
+|-----------------|------|----|----|------------|-------|
+| **Identity & Access Management** | | | | | |
+| User & Group Management | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Single Sign-On (SSO) | ✅ Limited (10 apps) | ✅ Unlimited | ✅ Unlimited | ✅ Unlimited | ✅ Unlimited |
+| Directory Synchronization (Entra Connect) | ✅ | ✅ | ✅ | ✅ | ✅ |
+| B2B Collaboration | ✅ (50k MAU free) | ✅ | ✅ | ✅ | ✅ |
+| **Authentication & Security** | | | | | |
+| MFA | ✅ Basic (Authenticator only) | ✅ Full MFA | ✅ Full MFA | ✅ Full MFA | ✅ Full MFA |
+| SSPR - Cloud Users | ✅ | ✅ | ✅ | ✅ | ✅ |
+| SSPR - On-premises Writeback | ❌ | ✅ | ✅ | ✅ | ✅ |
+| Conditional Access | ❌ | ✅ | ✅ | ✅ | ✅ |
+| Risk-Based Conditional Access | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Identity Protection | ❌ | ❌ | ✅ | ❌ | ✅ |
+| Security Defaults | ✅ | ✅ | ✅ | ✅ | ✅ |
+| **Group Management** | | | | | |
+| Static Groups | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Dynamic Groups | ❌ | ✅ | ✅ | ✅ | ✅ |
+| Self-Service Group Management | ❌ | ✅ | ✅ | ✅ | ✅ |
+| Group-Based Licensing | ❌ | ✅ | ✅ | ✅ | ✅ |
+| **Identity Governance** | | | | | |
+| Access Reviews | ❌ | ❌ | ✅ Basic | ✅ Advanced | ✅ Advanced |
+| Privileged Identity Management (PIM) | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Entitlement Management | ❌ | ❌ | ✅ Basic | ✅ Advanced | ✅ Advanced |
+| Lifecycle Workflows | ❌ | ❌ | ❌ | ✅ | ✅ |
+| Terms of Use | ❌ | ✅ | ✅ | ✅ | ✅ |
+| **Application Management** | | | | | |
+| Application Proxy | ❌ | ✅ | ✅ | ✅ | ✅ |
+| Application Provisioning | ❌ | ✅ | ✅ | ✅ | ✅ |
+| **Monitoring & Reporting** | | | | | |
+| Audit Logs | ✅ 7 days | ✅ 30 days | ✅ 30 days | ✅ 30 days | ✅ 30 days |
+| Sign-in Logs | ✅ 7 days | ✅ 30 days | ✅ 30 days | ✅ 30 days | ✅ 30 days |
+| Entra Connect Health | ❌ | ✅ | ✅ | ✅ | ✅ |
+| Usage & Insights Reports | ❌ | ✅ | ✅ | ✅ | ✅ |
+| **Advanced Features** | | | | | |
+| Custom RBAC Roles | ❌ | ✅ | ✅ | ✅ | ✅ |
+| Administrative Units | ❌ | ✅ | ✅ | ✅ | ✅ |
+| Verified ID (Premium) | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Private Access | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Internet Access | ❌ | ❌ | ❌ | ❌ | ✅ |
+| **Included With** | | | | | |
+| Microsoft 365 Plan | Azure/M365 subs | M365 E3, M365 BP | M365 E5 | Standalone | Standalone |
+| **Typical Monthly Cost/User** | Free | ~$6 | ~$9 | ~$7 (P1 required) | ~$12 (P1 required) |
 
-* Attempt to create Conditional Access policy (fails on Free).
-* Open **Identity Governance** → Access Reviews (only visible on P2+).
-* Try creating an **Entitlement Management catalog* (Governance only).
+### Key Differences for AZ-104 Exam
 
-📄 See `/docs/License-Feature-Matrix.md` for detailed feature comparison.
+**Free Tier:**
+* Basic identity management only
+* SSPR limited to cloud users (no on-premises writeback)
+* No Conditional Access
+* No dynamic groups or group-based licensing
 
----
+**P1 Tier (Most Common for AZ-104):**
+* **Conditional Access** - Control access based on conditions (location, device, risk)
+* **Dynamic Groups** - Automatically manage group membership based on user attributes
+* **SSPR with Writeback** - Password reset writes back to on-premises AD
+* **Group-Based Licensing** - Assign licenses to groups instead of individual users
+* **Application Proxy** - Publish on-premises apps securely
 
-## 🧩 Validation Checklist
+**P2 Tier:**
+* Everything in P1 **plus**:
+* **Identity Protection** - Risk-based policies and risk detections
+* **Privileged Identity Management (PIM)** - Just-in-time admin access
+* **Access Reviews** - Periodic reviews of group membership and app access
+* **Risk-Based Conditional Access** - Block/allow based on calculated risk scores
 
-| Task                      | Verification Command / Location                   |
-| ------------------------- | ------------------------------------------------- |
-| Users created             | `az ad user list`                                 |
-| Groups created            | Portal → Groups                                   |
-| Licenses assigned         | `az ad user show`                                 |
-| Guest invited             | `az ad user list --filter "userType eq 'Guest'"`  |
-| SSPR working              | Test “Forgot Password” flow                       |
-| License features verified | Portal → Identity Governance / Conditional Access |
+**Governance Tier:**
+* Requires P1 or P2 as prerequisite
+* Everything in P2 **plus**:
+* **Lifecycle Workflows** - Automate joiner/mover/leaver processes
+* **Advanced Entitlement Management** - Self-service access packages with approval workflows
+* **Advanced Access Reviews** - ML-assisted reviews with recommendations
+
+**Suite Tier:**
+* Requires P1 as prerequisite
+* Bundles: Governance + ID Protection + Verified ID (premium) + Private Access + Internet Access
+* Comprehensive zero-trust access solution
+
+### Common Exam Scenarios
+
+| Scenario | Required License |
+|----------|-----------------|
+| Enable dynamic group membership based on department attribute | P1 or higher |
+| Implement Conditional Access policy based on location | P1 or higher |
+| Enable SSPR for hybrid users (with on-premises writeback) | P1 or higher |
+| Assign licenses to groups instead of individual users | P1 or higher |
+| Block sign-ins for users with high risk scores | P2 or higher (requires Identity Protection) |
+| Implement just-in-time admin access with approval workflow | P2 or higher (requires PIM) |
+| Conduct periodic access reviews for privileged groups | P2 or higher |
+| Automate onboarding/offboarding with custom workflows | Governance |
+| Create access packages with multi-stage approval | Governance (advanced features) |
+
+**References:**
+
+* [Microsoft Entra Licensing](https://learn.microsoft.com/en-us/entra/fundamentals/licensing)
+* [Microsoft Entra ID Governance Licensing](https://learn.microsoft.com/en-us/entra/id-governance/licensing-fundamentals)
+* [Microsoft Entra Pricing](https://www.microsoft.com/security/business/microsoft-entra-pricing)
 
 ---
 
@@ -801,23 +874,87 @@ Create the following groups and assign appropriate licenses:
 
 Be able to answer:
 
-1. Why does license assignment fail without UsageLocation?
-2. What’s the difference between P1 and P2 for Conditional Access?
-3. How does SSPR behave for guest users?
-4. What happens if two group-based licenses overlap?
-5. Which license tier adds Entitlement Management?
+1. **Why does license assignment fail without UsageLocation?**
 
----
+   **Answer:** Microsoft requires the `UsageLocation` property to ensure license compliance with regional legal requirements and data residency regulations. Different countries/regions have different licensing terms, data protection laws (GDPR, etc.), and service availability. Without this property, Microsoft cannot determine which services and features are legally available to the user. The assignment will fail with an error indicating that the usage location must be set before licenses can be assigned.
 
-## 🧹 Cleanup
+   **Example Error:** "You cannot assign a license because the user does not have a usage location specified."
 
-```bash
-az ad user delete --id user1@637djb.onmicrosoft.com
-az ad group delete --group "Lab-Admins"
-az ad group delete --group "Tier-P1"
-az ad group delete --group "Tier-P2"
-az ad group delete --group "Tier-Gov"
-```
+2. **What's the difference between P1 and P2 for Conditional Access?**
+
+   **Answer:**
+   * **P1 Conditional Access:**
+     * **Standard Conditional Access policies** based on static conditions:
+       * User/group membership
+       * Location (IP ranges, countries)
+       * Device platform (Windows, macOS, iOS, Android)
+       * Device state (managed/compliant)
+       * Application
+       * Client app type
+     * Actions: Block, require MFA, require compliant device, require domain-joined device, grant access
+
+   * **P2 Conditional Access:**
+     * **Everything in P1** PLUS:
+     * **Risk-based Conditional Access** (requires Identity Protection):
+       * User risk-based policies (account compromised, leaked credentials)
+       * Sign-in risk-based policies (anonymous IP, atypical travel, malware-linked IP)
+       * Real-time and calculated risk scores
+       * Automated risk remediation (force password change, block high-risk sign-ins)
+     * **Advanced session controls** with Cloud App Security integration
+
+   **Key Difference:** P1 uses **static conditions**, P2 adds **dynamic risk assessment** powered by Microsoft's threat intelligence.
+
+3. **How does SSPR behave for guest users?**
+
+   **Answer:**
+   * **Guest users CAN use SSPR** if their home tenant has SSPR enabled.
+   * SSPR respects the **home tenant's policies**, not the resource tenant's policies.
+   * Three scenarios for B2B guest users:
+     1. **Partner org with Entra ID:** Guest uses SSPR from their home organization. The resource tenant doesn't control SSPR settings for these guests.
+     2. **Self-service signup users:** Can reset passwords using the email they registered during signup.
+     3. **Microsoft accounts (personal):** Cannot use Entra SSPR; must use Microsoft account recovery (https://account.live.com/password/reset).
+
+   * **Important:** Resource tenant administrators cannot reset guest user passwords through SSPR—guests must use their home tenant's password reset process.
+
+4. **What happens if two group-based licenses overlap?**
+
+   **Answer:**
+   * **User receives licenses from BOTH groups** if they're members of multiple groups with different licenses assigned.
+   * **If the same license SKU is assigned by multiple groups:**
+     * User receives **one instance** of that license (licenses don't duplicate).
+     * Service plans (sub-features within the license) are combined/merged.
+     * If one group disables specific service plans, those remain enabled if another group enables them.
+
+   * **Potential Issues:**
+     * **Conflicting service plans:** If two licenses have mutually exclusive services, the system may generate an error and enter an error state. Must be resolved manually.
+     * **Insufficient licenses:** If total unique licenses needed exceed available licenses in the tenant, some assignments will fail.
+     * **License reassignment:** When a user is removed from one group, the license from the remaining group stays active (no disruption).
+
+   **Best Practice:** Design group-based licensing strategy to avoid overlapping licenses with conflicting features. Use hierarchical or mutually exclusive groups when possible.
+
+5. **Which license tier adds Entitlement Management?**
+
+   **Answer:**
+   * **Basic Entitlement Management:** Requires **Microsoft Entra ID P2**
+     * Create access packages
+     * Define policies and approval workflows
+     * Basic catalog and resource management
+     * External user lifecycle management
+
+   * **Advanced Entitlement Management:** Requires **Microsoft Entra ID Governance** (P1 or P2 prerequisite)
+     * Everything in P2 PLUS:
+     * Custom extensions with Logic Apps
+     * Auto-assignment policies
+     * Verified ID integration
+     * Sponsors policy
+     * Request on-behalf-of functionality
+     * Directly assign any user (Preview)
+     * Mark guest as governed
+     * Microsoft Entra Roles assignment (Preview)
+
+   **Summary:** P2 provides core Entitlement Management; Governance adds advanced automation and integration capabilities.
+
+   **Also Included In:** Microsoft Entra Suite (which requires P1 as prerequisite)
 
 ---
 
