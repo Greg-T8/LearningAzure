@@ -131,14 +131,25 @@ For each scenario below, identify if it's regression, classification, or cluster
 - **Model:** The mathematical representation learned from data
 - **Inference:** Using the trained model to make predictions on new data
 
+https://learn.microsoft.com/en-us/training/modules/design-machine-learning-model-training-solution/
+
+
 **Activity:**
 
 Given a dataset of house sales with columns: `SquareFeet`, `Bedrooms`, `Bathrooms`, `Location`, `YearBuilt`, `SalePrice`:
 
-1. Which columns are features?
-2. Which column is the label?
-3. Is this a regression or classification problem?
-4. How would you split the data for training, validation, and testing?
+1. Which columns are features? - `SquareFeet`, `Bedrooms`, `Bathrooms`, `Location`, `YearBuilt`
+2. Which column is the label? - `SalePrice`
+3. Is this a regression or classification problem? - Regression
+4. How would you split the data for training, validation, and testing? 
+
+**📚 Related Documentation:**
+
+- [Build Classical ML Models with Supervised Learning](https://learn.microsoft.com/en-us/training/modules/introduction-to-classical-machine-learning/) - Define supervised learning and model training concepts
+- [What is Machine Learning?](https://learn.microsoft.com/en-us/training/modules/fundamentals-machine-learning/2-what-is-machine-learning) - Core ML concepts including features and labels
+- [Configure Training, Validation, and Test Data in Automated ML](https://learn.microsoft.com/en-us/azure/machine-learning/how-to-configure-cross-validation-data-splits) - Data splits and cross-validation
+- [Training, Validation, and Test Data Overview](https://learn.microsoft.com/en-us/azure/machine-learning/concept-automated-ml#training-validation-and-test-data) - Understanding data partitioning
+- [Model Training and Inference](https://learn.microsoft.com/en-us/azure/machine-learning/concept-automl-forecasting-evaluation#inference-scenarios) - Using trained models to make predictions
 
 ---
 
