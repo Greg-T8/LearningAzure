@@ -1,0 +1,24 @@
+{
+  "Name": "Resource Group Admin No Delete",
+  "IsCustom": true,
+  "Description": "Full access to manage resources within a resource group but cannot delete the resource group itself or any resources (compliance requirement)",
+  "Actions": [
+    "*/read",
+    "*/write",
+    "Microsoft.Authorization/*/read",
+    "Microsoft.Resources/subscriptions/resourceGroups/read",
+    "Microsoft.Resources/deployments/*",
+    "Microsoft.Insights/*",
+    "Microsoft.Support/*"
+  ],
+  "NotActions": [
+    "*/delete",
+    "Microsoft.Authorization/*/delete",
+    "Microsoft.Resources/deployments/delete"
+  ],
+  "DataActions": [],
+  "NotDataActions": [],
+  "AssignableScopes": [
+    "/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}"
+  ]
+}

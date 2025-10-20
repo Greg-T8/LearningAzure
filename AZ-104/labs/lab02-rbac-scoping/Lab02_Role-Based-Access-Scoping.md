@@ -66,6 +66,20 @@
   * [Check Access for a User](#check-access-for-a-user)
   * [Review All Role Assignments](#review-all-role-assignments)
   * [Exam Insights](#exam-insights-6)
+* [🔹 Exercise 8 – Create and Manage Custom Roles](#-exercise-8--create-and-manage-custom-roles)
+  * [What are Custom Roles?](#what-are-custom-roles)
+  * [Custom Role Structure](#custom-role-structure)
+  * [Create a Custom Role Using PowerShell](#create-a-custom-role-using-powershell)
+    * [Method 1: Modify an Existing Role](#method-1-modify-an-existing-role)
+    * [Method 2: Create from Scratch](#method-2-create-from-scratch)
+    * [Method 3: Create from JSON File](#method-3-create-from-json-file)
+  * [Create a Custom Role Using Azure CLI](#create-a-custom-role-using-azure-cli)
+  * [Create a Custom Role Using Azure Portal](#create-a-custom-role-using-azure-portal)
+  * [Assign Custom Role](#assign-custom-role)
+  * [Update a Custom Role](#update-a-custom-role)
+  * [Delete a Custom Role](#delete-a-custom-role)
+  * [Custom Role Best Practices](#custom-role-best-practices)
+  * [Exam Insights](#exam-insights-7)
 * [🧭 Reflection \& Readiness](#-reflection--readiness)
 * [📚 References](#-references)
 
@@ -74,6 +88,7 @@
 Implement and validate Azure role-based access control (RBAC) across different scopes. You will:
 
 * Explore Azure built-in roles and their permissions
+* Create custom roles with specific permissions
 * Assign roles at management group, subscription, resource group, and resource scopes
 * Verify permission inheritance and effective access
 * Implement least privilege access principles
@@ -85,6 +100,7 @@ Implement and validate Azure role-based access control (RBAC) across different s
 ## 🧱 Skills Measured (Exam Outline)
 
 * Manage built-in Azure roles
+* Create and manage custom Azure roles
 * Assign roles at different scopes
 * Interpret access assignments
 
@@ -116,6 +132,7 @@ You are responsible for implementing this RBAC strategy and validating that user
 | Tools | Azure Portal, Azure CLI, PowerShell, Bicep, Terraform |
 
 **Prerequisites:**
+
 * Completed Lab 1 with users and groups created
 * At least one resource group deployed
 * User Access Administrator or Owner role on the subscription
@@ -251,6 +268,7 @@ Resource (Most Specific)
 ```
 
 **Scope Format:**
+
 ```
 /providers/Microsoft.Management/managementGroups/{managementGroupName}
 /subscriptions/{subscriptionId}
@@ -540,12 +558,14 @@ terraform apply
 ### Understanding Permission Inheritance
 
 **Key Principles:**
+
 1. Permissions assigned at parent scope are inherited by child scopes
 2. Permissions are cumulative (additive)
 3. Deny assignments take precedence over role assignments
 4. Lower scopes cannot remove permissions granted at higher scopes
 
 **Example Scenario:**
+
 * User has **Reader** at subscription scope
 * User has **Contributor** at resource group scope
 * **Effective permission at resource group:** Contributor (more permissive)
@@ -622,6 +642,7 @@ New-AzResourceGroup -Name "test-rg" -Location "eastus"
 ```
 
 **Alternative: Use Azure Portal in Private/Incognito Mode**
+
 1. Open browser in private/incognito mode
 2. Sign in as `user1@637djb.onmicrosoft.com`
 3. Navigate to resource groups
@@ -647,9 +668,11 @@ New-AzResourceGroup -Name "test-rg" -Location "eastus"
 ### Scenario: Developer Access to Specific Resources
 
 **Current State:**
+
 * `Dev-Team` has Contributor at subscription scope (too broad)
 
 **Desired State:**
+
 * `Dev-Team` should only have Contributor on `rg-dev-test`
 * `Dev-Team` should have Reader on other resource groups
 
@@ -748,12 +771,14 @@ Remove-AzRoleAssignment `
 **Deny assignments** block users from performing specific actions even if a role assignment grants them access.
 
 **Key Characteristics:**
+
 * Deny assignments take precedence over role assignments
 * Created by Azure services automatically (e.g., Azure Blueprints, Managed Applications)
 * Cannot be created manually by users
 * Applied to protect system-critical resources
 
 **Precedence Order:**
+
 1. **Deny assignments** (highest priority)
 2. **Role assignments**
 3. **No access** (default)
@@ -808,15 +833,18 @@ az role assignment list \
 ### Common Deny Assignment Scenarios
 
 **1. Azure Blueprints with Resource Locks**
+
 * When you assign a blueprint with a lock, Azure creates a deny assignment
 * Prevents modification or deletion of locked resources
 * Even Owners cannot override
 
 **2. Managed Applications**
+
 * Resources in the managed resource group have deny assignments
 * Prevents customer modification of provider-managed resources
 
 **3. System-Assigned Deny Assignments**
+
 * Protect Azure system resources
 * Example: Deny delete on Azure AD tenant
 
@@ -875,6 +903,7 @@ az ad sp create-for-rbac \
 ```
 
 **Output Example:**
+
 ```json
 {
   "appId": "12345678-1234-1234-1234-123456789abc",
@@ -1055,21 +1084,473 @@ az role assignment list --all --role "Owner" --output table
 
 ---
 
+## 🔹 Exercise 8 – Create and Manage Custom Roles
+
+**Goal:** Create custom Azure roles with specific permissions when built-in roles don't meet requirements.
+
+### What are Custom Roles?
+
+**Custom roles** allow you to create role definitions with specific permissions tailored to your organization's needs when built-in roles are either too permissive or too restrictive.
+
+**When to Use Custom Roles:**
+
+* Built-in roles grant too many permissions (violates least privilege)
+* Need combination of permissions from multiple built-in roles
+* Need to restrict specific actions within a resource provider
+* Require granular control for compliance requirements
+
+**Key Limitations:**
+
+* Maximum of **5,000 custom roles** per Azure AD tenant
+* Cannot use root scope (`"/"`) as assignable scope (built-in roles only)
+* Only **one management group** in `AssignableScopes`
+* Custom roles with `DataActions` **cannot** be assigned at management group scope
+* Requires `Microsoft.Authorization/roleDefinitions/write` permission on all assignable scopes
+
+### Custom Role Structure
+
+A custom role definition consists of:
+
+```json
+{
+  "Name": "Custom Role Name",
+  "Id": "guid",
+  "IsCustom": true,
+  "Description": "Description of what this role does",
+  "Actions": [
+    "Microsoft.ResourceProvider/resource/action"
+  ],
+  "NotActions": [
+    "Microsoft.ResourceProvider/resource/restrictedAction"
+  ],
+  "DataActions": [
+    "Microsoft.Storage/storageAccounts/blobServices/containers/blobs/read"
+  ],
+  "NotDataActions": [],
+  "AssignableScopes": [
+    "/subscriptions/{subscription-id}",
+    "/subscriptions/{subscription-id}/resourceGroups/{resource-group}"
+  ]
+}
+```
+
+**Property Definitions:**
+
+| Property | Required | Description |
+|----------|----------|-------------|
+| `Name` | Yes | Display name of the custom role |
+| `Id` | No | Unique GUID (auto-generated if not specified) |
+| `IsCustom` | Yes | Must be `true` for custom roles |
+| `Description` | Yes | Clear description of the role's purpose |
+| `Actions` | Yes | Control plane operations allowed |
+| `NotActions` | No | Control plane operations excluded from `Actions` |
+| `DataActions` | No | Data plane operations allowed |
+| `NotDataActions` | No | Data plane operations excluded from `DataActions` |
+| `AssignableScopes` | Yes | Where the role can be assigned (management group, subscription, resource group) |
+
+**Permission Wildcards:**
+
+* `*` matches all operations: `Microsoft.Compute/*` = all Compute operations
+* Specific action: `Microsoft.Compute/virtualMachines/start/action`
+* Read-only: `*/read` = all read operations
+
+### Create a Custom Role Using PowerShell
+
+#### Method 1: Modify an Existing Role
+
+```powershell
+# Start with an existing built-in role
+$role = Get-AzRoleDefinition "Virtual Machine Contributor"
+
+# Modify properties
+$role.Id = $null  # Clear ID to create new role
+$role.Name = "Virtual Machine Operator"
+$role.Description = "Can monitor, start, and restart virtual machines"
+$role.IsCustom = $true
+
+# Clear and rebuild Actions
+$role.Actions.Clear()
+$role.Actions.Add("Microsoft.Storage/*/read")
+$role.Actions.Add("Microsoft.Network/*/read")
+$role.Actions.Add("Microsoft.Compute/*/read")
+$role.Actions.Add("Microsoft.Compute/virtualMachines/start/action")
+$role.Actions.Add("Microsoft.Compute/virtualMachines/restart/action")
+$role.Actions.Add("Microsoft.Authorization/*/read")
+$role.Actions.Add("Microsoft.ResourceHealth/availabilityStatuses/read")
+$role.Actions.Add("Microsoft.Resources/subscriptions/resourceGroups/read")
+$role.Actions.Add("Microsoft.Insights/alertRules/*")
+$role.Actions.Add("Microsoft.Support/*")
+
+# Set assignable scopes
+$role.AssignableScopes.Clear()
+$subscriptionId = (Get-AzContext).Subscription.Id
+$role.AssignableScopes.Add("/subscriptions/$subscriptionId")
+
+# Create the custom role
+New-AzRoleDefinition -Role $role
+```
+
+**Output:**
+
+```
+Name             : Virtual Machine Operator
+Id               : 12345678-1234-1234-1234-123456789abc
+IsCustom         : True
+Description      : Can monitor, start, and restart virtual machines
+Actions          : {Microsoft.Storage/*/read, Microsoft.Network/*/read, ...}
+NotActions       : {}
+DataActions      : {}
+NotDataActions   : {}
+AssignableScopes : {/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}
+```
+
+#### Method 2: Create from Scratch
+
+```powershell
+# Create new role object from scratch
+$role = [Microsoft.Azure.Commands.Resources.Models.Authorization.PSRoleDefinition]::new()
+$role.Name = 'Storage Blob Operator'
+$role.Description = 'Can read, write, and delete blobs but not manage storage accounts'
+$role.IsCustom = $true
+
+# Define permissions
+$perms = @(
+    'Microsoft.Storage/*/read'
+    'Microsoft.Storage/storageAccounts/blobServices/containers/read'
+    'Microsoft.Authorization/*/read'
+    'Microsoft.Resources/subscriptions/resourceGroups/read'
+)
+$role.Actions = $perms
+
+# Define data actions (data plane operations)
+$role.DataActions = @(
+    'Microsoft.Storage/storageAccounts/blobServices/containers/blobs/read'
+    'Microsoft.Storage/storageAccounts/blobServices/containers/blobs/write'
+    'Microsoft.Storage/storageAccounts/blobServices/containers/blobs/delete'
+)
+
+# Set assignable scopes
+$subscriptionId = (Get-AzContext).Subscription.Id
+$role.AssignableScopes = @("/subscriptions/$subscriptionId")
+
+# Create the custom role
+New-AzRoleDefinition -Role $role
+```
+
+#### Method 3: Create from JSON File
+
+Create a file named `custom-vm-operator.json`:
+
+```json
+{
+  "Name": "Virtual Machine Operator",
+  "IsCustom": true,
+  "Description": "Can monitor, start, and restart virtual machines",
+  "Actions": [
+    "Microsoft.Storage/*/read",
+    "Microsoft.Network/*/read",
+    "Microsoft.Compute/*/read",
+    "Microsoft.Compute/virtualMachines/start/action",
+    "Microsoft.Compute/virtualMachines/restart/action",
+    "Microsoft.Authorization/*/read",
+    "Microsoft.ResourceHealth/availabilityStatuses/read",
+    "Microsoft.Resources/subscriptions/resourceGroups/read",
+    "Microsoft.Insights/alertRules/*",
+    "Microsoft.Support/*"
+  ],
+  "NotActions": [],
+  "DataActions": [],
+  "NotDataActions": [],
+  "AssignableScopes": [
+    "/subscriptions/{subscription-id}"
+  ]
+}
+```
+
+**Deploy the custom role:**
+
+```powershell
+# Update subscription ID in JSON file
+$subscriptionId = (Get-AzContext).Subscription.Id
+$jsonPath = ".\custom-vm-operator.json"
+$content = Get-Content $jsonPath -Raw
+$content = $content -replace '\{subscription-id\}', $subscriptionId
+$content | Set-Content $jsonPath
+
+# Create role from JSON file
+New-AzRoleDefinition -InputFile $jsonPath
+```
+
+### Create a Custom Role Using Azure CLI
+
+```bash
+# Create JSON file for custom role
+cat > storage-blob-operator.json << EOF
+{
+  "Name": "Storage Blob Operator",
+  "IsCustom": true,
+  "Description": "Can read, write, and delete blobs but not manage storage accounts",
+  "Actions": [
+    "Microsoft.Storage/*/read",
+    "Microsoft.Storage/storageAccounts/blobServices/containers/read",
+    "Microsoft.Authorization/*/read",
+    "Microsoft.Resources/subscriptions/resourceGroups/read"
+  ],
+  "NotActions": [],
+  "DataActions": [
+    "Microsoft.Storage/storageAccounts/blobServices/containers/blobs/read",
+    "Microsoft.Storage/storageAccounts/blobServices/containers/blobs/write",
+    "Microsoft.Storage/storageAccounts/blobServices/containers/blobs/delete"
+  ],
+  "NotDataActions": [],
+  "AssignableScopes": [
+    "/subscriptions/$(az account show --query id --output tsv)"
+  ]
+}
+EOF
+
+# Create the custom role
+az role definition create --role-definition @storage-blob-operator.json
+```
+
+**List custom roles:**
+
+```bash
+# List all custom roles
+az role definition list --custom-role-only true --output table
+
+# Get specific custom role
+az role definition list --name "Storage Blob Operator" --output json
+```
+
+### Create a Custom Role Using Azure Portal
+
+1. Navigate to **Subscriptions** → Select your subscription
+2. Go to **Access control (IAM)** → **+ Add** → **Add custom role**
+3. **Basics tab:**
+   * **Custom role name:** `Storage Blob Operator`
+   * **Description:** `Can read, write, and delete blobs`
+   * **Baseline permissions:** Start from scratch or clone a role
+4. **Permissions tab:**
+   * Click **+ Add permissions**
+   * Search for `Microsoft.Storage`
+   * Select control plane actions (Actions)
+   * Select data plane actions (DataActions):
+     * `Microsoft.Storage/storageAccounts/blobServices/containers/blobs/read`
+     * `Microsoft.Storage/storageAccounts/blobServices/containers/blobs/write`
+     * `Microsoft.Storage/storageAccounts/blobServices/containers/blobs/delete`
+   * Click **Add**
+5. **Assignable scopes tab:**
+   * Keep current subscription or add resource groups
+   * **Note:** Cannot add root scope or multiple management groups
+6. **JSON tab:**
+   * Review and edit JSON if needed
+7. **Review + create:**
+   * Click **Create**
+
+### Assign Custom Role
+
+Once created, assign the custom role like any built-in role:
+
+```powershell
+# Assign custom role at resource group scope
+$userId = (Get-AzADUser -UserPrincipalName "user1@637djb.onmicrosoft.com").Id
+
+New-AzRoleAssignment `
+    -ObjectId $userId `
+    -RoleDefinitionName "Virtual Machine Operator" `
+    -ResourceGroupName "rg-dev-test"
+
+# Verify assignment
+Get-AzRoleAssignment -ObjectId $userId -ResourceGroupName "rg-dev-test"
+```
+
+Using Azure CLI:
+
+```bash
+# Assign custom role
+az role assignment create \
+    --assignee "user1@637djb.onmicrosoft.com" \
+    --role "Storage Blob Operator" \
+    --resource-group "rg-dev-test"
+```
+
+### Update a Custom Role
+
+```powershell
+# Get existing custom role
+$role = Get-AzRoleDefinition "Virtual Machine Operator"
+
+# Add new action
+$role.Actions.Add("Microsoft.Compute/virtualMachines/deallocate/action")
+
+# Update description
+$role.Description = "Can monitor, start, restart, and deallocate virtual machines"
+
+# Update the role
+Set-AzRoleDefinition -Role $role
+```
+
+Using Azure CLI:
+
+```bash
+# Get role definition
+az role definition list --name "Storage Blob Operator" > role.json
+
+# Edit role.json file to add permissions
+
+# Update the role
+az role definition update --role-definition @role.json
+```
+
+### Delete a Custom Role
+
+**Prerequisites:**
+
+* No active role assignments using the custom role
+* Must have permission to delete role definitions
+
+```powershell
+# Check for role assignments
+$role = Get-AzRoleDefinition "Virtual Machine Operator"
+$assignments = Get-AzRoleAssignment -RoleDefinitionId $role.Id
+
+if ($assignments) {
+    Write-Host "Cannot delete: Role has $($assignments.Count) active assignments"
+    $assignments | Format-Table DisplayName, Scope
+} else {
+    # Delete the custom role
+    Remove-AzRoleDefinition -Name "Virtual Machine Operator" -Force
+    Write-Host "Custom role deleted successfully"
+}
+```
+
+Using Azure CLI:
+
+```bash
+# List role assignments using this role
+roleId=$(az role definition list --name "Storage Blob Operator" --query [0].id --output tsv)
+az role assignment list --role "$roleId" --output table
+
+# Delete role (only if no assignments exist)
+az role definition delete --name "Storage Blob Operator"
+```
+
+**Error if assignments exist:**
+
+```
+There are existing role assignments referencing role (code: RoleDefinitionHasAssignments)
+```
+
+**Solution:** Remove all role assignments first, then delete the role.
+
+### Custom Role Best Practices
+
+**1. Use Least Privilege**
+
+* Grant only the minimum permissions needed
+* Prefer specific actions over wildcards
+* Review and remove unused permissions regularly
+
+**2. Meaningful Names and Descriptions**
+
+* Use clear, descriptive role names
+* Document the purpose and intended use case
+* Include version or date if role evolves
+
+**3. Appropriate Assignable Scopes**
+
+* Use narrowest scope possible (resource group > subscription)
+* Document why subscription scope is needed if used
+* Cannot use management group if role has DataActions
+
+**4. Version Control**
+
+* Store role definitions in source control (Git)
+* Track changes and who made them
+* Use JSON files for repeatability
+
+**5. Test Before Production**
+
+* Create and test custom roles in dev/test environments
+* Verify permissions work as expected
+* Document test results
+
+**6. Monitor and Audit**
+
+* Regular access reviews of custom role assignments
+* Alert on changes to custom role definitions
+* Document approval process for custom roles
+
+**7. Avoid Common Pitfalls**
+
+* Don't use wildcards (`*`) unnecessarily
+* Don't create duplicate built-in role functionality
+* Don't exceed 5,000 custom roles per tenant
+* Don't forget to update role when Azure adds new actions
+
+**Example: Compliance-Approved Custom Role**
+
+```json
+{
+  "Name": "Approved Storage Admin",
+  "IsCustom": true,
+  "Description": "Can manage storage accounts but cannot delete them or change access keys (Compliance requirement)",
+  "Actions": [
+    "Microsoft.Storage/storageAccounts/*"
+  ],
+  "NotActions": [
+    "Microsoft.Storage/storageAccounts/delete",
+    "Microsoft.Storage/storageAccounts/listkeys/action",
+    "Microsoft.Storage/storageAccounts/regeneratekey/action"
+  ],
+  "DataActions": [],
+  "NotDataActions": [],
+  "AssignableScopes": [
+    "/subscriptions/{subscription-id}/resourceGroups/rg-storage-prod"
+  ]
+}
+```
+
+### Exam Insights
+
+💡 **Exam Tip:** Custom roles require `Microsoft.Authorization/roleDefinitions/write` permission on **all** assignable scopes. Owner and User Access Administrator have this permission.
+
+💡 **Exam Tip:** Maximum of 5,000 custom roles per tenant. Plan role definitions carefully to avoid hitting this limit.
+
+💡 **Exam Tip:** Custom roles with `DataActions` cannot be assigned at management group scope. Use subscription or resource group scope instead.
+
+💡 **Exam Tip:** Only one management group can be specified in `AssignableScopes` for custom roles.
+
+💡 **Exam Tip:** `NotActions` are not deny permissions—they simply exclude actions from the allowed `Actions`. Deny assignments (separate concept) take precedence.
+
+💡 **Exam Tip:** Cannot delete a custom role if it has active role assignments. Remove assignments first, then delete the role.
+
+💡 **Exam Tip:** Built-in roles have `AssignableScopes: ["/"]` (root scope). Custom roles cannot use root scope.
+
+💡 **Exam Tip:** Role IDs don't change when renamed. Use role ID (GUID) in scripts for stability, not role name.
+
+💡 **Exam Tip:** Wildcards (`*`) in permissions grant current AND future actions. Be cautious—this may grant unintended permissions when Azure adds new actions.
+
+💡 **Exam Tip:** When troubleshooting "cannot create/update custom role" errors, verify you have write permissions on ALL assignable scopes defined in the role.
+
+---
+
 ## 🧭 Reflection & Readiness
 
 Be able to answer:
 
 1. **What's the difference between Owner and Contributor roles?**
 
-   **Answer:** 
+   **Answer:**
    * **Owner:** Full access to all resources including the ability to assign roles in Azure RBAC. Can manage both resources and access control.
    * **Contributor:** Full access to manage all resources but cannot assign roles in Azure RBAC. Can create, modify, and delete resources but cannot delegate access to others.
-   
+
    **Key Distinction:** Only Owner (and User Access Administrator) can manage RBAC role assignments.
 
 2. **If a user has Reader at subscription and Contributor at resource group, what are their effective permissions in that resource group?**
 
-   **Answer:** 
+   **Answer:**
    * **Effective Permission:** Contributor
    * **Reason:** Azure RBAC permissions are cumulative (additive). The more permissive role takes effect at each scope. Since Contributor includes all Reader permissions plus write/delete capabilities, the user effectively has Contributor access in that specific resource group.
    * **Other Resource Groups:** The user retains only Reader permissions (inherited from subscription) in resource groups where they don't have explicit Contributor assignment.
@@ -1082,7 +1563,7 @@ Be able to answer:
    * **Cannot be blocked:** Azure RBAC does not support "deny inheritance"—you cannot prevent inherited permissions from flowing down
    * **Cumulative:** If a user has Reader at subscription and Contributor at resource group, they get both (Contributor being more permissive wins)
    * **Assignment path:** Permissions can come from direct assignments at any level or through group membership
-   
+
    **Example:**
    * Reader assigned at subscription = read access to all resource groups and resources
    * Contributor at resource group = read/write to that RG and all its resources
@@ -1090,7 +1571,7 @@ Be able to answer:
 
 4. **Can you create custom deny assignments?**
 
-   **Answer:** 
+   **Answer:**
    * **No.** Users and administrators cannot manually create deny assignments
    * **Only Azure services** can create deny assignments automatically:
      * Azure Blueprints (when using resource locks)
@@ -1116,22 +1597,95 @@ Be able to answer:
 6. **What's the scope format for a resource group?**
 
    **Answer:**
+
    ```
    /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
    ```
-   
+
    **Full Scope Hierarchy:**
    * **Management Group:** `/providers/Microsoft.Management/managementGroups/{mgName}`
    * **Subscription:** `/subscriptions/{subscriptionId}`
    * **Resource Group:** `/subscriptions/{subscriptionId}/resourceGroups/{rgName}`
    * **Resource:** `/subscriptions/{subscriptionId}/resourceGroups/{rgName}/providers/{providerNamespace}/{resourceType}/{resourceName}`
-   
+
    **Example:**
+
    ```
    /subscriptions/12345678-1234-1234-1234-123456789abc/resourceGroups/rg-dev-test
    ```
-   
+
    **Usage:** This format is required when assigning roles via CLI or PowerShell with the `-Scope` parameter.
+
+7. **When should you create a custom role instead of using a built-in role?**
+
+   **Answer:**
+
+   Create a custom role when:
+
+   * **Built-in roles grant too many permissions:**
+     * Example: Need to allow VM restarts but not VM creation—Contributor is too broad
+     * Solution: Create custom role with only `Microsoft.Compute/virtualMachines/restart/action`
+
+   * **Need specific combination of permissions:**
+     * Example: Read storage accounts + write blobs (no built-in role for this exact combo)
+     * Solution: Custom role with control plane read + data plane write actions
+
+   * **Compliance requirements:**
+     * Example: Must prevent deletion of resources even for admins
+     * Solution: Custom role that includes all actions except delete
+
+   * **Need to exclude specific actions from a broader role:**
+     * Example: Storage admin who cannot regenerate access keys
+     * Solution: Use `NotActions` to exclude `listkeys` and `regeneratekey`
+
+   **When NOT to create custom roles:**
+   * Built-in role already provides exact permissions needed
+   * Only need temporary elevated access (use PIM instead)
+   * Would result in near-duplicate of built-in role
+   * Approaching 5,000 custom role limit per tenant
+
+   **Best Practice:** Always check if a built-in role meets requirements first—built-in roles are maintained by Microsoft and updated automatically.
+
+8. **What's the maximum number of custom roles per Azure AD tenant?**
+
+   **Answer:**
+   * **5,000 custom roles** per Azure AD tenant
+
+   **Planning Considerations:**
+   * Each custom role counts toward tenant limit regardless of scope
+   * No limit on role assignments (only role definitions)
+   * Consider consolidating similar custom roles
+   * Use parameterized roles where possible
+   * Monitor custom role count approaching limit
+
+   **Troubleshooting:**
+   * If approaching limit: Audit and delete unused custom roles
+   * Check for duplicate roles across subscriptions
+   * Consolidate roles with similar permissions
+   * Use resource-level built-in roles when possible
+
+9. **Can custom roles with DataActions be assigned at management group scope?**
+
+   **Answer:**
+   * **No.** Custom roles that include `DataActions` **cannot** be assigned at the management group scope.
+
+   **Reason:**
+   * Data plane operations are resource-specific and don't apply at management group abstraction level
+   * Management groups organize subscriptions, not data within resources
+
+   **Allowed Scopes for Custom Roles with DataActions:**
+   * ✅ Subscription scope
+   * ✅ Resource group scope  
+   * ✅ Resource scope
+   * ❌ Management group scope
+
+   **Solution:**
+   * If you need management group scope: Create role with only `Actions` (control plane)
+   * For data access: Assign separate role at subscription or resource group scope
+
+   **Example:**
+   * Control plane role (management group): List storage accounts, read properties
+   * Data plane role (subscription): Read/write blob data
 
 ---
 
@@ -1140,6 +1694,10 @@ Be able to answer:
 * [What is Azure role-based access control (Azure RBAC)?](https://learn.microsoft.com/en-us/azure/role-based-access-control/overview)
 * [Steps to assign an Azure role](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-steps)
 * [Azure built-in roles](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles)
+* [Azure custom roles](https://learn.microsoft.com/en-us/azure/role-based-access-control/custom-roles)
+* [Tutorial: Create a custom role using Azure PowerShell](https://learn.microsoft.com/en-us/azure/role-based-access-control/tutorial-custom-role-powershell)
+* [Tutorial: Create a custom role using Azure CLI](https://learn.microsoft.com/en-us/azure/role-based-access-control/tutorial-custom-role-cli)
+* [Create or update custom roles using Azure Portal](https://learn.microsoft.com/en-us/azure/role-based-access-control/custom-roles-portal)
 * [Understand scope for Azure RBAC](https://learn.microsoft.com/en-us/azure/role-based-access-control/scope-overview)
 * [Understand Azure deny assignments](https://learn.microsoft.com/en-us/azure/role-based-access-control/deny-assignments)
 * [Create a service principal with Azure CLI](https://learn.microsoft.com/en-us/cli/azure/azure-cli-sp-tutorial-1)

@@ -23,6 +23,7 @@ lab02-rbac-scoping/
 After completing this lab, you will be able to:
 
 * Understand Azure built-in roles and their permissions
+* Create custom roles with specific permissions
 * Assign roles at different scopes (subscription, resource group, resource)
 * Verify permission inheritance and effective access
 * Implement least privilege access principles
