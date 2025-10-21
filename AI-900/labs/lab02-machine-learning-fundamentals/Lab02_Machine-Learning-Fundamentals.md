@@ -179,13 +179,36 @@ Given a dataset of house sales with columns: `SquareFeet`, `Bedrooms`, `Bathroom
    - Once created, click "Launch studio"
    - This opens the Azure ML Studio web interface
 
+    <img src='images/2025-10-21-06-03-24.png' width=700>
+
 3. **Create a Dataset:**
    - Navigate to "Data" → "Create"
    - Upload a sample dataset (e.g., diabetes regression dataset, Titanic classification dataset)
+     - [Diabetes Dataset Sample](https://www4.stat.ncsu.edu/~boos/var.select/diabetes.tab.txt)
+     - [Bike Share Dataset Sample](https://github.com/Azure/azureml-examples/blob/v1-archive/v1/python-sdk/tutorials/automl-with-azureml/forecasting-bike-share/bike-no.csv)
    - Or use a built-in sample dataset
+
+        <img src='images/2025-10-21-06-09-49.png' width=600>
+
+        <img src='images/2025-10-21-06-10-21.png' width=600>
+
+        <img src='images/2025-10-21-06-10-54.png' width=600>
+
+        <img src='images/2025-10-21-06-21-42.png' width=600>
+
+        <img src='images/2025-10-21-06-22-46.png' width=600>
+
+        <img src='images/2025-10-21-06-23-31.png' width=600>
+
+        <img src='images/2025-10-21-06-24-01.png' width=600>
 
 4. **Run Automated ML:**
    - Navigate to "Automated ML" → "New Automated ML job"
+
+        <img src='images/2025-10-21-06-13-10.png' width=600>
+
+        <img src='images/2025-10-21-06-13-46.png' width=600>
+
    - Select your dataset
    - Choose task type: Regression, Classification, or Time Series Forecasting
    - Select target column (label)
