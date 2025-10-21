@@ -388,7 +388,7 @@ Resource (Most Specific)
 
 **Scope Format:**
 
-```
+```text
 /providers/Microsoft.Management/managementGroups/{managementGroupName}
 /subscriptions/{subscriptionId}
 /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
@@ -430,6 +430,8 @@ Get-AzRoleAssignment -Scope "/subscriptions/$subscriptionId" |
     Where-Object {$_.DisplayName -eq "Finance-Team"}
 ```
 
+<img src='images/2025-10-21-04-44-30.png' width=600>
+
 #### Using Azure CLI (`az role assignment create`)
 
 ```bash
@@ -449,6 +451,8 @@ az role assignment create \
     --role "Reader" \
     --scope "/subscriptions/$subscriptionId"
 ```
+
+<img src='images/2025-10-21-04-49-59.png' width=600>
 
 ### Assign Role at Resource Group Scope
 
@@ -479,6 +483,8 @@ New-AzRoleAssignment `
 Get-AzRoleAssignment -ResourceGroupName $resourceGroupName
 ```
 
+<img src='images/2025-10-21-04-53-52.png' width=600>
+
 #### Using Azure CLI
 
 ```bash
@@ -486,15 +492,18 @@ Get-AzRoleAssignment -ResourceGroupName $resourceGroupName
 az group create --name rg-dev-test --location eastus
 
 # Assign Contributor role
+subscriptionId=$(az account show --query id -o tsv)
 groupId=$(az ad group show --group "Dev-Team" --query id --output tsv)
 az role assignment create \
     --assignee $groupId \
     --role "Contributor" \
-    --resource-group "rg-dev-test"
+    --scope "/subscriptions/$subscriptionId/resourceGroups/rg-dev-test"
 
 # Verify assignment
 az role assignment list --resource-group rg-dev-test --output table
 ```
+
+<img src='images/2025-10-21-05-06-03.png' width=600>
 
 ### Assign Role at Resource Scope
 
