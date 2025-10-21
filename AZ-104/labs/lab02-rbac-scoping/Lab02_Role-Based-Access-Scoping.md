@@ -518,11 +518,13 @@ New-AzStorageAccount `
     -SkuName "Standard_LRS"
 ```
 
+<img src='images/2025-10-21-05-08-34.png' width=600>
+
 #### Using PowerShell
 
 ```powershell
 # Get storage account resource ID
-$storageAccount = Get-AzStorageAccount -ResourceGroupName "rg-dev-test" -Name "stdevtest1234"
+$storageAccount = Get-AzStorageAccount -ResourceGroupName "rg-dev-test" -Name "stdevtest7689"
 $resourceId = $storageAccount.Id
 
 # Assign Storage Blob Data Contributor to a user at resource scope
@@ -537,12 +539,14 @@ New-AzRoleAssignment `
 Get-AzRoleAssignment -Scope $resourceId
 ```
 
+<img src='images/2025-10-21-05-10-19.png' width=600>
+
 #### Using Azure CLI
 
 ```bash
 # Get storage account resource ID
 resourceId=$(az storage account show \
-    --name stdevtest1234 \
+    --name stdevtest7689 \
     --resource-group rg-dev-test \
     --query id --output tsv)
 
@@ -555,6 +559,8 @@ az role assignment create \
 # Verify assignment
 az role assignment list --scope "$resourceId" --output table
 ```
+
+<img src='images/2025-10-21-05-12-38.png' width=900>
 
 ### Using Bicep for Role Assignments
 
