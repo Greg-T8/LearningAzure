@@ -159,13 +159,118 @@ You are responsible for implementing this RBAC strategy and validating that user
    * **Reader** – View all resources but cannot make changes
    * **User Access Administrator** – Manage user access to resources
 4. Click on a role and select **Permissions** to view detailed actions
+
+    <img src='images/2025-10-21-04-04-43.png' width=700>
+
 5. Note the difference between `Actions`, `NotActions`, `DataActions`, and `NotDataActions`
 
-**Example: Virtual Machine Contributor**
+    <br>**Understanding Control Plane vs. Data Plane Permissions:**
 
-* **Actions:** `Microsoft.Compute/virtualMachines/*`
-* **NotActions:** None
-* **DataActions:** None (cannot access data inside VMs)
+    Azure RBAC distinguishes between two types of operations:
+
+    * **Control Plane (Management Plane):** Operations that manage Azure resources themselves
+      * Examples: Create VM, delete storage account, configure network settings
+      * Handled by Azure Resource Manager (`https://management.azure.com`)
+      * Use `Actions` and `NotActions`
+
+    * **Data Plane:** Operations that interact with data inside Azure resources
+      * Examples: Read/write blobs, read queue messages, query database
+      * Handled by the resource provider directly
+      * Use `DataActions` and `NotDataActions`
+
+    **Permission Properties Explained:**
+
+    | Property | Type | Purpose | Examples |
+    |----------|------|---------|----------|
+    | **Actions** | Control Plane | Specifies allowed management operations | `Microsoft.Compute/virtualMachines/write`<br>`Microsoft.Storage/storageAccounts/delete`<br>`*/read` (read all resources) |
+    | **NotActions** | Control Plane | Excludes specific operations from allowed `Actions` | Contributor has `Actions: ["*"]` but `NotActions` excludes RBAC operations like `Microsoft.Authorization/*/Write` |
+    | **DataActions** | Data Plane | Specifies allowed data operations inside resources | `Microsoft.Storage/storageAccounts/blobServices/containers/blobs/read`<br>`Microsoft.Storage/storageAccounts/queueServices/queues/messages/write` |
+    | **NotDataActions** | Data Plane | Excludes specific data operations from allowed `DataActions` | Grant all blob operations except delete:<br>`DataActions: ["Microsoft.Storage/.../blobs/*"]`<br>`NotDataActions: ["Microsoft.Storage/.../blobs/delete"]` |
+
+    **Effective Permissions Formula:**
+
+    ```text
+    Effective Control Plane Permissions = Actions - NotActions
+    Effective Data Plane Permissions = DataActions - NotDataActions
+    ```
+
+    **Key Concepts:**
+
+    1. **Historical Context - DataActions Introduction (Early 2018):**
+       * **Previously:** Role-based access control was NOT used for data actions. Authorization for data actions varied across resource providers
+       * **Change:** Azure extended the RBAC model to support data plane actions via `DataActions` and `NotDataActions`
+       * **Timeline:** DataActions were introduced in **API version `2018-01-01-preview`** (early 2018)
+       * **REST API Support:** To use DataActions in REST API, you must use **API version `2018-07-01` or later**
+       * **Tool Requirements:** Updated tool versions were required:
+         * Azure PowerShell 1.1.0 or later
+         * Azure CLI 2.0.30 or later
+       * **Why the change:** This separation prevents roles with wildcards (`*`) from suddenly having unrestricted access to data, maintaining security boundaries between resource management and data access
+
+    2. **Separation of Concerns:** Control plane access does NOT automatically grant data plane access
+       * Example: Having `Reader` role lets you see a storage account exists, but you cannot read the blobs inside
+       * You need `Storage Blob Data Reader` role (which has `DataActions`) to read blob data
+
+    3. **NotActions is NOT a Deny:** It's a subtraction from allowed actions, not a deny rule
+       * If Role A has `NotActions: ["delete"]` but Role B grants `Actions: ["delete"]`, the user CAN delete
+       * For true deny, use Deny Assignments (covered in Exercise 5)
+
+    4. **Wildcards:** `*` grants all current AND future operations
+       * `Actions: ["Microsoft.Compute/*"]` = all Compute operations
+       * `DataActions: ["Microsoft.Storage/.../blobs/*"]` = all blob data operations
+
+    5. **Authentication Methods Matter:** Data plane access only works when using Microsoft Entra authentication
+       * If storage account uses "Access Key" authentication, RBAC data plane roles are bypassed
+       * Set container authentication to "Microsoft Entra User Account" for RBAC to apply
+
+    **Real-World Example: Storage Blob Data Contributor Role**
+
+    ```json
+    {
+      "Name": "Storage Blob Data Contributor",
+      "Actions": [
+        "Microsoft.Storage/storageAccounts/blobServices/containers/delete",
+        "Microsoft.Storage/storageAccounts/blobServices/containers/read",
+        "Microsoft.Storage/storageAccounts/blobServices/containers/write",
+        "Microsoft.Storage/storageAccounts/blobServices/generateUserDelegationKey/action"
+      ],
+      "NotActions": [],
+      "DataActions": [
+        "Microsoft.Storage/storageAccounts/blobServices/containers/blobs/delete",
+        "Microsoft.Storage/storageAccounts/blobServices/containers/blobs/read",
+        "Microsoft.Storage/storageAccounts/blobServices/containers/blobs/write",
+        "Microsoft.Storage/storageAccounts/blobServices/containers/blobs/move/action",
+        "Microsoft.Storage/storageAccounts/blobServices/containers/blobs/add/action"
+      ],
+      "NotDataActions": []
+    }
+    ```
+
+    <img src='images/2025-10-21-04-24-45.png' width=700>
+
+    <img src='images/2025-10-21-04-24-00.png' width=700>
+
+    **Analysis:**
+    * **Control Plane (Actions):** Can manage blob containers (create, delete, list containers)
+    * **Data Plane (DataActions):** Can read/write/delete blob data inside containers
+    * This role provides BOTH management and data access
+
+    **Comparison Example: Owner vs. Storage Blob Data Contributor**
+
+    | Scenario | Owner Role | Storage Blob Data Contributor |
+    |----------|------------|-------------------------------|
+    | Create storage account | ✅ Yes (`Actions: ["*"]`) | ❌ No |
+    | Delete storage account | ✅ Yes | ❌ No |
+    | View storage account properties | ✅ Yes | ✅ Yes |
+    | Create blob container | ✅ Yes | ✅ Yes (`Actions` includes container operations) |
+    | Read blob data | ❌ No (no `DataActions`) | ✅ Yes (`DataActions` includes blob read) |
+    | Write blob data | ❌ No | ✅ Yes |
+    | Assign RBAC roles | ✅ Yes | ❌ No |
+
+    **Important:** Owner has wildcard `Actions: ["*"]` for all control plane operations, but has ZERO `DataActions`, so Owner **cannot** read/write blob data by default without additional data plane role assignment.
+
+    **📚 Related Documentation:**
+    * [Understand Azure role definitions - Control and data actions](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-definitions#control-and-data-actions)
+    * [Azure control plane and data plane](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/control-plane-and-data-plane)
 
 ### Using PowerShell (`Get-AzRoleDefinition`)
 
@@ -188,16 +293,25 @@ Get-AzRoleDefinition | Where-Object {$_.Actions -like "*Microsoft.Compute/virtua
 
 **Output Example:**
 
-```
-Name             : Contributor
+```pwsh
+> Get-AzRoleDefinition Contributor
+
+Name             : Contributor                                                     
 Id               : b24988ac-6180-42a0-ab88-20f7382dd24c
 IsCustom         : False
-Description      : Grants full access to manage all resources, but does not allow you to assign roles in Azure RBAC
+Description      : Grants full access to manage all resources, but does not allow 
+                   you to assign roles in Azure RBAC, manage assignments in Azure 
+                   Blueprints, or share image galleries.
 Actions          : {*}
-NotActions       : {Microsoft.Authorization/*/Delete, Microsoft.Authorization/*/Write...}
+NotActions       : {Microsoft.Authorization/*/Delete, 
+                   Microsoft.Authorization/*/Write, 
+                   Microsoft.Authorization/elevateAccess/Action,                   
+                   Microsoft.Blueprint/blueprintAssignments/write…}
 DataActions      : {}
 NotDataActions   : {}
 AssignableScopes : {/}
+Condition        : 
+ConditionVersion : 
 ```
 
 ### Using Azure CLI (`az role definition list`)
@@ -211,6 +325,11 @@ az role definition list --name "Contributor" --output json
 
 # Find roles with specific permissions
 az role definition list --query "[?contains(permissions[0].actions[0], 'Microsoft.Storage')]"
+
+# Find roles that can manage storage resources
+az role definition list `
+  --query "[?permissions[0].actions && contains(join('', permissions[0].actions), 'Microsoft.Storage')]" `
+  --output table
 ```
 
 ### Understanding Key Built-in Roles
