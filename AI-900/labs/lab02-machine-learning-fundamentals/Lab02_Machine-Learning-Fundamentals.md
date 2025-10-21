@@ -131,21 +131,31 @@ For each scenario below, identify if it's regression, classification, or cluster
 - **Model:** The mathematical representation learned from data
 - **Inference:** Using the trained model to make predictions on new data
 
-https://learn.microsoft.com/en-us/training/modules/design-machine-learning-model-training-solution/
-
-
 **Activity:**
 
 Given a dataset of house sales with columns: `SquareFeet`, `Bedrooms`, `Bathrooms`, `Location`, `YearBuilt`, `SalePrice`:
 
-1. Which columns are features? - `SquareFeet`, `Bedrooms`, `Bathrooms`, `Location`, `YearBuilt`
-2. Which column is the label? - `SalePrice`
-3. Is this a regression or classification problem? - Regression
-4. How would you split the data for training, validation, and testing? 
+1. **Which columns are features?** - `SquareFeet`, `Bedrooms`, `Bathrooms`, `Location`, `YearBuilt` ✅
+   - *Correct! Features are the input variables (independent variables) used to make predictions. They provide information about each house that helps the model learn patterns.*
+
+2. **Which column is the label?** - `SalePrice` ✅
+   - *Correct! The label (also called target variable or dependent variable) is what you're trying to predict. In supervised learning, this is the "answer" that the model learns to predict based on the features.*
+
+3. **Is this a regression or classification problem?** - Regression ✅
+   - *Correct! Since `SalePrice` is a continuous numeric value (like $250,000 or $375,500), this is a regression problem. Classification would be used if you were predicting categories (like "affordable," "moderate," "expensive").*
+
+4. **How would you split the data for training, validation, and testing?** - Use a **70/15/15 split**:
+   - **Training Set (70%):** Used to train the model and learn patterns between features and sale prices
+   - **Validation Set (15%):** Used to tune the model, compare different algorithms, and select the best performing model during training
+   - **Test Set (15%):** Held completely separate until the end to evaluate final model performance on unseen data
+   - **Important:** Shuffle the data randomly before splitting to avoid any ordering bias in the original dataset
+
+   *Alternative common splits: 80/10/10 or 60/20/20 (for smaller datasets). The key principle is to reserve separate data for validation (model tuning) and testing (final evaluation) to ensure the model generalizes well to new, unseen data.* 
 
 **📚 Related Documentation:**
 
-- [Build Classical ML Models with Supervised Learning](https://learn.microsoft.com/en-us/training/modules/introduction-to-classical-machine-learning/) - Define supervised learning and model training concepts
+- [Machine learning model](https://learn.microsoft.com/en-us/dotnet/machine-learning/mldotnet-api#machine-learning-model) - Features and labels explanation
+- [Learn Module: Build Classical ML Models with Supervised Learning](https://learn.microsoft.com/en-us/training/modules/introduction-to-classical-machine-learning/) - Define supervised learning and model training concepts
 - [What is Machine Learning?](https://learn.microsoft.com/en-us/training/modules/fundamentals-machine-learning/2-what-is-machine-learning) - Core ML concepts including features and labels
 - [Configure Training, Validation, and Test Data in Automated ML](https://learn.microsoft.com/en-us/azure/machine-learning/how-to-configure-cross-validation-data-splits) - Data splits and cross-validation
 - [Training, Validation, and Test Data Overview](https://learn.microsoft.com/en-us/azure/machine-learning/concept-automated-ml#training-validation-and-test-data) - Understanding data partitioning
