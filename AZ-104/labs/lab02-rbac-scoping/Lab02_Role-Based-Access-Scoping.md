@@ -728,21 +728,31 @@ terraform apply
 
 ```powershell
 # Get all role assignments for a specific user
-$userId = (Get-AzADUser -UserPrincipalName "user1@637djb.onmicrosoft.com").Id
+$userId = (Get-AzADUser -UserPrincipalName "user2@637djb.onmicrosoft.com").Id
 
 Get-AzRoleAssignment -ObjectId $userId | 
     Select-Object RoleDefinitionName, Scope, ObjectId | 
     Format-Table
+```
 
+<img src='images/2025-10-22-04-01-20.png' width=900>
+
+```powershell
 # Get role assignments at subscription scope (includes inherited)
 $subscriptionId = (Get-AzContext).Subscription.Id
-Get-AzRoleAssignment -Scope "/subscriptions/$subscriptionId" | 
-    Where-Object {$_.DisplayName -eq "user1"} |
+Get-AzRoleAssignment -AtScope -Scope "/subscriptions/$subscriptionId" | 
+    Where-Object {$_.SignInName -match "user2"} |
     Format-Table DisplayName, RoleDefinitionName, Scope
+```
 
+<img src='images/2025-10-22-04-07-39.png' width=600>
+
+```powershell
 # Get role assignments for a resource group (includes inherited)
 Get-AzRoleAssignment -ResourceGroupName "rg-dev-test" -ObjectId $userId
 ```
+
+<img src='images/2025-10-22-04-09-02.png' width=500>
 
 #### Using Azure CLI (`az role assignment list`)
 
