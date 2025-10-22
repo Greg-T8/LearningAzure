@@ -720,7 +720,9 @@ terraform apply
    * Direct assignments
    * Inherited assignments
    * Effective permissions
-5. Review the **Inheritance path** to understand where permissions come from
+5. Review the role assignments showing **access at this scope and inherited to this scope** to understand where permissions come fromm
+
+<img src='images/2025-10-22-03-54-35.png' width=800>
 
 #### Using PowerShell (`Get-AzRoleAssignment`)
 
