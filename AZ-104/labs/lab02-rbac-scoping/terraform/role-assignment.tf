@@ -25,7 +25,7 @@ data "azurerm_resource_group" "dev" {
 }
 
 data "azuread_user" "dev_user" {
-  user_principal_name = "user3@637djb.onmicrosoft.com"
+  user_principal_name = "user2@637djb.onmicrosoft.com"
 }
 
 # Role assignment at resource group scope

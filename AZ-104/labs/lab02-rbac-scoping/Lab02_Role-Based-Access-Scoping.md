@@ -609,6 +609,8 @@ New-AzResourceGroupDeployment `
     -principalType "User"
 ```
 
+<img src='images/2025-10-22-03-28-28.png' width=800>
+
 ### Using Terraform for Role Assignments
 
 Create `role-assignment.tf`:
@@ -670,6 +672,8 @@ terraform init
 terraform plan
 terraform apply
 ```
+
+<img src='images/2025-10-22-03-45-33.png' width=700>
 
 ### Exam Insights
 
