@@ -609,7 +609,7 @@ New-AzResourceGroupDeployment `
     -principalType "User"
 ```
 
-<img src='images/2025-10-22-03-28-28.png' width=800>
+<img src='images/2025-10-22-03-28-28.png' width=900>
 
 ### Using Terraform for Role Assignments
 
