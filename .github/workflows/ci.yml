@@ -17,18 +17,13 @@ on:
 # CI jobs
 jobs:
 
-  # Markdown lint job (markdownlint) and inline link check (lychee)
+  # Markdown lint job (markdownlint only)
   markdown:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: DavidAnson/markdownlint-cli2-action@v16
         with: { globs: "**/*.md" }
-      - uses: lycheeverse/lychee-action@v2
-        with:
-          args: "--no-progress --verbose **/*.md "
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   # Dedicated link-check job using lychee (checks for broken links)
   link-check:
@@ -40,6 +35,7 @@ jobs:
 
       # Run lychee to detect broken links in markdown files
       - name: Check links with lychee
+        id: lychee
         uses: lycheeverse/lychee-action@v2
         with:
           # Recursively scan markdown files; verbose output helps debug broken links
@@ -47,6 +43,27 @@ jobs:
         env:
           # Provide token to increase rate limits for external link checks
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Send email notification only on failure
+      - name: Send email notification on link check failure
+        if: failure()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: "❌ Broken links detected in ${{ github.repository }}"
+          to: ${{ secrets.MAIL_TO }}
+          from: GitHub Actions
+          body: |
+            Link check failed in repository: ${{ github.repository }}
+            Branch: ${{ github.ref_name }}
+            Commit: ${{ github.sha }}
+
+            View details: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+            Please review the failed links and update the documentation.
 
   # PowerShell static analysis job (PSScriptAnalyzer)
   powershell:
