@@ -150,7 +150,7 @@ Given a dataset of house sales with columns: `SquareFeet`, `Bedrooms`, `Bathroom
    - **Test Set (15%):** Held completely separate until the end to evaluate final model performance on unseen data
    - **Important:** Shuffle the data randomly before splitting to avoid any ordering bias in the original dataset
 
-   *Alternative common splits: 80/10/10 or 60/20/20 (for smaller datasets). The key principle is to reserve separate data for validation (model tuning) and testing (final evaluation) to ensure the model generalizes well to new, unseen data.* 
+   *Alternative common splits: 80/10/10 or 60/20/20 (for smaller datasets). The key principle is to reserve separate data for validation (model tuning) and testing (final evaluation) to ensure the model generalizes well to new, unseen data.*
 
 **📚 Related Documentation:**
 
@@ -167,6 +167,8 @@ Given a dataset of house sales with columns: `SquareFeet`, `Bedrooms`, `Bathroom
 
 **Objective:** Train a machine learning model using Azure ML's no-code automated ML capability.
 
+[Tutorial: Train a classification model with no-code AutoML in the Azure Machine Learning studio](https://learn.microsoft.com/en-us/azure/machine-learning/tutorial-first-experiment-automated-ml?view=azureml-api-2)
+
 **Steps:**
 
 1. **Create an Azure Machine Learning Workspace:**
@@ -182,33 +184,11 @@ Given a dataset of house sales with columns: `SquareFeet`, `Bedrooms`, `Bathroom
     <img src='images/2025-10-21-06-03-24.png' width=700>
 
 3. **Create a Dataset:**
-   - Navigate to "Data" → "Create"
-   - Upload a sample dataset (e.g., diabetes regression dataset, Titanic classification dataset)
-     - [Diabetes Dataset Sample](https://www4.stat.ncsu.edu/~boos/var.select/diabetes.tab.txt)
-     - [Bike Share Dataset Sample](https://github.com/Azure/azureml-examples/blob/v1-archive/v1/python-sdk/tutorials/automl-with-azureml/forecasting-bike-share/bike-no.csv)
-   - Or use a built-in sample dataset
-
-        <img src='images/2025-10-21-06-09-49.png' width=600>
-
-        <img src='images/2025-10-21-06-10-21.png' width=600>
-
-        <img src='images/2025-10-21-06-10-54.png' width=600>
-
-        <img src='images/2025-10-21-06-21-42.png' width=600>
-
-        <img src='images/2025-10-21-06-22-46.png' width=600>
-
-        <img src='images/2025-10-21-06-23-31.png' width=600>
-
-        <img src='images/2025-10-21-06-24-01.png' width=600>
+   - Navigate to "Data" → "Create" ([Create and load a dataset as a data asset](https://learn.microsoft.com/en-us/azure/machine-learning/tutorial-first-experiment-automated-ml?view=azureml-api-2#create-and-load-a-dataset-as-a-data-asset))
+   - Upload a sample dataset ([Bank Marketing Dataset](https://archive.ics.uci.edu/dataset/222/bank+marketing))
 
 4. **Run Automated ML:**
    - Navigate to "Automated ML" → "New Automated ML job"
-
-        <img src='images/2025-10-21-06-13-10.png' width=600>
-
-        <img src='images/2025-10-21-06-13-46.png' width=600>
-
    - Select your dataset
    - Choose task type: Regression, Classification, or Time Series Forecasting
    - Select target column (label)
@@ -217,13 +197,22 @@ Given a dataset of house sales with columns: `SquareFeet`, `Bedrooms`, `Bathroom
      - Training time limit (shorter for labs, e.g., 15 minutes)
    - Submit the job
 
+        <img src='images/2025-10-25-05-55-24.png' width=700>
+
 5. **Review Results:**
    - Once complete, review the best model
    - Examine metrics (accuracy, precision, recall, F1 score, etc.)
    - Review feature importance
 
+        <img src='images/2025-10-25-05-59-47.png' width=700>
+
 6. **Deploy the Model (Optional):**
-   - Deploy the best model as a web service endpoint
+   - Deploy the best model as a web service endpoint ([Deploy the best model](https://learn.microsoft.com/en-us/azure/machine-learning/tutorial-first-experiment-automated-ml?view=azureml-api-2#deploy-the-best-model))
+
+        <img src='images/2025-10-25-06-01-05.png' width=700>
+
+        <img src='images/2025-10-25-06-15-23.png' width=700>
+
    - Test the endpoint with sample data
 
 **Deliverables:**
@@ -243,6 +232,22 @@ Given a dataset of house sales with columns: `SquareFeet`, `Bedrooms`, `Bathroom
 
 **Objective:** Learn about advanced machine learning techniques.
 
+[Deep learning vs machine learning in Azure Machine Learning](https://learn.microsoft.com/en-us/azure/machine-learning/concept-deep-learning-vs-machine-learning?view=azureml-api-2)
+
+**AI, Machine Learning, and Deep Learning — Relationship (per Microsoft docs):**
+
+- Artificial Intelligence (AI) is the broad field of building systems that perform tasks requiring human-like intelligence (reasoning, perception, decision-making).
+- Machine Learning (ML) is a subset of AI where systems learn patterns from data instead of relying only on hand-crafted rules.
+- Deep Learning (DL) is a subset of ML that uses deep neural networks to automatically learn representations, excelling with large amounts of data and unstructured inputs (images, audio, text).
+- Inclusion relationship: AI ⊃ ML ⊃ DL. Not every AI solution uses ML, and not every ML problem needs DL. DL often provides higher accuracy on unstructured data but typically requires more data, compute, and may be less interpretable.
+
+**Generative AI — Where it fits (per Microsoft docs):**
+
+- Generative AI is an application area within AI that focuses on creating new content (text, images, code, audio).
+- It is typically powered by deep learning–based generative models (e.g., Transformers for LLMs, diffusion models, GANs, VAEs), so it largely sits inside DL ⊂ ML ⊂ AI.
+- Not all DL is generative; many DL models are discriminative. Generative AI emphasizes content creation, while discriminative models focus on prediction/classification.
+- In Azure, services like Azure OpenAI provide generative models built on Transformer architectures.
+
 **Deep Learning:**
 
 - Uses neural networks with multiple layers (hence "deep")
@@ -251,12 +256,55 @@ Given a dataset of house sales with columns: `SquareFeet`, `Bedrooms`, `Bathroom
 - **Recurrent Neural Networks (RNNs):** Specialized for sequences (text, time series)
 - Requires large amounts of data and computational power
 
+**Transfer Learning (per Microsoft docs):**
+
+- Reuse a model pre-trained on a large dataset and adapt it to a new, related task instead of training from scratch.
+- Two common approaches:
+  - Feature extraction: freeze earlier layers as generic feature extractors, train a new classifier head.
+  - Fine-tuning: unfreeze some/all layers and continue training on your task data.
+- Benefits: requires less labeled data and compute, converges faster, and often improves accuracy when data is limited.
+- Typical use cases: computer vision (e.g., adapting ImageNet-trained CNNs), NLP (e.g., adapting BERT/GPT), and speech.
+- In Azure Machine Learning, you can build transfer learning workflows using pre-trained models and fine-tuning within your training pipelines.
+
+**Types of Artificial Neural Networks (per Microsoft docs):**
+
+- Feedforward (DNN/MLP): stacked fully connected layers; strong baseline for tabular data; no recurrence or convolution.
+- Convolutional Neural Networks (CNNs): use convolutions/pooling to learn spatial features; excel on images and video.
+- Recurrent Neural Networks (RNNs): model sequences and time dependencies; LSTM/GRU variants mitigate vanishing gradients.
+- Autoencoders/VAEs: encoder–decoder nets that learn compact representations; used for denoising, compression, anomaly detection.
+- Generative Adversarial Networks (GANs): generator vs discriminator setup for content synthesis (e.g., images), data augmentation.
+- Transformers: attention-based sequence models that scale well; foundation for LLMs and many generative AI workloads.
+
+**CNNs vs RNNs — Key Differences (exam)**
+
+- Data structure and inductive bias:
+  - CNNs: exploit spatial locality with shared kernels and pooling; translation invariance on grid-like data (images/video).
+  - RNNs: exploit temporal order with recurrent connections; model dependencies across time steps.
+- Parallelism and training:
+  - CNNs: highly parallelizable across spatial dimensions; typically faster to train on modern hardware.
+  - RNNs: inherently sequential across time steps; slower and harder to parallelize.
+- Context modeling:
+  - CNNs: strong at local patterns via receptive fields; use depth/dilation to expand context.
+  - RNNs: better for sequence dependencies; LSTM/GRU mitigate vanishing gradients for longer-range context.
+- Variable-length handling:
+  - CNNs: usually require fixed-size windows/padding or global pooling.
+  - RNNs: naturally handle variable-length sequences.
+- Typical use cases:
+  - CNNs: image classification, object detection, segmentation, video tasks.
+  - RNNs: language modeling, sequence labeling (NER), time-series forecasting, speech.
+- Outputs:
+  - CNNs: produce feature maps; add fully connected head for classification/regression.
+  - RNNs: produce hidden states per step or a final summary state; suited for seq-to-seq and sequence tagging.
+- Note: 1D CNNs can work on sequences, and Transformers increasingly replace RNNs for many NLP tasks.
+
 **Transformer Architecture:**
 
 - Modern architecture that revolutionized NLP
 - Uses "attention mechanisms" to understand context
 - Foundation for models like BERT, GPT, T5
 - Powers Azure OpenAI Service models
+
+
 
 **Activity:**
 
@@ -282,6 +330,7 @@ Given a dataset of house sales with columns: `SquareFeet`, `Bedrooms`, `Bathroom
 - [Azure Machine Learning Documentation](https://learn.microsoft.com/en-us/azure/machine-learning/)
 - [Automated ML Overview](https://learn.microsoft.com/en-us/azure/machine-learning/concept-automated-ml)
 - [Deep Learning Fundamentals](https://learn.microsoft.com/en-us/training/modules/intro-to-deep-learning/)
+- [Machine Learning Algorithm Cheat Sheet](https://learn.microsoft.com/en-us/azure/machine-learning/algorithm-cheat-sheet?view=azureml-api-1&viewFallbackFrom=azureml-api-2&WT.mc_id=docs-article-lazzeri)
 
 ---
 
