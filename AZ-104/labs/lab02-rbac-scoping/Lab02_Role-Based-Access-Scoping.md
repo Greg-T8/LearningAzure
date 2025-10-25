@@ -946,6 +946,7 @@ Using Azure CLI:
 # List all deny assignments
 az role assignment list --query "[?type=='Microsoft.Authorization/denyAssignments']" --output table
 ```
+
 ### Exam Insights
 
 💡 **Exam Tip:** Deny assignments always take precedence. Even an Owner cannot override a deny assignment.
@@ -981,18 +982,20 @@ Before creating service principals, it's important to understand the relationshi
 * **One App Registration** can be used by multiple Service Principals across different tenants
 
 **Service Principal (Enterprise Application):**
+
 * The **local representation** of the application in a specific Microsoft Entra ID tenant
 * The security principal that actually performs actions and has permissions assigned
 * The object that receives role assignments (RBAC)
 * Think of it as the "instance" or "local copy" of the app registration in a tenant
 
 **Analogy:**
+
 * **App Registration** = Class definition in code (blueprint)
 * **Service Principal** = Object instance created from that class (actual running instance)
 
 **Relationship:**
 
-```
+```text
 App Registration (1)  ──creates──>  Service Principal (1 or more)
      (Global)                            (Per Tenant)
 ```
@@ -1055,6 +1058,7 @@ az role assignment create \
 ```
 
 **📚 Related Documentation:**
+
 * [Application and service principal objects in Microsoft Entra ID](https://learn.microsoft.com/en-us/entra/identity-platform/app-objects-and-service-principals)
 * [How to: Use the portal to create a Microsoft Entra application and service principal](https://learn.microsoft.com/en-us/entra/identity-platform/howto-create-service-principal-portal)
 
