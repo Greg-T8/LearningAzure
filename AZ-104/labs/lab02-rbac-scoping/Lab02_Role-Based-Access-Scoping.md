@@ -53,9 +53,9 @@
   * [View Deny Assignments](#view-deny-assignments)
     * [Using the Azure Portal](#using-the-azure-portal-4)
     * [Using PowerShell (`Get-AzDenyAssignment`)](#using-powershell-get-azdenyassignment)
-  * [Common Deny Assignment Scenarios](#common-deny-assignment-scenarios)
   * [Exam Insights](#exam-insights-4)
 * [🔹 Exercise 6 – Assign Roles to Service Principals](#-exercise-6--assign-roles-to-service-principals)
+  * [Understanding App Registrations vs Service Principals](#understanding-app-registrations-vs-service-principals)
   * [Create a Service Principal](#create-a-service-principal)
     * [Using Azure CLI (`az ad sp create-for-rbac`)](#using-azure-cli-az-ad-sp-create-for-rbac)
     * [Using PowerShell (`New-AzADServicePrincipal`)](#using-powershell-new-azadserviceprincipal)
@@ -80,8 +80,6 @@
   * [Delete a Custom Role](#delete-a-custom-role)
   * [Custom Role Best Practices](#custom-role-best-practices)
   * [Exam Insights](#exam-insights-7)
-* [🧭 Reflection \& Readiness](#-reflection--readiness)
-* [📚 References](#-references)
 
 ## 🎯 Lab Objective
 
@@ -894,10 +892,12 @@ Remove-AzRoleAssignment `
 
 **Deny assignments** block users from performing specific actions even if a role assignment grants them access.
 
+[List Azure deny assignments](https://learn.microsoft.com/en-us/azure/role-based-access-control/deny-assignments?tabs=azure-portal)
+
 **Key Characteristics:**
 
 * Deny assignments take precedence over role assignments
-* Created by Azure services automatically (e.g., Azure Blueprints, Managed Applications)
+* Created by Azure services automatically (e.g., Azure Deployment Stacks)
 * Cannot be created manually by users
 * Applied to protect system-critical resources
 
@@ -920,7 +920,7 @@ Remove-AzRoleAssignment `
    * Principals (who is denied)
    * Scope
 
-**Note:** Most tenants won't have deny assignments unless Azure Blueprints or Managed Applications are in use.
+**Note:** Most tenants won't have deny assignments unless Deployment Stacks are in use.
 
 #### Using PowerShell (`Get-AzDenyAssignment`)
 
@@ -944,55 +944,8 @@ Using Azure CLI:
 
 ```bash
 # List all deny assignments
-az role assignment list --include-deny-assignments --query "[?type=='Microsoft.Authorization/denyAssignments']"
-
-# Get deny assignments at subscription scope
-az role assignment list \
-    --all \
-    --include-deny-assignments \
-    --query "[?type=='Microsoft.Authorization/denyAssignments']" \
-    --output table
+az role assignment list --query "[?type=='Microsoft.Authorization/denyAssignments']" --output table
 ```
-
-### Common Deny Assignment Scenarios
-
-**1. Azure Blueprints with Resource Locks**
-
-* When you assign a blueprint with a lock, Azure creates a deny assignment
-* Prevents modification or deletion of locked resources
-* Even Owners cannot override
-
-**2. Managed Applications**
-
-* Resources in the managed resource group have deny assignments
-* Prevents customer modification of provider-managed resources
-
-**3. System-Assigned Deny Assignments**
-
-* Protect Azure system resources
-* Example: Deny delete on Azure AD tenant
-
-**Example: Checking for Deny Assignments**
-
-```powershell
-# Create a blueprint-locked resource group (if Blueprints available)
-# Then check for deny assignments
-
-$rgName = "rg-locked-test"
-$denyAssignments = Get-AzDenyAssignment -ResourceGroupName $rgName
-
-if ($denyAssignments) {
-    Write-Host "Deny assignments found:"
-    $denyAssignments | ForEach-Object {
-        Write-Host "  Name: $($_.DenyAssignmentName)"
-        Write-Host "  Denied Actions: $($_.Permissions.Actions -join ', ')"
-        Write-Host "  Principals: $($_.Principals.Count) affected principals"
-    }
-} else {
-    Write-Host "No deny assignments found in $rgName"
-}
-```
-
 ### Exam Insights
 
 💡 **Exam Tip:** Deny assignments always take precedence. Even an Owner cannot override a deny assignment.
@@ -1008,6 +961,104 @@ if ($denyAssignments) {
 ## 🔹 Exercise 6 – Assign Roles to Service Principals
 
 **Goal:** Manage automated access using service principals.
+
+### Understanding App Registrations vs Service Principals
+
+Before creating service principals, it's important to understand the relationship between **App Registrations** and **Service Principals**, as these terms are often used interchangeably but represent different concepts.
+
+<img src='images/2025-10-25-05-37-45.png' width=200>
+
+**App Registration (Entra Application):**
+
+* The **global definition** of your application across all Microsoft Entra ID tenants
+* Created in your "home" Microsoft Entra ID tenant
+* Defines the application's identity and configuration
+* Contains:
+  * Application (Client) ID - unique identifier
+  * Redirect URIs
+  * API permissions required
+  * Certificates & secrets (credentials)
+* **One App Registration** can be used by multiple Service Principals across different tenants
+
+**Service Principal (Enterprise Application):**
+* The **local representation** of the application in a specific Microsoft Entra ID tenant
+* The security principal that actually performs actions and has permissions assigned
+* The object that receives role assignments (RBAC)
+* Think of it as the "instance" or "local copy" of the app registration in a tenant
+
+**Analogy:**
+* **App Registration** = Class definition in code (blueprint)
+* **Service Principal** = Object instance created from that class (actual running instance)
+
+**Relationship:**
+
+```
+App Registration (1)  ──creates──>  Service Principal (1 or more)
+     (Global)                            (Per Tenant)
+```
+
+**Real-World Example:**
+
+1. You create an **App Registration** named "MyApp" in your Microsoft Entra ID tenant
+   * Gets Application ID: `12345678-1234-1234-1234-123456789abc`
+
+2. When you grant this app access to resources in your tenant:
+   * A **Service Principal** is automatically created in your tenant
+   * This Service Principal is what you assign RBAC roles to
+   * The Service Principal references the App Registration by Application ID
+
+3. If another organization wants to use "MyApp" (multi-tenant scenario):
+   * They consent to your App Registration (global definition)
+   * A new **Service Principal** is created in *their* tenant
+   * Your App Registration remains unchanged (still one global definition)
+   * Now there are two Service Principals (one per tenant) referencing the same App Registration
+
+**Terminology Across Tools:**
+
+| Concept | Azure Portal (Entra) | Azure CLI | PowerShell |
+|---------|---------------------|-----------|------------|
+| **App Registration** | "App registrations" blade | `az ad app` | `New-AzADApplication` |
+| | Entra Application | Application object | Application object |
+| **Service Principal** | "Enterprise applications" blade | `az ad sp` | `New-AzADServicePrincipal` |
+| | Enterprise Application | Service principal object | Service Principal object |
+
+**Why This Matters for RBAC:**
+
+* **You assign Azure RBAC roles to the Service Principal, NOT the App Registration**
+* When using `az ad sp create-for-rbac`:
+  * Creates App Registration (global definition)
+  * Creates Service Principal (local instance)
+  * Assigns RBAC role to the Service Principal
+  * Returns credentials for authentication
+
+**Object IDs:**
+
+* **Application (Client) ID:** Identifies the App Registration globally across all tenants
+* **Service Principal Object ID:** Identifies the Service Principal in a specific tenant
+* **When assigning roles:** Use the Service Principal Object ID, not the Application ID
+
+**Example Commands:**
+
+```bash
+# Create App Registration
+az ad app create --display-name "MyApp"
+# Output: Application (Client) ID
+
+# Create Service Principal from App Registration
+az ad sp create --id <Application-Client-ID>
+# Output: Service Principal Object ID (different from Application ID)
+
+# Assign role to Service Principal (use SP Object ID)
+az role assignment create \
+    --assignee <Service-Principal-Object-ID> \
+    --role "Contributor"
+```
+
+**📚 Related Documentation:**
+* [Application and service principal objects in Microsoft Entra ID](https://learn.microsoft.com/en-us/entra/identity-platform/app-objects-and-service-principals)
+* [How to: Use the portal to create a Microsoft Entra application and service principal](https://learn.microsoft.com/en-us/entra/identity-platform/howto-create-service-principal-portal)
+
+---
 
 ### Create a Service Principal
 
@@ -1042,7 +1093,7 @@ az ad sp create-for-rbac \
 #### Using PowerShell (`New-AzADServicePrincipal`)
 
 ```powershell
-# Create an Azure AD application
+# Create a Microsoft Entra application
 $app = New-AzADApplication -DisplayName "sp-automation"
 
 # Create a service principal for the application
@@ -1125,7 +1176,7 @@ New-AzStorageAccount `
    * Use certificate-based authentication for higher security
 
 4. **Monitor service principal activity**
-   * Review sign-in logs in Azure AD
+   * Review sign-in logs in Microsoft Entra ID
    * Set up alerts for unusual activity
 
 ### Exam Insights
@@ -1202,7 +1253,7 @@ az role assignment list --all --role "Owner" --output table
 
 💡 **Exam Tip:** Classic subscription administrators (Service Administrator, Co-Administrators) automatically have Owner role at subscription scope.
 
-💡 **Exam Tip:** Regular access reviews help identify stale assignments and over-privileged accounts (requires Azure AD Premium P2).
+💡 **Exam Tip:** Regular access reviews help identify stale assignments and over-privileged accounts (requires Microsoft Entra ID Premium P2).
 
 💡 **Exam Tip:** Use Azure Policy to enforce tagging on role assignments for better tracking (custom metadata).
 
@@ -1225,7 +1276,7 @@ az role assignment list --all --role "Owner" --output table
 
 **Key Limitations:**
 
-* Maximum of **5,000 custom roles** per Azure AD tenant
+* Maximum of **5,000 custom roles** per Microsoft Entra ID tenant
 * Cannot use root scope (`"/"`) as assignable scope (built-in roles only)
 * Only **one management group** in `AssignableScopes`
 * Custom roles with `DataActions` **cannot** be assigned at management group scope
@@ -1519,7 +1570,7 @@ Using Azure CLI:
 
 ```bash
 # Get role definition
-az role definition list --name "Storage Blob Operator" > role.json
+az role definition list --name "Storage Blob Operator" --output json > role.json
 
 # Edit role.json file to add permissions
 
@@ -1646,189 +1697,4 @@ There are existing role assignments referencing role (code: RoleDefinitionHasAss
 
 💡 **Exam Tip:** Only one management group can be specified in `AssignableScopes` for custom roles.
 
-💡 **Exam Tip:** `NotActions` are not deny permissions—they simply exclude actions from the allowed `Actions`. Deny assignments (separate concept) take precedence.
-
-💡 **Exam Tip:** Cannot delete a custom role if it has active role assignments. Remove assignments first, then delete the role.
-
-💡 **Exam Tip:** Built-in roles have `AssignableScopes: ["/"]` (root scope). Custom roles cannot use root scope.
-
-💡 **Exam Tip:** Role IDs don't change when renamed. Use role ID (GUID) in scripts for stability, not role name.
-
-💡 **Exam Tip:** Wildcards (`*`) in permissions grant current AND future actions. Be cautious—this may grant unintended permissions when Azure adds new actions.
-
-💡 **Exam Tip:** When troubleshooting "cannot create/update custom role" errors, verify you have write permissions on ALL assignable scopes defined in the role.
-
----
-
-## 🧭 Reflection & Readiness
-
-Be able to answer:
-
-1. **What's the difference between Owner and Contributor roles?**
-
-   **Answer:**
-   * **Owner:** Full access to all resources including the ability to assign roles in Azure RBAC. Can manage both resources and access control.
-   * **Contributor:** Full access to manage all resources but cannot assign roles in Azure RBAC. Can create, modify, and delete resources but cannot delegate access to others.
-
-   **Key Distinction:** Only Owner (and User Access Administrator) can manage RBAC role assignments.
-
-2. **If a user has Reader at subscription and Contributor at resource group, what are their effective permissions in that resource group?**
-
-   **Answer:**
-   * **Effective Permission:** Contributor
-   * **Reason:** Azure RBAC permissions are cumulative (additive). The more permissive role takes effect at each scope. Since Contributor includes all Reader permissions plus write/delete capabilities, the user effectively has Contributor access in that specific resource group.
-   * **Other Resource Groups:** The user retains only Reader permissions (inherited from subscription) in resource groups where they don't have explicit Contributor assignment.
-
-3. **How does scope inheritance work?**
-
-   **Answer:**
-   * Permissions assigned at a parent scope automatically flow down to all child scopes (inheritance)
-   * **Hierarchy:** Management Group → Subscription → Resource Group → Resource
-   * **Cannot be blocked:** Azure RBAC does not support "deny inheritance"—you cannot prevent inherited permissions from flowing down
-   * **Cumulative:** If a user has Reader at subscription and Contributor at resource group, they get both (Contributor being more permissive wins)
-   * **Assignment path:** Permissions can come from direct assignments at any level or through group membership
-
-   **Example:**
-   * Reader assigned at subscription = read access to all resource groups and resources
-   * Contributor at resource group = read/write to that RG and all its resources
-   * Virtual Machine Contributor at specific VM = manage only that VM
-
-4. **Can you create custom deny assignments?**
-
-   **Answer:**
-   * **No.** Users and administrators cannot manually create deny assignments
-   * **Only Azure services** can create deny assignments automatically:
-     * Azure Blueprints (when using resource locks)
-     * Azure Managed Applications (managed resource groups)
-     * System-protection mechanisms
-   * **Precedence:** Deny assignments always take precedence over allow (role assignments)
-   * **Purpose:** Protect critical resources from accidental or malicious modification/deletion
-   * **View only:** You can view and list deny assignments but cannot create, modify, or delete them
-
-5. **Why use service principals instead of user accounts for automation?**
-
-   **Answer:**
-   * **Non-interactive authentication:** Service principals are designed for apps, services, and automation tools—no human sign-in required
-   * **No MFA prompts:** Automation scripts don't get interrupted by multi-factor authentication
-   * **Independent lifecycle:** Not tied to a specific user's employment status or password changes
-   * **Principle of least privilege:** Can assign minimal permissions specific to the automation task
-   * **Auditing:** Service principal activity is logged separately from user activity, making it easier to audit automated vs. manual changes
-   * **Credential management:** Can use certificates or federated credentials (workload identity) instead of passwords
-   * **Better alternative:** Managed Identities (when applicable) are even better—no credentials to manage at all
-
-   **Best Practice:** Use Managed Identities > Service Principals > User Accounts for automation.
-
-6. **What's the scope format for a resource group?**
-
-   **Answer:**
-
-   ```
-   /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-   ```
-
-   **Full Scope Hierarchy:**
-   * **Management Group:** `/providers/Microsoft.Management/managementGroups/{mgName}`
-   * **Subscription:** `/subscriptions/{subscriptionId}`
-   * **Resource Group:** `/subscriptions/{subscriptionId}/resourceGroups/{rgName}`
-   * **Resource:** `/subscriptions/{subscriptionId}/resourceGroups/{rgName}/providers/{providerNamespace}/{resourceType}/{resourceName}`
-
-   **Example:**
-
-   ```
-   /subscriptions/12345678-1234-1234-1234-123456789abc/resourceGroups/rg-dev-test
-   ```
-
-   **Usage:** This format is required when assigning roles via CLI or PowerShell with the `-Scope` parameter.
-
-7. **When should you create a custom role instead of using a built-in role?**
-
-   **Answer:**
-
-   Create a custom role when:
-
-   * **Built-in roles grant too many permissions:**
-     * Example: Need to allow VM restarts but not VM creation—Contributor is too broad
-     * Solution: Create custom role with only `Microsoft.Compute/virtualMachines/restart/action`
-
-   * **Need specific combination of permissions:**
-     * Example: Read storage accounts + write blobs (no built-in role for this exact combo)
-     * Solution: Custom role with control plane read + data plane write actions
-
-   * **Compliance requirements:**
-     * Example: Must prevent deletion of resources even for admins
-     * Solution: Custom role that includes all actions except delete
-
-   * **Need to exclude specific actions from a broader role:**
-     * Example: Storage admin who cannot regenerate access keys
-     * Solution: Use `NotActions` to exclude `listkeys` and `regeneratekey`
-
-   **When NOT to create custom roles:**
-   * Built-in role already provides exact permissions needed
-   * Only need temporary elevated access (use PIM instead)
-   * Would result in near-duplicate of built-in role
-   * Approaching 5,000 custom role limit per tenant
-
-   **Best Practice:** Always check if a built-in role meets requirements first—built-in roles are maintained by Microsoft and updated automatically.
-
-8. **What's the maximum number of custom roles per Azure AD tenant?**
-
-   **Answer:**
-   * **5,000 custom roles** per Azure AD tenant
-
-   **Planning Considerations:**
-   * Each custom role counts toward tenant limit regardless of scope
-   * No limit on role assignments (only role definitions)
-   * Consider consolidating similar custom roles
-   * Use parameterized roles where possible
-   * Monitor custom role count approaching limit
-
-   **Troubleshooting:**
-   * If approaching limit: Audit and delete unused custom roles
-   * Check for duplicate roles across subscriptions
-   * Consolidate roles with similar permissions
-   * Use resource-level built-in roles when possible
-
-9. **Can custom roles with DataActions be assigned at management group scope?**
-
-   **Answer:**
-   * **No.** Custom roles that include `DataActions` **cannot** be assigned at the management group scope.
-
-   **Reason:**
-   * Data plane operations are resource-specific and don't apply at management group abstraction level
-   * Management groups organize subscriptions, not data within resources
-
-   **Allowed Scopes for Custom Roles with DataActions:**
-   * ✅ Subscription scope
-   * ✅ Resource group scope  
-   * ✅ Resource scope
-   * ❌ Management group scope
-
-   **Solution:**
-   * If you need management group scope: Create role with only `Actions` (control plane)
-   * For data access: Assign separate role at subscription or resource group scope
-
-   **Example:**
-   * Control plane role (management group): List storage accounts, read properties
-   * Data plane role (subscription): Read/write blob data
-
----
-
-## 📚 References
-
-* [What is Azure role-based access control (Azure RBAC)?](https://learn.microsoft.com/en-us/azure/role-based-access-control/overview)
-* [Steps to assign an Azure role](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-steps)
-* [Azure built-in roles](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles)
-* [Azure custom roles](https://learn.microsoft.com/en-us/azure/role-based-access-control/custom-roles)
-* [Tutorial: Create a custom role using Azure PowerShell](https://learn.microsoft.com/en-us/azure/role-based-access-control/tutorial-custom-role-powershell)
-* [Tutorial: Create a custom role using Azure CLI](https://learn.microsoft.com/en-us/azure/role-based-access-control/tutorial-custom-role-cli)
-* [Create or update custom roles using Azure Portal](https://learn.microsoft.com/en-us/azure/role-based-access-control/custom-roles-portal)
-* [Understand scope for Azure RBAC](https://learn.microsoft.com/en-us/azure/role-based-access-control/scope-overview)
-* [Understand Azure deny assignments](https://learn.microsoft.com/en-us/azure/role-based-access-control/deny-assignments)
-* [Create a service principal with Azure CLI](https://learn.microsoft.com/en-us/cli/azure/azure-cli-sp-tutorial-1)
-* [Assign Azure roles using Azure PowerShell](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-powershell)
-* [List Azure role assignments](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-list-portal)
-
----
-
-*Lab created: 2025-10-20*
-*Last updated: 2025-10-20*
+💡 **Exam Tip:** `NotActions` are not deny permissions—they simply exclude actions from the allowed `Actions`
