@@ -41,8 +41,8 @@
   * [Verify Effective Permissions](#verify-effective-permissions)
     * [Using the Azure Portal](#using-the-azure-portal-3)
     * [Using PowerShell (`Get-AzRoleAssignment`)](#using-powershell-get-azroleassignment)
+    * [Get role assignments for a resource group (includes inherited)](#get-role-assignments-for-a-resource-group-includes-inherited)
     * [Using Azure CLI (`az role assignment list`)](#using-azure-cli-az-role-assignment-list)
-  * [Test Access with a User Account](#test-access-with-a-user-account)
   * [Exam Insights](#exam-insights-2)
 * [🔹 Exercise 4 – Implement Just-Enough-Access (JEA) Principle](#-exercise-4--implement-just-enough-access-jea-principle)
   * [Scenario: Developer Access to Specific Resources](#scenario-developer-access-to-specific-resources)
@@ -747,8 +747,9 @@ Get-AzRoleAssignment -AtScope -Scope "/subscriptions/$subscriptionId" |
 
 <img src='images/2025-10-22-04-07-39.png' width=600>
 
+#### Get role assignments for a resource group (includes inherited)
+
 ```powershell
-# Get role assignments for a resource group (includes inherited)
 Get-AzRoleAssignment -ResourceGroupName "rg-dev-test" -ObjectId $userId
 ```
 
@@ -758,9 +759,16 @@ Get-AzRoleAssignment -ResourceGroupName "rg-dev-test" -ObjectId $userId
 
 ```bash
 # Get all role assignments for a user
-userId=$(az ad user show --id "user1@637djb.onmicrosoft.com" --query id --output tsv)
-az role assignment list --assignee $userId --all --output table
 
+az role assignment list \
+    --assignee user2@637djb.onmicrosoft.com \
+    --include-inherited \
+    --output table
+```
+
+<img src='images/2025-10-25-04-29-17.png' width=700>
+
+```bash
 # Get role assignments at a specific scope
 az role assignment list \
     --scope "/subscriptions/$(az account show --query id --output tsv)" \
@@ -774,30 +782,6 @@ az role assignment list \
     --include-inherited \
     --output table
 ```
-
-### Test Access with a User Account
-
-**Scenario:** Verify that `user1` can read resources but not modify them.
-
-```powershell
-# Sign in as user1 in a new PowerShell session
-Connect-AzAccount -AccountId "user1@637djb.onmicrosoft.com"
-
-# Test read access (should succeed if Reader role assigned)
-Get-AzResourceGroup
-
-# Test write access (should fail if only Reader role assigned)
-New-AzResourceGroup -Name "test-rg" -Location "eastus"
-# Expected error: AuthorizationFailed - does not have authorization to perform action
-```
-
-**Alternative: Use Azure Portal in Private/Incognito Mode**
-
-1. Open browser in private/incognito mode
-2. Sign in as `user1@637djb.onmicrosoft.com`
-3. Navigate to resource groups
-4. Attempt to create a new resource group
-5. Verify that "Create" button is grayed out or results in error
 
 ### Exam Insights
 
@@ -844,6 +828,11 @@ if ($assignment) {
     Remove-AzRoleAssignment -ObjectId $groupId -RoleDefinitionName "Contributor" -Scope "/subscriptions/$subscriptionId"
     Write-Host "Removed Contributor role at subscription scope"
 }
+```
+
+<img src='images/2025-10-25-04-37-06.png' width=700>
+
+```powershell
 
 # Assign Reader at subscription scope (for visibility)
 New-AzRoleAssignment `
@@ -861,24 +850,7 @@ New-AzRoleAssignment `
 Get-AzRoleAssignment -ObjectId $groupId | Format-Table RoleDefinitionName, Scope
 ```
 
-**Verification:**
-
-```powershell
-# As a member of Dev-Team:
-# Can create resources in rg-dev-test
-New-AzStorageAccount `
-    -ResourceGroupName "rg-dev-test" `
-    -Name "sttest$(Get-Random)" `
-    -Location "eastus" `
-    -SkuName "Standard_LRS"  # Should succeed
-
-# Cannot create resources in other resource groups
-New-AzStorageAccount `
-    -ResourceGroupName "rg-finance-prod" `
-    -Name "sttest$(Get-Random)" `
-    -Location "eastus" `
-    -SkuName "Standard_LRS"  # Should fail with AuthorizationFailed
-```
+<img src='images/2025-10-25-04-39-27.png' width=700>
 
 ### Remove Excessive Permissions
 
@@ -899,6 +871,8 @@ Remove-AzRoleAssignment `
     -Scope "/subscriptions/$subscriptionId" `
     -Verbose
 ```
+
+<img src='images/2025-10-25-04-46-53.png' width=700>
 
 ### Exam Insights
 

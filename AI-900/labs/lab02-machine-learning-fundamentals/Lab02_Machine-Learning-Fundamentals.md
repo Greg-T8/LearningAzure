@@ -232,6 +232,11 @@ Given a dataset of house sales with columns: `SquareFeet`, `Bedrooms`, `Bathroom
 - Description of which algorithm performed best
 - Explanation of top 3 most important features
 
+**References:**  
+
+- [Tutorial: Train a classification model with no-code AutoML in the Azure Machine Learning studio](https://learn.microsoft.com/en-us/azure/machine-learning/tutorial-first-experiment-automated-ml?view=azureml-api-2)
+- [Bank Marketing Dataset](https://archive.ics.uci.edu/dataset/222/bank+marketing)
+
 ---
 
 ### Exercise 4: Understand Deep Learning and Transformers
