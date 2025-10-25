@@ -299,29 +299,110 @@ Given a dataset of house sales with columns: `SquareFeet`, `Bedrooms`, `Bathroom
 
 **Transformer Architecture:**
 
+[Understand the transformer architecture used for natural language processing (NLP)](https://learn.microsoft.com/en-us/training/modules/explore-foundation-models-in-model-catalog/4-transformers)
+
 - Modern architecture that revolutionized NLP
 - Uses "attention mechanisms" to understand context
 - Foundation for models like BERT, GPT, T5
 - Powers Azure OpenAI Service models
 
+**Transformer Architecture — Detailed Overview:**
 
+Transformers are a breakthrough deep learning architecture introduced in 2017 that revolutionized natural language processing and other AI domains.
+
+**Key Components:**
+
+- **Self-Attention Mechanism:** The core innovation that allows the model to weigh the importance of different words in a sequence relative to each other, regardless of their distance. This enables understanding of long-range dependencies and context.
+
+- **Parallel Processing:** Unlike RNNs that process sequences step-by-step, transformers process entire sequences simultaneously, making them much faster to train and more scalable.
+
+- **Encoder-Decoder Architecture:**
+  - **Encoder:** Processes input sequences and creates contextual representations
+  - **Decoder:** Generates output sequences based on encoder representations
+  - Some models use only encoders (BERT) or only decoders (GPT)
+
+- **Positional Encoding:** Since transformers don't process sequences in order, positional information is added to help the model understand word order.
+
+**Foundation Models:**
+
+Large pre-trained transformer models that serve as the basis for many AI applications:
+
+- **BERT (Bidirectional Encoder Representations from Transformers):** Understands context from both directions, excellent for classification and question answering
+- **GPT (Generative Pre-trained Transformer):** Specializes in text generation and completion
+- **T5 (Text-to-Text Transfer Transformer):** Treats all NLP tasks as text-to-text problems
+
+**Applications Beyond NLP:**
+
+- **Vision Transformers (ViT):** Apply transformer architecture to image processing
+- **Code generation:** Models like GitHub Copilot use transformer-based architectures
+- **Multimodal models:** Combine text, images, and other data types
+
+**Benefits:**
+
+- Better handling of long-range dependencies in text
+- Parallel processing enables faster training
+- Transfer learning through pre-training on large datasets
+- Versatility across multiple tasks without architecture changes
+- Foundation for modern large language models (LLMs)
+
+**Azure Integration:**
+
+- Available through Azure Machine Learning Model Catalog
+- Powers Azure OpenAI Service (GPT-4, GPT-3.5, etc.)
+- Can be deployed and fine-tuned using Azure ML services
 
 **Activity:**
 
-1. Research one real-world application of CNNs
-2. Research one real-world application of Transformers
-3. Explain why Transformers are well-suited for language understanding
+1. **Research one real-world application of CNNs**
+
+   **Medical Image Analysis - Diabetic Retinopathy Detection:** CNNs analyze retinal photographs to detect diabetic retinopathy (eye disease). Google's DeepMind system processes retinal scans using convolutional layers to identify blood vessel patterns, hemorrhages, and lesions, classifying disease severity. CNNs excel here because they automatically learn hierarchical visual features and maintain spatial relationships critical for identifying disease markers in specific retinal locations. Deployed in clinics worldwide, achieving accuracy comparable to human ophthalmologists.
+
+2. **Research one real-world application of Transformers**
+
+   **GitHub Copilot - AI-Powered Code Completion:** GitHub Copilot uses OpenAI's Codex (transformer-based) to suggest code completions and entire functions in real-time. Built on GPT architecture and trained on billions of lines of code, it uses self-attention to understand code context across multiple programming languages. Transformers excel here because they understand long-range dependencies in code (e.g., variables defined many lines earlier), handle multiple languages with one architecture, and generate coherent multi-line code blocks. Studies show it increases developer productivity by 55%.
+
+3. **Explain why Transformers are well-suited for language understanding**
+
+   Transformers excel at language understanding due to:
+   - **Self-Attention Mechanism:** Weighs importance of every word relative to every other word, capturing contextual meaning (e.g., "bank" in "river bank" vs. "bank account")
+   - **Bidirectional Context:** Models like BERT read text in both directions simultaneously, understanding pronouns and references across long distances
+   - **Parallel Processing:** Processes entire sentences at once (unlike sequential RNNs), enabling faster training and better long-range dependency capture
+   - **Positional Encoding:** Maintains word order while processing in parallel (understanding "dog bites man" ≠ "man bites dog")
+   - **Transfer Learning:** Pre-trained on massive text corpora, learning grammar, semantics, and world knowledge before fine-tuning for specific tasks
+
+   **Example:** In "The trophy doesn't fit in the brown suitcase because it's too large," transformers use self-attention to determine "it" refers to "trophy" (not "suitcase") based on "too large," processing all relationships in parallel.
 
 ---
 
 ## 🧠 Knowledge Check
 
-1. What is the difference between regression and classification?
-2. Is clustering supervised or unsupervised learning?
-3. What is the purpose of a validation dataset?
-4. What does AutoML do?
-5. Name two types of deep learning architectures.
-6. What is the Transformer architecture used for?
+1. **What is the difference between regression and classification?**
+
+   **Answer:** Regression predicts continuous numeric values (e.g., house prices, temperatures), while classification predicts discrete categories or classes (e.g., spam/not spam, cat/dog/bird). Regression outputs numbers; classification outputs labels.
+
+2. **Is clustering supervised or unsupervised learning?**
+
+   **Answer:** Clustering is unsupervised learning. It discovers natural groupings in data without predefined labels or categories, finding patterns based purely on feature similarity.
+
+3. **What is the purpose of a validation dataset?**
+
+   **Answer:** The validation dataset is used during training to tune model hyperparameters, compare different algorithms, and select the best performing model. It helps prevent overfitting by providing feedback on model performance on data it hasn't trained on, without compromising the test set.
+
+4. **What does AutoML do?**
+
+   **Answer:** AutoML (Automated Machine Learning) automatically tries multiple algorithms, feature engineering techniques, and hyperparameters to find the best model for your data. It eliminates manual trial-and-error, making machine learning accessible without deep expertise in algorithm selection and tuning.
+
+5. **Name two types of deep learning architectures.**
+
+   **Answer:**
+   - **Convolutional Neural Networks (CNNs):** Specialized for processing grid-like data such as images and video
+   - **Transformers:** Use self-attention mechanisms for processing sequences, foundation for modern NLP models like GPT and BERT
+
+   *Other valid answers: RNNs (Recurrent Neural Networks), GANs (Generative Adversarial Networks), Autoencoders*
+
+6. **What is the Transformer architecture used for?**
+
+   **Answer:** Transformers are primarily used for natural language processing tasks including text generation, translation, question answering, and sentiment analysis. They also power modern applications like ChatGPT, GitHub Copilot, and Azure OpenAI Service. Beyond NLP, Vision Transformers (ViT) apply the architecture to image processing and multimodal models combine text, images, and other data types.
 
 ---
 
