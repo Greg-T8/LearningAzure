@@ -68,7 +68,7 @@ Hands-on labs organized by exam domain:
 
 ---
 
-### Lab 3: Computer Vision on Azure
+### [Lab 3: Computer Vision on Azure](labs/lab03-computer-vision/Lab03_Computer-Vision.md)
 
 **Location:** `labs/lab03-computer-vision/`  
 **Objectives:**
