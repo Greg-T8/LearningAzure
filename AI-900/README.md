@@ -200,7 +200,6 @@ However, AI-900 is **not a prerequisite** for these role-based certifications.
 - **[AI & Machine Learning Community](https://techcommunity.microsoft.com/t5/artificial-intelligence-and/ct-p/AI)** — Community support
 - **[Microsoft Learn Community](https://techcommunity.microsoft.com/t5/microsoft-learn/ct-p/MicrosoftLearn)** — Learning resources and discussions
 
-- [broken link](https://thislinkdoesnntexist.abcxyz)
 
 ---
 

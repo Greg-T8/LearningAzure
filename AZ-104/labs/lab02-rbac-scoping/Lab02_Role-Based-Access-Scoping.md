@@ -1043,6 +1043,27 @@ App Registration (1)  ──creates──>  Service Principal (1 or more)
 **Example Commands:**
 
 ```bash
+# List app registrations
+az ad app list --output table
+```
+
+<img src='images/2025-10-26-08-58-21.png' width=700>
+
+```bash
+# List service principals (Enterprise Applications)
+az ad sp list --all --output table
+```
+
+<img src='images/2025-10-26-09-00-35.png' width=700>
+
+```bash
+# List service principals created by the current user
+az ad sp list --show-mine --output table
+```
+
+<img src='images/2025-10-26-09-12-23.png' width=700>
+
+```bash
 # Create App Registration
 az ad app create --display-name "MyApp"
 # Output: Application (Client) ID
@@ -1051,11 +1072,23 @@ az ad app create --display-name "MyApp"
 az ad sp create --id <Application-Client-ID>
 # Output: Service Principal Object ID (different from Application ID)
 
+# Create application and service principal with RBAC in one step
+az ad sp create-for-rbac -n "MyApp2"
+```
+
+<img src='images/2025-10-26-09-06-51.png' width=400>
+
+```bash
+
 # Assign role to Service Principal (use SP Object ID)
 az role assignment create \
-    --assignee <Service-Principal-Object-ID> \
-    --role "Contributor"
+    --assignee 7cb40571-7f21-43a9-8800-ef55b7e89eda \
+    --scope 'subscriptions/e091f6e7-031a-4924-97bb-8c983ca5d21a' \
+    --role Contributor
 ```
+
+<img src='images/2025-10-26-09-15-42.png' width=500>
+
 
 **📚 Related Documentation:**
 
