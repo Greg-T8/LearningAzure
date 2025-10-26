@@ -1263,7 +1263,6 @@ az role assignment list --include-inherited > rbac-assignments.json
 
 
 ```bash
-
 # Get summary by role
 az role assignment list --include-inherited --query "[].{Role:roleDefinitionName}" --output tsv | sort | uniq -c
 ```
