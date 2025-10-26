@@ -60,7 +60,6 @@
     * [Using Azure CLI (`az ad sp create-for-rbac`)](#using-azure-cli-az-ad-sp-create-for-rbac)
     * [Using PowerShell (`New-AzADServicePrincipal`)](#using-powershell-new-azadserviceprincipal)
   * [Assign Role to Service Principal](#assign-role-to-service-principal)
-  * [Verify Service Principal Access](#verify-service-principal-access)
   * [Exam Insights](#exam-insights-5)
 * [🔹 Exercise 7 – Review Access Using Access Control (IAM)](#-exercise-7--review-access-using-access-control-iam)
   * [Check Access for a User](#check-access-for-a-user)
@@ -1089,7 +1088,6 @@ az role assignment create \
 
 <img src='images/2025-10-26-09-15-42.png' width=500>
 
-
 **📚 Related Documentation:**
 
 * [Application and service principal objects in Microsoft Entra ID](https://learn.microsoft.com/en-us/entra/identity-platform/app-objects-and-service-principals)
@@ -1104,9 +1102,9 @@ az role assignment create \
 ```bash
 # Create service principal with Contributor role at resource group scope
 az ad sp create-for-rbac \
-    --name "sp-automation" \
-    --role "Contributor" \
-    --scopes /subscriptions/$(az account show --query id --output tsv)/resourceGroups/rg-dev-test
+    --name 'sp-automation' \
+    --role 'Contributor' \
+    --scopes "/subscriptions/$(az account show --query id --output tsv)/resourceGroups/rg-dev-test"t
 
 # Output includes:
 # - appId (Application ID / Client ID)
@@ -1114,18 +1112,16 @@ az ad sp create-for-rbac \
 # - tenant (Tenant ID)
 ```
 
-**Output Example:**
-
-```json
-{
-  "appId": "12345678-1234-1234-1234-123456789abc",
-  "displayName": "sp-automation",
-  "password": "secret-password-here",
-  "tenant": "87654321-4321-4321-4321-cba987654321"
-}
-```
+<img src='images/2025-10-26-09-27-04.png' width=500>
 
 ⚠️ **Security Note:** Store the password securely immediately. It cannot be retrieved later.
+
+To clean up, you need to delete both the service principal and the app registration:
+
+```bash
+az ad sp delete --id "20159753-aee2-41d1-a0d3-5b9802f71f52"       # AppID, not object ID
+az ad app delete --id "20159753-aee2-41d1-a0d3-5b9802f71f52"
+```
 
 #### Using PowerShell (`New-AzADServicePrincipal`)
 
@@ -1146,6 +1142,8 @@ Write-Host "Client Secret: $($credential.SecretText)"
 Write-Host "Tenant ID: $((Get-AzContext).Tenant.Id)"
 ```
 
+<img src='images/2025-10-26-09-45-43.png' width=400>
+
 ### Assign Role to Service Principal
 
 ```powershell
@@ -1161,6 +1159,8 @@ New-AzRoleAssignment `
 Get-AzRoleAssignment -ObjectId $spObjectId
 ```
 
+<img src='images/2025-10-26-09-48-21.png' width=500>
+
 Using Azure CLI:
 
 ```bash
@@ -1173,31 +1173,6 @@ az role assignment create \
     --role "Contributor" \
     --resource-group "rg-dev-test"
 ```
-
-### Verify Service Principal Access
-
-```powershell
-# Sign in as service principal
-$appId = "12345678-1234-1234-1234-123456789abc"
-$secret = "secret-password-here"
-$tenantId = "87654321-4321-4321-4321-cba987654321"
-
-$securePassword = ConvertTo-SecureString $secret -AsPlainText -Force
-$credential = New-Object System.Management.Automation.PSCredential($appId, $securePassword)
-
-Connect-AzAccount -ServicePrincipal -Credential $credential -Tenant $tenantId
-
-# Test access
-Get-AzResourceGroup -Name "rg-dev-test"
-
-# Attempt to create a resource
-New-AzStorageAccount `
-    -ResourceGroupName "rg-dev-test" `
-    -Name "stauto$(Get-Random)" `
-    -Location "eastus" `
-    -SkuName "Standard_LRS"
-```
-
 **Best Practices for Service Principals:**
 
 1. **Use Managed Identities when possible** (System-assigned or User-assigned)
@@ -1264,25 +1239,43 @@ $report | Export-Csv -Path ".\rbac-assignments-report.csv" -NoTypeInformation
 $report | Group-Object RoleDefinitionName | 
     Select-Object Name, Count | 
     Sort-Object Count -Descending
+```
 
+<img src='images/2025-10-26-09-58-49.png' width=400>
+
+```powershell
 # Find high-privilege assignments (Owner, Contributor, User Access Administrator)
 $highPrivilegeRoles = @("Owner", "Contributor", "User Access Administrator")
 $report | Where-Object {$_.RoleDefinitionName -in $highPrivilegeRoles} |
     Format-Table DisplayName, RoleDefinitionName, Scope -AutoSize
 ```
 
+<img src='images/2025-10-26-10-02-16.png' width=600>
+
 Using Azure CLI:
 
 ```bash
 # Export all role assignments to JSON
-az role assignment list --all > rbac-assignments.json
+az role assignment list --include-inherited > rbac-assignments.json
+```
+
+<img src='images/2025-10-26-10-04-07.png' width=700>
+
+
+```bash
 
 # Get summary by role
-az role assignment list --all --query "[].{Role:roleDefinitionName}" --output tsv | sort | uniq -c
-
-# Find Owner assignments
-az role assignment list --all --role "Owner" --output table
+az role assignment list --include-inherited --query "[].{Role:roleDefinitionName}" --output tsv | sort | uniq -c
 ```
+
+<img src='images/2025-10-26-10-05-27.png' width=700>
+
+```bash
+# Find Owner assignments
+az role assignment list --include-inherited --role "Owner" --output table
+```
+
+<img src='images/2025-10-26-10-06-42.png' width=700>
 
 ### Exam Insights
 
