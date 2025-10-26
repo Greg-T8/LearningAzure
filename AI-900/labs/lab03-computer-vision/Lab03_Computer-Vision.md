@@ -3,6 +3,9 @@
 **Duration:** 60–75 minutes  
 **Difficulty:** Intermediate
 
+**Aligned with Microsoft Learn:**  
+This lab aligns with the [Microsoft Azure AI Fundamentals: Computer Vision](https://learn.microsoft.com/en-us/training/paths/explore-computer-vision-microsoft-azure/) learning path and prepares you for the [AI-900: Microsoft Azure AI Fundamentals](https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-fundamentals/) certification exam.
+
 ---
 
 ## 🎯 Objectives
@@ -18,9 +21,10 @@ By the end of this lab, you will be able to:
 
 ## 📋 Prerequisites
 
-- Azure subscription with ability to create AI services
+- Azure subscription with ability to create AI services ([Create a free account](https://azure.microsoft.com/pricing/purchase-options/azure-account))
 - Completion of Lab 01 and Lab 02 (recommended)
 - Sample images for testing (or use provided URLs)
+- [Azure Portal access](https://portal.azure.com)
 
 ---
 
@@ -30,12 +34,24 @@ By the end of this lab, you will be able to:
 
 **Objective:** Analyze images to extract tags, captions, and objects.
 
+**Microsoft Learn Module:** [Analyze images with the Azure AI Vision service](https://learn.microsoft.com/en-us/training/modules/analyze-images/)
+
+**Reference Documentation:**
+
+- [What is Azure AI Vision Image Analysis?](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview-image-analysis)
+- [Object detection concepts](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/concept-object-detection)
+- [Quickstart: Image Analysis](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/quickstarts-sdk/image-analysis-client-library-40)
+
 **Steps:**
 
 1. **Create Azure AI Vision Resource:**
    - Navigate to Azure Portal
    - Create resource: "Computer Vision" or "Azure AI services"
    - Note the endpoint URL and API key
+
+        <img src='images/2025-10-26-11-06-40.png' width=500>
+
+   - [Learn more: Create a Computer Vision resource](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/quickstarts-sdk/image-analysis-client-library#prerequisites)
 
 2. **Test Image Analysis (Portal):**
    - In the resource overview, click "Try it out" or "Quick start"
@@ -45,10 +61,12 @@ By the end of this lab, you will be able to:
      - Captions (generated descriptions)
      - Objects (detected items with bounding boxes)
      - Colors, brands, faces
+   - [Tutorial: Analyze an image in Vision Studio](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/quickstarts-sdk/image-analysis-client-library-40#analyze-an-image)
 
 3. **Test via REST API or SDK (Optional):**
    - Use Python SDK or cURL to call the Analyze Image API
    - Extract tags, captions, and objects programmatically
+   - [Code samples: Analyze Image API](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/how-to/call-analyze-image)
 
 **Sample Images to Try:**
 
@@ -69,6 +87,14 @@ By the end of this lab, you will be able to:
 
 **Objective:** Extract text from images and documents using the Read API.
 
+**Microsoft Learn Module:** [Read text in images and documents with the Computer Vision service](https://learn.microsoft.com/en-us/training/modules/read-text-images-documents-with-computer-vision-service/)
+
+**Reference Documentation:**
+
+- [What is OCR (Optical Character Recognition)?](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview-ocr)
+- [OCR for images (version 4.0)](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/concept-ocr)
+- [Call the Read API](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/how-to/call-read-api)
+
 **Steps:**
 
 1. **Use the Read API:**
@@ -79,15 +105,18 @@ By the end of this lab, you will be able to:
      - Handwritten note
      - Receipt or invoice
      - Street sign
+   - [Learn more: Read printed and handwritten text](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/quickstarts-sdk/client-library#read-printed-and-handwritten-text)
 
 2. **Review Extracted Text:**
    - Examine the extracted text
    - Note confidence scores
    - Check for errors or misreads
+   - [Language support for OCR](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/language-support#optical-character-recognition-ocr)
 
 3. **Test via SDK (Optional):**
    - Use Python or C# SDK to extract text programmatically
    - Process the results (e.g., search for specific keywords)
+   - [Quickstart: Azure AI Vision OCR SDK](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/quickstarts-sdk/client-library)
 
 **Deliverables:**
 
@@ -101,12 +130,23 @@ By the end of this lab, you will be able to:
 
 **Objective:** Detect faces and analyze facial attributes.
 
+**Microsoft Learn Module:** [Detect, analyze, and recognize faces](https://learn.microsoft.com/en-us/training/modules/detect-analyze-recognize-faces/)
+
+**Reference Documentation:**
+
+- [What is Azure AI Face service?](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview-identity)
+- [Face detection and attributes](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/concept-face-detection)
+- [Call the Detect API](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/how-to/identity-detect-faces)
+
+**Steps:**
+
 **Steps:**
 
 1. **Create Azure AI Face Resource:**
    - Navigate to Azure Portal
    - Create resource: "Face" service
    - Note the endpoint URL and API key
+   - [Learn more: Face API prerequisites](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/quickstarts-sdk/identity-client-library)
 
 2. **Test Face Detection (Portal):**
    - Use the Face API test interface
@@ -126,6 +166,7 @@ By the end of this lab, you will be able to:
 
 - Face identification (recognizing specific individuals) requires additional setup and has strict usage policies
 - This lab focuses on detection and attribute analysis only
+- [Responsible AI considerations for Face](https://learn.microsoft.com/en-us/azure/ai-foundry/responsible-ai/face/transparency-note)
 
 **Deliverables:**
 
@@ -139,6 +180,16 @@ By the end of this lab, you will be able to:
 
 **Objective:** Learn which Azure computer vision service to use for different scenarios.
 
+**Microsoft Learn Resources:**
+
+- [Get started with computer vision in Azure](https://learn.microsoft.com/en-us/training/modules/get-started-computer-vision-azure/)
+- [Fundamentals of Computer Vision](https://learn.microsoft.com/en-us/training/modules/analyze-images-computer-vision/)
+
+**Reference Documentation:**
+
+- [What is Azure AI Vision?](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview)
+- [Choose an Azure AI image and video processing technology](https://learn.microsoft.com/en-us/azure/architecture/data-guide/ai-services/image-video-processing)
+
 **Service Comparison:**
 
 | Scenario | Service | Feature |
@@ -149,7 +200,7 @@ By the end of this lab, you will be able to:
 | Detect faces in a photo | Azure AI Face | Face Detection |
 | Estimate age and emotion from faces | Azure AI Face | Face Attributes |
 | Recognize specific individuals | Azure AI Face | Face Identification |
-| Train a custom image classifier | Azure AI Vision | Custom Vision |
+| Train a custom image classifier | Azure AI Vision | [Custom Vision](https://learn.microsoft.com/en-us/azure/ai-services/custom-vision-service/overview) |
 
 **Activity:**
 
@@ -175,9 +226,27 @@ For each scenario, choose the correct service and feature:
 
 ## 📚 Additional Resources
 
+### Microsoft Learn Paths & Modules
+
+- **[Microsoft Azure AI Fundamentals: Computer Vision](https://learn.microsoft.com/en-us/training/paths/explore-computer-vision-microsoft-azure/)** - Complete learning path for AI-900 computer vision topics
+- **[Develop computer vision solutions in Azure](https://learn.microsoft.com/en-us/training/paths/create-computer-vision-solutions-azure-ai/)** - Intermediate-level learning path
+- **[Analyze images](https://learn.microsoft.com/en-us/training/modules/analyze-images/)** - Hands-on module for Azure AI Vision
+- **[Read text in images](https://learn.microsoft.com/en-us/training/modules/read-text-images-documents-with-computer-vision-service/)** - OCR module
+- **[Detect, analyze, and recognize faces](https://learn.microsoft.com/en-us/training/modules/detect-analyze-recognize-faces/)** - Face detection module
+
+### Documentation & API References
+
 - [Azure AI Vision Documentation](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/)
 - [Azure AI Face Documentation](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview-identity)
 - [Custom Vision Service](https://learn.microsoft.com/en-us/azure/ai-services/custom-vision-service/)
+- [Image Analysis REST API Reference](https://learn.microsoft.com/en-us/rest/api/computervision/analyze-image/analyze-image)
+- [Face Detection REST API Reference](https://learn.microsoft.com/en-us/rest/api/face/face-detection-operations/detect)
+
+### Additional Learning Resources
+
+- [AI-900 Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/ai-900)
+- [Azure AI Vision Studio](https://portal.vision.cognitive.azure.com/) - Try out features in the browser
+- [Responsible AI for Computer Vision](https://learn.microsoft.com/en-us/azure/ai-foundry/responsible-ai/computer-vision/ocr-transparency-note)
 
 ---
 
@@ -194,4 +263,4 @@ You have successfully completed Lab 03. You should now understand:
 
 ---
 
-**Last updated:** 2025-10-16
+**Last updated:** 2025-10-26
