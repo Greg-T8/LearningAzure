@@ -1554,14 +1554,14 @@ az role definition create --role-definition @storage-blob-operator.json
 az role definition list --custom-role-only true --output table
 ```
 
-<img src='images/2025-10-27-04-38-21.png' width=800>
+<img src='images/2025-10-27-04-38-21.png' width=900>
 
 ```bash
 # Get specific custom role
 az role definition list --name "Storage Blob Operator" --output json
 ```
 
-<img src='images/2025-10-27-04-39-01.png' width=800>
+<img src='images/2025-10-27-04-39-01.png' width=600>
 
 ### Create a Custom Role Using Azure Portal
 
