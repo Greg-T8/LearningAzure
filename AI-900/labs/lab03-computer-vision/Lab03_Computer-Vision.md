@@ -176,6 +176,7 @@ The Read API accepts images and documents with the following specifications:
    - Group photo
    - Profile view vs. frontal view
    - Different lighting conditions
+        <img src='images/2025-10-27-06-03-43.png' width=500>
 
 **Important Note:**
 
@@ -183,11 +184,6 @@ The Read API accepts images and documents with the following specifications:
 - This lab focuses on detection and attribute analysis only
 - [Responsible AI considerations for Face](https://learn.microsoft.com/en-us/azure/ai-foundry/responsible-ai/face/transparency-note)
 
-**Deliverables:**
-
-- Screenshot of face detection results
-- List of detected attributes for each face
-- Discussion: What are ethical considerations when using facial analysis?
 
 ---
 
