@@ -26,6 +26,14 @@ By the end of this lab, you will be able to:
 - Sample images for testing (or use provided URLs)
 - [Azure Portal access](https://portal.azure.com)
 
+**📝 Note on Azure Service Names:**
+
+Azure Cognitive Services was renamed to **Azure AI services** in November 2023 as part of Microsoft's broader AI branding initiative. You may encounter "Cognitive Services" in older documentation, code examples, or SDK references, but this refers to the same services now called "Azure AI services." This lab uses the current naming convention:
+
+- Azure AI Vision (formerly Computer Vision)
+- Azure AI Face
+- Azure AI services (umbrella term)
+
 ---
 
 ## 🧪 Lab Exercises
@@ -124,7 +132,6 @@ The Read API accepts images and documents with the following specifications:
 
         <img src='images/2025-10-27-05-30-56.png' width=700>
 
-
 ---
 
 ### Exercise 3: Facial Detection and Analysis with Azure AI Face
@@ -139,7 +146,14 @@ The Read API accepts images and documents with the following specifications:
 - [Face detection and attributes](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/concept-face-detection)
 - [Call the Detect API](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/how-to/identity-detect-faces)
 
-**Steps:**
+**Common Use Cases for Face Service:**
+
+- **Verify user identity:** Authenticate users against trusted face images (e.g., government ID, enrollment photo) for access to digital or physical properties
+- **Liveness detection:** Anti-spoofing feature to verify a user is physically present (not a photo, video, or mask)
+- **Touchless access control:** Enhanced check-in experience at airports, stadiums, buildings, hospitals, gyms, or schools
+- **Face redaction:** Blur or redact faces in videos to protect privacy
+
+⚠️ **Limited Access:** Face service has restricted access based on eligibility and usage criteria to support Responsible AI principles. Apply via [Face Recognition intake form](https://aka.ms/facerecognition).
 
 **Steps:**
 
