@@ -1497,7 +1497,7 @@ Create a file named `custom-vm-operator.json`:
 ```powershell
 # Update subscription ID in JSON file
 $subscriptionId = (Get-AzContext).Subscription.Id
-$jsonPath = ".\custom-vm-operator.json"
+$jsonPath = ".\vm-operator.json"
 $content = Get-Content $jsonPath -Raw
 $content = $content -replace '\{subscription-id\}', $subscriptionId
 $content | Set-Content $jsonPath
@@ -1505,6 +1505,8 @@ $content | Set-Content $jsonPath
 # Create role from JSON file
 New-AzRoleDefinition -InputFile $jsonPath
 ```
+
+<img src='images/2025-10-27-04-30-38.png' width=800>
 
 ### Create a Custom Role Using Azure CLI
 
