@@ -42,6 +42,17 @@ By the end of this lab, you will be able to:
 - [Object detection concepts](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/concept-object-detection)
 - [Quickstart: Image Analysis](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/quickstarts-sdk/image-analysis-client-library-40)
 
+**Object Detection Limitations:**
+
+Be aware of these limitations when using object detection:
+
+- **Small objects:** Objects smaller than 5% of the image are usually not detected
+- **Closely arranged objects:** Objects arranged tightly together (e.g., stack of plates) may not be detected
+- **Brand/product differentiation:** Cannot distinguish between brands or product names (e.g., different soda brands on a shelf)
+  - Use [Brand detection](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/concept-brand-detection) feature for brand information
+
+💡 **Note:** Object detection finds objects and living things with bounding boxes, while tagging can include contextual terms like "indoor" that cannot be localized.
+
 **Steps:**
 
 1. **Create Azure AI Vision Resource:**
@@ -65,24 +76,6 @@ By the end of this lab, you will be able to:
 
         <img src='images/2025-10-27-04-59-00.png' width=700>
 
-3. **Test via REST API or SDK (Optional):**
-   - Use Python SDK or cURL to call the Analyze Image API
-   - Extract tags, captions, and objects programmatically
-   - [Code samples: Analyze Image API](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/how-to/call-analyze-image)
-
-**Sample Images to Try:**
-
-- Street scene with cars and pedestrians
-- Retail store with products on shelves
-- Landscape with mountains and trees
-- Food on a plate
-
-**Deliverables:**
-
-- Screenshot of analysis results for 2-3 images
-- List of detected tags and objects
-- Discussion: How accurate were the results?
-
 ---
 
 ### Exercise 2: Optical Character Recognition (OCR)
@@ -96,6 +89,20 @@ By the end of this lab, you will be able to:
 - [What is OCR (Optical Character Recognition)?](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview-ocr)
 - [OCR for images (version 4.0)](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/concept-ocr)
 - [Call the Read API](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/how-to/call-read-api)
+
+**Input Requirements:**
+
+The Read API accepts images and documents with the following specifications:
+
+- **Supported formats:** JPEG, PNG, BMP, PDF, TIFF
+- **File size:**
+  - Images: < 500 MB (4 MB for free tier)
+  - PDF: No size limit
+- **Dimensions:** 50 x 50 pixels (minimum) to 10,000 x 10,000 pixels (maximum)
+- **Pages:** Up to 2,000 pages for PDF/TIFF (first 2 pages only for free tier)
+- **Minimum text height:** 12 pixels for 1024 x 768 image (~8-point font at 150 DPI)
+
+💡 **Tip:** You don't need to crop images for text lines—send the whole image and the Read API will recognize all text.
 
 **Steps:**
 
@@ -115,16 +122,8 @@ By the end of this lab, you will be able to:
    - Check for errors or misreads
    - [Language support for OCR](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/language-support#optical-character-recognition-ocr)
 
-3. **Test via SDK (Optional):**
-   - Use Python or C# SDK to extract text programmatically
-   - Process the results (e.g., search for specific keywords)
-   - [Quickstart: Azure AI Vision OCR SDK](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/quickstarts-sdk/client-library)
+        <img src='images/2025-10-27-05-30-56.png' width=700>
 
-**Deliverables:**
-
-- Screenshot of OCR results
-- Accuracy assessment (were there any errors?)
-- Discussion: When would OCR be useful in a business context?
 
 ---
 
