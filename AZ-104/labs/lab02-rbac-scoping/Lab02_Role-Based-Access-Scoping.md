@@ -1173,6 +1173,7 @@ az role assignment create \
     --role "Contributor" \
     --resource-group "rg-dev-test"
 ```
+
 **Best Practices for Service Principals:**
 
 1. **Use Managed Identities when possible** (System-assigned or User-assigned)
@@ -1261,7 +1262,6 @@ az role assignment list --include-inherited > rbac-assignments.json
 
 <img src='images/2025-10-26-10-04-07.png' width=700>
 
-
 ```bash
 # Get summary by role
 az role assignment list --include-inherited --query "[].{Role:roleDefinitionName}" --output tsv | sort | uniq -c
@@ -1296,6 +1296,16 @@ az role assignment list --include-inherited --role "Owner" --output table
 
 **Custom roles** allow you to create role definitions with specific permissions tailored to your organization's needs when built-in roles are either too permissive or too restrictive.
 
+**📚 Related Documentation:**
+
+* [Azure custom roles](https://learn.microsoft.com/en-us/azure/role-based-access-control/custom-roles)
+* [Azure RBAC Available permissions](https://learn.microsoft.com/en-us/azure/role-based-access-control/resource-provider-operations)
+* [Tutorial: Create an Azure custom role using the Azure portal](https://learn.microsoft.com/en-us/azure/role-based-access-control/custom-roles-portal)
+* [Tutorial: Create an Azure custom role using Azure PowerShell](https://learn.microsoft.com/en-us/azure/role-based-access-control/tutorial-custom-role-powershell)
+* [Tutorial: Create an Azure custom role using Azure CLI](https://learn.microsoft.com/en-us/azure/role-based-access-control/tutorial-custom-role-cli)
+* [Create or update Azure custom roles using an ARM template](https://learn.microsoft.com/en-us/azure/role-based-access-control/custom-roles-template)
+* [Create or update Azure custom roles using the REST API](https://learn.microsoft.com/en-us/azure/role-based-access-control/custom-roles-rest)
+
 **When to Use Custom Roles:**
 
 * Built-in roles grant too many permissions (violates least privilege)
@@ -1314,6 +1324,10 @@ az role assignment list --include-inherited --role "Owner" --output table
 ### Custom Role Structure
 
 A custom role definition consists of:
+
+**📚 Related Documentation:**
+
+* [Understand Azure role definitions](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-definitions)
 
 ```json
 {
@@ -1338,6 +1352,10 @@ A custom role definition consists of:
 }
 ```
 
+**Important Note on AssignableScopes:**
+
+`AssignableScopes` defines where the role **can be assigned**, not where it **is assigned**. Including both a subscription and a resource group within it is redundant since subscription scope already includes all resource groups. Use multiple specific scopes only when you want to restrict where admins can assign the role.
+
 **Property Definitions:**
 
 | Property | Required | Description |
@@ -1358,7 +1376,16 @@ A custom role definition consists of:
 * Specific action: `Microsoft.Compute/virtualMachines/start/action`
 * Read-only: `*/read` = all read operations
 
+**📚 Resource Provider Operations Reference:**
+
+* [Azure resource provider operations](https://learn.microsoft.com/en-us/azure/role-based-access-control/resource-provider-operations)
+
 ### Create a Custom Role Using PowerShell
+
+**📚 Related Documentation:**
+
+* [Create or update Azure custom roles using Azure PowerShell](https://learn.microsoft.com/en-us/azure/role-based-access-control/custom-roles-powershell)
+* [New-AzRoleDefinition cmdlet reference](https://learn.microsoft.com/en-us/powershell/module/az.resources/new-azroledefinition)
 
 #### Method 1: Modify an Existing Role
 
@@ -1394,19 +1421,9 @@ $role.AssignableScopes.Add("/subscriptions/$subscriptionId")
 New-AzRoleDefinition -Role $role
 ```
 
-**Output:**
+<img src='images/2025-10-27-04-00-10.png' width=800>
 
-```
-Name             : Virtual Machine Operator
-Id               : 12345678-1234-1234-1234-123456789abc
-IsCustom         : True
-Description      : Can monitor, start, and restart virtual machines
-Actions          : {Microsoft.Storage/*/read, Microsoft.Network/*/read, ...}
-NotActions       : {}
-DataActions      : {}
-NotDataActions   : {}
-AssignableScopes : {/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}
-```
+<img src='images/2025-10-27-04-01-49.png' width=800>
 
 #### Method 2: Create from Scratch
 
@@ -1440,6 +1457,10 @@ $role.AssignableScopes = @("/subscriptions/$subscriptionId")
 # Create the custom role
 New-AzRoleDefinition -Role $role
 ```
+
+<img src='images/2025-10-27-04-05-54.png' width=700>
+
+<img src='images/2025-10-27-04-06-24.png' width=700>
 
 #### Method 3: Create from JSON File
 
@@ -1487,6 +1508,11 @@ New-AzRoleDefinition -InputFile $jsonPath
 
 ### Create a Custom Role Using Azure CLI
 
+**📚 Related Documentation:**
+
+* [Create or update Azure custom roles using Azure CLI](https://learn.microsoft.com/en-us/azure/role-based-access-control/custom-roles-cli)
+* [az role definition create command reference](https://learn.microsoft.com/en-cli/azure/role/definition#az-role-definition-create)
+
 ```bash
 # Create JSON file for custom role
 cat > storage-blob-operator.json << EOF
@@ -1528,6 +1554,10 @@ az role definition list --name "Storage Blob Operator" --output json
 ```
 
 ### Create a Custom Role Using Azure Portal
+
+**📚 Related Documentation:**
+
+* [Create or update Azure custom roles using the Azure portal](https://learn.microsoft.com/en-us/azure/role-based-access-control/custom-roles-portal)
 
 1. Navigate to **Subscriptions** → Select your subscription
 2. Go to **Access control (IAM)** → **+ Add** → **Add custom role**
@@ -1581,6 +1611,11 @@ az role assignment create \
 
 ### Update a Custom Role
 
+**📚 Related Documentation:**
+
+* [Set-AzRoleDefinition cmdlet reference](https://learn.microsoft.com/en-us/powershell/module/az.resources/set-azroledefinition)
+* [az role definition update command reference](https://learn.microsoft.com/en-cli/azure/role/definition#az-role-definition-update)
+
 ```powershell
 # Get existing custom role
 $role = Get-AzRoleDefinition "Virtual Machine Operator"
@@ -1608,6 +1643,11 @@ az role definition update --role-definition @role.json
 ```
 
 ### Delete a Custom Role
+
+**📚 Related Documentation:**
+
+* [Remove-AzRoleDefinition cmdlet reference](https://learn.microsoft.com/en-us/powershell/module/az.resources/remove-azroledefinition)
+* [az role definition delete command reference](https://learn.microsoft.com/en-cli/azure/role/definition#az-role-definition-delete)
 
 **Prerequisites:**
 
@@ -1642,7 +1682,7 @@ az role definition delete --name "Storage Blob Operator"
 
 **Error if assignments exist:**
 
-```
+```text
 There are existing role assignments referencing role (code: RoleDefinitionHasAssignments)
 ```
 
