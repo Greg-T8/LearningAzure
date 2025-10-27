@@ -63,6 +63,8 @@ By the end of this lab, you will be able to:
      - Colors, brands, faces
    - [Tutorial: Analyze an image in Vision Studio](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/quickstarts-sdk/image-analysis-client-library-40#analyze-an-image)
 
+        <img src='images/2025-10-27-04-59-00.png' width=700>
+
 3. **Test via REST API or SDK (Optional):**
    - Use Python SDK or cURL to call the Analyze Image API
    - Extract tags, captions, and objects programmatically
