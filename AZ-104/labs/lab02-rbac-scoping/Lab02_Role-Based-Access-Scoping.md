@@ -1315,11 +1315,17 @@ az role assignment list --include-inherited --role "Owner" --output table
 
 **Key Limitations:**
 
-* Maximum of **5,000 custom roles** per Microsoft Entra ID tenant
-* Cannot use root scope (`"/"`) as assignable scope (built-in roles only)
-* Only **one management group** in `AssignableScopes`
-* Custom roles with `DataActions` **cannot** be assigned at management group scope
+* **Cannot set `AssignableScopes` to root scope (`"/"`)** – Only built-in roles can use root scope, which represents the Tenant Root Group level and makes the role available for assignment across all scopes. Custom roles must specify explicit management group, subscription, or resource group scopes.
+* Only **one management group** in `AssignableScopes` of a custom role
+* Custom roles with `DataActions` **cannot** be assigned at management group scope (but can be assigned at subscription scopes within that management group)
+* Cannot use wildcards (`*`) in `AssignableScopes`
 * Requires `Microsoft.Authorization/roleDefinitions/write` permission on all assignable scopes
+* You can create a custom role with DataActions and one management group in AssignableScopes. You can't assign the custom role at the management group scope itself; however, you can assign the custom role at the scope of the subscriptions within the management group. This can be helpful if you need to create a single custom role with DataActions that needs to be assigned in multiple subscriptions, instead of creating a separate custom role for each subscription.
+* Maximum of **5,000 custom roles** per Microsoft Entra ID tenant
+
+**📚 Related Documentation:**
+
+* [Azure custom roles - Custom role limits](https://learn.microsoft.com/en-us/azure/role-based-access-control/custom-roles#custom-role-limits)
 
 ### Custom Role Structure
 
@@ -1571,10 +1577,16 @@ az role definition list --name "Storage Blob Operator" --output json
 
 1. Navigate to **Subscriptions** → Select your subscription
 2. Go to **Access control (IAM)** → **+ Add** → **Add custom role**
+
+    <img src='images/2025-10-28-03-25-08.png' width=500>
+
 3. **Basics tab:**
    * **Custom role name:** `Storage Blob Operator`
    * **Description:** `Can read, write, and delete blobs`
    * **Baseline permissions:** Start from scratch or clone a role
+
+    <img src='images/2025-10-28-03-26-06.png' width=500>
+
 4. **Permissions tab:**
    * Click **+ Add permissions**
    * Search for `Microsoft.Storage`
@@ -1584,11 +1596,24 @@ az role definition list --name "Storage Blob Operator" --output json
      * `Microsoft.Storage/storageAccounts/blobServices/containers/blobs/write`
      * `Microsoft.Storage/storageAccounts/blobServices/containers/blobs/delete`
    * Click **Add**
+
+    <img src='images/2025-10-28-03-28-01.png' width=700>
+
 5. **Assignable scopes tab:**
    * Keep current subscription or add resource groups
+
+    <img src='images/2025-10-28-03-29-47.png' width=700>
+
+
    * **Note:** Cannot add root scope or multiple management groups
+
+        <img src='images/2025-10-28-03-30-28.png' width=500>
+
 6. **JSON tab:**
    * Review and edit JSON if needed
+
+    <img src='images/2025-10-28-03-31-18.png' width=500>
+
 7. **Review + create:**
    * Click **Create**
 
@@ -1609,15 +1634,19 @@ New-AzRoleAssignment `
 Get-AzRoleAssignment -ObjectId $userId -ResourceGroupName "rg-dev-test"
 ```
 
+<img src='images/2025-10-28-03-42-22.png' width=700>
+
 Using Azure CLI:
 
 ```bash
 # Assign custom role
 az role assignment create \
-    --assignee "user1@637djb.onmicrosoft.com" \
-    --role "Storage Blob Operator" \
-    --resource-group "rg-dev-test"
+  --scope "subscriptions/$(az account show --query id --output tsv)/resourceGroups/rg-dev-test" \
+  --role "Storage Blob Operator" \
+  --assignee "user1@637djb.onmicrosoft.com"
 ```
+
+<img src='images/2025-10-28-03-53-23.png' width=700>
 
 ### Update a Custom Role
 

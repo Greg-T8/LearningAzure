@@ -184,7 +184,6 @@ The Read API accepts images and documents with the following specifications:
 - This lab focuses on detection and attribute analysis only
 - [Responsible AI considerations for Face](https://learn.microsoft.com/en-us/azure/ai-foundry/responsible-ai/face/transparency-note)
 
-
 ---
 
 ### Exercise 4: Understand When to Use Each Service
