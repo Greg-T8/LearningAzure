@@ -43,6 +43,7 @@ Create labs with the following structure:
 ### Required Sections (in order)
 
 1. **Title and Metadata**
+
    ```markdown
    # Lab {##}: {Title}
    
@@ -52,7 +53,42 @@ Create labs with the following structure:
    **Dependencies:** {prerequisite labs or requirements}
    ```
 
-2. **Table of Contents** (for longer labs)
+2. **📊 Lab Series Progress** (for multi-lab courses)
+
+   ```markdown
+   ## 🧪 Lab Series Progress
+   
+   - ✅ [Lab 01: Title](../lab01-name/Lab01_Title.md) - Completed
+   - ✅ [Lab 02: Title](../lab02-name/Lab02_Title.md) - Completed
+   - 🔄 **Lab 03: Title** - In Progress (Current Lab)
+   - ⬜ [Lab 04: Title](../lab04-name/Lab04_Title.md) - Not Started
+   - ⬜ [Lab 05: Title](../lab05-name/Lab05_Title.md) - Not Started
+   ```
+
+   **Purpose:** Track overall progress through the lab series
+
+   **Status Indicators:**
+   - ✅ = Completed
+   - 🔄 = In Progress (current lab)
+   - ⬜ = Not Started
+
+3. **📊 Exercise Progress** (for labs with multiple exercises)
+
+   ```markdown
+   ## 📊 Exercise Progress
+   
+   - ⬜ Exercise 1: {Title} - Not Started
+   - ⬜ Exercise 2: {Title} - Not Started
+   - ⬜ Exercise 3: {Title} - Not Started
+   - ⬜ Exercise 4: {Title} - Not Started
+   ```
+
+   **Purpose:** Track progress through exercises within the current lab
+
+   **Note:** Users can update checkmarks as they complete exercises
+
+4. **Table of Contents** (for longer labs)
+
    ```markdown
    <!-- omit in toc -->
    ## 🧾 Contents
@@ -60,44 +96,46 @@ Create labs with the following structure:
    * [section links]
    ```
 
-3. **🎯 Objectives**
+5. **🎯 Objectives**
    - Use bullet points starting with "By the end of this lab, you will be able to:"
    - List 3-6 specific, measurable learning outcomes
    - Use action verbs (create, configure, understand, implement, etc.)
 
-4. **📋 Prerequisites**
+6. **📋 Prerequisites**
    - Azure subscription requirements
    - Prior lab completion requirements
    - Required knowledge or tools
    - Access requirements (permissions, licenses, etc.)
 
-5. **🧱 Skills Measured** (for exam-focused labs)
+7. **🧱 Skills Measured** (for exam-focused labs)
    - List specific exam objectives covered
    - Reference official exam outline
 
-6. **🧠 Scenario** (optional but recommended)
+8. **🧠 Scenario** (optional but recommended)
    - Provide real-world context for the lab
    - Explain the business problem being solved
 
-7. **⚙️ Environment Setup** (if needed)
+9. **⚙️ Environment Setup** (if needed)
    - Initial setup steps
    - Resource creation prerequisites
 
-8. **🧪 Lab Exercises** (main content)
-   - Number exercises sequentially
-   - Use clear exercise titles with objectives
-   - Include step-by-step instructions
-   - Provide multiple implementation methods where applicable (Portal, CLI, PowerShell, Bicep, Terraform)
-   - Add screenshots with `<img src='images/filename.png' width=700>`
-   - Include verification steps after each major task
-   - Add "Exam Insights" sections for exam-focused content
+10. **🧪 Lab Exercises** (main content)
 
-9. **🧭 Reflection & Readiness** (for exam labs)
-   - Review questions
-   - Key takeaways
-   - Common pitfalls
+    - Number exercises sequentially
+    - Use clear exercise titles with objectives
+    - Include step-by-step instructions
+    - Provide multiple implementation methods where applicable (Portal, CLI, PowerShell, Bicep, Terraform)
+    - Add screenshots with `<img src='images/filename.png' width=700>`
+    - Include verification steps after each major task
+    - Add "Exam Insights" sections for exam-focused content
 
-10. **📚 References**
+11. **🧭 Reflection & Readiness** (for exam labs)
+
+    - Review questions
+    - Key takeaways
+    - Common pitfalls
+
+12. **📚 References**
     - Microsoft Learn modules
     - Microsoft documentation links
     - Related resources
@@ -119,6 +157,39 @@ Create labs with the following structure:
   - Related technologies
 - Add a dedicated "📚 References" section at the end with all Microsoft Learn modules cited
 
+### Exercise Documentation Links
+
+**REQUIRED:** Each exercise must include a **📚 Related Documentation** section immediately after the objective statement.
+
+- Add links to relevant Microsoft documentation for each exercise
+- Include 3-7 high-quality documentation links per exercise
+- Link types to include:
+  - Service overview pages (e.g., "What is Azure AI Language?")
+  - Feature-specific documentation (e.g., "Sentiment Analysis overview")
+  - Quickstart guides
+  - How-to guides
+  - API references (when applicable)
+  - Studio/Portal links (e.g., Language Studio, Speech Studio)
+- Format example:
+  ```markdown
+  ### Exercise 1: {Exercise Title}
+  
+  **Objective:** {Clear statement of what this exercise accomplishes}
+  
+  **📚 Related Documentation:**
+  
+  - [Service Overview Title](https://learn.microsoft.com/...)
+  - [Feature Documentation](https://learn.microsoft.com/...)
+  - [Quickstart Guide](https://learn.microsoft.com/...)
+  - [How-to Guide](https://learn.microsoft.com/...)
+  - [Try It Out - Studio Link](https://studio.example.com/)
+  
+  **Steps:**
+  ```
+- Place documentation links BEFORE the "Steps:" section
+- Use descriptive link text (avoid generic "click here" or "documentation")
+- Ensure all links are valid and point to current Microsoft documentation
+
 ### Writing Style
 
 - Use clear, concise language
@@ -134,6 +205,7 @@ Create labs with the following structure:
 - Include comments explaining key parameters
 - Show both imperative and declarative approaches where applicable
 - Format with proper syntax highlighting:
+
   ````markdown
   ```powershell
   # PowerShell example
@@ -177,6 +249,7 @@ For certification exam labs (AI-900, AZ-104, etc.):
 ### Best Practices and Tips
 
 - Use callout boxes for important notes:
+
   ```markdown
   > **Note:** Important information here
   
@@ -184,6 +257,7 @@ For certification exam labs (AI-900, AZ-104, etc.):
   
   > **Tip:** Helpful suggestion here
   ```
+
 - Include troubleshooting sections for common issues
 - Provide cleanup instructions at the end if resources were created
 - Add estimated time for each exercise
@@ -226,6 +300,25 @@ Before finalizing a new lab, verify:
 
 ---
 
+## 🧪 Lab Series Progress
+
+- ✅ [Lab 01: AI Workloads and Responsible AI](../lab01-ai-workloads-responsible-ai/Lab01_AI-Workloads-Responsible-AI.md) - Completed
+- ✅ [Lab 02: Machine Learning Fundamentals](../lab02-machine-learning-fundamentals/Lab02_Machine-Learning-Fundamentals.md) - Completed
+- 🔄 **Lab {##}: {Title}** - In Progress (Current Lab)
+- ⬜ [Lab 04: Next Lab Title](../lab04-next-lab/Lab04_Next-Lab-Title.md) - Not Started
+- ⬜ [Lab 05: Final Lab Title](../lab05-final-lab/Lab05_Final-Lab-Title.md) - Not Started
+
+---
+
+## 📊 Exercise Progress
+
+- ⬜ Exercise 1: {Exercise Title} - Not Started
+- ⬜ Exercise 2: {Exercise Title} - Not Started
+- ⬜ Exercise 3: {Exercise Title} - Not Started
+- ⬜ Exercise 4: {Exercise Title} - Not Started
+
+---
+
 ## 🎯 Objectives
 
 By the end of this lab, you will be able to:
@@ -249,6 +342,11 @@ By the end of this lab, you will be able to:
 ### Exercise 1: {Exercise Title}
 
 **Objective:** {Clear statement of what this exercise accomplishes}
+
+**📚 Related Documentation:**
+
+- [Microsoft Learn Module Title](URL)
+- [Azure Documentation](URL)
 
 {Exercise content with Microsoft Learn references}
 
