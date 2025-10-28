@@ -5,6 +5,15 @@
 
 ---
 
+## 📊 Exercise Progress
+
+- 🔄  Exercise 1: Text Analysis with Azure AI Language - In Progress
+- ⬜ Exercise 2: Speech Recognition and Synthesis - Not Started
+- ⬜ Exercise 3: Language Translation - Not Started
+- ⬜ Exercise 4: Conversational Language Understanding (CLU) - Not Started
+
+---
+
 ## 🎯 Objectives
 
 By the end of this lab, you will be able to:
@@ -30,12 +39,26 @@ By the end of this lab, you will be able to:
 
 **Objective:** Analyze text to extract insights (sentiment, entities, key phrases).
 
+**📚 Related Documentation:**
+
+- [What is Azure AI Language?](https://learn.microsoft.com/en-us/azure/ai-services/language-service/overview)
+- [Sentiment Analysis](https://learn.microsoft.com/en-us/azure/ai-services/language-service/sentiment-opinion-mining/overview)
+- [Named Entity Recognition (NER)](https://learn.microsoft.com/en-us/azure/ai-services/language-service/named-entity-recognition/overview)
+- [Key Phrase Extraction](https://learn.microsoft.com/en-us/azure/ai-services/language-service/key-phrase-extraction/overview)
+- [Quickstart: Use Language Studio](https://learn.microsoft.com/en-us/azure/ai-services/language-service/language-studio)
+
 **Steps:**
 
 1. **Create Azure AI Language Resource:**
    - Navigate to Azure Portal
    - Create resource: "Language" or "Azure AI services"
    - Note the endpoint URL and API key
+
+    <img src='images/2025-10-28-05-47-35.png' width=700>
+
+    [Language Studio](https://language.cognitive.azure.com/home)
+
+    <br>
 
 2. **Test Sentiment Analysis:**
    - Use Language Studio or REST API
@@ -77,6 +100,14 @@ By the end of this lab, you will be able to:
 
 **Objective:** Convert speech to text and text to speech using Azure AI Speech.
 
+**📚 Related Documentation:**
+
+- [What is Azure AI Speech?](https://learn.microsoft.com/en-us/azure/ai-services/speech-service/overview)
+- [Speech-to-text overview](https://learn.microsoft.com/en-us/azure/ai-services/speech-service/speech-to-text)
+- [Text-to-speech overview](https://learn.microsoft.com/en-us/azure/ai-services/speech-service/text-to-speech)
+- [Speech translation overview](https://learn.microsoft.com/en-us/azure/ai-services/speech-service/speech-translation)
+- [Try Speech Studio](https://speech.microsoft.com/)
+
 **Steps:**
 
 1. **Create Azure AI Speech Resource:**
@@ -117,6 +148,14 @@ By the end of this lab, you will be able to:
 
 **Objective:** Translate text between languages.
 
+**📚 Related Documentation:**
+
+- [What is Azure AI Translator?](https://learn.microsoft.com/en-us/azure/ai-services/translator/translator-overview)
+- [Text Translation overview](https://learn.microsoft.com/en-us/azure/ai-services/translator/text-translation-overview)
+- [Document Translation overview](https://learn.microsoft.com/en-us/azure/ai-services/translator/document-translation/overview)
+- [Quickstart: Text translation](https://learn.microsoft.com/en-us/azure/ai-services/translator/quickstart-text-rest-api)
+- [Language support](https://learn.microsoft.com/en-us/azure/ai-services/translator/language-support)
+
 **Steps:**
 
 1. **Create Azure AI Translator Resource:**
@@ -149,6 +188,14 @@ By the end of this lab, you will be able to:
 ### Exercise 4: Conversational Language Understanding (CLU)
 
 **Objective:** Understand how to build language understanding models for chatbots and voice assistants.
+
+**📚 Related Documentation:**
+
+- [What is conversational language understanding?](https://learn.microsoft.com/en-us/azure/ai-services/language-service/conversational-language-understanding/overview)
+- [Quickstart: Conversational language understanding](https://learn.microsoft.com/en-us/azure/ai-services/language-service/conversational-language-understanding/quickstart)
+- [Build schema design](https://learn.microsoft.com/en-us/azure/ai-services/language-service/conversational-language-understanding/how-to/build-schema)
+- [Intents and entities](https://learn.microsoft.com/en-us/azure/ai-services/language-service/conversational-language-understanding/concepts/entity-components)
+- [Train and evaluate models](https://learn.microsoft.com/en-us/azure/ai-services/language-service/conversational-language-understanding/how-to/train-model)
 
 **Concepts:**
 
