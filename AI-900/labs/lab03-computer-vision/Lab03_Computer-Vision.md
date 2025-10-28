@@ -216,21 +216,43 @@ The Read API accepts images and documents with the following specifications:
 
 For each scenario, choose the correct service and feature:
 
-1. A retail store wants to count customers entering the store
-2. A library wants to digitize old books
-3. A security system needs to verify employee identity
-4. A social media app wants to tag objects in user photos
-5. A research study needs to analyze emotional expressions
+1. A retail store wants to count customers entering the store - **Object Detection** ✅
+2. A library wants to digitize old books - **Read API (OCR)** ✅
+3. A security system needs to verify employee identity - **Face Identification** ✅
+4. A social media app wants to tag objects in user photos - **Object Detection** or **Image Analysis (Tagging)** ⚠️
+   - *Note: Image Classification identifies the primary category of an entire image (e.g., "this is a beach photo"), while Object Detection/Image Tagging identifies multiple objects within an image (e.g., "beach, umbrella, person, dog"). For tagging multiple objects in user photos, Object Detection or the Image Analysis tagging feature is more appropriate.*
+5. A research study needs to analyze emotional expressions - **Face Attributes** ✅
+
+**Key Distinction:**
+- **Image Classification:** Categorizes the entire image with a single label → "This is a dog photo"
+- **Object Detection/Tagging:** Identifies multiple objects within the image → "Contains: dog, person, tree, frisbee, grass"
 
 ---
 
 ## 🧠 Knowledge Check
 
-1. What is the difference between image classification and object detection?
-2. Which Azure service would you use to extract text from a PDF?
-3. What attributes can Azure AI Face detect?
-4. When would you use Custom Vision instead of the standard Azure AI Vision service?
-5. What are ethical considerations when using facial analysis technology?
+1. **What is the difference between image classification and object detection?**
+   - **Image Classification** assigns a single label/category to an entire image (e.g., "this is a cat photo")
+   - **Object Detection** identifies and locates multiple objects within an image with bounding boxes (e.g., "cat at coordinates X,Y; person at coordinates A,B")
+
+2. **Which Azure service would you use to extract text from a PDF?**
+   - **Azure AI Vision - Read API (OCR)** - specifically designed to extract printed and handwritten text from images and PDF documents
+
+3. **What attributes can Azure AI Face detect?**
+   - Age, emotion, facial hair, glasses, head pose, makeup, occlusion, accessories, blur, exposure, noise, and more
+   - Note: Azure AI Face has limited access requirements for face identification and verification features
+
+4. **When would you use Custom Vision instead of the standard Azure AI Vision service?**
+   - When you need to classify or detect **domain-specific objects** not covered by pre-trained models
+   - Examples: identifying specific product defects, classifying rare plant species, detecting custom logo variations
+   - When you have your own training dataset and need a specialized model
+
+5. **What are ethical considerations when using facial analysis technology?**
+   - **Privacy:** Obtaining informed consent before capturing/analyzing facial data
+   - **Bias:** Ensuring models perform equally across different demographics (age, gender, ethnicity)
+   - **Limited Access:** Microsoft restricts face identification/verification features to prevent misuse
+   - **Transparency:** Being clear about when and how facial analysis is being used
+   - **Data Security:** Protecting sensitive biometric data from unauthorized access
 
 ---
 
