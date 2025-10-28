@@ -1653,7 +1653,7 @@ az role assignment create \
 **📚 Related Documentation:**
 
 * [Set-AzRoleDefinition cmdlet reference](https://learn.microsoft.com/en-us/powershell/module/az.resources/set-azroledefinition)
-* [az role definition update command reference](https://learn.microsoft.com/en-cli/azure/role/definition#az-role-definition-update)
+* [az role definition update command reference](https://learn.microsoft.com/en-us/azure/role-based-access-control/custom-roles-cli)
 
 ```powershell
 # Get existing custom role
@@ -1669,17 +1669,55 @@ $role.Description = "Can monitor, start, restart, and deallocate virtual machine
 Set-AzRoleDefinition -Role $role
 ```
 
+<img src='images/2025-10-28-03-55-35.png' width=700>
+
 Using Azure CLI:
 
 ```bash
 # Get role definition
 az role definition list --name "Storage Blob Operator" --output json > role.json
+```
 
-# Edit role.json file to add permissions
+<img src='images/2025-10-28-03-57-53.png' width=700>
 
+This command does not output in the exact format needed for update, so some editing is required. See [Azure CLI foramt](https://learn.microsoft.com/en-us/azure/role-based-access-control/custom-roles#azure-cli).
+
+Edit role.json file to add permissions.
+
+<img src='images/2025-10-28-04-00-22.png' width=600>
+
+Here is the final JSON after editing:
+
+```json
+{
+  "Name": "Storage Blob Operator",
+  "Description": "Can read, write, and delete blobs but not manage storage accounts",
+  "Actions": [
+    "Microsoft.Storage/*/read",
+    "Microsoft.Storage/storageAccounts/blobServices/containers/read",
+    "Microsoft.Authorization/*/read",
+    "Microsoft.Resources/subscriptions/resourceGroups/read"
+  ],
+  "NotActions": [],
+  "DataActions": [
+    "Microsoft.Storage/storageAccounts/blobServices/containers/blobs/read",
+    "Microsoft.Storage/storageAccounts/blobServices/containers/blobs/write",
+    "Microsoft.Storage/storageAccounts/blobServices/containers/blobs/delete",
+    "Microsoft.Storage/storageAccounts/blobServices/containers/blobs/move/action"
+  ],
+  "NotDataActions": [],
+  "AssignableScopes": [
+    "/subscriptions/e091f6e7-031a-4924-97bb-8c983ca5d21a"
+  ]
+}
+```
+
+```bash
 # Update the role
 az role definition update --role-definition @role.json
 ```
+
+<img src='images/2025-10-28-04-41-42.png' width=700>
 
 ### Delete a Custom Role
 
