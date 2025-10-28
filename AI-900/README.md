@@ -92,7 +92,7 @@ Hands-on labs organized by exam domain:
 
 ---
 
-### Lab 4: Natural Language Processing
+### [Lab 4: Natural Language Processing](labs/lab04-natural-language-processing/Lab04_Natural-Language-Processing.md)
 
 **Location:** `labs/lab04-natural-language-processing/`  
 **Objectives:**
@@ -106,7 +106,7 @@ Hands-on labs organized by exam domain:
 
 ---
 
-### Lab 5: Generative AI with Azure OpenAI
+### [Lab 5: Generative AI with Azure OpenAI](labs/lab05-generative-ai/Lab05_Generative-AI.md)
 
 **Location:** `labs/lab05-generative-ai/`  
 **Objectives:**
