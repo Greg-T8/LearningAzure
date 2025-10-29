@@ -15,7 +15,7 @@ Each lab:
 - Intentionally requires referencing **Microsoft documentation**
 - Reinforces **governance, automation, and troubleshooting**
 
-Average lab duration: **1.5–2 hours**
+Average lab duration: **8 hours**
 
 ---
 
@@ -42,44 +42,6 @@ Average lab duration: **1.5–2 hours**
 | **C** | **4–5** | ☁️ **Compute and Automation**           | Lab 7 – Infrastructure as Code (Bicep & Terraform) <br>Lab 8 – Virtual Machines & Disks <br>Lab 9 – Scale Sets & Containers <br>Lab 10 – App Services & Web Apps                                                 |
 | **D** | **6–7** | 🌐 **Networking & Hybrid Connectivity**  | Lab 11 – Virtual Networks & Routing <br>Lab 12 – Network Security & Private Access <br>Lab 13 – VPN, ExpressRoute, Virtual WAN <br>Lab 14 – Load Balancing & Front Door <br>Lab 15 – Azure DNS Zones             |
 | **E** | **8**   | 🩺 **Monitoring & Resilience**           | Lab 16 – Monitoring & Diagnostics <br>Lab 17 – Backup & Recovery <br>Lab 18 – Capstone: End-to-End Scenario                                                                                                      |
-
----
-
-### 📁 Artifact Index
-
-Each lab folder includes:
-
-| **Category**               | **Folder Path**          | **Description**                                                                             |
-| -------------------------- | ------------------------ | ------------------------------------------------------------------------------------------- |
-| **Lab Guide**              | `Lab##_Name.md`          | Step-by-step guide for completing the lab                                                   |
-| **Infrastructure as Code** | `/bicep/`, `/terraform/` | Bicep and Terraform templates for IaC deployments                                           |
-| **Automation Scripts**     | `/powershell/`, `/cli/`  | PowerShell and Azure CLI automation scripts                                                 |
-| **Logs**                   | `/artifacts/logs/`       | Command-line transcripts (CLI / PowerShell)                                                 |
-| **Configs**                | `/artifacts/configs/`    | JSON, YAML, or exported policy/configuration data                                           |
-| **Outputs**                | `/artifacts/outputs/`    | Deployment results, state files, or verification exports                                    |
-| **Reports**                | `/artifacts/reports/`    | Downloaded reports, cost exports, or audit outputs                                          |
-| **Docs**                   | `/docs/`                 | Supporting study materials (e.g., License Matrix, Feature Comparison, Exam Readiness notes) |
-
-**Example Lab Folder Structure:**  
-
-```text
-/labs/
-  lab01-setup-identity-baseline/
-    Lab01_Setup-Identity-Baseline.md
-    /bicep/
-    /terraform/
-    /powershell/
-    /cli/
-    /artifacts/
-      /logs/
-      /configs/
-      /outputs/
-      /reports/
-    /docs/
-      License-Feature-Matrix.md
-      SSPR-Troubleshooting.md
-      Exam-Readiness-Notes.md
-```
 
 ---
 
@@ -128,14 +90,14 @@ Each lab folder includes:
 
 - **Manage Microsoft Entra ID objects**
   - Create users and groups
-    - [Types of users](https://learn.microsoft.com/en-us/entra/fundamentals/how-to-create-delete-users#types-of-users)
-    - [Default user permissions](https://learn.microsoft.com/en-us/entra/fundamentals/users-default-permissions)
-    - [Create users in bulk](https://learn.microsoft.com/en-us/entra/identity/users/users-bulk-add)
+    - Types of users
+    - Default user permissions
+    - Create users in bulk
   - Manage user and group properties
-    - [Restore a deleted user](https://learn.microsoft.com/en-us/entra/fundamentals/users-restore?toc=%2Fentra%2Fidentity%2Fusers%2Ftoc.json&bc=%2Fentra%2Fidentity%2Fusers%2Fbreadcrumb%2Ftoc.json)
+    - Restore a deleted user
   - Manage licenses in Microsoft Entra ID
-    - [Microsoft Entra Licensing](https://learn.microsoft.com/en-us/entra/fundamentals/licensing)
-    - [Group-based licensing limitations](https://learn.microsoft.com/en-us/entra/identity/users/licensing-group-advanced#limitations-and-known-issues)
+    - Microsoft Entra Licensing
+    - Group-based licensing limitations
   - Manage external users
   - Configure self-service password reset
 - **Manage access to Azure resources**
@@ -237,5 +199,41 @@ Each lab folder includes:
   - Configure and review backup reports
 
 ---
+
+### 📁 Artifact Index
+
+Each lab folder includes:
+
+| **Category**               | **Folder Path**          | **Description**                                                                             |
+| -------------------------- | ------------------------ | ------------------------------------------------------------------------------------------- |
+| **Lab Guide**              | `Lab##_Name.md`          | Step-by-step guide for completing the lab                                                   |
+| **Infrastructure as Code** | `/bicep/`, `/terraform/` | Bicep and Terraform templates for IaC deployments                                           |
+| **Automation Scripts**     | `/powershell/`, `/cli/`  | PowerShell and Azure CLI automation scripts                                                 |
+| **Logs**                   | `/artifacts/logs/`       | Command-line transcripts (CLI / PowerShell)                                                 |
+| **Configs**                | `/artifacts/configs/`    | JSON, YAML, or exported policy/configuration data                                           |
+| **Outputs**                | `/artifacts/outputs/`    | Deployment results, state files, or verification exports                                    |
+| **Reports**                | `/artifacts/reports/`    | Downloaded reports, cost exports, or audit outputs                                          |
+| **Docs**                   | `/docs/`                 | Supporting study materials (e.g., License Matrix, Feature Comparison, Exam Readiness notes) |
+
+**Example Lab Folder Structure:**  
+
+```text
+/labs/
+  lab01-setup-identity-baseline/
+    Lab01_Setup-Identity-Baseline.md
+    /bicep/
+    /terraform/
+    /powershell/
+    /cli/
+    /artifacts/
+      /logs/
+      /configs/
+      /outputs/
+      /reports/
+    /docs/
+      License-Feature-Matrix.md
+      SSPR-Troubleshooting.md
+      Exam-Readiness-Notes.md
+```
 
 *Last updated: 2025-10-08*
