@@ -1,7 +1,7 @@
 # Lab 2 – Role-Based Access & Scoping
 
 **Domain:** Manage Azure identities and governance  
-**Difficulty:** Medium (≈1.5–2 hrs)  
+**Difficulty:** Medium (≈8 hrs)  
 **Dependencies:** Lab 1 – Setup and Identity Baseline
 
 ---
