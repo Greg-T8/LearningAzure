@@ -2,7 +2,7 @@
 
 # 🌩️ Learning Azure
 
-*A hands-on journey through Microsoft Azure certifications*
+*My hands-on journey through Microsoft Azure certifications*
 
 [![AI-900](https://img.shields.io/badge/AI--900-In%20Progress-yellow)](AI-900/)
 [![AZ-104](https://img.shields.io/badge/AZ--104-In%20Progress-yellow)](AZ-104/)
