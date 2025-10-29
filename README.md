@@ -4,11 +4,9 @@
 
 *My hands-on journey through Microsoft Azure certifications*
 
-[![AI-900](https://img.shields.io/badge/AI--900-In%20Progress-yellow)](AI-900/)
-[![AZ-104](https://img.shields.io/badge/AZ--104-In%20Progress-yellow)](AZ-104/)
-![GitHub commit activity](https://img.shields.io/github/commit-activity/m/Greg-T8/LearningAzure)
-![GitHub last commit](https://img.shields.io/github/last-commit/Greg-T8/LearningAzure)
+[![AI-900](https://img.shields.io/badge/AI--900-In%20Progress-yellow)](AI-900/) [![AZ-104](https://img.shields.io/badge/AZ--104-In%20Progress-yellow)](AZ-104/) ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/Greg-T8/LearningAzure) ![GitHub last commit](https://img.shields.io/github/last-commit/Greg-T8/LearningAzure)
 
+![Total Labs](https://img.shields.io/badge/Total%20Labs-23-blue) ![Completed Labs](https://img.shields.io/badge/Completed-6-success) ![In Progress](https://img.shields.io/badge/In%20Progress-2-yellow)
 </div>
 
 ---
@@ -25,12 +23,6 @@ This repository documents my hands-on learning journey through Microsoft Azure c
 |---------------|--------|----------------|---------|-------------------|
 | **AI-900** | 🔄 In Progress | 3/5 (60%) | 10/16/2025 | 11/16/2025 |
 | **AZ-104** | 🔄 In Progress | 3/18 (17%) | 10/09/2025 | 2/1/2026 |
-
-### Quick Stats
-
-![Total Labs](https://img.shields.io/badge/Total%20Labs-23-blue)
-![Completed Labs](https://img.shields.io/badge/Completed-6-success)
-![In Progress](https://img.shields.io/badge/In%20Progress-2-yellow)
 
 <!-- COMMIT_STATS_START -->
 ## 📈 Recent Activity (Last 7 Days)
