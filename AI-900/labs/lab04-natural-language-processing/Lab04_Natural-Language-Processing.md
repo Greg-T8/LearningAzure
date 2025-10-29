@@ -1,6 +1,6 @@
 # Lab 04: Natural Language Processing
 
-**Duration:** 60–75 minutes  
+**Duration:** 4 hours
 **Difficulty:** Intermediate
 
 ---
@@ -11,6 +11,8 @@
 - ⬜ Exercise 2: Speech Recognition and Synthesis - Not Started
 - ⬜ Exercise 3: Language Translation - Not Started
 - ⬜ Exercise 4: Conversational Language Understanding (CLU) - Not Started
+
+**Status:** ⬜ Not Started | 🔄 In Progress | ✅ Completed
 
 ---
 

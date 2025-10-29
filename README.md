@@ -32,6 +32,25 @@ This repository documents my hands-on learning journey through Microsoft Azure c
 ![Completed Labs](https://img.shields.io/badge/Completed-6-success)
 ![In Progress](https://img.shields.io/badge/In%20Progress-2-yellow)
 
+<!-- COMMIT_STATS_START -->
+## 📈 Recent Activity (Last 7 Days)
+
+| Date | AI-900 | AZ-104 | Repo | Total |
+|------|--------|--------|------|-------|
+| Mon, Oct 28 | 0 | 0 | 0 | 0 |
+| Tue, Oct 29 | 0 | 0 | 0 | 0 |
+| Wed, Oct 30 | 0 | 0 | 0 | 0 |
+| Thu, Oct 31 | 0 | 0 | 0 | 0 |
+| Fri, Nov 01 | 0 | 0 | 0 | 0 |
+| Sat, Nov 02 | 0 | 0 | 0 | 0 |
+| Sun, Nov 03 | 0 | 0 | 0 | 0 |
+| **Total** | **0** | **0** | **0** | **0** |
+
+*🟢 = Activity on this day*
+
+*Last updated: Placeholder - will be updated by GitHub Actions*
+<!-- COMMIT_STATS_END -->
+
 ---
 
 ## 🎓 Certifications
@@ -41,6 +60,7 @@ This repository documents my hands-on learning journey through Microsoft Azure c
 **Status:** 🔄 In Progress (3/5 labs completed - 60%)
 
 **Focus Areas:**
+
 - AI workloads and Responsible AI principles
 - Machine Learning fundamentals
 - Computer Vision workloads
@@ -48,6 +68,7 @@ This repository documents my hands-on learning journey through Microsoft Azure c
 - Generative AI with Azure OpenAI
 
 **Exam Details:**
+
 - **Level:** Foundational
 - **Exam Weight:** Covers 5 main domains
 - **Current Lab:** Lab 04 - Natural Language Processing
@@ -61,6 +82,7 @@ This repository documents my hands-on learning journey through Microsoft Azure c
 **Status:** 🔄 In Progress (3/18 labs completed - 17%)
 
 **Focus Areas:**
+
 - Manage Azure identities and governance (20-25%)
 - Implement and manage storage (15-20%)
 - Deploy and manage Azure compute resources (20-25%)
@@ -68,6 +90,7 @@ This repository documents my hands-on learning journey through Microsoft Azure c
 - Monitor and maintain Azure resources (10-15%)
 
 **Exam Details:**
+
 - **Level:** Associate
 - **Lab Approach:** Scenario-driven, multi-modal (Portal, CLI, PowerShell, Bicep, Terraform)
 - **Current Lab:** Lab 03 - Governance & Policies
@@ -130,6 +153,7 @@ LearningAzure/
 ### Quick Start
 
 1. **Clone this repository**
+
    ```bash
    git clone https://github.com/Greg-T8/LearningAzure.git
    cd LearningAzure
@@ -187,6 +211,7 @@ LearningAzure/
 This is a **personal learning repository** documenting my journey through Azure certifications. The labs are designed for hands-on practice and exam preparation, with a focus on real-world scenarios and multiple implementation approaches.
 
 **Key Features:**
+
 - Detailed lab guides with step-by-step instructions
 - Multiple implementation methods (Portal, CLI, PowerShell, IaC)
 - Comprehensive documentation links
