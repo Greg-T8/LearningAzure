@@ -17,7 +17,7 @@ Track your progress through the lab exercises:
 - ✅ Exercise 5 – Understand Deny Assignments
 - ✅ Exercise 6 – Assign Roles to Service Principals
 - ✅ Exercise 7 – Review Access Using Access Control (IAM)
-- 🔄 Exercise 8 – Create and Manage Custom Roles
+- ✅ Exercise 8 – Create and Manage Custom Roles
 
 **Status:** ⬜ Not Started | 🔄 In Progress | ✅ Completed
 
