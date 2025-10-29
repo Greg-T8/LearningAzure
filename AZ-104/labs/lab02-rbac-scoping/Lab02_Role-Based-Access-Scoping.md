@@ -6,9 +6,27 @@
 
 ---
 
+## 📊 Exercise Progress
+
+Track your progress through the lab exercises:
+
+- ✅ Exercise 1 – Explore Built-in Azure Roles
+- ✅ Exercise 2 – Assign Roles at Different Scopes
+- ✅ Exercise 3 – Verify Role Inheritance and Effective Permissions
+- ✅ Exercise 4 – Implement Just-Enough-Access (JEA) Principle
+- ✅ Exercise 5 – Understand Deny Assignments
+- ✅ Exercise 6 – Assign Roles to Service Principals
+- ✅ Exercise 7 – Review Access Using Access Control (IAM)
+- 🔄 Exercise 8 – Create and Manage Custom Roles
+
+**Status:** ⬜ Not Started | 🔄 In Progress | ✅ Completed
+
+---
+
 <!-- omit in toc -->
 ## 🧾 Contents
 
+* [📊 Exercise Progress](#-exercise-progress)
 * [🎯 Lab Objective](#-lab-objective)
 * [🧱 Skills Measured (Exam Outline)](#-skills-measured-exam-outline)
 * [🧠 Scenario](#-scenario)
@@ -84,22 +102,22 @@
 
 Implement and validate Azure role-based access control (RBAC) across different scopes. You will:
 
-* Explore Azure built-in roles and their permissions
-* Create custom roles with specific permissions
-* Assign roles at management group, subscription, resource group, and resource scopes
-* Verify permission inheritance and effective access
-* Implement least privilege access principles
-* Understand deny assignments and their precedence
-* Manage service principal access
+- Explore Azure built-in roles and their permissions
+- Create custom roles with specific permissions
+- Assign roles at management group, subscription, resource group, and resource scopes
+- Verify permission inheritance and effective access
+- Implement least privilege access principles
+- Understand deny assignments and their precedence
+- Manage service principal access
 
 ---
 
 ## 🧱 Skills Measured (Exam Outline)
 
-* Manage built-in Azure roles
-* Create and manage custom Azure roles
-* Assign roles at different scopes
-* Interpret access assignments
+- Manage built-in Azure roles
+- Create and manage custom Azure roles
+- Assign roles at different scopes
+- Interpret access assignments
 
 ---
 
@@ -107,11 +125,11 @@ Implement and validate Azure role-based access control (RBAC) across different s
 
 Your organization, **Contoso Ltd**, is scaling its Azure environment and needs proper access control. The security team has mandated that:
 
-* **Finance team** needs read-only access to all resources across the subscription
-* **Development team** needs contributor access to their specific resource groups only
-* **Operations team** needs owner access to production resource groups
-* **Service principals** for automation need targeted permissions
-* All access must follow the principle of least privilege
+- **Finance team** needs read-only access to all resources across the subscription
+- **Development team** needs contributor access to their specific resource groups only
+- **Operations team** needs owner access to production resource groups
+- **Service principals** for automation need targeted permissions
+- All access must follow the principle of least privilege
 
 You are responsible for implementing this RBAC strategy and validating that users have appropriate access.
 
@@ -130,9 +148,9 @@ You are responsible for implementing this RBAC strategy and validating that user
 
 **Prerequisites:**
 
-* Completed Lab 1 with users and groups created
-* At least one resource group deployed
-* User Access Administrator or Owner role on the subscription
+- Completed Lab 1 with users and groups created
+- At least one resource group deployed
+- User Access Administrator or Owner role on the subscription
 
 ---
 
@@ -151,10 +169,10 @@ You are responsible for implementing this RBAC strategy and validating that user
 1. Navigate to **Subscriptions** → Select your subscription
 2. Go to **Access control (IAM)** → **Roles**
 3. Explore the following built-in roles:
-   * **Owner** – Full access including role assignment
-   * **Contributor** – Manage all resources but cannot assign roles
-   * **Reader** – View all resources but cannot make changes
-   * **User Access Administrator** – Manage user access to resources
+   - **Owner** – Full access including role assignment
+   - **Contributor** – Manage all resources but cannot assign roles
+   - **Reader** – View all resources but cannot make changes
+   - **User Access Administrator** – Manage user access to resources
 4. Click on a role and select **Permissions** to view detailed actions
 
     <img src='images/2025-10-21-04-04-43.png' width=700>
@@ -165,15 +183,15 @@ You are responsible for implementing this RBAC strategy and validating that user
 
     Azure RBAC distinguishes between two types of operations:
 
-    * **Control Plane (Management Plane):** Operations that manage Azure resources themselves
-      * Examples: Create VM, delete storage account, configure network settings
-      * Handled by Azure Resource Manager (`https://management.azure.com`)
-      * Use `Actions` and `NotActions`
+    - **Control Plane (Management Plane):** Operations that manage Azure resources themselves
+      - Examples: Create VM, delete storage account, configure network settings
+      - Handled by Azure Resource Manager (`https://management.azure.com`)
+      - Use `Actions` and `NotActions`
 
-    * **Data Plane:** Operations that interact with data inside Azure resources
-      * Examples: Read/write blobs, read queue messages, query database
-      * Handled by the resource provider directly
-      * Use `DataActions` and `NotDataActions`
+    - **Data Plane:** Operations that interact with data inside Azure resources
+      - Examples: Read/write blobs, read queue messages, query database
+      - Handled by the resource provider directly
+      - Use `DataActions` and `NotDataActions`
 
     **Permission Properties Explained:**
 
@@ -194,30 +212,30 @@ You are responsible for implementing this RBAC strategy and validating that user
     **Key Concepts:**
 
     1. **Historical Context - DataActions Introduction (Early 2018):**
-       * **Previously:** Role-based access control was NOT used for data actions. Authorization for data actions varied across resource providers
-       * **Change:** Azure extended the RBAC model to support data plane actions via `DataActions` and `NotDataActions`
-       * **Timeline:** DataActions were introduced in **API version `2018-01-01-preview`** (early 2018)
-       * **REST API Support:** To use DataActions in REST API, you must use **API version `2018-07-01` or later**
-       * **Tool Requirements:** Updated tool versions were required:
-         * Azure PowerShell 1.1.0 or later
-         * Azure CLI 2.0.30 or later
-       * **Why the change:** This separation prevents roles with wildcards (`*`) from suddenly having unrestricted access to data, maintaining security boundaries between resource management and data access
+       - **Previously:** Role-based access control was NOT used for data actions. Authorization for data actions varied across resource providers
+       - **Change:** Azure extended the RBAC model to support data plane actions via `DataActions` and `NotDataActions`
+       - **Timeline:** DataActions were introduced in **API version `2018-01-01-preview`** (early 2018)
+       - **REST API Support:** To use DataActions in REST API, you must use **API version `2018-07-01` or later**
+       - **Tool Requirements:** Updated tool versions were required:
+         - Azure PowerShell 1.1.0 or later
+         - Azure CLI 2.0.30 or later
+       - **Why the change:** This separation prevents roles with wildcards (`*`) from suddenly having unrestricted access to data, maintaining security boundaries between resource management and data access
 
     2. **Separation of Concerns:** Control plane access does NOT automatically grant data plane access
-       * Example: Having `Reader` role lets you see a storage account exists, but you cannot read the blobs inside
-       * You need `Storage Blob Data Reader` role (which has `DataActions`) to read blob data
+       - Example: Having `Reader` role lets you see a storage account exists, but you cannot read the blobs inside
+       - You need `Storage Blob Data Reader` role (which has `DataActions`) to read blob data
 
     3. **NotActions is NOT a Deny:** It's a subtraction from allowed actions, not a deny rule
-       * If Role A has `NotActions: ["delete"]` but Role B grants `Actions: ["delete"]`, the user CAN delete
-       * For true deny, use Deny Assignments (covered in Exercise 5)
+       - If Role A has `NotActions: ["delete"]` but Role B grants `Actions: ["delete"]`, the user CAN delete
+       - For true deny, use Deny Assignments (covered in Exercise 5)
 
     4. **Wildcards:** `*` grants all current AND future operations
-       * `Actions: ["Microsoft.Compute/*"]` = all Compute operations
-       * `DataActions: ["Microsoft.Storage/.../blobs/*"]` = all blob data operations
+       - `Actions: ["Microsoft.Compute/*"]` = all Compute operations
+       - `DataActions: ["Microsoft.Storage/.../blobs/*"]` = all blob data operations
 
     5. **Authentication Methods Matter:** Data plane access only works when using Microsoft Entra authentication
-       * If storage account uses "Access Key" authentication, RBAC data plane roles are bypassed
-       * Set container authentication to "Microsoft Entra User Account" for RBAC to apply
+       - If storage account uses "Access Key" authentication, RBAC data plane roles are bypassed
+       - Set container authentication to "Microsoft Entra User Account" for RBAC to apply
 
     **Real-World Example: Storage Blob Data Contributor Role**
 
@@ -247,9 +265,9 @@ You are responsible for implementing this RBAC strategy and validating that user
     <img src='images/2025-10-21-04-24-00.png' width=700>
 
     **Analysis:**
-    * **Control Plane (Actions):** Can manage blob containers (create, delete, list containers)
-    * **Data Plane (DataActions):** Can read/write/delete blob data inside containers
-    * This role provides BOTH management and data access
+    - **Control Plane (Actions):** Can manage blob containers (create, delete, list containers)
+    - **Data Plane (DataActions):** Can read/write/delete blob data inside containers
+    - This role provides BOTH management and data access
 
     **Comparison Example: Owner vs. Storage Blob Data Contributor**
 
@@ -266,8 +284,8 @@ You are responsible for implementing this RBAC strategy and validating that user
     **Important:** Owner has wildcard `Actions: ["*"]` for all control plane operations, but has ZERO `DataActions`, so Owner **cannot** read/write blob data by default without additional data plane role assignment.
 
     **📚 Related Documentation:**
-    * [Understand Azure role definitions - Control and data actions](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-definitions#control-and-data-actions)
-    * [Azure control plane and data plane](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/control-plane-and-data-plane)
+    - [Understand Azure role definitions - Control and data actions](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-definitions#control-and-data-actions)
+    - [Azure control plane and data plane](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/control-plane-and-data-plane)
 
 ### Using PowerShell (`Get-AzRoleDefinition`)
 
@@ -343,17 +361,17 @@ az role definition list `
 
 **Key Differences:**
 
-* **Owner vs User Access Administrator:**
-  * Owner: Full resource management + RBAC
-  * User Access Administrator: RBAC only, no resource management
+- **Owner vs User Access Administrator:**
+  - Owner: Full resource management + RBAC
+  - User Access Administrator: RBAC only, no resource management
 
-* **Contributor vs Owner:**
-  * Contributor: Cannot assign roles or manage RBAC
-  * Owner: Can do everything including RBAC
+- **Contributor vs Owner:**
+  - Contributor: Cannot assign roles or manage RBAC
+  - Owner: Can do everything including RBAC
 
-* **Actions vs DataActions:**
-  * Actions: Control plane operations (create, delete, update resources)
-  * DataActions: Data plane operations (read/write data within resources)
+- **Actions vs DataActions:**
+  - Actions: Control plane operations (create, delete, update resources)
+  - DataActions: Data plane operations (read/write data within resources)
 
 ### Exam Insights
 
@@ -701,10 +719,10 @@ terraform apply
 
 **Example Scenario:**
 
-* User has **Reader** at subscription scope
-* User has **Contributor** at resource group scope
-* **Effective permission at resource group:** Contributor (more permissive)
-* **Effective permission at other resource groups:** Reader (inherited from subscription)
+- User has **Reader** at subscription scope
+- User has **Contributor** at resource group scope
+- **Effective permission at resource group:** Contributor (more permissive)
+- **Effective permission at other resource groups:** Reader (inherited from subscription)
 
 ### Verify Effective Permissions
 
@@ -714,9 +732,9 @@ terraform apply
 2. Go to **Access control (IAM)** → **Check access**
 3. Search for a user (e.g., `user1@637djb.onmicrosoft.com`)
 4. Click **View** to see:
-   * Direct assignments
-   * Inherited assignments
-   * Effective permissions
+   - Direct assignments
+   - Inherited assignments
+   - Effective permissions
 5. Review the role assignments showing **access at this scope and inherited to this scope** to understand where permissions come fromm
 
 <img src='images/2025-10-22-03-54-35.png' width=800>
@@ -800,12 +818,12 @@ az role assignment list \
 
 **Current State:**
 
-* `Dev-Team` has Contributor at subscription scope (too broad)
+- `Dev-Team` has Contributor at subscription scope (too broad)
 
 **Desired State:**
 
-* `Dev-Team` should only have Contributor on `rg-dev-test`
-* `Dev-Team` should have Reader on other resource groups
+- `Dev-Team` should only have Contributor on `rg-dev-test`
+- `Dev-Team` should have Reader on other resource groups
 
 **Implementation:**
 
@@ -895,10 +913,10 @@ Remove-AzRoleAssignment `
 
 **Key Characteristics:**
 
-* Deny assignments take precedence over role assignments
-* Created by Azure services automatically (e.g., Azure Deployment Stacks)
-* Cannot be created manually by users
-* Applied to protect system-critical resources
+- Deny assignments take precedence over role assignments
+- Created by Azure services automatically (e.g., Azure Deployment Stacks)
+- Cannot be created manually by users
+- Applied to protect system-critical resources
 
 **Precedence Order:**
 
@@ -914,10 +932,10 @@ Remove-AzRoleAssignment `
 2. Go to **Access control (IAM)** → **Deny assignments** tab
 3. Review any deny assignments
 4. Click on a deny assignment to see:
-   * Denied actions
-   * Denied data actions
-   * Principals (who is denied)
-   * Scope
+   - Denied actions
+   - Denied data actions
+   - Principals (who is denied)
+   - Scope
 
 **Note:** Most tenants won't have deny assignments unless Deployment Stacks are in use.
 
@@ -970,27 +988,27 @@ Before creating service principals, it's important to understand the relationshi
 
 **App Registration (Entra Application):**
 
-* The **global definition** of your application across all Microsoft Entra ID tenants
-* Created in your "home" Microsoft Entra ID tenant
-* Defines the application's identity and configuration
-* Contains:
-  * Application (Client) ID - unique identifier
-  * Redirect URIs
-  * API permissions required
-  * Certificates & secrets (credentials)
-* **One App Registration** can be used by multiple Service Principals across different tenants
+- The **global definition** of your application across all Microsoft Entra ID tenants
+- Created in your "home" Microsoft Entra ID tenant
+- Defines the application's identity and configuration
+- Contains:
+  - Application (Client) ID - unique identifier
+  - Redirect URIs
+  - API permissions required
+  - Certificates & secrets (credentials)
+- **One App Registration** can be used by multiple Service Principals across different tenants
 
 **Service Principal (Enterprise Application):**
 
-* The **local representation** of the application in a specific Microsoft Entra ID tenant
-* The security principal that actually performs actions and has permissions assigned
-* The object that receives role assignments (RBAC)
-* Think of it as the "instance" or "local copy" of the app registration in a tenant
+- The **local representation** of the application in a specific Microsoft Entra ID tenant
+- The security principal that actually performs actions and has permissions assigned
+- The object that receives role assignments (RBAC)
+- Think of it as the "instance" or "local copy" of the app registration in a tenant
 
 **Analogy:**
 
-* **App Registration** = Class definition in code (blueprint)
-* **Service Principal** = Object instance created from that class (actual running instance)
+- **App Registration** = Class definition in code (blueprint)
+- **Service Principal** = Object instance created from that class (actual running instance)
 
 **Relationship:**
 
@@ -1002,18 +1020,18 @@ App Registration (1)  ──creates──>  Service Principal (1 or more)
 **Real-World Example:**
 
 1. You create an **App Registration** named "MyApp" in your Microsoft Entra ID tenant
-   * Gets Application ID: `12345678-1234-1234-1234-123456789abc`
+   - Gets Application ID: `12345678-1234-1234-1234-123456789abc`
 
 2. When you grant this app access to resources in your tenant:
-   * A **Service Principal** is automatically created in your tenant
-   * This Service Principal is what you assign RBAC roles to
-   * The Service Principal references the App Registration by Application ID
+   - A **Service Principal** is automatically created in your tenant
+   - This Service Principal is what you assign RBAC roles to
+   - The Service Principal references the App Registration by Application ID
 
 3. If another organization wants to use "MyApp" (multi-tenant scenario):
-   * They consent to your App Registration (global definition)
-   * A new **Service Principal** is created in *their* tenant
-   * Your App Registration remains unchanged (still one global definition)
-   * Now there are two Service Principals (one per tenant) referencing the same App Registration
+   - They consent to your App Registration (global definition)
+   - A new **Service Principal** is created in *their* tenant
+   - Your App Registration remains unchanged (still one global definition)
+   - Now there are two Service Principals (one per tenant) referencing the same App Registration
 
 **Terminology Across Tools:**
 
@@ -1026,18 +1044,18 @@ App Registration (1)  ──creates──>  Service Principal (1 or more)
 
 **Why This Matters for RBAC:**
 
-* **You assign Azure RBAC roles to the Service Principal, NOT the App Registration**
-* When using `az ad sp create-for-rbac`:
-  * Creates App Registration (global definition)
-  * Creates Service Principal (local instance)
-  * Assigns RBAC role to the Service Principal
-  * Returns credentials for authentication
+- **You assign Azure RBAC roles to the Service Principal, NOT the App Registration**
+- When using `az ad sp create-for-rbac`:
+  - Creates App Registration (global definition)
+  - Creates Service Principal (local instance)
+  - Assigns RBAC role to the Service Principal
+  - Returns credentials for authentication
 
 **Object IDs:**
 
-* **Application (Client) ID:** Identifies the App Registration globally across all tenants
-* **Service Principal Object ID:** Identifies the Service Principal in a specific tenant
-* **When assigning roles:** Use the Service Principal Object ID, not the Application ID
+- **Application (Client) ID:** Identifies the App Registration globally across all tenants
+- **Service Principal Object ID:** Identifies the Service Principal in a specific tenant
+- **When assigning roles:** Use the Service Principal Object ID, not the Application ID
 
 **Example Commands:**
 
@@ -1090,8 +1108,8 @@ az role assignment create \
 
 **📚 Related Documentation:**
 
-* [Application and service principal objects in Microsoft Entra ID](https://learn.microsoft.com/en-us/entra/identity-platform/app-objects-and-service-principals)
-* [How to: Use the portal to create a Microsoft Entra application and service principal](https://learn.microsoft.com/en-us/entra/identity-platform/howto-create-service-principal-portal)
+- [Application and service principal objects in Microsoft Entra ID](https://learn.microsoft.com/en-us/entra/identity-platform/app-objects-and-service-principals)
+- [How to: Use the portal to create a Microsoft Entra application and service principal](https://learn.microsoft.com/en-us/entra/identity-platform/howto-create-service-principal-portal)
 
 ---
 
@@ -1177,20 +1195,20 @@ az role assignment create \
 **Best Practices for Service Principals:**
 
 1. **Use Managed Identities when possible** (System-assigned or User-assigned)
-   * No credentials to manage
-   * Automatic credential rotation
-   * More secure than service principals
+   - No credentials to manage
+   - Automatic credential rotation
+   - More secure than service principals
 
 2. **Limit scope to minimum required**
-   * Assign at resource group or resource level, not subscription
+   - Assign at resource group or resource level, not subscription
 
 3. **Use short-lived credentials**
-   * Rotate secrets regularly (90 days or less)
-   * Use certificate-based authentication for higher security
+   - Rotate secrets regularly (90 days or less)
+   - Use certificate-based authentication for higher security
 
 4. **Monitor service principal activity**
-   * Review sign-in logs in Microsoft Entra ID
-   * Set up alerts for unusual activity
+   - Review sign-in logs in Microsoft Entra ID
+   - Set up alerts for unusual activity
 
 ### Exam Insights
 
@@ -1216,12 +1234,12 @@ az role assignment create \
 2. Go to **Access control (IAM)** → **Check access**
 3. Search for a user: `user1@637djb.onmicrosoft.com`
 4. Review:
-   * **Current role assignments** (direct and inherited)
-   * **Scope** of each assignment
-   * **Source** (direct or group membership)
+   - **Current role assignments** (direct and inherited)
+   - **Scope** of each assignment
+   - **Source** (direct or group membership)
 5. Click **View details** to see:
-   * Role permissions (Actions, NotActions, DataActions)
-   * Assignment path (which scope granted the permission)
+   - Role permissions (Actions, NotActions, DataActions)
+   - Assignment path (which scope granted the permission)
 
 ### Review All Role Assignments
 
@@ -1298,34 +1316,34 @@ az role assignment list --include-inherited --role "Owner" --output table
 
 **📚 Related Documentation:**
 
-* [Azure custom roles](https://learn.microsoft.com/en-us/azure/role-based-access-control/custom-roles)
-* [Azure RBAC Available permissions](https://learn.microsoft.com/en-us/azure/role-based-access-control/resource-provider-operations)
-* [Tutorial: Create an Azure custom role using the Azure portal](https://learn.microsoft.com/en-us/azure/role-based-access-control/custom-roles-portal)
-* [Tutorial: Create an Azure custom role using Azure PowerShell](https://learn.microsoft.com/en-us/azure/role-based-access-control/tutorial-custom-role-powershell)
-* [Tutorial: Create an Azure custom role using Azure CLI](https://learn.microsoft.com/en-us/azure/role-based-access-control/tutorial-custom-role-cli)
-* [Create or update Azure custom roles using an ARM template](https://learn.microsoft.com/en-us/azure/role-based-access-control/custom-roles-template)
-* [Create or update Azure custom roles using the REST API](https://learn.microsoft.com/en-us/azure/role-based-access-control/custom-roles-rest)
+- [Azure custom roles](https://learn.microsoft.com/en-us/azure/role-based-access-control/custom-roles)
+- [Azure RBAC Available permissions](https://learn.microsoft.com/en-us/azure/role-based-access-control/resource-provider-operations)
+- [Tutorial: Create an Azure custom role using the Azure portal](https://learn.microsoft.com/en-us/azure/role-based-access-control/custom-roles-portal)
+- [Tutorial: Create an Azure custom role using Azure PowerShell](https://learn.microsoft.com/en-us/azure/role-based-access-control/tutorial-custom-role-powershell)
+- [Tutorial: Create an Azure custom role using Azure CLI](https://learn.microsoft.com/en-us/azure/role-based-access-control/tutorial-custom-role-cli)
+- [Create or update Azure custom roles using an ARM template](https://learn.microsoft.com/en-us/azure/role-based-access-control/custom-roles-template)
+- [Create or update Azure custom roles using the REST API](https://learn.microsoft.com/en-us/azure/role-based-access-control/custom-roles-rest)
 
 **When to Use Custom Roles:**
 
-* Built-in roles grant too many permissions (violates least privilege)
-* Need combination of permissions from multiple built-in roles
-* Need to restrict specific actions within a resource provider
-* Require granular control for compliance requirements
+- Built-in roles grant too many permissions (violates least privilege)
+- Need combination of permissions from multiple built-in roles
+- Need to restrict specific actions within a resource provider
+- Require granular control for compliance requirements
 
 **Key Limitations:**
 
-* **Cannot set `AssignableScopes` to root scope (`"/"`)** – Only built-in roles can use root scope, which represents the Tenant Root Group level and makes the role available for assignment across all scopes. Custom roles must specify explicit management group, subscription, or resource group scopes.
-* Only **one management group** in `AssignableScopes` of a custom role
-* Custom roles with `DataActions` **cannot** be assigned at management group scope (but can be assigned at subscription scopes within that management group)
-* Cannot use wildcards (`*`) in `AssignableScopes`
-* Requires `Microsoft.Authorization/roleDefinitions/write` permission on all assignable scopes
-* You can create a custom role with DataActions and one management group in AssignableScopes. You can't assign the custom role at the management group scope itself; however, you can assign the custom role at the scope of the subscriptions within the management group. This can be helpful if you need to create a single custom role with DataActions that needs to be assigned in multiple subscriptions, instead of creating a separate custom role for each subscription.
-* Maximum of **5,000 custom roles** per Microsoft Entra ID tenant
+- **Cannot set `AssignableScopes` to root scope (`"/"`)** – Only built-in roles can use root scope, which represents the Tenant Root Group level and makes the role available for assignment across all scopes. Custom roles must specify explicit management group, subscription, or resource group scopes.
+- Only **one management group** in `AssignableScopes` of a custom role
+- Custom roles with `DataActions` **cannot** be assigned at management group scope (but can be assigned at subscription scopes within that management group)
+- Cannot use wildcards (`*`) in `AssignableScopes`
+- Requires `Microsoft.Authorization/roleDefinitions/write` permission on all assignable scopes
+- You can create a custom role with DataActions and one management group in AssignableScopes. You can't assign the custom role at the management group scope itself; however, you can assign the custom role at the scope of the subscriptions within the management group. This can be helpful if you need to create a single custom role with DataActions that needs to be assigned in multiple subscriptions, instead of creating a separate custom role for each subscription.
+- Maximum of **5,000 custom roles** per Microsoft Entra ID tenant
 
 **📚 Related Documentation:**
 
-* [Azure custom roles - Custom role limits](https://learn.microsoft.com/en-us/azure/role-based-access-control/custom-roles#custom-role-limits)
+- [Azure custom roles - Custom role limits](https://learn.microsoft.com/en-us/azure/role-based-access-control/custom-roles#custom-role-limits)
 
 ### Custom Role Structure
 
@@ -1333,7 +1351,7 @@ A custom role definition consists of:
 
 **📚 Related Documentation:**
 
-* [Understand Azure role definitions](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-definitions)
+- [Understand Azure role definitions](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-definitions)
 
 ```json
 {
@@ -1378,20 +1396,20 @@ A custom role definition consists of:
 
 **Permission Wildcards:**
 
-* `*` matches all operations: `Microsoft.Compute/*` = all Compute operations
-* Specific action: `Microsoft.Compute/virtualMachines/start/action`
-* Read-only: `*/read` = all read operations
+- `*` matches all operations: `Microsoft.Compute/*` = all Compute operations
+- Specific action: `Microsoft.Compute/virtualMachines/start/action`
+- Read-only: `*/read` = all read operations
 
 **📚 Resource Provider Operations Reference:**
 
-* [Azure resource provider operations](https://learn.microsoft.com/en-us/azure/role-based-access-control/resource-provider-operations)
+- [Azure resource provider operations](https://learn.microsoft.com/en-us/azure/role-based-access-control/resource-provider-operations)
 
 ### Create a Custom Role Using PowerShell
 
 **📚 Related Documentation:**
 
-* [Create or update Azure custom roles using Azure PowerShell](https://learn.microsoft.com/en-us/azure/role-based-access-control/custom-roles-powershell)
-* [New-AzRoleDefinition cmdlet reference](https://learn.microsoft.com/en-us/powershell/module/az.resources/new-azroledefinition)
+- [Create or update Azure custom roles using Azure PowerShell](https://learn.microsoft.com/en-us/azure/role-based-access-control/custom-roles-powershell)
+- [New-AzRoleDefinition cmdlet reference](https://learn.microsoft.com/en-us/powershell/module/az.resources/new-azroledefinition)
 
 #### Method 1: Modify an Existing Role
 
@@ -1518,8 +1536,8 @@ New-AzRoleDefinition -InputFile $jsonPath
 
 **📚 Related Documentation:**
 
-* [Create or update Azure custom roles using Azure CLI](https://learn.microsoft.com/en-us/azure/role-based-access-control/custom-roles-cli)
-* [az role definition create command reference](https://learn.microsoft.com/en-cli/azure/role/definition#az-role-definition-create)
+- [Create or update Azure custom roles using Azure CLI](https://learn.microsoft.com/en-us/azure/role-based-access-control/custom-roles-cli)
+- [az role definition create command reference](https://learn.microsoft.com/en-cli/azure/role/definition#az-role-definition-create)
 
 ```bash
 # Create JSON file for custom role
@@ -1573,7 +1591,7 @@ az role definition list --name "Storage Blob Operator" --output json
 
 **📚 Related Documentation:**
 
-* [Create or update Azure custom roles using the Azure portal](https://learn.microsoft.com/en-us/azure/role-based-access-control/custom-roles-portal)
+- [Create or update Azure custom roles using the Azure portal](https://learn.microsoft.com/en-us/azure/role-based-access-control/custom-roles-portal)
 
 1. Navigate to **Subscriptions** → Select your subscription
 2. Go to **Access control (IAM)** → **+ Add** → **Add custom role**
@@ -1581,41 +1599,40 @@ az role definition list --name "Storage Blob Operator" --output json
     <img src='images/2025-10-28-03-25-08.png' width=500>
 
 3. **Basics tab:**
-   * **Custom role name:** `Storage Blob Operator`
-   * **Description:** `Can read, write, and delete blobs`
-   * **Baseline permissions:** Start from scratch or clone a role
+   - **Custom role name:** `Storage Blob Operator`
+   - **Description:** `Can read, write, and delete blobs`
+   - **Baseline permissions:** Start from scratch or clone a role
 
     <img src='images/2025-10-28-03-26-06.png' width=500>
 
 4. **Permissions tab:**
-   * Click **+ Add permissions**
-   * Search for `Microsoft.Storage`
-   * Select control plane actions (Actions)
-   * Select data plane actions (DataActions):
-     * `Microsoft.Storage/storageAccounts/blobServices/containers/blobs/read`
-     * `Microsoft.Storage/storageAccounts/blobServices/containers/blobs/write`
-     * `Microsoft.Storage/storageAccounts/blobServices/containers/blobs/delete`
-   * Click **Add**
+   - Click **+ Add permissions**
+   - Search for `Microsoft.Storage`
+   - Select control plane actions (Actions)
+   - Select data plane actions (DataActions):
+     - `Microsoft.Storage/storageAccounts/blobServices/containers/blobs/read`
+     - `Microsoft.Storage/storageAccounts/blobServices/containers/blobs/write`
+     - `Microsoft.Storage/storageAccounts/blobServices/containers/blobs/delete`
+   - Click **Add**
 
     <img src='images/2025-10-28-03-28-01.png' width=700>
 
 5. **Assignable scopes tab:**
-   * Keep current subscription or add resource groups
+   - Keep current subscription or add resource groups
 
     <img src='images/2025-10-28-03-29-47.png' width=700>
 
-
-   * **Note:** Cannot add root scope or multiple management groups
+   - **Note:** Cannot add root scope or multiple management groups
 
         <img src='images/2025-10-28-03-30-28.png' width=500>
 
 6. **JSON tab:**
-   * Review and edit JSON if needed
+   - Review and edit JSON if needed
 
     <img src='images/2025-10-28-03-31-18.png' width=500>
 
 7. **Review + create:**
-   * Click **Create**
+   - Click **Create**
 
 ### Assign Custom Role
 
@@ -1652,8 +1669,8 @@ az role assignment create \
 
 **📚 Related Documentation:**
 
-* [Set-AzRoleDefinition cmdlet reference](https://learn.microsoft.com/en-us/powershell/module/az.resources/set-azroledefinition)
-* [az role definition update command reference](https://learn.microsoft.com/en-us/azure/role-based-access-control/custom-roles-cli)
+- [Set-AzRoleDefinition cmdlet reference](https://learn.microsoft.com/en-us/powershell/module/az.resources/set-azroledefinition)
+- [az role definition update command reference](https://learn.microsoft.com/en-us/azure/role-based-access-control/custom-roles-cli)
 
 ```powershell
 # Get existing custom role
@@ -1723,13 +1740,13 @@ az role definition update --role-definition @role.json
 
 **📚 Related Documentation:**
 
-* [Remove-AzRoleDefinition cmdlet reference](https://learn.microsoft.com/en-us/powershell/module/az.resources/remove-azroledefinition)
-* [az role definition delete command reference](https://learn.microsoft.com/en-cli/azure/role/definition#az-role-definition-delete)
+- [Remove-AzRoleDefinition cmdlet reference](https://learn.microsoft.com/en-us/powershell/module/az.resources/remove-azroledefinition)
+- [az role definition delete command reference](https://learn.microsoft.com/en-cli/azure/role/definition#az-role-definition-delete)
 
 **Prerequisites:**
 
-* No active role assignments using the custom role
-* Must have permission to delete role definitions
+- No active role assignments using the custom role
+- Must have permission to delete role definitions
 
 ```powershell
 # Check for role assignments
@@ -1746,16 +1763,22 @@ if ($assignments) {
 }
 ```
 
+<img src='images/2025-10-29-03-50-06.png' width=600>
+
+<img src='images/2025-10-29-03-55-31.png' width=600>
+
 Using Azure CLI:
 
 ```bash
 # List role assignments using this role
-roleId=$(az role definition list --name "Storage Blob Operator" --query [0].id --output tsv)
+roleId=$(az role definition list --name "Storage Blob Operator" --query "[0].id" --output tsv)
 az role assignment list --role "$roleId" --output table
 
 # Delete role (only if no assignments exist)
 az role definition delete --name "Storage Blob Operator"
 ```
+
+<img src='images/2025-10-29-04-08-29.png' width=600>
 
 **Error if assignments exist:**
 
@@ -1769,46 +1792,46 @@ There are existing role assignments referencing role (code: RoleDefinitionHasAss
 
 **1. Use Least Privilege**
 
-* Grant only the minimum permissions needed
-* Prefer specific actions over wildcards
-* Review and remove unused permissions regularly
+- Grant only the minimum permissions needed
+- Prefer specific actions over wildcards
+- Review and remove unused permissions regularly
 
 **2. Meaningful Names and Descriptions**
 
-* Use clear, descriptive role names
-* Document the purpose and intended use case
-* Include version or date if role evolves
+- Use clear, descriptive role names
+- Document the purpose and intended use case
+- Include version or date if role evolves
 
 **3. Appropriate Assignable Scopes**
 
-* Use narrowest scope possible (resource group > subscription)
-* Document why subscription scope is needed if used
-* Cannot use management group if role has DataActions
+- Use narrowest scope possible (resource group > subscription)
+- Document why subscription scope is needed if used
+- Cannot use management group if role has DataActions
 
 **4. Version Control**
 
-* Store role definitions in source control (Git)
-* Track changes and who made them
-* Use JSON files for repeatability
+- Store role definitions in source control (Git)
+- Track changes and who made them
+- Use JSON files for repeatability
 
 **5. Test Before Production**
 
-* Create and test custom roles in dev/test environments
-* Verify permissions work as expected
-* Document test results
+- Create and test custom roles in dev/test environments
+- Verify permissions work as expected
+- Document test results
 
 **6. Monitor and Audit**
 
-* Regular access reviews of custom role assignments
-* Alert on changes to custom role definitions
-* Document approval process for custom roles
+- Regular access reviews of custom role assignments
+- Alert on changes to custom role definitions
+- Document approval process for custom roles
 
 **7. Avoid Common Pitfalls**
 
-* Don't use wildcards (`*`) unnecessarily
-* Don't create duplicate built-in role functionality
-* Don't exceed 5,000 custom roles per tenant
-* Don't forget to update role when Azure adds new actions
+- Don't use wildcards (`*`) unnecessarily
+- Don't create duplicate built-in role functionality
+- Don't exceed 5,000 custom roles per tenant
+- Don't forget to update role when Azure adds new actions
 
 **Example: Compliance-Approved Custom Role**
 
