@@ -54,9 +54,9 @@ def get_commits_by_path(days=7):
 def generate_commit_table(commits_by_date_cert, days=7):
     """Generate markdown table for commit statistics"""
 
-    # Get last 7 days
+    # Get last 7 days (most recent first)
     dates = []
-    for i in range(days - 1, -1, -1):
+    for i in range(0, days):
         date = (datetime.now() - timedelta(days=i)).strftime('%Y-%m-%d')
         dates.append(date)
 
