@@ -23,8 +23,8 @@ This repository documents my hands-on learning journey through Microsoft Azure c
 
 | Certification | Status | Labs Completed | Started | Target Completion |
 |---------------|--------|----------------|---------|-------------------|
-| **AI-900** | 🔄 In Progress | 3/5 (60%) | [Date] | TBD |
-| **AZ-104** | 🔄 In Progress | 3/18 (17%) | 10/09/2025 | TBD |
+| **AI-900** | 🔄 In Progress | 3/5 (60%) | 10/16/2025 | 11/16/2025 |
+| **AZ-104** | 🔄 In Progress | 3/18 (17%) | 10/09/2025 | 2/1/2026 |
 
 ### Quick Stats
 
