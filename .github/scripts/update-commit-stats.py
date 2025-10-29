@@ -62,22 +62,19 @@ def generate_commit_table(commits_by_date_cert, days=7):
 
     # Build table
     table = "## 📈 Recent Activity (Last 7 Days)\n\n"
-    table += "| Date | AI-900 | AZ-104 | Repo | Total |\n"
-    table += "|------|--------|--------|------|-------|\n"
+    table += "| Date | AI-900 | AZ-104 | Total |\n"
+    table += "|------|--------|--------|-------|\n"
 
     total_ai900 = 0
     total_az104 = 0
-    total_repo = 0
 
     for date in dates:
         ai900 = commits_by_date_cert.get(date, {}).get('AI-900', 0)
         az104 = commits_by_date_cert.get(date, {}).get('AZ-104', 0)
-        repo = commits_by_date_cert.get(date, {}).get('Repo', 0)
-        daily_total = ai900 + az104 + repo
+        daily_total = ai900 + az104
 
         total_ai900 += ai900
         total_az104 += az104
-        total_repo += repo
 
         # Format date as Mon, Oct 29
         date_obj = datetime.strptime(date, '%Y-%m-%d')
@@ -86,14 +83,13 @@ def generate_commit_table(commits_by_date_cert, days=7):
         # Use emoji indicators for activity
         ai900_str = f"{'🟢 ' if ai900 > 0 else ''}{ai900}"
         az104_str = f"{'🟢 ' if az104 > 0 else ''}{az104}"
-        repo_str = f"{'🟢 ' if repo > 0 else ''}{repo}"
         total_str = f"**{daily_total}**" if daily_total > 0 else "0"
 
-        table += f"| {formatted_date} | {ai900_str} | {az104_str} | {repo_str} | {total_str} |\n"
+        table += f"| {formatted_date} | {ai900_str} | {az104_str} | {total_str} |\n"
 
     # Add totals row
-    grand_total = total_ai900 + total_az104 + total_repo
-    table += f"| **Total** | **{total_ai900}** | **{total_az104}** | **{total_repo}** | **{grand_total}** |\n"
+    grand_total = total_ai900 + total_az104
+    table += f"| **Total** | **{total_ai900}** | **{total_az104}** | **{grand_total}** |\n"
 
     table += "\n*🟢 = Activity on this day*\n"
     table += f"\n*Last updated: {datetime.now().strftime('%B %d, %Y at %H:%M UTC')}*\n"

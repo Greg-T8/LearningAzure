@@ -35,16 +35,16 @@ This repository documents my hands-on learning journey through Microsoft Azure c
 <!-- COMMIT_STATS_START -->
 ## 📈 Recent Activity (Last 7 Days)
 
-| Date | AI-900 | AZ-104 | Repo | Total |
-|------|--------|--------|------|-------|
-| Thu, Oct 23 | 0 | 0 | 0 | 0 |
-| Fri, Oct 24 | 0 | 0 | 0 | 0 |
-| Sat, Oct 25 | 🟢 10 | 🟢 10 | 🟢 1 | **21** |
-| Sun, Oct 26 | 🟢 3 | 🟢 16 | 0 | **19** |
-| Mon, Oct 27 | 🟢 7 | 🟢 12 | 0 | **19** |
-| Tue, Oct 28 | 🟢 6 | 🟢 14 | 🟢 1 | **21** |
-| Wed, Oct 29 | 🟢 1 | 🟢 25 | 🟢 9 | **35** |
-| **Total** | **27** | **77** | **11** | **115** |
+| Date | AI-900 | AZ-104 | Total |
+|------|--------|--------|-------|
+| Thu, Oct 23 | 0 | 0 | 0 |
+| Fri, Oct 24 | 0 | 0 | 0 |
+| Sat, Oct 25 | 🟢 10 | 🟢 10 | **20** |
+| Sun, Oct 26 | 🟢 3 | 🟢 16 | **19** |
+| Mon, Oct 27 | 🟢 7 | 🟢 12 | **19** |
+| Tue, Oct 28 | 🟢 6 | 🟢 14 | **20** |
+| Wed, Oct 29 | 🟢 1 | 🟢 25 | **26** |
+| **Total** | **27** | **77** | **104** |
 
 *🟢 = Activity on this day*
 
