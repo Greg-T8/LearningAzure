@@ -33,16 +33,6 @@ Average lab duration: **1.5–2 hours**
 
 ---
 
-## 🧭 Learning Approach
-
-- **Hands-on:** Every lab deploys and validates live Azure resources.  
-- **Multi-modal:** Work through each scenario using Portal, CLI, PowerShell, and IaC (Bicep/Terraform).  
-- **Exam-driven:** Fully aligned to the “Skills Measured” outline.  
-- **Documentation-first:** Some parameters are intentionally omitted to encourage doc lookup.  
-- **Scenario-based:** Assume the role of an Azure administrator responding to operational challenges.
-
----
-
 ## 🗓 8-Week Lab Roadmap
 
 | Phase | Week    | Focus Area                                | Labs                                                                                                                                                                                                             |
