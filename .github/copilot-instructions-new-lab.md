@@ -4,6 +4,81 @@ Use these instructions when creating new lab exercises for the LearningAzure rep
 
 ---
 
+## 🚨 Response Length Management
+
+**CRITICAL:** Due to token/length limits, complex labs (6+ exercises) must be created in sections.
+
+### Approach for Large Labs
+
+When creating a comprehensive lab that would exceed response length limits:
+
+1. **Initial Creation - Lab Structure with First Exercise(s)**
+   - Create complete lab structure (title, metadata, progress tracking, command reference, TOC)
+   - Fully develop Exercise 1 with all implementation methods (Portal, CLI, PowerShell, Bicep/Terraform)
+   - Include complete Exercise 2 if space permits
+   - Leave placeholders for remaining exercises with titles only
+
+2. **Subsequent Requests - Add Remaining Exercises**
+   - User will request: "Add Exercise {N} to Lab{##}"
+   - Read the existing lab file
+   - Insert the complete exercise content at the appropriate location
+   - Maintain consistent formatting and structure
+
+3. **Quality Standards for Each Section**
+   - Every exercise must include:
+     - Clear objective statement
+     - Related Documentation links (3-7 links)
+     - Multiple implementation methods
+     - Verification steps
+     - Exam Insights section
+   - Command Reference must list all commands from completed exercises
+   - Exercise Progress checkboxes must match total exercise count
+
+### Example Initial Lab Structure
+
+```markdown
+# Lab 03 – Governance & Policies
+
+[Complete metadata, Exercise Progress, Command Reference, TOC, Objectives, Prerequisites, Scenario, Environment Setup]
+
+## 🔹 Exercise 1 – {Title}
+
+[FULLY COMPLETED with all details, code samples, screenshots, documentation links]
+
+---
+
+## 🔹 Exercise 2 – {Title}
+
+[FULLY COMPLETED if space permits, otherwise placeholder]
+
+---
+
+## 🔹 Exercise 3 – {Title}
+
+**Goal:** {Brief description}
+
+*[Content to be added in next request]*
+
+---
+
+[Remaining exercise placeholders...]
+
+## 📚 References
+
+[Initial references from completed exercises]
+```
+
+### User Follow-up Pattern
+
+After initial creation, user will request:
+- "Add Exercise 3 to Lab03" 
+- "Complete Exercise 4 and 5"
+- "Fill in remaining exercises"
+
+**Response:** Read file, insert complete exercise content, update Command Reference if new commands are introduced.
+
+---
+
 ## Lab Structure Requirements
 
 ### Directory Organization
@@ -53,39 +128,82 @@ Create labs with the following structure:
    **Dependencies:** {prerequisite labs or requirements}
    ```
 
-2. **📊 Lab Series Progress** (for multi-lab courses)
-
-   ```markdown
-   ## 🧪 Lab Series Progress
-   
-   - ✅ [Lab 01: Title](../lab01-name/Lab01_Title.md) - Completed
-   - ✅ [Lab 02: Title](../lab02-name/Lab02_Title.md) - Completed
-   - 🔄 **Lab 03: Title** - In Progress (Current Lab)
-   - ⬜ [Lab 04: Title](../lab04-name/Lab04_Title.md) - Not Started
-   - ⬜ [Lab 05: Title](../lab05-name/Lab05_Title.md) - Not Started
-   ```
-
-   **Purpose:** Track overall progress through the lab series
-
-   **Status Indicators:**
-   - ✅ = Completed
-   - 🔄 = In Progress (current lab)
-   - ⬜ = Not Started
-
-3. **📊 Exercise Progress** (for labs with multiple exercises)
+2. **📊 Exercise Progress** (for labs with multiple exercises)
 
    ```markdown
    ## 📊 Exercise Progress
    
-   - ⬜ Exercise 1: {Title} - Not Started
-   - ⬜ Exercise 2: {Title} - Not Started
-   - ⬜ Exercise 3: {Title} - Not Started
-   - ⬜ Exercise 4: {Title} - Not Started
+   Track your progress through the lab exercises:
+   
+   - ⬜ Exercise 1 – {Exercise Title}
+   - ⬜ Exercise 2 – {Exercise Title}
+   - ⬜ Exercise 3 – {Exercise Title}
+   - ⬜ Exercise 4 – {Exercise Title}
+   - ⬜ Exercise 5 – {Exercise Title}
+   
+   **Status:** ⬜ Not Started | 🔄 In Progress | ✅ Completed
    ```
 
    **Purpose:** Track progress through exercises within the current lab
+   
+   **Placement:** Immediately after title/metadata, before Table of Contents
+   
+   **Status Indicators:**
+   - ⬜ = Not Started
+   - 🔄 = In Progress (currently working on)
+   - ✅ = Completed
+   
+   **Note:** Users update checkmarks as they complete exercises
 
-   **Note:** Users can update checkmarks as they complete exercises
+3. **🔧 Command Reference** (for technical labs with CLI/PowerShell/Terraform)
+
+   ```markdown
+   ## 🔧 Command Reference
+   
+   Quick reference of all commands used in this lab, organized by tool.
+   
+   ### PowerShell Commands
+   
+   | Command | Purpose | Exercise |
+   |---------|---------|----------|
+   | `Get-Az{Resource}` | List resources | 1, 3 |
+   | `New-Az{Resource}` | Create resource | 2 |
+   | `Set-Az{Resource}` | Update resource | 4 |
+   | `Remove-Az{Resource}` | Delete resource | 5 |
+   
+   ### Azure CLI Commands
+   
+   | Command | Purpose | Exercise |
+   |---------|---------|----------|
+   | `az {resource} list` | List resources | 1, 3 |
+   | `az {resource} create` | Create resource | 2 |
+   | `az {resource} update` | Update resource | 4 |
+   | `az {resource} delete` | Delete resource | 5 |
+   
+   ### Terraform Commands
+   
+   | Command | Purpose | Exercise |
+   |---------|---------|----------|
+   | `terraform init` | Initialize working directory | 2 |
+   | `terraform plan` | Preview changes | 2 |
+   | `terraform apply` | Apply configuration | 2 |
+   | `terraform destroy` | Destroy resources | 5 |
+   
+   ### Bicep Commands
+   
+   Bicep templates are deployed using `New-AzResourceGroupDeployment` (PowerShell) or `az deployment group create` (CLI).
+   ```
+
+   **Purpose:** Provide quick reference for all commands used throughout the lab
+   
+   **Placement:** After Exercise Progress and before Table of Contents
+   
+   **Guidelines:**
+   - Organize by tool/technology (PowerShell, Azure CLI, Terraform, Bicep, etc.)
+   - Use tables for clarity
+   - Include command name, purpose, and which exercise(s) use it
+   - List commands in logical order (list → create → update → delete)
+   - Include only commands actually used in the lab
 
 4. **Table of Contents** (for longer labs)
 
@@ -128,6 +246,7 @@ Create labs with the following structure:
     - Add screenshots with `<img src='images/filename.png' width=700>`
     - Include verification steps after each major task
     - Add "Exam Insights" sections for exam-focused content
+    - **REQUIRED:** Include **📚 Related Documentation** section for each exercise (see Exercise Documentation Links below)
 
 11. **🧭 Reflection & Readiness** (for exam labs)
 
@@ -159,36 +278,58 @@ Create labs with the following structure:
 
 ### Exercise Documentation Links
 
-**REQUIRED:** Each exercise must include a **📚 Related Documentation** section immediately after the objective statement.
+**REQUIRED:** Each exercise must include a **📚 Related Documentation** section immediately after the objective statement and before the steps.
 
-- Add links to relevant Microsoft documentation for each exercise
-- Include 3-7 high-quality documentation links per exercise
+**Purpose:** Provide learners with comprehensive Microsoft documentation references for deeper understanding and troubleshooting.
+
+**Guidelines:**
+
+- Add 3-7 high-quality documentation links per exercise
 - Link types to include:
-  - Service overview pages (e.g., "What is Azure AI Language?")
-  - Feature-specific documentation (e.g., "Sentiment Analysis overview")
+  - Service overview pages (e.g., "What is Azure RBAC?", "What is Azure AI Language?")
+  - Feature-specific documentation (e.g., "Azure custom roles", "Sentiment Analysis")
   - Quickstart guides
   - How-to guides
+  - Tutorial pages
   - API references (when applicable)
-  - Studio/Portal links (e.g., Language Studio, Speech Studio)
-- Format example:
-  ```markdown
-  ### Exercise 1: {Exercise Title}
-  
-  **Objective:** {Clear statement of what this exercise accomplishes}
-  
-  **📚 Related Documentation:**
-  
-  - [Service Overview Title](https://learn.microsoft.com/...)
-  - [Feature Documentation](https://learn.microsoft.com/...)
-  - [Quickstart Guide](https://learn.microsoft.com/...)
-  - [How-to Guide](https://learn.microsoft.com/...)
-  - [Try It Out - Studio Link](https://studio.example.com/)
-  
-  **Steps:**
-  ```
-- Place documentation links BEFORE the "Steps:" section
+  - Studio/Portal links for interactive experiences (e.g., Language Studio, Speech Studio)
+  - Best practices documentation
+  - Limits and quotas pages (when relevant)
+- Placement: After objective, before steps
 - Use descriptive link text (avoid generic "click here" or "documentation")
-- Ensure all links are valid and point to current Microsoft documentation
+- Ensure all links point to official Microsoft Learn or Microsoft Docs (learn.microsoft.com)
+- Verify all links are valid and current
+
+**Format example:**
+
+```markdown
+### Exercise 1: {Exercise Title}
+
+**Objective:** {Clear statement of what this exercise accomplishes}
+
+**📚 Related Documentation:**
+
+- [Azure RBAC Overview](https://learn.microsoft.com/en-us/azure/role-based-access-control/overview)
+- [Understand Azure role definitions](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-definitions)
+- [Azure built-in roles](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles)
+- [Tutorial: Grant a user access using Azure Portal](https://learn.microsoft.com/en-us/azure/role-based-access-control/quickstart-assign-role-user-portal)
+- [Azure resource provider operations](https://learn.microsoft.com/en-us/azure/role-based-access-control/resource-provider-operations)
+
+**Steps:**
+
+1. {First step}
+2. {Second step}
+```
+
+**Best Practices:**
+
+- Review the lab exercises in the repository (like Lab02) for reference examples
+- Choose links that directly relate to the exercise content
+- Include both conceptual ("What is...") and procedural ("How to...") documentation
+- Add interactive studio links when applicable for hands-on exploration
+- Keep links organized (overview first, then specific features, then how-tos)
+
+---
 
 ### Writing Style
 
@@ -345,10 +486,20 @@ By the end of this lab, you will be able to:
 
 **📚 Related Documentation:**
 
-- [Microsoft Learn Module Title](URL)
-- [Azure Documentation](URL)
+- [Service Overview](https://learn.microsoft.com/...)
+- [Feature Documentation](https://learn.microsoft.com/...)
+- [Quickstart Guide](https://learn.microsoft.com/...)
+- [Studio Link](https://studio.example.com/)
 
-{Exercise content with Microsoft Learn references}
+**Steps:**
+
+{Exercise content with steps}
+
+---
+
+### Exercise 2: {Exercise Title}
+
+{Repeat structure for additional exercises}
 
 ---
 
@@ -366,6 +517,21 @@ By the end of this lab, you will be able to:
 **Domain:** {Exam domain area}  
 **Difficulty:** {Level} (≈{X–Y} hrs)  
 **Dependencies:** {Prerequisites or "None"}
+
+---
+
+## 📊 Exercise Progress
+
+Track your progress through the lab exercises:
+
+- ⬜ Exercise 1 – {Exercise Title}
+- ⬜ Exercise 2 – {Exercise Title}
+- ⬜ Exercise 3 – {Exercise Title}
+- ⬜ Exercise 4 – {Exercise Title}
+- ⬜ Exercise 5 – {Exercise Title}
+- ⬜ Exercise 6 – {Exercise Title}
+
+**Status:** ⬜ Not Started | 🔄 In Progress | ✅ Completed
 
 ---
 
@@ -404,7 +570,53 @@ You will:
 
 ---
 
-## 🔹 Exercise 1 – {Exercise Title}
+## � Command Reference
+
+Quick reference of all commands used in this lab, organized by tool.
+
+### PowerShell Commands
+
+| Command | Purpose | Exercise |
+|---------|---------|----------|
+| `Get-Az{Resource}` | List and query resources | 1, 3 |
+| `New-Az{Resource}` | Create resource | 2 |
+| `Set-Az{Resource}` | Update resource configuration | 4 |
+| `Remove-Az{Resource}` | Delete resource | 6 |
+
+### Azure CLI Commands
+
+| Command | Purpose | Exercise |
+|---------|---------|----------|
+| `az {resource} list` | List resources | 1, 3 |
+| `az {resource} create` | Create resource | 2 |
+| `az {resource} update` | Update resource | 4 |
+| `az {resource} delete` | Delete resource | 6 |
+
+### Terraform Commands
+
+| Command | Purpose | Exercise |
+|---------|---------|----------|
+| `terraform init` | Initialize Terraform working directory | 2 |
+| `terraform plan` | Preview infrastructure changes | 2 |
+| `terraform apply` | Apply Terraform configuration | 2 |
+
+### Bicep Commands
+
+Bicep templates are deployed using `New-AzResourceGroupDeployment` (PowerShell) or `az deployment group create` (CLI).
+
+---
+
+## �🔹 Exercise 1 – {Exercise Title}
+
+**Goal:** {Clear objective of what this exercise accomplishes}
+
+**📚 Related Documentation:**
+
+- [Service Overview](https://learn.microsoft.com/...)
+- [Feature Documentation](https://learn.microsoft.com/...)
+- [Quickstart Guide](https://learn.microsoft.com/...)
+- [How-to Guide](https://learn.microsoft.com/...)
+- [Best Practices](https://learn.microsoft.com/...)
 
 {Exercise content with multiple implementation methods}
 
@@ -412,7 +624,7 @@ You will:
 
 {Portal steps}
 
-### Using `Az` CLI
+### Using Azure CLI
 
 {CLI commands with explanations}
 
@@ -430,7 +642,13 @@ You will:
 
 ### Exam Insights
 
-{Exam-specific guidance}
+💡 **Exam Tip:** {Exam-specific guidance}
+
+---
+
+## 🔹 Exercise 2 – {Exercise Title}
+
+{Repeat structure for additional exercises}
 
 ---
 

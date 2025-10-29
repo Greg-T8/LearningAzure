@@ -1,0 +1,28 @@
+{
+  "mode": "Indexed",
+  "policyRule": {
+    "if": {
+      "allOf": [
+        {
+          "field": "type",
+          "equals": "Microsoft.Storage/storageAccounts"
+        },
+        {
+          "not": {
+            "field": "name",
+            "match": "st[dev|test|prod]*[eus|wus|cus]*[0-9][0-9]"
+          }
+        }
+      ]
+    },
+    "then": {
+      "effect": "deny"
+    }
+  },
+  "parameters": {},
+  "metadata": {
+    "category": "Storage",
+    "displayName": "Enforce Storage Account Naming Convention",
+    "description": "Storage account names must follow pattern: st<env><app><region><seq>"
+  }
+}

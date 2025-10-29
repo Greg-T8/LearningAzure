@@ -6,6 +6,7 @@
 
 ---
 
+<!-- omit in toc -->
 ## 📊 Exercise Progress
 
 Track your progress through the lab exercises:
@@ -23,86 +24,18 @@ Track your progress through the lab exercises:
 
 ---
 
-## 🔧 Command Reference
-
-Quick reference of all commands used in this lab, organized by tool.
-
-### PowerShell Commands
-
-| Command | Purpose | Exercise |
-|---------|---------|----------|
-| `Get-AzRoleDefinition` | List and query Azure role definitions | 1 |
-| `Get-AzContext` | Get current Azure context (subscription, tenant) | 2, 4, 8 |
-| `Get-AzADUser` | Get Microsoft Entra user information | 2, 3, 8 |
-| `Get-AzADGroup` | Get Microsoft Entra group information | 2, 4 |
-| `New-AzRoleAssignment` | Assign Azure role to principal | 2, 6, 8 |
-| `Get-AzRoleAssignment` | List role assignments | 2, 3, 4, 7 |
-| `Remove-AzRoleAssignment` | Remove role assignment | 4 |
-| `New-AzResourceGroup` | Create resource group | 2 |
-| `New-AzStorageAccount` | Create storage account | 2 |
-| `Get-AzStorageAccount` | Get storage account details | 2 |
-| `Get-AzDenyAssignment` | List deny assignments | 5 |
-| `New-AzADApplication` | Create Entra application registration | 6 |
-| `New-AzADServicePrincipal` | Create service principal | 6 |
-| `Get-AzADServicePrincipal` | Get service principal details | 6 |
-| `New-AzADAppCredential` | Create credential for app registration | 6 |
-| `New-AzRoleDefinition` | Create custom role definition | 8 |
-| `Set-AzRoleDefinition` | Update custom role definition | 8 |
-| `Remove-AzRoleDefinition` | Delete custom role definition | 8 |
-| `New-AzResourceGroupDeployment` | Deploy Bicep/ARM template | 2 |
-
-### Azure CLI Commands
-
-| Command | Purpose | Exercise |
-|---------|---------|----------|
-| `az role definition list` | List role definitions | 1, 8 |
-| `az role definition create` | Create custom role | 8 |
-| `az role definition update` | Update custom role | 8 |
-| `az role definition delete` | Delete custom role | 8 |
-| `az role assignment list` | List role assignments | 2, 3, 7 |
-| `az role assignment create` | Create role assignment | 2, 6 |
-| `az account show` | Show current subscription details | 2, 3, 4 |
-| `az group create` | Create resource group | 2 |
-| `az storage account show` | Get storage account details | 2 |
-| `az storage account create` | Create storage account | 2 |
-| `az ad user show` | Get user details | 2 |
-| `az ad group show` | Get group details | 2 |
-| `az ad sp list` | List service principals | 6 |
-| `az ad sp create-for-rbac` | Create service principal with role | 6 |
-| `az ad sp delete` | Delete service principal | 6 |
-| `az ad app list` | List app registrations | 6 |
-| `az ad app create` | Create app registration | 6 |
-| `az ad app delete` | Delete app registration | 6 |
-| `az ad sp create` | Create service principal from app | 6 |
-
-### Terraform Commands
-
-| Command | Purpose | Exercise |
-|---------|---------|----------|
-| `terraform init` | Initialize Terraform working directory | 2 |
-| `terraform plan` | Preview infrastructure changes | 2 |
-| `terraform apply` | Apply Terraform configuration | 2 |
-
-### Bicep Commands
-
-Bicep templates are deployed using `New-AzResourceGroupDeployment` (PowerShell) or `az deployment group create` (CLI).
-
----
-
 <!-- omit in toc -->
 ## 🧾 Contents
 
-* [📊 Exercise Progress](#-exercise-progress)
+* [🎯 Lab Objective](#-lab-objective)
+* [🧱 Skills Measured (Exam Outline)](#-skills-measured-exam-outline)
+* [🧠 Scenario](#-scenario)
+* [⚙️ Environment Setup](#️-environment-setup)
 * [🔧 Command Reference](#-command-reference)
   * [PowerShell Commands](#powershell-commands)
   * [Azure CLI Commands](#azure-cli-commands)
   * [Terraform Commands](#terraform-commands)
   * [Bicep Commands](#bicep-commands)
-* [🎯 Lab Objective](#-lab-objective)
-* [🧱 Skills Measured (Exam Outline)](#-skills-measured-exam-outline)
-* [🧠 Scenario](#-scenario)
-* [⚙️ Environment Setup](#️-environment-setup)
-* [⏱ Estimated Duration](#-estimated-duration)
 * [🔹 Exercise 1 – Explore Built-in Azure Roles](#-exercise-1--explore-built-in-azure-roles)
   * [Using the Azure Portal](#using-the-azure-portal)
   * [Using PowerShell (`Get-AzRoleDefinition`)](#using-powershell-get-azroledefinition)
@@ -225,9 +158,69 @@ You are responsible for implementing this RBAC strategy and validating that user
 
 ---
 
-## ⏱ Estimated Duration
+## 🔧 Command Reference
 
-**90–120 minutes**
+Quick reference of all commands used in this lab, organized by tool.
+
+### PowerShell Commands
+
+| Command | Purpose | Exercise |
+|---------|---------|----------|
+| `Get-AzRoleDefinition` | List and query Azure role definitions | 1 |
+| `Get-AzContext` | Get current Azure context (subscription, tenant) | 2, 4, 8 |
+| `Get-AzADUser` | Get Microsoft Entra user information | 2, 3, 8 |
+| `Get-AzADGroup` | Get Microsoft Entra group information | 2, 4 |
+| `New-AzRoleAssignment` | Assign Azure role to principal | 2, 6, 8 |
+| `Get-AzRoleAssignment` | List role assignments | 2, 3, 4, 7 |
+| `Remove-AzRoleAssignment` | Remove role assignment | 4 |
+| `New-AzResourceGroup` | Create resource group | 2 |
+| `New-AzStorageAccount` | Create storage account | 2 |
+| `Get-AzStorageAccount` | Get storage account details | 2 |
+| `Get-AzDenyAssignment` | List deny assignments | 5 |
+| `New-AzADApplication` | Create Entra application registration | 6 |
+| `New-AzADServicePrincipal` | Create service principal | 6 |
+| `Get-AzADServicePrincipal` | Get service principal details | 6 |
+| `New-AzADAppCredential` | Create credential for app registration | 6 |
+| `New-AzRoleDefinition` | Create custom role definition | 8 |
+| `Set-AzRoleDefinition` | Update custom role definition | 8 |
+| `Remove-AzRoleDefinition` | Delete custom role definition | 8 |
+| `New-AzResourceGroupDeployment` | Deploy Bicep/ARM template | 2 |
+
+### Azure CLI Commands
+
+| Command | Purpose | Exercise |
+|---------|---------|----------|
+| `az role definition list` | List role definitions | 1, 8 |
+| `az role definition create` | Create custom role | 8 |
+| `az role definition update` | Update custom role | 8 |
+| `az role definition delete` | Delete custom role | 8 |
+| `az role assignment list` | List role assignments | 2, 3, 7 |
+| `az role assignment create` | Create role assignment | 2, 6 |
+| `az account show` | Show current subscription details | 2, 3, 4 |
+| `az group create` | Create resource group | 2 |
+| `az storage account show` | Get storage account details | 2 |
+| `az storage account create` | Create storage account | 2 |
+| `az ad user show` | Get user details | 2 |
+| `az ad group show` | Get group details | 2 |
+| `az ad sp list` | List service principals | 6 |
+| `az ad sp create-for-rbac` | Create service principal with role | 6 |
+| `az ad sp delete` | Delete service principal | 6 |
+| `az ad app list` | List app registrations | 6 |
+| `az ad app create` | Create app registration | 6 |
+| `az ad app delete` | Delete app registration | 6 |
+| `az ad sp create` | Create service principal from app | 6 |
+
+### Terraform Commands
+
+| Command | Purpose | Exercise |
+|---------|---------|----------|
+| `terraform init` | Initialize Terraform working directory | 2 |
+| `terraform plan` | Preview infrastructure changes | 2 |
+| `terraform apply` | Apply Terraform configuration | 2 |
+
+### Bicep Commands
+
+Bicep templates are deployed using `New-AzResourceGroupDeployment` (PowerShell) or `az deployment group create` (CLI).
 
 ---
 

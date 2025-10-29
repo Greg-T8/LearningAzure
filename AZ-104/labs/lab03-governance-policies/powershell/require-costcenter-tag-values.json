@@ -1,0 +1,48 @@
+{
+  "mode": "Indexed",
+  "policyRule": {
+    "if": {
+      "anyOf": [
+        {
+          "field": "[concat('tags[', parameters('tagName'), ']')]",
+          "exists": "false"
+        },
+        {
+          "field": "[concat('tags[', parameters('tagName'), ']')]",
+          "notIn": "[parameters('allowedValues')]"
+        }
+      ]
+    },
+    "then": {
+      "effect": "deny"
+    }
+  },
+  "parameters": {
+    "tagName": {
+      "type": "String",
+      "metadata": {
+        "displayName": "Tag Name",
+        "description": "Name of the tag, such as 'CostCenter'"
+      },
+      "defaultValue": "CostCenter"
+    },
+    "allowedValues": {
+      "type": "Array",
+      "metadata": {
+        "displayName": "Allowed Tag Values",
+        "description": "List of allowed values for the tag"
+      },
+      "defaultValue": [
+        "Engineering",
+        "Marketing",
+        "Sales",
+        "HR"
+      ]
+    }
+  },
+  "metadata": {
+    "category": "Tags",
+    "displayName": "Require Tag with Allowed Values",
+    "description": "Requires a tag with specific allowed values"
+  }
+}
