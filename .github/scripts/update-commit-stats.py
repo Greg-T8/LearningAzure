@@ -92,6 +92,11 @@ def generate_commit_table(commits_by_date_cert, days=7):
     table += f"| **Total** | **{total_ai900}** | **{total_az104}** | **{grand_total}** |\n"
 
     table += "\n*🟢 = Activity on this day*\n"
+    table += "\n### What counts as activity?\n"
+    table += "- Each **file modified** in a commit counts as one activity\n"
+    table += "- Activity is grouped by certification path (`AI-900/` or `AZ-104/`)\n"
+    table += "- One commit can generate multiple activities if it modifies multiple files\n"
+    table += "- Repository infrastructure changes (`.github/`, `README.md`) are tracked separately\n"
     table += f"\n*Last updated: {datetime.now().strftime('%B %d, %Y at %H:%M UTC')}*\n"
 
     return table
