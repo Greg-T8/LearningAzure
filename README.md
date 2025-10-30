@@ -40,7 +40,13 @@ This repository documents my hands-on learning journey through Microsoft Azure c
 
 *🟢 = Activity on this day*
 
-*Last updated: October 30, 2025 at 10:52 UTC*
+### What counts as activity?
+- Each **file modified** in a commit counts as one activity
+- Activity is grouped by certification path (`AI-900/` or `AZ-104/`)
+- One commit can generate multiple activities if it modifies multiple files
+- Repository infrastructure changes (`.github/`, `README.md`) are tracked separately
+
+*Last updated: October 30, 2025 at 10:58 UTC*
 
 <!-- COMMIT_STATS_END -->
 
