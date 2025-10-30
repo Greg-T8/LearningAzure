@@ -7,8 +7,8 @@
 
 ## 📊 Exercise Progress
 
-- 🔄  Exercise 1: Text Analysis with Azure AI Language - In Progress
-- ⬜ Exercise 2: Speech Recognition and Synthesis - Not Started
+- ✅  Exercise 1: Text Analysis with Azure AI Language - In Progress
+- 🔄 Exercise 2: Speech Recognition and Synthesis - Not Started
 - ⬜ Exercise 3: Language Translation - Not Started
 - ⬜ Exercise 4: Conversational Language Understanding (CLU) - Not Started
 
@@ -70,6 +70,8 @@ By the end of this lab, you will be able to:
      - Neutral statement: "The package arrived on Tuesday."
    - Review sentiment scores (positive, negative, neutral)
 
+    <img src='images/2025-10-30-06-06-52.png' width=600>
+
 3. **Test Entity Recognition (NER):**
    - Analyze text to extract named entities:
      - People: "John Smith works at Microsoft."
@@ -78,6 +80,8 @@ By the end of this lab, you will be able to:
      - Dates: "The meeting is on October 20, 2025."
    - Review entity types and confidence scores
 
+    <img src='images/2025-10-30-06-09-49.png' width=600>
+
 4. **Test Key Phrase Extraction:**
    - Extract main topics from longer text:
      - News article
@@ -85,16 +89,7 @@ By the end of this lab, you will be able to:
      - Email or document
    - Identify key phrases that summarize the content
 
-**Sample Text to Analyze:**
-
-> "Microsoft announced the release of Azure OpenAI Service in November 2023. The service provides access to powerful language models like GPT-4 and DALL-E 3. Customers can deploy these models in their own Azure subscriptions for enhanced security and compliance. Early feedback has been overwhelmingly positive."
-
-**Deliverables:**
-
-- Screenshot of sentiment analysis results
-- List of extracted entities with types
-- Key phrases identified
-- Discussion: How could this be used in a customer service context?
+    <img src='images/2025-10-30-06-12-03.png' width=600>
 
 ---
 
@@ -117,6 +112,8 @@ By the end of this lab, you will be able to:
    - Create resource: "Speech" service
    - Note the endpoint and API key
 
+    <img src='images/2025-10-30-06-34-56.png' width=700>
+
 2. **Test Speech-to-Text (Recognition):**
    - Use Speech Studio or SDK
    - Upload an audio file or use microphone
@@ -125,6 +122,8 @@ By the end of this lab, you will be able to:
      - Clear speech
      - Background noise
      - Different accents
+
+    <img src='images/2025-10-30-06-38-19.png' width=700>
 
 3. **Test Text-to-Speech (Synthesis):**
    - Convert text to spoken audio
