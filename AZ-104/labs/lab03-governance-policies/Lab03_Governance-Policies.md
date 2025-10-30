@@ -11,7 +11,7 @@
 
 Track your progress through the lab exercises:
 
-- ⬜ Exercise 1 – Understanding Azure Policy Fundamentals
+- 🔄 Exercise 1 – Understanding Azure Policy Fundamentals
 - ⬜ Exercise 2 – Create and Assign Built-in Policies
 - ⬜ Exercise 3 – Create Custom Policy Definitions
 - ⬜ Exercise 4 – Implement Policy Initiatives
@@ -259,6 +259,26 @@ Common policy effects:
 | **DeployIfNotExists** | Deploys resource if it doesn't exist | Auto-deploy diagnostic settings, extensions |
 | **Disabled** | Policy is not evaluated | Temporarily disable without unassigning |
 
+**Order of Evaluation:**
+
+Azure Policy evaluates effects in a specific order during resource operations. Understanding this order is critical for predicting policy behavior:
+
+1. **Disabled** - Checked first to determine if the policy rule should be evaluated
+2. **Append** and **Modify** - Evaluated next; these can alter the resource request before compliance is assessed
+3. **Deny** - Evaluated before Audit effects to prevent non-compliant resources from being created
+4. **Audit** and **AuditIfNotExists** - Evaluated after Deny to log compliance issues
+5. **DeployIfNotExists** - Evaluated last to deploy supporting resources if needed
+
+**Key insights:**
+
+- **Append** and **Modify** run *before* **Deny**, so they can transform a request to make it compliant
+- **Deny** takes precedence over **Audit** - if a resource is denied, audit events are not generated
+- Multiple policies with different effects can apply to the same resource, evaluated in this order
+
+**Example scenario:** A policy with **Append** adds a required tag, then a **Deny** policy checks for that tag. Because Append runs first, the Deny policy sees the modified request and allows it.
+
+📚 [Learn more about order of evaluation](https://learn.microsoft.com/en-us/azure/governance/policy/concepts/effect-basics#order-of-evaluation)
+
 #### 4. Policy Evaluation Flow
 
 1. **Resource operation** is initiated (create, update, delete)
@@ -278,29 +298,50 @@ Common policy effects:
    - Effect type
    - Policy type (Built-in, Custom)
 
-<img src='images/policy-definitions.png' width=700>
+<img src='images/2025-10-30-04-54-45.png' width=900>
 
 ### List Policy Definitions Using PowerShell
 
+There are over 3,000 built-in policy definitions available in Azure. 
+
+<img src='images/2025-10-30-04-59-18.png' width=250>
+
 ```powershell
-# Get all built-in policy definitions
-Get-AzPolicyDefinition | Where-Object { $_.Properties.PolicyType -eq "BuiltIn" } | 
-    Select-Object Name, @{Name="DisplayName";Expression={$_.Properties.DisplayName}}, 
-    @{Name="Category";Expression={$_.Properties.Metadata.category}} | 
+# Get policy count by category
+Get-AzPolicyDefinition | 
+    Select-Object -ExpandProperty Metadata | 
+    Group-Object category | 
+    Select-Object @{Name='Category';Expression={$_.Name}}, 
+                  @{Name='PolicyCount';Expression={$_.Count}} | 
+    Sort-Object PolicyCount -Descending | 
     Format-Table -AutoSize
-
-# Search for policies related to allowed locations
-Get-AzPolicyDefinition | Where-Object { 
-    $_.Properties.DisplayName -like "*location*" 
-} | Select-Object @{Name="DisplayName";Expression={$_.Properties.DisplayName}}, 
-    @{Name="Effect";Expression={$_.Properties.PolicyRule.then.effect}}
-
-# Get details of a specific policy
-$policy = Get-AzPolicyDefinition -Name "e56962a6-4747-49cd-b67b-bf8b01975c4c"
-$policy.Properties.DisplayName
-$policy.Properties.Description
-$policy.Properties.PolicyRule | ConvertTo-Json -Depth 10
 ```
+
+<img src='images/2025-10-30-05-10-56.png' width=450>
+
+
+```powershell
+# Show matching policy plus full rule JSON for “Do not allow deletion” definitions
+Get-AzPolicyDefinition |
+    Where-Object DisplayName -match 'Do not allow deletion' |
+    Select-Object DisplayName, Name, @{
+        Name       = 'PolicyRule'
+        Expression = { $_.PolicyRule | ConvertTo-Json -Depth 10 }
+    } |
+    Format-List
+```
+
+<img src='images/2025-10-30-05-46-20.png' width=600>
+
+```powershell
+# Get details of a specific policy
+$policy = Get-AzPolicyDefinition -Name "78460a36-508a-49a4-b2b2-2f5ec564f4bb"
+$policy.DisplayName
+$policy.Description
+$policy.PolicyRule | ConvertTo-Json -Depth 10
+```
+
+<img src='images/2025-10-30-05-49-39.png' width=700>
 
 ### List Policy Definitions Using Azure CLI
 
