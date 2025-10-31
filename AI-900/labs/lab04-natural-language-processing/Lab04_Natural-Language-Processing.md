@@ -9,8 +9,8 @@
 
 - ✅ Exercise 1: Text Analysis with Azure AI Language - In Progress
 - ✅ Exercise 2: Speech Recognition and Synthesis - Not Started
-- 🔄 Exercise 3: Language Translation - Not Started
-- ⬜ Exercise 4: Conversational Language Understanding (CLU) - Not Started
+- ✅ Exercise 3: Language Translation - Not Started
+- 🔄 Exercise 4: Conversational Language Understanding (CLU) - Not Started
 
 **Status:** ⬜ Not Started | 🔄 In Progress | ✅ Completed
 
@@ -162,25 +162,15 @@ By the end of this lab, you will be able to:
    - Create resource: "Translator" (part of Azure AI services)
    - Note the endpoint and API key
 
+    <img src='images/2025-10-31-06-07-42.png' width=700>
+
+
 2. **Test Text Translation:**
    - Translate sample sentences:
      - English to Spanish
      - French to English
      - German to Japanese
    - Compare translation quality
-
-3. **Test Document Translation (Optional):**
-   - Upload a document (Word, PDF) for translation
-   - Review the translated document
-
-**Sample Text to Translate:**
-
-> "Artificial intelligence is transforming how businesses operate. From customer service chatbots to predictive analytics, AI is enabling new capabilities and efficiencies."
-
-**Deliverables:**
-
-- Screenshots of translations in 2-3 languages
-- Discussion: How accurate were the translations?
 
 ---
 
