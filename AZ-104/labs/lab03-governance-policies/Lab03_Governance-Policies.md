@@ -319,7 +319,6 @@ Get-AzPolicyDefinition |
 
 <img src='images/2025-10-30-05-10-56.png' width=450>
 
-
 ```powershell
 # Show matching policy plus full rule JSON for “Do not allow deletion” definitions
 Get-AzPolicyDefinition |
@@ -347,7 +346,16 @@ $policy.PolicyRule | ConvertTo-Json -Depth 10
 
 ```bash
 # Get all built-in policy definitions
-az policy definition list --query "[?policyType=='BuiltIn'].{Name:name, DisplayName:displayName, Category:metadata.category}" --output table
+az policy definition list \
+--query "[?policyType=='BuiltIn'].{Name:name, Category:metadata.category, DisplayName:displayName}" \
+--output table | less -S
+```
+
+<img src='images/2025-10-31-04-44-34.png' width=800>
+
+Note: `less -S` disables line wrapping and allows horizontal scrolling in the terminal.
+
+```bash
 
 # Search for policies related to allowed locations
 az policy definition list --query "[?contains(displayName, 'location')].{DisplayName:displayName, Effect:policyRule.then.effect}" --output table
