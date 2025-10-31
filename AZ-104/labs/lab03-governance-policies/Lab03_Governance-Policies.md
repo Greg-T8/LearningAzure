@@ -302,7 +302,7 @@ Azure Policy evaluates effects in a specific order during resource operations. U
 
 ### List Policy Definitions Using PowerShell
 
-There are over 3,000 built-in policy definitions available in Azure. 
+There are over 3,000 built-in policy definitions available in Azure.
 
 <img src='images/2025-10-30-04-59-18.png' width=250>
 
@@ -353,13 +353,41 @@ az policy definition list \
 
 <img src='images/2025-10-31-04-44-34.png' width=800>
 
-Note: `less -S` disables line wrapping and allows horizontal scrolling in the terminal.
+**Note:**
+
+- `less -S` disables line wrapping and allows horizontal scrolling in the terminal.
+- The query syntax uses JMESPath for filtering and formatting output.
 
 ```bash
+# List the properties of the first policy definition
+az policy definition list --query "[0]" --output json
+```
 
-# Search for policies related to allowed locations
-az policy definition list --query "[?contains(displayName, 'location')].{DisplayName:displayName, Effect:policyRule.then.effect}" --output table
+<img src='images/2025-10-31-05-11-13.png' width=800>
 
+Use the `jq` command to get some nice formatting:
+
+<img src='images/2025-10-31-05-12-09.png' width=800>
+
+```bash
+# Get the first policy definition containing "deletion" with expanded JSON output
+az policy definition list \
+    --query "[?contains(displayName, 'deletion')] | [0]" \
+    --output json | jq .
+```
+
+<img src='images/2025-10-31-05-39-16.png' width=600>
+
+```bash
+# Get the policy and specified fields only, including expanded JSON
+az policy definition list \
+    --query "[?contains(displayName, 'deletion')] | [0]" \
+    --output json | jq '{DisplayName: .displayName, Name: .name, PolicyRule: .policyRule}'
+```
+
+<img src='images/2025-10-31-05-46-01.png' width=700>
+
+```bash
 # Get details of a specific policy
 az policy definition show --name e56962a6-4747-49cd-b67b-bf8b01975c4c
 ```
