@@ -7,9 +7,9 @@
 
 ## 📊 Exercise Progress
 
-- ✅  Exercise 1: Text Analysis with Azure AI Language - In Progress
-- 🔄 Exercise 2: Speech Recognition and Synthesis - Not Started
-- ⬜ Exercise 3: Language Translation - Not Started
+- ✅ Exercise 1: Text Analysis with Azure AI Language - In Progress
+- ✅ Exercise 2: Speech Recognition and Synthesis - Not Started
+- 🔄 Exercise 3: Language Translation - Not Started
 - ⬜ Exercise 4: Conversational Language Understanding (CLU) - Not Started
 
 **Status:** ⬜ Not Started | 🔄 In Progress | ✅ Completed
@@ -133,15 +133,13 @@ By the end of this lab, you will be able to:
      - Speech rate and pitch
    - Download the generated audio
 
+    <img src='images/2025-10-31-05-57-14.png' width=700>
+
 4. **Test Speech Translation (Optional):**
    - Translate spoken audio to text in another language
    - Example: Speak in English, get Spanish text output
 
-**Deliverables:**
-
-- Screenshot of speech-to-text transcription
-- Audio file generated from text-to-speech
-- Accuracy assessment: Were there transcription errors?
+    <img src='images/2025-10-31-05-58-34.png' width=700>
 
 ---
 
