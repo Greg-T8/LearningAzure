@@ -42,8 +42,8 @@ The AI-900 exam covers five main skill areas:
 - ✅ [Lab 01: AI Workloads and Responsible AI](labs/lab01-ai-workloads-responsible-ai/Lab01_AI-Workloads-Responsible-AI.md) - **Completed**
 - ✅ [Lab 02: Machine Learning Fundamentals](labs/lab02-machine-learning-fundamentals/Lab02_Machine-Learning-Fundamentals.md) - **Completed**
 - ✅ [Lab 03: Computer Vision on Azure](labs/lab03-computer-vision/Lab03_Computer-Vision.md) - **Completed**
-- 🔄  [Lab 04: Natural Language Processing](labs/lab04-natural-language-processing/Lab04_Natural-Language-Processing.md) - **In Progress**
-- ⬜ [Lab 05: Generative AI with Azure OpenAI](labs/lab05-generative-ai/Lab05_Generative-AI.md) - **Not Started**
+- ✅  [Lab 04: Natural Language Processing](labs/lab04-natural-language-processing/Lab04_Natural-Language-Processing.md) - **In Progress**
+- 🔄 [Lab 05: Generative AI with Azure OpenAI](labs/lab05-generative-ai/Lab05_Generative-AI.md) - **Not Started**
 
 ---
 

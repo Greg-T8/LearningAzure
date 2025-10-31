@@ -10,7 +10,7 @@
 - ✅ Exercise 1: Text Analysis with Azure AI Language - In Progress
 - ✅ Exercise 2: Speech Recognition and Synthesis - Not Started
 - ✅ Exercise 3: Language Translation - Not Started
-- 🔄 Exercise 4: Conversational Language Understanding (CLU) - Not Started
+- ✅ Exercise 4: Conversational Language Understanding (CLU) - Not Started
 
 **Status:** ⬜ Not Started | 🔄 In Progress | ✅ Completed
 
