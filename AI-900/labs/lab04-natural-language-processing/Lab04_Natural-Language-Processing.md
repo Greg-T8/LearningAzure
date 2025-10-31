@@ -164,7 +164,6 @@ By the end of this lab, you will be able to:
 
     <img src='images/2025-10-31-06-07-42.png' width=700>
 
-
 2. **Test Text Translation:**
    - Translate sample sentences:
      - English to Spanish
@@ -192,46 +191,115 @@ By the end of this lab, you will be able to:
 - **Entity:** Key information extracted from the utterance (e.g., "Seattle" as a location, "tomorrow" as a date)
 - **Utterance:** What the user says (e.g., "Book a flight to Seattle tomorrow")
 
-**Activity (Conceptual):**
+**Activity: Build a Conversational Language Understanding Project**
 
-Design a simple language understanding model for a pizza ordering bot:
+In this exercise, you'll create a CLU project in Azure AI Foundry using a sample project.
 
-1. **Intents:**
-   - OrderPizza
-   - CheckOrderStatus
-   - CancelOrder
+**Steps:**
 
-2. **Entities:**
-   - PizzaSize (small, medium, large)
-   - Toppings (pepperoni, mushrooms, olives)
-   - Quantity (1, 2, 3)
+1. **Import Sample Project:**
+   - Navigate to [Azure AI Foundry](https://ai.azure.com/) → **Playgrounds** → **Language playground**
+   - Select **Conversational language understanding** → **Fine-tune**
+   - Import the [EmailAppDemo.json](https://github.com/Azure-Samples/cognitive-services-sample-data-files/blob/master/language-service/CLU/EmailAppDemo.json) sample project
 
-3. **Sample Utterances:**
-   - "I want to order a large pepperoni pizza"
-   - "Can I get two medium pizzas with mushrooms?"
-   - "What's the status of my order?"
+2. **Train and Deploy:**
+   - Train the model using **Standard training** mode
+   - Deploy the trained model to an endpoint
 
-4. **Design Exercise:**
-   - Write 5 sample utterances for each intent
-   - Identify which entities should be extracted
-   - Discuss how the bot would respond to each intent
+3. **Test Your Model:**
+   - In the Language playground, enter a test utterance (e.g., "Check email")
+   - Review predicted intent and extracted entities
 
-**Deliverables:**
+<img src='images/2025-10-31-06-32-01.png' width=700>
 
-- Intent and entity design document
-- Sample utterances for each intent
-- Discussion: How would you train this model in Azure Language Studio?
+<img src='images/2025-10-31-06-32-14.png' width=700>
+
+<img src='images/2025-10-31-06-32-28.png' width=700>
 
 ---
 
 ## 🧠 Knowledge Check
 
-1. What is the difference between sentiment analysis and key phrase extraction?
-2. Which Azure service converts speech to text?
-3. What is an "entity" in the context of NLP?
-4. Name three types of entities that can be extracted from text.
-5. What is the purpose of conversational language understanding (CLU)?
-6. How does Azure AI Speech differ from Azure AI Language?
+1. **What is the difference between sentiment analysis and key phrase extraction?**
+
+   <details>
+   <summary>Answer</summary>
+
+   - **Sentiment Analysis** determines the emotional tone or attitude expressed in text (positive, negative, neutral, or mixed). It evaluates how the author feels about the subject matter.
+   - **Key Phrase Extraction** identifies the main topics and important concepts mentioned in the text. It extracts significant words or phrases that summarize the content without evaluating emotion or opinion.
+
+   Example: For "I love this amazing product!" - Sentiment would be "positive" while key phrases might be "amazing product."
+   </details>
+
+2. **Which Azure service converts speech to text?**
+
+   <details>
+   <summary>Answer</summary>
+
+   **Azure AI Speech** service (specifically the Speech-to-Text feature) converts spoken audio into written text. It supports real-time transcription, batch transcription, and can handle multiple languages and accents.
+   </details>
+
+3. **What is an "entity" in the context of NLP?**
+
+   <details>
+   <summary>Answer</summary>
+
+   An **entity** is a specific piece of information extracted from text that represents a real-world object, concept, or category. Entities are key data points that provide meaning and context, such as names, places, dates, quantities, or custom domain-specific items. They help structure unstructured text by identifying and categorizing important information.
+   </details>
+
+4. **Name three types of entities that can be extracted from text.**
+
+   <details>
+   <summary>Answer</summary>
+
+   Common entity types include:
+   - **Person** - Names of people (e.g., "John Smith", "Dr. Sarah Johnson")
+   - **Location** - Geographic places (e.g., "Paris", "Microsoft headquarters", "California")
+   - **Organization** - Company names, institutions (e.g., "Microsoft", "United Nations", "Harvard University")
+   - **DateTime** - Dates and times (e.g., "October 20, 2025", "next Tuesday", "3:00 PM")
+   - **Quantity** - Numbers and measurements (e.g., "25 dollars", "3 kilometers")
+   - **Email** - Email addresses
+   - **URL** - Web addresses
+   </details>
+
+5. **What is the purpose of conversational language understanding (CLU)?**
+
+   <details>
+   <summary>Answer</summary>
+
+   **Conversational Language Understanding (CLU)** enables applications to understand user intentions and extract relevant information from natural language input. Its purposes include:
+
+   - **Intent Recognition** - Determining what the user wants to do (e.g., book a flight, check weather, cancel order)
+   - **Entity Extraction** - Identifying key information needed to fulfill the request (e.g., destination, date, order number)
+   - **Building Conversational AI** - Powering chatbots, voice assistants, and interactive applications that can understand and respond to human language naturally
+   - **Custom Language Models** - Creating domain-specific models trained on your business vocabulary and user interactions
+
+   CLU is essential for building intelligent conversational interfaces that can interpret user requests and take appropriate actions.
+   </details>
+
+6. **How does Azure AI Speech differ from Azure AI Language?**
+
+   <details>
+   <summary>Answer</summary>
+
+   **Azure AI Speech** and **Azure AI Language** serve different but complementary purposes:
+
+   **Azure AI Speech:**
+   - Focuses on **audio processing**
+   - Converts speech to text (speech recognition)
+   - Converts text to speech (speech synthesis)
+   - Provides speech translation
+   - Works with audio input/output
+
+   **Azure AI Language:**
+   - Focuses on **text analysis and understanding**
+   - Performs sentiment analysis, entity recognition, key phrase extraction
+   - Provides conversational language understanding (CLU)
+   - Supports text classification and summarization
+   - Works exclusively with text input
+
+   **In practice:** You might use Speech to transcribe an audio recording to text, then use Language to analyze that text for sentiment and extract key information.
+   </details>
 
 ---
 
