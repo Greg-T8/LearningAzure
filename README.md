@@ -29,14 +29,14 @@ This repository documents my hands-on learning journey through Microsoft Azure c
 
 | Date | AI-900 | AZ-104 | Total |
 |------|--------|--------|-------|
-| Fri, Oct 31 | 0 | 🟢 7 | **7** |
+| Fri, Oct 31 | 🟢 3 | 🟢 7 | **10** |
 | Thu, Oct 30 | 🟢 6 | 🟢 6 | **12** |
 | Wed, Oct 29 | 🟢 1 | 🟢 25 | **26** |
 | Tue, Oct 28 | 🟢 6 | 🟢 14 | **20** |
 | Mon, Oct 27 | 🟢 7 | 🟢 12 | **19** |
 | Sun, Oct 26 | 🟢 3 | 🟢 16 | **19** |
 | Sat, Oct 25 | 🟢 10 | 🟢 10 | **20** |
-| **Total** | **33** | **90** | **123** |
+| **Total** | **36** | **90** | **126** |
 
 *🟢 = Activity on this day*
 
@@ -46,7 +46,7 @@ This repository documents my hands-on learning journey through Microsoft Azure c
 - One commit can generate multiple activities if it modifies multiple files
 - Repository infrastructure changes (`.github/`, `README.md`) are tracked separately
 
-*Last updated: October 31, 2025 at 10:47 UTC*
+*Last updated: October 31, 2025 at 10:59 UTC*
 
 <!-- COMMIT_STATS_END -->
 
