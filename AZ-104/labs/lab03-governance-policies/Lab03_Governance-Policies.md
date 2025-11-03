@@ -464,19 +464,25 @@ Contoso wants to ensure all resources are deployed only in approved regions (Eas
    - **Exclusions**: (Optional) Exclude specific resource groups
    - **Policy definition**: Search for "Allowed locations"
    - Select **"Allowed locations"** (built-in policy)
+
+    <img src='images/2025-11-03-02-20-23.png' width=600>
+
 5. Click **Next** to configure parameters
 6. **Allowed locations**: Select **East US** and **West US**
+
+    <img src='images/2025-11-03-02-21-04.png' width=600>
+
 7. Click **Next** through Remediation and Non-compliance messages
 8. **Review + create** → **Create**
 
-<img src='images/policy-assignment-portal.png' width=700>
+    <img src='images/2025-11-03-02-22-46.png' width=700>
 
 ### Using PowerShell
 
 ```powershell
 # Get the policy definition
-$definition = Get-AzPolicyDefinition | Where-Object { 
-    $_.Properties.DisplayName -eq 'Allowed locations' 
+$definition = Get-AzPolicyDefinition | Where-Object {
+    $_.DisplayName -eq 'Allowed locations' 
 }
 
 # Define allowed locations
@@ -488,7 +494,7 @@ $policyParam = @{
 }
 
 # Assign the policy to subscription scope
-$subscription = Get-AzSubscription | Where-Object { $_.State -eq "Enabled" } | Select-Object -First 1
+$subscription = (Get-AzContext).SubscriptionId
 
 New-AzPolicyAssignment `
     -Name 'allowed-locations-policy' `
