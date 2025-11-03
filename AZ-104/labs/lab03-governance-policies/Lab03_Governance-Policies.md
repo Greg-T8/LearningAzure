@@ -11,8 +11,8 @@
 
 Track your progress through the lab exercises:
 
-- 🔄 Exercise 1 – Understanding Azure Policy Fundamentals
-- ⬜ Exercise 2 – Create and Assign Built-in Policies
+- ✅ Exercise 1 – Understanding Azure Policy Fundamentals
+- 🔄 Exercise 2 – Create and Assign Built-in Policies
 - ⬜ Exercise 3 – Create Custom Policy Definitions
 - ⬜ Exercise 4 – Implement Policy Initiatives
 - ⬜ Exercise 5 – Configure Policy Remediation
@@ -149,6 +149,7 @@ Quick reference of all commands used in this lab, organized by tool.
 | `New-AzPolicyAssignment` | Assign policy to scope | 2, 3, 4 |
 | `Remove-AzPolicyAssignment` | Remove policy assignment | 2, 5 |
 | `Get-AzPolicyState` | Get policy compliance state | 2, 5 |
+| `Start-AzPolicyComplianceScan` | Trigger on-demand policy evaluation scan | 2 |
 | `Start-AzPolicyRemediation` | Start remediation task | 5 |
 | `Get-AzPolicySetDefinition` | List policy initiatives | 4 |
 | `New-AzPolicySetDefinition` | Create policy initiative | 4 |
@@ -172,6 +173,7 @@ Quick reference of all commands used in this lab, organized by tool.
 | `az policy assignment create` | Assign policy to scope | 2, 3, 4 |
 | `az policy assignment delete` | Remove policy assignment | 2, 5 |
 | `az policy state list` | Get policy compliance state | 2, 5 |
+| `az policy state trigger-scan` | Trigger on-demand policy evaluation scan | 2 |
 | `az policy remediation create` | Start remediation task | 5 |
 | `az policy set-definition list` | List policy initiatives | 4 |
 | `az policy set-definition create` | Create policy initiative | 4 |
@@ -391,6 +393,10 @@ az policy definition list \
 # Get details of a specific policy
 az policy definition show --name e56962a6-4747-49cd-b67b-bf8b01975c4c
 ```
+
+<img src='images/2025-11-03-02-10-21.png' width=700>
+
+You must specify the GUID; you cannot use the display name.
 
 ### Understanding Policy Scopes
 
@@ -749,6 +755,101 @@ az policy state summarize --subscription <your-subscription-id>
 # Get non-compliant resources for a specific policy
 az policy state list --filter "policyAssignmentName eq 'allowed-locations-policy' and complianceState eq 'NonCompliant'"
 ```
+
+### Trigger On-Demand Policy Evaluation Scan
+
+By default, Azure Policy evaluates compliance for existing resources approximately **every 24 hours**. However, you may want immediate compliance results after assigning a new policy or making changes to resources. You can trigger an on-demand evaluation scan to get instant compliance data.
+
+**📚 Related Documentation:**
+
+- [Get compliance data - On-demand evaluation scan](https://learn.microsoft.com/en-us/azure/governance/policy/how-to/get-compliance-data#on-demand-evaluation-scan)
+
+**Key Concepts:**
+
+- On-demand scans are **asynchronous operations** that may take several minutes to complete
+- Scans can be triggered at the **subscription** or **resource group** scope
+- If a scan is already running for a scope, new scan requests receive the same status URI
+- Not all Azure resource providers support on-demand scans (e.g., Azure Virtual Network Manager)
+
+#### Trigger Scan Using PowerShell
+
+```powershell
+# Trigger a compliance scan for the entire subscription
+Start-AzPolicyComplianceScan
+
+# Trigger a compliance scan for a specific resource group
+Start-AzPolicyComplianceScan -ResourceGroupName "rg-governance-lab"
+
+# Run the scan in the background as a PowerShell job
+$job = Start-AzPolicyComplianceScan -AsJob
+
+# Check the job status
+$job
+
+# Wait for the job to complete
+$job | Wait-Job
+
+# Get the job results
+$job | Receive-Job
+```
+
+**Example output while running:**
+
+```powershell
+Id     Name              PSJobTypeName     State    HasMoreData     Location   Command
+--     ----              -------------     -----    -----------     --------   -------
+2      Long Running O... AzureLongRunni... Running  True            localhost  Start-AzPolicyCompliance...
+```
+
+When the scan completes, the `State` property changes to `Completed`.
+
+#### Trigger Scan Using Azure CLI
+
+```bash
+# Trigger a compliance scan for the entire subscription
+az policy state trigger-scan
+
+# Trigger a compliance scan for a specific resource group
+az policy state trigger-scan --resource-group "rg-governance-lab"
+
+# Run the scan without waiting for completion
+az policy state trigger-scan --no-wait
+```
+
+**Note:** The Azure CLI command runs synchronously by default and waits for the scan to complete before returning. Use the `--no-wait` parameter to run it asynchronously.
+
+#### Verify Compliance After Scan
+
+After the on-demand scan completes, verify the updated compliance data:
+
+```powershell
+# PowerShell - Get compliance summary
+Get-AzPolicyStateSummary -SubscriptionId $subscription.Id
+
+# PowerShell - Get detailed compliance state
+Get-AzPolicyState -SubscriptionId $subscription.Id | 
+    Select-Object PolicyAssignmentName, ComplianceState, ResourceId, Timestamp | 
+    Sort-Object Timestamp -Descending | 
+    Format-Table -AutoSize
+```
+
+```bash
+# Azure CLI - Get compliance summary
+az policy state summarize --subscription <your-subscription-id>
+
+# Azure CLI - Get detailed compliance state sorted by timestamp
+az policy state list --subscription <your-subscription-id> \
+    --query "[].{PolicyAssignment:policyAssignmentName, ComplianceState:complianceState, Resource:resourceId, Timestamp:timestamp} | sort_by(@, &Timestamp) | reverse(@)" \
+    --output table
+```
+
+#### When to Use On-Demand Scans
+
+- **After assigning new policies**: Immediately check compliance without waiting 24 hours
+- **After resource deployment**: Verify that new resources comply with policies
+- **During policy testing**: Quickly validate policy definitions during development
+- **For compliance audits**: Generate up-to-date compliance reports on demand
+- **After remediation**: Verify that remediation tasks successfully fixed non-compliant resources
 
 ### Exam Insights
 
