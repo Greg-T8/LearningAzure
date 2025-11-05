@@ -480,40 +480,41 @@ Contoso wants to ensure all resources are deployed only in approved regions (Eas
 ### Using PowerShell
 
 ```powershell
-# Get the policy definition
 $definition = Get-AzPolicyDefinition | Where-Object {
     $_.DisplayName -eq 'Allowed locations' 
 }
 
-# Define allowed locations
 $allowedLocations = @('eastus', 'westus')
 
-# Create policy parameters
 $policyParam = @{
     'listOfAllowedLocations' = $allowedLocations
 }
 
-# Assign the policy to subscription scope
-$subscription = (Get-AzContext).SubscriptionId
+$subscriptionId = (Get-AzContext).Subscription
 
 New-AzPolicyAssignment `
     -Name 'allowed-locations-policy' `
     -DisplayName 'Allowed Locations - East US and West US Only' `
-    -Scope "/subscriptions/$($subscription.Id)" `
+    -Scope "/subscriptions/$subscriptionId" `
     -PolicyDefinition $definition `
     -PolicyParameterObject $policyParam `
     -Description 'Restricts resource deployment to East US and West US regions'
 
-# Verify the assignment
 Get-AzPolicyAssignment -Name 'allowed-locations-policy'
 ```
+
+<img src='images/2025-11-04-03-27-36.png' width=700>
 
 ### Using Azure CLI
 
 ```bash
 # Get the policy definition ID
 az policy definition list --query "[?displayName=='Allowed locations'].id" --output tsv
+```
 
+
+
+```bash
 # Assign the policy to subscription scope
 az policy assignment create \
     --name 'allowed-locations-policy' \
