@@ -512,9 +512,20 @@ Get-AzPolicyAssignment -Name 'allowed-locations-policy'
 az policy definition list --query "[?displayName=='Allowed locations'].id" --output tsv
 ```
 
+<img src='images/2025-11-06-05-49-36.png' width=700>
+
+```bash
+# 
+az policy definition list \
+  --query "[?displayName=='Allowed locations'].{DisplayName:displayName,ID:id}" \
+  --output tsv
+```
 
 
 ```bash
+
+
+
 # Assign the policy to subscription scope
 az policy assignment create \
     --name 'allowed-locations-policy' \
@@ -526,7 +537,7 @@ az policy assignment create \
             "value": ["eastus", "westus"]
         }
     }' \
-    --description 'Restricts resource deployment to East US and West US regions'
+    --description 'Restricts resource deployment to East US and West US regions
 
 # Verify the assignment
 az policy assignment show --name 'allowed-locations-policy'
