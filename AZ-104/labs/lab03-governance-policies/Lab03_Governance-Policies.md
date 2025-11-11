@@ -512,7 +512,7 @@ Get-AzPolicyAssignment -Name 'allowed-locations-policy'
 az policy definition list --query "[?displayName=='Allowed locations'].id" --output tsv
 ```
 
-<img src='images/2025-11-06-05-49-36.png' width=700>
+<img src='images/2025-11-06-05-49-36.png' width=600>
 
 ```bash
 # List policy categories
@@ -523,8 +523,24 @@ jq -r ".[]" |\
 sort | uniq
 ```
 
-<img src='images/2025-11-11-05-25-04.png' width=350>
+<img src='images/2025-11-11-05-25-04.png' width=300>
 
+**Note:** The JMESPath query is only able to provide a selection of data; therefore, you should use `jq` to process the JSON output for unique categories.
+
+
+```bash
+# List policies in the "Network" category
+az policy definition list \
+    --output table \
+    --filter "category eq 'Network'" \
+    --query "[*].{Category:metadata.category,DisplayName:displayName}"
+```
+
+<img src='images/2025-11-11-05-49-42.png' width=800>
+
+**Note:** This command uses a combination of `--filter` and `--query` to narrow down the results to a specific category. The `--filter` parameter applies server-side filtering using OData syntax, while the `--query` parameter uses JMESPath syntax to format the output on the client side.
+
+The command only supports certain types of filters. See [URI Parameters](https://learn.microsoft.com/en-us/rest/api/policy/policy-definitions/list?view=rest-policy-2023-04-01&tabs=HTTP#uri-parameters) for more information.
 
 
 
