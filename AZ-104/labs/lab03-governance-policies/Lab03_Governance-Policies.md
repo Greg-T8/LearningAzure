@@ -523,7 +523,7 @@ jq -r ".[]" |\
 sort | uniq
 ```
 
-<img src='images/2025-11-11-05-25-04.png' width=300>
+<img src='images/2025-11-11-05-25-04.png' width=250>
 
 **Note:** The JMESPath query is only able to provide a selection of data; therefore, you should use `jq` to process the JSON output for unique categories.
 
