@@ -509,24 +509,37 @@ Get-AzPolicyAssignment -Name 'allowed-locations-policy'
 
 ```bash
 # Get the policy definition ID
-az policy definition list --query "[?displayName=='Allowed locations'].id" --output tsv
+az policy definition list \
+    --output tsv \
+    --query "[?displayName=='Allowed locations'].id" 
 ```
+<img src='images/2025-11-12-04-57-47.png' width=600>
 
-<img src='images/2025-11-06-05-49-36.png' width=600>
+```bash
+# List policies with "allowed" in the display name
+az policy definition list \
+    --output table \
+    --query "[?contains(displayName,'allowed')].{Name:name,DisplayName:displayName}"
+```
+<img src='images/2025-11-12-04-55-58.png' width=500>
+
 
 ```bash
 # List policy categories
 az policy definition list \
     --output json \
-    --query "[*].metadata.category" |\
-jq -r ".[]" |\
-sort | uniq
+    --query "[*].metadata.category" \
+    | jq -r '.[]' \
+    | sort | uniq
 ```
 
-<img src='images/2025-11-11-05-25-04.png' width=250>
+<img src='images/2025-11-12-04-39-54.png' width=300>
 
 **Note:** The JMESPath query language does not provide any facilities for removing duplicates, so we use `jq`, `sort`, and `uniq` to get unique category names. This is by design, as tasks like deduplication, sorting, or aggregation are intentionally left to downstream tools.
 
+The `jq` notation `.[]` extracts (iterates through) each element from the JSON array rather than `.` which would return the entire array structure.
+
+**Note:** Use double quotes `"` for JMESPath queries in Azure CLI and use single quotes `'` for shell commands, e.g. `jq`, to avoid conflicts.
 
 ```bash
 # List policies in the "Network" category
@@ -540,7 +553,7 @@ az policy definition list \
 
 **Note:** This command uses a combination of `--filter` and `--query` to narrow down the results to a specific category. The `--filter` parameter applies server-side filtering using OData syntax, while the `--query` parameter uses JMESPath syntax to format the output on the client side.
 
-The command only supports certain types of filters. See [URI Parameters](https://learn.microsoft.com/en-us/rest/api/policy/policy-definitions/list?view=rest-policy-2023-04-01&tabs=HTTP#uri-parameters) for more information.
+The `az policy definition list` command only supports certain types of filters. See [URI Parameters](https://learn.microsoft.com/en-us/rest/api/policy/policy-definitions/list?view=rest-policy-2023-04-01&tabs=HTTP#uri-parameters) for more information.
 
 
 
