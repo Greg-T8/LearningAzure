@@ -503,7 +503,7 @@ New-AzPolicyAssignment `
 Get-AzPolicyAssignment -Name 'allowed-locations-policy'
 ```
 
-<img src='images/2025-11-04-03-27-36.png' width=700>
+<img src='images/2025-11-04-03-27-36.png' width=500>
 
 ### Using Azure CLI
 
