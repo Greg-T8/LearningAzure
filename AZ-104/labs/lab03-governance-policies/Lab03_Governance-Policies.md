@@ -556,22 +556,32 @@ az policy definition list \
 The `az policy definition list` command only supports certain types of filters. See [URI Parameters](https://learn.microsoft.com/en-us/rest/api/policy/policy-definitions/list?view=rest-policy-2023-04-01&tabs=HTTP#uri-parameters) for more information.
 
 
-
-
 ```bash
 # Assign the policy to subscription scope
 az policy assignment create \
     --name 'allowed-locations-policy' \
-    --display-name 'Allowed Locations - East US and West US Only' \
-    --scope /subscriptions/<your-subscription-id> \
-    --policy "e56962a6-4747-49cd-b67b-bf8b01975c4c" \
+    --scope "/subscriptions/$(az account show --query id --output tsv)" \
+    --policy $( az policy definition list --query "[?displayName=='Allowed locations'][name]" --output tsv ) \
     --params '{
-        "listOfAllowedLocations": {
-            "value": ["eastus", "westus"]
-        }
+            "listOfAllowedLocations": {
+                    "value": ["eastus", "westus"]
+            }
     }' \
-    --description 'Restricts resource deployment to East US and West US regions
+    --description 'Restricts resource deployment to East US and West US regions'
+```
+<img src='images/2025-11-13-03-56-08.png' width=700>
 
+
+```bash
+# Delete the policy assignment
+az policy assignment delete \
+    --name $( az policy definition list --query "[?displayName=='Allowed locations'][name]" --output tsv ) \
+    --scope "/subscriptions/$( az account show --query id --output tsv )"
+```
+
+<img src='images/2025-11-13-04-02-37.png' width=700>
+
+```bash
 # Verify the assignment
 az policy assignment show --name 'allowed-locations-policy'
 ```
