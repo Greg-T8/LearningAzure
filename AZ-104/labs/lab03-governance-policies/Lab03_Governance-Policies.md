@@ -513,6 +513,7 @@ az policy definition list \
     --output tsv \
     --query "[?displayName=='Allowed locations'].id" 
 ```
+
 <img src='images/2025-11-12-04-57-47.png' width=600>
 
 ```bash
@@ -521,8 +522,8 @@ az policy definition list \
     --output table \
     --query "[?contains(displayName,'allowed')].{Name:name,DisplayName:displayName}"
 ```
-<img src='images/2025-11-12-04-55-58.png' width=500>
 
+<img src='images/2025-11-12-04-55-58.png' width=500>
 
 ```bash
 # List policy categories
@@ -555,12 +556,11 @@ az policy definition list \
 
 The `az policy definition list` command only supports certain types of filters. See [URI Parameters](https://learn.microsoft.com/en-us/rest/api/policy/policy-definitions/list?view=rest-policy-2023-04-01&tabs=HTTP#uri-parameters) for more information.
 
-
 ```bash
 # Assign the policy to subscription scope
 az policy assignment create \
     --name 'allowed-locations-policy' \
-    --scope "/subscriptions/$(az account show --query id --output tsv)" \
+    --scope "/subscriptions/$( az account show --query id --output tsv )" \
     --policy $( az policy definition list --query "[?displayName=='Allowed locations'][name]" --output tsv ) \
     --params '{
             "listOfAllowedLocations": {
@@ -569,8 +569,18 @@ az policy assignment create \
     }' \
     --description 'Restricts resource deployment to East US and West US regions'
 ```
-<img src='images/2025-11-13-03-56-08.png' width=700>
 
+<img src='images/2025-11-13-04-06-27.png' width=700>
+
+**Note:** the use of `jq` is optional but provides color formatting and better readability for JSON output in the terminal.
+
+
+```bash
+# Verify the assignment
+az policy assignment show --name 'allowed-locations-policy'
+```
+
+<img src='images/2025-11-13-04-08-30.png' width=600>
 
 ```bash
 # Delete the policy assignment
@@ -580,11 +590,6 @@ az policy assignment delete \
 ```
 
 <img src='images/2025-11-13-04-02-37.png' width=700>
-
-```bash
-# Verify the assignment
-az policy assignment show --name 'allowed-locations-policy'
-```
 
 ### Test the Policy
 
