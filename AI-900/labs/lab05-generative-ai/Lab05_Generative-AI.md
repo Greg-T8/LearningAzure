@@ -33,43 +33,46 @@ By the end of this lab, you will be able to:
 
 **Objective:** Understand the capabilities of different Azure OpenAI models.
 
+[Explore Microsoft Foundry Models](https://learn.microsoft.com/en-us/azure/ai-foundry/concepts/foundry-models-overview?view=foundry-classic&viewFallbackFrom=foundry)
+- [Foundry Models sold directly by Azure](https://learn.microsoft.com/en-us/azure/ai-foundry/foundry-models/concepts/models-sold-directly-by-azure?view=foundry-classic&tabs=global-standard-aoai%2Cstandard-chat-completions%2Cglobal-standard&pivots=azure-openai)
+- [Foundry Models from partners and community](https://learn.microsoft.com/en-us/azure/ai-foundry/foundry-models/concepts/models-from-partners?view=foundry-classic)
+
 **Available Models:**
 
-1. **GPT-4 and GPT-4 Turbo:**
-   - Most capable language model
-   - Excellent for complex reasoning, content creation, code generation
-   - Supports large context windows (up to 128K tokens)
-   - Higher cost, slower than GPT-3.5
+1. **GPT-5.1 Series:**
+   - Latest reasoning models with advanced problem-solving capabilities
+   - Models: gpt-5.1, gpt-5.1-chat, gpt-5.1-codex, gpt-5.1-codex-mini
+   - Supports text and image processing with structured outputs
+   - Context window: up to 400,000 tokens (input: 272,000, output: 128,000)
+   - Requires registration for access
 
-2. **GPT-3.5 Turbo:**
-   - Fast and cost-effective
-   - Good for most common tasks (chatbots, summarization, simple Q&A)
-   - Smaller context window (4K-16K tokens)
+2. **o-series Models (Reasoning):**
+   - Advanced reasoning models: o4-mini, o3, o3-mini, o1
+   - Designed for complex problem-solving, coding, and mathematical tasks
+   - Spend more time processing to deliver better results
+   - Context window: up to 200,000 tokens
+   - Exceptional for science, coding, and analytical work
 
-3. **DALL-E 3:**
-   - Image generation from text descriptions
-   - Creates photorealistic or artistic images
-   - Example prompt: "A futuristic cityscape at sunset with flying cars"
+3. **GPT-4.1 Series:**
+   - Models: gpt-4.1, gpt-4.1-mini, gpt-4.1-nano
+   - Text and image input with text output
+   - Context window: up to 1 million tokens (128,000 for provisioned deployments)
+   - Supports structured outputs and function calling
+   - Released 2025-04-14
 
-4. **Whisper:**
-   - Speech-to-text (transcription)
-   - Highly accurate, supports multiple languages
-   - Can handle noisy audio
+4. **Claude Series (Anthropic):**
+   - High-performance models: claude-opus-4-1, claude-sonnet-4-5, claude-haiku-4-5
+   - Excellent for complex reasoning, coding, and agents
+   - Supports text, image, and code processing
+   - Context window: 200,000 tokens
+   - Trusted for enterprise use cases
 
-5. **Embeddings (text-embedding-ada-002):**
-   - Convert text to vector representations
-   - Used for semantic search, recommendations, clustering
-   - Enable finding similar documents or passages
-
-**Activity:**
-
-For each scenario, choose the best model:
-
-1. Build a customer support chatbot
-2. Generate marketing images for a product launch
-3. Transcribe a podcast episode
-4. Write complex technical documentation
-5. Search through thousands of support tickets to find similar issues
+5. **Phi-4 Series (Microsoft):**
+   - Small language models: Phi-4, Phi-4-mini-instruct, Phi-4-multimodal-instruct, Phi-4-reasoning
+   - Phi-4-multimodal supports text, images, and audio input
+   - Context window: up to 131,072 tokens
+   - Efficient and cost-effective for various tasks
+   - Phi-4-reasoning optimized for reasoning tasks
 
 ---
 
