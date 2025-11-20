@@ -582,29 +582,79 @@ az policy assignment show --name 'allowed-locations-policy'
 
 <img src='images/2025-11-13-04-08-30.png' width=600>
 
-```bash
-# Delete the policy assignment
-az policy assignment delete \
-    --name $( az policy definition list --query "[?displayName=='Allowed locations'][name]" --output tsv ) \
-    --scope "/subscriptions/$( az account show --query id --output tsv )"
-```
-
-<img src='images/2025-11-13-04-02-37.png' width=700>
 
 ### Test the Policy
 
-Try to create a resource in a non-allowed region:
+Confirm the policy definition and policy assignment are in place.
 
-```powershell
-# PowerShell - This should FAIL
-New-AzResourceGroup -Name "rg-test-northeurope" -Location "northeurope"
+```bash
+az policy assignment list --query "[?contains(name,'allowed')]" \
+    | jq '.[] | {name, description, policyDefinitionId}'
+```
+
+<img src='images/2025-11-20-03-32-28.png' width=700>
+
+You'll need the GUID from the `policyDefinitionId` property for the next steps:
+
+```bash
+az policy assignment list --query "[?contains(name,'allowed')]" \
+    | jq '.[] | {
+        name,
+        description,
+        policyDefinitionGuid: (.policyDefinitionId | split("/")[-1])
+    }'
+```
+
+The snippet above shows how to extract the GUID from the full policy definition ID using `jq` string manipulation functions.
+
+<img src='images/2025-11-20-03-39-26.png' width=600>
+
+You can store the GUID in a variable for use in finding the policy definition. Note the `-r` flag to get raw string output without quotes:
+
+```bash
+GUID=$(az policy assignment list --query "[?contains(name,'allowed')]" \
+    | jq -r '.[0].policyDefinitionId | split("/")[-1]')
+```
+
+<img src='images/2025-11-20-03-47-40.png' width=550>
+
+From there, you an pull details about the policy definition itself:
+
+```bash
+az policy definition show --name $GUID | jq '. | {name, description}'
+```
+
+<img src='images/2025-11-20-03-53-25.png' width=650>
+
+Notice the policy definition description excludes resource groups, so you must test at the resource level.
+
+Now, try to create a resource in a non-allowed region, e.g. `southcentralus`:
+
+```bash
+az storage account create \
+    -n testpolicysa$RANDOM \
+    -g rg-dev-test \
+    -l southcentralus \
+    --sku Standard_LRS
 ```
 
 Expected error:
 
+<img src='images/2025-11-20-04-02-15.png' width=600>
+
+For cleanup, delete the policy assignment:
+
+```bash
+# Delete the policy assignment
+GUID=$(az policy definition list --query "[?displayName=='Allowed locations'].id" |
+    jq -r '.[0] | split("/")[-1]')
+
+az policy assignment delete --name $GUID
 ```
-Resource 'rg-test-northeurope' was disallowed by policy. Policy identifiers: '[{"policyAssignment":{"name":"Allowed Locations - East US and West US Only"...
-```
+
+<img src='images/2025-11-20-04-09-47.png' width=650>
+
+
 
 ### Assign Additional Built-in Policies
 
