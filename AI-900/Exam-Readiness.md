@@ -181,28 +181,28 @@ Use it to reinforce concepts, review domain summaries, and quickly recall high-v
     - Whisper (speech-to-text)
     - Embeddings (semantic search, recommendations)
     - Content filters and responsible AI controls
-  - **Azure AI Foundry (formerly Azure AI Studio):**
+  - **Microsoft Foundry (formerly Azure AI Studio):**
     - Build, test, and deploy generative AI solutions
     - Prompt engineering and testing (prompt flow)
     - Model evaluation and monitoring
     - Integration with Azure OpenAI, Azure AI Search, and other services
-  - **Azure AI Foundry model catalog:**
+  - **Microsoft Foundry model catalog:**
     - Access to foundation models from Microsoft, OpenAI, Meta, Hugging Face, etc.
     - Deploy models as managed endpoints
     - Fine-tune models with custom data
 
 **Common Pitfalls**
 
-- Confusing **Azure OpenAI Service** (API access to models) vs. **Azure AI Foundry** (platform for building solutions)
+- Confusing **Azure OpenAI Service** (API access to models) vs. **Microsoft Foundry** (platform for building solutions)
 - Not understanding the importance of **content filters** and **grounding** for responsible AI
 - Forgetting that **prompt engineering** is critical for getting good results from LLMs
 - Missing the difference between **GPT-4** (most capable, expensive) vs. **GPT-3.5** (faster, cheaper)
-- Not knowing that **Azure AI Foundry model catalog** provides access to non-OpenAI models
+- Not knowing that **Microsoft Foundry model catalog** provides access to non-OpenAI models
 
 **References**
 
 - [Azure OpenAI Service Documentation](https://learn.microsoft.com/en-us/azure/ai-services/openai/)
-- [Azure AI Foundry Documentation](https://learn.microsoft.com/en-us/azure/ai-studio/)
+- [Microsoft Foundry Documentation](https://learn.microsoft.com/en-us/azure/ai-studio/)
 - [Responsible AI for Generative AI](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/system-message)
 
 ---
@@ -215,7 +215,7 @@ Use it to reinforce concepts, review domain summaries, and quickly recall high-v
 | **2** | Master machine learning fundamentals | Azure ML automated ML, datasets |
 | **3** | Deep dive into computer vision | Azure AI Vision, Azure AI Face |
 | **4** | Explore NLP and speech | Azure AI Language, Azure AI Speech |
-| **5** | Build generative AI solutions | Azure OpenAI, Azure AI Foundry |
+| **5** | Build generative AI solutions | Azure OpenAI, Microsoft Foundry |
 
 > 💡 **Tip:** Focus on **understanding use cases** and **when to use which service** rather than memorizing API details.
 
@@ -243,7 +243,7 @@ Use diagrams and screenshots to reinforce key concepts:
 ✅ Understand **Azure AI Language** capabilities (sentiment, entities, key phrases)  
 ✅ Know the difference between **Azure AI Speech** (speech-to-text, text-to-speech) vs. **Azure AI Language** (text analysis)  
 ✅ Understand **Azure OpenAI Service** capabilities (GPT, DALL-E, Whisper)  
-✅ Know what **Azure AI Foundry** is used for (building and deploying generative AI solutions)  
+✅ Know what **Microsoft Foundry** is used for (building and deploying generative AI solutions)  
 ✅ Understand **responsible AI for generative AI** (content filters, grounding, bias mitigation)  
 ✅ Practice identifying **use cases** for each AI service  
 ✅ Complete all hands-on labs to reinforce practical knowledge  
@@ -268,8 +268,8 @@ Use diagrams and screenshots to reinforce key concepts:
 ✅ **Watch for keywords** like "unsupervised" (clustering), "numeric prediction" (regression), "categorize" (classification)  
 ✅ **Responsible AI questions are common** — know all six principles cold  
 ✅ **Use cases are key** — understand when to use which service, not just what each service does  
-✅ **Azure AI Foundry is new** — expect questions on its capabilities and model catalog  
-✅ **Generative AI has the highest weight (20–25%)** — spend extra time on Azure OpenAI and AI Foundry  
+✅ **Microsoft Foundry is new** — expect questions on its capabilities and model catalog  
+✅ **Generative AI has the highest weight (20–25%)** — spend extra time on Azure OpenAI and Microsoft Foundry  
 ✅ **Take the practice assessment multiple times** — it's free and closely mirrors the real exam  
 
 ---

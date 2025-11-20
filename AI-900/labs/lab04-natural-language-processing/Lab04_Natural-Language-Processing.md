@@ -193,12 +193,12 @@ By the end of this lab, you will be able to:
 
 **Activity: Build a Conversational Language Understanding Project**
 
-In this exercise, you'll create a CLU project in Azure AI Foundry using a sample project.
+In this exercise, you'll create a CLU project in Microsoft Foundry using a sample project.
 
 **Steps:**
 
 1. **Import Sample Project:**
-   - Navigate to [Azure AI Foundry](https://ai.azure.com/) → **Playgrounds** → **Language playground**
+   - Navigate to [Microsoft Foundry](https://ai.azure.com/) → **Playgrounds** → **Language playground**
    - Select **Conversational language understanding** → **Fine-tune**
    - Import the [EmailAppDemo.json](https://github.com/Azure-Samples/cognitive-services-sample-data-files/blob/master/language-service/CLU/EmailAppDemo.json) sample project
 

@@ -28,7 +28,7 @@ The AI-900 exam covers five main skill areas:
 | **2. Machine Learning on Azure** | 15–20% | ML techniques, core concepts, Azure ML capabilities |
 | **3. Computer Vision Workloads** | 15–20% | Image classification, object detection, OCR, facial analysis |
 | **4. NLP Workloads** | 15–20% | Text analysis, speech, translation, language understanding |
-| **5. Generative AI Workloads** | 20–25% | Azure OpenAI, Azure AI Foundry, model catalog |
+| **5. Generative AI Workloads** | 20–25% | Azure OpenAI, Microsoft Foundry, model catalog |
 
 **Reference:**
 
@@ -112,8 +112,8 @@ Hands-on labs organized by exam domain:
 **Objectives:**
 
 - Explore Azure OpenAI Service capabilities (GPT, DALL-E, Whisper)
-- Use Azure AI Foundry to build and deploy generative AI solutions
-- Explore Azure AI Foundry model catalog
+- Use Microsoft Foundry to build and deploy generative AI solutions
+- Explore Microsoft Foundry model catalog
 - Apply responsible AI principles to generative AI workloads
 - Build a simple chatbot or content generation application
 
@@ -170,7 +170,7 @@ Hands-on labs organized by exam domain:
 ✅ Review **responsible AI principles** — these are heavily tested  
 ✅ Understand **when to use which service** (e.g., Azure AI Vision vs. Face, Language vs. Speech)  
 ✅ Practice identifying **use cases** for each AI workload type  
-✅ Explore the **Azure AI Foundry** portal and model catalog  
+✅ Explore the **Microsoft Foundry** portal and model catalog  
 ✅ Take the **official practice assessment** multiple times  
 ✅ Watch **The AI Show** videos for real-world Azure AI examples  
 

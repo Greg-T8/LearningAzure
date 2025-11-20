@@ -10,8 +10,8 @@
 By the end of this lab, you will be able to:
 
 - Understand Azure OpenAI Service capabilities (GPT, DALL-E, Whisper)
-- Use Azure AI Foundry to build and test generative AI solutions
-- Explore the Azure AI Foundry model catalog
+- Use Microsoft Foundry to build and test generative AI solutions
+- Explore the Microsoft Foundry model catalog
 - Apply responsible AI principles to generative AI workloads
 - Build a simple chatbot or content generation application
 
@@ -34,56 +34,55 @@ By the end of this lab, you will be able to:
 **Objective:** Understand the capabilities of different Azure OpenAI models.
 
 [Explore Microsoft Foundry Models](https://learn.microsoft.com/en-us/azure/ai-foundry/concepts/foundry-models-overview?view=foundry-classic&viewFallbackFrom=foundry)
-- [Foundry Models sold directly by Azure](https://learn.microsoft.com/en-us/azure/ai-foundry/foundry-models/concepts/models-sold-directly-by-azure?view=foundry-classic&tabs=global-standard-aoai%2Cstandard-chat-completions%2Cglobal-standard&pivots=azure-openai)
-- [Foundry Models from partners and community](https://learn.microsoft.com/en-us/azure/ai-foundry/foundry-models/concepts/models-from-partners?view=foundry-classic)
 
 **Available Models:**
 
-1. **GPT-5.1 Series:**
-   - Latest reasoning models with advanced problem-solving capabilities
-   - Models: gpt-5.1, gpt-5.1-chat, gpt-5.1-codex, gpt-5.1-codex-mini
-   - Supports text and image processing with structured outputs
-   - Context window: up to 400,000 tokens (input: 272,000, output: 128,000)
-   - Requires registration for access
+1. **GPT-4 and GPT-4 Turbo:**
+   - Most capable language model
+   - Excellent for complex reasoning, content creation, code generation
+   - Supports large context windows (up to 128K tokens)
+   - Higher cost, slower than GPT-3.5
 
-2. **o-series Models (Reasoning):**
-   - Advanced reasoning models: o4-mini, o3, o3-mini, o1
-   - Designed for complex problem-solving, coding, and mathematical tasks
-   - Spend more time processing to deliver better results
-   - Context window: up to 200,000 tokens
-   - Exceptional for science, coding, and analytical work
+2. **GPT-3.5 Turbo:**
+   - Fast and cost-effective
+   - Good for most common tasks (chatbots, summarization, simple Q&A)
+   - Smaller context window (4K-16K tokens)
 
-3. **GPT-4.1 Series:**
-   - Models: gpt-4.1, gpt-4.1-mini, gpt-4.1-nano
-   - Text and image input with text output
-   - Context window: up to 1 million tokens (128,000 for provisioned deployments)
-   - Supports structured outputs and function calling
-   - Released 2025-04-14
+3. **DALL-E 3:**
+   - Image generation from text descriptions
+   - Creates photorealistic or artistic images
+   - Example prompt: "A futuristic cityscape at sunset with flying cars"
 
-4. **Claude Series (Anthropic):**
-   - High-performance models: claude-opus-4-1, claude-sonnet-4-5, claude-haiku-4-5
-   - Excellent for complex reasoning, coding, and agents
-   - Supports text, image, and code processing
-   - Context window: 200,000 tokens
-   - Trusted for enterprise use cases
+4. **Whisper:**
+   - Speech-to-text (transcription)
+   - Highly accurate, supports multiple languages
+   - Can handle noisy audio
 
-5. **Phi-4 Series (Microsoft):**
-   - Small language models: Phi-4, Phi-4-mini-instruct, Phi-4-multimodal-instruct, Phi-4-reasoning
-   - Phi-4-multimodal supports text, images, and audio input
-   - Context window: up to 131,072 tokens
-   - Efficient and cost-effective for various tasks
-   - Phi-4-reasoning optimized for reasoning tasks
+5. **Embeddings (text-embedding-ada-002):**
+   - Convert text to vector representations
+   - Used for semantic search, recommendations, clustering
+   - Enable finding similar documents or passages
+
+**Activity:**
+
+For each scenario, choose the best model:
+
+1. Build a customer support chatbot
+2. Generate marketing images for a product launch
+3. Transcribe a podcast episode
+4. Write complex technical documentation
+5. Search through thousands of support tickets to find similar issues
 
 ---
 
-### Exercise 2: Use Azure AI Foundry (Prompt Engineering)
+### Exercise 2: Use Microsoft Foundry (Prompt Engineering)
 
-**Objective:** Learn to build and test generative AI solutions using Azure AI Foundry.
+**Objective:** Learn to build and test generative AI solutions using Microsoft Foundry.
 
 **Steps:**
 
-1. **Navigate to Azure AI Foundry:**
-   - Go to [Azure AI Foundry portal](https://ai.azure.com)
+1. **Navigate to Microsoft Foundry:**
+   - Go to [Microsoft Foundry portal](https://ai.azure.com)
    - Sign in with your Azure account
    - Create a new project
 
@@ -128,14 +127,14 @@ By the end of this lab, you will be able to:
 
 ---
 
-### Exercise 3: Explore Azure AI Foundry Model Catalog
+### Exercise 3: Explore Microsoft Foundry Model Catalog
 
 **Objective:** Understand the variety of models available beyond Azure OpenAI.
 
 **Steps:**
 
 1. **Navigate to Model Catalog:**
-   - In Azure AI Foundry, go to "Model catalog"
+   - In Microsoft Foundry, go to "Model catalog"
    - Browse available models from:
      - Microsoft (Phi-3, Florence)
      - OpenAI (GPT, DALL-E)
@@ -213,7 +212,7 @@ By the end of this lab, you will be able to:
 
 ### Exercise 5: Build a Simple Chatbot (Optional)
 
-**Objective:** Create a functional chatbot using Azure OpenAI and Azure AI Foundry.
+**Objective:** Create a functional chatbot using Azure OpenAI and Microsoft Foundry.
 
 **Steps:**
 
@@ -222,7 +221,7 @@ By the end of this lab, you will be able to:
    - Write a system message
    - Prepare sample questions
 
-2. **Implement in Azure AI Foundry:**
+2. **Implement in Microsoft Foundry:**
    - Use the Chat playground
    - Configure system message and parameters
    - Test with sample conversations
@@ -251,7 +250,7 @@ By the end of this lab, you will be able to:
 3. What does "temperature" control in GPT models?
 4. What is grounding and why is it important?
 5. Name three responsible AI considerations for generative AI.
-6. What is the Azure AI Foundry model catalog?
+6. What is the Microsoft Foundry model catalog?
 7. What is prompt engineering?
 
 ---
@@ -259,7 +258,7 @@ By the end of this lab, you will be able to:
 ## 📚 Additional Resources
 
 - [Azure OpenAI Service Documentation](https://learn.microsoft.com/en-us/azure/ai-services/openai/)
-- [Azure AI Foundry Documentation](https://learn.microsoft.com/en-us/azure/ai-studio/)
+- [Microsoft Foundry Documentation](https://learn.microsoft.com/en-us/azure/ai-studio/)
 - [Prompt Engineering Guide](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/prompt-engineering)
 - [Responsible AI for Azure OpenAI](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/system-message)
 
@@ -270,9 +269,9 @@ By the end of this lab, you will be able to:
 You have successfully completed Lab 05 and the entire AI-900 lab series! You should now understand:
 
 - Azure OpenAI Service capabilities (GPT, DALL-E, Whisper, embeddings)
-- How to use Azure AI Foundry for building generative AI solutions
+- How to use Microsoft Foundry for building generative AI solutions
 - Prompt engineering techniques
-- The Azure AI Foundry model catalog
+- The Microsoft Foundry model catalog
 - Responsible AI practices for generative AI
 
 **Next Steps:**
