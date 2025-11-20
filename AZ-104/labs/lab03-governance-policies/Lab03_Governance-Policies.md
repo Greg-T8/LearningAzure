@@ -652,7 +652,7 @@ GUID=$(az policy definition list --query "[?displayName=='Allowed locations'].id
 az policy assignment delete --name $GUID
 ```
 
-<img src='images/2025-11-20-04-09-47.png' width=650>
+<img src='images/2025-11-20-04-09-47.png' width=550>
 
 
 
