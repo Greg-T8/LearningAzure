@@ -105,11 +105,13 @@ For each scenario, choose the best model:
    - Prompt: "Write a Python function to calculate the Fibonacci sequence."
    - Test with different languages (JavaScript, C#)
 
-    <img src='images/2025-11-20-05-19-10.png' width=900>
+        <img src='images/2025-11-20-05-19-10.png' width=900>
 
    **Example 3: Data Extraction**
    - Prompt: "Extract the name, email, and phone number from this text: [sample unstructured text]"
    - Review JSON output
+
+        <img src='images/2025-12-15-05-08-48.png' width=800>
 
    **Example 4: Summarization**
    - Prompt: "Summarize this article in 3 bullet points: [paste long article]"
