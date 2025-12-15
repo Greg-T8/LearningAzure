@@ -654,16 +654,15 @@ az policy assignment delete --name $GUID
 
 <img src='images/2025-11-20-04-09-47.png' width=550>
 
-
-
 ### Assign Additional Built-in Policies
 
 #### Require a tag on resource groups
 
 ```powershell
-# PowerShell
+$subscription = Get-AzContext
+
 $definition = Get-AzPolicyDefinition | Where-Object { 
-    $_.Properties.DisplayName -eq 'Require a tag on resource groups' 
+    $_.DisplayName -eq 'Require a tag on resource groups' 
 }
 
 $policyParam = @{
@@ -673,7 +672,7 @@ $policyParam = @{
 New-AzPolicyAssignment `
     -Name 'require-costcenter-tag-rg' `
     -DisplayName 'Require CostCenter Tag on Resource Groups' `
-    -Scope "/subscriptions/$($subscription.Id)" `
+    -Scope "/subscriptions/$($subscription.SubscriptionId)" `
     -PolicyDefinition $definition `
     -PolicyParameterObject $policyParam
 ```
