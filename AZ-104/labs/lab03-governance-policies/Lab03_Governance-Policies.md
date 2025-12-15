@@ -658,6 +658,8 @@ az policy assignment delete --name $GUID
 
 #### Require a tag on resource groups
 
+This command creates a policy assignment that requires all resource groups to have a `CostCenter` tag. 
+
 ```powershell
 # PowerShell
 $subscriptionId = Get-AzContext | Select-Object -ExpandProperty Subscription
@@ -678,13 +680,13 @@ New-AzPolicyAssignment `
     -PolicyParameterObject $policyParam
 ```
 
-This command creates a policy assignment that requires all resource groups to have a `CostCenter` tag. 
-
-<img src='images/2025-12-15-03-54-28.png' width=700>
-
 The policy definition rule accepts 'tagName' as a parameter, which is set to 'CostCenter' in this case.
 
 <img src='images/2025-12-15-03-59-03.png' width=500>
+
+Output:
+
+<img src='images/2025-12-15-03-54-28.png' width=700>
 
 
 ```bash
