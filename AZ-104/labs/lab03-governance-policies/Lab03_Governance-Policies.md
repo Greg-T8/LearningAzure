@@ -659,7 +659,8 @@ az policy assignment delete --name $GUID
 #### Require a tag on resource groups
 
 ```powershell
-$subscription = Get-AzContext
+# PowerShell
+$subscriptionId = Get-AzContext | Select-Object -ExpandProperty Subscription
 
 $definition = Get-AzPolicyDefinition | Where-Object { 
     $_.DisplayName -eq 'Require a tag on resource groups' 
@@ -672,10 +673,19 @@ $policyParam = @{
 New-AzPolicyAssignment `
     -Name 'require-costcenter-tag-rg' `
     -DisplayName 'Require CostCenter Tag on Resource Groups' `
-    -Scope "/subscriptions/$($subscription.SubscriptionId)" `
+    -Scope "/subscriptions/$($subscriptionId)" `
     -PolicyDefinition $definition `
     -PolicyParameterObject $policyParam
 ```
+
+This command creates a policy assignment that requires all resource groups to have a `CostCenter` tag. 
+
+<img src='images/2025-12-15-03-54-28.png' width=700>
+
+The policy definition rule accepts 'tagName' as a parameter, which is set to 'CostCenter' in this case.
+
+<img src='images/2025-12-15-03-59-03.png' width=500>
+
 
 ```bash
 # Azure CLI
