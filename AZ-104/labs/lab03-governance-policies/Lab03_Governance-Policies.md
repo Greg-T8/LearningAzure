@@ -574,14 +574,12 @@ az policy assignment create \
 
 **Note:** the use of `jq` is optional but provides color formatting and better readability for JSON output in the terminal.
 
-
 ```bash
 # Verify the assignment
 az policy assignment show --name 'allowed-locations-policy'
 ```
 
 <img src='images/2025-11-13-04-08-30.png' width=600>
-
 
 ### Test the Policy
 
@@ -658,7 +656,11 @@ az policy assignment delete --name $GUID
 
 #### Require a tag on resource groups
 
-This command creates a policy assignment that requires all resource groups to have a `CostCenter` tag. 
+The following PowerShell and Az commands command create a policy assignment that requires all resource groups to have a `CostCenter` tag.
+
+The policy definition rule accepts `tagName` as a parameter, which is set to `CostCenter` in this case.
+
+<img src='images/2025-12-15-03-59-03.png' width=500>
 
 ```powershell
 # PowerShell
@@ -680,14 +682,7 @@ New-AzPolicyAssignment `
     -PolicyParameterObject $policyParam
 ```
 
-The policy definition rule accepts 'tagName' as a parameter, which is set to 'CostCenter' in this case.
-
-<img src='images/2025-12-15-03-59-03.png' width=500>
-
-Output:
-
 <img src='images/2025-12-15-03-54-28.png' width=700>
-
 
 ```bash
 # Azure CLI
