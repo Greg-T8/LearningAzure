@@ -29,18 +29,18 @@ This repository documents my hands-on learning journey through Microsoft Azure c
 
 | Date | AI-900 | AZ-104 | Total |
 |------|--------|--------|-------|
-| Mon, Dec 15 | 0 | 🟢 1 | **1** |
+| Mon, Dec 15 | 0 | 🟢 4 | **4** |
 | Sun, Dec 14 | 0 | 0 | 0 |
 | Sat, Dec 13 | 0 | 0 | 0 |
 | Fri, Dec 12 | 0 | 0 | 0 |
 | Thu, Dec 11 | 0 | 0 | 0 |
 | Wed, Dec 10 | 0 | 0 | 0 |
 | Tue, Dec 09 | 0 | 0 | 0 |
-| **Total** | **0** | **1** | **1** |
+| **Total** | **0** | **4** | **4** |
 
 *🟢 = Activity on this day*
 
-*Last updated: December 15, 2025 at 09:49 UTC*
+*Last updated: December 15, 2025 at 09:59 UTC*
 
 <!-- COMMIT_STATS_END -->
 
