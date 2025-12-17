@@ -718,6 +718,9 @@ The `[?displayName && contains(...)]` syntax ensures that only assignments with 
 
 <img src='images/2025-12-17-04-41-57.png' width=700>
 
+Test resource group creation to confirm policy:
+
+<img src='images/2025-12-17-04-47-05.png' width=700>
 
 #### Allowed virtual machine size SKUs
 
