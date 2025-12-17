@@ -686,17 +686,38 @@ New-AzPolicyAssignment `
 
 ```bash
 # Azure CLI
+subscriptionId=$(az account show --query id -o tsv)
+
+definitionId=$( \
+    az policy definition list \
+        --query "[?contains(displayName, 'Require a tag on resource groups')].name" \
+        -o tsv
+)
+
 az policy assignment create \
     --name 'require-costcenter-tag-rg' \
     --display-name 'Require CostCenter Tag on Resource Groups' \
-    --scope /subscriptions/<your-subscription-id> \
-    --policy "96670d01-0a4d-4649-9c89-2d3abc0a5025" \
+    --scope /subscriptions/$subscriptionId \
+    --policy $definitionId \
     --params '{
         "tagName": {
             "value": "CostCenter"
         }
     }'
 ```
+
+<img src='images/2025-12-17-04-29-46.png' width=700>
+
+To confirm the assignment:
+
+```bash
+az policy assignment list --query "[?displayName && contains(displayName, 'CostCenter')].displayName" -o tsv
+```
+
+The `[?displayName && contains(...)]` syntax ensures that only assignments with a defined display name are evaluated, preventing errors from null values.
+
+<img src='images/2025-12-17-04-41-57.png' width=700>
+
 
 #### Allowed virtual machine size SKUs
 
