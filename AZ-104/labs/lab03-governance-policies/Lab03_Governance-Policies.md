@@ -744,6 +744,8 @@ New-AzPolicyAssignment `
     -PolicyParameterObject $policyParam
 ```
 
+
+
 <img src='images/2025-12-18-02-53-27.png' width=600>
 
 ### Using Bicep for Policy Assignment
@@ -1000,6 +1002,23 @@ az policy state list --subscription <your-subscription-id> \
 - **During policy testing**: Quickly validate policy definitions during development
 - **For compliance audits**: Generate up-to-date compliance reports on demand
 - **After remediation**: Verify that remediation tasks successfully fixed non-compliant resources
+
+### Disable Policy Assignment
+
+```bash
+# List current policy assignments
+ az policy assignment list | jq '.[] | {name, displayName, enforcementMode}'
+```
+<img src='images/2025-12-18-03-11-50.png' width=600>
+
+```bash
+# Disable a policy assignment by setting enforcement mode to DoNotEnforce
+az policy assignment update --name allowed-vm-skus --enforcement-mode DoNotEnforce
+```
+
+<img src='images/2025-12-18-03-18-17.png' width=600>
+
+
 
 ### Exam Insights
 
