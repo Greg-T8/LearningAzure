@@ -750,6 +750,14 @@ New-AzPolicyAssignment `
 
 ### Using Bicep for Policy Assignment
 
+```bash
+# Get the policy definition ID of "Allowed locations" policy
+az policy definition list --query "[?contains(displayName, 'Allowed locations')]" \
+    | jq '.[] | {name, displayName}'
+```
+
+<img src='images/2025-12-18-03-31-25.png' width=600>
+
 Create `policy-assignment.bicep`:
 
 ```bicep
