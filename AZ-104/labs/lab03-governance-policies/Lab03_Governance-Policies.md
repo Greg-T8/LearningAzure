@@ -726,8 +726,10 @@ Test resource group creation to confirm policy:
 
 ```powershell
 # PowerShell
+$subscriptionId = Get-AzContext | Select-Object -ExpandProperty Subscription
+
 $definition = Get-AzPolicyDefinition | Where-Object { 
-    $_.Properties.DisplayName -eq 'Allowed virtual machine size SKUs' 
+    $_.DisplayName -eq 'Allowed virtual machine size SKUs' 
 }
 
 $policyParam = @{
@@ -737,10 +739,12 @@ $policyParam = @{
 New-AzPolicyAssignment `
     -Name 'allowed-vm-skus' `
     -DisplayName 'Allowed VM SKUs - Budget-Friendly Only' `
-    -Scope "/subscriptions/$($subscription.Id)" `
+    -Scope "/subscriptions/$($subscriptionId)" `
     -PolicyDefinition $definition `
     -PolicyParameterObject $policyParam
 ```
+
+<img src='images/2025-12-18-02-53-27.png' width=600>
 
 ### Using Bicep for Policy Assignment
 
