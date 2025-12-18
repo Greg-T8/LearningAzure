@@ -758,6 +758,8 @@ az policy definition list --query "[?contains(displayName, 'Allowed locations')]
 
 <img src='images/2025-12-18-03-31-25.png' width=600>
 
+Resulting GUID to be used in Bicep template: `e56962a6-4747-49cd-b67b-bf8b01975c4c`
+
 Create `policy-assignment.bicep`:
 
 ```bicep
@@ -770,7 +772,7 @@ param allowedLocations array = [
   'westus'
 ]
 
-resource policyAssignment 'Microsoft.Authorization/policyAssignments@2023-04-01' = {
+resource policyAssignment 'Microsoft.Authorization/policyAssignments@2025-03-01' = {
   name: policyAssignmentName
   properties: {
     displayName: 'Allowed Locations - East US and West US Only'
@@ -786,6 +788,11 @@ resource policyAssignment 'Microsoft.Authorization/policyAssignments@2023-04-01'
 
 output policyAssignmentId string = policyAssignment.id
 ```
+
+**References:**
+
+- [Azure Policy assignment structure](https://learn.microsoft.com/en-us/azure/governance/policy/concepts/assignment-structure?utm_source=chatgpt.com#policy-definition-id-and-version-preview)
+- [Microsoft.Authorization policyAssignments](https://learn.microsoft.com/en-us/azure/templates/microsoft.authorization/policyassignments?pivots=deployment-language-bicep)
 
 Deploy the Bicep template:
 

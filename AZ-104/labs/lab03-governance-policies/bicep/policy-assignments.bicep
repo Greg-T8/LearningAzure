@@ -13,7 +13,7 @@ param policyAssignmentName string = 'allowed-locations-policy'
 param policyDefinitionId string = '/providers/Microsoft.Authorization/policyDefinitions/e56962a6-4747-49cd-b67b-bf8b01975c4c'
 
 // Assign Allowed Locations policy
-resource allowedLocationsAssignment 'Microsoft.Authorization/policyAssignments@2023-04-01' = {
+resource allowedLocationsAssignment 'Microsoft.Authorization/policyAssignments@2025-03-01' = {
   name: policyAssignmentName
   properties: {
     displayName: 'Allowed Locations - East US and West US Only'
