@@ -141,60 +141,60 @@ Quick reference of all commands used in this lab, organized by tool.
 
 ### PowerShell Commands
 
-| Command | Purpose | Exercise |
-|---------|---------|----------|
-| `Get-AzPolicyDefinition` | List and query policy definitions | 1, 2 |
-| `Get-AzPolicyAssignment` | List policy assignments | 1, 2, 3 |
-| `New-AzPolicyDefinition` | Create custom policy definition | 3 |
-| `New-AzPolicyAssignment` | Assign policy to scope | 2, 3, 4 |
-| `Remove-AzPolicyAssignment` | Remove policy assignment | 2, 5 |
-| `Get-AzPolicyState` | Get policy compliance state | 2, 5 |
-| `Start-AzPolicyComplianceScan` | Trigger on-demand policy evaluation scan | 2 |
-| `Start-AzPolicyRemediation` | Start remediation task | 5 |
-| `Get-AzPolicySetDefinition` | List policy initiatives | 4 |
-| `New-AzPolicySetDefinition` | Create policy initiative | 4 |
-| `New-AzResourceLock` | Create resource lock | 6 |
-| `Get-AzResourceLock` | List resource locks | 6 |
-| `Remove-AzResourceLock` | Remove resource lock | 6 |
-| `New-AzTag` | Create tag on resource | 7 |
-| `Update-AzTag` | Update tags on resource | 7 |
-| `Get-AzTag` | List tags | 7 |
-| `Move-AzResource` | Move resource between groups/subscriptions | 8 |
-| `Get-AzManagementGroup` | List management groups | 9 |
-| `New-AzManagementGroup` | Create management group | 9 |
+| Command                        | Purpose                                    | Exercise |
+| ------------------------------ | ------------------------------------------ | -------- |
+| `Get-AzPolicyDefinition`       | List and query policy definitions          | 1, 2     |
+| `Get-AzPolicyAssignment`       | List policy assignments                    | 1, 2, 3  |
+| `New-AzPolicyDefinition`       | Create custom policy definition            | 3        |
+| `New-AzPolicyAssignment`       | Assign policy to scope                     | 2, 3, 4  |
+| `Remove-AzPolicyAssignment`    | Remove policy assignment                   | 2, 5     |
+| `Get-AzPolicyState`            | Get policy compliance state                | 2, 5     |
+| `Start-AzPolicyComplianceScan` | Trigger on-demand policy evaluation scan   | 2        |
+| `Start-AzPolicyRemediation`    | Start remediation task                     | 5        |
+| `Get-AzPolicySetDefinition`    | List policy initiatives                    | 4        |
+| `New-AzPolicySetDefinition`    | Create policy initiative                   | 4        |
+| `New-AzResourceLock`           | Create resource lock                       | 6        |
+| `Get-AzResourceLock`           | List resource locks                        | 6        |
+| `Remove-AzResourceLock`        | Remove resource lock                       | 6        |
+| `New-AzTag`                    | Create tag on resource                     | 7        |
+| `Update-AzTag`                 | Update tags on resource                    | 7        |
+| `Get-AzTag`                    | List tags                                  | 7        |
+| `Move-AzResource`              | Move resource between groups/subscriptions | 8        |
+| `Get-AzManagementGroup`        | List management groups                     | 9        |
+| `New-AzManagementGroup`        | Create management group                    | 9        |
 
 ### Azure CLI Commands
 
-| Command | Purpose | Exercise |
-|---------|---------|----------|
-| `az policy definition list` | List policy definitions | 1, 2 |
-| `az policy assignment list` | List policy assignments | 1, 2, 3 |
-| `az policy definition create` | Create custom policy definition | 3 |
-| `az policy assignment create` | Assign policy to scope | 2, 3, 4 |
-| `az policy assignment delete` | Remove policy assignment | 2, 5 |
-| `az policy state list` | Get policy compliance state | 2, 5 |
-| `az policy state trigger-scan` | Trigger on-demand policy evaluation scan | 2 |
-| `az policy remediation create` | Start remediation task | 5 |
-| `az policy set-definition list` | List policy initiatives | 4 |
-| `az policy set-definition create` | Create policy initiative | 4 |
-| `az lock create` | Create resource lock | 6 |
-| `az lock list` | List resource locks | 6 |
-| `az lock delete` | Remove resource lock | 6 |
-| `az tag create` | Create tag on resource | 7 |
-| `az tag update` | Update tags on resource | 7 |
-| `az tag list` | List tags | 7 |
-| `az resource move` | Move resource between groups/subscriptions | 8 |
-| `az account management-group list` | List management groups | 9 |
-| `az account management-group create` | Create management group | 9 |
+| Command                              | Purpose                                    | Exercise |
+| ------------------------------------ | ------------------------------------------ | -------- |
+| `az policy definition list`          | List policy definitions                    | 1, 2     |
+| `az policy assignment list`          | List policy assignments                    | 1, 2, 3  |
+| `az policy definition create`        | Create custom policy definition            | 3        |
+| `az policy assignment create`        | Assign policy to scope                     | 2, 3, 4  |
+| `az policy assignment delete`        | Remove policy assignment                   | 2, 5     |
+| `az policy state list`               | Get policy compliance state                | 2, 5     |
+| `az policy state trigger-scan`       | Trigger on-demand policy evaluation scan   | 2        |
+| `az policy remediation create`       | Start remediation task                     | 5        |
+| `az policy set-definition list`      | List policy initiatives                    | 4        |
+| `az policy set-definition create`    | Create policy initiative                   | 4        |
+| `az lock create`                     | Create resource lock                       | 6        |
+| `az lock list`                       | List resource locks                        | 6        |
+| `az lock delete`                     | Remove resource lock                       | 6        |
+| `az tag create`                      | Create tag on resource                     | 7        |
+| `az tag update`                      | Update tags on resource                    | 7        |
+| `az tag list`                        | List tags                                  | 7        |
+| `az resource move`                   | Move resource between groups/subscriptions | 8        |
+| `az account management-group list`   | List management groups                     | 9        |
+| `az account management-group create` | Create management group                    | 9        |
 
 ### Terraform Commands
 
-| Command | Purpose | Exercise |
-|---------|---------|----------|
-| `terraform init` | Initialize Terraform working directory | 2, 3, 4, 6, 7 |
-| `terraform plan` | Preview infrastructure changes | 2, 3, 4, 6, 7 |
-| `terraform apply` | Apply Terraform configuration | 2, 3, 4, 6, 7 |
-| `terraform destroy` | Destroy Terraform-managed resources | All |
+| Command             | Purpose                                | Exercise      |
+| ------------------- | -------------------------------------- | ------------- |
+| `terraform init`    | Initialize Terraform working directory | 2, 3, 4, 6, 7 |
+| `terraform plan`    | Preview infrastructure changes         | 2, 3, 4, 6, 7 |
+| `terraform apply`   | Apply Terraform configuration          | 2, 3, 4, 6, 7 |
+| `terraform destroy` | Destroy Terraform-managed resources    | All           |
 
 ### Bicep Commands
 
@@ -251,15 +251,15 @@ A **policy assignment** is the act of assigning a policy definition to a specifi
 
 Common policy effects:
 
-| Effect | Description | Use Case |
-|--------|-------------|----------|
-| **Deny** | Prevents resource creation/modification | Enforce region restrictions, SKU limitations |
-| **Audit** | Creates warning event in activity log | Monitor compliance without blocking |
-| **AuditIfNotExists** | Audits if related resource doesn't exist | Check for diagnostic settings, extensions |
-| **Append** | Adds fields to the resource during creation | Add default tags |
-| **Modify** | Adds, updates, or removes properties | Modify tags, enable features |
-| **DeployIfNotExists** | Deploys resource if it doesn't exist | Auto-deploy diagnostic settings, extensions |
-| **Disabled** | Policy is not evaluated | Temporarily disable without unassigning |
+| Effect                | Description                                 | Use Case                                     |
+| --------------------- | ------------------------------------------- | -------------------------------------------- |
+| **Deny**              | Prevents resource creation/modification     | Enforce region restrictions, SKU limitations |
+| **Audit**             | Creates warning event in activity log       | Monitor compliance without blocking          |
+| **AuditIfNotExists**  | Audits if related resource doesn't exist    | Check for diagnostic settings, extensions    |
+| **Append**            | Adds fields to the resource during creation | Add default tags                             |
+| **Modify**            | Adds, updates, or removes properties        | Modify tags, enable features                 |
+| **DeployIfNotExists** | Deploys resource if it doesn't exist        | Auto-deploy diagnostic settings, extensions  |
+| **Disabled**          | Policy is not evaluated                     | Temporarily disable without unassigning      |
 
 **Order of Evaluation:**
 
@@ -402,7 +402,7 @@ You must specify the GUID; you cannot use the display name.
 
 Azure Policy can be assigned at multiple scopes:
 
-```
+```txt
 Management Group (highest)
     ↓
 Subscription
@@ -744,8 +744,6 @@ New-AzPolicyAssignment `
     -PolicyParameterObject $policyParam
 ```
 
-
-
 <img src='images/2025-12-18-02-53-27.png' width=600>
 
 ### Using Bicep for Policy Assignment
@@ -803,6 +801,7 @@ New-AzSubscriptionDeployment `
     -Location 'eastus' `
     -TemplateFile './bicep/policy-assignment.bicep'
 ```
+<img src='images/2026-01-06-06-07-43.png' width=800>
 
 ```bash
 # Azure CLI
@@ -811,6 +810,7 @@ az deployment sub create \
     --location eastus \
     --template-file ./bicep/policy-assignment.bicep
 ```
+<img src='images/2026-01-06-06-24-38.png' width=800>
 
 ### Using Terraform for Policy Assignment
 
@@ -1024,6 +1024,7 @@ az policy state list --subscription <your-subscription-id> \
 # List current policy assignments
  az policy assignment list | jq '.[] | {name, displayName, enforcementMode}'
 ```
+
 <img src='images/2025-12-18-03-11-50.png' width=600>
 
 ```bash
@@ -1032,8 +1033,6 @@ az policy assignment update --name allowed-vm-skus --enforcement-mode DoNotEnfor
 ```
 
 <img src='images/2025-12-18-03-18-17.png' width=600>
-
-
 
 ### Exam Insights
 
