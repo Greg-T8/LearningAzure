@@ -206,10 +206,10 @@ resource "azurerm_policy_definition" "audit_vm_backup" {
     then = {
       effect = "auditIfNotExists"
       details = {
-        type = "Microsoft.RecoveryServices/backupprotecteditems"
+        type = "Microsoft.RecoveryServices/backupProtectedItems"
         existenceCondition = {
-          field  = "Microsoft.RecoveryServices/backupprotecteditems/friendlyName"
-          equals = "[field('name')]"
+          field  = "Microsoft.RecoveryServices/backupProtectedItems/policyId"
+          exists = "true"
         }
       }
     }

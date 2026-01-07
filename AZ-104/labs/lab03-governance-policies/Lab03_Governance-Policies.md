@@ -801,6 +801,7 @@ New-AzSubscriptionDeployment `
     -Location 'eastus' `
     -TemplateFile './bicep/policy-assignment.bicep'
 ```
+
 <img src='images/2026-01-06-06-07-43.png' width=800>
 
 ```bash
@@ -810,6 +811,7 @@ az deployment sub create \
     --location eastus \
     --template-file ./bicep/policy-assignment.bicep
 ```
+
 <img src='images/2026-01-06-06-24-38.png' width=800>
 
 ### Using Terraform for Policy Assignment
@@ -878,6 +880,8 @@ terraform init
 terraform plan
 terraform apply -auto-approve
 ```
+
+See [main.tf](terraform/main.tf) for a more comprehensive example. 
 
 ### Check Policy Compliance
 
