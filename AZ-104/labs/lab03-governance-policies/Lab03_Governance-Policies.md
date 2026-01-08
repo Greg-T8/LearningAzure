@@ -924,17 +924,33 @@ Get-AzPolicyState -Filter "PolicyAssignmentName eq 'allowed-locations-policy' an
 #### Using Azure CLI
 
 ```bash
+subscriptionId=$(az account show --query id -o tsv)
+
 # Get compliance state for all policy assignments
-az policy state list --subscription <your-subscription-id> \
-    --query "[].{PolicyAssignment:policyAssignmentName, ComplianceState:complianceState, Resource:resourceId}" \
-    --output table
+ az policy state list --subscription $subscriptionId \
+        --query "reverse(sort_by( \
+                [].{ \
+                        PolicyAssignment:policyAssignmentName, \
+                        ComplianceState:complianceState, \
+                        ResourceGroup:resourceGroup, \
+                        ResourceType:resourceType \
+                }, \
+                &PolicyAssignment))" \
+        --output table \
+        | column -t
 
 # Get compliance summary
-az policy state summarize --subscription <your-subscription-id>
+az policy state summarize --subscription $subscriptionId --query results
 
 # Get non-compliant resources for a specific policy
 az policy state list --filter "policyAssignmentName eq 'allowed-locations-policy' and complianceState eq 'NonCompliant'"
 ```
+
+<img src='images/2026-01-08-04-29-51.png' width=800>
+
+<img src='images/2026-01-08-04-41-06.png' width=700>
+
+<img src='images/2026-01-08-04-44-46.png' width=700>
 
 ### Trigger On-Demand Policy Evaluation Scan
 
