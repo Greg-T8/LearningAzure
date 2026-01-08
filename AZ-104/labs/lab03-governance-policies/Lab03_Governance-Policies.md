@@ -881,7 +881,7 @@ terraform plan
 terraform apply -auto-approve
 ```
 
-See [main.tf](terraform/main.tf) for a more comprehensive example. 
+See [main.tf](terraform/main.tf) for a more comprehensive example.
 
 ### Check Policy Compliance
 
@@ -895,7 +895,7 @@ After assigning policies, check compliance status:
 4. Click on a policy assignment to see detailed compliance data
 5. Review compliant and non-compliant resources
 
-<img src='images/policy-compliance.png' width=700>
+<img src='images/2026-01-08-03-27-20.png' width=800>
 
 #### Using PowerShell
 
