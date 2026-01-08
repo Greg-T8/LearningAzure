@@ -919,7 +919,7 @@ Get-AzPolicyState -Filter "PolicyAssignmentName eq 'allowed-locations-policy' an
 
 <img src='images/2026-01-08-03-38-30.png' width=450>
 
-<img src='images/2026-01-08-03-44-16.png' width=700>
+<img src='images/2026-01-08-03-44-16.png' width=800>
 
 #### Using Azure CLI
 
