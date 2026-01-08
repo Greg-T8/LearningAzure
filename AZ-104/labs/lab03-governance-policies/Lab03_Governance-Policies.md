@@ -900,17 +900,26 @@ After assigning policies, check compliance status:
 #### Using PowerShell
 
 ```powershell
+$subscriptionId = Get-AzContext | Select-Object -ExpandProperty Subscription
+
 # Get compliance state for all policy assignments
-Get-AzPolicyState -SubscriptionId $subscription.Id | 
-    Select-Object PolicyAssignmentName, ComplianceState, ResourceId | 
+Get-AzPolicyState -SubscriptionId $subscriptionId | 
+    Select-Object PolicyAssignmentName, ComplianceState, ResourceGroup, ResourceType | 
+    Sort-Object PolicyAssignmentName |
     Format-Table -AutoSize
 
 # Get compliance summary
-Get-AzPolicyStateSummary -SubscriptionId $subscription.Id
+Get-AzPolicyStateSummary -SubscriptionId $subscriptionId
 
-# Get non-compliant resources for a specific policy
+# Get non-compliant resources for a specific policy (using OData filter)
 Get-AzPolicyState -Filter "PolicyAssignmentName eq 'allowed-locations-policy' and ComplianceState eq 'NonCompliant'"
 ```
+
+<img src='images/2026-01-08-03-36-19.png' width=700>
+
+<img src='images/2026-01-08-03-38-30.png' width=450>
+
+<img src='images/2026-01-08-03-44-16.png' width=700>
 
 #### Using Azure CLI
 
