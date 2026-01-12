@@ -982,20 +982,15 @@ $job = Start-AzPolicyComplianceScan -AsJob
 # Check the job status
 $job
 
-# Wait for the job to complete
+# Wait for the job to complete - holds terminal action until done
 $job | Wait-Job
 
 # Get the job results
 $job | Receive-Job
 ```
-
 **Example output while running:**
 
-```powershell
-Id     Name              PSJobTypeName     State    HasMoreData     Location   Command
---     ----              -------------     -----    -----------     --------   -------
-2      Long Running O... AzureLongRunni... Running  True            localhost  Start-AzPolicyCompliance...
-```
+<img src='images/2026-01-12-03-21-12.png' width=600>
 
 When the scan completes, the `State` property changes to `Completed`.
 
@@ -1012,6 +1007,8 @@ az policy state trigger-scan --resource-group "rg-governance-lab"
 az policy state trigger-scan --no-wait
 ```
 
+<img src='images/2026-01-12-03-27-58.png' width=600>
+
 **Note:** The Azure CLI command runs synchronously by default and waits for the scan to complete before returning. Use the `--no-wait` parameter to run it asynchronously.
 
 #### Verify Compliance After Scan
@@ -1019,25 +1016,33 @@ az policy state trigger-scan --no-wait
 After the on-demand scan completes, verify the updated compliance data:
 
 ```powershell
+$subscriptionId = Get-AzContext | Select-Object -ExpandProperty Subscription
+
 # PowerShell - Get compliance summary
-Get-AzPolicyStateSummary -SubscriptionId $subscription.Id
+Get-AzPolicyStateSummary -SubscriptionId $subscriptionId
 
 # PowerShell - Get detailed compliance state
-Get-AzPolicyState -SubscriptionId $subscription.Id | 
+Get-AzPolicyState -SubscriptionId $subscriptionId | 
     Select-Object PolicyAssignmentName, ComplianceState, ResourceId, Timestamp | 
     Sort-Object Timestamp -Descending | 
     Format-Table -AutoSize
 ```
 
+<img src='images/2026-01-12-03-29-47.png' width=700>
+
 ```bash
 # Azure CLI - Get compliance summary
-az policy state summarize --subscription <your-subscription-id>
+subscriptionId=$(az account show --query id -o tsv)
+
+az policy state summarize --subscription $subscriptionId --query results
 
 # Azure CLI - Get detailed compliance state sorted by timestamp
-az policy state list --subscription <your-subscription-id> \
+az policy state list --subscription $subscriptionId \
     --query "[].{PolicyAssignment:policyAssignmentName, ComplianceState:complianceState, Resource:resourceId, Timestamp:timestamp} | sort_by(@, &Timestamp) | reverse(@)" \
     --output table
 ```
+
+<img src='images/2026-01-12-04-08-59.png' width=500>
 
 #### When to Use On-Demand Scans
 
