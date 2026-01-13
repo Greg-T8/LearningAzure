@@ -1089,7 +1089,7 @@ az policy assignment update --name allowed-vm-skus --enforcement-mode DoNotEnfor
 - [Tutorial: Create a custom policy definition](https://learn.microsoft.com/en-us/azure/governance/policy/tutorials/create-custom-policy-definition)
 - [Azure Policy definition structure](https://learn.microsoft.com/en-us/azure/governance/policy/concepts/definition-structure)
 - [Azure Policy effects](https://learn.microsoft.com/en-us/azure/governance/policy/concepts/effects)
-- [Policy functions](https://learn.microsoft.com/en-us/azure/governance/policy/concepts/definition-structure#policy-functions)
+- [Policy conditions](https://learn.microsoft.com/en-us/azure/governance/policy/concepts/definition-structure-policy-rule#conditions)
 - [Author policies for array properties](https://learn.microsoft.com/en-us/azure/governance/policy/how-to/author-policies-for-arrays)
 
 ### Scenario: Enforce Naming Conventions
