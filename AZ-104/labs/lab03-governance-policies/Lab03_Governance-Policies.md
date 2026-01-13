@@ -1163,6 +1163,8 @@ Create `storage-naming-policy.json`:
 #### Using PowerShell to Create Custom Policy
 
 ```powershell
+$subscriptionId = Get-AzContext | Select-Object -ExpandProperty Subscription
+
 # Create custom policy definition from JSON file
 $policyDef = New-AzPolicyDefinition `
     -Name 'storage-naming-convention' `
@@ -1173,15 +1175,16 @@ $policyDef = New-AzPolicyDefinition `
     -Metadata '{"category":"Storage"}'
 
 # View the created policy
-$policyDef | Select-Object Name, @{Name="DisplayName";Expression={$_.Properties.DisplayName}}, PolicyDefinitionId
+$policyDef | Select-Object Name, @{Name="DisplayName";Expression={$_.DisplayName}}, Id 
 
 # Assign the custom policy
 New-AzPolicyAssignment `
     -Name 'enforce-storage-naming' `
     -DisplayName 'Enforce Storage Naming Convention' `
-    -Scope "/subscriptions/$($subscription.Id)" `
+    -Scope "/subscriptions/$subscriptionId" `
     -PolicyDefinition $policyDef
 ```
+<img src='images/2026-01-13-04-18-07.png' width=800>
 
 #### Using Azure CLI to Create Custom Policy
 
