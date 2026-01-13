@@ -1184,6 +1184,7 @@ New-AzPolicyAssignment `
     -Scope "/subscriptions/$subscriptionId" `
     -PolicyDefinition $policyDef
 ```
+
 <img src='images/2026-01-13-04-18-07.png' width=800>
 
 #### Using Azure CLI to Create Custom Policy
