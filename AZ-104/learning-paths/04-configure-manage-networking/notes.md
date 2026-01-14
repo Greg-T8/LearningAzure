@@ -1,10 +1,3 @@
-# -------------------------------------------------------------------------
-# Document: Learning Path 4 - Configure and Manage Virtual Networks
-# Description: Notes from Microsoft Learn modules on Azure networking
-# Context: AZ-104 study preparation (Microsoft Azure Administrator)
-# Author: Greg Tate
-# -------------------------------------------------------------------------
-
 # Learning Path 4: Configure and Manage Virtual Networks
 
 **Link:** [Microsoft Learn](https://learn.microsoft.com/en-us/training/paths/az-104-manage-virtual-networks/)

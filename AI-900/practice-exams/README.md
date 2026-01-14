@@ -1,6 +1,6 @@
-# Practice Exams - AZ-104
+# Practice Exams - AI-900
 
-**Platform:** [MeasureUp](https://www.measureup.com/)
+**Official Practice Assessment:** [Microsoft Learn](https://learn.microsoft.com/en-us/credentials/certifications/exams/ai-900/practice/assessment?assessment-type=practice&assessmentId=26)
 
 ---
 
@@ -10,7 +10,6 @@
 |------|------|-------|-----------|------|-------|
 | | Practice | | | | |
 | | Practice | | | | |
-| | Certification | | | | |
 
 **Target Score:** 80%+ before scheduling exam (passing is 700/1000 ≈ 70%)
 
@@ -20,46 +19,39 @@
 
 | Domain | Weight | Best Score | Weak Areas |
 |--------|--------|------------|------------|
-| 1. Identities & Governance | 20-25% | — | |
-| 2. Storage | 15-20% | — | |
-| 3. Compute | 20-25% | — | |
-| 4. Networking | 15-20% | — | |
-| 5. Monitoring & Backup | 10-15% | — | |
+| 1. AI Workloads & Considerations | 15-20% | — | |
+| 2. Machine Learning on Azure | 15-20% | — | |
+| 3. Computer Vision Workloads | 15-20% | — | |
+| 4. NLP Workloads | 15-20% | — | |
+| 5. Generative AI Workloads | 20-25% | — | |
 
 ---
 
 ## 🔴 Weak Area Review
 
-### Domain 1: Identities & Governance
+### Domain 1: AI Workloads & Considerations
 <!-- Add notes on missed questions -->
 
-### Domain 2: Storage
+### Domain 2: Machine Learning on Azure
 <!-- Add notes on missed questions -->
 
-### Domain 3: Compute
+### Domain 3: Computer Vision Workloads
 <!-- Add notes on missed questions -->
 
-### Domain 4: Networking
+### Domain 4: NLP Workloads
 <!-- Add notes on missed questions -->
 
-### Domain 5: Monitoring & Backup
+### Domain 5: Generative AI Workloads
 <!-- Add notes on missed questions -->
-
----
-
-## 📁 Review Notes
-
-Create detailed review notes for commonly missed topics:
-- `review-notes/topic-name.md`
 
 ---
 
 ## 🎯 Exam Readiness Checklist
 
 - [ ] Completed all Microsoft Learn paths
-- [ ] Completed all Microsoft GitHub labs
+- [ ] Completed key Microsoft GitHub labs
 - [ ] Watched John Savill Study Cram
-- [ ] Scored 80%+ on 3 consecutive practice exams
+- [ ] Scored 80%+ on 3 consecutive practice assessments
 - [ ] Reviewed all weak areas
 - [ ] Scheduled exam date: ___________
 

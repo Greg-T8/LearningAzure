@@ -1,10 +1,3 @@
-# -------------------------------------------------------------------------
-# Document: O'Reilly Learning Platform Index
-# Description: Track progress through O'Reilly AZ-104 courses
-# Context: AZ-104 study preparation (Microsoft Azure Administrator)
-# Author: Greg Tate
-# -------------------------------------------------------------------------
-
 # O'Reilly Learning Platform - AZ-104 Courses
 
 **Platform:** [O'Reilly Learning](https://learning.oreilly.com/)

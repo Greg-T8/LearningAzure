@@ -1,10 +1,3 @@
-# -------------------------------------------------------------------------
-# Document: Custom Labs Archive
-# Description: Archived custom scenario-based labs (no longer part of active study)
-# Context: AZ-104 study preparation (Microsoft Azure Administrator)
-# Author: Greg Tate
-# -------------------------------------------------------------------------
-
 # Custom Labs Archive
 
 **Status:** Archived — Not part of active study strategy

@@ -1,10 +1,3 @@
-# -------------------------------------------------------------------------
-# Document: Microsoft Learn - Learning Paths Index
-# Description: Track progress through official Microsoft Learn modules for AZ-104
-# Context: AZ-104 study preparation (Microsoft Azure Administrator)
-# Author: Greg Tate
-# -------------------------------------------------------------------------
-
 # Microsoft Learn - AZ-104 Learning Paths
 
 **Objective:** Complete all official Microsoft Learn modules mapped to AZ-104 exam objectives.

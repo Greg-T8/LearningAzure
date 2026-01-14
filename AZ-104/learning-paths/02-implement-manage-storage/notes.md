@@ -1,10 +1,3 @@
-# -------------------------------------------------------------------------
-# Document: Learning Path 2 - Implement and Manage Storage
-# Description: Notes from Microsoft Learn modules on Azure storage
-# Context: AZ-104 study preparation (Microsoft Azure Administrator)
-# Author: Greg Tate
-# -------------------------------------------------------------------------
-
 # Learning Path 2: Implement and Manage Storage
 
 **Link:** [Microsoft Learn](https://learn.microsoft.com/en-us/training/paths/az-104-manage-storage/)

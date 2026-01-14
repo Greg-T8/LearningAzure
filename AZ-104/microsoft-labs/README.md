@@ -1,10 +1,3 @@
-# -------------------------------------------------------------------------
-# Document: Microsoft Learning GitHub Labs Index
-# Description: Track progress through official Microsoft AZ-104 labs
-# Context: AZ-104 study preparation (Microsoft Azure Administrator)
-# Author: Greg Tate
-# -------------------------------------------------------------------------
-
 # Microsoft Learning - AZ-104 Official Labs
 
 **Repository:** [MicrosoftLearning/AZ-104-MicrosoftAzureAdministrator](https://github.com/MicrosoftLearning/AZ-104-MicrosoftAzureAdministrator)

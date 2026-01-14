@@ -1,216 +1,168 @@
-# AI-900: Microsoft Azure AI Fundamentals
+# AI-900: Microsoft Azure AI Fundamentals — Study Guide
 
-**Purpose:**  
-Hands-on labs and study materials to prepare for the **Microsoft Certified: Azure AI Fundamentals (AI-900)** certification exam.
+**Objective:** Achieve the **AI-900: Microsoft Azure AI Fundamentals** certification through a structured, multi-resource study approach.
 
 ---
 
 ## 🎯 Overview
 
-The AI-900 exam validates foundational knowledge of machine learning and AI concepts, and related Microsoft Azure services. This certification is designed for both technical and non-technical professionals who want to demonstrate their understanding of AI workloads, responsible AI principles, and Azure AI services.
+This repository provides a **comprehensive study path** combining official Microsoft resources, video courses, hands-on labs, and practice exams.
 
-**Exam Details:**
+### 📚 Learning Resource Priorities
 
-- **Passing Score:** 700 or higher
-- **Duration:** Approximately 60 minutes
-- **Question Types:** Multiple choice, drag-and-drop, case studies
-- **Cost:** $99 USD (subject to regional pricing)
+| Priority | Resource | Purpose | Location |
+|----------|----------|---------|----------|
+| 1 | [Microsoft Learn Paths](./learning-paths/README.md) | Core concepts & knowledge | `learning-paths/` |
+| 2 | [Microsoft GitHub Labs](./microsoft-labs/README.md) | Official hands-on practice | `microsoft-labs/` |
+| 3 | [Video Courses](./video-courses/README.md) | Visual reinforcement | `video-courses/` |
+| 4 | [Practice Exams](./practice-exams/README.md) | Exam readiness assessment | `practice-exams/` |
 
----
+### 🔄 Study Workflow Per Domain
 
-## 📚 Exam Domains
+1. **Learn** — Complete Microsoft Learn modules
+2. **Practice** — Do official Microsoft GitHub lab
+3. **Reinforce** — Watch video content for gaps
+4. **Assess** — Practice exam questions for domain
+5. **Review** — Update weak areas, refine notes
 
-The AI-900 exam covers five main skill areas:
-
-| Domain | Weight | Focus Areas |
-|--------|--------|-------------|
-| **1. AI Workloads & Considerations** | 15–20% | Common AI workloads, Responsible AI principles |
-| **2. Machine Learning on Azure** | 15–20% | ML techniques, core concepts, Azure ML capabilities |
-| **3. Computer Vision Workloads** | 15–20% | Image classification, object detection, OCR, facial analysis |
-| **4. NLP Workloads** | 15–20% | Text analysis, speech, translation, language understanding |
-| **5. Generative AI Workloads** | 20–25% | Azure OpenAI, Microsoft Foundry, model catalog |
-
-**Reference:**
-
-- [Study guide for Exam AI-900: Microsoft Azure AI Fundamentals](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/ai-900)
-- [Learning Path: Introduction to AI in Azure](https://learn.microsoft.com/en-us/training/paths/introduction-to-ai-on-azure/)
+> 📝 **Take notes at every step** — capture key concepts, services, and use cases.
 
 ---
 
-## 📊 Lab Series Progress
+## 📊 Exam Domains and Consolidated Progress Tracker
 
-- ✅ [Lab 01: AI Workloads and Responsible AI](labs/lab01-ai-workloads-responsible-ai/Lab01_AI-Workloads-Responsible-AI.md)
-- ✅ [Lab 02: Machine Learning Fundamentals](labs/lab02-machine-learning-fundamentals/Lab02_Machine-Learning-Fundamentals.md)
-- ✅ [Lab 03: Computer Vision on Azure](labs/lab03-computer-vision/Lab03_Computer-Vision.md)
-- ✅  [Lab 04: Natural Language Processing](labs/lab04-natural-language-processing/Lab04_Natural-Language-Processing.md)
-- 🔄 [Lab 05: Generative AI with Azure OpenAI](labs/lab05-generative-ai/Lab05_Generative-AI.md)
+| Domain | Weight | MS Learn | MS Labs | Video |
+|--------|--------|----------|---------|-------|
+| 1. AI Workloads & Considerations | 15-20% | 🕒 | 🕒 | 🕒 |
+| 2. Machine Learning on Azure | 15-20% | 🕒 | 🕒 | 🕒 |
+| 3. Computer Vision Workloads | 15-20% | 🕒 | 🕒 | 🕒 |
+| 4. NLP Workloads | 15-20% | 🕒 | 🕒 | 🕒 |
+| 5. Generative AI Workloads | 20-25% | 🕒 | 🕒 | 🕒 |
 
----
+**Legend:** 🕒 Not Started | 🚧 In Progress | ✅ Complete
 
-## 🧪 Lab Series
-
-Hands-on labs organized by exam domain:
-
-### [Lab 1: AI Workloads and Responsible AI](labs/lab01-ai-workloads-responsible-ai/Lab01_AI-Workloads-Responsible-AI.md)
-
-**Location:** `labs/lab01-ai-workloads-responsible-ai/`  
-**Objectives:**
-
-- Explore common AI workload scenarios (computer vision, NLP, document processing, generative AI)
-- Review and apply responsible AI principles (fairness, reliability, privacy, inclusiveness, transparency, accountability)
-- Analyze case studies demonstrating responsible AI implementation
-
-**Duration:** 45–60 minutes
+> Source: [AI-900 Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/ai-900)
 
 ---
 
-### [Lab 2: Machine Learning Fundamentals](labs/lab02-machine-learning-fundamentals/Lab02_Machine-Learning-Fundamentals.md)
+## 📘 Domain Quick Reference
 
-**Location:** `labs/lab02-machine-learning-fundamentals/`  
-**Objectives:**
+### Domain 1: AI Workloads and Considerations (15–20%)
 
-- Identify regression, classification, and clustering scenarios
-- Explore deep learning and Transformer architecture concepts
-- Use Azure Machine Learning automated ML to train and deploy a model
-- Understand features, labels, training, and validation datasets
+**Key Topics**
+- Common AI workloads: computer vision, NLP, document processing, generative AI
+- Responsible AI principles: fairness, reliability, privacy, inclusiveness, transparency, accountability
 
-**Duration:** 60–90 minutes
-
----
-
-### [Lab 3: Computer Vision on Azure](labs/lab03-computer-vision/Lab03_Computer-Vision.md)
-
-**Location:** `labs/lab03-computer-vision/`  
-**Objectives:**
-
-- Use Azure AI Vision service for image classification and object detection
-- Perform optical character recognition (OCR) on documents
-- Explore Azure AI Face detection and facial analysis capabilities
-- Build a simple computer vision application
-
-**Duration:** 60–75 minutes
+**Common Pitfalls**
+- Confusing computer vision vs. NLP scenarios
+- Classification (categorize whole image) vs. object detection (locate + identify multiple objects)
+- Missing the six responsible AI principles — heavily tested
+- Transparency means making AI decisions understandable to users
 
 ---
 
-### [Lab 4: Natural Language Processing](labs/lab04-natural-language-processing/Lab04_Natural-Language-Processing.md)
+### Domain 2: Machine Learning on Azure (15–20%)
 
-**Location:** `labs/lab04-natural-language-processing/`  
-**Objectives:**
+**Key Topics**
+- Regression: Predict numeric value (price, temperature)
+- Classification: Predict category (spam/not spam)
+- Clustering: Group similar items without labels (unsupervised)
+- Features (inputs), labels (targets), training/validation/test datasets
+- Azure ML: Automated ML, designer, compute, model registry
 
-- Use Azure AI Language service for key phrase extraction, entity recognition, and sentiment analysis
-- Implement speech recognition and synthesis with Azure AI Speech service
-- Perform language translation
-- Build a conversational language understanding model
-
-**Duration:** 60–75 minutes
-
----
-
-### [Lab 5: Generative AI with Azure OpenAI](labs/lab05-generative-ai/Lab05_Generative-AI.md)
-
-**Location:** `labs/lab05-generative-ai/`  
-**Objectives:**
-
-- Explore Azure OpenAI Service capabilities (GPT, DALL-E, Whisper)
-- Use Microsoft Foundry to build and deploy generative AI solutions
-- Explore Microsoft Foundry model catalog
-- Apply responsible AI principles to generative AI workloads
-- Build a simple chatbot or content generation application
-
-**Duration:** 75–90 minutes
+**Common Pitfalls**
+- Regression (numeric) vs. classification (categorical)
+- Clustering is unsupervised (no labels)
+- Training vs. validation vs. test dataset purposes
+- Automated ML (no-code) vs. custom training (code-first)
 
 ---
 
-## 🛠️ Prerequisites
+### Domain 3: Computer Vision Workloads (15–20%)
 
-**Azure Subscription:**
+**Key Topics**
+- Image classification: Categorize entire image
+- Object detection: Locate and identify multiple objects (bounding boxes)
+- OCR: Extract text from images/documents
+- Face detection vs. facial analysis vs. face recognition
+- Azure AI Vision, Azure AI Face, Custom Vision
 
-- Free trial or paid Azure subscription with AI service access
-- Ability to create resource groups and AI services
-
-**Tools:**
-
-- Azure Portal access
-- [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli) (optional but recommended)
-- [Python 3.8+](https://www.python.org/downloads/) for SDK-based labs
-- Code editor (VS Code recommended)
-
-**Knowledge:**
-
-- Basic understanding of cloud concepts
-- Familiarity with client-server applications
-- No prior data science or software engineering experience required
+**Common Pitfalls**
+- Image classification (one label) vs. object detection (multiple objects with locations)
+- When to use Azure AI Vision vs. Azure AI Face
+- Custom Vision is for training custom models, not general-purpose
+- Face detection (find) vs. face recognition (identify specific people)
 
 ---
 
-## 🚀 Getting Started
+### Domain 4: NLP Workloads (15–20%)
 
-1. **Clone or download this repository**
-2. **Review the [Exam Readiness Guide](./Exam-Readiness.md)** for study strategies and quick references
-3. **Complete labs in order** (1 → 5) to build foundational knowledge progressively
-4. **Practice with the [official practice assessment](https://learn.microsoft.com/en-us/credentials/certifications/exams/ai-900/practice/assessment?assessment-type=practice&assessmentId=26)**
-5. **Schedule your exam** via [Microsoft Learn](https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-fundamentals/)
+**Key Topics**
+- Key phrase extraction, entity recognition, sentiment analysis
+- Speech recognition (speech-to-text), speech synthesis (text-to-speech)
+- Language translation
+- Conversational language understanding (CLU)
+- Azure AI Language, Azure AI Speech
 
----
-
-## 📖 Official Resources
-
-- **[AI-900 Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/ai-900)** — Official exam objectives
-- **[AI-900 Learning Path](https://learn.microsoft.com/en-us/training/paths/get-started-with-artificial-intelligence-on-azure/)** — Microsoft Learn modules
-- **[Azure AI Documentation](https://learn.microsoft.com/en-us/azure/ai-services/)** — Service-specific docs
-- **[Exam Sandbox](https://aka.ms/examdemo)** — Practice the exam interface
-- **[AI Show](https://learn.microsoft.com/en-us/shows/ai-show/)** — Video series on Azure AI
+**Common Pitfalls**
+- Key phrase extraction (topics) vs. entity recognition (specific names/dates)
+- Azure AI Language (text analysis) vs. Azure AI Speech (audio)
+- Sentiment analysis returns positive/negative/neutral scores
+- CLU is for building chatbots/voice assistants
 
 ---
 
-## 🧠 Study Tips
+### Domain 5: Generative AI Workloads (20–25%)
 
-✅ Focus on **understanding concepts** rather than memorizing service names  
-✅ Complete **all hands-on labs** to reinforce practical knowledge  
-✅ Review **responsible AI principles** — these are heavily tested  
-✅ Understand **when to use which service** (e.g., Azure AI Vision vs. Face, Language vs. Speech)  
-✅ Practice identifying **use cases** for each AI workload type  
-✅ Explore the **Microsoft Foundry** portal and model catalog  
-✅ Take the **official practice assessment** multiple times  
-✅ Watch **The AI Show** videos for real-world Azure AI examples  
+**Key Topics**
+- Generative AI: Models that create new content (text, images, code)
+- Azure OpenAI Service: GPT-4, GPT-3.5, DALL-E, Whisper
+- Microsoft Foundry: Build, test, deploy generative AI solutions
+- Model catalog: Access to models from Microsoft, OpenAI, Meta, Hugging Face
+- Responsible AI: Content filters, grounding, bias mitigation
+
+**Common Pitfalls**
+- Azure OpenAI Service (API) vs. Microsoft Foundry (platform for building)
+- Importance of content filters and grounding
+- Prompt engineering is critical for good results
+- GPT-4 (most capable) vs. GPT-3.5 (faster, cheaper)
+- Microsoft Foundry model catalog provides access to non-OpenAI models
 
 ---
 
-## 📂 Repository Structure
+## 🧾 Final Review Checklist
 
-```plaintext
-AI-900/
-├── README.md                           # This file
-├── Exam-Readiness.md                   # Quick reference guide and study strategies
-├── images/                             # Screenshots and diagrams
-└── labs/
-    ├── lab01-ai-workloads-responsible-ai/
-    ├── lab02-machine-learning-fundamentals/
-    ├── lab03-computer-vision/
-    ├── lab04-natural-language-processing/
-    └── lab05-generative-ai/
-```
+- [ ] Memorize the **six responsible AI principles**
+- [ ] Understand **regression vs. classification vs. clustering**
+- [ ] Know when to use **Azure AI Vision vs. Azure AI Face**
+- [ ] Understand **Azure AI Language** capabilities (sentiment, entities, key phrases)
+- [ ] Know **Azure AI Speech** (speech-to-text, text-to-speech) vs. **Azure AI Language** (text)
+- [ ] Understand **Azure OpenAI Service** capabilities (GPT, DALL-E, Whisper)
+- [ ] Know what **Microsoft Foundry** is used for
+- [ ] Understand **responsible AI for generative AI**
+- [ ] Practice identifying **use cases** for each AI service
+
+---
+
+## 💡 Exam Tips
+
+- Read questions carefully — some test subtle differences between services
+- Watch for keywords: "unsupervised" (clustering), "numeric prediction" (regression), "categorize" (classification)
+- Responsible AI questions are common — know all six principles
+- Generative AI has the highest weight (20–25%) — spend extra time here
+- Take the practice assessment multiple times — it's free and mirrors the real exam
 
 ---
 
 ## 🎓 Certification Path
 
-AI-900 is a **foundational certification** that can help you prepare for:
+AI-900 is a **foundational certification** that can help prepare for:
 
 - **[Azure Data Scientist Associate (DP-100)](https://learn.microsoft.com/en-us/credentials/certifications/azure-data-scientist/)**
 - **[Azure AI Engineer Associate (AI-102)](https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-engineer/)**
 
-However, AI-900 is **not a prerequisite** for these role-based certifications.
+AI-900 is **not a prerequisite** for these role-based certifications.
 
 ---
 
-## 📞 Get Help
-
-- **[Microsoft Q&A](https://learn.microsoft.com/en-us/answers/products/)** — Ask technical questions
-- **[AI & Machine Learning Community](https://techcommunity.microsoft.com/t5/artificial-intelligence-and/ct-p/AI)** — Community support
-- **[Microsoft Learn Community](https://techcommunity.microsoft.com/t5/microsoft-learn/ct-p/MicrosoftLearn)** — Learning resources and discussions
-
-
----
-
-**Last updated:** 2025-10-16
+*Last updated: 2026-01-14*

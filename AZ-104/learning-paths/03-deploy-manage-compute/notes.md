@@ -1,10 +1,3 @@
-# -------------------------------------------------------------------------
-# Document: Learning Path 3 - Deploy and Manage Compute Resources
-# Description: Notes from Microsoft Learn modules on Azure compute
-# Context: AZ-104 study preparation (Microsoft Azure Administrator)
-# Author: Greg Tate
-# -------------------------------------------------------------------------
-
 # Learning Path 3: Deploy and Manage Compute Resources
 
 **Link:** [Microsoft Learn](https://learn.microsoft.com/en-us/training/paths/az-104-manage-compute-resources/)

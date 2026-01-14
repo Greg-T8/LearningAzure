@@ -1,10 +1,3 @@
-# -------------------------------------------------------------------------
-# Document: John Savill's Technical Training Index
-# Description: Track progress through John Savill's AZ-104 video content
-# Context: AZ-104 study preparation (Microsoft Azure Administrator)
-# Author: Greg Tate
-# -------------------------------------------------------------------------
-
 # John Savill's Technical Training - AZ-104
 
 **Playlist:** [AZ-104 Azure Administrator Study Playlist](https://www.youtube.com/playlist?list=PLlVtbbG169nGlGPWs9xaLKT1KfwqREHbs)

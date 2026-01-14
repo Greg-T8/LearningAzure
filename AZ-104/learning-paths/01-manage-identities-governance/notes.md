@@ -1,10 +1,3 @@
-# -------------------------------------------------------------------------
-# Document: Learning Path 1 - Manage Identities and Governance
-# Description: Notes from Microsoft Learn modules on identity and governance
-# Context: AZ-104 study preparation (Microsoft Azure Administrator)
-# Author: Greg Tate
-# -------------------------------------------------------------------------
-
 # Learning Path 1: Manage Identities and Governance
 
 **Link:** [Microsoft Learn](https://learn.microsoft.com/en-us/training/paths/az-104-manage-identities-governance/)

@@ -113,8 +113,8 @@ def update_readme(new_table):
         new_section = f"{start_marker}\n{new_table}\n{end_marker}"
         new_content = re.sub(pattern, new_section, content, flags=re.DOTALL)
     else:
-        # Add section after Quick Stats
-        insert_after = "![In Progress](https://img.shields.io/badge/In%20Progress-2-yellow)"
+        # Add section after badges
+        insert_after = "![AZ-104 Domains](https://img.shields.io/badge/AZ--104%20Domains-0%2F5-blue)"
         if insert_after in content:
             new_section = f"\n\n{start_marker}\n{new_table}\n{end_marker}"
             new_content = content.replace(insert_after, insert_after + new_section)
