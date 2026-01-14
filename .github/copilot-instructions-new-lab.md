@@ -88,14 +88,14 @@ Create labs with the following structure:
 ```text
 {EXAM-CODE}/labs/lab{##}-{descriptive-name}/
 ├── Lab{##}_{Title-With-Hyphens}.md
-├── images/
+├── .img/
 ├── README.md (optional for complex labs)
 ├── bicep/ (if applicable)
 ├── cli/ (if applicable)
 ├── powershell/ (if applicable)
 ├── terraform/ (if applicable)
 ├── datasets/ (for AI/ML labs if applicable)
-├── sample-images/ (for Computer Vision labs if applicable)
+├── sample-.img/ (for Computer Vision labs if applicable)
 ├── sample-text/ (for NLP labs if applicable)
 └── prompts/ (for Generative AI labs if applicable)
 ```
@@ -108,7 +108,7 @@ Create labs with the following structure:
 - **Directory name:** `lab{##}-{descriptive-name-lowercase}`
   - Example: `lab01-setup-identity-baseline`
   - Example: `lab02-machine-learning-fundamentals`
-- **Images:** Store in `images/` subdirectory with descriptive names
+- **Images:** Store in `.img/` subdirectory with descriptive names
 - **Code samples:** Organize by tool/language (bicep/, cli/, powershell/, terraform/)
 
 ---
@@ -243,7 +243,7 @@ Create labs with the following structure:
     - Use clear exercise titles with objectives
     - Include step-by-step instructions
     - Provide multiple implementation methods where applicable (Portal, CLI, PowerShell, Bicep, Terraform)
-    - Add screenshots with `<img src='images/filename.png' width=700>`
+    - Add screenshots with `<img src='.img/filename.png' width=700>`
     - Include verification steps after each major task
     - Add "Exam Insights" sections for exam-focused content
     - **REQUIRED:** Include **📚 Related Documentation** section for each exercise (see Exercise Documentation Links below)
@@ -416,7 +416,7 @@ Before finalizing a new lab, verify:
 - [ ] Screenshots are clear and properly sized
 - [ ] All links are valid and working
 - [ ] File and directory naming conventions are followed
-- [ ] Images are stored in the `images/` subdirectory
+- [ ] Images are stored in the `.img/` subdirectory
 - [ ] Code samples are organized by tool type
 - [ ] Prerequisites are clearly stated
 - [ ] Objectives are specific and measurable

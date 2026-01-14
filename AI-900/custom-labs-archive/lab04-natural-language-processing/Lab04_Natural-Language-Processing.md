@@ -56,7 +56,7 @@ By the end of this lab, you will be able to:
    - Create resource: "Language" or "Azure AI services"
    - Note the endpoint URL and API key
 
-    <img src='images/2025-10-28-05-47-35.png' width=700>
+    <img src='.img/2025-10-28-05-47-35.png' width=700>
 
     [Language Studio](https://language.cognitive.azure.com/home)
 
@@ -70,7 +70,7 @@ By the end of this lab, you will be able to:
      - Neutral statement: "The package arrived on Tuesday."
    - Review sentiment scores (positive, negative, neutral)
 
-    <img src='images/2025-10-30-06-06-52.png' width=600>
+    <img src='.img/2025-10-30-06-06-52.png' width=600>
 
 3. **Test Entity Recognition (NER):**
    - Analyze text to extract named entities:
@@ -80,7 +80,7 @@ By the end of this lab, you will be able to:
      - Dates: "The meeting is on October 20, 2025."
    - Review entity types and confidence scores
 
-    <img src='images/2025-10-30-06-09-49.png' width=600>
+    <img src='.img/2025-10-30-06-09-49.png' width=600>
 
 4. **Test Key Phrase Extraction:**
    - Extract main topics from longer text:
@@ -89,7 +89,7 @@ By the end of this lab, you will be able to:
      - Email or document
    - Identify key phrases that summarize the content
 
-    <img src='images/2025-10-30-06-12-03.png' width=600>
+    <img src='.img/2025-10-30-06-12-03.png' width=600>
 
 ---
 
@@ -112,7 +112,7 @@ By the end of this lab, you will be able to:
    - Create resource: "Speech" service
    - Note the endpoint and API key
 
-    <img src='images/2025-10-30-06-34-56.png' width=700>
+    <img src='.img/2025-10-30-06-34-56.png' width=700>
 
 2. **Test Speech-to-Text (Recognition):**
    - Use Speech Studio or SDK
@@ -123,7 +123,7 @@ By the end of this lab, you will be able to:
      - Background noise
      - Different accents
 
-    <img src='images/2025-10-30-06-38-19.png' width=700>
+    <img src='.img/2025-10-30-06-38-19.png' width=700>
 
 3. **Test Text-to-Speech (Synthesis):**
    - Convert text to spoken audio
@@ -133,13 +133,13 @@ By the end of this lab, you will be able to:
      - Speech rate and pitch
    - Download the generated audio
 
-    <img src='images/2025-10-31-05-57-14.png' width=700>
+    <img src='.img/2025-10-31-05-57-14.png' width=700>
 
 4. **Test Speech Translation (Optional):**
    - Translate spoken audio to text in another language
    - Example: Speak in English, get Spanish text output
 
-    <img src='images/2025-10-31-05-58-34.png' width=700>
+    <img src='.img/2025-10-31-05-58-34.png' width=700>
 
 ---
 
@@ -162,7 +162,7 @@ By the end of this lab, you will be able to:
    - Create resource: "Translator" (part of Azure AI services)
    - Note the endpoint and API key
 
-    <img src='images/2025-10-31-06-07-42.png' width=700>
+    <img src='.img/2025-10-31-06-07-42.png' width=700>
 
 2. **Test Text Translation:**
    - Translate sample sentences:
@@ -210,11 +210,11 @@ In this exercise, you'll create a CLU project in Microsoft Foundry using a sampl
    - In the Language playground, enter a test utterance (e.g., "Check email")
    - Review predicted intent and extracted entities
 
-<img src='images/2025-10-31-06-32-01.png' width=700>
+<img src='.img/2025-10-31-06-32-01.png' width=700>
 
-<img src='images/2025-10-31-06-32-14.png' width=700>
+<img src='.img/2025-10-31-06-32-14.png' width=700>
 
-<img src='images/2025-10-31-06-32-28.png' width=700>
+<img src='.img/2025-10-31-06-32-28.png' width=700>
 
 ---
 

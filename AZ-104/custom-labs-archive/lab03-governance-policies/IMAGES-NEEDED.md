@@ -66,7 +66,7 @@ This document lists the screenshots and diagrams needed to complete Lab 03.
 ## 🎨 Image Specifications
 
 **Format:** PNG  
-**Width:** 700px (as specified in markdown: `<img src='images/filename.png' width=700>`)  
+**Width:** 700px (as specified in markdown: `<img src='.img/filename.png' width=700>`)  
 **Quality:** High-resolution, clear text  
 **Style:** Azure Portal screenshots with consistent theme  
 

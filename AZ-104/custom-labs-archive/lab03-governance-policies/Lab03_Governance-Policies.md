@@ -300,13 +300,13 @@ Azure Policy evaluates effects in a specific order during resource operations. U
    - Effect type
    - Policy type (Built-in, Custom)
 
-<img src='images/2025-10-30-04-54-45.png' width=900>
+<img src='.img/2025-10-30-04-54-45.png' width=900>
 
 ### List Policy Definitions Using PowerShell
 
 There are over 3,000 built-in policy definitions available in Azure.
 
-<img src='images/2025-10-30-04-59-18.png' width=250>
+<img src='.img/2025-10-30-04-59-18.png' width=250>
 
 ```powershell
 # Get policy count by category
@@ -319,7 +319,7 @@ Get-AzPolicyDefinition |
     Format-Table -AutoSize
 ```
 
-<img src='images/2025-10-30-05-10-56.png' width=450>
+<img src='.img/2025-10-30-05-10-56.png' width=450>
 
 ```powershell
 # Show matching policy plus full rule JSON for “Do not allow deletion” definitions
@@ -332,7 +332,7 @@ Get-AzPolicyDefinition |
     Format-List
 ```
 
-<img src='images/2025-10-30-05-46-20.png' width=600>
+<img src='.img/2025-10-30-05-46-20.png' width=600>
 
 ```powershell
 # Get details of a specific policy
@@ -342,7 +342,7 @@ $policy.Description
 $policy.PolicyRule | ConvertTo-Json -Depth 10
 ```
 
-<img src='images/2025-10-30-05-49-39.png' width=700>
+<img src='.img/2025-10-30-05-49-39.png' width=700>
 
 ### List Policy Definitions Using Azure CLI
 
@@ -353,7 +353,7 @@ az policy definition list \
 --output table | less -S
 ```
 
-<img src='images/2025-10-31-04-44-34.png' width=800>
+<img src='.img/2025-10-31-04-44-34.png' width=800>
 
 **Note:**
 
@@ -365,11 +365,11 @@ az policy definition list \
 az policy definition list --query "[0]" --output json
 ```
 
-<img src='images/2025-10-31-05-11-13.png' width=800>
+<img src='.img/2025-10-31-05-11-13.png' width=800>
 
 Use the `jq` command to get some nice formatting:
 
-<img src='images/2025-10-31-05-12-09.png' width=800>
+<img src='.img/2025-10-31-05-12-09.png' width=800>
 
 ```bash
 # Get the first policy definition containing "deletion" with expanded JSON output
@@ -378,7 +378,7 @@ az policy definition list \
     --output json | jq .
 ```
 
-<img src='images/2025-10-31-05-39-16.png' width=600>
+<img src='.img/2025-10-31-05-39-16.png' width=600>
 
 ```bash
 # Get the policy and specified fields only, including expanded JSON
@@ -387,14 +387,14 @@ az policy definition list \
     --output json | jq '{DisplayName: .displayName, Name: .name, PolicyRule: .policyRule}'
 ```
 
-<img src='images/2025-10-31-05-46-01.png' width=700>
+<img src='.img/2025-10-31-05-46-01.png' width=700>
 
 ```bash
 # Get details of a specific policy
 az policy definition show --name e56962a6-4747-49cd-b67b-bf8b01975c4c
 ```
 
-<img src='images/2025-11-03-02-10-21.png' width=700>
+<img src='.img/2025-11-03-02-10-21.png' width=700>
 
 You must specify the GUID; you cannot use the display name.
 
@@ -465,17 +465,17 @@ Contoso wants to ensure all resources are deployed only in approved regions (Eas
    - **Policy definition**: Search for "Allowed locations"
    - Select **"Allowed locations"** (built-in policy)
 
-    <img src='images/2025-11-03-02-20-23.png' width=600>
+    <img src='.img/2025-11-03-02-20-23.png' width=600>
 
 5. Click **Next** to configure parameters
 6. **Allowed locations**: Select **East US** and **West US**
 
-    <img src='images/2025-11-03-02-21-04.png' width=600>
+    <img src='.img/2025-11-03-02-21-04.png' width=600>
 
 7. Click **Next** through Remediation and Non-compliance messages
 8. **Review + create** → **Create**
 
-    <img src='images/2025-11-03-02-22-46.png' width=700>
+    <img src='.img/2025-11-03-02-22-46.png' width=700>
 
 ### Using PowerShell
 
@@ -503,7 +503,7 @@ New-AzPolicyAssignment `
 Get-AzPolicyAssignment -Name 'allowed-locations-policy'
 ```
 
-<img src='images/2025-11-04-03-27-36.png' width=500>
+<img src='.img/2025-11-04-03-27-36.png' width=500>
 
 ### Using Azure CLI
 
@@ -514,7 +514,7 @@ az policy definition list \
     --query "[?displayName=='Allowed locations'].id" 
 ```
 
-<img src='images/2025-11-12-04-57-47.png' width=600>
+<img src='.img/2025-11-12-04-57-47.png' width=600>
 
 ```bash
 # List policies with "allowed" in the display name
@@ -523,7 +523,7 @@ az policy definition list \
     --query "[?contains(displayName,'allowed')].{Name:name,DisplayName:displayName}"
 ```
 
-<img src='images/2025-11-12-04-55-58.png' width=500>
+<img src='.img/2025-11-12-04-55-58.png' width=500>
 
 ```bash
 # List policy categories
@@ -534,7 +534,7 @@ az policy definition list \
     | sort | uniq
 ```
 
-<img src='images/2025-11-12-04-39-54.png' width=300>
+<img src='.img/2025-11-12-04-39-54.png' width=300>
 
 **Note:** The JMESPath query language does not provide any facilities for removing duplicates, so we use `jq`, `sort`, and `uniq` to get unique category names. This is by design, as tasks like deduplication, sorting, or aggregation are intentionally left to downstream tools.
 
@@ -550,7 +550,7 @@ az policy definition list \
     --query "[*].{Category:metadata.category,DisplayName:displayName}"
 ```
 
-<img src='images/2025-11-11-05-49-42.png' width=800>
+<img src='.img/2025-11-11-05-49-42.png' width=800>
 
 **Note:** This command uses a combination of `--filter` and `--query` to narrow down the results to a specific category. The `--filter` parameter applies server-side filtering using OData syntax, while the `--query` parameter uses JMESPath syntax to format the output on the client side.
 
@@ -570,7 +570,7 @@ az policy assignment create \
     --description 'Restricts resource deployment to East US and West US regions'
 ```
 
-<img src='images/2025-11-13-04-06-27.png' width=700>
+<img src='.img/2025-11-13-04-06-27.png' width=700>
 
 **Note:** the use of `jq` is optional but provides color formatting and better readability for JSON output in the terminal.
 
@@ -579,7 +579,7 @@ az policy assignment create \
 az policy assignment show --name 'allowed-locations-policy'
 ```
 
-<img src='images/2025-11-13-04-08-30.png' width=600>
+<img src='.img/2025-11-13-04-08-30.png' width=600>
 
 ### Test the Policy
 
@@ -590,7 +590,7 @@ az policy assignment list --query "[?contains(name,'allowed')]" \
     | jq '.[] | {name, description, policyDefinitionId}'
 ```
 
-<img src='images/2025-11-20-03-32-28.png' width=700>
+<img src='.img/2025-11-20-03-32-28.png' width=700>
 
 You'll need the GUID from the `policyDefinitionId` property for the next steps:
 
@@ -605,7 +605,7 @@ az policy assignment list --query "[?contains(name,'allowed')]" \
 
 The snippet above shows how to extract the GUID from the full policy definition ID using `jq` string manipulation functions.
 
-<img src='images/2025-11-20-03-39-26.png' width=600>
+<img src='.img/2025-11-20-03-39-26.png' width=600>
 
 You can store the GUID in a variable for use in finding the policy definition. Note the `-r` flag to get raw string output without quotes:
 
@@ -614,7 +614,7 @@ GUID=$(az policy assignment list --query "[?contains(name,'allowed')]" \
     | jq -r '.[0].policyDefinitionId | split("/")[-1]')
 ```
 
-<img src='images/2025-11-20-03-47-40.png' width=550>
+<img src='.img/2025-11-20-03-47-40.png' width=550>
 
 From there, you an pull details about the policy definition itself:
 
@@ -622,7 +622,7 @@ From there, you an pull details about the policy definition itself:
 az policy definition show --name $GUID | jq '. | {name, description}'
 ```
 
-<img src='images/2025-11-20-03-53-25.png' width=650>
+<img src='.img/2025-11-20-03-53-25.png' width=650>
 
 Notice the policy definition description excludes resource groups, so you must test at the resource level.
 
@@ -638,7 +638,7 @@ az storage account create \
 
 Expected error:
 
-<img src='images/2025-11-20-04-02-15.png' width=600>
+<img src='.img/2025-11-20-04-02-15.png' width=600>
 
 For cleanup, delete the policy assignment:
 
@@ -650,7 +650,7 @@ GUID=$(az policy definition list --query "[?displayName=='Allowed locations'].id
 az policy assignment delete --name $GUID
 ```
 
-<img src='images/2025-11-20-04-09-47.png' width=550>
+<img src='.img/2025-11-20-04-09-47.png' width=550>
 
 ### Assign Additional Built-in Policies
 
@@ -660,7 +660,7 @@ The following PowerShell and Az commands command create a policy assignment that
 
 The policy definition rule accepts `tagName` as a parameter, which is set to `CostCenter` in this case.
 
-<img src='images/2025-12-15-03-59-03.png' width=500>
+<img src='.img/2025-12-15-03-59-03.png' width=500>
 
 ```powershell
 # PowerShell
@@ -682,7 +682,7 @@ New-AzPolicyAssignment `
     -PolicyParameterObject $policyParam
 ```
 
-<img src='images/2025-12-15-03-54-28.png' width=700>
+<img src='.img/2025-12-15-03-54-28.png' width=700>
 
 ```bash
 # Azure CLI
@@ -706,7 +706,7 @@ az policy assignment create \
     }'
 ```
 
-<img src='images/2025-12-17-04-29-46.png' width=700>
+<img src='.img/2025-12-17-04-29-46.png' width=700>
 
 To confirm the assignment:
 
@@ -716,11 +716,11 @@ az policy assignment list --query "[?displayName && contains(displayName, 'CostC
 
 The `[?displayName && contains(...)]` syntax ensures that only assignments with a defined display name are evaluated, preventing errors from null values.
 
-<img src='images/2025-12-17-04-41-57.png' width=700>
+<img src='.img/2025-12-17-04-41-57.png' width=700>
 
 Test resource group creation to confirm policy:
 
-<img src='images/2025-12-17-04-47-05.png' width=700>
+<img src='.img/2025-12-17-04-47-05.png' width=700>
 
 #### Allowed virtual machine size SKUs
 
@@ -744,7 +744,7 @@ New-AzPolicyAssignment `
     -PolicyParameterObject $policyParam
 ```
 
-<img src='images/2025-12-18-02-53-27.png' width=600>
+<img src='.img/2025-12-18-02-53-27.png' width=600>
 
 ### Using Bicep for Policy Assignment
 
@@ -754,7 +754,7 @@ az policy definition list --query "[?contains(displayName, 'Allowed locations')]
     | jq '.[] | {name, displayName}'
 ```
 
-<img src='images/2025-12-18-03-31-25.png' width=600>
+<img src='.img/2025-12-18-03-31-25.png' width=600>
 
 Resulting GUID to be used in Bicep template: `e56962a6-4747-49cd-b67b-bf8b01975c4c`
 
@@ -802,7 +802,7 @@ New-AzSubscriptionDeployment `
     -TemplateFile './bicep/policy-assignment.bicep'
 ```
 
-<img src='images/2026-01-06-06-07-43.png' width=800>
+<img src='.img/2026-01-06-06-07-43.png' width=800>
 
 ```bash
 # Azure CLI
@@ -812,7 +812,7 @@ az deployment sub create \
     --template-file ./bicep/policy-assignment.bicep
 ```
 
-<img src='images/2026-01-06-06-24-38.png' width=800>
+<img src='.img/2026-01-06-06-24-38.png' width=800>
 
 ### Using Terraform for Policy Assignment
 
@@ -895,7 +895,7 @@ After assigning policies, check compliance status:
 4. Click on a policy assignment to see detailed compliance data
 5. Review compliant and non-compliant resources
 
-<img src='images/2026-01-08-03-27-20.png' width=800>
+<img src='.img/2026-01-08-03-27-20.png' width=800>
 
 #### Using PowerShell
 
@@ -915,11 +915,11 @@ Get-AzPolicyStateSummary -SubscriptionId $subscriptionId
 Get-AzPolicyState -Filter "PolicyAssignmentName eq 'allowed-locations-policy' and ComplianceState eq 'NonCompliant'"
 ```
 
-<img src='images/2026-01-08-03-36-19.png' width=700>
+<img src='.img/2026-01-08-03-36-19.png' width=700>
 
-<img src='images/2026-01-08-03-38-30.png' width=450>
+<img src='.img/2026-01-08-03-38-30.png' width=450>
 
-<img src='images/2026-01-08-03-44-16.png' width=800>
+<img src='.img/2026-01-08-03-44-16.png' width=800>
 
 #### Using Azure CLI
 
@@ -946,11 +946,11 @@ az policy state summarize --subscription $subscriptionId --query results
 az policy state list --filter "policyAssignmentName eq 'allowed-locations-policy' and complianceState eq 'NonCompliant'"
 ```
 
-<img src='images/2026-01-08-04-29-51.png' width=800>
+<img src='.img/2026-01-08-04-29-51.png' width=800>
 
-<img src='images/2026-01-08-04-41-06.png' width=700>
+<img src='.img/2026-01-08-04-41-06.png' width=700>
 
-<img src='images/2026-01-08-04-44-46.png' width=700>
+<img src='.img/2026-01-08-04-44-46.png' width=700>
 
 ### Trigger On-Demand Policy Evaluation Scan
 
@@ -990,7 +990,7 @@ $job | Receive-Job
 ```
 **Example output while running:**
 
-<img src='images/2026-01-12-03-21-12.png' width=600>
+<img src='.img/2026-01-12-03-21-12.png' width=600>
 
 When the scan completes, the `State` property changes to `Completed`.
 
@@ -1007,7 +1007,7 @@ az policy state trigger-scan --resource-group "rg-governance-lab"
 az policy state trigger-scan --no-wait
 ```
 
-<img src='images/2026-01-12-03-27-58.png' width=600>
+<img src='.img/2026-01-12-03-27-58.png' width=600>
 
 **Note:** The Azure CLI command runs synchronously by default and waits for the scan to complete before returning. Use the `--no-wait` parameter to run it asynchronously.
 
@@ -1028,7 +1028,7 @@ Get-AzPolicyState -SubscriptionId $subscriptionId |
     Format-Table -AutoSize
 ```
 
-<img src='images/2026-01-12-03-29-47.png' width=700>
+<img src='.img/2026-01-12-03-29-47.png' width=700>
 
 ```bash
 # Azure CLI - Get compliance summary
@@ -1042,7 +1042,7 @@ az policy state list --subscription $subscriptionId \
     --output table
 ```
 
-<img src='images/2026-01-12-04-08-59.png' width=500>
+<img src='.img/2026-01-12-04-08-59.png' width=500>
 
 #### When to Use On-Demand Scans
 
@@ -1059,14 +1059,14 @@ az policy state list --subscription $subscriptionId \
  az policy assignment list | jq '.[] | {name, displayName, enforcementMode}'
 ```
 
-<img src='images/2025-12-18-03-11-50.png' width=600>
+<img src='.img/2025-12-18-03-11-50.png' width=600>
 
 ```bash
 # Disable a policy assignment by setting enforcement mode to DoNotEnforce
 az policy assignment update --name allowed-vm-skus --enforcement-mode DoNotEnforce
 ```
 
-<img src='images/2025-12-18-03-18-17.png' width=600>
+<img src='.img/2025-12-18-03-18-17.png' width=600>
 
 ### Exam Insights
 
@@ -1185,7 +1185,7 @@ New-AzPolicyAssignment `
     -PolicyDefinition $policyDef
 ```
 
-<img src='images/2026-01-13-04-18-07.png' width=800>
+<img src='.img/2026-01-13-04-18-07.png' width=800>
 
 #### Using Azure CLI to Create Custom Policy
 

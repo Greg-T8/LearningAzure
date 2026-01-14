@@ -32,7 +32,7 @@ By the end of this lab, you will be able to:
 
 Types of machine learning models:
 
-<img src='images/2025-10-20-05-07-55.png' width=700>
+<img src='.img/2025-10-20-05-07-55.png' width=700>
 
 **Overview of Machine Learning Types:**
 
@@ -181,7 +181,7 @@ Given a dataset of house sales with columns: `SquareFeet`, `Bedrooms`, `Bathroom
    - Once created, click "Launch studio"
    - This opens the Azure ML Studio web interface
 
-    <img src='images/2025-10-21-06-03-24.png' width=700>
+    <img src='.img/2025-10-21-06-03-24.png' width=700>
 
 3. **Create a Dataset:**
    - Navigate to "Data" → "Create" ([Create and load a dataset as a data asset](https://learn.microsoft.com/en-us/azure/machine-learning/tutorial-first-experiment-automated-ml?view=azureml-api-2#create-and-load-a-dataset-as-a-data-asset))
@@ -197,21 +197,21 @@ Given a dataset of house sales with columns: `SquareFeet`, `Bedrooms`, `Bathroom
      - Training time limit (shorter for labs, e.g., 15 minutes)
    - Submit the job
 
-        <img src='images/2025-10-25-05-55-24.png' width=700>
+        <img src='.img/2025-10-25-05-55-24.png' width=700>
 
 5. **Review Results:**
    - Once complete, review the best model
    - Examine metrics (accuracy, precision, recall, F1 score, etc.)
    - Review feature importance
 
-        <img src='images/2025-10-25-05-59-47.png' width=700>
+        <img src='.img/2025-10-25-05-59-47.png' width=700>
 
 6. **Deploy the Model (Optional):**
    - Deploy the best model as a web service endpoint ([Deploy the best model](https://learn.microsoft.com/en-us/azure/machine-learning/tutorial-first-experiment-automated-ml?view=azureml-api-2#deploy-the-best-model))
 
-        <img src='images/2025-10-25-06-01-05.png' width=700>
+        <img src='.img/2025-10-25-06-01-05.png' width=700>
 
-        <img src='images/2025-10-25-06-15-23.png' width=700>
+        <img src='.img/2025-10-25-06-15-23.png' width=700>
 
    - Test the endpoint with sample data
 

@@ -129,7 +129,7 @@ Create the following users:
    | [user2@637djb.onmicrosoft.com](mailto:user2@637djb.onmicrosoft.com) | Dana White   | IT         | Admin      |
    | [user3@637djb.onmicrosoft.com](mailto:user3@637djb.onmicrosoft.com) | Jamie Cruz   | HR         | Specialist |
 
-<img src='images/2025-10-14-05-40-15.png' width=600>
+<img src='.img/2025-10-14-05-40-15.png' width=600>
 
 Notes on the .csv template:
 
@@ -140,11 +140,11 @@ Notes on the .csv template:
 * Make sure to check there is no unintended whitespace before/after any field. For User principal name, having such whitespace would cause import failure.
 * Ensure that values in Initial password comply with the currently active password policy.
 
-<img src='images/2025-10-14-05-45-44.png' width=800>
+<img src='.img/2025-10-14-05-45-44.png' width=800>
 
 The process will create other users even if some rows have errors.
 
-<img src='images/2025-10-14-05-48-57.png' width=800>
+<img src='.img/2025-10-14-05-48-57.png' width=800>
 
 See [Create users in bulk](https://learn.microsoft.com/en-us/entra/identity/users/users-bulk-add)
 
@@ -160,7 +160,7 @@ az ad user create `
  --force-change-password-next-sign-in
 ```
 
-<img src='images/2025-10-08-16-17-04.png' width=500>
+<img src='.img/2025-10-08-16-17-04.png' width=500>
 
 The built-in `az ad user create` command only supports required attributes. It does does not support other attributes, such as `givenName` and `surname`, directly. For that, use the `az rest` method as shown in the Deep Dive link below.
 
@@ -174,7 +174,7 @@ Documentation: [az ad user](https://learn.microsoft.com/en-us/cli/azure/ad/user?
 az ad user list --query "[?contains(displayName, 'Alex')].{Name: displayName, UPN: userPrincipalName}"
 ```
 
-<img src='images/2025-10-08-16-26-06.png' width=700>
+<img src='.img/2025-10-08-16-26-06.png' width=700>
 
 See [JMESPath Examples](https://jmespath.org/examples.html) for query syntax.
 
@@ -195,7 +195,7 @@ New-AzADUser `
    -PasswordProfile @{ Password = "P@ssword123!"; ForceChangePasswordNextSignIn = $true }
 ```
 
-<img src='images/2025-10-10-04-29-02.png' width=500>
+<img src='.img/2025-10-10-04-29-02.png' width=500>
 
 **Note:** The PowerShell version supports `givenName` and `surname` directly, among other properties.
 
@@ -207,7 +207,7 @@ Get-AzADUser -ObjectId 'user1@637djb.onmicrosoft.com'
 Remove-AzADUser -UPNOrObjectId 'user1@637djb.onmicrosoft.com'
 ```
 
-<img src='images/2025-10-10-04-31-46.png' width=700>
+<img src='.img/2025-10-10-04-31-46.png' width=700>
 
 Documentation: [New-AzADUser](https://learn.microsoft.com/en-us/powershell/module/az.resources/new-azaduser?view=azps-14.4.0)
 
@@ -221,13 +221,13 @@ For production scenarios, avoid using Terraform to create users because Terrafor
 
 *terraform.tfstate*:  
 
-<img src='images/2025-10-10-08-40-40.png' width=300>
+<img src='.img/2025-10-10-08-40-40.png' width=300>
 
 See [main.tf](./terraform/users/main.tf) for a working example. This example uses the [users.yaml](./terraform/users/users.yaml) file for user definitions.
 
-<img src='images/2025-10-12-04-35-30.png' width=400>
+<img src='.img/2025-10-12-04-35-30.png' width=400>
 
-<img src='images/2025-10-12-04-37-27.png' width=500>
+<img src='.img/2025-10-12-04-37-27.png' width=500>
 
 ### Exam Insights
 
@@ -263,7 +263,7 @@ az ad group list | cfj | select displayname, groupTypes
 
 **Note:** `cfj` is a custom alias for `ConvertFrom-Json` in PowerShell.
 
-<img src='images/2025-10-12-04-51-40.png' width=400>
+<img src='.img/2025-10-12-04-51-40.png' width=400>
 
 **Note:** The `az ad group` command is limited to creating static security groups.
 
@@ -277,7 +277,7 @@ You must use the user's **object ID** (not UPN) to add them as a member. Use `az
 
 Use `az ad group member list` to verify members:
 
-<img src='images/2025-10-12-05-05-38.png' width=400>
+<img src='.img/2025-10-12-05-05-38.png' width=400>
 
 The `az ad group` command provides limited functionality for group management. For fuller functionality, use either `az rest` or Microsoft Graph PowerShell.
 
@@ -285,7 +285,7 @@ The `az ad group` command provides limited functionality for group management. F
 
 See [main.tf](./terraform/groups/main.tf) for a working example.
 
-<img src='images/2025-10-13-04-59-16.png' width=600>
+<img src='.img/2025-10-13-04-59-16.png' width=600>
 
 ### Dynamic Group
 
@@ -305,7 +305,7 @@ New-AzADGroup `
    -MembershipRuleProcessingState "On"
 ```
 
-<img src='images/2025-10-12-05-30-18.png' width=600>
+<img src='.img/2025-10-12-05-30-18.png' width=600>
 
 ### Exam Insights
 
@@ -337,21 +337,21 @@ See [🥽 Deep Dive: Using Microsoft Graph Commands](./deepdives/Lab01_Deep-Dive
 Get-EntraUserLicenseDetail -UserId user1@637djb.onmicrosoft.com
 ```
 
-<img src='images/2025-10-17-03-21-00.png' width=700>
+<img src='.img/2025-10-17-03-21-00.png' width=700>
 
 ```pwsh
 Get-MgUserLicenseDetail -UserId user1@637djb.onmicrosoft.com
 ```
 
-<img src='images/2025-10-17-03-20-43.png' width=700>
+<img src='.img/2025-10-17-03-20-43.png' width=700>
 
 You can also use `Get-MgUser`, but you have to explicitly specify the `AssignedLicenses` property:
 
-<img src='images/2025-10-17-03-22-37.png' width=700>
+<img src='.img/2025-10-17-03-22-37.png' width=700>
 
 With `Get-EntraUser`, you do not need to specify the `AssignedLicenses` property:
 
-<img src='images/2025-10-17-03-23-33.png' width=700>
+<img src='.img/2025-10-17-03-23-33.png' width=700>
 
 Unfortunately, neither `Get-AzADUser` nor the `az ad user` command provide license details.
 
@@ -378,7 +378,7 @@ Get-EntraSubscribedSku | select *
 Get-MgSubscribedSku | select *      # Returns same info
 ```
 
-<img src='images/2025-10-17-03-43-37.png' width=700>
+<img src='.img/2025-10-17-03-43-37.png' width=700>
 
 ### Verify permissions to assign license
 
@@ -388,13 +388,13 @@ Both your account and the Microsoft Graph PowerShell SDK application needs permi
 Find-MgGraphCommand Set-MgUserLicense | select -ExpandProperty Permissions
 ```
 
-<img src='images/2025-10-17-03-54-47.png' width=800>
+<img src='.img/2025-10-17-03-54-47.png' width=800>
 
 ```pwsh
 Get-MgContext | select -ExpandProperty scopes
 ```
 
-<img src='images/2025-10-17-03-55-44.png' width=300>
+<img src='.img/2025-10-17-03-55-44.png' width=300>
 
 ### Assign a license to the user
 
@@ -408,7 +408,7 @@ $licenses.AddLicenses = $license
 Set-EntraUserLicense -UserId user1@637djb.onmicrosoft.com -AssignedLicenses $licenses
 ```
 
-<img src='images/2025-10-17-04-08-28.png' width=600>
+<img src='.img/2025-10-17-04-08-28.png' width=600>
 
 References:  
 
@@ -422,7 +422,7 @@ $skuID = (Get-MgSubscribedSku | Where-Object { $_.SkuPartNumber -eq 'DEVELOPERPA
 Set-MgUserLicense -UserId user1@637djb.onmicrosoft.com -AddLicenses @{SkuId = $skuID} -RemoveLicenses @()
 ```
 
-<img src='images/2025-10-17-04-16-43.png' width=600>
+<img src='.img/2025-10-17-04-16-43.png' width=600>
 
 References:  
 
@@ -447,13 +447,13 @@ New-MgGroup `
  -Description "Users licensed with Microsoft Defender for Endpoint"
 ```
 
-<img src='images/2025-10-18-04-09-03.png' width=800>
+<img src='.img/2025-10-18-04-09-03.png' width=800>
 
 By default, this command creates a security group. Specify the `-GroupTypes` parameter as shown to create a Microsoft 365 group.
 
 The `-SecurityEnabled` flag must be set to `$true` for group-based licensing to work. Otherwise, you will get an error when assigning licenses.
 
-<img src='images/2025-10-18-04-37-57.png' width=800>
+<img src='.img/2025-10-18-04-37-57.png' width=800>
 
 References:  
 
@@ -470,7 +470,7 @@ $MDESkuId
 111046dd-295b-4d6d-9724-d52ac90bd1f2
 ```
 
-<img src='images/2025-10-18-04-16-12.png' width=700>
+<img src='.img/2025-10-18-04-16-12.png' width=700>
 
 #### 3. Assign Licenses to the Group (`Set-MgGroupLicense`)
 
@@ -479,7 +479,7 @@ $groupID = (Get-MgGroup | ? DisplayName -eq 'MDE Licensed Users').Id
 Set-MgGroupLicense -GroupId $groupID -AddLicenses @(@{ skuId=$MDESkuId; disabledPlans=@() }) -RemoveLicenses @()
 ```
 
-<img src='images/2025-10-18-04-38-51.png' width=800>
+<img src='.img/2025-10-18-04-38-51.png' width=800>
 
 Verify the license assignment:
 
@@ -487,7 +487,7 @@ Verify the license assignment:
 Get-MgGroup -Property DisplayName, AssignedLicenses | ? DisplayName -eq 'MDE Licensed Users' | Select DisplayName, AssignedLicenses
 ```
 
-<img src='images/2025-10-18-04-42-44.png' width=800>
+<img src='.img/2025-10-18-04-42-44.png' width=800>
 
 References:  
 
@@ -525,7 +525,7 @@ Add-EntraGroupMember -GroupId $groupId -MemberId $memberId
 
 Unlike `Add-AzADGroupMember`, `Add-EntraGroupMember` only supports adding one member at a time.
 
-<img src='images/2025-10-18-05-21-03.png' width=800>
+<img src='.img/2025-10-18-05-21-03.png' width=800>
 
 Reference: [Add-EntraGroupMember](https://learn.microsoft.com/en-us/powershell/module/microsoft.entra.groups/add-entragroupmember?view=entra-powershell)
 
@@ -594,7 +594,7 @@ Resolving issues with licensing:
 1. Use the Audit Logs to monitor group licensing activity
 2. Monitor status and update license features in the M365 Admin Center
 
-    <img src='images/2025-10-19-04-16-51.png' width=400>
+    <img src='.img/2025-10-19-04-16-51.png' width=400>
 
 ##### Force user licensing processing to resolve errors (`Invoke-MgUserLicense`)
 
@@ -639,7 +639,7 @@ New-MgInvitation `
  -SendInvitationMessage:$true
 ```
 
-<img src='images/2025-10-19-04-48-35.png' width=700>
+<img src='.img/2025-10-19-04-48-35.png' width=700>
 
 You can also use `New-EntraInvitation`.
 
@@ -649,7 +649,7 @@ To verify:
 Get-EntraUser -Filter "Mail eq 'henry@contoso.com'" | select *
 ```
 
-<img src='images/2025-10-19-04-55-47.png' width=600>
+<img src='.img/2025-10-19-04-55-47.png' width=600>
 
 The commands `Get-AzADUser` and `Get-MgUser` don't return sufficient details to understand guest invitation state.
 

@@ -10,7 +10,7 @@ This article covers basic topics in using the Microsoft Graph and Entra PowerShe
 Find-MgGraphCommand Get-MgSubscribedSku | select permissions
 ```
 
-<img src='../images/2025-10-16-04-31-32.png' width=700>
+<img src='../.img/2025-10-16-04-31-32.png' width=700>
 
 ## List Available Permissions
 
@@ -18,7 +18,7 @@ Find-MgGraphCommand Get-MgSubscribedSku | select permissions
 Find-MgGraphPermission -SearchString Directory
 ```
 
-<img src='../images/2025-10-16-04-34-29.png' width=900>
+<img src='../.img/2025-10-16-04-34-29.png' width=900>
 
 You can also use `Find-EntraPermission`.
 
@@ -30,6 +30,6 @@ Use the formal wildcard regex `.*` to find commands.
 Find-MgGraphCommand -Command .*userlicense.*
 ```
 
-<img src='../images/2025-10-16-04-38-36.png' width=1100>
+<img src='../.img/2025-10-16-04-38-36.png' width=1100>
 
 [Find-MgGraphCommand](https://learn.microsoft.com/en-us/powershell/microsoftgraph/find-mg-graph-command?view=graph-powershell-1.0)

@@ -68,7 +68,7 @@ Be aware of these limitations when using object detection:
    - Create resource: "Computer Vision" or "Azure AI services"
    - Note the endpoint URL and API key
 
-        <img src='images/2025-10-26-11-06-40.png' width=500>
+        <img src='.img/2025-10-26-11-06-40.png' width=500>
 
    - [Learn more: Create a Computer Vision resource](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/quickstarts-sdk/image-analysis-client-library#prerequisites)
 
@@ -82,7 +82,7 @@ Be aware of these limitations when using object detection:
      - Colors, brands, faces
    - [Tutorial: Analyze an image in Vision Studio](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/quickstarts-sdk/image-analysis-client-library-40#analyze-an-image)
 
-        <img src='images/2025-10-27-04-59-00.png' width=700>
+        <img src='.img/2025-10-27-04-59-00.png' width=700>
 
 ---
 
@@ -130,7 +130,7 @@ The Read API accepts images and documents with the following specifications:
    - Check for errors or misreads
    - [Language support for OCR](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/language-support#optical-character-recognition-ocr)
 
-        <img src='images/2025-10-27-05-30-56.png' width=700>
+        <img src='.img/2025-10-27-05-30-56.png' width=700>
 
 ---
 
@@ -176,7 +176,7 @@ The Read API accepts images and documents with the following specifications:
    - Group photo
    - Profile view vs. frontal view
    - Different lighting conditions
-        <img src='images/2025-10-27-06-03-43.png' width=500>
+        <img src='.img/2025-10-27-06-03-43.png' width=500>
 
 **Important Note:**
 

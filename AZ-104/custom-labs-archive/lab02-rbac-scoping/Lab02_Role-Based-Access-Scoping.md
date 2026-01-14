@@ -239,7 +239,7 @@ Bicep templates are deployed using `New-AzResourceGroupDeployment` (PowerShell) 
    - **User Access Administrator** – Manage user access to resources
 4. Click on a role and select **Permissions** to view detailed actions
 
-    <img src='images/2025-10-21-04-04-43.png' width=700>
+    <img src='.img/2025-10-21-04-04-43.png' width=700>
 
 5. Note the difference between `Actions`, `NotActions`, `DataActions`, and `NotDataActions`
 
@@ -324,9 +324,9 @@ Bicep templates are deployed using `New-AzResourceGroupDeployment` (PowerShell) 
     }
     ```
 
-    <img src='images/2025-10-21-04-24-45.png' width=700>
+    <img src='.img/2025-10-21-04-24-45.png' width=700>
 
-    <img src='images/2025-10-21-04-24-00.png' width=700>
+    <img src='.img/2025-10-21-04-24-00.png' width=700>
 
     **Analysis:**
     - **Control Plane (Actions):** Can manage blob containers (create, delete, list containers)
@@ -509,7 +509,7 @@ Get-AzRoleAssignment -Scope "/subscriptions/$subscriptionId" |
     Where-Object {$_.DisplayName -eq "Finance-Team"}
 ```
 
-<img src='images/2025-10-21-04-44-30.png' width=600>
+<img src='.img/2025-10-21-04-44-30.png' width=600>
 
 #### Using Azure CLI (`az role assignment create`)
 
@@ -531,7 +531,7 @@ az role assignment create \
     --scope "/subscriptions/$subscriptionId"
 ```
 
-<img src='images/2025-10-21-04-49-59.png' width=600>
+<img src='.img/2025-10-21-04-49-59.png' width=600>
 
 ### Assign Role at Resource Group Scope
 
@@ -562,7 +562,7 @@ New-AzRoleAssignment `
 Get-AzRoleAssignment -ResourceGroupName $resourceGroupName
 ```
 
-<img src='images/2025-10-21-04-53-52.png' width=600>
+<img src='.img/2025-10-21-04-53-52.png' width=600>
 
 #### Using Azure CLI
 
@@ -582,7 +582,7 @@ az role assignment create \
 az role assignment list --resource-group rg-dev-test --output table
 ```
 
-<img src='images/2025-10-21-05-06-03.png' width=600>
+<img src='.img/2025-10-21-05-06-03.png' width=600>
 
 ### Assign Role at Resource Scope
 
@@ -597,7 +597,7 @@ New-AzStorageAccount `
     -SkuName "Standard_LRS"
 ```
 
-<img src='images/2025-10-21-05-08-34.png' width=600>
+<img src='.img/2025-10-21-05-08-34.png' width=600>
 
 #### Using PowerShell
 
@@ -618,7 +618,7 @@ New-AzRoleAssignment `
 Get-AzRoleAssignment -Scope $resourceId
 ```
 
-<img src='images/2025-10-21-05-10-19.png' width=600>
+<img src='.img/2025-10-21-05-10-19.png' width=600>
 
 #### Using Azure CLI
 
@@ -639,7 +639,7 @@ az role assignment create \
 az role assignment list --scope "$resourceId" --output table
 ```
 
-<img src='images/2025-10-21-05-12-38.png' width=900>
+<img src='.img/2025-10-21-05-12-38.png' width=900>
 
 ### Using Bicep for Role Assignments
 
@@ -688,7 +688,7 @@ New-AzResourceGroupDeployment `
     -principalType "User"
 ```
 
-<img src='images/2025-10-22-03-28-28.png' width=900>
+<img src='.img/2025-10-22-03-28-28.png' width=900>
 
 ### Using Terraform for Role Assignments
 
@@ -752,7 +752,7 @@ terraform plan
 terraform apply
 ```
 
-<img src='images/2025-10-22-03-45-33.png' width=700>
+<img src='.img/2025-10-22-03-45-33.png' width=700>
 
 ### Exam Insights
 
@@ -801,7 +801,7 @@ terraform apply
    - Effective permissions
 5. Review the role assignments showing **access at this scope and inherited to this scope** to understand where permissions come fromm
 
-<img src='images/2025-10-22-03-54-35.png' width=800>
+<img src='.img/2025-10-22-03-54-35.png' width=800>
 
 #### Using PowerShell (`Get-AzRoleAssignment`)
 
@@ -814,7 +814,7 @@ Get-AzRoleAssignment -ObjectId $userId |
     Format-Table
 ```
 
-<img src='images/2025-10-22-04-01-20.png' width=900>
+<img src='.img/2025-10-22-04-01-20.png' width=900>
 
 ```powershell
 # Get role assignments at subscription scope (includes inherited)
@@ -824,7 +824,7 @@ Get-AzRoleAssignment -AtScope -Scope "/subscriptions/$subscriptionId" |
     Format-Table DisplayName, RoleDefinitionName, Scope
 ```
 
-<img src='images/2025-10-22-04-07-39.png' width=600>
+<img src='.img/2025-10-22-04-07-39.png' width=600>
 
 #### Get role assignments for a resource group (includes inherited)
 
@@ -832,7 +832,7 @@ Get-AzRoleAssignment -AtScope -Scope "/subscriptions/$subscriptionId" |
 Get-AzRoleAssignment -ResourceGroupName "rg-dev-test" -ObjectId $userId
 ```
 
-<img src='images/2025-10-22-04-09-02.png' width=500>
+<img src='.img/2025-10-22-04-09-02.png' width=500>
 
 #### Using Azure CLI (`az role assignment list`)
 
@@ -845,7 +845,7 @@ az role assignment list \
     --output table
 ```
 
-<img src='images/2025-10-25-04-29-17.png' width=700>
+<img src='.img/2025-10-25-04-29-17.png' width=700>
 
 ```bash
 # Get role assignments at a specific scope
@@ -909,7 +909,7 @@ if ($assignment) {
 }
 ```
 
-<img src='images/2025-10-25-04-37-06.png' width=700>
+<img src='.img/2025-10-25-04-37-06.png' width=700>
 
 ```powershell
 
@@ -929,7 +929,7 @@ New-AzRoleAssignment `
 Get-AzRoleAssignment -ObjectId $groupId | Format-Table RoleDefinitionName, Scope
 ```
 
-<img src='images/2025-10-25-04-39-27.png' width=700>
+<img src='.img/2025-10-25-04-39-27.png' width=700>
 
 ### Remove Excessive Permissions
 
@@ -951,7 +951,7 @@ Remove-AzRoleAssignment `
     -Verbose
 ```
 
-<img src='images/2025-10-25-04-46-53.png' width=700>
+<img src='.img/2025-10-25-04-46-53.png' width=700>
 
 ### Exam Insights
 
@@ -1048,7 +1048,7 @@ az role assignment list --query "[?type=='Microsoft.Authorization/denyAssignment
 
 Before creating service principals, it's important to understand the relationship between **App Registrations** and **Service Principals**, as these terms are often used interchangeably but represent different concepts.
 
-<img src='images/2025-10-25-05-37-45.png' width=200>
+<img src='.img/2025-10-25-05-37-45.png' width=200>
 
 **App Registration (Entra Application):**
 
@@ -1128,21 +1128,21 @@ App Registration (1)  ──creates──>  Service Principal (1 or more)
 az ad app list --output table
 ```
 
-<img src='images/2025-10-26-08-58-21.png' width=700>
+<img src='.img/2025-10-26-08-58-21.png' width=700>
 
 ```bash
 # List service principals (Enterprise Applications)
 az ad sp list --all --output table
 ```
 
-<img src='images/2025-10-26-09-00-35.png' width=700>
+<img src='.img/2025-10-26-09-00-35.png' width=700>
 
 ```bash
 # List service principals created by the current user
 az ad sp list --show-mine --output table
 ```
 
-<img src='images/2025-10-26-09-12-23.png' width=700>
+<img src='.img/2025-10-26-09-12-23.png' width=700>
 
 ```bash
 # Create App Registration
@@ -1157,7 +1157,7 @@ az ad sp create --id <Application-Client-ID>
 az ad sp create-for-rbac -n "MyApp2"
 ```
 
-<img src='images/2025-10-26-09-06-51.png' width=400>
+<img src='.img/2025-10-26-09-06-51.png' width=400>
 
 ```bash
 
@@ -1168,7 +1168,7 @@ az role assignment create \
     --role Contributor
 ```
 
-<img src='images/2025-10-26-09-15-42.png' width=500>
+<img src='.img/2025-10-26-09-15-42.png' width=500>
 
 **📚 Related Documentation:**
 
@@ -1194,7 +1194,7 @@ az ad sp create-for-rbac \
 # - tenant (Tenant ID)
 ```
 
-<img src='images/2025-10-26-09-27-04.png' width=500>
+<img src='.img/2025-10-26-09-27-04.png' width=500>
 
 ⚠️ **Security Note:** Store the password securely immediately. It cannot be retrieved later.
 
@@ -1224,7 +1224,7 @@ Write-Host "Client Secret: $($credential.SecretText)"
 Write-Host "Tenant ID: $((Get-AzContext).Tenant.Id)"
 ```
 
-<img src='images/2025-10-26-09-45-43.png' width=400>
+<img src='.img/2025-10-26-09-45-43.png' width=400>
 
 ### Assign Role to Service Principal
 
@@ -1241,7 +1241,7 @@ New-AzRoleAssignment `
 Get-AzRoleAssignment -ObjectId $spObjectId
 ```
 
-<img src='images/2025-10-26-09-48-21.png' width=500>
+<img src='.img/2025-10-26-09-48-21.png' width=500>
 
 Using Azure CLI:
 
@@ -1324,7 +1324,7 @@ $report | Group-Object RoleDefinitionName |
     Sort-Object Count -Descending
 ```
 
-<img src='images/2025-10-26-09-58-49.png' width=400>
+<img src='.img/2025-10-26-09-58-49.png' width=400>
 
 ```powershell
 # Find high-privilege assignments (Owner, Contributor, User Access Administrator)
@@ -1333,7 +1333,7 @@ $report | Where-Object {$_.RoleDefinitionName -in $highPrivilegeRoles} |
     Format-Table DisplayName, RoleDefinitionName, Scope -AutoSize
 ```
 
-<img src='images/2025-10-26-10-02-16.png' width=600>
+<img src='.img/2025-10-26-10-02-16.png' width=600>
 
 Using Azure CLI:
 
@@ -1342,21 +1342,21 @@ Using Azure CLI:
 az role assignment list --include-inherited > rbac-assignments.json
 ```
 
-<img src='images/2025-10-26-10-04-07.png' width=700>
+<img src='.img/2025-10-26-10-04-07.png' width=700>
 
 ```bash
 # Get summary by role
 az role assignment list --include-inherited --query "[].{Role:roleDefinitionName}" --output tsv | sort | uniq -c
 ```
 
-<img src='images/2025-10-26-10-05-27.png' width=700>
+<img src='.img/2025-10-26-10-05-27.png' width=700>
 
 ```bash
 # Find Owner assignments
 az role assignment list --include-inherited --role "Owner" --output table
 ```
 
-<img src='images/2025-10-26-10-06-42.png' width=700>
+<img src='.img/2025-10-26-10-06-42.png' width=700>
 
 ### Exam Insights
 
@@ -1509,9 +1509,9 @@ $role.AssignableScopes.Add("/subscriptions/$subscriptionId")
 New-AzRoleDefinition -Role $role
 ```
 
-<img src='images/2025-10-27-04-00-10.png' width=800>
+<img src='.img/2025-10-27-04-00-10.png' width=800>
 
-<img src='images/2025-10-27-04-01-49.png' width=800>
+<img src='.img/2025-10-27-04-01-49.png' width=800>
 
 #### Method 2: Create from Scratch
 
@@ -1546,9 +1546,9 @@ $role.AssignableScopes = @("/subscriptions/$subscriptionId")
 New-AzRoleDefinition -Role $role
 ```
 
-<img src='images/2025-10-27-04-05-54.png' width=700>
+<img src='.img/2025-10-27-04-05-54.png' width=700>
 
-<img src='images/2025-10-27-04-06-24.png' width=700>
+<img src='.img/2025-10-27-04-06-24.png' width=700>
 
 #### Method 3: Create from JSON File
 
@@ -1594,7 +1594,7 @@ $content | Set-Content $jsonPath
 New-AzRoleDefinition -InputFile $jsonPath
 ```
 
-<img src='images/2025-10-27-04-30-38.png' width=800>
+<img src='.img/2025-10-27-04-30-38.png' width=800>
 
 ### Create a Custom Role Using Azure CLI
 
@@ -1633,7 +1633,7 @@ EOF
 az role definition create --role-definition @storage-blob-operator.json
 ```
 
-<img src='images/2025-10-27-04-37-08.png' width=800>
+<img src='.img/2025-10-27-04-37-08.png' width=800>
 
 **List custom roles:**
 
@@ -1642,14 +1642,14 @@ az role definition create --role-definition @storage-blob-operator.json
 az role definition list --custom-role-only true --output table
 ```
 
-<img src='images/2025-10-27-04-38-21.png' width=900>
+<img src='.img/2025-10-27-04-38-21.png' width=900>
 
 ```bash
 # Get specific custom role
 az role definition list --name "Storage Blob Operator" --output json
 ```
 
-<img src='images/2025-10-27-04-39-01.png' width=600>
+<img src='.img/2025-10-27-04-39-01.png' width=600>
 
 ### Create a Custom Role Using Azure Portal
 
@@ -1660,14 +1660,14 @@ az role definition list --name "Storage Blob Operator" --output json
 1. Navigate to **Subscriptions** → Select your subscription
 2. Go to **Access control (IAM)** → **+ Add** → **Add custom role**
 
-    <img src='images/2025-10-28-03-25-08.png' width=500>
+    <img src='.img/2025-10-28-03-25-08.png' width=500>
 
 3. **Basics tab:**
    - **Custom role name:** `Storage Blob Operator`
    - **Description:** `Can read, write, and delete blobs`
    - **Baseline permissions:** Start from scratch or clone a role
 
-    <img src='images/2025-10-28-03-26-06.png' width=500>
+    <img src='.img/2025-10-28-03-26-06.png' width=500>
 
 4. **Permissions tab:**
    - Click **+ Add permissions**
@@ -1679,21 +1679,21 @@ az role definition list --name "Storage Blob Operator" --output json
      - `Microsoft.Storage/storageAccounts/blobServices/containers/blobs/delete`
    - Click **Add**
 
-    <img src='images/2025-10-28-03-28-01.png' width=700>
+    <img src='.img/2025-10-28-03-28-01.png' width=700>
 
 5. **Assignable scopes tab:**
    - Keep current subscription or add resource groups
 
-    <img src='images/2025-10-28-03-29-47.png' width=700>
+    <img src='.img/2025-10-28-03-29-47.png' width=700>
 
    - **Note:** Cannot add root scope or multiple management groups
 
-        <img src='images/2025-10-28-03-30-28.png' width=500>
+        <img src='.img/2025-10-28-03-30-28.png' width=500>
 
 6. **JSON tab:**
    - Review and edit JSON if needed
 
-    <img src='images/2025-10-28-03-31-18.png' width=500>
+    <img src='.img/2025-10-28-03-31-18.png' width=500>
 
 7. **Review + create:**
    - Click **Create**
@@ -1715,7 +1715,7 @@ New-AzRoleAssignment `
 Get-AzRoleAssignment -ObjectId $userId -ResourceGroupName "rg-dev-test"
 ```
 
-<img src='images/2025-10-28-03-42-22.png' width=700>
+<img src='.img/2025-10-28-03-42-22.png' width=700>
 
 Using Azure CLI:
 
@@ -1727,7 +1727,7 @@ az role assignment create \
   --assignee "user1@637djb.onmicrosoft.com"
 ```
 
-<img src='images/2025-10-28-03-53-23.png' width=700>
+<img src='.img/2025-10-28-03-53-23.png' width=700>
 
 ### Update a Custom Role
 
@@ -1750,7 +1750,7 @@ $role.Description = "Can monitor, start, restart, and deallocate virtual machine
 Set-AzRoleDefinition -Role $role
 ```
 
-<img src='images/2025-10-28-03-55-35.png' width=700>
+<img src='.img/2025-10-28-03-55-35.png' width=700>
 
 Using Azure CLI:
 
@@ -1759,13 +1759,13 @@ Using Azure CLI:
 az role definition list --name "Storage Blob Operator" --output json > role.json
 ```
 
-<img src='images/2025-10-28-03-57-53.png' width=700>
+<img src='.img/2025-10-28-03-57-53.png' width=700>
 
 This command does not output in the exact format needed for update, so some editing is required. See [Azure CLI foramt](https://learn.microsoft.com/en-us/azure/role-based-access-control/custom-roles#azure-cli).
 
 Edit role.json file to add permissions.
 
-<img src='images/2025-10-28-04-00-22.png' width=600>
+<img src='.img/2025-10-28-04-00-22.png' width=600>
 
 Here is the final JSON after editing:
 
@@ -1798,7 +1798,7 @@ Here is the final JSON after editing:
 az role definition update --role-definition @role.json
 ```
 
-<img src='images/2025-10-28-04-41-42.png' width=700>
+<img src='.img/2025-10-28-04-41-42.png' width=700>
 
 ### Delete a Custom Role
 
@@ -1827,9 +1827,9 @@ if ($assignments) {
 }
 ```
 
-<img src='images/2025-10-29-03-50-06.png' width=600>
+<img src='.img/2025-10-29-03-50-06.png' width=600>
 
-<img src='images/2025-10-29-03-55-31.png' width=600>
+<img src='.img/2025-10-29-03-55-31.png' width=600>
 
 Using Azure CLI:
 
@@ -1842,7 +1842,7 @@ az role assignment list --role "$roleId" --output table
 az role definition delete --name "Storage Blob Operator"
 ```
 
-<img src='images/2025-10-29-04-08-29.png' width=600>
+<img src='.img/2025-10-29-04-08-29.png' width=600>
 
 **Error if assignments exist:**
 

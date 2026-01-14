@@ -181,7 +181,7 @@ By the end of this lab, you will be able to:
    - Clear governance and oversight
    - Example: Designate responsible parties for AI system outcomes
 
-<img src='images/2025-10-19-05-44-04.png' width=500>
+<img src='.img/2025-10-19-05-44-04.png' width=500>
 
 **Activity:**
 
@@ -230,7 +230,7 @@ A hospital wants to deploy an AI system to assist doctors in diagnosing diseases
 3. How can transparency be achieved in this context?
 4. Who should be accountable if the AI makes an incorrect diagnosis?
 
-<img src='images/2025-10-20-12-07-37.png' width=600>
+<img src='.img/2025-10-20-12-07-37.png' width=600>
 
 Source [@Mayhem4Markets](https://x.com/Mayhem4Markets/status/1980001528464175463)
 
