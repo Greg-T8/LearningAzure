@@ -44,17 +44,6 @@ This repository provides a **comprehensive study path** combining official Micro
 
 > Source: [Microsoft Official Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104)
 
-## 🧠 Additional Resources
-
-| Resource | Link |
-|----------|------|
-| Exam Readiness Zone | [Microsoft Learn](https://learn.microsoft.com/en-us/shows/exam-readiness-zone/?terms=az-104) |
-| Official Exam Guide | [Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104) |
-| Microsoft Labs (GitHub) | [AZ-104 Labs](https://github.com/MicrosoftLearning/AZ-104-MicrosoftAzureAdministrator) |
-| John Savill Study Cram | [YouTube](https://youtu.be/0Knf9nub4-k) |
-| Microsoft Docs Hub | [Azure Docs](https://learn.microsoft.com/en-us/azure/) |
-| Azure Architecture Center | [Architecture](https://learn.microsoft.com/en-us/azure/architecture/) |
-
 ---
 
 ## 📘 Domain Quick Reference
