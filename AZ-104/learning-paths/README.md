@@ -8,7 +8,7 @@
 
 | #   | Learning Path                                                                                                             | Modules | Status          | Completed |
 | --- | ------------------------------------------------------------------------------------------------------------------------- | ------- | --------------- | --------- |
-| 1   | [Manage identities and governance](https://learn.microsoft.com/en-us/training/paths/az-104-manage-identities-governance/) | 6       | 🕒 Not Started | —         |
+| 1   | [Manage identities and governance](https://learn.microsoft.com/en-us/training/paths/az-104-manage-identities-governance/) | 6       | 🚧 In Progress | 1         |
 | 2   | [Manage virtual networks](https://learn.microsoft.com/en-us/training/paths/az-104-manage-virtual-networks/)               | 8       | 🕒 Not Started | —         |
 | 3   | [Manage storage](https://learn.microsoft.com/en-us/training/paths/az-104-manage-storage/)                                 | 4       | 🕒 Not Started | —         |
 | 4   | [Manage Azure compute resources](https://learn.microsoft.com/en-us/training/paths/az-104-manage-compute-resources/)       | 5       | 🕒 Not Started | —         |

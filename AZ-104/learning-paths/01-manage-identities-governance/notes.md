@@ -12,8 +12,6 @@
     * [⚡ Key Exam Takeaways](#-key-exam-takeaways)
     * [🚫 What It Does NOT Do](#-what-it-does-not-do)
     * [💡 Exam Tip](#-exam-tip)
-* [💡 Commands \& Snippets](#-commands--snippets)
-* [❓ Questions for Review](#-questions-for-review)
 
 ---
 
@@ -100,27 +98,6 @@ Here's a simplified table breaking down the Microsoft Entra ID features by editi
 #### 💡 Exam Tip
 >
 > If a question mentions needing **domain join, LDAP, Kerberos, or NTLM** for Azure VMs or legacy apps **without managing domain controllers**, the answer is **Microsoft Entra Domain Services**.
-
----
-
-## 💡 Commands & Snippets
-
-```powershell
-# Add useful commands here
-```
-
----
-
-## ❓ Questions for Review
-
-<!-- Add questions that came up during study -->
-
-[Module Assessment - Understand Microsoft Entra ID](https://learn.microsoft.com/en-us/training/modules/understand-azure-active-directory/7-knowledge-check)
-<details>
-<summary>Questions</summary>
-
-</details>
-
 
 ---
 
