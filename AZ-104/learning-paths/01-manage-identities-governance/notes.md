@@ -9,23 +9,22 @@
     * [🎯 What It Is](#-what-it-is)
     * [📌 Critical Exam Highlights](#-critical-exam-highlights)
     * [🔑 Supported Features (Memorize These!)](#-supported-features-memorize-these)
-  * [⚡ Key Exam Takeaways](#-key-exam-takeaways)
-  * [🚫 What It Does NOT Do](#-what-it-does-not-do)
-  * [💡 Exam Tip](#-exam-tip)
+    * [⚡ Key Exam Takeaways](#-key-exam-takeaways)
+    * [🚫 What It Does NOT Do](#-what-it-does-not-do)
+    * [💡 Exam Tip](#-exam-tip)
 * [💡 Commands \& Snippets](#-commands--snippets)
 * [❓ Questions for Review](#-questions-for-review)
-
 
 ---
 
 ## 📋 Modules
 
-| # | Module | Status | Notes |
-|---|--------|--------|-------|
-| 1 | [Understand Microsoft Entra ID](https://learn.microsoft.com/en-us/training/modules/understand-azure-active-directory/)| 🚧 | |
-| 2 | Configure user and group accounts | 🕒 | |
-| 3 | Configure subscriptions | 🕒 | |
-| 4 | Configure Azure Policy | 🕒 | |
+| # | Module | Status |
+|---|--------|--------|
+| 1 | [Understand Microsoft Entra ID](https://learn.microsoft.com/en-us/training/modules/understand-azure-active-directory/)| ✅ |
+| 2 | Configure user and group accounts | 🚧 |
+| 3 | Configure subscriptions | 🕒 |
+| 4 | Configure Azure Policy | 🕒 |
 
 ---
 
@@ -34,6 +33,8 @@
 <!-- Add notes as you complete each module -->
 
 ### Entra ID P1 vs P2 Features
+
+[Module Reference](https://learn.microsoft.com/en-us/training/modules/understand-azure-active-directory/5-compare-azure-premium-p1-p2-plans)
 
 Here's a simplified table breaking down the Microsoft Entra ID features by edition:
 
@@ -53,14 +54,15 @@ Here's a simplified table breaking down the Microsoft Entra ID features by editi
 
 **Summary:** P2 includes everything in P1, plus **ID Protection** and **Privileged Identity Management** for enhanced security monitoring and privileged access control.
 
+---
 
 ### Microsoft Entra Domain Services
+
+[Module Reference](https://learn.microsoft.com/en-us/training/modules/understand-azure-active-directory/6-examine-azure-domain-services)
 
 #### 🎯 What It Is
 
 **Microsoft Entra Domain Services** (formerly Azure AD Domain Services) is a **Microsoft-managed** domain service that provides traditional Active Directory features in Azure **without deploying or managing domain controllers**.
-
----
 
 #### 📌 Critical Exam Highlights
 
@@ -72,8 +74,6 @@ Here's a simplified table breaking down the Microsoft Entra ID features by editi
 | **Synchronization** | Automatically syncs users, passwords, and groups from Microsoft Entra ID |
 | **Use Case** | Lift-and-shift **legacy applications** that require traditional AD features to Azure |
 
----
-
 #### 🔑 Supported Features (Memorize These!)
 
 | Feature | Purpose |
@@ -83,9 +83,7 @@ Here's a simplified table breaking down the Microsoft Entra ID features by editi
 | **LDAP** | Directory lookups for legacy apps |
 | **Kerberos/NTLM** | Authentication protocols for legacy apps |
 
----
-
-### ⚡ Key Exam Takeaways
+#### ⚡ Key Exam Takeaways
 
 1. **Primary Purpose**: Run legacy/on-premises apps in Azure that need traditional AD services
 2. **Fully Managed**: No infrastructure overhead—Azure handles everything
@@ -93,17 +91,13 @@ Here's a simplified table breaking down the Microsoft Entra ID features by editi
 4. **Integration**: Seamlessly integrates with Microsoft Entra ID (cloud identities)
 5. **Hybrid Scenarios**:  Bridges on-premises AD and cloud identity management
 
----
-
-### 🚫 What It Does NOT Do
+#### 🚫 What It Does NOT Do
 
 - Does **not** replace on-premises AD DS for complex environments
 - Does **not** provide schema extensions or forest trusts (limited customization)
 - You **cannot** directly manage the domain controllers
 
----
-
-### 💡 Exam Tip
+#### 💡 Exam Tip
 >
 > If a question mentions needing **domain join, LDAP, Kerberos, or NTLM** for Azure VMs or legacy apps **without managing domain controllers**, the answer is **Microsoft Entra Domain Services**.
 
@@ -120,6 +114,13 @@ Here's a simplified table breaking down the Microsoft Entra ID features by editi
 ## ❓ Questions for Review
 
 <!-- Add questions that came up during study -->
+
+[Module Assessment - Understand Microsoft Entra ID](https://learn.microsoft.com/en-us/training/modules/understand-azure-active-directory/7-knowledge-check)
+<details>
+<summary>Questions</summary>
+
+</details>
+
 
 ---
 
