@@ -6,6 +6,7 @@
 
 **Official Study Guide:** [AZ-104 Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104)
 
+
 ---
 
 ## 🎯 Overview
@@ -16,7 +17,7 @@ This repository provides a study path combining official Microsoft resources, vi
 
 | Priority | Resource Notes | Purpose | Location |
 |----------|----------|---------|----------|
-| 1 | [Microsoft Learn Paths](./learning-paths/README.md) | Core concepts & knowledge | `learning-paths/` |
+| 1 | [Microsoft Learning Paths](./learning-paths/README.md) | Core concepts & knowledge | `learning-paths/` |
 | 2 | [Microsoft GitHub Labs](./microsoft-labs/README.md) | Official hands-on practice | `microsoft-labs/` |
 | 3 | [John Savill's Training](./video-courses/john-savill/README.md) | Visual reinforcement & deep dives | `video-courses/john-savill/` |
 | 4 | [O'Reilly Courses](./video-courses/oreilly/README.md) | Alternative explanations | `video-courses/oreilly/` |

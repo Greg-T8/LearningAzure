@@ -6,20 +6,21 @@
 
 ## 📚 Learning Paths Overview
 
-| # | Learning Path | Modules | Status | Completed |
-|---|---------------|---------|--------|-----------|
-| 1 | [Manage identities and governance](https://learn.microsoft.com/en-us/training/paths/az-104-manage-identities-governance/) | 4 | 🕒 Not Started | — |
-| 2 | [Implement and manage storage](https://learn.microsoft.com/en-us/training/paths/az-104-manage-storage/) | 4 | 🕒 Not Started | — |
-| 3 | [Deploy and manage compute resources](https://learn.microsoft.com/en-us/training/paths/az-104-manage-compute-resources/) | 6 | 🕒 Not Started | — |
-| 4 | [Configure and manage virtual networks](https://learn.microsoft.com/en-us/training/paths/az-104-manage-virtual-networks/) | 6 | 🕒 Not Started | — |
-| 5 | [Monitor and back up resources](https://learn.microsoft.com/en-us/training/paths/az-104-monitor-backup-resources/) | 4 | 🕒 Not Started | — |
+| #   | Learning Path                                                                                                             | Modules | Status          | Completed |
+| --- | ------------------------------------------------------------------------------------------------------------------------- | ------- | --------------- | --------- |
+| 1   | [Manage identities and governance](https://learn.microsoft.com/en-us/training/paths/az-104-manage-identities-governance/) | 6       | 🕒 Not Started | —         |
+| 2   | [Manage virtual networks](https://learn.microsoft.com/en-us/training/paths/az-104-manage-virtual-networks/)               | 8       | 🕒 Not Started | —         |
+| 3   | [Manage storage](https://learn.microsoft.com/en-us/training/paths/az-104-manage-storage/)                                 | 4       | 🕒 Not Started | —         |
+| 4   | [Manage Azure compute resources](https://learn.microsoft.com/en-us/training/paths/az-104-manage-compute-resources/)       | 5       | 🕒 Not Started | —         |
+| 5   | [Monitor and back up resources](https://learn.microsoft.com/en-us/training/paths/az-104-monitor-backup-resources/)        | 2       | 🕒 Not Started | —         |
 
 **Legend:**  
-| Emoji | Meaning |
-|-------|---------|
-| 🕒 | Not Started |
-| 🚧 | In Progress |
-| ✅ | Complete |
+
+| Emoji | Meaning     |
+| ----- | ----------- |
+| 🕒   | Not Started |
+| 🚧   | In Progress |
+| ✅    | Complete    |
 
 ---
 
@@ -34,6 +35,7 @@ Each learning path has a dedicated folder with:
 
 ## 🔗 Quick Links
 
+- [AZ-104 Microsoft Learning Path Course Syllabus](https://learn.microsoft.com/en-us/training/courses/az-104t00)
 - [AZ-104 Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104)
 - [Exam Readiness Zone](https://learn.microsoft.com/en-us/shows/exam-readiness-zone/?terms=az-104)
 - [Microsoft Learn Browse](https://learn.microsoft.com/en-us/training/browse/?products=azure&roles=administrator)
