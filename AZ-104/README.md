@@ -2,15 +2,19 @@
 
 **Objective:** Achieve the **AZ-104: Microsoft Azure Administrator** certification through a structured, multi-resource study approach.
 
+**Certification Page:** [AZ-104: Microsoft Azure Administrator](https://learn.microsoft.com/en-us/credentials/certifications/azure-administrator/?practice-assessment-type=certification#certification-prepare-for-the-exam)
+
+**Official Study Guide:** [AZ-104 Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104)
+
 ---
 
 ## 🎯 Overview
 
-This repository provides a **comprehensive study path** combining official Microsoft resources, video courses, hands-on labs, and practice exams.
+This repository provides a study path combining official Microsoft resources, video courses, hands-on labs, and practice exams.
 
 ### 📚 Learning Resource Priorities
 
-| Priority | Resource | Purpose | Location |
+| Priority | Resource Notes | Purpose | Location |
 |----------|----------|---------|----------|
 | 1 | [Microsoft Learn Paths](./learning-paths/README.md) | Core concepts & knowledge | `learning-paths/` |
 | 2 | [Microsoft GitHub Labs](./microsoft-labs/README.md) | Official hands-on practice | `microsoft-labs/` |
@@ -20,13 +24,13 @@ This repository provides a **comprehensive study path** combining official Micro
 
 ### 🔄 Study Workflow Per Domain
 
-> 📝 **Take notes at every step** — capture key concepts, commands, and pitfalls.
-
 1. **Learn** — Complete Microsoft Learn modules
 2. **Practice** — Do official Microsoft GitHub lab
 3. **Reinforce** — Watch video content for gaps
 4. **Assess** — Practice exam questions for domain
 5. **Review** — Update weak areas, refine notes
+
+> 📝 **Take notes at every step** — capture key concepts, commands, and pitfalls.
 
 ---
 
@@ -41,8 +45,6 @@ This repository provides a **comprehensive study path** combining official Micro
 | 5. Monitoring & Backup | 10-15% | 🕒 | 🕒 | 🕒 |
 
 **Legend:** 🕒 Not Started | 🚧 In Progress | ✅ Complete
-
-> Source: [Microsoft Official Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104)
 
 ---
 
