@@ -14,13 +14,7 @@
 | 4   | [Manage Azure compute resources](https://learn.microsoft.com/en-us/training/paths/az-104-manage-compute-resources/)       | 5       | 🕒 Not Started | —         |
 | 5   | [Monitor and back up resources](https://learn.microsoft.com/en-us/training/paths/az-104-monitor-backup-resources/)        | 2       | 🕒 Not Started | —         |
 
-**Legend:**  
-
-| Emoji | Meaning     |
-| ----- | ----------- |
-| 🕒   | Not Started |
-| 🚧   | In Progress |
-| ✅    | Complete    |
+**Legend:** 🕒 Not Started | 🚧 In Progress | ✅ Complete
 
 ---
 

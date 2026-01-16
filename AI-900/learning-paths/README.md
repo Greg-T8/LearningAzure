@@ -1,25 +1,35 @@
-# Microsoft Learn - AI-900 Learning Paths
+# Microsoft Learn - AI-900 Modules
 
 **Objective:** Complete all official Microsoft Learn modules mapped to AI-900 exam objectives.
 
+- [AI-900 Certification Page](https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-fundamentals/?practice-assessment-type=certification)
+- [AI-900 Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/ai-900)
+- [Microsoft Learn Courses for AI-900](https://learn.microsoft.com/en-us/training/courses/ai-900t00)
+
 ---
 
-## 📚 Learning Paths Overview
+## 📚 Introduction to AI in Azure
 
-| # | Learning Path | Modules | Status | Completed |
-|---|---------------|---------|--------|-----------|
-| 1 | [Get started with AI on Azure](https://learn.microsoft.com/en-us/training/paths/get-started-with-artificial-intelligence-on-azure/) | 3 | 🕒 Not Started | — |
-| 2 | [Explore visual tools for ML](https://learn.microsoft.com/en-us/training/paths/create-no-code-predictive-models-azure-machine-learning/) | 4 | 🕒 Not Started | — |
-| 3 | [Explore computer vision](https://learn.microsoft.com/en-us/training/paths/explore-computer-vision-microsoft-azure/) | 4 | 🕒 Not Started | — |
-| 4 | [Explore NLP](https://learn.microsoft.com/en-us/training/paths/explore-natural-language-processing/) | 5 | 🕒 Not Started | — |
-| 5 | [Explore generative AI](https://learn.microsoft.com/en-us/training/paths/introduction-generative-ai/) | 4 | 🕒 Not Started | — |
+**Learning Path:** [Introduction to AI in Azure](https://learn.microsoft.com/en-us/training/paths/introduction-to-ai-on-azure/)
 
-**Legend:**  
-| Emoji | Meaning |
-|-------|---------|
-| 🕒 | Not Started |
-| 🚧 | In Progress |
-| ✅ | Complete |
+| # | Module | Status | Completed |
+|---|--------|--------|-----------|
+| 1 | [Overview of AI concepts](https://learn.microsoft.com/en-us/training/modules/get-started-ai-fundamentals/) | 🕒 Not Started | — |
+| 2 | [Get started with AI in Microsoft Foundry](https://learn.microsoft.com/en-us/training/modules/get-started-ai-in-foundry/) | 🕒 Not Started | — |
+| 3 | [Introduction to machine learning concepts](https://learn.microsoft.com/en-us/training/modules/fundamentals-machine-learning/) | 🕒 Not Started | — |
+| 4 | [Get started with machine learning in Azure](https://learn.microsoft.com/en-us/training/modules/design-machine-learning-model-training-solution/) | 🕒 Not Started | — |
+| 5 | [Introduction to generative AI and agents](https://learn.microsoft.com/en-us/training/modules/fundamentals-generative-ai/) | 🕒 Not Started | — |
+| 6 | [Get started with generative AI in Microsoft Foundry](https://learn.microsoft.com/en-us/training/modules/get-started-generative-ai-azure/) | 🕒 Not Started | — |
+| 7 | [Introduction to text analysis concepts](https://learn.microsoft.com/en-us/training/modules/introduction-language/) | 🕒 Not Started | — |
+| 8 | [Get started with natural language processing in Microsoft Foundry](https://learn.microsoft.com/en-us/training/modules/get-started-language-azure/) | 🕒 Not Started | — |
+| 9 | [Introduction to AI speech concepts](https://learn.microsoft.com/en-us/training/modules/introduction-ai-speech/) | 🕒 Not Started | — |
+| 10 | [Get started with speech in Microsoft Foundry](https://learn.microsoft.com/en-us/training/modules/recognize-synthesize-speech/) | 🕒 Not Started | — |
+| 11 | [Introduction to computer vision concepts](https://learn.microsoft.com/en-us/training/modules/introduction-computer-vision/) | 🕒 Not Started | — |
+| 12 | [Get started with computer vision in Microsoft Foundry](https://learn.microsoft.com/en-us/training/modules/get-started-computer-vision-azure/) | 🕒 Not Started | — |
+| 13 | [Introduction to AI-powered information extraction concepts](https://learn.microsoft.com/en-us/training/modules/introduction-information-extraction/) | 🕒 Not Started | — |
+| 14 | [Get started with AI-powered information extraction in Microsoft Foundry](https://learn.microsoft.com/en-us/training/modules/ai-information-extraction/) | 🕒 Not Started | — |
+
+**Legend:** 🕒 Not Started | 🚧 In Progress | ✅ Complete
 
 ---
 
@@ -34,7 +44,6 @@ Each learning path has a dedicated folder with:
 
 ## 🔗 Quick Links
 
-- [AI-900 Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/ai-900)
 - [Official Practice Assessment](https://learn.microsoft.com/en-us/credentials/certifications/exams/ai-900/practice/assessment?assessment-type=practice&assessmentId=26)
 
 ---
