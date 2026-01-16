@@ -1,6 +1,6 @@
 # Learning Path 1: Manage Identities and Governance
 
-**Link:** [Microsoft Learn](https://learn.microsoft.com/en-us/training/paths/az-104-manage-identities-governance/)
+**Learning Path** [AZ-104: Manage identities and governance in Azure](https://learn.microsoft.com/en-us/training/paths/az-104-manage-identities-governance/)
 
 * [📋 Modules](#-modules)
 * [🧠 Key Concepts](#-key-concepts)
@@ -12,6 +12,8 @@
     * [⚡ Key Exam Takeaways](#-key-exam-takeaways)
     * [🚫 What It Does NOT Do](#-what-it-does-not-do)
     * [💡 Exam Tip](#-exam-tip)
+  * [Microsoft Entra ID: Restore or Remove Deleted Users](#microsoft-entra-id-restore-or-remove-deleted-users)
+  * [Change Group License Assignments (Microsoft Entra ID)](#change-group-license-assignments-microsoft-entra-id)
 
 ---
 
@@ -20,7 +22,7 @@
 | # | Module | Status |
 |---|--------|--------|
 | 1 | [Understand Microsoft Entra ID](https://learn.microsoft.com/en-us/training/modules/understand-azure-active-directory/)| ✅ |
-| 2 | Configure user and group accounts | 🚧 |
+| 2 | [Create, configure, and manage identities](https://learn.microsoft.com/en-us/training/modules/create-configure-manage-identities/) | 🚧 |
 | 3 | Configure subscriptions | 🕒 |
 | 4 | Configure Azure Policy | 🕒 |
 
@@ -91,14 +93,74 @@ Here's a simplified table breaking down the Microsoft Entra ID features by editi
 
 #### 🚫 What It Does NOT Do
 
-- Does **not** replace on-premises AD DS for complex environments
-- Does **not** provide schema extensions or forest trusts (limited customization)
-- You **cannot** directly manage the domain controllers
+* Does **not** replace on-premises AD DS for complex environments
+* Does **not** provide schema extensions or forest trusts (limited customization)
+* You **cannot** directly manage the domain controllers
 
 #### 💡 Exam Tip
 >
 > If a question mentions needing **domain join, LDAP, Kerberos, or NTLM** for Azure VMs or legacy apps **without managing domain controllers**, the answer is **Microsoft Entra Domain Services**.
 
 ---
+
+### Microsoft Entra ID: Restore or Remove Deleted Users
+
+[Module Reference](https://learn.microsoft.com/en-us/training/modules/create-configure-manage-identities/3-exercise-assign-licenses-users)
+
+**Deleted user lifecycle**
+
+* When a user is deleted, the account is placed in a **soft-deleted (suspended) state for 30 days**.
+* During this **30-day window**, the user **can be restored with all properties**.
+* After 30 days, the account is **permanently deleted automatically**.
+
+**Important**
+
+* **Permanently deleted users cannot be restored.**
+
+**Where this is managed**
+
+* Microsoft Entra ID user interface → view restorable users, restore users, or permanently delete users.
+
+**Required roles to restore or permanently delete**
+
+* Global Administrator
+* User Administrator
+* Partner Tier-1 Support
+* Partner Tier-2 Support
+
+---
+
+### Change Group License Assignments (Microsoft Entra ID)
+
+**Group-based licensing overview**
+
+* Assign licenses to a **security group** so all current/future members get licenses automatically; removing a user from the group removes the group-assigned license. ([Microsoft Learn][1])
+* Group/user license assignment is managed through the **Microsoft 365 Admin Center**. ([Microsoft Learn][2])
+
+**Where to do it (high level)**
+
+* Microsoft 365 Admin Center → **Billing → Licenses** → select product → **Groups** tab → assign to a group. ([Microsoft Learn][1])
+
+**Status concepts**
+
+* Assignments can be processing or completed; failures are recorded as an **error state on the user** and can be investigated (including via audit logs). ([Microsoft Learn][3])
+
+**Error types you should recognize**
+(These show up as licensing assignment error categories, including in Microsoft Graph.)
+
+* **CountViolation** — not enough licenses available (license count exceeded). ([Microsoft Learn][4])
+* **MutuallyExclusiveViolation** — conflicting plans can’t coexist. ([Microsoft Learn][4])
+* **DependencyViolation** — missing required/dependent service plan. ([Microsoft Learn][4])
+* **ProhibitedInUsageLocationViolation** — usage location missing/invalid or service not available in that location (usage location must be set). ([Microsoft Learn][4])
+* **UniquenessViolation** — uniqueness constraint failure (commonly surfaced as conflicts like duplicate values). ([Microsoft Learn][4])
+* **Other** — miscellaneous licensing interaction/processing failures. ([Microsoft Learn][4])
+
+[1]: https://learn.microsoft.com/en-us/entra/identity/users/licensing-admin-center?utm_source=chatgpt.com "Assign licenses to a group using the Microsoft 365 admin ..."
+[2]: https://learn.microsoft.com/en-us/entra/identity/users/licensing-group-advanced?utm_source=chatgpt.com "Scenarios, limitations, and known issues using groups to ..."
+[3]: https://learn.microsoft.com/en-us/entra/fundamentals/licensing-groups-resolve-problems?utm_source=chatgpt.com "Resolve group license assignment problems."
+[4]: https://learn.microsoft.com/en-us/graph/api/resources/licenseassignmentstate?view=graph-rest-1.0&utm_source=chatgpt.com "licenseAssignmentState resource type - Microsoft Graph v1.0"
+
+---
+
 
 *Last updated: 2026-01-14*
