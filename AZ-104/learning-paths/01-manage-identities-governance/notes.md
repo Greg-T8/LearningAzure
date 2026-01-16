@@ -14,6 +14,8 @@
     * [💡 Exam Tip](#-exam-tip)
   * [Microsoft Entra ID: Restore or Remove Deleted Users](#microsoft-entra-id-restore-or-remove-deleted-users)
   * [Change Group License Assignments (Microsoft Entra ID)](#change-group-license-assignments-microsoft-entra-id)
+  * [Azure Physical Infrastructure](#azure-physical-infrastructure)
+  * [Azure Management Infrastructure](#azure-management-infrastructure)
 
 ---
 
@@ -22,9 +24,17 @@
 | # | Module | Status |
 |---|--------|--------|
 | 1 | [Understand Microsoft Entra ID](https://learn.microsoft.com/en-us/training/modules/understand-azure-active-directory/)| ✅ |
-| 2 | [Create, configure, and manage identities](https://learn.microsoft.com/en-us/training/modules/create-configure-manage-identities/) | 🚧 |
-| 3 | Configure subscriptions | 🕒 |
+| 2 | [Create, configure, and manage identities](https://learn.microsoft.com/en-us/training/modules/create-configure-manage-identities/) | ✅ |
+| 3 | [Describe the core architectural components of Azure](https://learn.microsoft.com/en-us/training/modules/describe-core-architectural-components-of-azure/) | 🚧 |
 | 4 | Configure Azure Policy | 🕒 |
+
+**Legend:**  
+
+| Emoji | Meaning     |
+| ----- | ----------- |
+| 🕒   | Not Started |
+| 🚧   | In Progress |
+| ✅    | Complete    |
 
 ---
 
@@ -161,6 +171,134 @@ Here's a simplified table breaking down the Microsoft Entra ID features by editi
 [4]: https://learn.microsoft.com/en-us/graph/api/resources/licenseassignmentstate?view=graph-rest-1.0&utm_source=chatgpt.com "licenseAssignmentState resource type - Microsoft Graph v1.0"
 
 ---
+
+### Azure Physical Infrastructure
+
+[Module Reference](https://learn.microsoft.com/en-us/training/modules/describe-core-architectural-components-of-azure/5-describe-azure-physical-infrastructure)
+
+**Azure datacenter foundation**
+
+* Azure is built on **global datacenters** that house compute, storage, and networking hardware with redundant power, cooling, and connectivity.
+
+**Regions**
+
+* A **region** is a geographic location with **multiple datacenters** connected by high-speed, low-latency networks.
+* Regions are where you **deploy Azure resources**; region choice affects performance, compliance, and availability.
+
+**Availability Zones**
+
+* **Availability Zones** are **physically separate datacenters** within the same region.
+* Each zone has independent power, networking, and cooling.
+* Zones improve **fault tolerance**: failure in one zone doesn’t affect others.
+
+**Region pairs**
+
+* Regions are paired within the same geography to support **disaster recovery and data residency**.
+* Azure places **priority for recovery** across paired regions in major outages.
+
+**Sovereign regions**
+
+* **Sovereign regions** are isolated instances of Azure designed to meet **special regulatory and data-residency requirements**.
+
+**Purpose of physical distribution**
+
+* The combination of **regions, availability zones, and region pairs** provides:
+
+  * **Resiliency** against failures
+  * **Low latency** for customers
+  * **Compliance boundaries** for data sovereignty and regulations
+
+**Key concepts to remember**
+
+* Region = one or more datacenters in a geography.
+* Availability Zones = separate locations within a region for redundancy.
+* Region pairs = disaster recovery alignment across regions.
+* Sovereign regions = specialized isolated Azure deployments.
+
+---
+
+### Azure Management Infrastructure
+
+[Module Reference](https://learn.microsoft.com/en-us/training/modules/describe-core-architectural-components-of-azure/6-describe-azure-management-infrastructure)
+
+**Overview**
+
+* Azure provides a hierarchical management structure to organize resources, apply governance, and control access at scale.
+* Management layers allow consistent policy, RBAC, and compliance enforcement across large environments.
+
+**Management Hierarchy (Top → Bottom)**
+
+* **Management Groups**
+
+  * Used to organize subscriptions.
+  * Policies and RBAC assigned at a management group are inherited by all child management groups and subscriptions.
+  * A management group tree supports **up to six levels of depth** (excluding the tenant root).
+  * The **tenant root management group** is the top-level container and is created automatically.
+* **Subscriptions**
+
+  * Logical containers for billing, access control, and quotas.
+  * A subscription can belong to only **one** management group.
+* **Resource Groups**
+
+  * Containers that hold related Azure resources.
+  * Resources can exist in only one resource group at a time.
+  * Resource groups are used for lifecycle management (deploy, update, delete as a unit).
+* **Resources**
+
+  * Individual Azure services (VMs, storage accounts, VNets, databases, etc.).
+
+**Azure Resource Manager (ARM)**
+
+* The control plane for Azure.
+* Handles deployment, updates, and deletion of resources.
+* Provides:
+
+  * Declarative infrastructure via templates (ARM templates, Bicep).
+  * Consistent management layer across Azure services.
+  * Role-based access control (RBAC).
+  * Policy enforcement.
+  * Tagging support for cost and organization.
+
+**Role-Based Access Control (RBAC)**
+
+* Controls **who** can do **what** at a given scope.
+* Scopes include:
+
+  * Management group
+  * Subscription
+  * Resource group
+  * Individual resource
+* Access is inherited down the hierarchy.
+* Uses built-in roles (Owner, Contributor, Reader) and custom roles.
+
+**Azure Policy**
+
+* Used to enforce standards and assess compliance.
+* Can:
+
+  * Deny non-compliant resources.
+  * Audit existing resources.
+  * Append or modify resource settings.
+* Assigned at management group, subscription, or resource group scope.
+* Policies are inherited by child scopes.
+
+**Tags**
+
+* Key-value pairs applied to resources or resource groups.
+* Used for:
+
+  * Cost management and chargeback.
+  * Organization and reporting.
+* Tags are **not automatically inherited** from parent scopes.
+
+**Key Exam Takeaways**
+
+* Management groups are for **organization and governance across subscriptions**.
+* RBAC controls access; Azure Policy enforces rules and compliance.
+* ARM is the unified management layer for Azure.
+* Inheritance flows **downward** through the management hierarchy.
+* Management group hierarchy depth limit: **6 levels**.
+
 
 
 *Last updated: 2026-01-14*
