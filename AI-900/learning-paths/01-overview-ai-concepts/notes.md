@@ -3,7 +3,7 @@
 **Link:** [Overview of AI concepts](https://learn.microsoft.com/en-us/training/modules/get-started-ai-fundamentals/)
 
 * [Generative AI Fundamentals](#generative-ai-fundamentals)
-* [Natural language processing fundamentals](#natural-language-processing-fundamentals)
+* [Natural Language Processing (NLP)](#natural-language-processing-nlp)
 
 ---
 
@@ -66,64 +66,47 @@
 
 ---
 
-## Natural language processing fundamentals
+## Natural Language Processing (NLP)
 
 [Module Reference](https://learn.microsoft.com/en-us/training/modules/get-started-ai-fundamentals/5-natural-language-processing?pivots=text)
 
-**What Natural Language Processing (NLP) is**
+**Definition**
 
-* A branch of AI that enables computers to **understand, interpret, and generate human language**.
-* Works with both **text and speech** inputs.
+* Natural Language Processing (NLP) is a branch of artificial intelligence that enables computers to process, analyze, understand, and generate human language.
 
-**Common NLP tasks**
+**Why NLP is difficult**
 
-* **Tokenization**: breaking text into words, subwords, or characters.
-* **Part-of-speech tagging**: identifying grammatical roles (noun, verb, adjective).
-* **Named Entity Recognition (NER)**: detecting entities such as people, organizations, locations, and dates.
-* **Sentiment analysis**: determining emotional tone (positive, negative, neutral).
-* **Language detection**: identifying the language of input text.
-* **Text classification**: categorizing text (spam detection, topic labeling).
-* **Summarization and translation**: condensing or converting text between languages.
-* **Speech-to-text / text-to-speech**: converting between spoken and written language.
+* Human language is ambiguous and context-dependent.
+* The same word can have different meanings depending on usage.
+* Language includes slang, idioms, sarcasm, and grammatical variation.
 
-**How NLP systems work (high level)**
+**Common NLP workloads**
 
-* Text is converted into a **numeric representation** (tokens, embeddings).
-* Models learn patterns and relationships between words based on **context**.
-* Modern NLP commonly uses **deep learning models** (e.g., transformer-based architectures).
+* **Text classification**: Assigning categories to text (for example, spam detection).
+* **Sentiment analysis**: Identifying whether text expresses positive, negative, or neutral sentiment.
+* **Key phrase extraction**: Identifying important terms in text.
+* **Named entity recognition (NER)**: Detecting entities such as people, organizations, locations, dates, or quantities.
+* **Language detection**: Identifying the language of a text sample.
+* **Machine translation**: Translating text between languages.
+* **Speech-related tasks**: Speech-to-text and text-to-speech.
+* **Question answering / conversational AI**: Understanding user input and generating relevant responses.
 
-**Natural language understanding vs. generation**
+**How NLP systems work**
 
-* **NLU (Understanding)**: extracting meaning, intent, and entities from text.
-* **NLG (Generation)**: producing human-like language from structured or unstructured data.
-* Many systems combine both (for example, chatbots).
+* Text is converted into numerical representations that models can process.
+* Machine learning models learn language patterns from large datasets.
+* Pre-trained language models can be reused and adapted for specific NLP tasks.
 
-**Use cases**
+**Modern NLP approaches**
 
-* Chatbots and virtual assistants.
-* Search and information retrieval.
-* Customer feedback analysis.
-* Document processing and summarization.
-* Voice-enabled applications.
+* Deep learning models are commonly used for NLP.
+* Transformer-based models analyze relationships between words across entire sentences or documents, improving context awareness.
 
-**Limitations and challenges**
+**Exam-relevant points**
 
-* Ambiguity in language (sarcasm, idioms, context).
-* Bias inherited from training data.
-* Accuracy varies with domain-specific language.
-* Requires quality data and evaluation for real-world reliability.
+* NLP focuses on enabling computers to work with natural (human) language.
+* Ambiguity and context are core challenges in NLP.
+* Many NLP solutions rely on pre-trained models rather than training from scratch.
 
-**Responsible AI considerations**
-
-* Validate outputs, especially for sentiment or intent classification.
-* Be cautious with sensitive or personal data.
-* Monitor for bias and misinterpretation.
-
-**Exam-relevant takeaways**
-
-* NLP focuses on **understanding and generating human language**.
-* Tokenization and embeddings are foundational concepts.
-* NER and sentiment analysis are core, commonly tested NLP tasks.
-* NLP supports both text-based and speech-based scenarios.
 
 *Last updated: 2026-01-16*
