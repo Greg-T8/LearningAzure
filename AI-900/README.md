@@ -10,12 +10,12 @@ This repository provides a **comprehensive study path** combining official Micro
 
 ### 📚 Learning Resource Priorities
 
-| Priority | Resource | Purpose | Location |
-|----------|----------|---------|----------|
-| 1 | [Microsoft Learn Paths](./learning-paths/README.md) | Core concepts & knowledge | `learning-paths/` |
-| 2 | [Microsoft GitHub Labs](./microsoft-labs/README.md) | Official hands-on practice | `microsoft-labs/` |
-| 3 | [Video Courses](./video-courses/README.md) | Visual reinforcement | `video-courses/` |
-| 4 | [Practice Exams](./practice-exams/README.md) | Exam readiness assessment | `practice-exams/` |
+| Priority | Resource                                            | Purpose                    | Location          |
+| -------- | --------------------------------------------------- | -------------------------- | ----------------- |
+| 1        | [Microsoft Learn Paths](./learning-paths/README.md) | Core concepts & knowledge  | `learning-paths/` |
+| 2        | [Microsoft GitHub Labs](./microsoft-labs/README.md) | Official hands-on practice | `microsoft-labs/` |
+| 3        | [Video Courses](./video-courses/README.md)          | Visual reinforcement       | `video-courses/`  |
+| 4        | [Practice Exams](./practice-exams/README.md)        | Exam readiness assessment  | `practice-exams/` |
 
 ### 🔄 Study Workflow Per Domain
 
@@ -31,13 +31,13 @@ This repository provides a **comprehensive study path** combining official Micro
 
 ## 📊 Exam Domains and Consolidated Progress Tracker
 
-| Domain | Weight | MS Learn | MS Labs | Video |
-|--------|--------|----------|---------|-------|
-| 1. AI Workloads & Considerations | 15-20% | 🕒 | 🕒 | 🕒 |
-| 2. Machine Learning on Azure | 15-20% | 🕒 | 🕒 | 🕒 |
-| 3. Computer Vision Workloads | 15-20% | 🕒 | 🕒 | 🕒 |
-| 4. NLP Workloads | 15-20% | 🕒 | 🕒 | 🕒 |
-| 5. Generative AI Workloads | 20-25% | 🕒 | 🕒 | 🕒 |
+| Domain                           | Weight | MS Learn | MS Labs | Video |
+| -------------------------------- | ------ | -------- | ------- | ----- |
+| 1. AI Workloads & Considerations | 15-20% | 🕒      | 🕒     | 🕒   |
+| 2. Machine Learning on Azure     | 15-20% | 🕒      | 🕒     | 🕒   |
+| 3. Computer Vision Workloads     | 15-20% | 🕒      | 🕒     | 🕒   |
+| 4. NLP Workloads                 | 15-20% | 🕒      | 🕒     | 🕒   |
+| 5. Generative AI Workloads       | 20-25% | 🕒      | 🕒     | 🕒   |
 
 **Legend:** 🕒 Not Started | 🚧 In Progress | ✅ Complete
 
