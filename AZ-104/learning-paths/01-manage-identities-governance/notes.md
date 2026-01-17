@@ -2,17 +2,18 @@
 
 **Learning Path** [AZ-104: Manage identities and governance in Azure](https://learn.microsoft.com/en-us/training/paths/az-104-manage-identities-governance/)
 
-* [📋 Modules](#-modules)
-* [🧠 Key Concepts](#-key-concepts)
-  * [Entra ID P1 vs P2 Features](#entra-id-p1-vs-p2-features)
-  * [Microsoft Entra Domain Services](#microsoft-entra-domain-services)
-  * [Microsoft Entra ID: Restore or Remove Deleted Users](#microsoft-entra-id-restore-or-remove-deleted-users)
-  * [Change Group License Assignments (Microsoft Entra ID)](#change-group-license-assignments-microsoft-entra-id)
-  * [Azure Physical Infrastructure](#azure-physical-infrastructure)
-  * [Azure Management Infrastructure](#azure-management-infrastructure)
+
+* [Entra ID P1 vs P2 Features](#entra-id-p1-vs-p2-features)
+* [Microsoft Entra Domain Services](#microsoft-entra-domain-services)
+* [Microsoft Entra ID: Restore or Remove Deleted Users](#microsoft-entra-id-restore-or-remove-deleted-users)
+* [Change Group License Assignments (Microsoft Entra ID)](#change-group-license-assignments-microsoft-entra-id)
+* [Azure Physical Infrastructure](#azure-physical-infrastructure)
+* [Azure Management Infrastructure](#azure-management-infrastructure)
+* [Cloud Adoption Framework for Azure](#cloud-adoption-framework-for-azure)
 
 ---
 
+<!-- omit in toc -->
 ## 📋 Modules
 
 | # | Module | Status |
@@ -28,11 +29,7 @@
 
 ---
 
-## 🧠 Key Concepts
-
-<!-- Add notes as you complete each module -->
-
-### Entra ID P1 vs P2 Features
+## Entra ID P1 vs P2 Features
 
 [Module Reference](https://learn.microsoft.com/en-us/training/modules/understand-azure-active-directory/5-compare-azure-premium-p1-p2-plans)
 
@@ -56,7 +53,7 @@ Here's a simplified table breaking down the Microsoft Entra ID features by editi
 
 ---
 
-### Microsoft Entra Domain Services
+## Microsoft Entra Domain Services
 
 [Module Reference](https://learn.microsoft.com/en-us/training/modules/understand-azure-active-directory/6-examine-azure-domain-services)
 
@@ -103,7 +100,7 @@ Here's a simplified table breaking down the Microsoft Entra ID features by editi
 
 ---
 
-### Microsoft Entra ID: Restore or Remove Deleted Users
+## Microsoft Entra ID: Restore or Remove Deleted Users
 
 [Module Reference](https://learn.microsoft.com/en-us/training/modules/create-configure-manage-identities/3-exercise-assign-licenses-users)
 
@@ -130,7 +127,7 @@ Here's a simplified table breaking down the Microsoft Entra ID features by editi
 
 ---
 
-### Change Group License Assignments (Microsoft Entra ID)
+## Change Group License Assignments (Microsoft Entra ID)
 
 **Group-based licensing overview**
 
@@ -162,7 +159,7 @@ Here's a simplified table breaking down the Microsoft Entra ID features by editi
 
 ---
 
-### Azure Physical Infrastructure
+## Azure Physical Infrastructure
 
 [Module Reference](https://learn.microsoft.com/en-us/training/modules/describe-core-architectural-components-of-azure/5-describe-azure-physical-infrastructure)
 
@@ -207,7 +204,7 @@ Here's a simplified table breaking down the Microsoft Entra ID features by editi
 
 ---
 
-### Azure Management Infrastructure
+## Azure Management Infrastructure
 
 [Module Reference](https://learn.microsoft.com/en-us/training/modules/describe-core-architectural-components-of-azure/6-describe-azure-management-infrastructure)
 
@@ -288,6 +285,74 @@ Here's a simplified table breaking down the Microsoft Entra ID features by editi
 * ARM is the unified management layer for Azure.
 * Inheritance flows **downward** through the management hierarchy.
 * Management group hierarchy depth limit: **6 levels**.
+
+---
+
+## Cloud Adoption Framework for Azure
+
+[Module Reference](https://learn.microsoft.com/en-us/training/modules/sovereignty-policy-initiatives/cloud-adoption-framework)
+
+**Overview**
+
+* The Cloud Adoption Framework for Azure provides end-to-end technical guidance to help organizations achieve cloud adoption objectives.
+* The framework includes best practices, documentation, and tools contributed by Microsoft and partners.
+* Azure Policy is integral to the governance methodology, helping enforce guardrails and compliance.
+
+**Cloud Governance**
+
+* **Definition** – Continuous process to manage cloud usage, minimize risks, enforce compliance, and optimize operations.
+* **Purpose** – Ensure cloud activities are consistent with strategy and business objectives.
+
+**Steps for Cloud Governance**
+
+1. **Build a governance team** – Define, maintain, and report on cloud governance policy.
+2. **Assess cloud risks** – Identify risks across compliance, security, operations, cost, and data.
+3. **Document cloud governance policies** – Translate risk decisions into clear rules and guidelines.
+4. **Enforce cloud governance policies** – Use automated and manual tools to ensure compliance.
+5. **Monitor cloud governance** – Continuously evaluate usage against policies and iterate improvements.
+
+<img src='.img/2026-01-17-05-10-03.png' width=800>
+
+**Considerations for Defining Governance Policy**
+
+* **Business risk** – Align policies with business tolerance for risk and data classification.
+* **Policy and compliance** – Convert risk decisions into enforceable policies.
+* **Process** – Establish mechanisms to monitor and respond to violations.
+
+<img src='.img/2026-01-17-05-10-24.png' width=800>
+
+**Core Disciplines of Cloud Governance**
+
+* **Cost management** – Monitor and control cloud expenditures and resource rightsizing.
+* **Security baseline** – Apply security controls consistently across the environment.
+* **Resource consistency** – Standardize resource configuration and onboarding practices.
+* **Identity baseline** – Enforce consistent identity and access controls.
+* **Deployment acceleration** – Centralize and standardize deployment patterns.
+
+**Azure Policy in Governance**
+
+* **Role** – Primary governance tool to enforce organizational standards and assess compliance at scale.
+* **Capabilities**
+
+  * Establish guardrails across resources.
+  * Provide a compliance dashboard with aggregated and per-resource views.
+  * Track compliance status and root causes.
+  * Automate bulk remediation for existing resources.
+  * Prevent creation of non-compliant resources.
+* **Common controls enforced with Azure Policy**
+
+  * Restrict deployments to allowed regions.
+  * Enforce geo-replication and other compliance-related rules.
+  * Mandate resource tags, identity and access control settings, and diagnostic logging.
+* **Integration** – Can integrate with DevOps pipelines to enforce pre- and post-deployment policies.
+
+**Key Facts to Remember**
+
+* **Cloud Adoption Framework** is structured to support strategy, planning, readiness, governance, security, and operations across the cloud lifecycle.
+* **Governance process** is continuous, iterative, and must balance control with operational efficiency.
+* **Azure Policy** is central to governance in the Cloud Adoption Framework, enabling automated enforcement and compliance tracking.
+* **Core governance disciplines** include cost, security, resource consistency, identity, and deployment acceleration.
+* **Enforcement** can include bulk remediation and prevention of non-compliant resource creation.
 
 
 
