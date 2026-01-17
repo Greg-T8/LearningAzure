@@ -24,8 +24,8 @@
 | 1 | [Understand Microsoft Entra ID](https://learn.microsoft.com/en-us/training/modules/understand-azure-active-directory/)| ✅ |
 | 2 | [Create, configure, and manage identities](https://learn.microsoft.com/en-us/training/modules/create-configure-manage-identities/) | ✅ |
 | 3 | [Describe the core architectural components of Azure](https://learn.microsoft.com/en-us/training/modules/describe-core-architectural-components-of-azure/) | ✅ |
-| 4 | [Azure Policy Initiatives](https://learn.microsoft.com/en-us/training/modules/sovereignty-policy-initiatives) | 🚧 |
-| 5 | [Secure your Azure resources with Azure role-based access control (Azure RBAC)](https://learn.microsoft.com/en-us/training/modules/secure-azure-resources-with-rbac/) | 🕒 |
+| 4 | [Azure Policy Initiatives](https://learn.microsoft.com/en-us/training/modules/sovereignty-policy-initiatives) | ✅ |
+| 5 | [Secure your Azure resources with Azure role-based access control (Azure RBAC)](https://learn.microsoft.com/en-us/training/modules/secure-azure-resources-with-rbac/) | 🚧 |
 | 6 | [Allow users to reset their password with Microsoft Entra self-service password reset](https://learn.microsoft.com/en-us/training/modules/allow-users-reset-their-password/) | 🕒 |
 
 **Legend:** 🕒 Not Started | 🚧 In Progress | ✅ Complete
