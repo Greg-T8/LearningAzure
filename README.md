@@ -13,7 +13,7 @@
 
 ## 🎯 About
 
-This repository documents my hands-on learning journey through Microsoft Azure certifications. The focus is on building real-world skills through practical lab exercises that align directly with exam objectives.
+This repository documents my learning journey through Microsoft Azure certifications.
 
 ---
 
