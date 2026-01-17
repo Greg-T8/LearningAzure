@@ -12,6 +12,7 @@
 * [Azure Policy design principles](#azure-policy-design-principles)
 * [Azure Policy resources](#azure-policy-resources)
 * [Azure Policy definitions](#azure-policy-definitions)
+* [Evaluation of resources through Azure Policy](#evaluation-of-resources-through-azure-policy)
 
 ---
 
@@ -967,6 +968,231 @@ Here's a simplified table breaking down the Microsoft Entra ID features by editi
 
 ---
 
+## Evaluation of resources through Azure Policy
+
+[Module Reference](URL)
+
+**Overview**
+
+* Azure Policy provides insight and control over resources in a subscription or management group.
+* Common uses include:
+
+  * Preventing resource creation in incorrect locations
+  * Enforcing consistent tag usage
+  * Auditing existing resources for required configurations
+* Understanding **evaluation triggers**, **evaluation timing**, and **resource compliance states** is required before reacting to compliance data.
+
+**Evaluation Triggers**
+
+Evaluations of assigned policies and initiatives occur when:
+
+* A policy or initiative is newly assigned to a scope
+* An existing policy or initiative assignment is updated
+* A resource is deployed or updated in a scope with an assignment via:
+
+  * Azure Resource Manager
+  * REST API
+  * Supported SDK
+* A subscription (`Microsoft.Resources/subscriptions`) is:
+
+  * Created, or
+  * Moved within a management group hierarchy that has an assigned policy targeting subscriptions
+* A policy exemption is created, updated, or deleted
+* The standard compliance evaluation cycle runs
+* The machine configuration resource provider reports compliance data
+* An on-demand scan is triggered
+
+**Evaluation Timing**
+
+Compliance scans are triggered in the following ways:
+
+* **Automatic full scan**
+
+  * Runs every **24 hours**
+* **Manual scan (Brownfield scenarios)**
+
+  * Used when new policies are applied to existing resources
+  * Triggered with `az policy state trigger-scan`
+
+**Policy Assignment Propagation Delay**
+
+* New policy assignments can take up to **30 minutes** to take effect
+* Delay is caused by the Azure Resource Manager session cache
+* Signing out and back in refreshes the cache and applies the policy immediately
+
+**Factors Affecting Scan Duration**
+
+* **Policy definitions**
+
+  * Increased size or complexity increases scan time
+* **Number of policies**
+
+  * More policies result in longer scans
+* **Scope size**
+
+  * Larger scopes take longer to evaluate
+* **System load**
+
+  * Compliance scans are **low-priority**
+  * Scans may take minutes or tens of minutes, even for small environments
+* **Synchronous scan (low-priority execution)**
+
+  * Scans are delayed when the system is busy, extending completion time
+
+**Resource Compliance States**
+
+Each evaluated resource is assigned one compliance state:
+
+1. **Non-compliant**
+2. **Compliant**
+3. **Error** – Template or evaluation error
+4. **Conflicting** – Contradicting policy assignments in the same scope
+5. **Protected** – Resource covered by a `denyAction` effect
+6. **Exempted**
+7. **Unknown** – Default state for definitions with a manual effect
+
+* Compliance is evaluated per **resource** and per **policy assignment**
+* When multiple states apply, Azure Policy uses a **ranking order**
+* Ranking order follows the list above (top has highest priority)
+
+**Compliance Percentage Calculation**
+
+* Calculated as:
+  *(**Compliant + Exempt + Unknown**) ÷ **Total resources**
+* Total resources include:
+
+  * Compliant
+  * Non-compliant
+  * Unknown
+  * Exempt
+  * Conflicting
+  * Error
+
+**Enforcement Mode**
+
+* `enforcementMode` is a property of a **policy assignment**
+* Allows evaluation without enforcing the policy effect
+* Used to test policy impact on existing resources
+* Does not trigger Azure Activity Log entries when disabled
+* Can be switched to **Enabled** after validation
+
+**Difference Between enforcementMode and Disabled Effect**
+
+* **enforcementMode**
+
+  * Evaluation occurs
+  * Policy effect is not enforced
+* **Disabled effect**
+
+  * Evaluation does not occur at all
+
+**enforcementMode Values**
+
+* **Enabled**
+
+  * JSON value: `Default`
+  * Policy effect is enforced
+  * Activity log entries are created
+  * Manual remediation allowed
+
+* **Disabled**
+
+  * JSON value: `DoNotEnforce`
+  * Policy effect is not enforced
+  * No activity log entries
+  * Manual remediation allowed
+
+* If not specified, `Default` is used
+
+* Remediation tasks for `deployIfNotExists` policies can run even when `DoNotEnforce` is set
+
+**Policy Enforcement and Safe Deployment Best Practices**
+
+* Applying policies directly to production can cause unintended behavior
+* Treat policy as code:
+
+  * Store definitions in source control
+  * Test and validate all changes
+* Goal: minimize impact while ensuring compliance
+
+**Safe Deployment Framework – Two Aspects**
+
+* **Aspect 1: Start with enforcementMode Disabled**
+
+  * Assign policies with `deny` or `modify` effects in **Disabled** mode
+  * Evaluate compliance without enforcement
+  * Enables a “what-if” scenario
+
+* **Aspect 2: Deploy in deployment rings**
+
+  * Gradual rollout from small to large scopes
+  * Start with test and development environments
+  * Expand to production incrementally
+
+**Safe Deployment Steps**
+
+1. **Create definition**
+
+   * Define policy with scope at the root (tenant)
+2. **Create assignment**
+
+   * Define deployment rings (1–5) using resource selectors
+   * Assign policy to Ring 5
+   * Set `enforcementMode` to **Disabled**
+3. **Compliance check**
+
+   * Verify expected compliance state in Ring 5
+4. **Application health check**
+
+   * Validate no unintended side effects
+5. **Repeat for non-production rings**
+6. **Update assignment (optional)**
+
+   * Modify policy or assignment if needed
+   * Reassign with `enforcementMode` **Enabled**
+7. **Revalidate**
+
+   * Repeat compliance and health checks
+8. **Deploy to production rings**
+
+   * Start with a small production ring
+   * Gradually expand scope
+ 
+<img src='.img/2026-01-17-05-57-37.png' width=800>
+
+**Reacting to Policy State Changes**
+
+* Azure Policy emits events when policy states change
+* Events are sent to **Azure Event Grid**
+* Enables event-driven reactions without polling
+
+**Event Grid Capabilities**
+
+* Reliable delivery
+* Retry policies
+* Dead-letter handling
+* Event routing, filtering, and multicasting
+
+**Event Handlers**
+
+Events can be handled by:
+
+* Azure Functions
+* Azure Logic Apps
+* Custom HTTP listeners
+* Webhooks
+
+**Key Facts to Remember**
+
+* Automatic compliance scans run every **24 hours**
+* New policy assignments can take up to **30 minutes** to propagate
+* Compliance scans are **low-priority** and synchronous
+* Compliance states are ranked, with **Non-compliant** having highest priority
+* Compliance percentage includes **Compliant, Exempt, and Unknown** resources
+* `enforcementMode` allows evaluation without enforcement
+* Safe deployment relies on **Disabled enforcement** and **deployment rings**
+
+---
 
 
 
