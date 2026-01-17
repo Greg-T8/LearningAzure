@@ -2,7 +2,6 @@
 
 **Learning Path** [AZ-104: Manage identities and governance in Azure](https://learn.microsoft.com/en-us/training/paths/az-104-manage-identities-governance/)
 
-
 * [Entra ID P1 vs P2 Features](#entra-id-p1-vs-p2-features)
 * [Microsoft Entra Domain Services](#microsoft-entra-domain-services)
 * [Microsoft Entra ID: Restore or Remove Deleted Users](#microsoft-entra-id-restore-or-remove-deleted-users)
@@ -10,6 +9,7 @@
 * [Azure Physical Infrastructure](#azure-physical-infrastructure)
 * [Azure Management Infrastructure](#azure-management-infrastructure)
 * [Cloud Adoption Framework for Azure](#cloud-adoption-framework-for-azure)
+* [Azure Policy design principles](#azure-policy-design-principles)
 
 ---
 
@@ -354,6 +354,163 @@ Here's a simplified table breaking down the Microsoft Entra ID features by editi
 * **Core governance disciplines** include cost, security, resource consistency, identity, and deployment acceleration.
 * **Enforcement** can include bulk remediation and prevention of non-compliant resource creation.
 
+---
 
+## Azure Policy design principles
+
+[Module Reference](URL)
+
+**Governance Overview**
+
+* Governance provides mechanisms and processes to maintain control over applications and resources in Azure
+* Governance involves planning Azure Policy and setting strategic priorities
+* Cloud resources must be organized to **secure**, **manage**, and **track costs** related to workloads
+
+**Hierarchy for Governance**
+
+* Azure provides **four levels of management**:
+
+  * **Management groups**
+  * **Subscriptions**
+  * **Resource groups**
+  * **Resources**
+* Management groups and subscriptions can be structured hierarchically for unified policy and access management
+* The hierarchy starts with the **tenant root group**
+* Management groups can extend **up to six levels** beneath the root
+
+**Management Hierarchy Concepts**
+
+* **Resources**
+
+  * Basic building blocks of Azure
+  * Include services such as virtual machines, virtual networks, databases, and AI services
+
+* **Resource groups**
+
+  * Logical groupings of resources
+  * Each resource must belong to **one and only one** resource group
+  * Actions applied to a resource group apply to **all contained resources**
+  * Deleting a resource group deletes **all resources** in it
+  * Access granted or denied at the resource group applies to all its resources
+
+* **Subscriptions**
+
+  * Unit of **management, billing, and scale**
+  * Used to logically organize resource groups
+  * Each subscription has **limits and quotas**
+  * Used to manage costs and control resource usage by users, teams, and projects
+  * Required to use Azure
+  * Linked to an Azure account in **Microsoft Entra ID** or a trusted directory
+
+* **Management groups**
+
+  * Provide a scope **above subscriptions**
+  * Used to manage access, policies, and compliance across multiple subscriptions
+  * Subscriptions are organized into management groups
+  * Governance conditions applied at the management group are **inherited** by all subscriptions
+  * Management groups can be **nested**
+
+**Policy Scope and Inheritance**
+
+* Policies can be applied at any level of the hierarchy
+* Lower levels inherit settings from higher levels
+* Applying a policy at:
+
+  * **Management group** → affects all subscriptions under it
+  * **Subscription** → affects all resource groups and resources in that subscription
+  * **Resource group** → affects only that resource group and its resources
+
+**Introduction to Azure Resource Manager**
+
+* Azure Resource Manager is the **deployment and management service** for Azure
+* Provides a management layer to **create, update, and delete** resources
+* Azure operations are divided into:
+
+  * **Control plane**
+  * **Data plane**
+
+**Control Plane**
+
+* Used to manage resources in a subscription
+* Azure Policy operates in the **control plane**
+* Azure Resource Manager manages all control plane operations
+* Azure Policy is integrated with Azure Resource Manager
+* Azure Resource Manager manages:
+
+  * Template-based deployments
+  * Role-based access control (RBAC)
+  * Auditing
+  * Monitoring
+  * Tagging
+* All Azure portals, tools, SDKs, PowerShell, Azure CLI, and REST APIs use the **same API**
+* Requests are authenticated and authorized before being sent to the resource provider
+* Azure Policy is evaluated **after RBAC**
+
+**Data Plane**
+
+* Handles **direct data operations** on resources
+* Examples include:
+
+  * Uploading or downloading files
+  * Querying databases
+  * Reading secrets
+* Data plane requests bypass Azure Resource Manager
+* Managed directly by the service’s resource provider
+* Access is controlled by service-specific mechanisms such as **RBAC or ACLs**
+* Azure Policy ensures resources accessed in the data plane remain compliant
+
+**Azure Policy Data Plane Resource Provider Modes**
+
+* **Microsoft.Kubernetes.Data** – Kubernetes clusters and components
+* **Microsoft.KeyVault.Data** – Vaults and certificates
+* **Microsoft.Network.Data** – Virtual Network Manager custom membership policies
+* **Microsoft.ManagedHSM.Data** – Managed HSM keys
+* **Microsoft.DataFactory.Data** – Data Factory outbound traffic domain names
+* **Microsoft.MachineLearningServices.v2.Data** – Machine Learning model deployments
+
+  * Reports compliance for newly created and updated components
+
+**Operation Flows of Azure Resource Manager**
+
+* Two scenarios:
+
+  * **Greenfield**
+  * **Brownfield**
+
+**Greenfield Scenario (Policy-first)**
+
+* Policy exists **before** resource creation or update
+* Requests pass through:
+
+  * RBAC
+  * Azure Policy
+* If RBAC fails, Azure Policy is **not evaluated**
+* For updates:
+
+  * Only the delta is sent
+  * Azure Policy merges the delta with the current resource state
+  * The resulting target state is evaluated against policies
+
+**Brownfield Scenario (Resource-first)**
+
+* Resources already exist when a new policy is assigned
+* Policy evaluation occurs through a **compliance scan**
+* Compliance scan:
+
+  * Runs automatically every **24 hours**
+  * Can be manually triggered
+  * Duration is unpredictable
+* Existing noncompliant resources are **flagged**, not deleted
+* Future noncompliant resource creation attempts are **denied**
+
+**Key Facts to Remember**
+
+* Azure governance hierarchy has **four levels**
+* Management groups can extend **six levels** below the tenant root group
+* Policies inherit from higher scopes to lower scopes
+* Azure Policy operates in the **control plane**
+* Azure Policy is evaluated **after RBAC**
+* Data plane operations bypass Azure Resource Manager
+* Compliance scans for existing resources run every **24 hours**
 
 *Last updated: 2026-01-14*
