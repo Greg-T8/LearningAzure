@@ -8,6 +8,19 @@
 
 This repository provides a **comprehensive study path** combining official Microsoft resources, video courses, hands-on labs, and practice exams.
 
+## 📈 Progress Tracker
+
+| Resource               | Status |
+| ---------------------- | ------ |
+| Microsoft Learn Course | 🚧    |
+| GitHub Labs            | 🕒    |
+| Video Courses          | 🕒    |
+| Practice Exams         | 🕒    |
+
+**Legend:** 🕒 Not Started | 🚧 In Progress | ✅ Complete
+
+---
+
 ### 📚 Learning Resource Priorities
 
 | Priority | Resource                                            | Purpose                    | Location          |
@@ -29,17 +42,15 @@ This repository provides a **comprehensive study path** combining official Micro
 
 ---
 
-## 📊 Exam Domains and Consolidated Progress Tracker
+## 📊 Exam Domains
 
-| Domain                           | Weight | MS Learn | MS Labs | Video |
-| -------------------------------- | ------ | -------- | ------- | ----- |
-| 1. AI Workloads & Considerations | 15-20% | 🚧      | 🕒     | 🕒   |
-| 2. Machine Learning on Azure     | 15-20% | 🕒      | 🕒     | 🕒   |
-| 3. Computer Vision Workloads     | 15-20% | 🕒      | 🕒     | 🕒   |
-| 4. NLP Workloads                 | 15-20% | 🕒      | 🕒     | 🕒   |
-| 5. Generative AI Workloads       | 20-25% | 🕒      | 🕒     | 🕒   |
-
-**Legend:** 🕒 Not Started | 🚧 In Progress | ✅ Complete
+| Domain                           | Weight |
+| -------------------------------- | ------ |
+| 1. AI Workloads & Considerations | 15-20% |
+| 2. Machine Learning on Azure     | 15-20% |
+| 3. Computer Vision Workloads     | 15-20% |
+| 4. NLP Workloads                 | 15-20% |
+| 5. Generative AI Workloads       | 20-25% |
 
 > Source: [AI-900 Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/ai-900)
 
