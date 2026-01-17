@@ -6,12 +6,6 @@
 * [🧠 Key Concepts](#-key-concepts)
   * [Entra ID P1 vs P2 Features](#entra-id-p1-vs-p2-features)
   * [Microsoft Entra Domain Services](#microsoft-entra-domain-services)
-    * [🎯 What It Is](#-what-it-is)
-    * [📌 Critical Exam Highlights](#-critical-exam-highlights)
-    * [🔑 Supported Features (Memorize These!)](#-supported-features-memorize-these)
-    * [⚡ Key Exam Takeaways](#-key-exam-takeaways)
-    * [🚫 What It Does NOT Do](#-what-it-does-not-do)
-    * [💡 Exam Tip](#-exam-tip)
   * [Microsoft Entra ID: Restore or Remove Deleted Users](#microsoft-entra-id-restore-or-remove-deleted-users)
   * [Change Group License Assignments (Microsoft Entra ID)](#change-group-license-assignments-microsoft-entra-id)
   * [Azure Physical Infrastructure](#azure-physical-infrastructure)
@@ -25,16 +19,12 @@
 |---|--------|--------|
 | 1 | [Understand Microsoft Entra ID](https://learn.microsoft.com/en-us/training/modules/understand-azure-active-directory/)| ✅ |
 | 2 | [Create, configure, and manage identities](https://learn.microsoft.com/en-us/training/modules/create-configure-manage-identities/) | ✅ |
-| 3 | [Describe the core architectural components of Azure](https://learn.microsoft.com/en-us/training/modules/describe-core-architectural-components-of-azure/) | 🚧 |
-| 4 | Configure Azure Policy | 🕒 |
+| 3 | [Describe the core architectural components of Azure](https://learn.microsoft.com/en-us/training/modules/describe-core-architectural-components-of-azure/) | ✅ |
+| 4 | [Azure Policy Initiatives](https://learn.microsoft.com/en-us/training/modules/sovereignty-policy-initiatives) | 🚧 |
+| 5 | [Secure your Azure resources with Azure role-based access control (Azure RBAC)](https://learn.microsoft.com/en-us/training/modules/secure-azure-resources-with-rbac/) | 🕒 |
+| 6 | [Allow users to reset their password with Microsoft Entra self-service password reset](https://learn.microsoft.com/en-us/training/modules/allow-users-reset-their-password/) | 🕒 |
 
-**Legend:**  
-
-| Emoji | Meaning     |
-| ----- | ----------- |
-| 🕒   | Not Started |
-| 🚧   | In Progress |
-| ✅    | Complete    |
+**Legend:** 🕒 Not Started | 🚧 In Progress | ✅ Complete
 
 ---
 
@@ -70,11 +60,11 @@ Here's a simplified table breaking down the Microsoft Entra ID features by editi
 
 [Module Reference](https://learn.microsoft.com/en-us/training/modules/understand-azure-active-directory/6-examine-azure-domain-services)
 
-#### 🎯 What It Is
+**🎯 What It Is**
 
 **Microsoft Entra Domain Services** (formerly Azure AD Domain Services) is a **Microsoft-managed** domain service that provides traditional Active Directory features in Azure **without deploying or managing domain controllers**.
 
-#### 📌 Critical Exam Highlights
+**📌 Critical Exam Highlights**
 
 | Concept | Key Points to Remember |
 |---------|------------------------|
@@ -84,7 +74,7 @@ Here's a simplified table breaking down the Microsoft Entra ID features by editi
 | **Synchronization** | Automatically syncs users, passwords, and groups from Microsoft Entra ID |
 | **Use Case** | Lift-and-shift **legacy applications** that require traditional AD features to Azure |
 
-#### 🔑 Supported Features (Memorize These!)
+**🔑 Supported Features (Memorize These!)**
 
 | Feature | Purpose |
 |---------|---------|
@@ -93,7 +83,7 @@ Here's a simplified table breaking down the Microsoft Entra ID features by editi
 | **LDAP** | Directory lookups for legacy apps |
 | **Kerberos/NTLM** | Authentication protocols for legacy apps |
 
-#### ⚡ Key Exam Takeaways
+**⚡ Key Exam Takeaways**
 
 1. **Primary Purpose**: Run legacy/on-premises apps in Azure that need traditional AD services
 2. **Fully Managed**: No infrastructure overhead—Azure handles everything
@@ -101,13 +91,13 @@ Here's a simplified table breaking down the Microsoft Entra ID features by editi
 4. **Integration**: Seamlessly integrates with Microsoft Entra ID (cloud identities)
 5. **Hybrid Scenarios**:  Bridges on-premises AD and cloud identity management
 
-#### 🚫 What It Does NOT Do
+**🚫 What It Does NOT Do**
 
 * Does **not** replace on-premises AD DS for complex environments
 * Does **not** provide schema extensions or forest trusts (limited customization)
 * You **cannot** directly manage the domain controllers
 
-#### 💡 Exam Tip
+**💡 Exam Tip**
 >
 > If a question mentions needing **domain join, LDAP, Kerberos, or NTLM** for Azure VMs or legacy apps **without managing domain controllers**, the answer is **Microsoft Entra Domain Services**.
 
