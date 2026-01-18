@@ -2,7 +2,7 @@
 
 # 🌩️ Learning Azure
 
-*My hands-on journey through Microsoft Azure certifications*
+*My progress through Microsoft Azure certifications*
 
 [![AI-900](https://img.shields.io/badge/AI--900-In%20Progress-yellow)](AI-900/) [![AZ-104](https://img.shields.io/badge/AZ--104-In%20Progress-yellow)](AZ-104/) ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/Greg-T8/LearningAzure) ![GitHub last commit](https://img.shields.io/github/last-commit/Greg-T8/LearningAzure)
 
@@ -13,16 +13,7 @@
 
 ## 🎯 About
 
-This repository documents my learning journey through Microsoft Azure certifications.
-
----
-
-## 📊 Overall Progress
-
-| Certification | Status | Progress | Started | Target Completion |
-|---------------|--------|----------|---------|-------------------|
-| **AI-900** | 🔄 In Progress | 0/5 Domains | 01/14/2026 | TBD |
-| **AZ-104** | 🔄 In Progress | 0/5 Domains | 01/14/2026 | TBD |
+This repository documents my learning progress through Microsoft Azure certifications.
 
 <!-- COMMIT_STATS_START -->
 ## 📈 Recent Activity (Last 7 Days)
