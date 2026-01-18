@@ -8,6 +8,8 @@
 * [Plan IP addressing](#plan-ip-addressing)
 * [Create public IP addressing](#create-public-ip-addressing)
 * [Associate public IP addresses](#associate-public-ip-addresses)
+* [Allocate or assign private IP addresses](#allocate-or-assign-private-ip-addresses)
+* [Exercise: Create and configure virtual networks](#exercise-create-and-configure-virtual-networks)
 
 
 ---
@@ -17,7 +19,7 @@
 
 | # | Module | Status |
 |---|--------|--------|
-| 1 | [Configure virtual networks](https://learn.microsoft.com/en-us/training/modules/configure-virtual-networks/) | 🕒 |
+| 1 | [Configure virtual networks](https://learn.microsoft.com/en-us/training/modules/configure-virtual-networks/) | ✅ |
 | 2 | [Configure network security groups](https://learn.microsoft.com/en-us/training/modules/configure-network-security-groups/) | 🕒 |
 | 3 | [Host your domain on Azure DNS](https://learn.microsoft.com/en-us/training/modules/host-domain-azure-dns/) | 🕒 |
 | 4 | [Configure Azure Virtual Network peering](https://learn.microsoft.com/en-us/training/modules/configure-vnet-peering/) | 🕒 |
@@ -25,6 +27,8 @@
 | 6 | [Introduction to Azure Load Balancer](https://learn.microsoft.com/en-us/training/modules/intro-to-azure-load-balancer/) | 🕒 |
 | 7 | [Introduction to Azure Application Gateway](https://learn.microsoft.com/en-us/training/modules/intro-to-azure-application-gateway/) | 🕒 |
 | 8 | [Introduction to Azure Network Watcher](https://learn.microsoft.com/en-us/training/modules/intro-to-azure-network-watcher/) | 🕒 |
+
+**Legend:** 🕒 Not Started | 🚧 In Progress | ✅ Complete
 
 ---
 
@@ -404,6 +408,121 @@
 * Public IPs attach at **different configuration levels** depending on resource type.
 * **Standard SKU** is the supported option after **Basic SKU retirement**.
 * Standard public IPs are **static**, **secure by default**, and **zone-aware**.
+
+---
+
+## Allocate or assign private IP addresses
+
+[Module Reference](https://learn.microsoft.com/training/modules/configure-virtual-networks/allocate-or-assign-private-ip-addresses)
+
+**Overview**
+
+* A **private IP address resource** can be associated with:
+
+  * Virtual machine **network interfaces (NICs)**
+  * **Internal load balancers**
+  * **Application gateways**
+* Private IP addresses can be **dynamically assigned by Azure** or **statically assigned by you**.
+
+**Association by Resource Type**
+
+* **Virtual machine**
+
+  * Association: **NIC**
+  * Dynamic IP: **Yes**
+  * Static IP: **Yes**
+* **Internal load balancer**
+
+  * Association: **Front-end configuration**
+  * Dynamic IP: **Yes**
+  * Static IP: **Yes**
+* **Application gateway**
+
+  * Association: **Front-end configuration**
+  * Dynamic IP: **Yes**
+  * Static IP: **Yes**
+
+**Private IP Address Assignment**
+
+* Private IPs are allocated from the **address range of the subnet** where the resource is deployed.
+* Two allocation options are available:
+
+  * **Dynamic**
+  * **Static**
+
+**Dynamic Assignment**
+
+* Azure assigns the **next available unassigned or unreserved IP address** in the subnet.
+* **Default allocation method**
+* Example:
+
+  * Assigned: `10.0.0.4` – `10.0.0.9`
+  * Next assigned by Azure: **`10.0.0.10`**
+
+**Static Assignment**
+
+* You manually select **any unassigned or unreserved IP address** in the subnet.
+* Example:
+
+  * Subnet range: `10.0.0.0/16`
+  * Assigned: `10.0.0.4` – `10.0.0.9`
+  * Valid static range: **`10.0.0.10` – `10.0.255.254`**
+
+**Key Facts to Remember**
+
+* Private IPs are always allocated **from the subnet address range**.
+* **Dynamic assignment** is the default and automatic.
+* **Static assignment** requires manual selection of a valid, unused IP.
+* NICs and front-end configurations determine **where private IPs are associated**.
+
+---
+
+## Exercise: Create and configure virtual networks
+
+[Module Reference](URL)
+
+**Exercise scenario**
+
+* Your organization is migrating a **web-based application** to **Azure**.
+* First task: set up **virtual networks** and **subnets**.
+* You also need to **securely peer** the virtual networks.
+
+<img src='.img/2026-01-18-06-19-49.png' width=800>
+
+**Requirements**
+
+* Create **two virtual networks**:
+
+  * **app-vnet**
+  * **hub-vnet**
+* These virtual networks simulate a **hub-and-spoke network architecture**.
+* **app-vnet** hosts the application and requires **two subnets**:
+
+  * **frontend subnet** – hosts the **web servers**
+  * **backend subnet** – hosts the **database servers**
+* **hub-vnet** requires **one subnet**:
+
+  * subnet for the **firewall**
+* Configure the two virtual networks to communicate **securely and privately** using **virtual network peering**.
+* Both virtual networks should be in the **same region**.
+
+**Job skills**
+
+* Create a **virtual network**
+* Create a **subnet**
+* Configure **virtual network peering** (**optional**)
+
+**Notes**
+
+* Estimated time: **30 minutes**
+* Requires an **Azure subscription**
+* Launch the exercise and follow the instructions; when finished, return to continue learning.
+
+**Key Facts to Remember**
+
+* Virtual networks required: **2** (**app-vnet**, **hub-vnet**) in the **same region**
+* Subnets: **app-vnet = 2** (frontend/web, backend/database); **hub-vnet = 1** (firewall)
+* Connectivity between vnets uses **virtual network peering** for **secure, private** communication
 
 ---
 
