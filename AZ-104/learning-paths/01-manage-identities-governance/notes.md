@@ -14,6 +14,7 @@
 * [Azure Policy definitions](#azure-policy-definitions)
 * [Evaluation of resources through Azure Policy](#evaluation-of-resources-through-azure-policy)
 * [What is Azure RBAC?](#what-is-azure-rbac)
+* [What is self-service password reset in Microsoft Entra ID?](#what-is-self-service-password-reset-in-microsoft-entra-id)
 
 ---
 
@@ -26,8 +27,8 @@
 | 2 | [Create, configure, and manage identities](https://learn.microsoft.com/en-us/training/modules/create-configure-manage-identities/) | ✅ |
 | 3 | [Describe the core architectural components of Azure](https://learn.microsoft.com/en-us/training/modules/describe-core-architectural-components-of-azure/) | ✅ |
 | 4 | [Azure Policy Initiatives](https://learn.microsoft.com/en-us/training/modules/sovereignty-policy-initiatives) | ✅ |
-| 5 | [Secure your Azure resources with Azure role-based access control (Azure RBAC)](https://learn.microsoft.com/en-us/training/modules/secure-azure-resources-with-rbac/) | 🚧 |
-| 6 | [Allow users to reset their password with Microsoft Entra self-service password reset](https://learn.microsoft.com/en-us/training/modules/allow-users-reset-their-password/) | 🕒 |
+| 5 | [Secure your Azure resources with Azure role-based access control (Azure RBAC)](https://learn.microsoft.com/en-us/training/modules/secure-azure-resources-with-rbac/) | ✅ |
+| 6 | [Allow users to reset their password with Microsoft Entra self-service password reset](https://learn.microsoft.com/en-us/training/modules/allow-users-reset-their-password/) | ✅ |
 
 **Legend:** 🕒 Not Started | 🚧 In Progress | ✅ Complete
 
@@ -1335,6 +1336,164 @@ Events can be handled by:
 * **NotActions** subtract permissions from allowed actions
 * Each subscription is tied to **one Microsoft Entra tenant**
 * Resources belong to **one resource group**, and resource groups belong to **one subscription**
+
+---
+
+## What is self-service password reset in Microsoft Entra ID?
+
+[Module Reference](https://learn.microsoft.com/training/modules/allow-users-reset-passwords/)
+
+**Business Problem Addressed**
+
+* Help-desk spends significant time **resetting user passwords**
+* Password reset delays **reduce user productivity**
+* Goal: Allow users to **manage their own passwords** securely
+
+**What Is Self-Service Password Reset (SSPR)?**
+
+* Allows users to **reset their own passwords** when:
+
+  * They are **not signed in**
+  * They **forgot** their password
+  * Their password **expired**
+* Available through:
+
+  * A **web browser**
+  * The **Windows sign-in screen**
+* Restores access to:
+
+  * **Azure**
+  * **Microsoft 365**
+  * Any app using **Microsoft Entra ID** authentication
+
+**Why Use SSPR?**
+
+* Reduces **administrator and help-desk workload**
+* Improves **user productivity**
+* Eliminates waiting for admin availability
+* Users resolve password issues **independently**
+
+**How SSPR Works**
+
+1. **Initiation**
+
+   * User visits the password-reset portal or selects **Can’t access your account**
+2. **Localization**
+
+   * Portal detects browser locale and displays the correct language
+3. **Verification**
+
+   * User enters username
+   * CAPTCHA confirms the request is human
+4. **Authentication**
+
+   * User verifies identity using configured methods
+5. **Password reset**
+
+   * User enters and confirms a new password
+6. **Notification**
+
+   * Confirmation message is sent to the user
+
+**SSPR Authentication Methods**
+
+| Method                      | Registration                                 | Authentication                    |
+| --------------------------- | -------------------------------------------- | --------------------------------- |
+| **Mobile app notification** | Install and register Microsoft Authenticator | Approve or deny notification      |
+| **Mobile app code**         | Install and register Microsoft Authenticator | Enter code from app               |
+| **Email**                   | Register external email address              | Enter emailed code                |
+| **Mobile phone**            | Register mobile number                       | Enter SMS code or receive call    |
+| **Office phone**            | Register nonmobile phone                     | Answer automated call and press # |
+| **Security questions**      | Select and answer questions                  | Answer questions                  |
+
+* Phone call options are **not supported** in **trial tenants**
+
+**Minimum Authentication Methods**
+
+* Admins can require **one or two methods**
+
+* Users must register **at least the required number**
+
+* Example:
+
+  * Enabled: mobile app code, email, office phone, security questions
+  * Required: **two**
+  * User chooses any two supported methods
+
+* Security questions:
+
+  * Admins define:
+
+    * Minimum questions to register
+    * Minimum questions to answer correctly
+
+* Users are considered **registered for SSPR** only after meeting the minimum requirements
+
+**Recommendations**
+
+* Enable **two or more** authentication methods
+* Prefer:
+
+  * **Mobile app notification or code** as primary
+  * **Email or office phone** as backup
+* Avoid using:
+
+  * **Mobile phone (SMS)** due to fraud risk
+  * **Security questions alone**
+* Use security questions **only with another method**
+
+**Administrator Accounts**
+
+* Always require **two authentication methods**
+* **Security questions are not allowed** for admin accounts
+* Policy applies regardless of general user configuration
+
+**Notifications**
+
+Admins can enable:
+
+* **Notify users on password resets**
+
+  * Alerts users if a reset was done maliciously
+* **Notify all admins when another admin resets their password**
+
+**License Requirements**
+
+* **Password change while signed in**:
+
+  * Available in **all editions**
+* **SSPR when not signed in**:
+
+  * Requires **Microsoft Entra ID Premium P1 or P2**
+  * Also available with **Microsoft365 Apps for business** or **Microsoft 365**
+* **Password writeback to on-premises AD**:
+
+  * Requires **P1 or P2**
+  * Required for hybrid environments
+
+**SSPR Deployment Options**
+
+* **Microsoft Entra Connect**
+
+  * Supports password writeback for existing on-premises users
+* **Cloud sync**
+
+  * Supports password writeback
+  * Higher availability
+  * Does not rely on a single Connect instance
+* Both options can be deployed **side by side**
+
+  * Useful for mergers, splits, or disconnected domains
+
+**Key Facts to Remember**
+
+* SSPR reduces help-desk workload and downtime
+* Users must register the **minimum required authentication methods**
+* Azure supports **six authentication methods**
+* Admin accounts always require **strong authentication**
+* SSPR requires **P1 or P2** when users can’t sign in
+* Password writeback is required for **hybrid environments**
+* Cloud sync provides **higher availability** than Entra Connect
 
 ---
 
