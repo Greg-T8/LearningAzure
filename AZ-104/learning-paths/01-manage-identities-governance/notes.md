@@ -13,6 +13,7 @@
 * [Azure Policy resources](#azure-policy-resources)
 * [Azure Policy definitions](#azure-policy-definitions)
 * [Evaluation of resources through Azure Policy](#evaluation-of-resources-through-azure-policy)
+* [What is Azure RBAC?](#what-is-azure-rbac)
 
 ---
 
@@ -1194,6 +1195,148 @@ Events can be handled by:
 
 ---
 
+## What is Azure RBAC?
+
+[Module Reference](https://learn.microsoft.com/training/modules/secure-azure-resources-with-rbac/)
+
+**Identity and Access Goals**
+
+* Ensure users who leave the organization **lose access** to cloud resources
+* Balance **team autonomy** with **central governance**
+
+  * Example: teams manage VMs while networks are centrally controlled
+* **Microsoft Entra ID** and **Azure RBAC** work together to meet these goals
+
+**Azure Subscriptions and Microsoft Entra ID**
+
+* Each Azure subscription is associated with **one Microsoft Entra directory**
+* **Users, groups, and applications** in the directory can manage subscription resources
+* Subscriptions use **Microsoft Entra ID** for:
+
+  * **Single sign-on (SSO)**
+  * **Access management**
+* **Microsoft Entra Connect**:
+
+  * Extends on-premises Active Directory to Azure
+  * When an on-prem AD account is disabled, access to connected Azure subscriptions is **automatically removed**
+
+**What Is Azure RBAC?**
+
+* **Azure role-based access control (Azure RBAC)** is an **authorization system** built on **Azure Resource Manager**
+* Provides **fine-grained access management** for Azure resources
+* Grants users **only the permissions they need**
+* Access is assigned by:
+
+  * **Role**
+  * **Scope**
+  * **Security principal**
+
+**Scopes in Azure RBAC**
+
+* Role assignments can be applied at:
+
+  * **Management group**
+  * **Subscription**
+  * **Resource group**
+  * **Single resource**
+* Scopes follow a **parent-child inheritance model**
+
+  * Roles assigned at a parent scope apply to all child scopes
+* Key relationships:
+
+  * A subscription is associated with **only one Microsoft Entra tenant**
+  * A resource group belongs to **only one subscription**
+  * A resource belongs to **only one resource group**
+
+<img src='.img/2026-01-18-05-41-12.png' width=800>
+
+**What You Can Do with Azure RBAC**
+
+* Assign different permissions within the same subscription
+* Common scenarios:
+
+  * One user manages **virtual machines**, another manages **virtual networks**
+  * A group manages **SQL databases**
+  * A user manages **all resources in a resource group**
+  * An application accesses **all resources in a resource group**
+
+**Azure RBAC in the Azure Portal**
+
+* Managed through **Access control (IAM)** in the Azure portal
+* Allows you to:
+
+  * View who has access
+  * See assigned roles
+  * Grant or remove access
+
+**How Azure RBAC Works (Who, What, Where)**
+
+1. **Security principal (who)**
+
+   * A **user**, **group**, or **application**
+
+2. **Role definition (what)**
+
+   * A collection of permissions (read, write, delete)
+   * Can be **built-in** or **custom**
+   * Four fundamental built-in roles:
+
+     * **Owner** – Full access, including delegating access
+     * **Contributor** – Create and manage resources, cannot grant access
+     * **Reader** – View resources only
+     * **User Access Administrator** – Manage user access to resources
+
+    <img src='.img/2026-01-18-05-42-52.png' width=600>
+
+3. **Scope (where)**
+
+   * Level at which access applies:
+
+     * Management group
+     * Subscription
+     * Resource group
+     * Resource
+   * Child scopes inherit permissions from parent scopes
+
+**Role Assignment**
+
+* A **role assignment** binds:
+
+  * Security principal
+  * Role definition
+  * Scope
+* To grant access: **create** a role assignment
+* To revoke access: **remove** a role assignment
+
+<img src='.img/2026-01-18-05-43-28.png' width=600>
+
+**Azure RBAC Allow Model**
+
+* Azure RBAC is an **allow-only model**
+* Permissions are **additive**
+
+  * Multiple role assignments combine permissions
+* Uses **Actions** and **NotActions**
+
+  * **Effective permissions** = Actions − NotActions
+* Example (Contributor role NotActions):
+
+  * Delete roles and role assignments
+  * Create roles and role assignments
+  * Grant User Access Administrator at tenant scope
+  * Create or delete blueprint artifacts
+
+**Key Facts to Remember**
+
+* Azure RBAC is built on **Azure Resource Manager**
+* Access control is defined by **who, what, and where**
+* Permissions inherit from **parent to child scopes**
+* Azure RBAC does **not deny** actions—only allows them
+* **NotActions** subtract permissions from allowed actions
+* Each subscription is tied to **one Microsoft Entra tenant**
+* Resources belong to **one resource group**, and resource groups belong to **one subscription**
+
+---
 
 
 *Last updated: 2026-01-14*
