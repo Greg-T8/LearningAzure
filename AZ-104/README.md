@@ -22,16 +22,6 @@ This repository provides a study path combining official Microsoft resources, vi
 | 4        | [O'Reilly Courses](./video-courses/oreilly/README.md)           | Alternative explanations          |
 | 5        | [MeasureUp Practice Exams](./practice-exams/README.md)          | Exam readiness assessment         |
 
-### 🔄 Study Workflow Per Domain
-
-1. **Learn** — Complete Microsoft Learn modules
-2. **Practice** — Do official Microsoft GitHub lab
-3. **Reinforce** — Watch video content for gaps
-4. **Assess** — Practice exam questions for domain
-5. **Review** — Update weak areas, refine notes
-
-> 📝 **Take notes at every step** — capture key concepts, commands, and pitfalls.
-
 ---
 
 ## 📊 Exam Domains and Consolidated Progress Tracker
