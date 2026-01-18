@@ -23,22 +23,12 @@ This repository provides a **comprehensive study path** combining official Micro
 
 ### 📚 Learning Resource Priorities
 
-| Priority | Resource                                            | Purpose                    | Location          |
-| -------- | --------------------------------------------------- | -------------------------- | ----------------- |
-| 1        | [Microsoft Learn Paths](./learning-paths/README.md) | Core concepts & knowledge  | `learning-paths/` |
-| 2        | [Microsoft GitHub Labs](./microsoft-labs/README.md) | Official hands-on practice | `microsoft-labs/` |
-| 3        | [Video Courses](./video-courses/README.md)          | Visual reinforcement       | `video-courses/`  |
-| 4        | [Practice Exams](./practice-exams/README.md)        | Exam readiness assessment  | `practice-exams/` |
-
-### 🔄 Study Workflow Per Domain
-
-1. **Learn** — Complete Microsoft Learn modules
-2. **Practice** — Do official Microsoft GitHub lab
-3. **Reinforce** — Watch video content for gaps
-4. **Assess** — Practice exam questions for domain
-5. **Review** — Update weak areas, refine notes
-
-> 📝 **Take notes at every step** — capture key concepts, services, and use cases.
+| Priority | Notes                                               | Purpose                    |
+| -------- | --------------------------------------------------- | -------------------------- |
+| 1        | [Microsoft Learn Paths](./learning-paths/README.md) | Core concepts & knowledge  |
+| 2        | [Microsoft GitHub Labs](./microsoft-labs/README.md) | Official hands-on practice |
+| 3        | [Video Courses](./video-courses/README.md)          | Visual reinforcement       |
+| 4        | [Practice Exams](./practice-exams/README.md)        | Exam readiness assessment  |
 
 ---
 
