@@ -4,6 +4,10 @@
 
 * [Plan virtual networks](#plan-virtual-networks)
 * [Create subnets](#create-subnets)
+* [Create virtual networks](#create-virtual-networks)
+* [Plan IP addressing](#plan-ip-addressing)
+* [Create public IP addressing](#create-public-ip-addressing)
+* [Associate public IP addresses](#associate-public-ip-addresses)
 
 
 ---
@@ -160,6 +164,246 @@
 * CIDR notation is **required** for subnet address space.
 * Azure VPN Gateway requires a **dedicated subnet**.
 * Only **one NSG per subnet** is allowed.
+
+---
+
+## Create virtual networks
+
+[Module Reference](URL)
+
+**Overview**
+
+* You can create a virtual network at any time.
+* You can also create a virtual network during virtual machine creation.
+
+**IP Address Space Requirements**
+
+* You must define an **IP address space** when creating a virtual network.
+* The address space must **not already be in use** within your organization.
+* The address space can be **on-premises or cloud-based**, but **not both**.
+* Once created, the **IP address space cannot be changed**.
+* Planning cloud-only address spaces is important if future **on-premises connectivity** is expected.
+
+**Subnet Requirements**
+
+* At least **one subnet** is required to create a virtual network.
+* Each subnet:
+
+  * Contains a **range of IP addresses** within the virtual network address space.
+  * Must have a **unique address range**.
+  * **Cannot overlap** with any other subnet in the same virtual network.
+
+**Creation in Azure Portal**
+
+* Required inputs:
+
+  * **Azure subscription**
+  * **Resource group**
+  * **Virtual network name**
+  * **Service region**
+
+**Limits and Considerations**
+
+* Default limits on Azure networking resources **can change over time**.
+* Always review the latest Azure networking documentation before deployment.
+
+**Key Facts to Remember**
+
+* **IP address space is immutable** after creation.
+* **At least one subnet is mandatory**.
+* **Subnet IP ranges must be unique and non-overlapping**.
+* Address space must be **unused and either cloud or on-premises only**, not both.
+
+---
+
+## Plan IP addressing
+
+[Module Reference](https://learn.microsoft.com/training/modules/configure-virtual-networks/plan-ip-addressing)
+
+**Overview**
+
+* IP addresses enable Azure resources to communicate with:
+
+  * Other Azure resources
+  * On-premises networks
+  * The internet
+* Azure supports **two types of IP addresses**:
+
+  * **Private IP addresses**
+  * **Public IP addresses**
+
+**Private IP Addresses**
+
+* Enable communication **within an Azure virtual network**
+* Enable communication with **on-premises networks**
+* Created when you extend your network to Azure using:
+
+  * **VPN gateway**
+  * **Azure ExpressRoute circuit**
+
+**Public IP Addresses**
+
+* Allow Azure resources to communicate with the **internet**
+* Used to connect with **Azure public-facing services**
+
+<img src='.img/2026-01-18-06-14-49.png' width=800>
+
+**IP Address Assignment Types**
+
+* IP addresses can be:
+
+  * **Statically assigned**
+  * **Dynamically assigned**
+* You can separate static and dynamic IP resources into **different subnets**
+
+**Static IP Address Characteristics**
+
+* **Do not change**
+* Best suited for scenarios requiring consistent addressing, including:
+
+  * **DNS name resolution** where IP changes would require host record updates
+  * **IP-based security models** that require fixed IPs
+  * **TLS/SSL certificates** linked to an IP address
+  * **Firewall rules** that allow or deny traffic based on IP ranges
+  * **Role-based virtual machines**, such as:
+
+    * Domain Controllers
+    * DNS servers
+
+**Key Facts to Remember**
+
+* Azure uses **private and public IP addresses**
+* **Private IPs** are for internal and hybrid connectivity
+* **Public IPs** enable internet access
+* IPs can be **static or dynamic**
+* **Static IPs** are required for DNS, security rules, certificates, firewalls, and critical infrastructure roles
+
+---
+
+## Create public IP addressing
+
+[Module Reference](https://learn.microsoft.com/training/modules/configure-virtual-networks/create-public-ip-addressing)
+
+**Overview**
+
+* You can create a **public IP address** for an Azure resource using the **Azure portal**
+* A common use case is assigning a public IP address to a **virtual machine**
+* Public IP addresses are **often used with load balancers**
+
+<img src='.img/2026-01-18-06-16-00.png' width=700>
+
+**Configuration Settings for Public IP Addresses**
+
+* **IP Version**
+
+  * **IPv4**
+
+    * Can be attached to:
+
+      * Load balancers
+      * Network interfaces
+  * **IPv6**
+
+    * Can only be attached to **load balancers**
+  * **IPv4 and IPv6 are charged at the same rate**
+
+* **SKU**
+
+  * Select the SKU for the public IP address
+  * The **Public IP SKU must match** the SKU of the **Load Balancer** it is used with
+
+* **Tier**
+
+  * Must match the **load balancer tier**
+  * **Cross-region**
+
+    * Distributes traffic across **regional backends**
+  * **Regional**
+
+    * Distributes traffic **within a virtual network**
+
+* **IP Address Assignment**
+
+  * Public IP addresses are **static**
+  * Assigned **when the public IP address is created**
+  * Not released until the **public IP address resource is deleted**
+
+**Key Facts to Remember**
+
+* Public IPs are created in the **Azure portal**
+* Frequently used with **load balancers**
+* **IPv6 public IPs** can only be used with load balancers
+* **SKU and tier must match** the associated load balancer
+* Public IP addresses are **static by default** and persist until deletion
+
+---
+
+## Associate public IP addresses
+
+[Module Reference](https://learn.microsoft.com/training/modules/configure-virtual-networks/associate-public-ip-addresses)
+
+**Overview**
+
+* A **public IP address resource** can be associated with:
+
+  * Virtual machine **network interfaces**
+  * Internet-facing **load balancers**
+  * **VPN gateways**
+  * **Application gateways**
+* Resources can use **dynamic or static** public IP addresses.
+
+**Important**
+
+* **Basic SKU public IPs were retired on September 30, 2025**.
+
+**Association by Resource Type**
+
+* **Virtual machine**
+
+  * Associated at the **network interface configuration**
+* **Virtual Network Gateway (VPN)**
+
+  * Associated at the **gateway IP configuration**
+* **Virtual Network Gateway (ER)**
+
+  * Associated at the **gateway IP configuration**
+* **NAT Gateway**
+
+  * Associated at the **gateway IP configuration**
+* **Public Load Balancer**
+
+  * Associated at the **front-end configuration**
+* **Application Gateway**
+
+  * Associated at the **front-end configuration**
+* **Azure Firewall**
+
+  * Associated at the **front-end configuration**
+* **Route Server**
+
+  * Associated at the **front-end configuration**
+* **API Management**
+
+  * Associated at the **front-end configuration**
+* **Bastion host**
+
+  * Associated at the **public IP configuration**
+
+**Public IP Address SKU Features**
+
+* **Standard SKU**
+
+  * **Allocation method**: Static
+  * **Security**: Secure by default model
+  * **Availability zones**: Supported
+
+    * Can be **nonzonal**, **zonal**, or **zone-redundant**
+
+**Key Facts to Remember**
+
+* Public IPs attach at **different configuration levels** depending on resource type.
+* **Standard SKU** is the supported option after **Basic SKU retirement**.
+* Standard public IPs are **static**, **secure by default**, and **zone-aware**.
 
 ---
 
