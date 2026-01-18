@@ -14,13 +14,13 @@ This repository provides a study path combining official Microsoft resources, vi
 
 ### 📚 Learning Resource Priorities
 
-| Priority | Resource Notes                                                  | Purpose                           | Location                     |
-| -------- | --------------------------------------------------------------- | --------------------------------- | ---------------------------- |
-| 1        | [Microsoft Learning Paths](./learning-paths/README.md)          | Core concepts & knowledge         | `learning-paths/`            |
-| 2        | [Microsoft GitHub Labs](./microsoft-labs/README.md)             | Official hands-on practice        | `microsoft-labs/`            |
-| 3        | [John Savill's Training](./video-courses/john-savill/README.md) | Visual reinforcement & deep dives | `video-courses/john-savill/` |
-| 4        | [O'Reilly Courses](./video-courses/oreilly/README.md)           | Alternative explanations          | `video-courses/oreilly/`     |
-| 5        | [MeasureUp Practice Exams](./practice-exams/README.md)          | Exam readiness assessment         | `practice-exams/`            |
+| Priority | Notes                                                           | Purpose                           |
+| -------- | --------------------------------------------------------------- | --------------------------------- |
+| 1        | [Microsoft Learning Paths](./learning-paths/README.md)          | Core concepts & knowledge         |
+| 2        | [Microsoft GitHub Labs](./microsoft-labs/README.md)             | Official hands-on practice        |
+| 3        | [John Savill's Training](./video-courses/john-savill/README.md) | Visual reinforcement & deep dives |
+| 4        | [O'Reilly Courses](./video-courses/oreilly/README.md)           | Alternative explanations          |
+| 5        | [MeasureUp Practice Exams](./practice-exams/README.md)          | Exam readiness assessment         |
 
 ### 🔄 Study Workflow Per Domain
 
@@ -38,10 +38,10 @@ This repository provides a study path combining official Microsoft resources, vi
 
 | Domain                     | Weight | MS Learn | Video | MS Labs |
 | -------------------------- | ------ | -------- | ----- | ------- |
-| 1. Identities & Governance | 20-25% | 🚧      | 🕒   | 🕒     |
+| 1. Identities & Governance | 20-25% | ✅      | 🕒   | 🕒     |
 | 2. Storage                 | 15-20% | 🕒      | 🕒   | 🕒     |
 | 3. Compute                 | 20-25% | 🕒      | 🕒   | 🕒     |
-| 4. Networking              | 15-20% | 🕒      | 🕒   | 🕒     |
+| 4. Networking              | 15-20% | 🚧      | 🕒   | 🕒     |
 | 5. Monitoring & Backup     | 10-15% | 🕒      | 🕒   | 🕒     |
 
 **Legend:** 🕒 Not Started | 🚧 In Progress | ✅ Complete
