@@ -5,6 +5,8 @@
 * [What is an AI application?](#what-is-an-ai-application)
 * [Components of an AI application](#components-of-an-ai-application)
 * [Microsoft Foundry for AI](#microsoft-foundry-for-ai)
+* [Get started with Foundry](#get-started-with-foundry)
+* [Understand Azure](#understand-azure)
 
 ---
 
@@ -333,5 +335,196 @@
 * Foundry supports **portal-based and SDK-based** development
 
 ---
+
+## Get started with Foundry
+
+[Module Reference](https://learn.microsoft.com/training/modules/get-started-ai-foundry/)
+
+**Foundry Project Basics**
+
+* A **project** is the primary workspace for building AI applications and agents.
+* A project is created after signing in with an **Azure subscription**.
+* Creating a project results in:
+
+  * A **resource group** in the Azure subscription
+  * A **Microsoft Foundry resource** deployed in a specified region
+
+**What You Get with a Foundry Project**
+
+* **Model catalog**
+
+  * Foundation models
+  * Partner models
+* **Playgrounds** for testing models
+* **Tools** for:
+
+  * Deploying models
+  * Running evaluations
+  * Creating agents
+* **Management Center** for:
+
+  * User roles
+  * Quotas
+  * Resource connections
+
+**Development Capabilities**
+
+* Developers can:
+
+  * Experiment in playgrounds
+  * Deploy models
+  * Integrate models via **SDKs or APIs**
+  * Build and test **agentic workflows**
+* Includes **observability** and **Responsible AI** features
+
+**When to Choose a Foundry Project**
+
+* Use a Foundry project when you need:
+
+  * The **latest agents**
+  * **Evaluations**
+  * The **model catalog**
+  * **Minimal Azure setup**
+* To access additional services (for example, Azure Language, Speech, Vision), create a **Hub** in addition to a project
+
+**Characteristics of Foundry Offerings**
+
+* **Prebuilt and ready to use or customize**
+* **Accessed through APIs**
+* **Available on Azure**
+
+**Prebuilt and Ready to Use**
+
+* Foundry uses **pretrained machine learning models** to deliver AI as a service.
+* Removes traditional barriers to AI adoption:
+
+  * Large training datasets
+  * Massive compute requirements
+  * Specialized programming expertise
+* Uses **high-performance Azure computing** to deploy advanced AI models.
+* Makes decades of AI research accessible to developers of all skill levels.
+
+**Accessed Through APIs**
+
+* Foundry models and tools integrate into applications using **APIs**.
+* API access requires **authentication** to verify:
+
+  * Identity
+  * Authorization
+* Authentication uses:
+
+  * **Resource key** – secret used to prove identity
+  * **Endpoint** – identifies how to reach the AI service resource
+* Requests to Foundry resources must be authenticated.
+* Keys and endpoints must be included in the **authentication header**.
+* Resource keys can be **rotated periodically** to maintain security.
+
+**Key Facts to Remember**
+
+* A **project** is the core workspace in Foundry.
+* Creating a project creates both a **resource group** and a **Foundry resource**.
+* Foundry provides **models, tools, playgrounds, and management** in one place.
+* Foundry AI services are **prebuilt**, **API-driven**, and **Azure-based**.
+* API access requires both a **resource key** and an **endpoint**.
+* Create a **Hub** to access additional Azure AI services.
+
+---
+
+## Understand Azure
+
+[Module Reference](https://learn.microsoft.com/training/modules/get-started-with-ai-in-microsoft-foundry/)
+
+**What is Microsoft Azure**
+
+* **Microsoft Azure** is a cloud computing platform for building, deploying, and managing applications through Microsoft-managed data centers.
+* Provides **flexibility**, **scalability**, and **global reach**.
+* Supports **multiple programming languages, frameworks, and operating systems**, allowing developers to use preferred tools.
+
+**Core Cloud Capabilities**
+
+Azure delivers cloud services across **four main areas**:
+
+* **Compute**
+
+  * Virtual machines
+  * Containers
+  * Serverless functions
+* **Storage**
+
+  * Scalable and secure data storage
+  * Examples include **Blob Storage** and **Azure Files**
+* **Networking**
+
+  * Secure and reliable connectivity between resources
+  * Examples include **Azure Virtual Network** and **Load Balancer**
+* **Application Services**
+
+  * Services to build and host web apps, APIs, and mobile backends
+
+**Azure Resource Organization Hierarchy**
+
+Azure organizes access and management using a structured hierarchy:
+
+* **Tenant**
+
+  * A dedicated instance of **Azure Active Directory**
+  * Manages identity and access
+* **Subscription**
+
+  * Defines **billing boundaries**
+  * Provides access to Azure services
+* **Resource Group**
+
+  * Logical container for related resources
+* **Resources**
+
+  * Individual services such as virtual machines, databases, or storage accounts
+
+**Benefits of the Azure Hierarchy**
+
+* Enables **clear separation of concerns** across teams or projects
+* Improves **security and governance**
+* Simplifies **policy application**, **monitoring**, and **automation**
+* Supports effective **cost control**
+
+**Foundry Runs on Azure**
+
+* **Foundry runs on Azure** and uses Azure resource types.
+* Foundry is an **AI development layer within Azure**.
+* Designed to accelerate building and managing **generative AI applications and agents**.
+* Foundry **projects and hubs** are Azure resources.
+* Integrates with Azure **networking, storage, and security**.
+
+**Foundry Tools and Models**
+
+* Foundry Tools and models are **cloud-based**.
+* Accessed through a **Foundry resource**.
+* Managed like other Azure services, including:
+
+  * Platform as a Service (PaaS)
+  * Infrastructure as a Service (IaaS)
+  * Managed database services
+* **Azure Resource Manager** provides consistent handling for:
+
+  * Resource creation and deletion
+  * Availability
+  * Billing
+
+**Typical Workflow**
+
+* Start with an **Azure subscription**
+* Create a **Foundry project**
+* Develop and manage an **AI application**
+
+**Key Facts to Remember**
+
+* Azure organizes resources as **Tenant → Subscription → Resource Group → Resource**
+* Azure core service areas: **Compute, Storage, Networking, Application Services**
+* Foundry is **built on Azure**, not separate from it
+* Foundry resources follow the **same management, billing, and governance model** as other Azure services
+* An **Azure subscription is required** to create and use a Foundry project
+
+---
+
 
 *Last updated: 2026-01-16*
