@@ -180,5 +180,369 @@
 
 ---
 
+## Regression
+
+[Module Reference](https://learn.microsoft.com/training/modules/introduction-to-machine-learning-concepts/)
+
+**What Regression Is**
+
+* **Regression models** predict **numeric label values**.
+* Training data includes **features** and **known labels**.
+* Regression is a type of **supervised machine learning**.
+
+<img src='.img/2026-01-18-06-56-42.png' width=700>
+
+**Supervised Model Training Process**
+
+1. **Split data** randomly into:
+
+   * Training dataset
+   * Validation dataset
+2. **Train the model** using an algorithm (for regression, a regression algorithm such as **linear regression**).
+3. **Predict labels** for the validation data.
+4. **Evaluate performance** by comparing predicted labels to actual labels.
+5. **Repeat iteratively** with different algorithms and parameters until an acceptable metric is achieved.
+
+**Regression Example Overview**
+
+* **Feature (x)**: Temperature (maximum daily temperature)
+* **Label (y)**: Number of ice creams sold
+* Goal: Predict numeric sales values from temperature data.
+
+**Training a Regression Model**
+
+* A subset of historical temperature and sales data is used for training.
+* Data points can be visualized using a **scatter plot**.
+* A **linear regression algorithm** fits a straight line that minimizes the average distance between the line and the data points.
+* The resulting function from the example:
+
+  * **f(x) = x − 50**
+* Example prediction:
+
+  * If temperature is **77**, predicted sales = **27**.
+
+**Model Validation**
+
+* Held-back validation data is used to test predictions.
+* Predicted values (ŷ) are compared to actual values (y).
+* Differences between ŷ and y represent prediction errors.
+
+**Regression Evaluation Metrics**
+
+* **Mean Absolute Error (MAE)**
+
+  * Average of absolute prediction errors.
+  * Example MAE: **2.33**
+
+* **Mean Squared Error (MSE)**
+
+  * Mean of squared errors, emphasizing larger errors.
+  * Example MSE: **6**
+
+* **Root Mean Squared Error (RMSE)**
+
+  * Square root of MSE.
+  * Expresses error in the same units as the label.
+  * Example RMSE: **2.45**
+
+* **Coefficient of Determination (R²)**
+
+  * Measures the proportion of variance explained by the model.
+  * Value ranges from **0 to 1**.
+  * Closer to **1** indicates a better fit.
+  * Example R²: **0.95**
+  * Formula:
+
+    * **R² = 1 − ∑(y − ŷ)² ÷ ∑(y − ȳ)²**
+
+**Iterative Training Considerations**
+
+* Models are refined by varying:
+
+  * **Feature selection and preparation**
+  * **Algorithm selection**
+  * **Algorithm parameters (hyperparameters)**
+* The final model is chosen based on the **best acceptable evaluation metric** for the scenario.
+
+**Key Facts to Remember**
+
+* Regression predicts **numeric outcomes**.
+* Training involves **split → train → validate → evaluate → repeat**.
+* **MAE, MSE, RMSE, and R²** are standard regression metrics.
+* **R² ranges from 0 to 1** and measures explained variance.
+* Model development is an **iterative process**.
+
+---
+
+## Binary classification
+
+[Module Reference](https://learn.microsoft.com/training/modules/introduction-to-machine-learning-concepts/)
+
+**Overview**
+
+* **Binary classification** is a **supervised machine learning** technique.
+* Follows an **iterative process** of **training**, **validating**, and **evaluating** models.
+* Predicts **one of two possible labels** for a single class (typically **1 or 0**, **true or false**).
+* Models calculate **probability values** for class assignment.
+* Evaluation compares **predicted classes** to **actual classes**, not numeric values.
+
+**Training Data Characteristics**
+
+* Observations include:
+
+  * One or more **features (x)**
+  * A **label (y)** with values **1 or 0**
+* Probabilities range from **0.0 to 1.0**
+* Total probability across all classes equals **1.0**
+
+**Example Scenario**
+
+* Feature: **Blood glucose level**
+* Label: **Diabetic (1) or not diabetic (0)**
+* Used to demonstrate binary classification with a **single feature**
+
+**Training a Binary Classification Model**
+
+* Uses an algorithm to fit training data to a function:
+
+  * **f(x) = P(y = 1 | x)**
+* Output represents the **probability** that the label is true.
+* **Logistic regression** is a common binary classification algorithm.
+
+  * Produces a **sigmoid (S-shaped) function**
+  * Output values between **0.0 and 1.0**
+* Despite its name, **logistic regression is used for classification**, not regression.
+
+**Decision Threshold**
+
+* A **threshold** determines predicted class:
+
+  * Default threshold: **0.5**
+* Rules:
+
+  * **P(y) ≥ 0.5 → predict 1**
+  * **P(y) < 0.5 → predict 0**
+* Changing the threshold changes prediction behavior.
+
+**Model Validation**
+
+* A **subset of data** is held back for validation.
+* Model generates **predicted labels (ŷ)** using the learned function.
+* Predicted labels are compared to **actual labels (y)**.
+
+**Confusion Matrix**
+
+* Used to summarize prediction results:
+
+  * **True Negative (TN)**: ŷ=0, y=0
+  * **False Positive (FP)**: ŷ=1, y=0
+  * **False Negative (FN)**: ŷ=0, y=1
+  * **True Positive (TP)**: ŷ=1, y=1
+* Correct predictions appear along the **diagonal**.
+
+**Accuracy**
+
+* Measures overall correctness of predictions.
+* Formula:
+
+  * **(TN + TP) ÷ (TN + FN + FP + TP)**
+* Example result:
+
+  * **0.83 (83%)**
+* Limitation:
+
+  * Can be misleading with **imbalanced datasets**.
+
+**Recall**
+
+* Measures ability to identify **positive cases**.
+* Formula:
+
+  * **TP ÷ (TP + FN)**
+* Example result:
+
+  * **0.75**
+* Also known as **True Positive Rate (TPR)**.
+
+**Precision**
+
+* Measures correctness of **positive predictions**.
+* Formula:
+
+  * **TP ÷ (TP + FP)**
+* Example result:
+
+  * **1.0**
+
+**F1-score**
+
+* Combines **precision** and **recall** into one metric.
+* Formula:
+
+  * **(2 × Precision × Recall) ÷ (Precision + Recall)**
+* Example result:
+
+  * **0.86**
+
+**ROC Curve and AUC**
+
+* **False Positive Rate (FPR)** formula:
+
+  * **FP ÷ (FP + TN)**
+* **ROC curve** plots:
+
+  * **TPR vs. FPR** across all threshold values from **0.0 to 1.0**
+* Interpretation:
+
+  * **Perfect model**: AUC = **1.0**
+  * **Random guessing**: AUC = **0.5**
+* Example model:
+
+  * **AUC = 0.875**
+  * Performs better than random guessing.
+
+**Key Facts to Remember**
+
+* Binary classification predicts **one of two labels**.
+* Output is a **probability between 0.0 and 1.0**.
+* Default classification threshold is **0.5**.
+* Accuracy alone can be misleading.
+* **Recall**, **precision**, **F1-score**, and **AUC** provide deeper performance insight.
+* **AUC > 0.5** indicates better-than-random performance.
+
+---
+
+
+## Multiclass classification
+
+[Module Reference](https://learn.microsoft.com/training/modules/introduction-to-machine-learning-concepts/)
+
+**Definition**
+
+* **Multiclass classification** predicts which one of **multiple possible classes** an observation belongs to.
+* It is a **supervised learning** technique.
+* Follows the same **train, validate, evaluate** process as:
+
+  * Regression
+  * Binary classification
+* A subset of training data is held back for **validation**.
+
+**Example scenario**
+
+* Observations: **penguin flipper length (x)**
+* Target variable: **penguin species (y)**
+* Class encoding:
+
+  * **0** – Adelie
+  * **1** – Gentoo
+  * **2** – Chinstrap
+* Example data:
+
+| Flipper length (x) | Species (y) |
+| ------------------ | ----------- |
+| 167                | 0           |
+| 172                | 0           |
+| 225                | 2           |
+| 197                | 1           |
+| 189                | 1           |
+| 232                | 2           |
+| 158                | 0           |
+
+* Real-world scenarios typically use **multiple features**, not just one.
+
+**Training a multiclass classification model**
+
+* The model learns a function that calculates a **probability for each possible class**.
+* Two algorithm approaches are used:
+
+  * **One-vs-Rest (OvR)**
+  * **Multinomial**
+
+**One-vs-Rest (OvR) algorithms**
+
+* Train **one binary classifier per class**.
+* Each classifier estimates the probability that an observation belongs to its target class versus all others.
+* Example functions:
+
+  * **f₀(x) = P(y = 0 | x)**
+  * **f₁(x) = P(y = 1 | x)**
+  * **f₂(x) = P(y = 2 | x)**
+* Each function produces a **sigmoid output between 0.0 and 1.0**.
+* The predicted class is the one with the **highest probability**.
+
+**Multinomial algorithms**
+
+* Use a **single function** that outputs a **probability distribution** across all classes.
+* Output is a **vector** where probabilities sum to **1.0**:
+
+  * **f(x) = [P(y=0|x), P(y=1|x), P(y=2|x)]**
+* Common example: **softmax function**
+* Example output:
+
+  * **[0.2, 0.3, 0.5]**
+* The predicted class is the one with the **highest probability value**.
+
+**Prediction behavior**
+
+* Regardless of algorithm type:
+
+  * The model selects the **most probable class**.
+  * Outputs the corresponding **class label (y)**.
+
+**Evaluating a multiclass classification model**
+
+* Evaluation approaches:
+
+  * Calculate **binary classification metrics per class**
+  * Calculate **aggregate metrics across all classes**
+* Uses a **multiclass confusion matrix** showing predicted vs. actual labels.
+
+**Example evaluation results**
+
+| Flipper length (x) | Actual (y) | Predicted (ŷ) |
+| ------------------ | ---------- | ------------- |
+| 165                | 0          | 0             |
+| 171                | 0          | 0             |
+| 205                | 2          | 1             |
+| 195                | 1          | 1             |
+| 183                | 1          | 1             |
+| 221                | 2          | 2             |
+| 214                | 2          | 2             |
+
+**Per-class metrics**
+
+| Class | TP | TN | FP | FN | Accuracy | Recall | Precision | F1-score |
+| ----- | -- | -- | -- | -- | -------- | ------ | --------- | -------- |
+| 0     | 2  | 5  | 0  | 0  | 1.0      | 1.0    | 1.0       | 1.0      |
+| 1     | 2  | 4  | 1  | 0  | 0.86     | 1.0    | 0.67      | 0.8      |
+| 2     | 2  | 4  | 0  | 1  | 0.86     | 0.67   | 1.0       | 0.8      |
+
+**Overall metrics**
+
+* **Overall accuracy**:
+
+  * (13 + 6) ÷ (13 + 6 + 1 + 1) = **0.90**
+* **Overall recall**:
+
+  * 6 ÷ (6 + 1) = **0.86**
+* **Overall precision**:
+
+  * 6 ÷ (6 + 1) = **0.86**
+* **Overall F1-score**:
+
+  * (2 × 0.86 × 0.86) ÷ (0.86 + 0.86) = **0.86**
+
+**Key Facts to Remember**
+
+* Multiclass classification predicts **one of more than two classes**.
+* OvR uses **multiple binary classifiers**, one per class.
+* Multinomial uses **one model** with a probability vector output.
+* Predicted class is always the **highest probability**.
+* Multiclass evaluation can be done **per class** or **aggregated**.
+* Overall metrics are calculated from **total TP, TN, FP, and FN values**.
+
+---
+
+
 
 *Last updated: 2026-01-16*
