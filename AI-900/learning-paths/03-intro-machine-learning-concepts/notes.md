@@ -543,6 +543,187 @@
 
 ---
 
+## Clustering
+
+[Module Reference](URL)
+
+**Overview**
+
+* **Clustering** is a form of **unsupervised machine learning**
+* Observations are grouped into **clusters** based on similarities in their **features**
+* No previously known **label values** are used to train the model
+* In clustering, the **label** is the cluster an observation is assigned to
+
+**Clustering Example**
+
+* Dataset contains **no known labels**
+* Each observation has **two features**:
+
+  * Number of leaves (**x1**)
+  * Number of petals (**x2**)
+* Goal is **not** to identify flower species
+* Goal is to **group similar flowers** based on feature values
+
+**Training a Clustering Model (K-Means)**
+
+1. **Vectorize features**
+
+   * Feature values are converted into **n-dimensional coordinates**
+   * n equals the number of features (for example, `[x1, x2]`)
+2. **Choose number of clusters**
+
+   * Select **k**, the number of clusters
+   * k random points are plotted as initial **centroids**
+3. **Assign data points**
+
+   * Each data point is assigned to the **nearest centroid**
+4. **Move centroids**
+
+   * Each centroid is repositioned to the **mean center** of its assigned points
+5. **Reassign clusters**
+
+   * Data points may be reassigned based on updated centroid positions
+6. **Repeat**
+
+   * Steps repeat until clusters are **stable** or a **maximum number of iterations** is reached
+
+**Evaluating a Clustering Model**
+
+* Evaluation is based on **cluster separation**, not label accuracy
+* Common evaluation metrics include:
+
+  * **Average distance to cluster center** – Average distance of points to their centroid
+  * **Average distance to other center** – Average distance of points to centroids of other clusters
+  * **Maximum distance to cluster center** – Furthest distance from a point to its centroid
+  * **Silhouette score**
+
+    * Value between **-1 and 1**
+    * Closer to **1** indicates better cluster separation
+
+**Key Facts to Remember**
+
+* Clustering is **unsupervised learning**
+* **K-Means** requires selecting a value for **k**
+* Centroids are updated using the **mean** of assigned points
+* Clustering evaluation focuses on **separation**, not prediction accuracy
+* **Silhouette scores** range from **-1 to 1**
+
+---
+
+## Deep learning
+
+[Module Reference](https://learn.microsoft.com/training/modules/introduction-to-machine-learning-concepts/)
+
+**Overview**
+
+* **Deep learning** is an advanced form of machine learning that attempts to emulate how the human brain learns.
+* It is based on **artificial neural networks** that simulate electrochemical activity in biological neurons using mathematical functions.
+* Models built with this approach are called **deep neural networks (DNNs)**.
+
+<img src='.img/2026-01-18-07-06-55.png' width=600>
+
+**Artificial Neural Networks**
+
+* Each **neuron**:
+
+  * Operates on an input value **(x)** and a **weight (w)**.
+  * Applies a mathematical function.
+  * Uses an **activation function** to decide whether to pass the output forward.
+* Networks consist of **multiple layers of neurons**, forming a deeply nested function.
+* The depth (multiple layers) is why the technique is called **deep learning**.
+
+**Machine Learning Tasks Supported**
+
+* **Regression**
+* **Classification**
+* Specialized models for:
+
+  * **Natural language processing**
+  * **Computer vision**
+
+**Deep Learning Model Function**
+
+* Like other machine learning techniques:
+
+  * Training data is fitted to a function **f(x)** that predicts a label **(y)**.
+* **f(x)** represents the outer layer of a nested function.
+* Each layer:
+
+  * Encapsulates functions that operate on **x** and **w** values.
+* Training process:
+
+  * Feed features **(x)** forward through the network to compute predicted values **(ŷ)**.
+  * Compare **ŷ** to known **y** values to measure **loss**.
+  * Adjust **weights (w)** iteratively to reduce loss.
+* The trained model consists of the final weight values that produce the most accurate predictions.
+
+**Example – Deep Learning for Classification**
+
+* **Problem type**: Classification
+* **Scenario**: Predicting penguin species
+
+**Feature Vector (x)**
+
+* Measurements used:
+
+  * Bill length
+  * Bill depth
+  * Flipper length
+  * Weight
+* Represented as:
+
+  * **x = [x₁, x₂, x₃, x₄]**
+
+**Labels (y)**
+
+* Possible species:
+
+  * Adelie
+  * Gentoo
+  * Chinstrap
+* Output is a **probability vector**:
+
+  * **[P(y=0|x), P(y=1|x), P(y=2|x)]**
+
+<img src='.img/2026-01-18-07-08-39.png' width=700>
+
+**Inference Process**
+
+1. Feature vector is fed into the **input layer**, with one neuron per feature.
+2. Neurons compute weighted sums and apply activation functions.
+3. Each layer is **fully connected** to the next layer.
+4. The **output layer** uses a **softmax (or similar) function** to produce class probabilities.
+5. The predicted class is the one with the **highest probability**.
+
+**How a Neural Network Learns**
+
+1. Training and validation datasets are defined.
+2. Training features are fed into the network.
+3. Initial weights are assigned **randomly**.
+4. The network produces predicted values **(ŷ)**.
+5. A **loss function** compares **ŷ** to known **y** values and calculates total loss.
+6. An **optimization function** (typically **gradient descent**) evaluates how each weight affects loss.
+7. Weights are adjusted to minimize loss.
+8. Updated weights are **backpropagated** through the network.
+9. The process repeats over multiple **epochs** until acceptable accuracy is reached.
+
+<img src='.img/2026-01-18-07-08-59.png' width=700>
+
+**Performance Considerations**
+
+* Training is performed using **batches of data** represented as matrices.
+* Neural network training relies heavily on **linear algebra**.
+* **GPUs** are preferred due to efficient vector and matrix processing.
+
+**Key Facts to Remember**
+
+* **Deep learning** uses multi-layer neural networks (DNNs).
+* Each neuron operates on **x**, **w**, and an **activation function**.
+* Classification outputs are **probability vectors**.
+* Training minimizes **loss** using **gradient descent** and **backpropagation**.
+* Training is computationally intensive and best suited for **GPUs**.
+
+---
 
 
 *Last updated: 2026-01-16*
