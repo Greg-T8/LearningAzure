@@ -137,6 +137,102 @@
 
 ---
 
+## Get and prepare data
+
+[Module Reference](https://learn.microsoft.com/training/modules/get-started-machine-learning-azure/)
+
+**Overview**
+
+* **Data is the foundation of machine learning**
+
+  * Both **data quantity** and **data quality** directly affect model accuracy.
+* Before training a model, you must:
+
+  * **Identify data source and format**
+  * **Choose how to serve data**
+  * **Design a data ingestion solution**
+
+**Identify data source and format**
+
+* **Data source**
+
+  * Examples include:
+
+    * **Customer Relationship Management (CRM) systems**
+    * **Transactional databases** (for example, SQL databases)
+    * **Internet of Things (IoT) devices**
+* **Data format**
+
+  * **Structured (tabular) data**
+  * **Semi-structured data**
+  * **Unstructured data**
+* You must decide:
+
+  * What data is required to train the model
+  * The format in which the data should be served to the model
+
+**Design a data ingestion solution**
+
+* Best practice is to:
+
+  * **Extract data from its source**
+  * **Transform the data**
+  * **Load it into a serving layer**
+* This process is known as:
+
+  * **ETL** (Extract, Transform, Load)
+  * **ELT** (Extract, Load, Transform)
+* The **serving layer** makes data available for:
+
+  * Training machine learning models
+  * Making predictions
+* Data ingestion pipelines:
+
+  * Are a **sequence of tasks** that move and transform data
+  * Can be **manually triggered** or **scheduled**
+  * Can be built using:
+
+    * Azure Synapse Analytics
+    * Azure Databricks
+    * Azure Machine Learning
+
+**Common data ingestion approach**
+
+1. **Extract** raw data from the source (for example, CRM system or IoT device)
+2. **Copy and transform** data using Azure Synapse Analytics
+3. **Store** prepared data in Azure Blob Storage
+4. **Train** the model using Azure Machine Learning
+
+**Example: Weather forecasting scenario**
+
+* Goal:
+
+  * One table containing **temperature measurements per minute**
+  * Aggregated data showing **average temperature per hour**
+* Source data:
+
+  * **Semi-structured JSON data** from IoT temperature sensors
+* Transformation steps:
+
+  1. Extract temperature measurements as **JSON objects**
+  2. Convert JSON objects into a **tabular format**
+  3. Transform data to calculate **temperature per machine per minute**
+
+<img src='.img/2026-01-19-04-31-31.png' width=700>
+
+**Key Facts to Remember**
+
+* **Data quality and quantity** both impact model accuracy
+* Machine learning data preparation requires:
+
+  * Identifying **source**
+  * Understanding **format**
+  * Designing an **ingestion pipeline**
+* **ETL/ELT pipelines** are standard for preparing data
+* **Serving layers** make prepared data available for model training
+* Semi-structured data (like JSON) often must be **converted to tabular data** before training
+
+---
 
 
 *Last updated: 2026-01-16*
