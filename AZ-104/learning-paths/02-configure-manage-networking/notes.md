@@ -14,6 +14,9 @@
 * [Determine network security group rules](#determine-network-security-group-rules)
 * [Determine network security group effective rules](#determine-network-security-group-effective-rules)
 * [Create network security group rules](#create-network-security-group-rules)
+* [Implement application security groups](#implement-application-security-groups)
+* [What is Azure DNS?](#what-is-azure-dns)
+* [Configure Azure DNS to host your domain](#configure-azure-dns-to-host-your-domain)
 
 
 ---
@@ -21,16 +24,16 @@
 <!-- omit in toc -->
 ## 📋 Modules
 
-| # | Module | Status |
-|---|--------|--------|
-| 1 | [Configure virtual networks](https://learn.microsoft.com/en-us/training/modules/configure-virtual-networks/) | ✅ |
-| 2 | [Configure network security groups](https://learn.microsoft.com/en-us/training/modules/configure-network-security-groups/) | 🕒 |
-| 3 | [Host your domain on Azure DNS](https://learn.microsoft.com/en-us/training/modules/host-domain-azure-dns/) | 🕒 |
-| 4 | [Configure Azure Virtual Network peering](https://learn.microsoft.com/en-us/training/modules/configure-vnet-peering/) | 🕒 |
-| 5 | [Manage and control traffic flow in your Azure deployment with routes](https://learn.microsoft.com/en-us/training/modules/control-network-traffic-flow-with-routes/) | 🕒 |
-| 6 | [Introduction to Azure Load Balancer](https://learn.microsoft.com/en-us/training/modules/intro-to-azure-load-balancer/) | 🕒 |
-| 7 | [Introduction to Azure Application Gateway](https://learn.microsoft.com/en-us/training/modules/intro-to-azure-application-gateway/) | 🕒 |
-| 8 | [Introduction to Azure Network Watcher](https://learn.microsoft.com/en-us/training/modules/intro-to-azure-network-watcher/) | 🕒 |
+| # | Module | Status | Completed |
+|---|--------|--------|-----------|
+| 1 | [Configure virtual networks](https://learn.microsoft.com/en-us/training/modules/configure-virtual-networks/) | ✅ | 1/18/26 |
+| 2 | [Configure network security groups](https://learn.microsoft.com/en-us/training/modules/configure-network-security-groups/) | ✅ | 1/19/26 |
+| 3 | [Host your domain on Azure DNS](https://learn.microsoft.com/en-us/training/modules/host-domain-azure-dns/) | 🕒 | |
+| 4 | [Configure Azure Virtual Network peering](https://learn.microsoft.com/en-us/training/modules/configure-vnet-peering/) | 🕒 | |
+| 5 | [Manage and control traffic flow in your Azure deployment with routes](https://learn.microsoft.com/en-us/training/modules/control-network-traffic-flow-with-routes/) | 🕒 | |
+| 6 | [Introduction to Azure Load Balancer](https://learn.microsoft.com/en-us/training/modules/intro-to-azure-load-balancer/) | 🕒 | |
+| 7 | [Introduction to Azure Application Gateway](https://learn.microsoft.com/en-us/training/modules/intro-to-azure-application-gateway/) | 🕒 | |
+| 8 | [Introduction to Azure Network Watcher](https://learn.microsoft.com/en-us/training/modules/intro-to-azure-network-watcher/) | 🕒 | |
 
 **Legend:** 🕒 Not Started | 🚧 In Progress | ✅ Complete
 
@@ -928,6 +931,305 @@ You then tie them to a Virtual Machine:
 From there, you create an ASG rule in an NSG:
 
 <img src='.img/2026-01-19-03-58-43.png' width=600>
+
+---
+
+## What is Azure DNS?
+
+[Module Reference](https://learn.microsoft.com/training/modules/host-domain-azure-dns/)
+
+**Overview**
+
+* **Azure DNS** is a hosting service for **Domain Name System (DNS)** domains that provides name resolution using **Microsoft Azure infrastructure**.
+* Azure DNS enables you to **host and manage DNS domains**, but **does not register domain names**.
+* Domains must be registered through a **third-party domain registrar**.
+* Azure DNS acts as the **Start of Authority (SOA)** for the domain.
+
+**What is DNS**
+
+* **DNS (Domain Name System)** is a protocol within the **TCP/IP standard**.
+* DNS translates **human-readable domain names** (for example, `www.wideworldimports.com`) into **IP addresses**.
+* DNS operates as a **global distributed directory** hosted on servers worldwide.
+* A DNS server is also called a **DNS name server**.
+
+**How DNS Works**
+
+A DNS server performs two primary functions:
+
+* **Caching**
+
+  * Maintains a local cache of recently resolved domain names and IP addresses.
+  * Speeds up resolution for repeat requests.
+  * For unresolved requests, forwards queries to other DNS servers until resolved or timed out.
+* **Authoritative resolution**
+
+  * Maintains a **key-value database** of domains and IP addresses for which it has authority.
+  * Commonly used for web, mail, and internet services.
+
+**DNS Server Assignment**
+
+* DNS settings depend on the network connection:
+
+  * **On-premises network** – DNS settings provided by the organization’s server.
+  * **External networks (for example, hotels)** – DNS settings provided by the ISP.
+
+**Domain Lookup Process**
+
+1. DNS server checks its **short-term cache**.
+2. If not found, it queries other DNS servers on the internet.
+3. If resolved, the result is cached and returned.
+4. If unresolved after multiple attempts, a **domain not found** error is returned.
+
+**IPv4 and IPv6**
+
+* **IPv4**
+
+  * Four numbers (0–255) separated by dots.
+  * Example: `127.0.0.1`
+  * Most commonly used today.
+* **IPv6**
+
+  * Eight groups of hexadecimal values separated by colons.
+  * Example: `fe80:11a1:ac15:e9gf:e884:edb0:ddee:fea3`
+* DNS can resolve domain names to **both IPv4 and IPv6 addresses**.
+* Many devices are provisioned with **both address types**.
+
+**DNS Settings for Your Domain**
+
+* DNS servers must be configured for each **host type**, such as:
+
+  * Web
+  * Email
+  * Other services
+* When using Azure DNS, it functions as the **SOA** for the domain.
+
+**DNS Record Types**
+
+Most commonly used records:
+
+* **A** – Maps a domain or host name to an IP address.
+* **CNAME** – Creates an alias from one domain name to another.
+* **MX** – Routes email to a mail server.
+* **TXT** – Stores text strings; used for **domain ownership verification** by Azure and Microsoft 365.
+
+Additional record types:
+
+* Wildcards
+
+* **CAA**
+
+* **NS**
+
+* **SOA**
+
+* **SPF**
+
+* **SRV**
+
+* **SOA and NS records** are created automatically when a DNS zone is created in Azure DNS.
+
+**Record Sets**
+
+* Some DNS record types support **record sets**, allowing multiple values per record.
+* Example: One domain mapped to multiple IP addresses using an **A record**.
+* **SOA and CNAME records do not support record sets**.
+
+**What is Azure DNS**
+
+* Azure DNS provides **globally distributed name servers**.
+* Enables DNS management using **existing Azure credentials**.
+* Acts as the **authoritative DNS service (SOA)** for hosted domains.
+
+**Why Use Azure DNS**
+
+Azure DNS is built on **Azure Resource Manager**, providing:
+
+* **Improved security**
+
+* **Ease of use**
+
+* **Private DNS domains**
+
+* **Alias record sets**
+
+* Azure DNS **does not support DNSSEC**.
+
+* Domains requiring DNSSEC must be hosted with a **third-party provider**.
+
+**Security Features**
+
+* **Role-based access control (RBAC)** – Granular control over user access.
+* **Activity logs** – Track changes and identify faults.
+* **Resource locking** – Restrict or prevent changes to Azure resources.
+
+**Ease of Use**
+
+* Manages DNS for **Azure and external resources**.
+* Uses the same **Azure credentials, billing, and support** as other Azure services.
+* Management options:
+
+  * Azure portal
+  * Azure PowerShell
+  * Azure CLI
+  * REST API and SDK for automation
+
+**Private DNS Domains**
+
+* Azure DNS supports **private DNS zones**.
+* Provide name resolution for:
+
+  * VMs within a virtual network
+  * VMs across virtual networks
+* Private zones use **custom domain names** instead of Azure-provided names.
+* Virtual networks must be explicitly linked to resolve records.
+
+**Private DNS Zone Benefits**
+
+* Fully managed as part of Azure infrastructure.
+* Supports record types: **A, CNAME, TXT, MX, SOA, AAAA, PTR, SRV**.
+* VM host names are **automatically maintained**.
+* **Split-horizon DNS**:
+
+  * Same domain name can exist in public and private zones.
+  * Resolution depends on request origin.
+
+**Alias Record Sets**
+
+* Alias records can point directly to **Azure resources**, including:
+
+  * Azure public IP addresses
+  * Azure Traffic Manager profiles
+  * Azure Content Delivery Network endpoints
+* Supported record types:
+
+  * **A**
+  * **AAAA**
+  * **CNAME**
+
+**Key Facts to Remember**
+
+* **Azure DNS hosts and manages domains**, but does **not register** them.
+* Azure DNS acts as the **SOA** for hosted domains.
+* **SOA and NS records** are created automatically.
+* **DNSSEC is not supported** in Azure DNS.
+* Private DNS zones support **split-horizon DNS**.
+* Alias record sets can point directly to **Azure resources**.
+
+---
+
+## Configure Azure DNS to host your domain
+
+[Module Reference](https://learn.microsoft.com/training/modules/host-domain-azure-dns/)
+
+**Overview**
+
+* Azure DNS is used to **host DNS records** for an existing domain.
+* Domains must already be **registered with a third-party registrar**.
+* DNS zones in Azure store **all DNS records** for a domain.
+* Azure DNS becomes the **Start of Authority (SOA)** for the domain.
+
+**Step 1: Create a DNS Zone in Azure**
+
+* A **DNS zone** contains all DNS records for a domain.
+* Required configuration when creating a DNS zone:
+
+  * **Subscription** – Azure subscription to use
+  * **Resource group** – Container for managing DNS resources
+  * **Name** – Fully qualified domain name (for example, `wideworldimports.com`)
+  * **Resource group location** – Defaults to the resource group location
+
+**Step 2: Get Azure DNS Name Servers**
+
+* Azure DNS automatically creates an **NS (name server) record** for the zone.
+* The NS record contains **four Azure DNS name servers**.
+* These name servers are required to delegate the domain to Azure DNS.
+
+**Step 3: Update Domain Registrar Settings**
+
+* Sign in to the **domain registrar’s management portal**.
+* Replace existing NS records with the **four Azure DNS name servers**.
+* This process is called **domain delegation**.
+* All four Azure-provided name servers must be used.
+
+**Step 4: Verify Domain Delegation**
+
+* Delegation can take **10 minutes or longer** to complete.
+* Verification is done by querying the **SOA record**.
+* The SOA record is created automatically with the DNS zone.
+* Verification example:
+
+  * `nslookup -type=SOA wideworldimports.com`
+* A valid SOA response confirms successful delegation.
+
+**Step 5: Configure Custom DNS Records**
+
+* DNS records define how domain names resolve to resources.
+
+**A Record**
+
+* Maps a host name to an **IP address**.
+* Required properties:
+
+  * **Name** – Host name (for example, `webserver1`)
+  * **Type** – A
+  * **TTL** – Time-to-live in seconds
+  * **IP address** – Destination IP address
+
+**CNAME Record**
+
+* Creates an **alias** to another domain name.
+* Used when multiple domain names resolve to the same endpoint.
+* Example use case:
+
+  * `www.wideworldimports.com` and `wideworldimports.com` resolving to the same IP
+* Example configuration:
+
+  * **Name** – `www`
+  * **TTL** – 600 seconds
+  * **Record type** – CNAME
+* Can be used to resolve to **Azure resources**, such as Azure Functions.
+
+**Configure a Private DNS Zone**
+
+* **Private DNS zones** are not visible on the internet.
+* Do **not require a domain registrar**.
+* Used for **internal name resolution** within Azure virtual networks.
+* Commonly used to assign DNS names to **VMs**.
+
+**Step 1: Create a Private DNS Zone**
+
+* Create a private DNS zone in the Azure portal.
+* Required inputs:
+
+  * **Resource group**
+  * **Zone name** (for example, `private.wideworldimports.com`)
+
+**Step 2: Identify Virtual Networks**
+
+* Determine which **virtual networks** host VMs requiring DNS resolution.
+* Each virtual network must be explicitly linked to the private DNS zone.
+
+**Step 3: Link Virtual Networks to the Private DNS Zone**
+
+* Create a **virtual network link** from the private DNS zone.
+* Navigate to **Virtual network links** in the private DNS zone.
+* Add a link for **each virtual network** that requires name resolution.
+* Linked networks can resolve records in the private DNS zone.
+
+<img src='.img/2026-01-19-04-10-19.png' width=700>
+
+<img src='.img/2026-01-19-04-10-34.png' width=600>
+
+**Key Facts to Remember**
+
+* Azure DNS hosts DNS records but **does not register domains**.
+* A DNS zone is required before delegating a domain to Azure DNS.
+* **Four name servers** must be configured during domain delegation.
+* SOA records are **automatically created** in Azure DNS zones.
+* **A records** map host names to IP addresses.
+* **CNAME records** create aliases to other domain names.
+* Private DNS zones provide **internal-only name resolution**.
+* Virtual networks must be **explicitly linked** to private DNS zones.
 
 ---
 
