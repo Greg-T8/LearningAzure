@@ -17,6 +17,8 @@
 * [Implement application security groups](#implement-application-security-groups)
 * [What is Azure DNS?](#what-is-azure-dns)
 * [Configure Azure DNS to host your domain](#configure-azure-dns-to-host-your-domain)
+* [Dynamically resolve resource name by using alias record](#dynamically-resolve-resource-name-by-using-alias-record)
+* [Exercise - Create alias records for Azure DNS](#exercise---create-alias-records-for-azure-dns)
 
 
 ---
@@ -1230,6 +1232,164 @@ Azure DNS is built on **Azure Resource Manager**, providing:
 * **CNAME records** create aliases to other domain names.
 * Private DNS zones provide **internal-only name resolution**.
 * Virtual networks must be **explicitly linked** to private DNS zones.
+
+---
+
+## Dynamically resolve resource name by using alias record
+
+[Module Reference](https://learn.microsoft.com/training/modules/host-domain-azure-dns/)
+
+**Scenario Context**
+
+* Domain was delegated from registrar to **Azure DNS**
+* An **A record** was previously configured to point to a web server
+* Next requirement is **improved resiliency** using a **load balancer**
+* **A** and **CNAME** records **cannot directly connect** an apex domain to Azure load-balancing resources
+
+**Apex Domain (Zone Apex)**
+
+* The **apex domain** is the highest level of the domain (for example, `wideworldimports.com`)
+* Also called:
+
+  * **Zone apex**
+  * **Root apex**
+* Represented by **@** in DNS zone records
+* Default apex records created automatically:
+
+  * **NS**
+  * **SOA**
+* **CNAME records are not supported** at the zone apex
+
+**Alias Records**
+
+* **Azure alias records** allow the **zone apex** to reference **Azure resources directly**
+* Eliminate the need for complex redirection or manual IP updates
+* Enable routing all traffic through **Traffic Manager**
+
+**Azure Resources Supported by Alias Records**
+
+* **Traffic Manager profile**
+* **Azure Content Delivery Network (CDN) endpoints**
+* **Public IP resource**
+* **Front Door profile**
+
+**Alias Record Benefits**
+
+* **Lifecycle tracking**
+
+  * DNS records automatically reflect changes to the target Azure resource
+* **Prevents dangling DNS records**
+
+  * Avoids stale IP references when resources change
+* **Automatic DNS updates**
+
+  * DNS record sets refresh automatically if IP addresses change
+* **Supports load-balanced applications**
+
+  * Enables routing at the **zone apex**
+* **Direct CDN integration**
+
+  * Zone apex can point directly to Azure CDN endpoints
+
+**Alias Record Set Types Supported**
+
+* **A** – IPv4 domain name mapping
+* **AAAA** – IPv6 domain name mapping
+* **CNAME** – Alias that links to an A record
+
+**Primary Use Case Highlighted**
+
+* Link the **zone apex** (`wideworldimports.com`) to a **load balancer**
+* Alias records create a **resource-based link**, not an IP-based link
+* DNS continues to function even if the load balancer IP changes
+
+**Key Facts to Remember**
+
+* **CNAME records cannot be used at the zone apex**
+* **Alias records are required** to connect apex domains to Azure load-balancing services
+* Alias records automatically track and update Azure resource changes
+* Alias records support **Traffic Manager**, **CDN**, **Public IPs**, and **Front Door**
+* Alias records are essential for **high availability at the zone apex**
+
+---
+
+## Exercise - Create alias records for Azure DNS
+
+[Module Reference](https://learn.microsoft.com/training/modules/host-domain-azure-dns/)
+
+**Scenario Overview**
+
+* Website traffic exceeds capacity of a single VM
+* Load must be distributed across multiple servers
+* **Azure DNS alias records** are used to dynamically map the **zone apex** to an Azure load balancer
+
+**Exercise Objectives**
+
+* Set up a **virtual network**, **two VMs**, and a **load balancer**
+* Configure an **Azure DNS alias record at the zone apex**
+* Verify DNS resolution routes traffic through the load balancer to either VM
+
+**Prerequisites and Notes**
+
+* Exercise is **optional**
+* Requires an **Azure subscription**
+* Can be completed by reviewing steps without deploying resources
+
+**Automated Environment Setup (Bash Script)**
+
+* GitHub repository provides a setup script to reduce manual configuration time
+* Script actions:
+
+  * Creates a **network security group**
+  * Creates **two NICs** and **two VMs**
+  * Creates a **virtual network** and assigns VMs
+  * Creates a **public IP address**
+  * Creates a **load balancer** with rules
+  * Links NICs to the load balancer
+* Script outputs the **public IP address of the load balancer**
+
+**Alias Record Configuration (Zone Apex)**
+
+* DNS zone: `wideworldimportsXXXX.com`
+* Record set settings:
+
+  * **Name**: Blank (represents zone apex)
+  * **Type**: **A**
+  * **Alias record set**: **Yes**
+  * **Alias type**: **Azure resource**
+  * **Azure resource**: Public IP associated with the load balancer
+* Propagation can take **up to 15 minutes**
+
+<img src='.img/2026-01-19-04-16-34.png' width=500>
+
+<img src='.img/2026-01-19-04-16-11.png' width=700>
+
+**Alias Record Characteristics**
+
+* Alias records dynamically reference Azure resources
+* Automatically update when the resource IP changes
+* Supported base record types:
+
+  * **A**
+  * **AAAA**
+  * **CNAME**
+
+**Verification Process**
+
+* Copy the **public IP address** of the load balancer
+* Paste the IP into a web browser
+* Result:
+
+  * Web page displays the **name of the VM** that handled the request
+  * Confirms traffic is being distributed by the load balancer
+
+**Key Facts to Remember**
+
+* **Zone apex cannot directly use CNAME records**
+* **Azure alias records enable apex-to-resource mapping**
+* Alias records **auto-refresh** when Azure resource IPs change
+* Base record type must still be **A, AAAA, or CNAME**
+* Alias propagation may take **up to 15 minutes**
 
 ---
 
