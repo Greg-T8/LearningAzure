@@ -162,3 +162,91 @@
 * **POS tagging** adds grammatical context to tokens.
 
 ---
+
+## Statistical text analysis
+
+[Module Reference](https://learn.microsoft.com/en-us/training/modules/introduction-language/3-statistical-techniques?pivots=text)
+
+**Overview**
+
+* Statistical text analysis infers meaning from text after **tokenization**, **normalization**, and **lemmatization**.
+* Techniques identify themes, relevance, and structure within documents or across a corpus.
+
+**Frequency Analysis**
+
+* Counts occurrences of each **normalized token** in a document.
+* Assumption: **More frequent terms indicate key topics or themes**.
+* Effective for understanding **single documents**.
+* Example outcome: high counts for terms like **AI**, **business**, and **benefit** indicate business-focused AI content.
+
+**Term Frequency – Inverse Document Frequency (TF-IDF)**
+
+* Used to **differentiate relevance across multiple documents** in a corpus.
+* Addresses limitations of simple frequency counts when common terms appear in many documents.
+
+**TF-IDF Calculation Process**
+
+1. **Term Frequency (TF)**
+
+   * Number of times a term appears in a document.
+   * Example: tf(agent) = 6.
+2. **Inverse Document Frequency (IDF)**
+
+   * Measures how rare a term is across the corpus.
+   * Formula: **idf(t) = log(N / df(t))**
+
+     * **N** = total number of documents
+     * **df(t)** = number of documents containing term *t*
+3. **TF-IDF Score**
+
+   * Formula: **tfidf(t, d) = tf(t, d) × log(N / df(t))**
+
+* **High TF-IDF**: term is frequent in one document but rare across others.
+* **Low TF-IDF**: term is common across many documents.
+* Terms appearing in all documents have **IDF = 0** and no discriminative value.
+
+**Bag-of-Words Techniques**
+
+* Represents text as a **vector of word frequencies or occurrences**.
+* **Ignores grammar and word order**.
+* Commonly used as features for machine learning algorithms.
+
+**Common Uses**
+
+* **Naive Bayes classification** for document categorization.
+* **Spam filtering** based on word frequency patterns.
+* **Sentiment analysis**, assigning labels such as *positive* or *negative* using probabilistic models.
+
+**TextRank**
+
+* **Unsupervised, graph-based algorithm** for text ranking.
+* Models text as a graph:
+
+  * **Nodes**: sentences (or words)
+  * **Edges**: weighted by similarity (e.g., word overlap, cosine similarity)
+
+<img src='.img/2026-01-19-05-09-47.png' width=500> 
+
+**TextRank Process**
+
+1. **Build a graph** of sentences connected by similarity-weighted edges.
+2. **Iteratively calculate ranks** using:
+
+   * TextRank(Sᵢ) = (1 − d) + d × Σ(wⱼᵢ / Σwⱼₖ) × TextRank(Sⱼ)
+   * **d (damping factor)** ≈ 0.85
+3. **Extract top-ranked sentences** after convergence.
+
+* Used for **extractive summarization** (selects existing sentences).
+* Can also be applied to **keyword extraction** at the word level.
+* Distinct from **abstractive summarization**, which generates new text.
+
+**Key Facts to Remember**
+
+* **Frequency analysis** is best for single-document topic identification.
+* **TF-IDF** highlights terms that distinguish documents within a corpus.
+* **Bag-of-words** ignores word order and grammar.
+* **Naive Bayes** commonly uses bag-of-words features.
+* **TextRank** is graph-based and unsupervised.
+* **Extractive summarization** selects original sentences; no new text is generated.
+
+---
