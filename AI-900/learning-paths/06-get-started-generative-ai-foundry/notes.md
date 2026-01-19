@@ -264,3 +264,34 @@
 * **RAG** is best suited for applications requiring **up-to-date or proprietary data**.
 
 ---
+
+## Understand observability
+
+[Module Reference](https://learn.microsoft.com/)
+
+**Dimensions for Evaluating Generative AI**
+
+* **Performance and quality evaluators** – Assess **accuracy**, **groundedness**, and **relevance** of generated content.
+* **Risk and safety evaluators** – Assess potential risks to safeguard against **harmful or inappropriate content**, including an AI system’s predisposition to generate such content.
+* **Custom evaluators** – **Industry-specific metrics** designed to meet particular needs and goals.
+
+**Microsoft Foundry Observability**
+
+* Microsoft Foundry provides **observability features** to improve the **performance** and **trustworthiness** of generative AI responses.
+* **Evaluators** are specialized tools in Microsoft Foundry that measure **quality**, **safety**, and **reliability** of AI responses.
+
+**Types of Evaluators**
+
+* **Groundedness** – Measures how consistent the response is with the **retrieved context**.
+* **Relevance** – Measures how relevant the response is to the **query**.
+* **Fluency** – Measures **natural language quality** and **readability**.
+* **Coherence** – Measures **logical consistency** and **flow** of responses.
+* **Content safety** – Provides a **comprehensive assessment** of safety concerns.
+
+**Key Facts to Remember**
+
+* Observability in Microsoft Foundry focuses on **quality**, **safety**, and **reliability** of generative AI.
+* Evaluators fall into **performance/quality**, **risk/safety**, and **custom** categories.
+* **Groundedness** and **relevance** rely on alignment with context and query, not just fluency.
+
+---
