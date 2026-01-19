@@ -41,7 +41,7 @@ This repository documents my learning progress through Microsoft Azure certifica
 
 ### [AI-900: Microsoft Azure AI Fundamentals](AI-900/README.md)
 
-**Status:** 🔄 In Progress (0/5 domains completed)
+**Status:** 🔄 In Progress 
 
 **Exam Domains:**
 
@@ -62,7 +62,7 @@ This repository documents my learning progress through Microsoft Azure certifica
 
 ### [AZ-104: Microsoft Azure Administrator](AZ-104/README.md)
 
-**Status:** 🔄 In Progress (0/5 domains completed)
+**Status:** 🔄 In Progress
 
 **Exam Domains:**
 
