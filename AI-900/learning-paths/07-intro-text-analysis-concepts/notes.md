@@ -250,3 +250,121 @@
 * **Extractive summarization** selects original sentences; no new text is generated.
 
 ---
+
+## Semantic language models
+
+[Module Reference](https://learn.microsoft.com/training/modules/introduction-text-analysis/semantic-language-models)
+
+**Overview**
+
+* Modern NLP uses **deep learning language models** that encode **semantic relationships** between tokens.
+* Tokens are represented as **embeddings**: vectors (multi-valued numeric arrays).
+* Embeddings capture **semantic meaning** based on token usage during training.
+* Techniques such as **Word2Vec** and **GloVe** introduced dense, multi-dimensional vectors.
+* **Attention mechanisms** consider tokens in context, producing **contextualized embeddings**.
+* Contextualized embeddings (for example, GPT-style models) underpin **modern generative AI**.
+
+**Representing Text as Vectors**
+
+* Vectors represent points in **multidimensional space**.
+
+* Each vector has a **direction and magnitude**.
+
+* **Semantically similar tokens** have vectors with similar orientations.
+
+* Example 3D embeddings:
+
+  * **dog**: [0.8, 0.6, 0.1]
+  * **puppy**: [0.9, 0.7, 0.4]
+  * **cat**: [0.7, 0.5, 0.2]
+  * **kitten**: [0.8, 0.6, 0.5]
+  * **young**: [0.1, 0.1, 0.3]
+  * **ball**: [0.3, 0.9, 0.1]
+  * **tree**: [0.2, 0.1, 0.9]
+
+* Similar concepts (dog/cat, puppy/kitten) have similar vector orientations.
+
+* Unrelated words have clearly different orientations.
+
+<img src='.img/2026-01-19-05-12-19.png' width=500>
+
+**Finding Related Terms**
+
+* Semantic similarity can be calculated using **cosine similarity**.
+
+* Formula:
+
+  * cosine_similarity(A, B) = (A · B) / (||A|| × ||B||)
+
+* Interpretation:
+
+  * Values close to **1** indicate high similarity.
+  * Lower values indicate weaker semantic relationship.
+
+* Example results:
+
+  * **dog ↔ cat**: ~0.992 (high similarity)
+  * **dog ↔ tree**: ~0.333 (low similarity)
+  * **cat ↔ tree**: ~0.452 (low similarity)
+
+* Used to identify **odd-one-out** terms based on semantics.
+
+<img src='.img/2026-01-19-05-13-09.png' width=500>
+
+**Vector Translation Through Addition and Subtraction**
+
+* Vectors can be **added or subtracted** to model semantic transformations.
+* Examples:
+
+  * **dog + young = puppy**
+  * **cat + young = kitten**
+* Reverse operations:
+
+  * **puppy − young = dog**
+  * **kitten − young = cat**
+* In practice, results are matched by finding the **closest vector**, not exact equality.
+
+**Analogical Reasoning**
+
+* Vector arithmetic can solve analogies.
+* Example:
+
+  * “puppy is to dog as kitten is to ?”
+  * Calculation: **kitten − puppy + dog = cat**
+* Demonstrates how embeddings encode **linguistic relationships**.
+
+<img src='.img/2026-01-19-05-13-50.png' width=500>
+
+**Using Semantic Models for Text Analysis**
+
+* **Text summarization**
+
+  * Encode sentences as vectors.
+  * Identify sentences most representative of the document meaning.
+  * Enables **extractive summarization**.
+
+* **Keyword extraction**
+
+  * Compare word vectors to the document’s overall semantic vector.
+  * Most similar or central vectors represent key terms.
+
+* **Named entity recognition**
+
+  * Models learn vector patterns for entity types.
+  * Tokens are classified based on embeddings and context.
+
+* **Text classification**
+
+  * Documents represented as aggregate vectors (for example, mean of word embeddings).
+  * Used directly for classification or as features in ML models.
+  * Semantically similar documents cluster together.
+
+**Key Facts to Remember**
+
+* **Embeddings** are vector representations of tokens capturing semantic meaning.
+* **Attention** enables contextualized embeddings.
+* **Cosine similarity** measures semantic closeness between vectors.
+* **Vector arithmetic** supports analogy and semantic transformation.
+* Semantic models enable summarization, keyword extraction, NER, and classification.
+
+---
