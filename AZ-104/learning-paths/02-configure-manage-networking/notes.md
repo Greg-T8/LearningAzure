@@ -10,6 +10,10 @@
 * [Associate public IP addresses](#associate-public-ip-addresses)
 * [Allocate or assign private IP addresses](#allocate-or-assign-private-ip-addresses)
 * [Exercise: Create and configure virtual networks](#exercise-create-and-configure-virtual-networks)
+* [Implement network security groups](#implement-network-security-groups)
+* [Determine network security group rules](#determine-network-security-group-rules)
+* [Determine network security group effective rules](#determine-network-security-group-effective-rules)
+* [Create network security group rules](#create-network-security-group-rules)
 
 
 ---
@@ -523,6 +527,407 @@
 * Virtual networks required: **2** (**app-vnet**, **hub-vnet**) in the **same region**
 * Subnets: **app-vnet = 2** (frontend/web, backend/database); **hub-vnet = 1** (firewall)
 * Connectivity between vnets uses **virtual network peering** for **secure, private** communication
+
+---
+
+## Implement network security groups
+
+[Module Reference](URL)
+
+**Network Security Group (NSG) Overview**
+
+* Used to **limit network traffic** to resources in a virtual network
+* Can be assigned to a **subnet** or a **network interface**
+* Security rules control **inbound and outbound** traffic
+
+<img src='.img/2026-01-19-03-20-04.png' width=600>
+
+**Things to Know About Network Security Groups**
+
+* An NSG contains a list of **security rules** that **allow or deny** network traffic
+* An NSG can be associated to:
+
+  * A **subnet**
+  * A **network interface**
+* An NSG can be **associated multiple times**
+* NSGs and rules are created in the **Azure portal**
+* The **virtual machine Overview page** shows:
+
+  * Associated NSGs
+  * Assigned subnets
+  * Assigned network interfaces
+  * Defined security rules
+
+**Network Security Groups and Subnets**
+
+* An NSG can be assigned to a subnet to create a **screened subnet (DMZ)**
+* A **DMZ** acts as a buffer between:
+
+  * Resources in the virtual network
+  * The internet
+* NSG rules apply to **all machines in the subnet**
+* Each subnet can have **a maximum of one NSG**
+
+**Network Security Groups and Network Interfaces**
+
+* An NSG can be assigned to a **network interface card (NIC)**
+* NSG rules control **all traffic through the network interface**
+* Each NIC can have:
+
+  * **Zero or one** associated NSG
+
+**Key Facts to Remember**
+
+* NSGs control **inbound and outbound** traffic using rules
+* NSGs can be applied at the **subnet or NIC** level
+* **One NSG per subnet maximum**
+* **Zero or one NSG per network interface**
+* DMZs are implemented using **subnet-level NSGs**
+
+---
+
+## Determine network security group rules
+
+[Module Reference](URL)
+
+**Security Rules Overview**
+
+* Security rules filter **network traffic**
+* Rules control traffic **into and out of**:
+
+  * Virtual network **subnets**
+  * **Network interfaces**
+* Rules are defined within a **network security group (NSG)**
+
+**Default Security Rules**
+
+* Azure automatically creates **default security rules** in every NSG
+* Default rules include **inbound** and **outbound** traffic rules
+* Examples of default rules:
+
+  * **DenyAllInbound**
+  * **AllowInternetOutbound**
+* Default security rules **cannot be removed**
+* Default rules are created **for every NSG** you create
+
+**Custom Security Rules**
+
+* You can add **custom security rules** by defining conditions
+* Common rule settings include:
+
+| Setting                | Description                                                                  |
+| ---------------------- | ---------------------------------------------------------------------------- |
+| **Source**             | Any, IP Addresses, My IP address, Service Tag, or Application security group |
+| **Source port ranges** | Ports on which traffic is allowed or denied                                  |
+| **Destination**        | Any, IP Addresses, Service Tag, or Application security group                |
+| **Protocol**           | TCP, UDP, ICMP, or **Any** (default)                                         |
+| **Action**             | Allow or Deny                                                                |
+| **Priority**           | Value from **100 to 4096**, unique within the NSG                            |
+
+**Rule Priority Processing**
+
+* Every security rule has a **Priority** value
+* Rules are processed in **priority order**
+* **Lower priority numbers = higher precedence**
+* You can override a default rule by:
+
+  * Creating a custom rule with a **higher priority** (lower number)
+
+**Inbound Traffic Rules**
+
+* Azure creates **three default inbound rules**
+* Default inbound rules:
+
+  * Deny all inbound traffic **except**:
+
+    * Traffic from the **virtual network**
+    * Traffic from **Azure load balancers**
+
+<img src='.img/2026-01-19-03-23-49.png' width=700>
+
+**Outbound Traffic Rules**
+
+* Azure creates **three default outbound rules**
+* Default outbound rules allow traffic to:
+
+  * The **internet**
+  * The **virtual network**
+
+<img src='.img/2026-01-19-03-24-03.png' width=700>
+
+**Key Facts to Remember**
+
+* NSG rules control **inbound and outbound** traffic
+* Default NSG rules are **created automatically**
+* Default rules **cannot be deleted**
+* Rule priority range is **100–4096**
+* **Lower priority value = higher rule precedence**
+* Custom rules can **override default rules** using higher priority
+
+---
+
+## Determine network security group effective rules
+
+[Module Reference](https://learn.microsoft.com/training/modules/configure-network-security-groups/)
+
+**How Network Security Groups Are Evaluated**
+
+* Each **network security group (NSG)** is evaluated **independently**
+* Azure processes **all rules** defined for each virtual machine
+* Rule effectiveness is determined by **priority and processing order**
+
+<img src='.img/2026-01-19-03-26-09.png' width=700>
+
+**Inbound Traffic Evaluation**
+
+* Azure first evaluates NSG rules applied to the **subnet**
+* Then evaluates NSG rules applied to the **network interface (NIC)**
+
+**Outbound Traffic Evaluation**
+
+* Azure first evaluates NSG rules applied to the **network interface (NIC)**
+* Then evaluates NSG rules applied to the **subnet**
+
+**Intra-Subnet Traffic**
+
+* Azure evaluates how rules apply to **virtual machines in the same subnet**
+* Intra-subnet traffic refers to traffic **between VMs within the same subnet**
+* Subnet-level NSG rules can affect **all VMs** in that subnet
+
+**NSG Evaluation When Applied at Multiple Levels**
+
+* When NSGs are applied to both a **subnet and a NIC**:
+
+  * Each NSG is evaluated **separately**
+  * Both **inbound and outbound rules** are considered
+  * Rule **priority and order** determine the final outcome
+
+**Considerations for Creating Effective Rules**
+
+* **Allow all traffic**
+
+  * If no NSG is associated with a subnet or NIC, traffic is allowed based on **default Azure security rules**
+  * Use this approach if traffic control at that level is not required
+
+* **Importance of allow rules**
+
+  * If an NSG is associated at both subnet and NIC levels, an **allow rule must exist at both levels**
+  * Traffic is **denied** at any level that does not explicitly allow it
+
+* **Intra-subnet traffic control**
+
+  * Subnet-level NSG rules can block traffic between VMs in the same subnet
+  * You can block all VM-to-VM traffic by defining a **deny all inbound and outbound** rule
+
+* **Rule priority**
+
+  * Rules are processed in **priority order**
+  * Lower priority numbers are processed first
+  * Use spaced numbering (for example: **100, 200, 300**) to allow future rule insertion
+
+**Viewing Effective Security Rules**
+
+* Use **Effective security rules** in the Azure portal to:
+
+  * See which rules apply to a **VM**
+  * View rules inherited from **subnets and NICs**
+* Helps verify rule conflicts or unexpected behavior
+
+<img src='.img/2026-01-19-03-30-05.png' width=700>
+
+**Additional Tool**
+
+* **Network Watcher**
+
+  * Provides a **consolidated view** of infrastructure security rules
+
+**Key Facts to Remember**
+
+* **Inbound order**: Subnet → NIC
+* **Outbound order**: NIC → Subnet
+* **NSGs are evaluated independently**
+* **Allow rules must exist at every applied level**
+* **Subnet NSGs affect all VMs in the subnet**
+* **Lower priority number = higher rule precedence**
+* **Effective security rules** show final applied rules
+
+---
+
+## Create network security group rules
+
+[Module Reference](https://learn.microsoft.com/training/modules/configure-network-security-groups/)
+
+**Overview**
+
+* Security rules control **inbound and outbound traffic** in a network security group (NSG).
+* Rules are configured in the **Azure portal**.
+* You can select from predefined services such as **HTTPS, RDP, FTP, and DNS**, or define custom settings.
+
+<img src='.img/2026-01-19-03-31-11.png' width=400>
+
+**Source**
+
+* Identifies how the rule controls **inbound traffic**.
+* Specifies the **source IP address range** to allow or deny.
+* Supported source filters:
+
+  * Any resource
+  * IP address range
+  * Application security group
+  * Default tag
+
+**Destination**
+
+* Identifies how the rule controls **outbound traffic**.
+* Specifies the **destination IP address range** to allow or deny.
+* Supported destination filters:
+
+  * Any resource
+  * IP address range
+  * Application security group
+  * Default tag
+
+**Service**
+
+* Specifies the **destination protocol and port range**.
+* Options include:
+
+  * Predefined services (for example, **RDP**, **SSH**)
+  * Custom port ranges
+* A large set of predefined services is available.
+
+<img src='.img/2026-01-19-03-31-37.png' width=300>
+
+**Priority**
+
+* Defines the **order in which rules are processed**.
+* Applies across all rules in the NSG, including those associated with:
+
+  * Subnets
+  * Network interfaces
+* **Lower priority numbers are evaluated first** (higher precedence).
+
+<img src='.img/2026-01-19-03-31-50.png' width=400>
+
+**Key Facts to Remember**
+
+* NSG rules can allow or deny both inbound and outbound traffic.
+* Source and destination filters support IP ranges, application security groups, and default tags.
+* Service defines protocol and port range, either predefined or custom.
+* Rule processing is determined by priority; **lowest value wins**.
+
+---
+
+## Implement application security groups
+
+[Module Reference](URL)
+
+**Application Security Groups (ASGs) Overview**
+
+* **Application security groups (ASGs)** logically group virtual machines by **workload**
+* ASGs are used as **source or destination** entries in **network security group (NSG) rules**
+* ASGs provide an **application-centric** approach to securing infrastructure
+* Virtual machines are joined to ASGs via their **network interfaces**
+
+**How ASGs Work with NSGs**
+
+* ASGs function similarly to NSGs but focus on **applications instead of IP addresses**
+* NSG rules reference ASGs rather than individual IP addresses
+* This approach simplifies rule management as environments scale or change
+
+**Scenario Architecture**
+
+* Two-tier application:
+
+  * **Web servers**
+
+    * Handle **HTTP (80)** and **HTTPS (443)** internet traffic
+  * **Application servers**
+
+    * Process **SQL Server** requests from web servers
+* Goal: Control traffic flow between tiers using ASGs and NSGs
+
+<img src='.img/2026-01-19-03-35-04.png' width=600>
+
+**Solution Configuration**
+
+1. **Create ASGs**
+
+   * One ASG for **web servers**
+   * One ASG for **application servers**
+
+2. **Assign Network Interfaces**
+
+   * Each virtual machine’s **NIC** is associated with the appropriate ASG
+
+3. **Create NSG and Security Rules**
+
+   * **Rule 1**
+
+     * **Priority**: 100
+     * **Action**: Allow
+     * **Source**: Internet
+     * **Destination**: Web server ASG
+     * **Ports**: HTTP (80), HTTPS (443)
+     * **Reason**: Lowest priority value gives highest precedence
+
+   * **Rule 2**
+
+     * **Priority**: 110
+     * **Action**: Allow
+     * **Source**: Web server ASG
+     * **Destination**: Application server ASG
+     * **Port**: SQL (1433)
+
+   * **Rule 3**
+
+     * **Priority**: 120
+     * **Action**: Deny
+     * **Source**: Anywhere
+     * **Destination**: Application server ASG
+     * **Ports**: HTTP (80), HTTPS (443)
+
+* **Result**: Only web servers can access application servers; external access is blocked
+
+**Advantages of Using ASGs**
+
+* **Reduced IP address maintenance**
+
+  * No need to manage or update individual IP addresses in rules
+* **No subnet dependency**
+
+  * VMs do not need to be placed in specific subnets to control traffic
+* **Simplified rule management**
+
+  * Single rule applies to all VMs in an ASG
+  * New VMs automatically inherit applicable rules
+* **Workload-based organization**
+
+  * Easier to understand and maintain security aligned to application roles
+* **Complementary to service tags**
+
+  * **Service tags** simplify Azure service IP management
+  * **ASGs** group VMs and enforce workload-based security policies
+
+**Key Facts to Remember**
+
+* ASGs group **virtual machines by workload**, not by subnet or IP
+* ASGs are referenced in **NSG rules** as sources or destinations
+* **Lower NSG priority numbers take precedence**
+* ASGs simplify security rule management in **dynamic environments**
+* Service tags and ASGs serve **different but complementary purposes**
+
+**Additional Notes**  
+
+ASGs are a dedicated resource and must be created.
+
+You then tie them to a Virtual Machine:
+
+<img src='.img/2026-01-19-03-58-11.png' width=600>
+
+From there, you create an ASG rule in an NSG:
+
+<img src='.img/2026-01-19-03-58-43.png' width=600>
 
 ---
 
