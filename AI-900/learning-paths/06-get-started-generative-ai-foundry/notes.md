@@ -87,3 +87,180 @@
 * Generative AI applications fall into **three categories** based on customization level
 
 ---
+
+## Understand generative AI development in Foundry
+
+[Module Reference](https://learn.microsoft.com/en-us/training/modules/get-started-generative-ai-azure/3-tools-to-develop-solutions)
+
+**Overview**
+
+* Microsoft provides an ecosystem of tools and services for building **generative AI solutions** across the AI lifecycle.
+* This module focuses on **Microsoft Foundry**, a unified platform for **enterprise AI operations**, **model builders**, and **application development**.
+* Microsoft Foundry is a **platform as a service (PaaS)** offering control over **customization of language models** used in applications.
+* Models built in Foundry can be **deployed in the cloud** and **consumed by custom-developed apps and services**.
+* Microsoft Foundry provides a **user interface** for building, customizing, and managing **AI applications and agents**, especially those using generative AI.
+
+**Components of Microsoft Foundry**
+
+* **Microsoft Foundry model catalog**
+
+  * Centralized hub to **discover, compare, and deploy models** for generative AI development.
+* **Playgrounds**
+
+  * Ready-to-use environments for **testing ideas**, **trying models**, and **exploring Foundry Models**.
+* **Foundry Tools**
+
+  * Used to **build, test, view demos, and deploy** tools within Microsoft Foundry.
+* **Solutions**
+
+  * Supports **building agents** and **customizing models**.
+* **Observability**
+
+  * Enables **monitoring usage and performance** of application models.
+
+**Related Microsoft Generative AI Tool**
+
+* **Microsoft Copilot Studio**
+
+  * Designed for **low-code development** of conversational AI.
+  * Enables business users and developers to create AI experiences with minimal infrastructure management.
+  * Produces a **fully managed SaaS agent** hosted in the **Microsoft 365 environment**.
+  * Delivered through chat channels such as **Microsoft Teams**.
+  * Infrastructure and model deployment are handled automatically, allowing focus on solution design.
+
+**Key Facts to Remember**
+
+* **Microsoft Foundry** is a **PaaS** for enterprise generative AI development.
+* Foundry supports **model customization, deployment, and consumption** by applications.
+* Core components include **model catalog, playgrounds, tools, solutions, and observability**.
+* **Copilot Studio** targets **low-code**, fully managed conversational AI scenarios.
+
+---
+
+## Understand Foundry's model catalog
+
+[Module Reference](https://learn.microsoft.com/training/modules/get-started-generative-ai-microsoft-foundry/)
+
+**Microsoft Foundry Model Catalog**
+
+* Provides a **comprehensive marketplace** of models
+* Includes:
+
+  * **Microsoft first-party models**
+  * **Partner and community models**
+* Models are available for **direct deployment** from the catalog
+
+**Azure OpenAI in Foundry Models**
+
+* Represent Microsoft’s **first-party model family**
+* Classified as **foundation models**
+* **Foundation models** are:
+
+  * Pretrained on **large text datasets**
+  * Capable of being **fine-tuned with relatively small datasets**
+* Can be:
+
+  * **Deployed immediately** without extra training
+  * **Customized** for improved performance on:
+
+    * Specific tasks
+    * Domain-specific knowledge
+
+**Model Selection and Evaluation**
+
+* Models can be tested using **playgrounds**
+* **Model leaderboards (preview)** are available to:
+
+  * Compare model performance
+  * Evaluate models across criteria such as:
+
+    * **Quality**
+    * **Cost**
+    * **Throughput**
+* Leaderboards include **graphical comparisons** based on specific metrics
+
+**Key Facts to Remember**
+
+* **Model catalog** includes Microsoft, partner, and community models
+* **Azure OpenAI models** are foundation models
+* **No training required** to deploy a model
+* **Customization is optional** for task or domain specialization
+* **Playgrounds and leaderboards** help compare and select models
+
+---
+
+## Understand Foundry capabilities
+
+[Module Reference](https://learn.microsoft.com/training/modules/get-started-generative-ai-microsoft-foundry/understand-foundry-capabilities)
+
+**Foundry Structure**
+
+* Microsoft Foundry uses a **hub-and-project** model.
+* **Hubs**
+
+  * Provide broader access to **Azure AI** and **Azure Machine Learning**.
+  * Serve as a container for multiple projects.
+* **Projects**
+
+  * Created within a hub.
+  * Provide focused access to **models** and **agent development**.
+  * Managed from the **Microsoft Foundry overview page**.
+
+**Azure AI Hub Resource Creation**
+
+* Creating an **Azure AI Hub** automatically creates supporting resources.
+* Includes a **Foundry Tools resource** created in tandem.
+
+**Foundry Tools**
+
+* Tools available for testing directly in Microsoft Foundry include:
+
+  * **Azure Speech**
+  * **Azure Language**
+  * **Azure Vision**
+  * **Microsoft Foundry Content Safety**
+* Tools can be explored through:
+
+  * **Demos**
+  * **Playgrounds**
+
+**Playgrounds**
+
+* Playgrounds allow testing of:
+
+  * **Foundry Tools**
+  * **Models from the model catalog**
+* Includes specialized environments such as:
+
+  * **Chat playground**
+
+**Model Customization Methods**
+
+* **Using grounding data**
+
+  * Aligns model outputs with **factual, contextual, or reliable data sources**
+  * Can use databases, search engines, or domain-specific knowledge bases
+  * Improves **trustworthiness** and **applicability**
+* **Implementing Retrieval-Augmented Generation (RAG)**
+
+  * Connects models to **organization-owned proprietary data**
+  * Retrieves relevant information to generate accurate responses
+  * Useful for **real-time, dynamic data** scenarios (e.g., customer support)
+* **Fine-tuning**
+
+  * Further trains a pretrained model on a **task-specific dataset**
+  * Improves **domain specialization**, **accuracy**, and relevance
+* **Managing security and governance controls**
+
+  * Controls **access**, **authentication**, and **data usage**
+  * Helps prevent **unauthorized or incorrect information publication**
+
+**Key Facts to Remember**
+
+* **Hubs** provide broad AI/ML access; **projects** provide focused development scope.
+* Creating an **Azure AI Hub** automatically provisions **Foundry Tools**.
+* **Playgrounds** are used to test tools and models without deployment.
+* Four main customization approaches: **grounding**, **RAG**, **fine-tuning**, and **security/governance**.
+* **RAG** is best suited for applications requiring **up-to-date or proprietary data**.
+
+---
