@@ -19,6 +19,7 @@
 * [Configure Azure DNS to host your domain](#configure-azure-dns-to-host-your-domain)
 * [Dynamically resolve resource name by using alias record](#dynamically-resolve-resource-name-by-using-alias-record)
 * [Exercise - Create alias records for Azure DNS](#exercise---create-alias-records-for-azure-dns)
+* [Determine Azure Virtual Network peering uses](#determine-azure-virtual-network-peering-uses)
 
 
 ---
@@ -1393,5 +1394,76 @@ Azure DNS is built on **Azure Resource Manager**, providing:
 
 ---
 
+## Determine Azure Virtual Network peering uses
 
-*Last updated: 2026-01-14*
+[Module Reference](https://learn.microsoft.com/training/modules/configure-azure-virtual-network-peering/)
+
+**Azure Virtual Network Peering Overview**
+
+* **Azure Virtual Network peering** connects two Azure virtual networks so they operate as a **single network** for connectivity.
+* Provides a **simple and quick** way to connect virtual networks.
+
+**Types of Azure Virtual Network Peering**
+
+* **Regional peering**
+
+  * Connects virtual networks **within the same Azure region**
+* **Global peering**
+
+  * Connects virtual networks **across different Azure regions**
+
+<img src='.img/2026-01-20-03-08-17.png' width=700>
+
+**Regional Peering Rules**
+
+* Virtual networks must be in:
+
+  * The **same Azure public cloud region**, or
+  * The **same China cloud region**, or
+  * The **same Microsoft Azure Government cloud region**
+
+**Global Peering Rules**
+
+* Allowed between virtual networks in:
+
+  * **Any Azure public cloud region**
+  * **Any China cloud region**
+* **Not permitted** between different **Azure Government cloud regions**
+
+**Management and Scope**
+
+* Peered virtual networks remain **separate resources**
+* Virtual networks can be peered:
+
+  * **Across subscriptions**
+  * **Across tenants**
+
+**Benefits of Azure Virtual Network Peering**
+
+* **Private network connections**
+
+  * Traffic stays on the **Azure backbone network**
+  * **No public internet**, **no gateways**, **no encryption required**
+* **Strong performance**
+
+  * **Low latency**
+  * **High bandwidth**
+* **Simplified communication**
+
+  * Resources communicate directly across peered networks
+* **Seamless data transfer**
+
+  * Works across **subscriptions**, **deployment models**, and **regions**
+* **No resource disruptions**
+
+  * **No downtime** during or after peering creation
+
+**Key Facts to Remember**
+
+* Two peering types: **regional** and **global**
+* Global peering **cannot** span Azure Government regions
+* Peering does **not merge** virtual networks into a single resource
+* Traffic remains **private on the Azure backbone**
+* Peering supports **cross-subscription** and **cross-tenant** connectivity
+
+---
