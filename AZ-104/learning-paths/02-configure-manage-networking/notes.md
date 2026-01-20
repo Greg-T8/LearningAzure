@@ -22,6 +22,7 @@
 * [Determine Azure Virtual Network peering uses](#determine-azure-virtual-network-peering-uses)
 * [Determine gateway transit and connectivity](#determine-gateway-transit-and-connectivity)
 * [Create virtual network peering](#create-virtual-network-peering)
+* [Extend peering with user-defined routes and service chaining](#extend-peering-with-user-defined-routes-and-service-chaining)
 
 
 ---
@@ -1604,5 +1605,77 @@ When VPN gateway transit is allowed, the gateway can:
 * Peering is only active when **both sides show Connected**
 * Initial peering always starts in the **Initiated** state
 * Full connectivity is achieved only after the **second peering is created**
+
+---
+
+## Extend peering with user-defined routes and service chaining
+
+[Module Reference](https://learn.microsoft.com/training/modules/configure-azure-virtual-network-peering/)
+
+**Nontransitive Virtual Network Peering**
+
+* Virtual network peering is **nontransitive**
+* Communication is limited to:
+
+  * The **two virtual networks** in the peering
+  * **Resources** within those networks
+* Peering between:
+
+  * **VNet A ↔ VNet B**
+  * **VNet B ↔ VNet C**
+* Does **NOT** enable communication between:
+
+  * **VNet A ↔ VNet C**
+* Additional mechanisms are required to enable traffic outside the direct peering relationship
+
+**Ways to Extend Peering Capabilities**
+
+* Extends connectivity to:
+
+  * Other virtual networks
+  * Resources outside the private peering network
+
+**Hub-and-Spoke Network**
+
+* A **hub virtual network** hosts shared infrastructure components
+* Common hub components:
+
+  * **Network Virtual Appliance (NVA)**
+  * **Azure VPN gateway**
+* **Spoke virtual networks** peer with the hub
+* Traffic flows:
+
+  * From spoke VNets
+  * Through NVAs or VPN gateways in the hub
+
+**User-Defined Routes (UDRs)**
+
+* Virtual network peering allows UDRs with next hop as:
+
+  * IP address of a **virtual machine** in a peered virtual network
+  * A **VPN gateway**
+* Used to control traffic flow beyond default routing
+
+<img src='.img/2026-01-20-03-20-51.png' width=700>
+
+**Service Chaining**
+
+* Used to **direct traffic** through:
+
+  * Virtual appliances
+  * Gateways
+* Enabled by configuring **UDRs** that:
+
+  * Point to virtual machines in peered virtual networks as the **next hop**
+  * Or point to **virtual network gateways**
+* Commonly used with hub-and-spoke architectures
+
+**Key Facts to Remember**
+
+* **Peering is nontransitive** — no automatic multi-hop communication
+* **Hub-and-spoke** enables centralized routing and shared services
+* **UDRs** extend routing by specifying custom next hops
+* **Service chaining** relies on UDRs to steer traffic through NVAs or gateways
+* NVAs and VPN gateways are typically placed in the **hub virtual network**
 
 ---
