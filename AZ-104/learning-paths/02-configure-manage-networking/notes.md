@@ -28,6 +28,7 @@
 * [Exercise - Create custom routes](#exercise---create-custom-routes)
 * [What is an NVA?](#what-is-an-nva)
 * [Exercise - Create an NVA and virtual machines](#exercise---create-an-nva-and-virtual-machines)
+* [Exercise - Route traffic through the NVA](#exercise---route-traffic-through-the-nva)
 
 
 ---
@@ -2221,5 +2222,169 @@ Azure creates additional system routes when these capabilities are enabled:
 * NVA is deployed to the **dmzsubnet**
 * Traffic using **custom routes** is forwarded to the **privatesubnet**
 * Without IP forwarding, routed traffic **will not reach its destination**
+
+---
+
+## Exercise - Route traffic through the NVA
+
+[Module Reference](https://learn.microsoft.com/training/modules/manage-control-traffic-flow-with-routes/)
+
+**Exercise Overview**
+
+* Route traffic between subnets through a **network virtual appliance (NVA)**.
+* Validate routing behavior using **traceroute**.
+* Demonstrate how **user-defined routes (UDRs)** affect traffic flow.
+
+<img src='.img/2026-01-20-04-01-02.png' width=700>
+
+**Prerequisites**
+
+* An **Azure subscription** is required to complete the exercise.
+* Three VMs must exist:
+
+  * **public** VM (public subnet)
+  * **private** VM (private subnet)
+  * **nva** VM (DMZ subnet)
+
+**Create Cloud-Init Configuration**
+
+* Used to automatically install **traceroute** on VM creation.
+
+1. Create a cloud-init file:
+
+   ```bash
+   code cloud-init.txt
+   ```
+
+2. Add configuration:
+
+   ```text
+   #cloud-config
+   package_upgrade: true
+   packages:
+      - inetutils-traceroute
+   ```
+
+**Create the Public VM**
+
+1. Deploy the public VM:
+
+   ```azurecli
+   az vm create \
+       --resource-group "myResourceGroupName" \
+       --name public \
+       --vnet-name vnet \
+       --subnet publicsubnet \
+       --image Ubuntu2204 \
+       --admin-username azureuser \
+       --no-wait \
+       --custom-data cloud-init.txt \
+       --admin-password <password>
+   ```
+
+**Create the Private VM**
+
+1. Deploy the private VM:
+
+   ```azurecli
+   az vm create \
+       --resource-group "myResourceGroupName" \
+       --name private \
+       --vnet-name vnet \
+       --subnet privatesubnet \
+       --image Ubuntu2204 \
+       --admin-username azureuser \
+       --no-wait \
+       --custom-data cloud-init.txt \
+       --admin-password <password>
+   ```
+
+**Verify VM Deployment**
+
+* Monitor VM status until all show:
+
+  * **ProvisioningState** = `Succeeded`
+  * **PowerState** = `VM running`
+
+1. Watch VM status:
+
+   ```bash
+   watch -d -n 5 "az vm list \
+       --resource-group "myResourceGroupName" \
+       --show-details \
+       --query '[*].{Name:name, ProvisioningState:provisioningState, PowerState:powerState}' \
+       --output table"
+   ```
+
+**Capture VM IP Addresses**
+
+* Save public VM IP:
+
+  ```azurecli
+  PUBLICIP="$(az vm list-ip-addresses \
+      --resource-group "myResourceGroupName" \
+      --name public \
+      --query "[].virtualMachine.network.publicIpAddresses[*].ipAddress" \
+      --output tsv)"
+  ```
+
+* Save private VM IP:
+
+  ```azurecli
+  PRIVATEIP="$(az vm list-ip-addresses \
+      --resource-group "myResourceGroupName" \
+      --name private \
+      --query "[].virtualMachine.network.publicIpAddresses[*].ipAddress" \
+      --output tsv)"
+  ```
+
+**Test Routing: Public → Private**
+
+* Traces ICMP traffic from **public VM** to **private VM**.
+
+1. Run traceroute:
+
+   ```bash
+   ssh -t -o StrictHostKeyChecking=no azureuser@$PUBLICIP 'traceroute private --type=icmp; exit'
+   ```
+
+* Expected behavior:
+
+  * **Hop 1**: NVA private IP (e.g., `10.0.2.4`)
+  * **Hop 2**: Private VM IP (e.g., `10.0.1.4`)
+* Confirms traffic from **publicsubnet** is routed through the **NVA** via a custom route.
+
+<img src='.img/2026-01-20-04-06-10.png' width=700>
+
+**Test Routing: Private → Public**
+
+* Traces ICMP traffic from **private VM** to **public VM**.
+
+1. Run traceroute:
+
+   ```bash
+   ssh -t -o StrictHostKeyChecking=no azureuser@$PRIVATEIP 'traceroute public --type=icmp; exit'
+   ```
+
+* Expected behavior:
+
+  * Direct hop to public VM IP (e.g., `10.0.0.4`)
+* Confirms **default routing** is used with no NVA involvement.
+
+<img src='.img/2026-01-20-04-06-39.png' width=700>
+
+**Routing Outcome**
+
+* Traffic from **public → private** is forced through the **NVA** using a UDR.
+* Traffic from **private → public** follows **system default routes**.
+* The NVA in the **dmzsubnet** can inspect and block traffic before it reaches the private subnet.
+
+**Key Facts to Remember**
+
+* **User-defined routes (UDRs)** control traffic flow at the subnet level.
+* Routing behavior is **asymmetric** unless explicitly defined.
+* **Traceroute** validates the actual packet path.
+* Installing tools via **cloud-init** automates VM configuration.
+* NVAs can be used for **inspection, filtering, and security enforcement**.
 
 ---
