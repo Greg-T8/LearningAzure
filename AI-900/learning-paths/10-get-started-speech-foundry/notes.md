@@ -67,3 +67,120 @@
 * Prosody controls **how speech sounds**, not just what is spoken
 
 ---
+
+## Get started with speech on Azure
+
+[Module Reference](https://learn.microsoft.com/training/modules/get-started-speech-microsoft-foundry/)
+
+**Azure Speech Service Overview**
+
+* Provides **speech recognition and speech synthesis** capabilities
+* Core capabilities include:
+
+  * **Speech to text**
+  * **Text to speech**
+  * **Speech translation**
+
+**Speech to Text**
+
+* Converts **spoken audio into text**
+* Supports:
+
+  * **Real-time transcription**
+  * **Batch transcription**
+* Audio sources can be:
+
+  * Live microphone input
+  * Audio files
+* Based on Microsoft’s **Universal Language Model**
+
+  * Model data is **Microsoft-owned**
+  * Deployed on **Azure**
+* Optimized for:
+
+  * **Conversational** scenarios
+  * **Dictation** scenarios
+* Supports **custom models**:
+
+  * Acoustic models
+  * Language models
+  * Pronunciation models
+
+**Real-Time Transcription**
+
+* Transcribes **live audio streams**
+* Common use cases:
+
+  * Presentations
+  * Demos
+  * Live speaking scenarios
+* Application requirements:
+
+  * Listens for incoming audio
+  * Streams audio to the service
+  * Receives transcribed text in real time
+
+**Batch Transcription**
+
+* Used for **non-real-time** scenarios
+* Audio files can be stored:
+
+  * On file shares
+  * On remote servers
+  * In Azure storage
+* Audio files are accessed using a **Shared Access Signature (SAS) URI**
+* Processing behavior:
+
+  * Runs **asynchronously**
+  * Scheduled on a **best-effort basis**
+  * Jobs usually start within minutes
+  * No guaranteed time for when a job enters the running state
+
+**Text to Speech**
+
+* Converts **text input into audible speech**
+* Output options:
+
+  * Play through speakers
+  * Save to an audio file
+* **Speech synthesis voices**:
+
+  * Multiple predefined voices
+  * Support for multiple languages and regional pronunciations
+  * Includes **neural voices** for more natural intonation
+* Supports **custom voice development**
+
+  * Custom voices can be used with the text to speech API
+
+**Speech Translation**
+
+* Feature of the Azure Speech service
+* Enables **real-time translation** of spoken language
+* Processing flow:
+
+  1. Converts speech to text using **automatic speech recognition (ASR)**
+  2. Translates text into one or more target languages using **machine translation**
+* Output formats:
+
+  * Translated text
+  * Synthesized speech
+* Supports a wide range of **source and target languages**
+* Common use cases:
+
+  * Multilingual meetings
+  * Live event captioning
+  * Global customer support
+* Accessible via:
+
+  * REST APIs
+  * SDKs
+
+**Key Facts to Remember**
+
+* **Speech to text** supports both **real-time** and **batch** processing
+* **Batch transcription** is asynchronous and best-effort with no guaranteed start time
+* **Text to speech** supports neural and custom voices
+* **Speech translation** combines ASR and machine translation in real time
+* Audio files for batch transcription require a **SAS URI**
+
+---
