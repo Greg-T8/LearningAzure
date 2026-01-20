@@ -23,6 +23,8 @@
 * [Determine gateway transit and connectivity](#determine-gateway-transit-and-connectivity)
 * [Create virtual network peering](#create-virtual-network-peering)
 * [Extend peering with user-defined routes and service chaining](#extend-peering-with-user-defined-routes-and-service-chaining)
+* [Exercise - Implement Intersite Connectivity](#exercise---implement-intersite-connectivity)
+* [Identify routing capabilities of an Azure virtual network](#identify-routing-capabilities-of-an-azure-virtual-network)
 
 
 ---
@@ -35,7 +37,7 @@
 | 1 | [Configure virtual networks](https://learn.microsoft.com/en-us/training/modules/configure-virtual-networks/) | ✅ | 1/18/26 |
 | 2 | [Configure network security groups](https://learn.microsoft.com/en-us/training/modules/configure-network-security-groups/) | ✅ | 1/19/26 |
 | 3 | [Host your domain on Azure DNS](https://learn.microsoft.com/en-us/training/modules/host-domain-azure-dns/) | ✅ | 1/19/26 |
-| 4 | [Configure Azure Virtual Network peering](https://learn.microsoft.com/en-us/training/modules/configure-vnet-peering/) | 🕒 | |
+| 4 | [Configure Azure Virtual Network peering](https://learn.microsoft.com/en-us/training/modules/configure-vnet-peering/) | ✅ | 1/20/26|
 | 5 | [Manage and control traffic flow in your Azure deployment with routes](https://learn.microsoft.com/en-us/training/modules/control-network-traffic-flow-with-routes/) | 🕒 | |
 | 6 | [Introduction to Azure Load Balancer](https://learn.microsoft.com/en-us/training/modules/intro-to-azure-load-balancer/) | 🕒 | |
 | 7 | [Introduction to Azure Application Gateway](https://learn.microsoft.com/en-us/training/modules/intro-to-azure-application-gateway/) | 🕒 | |
@@ -1677,5 +1679,209 @@ When VPN gateway transit is allowed, the gateway can:
 * **UDRs** extend routing by specifying custom next hops
 * **Service chaining** relies on UDRs to steer traffic through NVAs or gateways
 * NVAs and VPN gateways are typically placed in the **hub virtual network**
+
+---
+
+## Exercise - Implement Intersite Connectivity
+
+[Module Reference](https://learn.microsoft.com/training/modules/configure-azure-virtual-network-peering/)
+
+**Lab Scenario**
+
+* Organization separates **core IT apps and services** (for example, DNS and security services) from other business areas such as **manufacturing**
+* Some scenarios require **communication between segmented areas**
+* Demonstrates a **common networking pattern**:
+
+  * Separating production from development
+  * Separating subsidiaries or business units
+* Objective is to **configure connectivity** between segmented virtual networks
+
+**Architecture**
+
+* Two **separate virtual networks**
+* Each virtual network contains its own **virtual machine**
+* Connectivity is enabled through **virtual network peering**
+* Connection validation is performed using **Network Watcher** and **Azure PowerShell**
+
+<img src='.img/2026-01-20-03-23-04.png' width=700>
+
+**Job Skills Practiced**
+
+* Create a **virtual machine** in a virtual network
+* Create a **virtual machine** in a different virtual network
+* Configure **virtual network peering** between virtual networks
+* Use **Network Watcher** to test connectivity between virtual machines
+* Use **Azure PowerShell** to test connectivity between virtual machines
+* Create a **custom route** (optional)
+
+**Exercise Details**
+
+* **Estimated time**: 50 minutes
+* **Azure subscription required**
+* Exercise is launched externally and must be completed before continuing
+
+**Key Facts to Remember**
+
+* Virtual network peering enables **communication between isolated network segments**
+* Connectivity does not exist **until peering is configured**
+* Network Watcher is used to **validate network connectivity**
+* Azure PowerShell can be used for **connection testing**
+* Custom routes are **optional** and extend routing control
+
+---
+
+## Identify routing capabilities of an Azure virtual network
+
+[Module Reference](https://learn.microsoft.com/en-us/training/modules/control-network-traffic-flow-with-routes/2-azure-virtual-network-route)
+
+**Azure routing**
+
+* Network traffic in Azure is automatically routed across subnets, virtual networks, and on-premises networks by **system routes**
+* System routes are assigned by default to each subnet
+* Virtual machines in the same virtual network can communicate by default
+* Virtual machines can be accessible from on-premises networks or the internet
+* System routes **can’t be created or deleted**, but **can be overridden** with custom routes
+
+**Default system routes**
+
+* **Unique to the virtual network** → Virtual network
+* **0.0.0.0/0** → Internet
+* **10.0.0.0/8** → None
+* **172.16.0.0/12** → None
+* **192.168.0.0/16** → None
+* **100.64.0.0/10** → None
+
+**Next hop types**
+
+* **Virtual network**
+
+  * Routes traffic within address ranges defined at the virtual-network level
+* **Internet**
+
+  * Default route (0.0.0.0/0) to the internet unless overridden
+* **None**
+
+  * Drops traffic and does not route it outside the subnet
+  * Includes private IPv4 ranges and shared address space
+  * These address ranges are not globally routable
+
+<img src='.img/2026-01-20-03-26-37.png' width=700>
+
+**Additional system routes**
+
+Azure creates additional system routes when these capabilities are enabled:
+
+* Virtual network peering
+* Service chaining
+* Virtual network gateway
+* Virtual network service endpoint
+
+**Virtual network peering and service chaining**
+
+* Enables connectivity between virtual networks in the same or different regions
+* Allows virtual machines to communicate across peered networks
+* Creates additional routes in the default route table
+* **Service chaining** allows overriding these routes with user-defined routes
+* Traffic can be routed through an NVA or Azure VPN gateway
+
+<img src='.img/2026-01-20-03-34-00.png' width=700>
+
+**Virtual network gateway**
+
+* Sends encrypted traffic:
+
+  * Between Azure and on-premises over the internet
+  * Between Azure virtual networks
+* Contains routing tables and gateway services
+
+<img src='.img/2026-01-20-03-34-33.png' width=700>
+
+**Virtual network service endpoint**
+
+* Extends private address space to Azure services
+* Enables private access to Azure resources (for example, storage accounts)
+* Restricts access from public virtual machines
+* Automatically creates routes to direct endpoint traffic
+
+**Custom routes**
+
+* Used to control traffic flow beyond default system routing
+* Common scenarios include routing through:
+
+  * Network virtual appliances (NVAs)
+  * Firewalls
+* Implemented using:
+
+  * **User-defined routes**
+  * **Border Gateway Protocol (BGP)**
+
+**User-defined routes**
+
+* Override default system routes
+* Commonly used to route traffic through firewalls or NVAs
+* Can prevent direct traffic flow between subnets
+
+**Supported next hop types for user-defined routes**
+
+* **Virtual appliance**
+
+  * Typically a firewall or NVA
+  * Uses a private IP of a NIC or internal load balancer
+* **Virtual network gateway**
+
+  * Routes traffic to a VPN gateway
+* **Virtual network**
+
+  * Overrides default routing within the virtual network
+* **Internet**
+
+  * Routes traffic for a specific prefix to the internet
+* **None**
+
+  * Drops traffic for a specified address prefix
+* Cannot use **VirtualNetworkServiceEndpoint** as a next hop type
+
+**Service tags for user-defined routes**
+
+* Service tags can be used instead of IP address ranges
+* Represent a group of IP prefixes for an Azure service
+* Address prefixes are managed and updated automatically by Microsoft
+* Reduce route maintenance and number of routes required
+
+**Border Gateway Protocol (BGP)**
+
+* Exchanges routes between:
+
+  * On-premises network gateways
+  * Azure virtual network gateways
+* Standard routing protocol for exchanging routes between networks
+* Commonly used with:
+
+  * Azure ExpressRoute
+  * VPN site-to-site connections
+* Improves network stability by dynamically rerouting traffic if paths fail
+
+<img src='.img/2026-01-20-03-35-37.png' width=700>
+
+**Route selection and priority**
+
+* Azure selects routes using **longest prefix match**
+* More specific prefixes take priority over broader ones
+* Multiple user-defined routes with the same address prefix are not allowed
+
+**Route priority order**
+
+1. **User-defined routes**
+2. **BGP routes**
+3. **System routes**
+
+**Key Facts to Remember**
+
+* System routes are default and cannot be deleted
+* Custom routes override system routes
+* Longest prefix match determines route selection
+* User-defined routes have the highest priority
+* BGP routes take precedence over system routes
+* Service tags simplify route management
 
 ---
