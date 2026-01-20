@@ -30,6 +30,7 @@
 * [Exercise - Create an NVA and virtual machines](#exercise---create-an-nva-and-virtual-machines)
 * [Exercise - Route traffic through the NVA](#exercise---route-traffic-through-the-nva)
 * [What is Azure Load Balancer?](#what-is-azure-load-balancer)
+* [How Azure Load Balancer works](#how-azure-load-balancer-works)
 
 
 ---
@@ -2462,5 +2463,169 @@ Azure creates additional system routes when these capabilities are enabled:
 * **Public load balancers** handle internet-facing traffic.
 * **Internal load balancers** are used for private, internal, and multi-tier scenarios.
 * Supports **TCP and UDP** at very large scale.
+
+---
+
+## How Azure Load Balancer works
+
+[Module Reference](https://learn.microsoft.com/training/modules/intro-to-azure-load-balancer/how-azure-load-balancer-works)
+
+**Azure Load Balancer Overview**
+
+* Operates at **Layer 4 (transport layer)** of the OSI model
+* Manages traffic based on:
+
+  * **Source IP address**
+  * **Destination IP address**
+  * **TCP or UDP protocol**
+  * **Port number**
+* Cannot inspect or route traffic based on **Layer 7 (application layer)** content
+
+<img src='.img/2026-01-20-04-12-40.png' width=400>
+
+**Core Load Balancer Components**
+
+* **Front-end IP**
+* **Load balancer rules**
+* **Back-end pool**
+* **Health probes**
+* **Inbound NAT rules**
+* **High availability ports**
+* **Outbound rules**
+
+**Front-end IP**
+
+* Address clients use to connect to the application
+* Can be **public** or **private**
+* A load balancer can have **multiple front-end IPs**
+* Choice of IP type determines load balancer type:
+
+  * **Public load balancer**
+
+    * Maps public IP and port to private IP and port of VMs
+    * Used to distribute internet traffic to VMs or services
+    * Responses are mapped back to the public IP and port
+  * **Internal load balancer**
+
+    * Uses private IP addresses only
+    * Distributes traffic within a virtual network
+    * Not exposed to the internet
+    * Accessed from Azure or on-premises via **VPN** or **ExpressRoute**
+
+**Load Balancer Rules**
+
+* Define how traffic is distributed to the back-end pool
+* Map a **front-end IP and port** to **back-end IPs and ports**
+* Use a **five-tuple hash**:
+
+  * Source IP
+  * Source port
+  * Destination IP
+  * Destination port
+  * Protocol (TCP or UDP)
+* Supports:
+
+  * Multiple ports
+  * Multiple IP addresses
+  * Separate rules per front-end IP
+* **Multiple front-end configurations** are supported only with **IaaS VMs**
+* Cannot apply rules based on traffic content (Layer 7)
+
+<img src='.img/2026-01-20-04-13-31.png' width=700>
+
+**Back-end Pool**
+
+* Group of **VMs** or **Virtual Machine Scale Set instances**
+* Handles incoming requests
+* Scaling guidance:
+
+  * Add instances to handle increased traffic
+* Automatically reconfigures when instances are added or removed
+* Traffic is redistributed using existing rules
+
+**Health Probes**
+
+* Determine whether back-end instances are healthy
+* Unhealthy instances stop receiving **new connections**
+* Existing connections continue until:
+
+  * Application ends the flow
+  * Idle timeout occurs
+  * VM shuts down
+* Probe types:
+
+  * **TCP**
+
+    * Succeeds if TCP session can be established
+    * Configurable: **Port**, **Interval**, **Unhealthy threshold**
+  * **HTTP / HTTPS**
+
+    * Probed every **15 seconds (default)**
+    * Timeout: **31 seconds (default)**
+    * Healthy only if **HTTP 200** is returned
+    * Configurable: **Port**, **URI**, **Interval**, **Unhealthy threshold**
+
+**Session Persistence (Session Affinity)**
+
+* Default behavior: **None**
+
+  * Any healthy VM can handle successive requests
+* Stickiness applies only within a transport session
+* Uses hash-based routing:
+
+  * **2-tuple** or **3-tuple**
+* Options:
+
+  * **None (default)**
+  * **Client IP (2-tuple)**: Source IP + Destination IP
+  * **Client IP and protocol (3-tuple)**: Source IP + Destination IP + Protocol
+
+**High Availability Ports**
+
+* Load balancer rule with:
+
+  * **Protocol: All**
+  * **Port: 0**
+* Applies only to **internal standard load balancers**
+* Load balances **all TCP and UDP traffic on all ports**
+* Uses a **five-tuple flow-based decision**
+* Common use cases:
+
+  * High availability
+  * Network virtual appliances (NVAs)
+  * Scenarios with large numbers of ports
+
+<img src='.img/2026-01-20-04-15-12.png' width=400>
+
+**Inbound NAT Rules**
+
+* Used with load balancing rules
+* Enable direct access to specific VM ports
+* Example use case:
+
+  * Map public IP to **TCP 3389** for Remote Desktop access
+
+<img src='.img/2026-01-20-04-15-55.png' width=700>
+
+**Outbound Rules**
+
+* Configure **Source Network Address Translation (SNAT)**
+* Apply to all VMs or instances in a back-end pool
+* Enable outbound connectivity to:
+
+  * Internet
+  * Public endpoints
+
+<img src='.img/2026-01-20-04-16-19.png' width=700>
+
+**Key Facts to Remember**
+
+* **Azure Load Balancer operates at Layer 4**
+* **Traffic distribution uses a five-tuple hash**
+* **HTTP probes require an HTTP 200 response**
+* **Default health probe interval is 15 seconds**
+* **Default session persistence is None**
+* **HA ports use protocol = all and port = 0**
+* **Layer 7 routing requires Azure Application Gateway**
 
 ---
