@@ -5,6 +5,7 @@
 * [Understand natural language processing on Azure](#understand-natural-language-processing-on-azure)
 * [Understand Azure Language's text analysis capabilities](#understand-azure-languages-text-analysis-capabilities)
 * [Azure Language's conversational AI capabilities](#azure-languages-conversational-ai-capabilities)
+* [Azure Translator capabilities](#azure-translator-capabilities)
 
 ---
 
@@ -220,5 +221,66 @@
 * **Custom question answering** uses question-and-answer pairs queried via natural language.
 * **CLU** focuses on intent prediction and information extraction.
 * Conversational AI and generative AI are related but **not the same**—generative AI creates new content.
+
+---
+
+## Azure Translator capabilities
+
+[Module Reference](https://learn.microsoft.com/en-us/training/modules/get-started-language-azure/5-azure-translator)
+
+**Overview**
+
+* Early machine translation relied on **literal translation** (word-for-word), which caused issues:
+
+  * No equivalent word in the target language
+  * Changed meaning or loss of context
+* AI-based translation focuses on **semantic context**, not just individual words
+* Accurate translation must consider:
+
+  * **Context**
+  * **Grammar rules**
+  * **Formal vs. informal language**
+  * **Colloquialisms**
+
+**Language Support**
+
+* Supports **text-to-text translation** between **more than 130 languages**
+* Allows specifying:
+
+  * **One source (“from”) language**
+  * **Multiple target (“to”) languages** simultaneously
+
+**Azure Translator Capabilities**
+
+* **Text translation**
+
+  * Real-time translation across all supported languages
+* **Document translation**
+
+  * Translates multiple documents
+  * Preserves **original document structure**
+* **Custom translation**
+
+  * Enables enterprises, app developers, and language service providers
+  * Used to build **customized neural machine translation (NMT)** systems
+
+**Integration and Availability**
+
+* Available in **Microsoft Foundry**
+
+  * Unified platform for enterprise AI operations, model builders, and application development
+* Also available in **Microsoft Translator Pro**
+
+  * Mobile application for enterprises
+  * Supports **real-time speech-to-speech translation**
+
+**Key Facts to Remember**
+
+* **Literal translation** is insufficient due to context and meaning loss
+* Azure Translator supports **130+ languages**
+* One source language can be translated into **multiple target languages at once**
+* **Document translation** preserves structure
+* **Custom translation** uses **neural machine translation (NMT)**
+* Service is accessible through **Microsoft Foundry** and **Microsoft Translator Pro**
 
 ---
