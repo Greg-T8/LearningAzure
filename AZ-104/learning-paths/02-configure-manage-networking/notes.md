@@ -26,6 +26,7 @@
 * [Exercise - Implement Intersite Connectivity](#exercise---implement-intersite-connectivity)
 * [Identify routing capabilities of an Azure virtual network](#identify-routing-capabilities-of-an-azure-virtual-network)
 * [Exercise - Create custom routes](#exercise---create-custom-routes)
+* [What is an NVA?](#what-is-an-nva)
 
 
 ---
@@ -2001,5 +2002,115 @@ Azure creates additional system routes when these capabilities are enabled:
   * **privatesubnet**: **10.0.1.0/24**
   * **dmzsubnet**: **10.0.2.0/24**
 * Route table association is applied to **publicsubnet**.
+
+---
+
+## What is an NVA?
+
+[Module Reference](https://learn.microsoft.com/training/modules/manage-control-traffic-flow-azure-deployment-routes/)
+
+**Definition**
+
+* A **network virtual appliance (NVA)** is a **virtual machine** that controls the flow of network traffic by managing **routing** within an Azure virtual network.
+
+**Common NVA Functions**
+
+* **Firewall**
+* **WAN optimizer**
+* **Application-delivery controller**
+* **Router**
+* **Load balancer**
+* **IDS/IPS**
+* **Proxy**
+
+**NVA Providers**
+
+* NVAs can be deployed from **Azure Marketplace**
+* Common providers include:
+
+  * Cisco
+  * Check Point
+  * Barracuda
+  * Sophos
+  * WatchGuard
+  * SonicWall
+
+<img src='.img/2026-01-20-03-49-43.png' width=700>
+
+**Why Use an NVA**
+
+* Filter **inbound traffic** to a virtual network
+* Block **malicious requests**
+* Block traffic from **unexpected or unauthorized resources**
+* Prevent **unwanted or unsecured traffic** from reaching critical systems
+* Secure both:
+
+  * **Virtual machine networking**
+  * **Azure services networking**
+
+**Traffic Control Role**
+
+* NVAs are typically used to:
+
+  * Manage traffic from a **perimeter network** to internal subnets
+  * Inspect and control traffic before it reaches internal resources
+* When deployed, an NVA **acts as a router** that forwards traffic between subnets
+
+**Deployment Models**
+
+* **Perimeter subnet deployment**
+
+  * Firewall appliance placed in a dedicated perimeter subnet
+* **Microsegmentation approach**
+
+  * Dedicated subnet for the firewall
+  * Workloads deployed in separate subnets
+  * **All traffic is routed through the firewall**
+  * Traffic is inspected by the NVA before reaching target subnets
+
+**Inspection Capabilities**
+
+* Inspects packets at:
+
+  * **OSI Layer 4**
+  * **OSI Layer 7** (for application-aware appliances)
+
+**Network Interfaces**
+
+* Some NVAs require **multiple network interfaces**
+
+  * One interface for **management**
+  * Additional interfaces for **traffic processing**
+* Traffic is routed through the appropriate interface after configuration
+* **IP forwarding** must be enabled on appliance network interfaces
+
+**User-Defined Routes (UDRs)**
+
+* Default Azure system routes are sufficient for most environments
+* Custom route tables are required for scenarios such as:
+
+  * **Forced tunneling** (internet access via on-premises network)
+  * **Routing traffic through NVAs**
+* Key rules:
+
+  * You can create **multiple route tables**
+  * A route table can be associated with **multiple subnets**
+  * A subnet can be associated with **only one route table**
+
+**High Availability Considerations**
+
+* NVAs are **critical infrastructure components**
+* NVA failure directly affects service communication
+* **Highly available architectures** are required for production deployments
+* Multiple high-availability designs are supported (details provided later in the module)
+
+**Key Facts to Remember**
+
+* **NVA purpose**: Control and inspect traffic flow through routing
+* **Primary benefit**: Allow only traffic that meets security requirements to pass from the perimeter network
+* **Microsegmentation** ensures all subnet traffic is inspected
+* **UDRs** are required to force traffic through an NVA
+* **Subnets** can be linked to only **one route table**
+* **NVA failures impact availability**, so HA design is essential
 
 ---
