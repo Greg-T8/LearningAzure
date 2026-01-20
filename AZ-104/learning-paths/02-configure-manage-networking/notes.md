@@ -25,6 +25,7 @@
 * [Extend peering with user-defined routes and service chaining](#extend-peering-with-user-defined-routes-and-service-chaining)
 * [Exercise - Implement Intersite Connectivity](#exercise---implement-intersite-connectivity)
 * [Identify routing capabilities of an Azure virtual network](#identify-routing-capabilities-of-an-azure-virtual-network)
+* [Exercise - Create custom routes](#exercise---create-custom-routes)
 
 
 ---
@@ -1883,5 +1884,122 @@ Azure creates additional system routes when these capabilities are enabled:
 * User-defined routes have the highest priority
 * BGP routes take precedence over system routes
 * Service tags simplify route management
+
+---
+
+## Exercise - Create custom routes
+
+[Module Reference](https://learn.microsoft.com/training/modules/manage-control-traffic-flow-with-routes/)
+
+**Scenario and Goal**
+
+* Control how network traffic is routed across an Azure infrastructure as part of a security strategy.
+* Use a **network virtual appliance (NVA)** to secure/monitor traffic so communication between **front-end public servers** and **internal private servers** is always routed through the appliance.
+* Configure routing so traffic from the **public subnet** to the **private subnet** is routed through the NVA by:
+
+  * Creating a **custom route** for the public subnet that routes traffic to a **perimeter-network (dmz) subnet**
+  * Deploying the NVA later to the **perimeter-network subnet**
+
+<img src='.img/2026-01-20-03-45-29.png' width=700>
+
+**Exercise Notes and Requirements**
+
+* Exercise is **optional**.
+* To complete it, you need an **Azure subscription**.
+* You need a **resource group**:
+
+  * Use an existing one, or create a new one for easier cleanup.
+* Replace **myResourceGroupName** in examples with your resource group name.
+* If you see an error: **“This command is implicitly deprecated.”** ignore it for this module.
+* In Azure Cloud Shell: **Settings > Go to Classic version**.
+
+**Create a route table and custom route**
+
+1. Create the route table:
+
+   ```azurecli
+   az network route-table create \
+       --name publictable \
+       --resource-group "myResourceGroupName" \
+       --disable-bgp-route-propagation false
+   ```
+
+2. Create a custom route for traffic intended for the private subnet:
+
+   ```azurecli
+   az network route-table route create \
+       --route-table-name publictable \
+       --resource-group "myResourceGroupName" \
+       --name productionsubnet \
+       --address-prefix 10.0.1.0/24 \
+       --next-hop-type VirtualAppliance \
+       --next-hop-ip-address 10.0.2.4
+   ```
+
+**Create a virtual network and subnets**
+
+* Create virtual network **vnet** and subnet **publicsubnet**:
+
+  ```azurecli
+  az network vnet create \
+      --name vnet \
+      --resource-group "myResourceGroupName" \
+      --address-prefixes 10.0.0.0/16 \
+      --subnet-name publicsubnet \
+      --subnet-prefixes 10.0.0.0/24
+  ```
+
+* Create subnet **privatesubnet**:
+
+  ```azurecli
+  az network vnet subnet create \
+      --name privatesubnet \
+      --vnet-name vnet \
+      --resource-group "myResourceGroupName" \
+      --address-prefixes 10.0.1.0/24
+  ```
+
+* Create subnet **dmzsubnet**:
+
+  ```azurecli
+  az network vnet subnet create \
+      --name dmzsubnet \
+      --vnet-name vnet \
+      --resource-group "myResourceGroupName" \
+      --address-prefixes 10.0.2.0/24
+  ```
+
+* List all subnets in **vnet**:
+
+  ```azurecli
+  az network vnet subnet list \
+      --resource-group "myResourceGroupName" \
+      --vnet-name vnet \
+      --output table
+  ```
+
+**Associate the route table with the public subnet**
+
+1. Associate route table **publictable** with subnet **publicsubnet**:
+
+   ```azurecli
+   az network vnet subnet update \
+       --name publicsubnet \
+       --vnet-name vnet \
+       --resource-group "myResourceGroupName" \
+       --route-table publictable
+   ```
+
+**Key Facts to Remember**
+
+* Goal: route traffic from **public subnet** to **private subnet** through an **NVA**.
+* Route table created: **publictable**.
+* Custom route targets **10.0.1.0/24** with next hop **VirtualAppliance** at **10.0.2.4**.
+* VNet: **10.0.0.0/16** with subnets:
+
+  * **publicsubnet**: **10.0.0.0/24**
+  * **privatesubnet**: **10.0.1.0/24**
+  * **dmzsubnet**: **10.0.2.0/24**
+* Route table association is applied to **publicsubnet**.
 
 ---
