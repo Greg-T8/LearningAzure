@@ -27,6 +27,7 @@
 * [Identify routing capabilities of an Azure virtual network](#identify-routing-capabilities-of-an-azure-virtual-network)
 * [Exercise - Create custom routes](#exercise---create-custom-routes)
 * [What is an NVA?](#what-is-an-nva)
+* [Exercise - Create an NVA and virtual machines](#exercise---create-an-nva-and-virtual-machines)
 
 
 ---
@@ -2112,5 +2113,113 @@ Azure creates additional system routes when these capabilities are enabled:
 * **UDRs** are required to force traffic through an NVA
 * **Subnets** can be linked to only **one route table**
 * **NVA failures impact availability**, so HA design is essential
+
+---
+
+## Exercise - Create an NVA and virtual machines
+
+[Module Reference](https://learn.microsoft.com/training/modules/manage-control-traffic-flow-azure-deployment-routes/)
+
+**Purpose of the Exercise**
+
+* Deploy a **network virtual appliance (NVA)** to secure and monitor traffic between **front-end public servers** and **internal private servers**
+* Ensure traffic routed through the NVA reaches its destination by enabling **IP forwarding**
+* Place the NVA in the **dmzsubnet** subnet
+* Forward traffic that matches custom routes to the **privatesubnet**
+
+<img src='.img/2026-01-20-03-55-32.png' width=700>
+
+**Important Prerequisites**
+
+* Exercise is **optional**
+* Requires an **Azure subscription**
+* If no subscription is available, instructions can be reviewed conceptually
+
+**Deploy the Network Virtual Appliance**
+
+* The NVA is implemented using an **Ubuntu LTS virtual machine**
+* Deployed into the **dmzsubnet** subnet of the virtual network
+
+1. Create the NVA virtual machine:
+
+   ```azurecli
+   az vm create \
+       --resource-group "myResourceGroupName" \
+       --name nva \
+       --vnet-name vnet \
+       --subnet dmzsubnet \
+       --image Ubuntu2204 \
+       --admin-username azureuser \
+       --admin-password <password>
+   ```
+
+**Enable IP Forwarding on the Azure Network Interface**
+
+* IP forwarding must be enabled at the **Azure NIC level**
+* Without this, traffic routed through the NVA will not be forwarded
+
+1. Retrieve the network interface ID:
+
+   ```azurecli
+   NICID=$(az vm nic list \
+       --resource-group "myResourceGroupName" \
+       --vm-name nva \
+       --query "[].{id:id}" --output tsv)
+
+   echo $NICID
+   ```
+
+2. Retrieve the network interface name:
+
+   ```azurecli
+   NICNAME=$(az vm nic show \
+       --resource-group "myResourceGroupName" \
+       --vm-name nva \
+       --nic $NICID \
+       --query "{name:name}" --output tsv)
+
+   echo $NICNAME
+   ```
+
+3. Enable IP forwarding on the NIC:
+
+   ```azurecli
+   az network nic update --name $NICNAME \
+       --resource-group "myResourceGroupName" \
+       --ip-forwarding true
+   ```
+
+**Enable IP Forwarding Inside the Appliance**
+
+* IP forwarding must also be enabled **within the Linux operating system**
+* Both Azure-level and OS-level forwarding are required
+
+1. Capture the public IP address of the NVA:
+
+   ```azurecli
+   NVAIP="$(az vm list-ip-addresses \
+       --resource-group "myResourceGroupName" \
+       --name nva \
+       --query "[].virtualMachine.network.publicIpAddresses[*].ipAddress" \
+       --output tsv)"
+
+   echo $NVAIP
+   ```
+
+2. Enable IP forwarding in the Ubuntu VM:
+
+   ```bash
+   ssh -t -o StrictHostKeyChecking=no azureuser@$NVAIP 'sudo sysctl -w net.ipv4.ip_forward=1; exit;'
+   ```
+
+* Enter the **admin password** when prompted
+
+**Key Facts to Remember**
+
+* **IP forwarding must be enabled in two places**: Azure NIC and guest OS
+* **Ubuntu 22.04 LTS** is used for the NVA
+* NVA is deployed to the **dmzsubnet**
+* Traffic using **custom routes** is forwarded to the **privatesubnet**
+* Without IP forwarding, routed traffic **will not reach its destination**
 
 ---
