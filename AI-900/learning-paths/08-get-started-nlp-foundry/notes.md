@@ -4,6 +4,7 @@
 
 * [Understand natural language processing on Azure](#understand-natural-language-processing-on-azure)
 * [Understand Azure Language's text analysis capabilities](#understand-azure-languages-text-analysis-capabilities)
+* [Azure Language's conversational AI capabilities](#azure-languages-conversational-ai-capabilities)
 
 ---
 
@@ -158,5 +159,66 @@
 * **Sentiment scores** range from **0 to 1** across three categories
 * **Ambiguous text** can return **unknown language** and **NaN score**
 * **Key phrase extraction** highlights core concepts, not summaries
+
+---
+
+## Azure Language's conversational AI capabilities
+
+[Module Reference](https://learn.microsoft.com/training/modules/get-started-text-analysis-microsoft-foundry/)
+
+**Overview**
+
+* **Conversational AI** enables dialog between an AI system and a human.
+* Azure Language includes features that support conversational AI solutions.
+
+**Question Answering**
+
+* **Question answering** enables building conversational AI solutions with an automated dialog component.
+* Commonly used for **bot applications** that respond to customer queries.
+* Capabilities include:
+
+  * Immediate responses
+  * Accurate answers
+  * Natural, **multi-turn interactions**
+* Bots can be implemented across multiple platforms:
+
+  * Web sites
+  * Social media platforms
+* Azure Language provides **custom question answering**:
+
+  * Create a **knowledge base** of question-and-answer pairs
+  * Query the knowledge base using **natural language input**
+
+**Conversational Language Understanding (CLU)**
+
+* **Conversational Language Understanding (CLU)** interprets the meaning of phrases in a conversational context.
+* Used to build **end-to-end conversational applications**.
+* Enables customization of natural language understanding models to:
+
+  * Predict the **intent** of an incoming phrase
+  * Extract **important information** from user input
+* Example use case:
+
+  * Interpreting commands such as “Turn the light off” and identifying the required action
+* Applicable scenarios include:
+
+  * Command and control tasks
+  * End-to-end conversations
+  * Enterprise support solutions
+
+<img src='.img/2026-01-20-04-29-19.png' width=700>
+
+**Relationship to Generative AI**
+
+* Modern AI solutions often combine multiple AI capabilities.
+* Conversational AI builds on **natural language processing (NLP)**.
+* **Generative AI** uses NLP as a foundation but extends it by **creating new content**.
+
+**Key Facts to Remember**
+
+* **Question answering** is optimized for conversational bots using knowledge bases.
+* **Custom question answering** uses question-and-answer pairs queried via natural language.
+* **CLU** focuses on intent prediction and information extraction.
+* Conversational AI and generative AI are related but **not the same**—generative AI creates new content.
 
 ---
