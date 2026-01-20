@@ -11,18 +11,6 @@
 
 This repository provides a study path combining official Microsoft resources, video courses, hands-on labs, and practice exams.
 
-### 📚 Learning Resource Priorities
-
-| Priority | Notes                                                           | Purpose                           |
-| -------- | --------------------------------------------------------------- | --------------------------------- |
-| 1        | [Microsoft Learning Paths](./learning-paths/README.md)          | Core concepts & knowledge         |
-| 2        | [Microsoft GitHub Labs](./microsoft-labs/README.md)             | Official hands-on practice        |
-| 3        | [John Savill's Training](./video-courses/john-savill/README.md) | Visual reinforcement & deep dives |
-| 4        | [O'Reilly Courses](./video-courses/oreilly/README.md)           | Alternative explanations          |
-| 5        | [MeasureUp Practice Exams](./practice-exams/README.md)          | Exam readiness assessment         |
-
----
-
 ## 📊 Exam Domains and Consolidated Progress Tracker
 
 | Domain                     | Weight | MS Learn | Video | MS Labs |
@@ -36,6 +24,19 @@ This repository provides a study path combining official Microsoft resources, vi
 **Legend:** 🕒 Not Started | 🚧 In Progress | ✅ Complete
 
 ---
+
+### 📚 Learning Resource Priorities
+
+| Priority | Notes                                                           | Purpose                           |
+| -------- | --------------------------------------------------------------- | --------------------------------- |
+| 1        | [Microsoft Learning Paths](./learning-paths/README.md)          | Core concepts & knowledge         |
+| 2        | [Microsoft GitHub Labs](./microsoft-labs/README.md)             | Official hands-on practice        |
+| 3        | [John Savill's Training](./video-courses/john-savill/README.md) | Visual reinforcement & deep dives |
+| 4        | [O'Reilly Courses](./video-courses/oreilly/README.md)           | Alternative explanations          |
+| 5        | [MeasureUp Practice Exams](./practice-exams/README.md)          | Exam readiness assessment         |
+
+---
+
 
 ## 📘 Domain Quick Reference
 
