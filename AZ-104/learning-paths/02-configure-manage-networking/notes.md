@@ -20,6 +20,8 @@
 * [Dynamically resolve resource name by using alias record](#dynamically-resolve-resource-name-by-using-alias-record)
 * [Exercise - Create alias records for Azure DNS](#exercise---create-alias-records-for-azure-dns)
 * [Determine Azure Virtual Network peering uses](#determine-azure-virtual-network-peering-uses)
+* [Determine gateway transit and connectivity](#determine-gateway-transit-and-connectivity)
+* [Create virtual network peering](#create-virtual-network-peering)
 
 
 ---
@@ -1465,5 +1467,142 @@ Azure DNS is built on **Azure Resource Manager**, providing:
 * Peering does **not merge** virtual networks into a single resource
 * Traffic remains **private on the Azure backbone**
 * Peering supports **cross-subscription** and **cross-tenant** connectivity
+
+---
+
+## Determine gateway transit and connectivity
+
+[Module Reference](https://learn.microsoft.com/training/modules/configure-azure-virtual-network-peering/)
+
+**Gateway Transit Overview**
+
+* When virtual networks are peered, an **Azure VPN Gateway** in one virtual network can act as a **transit point**.
+* A peered virtual network can use a **remote VPN gateway** to access other resources.
+
+<img src='.img/2026-01-20-03-09-31.png' width=700>
+
+**Transit and Connectivity Scenario**
+
+* Multiple virtual networks are connected using **virtual network peering**
+* A **hub virtual network** contains:
+
+  * A **gateway subnet**
+  * An **Azure VPN gateway**
+* The VPN gateway is configured to **allow gateway transit**
+* A spoke virtual network:
+
+  * Accesses hub resources
+  * Uses the **remote VPN gateway** for connectivity
+
+**Azure Portal Configuration Notes**
+
+* The Azure portal does **not explicitly label** settings as gateway transit
+* Configuration is done through options for:
+
+  * **Allowing**
+  * **Forwarding** network traffic
+
+**Azure VPN Gateway Characteristics**
+
+* A virtual network can have **only one VPN gateway**
+* **Gateway transit** is supported for:
+
+  * **Regional** virtual network peering
+  * **Global** virtual network peering
+
+**Capabilities Enabled by Gateway Transit**
+
+When VPN gateway transit is allowed, the gateway can:
+
+* Connect to an **on-premises network** using a **site-to-site VPN**
+* Connect to another virtual network using a **vnet-to-vnet connection**
+* Connect clients using a **point-to-site VPN**
+
+**Benefits of Gateway Transit**
+
+* Peered virtual networks can **share a single VPN gateway**
+* Eliminates the need to deploy a **VPN gateway in each peered virtual network**
+* Enables access to **external resources** beyond the peered networks
+
+**Network Security Groups (NSGs)**
+
+* **Network security groups** can be used to:
+
+  * Allow access
+  * Block access
+* During virtual network peering configuration, you can:
+
+  * **Open**
+  * **Close**
+    NSG rules between virtual networks
+
+**Key Facts to Remember**
+
+* Only **one VPN gateway per virtual network**
+* Gateway transit works with **regional and global peering**
+* Gateway transit enables access to **external networks**
+* Peered networks can **share a gateway**
+* NSGs control traffic flow between peered networks
+
+---
+
+## Create virtual network peering
+
+[Module Reference](https://learn.microsoft.com/en-us/training/modules/configure-vnet-peering/4-create)
+
+**Overview**
+
+* Azure Virtual Network peering can be configured using:
+
+  * Azure portal
+  * Azure PowerShell
+  * Azure CLI
+* This module focuses on creating peering in the **Azure portal** for virtual networks deployed using **Azure Resource Manager (ARM)**
+
+**Things to Know Before Creating Peering**
+
+* Your Azure account must have one of the following:
+
+  * **Network Contributor** role
+  * A **custom role** with permissions to perform peering actions
+* **Two virtual networks** are required to create a peering
+* The second virtual network is referred to as the **remote network**
+* Before peering:
+
+  * Virtual machines in each virtual network **cannot communicate**
+* After peering is established:
+
+  * Virtual machines **can communicate** based on the configured peering settings
+
+**Peering Connectivity Behavior**
+
+* Peering enables communication **within the peered networks**
+* Communication behavior depends on **configuration settings** applied during peering
+
+**Checking Peering Status**
+
+* Peering status can be viewed in the **Azure portal**
+* Peering is **not successfully established** until **both virtual networks** show a status of **Connected**
+
+**Peering Status Conditions (Azure Resource Manager)**
+
+* **Initiated**
+
+  * Occurs when the peering is created from the first virtual network to the remote virtual network
+* **Connected**
+
+  * Occurs after the peering is created from the remote virtual network back to the first virtual network
+  * Once complete, **both virtual networks** show a status of **Connected**
+
+**Classic Deployment Model Status**
+
+* In addition to **Initiated** and **Connected**, the **Updating** status may appear
+
+**Key Facts to Remember**
+
+* **Two peerings are required** for a complete connection (one from each virtual network)
+* Peering is only active when **both sides show Connected**
+* Initial peering always starts in the **Initiated** state
+* Full connectivity is achieved only after the **second peering is created**
 
 ---
