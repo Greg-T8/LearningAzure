@@ -22,7 +22,7 @@
 | 5   | [Introduction to generative AI and agents](https://learn.microsoft.com/en-us/training/modules/fundamentals-generative-ai/)                               | ✅    | 1/19/26        | [notes](05-intro-generative-ai-agents/notes.md)                     |
 | 6   | [Get started with generative AI in Microsoft Foundry](https://learn.microsoft.com/en-us/training/modules/get-started-generative-ai-azure/)               | ✅    | 1/19/26         | [notes](06-get-started-generative-ai-foundry/notes.md)              |
 | 7   | [Introduction to text analysis concepts](https://learn.microsoft.com/en-us/training/modules/introduction-language/)                                      | ✅    | 1/19/26         | [notes](07-intro-text-analysis-concepts/notes.md)                   |
-| 8   | [Get started with text analysis in Microsoft Foundry](https://learn.microsoft.com/en-us/training/modules/get-started-language-azure/)      | 🕒    | —         | [notes](08-get-started-nlp-foundry/notes.md)                        |
+| 8   | [Get started with text analysis in Microsoft Foundry](https://learn.microsoft.com/en-us/training/modules/get-started-language-azure/)      | ✅    | 1/20/26         | [notes](08-get-started-nlp-foundry/notes.md)                        |
 | 9   | [Introduction to AI speech concepts](https://learn.microsoft.com/en-us/training/modules/introduction-ai-speech/)                                         | 🕒    | —         | [notes](09-intro-ai-speech-concepts/notes.md)                       |
 | 10  | [Get started with speech in Microsoft Foundry](https://learn.microsoft.com/en-us/training/modules/recognize-synthesize-speech/)                          | 🕒    | —         | [notes](10-get-started-speech-foundry/notes.md)                     |
 | 11  | [Introduction to computer vision concepts](https://learn.microsoft.com/en-us/training/modules/introduction-computer-vision/)                             | 🕒    | —         | [notes](11-intro-computer-vision-concepts/notes.md)                 |
@@ -34,4 +34,40 @@
 
 ---
 
-*Last updated: 2026-01-14*
+## Introduction to AI Speech Concepts
+
+[Module Reference](https://learn.microsoft.com/training/modules/introduction-ai-speech-concepts/)
+
+**Overview**
+
+* **Speech** is a natural human communication method that enables more intuitive, accessible, and engaging AI applications.
+* Adding speech capabilities improves user experiences in:
+
+  * Voice assistants
+  * Accessible applications
+  * Conversational AI agents
+* Understanding speech technologies is essential for modern AI solutions.
+
+**Fundamental Speech Capabilities**
+
+* **Speech recognition**
+
+  * Converts **spoken words into text**
+* **Speech synthesis**
+
+  * Converts **text into natural-sounding speech**
+* These two capabilities work together to enable **seamless voice interactions**.
+
+**Learning Focus of the Module**
+
+* How speech recognition and speech synthesis function
+* How both technologies combine to power **voice-enabled applications**
+* Real-world scenarios where speech technologies enhance user interaction
+
+**Key Facts to Remember**
+
+* **Speech recognition** = spoken language → text
+* **Speech synthesis** = text → spoken language
+* Speech technologies enable **intuitive, accessible, and engaging** AI experiences
+
+---
