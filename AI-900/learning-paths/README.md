@@ -71,3 +71,116 @@
 * Speech technologies enable **intuitive, accessible, and engaging** AI experiences
 
 ---
+
+## Speech-enabled solutions
+
+[Module Reference](URL)
+
+**Overview**
+
+- **Speech recognition** converts spoken language into text.
+- **Speech synthesis** converts text into natural-sounding audio.
+- Together, they enable hands-free interaction, improve accessibility, and support natural conversational experiences.
+
+**Benefits of Integrating Speech**
+
+- **Expand accessibility**: Supports users with visual impairments or mobility challenges.
+- **Increase productivity**: Enables multitasking without keyboards or screens.
+- **Enhance user experience**: Creates natural, human-like conversations.
+- **Reach global audiences**: Supports multiple languages and regional dialects.
+
+**Common Speech Recognition Scenarios (Speech-to-Text)**
+
+- **Customer service and support**
+
+  - Real-time call transcription
+  - Intelligent call routing
+  - Sentiment analysis and issue detection
+  - Searchable call records
+  - **Business value**: Reduces manual notes, improves accuracy, captures service insights.
+
+- **Voice-activated assistants and agents**
+
+  - Voice commands for hands-free control
+  - Natural language question answering
+  - Task execution (reminders, messages, searches)
+  - Device and system control
+  - **Business value**: Increases engagement and simplifies workflows.
+
+- **Meeting and interview transcription**
+
+  - Searchable meeting notes
+  - Real-time captions
+  - Summaries and key point extraction
+  - **Business value**: Saves time, ensures accurate and accessible records.
+
+- **Healthcare documentation**
+
+  - Dictation into electronic health records
+  - Real-time updates to treatment plans
+  - Reduced administrative burden
+  - **Business value**: Improves care focus and documentation accuracy.
+
+**Common Speech Synthesis Scenarios (Text-to-Speech)**
+
+- **Conversational AI and chatbots**
+
+  - Spoken responses instead of text
+  - Adjustable tone, pace, and style
+  - Voice-based customer interactions
+  - **Business value**: Improves approachability and availability.
+
+- **Accessibility and content consumption**
+
+  - Read-aloud web and document content
+  - Support for dyslexia and visual impairments
+  - Hands-free content consumption
+  - **Business value**: Expands audience reach and inclusion.
+
+- **Notifications and alerts**
+
+  - Spoken alerts and reminders
+  - Navigation and GPS instructions
+  - Safety and system status updates
+  - **Business value**: Improves responsiveness and safety.
+
+- **E-learning and training**
+
+  - Narrated lessons without recording studios
+  - Pronunciation guidance
+  - Multilingual audio content
+  - **Business value**: Reduces costs and accelerates content creation.
+
+- **Entertainment and media**
+
+  - Character voices and voiceovers
+  - Podcast and audiobook prototypes
+  - Personalized audio experiences
+  - **Business value**: Enables rapid prototyping and scalability.
+
+**Combining Speech Recognition and Synthesis**
+
+- **Voice-driven customer service**
+- **Interactive voice response (IVR) systems**
+- **Language learning applications**
+- **Voice-controlled vehicles**
+
+*Combined use enables fluid, two-way conversational experiences that reduce user friction.*
+
+**Key Considerations Before Implementation**
+
+- **Audio quality**: Noise, microphones, and bandwidth affect accuracy.
+- **Language and dialect support**: Verify coverage for target audiences.
+- **Privacy and compliance**: Understand audio data handling and protection.
+- **Latency**: Real-time conversations require low latency.
+- **Accessibility standards**: Must align with WCAG guidelines.
+- **Alternative interfaces**: Always provide text-based input and output options.
+
+**Key Facts to Remember**
+
+- **Speech recognition** = speech-to-text.
+- **Speech synthesis** = text-to-speech.
+- Combining both enables conversational AI.
+- Accessibility and alternative interfaces are mandatory considerations.
+
+---
