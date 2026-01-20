@@ -31,6 +31,7 @@
 * [Exercise - Route traffic through the NVA](#exercise---route-traffic-through-the-nva)
 * [What is Azure Load Balancer?](#what-is-azure-load-balancer)
 * [How Azure Load Balancer works](#how-azure-load-balancer-works)
+* [When to use Azure Load Balancer](#when-to-use-azure-load-balancer)
 
 
 ---
@@ -2627,5 +2628,73 @@ Azure creates additional system routes when these capabilities are enabled:
 * **Default session persistence is None**
 * **HA ports use protocol = all and port = 0**
 * **Layer 7 routing requires Azure Application Gateway**
+
+---
+
+## When to use Azure Load Balancer
+
+[Module Reference](https://learn.microsoft.com/training/modules/intro-to-azure-load-balancer/when-to-use-azure-load-balancer)
+
+**When to Use Azure Load Balancer**
+
+* Best suited for applications that require **ultra-low latency** and **high performance**
+* Appropriate when replacing **existing on-premises network hardware load balancers**
+* Supports applications that use **multiple VM tiers**, similar to traditional on-premises architectures
+* Operates at **Layer 4 (TCP/UDP)**, matching the functionality of legacy hardware devices
+* Uses **health probes** to prevent traffic from being sent to failed VM instances
+* Supports **session persistence** to ensure clients communicate with the same VM during a session
+* Supports **public load balancers** for front-end traffic to web application tiers
+* Supports **internal load balancers** for traffic between application tiers (for example, web tier to data processing tier)
+* Supports **inbound NAT rules** to allow **RDP access** to individual VM instances for administration
+
+**When Not to Use Azure Load Balancer**
+
+* Not appropriate for applications running on a **single IaaS VM** that do not require load balancing
+* Unnecessary when applications receive **low traffic** and existing infrastructure already handles the load
+* No benefit if there is no need for a **back-end pool of VMs**
+
+**Alternative Azure Load-Balancing Solutions**
+
+* **Azure Front Door**
+
+  * Global application delivery network
+  * Provides **Layer 7** features including:
+
+    * TLS/SSL offload
+    * Path-based routing
+    * Fast failover
+    * Web application firewall
+    * Caching
+  * Best for **web apps deployed across multiple Azure regions**
+
+* **Azure Traffic Manager**
+
+  * **DNS-based** traffic load balancer
+  * Distributes traffic across global Azure regions
+  * Load balances at the **domain level only**
+  * Slower failover due to **DNS caching** and TTL behavior
+
+* **Azure Application Gateway**
+
+  * **Application Delivery Controller (ADC)** as a service
+  * Provides **Layer 7** load-balancing features
+  * Offloads **TLS/SSL termination** to reduce backend CPU usage
+  * Operates **within a single region**, not globally
+
+**Azure Load Balancer Comparison Highlights**
+
+* **Layer 4** load balancing for **TCP and UDP**
+* Handles **millions of requests per second**
+* Provides **inbound and outbound** load balancing
+* **Zone-redundant**, ensuring high availability across availability zones
+* Does **not** provide **web application firewall** functionality
+
+**Key Facts to Remember**
+
+* **Layer**: Layer 4 (TCP/UDP)
+* **Performance**: Ultra-low latency, high throughput
+* **Scope**: Regional, zone-redundant
+* **Use Case**: VM-based workloads requiring hardware-style load balancing
+* **Limitation**: No Layer 7 or WAF capabilities
 
 ---
