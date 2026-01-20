@@ -5,8 +5,6 @@
 *My progress through Microsoft Azure certifications*
 
 [![AI-900](https://img.shields.io/badge/AI--900-In%20Progress-yellow)](AI-900/) [![AZ-104](https://img.shields.io/badge/AZ--104-In%20Progress-yellow)](AZ-104/) ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/Greg-T8/LearningAzure) ![GitHub last commit](https://img.shields.io/github/last-commit/Greg-T8/LearningAzure)
-
-![AI-900 Domains](https://img.shields.io/badge/AI--900%20Domains-0%2F5-blue) ![AZ-104 Domains](https://img.shields.io/badge/AZ--104%20Domains-0%2F5-blue)
 </div>
 
 ---
