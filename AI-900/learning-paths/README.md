@@ -323,3 +323,151 @@
 - Post-processing improves readability and usability
 
 ---
+
+## Speech synthesis
+
+[Module Reference](https://learn.microsoft.com/training/modules/introduction-to-ai-speech-concepts/)
+
+**Overview**
+
+- **Speech synthesis** (text-to-speech, TTS) converts written text into spoken audio.
+- Used by virtual assistants, navigation apps, and accessibility tools.
+- Systems transform text through **four distinct stages**, producing a natural audio waveform.
+
+**Stage 1: Text normalization**
+
+- Prepares raw text for pronunciation by converting it into spoken forms.
+- Prevents pronunciation of raw symbols or digits.
+
+*Common normalization tasks*
+
+- Expanding abbreviations (for example, **“Dr.” → “Doctor”**, **“Inc.” → “Incorporated”**)
+
+- Converting numbers to words (**“3” → “three”**, **“25.50” → “twenty-five dollars and fifty cents”**)
+
+- Handling dates and times (**“12/15/2023” → “December fifteenth, two thousand twenty-three”**)
+
+- Processing symbols and special characters (**“$” → “dollars”**, **“@” → “at”**)
+
+- Resolving homographs based on context (**“read” present vs. past tense**)
+
+- Domain-specific rules apply (for example, medical vs. financial text).
+
+**Stage 2: Linguistic analysis**
+
+- Maps normalized text to **phonemes** (smallest units of sound).
+- Determines correct pronunciation based on context.
+
+*Linguistic analysis tasks*
+
+- Segmenting text into words and syllables
+- Looking up pronunciations in lexicons
+- Applying **grapheme-to-phoneme (G2P)** rules or neural models for unknown words
+- Marking syllable boundaries and stressed syllables
+- Determining phonetic context of adjacent sounds
+
+**Grapheme-to-phoneme (G2P) conversion**
+
+- Maps written letters to phonemes.
+- Handles inconsistent spelling-to-sound mappings in languages like English.
+
+*Examples*
+
+- **though** → /θoʊ/
+
+- **through** → /θruː/
+
+- **cough** → /kɔːf/
+
+- Modern G2P uses neural networks trained on pronunciation dictionaries.
+
+- Context-aware models (often transformers) disambiguate pronunciation (for example, **“read”** in present vs. past tense).
+
+**Stage 3: Prosody generation**
+
+- Determines **how** words are spoken, not just which sounds are produced.
+- Prosody affects naturalness and meaning.
+
+*Elements of prosody*
+
+- Pitch contours (rising/falling pitch)
+- Duration (sound length and rhythm)
+- Intensity (loudness)
+- Pauses (phrase and sentence breaks)
+- Stress patterns (syllable and word emphasis)
+
+*Prosody impact*
+
+- Emphasis placement can change sentence meaning.
+- Flat prosody results in robotic-sounding speech.
+
+**Transformer-based prosody prediction**
+
+- Uses transformer neural networks to model sentence-level context.
+
+*Prosody generation process*
+
+1. **Input encoding**: Phoneme sequence plus linguistic features
+2. **Contextual analysis**: Self-attention identifies relationships across the sentence
+3. **Prosody prediction**: Pitch, duration, and energy per phoneme
+4. **Style factors**: Speaking style and speaker characteristics
+
+*Factors influencing prosody*
+
+- Syntax
+
+- Semantics
+
+- Discourse context
+
+- Speaker identity
+
+- Emotional tone
+
+- Output is a detailed target specification (pitch, duration, intensity, pauses).
+
+**Stage 4: Speech synthesis (audio generation)**
+
+- Generates the final audio waveform from phonemes and prosody.
+
+*Waveform generation approaches*
+
+- Uses **neural vocoders**.
+
+*Common vocoder architectures*
+
+- **WaveNet**
+- **WaveGlow**
+- **HiFi-GAN**
+
+*Synthesis process*
+
+1. **Acoustic feature generation**: Converts phonemes and prosody into mel-spectrograms
+2. **Vocoding**: Converts mel-spectrograms into raw audio waveforms (16,000–48,000 samples/second)
+3. **Post-processing**: Filtering, normalization, and audio effects
+
+*Why neural vocoders are effective*
+
+- High fidelity audio
+- Natural-sounding speech
+- Real-time generation
+- Flexibility across speakers, languages, and styles
+
+**Complete pipeline example**
+
+- Input: **“Dr. Chen’s appointment is at 3:00 PM”**
+- Text normalization: “Doctor Chen’s appointment is at three o’clock P M”
+- Linguistic analysis: Converted to phoneme sequence
+- Prosody generation: Emphasis and pauses predicted
+- Speech synthesis: Audio waveform generated
+- End-to-end process typically completes in **under one second** on modern hardware.
+
+**Key Facts to Remember**
+
+- **Speech synthesis has four stages**: text normalization, linguistic analysis, prosody generation, speech synthesis.
+- **G2P conversion** handles inconsistent spelling-to-sound mappings.
+- **Prosody** (pitch, stress, rhythm) is critical for natural-sounding speech.
+- **Transformers** are used for both pronunciation context and prosody prediction.
+- **Neural vocoders** generate high-quality, real-time audio waveforms.
+
+---
