@@ -184,3 +184,44 @@
 * Audio files for batch transcription require a **SAS URI**
 
 ---
+
+## Use Azure Speech
+
+[Module Reference](https://learn.microsoft.com/training/modules/get-started-speech-microsoft-foundry/use-azure-speech)
+
+**Ways to use Azure Speech**
+
+* Available through multiple tools and programming options:
+
+  * **Studio interfaces**
+  * **Command Line Interface (CLI)**
+  * **REST APIs**
+  * **Software Development Kits (SDKs)**
+
+**Using studio interfaces**
+
+* Azure Speech projects can be created using **Speech Playground** in the **Microsoft Foundry portal**
+* Speech Playground provides a browser-based interface for experimenting with speech capabilities
+
+**Azure resources for Azure Speech**
+
+* An Azure resource is required before using Azure Speech in an application
+* You can choose between two resource types:
+
+  * **Speech resource**
+
+    * Use when only Azure Speech services are needed
+    * Allows separate management of access and billing
+  * **Foundry Tools resource**
+
+    * Use when Azure Speech is combined with other Foundry Tools
+    * Enables shared access and consolidated billing across services
+
+**Key Facts to Remember**
+
+* Azure Speech supports **studio tools, CLI, REST APIs, and SDKs**
+* **Speech Playground** is available in the Microsoft Foundry portal
+* Resource choice affects **service scope** and **billing management**
+* Only **Speech** and **Foundry Tools** resources are supported for Azure Speech usage
+
+---
