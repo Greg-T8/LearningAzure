@@ -6,6 +6,7 @@
 * [Understand Azure Language's text analysis capabilities](#understand-azure-languages-text-analysis-capabilities)
 * [Azure Language's conversational AI capabilities](#azure-languages-conversational-ai-capabilities)
 * [Azure Translator capabilities](#azure-translator-capabilities)
+* [Get started in Microsoft Foundry](#get-started-in-microsoft-foundry)
 
 ---
 
@@ -282,5 +283,84 @@
 * **Document translation** preserves structure
 * **Custom translation** uses **neural machine translation (NMT)**
 * Service is accessible through **Microsoft Foundry** and **Microsoft Translator Pro**
+
+---
+
+## Get started in Microsoft Foundry
+
+[Module Reference](https://learn.microsoft.com/training/modules/get-started-text-analysis-microsoft-foundry/)
+
+**Overview**
+
+* **Azure Language** and **Azure Translator** provide the core language capabilities for applications.
+* Both services are available as **Foundry Tools** and can be integrated into applications using:
+
+  * **Microsoft Foundry portal**
+  * **SDKs or REST APIs**
+
+**Resource Provisioning Options**
+
+To use Azure Language or Azure Translator, you must provision a resource in an Azure subscription. Available options:
+
+* **Language resource**
+
+  * Use when only Azure Language services are required
+  * Allows separate access control and billing
+* **Translator resource**
+
+  * Use when managing access and billing for translation independently
+* **Foundry Tools resource**
+
+  * Use when combining Azure Language with other Foundry Tools
+  * Centralized access and billing across services
+
+**Resource Creation Methods**
+
+* Resources can be created using:
+
+  * A **user interface**
+  * A **script**
+* Both the **Azure portal** and **Microsoft Foundry portal** support UI-based creation.
+* Choose the **Microsoft Foundry portal** when you want to view and test Foundry Tools examples.
+
+**Microsoft Foundry Portal**
+
+![Image](https://learn.microsoft.com/en-us/azure/ai-services/language-service/media/overview/conversation-pii.png)
+
+![Image](https://learn.microsoft.com/en-us/azure/ai-services/language-service/sentiment-opinion-mining/media/quickstarts/azure-ai-foundry/foundry-playground-navigation.png)
+
+![Image](https://learn.microsoft.com/en-us/azure/ai-foundry/media/concept-playgrounds/playground-landing-page.png?view=foundry-classic)
+
+* **Microsoft Foundry** is a unified platform for:
+
+  * Enterprise AI operations
+  * Model building
+  * Application development
+* The portal is organized around **hubs** and **projects**.
+* Creating a **project**:
+
+  * Is required to use Foundry Tools
+  * Automatically creates a **Foundry Tools resource**
+* **Projects** act as containers for:
+
+  * Datasets
+  * Models
+  * Other AI-related resources
+* Projects support organization, management, and collaboration.
+
+**Playground Capabilities**
+
+* The Foundry portal includes playgrounds to test services without writing code:
+
+  * **Language playground** (for example, sentiment analysis)
+  * **Translator playground** (for example, text translation)
+
+**Key Facts to Remember**
+
+* **Azure Language** and **Azure Translator** are Foundry Tools used for language capabilities.
+* A **resource must be provisioned** before using either service.
+* **Foundry Tools resources** support combined billing and access management.
+* A **project in Microsoft Foundry** is required to use Foundry Tools.
+* The Foundry portal includes **language and translator playgrounds** for experimentation.
 
 ---
