@@ -29,6 +29,7 @@
 * [What is an NVA?](#what-is-an-nva)
 * [Exercise - Create an NVA and virtual machines](#exercise---create-an-nva-and-virtual-machines)
 * [Exercise - Route traffic through the NVA](#exercise---route-traffic-through-the-nva)
+* [What is Azure Load Balancer?](#what-is-azure-load-balancer)
 
 
 ---
@@ -42,7 +43,7 @@
 | 2 | [Configure network security groups](https://learn.microsoft.com/en-us/training/modules/configure-network-security-groups/) | ✅ | 1/19/26 |
 | 3 | [Host your domain on Azure DNS](https://learn.microsoft.com/en-us/training/modules/host-domain-azure-dns/) | ✅ | 1/19/26 |
 | 4 | [Configure Azure Virtual Network peering](https://learn.microsoft.com/en-us/training/modules/configure-vnet-peering/) | ✅ | 1/20/26|
-| 5 | [Manage and control traffic flow in your Azure deployment with routes](https://learn.microsoft.com/en-us/training/modules/control-network-traffic-flow-with-routes/) | 🕒 | |
+| 5 | [Manage and control traffic flow in your Azure deployment with routes](https://learn.microsoft.com/en-us/training/modules/control-network-traffic-flow-with-routes/) | ✅ | 1/20/26 |
 | 6 | [Introduction to Azure Load Balancer](https://learn.microsoft.com/en-us/training/modules/intro-to-azure-load-balancer/) | 🕒 | |
 | 7 | [Introduction to Azure Application Gateway](https://learn.microsoft.com/en-us/training/modules/intro-to-azure-application-gateway/) | 🕒 | |
 | 8 | [Introduction to Azure Network Watcher](https://learn.microsoft.com/en-us/training/modules/intro-to-azure-network-watcher/) | 🕒 | |
@@ -2386,5 +2387,80 @@ Azure creates additional system routes when these capabilities are enabled:
 * **Traceroute** validates the actual packet path.
 * Installing tools via **cloud-init** automates VM configuration.
 * NVAs can be used for **inspection, filtering, and security enforcement**.
+
+---
+
+## What is Azure Load Balancer?
+
+[Module Reference]([URL](https://learn.microsoft.com/en-us/training/modules/intro-to-azure-load-balancer/2-what-is-azure-load-balancer))
+
+**Load Balancing Overview**
+
+* **Load balancing** distributes incoming traffic equitably across multiple computers.
+* A pool of computers with lower individual resources can respond more effectively than a single high-performance server.
+* Load balancing helps avoid overloading a single server without continuously adding hardware resources.
+
+**Azure Load Balancer**
+
+* **Azure Load Balancer** evenly distributes incoming network traffic across:
+
+  * A group of **Azure virtual machines (VMs)**
+  * Instances in a **Virtual Machine Scale Set**
+* Designed to deliver **high availability** and **high network performance**.
+
+**Core Components**
+
+* **Load-balancing rules**
+
+  * Define how traffic is distributed to back-end instances.
+* **Health probes**
+
+  * Verify that back-end resources are healthy.
+  * Prevent traffic from being sent to unhealthy instances.
+
+**Types of Azure Load Balancers**
+
+* **Public Load Balancer**
+
+  * Load balances **internet traffic** to VMs.
+  * Maps a **public IP address and port** to **private IP addresses and ports** of back-end VMs.
+  * Commonly used for spreading web traffic across multiple web servers.
+  * Can also provide **outbound connections** for VMs in a virtual network.
+
+* **Internal (Private) Load Balancer**
+
+  * Directs traffic **within a virtual network** or from **on-premises networks via VPN**.
+  * Front-end IP addresses are **never exposed to the internet**.
+  * Used for **internal line-of-business (LOB) applications**.
+  * Commonly balances traffic between application tiers (for example, web tier to processing tier).
+
+**Internal Load Balancer Scenarios**
+
+* **Within a virtual network**
+
+  * Load balancing between VMs in the same virtual network.
+* **Cross-premises virtual network**
+
+  * Load balancing from on-premises computers to Azure VMs.
+* **Multi-tier applications**
+
+  * Back-end tiers that are not internet-facing receive traffic from the front-end tier.
+* **LOB applications**
+
+  * Load balancing for Azure-hosted LOB apps without additional hardware or software.
+  * Can include on-premises servers in the load-balanced set.
+
+**Scale and Protocol Support**
+
+* Supports **inbound and outbound** scenarios.
+* Scales to **millions of TCP and UDP application flows**.
+
+**Key Facts to Remember**
+
+* **Azure Load Balancer** operates at the network level to distribute traffic.
+* **Health probes** ensure traffic is sent only to healthy back-end instances.
+* **Public load balancers** handle internet-facing traffic.
+* **Internal load balancers** are used for private, internal, and multi-tier scenarios.
+* Supports **TCP and UDP** at very large scale.
 
 ---
