@@ -184,3 +184,142 @@
 - Accessibility and alternative interfaces are mandatory considerations.
 
 ---
+
+## Introduction to AI speech concepts – Speech recognition
+
+[Module Reference](https://learn.microsoft.com/en-us/training/modules/introduction-ai-speech/3-speech-recognition?pivots=text)
+
+**Speech Recognition Overview**
+
+- **Speech recognition (speech-to-text)** converts spoken language into written text.
+- The pipeline consists of **six coordinated stages**:
+
+  - Audio capture
+  - Pre-processing
+  - Acoustic modeling
+  - Language modeling
+  - Decoding
+  - Post-processing
+
+**Audio Capture**
+
+- Converts **analog sound waves to digital signals** using a microphone.
+- Typical sampling rate for speech:
+
+  - **16,000 samples per second (16 kHz)**
+- Sampling rate considerations:
+
+  - Higher rates (e.g., **44.1 kHz**) capture more detail but increase processing cost.
+  - Speech systems balance clarity and efficiency at **8–16 kHz**.
+- Accuracy is affected by:
+
+  - Background noise
+  - Microphone quality
+  - Distance from the speaker
+- Basic filters may remove hums, clicks, and background noise before further processing.
+
+**Pre-Processing**
+
+- Transforms raw audio into compact, meaningful representations.
+- Discards irrelevant details such as absolute volume.
+
+**Mel-Frequency Cepstral Coefficients (MFCCs)**
+
+- **Most common feature extraction technique** in speech recognition.
+- Mimics human hearing by emphasizing speech-relevant frequencies.
+- **MFCC process**:
+
+  1. Divide audio into overlapping **20–30 ms frames**
+  2. Apply **Fourier transform** to convert time domain to frequency domain
+  3. Map frequencies to the **Mel scale**
+  4. Extract a small set of coefficients (commonly **13 coefficients**)
+- Output is a **sequence of feature vectors**, one per frame.
+- Each vector contains **13 MFCC values** representing spectral shape.
+
+<img src='.img/2026-01-20-04-41-23.png' width=700>
+
+
+**Acoustic Modeling**
+
+- Learns the relationship between audio features and **phonemes**.
+- **Phonemes** are the smallest sound units distinguishing words.
+
+  - English uses approximately **44 phonemes**
+  - Example: *cat* → /k/, /æ/, /t/
+- Modern systems use **transformer architectures**.
+- Transformer characteristics:
+
+  - **Attention mechanisms** use surrounding frames for context
+  - **Parallel processing** improves speed and accuracy
+  - **Contextualized predictions** learn common phoneme sequences
+- Output is a **probability distribution over phonemes** for each frame.
+- Phonemes are **language-specific** and require retraining for other languages.
+
+**Language Modeling**
+
+- Resolves ambiguity where phonemes alone are insufficient.
+- Applies knowledge of:
+
+  - Vocabulary
+  - Grammar
+  - Common word patterns
+- Language model guidance includes:
+
+  - **Statistical patterns** from training data
+  - **Context awareness** based on prior words
+  - **Domain adaptation** for specialized terminology
+
+**Decoding**
+
+- Searches for the word sequence that best matches acoustic and language models.
+- Balances:
+
+  - Fidelity to the audio signal
+  - Readability and grammatical correctness
+- **Beam search decoding**:
+
+  - Maintains a shortlist of top-scoring hypotheses
+  - Extends, scores, and prunes candidates at each step
+- Evaluates **thousands of hypotheses** for short utterances.
+- Decoding is **computationally intensive**.
+
+  - Real-time systems limit beam width and hypothesis depth to reduce latency.
+
+**Post-Processing**
+
+- Refines raw decoded text for presentation.
+- Common tasks:
+
+  - **Capitalization**
+  - **Punctuation restoration**
+  - **Number formatting**
+  - **Profanity filtering**
+  - **Inverse text normalization**
+  - **Confidence scoring**
+- Azure Speech returns:
+
+  - Final transcription
+  - **Word-level timestamps**
+  - **Confidence scores**
+
+**End-to-End Pipeline Flow**
+
+- Audio capture → raw signal
+- Pre-processing → MFCC features
+- Acoustic modeling → phoneme probabilities
+- Language modeling → vocabulary and grammar context
+- Decoding → best word sequence
+- Post-processing → readable, formatted text
+
+**Key Facts to Remember**
+
+- **Six stages** make up the speech recognition pipeline
+- Typical speech sampling rate: **16 kHz**
+- MFCCs commonly extract **13 coefficients**
+- Audio frames are **20–30 ms**
+- English has approximately **44 phonemes**
+- Transformers are used for modern acoustic modeling
+- Beam search is the most common decoding technique
+- Post-processing improves readability and usability
+
+---
