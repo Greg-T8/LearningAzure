@@ -36,6 +36,7 @@
 * [How Azure Application Gateway works](#how-azure-application-gateway-works)
 * [When to use Azure Application Gateway](#when-to-use-azure-application-gateway)
 * [What is Azure Network Watcher?](#what-is-azure-network-watcher)
+* [How Azure Network Watcher works](#how-azure-network-watcher-works)
 
 
 ---
@@ -3115,5 +3116,200 @@ Azure creates additional system routes when these capabilities are enabled:
 * **Connection troubleshoot** tests connectivity **at a single point in time**
 * **IP flow verify** and **NSG diagnostics** identify **which rule allows or blocks traffic**
 * **Flow logs** store traffic data; **Traffic analytics** visualizes it
+
+---
+
+## How Azure Network Watcher works
+
+[Module Reference](https://learn.microsoft.com/training/modules/introduction-to-azure-network-watcher/how-azure-network-watcher-works)
+
+**Availability and Access**
+
+* **Azure Network Watcher** is **automatically enabled** when you create a **virtual network** in an Azure region.
+* You can access it directly in the **Azure portal** by searching for **Network Watcher**.
+
+<img src='.img/2026-01-21-03-40-16.png' width=700>
+
+<img src='.img/2026-01-21-03-43-26.png' width=300>
+
+**Topology Tool**
+
+* Provides a **visual view** of all resources in a virtual network and their **relationships**.
+
+* Displays both:
+
+  * Resources in the virtual network
+  * Resources associated with those resources
+
+* **Resources shown include**:
+
+  * Subnets
+  * Network interfaces
+  * Network security groups (NSGs)
+  * Load balancers
+  * Load balancer health probes
+  * Public IP addresses
+  * Virtual network peering
+  * Virtual network gateways
+  * VPN gateway connections
+  * Virtual machines
+  * Virtual Machine Scale Sets
+
+* **Topology resource properties**:
+
+  * **Name** – resource name
+  * **Id** – resource URI
+  * **Location** – Azure region
+  * **Associations**
+
+    * **AssociationType**: `Contains` or `Associated`
+    * **Name** – referenced resource name
+    * **ResourceId** – referenced resource URI
+
+**Connection Monitor**
+
+* Provides **end-to-end connection monitoring**.
+
+* Supports both **Azure** and **hybrid** (on-premises) environments.
+
+* Measures **latency** between resources.
+
+* Detects connectivity changes caused by:
+
+  * Network configuration changes
+  * NSG rule modifications
+
+* Can probe VMs at **regular intervals**.
+
+* Diagnoses issues and explains:
+
+  * Why the issue occurred
+  * Steps to fix it
+
+* **Agent requirement**:
+
+  * Requires **monitoring agents** on monitored hosts.
+  * Azure VMs use the **Network Watcher Agent VM** (Network Watcher extension).
+
+<img src='.img/2026-01-21-03-47-28.png' width=500>
+
+**IP Flow Verify**
+
+* Uses **5-tuple packet verification** to determine if traffic is **allowed or denied**.
+* Parameters include:
+
+  * Protocol (**TCP or UDP**)
+  * Local IP and port
+  * Remote IP and port
+  * VM and network adapter
+* Verifies both **inbound and outbound** traffic.
+
+**Next Hop**
+
+* Determines how traffic from an **IaaS VM** is routed.
+* Returns:
+
+  * **Next hop type**
+  * **Next hop IP address**
+  * **Route table** used
+* If the route is:
+
+  * **User-defined** → returns that route
+  * **System-defined** → returns **System Route**
+* Helps identify misconfigured routes that cause connectivity issues.
+
+**Effective Security Rules**
+
+* Evaluates all **NSG rules** applied to a resource.
+* Accounts for **multiple NSGs** applied at different scopes.
+* Explains **why traffic is allowed or denied** based on effective rules.
+
+**Packet Capture**
+
+* Implemented as a **VM extension** triggered remotely.
+* Can be started via:
+
+  * Azure portal
+  * PowerShell
+  * Azure CLI
+  * REST API
+* Supports **5-tuple filtering**:
+
+  * Protocol
+  * Local IP
+  * Remote IP
+  * Local port
+  * Remote port
+* Captured data is stored:
+
+  * On the **local disk**
+  * Or in a **storage blob**
+
+**Connection Troubleshoot**
+
+* Tests **TCP connectivity** between a source and destination.
+
+* Destination can be specified using:
+
+  * FQDN
+  * URI
+  * IP address
+
+* **Successful results include**:
+
+  * Latency (milliseconds)
+  * Number of probe packets sent
+  * Number of hops to destination
+
+* **Failure fault types**:
+
+  * **CPU** – high CPU utilization
+  * **Memory** – high memory utilization
+  * **GuestFirewall** – firewall outside Azure blocked traffic
+  * **DNSResolution** – destination IP could not be resolved
+  * **NetworkSecurityRule** – NSG blocked traffic
+  * **UserDefinedRoute** – incorrect route table entry
+
+**VPN Troubleshoot**
+
+* Diagnoses **VPN gateways** and **connections**.
+
+* Can be run via:
+
+  * Azure portal
+  * PowerShell
+  * Azure CLI
+  * REST API
+
+* Operates as a **long-running transaction**.
+
+* Returns overall health plus detailed diagnostics.
+
+* **Returned values**:
+
+  * **startTime**
+  * **endTime**
+  * **code** – `UnHealthy` if any diagnosis fails
+  * **results** – collection of diagnostics
+
+    * **id** – fault type
+    * **summary** – fault summary
+    * **detailed** – detailed description
+    * **recommendedActions**
+
+      * **actionText**
+      * **actionUri**
+      * **actionUriText**
+
+**Key Facts to Remember**
+
+* Network Watcher is **enabled automatically** with a virtual network.
+* **Topology** shows resources and their relationships.
+* **Connection Monitor** requires agents and supports hybrid monitoring.
+* **IP flow verify** and **Effective security rules** explain traffic allow/deny behavior.
+* **Next hop** distinguishes between **user-defined** and **system routes**.
+* **Packet capture** uses 5-tuple filtering and runs via a VM extension.
+* **Connection troubleshoot** identifies specific failure causes.
+* **VPN troubleshoot** returns health, diagnostics, and recommended actions.
 
 ---
