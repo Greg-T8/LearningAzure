@@ -173,3 +173,71 @@
 * Padding is typically **0** for edge pixels
 
 ---
+
+## Convolutional neural networks
+
+[Module Reference](https://learn.microsoft.com/training/modules/introduction-computer-vision-concepts/)
+
+**Overview**
+
+* Computer vision focuses on **extracting meaning or actionable insights** from images, not just applying visual effects.
+* This requires **machine learning models** trained on large volumes of images.
+* A **convolutional neural network (CNN)** is one of the most common deep learning architectures used for computer vision.
+
+
+**What is a CNN**
+
+* A CNN is a **deep learning architecture** that uses **filters** to extract numeric features from images.
+* Extracted features are used by a neural network to **predict a label**.
+* In image classification, the label represents **what the image contains** (for example, apple, banana, or orange).
+
+**CNN Training Process**
+
+* **Filter kernels** are initialized with **randomly generated weights**.
+* Images with **known labels** are fed into the network.
+* Model predictions are **compared to actual labels**.
+* **Weights are adjusted** to improve accuracy.
+* Training continues until an **optimal set of weights** is learned.
+
+**CNN Image Classification Flow**
+
+1. Images with known labels (for example, `0: apple`, `1: banana`, `2: orange`) are input to the network.
+2. One or more **convolutional filter layers** extract features from images.
+
+   * Filters generate **feature maps** (arrays of numeric values).
+   * Optional **pooling/downsampling layers** reduce feature map size and emphasize key features.
+3. Feature maps are **flattened** into a single-dimensional array.
+4. Flattened values are passed to a **fully connected neural network**.
+5. The output layer applies **softmax or similar functions** to produce class probabilities (for example, `[0.2, 0.5, 0.3]`).
+6. Predicted probabilities are compared to actual labels (for example, banana = `[0.0, 1.0, 0.0]`).
+7. **Loss is calculated**, and weights in both the neural network and filter kernels are updated.
+8. Training repeats over multiple **epochs** until loss is minimized.
+
+<img src='.img/2026-01-21-04-35-11.png' width=600>
+
+**Model Usage After Training**
+
+* Learned weights are **saved**.
+* The trained model can predict labels for **new, unlabeled images**.
+
+**Architecture Notes**
+
+* CNNs typically include:
+
+  * Multiple convolutional layers
+  * Layers to reduce feature map size
+  * Layers to constrain or manipulate feature values
+* These layers may be omitted in simplified explanations to focus on the **core concept**:
+
+  * Filters extract numeric features
+  * Features are used to predict image labels
+
+**Key Facts to Remember**
+
+* **CNNs are deep learning models** designed for image-based tasks.
+* **Filters extract numeric feature maps** from images.
+* **Random weights** are refined through training and loss minimization.
+* **Softmax outputs probabilities** for each possible class.
+* Training occurs over multiple **epochs** until optimal weights are learned.
+
+---
