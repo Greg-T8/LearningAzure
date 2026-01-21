@@ -7,6 +7,7 @@
 * [Determine storage account types](#determine-storage-account-types)
 * [Determine replication strategies](#determine-replication-strategies)
 * [Access storage](#access-storage)
+* [Secure storage endpoints](#secure-storage-endpoints)
 
 
 ---
@@ -498,6 +499,8 @@
   * `<storage-account>.blob.core.windows.net`
 * DNS CNAME record points the subdomain to the storage endpoint
 
+<img src='.img/2026-01-21-04-16-52.png' width=700> 
+
 **Key Facts to Remember**
 
 * **Every Azure Storage object has a unique URL**
@@ -506,5 +509,50 @@
 * **Custom domains apply to Blob Storage**
 * **Direct mapping uses a DNS CNAME record**
 * **Custom domains map to blob or web endpoints**
+
+---
+
+## Secure storage endpoints
+
+[Module Reference](https://learn.microsoft.com/training/modules/configure-storage-accounts/secure-storage-endpoints)
+
+**Firewall and Virtual Network Settings**
+
+* Storage account network access is configured through **Firewalls and virtual networks** in the Azure portal.
+* You explicitly define which **virtual networks and subnets** are allowed to access the storage account.
+* This configuration **restricts access** to:
+
+  * Specific **subnets** within virtual networks
+  * Specific **public IP addresses or IP ranges**
+
+<img src='.img/2026-01-21-04-14-32.png' width=700> 
+
+**Service Endpoints**
+
+* Azure Storage provides **service endpoint base URLs** for:
+
+  * Blob
+  * Queue
+  * Table
+  * File
+* These base URLs are used to construct the full address for individual storage resources.
+
+<img src='.img/2026-01-21-04-14-57.png' width=700> 
+
+**Configuration Considerations**
+
+* Access can be allowed from **one or more public IP ranges**.
+* Virtual networks and subnets must be:
+
+  * In the **same Azure region** as the storage account, **or**
+  * In a supported **region pair**
+* After configuration, you should **test the service endpoint** to confirm access is restricted as intended.
+
+**Key Facts to Remember**
+
+* **Firewalls and virtual networks** control network-level access to storage accounts.
+* **Service endpoints** provide the base URL for all Azure Storage services.
+* **Region alignment is required** between storage accounts and allowed virtual networks.
+* **Testing access** after configuration is required to verify security behavior.
 
 ---
