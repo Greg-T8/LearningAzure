@@ -8,7 +8,7 @@
 
 This repository provides a **comprehensive study path** combining official Microsoft resources, video courses, hands-on labs, and practice exams.
 
-## � Learning Resource Progress Tracker
+## 📚 Learning Resource Progress Tracker
 
 | Priority | Resource                                            | Purpose                    | Status       | Completed |
 | -------- | --------------------------------------------------- | -------------------------- | ------------ | --------- |
