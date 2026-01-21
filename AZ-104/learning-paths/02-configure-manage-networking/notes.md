@@ -33,6 +33,8 @@
 * [How Azure Load Balancer works](#how-azure-load-balancer-works)
 * [When to use Azure Load Balancer](#when-to-use-azure-load-balancer)
 * [What is Azure Application Gateway?](#what-is-azure-application-gateway)
+* [How Azure Application Gateway works](#how-azure-application-gateway-works)
+* [When to use Azure Application Gateway](#when-to-use-azure-application-gateway)
 
 
 ---
@@ -2749,5 +2751,242 @@ Azure creates additional system routes when these capabilities are enabled:
 * Includes **WAF** for application-layer security
 * Can route traffic to **Azure and on-premises** back-end servers
 * Supports **autoscaling** and **connection draining**
+
+---
+
+## How Azure Application Gateway works
+
+[Module Reference](https://learn.microsoft.com/training/modules/introduction-to-azure-application-gateway/)
+
+
+<img src='.img/2026-01-21-03-25-07.png' width=700>
+
+**Core Components**
+
+* **Front-end IP address**
+
+  * Receives client requests
+  * Can be **public**, **private**, or **both**
+  * Maximum of **one public IP** and **one private IP**
+
+* **Listeners**
+
+  * Accept incoming requests based on **protocol, port, host, and IP**
+  * Route requests to back-end pools using routing rules
+  * Types:
+
+    * **Basic listener** – routes based on URL path only
+    * **Multi-site listener** – routes based on hostname and URL path
+  * Handle **TLS/SSL certificates** between clients and the gateway
+
+* **Routing rules**
+
+  * Bind a listener to a back-end pool
+  * Define how hostname and path are interpreted
+  * Include **HTTP settings**, such as:
+
+    * Protocol
+    * Session stickiness
+    * Connection draining
+    * Request timeout period
+    * Health probes
+  * Specify whether traffic is encrypted between gateway and back end
+
+**Load Balancing**
+
+* Uses **round-robin** load-balancing
+* Operates at **OSI Layer 7**
+
+  * Routes based on **hostnames and paths**
+* Supports **session stickiness** to keep client sessions on the same server
+* Differs from Azure Load Balancer, which operates at **OSI Layer 4**
+
+**Web Application Firewall (WAF)**
+
+* Optional component that processes requests **before** listeners
+* Protects against common threats defined by **OWASP**
+* Threats include:
+
+  * SQL injection
+  * Cross-site scripting
+  * Command injection
+  * HTTP request smuggling
+  * HTTP response splitting
+  * Remote file inclusion
+  * Bots, crawlers, and scanners
+  * HTTP protocol violations and anomalies
+* Uses **OWASP Core Rule Sets (CRS)**:
+
+  * **3.2**
+  * **3.1** (default)
+  * **3.0**
+  * **2.2.9**
+* Supports:
+
+  * Selecting specific rules
+  * Custom inspection targets
+  * Message size limits
+
+**Back-End Pools**
+
+* Collection of web servers, including:
+
+  * Virtual machines
+  * Virtual machine scale sets
+  * Azure App Service apps
+  * On-premises servers
+* All servers must be configured **consistently**
+* Each pool has an associated load balancer
+* TLS/SSL behavior:
+
+  * Requires HTTP settings referencing a certificate for authentication
+  * Traffic is **re-encrypted** before reaching back-end servers
+* Azure App Service back ends:
+
+  * Certificates not required
+  * Traffic is automatically encrypted
+  * Trust is managed by Azure
+
+**Routing Methods**
+
+* **Path-based routing**
+
+  * Routes requests to different back-end pools based on URL paths
+  * Example:
+
+    * `/video/*` → video-optimized servers
+    * `/images/*` → image servers
+
+<img src='.img/2026-01-21-03-27-31.png' width=500>
+
+* **Multiple-site routing**
+
+  * Hosts multiple web apps on one gateway
+  * Uses multiple DNS names (CNAMEs)
+  * Separate listeners and rules per site
+  * Commonly used for **multitenant applications**
+
+<img src='.img/2026-01-21-03-27-46.png' width=500>
+
+**Additional Routing Features**
+
+* Redirection (for example, HTTP to HTTPS)
+* HTTP header rewrite
+* Custom error pages with branding
+
+**TLS/SSL Termination**
+
+* Gateway offloads TLS/SSL processing from back-end servers
+* Certificates not required on servers when terminating at the gateway
+* Supports **end-to-end encryption** by decrypting and re-encrypting traffic
+* Only ports **80** and **443** are exposed externally
+* Back-end servers are not directly accessible from the internet
+
+<img src='.img/2026-01-21-03-28-10.png' width=700>
+
+**Health Probes**
+
+* Determine which back-end servers are available
+* Server is healthy if HTTP status code is **200–399**
+* Default probe:
+
+  * Waits **30 seconds** before marking a server unavailable
+* Prevents routing traffic to failed or nonresponsive servers
+
+**Autoscaling**
+
+* Automatically scales up or down based on traffic load
+* No need to select deployment size or instance count
+
+**WebSocket and HTTP/2 Support**
+
+* Native support for **WebSocket** and **HTTP/2**
+* Enables full-duplex, bidirectional communication
+* Uses long-running TCP connections
+* Operates over ports **80** and **443**
+* Improves efficiency through connection reuse and lower overhead
+
+**Key Facts to Remember**
+
+* **Layer 7 load balancer** using hostname and path-based routing
+* **One public and one private IP maximum**
+* **CRS 3.1** is the default WAF rule set
+* Health probe success range: **HTTP 200–399**
+* Default health probe timeout: **30 seconds**
+* Supports **autoscaling**, **WebSocket**, and **HTTP/2**
+* TLS/SSL can be terminated or re-encrypted end to end
+
+---
+
+## When to use Azure Application Gateway
+
+[Module Reference](https://learn.microsoft.com/training/modules/intro-to-azure-application-gateway/)
+
+**Reasons to Use Azure Application Gateway**
+
+* **Application-level routing**
+
+  * Routes traffic from an Azure endpoint to a back-end pool, including servers running in an on-premises datacenter.
+  * Uses **health probes** to ensure traffic is sent only to healthy back-end servers.
+
+* **TLS termination**
+
+  * Offloads encryption and decryption from back-end servers.
+  * Reduces **CPU utilization** on application servers.
+
+* **Web Application Firewall (WAF) support**
+
+  * Blocks common web attacks such as **cross-site scripting (XSS)** and **SQL injection** before traffic reaches back-end servers.
+
+* **Session affinity**
+
+  * Supports **cookie-based session affinity**.
+  * Required when applications store **user session state locally** on individual back-end servers.
+
+**When Not to Use Azure Application Gateway**
+
+* Not appropriate when:
+
+  * The web application **does not require load balancing**.
+  * Traffic volume is low and existing infrastructure already handles the load effectively.
+  * There is no need for a back-end pool of web apps or virtual machines.
+
+**Alternative Azure Load-Balancing Services**
+
+* **Azure Front Door**
+
+  * Global **application delivery network (Layer 7)**.
+  * Features:
+
+    * TLS/SSL offload
+    * Path-based routing
+    * Fast failover
+    * Web Application Firewall
+    * Caching
+  * Best for **multi-region web applications** requiring global load balancing and acceleration.
+
+* **Azure Traffic Manager**
+
+  * **DNS-based** global traffic distribution.
+  * Load-balances at the **domain level only**.
+  * Slower failover compared to Front Door due to:
+
+    * DNS caching
+    * DNS TTL not always being honored.
+
+* **Azure Load Balancer**
+
+  * **Layer 4 (TCP/UDP)** load balancing.
+  * Ultra-low latency and high throughput.
+  * Handles **millions of requests per second**.
+  * **Zone-redundant** for high availability.
+  * Operates **within a single Azure region**, not globally.
+
+**Key Facts to Remember**
+
+* **Azure Application Gateway** operates at **Layer 7** and is optimized for HTTP/HTTPS traffic.
+* **Session affinity** is critical when session state is stored locally on back-end servers.
+* **Front Door** is global and application-focused; **Load Balancer** is regional and transport-layer focused.
+* **Traffic Manager** relies on DNS and cannot provide rapid failover.
 
 ---
