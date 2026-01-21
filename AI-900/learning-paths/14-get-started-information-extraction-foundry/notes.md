@@ -144,3 +144,82 @@
 * Services can be **combined** to support complex, end-to-end information extraction scenarios
 
 ---
+
+## Extract information with Azure Vision
+
+[Module Reference](https://learn.microsoft.com/training/modules/get-started-ai-powered-information-extraction-microsoft-foundry/)
+
+**Azure Vision Image Analysis – Use Cases**
+
+* Used to extract insights from **photographs** and **small scanned documents**
+* Suitable examples:
+
+  * Business cards
+  * Menus
+  * Simple scanned documents
+
+**Automated Caption and Tag Generation**
+
+* Azure Vision Image Analysis can analyze an image and generate:
+
+  * **A caption** that describes the overall image
+  * **Dense captions** that describe key objects within the image
+  * **Tags** that categorize the image content
+
+* Example outputs include:
+
+  * Caption: *A man walking a dog on a leash*
+  * Dense captions identifying:
+
+    * People
+    * Objects (cars, booths, animals)
+    * Context (street, city)
+  * Tags such as:
+
+    * outdoor, vehicle, road, person, dog, city, walking, yellow
+
+**Object Detection**
+
+* Detects **common objects and people** in images
+* Identifies:
+
+  * **Object types**
+  * **Object locations** within the image
+* Example:
+
+  * Detects and highlights an **apple**, **banana**, and **orange** in a photo
+
+**Optical Character Recognition (OCR)**
+
+* Extracts **printed or handwritten text** from images
+
+* Determines:
+
+  * Location of each line of text
+  * Individual words within the image
+
+* Useful for:
+
+  * Reading text for further processing
+  * Translating text (for example, menus in mobile apps)
+  * Extracting small volumes of free-form text from simple documents
+
+* Example use case:
+
+  * Extracting contact details from a **business card**
+  * Sample extracted fields:
+
+    * Company name
+    * Person name
+    * Job title
+    * Email address
+    * Phone number
+
+**Key Facts to Remember**
+
+* **Azure Vision Image Analysis** supports captions, dense captions, tags, object detection, and OCR
+* **OCR** works with both printed and handwritten text
+* Best suited for **images and small, simple documents**, not large or complex documents
+* Common scenarios include **business cards, menus, and photos**
+
+---
