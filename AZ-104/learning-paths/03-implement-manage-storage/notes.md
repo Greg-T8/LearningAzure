@@ -5,6 +5,7 @@
 * [Implement Azure Storage](#implement-azure-storage)
 * [Explore Azure Storage services](#explore-azure-storage-services)
 * [Determine storage account types](#determine-storage-account-types)
+* [Determine replication strategies](#determine-replication-strategies)
 
 
 ---
@@ -314,5 +315,126 @@
 * **SSE encryption** is enabled for all storage accounts by default
 * **Premium accounts are workload-specific** (block blobs, file shares, page blobs)
 * **Standard GPv2** is the default choice for most Azure storage scenarios
+
+---
+
+## Determine replication strategies
+
+[Module Reference](https://learn.microsoft.com/training/modules/configure-storage-accounts/)
+
+**Azure Storage Replication Overview**
+
+* Data in an Azure storage account is **always replicated** to ensure **durability** and **high availability**.
+* Replication protects against:
+
+  * Transient hardware failures
+  * Network or power outages
+  * Data center failures
+  * Regional disasters
+* Replication options span:
+
+  * Within a **single datacenter**
+  * Across **availability zones** in a region
+  * Across **geographically paired regions**
+* Replication helps meet Azure Storage **SLA** even during failures.
+
+
+**Locally Redundant Storage (LRS)**
+
+* **Lowest-cost** replication option
+* Data is replicated **three times within a single datacenter**
+* **Lowest durability** compared to other strategies
+* **All replicas may be lost** during a datacenter-level disaster
+* Appropriate when:
+
+  * Data can be **easily reconstructed**
+  * Data is **nonessential or constantly changing**
+  * **Data residency** requires a single location
+
+<img src='.img/2026-01-21-04-08-45.png' width=400>
+
+**Zone-Redundant Storage (ZRS)**
+
+* Data is **synchronously replicated across three availability zones** in one region
+* Each zone:
+
+  * Is **physically separated**
+  * Has **independent power, networking, and cooling**
+* Ensures data access if **one zone becomes unavailable**
+* Provides **excellent performance and low latency**
+* Limitations:
+
+  * **Not available in all regions**
+  * Converting to ZRS requires **physical data movement**
+
+<img src='.img/2026-01-21-04-09-39.png' width=400> 
+
+**Geo-Redundant Storage (GRS)**
+
+* Replicates data to a **secondary region** hundreds of miles away
+* Designed for **regional disaster recovery**
+* Provides **99.99999999999999% (16 9’s) durability**
+* Secondary data is **read-only after Microsoft-initiated failover**
+* Replication process:
+
+  * Data written to primary region using **LRS**
+  * Replicated **asynchronously** to secondary region
+  * Secondary region also uses **LRS**
+* Replication unit: **storage scale unit**
+
+<img src='.img/2026-01-21-04-10-19.png' width=700>
+
+**Read-Access Geo-Redundant Storage (RA-GRS)**
+
+* Based on **GRS**
+* Adds **read access to the secondary region at all times**
+* Read access is available **even without failover**
+
+**Geo-Zone-Redundant Storage (GZRS)**
+
+* Combines **ZRS + GRS**
+* Data is:
+
+  * Replicated across **three availability zones** in the primary region
+  * Replicated to a **secondary paired region**
+* Supports:
+
+  * **Read/write access** during zone failures
+  * **Durability during regional outages**
+* Designed for **99.99999999999999% (16 9’s) durability**
+* Same scalability targets as **LRS, ZRS, GRS, RA-GRS**
+* Optional **read access to secondary region** with **RA-GZRS**
+* Microsoft **recommends GZRS** for:
+
+  * High availability
+  * Strong consistency
+  * Disaster recovery
+  * Excellent performance
+
+**Replication Strategy Capabilities**
+
+* **Node failure protection**:
+
+  * LRS, ZRS, GRS, RA-GRS, GZRS, RA-GZRS
+* **Datacenter failure protection**:
+
+  * ZRS, GRS, RA-GRS, GZRS, RA-GZRS
+* **Region-wide outage protection**:
+
+  * GRS, RA-GRS, GZRS, RA-GZRS
+* **Read access during regional outage**:
+
+  * RA-GRS, RA-GZRS
+
+**Key Facts to Remember**
+
+* **LRS**: Lowest cost, lowest durability, single datacenter
+* **ZRS**: Synchronous replication across **3 availability zones**
+* **GRS**: Asynchronous replication to **secondary region**
+* **RA-GRS**: Read access to secondary region **without failover**
+* **GZRS**: ZRS + GRS combined
+* **RA-GZRS**: Read access to secondary region during disasters
+* **16 nines durability** applies to **GRS, RA-GRS, GZRS, RA-GZRS**
+* All geo-replication uses **LRS at both primary and secondary regions**
 
 ---
