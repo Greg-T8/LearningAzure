@@ -1,5 +1,9 @@
 # Video Courses - AI-900
 
+Video courses provide visual reinforcement of AI-900 concepts. John Savill's Study Cram videos offer a condensed review ideal for final exam prep, while the freeCodeCamp course provides comprehensive coverage of all exam domains.
+
+**Recommended approach:** Watch the freeCodeCamp course first for thorough coverage, then use John Savill's videos for quick review before the exam.
+
 ---
 
 ## 📺 Video Course Tracker
