@@ -1,6 +1,10 @@
 # Module 12: Get started with computer vision in Microsoft Foundry
 
 **Link:** [Microsoft Learn](https://learn.microsoft.com/en-us/training/modules/get-started-computer-vision-azure/)
+* [Understand Foundry Tools for computer vision](#understand-foundry-tools-for-computer-vision)
+* [Understand Azure Vision Image Analysis Capabilities](#understand-azure-vision-image-analysis-capabilities)
+* [Understand Azure Vision's Face service capabilities](#understand-azure-visions-face-service-capabilities)
+* [Get started in Microsoft Foundry portal](#get-started-in-microsoft-foundry-portal)
 
 ---
 
