@@ -6,6 +6,7 @@
 * [Explore Azure Storage services](#explore-azure-storage-services)
 * [Determine storage account types](#determine-storage-account-types)
 * [Determine replication strategies](#determine-replication-strategies)
+* [Access storage](#access-storage)
 
 
 ---
@@ -436,5 +437,74 @@
 * **RA-GZRS**: Read access to secondary region during disasters
 * **16 nines durability** applies to **GRS, RA-GRS, GZRS, RA-GZRS**
 * All geo-replication uses **LRS at both primary and secondary regions**
+
+---
+
+## Access storage
+
+[Module Reference](https://learn.microsoft.com/training/modules/configure-storage-accounts/)
+
+**Storage Account Endpoints**
+
+* Every object in **Azure Storage** has a **unique URL**
+* The **storage account name** forms the **subdomain** of the URL
+* The **service type** determines the **domain name**
+* The combination creates a **service endpoint**
+
+**Default Service Endpoints**
+
+| Service                      | Default Endpoint                             |
+| ---------------------------- | -------------------------------------------- |
+| **Blob (Container) service** | `//<storage-account>.blob.core.windows.net`  |
+| **Table service**            | `//<storage-account>.table.core.windows.net` |
+| **Queue service**            | `//<storage-account>.queue.core.windows.net` |
+| **File service**             | `//<storage-account>.file.core.windows.net`  |
+
+**Accessing Objects in Storage**
+
+* Object URLs are created by **appending the object path** to the service endpoint
+
+* Format:
+
+  * `//<storage-account>.<service>.core.windows.net/<container>/<object>`
+
+* Example:
+
+  * Blob name: `myblob`
+  * Container: `mycontainer`
+  * URL:
+
+    * `//mystorageaccount.blob.core.windows.net/mycontainer/myblob`
+
+**Configure Custom Domains**
+
+* You can configure a **custom domain** for **Azure Blob Storage**
+* Default blob endpoint format:
+
+  * `<storage-account>.blob.core.windows.net`
+* Custom domains allow users to access blob data using a **friendly domain name**
+
+**Direct Mapping with CNAME**
+
+* **Direct mapping** enables a custom **subdomain** for a storage account
+* Requires creating a **CNAME record** in DNS
+* The CNAME maps the custom subdomain to the **blob or web endpoint**
+
+**Direct Mapping Example**
+
+* Custom subdomain: `blobs.contoso.com`
+* Azure blob endpoint:
+
+  * `<storage-account>.blob.core.windows.net`
+* DNS CNAME record points the subdomain to the storage endpoint
+
+**Key Facts to Remember**
+
+* **Every Azure Storage object has a unique URL**
+* **Storage account name = URL subdomain**
+* **Service type determines the endpoint domain**
+* **Custom domains apply to Blob Storage**
+* **Direct mapping uses a DNS CNAME record**
+* **Custom domains map to blob or web endpoints**
 
 ---
