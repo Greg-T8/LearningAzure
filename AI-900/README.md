@@ -8,27 +8,16 @@
 
 This repository provides a **comprehensive study path** combining official Microsoft resources, video courses, hands-on labs, and practice exams.
 
-## 📈 Progress Tracker
+## � Learning Resource Progress Tracker
 
-| Resource               | Status |
-| ---------------------- | ------ |
-| Microsoft Learn Course | 🚧    |
-| GitHub Labs            | 🕒    |
-| Video Courses          | 🕒    |
-| Practice Exams         | 🕒    |
+| Priority | Resource                                            | Purpose                    | Status       | Completed |
+| -------- | --------------------------------------------------- | -------------------------- | ------------ | --------- |
+| 1        | [Microsoft Learn Paths](./learning-paths/README.md) | Core concepts & knowledge  | 🚧  |           |
+| 2        | [Microsoft GitHub Labs](./microsoft-labs/README.md) | Official hands-on practice | 🕒  |           |
+| 3        | [Video Courses](./video-courses/README.md)          | Visual reinforcement       | 🕒  |           |
+| 4        | [Practice Exams](./practice-exams/README.md)        | Exam readiness assessment  | 🕒  |           |
 
 **Legend:** 🕒 Not Started | 🚧 In Progress | ✅ Complete
-
----
-
-### 📚 Learning Resource Priorities
-
-| Priority | Notes                                               | Purpose                    |
-| -------- | --------------------------------------------------- | -------------------------- |
-| 1        | [Microsoft Learn Paths](./learning-paths/README.md) | Core concepts & knowledge  |
-| 2        | [Microsoft GitHub Labs](./microsoft-labs/README.md) | Official hands-on practice |
-| 3        | [Video Courses](./video-courses/README.md)          | Visual reinforcement       |
-| 4        | [Practice Exams](./practice-exams/README.md)        | Exam readiness assessment  |
 
 ---
 
