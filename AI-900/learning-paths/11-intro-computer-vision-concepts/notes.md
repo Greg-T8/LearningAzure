@@ -2,6 +2,13 @@
 
 **Link:** [Microsoft Learn](https://learn.microsoft.com/en-us/training/modules/introduction-computer-vision/)
 
+* [Computer vision tasks and techniques](#computer-vision-tasks-and-techniques)
+* [Images and image processing](#images-and-image-processing)
+* [Convolutional neural networks](#convolutional-neural-networks)
+* [Vision transformers and multimodal models](#vision-transformers-and-multimodal-models)
+* [Image generation](#image-generation)
+
+
 ---
 
 ## Computer vision tasks and techniques
