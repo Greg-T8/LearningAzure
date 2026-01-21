@@ -1,6 +1,9 @@
 # Module 13: Introduction to AI-powered information extraction concepts
 
 **Link:** [Microsoft Learn](https://learn.microsoft.com/en-us/training/modules/introduction-information-extraction/)
+* [Introduction to AI-powered information extraction concepts](#introduction-to-ai-powered-information-extraction-concepts)
+* [Overview of information extraction](#overview-of-information-extraction)
+* [Optical character recognition (OCR)](#optical-character-recognition-ocr)
 
 ---
 
@@ -180,5 +183,186 @@
 * Value mapping links extracted text to **specific data fields**.
 * Layout consistency, volume, and accuracy drive solution design.
 * Cloud-based services improve **scalability**, **performance**, and **integration**.
+
+---
+
+## Optical character recognition (OCR)
+
+[Module Reference](https://learn.microsoft.com/training/modules/introduction-to-ai-powered-information-extraction-concepts/)
+
+**Definition**
+
+* **Optical Character Recognition (OCR)** automatically converts **visual text in images** into **editable, searchable text data**
+* Eliminates manual transcription
+
+**Common OCR Input Sources**
+
+* Scanned invoices and receipts
+* Digital photographs of documents
+* PDF files containing images of text
+* Screenshots and captured content
+* Forms and handwritten notes
+
+**OCR Pipeline Overview**
+
+* The OCR pipeline consists of **five essential stages** that transform visual information into text data:
+
+  1. Image acquisition and input
+  2. Preprocessing and image enhancement
+  3. Text region detection
+  4. Character recognition and classification
+  5. Output generation and post-processing
+
+**Stage 1: Image Acquisition and Input**
+
+* Image enters the OCR system from:
+
+  * Smartphone camera photographs
+  * Flatbed or document scanners
+  * Video stream frames
+  * PDF pages rendered as images
+* **Image quality at this stage significantly impacts final accuracy**
+
+**Stage 2: Preprocessing and Image Enhancement**
+
+* **Noise reduction**
+
+  * Removes artifacts and imperfections
+  * Techniques:
+
+    * Gaussian filters, median filters, morphological operations
+    * Denoising autoencoders and CNNs
+* **Contrast adjustment**
+
+  * Improves distinction between text and background
+  * Techniques:
+
+    * Histogram equalization, adaptive thresholding, gamma correction
+    * Deep learning models for adaptive enhancement
+* **Skew correction**
+
+  * Aligns text horizontally
+  * Techniques:
+
+    * Hough transform, projection profiles, connected component analysis
+    * Regression CNNs predicting rotation angles
+* **Resolution optimization**
+
+  * Adjusts image to optimal resolution for recognition
+  * Techniques:
+
+    * Bicubic, bilinear, Lanczos interpolation
+    * Super-resolution models (GANs, residual networks)
+
+**Stage 3: Text Region Detection**
+
+* **Layout analysis**
+
+  * Differentiates text, images, graphics, and whitespace
+  * Techniques:
+
+    * Connected component analysis, run-length encoding
+    * U-Net, Mask R-CNN, LayoutLM, PubLayNet-trained models
+* **Text block identification**
+
+  * Groups characters into words, lines, and paragraphs
+  * Techniques:
+
+    * Distance-based clustering, whitespace analysis
+    * Graph neural networks and transformer models
+* **Reading order determination**
+
+  * Establishes correct reading sequence
+  * Techniques:
+
+    * Geometric rule-based systems
+    * Sequence prediction and graph-based ML models
+* **Region classification**
+
+  * Identifies headers, body text, captions, tables
+  * Techniques:
+
+    * SVMs using font size, position, formatting
+    * CNNs and vision transformers
+
+**Stage 4: Character Recognition and Classification**
+
+* **Feature extraction**
+
+  * Analyzes shape, size, and character structure
+  * Techniques:
+
+    * Moments, Fourier descriptors, structural features
+    * CNN-based automatic feature learning
+* **Pattern matching**
+
+  * Matches features against trained character models
+  * Techniques:
+
+    * Template matching
+    * HMMs, SVMs, k-nearest neighbors
+    * MLPs, CNNs, LeNet
+    * ResNet, DenseNet, EfficientNet
+* **Context analysis**
+
+  * Improves accuracy using surrounding text
+  * Techniques:
+
+    * N-gram language models
+    * Dictionary-based correction with edit distance
+    * LSTM and transformer-based language models
+    * Attention mechanisms
+* **Confidence scoring**
+
+  * Assigns probability to recognized characters
+  * Techniques:
+
+    * Bayesian models
+    * Softmax probability outputs
+    * Ensemble methods
+
+**Stage 5: Output Generation and Post-Processing**
+
+* **Text compilation**
+
+  * Combines characters into words and sentences
+  * Techniques:
+
+    * Rule-based assembly
+    * RNNs and LSTMs
+    * Transformer-based sequence models
+* **Format preservation**
+
+  * Maintains paragraphs, spacing, and line breaks
+  * Techniques:
+
+    * Bounding-box geometry and whitespace analysis
+    * Graph neural networks and document AI models
+    * Multi-modal transformers (for example, LayoutLM)
+* **Coordinate mapping**
+
+  * Records exact position of text in the image
+  * Techniques:
+
+    * Pixel-to-document coordinate transformations
+    * R-trees and quad-trees
+    * Neural regression models
+* **Quality validation**
+
+  * Detects spelling and grammar errors
+  * Techniques:
+
+    * Dictionary-based validation
+    * N-gram and probabilistic language models
+    * Pre-trained neural models fine-tuned for OCR correction
+    * Ensemble validation approaches
+
+**Key Facts to Remember**
+
+* **OCR converts visual text into machine-readable text**
+* The OCR pipeline has **five mandatory stages**
+* **Preprocessing directly impacts recognition accuracy**
+* **Deep learning models are used across all pipeline stages**
+* Output includes **text content, structure, coordinates, and confidence scores**
 
 ---
