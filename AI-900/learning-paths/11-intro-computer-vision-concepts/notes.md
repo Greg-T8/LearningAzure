@@ -321,3 +321,45 @@
 * Models infer **semantic relationships**, not real-world understanding.
 
 ---
+
+## Image generation
+
+**Overview**
+
+* The same **multimodal model architecture** used to generate natural language responses from visual input can also generate images from **natural language prompts**
+* Models identify **visual features associated with language** to synthesize images or video from descriptions
+
+**Diffusion-based image generation**
+
+* Most modern image-generation models use **diffusion**
+* A **prompt** is used to identify related visual features
+* Image creation starts with **random pixel values**
+* The model **iteratively removes noise** to introduce structure
+* After each iteration, the model **evaluates the image against the prompt**
+* The process continues until the final image **depicts the desired scene**
+
+**Example diffusion process**
+
+* Prompt example: *“A dog carrying a stick in its mouth”*
+* Iterations progressively add **visual structure**
+* Each step refines the image to better match the prompt
+
+<img src='.img/2026-01-21-04-41-56.png' width=700> 
+
+**Video generation**
+
+* Some models apply a similar diffusion-based process to **video generation**
+* Uses language-associated visual features
+* Accounts for:
+
+  * **Physical behavior of objects** (for example, realistic movement)
+  * **Temporal progression** to ensure a logical sequence of activity
+
+**Key Facts to Remember**
+
+* **Diffusion** is the primary technique used by modern image-generation models
+* Image generation starts from **random noise** and becomes structured over time
+* The model **evaluates each iteration** against the original prompt
+* Video generation adds **physics-aware behavior** and **time-based continuity**
+
+---
