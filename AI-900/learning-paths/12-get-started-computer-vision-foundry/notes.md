@@ -182,3 +182,82 @@
 * Custom models extend image classification and object detection using **foundation models**.
 
 ---
+
+## Understand Azure Vision's Face service capabilities
+
+[Module Reference](https://learn.microsoft.com/training/modules/get-started-computer-vision-microsoft-foundry/)
+
+**Overview**
+
+* **Azure AI Face** is a product within **Azure Vision**
+* Supports use cases such as:
+
+  * **User identity verification**
+  * **Liveness detection**
+  * **Touchless access control**
+  * **Face redaction**
+* Core concepts include **face detection** and **face recognition**
+
+**Facial detection**
+
+* Identifies regions of an image that contain a human face
+* Returns **bounding box (rectangle) coordinates** around each detected face
+* Can analyze facial features to support model training
+* Facial features include:
+
+  * **Eyes**
+  * **Eyebrows**
+  * **Nose**
+  * **Lips**
+  * Other face landmarks
+
+<img src='.img/2026-01-21-04-53-38.png' width=500>
+
+**Facial recognition**
+
+* Uses multiple images of an individual to **train a machine learning model**
+* Enables identification of known individuals in new images
+* Operates only after the model has been trained with labeled faces
+* Intended for responsible use to improve **efficiency, security, and customer experience**
+
+<img src='.img/2026-01-21-04-54-45.png' width=500>
+
+**Azure AI Face service capabilities**
+
+* Returns **face rectangle coordinates** for detected faces
+* Can also return the following **face attributes**:
+
+  * **Accessories**: headwear, glasses, mask (confidence score from 0–1)
+  * **Blur**: indicates how blurred the face is
+  * **Exposure**: underexposed or overexposed face
+  * **Glasses**: whether glasses are worn
+  * **Head pose**: face orientation in 3D space
+  * **Mask**: whether a mask is worn
+  * **Noise**: visual noise (graininess) in the face image
+  * **Occlusion**: whether objects may be blocking the face
+  * **Quality for recognition**: **high**, **medium**, or **low**
+
+**Responsible AI use**
+
+* Azure AI Face and Azure Vision use a **Limited Access policy**
+* **Available to all users without approval**:
+
+  * Detect face locations in images
+  * Determine if glasses are worn
+  * Detect **occlusion**, **blur**, **noise**, and **over/under exposure**
+  * Return **head pose coordinates**
+* **Requires Limited Access approval (intake form)**:
+
+  * **Face verification** (compare faces for similarity)
+  * **Face identification** (identify named individuals)
+  * **Liveness detection** (detect real vs. fake or replayed input)
+
+**Key Facts to Remember**
+
+* **Face detection** returns bounding box coordinates
+* **Face recognition** requires training with multiple images
+* **Quality for recognition** is rated as high, medium, or low
+* **Verification, identification, and liveness detection** require Limited Access approval
+* Responsible AI standards govern advanced Face service capabilities
+
+---
