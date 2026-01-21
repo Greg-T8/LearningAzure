@@ -2714,6 +2714,8 @@ Azure creates additional system routes when these capabilities are enabled:
   * **Azure App Service**
   * **On-premises servers**
 
+<img src='.img/2026-01-21-03-23-01.png' width=700>
+
 **Traffic Management and Security**
 
 * Performs **HTTP load balancing** for web traffic
