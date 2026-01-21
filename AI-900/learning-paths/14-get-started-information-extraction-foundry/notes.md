@@ -371,3 +371,65 @@
 * Designed for **complex, multi-page documents and forms**
 
 ---
+
+## Create a knowledge mining solution with Azure AI Search
+
+[Module Reference](https://learn.microsoft.com/en-us/training/modules/ai-information-extraction/6-ai-search)
+
+**Azure AI Search Overview**
+
+* **Azure AI Search** is a cloud service for **indexing and searching data**
+* Uses **AI skills** to extract insights from **multiple data formats**
+* Integrates with other AI services:
+
+  * **Azure Vision**
+  * **Azure Language**
+  * **Azure Document Intelligence**
+* Enables **digital asset management** and **knowledge mining solutions**
+
+**Core Components: Indexers, Indexes, and Skills**
+
+* An **indexer** defines a **repeatable process** to build a searchable index
+
+* The indexer process includes:
+
+  * **Ingesting data** from a data source
+
+    * Examples: Azure Storage containers, databases
+  * **Cracking documents** to extract contents
+
+    * Examples: text and images from PDF files
+  * **Applying AI skillsets** to enrich data and generate fields
+
+    * **Core fields**: document name, last modified date
+    * **AI-generated fields**:
+
+      * Image tags and captions using **Azure Vision**
+      * Sentiment analysis and named entities using **Azure Language**
+      * Field extraction from forms using **Azure Document Intelligence**
+  * **Persisting extracted fields** into an **index**
+
+* The resulting **index** supports:
+
+  * Keyword-based search
+  * Filtering on extracted fields
+
+**Knowledge Store Persistence**
+
+* Azure AI Search can persist enriched data to a **knowledge store** in **Azure Storage**
+
+* The indexer can save:
+
+  * **Tables** containing extracted field values
+  * **Images** extracted from source documents
+  * **JSON documents** representing structured or hierarchical data
+
+**Key Facts to Remember**
+
+* **Indexers** orchestrate ingestion, enrichment, and indexing
+* **AI skills** enrich raw data using integrated AI services
+* **Indexes** enable search and filtering over extracted fields
+* **Knowledge stores** persist enriched data assets in Azure Storage
+* Azure AI Search supports both **search** and **knowledge mining** scenarios
+
+---
