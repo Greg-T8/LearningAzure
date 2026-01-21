@@ -12,9 +12,9 @@ This repository provides a **comprehensive study path** combining official Micro
 
 | Priority | Resource                                            | Purpose                    | Status       | Completed |
 | -------- | --------------------------------------------------- | -------------------------- | ------------ | --------- |
-| 1        | [Microsoft Learn Paths](./learning-paths/README.md) | Core concepts & knowledge  | 🚧  |           |
-| 2        | [Microsoft GitHub Labs](./microsoft-labs/README.md) | Official hands-on practice | 🕒  |           |
-| 3        | [Video Courses](./video-courses/README.md)          | Visual reinforcement       | 🕒  |           |
+| 1        | [Microsoft Learn Paths](./learning-paths/README.md) | Core concepts & knowledge  | ✅  |           | 1/21/26
+| 2        | [Video Courses](./video-courses/README.md)          | Visual reinforcement       | 🚧  |           |
+| 3        | [Microsoft GitHub Labs](./microsoft-labs/README.md) | Official hands-on practice | 🕒  |           |
 | 4        | [Practice Exams](./practice-exams/README.md)        | Exam readiness assessment  | 🕒  |           |
 
 **Legend:** 🕒 Not Started | 🚧 In Progress | ✅ Complete
