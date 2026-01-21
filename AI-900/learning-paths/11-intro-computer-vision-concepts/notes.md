@@ -241,3 +241,83 @@
 * Training occurs over multiple **epochs** until optimal weights are learned.
 
 ---
+
+## Vision transformers and multimodal models
+
+[Module Reference](https://learn.microsoft.com/training/modules/introduction-computer-vision-concepts/)
+
+**CNNs in Computer Vision**
+
+* **Convolutional Neural Networks (CNNs)** have been the foundation of computer vision solutions for many years.
+* CNNs are commonly used for **image classification**.
+* More complex models, such as **object detection**, combine:
+
+  * CNN **feature extraction layers**
+  * **Regions of interest** to identify multiple object classes in a single image.
+* Many historical advances in computer vision are driven by improvements in **CNN-based models**.
+
+**Semantic Modeling for Language – Transformers**
+
+* **Transformers** are a neural network architecture that enabled major advances in **natural language processing (NLP)**.
+* Transformers process **large volumes of data** and encode **language tokens** (words or phrases) as **vector-based embeddings**.
+* **Attention** assigns embedding values based on how tokens are used in context with other tokens.
+* Embeddings represent tokens as vectors in **multidimensional space**, where:
+
+  * Each dimension encodes a **linguistic attribute**
+  * Tokens used in similar contexts have **closely aligned vectors**
+* This creates a **semantic language model** used for:
+
+  * Text analysis
+  * Translation
+  * Language generation
+  * Other NLP tasks
+
+<img src='.img/2026-01-21-04-37-51.png' width=700>
+
+**Semantic Model for Images – Vision Transformers**
+
+* **Vision Transformer (ViT)** models apply the transformer approach to image data.
+* Instead of text tokens, ViTs:
+
+  * Extract **patches of pixel values** from images
+  * Convert each patch into a **linear vector**
+* **Attention** is used to identify contextual relationships between image patches.
+* Embeddings are based on **visual features**, including:
+
+  * Color
+  * Shape
+  * Contrast
+  * Texture
+* The result is a **multidimensional visual feature map** based on training images.
+* Visual features that appear in similar contexts are assigned **similar vector directions**.
+* The model does **not understand objects**, but can infer **semantic relationships** between visual characteristics.
+
+<img src='.img/2026-01-21-04-38-41.png' width=500>
+
+<img src='.img/2026-01-21-04-39-43.png' width=400>
+
+**Multimodal Models**
+
+* A **language transformer** produces a linguistic embedding space.
+* A **vision transformer** produces a visual embedding space.
+* When training data includes **images with associated text**, both encoders can be combined.
+* **Cross-model attention** aligns language and vision embeddings into a **shared spatial representation**.
+* This unified embedding space enables:
+
+  * Semantic relationships between text and visual features
+  * Generation of complex image descriptions
+  * Recognition of unseen images by mapping visual features to related language
+
+<img src='.img/2026-01-21-04-40-04.png' width=500>
+
+<img src='.img/2026-01-21-04-40-35.png' width=400>
+
+**Key Facts to Remember**
+
+* **CNNs** are foundational for image classification and object detection.
+* **Transformers** encode tokens as embeddings using **attention**.
+* **Vision transformers** encode image patches instead of text tokens.
+* **Multimodal models** combine language and vision embeddings using **cross-model attention**.
+* Models infer **semantic relationships**, not real-world understanding.
+
+---
