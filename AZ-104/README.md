@@ -11,29 +11,29 @@
 
 This repository provides a study path combining official Microsoft resources, video courses, hands-on labs, and practice exams.
 
-## 📊 Exam Domains and Consolidated Progress Tracker
+## 📊 Exam Domains
 
-| Domain                     | Weight | MS Learn | Video | MS Labs |
-| -------------------------- | ------ | -------- | ----- | ------- |
-| 1. Identities & Governance | 20-25% | ✅      | 🕒   | 🕒     |
-| 2. Storage                 | 15-20% | 🕒      | 🕒   | 🕒     |
-| 3. Compute                 | 20-25% | 🕒      | 🕒   | 🕒     |
-| 4. Networking              | 15-20% | 🚧      | 🕒   | 🕒     |
-| 5. Monitoring & Backup     | 10-15% | 🕒      | 🕒   | 🕒     |
-
-**Legend:** 🕒 Not Started | 🚧 In Progress | ✅ Complete
+| Domain                     | Weight |
+| -------------------------- | ------ |
+| 1. Identities & Governance | 20-25% |
+| 2. Storage                 | 15-20% |
+| 3. Compute                 | 20-25% |
+| 4. Networking              | 15-20% |
+| 5. Monitoring & Backup     | 10-15% |
 
 ---
 
-### 📚 Learning Resource Priorities
+### 📚 Learning Resource Progress Tracker
 
-| Priority | Notes                                                           | Purpose                           |
-| -------- | --------------------------------------------------------------- | --------------------------------- |
-| 1        | [Microsoft Learning Paths](./learning-paths/README.md)          | Core concepts & knowledge         |
-| 2        | [Microsoft GitHub Labs](./microsoft-labs/README.md)             | Official hands-on practice        |
-| 3        | [John Savill's Training](./video-courses/john-savill/README.md) | Visual reinforcement & deep dives |
-| 4        | [O'Reilly Courses](./video-courses/oreilly/README.md)           | Alternative explanations          |
-| 5        | [MeasureUp Practice Exams](./practice-exams/README.md)          | Exam readiness assessment         |
+| Priority | Resource                                                        | Purpose                           | Status | Completed |
+| -------- | --------------------------------------------------------------- | --------------------------------- | ------ | --------- |
+| 1        | [Microsoft Learning Paths](./learning-paths/README.md)          | Core concepts & knowledge         | 🚧    |           |
+| 2        | [Microsoft GitHub Labs](./microsoft-labs/README.md)             | Official hands-on practice        | 🕒    |           |
+| 3        | [John Savill's Training](./video-courses/john-savill/README.md) | Visual reinforcement & deep dives | 🕒    |           |
+| 4        | [O'Reilly Courses](./video-courses/oreilly/README.md)           | Alternative explanations          | 🕒    |           |
+| 5        | [MeasureUp Practice Exams](./practice-exams/README.md)          | Exam readiness assessment         | 🕒    |           |
+
+**Legend:** 🕒 Not Started | 🚧 In Progress | ✅ Complete
 
 ---
 
