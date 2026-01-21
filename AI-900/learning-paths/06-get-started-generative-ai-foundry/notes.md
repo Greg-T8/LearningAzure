@@ -1,6 +1,11 @@
 # Module 6: Get started with generative AI in Microsoft Foundry
 
 **Link:** [Microsoft Learn](https://learn.microsoft.com/en-us/training/modules/get-started-generative-ai-azure/)
+* [Understand generative AI applications](#understand-generative-ai-applications)
+* [Understand generative AI development in Foundry](#understand-generative-ai-development-in-foundry)
+* [Understand Foundry's model catalog](#understand-foundrys-model-catalog)
+* [Understand Foundry capabilities](#understand-foundry-capabilities)
+* [Understand observability](#understand-observability)
 
 ---
 

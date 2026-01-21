@@ -1,6 +1,12 @@
 # Module 4: Get started with machine learning in Azure
 
 **Link:** [Microsoft Learn](https://learn.microsoft.com/en-us/training/modules/design-machine-learning-model-training-solution/)
+* [Introduction](#introduction)
+* [Define the problem](#define-the-problem)
+* [Get and prepare data](#get-and-prepare-data)
+* [Train the model](#train-the-model)
+* [Use Azure Machine Learning studio](#use-azure-machine-learning-studio)
+* [Integrate a model](#integrate-a-model)
 
 ---
 

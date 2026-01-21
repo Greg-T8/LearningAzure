@@ -1,6 +1,9 @@
 # Module 5: Introduction to generative AI and agents
 
 **Link:** [Microsoft Learn](https://learn.microsoft.com/en-us/training/modules/fundamentals-generative-ai/)
+* [Large language models (LLMs)](#large-language-models-llms)
+* [Prompts](#prompts)
+* [AI agents](#ai-agents)
 
 ---
 

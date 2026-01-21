@@ -1,6 +1,10 @@
 # Module 7: Introduction to text analysis concepts
 
 **Link:** [Microsoft Learn](https://learn.microsoft.com/en-us/training/modules/introduction-language/)
+* [Introduction to text analysis concepts](#introduction-to-text-analysis-concepts)
+* [Tokenization](#tokenization)
+* [Statistical text analysis](#statistical-text-analysis)
+* [Semantic language models](#semantic-language-models)
 
 ---
 

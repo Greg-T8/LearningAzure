@@ -1,6 +1,13 @@
 # Module 3: Introduction to machine learning concepts
 
 **Link:** [Microsoft Learn](https://learn.microsoft.com/en-us/training/modules/fundamentals-machine-learning/)
+* [Machine learning models](#machine-learning-models)
+* [Types of machine learning model](#types-of-machine-learning-model)
+* [Regression](#regression)
+* [Binary classification](#binary-classification)
+* [Multiclass classification](#multiclass-classification)
+* [Clustering](#clustering)
+* [Deep learning](#deep-learning)
 
 ---
 
