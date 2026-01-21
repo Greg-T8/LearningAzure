@@ -134,3 +134,94 @@
 * **Redundancy** ensures durability and availability during failures
 
 ---
+
+## Explore Azure Storage services
+
+[Module Reference](https://learn.microsoft.com/training/modules/configure-storage-accounts/)
+
+<img src='.img/2026-01-21-04-03-23.png' width=700> 
+
+**Azure Blob Storage**
+
+* **Object storage** optimized for **massive amounts of unstructured or nonrelational data**
+* Ideal for:
+
+  * Serving **images or documents** directly to a browser
+  * **Distributed file access**
+  * **Streaming video and audio**
+  * **Backup, restore, disaster recovery, and archiving**
+  * **Data analysis** by on-premises or Azure-hosted services
+* Blobs are accessible worldwide via **HTTP or HTTPS**
+* Access methods:
+
+  * URLs
+  * Azure Storage REST API
+  * Azure PowerShell
+  * Azure CLI
+  * Azure Storage client libraries
+* Client libraries available for **.NET, Java, Node.js, Python, PHP, and Ruby**
+* Supports access using the **NFS protocol**
+
+**Azure Files**
+
+* Provides **highly available network file shares**
+* Supports access using:
+
+  * **Server Message Block (SMB)**
+  * **Network File System (NFS)**
+* Multiple virtual machines can share files with **read and write access**
+* Files can also be accessed via:
+
+  * REST interface
+  * Storage client libraries
+* Common use cases:
+
+  * **Lift-and-shift migration** of on-premises apps using file shares
+  * Shared **configuration files** across multiple VMs
+  * Centralized storage for **tools and utilities**
+  * Storage of **diagnostic logs, metrics, and crash dumps**
+* **Storage account credentials** are used for authentication
+* All users mounting the share have **full read/write access**
+
+**Azure Queue Storage**
+
+* Used to **store and retrieve messages**
+* **Queue message size limit: 64 KB**
+* A queue can contain **millions of messages**
+* Designed for **asynchronous message processing**
+* Common scenario:
+
+  * Decoupling application components
+  * Creating a **backlog of work**
+  * Independent scaling of processing components (for example, using Azure Functions)
+
+**Azure Table Storage**
+
+* Stores **structured, nonrelational (NoSQL) data**
+* Provides a **key/attribute store** with a **schemaless design**
+* Benefits:
+
+  * Easy schema evolution as application needs change
+  * **Fast and cost-effective** access
+  * Typically **lower cost than traditional SQL** for similar data volumes
+* Azure Cosmos DB Table API:
+
+  * **Throughput-optimized tables**
+  * **Global distribution**
+  * **Automatic secondary indexes**
+
+**Choosing the Right Azure Storage Service**
+
+* **Massive unstructured data**: Use **Azure Blob Storage**
+* **Highly available shared file storage**: Use **Azure Files**
+* **Asynchronous message processing**: Use **Azure Queue Storage**
+* **Structured, nonrelational data**: Use **Azure Table Storage / Cosmos DB Table API**
+
+**Key Facts to Remember**
+
+* **Blob Storage**: Unstructured data, HTTP/HTTPS access, NFS supported
+* **Azure Files**: SMB and NFS file shares, shared VM access, lift-and-shift friendly
+* **Queue Storage**: 64 KB message limit, millions of messages, async processing
+* **Table Storage**: Schemaless NoSQL, cost-effective, Cosmos DB integration
+
+---
