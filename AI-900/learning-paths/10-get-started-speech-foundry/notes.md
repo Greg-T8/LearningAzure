@@ -2,6 +2,10 @@
 
 **Link:** [Microsoft Learn](https://learn.microsoft.com/en-us/training/modules/recognize-synthesize-speech/)
 
+* [Understand speech recognition and synthesis](#understand-speech-recognition-and-synthesis)
+* [Get started with speech on Azure](#get-started-with-speech-on-azure)
+* [Use Azure Speech](#use-azure-speech)
+
 ---
 
 ## Understand speech recognition and synthesis
