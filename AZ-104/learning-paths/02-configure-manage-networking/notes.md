@@ -32,6 +32,7 @@
 * [What is Azure Load Balancer?](#what-is-azure-load-balancer)
 * [How Azure Load Balancer works](#how-azure-load-balancer-works)
 * [When to use Azure Load Balancer](#when-to-use-azure-load-balancer)
+* [What is Azure Application Gateway?](#what-is-azure-application-gateway)
 
 
 ---
@@ -2696,5 +2697,55 @@ Azure creates additional system routes when these capabilities are enabled:
 * **Scope**: Regional, zone-redundant
 * **Use Case**: VM-based workloads requiring hardware-style load balancing
 * **Limitation**: No Layer 7 or WAF capabilities
+
+---
+
+## What is Azure Application Gateway?
+
+[Module Reference](https://learn.microsoft.com/training/modules/intro-to-azure-application-gateway/)
+
+**Overview**
+
+* **Azure Application Gateway** manages requests from client applications to web apps hosted on a **pool of web servers**
+* Back-end pool can include:
+
+  * **Azure Virtual Machines**
+  * **Azure Virtual Machine Scale Sets**
+  * **Azure App Service**
+  * **On-premises servers**
+
+**Traffic Management and Security**
+
+* Performs **HTTP load balancing** for web traffic
+* Supports **TLS/SSL encryption**:
+
+  * Between users and the Application Gateway
+  * Between Application Gateway and application servers
+* Uses **round-robin** routing to distribute requests across back-end servers
+* Supports **session stickiness** to ensure requests from the same client session go to the same back-end server
+
+  * Especially important for **e-commerce applications** to prevent transaction disruption
+
+**Supported Protocols**
+
+* **HTTP**
+* **HTTPS**
+* **HTTP/2**
+* **WebSocket**
+
+**Built-in Capabilities**
+
+* **Web Application Firewall (WAF)** to protect against common web application vulnerabilities
+* **End-to-end request encryption**
+* **Autoscaling** to dynamically adjust capacity as web traffic changes
+* **Connection draining** to gracefully remove back-end pool members during planned service updates
+
+**Key Facts to Remember**
+
+* **Layer 7 (application-layer) load balancer** for web traffic
+* Supports **session persistence (stickiness)**
+* Includes **WAF** for application-layer security
+* Can route traffic to **Azure and on-premises** back-end servers
+* Supports **autoscaling** and **connection draining**
 
 ---
