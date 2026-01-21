@@ -223,3 +223,90 @@
 * Common scenarios include **business cards, menus, and photos**
 
 ---
+
+## Extract multimodal information with Azure Content Understanding
+
+[Module Reference](https://learn.microsoft.com/training/modules/extract-multimodal-information-azure-content-understanding)
+
+**Overview**
+
+* **Azure Content Understanding** uses state-of-the-art AI models to analyze content across multiple formats.
+* Supported content types:
+
+  * **Text-based forms and documents**
+  * **Audio**
+  * **Images**
+  * **Video**
+
+**Analyzing Forms and Documents**
+
+* Document analysis goes beyond basic OCR.
+* Uses **schema-based extraction** to identify fields and their values.
+* Schemas define expected fields, even if:
+
+  * Field labels differ
+  * Fields are unlabeled
+* Example invoice schema fields:
+
+  * **Vendor name**
+  * **Invoice number**
+  * **Invoice date**
+  * **Customer name**
+  * **Custom address**
+  * **Items**
+
+    * Item description
+    * Unit price
+    * Quantity ordered
+    * Line item total
+  * **Invoice subtotal**
+  * **Tax**
+  * **Shipping charge**
+  * **Invoice total**
+* Extracted values are returned per field based on the schema.
+
+**Analyzing Audio**
+
+* Supports analysis of **audio files**.
+* Capabilities include:
+
+  * **Transcriptions**
+  * **Summaries**
+  * **Key insight extraction**
+* Uses a predefined schema to extract structured insights.
+* Example audio schema fields:
+
+  * **Caller**
+  * **Message summary**
+  * **Requested actions**
+  * **Callback number**
+  * **Alternative contact details**
+* Extracts structured results from unstructured voice recordings.
+
+**Analyzing Images and Video**
+
+* Supports analysis of **images** and **video** using a custom schema.
+* Can extract contextual and numerical information.
+* Example image schema fields:
+
+  * **Location**
+  * **In-person attendees**
+  * **Remote attendees**
+  * **Total attendees**
+* Video analysis schemas can include:
+
+  * Attendance counts over time
+  * Speaker identification
+  * Spoken content
+  * Discussion summaries
+  * Assigned actions
+
+**Key Facts to Remember**
+
+* Azure Content Understanding supports **text, audio, image, and video** analysis.
+* Uses **custom schemas** to extract structured information.
+* Schema-based extraction works even with inconsistent or missing labels.
+* Audio analysis can return **summaries, actions, and contact details**.
+* Image and video analysis can extract **counts, context, and activity details**.
+
+---
