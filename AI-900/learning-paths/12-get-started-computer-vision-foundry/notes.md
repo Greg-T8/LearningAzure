@@ -261,3 +261,88 @@
 * Responsible AI standards govern advanced Face service capabilities
 
 ---
+
+## Get started in Microsoft Foundry portal
+
+[Module Reference](https://learn.microsoft.com/training/modules/get-started-computer-vision-microsoft-foundry/)
+
+**Azure Vision Overview**
+
+* **Azure Vision** provides core vision capabilities for applications.
+* It is one of the **Foundry Tools** available for building AI solutions.
+* Azure Vision solutions can be created using:
+
+  * **Microsoft Foundry portal**
+  * **SDKs or REST APIs**
+
+**Azure Resources for Azure Vision**
+
+* To use Azure Vision, a resource must be created in an Azure subscription.
+* Two supported resource types:
+
+  * **Azure Vision**
+
+    * Dedicated resource for Azure Vision only.
+    * Use when not planning to use other Foundry Tools.
+    * Allows separate tracking of utilization and costs.
+  * **Foundry Tools**
+
+    * General resource that includes Azure Vision and other AI services.
+    * Includes services such as **Azure Language**, **Azure AI Custom Vision**, and **Azure Translator**.
+    * Use when planning to work with multiple AI services to simplify administration and development.
+
+**Resource Creation Options**
+
+* Resources can be created using:
+
+  * A **user interface**
+  * **Scripts**
+* Both the **Azure portal** and **Microsoft Foundry portal** provide UI-based resource creation.
+* Choose **Microsoft Foundry portal** when you want to:
+
+  * Create resources
+  * View examples of Foundry Tools in action
+
+**Microsoft Foundry Portal**
+
+* Microsoft Foundry is a **unified platform** for:
+
+  * Enterprise AI operations
+  * Model builders
+  * Application development
+* The portal UI is organized around **hubs** and **projects**.
+* To use any Foundry Tool (including Azure Vision):
+
+  * You must create a **project**
+  * Creating a project automatically creates a **Foundry Tools resource**
+
+**Projects in Microsoft Foundry**
+
+* Projects act as **containers** for:
+
+  * Datasets
+  * Models
+  * Other AI-related resources
+* Projects help:
+
+  * Organize work
+  * Manage resources
+  * Enable collaboration on AI solutions
+
+**Using Azure Vision in the Portal**
+
+* The Microsoft Foundry portal allows you to:
+
+  * Test vision features with **sample images**
+  * Upload and test **your own images**
+* Vision capabilities can be explored directly within the portal UI.
+
+**Key Facts to Remember**
+
+* **Azure Vision** is a Foundry Tool used for computer vision capabilities.
+* Two resource types: **Azure Vision** (dedicated) and **Foundry Tools** (shared).
+* Creating a **project** in Microsoft Foundry automatically creates a Foundry Tools resource.
+* Use the **Microsoft Foundry portal** to experiment with vision features using sample or uploaded images.
+* Projects organize datasets, models, and resources for collaboration.
+
+---
