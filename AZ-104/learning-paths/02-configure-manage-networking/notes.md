@@ -35,6 +35,7 @@
 * [What is Azure Application Gateway?](#what-is-azure-application-gateway)
 * [How Azure Application Gateway works](#how-azure-application-gateway-works)
 * [When to use Azure Application Gateway](#when-to-use-azure-application-gateway)
+* [What is Azure Network Watcher?](#what-is-azure-network-watcher)
 
 
 ---
@@ -50,7 +51,7 @@
 | 4 | [Configure Azure Virtual Network peering](https://learn.microsoft.com/en-us/training/modules/configure-vnet-peering/) | ✅ | 1/20/26|
 | 5 | [Manage and control traffic flow in your Azure deployment with routes](https://learn.microsoft.com/en-us/training/modules/control-network-traffic-flow-with-routes/) | ✅ | 1/20/26 |
 | 6 | [Introduction to Azure Load Balancer](https://learn.microsoft.com/en-us/training/modules/intro-to-azure-load-balancer/) | ✅ | 1/20/26 |
-| 7 | [Introduction to Azure Application Gateway](https://learn.microsoft.com/en-us/training/modules/intro-to-azure-application-gateway/) | 🕒 | |
+| 7 | [Introduction to Azure Application Gateway](https://learn.microsoft.com/en-us/training/modules/intro-to-azure-application-gateway/) | ✅ | 1/21/26 |
 | 8 | [Introduction to Azure Network Watcher](https://learn.microsoft.com/en-us/training/modules/intro-to-azure-network-watcher/) | 🕒 | |
 
 **Legend:** 🕒 Not Started | 🚧 In Progress | ✅ Complete
@@ -2988,5 +2989,131 @@ Azure creates additional system routes when these capabilities are enabled:
 * **Session affinity** is critical when session state is stored locally on back-end servers.
 * **Front Door** is global and application-focused; **Load Balancer** is regional and transport-layer focused.
 * **Traffic Manager** relies on DNS and cannot provide rapid failover.
+
+---
+
+## What is Azure Network Watcher?
+
+[Module Reference](https://learn.microsoft.com/training/modules/introduction-to-azure-network-watcher/)
+
+**Overview**
+
+* **Azure Network Watcher** provides tools to **monitor, diagnose, view metrics, and enable or disable logs** for Azure **IaaS** resources.
+* Designed to monitor and repair **network health** for:
+
+  * Virtual machines (VMs)
+  * Virtual networks (VNets)
+  * Application gateways
+  * Load balancers
+* **Not intended** for **PaaS monitoring** or **web analytics**.
+
+<img src='.img/2026-01-21-03-37-32.png' width=700>
+
+**Major Capability Areas**
+
+* **Monitoring**
+* **Network Diagnostic**
+* **Traffic**
+
+**Monitoring Tools**
+
+* **Topology**
+
+  * Visualizes the **entire network configuration**
+  * Shows resources and relationships across:
+
+    * Multiple subscriptions
+    * Resource groups
+    * Locations
+  * Useful at the **start of troubleshooting** to identify hidden issues
+* **Connection monitor**
+
+  * Provides **end-to-end connection monitoring**
+  * Monitors **network performance** between endpoints
+  * Supports:
+
+    * Azure-to-Azure (e.g., multi-tier VM apps)
+    * Hybrid connectivity scenarios
+
+**Network Diagnostic Tools**
+
+* **IP flow verify**
+
+  * Detects traffic filtering issues at the **VM level**
+  * Verifies whether traffic is **allowed or denied**
+  * Identifies the **specific security rule** responsible
+* **NSG diagnostics**
+
+  * Detects filtering issues at:
+
+    * VM
+    * VM scale set
+    * Application gateway
+  * Supports IP address, IP prefix, and service tags
+  * Identifies the rule and allows adding a **higher-priority rule**
+* **Next hop**
+
+  * Detects **routing issues**
+  * Shows:
+
+    * Next hop type
+    * Next hop IP address
+    * Route table ID
+* **Effective security rules**
+
+  * Displays the **effective rules** applied to a network interface
+  * Includes:
+
+    * NIC-level rules
+    * Subnet-level rules
+    * Aggregated view
+* **Connection troubleshoot**
+
+  * Tests connectivity **at a point in time**
+  * Supports sources:
+
+    * VM
+    * VM scale set
+    * Application gateway
+    * Bastion host
+  * Supports destinations:
+
+    * VM
+    * FQDN
+    * URI
+    * IPv4 address
+* **Packet capture**
+
+  * Remotely captures **network traffic**
+  * Supported on:
+
+    * VM
+    * VM scale set
+* **VPN troubleshoot**
+
+  * Troubleshoots **virtual network gateways** and VPN connections
+
+**Traffic Tools**
+
+* **Flow logs**
+
+  * Logs Azure IP traffic
+  * Stores data in **Azure Storage**
+  * Supports:
+
+    * Network security groups
+    * Azure virtual networks
+* **Traffic analytics**
+
+  * Provides **visualizations** based on flow log data
+
+**Key Facts to Remember**
+
+* **Azure Network Watcher is for IaaS only**
+* **Topology** is best for **visual network understanding**
+* **Connection monitor** tracks connectivity **over time**
+* **Connection troubleshoot** tests connectivity **at a single point in time**
+* **IP flow verify** and **NSG diagnostics** identify **which rule allows or blocks traffic**
+* **Flow logs** store traffic data; **Traffic analytics** visualizes it
 
 ---
