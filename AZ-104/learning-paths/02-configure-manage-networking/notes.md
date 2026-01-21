@@ -37,6 +37,7 @@
 * [When to use Azure Application Gateway](#when-to-use-azure-application-gateway)
 * [What is Azure Network Watcher?](#what-is-azure-network-watcher)
 * [How Azure Network Watcher works](#how-azure-network-watcher-works)
+* [When to use Azure Network Watcher](#when-to-use-azure-network-watcher)
 
 
 ---
@@ -53,7 +54,7 @@
 | 5 | [Manage and control traffic flow in your Azure deployment with routes](https://learn.microsoft.com/en-us/training/modules/control-network-traffic-flow-with-routes/) | ✅ | 1/20/26 |
 | 6 | [Introduction to Azure Load Balancer](https://learn.microsoft.com/en-us/training/modules/intro-to-azure-load-balancer/) | ✅ | 1/20/26 |
 | 7 | [Introduction to Azure Application Gateway](https://learn.microsoft.com/en-us/training/modules/intro-to-azure-application-gateway/) | ✅ | 1/21/26 |
-| 8 | [Introduction to Azure Network Watcher](https://learn.microsoft.com/en-us/training/modules/intro-to-azure-network-watcher/) | 🕒 | |
+| 8 | [Introduction to Azure Network Watcher](https://learn.microsoft.com/en-us/training/modules/intro-to-azure-network-watcher/) | ✅ | 1/21/26|
 
 **Legend:** 🕒 Not Started | 🚧 In Progress | ✅ Complete
 
@@ -3311,5 +3312,96 @@ Azure creates additional system routes when these capabilities are enabled:
 * **Packet capture** uses 5-tuple filtering and runs via a VM extension.
 * **Connection troubleshoot** identifies specific failure causes.
 * **VPN troubleshoot** returns health, diagnostics, and recommended actions.
+
+---
+
+## When to use Azure Network Watcher
+
+[Module Reference](https://learn.microsoft.com/training/modules/introduction-to-azure-network-watcher/)
+
+**Overview**
+
+* **Azure Network Watcher** is used to troubleshoot networking issues related to **Azure IaaS resources**, especially virtual machines deployed in Azure virtual networks.
+* Provides **intermediate-level network diagnostic tools** focused on visibility, connectivity, and latency for IaaS scenarios.
+
+**Resolve Connectivity Issues for IaaS VMs**
+
+* Used when virtual machines cannot communicate as expected within the same virtual network.
+* **IP flow verify** tool:
+
+  * Performs a **logical test of effective NSG rules**
+  * Requires:
+
+    * Local IP and port
+    * Remote IP and port
+    * Protocol (**TCP or UDP**)
+    * Direction (**inbound or outbound**)
+  * Identifies whether traffic is **allowed or denied**
+  * Reports the **specific NSG rule** responsible for blocked traffic
+* Example use:
+
+  * Troubleshoot PowerShell remoting over **TCP port 5986 (HTTPS)** between two IaaS VMs.
+
+**Troubleshoot VPN Connections**
+
+* Used when IaaS VMs connect to on-premises networks through **site-to-site VPNs**.
+* **Azure VPN troubleshoot tool**:
+
+  * Runs diagnostics on a **virtual network gateway connection**
+  * Returns a **health diagnosis**
+  * Available via:
+
+    * Azure portal
+    * PowerShell
+    * Azure CLI
+  * Provides:
+
+    * Confirmation whether the VPN is working
+    * Log files for deeper inspection
+    * Suggested remediation steps if issues are detected
+
+**Determine Cross-Region Network Latency**
+
+* Helps decide **optimal Azure regions** for deploying IaaS resources.
+* Network Watcher can:
+
+  * Have IaaS VMs in different regions **regularly ping each other**
+  * Measure **cross-region network latency**
+* Common use cases:
+
+  * Decide whether VMs should be in:
+
+    * A single region, or
+    * Multiple regions for specific architectures
+  * Compare latency between:
+
+    * On-premises applications
+    * Azure IaaS VMs accessing the same storage endpoint
+* Latency results can justify:
+
+  * Migrating on-premises workloads to Azure
+  * Moving Azure VMs to a different region
+
+**When Not to Use Azure Network Watcher**
+
+* Not suitable for:
+
+  * **PaaS service connectivity issues**
+  * **Web analytics**
+* Does not replace:
+
+  * **Advanced third-party network diagnostic tools**
+* For non-IaaS issues:
+
+  * Use **Azure status** or **Service Health dashboard**
+
+**Key Facts to Remember**
+
+* Azure Network Watcher is primarily for **IaaS networking diagnostics**
+* **IP flow verify** identifies blocked traffic and the responsible **NSG rule**
+* **VPN troubleshoot** diagnoses virtual network gateway connections
+* Supports **latency analysis across Azure regions**
+* Cannot diagnose **PaaS or service-level issues**
+* Provides **intermediate**, not advanced, diagnostic capabilities
 
 ---
