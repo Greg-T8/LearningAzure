@@ -4,6 +4,7 @@
 * [Introduction to AI-powered information extraction concepts](#introduction-to-ai-powered-information-extraction-concepts)
 * [Overview of information extraction](#overview-of-information-extraction)
 * [Optical character recognition (OCR)](#optical-character-recognition-ocr)
+* [Field extraction and mapping](#field-extraction-and-mapping)
 
 ---
 
@@ -364,5 +365,193 @@
 * **Preprocessing directly impacts recognition accuracy**
 * **Deep learning models are used across all pipeline stages**
 * Output includes **text content, structure, coordinates, and confidence scores**
+
+---
+
+## Field extraction and mapping
+
+[Module Reference](https://learn.microsoft.com/training/modules/introduction-to-ai-powered-information-extraction-concepts/)
+
+**Field Extraction Overview**
+
+* **Field extraction** maps OCR text output to **labeled data fields** that represent meaningful business information.
+* **OCR** identifies *what text exists*; **field extraction** determines *what the text means* and *where it belongs* in business systems.
+* Field extraction relies heavily on **text position and layout**, not just text content.
+
+**Field Extraction Pipeline**
+
+* The pipeline transforms OCR output into structured data through defined stages:
+
+  1. OCR output ingestion
+  2. Field detection and candidate identification
+  3. Field mapping and association
+  4. Data normalization and standardization
+  5. Integration with business processes and systems
+
+<img src='.img/2026-01-21-05-04-03.png' width=500>
+
+**Stage 1: OCR Output Ingestion**
+
+* Input consists of structured OCR output, including:
+
+  * **Raw text content**: Extracted characters and words
+  * **Positional metadata**: Bounding boxes, page location, reading order
+  * **Confidence scores**: OCR confidence per text element
+  * **Layout information**: Lines, paragraphs, document structure
+* Field extraction depends on **where text appears**, not only the text value itself.
+
+**Stage 2: Field Detection and Candidate Identification**
+
+* Identifies potential field values within OCR output.
+
+* Multiple approaches can be used independently or together.
+
+* **Template-Based Detection**
+
+  * Uses rule-based pattern matching:
+
+    * Predefined layouts with known field positions and anchor keywords
+    * Label-value pairs (for example, *Invoice Number:*, *Date:*)
+    * Regular expressions and string matching
+  * **Advantages**:
+
+    * High accuracy for known document types
+    * Fast processing
+    * Explainable results
+  * **Limitations**:
+
+    * Manual template creation required
+    * Sensitive to layout variation and naming inconsistencies
+
+* **Machine Learning–Based Detection**
+
+  * Models learn field relationships from example documents.
+  * Transformer-based models use contextual cues.
+  * Training approaches include:
+
+    * **Supervised learning** with labeled datasets
+    * **Self-supervised learning** on large document corpora
+    * **Multi-modal learning** combining text, visual, and positional features
+  * Advanced architectures include:
+
+    * **Graph Neural Networks (GNNs)** for spatial relationships
+    * **Attention mechanisms** for region-focused prediction
+    * **Sequence-to-sequence models** for structured output generation
+
+* **Generative AI for Schema-Based Extraction**
+
+  * Uses large language models (LLMs) for field detection:
+
+    * **Prompt-based extraction** using document text and schema definitions
+    * **Few-shot learning** with minimal examples
+    * **Chain-of-thought reasoning** for step-by-step field identification
+
+**Stage 3: Field Mapping and Association**
+
+* Candidate values are mapped to specific schema fields.
+
+* **Key-Value Pairing Techniques**
+
+  * **Proximity analysis**:
+
+    * Spatial clustering
+    * Reading order analysis
+    * Geometric relationships (alignment, indentation, position)
+  * **Linguistic pattern recognition**:
+
+    * Named entity recognition (NER)
+    * Part-of-speech tagging
+    * Dependency parsing
+
+* **Table and Structured Content Processing**
+
+  * Tables may contain line items or structured data.
+  * Table detection techniques include:
+
+    * CNN-based table recognition
+    * Object detection for table cells
+    * Graph-based table parsing
+  * Table value mapping techniques include:
+
+    * Row-column association
+    * Header detection
+    * Hierarchical processing for nested tables and subtotals
+
+* **Confidence Scoring and Validation**
+
+  * Accuracy evaluation techniques include:
+
+    * OCR confidence inheritance
+    * Pattern-matching confidence
+    * Context validation
+    * Cross-field validation (for example, subtotals matching totals)
+
+**Stage 4: Data Normalization and Standardization**
+
+* Extracted values are converted into consistent formats and validated.
+
+* **Format Standardization**
+
+  * **Date normalization**:
+
+    * Format detection
+    * Parsing to standardized formats
+    * Ambiguity resolution
+  * **Currency and numeric processing**:
+
+    * Currency symbol recognition
+    * Decimal normalization
+    * Unit conversion
+  * **Text standardization**:
+
+    * Case normalization
+    * Encoding standardization
+    * Abbreviation expansion
+
+* **Data Validation and Quality Assurance**
+
+  * **Rule-based validation**:
+
+    * Format checking
+    * Range validation
+    * Required field verification
+  * **Statistical validation**:
+
+    * Outlier detection
+    * Distribution analysis
+    * Cross-document consistency checks
+
+**Stage 5: Integration with Business Processes and Systems**
+
+* Extracted data is integrated into downstream systems.
+
+* **Schema Mapping**
+
+  * Maps extracted fields to target systems such as:
+
+    * Database schemas
+    * API payloads
+    * Message queues
+  * Transformations can include:
+
+    * Field renaming
+    * Data type conversion
+    * Conditional business logic
+
+* **Quality Metrics and Reporting**
+
+  * Post-extraction evaluation may include:
+
+    * Field-level confidence scores
+    * Document-level quality metrics
+    * Error categorization by type and cause
+
+**Key Facts to Remember**
+
+* **Field extraction** adds semantic meaning to OCR output.
+* **Position and layout** are critical for accurate field identification.
+* **Multiple detection approaches** (template, ML, generative AI) can be combined.
+* **Normalization and validation** ensure consistency and reliability before integration.
+* **Integration** aligns extracted data with downstream business systems.
 
 ---
