@@ -310,3 +310,64 @@
 * Image and video analysis can extract **counts, context, and activity details**.
 
 ---
+
+## Extract information from forms with Azure Document Intelligence
+
+[Module Reference](https://learn.microsoft.com/training/modules/extract-information-from-forms-with-azure-document-intelligence/)
+
+**Azure Document Intelligence Overview**
+
+* Designed to support **complex document and form processing scenarios**
+* Can be used to extract fields from **forms and documents**
+* Provides a **large library of prebuilt models**
+* Supports creation of **custom models**
+* Compared to Azure Content Understanding:
+
+  * Both can extract fields
+  * **Azure Document Intelligence offers more extensive prebuilt models** for common document types
+
+**Using Prebuilt Models**
+
+* Prebuilt models are available for documents ranging from:
+
+  * **Simple receipts**
+  * **Complex tax forms**
+* Suitable for high-volume processing scenarios (for example, hundreds of forms per day)
+* Prebuilt models can automatically locate and extract fields without custom training
+
+**Example: Mortgage Application Processing**
+
+* Example scenario: processing a **standard 11-page mortgage application**
+* Azure Document Intelligence includes a **prebuilt model** for mortgage/loan forms
+* Example fields that can be extracted:
+
+  * **Borrower name**
+  * **Address**
+  * **Telephone number**
+  * **Social security number**
+  * **Date of birth**
+  * **Marital status**
+  * **Employment status**
+  * **Employer name**
+  * **Employer address**
+  * **Income**
+  * **Citizenship**
+  * And more
+
+**Creating Custom Models**
+
+* Custom models are trained using **labeled examples** of documents
+* Labeling process includes:
+
+  * Using **OCR** to define the document layout
+  * Identifying **discrete fields** to extract
+* Custom models enable extraction when prebuilt models do not meet requirements
+
+**Key Facts to Remember**
+
+* **Azure Document Intelligence** supports both **prebuilt** and **custom** models
+* Prebuilt models reduce development effort for common document types
+* Custom models require **labeled documents** and **OCR-based layout definition**
+* Designed for **complex, multi-page documents and forms**
+
+---
