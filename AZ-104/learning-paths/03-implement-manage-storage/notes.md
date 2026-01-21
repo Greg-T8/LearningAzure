@@ -2,8 +2,14 @@
 
 **Link:** [Microsoft Learn](https://learn.microsoft.com/en-us/training/paths/az-104-manage-storage/)
 
+* [Implement Azure Storage](#implement-azure-storage)
+* [Explore Azure Storage services](#explore-azure-storage-services)
+* [Determine storage account types](#determine-storage-account-types)
+
+
 ---
 
+<!-- omit in toc -->
 ## 📋 Modules
 
 | # | Module | Status | Completed |
@@ -223,5 +229,90 @@
 * **Azure Files**: SMB and NFS file shares, shared VM access, lift-and-shift friendly
 * **Queue Storage**: 64 KB message limit, millions of messages, async processing
 * **Table Storage**: Schemaless NoSQL, cost-effective, Cosmos DB integration
+
+---
+
+## Determine storage account types
+
+[Module Reference](https://learn.microsoft.com/training/modules/configure-storage-accounts/)
+
+**Storage Account Types Overview**
+
+* General-purpose Azure storage accounts have **two basic types**:
+
+  * **Standard**
+  * **Premium**
+
+**Standard Storage Accounts**
+
+* Backed by **magnetic hard disk drives (HDD)**
+* Provide the **lowest cost per GB**
+* Best suited for:
+
+  * Bulk storage
+  * Data that is **infrequently accessed**
+* Common use cases include general application data and cost-sensitive workloads
+
+**Premium Storage Accounts**
+
+* Backed by **solid-state drives (SSD)**
+* Provide **consistent low-latency and high-performance**
+* Best suited for:
+
+  * **I/O-intensive workloads**
+  * Azure virtual machine disks
+  * Databases and high-transaction applications
+
+**Important Notes**
+
+* **Standard and Premium storage accounts cannot be converted** between types
+
+  * A new storage account must be created
+  * Data must be copied manually if needed
+* **All storage account types are encrypted at rest**
+
+  * Encryption uses **Storage Service Encryption (SSE)**
+
+**Storage Account Types and Supported Services**
+
+* **Standard general-purpose v2**
+
+  * Supports: Blob Storage (including Data Lake Storage), Queue Storage, Table Storage, Azure Files
+  * Recommended for **most scenarios**, including blobs, file shares, queues, tables, and disks (page blobs)
+
+* **Premium block blobs**
+
+  * Supports: Blob Storage (including Data Lake Storage)
+  * Recommended for:
+
+    * Block blobs and append blobs
+    * Applications with **high transaction rates**
+    * Smaller objects or workloads requiring **consistently low latency**
+
+* **Premium file shares**
+
+  * Supports: Azure Files only
+  * Recommended for:
+
+    * Enterprise or high-performance scale applications
+    * Scenarios requiring both **SMB and NFS** support
+
+* **Premium page blobs**
+
+  * Supports: Page blobs only
+  * Recommended for:
+
+    * Index-based and sparse data structures
+    * Operating systems
+    * Virtual machine data disks
+    * Databases
+
+**Key Facts to Remember**
+
+* **Two base storage types**: Standard (HDD) and Premium (SSD)
+* **No conversion** between Standard and Premium storage accounts
+* **SSE encryption** is enabled for all storage accounts by default
+* **Premium accounts are workload-specific** (block blobs, file shares, page blobs)
+* **Standard GPv2** is the default choice for most Azure storage scenarios
 
 ---
