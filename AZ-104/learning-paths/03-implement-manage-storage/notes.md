@@ -25,6 +25,8 @@
 * [Manage Azure file shares](#manage-azure-file-shares)
 * [Create file share snapshots](#create-file-share-snapshots)
 * [Implement soft delete for Azure Files](#implement-soft-delete-for-azure-files)
+* [Use Azure Storage Explorer](#use-azure-storage-explorer)
+* [Consider Azure File Sync](#consider-azure-file-sync)
 
 
 ---
@@ -1825,5 +1827,146 @@
 * **Retention period**: **1–365 days**
 * **Recovery**: Deleted file shares are recoverable during the retention period
 * **Applicability**: Works with both **new and existing** file shares
+
+---
+
+## Use Azure Storage Explorer
+
+[Module Reference](https://learn.microsoft.com/en-us/training/modules/configure-azure-files-file-sync/6-identify-components)
+
+**Overview**
+
+* **Azure Storage Explorer** is a standalone application for managing Azure Storage data.
+* Supported platforms: **Windows, macOS, and Linux**.
+* Enables access to **multiple storage accounts and subscriptions**.
+* Used to manage **all Azure Storage content** from a single interface.
+
+**Access and Permissions**
+
+* Requires **both management (Azure Resource Manager)** and **data layer permissions** for full access.
+* **Microsoft Entra ID permissions** are required to:
+
+  * Access the storage account
+  * Access containers
+  * Access data within containers
+
+**Connecting to Storage Accounts**
+
+* Connect to storage accounts in multiple ways:
+
+  * Storage accounts in **your Azure subscriptions**
+  * Storage accounts shared from **other Azure subscriptions**
+  * **Local development storage** using the **Azure Storage Emulator**
+
+**Supported Scenarios**
+
+| Scenario                            | Description                                                                                             |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| Connect to an Azure subscription    | Manage storage resources in your Azure subscription                                                     |
+| Work with local development storage | Manage local storage using the Azure Storage Emulator                                                   |
+| Attach to external storage          | Manage storage from another subscription or national Azure cloud using account name, key, and endpoints |
+| Attach a storage account with a SAS | Manage another subscription’s storage using a shared access signature                                   |
+| Attach a service with a SAS         | Manage a specific service (blob container, queue, or table) using a SAS                                 |
+
+**Attach to External Storage Accounts**
+
+* Requires:
+
+  * **Storage account name**
+  * **Account key** (called **key1** in the Azure portal)
+* For **national Azure clouds**:
+
+  * Select **Other** in the **Storage endpoints domain** dropdown
+  * Enter a **custom storage account endpoint domain**
+
+**Access Keys**
+
+* Storage accounts provide **two access keys**.
+* Purpose:
+
+  * Maintain access with one key while regenerating the other.
+* **Security guidance**:
+
+  * Store access keys securely.
+  * Regenerate keys regularly.
+* After regeneration:
+
+  * Update all Azure resources and applications using the old key.
+  * Regenerating keys **does not interrupt VM disk access**.
+
+**Key Facts to Remember**
+
+* **Cross-platform** tool: Windows, macOS, Linux
+* Requires **management + data permissions**
+* Supports **subscriptions, external accounts, SAS, and emulator**
+* **Two access keys** per storage account for rotation without downtime
+* External and national cloud accounts require **custom endpoint configuration**
+
+---
+
+## Consider Azure File Sync
+
+[Module Reference](https://learn.microsoft.com/training/modules/configure-azure-files/consider-azure-file-sync)
+
+**Overview**
+
+* **Azure File Sync** enables caching of **Azure Files shares** on an on-premises **Windows Server** or a **cloud virtual machine**.
+* Centralizes organizational file shares in **Azure Files** while retaining on-premises **performance, flexibility, and compatibility**.
+* Transforms **Windows Server** into a **fast local cache** for Azure Files shares.
+
+**Access and Protocol Support**
+
+* Local access uses **any protocol available on Windows Server**, including:
+
+  * **SMB**
+  * **NFS**
+  * **FTPS**
+* Supports **multiple caches globally**, enabling distributed access around the world.
+
+**Cloud Tiering**
+
+* **Cloud tiering** is an **optional feature** of Azure File Sync.
+* **Frequently accessed files** are cached locally.
+* **Infrequently accessed files** are tiered to **Azure Files** based on **policy settings**.
+
+**Tiered File Behavior**
+
+* Tiered files are replaced locally with a **pointer (reparse point)**.
+* The reparse point represents a **URL to the file in Azure Files**.
+* When a user opens a tiered file:
+
+  * File data is **automatically recalled** from Azure Files.
+  * The process is **transparent to the user**.
+* Tiered files display:
+
+  * **Greyed icons**
+  * **Offline “O” file attribute**, indicating the file exists only in Azure.
+
+**Common Usage Scenarios**
+
+* **Application lift and shift**
+
+  * Move applications requiring shared access between Azure and on-premises systems.
+  * Provide **write access to the same data** across Windows Servers and Azure Files.
+* **Branch office support**
+
+  * Deploy new servers that connect to Azure storage for file backup and access.
+* **Backup and disaster recovery**
+
+  * Azure Backup protects on-premises data after Azure File Sync is implemented.
+  * **File metadata restores immediately**, with data recalled as needed.
+* **File archiving**
+
+  * Store only **recently accessed data** on local servers.
+  * Use cloud tiering to move **older data** to Azure Files.
+
+**Key Facts to Remember**
+
+* Azure File Sync turns Windows Server into a **local cache** for Azure Files.
+* Supports **SMB, NFS, and FTPS** for local access.
+* **Cloud tiering is optional** and policy-driven.
+* Tiered files use **reparse points** and are recalled **on demand**.
+* Visual indicators show when files exist **only in Azure**.
+* Integrates with **Azure Backup** for disaster recovery.
 
 ---
