@@ -24,6 +24,7 @@
 * [Compare storage for file shares and blob data](#compare-storage-for-file-shares-and-blob-data)
 * [Manage Azure file shares](#manage-azure-file-shares)
 * [Create file share snapshots](#create-file-share-snapshots)
+* [Implement soft delete for Azure Files](#implement-soft-delete-for-azure-files)
 
 
 ---
@@ -1773,5 +1774,56 @@
 * **Most recent snapshot** is sufficient for restoration.
 * **Individual file restore** is supported.
 * Deleting a file share **removes all snapshots**.
+
+---
+
+## Implement soft delete for Azure Files
+
+[Module Reference](https://learn.microsoft.com/en-us/training/modules/configure-azure-files-file-sync/5-implement-file-sync)
+
+**Overview**
+
+* **Soft delete for Azure Files** allows recovery of deleted files and file shares.
+* Deleted content is placed into a **soft deleted state** instead of being permanently erased.
+
+<img src='.img/2026-01-22-04-20-48.png' width=500>
+
+**Key Characteristics**
+
+* **Enabled at the storage account level**
+* Applies to **file shares**
+* **Retention period is configurable**
+
+  * Retention period defines how long soft-deleted file shares are available for recovery
+  * Supported range: **1 to 365 days**
+* Can be enabled on:
+
+  * **New file shares**
+  * **Existing file shares**
+
+**Benefits and Use Cases**
+
+* **Accidental data loss recovery**
+
+  * Restore deleted or corrupted data
+* **Upgrade recovery**
+
+  * Roll back to a known good state after a failed upgrade
+* **Ransomware protection**
+
+  * Recover data without paying ransom
+* **Long-term retention**
+
+  * Support compliance with data retention requirements
+* **Business continuity**
+
+  * Improve availability for critical workloads
+
+**Key Facts to Remember**
+
+* **Scope**: Enabled at the **storage account** level
+* **Retention period**: **1–365 days**
+* **Recovery**: Deleted file shares are recoverable during the retention period
+* **Applicability**: Works with both **new and existing** file shares
 
 ---
