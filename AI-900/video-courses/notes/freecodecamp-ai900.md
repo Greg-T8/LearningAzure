@@ -5,23 +5,3 @@
 **Duration:** ~4 hours
 
 ---
-
-## 📋 Course Overview
-
-Comprehensive course covering all AI-900 exam domains with lectures, follow-alongs, and cheatsheets.
-
----
-
-## 📝 Notes
-
-<!-- Add your notes here as you watch the video -->
-
----
-
-## 🔑 Key Takeaways
-
-<!-- Summarize key concepts after completing the course -->
-
----
-
-*Status:* 🕒 Not Started
