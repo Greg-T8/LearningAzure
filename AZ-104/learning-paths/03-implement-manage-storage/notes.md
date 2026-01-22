@@ -13,6 +13,8 @@
 * [Assign blob access tiers](#assign-blob-access-tiers)
 * [Add blob lifecycle management rules](#add-blob-lifecycle-management-rules)
 * [Determine blob object replication](#determine-blob-object-replication)
+* [Manage blobs](#manage-blobs)
+* [Determine Blob Storage pricing](#determine-blob-storage-pricing)
 
 
 ---
@@ -911,5 +913,126 @@
 * Replication is **asynchronous**.
 * Replication policies define **account pairs, containers, and rules**.
 * Object replication supports **multi-region access, compute scaling, and cost optimization**.
+
+---
+
+## Manage blobs
+
+[Module Reference](https://learn.microsoft.com/training/modules/configure-azure-blob-storage/manage-blobs)
+
+**Blob Types**
+
+* **Block blobs**
+
+  * Consist of blocks of data assembled into a blob
+  * **Default blob type** if no type is specified during creation
+  * Ideal for storing **text and binary data**
+  * Common use cases: **files, images, videos**
+* **Append blobs**
+
+  * Similar to block blobs but optimized for **append operations**
+  * Data can only be added to the end of the blob
+  * Ideal for **logging scenarios** where data grows over time
+* **Page blobs**
+
+  * Support blobs **up to 8 TB** in size
+  * Optimized for **frequent read/write operations**
+  * Used by **Azure Virtual Machines** for OS disks and data disks
+
+<img src='.img/2026-01-22-03-31-35.png' width=300>
+
+**Important Limitation**
+
+* **Blob type cannot be changed after creation**
+
+**Managing Blobs in the Azure Portal**
+
+* Suitable for **uploading and managing a small number of files**
+* When uploading blobs, you configure:
+
+  * **Blob type**
+  * **Block size**
+  * **Container folder**
+  * **Access tier**
+  * **Encryption scope**
+
+**Tools for Managing Large Numbers of Files**
+
+* **Azure Storage Explorer**
+
+  * Upload, download, and manage blobs, files, queues, and tables
+  * Supports Azure Data Lake Storage entities and managed disks
+  * Allows previewing data and configuring permissions and access controls
+* **AzCopy**
+
+  * Command-line tool for **Windows and Linux**
+  * Copies data to and from Blob Storage
+  * Supports copying across containers and storage accounts
+* **Azure Data Box Disk**
+
+  * Used for **large datasets** or when **network constraints** prevent online transfer
+  * Microsoft ships **SSDs** to you
+  * You copy data locally and return disks for upload to Blob Storage
+
+**Key Facts to Remember**
+
+* **Three blob types**: block blob, append blob, page blob
+* **Default blob type**: block blob
+* **Maximum size**: page blobs support up to **8 TB**
+* **Blob type is immutable** after creation
+* **Portal** is best for few files; **tools** are recommended for large-scale transfers
+
+---
+
+## Determine Blob Storage pricing
+
+[Module Reference](https://learn.microsoft.com/training/modules/configure-blob-storage/)
+
+**Cost drivers for block blob storage**
+
+* Primary tool for estimating costs: **Azure pricing calculator**
+
+  * Can calculate **migration**, **monthly estimates**, and **future pricing estimates** based on workload-driven input you specify
+* Block blob storage cost depends on:
+
+  * **Volume of data stored per month**
+  * **Quantity and types of operations performed**, plus any **data transfer costs**
+  * **Data redundancy option selected**
+
+**Things to know about pricing for Blob Storage**
+
+* **Performance tiers**
+
+  * The Blob Storage tier determines amount of data stored and the cost for storing that data
+  * As the performance tier gets **cooler**, **per-gigabyte cost decreases**
+* **Data access costs**
+
+  * Data access charges increase as the tier gets **cooler**
+  * For data in **Cool** and **Archive** tiers, you’re billed a **per-gigabyte data access charge for reads**
+* **Transaction costs**
+
+  * There’s a **per-transaction charge for all tiers**
+  * The charge increases as the tier gets **cooler**
+* **Geo-replication data transfer costs**
+
+  * Applies only when geo-replication is configured (including **GRS** and **RA-GRS**)
+  * Geo-replication data transfer incurs a **per-gigabyte** charge
+* **Outbound data transfer costs**
+
+  * Outbound data transfers incur billing for bandwidth usage on a **per-gigabyte** basis
+  * Billing is consistent with general-purpose Azure storage accounts
+* **Changes to the storage tier**
+
+  * Change account storage tier **Cool → Hot**: charge equal to **reading all data** existing in the storage account
+  * Change account storage tier **Hot → Cool**: charge equal to **writing all data** into the Cool tier (**GPv2 accounts only**)
+
+**Key Facts to Remember**
+
+* **Azure pricing calculator** is the primary tool to estimate Blob Storage costs (migration, monthly, future estimates).
+* Block blob costs are driven by **stored data volume**, **operations + data transfers**, and **redundancy option**.
+* As tiers get **cooler**: **storage cost/GB decreases**, but **data access** and **transaction charges increase**.
+* **Cool/Archive**: billed **per-GB read access** charge.
+* **GRS/RA-GRS**: geo-replication transfer billed **per-GB**.
+* Tier changes can trigger full-data read/write charges (**Cool→Hot = read all**; **Hot→Cool = write all**, **GPv2 only**).
 
 ---
