@@ -8,6 +8,10 @@
 * [Determine replication strategies](#determine-replication-strategies)
 * [Access storage](#access-storage)
 * [Secure storage endpoints](#secure-storage-endpoints)
+* [Implement Azure Blob Storage](#implement-azure-blob-storage)
+* [Create blob containers](#create-blob-containers)
+* [Assign blob access tiers](#assign-blob-access-tiers)
+* [Add blob lifecycle management rules](#add-blob-lifecycle-management-rules)
 
 
 ---
@@ -557,5 +561,276 @@
 * **Service endpoints** provide the base URL for all Azure Storage services.
 * **Region alignment is required** between storage accounts and allowed virtual networks.
 * **Testing access** after configuration is required to verify security behavior.
+
+---
+
+## Implement Azure Blob Storage
+
+[Module Reference](https://learn.microsoft.com/training/modules/configure-azure-blob-storage/)
+
+**Overview**
+
+* **Azure Blob Storage** stores **unstructured data** in the cloud as objects (blobs)
+* Blob = **Binary Large Object**
+* Also referred to as **object storage** or **container storage**
+* Supports **text and binary data** (documents, images, videos, application installers)
+
+
+**Blob Storage Architecture**
+
+* Blob Storage uses **three core resources**:
+
+  * **Azure storage account**
+  * **Containers** within the storage account
+  * **Blobs** stored inside containers
+
+<img src='.img/2026-01-22-03-07-48.png' width=500>
+
+**Configuration Areas When Implementing Blob Storage**
+
+* **Blob container options**
+* **Blob types and upload options**
+* **Blob Storage access tiers**
+* **Blob lifecycle rules**
+* **Blob object replication options**
+
+**Common Usage Scenarios**
+
+* **Browser uploads**
+
+  * Serve images or documents directly to a browser
+* **Distributed access**
+
+  * Store files for use across distributed systems (for example, installers)
+* **Streaming data**
+
+  * Stream video and audio content
+* **Archiving and recovery**
+
+  * Backup, restore, disaster recovery, and long-term archiving
+* **Application access**
+
+  * Store data for analysis by on-premises or Azure-hosted services
+
+**Key Facts to Remember**
+
+* Blob Storage is designed for **unstructured data**
+* Data is organized as **storage account → container → blob**
+* Multiple configuration options affect **cost, access, and lifecycle management**
+* Suitable for **web, streaming, backup, and analytics workloads**
+
+---
+
+## Create blob containers
+
+[Module Reference](https://learn.microsoft.com/training/modules/configure-azure-blob-storage/)
+
+**Containers and Blobs Overview**
+
+* **All blobs must be stored in a container**
+* **Blobs cannot exist independently** in Azure Blob Storage
+* **Containers organize blob storage** within a storage account
+* A **container can store an unlimited number of blobs**
+* An **Azure storage account can contain an unlimited number of containers**
+* You **must create a container before uploading any blobs**
+
+**Container Configuration**
+
+* **Name**
+
+  * Must be **unique within the storage account**
+  * Allowed characters: **lowercase letters, numbers, hyphens**
+  * Must **begin with a letter or number**
+  * **Minimum length**: 3 characters
+  * **Maximum length**: 63 characters
+
+* **Public Access Level**
+
+  * Determines whether the container and/or blobs are publicly accessible
+  * **Private (Default)**
+
+    * No anonymous access to the container or blobs
+  * **Blob**
+
+    * Allows anonymous **read access to blobs only**
+  * **Container**
+
+    * Allows anonymous **read and list access to the container and all blobs**
+
+<img src='.img/2026-01-22-03-12-30.png' width=700> 
+
+**Key Facts to Remember**
+
+* **Blobs require containers** — no exceptions
+* **Unlimited containers per storage account**
+* **Unlimited blobs per container**
+* **Default access level is Private**
+* **Container naming rules are strict and enforced**
+* **Public access level applies to anonymous users only**
+
+---
+
+## Assign blob access tiers
+
+[Module Reference](https://learn.microsoft.com/training/modules/configure-azure-blob-storage/assign-blob-access-tiers)
+
+**Overview**
+
+* Azure Blob Storage supports four access tiers: **Hot**, **Cool**, **Cold**, and **Archive**
+* Each tier is optimized for a specific data access pattern and cost profile
+
+**Hot tier**
+
+* Optimized for **frequent reads and writes**
+* Intended for **actively used or processed data**
+* **Highest storage costs**
+* **Lowest access costs**
+* Online tier with immediate access
+
+**Cool tier**
+
+* Optimized for **infrequently accessed data**
+* Data should remain for **at least 30 days**
+* Common use cases:
+
+  * Short-term backup
+  * Disaster recovery datasets
+  * Older media content
+* **Lower storage costs** than Hot
+* **Higher access costs** than Hot
+* Data is **immediately available**
+
+**Cold tier**
+
+* Optimized for **very infrequently accessed data**
+* Data should remain for **at least 90 days**
+* **Lower storage costs** than Cool
+* **Higher access costs** than Cool
+* Data is **immediately available**
+
+**Archive tier**
+
+* **Offline tier** with **hours of retrieval latency**
+* Data must remain for **at least 180 days** or incur **early deletion charges**
+* Common use cases:
+
+  * Secondary backups
+  * Original raw data
+  * Compliance and legal retention data
+* **Lowest storage costs**
+* **Highest access costs**
+* Blob content **cannot be read or modified directly**
+* Metadata and index tags **are accessible**
+* Accessing data requires **rehydration** to Hot, Cool, or Cold tier
+
+**Rehydration**
+
+* Required to access Archive tier blob content
+* Performed by changing the blob’s tier to:
+
+  * Hot
+  * Cool
+  * Cold
+* Retrieval can take **several hours**
+
+**Access tier comparison**
+
+| Feature                          | Hot          | Cool         | Cold         | Archive  |
+| -------------------------------- | ------------ | ------------ | ------------ | -------- |
+| **Availability**                 | 99.9%        | 99%          | 99%          | 99%      |
+| **Availability (RA-GRS reads)**  | 99.99%       | 99.9%        | 99.9%        | 99.9%    |
+| **Latency (time to first byte)** | Milliseconds | Milliseconds | Milliseconds | Hours    |
+| **Minimum storage duration**     | N/A          | 30 days      | 90 days      | 180 days |
+
+**Key Facts to Remember**
+
+* **Hot** = frequent access, highest storage cost
+* **Cool** = infrequent access, 30-day minimum
+* **Cold** = very infrequent access, 90-day minimum
+* **Archive** = offline, hours of latency, 180-day minimum
+* Archive blobs require **rehydration** before content access
+* Storage cost decreases and access cost increases as you move from Hot → Archive
+
+---
+
+## Add blob lifecycle management rules
+
+[Module Reference](https://learn.microsoft.com/training/modules/configure-azure-blob-storage/add-blob-lifecycle-management-rules)
+
+**Overview**
+
+* **Azure Blob Storage** supports **lifecycle management** for datasets with changing access patterns over time.
+* Lifecycle management uses **rule-based policies** to:
+
+  * Transition data between access tiers.
+  * Expire and delete data at the end of its lifecycle.
+* Supported for **GPv2** and **Blob Storage** accounts.
+
+**Things to Know About Lifecycle Management**
+
+* Lifecycle policy rules can:
+
+  * Transition blobs to cooler tiers:
+
+    * **Hot → Cool**
+    * **Hot → Archive**
+    * **Cool → Archive**
+  * Delete:
+
+    * Current versions of blobs
+    * Previous versions of blobs
+    * Blob snapshots
+* Rules can be scoped to:
+
+  * An entire storage account
+  * Specific containers
+  * A subset of blobs using **name prefixes** or **blob index tags**
+
+**Business Scenario Example**
+
+* **Early lifecycle**: Data frequently accessed → **Hot tier**
+* **After ~2 weeks**: Occasional access → **Cool tier**
+* **After ~1 month**: Rarely accessed → **Archive tier**
+* Lifecycle management rules automate these tier transitions based on data age.
+
+**Configure Lifecycle Management Policy Rules**
+
+* Rules are created in the **Azure portal** for a storage account.
+* Each rule consists of an **If–Then** structure.
+
+<img src='.img/2026-01-22-03-16-08.png' width=500> 
+
+**If Clause (Evaluation Condition)**
+
+* Determines when the rule is applied.
+* Evaluates data based on:
+
+  * **Access time** or **modification time**
+* **More than (days ago)**:
+
+  * Specifies the number of days used in the evaluation condition.
+
+**Then Clause (Action Condition)**
+
+* Executes when the If clause evaluates to true.
+* Available actions:
+
+  * **Move to cool storage** – transitions blob to **Cool tier**
+  * **Move to cold storage** – transitions blob to **Cold tier**
+  * **Move to archive storage** – transitions blob to **Archive tier**
+  * **Delete the blob** – permanently deletes the blob
+
+**Design Considerations**
+
+* Align tier transitions with the **age of data**.
+* Use lifecycle rules to minimize storage cost while maintaining required performance.
+
+**Key Facts to Remember**
+
+* Lifecycle management is **rule-based** and automated.
+* Supports **tier transitions** and **data deletion**.
+* Rules use **If–Then** logic based on time since access or modification.
+* Can target entire accounts, containers, or filtered blob subsets.
+* Optimizes cost by matching storage tiers to data usage patterns.
 
 ---
