@@ -23,6 +23,7 @@
 * [Apply Azure Storage security best practices](#apply-azure-storage-security-best-practices)
 * [Compare storage for file shares and blob data](#compare-storage-for-file-shares-and-blob-data)
 * [Manage Azure file shares](#manage-azure-file-shares)
+* [Create file share snapshots](#create-file-share-snapshots)
 
 
 ---
@@ -1718,5 +1719,59 @@
 * **SAS tokens for Azure Files are REST-only**
 * **SMB traffic uses port 445**
 * **File shares (preview) do not require storage accounts**
+
+---
+
+## Create file share snapshots
+
+[Module Reference](https://learn.microsoft.com/training/modules/configure-azure-files/)
+
+**Overview**
+
+* Azure Files supports **file share snapshots** that capture a **point-in-time, read-only copy** of a file share.
+* Snapshots operate at the **file share level**, not at the individual storage account level.
+
+<img src='.img/2026-01-22-04-18-16.png' width=500>
+
+**Characteristics of File Share Snapshots**
+
+* **Share-level capability**: Snapshots apply to an entire Azure file share.
+* **Incremental snapshots**:
+
+  * Only data changed since the **most recent snapshot** is stored.
+  * Reduces **snapshot creation time** and **storage costs**.
+* **Restore efficiency**:
+
+  * Despite being incremental, you only need the **most recent snapshot** to restore the share.
+* **Granular recovery**:
+
+  * Individual files can be restored from a share snapshot.
+  * Avoids restoring the entire file share when only a single file is needed.
+* **Deletion behavior**:
+
+  * Deleting a file share **also deletes all associated snapshots**.
+
+**Benefits of Using File Share Snapshots**
+
+* **Protection against application errors and data corruption**
+
+  * Useful before deploying new application code.
+  * Enables rollback to a previous state if a deployment introduces bugs or data corruption.
+* **Protection against accidental deletions or unintended changes**
+
+  * Allows recovery of files that were deleted, renamed, or overwritten.
+  * Provides access to previous versions after changes are committed.
+* **Backup and recovery support**
+
+  * Periodic snapshots can serve as **data backups**.
+  * Supports **audit requirements** and **disaster recovery** scenarios by retaining historical versions of data.
+
+**Key Facts to Remember**
+
+* Snapshots are **read-only** and **point-in-time**.
+* Snapshots are **incremental**, saving only changed data.
+* **Most recent snapshot** is sufficient for restoration.
+* **Individual file restore** is supported.
+* Deleting a file share **removes all snapshots**.
 
 ---
