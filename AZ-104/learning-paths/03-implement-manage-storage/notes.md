@@ -20,6 +20,7 @@
 * [Identify URI and SAS parameters](#identify-uri-and-sas-parameters)
 * [Determine Azure Storage encryption](#determine-azure-storage-encryption)
 * [Create customer-managed keys](#create-customer-managed-keys)
+* [Apply Azure Storage security best practices](#apply-azure-storage-security-best-practices)
 
 
 ---
@@ -1492,5 +1493,69 @@
 * **Storage account and key vault must be in the same region**
 * Keys can be **audited, rotated, disabled, and access-controlled**
 * Configuration is performed through the **Azure portal**
+
+---
+
+## Apply Azure Storage security best practices
+
+[Module Reference](https://learn.microsoft.com/en-us/training/modules/configure-storage-security/7-apply-best-practices)
+
+**Storage Insights Overview**
+
+* **Storage Insights** provides comprehensive monitoring for **Azure Storage accounts**
+* Delivers a **unified view** of storage **performance, capacity, and availability**
+
+<img src='.img/2026-01-22-04-02-19.png' width=700>
+
+**Benefits of Storage Insights**
+
+* **Detailed Metrics and Logs**
+
+  * Provides metrics, logs, and diagnostic data
+  * Enables monitoring of key KPIs:
+
+    * **Latency**
+    * **Throughput**
+    * **Capacity utilization**
+    * **Transactions**
+* **Enhanced Security and Compliance**
+
+  * Delivers actionable insights and alerts
+  * Helps quickly identify and resolve **security issues**
+* **Role-Based Access Control (RBAC) Integration**
+
+  * Integrates with:
+
+    * **Role-based access control (RBAC)**
+    * **Microsoft Entra ID**
+    * **Connection strings**
+    * **Access control lists (ACLs)**
+  * Ensures secure access to storage data and resources
+* **Unified View**
+
+  * Centralized visibility across Azure Storage services
+  * Supports secure and efficient storage account management
+
+**Security Uses for Storage Insights**
+
+* **Real-Time Monitoring**
+
+  * Tracks usage trends and performance
+  * Supports alerting for **anomalies**
+* **Security Auditing**
+
+  * Provides detailed logs for auditing
+  * Supports **compliance** and security investigations
+* **Health Analysis and Optimization**
+
+  * Assists with storage account health analysis
+  * Helps maintain **secure and optimal performance**
+
+**Key Facts to Remember**
+
+* **Storage Insights** focuses on monitoring **performance, capacity, availability, and security**
+* Supports **real-time monitoring**, **security auditing**, and **health optimization**
+* Integrates with **RBAC**, **Microsoft Entra ID**, connection strings, and **ACLs**
+* Provides a **single, unified view** of Azure Storage services
 
 ---
