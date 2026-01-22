@@ -17,6 +17,8 @@
 * [Determine Blob Storage pricing](#determine-blob-storage-pricing)
 * [Review Azure Storage security strategies](#review-azure-storage-security-strategies)
 * [Create shared access signatures](#create-shared-access-signatures)
+* [Identify URI and SAS parameters](#identify-uri-and-sas-parameters)
+* [Determine Azure Storage encryption](#determine-azure-storage-encryption)
 
 
 ---
@@ -1244,5 +1246,188 @@
 * **Stored access policies** enable revocation without key regeneration.
 * **Clock skew** can affect SAS validity by up to **15 minutes**.
 * **Older REST API versions** limit SAS duration to **1 hour** without a stored access policy.
+
+---
+
+## Identify URI and SAS parameters
+
+[Module Reference](https://learn.microsoft.com/training/modules/configure-azure-storage-security/)
+
+**Overview**
+
+* A **shared access signature (SAS)** creates a **URI** composed of:
+
+  * The **Azure Storage resource URI**
+  * A **SAS token** made up of parameters and values
+* SAS URIs control **scope**, **permissions**, and **access constraints** to Azure Storage resources
+
+**Example SAS URI**
+
+* Service-level SAS granting **read** and **write** permissions to a blob:
+
+  ```
+  https://myaccount.blob.core.windows.net/?restype=service&comp=properties&sv=2015-04-05&ss=bf&st=2015-04-29T22%3A18%3A26Z&se=2015-04-30T02%3A23%3A26Z&sr=b&sp=rw&sip=168.1.5.60-168.1.5.70&spr=https&sig=...
+  ```
+
+**URI and SAS Parameters**
+
+* **Resource URI**
+
+  * Defines the Azure Storage endpoint and request context
+  * Example indicates:
+
+    * Blob Storage endpoint
+    * Service-level operations (`restype=service`)
+    * Storage properties operations (`comp=properties`)
+  * Behavior:
+
+    * `GET` → retrieves storage properties
+    * `SET` → configures storage properties
+
+* **Storage version (`sv`)**
+
+  * Indicates the Azure Storage API version to use
+  * Applies to versions **2012-02-12 and later**
+  * Example: `2015-04-05`
+
+* **Storage service (`ss`)**
+
+  * Specifies which Azure Storage services the SAS applies to
+  * Example: `bf` = Blob Storage and Azure Files
+
+* **Start time (`st`)**
+
+  * *(Optional)*
+  * Specifies when the SAS becomes valid (UTC)
+  * If omitted, the SAS is valid immediately
+
+* **Expiry time (`se`)**
+
+  * Required
+  * Specifies when the SAS expires (UTC)
+
+* **Resource (`sr`)**
+
+  * Defines the resource type accessible via the SAS
+  * Example: `b` = Blob resource
+
+* **Permissions (`sp`)**
+
+  * Lists allowed operations
+  * Example: `rw` = read and write permissions
+
+* **IP range (`sip`)**
+
+  * Restricts access to a specific IP address range
+  * Example: `168.1.5.60–168.1.5.70`
+
+* **Protocol (`spr`)**
+
+  * Restricts which protocols can be used
+  * Example: `https` = HTTPS only
+
+* **Signature (`sig`)**
+
+  * Authenticates access using **HMAC**
+  * Computed with:
+
+    * A storage account key
+    * **SHA256** hashing algorithm
+    * **Base64** encoding
+
+**Key Facts to Remember**
+
+* A SAS URI = **resource URI + SAS token**
+* **Start time is optional**; omit it for immediate validity
+* **Expiry time is required**
+* **Permissions, resource scope, protocol, and IP range** are enforced by SAS parameters
+* The **signature (`sig`)** secures the SAS using **HMAC with SHA256**
+* Service-level SAS can control **storage service operations**, not just individual objects
+
+---
+
+## Determine Azure Storage encryption
+
+[Module Reference](https://learn.microsoft.com/training/modules/configure-azure-storage-security/)
+
+**Azure Storage Encryption Overview**
+
+* **Encryption at rest** protects data to meet organizational security and compliance requirements.
+* **Encryption and decryption are automatic** and require **no code or application changes**.
+* Data is **secured by default** for all Azure Storage accounts.
+
+**Storage Account Access Keys**
+
+* When a storage account is created, Azure generates **two 512-bit storage account access keys**.
+* These keys are used for:
+
+  * **Shared Key authorization**
+  * **Shared Access Signature (SAS) tokens** signed with the shared key
+* **Microsoft recommendation**:
+
+  * Use **Azure Key Vault** to manage access keys.
+  * **Regularly rotate and regenerate keys**.
+  * Key Vault enables **key rotation without application interruption**.
+  * Keys can also be **manually rotated**.
+
+**Things to Know About Azure Storage Encryption**
+
+* Data is **automatically encrypted before being written** to storage.
+* Data is **automatically decrypted when retrieved**.
+* Encryption, decryption, and key management are **transparent to users**.
+* All data is encrypted using **256-bit Advanced Encryption Standard (AES)**.
+* Encryption is **enabled for all new and existing storage accounts**.
+* Encryption **cannot be disabled**.
+
+**Configure Azure Storage Encryption**
+
+* Encryption is configured in the **Azure portal** by specifying the **encryption type**.
+* You can choose:
+
+  * **Microsoft-managed keys**
+  * **Customer-managed keys**
+
+<img src='.img/2026-01-22-03-55-26.png' width=700>
+
+**Infrastructure Encryption**
+
+* Can be enabled:
+
+  * For the **entire storage account**
+  * For an **encryption scope** within an account
+* When enabled:
+
+  * Data is **encrypted twice**:
+
+    * Once at the **service level**
+    * Once at the **infrastructure level**
+  * Uses **two different encryption algorithms**
+  * Uses **two different keys**
+
+**Platform-Managed Keys (PMK)**
+
+* Keys are **generated, stored, and managed entirely by Azure**.
+* Customers **do not interact** with these keys.
+* PMKs are the **default** for Azure Data Encryption-at-Rest.
+
+**Customer-Managed Keys (CMK)**
+
+* Keys are **read, created, deleted, updated, or administered by customers**.
+* Keys are stored in:
+
+  * A **customer-owned key vault**
+  * A **hardware security module (HSM)**
+* **Bring Your Own Key (BYOK)**:
+
+  * A CMK scenario where customers **import keys from an external location**.
+
+**Key Facts to Remember**
+
+* **Encryption standard**: 256-bit AES
+* **Encryption status**: Enabled by default and cannot be disabled
+* **Access keys**: Two 512-bit keys per storage account
+* **Infrastructure encryption**: Encrypts data twice with different keys and algorithms
+* **PMK vs CMK**: PMKs are Azure-managed; CMKs are customer-managed
+* **Recommended key management**: Azure Key Vault
 
 ---
