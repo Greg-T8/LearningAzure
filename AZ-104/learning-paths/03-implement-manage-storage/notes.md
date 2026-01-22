@@ -21,6 +21,7 @@
 * [Determine Azure Storage encryption](#determine-azure-storage-encryption)
 * [Create customer-managed keys](#create-customer-managed-keys)
 * [Apply Azure Storage security best practices](#apply-azure-storage-security-best-practices)
+* [Compare storage for file shares and blob data](#compare-storage-for-file-shares-and-blob-data)
 
 
 ---
@@ -32,7 +33,7 @@
 |---|--------|--------|-------|
 | 1 | [Configure storage accounts](https://learn.microsoft.com/en-us/training/modules/configure-storage-accounts/) | ✅ | 1/21/26 |
 | 2 | [Configure Azure Blob Storage](https://learn.microsoft.com/en-us/training/modules/configure-blob-storage/) | ✅ | 1/22/26|
-| 3 | [Configure Azure Storage security](https://learn.microsoft.com/en-us/training/modules/configure-storage-security/) | 🕒 | |
+| 3 | [Configure Azure Storage security](https://learn.microsoft.com/en-us/training/modules/configure-storage-security/) | ✅ | 1/22/26|
 | 4 | [Configure Azure Files](https://learn.microsoft.com/en-us/training/modules/configure-azure-files-file-sync/) | 🕒 | |
 
 **Legend:** 🕒 Not Started | 🚧 In Progress | ✅ Complete
@@ -1557,5 +1558,79 @@
 * Supports **real-time monitoring**, **security auditing**, and **health optimization**
 * Integrates with **RBAC**, **Microsoft Entra ID**, connection strings, and **ACLs**
 * Provides a **single, unified view** of Azure Storage services
+
+---
+
+## Compare storage for file shares and blob data
+
+[Module Reference](https://learn.microsoft.com/training/modules/compare-storage-file-shares-blob-data/)
+
+**Azure Files Overview**
+
+* **Fully managed file shares** provided as a PaaS service
+* Accessible using **SMB**, **NFS**, and **HTTP** protocols
+* Supported clients: **Windows**, **Linux**, and **macOS**
+
+**Key Characteristics of Azure Files**
+
+* **Serverless deployment**
+
+  * No virtual machines, operating systems, or patching required
+* **Storage limits**
+
+  * Up to **100 TiB** per file share
+  * Up to **4 TiB** per file
+  * Uses a **hierarchical folder structure**
+* **Data encryption**
+
+  * Encrypted **at rest** in Azure datacenters
+  * Encrypted **in transit** over the network
+* **Access from anywhere**
+
+  * Internet-accessible by default
+* **Identity integration**
+
+  * Access controlled using **Microsoft Entra identities** or **AD DS identities synced to Microsoft Entra ID**
+  * Provides a familiar experience similar to on-premises file servers
+* **Previous versions and backups**
+
+  * Supports **file share snapshots**
+  * Integrates with **Previous Versions** in File Explorer
+  * Supports **Azure Backup**
+* **Data redundancy**
+
+  * Data is replicated within a datacenter or across multiple datacenters
+  * Controlled by the **storage account replication setting**
+
+**Common Azure Files Use Cases**
+
+* Replace or supplement **on-premises file servers or NAS**
+* Enable **global access** to file shares across operating systems
+* **Lift-and-shift applications** that depend on file system APIs
+* Use **Azure File Sync** to replicate shares to Windows Servers for local performance and caching
+* Store **shared application configuration files**
+* Centralize **diagnostic data** (logs, metrics, crash dumps)
+* Store **tools and utilities** used across Azure VMs or cloud services
+
+**Azure Files vs. Azure Blob Storage**
+
+| Feature / Scenario | Azure Files (File Shares)                            | Azure Blob Storage (Blobs)             |
+| ------------------ | ---------------------------------------------------- | -------------------------------------- |
+| Access model       | SMB, NFS, REST                                       | REST and client libraries              |
+| Data structure     | **True directories** with hierarchical structure     | **Flat namespace**                     |
+| Data access        | Accessed through **file shares** across multiple VMs | Accessed through **containers**        |
+| Ideal workloads    | Lift-and-shift apps using file system APIs           | Massive-scale unstructured data        |
+| Sharing model      | Shared files across applications and VMs             | Data accessed by applications directly |
+| Typical use cases  | Shared tools, debugging, app settings                | Streaming and random-access scenarios  |
+| Global access      | Optimized for shared file access                     | Optimized for application data access  |
+
+**Key Facts to Remember**
+
+* **Azure Files max share size**: 100 TiB
+* **Azure Files max file size**: 4 TiB
+* **Azure Files supports**: SMB, NFS, HTTP
+* **Azure Blob Storage uses**: flat namespace with containers
+* **Lift-and-shift scenarios favor**: Azure Files
+* **Streaming and large-scale object storage favor**: Azure Blob Storage
 
 ---
