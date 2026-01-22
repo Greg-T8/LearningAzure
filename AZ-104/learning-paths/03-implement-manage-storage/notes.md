@@ -16,6 +16,7 @@
 * [Manage blobs](#manage-blobs)
 * [Determine Blob Storage pricing](#determine-blob-storage-pricing)
 * [Review Azure Storage security strategies](#review-azure-storage-security-strategies)
+* [Create shared access signatures](#create-shared-access-signatures)
 
 
 ---
@@ -1127,5 +1128,121 @@
 * **Microsoft Entra ID with managed identities** is the recommended authorization method.
 * **RBAC** controls who can access storage resources and at what scope.
 * **SAS** provides temporary, scoped access without sharing account keys.
+
+---
+
+## Create shared access signatures
+
+[Module Reference](https://learn.microsoft.com/training/modules/configure-azure-storage-security/)
+
+**Shared access signature (SAS) overview**
+
+* A **shared access signature (SAS)** is a **URI** that grants **restricted access** to Azure Storage resources.
+* SAS enables secure sharing **without exposing storage account keys**.
+* A SAS is typically provided to clients that need **temporary read/write access** to storage resources.
+* Access is granted for a **specified period of time** and with **explicit permissions**.
+
+**Types of SAS**
+
+* **User delegation SAS**
+
+  * Secured with **Microsoft Entra credentials**.
+  * Permissions are defined by the SAS.
+  * Supported for:
+
+    * **Blob Storage**
+    * **Data Lake Storage**
+
+* **Account-level SAS**
+
+  * Grants access to:
+
+    * All capabilities of a **service-level SAS**
+    * Additional resources and abilities
+  * Example:
+
+    * Allows the ability to **create file systems**
+
+* **Service-level SAS**
+
+  * Grants access to **specific resources** within a storage account.
+  * Example use cases:
+
+    * Retrieve a **list of files** in a file system
+    * **Download a file**
+
+* **Stored access policy**
+
+  * Used with **service-level SAS**.
+  * Provides:
+
+    * Grouping of SAS tokens
+    * Additional access restrictions
+    * Ability to **revoke permissions without regenerating account keys**
+
+**Recommendations for managing risks**
+
+* **Always use HTTPS**
+
+  * Prevents interception and misuse of SAS tokens.
+  * Mitigates man-in-the-middle attacks.
+
+* **Reference stored access policies where possible**
+
+  * Enables revocation without regenerating storage account keys.
+  * Set storage account key expiration far in the future.
+
+* **Set near-term expiry for unplanned SAS**
+
+  * Limits damage if a SAS is compromised.
+  * Especially important when not using a stored access policy.
+  * Reduces the amount of data that can be written.
+
+* **Require clients to automatically renew SAS**
+
+  * Renew well before expiration.
+  * Allows retry time if the SAS service is unavailable.
+
+* **Plan SAS start and expiry times carefully**
+
+  * Clock skew can cause intermittent failures.
+  * Best practices:
+
+    * Set start time **at least 15 minutes in the past**, or
+    * Omit the start time to make the SAS valid immediately
+  * Up to **15 minutes of clock skew** may occur in either direction.
+  * For REST API versions earlier than **2012-02-12**:
+
+    * Maximum SAS duration without a stored access policy is **1 hour**
+    * Longer durations will fail
+
+* **Define minimum required permissions**
+
+  * Follow least-privilege principles.
+  * Grant only the permissions needed (for example, read-only instead of read/write/delete).
+  * Reduces impact if a SAS is compromised.
+
+* **Validate data written using a SAS**
+
+  * Validate data **after it is written but before it is used**.
+  * Protects against corrupt or malicious data.
+
+* **Don’t assume SAS is always the right choice**
+
+  * For high-risk operations:
+
+    * Use a middle-tier service for validation, authentication, and auditing.
+  * For public access scenarios:
+
+    * Consider making a container **public** instead of issuing SAS tokens.
+
+**Key Facts to Remember**
+
+* **SAS** provides time-bound, permission-scoped access without exposing account keys.
+* **User delegation SAS** uses Microsoft Entra credentials.
+* **Account-level SAS** provides broader permissions than service-level SAS.
+* **Stored access policies** enable revocation without key regeneration.
+* **Clock skew** can affect SAS validity by up to **15 minutes**.
+* **Older REST API versions** limit SAS duration to **1 hour** without a stored access policy.
 
 ---
