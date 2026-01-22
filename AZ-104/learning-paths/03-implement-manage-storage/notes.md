@@ -22,6 +22,7 @@
 * [Create customer-managed keys](#create-customer-managed-keys)
 * [Apply Azure Storage security best practices](#apply-azure-storage-security-best-practices)
 * [Compare storage for file shares and blob data](#compare-storage-for-file-shares-and-blob-data)
+* [Manage Azure file shares](#manage-azure-file-shares)
 
 
 ---
@@ -1632,5 +1633,90 @@
 * **Azure Blob Storage uses**: flat namespace with containers
 * **Lift-and-shift scenarios favor**: Azure Files
 * **Streaming and large-scale object storage favor**: Azure Blob Storage
+
+---
+
+## Manage Azure file shares
+
+[Module Reference]()
+
+**Azure Files Protocol Support**
+
+* Azure Files supports **Server Message Block (SMB)** and **Network File System (NFS)** protocols
+* A single Azure file share supports **either SMB or NFS**, not both
+* SMB and NFS file shares can coexist within the **same storage account**
+
+**Types of Azure File Shares**
+
+* Azure Files supports **two storage tiers**:
+
+  * **Premium**
+  * **Standard**
+
+| Storage tier | Description                                                                                                                                                                                                             |
+| ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Premium**  | Stores data on **SSDs**; available only in **FileStorage** storage accounts; provides **consistent high performance and low latency**; supports **LRS** and **ZRS (in some regions)**; **not available in all regions** |
+| **Standard** | Stores data on **HDDs**; deployed in **GPv2** storage accounts; suitable for **general-purpose and dev/test workloads**; supports **LRS, ZRS, GRS, and GZRS**; available in **all Azure regions**                       |
+
+**Authentication Methods**
+
+* Azure Files supports **three authentication methods**:
+
+  * **Identity-based authentication over SMB**
+
+    * Provides **single sign-on (SSO)** similar to on-premises file shares
+  * **Access key**
+
+    * Storage accounts have **two static access keys**
+    * Provide **full control access**
+    * **Bypass all access control restrictions**
+    * Best practice is to **avoid sharing access keys**
+  * **Shared Access Signature (SAS) token**
+
+    * Dynamically generated **URI**
+    * Provides **restricted access** based on:
+
+      * Permissions
+      * Start and expiry time
+      * Allowed IP addresses
+      * Allowed protocols
+    * With Azure Files, SAS is used **only for REST API access from code**
+
+**Creating SMB Azure File Shares (Classic)**
+
+* Classic Azure file shares:
+
+  * Exist **inside a storage account**
+  * Follow the **limits of the storage account**
+* Storage options:
+
+  * **SSD (Premium)** – low latency, single-digit milliseconds
+  * **HDD (Standard)** – cost-effective, general-purpose
+* SMB file shares allow selection of access tiers:
+
+  * **Transaction optimized**
+  * **Hot**
+  * **Cool**
+
+<img src='.img/2026-01-22-04-11-10.png' width=500>
+
+* SMB connectivity:
+
+  * Uses **port 445**
+  * Azure provides **ready-to-use scripts** for Windows and Linux
+
+**Important Notes**
+
+* **File shares (preview)** are a new **top-level Azure resource**
+* File shares (preview) **do not require a storage account**
+
+**Key Facts to Remember**
+
+* **SMB and NFS cannot be used on the same file share**
+* **Premium = SSD + FileStorage account**
+* **Standard = HDD + GPv2 account**
+* **SAS tokens for Azure Files are REST-only**
+* **SMB traffic uses port 445**
+* **File shares (preview) do not require storage accounts**
 
 ---
