@@ -19,6 +19,7 @@
 * [Create shared access signatures](#create-shared-access-signatures)
 * [Identify URI and SAS parameters](#identify-uri-and-sas-parameters)
 * [Determine Azure Storage encryption](#determine-azure-storage-encryption)
+* [Create customer-managed keys](#create-customer-managed-keys)
 
 
 ---
@@ -1429,5 +1430,67 @@
 * **Infrastructure encryption**: Encrypts data twice with different keys and algorithms
 * **PMK vs CMK**: PMKs are Azure-managed; CMKs are customer-managed
 * **Recommended key management**: Azure Key Vault
+
+---
+
+## Create customer-managed keys
+
+[Module Reference]()
+
+**Overview**
+
+* Azure Storage supports **customer-managed keys (CMK)** for encryption by integrating with **Azure Key Vault**
+* Encryption keys can be:
+
+  * Generated using **Azure Key Vault APIs**
+  * Created externally and stored in a key vault
+
+**Things to know about customer-managed keys**
+
+* **Customer-managed keys** provide:
+
+  * Greater flexibility
+  * More direct control over encryption
+* You can:
+
+  * **Create**
+  * **Disable**
+  * **Audit**
+  * **Rotate**
+  * **Define access controls** for keys
+* Customer-managed keys can be used with **Azure Storage encryption**
+* You can use:
+
+  * A **new key**, or
+  * An **existing key vault and key**
+* **Region requirement**:
+
+  * The **storage account** and **key vault** must be in the **same region**
+  * They **can be in different subscriptions**
+
+**Configure customer-managed keys**
+
+* Configuration is done in the **Azure portal**
+* Key management options:
+
+  * **Microsoft-managed keys**
+  * **Customer-managed keys**
+* When configuring encryption:
+
+  * **Encryption type**: Select whether keys are managed by Microsoft or by the customer
+  * **Encryption key**:
+
+    * Enter a **key URI**, or
+    * Select a key from an **existing Azure Key Vault**
+
+<img src='.img/2026-01-22-04-00-08.png' width=700>
+
+**Key Facts to Remember**
+
+* **Customer-managed keys** increase control over encryption and key lifecycle
+* **Azure Key Vault** is required for managing customer-managed keys
+* **Storage account and key vault must be in the same region**
+* Keys can be **audited, rotated, disabled, and access-controlled**
+* Configuration is performed through the **Azure portal**
 
 ---
