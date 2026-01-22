@@ -15,6 +15,7 @@
 * [Determine blob object replication](#determine-blob-object-replication)
 * [Manage blobs](#manage-blobs)
 * [Determine Blob Storage pricing](#determine-blob-storage-pricing)
+* [Review Azure Storage security strategies](#review-azure-storage-security-strategies)
 
 
 ---
@@ -1034,5 +1035,97 @@
 * **Cool/Archive**: billed **per-GB read access** charge.
 * **GRS/RA-GRS**: geo-replication transfer billed **per-GB**.
 * Tier changes can trigger full-data read/write charges (**Cool→Hot = read all**; **Hot→Cool = write all**, **GPv2 only**).
+
+---
+
+## Review Azure Storage security strategies
+
+[Module Reference](https://learn.microsoft.com/training/modules/configure-azure-storage-security/)
+
+**Azure Storage Security Overview**
+
+* Azure Storage provides security capabilities aligned to common strategies:
+
+  * **Encryption**
+  * **Authentication**
+  * **Authorization**
+  * **User access control**
+* Designed to support **defense in depth** by layering multiple security controls.
+
+<img src='.img/2026-01-22-03-46-34.png' width=700>
+
+**Encryption at Rest**
+
+* **Storage Service Encryption (SSE)** encrypts all data written to Azure Storage.
+* Uses **256-bit Advanced Encryption Standard (AES)**.
+* Data is automatically decrypted when read.
+* No additional cost and no performance degradation.
+* Includes encryption of **virtual hard disks (VHDs)**:
+
+  * **BitLocker** for Windows images
+  * **dm-crypt** for Linux images
+
+**Encryption in Transit**
+
+* Secure data using **transport-level security**.
+* Always use **HTTPS** for public internet communication.
+* You can enforce HTTPS by enabling **secure transfer required** on the storage account.
+* After enabling secure transfer:
+
+  * **HTTP connections are refused**
+  * **SMB requires SMB 3.0** for all file share mounts
+
+**Encryption Models**
+
+* Supported encryption options include:
+
+  * **Server-side encryption with service-managed keys**
+  * **Server-side encryption with customer-managed keys in Key Vault**
+  * **Customer-managed keys on customer-controlled hardware**
+* **Client-side encryption** allows keys to be managed on-premises or in another secure location.
+
+**Authorization Recommendations**
+
+* Microsoft recommends using **Microsoft Entra ID with managed identities** to authorize access to:
+
+  * **Blob data**
+  * **Queue data**
+  * **Table data**
+* Provides better security and usability than **Shared Key authorization**.
+
+**Role-Based Access Control (RBAC)**
+
+* Controls access to storage account resources.
+* Ensures access is granted only to:
+
+  * Approved users or applications
+  * The appropriate scope
+* RBAC roles are assigned at the **storage account scope**.
+
+**Storage Analytics**
+
+* **Azure Storage Analytics** provides logging for storage accounts.
+* Enables:
+
+  * Request tracing
+  * Usage trend analysis
+  * Issue diagnosis
+
+**Authorization Strategies**
+
+| Authorization strategy             | Description                                                                                           |
+| ---------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| **Microsoft Entra ID**             | Cloud-based identity and access management with fine-grained RBAC for users, groups, and applications |
+| **Shared Key**                     | Uses storage account access keys to generate an encrypted signature in the Authorization header       |
+| **Shared access signatures (SAS)** | Delegates time-limited and permission-scoped access to specific storage resources                     |
+| **Anonymous access**               | Allows public read access to containers or blobs without authorization                                |
+
+**Key Facts to Remember**
+
+* **SSE uses AES-256** and is enabled by default.
+* **Secure transfer required** blocks HTTP and enforces SMB 3.0.
+* **Microsoft Entra ID with managed identities** is the recommended authorization method.
+* **RBAC** controls who can access storage resources and at what scope.
+* **SAS** provides temporary, scoped access without sharing account keys.
 
 ---
