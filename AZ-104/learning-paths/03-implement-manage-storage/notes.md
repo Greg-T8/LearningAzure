@@ -798,8 +798,8 @@
 * Rules are created in the **Azure portal** for a storage account.
 * Each rule consists of an **If–Then** structure.
 
-<img src='.img/2026-01-22-03-16-08.png' width=500> 
-
+<img src='.img/2026-01-22-03-18-40.png' width=700>
+ 
 **If Clause (Evaluation Condition)**
 
 * Determines when the rule is applied.
