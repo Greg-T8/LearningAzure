@@ -12,6 +12,7 @@
 * [Create blob containers](#create-blob-containers)
 * [Assign blob access tiers](#assign-blob-access-tiers)
 * [Add blob lifecycle management rules](#add-blob-lifecycle-management-rules)
+* [Determine blob object replication](#determine-blob-object-replication)
 
 
 ---
@@ -832,5 +833,83 @@
 * Rules use **If–Then** logic based on time since access or modification.
 * Can target entire accounts, containers, or filtered blob subsets.
 * Optimizes cost by matching storage tiers to data usage patterns.
+
+---
+
+## Determine blob object replication
+
+[Module Reference](https://learn.microsoft.com/training/modules/configure-azure-blob-storage/)
+
+**Overview**
+
+* **Object replication** asynchronously copies blobs between containers based on configured policy rules.
+* Replication includes:
+
+  * **Blob content**
+  * **Metadata properties**
+  * **Blob versions**
+
+<img src='.img/2026-01-22-03-19-48.png' width=500>
+
+**Requirements and Limitations**
+
+* **Blob versioning must be enabled** on both the **source** and **destination** storage accounts.
+* Object replication **does not support blob snapshots**.
+
+  * Snapshots in the source account are **not replicated**.
+* Supported storage tiers:
+
+  * **Hot**
+  * **Cool**
+  * **Cold**
+* Source and destination accounts **can use different tiers**.
+
+**Replication Policy Configuration**
+
+* Object replication uses a **replication policy** that defines:
+
+  * **Source storage account**
+  * **Destination storage account**
+* A replication policy includes **one or more rules**.
+
+  * Each rule specifies:
+
+    * A **source container**
+    * A **destination container**
+* The policy determines **which blobs** in the source container are replicated.
+
+<img src='.img/2026-01-22-03-29-11.png' width=700>
+
+**Scenarios and Considerations**
+
+* **Latency reduction**
+
+  * Reduce read latency by allowing clients to access data from a geographically closer region.
+* **Compute workload efficiency**
+
+  * Enable compute workloads in different regions to process the **same blob datasets**.
+* **Data distribution**
+
+  * Process or analyze data in one region and replicate only the **results** to other regions.
+* **Cost optimization**
+
+  * After replication, reduce storage costs by moving data to the **Archive tier** using **lifecycle management policies**.
+
+**Versioning Considerations**
+
+* **Blob versioning** automatically maintains previous versions of blobs.
+* Enables recovery of:
+
+  * **Modified data**
+  * **Deleted data**
+
+**Key Facts to Remember**
+
+* **Blob versioning is required** on both source and destination accounts.
+* **Snapshots are not replicated**.
+* Supported tiers: **Hot, Cool, Cold**.
+* Replication is **asynchronous**.
+* Replication policies define **account pairs, containers, and rules**.
+* Object replication supports **multi-region access, compute scaling, and cost optimization**.
 
 ---
