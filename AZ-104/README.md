@@ -7,10 +7,6 @@
 
 ---
 
-## 🎯 Overview
-
-This repository provides a study path combining official Microsoft resources, video courses, hands-on labs, and practice exams.
-
 ## 📊 Exam Domains
 
 | Domain                     | Weight |
