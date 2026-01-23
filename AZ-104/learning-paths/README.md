@@ -1,6 +1,10 @@
 # Microsoft Learn - AZ-104 Learning Paths
 
 **Objective:** Complete all official Microsoft Learn modules mapped to AZ-104 exam objectives.
+- [AZ-104 Microsoft Learning Path Course Syllabus](https://learn.microsoft.com/en-us/training/courses/az-104t00)
+- [AZ-104 Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104)
+- [Exam Readiness Zone](https://learn.microsoft.com/en-us/shows/exam-readiness-zone/?terms=az-104)
+- [Microsoft Learn Browse](https://learn.microsoft.com/en-us/training/browse/?products=azure&roles=administrator)
 
 ---
 
@@ -15,16 +19,3 @@
 | 5   | [Monitor and back up resources](https://learn.microsoft.com/en-us/training/paths/az-104-monitor-backup-resources/)        | 2       | 🕒    | [notes.md](05-monitor-backup-resources/notes.md)     |           |
 
 **Legend:** 🕒 Not Started | 🚧 In Progress | ✅ Complete
-
----
-
-## Quick Links
-
-- [AZ-104 Microsoft Learning Path Course Syllabus](https://learn.microsoft.com/en-us/training/courses/az-104t00)
-- [AZ-104 Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104)
-- [Exam Readiness Zone](https://learn.microsoft.com/en-us/shows/exam-readiness-zone/?terms=az-104)
-- [Microsoft Learn Browse](https://learn.microsoft.com/en-us/training/browse/?products=azure&roles=administrator)
-
----
-
-*Last updated: 2026-01-14*
