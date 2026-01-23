@@ -6,35 +6,12 @@
 
 ## 📋 Modules
 
-| # | Module | Status | Notes |
+| # | Module | Status | Completed |
 |---|--------|--------|-------|
-| 1 | Configure virtual machines | 🕒 | |
-| 2 | Configure virtual machine availability | 🕒 | |
-| 3 | Configure Azure App Service plans | 🕒 | |
-| 4 | Configure Azure App Service | 🕒 | |
-| 5 | Configure Azure Container Instances | 🕒 | |
-| 6 | Configure Azure Kubernetes Service | 🕒 | |
+| 1 | [Introduction to Azure virtual machines](https://learn.microsoft.com/en-us/training/modules/intro-to-azure-virtual-machines/) | 🕒 | |
+| 2 | [Configure virtual machine availability](https://learn.microsoft.com/en-us/training/modules/configure-virtual-machine-availability/) | 🕒 | |
+| 3 | [Configure Azure App Service plans](https://learn.microsoft.com/en-us/training/modules/configure-app-service-plans/) | 🕒 | |
+| 4 | [Configure Azure App Service](https://learn.microsoft.com/en-us/training/modules/configure-azure-app-services/) | 🕒 | |
+| 5 | [Configure Azure Container Instances](https://learn.microsoft.com/en-us/training/modules/configure-azure-container-instances/) | 🕒 | |
 
 ---
-
-## 🧠 Key Concepts
-
-<!-- Add notes as you complete each module -->
-
----
-
-## 💡 Commands & Snippets
-
-```powershell
-# Add useful commands here
-```
-
----
-
-## ❓ Questions for Review
-
-<!-- Add questions that came up during study -->
-
----
-
-*Last updated: 2026-01-14*
