@@ -1,6 +1,7 @@
 # Microsoft Learn - AZ-104 Learning Paths
 
 **Objective:** Complete all official Microsoft Learn modules mapped to AZ-104 exam objectives.
+
 - [AZ-104 Microsoft Learning Path Course Syllabus](https://learn.microsoft.com/en-us/training/courses/az-104t00)
 - [AZ-104 Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104)
 - [Exam Readiness Zone](https://learn.microsoft.com/en-us/shows/exam-readiness-zone/?terms=az-104)
