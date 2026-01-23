@@ -9,6 +9,8 @@
 * [Back up your virtual machines](#back-up-your-virtual-machines)
 * [Plan for maintenance and downtime](#plan-for-maintenance-and-downtime)
 * [Create availability sets](#create-availability-sets)
+* [Review update domains and fault domains](#review-update-domains-and-fault-domains)
+* [Review availability zones](#review-availability-zones)
 
 ---
 
@@ -911,5 +913,139 @@ New-AzVm `
 * Availability sets improve **infrastructure-level availability**, not application-level resilience.
 * Separate availability sets should be used for **different application tiers**.
 * Load balancing is required to achieve **high availability** across virtual machines.
+
+---
+
+## Review update domains and fault domains
+
+[Module Reference](https://learn.microsoft.com/training/modules/availability-virtual-machines/)
+
+**Azure Virtual Machine Availability Sets**
+
+* Use **update domains** and **fault domains** to provide high availability and fault tolerance
+* Each virtual machine in an availability set is assigned to:
+
+  * **One update domain**
+  * **One fault domain**
+
+**Update Domains**
+
+* An **update domain** is a group of nodes upgraded together during service updates
+* Enables **incremental (rolling) upgrades** across a deployment
+* Characteristics:
+
+  * Contains virtual machines and associated physical hardware
+  * VMs in the same update domain can be **updated and rebooted at the same time**
+  * During **planned maintenance**, only **one update domain** is rebooted at a time
+  * **Default**: **5 update domains** (not user-configurable)
+  * **Maximum configurable**: **Up to 20 update domains**
+
+**Fault Domains**
+
+* A **fault domain** represents a **physical unit of failure**
+* Typically maps to a **single server rack**
+* Characteristics:
+
+  * VMs in the same fault domain share common hardware components
+
+    * Power
+    * Networking switches
+  * Protects against:
+
+    * Hardware failures
+    * Network outages
+    * Power interruptions
+    * Software updates
+  * Uses **two fault domains** to distribute VMs and reduce single points of failure
+
+**Fault Domain Distribution Scenario**
+
+* Two fault domains with two virtual machines each
+* Virtual machines are spread across **different availability sets**
+
+  * **Web availability set**:
+
+    * One VM in fault domain 1
+    * One VM in fault domain 2
+  * **SQL availability set**:
+
+    * One VM in fault domain 1
+    * One VM in fault domain 2
+* Ensures availability even if a single fault domain fails
+
+<img src='.img/2026-01-23-03-42-59.png' width=500>
+
+**Key Facts to Remember**
+
+* **Each VM** in an availability set is placed in **one update domain and one fault domain**
+* **Update domains** control **planned maintenance and upgrades**
+* **Fault domains** protect against **physical infrastructure failures**
+* **Default update domains**: **5**
+* **Maximum update domains**: **20**
+* **Minimum fault domains used**: **2**
+
+---
+
+## Review availability zones
+
+[Module Reference](https://learn.microsoft.com/training/modules/configure-virtual-machine-availability/review-availability-zones)
+
+**Availability Zones Overview**
+
+* Availability zones are a **high-availability offering** that protect applications and data from **datacenter failures**.
+* Applications achieve high availability by:
+
+  * Colocating **compute, storage, networking, and data** resources within a zone
+  * **Replicating resources across other zones**
+* Distributing virtual machines across zones results in:
+
+  * **Three fault domains**
+  * **Three update domains**
+* Azure ensures that virtual machines in different zones are **not updated at the same time**.
+
+**Characteristics of Availability Zones**
+
+* Availability zones are **unique physical locations** within an Azure region.
+* Each zone consists of **one or more datacenters** with:
+
+  * Independent **power**
+  * Independent **cooling**
+  * Independent **networking**
+* Enabled regions have a **minimum of three separate zones**.
+* Physical separation protects applications and data from **datacenter-level failures**.
+* **Zone-redundant services** replicate data and applications across zones to avoid **single points of failure**.
+
+**Availability Zone Service Categories**
+
+* **Zonal services**
+
+  * Resources are **pinned to a specific zone**
+  * Examples:
+
+    * Azure Virtual Machines
+    * Azure managed disks
+    * Standard IP addresses
+
+* **Zone-redundant services**
+
+  * Azure **automatically replicates** resources across all zones
+  * Examples:
+
+    * Zone-redundant Azure Storage
+    * Azure SQL Database
+
+**Architecture Consideration**
+
+* For comprehensive business continuity, combine:
+
+  * **Availability zones**
+  * **Azure regional pairs**
+
+**Key Facts to Remember**
+
+* **Minimum zones per enabled region**: 3
+* **Zonal services** are tied to a specific zone
+* **Zone-redundant services** replicate automatically across zones
+* Availability zones provide protection against **datacenter failures**
 
 ---
