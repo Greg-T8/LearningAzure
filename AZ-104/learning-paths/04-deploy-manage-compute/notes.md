@@ -12,6 +12,8 @@
 * [Review update domains and fault domains](#review-update-domains-and-fault-domains)
 * [Review availability zones](#review-availability-zones)
 * [Compare vertical and horizontal scaling](#compare-vertical-and-horizontal-scaling)
+* [Implement Azure Virtual Machine Scale Sets](#implement-azure-virtual-machine-scale-sets)
+* [Create Virtual Machine Scale Sets](#create-virtual-machine-scale-sets)
 
 ---
 
@@ -1103,5 +1105,116 @@ New-AzVm `
 * Vertical scaling often requires downtime due to restart.
 * Horizontal scaling offers greater flexibility and scale.
 * Robust availability planning must consider **reprovisioning and data persistence**.
+
+---
+
+## Implement Azure Virtual Machine Scale Sets
+
+[Module Reference](https://learn.microsoft.com/en-us/training/modules/configure-virtual-machine-availability/7-implement-scale-sets)
+
+**Overview**
+
+* **Azure Virtual Machine Scale Sets** are an Azure Compute resource used to deploy and manage a set of **identical virtual machines**.
+* Configuring all virtual machines the same way enables **true autoscaling**.
+* Scale sets **automatically increase** VM instances as demand rises and **decrease** instances as demand falls.
+* Virtual machines **do not need to be pre-provisioned**, simplifying large-scale deployments.
+* Suitable for **large-scale services**, **big compute**, **big data**, and **containerized workloads**.
+* Scaling actions can be **manual**, **automated**, or a **combination** of both.
+
+**Availability and Traffic Management**
+
+* All virtual machine instances are created from the **same base operating system image and configuration**.
+* Supports **Azure Load Balancer** for **layer-4 traffic distribution**.
+* Supports **Azure Application Gateway** for **layer-7 traffic distribution** and **TLS/SSL termination**.
+* Applications continue to be accessible if one VM instance fails, improving **availability**.
+
+**Autoscaling Behavior**
+
+* Automatically adjusts the number of virtual machine instances based on **customer demand**.
+* Scaling responds to usage patterns that change throughout the **day or week**.
+
+**Limits and Capacity**
+
+* Supports **up to 1,000 virtual machine instances**.
+* If using **custom virtual machine images**, the limit is **600 virtual machine instances**.
+
+**Key Facts to Remember**
+
+* **Identical configuration** across all VM instances enables simplified management.
+* **Autoscaling** increases and decreases VM count automatically based on demand.
+* **Azure Load Balancer** = layer 4; **Azure Application Gateway** = layer 7 with TLS/SSL.
+* **Maximum instances**: 1,000 (600 with custom images).
+
+---
+
+## Create Virtual Machine Scale Sets
+
+[Module Reference](https://learn.microsoft.com/training/modules/configure-virtual-machine-availability/create-virtual-machine-scale-sets)
+
+**Overview**
+
+* Azure Virtual Machine Scale Sets let you deploy and manage a group of virtual machines as a single resource.
+* You specify the **number of VMs**, **VM size**, and preferences such as **Azure Spot instances**, **managed disks**, and **allocation policies**.
+* Configuration is performed through the **Azure portal**.
+
+<img src='.img/2026-01-23-03-50-09.png' width=500>
+
+**Orchestration Mode**
+
+* **Flexible**
+
+  * You manually create and add virtual machines.
+  * VMs can have **any configuration** within the scale set.
+* **Uniform**
+
+  * You define a **single VM model**.
+  * Azure automatically creates **identical VM instances** based on that model.
+
+**Image**
+
+* Select the **base operating system** or **application image** for the virtual machines.
+
+**VM Architecture**
+
+* **x64**
+
+  * Provides the **highest software compatibility**.
+* **Arm64**
+
+  * Provides **up to 50% better price-performance** compared to similar x64 VMs.
+
+**Size**
+
+* Choose a VM size that matches workload requirements.
+* VM size determines:
+
+  * **CPU**
+  * **Memory**
+  * **Storage capacity**
+* Azure charges **per hour** based on:
+
+  * VM size
+  * Operating system
+
+**Advanced Settings – Spreading Algorithm**
+
+* Determines how VMs are distributed across **fault domains**.
+* **Max spreading**
+
+  * VMs are spread across **as many fault domains as possible** in each zone.
+  * Scale set **successfully deploys** even if fewer than five fault domains exist.
+  * **Recommended by Microsoft**.
+* **Fixed spreading**
+
+  * VMs are spread across **exactly five fault domains**.
+  * Deployment **fails** if fewer than five fault domains are available.
+
+**Key Facts to Remember**
+
+* **Uniform orchestration** creates identical VMs from a single model.
+* **Flexible orchestration** allows mixed VM configurations.
+* **Arm64 VMs** can deliver up to **50% better price-performance**.
+* **Max spreading** is recommended to avoid deployment failures.
+* VM pricing is **hourly** and depends on **size and OS**.
 
 ---
