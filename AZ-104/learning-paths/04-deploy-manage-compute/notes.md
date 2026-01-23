@@ -2,17 +2,27 @@
 
 **Link:** [Microsoft Learn](https://learn.microsoft.com/en-us/training/paths/az-104-manage-compute-resources/)
 
+* [Compile a checklist for creating an Azure Virtual Machine](#compile-a-checklist-for-creating-an-azure-virtual-machine)
+* [Exercise - Create a VM using the Azure portal](#exercise---create-a-vm-using-the-azure-portal)
+* [Describe the options available to create and manage an Azure Virtual Machine](#describe-the-options-available-to-create-and-manage-an-azure-virtual-machine)
+* [Manage the availability of your Azure VMs](#manage-the-availability-of-your-azure-vms)
+* [Back up your virtual machines](#back-up-your-virtual-machines)
+* [Plan for maintenance and downtime](#plan-for-maintenance-and-downtime)
+
 ---
 
+<!-- omit in toc -->
 ## 📋 Modules
 
 | # | Module | Status | Completed |
 |---|--------|--------|-------|
-| 1 | [Introduction to Azure virtual machines](https://learn.microsoft.com/en-us/training/modules/intro-to-azure-virtual-machines/) | 🕒 | |
+| 1 | [Introduction to Azure virtual machines](https://learn.microsoft.com/en-us/training/modules/intro-to-azure-virtual-machines/) | ✅ | 1/23/26 |
 | 2 | [Configure virtual machine availability](https://learn.microsoft.com/en-us/training/modules/configure-virtual-machine-availability/) | 🕒 | |
 | 3 | [Configure Azure App Service plans](https://learn.microsoft.com/en-us/training/modules/configure-app-service-plans/) | 🕒 | |
 | 4 | [Configure Azure App Service](https://learn.microsoft.com/en-us/training/modules/configure-azure-app-services/) | 🕒 | |
 | 5 | [Configure Azure Container Instances](https://learn.microsoft.com/en-us/training/modules/configure-azure-container-instances/) | 🕒 | |
+
+**Legend:** 🕒 Not Started | 🚧 In Progress | ✅ Complete
 
 ---
 
@@ -765,5 +775,74 @@ New-AzVm `
 * **Unlimited scaling and data transfer** are built-in.
 * **Application-consistent backups** are supported.
 * **No retention time limit** for stored backups.
+
+---
+
+## Plan for maintenance and downtime
+
+[Module Reference](https://learn.microsoft.com/training/modules/configure-virtual-machine-availability/plan-for-maintenance-and-downtime)
+
+**Maintenance Planning Overview**
+
+* Azure administrators must plan for **planned** and **unplanned** failures.
+* An availability plan for Azure virtual machines should account for:
+
+  * **Unplanned hardware maintenance**
+  * **Unexpected downtime**
+  * **Planned maintenance**
+
+**Unplanned Hardware Maintenance**
+
+* Occurs when Azure predicts an impending failure of hardware or platform components.
+* Azure issues an **unplanned hardware maintenance event**.
+* Azure uses **Live Migration** to move virtual machines to healthy hardware.
+* Live Migration characteristics:
+
+  * Preserves the virtual machine state.
+  * Causes only a **short pause**.
+  * Performance **may be reduced before or after** the event.
+
+**Unexpected Downtime**
+
+* Occurs when hardware or physical infrastructure fails unexpectedly.
+* Examples include:
+
+  * Local network failures
+  * Local disk failures
+  * Rack-level failures
+* Azure automatically **heals** the virtual machine by migrating it to healthy hardware in the **same datacenter**.
+* During healing:
+
+  * Virtual machines experience **downtime (reboot)**.
+  * There may be **loss of the temporary drive** in some cases.
+
+**Planned Maintenance**
+
+* Periodic updates performed by Microsoft.
+* Purpose of planned maintenance:
+
+  * Improve **reliability**
+  * Improve **performance**
+  * Improve **security** of the Azure platform infrastructure.
+* Planned maintenance affects the **underlying host and hardware**, not the guest OS.
+
+**Virtual Machine Update Responsibility**
+
+* Microsoft **does not automatically update**:
+
+  * Virtual machine operating systems
+  * Software running inside virtual machines
+* Customers have **full control and responsibility** for OS and application updates.
+* Azure **does** periodically patch:
+
+  * Underlying host software
+  * Physical hardware
+
+**Key Facts to Remember**
+
+* **Live Migration** minimizes downtime during predicted hardware failures.
+* **Unexpected downtime** can cause VM reboots and temporary disk loss.
+* **Planned maintenance** targets Azure infrastructure, not guest operating systems.
+* VM OS and application patching is **customer-managed**, not Microsoft-managed.
 
 ---
