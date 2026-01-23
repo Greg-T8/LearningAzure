@@ -4,7 +4,6 @@
 - [AZ-104 Microsoft Learning Path Course Syllabus](https://learn.microsoft.com/en-us/training/courses/az-104t00)
 - [AZ-104 Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104)
 - [Exam Readiness Zone](https://learn.microsoft.com/en-us/shows/exam-readiness-zone/?terms=az-104)
-- [Microsoft Learn Browse](https://learn.microsoft.com/en-us/training/browse/?products=azure&roles=administrator)
 
 ---
 
