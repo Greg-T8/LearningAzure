@@ -239,3 +239,115 @@
 * Disk type selection directly impacts performance and cost
 
 ---
+
+## Exercise - Create a VM using the Azure portal
+
+[Module Reference](https://learn.microsoft.com/training/modules/intro-to-azure-virtual-machines/)
+
+**Purpose of the Exercise**
+
+* Demonstrates how to create an Azure virtual machine using the **Azure portal**
+* Shows a **browser-based** approach compared to command-line tools
+* Exercise is **optional** and requires an **Azure subscription**
+* Intended as a walkthrough, not a full explanation of all VM options
+
+**Prerequisites and Notes**
+
+* An **Azure subscription** is required to complete the exercise
+* A **resource group** is required
+
+  * You can use an existing resource group
+  * Creating a new resource group makes cleanup easier
+* Replace `myResourceGroupName` with your actual resource group name in all examples
+
+**Options to Create and Manage Virtual Machines**
+
+* Azure supports:
+
+  * **Azure portal** (web-based UI)
+  * **Command-line tools** (Linux, macOS, Windows)
+
+**Azure Portal Overview**
+
+* Browser-based interface for creating and managing Azure resources
+* Supports:
+
+  * Resource creation
+  * Scaling compute resources
+  * Cost monitoring
+* Uses guided wizards, making it suitable for learning and exploration
+
+**Steps to Create an Azure VM Using the Azure Portal**
+
+* Sign in to the **Azure portal**
+* On the home page:
+
+  * Select **Create a resource**
+  * Choose **Virtual machine**
+* The **Create virtual machine** pane opens
+
+**VM Configuration – Basics Tab**
+
+* **Project details**
+
+  * **Subscription**: Select your subscription
+  * **Resource group**: Select `myResourceGroupName`
+* **Instance details**
+
+  * **Virtual machine name**: `test-ubuntu-cus-vm`
+  * **Region**: Select a region close to you
+  * **Availability options**: No infrastructure redundancy required
+  * **Security type**: Standard
+  * **Image**: Ubuntu Server 24.04 LTS – Gen2
+  * **VM architecture**: x64
+  * **Run with Azure Spot discount**: Unchecked
+  * **Size**: Standard D2s V3
+* **Administrator account**
+
+  * **Authentication type**: SSH public key
+  * **Username**: User-defined
+  * **SSH public key source**: Generate a new key pair
+  * **Key pair name**: `test-ubuntu-cus-vm_key`
+* **Inbound port rules**
+
+  * **Public inbound ports**: Allow selected ports
+  * **Select inbound ports**: SSH (22)
+
+**Validation and Deployment**
+
+* Select **Review + create** to validate settings
+* Azure performs configuration validation before deployment
+* Errors are shown by tab and must be resolved before continuing
+* Select **Create** to deploy the VM
+* When prompted:
+
+  * Select **Download private key and create resource**
+
+**Monitoring Deployment**
+
+* Deployment progress can be viewed in:
+
+  * **Deployment details** on the Overview pane
+  * **Notifications** pane (top-right toolbar icon)
+* Deployment takes a few minutes
+* A notification confirms successful deployment
+
+**Post-Deployment**
+
+* Select **Go to resource** to open the VM Overview page
+* VM Overview displays:
+
+  * Configuration details
+  * **Public IP address**
+* SSH access is available because SSH public key authentication was enabled
+
+**Key Facts to Remember**
+
+* **Azure portal** provides a guided, browser-based VM creation experience
+* A **resource group is mandatory** for VM creation
+* SSH (port 22) must be explicitly allowed for Linux VM access
+* Azure validates VM settings before deployment
+* A **private SSH key** must be downloaded when generated during VM creation
+* VM deployment status is available via the **Notifications** pane
+
+---
