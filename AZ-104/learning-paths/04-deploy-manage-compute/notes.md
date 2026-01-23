@@ -15,6 +15,7 @@
 * [Implement Azure Virtual Machine Scale Sets](#implement-azure-virtual-machine-scale-sets)
 * [Create Virtual Machine Scale Sets](#create-virtual-machine-scale-sets)
 * [Implement autoscale](#implement-autoscale)
+* [Configure autoscale](#configure-autoscale)
 
 ---
 
@@ -1271,5 +1272,82 @@ New-AzVm `
 * Supports both **scale out** (increase instances) and **scale in** (decrease instances).
 * Can be triggered by **metrics** or **scheduled events**.
 * Improves cost efficiency and application performance.
+
+---
+
+## Configure autoscale
+
+[Module Reference](https://learn.microsoft.com/training/modules/configure-virtual-machine-availability/)
+
+**Overview**
+
+* When creating an **Azure Virtual Machine Scale Sets** implementation, you can enable **manual scaling** or **autoscaling**
+* For optimal performance, define **minimum**, **maximum**, and **default** instance counts
+* Scaling mode is selected during configuration in the Azure portal
+
+<img src='.img/2026-01-23-03-53-07.png' width=500>
+
+**Scaling Modes**
+
+* **Manually update the capacity**
+
+  * Maintains a **fixed instance count**
+  * Instance count range: **0–1000**
+  * Configure a **scale-in policy** to determine deletion order
+
+    * Example: balance across zones, then delete the VM with the **highest instance ID**
+
+* **Autoscaling**
+
+  * Automatically adjusts capacity
+  * Can scale:
+
+    * On a **schedule**
+    * Based on **metrics**
+  * You must specify the **maximum number of instances** allowed
+
+**Autoscaling Configuration**
+
+* Autoscaling operates based on a **scaling condition**
+
+<img src='.img/2026-01-23-03-54-24.png' width=500>
+
+* **Default instance count**
+
+  * Initial number of VMs deployed
+  * Range: **0–1000**
+
+* **Instance limit**
+
+  * **Minimum** instance count for scale-in
+  * **Maximum** instance count for scale-out
+
+* **Scale out rule**
+
+  * Triggered by **CPU usage percentage threshold**
+  * Defines the **number of instances to add**
+
+* **Scale in rule**
+
+  * Triggered by **CPU usage percentage threshold**
+  * Defines the **number of instances to remove**
+
+* **Query duration**
+
+  * Look-back period used by the autoscale engine
+  * Allows metric values to **stabilize** before scaling decisions
+
+* **Schedule**
+
+  * Define **start and end dates**
+  * Can repeat on **specific days**
+
+**Key Facts to Remember**
+
+* **Instance range**: 0–1000
+* **Manual scaling** = fixed capacity
+* **Autoscaling** supports metric-based and scheduled scaling
+* **CPU percentage thresholds** control scale-in and scale-out
+* **Query duration** stabilizes metrics before action
 
 ---
