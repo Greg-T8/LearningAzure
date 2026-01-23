@@ -8,6 +8,7 @@
 * [Manage the availability of your Azure VMs](#manage-the-availability-of-your-azure-vms)
 * [Back up your virtual machines](#back-up-your-virtual-machines)
 * [Plan for maintenance and downtime](#plan-for-maintenance-and-downtime)
+* [Create availability sets](#create-availability-sets)
 
 ---
 
@@ -844,5 +845,71 @@ New-AzVm `
 * **Unexpected downtime** can cause VM reboots and temporary disk loss.
 * **Planned maintenance** targets Azure infrastructure, not guest operating systems.
 * VM OS and application patching is **customer-managed**, not Microsoft-managed.
+
+---
+
+## Create availability sets
+
+[Module Reference](https://learn.microsoft.com/training/modules/configure-virtual-machine-availability/create-availability-sets)
+
+**Overview**
+
+* An **availability set** is a logical grouping used to ensure related virtual machines are deployed together.
+* Helps prevent a **single point of failure** from impacting all virtual machines.
+* Ensures virtual machines are **not upgraded at the same time** during host OS upgrades in the datacenter.
+
+**Characteristics of Availability Sets**
+
+* All virtual machines should perform **identical functionalities**.
+* All virtual machines should have the **same software installed**.
+* Azure distributes virtual machines across:
+
+  * Multiple **physical servers**
+  * **Compute racks**
+  * **Storage units**
+  * **Network switches**
+* If hardware or Azure software failures occur, **only a subset** of virtual machines is affected.
+* Applications remain available during partial failures.
+* A virtual machine and an availability set can be **created at the same time**.
+* A virtual machine can be added to an availability set **only at creation time**.
+
+  * To change the availability set, the virtual machine must be **deleted and recreated**.
+* Availability sets can be created using:
+
+  * Azure portal
+  * Azure Resource Manager (ARM) templates
+  * Scripting
+  * API tools
+* Azure provides **Service Level Agreements (SLAs)** for virtual machines in availability sets.
+
+**Limitations**
+
+* Availability sets **do not protect** against:
+
+  * Operating system failures
+  * Application-specific failures
+* Additional **disaster recovery and backup solutions** are required for application-level protection.
+
+**Design Considerations**
+
+* **Redundancy**
+
+  * Place multiple virtual machines in an availability set to achieve redundancy.
+* **Separation of application tiers**
+
+  * Each application tier should be placed in a **separate availability set**.
+* **Load balancing**
+
+  * Use Azure Load Balancer to distribute traffic across virtual machines in the availability set.
+* **Managed disks**
+
+  * Availability sets support **Azure managed disks** for block-level storage.
+
+**Key Facts to Remember**
+
+* Virtual machines can only join an availability set **at creation time**.
+* Availability sets improve **infrastructure-level availability**, not application-level resilience.
+* Separate availability sets should be used for **different application tiers**.
+* Load balancing is required to achieve **high availability** across virtual machines.
 
 ---
