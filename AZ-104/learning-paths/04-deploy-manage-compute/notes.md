@@ -14,6 +14,7 @@
 * [Compare vertical and horizontal scaling](#compare-vertical-and-horizontal-scaling)
 * [Implement Azure Virtual Machine Scale Sets](#implement-azure-virtual-machine-scale-sets)
 * [Create Virtual Machine Scale Sets](#create-virtual-machine-scale-sets)
+* [Implement autoscale](#implement-autoscale)
 
 ---
 
@@ -1216,5 +1217,59 @@ New-AzVm `
 * **Arm64 VMs** can deliver up to **50% better price-performance**.
 * **Max spreading** is recommended to avoid deployment failures.
 * VM pricing is **hourly** and depends on **size and OS**.
+
+---
+
+## Implement autoscale
+
+[Module Reference](https://learn.microsoft.com/training/modules/configure-virtual-machine-availability/implement-autoscale)
+
+**Overview**
+
+* **Autoscaling** automatically increases or decreases the number of virtual machine instances in an **Azure Virtual Machine Scale Sets** implementation.
+* Autoscaling dynamically adjusts capacity to meet changing workload demands.
+* Helps maintain acceptable application performance while optimizing cost.
+
+<img src='.img/2026-01-23-03-51-30.png' width=500>
+
+**Benefits of Autoscaling**
+
+* Minimizes unnecessary virtual machine instances when demand is low.
+* Automatically adds instances as demand grows to maintain performance.
+* Reduces manual monitoring and operational overhead.
+
+**Things to Consider When Using Autoscaling**
+
+* **Automatic adjusted capacity**
+
+  * Autoscale rules define acceptable performance thresholds.
+  * When thresholds are met, autoscale rules adjust the number of VM instances automatically.
+
+* **Scale out**
+
+  * Used when application demand increases consistently.
+  * Autoscale rules add virtual machine instances to handle sustained load increases.
+
+* **Scale in**
+
+  * Used when application demand decreases consistently (for example, evenings or weekends).
+  * Autoscale rules remove virtual machine instances.
+  * Reduces operational costs by running only the required number of instances.
+
+* **Scheduled events**
+
+  * Autoscaling can be configured to increase or decrease capacity at fixed, scheduled times.
+
+* **Management overhead**
+
+  * Autoscaling with Virtual Machine Scale Sets reduces the need for manual performance monitoring and optimization.
+
+**Key Facts to Remember**
+
+* Autoscaling applies to **Azure Virtual Machine Scale Sets**.
+* Scaling actions are based on **defined rules and thresholds**.
+* Supports both **scale out** (increase instances) and **scale in** (decrease instances).
+* Can be triggered by **metrics** or **scheduled events**.
+* Improves cost efficiency and application performance.
 
 ---
