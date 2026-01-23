@@ -11,6 +11,7 @@
 * [Create availability sets](#create-availability-sets)
 * [Review update domains and fault domains](#review-update-domains-and-fault-domains)
 * [Review availability zones](#review-availability-zones)
+* [Compare vertical and horizontal scaling](#compare-vertical-and-horizontal-scaling)
 
 ---
 
@@ -1047,5 +1048,60 @@ New-AzVm `
 * **Zonal services** are tied to a specific zone
 * **Zone-redundant services** replicate automatically across zones
 * Availability zones provide protection against **datacenter failures**
+
+---
+
+## Compare vertical and horizontal scaling
+
+[Module Reference](https://learn.microsoft.com/training/modules/configure-virtual-machine-availability/compare-vertical-horizontal-scaling)
+
+**Scalability Overview**
+
+* **Scalability** allows a virtual machine to handle increased requests without degrading response time or throughput.
+* Scaling adjusts capacity in proportion to available hardware resources.
+* Two primary scaling approaches are **vertical scaling** and **horizontal scaling**.
+
+**Vertical Scaling (Scale Up / Scale Down)**
+
+* Involves **increasing or decreasing the size of a single virtual machine**.
+* Makes a virtual machine more powerful (**scale up**) or less powerful (**scale down**).
+* Useful when workloads fluctuate but do not require additional VM instances.
+
+*Common scenarios:*
+
+* Reduce VM size during periods of low utilization (for example, weekends) to **lower costs**.
+* Increase VM size to support higher demand **without adding new virtual machines**.
+
+**Horizontal Scaling (Scale Out / Scale In)**
+
+* Involves **increasing or decreasing the number of virtual machine instances**.
+* Adds instances to **scale out** or removes instances to **scale in**.
+* Designed to support changing workloads by distributing demand across multiple VMs.
+
+**Considerations for Vertical vs. Horizontal Scaling**
+
+* **Limitations**
+
+  * Vertical scaling is limited by available hardware sizes and regional availability.
+  * Vertical scaling usually requires the VM to **stop and restart**, causing temporary service disruption.
+  * Horizontal scaling generally has **fewer limitations**.
+
+* **Flexibility**
+
+  * Horizontal scaling is more flexible in cloud environments.
+  * Can support **potentially thousands of virtual machines** to meet workload demands.
+
+* **Reprovisioning**
+
+  * Reprovisioning replaces an existing VM with a new one.
+  * Availability planning should account for reprovisioning-related interruptions.
+  * Any required data must be identified and **migrated** if reprovisioning occurs.
+
+**Key Facts to Remember**
+
+* **Vertical scaling** changes VM size; **horizontal scaling** changes VM count.
+* Vertical scaling often requires downtime due to restart.
+* Horizontal scaling offers greater flexibility and scale.
+* Robust availability planning must consider **reprovisioning and data persistence**.
 
 ---
