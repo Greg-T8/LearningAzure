@@ -351,3 +351,419 @@
 * VM deployment status is available via the **Notifications** pane
 
 ---
+
+## Describe the options available to create and manage an Azure Virtual Machine
+
+[Module Reference](https://learn.microsoft.com/training/modules/intro-to-azure-virtual-machines/)
+
+**Overview**
+
+* The **Azure portal** is the easiest way to create VMs when starting out.
+* The portal is not efficient for creating or managing **many VMs at scale**.
+* Azure provides multiple **automation, scripting, and programmatic options** to create and manage VMs.
+
+**Ways to Create and Manage Azure Virtual Machines**
+
+* **Azure Resource Manager (ARM) templates**
+* **Azure CLI**
+* **Azure PowerShell**
+* **Terraform**
+* **Azure REST API**
+* **Azure Client SDKs**
+* **Azure VM extensions**
+* **Azure Automation services**
+* **Auto-shutdown**
+
+---
+
+**Azure Resource Manager (ARM) Templates**
+
+* JSON files that **define resources declaratively**
+* Used to create **exact copies of VMs** and infrastructure
+* Templates can be exported from an existing VM:
+
+  * VM menu → **Automation** → **Export template**
+* Templates are:
+
+  * Easy to edit
+  * Reusable
+  * Parameterized (VM name, network name, storage account, etc.)
+* Redeploying a modified template:
+
+  * Updates existing resources to match the template
+* Enables consistent environments (test, staging, production)
+
+<img src='.img/2026-01-23-03-27-40.png' width=500>
+
+---
+
+**Azure CLI**
+
+* Cross-platform command-line tool (Windows, Linux, macOS, Cloud Shell)
+* Used for **scripting and automation**
+* Can be integrated with other languages (Python, Ruby)
+
+**Command example – create a VM**
+
+```bash
+az vm create \
+    --resource-group TestResourceGroup \
+    --name test-wp1-eus-vm \
+    --image Ubuntu2204 \
+    --admin-username azureuser \
+    --generate-ssh-keys
+```
+
+---
+
+**Azure PowerShell**
+
+* Best for:
+
+  * One-off interactive tasks
+  * Repeated automation
+* Cross-platform
+* Uses Azure-specific **cmdlets**
+
+**Command example – create a VM**
+
+```powershell
+New-AzVm `
+    -ResourceGroupName "TestResourceGroup" `
+    -Name "test-wp1-eus-vm" `
+    -Location "East US" `
+    -Image Debian11 `
+    -VirtualNetworkName "test-wp1-eus-network" `
+    -SubnetName "default" `
+    -SecurityGroupName "test-wp1-eus-nsg" `
+    -PublicIpAddressName "test-wp1-eus-pubip" `
+    -GenerateSshKey `
+    -SshKeyName myPSKey `
+    -OpenPorts 22
+```
+
+---
+
+**Terraform**
+
+* Infrastructure as Code (IaC) tool with an Azure provider
+* Uses **HCL (HashiCorp Configuration Language)**
+* Workflow:
+
+  * Define infrastructure
+  * Generate execution plan
+  * Preview changes
+  * Apply plan to deploy
+* Supports repeatable, predictable deployments
+
+---
+
+**Programmatic Options (APIs)**
+
+* Used for **complex scenarios** or integration into applications
+
+**Azure REST API**
+
+* Direct interaction using:
+
+  * HTTP methods: **GET, PUT, POST, DELETE, PATCH**
+* Azure Compute APIs provide VM management capabilities
+
+**Azure Client SDKs**
+
+* Higher-level abstraction over REST API
+* Available for:
+
+  * .NET (C#)
+  * Java
+  * Node.js
+  * Python
+  * PHP
+  * Ruby
+  * Go
+* Simplifies VM creation and management in code
+
+---
+
+**Azure VM Extensions**
+
+* Small applications that run **after VM deployment**
+* Used to:
+
+  * Install software
+  * Apply configurations
+  * Automate tasks
+* Executed and monitored automatically
+
+---
+
+**Azure Automation Services**
+
+* Used to reduce manual effort and operational errors
+
+* Includes:
+
+* **Process Automation**
+
+  * Responds automatically to events or errors
+
+* **Configuration Management**
+
+  * Tracks OS and software updates
+  * Supports integration with Microsoft Endpoint Configuration Manager
+
+* **Update Management**
+
+  * Assesses update status
+  * Schedules patching
+  * Reviews deployment results
+  * Enabled per VM or via Automation account
+
+---
+
+**Auto-shutdown**
+
+* Automatically shuts down VMs on a schedule
+* Helps **reduce costs**
+* Supports:
+
+  * Daily or weekly schedules
+  * Time zone configuration
+* Configured from the VM blade in the portal under **Operations**
+
+---
+
+**Key Facts to Remember**
+
+* **ARM templates** enable repeatable, parameterized VM deployments
+* **Azure CLI and PowerShell** are primary scripting tools for VM management
+* **Terraform** provides declarative, previewable infrastructure deployment
+* **REST API and SDKs** are used for advanced, application-driven scenarios
+* **VM extensions** configure VMs after deployment
+* **Azure Automation** handles process, configuration, and update management
+* **Auto-shutdown** reduces VM costs by enforcing scheduled shutdowns
+
+---
+
+## Manage the availability of your Azure VMs
+
+[Module Reference](https://learn.microsoft.com/training/modules/manage-availability-azure-vms/)
+
+**Availability**
+
+* **Availability** is the **percentage of time a service is available for use**
+* Customers often expect **100% availability**, especially for customer-facing services
+* Azure provides built-in capabilities to help manage **availability, security, and monitoring**
+* VM administration includes planning for **business continuity and disaster recovery (BCDR)**
+
+**Why Availability Matters in Azure**
+
+* Azure VMs run on **physical servers** in Azure datacenters
+* If a **physical host fails**, all VMs on that host fail
+* Azure automatically moves affected VMs to a **healthy host**, but:
+
+  * Self-healing migrations can take **several minutes**
+  * Applications may be **unavailable during migration**
+* **Planned maintenance events** (software updates, hardware upgrades) may:
+
+  * Occur without VM impact
+  * Require **VM reboots** in some cases
+
+**Availability Zones**
+
+* An **Availability Zone** is a **physically separate zone** within an Azure region
+* Supported regions have **three Availability Zones**
+* Each zone has:
+
+  * **Independent power**
+  * **Independent networking**
+  * **Independent cooling**
+* Using **replicated VMs across zones**:
+
+  * Protects against **datacenter-level failures**
+  * Ensures apps and data remain available if one zone fails
+
+**Virtual Machine Scale Sets**
+
+* **VM Scale Sets** let you create and manage **load-balanced groups of VMs**
+* VM instance count can:
+
+  * **Automatically scale up or down**
+  * Respond to **demand or schedules**
+* Benefits:
+
+  * **High availability**
+  * Centralized **management, configuration, and updates**
+* **No additional cost** for scale sets
+
+  * You pay only for **VM instances**
+* Deployment options:
+
+  * **Multiple availability zones**
+  * **Single availability zone**
+  * **Regional**
+* Availability zone options depend on the **orchestration mode**
+
+**Load Balancer**
+
+* **Azure Load Balancer** distributes traffic across multiple VMs
+* Combining Load Balancer with:
+
+  * **Availability Zones**
+  * **Availability Sets**
+  * Provides **maximum application resiliency**
+* **Standard tier VMs** include Azure Load Balancer
+* Not all VM tiers include Load Balancer support
+
+**Azure Storage Redundancy**
+
+* Azure Storage stores **multiple copies of data by default**
+* Protects against:
+
+  * Hardware failures
+  * Network or power outages
+  * Natural disasters
+* Redundancy helps meet **availability and durability targets**
+* Factors when choosing redundancy:
+
+  * Replication method in the **primary region**
+  * Whether data is replicated to a **secondary geographic region**
+  * Whether **read access** is required in the secondary region during outages
+
+**Failover Across Locations (Azure Site Recovery)**
+
+* **Azure Site Recovery** replicates workloads from:
+
+  * A **primary site**
+  * To a **secondary location**
+* If the primary site fails:
+
+  * You can **fail over** to the secondary site
+  * Users maintain **uninterrupted access**
+* After recovery:
+
+  * You can **fail back** to the primary site
+
+**Business Advantages of Site Recovery**
+
+* Eliminates the need to maintain a **secondary physical datacenter**
+* Enables **non-disruptive failover testing** for recovery drills
+* Supports **recovery plans** that can include:
+
+  * Custom PowerShell scripts
+  * Azure Automation runbooks
+  * Manual intervention steps
+* Works with:
+
+  * Azure resources
+  * Hyper-V
+  * VMware
+  * Physical on-premises servers
+* Plays a central role in **BCDR strategy**
+* Enables additional scenarios:
+
+  * Azure migration
+  * Temporary capacity bursts
+  * Development and testing environments
+
+**Key Facts to Remember**
+
+* Availability is measured as a **percentage of uptime**
+* Azure automatically heals VM failures, but **downtime can still occur**
+* **Three Availability Zones** exist per supported Azure region
+* Scale sets provide **automatic scaling and high availability**
+* Azure Storage always maintains **multiple data copies**
+* Azure Site Recovery handles **replication, failover, and recovery** across locations
+
+---
+
+## Back up your virtual machines
+
+[Module Reference](https://learn.microsoft.com/training/modules/intro-to-azure-virtual-machines/backup-your-virtual-machines)
+
+**Overview**
+
+* Data backup and recovery is a required part of infrastructure planning.
+* Backup supports recovery from accidental data loss, software bugs, or audit requirements.
+* **Azure Backup** is a backup-as-a-service solution for physical and virtual machines.
+* Protects workloads **on-premises and in the cloud**.
+
+<img src='.img/2026-01-23-03-34-44.png' width=500>
+
+**Supported Backup Scenarios**
+
+* **Files and folders** on Windows OS machines
+
+  * Physical or virtual
+  * On-premises or cloud
+* **Application-aware snapshots** using **Volume Shadow Copy Service (VSS)**
+* Microsoft server workloads:
+
+  * **Microsoft SQL Server**
+  * **Microsoft SharePoint**
+  * **Microsoft Exchange**
+* **Azure Virtual Machines**
+
+  * Windows
+  * Linux
+* **Client machines**
+
+  * Windows
+  * Linux
+  * Windows 10
+
+**Advantages of Azure Backup**
+
+* **Automatic storage management**
+
+  * Storage is automatically allocated and managed.
+  * Pay-as-you-use pricing model.
+* **Unlimited scaling**
+
+  * Uses Azure scalability for high availability.
+* **Multiple storage options**
+
+  * **Locally redundant storage (LRS)**: copies stored in the same region.
+  * **Geo-redundant storage (GRS)**: data replicated to a secondary region.
+* **Unlimited data transfer**
+
+  * No inbound or outbound data transfer limits.
+  * No charge for transferred data.
+* **Data encryption**
+
+  * Secure transmission and storage of backup data.
+* **Application-consistent backups**
+
+  * Recovery points contain all required data for restore.
+* **Long-term retention**
+
+  * No limit on how long backup data can be retained.
+
+**Azure Backup Components**
+
+* **Azure Backup agent**
+* **System Center Data Protection Manager (DPM)**
+* **Azure Backup Server**
+* **Azure Backup VM extension**
+
+**Recovery Services Vault**
+
+* Backup data is stored in a **Recovery Services vault**.
+* Vaults use **Azure Storage blobs** for efficient, low-cost long-term storage.
+* After creating a vault:
+
+  * Select machines to back up.
+  * Define a **backup policy**:
+
+    * Snapshot schedule
+    * Retention duration
+
+**Key Facts to Remember**
+
+* Azure Backup supports **both on-premises and cloud** workloads.
+* Backup storage uses **Azure Storage blobs**.
+* **Unlimited scaling and data transfer** are built-in.
+* **Application-consistent backups** are supported.
+* **No retention time limit** for stored backups.
+
+---
