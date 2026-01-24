@@ -33,6 +33,7 @@
 * [Compare containers to virtual machines](#compare-containers-to-virtual-machines)
 * [Review Azure Container Instances](#review-azure-container-instances)
 * [Implement container groups](#implement-container-groups)
+* [Review Azure Container Apps](#review-azure-container-apps)
 
 ---
 
@@ -2746,5 +2747,80 @@ Deployment slot settings fall into three categories:
 * Resource allocation is the **sum of all container requests**.
 * **Port mapping is not supported** in container groups.
 * Deleting a container group **releases its IP address and FQDN**.
+
+---
+
+## Review Azure Container Apps
+
+[Module Reference](https://learn.microsoft.com/training/modules/configure-azure-container-instances/)
+
+**Things to Know About Azure Container Apps**
+
+* **Azure Container Apps** is a **serverless platform** for running containerized applications with reduced infrastructure management.
+* Abstracts **server configuration, container orchestration, and deployment details**.
+* Provides **up-to-date server resources** to keep applications **stable and secure**.
+* Designed to help teams **save costs** and focus on application logic.
+
+**Common Use Cases**
+
+* Deploying **API endpoints**
+* Hosting **background processing jobs**
+* Handling **event-driven processing**
+* Running **microservices**
+
+**Scaling Capabilities**
+
+Applications can dynamically scale based on:
+
+* **HTTP traffic**
+* **Event-driven processing**
+* **CPU or memory load**
+* **Any KEDA-supported scaler**
+
+**Things to Consider When Using Azure Container Apps**
+
+* Enables **serverless microservices and jobs** using containers.
+* Optimized for **general-purpose containers**, especially **microservices-based architectures**.
+* Built on **Kubernetes** and open-source technologies:
+
+  * **Dapr**
+  * **KEDA**
+  * **Envoy**
+* Supports Kubernetes-style features:
+
+  * **Service discovery**
+  * **Traffic splitting**
+* Enables **event-driven architectures**, including:
+
+  * Scaling based on traffic
+  * Pulling from event sources like **queues**
+  * **Scale to zero**
+* Supports:
+
+  * **On-demand jobs**
+  * **Scheduled jobs**
+  * **Event-driven jobs**
+* Does **not provide direct access** to underlying Kubernetes APIs.
+* Best suited when Kubernetes-style apps are needed **without full cluster management**.
+* Provides a **fully managed experience** based on best practices.
+
+**Compare Container Management Solutions**
+
+| Feature         | Azure Container Apps (ACA)                                                    | Azure Kubernetes Service (AKS)                                             |
+| --------------- | ----------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| **Overview**    | Serverless container platform that abstracts infrastructure for microservices | Managed Kubernetes cluster for complex orchestration needs                 |
+| **Deployment**  | PaaS experience with quick deployment and simplified management               | Greater control and customization for Kubernetes environments              |
+| **Management**  | Simplified PaaS built on AKS                                                  | Granular Kubernetes control for experienced teams                          |
+| **Scalability** | HTTP-based autoscaling and event-driven scaling                               | Horizontal pod autoscaling and cluster autoscaling                         |
+| **Use Cases**   | Microservices and serverless apps requiring rapid scaling                     | Complex, long-running applications needing full Kubernetes features        |
+| **Integration** | Integrates with Logic Apps, Functions, Event Grid                             | Integrates with Azure Policy, Azure Monitor, Azure Defender for Kubernetes |
+
+**Key Facts to Remember**
+
+* **Azure Container Apps** is **serverless** and abstracts infrastructure management.
+* Supports **event-driven scaling** and **scale to zero**.
+* Built on **Kubernetes**, but **Kubernetes APIs are not directly accessible**.
+* Best for **microservices and containerized serverless workloads**.
+* **AKS** is preferred when **full Kubernetes control** is required.
 
 ---
