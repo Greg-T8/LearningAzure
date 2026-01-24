@@ -28,6 +28,7 @@
 * [Secure your App Service app](#secure-your-app-service-app)
 * [Create custom domain names](#create-custom-domain-names)
 * [Back up and restore your App Service app](#back-up-and-restore-your-app-service-app)
+* [Use Azure Application Insights](#use-azure-application-insights)
 
 ---
 
@@ -2392,5 +2393,91 @@ Deployment slot settings fall into three categories:
 * **Default backup type**: Full
 * **Maximum backup size**: 10 GB
 * **Firewall restriction**: Blocks use as backup destination
+
+---
+
+## Use Azure Application Insights
+
+[Module Reference](https://learn.microsoft.com/training/modules/configure-azure-app-service/)
+
+**Overview**
+
+* **Azure Application Insights** is a feature of **Azure Monitor** used to monitor live applications.
+* Can be integrated with **Azure App Service** to automatically detect performance anomalies.
+* Designed to continuously improve **performance** and **usability** of applications.
+* Provides analytics to diagnose issues and understand **user behavior**.
+
+**Key Characteristics**
+
+* Supports multiple platforms:
+
+  * **.NET**
+  * **Node.js**
+  * **Java EE**
+* Can monitor applications hosted:
+
+  * On-premises
+  * In a hybrid environment
+  * In any public cloud
+* Integrates with **Azure Pipelines**.
+* Connects with many development tools.
+* Supports monitoring mobile apps through **Visual Studio App Center**.
+
+**What to Monitor with Application Insights**
+
+* **Requests**
+
+  * Request rates
+  * Response times
+  * Failure rates
+  * Page popularity, usage times, and user locations
+* **Dependencies**
+
+  * Dependency rates
+  * Response times
+  * Failure rates
+  * Identifies performance issues caused by external services
+* **Exceptions**
+
+  * Aggregated exception statistics
+  * Drill-down into specific instances
+  * Stack traces and related requests
+  * Reports both server-side and browser exceptions
+* **Page Views**
+
+  * Number of page views
+  * Page load performance from users’ browsers
+* **Users and Sessions**
+
+  * Number of users connected
+  * Session counts
+* **Performance Counters**
+
+  * CPU usage
+  * Memory usage
+  * Network usage
+  * Collected from Windows or Linux servers
+* **Host Diagnostics**
+
+  * Diagnostics from Docker or Azure environments
+* **Diagnostic Trace Logs**
+
+  * Application trace logs
+  * Correlate trace events with requests
+* **Custom Events and Metrics**
+
+  * Custom event tracking via client or server code
+  * Business metrics such as:
+
+    * Number of items sold
+    * Number of games won
+
+**Key Facts to Remember**
+
+* Application Insights is part of **Azure Monitor**.
+* It supports **automatic performance anomaly detection**.
+* Works across **multiple platforms and hosting environments**.
+* Provides deep visibility into **requests, dependencies, exceptions, users, and performance metrics**.
+* Supports **custom telemetry** for business-specific insights.
 
 ---
