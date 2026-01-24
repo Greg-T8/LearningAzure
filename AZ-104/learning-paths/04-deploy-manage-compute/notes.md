@@ -2323,6 +2323,8 @@ Deployment slot settings fall into three categories:
   * **Restoring to another app or site**
 * The **Backups page** shows all automatic and custom backups with their status
 
+<img src='.img/2026-01-24-05-03-07.png' width=600>
+
 **Requirements**
 
 * App must use a **Standard or Premium** App Service plan
