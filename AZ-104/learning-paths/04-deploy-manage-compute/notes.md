@@ -23,6 +23,8 @@
 * [Implement Azure App Service](#implement-azure-app-service)
 * [Create an app with App Service](#create-an-app-with-app-service)
 * [Explore continuous integration and deployment](#explore-continuous-integration-and-deployment)
+* [Create deployment slots](#create-deployment-slots)
+* [Add deployment slots](#add-deployment-slots)
 
 ---
 
@@ -2030,5 +2032,127 @@ Create a **new App Service plan** when:
 * **Manual deployment** requires direct user action to push code.
 * **GitHub production branch commits** trigger automatic deployment.
 * Azure DevOps supports **custom build and release pipelines**.
+
+---
+
+## Create deployment slots
+
+[Module Reference](https://learn.microsoft.com/training/modules/configure-azure-app-service/create-deployment-slots)
+
+**Overview**
+
+* When deploying a **web app**, **web app on Linux**, **mobile backend**, or **API app** to Azure App Service, you can deploy to a **deployment slot** instead of the default **production slot**.
+
+**Things to Know About Deployment Slots**
+
+* Deployment slots are **live apps** with their own **hostnames**
+* Deployment slots are available only in these **App Service pricing tiers**:
+
+  * **Standard**
+  * **Premium**
+  * **Isolated**
+* Each pricing tier supports a **different number of deployment slots**
+* **App content and configuration** can be **swapped** between two slots, including the **production slot**
+
+<img src='.img/2026-01-24-04-51-58.png' width=500>
+
+**Things to Consider When Using Deployment Slots**
+
+* **Validation**
+
+  * Test and validate changes in a **staging slot** before swapping into production
+* **Reduced downtime**
+
+  * Swapping ensures all instances are ready before going live
+  * **No downtime** during deployment
+  * Traffic redirection is **seamless**
+  * **No requests are dropped** during swap operations
+  * Entire process can be automated using **Auto swap** when pre-swap validation is not required
+* **Restore to last known good site**
+
+  * After a swap, the previous production version remains available in the other slot
+  * You can immediately swap back if issues occur
+* **Auto swap**
+
+  * Automatically swaps the app into production after it is warmed up
+  * Designed for **continuous deployment** scenarios
+  * Provides **zero cold starts** and **zero downtime**
+  * **Not supported for Web Apps on Linux**
+
+**Key Facts to Remember**
+
+* Deployment slots require **Standard, Premium, or Isolated** App Service tiers
+* Slots are **fully live apps** with independent hostnames
+* **Swap operations** support rollback to the previous production version
+* **Auto swap** is unsupported on **Web Apps on Linux**
+
+---
+
+## Add deployment slots
+
+[Module Reference](https://learn.microsoft.com/training/modules/configure-azure-app-service/)
+
+**Overview**
+
+* Deployment slots are configured in the **Azure portal**
+* You can **swap app content and configuration** between slots, including the **production slot**
+
+**Creating Deployment Slots**
+
+* New deployment slots can be:
+
+  * **Empty**
+  * **Cloned** from an existing slot
+* When cloning:
+
+  * The cloned configuration is **fully editable**
+  * Some settings **move with the content** during a swap
+  * Some settings remain **slot-specific** and stay with the source slot
+
+**Deployment Slot Configuration Categories**
+
+Deployment slot settings fall into three categories:
+
+* **Slot-specific app settings and connection strings** (if applicable)
+* **Continuous deployment settings** (when enabled)
+* **Azure App Service authentication settings** (when enabled)
+
+**Swapped vs. Slot-Specific Settings**
+
+*Settings that are swapped between slots:*
+
+* Language stack and version, **32/64-bit**
+* **App settings***
+* **Connection strings***
+* **Mounted storage accounts***
+* Public certificates
+* WebJobs content
+* Hybrid connections**
+* Service endpoints**
+* Azure Content Delivery Network**
+* Path mapping
+
+*Settings that remain slot-specific:*
+
+* Custom domain names
+* Nonpublic certificates and TLS/SSL settings
+* Scale settings
+* Always On
+* IP restrictions
+* WebJobs schedulers
+* Diagnostic settings
+* Cross-origin resource sharing (CORS)
+* Virtual network integration
+* Managed identities
+
+* Setting can be configured to be slot-specific
+** Feature isn’t currently available
+
+**Key Facts to Remember**
+
+* Deployment slots support **safe testing and staged deployments**
+* **Not all settings swap**—slot-specific settings remain with the source slot
+* App settings and connection strings are **swapped by default**, but can be marked slot-specific
+* Slot swaps can include the **production slot**
 
 ---
