@@ -16,6 +16,10 @@
 * [Create Virtual Machine Scale Sets](#create-virtual-machine-scale-sets)
 * [Implement autoscale](#implement-autoscale)
 * [Configure autoscale](#configure-autoscale)
+* [Implement Azure App Service plans](#implement-azure-app-service-plans)
+* [Determine Azure App Service plan pricing](#determine-azure-app-service-plan-pricing)
+* [Scale up and scale out Azure App Service](#scale-up-and-scale-out-azure-app-service)
+* [Configure Azure App Service autoscale](#configure-azure-app-service-autoscale)
 
 ---
 
@@ -1349,5 +1353,422 @@ New-AzVm `
 * **Autoscaling** supports metric-based and scheduled scaling
 * **CPU percentage thresholds** control scale-in and scale-out
 * **Query duration** stabilizes metrics before action
+
+---
+
+## Implement Azure App Service plans
+
+[Module Reference](https://learn.microsoft.com/training/modules/configure-azure-app-service-plans/)
+
+**What an App Service plan is**
+
+* An **Azure App Service plan** defines the **compute resources** used by applications running in Azure App Service.
+* Compute resources are analogous to a **server farm** in traditional web hosting.
+* **One or more applications** can run on the **same App Service plan**.
+* All apps in the plan share the **same compute resources**.
+
+**Behavior of App Service plans**
+
+* When an App Service plan is created in a **region**, Azure provisions compute resources **in that region**.
+* Any application added to the plan runs on the plan’s defined compute resources.
+* New applications can be added **as long as sufficient capacity remains**.
+
+**App Service plan settings**
+
+Each App Service plan defines:
+
+* **Operating system**: Linux or Windows
+* **Region**: The geographic location (for example, West US, Central India, North Europe)
+* **Pricing tier**
+
+  * Determines available App Service features
+  * Determines cost
+  * Available tiers depend on the selected operating system
+* **Number of VM instances**
+
+  * Determined by the plan
+* **Size of VM instances**
+
+  * Defined by **CPU**, **memory**, and **remote storage**
+
+**Cost and resource considerations**
+
+* **Cost savings**
+
+  * You pay for the compute resources allocated to the plan
+  * Multiple applications in one plan can reduce costs
+* **Multiple applications in one plan**
+
+  * Simplifies configuration and maintenance
+  * Applications share the same VM instances
+  * Requires careful resource and capacity management
+* **Plan capacity**
+
+  * Evaluate resource requirements before adding new applications
+  * Ensure sufficient remaining capacity
+
+**Important limitation**
+
+* **Overloading an App Service plan can cause downtime** for both new and existing applications.
+
+**Application isolation scenarios**
+
+Create a **new App Service plan** when:
+
+* The application is **resource-intensive**
+* The application must **scale independently**
+* The application requires resources in a **different geographic region**
+
+**Key Facts to Remember**
+
+* App Service plans define **shared compute resources** for one or more applications
+* All apps in a plan share the **same VM instances**
+* Pricing tier affects **features, scale, and cost**
+* Overloading a plan risks **application downtime**
+* Use separate plans for **isolation, scaling, or regional needs**
+
+---
+
+## Determine Azure App Service plan pricing
+
+[Module Reference](https://learn.microsoft.com/training/modules/configure-azure-app-service-plans/)
+
+**Overview**
+
+* The **pricing tier** of an Azure App Service plan determines:
+
+  * Available App Service **features**
+  * **Cost** of the plan
+* Example pricing tiers:
+
+  * **Free**
+  * **Shared**
+  * **Basic**
+  * **Standard**
+  * **Premium**
+  * **PremiumV2**
+  * **PremiumV3**
+  * **Isolated**
+  * **IsolatedV2**
+
+**How Apps Run and Scale in App Service Plans**
+
+* An **App Service plan** is the **scale unit** for App Service applications
+* All apps in the same plan:
+
+  * Run on the **same VM instances**
+  * **Scale together**
+* If a plan has **five VM instances**, all apps run on all five instances
+* Autoscale settings apply to **all apps** in the plan
+
+**Pricing Tier Categories**
+
+* **Shared compute**
+
+  * Includes **Free** and **Shared**
+  * Apps run on **shared Azure VMs** with other apps (including other customers)
+  * **CPU quotas per app**
+  * **No scale-out**
+  * Intended for **development and testing only**
+
+* **Dedicated compute**
+
+  * Includes **Basic**, **Standard**, **Premium**, **PremiumV2**, **PremiumV3**
+  * Apps run on **dedicated Azure VMs**
+  * Compute resources are shared **only within the same App Service plan**
+  * Higher tiers allow **more VM instances for scale-out**
+
+* **Isolated**
+
+  * Includes **Isolated** and **IsolatedV2**
+  * Apps run on **dedicated VMs** in **dedicated virtual networks**
+  * Provides **network isolation** and **compute isolation**
+  * Offers the **maximum scale-out capability**
+
+**Sample Plan Feature Comparison**
+
+* **Free (F1)**
+
+  * Usage: Development, Testing
+  * Staging slots: N/A
+  * Autoscale: N/A
+  * Scale instances: N/A
+  * Daily backups: N/A
+
+* **Basic (B1)**
+
+  * Usage: Development, Testing
+  * Staging slots: N/A
+  * Autoscale: Manual
+  * Scale instances: **3**
+  * Daily backups: N/A
+
+* **Standard (S1)**
+
+  * Usage: Production workloads
+  * Staging slots: **5**
+  * Autoscale: Rules
+  * Scale instances: **10**
+  * Daily backups: **10**
+
+* **Premium (P1V3)**
+
+  * Usage: Enhanced scale and performance
+  * Staging slots: **20**
+  * Autoscale: Rules, Elastic
+  * Scale instances: **30**
+  * Daily backups: **50**
+
+**Free and Shared Plans**
+
+* Run on **shared Azure virtual machines**
+* Intended for **development and testing only**
+* **No SLA**
+* **Metered per application**
+
+**Basic Plan**
+
+* Designed for **low traffic** applications
+* Does **not** include advanced autoscale or traffic management
+* Pricing based on **VM size and instance count**
+* Includes **built-in network load balancing**
+* Linux runtime supports **Web App for Containers**
+
+**Standard Plan**
+
+* Designed for **production workloads**
+* Pricing based on **VM size and instance count**
+* Includes:
+
+  * **Built-in load balancing**
+  * **Autoscale** based on rules
+* Linux runtime supports **Web App for Containers**
+
+**Premium Plan**
+
+* Designed for **enhanced performance** production applications
+* Premium v2 features:
+
+  * **Dv2-series VMs**
+  * Faster processors
+  * **SSD storage**
+  * **Double memory-to-core ratio** vs Standard
+* Supports **higher scale-out** than Standard
+* Original Premium tier remains available for existing customers
+
+**Isolated Plan**
+
+* Designed for **mission-critical workloads**
+* Runs in a **private, dedicated environment**
+* Uses **App Service Environment**
+* Features:
+
+  * **Network isolation**
+  * **Dv2-series VMs**
+  * SSD storage
+  * Double memory-to-core ratio vs Standard
+* Can scale to **100 instances** (more available upon request)
+
+**Selecting an App Service Plan**
+
+* Selection criteria:
+
+  * **Hardware requirements**
+
+    * CPU
+    * Memory
+    * Number of instances
+  * **Feature requirements**
+
+    * Backups
+    * Staging slots
+    * Zone redundancy
+* Azure portal steps:
+
+  * Search for **App Service plans**
+  * Create a new App Service plan
+  * Select **Explore pricing plans**
+
+**Key Facts to Remember**
+
+* **App Service plan = scaling boundary** for all apps in the plan
+* **Shared compute tiers** cannot scale out
+* **Dedicated compute tiers** allow increasing VM instances
+* **Isolated tiers** provide both **network and compute isolation**
+* **Autoscale applies to all apps** in the same plan
+
+---
+
+## Scale up and scale out Azure App Service
+
+[Module Reference]([URL](https://learn.microsoft.com/en-us/training/modules/configure-app-service-plans/4-scale-up-scale-out))
+
+**Azure App Service Scaling Methods**
+
+* Azure App Service plans and applications support **two scaling methods**: **scale up** and **scale out**
+* Scaling can be performed **manually** or **automatically (autoscale)**
+
+**Scale Up (Vertical Scaling)**
+
+* Increases **CPU, memory, and disk space**
+* Performed by **changing the pricing tier** of the App Service plan
+* Unlocks additional features, including:
+
+  * **Dedicated virtual machines**
+  * **Custom domains and certificates**
+  * **Deployment (staging) slots**
+  * **Autoscaling**
+* App Service plans can be **scaled up or down at any time**
+
+**Scale Out (Horizontal Scaling)**
+
+* Increases the **number of virtual machine instances** running the application
+* Maximum instance count depends on the **App Service plan pricing tier**
+* **Isolated tier (App Service Environment)** supports up to **100 instances**
+* Instance count can be configured:
+
+  * **Manually**
+  * **Automatically using autoscale**
+
+**Autoscale**
+
+* Applies to the **scale-out method**
+* Automatically adjusts the **instance count**
+* Based on:
+
+  * **Predefined rules**
+  * **Schedules**
+* Helps maintain performance during high load and reduce costs during low load
+
+**Scaling Considerations**
+
+* **Manual tier adjustment**
+
+  * Start with a **lower pricing tier**
+  * Scale up only when additional features are required
+  * Scale down when features are no longer needed to **reduce costs**
+* **Progressive scaling scenario**
+
+  * Free tier → Shared tier (custom DNS)
+  * Shared tier → Basic tier (SSL binding)
+  * Basic tier → Standard tier (staging slots)
+  * Scale within the same tier for **more cores, memory, or storage**
+* **No redeployment required**
+
+  * Scaling does **not require code changes**
+  * Scale changes apply in **seconds**
+  * All apps in the App Service plan are affected
+* **Independent scaling of dependent services**
+
+  * Azure App Service plans **do not manage scaling** for dependent services
+  * Services like **Azure SQL Database** or **Azure Storage** must be scaled separately
+
+**Key Facts to Remember**
+
+* **Scale up** = change pricing tier to gain more resources and features
+* **Scale out** = increase number of VM instances
+* **Autoscale** applies only to scale out
+* **Isolated tier** supports up to **100 instances**
+* Scaling does **not require redeployment**
+* App Service plan scaling affects **all apps in the plan**
+
+---
+
+## Configure Azure App Service autoscale
+
+[Module Reference](https://learn.microsoft.com/training/modules/configure-azure-app-service-plans/)
+
+**Autoscale Overview**
+
+* **Autoscale** adjusts resources automatically to handle application load.
+* Supports **scaling out** to handle increased load and **scaling in** to reduce cost during idle periods.
+* Uses **rules and conditions** to control scaling behavior.
+
+**Autoscale Configuration Basics**
+
+* Define a **minimum** and **maximum** number of instances.
+* The autoscale engine automatically adjusts the number of **virtual machine instances** based on defined rules.
+* When rule conditions are met, one or more **autoscale actions** are triggered.
+
+<img src='.img/2026-01-24-04-29-50.png' width=700>
+
+**Autoscale Settings and Profiles**
+
+* An **autoscale setting** determines whether to scale in or scale out.
+* Autoscale settings are grouped into **profiles**.
+* Each profile contains one or more autoscale rules.
+
+**Autoscale Rules**
+
+* Autoscale rules consist of:
+
+  * A **trigger**
+  * A **scale action** (scale in or scale out)
+* Triggers can be:
+
+  * **Metric-based**
+
+    * Scale based on measured load.
+    * Example metrics:
+
+      * **CPU time**
+      * **Average response time**
+      * **Requests**
+    * Example condition: scale when **CPU usage > 50%**
+  * **Time-based (schedule-based)**
+
+    * Scale based on predictable time patterns.
+    * Example: trigger an action at **8:00 AM on Saturday** in a specific time zone.
+
+**Notifications**
+
+* The autoscale engine uses **notification settings**.
+* Notifications are triggered when autoscale events occur.
+* Notifications can:
+
+  * Send emails to **one or more email addresses**
+  * Call **one or more webhooks**
+
+**Configuration Considerations**
+
+* **Minimum instance count**
+
+  * Ensures the application remains running even with no load.
+* **Maximum instance count**
+
+  * Limits total possible **hourly cost**.
+* **Adequate scale margin**
+
+  * Minimum and maximum values must be different.
+  * Autoscale operates between these values using rules.
+* **Scale rule combinations**
+
+  * Always configure both **scale-out** and **scale-in** rules.
+  * Missing scale-out rules can cause performance degradation.
+  * Missing scale-in rules can lead to unnecessary costs.
+* **Metric statistics**
+
+  * Choose the correct statistic:
+
+    * **Average**
+    * **Minimum**
+    * **Maximum**
+    * **Total**
+* **Default instance count**
+
+  * Used when metrics are unavailable.
+  * Should be a **safe and stable** value.
+* **Notifications**
+
+  * Should always be enabled to monitor application behavior during load changes.
+
+**Key Facts to Remember**
+
+* Autoscale uses **profiles**, **rules**, and **conditions**.
+* Rules always include a **trigger** and a **scale action**.
+* Triggers can be **metric-based** or **time-based**.
+* Always configure **minimum, maximum, and default** instance counts.
+* Both **scale-out and scale-in rules** are required for effective autoscale.
+* Notifications support **email and webhook** targets.
 
 ---
