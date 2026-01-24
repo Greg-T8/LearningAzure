@@ -30,6 +30,7 @@
 * [Back up and restore your App Service app](#back-up-and-restore-your-app-service-app)
 * [Use Azure Application Insights](#use-azure-application-insights)
 * [Exercise: Implement Web Apps](#exercise-implement-web-apps)
+* [Compare containers to virtual machines](#compare-containers-to-virtual-machines)
 
 ---
 
@@ -41,7 +42,7 @@
 | 1 | [Introduction to Azure virtual machines](https://learn.microsoft.com/en-us/training/modules/intro-to-azure-virtual-machines/) | ✅ | 1/23/26 |
 | 2 | [Configure virtual machine availability](https://learn.microsoft.com/en-us/training/modules/configure-virtual-machine-availability/) | ✅ | 1/23/26 |
 | 3 | [Configure Azure App Service plans](https://learn.microsoft.com/en-us/training/modules/configure-app-service-plans/) | ✅ | 1/24/26 |
-| 4 | [Configure Azure App Service](https://learn.microsoft.com/en-us/training/modules/configure-azure-app-services/) | 🕒 | |
+| 4 | [Configure Azure App Service](https://learn.microsoft.com/en-us/training/modules/configure-azure-app-services/) | ✅ | 1/24/26 |
 | 5 | [Configure Azure Container Instances](https://learn.microsoft.com/en-us/training/modules/configure-azure-container-instances/) | 🕒 | |
 
 **Legend:** 🕒 Not Started | 🚧 In Progress | ✅ Complete
@@ -2526,5 +2527,43 @@ Deployment slot settings fall into three categories:
 * **Autoscaling** can be configured and tested on Azure Web Apps.
 * **PHP runtime on Windows** is supported in Azure Web Apps.
 * This exercise is **hands-on** and requires an Azure subscription.
+
+---
+
+## Compare containers to virtual machines
+
+[Module Reference](https://learn.microsoft.com/training/modules/compare-containers-virtual-machines/)
+
+**Overview**
+
+* **Hardware virtualization** allows multiple isolated operating systems to run concurrently on the same physical hardware.
+* **Containers** represent the next stage of virtualization by virtualizing the **operating system** instead of the hardware.
+* Containers allow multiple applications to run in the same OS instance while maintaining isolation.
+* Containers inside a virtual machine provide functionality similar to virtual machines on a physical server.
+
+**Containers vs. Virtual Machines**
+
+| Compare                | Containers                                                                                                                               | Virtual Machines                                                                                                                                                   |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Isolation**          | Provides lightweight isolation from the host and other containers, but **not as strong** a security boundary                             | Provides **complete isolation** from the host OS and other VMs; preferred when strong security boundaries are required                                             |
+| **Operating system**   | Run the **user mode portion** of an OS and include only required services, using fewer resources                                         | Run a **full OS including the kernel**, requiring more CPU, memory, and storage                                                                                    |
+| **Deployment**         | Deploy individual containers using **Docker CLI**; deploy multiple containers using an orchestrator such as **Azure Kubernetes Service** | Deploy individual VMs using **Windows Admin Center** or **Hyper-V Manager**; deploy multiple VMs using **PowerShell** or **System Center Virtual Machine Manager** |
+| **Persistent storage** | Use **Azure Disks** for single-node local storage or **Azure Files (SMB)** for shared storage                                            | Use **VHDs** for local storage or **SMB file shares** for shared storage                                                                                           |
+| **Fault tolerance**    | If a cluster node fails, the orchestrator **rapidly recreates containers** on another node                                               | VMs **fail over** to another server, where the OS **restarts**                                                                                                     |
+
+**Things to Consider When Using Containers**
+
+* **Flexibility and speed**: Faster development and sharing of containerized applications.
+* **Testing**: Simplifies application testing scenarios.
+* **App deployment**: Enables streamlined and accelerated deployments.
+* **Workload density**: Supports higher workload density and improved resource utilization.
+
+**Key Facts to Remember**
+
+* Containers virtualize the **operating system**, not the hardware.
+* Containers provide **lighter isolation** than virtual machines.
+* Virtual machines run a **full OS with a kernel**.
+* Containers rely on **orchestrators** for fault tolerance and scaling.
+* Containers enable **higher density and faster deployment** than virtual machines.
 
 ---
