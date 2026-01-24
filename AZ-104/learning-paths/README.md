@@ -15,7 +15,7 @@
 | 1   | [Manage identities and governance](https://learn.microsoft.com/en-us/training/paths/az-104-manage-identities-governance/) | 6       | ✅     | [notes.md](01-manage-identities-governance/notes.md) |  1/17/26         |
 | 2   | [Manage virtual networks](https://learn.microsoft.com/en-us/training/paths/az-104-manage-virtual-networks/)               | 8       | ✅    | [notes.md](02-configure-manage-networking/notes.md)  | 1/21/26        |
 | 3   | [Manage storage](https://learn.microsoft.com/en-us/training/paths/az-104-manage-storage/)                                 | 4       | ✅    | [notes.md](03-implement-manage-storage/notes.md)     | 1/22/26          |
-| 4   | [Manage Azure compute resources](https://learn.microsoft.com/en-us/training/paths/az-104-manage-compute-resources/)       | 5       | 🚧    | [notes.md](04-deploy-manage-compute/notes.md)        |           |
+| 4   | [Manage Azure compute resources](https://learn.microsoft.com/en-us/training/paths/az-104-manage-compute-resources/)       | 5       | ✅    | [notes.md](04-deploy-manage-compute/notes.md)        | 1/24/26          |
 | 5   | [Monitor and back up resources](https://learn.microsoft.com/en-us/training/paths/az-104-monitor-backup-resources/)        | 2       | 🕒    | [notes.md](05-monitor-backup-resources/notes.md)     |           |
 
 **Legend:** 🕒 Not Started | 🚧 In Progress | ✅ Complete
