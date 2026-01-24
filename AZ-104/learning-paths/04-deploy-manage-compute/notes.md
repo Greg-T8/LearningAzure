@@ -21,6 +21,8 @@
 * [Scale up and scale out Azure App Service](#scale-up-and-scale-out-azure-app-service)
 * [Configure Azure App Service autoscale](#configure-azure-app-service-autoscale)
 * [Implement Azure App Service](#implement-azure-app-service)
+* [Create an app with App Service](#create-an-app-with-app-service)
+* [Explore continuous integration and deployment](#explore-continuous-integration-and-deployment)
 
 ---
 
@@ -1852,5 +1854,181 @@ Create a **new App Service plan** when:
 * **Integrated CI/CD with multiple DevOps platforms**
 * **Built-in security, compliance, and authentication options**
 * **Marketplace templates simplify app deployment**
+
+---
+
+## Create an app with App Service
+
+[Module Reference](https://learn.microsoft.com/training/modules/create-app-service-app/)
+
+**App Service App Types**
+
+* Azure App Service supports **Web Apps**, **Mobile Apps**, and **API Apps**
+* Apps are created and managed through the **Azure portal**
+
+**Basic Configuration Settings**
+
+* **Name**
+
+  * Must be **globally unique**
+  * Used to identify and locate the app in Azure
+  * Default format: `appname.azurewebsites.net`
+  * Can be mapped to a **custom domain**
+* **Publish**
+
+  * Determines how the app is hosted
+  * Options:
+
+    * **Code**
+    * **Docker Container**
+* **Runtime stack**
+
+  * Defines the language and SDK used to run the app
+  * Supported stacks:
+
+    * **.NET Core**
+    * **.NET Framework**
+    * **Node.js**
+    * **PHP**
+    * **Python**
+    * **Ruby**
+  * Multiple versions available for **Linux** and **Windows**
+  * For Linux and custom containers, an **optional startup command or file** can be configured
+* **Operating system**
+
+  * App runtime OS options:
+
+    * **Linux**
+    * **Windows**
+* **Region**
+
+  * Determines the geographic location of the app
+  * Affects which **App Service plans** are available
+* **Pricing plans**
+
+  * App must be associated with an **Azure App Service plan**
+  * Plan defines:
+
+    * Available resources
+    * Features
+    * Capacity
+  * Pricing tiers depend on the selected region
+
+**Post-Creation Configuration Settings**
+
+* Additional configuration options become available after app creation
+* Includes:
+
+  * App deployment options
+  * Path mapping
+
+<img src='.img/2026-01-24-04-38-23.png' width=700>
+
+**Additional Application Settings**
+
+* **Always On**
+
+  * Keeps the app loaded even when there is no traffic
+  * **Required** for:
+
+    * Continuous WebJobs
+    * WebJobs triggered by a **CRON expression**
+* **Session affinity**
+
+  * Ensures clients are routed to the **same instance** for the duration of a session
+  * Applies to **multi-instance deployments**
+* **HTTPS Only**
+
+  * Redirects all HTTP traffic to **HTTPS** when enabled
+
+**Key Facts to Remember**
+
+* App name must be **unique across Azure**
+* App Service apps require an **App Service plan**
+* Runtime stack defines both **language and SDK version**
+* **Always On** is required for continuous and CRON-triggered WebJobs
+* **Session affinity** is used to maintain client-to-instance consistency
+* **HTTPS Only** enforces secure traffic
+
+---
+
+## Explore continuous integration and deployment
+
+[Module Reference](https://learn.microsoft.com/training/modules/configure-azure-app-service/)
+
+**Overview**
+
+* Azure App Service provides **out-of-the-box continuous integration and deployment (CI/CD)**.
+* Supported sources:
+
+  * **Azure DevOps services**
+  * **GitHub**
+  * **Bitbucket**
+  * **FTP**
+  * **Local Git repository**
+* App Service **automatically synchronizes code** and deploys future changes without manual intervention.
+* With Azure DevOps, you can define **custom build and release pipelines**:
+
+  * Compile source code
+  * Run tests
+  * Build and deploy on every commit
+* Deployment operations occur **implicitly**, with **no human administration required**.
+
+**Deployment Options in App Service**
+
+* Deployment methods are configured in the **Deployment Center**.
+* Two deployment models are available:
+
+  * **Continuous deployment**
+  * **Manual deployment**
+
+<img src='.img/2026-01-24-04-50-20.png' width=700>
+
+**Continuous Deployment (CI/CD)**
+
+* Enables **frequent, automated deployments** with minimal impact on end users.
+* Azure supports automated deployment from:
+
+  * **GitHub**
+
+    * Changes pushed to the **production branch** are automatically deployed.
+  * **Bitbucket**
+
+    * Similar automated deployment experience as GitHub.
+  * **Local Git**
+
+    * App Service provides a **local Git URL** that acts as a repository.
+  * **Azure Repos**
+
+    * Version control service for managing code of any project size.
+* Best suited for:
+
+  * Rapid feature delivery
+  * Automated testing and releases
+  * Reducing manual deployment effort
+
+**Manual Deployment**
+
+* Requires **explicit user action** to push code to Azure.
+* Supported manual deployment options:
+
+  * **Remote Git**
+
+    * App Service provides a **Git URL** used as a remote repository.
+    * Pushing code triggers deployment.
+  * **OneDrive**
+
+    * Cloud-based file storage and sharing service.
+  * **Dropbox**
+
+    * File hosting service for manual code uploads.
+
+**Key Facts to Remember**
+
+* **Deployment Center** is where CI/CD and manual deployment are configured.
+* **Continuous deployment** automatically deploys code changes from connected repositories.
+* **Manual deployment** requires direct user action to push code.
+* **GitHub production branch commits** trigger automatic deployment.
+* Azure DevOps supports **custom build and release pipelines**.
 
 ---
