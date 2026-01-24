@@ -7,19 +7,7 @@
 
 ---
 
-## 📊 Exam Domains
-
-| Domain                     | Weight |
-| -------------------------- | ------ |
-| 1. Identities & Governance | 20-25% |
-| 2. Storage                 | 15-20% |
-| 3. Compute                 | 20-25% |
-| 4. Networking              | 15-20% |
-| 5. Monitoring & Backup     | 10-15% |
-
----
-
-### 📚 Learning Resource Progress Tracker
+### 📚 Learning Modality Progress Tracker
 
 | Priority | Resource                                                        | Purpose                           | Status | Completed |
 | -------- | --------------------------------------------------------------- | --------------------------------- | ------ | --------- |
@@ -30,6 +18,17 @@
 | 5        | [MeasureUp Practice Exams](./practice-exams/README.md)          | Exam readiness assessment         | 🕒    |           |
 
 **Legend:** 🕒 Not Started | 🚧 In Progress | ✅ Complete
+
+---
+## 📊 Exam Domains
+
+| Domain                     | Weight |
+| -------------------------- | ------ |
+| 1. Identities & Governance | 20-25% |
+| 2. Storage                 | 15-20% |
+| 3. Compute                 | 20-25% |
+| 4. Networking              | 15-20% |
+| 5. Monitoring & Backup     | 10-15% |
 
 ---
 
