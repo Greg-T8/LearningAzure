@@ -20,6 +20,7 @@
 * [Determine Azure App Service plan pricing](#determine-azure-app-service-plan-pricing)
 * [Scale up and scale out Azure App Service](#scale-up-and-scale-out-azure-app-service)
 * [Configure Azure App Service autoscale](#configure-azure-app-service-autoscale)
+* [Implement Azure App Service](#implement-azure-app-service)
 
 ---
 
@@ -30,7 +31,7 @@
 |---|--------|--------|-------|
 | 1 | [Introduction to Azure virtual machines](https://learn.microsoft.com/en-us/training/modules/intro-to-azure-virtual-machines/) | ✅ | 1/23/26 |
 | 2 | [Configure virtual machine availability](https://learn.microsoft.com/en-us/training/modules/configure-virtual-machine-availability/) | ✅ | 1/23/26 |
-| 3 | [Configure Azure App Service plans](https://learn.microsoft.com/en-us/training/modules/configure-app-service-plans/) | 🕒 | |
+| 3 | [Configure Azure App Service plans](https://learn.microsoft.com/en-us/training/modules/configure-app-service-plans/) | ✅ | 1/24/26 |
 | 4 | [Configure Azure App Service](https://learn.microsoft.com/en-us/training/modules/configure-azure-app-services/) | 🕒 | |
 | 5 | [Configure Azure Container Instances](https://learn.microsoft.com/en-us/training/modules/configure-azure-container-instances/) | 🕒 | |
 
@@ -1770,5 +1771,86 @@ Create a **new App Service plan** when:
 * Always configure **minimum, maximum, and default** instance counts.
 * Both **scale-out and scale-in rules** are required for effective autoscale.
 * Notifications support **email and webhook** targets.
+
+---
+
+## Implement Azure App Service
+
+[Module Reference](https://learn.microsoft.com/en-us/training/modules/configure-azure-app-services/2-implement)
+
+**Overview**
+
+* **Azure App Service** enables building **websites, mobile backends, and web APIs** for any platform or device.
+* Applications **run and scale** in both **Windows** and **Linux-based** environments.
+* Provides **Quickstarts** for common programming languages.
+
+**Supported Languages**
+
+* **ASP.NET**
+* **Java**
+* **Node.js**
+* **Python**
+* **PHP**
+
+**App Service Benefits**
+
+* **Multiple languages and frameworks**
+
+  * First-class support for **ASP.NET, Java, Node.js, PHP, and Python**
+  * Supports **PowerShell** and other scripts or executables as background services
+
+* **DevOps optimization**
+
+  * Continuous integration and deployment with:
+
+    * **Azure DevOps**
+    * **GitHub**
+    * **BitBucket**
+    * **Docker Hub**
+    * **Azure Container Registry**
+  * Support for **test and staging environments**
+  * App management via **Azure PowerShell** or **cross-platform CLI**
+
+* **Global scale with high availability**
+
+  * Scale **up or out**, **manually or automatically**
+  * Host apps in **Microsoft global datacenter infrastructure**
+  * App Service **SLA provides high availability**
+
+* **Security and compliance**
+
+  * Compliant with **ISO**, **SOC**, and **PCI**
+  * Authentication using:
+
+    * **Microsoft Entra ID**
+    * Social logins (**Google, Facebook, Twitter, Microsoft**)
+  * Supports **IP address restrictions**
+  * Supports **managed service identities**
+
+* **Application templates**
+
+  * Templates available from **Azure Marketplace**
+  * Examples: **WordPress, Joomla, Drupal**
+
+* **Visual Studio integration**
+
+  * Dedicated tools for **creating, deploying, and debugging** applications
+
+* **API and mobile features**
+
+  * Built-in **CORS** support for RESTful APIs
+  * Mobile features include:
+
+    * Authentication
+    * Offline data sync
+    * Push notifications
+
+**Key Facts to Remember**
+
+* **App Service supports Windows and Linux**
+* **Automatic and manual scaling are both supported**
+* **Integrated CI/CD with multiple DevOps platforms**
+* **Built-in security, compliance, and authentication options**
+* **Marketplace templates simplify app deployment**
 
 ---
