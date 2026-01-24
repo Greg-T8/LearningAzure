@@ -31,6 +31,7 @@
 * [Use Azure Application Insights](#use-azure-application-insights)
 * [Exercise: Implement Web Apps](#exercise-implement-web-apps)
 * [Compare containers to virtual machines](#compare-containers-to-virtual-machines)
+* [Review Azure Container Instances](#review-azure-container-instances)
 
 ---
 
@@ -2565,5 +2566,77 @@ Deployment slot settings fall into three categories:
 * Virtual machines run a **full OS with a kernel**.
 * Containers rely on **orchestrators** for fault tolerance and scaling.
 * Containers enable **higher density and faster deployment** than virtual machines.
+
+---
+
+## Review Azure Container Instances
+
+[Module Reference](https://learn.microsoft.com/training/modules/configure-azure-container-instances/)
+
+**Azure Container Instances Overview**
+
+* **Azure Container Instances (ACI)** provides the **fastest and simplest way** to run containers in Azure.
+* No need to manage **virtual machines**.
+* No requirement to adopt a **higher-level orchestration service**.
+* Designed for scenarios that can run in **isolated containers**.
+
+**Container Images**
+
+* All containers are created from **container images**.
+* A container image is a **lightweight, standalone, executable package**.
+* Container images include:
+
+  * **Code**: Application source code
+  * **Runtime**: Environment required to execute the application
+  * **System tools**: Utilities needed for operation
+  * **System libraries**: Shared libraries used by the application
+  * **Settings**: Application-specific configuration parameters
+* Container images are **portable** and run **consistently across environments**.
+* Containers are **runtime instances** of container images.
+
+**Azure Container Instances Architecture**
+
+* Containers run on a **virtual machine** within a **virtual network**.
+* The underlying infrastructure is **fully managed by Azure**.
+
+<img src='.img/2026-01-24-05-16-26.png' width=400>
+
+**Benefits of Azure Container Instances**
+
+* **Fast startup times**
+
+  * Containers start in **seconds**.
+  * No VM deployment or management required.
+* **Public IP connectivity and DNS names**
+
+  * Containers can be exposed directly to the internet.
+  * Supports **public IP addresses** and **FQDNs**.
+* **Custom sizes**
+
+  * Container resources can be **scaled dynamically** based on demand.
+* **Persistent storage**
+
+  * Supports direct mounting of **Azure Files** file shares.
+* **Linux and Windows containers**
+
+  * Supports both **Linux** and **Windows** container workloads.
+  * OS type is specified when creating container groups.
+* **Coscheduled groups**
+
+  * Supports **multi-container groups**.
+  * Containers share the same host machine resources.
+* **Virtual network deployment**
+
+  * Containers can be deployed directly into an **Azure virtual network**.
+
+**Key Facts to Remember**
+
+* **ACI requires no VM management**
+* **Containers start in seconds**
+* **Supports Linux and Windows containers**
+* **Supports Azure Files for persistent storage**
+* **Allows public IP and DNS exposure**
+* **Supports multi-container groups**
+* **Can be deployed into virtual networks**
 
 ---
