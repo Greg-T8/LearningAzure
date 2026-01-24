@@ -29,6 +29,7 @@
 * [Create custom domain names](#create-custom-domain-names)
 * [Back up and restore your App Service app](#back-up-and-restore-your-app-service-app)
 * [Use Azure Application Insights](#use-azure-application-insights)
+* [Exercise: Implement Web Apps](#exercise-implement-web-apps)
 
 ---
 
@@ -2479,5 +2480,51 @@ Deployment slot settings fall into three categories:
 * Works across **multiple platforms and hosting environments**.
 * Provides deep visibility into **requests, dependencies, exceptions, users, and performance metrics**.
 * Supports **custom telemetry** for business-specific insights.
+
+---
+
+## Exercise: Implement Web Apps
+
+[Module Reference](https://learn.microsoft.com/training/modules/configure-azure-app-service/)
+
+**Lab Scenario**
+
+* Your organization is migrating **on-premises web apps** to **Azure**.
+* You are acting as the **Azure Administrator** for this migration.
+
+**Objectives / Job Skills**
+
+* **Create an Azure Web App**
+* **Host websites on Windows servers using the PHP runtime stack**
+* **Create and use Azure Web App deployment slots**
+* **Create a staging deployment slot**
+* **Configure Web App deployment settings**
+* **Deploy code to the staging deployment slot**
+* **Swap deployment slots**
+* **Configure and test autoscaling for the Azure Web App**
+
+**Architecture**
+
+* Architecture diagram is provided and explained within the exercise instructions.
+
+**Exercise Details**
+
+* **Estimated time**: 20 minutes
+* **Prerequisite**: An active Azure subscription
+* The exercise is launched from the page and completed by following step-by-step instructions.
+* After completing the lab, you return to the module to continue learning.
+
+**Next Unit**
+
+* **Module assessment**
+
+**Key Facts to Remember**
+
+* **Deployment slots** enable staged deployments and zero-downtime swaps.
+* **Staging slots** are used to validate changes before production.
+* **Slot swapping** promotes tested code to production.
+* **Autoscaling** can be configured and tested on Azure Web Apps.
+* **PHP runtime on Windows** is supported in Azure Web Apps.
+* This exercise is **hands-on** and requires an Azure subscription.
 
 ---
