@@ -25,6 +25,9 @@
 * [Explore continuous integration and deployment](#explore-continuous-integration-and-deployment)
 * [Create deployment slots](#create-deployment-slots)
 * [Add deployment slots](#add-deployment-slots)
+* [Secure your App Service app](#secure-your-app-service-app)
+* [Create custom domain names](#create-custom-domain-names)
+* [Back up and restore your App Service app](#back-up-and-restore-your-app-service-app)
 
 ---
 
@@ -2154,5 +2157,238 @@ Deployment slot settings fall into three categories:
 * **Not all settings swap**—slot-specific settings remain with the source slot
 * App settings and connection strings are **swapped by default**, but can be marked slot-specific
 * Slot swaps can include the **production slot**
+
+---
+
+## Secure your App Service app
+
+[Module Reference](https://learn.microsoft.com/training/modules/secure-your-app-service-app/)
+
+**Overview**
+
+* **Azure App Service** provides built-in **authentication and authorization**.
+* Supports **web apps**, **APIs**, **mobile backends**, and **Azure Functions**.
+* Enables sign-in and secure data access with **minimal or no application code**.
+* Abstracts complex security concepts such as **federation**, **encryption**, **JWT management**, and **grant types**.
+
+**Authentication and Authorization Module**
+
+* Runs **in the same environment** as application code, but **separately**.
+* Configured using **app settings**.
+* Requires **no SDKs**, **no language-specific features**, and **no code changes**.
+* Handles:
+
+  * **User authentication** with the selected identity provider
+  * **Token validation, storage, and refresh**
+  * **Authenticated session management**
+  * **Injection of identity data** into HTTP request headers
+
+**Configuration Options for App Security**
+
+* **Allow anonymous requests**
+
+  * No automatic action taken for unauthenticated traffic.
+  * Authorization is handled by the application code.
+  * Authentication details are passed in HTTP headers for authenticated users.
+  * Allows flexibility and support for **multiple sign-in providers**.
+
+* **Allow only authenticated requests**
+
+  * Redirects anonymous requests to:
+
+    * `/.auth/login/<provider>`
+  * Equivalent to **Log in with <provider>**.
+  * Native mobile apps receive **HTTP 401 Unauthorized**.
+  * Removes the need to write authentication code.
+  * Restricts access to **all endpoints**.
+
+**Important Consideration**
+
+* Restricting all access may be unsuitable for apps that require a **public home page**, such as many **single-page applications (SPAs)**.
+
+**Logging and Tracing**
+
+* Authentication and authorization traces are written to **application logs**.
+* Useful for diagnosing unexpected authentication errors.
+* **Failed request tracing** shows how the security module handled a request.
+* Look for log entries referencing:
+
+  * **EasyAuthModule_32**
+  * **EasyAuthModule_64**
+
+**Key Facts to Remember**
+
+* App Service authentication runs **alongside but isolated from app code**.
+* Configuration is done via **Azure portal settings**, not code.
+* Two access modes: **anonymous allowed** or **authentication required**.
+* Token handling and identity injection are fully managed by App Service.
+* Authentication troubleshooting is done through **standard app logs**.
+
+---
+
+## Create custom domain names
+
+[Module Reference](https://learn.microsoft.com/training/modules/configure-azure-app-service/)
+
+**Default Domain Behavior**
+
+* Azure assigns each web app a default subdomain of **`azurewebsites.net`**
+* Example:
+
+  * Web app name: **contoso**
+  * Default URL: **contoso.azurewebsites.net**
+* Azure also assigns a **virtual IP address** to the app
+
+**What Is a Custom Domain**
+
+* A **domain name** is the address users enter in a browser to reach a website
+* A **custom domain** is a domain you own that points to your Azure-hosted app
+* Replaces the default Azure-assigned domain
+
+**Examples**
+
+* Default Azure domain: **myapp-00000.westus.azurewebsites.net**
+* Custom domain: **[www.contoso.com](http://www.contoso.com)**
+
+**Benefits of Using a Custom Domain**
+
+* Establishes a **branded, user-friendly** web address
+* Improves **trust and credibility**
+* Helps **manage and secure traffic** to the application
+
+**Steps to Configure a Custom Domain**
+
+<img src='.img/2026-01-24-05-00-57.png' width=500>
+
+
+1. **Reserve your domain name**
+
+   * You can purchase a domain directly in the **Azure portal**
+   * Domain registration and management are handled within Azure
+   * This domain is separate from the `*.azurewebsites.net` name
+
+2. **Create DNS records**
+
+   * DNS maps domain names to destinations
+   * Supported DNS record types for web apps:
+
+     * **A record**
+
+       * Maps a domain name to an **IP address**
+       * Must be updated if the IP address changes
+     * **CNAME record**
+
+       * Maps a domain name to **another domain name**
+       * Example: `contoso.com` → `webapp.azurewebsites.net`
+       * Remains valid if the IP address changes
+   * Limitations:
+
+     * Some registrars do **not allow CNAME records** for:
+
+       * Root domains
+       * Wildcard domains
+     * In these cases, an **A record is required**
+
+3. **Enable the custom domain**
+
+   * Validate the domain in the **Azure portal**
+   * Add the custom domain to the web app
+   * Test the domain before publishing
+
+**Important Requirements**
+
+* A **paid App Service plan tier** is required to map a custom domain to an app
+
+**Key Facts to Remember**
+
+* Default App Service domains use **`azurewebsites.net`**
+* Custom domains must be **owned and configured** by the user
+* **CNAME records** are preferred when allowed because they survive IP changes
+* **A records** are required when CNAMEs are not supported
+* Custom domains **require a paid App Service plan**
+
+---
+
+## Back up and restore your App Service app
+
+[Module Reference](https://learn.microsoft.com/training/modules/backup-restore-azure-app-service/)
+
+**Backup and Restore Overview**
+
+* The **Backup and Restore** feature in **Azure App Service** allows **manual or scheduled backups**
+* Backups can be **retained for a specific period or indefinitely**
+* Apps or sites can be restored by:
+
+  * **Overwriting the existing app**
+  * **Restoring to another app or site**
+* The **Backups page** shows all automatic and custom backups with their status
+
+**Requirements**
+
+* App must use a **Standard or Premium** App Service plan
+* Requires an **Azure Storage account and container**
+
+  * Must be in the **same subscription** as the app
+
+**What Gets Backed Up**
+
+* **App configuration settings**
+* **File content**
+* **Connected databases**, including:
+
+  * SQL Database
+  * Azure Database for MySQL
+  * Azure Database for PostgreSQL
+  * MySQL in-app
+
+**Backup File Structure**
+
+* Each backup contains:
+
+  * **ZIP file** – application and database data
+  * **XML file** – manifest of ZIP contents
+
+**Backup Types**
+
+* **Full backups**
+
+  * Default option
+  * Includes all configuration, files, and databases
+* **Partial backups**
+
+  * Supported
+  * Allows exclusion of specific files or folders
+  * Restored using the same process as full backups
+
+**Restore Behavior**
+
+* **Full restore**
+
+  * Replaces all site content with backup contents
+  * Files not present in the backup are **deleted**
+* **Partial restore**
+
+  * Excluded files and folders remain **unchanged**
+
+**Limits and Visibility**
+
+* Backups can store up to **10 GB** of app and database content
+* Backup files are visible:
+
+  * In the **Containers** page of the storage account
+  * On the app or site page in the Azure portal
+
+**Additional Considerations**
+
+* Backup files can be **unzipped and browsed** without restoring
+* Storage accounts with a **firewall enabled** cannot be used as backup destinations
+
+**Key Facts to Remember**
+
+* **Plan requirement**: Standard or Premium App Service plan
+* **Storage requirement**: Same-subscription Azure Storage account
+* **Default backup type**: Full
+* **Maximum backup size**: 10 GB
+* **Firewall restriction**: Blocks use as backup destination
 
 ---
