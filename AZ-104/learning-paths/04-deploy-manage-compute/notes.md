@@ -32,6 +32,7 @@
 * [Exercise: Implement Web Apps](#exercise-implement-web-apps)
 * [Compare containers to virtual machines](#compare-containers-to-virtual-machines)
 * [Review Azure Container Instances](#review-azure-container-instances)
+* [Implement container groups](#implement-container-groups)
 
 ---
 
@@ -2638,5 +2639,112 @@ Deployment slot settings fall into three categories:
 * **Allows public IP and DNS exposure**
 * **Supports multi-container groups**
 * **Can be deployed into virtual networks**
+
+---
+
+## Implement container groups
+
+[Module Reference](https://learn.microsoft.com/training/modules/configure-azure-container-instances/implement-container-groups)
+
+**Container Group Overview**
+
+* A **container group** is the top-level resource in **Azure Container Instances**.
+* A container group is a collection of containers scheduled on the **same host machine**.
+* Containers in a group **share**:
+
+  * Lifecycle
+  * Allocated resources
+  * Local network
+  * Storage volumes
+
+**Relationship to Kubernetes Pods**
+
+* A container group is **similar to a Kubernetes pod**.
+* A pod typically maps **1:1 with a container**, but can contain multiple containers.
+* Containers in a multi-container pod or group can **share related resources**.
+
+**Resource Allocation**
+
+* Azure Container Instances allocates resources to a multi-container group by **summing the resource requests** of all containers.
+* Supported resource types include:
+
+  * CPUs
+  * Memory
+  * GPUs
+
+**Deployment Methods**
+
+* Two common ways to deploy multi-container groups:
+
+  * **ARM templates**
+
+    * Recommended when deploying container instances **with other Azure resources**, such as Azure Files.
+  * **YAML files**
+
+    * Recommended when the deployment includes **only container instances** due to concise syntax.
+
+**Networking and Access**
+
+* Container groups can share:
+
+  * A **single external-facing IP address**
+  * **One or more exposed ports** on that IP
+  * A **DNS label with an FQDN**
+* **External client access**
+
+  * Requires exposing the port on both the **container group IP** and the **container**.
+* **Port mapping**
+
+  * **Not supported**
+  * Containers share a **single port namespace**.
+* **Deleted container groups**
+
+  * The assigned **IP address and FQDN are released** when the group is deleted.
+
+**Multi-Container Group Configuration Example**
+
+* Scheduled on a **single host machine**
+* Assigned a **DNS name label**
+* Exposes:
+
+  * **One public IP address**
+  * **One exposed port**
+* Container configuration:
+
+  * One container listens on **port 80**
+  * One container listens on **port 1433**
+* Storage:
+
+  * Includes **two Azure Files file shares**
+  * Each container mounts **one file share locally**
+
+<img src='.img/2026-01-24-05-22-05.png' width=700>
+
+**Use Cases for Multi-Container Groups**
+
+* **Web app updates**
+
+  * One container serves the web app.
+  * Another container pulls the latest content from source control.
+* **Log data collection**
+
+  * Application container outputs logs and metrics.
+  * Logging container collects and writes data to long-term storage.
+* **App monitoring**
+
+  * Monitoring container periodically checks application health.
+  * Raises alerts if issues are detected.
+* **Front-end and back-end support**
+
+  * Front-end container serves the web app.
+  * Back-end container retrieves or processes data.
+
+**Key Facts to Remember**
+
+* **Container group** is the top-level Azure Container Instances resource.
+* All containers in a group **share lifecycle, networking, and storage**.
+* Resource allocation is the **sum of all container requests**.
+* **Port mapping is not supported** in container groups.
+* Deleting a container group **releases its IP address and FQDN**.
 
 ---
