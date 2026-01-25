@@ -18,7 +18,7 @@
 | # | Module | Status | Completed |
 |---|--------|--------|-----------|
 | 1 | [Introduction to Azure Backup](https://learn.microsoft.com/en-us/training/modules/intro-to-azure-backup/) | ✅ | 1/25/26 |
-| 2 | [Protect your virtual machines by using Azure Backup](https://learn.microsoft.com/en-us/training/modules/protect-virtual-machines-with-azure-backup/) | 🕒 | |
+| 2 | [Protect your virtual machines by using Azure Backup](https://learn.microsoft.com/en-us/training/modules/protect-virtual-machines-with-azure-backup/) | ✅ | 1/25/26 |
 
 **Legend:** 🕒 Not Started | 🚧 In Progress | ✅ Complete
 
