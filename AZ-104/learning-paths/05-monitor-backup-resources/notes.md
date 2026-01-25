@@ -6,33 +6,11 @@
 
 ## 📋 Modules
 
-| # | Module | Status | Notes |
-|---|--------|--------|-------|
-| 1 | Configure Azure Monitor | 🕒 | |
-| 2 | Configure Log Analytics | 🕒 | |
-| 3 | Configure Azure alerts | 🕒 | |
-| 4 | Configure Azure Backup | 🕒 | |
+| # | Module | Status | Completed |
+|---|--------|--------|-----------|
+| 1 | [Introduction to Azure Backup](https://learn.microsoft.com/en-us/training/modules/intro-to-azure-backup/) | 🕒 | |
+| 2 | [Protect your virtual machines by using Azure Backup](https://learn.microsoft.com/en-us/training/modules/protect-virtual-machines-with-azure-backup/) | 🕒 | |
+
+**Legend:** 🕒 Not Started | 🚧 In Progress | ✅ Complete
 
 ---
-
-## 🧠 Key Concepts
-
-<!-- Add notes as you complete each module -->
-
----
-
-## 💡 Commands & Snippets
-
-```powershell
-# Add useful commands here
-```
-
----
-
-## ❓ Questions for Review
-
-<!-- Add questions that came up during study -->
-
----
-
-*Last updated: 2026-01-14*
