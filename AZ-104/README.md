@@ -11,8 +11,8 @@
 
 | Priority | Resource                                                        | Purpose                           | Status | Completed |
 | -------- | --------------------------------------------------------------- | --------------------------------- | ------ | --------- |
-| 1        | [Microsoft Learning Paths](./learning-paths/README.md)          | Core concepts & knowledge         | 🚧    |           |
-| 2        | [Udemy Course]()           | Alternative explanations          | 🕒    |           |
+| 1        | [Microsoft Learning Paths](./learning-paths/README.md)          | Core concepts & knowledge         | ✅    | 1/25/26          |
+| 2        | [Udemy Course]()           | Alternative explanations          | 🚧    |           |
 | 3        | [John Savill's Training](./video-courses/john-savill/README.md) | Visual reinforcement & deep dives | 🕒    |           |
 | 4        | [Microsoft GitHub Labs](./microsoft-labs/README.md)             | Official hands-on practice        | 🕒    |           |
 | 5        | [MeasureUp Practice Exams](./practice-exams/README.md)          | Exam readiness assessment         | 🕒    |           |
