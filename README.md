@@ -14,18 +14,18 @@ This repository documents my learning progress through Microsoft Azure certifica
 
 | Date | AI-900 | AZ-104 | Total |
 |------|--------|--------|-------|
+| Sun, Jan 25 | 0 | 🟢 23 | **23** |
 | Sat, Jan 24 | 0 | 🟢 23 | **23** |
 | Fri, Jan 23 | 0 | 🟢 24 | **24** |
 | Thu, Jan 22 | 🟢 3 | 🟢 32 | **35** |
 | Wed, Jan 21 | 🟢 66 | 🟢 32 | **98** |
 | Tue, Jan 20 | 🟢 21 | 🟢 32 | **53** |
 | Mon, Jan 19 | 🟢 24 | 🟢 20 | **44** |
-| Sun, Jan 18 | 🟢 14 | 🟢 24 | **38** |
-| **Total** | **128** | **187** | **315** |
+| **Total** | **114** | **186** | **300** |
 
 *🟢 = Activity on this day*
 
-*Last updated: January 24, 2026 at 14:03 UTC*
+*Last updated: January 25, 2026 at 14:02 UTC*
 
 <!-- COMMIT_STATS_END -->
 
