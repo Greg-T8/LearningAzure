@@ -8,6 +8,7 @@
 * [Azure Backup features and scenarios](#azure-backup-features-and-scenarios)
 * [Back up an Azure virtual machine by using Azure Backup](#back-up-an-azure-virtual-machine-by-using-azure-backup)
 * [Exercise - Back up an Azure virtual machine](#exercise---back-up-an-azure-virtual-machine)
+* [Restore virtual machine data](#restore-virtual-machine-data)
 
 ---
 <!-- omit in toc -->
@@ -835,5 +836,142 @@ az backup protection backup-now \
 * Default retention period is **180 days**
 * On-demand backups can be triggered without waiting for the schedule
 * Backup status is visible at both **VM** and **vault** levels
+
+---
+
+## Restore virtual machine data
+
+[Module Reference](https://learn.microsoft.com/en-us/training/modules/protect-virtual-machines-using-azure-backup/restore-virtual-machine-data)
+
+**Overview**
+
+* Used as part of **business continuity and disaster recovery (BCDR)** testing.
+* Azure Backup supports restoring an Azure virtual machine (VM) from:
+
+  * **Snapshot tier** (instant restore, optimized for operational recovery)
+  * **Vault tier** (Recovery Services vault)
+
+**Restore Types**
+
+* **Create a new VM**
+
+  * Quickly creates a basic VM from a restore point.
+  * The new VM **must be created in the same region** as the source VM.
+
+* **Restore disk**
+
+  * Restores VM disks to a specified resource group.
+  * Disks can be:
+
+    * Used to create a new VM (template provided by Azure Backup)
+    * Attached to an existing VM
+  * Useful for:
+
+    * Customizing VM configuration
+    * Adding settings not present at backup time
+    * Using ARM templates or PowerShell
+
+* **Replace existing**
+
+  * Restores disks and replaces disks on an **existing VM**.
+  * Azure Backup:
+
+    * Takes a snapshot of the current VM
+    * Stores it in a staging location
+    * Replaces existing disks with the selected restore point
+  * Limitations:
+
+    * The VM **must exist**
+    * Not supported if the VM is deleted
+
+**Cross Region (Secondary Region) Restore**
+
+* Restores Azure VMs to the **secondary region** of an Azure paired region.
+* Supported restore options:
+
+  * Create a VM
+  * Restore disks
+* Not supported:
+
+  * Replace existing disks
+
+**Cross Subscription Restore**
+
+* Allows restore to a **different subscription** in the same tenant.
+* Requirements and capabilities:
+
+  * Cross Subscription Restore must be **enabled on the Recovery Services vault**
+  * Supported only for **managed VMs**
+  * Works with:
+
+    * Cross Region Restore
+    * Cross Zonal Restore
+  * Supported for **Restore with Managed System Identities (MSI)**
+* Not supported:
+
+  * Snapshot tier recovery points
+  * Unmanaged VMs
+  * VMs encrypted with Advanced Digital Encryption (ADE)
+
+**Cross Zonal Restore**
+
+* Restores VMs or disks to **different availability zones**.
+* Zone selection is **logical**, not physical.
+* Supported scenarios:
+
+  * Managed virtual machines only
+  * Restore with Managed System Identities (MSI)
+  * Vaults with **Zone-Redundant Storage (ZRS)** enabled
+  * Restore from secondary regions
+* Not supported:
+
+  * Snapshot restore points
+  * Encrypted Azure VMs
+
+**Selective Disk Backup**
+
+* Available through **Enhanced policy**.
+* Allows:
+
+  * Backup of only selected data disks
+  * Restore of a subset of disks from a recovery point
+* Supported from:
+
+  * Instant restore
+  * Vault tier
+* Useful when:
+
+  * Only certain disks contain critical data
+  * Using database backups and only the OS disk needs VM-level backup
+  * Reducing backup storage costs
+
+**Recover Files from a Backup**
+
+* Individual files can be recovered by:
+
+  * Mounting the snapshot on the target machine
+  * Using the **iSCSI initiator**
+* File recovery is performed without restoring the entire VM.
+
+**Restore Encrypted Virtual Machines**
+
+* Azure Backup supports VMs encrypted using **Azure Disk Encryption**.
+* Encryption uses **Azure Key Vault** to manage secrets.
+* Key Encryption Keys (KEKs) can add an extra layer of protection.
+
+**Encrypted VM Restore Limitations**
+
+* Only **standalone key encryption** is supported.
+* File-level or folder-level restores are **not supported**.
+* Entire VM must be restored for file access.
+* **Replace existing VM** restore option is not available.
+
+**Key Facts to Remember**
+
+* **Replace existing** restore fails if the VM is deleted.
+* Cross Region Restore does **not** support replacing existing disks.
+* Cross Subscription and Cross Zonal Restore support **managed VMs only**.
+* Snapshot tier recovery points do **not** support cross-subscription or cross-zonal restore.
+* Encrypted VMs cannot use file-level restore or replace existing VM options.
 
 ---
