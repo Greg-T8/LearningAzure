@@ -4,6 +4,7 @@
 * [Introduction to Azure Backup](#introduction-to-azure-backup)
 * [What is Azure Backup?](#what-is-azure-backup)
 * [How Azure Backup works](#how-azure-backup-works)
+* [When to use Azure Backup](#when-to-use-azure-backup)
 
 ---
 <!-- omit in toc -->
@@ -11,7 +12,7 @@
 
 | # | Module | Status | Completed |
 |---|--------|--------|-----------|
-| 1 | [Introduction to Azure Backup](https://learn.microsoft.com/en-us/training/modules/intro-to-azure-backup/) | 🕒 | |
+| 1 | [Introduction to Azure Backup](https://learn.microsoft.com/en-us/training/modules/intro-to-azure-backup/) | ✅ | 1/25/26 |
 | 2 | [Protect your virtual machines by using Azure Backup](https://learn.microsoft.com/en-us/training/modules/protect-virtual-machines-with-azure-backup/) | 🕒 | |
 
 **Legend:** 🕒 Not Started | 🚧 In Progress | ✅ Complete
@@ -301,5 +302,122 @@ Azure Backup supports backing up the following resources:
 * Soft delete retains backups for **14 days**
 * SQL log backups can run every **15 minutes**
 * Enhanced backup policy enables **hourly VM backups** and **selective disk backup**
+
+---
+
+## When to use Azure Backup
+
+[Module Reference](https://learn.microsoft.com/en-us/training/modules/intro-to-azure-backup/)
+
+**Overview**
+
+* **Azure Backup** is a secure, zero-infrastructure Azure service for protecting Azure-managed data assets.
+* Designed to ensure:
+
+  * **Data availability**
+  * **Protection of Azure workloads**
+  * **Data security**
+
+**Decision Criteria**
+
+* **Azure workloads supported**
+
+  * Azure Virtual Machines (Windows and Linux)
+  * Azure Disks
+  * SQL Server in Azure VMs
+  * SAP HANA databases in Azure VMs
+  * Azure Blobs
+  * Azure File shares
+  * Azure Database for PostgreSQL
+* **Compliance**
+
+  * Customer-defined backup policies
+  * Long-term retention across multiple zones or regions
+* **Operational recoveries**
+
+  * Self-service backup and restore
+  * Supports recovery from accidental deletion or data corruption
+
+**Applying the Criteria**
+
+* Azure Backup:
+
+  * Protects entire Azure VMs using backup extensions
+  * Supports file, folder, and system state backup using the **Microsoft Azure Recovery Services (MARS) agent**
+  * Supports **SQL Server–only backups** on Azure VMs using a specialized, stream-based solution
+* **Cross-region considerations**
+
+  * Cross-region backup is **not supported for most workloads**
+  * **Cross-region restore** is supported in a paired secondary region
+
+**SQL Server Backup Capabilities**
+
+* Workload-aware backups support:
+
+  * **Full**
+  * **Differential**
+  * **Log**
+* **Recovery Point Objective (RPO)**: as low as **15 minutes**
+* **Point-in-time recovery**: up to **one second**
+* **Granularity**
+
+  * Individual database-level backup and restore
+* Benefits include:
+
+  * Zero infrastructure
+  * Long-term retention
+  * Centralized management
+
+<img src='.img/2026-01-25-05-27-09.png' width=700> 
+
+**Compliance and Retention**
+
+* Backup management is handled through:
+
+  * Recovery Services vaults and Backup vaults
+  * Azure portal, Backup Center, Vault dashboards
+  * SDK, CLI, and REST APIs
+* Vaults act as an **Azure RBAC boundary**, allowing access restriction to authorized Backup Admins
+* **Retention types**
+
+  * Short-term retention: minutes or daily
+  * Long-term retention: weekly, monthly, or yearly
+* **Long-term retention scenarios**
+
+  * **Planned**: known compliance requirements
+  * **Unplanned**: on-demand backups with custom retention
+* **On-demand backups**
+
+  * Not governed by scheduled backup policy retention
+  * Useful for unscheduled or granular backups (for example, multiple VM backups per day)
+
+**Policy Management**
+
+* Azure Backup Policies define:
+
+  * Backup schedule
+  * Retention duration
+* Policies can be reused and applied across multiple protected items within a vault
+
+**Monitoring and Administration**
+
+* Integrates with **Log Analytics** for monitoring and reporting
+* Provides:
+
+  * Built-in job monitoring for backup, restore, delete, and configuration operations
+  * Vault-scoped monitoring for individual vaults
+* **Backup Explorer**
+
+  * Azure Monitor workbook
+  * Centralized view across tenants, regions, subscriptions, resource groups, and vaults
+  * Supports drill-down analysis and troubleshooting
+
+**Key Facts to Remember**
+
+* Azure Backup is **zero-infrastructure** and **Azure-native**
+* Supports **long-term retention**, including **up to 10+ years**
+* **15-minute RPO** for SQL Server log backups
+* **Cross-region restore** is supported; **cross-region backup** generally is not
+* On-demand backups use **custom retention**, independent of scheduled policies
 
 ---
