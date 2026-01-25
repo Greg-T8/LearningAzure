@@ -6,6 +6,7 @@
 * [How Azure Backup works](#how-azure-backup-works)
 * [When to use Azure Backup](#when-to-use-azure-backup)
 * [Azure Backup features and scenarios](#azure-backup-features-and-scenarios)
+* [Back up an Azure virtual machine by using Azure Backup](#back-up-an-azure-virtual-machine-by-using-azure-backup)
 
 ---
 <!-- omit in toc -->
@@ -546,5 +547,123 @@ Azure Backup supports backing up the following resources:
 * Backup data is stored in a **Recovery Services vault**.
 * Supports **LRS, GRS, and ZRS** replication options.
 * SQL Server and SAP HANA backups support **15-minute RPO** and point-in-time restore.
+
+---
+
+## Back up an Azure virtual machine by using Azure Backup
+
+[Module Reference](https://learn.microsoft.com/en-us/training/modules/protect-virtual-machines-by-using-azure-backup/)
+
+**Overview**
+
+* Azure virtual machines can be backed up using **Azure Backup** without installing extra software.
+* Backups are created by taking **snapshots of VM disks** at user-defined intervals.
+* Snapshots are transferred to a **Recovery Services vault** based on the configured backup policy.
+
+**Recovery Services vault**
+
+* Central storage and management entity for Azure Backup data.
+* Eliminates the need to deploy or manage storage accounts.
+* Backup data is stored in Azure Backup storage accounts in a **separate fault domain**.
+* Acts as a **role-based access control (RBAC) boundary** for secure access.
+* Used to monitor and manage backup and restore operations.
+
+<img src='.img/2026-01-25-05-34-13.png' width=700> 
+
+**Snapshots**
+
+* A snapshot is a **point-in-time backup** of all disks on a VM.
+* Snapshot extensions depend on the VM operating system:
+
+| Extension        | OS      | Description                                                           |
+| ---------------- | ------- | --------------------------------------------------------------------- |
+| VM Snapshot      | Windows | Uses Volume Shadow Copy Service (VSS) to capture disk data and memory |
+| VM SnapshotLinux | Linux   | Captures a copy of the disk                                           |
+
+**Backup consistency levels**
+
+* **Application consistent**
+
+  * Captures memory, disk data, and pending I/O operations.
+  * Uses VSS writers on Windows.
+  * Requires custom pre- and post-scripts on Linux.
+  * Provides full VM and application consistency.
+* **File system consistent**
+
+  * Used if VSS or Linux scripts fail.
+  * Prevents file system corruption.
+  * Applications must self-recover during startup.
+* **Crash consistent**
+
+  * Typically occurs when the VM is shut down.
+  * No memory or I/O captured.
+  * Does not guarantee OS or application consistency.
+
+**Backup policy**
+
+* Defines **backup frequency** and **retention duration**.
+* Backup frequency options:
+
+  * Daily
+  * Weekly
+  * Hourly (Enhanced policy only)
+* Retention can span **multiple years**.
+* Supports two access tiers:
+
+  * Snapshot tier
+  * Vault tier
+
+**Selective disk backup (Enhanced policy)**
+
+* Allows backup and restore of **specific data disks only**.
+* Enables restoring a subset of disks from a recovery point.
+* Useful for:
+
+  * Protecting critical disks only
+  * Reducing backup costs
+  * Using database-specific backup solutions
+  * Backing up only the OS disk when required
+
+**Snapshot tier**
+
+* Stores snapshots **locally for up to five days**.
+* Enables **instant restore**.
+* Recommended for faster restore operations.
+
+**Vault tier**
+
+* Snapshots are copied to the vault for **long-term retention**.
+* Recovery point type becomes **snapshot and vault**.
+* Provides higher durability and security.
+
+**Backup process for Azure virtual machines**
+
+1. Azure Backup starts a backup job based on the configured policy.
+2. During the first backup:
+
+   * Windows VMs install the **VM Snapshot** extension.
+   * Linux VMs install the **VM SnapshotLinux** extension.
+3. A snapshot is taken.
+4. Data is stored locally, then transferred to the vault.
+5. Disks are backed up **in parallel**.
+6. Only **changed blocks (delta)** since the last backup are transferred.
+7. Snapshot data may take several hours to reach the vault during peak times.
+8. Total backup time is **less than 24 hours** for daily policies.
+
+**Security and protection features**
+
+* Vault encryption can be enabled using **customer-managed keys (CMK)**.
+* **Enhanced soft delete** protects backups from accidental or malicious deletion.
+* Enhanced soft delete can be locked **always on** for additional protection.
+
+<img src='.img/2026-01-25-05-37-12.png' width=700> 
+
+**Key Facts to Remember**
+
+* Azure VM backups use **disk snapshots**, not agents.
+* Snapshots are stored locally for **up to five days**.
+* Enhanced policy enables **hourly backups** and **selective disk backup**.
+* Recovery Services vault provides **RBAC, storage isolation, and retention management**.
+* Daily VM backups complete in **less than 24 hours**.
 
 ---
