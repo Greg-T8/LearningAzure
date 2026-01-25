@@ -5,6 +5,7 @@
 * [What is Azure Backup?](#what-is-azure-backup)
 * [How Azure Backup works](#how-azure-backup-works)
 * [When to use Azure Backup](#when-to-use-azure-backup)
+* [Azure Backup features and scenarios](#azure-backup-features-and-scenarios)
 
 ---
 <!-- omit in toc -->
@@ -419,5 +420,131 @@ Azure Backup supports backing up the following resources:
 * **15-minute RPO** for SQL Server log backups
 * **Cross-region restore** is supported; **cross-region backup** generally is not
 * On-demand backups use **custom retention**, independent of scheduled policies
+
+---
+
+## Azure Backup features and scenarios
+
+[Module Reference](https://learn.microsoft.com/en-us/training/modules/protect-virtual-machines-with-azure-backup/)
+
+**What is Azure Backup**
+
+* **Azure Backup** is a built-in Azure service that provides secure backup for Azure-managed data assets.
+* Uses **zero-infrastructure** solutions with self-service backup and restore.
+* Provides **at-scale management** with lower and predictable cost.
+* Supports:
+
+  * Azure virtual machines (Windows and Linux)
+  * On-premises virtual machines
+  * Workloads such as **SQL Server** and **SAP HANA** running in Azure VMs
+* Managed entirely through the **Azure portal**, unlike traditional backup solutions that require complex setup.
+
+**Azure Backup vs. Azure Site Recovery**
+
+* **Azure Backup**
+
+  * Maintains copies of **stateful data**
+  * Allows you to **go back in time**
+  * Used for:
+
+    * Accidental data loss
+    * Data corruption
+    * Ransomware attacks
+* **Azure Site Recovery**
+
+  * Replicates data in **near real time**
+  * Enables **failover**
+  * Used for:
+
+    * Region-wide disasters (for example, natural disasters)
+* Choice depends on:
+
+  * Application criticality
+  * **Recovery Point Objective (RPO)**
+  * **Recovery Time Objective (RTO)**
+  * Cost implications
+
+**Why use Azure Backup**
+
+* **Zero-infrastructure backup**
+
+  * No need to deploy or manage backup servers or storage
+* **Long-term retention**
+
+  * Retain backups for many years
+  * Automatic pruning of recovery points using lifecycle management
+* **Security**
+
+  * **Azure role-based access control (RBAC)** for least-privilege access
+  * **Encryption**
+
+    * Encrypted at rest using Microsoft-managed keys
+    * Optional customer-managed keys stored in Azure Key Vault
+  * **No internet connectivity required**
+
+    * Data transfer occurs only on the Azure backbone network
+    * No IP or FQDN access required
+  * **Soft delete**
+
+    * Retains backup data for **14 days** after deletion
+    * Protects against accidental or malicious deletion
+    * **Enhanced soft delete** allows longer retention
+  * Supports VMs encrypted with **Azure Disk Encryption**
+* **High availability**
+
+  * **Locally redundant storage (LRS)**
+
+    * Lowest cost
+    * Protects against rack and drive failures
+    * Recommended for noncritical scenarios
+  * **Geo-redundant storage (GRS)**
+
+    * Replicates to a secondary region
+    * Recommended for backup scenarios
+  * **Zone-redundant storage (ZRS)**
+
+    * Replicates synchronously across three availability zones
+    * Protects against datacenter-level failures
+    * Recommended for high-availability scenarios
+* **Centralized monitoring and management**
+
+  * Built-in monitoring and alerting
+  * Managed through a **Recovery Services vault**
+  * No additional management infrastructure required
+
+**Azure Backup supported scenarios**
+
+* **Azure virtual machines**
+
+  * Back up Windows and Linux Azure VMs
+  * Independent, isolated backups stored in a Recovery Services vault
+  * Optimized backups with simple configuration and scaling
+* **On-premises workloads**
+
+  * Back up files, folders, and system state using the **Microsoft Azure Recovery Services (MARS) agent**
+  * Protect on-premises VMs using:
+
+    * **Microsoft Azure Backup Server (MABS)**
+    * **Data Protection Manager (DPM)**
+  * Supports Hyper-V and VMware
+* **Azure Files shares**
+
+  * Snapshot management provided by Azure Backup
+* **SQL Server and SAP HANA in Azure VMs**
+
+  * Stream-based, workload-aware backups
+  * Supports:
+
+    * Full, differential, and log backups
+    * **15-minute RPO**
+    * Point-in-time recovery
+
+**Key Facts to Remember**
+
+* Azure Backup is **backup-based recovery**, not real-time replication.
+* Soft delete retains data for **14 days** by default.
+* Backup data is stored in a **Recovery Services vault**.
+* Supports **LRS, GRS, and ZRS** replication options.
+* SQL Server and SAP HANA backups support **15-minute RPO** and point-in-time restore.
 
 ---
