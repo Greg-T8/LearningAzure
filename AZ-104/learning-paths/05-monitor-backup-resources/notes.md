@@ -264,7 +264,7 @@ Azure Backup supports backing up the following resources:
 * On-premises Windows machines:
 
   * Direct backup using **MARS agent**
-  * Indirect backup using **DPM** or **MABS**, then backed up to Azure
+  * Indirect backup using **DPM** or **MABS** (Microsoft Azure Backup Server), then backed up to Azure
 * Azure VMs:
 
   * Full VM backup using VM backup extension
