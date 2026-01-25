@@ -9,6 +9,7 @@
 * [Back up an Azure virtual machine by using Azure Backup](#back-up-an-azure-virtual-machine-by-using-azure-backup)
 * [Exercise - Back up an Azure virtual machine](#exercise---back-up-an-azure-virtual-machine)
 * [Restore virtual machine data](#restore-virtual-machine-data)
+* [Exercise - Restore Azure virtual machine data](#exercise---restore-azure-virtual-machine-data)
 
 ---
 <!-- omit in toc -->
@@ -973,5 +974,79 @@ az backup protection backup-now \
 * Cross Subscription and Cross Zonal Restore support **managed VMs only**.
 * Snapshot tier recovery points do **not** support cross-subscription or cross-zonal restore.
 * Encrypted VMs cannot use file-level restore or replace existing VM options.
+
+---
+
+## Exercise - Restore Azure virtual machine data
+
+[Module Reference](https://learn.microsoft.com/en-us/training/modules/protect-your-virtual-machines-by-using-azure-backup/)
+
+**Scenario Overview**
+
+* A previously backed-up Azure virtual machine becomes corrupted.
+* Goal is to restore the VM by replacing its disk from a backup.
+* Restore progress must be monitored to completion.
+
+**Create a Storage Account for Staging**
+
+* Required as a temporary staging location for the restore process.
+* Created in the **vmbackups** resource group.
+* Storage account name must be **globally unique** (example: `restorestagingYYYYMMDD`).
+* Region used: **West US 2**.
+* Creation steps:
+
+  * Azure portal → **Storage accounts** → **Create**
+  * Configure **Basics** tab only.
+  * Select **Review + create**, then **Create**.
+* Wait for deployment to complete before proceeding.
+
+**Stop the Virtual Machine**
+
+* A VM **must be stopped (deallocated)** before a restore can occur.
+* Attempting to restore a running VM results in an error.
+* Steps:
+
+  * Azure portal → **Virtual Machines** → select **NW-APP01**
+  * Select **Stop**
+  * Confirm by selecting **OK**
+
+**Restore the Virtual Machine**
+
+* Recovery Services vault is accessed directly from the VM.
+* Steps:
+
+  * VM → **Operations** → **Backup**
+  * Select **Restore VM**
+  * Choose a **Restore point**
+
+    * Default range is two weeks.
+    * Start date adjusted to locate available restore points (example: 07/05/2021).
+  * Configure restore settings:
+
+    * **Replace existing**: Selected
+    * **Staging Location**: Select the newly created storage account
+  * Select **Restore** to start the process.
+* A notification confirms that the restore has been triggered.
+
+**Track the Restore Job**
+
+* Restore progress is monitored through Backup Jobs.
+* Steps:
+
+  * Backup pane → **Alerts and Jobs** → **View all Jobs**
+  * Select **View details** for the restore job.
+* Restore job monitoring includes:
+
+  * **Job details**: Information about the initiated restore
+  * **Job status**: Real-time progress
+  * **Sub tasks**: Individual task names and their status
+
+**Key Facts to Remember**
+
+* A VM **must be stopped** before restoring from backup.
+* A **storage account is required** as a staging location for restores.
+* Restore jobs are tracked through **Backup Jobs** in the Recovery Services vault.
+* Selecting **Replace existing** overwrites the current VM disks with backup data.
+* Restore progress is visible at both **job** and **subtask** levels.
 
 ---
