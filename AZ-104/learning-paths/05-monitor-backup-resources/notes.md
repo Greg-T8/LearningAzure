@@ -7,6 +7,7 @@
 * [When to use Azure Backup](#when-to-use-azure-backup)
 * [Azure Backup features and scenarios](#azure-backup-features-and-scenarios)
 * [Back up an Azure virtual machine by using Azure Backup](#back-up-an-azure-virtual-machine-by-using-azure-backup)
+* [Exercise - Back up an Azure virtual machine](#exercise---back-up-an-azure-virtual-machine)
 
 ---
 <!-- omit in toc -->
@@ -665,5 +666,174 @@ Azure Backup supports backing up the following resources:
 * Enhanced policy enables **hourly backups** and **selective disk backup**.
 * Recovery Services vault provides **RBAC, storage isolation, and retention management**.
 * Daily VM backups complete in **less than 24 hours**.
+
+---
+
+## Exercise - Back up an Azure virtual machine
+
+[Module Reference](https://learn.microsoft.com/en-us/training/modules/protect-virtual-machines-with-azure-backup/)
+
+**Exercise Purpose**
+
+* Demonstrate that **Azure Backup** supports both **Windows** and **Linux** virtual machines
+* Enable and run backups using both the **Azure portal** and **Azure CLI**
+
+**Supported Management Methods**
+
+* Azure portal
+* Azure CLI
+* PowerShell
+
+**Environment Setup**
+
+* Sign in to the **Azure portal**
+* Open **Azure Cloud Shell**
+* Create a resource group for all exercise resources
+
+```azurecli
+RGROUP=$(az group create --name vmbackups --location westus2 --output tsv --query name)
+```
+
+**Create Virtual Network and Subnet**
+
+```azurecli
+az network vnet create \
+    --resource-group $RGROUP \
+    --name NorthwindInternal \
+    --address-prefixes 10.0.0.0/16 \
+    --subnet-name NorthwindInternal1 \
+    --subnet-prefixes 10.0.0.0/24
+```
+
+**Create a Windows Virtual Machine**
+
+* VM name: **NW-APP01**
+* Image: **Win2016Datacenter**
+* Size: **Standard_DS1_v2**
+* Authentication: Username and password
+
+```azurecli
+az vm create \
+    --resource-group $RGROUP \
+    --name NW-APP01 \
+    --size Standard_DS1_v2 \
+    --public-ip-sku Standard \
+    --vnet-name NorthwindInternal \
+    --subnet NorthwindInternal1 \
+    --image Win2016Datacenter \
+    --admin-username admin123 \
+    --no-wait \
+    --admin-password "<password>"
+```
+
+**Create a Linux Virtual Machine**
+
+* VM name: **NW-RHEL01**
+* Image: **RedHat:RHEL:8-gen2:latest**
+* Authentication: **SSH keys**
+
+```azurecli
+az vm create \
+    --resource-group $RGROUP \
+    --name NW-RHEL01 \
+    --size Standard_DS1_v2 \
+    --image RedHat:RHEL:8-gen2:latest \
+    --authentication-type ssh \
+    --generate-ssh-keys \
+    --vnet-name NorthwindInternal \
+    --subnet NorthwindInternal1
+```
+
+**Optional Feature Registration (If Required)**
+
+* Used to resolve `securityProfile.securityType is invalid` error
+
+```azurecli
+az feature register --name UseStandardSecurityType --namespace Microsoft.Compute
+az feature show --name UseStandardSecurityType --namespace Microsoft.Compute
+```
+
+**Enable Backup Using the Azure Portal (Linux VM)**
+
+* Navigate to **Virtual machines**
+* Select **NW-RHEL01**
+* Go to **Capabilities → Backup**
+* Backup settings:
+
+  * **Backup vault**: vaultXXX (default)
+  * **Backup policy**: DailyPolicy-xxxxxxxx
+
+    * Daily at **12:00 PM UTC**
+    * **180-day** retention
+* Select **Enable backup**
+* Trigger first backup using **Backup now**
+
+**Create a Recovery Services Vault (CLI)**
+
+```azurecli
+az backup vault create \
+    --resource-group vmbackups \
+    --location westus2 \
+    --name azure-backup
+```
+
+**Enable Backup Using Azure CLI (Windows VM)**
+
+```azurecli
+az backup protection enable-for-vm \
+    --resource-group vmbackups \
+    --vault-name azure-backup \
+    --vm NW-APP01 \
+    --policy-name EnhancedPolicy
+```
+
+**Monitor Backup Jobs (CLI)**
+
+```azurecli
+az backup job list \
+    --resource-group vmbackups \
+    --vault-name azure-backup \
+    --output table
+```
+
+* Wait until **ConfigureBackup** status shows **Completed**
+
+**Run an On-Demand Backup (CLI)**
+
+```azurecli
+az backup protection backup-now \
+    --resource-group vmbackups \
+    --vault-name azure-backup \
+    --container-name NW-APP01 \
+    --item-name NW-APP01 \
+    --retain-until 18-10-2030 \
+    --backup-management-type AzureIaasVM
+```
+
+**Monitor Backup Status in the Portal**
+
+* **Single VM**
+
+  * Virtual machine → **Capabilities → Backup**
+  * Check **Last backup status**
+* **Recovery Services Vault**
+
+  * Open **azure-backup** vault
+  * View **Backup** tab for:
+
+    * Protected items
+    * Storage usage
+    * Job status
+
+<img src='.img/2026-01-25-05-41-32.png' width=700> 
+
+**Key Facts to Remember**
+
+* Azure Backup supports **Windows and Linux** Azure VMs
+* Backups can be enabled via **portal or CLI**
+* Default daily policy runs at **12:00 PM UTC**
+* Default retention period is **180 days**
+* On-demand backups can be triggered without waiting for the schedule
+* Backup status is visible at both **VM** and **vault** levels
 
 ---
