@@ -3,6 +3,7 @@
 **Link:** [Microsoft Learn](https://learn.microsoft.com/en-us/training/paths/az-104-monitor-backup-resources/)
 * [Introduction to Azure Backup](#introduction-to-azure-backup)
 * [What is Azure Backup?](#what-is-azure-backup)
+* [How Azure Backup works](#how-azure-backup-works)
 
 ---
 <!-- omit in toc -->
@@ -180,5 +181,125 @@ Azure Backup supports backing up the following resources:
 * **RTO = restore time target**
 * **RPO = acceptable data loss window**
 * Built-in security protects backups from **ransomware and accidental deletion**
+
+---
+
+## How Azure Backup works
+
+[Module Reference](https://learn.microsoft.com/en-us/training/modules/intro-to-azure-backup/)
+
+**Azure Backup Service Overview**
+
+* Azure Backup provides data protection for **on-premises machines**, **Azure virtual machines**, and **workloads**
+* Backed-up data is stored in **Recovery Services vaults** or **Backup vaults**
+* Protects **data**, **machine state**, and **workloads**
+
+**Azure Backup Architecture Layers**
+
+* **Workload integration layer – Backup Extension**
+
+  * Integrates directly with workloads such as **Azure VMs**, **Azure Blobs**, and databases
+  * Backup extensions are installed on source VMs or worker VMs
+  * Backup types generated:
+
+    * **Snapshots** for Azure VMs and Azure Files
+    * **Stream backups** for databases such as SQL Server and HANA
+
+* **Data Plane – Access Tiers**
+
+  * **Snapshot tier**
+
+    * First phase of VM backup
+    * Snapshots stored in the customer’s subscription and resource group
+    * Faster restores because data is locally available
+  * **Vault-standard tier**
+
+    * Online storage in Microsoft-managed tenant
+    * Stores isolated copy of backup data
+    * Ensures availability even if source data is deleted or compromised
+  * **Archive tier**
+
+    * Used for **long-term retention (LTR)**
+    * Optimized for rarely accessed data
+    * Supports compliance-based retention requirements
+  * Each tier has different **RTOs** and pricing
+
+<img src='.img/2026-01-25-05-20-31.png' width=700> 
+
+* **Data Plane – Availability and Security**
+
+  * Data replication options:
+
+    * **Locally redundant storage (LRS)**
+    * **Zone-redundant storage (ZRS)**
+    * **Geo-redundant storage (GRS)**
+  * Security features:
+
+    * **Encryption**
+    * **Azure RBAC**
+    * **Soft delete**
+
+      * Deleted backups retained for **14 days** at no cost
+  * Supports **backup data lifecycle management** for retention policies
+
+* **Management Plane – Vaults and Backup Center**
+
+  * **Recovery Services vaults** and **Backup vaults**
+
+    * Manage backups and store backup data
+    * Contain **backup policies** that define schedules and retention
+  * Vault usage models:
+
+    * Single vault for single subscription/resource
+    * Multiple vaults across subscriptions and regions
+  * **Backup center**
+
+    * Centralized management (“single pane of glass”)
+    * Supports multiple workloads, vaults, subscriptions, regions, and Azure Lighthouse tenants
+
+<img src='.img/2026-01-25-05-20-51.png' width=700> 
+
+**What Data Is Backed Up**
+
+* On-premises Windows machines:
+
+  * Direct backup using **MARS agent**
+  * Indirect backup using **DPM** or **MABS**, then backed up to Azure
+* Azure VMs:
+
+  * Full VM backup using VM backup extension
+  * File and folder backup using MARS agent
+
+**Supported Backup Types**
+
+* **Full backup**
+
+  * Initial backup type
+* **Incremental backup**
+
+  * Backs up only changed data blocks
+  * Used for all Azure backups and DPM/MABS disk backups
+
+**SQL Server Backup Support**
+
+| Backup Type              | Description                           | Limits                                         |
+| ------------------------ | ------------------------------------- | ---------------------------------------------- |
+| Full                     | Entire database backup including logs | Max **1 per day**                              |
+| Differential             | Changes since last full backup        | Max **1 per day**; cannot run same day as full |
+| Multiple backups per day | Azure VM backups                      | RPO **4–24 hours** using Enhanced policy       |
+| Selective disk backup    | Backup selected VM disks only         | Supported via Enhanced policy                  |
+| Transaction log          | Point-in-time recovery                | Every **15 minutes** maximum                   |
+
+<img src='.img/2026-01-25-05-21-08.png' width=700> 
+
+
+**Key Facts to Remember**
+
+* Azure Backup uses **vaults** to store and manage backup data
+* Backup extensions generate **snapshots** or **stream backups**
+* Three access tiers: **Snapshot**, **Vault-standard**, **Archive**
+* Soft delete retains backups for **14 days**
+* SQL log backups can run every **15 minutes**
+* Enhanced backup policy enables **hourly VM backups** and **selective disk backup**
 
 ---
