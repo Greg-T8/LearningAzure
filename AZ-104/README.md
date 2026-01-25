@@ -9,13 +9,13 @@
 
 ### 📚 Learning Modality Progress Tracker
 
-| Priority | Resource                                                        | Purpose                           | Status | Completed |
-| -------- | --------------------------------------------------------------- | --------------------------------- | ------ | --------- |
-| 1        | [Microsoft Learning Paths](./learning-paths/README.md)          | Core concepts & knowledge         | ✅    | 1/25/26          |
-| 2        | [Udemy Course]()           | Alternative explanations          | 🚧    |           |
-| 3        | [John Savill's Training](./video-courses/john-savill/README.md) | Visual reinforcement & deep dives | 🕒    |           |
-| 4        | [Microsoft GitHub Labs](./microsoft-labs/README.md)             | Official hands-on practice        | 🕒    |           |
-| 5        | [MeasureUp Practice Exams](./practice-exams/README.md)          | Exam readiness assessment         | 🕒    |           |
+| Priority | Resource                                                           | Purpose                           | Status | Started | Completed | Days |
+| -------- | ------------------------------------------------------------------ | --------------------------------- | ------ | ------- | --------- | ---- |
+| 1        | [Microsoft Learning Paths](./learning-paths/README.md)             | Core concepts & knowledge         | ✅     | 1/14/26        | 1/25/26   | 11      |
+| 2        | [FreeCodeCamp Course](https://www.youtube.com/watch?v=10PbGbTUSAg) | Visual reinforcement & deep dives | 🚧    |         |           |      |
+| 3        | [John Savill's Training](./video-courses/john-savill/README.md)    | Visual reinforcement & deep dives | 🕒    |         |           |      |
+| 4        | [Microsoft GitHub Labs](./microsoft-labs/README.md)                | Official hands-on practice        | 🕒    |         |           |      |
+| 5        | [MeasureUp Practice Exams](./practice-exams/README.md)             | Exam readiness assessment         | 🕒    |         |           |      |
 
 **Legend:** 🕒 Not Started | 🚧 In Progress | ✅ Complete
 
