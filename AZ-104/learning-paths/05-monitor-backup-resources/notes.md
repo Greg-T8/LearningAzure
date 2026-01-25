@@ -2,6 +2,7 @@
 
 **Link:** [Microsoft Learn](https://learn.microsoft.com/en-us/training/paths/az-104-monitor-backup-resources/)
 * [Introduction to Azure Backup](#introduction-to-azure-backup)
+* [What is Azure Backup?](#what-is-azure-backup)
 
 ---
 <!-- omit in toc -->
@@ -91,5 +92,93 @@ Azure Backup supports backing up the following resources:
 * Long-term retention (for example, **10 years**) is supported
 * Designed to reduce downtime compared to traditional tape or off-site backups
 * Focuses on **security**, **simplicity**, and **cost efficiency**
+
+---
+
+## What is Azure Backup?
+
+[Module Reference](https://learn.microsoft.com/en-us/training/modules/intro-to-azure-backup/)
+
+**Azure Backup Overview**
+
+* **Azure Backup** is an Azure service that provides **cost-effective, secure, zero-infrastructure backup solutions** for Azure-managed data assets.
+* Eliminates the need to deploy or manage backup servers or backup storage.
+* Backup storage is **automatically managed and scaled** by Azure.
+
+<img src='.img/2026-01-25-05-16-45.png' width=700> 
+
+**Azure Backup Definition**
+
+* Provides **centralized management** for defining backup policies.
+* Protects a wide range of enterprise workloads, including:
+
+  * **On-premises files, folders, and system state**
+  * **Azure Virtual Machines (VMs)**
+  * **Azure Managed Disks**
+  * **Azure File Shares**
+  * **SQL Server in Azure VMs**
+  * **SAP HANA databases in Azure VMs**
+  * **Azure Database for PostgreSQL servers**
+  * **Azure Database for PostgreSQL – Flexible servers**
+  * **Azure Database for MySQL – Flexible servers**
+  * **Azure Blobs**
+  * **Azure Kubernetes clusters**
+
+<img src='.img/2026-01-25-05-17-28.png' width=700> 
+
+**When to Use Azure Backup**
+
+* Designed for organizations with **compliance and data-protection requirements**.
+* Supports **self-service backup and restore** for application administrators.
+* Protects **all workloads** from a **centralized management interface**.
+* Addresses scenarios such as:
+
+  * Data corruption
+  * Accidental deletions
+  * Rogue administrator actions
+  * Disaster recovery requirements
+
+**Key Features**
+
+* **Zero-infrastructure backup solution**
+
+  * No backup servers or storage to deploy.
+  * Reduces **capital expenses** and **operational expenses**.
+  * Automates storage management.
+* **At-scale management**
+
+  * Centralized management through **Backup Center**.
+  * Supports **APIs, PowerShell, and Azure CLI** for automation.
+  * Enables discovery, governance, monitoring, operation, and optimization of backups.
+* **Security**
+
+  * Built-in protection for data **in transit and at rest**.
+  * Uses encryption, private endpoints, alerts, and other security capabilities.
+  * Protects against ransomware, malicious admins, and accidental deletions.
+
+**Recovery Objectives**
+
+* **Recovery Time Objective (RTO)**
+
+  * Target time to restore a business process after a disaster.
+  * Example: If maximum tolerated downtime is four hours, RTO is **four hours**.
+* **Recovery Point Objective (RPO)**
+
+  * Maximum acceptable data loss measured in time.
+  * Example: An RPO of **one hour** means backups occur hourly, with no more than one hour of data loss.
+* Example scenario:
+
+  * RPO: **1 hour**
+  * RTO: **3 hours**
+  * Data loss is limited to one hour, and system access is restored within three hours.
+
+**Key Facts to Remember**
+
+* **Azure Backup requires no backup infrastructure**
+* **Backup Center** is the central management console
+* Supports **Azure, on-premises, and database workloads**
+* **RTO = restore time target**
+* **RPO = acceptable data loss window**
+* Built-in security protects backups from **ransomware and accidental deletion**
 
 ---
