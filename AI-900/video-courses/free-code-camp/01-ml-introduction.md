@@ -657,6 +657,8 @@
 - **True Positive (TP)**: When the model correctly predicts the positive class (e.g., predicted 1 and actual 1).  
 - **False Negative (FN)**: When the model incorrectly predicts the negative class for a positive instance (e.g., predicted 0 but actual 1).  
 
+<img src='.img/2026-01-27-05-53-11.png' width=700>
+
 **Key Facts**  
 
 - For binary classification, the confusion matrix is typically 2x2 (two labels, e.g., 0 and 1).  
