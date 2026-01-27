@@ -617,7 +617,9 @@
 **Definitions**  
 
 - **Clustering**: The process of grouping unlabeled data into clusters based on similarity or difference, used in unsupervised learning.  
-- **Unlabeled Data**: Data that does not have predefined categories or labels.  
+- **Unlabeled Data**: Data that does not have predefined categories or labels. 
+
+<img src='.img/2026-01-27-05-51-22.png' width=700> 
 
 **Key Facts**  
 
