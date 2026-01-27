@@ -277,6 +277,8 @@
 - **GPU (Graphics Processing Unit)**: A processor designed to quickly render images and videos concurrently by performing parallel operations on multiple data sets.  
 - **CPU (Central Processing Unit)**: A processor with fewer cores (typically 4 to 16) designed for general-purpose computing.  
 
+<img src='.img/2026-01-27-05-39-08.png' width=700> 
+
 **Key Facts**  
 
 - CPUs typically have 4 to 16 cores.  
