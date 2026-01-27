@@ -317,6 +317,9 @@
 - **GPGPU (General-Purpose computing on Graphics Processing Units)**: Using GPUs to perform computation traditionally handled by CPUs.  
 - **cuDNN (CUDA Deep Neural Network Library)**: A library offering highly tuned implementations of standard deep learning operations like convolution, pooling, normalization, and activation layers.  
 
+<img src='.img/2026-01-27-05-41-28.png' width=700>
+
+
 **Key Facts**  
 
 - GPUs can have thousands of cores (e.g., 48 GPUs could total ~40,000 cores).  
