@@ -1,8 +1,8 @@
 # ML Studio
 
-**Channel:** freeCodeCamp.org
-**Duration:** 4:23:51
-**URL:** https://www.youtube.com/watch?v=hHjmr_YOqnU
+**Channel:** freeCodeCamp.org 
+**Duration:** 4:23:51 
+**URL:** https://www.youtube.com/watch?v=hHjmr_YOqnU 
 
 ---
 
