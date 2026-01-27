@@ -575,6 +575,8 @@
 - **Classification**: The process of finding a function to divide a labeled data set into distinct classes or categories.  
 - **Supervised Learning**: A type of machine learning where the model is trained on labeled data (input-output pairs).
 
+<img src='.img/2026-01-27-05-49-51.png' width=700> 
+
 **Key Facts**  
 
 - Classification predicts discrete categories (e.g., sunny vs. rainy).  
