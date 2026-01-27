@@ -537,6 +537,8 @@
 - **Root Mean Squared Error (RMSE)**: The square root of MSE, representing error in the same units as the predicted variable.  
 - **Mean Absolute Error (MAE)**: The average of absolute differences between predicted and actual values.
 
+<img src='.img/2026-01-27-05-48-44.png' width=700> 
+
 **Key Facts**  
 
 - Regression deals with labeled data sets and continuous output variables.  
