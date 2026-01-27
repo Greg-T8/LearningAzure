@@ -406,6 +406,8 @@
 - **Forecasting**: Making a prediction with relevant data, primarily used for trend analysis; it is data-driven and not guesswork.  
 - **Prediction**: Making a prediction without relevant data, often involving guessing and using decision theory/statistics to estimate future outcomes.
 
+<img src='.img/2026-01-27-05-43-53.png' width=700> 
+
 **Key Facts**  
 
 - Forecasting uses relevant data to infer outcomes (e.g., trend analysis).  
@@ -442,6 +444,8 @@
 - **Performance/Evaluation Metrics**: Measures used to evaluate the effectiveness of ML models’ predictions.  
 - **Internal Evaluation Metrics**: Metrics used to evaluate the internals of an ML model (e.g., accuracy, precision, recall, F1 score).  
 - **External Evaluation Metrics**: Metrics used to evaluate the final prediction output of an ML model.
+
+
 
 **Key Facts**  
 
