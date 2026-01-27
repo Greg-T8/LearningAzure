@@ -8,11 +8,11 @@ Video courses provide visual reinforcement of AI-900 concepts. John Savill's Stu
 
 ## 📺 Video Course Tracker
 
-| # | Video | Channel | Duration | Status | Notes |
-|---|-------|---------|----------|--------|-------|
-| 1 | [AI-900 Full Course (2024)](https://www.youtube.com/watch?v=hHjmr_YOqnU) | freeCodeCamp | ~4h | 🕒 | [Notes](./notes/freecodecamp-ai900.md) |
-| 2 | [AI-900 Study Cram v2 (non-GenAI)](https://www.youtube.com/watch?v=bTkUTkXrqOQ) | John Savill | ~2h | 🕒 | [Notes](./notes/john-savill-study-cram-v2.md) |
-| 3 | [AI-900 Learning About Generative AI](https://www.youtube.com/watch?v=Ch6KE7KxHGM) | John Savill | ~1h | 🕒 | [Notes](./notes/john-savill-generative-ai.md) |
+| # | Course | Channel | Video | Duration | Status | Started | Completed | Days |
+|---|--------|---------|-------|----------|--------|---------|-----------|------|
+| 1 | [AI-900 Full Course (2024)](./free-code-camp/README.md) | freeCodeCamp | [YouTube](https://www.youtube.com/watch?v=hHjmr_YOqnU) | ~4h | 🕒 |         |           |      |
+| 2 | [AI-900 Study Cram v2 (non-GenAI)](./john-savill/README.md) | John Savill | [YouTube](https://www.youtube.com/watch?v=bTkUTkXrqOQ) | ~2h | 🕒 |         |           |      |
+| 3 | [AI-900 Learning About Generative AI](./john-savill/README.md) | John Savill | [YouTube](https://www.youtube.com/watch?v=Ch6KE7KxHGM) | ~1h | 🕒 |         |           |      |
 
 **Legend:** 🕒 Not Started | 🚧 In Progress | ✅ Complete
 
