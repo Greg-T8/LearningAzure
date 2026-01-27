@@ -22,7 +22,7 @@
 | 10  | [Application Gateway](10-application-gateway.md)                | 🕒     |         |           |
 | 11  | [Scale Sets](11-scale-sets.md)                                  | 🕒     |         |           |
 | 12  | [App Service](12-app-service.md)                                | 🕒     |         |           |
-| 13  | [Availability Follow Along](13-availability.md)                 | 🕒     |         |           |
+| 13  | [Availability](13-availability.md)                 | 🕒     |         |           |
 | 14  | [Monitor](14-monitor.md)                                        | 🕒     |         |           |
 | 15  | [Containers](15-containers.md)                                  | 🕒     |         |           |
 | 16  | [Networking](16-networking.md)                                  | 🕒     |         |           |
