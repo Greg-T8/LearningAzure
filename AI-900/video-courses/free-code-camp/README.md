@@ -1,8 +1,8 @@
 # freeCodeCamp - AI-900 Azure AI Fundamentals Certification
 
-**Channel:** freeCodeCamp.org
-**Duration:** 4:23:51
-**URL:** https://www.youtube.com/watch?v=hHjmr_YOqnU
+**Channel:** freeCodeCamp.org 
+**Duration:** 4:23:51 
+**URL:** https://www.youtube.com/watch?v=hHjmr_YOqnU 
 
 ---
 
