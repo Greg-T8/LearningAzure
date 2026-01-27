@@ -2,7 +2,7 @@
 
 **Channel:** freeCodeCamp.org
 **Duration:** 11:16:25
-**URL:** https://www.youtube.com/watch?v=10PbGbTUSAg
+**URL:** <https://www.youtube.com/watch?v=10PbGbTUSAg>
 
 ---
 
@@ -11,6 +11,7 @@
 **Timestamp**: 00:00:00 – 00:19:45
 
 **Key Concepts**  
+
 - Purpose of AZ-104 certification: validate Azure administrator skills for managing cloud workloads  
 - AZ-104 is an associate-level certification focused on managing/configuring devices, users, permissions, compute, storage, and networking in Azure  
 - Azure certification roadmap: Fundamentals (AZ-900) → Associate (e.g., AZ-104) → Expert (e.g., AZ-303) → Specialty certifications  
@@ -30,6 +31,7 @@
   - Monitor and backup Azure resources  
 
 **Definitions**  
+
 - **AZ-104**: Microsoft Azure Administrator Associate certification exam code  
 - **Azure Active Directory (Azure AD)**: Cloud-based identity and access management service for user sign-ins and resource access  
 - **Role-Based Access Control (RBAC)**: Method to assign permissions to users/groups at different scopes in Azure  
@@ -38,6 +40,7 @@
 - **Case Study Questions**: Exam questions based on a business scenario requiring multiple related answers  
 
 **Key Facts**  
+
 - AZ-104 is generally taken after AZ-900 and before expert-level certifications like AZ-303  
 - Study time recommendations:  
   - 2-3 years Azure experience → ~12 hours study  
@@ -52,11 +55,13 @@
 - Certification lasts 24 months before recertification is required  
 
 **Examples**  
+
 - Example exam question type: Steps to set up Azure File Share Sync in correct order  
 - Use of Azure AD for single sign-on to multiple resources like Microsoft 365, Azure Portal, SaaS apps, and internal apps  
 - Exam pro platform uses Azure AD for admin panel login  
 
 **Key Takeaways 🎯**  
+
 - Start your Azure certification journey with AZ-900 before AZ-104  
 - AZ-104 focuses on practical skills managing core Azure services: identities, storage, compute, networking, and monitoring  
 - Hands-on labs and follow-alongs in your own Azure account are critical for success  
