@@ -1,5 +1,9 @@
 # Azure Policies
 
+**Channel:** freeCodeCamp.org
+**Duration:** 11:16:25
+**URL:** https://www.youtube.com/watch?v=10PbGbTUSAg
+
 ## Policies Intro
 
 **Timestamp**: 01:28:32 – 01:30:06

@@ -1,5 +1,9 @@
 # Scale Sets
 
+**Channel:** freeCodeCamp.org
+**Duration:** 11:16:25
+**URL:** https://www.youtube.com/watch?v=10PbGbTUSAg
+
 ---
 
 ## Intro to Scale Sets

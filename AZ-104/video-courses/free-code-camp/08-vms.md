@@ -1,5 +1,9 @@
 # VMs
 
+**Channel:** freeCodeCamp.org
+**Duration:** 11:16:25
+**URL:** https://www.youtube.com/watch?v=10PbGbTUSAg
+
 ## VMs Intro
 
 **Timestamp**: 04:02:22 – 04:05:15

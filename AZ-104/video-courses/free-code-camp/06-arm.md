@@ -1,5 +1,9 @@
 # ARM
 
+**Channel:** freeCodeCamp.org
+**Duration:** 11:16:25
+**URL:** https://www.youtube.com/watch?v=10PbGbTUSAg
+
 ## Azure ARM Intro
 
 **Timestamp**: 01:41:54 – 01:43:18

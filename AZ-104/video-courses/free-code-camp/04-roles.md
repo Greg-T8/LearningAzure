@@ -1,5 +1,9 @@
 # Roles
 
+**Channel:** freeCodeCamp.org
+**Duration:** 11:16:25
+**URL:** https://www.youtube.com/watch?v=10PbGbTUSAg
+
 ## Type of Roles
 
 **Timestamp**: 01:13:38 – 01:14:32

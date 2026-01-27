@@ -1,5 +1,9 @@
 # Azure AD
 
+**Channel:** freeCodeCamp.org
+**Duration:** 11:16:25
+**URL:** https://www.youtube.com/watch?v=10PbGbTUSAg
+
 ## Azure AD Intro
 
 **Timestamp**: 00:19:45 – 00:21:43

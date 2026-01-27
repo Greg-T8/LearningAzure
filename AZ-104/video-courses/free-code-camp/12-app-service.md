@@ -1,5 +1,9 @@
 # App Service
 
+**Channel:** freeCodeCamp.org
+**Duration:** 11:16:25
+**URL:** https://www.youtube.com/watch?v=10PbGbTUSAg
+
 ## Intro to App Service
 
 **Timestamp**: 06:23:06 – 06:25:02

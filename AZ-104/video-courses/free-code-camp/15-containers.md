@@ -1,5 +1,9 @@
 # Containers
 
+**Channel:** freeCodeCamp.org
+**Duration:** 11:16:25
+**URL:** https://www.youtube.com/watch?v=10PbGbTUSAg
+
 ## ACI
 
 **Timestamp**: 08:31:10 – 08:41:42

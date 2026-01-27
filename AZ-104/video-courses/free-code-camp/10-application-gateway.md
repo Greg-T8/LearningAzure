@@ -1,5 +1,9 @@
 # Application Gateway
 
+**Channel:** freeCodeCamp.org
+**Duration:** 11:16:25
+**URL:** https://www.youtube.com/watch?v=10PbGbTUSAg
+
 ## App Gateway Intro
 
 **Timestamp**: 06:06:20 – 06:08:47

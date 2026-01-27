@@ -1,5 +1,9 @@
 # Disks
 
+**Channel:** freeCodeCamp.org
+**Duration:** 11:16:25
+**URL:** https://www.youtube.com/watch?v=10PbGbTUSAg
+
 ## Disks Intro
 
 **Timestamp**: 05:31:25 – 05:32:56

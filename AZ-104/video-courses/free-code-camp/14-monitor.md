@@ -1,5 +1,9 @@
 # Monitor
 
+**Channel:** freeCodeCamp.org
+**Duration:** 11:16:25
+**URL:** https://www.youtube.com/watch?v=10PbGbTUSAg
+
 ## Monitor Intro
 
 **Timestamp**: 07:37:36 – 07:38:06
