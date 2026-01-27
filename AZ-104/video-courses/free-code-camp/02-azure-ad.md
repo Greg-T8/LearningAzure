@@ -1,6 +1,6 @@
-## Azure AD
+# Azure AD
 
-### Azure AD Intro
+## Azure AD Intro
 
 **Timestamp**: 00:19:45 – 00:21:43
 
@@ -45,7 +45,7 @@
 
 ---
 
-### Use Cases
+## Use Cases
 
 **Timestamp**: 00:21:43 – 00:22:44
 
@@ -81,7 +81,7 @@
 
 ---
 
-### AD vs AAD
+## AD vs AAD
 
 **Timestamp**: 00:22:44 – 00:23:37
 
@@ -113,7 +113,7 @@
 
 ---
 
-### Terminology
+## Terminology
 
 **Timestamp**: 00:23:37 – 00:25:54
 
@@ -157,7 +157,7 @@
 
 ---
 
-### Tenant
+## Tenant
 
 **Timestamp**: 00:25:54 – 00:26:42
 
@@ -190,7 +190,7 @@
 
 ---
 
-### AD DS
+## AD DS
 
 **Timestamp**: 00:26:42 – 00:27:51
 
@@ -219,7 +219,7 @@
 
 ---
 
-### AD Connect
+## AD Connect
 
 **Timestamp**: 00:27:51 – 00:29:04
 
@@ -258,7 +258,7 @@
 
 ---
 
-### Users
+## Users
 
 **Timestamp**: 00:29:04 – 00:30:04
 
@@ -300,7 +300,7 @@
 
 ---
 
-### Groups
+## Groups
 
 **Timestamp**: 00:30:04 – 00:30:53
 
@@ -330,7 +330,7 @@
 
 ---
 
-### Assign Access Rights
+## Assign Access Rights
 
 **Timestamp**: 00:30:53 – 00:31:38
 
@@ -363,7 +363,7 @@
 
 ---
 
-### External Identities
+## External Identities
 
 **Timestamp**: 00:31:38 – 00:32:17
 
@@ -397,7 +397,7 @@
 
 ---
 
-### Create a Tenant
+## Create a Tenant
 
 **Timestamp**: 00:32:17 – 00:35:14
 
@@ -441,7 +441,7 @@
 
 ---
 
-### Upgrade License
+## Upgrade License
 
 **Timestamp**: 00:35:14 – 00:37:58
 
@@ -477,7 +477,7 @@
 
 ---
 
-### User and Groups
+## User and Groups
 
 **Timestamp**: 00:37:58 – 00:41:39
 
@@ -519,7 +519,7 @@
 
 ---
 
-### Guest Users
+## Guest Users
 
 **Timestamp**: 00:41:39 – 00:43:53
 
@@ -552,7 +552,7 @@
 
 ---
 
-### Mass Import
+## Mass Import
 
 **Timestamp**: 00:43:53 – 00:46:45
 
@@ -590,7 +590,7 @@
 
 ---
 
-### MFA
+## MFA
 
 **Timestamp**: 00:46:45 – 00:50:51
 
@@ -637,7 +637,7 @@
 
 ---
 
-### Self Service Rest Password
+## Self Service Rest Password
 
 **Timestamp**: 00:50:51 – 00:53:22
 
@@ -680,7 +680,7 @@
 
 ---
 
-### AD CheatSheet
+## AD CheatSheet
 
 **Timestamp**: 00:53:22 – 00:57:31
 

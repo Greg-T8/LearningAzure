@@ -1,8 +1,8 @@
-## AD Device Management
+# AD Device Management
 
 ---
 
-### Intro to Device Management
+## Intro to Device Management
 
 **Timestamp**: 00:57:31 – 01:00:14
 
@@ -43,7 +43,7 @@
 
 ---
 
-### AD Registered Devices
+## AD Registered Devices
 
 **Timestamp**: 01:00:14 – 01:01:57
 
@@ -86,7 +86,7 @@
 
 ---
 
-### Windows Hello
+## Windows Hello
 
 **Timestamp**: 01:01:57 – 01:02:31
 
@@ -111,7 +111,7 @@
 
 ---
 
-### MDM and MAM
+## MDM and MAM
 
 **Timestamp**: 01:02:31 – 01:04:16
 
@@ -149,7 +149,7 @@
 
 ---
 
-### EMS
+## EMS
 
 **Timestamp**: 01:04:16 – 01:05:10
 
@@ -185,7 +185,7 @@
 
 ---
 
-### MS Authenticator App
+## MS Authenticator App
 
 **Timestamp**: 01:05:10 – 01:05:50
 
@@ -215,7 +215,7 @@
 
 ---
 
-### AD Joined Devices
+## AD Joined Devices
 
 **Timestamp**: 01:05:50 – 01:07:35
 
@@ -258,7 +258,7 @@
 
 ---
 
-### FIDO2 and Security Keys
+## FIDO2 and Security Keys
 
 **Timestamp**: 01:07:35 – 01:09:41
 
@@ -299,7 +299,7 @@
 
 ---
 
-### Hybrid AD Joined Devices
+## Hybrid AD Joined Devices
 
 **Timestamp**: 01:09:41 – 01:11:24
 
@@ -337,7 +337,7 @@
 
 ---
 
-### Windows Autopilot
+## Windows Autopilot
 
 **Timestamp**: 01:11:24 – 01:12:19
 
@@ -368,7 +368,7 @@
 
 ---
 
-### Device Management Cheatsheet
+## Device Management Cheatsheet
 
 **Timestamp**: 01:12:19 – 01:13:38
 

@@ -1,6 +1,6 @@
-## Roles
+# Roles
 
-### Type of Roles
+## Type of Roles
 
 **Timestamp**: 01:13:38 – 01:14:32
 
@@ -34,7 +34,7 @@
 
 ---
 
-### IAM Access Controls
+## IAM Access Controls
 
 **Timestamp**: 01:14:32 – 01:16:04
 
@@ -78,7 +78,7 @@
 
 ---
 
-### Classic Administrator
+## Classic Administrator
 
 **Timestamp**: 01:16:04 – 01:17:14
 
@@ -113,7 +113,7 @@
 
 ---
 
-### RBAC
+## RBAC
 
 **Timestamp**: 01:17:14 – 01:20:06
 
@@ -158,7 +158,7 @@
 
 ---
 
-### AD Roles
+## AD Roles
 
 **Timestamp**: 01:20:06 – 01:21:30
 
@@ -199,7 +199,7 @@
 
 ---
 
-### Roles
+## Roles
 
 **Timestamp**: 01:21:30 – 01:24:21
 
@@ -241,7 +241,7 @@
 
 ---
 
-### Policies vs RBAC
+## Policies vs RBAC
 
 **Timestamp**: 01:24:21 – 01:25:35
 
@@ -273,7 +273,7 @@
 
 ---
 
-### AD Roles vs RBAC
+## AD Roles vs RBAC
 
 **Timestamp**: 01:25:35 – 01:26:50
 
@@ -307,7 +307,7 @@
 
 ---
 
-### Roles CheatSheet
+## Roles CheatSheet
 
 **Timestamp**: 01:26:50 – 01:28:32
 

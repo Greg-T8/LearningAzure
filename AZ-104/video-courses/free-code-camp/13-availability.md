@@ -1,8 +1,8 @@
-## Availability Follow Along
+# Availability Follow Along
 
 ---
 
-### Backup VM using Images
+## Backup VM using Images
 
 **Timestamp**: 07:16:53 – 07:23:27
 
@@ -49,7 +49,7 @@
 
 ---
 
-### Review Availability Sets
+## Review Availability Sets
 
 **Timestamp**: 07:23:27 – 07:26:03
 
@@ -88,7 +88,7 @@
 
 ---
 
-### Create a Scale Sets
+## Create a Scale Sets
 
 **Timestamp**: 07:26:03 – 07:31:07
 
@@ -133,7 +133,7 @@
 
 ---
 
-### Create an Application Gateway
+## Create an Application Gateway
 
 **Timestamp**: 07:31:07 – 07:37:36
 

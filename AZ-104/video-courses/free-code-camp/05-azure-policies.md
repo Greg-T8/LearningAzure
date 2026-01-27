@@ -1,6 +1,6 @@
-## Azure Policies
+# Azure Policies
 
-### Policies Intro
+## Policies Intro
 
 **Timestamp**: 01:28:32 – 01:30:06
 
@@ -45,7 +45,7 @@
 
 ---
 
-### Non Compliant Resources
+## Non Compliant Resources
 
 **Timestamp**: 01:30:06 – 01:30:35
 
@@ -72,7 +72,7 @@
 
 ---
 
-### Policy Definition File
+## Policy Definition File
 
 **Timestamp**: 01:30:35 – 01:34:45
 
@@ -128,7 +128,7 @@
 
 ---
 
-### Configure Policy
+## Configure Policy
 
 **Timestamp**: 01:34:45 – 01:41:06
 
@@ -174,7 +174,7 @@
 
 ---
 
-### Policies CheatSheet
+## Policies CheatSheet
 
 **Timestamp**: 01:41:06 – 01:41:54
 

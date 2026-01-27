@@ -1,8 +1,8 @@
-## Course Contents
+# Course Contents
 
 ---
 
-### Getting Started
+## Getting Started
 
 **Timestamp**: 00:00:00 – 00:19:45
 
@@ -65,3 +65,4 @@
 - Certification renewal is required every 2 years, with potential free recertification options available  
 
 ---
+

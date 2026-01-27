@@ -1,8 +1,8 @@
-## Storage Accounts
+# Storage Accounts
 
 ---
 
-### Intro to Storage Accounts
+## Intro to Storage Accounts
 
 **Timestamp**: 02:32:04 – 02:33:48
 
@@ -41,7 +41,7 @@
 
 ---
 
-### Storage Comparison
+## Storage Comparison
 
 **Timestamp**: 02:33:48 – 02:35:49
 
@@ -81,7 +81,7 @@
 
 ---
 
-### Core Storage Services
+## Core Storage Services
 
 **Timestamp**: 02:35:49 – 02:37:43
 
@@ -117,7 +117,7 @@
 
 ---
 
-### Performance Tiers
+## Performance Tiers
 
 **Timestamp**: 02:37:43 – 02:39:51
 
@@ -153,7 +153,7 @@
 
 ---
 
-### Access Tiers
+## Access Tiers
 
 **Timestamp**: 02:39:51 – 02:43:37
 
@@ -196,7 +196,7 @@
 
 ---
 
-### Replication Data Redundancy
+## Replication Data Redundancy
 
 **Timestamp**: 02:43:37 – 02:45:30
 
@@ -239,7 +239,7 @@
 
 ---
 
-### LRS ZRS
+## LRS ZRS
 
 **Timestamp**: 02:45:30 – 02:47:01
 
@@ -276,7 +276,7 @@
 
 ---
 
-### GRS GZRS
+## GRS GZRS
 
 **Timestamp**: 02:47:01 – 02:49:02
 
@@ -321,7 +321,7 @@
 
 ---
 
-### RAGRS_RA GZRS
+## RAGRS_RA GZRS
 
 **Timestamp**: 02:49:02 – 02:49:44
 
@@ -350,7 +350,7 @@
 
 ---
 
-### Intro to Blob
+## Intro to Blob
 
 **Timestamp**: 02:49:44 – 02:50:51
 
@@ -386,7 +386,7 @@
 
 ---
 
-### Blob Types
+## Blob Types
 
 **Timestamp**: 02:50:51 – 02:51:45
 
@@ -418,7 +418,7 @@
 
 ---
 
-### Blob Moving Data
+## Blob Moving Data
 
 **Timestamp**: 02:51:45 – 02:52:50
 
@@ -450,7 +450,7 @@
 
 ---
 
-### Intro to Files
+## Intro to Files
 
 **Timestamp**: 02:52:50 – 02:54:05
 
@@ -482,7 +482,7 @@
 
 ---
 
-### Files Use Cases
+## Files Use Cases
 
 **Timestamp**: 02:54:05 – 02:57:31
 
@@ -531,7 +531,7 @@
 
 ---
 
-### Files Feature
+## Files Feature
 
 **Timestamp**: 02:57:31 – 03:01:21
 
@@ -582,7 +582,7 @@
 
 ---
 
-### File Sync
+## File Sync
 
 **Timestamp**: 03:01:21 – 03:02:21
 
@@ -611,7 +611,7 @@
 
 ---
 
-### Storage Explorer
+## Storage Explorer
 
 **Timestamp**: 03:02:21 – 03:02:55
 
@@ -642,7 +642,7 @@
 
 ---
 
-### AZCopy
+## AZCopy
 
 **Timestamp**: 03:02:55 – 03:04:42
 
@@ -684,7 +684,7 @@
 
 ---
 
-### Import Export Service
+## Import Export Service
 
 **Timestamp**: 03:04:42 – 03:07:10
 
@@ -727,7 +727,7 @@
 
 ---
 
-### SAS
+## SAS
 
 **Timestamp**: 03:07:10 – 03:10:09
 
@@ -774,7 +774,7 @@
 
 ---
 
-### Use AZCopy to copy files to Storage Accounts
+## Use AZCopy to copy files to Storage Accounts
 
 **Timestamp**: 03:10:09 – 03:26:14
 
@@ -829,7 +829,7 @@
 
 ---
 
-### Create a File Share with Files
+## Create a File Share with Files
 
 **Timestamp**: 03:26:14 – 03:37:22
 
@@ -885,7 +885,7 @@
 
 ---
 
-### Setup Files Sync
+## Setup Files Sync
 
 **Timestamp**: 03:37:22 – 03:54:31
 
@@ -940,7 +940,7 @@
 
 ---
 
-### Storage Accounts CheatSheet
+## Storage Accounts CheatSheet
 
 **Timestamp**: 03:54:31 – 04:02:22
 

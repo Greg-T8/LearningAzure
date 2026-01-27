@@ -1,6 +1,6 @@
-## Application Gateway
+# Application Gateway
 
-### App Gateway Intro
+## App Gateway Intro
 
 **Timestamp**: 06:06:20 – 06:08:47
 
@@ -52,7 +52,7 @@
 
 ---
 
-### Routing Rules
+## Routing Rules
 
 **Timestamp**: 06:08:47 – 06:11:43
 
@@ -97,7 +97,7 @@
 
 ---
 
-### AGW CheatSheet
+## AGW CheatSheet
 
 **Timestamp**: 06:11:43 – 06:13:20
 

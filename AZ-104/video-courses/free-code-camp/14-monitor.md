@@ -1,6 +1,6 @@
-## Monitor
+# Monitor
 
-### Monitor Intro
+## Monitor Intro
 
 **Timestamp**: 07:37:36 – 07:38:06
 
@@ -29,7 +29,7 @@
 
 ---
 
-### The Pillars of Observability
+## The Pillars of Observability
 
 **Timestamp**: 07:38:06 – 07:39:18
 
@@ -63,7 +63,7 @@
 
 ---
 
-### Anatomy of Monitor
+## Anatomy of Monitor
 
 **Timestamp**: 07:39:18 – 07:40:36
 
@@ -99,7 +99,7 @@
 
 ---
 
-### Sources Application
+## Sources Application
 
 **Timestamp**: 07:40:36 – 07:42:26
 
@@ -141,7 +141,7 @@
 
 ---
 
-### Sources Operation System
+## Sources Operation System
 
 **Timestamp**: 07:42:26 – 07:44:00
 
@@ -183,7 +183,7 @@
 
 ---
 
-### Sources Resources
+## Sources Resources
 
 **Timestamp**: 07:44:00 – 07:44:57
 
@@ -224,7 +224,7 @@
 
 ---
 
-### Source Subscription
+## Source Subscription
 
 **Timestamp**: 07:44:57 – 07:45:16
 
@@ -251,7 +251,7 @@
 
 ---
 
-### Sources Tenant
+## Sources Tenant
 
 **Timestamp**: 07:45:16 – 07:45:42
 
@@ -278,7 +278,7 @@
 
 ---
 
-### Sources Custom Sources
+## Sources Custom Sources
 
 **Timestamp**: 07:45:42 – 07:46:08
 
@@ -305,7 +305,7 @@
 
 ---
 
-### Data Stores
+## Data Stores
 
 **Timestamp**: 07:46:08 – 07:47:43
 
@@ -345,7 +345,7 @@
 
 ---
 
-### Log Analytics Workspaces
+## Log Analytics Workspaces
 
 **Timestamp**: 07:47:43 – 07:48:35
 
@@ -373,7 +373,7 @@
 
 ---
 
-### Log Analytics
+## Log Analytics
 
 **Timestamp**: 07:48:35 – 07:49:12
 
@@ -404,7 +404,7 @@
 
 ---
 
-### Kusto
+## Kusto
 
 **Timestamp**: 07:49:12 – 07:50:31
 
@@ -443,7 +443,7 @@
 
 ---
 
-### Kusto Entities
+## Kusto Entities
 
 **Timestamp**: 07:50:31 – 07:51:55
 
@@ -480,7 +480,7 @@
 
 ---
 
-### Scalar Data Types
+## Scalar Data Types
 
 **Timestamp**: 07:51:55 – 07:54:33
 
@@ -529,7 +529,7 @@
 
 ---
 
-### Control Commands
+## Control Commands
 
 **Timestamp**: 07:54:33 – 07:55:51
 
@@ -565,7 +565,7 @@
 
 ---
 
-### Functions
+## Functions
 
 **Timestamp**: 07:55:51 – 07:57:30
 
@@ -614,7 +614,7 @@
 
 ---
 
-### Scalar Operators
+## Scalar Operators
 
 **Timestamp**: 07:57:30 – 07:59:35
 
@@ -658,7 +658,7 @@
 
 ---
 
-### Tabular Operators
+## Tabular Operators
 
 **Timestamp**: 07:59:35 – 08:01:11
 
@@ -705,7 +705,7 @@
 
 ---
 
-### Metrics Explorer
+## Metrics Explorer
 
 **Timestamp**: 08:01:11 – 08:02:39
 
@@ -739,7 +739,7 @@
 
 ---
 
-### Alerts
+## Alerts
 
 **Timestamp**: 08:02:39 – 08:04:22
 
@@ -780,7 +780,7 @@
 
 ---
 
-### Dashboards
+## Dashboards
 
 **Timestamp**: 08:04:22 – 08:05:04  
 
@@ -807,7 +807,7 @@
 
 ---
 
-### Workbooks
+## Workbooks
 
 **Timestamp**: 08:05:04 – 08:06:21
 
@@ -845,7 +845,7 @@
 
 ---
 
-### Application Insights
+## Application Insights
 
 **Timestamp**: 08:06:21 – 08:09:54
 
@@ -898,7 +898,7 @@
 
 ---
 
-### Monitor CheatSheet
+## Monitor CheatSheet
 
 **Timestamp**: 08:09:54 – 08:15:45
 
@@ -953,7 +953,7 @@
 
 ---
 
-### Backup
+## Backup
 
 **Timestamp**: 08:15:45 – 08:31:10
 

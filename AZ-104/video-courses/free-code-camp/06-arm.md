@@ -1,6 +1,6 @@
-## ARM
+# ARM
 
-### Azure ARM Intro
+## Azure ARM Intro
 
 **Timestamp**: 01:41:54 – 01:43:18
 
@@ -35,7 +35,7 @@
 
 ---
 
-### Use Case
+## Use Case
 
 **Timestamp**: 01:43:18 – 01:44:26
 
@@ -75,7 +75,7 @@
 
 ---
 
-### Scoping
+## Scoping
 
 **Timestamp**: 01:44:26 – 01:45:54
 
@@ -111,7 +111,7 @@
 
 ---
 
-### Subscriptions
+## Subscriptions
 
 **Timestamp**: 01:45:54 – 01:47:00
 
@@ -150,7 +150,7 @@
 
 ---
 
-### Management Groups
+## Management Groups
 
 **Timestamp**: 01:47:00 – 01:48:05
 
@@ -185,7 +185,7 @@
 
 ---
 
-### Resource Groups
+## Resource Groups
 
 **Timestamp**: 01:48:05 – 01:48:40
 
@@ -217,7 +217,7 @@
 
 ---
 
-### Resource Providers
+## Resource Providers
 
 **Timestamp**: 01:48:40 – 01:49:49
 
@@ -249,7 +249,7 @@
 
 ---
 
-### Resource Tags
+## Resource Tags
 
 **Timestamp**: 01:49:49 – 01:51:24
 
@@ -286,7 +286,7 @@
 
 ---
 
-### Resource Locks
+## Resource Locks
 
 **Timestamp**: 01:51:24 – 01:52:04
 
@@ -318,7 +318,7 @@
 
 ---
 
-### Blueprints
+## Blueprints
 
 **Timestamp**: 01:52:04 – 01:54:06
 
@@ -355,7 +355,7 @@
 
 ---
 
-### Moving Resources
+## Moving Resources
 
 **Timestamp**: 01:54:06 – 02:06:40
 
@@ -406,7 +406,7 @@
 
 ---
 
-### ARM CheatSheet
+## ARM CheatSheet
 
 **Timestamp**: 02:06:40 – 02:08:58
 
@@ -452,7 +452,7 @@
 
 ---
 
-### Intro to ARM Templates
+## Intro to ARM Templates
 
 **Timestamp**: 02:08:58 – 02:11:53
 
@@ -502,7 +502,7 @@
 
 ---
 
-### ARM Template Skeleton
+## ARM Template Skeleton
 
 **Timestamp**: 02:11:53 – 02:13:15
 
@@ -541,7 +541,7 @@
 
 ---
 
-### ARM Template Resources
+## ARM Template Resources
 
 **Timestamp**: 02:13:15 – 02:14:32
 
@@ -588,7 +588,7 @@
 
 ---
 
-### ARM Template Parameters
+## ARM Template Parameters
 
 **Timestamp**: 02:14:32 – 02:16:02
 
@@ -630,7 +630,7 @@
 
 ---
 
-### ARM Template Functions
+## ARM Template Functions
 
 **Timestamp**: 02:16:02 – 02:17:42
 
@@ -677,7 +677,7 @@
 
 ---
 
-### ARM Template Variables
+## ARM Template Variables
 
 **Timestamp**: 02:17:42 – 02:18:44
 
@@ -710,7 +710,7 @@
 
 ---
 
-### ARM Template Output
+## ARM Template Output
 
 **Timestamp**: 02:18:44 – 02:19:36
 
@@ -741,7 +741,7 @@
 
 ---
 
-### Launch an ARM Template
+## Launch an ARM Template
 
 **Timestamp**: 02:19:36 – 02:30:12
 
@@ -788,7 +788,7 @@
 
 ---
 
-### ARM Template CheatSheet
+## ARM Template CheatSheet
 
 **Timestamp**: 02:30:12 – 02:32:04
 

@@ -1,6 +1,6 @@
-## VMs
+# VMs
 
-### VMs Intro
+## VMs Intro
 
 **Timestamp**: 04:02:22 – 04:05:15
 
@@ -44,7 +44,7 @@
 
 ---
 
-### Operation Systems
+## Operation Systems
 
 **Timestamp**: 04:05:15 – 04:07:01
 
@@ -78,7 +78,7 @@
 
 ---
 
-### Cloud Init
+## Cloud Init
 
 **Timestamp**: 04:07:01 – 04:08:55
 
@@ -113,7 +113,7 @@
 
 ---
 
-### Sizes
+## Sizes
 
 **Timestamp**: 04:08:55 – 04:12:15
 
@@ -155,7 +155,7 @@
 
 ---
 
-### ACUs
+## ACUs
 
 **Timestamp**: 04:12:15 – 04:13:48
 
@@ -190,7 +190,7 @@
 
 ---
 
-### MobileApp
+## MobileApp
 
 **Timestamp**: 04:13:48 – 04:14:38
 
@@ -221,7 +221,7 @@
 
 ---
 
-### VM Generations
+## VM Generations
 
 **Timestamp**: 04:14:38 – 04:17:26
 
@@ -260,7 +260,7 @@
 
 ---
 
-### 3 Ways To Connect
+## 3 Ways To Connect
 
 **Timestamp**: 04:17:26 – 04:19:29
 
@@ -296,7 +296,7 @@
 
 ---
 
-### SSH
+## SSH
 
 **Timestamp**: 04:19:29 – 04:20:41
 
@@ -332,7 +332,7 @@
 
 ---
 
-### RDP
+## RDP
 
 **Timestamp**: 04:20:41 – 04:21:25
 
@@ -364,7 +364,7 @@
 
 ---
 
-### Bastion
+## Bastion
 
 **Timestamp**: 04:21:25 – 04:23:57
 
@@ -399,7 +399,7 @@
 
 ---
 
-### Windows Vs Linux
+## Windows Vs Linux
 
 **Timestamp**: 04:23:57 – 04:26:34
 
@@ -437,7 +437,7 @@
 
 ---
 
-### Update Management
+## Update Management
 
 **Timestamp**: 04:26:34 – 04:28:25
 
@@ -479,7 +479,7 @@
 
 ---
 
-### Create a Bastion
+## Create a Bastion
 
 **Timestamp**: 04:28:25 – 04:33:23
 
@@ -517,7 +517,7 @@
 
 ---
 
-### Create a Windows VM and RDP
+## Create a Windows VM and RDP
 
 **Timestamp**: 04:33:23 – 04:38:53
 
@@ -564,7 +564,7 @@
 
 ---
 
-### Create a Linux VM and SSH
+## Create a Linux VM and SSH
 
 **Timestamp**: 04:38:53 – 04:53:15
 
@@ -625,7 +625,7 @@
 
 ---
 
-### VM Monitoring
+## VM Monitoring
 
 **Timestamp**: 04:53:15 – 05:27:55
 
@@ -695,7 +695,7 @@
 
 ---
 
-### VM CheatSheets
+## VM CheatSheets
 
 **Timestamp**: 05:27:55 – 05:31:25
 

@@ -1,8 +1,8 @@
-## Scale Sets
+# Scale Sets
 
 ---
 
-### Intro to Scale Sets
+## Intro to Scale Sets
 
 **Timestamp**: 06:13:20 – 06:14:18
 
@@ -38,7 +38,7 @@
 
 ---
 
-### Associate a Load Balancer
+## Associate a Load Balancer
 
 **Timestamp**: 06:14:18 – 06:15:24
 
@@ -73,7 +73,7 @@
 
 ---
 
-### Scaling Policy
+## Scaling Policy
 
 **Timestamp**: 06:15:24 – 06:18:51
 
@@ -117,7 +117,7 @@
 
 ---
 
-### Health Monitoring
+## Health Monitoring
 
 **Timestamp**: 06:18:51 – 06:20:18
 
@@ -151,7 +151,7 @@
 
 ---
 
-### Advanced Features
+## Advanced Features
 
 **Timestamp**: 06:20:18 – 06:21:22
 
@@ -181,7 +181,7 @@
 
 ---
 
-### Scale Sets CheatSheet
+## Scale Sets CheatSheet
 
 **Timestamp**: 06:21:22 – 06:23:06
 

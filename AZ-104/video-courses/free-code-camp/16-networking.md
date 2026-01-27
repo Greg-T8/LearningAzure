@@ -1,6 +1,6 @@
-## Networking
+# Networking
 
-### DNS
+## DNS
 
 **Timestamp**: 09:13:36 – 09:30:07
 
@@ -62,7 +62,7 @@
 
 ---
 
-### Networking
+## Networking
 
 **Timestamp**: 09:30:07 – 10:53:41
 
@@ -136,7 +136,7 @@
 
 ---
 
-### NSG
+## NSG
 
 **Timestamp**: 10:53:41 – 11:00:44
 
@@ -194,7 +194,7 @@
 
 ---
 
-### Virtual WAN
+## Virtual WAN
 
 **Timestamp**: 11:00:44 – 11:12:38
 
@@ -245,7 +245,7 @@
 
 ---
 
-### VNGs
+## VNGs
 
 **Timestamp**: 11:12:38 – unknown
 

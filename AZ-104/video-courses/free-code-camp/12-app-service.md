@@ -1,6 +1,6 @@
-## App Service
+# App Service
 
-### Intro to App Service
+## Intro to App Service
 
 **Timestamp**: 06:23:06 – 06:25:02
 
@@ -40,7 +40,7 @@
 
 ---
 
-### Runtimes
+## Runtimes
 
 **Timestamp**: 06:25:02 – 06:26:32
 
@@ -75,7 +75,7 @@
 
 ---
 
-### Custom Containers
+## Custom Containers
 
 **Timestamp**: 06:26:32 – 06:27:15
 
@@ -103,7 +103,7 @@
 
 ---
 
-### Deployment Slots
+## Deployment Slots
 
 **Timestamp**: 06:27:15 – 06:28:12
 
@@ -135,7 +135,7 @@
 
 ---
 
-### App Service Environment
+## App Service Environment
 
 **Timestamp**: 06:28:12 – 06:30:49
 
@@ -180,7 +180,7 @@
 
 ---
 
-### Deployment
+## Deployment
 
 **Timestamp**: 06:30:49 – 06:34:53
 
@@ -233,7 +233,7 @@
 
 ---
 
-### App Service Plan
+## App Service Plan
 
 **Timestamp**: 06:34:53 – 06:38:11
 
@@ -282,7 +282,7 @@
 
 ---
 
-### WebJobs
+## WebJobs
 
 **Timestamp**: 06:38:11 – 06:39:37
 
@@ -327,7 +327,7 @@
 
 ---
 
-### Configure and Deploy App Service
+## Configure and Deploy App Service
 
 **Timestamp**: 06:39:37 – 06:48:52
 
@@ -374,7 +374,7 @@
 
 ---
 
-### Trigger a Deploy via Github Actions
+## Trigger a Deploy via Github Actions
 
 **Timestamp**: 06:48:52 – 06:56:24
 
@@ -429,7 +429,7 @@
 
 ---
 
-### Create Deployment Slots
+## Create Deployment Slots
 
 **Timestamp**: 06:56:24 – 07:07:44
 
@@ -476,7 +476,7 @@
 
 ---
 
-### Scaling App Service
+## Scaling App Service
 
 **Timestamp**: 07:07:44 – 07:14:02
 
@@ -521,7 +521,7 @@
 
 ---
 
-### App Services CheatSheet
+## App Services CheatSheet
 
 **Timestamp**: 07:14:02 – 07:16:53
 

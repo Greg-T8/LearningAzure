@@ -1,6 +1,6 @@
-## Disks
+# Disks
 
-### Disks Intro
+## Disks Intro
 
 **Timestamp**: 05:31:25 – 05:32:56
 
@@ -41,7 +41,7 @@
 
 ---
 
-### Encryption
+## Encryption
 
 **Timestamp**: 05:32:56 – 05:34:01  
 
@@ -74,7 +74,7 @@
 
 ---
 
-### Disk Roles
+## Disk Roles
 
 **Timestamp**: 05:34:01 – 05:35:42
 
@@ -117,7 +117,7 @@
 
 ---
 
-### Managed Disk Snapshots Managed Custom Image
+## Managed Disk Snapshots Managed Custom Image
 
 **Timestamp**: 05:35:42 – 05:37:07
 
@@ -153,7 +153,7 @@
 
 ---
 
-### Disk Types
+## Disk Types
 
 **Timestamp**: 05:37:07 – 05:40:35
 
@@ -199,7 +199,7 @@
 
 ---
 
-### Bursting
+## Bursting
 
 **Timestamp**: 05:40:35 – 05:41:48
 
@@ -230,7 +230,7 @@
 
 ---
 
-### Attaching Partitioning and Mounting a Disk
+## Attaching Partitioning and Mounting a Disk
 
 **Timestamp**: 05:41:48 – 06:01:36
 
@@ -298,7 +298,7 @@ These notes cover the practical steps and concepts needed for exam questions rel
 
 ---
 
-### Disks CheatSheet
+## Disks CheatSheet
 
 **Timestamp**: 06:01:36 – 06:06:20
 
