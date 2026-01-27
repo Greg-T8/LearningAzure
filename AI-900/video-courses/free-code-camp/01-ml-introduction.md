@@ -490,6 +490,10 @@
 - **IPython**: The original interactive Python shell that became the kernel powering Jupyter Notebooks.  
 - **JupyterLabs**: The next-generation web-based user interface for Jupyter, offering a more flexible and powerful environment than classic notebooks.
 
+<img src='.img/2026-01-27-05-46-30.png' width=700> 
+
+<img src='.img/2026-01-27-05-47-52.png' width=700> 
+
 **Key Facts**  
 
 - Jupyter Notebooks were extracted from IPython and now use IPython as their Python execution kernel.  
