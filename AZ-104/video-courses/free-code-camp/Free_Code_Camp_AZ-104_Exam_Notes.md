@@ -1,6 +1,8 @@
 # Azure Administrator Certification (AZ-104) - Full Course to PASS the Exam - Exam Notes
 
-*Generated on 2026-01-26 17:40*
+**Channel:** freeCodeCamp.org
+**Duration:** 11:16:25
+**URL:** https://www.youtube.com/watch?v=10PbGbTUSAg
 
 ---
 
@@ -9,7 +11,6 @@
 * [Table of Contents](#table-of-contents)
 * [Course Contents](#course-contents)
   * [Getting Started](#getting-started)
-* [Monitor](#monitor)
   * [Intro](#intro)
 * [Azure AD](#azure-ad)
   * [Use Cases](#use-cases)
@@ -42,25 +43,24 @@
   * [Hybrid AD Joined Devices](#hybrid-ad-joined-devices)
   * [Windows Autopilot](#windows-autopilot)
   * [Device Management Cheatsheet](#device-management-cheatsheet)
-  * [Roles](#roles)
-  * [Roles](#roles-1)
+* [Roles](#roles)
   * [Type of Roles](#type-of-roles)
   * [IAM Access Controls](#iam-access-controls)
   * [Classic Administrator](#classic-administrator)
   * [RBAC](#rbac)
   * [AD Roles](#ad-roles)
-  * [Roles](#roles-2)
+  * [Roles](#roles-1)
   * [Policies vs RBAC](#policies-vs-rbac)
   * [AD Roles vs RBAC](#ad-roles-vs-rbac)
   * [Roles CheatSheet](#roles-cheatsheet)
-  * [Intro](#intro-1)
 * [Azure Policies](#azure-policies)
+  * [Policies Intro](#policies-intro)
   * [Non Compliant Resources](#non-compliant-resources)
   * [Policy Definition File](#policy-definition-file)
   * [Configure Policy](#configure-policy)
   * [Policies CheatSheet](#policies-cheatsheet)
-  * [Intro](#intro-2)
 * [ARM](#arm)
+  * [Azure ARM Intro](#azure-arm-intro)
   * [Use Case](#use-case)
   * [Scoping](#scoping)
   * [Subscriptions](#subscriptions)
@@ -72,7 +72,6 @@
   * [Blueprints](#blueprints)
   * [Moving Resources](#moving-resources)
   * [ARM CheatSheet](#arm-cheatsheet)
-* [ARM Templates](#arm-templates)
   * [Intro to ARM Templates](#intro-to-arm-templates)
   * [ARM Template Skeleton](#arm-template-skeleton)
   * [ARM Template Resources](#arm-template-resources)
@@ -107,8 +106,8 @@
   * [Create a File Share with Files](#create-a-file-share-with-files)
   * [Setup Files Sync](#setup-files-sync)
   * [Storage Accounts CheatSheet](#storage-accounts-cheatsheet)
-  * [Intro](#intro-3)
 * [VMs](#vms)
+  * [VMs Intro](#vms-intro)
   * [Operation Systems](#operation-systems)
   * [Cloud Init](#cloud-init)
   * [Sizes](#sizes)
@@ -126,8 +125,8 @@
   * [Create a Linux VM and SSH](#create-a-linux-vm-and-ssh)
   * [VM Monitoring](#vm-monitoring)
   * [VM CheatSheets](#vm-cheatsheets)
-  * [Intro](#intro-4)
 * [Disks](#disks)
+  * [Disks Intro](#disks-intro)
   * [Encryption](#encryption)
   * [Disk Roles](#disk-roles)
   * [Managed Disk Snapshots Managed Custom Image](#managed-disk-snapshots-managed-custom-image)
@@ -135,8 +134,8 @@
   * [Bursting](#bursting)
   * [Attaching Partitioning and Mounting a Disk](#attaching-partitioning-and-mounting-a-disk)
   * [Disks CheatSheet](#disks-cheatsheet)
-  * [Intro](#intro-5)
 * [Application Gateway](#application-gateway)
+  * [App Gateway Intro](#app-gateway-intro)
   * [Routing Rules](#routing-rules)
   * [AGW CheatSheet](#agw-cheatsheet)
 * [Scale Sets](#scale-sets)
@@ -146,8 +145,8 @@
   * [Health Monitoring](#health-monitoring)
   * [Advanced Features](#advanced-features)
   * [Scale Sets CheatSheet](#scale-sets-cheatsheet)
-  * [Intro](#intro-6)
 * [App Service](#app-service)
+  * [Intro to App Service](#intro-to-app-service)
   * [Runtimes](#runtimes)
   * [Custom Containers](#custom-containers)
   * [Deployment Slots](#deployment-slots)
@@ -165,7 +164,8 @@
   * [Review Availability Sets](#review-availability-sets)
   * [Create a Scale Sets](#create-a-scale-sets)
   * [Create an Application Gateway](#create-an-application-gateway)
-  * [Intro](#intro-7)
+* [Monitor](#monitor)
+  * [Monitor Intro](#monitor-intro)
   * [The Pillars of Observability](#the-pillars-of-observability)
   * [Anatomy of Monitor](#anatomy-of-monitor)
   * [Sources Application](#sources-application)
@@ -269,11 +269,6 @@
 - Certification renewal is required every 2 years, with potential free recertification options available  
 
 ---
-
-## Monitor
-
----
-
 ### Intro
 
 **Timestamp**: 00:19:45 – 00:21:43
@@ -1420,9 +1415,7 @@
 
 ---
 
-### Roles
-
-### Roles
+## Roles
 
 ### Type of Roles
 
@@ -1779,7 +1772,9 @@
 
 ---
 
-### Intro
+## Azure Policies
+
+### Policies Intro
 
 **Timestamp**: 01:28:32 – 01:30:06
 
@@ -1821,8 +1816,6 @@
 - Reviewing the structure of a policy definition JSON file is good practice but likely not required for the exam.
 
 ---
-
-## Azure Policies
 
 ---
 
@@ -1987,8 +1980,9 @@
 - Additional reading on use cases in Azure docs can deepen understanding but is not required for the exam.  
 
 ---
+## ARM
 
-### Intro
+### Azure ARM Intro
 
 **Timestamp**: 01:41:54 – 01:43:18
 
@@ -2020,10 +2014,6 @@
 - Requests to Azure resources always pass through ARM, which authorizes and processes them.  
 - Familiarize yourself with the concept of ARM templates for infrastructure as code.  
 - No direct exam questions on policy use cases were noted, but reviewing Azure docs on policies can deepen understanding.
-
----
-
-## ARM
 
 ---
 
@@ -2441,10 +2431,6 @@
 - Azure Blueprints complement ARM templates for governed subscription deployment.  
 - ARM templates are JSON files used to define infrastructure as code declaratively.  
 - For exam scenarios, expect questions on resource scopes, locks, tags, and the role of ARM in managing Azure resources.
-
----
-
-## ARM Templates
 
 ---
 
@@ -3857,7 +3843,9 @@
 
 ---
 
-### Intro
+## VMs
+
+### VMs Intro
 
 **Timestamp**: 04:02:22 – 04:05:15
 
@@ -3900,8 +3888,6 @@
 - During the exam, expect questions on VM architecture, availability SLAs, and networking components associated with VMs.
 
 ---
-
-## VMs
 
 ---
 
@@ -4607,7 +4593,9 @@
 
 ---
 
-### Intro
+## Disks
+
+### Disks Intro
 
 **Timestamp**: 05:31:25 – 05:32:56
 
@@ -4645,10 +4633,6 @@
 - Be aware of the limits: 50 disks per subscription per region, and 1,000 VMs in a scale set.  
 - Understand integration points: availability sets/zones, backup, RBAC, and private links for secure traffic.  
 - Encryption keys management options (platform vs customer) are important for compliance and security.
-
----
-
-## Disks
 
 ---
 
@@ -4966,7 +4950,9 @@ These notes cover the practical steps and concepts needed for exam questions rel
 
 ---
 
-### Intro
+## Application Gateway
+
+### App Gateway Intro
 
 **Timestamp**: 06:06:20 – 06:08:47
 
@@ -5015,10 +5001,6 @@ These notes cover the practical steps and concepts needed for exam questions rel
 - Remember the two types of routing rules (basic and multi-site) and their use cases.  
 - Routing rules order is important—basic rules should be last to avoid capturing all traffic prematurely.  
 - Application Gateway can apply advanced routing logic based on URL paths, host headers, cookies, and WAF policies—important for exam scenarios involving application-level traffic management.
-
----
-
-## Application Gateway
 
 ---
 
@@ -5333,7 +5315,9 @@ These notes cover the practical steps and concepts needed for exam questions rel
 
 ---
 
-### Intro
+## App Service
+
+### Intro to App Service
 
 **Timestamp**: 06:23:06 – 06:25:02
 
@@ -5370,10 +5354,6 @@ These notes cover the practical steps and concepts needed for exam questions rel
 - Be aware that Docker container deployment is supported.  
 - Default domain names can be customized with your own domain and SSL certificates.  
 - Runtimes define the environment your app runs in, including language and framework support.
-
----
-
-## App Service
 
 ---
 
@@ -6086,7 +6066,9 @@ These notes cover the practical steps and concepts needed for exam questions rel
 
 ---
 
-### Intro
+## Monitor
+
+### Monitor Intro
 
 **Timestamp**: 07:37:36 – 07:38:06
 
