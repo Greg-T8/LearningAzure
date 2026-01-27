@@ -234,6 +234,8 @@
 - **Dense Layer**: A layer with an increased number of nodes compared to the previous layer.  
 - **Sparse Layer**: A layer with fewer nodes than the previous layer, often used for dimensionality reduction.
 
+<img src='.img/2026-01-27-05-38-07.png' width=700> 
+
 **Key Facts**  
 
 - Neural network connections are weighted, which is crucial for learning and output determination.  
