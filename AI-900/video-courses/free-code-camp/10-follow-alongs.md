@@ -1,5 +1,9 @@
 # Follow Alongs
 
+**Channel:** freeCodeCamp.org
+**Duration:** 11:16:25
+**URL:** https://www.youtube.com/watch?v=10PbGbTUSAg
+
 ---
 
 ## Setup
@@ -694,4 +698,3 @@
 - Use the Azure portal’s resource group deletion feature to remove all related resources at once.  
 - Double-check the "All Resources" view in Azure portal to confirm no resources are left running.  
 - Being "paranoid" and manually deleting resources before deleting the resource group is a good practice for thorough cleanup.
-

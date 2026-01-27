@@ -1,5 +1,9 @@
 # Congitive Services
 
+**Channel:** freeCodeCamp.org
+**Duration:** 11:16:25
+**URL:** https://www.youtube.com/watch?v=10PbGbTUSAg
+
 ---
 
 ## Azure Cognitive Services
@@ -553,5 +557,3 @@
 - Be familiar with supported programming languages (C# and Node.js) and deployment targets (Azure Web Apps, Azure Functions).  
 - Recognize the importance of channel integration to connect bots with various communication platforms.  
 - For the AI-900 exam, focus on the high-level concepts of Azure Bot Service, Bot Framework SDK, and Bot Framework Composer without needing deep technical details.
-
-

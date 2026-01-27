@@ -1,5 +1,9 @@
 # Capabilities of Azure OpenAI Service
 
+**Channel:** freeCodeCamp.org
+**Duration:** 11:16:25
+**URL:** https://www.youtube.com/watch?v=10PbGbTUSAg
+
 ---
 
 ## Introduction to Azure OpenAI Service
@@ -295,5 +299,3 @@
 - Generated answers come with source links—use these for verifying information and further study.  
 - Copilot supports multiple programming languages, useful for coding exam questions or practice.  
 - Using follow-up suggestions can help deepen understanding or explore related topics efficiently.
-
-

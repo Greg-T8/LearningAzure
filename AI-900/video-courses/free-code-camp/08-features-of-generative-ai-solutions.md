@@ -1,5 +1,9 @@
 # Features of generative AI solutions
 
+**Channel:** freeCodeCamp.org
+**Duration:** 11:16:25
+**URL:** https://www.youtube.com/watch?v=10PbGbTUSAg
+
 ---
 
 ## AI vs Generative AI
@@ -265,5 +269,3 @@
 - Transformers do not "know" or "understand" language like humans but excel at pattern recognition through attention mechanisms.  
 - Be able to explain the role of attention in both the encoder (contextual word representation) and decoder (predicting next word) stages.  
 - Use the example sentence to illustrate how attention focuses on related words to determine meaning and next word prediction.
-
-

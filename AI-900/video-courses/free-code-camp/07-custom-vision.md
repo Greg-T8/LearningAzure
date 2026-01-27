@@ -1,5 +1,9 @@
 # Custom Vision
 
+**Channel:** freeCodeCamp.org
+**Duration:** 11:16:25
+**URL:** https://www.youtube.com/watch?v=10PbGbTUSAg
+
 ---
 
 ## Introduction to Custom Vision
@@ -125,5 +129,3 @@
 - Know the evaluation metrics: precision, recall, and mean average precision (mAP) — these are likely exam topics.  
 - Be familiar with the Smart Labeler feature as an example of ML-assisted labeling to speed up dataset preparation.  
 - Know the workflow: upload/tag images → train (quick or advanced) → test → publish → get prediction URL.
-
-

@@ -1,5 +1,9 @@
 # Responsible AI
 
+**Channel:** freeCodeCamp.org
+**Duration:** 11:16:25
+**URL:** https://www.youtube.com/watch?v=10PbGbTUSAg
+
 ---
 
 ## Responsible AI
@@ -317,5 +321,3 @@
 - Users must be notified about AI system changes and new features to maintain transparency.  
 - Practical examples from Microsoft and other tech companies illustrate these principles in real-world applications.  
 - For exam focus, link these guidelines to responsible AI concepts and how they improve user experience and trust.
-
-

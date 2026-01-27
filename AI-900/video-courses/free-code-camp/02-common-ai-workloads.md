@@ -1,5 +1,9 @@
 # Common AI Workloads
 
+**Channel:** freeCodeCamp.org
+**Duration:** 11:16:25
+**URL:** https://www.youtube.com/watch?v=10PbGbTUSAg
+
 ---
 
 ## Anomaly Detection AI
@@ -165,5 +169,3 @@
 - Remember the main Azure services for conversational AI: Q&A Maker (knowledge base bots) and Azure Bot Service (bot lifecycle management).  
 - Recognize the broad applicability of conversational AI across industries and devices.  
 - Conversational AI relies heavily on NLP technologies to interpret and respond to human language.
-
-

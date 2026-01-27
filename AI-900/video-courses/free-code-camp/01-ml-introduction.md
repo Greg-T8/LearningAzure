@@ -1,5 +1,9 @@
 # ML Introduction
 
+**Channel:** freeCodeCamp.org
+**Duration:** 11:16:25
+**URL:** https://www.youtube.com/watch?v=10PbGbTUSAg
+
 ---
 
 ## Layers of Machine Learning
@@ -559,5 +563,3 @@
 - Know how to determine the size of a confusion matrix based on the number of classes.  
 - Expect exam questions to use numeric labels (0,1,2, etc.) rather than descriptive labels.  
 - Remember confusion matrix is a fundamental tool for evaluating classification model performance.
-
-

@@ -1,5 +1,9 @@
 # ML Studio
 
+**Channel:** freeCodeCamp.org
+**Duration:** 11:16:25
+**URL:** https://www.youtube.com/watch?v=10PbGbTUSAg
+
 ---
 
 ## Azure Machine Learning Service
@@ -423,5 +427,3 @@
 - Be aware that you can open Azure ML notebooks in familiar IDEs like VS Code or Jupyter for a better user experience.  
 - The VS Code notebook experience mirrors the Azure ML Studio notebook editor exactly.  
 - For exams, focus on the flexibility of notebook environments and the kernel concept within Azure ML.
-
-

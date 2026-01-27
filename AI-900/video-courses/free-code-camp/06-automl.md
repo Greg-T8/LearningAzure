@@ -1,5 +1,9 @@
 # AutoML
 
+**Channel:** freeCodeCamp.org
+**Duration:** 11:16:25
+**URL:** https://www.youtube.com/watch?v=10PbGbTUSAg
+
 ---
 
 ## Introduction to AutoML
@@ -242,5 +246,3 @@
 - Understand that model validation is a post-training evaluation step comparing training and test results.  
 - Be aware of common validation methods (K-fold, Monte Carlo, train-validation split), even if deep details are not required.  
 - For AI-900 exam, focus on the concept of validation rather than the intricate mechanics of each validation type.
-
-
