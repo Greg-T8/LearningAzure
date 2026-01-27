@@ -365,6 +365,8 @@
 - **Serving/Deployment**: Making the trained ML model accessible for use, typically by hosting it on cloud services like Azure Kubernetes Service or Azure Container Instance.  
 - **Inference**: The act of using the deployed model to make predictions on new data inputs.  
 
+<img src='.img/2026-01-27-05-42-59.png' width=700> 
+
 **Key Facts**  
 
 - ML models only work with numerical data, necessitating feature engineering.  
