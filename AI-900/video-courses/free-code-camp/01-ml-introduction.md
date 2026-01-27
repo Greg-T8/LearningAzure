@@ -445,7 +445,7 @@
 - **Internal Evaluation Metrics**: Metrics used to evaluate the internals of an ML model (e.g., accuracy, precision, recall, F1 score).  
 - **External Evaluation Metrics**: Metrics used to evaluate the final prediction output of an ML model.
 
-
+<img src='.img/2026-01-27-05-45-46.png' width=700> 
 
 **Key Facts**  
 
