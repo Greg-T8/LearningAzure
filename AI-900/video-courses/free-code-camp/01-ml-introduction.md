@@ -184,6 +184,8 @@
 - **Unsupervised Learning**: Machine learning where the data is unlabeled; the model identifies patterns or structures such as clusters or associations without precise outcome requirements.  
 - **Reinforcement Learning**: Learning method where an agent interacts with an environment, generating data through attempts to achieve a goal, used in decision-driven tasks like game AI or robot navigation.  
 
+<img src='.img/2026-01-27-05-36-20.png' width=700> 
+
 **Key Facts**  
 
 - Supervised learning is task-driven and used when labels are known and precise outcomes are needed.  
