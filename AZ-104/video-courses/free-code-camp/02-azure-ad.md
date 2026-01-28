@@ -398,6 +398,8 @@
 - Access can be assigned directly to users or indirectly via groups or rules.  
 - External authorities can also provide access rights.
 
+<img src='.img/2026-01-28-03-28-25.png' width=700> 
+
 **Definitions**  
 
 - **Direct Assignment**: The resource owner assigns access rights directly to an individual user.  
