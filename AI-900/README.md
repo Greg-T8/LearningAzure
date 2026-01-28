@@ -9,7 +9,7 @@
 
 ## 📚 Learning Resource Progress Tracker
 
-| Priority | Modality         | Notes                                            | Status | Started | Completed | Days |
+| Priority | Modality         | My Notes                                            | Status | Started | Completed | Days |
 | -------- | ---------------- | --------------------------------------------------- | ------ | ------- | --------- | ---- |
 | 1        | Microsoft Learn  | [Microsoft Learning Paths](./learning-paths/README.md) | ✅     | 1/14/26 | 1/21/26   | 7    |
 | 2        | Video            | [John Savill's Training](./video-courses/savill/README.md)          | 🚧     |         |           |      |
