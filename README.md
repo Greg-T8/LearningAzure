@@ -31,6 +31,17 @@ This repository documents my learning progress through Microsoft Azure certifica
 
 ---
 
+## 📖 Learning Approach
+
+My exam preparation follows a structured, multi-modality approach designed to reinforce concepts through varied learning methods:
+
+1. **Microsoft Learning Paths** — Establish a solid foundation of core knowledge
+2. **Video courses** — Visual reinforcement and deeper exploration of complex topics
+3. **Hands-on Labs** — Practical experience applying concepts in real Azure environments
+4. **Practice Exams** — Assess readiness and identify knowledge gaps before taking the certification exam
+
+---
+
 ## 🎓 Certifications
 
 ### [AI-900: Microsoft Azure AI Fundamentals](AI-900/README.md)
