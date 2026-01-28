@@ -441,6 +441,7 @@
 - Supports development of apps for Azure AD tenants (single-tenant or multi-tenant).  
 - Azure AD B2C enables creation of white-label apps for consumers and customers.
 
+
 **Definitions**  
 
 - **External Identities**: Azure AD feature that allows external users to access organizational resources using their own identity providers (e.g., Google, Facebook).  
@@ -654,6 +655,8 @@
 - After filling out the CSV, it can be uploaded to the system for processing.  
 - The system provides status updates on the bulk import operation, including success or failure counts.  
 - Successfully imported users appear in the user list after completion.
+
+<img src='.img/2026-01-28-03-39-29.png' width=900> 
 
 **Definitions**  
 
