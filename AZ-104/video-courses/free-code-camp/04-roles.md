@@ -242,7 +242,7 @@
 
 <img src='.img/2026-01-28-04-09-59.png' width=900> 
 
-**Definitions**  
+**Definitions**
 
 - **Azure Role**: A set of permissions that define what actions a user or service principal can perform on Azure resources.  
 - **Custom Role**: A user-defined role with specific permissions, requiring Azure AD Premium P1 or P2.  
@@ -288,6 +288,8 @@
 - Policies evaluate resource properties and do not restrict actions directly.  
 - RBAC focuses on restricting what actions users can perform at various scopes.  
 - Even if a user has permission to perform an action, Azure Policy can block the action if it results in a non-compliant resource.
+
+
 
 **Definitions**  
 
