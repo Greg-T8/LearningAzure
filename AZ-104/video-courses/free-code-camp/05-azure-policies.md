@@ -104,6 +104,8 @@
 
 <img src='.img/2026-01-28-04-17-17.png' width=800> 
 
+<img src='.img/2026-01-28-04-18-44.png' width=700> 
+
 **Definitions**  
 
 - **Built-in Policy**: Maintained by Microsoft.  
