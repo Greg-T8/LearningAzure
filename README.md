@@ -31,9 +31,18 @@ This repository documents my learning progress through Microsoft Azure certifica
 
 ---
 
+## 📚 My Study Guides & Notes
+
+Explore my comprehensive study notes, progress trackers, and learning resources for each certification:
+
+- 📘 [**My AI-900 Study Notes**](AI-900/README.md)
+- 📗 [**My AZ-104 Study Notes**](AZ-104/README.md)
+
+---
+
 ## 📖 Learning Approach
 
-My exam preparation follows a structured, multi-modality approach designed to reinforce concepts through varied learning methods:
+My exam preparation follows a structured approach designed to reinforce concepts through the following learning modalities:
 
 1. **Microsoft Learning Paths** — Establish a solid foundation of core knowledge
 2. **Video courses** — Visual reinforcement and deeper exploration of complex topics
@@ -41,33 +50,3 @@ My exam preparation follows a structured, multi-modality approach designed to re
 4. **Practice Exams** — Assess readiness and identify knowledge gaps before taking the certification exam
 
 **Resource Hub:** [Microsoft Skills Navigator](https://msfthub.com/) — Central hub for Microsoft certifications and learning resources
-
----
-
-## 🎓 Certifications
-
-### [AI-900: Microsoft Azure AI Fundamentals](AI-900/README.md)
-
-**Status:** 🔄 In Progress 
-
-**Exam Domains:**
-
-- AI Workloads & Considerations (15-20%)
-- Machine Learning on Azure (15-20%)
-- Computer Vision Workloads (15-20%)
-- NLP Workloads (15-20%)
-- Generative AI Workloads (20-25%)
-
----
-
-### [AZ-104: Microsoft Azure Administrator](AZ-104/README.md)
-
-**Status:** 🔄 In Progress
-
-**Exam Domains:**
-
-- Manage Azure identities and governance (20-25%)
-- Implement and manage storage (15-20%)
-- Deploy and manage Azure compute resources (20-25%)
-- Implement and manage virtual networking (15-20%)
-- Monitor and maintain Azure resources (10-15%)
