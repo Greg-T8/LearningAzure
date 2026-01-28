@@ -109,6 +109,8 @@
 - **Active Directory Domain Services (AD DS)**: Introduced in Windows 2000, it allows organizations to manage multiple on-premise infrastructure components and systems using a single user identity.  
 - **Azure Active Directory (Azure AD)**: A cloud-hosted identity as a service (IDaaS) solution for managing user identities and access to applications across cloud and on-premise environments.
 
+<img src='.img/2026-01-28-03-21-59.png' width=700> 
+
 **Key Facts**  
 
 - Active Directory has been around for over 20 years (since Windows 2000).  
