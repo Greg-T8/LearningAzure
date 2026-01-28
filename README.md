@@ -40,6 +40,8 @@ My exam preparation follows a structured, multi-modality approach designed to re
 3. **Hands-on Labs** — Practical experience applying concepts in real Azure environments
 4. **Practice Exams** — Assess readiness and identify knowledge gaps before taking the certification exam
 
+**Resource Hub:** [Microsoft Skills Navigator](https://msfthub.com/) — Central hub for Microsoft certifications and learning resources
+
 ---
 
 ## 🎓 Certifications
