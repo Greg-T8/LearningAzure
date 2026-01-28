@@ -146,6 +146,10 @@
 - Directory services store and provide access to directory data, running on domain controllers.  
 - A tenant represents an organization in Azure AD and is created automatically with Azure, Intune, or Microsoft 365 sign-up.
 
+<img src='.img/2026-01-28-03-23-31.png' width=700> 
+
+
+
 **Definitions**  
 
 - **Domain**: A logical grouping of Active Directory objects on a network, organized by a single authentication database.  
