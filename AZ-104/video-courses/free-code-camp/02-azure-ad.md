@@ -11,7 +11,7 @@
 **Key Concepts**  
 
 - Azure Active Directory (Azure AD) is a cloud-based identity and access management service.  
-- It manages user sign-ins and access to both external and internal resources.  
+- It manages user sign-ins and access to bot and internal resources.  
 - Supports single sign-on (SSO) to enable users to log into multiple applications with one set of credentials.  
 - Azure AD integrates with various platforms including Microsoft Office 365, Azure Portal, SaaS apps, on-premises applications, and workstations.  
 - Azure AD comes in four editions with increasing features: Free, Office 365 Apps, Premium P1, and Premium P2.  
