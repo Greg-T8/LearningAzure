@@ -22,7 +22,7 @@ Comprehensive study notes, progress trackers, and learning resources for each ce
 
 Azure evolves rapidly with new services, features, and best practices. This section captures ongoing learning beyond certification prep — exploring updates, deep-diving into specific topics, and documenting insights from industry experts.
 
-📝 [**ongoing-learning/**](ongoing-learning/README.md) — Organized notes on Azure updates, feature releases, and advanced topics
+- 📝 [**Ongoing Learning**](ongoing-learning/README.md) — Organized notes on Azure updates, feature releases, and advanced topics
 
 ---
 
