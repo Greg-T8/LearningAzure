@@ -1,8 +1,8 @@
 # AI-900 - Learning About Generative AI - Exam Notes
 
-**Video:** [https://www.youtube.com/watch?v=Ch6KE7KxHGM](https://www.youtube.com/watch?v=Ch6KE7KxHGM) 
-**Published:** 2023-11-27 
-**Duration:** 59:47 
+**Video:** [https://www.youtube.com/watch?v=Ch6KE7KxHGM](https://www.youtube.com/watch?v=Ch6KE7KxHGM)  
+**Published:** 2023-11-27  
+**Duration:** 59:47  
 
 *Generated on 2026-01-28 05:32*
 
