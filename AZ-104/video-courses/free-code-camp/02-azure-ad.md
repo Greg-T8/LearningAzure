@@ -321,6 +321,8 @@
 - Roles and applications can be assigned directly to groups.  
 - Group owners can enable self-service group joining with options for automatic acceptance or approval.
 
+<img src='.img/2026-01-28-03-27-07.png' width=700> 
+
 **Definitions**  
 
 - **User**: An identity representing a person or employee in a domain, with credentials to log into Azure portal.  
