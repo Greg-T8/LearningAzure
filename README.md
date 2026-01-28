@@ -33,7 +33,7 @@ Explore my comprehensive study notes, progress trackers, and learning resources 
 | Wed, Jan 21 | 🟢 66 | 🟢 32 | **98** |
 | **Total** | **156** | **195** | **351** |
 
-*🟢 = Activity on this day*
+*🟢 = Activity on this day. Activity includes changed files.*
 
 *Last updated: January 27, 2026 at 14:09 UTC*
 
