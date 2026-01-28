@@ -2,13 +2,14 @@
 
 **Channel:** freeCodeCamp.org
 **Duration:** 11:16:25
-**URL:** https://www.youtube.com/watch?v=10PbGbTUSAg
+**URL:** <https://www.youtube.com/watch?v=10PbGbTUSAg>
 
 ## Type of Roles
 
 **Timestamp**: 01:13:38 – 01:14:32
 
 **Key Concepts**  
+
 - Azure has three types of roles for access and management.  
 - Classic subscription administrator roles are the original Azure role system but are largely legacy.  
 - Azure Roles are part of Role-Based Access Control (RBAC), built on Azure Resource Manager.  
@@ -17,19 +18,23 @@
 - Azure RBAC roles restrict access to resource actions (operations).  
 
 **Definitions**  
+
 - **Classic Subscription Administrator Roles**: The original Azure role system used to manage subscriptions; mostly legacy now.  
 - **Azure Roles (RBAC)**: Authorization system built on Azure Resource Manager that controls access to Azure resources by assigning roles.  
 - **Azure Active Directory (Azure AD) Roles**: Roles used to manage Azure AD resources within a directory.  
 - **IAM (Identity Access Management)**: The system that allows creation and assignment of roles to users to control access.  
 
 **Key Facts**  
+
 - Azure has three distinct role types: Classic subscription administrator roles, Azure RBAC roles, and Azure AD roles.  
 - RBAC roles are tied to Azure Resource Manager and control access to resource operations.  
 
 **Examples**  
+
 - None mentioned explicitly in this segment.  
 
 **Key Takeaways 🎯**  
+
 - Understand the difference between the three Azure role types and their purposes.  
 - Know that Classic roles are legacy but still exist.  
 - Azure RBAC is the primary authorization system for managing access to Azure resources.  
@@ -43,6 +48,7 @@
 **Timestamp**: 01:14:32 – 01:16:04
 
 **Key Concepts**  
+
 - IAM (Identity Access Management) in Azure is used to create and assign roles to users for access control.  
 - Azure Roles are part of Role-Based Access Control (RBAC), which restricts access to resource operations.  
 - There are two types of Azure RBAC roles: built-in roles and custom roles.  
@@ -51,6 +57,7 @@
 - Classic administrators represent the original Azure role system, now largely replaced by RBAC.
 
 **Definitions**  
+
 - **IAM (Identity Access Management)**: A system that allows creation and assignment of roles to users to control access.  
 - **Azure Roles**: Roles used in Azure RBAC to restrict access to resource actions.  
 - **Built-in Roles**: Predefined, read-only roles managed by Microsoft (e.g., Owner, Contributor, Reader).  
@@ -60,6 +67,7 @@
 - **Classic Administrators**: The original Azure role system with three roles: Account Administrator, Service Administrator, and Co-Administrator.
 
 **Key Facts**  
+
 - Built-in roles are managed by Microsoft and are read-only.  
 - Common built-in roles include Owner, Contributor, and Reader.  
 - Deny assignments can only be applied through Azure Blueprints.  
@@ -67,6 +75,7 @@
 - Service Administrator: Has full access to the Azure portal, equivalent to Owner role at subscription scope.  
 
 **Examples**  
+
 - Role assignments can be applied to service principals, user groups, or individual users.  
 - Deny assignments act as guardrails to prevent certain actions regardless of other permissions.  
 - Classic Administrator roles:  
@@ -74,6 +83,7 @@
   - Service Administrator (full portal access, owner-level permissions)  
 
 **Key Takeaways 🎯**  
+
 - Always prefer using RBAC over Classic Administrator roles for access control.  
 - Understand the difference between built-in and custom roles in RBAC.  
 - Remember that deny assignments override role assignments and are only set via Azure Blueprints.  
@@ -87,6 +97,7 @@
 **Timestamp**: 01:16:04 – 01:17:14
 
 **Key Concepts**  
+
 - Classic Administrator is the original Azure role system, predating Azure RBAC.  
 - It is accessed via the "Classic Administrator" tab under Access Control in the Azure portal.  
 - There are three types of classic administrator roles: Account Administrator, Service Administrator, and Co-Administrator.  
@@ -94,21 +105,25 @@
 - Although largely replaced by RBAC, a classic administrator role is still created automatically when an Azure account is set up.
 
 **Definitions**  
+
 - **Account Administrator**: The billing owner of the subscription; does **not** have access to the Azure portal.  
 - **Service Administrator**: Has the same access as a user assigned the Owner role at the subscription scope; has full access to the Azure portal.  
 - **Co-Administrator**: Has the same access as a user assigned the Owner role at the subscription scope; can manage services but is distinct from the Service Administrator.
 
 **Key Facts**  
+
 - Classic Administrator roles are simpler and more limited compared to RBAC roles.  
 - When an Azure account is created, it automatically assigns one classic administrator role (typically the Account Administrator).  
 - The Service Administrator and Co-Administrator roles have Owner-level access at the subscription scope.  
 - The Account Administrator role is primarily for billing and does not grant portal access.
 
 **Examples**  
+
 - The instructor mentions that when their Azure account was set up by a colleague ("Baker"), one classic administrator role was automatically assigned.  
 - No other specific examples mentioned.
 
 **Key Takeaways 🎯**  
+
 - Prefer using Azure RBAC over Classic Administrator roles for managing access.  
 - Understand the distinctions between the three classic administrator roles, especially regarding portal access and billing.  
 - Remember that classic administrator roles are still created by default with new Azure subscriptions but are mostly legacy.  
@@ -122,12 +137,14 @@
 **Timestamp**: 01:17:14 – 01:20:06
 
 **Key Concepts**  
+
 - Role-Based Access Control (RBAC) manages who has access to Azure resources, what actions they can perform, and the scope of their access.  
 - A role assignment consists of three elements: security principal, role definition, and scope.  
 - Azure has fundamental built-in roles and many additional built-in roles (over 70).  
 - Azure AD roles are distinct from Azure RBAC roles and manage Azure Active Directory resources.
 
 **Definitions**  
+
 - **Security Principal**: The identity requesting access to an Azure resource. This can be:  
   - A user in Azure Active Directory (AAD)  
   - A group in AAD  
@@ -138,6 +155,7 @@
 - **Azure AD Roles**: Roles used to manage Azure Active Directory resources like users, licenses, domains, and administrative privileges.
 
 **Key Facts**  
+
 - Four fundamental Azure RBAC built-in roles to know:  
   1. **Owner** – Full access including managing access permissions.  
   2. **Contributor** – Can read and create/update/delete resources but cannot grant access to others.  
@@ -147,12 +165,14 @@
 - Azure AD roles include predefined roles such as Application Administrator and Application Developer.
 
 **Examples**  
+
 - None explicitly detailed, but the explanation of roles implies practical usage such as:  
   - Owner role assigned at subscription scope has full control.  
   - Contributor can manage resources but not assign roles.  
   - User Access Administrator manages access permissions without modifying resources.
 
 **Key Takeaways 🎯**  
+
 - Understand the three elements of role assignment: security principal, role definition, and scope.  
 - Memorize the four fundamental Azure RBAC roles and their permission levels.  
 - Know the difference between Azure RBAC roles (resource management) and Azure AD roles (directory management).  
@@ -167,6 +187,7 @@
 **Timestamp**: 01:20:06 – 01:21:30
 
 **Key Concepts**  
+
 - Azure AD roles are used to manage Azure Active Directory resources.  
 - These roles control actions like creating/editing users, assigning admin roles, resetting passwords, managing licenses, and domains.  
 - Azure AD has many predefined built-in roles accessible under "Roles and Administrators" in the Azure portal.  
@@ -176,6 +197,7 @@
 - Azure role documents have different syntaxes depending on whether PowerShell or CLI is used.
 
 **Definitions**  
+
 - **Azure AD Roles**: Roles specifically designed to manage Azure Active Directory resources and administrative tasks within the directory.  
 - **Global Administrator**: A built-in role with full access to all Azure AD features and settings.  
 - **User Administrator**: A built-in role with full access to create and manage users.  
@@ -183,17 +205,20 @@
 - **Custom Roles**: User-defined roles that can be created to tailor permissions but require Azure AD Premium licensing.
 
 **Key Facts**  
+
 - Custom Azure AD roles require Azure AD Premium P1 or P2 licenses (paid feature).  
 - Azure AD Premium tiers (P1 and P2) provide enhanced control and features for role management.  
 - Azure role definitions can be viewed and analyzed using PowerShell or CLI, with slight syntax differences.  
 - Azure AD roles are distinct from Azure built-in roles like Owner, Contributor, Reader, and User Access Administrator.
 
 **Examples**  
+
 - Built-in roles mentioned: Global Administrator, User Administrator, Billing Administrator.  
 - Role management location: Azure Portal > Azure Active Directory > Roles and Administrators.  
 - PowerShell example syntax for role inspection mentioned (no detailed script provided).
 
 **Key Takeaways 🎯**  
+
 - Know the purpose of Azure AD roles: managing directory resources and administrative tasks.  
 - Remember key built-in Azure AD roles and their primary responsibilities.  
 - Understand that creating custom roles requires Azure AD Premium licensing (P1 or P2).  
@@ -208,6 +233,7 @@
 **Timestamp**: 01:21:30 – 01:24:21
 
 **Key Concepts**  
+
 - Azure roles define permissions to control access to Azure resources.  
 - Custom roles require Azure Active Directory Premium (P1 or P2).  
 - Roles have specific properties that define their behavior and scope.  
@@ -215,6 +241,7 @@
 - Roles differ from Azure policies, which enforce compliance rather than access control.
 
 **Definitions**  
+
 - **Azure Role**: A set of permissions that define what actions a user or service principal can perform on Azure resources.  
 - **Custom Role**: A user-defined role with specific permissions, requiring Azure AD Premium P1 or P2.  
 - **Assignable Scopes**: The specific Azure management groups or subscriptions where a custom role can be assigned.  
@@ -225,6 +252,7 @@
 - **Wildcard (*)**: A symbol used in role definitions to indicate all possible actions or data actions within a category.
 
 **Key Facts**  
+
 - Creating custom roles requires Azure Active Directory Premium P1 or P2 license.  
 - Role properties include: Name, ID (auto-generated), IsCustom (boolean), Description, Actions, NotActions, DataActions, NotDataActions, and AssignableScopes.  
 - AssignableScopes for custom roles can only include one management group.  
@@ -232,10 +260,12 @@
 - Wildcards (*) can be used in Actions, NotActions, DataActions, and NotDataActions to match all permissions in that category.
 
 **Examples**  
+
 - The transcript references a JSON example of a role definition (not fully shown) and notes that PowerShell uses slightly different property names (e.g., "Name" vs. "RoleName").  
 - Example of wildcard usage: Using "*" in actions to represent all operations like read, write, delete, run, etc., within a category such as cost management.
 
 **Key Takeaways 🎯**  
+
 - Always review built-in managed roles to understand what permissions they grant instead of relying solely on the role name.  
 - Custom roles require Azure AD Premium P1 or P2, so plan licensing accordingly.  
 - Understand the difference between Actions and NotActions to effectively design roles with appropriate permissions and restrictions.  
@@ -250,6 +280,7 @@
 **Timestamp**: 01:24:21 – 01:25:35
 
 **Key Concepts**  
+
 - Azure Policies ensure compliance of resources by evaluating resource states against business rules.  
 - Azure Roles (RBAC) control access to Azure resources by managing user actions and applying restrictions.  
 - Policies evaluate resource properties and do not restrict actions directly.  
@@ -257,19 +288,23 @@
 - Even if a user has permission to perform an action, Azure Policy can block the action if it results in a non-compliant resource.
 
 **Definitions**  
+
 - **Azure Policies**: Tools used to enforce compliance by evaluating resource states and ensuring they meet organizational standards, regardless of who performs the action.  
 - **Azure Roles (RBAC)**: Role-based access control mechanisms that manage and restrict user permissions to perform actions on Azure resources.
 
 **Key Facts**  
+
 - Azure Policies examine properties of resources represented in Azure Resource Manager and some resource providers.  
 - Policies do not restrict operations (actions) but enforce compliance by blocking non-compliant resource creation or updates.  
 - RBAC restricts user actions at different scopes within Azure resources.  
 - Azure Policies and RBAC serve complementary but distinct purposes: compliance vs access control.
 
 **Examples**  
+
 - None mentioned explicitly in this section.
 
 **Key Takeaways 🎯**  
+
 - Remember that Azure Policies focus on *what* state a resource should be in (compliance), not *who* can do what.  
 - RBAC controls *who* can perform *which* actions on Azure resources.  
 - Even with RBAC permissions, Azure Policy can block changes if they violate compliance rules.  
@@ -282,6 +317,7 @@
 **Timestamp**: 01:25:35 – 01:26:50
 
 **Key Concepts**  
+
 - Azure AD roles control access to Azure Active Directory resources.  
 - Azure roles (RBAC) control access to Azure resources.  
 - AD roles and Azure roles operate independently by default and do not span across each other’s domains.  
@@ -289,20 +325,24 @@
 - Access to Azure resources for AD Global Administrators requires explicit assignment of an Azure role (e.g., User Access Administrator).  
 
 **Definitions**  
+
 - **Azure AD Roles**: Roles that manage permissions related to Azure Active Directory resources such as users, groups, billing, licensing, and application registrations.  
 - **Azure Roles (RBAC)**: Role-Based Access Control roles that manage permissions on Azure resources like virtual machines, databases, storage, and networking.  
 
 **Key Facts**  
+
 - Azure AD roles focus on identity and directory-related resources.  
 - Azure RBAC roles focus on managing access to Azure infrastructure and services.  
 - The Global Administrator role in Azure AD does not inherently grant access to Azure resources.  
 - To manage Azure resources, Global Administrators must be assigned an Azure RBAC role explicitly.  
 
 **Examples**  
+
 - AD resources: users, groups, billing, licensing, application registration.  
 - Azure resources: virtual machines, databases, cloud storage, cloud networking.  
 
 **Key Takeaways 🎯**  
+
 - Understand the clear separation between Azure AD roles and Azure RBAC roles.  
 - Remember that Azure AD roles do not grant access to Azure resources by default.  
 - Know that Global Administrator access to Azure resources requires an additional Azure RBAC role assignment.  
@@ -316,6 +356,7 @@
 **Timestamp**: 01:26:50 – 01:28:32
 
 **Key Concepts**  
+
 - Azure has three types of roles related to Identity and Access Management (IAM):  
   1. Classic subscription administrator roles  
   2. Azure Roles (Role-Based Access Control - RBAC)  
@@ -330,6 +371,7 @@
 - Custom Azure AD roles require Azure AD Premium P1 or P2 licenses.  
 
 **Definitions**  
+
 - **Classic subscription administrator roles**: Legacy roles managing Azure subscriptions before RBAC was introduced.  
 - **Azure Roles (RBAC)**: Role-Based Access Control roles built on Azure Resource Manager (ARM) to manage access to Azure resources.  
 - **Azure AD roles**: Roles that manage permissions within Azure Active Directory, separate from Azure resource access.  
@@ -338,6 +380,7 @@
 - **Custom roles**: Roles created by users to tailor permissions beyond built-in roles.  
 
 **Key Facts**  
+
 - By default, Azure roles and Azure AD roles do NOT span across Azure and Azure AD.  
 - The Global Administrator role in Azure AD does NOT have access to Azure resources by default.  
 - Global Administrators can gain Azure resource access if assigned the User Access Administrator role in Azure RBAC.  
@@ -347,9 +390,11 @@
 - Creating custom Azure AD roles requires Azure AD Premium P1 or P2 licenses.  
 
 **Examples**  
+
 - None specifically mentioned in this section.  
 
 **Key Takeaways 🎯**  
+
 - Understand the difference between classic subscription roles, Azure RBAC roles, and Azure AD roles.  
 - Remember that Azure AD roles and Azure resource roles are separate and do not overlap by default.  
 - Know the main built-in Azure RBAC roles and classic administrator roles for the exam.  
