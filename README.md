@@ -58,8 +58,6 @@ My exam preparation follows a structured, multi-modality approach designed to re
 - NLP Workloads (15-20%)
 - Generative AI Workloads (20-25%)
 
-[→ View AI-900 Study Guide](AI-900/README.md)
-
 ---
 
 ### [AZ-104: Microsoft Azure Administrator](AZ-104/README.md)
@@ -73,5 +71,3 @@ My exam preparation follows a structured, multi-modality approach designed to re
 - Deploy and manage Azure compute resources (20-25%)
 - Implement and manage virtual networking (15-20%)
 - Monitor and maintain Azure resources (10-15%)
-
-[→ View AZ-104 Study Guide](AZ-104/README.md)
