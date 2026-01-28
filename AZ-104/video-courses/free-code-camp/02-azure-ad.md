@@ -276,6 +276,8 @@
 - **Synchronization**: The process of creating and matching users, groups, and other AD objects between on-premise AD and Azure AD.  
 - **Azure AD Connect Health**: A monitoring service providing a centralized view of Azure AD Connect activity and health status in the Azure portal.
 
+<img src='.img/2026-01-28-03-26-22.png' width=700> 
+
 **Key Facts**  
 
 - Azure AD Connect supports:  
