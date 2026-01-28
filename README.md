@@ -30,19 +30,19 @@ Azure evolves rapidly with new services, features, and best practices. This sect
 ## 📈 Recent Activity (Last 7 Days)
 
 | Date | AI-900 | AZ-104 | Total |
-| :--- | :----- | :----- | :---- |
+|------|--------|--------|-------|
+| Wed, Jan 28 | 🟢 30 | 🟢 59 | **89** |
 | Tue, Jan 27 | 🟢 87 | 🟢 60 | **147** |
 | Mon, Jan 26 | 0 | 0 | 0 |
 | Sun, Jan 25 | 0 | 🟢 24 | **24** |
 | Sat, Jan 24 | 0 | 🟢 23 | **23** |
 | Fri, Jan 23 | 0 | 🟢 24 | **24** |
 | Thu, Jan 22 | 🟢 3 | 🟢 32 | **35** |
-| Wed, Jan 21 | 🟢 66 | 🟢 32 | **98** |
-| **Total** | **156** | **195** | **351** |
+| **Total** | **120** | **222** | **342** |
 
-*🟢 = Activity on this day. Activity includes changed files.*
+*🟢 = Activity on this day*
 
-*Last updated: January 27, 2026 at 14:09 UTC*
+*Last updated: January 28, 2026 at 08:09 CST*
 
 <!-- COMMIT_STATS_END -->
 
