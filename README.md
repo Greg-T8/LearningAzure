@@ -9,7 +9,7 @@ This repository documents my journey learning Microsoft Azure — from certifica
 
 ---
 
-## 📚 Certification Study Guides
+## 📚 Certification Work
 
 Comprehensive study notes, progress trackers, and learning resources for each certification:
 
@@ -22,7 +22,7 @@ Comprehensive study notes, progress trackers, and learning resources for each ce
 
 Azure evolves rapidly with new services, features, and best practices. This section captures ongoing learning beyond certification prep — exploring updates, deep-diving into specific topics, and documenting insights from industry experts.
 
-📝 **My Notes:** [**ongoing-learning/**](ongoing-learning/README.md) — Organized notes on Azure updates, feature releases, and advanced topics
+📝 [**ongoing-learning/**](ongoing-learning/README.md) — Organized notes on Azure updates, feature releases, and advanced topics
 
 ---
 
