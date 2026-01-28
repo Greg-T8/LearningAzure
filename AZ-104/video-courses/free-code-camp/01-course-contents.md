@@ -34,6 +34,8 @@
 
 <img src='.img/2026-01-28-03-12-27.png' width=700> 
 
+<img src='.img/2026-01-28-03-13-23.png' width=700> 
+
 **Definitions**  
 
 - **AZ-104**: Microsoft Azure Administrator Associate certification exam code  
@@ -63,6 +65,8 @@
 - Example exam question type: Steps to set up Azure File Share Sync in correct order  
 - Use of Azure AD for single sign-on to multiple resources like Microsoft 365, Azure Portal, SaaS apps, and internal apps  
 - Exam pro platform uses Azure AD for admin panel login  
+
+<img src='.img/2026-01-28-03-13-41.png' width=700> 
 
 **Key Takeaways 🎯**  
 
