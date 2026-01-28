@@ -9,13 +9,12 @@
 
 ### 📚 Learning Modality Progress Tracker
 
-| Priority | Resource                                                        | Purpose                           | Status | Started | Completed | Days |
-| -------- | --------------------------------------------------------------- | --------------------------------- | ------ | ------- | --------- | ---- |
-| 1        | [Microsoft Learning Paths](./learning-paths/README.md)          | Core concepts & knowledge         | ✅     | 1/14/26 | 1/25/26   | 11   |
-| 2        | [FreeCodeCamp Course](./video-courses/free-code-camp/README.md) | Visual reinforcement & deep dives | 🚧    | 1/27/26 |           |      |
-| 3        | [John Savill's Training](./video-courses/john-savill/README.md) | Visual reinforcement & deep dives | 🕒    |         |           |      |
-| 4        | [Microsoft GitHub Labs](./microsoft-labs/README.md)             | Official hands-on practice        | 🕒    |         |           |      |
-| 5        | [MeasureUp Practice Exams](./practice-exams/README.md)          | Exam readiness assessment         | 🕒    |         |           |      |
+| Priority | Modality         | Resource                                                        | Status | Started | Completed | Days |
+| -------- | ---------------- | --------------------------------------------------------------- | ------ | ------- | --------- | ---- |
+| 1        | Microsoft Learning | [Microsoft Learning Paths](./learning-paths/README.md)          | ✅     | 1/14/26 | 1/25/26   | 11   |
+| 2        | Video            | [John Savill's Training](./video-courses/savill/README.md) | 🕒    |         |           |      |
+| 3        | Hands-on Labs    | [Microsoft GitHub Labs](./microsoft-labs/README.md)             | 🕒    |         |           |      |
+| 4        | Practice Exams   | [MeasureUp Practice Exams](./practice-exams/README.md)          | 🕒    |         |           |      |
 
 **Legend:** 🕒 Not Started | 🚧 In Progress | ✅ Complete
 

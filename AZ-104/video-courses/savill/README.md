@@ -18,12 +18,7 @@
 | 6 | Azure Master Class (Networking) | | 4 | 🕒 | |
 | 7 | Azure Master Class (Monitoring) | | 5 | 🕒 | |
 
-**Legend:**  
-| Emoji | Meaning |
-|-------|---------|
-| 🕒 | Not Started |
-| 🚧 | In Progress |
-| ✅ | Complete |
+**Legend:** 🕒 Not Started | 🚧 In Progress | ✅ Complete
 
 ---
 
