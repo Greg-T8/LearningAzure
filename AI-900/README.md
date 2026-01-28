@@ -2,6 +2,9 @@
 
 **Objective:** Achieve the **AI-900: Microsoft Azure AI Fundamentals** certification through a structured, multi-resource study approach.
 
+- **Certification Page:** [AI-900: Microsoft Azure AI Fundamentals](https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-fundamentals/?practice-assessment-type=certification)
+- **Official Study Guide:** [AI-900 Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/ai-900)
+
 ---
 
 ## 🎯 Overview
@@ -10,12 +13,12 @@ This repository provides a **comprehensive study path** combining official Micro
 
 ## 📚 Learning Resource Progress Tracker
 
-| Priority | Resource                                            | Purpose                    | Status       | Completed |
-| -------- | --------------------------------------------------- | -------------------------- | ------------ | --------- |
-| 1        | [Microsoft Learn Paths](./learning-paths/README.md) | Core concepts & knowledge  | ✅  | 1/21/26          | 
-| 2        | [Video Courses](./video-courses/README.md)          | Visual reinforcement       | 🚧  |           |
-| 3        | [Microsoft GitHub Labs](./microsoft-labs/README.md) | Official hands-on practice | 🕒  |           |
-| 4        | [Practice Exams](./practice-exams/README.md)        | Exam readiness assessment  | 🕒  |           |
+| Priority | Modality         | Resource                                            | Status | Started | Completed | Days |
+| -------- | ---------------- | --------------------------------------------------- | ------ | ------- | --------- | ---- |
+| 1        | Microsoft Learn  | [Microsoft Learn Paths](./learning-paths/README.md) | ✅     | 1/14/26 | 1/21/26   | 7    |
+| 2        | Video            | [Video Courses](./video-courses/README.md)          | 🚧     |         |           |      |
+| 3        | Hands-on Labs    | [Microsoft GitHub Labs](./microsoft-labs/README.md) | 🕒     |         |           |      |
+| 4        | Practice Exams   | [Practice Exams](./practice-exams/README.md)        | 🕒     |         |           |      |
 
 **Legend:** 🕒 Not Started | 🚧 In Progress | ✅ Complete
 
