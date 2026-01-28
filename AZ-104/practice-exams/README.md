@@ -7,7 +7,7 @@
 ## 📊 Score History
 
 | Date | Mode | Score | Pass/Fail | Time | Notes |
-|------|------|-------|-----------|------|-------|
+| :--- | :--- | :---- | :-------- | :--- | :---- |
 | | Practice | | | | |
 | | Practice | | | | |
 | | Certification | | | | |
@@ -19,7 +19,7 @@
 ## 📈 Domain Performance
 
 | Domain | Weight | Best Score | Weak Areas |
-|--------|--------|------------|------------|
+| :----- | :----- | :--------- | :--------- |
 | 1. Identities & Governance | 20-25% | — | |
 | 2. Storage | 15-20% | — | |
 | 3. Compute | 20-25% | — | |

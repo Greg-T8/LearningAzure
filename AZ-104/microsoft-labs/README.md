@@ -7,7 +7,7 @@
 ## 📚 Lab Index
 
 | Lab | Title | Domain | Status | Completed | Notes |
-|-----|-------|--------|--------|-----------|-------|
+| :-- | :---- | :----- | :----- | :-------- | :---- |
 | 01 | Manage Microsoft Entra ID Identities | 1 | 🕒 | — | |
 | 02a | Manage Subscriptions and RBAC | 1 | 🕒 | — | |
 | 02b | Manage Governance via Azure Policy | 1 | 🕒 | — | |

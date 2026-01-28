@@ -10,7 +10,7 @@
 ## 📚 Learning Resource Progress Tracker
 
 | Priority | Modality         | My Notes                                            | Status | Started | Completed | Days |
-| -------- | ---------------- | --------------------------------------------------- | ------ | ------- | --------- | ---- |
+| :------- | :--------------- | :-------------------------------------------------- | :----- | :------ | :-------- | :--- |
 | 1        | Microsoft Learn  | [Microsoft Learning Paths](./learning-paths/README.md) | ✅     | 1/14/26 | 1/21/26   | 7    |
 | 2        | Video            | [John Savill's Training](./video-courses/savill/README.md)          | 🚧     |         |           |      |
 | 3        | Hands-on Labs    | [Microsoft GitHub Labs](./microsoft-labs/README.md) | 🕒     |         |           |      |
@@ -23,7 +23,7 @@
 ## 📊 Exam Domains
 
 | Domain                           | Weight |
-| -------------------------------- | ------ |
+| :------------------------------- | :----- |
 | 1. AI Workloads & Considerations | 15-20% |
 | 2. Machine Learning on Azure     | 15-20% |
 | 3. Computer Vision Workloads     | 15-20% |

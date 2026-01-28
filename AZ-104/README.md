@@ -10,7 +10,7 @@
 ### 📚 Learning Modality Progress Tracker
 
 | Priority | Modality         | My Notes                                                        | Status | Started | Completed | Days |
-| -------- | ---------------- | --------------------------------------------------------------- | ------ | ------- | --------- | ---- |
+| :------- | :--------------- | :-------------------------------------------------------------- | :----- | :------ | :-------- | :--- |
 | 1        | Microsoft Learn | [Microsoft Learning Paths](./learning-paths/README.md)          | ✅     | 1/14/26 | 1/25/26   | 11   |
 | 2        | Video            | [John Savill's Training](./video-courses/savill/README.md) | 🕒    |         |           |      |
 | 3        | Hands-on Labs    | [Microsoft GitHub Labs](./microsoft-labs/README.md)             | 🕒    |         |           |      |
@@ -22,7 +22,7 @@
 ## 📊 Exam Domains
 
 | Domain                     | Weight |
-| -------------------------- | ------ |
+| :------------------------- | :----- |
 | 1. Identities & Governance | 20-25% |
 | 2. Storage                 | 15-20% |
 | 3. Compute                 | 20-25% |

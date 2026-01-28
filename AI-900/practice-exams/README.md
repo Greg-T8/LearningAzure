@@ -7,7 +7,7 @@
 ## 📊 Score History
 
 | Date | Mode | Score | Pass/Fail | Time | Notes |
-|------|------|-------|-----------|------|-------|
+| :--- | :--- | :---- | :-------- | :--- | :---- |
 | | Practice | | | | |
 | | Practice | | | | |
 

@@ -23,7 +23,7 @@ Explore my comprehensive study notes, progress trackers, and learning resources 
 ## 📈 Recent Activity (Last 7 Days)
 
 | Date | AI-900 | AZ-104 | Total |
-|------|--------|--------|-------|
+| :--- | :----- | :----- | :---- |
 | Tue, Jan 27 | 🟢 87 | 🟢 60 | **147** |
 | Mon, Jan 26 | 0 | 0 | 0 |
 | Sun, Jan 25 | 0 | 🟢 24 | **24** |

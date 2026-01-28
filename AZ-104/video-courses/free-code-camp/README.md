@@ -9,7 +9,7 @@
 ## 📚 Section Progress
 
 | #   | Section                                                         | Status | Started | Completed |
-| --- | --------------------------------------------------------------- | ------ | ------- | --------- |
+| :-- | :-------------------------------------------------------------- | :----- | :------ | :-------- |
 | 1   | [Course Contents](01-course-contents.md)                        | 🕒     |         |           |
 | 2   | [Azure AD](02-azure-ad.md)                                      | 🕒     |         |           |
 | 3   | [AD Device Management](03-ad-device-management.md)              | 🕒     |         |           |

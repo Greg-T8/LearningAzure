@@ -9,7 +9,7 @@
 These labs were custom scenario-based exercises created for hands-on practice. They have been archived in favor of the official Microsoft GitHub labs.
 
 | Lab | Title | Status at Archive |
-|-----|-------|-------------------|
+| :-- | :---- | :---------------- |
 | 1 | Setup and Identity Baseline | ✅ Complete |
 | 2 | Role-Based Access & Scoping | ✅ Complete |
 | 3 | Governance & Policies | 🚧 In Progress |
