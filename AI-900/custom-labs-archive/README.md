@@ -9,7 +9,7 @@
 These labs were custom scenario-based exercises created for hands-on practice. They have been archived in favor of the official Microsoft GitHub labs.
 
 | Lab | Title | Status at Archive |
-|-----|-------|-------------------|
+| :-- | :---- | :---------------- |
 | 1 | AI Workloads and Responsible AI | ✅ Complete |
 | 2 | Machine Learning Fundamentals | ✅ Complete |
 | 3 | Computer Vision | ✅ Complete |

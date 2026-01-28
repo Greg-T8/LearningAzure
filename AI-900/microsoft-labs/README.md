@@ -6,8 +6,8 @@
 
 ## 📚 Lab Index
 
-| Lab | Title | Domain | Status | Completed | Notes |
-|-----|-------|--------|--------|-----------|-------|
+| Lab | Title | Domain | Status | Completed | My Notes |
+| :-- | :---- | :----- | :----- | :-------- | :---- |
 | 01 | Explore Azure AI Services | 1 | 🕒 | — | |
 | 02 | Explore Automated Machine Learning | 2 | 🕒 | — | |
 | 03 | Explore Azure AI Vision | 3 | 🕒 | — | |

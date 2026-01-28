@@ -9,7 +9,7 @@
 ## 📚 Section Progress
 
 | #   | Section                                                                            | Status | Started | Completed |
-| --- | ---------------------------------------------------------------------------------- | ------ | ------- | --------- |
+| :-- | :--------------------------------------------------------------------------------- | :----- | :------ | :-------- |
 | 0   | [Course Introduction](00-course-introduction.md)                                   | ✅     | 1/27/26 | 1/27/26   |
 | 1   | [ML Introduction](01-ml-introduction.md)                                           | ✅     | 1/27/26 | 1/27/26   |
 | 2   | [Common AI Workloads](02-common-ai-workloads.md)                                   | 🕒    |         |           |

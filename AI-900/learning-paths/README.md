@@ -13,8 +13,8 @@
 
 **Link:** [Introduction to AI in Azure](https://learn.microsoft.com/en-us/training/paths/introduction-to-ai-on-azure/)
 
-| #   | Module                                                                                                                                                   | Status | Completed | Notes                                                               |
-| --- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | --------- | ------------------------------------------------------------------- |
+| #   | Module                                                                                                                                                   | Status | Completed | My Notes                                                               |
+| :-- | :------------------------------------------------------------------------------------------------------------------------------------------------------- | :----- | :-------- | :------------------------------------------------------------------ |
 | 1   | [Overview of AI concepts](https://learn.microsoft.com/en-us/training/modules/get-started-ai-fundamentals/)                                               | ✅     | 1/17/26         | [notes](01-overview-ai-concepts/notes.md)                           |
 | 2   | [Get started with AI in Microsoft Foundry](https://learn.microsoft.com/en-us/training/modules/get-started-ai-in-foundry/)                                | ✅    | 1/18/26          | [notes](02-get-started-ai-foundry/notes.md)                         |
 | 3   | [Introduction to machine learning concepts](https://learn.microsoft.com/en-us/training/modules/fundamentals-machine-learning/)                           | ✅    | 1/18/26         | [notes](03-intro-machine-learning-concepts/notes.md)                |

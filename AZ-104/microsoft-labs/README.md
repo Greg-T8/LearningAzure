@@ -6,7 +6,7 @@
 
 ## 📚 Lab Index
 
-| Lab | Title | Domain | Status | Completed | Notes |
+| Lab | Title | Domain | Status | Completed | My Notes |
 | :-- | :---- | :----- | :----- | :-------- | :---- |
 | 01 | Manage Microsoft Entra ID Identities | 1 | 🕒 | — | |
 | 02a | Manage Subscriptions and RBAC | 1 | 🕒 | — | |
