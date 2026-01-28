@@ -64,6 +64,8 @@
 - Compliance status can be monitored under the "Policies and Compliance" section in Azure.  
 - Resources can be flagged as compliant or non-compliant based on the policies applied.
 
+<img src='.img/2026-01-28-04-15-35.png' width=700> 
+
 **Definitions**  
 
 - **Non-Compliant Resource**: A resource that does not meet the requirements defined by the assigned Azure policies.  
@@ -99,6 +101,8 @@
 - Parameters allow flexibility in policies (types, metadata, default values, allowed values)  
 - Policy rules structure: if-then logic with conditions and effects  
 - Policy effects: deny, audit, append, auditIfNotExists, deployIfNotExists, disabled  
+
+<img src='.img/2026-01-28-04-17-17.png' width=800> 
 
 **Definitions**  
 
