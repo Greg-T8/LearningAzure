@@ -148,8 +148,6 @@
 
 <img src='.img/2026-01-28-03-23-31.png' width=700> 
 
-
-
 **Definitions**  
 
 - **Domain**: A logical grouping of Active Directory objects on a network, organized by a single authentication database.  
@@ -201,6 +199,8 @@
 
 - **Tenant**: An organization’s dedicated instance within Azure Active Directory, created automatically upon subscription to Microsoft cloud services.  
 - **Domain Controller**: The server responsible for authenticating users to the directory service.
+
+<img src='.img/2026-01-28-03-24-23.png' width=700> 
 
 **Key Facts**  
 
