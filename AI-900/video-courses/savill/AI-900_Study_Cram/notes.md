@@ -1,8 +1,8 @@
 # AI-900 Study Cram v2 (the non-Generative AI bits) - Exam Notes
 
-**Video:** [https://www.youtube.com/watch?v=bTkUTkXrqOQ](https://www.youtube.com/watch?v=bTkUTkXrqOQ)
-**Published:** 2024-07-01
-**Duration:** 1:16:59
+**Video:** [https://www.youtube.com/watch?v=bTkUTkXrqOQ](https://www.youtube.com/watch?v=bTkUTkXrqOQ) 
+**Published:** 2024-07-01 
+**Duration:** 1:16:59 
 
 *Generated on 2026-01-28 05:22*
 
