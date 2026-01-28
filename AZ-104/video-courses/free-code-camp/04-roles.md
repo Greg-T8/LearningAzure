@@ -240,6 +240,8 @@
 - Wildcards (*) can be used in role definitions to represent all actions within a category.  
 - Roles differ from Azure policies, which enforce compliance rather than access control.
 
+<img src='.img/2026-01-28-04-09-59.png' width=900> 
+
 **Definitions**  
 
 - **Azure Role**: A set of permissions that define what actions a user or service principal can perform on Azure resources.  
