@@ -7,6 +7,7 @@ Tracks commits per certification for the last 7 days
 import subprocess
 import re
 from datetime import datetime, timedelta
+from zoneinfo import ZoneInfo
 from collections import defaultdict
 
 def get_commits_by_path(days=7):
@@ -92,7 +93,10 @@ def generate_commit_table(commits_by_date_cert, days=7):
     table += f"| **Total** | **{total_ai900}** | **{total_az104}** | **{grand_total}** |\n"
 
     table += "\n*🟢 = Activity on this day*\n"
-    table += f"\n*Last updated: {datetime.now().strftime('%B %d, %Y at %H:%M UTC')}*\n"
+
+    # Get current time in Central timezone
+    central_time = datetime.now(ZoneInfo('America/Chicago'))
+    table += f"\n*Last updated: {central_time.strftime('%B %d, %Y at %H:%M %Z')}*\n"
 
     return table
 
