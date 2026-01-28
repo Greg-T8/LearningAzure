@@ -22,12 +22,7 @@ Comprehensive study notes, progress trackers, and learning resources for each ce
 
 Azure evolves rapidly with new services, features, and best practices. This section captures ongoing learning beyond certification prep — exploring updates, deep-diving into specific topics, and documenting insights from industry experts.
 
-**Primary Sources:**
-
-- 📹 [John Savill's Azure Master Class](https://www.youtube.com/@NTFAQGuy) — In-depth technical walkthroughs and Azure updates
-- 📰 Azure announcements, documentation updates, and community insights
-
-**Notes & Insights:** Coming soon — organized notes on Azure updates, feature releases, and advanced topics
+📝 **My Notes:** [**ongoing-learning/**](ongoing-learning/README.md) — Organized notes on Azure updates, feature releases, and advanced topics
 
 ---
 
