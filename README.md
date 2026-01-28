@@ -2,20 +2,32 @@
 
 # 🌩️ Learning Azure
 
-This repository documents my learning progress through Microsoft Azure certifications.
+This repository documents my journey learning Microsoft Azure — from certification preparation to staying current with the latest platform updates and best practices.
 
 [![AI-900](https://img.shields.io/badge/AI--900-In%20Progress-yellow)](AI-900/) [![AZ-104](https://img.shields.io/badge/AZ--104-In%20Progress-yellow)](AZ-104/) ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/Greg-T8/LearningAzure) ![GitHub last commit](https://img.shields.io/github/last-commit/Greg-T8/LearningAzure)
 </div>
 
 ---
 
+## 📚 Certification Study Guides
 
-## 📚 My Study Guides & Notes
+Comprehensive study notes, progress trackers, and learning resources for each certification:
 
-Explore my comprehensive study notes, progress trackers, and learning resources for each certification:
+- 📘 [**AI-900 Study Notes**](AI-900/README.md) — Azure AI Fundamentals (progress tracker, domain guides, practice labs)
+- 📗 [**AZ-104 Study Notes**](AZ-104/README.md) — Azure Administrator (progress tracker, domain guides, hands-on labs)
 
-- 📘 [**My AI-900 Study Notes**](AI-900/README.md)
-- 📗 [**My AZ-104 Study Notes**](AZ-104/README.md)
+---
+
+## 🔄 Staying Current with Azure
+
+Azure evolves rapidly with new services, features, and best practices. This section captures ongoing learning beyond certification prep — exploring updates, deep-diving into specific topics, and documenting insights from industry experts.
+
+**Primary Sources:**
+
+- 📹 [John Savill's Azure Master Class](https://www.youtube.com/@NTFAQGuy) — In-depth technical walkthroughs and Azure updates
+- 📰 Azure announcements, documentation updates, and community insights
+
+**Notes & Insights:** Coming soon — organized notes on Azure updates, feature releases, and advanced topics
 
 ---
 
