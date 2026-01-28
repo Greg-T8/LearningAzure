@@ -362,6 +362,8 @@
 - Roles and applications can be assigned directly to groups.  
 - Group owners can enable users to request to join groups, with options for automatic acceptance or approval required.
 
+<img src='.img/2026-01-28-03-27-41.png' width=700> 
+
 **Definitions**  
 
 - **Group Owner**: A user with permissions to add or remove members from the group.  
