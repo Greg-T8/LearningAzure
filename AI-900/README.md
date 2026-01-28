@@ -7,10 +7,6 @@
 
 ---
 
-## 🎯 Overview
-
-This repository provides a **comprehensive study path** combining official Microsoft resources, video courses, hands-on labs, and practice exams.
-
 ## 📚 Learning Resource Progress Tracker
 
 | Priority | Modality         | Resource                                            | Status | Started | Completed | Days |
@@ -33,8 +29,6 @@ This repository provides a **comprehensive study path** combining official Micro
 | 3. Computer Vision Workloads     | 15-20% |
 | 4. NLP Workloads                 | 15-20% |
 | 5. Generative AI Workloads       | 20-25% |
-
-> Source: [AI-900 Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/ai-900)
 
 ---
 
@@ -144,28 +138,3 @@ This repository provides a **comprehensive study path** combining official Micro
 - [ ] Know what **Microsoft Foundry** is used for
 - [ ] Understand **responsible AI for generative AI**
 - [ ] Practice identifying **use cases** for each AI service
-
----
-
-## 💡 Exam Tips
-
-- Read questions carefully — some test subtle differences between services
-- Watch for keywords: "unsupervised" (clustering), "numeric prediction" (regression), "categorize" (classification)
-- Responsible AI questions are common — know all six principles
-- Generative AI has the highest weight (20–25%) — spend extra time here
-- Take the practice assessment multiple times — it's free and mirrors the real exam
-
----
-
-## 🎓 Certification Path
-
-AI-900 is a **foundational certification** that can help prepare for:
-
-- **[Azure Data Scientist Associate (DP-100)](https://learn.microsoft.com/en-us/credentials/certifications/azure-data-scientist/)**
-- **[Azure AI Engineer Associate (AI-102)](https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-engineer/)**
-
-AI-900 is **not a prerequisite** for these role-based certifications.
-
----
-
-*Last updated: 2026-01-14*
