@@ -7,11 +7,9 @@
 *Generated on 2026-01-28 05:32*
 
 ---
-
+<!-- omit in toc -->
 ## Table of Contents
 
-* [Table of Contents](#table-of-contents)
-* [Useful associated videos](#useful-associated-videos)
 * [Introduction](#introduction)
 * [AI vs Generative AI](#ai-vs-generative-ai)
 * [Training an LLM](#training-an-llm)
@@ -32,30 +30,6 @@
 * [Adding data and Azure AI Search](#adding-data-and-azure-ai-search)
 * [Responsible Generative AI](#responsible-generative-ai)
 * [Summary and close](#summary-and-close)
-
-## Useful associated videos
-
-**Timestamp**: 00:00:24 – 00:00:29
-
-**Key Concepts**
-
-- Regular artificial intelligence aims to imitate human behavior.
-
-**Definitions**
-
-- **Regular Artificial Intelligence (AI)**: AI designed primarily to replicate or simulate some aspect of human behavior.
-
-**Key Facts**
-
-- None mentioned.
-
-**Examples**
-
-- None mentioned.
-
-**Key Takeaways 🎯**
-
-- The fundamental goal of regular AI is to mimic human actions or behaviors.
 
 ---
 
