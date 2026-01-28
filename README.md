@@ -9,6 +9,16 @@ This repository documents my learning progress through Microsoft Azure certifica
 
 ---
 
+
+## 📚 My Study Guides & Notes
+
+Explore my comprehensive study notes, progress trackers, and learning resources for each certification:
+
+- 📘 [**My AI-900 Study Notes**](AI-900/README.md)
+- 📗 [**My AZ-104 Study Notes**](AZ-104/README.md)
+
+---
+
 <!-- COMMIT_STATS_START -->
 ## 📈 Recent Activity (Last 7 Days)
 
@@ -28,15 +38,6 @@ This repository documents my learning progress through Microsoft Azure certifica
 *Last updated: January 27, 2026 at 14:09 UTC*
 
 <!-- COMMIT_STATS_END -->
-
----
-
-## 📚 My Study Guides & Notes
-
-Explore my comprehensive study notes, progress trackers, and learning resources for each certification:
-
-- 📘 [**My AI-900 Study Notes**](AI-900/README.md)
-- 📗 [**My AZ-104 Study Notes**](AZ-104/README.md)
 
 ---
 
