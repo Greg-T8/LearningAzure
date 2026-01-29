@@ -210,7 +210,7 @@
 - Entra ID supports authentication for Microsoft services (Azure, Microsoft 365) and third-party SaaS applications.  
 - Entra ID can integrate with secure service edge solutions, enabling control over internet access and on-premises TCP/UDP applications via Entra Private Access.
 
-<img src='.img/2026-01-29-03-38-33.png' width=500>
+<img src='.img/2026-01-29-03-39-13.png' width=500>
 
 **Definitions**  
 
