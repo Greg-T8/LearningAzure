@@ -334,6 +334,10 @@
 - Bulk user operations are supported for creation and invitation, using CSV templates or scripts.  
 - Groups are used to manage permissions and licenses more efficiently than assigning them individually to users.
 
+<img src='.img/2026-01-29-03-42-32.png' width=700>
+
+<img src='.img/2026-01-29-03-42-59.png' width=700>
+
 **Definitions**  
 
 - **Cloud Account**: A user account created directly in the cloud tenant.  
