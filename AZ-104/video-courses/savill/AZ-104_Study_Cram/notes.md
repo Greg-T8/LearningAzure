@@ -689,7 +689,6 @@ https://datacenters.microsoft.com/globe/explore/
 
 <img src='.img/2026-01-29-04-08-38.png' width=700>
 
-
 **Definitions**  
 
 - **Tenant**: The overarching Azure Active Directory instance that owns and manages subscriptions.  
