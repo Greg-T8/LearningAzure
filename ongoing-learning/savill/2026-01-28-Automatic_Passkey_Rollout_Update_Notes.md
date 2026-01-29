@@ -241,6 +241,8 @@
 - Configuration changes maintain existing settings but add flexibility for targeting different user groups.
 - Ability to enable device bound passkeys for sensitive users and synced passkeys for general users.
 
+<img src='.img/2026-01-29-05-19-23.png' width=700> 
+
 **Definitions**
 
 - **Registration campaign**: A process that targets users to register authentication methods, previously via SMS or phone calls, now shifting to passkeys.
