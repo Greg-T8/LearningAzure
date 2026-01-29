@@ -890,6 +890,15 @@ https://datacenters.microsoft.com/globe/explore/
 - Azure Policy can be used to enforce or copy tags from parent scopes to child resources.  
 - Tags can be used for billing, filtering views, and tracking ownership or environment details.
 
+<img src='.img/2026-01-29-04-21-37.png' width=400>
+
+<img src='.img/2026-01-29-04-22-20.png' width=700>
+
+<img src='.img/2026-01-29-04-22-36.png' width=700>
+
+<img src='.img/2026-01-29-04-23-15.png' width=700>
+
+
 **Definitions**  
 
 - **Tag**: A key-value pair assigned to Azure resources, resource groups, or subscriptions to store metadata for organizational or billing purposes.  
