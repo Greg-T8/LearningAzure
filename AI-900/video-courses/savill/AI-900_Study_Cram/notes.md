@@ -445,6 +445,11 @@
 
 <img src='.img/2026-01-29-04-56-08.png' width=200>
 
+<img src='.img/2026-01-29-04-56-55.png' width=700> 
+
+<img src='.img/2026-01-29-04-58-26.png' width=400>
+
+
 **Definitions**  
 
 - **Optical Character Recognition (OCR)**: Technology to read and extract text from images.  
