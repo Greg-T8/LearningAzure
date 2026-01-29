@@ -338,6 +338,10 @@
 
 <img src='.img/2026-01-29-03-42-59.png' width=700>
 
+<img src='.img/2026-01-29-03-45-35.png' width=500>
+
+
+
 **Definitions**  
 
 - **Cloud Account**: A user account created directly in the cloud tenant.  
