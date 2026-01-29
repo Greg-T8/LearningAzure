@@ -4,14 +4,23 @@ This section captures continuous learning beyond certification preparation — e
 
 ---
 
-## 📹 John Savill's Content
+## 📊 Learning Activity Tracker
 
-Notes and insights from John Savill's Azure Master Class and technical videos.
+**Legend:** ✅ Complete | 🚧 In Progress | 🕒 Not Started
 
-**Channel:** [John Savill's Technical Training](https://www.youtube.com/@NTFAQGuy)
+### 🔄 Updates
 
-### Content Organization
+New Azure announcements, feature releases, and platform changes.
 
-- **[azure-updates/](./savill/azure-updates/)** — Monthly Azure platform updates and feature releases
-- **[deep-dives/](./savill/deep-dives/)** — In-depth explorations of specific Azure services and patterns
-- **[master-class-notes/](./savill/master-class-notes/)** — Notes from Azure Master Class series
+| Topic | Source | Status | Completed |
+| :---- | :----- | :----- | :-------- |
+| [Automatic Passkey Rollout](./savill/2026-01-28-Automatic_Passkey_Rollout_Update_Notes.md) | John Savill | ✅ | 2026-01-28 |
+
+### 🔍 Deep Dives
+
+In-depth exploration of specific Azure topics and concepts.
+
+| Topic | Source | Status | Completed |
+| :---- | :----- | :----- | :-------- |
+
+---
