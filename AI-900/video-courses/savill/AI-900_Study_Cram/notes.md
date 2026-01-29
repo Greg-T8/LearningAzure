@@ -499,6 +499,10 @@
 - Role-based access control (RBAC) and Azure Entra ID integrated authentication can eliminate the need to store keys.  
 - Managed identities in Azure provide automatic identities for resources to access services securely without keys.  
 
+<img src='.img/2026-01-29-04-59-56.png' width=400>
+
+<img src='.img/2026-01-29-05-00-42.png' width=700> 
+
 **Definitions**  
 
 - **Endpoint**: A URL address exposed by an AI service that an application connects to for interaction.  
