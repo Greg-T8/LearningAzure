@@ -685,6 +685,11 @@ https://datacenters.microsoft.com/globe/explore/
 - The hierarchy can be structured based on geography, business units, environment (prod/non-prod), or other organizational needs.  
 - Cost management and billing tools are available at subscription and management group levels to monitor and forecast spending.
 
+<img src='.img/2026-01-29-04-07-47.png' width=500> 
+
+<img src='.img/2026-01-29-04-08-38.png' width=700>
+
+
 **Definitions**  
 
 - **Tenant**: The overarching Azure Active Directory instance that owns and manages subscriptions.  
