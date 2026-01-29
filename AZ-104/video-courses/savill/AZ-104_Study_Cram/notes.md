@@ -629,6 +629,8 @@ https://datacenters.microsoft.com/globe/explore/
 
 <img src='.img/2026-01-29-04-04-35.png' width=700>
 
+<img src='.img/2026-01-29-04-05-35.png' width=700> 
+
 
 
 
