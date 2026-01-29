@@ -528,6 +528,8 @@
 - Configurable authentication methods and policies for password reset.  
 - Role-based access control with emphasis on privileged roles like Global Administrator.
 
+<img src='.img/2026-01-29-03-56-25.png' width=700> 
+
 **Definitions**  
 
 - **Self-Service Password Reset (SSPR)**: A feature that allows users to reset their own passwords securely without contacting IT support.  
