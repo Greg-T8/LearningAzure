@@ -12,7 +12,7 @@
 | Priority | Modality         | My Notes                                                        | Status | Started | Completed | Days |
 | :------- | :--------------- | :-------------------------------------------------------------- | :----- | :------ | :-------- | :--- |
 | 1        | Microsoft Learn | [Microsoft Learning Paths](./learning-paths/README.md)          | ✅     | 1/14/26 | 1/25/26   | 11   |
-| 2        | Video            | [John Savill's Training](./video-courses/savill/README.md) | 🕒    |         |           |      |
+| 2        | Video            | [John Savill's Training](./video-courses/savill/README.md) | 🚧    | 1/29/26 |           |      |
 | 3        | Hands-on Labs    | [Microsoft GitHub Labs](./microsoft-labs/README.md)             | 🕒    |         |           |      |
 | 4        | Practice Exams   | [MeasureUp Practice Exams](./practice-exams/README.md)          | 🕒    |         |           |      |
 
