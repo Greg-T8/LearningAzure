@@ -437,9 +437,6 @@
 
 <img src='.img/2026-01-29-03-52-27.png' width=500>
 
-
-
-
 **Definitions**  
 
 - **Registered Device**: A device that is known to the Entra tenant, allowing some management and policy application, typically used for personal devices accessing corporate applications.  
@@ -482,6 +479,8 @@
 - P2 license adds advanced features such as privileged identity management, core access reviews, and identity protection.  
 - License assignment can be tailored based on user roles and needs (e.g., privileged users get P2, basic workers get P1).  
 - Self-service password reset is an important feature, ideally moving towards passwordless solutions.  
+
+<img src='.img/2026-01-29-03-53-12.png' width=700>
 
 **Definitions**  
 
