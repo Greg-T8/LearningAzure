@@ -945,6 +945,10 @@ https://datacenters.microsoft.com/globe/explore/
 - Microsoft provides built-in policy definitions and initiatives, including large sets like the Azure Defender for Cloud initiative.  
 - Regulatory compliance initiatives (e.g., FedRAMP, HIPAA, ISO) require a paid Azure plan.  
 
+<img src='.img/2026-01-29-04-24-31.png' width=700> 
+
+<img src='.img/2026-01-29-04-25-10.png' width=500> 
+
 **Definitions**  
 
 - **Azure Policy**: A service that allows setting guardrails by defining rules and effects to enforce organizational standards on Azure resources.  
