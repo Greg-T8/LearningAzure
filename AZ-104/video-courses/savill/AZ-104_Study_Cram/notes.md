@@ -293,6 +293,9 @@
 - Customizable elements include backgrounds, background images, and logon messages  
 - Use of special characters in messages to apply formatting (e.g., bold, underline)  
 
+<img src='.img/2026-01-29-03-41-50.png' width=700>
+
+
 **Definitions**  
 
 - **Company Branding**: The ability to customize the user interface and experience within an Entra tenant to reflect organizational identity.  
