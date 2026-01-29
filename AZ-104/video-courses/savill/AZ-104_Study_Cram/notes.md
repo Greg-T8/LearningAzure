@@ -435,6 +435,11 @@
 - Devices appear as objects within the Entra tenant and can be managed accordingly.  
 - Licensing for Entra ID features can be assigned per user and vary by license level (e.g., P1, P2).  
 
+<img src='.img/2026-01-29-03-52-27.png' width=500>
+
+
+
+
 **Definitions**  
 
 - **Registered Device**: A device that is known to the Entra tenant, allowing some management and policy application, typically used for personal devices accessing corporate applications.  
