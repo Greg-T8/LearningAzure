@@ -747,6 +747,10 @@ https://datacenters.microsoft.com/globe/explore/
 - Azure Advisor provides cost optimization recommendations such as stopping unused resources or right-sizing.  
 - Resource groups organize resources within a subscription but cannot be nested.
 
+<img src='.img/2026-01-29-04-10-37.png' width=700>
+
+<img src='.img/2026-01-29-04-11-14.png' width=700> 
+
 **Definitions**  
 
 - **Cost Analysis**: A tool to view accumulated costs, forecast spending, and analyze costs by different dimensions such as resource, service, or location.  
