@@ -538,6 +538,8 @@
 
 ## Responsible AI
 
+https://youtu.be/bTkUTkXrqOQ?si=B46eqFh7n48VLJ2Z&t=2022
+
 **Timestamp**: 00:33:32 – 00:39:04
 
 **Key Concepts**  
