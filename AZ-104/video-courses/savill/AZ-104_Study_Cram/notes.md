@@ -253,6 +253,8 @@
 - Custom domains can be added and verified to a tenant, replacing the default onmicrosoft.com domain.  
 - Tenants support company branding to customize user experience during sign-in and access.
 
+<img src='.img/2026-01-29-03-41-02.png' width=700> 
+
 **Definitions**  
 
 - **Tenant**: A specific organizational instance in Entra ID that holds users, groups, devices, applications, and conditional access policies.  
