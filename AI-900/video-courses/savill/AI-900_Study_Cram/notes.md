@@ -395,7 +395,7 @@
 - Different types of machine learning approaches  
 - Artificial Intelligence (AI) as rule-based or explicitly programmed behavior  
 - Machine Learning (ML) using labeled data for prediction, labeling, and classification  
-- Deep Learning leveraging neural networks for advanced tasks  
+- Deep Learning leveraging neural networks for advanced tasks 
 
 **Definitions**  
 
@@ -438,6 +438,8 @@
 - Multi-service resources combine many AI capabilities under one endpoint but lack free tiers and granular cost tracking.  
 - Azure OpenAI and AI Search are special service types with different availability and pricing models.  
 - AI services expose REST endpoints for applications to interact with, typically using HTTP and JSON.
+
+
 
 **Definitions**  
 
