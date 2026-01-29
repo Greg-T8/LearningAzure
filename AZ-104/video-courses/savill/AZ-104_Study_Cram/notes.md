@@ -387,6 +387,10 @@
 - Dynamic groups automatically update membership based on attributes like department, job title, or hire date.  
 - Groups simplify administration by reducing the risk of leftover permissions or licenses on individual accounts.
 
+<img src='.img/2026-01-29-03-46-47.png' width=700>
+
+<img src='.img/2026-01-29-03-47-03.png' width=500>
+
 **Definitions**  
 
 - **Security Group**: A group type primarily used to assign roles and permissions within the system.  
