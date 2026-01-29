@@ -40,22 +40,27 @@
 **Timestamp**: 00:00:00 – 00:00:44
 
 **Key Concepts**  
+
 - Updating study materials with the latest information on Azure AI Fundamentals  
 - Separation of content between generative AI and general Azure AI topics  
 - Importance of using official Microsoft Learn resources for exam preparation  
 
 **Definitions**  
+
 - **Generative AI**: Not covered in this session; addressed in a separate study cram video  
 
 **Key Facts**  
+
 - The presenter has created a separate study cram specifically for generative AI  
 - Microsoft Learn provides updated information on exam preparation, skills measured, and practice resources  
 - The Microsoft Azure AI Fundamentals course is regularly updated and includes practice assessments and a sandbox environment  
 
 **Examples**  
+
 - None mentioned  
 
 **Key Takeaways 🎯**  
+
 - Watch this session for general Azure AI information excluding generative AI  
 - Follow up with the generative AI study cram for a complete understanding  
 - Start exam preparation with the Microsoft Learn page to access up-to-date content and practice tools  
@@ -68,6 +73,7 @@
 **Timestamp**: 00:00:44 – 00:02:28
 
 **Key Concepts**  
+
 - Start exam preparation with the Microsoft Learn page for the Azure AI Fundamentals exam.  
 - Microsoft Learn provides updated information, exam preparation guidance, skills measured, and the official Azure AI Fundamentals course.  
 - The Azure AI Fundamentals course is comprehensive, regularly updated, and includes practice assessments.  
@@ -79,19 +85,23 @@
 - Study crams serve as quick refreshers just before the exam to reinforce learned material.
 
 **Definitions**  
+
 - **Sandbox**: A practice environment that mimics the actual exam interface, helping candidates become comfortable with the exam format and controls.  
 - **Skills Measured**: The specific knowledge areas and competencies that the exam tests, broken down into main topics and detailed skills.
 
 **Key Facts**  
+
 - Exam length: 45 minutes.  
 - Exam level: Fundamental (basic understanding, no coding or deployment required).  
 - Microsoft Learn is the primary official resource for preparation.  
 - Practice assessments and sandbox environment are available on Microsoft Learn.
 
 **Examples**  
+
 - Sandbox environment example: Allows candidates to experience the exam interface and understand what buttons and question types to expect.
 
 **Key Takeaways 🎯**  
+
 - Begin preparation with Microsoft Learn’s Azure AI Fundamentals course and resources.  
 - Use the skills measured documentation as a checklist to ensure all topics are understood.  
 - Take advantage of practice assessments and the sandbox to reduce exam-day anxiety.  
@@ -105,6 +115,7 @@
 **Timestamp**: 00:02:28 – 00:04:38
 
 **Key Concepts**  
+
 - Intelligence involves various human capabilities such as seeing, recognizing objects, reading text, speaking, hearing and transcribing, translating, making decisions, and predicting based on historical data.  
 - Artificial Intelligence (AI) is about computers imitating some aspects of human intelligence and behavior.  
 - AI is software designed to replicate human capabilities.  
@@ -112,15 +123,18 @@
 - Machine Learning is a subset of AI where computers train themselves using past data to make future predictions.
 
 **Definitions**  
+
 - **Artificial Intelligence (AI)**: The ability of a computer to imitate human capabilities and behaviors through software.  
 - **Machine Learning**: A subset of AI where a computer uses training data to learn and make predictions without being explicitly programmed for every scenario.
 
 **Key Facts**  
+
 - Human intelligence includes abilities such as object recognition, captioning images, reading text aloud, speech-to-text transcription, translation, decision making, and prediction.  
 - Writing explicit code for complex tasks like number recognition (e.g., identifying all variations of the digit "1") is impractical due to the vast number of possibilities.  
 - Machine learning allows computers to avoid manual logic coding by learning from historical data.
 
 **Examples**  
+
 - Human capabilities:  
   - Seeing and identifying objects in a picture.  
   - Giving detailed captions for images.  
@@ -131,6 +145,7 @@
 - AI example: Instead of coding every possible variation of the number "1" for recognition, a machine learning model can be trained on past data to recognize numbers.
 
 **Key Takeaways 🎯**  
+
 - AI fundamentally means software imitating human intelligence and behavior.  
 - Explicitly coding all logic for complex tasks is inefficient and often impossible.  
 - Machine learning enables computers to learn from data and improve predictions without exhaustive manual programming.  
@@ -143,23 +158,28 @@
 **Timestamp**: 00:04:38 – 00:05:22
 
 **Key Concepts**  
+
 - Machine learning is a subset of artificial intelligence.  
 - Instead of manually writing all the logic for tasks (e.g., number recognition), the computer can train itself using past data.  
 - The training process involves using historical data to build a model that can make future predictions.
 
 **Definitions**  
+
 - **Machine learning**: A branch of AI focused on enabling computers to learn from past data and improve their performance on tasks without explicit programming of every rule.
 
 **Key Facts**  
+
 - Machine learning relies on having training data.  
 - Training data consists of many examples with associated correct answers (labels).  
 - Features are the individual pieces of data or attributes used to train the model.
 
 **Examples**  
+
 - Number recognition: Instead of coding every possible variation of the number "1," the computer learns from many examples of handwritten or printed "1"s.  
 - Other example contexts mentioned include pictures of numbers, pictures of oranges, or historical temperature data from engines.
 
 **Key Takeaways 🎯**  
+
 - Writing explicit logic for complex recognition tasks is impractical due to the vast variability.  
 - Machine learning automates this by learning patterns from data.  
 - The quality and quantity of training data are crucial for building effective machine learning models.  
@@ -172,6 +192,7 @@
 **Timestamp**: 00:05:22 – 00:09:33
 
 **Key Concepts**  
+
 - Machine learning uses training data consisting of features and labels to train models.  
 - Training data includes input features (data points) and corresponding correct answers (labels).  
 - Algorithms analyze training data to find relationships between features and labels.  
@@ -182,13 +203,19 @@
 - Based on testing results, models may be released or further trained/tweaked.  
 - There are different types of training, including supervised learning where data is labeled.
 
+<img src='.img/2026-01-29-04-38-21.png' width=500> 
+
+<img src='.img/2026-01-29-04-40-33.png' width=700> 
+
 **Definitions**  
+
 - **Features**: The input data values or attributes used to describe aspects of the data (e.g., pictures of numbers, temperature readings).  
 - **Label**: The correct answer or category associated with each feature in the training data (e.g., "orange," "#1").  
 - **Model**: The output of the training process; a system that can predict labels for new data based on learned relationships.  
 - **Supervised Learning**: A type of machine learning where the training data includes both features and their correct labels.
 
 **Key Facts**  
+
 - Training data must be labeled to be useful for supervised learning.  
 - Algorithms mentioned include decision trees, linear regression, and support vector machines.  
 - Decision trees split data based on feature values until reaching leaf nodes that represent outcomes.  
@@ -198,6 +225,7 @@
 - Model tuning involves tweaking parameters until performance is satisfactory for real-world use.
 
 **Examples**  
+
 - Pictures of numbers (#1, #2, #3, #4) as features with labels indicating the number shown.  
 - Pictures of oranges and apples with labels identifying the fruit.  
 - Historical temperature data from engines with labels indicating conditions.  
@@ -205,6 +233,7 @@
 - Clusters of data separated by a line in support vector machines.
 
 **Key Takeaways 🎯**  
+
 - Machine learning relies on labeled training data to build predictive models.  
 - Choosing the right algorithm depends on the data type and problem context.  
 - Training is iterative and requires validation with testing data to ensure accuracy.  
@@ -218,6 +247,7 @@
 **Timestamp**: 00:09:33 – 00:13:40
 
 **Key Concepts**  
+
 - Different types of training data exist beyond just "training data" itself.  
 - Supervised learning involves labeled data.  
 - Supervised learning can be subdivided into regression and classification.  
@@ -225,7 +255,10 @@
 - Unsupervised learning involves unlabeled data and focuses on clustering or grouping based on similarities.  
 - Azure Machine Learning Studio supports creating custom models, importing and labeling datasets, training, testing, and deploying models.
 
+
+
 **Definitions**  
+
 - **Supervised learning**: Training with data that has known labels.  
 - **Regression**: A type of supervised learning where the output is numeric (e.g., predicting house prices).  
 - **Classification**: A type of supervised learning where the output is a category or class.  
@@ -234,6 +267,7 @@
 - **Unsupervised learning**: Training with data that has no labels, focusing on finding clusters or groups within the data.
 
 **Key Facts**  
+
 - Supervised learning requires labeled data.  
 - Regression is used for numeric prediction tasks.  
 - Classification tasks can be binary or multiclass.  
@@ -242,11 +276,13 @@
 - Models can be deployed in containers on-premises or in Azure cloud services like Kubernetes or container instances.
 
 **Examples**  
+
 - Regression example: Predicting house prices.  
 - Binary classification example: Predicting if a viewer will like a video or not.  
 - Multiclass classification example: Categorizing videos into genres such as horror, fiction, or learning.
 
 **Key Takeaways 🎯**  
+
 - Understanding the type of training data (supervised vs unsupervised) is crucial for selecting the right machine learning approach.  
 - Supervised learning requires labeled data and can be tailored to numeric or categorical outputs.  
 - Unsupervised learning is useful when labels are not available and the goal is to find inherent patterns.  
@@ -260,25 +296,30 @@
 **Timestamp**: 00:13:40 – 00:14:37
 
 **Key Concepts**  
+
 - Azure Machine Learning Studio is a cloud service designed to help users perform custom machine learning training.  
 - Models trained in Azure ML Studio can be deployed in various environments, including containers.  
 - Deployment options include on-premises containers, Azure Kubernetes Service (AKS), and Azure Container Instances (ACI).  
 - Azure ML Studio supports both custom model training and access to pre-built models.
 
 **Definitions**  
+
 - **Azure Machine Learning Studio**: An Azure cloud service that facilitates custom training, testing, and deployment of machine learning models.  
 - **Container**: A lightweight, standalone, executable package that includes everything needed to run a piece of software, such as a trained ML model, in different environments.
 
 **Key Facts**  
+
 - Models trained in Azure ML Studio are not limited to cloud hosting; they can be deployed in containers on-premises or in Azure services like AKS and ACI.  
 - Azure ML Studio provides flexibility in how and where models are run after training.  
 - While many pre-built models exist, Azure ML Studio is specifically useful when custom training is required.
 
 **Examples**  
+
 - Deploying a trained model to a container that runs on-premises or in Azure Kubernetes Service.  
 - Using Azure Container Instances to host a custom-trained model.
 
 **Key Takeaways 🎯**  
+
 - Azure Machine Learning Studio is a versatile platform for custom ML model training and deployment.  
 - Deployment flexibility allows models to run in cloud or on-premises environments using containers.  
 - Pre-built models are available, but Azure ML Studio is essential when custom training is needed.  
@@ -291,6 +332,7 @@
 **Timestamp**: 00:14:37 – 00:22:32
 
 **Key Concepts**  
+
 - Deep learning is a subset of machine learning designed to handle complex relationships that basic algorithms cannot express.  
 - Deep learning uses neural networks composed of multiple layers of neurons (nodes) connected to each other.  
 - Each neuron applies an activation function to decide whether to pass a value forward or output zero.  
@@ -304,6 +346,7 @@
 - Smaller neural networks can be trained effectively with less data and computational power for specific tasks.  
 
 **Definitions**  
+
 - **Deep learning**: A subset of machine learning using multi-layered neural networks to model complex data relationships.  
 - **Neuron (Activation function)**: A computational unit in a neural network that processes input values and decides whether to activate (pass a value) or output zero.  
 - **Weights**: Parameters on connections between neurons that scale input values.  
@@ -312,6 +355,7 @@
 - **Softmax**: A function that converts a vector of values into a probability distribution summing to one.  
 
 **Key Facts**  
+
 - Neural networks consist of multiple layers: input, hidden, and output layers.  
 - Each neuron connects to every neuron in the next layer (fully connected layers).  
 - Activation functions include ReLU, sigmoid, Gaussian error linear unit, among others.  
@@ -320,11 +364,13 @@
 - Softmax is used to pick the most probable next token in language models.  
 
 **Examples**  
+
 - Large language models like GPT use deep learning with many hidden layers and trillions of parameters.  
 - Deep learning can be used for classification, prediction, anomaly detection (e.g., detecting if someone is wearing a mask, predicting equipment failure).  
 - Smaller neural networks can be trained for specific tasks without the need for massive resources.  
 
 **Key Takeaways 🎯**  
+
 - Deep learning enables modeling of highly complex data patterns beyond traditional machine learning algorithms.  
 - Neural networks rely on weighted connections and activation functions to process and propagate information.  
 - Training large deep learning models is resource-intensive and often impractical for individual users.  
@@ -339,25 +385,30 @@
 **Timestamp**: 00:22:32 – 00:23:07
 
 **Key Concepts**  
+
 - Different types of machine learning approaches  
 - Artificial Intelligence (AI) as rule-based or explicitly programmed behavior  
 - Machine Learning (ML) using labeled data for prediction, labeling, and classification  
 - Deep Learning leveraging neural networks for advanced tasks  
 
 **Definitions**  
+
 - **Artificial Intelligence (AI)**: Systems where behavior is explicitly programmed or rules are written to perform tasks (e.g., early chess computers).  
 - **Machine Learning (ML)**: Algorithms trained on labeled data to predict or classify new data.  
 - **Deep Learning**: Use of neural networks to model complex patterns and perform sophisticated tasks.  
 
 **Key Facts**  
+
 - Early chess computers operated similarly to AI with explicit rules rather than learning.  
 - Machine learning requires labeled data to train models for prediction and classification.  
 - Deep learning uses neural networks and is often applied in advanced AI solutions.  
 
 **Examples**  
+
 - Early chess computers as an example of AI with explicit programming.  
 
 **Key Takeaways 🎯**  
+
 - AI, ML, and deep learning represent a spectrum from rule-based systems to data-driven neural networks.  
 - Understanding these distinctions helps in selecting appropriate approaches for different problems.  
 - Deep learning enables leveraging powerful neural networks for complex tasks beyond traditional ML.
@@ -369,6 +420,7 @@
 **Timestamp**: 00:23:07 – 00:30:47
 
 **Key Concepts**  
+
 - Provided AI solutions are pre-trained models designed for specific tasks.  
 - Vision capabilities include OCR, image tagging, object detection, face detection, and live face verification.  
 - Natural language capabilities include chatbots, summarization, question answering, speech-to-text, text-to-speech, and translation.  
@@ -382,6 +434,7 @@
 - AI services expose REST endpoints for applications to interact with, typically using HTTP and JSON.
 
 **Definitions**  
+
 - **Optical Character Recognition (OCR)**: Technology to read and extract text from images.  
 - **Document Intelligence**: AI capability to understand and extract data from documents such as forms and invoices.  
 - **Knowledge Mining**: Process of extracting, indexing, and enriching information from various data types to make it searchable and usable by other applications.  
@@ -390,6 +443,7 @@
 - **Endpoint**: A RESTful URL where an AI service is accessed by applications, communicating via HTTP and exchanging JSON data.
 
 **Key Facts**  
+
 - Many Azure AI single service resources have free tiers allowing a certain number of free calls for learning and experimentation.  
 - Azure OpenAI service does not have a free tier.  
 - AI Search has a limited free tier but lacks some advanced features like semantic re-ranking.  
@@ -398,12 +452,14 @@
 - Applications interact with AI services via REST endpoints using HTTP requests and JSON responses.
 
 **Examples**  
+
 - Vision capabilities: reading text from images (OCR), tagging images, detecting objects and faces, verifying if a face is live.  
 - Natural language: chatbots, summarizing text, question answering, speech-to-text, text-to-speech, translation.  
 - Document intelligence: extracting addresses, phone numbers, invoice items from forms.  
 - Knowledge mining: extracting text from images or audio via vision or speech services to index and make searchable.
 
 **Key Takeaways 🎯**  
+
 - Provided AI solutions cover a broad range of specialized tasks, enabling rapid development without training models from scratch.  
 - Azure AI offers flexible resource types: single service for focused use with free tiers, multi-service for convenience but without free tiers or detailed cost tracking.  
 - Understanding the distinction between single service, multi-service, and OpenAI resources is important for cost management and capability planning.  
@@ -417,6 +473,7 @@
 **Timestamp**: 00:30:47 – 00:33:32
 
 **Key Concepts**  
+
 - AI services expose endpoints (URLs) that applications communicate with.  
 - Communication with endpoints is typically via REST (HTTP-based) and returns JSON responses.  
 - SDKs often provide language-friendly libraries that handle REST calls internally.  
@@ -426,6 +483,7 @@
 - Managed identities in Azure provide automatic identities for resources to access services securely without keys.  
 
 **Definitions**  
+
 - **Endpoint**: A URL address exposed by an AI service that an application connects to for interaction.  
 - **REST Endpoint**: An HTTP-based interface that accepts requests and returns JSON responses.  
 - **SDK (Software Development Kit)**: A set of libraries that simplify interacting with REST endpoints in a programming language.  
@@ -435,6 +493,7 @@
 - **Managed Identity**: An automatically managed identity assigned to Azure resources to authenticate to services without storing credentials.  
 
 **Key Facts**  
+
 - Endpoints are REST-based and return JSON responses.  
 - Each endpoint has associated keys (usually two) for authentication.  
 - Keys should not be stored in config files or Git repositories.  
@@ -442,10 +501,12 @@
 - Managed identities simplify permission management and key rotation concerns.  
 
 **Examples**  
+
 - Viewing a vision AI resource in Azure shows the endpoint URL and two keys.  
 - An application can fetch keys securely from Azure Key Vault or use Entra ID integrated auth with assigned roles.  
 
 **Key Takeaways 🎯**  
+
 - Always secure your keys; do not hardcode or expose them publicly.  
 - Prefer using Azure Entra ID integrated authentication and managed identities for better security and easier management.  
 - Use SDKs to simplify interaction with REST endpoints.  
@@ -459,12 +520,14 @@
 **Timestamp**: 00:33:32 – 00:39:04
 
 **Key Concepts**  
+
 - Responsible AI involves ensuring AI systems are trustworthy, safe, fair, reliable, inclusive, transparent, and accountable.  
 - AI introduces risks such as bias, errors, privacy concerns, and lack of inclusiveness.  
 - The shift from human decision-making to AI-driven decisions requires careful consideration of these risks.  
 - Six key principles guide responsible AI: fairness, reliability & safety, privacy & security, inclusiveness, transparency, and responsibility/accountability.
 
 **Definitions**  
+
 - **Fairness**: Ensuring AI treats all people equally without bias introduced from training data.  
 - **Reliability and Safety**: AI systems must be rigorously tested and dependable, especially in critical applications.  
 - **Privacy and Security**: Data used for training must be legitimate, scrubbed, and protected to maintain privacy.  
@@ -473,6 +536,7 @@
 - **Responsibility/Accountability**: Developers, companies, and leadership must be held accountable for ethical and legal standards in AI deployment.
 
 **Key Facts**  
+
 - Bias in training data leads to biased AI models ("garbage in, garbage out").  
 - Errors in AI can have severe consequences (e.g., self-driving cars causing accidents).  
 - Data exposure risks arise if inappropriate data is used for training or predictions reveal sensitive information.  
@@ -480,11 +544,13 @@
 - Accountability is critical to prevent misuse or abuse of AI technologies such as facial recognition.
 
 **Examples**  
+
 - Self-driving cars: illustrate risks of errors and the need for reliability and safety.  
 - AI in surgery or monitoring reactors: examples where reliability and safety are paramount.  
 - Facial recognition: example of technology that can be abused if accountability is lacking.
 
 **Key Takeaways 🎯**  
+
 - Responsible AI requires proactive identification and mitigation of risks related to bias, errors, privacy, inclusiveness, transparency, and accountability.  
 - Comprehensive testing and ethical considerations must be embedded throughout AI development and deployment.  
 - Accountability lies with developers, companies, and leadership to ensure AI meets ethical and legal standards.  
@@ -498,6 +564,7 @@
 **Timestamp**: 00:39:04 – 00:41:55
 
 **Key Concepts**  
+
 - Computer vision deals with processing and understanding images.  
 - Images are fundamentally composed of pixels, each having a value.  
 - Multimodal models support multiple input types/modalities such as images, language, video, and audio.  
@@ -505,11 +572,13 @@
 - Vision services include tasks like image analysis and captioning.
 
 **Definitions**  
+
 - **Image**: A collection of pixels, where each pixel has a value (e.g., grayscale values from 0 to 255 or multiple values for color).  
 - **Multimodal**: Refers to models that can understand and interact with multiple types of data/modalities (e.g., images, text, video, audio).  
 - **Foundational model**: A broad, general-purpose AI model that can be adapted or fine-tuned for specific tasks or domains.
 
 **Key Facts**  
+
 - Grayscale pixel values typically range from 0 to 255.  
 - Color images have multiple values per pixel (e.g., RGB channels).  
 - JPEG images use compression to store images more efficiently than raw pixel data.  
@@ -517,10 +586,12 @@
 - Foundational models serve as a base for building more specialized solutions.
 
 **Examples**  
+
 - An image of a number “7” represented by pixels with values (e.g., 255 for white pixels forming the shape, zeros elsewhere).  
 - Vision services can analyze an image (e.g., a cow under a tree) and generate captions describing the content.
 
 **Key Takeaways 🎯**  
+
 - Understanding the pixel-based nature of images is fundamental to computer vision.  
 - Multimodal AI models enhance interaction by supporting various data types beyond just images.  
 - Foundational models provide a versatile starting point for developing tailored computer vision applications.  
@@ -533,6 +604,7 @@
 **Timestamp**: 00:41:55 – 00:47:08
 
 **Key Concepts**  
+
 - Vision services focus on analyzing images using AI to extract meaningful information.  
 - Image analysis can generate captions, tags, detect objects with bounding boxes, remove backgrounds, and perform smart cropping.  
 - Optical Character Recognition (OCR) is used to extract text from images; different services apply depending on text volume.  
@@ -541,6 +613,7 @@
 - Face services detect faces, identify characteristics, and perform liveness checks, with controlled access due to potential for misuse.
 
 **Definitions**  
+
 - **Multimodal**: The ability of a model to work across different input types or modalities (e.g., images, text).  
 - **Image Analysis**: AI service that processes images to generate captions, tags, detect objects, remove backgrounds, crop images, and extract text via OCR.  
 - **Object Detection**: Identifying objects within an image and providing their locations using bounding boxes.  
@@ -549,6 +622,7 @@
 - **Face Service**: AI service to detect faces, identify facial characteristics, and perform liveness checks, requiring onboarding due to ethical considerations.
 
 **Key Facts**  
+
 - Image analysis version 4.0 is the latest at the time of recording, offering advanced features like background removal and smart cropping.  
 - Object detection returns bounding boxes with coordinates (e.g., cow at 10x20 to 15x25).  
 - OCR in image analysis is suitable for small amounts of text; for large documents, Document Intelligence is recommended.  
@@ -556,6 +630,7 @@
 - Face services require onboarding and form submission before use due to potential for abuse.
 
 **Examples**  
+
 - Caption generated for an image: "This is a very poor picture of a cow under a tree drawn by a two-year-old."  
 - Tags identified: "cow" and "tree."  
 - Object detection providing bounding boxes around a cow and a tree.  
@@ -564,6 +639,7 @@
 - Vision Studio demo showing detection of products on shelves, adding dense captions, removing backgrounds, detecting faces, and extracting text.
 
 **Key Takeaways 🎯**  
+
 - Use image analysis for general image understanding tasks like tagging, captioning, object detection, and small-scale OCR.  
 - For large text extraction from documents, use Document Intelligence instead of image analysis.  
 - Vision Studio is a practical tool to experiment with and customize vision AI models.  
@@ -577,6 +653,7 @@
 **Timestamp**: 00:47:08 – 00:52:04
 
 **Key Concepts**  
+
 - Face service in computer vision focuses on detecting and analyzing human faces in images.  
 - Includes face detection, liveness check, identification, and verification.  
 - Detection includes facial landmarks and attributes like head pose, mask presence, glasses, blur, exposure, and occlusion.  
@@ -586,6 +663,7 @@
 - Transformer models require fewer images but take longer to train and cost more.  
 
 **Definitions**  
+
 - **Face Detection**: The process of finding faces in an image and analyzing features such as facial landmarks (eyes, nose, ears, lips), head pose, and presence of masks or glasses.  
 - **Liveness Check**: A verification step to ensure the face is from a live person and not a 3D print or photo.  
 - **Identification**: Matching a detected face against a database of known faces to find a match.  
@@ -594,6 +672,7 @@
 - **Convolutional Neural Network (CNN)**: An older neural network architecture used in the traditional Custom Vision service that requires more images for training.  
 
 **Key Facts**  
+
 - Face detection works on JPEG, PNG, first frame of GIF, bitmap formats.  
 - Maximum image size: 6 megabytes.  
 - Detectable face size range: minimum 36x36 pixels up to 4096x4096 pixels.  
@@ -604,11 +683,13 @@
 - Transformer models provide higher accuracy with less data but take longer and cost more to train.  
 
 **Examples**  
+
 - Creating a database of people’s faces to perform identification and verification.  
 - Detecting if a person is wearing a mask or glasses.  
 - Checking if a face image is blurred or occluded.  
 
 **Key Takeaways 🎯**  
+
 - Face services are powerful but require onboarding and form submission to access.  
 - Liveness checks help prevent spoofing attacks using photos or 3D prints.  
 - Privacy and ethical concerns have led to removal of emotional and gender detection features.  
@@ -624,6 +705,7 @@
 **Timestamp**: 00:52:04 – 00:59:33
 
 **Key Concepts**  
+
 - Natural language processing (NLP) involves computers interacting with human language by converting text into tokens.  
 - Tokens can represent whole words, parts of words, punctuation, emojis, and vary by language.  
 - Language models (e.g., GPT-3.5, GPT-4) process tokens as input and output tokens based on probability distributions.  
@@ -635,6 +717,7 @@
 - Speech capabilities complement NLP by converting text to speech and speech to text, supporting synthesis and transcription.
 
 **Definitions**  
+
 - **Token**: A unit of text used by language models, which can be a whole word, part of a word, punctuation, or emoji.  
 - **Language Model**: A deep neural network that takes tokens as input and predicts the next most probable token as output.  
 - **Knowledge Base**: A collection of questions and answers used to power Q&A systems and bots.  
@@ -643,6 +726,7 @@
 - **Entity**: A specific piece of information extracted from text, such as a phone number or object referenced in an utterance.
 
 **Key Facts**  
+
 - Tokens for the phrase "AI-900 study cram" were broken down into 8 tokens by OpenAI’s tokenizer (e.g., "AI", "900", "study", "-").  
 - Language models handle tens of thousands of possible tokens with probability distributions to generate output.  
 - Azure Bot Service supports multiple channels including Teams, web chat, custom web apps, and email.  
@@ -650,12 +734,14 @@
 - Azure Language Studio features include summarization, post-call transcription, PII extraction, key phrase extraction, and linked entity detection.
 
 **Examples**  
+
 - Tokenization example: "AI-900 study cram" split into 8 tokens by OpenAI’s tokenizer.  
 - Q&A knowledge base can be created from existing FAQs or chit-chat sources and consumed via Azure Bot Service.  
 - LUIS example: Utterance "turn on the lights" is analyzed to detect intent ("turn on") and entity ("lights").  
 - Entity detection can use regex patterns, e.g., to identify phone numbers in text.
 
 **Key Takeaways 🎯**  
+
 - Natural language processing relies heavily on tokenization to convert text into a format understandable by models.  
 - Language models predict the next token based on probability distributions over a large token set.  
 - NLP capabilities are broad and include language detection, sentiment analysis, summarization, entity extraction, and Q&A.  
@@ -671,6 +757,7 @@
 **Timestamp**: 00:59:33 – 01:01:13
 
 **Key Concepts**  
+
 - Interaction between text and speech in both directions (text-to-speech and speech-to-text)  
 - Speech synthesis with multiple voice options  
 - Speech transcription to convert spoken words into text  
@@ -680,20 +767,24 @@
 - Translation service also supports text, documents, and custom language models  
 
 **Definitions**  
+
 - **Speech Synthesis**: The process of converting text into spoken voice output using various voices.  
 - **Speech Transcription**: Converting spoken language into written text.  
 - **Speech Translation**: Translating spoken language from one language to another, either as text or synthesized speech.  
 - **Translation Service**: A service that translates text or documents, including support for custom languages or industry-specific terminology.  
 
 **Key Facts**  
+
 - Supports about 60 different languages for speech translation (as of the time of recording).  
 - Translation service works with small amounts of text, documents, and custom language models.  
 
 **Examples**  
+
 - Translating spoken language from one language and outputting the translated text in another language.  
 - Translating spoken language and outputting the translated speech in a different language.  
 
 **Key Takeaways 🎯**  
+
 - Speech capabilities enable flexible interaction between text and speech in both directions.  
 - Multiple voices and language recognition enhance the naturalness and usability of speech synthesis.  
 - Speech translation supports a wide range of languages and can output either text or speech.  
@@ -706,6 +797,7 @@
 **Timestamp**: 01:01:13 – 01:02:31
 
 **Key Concepts**  
+
 - Translation service works primarily with text, documents, and custom language sets.  
 - Customization allows defining domain- or industry-specific language for more accurate translations.  
 - Translation can include filters such as profanity filters or selective translation filters to exclude certain words from being translated.  
@@ -713,20 +805,24 @@
 - Useful for handling larger amounts of text requiring translation across languages.
 
 **Definitions**  
+
 - **Translation Service**: A service that translates text or documents from one language to another, with support for custom language dictionaries and filters.  
 - **Custom Language Dictionary**: A user-defined set of domain- or industry-specific terms that the translation service uses to improve accuracy.  
 - **Profanity Filter**: A filter that removes or censors offensive language during translation.  
 - **Selective Translation**: A feature that allows certain words (e.g., brand names like "Azure") to remain untranslated.
 
 **Key Facts**  
+
 - Translation service can handle small amounts of text, documents, and custom language sets.  
 - Custom dictionaries can be created for specific industries or domains.  
 - Filters can be applied to control translation behavior, including profanity filtering and selective word exclusion.
 
 **Examples**  
+
 - Example of selective translation: The word "Azure" can be set to not translate, even if it might have different meanings in other languages.
 
 **Key Takeaways 🎯**  
+
 - Translation services are flexible and customizable to fit specific industry needs.  
 - Filters enhance translation quality and appropriateness by controlling what gets translated.  
 - Translation supports both text and speech output, enabling speech-to-speech translation.  
@@ -739,6 +835,7 @@
 **Timestamp**: 01:02:31 – 01:06:05
 
 **Key Concepts**  
+
 - Document intelligence involves analyzing various types of documents (text bodies, forms, receipts, invoices) to extract structured data.  
 - It evolved from the former "Forms Recognizer" service to emphasize AI capabilities.  
 - Uses pre-built AI models to understand semantic meaning in documents, not just OCR text extraction.  
@@ -748,11 +845,13 @@
 - Custom models can be trained to recognize specific form structures and output customized data.  
 
 **Definitions**  
+
 - **Document Intelligence**: An AI-powered service that analyzes documents to extract structured, meaningful data beyond simple text recognition.  
 - **Pre-built Models**: Ready-to-use AI models designed to handle common document types like receipts, invoices, identity cards, health insurance cards, and tax forms.  
 - **Custom Models**: User-trained AI models created by providing sample documents to tailor extraction to specific form layouts or data needs.  
 
 **Key Facts**  
+
 - Only 5 example forms are needed to create a custom model.  
 - Outputs extracted data as JSON.  
 - Supports multiple document types including PDFs and images.  
@@ -760,11 +859,13 @@
 - Pre-built models cover a wide range of document types (invoices, receipts, identity cards, health insurance cards, tax forms).  
 
 **Examples**  
+
 - Recognizing and extracting addresses and phone numbers from documents.  
 - Using pre-built models to analyze receipts and invoices.  
 - Creating a custom model by uploading 5 sample forms to extract specific form fields.  
 
 **Key Takeaways 🎯**  
+
 - Document Intelligence is more than OCR; it understands the semantic meaning of document content.  
 - Pre-built models enable quick deployment for common document types without training.  
 - Custom models allow flexibility for unique or proprietary form layouts with minimal training data.  
@@ -778,6 +879,7 @@
 **Timestamp**: 01:06:05 – 01:09:39
 
 **Key Concepts**  
+
 - Knowledge mining is the process of extracting insights and relevant information from large volumes of data.  
 - Azure AI Search (formerly Azure Cognitive Search) is the primary service used for knowledge mining in Azure.  
 - Data sources can include BLOB storage, data lakes, databases, and table storage.  
@@ -788,6 +890,7 @@
 - Hybrid search combines exact phrase matching and semantic vector search to improve query relevance.  
 
 **Definitions**  
+
 - **Knowledge mining**: The process of extracting meaningful insights from large, unstructured or structured data sets using AI-powered search and enrichment techniques.  
 - **Azure AI Search**: An Azure resource/service designed to index and search data using both traditional text and semantic vector methods.  
 - **Skill sets**: Configurations that define how data is processed and enriched during indexing, such as chunking and calling AI services.  
@@ -796,6 +899,7 @@
 - **Hybrid search**: A search approach that combines traditional keyword-based search with vector-based semantic search and re-ranks results accordingly.  
 
 **Key Facts**  
+
 - Azure AI Search is a standalone resource, not part of the multi-service Azure AI accounts.  
 - Data can come from various sources including BLOB storage, data lakes, databases, and table storage.  
 - Chunking involves breaking data into smaller parts with some overlap to preserve context.  
@@ -804,10 +908,12 @@
 - Hybrid search improves natural language query results by combining phrase matching and semantic understanding.  
 
 **Examples**  
+
 - A large document about "a dog going to the park" is chunked and embedded into vectors representing its semantic content.  
 - A query like "information about puppies going to public green areas" can successfully retrieve the document about a dog going to the park due to semantic vector search.  
 
 **Key Takeaways 🎯**  
+
 - Knowledge mining enables extracting actionable insights from large and complex data sets by combining AI enrichment and advanced search techniques.  
 - Azure AI Search is the core Azure service for knowledge mining, supporting both traditional and semantic search indexes.  
 - Chunking and embedding are crucial steps to handle large documents and capture their semantic meaning effectively.  
@@ -822,6 +928,7 @@
 **Timestamp**: 01:09:39 – 01:15:26
 
 **Key Concepts**  
+
 - Artificial Intelligence (AI) mimics human capabilities such as vision, speech, natural language, document intelligence, and knowledge.  
 - Machine Learning (ML) is a subset of AI where models are trained on labeled data to perform tasks without explicit programming.  
 - Types of ML include supervised learning (regression, classification - binary and multiclass) and unsupervised learning (finding groupings without labels).  
@@ -837,6 +944,7 @@
 - Knowledge Mining (Azure AI Search) supports multiple data sources, enriches data via skills, and creates text and vector indexes for querying.  
 
 **Definitions**  
+
 - **Artificial Intelligence (AI)**: Technology that mimics human cognitive functions such as vision, speech, and natural language understanding.  
 - **Machine Learning (ML)**: A subset of AI where algorithms learn patterns from labeled data to make predictions or decisions.  
 - **Deep Learning**: A type of ML using neural networks with multiple layers to model complex patterns.  
@@ -846,6 +954,7 @@
 - **Knowledge Mining**: The process of extracting useful information from large datasets using AI-powered search and enrichment techniques.  
 
 **Key Facts**  
+
 - Training custom document models can be done with as few as five examples.  
 - Azure AI multi-service endpoints do not have a free SKU; single-service endpoints may have free options.  
 - Authentication methods include API keys and Entra ID integrated authentication.  
@@ -853,6 +962,7 @@
 - Responsible AI covers fairness, bias, reliability, safety, privacy, security, inclusivity, transparency, and accountability.  
 
 **Examples**  
+
 - Querying a vector-based hybrid search to find documents about dogs going to parks using natural language variations.  
 - Vision service capabilities: generating captions, deep captions, tags, object detection, background removal, smart cropping thumbnails, and text extraction from images.  
 - Face detection can identify face direction, ears, verify identity, and detect liveness to prevent spoofing.  
@@ -862,6 +972,7 @@
 - Knowledge Mining chunks data into smaller pieces, enriches it, and creates text and vector indexes for efficient querying.  
 
 **Key Takeaways 🎯**  
+
 - Understand the broad scope of AI and its subsets: ML and deep learning.  
 - Familiarize yourself with Azure AI service types, their capabilities, and authentication methods.  
 - Responsible AI is critical—ensure fairness, privacy, transparency, and accountability in AI solutions.  
@@ -876,6 +987,7 @@
 **Timestamp**: 01:15:26 – 01:16:36
 
 **Key Concepts**  
+
 - Familiarize yourself with the exam format and experience beforehand  
 - Manage your time effectively during the exam  
 - Use process of elimination on questions you find difficult  
@@ -883,19 +995,23 @@
 - Review your performance by section if you don’t pass and focus on weak areas  
 
 **Definitions**  
+
 - **Educated guess**: Choosing the most logical answer based on your knowledge when you are unsure  
 
 **Key Facts**  
+
 - Pay attention to the number of questions and total time available on the exam  
 - You can skip questions and return to them later  
 - The exam interface will show your performance by section after completion  
 - It is common not to pass on the first attempt  
 
 **Examples**  
+
 - Avoid obviously wrong answers (e.g., “cheese” is humorously noted as never being a correct answer)  
 - Use free Microsoft Learn sandboxes to familiarize yourself with the exam environment  
 
 **Key Takeaways 🎯**  
+
 - Practice with Microsoft Learn and sandbox environments to avoid surprises on exam day  
 - Don’t spend too long on any one question; move on and come back if needed  
 - Eliminate clearly wrong answers to improve chances when guessing  
@@ -910,6 +1026,7 @@
 **Timestamp**: 01:16:36 – unknown
 
 **Key Concepts**  
+
 - Approach exam questions with educated guesses when unsure  
 - The exam services are designed to be intuitive, not confusing  
 - Review your results after the exam to identify weak areas  
@@ -917,16 +1034,20 @@
 - Follow-up study resources are recommended (generative AI study cram video)  
 
 **Definitions**  
+
 - None mentioned  
 
 **Key Facts**  
+
 - If you don’t pass the exam on the first try, it’s normal and expected  
 - The exam results will show performance by section to guide further study  
 
 **Examples**  
+
 - None mentioned  
 
 **Key Takeaways 🎯**  
+
 - Avoid overthinking or expecting trick answers (e.g., “cheese” is not a valid answer)  
 - Make the most logical choice when uncertain  
 - Use exam feedback constructively to focus on weaker topics  
