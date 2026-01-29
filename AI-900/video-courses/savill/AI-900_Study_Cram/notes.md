@@ -439,7 +439,11 @@
 - Azure OpenAI and AI Search are special service types with different availability and pricing models.  
 - AI services expose REST endpoints for applications to interact with, typically using HTTP and JSON.
 
+<img src='.img/2026-01-29-04-54-45.png' width=500> 
 
+<img src='.img/2026-01-29-04-55-14.png' width=700>
+
+<img src='.img/2026-01-29-04-56-08.png' width=200>
 
 **Definitions**  
 
