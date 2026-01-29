@@ -573,6 +573,8 @@
 - Permissions granted via roles in an administrative unit apply only to objects within that unit.  
 - Adding a group to an administrative unit does not automatically grant role permissions over the users in that group; users must be explicitly added to the administrative unit for role permissions to apply.  
 
+<img src='.img/2026-01-29-03-57-07.png' width=700> 
+
 **Definitions**  
 
 - **Global Administrator**: The highest privilege role with broad access across the organization; should be restricted to trusted individuals.  
