@@ -577,7 +577,6 @@
 
 <img src='.img/2026-01-29-03-57-31.png' width=700>
 
-
 **Definitions**  
 
 - **Global Administrator**: The highest privilege role with broad access across the organization; should be restricted to trusted individuals.  
@@ -619,6 +618,19 @@
 - Pairings are used by Microsoft for staged rollouts but customers are not required to use paired regions exclusively.  
 - Selecting regions depends on latency, data sovereignty, and resiliency needs.  
 - Subscriptions are the deployment boundary and trust a specific tenant.
+
+<img src='.img/2026-01-29-03-59-20.png' width=700> 
+
+https://datacenters.microsoft.com/globe/explore/
+
+<img src='.img/2026-01-29-04-02-45.png' width=500>
+
+<img src='.img/2026-01-29-04-03-44.png' width=700>
+
+<img src='.img/2026-01-29-04-04-35.png' width=700>
+
+
+
 
 **Definitions**  
 
