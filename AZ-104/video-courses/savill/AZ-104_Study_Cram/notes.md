@@ -575,6 +575,9 @@
 
 <img src='.img/2026-01-29-03-57-07.png' width=700> 
 
+<img src='.img/2026-01-29-03-57-31.png' width=700>
+
+
 **Definitions**  
 
 - **Global Administrator**: The highest privilege role with broad access across the organization; should be restricted to trusted individuals.  
