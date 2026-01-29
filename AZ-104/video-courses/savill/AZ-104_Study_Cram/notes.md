@@ -165,6 +165,8 @@
 - Entra ID has a flat structure, unlike AD DS which has organizational units; however, Entra ID supports administrative units for granular permission delegation.  
 - Common practice involves syncing on-premises AD DS to Entra ID, with AD DS as the source of truth.  
 
+<img src='.img/2026-01-29-03-37-11.png' width=500> 
+
 **Definitions**  
 
 - **Entra ID**: Microsoft’s cloud-based identity provider, formerly known as Azure AD, designed for internet-based authentication and authorization.  
