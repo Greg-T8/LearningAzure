@@ -984,6 +984,9 @@ https://datacenters.microsoft.com/globe/explore/
 
 ## RBAC
 
+https://youtu.be/0Knf9nub4-k?si=PZ-1yaPQUphTqOz6&t=3568
+
+
 **Timestamp**: 00:59:09 – 01:06:56
 
 **Key Concepts**  
