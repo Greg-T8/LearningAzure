@@ -255,7 +255,7 @@
 - Unsupervised learning involves unlabeled data and focuses on clustering or grouping based on similarities.  
 - Azure Machine Learning Studio supports creating custom models, importing and labeling datasets, training, testing, and deploying models.
 
-
+<img src='.img/2026-01-29-04-43-37.png' width=700> 
 
 **Definitions**  
 
@@ -301,6 +301,10 @@
 - Models trained in Azure ML Studio can be deployed in various environments, including containers.  
 - Deployment options include on-premises containers, Azure Kubernetes Service (AKS), and Azure Container Instances (ACI).  
 - Azure ML Studio supports both custom model training and access to pre-built models.
+
+<img src='.img/2026-01-29-04-43-57.png' width=700> 
+
+<img src='.img/2026-01-29-04-44-37.png' width=200>
 
 **Definitions**  
 
