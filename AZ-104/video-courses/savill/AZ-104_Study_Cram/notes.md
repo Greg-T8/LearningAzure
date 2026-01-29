@@ -751,6 +751,10 @@ https://datacenters.microsoft.com/globe/explore/
 
 <img src='.img/2026-01-29-04-11-14.png' width=700> 
 
+<img src='.img/2026-01-29-04-12-17.png' width=500> 
+
+<img src='.img/2026-01-29-04-12-25.png' width=500>
+
 **Definitions**  
 
 - **Cost Analysis**: A tool to view accumulated costs, forecast spending, and analyze costs by different dimensions such as resource, service, or location.  
