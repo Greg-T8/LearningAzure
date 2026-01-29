@@ -797,8 +797,10 @@ https://datacenters.microsoft.com/globe/explore/
 - Multiple resource groups can exist within a single subscription, but resource groups cannot be nested inside one another.  
 - Role-Based Access Control (RBAC), policies, and budgets can be applied at the resource group level for granular management.  
 - Resources such as virtual machines, storage accounts, load balancers, etc., are created inside resource groups.  
-- Resource groups are used to logically group resources that are provisioned, run, and decommissioned together.  
+- **Resource groups are used to logically group resources that are provisioned, run, and decommissioned together**.  
 - Grouping resources by application or functionality helps with access control, policy application, and cost tracking.
+
+<img src='.img/2026-01-29-04-13-51.png' width=500> 
 
 **Definitions**  
 
@@ -837,6 +839,8 @@ https://datacenters.microsoft.com/globe/explore/
 - Savings Plan discounts vary by SKU and service type and apply hourly to running resources.  
 - Only one financial discount mechanism (Savings Plan or Reserved Instance) can apply to a resource at a time.  
 - Tags can be applied to subscriptions, resource groups, or resources to add metadata useful for filtering and billing.
+
+<img src='.img/2026-01-29-04-19-03.png' width=700>
 
 **Definitions**  
 
