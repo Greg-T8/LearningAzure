@@ -92,7 +92,7 @@ def generate_commit_table(commits_by_date_cert, days=7):
     grand_total = total_ai900 + total_az104
     table += f"| **Total** | **{total_ai900}** | **{total_az104}** | **{grand_total}** |\n"
 
-    table += "\n*🟢 = Activity on this day*\n"
+    table += "\n*🟢 = Activity on this day (commits with file changes in that certification folder)*\n"
 
     # Get current time in Central timezone
     central_time = datetime.now(ZoneInfo('America/Chicago'))
