@@ -339,7 +339,7 @@
 
 - Deep learning is a subset of machine learning designed to handle complex relationships that basic algorithms cannot express.  
 - Deep learning uses neural networks composed of multiple layers of neurons (nodes) connected to each other.  
-- Each neuron applies an activation function to decide whether to pass a value forward or output zero.  
+- Each neuron applies an **activation function** to decide whether to pass a value forward or output zero.  
 - Neural networks have an input layer (receives data), multiple hidden layers (process data), and an output layer (produces results).  
 - Connections between neurons have weights and biases that adjust the strength and threshold of activations.  
 - Training deep learning models involves adjusting weights and biases to model complex patterns.  
@@ -348,6 +348,8 @@
 - Training large models requires massive computational resources (e.g., 10,000+ GPUs over months).  
 - For most users, retraining large models is impractical; instead, techniques like prompt engineering and retrieval-augmented generation (RAG) are used.  
 - Smaller neural networks can be trained effectively with less data and computational power for specific tasks.  
+
+<img src='.img/2026-01-29-04-48-10.png' width=600> 
 
 **Definitions**  
 
