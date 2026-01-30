@@ -23,5 +23,6 @@ In-depth exploration of specific Azure topics and concepts.
 | Topic | Source | Status | Completed |
 | :---- | :----- | :----- | :-------- |
 | [Azure Master Class v3 - Part 3 - Governance](./savill/2025-01-20-Azure_Master_Class_v3_-_Part_3_-_Governance_Notes.md) | John Savill | 🕒 |  |
+| [Azure Virtual Network Manager Deep Dive](./savill/2022-08-02-Azure_Virtual_Network_Manager_Deep_Dive_Notes.md) | John Savill | 🕒 |  |
 
 ---
