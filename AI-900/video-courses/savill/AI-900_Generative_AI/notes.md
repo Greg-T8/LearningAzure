@@ -349,6 +349,10 @@ Encoder -decoder architecture:
 - Encoder-only models (e.g., BERT) are also common and serve different purposes.  
 - The attention mechanism enables the model to maintain context over long sequences, preventing it from forgetting critical information.  
 
+<img src='.img/2026-01-30-05-09-00.png' width=600>
+
+<img src='.img/2026-01-30-05-09-27.png' width=600>
+
 **Definitions**  
 
 - **Self-Attention**: A mechanism where each word/token in a sequence attends to other words/tokens in the same sequence to understand context and relationships.  
