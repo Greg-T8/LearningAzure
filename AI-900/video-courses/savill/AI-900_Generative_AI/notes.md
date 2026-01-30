@@ -260,6 +260,9 @@ Encoder -decoder architecture:
 
 <img src='.img/2026-01-30-05-00-26.png' width=600>
 
+<img src='.img/2026-01-30-05-03-18.png' width=500>
+
+<img src='.img/2026-01-30-05-04-18.png' width=700> 
 
 **Definitions**  
 
