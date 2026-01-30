@@ -1810,6 +1810,10 @@ https://datacenters.microsoft.com/globe/explore/
 - Private Link Service can be used with a standard load balancer to expose custom services privately without peering VNets.  
 - Private endpoints support TLS because the service name resolves correctly to the private IP, allowing certificate validation.  
 
+<img src='.img/2026-01-30-03-56-48.png' width=300>
+
+<img src='.img/2026-01-30-03-58-34.png' width=500>
+
 **Definitions**  
 
 - **Private Endpoint**: An IP address allocated from a subnet that connects privately to a specific instance of an Azure service, eliminating the need for a public endpoint.  
