@@ -1845,6 +1845,8 @@ https://datacenters.microsoft.com/globe/explore/
 
 ## Azure Bastion
 
+https://www.youtube.com/watch?v=0Knf9nub4-k&t=3568s
+
 **Timestamp**: 02:08:03 – 02:10:24
 
 **Key Concepts**  
