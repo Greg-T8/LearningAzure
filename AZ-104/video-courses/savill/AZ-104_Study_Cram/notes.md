@@ -1373,6 +1373,8 @@ https://datacenters.microsoft.com/globe/explore/
 - Azure Firewall comes in different SKUs: Basic, Standard, and Premium, each with varying performance and features.  
 - User Defined Routes (UDRs) are used to direct traffic through the Azure Firewall from different parts of the network.
 
+<img src='.img/2026-01-30-03-34-23.png' width=700>
+
 **Definitions**  
 
 - **Azure Firewall**: A managed, cloud-based network security service that protects Azure Virtual Network resources by filtering traffic using defined rules.  
@@ -1418,6 +1420,8 @@ https://datacenters.microsoft.com/globe/explore/
 - Dangling DNS occurs when a DNS record points to a deleted or non-existent resource, which can be exploited by attackers.  
 - Azure Traffic Manager creates public DNS records but is typically referenced via custom domain DNS records rather than directly.  
 - Private DNS zones can have manual and automatic record creation and can be associated with virtual networks.
+
+
 
 **Definitions**  
 
