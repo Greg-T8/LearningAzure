@@ -1471,6 +1471,10 @@ https://datacenters.microsoft.com/globe/explore/
 - Custom DNS servers can be configured at the VNet level and integrated with Azure Private DNS.  
 - Split-brain DNS scenarios are supported by using both public and private DNS zones for the same domain names.
 
+<img src='.img/2026-01-30-03-38-56.png' width=500>
+
+<img src='.img/2026-01-30-03-39-44.png' width=500>
+
 **Definitions**  
 
 - **Private DNS Zone**: A DNS zone accessible only within specified VNets, used for internal name resolution.  
@@ -1485,7 +1489,7 @@ https://datacenters.microsoft.com/globe/explore/
 - A private DNS zone can be used by up to 100 VNets for auto-registration.  
 - A virtual network can resolve DNS records from up to 1000 private DNS zones.  
 - A private DNS zone can be linked to up to 1000 VNets for resolution purposes.  
-- Azure DNS IP address for resolution is always 168.63.129.16, accessible only from within VNets.  
+- **Azure DNS IP address for resolution is always 168.63.129.16, accessible only from within VNets.**  
 - Azure Private DNS zones are global and can be linked across subscriptions and tenants with appropriate permissions.
 
 **Examples**  
