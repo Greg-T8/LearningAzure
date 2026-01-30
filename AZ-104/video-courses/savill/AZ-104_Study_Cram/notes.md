@@ -1262,6 +1262,10 @@ https://datacenters.microsoft.com/globe/explore/
 - Security Admin Rules: Precede local subnet or NIC-level rules and control traffic flow at a higher level.  
 - Security rules can be set to **Allow**, **Always Allow** (bypass NSGs), or **Deny** traffic.  
 
+<img src='.img/2026-01-30-03-22-27.png' width=500>
+
+<img src='.img/2026-01-30-03-25-46.png' width=500>
+
 **Definitions**  
 
 - **Azure Virtual Network Manager (AVNM)**: A service that enables centralized management of network connectivity and security policies across multiple VNets, reducing the complexity of manual peering and routing configurations.  
