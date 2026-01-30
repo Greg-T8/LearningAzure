@@ -75,6 +75,8 @@
 - The process of generating text is called inference, where the model predicts tokens sequentially until an end-of-sequence token is reached.  
 - Training generative AI models requires massive datasets sourced from the web, books, Wikipedia, and other large libraries.
 
+<img src='.img/2026-01-30-04-51-32.png' width=600>
+
 **Definitions**  
 
 - **Artificial Intelligence (AI)**: Technology designed to imitate specific aspects of human behavior, such as recognizing speech or classifying images.  
@@ -120,10 +122,7 @@
 - Once training is complete, the model becomes essentially read-only and does not change during inference.  
 - Increasing model size (parameters) generally improves performance and intelligence, with no known upper limit currently.  
 
-**Definitions**  
-
-- **Inference**: The process where a trained model predicts the next token(s) based on a given prompt until it completes the sequence.  
-- **Parameters**: Numerical values (weights and biases) within the neural network that determine how input data is transformed to output predictions.  
+<img src='.img/2026-01-30-04-54-57.png' width=400>
 
 **Key Facts**  
 
@@ -156,7 +155,9 @@
 - Large language models (LLMs) perform a variety of natural language tasks.  
 - LLMs are highly capable but are not equivalent to artificial general intelligence (AGI).  
 - LLMs focus on predicting the next token in a sequence.  
-- The underlying architecture of many LLMs is based on the transformer model.  
+- The underlying architecture of many LLMs is based on the transformer model.
+
+
 
 **Definitions**  
 
