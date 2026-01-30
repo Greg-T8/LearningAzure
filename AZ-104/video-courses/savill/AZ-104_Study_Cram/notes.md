@@ -1758,6 +1758,14 @@ https://datacenters.microsoft.com/globe/explore/
 - Service endpoints allow restricting access to PaaS services only from selected subnets despite the service having a public endpoint.  
 - Private endpoints are a more advanced option that assign a private IP address within the subnet to the PaaS service, removing exposure to the public endpoint.
 
+<img src='.img/2026-01-30-03-54-15.png' width=300>
+
+<img src='.img/2026-01-30-03-54-47.png' width=700>
+
+<img src='.img/2026-01-30-03-55-33.png' width=700>
+
+<img src='.img/2026-01-30-03-55-44.png' width=400>
+
 **Definitions**  
 
 - **Service Endpoint**: A feature that extends a virtual network subnet identity to an Azure service, allowing the subnet to be explicitly allowed to communicate with that service over a direct route, even though the service has a public endpoint.  
