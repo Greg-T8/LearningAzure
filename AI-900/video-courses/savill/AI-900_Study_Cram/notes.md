@@ -594,7 +594,7 @@
 - Foundational models are broad in capability and can be fine-tuned for specific use cases.  
 - Vision services include tasks like image analysis and captioning.
 
-
+<img src='.img/2026-01-30-04-13-15.png' width=400>
 
 **Definitions**  
 
