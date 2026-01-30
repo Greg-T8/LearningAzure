@@ -157,7 +157,7 @@
 - LLMs focus on predicting the next token in a sequence.  
 - The underlying architecture of many LLMs is based on the transformer model.
 
-
+<img src='.img/2026-01-30-04-55-58.png' width=400>
 
 **Definitions**  
 
@@ -202,6 +202,8 @@
 - The decoder also considers its own output as part of the input for generating the next token.  
 - The model uses mechanisms such as embeddings, positional encoding, multi-head attention, and feed-forward layers.  
 - The output probabilities are normalized using a softmax function to determine the most likely next token.
+
+
 
 **Definitions**  
 
