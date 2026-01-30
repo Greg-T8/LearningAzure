@@ -9,16 +9,19 @@
 
 ## Table of Contents
 
-- [Introduction and Setup](#introduction-and-setup)
-- [New Videos and Passkey Profile Rollout](#new-videos-and-passkey-profile-rollout)
-- [Compute Updates](#compute-updates)
-- [Networking Updates](#networking-updates)
-- [Storage Updates](#storage-updates)
-- [Database Updates](#database-updates)
-- [Azure Databricks AgentBricks GA](#azure-databricks-agentbricks-ga)
-- [Microsoft Research Rho Alpha Model](#microsoft-research-rho-alpha-model)
-- [Tenant Configuration Management APIs Preview](#tenant-configuration-management-apis-preview)
-- [Closing Remarks](#closing-remarks)
+* [Table of Contents](#table-of-contents)
+* [Introduction and Setup](#introduction-and-setup)
+* [New Videos and Passkey Profile Rollout](#new-videos-and-passkey-profile-rollout)
+* [Compute Updates](#compute-updates)
+* [Networking Updates](#networking-updates)
+* [Storage Updates](#storage-updates)
+* [Database Updates](#database-updates)
+* [Azure Databricks AgentBricks GA](#azure-databricks-agentbricks-ga)
+* [Microsoft Research Rho Alpha Model](#microsoft-research-rho-alpha-model)
+* [Tenant Configuration Management APIs Preview](#tenant-configuration-management-apis-preview)
+* [Closing Remarks](#closing-remarks)
+
+<img src='.img/2026-01-30-09-57-54.png' width=400> 
 
 ## Introduction and Setup
 
@@ -28,6 +31,7 @@
 
 - Overview of updated learning resources for Azure
 - Introduction to the new passkey profile rollout across tenants
+
 
 **Definitions**
 
@@ -96,6 +100,8 @@
 - Availability of AMD-based VM SKUs with significant CPU improvements.
 - Upcoming deprecation of Python 3.10 support for Azure Functions.
 
+
+
 **Definitions**
 
 - **Azure Command Launcher for Java (Jazz command)**: A preview tool that replaces the regular Java command in the JVM to automatically set optimized parameters for cloud environments, improving performance and efficiency across Azure Compute Services.
@@ -105,6 +111,10 @@
 - **Azure Boost**: A feature providing enhanced networking (up to 400 Gbps) and storage throughput (up to 20 GB/s) on the largest VM sizes.
 - **V7 SKUs (D, E, A, F series)**: Azure VM SKUs powered by 5th Gen AMD EPYC processors with Zen 5 cores, offering up to 35% CPU improvement over V6 SKUs.
 - **Python 3.10 Support for Azure Functions**: Support ending in early October; users must upgrade to Python 3.13 or above.
+
+<img src='.img/2026-01-30-10-16-24.png' width=400> 
+
+
 
 **Key Facts**
 
@@ -150,6 +160,8 @@
 - **ExpressRoute scalable gateway (ERGW scale)**: A new SKU for ExpressRoute gateways that allows variable scaling of bandwidth by adjusting the number of scale units dynamically.
 - **Scale unit**: A unit of bandwidth capacity in the ERGW scale gateway, providing 1 Gbps each.
 
+<img src='.img/2026-01-30-10-17-40.png' width=400>
+
 **Key Facts**
 
 - Each scale unit provides 1 Gbps of bandwidth.
@@ -186,6 +198,8 @@
 
 - **OpenShift Virtualization**: A feature within Azure Red Hat OpenShift that enables running virtual machines alongside containers on the same OpenShift cluster.
 - **Azure NetApp Files (ANF)**: A high-performance file storage service in Azure that now supports use as persistent volumes for VMs in OpenShift virtualization.
+
+<img src='.img/2026-01-30-10-18-15.png' width=400>
 
 **Key Facts**
 
@@ -224,6 +238,8 @@
 - These minor version updates occur automatically during planned monthly maintenance
 - No manual intervention is required to receive these updates
 
+<img src='.img/2026-01-30-10-18-36.png' width=400>
+
 **Examples**
 
 - None mentioned
@@ -253,6 +269,8 @@
 
 - **AgentBricks**: Modular AI agents within Azure Databricks designed to unify data and AI capabilities by enabling tailored AI agent creation, deployment, and management.
 - **MCP Catalog**: An integrated catalog providing additional tooling and knowledge resources for AgentBricks.
+
+<img src='.img/2026-01-30-10-19-16.png' width=400>
 
 **Key Facts**
 
@@ -298,6 +316,8 @@
 - **Control signals**: Commands sent to a robot to direct its movements or actions.
 - **Tactile sensing**: The robot’s ability to perceive and respond to touch or physical feedback.
 
+<img src='.img/2026-01-30-10-19-36.png' width=300>
+
 **Key Facts**
 
 - Built on the Microsoft Research Pi Vision Language family of models.
@@ -331,6 +351,8 @@
 - The APIs are currently available in preview and require using the `/beta` version of Microsoft Graph.
 - Separate APIs exist for snapshotting configurations and for monitoring changes.
 - Detected configuration drifts can be tracked and will be automatically deleted after 30 days once fixed.
+
+<img src='.img/2026-01-30-10-20-21.png' width=400>
 
 **Definitions**
 
