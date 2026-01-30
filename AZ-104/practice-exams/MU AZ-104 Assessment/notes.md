@@ -6,6 +6,10 @@ Notes and insights from the MeasureUp practice assessment for AZ-104.
 
 ---
 
+<img src='.img/2026-01-30-06-23-36.png' width=700>
+
+<img src='.img/2026-01-30-06-25-12.png' width=700> 
+
 <img src='.img/2026-01-30-05-24-16.png' width=700>
 
 <img src='.img/2026-01-30-05-24-56.png' width=700>
@@ -73,7 +77,3 @@ Notes and insights from the MeasureUp practice assessment for AZ-104.
 <img src='.img/2026-01-30-06-21-46.png' width=700
 
 <img src='.img/2026-01-30-06-23-03.png' width=700>
-
-<img src='.img/2026-01-30-06-23-36.png' width=700>
-
-<img src='.img/2026-01-30-06-25-12.png' width=700> 
