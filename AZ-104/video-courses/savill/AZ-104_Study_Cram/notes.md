@@ -1676,6 +1676,10 @@ https://datacenters.microsoft.com/globe/explore/
 - Standard SKU allows deployment of Azure Firewall and custom network virtual appliances within the Virtual WAN.  
 - Routing in Virtual WAN can be controlled and overridden using User Defined Routes (UDRs).  
 
+<img src='.img/2026-01-30-03-50-25.png' width=500>
+
+<img src='.img/2026-01-30-03-50-36.png' width=700>
+
 **Definitions**  
 
 - **Azure Virtual WAN**: A managed service that centralizes and simplifies the creation and management of network connectivity, including VPNs, ExpressRoute, and VNet interconnectivity.  
