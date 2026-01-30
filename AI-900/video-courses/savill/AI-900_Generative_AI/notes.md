@@ -254,6 +254,13 @@ Encoder -decoder architecture:
 - Positional encoding is added to embeddings to capture the order of words, which is crucial for meaning.  
 - Positional encoding uses mathematical functions (cosine and sine waves at different frequencies) to encode position information.
 
+<img src='.img/2026-01-30-04-59-47.png' width=400>
+
+<img src='.img/2026-01-30-05-00-05.png' width=700>
+
+<img src='.img/2026-01-30-05-00-26.png' width=600>
+
+
 **Definitions**  
 
 - **Tokenizer**: A tool that breaks input text into smaller units called tokens, which can be whole words or parts of words.  
