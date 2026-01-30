@@ -859,6 +859,8 @@
 - The service supports both text translation and speech translation (speech-to-speech).  
 - Useful for handling larger amounts of text requiring translation across languages.
 
+
+
 **Definitions**  
 
 - **Translation Service**: A service that translates text or documents from one language to another, with support for custom language dictionaries and filters.  
@@ -898,6 +900,8 @@
 - Works with PDFs and images as input formats.  
 - Allows creation of custom models with as few as 5 sample forms using a no-code interface (Document Intelligence Studio).  
 - Custom models can be trained to recognize specific form structures and output customized data.  
+
+<img src='.img/2026-01-30-04-36-08.png' width=400>
 
 **Definitions**  
 
