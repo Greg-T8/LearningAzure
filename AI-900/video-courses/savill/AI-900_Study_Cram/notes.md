@@ -692,10 +692,12 @@
 - Face service in computer vision focuses on detecting and analyzing human faces in images.  
 - Includes face detection, liveness check, identification, and verification.  
 - Detection includes facial landmarks and attributes like head pose, mask presence, glasses, blur, exposure, and occlusion.  
-- Emotional state, gender, and emotions detection are no longer supported due to concerns about abuse.  
+- **Emotional state, gender, and emotions detection are no longer supported due to concerns about abuse.**  
 - Supports multiple image formats and size constraints.  
 - Custom vision training can be done using Image Analysis v4.0 transformer-based model or older convolutional neural network (CNN) model.  
 - Transformer models require fewer images but take longer to train and cost more.  
+
+<img src='.img/2026-01-30-04-19-30.png' width=400>
 
 **Definitions**  
 
