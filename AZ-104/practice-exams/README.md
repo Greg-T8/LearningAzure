@@ -47,10 +47,9 @@
 
 ---
 
-## 📁 Review Notes
+## 📝 MeasureUp Assessment Notes
 
-Create detailed review notes for commonly missed topics:
-- `review-notes/topic-name.md`
+- [Assessment AZ-104: Microsoft Azure Administrator](./MU%20AZ-104%20Assessment/notes.md)
 
 ---
 
