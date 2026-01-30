@@ -1421,7 +1421,9 @@ https://datacenters.microsoft.com/globe/explore/
 - Azure Traffic Manager creates public DNS records but is typically referenced via custom domain DNS records rather than directly.  
 - Private DNS zones can have manual and automatic record creation and can be associated with virtual networks.
 
+<img src='.img/2026-01-30-03-35-58.png' width=300>
 
+<img src='.img/2026-01-30-03-37-16.png' width=700>
 
 **Definitions**  
 
