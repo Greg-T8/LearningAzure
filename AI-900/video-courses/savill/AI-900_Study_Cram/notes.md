@@ -952,6 +952,8 @@
 - Knowledge mining creates both traditional text indexes and vector indexes to support hybrid search capabilities.  
 - Hybrid search combines exact phrase matching and semantic vector search to improve query relevance.  
 
+<img src='.img/2026-01-30-04-39-56.png' width=500>
+
 **Definitions**  
 
 - **Knowledge mining**: The process of extracting meaningful insights from large, unstructured or structured data sets using AI-powered search and enrichment techniques.  
