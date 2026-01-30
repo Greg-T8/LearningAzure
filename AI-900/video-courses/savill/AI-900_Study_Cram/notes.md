@@ -819,6 +819,8 @@
 - Translation can output either text or synthesized speech in a target language  
 - Translation service also supports text, documents, and custom language models  
 
+<img src='.img/2026-01-30-04-33-00.png' width=400>
+
 **Definitions**  
 
 - **Speech Synthesis**: The process of converting text into spoken voice output using various voices.  
