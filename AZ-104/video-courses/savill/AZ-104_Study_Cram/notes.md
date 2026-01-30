@@ -1137,13 +1137,15 @@ https://datacenters.microsoft.com/globe/explore/
 - A VNet exists within a single Azure subscription and region (cannot span multiple subscriptions or regions).  
 - VNets are defined by one or more IPv4 CIDR ranges, commonly private IP ranges (RFC 1918), but can also include custom or public IP ranges (with limitations).  
 - VNets are subdivided into subnets, which are subsets of the VNet’s IP address space.  
-- Subnets are regional resources and can span multiple Availability Zones within the same region.  
-- Each subnet loses 5 IP addresses due to reserved addresses for network, broadcast, gateway, and DNS purposes.  
+- Subnets are regional resources and can span multiple Availability Zones within the same region. 
+- **Each subnet loses 5 IP addresses due to reserved addresses for network, broadcast, gateway, and DNS purposes.**  
 - Resources connect to VNets via virtual NICs that receive private IP addresses allocated by Azure DHCP.  
 - Public IP addresses can be associated with resources for internet accessibility, but private IPs are not internet routable by default.  
 - Public IPs come in Standard and Basic SKUs; Standard is recommended as Basic is being retired by September 2025.  
 - Azure supports bringing your own public IP prefixes (ranges) with specific size requirements and validation processes.  
 - For outbound internet access, explicit configuration is required (e.g., public IP, NAT gateway, Azure Firewall, or Standard Load Balancer with outbound rules) as implicit internet access is being deprecated.  
+
+<img src='.img/2026-01-30-03-10-57.png' width=500>
 
 **Definitions**  
 
@@ -1204,6 +1206,8 @@ https://datacenters.microsoft.com/globe/explore/
 - Peering relationships are not transitive by default; spokes cannot communicate with each other unless explicitly peered or routed through a network virtual appliance (NVA) like Azure Firewall.  
 - User Defined Routes (UDRs) can be used to direct traffic through NVAs to enable transitive routing between VNets.  
 - Azure Virtual Network Manager can help manage and configure network groups and peerings at scale.
+
+
 
 **Definitions**  
 
