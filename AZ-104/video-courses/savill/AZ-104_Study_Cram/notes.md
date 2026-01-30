@@ -1314,11 +1314,23 @@ https://datacenters.microsoft.com/globe/explore/
 - Effective routes and rules impacting a NIC can be viewed to understand traffic flow and restrictions.  
 - Azure Firewall is a Microsoft Network Virtual Appliance that can complement NSGs by providing advanced inbound/outbound filtering and NAT capabilities.
 
+<img src='.img/2026-01-30-03-27-16.png' width=500>
+
+<img src='.img/2026-01-30-03-28-22.png' width=700>
+
+<img src='.img/2026-01-30-03-29-49.png' width=700>
+
+<img src='.img/2026-01-30-03-31-15.png' width=700>
+
+<img src='.img/2026-01-30-03-31-25.png' width=700>
+
+<img src='.img/2026-01-30-03-31-36.png' width=700>
+
 **Definitions**  
 
 - **Network Security Group (NSG)**: A collection of security rules that allow or deny inbound and outbound network traffic to Azure resources.  
 - **Service Tag**: A label representing a group of IP address prefixes for specific Azure services, used to simplify NSG rule management.  
-- **Application Security Group (ASG)**: A logical grouping of NICs that allows NSG rules to be applied based on application roles rather than IP addresses.  
+- **Application Security Group (ASG)**: **A logical grouping of NICs that allows NSG rules to be applied based on application roles rather than IP addresses.** 
 - **Priority (in NSG rules)**: A numeric value determining the order of rule evaluation; lower numbers have higher priority.  
 - **Azure Firewall**: A managed, first-party network virtual appliance that provides advanced filtering, NAT, and traffic inspection capabilities.
 
