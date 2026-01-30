@@ -309,6 +309,8 @@ Encoder -decoder architecture:
 - This encoding is merged into the vector representing each word.  
 - Positional encoding enables the model to distinguish between sentences with the same words but different word orders.
 
+<img src='.img/2026-01-30-05-05-57.png' width=300>
+
 **Definitions**  
 
 - **Positional encoding**: A method of adding information about the position of words in a sequence to their vector representations, typically using sine and cosine functions at varying frequencies.
