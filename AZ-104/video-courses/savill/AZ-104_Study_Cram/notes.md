@@ -1059,12 +1059,15 @@ https://datacenters.microsoft.com/globe/explore/
 - Locks affect only the Azure control plane, not the data plane.  
 - Locks are inherited down the resource hierarchy.  
 
+<img src='.img/2026-01-30-03-06-12.png' width=500>
+
+
 **Definitions**  
 
 - **Cannot delete lock**: Prevents deletion of the resource but allows modifications.  
 - **Read only lock**: Prevents any modifications, including writes, to the resource.  
 - **Control plane**: The management layer of Azure where resources are created, configured, or deleted.  
-- **Data plane**: The layer where data operations occur, such as writing or deleting records inside a resource (e.g., database entries, blobs).  
+- **Data plane**: The layer where data operations occur, such as writing or deleting records inside a resource (e.g., database entries, blobs). 
 
 **Key Facts**  
 
