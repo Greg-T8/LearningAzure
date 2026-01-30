@@ -699,6 +699,8 @@
 
 <img src='.img/2026-01-30-04-19-30.png' width=400>
 
+<img src='.img/2026-01-30-04-20-51.png' width=700>
+
 **Definitions**  
 
 - **Face Detection**: The process of finding faces in an image and analyzing features such as facial landmarks (eyes, nose, ears, lips), head pose, and presence of masks or glasses.  
