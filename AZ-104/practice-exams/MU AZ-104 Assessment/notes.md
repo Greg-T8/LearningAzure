@@ -33,3 +33,21 @@ Notes and insights from the MeasureUp practice assessment for AZ-104.
 <img src='.img/2026-01-30-05-50-54.png' width=700>
 
 <img src='.img/2026-01-30-05-53-50.png' width=700>
+
+<img src='.img/2026-01-30-05-55-46.png' width=700>
+
+<img src='.img/2026-01-30-05-57-13.png' width=700>
+
+<img src='.img/2026-01-30-05-58-51.png' width=700>
+
+<img src='.img/2026-01-30-05-59-35.png' width=700>
+
+<img src='.img/2026-01-30-06-00-11.png' width=700>
+
+<img src='.img/2026-01-30-06-01-29.png' width=700>
+
+<img src='.img/2026-01-30-06-03-01.png' width=700>
+
+<img src='.img/2026-01-30-06-03-32.png' width=700>
+
+<img src='.img/2026-01-30-06-06-46.png' width=700>
