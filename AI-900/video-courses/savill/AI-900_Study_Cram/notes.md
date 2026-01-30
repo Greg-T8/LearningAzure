@@ -637,6 +637,16 @@
 - Vision Studio provides an interactive environment to test and customize vision models and see outputs like bounding boxes and JSON data.  
 - Face services detect faces, identify characteristics, and perform liveness checks, with controlled access due to potential for misuse.
 
+<img src='.img/2026-01-30-04-14-44.png' width=500>
+
+<img src='.img/2026-01-30-04-15-53.png' width=500>
+
+<img src='.img/2026-01-30-04-16-32.png' width=700> 
+
+<img src='.img/2026-01-30-04-16-55.png' width=700>
+
+<img src='.img/2026-01-30-04-17-18.png' width=700>
+
 **Definitions**  
 
 - **Multimodal**: The ability of a model to work across different input types or modalities (e.g., images, text).  
