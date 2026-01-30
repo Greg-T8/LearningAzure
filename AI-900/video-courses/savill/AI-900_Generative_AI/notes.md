@@ -203,7 +203,11 @@
 - The model uses mechanisms such as embeddings, positional encoding, multi-head attention, and feed-forward layers.  
 - The output probabilities are normalized using a softmax function to determine the most likely next token.
 
+<img src='.img/2026-01-30-04-57-32.png' width=600>
 
+Encoder -decoder architecture:
+
+<img src='.img/2026-01-30-04-57-50.png' width=600>
 
 **Definitions**  
 
