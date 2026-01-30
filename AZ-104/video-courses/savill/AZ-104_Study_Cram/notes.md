@@ -1617,6 +1617,12 @@ https://datacenters.microsoft.com/globe/explore/
 - Microsoft peering on ExpressRoute allows private connectivity to Azure PaaS services (e.g., storage accounts, databases) without routing through a virtual network or private endpoints.  
 - Route filters control which Microsoft services are accessible via Microsoft peering.  
 
+<img src='.img/2026-01-30-03-46-15.png' width=500>
+
+<img src='.img/2026-01-30-03-47-09.png' width=500>
+
+<img src='.img/2026-01-30-03-49-02.png' width=500>
+
 **Definitions**  
 
 - **ExpressRoute**: A service that provides private, dedicated network connectivity between a customer’s on-premises infrastructure and Microsoft Azure, using Microsoft’s global network backbone instead of the public internet.  
