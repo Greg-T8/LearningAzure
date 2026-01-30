@@ -984,9 +984,6 @@ https://datacenters.microsoft.com/globe/explore/
 
 ## RBAC
 
-https://youtu.be/0Knf9nub4-k?si=PZ-1yaPQUphTqOz6&t=3568
-
-
 **Timestamp**: 00:59:09 – 01:06:56
 
 **Key Concepts**  
@@ -1002,6 +999,10 @@ https://youtu.be/0Knf9nub4-k?si=PZ-1yaPQUphTqOz6&t=3568
 - RBAC roles differ from Entra roles, which apply to tenant-level permissions.  
 - User Access Administrator role allows elevating permissions across subscriptions that trust the tenant.  
 - Resource locks can be applied at subscription, resource group, or resource level to prevent deletion or make resources read-only.
+
+<img src='.img/2026-01-30-02-59-14.png' width=500>
+
+<img src='.img/2026-01-30-03-00-05.png' width=700>
 
 **Definitions**  
 
