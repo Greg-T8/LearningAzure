@@ -538,8 +538,6 @@
 
 ## Responsible AI
 
-https://youtu.be/bTkUTkXrqOQ?si=B46eqFh7n48VLJ2Z&t=2022
-
 **Timestamp**: 00:33:32 – 00:39:04
 
 **Key Concepts**  
@@ -548,6 +546,8 @@ https://youtu.be/bTkUTkXrqOQ?si=B46eqFh7n48VLJ2Z&t=2022
 - AI introduces risks such as bias, errors, privacy concerns, and lack of inclusiveness.  
 - The shift from human decision-making to AI-driven decisions requires careful consideration of these risks.  
 - Six key principles guide responsible AI: fairness, reliability & safety, privacy & security, inclusiveness, transparency, and responsibility/accountability.
+
+<img src='.img/2026-01-30-04-10-54.png' width=500>
 
 **Definitions**  
 
@@ -593,6 +593,8 @@ https://youtu.be/bTkUTkXrqOQ?si=B46eqFh7n48VLJ2Z&t=2022
 - Multimodal models support multiple input types/modalities such as images, language, video, and audio.  
 - Foundational models are broad in capability and can be fine-tuned for specific use cases.  
 - Vision services include tasks like image analysis and captioning.
+
+
 
 **Definitions**  
 
