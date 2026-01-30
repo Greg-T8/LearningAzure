@@ -755,6 +755,20 @@
 - Azure Language Studio offers various NLP features like summarization, transcription, PII extraction, and entity/key phrase extraction.  
 - Speech capabilities complement NLP by converting text to speech and speech to text, supporting synthesis and transcription.
 
+<img src='.img/2026-01-30-04-22-42.png' width=300>
+
+<img src='.img/2026-01-30-04-23-17.png' width=700>
+
+<img src='.img/2026-01-30-04-25-45.png' width=500>
+
+<img src='.img/2026-01-30-04-26-46.png' width=400>
+
+<img src='.img/2026-01-30-04-31-14.png' width=700>
+
+<img src='.img/2026-01-30-04-31-25.png' width=700>
+
+<img src='.img/2026-01-30-04-31-34.png' width=700> 
+
 **Definitions**  
 
 - **Token**: A unit of text used by language models, which can be a whole word, part of a word, punctuation, or emoji.  
