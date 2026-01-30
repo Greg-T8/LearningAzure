@@ -402,6 +402,7 @@ Encoder -decoder architecture:
 - Large language models are computationally expensive to train and run inference on.  
 - There is ongoing work to create smaller, task-focused language models that are cheaper and faster to train and tune.
 
+
 **Definitions**  
 
 - **Transformer model**: A neural network architecture that uses self-attention to process input data, enabling it to keep track of context over long sequences.  
@@ -428,6 +429,8 @@ Encoder -decoder architecture:
 ---
 
 ## OpenAI and GPT
+
+https://youtu.be/Ch6KE7KxHGM?si=EN8LLNKd5VpPkTde&t=1655
 
 **Timestamp**: 00:27:38 – 00:32:20
 
