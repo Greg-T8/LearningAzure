@@ -903,6 +903,10 @@
 
 <img src='.img/2026-01-30-04-36-08.png' width=400>
 
+<img src='.img/2026-01-30-04-36-46.png' width=700>
+
+<img src='.img/2026-01-30-04-36-55.png' width=400>
+
 **Definitions**  
 
 - **Document Intelligence**: An AI-powered service that analyzes documents to extract structured, meaningful data beyond simple text recognition.  
