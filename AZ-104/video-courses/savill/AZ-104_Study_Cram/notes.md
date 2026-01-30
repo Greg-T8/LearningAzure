@@ -1519,6 +1519,7 @@ https://datacenters.microsoft.com/globe/explore/
 - Virtual Network (VNet) subnet sizing considerations for gateway subnets  
 - VPN gateway types: policy-based (static routing) vs route-based (dynamic routing)  
 
+
 **Definitions**  
 
 - **Private DNS Zone**: A DNS zone used internally within Azure for private name resolution, isolated from the public internet.  
@@ -1560,6 +1561,10 @@ https://datacenters.microsoft.com/globe/explore/
 - VPN gateways can be configured in active-passive or active-active modes for redundancy.  
 - S2S VPN traffic is encrypted but traverses the public Internet, which may cause variable latency.  
 - ExpressRoute is an alternative private connectivity option using Microsoft’s global backbone network.
+
+<img src='.img/2026-01-30-03-43-23.png' width=400>  
+
+<img src='.img/2026-01-30-03-44-22.png' width=400>
 
 **Definitions**  
 
