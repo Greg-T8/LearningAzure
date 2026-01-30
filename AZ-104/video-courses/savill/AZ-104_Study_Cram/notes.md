@@ -1207,7 +1207,11 @@ https://datacenters.microsoft.com/globe/explore/
 - User Defined Routes (UDRs) can be used to direct traffic through NVAs to enable transitive routing between VNets.  
 - Azure Virtual Network Manager can help manage and configure network groups and peerings at scale.
 
+<img src='.img/2026-01-30-03-17-36.png' width=700>
 
+<img src='.img/2026-01-30-03-19-18.png' width=700>
+
+<img src='.img/2026-01-30-03-20-35.png' width=700>
 
 **Definitions**  
 
