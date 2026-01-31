@@ -2338,6 +2338,11 @@ https://datacenters.microsoft.com/globe/explore/
 
 <img src='.img/2026-01-31-04-05-26.png' width=900> 
 
+<img src='.img/2026-01-31-04-06-13.png' width=700> 
+
+<img src='.img/2026-01-31-04-06-27.png' width=700>
+
+
 **Definitions**  
 
 - **Hot tier**: Highest storage cost but lowest transaction cost; ideal for frequently accessed data.  
