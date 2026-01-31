@@ -2441,6 +2441,10 @@ Can manually trigger failover:
 - Supports adding filters to control what data gets replicated.  
 - Enables creation of custom replication rules between containers in different storage accounts.
 
+<img src='.img/2026-01-31-04-10-13.png' width=500>
+
+<img src='.img/2026-01-31-04-08-58.png' width=700> 
+
 **Definitions**  
 
 - **Object replication**: A feature that allows copying blobs from one container in a storage account to another container in a different storage account, potentially in a different region, with customizable rules and filters.
