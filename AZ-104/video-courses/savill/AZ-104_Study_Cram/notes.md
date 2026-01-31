@@ -2282,7 +2282,7 @@ https://datacenters.microsoft.com/globe/explore/
 - Storage accounts can be secured with firewall rules restricting access to service or private endpoints.  
 - Different resiliency and cost optimization options are available for Blob storage, including tiering.
 
-<img src='.img/2026-01-31-03-58-16.png' width=500>
+<img src='.img/2026-01-31-03-58-16.png' width=300>
 
 **Definitions**  
 
@@ -2329,6 +2329,8 @@ https://datacenters.microsoft.com/globe/explore/
 - Tiering can be set at the individual blob level.  
 - Costs depend on both storage capacity and transaction frequency.  
 - Lifecycle management can automate tier transitions and deletions.
+
+
 
 **Definitions**  
 
