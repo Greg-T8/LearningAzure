@@ -2282,6 +2282,8 @@ https://datacenters.microsoft.com/globe/explore/
 - Storage accounts can be secured with firewall rules restricting access to service or private endpoints.  
 - Different resiliency and cost optimization options are available for Blob storage, including tiering.
 
+<img src='.img/2026-01-31-03-58-16.png' width=500>
+
 **Definitions**  
 
 - **Storage Explorer**: A graphical tool to upload, download, and manipulate data in Azure Storage accounts.  
