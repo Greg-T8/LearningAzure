@@ -2205,6 +2205,10 @@ https://datacenters.microsoft.com/globe/explore/
 - Azure Queues provide FIFO message queuing.  
 - Redundancy options determine how many copies of data exist and where they are stored to ensure resiliency.
 
+<img src='.img/2026-01-31-03-50-27.png' width=500>
+
+<img src='.img/2026-01-31-03-50-48.png' width=700>
+
 **Definitions**  
 
 - **Storage Account**: A container in Azure that holds all storage data objects like blobs, files, queues, and tables, scoped to a region with specific performance and redundancy settings.  

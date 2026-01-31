@@ -25,5 +25,6 @@ In-depth exploration of specific Azure topics and concepts.
 | :---- | :----- | :----- | :-------- |
 | [Azure Master Class v3 - Part 3 - Governance](./savill/2025-01-20-Azure_Master_Class_v3_-_Part_3_-_Governance_Notes.md) | John Savill | 🕒 |  |
 | [Azure Virtual Network Manager Deep Dive](./savill/2022-08-02-Azure_Virtual_Network_Manager_Deep_Dive_Notes.md) | John Savill | 🕒 |  |
+| [Picking the right Azure Load Balancing Solution](./savill/2021-04-22-Picking_the_right_Azure_Load_Balancing_Solution_Notes.md) | John Savill | 🕒 |  |
 
 ---
