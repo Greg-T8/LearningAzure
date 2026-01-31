@@ -2155,6 +2155,8 @@ https://datacenters.microsoft.com/globe/explore/
 - Premium SKU includes advanced features like Microsoft-managed WAF rule sets and bot protection.  
 - Features path-based routing and a rules engine for flexible traffic management.
 
+<img src='.img/2026-01-31-03-41-10.png' width=700> 
+
 **Definitions**  
 
 - **Azure Front Door**: A Layer 7 global load balancer and application delivery network service that provides secure, fast, and reliable access to applications by routing traffic through Microsoft’s global network.  
