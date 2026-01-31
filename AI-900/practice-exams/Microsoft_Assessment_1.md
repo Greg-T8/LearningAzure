@@ -105,7 +105,42 @@ Text translation works on written text without any audio component, so it belong
 <details>
 <summary>Click to expand</summary>
 
+## Why You Missed This Question
 
+You selected **CSV** instead of **DOC** as one of the supported file types for generating a knowledge base with Azure AI Bot Service. You got 1 out of 2 correct!
+
+### The Key Concept: What File Types Can Build a Knowledge Base?
+
+Azure AI Bot Service (used with Microsoft Foundry Agent) can import files to automatically generate **question-and-answer pairs** for a knowledge base. The service needs to extract structured Q&A content from documents.
+
+### Supported vs. Unsupported File Types
+
+| File Type | Supported? | Why |
+|-----------|------------|-----|
+| ✅ **DOC/DOCX** | Yes | Word documents contain structured/unstructured text that can be parsed for Q&A pairs |
+| ✅ **PDF** | Yes | PDFs contain readable text content that can be extracted and processed |
+| ❌ **CSV** | No | CSV is structured data (rows/columns), not natural language Q&A content |
+| ❌ **MP4** | No | Video files — Bot Service can't process multimedia |
+| ❌ **ZIP** | No | Archive files must be extracted first before contents can be imported |
+
+### Why CSV Seems Like It Should Work (But Doesn't)
+
+This is a reasonable assumption! CSV files are:
+
+- Structured and organized
+- Often used for data import/export
+- Easy to parse programmatically
+
+**However**, the knowledge base import is designed for **natural language documents** — files where Q&A pairs can be extracted from flowing text, FAQs, or documentation. CSV files are meant for tabular data, not conversational Q&A content.
+
+### Quick Memory Trick
+
+Think: **"What would a human read to learn from?"**
+
+- 📄 **DOC/PDF** → Documents humans read → ✅ Supported
+- 📊 **CSV** → Data tables for spreadsheets → ❌ Not supported
+- 🎥 **MP4** → Video content → ❌ Not supported
+- 📦 **ZIP** → Container, not content → ❌ Must extract first
 
 </details>
 
