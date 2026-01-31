@@ -852,6 +852,10 @@ Encoder -decoder architecture:
 - Some filter severity settings can be adjusted but may require special permissions.  
 - Responsible AI frameworks and guidelines exist from organizations like Microsoft and NIST.  
 
+<img src='.img/2026-01-31-04-44-50.png' width=300>
+
+<img src='.img/2026-01-31-04-47-06.png' width=700> 
+
 **Definitions**  
 
 - **Identify**: The process of determining potential harms that could arise from an AI system.  
