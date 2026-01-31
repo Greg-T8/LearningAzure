@@ -2062,7 +2062,7 @@ https://datacenters.microsoft.com/globe/explore/
 - Can route traffic to various Azure endpoints such as PaaS services, web apps, public IPs, IPv4/IPv6 addresses, nested endpoints, or even other Traffic Manager profiles.  
 - Time to live (TTL) can be configured to control DNS record caching duration.
 
-
+<img src='.img/2026-01-31-03-36-12.png' width=700> 
 
 **Definitions**  
 
@@ -2103,6 +2103,8 @@ https://datacenters.microsoft.com/globe/explore/
 - Designed for high availability and resilience both within a region and across regions.  
 - Supports global failover: if one region goes down, traffic is routed to another region.  
 - Layer 7 global load balancing is handled separately by Azure Front Door.
+
+<img src='.img/2026-01-31-03-36-55.png' width=500> 
 
 **Definitions**  
 
