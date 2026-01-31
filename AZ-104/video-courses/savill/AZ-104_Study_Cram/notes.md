@@ -2528,6 +2528,18 @@ Can manually trigger failover:
 - Shared Access Signatures (SAS) for scoped, time-limited access  
 - Encryption options for storage data  
 
+<img src='.img/2026-01-31-04-14-22.png' width=500>
+
+<img src='.img/2026-01-31-04-15-05.png' width=300>
+
+SAS on the account level:
+
+<img src='.img/2026-01-31-04-16-10.png' width=500>
+
+SAS on the blob level:
+
+<img src='.img/2026-01-31-04-16-25.png' width=500> 
+
 **Definitions**  
 
 - **Access Keys**: Two keys provided per storage account to authenticate and authorize access; having two allows key rotation without service interruption.  
@@ -2539,7 +2551,7 @@ Can manually trigger failover:
 
 - Storage accounts have two access keys to enable seamless key regeneration and rotation.  
 - RBAC roles include Blob Data Reader, Blob Data Contributor, Blob Data Owner, File Data, Queue Data, and Table Data roles.  
-- Access keys can be disabled to block their use entirely; however, disabling access keys also disables SAS tokens since SAS tokens are signed by access keys.  
+- Access keys can be disabled to block their use entirely; however, **disabling access keys also disables SAS tokens since SAS tokens are signed by access keys.**
 - SAS tokens allow granular control over permissions, services, time validity, and IP ranges.  
 - Encryption by default uses Microsoft-managed platform keys; customers can opt for customer-managed keys via Azure Key Vault.  
 
