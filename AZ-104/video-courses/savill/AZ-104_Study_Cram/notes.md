@@ -1845,8 +1845,6 @@ https://datacenters.microsoft.com/globe/explore/
 
 ## Azure Bastion
 
-https://www.youtube.com/watch?v=0Knf9nub4-k&t=3568s
-
 **Timestamp**: 02:08:03 – 02:10:24
 
 **Key Concepts**  
@@ -1856,6 +1854,8 @@ https://www.youtube.com/watch?v=0Knf9nub4-k&t=3568s
 - Integrates with Azure Entra for enhanced security via conditional access policies.  
 - Deploys into a dedicated subnet called the Azure Bastion subnet.  
 - Different SKUs (Basic, Standard) offer varying levels of functionality and scalability.  
+
+<img src='.img/2026-01-31-03-20-56.png' width=700> 
 
 **Definitions**  
 
