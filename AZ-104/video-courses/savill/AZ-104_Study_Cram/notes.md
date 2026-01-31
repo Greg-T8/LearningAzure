@@ -2482,6 +2482,10 @@ Can manually trigger failover:
 - Azure File Sync enables synchronization between on-premises Windows file shares and Azure Files.  
 - Tiering capability in Azure File Sync allows offloading less-used files to the cloud to save local storage space.  
 
+<img src='.img/2026-01-31-04-11-16.png' width=700> 
+
+<img src='.img/2026-01-31-04-13-19.png' width=500>
+
 **Definitions**  
 
 - **Azure Files**: A cloud service that offers fully managed file shares accessible via SMB protocol, supporting various performance tiers and data protection features.  
