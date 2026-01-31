@@ -2209,6 +2209,13 @@ https://datacenters.microsoft.com/globe/explore/
 
 <img src='.img/2026-01-31-03-50-48.png' width=700>
 
+<img src='.img/2026-01-31-03-51-42.png' width=700> 
+
+<img src='.img/2026-01-31-03-52-46.png' width=700>
+
+<img src='.img/2026-01-31-03-56-38.png' width=500> 
+
+
 **Definitions**  
 
 - **Storage Account**: A container in Azure that holds all storage data objects like blobs, files, queues, and tables, scoped to a region with specific performance and redundancy settings.  
