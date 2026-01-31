@@ -2585,6 +2585,15 @@ SAS on the blob level:
 - Encryption scopes provide flexibility without needing separate storage accounts for different encryption keys.  
 - Blob uploads can specify an encryption scope if no container-level scope is set.  
 
+<img src='.img/2026-01-31-04-17-20.png' width=400>
+
+<img src='.img/2026-01-31-04-17-49.png' width=500>
+
+<img src='.img/2026-01-31-04-18-24.png' width=700> 
+
+<img src='.img/2026-01-31-04-18-33.png' width=500>
+
+
 **Definitions**  
 
 - **Platform-managed keys**: Encryption keys managed by Microsoft by default for Azure Storage encryption.  
