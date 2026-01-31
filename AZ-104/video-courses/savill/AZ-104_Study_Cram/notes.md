@@ -2393,6 +2393,15 @@ https://datacenters.microsoft.com/globe/explore/
 - Filters can be based on blob name, BLOB index keys, or other metadata.  
 - Automation helps avoid manual and cumbersome tier management.  
 
+<img src='.img/2026-01-31-04-07-35.png' width=700>
+
+<img src='.img/2026-01-31-04-07-47.png' width=700>
+
+Can manually trigger failover:
+
+<img src='.img/2026-01-31-04-07-59.png' width=700> 
+
+
 **Definitions**  
 
 - **Lifecycle management**: A system to create rules that automatically move or delete data based on access patterns, age, or other filters to optimize storage costs and accessibility.  
