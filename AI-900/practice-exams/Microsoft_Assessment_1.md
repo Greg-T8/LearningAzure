@@ -51,14 +51,112 @@ Key phrase extraction would only tell you "this article is about technology" —
 
 <img src='.img/2026-01-31-05-01-55.png' width=700>
 
+<details>
+<summary>Click to expand</summary>
+
+## Why You Missed This Question
+
+You selected **Text Translation** as part of Azure Speech service, but it actually belongs to a different Azure service. You got 2 out of 3 correct!
+
+### The Key Distinction: Speech vs. Translator Services
+
+| Azure Service | Features |
+|---------------|----------|
+| **Azure Speech** | Language identification, Speaker recognition, Voice assistants, Speech-to-text, Text-to-speech |
+| **Azure Translator** | Text translation, Document translation |
+
+### Why Text Translation is NOT Part of Speech Service
+
+This is a common mix-up because both services deal with language. Here's the conceptual difference:
+
+- **Azure Speech** = Deals with **audio/voice** processing
+  - Converting speech ↔ text
+  - Identifying *who* is speaking
+  - Identifying *what language* is being spoken
+  - Building voice-enabled assistants
+
+- **Azure Translator** = Deals with **text/document** conversion between languages
+  - Translating written text from one language to another
+  - Translating entire documents
+
+### The Correct Three Answers
+
+| ✅ Correct | Why It's Part of Speech |
+|-----------|------------------------|
+| **Language Identification** | Detects which language is being *spoken* in audio |
+| **Speaker Recognition** | Identifies or verifies *who* is speaking based on voice |
+| **Voice Assistants** | Builds conversational voice-driven experiences |
+
+### Quick Memory Trick
+
+Ask yourself: **"Does this feature involve audio/voice?"**
+
+- **Yes** → Azure Speech
+- **No, just text** → Azure Translator
+
+Text translation works on written text without any audio component, so it belongs to Translator, not Speech.
+
+</details>
+
 ---
 
 <img src='.img/2026-01-31-05-03-17.png' width=700>
 
+<details>
+<summary>Click to expand</summary>
+
+
+
+</details>
+
 ---
 
-
 <img src='.img/2026-01-31-05-05-27.png' width=700>
+
+<details>
+<summary>Click to expand</summary>
+
+## Why You Missed This Question
+
+You selected **Extracting handwritten text from online images** as an NLP workload, but it's actually a **Computer Vision** workload, not NLP. You got 1 out of 2 correct!
+
+### The Key Distinction: NLP vs. Computer Vision
+
+| AI Workload Type | What It Processes | Examples |
+|------------------|-------------------|----------|
+| **Natural Language Processing (NLP)** | **Text/Language** — understanding, analyzing, or transforming written or spoken words | Sentiment analysis, Translation, Text summarization, Named entity recognition |
+| **Computer Vision** | **Images/Video** — extracting information from visual content | OCR (text extraction from images), Image tagging, Object detection, Facial recognition |
+
+### Why Your Answers Were Scored This Way
+
+| Your Selection | Correct? | Why |
+|----------------|----------|-----|
+| ✅ Performing sentiment analysis on social media data | Correct | Analyzes **text** to determine emotional tone (positive/negative/neutral) — pure NLP |
+| ❌ Extracting handwritten text from online images | Incorrect | Uses **OCR (Optical Character Recognition)** which is a **Computer Vision** task |
+| ⬜ Translating text between languages from product reviews | Should have selected | Converts **text** from one language to another — pure NLP (Azure Translator) |
+
+### The Tricky Part Explained
+
+"Extracting handwritten text from images" involves text, which is why it seems like NLP. However:
+
+- **The INPUT is an image** → Computer Vision analyzes the visual pixels
+- **The OUTPUT is text** → But the AI workload itself is image processing (OCR)
+
+Think of it this way:
+
+- **NLP starts with text** → processes text
+- **Computer Vision starts with images** → even if it outputs text
+
+### Quick Memory Trick
+
+Ask: **"What is the AI analyzing as input?"**
+
+- **Text/Language** → NLP
+- **Images/Video** → Computer Vision
+
+Even though OCR *produces* text, it *analyzes* images — so it's Computer Vision! 🖼️
+
+</details>
 
 ---
 
