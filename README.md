@@ -31,18 +31,18 @@ Ongoing learning beyond certification prep — tracking Azure updates and deep d
 
 | Date | AI-900 | AZ-104 | Total |
 |------|--------|--------|-------|
+| Sat, Jan 31 | 🟢 107 | 🟢 86 | **193** |
 | Fri, Jan 30 | 🟢 59 | 🟢 101 | **160** |
 | Thu, Jan 29 | 🟢 28 | 🟢 64 | **92** |
 | Wed, Jan 28 | 🟢 30 | 🟢 59 | **89** |
 | Tue, Jan 27 | 🟢 87 | 🟢 60 | **147** |
 | Mon, Jan 26 | 0 | 0 | 0 |
 | Sun, Jan 25 | 0 | 🟢 24 | **24** |
-| Sat, Jan 24 | 0 | 🟢 23 | **23** |
-| **Total** | **204** | **331** | **535** |
+| **Total** | **311** | **394** | **705** |
 
 *🟢 = Activity on this day (commits with file changes in that certification folder)*
 
-*Last updated: January 30, 2026 at 08:12 CST*
+*Last updated: January 31, 2026 at 08:05 CST*
 
 <!-- COMMIT_STATS_END -->
 
