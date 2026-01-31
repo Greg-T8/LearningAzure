@@ -402,7 +402,6 @@ Encoder -decoder architecture:
 - Large language models are computationally expensive to train and run inference on.  
 - There is ongoing work to create smaller, task-focused language models that are cheaper and faster to train and tune.
 
-
 **Definitions**  
 
 - **Transformer model**: A neural network architecture that uses self-attention to process input data, enabling it to keep track of context over long sequences.  
@@ -429,8 +428,6 @@ Encoder -decoder architecture:
 ---
 
 ## OpenAI and GPT
-
-https://youtu.be/Ch6KE7KxHGM?si=EN8LLNKd5VpPkTde&t=1655
 
 **Timestamp**: 00:27:38 – 00:32:20
 
@@ -486,6 +483,8 @@ https://youtu.be/Ch6KE7KxHGM?si=EN8LLNKd5VpPkTde&t=1655
 - Microsoft Copilots act as orchestrators that integrate LLM capabilities across various Microsoft products and services.  
 - The quality of user prompts is critical to the effectiveness of Copilots and the responses generated.  
 - Prompt engineering is an important discipline focused on crafting precise and explicit prompts to improve AI output quality.
+
+
 
 **Definitions**  
 
@@ -660,6 +659,8 @@ https://youtu.be/Ch6KE7KxHGM?si=EN8LLNKd5VpPkTde&t=1655
 - Creating the Azure OpenAI service instance itself does not incur cost; charges apply only for usage.  
 - Various models available include GPT-3.5 turbo, GPT-4, fine-tuned models, image models, and embedding models.  
 
+<img src='.img/2026-01-31-04-37-22.png' width=500>
+
 **Definitions**  
 
 - **Azure OpenAI**: A cloud service by Microsoft that hosts OpenAI’s large language models, allowing developers to deploy and use these models via Azure.  
@@ -704,6 +705,8 @@ https://youtu.be/Ch6KE7KxHGM?si=EN8LLNKd5VpPkTde&t=1655
 - Available models include GPT-3.5 Turbo, GPT-4, fine-tuned models, image models, and embedding models.  
 - Context size varies by model.
 
+<img src='.img/2026-01-31-04-38-00.png' width=500>
+
 **Definitions**  
 
 - **Tokens**: Units of text processed by the model, used to calculate usage and pricing.  
@@ -745,6 +748,12 @@ https://youtu.be/Ch6KE7KxHGM?si=EN8LLNKd5VpPkTde&t=1655
 - Various parameters can be tuned such as maximum response size (token limit), creativity, and randomness.  
 - Grounding the model with external data sources (internet search, databases, HR systems) is important for domain-specific or updated knowledge.  
 - Microsoft offers tools like the Semantic Kernel to orchestrate calls to the language model and integrate with other Azure services like Azure AI Search.
+
+<img src='.img/2026-01-31-04-38-31.png' width=700> 
+
+<img src='.img/2026-01-31-04-38-46.png' width=700> 
+
+<img src='.img/2026-01-31-04-39-21.png' width=500> 
 
 **Definitions**  
 
@@ -792,6 +801,8 @@ https://youtu.be/Ch6KE7KxHGM?si=EN8LLNKd5VpPkTde&t=1655
 - Integration with multiple data sources such as BLOB storage, databases (Postgres SQL, Cosmos DB, MongoDB), and data lakes.  
 - Enterprise-grade features including role-based access control, network integration, and governance boundaries.  
 - Importance of responsible AI practices when deploying generative AI systems.
+
+<img src='.img/2026-01-31-04-41-48.png' width=500>
 
 **Definitions**  
 
