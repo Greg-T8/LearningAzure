@@ -1943,6 +1943,8 @@ https://datacenters.microsoft.com/globe/explore/
 - Two SKUs exist: Basic (free) and Standard (paid), with different capabilities and SLAs.  
 - Floating IP allows the back-end resource to see the front-end IP instead of its own IP.  
 
+<img src='.img/2026-01-31-03-26-59.png' width=500> 
+
 **Definitions**  
 
 - **Azure Load Balancer**: A Layer 4 load balancing service in Azure that distributes incoming TCP/UDP traffic across multiple back-end resources.  
@@ -2006,6 +2008,9 @@ https://datacenters.microsoft.com/globe/explore/
 - Health probes monitor backend target availability.  
 - App Gateway is regional; for global load balancing, Azure Traffic Manager (DNS-based) can be used.
 
+<img src='.img/2026-01-31-03-32-29.png' width=700>
+
+
 **Definitions**  
 
 - **Floating IP**: A feature where the backend pool member sees the frontend IP address instead of its own IP, useful for certain communication scenarios.  
@@ -2056,6 +2061,8 @@ https://datacenters.microsoft.com/globe/explore/
 - Supports multiple routing methods including performance-based, priority, weighted, geographic, multi-value, and subnet-based routing.  
 - Can route traffic to various Azure endpoints such as PaaS services, web apps, public IPs, IPv4/IPv6 addresses, nested endpoints, or even other Traffic Manager profiles.  
 - Time to live (TTL) can be configured to control DNS record caching duration.
+
+
 
 **Definitions**  
 
