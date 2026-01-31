@@ -2215,6 +2215,8 @@ https://datacenters.microsoft.com/globe/explore/
 
 <img src='.img/2026-01-31-03-56-38.png' width=500> 
 
+<img src='.img/2026-01-31-04-03-20.png' width=700> 
+
 
 **Definitions**  
 
@@ -2330,7 +2332,11 @@ https://datacenters.microsoft.com/globe/explore/
 - Costs depend on both storage capacity and transaction frequency.  
 - Lifecycle management can automate tier transitions and deletions.
 
+<img src='.img/2026-01-31-04-03-43.png' width=500>
 
+<img src='.img/2026-01-31-04-04-03.png' width=700>
+
+<img src='.img/2026-01-31-04-05-26.png' width=900> 
 
 **Definitions**  
 
