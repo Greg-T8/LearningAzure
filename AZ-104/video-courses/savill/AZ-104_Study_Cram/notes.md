@@ -3123,8 +3123,6 @@ SAS on the blob level:
 
 <img src='.img/2026-02-01-05-22-55.png' width=600>
 
-
-
 **Definitions**  
 
 - **Activity Log**: A free log that records control plane changes at the subscription level.  
@@ -3178,6 +3176,8 @@ SAS on the blob level:
 - Action groups define the actions triggered by alerts, such as sending SMS, emails, calling functions, webhooks, runbooks, or integrating with ITSM systems.  
 - Alert processing rules provide a centralized, scalable way to manage alert responses and suppressions, improving organization and reducing manual configuration.  
 - Scheduling can be applied to alert processing rules to control when alerts trigger actions or suppressions.
+
+<img src='.img/2026-02-01-05-25-46.png' width=400>
 
 **Definitions**  
 
