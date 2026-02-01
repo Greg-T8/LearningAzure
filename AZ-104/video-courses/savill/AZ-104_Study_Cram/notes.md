@@ -3234,6 +3234,12 @@ SAS on the blob level:
 - Tables within a workspace can be configured to use either analytics or basic logs.  
 - Network Watcher integrates with Log Analytics for network health and troubleshooting.
 
+<img src='.img/2026-02-01-05-27-51.png' width=500> 
+
+<img src='.img/2026-02-01-05-30-30.png' width=500>
+
+<img src='.img/2026-02-01-05-30-46.png' width=500>
+
 **Definitions**  
 
 - **Log Analytics Workspace**: A centralized repository for collecting, storing, and analyzing log data using Kusto Query Language (KQL).  
