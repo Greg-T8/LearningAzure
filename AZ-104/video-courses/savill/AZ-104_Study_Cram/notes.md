@@ -2747,6 +2747,8 @@ SAS on the blob level:
 - Types of cloud services: Infrastructure as a Service (IaaS), Platform as a Service (PaaS), Software as a Service (SaaS).  
 - The goal is to minimize user responsibility to focus on business value rather than infrastructure management.
 
+<img src='.img/2026-02-01-04-53-33.png' width=500>
+
 **Definitions**  
 
 - **Infrastructure as a Service (IaaS)**: Cloud service where the vendor manages physical servers, storage, networking, and hypervisor; the user manages the OS and everything above it (patching, antivirus, backup, disaster recovery, etc.).  
@@ -2796,6 +2798,8 @@ SAS on the blob level:
 - Backup management can be centralized via Azure Backup Center with different vault types (Recovery Services vault for legacy workloads and newer backup vaults for disks, blobs, databases, Kubernetes).  
 - Secure access to VMs is recommended via Azure Bastion to avoid exposing public IPs and reduce attack surface.  
 - Physical hosts and racks correspond to fault domains within data centers, important for availability considerations.
+
+
 
 **Definitions**  
 
