@@ -2904,6 +2904,8 @@ SAS on the blob level:
 - Flexible VMSS allows mixing different VM SKUs and Spot instances within the scale set.  
 - Spot instances use Azure’s spare capacity at lower cost, suitable for interruptible workloads.  
 
+<img src='.img/2026-02-01-05-08-05.png' width=700>
+
 **Definitions**  
 
 - **Virtual Machine Scale Set (VMSS)**: A service that manages a group of identical, load-balanced VMs that can automatically scale in or out based on defined rules.  
