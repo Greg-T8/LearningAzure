@@ -3065,6 +3065,8 @@ SAS on the blob level:
   - Elastic scaling that automatically adjusts based on HTTP load, including pre-warmed instances.  
 - Multiple deployment methods supported: DevOps pipelines, GitHub Actions, direct URL, FTP, zip/file upload.
 
+<img src='.img/2026-02-01-05-17-44.png' width=500>
+
 **Definitions**  
 
 - **App Service Plan**: A set of compute resources (worker nodes) in a specific region that host one or more Azure App Services (web apps).  
