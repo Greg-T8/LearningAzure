@@ -386,7 +386,6 @@ The question asks about **constraints and style** → that's directing the "acto
 
 <img src='.img/2026-01-31-05-31-17.png' width=700>
 
-
 <details>
 <summary>Click to expand</summary>
 
@@ -469,9 +468,121 @@ These are pre-built models you can call via API specifically for converting text
 The question is asking for the *specific Azure OpenAI capability*, not the general field of study! 🎯
 
 </details>
+
 ---
 
 <img src='.img/2026-01-31-05-34-17.png' width=700>
+
+<details>
+<summary>Click to expand</summary>
+
+## Why You Got This Wrong
+
+You selected **Image classification**, but the correct answer is **Object detection**. This is one of the most commonly confused concepts in computer vision!
+
+### The Critical Difference
+
+| Task | What It Does | Real-World Example |
+|------|--------------|-------------------|
+| **Image Classification** | Assigns **one label** to the **entire image** | "This image shows: traffic" or "This image shows: a car" |
+| **Object Detection** ✅ | Finds and labels **multiple individual objects** in the same image | "Car here, bus there, cyclist over there, truck in the corner" |
+
+### Why the Question Requires Object Detection
+
+The question asks: *"What allows you to identify **different vehicle types** in traffic monitoring images?"*
+
+Key phrase: **"different vehicle types"** (plural)
+
+**In a single traffic monitoring image, you typically have:**
+
+- 🚗 Multiple cars
+- 🚌 Buses
+- 🚴 Cyclists
+- 🚚 Trucks
+- 🏍️ Motorcycles
+
+**Object detection** can:
+
+- ✅ Find ALL vehicles in one image
+- ✅ Identify each one separately ("This is a car", "This is a bus", "This is a cyclist")
+- ✅ Draw bounding boxes around each
+- ✅ Give location coordinates
+- ✅ Count how many of each type
+
+**Image classification** would only:
+
+- ❌ Give one overall label: "This is a traffic scene" or "This contains vehicles"
+- ❌ Cannot distinguish individual vehicles
+- ❌ Cannot tell you where they are
+- ❌ Cannot count different types
+
+### The Confusing Part (Where Your Logic Went Wrong)
+
+**Your thinking probably was:**
+> "I need to *classify* what type each vehicle is (car vs. bus vs. cyclist), so this must be *classification*."
+
+**Why this seems logical but is wrong:**
+
+- Yes, you are classifying vehicle types
+- BUT you need to classify **multiple objects** in the same image
+- To do that, you first need to **detect** where each object is
+- Then classify each detected object
+
+**Object detection = Detection + Classification combined!**
+
+Think of it as a two-step process that happens together:
+
+1. **Detect**: "I found 5 objects in this image"
+2. **Classify each**: "Object 1 is a car, Object 2 is a bus, Object 3 is a car, Object 4 is a cyclist, Object 5 is a truck"
+
+### Visual Example
+
+**Traffic monitoring scenario:**
+
+```
+Image Classification output:
+"traffic" ❌
+(Doesn't tell you about individual vehicles)
+
+Object Detection output:
+[Car, coordinates: (120, 340), confidence: 94%]
+[Bus, coordinates: (450, 280), confidence: 91%]
+[Cyclist, coordinates: (80, 420), confidence: 88%]
+[Car, coordinates: (600, 350), confidence: 92%]
+[Truck, coordinates: (300, 250), confidence: 89%]
+✅ (Identifies each vehicle type and location!)
+```
+
+### The Explanation from the Question
+
+The explanation says:
+> "Object detection can be used to evaluate traffic monitoring images to **quickly classify specific vehicle types**, such as car, bus, or cyclist."
+
+Notice it says object detection is used to "classify specific vehicle types" — this is the confusing part! Object detection **includes** classification, but for **multiple objects**.
+
+> "Image classification is part of computer vision that is concerned with the **primary contents of an image**."
+
+"Primary contents" = the overall subject of the whole image, not individual items within it.
+
+### Simple Memory Rule
+
+**Think of the scenario:**
+
+- **One thing** in the image → Image Classification
+  - "What is this image of?" → "A car"
+  
+- **Multiple things** in the image → Object Detection
+  - "What are all the things in this image?" → "A car here, a bus there, a cyclist here..."
+
+### Quick Mnemonic
+
+**"Detection finds the DOTS (multiple objects), Classification labels the WHOLE DOT (single image)"**
+
+Or simply: **"Different types = Detection"** (multiple = detection)
+
+You got confused because object detection *does* involve classifying each object, but the key is it finds and classifies **multiple objects**, not just labeling one whole image! 🎯
+
+</details>
 
 ---
 
