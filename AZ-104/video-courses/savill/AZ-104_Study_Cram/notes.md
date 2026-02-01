@@ -2800,6 +2800,9 @@ SAS on the blob level:
 - Physical hosts and racks correspond to fault domains within data centers, important for availability considerations.
 
 
+<img src='.img/2026-02-01-05-01-29.png' width=700>
+
+<img src='.img/2026-02-01-05-01-06.png' width=700> 
 
 **Definitions**  
 
@@ -2855,6 +2858,8 @@ SAS on the blob level:
 - Availability Sets group VMs across multiple fault domains (racks) to provide resiliency against rack-level failures.  
 - Availability Zones are physically separate locations within an Azure region that isolate power, cooling, networking, and control planes.  
 - Availability Zones offer higher fault tolerance than Availability Sets by protecting against entire data center or power substation failures.  
+
+
 
 **Definitions**  
 
