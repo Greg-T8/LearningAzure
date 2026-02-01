@@ -2631,6 +2631,12 @@ SAS on the blob level:
 - Encryption for managed disks can be handled via disk encryption sets using customer-managed keys or via guest OS encryption (Azure Disk Encryption).  
 - Encryption at host can be combined with disk encryption sets for enhanced security, including encryption of cache files and data in transit.
 
+<img src='.img/2026-02-01-04-42-07.png' width=400>
+
+<img src='.img/2026-02-01-04-44-27.png' width=300>
+
+<img src='.img/2026-02-01-04-45-11.png' width=200>
+
 **Definitions**  
 
 - **Managed Disk**: A disk resource in Azure that abstracts the underlying storage account and page blob, simplifying management and improving scalability.  
@@ -2649,7 +2655,7 @@ SAS on the blob level:
 - Latency examples:  
   - Ultra Disk offers ~0.5 millisecond latency (lowest latency).  
   - Premium SSD offers ~1 millisecond latency.  
-- Disk performance scales with capacity; bigger disks provide better IOPS and throughput.  
+- **Disk performance scales with capacity**; bigger disks provide better IOPS and throughput.  
 - Premium SSD allows selection of performance tiers to temporarily boost performance without resizing the disk.  
 - Disks can only be increased in size; shrinking requires creating a new disk and migrating data.  
 - Premium SSD V2 and Ultra Disk allow independent selection and dynamic modification of IOPS and throughput up to defined limits.  
@@ -2691,6 +2697,8 @@ SAS on the blob level:
 - Azure Portal allows exporting existing resources as ARM JSON templates for reuse and modification.  
 - Bicep is a more human-friendly language that transpiles into ARM JSON, making templates easier to read and maintain.  
 - Azure stores resource metadata internally in JSON format, reflecting the ARM template structure.  
+
+
 
 **Definitions**  
 
