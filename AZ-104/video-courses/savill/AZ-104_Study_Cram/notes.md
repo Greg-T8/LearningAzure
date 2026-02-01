@@ -3001,7 +3001,9 @@ SAS on the blob level:
 - Networking models in AKS: Kubenet, Azure CNI, and Overlay networking  
 - Scaling in AKS at two levels: pods and nodes  
 - Autoscaling tools: Horizontal Pod Autoscaler, KEDA (Kubernetes Event Driven Autoscaler), and Cluster Autoscaler  
-- Bursting capacity to Azure Container Instances (ACI) via virtual kubelet  
+- Bursting capacity to Azure Container Instances (ACI) via virtual kubelet
+
+<img src='.img/2026-02-01-05-13-28.png' width=600>
 
 **Definitions**  
 
