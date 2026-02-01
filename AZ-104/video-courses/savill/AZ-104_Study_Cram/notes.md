@@ -3291,6 +3291,8 @@ SAS on the blob level:
 
 - **Network Watcher**: A network monitoring and diagnostic service that offers insights into network topology, traffic flow, security rules, and connectivity health.  
 
+<img src='.img/2026-02-01-05-31-31.png' width=600>
+
 **Key Facts**  
 
 - Features include:  
