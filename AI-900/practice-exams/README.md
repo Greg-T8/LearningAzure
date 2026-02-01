@@ -1,9 +1,5 @@
 # Practice Exams - AI-900
 
-**Platforms:** [Microsoft Learn](https://learn.microsoft.com/en-us/credentials/certifications/exams/ai-900/practice/assessment?assessment-type=practice&assessmentId=26) | [MeasureUp](https://www.measureup.com/) | [TutorialsDojo](https://tutorialsdojo.com/)
-
----
-
 ##  Practice Test Score History
 
 | Test Type | Date | Overall Score | AI Workloads | Machine Learning | Computer Vision | NLP | Generative AI |
