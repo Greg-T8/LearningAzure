@@ -2859,7 +2859,7 @@ SAS on the blob level:
 - Availability Zones are physically separate locations within an Azure region that isolate power, cooling, networking, and control planes.  
 - Availability Zones offer higher fault tolerance than Availability Sets by protecting against entire data center or power substation failures.  
 
-
+<img src='.img/2026-02-01-05-02-34.png' width=700> 
 
 **Definitions**  
 
