@@ -197,7 +197,60 @@ Even though OCR *produces* text, it *analyzes* images — so it's Computer Visio
 
 <img src='.img/2026-01-31-05-18-29.png' width=700>
 
+<details>
+<summary>Click to expand</summary>
 
+## Why You Missed This Question
+
+You selected **Add a dataset**, but the correct answer is **Create a pipeline**. This is about understanding the correct workflow order in Azure Machine Learning designer.
+
+### The Correct Workflow Order
+
+In Azure Machine Learning designer, the steps must follow this sequence:
+
+| Step | Action | Why |
+|------|--------|-----|
+| **1. Create a pipeline** ✅ | Establish the workflow container | The pipeline is the canvas/workspace where everything else happens |
+| **2. Add a dataset** | Import your training data | You need data to work with |
+| **3. Add training modules** | Configure preprocessing, algorithms, etc. | Define how the model will be trained |
+| **4. Deploy a service** | Make the trained model available | Put the model into production |
+
+### Why "Create a Pipeline" Comes First
+
+Think of a **pipeline** like a blank canvas or project workspace:
+
+- It's the **container** that holds all your ML workflow components
+- You **cannot add a dataset** without first having a pipeline to add it to
+- Everything else (data, modules, training) happens **inside** the pipeline
+
+### Why "Add a Dataset" is NOT First
+
+While it's true you need data to train a model, you can't just add data into thin air — you need a structured workspace first:
+
+| Your Thinking | The Reality |
+|---------------|-------------|
+| "I need data first to do anything" | "I need a workspace first to hold the data" |
+| Data is the foundation | Pipeline is the foundation; data is the first ingredient |
+
+### Real-World Analogy
+
+| Scenario | Equivalent |
+|----------|------------|
+| **Building a meal** | You need a kitchen/workspace **before** you add ingredients |
+| **Azure ML Designer** | You need a pipeline **before** you add a dataset |
+
+You wouldn't throw ingredients on the counter without setting up your workspace — same concept here!
+
+### Quick Memory Trick
+
+**Pipeline = Container First**
+
+- Think: "**P**ipeline comes before everything"
+- Or: "You can't add ingredients without a **P**an (Pipeline)"
+
+The pipeline is your project structure — without it, there's nowhere to put your dataset! 🎯
+
+</details>
 
 
 ---
