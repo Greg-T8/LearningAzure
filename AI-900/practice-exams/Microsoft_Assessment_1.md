@@ -197,9 +197,70 @@ Even though OCR *produces* text, it *analyzes* images — so it's Computer Visio
 
 <img src='.img/2026-01-31-05-18-29.png' width=700>
 
+
+
+
 ---
 
 <img src='.img/2026-01-31-05-23-10.png' width=700>
+
+<details>
+<summary>Click to expand</summary>
+
+## Why You Missed This Question
+
+You selected **Metaprompt and Grounding**, but the correct answer is **Safety System**. This question tests your understanding of the different layers in responsible AI architecture.
+
+### The Four Layers of Responsible AI Architecture
+
+| Layer | Purpose | Examples |
+|-------|---------|----------|
+| **Model** | The underlying AI model itself | GPT-4, GPT-3.5-turbo |
+| **Safety System** | Platform-level protections that filter/monitor content | **Content filters**, abuse monitoring, rate limiting |
+| **Metaprompt & Grounding** | Instructions and context to guide model behavior | System prompts, RAG data, few-shot examples |
+| **User Experience** | How users interact with the system | UI design, input validation, user controls |
+
+### Why Safety System is Correct
+
+**Content filters** are applied at the **Safety System layer** because they are:
+
+- **Platform-level configurations** (not prompt-based instructions)
+- **Automated screening mechanisms** that evaluate content before and after the model processes it
+- **Policy enforcement tools** that classify content into severity levels:
+  - **Categories**: Hate, Sexual, Violence, Self-harm
+  - **Severity**: Safe, Low, Medium, High
+- **Hard stops** that can block requests/responses regardless of what the model wants to generate
+
+### Why Metaprompt & Grounding is NOT Correct
+
+**Metaprompts and grounding** work differently:
+
+| Metaprompt & Grounding | Safety System (Content Filters) |
+|------------------------|--------------------------------|
+| "Please don't generate harmful content" (instruction) | Automatically scans and blocks harmful content (enforcement) |
+| Model *interprets* and *follows* guidance | Filter *intercepts* and *prevents* output |
+| Can be bypassed through clever prompting (jailbreaks) | Cannot be bypassed — runs outside the model |
+| Shapes behavior through context | Enforces policy through detection |
+
+### The Key Distinction
+
+Think of it like this:
+
+- **Metaprompt/Grounding** = Asking someone politely to behave ☝️
+- **Safety System** = Installing a security checkpoint that physically blocks entry 🚧
+
+Content filters are **technical safeguards**, not **behavioral guidance**.
+
+### Quick Memory Trick
+
+**"Filters" = Safety System**
+
+- Content **filters** filter at the **safety system** layer
+- It's a platform feature, not a prompt technique
+- Think: **System-level protection** = Safety System
+
+</details>
+
 
 ---
 
