@@ -314,15 +314,161 @@ Content filters are **technical safeguards**, not **behavioral guidance**.
 
 </details>
 
-
 ---
 
 <img src='.img/2026-01-31-05-25-11.png' width=700>
+
+<details>
+<summary>Click to expand</summary>
+
+## Why You Missed This Question
+
+You selected **Data grounding**, but the correct answer is **System messages**. This tests your understanding of different prompt engineering techniques and their specific purposes.
+
+### The Key Distinction: What Each Technique Does
+
+| Technique | Purpose | Example Use |
+|-----------|---------|-------------|
+| **System messages** ✅ | Sets **constraints, style, tone, behavior, and rules** for the model | "You are a professional assistant. Be concise and formal. Never discuss politics." |
+| **Data grounding** | Provides **factual data/context** to make responses accurate | "Here is our product catalog: [data]. Answer questions based only on this." |
+| **Embeddings** | Vector representations for **semantic search/matching** | Finding similar documents or questions |
+| **Tokenization** | Breaking text into **processable units** for the model | Converting "Hello world" → ["Hello", " world"] |
+
+### Why System Messages is Correct
+
+The question specifically asks: *"identify **constraints and styles** for responses"*
+
+**System messages** are designed exactly for this:
+
+- Set the **personality** ("Be friendly" vs "Be formal")
+- Define **constraints** ("Don't discuss competitors", "Keep responses under 100 words")
+- Establish **tone** (Professional, casual, technical)
+- Set **behavioral rules** ("Always cite sources", "Never make assumptions")
+
+### Why Data Grounding is NOT Correct
+
+**Data grounding** (also called RAG - Retrieval Augmented Generation) serves a different purpose:
+
+| System Messages | Data Grounding |
+|-----------------|----------------|
+| "**How** should I respond?" | "**What facts** should I use?" |
+| Sets style and constraints | Provides factual information |
+| "Be professional and concise" | "Here's our company's policy document" |
+| Controls **behavior** | Controls **accuracy** |
+
+**Example to illustrate the difference:**
+
+```
+System Message: "You are a customer service bot. Be friendly and empathetic. 
+Keep responses under 50 words. Never share internal policies."
+
+Data Grounding: "Our return policy: 30-day returns with receipt. 
+Shipping takes 3-5 business days."
+
+User: "What's your return policy?"
+
+Result: The system message ensures a FRIENDLY, CONCISE response.
+The data grounding ensures the FACTS are correct.
+```
+
+### Quick Memory Trick
+
+Think of it like directing an actor:
+
+- **System messages** = Director's instructions on **how to act** (tone, style, character)
+- **Data grounding** = The **script** with factual content to deliver
+
+The question asks about **constraints and style** → that's directing the "actor" → **System messages**! 🎬
+
+</details>
 
 ---
 
 <img src='.img/2026-01-31-05-31-17.png' width=700>
 
+
+<details>
+<summary>Click to expand</summary>
+
+## Why You Missed This Question
+
+You selected **Machine learning**, but the correct answer is **Embeddings**. This question tests your knowledge of specific Azure OpenAI capabilities and terminology.
+
+### The Key Distinction: General vs. Specific
+
+| Concept | Scope | What It Means |
+|---------|-------|---------------|
+| **Machine learning** | Broad field/category | The overall discipline of training computers to learn from data |
+| **Embeddings** ✅ | Specific technique/model | A particular Azure OpenAI model that converts text to numerical vectors for similarity analysis |
+
+### Why Embeddings is Correct
+
+**Embeddings** is the precise answer because it's a specific Azure OpenAI service/model designed exactly for the stated purpose:
+
+**What embeddings do:**
+
+- Convert text into **numerical vectors** (arrays of numbers)
+- Enable **semantic search** — find similar content based on meaning, not just keywords
+- Allow **classification** — group similar texts together
+- Enable **comparison** — measure how similar two pieces of text are
+
+**Example:**
+
+```
+Input texts:
+- "The cat sat on the mat"
+- "A feline rested on the rug"
+- "I need to buy groceries"
+
+Embeddings converts to vectors:
+- [0.2, 0.8, 0.1, ...] ← First text
+- [0.3, 0.7, 0.2, ...] ← Second text (similar vector!)
+- [0.9, 0.1, 0.6, ...] ← Third text (different vector)
+
+Result: The first two are identified as similar in meaning
+```
+
+### Why Machine Learning is NOT Correct
+
+**Machine learning** is too broad and generic for this context:
+
+| Machine Learning (Too Broad) | Embeddings (Specific) |
+|------------------------------|----------------------|
+| An entire field of AI | A specific model/technique |
+| Includes hundreds of techniques | One specific approach |
+| Like saying "technology" | Like saying "smartphone" |
+| Can include regression, classification, clustering, neural networks, etc. | Specifically: text → vectors for similarity |
+
+**The trap:** You're absolutely right that machine learning *can* do these things, but in the context of **Azure OpenAI services**, when discussing text similarity comparison, the specific term/product is **Embeddings**.
+
+### The Azure OpenAI Context
+
+In Azure OpenAI, **Embeddings** refers to specific models like:
+
+- `text-embedding-ada-002`
+- `text-embedding-3-small`
+- `text-embedding-3-large`
+
+These are pre-built models you can call via API specifically for converting text to vectors.
+
+### Analogy to Understand This Better
+
+| Question | Too General Answer | Specific Correct Answer |
+|----------|-------------------|------------------------|
+| "What do you use to browse the internet?" | "Software" ❌ | "A web browser" ✅ |
+| "What searches, classifies, and compares text for similarity?" | "Machine learning" ❌ | "Embeddings" ✅ |
+
+### Quick Memory Trick
+
+**"Embeddings = Em-BEDDING text into vectors"**
+
+- **Em**bed text into numerical space
+- Think: "Text gets **embedded** in vector form"
+- When you see "similarity search" or "semantic search" → Think **Embeddings**
+
+The question is asking for the *specific Azure OpenAI capability*, not the general field of study! 🎯
+
+</details>
 ---
 
 <img src='.img/2026-01-31-05-34-17.png' width=700>
