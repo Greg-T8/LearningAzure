@@ -2951,6 +2951,8 @@ SAS on the blob level:
 - For more complex needs (scaling, orchestration, networking, storage), Kubernetes is used as the container orchestrator.  
 - Azure Kubernetes Service (AKS) is Azure’s managed Kubernetes offering.
 
+<img src='.img/2026-02-01-05-12-49.png' width=700>
+
 **Definitions**  
 
 - **Container**: A lightweight, isolated user-mode sandbox that shares the host OS kernel, used to run application images.  
