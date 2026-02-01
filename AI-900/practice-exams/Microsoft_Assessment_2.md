@@ -6,7 +6,7 @@ Second attempt at the Microsoft practice assessment for AI-900.
 
 ## Assessment Results
 
-<!-- Insert screenshot here -->
+<img src='.img/2026-02-01-06-48-45.png' width=700>
 
 ---
 
