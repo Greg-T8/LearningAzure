@@ -4,13 +4,6 @@
 
 ---
 
-## 📋 Assessment
-
-- [Microsoft Assessment AI-900: Azure AI Fundamentals (Attempt 1)](./Microsoft_Assessment_1.md)
-- [Microsoft Assessment AI-900: Azure AI Fundamentals (Attempt 2)](./Microsoft_Assessment_2.md)
-
----
-
 ##  Practice Test Score History
 
 | Test Type | Date | Overall Score | AI Workloads | Machine Learning | Computer Vision | NLP | Generative AI |
