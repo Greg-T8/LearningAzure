@@ -3117,6 +3117,14 @@ SAS on the blob level:
 - Guest OS monitoring is possible via Azure Monitor agent and guest metrics.  
 - Alerts can be created based on activity logs, metrics, or log queries to proactively notify issues.
 
+<img src='.img/2026-02-01-05-21-21.png' width=700> 
+
+<img src='.img/2026-02-01-05-22-45.png' width=700>
+
+<img src='.img/2026-02-01-05-22-55.png' width=600>
+
+
+
 **Definitions**  
 
 - **Activity Log**: A free log that records control plane changes at the subscription level.  
