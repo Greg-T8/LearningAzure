@@ -3179,6 +3179,12 @@ SAS on the blob level:
 
 <img src='.img/2026-02-01-05-25-46.png' width=400>
 
+<img src='.img/2026-02-01-05-26-46.png' width=700>
+
+<img src='.img/2026-02-01-05-27-03.png' width=700>
+
+<img src='.img/2026-02-01-05-27-27.png' width=500>
+
 **Definitions**  
 
 - **Alert**: A configured notification or action triggered when specific conditions are met in monitoring data.  
