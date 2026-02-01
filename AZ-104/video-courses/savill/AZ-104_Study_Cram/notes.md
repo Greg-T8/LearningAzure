@@ -2698,7 +2698,9 @@ SAS on the blob level:
 - Bicep is a more human-friendly language that transpiles into ARM JSON, making templates easier to read and maintain.  
 - Azure stores resource metadata internally in JSON format, reflecting the ARM template structure.  
 
+<img src='.img/2026-02-01-04-47-51.png' width=300>
 
+<img src='.img/2026-02-01-04-48-23.png' width=700>
 
 **Definitions**  
 
