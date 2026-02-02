@@ -55,6 +55,9 @@ I took this assessment on Friday, January 30th, after reviewing the Microsoft Le
 
 ---
 
+<img src='.img/2026-01-30-06-12-43.png' width=700>
+
+---
 
 
 
@@ -134,9 +137,6 @@ I took this assessment on Friday, January 30th, after reviewing the Microsoft Le
 
 ---
 
-<img src='.img/2026-01-30-06-12-43.png' width=700>
-
----
 
 <img src='.img/2026-01-30-06-15-31.png' width=700>
 
