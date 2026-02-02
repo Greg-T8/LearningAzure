@@ -21,7 +21,7 @@ I took this assessment on Friday, January 30th, after reviewing the Microsoft Le
 <details>
 <summary>Click to expand explanation</summary>
 
-## Your Answer vs. The Correct Sequence
+**Your Answer vs. The Correct Sequence**
 
 **Your selected order:**
 
@@ -30,11 +30,11 @@ I took this assessment on Friday, January 30th, after reviewing the Microsoft Le
 3. Register an authentication method for SSPR ✗
 4. Enable SSPR with the Selected option ✗
 
-## The Issue
+**The Issue:**
 
 The main problem is with **steps 2-4**. You're trying to select a group for SSPR (step 2) before SSPR is even enabled (step 4). Additionally, you should configure the authentication method requirements before enabling SSPR.
 
-## The Correct Order Should Be
+**The Correct Order Should Be:**
 
 1. **Create a Microsoft Entra group and add users to the group** ✓
    - This satisfies the requirement to "add and remove users" by managing group membership
@@ -50,7 +50,7 @@ The main problem is with **steps 2-4**. You're trying to select a group for SSPR
    - Now you can specify which group(s) should have SSPR enabled
    - Users can be added/removed from SSPR by managing group membership
 
-## Key Takeaway
+**Key Takeaway:**
 
 You must **configure the authentication requirements and enable SSPR** before you can **assign it to specific groups**. Think of it as: configure what → enable it → specify who gets it.
 
@@ -65,12 +65,12 @@ You must **configure the authentication requirements and enable SSPR** before yo
 
 Looking at your selected answers, I can help you understand why this approach doesn't meet the requirements.
 
-## Your Selected Answer
+**Your Selected Answer:**
 
 1. ✓ Assign the built-in Contributor role to the SalesDepartment group for the RG1 resource group
 2. ✗ Assign the built-in Reader role to the SalesDepartment group at the subscription level
 
-## The Problem with Your Answer
+**The Problem with Your Answer:**
 
 **The second selection violates the least privilege principle:**
 
@@ -82,7 +82,7 @@ When you assign **Reader at the subscription level**, the Sales team gets read a
 
 The requirement explicitly states: "The Sales team should be able to read resources in RG1 and RG2 **only**."
 
-## The Correct Answer Should Be
+**The Correct Answer Should Be:**
 
 1. **Assign the built-in Contributor role to the SalesDepartment group for the RG1 resource group** ✓
    - Allows creating resources in RG1
@@ -94,7 +94,7 @@ The requirement explicitly states: "The Sales team should be able to read resour
    - Does NOT allow creating resources
    - No access to RG3
 
-## Why This Meets All Requirements
+**Why This Meets All Requirements:**
 
 ✓ Read resources in RG1 and RG2 only (not RG3)  
 ✓ Create resources in only RG1  
@@ -102,7 +102,7 @@ The requirement explicitly states: "The Sales team should be able to read resour
 ✓ Cannot create resource groups (no subscription-level permissions)  
 ✓ Follows least privilege principle
 
-## Key Takeaway
+**Key Takeaway:**
 
 Avoid assigning roles at higher scopes (like subscription level) when you can achieve the same result at lower scopes (resource group level). Always grant the minimum access needed at the most specific scope possible.
 
@@ -118,16 +118,16 @@ Avoid assigning roles at higher scopes (like subscription level) when you can ac
 
 Looking at your selected answers, I can help you understand what went wrong.
 
-## Your Selected Answers
+**Your Selected Answers:**
 
 1. ✗ Create a tag named CostCenter and assign it to each **resource group**
 2. ✓ Instruct the accounting department to use the Cost Analysis blade in the subscription panel
 
-## The Problem with Your Answer
+**The Problem with Your Answer:**
 
 You got **one correct** (Cost Analysis), but your tagging strategy is at the **wrong level of granularity**.
 
-### Why Resource Group Tagging is Insufficient
+**Why Resource Group Tagging is Insufficient:**
 
 **Resource group-level tags** can cause issues when:
 
@@ -142,7 +142,7 @@ For example, if RG1 contains:
 
 Tagging the resource group only gives you one cost center value, preventing accurate cost allocation.
 
-## The Correct Answers Should Be
+**The Correct Answers Should Be:**
 
 1. **Create a tag named CostCenter and assign it to each resource** ✓
    - Provides granular cost tracking at the resource level
@@ -154,11 +154,11 @@ Tagging the resource group only gives you one cost center value, preventing accu
    - Azure Account Center is NOT available for CSP subscriptions
    - Cost Analysis can filter and group costs by tags
 
-## Why "Azure Account Center" is Wrong
+**Why "Azure Account Center" is Wrong:**
 
 The **Azure Account Center** is not accessible in **Cloud Service Provider (CSP) managed subscriptions**. Only direct Enterprise Agreement (EA) or other subscription types have access to it.
 
-## Key Takeaway
+**Key Takeaway:**
 
 For cost center allocation:
 
@@ -179,19 +179,19 @@ For cost center allocation:
 
 Looking at your selected answers, I can see you've made the same mistake again with this question (which appears to be the same as image 3).
 
-## Your Selected Answers
+**Your Selected Answers:**
 
 1. ✗ Your users have the Storage Blob Data Reader role assigned in the storage accounts
 2. ✗ Your users have the Storage Blob Data Contributor role assigned in the storage accounts
 
-## The Problem - You're Still Selecting SOLUTIONS Instead of PROBLEMS
+**The Problem - You're Still Selecting SOLUTIONS Instead of PROBLEMS:**
 
 The error message clearly states:
 > "**Unable to list resources in account due to inadequate permissions**. Permission to list containers or to list account keys is required."
 
 You selected answers that indicate users **already have proper data access roles**. If they had Storage Blob Data Reader or Contributor, they **wouldn't be getting this error** - the problem would already be solved!
 
-## The Correct Answers Should Be
+**The Correct Answers Should Be:**
 
 1. **Your users have the Read role assigned in the storage accounts** ✓
    - **This IS a problem**: The generic "Read" role only provides management plane access
@@ -202,7 +202,7 @@ You selected answers that indicate users **already have proper data access roles
    - **This IS a problem**: ReadOnly locks can block operations in Storage Explorer
    - Locks can override permissions and prevent certain actions
 
-## Understanding the Logic
+**Understanding the Logic:**
 
 **Error exists** = Something is wrong/missing
 
@@ -210,15 +210,15 @@ You selected answers that indicate users **already have proper data access roles
 - ✓ "Users have Read role" = Error! (they lack data plane access)
 - ✓ "ReadOnly lock configured" = Error! (lock blocks operations)
 
-## Key Takeaway
+**Key Takeaway:**
 
 When a question asks for "**reasons why users are getting an error**," you need to identify what's **CAUSING the problem** (wrong role, locks), not what would **FIX the problem** (correct roles).
 
-### More Detail
+**More Detail:**
 
 Great question! Let me explain how ReadOnly locks interact with Azure Storage Explorer and why they can cause issues.
 
-## What ReadOnly Locks Do
+**What ReadOnly Locks Do:**
 
 **ReadOnly locks** in Azure prevent **any modifications** to a resource, including:
 
@@ -228,31 +228,31 @@ Great question! Let me explain how ReadOnly locks interact with Azure Storage Ex
 - Updating firewall rules
 - ANY write operation at the management plane
 
-## How Storage Explorer Accesses Storage
+**How Storage Explorer Accesses Storage:**
 
 Azure Storage Explorer can authenticate and access storage using **multiple methods**:
 
-### 1. **Account Keys (Management Plane)**
+**1. Account Keys (Management Plane):**
 
 - Storage Explorer attempts to **list and retrieve storage account keys**
 - This is a **write-equivalent operation** (POST request to list keys)
 - ReadOnly lock **BLOCKS** this operation
 - Result: ❌ Access denied
 
-### 2. **Azure AD / RBAC (Data Plane)**
+**2. Azure AD / RBAC (Data Plane):**
 
 - Uses your Azure AD identity with data plane roles
 - Directly accesses blobs/files without needing account keys
 - ReadOnly lock does **NOT** block this
 - Result: ✓ Should work
 
-### 3. **SAS Tokens**
+**3. SAS Tokens:**
 
 - Uses pre-generated shared access signatures
 - ReadOnly lock does **NOT** block this
 - Result: ✓ Should work
 
-## Why ReadOnly Locks Cause the Error
+**Why ReadOnly Locks Cause the Error:**
 
 When Storage Explorer opens and tries to browse a storage account:
 
@@ -265,7 +265,7 @@ When Storage Explorer opens and tries to browse a storage account:
 6. Error: "Unable to list resources due to inadequate permissions"
 ```
 
-## The Confusing Part
+**The Confusing Part:**
 
 The error message says "**inadequate permissions**," but it's actually:
 
@@ -274,7 +274,7 @@ The error message says "**inadequate permissions**," but it's actually:
 
 Even if you have **Owner** or **Contributor** role, the ReadOnly lock **overrides** your permissions and blocks management plane operations.
 
-## Visual Representation
+**Visual Representation:**
 
 ```
 Without ReadOnly Lock:
@@ -284,7 +284,7 @@ With ReadOnly Lock:
 User → Storage Explorer → List Keys API → ✗ BLOCKED by Lock → Error Message
 ```
 
-## How to Verify This is the Issue
+**How to Verify This is the Issue:**
 
 1. Check if a ReadOnly lock exists:
 
@@ -295,7 +295,7 @@ User → Storage Explorer → List Keys API → ✗ BLOCKED by Lock → Error Me
 2. Remove the lock temporarily and test Storage Explorer
    - If it works now, the lock was the problem
 
-## Solutions When ReadOnly Lock Exists
+**Solutions When ReadOnly Lock Exists:**
 
 **Option 1: Remove the Lock** (if policy allows)
 
@@ -317,7 +317,7 @@ User → Storage Explorer → List Keys API → ✗ BLOCKED by Lock → Error Me
 - Portal has built-in handling for locked resources
 - May provide better error messages
 
-## Key Takeaway
+**Key Takeaway:**
 
 ReadOnly locks block the **listKeys operation** that Storage Explorer commonly uses for authentication. While users might have proper RBAC permissions, the lock creates a hard stop at the management plane level, preventing Storage Explorer from retrieving the keys needed to access the data using the default authentication method.
 
@@ -337,16 +337,16 @@ The solution is either:
 
 Looking at your answer, I can explain why you got the File storage authorization wrong.
 
-## Your Answer
+**Your Answer:**
 
 - **Blob storage**: Microsoft Entra ID, access keys, and SAS ✓
 - **File storage**: Microsoft Entra ID only ✗
 
-## The Problem
+**The Problem:**
 
 You selected **Microsoft Entra ID only** for File storage, which is incorrect because:
 
-### 1. **Microsoft Entra ID has LIMITED/NO support for Azure Files with AzCopy**
+**1. Microsoft Entra ID has LIMITED/NO support for Azure Files with AzCopy:**
 
 While Microsoft Entra ID (Azure AD) works excellently for **Blob storage** with AzCopy, it has **very limited or no support** for **Azure Files** (File shares).
 
@@ -356,7 +356,7 @@ AzCopy's Azure AD authentication is primarily designed for:
 - ✓ Azure Data Lake Storage Gen2
 - ✗ Azure Files (not supported or very limited)
 
-### 2. **You Excluded Valid Methods**
+**2. You Excluded Valid Methods:**
 
 The scenario explicitly states:
 > "You have access to the storage account access keys for the source storage accounts and for DevStore. You also have valid Microsoft Entra user accounts and **shared access signatures (SAS)**."
@@ -367,12 +367,12 @@ For Azure Files, AzCopy **DOES support**:
 - ✓ **Access keys** - Supported
 - ✗ **Microsoft Entra ID** - Not supported/limited
 
-## The Correct Answer Should Be
+**The Correct Answer Should Be:**
 
 - **Blob storage**: Microsoft Entra ID, access keys, and SAS ✓
 - **File storage**: **Access keys and SAS** (or possibly just SAS)
 
-## Why This Matters
+**Why This Matters:**
 
 The critical distinction:
 
@@ -381,7 +381,7 @@ The critical distinction:
 | **Blob Storage** | ✓ Yes | ✓ Yes | ✓ Yes |
 | **File Storage** | ✗ Limited/No | ✓ Yes | ✓ Yes |
 
-## Key Detail: "Commands target only the file share or the account"
+**Key Detail: "Commands target only the file share or the account":**
 
 This hint suggests:
 
@@ -390,7 +390,7 @@ This hint suggests:
 
 Both are valid for Azure Files, but **not** Microsoft Entra ID.
 
-## AzCopy Command Examples
+**AzCopy Command Examples:**
 
 **For Blob (with Entra ID):**
 
@@ -428,19 +428,18 @@ azcopy copy "source" "https://devstore.file.core.windows.net/share"
 
 Looking at your answer, I can explain why you got the object replication configuration wrong.
 
-## Your Selected Answers
+**Your Selected Answers:**
 
 - **Change feed**: Destination account only ✗
 - **Blob versioning**: Source account only ✗
 
-## The Problem - You Have Both Settings Backwards
+**The Problem - You Have Both Settings Backwards:**
 
 You've essentially reversed the requirements for object replication. Let me explain what each feature does and where it's needed.
 
-## What Object Replication Requires
+**What Object Replication Requires:**
 
-### Change Feed
-
+**Change Feed:**
 
 **Purpose**: Tracks all create, modify, and delete operations on blobs
 
@@ -448,7 +447,7 @@ You've essentially reversed the requirements for object replication. Let me expl
 - **Why**: The source needs to track what changed so it knows what to replicate
 - **Destination doesn't need it**: The destination is passively receiving data
 
-### Blob Versioning
+**Blob Versioning:**
 
 **Purpose**: Maintains previous versions of blobs when they're modified or deleted
 
@@ -456,14 +455,14 @@ You've essentially reversed the requirements for object replication. Let me expl
 - **Why source needs it**: To track and maintain versions of objects being replicated
 - **Why destination needs it**: To properly receive and store the replicated blob versions
 
-## The Correct Answer Should Be
+**The Correct Answer Should Be:**
 
 - **Change feed**: **Source account only** ✓
 - **Blob versioning**: **Both source and destination accounts** ✓
 
-## Why Your Answer Was Wrong
+**Why Your Answer Was Wrong:**
 
-### Issue #1: Change Feed on Wrong Account
+**Issue #1: Change Feed on Wrong Account:**
 
 **You selected**: Destination account only ✗
 
@@ -473,7 +472,7 @@ You've essentially reversed the requirements for object replication. Let me expl
 - The SOURCE account needs change feed to detect which blobs have changed and need replication
 - Without change feed on the source, object replication cannot track what to replicate
 
-### Issue #2: Blob Versioning on Only One Account
+**Issue #2: Blob Versioning on Only One Account:**
 
 **You selected**: Source account only ✗
 
@@ -483,7 +482,7 @@ You've essentially reversed the requirements for object replication. Let me expl
 - BOTH accounts must support versioning to properly handle the replication
 - Without versioning on the destination, it cannot properly receive and store the versioned blobs
 
-## The Logic Flow
+**The Logic Flow:**
 
 ```
 SOURCE ACCOUNT                    DESTINATION ACCOUNT
@@ -500,14 +499,14 @@ SOURCE ACCOUNT                    DESTINATION ACCOUNT
                      blob versions
 ```
 
-## Visual Comparison
+**Visual Comparison:**
 
 | Feature | Your Answer | Correct Answer | Why |
 |---------|------------|----------------|-----|
 | **Change feed** | Destination only | **Source only** | Source tracks changes to replicate |
 | **Blob versioning** | Source only | **Both accounts** | Both need to handle blob versions |
 
-## Why "Minimize Configuration Changes" Matters
+**Why "Minimize Configuration Changes" Matters:**
 
 The question asks to "minimize configuration changes." The correct answer requires:
 
@@ -517,7 +516,7 @@ The question asks to "minimize configuration changes." The correct answer requir
 
 If you enabled change feed on both accounts, that would be 4 changes (unnecessary).
 
-## Key Takeaway
+**Key Takeaway:**
 
 For **Azure Storage Object Replication**:
 
@@ -531,7 +530,7 @@ Think of it this way:
 
 You had the logic completely reversed - change feed on the wrong end, and versioning on only one side when both need it!
 
-## References
+**References:**
 
 - [Prerequisites and caveats for object replication](https://learn.microsoft.com/en-us/azure/storage/blobs/object-replication-overview#prerequisites-and-caveats-for-object-replication)
 - [Enable and manage blob versioning](https://learn.microsoft.com/en-us/azure/storage/blobs/versioning-enable?tabs=portal)
@@ -553,18 +552,18 @@ You had the logic completely reversed - change feed on the wrong end, and versio
 
 You're absolutely right! Let me correct my response.
 
-## Your Selected Answers
+**Your Selected Answers:**
 
 - **$action** (not visible in dropdown, but should be first): ✗ Wrong cmdlet used
 - **$filter**: New-AzStorageAccountManagementPolicyFilter ✓
 - **$rule2**: New-AzStorageBlobInventoryPolicyRule ✗
 - **Final command**: Set-AzStorageBlobInventoryPolicy ✗
 
-## The Problem - You Mixed Up Two Different Features
+**The Problem - You Mixed Up Two Different Features:**
 
 You confused **Lifecycle Management Policies** with **Blob Inventory Policies**, AND the first command uses the wrong cmdlet structure.
 
-### The Correct Script Structure
+**The Correct Script Structure:**
 
 ```powershell
 $rgName = "RgGroup01"
@@ -612,7 +611,7 @@ Set-AzStorageAccountManagementPolicy `  ✓ CORRECT
 
 The first command should use `Add-AzStorageAccountManagementPolicyAction` to **add an action** (what to do with the blobs).
 
-### Issue #2: Inventory vs Management (Last Two Cmdlets)
+**Issue #2: Inventory vs Management (Last Two Cmdlets):**
 
 **You selected:**
 
@@ -624,7 +623,7 @@ The first command should use `Add-AzStorageAccountManagementPolicyAction` to **a
 - `New-AzStorageAccountManagementPolicyRule` ✓ (creates lifecycle rule)
 - `Set-AzStorageAccountManagementPolicy` ✓ (applies lifecycle policy)
 
-## The Logic Flow
+**The Logic Flow:**
 
 1. **$action** = `Add-AzStorageAccountManagementPolicyAction`
    - Define WHAT to do: "Tier to Cool after 30 days"
@@ -638,7 +637,7 @@ The first command should use `Add-AzStorageAccountManagementPolicyAction` to **a
 4. **Apply** = `Set-AzStorageAccountManagementPolicy`
    - Apply the rule to the storage account
 
-## Cmdlet Naming Pattern
+**Cmdlet Naming Pattern:**
 
 | Step | Verb | Object |
 |------|------|--------|
@@ -647,9 +646,9 @@ The first command should use `Add-AzStorageAccountManagementPolicyAction` to **a
 | Create rule | **New**-AzStorageAccount**ManagementPolicyRule** | Rule (action + filter) |
 | Apply policy | **Set**-AzStorageAccount**ManagementPolicy** | Complete policy |
 
-## Key Differences
+**Key Differences:**
 
-### Lifecycle Management (What you need)
+**Lifecycle Management (What you need):**
 
 ```powershell
 Add-AzStorageAccountManagementPolicyAction      # Define action
@@ -659,15 +658,15 @@ Set-AzStorageAccountManagementPolicy            # Apply policy
 # Purpose: Move blobs between tiers, delete old blobs
 ```
 
-### Blob Inventory (What you incorrectly selected)
+**Blob Inventory (What you incorrectly selected):**
 
 ```powershell
-New-AzStorageBlobInventoryPolicyRule            # ✗ Wrong!
-Set-AzStorageBlobInventoryPolicy                # ✗ Wrong!
+New-AzStorageBlobInventoryPolicyRule            # \u2717 Wrong!
+Set-AzStorageBlobInventoryPolicy                # \u2717 Wrong!
 # Purpose: Generate CSV/Parquet reports of blob metadata
 ```
 
-## Key Takeaway
+**Key Takeaway:**
 
 1. **Use `Add-` for actions**, `New-` for filters and rules, `Set-` to apply
 2. **Management Policy ≠ Inventory Policy**
