@@ -13,8 +13,9 @@
 | :------- | :--------------- | :-------------------------------------------------------------- | :----- | :------ | :-------- | :--- |
 | 1        | Microsoft Learn | [Microsoft Learning Paths](./learning-paths/README.md)          | ✅     | 1/14/26 | 1/25/26   | 11   |
 | 2        | Video            | [John Savill's Training](./video-courses/savill/README.md) | ✅    | 1/29/26 | 2/1/26          | 4      |
-| 3        | Hands-on Labs    | [Microsoft GitHub Labs](./microsoft-labs/README.md)             | 🕒    |         |           |      |
-| 4        | Practice Exams   | [MeasureUp Practice Exams](./practice-exams/README.md)          | 🕒    |         |           |      |
+| 3        | Assessment Exam  | [Assessment Exam](./practice-exams/README.md)                  | 🚧    | 2/2/26        |           |      |
+| 4        | Hands-on Labs    | [Microsoft GitHub Labs](./microsoft-labs/README.md)             | 🕒    |         |           |      |
+| 5        | Practice Exams   | [MeasureUp Practice Exams](./practice-exams/README.md)          | 🕒    |         |           |      |
 
 **Legend:** 🕒 Not Started | 🚧 In Progress | ✅ Complete
 
