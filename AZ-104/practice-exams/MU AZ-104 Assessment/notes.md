@@ -59,6 +59,17 @@ I took this assessment on Friday, January 30th, after reviewing the Microsoft Le
 
 ---
 
+<img src='.img/2026-01-30-05-53-50.png' width=700>
+
+---
+
+<img src='.img/2026-01-30-05-30-07.png' width=700>
+
+---
+
+<img src='.img/2026-01-30-05-26-15.png' width=700>
+
+---
 
 
 ## Correctly Answered Questions
@@ -75,13 +86,7 @@ I took this assessment on Friday, January 30th, after reviewing the Microsoft Le
 
 ---
 
-<img src='.img/2026-01-30-05-26-15.png' width=700>
 
----
-
-<img src='.img/2026-01-30-05-30-07.png' width=700>
-
----
 
 
 <img src='.img/2026-01-30-05-34-11.png' width=500>
@@ -98,9 +103,6 @@ I took this assessment on Friday, January 30th, after reviewing the Microsoft Le
 ---
 
 
-<img src='.img/2026-01-30-05-53-50.png' width=700>
-
----
 
 <img src='.img/2026-01-30-05-55-46.png' width=700>
 
