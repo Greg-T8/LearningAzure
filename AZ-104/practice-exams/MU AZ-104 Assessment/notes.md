@@ -18,7 +18,43 @@ I took this assessment on Friday, January 30th, after reviewing the Microsoft Le
 
 <img src='.img/2026-01-30-05-33-53.png' width=700>
 
+<details>
+<summary>Click to expand explanation</summary>
 
+## Your Answer vs. The Correct Sequence
+
+**Your selected order:**
+
+1. Create a Microsoft Entra group and add users to the group ✓
+2. Select the Microsoft Entra group for which you want to allow SSPR ✗
+3. Register an authentication method for SSPR ✗
+4. Enable SSPR with the Selected option ✗
+
+## The Issue
+
+The main problem is with **steps 2-4**. You're trying to select a group for SSPR (step 2) before SSPR is even enabled (step 4). Additionally, you should configure the authentication method requirements before enabling SSPR.
+
+## The Correct Order Should Be
+
+1. **Create a Microsoft Entra group and add users to the group** ✓
+   - This satisfies the requirement to "add and remove users" by managing group membership
+
+2. **Register an authentication method for SSPR**
+   - This configures "one additional piece of personal information" that users must provide (like security questions, phone, email, etc.)
+
+3. **Enable SSPR with the Selected option**
+   - You use "Selected" (not "All") because you only want a subset of users to have SSPR access
+   - This must be done before you can assign groups to SSPR
+
+4. **Select the Microsoft Entra group for which you want to allow SSPR**
+   - Now you can specify which group(s) should have SSPR enabled
+   - Users can be added/removed from SSPR by managing group membership
+
+## Key Takeaway
+
+You must **configure the authentication requirements and enable SSPR** before you can **assign it to specific groups**. Think of it as: configure what → enable it → specify who gets it.
+
+</details>
 
 ---
 
