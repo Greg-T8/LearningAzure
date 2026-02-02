@@ -423,6 +423,125 @@ azcopy copy "source" "https://devstore.file.core.windows.net/share"
 
 <img src='.img/2026-01-30-05-31-43.png' width=700>
 
+<details>
+<summary>Click to expand explanation</summary>
+
+Looking at your answer, I can explain why you got the object replication configuration wrong.
+
+## Your Selected Answers
+
+- **Change feed**: Destination account only ✗
+- **Blob versioning**: Source account only ✗
+
+## The Problem - You Have Both Settings Backwards
+
+You've essentially reversed the requirements for object replication. Let me explain what each feature does and where it's needed.
+
+## What Object Replication Requires
+
+### Change Feed
+
+
+**Purpose**: Tracks all create, modify, and delete operations on blobs
+
+- **Where needed**: **SOURCE account only** ✓
+- **Why**: The source needs to track what changed so it knows what to replicate
+- **Destination doesn't need it**: The destination is passively receiving data
+
+### Blob Versioning
+
+**Purpose**: Maintains previous versions of blobs when they're modified or deleted
+
+- **Where needed**: **BOTH source and destination accounts** ✓
+- **Why source needs it**: To track and maintain versions of objects being replicated
+- **Why destination needs it**: To properly receive and store the replicated blob versions
+
+## The Correct Answer Should Be
+
+- **Change feed**: **Source account only** ✓
+- **Blob versioning**: **Both source and destination accounts** ✓
+
+## Why Your Answer Was Wrong
+
+### Issue #1: Change Feed on Wrong Account
+
+**You selected**: Destination account only ✗
+
+**Problem**:
+
+- The destination account doesn't need to track changes - it's just receiving replicated data
+- The SOURCE account needs change feed to detect which blobs have changed and need replication
+- Without change feed on the source, object replication cannot track what to replicate
+
+### Issue #2: Blob Versioning on Only One Account
+
+**You selected**: Source account only ✗
+
+**Problem**:
+
+- Object replication replicates blob **versions**, not just the latest blob
+- BOTH accounts must support versioning to properly handle the replication
+- Without versioning on the destination, it cannot properly receive and store the versioned blobs
+
+## The Logic Flow
+
+```
+SOURCE ACCOUNT                    DESTINATION ACCOUNT
+┌─────────────────┐              ┌──────────────────┐
+│ Blob versioning │ ✓ Required   │ Blob versioning  │ ✓ Required
+│ Change feed     │ ✓ Required   │ Change feed      │ ✗ Not needed
+└─────────────────┘              └──────────────────┘
+         │                                │
+         │   Detects changes              │
+         │   Creates replication          │
+         │   tasks                        │
+         │                                │
+         └────────── Replicates ─────────>│
+                     blob versions
+```
+
+## Visual Comparison
+
+| Feature | Your Answer | Correct Answer | Why |
+|---------|------------|----------------|-----|
+| **Change feed** | Destination only | **Source only** | Source tracks changes to replicate |
+| **Blob versioning** | Source only | **Both accounts** | Both need to handle blob versions |
+
+## Why "Minimize Configuration Changes" Matters
+
+The question asks to "minimize configuration changes." The correct answer requires:
+
+- 1 account with change feed (source)
+- 2 accounts with blob versioning (both)
+- Total: 3 configuration changes
+
+If you enabled change feed on both accounts, that would be 4 changes (unnecessary).
+
+## Key Takeaway
+
+For **Azure Storage Object Replication**:
+
+1. **Change feed = Source only** (to detect what needs replicating)
+2. **Blob versioning = Both accounts** (to support version replication)
+
+Think of it this way:
+
+- **Change feed** = The "sensor" that detects changes (only needed where changes originate)
+- **Blob versioning** = The "infrastructure" that both accounts need to support versioned objects
+
+You had the logic completely reversed - change feed on the wrong end, and versioning on only one side when both need it!
+
+## References
+
+- [Prerequisites and caveats for object replication](https://learn.microsoft.com/en-us/azure/storage/blobs/object-replication-overview#prerequisites-and-caveats-for-object-replication)
+- [Enable and manage blob versioning](https://learn.microsoft.com/en-us/azure/storage/blobs/versioning-enable?tabs=portal)
+- [Change feed support in Azure Blob Storage](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blob-change-feed?tabs=azure-portal)
+
+<img src='.img/2026-02-02-04-12-42.png' width=700>
+
+<img src='.img/2026-02-02-04-15-32.png' width=600>
+
+</details>
 
 ---
 
@@ -562,6 +681,32 @@ Set-AzStorageBlobInventoryPolicy                # ✗ Wrong!
 ---
 
 <img src='.img/2026-01-30-06-01-29.png' width=700>
+
+<details>
+<summary>Click to expand explanation</summary>
+
+Looking at your selected answers, you chose **Put Blob**, **Append Block**, **Put Blob From URL**, and **Put Page**.
+
+**The key issue:** You selected **Append Block**, which does NOT create a new version.
+
+**Why Append Block doesn't create a new version:**
+Append Block adds data to the end of an append blob without overwriting existing content. Azure Blob versioning creates a new version when a blob is *overwritten* or deleted. Since Append Block only adds new data rather than modifying existing data, it doesn't trigger version creation.
+
+**What you likely missed:**
+The correct four operations that create new versions are:
+
+- **Copy Blob** - Creates or overwrites a blob, triggering a new version
+- **Put Blob** - Overwrites the entire blob ✓ (you got this)
+- **Put Block List** - Commits blocks to create/update a block blob, creating a new version
+- **Put Blob From URL** - Creates or overwrites a blob from a URL source ✓ (you got this)
+
+Note: **Put Page** modifies page blob content and can create a new version depending on the specific Azure documentation version, but it's less commonly listed as one of the primary four operations compared to Copy Blob and Put Block List.
+
+**Set Blob Metadata** also doesn't create a new version because it only changes metadata, not the actual blob content.
+
+**Key concept to remember:** Versioning is triggered by operations that *overwrite or replace* blob content, not operations that *append* or only modify *metadata/properties*.
+
+</details>
 
 ---
 
