@@ -690,26 +690,35 @@ Set-AzStorageBlobInventoryPolicy                # \u2717 Wrong!
 <details>
 <summary>Click to expand explanation</summary>
 
-Looking at your selected answers, you chose **Put Blob**, **Append Block**, **Put Blob From URL**, and **Put Page**.
+You're absolutely correct to question this. I made an error in my original response.
 
-**The key issue:** You selected **Append Block**, which does NOT create a new version.
+**The correct four operations that create new versions are:**
 
-**Why Append Block doesn't create a new version:**
-Append Block adds data to the end of an append blob without overwriting existing content. Azure Blob versioning creates a new version when a blob is *overwritten* or deleted. Since Append Block only adds new data rather than modifying existing data, it doesn't trigger version creation.
+1. **Put Blob** ✓ (You selected this correctly)
+2. **Put Block List** (You did not select this)
+3. **Copy Blob** (You did not select this)
+4. **Set Blob Metadata** (You did not select this)
 
-**What you likely missed:**
-The correct four operations that create new versions are:
+**Why your selected answers were wrong:**
 
-- **Copy Blob** - Creates or overwrites a blob, triggering a new version
-- **Put Blob** - Overwrites the entire blob ✓ (you got this)
-- **Put Block List** - Commits blocks to create/update a block blob, creating a new version
-- **Put Blob From URL** - Creates or overwrites a blob from a URL source ✓ (you got this)
+- **Append Block** – Does NOT create a new version. It appends data to an append blob without overwriting the blob itself.
+- **Put Blob From URL** – I incorrectly stated this creates a version. The documentation does NOT list this as a versioning operation. While it creates or overwrites a blob, it's not explicitly mentioned in Microsoft's versioning documentation as triggering a new version.
+- **Put Page** – Does NOT create a new version. It updates page ranges within a page blob in place.
 
-Note: **Put Page** modifies page blob content and can create a new version depending on the specific Azure documentation version, but it's less commonly listed as one of the primary four operations compared to Copy Blob and Put Block List.
+**Why Set Blob Metadata creates a version:**
 
-**Set Blob Metadata** also doesn't create a new version because it only changes metadata, not the actual blob content.
+I incorrectly stated that metadata changes don't trigger versioning. According to Microsoft's documentation, **Set Blob Metadata** is explicitly listed as a write operation that creates a new version. This is a key exam concept: metadata changes are considered blob modifications that warrant version tracking.
 
-**Key concept to remember:** Versioning is triggered by operations that *overwrite or replace* blob content, not operations that *append* or only modify *metadata/properties*.
+**Key takeaway:**
+
+The four versioning operations are **Put Blob**, **Put Block List**, **Copy Blob**, and **Set Blob Metadata**. These are the operations Microsoft explicitly lists in their documentation. Don't assume operations like "Put Blob From URL" trigger versioning unless explicitly documented.
+
+**References:**
+
+- [Blob versioning - How blob versioning works](https://learn.microsoft.com/en-us/azure/storage/blobs/versioning-overview#how-blob-versioning-works)
+
+<img src='.img/2026-02-02-04-41-46.png' width=600>
+
 
 </details>
 
