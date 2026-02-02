@@ -219,3 +219,51 @@ When the exam mentions converting text to vectors, semantic similarity, or compa
 - [Azure OpenAI models - Embeddings](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models#embeddings-models)
 
 </details>
+
+---
+
+<img src='.img/2026-02-02-05-35-08.png' width=700>
+
+<details open>
+<summary>Click to expand explanation</summary>
+
+You got this one correct! Here's a deeper look at the concept being tested.
+
+**What the question is testing:**
+This question assesses your understanding of the text preprocessing pipeline in NLP, specifically the sequence of steps involved in statistical text analysis.
+
+**Why removing stop words is the first step:**
+Stop words are common, high-frequency words (like "the," "is," "and," "a," "in") that carry little semantic meaning but appear frequently in text. Removing them *first* is essential because:
+
+- They add noise to statistical analysis
+- They would dominate word frequency counts if not removed
+- They don't contribute meaningful information about the text's content
+- Removing them reduces the dataset size and improves processing efficiency
+
+**Why the other options come later (or aren't part of statistical analysis):**
+
+| Option | Role in NLP Pipeline |
+|--------|---------------------|
+| **Counting word occurrences** | Happens *after* stop words are removed—otherwise "the" and "a" would dominate frequency counts |
+| **Creating a vectorized model** | Not statistical analysis; used for capturing semantic relationships (like word2vec or embeddings) |
+| **Encoding words as numeric features** | Used in downstream tasks like sentiment analysis; not part of the initial statistical analysis step |
+
+**Typical NLP text preprocessing order:**
+
+1. Tokenization (split text into words)
+2. Normalization (lowercase, remove punctuation)
+3. **Remove stop words** ← first step in *statistical* analysis
+4. Stemming/Lemmatization (reduce words to root form)
+5. Count occurrences / build frequency distributions
+6. Further analysis (TF-IDF, n-grams, etc.)
+
+**Key takeaway:**
+For AI-900, remember that **stop word removal** is the foundational preprocessing step before performing any statistical analysis on text. It ensures that meaningless high-frequency words don't skew your analysis.
+
+**References**
+
+- [Analyze text with the Language service - Microsoft Learn](https://learn.microsoft.com/en-us/training/modules/analyze-text-with-text-analytics-service/)
+- [Natural language processing - Azure AI Fundamentals](https://learn.microsoft.com/en-us/training/paths/explore-natural-language-processing/)
+- [What is text analytics?](https://learn.microsoft.com/en-us/azure/ai-services/language-service/overview)
+
+</details>
