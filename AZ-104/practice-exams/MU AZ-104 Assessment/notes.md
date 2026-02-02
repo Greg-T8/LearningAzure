@@ -1,5 +1,11 @@
 # MeasureUp Assessment AZ-104: Microsoft Azure Administrator
 
+* [Overview](#overview)
+* [Assessment Results](#assessment-results)
+* [Wrong Answers Review](#wrong-answers-review)
+* [Correctly Answered Questions](#correctly-answered-questions)
+
+
 ## Overview
 
 Notes and insights from the MeasureUp practice assessment for AZ-104.
@@ -413,7 +419,7 @@ export AZCOPY_ACCOUNT_KEY="<account-key>"
 azcopy copy "source" "https://devstore.file.core.windows.net/share"
 ```
 
-## Key Takeaway
+**Key Takeaway:**
 
 **Microsoft Entra ID authentication is NOT supported for Azure Files with AzCopy**, unlike Blob storage where it works perfectly. For File storage, you must use **SAS tokens or access keys**. Don't assume that authentication methods work the same across all storage types!
 
@@ -588,7 +594,7 @@ Set-AzStorageAccountManagementPolicy `  ✓ CORRECT
     -Rule $rule2
 ```
 
-## The Correct Cmdlets
+**The Correct Cmdlets:**
 
 1. **$action**: `Add-AzStorageAccountManagementPolicyAction`
    - **ADD** an action to the policy (TierToCool after 30 days)
@@ -605,9 +611,9 @@ Set-AzStorageAccountManagementPolicy `  ✓ CORRECT
    - Creates or modifies the management policy of an Azure Storage account.
    - ✗ You used: `Set-AzStorageBlobInventoryPolicy` (wrong - for inventory)
 
-## Why Your Answer Was Wrong
+**Why Your Answer Was Wrong:**
 
-### Issue #1: Wrong Cmdlet Pattern for $action
+**Issue #1: Wrong Cmdlet Pattern for $action:**
 
 The first command should use `Add-AzStorageAccountManagementPolicyAction` to **add an action** (what to do with the blobs).
 
