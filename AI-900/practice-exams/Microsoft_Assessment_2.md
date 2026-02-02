@@ -126,11 +126,54 @@ When a question mentions sensitive data (healthcare, financial, personal), prior
 
 </details>
 
+---
+
+<img src='.img/2026-02-02-05-27-53.png' width=700>
+
+<details open>
+<summary>Click to expand explanation</summary>
+
+**Why your selected answer (business card model) is wrong:**  
+The business card model is specifically designed to extract contact information from business cards—names, phone numbers, email addresses, job titles, and company names. It has no capability to process passports or sales account documents. The question asks about two distinct document types: international passports and sales accounts. You need to match each document type to its appropriate prebuilt model.
+
+**Why the correct answers (ID document model and invoice model) are right:**  
+
+- **ID document model:** Optimized to extract key information from identity documents, specifically US driver's licenses and *international passport biographical pages*. This directly addresses the "international passports" requirement in the question.
+- **Invoice model:** Designed to extract structured data from sales invoices and billing documents—vendor info, line items, totals, dates, etc. "Sales accounts" refers to sales/billing documentation, which maps to the invoice model.
+
+**The trap in this question:**  
+The question pairs two unrelated document types (passports + sales accounts), requiring you to identify the correct model for each. It's easy to overthink or pick a model that sounds plausible but doesn't match either document type. Business cards and receipts are common prebuilt models, but they don't apply here.
+
+**Azure Document Intelligence prebuilt models (quick reference):**
+
+| Model | Extracts From |
+|-------|---------------|
+| Invoice | Invoices, billing documents |
+| Receipt | Retail receipts |
+| ID Document | Passports, driver's licenses |
+| Business Card | Contact cards |
+| W-2 | US tax forms |
+| Health Insurance Card | US health insurance cards |
+
+**Key takeaway:**  
+Map each document type in the question to a specific prebuilt model. "Passports" = ID document model. "Sales accounts/invoices" = Invoice model. Don't select models based on partial matches or assumptions.
+
+**References**
+
+- [Prebuilt models - Azure AI Document Intelligence](https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/concept-model-overview)
+- [ID document model](https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/concept-id-document)
+- [Invoice model](https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/concept-invoice)
+
+</details>
 
 
 
 ## Unsure but Correctly Answered
 
 <img src='.img/2026-02-02-05-20-18.png' width=700> 
+
+---
+
+<img src='.img/2026-02-02-05-24-08.png' width=700>
 
 ---
