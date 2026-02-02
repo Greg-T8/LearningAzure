@@ -6,6 +6,7 @@ Second attempt at the Microsoft practice assessment for AI-900.
 
 ## Assessment Results
 
+<img src='.img/2026-02-02-05-55-29.png' width=700>
 
 ---
 
@@ -130,7 +131,7 @@ When a question mentions sensitive data (healthcare, financial, personal), prior
 
 <img src='.img/2026-02-02-05-27-53.png' width=700>
 
-<details open>
+<details>
 <summary>Click to expand explanation</summary>
 
 **Why your selected answer (business card model) is wrong:**  
@@ -170,7 +171,7 @@ Map each document type in the question to a specific prebuilt model. "Passports"
 
 <img src='.img/2026-02-02-05-37-13.png' width=700>
 
-<details open>
+<details>
 <summary>Click to expand explanation</summary>
 
 **Why the selected answer (-1) is wrong:**  
@@ -207,7 +208,7 @@ Azure Language detection confidence scores range from 0 to 1. When the language 
 
 <img src='.img/2026-02-02-05-45-10.png' width=700>
 
-<details open>
+<details>
 <summary>Click to expand explanation</summary>
 
 **Why the selected answer (lemmatization) is wrong:**
@@ -242,7 +243,7 @@ When a question mentions words being "closer" or having "similar values" based o
 
 <img src='.img/2026-02-02-05-47-46.png' width=700>
 
-<details open>
+<details>
 <summary>Click to expand explanation</summary>
 
 **Why the selected answer (speech-to-text) is wrong:**
@@ -277,7 +278,7 @@ Azure Translator = text in, text out. Any scenario involving speech (audio) requ
 
 <img src='.img/2026-02-02-05-49-21.png' width=700>
 
-<details open>
+<details>
 <summary>Click to expand explanation</summary>
 
 **Why the selected answer (Azure Language in Foundry Tools service) is wrong:**
@@ -417,7 +418,7 @@ For AI-900, remember that **stop word removal** is the foundational preprocessin
 
 <img src='.img/2026-02-02-05-53-09.png' width=700>
 
-<details open>
+<details>
 <summary>Click to expand explanation</summary>
 
 You got this one correct! Here's an expanded explanation with emphasis on the distinction between entity linking and named entity recognition, which is commonly tested on AI-900.
