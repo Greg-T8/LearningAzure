@@ -240,6 +240,77 @@ When a question mentions words being "closer" or having "similar values" based o
 
 ---
 
+<img src='.img/2026-02-02-05-47-46.png' width=700>
+
+<details open>
+<summary>Click to expand explanation</summary>
+
+**Why the selected answer (speech-to-text) is wrong:**
+Speech-to-text is a capability of the **Azure Speech service**, not the Azure Translator service. Speech-to-text transcribes spoken audio into written text. The Translator service does not accept audio input—it works exclusively with text.
+
+**Why the correct answer (text-to-text) is right:**
+Azure Translator is designed specifically for **text-to-text translation**—you provide text in one language, and it returns translated text in another language. It supports over 100 languages and handles only written text as both input and output.
+
+**The trap:**
+It's easy to conflate Azure's language-related services. The word "translation" might make you think of converting between modalities (like speech to text), but Translator is narrowly scoped to translating *text between languages*, not converting between formats.
+
+**How Azure's language services divide responsibilities:**
+
+| Service | Function |
+|---------|----------|
+| **Translator** | Text-to-text translation (language A → language B) |
+| **Speech** | Speech-to-text, text-to-speech, speech translation |
+| **Language** | NLP features (sentiment, entities, key phrases, etc.) |
+
+**Key takeaway:**
+Azure Translator = text in, text out. Any scenario involving speech (audio) requires the Azure Speech service, even for translation tasks.
+
+**References**
+
+- [What is Azure Translator?](https://learn.microsoft.com/en-us/azure/ai-services/translator/translator-overview)
+- [What is the Speech service?](https://learn.microsoft.com/en-us/azure/ai-services/speech-service/overview)
+- [Speech translation overview](https://learn.microsoft.com/en-us/azure/ai-services/speech-service/speech-translation)
+
+</details>
+
+---
+
+<img src='.img/2026-02-02-05-49-21.png' width=700>
+
+<details open>
+<summary>Click to expand explanation</summary>
+
+**Why the selected answer (Azure Language in Foundry Tools service) is wrong:**
+Azure Language is a *specific* AI service that only provides access to NLP features like sentiment analysis, entity recognition, and key phrase extraction. It does not include Translator or Speech capabilities. Each individual service (Language, Translator, Speech, Vision) has its own endpoint and key—they are not interchangeable.
+
+**Why the correct answer (Azure AI Services) is right:**
+Azure AI Services is a **multi-service resource** that consolidates access to multiple Azure AI capabilities under a single endpoint and authentication key. When you create an Azure AI Services resource (rather than individual service resources), you can access Translator, Speech, Language, Vision, and other services using the same credentials. This simplifies management and billing when you need multiple AI capabilities.
+
+**The key concept being tested:**
+Azure offers two deployment options for AI services:
+
+- **Single-service resources:** Dedicated to one service (e.g., Language only, Speech only)
+- **Multi-service resource (Azure AI Services):** Unified access to multiple services with one key
+
+| Resource Type | Services Accessible |
+|---------------|---------------------|
+| Azure AI Services | Translator, Speech, Language, Vision, etc. |
+| Azure Language | Language features only |
+| Azure Speech | Speech features only |
+| Azure Translator | Translator features only |
+
+**The trap:**
+The question asks about accessing *both* Translator and Speech with a single endpoint. Azure Language cannot provide this—it only covers Language service features. The umbrella resource that spans multiple services is Azure AI Services.
+
+**Key takeaway:**
+When a question asks about unified access to multiple Azure AI capabilities through one endpoint and key, the answer is **Azure AI Services** (the multi-service resource).
+
+**References**
+
+- [What are Azure AI Services?](https://learn.microsoft.com/en-us/azure/ai-services/what-are-ai-services)
+- [Create a multi-service resource](https://learn.microsoft.com/en-us/azure/ai-services/multi-service-resource)
+
+</details>
 
 
 ## Unsure but Correctly Answered
