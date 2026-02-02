@@ -414,3 +414,46 @@ For AI-900, remember that **stop word removal** is the foundational preprocessin
 </details>
 
 ---
+
+<img src='.img/2026-02-02-05-53-09.png' width=700>
+
+<details open>
+<summary>Click to expand explanation</summary>
+
+You got this one correct! Here's an expanded explanation with emphasis on the distinction between entity linking and named entity recognition, which is commonly tested on AI-900.
+
+**Why entity linking is correct:**
+Entity linking not only identifies entities in text but also **disambiguates** them and provides **links to external knowledge sources** (typically Wikipedia). The key phrase in the question is "provide further information online"—this directly points to entity linking's unique capability of returning URLs where users can learn more about the identified entity.
+
+**Entity Linking vs. Named Entity Recognition (NER) — the critical distinction:**
+
+| Feature | Named Entity Recognition (NER) | Entity Linking |
+|---------|-------------------------------|----------------|
+| **Primary function** | Identifies and categorizes entities | Identifies, disambiguates, and links entities |
+| **Output** | Entity text + category (Person, Location, Organization, etc.) | Entity text + Wikipedia URL + disambiguation |
+| **Disambiguation** | No — just labels what type of entity it is | Yes — resolves ambiguity (e.g., "Mars" the planet vs. "Mars" the candy company) |
+| **External links** | No | Yes — provides URLs to knowledge bases |
+
+**Example to illustrate the difference:**
+
+For the sentence: *"I visited the Washington Monument in Washington."*
+
+- **NER output:** "Washington Monument" (Location), "Washington" (Location)
+- **Entity Linking output:** "Washington Monument" → <https://en.wikipedia.org/wiki/Washington_Monument>, "Washington" → <https://en.wikipedia.org/wiki/Washington,_D.C>. (disambiguated from Washington state or George Washington)
+
+**Why the other options are wrong:**
+
+- **Named entity recognition:** Identifies and categorizes entities but does NOT provide links or disambiguate between entities with the same name.
+- **Key phrase extraction:** Extracts important phrases/concepts from text, not entities. No categorization or linking.
+- **Text translation:** Converts text between languages—completely different functionality.
+
+**Exam tip:**
+When a question mentions "further information," "links," "URLs," "Wikipedia," or "disambiguation," the answer is **entity linking**. When it mentions "categorize," "identify type," or lists categories like Person/Location/Organization, the answer is **NER**.
+
+**References**
+
+- [What is entity linking in Azure AI Language?](https://learn.microsoft.com/en-us/azure/ai-services/language-service/entity-linking/overview)
+- [What is Named Entity Recognition (NER)?](https://learn.microsoft.com/en-us/azure/ai-services/language-service/named-entity-recognition/overview)
+- [NLP concepts - Microsoft Learn training](https://learn.microsoft.com/en-us/training/modules/analyze-text-with-text-analytics-service/)
+
+</details>
