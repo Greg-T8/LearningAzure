@@ -484,6 +484,7 @@ Set-AzStorageAccountManagementPolicy `  ✓ CORRECT
 
 4. **Final**: `Set-AzStorageAccountManagementPolicy`
    - **SET/APPLY** the management policy to the storage account
+   - Creates or modifies the management policy of an Azure Storage account.
    - ✗ You used: `Set-AzStorageBlobInventoryPolicy` (wrong - for inventory)
 
 ## Why Your Answer Was Wrong
