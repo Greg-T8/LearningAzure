@@ -177,3 +177,45 @@ Map each document type in the question to a specific prebuilt model. "Passports"
 <img src='.img/2026-02-02-05-24-08.png' width=700>
 
 ---
+
+<img src='.img/2026-02-02-05-32-47.png' width=700>
+
+<details>
+<summary>Click to expand explanation</summary>
+
+You got this one correct! Here's a deeper explanation of the concept being tested.
+
+**What embeddings are:**  
+Embeddings are numerical vector representations of text (or other data) that capture semantic meaning. In Azure OpenAI, embedding models (like `text-embedding-ada-002`) convert words, sentences, or documents into high-dimensional vectors. Text with similar meaning will have vectors that are mathematically "close" to each other, enabling similarity comparisons.
+
+**Why embeddings enable search, classify, and compare:**  
+
+- **Search:** Convert a query into a vector, then find documents whose vectors are closest (using cosine similarity or other distance metrics). This powers semantic search—finding results based on meaning, not just keyword matching.
+- **Classify:** Use vectors as input features for classification algorithms. Similar texts cluster together in vector space, making categorization possible.
+- **Compare:** Calculate the distance between two text vectors to determine how semantically similar they are.
+
+**Why the other options are wrong:**
+
+| Option | Why It Doesn't Fit |
+|--------|-------------------|
+| **Data grounding** | Refers to augmenting LLM responses with external data sources (like RAG). It doesn't inherently search or compare text—it provides context to reduce hallucinations. |
+| **Machine learning** | A broad category/discipline, not a specific capability that "searches, classifies, and compares text for similarity." Too general. |
+| **System messages** | Instructions given to a model to shape its behavior (persona, rules). They don't perform search or comparison functions. |
+
+**Practical example:**  
+If you want to build a FAQ bot that finds the most relevant answer to a user's question, you'd:
+
+1. Generate embeddings for all FAQ entries
+2. Generate an embedding for the user's question
+3. Compare vectors to find the closest FAQ match
+
+**Key takeaway:**  
+When the exam mentions converting text to vectors, semantic similarity, or comparing/searching text by meaning, the answer is **embeddings**. This is a foundational concept for AI-900's generative AI section.
+
+**References**
+
+- [Understand embeddings in Azure OpenAI Service](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/understand-embeddings)
+- [Tutorial: Explore Azure OpenAI embeddings](https://learn.microsoft.com/en-us/azure/ai-services/openai/tutorials/embeddings)
+- [Azure OpenAI models - Embeddings](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models#embeddings-models)
+
+</details>
