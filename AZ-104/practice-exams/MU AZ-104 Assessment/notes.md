@@ -60,6 +60,54 @@ You must **configure the authentication requirements and enable SSPR** before yo
 
 <img src='.img/2026-01-30-06-03-01.png' width=700>
 
+<details>
+<summary>Click to expand explanation</summary>
+
+Looking at your selected answers, I can help you understand why this approach doesn't meet the requirements.
+
+## Your Selected Answer
+
+1. ✓ Assign the built-in Contributor role to the SalesDepartment group for the RG1 resource group
+2. ✗ Assign the built-in Reader role to the SalesDepartment group at the subscription level
+
+## The Problem with Your Answer
+
+**The second selection violates the least privilege principle:**
+
+When you assign **Reader at the subscription level**, the Sales team gets read access to **ALL** resource groups in the subscription, including:
+
+- RG1 ✓ (needed)
+- RG2 ✓ (needed)
+- **RG3 ✗ (NOT allowed by requirements)**
+
+The requirement explicitly states: "The Sales team should be able to read resources in RG1 and RG2 **only**."
+
+## The Correct Answer Should Be
+
+1. **Assign the built-in Contributor role to the SalesDepartment group for the RG1 resource group** ✓
+   - Allows creating resources in RG1
+   - Allows reading resources in RG1
+   - Does NOT allow assigning permissions (Contributor lacks this ability)
+
+2. **Assign the built-in Reader role to the SalesDepartment group for the RG2 resource group** ✓
+   - Allows reading resources in RG2 only
+   - Does NOT allow creating resources
+   - No access to RG3
+
+## Why This Meets All Requirements
+
+✓ Read resources in RG1 and RG2 only (not RG3)  
+✓ Create resources in only RG1  
+✓ Cannot assign permissions (Contributor doesn't include this)  
+✓ Cannot create resource groups (no subscription-level permissions)  
+✓ Follows least privilege principle
+
+## Key Takeaway
+
+Avoid assigning roles at higher scopes (like subscription level) when you can achieve the same result at lower scopes (resource group level). Always grant the minimum access needed at the most specific scope possible.
+
+</details>
+
 ---
 
 <img src='.img/2026-01-30-06-20-49.png' width=700>
