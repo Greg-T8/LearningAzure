@@ -166,6 +166,80 @@ Map each document type in the question to a specific prebuilt model. "Passports"
 
 </details>
 
+---
+
+<img src='.img/2026-02-02-05-37-13.png' width=700>
+
+<details open>
+<summary>Click to expand explanation</summary>
+
+**Why the selected answer (-1) is wrong:**  
+You likely assumed that Azure uses a sentinel value like -1 to indicate an unknown or invalid result, which is a common programming convention. However, Azure AI Language service does not use -1 for confidence scores. The confidence score range is strictly 0 to 1, where 0 is lowest confidence and 1 is highest. A value of -1 falls outside this range and is not part of the API's response schema.
+
+**Why the correct answer (NaN) is right:**  
+When Azure's language detection service cannot determine the language of the input text, it returns:
+
+- **Language name:** "Unknown"
+- **Confidence score:** NaN (Not a Number)
+
+NaN is the specific value used to indicate that a confidence score cannot be calculated because the language itself is unidentifiable. This is distinct from a low confidence score (like 0.1), which would indicate the service made a guess but isn't confident. NaN means no valid score exists at all.
+
+**The relationship between "Unknown" and "NaN":**
+
+- "Unknown" is the language *name* returned when detection fails
+- NaN is the confidence *score* associated with that unknown detection
+- They always appear together—you won't see "Unknown" with a numeric score
+
+**Common trap:**  
+The answer "Unknown" is tempting because the question mentions "unknown language name," but the question asks specifically about the *confidence score*, not the language name. The score for an unknown language is NaN, not the word "Unknown."
+
+**Key takeaway:**  
+Azure Language detection confidence scores range from 0 to 1. When the language cannot be detected, the service returns NaN (Not a Number) as the confidence score, paired with "Unknown" as the language name.
+
+**References**
+
+- [Language detection - Azure AI Language](https://learn.microsoft.com/en-us/azure/ai-services/language-service/language-detection/overview)
+- [Quickstart: Language detection](https://learn.microsoft.com/en-us/azure/ai-services/language-service/language-detection/quickstart)
+
+</details>
+
+---
+
+<img src='.img/2026-02-02-05-45-10.png' width=700>
+
+<details open>
+<summary>Click to expand explanation</summary>
+
+**Why the selected answer (lemmatization) is wrong:**
+Lemmatization is a text *normalization* technique that reduces words to their base or dictionary form (e.g., "running" → "run," "better" → "good"). It's about standardizing word forms before analysis, not about understanding meaning or relationships between words. Lemmatization doesn't assign values or measure how semantically close words are to each other.
+
+**Why the correct answer (vectorization) is right:**
+Vectorization converts words into numerical vectors in a multi-dimensional space. Words with similar meanings (like "plant" and "flower") are positioned closer together in this vector space, while unrelated words (like "airplane") are farther apart. This is the foundation of semantic similarity—the technique that enables NLP systems to understand that "plant" and "flower" are related concepts.
+
+**How each option works:**
+
+| Technique | What It Does |
+|-----------|--------------|
+| **Vectorization** | Maps words to coordinates in n-dimensional space; captures semantic relationships |
+| **Lemmatization** | Reduces words to root form for normalization |
+| **Frequency analysis** | Counts how often words appear |
+| **N-grams** | Analyzes sequences of consecutive words (bigrams, trigrams, etc.) |
+
+**The trap:**
+Lemmatization sounds sophisticated and deals with word forms, which might seem related to word relationships. However, the key phrase in the question is "considered closer to each other"—this describes *spatial/semantic proximity*, which is specifically what vectorization achieves through embeddings.
+
+**Key takeaway:**
+When a question mentions words being "closer" or having "similar values" based on meaning, the answer is vectorization (or embeddings). Lemmatization is purely about reducing words to their root form.
+
+**References**
+
+- [Understand embeddings in Azure OpenAI](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/understand-embeddings)
+- [Natural language processing - Azure AI Fundamentals](https://learn.microsoft.com/en-us/training/modules/analyze-text-with-text-analytics-service/)
+
+</details>
+
+---
+
 
 
 ## Unsure but Correctly Answered
@@ -224,7 +298,7 @@ When the exam mentions converting text to vectors, semantic similarity, or compa
 
 <img src='.img/2026-02-02-05-35-08.png' width=700>
 
-<details open>
+<details>
 <summary>Click to expand explanation</summary>
 
 You got this one correct! Here's a deeper look at the concept being tested.
@@ -267,3 +341,5 @@ For AI-900, remember that **stop word removal** is the foundational preprocessin
 - [What is text analytics?](https://learn.microsoft.com/en-us/azure/ai-services/language-service/overview)
 
 </details>
+
+---
