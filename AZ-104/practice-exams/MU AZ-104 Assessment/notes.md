@@ -16,6 +16,48 @@ I took this assessment on Friday, January 30th, after reviewing the Microsoft Le
 ## Wrong Answers Review
 
 
+<img src='.img/2026-01-30-05-33-53.png' width=700>
+
+---
+
+<img src='.img/2026-01-30-06-03-01.png' width=700>
+
+---
+
+<img src='.img/2026-01-30-06-20-49.png' width=700>
+
+---
+
+<img src='.img/2026-01-30-05-46-07.png' width=700>
+
+---
+
+<img src='.img/2026-01-30-05-58-51.png' width=700>
+
+---
+
+<img src='.img/2026-01-30-05-31-43.png' width=700>
+
+---
+
+<img src='.img/2026-01-30-05-50-54.png' width=700>
+
+
+<img src='.img/2026-01-30-05-42-04.png' width=400>
+
+---
+
+<img src='.img/2026-01-30-06-01-29.png' width=700>
+
+---
+
+<img src='.img/2026-01-30-05-38-46.png' width=700>
+
+---
+
+
+
+
 ## Correctly Answered Questions
 
 <img src='.img/2026-01-30-06-25-12.png' width=700>
@@ -38,13 +80,6 @@ I took this assessment on Friday, January 30th, after reviewing the Microsoft Le
 
 ---
 
-<img src='.img/2026-01-30-05-31-43.png' width=700>
-
----
-
-<img src='.img/2026-01-30-05-33-53.png' width=700>
-
----
 
 <img src='.img/2026-01-30-05-34-11.png' width=500>
 
@@ -54,25 +89,11 @@ I took this assessment on Friday, January 30th, after reviewing the Microsoft Le
 
 ---
 
-<img src='.img/2026-01-30-05-38-46.png' width=700>
-
----
 
 <img src='.img/2026-01-30-05-41-40.png' width=700>
 
 ---
 
-<img src='.img/2026-01-30-05-42-04.png' width=400>
-
----
-
-<img src='.img/2026-01-30-05-46-07.png' width=700>
-
----
-
-<img src='.img/2026-01-30-05-50-54.png' width=700>
-
----
 
 <img src='.img/2026-01-30-05-53-50.png' width=700>
 
@@ -86,9 +107,6 @@ I took this assessment on Friday, January 30th, after reviewing the Microsoft Le
 
 ---
 
-<img src='.img/2026-01-30-05-58-51.png' width=700>
-
----
 
 <img src='.img/2026-01-30-05-59-35.png' width=700>
 
@@ -98,13 +116,7 @@ I took this assessment on Friday, January 30th, after reviewing the Microsoft Le
 
 ---
 
-<img src='.img/2026-01-30-06-01-29.png' width=700>
 
----
-
-<img src='.img/2026-01-30-06-03-01.png' width=700>
-
----
 
 <img src='.img/2026-01-30-06-03-32.png' width=700>
 
@@ -146,9 +158,6 @@ I took this assessment on Friday, January 30th, after reviewing the Microsoft Le
 
 ---
 
-<img src='.img/2026-01-30-06-20-49.png' width=700>
-
----
 
 <img src='.img/2026-01-30-06-21-46.png' width=700>
 
