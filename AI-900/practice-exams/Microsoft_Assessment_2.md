@@ -45,7 +45,7 @@ When a question describes grouping or segmenting data based on shared characteri
 
 <img src='.img/2026-02-02-05-14-34.png' width=700>
 
-<details open>
+<details>
 <summary>Click to expand explanation</summary>
 
 **Why your selected answer (entity recognition) is wrong:**  
@@ -86,5 +86,51 @@ When a question asks about Azure Vision, focus on features that analyze *images 
 
 </details>
 
+---
+
+<img src='.img/2026-02-02-05-21-11.png' width=700>
+
+<details>
+<summary>Click to expand explanation</summary>
+
+**Why your selected answer (fairness) is wrong:**  
+Fairness focuses on ensuring AI systems treat all users equitably and do not produce biased outcomes across different groups. While fairness is always important, this question specifically asks about managing *healthcare data*—the scenario emphasizes data handling and compliance, not equitable treatment of users. Fairness doesn't directly address the protection of sensitive medical information or regulatory compliance.
+
+**Why the correct answers (accountability and privacy and security) are right:**  
+
+- **Privacy and Security:** Healthcare data (PHI/PII) is highly sensitive and regulated (HIPAA, GDPR, etc.). This principle ensures data is protected, anonymized where applicable, and accessed only by authorized parties. It's the most directly relevant principle when the question mentions "manage healthcare data."
+- **Accountability:** This principle ensures AI systems meet ethical and *legal* standards. Healthcare AI must comply with strict regulations, and organizations must be accountable for how the system handles patient data, makes decisions, and can be audited.
+
+**The trap in this question:**  
+The word "healthcare" might make you think about treating patients fairly, which pulls you toward "fairness." However, the question emphasizes *managing healthcare data*—this is about data governance, not equitable outcomes. Read the scenario carefully for whether it's about data handling vs. user treatment.
+
+**Microsoft's Six Responsible AI Principles (quick reference):**
+
+| Principle | Focus |
+|-----------|-------|
+| Fairness | Avoid bias; treat users equitably |
+| Reliability & Safety | Operate safely and as intended |
+| Privacy & Security | Protect data; ensure secure access |
+| Inclusiveness | Empower all users; accessible design |
+| Transparency | Explainable and understandable AI |
+| Accountability | Meet ethical/legal standards; auditability |
+
+**Key takeaway:**  
+When a question mentions sensitive data (healthcare, financial, personal), prioritize **privacy and security**. When it mentions legal/regulatory compliance or organizational responsibility, prioritize **accountability**. Fairness is about equitable treatment of people, not data protection.
+
+**References**
+
+- [Understand Responsible AI - Microsoft Learn](https://learn.microsoft.com/en-us/training/modules/get-started-ai-fundamentals/8-understand-responsible-ai)
+- [Microsoft Responsible AI principles](https://learn.microsoft.com/en-us/azure/machine-learning/concept-responsible-ai)
+- [Responsible AI overview - Azure AI Services](https://learn.microsoft.com/en-us/azure/ai-services/responsible-use-of-ai-overview)
+
+</details>
+
+
+
 
 ## Unsure but Correctly Answered
+
+<img src='.img/2026-02-02-05-20-18.png' width=700> 
+
+---
