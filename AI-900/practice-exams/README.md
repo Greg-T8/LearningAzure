@@ -5,6 +5,6 @@
 | Test Type | Date | Overall Score | AI Workloads | Machine Learning | Computer Vision | NLP | Generative AI |
 | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
 | [Microsoft Assessment](./Microsoft_Assessment_1.md) | 2026-01-31 | 80% | 78% | 78% | 78% | 55% | 88% |
-| [Microsoft Assessment 2](./Microsoft_Assessment_2.md) | 2026-02-01 | 88% | 85% | 100% | 100% | 55% | 100% |
+| [Microsoft Assessment 2](./Microsoft_Assessment_2.md) | 2026-02-02 | 84% | 85% | 95% | 95% | 60% | 100% |
 
 ---
