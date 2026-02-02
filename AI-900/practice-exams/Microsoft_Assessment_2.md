@@ -6,146 +6,85 @@ Second attempt at the Microsoft practice assessment for AI-900.
 
 ## Assessment Results
 
-<img src='.img/2026-02-01-06-48-45.png' width=700>
 
 ---
 
 ## Wrong Answers
 
-<!-- Insert screenshots and explanations here -->
+<img src='.img/2026-02-02-05-04-04.png' width=700>
+
+<details>
+<summary>Click to expand explanation</summary>
+
+**Why your answer (classification) is wrong:**  
+Classification is a *supervised* learning technique that requires **labeled training data**—meaning you already know the categories (e.g., "will buy" vs. "won't buy") and train a model to predict which category new data belongs to. The question doesn't mention any predefined labels or categories to predict; it's asking about grouping customers based on similarities, not predicting a known outcome.
+
+**Why the correct answer (clustering) is right:**  
+Clustering is an *unsupervised* learning technique that works with **unlabeled data**. It discovers natural groupings based on similarities in the data (like demographics and shopping behaviors) without needing predefined categories. The key phrase in the question is "group together online shoppers that have similar attributes"—this describes exactly what clustering does. The model finds patterns and segments customers into clusters, which the marketing team can then use for targeted campaigns.
+
+**How to distinguish these on the exam:**
+
+| Scenario | ML Type |
+|----------|---------|
+| Predict a **known category** (yes/no, spam/not spam) | Classification |
+| Predict a **numeric value** (price, temperature) | Regression |
+| **Group data by similarity** without predefined labels | Clustering |
+
+**Key takeaway:**  
+When a question describes grouping or segmenting data based on shared characteristics *without* mentioning predefined labels or predictions, the answer is clustering. Classification requires you to already know what categories exist.
+
+**References**
+
+- [What is clustering? - Azure Machine Learning](https://learn.microsoft.com/en-us/azure/machine-learning/component-reference/k-means-clustering)
+- [Machine learning algorithm types - Microsoft Learn](https://learn.microsoft.com/en-us/training/modules/fundamentals-machine-learning/2-what-is-machine-learning)
+- [Clustering models in Azure Machine Learning designer](https://learn.microsoft.com/en-us/azure/machine-learning/component-reference/train-clustering-model)
+
+</details>
 
 ---
 
-## Correctly Answered but Interesting Questions
+<img src='.img/2026-02-02-05-14-34.png' width=700>
+
+<details open>
+<summary>Click to expand explanation</summary>
+
+**Why your selected answer (entity recognition) is wrong:**  
+Entity recognition is a **Natural Language Processing (NLP)** feature, not a computer vision feature. It identifies and categorizes entities like names, dates, locations, and organizations from *text*. This capability belongs to the Azure AI Language service, not Azure Vision. The question specifically asks about *Vision* workloads, which deal with analyzing images and video—not text.
+
+**Why the correct answers (OCR and spatial analysis) are right:**  
+Both are core **computer vision** capabilities within Azure Vision in Foundry Tools:
+
+- **Optical Character Recognition (OCR):** Extracts printed and handwritten text *from images*. Even though it outputs text, it's a vision workload because it analyzes image data.
+- **Spatial Analysis:** Analyzes video streams to detect and track people's movements in physical spaces (e.g., counting people, detecting social distancing). This is a real-time video analytics feature.
+
+**The trap in this question:**  
+It's easy to confuse *entity recognition* with vision because OCR and entity recognition both deal with "extracting information." However:
+
+- OCR extracts text *from images* → **Vision**
+- Entity recognition extracts entities *from text* → **Language/NLP**
+
+**Quick reference for AI-900:**
+
+| Feature | Azure Service Category |
+|---------|------------------------|
+| OCR | Vision |
+| Spatial Analysis | Vision |
+| Image Classification | Vision |
+| Entity Recognition | Language (NLP) |
+| Key Phrase Extraction | Language (NLP) |
+| Sentiment Analysis | Language (NLP) |
+
+**Key takeaway:**  
+When a question asks about Azure Vision, focus on features that analyze *images or video*. NLP features like entity recognition, key phrase extraction, and sentiment analysis all operate on text and belong to Azure AI Language.
+
+**References**
+
+- [What is Azure AI Vision?](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview)
+- [OCR - Azure AI Vision](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview-ocr)
+- [Azure AI services Computer Vision Spatial Analysis](https://mcr.microsoft.com/artifact/mar/azure-cognitive-services/vision/spatial-analysis/about)
+- [What is Azure AI Language?](https://learn.microsoft.com/en-us/azure/ai-services/language-service/overview)
+
+</details>
 
 
-
-## Correctly Answered Questions
-
-<!-- Insert screenshots here -->
-
----
-
-<img src='.img/2026-02-01-06-19-31.png' width=700>
-
-<img src='.img/2026-02-01-06-20-11.png' width=700>
-
-<img src='.img/2026-02-01-06-20-46.png' width=700>
-
-<img src='.img/2026-02-01-06-21-12.png' width=700>
-
-<img src='.img/2026-02-01-06-21-30.png' width=700>
-
-<img src='.img/2026-02-01-06-21-50.png' width=700>
-
-<img src='.img/2026-02-01-06-22-12.png' width=700>
-
-<img src='.img/2026-02-01-06-22-49.png' width=700>
-
-<img src='.img/2026-02-01-06-23-06.png' width=700>
-
-<img src='.img/2026-02-01-06-23-40.png' width=700>
-
-<img src='.img/2026-02-01-06-24-04.png' width=700>
-
-<img src='.img/2026-02-01-06-24-27.png' width=700>
-
-<img src='.img/2026-02-01-06-24-48.png' width=700>
-
-<img src='.img/2026-02-01-06-25-08.png' width=700>
-
-<img src='.img/2026-02-01-06-25-25.png' width=700>
-
-<img src='.img/2026-02-01-06-25-51.png' width=700>
-
-<img src='.img/2026-02-01-06-26-06.png' width=700>
-
-<img src='.img/2026-02-01-06-27-17.png' width=700>
-
-<img src='.img/2026-02-01-06-27-40.png' width=700>
-
-<img src='.img/2026-02-01-06-27-58.png' width=700>
-
-<img src='.img/2026-02-01-06-28-19.png' width=700>
-
-<img src='.img/2026-02-01-06-28-34.png' width=700>
-
----
-<img src='.img/2026-02-01-06-29-30.png' width=700>
----
-
-<img src='.img/2026-02-01-06-34-15.png' width=700>
-
----
-<img src='.img/2026-02-01-06-35-00.png' width=700>
----
-
----
-<img src='.img/2026-02-01-06-35-41.png' width=700>
----
-
----
-<img src='.img/2026-02-01-06-36-49.png' width=700>
----
-
----
-<img src='.img/2026-02-01-06-37-21.png' width=700>
----
-
----
-<img src='.img/2026-02-01-06-38-11.png' width=700>
----
-
----
-<img src='.img/2026-02-01-06-39-21.png' width=700>
----
-
-<img src='.img/2026-02-01-06-39-38.png' width=700>
-
----
-<img src='.img/2026-02-01-06-40-19.png' width=700>
----
-
-<img src='.img/2026-02-01-06-40-41.png' width=700>
-
-<img src='.img/2026-02-01-06-41-10.png' width=700>
-
-<img src='.img/2026-02-01-06-41-28.png' width=700>
-
-<img src='.img/2026-02-01-06-41-42.png' width=700>
-
-<img src='.img/2026-02-01-06-42-00.png' width=700>
-
-<img src='.img/2026-02-01-06-42-13.png' width=700>
-
-<img src='.img/2026-02-01-06-42-27.png' width=700>
-
----
-<img src='.img/2026-02-01-06-42-51.png' width=700>
----
-
-<img src='.img/2026-02-01-06-43-11.png' width=700>
-
-<img src='.img/2026-02-01-06-43-37.png' width=700>
-
-<img src='.img/2026-02-01-06-44-03.png' width=700>
-
-<img src='.img/2026-02-01-06-44-25.png' width=700>
-
-<img src='.img/2026-02-01-06-44-59.png' width=700>
-
-<img src='.img/2026-02-01-06-45-18.png' width=700>
-
----
-<img src='.img/2026-02-01-06-45-50.png' width=700>
----
-
----
-<img src='.img/2026-02-01-06-46-49.png' width=700>
----
-
-<img src='.img/2026-02-01-06-47-23.png' width=700>
-
----
-<img src='.img/2026-02-01-06-47-55.png' width=700>
----
+## Unsure but Correctly Answered
