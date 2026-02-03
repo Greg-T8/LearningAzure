@@ -1039,7 +1039,7 @@ Action group notification “rate limiting” questions are testing that **notif
 
 <img src='.img/2026-01-30-05-34-11.png' width=500>
 
-<details open>
+<details>
 <summary>Click to expand explanation</summary>
 
 **Why the selected answers are wrong**
@@ -1084,6 +1084,47 @@ Premium storage accounts and storage account v1 are **not supported**, regardles
 ---
 
 <img src='.img/2026-01-30-05-41-40.png' width=700>
+
+<details open>
+<summary>Click to expand explanation</summary>
+
+**Why the selected answer is wrong**
+
+“Restore the disk containing the configuration file” is incorrect because a disk restore is a **full disk–level operation**. It replaces or attaches an entire managed disk from a recovery point. That is slower and risks overwriting or impacting other files on the disk, which directly violates the requirement to restore **only one file** as quickly as possible and **without affecting other system files**.
+On Azure exams, disk restore is a common trap when the scenario clearly calls for **granular recovery**.
+
+**Why the correct answer is right**
+
+The scenario is testing **Azure VM File Recovery** from a Recovery Services vault. File Recovery allows you to restore individual files from a specific recovery point **without restoring the VM or disk**.
+
+The correct sequence is:
+
+1. Start the file recovery process and select the recovery point of six days ago.
+2. Download and execute the PowerShell script to mount the recovery volume.
+3. Copy the required configuration file from the mounted volume to the VM.
+4. Unmount the volumes.
+
+This approach is the **fastest**, least disruptive method and is exactly what Azure Backup File Recovery is designed for.
+
+**Key takeaway**
+
+If the requirement is **one or a few files**, always choose **File Recovery**, not disk or VM restore.
+Disk restore = coarse-grained, higher impact.
+File Recovery = granular, fast, exam-preferred.
+
+**References**
+
+Azure VM file recovery
+[https://learn.microsoft.com/azure/backup/backup-azure-restore-files-from-vm](https://learn.microsoft.com/azure/backup/backup-azure-restore-files-from-vm)
+
+Restore Azure VM data using Azure Backup
+[https://learn.microsoft.com/azure/backup/backup-azure-vms-restore](https://learn.microsoft.com/azure/backup/backup-azure-vms-restore)
+
+Azure Recovery Services vault overview
+[https://learn.microsoft.com/azure/backup/backup-azure-recovery-services-vault-overview](https://learn.microsoft.com/azure/backup/backup-azure-recovery-services-vault-overview)
+
+
+</details>
 
 ---
 
