@@ -868,7 +868,7 @@ If a deployment-related command is available (like `Publish-AzWebApp`) and the s
 
 <img src='.img/2026-01-30-05-53-50.png' width=700>
 
-<details open>
+<details>
 <summary>Click to expand explanation</summary>
 
 **Why your selected answers are incorrect**
@@ -908,6 +908,61 @@ If a deployment-related command is available (like `Publish-AzWebApp`) and the s
 ---
 
 <img src='.img/2026-01-30-05-30-07.png' width=700>
+
+<details open>
+<summary>Click to expand explanation</summary>
+
+**Why the selected answer is wrong**
+
+**Configure separate backend pool VMs per application** does not address the actual failure mode.
+The issue described is a **backend VM attempting to access the internal load balancer (ILB) frontend**, which causes **hairpin (loopback) traffic**. Azure **Standard Internal Load Balancer does not support backend-to-frontend flows without an intermediary**, even if health probes succeed. Splitting applications into separate backend pools does not change the traffic pattern, so the data path still fails.
+
+This option is a design reorganization, not a troubleshooting or functional fix.
+
+**Why the correct answers are right**
+
+**Combine the Azure internal load balancer with a third-party proxy (e.g., Nginx)**
+A proxy running on a VM breaks the hairpin scenario by terminating the connection and re-initiating traffic to the backend. This is a valid workaround because:
+
+* Azure ILB does not support backend instances directly calling the ILB frontend
+* A proxy introduces a new source IP and symmetric flow
+* This is a documented and supported pattern for resolving ILB loopback limitations
+
+**Use internal Application Gateway with HTTP/HTTPS**
+Application Gateway **does support backend-to-frontend scenarios** because it operates at Layer 7 and manages connections differently:
+
+* It avoids the SNAT/loopback limitation of Azure Load Balancer
+* It is explicitly designed for HTTP/HTTPS internal routing
+* Backend instances can safely access the frontend endpoint
+
+This is a complete architectural fix when the workload is HTTP/HTTPS-based.
+
+**Why the other option is not correct**
+
+**Evaluate and reconfigure NSGs on the backend VMs**
+NSGs are not the problem here:
+
+* Health probes are succeeding, which already proves NSGs allow required traffic
+* The failure is due to **load balancer behavior**, not packet filtering
+* NSG changes cannot fix ILB hairpin traffic limitations
+
+**Key takeaway**
+
+Azure **Internal Load Balancer does not support backend VMs accessing the ILB frontend**. When this traffic pattern is required, you must introduce an intermediary (proxy) or switch to a service like **Application Gateway** that supports it. Configuration-only changes (backend pools, NSGs) do not resolve this limitation.
+
+**References**
+
+* Azure Load Balancer limitations and hairpinning:
+  [https://learn.microsoft.com/azure/load-balancer/load-balancer-troubleshoot#hairpinning](https://learn.microsoft.com/azure/load-balancer/load-balancer-troubleshoot#hairpinning)
+
+* Azure Application Gateway overview:
+  [https://learn.microsoft.com/azure/application-gateway/overview](https://learn.microsoft.com/azure/application-gateway/overview)
+
+* Azure Load Balancer architecture and behavior:
+  [https://learn.microsoft.com/azure/load-balancer/load-balancer-overview](https://learn.microsoft.com/azure/load-balancer/load-balancer-overview)
+
+
+</details>
 
 ---
 
