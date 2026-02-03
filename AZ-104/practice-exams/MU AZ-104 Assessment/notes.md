@@ -999,6 +999,40 @@ For Azure Monitor alerts, use **one action group with multiple actions** wheneve
 
 <img src='.img/2026-01-30-06-20-01.png' width=700>
 
+<details open>
+<summary>Click to expand explanation</summary>
+
+**Why the selected answer is wrong**
+
+* The dropdown values shown (Email **60**, Voice **4**, SMS **60** per hour) don’t match Azure Monitor’s **service-level notification rate limits** for action groups. Even if an alert fires every minute, Azure Monitor will **throttle notifications per recipient** (email address/phone number) based on those limits—not based on the alert frequency.
+
+**Why the correct answer is right**
+Azure Monitor action group notification limits (production) are:
+
+* **Email:** **No more than 100 emails per hour** per email address (per region). ([Microsoft Learn][1])
+* **SMS:** **No more than 1 SMS every 5 minutes** per phone number ⇒ 60 / 5 = **12 per hour**. ([Microsoft Learn][1])
+* **Voice:** **No more than 1 voice call every 5 minutes** per phone number ⇒ 60 / 5 = **12 per hour**. ([Microsoft Learn][1])
+
+So, with Alert1 firing every minute (60 times/hour), the **maximum notifications actually sent per hour** are:
+
+* **Email:** **60** (because the alert only fires 60 times/hour, which is under the 100/hour cap) ([Microsoft Learn][1])
+* **SMS:** **12** (throttled by 1 per 5 minutes) ([Microsoft Learn][1])
+* **Voice:** **12** (throttled by 1 per 5 minutes) ([Microsoft Learn][1])
+
+**Key takeaway**
+Action group notification “rate limiting” questions are testing that **notification throttles are per recipient**, and for **SMS/voice** they effectively translate to **12/hour** (1 per 5 minutes). Email has a higher cap (100/hour), so the alert’s firing rate (60/hour) becomes the limiting factor. ([Microsoft Learn][2])
+
+**References**
+
+* Azure Monitor service limits (Action groups: Email/SMS/Voice limits): [https://learn.microsoft.com/en-us/azure/azure-monitor/fundamentals/service-limits](https://learn.microsoft.com/en-us/azure/azure-monitor/fundamentals/service-limits)
+* Create and manage action groups in Azure Monitor (rate limiting behavior overview): [https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/action-groups](https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/action-groups)
+* Troubleshoot Azure Monitor alerts and notifications (SMS/voice throttling explanation): [https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-troubleshoot](https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-troubleshoot)
+
+[1]: https://learn.microsoft.com/en-us/azure/azure-monitor/fundamentals/service-limits "Azure Monitor service limits - Azure Monitor | Microsoft Learn"
+[2]: https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/action-groups?utm_source=chatgpt.com "Create and manage action groups in Azure Monitor"
+
+</details>
+
 ---
 
 <img src='.img/2026-01-30-05-36-07.png' width=700>
