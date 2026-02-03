@@ -50,7 +50,7 @@ If the scenario requires **training a model to recognize your own image categori
 
 <img src='.img/2026-02-03-04-58-27.png' width=700>
 
-<details open>
+<details>
 <summary>Click to expand explanation</summary>
 
 **Why the selected answer is wrong (Determine the seller’s identity from a sales receipt)**
@@ -83,6 +83,44 @@ For AI-900, Azure AI Document Intelligence is about **document OCR and structure
 </details>
 
 ---
+
+<img src='.img/2026-02-03-05-07-47.png' width=700>
+
+<details open>
+<summary>Click to expand explanation</summary>
+
+**Why the selected answer is wrong (Translate text from English to Spanish)**
+Text translation is **not** provided by Azure AI Language. Translation is handled by **Azure AI Translator**, which is a separate service under Azure AI Services. This is a common AI-900 trap: translation feels like “language,” but on the exam, **Azure AI Language focuses on understanding and analyzing text**, not converting it between languages.
+
+**Why the correct answers are right**
+**Perform sentiment analysis on customer reviews** is a core Azure AI Language capability. Sentiment analysis evaluates text to determine positive, negative, neutral, or mixed sentiment and is explicitly part of the service.
+
+**Extract key entities from legal documents** is also a native Azure AI Language feature. Entity recognition identifies people, organizations, locations, dates, and other structured information from unstructured text, which fits this scenario exactly.
+
+**Why the other options are incorrect**
+**Describe characteristics of an object in a picture** and **Identify objects in images** are computer vision workloads. These are handled by **Azure AI Vision**, not Azure AI Language. The exam expects you to separate **text-based NLP services** from **image-based vision services**.
+
+**Key takeaway**
+For AI-900, remember this boundary clearly:
+
+* **Azure AI Language** → sentiment analysis, entity extraction, key phrase extraction, text classification
+* **Azure AI Translator** → language translation
+* **Azure AI Vision** → images and visual content
+
+If translation or images are involved, Azure AI Language is not the correct choice.
+
+**References**  
+[https://learn.microsoft.com/azure/ai-services/language-service/overview](https://learn.microsoft.com/azure/ai-services/language-service/overview)
+[https://learn.microsoft.com/azure/ai-services/translator/overview](https://learn.microsoft.com/azure/ai-services/translator/overview)
+[https://learn.microsoft.com/azure/ai-services/computer-vision/overview](https://learn.microsoft.com/azure/ai-services/computer-vision/overview)
+
+<img src='.img/2026-02-03-05-09-46.png' width=300> 
+
+</details>
+
+---
+
+
 
 
 ## Correctly Answered but Uncertain Questions
