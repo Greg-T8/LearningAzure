@@ -909,7 +909,7 @@ If a deployment-related command is available (like `Publish-AzWebApp`) and the s
 
 <img src='.img/2026-01-30-05-30-07.png' width=700>
 
-<details open>
+<details>
 <summary>Click to expand explanation</summary>
 
 **Why the selected answer is wrong**
@@ -963,12 +963,37 @@ Azure **Internal Load Balancer does not support backend VMs accessing the ILB fr
 * Azure Load Balancer architecture and behavior:
   [https://learn.microsoft.com/azure/load-balancer/load-balancer-overview](https://learn.microsoft.com/azure/load-balancer/load-balancer-overview)
 
-
 </details>
 
 ---
 
 <img src='.img/2026-01-30-05-26-15.png' width=700>
+
+<details>
+<summary>Click to expand explanation</summary>
+
+**Why the selected answer is wrong**
+
+“Configure two action groups: one for email and SMS notification and one for IT service management (ITSM) ticket creation” adds unnecessary administrative overhead. Azure Monitor alert rules can reference a **single action group** that contains multiple actions. Splitting actions into separate action groups does not provide additional capability here and violates the requirement for *minimum administrative effort*. This is a common exam trap—assuming separation is required when Azure already supports multiple actions per action group.
+
+**Why the correct answers are right**
+
+“Configure one action group with two actions: one for email and SMS notification and one for IT service management (ITSM) ticket creation” is correct because Azure Monitor action groups are explicitly designed to fan out multiple notification and automation actions from a single alert. One action group can include email, SMS, voice, webhook, Logic App, and ITSM actions together, making it the simplest and lowest-effort configuration.
+
+“Configure an IT Service Management Connector (ITSMC)” is correct because System Center Service Manager integration with Azure Monitor alerts requires the ITSM Connector. The connector enables Azure Monitor to automatically create incidents in the ITSM system when alerts fire. Without the ITSMC, ticket creation is not possible regardless of how the action group is configured.
+
+**Key takeaway**
+
+For Azure Monitor alerts, use **one action group with multiple actions** whenever possible, and remember that **ITSM ticket creation requires an ITSM Connector**. The exam consistently favors solutions that minimize configuration objects while using native Azure Monitor capabilities.
+
+**References**
+
+* [https://learn.microsoft.com/azure/azure-monitor/alerts/action-groups](https://learn.microsoft.com/azure/azure-monitor/alerts/action-groups)
+* [https://learn.microsoft.com/azure/azure-monitor/alerts/itsmc-overview](https://learn.microsoft.com/azure/azure-monitor/alerts/itsmc-overview)
+* [https://learn.microsoft.com/azure/azure-monitor/alerts/alerts-overview](https://learn.microsoft.com/azure/azure-monitor/alerts/alerts-overview)
+
+
+</details>
 
 ---
 
