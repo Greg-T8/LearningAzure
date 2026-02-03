@@ -150,6 +150,41 @@ For Azure exams:
 
 ---
 
+<img src='.img/2026-02-03-05-19-43.png' width=700>
+
+<details>
+<summary>Click to expand explanation</summary>
+
+**Why the selected answer is wrong**
+You marked **“Sorting songs into playlists based on their genres”** as **No**, but this statement is **true** in the context of clustering. The mistake is assuming that clustering only applies when there are no known categories at all. On exams, **grouping items based on shared characteristics** (such as genre, tempo, or mood) is commonly treated as clustering, even if humans conceptually understand what those groups represent.
+
+A common trap is overthinking the difference between **classification vs clustering**:
+
+* Classification requires **pre-labeled data** and a trained model.
+* Clustering groups items **based on similarity**, often without predefined labels.
+
+The question does not state that a supervised model with labeled genres is being used, so clustering is valid.
+
+**Why the correct answer is right**
+
+* **Predicting house prices** is **regression**, not clustering. You correctly answered **No**.
+* **Sorting songs into playlists based on genre** is **clustering** because songs are grouped by similarity. Correct answer is **Yes**.
+* **Segmenting customers by purchasing behavior** is a textbook **clustering** example. You correctly answered **Yes**.
+
+**Key takeaway**
+On Microsoft exams, **clustering = grouping similar items**. Do not assume clustering is invalid just because the groups are meaningful or named. If the task is about **organizing data into groups based on shared traits**, clustering is usually the correct interpretation.
+
+**References**
+
+* [https://learn.microsoft.com/en-us/training/modules/describe-machine-learning-workloads/](https://learn.microsoft.com/en-us/training/modules/describe-machine-learning-workloads/)
+* [https://learn.microsoft.com/en-us/training/modules/describe-artificial-intelligence-workloads/](https://learn.microsoft.com/en-us/training/modules/describe-artificial-intelligence-workloads/)
+
+
+</details>
+
+---
+
+
 
 
 
