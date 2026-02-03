@@ -999,7 +999,7 @@ For Azure Monitor alerts, use **one action group with multiple actions** wheneve
 
 <img src='.img/2026-01-30-06-20-01.png' width=700>
 
-<details open>
+<details>
 <summary>Click to expand explanation</summary>
 
 **Why the selected answer is wrong**
@@ -1036,6 +1036,13 @@ Action group notification “rate limiting” questions are testing that **notif
 ---
 
 <img src='.img/2026-01-30-05-36-07.png' width=700>
+
+<details open>
+<summary>Click to expand explanation</summary>
+
+tbd
+
+</details>
 
 ---
 
