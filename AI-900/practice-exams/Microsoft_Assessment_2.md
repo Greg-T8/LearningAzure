@@ -313,14 +313,65 @@ When a question asks about unified access to multiple Azure AI capabilities thro
 
 </details>
 
-
 ## Unsure but Correctly Answered
 
 <img src='.img/2026-02-02-05-20-18.png' width=700> 
 
+<details>
+<summary>Click to expand explanation</summary>
+
+**Why your selected answer is correct**
+
+You selected **transparency**, which is correct. In Microsoft’s Responsible AI framework, transparency explicitly covers **making users aware of how an AI system works, what it is intended to do, and—critically—what its limitations are**. This includes setting appropriate expectations about accuracy, edge cases, and scenarios where the AI may not perform well.
+
+**Why the other options are incorrect**
+
+* **Accountability** focuses on ensuring humans remain responsible for AI outcomes, including governance, oversight, and remediation. It does not primarily address communicating system limitations to users.
+* **Privacy and security** is concerned with protecting personal data, preventing misuse, and securing AI systems against threats—not explaining AI constraints.
+* **Reliability and safety** ensures the system behaves consistently and avoids harmful outcomes under expected conditions. While related to risk, it does not center on user awareness of limitations.
+
+**Key takeaway**
+
+On Microsoft exams, any question about **explaining AI behavior, setting expectations, or communicating limitations** maps directly to **transparency**. Other principles focus on operational controls, protections, or governance—not awareness.
+
+**References**
+
+* [https://learn.microsoft.com/training/modules/understand-responsible-ai/](https://learn.microsoft.com/training/modules/understand-responsible-ai/)
+* [https://learn.microsoft.com/training/modules/identify-principles-practices-responsible-ai/](https://learn.microsoft.com/training/modules/identify-principles-practices-responsible-ai/)
+
+
+</details>
+
 ---
 
 <img src='.img/2026-02-02-05-24-08.png' width=700>
+
+<details>
+<summary>Click to expand explanation</summary>
+
+**Why this answer is correct**
+**Deep learning** is the foundational AI technique behind modern image classification. Specifically, convolutional neural networks (CNNs)—a deep learning architecture—are designed to automatically learn hierarchical visual features (edges → shapes → objects) directly from pixel data. This capability is what makes modern image classification accurate and scalable and is the core concept tested in Azure AI and Microsoft Learn content.
+
+**Why the other options are incorrect**
+**Semantic segmentation** is not a foundational technique; it is a *computer vision task*. While it often uses deep learning under the hood, it focuses on classifying *each pixel* in an image rather than assigning a single label to the entire image. This makes it a downstream application, not the base technique.
+
+**Linear regression** and **multiple linear regression** are traditional machine learning methods used for predicting continuous numeric values. They do not handle raw image data well and lack the ability to learn spatial and hierarchical features, which are essential for image classification.
+
+**Key takeaway**
+On Microsoft exams, remember the distinction:
+
+* **Deep learning** = foundational technique
+* **Image classification / object detection / semantic segmentation** = tasks that *use* deep learning
+
+If the question asks for what *enables* modern image classification, the answer is almost always **deep learning**.
+
+**References**
+[https://learn.microsoft.com/en-us/training/modules/understand-classification/](https://learn.microsoft.com/en-us/training/modules/understand-classification/)
+[https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview)
+[https://learn.microsoft.com/en-us/training/paths/get-started-computer-vision/](https://learn.microsoft.com/en-us/training/paths/get-started-computer-vision/)
+
+
+</details>
 
 ---
 
