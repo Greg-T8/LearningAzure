@@ -186,7 +186,7 @@ On Microsoft exams, **clustering = grouping similar items**. Do not assume clust
 
 <img src='.img/2026-02-03-05-24-14.png' width=700>
 
-<details open>
+<details>
 <summary>Click to expand explanation</summary>
 
 **Why the selected answer is wrong**
@@ -218,4 +218,40 @@ If the scenario emphasizes **unusual, abnormal, or unexpected patterns**, the co
 
 ## Correctly Answered but Uncertain Questions
 
-[Add screenshots and explanations of correctly answered but uncertain questions]
+<img src='.img/2026-02-03-05-29-19.png' width=700>
+
+<details open>
+<summary>Click to expand explanation</summary>
+
+**What the question is testing**
+It’s testing the distinction between *creating new input variables* from existing data (**feature engineering**) versus *choosing among existing variables* (**feature selection**) and other ML lifecycle steps (training/evaluation).
+
+**Why “Feature engineering” is correct**
+Feature engineering is the process of transforming raw data and **deriving additional features** that can improve a model’s predictive performance. Examples include:
+
+* Creating aggregates (e.g., total spend, rolling averages)
+* Extracting parts of a value (e.g., hour/day from a timestamp)
+* Encoding categories (one-hot, label encoding)
+* Normalizing/scaling, binning, handling missing values
+* Combining fields (ratios, interactions)
+
+This matches “generating additional features.”
+
+**Why the other options are wrong (common traps)**
+
+* **Feature selection**: reduces dimensionality by selecting a subset of the *existing* features. It does **not** generate new ones.
+* **Model training**: fits the algorithm to the (already prepared) features; it doesn’t focus on creating new features.
+* **Model evaluation**: measures performance (accuracy, precision/recall, RMSE, etc.); it doesn’t create features.
+
+**Key takeaway**
+If the prompt says **“create/generate additional features,”** the answer is **feature engineering**. If it says **“choose the most relevant features,”** that’s **feature selection**.
+
+**References**
+
+* [Feature engineering](https://learn.microsoft.com/en-us/azure/machine-learning/concept-automated-ml?view=azureml-api-2#feature-engineering)
+* [https://learn.microsoft.com/en-us/azure/architecture/data-science-process/create-features](https://learn.microsoft.com/en-us/azure/architecture/data-science-process/create-features)
+* [https://learn.microsoft.com/en-us/azure/machine-learning/concept-automated-ml#featurization](https://learn.microsoft.com/en-us/azure/machine-learning/concept-automated-ml#featurization)
+* [https://learn.microsoft.com/en-us/training/modules/introduction-to-azure-machine-learning/](https://learn.microsoft.com/en-us/training/modules/introduction-to-azure-machine-learning/)
+
+
+</details>
