@@ -48,6 +48,42 @@ If the scenario requires **training a model to recognize your own image categori
 
 ---
 
+<img src='.img/2026-02-03-04-58-27.png' width=700>
+
+<details open>
+<summary>Click to expand explanation</summary>
+
+**Why the selected answer is wrong (Determine the seller’s identity from a sales receipt)**
+Azure AI Document Intelligence can **extract text and structured fields** (for example, merchant name, date, total) from receipts, but it **does not determine or verify a person’s identity**. In exam wording, “identity” implies **identity recognition or verification**, which is outside the scope of Document Intelligence. This is a common exam trap: confusing **text extraction** with **identity recognition**.
+
+**Why the correct answers are right**
+
+* **Analyze and extract data from insurance claim forms**
+  This is a core use case for Azure AI Document Intelligence. The service is designed to process structured and semi-structured documents (forms, invoices, claims) and extract key-value pairs, tables, and fields using prebuilt or custom models.
+
+* **(Correct alternative instead of identity-related options)**
+  None of the remaining options align with Document Intelligence:
+
+  * Locating an image of a product → Computer Vision (image search/object detection)
+  * Converting a form from Filipino to English → Azure AI Translator
+  * Identifying emotions or sentiment → Azure AI Language (Text Analytics)
+
+**Key takeaway**
+For AI-900, Azure AI Document Intelligence is about **document OCR and structured data extraction**, not **image search**, **language translation**, **sentiment analysis**, or **identity recognition**. When you see wording like “identity,” treat it as a red flag unless the task is clearly about extracting text fields.
+
+**References**
+
+* [https://learn.microsoft.com/azure/ai-services/document-intelligence/overview](https://learn.microsoft.com/azure/ai-services/document-intelligence/overview)
+* [https://learn.microsoft.com/azure/ai-services/document-intelligence/prebuilt/receipts](https://learn.microsoft.com/azure/ai-services/document-intelligence/prebuilt/receipts)
+* [https://learn.microsoft.com/azure/ai-services/document-intelligence/prebuilt/forms](https://learn.microsoft.com/azure/ai-services/document-intelligence/prebuilt/forms)
+
+
+<img src='.img/2026-02-03-05-03-00.png' width=700> 
+
+</details>
+
+---
+
 
 ## Correctly Answered but Uncertain Questions
 
