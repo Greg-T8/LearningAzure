@@ -184,7 +184,35 @@ On Microsoft exams, **clustering = grouping similar items**. Do not assume clust
 
 ---
 
+<img src='.img/2026-02-03-05-24-14.png' width=700>
 
+<details open>
+<summary>Click to expand explanation</summary>
+
+**Why the selected answer is wrong**
+You marked **Yes** for “Predicting network intrusion attempts by analyzing abnormal network traffic patterns is an example of anomaly detection.” This statement is actually **true**, so selecting **Yes** should have been correct. The mistake likely comes from overthinking the word *predicting*. In AI-900, anomaly detection commonly includes identifying **unusual or abnormal patterns** that may indicate issues such as intrusions, fraud, or faults. Network intrusion detection is a textbook anomaly detection scenario.
+
+**Why the correct answer is right**
+Anomaly detection focuses on finding data points or patterns that deviate from normal behavior. Abnormal spikes, traffic patterns, or unusual access attempts in network logs fit this definition precisely. Whether the system flags them in real time or uses historical baselines, the task is still detecting anomalies rather than forecasting a continuous value.
+
+**Clarifying the contrast with forecasting**
+This question set is testing your ability to distinguish **forecasting/regression** from **anomaly detection**:
+
+* Forecasting stock prices is about **predicting future numeric values**, not identifying outliers.
+* Detecting abnormal network traffic or unusual credit card spending is about **finding deviations from normal patterns**, which is anomaly detection.
+
+**Key takeaway**
+If the scenario emphasizes **unusual, abnormal, or unexpected patterns**, the correct classification is **anomaly detection**. If it emphasizes **predicting a future value**, it is **forecasting/regression**.
+
+
+<img src='.img/2026-02-03-05-24-58.png' width=700>  
+
+**References**
+[https://learn.microsoft.com/en-us/training/modules/describe-machine-learning/](https://learn.microsoft.com/en-us/training/modules/describe-machine-learning/)
+[https://learn.microsoft.com/en-us/training/modules/fundamentals-machine-learning/](https://learn.microsoft.com/en-us/training/modules/fundamentals-machine-learning/)
+[https://learn.microsoft.com/en-us/azure/architecture/data-guide/scenarios/anomaly-detection](https://learn.microsoft.com/en-us/azure/architecture/data-guide/scenarios/anomaly-detection)
+
+</details>
 
 
 
