@@ -86,7 +86,7 @@ For AI-900, Azure AI Document Intelligence is about **document OCR and structure
 
 <img src='.img/2026-02-03-05-07-47.png' width=700>
 
-<details open>
+<details>
 <summary>Click to expand explanation</summary>
 
 **Why the selected answer is wrong (Translate text from English to Spanish)**
@@ -115,6 +115,36 @@ If translation or images are involved, Azure AI Language is not the correct choi
 [https://learn.microsoft.com/azure/ai-services/computer-vision/overview](https://learn.microsoft.com/azure/ai-services/computer-vision/overview)
 
 <img src='.img/2026-02-03-05-09-46.png' width=300> 
+
+</details>
+
+---
+
+<img src='.img/2026-02-03-05-12-59.png' width=700>
+
+<details>
+<summary>Click to expand explanation</summary>
+
+**Why the selected answer is wrong (Computer Vision)**
+Azure AI Computer Vision focuses on *general image analysis*. It can detect objects, read text (OCR), generate image descriptions, and identify visual features such as colors or landmarks. It **does not support facial recognition tasks** like identifying or verifying a person’s identity. A common exam trap is assuming “faces are images, so Computer Vision must be correct.” On Microsoft exams, **general vision ≠ facial identity**.
+
+**Why the correct answer is right (Azure AI Face)**
+Azure AI Face is the service **specifically designed for facial analysis and recognition**. It supports detecting faces in images and performing **face verification and identification**, which is exactly what a security system granting access to authorized personnel requires. When the requirement explicitly mentions *facial recognition*, the exam expects Azure AI Face.
+
+**Key takeaway**
+For Azure exams:
+
+* **Computer Vision** → objects, scenes, OCR, general image understanding
+* **Azure AI Face** → face detection, verification, and identification
+  If identity or access control is involved, choose **Azure AI Face**, not Computer Vision.
+
+**References**
+
+* [https://learn.microsoft.com/azure/ai-services/computer-vision/overview](https://learn.microsoft.com/azure/ai-services/computer-vision/overview)
+* [https://learn.microsoft.com/azure/ai-services/face/overview](https://learn.microsoft.com/azure/ai-services/face/overview)
+* [https://learn.microsoft.com/training/modules/analyze-images-computer-vision/](https://learn.microsoft.com/training/modules/analyze-images-computer-vision/)
+* [https://learn.microsoft.com/training/modules/detect-analyze-faces/](https://learn.microsoft.com/training/modules/detect-analyze-faces/)
+
 
 </details>
 
