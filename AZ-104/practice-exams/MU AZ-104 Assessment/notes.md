@@ -3,6 +3,7 @@
 * [Overview](#overview)
 * [Assessment Results](#assessment-results)
 * [Wrong Answers Review](#wrong-answers-review)
+* [Correctly Answered but Unsure Questions](#correctly-answered-but-unsure-questions)
 * [Correctly Answered Questions](#correctly-answered-questions)
 
 
@@ -1085,7 +1086,7 @@ Premium storage accounts and storage account v1 are **not supported**, regardles
 
 <img src='.img/2026-01-30-05-41-40.png' width=700>
 
-<details open>
+<details>
 <summary>Click to expand explanation</summary>
 
 **Why the selected answer is wrong**
@@ -1128,7 +1129,7 @@ Azure Recovery Services vault overview
 
 ---
 
-## Correctly Answered Questions
+## Correctly Answered but Unsure Questions
 
 <img src='.img/2026-01-30-05-24-16.png' width=700>
 
@@ -1138,8 +1139,19 @@ Azure Recovery Services vault overview
 
 ---
 
+<img src='.img/2026-01-30-06-17-12.png' width=700>
 
 ---
+
+<img src='.img/2026-01-30-06-17-46.png' width=700>
+
+---
+
+<img src='.img/2026-01-30-06-18-07.png' width=700>
+
+---
+
+## Correctly Answered Questions
 
 <img src='.img/2026-01-30-05-55-46.png' width=700>
 
@@ -1174,18 +1186,6 @@ Azure Recovery Services vault overview
 ---
 
 <img src='.img/2026-01-30-06-15-31.png' width=700>
-
----
-
-<img src='.img/2026-01-30-06-17-12.png' width=700>
-
----
-
-<img src='.img/2026-01-30-06-17-46.png' width=700>
-
----
-
-<img src='.img/2026-01-30-06-18-07.png' width=700>
 
 ---
 
