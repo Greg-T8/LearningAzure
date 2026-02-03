@@ -1070,8 +1070,10 @@ Boot diagnostics requires:
 
 Premium storage accounts and storage account v1 are **not supported**, regardless of region or resource group.
 
-**References**
+<img src='.img/2026-02-03-04-29-59.png' width=700> 
 
+**References**  
+* [Limitations](https://learn.microsoft.com/en-us/azure/virtual-machines/boot-diagnostics#limitations)
 * [https://learn.microsoft.com/azure/virtual-machines/boot-diagnostics](https://learn.microsoft.com/azure/virtual-machines/boot-diagnostics)
 * [https://learn.microsoft.com/azure/storage/common/storage-account-overview](https://learn.microsoft.com/azure/storage/common/storage-account-overview)
 * [https://learn.microsoft.com/azure/virtual-machines/troubleshooting/boot-diagnostics#requirements](https://learn.microsoft.com/azure/virtual-machines/troubleshooting/boot-diagnostics#requirements)
