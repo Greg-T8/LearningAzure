@@ -1024,7 +1024,7 @@ Action group notification “rate limiting” questions are testing that **notif
 
 **References**
 
-* Azure Monitor service limits (Action groups: Email/SMS/Voice limits): [https://learn.microsoft.com/en-us/azure/azure-monitor/fundamentals/service-limits](https://learn.microsoft.com/en-us/azure/azure-monitor/fundamentals/service-limits)
+* Azure Monitor service limits (Action groups: Email/SMS/Voice limits): [https://learn.microsoft.com/en-us/azure/azure-monitor/fundamentals/service-limits](https://learn.microsoft.com/en-us/azure/azure-monitor/fundamentals/service-limits#action-groups)
 * Create and manage action groups in Azure Monitor (rate limiting behavior overview): [https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/action-groups](https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/action-groups)
 * Troubleshoot Azure Monitor alerts and notifications (SMS/voice throttling explanation): [https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-troubleshoot](https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-troubleshoot)
 
