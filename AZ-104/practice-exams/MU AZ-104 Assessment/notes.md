@@ -1037,10 +1037,45 @@ Action group notification “rate limiting” questions are testing that **notif
 
 <img src='.img/2026-01-30-05-36-07.png' width=700>
 
+<img src='.img/2026-01-30-05-34-11.png' width=500>
+
 <details open>
 <summary>Click to expand explanation</summary>
 
-tbd
+**Why the selected answers are wrong**
+
+* **Using storage1 for vm1**
+  Boot diagnostics **cannot use a Premium storage account**. Boot diagnostics requires a **Standard** storage account (Blob service). `storage1` is explicitly a **Premium storage account**, so it is not eligible, even though it is in the same region and resource group as vm1.
+
+* **Using storage2 for vm2**
+  While `storage2` is a Standard storage account, it is a **Storage account v1 (Classic)**. Boot diagnostics **does not support storage account v1**. Only **Storage account v2 (General-purpose v2)** or supported Standard accounts are valid.
+
+**Why the correct answers are right**
+
+* **vm1 → storage3**
+  `storage3` is a **Storage account v2**, which is supported for boot diagnostics. It is also in the **same region (Central US)** as vm1.
+  Replication type (GRS vs LRS) and resource group **do not matter** for boot diagnostics—only account type and region do.
+
+* **vm2 → storage3**
+  Boot diagnostics **does not require the storage account to be in the same resource group**, but it **must be in the same region** as the VM.
+  vm2 is in **East US**, so none of the available accounts in East US meet the requirements (`storage2` fails due to v1). Therefore, **storage3 is the only valid supported account**, and this question is testing that **account type restrictions override resource group and replication considerations**.
+
+**Key takeaway**
+
+Boot diagnostics requires:
+
+* **Standard storage**
+* **Storage account v2**
+* **Same region as the VM**
+
+Premium storage accounts and storage account v1 are **not supported**, regardless of region or resource group.
+
+**References**
+
+* [https://learn.microsoft.com/azure/virtual-machines/boot-diagnostics](https://learn.microsoft.com/azure/virtual-machines/boot-diagnostics)
+* [https://learn.microsoft.com/azure/storage/common/storage-account-overview](https://learn.microsoft.com/azure/storage/common/storage-account-overview)
+* [https://learn.microsoft.com/azure/virtual-machines/troubleshooting/boot-diagnostics#requirements](https://learn.microsoft.com/azure/virtual-machines/troubleshooting/boot-diagnostics#requirements)
+
 
 </details>
 
@@ -1060,7 +1095,6 @@ tbd
 
 ---
 
-<img src='.img/2026-01-30-05-34-11.png' width=500>
 
 ---
 
