@@ -788,6 +788,8 @@ On Azure exams, when you see:
 
 ➡️ **Standard is too weak**, **Isolated is too expensive**, **Premium V3 is the correct balance**.
 
+<img src='.img/2026-02-03-03-22-57.png' width=700> 
+
 **References**
 
 * [https://learn.microsoft.com/azure/app-service/overview-hosting-plans](https://learn.microsoft.com/azure/app-service/overview-hosting-plans)
