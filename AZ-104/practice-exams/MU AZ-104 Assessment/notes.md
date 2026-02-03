@@ -804,7 +804,7 @@ On Azure exams, when you see:
 
 <img src='.img/2026-01-30-06-12-43.png' width=700>
 
-<details open>
+<details>
 <summary>Click to expand explanation</summary>
 
 **Why the selected answer is wrong**
@@ -867,6 +867,43 @@ If a deployment-related command is available (like `Publish-AzWebApp`) and the s
 ---
 
 <img src='.img/2026-01-30-05-53-50.png' width=700>
+
+<details open>
+<summary>Click to expand explanation</summary>
+
+**Why your selected answers are incorrect**
+
+* **Outbound flow on LB01 uses IP02 and IP03 at the same time — you selected No (incorrect).**
+  A *Standard* Load Balancer with multiple outbound public IP addresses can use **multiple SNAT IPs concurrently**. Azure hashes outbound flows (per 5-tuple) across the available frontend public IPs. This means LB01 **can actively use both IP02 and IP03 at the same time**, even though any single flow uses only one IP.
+
+* **Outbound flow on VM03 will use IP02 or IP03 for UDP traffic — you selected Yes (incorrect).**
+  Your load balancing rule is configured for **TCP only**. UDP traffic is **not associated with the load balancer rule**, so it does **not** use the load balancer’s outbound SNAT IPs (IP02/IP03). Instead, UDP outbound traffic from VM03 uses the VM’s **own assigned public IP if present**, or default outbound behavior if not. The presence of a TCP-only rule is the key trap here.
+
+**Why the correct answers are correct**
+
+* **Outbound flow on VM01 will always use IP02 — No (correct).**
+  VM01 has its own public IP (IP01). Azure prefers a VM’s **directly assigned public IP** for outbound traffic over load balancer SNAT. Therefore, VM01 does not “always” use IP02.
+
+* **Outbound flow on LB01 uses IP02 and IP03 at the same time — Yes (correct).**
+  Standard Load Balancer supports **multiple outbound frontend IPs**, distributing outbound connections across them. This increases SNAT port capacity and resiliency.
+
+* **Outbound flow on VM03 will use IP02 or IP03 for UDP traffic — No (correct).**
+  Since the load balancing rule is TCP-only, UDP traffic bypasses the load balancer’s SNAT configuration entirely.
+
+**Key takeaway**
+
+* **Standard Load Balancer outbound SNAT applies only to traffic matching its rules (TCP in this case).**
+* **Multiple outbound public IPs can be used concurrently.**
+* **A VM’s own public IP always takes precedence for outbound traffic.**
+
+**References**
+
+* [https://learn.microsoft.com/azure/load-balancer/load-balancer-outbound-connections](https://learn.microsoft.com/azure/load-balancer/load-balancer-outbound-connections)
+* [https://learn.microsoft.com/azure/load-balancer/load-balancer-standard-overview](https://learn.microsoft.com/azure/load-balancer/load-balancer-standard-overview)
+* [https://learn.microsoft.com/azure/virtual-network/ip-services/public-ip-addresses](https://learn.microsoft.com/azure/virtual-network/ip-services/public-ip-addresses)
+
+
+</details>
 
 ---
 
