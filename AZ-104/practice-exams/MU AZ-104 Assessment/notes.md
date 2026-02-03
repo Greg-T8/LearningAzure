@@ -1124,7 +1124,6 @@ Restore Azure VM data using Azure Backup
 Azure Recovery Services vault overview
 [https://learn.microsoft.com/azure/backup/backup-azure-recovery-services-vault-overview](https://learn.microsoft.com/azure/backup/backup-azure-recovery-services-vault-overview)
 
-
 </details>
 
 ---
