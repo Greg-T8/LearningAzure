@@ -1128,6 +1128,36 @@ Azure Recovery Services vault overview
 
 ---
 
+<img src='.img/2026-01-30-06-17-12.png' width=700>
+
+<details open>
+<summary>Click to expand explanation</summary>
+
+**Why the selected answer is wrong (Yes)**
+Moving from **Free (F1)** to **Shared (D1)** increases the daily CPU quota, but it **does not remove quotas**. Your symptom (“stops after 60 minutes and can’t be restarted until the next day”) matches hitting the **CPU (Day)** quota, which causes the app to be stopped until the quota resets. In Shared (D1), the app can still hit **CPU (Day)** and be stopped again—just later—so it won’t reliably run **8 hours/day**.
+
+**Why the correct answer is correct (No)**
+To meet “run 8 hours each day,” you need a plan where you **don’t get stopped due to Free/Shared quotas**. That generally means moving to a **Dedicated compute** tier (Basic/Standard/Premium), where the app runs on dedicated VMs and the Free/Shared CPU (Day) quota enforcement doesn’t apply in the same way. Shared (D1) remains a shared-compute tier with quota enforcement, so it doesn’t meet the requirement.
+
+**Why other options are incorrect or less appropriate**
+
+* **Stay on Free (F1):** guaranteed to stop once the quota is exceeded (as observed).
+* **Shared (D1):** still quota-enforced; may extend runtime but not to the required 8 hours consistently.
+* **Basic (B1) or higher:** costs more than Shared, but it’s the minimum tier change that aligns with the requirement to keep the app running during the testing window.
+
+**Key takeaway**
+**Free and Shared tiers have CPU quotas that can stop the app until the daily reset.** If you need predictable multi-hour runtime, move to a **Dedicated compute** tier (Basic or higher).
+
+**References**
+
+* [https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans](https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans)
+* [https://learn.microsoft.com/en-us/azure/app-service/web-sites-monitor](https://learn.microsoft.com/en-us/azure/app-service/web-sites-monitor)
+
+
+</details>
+
+---
+
 ## Correctly Answered but Unsure Questions
 
 <img src='.img/2026-01-30-05-24-16.png' width=700>
@@ -1190,7 +1220,7 @@ It does **not** answer: *“Can the VM actually accept this connection?”*
 
 <img src='.img/2026-01-30-05-24-56.png' width=700>
 
-<details open>
+<details>
 <summary>Click to expand explanation</summary>
 
 **Why the selected answer is right**
@@ -1210,9 +1240,6 @@ For Azure IaaS VMs protected by a Recovery Services vault, **soft delete provide
 
 ---
 
-<img src='.img/2026-01-30-06-17-12.png' width=700>
-
----
 
 <img src='.img/2026-01-30-06-17-46.png' width=700>
 

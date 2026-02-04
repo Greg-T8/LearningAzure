@@ -1,0 +1,14 @@
+# Terraform
+*.tfstate
+*.tfstate.*
+*.tfplan
+.terraform/
+.terraform.lock.hcl
+*.tfvars
+
+# Bicep
+*.parameters.local.json
+
+# OS
+.DS_Store
+Thumbs.db
