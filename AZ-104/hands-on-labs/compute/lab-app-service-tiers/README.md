@@ -117,6 +117,28 @@ cd bicep
 ```powershell
 cd bicep
 
+# Option A: Using the safe wrapper (recommended)
+# Validates subscription and auto-creates resource group
+..\..\..\_shared\bicep-safe.ps1 create `
+    -StackName "stack-compute-app-service-tiers" `
+    -ResourceGroup "az104-compute-app-service-tiers-bicep"
+
+# Deploy with Shared tier
+..\..\..\_shared\bicep-safe.ps1 create `
+    -StackName "stack-compute-app-service-tiers" `
+    -ResourceGroup "az104-compute-app-service-tiers-bicep" `
+    --parameters skuName=D1
+
+# Deploy with Basic tier
+..\..\..\_shared\bicep-safe.ps1 create `
+    -StackName "stack-compute-app-service-tiers" `
+    -ResourceGroup "az104-compute-app-service-tiers-bicep" `
+    --parameters skuName=B1
+
+# Option B: Direct az stack commands (subscription validation not enforced)
+# Create resource group first
+az group create --name "az104-compute-app-service-tiers-bicep" --location eastus
+
 # Deploy with Free tier (default)
 az stack group create `
     --name "stack-compute-app-service-tiers" `
@@ -160,6 +182,16 @@ az stack group create `
 ### View Deployment Stack
 
 ```powershell
+# Option A: Using the wrapper
+..\..\..\_shared\bicep-safe.ps1 show `
+    -StackName "stack-compute-app-service-tiers" `
+    -ResourceGroup "az104-compute-app-service-tiers-bicep"
+
+# List all stacks
+..\..\..\_shared\bicep-safe.ps1 list `
+    -ResourceGroup "az104-compute-app-service-tiers-bicep"
+
+# Option B: Direct commands
 # List deployment stacks
 az stack group list --resource-group "az104-compute-app-service-tiers-bicep" -o table
 
@@ -186,7 +218,13 @@ az stack group show `
 
 # Generate load to consume CPU time (run for a few minutes)
 $appUrl = az stack group show `
-    --name "stack-compute-app-service-tiers" `
+  Option A: Using the wrapper (recommended)
+..\..\..\_shared\bicep-safe.ps1 delete `
+    -StackName "stack-compute-app-service-tiers" `
+    -ResourceGroup "az104-compute-app-service-tiers-bicep"
+
+# Option B: Direct command
+#   --name "stack-compute-app-service-tiers" `
     --resource-group "az104-compute-app-service-tiers-bicep" `
     --query "outputs.appUrl.value" -o tsv
 
@@ -209,10 +247,11 @@ az group delete --name "az104-compute-app-service-tiers-bicep" --yes --no-wait
 
 ---
 
-# Comparison: Terraform vs Bicep
-
-| Aspect | Terraform | Bicep |
-|--------|-----------|-------|
+# Comparison: Terraform vs Bicepbicep-safe.ps1 delete` or `az stack group delete` |
+| **Plan/Preview** | `terraform plan` | `az deployment group what-if` |
+| **Variables** | `terraform.tfvars` | `main.bicepparam` |
+| **Provider Lock** | Explicit subscription ID | Validated by wrapper script |
+| **Subscription Guard** | Built into provider + precondition | PowerShell wrapper pre-flight check
 | **Resource Group Name** | `az104-compute-app-service-tiers-tf` | `az104-compute-app-service-tiers-bicep` |
 | **State Management** | Local state file | Deployment stack tracks resources |
 | **Cleanup** | `terraform destroy` | `az stack group delete` |

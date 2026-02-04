@@ -1,9 +1,9 @@
-# -------------------------------------------------------------------------
-# Program: main.bicep
-# Description: Deploy App Service with configurable pricing tier
-# Context: AZ-104 hands-on lab - App Service Plans (Microsoft Azure Administrator)
-# Author: Greg Tate
-# -------------------------------------------------------------------------
+// -------------------------------------------------------------------------
+// Program: main.bicep
+// Description: Deploy App Service with configurable pricing tier
+// Context: AZ-104 hands-on lab - App Service Plans (Microsoft Azure Administrator)
+// Author: Greg Tate
+// -------------------------------------------------------------------------
 
 @description('Azure subscription ID for lab deployments (prevents wrong-subscription mistakes)')
 param labSubscriptionId string
@@ -40,7 +40,7 @@ var uniqueAppName = '${toLower(appName)}-${uniqueString(resourceGroup().id)}'
 var commonTags = {
   Environment: 'Lab'
   Project: 'AZ-104'
-  Domain: toUpper(substring(domain, 0, 1)) + substring(domain, 1)
+  Domain: '${toUpper(substring(domain, 0, 1))}${substring(domain, 1)}'
   Purpose: 'App Service Pricing Tiers'
   Owner: owner
   DeploymentMethod: 'Bicep'

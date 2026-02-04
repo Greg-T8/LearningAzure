@@ -1,9 +1,9 @@
-# -------------------------------------------------------------------------
-# Program: main.bicepparam
-# Description: Lab-specific parameter values for App Service Pricing Tiers lab
-# Context: AZ-104 hands-on lab - App Service Plans (Microsoft Azure Administrator)
-# Author: Greg Tate
-# -------------------------------------------------------------------------
+// -------------------------------------------------------------------------
+// Program: main.bicepparam
+// Description: Lab-specific parameter values for App Service Pricing Tiers lab
+// Context: AZ-104 hands-on lab - App Service Plans (Microsoft Azure Administrator)
+// Author: Greg Tate
+// -------------------------------------------------------------------------
 
 using './main.bicep'
 
