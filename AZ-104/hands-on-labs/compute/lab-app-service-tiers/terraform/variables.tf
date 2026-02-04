@@ -5,6 +5,25 @@
 # Author: Greg Tate
 # -------------------------------------------------------------------------
 
+# -------------------------------------------------------------------------
+# Subscription Guard Variable
+# -------------------------------------------------------------------------
+variable "lab_subscription_id" {
+  description = "Azure subscription ID for lab deployments (prevents wrong-subscription mistakes)"
+  type        = string
+
+  # REPLACE with your lab subscription ID, or set via terraform.tfvars / environment variable
+  default = "00000000-0000-0000-0000-000000000000"
+
+  validation {
+    condition     = can(regex("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$", var.lab_subscription_id))
+    error_message = "lab_subscription_id must be a valid GUID format."
+  }
+}
+
+# -------------------------------------------------------------------------
+# Domain and Lab Configuration
+# -------------------------------------------------------------------------
 variable "domain" {
   description = "AZ-104 exam domain"
   type        = string

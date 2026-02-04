@@ -1,0 +1,19 @@
+# -------------------------------------------------------------------------
+# Program: terraform.tfvars.template
+# Description: Template for lab-specific variable values
+# Context: AZ-104 hands-on labs - Copy to terraform.tfvars and customize
+# Author: Greg Tate
+# -------------------------------------------------------------------------
+#
+# USAGE:
+#   1. Copy this file to terraform.tfvars
+#   2. Replace the subscription ID with your actual lab subscription
+#   3. The .gitignore excludes *.tfvars to prevent committing secrets
+# -------------------------------------------------------------------------
+
+# Your Azure lab subscription ID (REQUIRED - replace this!)
+lab_subscription_id = "00000000-0000-0000-0000-000000000000"
+
+# Optional overrides
+# location = "eastus"
+# owner    = "Greg Tate"

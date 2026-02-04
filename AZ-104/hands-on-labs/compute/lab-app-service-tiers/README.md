@@ -37,6 +37,18 @@ You deploy an Azure web app named **MyApp** in a **Free (F1)** pricing tier serv
 - Terraform CLI installed
 - Azure CLI authenticated (`az login`)
 
+## First-Time Setup
+
+```powershell
+cd terraform
+
+# Copy the tfvars template and add your subscription ID
+Copy-Item ..\..\..\_shared\terraform\terraform.tfvars.template .\terraform.tfvars
+
+# Edit terraform.tfvars and replace the placeholder subscription ID
+# lab_subscription_id = "your-actual-subscription-id"
+```
+
 ## Deploy
 
 ```powershell
@@ -45,13 +57,17 @@ cd terraform
 # Initialize
 terraform init
 
-# Deploy with Free tier (default)
+# Option A: Using the safe wrapper (recommended)
+# Validates subscription before running Terraform
+..\..\..\..\_shared\terraform-safe.ps1 apply -var="sku_name=F1"
+
+# Option B: Direct Terraform (subscription guard built into config)
 terraform apply -var="sku_name=F1"
 
-# Or deploy with Shared tier
+# Deploy with Shared tier
 terraform apply -var="sku_name=D1"
 
-# Or deploy with Basic tier
+# Deploy with Basic tier
 terraform apply -var="sku_name=B1"
 ```
 

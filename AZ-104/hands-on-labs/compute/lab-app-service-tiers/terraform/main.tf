@@ -20,8 +20,26 @@ terraform {
   }
 }
 
+# Locked to specific subscription - prevents accidental deployment to wrong environment
 provider "azurerm" {
   features {}
+
+  # REPLACE with your lab subscription ID
+  subscription_id = var.lab_subscription_id
+}
+
+# -------------------------------------------------------------------------
+# Subscription Guard - Fails fast if wrong subscription
+# -------------------------------------------------------------------------
+data "azurerm_subscription" "current" {}
+
+resource "terraform_data" "subscription_guard" {
+  lifecycle {
+    precondition {
+      condition     = data.azurerm_subscription.current.subscription_id == var.lab_subscription_id
+      error_message = "⛔ BLOCKED: Wrong subscription! Expected lab subscription, got ${data.azurerm_subscription.current.display_name}."
+    }
+  }
 }
 
 # Generate random suffix for globally unique app name
