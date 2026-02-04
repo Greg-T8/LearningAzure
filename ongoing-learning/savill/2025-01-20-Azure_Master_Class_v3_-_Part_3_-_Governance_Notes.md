@@ -10,55 +10,56 @@
 
 ## Table of Contents
 
-- [Introduction](#introduction)
-- [Governance 101](#governance-101)
-- [Understanding requirements](#understanding-requirements)
-- [Compliance manager in Purview](#compliance-manager-in-purview)
-- [Mitigating risk](#mitigating-risk)
-- [Key organizational components](#key-organizational-components)
-- [Management groups](#management-groups)
-- [Entra GA Azure resource elevation](#entra-ga-azure-resource-elevation)
-- [Organizing management groups](#organizing-management-groups)
-- [Subscriptions](#subscriptions)
-- [Controlling subscription policies](#controlling-subscription-policies)
-- [Azure limits](#azure-limits)
-- [How many subscriptions?](#how-many-subscriptions)
-- [Resource groups](#resource-groups)
-- [Moving resources](#moving-resources)
-- [Naming standards](#naming-standards)
-- [Tags](#tags)
-- [Types of governance](#types-of-governance)
-- [Inheritance](#inheritance)
-- [Who, what and how much](#who-what-and-how-much)
-- [Locks](#locks)
-- [ARM and resource structure](#arm-and-resource-structure)
-- [Actions available on resources](#actions-available-on-resources)
-- [Role Based Access Control](#role-based-access-control)
-- [Role assignments](#role-assignments)
-- [Permissions in a role](#permissions-in-a-role)
-- [Data plane roles](#data-plane-roles)
-- [Sum of role assignments](#sum-of-role-assignments)
-- [Custom roles](#custom-roles)
-- [PIM usage](#pim-usage)
-- [Attribute Based Access Control](#attribute-based-access-control)
-- [Azure Policy](#azure-policy)
-- [Cost management and budgets](#cost-management-and-budgets)
-- [Budgets](#budgets)
-- [Tag inheritance for billing](#tag-inheritance-for-billing)
-- [Cost allocation](#cost-allocation)
-- [API and PowerBI](#api-and-powerbi)
-- [Pricing calculator](#pricing-calculator)
-- [Optimizing costs](#optimizing-costs)
-- [Azure reservations](#azure-reservations)
-- [Azure Compute Savings Plan](#azure-compute-savings-plan)
-- [Azure Hybrid Benefit](#azure-hybrid-benefit)
-- [On-demand capacity reservations](#on-demand-capacity-reservations)
-- [Deployment stacks](#deployment-stacks)
-- [Resource graph](#resource-graph)
-- [Resource configuration change](#resource-configuration-change)
-- [Azure Advisor](#azure-advisor)
-- [Great resources](#great-resources)
-- [Close](#close)
+* [Table of Contents](#table-of-contents)
+* [Introduction](#introduction)
+* [Governance 101](#governance-101)
+* [Understanding requirements](#understanding-requirements)
+* [Compliance manager in Purview](#compliance-manager-in-purview)
+* [Mitigating risk](#mitigating-risk)
+* [Key organizational components](#key-organizational-components)
+* [Management groups](#management-groups)
+* [Entra GA Azure resource elevation](#entra-ga-azure-resource-elevation)
+* [Organizing management groups](#organizing-management-groups)
+* [Subscriptions](#subscriptions)
+* [Controlling subscription policies](#controlling-subscription-policies)
+* [Azure limits](#azure-limits)
+* [How many subscriptions?](#how-many-subscriptions)
+* [Resource groups](#resource-groups)
+* [Moving resources](#moving-resources)
+* [Naming standards](#naming-standards)
+* [Tags](#tags)
+* [Types of governance](#types-of-governance)
+* [Inheritance](#inheritance)
+* [Who, what and how much](#who-what-and-how-much)
+* [Locks](#locks)
+* [ARM and resource structure](#arm-and-resource-structure)
+* [Actions available on resources](#actions-available-on-resources)
+* [Role Based Access Control](#role-based-access-control)
+* [Role assignments](#role-assignments)
+* [Permissions in a role](#permissions-in-a-role)
+* [Data plane roles](#data-plane-roles)
+* [Sum of role assignments](#sum-of-role-assignments)
+* [Custom roles](#custom-roles)
+* [PIM usage](#pim-usage)
+* [Attribute Based Access Control](#attribute-based-access-control)
+* [Azure Policy](#azure-policy)
+* [Cost management and budgets](#cost-management-and-budgets)
+* [Budgets](#budgets)
+* [Tag inheritance for billing](#tag-inheritance-for-billing)
+* [Cost allocation](#cost-allocation)
+* [API and PowerBI](#api-and-powerbi)
+* [Pricing calculator](#pricing-calculator)
+* [Optimizing costs](#optimizing-costs)
+* [Azure reservations](#azure-reservations)
+* [Azure Compute Savings Plan](#azure-compute-savings-plan)
+* [Azure Hybrid Benefit](#azure-hybrid-benefit)
+* [On-demand capacity reservations](#on-demand-capacity-reservations)
+* [Deployment stacks](#deployment-stacks)
+* [Resource graph](#resource-graph)
+* [Resource configuration change](#resource-configuration-change)
+* [Azure Advisor](#azure-advisor)
+* [Great resources](#great-resources)
+* [Close](#close)
 
 ## Introduction
 
@@ -115,6 +116,8 @@
 - Understanding organizational requirements and standards is the first step before designing governance solutions.
 - Standards may come from internal policies or external regulatory compliance (industry, country).
 - Cloud environments have shared responsibility models that impact governance.
+
+
 
 **Definitions**
 
@@ -391,6 +394,8 @@
 ---
 
 ## Organizing management groups
+
+https://youtu.be/t-i4XrygWCc?si=e5CMrkBytA-S-00Z&t=1115
 
 **Timestamp**: 00:17:25 – 00:20:12
 
