@@ -4,43 +4,8 @@
 # Context: AZ-104 hands-on lab - App Service Plans (Microsoft Azure Administrator)
 # Author: Greg Tate
 # -------------------------------------------------------------------------
-
-terraform {
-  required_version = ">= 1.0"
-
-  required_providers {
-    azurerm = {
-      source  = "hashicorp/azurerm"
-      version = "~> 3.0"
-    }
-    random = {
-      source  = "hashicorp/random"
-      version = "~> 3.0"
-    }
-  }
-}
-
-# Locked to specific subscription - prevents accidental deployment to wrong environment
-provider "azurerm" {
-  features {}
-
-  # REPLACE with your lab subscription ID
-  subscription_id = var.lab_subscription_id
-}
-
-# -------------------------------------------------------------------------
-# Subscription Guard - Fails fast if wrong subscription
-# -------------------------------------------------------------------------
-data "azurerm_subscription" "current" {}
-
-resource "terraform_data" "subscription_guard" {
-  lifecycle {
-    precondition {
-      condition     = data.azurerm_subscription.current.subscription_id == var.lab_subscription_id
-      error_message = "⛔ BLOCKED: Wrong subscription! Expected lab subscription, got ${data.azurerm_subscription.current.display_name}."
-    }
-  }
-}
+# Note: terraform block and required_providers are defined in providers.tf
+# Note: Provider configuration and subscription guard are in providers.tf and subscription-guard.tf
 
 # Generate random suffix for globally unique app name
 resource "random_string" "suffix" {
@@ -51,14 +16,15 @@ resource "random_string" "suffix" {
 
 # Local variables for naming and tagging
 locals {
-  resource_group_name = "az104-${var.domain}-${var.topic}"
+  resource_group_name = "az104-${var.domain}-${var.topic}-tf"
 
   common_tags = {
-    Environment = "Lab"
-    Project     = "AZ-104"
-    Domain      = title(var.domain)
-    Purpose     = "App Service Pricing Tiers"
-    Owner       = var.owner
+    Environment      = "Lab"
+    Project          = "AZ-104"
+    Domain           = title(var.domain)
+    Purpose          = "App Service Pricing Tiers"
+    Owner            = var.owner
+    DeploymentMethod = "Terraform"
   }
 
   # Unique app name (must be globally unique)

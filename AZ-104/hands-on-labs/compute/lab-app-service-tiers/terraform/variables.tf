@@ -11,9 +11,7 @@
 variable "lab_subscription_id" {
   description = "Azure subscription ID for lab deployments (prevents wrong-subscription mistakes)"
   type        = string
-
-  # REPLACE with your lab subscription ID, or set via terraform.tfvars / environment variable
-  default = "00000000-0000-0000-0000-000000000000"
+  default     = "00000000-0000-0000-0000-000000000000"
 
   validation {
     condition     = can(regex("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$", var.lab_subscription_id))

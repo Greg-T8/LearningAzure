@@ -6,23 +6,25 @@ Standards and naming conventions for all Terraform and Bicep implementations.
 
 ## Resource Group Naming
 
-**Pattern:** `az104-<domain>-<topic>`
+**Pattern:** `<exam>-<domain>-<topic>-<deployment_method>`
 
 | Segment | Description | Allowed Values |
 |---------|-------------|----------------|
-| `az104` | Fixed prefix for all labs | `az104` |
+| `<exam>` | Fixed prefix for all labs | `az104` |
 | `<domain>` | AZ-104 exam domain | `identity`, `networking`, `storage`, `compute`, `monitoring` |
 | `<topic>` | Lab topic (kebab-case) | e.g., `vnet-peering`, `load-balancer`, `rbac-roles` |
+| `<deployment_method>` | IaC tool used | `tf` (Terraform), `bicep` (Bicep) |
 
 ### Examples
 
-| Lab | Resource Group Name |
-|-----|---------------------|
-| VNet Peering | `az104-networking-vnet-peering` |
-| Custom RBAC Roles | `az104-identity-rbac-roles` |
-| Storage Lifecycle | `az104-storage-blob-lifecycle` |
-| VM Availability Sets | `az104-compute-vm-availability` |
-| Log Analytics | `az104-monitoring-log-analytics` |
+| Lab | Deployment | Resource Group Name |
+|-----|------------|---------------------|
+| VNet Peering | Terraform | `az104-networking-vnet-peering-tf` |
+| VNet Peering | Bicep | `az104-networking-vnet-peering-bicep` |
+| Custom RBAC Roles | Terraform | `az104-identity-rbac-roles-tf` |
+| Storage Lifecycle | Bicep | `az104-storage-blob-lifecycle-bicep` |
+| VM Availability Sets | Terraform | `az104-compute-vm-availability-tf` |
+| Log Analytics | Bicep | `az104-monitoring-log-analytics-bicep` |
 
 ---
 
@@ -87,7 +89,7 @@ variable "owner" {
 }
 
 locals {
-  resource_group_name = "az104-${var.domain}-${var.topic}"
+  resource_group_name = "az104-${var.domain}-${var.topic}-tf"
   
   common_tags = {
     Environment = "Lab"
@@ -95,6 +97,7 @@ locals {
     Domain      = title(var.domain)
     Purpose     = replace(title(var.topic), "-", " ")
     Owner       = var.owner
+    DeploymentMethod = "Terraform"
   }
 }
 
@@ -116,14 +119,15 @@ param domain string
 param topic string
 param location string = resourceGroup().location
 param owner string = 'Greg Tate'
-
-var resourceGroupName = 'az104-${domain}-${topic}'
+-bicep'
 
 var commonTags = {
   Environment: 'Lab'
   Project: 'AZ-104'
   Domain: toUpper(substring(domain, 0, 1)) + substring(domain, 1)
   Purpose: replace(topic, '-', ' ')
+  Owner: owner
+  DeploymentMethod: 'Bicep'lace(topic, '-', ' ')
   Owner: owner
 }
 
@@ -151,12 +155,14 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 **Pattern:** `stack-<domain>-<topic>`
 
+
+**Note:** Deployment stack names don't include the `-bicep` suffix since they're already Bicep-specific constructs.
 Example: `stack-networking-vnet-peering`
 
 ---
 
-## Checklist Before Deployment
-
+## Checklist Before Deployment-<deployment_method>` pattern
+- [ ] All resources have required tags (including `DeploymentMethod`)
 - [ ] Resource group follows `az104-<domain>-<topic>` pattern
 - [ ] All resources have required tags
 - [ ] Location is in allowed list

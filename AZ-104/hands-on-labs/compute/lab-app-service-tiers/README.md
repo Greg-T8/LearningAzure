@@ -34,8 +34,13 @@ You deploy an Azure web app named **MyApp** in a **Free (F1)** pricing tier serv
 ## Prerequisites
 
 - Azure subscription
-- Terraform CLI installed
+- **For Terraform**: Terraform CLI installed
+- **For Bicep**: Azure CLI with Bicep installed
 - Azure CLI authenticated (`az login`)
+
+---
+
+# Terraform Deployment
 
 ## First-Time Setup
 
@@ -94,7 +99,130 @@ while ($true) { Invoke-WebRequest -Uri $appUrl -UseBasicParsing | Out-Null; Star
 terraform destroy -auto-approve
 ```
 
-## Notes
+---
+
+# Bicep Deployment (Azure Deployment Stacks)
+
+## First-Time Setup
+
+```powershell
+cd bicep
+
+# Edit main.bicepparam and update your subscription ID
+# labSubscriptionId = 'your-actual-subscription-id'
+```
+
+## Deploy
+
+```powershell
+cd bicep
+
+# Deploy with Free tier (default)
+az stack group create `
+    --name "stack-compute-app-service-tiers" `
+    --resource-group "az104-compute-app-service-tiers-bicep" `
+    --template-file main.bicep `
+    --parameters main.bicepparam `
+    --action-on-unmanage deleteAll `
+    --deny-settings-mode none `
+    --yes
+
+# Deploy with Shared tier
+az stack group create `
+    --name "stack-compute-app-service-tiers" `
+    --resource-group "az104-compute-app-service-tiers-bicep" `
+    --template-file main.bicep `
+    --parameters main.bicepparam `
+    --parameters skuName=D1 `
+    --action-on-unmanage deleteAll `
+    --deny-settings-mode none `
+    --yes
+
+# Deploy with Basic tier
+az stack group create `
+    --name "stack-compute-app-service-tiers" `
+    --resource-group "az104-compute-app-service-tiers-bicep" `
+    --template-file main.bicep `
+    --parameters main.bicepparam `
+    --parameters skuName=B1 `
+    --action-on-unmanage deleteAll `
+    --deny-settings-mode none `
+    --yes
+```
+
+## Validate
+
+1. Navigate to the App Service in Azure Portal
+2. Check **App Service Plan** → **Scale up** to see current tier
+3. Monitor **Quotas** under the App Service to see CPU time usage
+4. For Free/Shared tiers, observe the daily quota limits
+
+### View Deployment Stack
+
+```powershell
+# List deployment stacks
+az stack group list --resource-group "az104-compute-app-service-tiers-bicep" -o table
+
+# Show stack details
+az stack group show `
+    --name "stack-compute-app-service-tiers" `
+    --resource-group "az104-compute-app-service-tiers-bicep"
+
+# List managed resources in the stack
+az stack group show `
+    --name "stack-compute-app-service-tiers" `
+    --resource-group "az104-compute-app-service-tiers-bicep" `
+    --query "resources[].id" -o table
+```
+
+### Test CPU Time Consumption
+
+```powershell
+# Get the app URL from deployment outputs
+az stack group show `
+    --name "stack-compute-app-service-tiers" `
+    --resource-group "az104-compute-app-service-tiers-bicep" `
+    --query "outputs.appUrl.value" -o tsv
+
+# Generate load to consume CPU time (run for a few minutes)
+$appUrl = az stack group show `
+    --name "stack-compute-app-service-tiers" `
+    --resource-group "az104-compute-app-service-tiers-bicep" `
+    --query "outputs.appUrl.value" -o tsv
+
+while ($true) { Invoke-WebRequest -Uri $appUrl -UseBasicParsing | Out-Null; Start-Sleep -Milliseconds 100 }
+```
+
+## Cleanup
+
+```powershell
+# Delete the deployment stack (removes all managed resources)
+az stack group delete `
+    --name "stack-compute-app-service-tiers" `
+    --resource-group "az104-compute-app-service-tiers-bicep" `
+    --action-on-unmanage deleteAll `
+    --yes
+
+# Delete the resource group if needed
+az group delete --name "az104-compute-app-service-tiers-bicep" --yes --no-wait
+```
+
+---
+
+# Comparison: Terraform vs Bicep
+
+| Aspect | Terraform | Bicep |
+|--------|-----------|-------|
+| **Resource Group Name** | `az104-compute-app-service-tiers-tf` | `az104-compute-app-service-tiers-bicep` |
+| **State Management** | Local state file | Deployment stack tracks resources |
+| **Cleanup** | `terraform destroy` | `az stack group delete` |
+| **Plan/Preview** | `terraform plan` | `az deployment group what-if` |
+| **Variables** | `terraform.tfvars` | `main.bicepparam` |
+| **Provider Lock** | Explicit subscription ID | Resource group must exist first |
+
+---
+
+# General Validation & Notes
 
 _Record your observations here after running the lab:_
 
