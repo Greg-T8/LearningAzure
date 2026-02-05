@@ -5,10 +5,8 @@
 # Author: Greg Tate
 # -------------------------------------------------------------------------
 
-# Fetch current subscription context
-data "azurerm_subscription" "current" {}
-
 # Validation resource - fails fast with clear error message
+# Note: data.azurerm_subscription.current is defined in main.tf
 resource "terraform_data" "subscription_guard" {
   lifecycle {
     precondition {

@@ -39,17 +39,21 @@ resource "random_string" "suffix" {
 # Local Values
 # -------------------------------------------------------------------------
 locals {
+  # Resource group name per governance: az104-<domain>-<topic>-tf
+  resource_group_name = "az104-${var.domain}-${var.topic}-tf"
+
   # Resource naming prefix
   name_prefix = "lab${random_string.suffix.result}"
 
-  # Common tags for all resources
+  # Common tags for all resources (per GOVERNANCE.md tagging policy)
   common_tags = {
-    Domain      = var.domain
-    Topic       = var.topic
-    Owner       = var.owner
-    Environment = "lab"
-    CreatedBy   = "Terraform"
-    Purpose     = "AZ-104 Storage Explorer RBAC Lab"
+    Environment      = "Lab"
+    Project          = "AZ-104"
+    Domain           = title(var.domain)
+    Purpose          = replace(title(var.topic), "-", " ")
+    Owner            = var.owner
+    DateCreated      = formatdate("YYYY-MM-DD", timestamp())
+    DeploymentMethod = "Terraform"
   }
 }
 
@@ -59,7 +63,7 @@ locals {
 
 # Create resource group for the lab
 resource "azurerm_resource_group" "lab" {
-  name     = "rg-${var.domain}-${var.topic}-${random_string.suffix.result}"
+  name     = local.resource_group_name
   location = var.location
   tags     = local.common_tags
 }
@@ -88,15 +92,15 @@ resource "azurerm_storage_account" "lab" {
 # Create blob container
 resource "azurerm_storage_container" "documents" {
   name                  = var.container_name
-  storage_account_id    = azurerm_storage_account.lab.id
+  storage_account_name  = azurerm_storage_account.lab.name
   container_access_type = "private"
 }
 
 # Create file share
 resource "azurerm_storage_share" "reports" {
-  name               = var.file_share_name
-  storage_account_id = azurerm_storage_account.lab.id
-  quota              = 5
+  name                 = var.file_share_name
+  storage_account_name = azurerm_storage_account.lab.name
+  quota                = 5
 }
 
 # Upload a sample blob for testing data access
