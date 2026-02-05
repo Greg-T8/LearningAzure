@@ -55,4 +55,4 @@ My exam preparation follows a structured approach designed to reinforce concepts
 1. **Microsoft Learning Paths** — Establish a solid foundation of core knowledge
 2. **Video courses** — Visual reinforcement and deeper exploration of complex topics
 3. **Practice Exams** — Assess readiness and identify knowledge gaps before taking the certification exam
-4. **Hands-on Labs** — Practical experience applying concepts in real Azure environments using Terraform or Bicep, generated from practice exam questions
+4. **Hands-on Labs** — Practical experience using Terraform or Bicep, generated from practice exam questions
