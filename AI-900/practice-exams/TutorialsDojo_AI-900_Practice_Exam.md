@@ -218,41 +218,94 @@ If the scenario emphasizes **unusual, abnormal, or unexpected patterns**, the co
 
 <img src='.img/2026-02-05-05-54-30.png' width=700>
 
-<details open>
+<details>
+<summary>Click to expand explanation</summary>
+
+**Why the selected answers are wrong**
+
+* **Selecting the frequency and duration of exercise as inputs** was matched to **Feature engineering**, which is incorrect. This scenario describes **choosing which existing variables to include**, not transforming or creating new ones.
+* **Dividing a date into month, day, and year elements** was matched to **Feature selection**, which is incorrect. This action **creates new derived features** from a single raw feature.
+
+**Why the correct answers are correct**
+
+* **Selecting the frequency and duration of exercise as inputs for a heart disease prediction model → Feature selection**
+  This is about deciding **which features are relevant** to include in the model.
+* **Assessing the elements of a confusion matrix → Model evaluation**
+  Confusion matrices are used to **measure model performance** (accuracy, precision, recall, etc.).
+* **Dividing a date into distinct month, day, and year elements → Feature engineering**
+  This involves **transforming raw data into more useful features** for the model.
+
+**Why other options are incorrect**
+
+* **Model deployment** is unrelated to choosing inputs, transforming data, or evaluating performance. It concerns **making a trained model available for use** in production.
+
+**Key takeaway**
+
+* **Feature selection** = choosing which inputs to use.
+* **Feature engineering** = creating or transforming inputs.
+* **Model evaluation** = measuring how well the model performs.
+
+**References**
+
+* No stable Microsoft Learn link can be guaranteed for this specific exam concept.
+
+</details>
+
+---
+
+<img src='.img/2026-02-05-06-06-27.png' width=700> 
+
+<details>
 <summary>Click to expand explanation</summary>
 
 **Why the selected answer is wrong**
 
-* **Feature engineering** was incorrectly matched to “Selecting the frequency and duration of exercise as inputs for a heart disease prediction model.”
-* This scenario is not about transforming or creating new features from raw data. It is about deciding *which existing variables* should be used as inputs.
-* Feature engineering would involve actions like normalizing exercise duration, creating derived metrics (e.g., average exercise per week), or encoding values—not choosing which fields to include.
-
-**Why the correct answer is correct**
-
-* The correct match for “Selecting the frequency and duration of exercise as inputs for a heart disease prediction model” is **Feature selection**.
-* Feature selection focuses on choosing the most relevant input variables from available data to improve model performance, reduce noise, and avoid overfitting.
-* Frequency and duration already exist as candidate features; the task is deciding to include them.
-
-**Why the other options are incorrect**
-
-* **Model evaluation** correctly maps to “Assessing the elements of a confusion matrix” because confusion matrices are used to evaluate classification model performance.
-* **Feature engineering** correctly maps to “Dividing a date into distinct month, day, and year elements” because this creates new features from existing data.
-* **Model deployment** is not relevant to any of the listed scenarios, as it relates to operationalizing a trained model, not data preparation or assessment.
-
-**Key takeaway**
-
-* **Feature selection = choosing which inputs to use.**
-* **Feature engineering = transforming or creating inputs.**
-* Confusing these two is a common exam trap.
-
-**References**
-
-* [https://learn.microsoft.com/en-us/training/modules/understand-machine-learning/](https://learn.microsoft.com/en-us/training/modules/understand-machine-learning/)
-* [https://learn.microsoft.com/en-us/azure/machine-learning/concept-feature-engineering](https://learn.microsoft.com/en-us/azure/machine-learning/concept-feature-engineering)
-* [https://learn.microsoft.com/en-us/azure/machine-learning/concept-model-evaluation](https://learn.microsoft.com/en-us/azure/machine-learning/concept-model-evaluation)
+Speech synthesis refers to **text-to-speech**—generating spoken audio from text. In this scenario, your spoken English is being converted into Spanish in real time. The core capability being used is **language translation**, not speech generation. While speech services may be involved under the hood, the task is not creating
 
 
 </details>
+
+---
+
+<img src='.img/2026-02-05-06-11-03.png' width=700> 
+
+<details open>
+<summary>Click to expand explanation</summary>
+
+**Why the selected answers are wrong**
+
+The first statement is **false**, but it was marked **Yes**. In Azure Custom Vision, **object detection does not require choosing a predefined domain**. Domain selection (for example, General, Food, Retail) applies to **image classification**, not object detection. Object detection focuses on locating and labeling objects with bounding boxes and uses a fixed detection approach.
+
+The second statement is also **false**, but it was marked **Yes**. **Custom Vision does not support text classification** at all. Text classification (multiclass vs multilabel) is part of **Azure AI Language**, not Custom Vision. This question is testing service boundaries, not model configuration details.
+
+**Why the selected answer is correct**
+
+The third statement is **true** and correctly marked **Yes**. Custom Vision can be used to identify different types of fruits in an image, either by:
+
+* **Image classification** (classifying the whole image as apple, banana, etc.), or
+* **Object detection** (detecting and labeling multiple fruits within the same image).
+
+**Why the other options are incorrect**
+
+* Domain selection being mandatory for object detection is a **common confusion with image classification**.
+* Multiclass vs multilabel classification is a **language NLP concept**, not a computer vision feature in Custom Vision.
+
+**Key takeaway**
+
+Custom Vision is strictly for **image classification and object detection**.
+
+* **Domains apply only to image classification**, not object detection.
+* **Text classification is handled by Azure AI Language**, not Custom Vision.
+
+**References**
+
+* No stable Microsoft Learn link can be guaranteed for this specific exam concept.
+
+
+</details>
+
+
+
 
 ## Correctly Answered but Uncertain Questions
 
