@@ -9,12 +9,12 @@ This repository documents my journey learning Microsoft Azure — from certifica
 
 ---
 
-## 📚 Certification Work
+## 📚 Certifications
 
 Comprehensive study notes, progress trackers, practice exams, and hands-on labs for each certification:
 
-- 📘 [**AI-900 Work**](AI-900/README.md) — Azure AI Fundamentals
-- 📗 [**AZ-104 Work**](AZ-104/README.md) — Azure Administrator
+- 📘 [**AI-900 Progress**](AI-900/README.md) — Azure AI Fundamentals
+- 📗 [**AZ-104 Progress**](AZ-104/README.md) — Azure Administrator
 
 ---
 
