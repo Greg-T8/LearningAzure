@@ -31,18 +31,18 @@ Ongoing learning beyond certification prep, including tracking Azure updates and
 
 | Date | AI-900 | AZ-104 | Total |
 |------|--------|--------|-------|
-| Wed, Feb 04 | 🟢 50 | 🟢 247 | **297** |
+| Thu, Feb 05 | 🟢 7 | 🟢 31 | **38** |
+| Wed, Feb 04 | 🟢 50 | 🟢 249 | **299** |
 | Tue, Feb 03 | 🟢 19 | 🟢 17 | **36** |
 | Mon, Feb 02 | 🟢 33 | 🟢 17 | **50** |
 | Sun, Feb 01 | 🟢 65 | 🟢 42 | **107** |
 | Sat, Jan 31 | 🟢 107 | 🟢 86 | **193** |
 | Fri, Jan 30 | 🟢 59 | 🟢 101 | **160** |
-| Thu, Jan 29 | 🟢 28 | 🟢 64 | **92** |
-| **Total** | **361** | **574** | **935** |
+| **Total** | **340** | **543** | **883** |
 
 *🟢 = Activity on this day (commits with file changes in that certification folder)*
 
-*Last updated: February 04, 2026 at 08:16 CST*
+*Last updated: February 05, 2026 at 08:17 CST*
 
 <!-- COMMIT_STATS_END -->
 
