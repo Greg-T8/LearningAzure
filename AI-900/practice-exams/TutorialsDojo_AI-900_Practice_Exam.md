@@ -14,7 +14,7 @@ Practice exam from TutorialsDojo for AI-900: Azure AI Fundamentals.
 
 <img src='.img/2026-02-03-04-53-47.png' width=700> 
 
-<details open>
+<details>
 <summary>Click to expand explanation</summary>
 
 **Why the selected answer is wrong (Computer Vision)**
@@ -214,13 +214,16 @@ If the scenario emphasizes **unusual, abnormal, or unexpected patterns**, the co
 
 </details>
 
+---
+
+
 
 
 ## Correctly Answered but Uncertain Questions
 
 <img src='.img/2026-02-03-05-29-19.png' width=700>
 
-<details open>
+<details>
 <summary>Click to expand explanation</summary>
 
 **What the question is testing**
@@ -255,3 +258,5 @@ If the prompt says **“create/generate additional features,”** the answer is 
 
 
 </details>
+
+---

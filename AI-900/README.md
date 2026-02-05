@@ -35,105 +35,103 @@
 
 ### Domain 1: AI Workloads and Considerations (15–20%)
 
-**Key Topics**
+**Skills Measured**
 
-- Common AI workloads: computer vision, NLP, document processing, generative AI
-- Responsible AI principles: fairness, reliability, privacy, inclusiveness, transparency, accountability
+**Identify features of common AI workloads**
 
-**Common Pitfalls**
+- Identify computer vision workloads
+- Identify natural language processing workloads
+- Identify document processing workloads
+- Identify features of generative AI workloads
 
-- Confusing computer vision vs. NLP scenarios
-- Classification (categorize whole image) vs. object detection (locate + identify multiple objects)
-- Missing the six responsible AI principles — heavily tested
-- Transparency means making AI decisions understandable to users
+**Identify guiding principles for responsible AI**
+
+- Describe considerations for fairness in an AI solution
+- Describe considerations for reliability and safety in an AI solution
+- Describe considerations for privacy and security in an AI solution
+- Describe considerations for inclusiveness in an AI solution
+- Describe considerations for transparency in an AI solution
+- Describe considerations for accountability in an AI solution
 
 ---
 
 ### Domain 2: Machine Learning on Azure (15–20%)
 
-**Key Topics**
+**Skills Measured**
 
-- Regression: Predict numeric value (price, temperature)
-- Classification: Predict category (spam/not spam)
-- Clustering: Group similar items without labels (unsupervised)
-- Features (inputs), labels (targets), training/validation/test datasets
-- Azure ML: Automated ML, designer, compute, model registry
+**Identify common machine learning techniques**
 
-**Common Pitfalls**
+- Identify regression machine learning scenarios
+- Identify classification machine learning scenarios
+- Identify clustering machine learning scenarios
+- Identify features of deep learning techniques
+- Identify features of the Transformer architecture
 
-- Regression (numeric) vs. classification (categorical)
-- Clustering is unsupervised (no labels)
-- Training vs. validation vs. test dataset purposes
-- Automated ML (no-code) vs. custom training (code-first)
+**Describe core machine learning concepts**
+
+- Identify features and labels in a dataset for machine learning
+- Describe how training and validation datasets are used in machine learning
+
+**Describe Azure Machine Learning capabilities**
+
+- Describe capabilities of automated machine learning
+- Describe data and compute services for data science and machine learning
+- Describe model management and deployment capabilities in Azure Machine Learning
 
 ---
 
 ### Domain 3: Computer Vision Workloads (15–20%)
 
-**Key Topics**
+**Skills Measured**
 
-- Image classification: Categorize entire image
-- Object detection: Locate and identify multiple objects (bounding boxes)
-- OCR: Extract text from images/documents
-- Face detection vs. facial analysis vs. face recognition
-- Azure AI Vision, Azure AI Face, Custom Vision
+**Identify common types of computer vision solution**
 
-**Common Pitfalls**
+- Identify features of image classification solutions
+- Identify features of object detection solutions
+- Identify features of optical character recognition solutions
+- Identify features of facial detection and facial analysis solutions
 
-- Image classification (one label) vs. object detection (multiple objects with locations)
-- When to use Azure AI Vision vs. Azure AI Face
-- Custom Vision is for training custom models, not general-purpose
-- Face detection (find) vs. face recognition (identify specific people)
+**Identify Azure tools and services for computer vision tasks**
+
+- Describe capabilities of the Azure AI Vision service
+- Describe capabilities of the Azure AI Face detection service
 
 ---
 
 ### Domain 4: NLP Workloads (15–20%)
 
-**Key Topics**
+**Skills Measured**
 
-- Key phrase extraction, entity recognition, sentiment analysis
-- Speech recognition (speech-to-text), speech synthesis (text-to-speech)
-- Language translation
-- Conversational language understanding (CLU)
-- Azure AI Language, Azure AI Speech
+**Identify features of common NLP Workload Scenarios**
 
-**Common Pitfalls**
+- Identify features and uses for key phrase extraction
+- Identify features and uses for entity recognition
+- Identify features and uses for sentiment analysis
+- Identify features and uses for language modeling
+- Identify features and uses for speech recognition and synthesis
+- Identify features and uses for translation
 
-- Key phrase extraction (topics) vs. entity recognition (specific names/dates)
-- Azure AI Language (text analysis) vs. Azure AI Speech (audio)
-- Sentiment analysis returns positive/negative/neutral scores
-- CLU is for building chatbots/voice assistants
+**Identify Azure tools and services for NLP workloads**
+
+- Describe capabilities of the Azure AI Language service
+- Describe capabilities of the Azure AI Speech service
 
 ---
 
 ### Domain 5: Generative AI Workloads (20–25%)
 
-**Key Topics**
+**Skills Measured**
 
-- Generative AI: Models that create new content (text, images, code)
-- Azure OpenAI Service: GPT-4, GPT-3.5, DALL-E, Whisper
-- Microsoft Foundry: Build, test, deploy generative AI solutions
-- Model catalog: Access to models from Microsoft, OpenAI, Meta, Hugging Face
-- Responsible AI: Content filters, grounding, bias mitigation
+**Identify features of generative AI solutions**
 
-**Common Pitfalls**
+- Identify features of generative AI models
+- Identify common scenarios for generative AI
+- Identify responsible AI considerations for generative AI
 
-- Azure OpenAI Service (API) vs. Microsoft Foundry (platform for building)
-- Importance of content filters and grounding
-- Prompt engineering is critical for good results
-- GPT-4 (most capable) vs. GPT-3.5 (faster, cheaper)
-- Microsoft Foundry model catalog provides access to non-OpenAI models
+**Identify generative AI services and capabilities in Microsoft Azure**
+
+- Describe features and capabilities of Azure AI Foundry
+- Describe features and capabilities of Azure OpenAI service
+- Describe features and capabilities of Azure AI Foundry model catalog
 
 ---
-
-## 🧾 Final Review Checklist
-
-- [ ] Memorize the **six responsible AI principles**
-- [ ] Understand **regression vs. classification vs. clustering**
-- [ ] Know when to use **Azure AI Vision vs. Azure AI Face**
-- [ ] Understand **Azure AI Language** capabilities (sentiment, entities, key phrases)
-- [ ] Know **Azure AI Speech** (speech-to-text, text-to-speech) vs. **Azure AI Language** (text)
-- [ ] Understand **Azure OpenAI Service** capabilities (GPT, DALL-E, Whisper)
-- [ ] Know what **Microsoft Foundry** is used for
-- [ ] Understand **responsible AI for generative AI**
-- [ ] Practice identifying **use cases** for each AI service
