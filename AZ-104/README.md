@@ -13,13 +13,12 @@
 | :------- | :--------------- | :-------------------------------------------------------------- | :----- | :------ | :-------- | :--- |
 | 1        | Microsoft Learn | [Microsoft Learning Paths](./learning-paths/README.md)          | ✅     | 1/14/26 | 1/25/26   | 11   |
 | 2        | Video            | [John Savill's Training](./video-courses/savill/README.md) | ✅    | 1/29/26 | 2/1/26          | 4      |
-| 3        | Assessment Exam  | [Assessment Exam](./practice-exams/README.md)                  | 🚧    | 2/2/26        |           |      |
-| 4        | Hands-on Labs    | [Hands-on Labs](./hands-on-labs/README.md)             | 🕒    |         |           |      |
-| 5        | Practice Exams   | [MeasureUp Practice Exams](./practice-exams/README.md)          | 🕒    |         |           |      |
+| 3        | Practice Exams   | [MeasureUp Practice Exams](./practice-exams/README.md)          | 🚧    | 2/2/26        |           |      |
 
 **Legend:** 🕒 Not Started | 🚧 In Progress | ✅ Complete
 
 ---
+
 ## 📊 Exam Domains
 
 | Domain                     | Weight |
@@ -31,7 +30,6 @@
 | 5. Monitoring & Backup     | 10-15% |
 
 ---
-
 
 ## 📘 Domain Quick Reference
 

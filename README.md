@@ -11,18 +11,18 @@ This repository documents my journey learning Microsoft Azure — from certifica
 
 ## 📚 Certification Work
 
-Comprehensive study notes, progress trackers, and learning resources for each certification:
+Comprehensive study notes, progress trackers, practice exams, and hands-on labs for each certification:
 
-- 📘 [**AI-900 Study Notes**](AI-900/README.md) — Azure AI Fundamentals (progress tracker, domain guides, practice labs)
-- 📗 [**AZ-104 Study Notes**](AZ-104/README.md) — Azure Administrator (progress tracker, domain guides, hands-on labs)
+- 📘 [**AI-900 Work**](AI-900/README.md) — Azure AI Fundamentals
+- 📗 [**AZ-104 Work**](AZ-104/README.md) — Azure Administrator
 
 ---
 
 ## 🔄 Staying Current with Azure
 
-Ongoing learning beyond certification prep — tracking Azure updates and deep dives.
+Ongoing learning beyond certification prep, including tracking Azure updates and deep dives.
 
-- 📝 [**Ongoing Learning**](ongoing-learning/README.md) — Organized notes on Azure updates, feature releases, and advanced topics
+- 📝 [**Ongoing Learning Activity**](ongoing-learning/README.md)
 
 ---
 
@@ -54,7 +54,7 @@ My exam preparation follows a structured approach designed to reinforce concepts
 
 1. **Microsoft Learning Paths** — Establish a solid foundation of core knowledge
 2. **Video courses** — Visual reinforcement and deeper exploration of complex topics
-3. **Hands-on Labs** — Practical experience applying concepts in real Azure environments
-4. **Practice Exams** — Assess readiness and identify knowledge gaps before taking the certification exam
+3. **Practice Exams** — Assess readiness and identify knowledge gaps before taking the certification exam
+4. **Hands-on Labs** — Practical experience applying concepts in real Azure environments using Terraform or Bicep, generated from practice exam questions
 
 **Resource Hub:** [Microsoft Skills Navigator](https://msfthub.com/) — Central hub for Microsoft certifications and learning resources
