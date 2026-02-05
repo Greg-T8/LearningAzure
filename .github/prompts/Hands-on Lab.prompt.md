@@ -7,18 +7,35 @@ description: Creates a hands-on lab from an exam question scenario using Terrafo
 
 You are tasked with creating a comprehensive hands-on lab based on an exam question scenario. The lab must follow strict governance standards and produce working, validated infrastructure-as-code.
 
+## Determine Exam Context
+
+**CRITICAL**: Before starting, determine which exam this lab is for:
+1. Check the user's current working directory or file path
+2. Look for exam folder in workspace structure (e.g., AZ-104, AI-900, AZ-305)
+3. If unclear, ask the user which exam this lab is for
+
+Use the exam identifier throughout (e.g., "AZ-104", "AI-900") and lowercase prefix (e.g., "az104", "ai900").
+
 ## Context Files
 
 Read and strictly follow the governance requirements in:
-- `#file:AZ-104/hands-on-labs/GOVERNANCE.md`
+- `#file:<EXAM>/hands-on-labs/GOVERNANCE.md` (replace `<EXAM>` with the determined exam)
 
-Read and follow coding standards from:
-- `#file:c:/Users/gregt/OneDrive/Apps/Profiles/VSCode/instructions/General Coding Guidelines.instructions.md`
-- `#file:c:/Users/gregt/OneDrive/Apps/Profiles/VSCode/instructions/PowerShell Style Guidelines.instructions.md` (if creating PowerShell scripts)
+## Exam-Specific Considerations
+
+Different exams focus on different Azure services:
+
+- **AZ-104** (Azure Administrator): Infrastructure resources (VMs, Networks, Storage, Identity)
+- **AI-900** (Azure AI Fundamentals): Cognitive Services, Azure AI services, Machine Learning basics
+- **AZ-305** (Azure Solutions Architect): Complex architectures, multi-service integrations
+- **DP-203** (Azure Data Engineer): Data Factory, Synapse, Databricks, Storage
+- **AZ-400** (DevOps Engineer): Pipelines, Container registries, monitoring, deployment
+
+Adapt resource types and domains accordingly based on the exam context.
 
 ## Lab Structure Requirements
 
-Create the following structure in `AZ-104/hands-on-labs/<domain>/lab-<topic>/`:
+Create the following structure in `<EXAM>/hands-on-labs/<domain>/lab-<topic>/`:
 
 ```
 lab-<topic>/
@@ -38,14 +55,16 @@ lab-<topic>/
 ## Resource Group Naming
 
 **CRITICAL**: Follow this pattern exactly:
-- Pattern: `az104-<domain>-<topic>-<deployment_method>`
-- Domain: One of `identity`, `networking`, `storage`, `compute`, `monitoring`
-- Topic: Kebab-case description (e.g., `vnet-peering`, `rbac-roles`)
+- Pattern: `<exam-prefix>-<domain>-<topic>-<deployment_method>`
+- Exam Prefix: Lowercase exam identifier (e.g., `az104`, `ai900`, `az305`)
+- Domain: Exam-specific domain (see governance file for valid domains)
+- Topic: Kebab-case description (e.g., `vnet-peering`, `custom-vision`, `app-gateway`)
 - Deployment Method: `tf` (Terraform) or `bicep` (Bicep)
 
 Examples:
-- `az104-networking-vnet-peering-tf`
-- `az104-storage-blob-lifecycle-bicep`
+- AZ-104: `az104-networking-vnet-peering-tf`, `az104-storage-blob-lifecycle-bicep`
+- AI-900: `ai900-cognitive-custom-vision-tf`, `ai900-ml-training-bicep`
+- AZ-305: `az305-architecture-hub-spoke-tf`
 
 ## Resource Naming Conventions
 
@@ -65,8 +84,8 @@ Follow these prefixes (from GOVERNANCE.md):
 
 ```
 Environment = "Lab"
-Project     = "AZ-104"
-Domain      = "<Domain>"  # e.g., "Networking", "Storage"
+Project     = "<EXAM>"    # e.g., "AZ-104", "AI-900", "AZ-305"
+Domain      = "<Domain>"  # e.g., "Networking", "Storage", "Cognitive Services"
 Purpose     = "<Purpose>" # What the lab demonstrates
 Owner       = "Greg Tate"
 DateCreated = "<YYYY-MM-DD>"  # Use current date
@@ -194,7 +213,7 @@ az stack sub delete --name stack-<domain>-<topic> --delete-all
 - [Learning point 2]
 - [Learning point 3]
 
-## Related AZ-104 Exam Objectives
+## Related <EXAM> Exam Objectives
 
 [List relevant exam objectives this lab covers]
 
@@ -245,13 +264,17 @@ variable "lab_subscription_id" {
 }
 
 variable "domain" {
-  description = "AZ-104 exam domain"
+  description = "<EXAM> exam domain"
   type        = string
   validation {
-    condition     = contains(["identity", "networking", "storage", "compute", "monitoring"], var.domain)
-    error_message = "Domain must be: identity, networking, storage, compute, or monitoring."
+    condition     = contains([<domain-list>], var.domain)
+    error_message = "Domain must be one of the valid <EXAM> domains."
   }
 }
+
+# Note: Replace <domain-list> with exam-specific domains from governance file
+# AZ-104 example: ["identity", "networking", "storage", "compute", "monitoring"]
+# AI-900 example: ["ai-concepts", "ml", "cognitive-services", "computer-vision", "nlp"]
 
 variable "location" {
   description = "Azure region for resources"
@@ -285,7 +308,7 @@ Create `terraform.tfvars` based on the shared template with lab-specific subscri
 # -------------------------------------------------------------------------
 # Program: terraform.tfvars
 # Description: Lab-specific variable values for [lab description]
-# Context: AZ-104 Lab - [scenario description]
+# Context: <EXAM> Lab - [scenario description]
 # Author: Greg Tate
 # Date: [YYYY-MM-DD]
 # -------------------------------------------------------------------------
@@ -410,7 +433,7 @@ Follow the workspace coding guidelines:
    # -------------------------------------------------------------------------
    # Program: [filename]
    # Description: [what this does]
-   # Context: AZ-104 Lab - [scenario description]
+   # Context: <EXAM> Lab - [scenario description]
    # Author: Greg Tate
    # Date: [YYYY-MM-DD]
    # -------------------------------------------------------------------------
@@ -422,22 +445,26 @@ Follow the workspace coding guidelines:
 
 ## Workflow
 
-1. **Analyze** the exam question scenario provided
-2. **Identify** required Azure resources and their configuration
-3. **Create** directory structure under `AZ-104/hands-on-labs/<domain>/lab-<topic>/`
-4. **Generate** infrastructure code (Terraform OR Bicep as specified)
-5. **Create terraform.tfvars** (Terraform only) with lab subscription ID: `e091f6e7-031a-4924-97bb-8c983ca5d21a`
-6. **Validate** the code using appropriate tool commands
-7. **Create** comprehensive README.md with all required sections
-8. **Include** validation/testing scripts if complex verification is needed
-9. **Verify** all governance standards are met:
-   - [ ] Resource group naming follows pattern
-   - [ ] All resources have required tags
-   - [ ] Resource names follow conventions
-   - [ ] Location is `eastus` (or allowed region)
-   - [ ] Code follows header format
-   - [ ] terraform.tfvars created with correct subscription ID
-   - [ ] Validation commands run successfully
+1. **Determine exam** from workspace context or prompt user if unclear
+2. **Read governance file** for exam-specific domains and requirements
+3. **Analyze** the exam question scenario provided
+4. **Identify** required Azure resources and their configuration
+5. **Create** directory structure under `<EXAM>/hands-on-labs/<domain>/lab-<topic>/`
+6. **Generate** infrastructure code (Terraform OR Bicep as specified)
+7. **Create terraform.tfvars** (Terraform only) with lab subscription ID: `e091f6e7-031a-4924-97bb-8c983ca5d21a`
+8. **Validate** the code using appropriate tool commands
+9. **Create** comprehensive README.md with all required sections
+10. **Include** validation/testing scripts if complex verification is needed
+11. **Verify** all governance standards are met:
+    - [ ] Exam determined correctly
+    - [ ] Resource group naming follows pattern with correct exam prefix
+    - [ ] All resources have required tags (with correct Project value)
+    - [ ] Resource names follow conventions
+    - [ ] Domain is valid for the exam
+    - [ ] Location is `eastus` (or allowed region)
+    - [ ] Code follows header format with correct exam context
+    - [ ] terraform.tfvars created with correct subscription ID
+    - [ ] Validation commands run successfully
 
 ## Output Format
 
@@ -451,18 +478,36 @@ After creating the lab, provide:
 
 **CRITICAL Validation**: Confirm terraform.tfvars contains subscription ID `e091f6e7-031a-4924-97bb-8c983ca5d21a`
 
-## Example Invocation
-
+## Example Invocations
 ```
 Create a Terraform hands-on lab for the following AZ-104 exam question:
 
 [Paste exam question here]
 ```
 
-or
+```
+Create a Bicep hands-on lab for the following AI-900 exam question:
+
+[Paste exam question here]
+```
+
+### With Context-Based Exam Detection
+```
+[User is in AZ-104/hands-on-labs/ directory]
+
+Create a Terraform hands-on lab for the following exam question:
+
+[Paste exam question here]
+```
+
+### When Exam Cannot Be Determined
+If you cannot determine the exam from context or the user's request, ask:
 
 ```
-Create a Bicep hands-on lab using deployment stacks for the following AZ-104 exam question:
+Which exam is this lab for? (e.g., AZ-104, AI-900, AZ-305)
+```
+
+Then proceed with the appropriate exam-specific configuration.
 
 [Paste exam question here]
 ```
