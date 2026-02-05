@@ -1,21 +1,13 @@
 // -------------------------------------------------------------------------
-// Program: main.bicep
-// Description: Entry point - creates resource group and deploys resources
+// Program: resources.bicep
+// Description: Module that deploys App Service resources (called by main.bicep)
 // Context: AZ-104 hands-on lab - App Service Plans (Microsoft Azure Administrator)
 // Author: Greg Tate
 // -------------------------------------------------------------------------
 
-targetScope = 'subscription'
-
-@description('Azure subscription ID for lab deployments (prevents wrong-subscription mistakes)')
-param labSubscriptionId string
-
 @description('AZ-104 exam domain')
 @allowed(['identity', 'networking', 'storage', 'compute', 'monitoring'])
 param domain string = 'compute'
-
-@description('Lab topic in kebab-case')
-param topic string = 'app-service-tiers'
 
 @description('Azure region for resources')
 param location string = 'eastus'
@@ -39,56 +31,80 @@ param dateCreated string = utcNow('yyyy-MM-dd')
 // -------------------------------------------------------------------------
 // Local variables for naming and tagging
 // -------------------------------------------------------------------------
-var resourceGroupName = 'az104-${domain}-${topic}-bicep'
+var uniqueAppName = '${toLower(appName)}-${uniqueString(resourceGroup().id)}'
 
 var commonTags = {
   Environment: 'Lab'
   Project: 'AZ-104'
   Domain: '${toUpper(substring(domain, 0, 1))}${substring(domain, 1)}'
-  Purpose: replace(topic, '-', ' ')
+  Purpose: 'App Service Pricing Tiers'
   Owner: owner
   DateCreated: dateCreated
   DeploymentMethod: 'Bicep'
 }
 
-// Subscription ID validation (used at deployment time)
-var _ = labSubscriptionId
+var tierMapping = {
+  F1: 'Free'
+  D1: 'Shared'
+  B1: 'Basic'
+  B2: 'Basic'
+  B3: 'Basic'
+  S1: 'Standard'
+  S2: 'Standard'
+  S3: 'Standard'
+}
+
+var alwaysOnAllowed = (skuName != 'F1' && skuName != 'D1')
 
 // -------------------------------------------------------------------------
-// Resource Group
+// App Service Plan with configurable SKU
 // -------------------------------------------------------------------------
-resource rg 'Microsoft.Resources/resourceGroups@2024-03-01' = {
-  name: resourceGroupName
+resource appServicePlan 'Microsoft.Web/serverfarms@2023-01-01' = {
+  name: appServicePlanName
   location: location
   tags: commonTags
+  sku: {
+    name: skuName
+    tier: tierMapping[skuName]
+  }
+  kind: 'windows'
+  properties: {}
 }
 
 // -------------------------------------------------------------------------
-// Deploy resources into resource group via module
+// Web App
 // -------------------------------------------------------------------------
-module resources 'resources.bicep' = {
-  scope: rg
-  name: 'deploy-resources'
-  params: {
-    domain: domain
-    location: location
-    owner: owner
-    appServicePlanName: appServicePlanName
-    appName: appName
-    skuName: skuName
-    dateCreated: dateCreated
+resource webApp 'Microsoft.Web/sites@2023-01-01' = {
+  name: uniqueAppName
+  location: location
+  tags: commonTags
+  properties: {
+    serverFarmId: appServicePlan.id
+    httpsOnly: false
+    siteConfig: {
+      alwaysOn: alwaysOnAllowed
+      ftpsState: 'Disabled'
+      minTlsVersion: '1.2'
+      appSettings: [
+        {
+          name: 'WEBSITE_RUN_FROM_PACKAGE'
+          value: '0'
+        }
+      ]
+    }
   }
 }
 
 // -------------------------------------------------------------------------
 // Outputs
 // -------------------------------------------------------------------------
-output resourceGroupName string = rg.name
-output resourceGroupId string = rg.id
-output location string = rg.location
-output appServicePlanName string = resources.outputs.appServicePlanName
-output appServicePlanSku string = resources.outputs.appServicePlanSku
-output appName string = resources.outputs.appName
-output appUrl string = resources.outputs.appUrl
-output tierInfo object = resources.outputs.tierInfo
-output portalUrl string = resources.outputs.portalUrl
+output appServicePlanName string = appServicePlan.name
+output appServicePlanSku string = skuName
+output appName string = webApp.name
+output appUrl string = 'https://${webApp.properties.defaultHostName}'
+output tierInfo object = {
+  sku: skuName
+  dailyLimit: (skuName == 'F1') ? '60 CPU minutes' : (skuName == 'D1') ? '240 CPU minutes' : 'Unlimited'
+  computeType: (skuName == 'F1' || skuName == 'D1') ? 'Shared' : 'Dedicated'
+}
+output portalUrl string = 'https://portal.azure.com/#@/resource${appServicePlan.id}/scaleUp'

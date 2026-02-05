@@ -8,6 +8,9 @@
 
 # Bicep
 *.parameters.local.json
+# Compiled ARM JSON templates (auto-generated from .bicep files)
+**/bicep/main.json
+**/bicep/resources.json
 
 # OS
 .DS_Store

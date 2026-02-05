@@ -120,7 +120,7 @@ param domain string
 param topic string
 param location string = resourceGroup().location
 param owner string = 'Greg Tate'
--bicep'
+param dateCreated string = utcNow('yyyy-MM-dd')
 
 var commonTags = {
   Environment: 'Lab'
@@ -128,7 +128,7 @@ var commonTags = {
   Domain: toUpper(substring(domain, 0, 1)) + substring(domain, 1)
   Purpose: replace(topic, '-', ' ')
   Owner: owner
-  DateCreated: utcNow('yyyy-MM-dd')
+  DateCreated: dateCreated
   DeploymentMethod: 'Bicep'
 }
 

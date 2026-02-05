@@ -10,20 +10,20 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory = $true, Position = 0)]
-    [ValidateSet('create', 'delete', 'show', 'list', 'validate', 'delete-rg')]
+    [ValidateSet('create', 'delete', 'show', 'list', 'validate')]
     [string]$Action,
 
     [Parameter(Mandatory = $false)]
     [string]$StackName,
 
     [Parameter(Mandatory = $false)]
-    [string]$ResourceGroup,
-
-    [Parameter(Mandatory = $false)]
     [string]$TemplateFile = "main.bicep",
 
     [Parameter(Mandatory = $false)]
     [string]$ParametersFile = "main.bicepparam",
+
+    [Parameter(Mandatory = $false)]
+    [string]$Location = "eastus",
 
     [Parameter(Position = 1, ValueFromRemainingArguments = $true)]
     [string[]]$AdditionalArgs
@@ -34,6 +34,64 @@ param(
 # -------------------------------------------------------------------------
 $LabSubscriptionId   = "e091f6e7-031a-4924-97bb-8c983ca5d21a"
 $LabSubscriptionName = "sub-gtate-mpn-lab"
+
+# -------------------------------------------------------------------------
+# Parse parameters file to extract parameter values (supports .json and .bicepparam)
+# -------------------------------------------------------------------------
+function Get-BicepParamValue {
+    param(
+        [string]$FilePath,
+        [string]$ParamName
+    )
+
+    if (-not (Test-Path $FilePath)) {
+        return $null
+    }
+
+    $content = Get-Content $FilePath -Raw
+
+    # JSON format: "paramName": { "value": "actualValue" }
+    if ($FilePath -match '\.json$') {
+        try {
+            $json = $content | ConvertFrom-Json
+            if ($json.parameters.$ParamName.value) {
+                return $json.parameters.$ParamName.value
+            }
+        }
+        catch {
+            return $null
+        }
+    }
+
+    # Bicepparam format: param paramName = 'value' or param paramName = "value"
+    if ($content -match "param\s+$ParamName\s*=\s*['""]([^'""]+)['""]") {
+        return $Matches[1]
+    }
+
+    return $null
+}
+
+# -------------------------------------------------------------------------
+# Derive stack name from parameters file
+# -------------------------------------------------------------------------
+function Get-DerivedStackName {
+    param(
+        [string]$ParametersFile
+    )
+
+    if (-not (Test-Path $ParametersFile)) {
+        return $null
+    }
+
+    $domain = Get-BicepParamValue -FilePath $ParametersFile -ParamName "domain"
+    $topic = Get-BicepParamValue -FilePath $ParametersFile -ParamName "topic"
+
+    if ($domain -and $topic) {
+        return "stack-$domain-$topic"
+    }
+
+    return $null
+}
 
 # -------------------------------------------------------------------------
 # Pre-flight subscription validation
@@ -73,15 +131,15 @@ function Test-Subscription {
 }
 
 # -------------------------------------------------------------------------
-# Build az stack command
+# Build az stack sub command
 # -------------------------------------------------------------------------
-function Invoke-StackCommand {
+function Build-StackCommand {
     param(
         [string]$Action,
         [string]$StackName,
-        [string]$ResourceGroup,
         [string]$TemplateFile,
         [string]$ParametersFile,
+        [string]$Location,
         [string[]]$AdditionalArgs
     )
 
@@ -89,22 +147,9 @@ function Invoke-StackCommand {
 
     switch ($Action) {
         'create' {
-            if ([string]::IsNullOrEmpty($StackName) -or [string]::IsNullOrEmpty($ResourceGroup)) {
-                Write-Host "⛔ ERROR: --stack-name and --resource-group required for 'create'" -ForegroundColor Red
-                exit 1
-            }
-
-            # Ensure resource group exists
-            Write-Host "📦 Ensuring resource group exists..." -ForegroundColor Cyan
-            $rgExists = az group exists --name $ResourceGroup
-            if ($rgExists -eq 'false') {
-                Write-Host "   Creating resource group: $ResourceGroup" -ForegroundColor Yellow
-                az group create --name $ResourceGroup --location eastus | Out-Null
-            }
-
-            $command += "az stack group create"
+            $command += "az stack sub create"
             $command += "--name `"$StackName`""
-            $command += "--resource-group `"$ResourceGroup`""
+            $command += "--location `"$Location`""
             $command += "--template-file `"$TemplateFile`""
 
             if (-not [string]::IsNullOrEmpty($ParametersFile)) {
@@ -117,65 +162,30 @@ function Invoke-StackCommand {
         }
 
         'delete' {
-            if ([string]::IsNullOrEmpty($StackName) -or [string]::IsNullOrEmpty($ResourceGroup)) {
-                Write-Host "⛔ ERROR: --stack-name and --resource-group required for 'delete'" -ForegroundColor Red
-                exit 1
-            }
-
-            $command += "az stack group delete"
+            $command += "az stack sub delete"
             $command += "--name `"$StackName`""
-            $command += "--resource-group `"$ResourceGroup`""
             $command += "--action-on-unmanage deleteAll"
             $command += "--yes"
         }
 
-        'delete-rg' {
-            if ([string]::IsNullOrEmpty($ResourceGroup)) {
-                Write-Host "⛔ ERROR: --resource-group required for 'delete-rg'" -ForegroundColor Red
-                exit 1
-            }
-
-            $command += "az group delete"
-            $command += "--name `"$ResourceGroup`""
-            $command += "--yes"
-            $command += "--no-wait"
-        }
-
         'show' {
-            if ([string]::IsNullOrEmpty($StackName) -or [string]::IsNullOrEmpty($ResourceGroup)) {
-                Write-Host "⛔ ERROR: --stack-name and --resource-group required for 'show'" -ForegroundColor Red
-                exit 1
-            }
-
-            $command += "az stack group show"
+            $command += "az stack sub show"
             $command += "--name `"$StackName`""
-            $command += "--resource-group `"$ResourceGroup`""
         }
 
         'list' {
-            if ([string]::IsNullOrEmpty($ResourceGroup)) {
-                Write-Host "⛔ ERROR: --resource-group required for 'list'" -ForegroundColor Red
-                exit 1
-            }
-
-            $command += "az stack group list"
-            $command += "--resource-group `"$ResourceGroup`""
+            $command += "az stack sub list"
             $command += "-o table"
         }
 
         'validate' {
-            if ([string]::IsNullOrEmpty($TemplateFile)) {
-                Write-Host "⛔ ERROR: --template-file required for 'validate'" -ForegroundColor Red
-                exit 1
-            }
-
             $command += "az bicep build"
             $command += "--file `"$TemplateFile`""
         }
     }
 
     # Add any additional arguments passed through
-    if ($AdditionalArgs.Count -gt 0), 'delete-rg' {
+    if ($AdditionalArgs.Count -gt 0) {
         $command += $AdditionalArgs
     }
 
@@ -197,16 +207,78 @@ if ($Action -in @('create', 'delete')) {
     Write-Host "✅ Subscription verified: $($currentSub.name)" -ForegroundColor Green
 }
 
-# Build and execute command
-$azCommand = Invoke-StackCommand -Action $Action -StackName $StackName -ResourceGroup $ResourceGroup `
-                                 -TemplateFile $TemplateFile -ParametersFile $ParametersFile `
-                                 -AdditionalArgs $AdditionalArgs
+# Auto-derive stack name from parameters file if not provided
+if ([string]::IsNullOrEmpty($StackName)) {
+    $StackName = Get-DerivedStackName -ParametersFile $ParametersFile
 
-Write-Host "🚀 Running: $azCommand" -ForegroundColor Gray
-Write-Host ""
+    if (-not [string]::IsNullOrEmpty($StackName)) {
+        Write-Host "📋 Auto-derived stack name: $StackName" -ForegroundColor Cyan
+    }
+}
 
-# Execute the command
-Invoke-Expression $azCommand
+switch ($Action) {
+    'create' {
+        if ([string]::IsNullOrEmpty($StackName)) {
+            Write-Host "⛔ ERROR: Could not derive stack name. Provide -StackName or ensure parameters file has domain/topic." -ForegroundColor Red
+            exit 1
+        }
 
-# Capture and return exit code
-exit $LASTEXITCODE
+        Write-Host "`n📦 Deploying subscription-scoped stack (creates RG and resources)..." -ForegroundColor Cyan
+        $command = Build-StackCommand -Action 'create' -StackName $StackName `
+                                      -TemplateFile $TemplateFile -ParametersFile $ParametersFile `
+                                      -Location $Location -AdditionalArgs $AdditionalArgs
+        Write-Host "🚀 Running: $command" -ForegroundColor Gray
+        Write-Host ""
+        Invoke-Expression $command
+        exit $LASTEXITCODE
+    }
+
+    'delete' {
+        if ([string]::IsNullOrEmpty($StackName)) {
+            Write-Host "⛔ ERROR: Could not derive stack name. Provide -StackName or ensure parameters file has domain/topic." -ForegroundColor Red
+            exit 1
+        }
+
+        Write-Host "`n🗑️  Deleting subscription-scoped stack (removes RG and all resources)..." -ForegroundColor Cyan
+        $command = Build-StackCommand -Action 'delete' -StackName $StackName
+        Write-Host "🚀 Running: $command" -ForegroundColor Gray
+        Write-Host ""
+        Invoke-Expression $command
+        exit $LASTEXITCODE
+    }
+
+    'show' {
+        if ([string]::IsNullOrEmpty($StackName)) {
+            Write-Host "⛔ ERROR: -StackName required for 'show'" -ForegroundColor Red
+            exit 1
+        }
+
+        $command = Build-StackCommand -Action 'show' -StackName $StackName
+        Write-Host "🚀 Running: $command" -ForegroundColor Gray
+        Write-Host ""
+        Invoke-Expression $command
+        exit $LASTEXITCODE
+    }
+
+    'list' {
+        $command = Build-StackCommand -Action 'list'
+        Write-Host "🚀 Running: $command" -ForegroundColor Gray
+        Write-Host ""
+        Invoke-Expression $command
+        exit $LASTEXITCODE
+    }
+
+    'validate' {
+        if ([string]::IsNullOrEmpty($TemplateFile)) {
+            Write-Host "⛔ ERROR: -TemplateFile required for 'validate'" -ForegroundColor Red
+            exit 1
+        }
+
+        Write-Host "📋 Validating: $TemplateFile" -ForegroundColor Cyan
+        $command = Build-StackCommand -Action 'validate' -TemplateFile $TemplateFile
+        Write-Host "🚀 Running: $command" -ForegroundColor Gray
+        Write-Host ""
+        Invoke-Expression $command
+        exit $LASTEXITCODE
+    }
+}
