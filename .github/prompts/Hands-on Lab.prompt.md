@@ -293,7 +293,6 @@ variable "owner" {
 - Define locals for resource group name and common tags
 - Use standardized naming patterns
 - Apply common_tags to all resources
-- Include comments following General Coding Guidelines
 
 **outputs.tf**:
 - Output resource IDs
@@ -363,7 +362,6 @@ Confirm these commands succeed before considering the task complete.
 - Define commonTags variable
 - Use kebab-case for resource symbolic names
 - Apply tags to all resources
-- Include comments following General Coding Guidelines
 - Use latest stable API versions
 
 **main.bicepparam**:

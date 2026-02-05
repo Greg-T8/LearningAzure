@@ -60,6 +60,7 @@ All resources **must** include these tags:
 | `Purpose` | What the lab demonstrates | `VNet Peering` |
 | `Owner` | Your identifier | `Greg Tate` |
 | `DateCreated` | Resource creation date | `2026-02-05` |
+
 ---
 
 ## Implementation Examples
@@ -156,13 +157,13 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 **Pattern:** `stack-<domain>-<topic>`
 
-
 **Note:** Deployment stack names don't include the `-bicep` suffix since they're already Bicep-specific constructs.
 Example: `stack-networking-vnet-peering`
 
 ---
 
 ## Checklist Before Deployment-<deployment_method>` pattern
+
 - [ ] All resources have required tags (including `DeploymentMethod`)
 - [ ] Resource group follows `az104-<domain>-<topic>` pattern
 - [ ] All resources have required tags
