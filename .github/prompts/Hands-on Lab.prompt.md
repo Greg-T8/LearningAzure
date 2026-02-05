@@ -28,10 +28,12 @@ lab-<topic>/
 │   ├── variables.tf (or main.bicepparam)
 │   ├── outputs.tf (or outputs.bicep)
 │   ├── providers.tf (Terraform only)
-│   └── terraform.tfvars.example (or example.bicepparam)
+│   └── terraform.tfvars (Terraform - with lab subscription ID)
 └── validation/
     └── test-<scenario>.ps1 (optional validation scripts)
 ```
+
+**Note**: `terraform.tfvars` contains the lab subscription ID and is created for each lab.
 
 ## Resource Group Naming
 
@@ -97,6 +99,20 @@ Create a comprehensive README with this structure:
 - Azure subscription with appropriate permissions
 - Resource provider registered: [list providers]
 
+### Terraform Prerequisites
+
+Ensure you have a `terraform.tfvars` file with your subscription ID:
+
+```bash
+# The terraform.tfvars should contain:
+lab_subscription_id = "e091f6e7-031a-4924-97bb-8c983ca5d21a"
+```
+
+Register the provider if needed:
+```bash
+az provider register --namespace Microsoft.Storage  # or other required providers
+```
+
 ## Lab Objectives
 
 1. [Objective 1]
@@ -113,6 +129,12 @@ Create a comprehensive README with this structure:
    ```
 
 2. [For Terraform]:
+   Verify terraform.tfvars exists with your subscription ID:
+   ```bash
+   # File should already exist with lab subscription ID
+   cat terraform.tfvars
+   ```
+
    Initialize Terraform:
    ```bash
    terraform init
@@ -195,19 +217,54 @@ terraform {
       source  = "hashicorp/azurerm"
       version = "~> 4.0"
     }
+    # Add additional providers as needed (e.g., random, time, etc.)
   }
 }
 
 provider "azurerm" {
   features {}
+  subscription_id = var.lab_subscription_id
 }
 ```
 
+**Note**: Include additional providers (random, time, etc.) in required_providers section as needed for the lab.
+
 **variables.tf**:
+- **REQUIRED**: Include `lab_subscription_id` variable (sensitive, no default)
 - Include domain validation constraint
 - Set default location to `eastus`
 - Include all required variables with descriptions
 - Add owner variable with default "Greg Tate"
+
+Example:
+```hcl
+variable "lab_subscription_id" {
+  description = "Azure subscription ID for lab resources"
+  type        = string
+  sensitive   = true
+}
+
+variable "domain" {
+  description = "AZ-104 exam domain"
+  type        = string
+  validation {
+    condition     = contains(["identity", "networking", "storage", "compute", "monitoring"], var.domain)
+    error_message = "Domain must be: identity, networking, storage, compute, or monitoring."
+  }
+}
+
+variable "location" {
+  description = "Azure region for resources"
+  type        = string
+  default     = "eastus"
+}
+
+variable "owner" {
+  description = "Lab owner"
+  type        = string
+  default     = "Greg Tate"
+}
+```
 
 **main.tf**:
 - Define locals for resource group name and common tags
@@ -220,15 +277,43 @@ provider "azurerm" {
 - Output connection strings (if applicable)
 - Output any important resource properties for validation
 
-**terraform.tfvars.example**:
-- Provide example values
-- Include comments explaining each variable
+**terraform.tfvars** (copy from template):
+
+Create `terraform.tfvars` based on the shared template with lab-specific subscription ID:
+
+```hcl
+# -------------------------------------------------------------------------
+# Program: terraform.tfvars
+# Description: Lab-specific variable values for [lab description]
+# Context: AZ-104 Lab - [scenario description]
+# Author: Greg Tate
+# Date: [YYYY-MM-DD]
+# -------------------------------------------------------------------------
+#
+# IMPORTANT: This file is in .gitignore to prevent committing sensitive values
+# -------------------------------------------------------------------------
+
+# Azure lab subscription ID (REQUIRED)
+lab_subscription_id = "e091f6e7-031a-4924-97bb-8c983ca5d21a"
+
+# Optional overrides
+location = "eastus"
+owner    = "Greg Tate"
+
+# Add lab-specific variables here if needed
+# Example: container_name = "data"
+```
+
+**CRITICAL**: Always use subscription ID `e091f6e7-031a-4924-97bb-8c983ca5d21a` in terraform.tfvars
 
 ### Validation Steps
 
 After generating files, include these steps in your response:
 
 ```bash
+# Verify terraform.tfvars exists
+test -f terraform.tfvars && echo "✓ terraform.tfvars found" || echo "✗ Create terraform.tfvars"
+
 # Initialize Terraform
 terraform init
 
@@ -243,6 +328,8 @@ terraform plan
 ```
 
 Confirm these commands succeed before considering the task complete.
+
+**Note**: The terraform.tfvars file should already be created with the lab subscription ID.
 
 ## Bicep-Specific Requirements
 
@@ -339,15 +426,17 @@ Follow the workspace coding guidelines:
 2. **Identify** required Azure resources and their configuration
 3. **Create** directory structure under `AZ-104/hands-on-labs/<domain>/lab-<topic>/`
 4. **Generate** infrastructure code (Terraform OR Bicep as specified)
-5. **Validate** the code using appropriate tool commands
-6. **Create** comprehensive README.md with all required sections
-7. **Include** validation/testing scripts if complex verification is needed
-8. **Verify** all governance standards are met:
+5. **Create terraform.tfvars** (Terraform only) with lab subscription ID: `e091f6e7-031a-4924-97bb-8c983ca5d21a`
+6. **Validate** the code using appropriate tool commands
+7. **Create** comprehensive README.md with all required sections
+8. **Include** validation/testing scripts if complex verification is needed
+9. **Verify** all governance standards are met:
    - [ ] Resource group naming follows pattern
    - [ ] All resources have required tags
    - [ ] Resource names follow conventions
    - [ ] Location is `eastus` (or allowed region)
    - [ ] Code follows header format
+   - [ ] terraform.tfvars created with correct subscription ID
    - [ ] Validation commands run successfully
 
 ## Output Format
@@ -355,10 +444,12 @@ Follow the workspace coding guidelines:
 After creating the lab, provide:
 
 1. **Lab Summary**: Brief description of what was created
-2. **File List**: All files created with their paths
-3. **Validation Results**: Output from validation commands
+2. **File List**: All files created with their paths (including terraform.tfvars with subscription ID confirmation)
+3. **Validation Results**: Output from validation commands (including confirmation that terraform.tfvars exists)
 4. **Quick Start**: Condensed deployment steps
 5. **Next Steps**: Suggestions for additional learning or variations
+
+**CRITICAL Validation**: Confirm terraform.tfvars contains subscription ID `e091f6e7-031a-4924-97bb-8c983ca5d21a`
 
 ## Example Invocation
 
