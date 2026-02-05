@@ -216,8 +216,43 @@ If the scenario emphasizes **unusual, abnormal, or unexpected patterns**, the co
 
 ---
 
+<img src='.img/2026-02-05-05-54-30.png' width=700>
+
+<details open>
+<summary>Click to expand explanation</summary>
+
+**Why the selected answer is wrong**
+
+* **Feature engineering** was incorrectly matched to “Selecting the frequency and duration of exercise as inputs for a heart disease prediction model.”
+* This scenario is not about transforming or creating new features from raw data. It is about deciding *which existing variables* should be used as inputs.
+* Feature engineering would involve actions like normalizing exercise duration, creating derived metrics (e.g., average exercise per week), or encoding values—not choosing which fields to include.
+
+**Why the correct answer is correct**
+
+* The correct match for “Selecting the frequency and duration of exercise as inputs for a heart disease prediction model” is **Feature selection**.
+* Feature selection focuses on choosing the most relevant input variables from available data to improve model performance, reduce noise, and avoid overfitting.
+* Frequency and duration already exist as candidate features; the task is deciding to include them.
+
+**Why the other options are incorrect**
+
+* **Model evaluation** correctly maps to “Assessing the elements of a confusion matrix” because confusion matrices are used to evaluate classification model performance.
+* **Feature engineering** correctly maps to “Dividing a date into distinct month, day, and year elements” because this creates new features from existing data.
+* **Model deployment** is not relevant to any of the listed scenarios, as it relates to operationalizing a trained model, not data preparation or assessment.
+
+**Key takeaway**
+
+* **Feature selection = choosing which inputs to use.**
+* **Feature engineering = transforming or creating inputs.**
+* Confusing these two is a common exam trap.
+
+**References**
+
+* [https://learn.microsoft.com/en-us/training/modules/understand-machine-learning/](https://learn.microsoft.com/en-us/training/modules/understand-machine-learning/)
+* [https://learn.microsoft.com/en-us/azure/machine-learning/concept-feature-engineering](https://learn.microsoft.com/en-us/azure/machine-learning/concept-feature-engineering)
+* [https://learn.microsoft.com/en-us/azure/machine-learning/concept-model-evaluation](https://learn.microsoft.com/en-us/azure/machine-learning/concept-model-evaluation)
 
 
+</details>
 
 ## Correctly Answered but Uncertain Questions
 
