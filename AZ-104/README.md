@@ -35,117 +35,142 @@
 
 ### Domain 1: Manage Azure Identities and Governance (20–25%)
 
-**Key Topics**
+**Skills Measured**
 
-- Create and manage users, groups, and administrative units
-- Configure and manage license assignments (Free, P1, P2)
-- Manage external users (guest accounts, B2B collaboration)
+**Manage Microsoft Entra users and groups**
+- Create users and groups
+- Manage user and group properties
+- Manage licenses in Microsoft Entra ID
+- Manage external users
 - Configure self-service password reset (SSPR)
-- Implement RBAC: built-in roles, custom roles, scope inheritance
-- Implement Azure Policy: definitions, initiatives, remediation
-- Configure resource locks: **CanNotDelete** and **ReadOnly**
-- Manage resource tagging and management groups
 
-**Common Pitfalls**
+**Manage access to Azure resources**
+- Manage built-in Azure roles
+- Assign roles at different scopes
+- Interpret access assignments
 
-- Resource groups cannot be nested
-- Scope inheritance cannot be broken
-- Policy definitions (individual) vs. initiatives (grouped)
-- P1 vs P2 feature sets in Entra ID
-- Azure AD roles needed to manage licenses, not just RBAC roles
+**Manage Azure subscriptions and governance**
+- Implement and manage Azure Policy
+- Configure resource locks
+- Apply and manage tags on resources
+- Manage resource groups
+- Manage subscriptions
+- Manage costs by using alerts, budgets, and Azure Advisor recommendations
+- Configure management groups
 
 ---
 
 ### Domain 2: Implement and Manage Storage (15–20%)
 
-**Key Topics**
+**Skills Measured**
 
+**Configure access to storage**
+- Configure Azure Storage firewalls and virtual networks
+- Create and use shared access signature (SAS) tokens
+- Configure stored access policies
+- Manage access keys
+- Configure identity-based access for Azure Files
+
+**Configure and manage storage accounts**
 - Create and configure storage accounts
-- Configure redundancy (LRS, ZRS, GRS, RA-GRS, GZRS)
-- Configure Azure Storage firewalls and VNets
-- Configure and use SAS tokens and stored access policies
-- Configure Azure Files identity-based access (Entra ID, AD DS)
-- Configure object replication and encryption
-- Manage data using AzCopy and Storage Explorer
-- Configure lifecycle management, soft delete, snapshots, versioning
+- Configure Azure Storage redundancy
+- Configure object replication
+- Configure storage account encryption
+- Manage data by using Azure Storage Explorer and AzCopy
 
-**Common Pitfalls**
-
-- SAS tokens can only be revoked via stored access policy
-- Misconfiguring network rules that block access unintentionally
-- Confusing Azure File Sync with Azure Files share identity integration
+**Configure Azure Files and Azure Blob Storage**
+- Create and configure a file share in Azure Storage
+- Create and configure a container in Blob Storage
+- Configure storage tiers
+- Configure soft delete for blobs and containers
+- Configure snapshots and soft delete for Azure Files
+- Configure blob lifecycle management
+- Configure blob versioning
 
 ---
 
 ### Domain 3: Deploy and Manage Azure Compute Resources (20–25%)
 
-**Key Topics**
+**Skills Measured**
 
-- Create and configure VMs (size, disks, images)
-- Configure VM availability (sets, zones)
-- Configure and manage VM extensions
-- Automate deployment using ARM/Bicep/Terraform
-- Create and manage VM Scale Sets
-- Manage Azure Container Instances and Azure Container Apps
-- Configure and manage App Services and Web Apps
-- Manage VM moving between subscriptions and regions
+**Automate deployment of resources by using Azure Resource Manager (ARM) templates or Bicep files**
+- Interpret an Azure Resource Manager template or a Bicep file
+- Modify an existing Azure Resource Manager template
+- Modify an existing Bicep file
+- Deploy resources by using an Azure Resource Manager template or a Bicep file
+- Export a deployment as an Azure Resource Manager template or convert an Azure Resource Manager template to a Bicep file
 
-**Common Pitfalls**
+**Create and configure virtual machines**
+- Create a virtual machine
+- Configure Azure Disk Encryption
+- Move a virtual machine to another resource group, subscription, or region
+- Manage virtual machine sizes
+- Manage virtual machine disks
+- Deploy virtual machines to availability zones and availability sets
+- Deploy and configure an Azure Virtual Machine Scale Sets
 
-- Availability sets (within datacenter) vs. zones (across datacenters)
-- Forgetting to update NSG rules when using custom VMs
-- Not linking diagnostic settings for boot diagnostics
+**Provision and manage containers in the Azure portal**
+- Create and manage an Azure container registry
+- Provision a container by using Azure Container Instances
+- Provision a container by using Azure Container Apps
+- Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps
+
+**Create and configure Azure App Service**
+- Provision an App Service plan
+- Configure scaling for an App Service plan
+- Create an App Service
+- Configure certificates and Transport Layer Security (TLS) for an App Service
+- Map an existing custom DNS name to an App Service
+- Configure backup for an App Service
+- Configure networking settings for an App Service
+- Configure deployment slots for an App Service
 
 ---
 
 ### Domain 4: Implement and Manage Virtual Networking (15–20%)
 
-**Key Topics**
+**Skills Measured**
 
-- Create and configure VNets, subnets, and peering
-- Configure public/private IPs and user-defined routes (UDR)
-- Configure NSGs and Application Security Groups (ASGs)
-- Configure Bastion, Private Link, and Private Endpoints
-- Configure Azure DNS zones (public/private)
-- Configure VPN Gateway, ExpressRoute, and Virtual WAN
-- Configure Load Balancer, Application Gateway, Front Door, Traffic Manager
+**Configure and manage virtual networks in Azure**
+- Create and configure virtual networks and subnets
+- Create and configure virtual network peering
+- Configure public IP addresses
+- Configure user-defined network routes
+- Troubleshoot network connectivity
 
-**Common Pitfalls**
+**Configure secure access to virtual networks**
+- Create and configure network security groups (NSGs) and application security groups
+- Evaluate effective security rules in NSGs
+- Implement Azure Bastion
+- Configure service endpoints for Azure platform as a service (PaaS)
+- Configure private endpoints for Azure PaaS
 
-- NSG rules are stateful
-- Forgetting to disable private endpoint network policies
-- Confusing service endpoints vs. private endpoints
+**Configure name resolution and load balancing**
+- Configure Azure DNS
+- Configure an internal or public load balancer
+- Troubleshoot load balancing
 
 ---
 
 ### Domain 5: Monitor and Maintain Azure Resources (10–15%)
 
-**Key Topics**
+**Skills Measured**
 
-- Configure diagnostic settings and Azure Monitor
-- Query and analyze data in Log Analytics
-- Create and manage alerts and action groups
-- Configure and interpret metrics and workbooks
-- Implement Azure Backup and Recovery Services Vault
-- Perform restore operations
-- Monitor cost and resource utilization
+**Monitor resources in Azure**
+- Interpret metrics in Azure Monitor
+- Configure log settings in Azure Monitor
+- Query and analyze logs in Azure Monitor
+- Set up alert rules, action groups, and alert processing rules in Azure Monitor
+- Configure and interpret monitoring of virtual machines, storage accounts, and networks by using Azure Monitor Insights
+- Use Azure Network Watcher and Connection Monitor
 
-**Common Pitfalls**
-
-- Forgetting to connect resources to a Log Analytics workspace
-- Overlooking monitoring inheritance (diagnostic settings per resource)
-- Not validating recovery jobs after backup configuration
+**Implement backup and recovery**
+- Create a Recovery Services vault
+- Create an Azure Backup vault
+- Create and configure a backup policy
+- Perform backup and restore operations by using Azure Backup
+- Configure Azure Site Recovery for Azure resources
+- Perform a failover to a secondary region by using Site Recovery
+- Configure and interpret reports and alerts for backups
 
 ---
-
-## 🧾 Final Review Checklist
-
-- [ ] Know the difference between Entra ID and RBAC roles
-- [ ] Practice assigning roles at different scopes
-- [ ] Deploy and lock resources using Azure Policy
-- [ ] Understand redundancy models (LRS → GZRS)
-- [ ] Deploy a VM with diagnostics and backup enabled
-- [ ] Implement a load balancer + NSG combo
-- [ ] Set up Azure Monitor and send logs to Log Analytics
-- [ ] Configure a recovery vault and restore a VM
-- [ ] Review Advisor recommendations and budgets
