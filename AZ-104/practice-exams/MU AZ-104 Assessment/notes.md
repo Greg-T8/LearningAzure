@@ -1122,7 +1122,7 @@ Azure Recovery Services vault overview
 
 <img src='.img/2026-01-30-06-17-12.png' width=700>
 
-<details open>
+<details>
 <summary>Click to expand explanation</summary>
 
 **Why the selected answer is wrong (Yes)**
