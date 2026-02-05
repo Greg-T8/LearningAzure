@@ -1247,6 +1247,75 @@ For Azure IaaS VMs protected by a Recovery Services vault, **soft delete provide
 
 <img src='.img/2026-01-30-06-18-07.png' width=700>
 
+<details open>
+<summary>Click to expand explanation</summary>
+
+**Correct answer: No**
+
+**Why the selected answer is incorrect**
+Changing the App Service plan from **Free (F1)** to **Standard S1** does remove the 60-minute daily execution limit, so the app can run for eight hours per day. However, the solution also explicitly requires keeping **additional costs to a minimum**. Standard S1 is **not the lowest-cost plan** that satisfies the runtime requirement, so the solution does not fully meet the goal.
+
+**Why the correct answer is correct**
+While Standard S1 technically works from a functionality standpoint, it fails the cost-minimization requirement. A **Basic (B1)** plan would also allow the app to run continuously beyond 60 minutes and is **cheaper than Standard S1**, making S1 an unnecessarily expensive choice for testing.
+
+**Why other options are less appropriate**
+
+* Staying on **Free (F1)** is not viable because of the enforced 60-minute daily limit and the inability to restart the app the same day.
+* Moving to **Standard S1** overprovisions features (such as scaling and advanced capabilities) that are not required for this scenario and increases cost unnecessarily.
+
+**Key takeaway**
+For App Service questions, always evaluate both **technical capability and cost efficiency**. If multiple plans meet the runtime requirement, the **lowest-cost qualifying tier** is the correct exam choice.
+
+**References**
+
+* [https://learn.microsoft.com/azure/app-service/overview-hosting-plans](https://learn.microsoft.com/azure/app-service/overview-hosting-plans)
+* [https://learn.microsoft.com/azure/app-service/management-scale-up](https://learn.microsoft.com/azure/app-service/management-scale-up)
+* [https://learn.microsoft.com/azure/app-service/operating-system-functionality#app-service-plan-tiers](https://learn.microsoft.com/azure/app-service/operating-system-functionality#app-service-plan-tiers)
+
+<img src='.img/2026-02-05-02-52-17.png' width=600>
+
+**What the ACU/vCPU column represents**
+
+The **ACU/vCPU** column indicates the **relative CPU performance available per virtual CPU** for that App Service plan.
+
+**ACU (Azure Compute Unit)**
+
+* ACU is a **normalized performance score**, not a physical measurement.
+* Microsoft uses it to compare CPU performance **across different underlying hardware generations**.
+* Higher ACU means **more compute power per vCPU**.
+
+**How to read the values**
+
+* **N/A (Free F1 / Shared D1)**
+  These tiers don’t provide dedicated vCPUs. They run on shared infrastructure with enforced time quotas, so ACU isn’t applicable.
+
+* **100 ACU**
+  Baseline compute performance. This is common for **Basic (B-series)** and **Standard (S-series)** plans and many legacy Premium plans.
+
+* **195 ACU / 210 ACU**
+  Indicates **newer, faster CPU hardware** (for example, Premium v3 or Premium v2).
+  Each vCPU delivers roughly **~2× the compute performance** of a 100 ACU vCPU.
+
+**What this means in practice (exam-relevant)**
+
+* ACU is about **CPU speed per vCPU**, not total compute.
+* Total compute = **ACU × number of vCPUs**.
+* Two plans with the same vCPU count but different ACU values will have **different performance**.
+* ACU does **not** change memory, storage, features, or scaling rules—only relative CPU power.
+
+**Common exam trap**
+
+* Assuming “1 vCPU = same performance everywhere.”
+  This is incorrect. A **1-vCPU plan at 195 ACU** is significantly faster than **1 vCPU at 100 ACU**.
+
+**Key takeaway**
+
+ACU/vCPU is a **relative CPU performance indicator**. Higher numbers mean **faster CPUs per core**, typically reflecting newer App Service hardware generations.
+
+
+
+</details>
+
 ---
 
 ## Correctly Answered Questions

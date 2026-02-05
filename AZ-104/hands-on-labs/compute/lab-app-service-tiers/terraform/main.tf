@@ -24,6 +24,7 @@ locals {
     Domain           = title(var.domain)
     Purpose          = "App Service Pricing Tiers"
     Owner            = var.owner
+    DateCreated      = formatdate("YYYY-MM-DD", timestamp())
     DeploymentMethod = "Terraform"
   }
 

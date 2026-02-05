@@ -59,7 +59,7 @@ All resources **must** include these tags:
 | `Domain` | Exam domain | `Networking` |
 | `Purpose` | What the lab demonstrates | `VNet Peering` |
 | `Owner` | Your identifier | `Greg Tate` |
-
+| `DateCreated` | Resource creation date | `2026-02-05` |
 ---
 
 ## Implementation Examples
@@ -97,6 +97,7 @@ locals {
     Domain      = title(var.domain)
     Purpose     = replace(title(var.topic), "-", " ")
     Owner       = var.owner
+    DateCreated = formatdate("YYYY-MM-DD", timestamp())
     DeploymentMethod = "Terraform"
   }
 }
@@ -127,8 +128,8 @@ var commonTags = {
   Domain: toUpper(substring(domain, 0, 1)) + substring(domain, 1)
   Purpose: replace(topic, '-', ' ')
   Owner: owner
-  DeploymentMethod: 'Bicep'lace(topic, '-', ' ')
-  Owner: owner
+  DateCreated: utcNow('yyyy-MM-dd')
+  DeploymentMethod: 'Bicep'
 }
 
 // Apply tags to resources

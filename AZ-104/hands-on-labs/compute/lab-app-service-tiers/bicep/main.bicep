@@ -43,6 +43,7 @@ var commonTags = {
   Domain: '${toUpper(substring(domain, 0, 1))}${substring(domain, 1)}'
   Purpose: 'App Service Pricing Tiers'
   Owner: owner
+  DateCreated: utcNow('yyyy-MM-dd')
   DeploymentMethod: 'Bicep'
 }
 
