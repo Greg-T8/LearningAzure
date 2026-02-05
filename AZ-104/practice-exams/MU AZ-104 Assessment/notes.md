@@ -6,7 +6,6 @@
 * [Correctly Answered but Unsure Questions](#correctly-answered-but-unsure-questions)
 * [Correctly Answered Questions](#correctly-answered-questions)
 
-
 ## Overview
 
 Notes and insights from the MeasureUp practice assessment for AZ-104.
@@ -118,7 +117,6 @@ Avoid assigning roles at higher scopes (like subscription level) when you can ac
 ---
 
 <img src='.img/2026-01-30-06-20-49.png' width=700>
-
 
 <details>
 <summary>Click to expand explanation</summary>
@@ -553,7 +551,6 @@ You had the logic completely reversed - change feed on the wrong end, and versio
 
 <img src='.img/2026-01-30-05-50-54.png' width=700>
 
-
 <details>
 <summary>Click to expand explanation</summary>
 
@@ -789,15 +786,13 @@ On Azure exams, when you see:
 
 ➡️ **Standard is too weak**, **Isolated is too expensive**, **Premium V3 is the correct balance**.
 
-<img src='.img/2026-02-03-03-22-57.png' width=700> 
+<img src='.img/2026-02-03-03-22-57.png' width=700>
 
 **References**
 
 * [https://learn.microsoft.com/azure/app-service/overview-hosting-plans](https://learn.microsoft.com/azure/app-service/overview-hosting-plans)
 * [https://learn.microsoft.com/azure/app-service/plan-manage-costs](https://learn.microsoft.com/azure/app-service/plan-manage-costs)
 * [https://learn.microsoft.com/azure/app-service/environment/overview](https://learn.microsoft.com/azure/app-service/environment/overview)
-
-
 
 </details>
 
@@ -862,7 +857,6 @@ If a deployment-related command is available (like `Publish-AzWebApp`) and the s
 * [https://learn.microsoft.com/powershell/module/az.websites/publish-azwebapp](https://learn.microsoft.com/powershell/module/az.websites/publish-azwebapp)
 * [https://learn.microsoft.com/azure/app-service/deploy-local-git](https://learn.microsoft.com/azure/app-service/deploy-local-git)
 
-
 </details>
 
 ---
@@ -902,7 +896,6 @@ If a deployment-related command is available (like `Publish-AzWebApp`) and the s
 * [https://learn.microsoft.com/azure/load-balancer/load-balancer-outbound-connections](https://learn.microsoft.com/azure/load-balancer/load-balancer-outbound-connections)
 * [https://learn.microsoft.com/azure/load-balancer/load-balancer-standard-overview](https://learn.microsoft.com/azure/load-balancer/load-balancer-standard-overview)
 * [https://learn.microsoft.com/azure/virtual-network/ip-services/public-ip-addresses](https://learn.microsoft.com/azure/virtual-network/ip-services/public-ip-addresses)
-
 
 </details>
 
@@ -993,7 +986,6 @@ For Azure Monitor alerts, use **one action group with multiple actions** wheneve
 * [https://learn.microsoft.com/azure/azure-monitor/alerts/itsmc-overview](https://learn.microsoft.com/azure/azure-monitor/alerts/itsmc-overview)
 * [https://learn.microsoft.com/azure/azure-monitor/alerts/alerts-overview](https://learn.microsoft.com/azure/azure-monitor/alerts/alerts-overview)
 
-
 </details>
 
 ---
@@ -1071,14 +1063,14 @@ Boot diagnostics requires:
 
 Premium storage accounts and storage account v1 are **not supported**, regardless of region or resource group.
 
-<img src='.img/2026-02-03-04-29-59.png' width=700> 
+<img src='.img/2026-02-03-04-29-59.png' width=700>
 
 **References**  
+
 * [Limitations](https://learn.microsoft.com/en-us/azure/virtual-machines/boot-diagnostics#limitations)
 * [https://learn.microsoft.com/azure/virtual-machines/boot-diagnostics](https://learn.microsoft.com/azure/virtual-machines/boot-diagnostics)
 * [https://learn.microsoft.com/azure/storage/common/storage-account-overview](https://learn.microsoft.com/azure/storage/common/storage-account-overview)
 * [https://learn.microsoft.com/azure/virtual-machines/troubleshooting/boot-diagnostics#requirements](https://learn.microsoft.com/azure/virtual-machines/troubleshooting/boot-diagnostics#requirements)
-
 
 </details>
 
@@ -1153,101 +1145,13 @@ To meet “run 8 hours each day,” you need a plan where you **don’t get stop
 * [https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans](https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans)
 * [https://learn.microsoft.com/en-us/azure/app-service/web-sites-monitor](https://learn.microsoft.com/en-us/azure/app-service/web-sites-monitor)
 
-
 </details>
-
----
-
-## Correctly Answered but Unsure Questions
-
-<img src='.img/2026-01-30-05-24-16.png' width=700>
-
-<details>
-<summary>Click to expand explanation</summary>
-
-**Why the selected answer is correct (IP flow verify)**
-IP flow verify is the Network Watcher tool specifically designed to determine whether traffic is **allowed or denied** to or from a VM. You define the 5-tuple (source IP, destination IP, source port, destination port, protocol), and Azure evaluates the effective NSG rules applied to the NIC and subnet to return an **Allow** or **Deny** decision. This directly answers the requirement to check whether packets are being allowed or denied to the web server.
-
-**Why the other options are incorrect**
-
-* **Next hop**: Shows where traffic is routed (e.g., Internet, virtual appliance, VNet peering). It does not evaluate security rules or allow/deny decisions.
-* **Effective security rules**: Lists the merged NSG rules applied to a NIC or subnet, but does not simulate a specific packet flow or return an explicit allow/deny result for given traffic.
-* **Connection troubleshoot**: Tests end-to-end connectivity between a source and destination and identifies potential failures, but it is broader than required and not focused on evaluating packet allow/deny decisions at the NSG level.
-
-**Key takeaway**
-When the question asks whether packets are **allowed or denied**, the correct Network Watcher tool is **IP flow verify**.
-
-**References**
-
-* [https://learn.microsoft.com/azure/network-watcher/network-watcher-ip-flow-verify-overview](https://learn.microsoft.com/azure/network-watcher/network-watcher-ip-flow-verify-overview)
-* [https://learn.microsoft.com/azure/network-watcher/network-watcher-monitoring-overview](https://learn.microsoft.com/azure/network-watcher/network-watcher-monitoring-overview)
-* [https://learn.microsoft.com/azure/virtual-network/security-overview](https://learn.microsoft.com/azure/virtual-network/security-overview)
-
-No. **Windows Firewall rules do not impact IP flow verify results.**
-
-**Why**
-IP flow verify evaluates traffic **only at the Azure networking layer**, specifically:
-
-* Network Security Groups (NSGs) applied to the **subnet** and **NIC**
-* Azure’s effective security rule evaluation (priority-based NSG processing)
-
-It does **not** inspect or consider:
-
-* Guest OS firewalls (Windows Firewall, iptables, etc.)
-* Application-level listeners or services
-* VM-level routing inside the OS
-
-**Common exam trap**
-It is easy to assume that “packet allowed or denied” includes the OS firewall. On Azure exams, **IP flow verify = NSG evaluation only**. If IP flow verify returns **Allow** but connectivity still fails, the next suspects are:
-
-* Windows Firewall rules
-* Application not listening on the port
-* Local OS routing or security software
-
-**Key takeaway**
-IP flow verify answers: *“Would Azure networking allow this packet?”*
-It does **not** answer: *“Can the VM actually accept this connection?”*
-
-**References**
-
-* [https://learn.microsoft.com/azure/network-watcher/network-watcher-ip-flow-verify-overview](https://learn.microsoft.com/azure/network-watcher/network-watcher-ip-flow-verify-overview)
-* [https://learn.microsoft.com/azure/virtual-network/network-security-groups-overview](https://learn.microsoft.com/azure/virtual-network/network-security-groups-overview)
-
-
-</details>
-
----
-
-<img src='.img/2026-01-30-05-24-56.png' width=700>
-
-<details>
-<summary>Click to expand explanation</summary>
-
-**Why the selected answer is right**
-Azure Backup uses **Soft Delete** for Azure IaaS VM backups. When a VM and its backup data are deleted (intentionally or accidentally), the backup data is **retained for 14 days** in a soft-deleted state. During this window, the VM’s backup data can be recovered by undeleting the backup item from the Recovery Services vault. After 14 days, the data is permanently deleted and cannot be recovered.
-
-**Key takeaway**
-For Azure IaaS VMs protected by a Recovery Services vault, **soft delete provides a fixed 14-day recovery window** after deletion—independent of the configured backup retention policy.
-
-<img src='.img/2026-02-04-03-04-12.png' width=500>
-
-**References**
-
-* [Soft delete for virtual machines](https://learn.microsoft.com/en-us/azure/backup/soft-delete-virtual-machines?utm_source=chatgpt.com&tabs=azure-portal)
-
-
-</details>
-
----
-
-
-<img src='.img/2026-01-30-06-17-46.png' width=700>
 
 ---
 
 <img src='.img/2026-01-30-06-18-07.png' width=700>
 
-<details open>
+<details>
 <summary>Click to expand explanation</summary>
 
 **Correct answer: No**
@@ -1312,7 +1216,113 @@ The **ACU/vCPU** column indicates the **relative CPU performance available per v
 
 ACU/vCPU is a **relative CPU performance indicator**. Higher numbers mean **faster CPUs per core**, typically reflecting newer App Service hardware generations.
 
+---
 
+</details>
+
+## Correctly Answered but Unsure Questions
+
+<img src='.img/2026-01-30-05-24-16.png' width=700>
+
+<details>
+<summary>Click to expand explanation</summary>
+
+**Why the selected answer is correct (IP flow verify)**
+IP flow verify is the Network Watcher tool specifically designed to determine whether traffic is **allowed or denied** to or from a VM. You define the 5-tuple (source IP, destination IP, source port, destination port, protocol), and Azure evaluates the effective NSG rules applied to the NIC and subnet to return an **Allow** or **Deny** decision. This directly answers the requirement to check whether packets are being allowed or denied to the web server.
+
+**Why the other options are incorrect**
+
+* **Next hop**: Shows where traffic is routed (e.g., Internet, virtual appliance, VNet peering). It does not evaluate security rules or allow/deny decisions.
+* **Effective security rules**: Lists the merged NSG rules applied to a NIC or subnet, but does not simulate a specific packet flow or return an explicit allow/deny result for given traffic.
+* **Connection troubleshoot**: Tests end-to-end connectivity between a source and destination and identifies potential failures, but it is broader than required and not focused on evaluating packet allow/deny decisions at the NSG level.
+
+**Key takeaway**
+When the question asks whether packets are **allowed or denied**, the correct Network Watcher tool is **IP flow verify**.
+
+**References**
+
+* [https://learn.microsoft.com/azure/network-watcher/network-watcher-ip-flow-verify-overview](https://learn.microsoft.com/azure/network-watcher/network-watcher-ip-flow-verify-overview)
+* [https://learn.microsoft.com/azure/network-watcher/network-watcher-monitoring-overview](https://learn.microsoft.com/azure/network-watcher/network-watcher-monitoring-overview)
+* [https://learn.microsoft.com/azure/virtual-network/security-overview](https://learn.microsoft.com/azure/virtual-network/security-overview)
+
+No. **Windows Firewall rules do not impact IP flow verify results.**
+
+**Why**
+IP flow verify evaluates traffic **only at the Azure networking layer**, specifically:
+
+* Network Security Groups (NSGs) applied to the **subnet** and **NIC**
+* Azure’s effective security rule evaluation (priority-based NSG processing)
+
+It does **not** inspect or consider:
+
+* Guest OS firewalls (Windows Firewall, iptables, etc.)
+* Application-level listeners or services
+* VM-level routing inside the OS
+
+**Common exam trap**
+It is easy to assume that “packet allowed or denied” includes the OS firewall. On Azure exams, **IP flow verify = NSG evaluation only**. If IP flow verify returns **Allow** but connectivity still fails, the next suspects are:
+
+* Windows Firewall rules
+* Application not listening on the port
+* Local OS routing or security software
+
+**Key takeaway**
+IP flow verify answers: *“Would Azure networking allow this packet?”*
+It does **not** answer: *“Can the VM actually accept this connection?”*
+
+**References**
+
+* [https://learn.microsoft.com/azure/network-watcher/network-watcher-ip-flow-verify-overview](https://learn.microsoft.com/azure/network-watcher/network-watcher-ip-flow-verify-overview)
+* [https://learn.microsoft.com/azure/virtual-network/network-security-groups-overview](https://learn.microsoft.com/azure/virtual-network/network-security-groups-overview)
+
+</details>
+
+---
+
+<img src='.img/2026-01-30-05-24-56.png' width=700>
+
+<details>
+<summary>Click to expand explanation</summary>
+
+**Why the selected answer is right**
+Azure Backup uses **Soft Delete** for Azure IaaS VM backups. When a VM and its backup data are deleted (intentionally or accidentally), the backup data is **retained for 14 days** in a soft-deleted state. During this window, the VM’s backup data can be recovered by undeleting the backup item from the Recovery Services vault. After 14 days, the data is permanently deleted and cannot be recovered.
+
+**Key takeaway**
+For Azure IaaS VMs protected by a Recovery Services vault, **soft delete provides a fixed 14-day recovery window** after deletion—independent of the configured backup retention policy.
+
+<img src='.img/2026-02-04-03-04-12.png' width=500>
+
+**References**
+
+* [Soft delete for virtual machines](https://learn.microsoft.com/en-us/azure/backup/soft-delete-virtual-machines?utm_source=chatgpt.com&tabs=azure-portal)
+
+</details>
+
+---
+
+<img src='.img/2026-01-30-06-17-46.png' width=700>
+
+<details>
+<summary>Click to expand explanation</summary>
+
+**Why “Yes” is correct**
+Changing the App Service plan from **Free (F1)** to **Basic (B1)** removes the **Free/Shared quota enforcement** behavior. In Free/Shared tiers, Azure enforces CPU/Bandwidth quotas; when the app exceeds its quota (for example, CPU (Day)), the app is **stopped until the quota resets** (which matches “stops after 60 minutes” and “can’t be restarted until the next day”). Scaling up to a dedicated tier (Basic) avoids those per-app CPU-minute/day quotas, allowing the app to run for the required **8 hours/day**.
+
+**Why “No” would be a trap**
+A common misconception is that “Free just means no SLA” or “it only affects performance.” In reality, Free/Shared tiers have **hard quotas** that can stop the app for the rest of the day once exceeded.
+
+**Cost reasoning (exam perspective)**
+Basic **B1** is typically the lowest-cost **dedicated compute** App Service plan tier. Since the requirement is to run several hours daily, moving to the cheapest dedicated tier is the minimal-cost way to meet the runtime goal.
+
+**Key takeaway**
+Free/Shared App Service plans can stop apps when usage quotas are exceeded; moving to a dedicated tier like **Basic B1** eliminates that daily CPU-minute quota enforcement and meets the 8-hours/day requirement.
+
+<img src='.img/2026-02-05-04-17-27.png' width=800>
+
+**References**
+
+* [https://learn.microsoft.com/en-us/azure/app-service/web-sites-monitor](https://learn.microsoft.com/en-us/azure/app-service/web-sites-monitor)
+* [https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans](https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans)
 
 </details>
 

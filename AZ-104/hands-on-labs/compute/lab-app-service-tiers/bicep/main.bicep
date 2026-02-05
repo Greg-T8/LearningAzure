@@ -7,9 +7,6 @@
 
 targetScope = 'subscription'
 
-@description('Azure subscription ID for lab deployments (prevents wrong-subscription mistakes)')
-param labSubscriptionId string
-
 @description('AZ-104 exam domain')
 @allowed(['identity', 'networking', 'storage', 'compute', 'monitoring'])
 param domain string = 'compute'
@@ -50,9 +47,6 @@ var commonTags = {
   DateCreated: dateCreated
   DeploymentMethod: 'Bicep'
 }
-
-// Subscription ID validation (used at deployment time)
-var _ = labSubscriptionId
 
 // -------------------------------------------------------------------------
 // Resource Group

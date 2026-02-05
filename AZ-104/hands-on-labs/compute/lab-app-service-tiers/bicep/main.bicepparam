@@ -7,9 +7,6 @@
 
 using './main.bicep'
 
-// Your Azure lab subscription ID (REQUIRED - replace with your actual subscription)
-param labSubscriptionId = 'e091f6e7-031a-4924-97bb-8c983ca5d21a'
-
 // Domain and lab configuration
 param domain = 'compute'
 param topic = 'app-service-tiers'
