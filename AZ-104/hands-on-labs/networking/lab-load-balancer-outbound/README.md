@@ -1,14 +1,14 @@
 <!--
 # -------------------------------------------------------------------------
 # Program: README.md
-# Description: Hands-on lab guide for load balancer outbound traffic
-# Context: AZ-104 Lab - Load balancer outbound traffic
+# Description: Hands-on lab guide for load balancer outbound flow behavior
+# Context: AZ-104 Lab - Standard Load Balancer outbound flow behavior
 # Author: Greg Tate
-# Date: 2026-02-05
+# Date: 2026-02-06
 # -------------------------------------------------------------------------
 -->
 
-# Lab: Standard Load Balancer Outbound Traffic
+# Lab: Load Balancer Outbound Behavior
 
 ## Exam Question Scenario
 
@@ -23,33 +23,25 @@ For each of the following statements, select Yes if the statement is true. Other
 
 ## Scenario Analysis
 
-The scenario focuses on outbound connectivity behavior for a Standard Load Balancer when a backend VM has its own public IP and the load balancer has multiple frontend IPs. The lab must model three backend VMs, one instance-level public IP, two load balancer public frontends, and a TCP-only load balancing rule.
+The scenario focuses on outbound connectivity behavior for a Standard Load Balancer when a backend VM has its own public IP and the load balancer has multiple frontend IPs. The lab models three backend VMs, one instance-level public IP, two load balancer public frontends, and a TCP-only load balancing rule with an outbound rule that uses both frontends.
 
 ## Solution Architecture
 
-This lab deploys a resource group, virtual network, subnet, network security group, three Windows VMs, a Standard public load balancer, and three public IPs. VM01 receives its own public IP. The load balancer exposes two public frontends, and the backend pool contains all three VMs. An outbound rule is configured for each frontend IP to model SNAT behavior for VM02 and VM03.
+This lab deploys a resource group, virtual network, subnet, network security group, three Windows VMs, a Standard public load balancer, and three public IPs. VM01 receives its own public IP. The load balancer exposes two public frontends, and the backend pool contains all three VMs. A TCP-only load balancing rule and an outbound rule are configured to match the scenario.
 
 ## Prerequisites
 
 - Azure CLI installed and authenticated
-- Terraform installed
+- Bicep installed
 - Azure subscription with appropriate permissions
-- Resource providers registered: Microsoft.Compute, Microsoft.Network
+- Resource providers registered: Microsoft.Compute, Microsoft.Network, Microsoft.Resources
 
-### Terraform Prerequisites
-
-Ensure you have a `terraform.tfvars` file with your subscription ID:
-
-```bash
-# The terraform.tfvars should contain:
-lab_subscription_id = "e091f6e7-031a-4924-97bb-8c983ca5d21a"
-```
-
-Register the provider if needed:
+Register the providers if needed:
 
 ```bash
 az provider register --namespace Microsoft.Network
 az provider register --namespace Microsoft.Compute
+az provider register --namespace Microsoft.Resources
 ```
 
 ## Lab Objectives
@@ -60,80 +52,78 @@ az provider register --namespace Microsoft.Compute
 
 ## Deployment
 
-### Terraform Deployment
+### Bicep Deployment
 
-1. Navigate to the terraform directory:
+1. Navigate to the bicep directory:
    ```bash
-   cd terraform
+   cd bicep
    ```
 
-2. Verify terraform.tfvars exists with your subscription ID:
+2. Update the admin password in main.bicepparam:
    ```bash
-   # File should already exist with lab subscription ID
-   cat terraform.tfvars
+   # Replace the placeholder with a strong password before deployment
    ```
 
-3. Initialize Terraform:
-   ```bash
-   terraform init
+3. Validate the template:
+   ```powershell
+   .\bicep.ps1 validate
    ```
 
-4. Validate the configuration:
-   ```bash
-   terraform validate
+4. Review the plan (what-if):
+   ```powershell
+   .\bicep.ps1 plan
    ```
 
-5. Review the planned changes:
-   ```bash
-   terraform plan
-   ```
-
-6. Deploy the infrastructure:
-   ```bash
-   terraform apply
+5. Deploy the stack:
+   ```powershell
+   .\bicep.ps1 apply
    ```
 
 ## Validation Steps
 
-1. Confirm the public IPs after deployment:
-   - VM01 uses the VM01 public IP.
-   - IP02 and IP03 are load balancer frontends.
-2. Connect to VM01 and run:
+1. Confirm the load balancer frontends:
+   ```bash
+   az network lb frontend-ip list \
+     --resource-group az104-networking-load-balancer-outbound-bicep \
+     --lb-name lb-load-balancer-outbound
+   ```
+2. Confirm the outbound rule uses both frontend IPs:
+   ```bash
+   az network lb outbound-rule list \
+     --resource-group az104-networking-load-balancer-outbound-bicep \
+     --lb-name lb-load-balancer-outbound
+   ```
+3. From each VM, check outbound IP selection:
    ```powershell
    Invoke-RestMethod -Uri "https://ifconfig.me"
    ```
-3. Connect to VM02 and run:
-   ```powershell
-   Invoke-RestMethod -Uri "https://ifconfig.me"
-   ```
-4. Connect to VM03 and run:
-   ```powershell
-   Invoke-RestMethod -Uri "https://ifconfig.me"
-   ```
-5. Compare the results:
+4. Compare the results:
    - VM01 should return IP01.
    - VM02 and VM03 should return IP02 or IP03.
 
 ## Testing the Solution
 
-1. Browse to the load balancer IP02 from your workstation:
-   - `http://<IP02>` should return the IIS welcome page.
-2. Browse to the load balancer IP03 from your workstation:
-   - `http://<IP03>` should return the IIS welcome page.
-3. Refresh multiple times to observe load distribution across VM01-VM03.
+1. Confirm VM01 has its own public IP:
+   ```bash
+   az network public-ip show \
+     --resource-group az104-networking-load-balancer-outbound-bicep \
+     --name pip-load-balancer-outbound-vm01 \
+     --query ipAddress
+   ```
+2. Refresh the outbound IP test from VM02 and VM03 to observe IP02 or IP03 usage.
 
 ## Cleanup
 
-### Terraform Cleanup
+### Bicep Cleanup
 
-```bash
-terraform destroy
+```powershell
+.\bicep.ps1 destroy
 ```
 
 ## Key Learning Points
 
 - Instance-level public IPs override load balancer outbound SNAT.
-- Standard Load Balancer outbound rules control egress IP selection.
+- TCP-only load balancing rules impact outbound SNAT behavior.
 - Multiple frontend IPs can be used for outbound flows.
 
 ## Related AZ-104 Exam Objectives
@@ -144,6 +134,6 @@ terraform destroy
 
 ## Additional Resources
 
-- https://learn.microsoft.com/azure/load-balancer/load-balancer-outbound-rules
-- https://learn.microsoft.com/azure/load-balancer/load-balancer-overview
+- https://learn.microsoft.com/azure/load-balancer/load-balancer-outbound-connections
+- https://learn.microsoft.com/azure/load-balancer/load-balancer-multiple-frontends
 - https://learn.microsoft.com/azure/virtual-network/network-security-groups-overview
