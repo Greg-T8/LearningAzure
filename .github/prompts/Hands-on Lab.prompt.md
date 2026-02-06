@@ -302,7 +302,7 @@ owner    = "Greg Tate"
 
 ### Terraform Validation Steps
 
-After generating files, include these steps in your response:
+After generating files, you must run these commands in the terminal and include the output in your response:
 
 ```bash
 # Verify terraform.tfvars exists
@@ -473,7 +473,7 @@ az stack sub create \
 
 ### Bicep Validation Steps
 
-After generating files, include these steps in your response:
+After generating files, you must run these commands in the terminal and include the output in your response:
 
 ```powershell
 # Validate Bicep syntax using bicep.ps1 wrapper
@@ -641,6 +641,8 @@ terraform destroy
 7. **Generate** infrastructure code (Terraform OR Bicep as specified)
 8. **Create terraform.tfvars** (Terraform only) with lab subscription ID: `e091f6e7-031a-4924-97bb-8c983ca5d21a`
 9. **Validate** the code using appropriate tool commands
+  - **Terraform**: Always run `terraform init`, `terraform validate`, and `terraform plan`
+  - **Bicep**: Always run `bicep.ps1 validate` and `bicep.ps1 plan`
 10. **Create** comprehensive README.md with all required sections
 11. **Include** validation/testing scripts if complex verification is needed
 12. **Verify** all governance standards are met:
