@@ -132,7 +132,8 @@
         "Invoke-Expression": false,
         "iex": false,
         "terraform": true,
-        "az": true
+        "az": true,
+        "Copy-Item": true
     }
   }
 }
