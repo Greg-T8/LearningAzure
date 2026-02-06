@@ -133,7 +133,8 @@
         "iex": false,
         "terraform": true,
         "az": true,
-        "Copy-Item": true
+        "Copy-Item": true,
+        "ForEach-Object": true
     }
   }
 }

@@ -10,7 +10,7 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory = $true, Position = 0)]
-    [ValidateSet('create', 'delete', 'show', 'list', 'validate')]
+    [ValidateSet('apply', 'destroy', 'show', 'list', 'validate', 'plan')]
     [string]$Action,
 
     [Parameter(Mandatory = $false)]
@@ -146,7 +146,7 @@ function Build-StackCommand {
     $command = @()
 
     switch ($Action) {
-        'create' {
+        'apply' {
             $command += "az stack sub create"
             $command += "--name `"$StackName`""
             $command += "--location `"$Location`""
@@ -161,7 +161,7 @@ function Build-StackCommand {
             $command += "--yes"
         }
 
-        'delete' {
+        'destroy' {
             $command += "az stack sub delete"
             $command += "--name `"$StackName`""
             $command += "--action-on-unmanage deleteAll"
@@ -182,6 +182,15 @@ function Build-StackCommand {
             $command += "az bicep build"
             $command += "--file `"$TemplateFile`""
         }
+        'plan' {
+            $command += "az deployment sub what-if"
+            $command += "--location `"$Location`""
+            $command += "--template-file `"$TemplateFile`""
+            if (-not [string]::IsNullOrEmpty($ParametersFile)) {
+                $command += "--parameters `"$ParametersFile`""
+            }
+            $command += "--what-if-result-format FullResourcePayloads"
+        }
     }
 
     # Add any additional arguments passed through
@@ -197,7 +206,7 @@ function Build-StackCommand {
 # -------------------------------------------------------------------------
 
 # Validate subscription before any deployment operation
-if ($Action -in @('create', 'delete')) {
+    if ($Action -in @('apply', 'destroy', 'plan')) {
     if (-not (Test-Subscription)) {
         exit 1
     }
@@ -217,14 +226,14 @@ if ([string]::IsNullOrEmpty($StackName)) {
 }
 
 switch ($Action) {
-    'create' {
+    'apply' {
         if ([string]::IsNullOrEmpty($StackName)) {
             Write-Host "⛔ ERROR: Could not derive stack name. Provide -StackName or ensure parameters file has domain/topic." -ForegroundColor Red
             exit 1
         }
 
-        Write-Host "`n📦 Deploying subscription-scoped stack (creates RG and resources)..." -ForegroundColor Cyan
-        $command = Build-StackCommand -Action 'create' -StackName $StackName `
+        Write-Host "`n📦 Applying subscription-scoped stack (creates RG and resources)..." -ForegroundColor Cyan
+        $command = Build-StackCommand -Action 'apply' -StackName $StackName `
                                       -TemplateFile $TemplateFile -ParametersFile $ParametersFile `
                                       -Location $Location -AdditionalArgs $AdditionalArgs
         Write-Host "🚀 Running: $command" -ForegroundColor Gray
@@ -233,14 +242,14 @@ switch ($Action) {
         exit $LASTEXITCODE
     }
 
-    'delete' {
+    'destroy' {
         if ([string]::IsNullOrEmpty($StackName)) {
             Write-Host "⛔ ERROR: Could not derive stack name. Provide -StackName or ensure parameters file has domain/topic." -ForegroundColor Red
             exit 1
         }
 
-        Write-Host "`n🗑️  Deleting subscription-scoped stack (removes RG and all resources)..." -ForegroundColor Cyan
-        $command = Build-StackCommand -Action 'delete' -StackName $StackName
+        Write-Host "`n🗑️  Destroying subscription-scoped stack (removes RG and all resources)..." -ForegroundColor Cyan
+        $command = Build-StackCommand -Action 'destroy' -StackName $StackName
         Write-Host "🚀 Running: $command" -ForegroundColor Gray
         Write-Host ""
         Invoke-Expression $command
@@ -276,6 +285,20 @@ switch ($Action) {
 
         Write-Host "📋 Validating: $TemplateFile" -ForegroundColor Cyan
         $command = Build-StackCommand -Action 'validate' -TemplateFile $TemplateFile
+        Write-Host "🚀 Running: $command" -ForegroundColor Gray
+        Write-Host ""
+        Invoke-Expression $command
+        exit $LASTEXITCODE
+    }
+    'plan' {
+        if ([string]::IsNullOrEmpty($TemplateFile)) {
+            Write-Host "⛔ ERROR: -TemplateFile required for 'plan'" -ForegroundColor Red
+            exit 1
+        }
+        Write-Host "📋 Planning (What-If): $TemplateFile" -ForegroundColor Cyan
+        $command = Build-StackCommand -Action 'plan' -TemplateFile $TemplateFile `
+                                      -ParametersFile $ParametersFile -Location $Location `
+                                      -AdditionalArgs $AdditionalArgs
         Write-Host "🚀 Running: $command" -ForegroundColor Gray
         Write-Host ""
         Invoke-Expression $command
