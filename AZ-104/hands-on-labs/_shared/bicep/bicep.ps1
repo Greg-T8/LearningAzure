@@ -181,6 +181,12 @@ function Build-StackCommand {
         'validate' {
             $command += "az bicep build"
             $command += "--file `"$TemplateFile`""
+            $command += "&& az deployment sub validate"
+            $command += "--location `"$Location`""
+            $command += "--template-file `"$TemplateFile`""
+            if (-not [string]::IsNullOrEmpty($ParametersFile)) {
+                $command += "--parameters `"$ParametersFile`""
+            }
         }
         'plan' {
             $command += "az deployment sub what-if"
@@ -189,7 +195,6 @@ function Build-StackCommand {
             if (-not [string]::IsNullOrEmpty($ParametersFile)) {
                 $command += "--parameters `"$ParametersFile`""
             }
-            $command += "--what-if-result-format FullResourcePayloads"
         }
     }
 
