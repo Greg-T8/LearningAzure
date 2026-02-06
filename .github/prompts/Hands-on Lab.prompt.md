@@ -231,6 +231,69 @@ variable "owner" {
 - Output connection strings (if applicable)
 - Output any important resource properties for validation
 - Reference module outputs (e.g., `module.networking.vnet_id`)
+- **CRITICAL**: Output any generated admin passwords (marked as `sensitive = true`) so users can access resources
+
+### Credentials and Secrets
+
+**CRITICAL**: For lab environments, automatically generate friendly admin passwords that are easy to type but still meet complexity requirements:
+
+**Terraform**:
+- Use `random_integer` to create variation in a friendly password pattern
+- Include `random` provider in `required_providers`
+- Mark password outputs as `sensitive = true`
+- Output passwords so users can access resources
+
+Example:
+```hcl
+# In providers.tf, add to required_providers:
+random = {
+  source  = "hashicorp/random"
+  version = "~> 3.0"
+}
+
+# In main.tf or module:
+resource "random_integer" "password_suffix" {
+  min = 1000
+  max = 9999
+}
+
+locals {
+  admin_password = "AzureLab${random_integer.password_suffix.result}!"
+}
+
+# In outputs.tf:
+output "admin_password" {
+  description = "Generated admin password for resources (friendly format)"
+  value       = local.admin_password
+  sensitive   = true
+}
+```
+
+**Bicep**:
+- Use a friendly pattern with minimal variation for easy typing
+- Ensure complexity requirements are met (uppercase, lowercase, numbers, special characters)
+- Output passwords for user reference
+
+Example:
+```bicep
+// In main.bicep:
+var adminPassword = 'AzureLab${uniqueString(resourceGroup().id, '2026')}!'
+
+// Or for even more friendly:
+var adminPassword = 'AzureLab2026!'
+
+// In outputs:
+@description('Admin password for resources (friendly format)')
+output adminPassword string = adminPassword
+```
+
+**Friendly Password Patterns**:
+- `AzureLab2026!` - Simple, meets complexity (uppercase, lowercase, numbers, special)
+- `LabPassword${variation}!` - Pattern with variation
+- `Learning@Azure123` - Descriptive and memorable
+- `Demo${year}Pass!` - Year-based variation
+
+**Note**: Since this is a lab environment, these friendly passwords and their outputs are acceptable. In production, use Key Vault and avoid predictable patterns.
 
 ### Terraform Modules
 
@@ -296,9 +359,13 @@ owner    = "Greg Tate"
 
 # Add lab-specific variables here if needed
 # Example: container_name = "data"
+
+# NOTE: Do NOT add admin passwords here - use random_password resource instead
 ```
 
 **CRITICAL**: Always use subscription ID `e091f6e7-031a-4924-97bb-8c983ca5d21a` in terraform.tfvars
+
+**CRITICAL**: Never define admin password variables in variables.tf or terraform.tfvars - always generate them using `random_password` resource
 
 ### Terraform Validation Steps
 
@@ -356,6 +423,7 @@ param owner = 'Greg Tate'
 **outputs** (in main.bicep):
 - Output resource IDs
 - Output relevant properties for validation
+- **CRITICAL**: Output any generated admin passwords so users can access resources
 - Reference module outputs (e.g., `networking.outputs.vnetId`)
 
 ### Bicep Modules
@@ -598,6 +666,12 @@ az provider register --namespace Microsoft.Storage  # or other required provider
    ```bash
    terraform apply
    ```
+View generated credentials (if applicable):
+   ```bash
+   terraform output admin_password
+   # or
+   terraform output -json
+   ```
 
    [For Bicep]:
    Ensure you've switched to the Lab profile (step 1), then validate the Bicep template:
@@ -612,6 +686,13 @@ az provider register --namespace Microsoft.Storage  # or other required provider
 
    Deploy the infrastructure:
    ```powershell
+   .\bicep.ps1 apply
+   ```
+
+   View outputs including generated credentials:
+   ```powershell
+   .\bicep.ps1 show
+   # Look for adminPassword or similar in the outputs section
    .\bicep.ps1 apply
    ```
 
