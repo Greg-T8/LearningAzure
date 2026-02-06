@@ -304,9 +304,12 @@ owner    = "Greg Tate"
 
 After generating files, you must run these commands in the terminal and include the output in your response:
 
-```bash
+```powershell
+# CRITICAL: Switch to Lab Azure profile first
+Use-AzProfile Lab
+
 # Verify terraform.tfvars exists
-test -f terraform.tfvars && echo "✓ terraform.tfvars found" || echo "✗ Create terraform.tfvars"
+Test-Path terraform.tfvars
 
 # Initialize Terraform
 terraform init
@@ -476,6 +479,9 @@ az stack sub create \
 After generating files, you must run these commands in the terminal and include the output in your response:
 
 ```powershell
+# CRITICAL: Switch to Lab Azure profile first
+Use-AzProfile Lab
+
 # Validate Bicep syntax using bicep.ps1 wrapper
 .\bicep.ps1 validate
 
@@ -518,7 +524,21 @@ Create a comprehensive README with this structure:
 - Azure subscription with appropriate permissions
 - Resource provider registered: [list providers]
 
+**CRITICAL**: Before executing ANY Azure CLI, Terraform, or Bicep commands, you MUST switch to the Lab Azure profile:
+
+```powershell
+Use-AzProfile Lab
+```
+
+This ensures all commands execute in the correct Lab subscription environment. The profile switch persists for the terminal session.
+
 ### Terraform Prerequisites
+
+**CRITICAL**: Switch to Lab Azure profile before any Terraform operations:
+
+```powershell
+Use-AzProfile Lab
+```
 
 Ensure you have a `terraform.tfvars` file with your subscription ID:
 
@@ -542,12 +562,17 @@ az provider register --namespace Microsoft.Storage  # or other required provider
 
 ### [Terraform OR Bicep] Deployment
 
-1. Navigate to the terraform/bicep directory:
+1. **CRITICAL**: Switch to Lab Azure profile:
+   ```powershell
+   Use-AzProfile Lab
+   ```
+
+2. Navigate to the terraform/bicep directory:
    ```bash
    cd terraform  # or cd bicep
    ```
 
-2. [For Terraform]:
+3. [For Terraform]:
    Verify terraform.tfvars exists with your subscription ID:
    ```bash
    # File should already exist with lab subscription ID
@@ -575,7 +600,7 @@ az provider register --namespace Microsoft.Storage  # or other required provider
    ```
 
    [For Bicep]:
-   Validate the Bicep template:
+   Ensure you've switched to the Lab profile (step 1), then validate the Bicep template:
    ```powershell
    .\bicep.ps1 validate
    ```
@@ -601,6 +626,12 @@ az provider register --namespace Microsoft.Storage  # or other required provider
 ## Cleanup
 
 ### [Terraform OR Bicep] Cleanup
+
+**CRITICAL**: Ensure you're using the Lab profile before cleanup:
+
+```powershell
+Use-AzProfile Lab
+```
 
 [For Terraform]:
 ```bash

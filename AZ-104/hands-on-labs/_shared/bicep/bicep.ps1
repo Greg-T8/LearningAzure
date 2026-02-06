@@ -289,7 +289,9 @@ switch ($Action) {
         }
 
         Write-Host "📋 Validating: $TemplateFile" -ForegroundColor Cyan
-        $command = Build-StackCommand -Action 'validate' -TemplateFile $TemplateFile
+        $command = Build-StackCommand -Action 'validate' -TemplateFile $TemplateFile `
+                                      -ParametersFile $ParametersFile -Location $Location `
+                                      -AdditionalArgs $AdditionalArgs
         Write-Host "🚀 Running: $command" -ForegroundColor Gray
         Write-Host ""
         Invoke-Expression $command

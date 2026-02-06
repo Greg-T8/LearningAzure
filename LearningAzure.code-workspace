@@ -135,7 +135,11 @@
         "az": true,
         "Copy-Item": true,
         "ForEach-Object": true,
-        ".\\bicep.ps1": true
+        ".\\bicep.ps1": true,
+        "Test-Path": true,
+        "Get-Command": true,
+        "Use-AzProfile": true,
+        "Y": true
     }
   }
 }
