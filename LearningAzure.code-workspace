@@ -134,7 +134,8 @@
         "terraform": true,
         "az": true,
         "Copy-Item": true,
-        "ForEach-Object": true
+        "ForEach-Object": true,
+        ".\\bicep.ps1": true
     }
   }
 }
