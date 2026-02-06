@@ -22,8 +22,19 @@ Use the exam identifier throughout (e.g., "AZ-104", "AI-900") and lowercase pref
 
 ### Governance File
 
-Read and strictly follow the governance requirements in:
+**CRITICAL**: Read and strictly follow the governance requirements in:
 - `#file:<EXAM>/hands-on-labs/GOVERNANCE.md` (replace `<EXAM>` with the determined exam)
+
+The GOVERNANCE.md file is the **single source of truth** for:
+- Naming conventions (resource groups, resources, deployment stacks)
+- Tagging requirements (all required tags)
+- Location policies and allowed regions
+- Tool-specific standards (Terraform/Bicep file structure, providers, versions)
+- Cost management policies
+- Documentation requirements
+- Pre-deployment checklist
+
+**Always consult GOVERNANCE.md** for these standards rather than relying on memory or assumptions.
 
 ### Exam-Specific Considerations
 
@@ -111,127 +122,115 @@ Every file must have a header section:
 
 ## Naming & Tagging Standards
 
-### Resource Group Naming
+**CRITICAL**: Consult `GOVERNANCE.md` for complete naming and tagging specifications.
 
-**CRITICAL**: Follow this pattern exactly:
-- Pattern: `<exam-prefix>-<domain>-<topic>-<deployment_method>`
-- Exam Prefix: Lowercase exam identifier (e.g., `az104`, `ai900`, `az305`)
-- Domain: Exam-specific domain (see governance file for valid domains)
-- Topic: Kebab-case description (e.g., `vnet-peering`, `custom-vision`, `app-gateway`)
-- Deployment Method: `tf` (Terraform) or `bicep` (Bicep)
+### Quick Reference
 
-Examples:
-- AZ-104: `az104-networking-vnet-peering-tf`, `az104-storage-blob-lifecycle-bicep`
-- AI-900: `ai900-cognitive-custom-vision-tf`, `ai900-ml-training-bicep`
-- AZ-305: `az305-architecture-hub-spoke-tf`
+**Resource Group Pattern**: `<exam-prefix>-<domain>-<topic>-<deployment_method>`
+- Example: `az104-networking-vnet-peering-tf`
 
-### Resource Naming Conventions
+**Resource Naming**: Follow standardized prefixes defined in GOVERNANCE.md
+- VNet: `vnet-<name>`, Storage: `st<name>`, VM: `vm-<name>-<instance>`, etc.
 
-Follow these prefixes (from GOVERNANCE.md):
-- Virtual Network: `vnet-<name>`
-- Subnet: `snet-<name>`
-- Network Security Group: `nsg-<name>`
-- Storage Account: `st<name>` (no hyphens, lowercase, max 24 chars)
-- Virtual Machine: `vm-<name>-<instance>`
-- Public IP: `pip-<name>`
-- Load Balancer: `lb-<name>`
-- Log Analytics Workspace: `law-<name>`
+**Required Tags**: All resources must include 7 required tags (see GOVERNANCE.md):
+- Environment, Project, Domain, Purpose, Owner, DateCreated, DeploymentMethod
 
-### Required Tags
+**Stack Naming (Bicep)**: `stack-<domain>-<topic>`
+- Example: `stack-networking-vnet-peering`
 
-**ALL resources must include these tags**:
+---
 
+## Azure Resource Configuration Best Practices
+
+When creating Azure resources, follow these configuration best practices to avoid common deployment errors:
+
+### Load Balancer with Outbound Rules
+
+**CRITICAL**: When configuring Standard Load Balancers with BOTH load balancing rules AND outbound rules that share the same frontend IP configuration:
+
+- **Always set `disableOutboundSnat: true`** on the load balancing rule
+- This prevents SNAT port allocation conflicts between the two rule types
+- Azure requires this when a frontend IP is referenced by both rule types
+
+Example (Bicep):
+```bicep
+loadBalancingRules: [
+  {
+    name: 'my-lb-rule'
+    properties: {
+      // ... other properties ...
+      disableOutboundSnat: true  // REQUIRED when frontend IP is also in outbound rules
+    }
+  }
+]
 ```
-Environment = "Lab"
-Project     = "<EXAM>"    # e.g., "AZ-104", "AI-900", "AZ-305"
-Domain      = "<Domain>"  # e.g., "Networking", "Storage", "Cognitive Services"
-Purpose     = "<Purpose>" # What the lab demonstrates
-Owner       = "Greg Tate"
-DateCreated = "<YYYY-MM-DD>"  # Use current date
-DeploymentMethod = "Terraform" or "Bicep"
+
+Example (Terraform):
+```hcl
+resource "azurerm_lb_rule" "example" {
+  # ... other properties ...
+  disable_outbound_snat = true  # REQUIRED when frontend IP is also in outbound rules
+}
 ```
+
+**Error if omitted**: `LoadBalancingRuleMustDisableSNATSinceSameFrontendIPConfigurationIsReferencedByOutboundRule`
+
+### Other Common Pitfalls
+
+- **Network Security Groups**: Ensure required ports are open for service functionality (e.g., port 80 for HTTP, 443 for HTTPS)
+- **Public IP SKUs**: Standard Load Balancers require Standard SKU public IPs, not Basic
+- **Subnet Delegation**: Some services (e.g., Azure Container Instances, Azure Databricks) require subnet delegation
+- **Resource Dependencies**: Use explicit `dependsOn` only when implicit dependencies don't capture the relationship
 
 ---
 
 ## Terraform Requirements
 
-### File Structure
+**CRITICAL**: Consult `GOVERNANCE.md` for complete Terraform standards (versions, state management, file structure).
 
-**providers.tf**:
+### File Structure Overview
+
+Create these files following GOVERNANCE.md specifications:
+- **providers.tf**: Terraform version ≥1.0, azurerm provider ~>4.0, additional providers as needed
+- **variables.tf**: Required variables with validation (lab_subscription_id, domain, location, owner)
+- **main.tf**: Thin orchestration layer calling modules
+- **outputs.tf**: Resource IDs, connection strings, **generated passwords** (sensitive)
+- **terraform.tfvars**: Lab subscription ID and overrides (gitignored)
+- **modules/**: Logical resource groupings (when ≥3 related resources)
+
+### Key Requirements
+
+**Subscription ID**:
+- Always use: `e091f6e7-031a-4924-97bb-8c983ca5d21a`
+- Store in `terraform.tfvars` (not committed to git)
+
+**Domain Validation**:
 ```hcl
-terraform {
-  required_version = ">= 1.0"
-  required_providers {
-    azurerm = {
-      source  = "hashicorp/azurerm"
-      version = "~> 4.0"
-    }
-    # Add additional providers as needed (e.g., random, time, etc.)
-  }
-}
-
-provider "azurerm" {
-  features {}
-  subscription_id = var.lab_subscription_id
-}
-```
-
-**Note**: Include additional providers (random, time, etc.) in required_providers section as needed for the lab.
-
-**variables.tf**:
-- **REQUIRED**: Include `lab_subscription_id` variable (sensitive, no default)
-- Include domain validation constraint
-- Set default location to `eastus`
-- Include all required variables with descriptions
-- Add owner variable with default "Greg Tate"
-
-Example:
-```hcl
-variable "lab_subscription_id" {
-  description = "Azure subscription ID for lab resources"
-  type        = string
-  sensitive   = true
-}
-
 variable "domain" {
   description = "<EXAM> exam domain"
   type        = string
   validation {
     condition     = contains([<domain-list>], var.domain)
-    error_message = "Domain must be one of the valid <EXAM> domains."
+    error_message = "Domain must be one of valid <EXAM> domains."
   }
 }
-
-# Note: Replace <domain-list> with exam-specific domains from governance file
-# AZ-104 example: ["identity", "networking", "storage", "compute", "monitoring"]
-# AI-900 example: ["ai-concepts", "ml", "cognitive-services", "computer-vision", "nlp"]
-
-variable "location" {
-  description = "Azure region for resources"
-  type        = string
-  default     = "eastus"
-}
-
-variable "owner" {
-  description = "Lab owner"
-  type        = string
-  default     = "Greg Tate"
-}
+# Consult GOVERNANCE.md for exam-specific domain lists
 ```
 
-**main.tf** (orchestration layer):
-- Define locals for resource group name and common tags
-- Use standardized naming patterns
-- Call modules for resource creation — keep `main.tf` as a thin orchestration layer
-- Pass `common_tags`, `location`, and naming values into modules
-- **Do NOT define individual resources directly in `main.tf`** when a module is more appropriate
-
-**outputs.tf**:
-- Output resource IDs
-- Output connection strings (if applicable)
-- Output any important resource properties for validation
-- Reference module outputs (e.g., `module.networking.vnet_id`)
-- **CRITICAL**: Output any generated admin passwords (marked as `sensitive = true`) so users can access resources
+**Common Tags**:
+```hcl
+locals {
+  common_tags = {
+    Environment      = "Lab"
+    Project          = "<EXAM>"
+    Domain           = title(var.domain)
+    Purpose          = replace(title(var.topic), "-", " ")
+    Owner            = var.owner
+    DateCreated      = formatdate("YYYY-MM-DD", timestamp())
+    DeploymentMethod = "Terraform"
+  }
+}
+```
 
 ### Credentials and Secrets
 
@@ -334,9 +333,7 @@ module "compute" {
 
 **Note**: The resource group itself is typically defined in `main.tf` (not in a module) since most modules need its name as an input.
 
-**terraform.tfvars**:
-
-Create `terraform.tfvars` based on the shared template with lab-specific subscription ID:
+### terraform.tfvars Template
 
 ```hcl
 # -------------------------------------------------------------------------
@@ -346,9 +343,6 @@ Create `terraform.tfvars` based on the shared template with lab-specific subscri
 # Author: Greg Tate
 # Date: [YYYY-MM-DD]
 # -------------------------------------------------------------------------
-#
-# IMPORTANT: This file is in .gitignore to prevent committing sensitive values
-# -------------------------------------------------------------------------
 
 # Azure lab subscription ID (REQUIRED)
 lab_subscription_id = "e091f6e7-031a-4924-97bb-8c983ca5d21a"
@@ -357,17 +351,11 @@ lab_subscription_id = "e091f6e7-031a-4924-97bb-8c983ca5d21a"
 location = "eastus"
 owner    = "Greg Tate"
 
-# Add lab-specific variables here if needed
-# Example: container_name = "data"
-
-# NOTE: Do NOT add admin passwords here - use random_password resource instead
+# Add lab-specific variables as needed
+# NOTE: Do NOT add admin passwords - use random_password resource instead
 ```
 
-**CRITICAL**: Always use subscription ID `e091f6e7-031a-4924-97bb-8c983ca5d21a` in terraform.tfvars
-
-**CRITICAL**: Never define admin password variables in variables.tf or terraform.tfvars - always generate them using `random_password` resource
-
-### Terraform Validation Steps
+### Validation Steps
 
 After generating files, you must run these commands in the terminal and include the output in your response:
 
@@ -399,58 +387,52 @@ Confirm these commands succeed before considering the task complete.
 
 ## Bicep Requirements
 
-### File Structure
+**CRITICAL**: Consult `GOVERNANCE.md` for complete Bicep standards (configuration, file structure, parameter files).
 
-**main.bicep** (orchestration layer):
-- Use `@allowed()` decorator for domain parameter
-- Define commonTags variable
-- Use kebab-case for resource symbolic names
-- Apply tags to all resources
-- Use latest stable API versions
-- Call modules for resource creation — keep `main.bicep` as a thin orchestration layer
-- **Do NOT define individual resources directly in `main.bicep`** when a module is more appropriate
+### File Structure Overview
 
-**main.bicepparam**:
+Create these files following GOVERNANCE.md specifications:
+- **main.bicep**: Thin orchestration layer with @allowed() decorator for domain, commonTags variable
+- **main.bicepparam**: Parameter values (domain, topic, location, owner)
+- **modules/*.bicep**: Logical resource groupings (when ≥3 related resources)
+- **bicep.ps1**: Deployment wrapper script (copy from `_shared/bicep/bicep.ps1`)
+
+### Key Requirements
+
+**Domain Validation**:
 ```bicep
-using './main.bicep'
-
-param domain = '<domain>'
-param topic = '<topic>'
-param location = 'eastus'
-param owner = 'Greg Tate'
+@allowed(['identity', 'networking', 'storage', 'compute', 'monitoring'])
+param domain string
+// Consult GOVERNANCE.md for exam-specific domain lists
 ```
 
-**outputs** (in main.bicep):
-- Output resource IDs
-- Output relevant properties for validation
-- **CRITICAL**: Output any generated admin passwords so users can access resources
-- Reference module outputs (e.g., `networking.outputs.vnetId`)
-
-### Bicep Modules
-
-**When to create modules**: Use modules when the lab creates **3 or more related resources** within a logical grouping (e.g., networking, compute, storage). For very simple labs with only 1-2 resources total, modules are optional.
-
-**Module structure** — each module in `modules/`:
-- `modules/<group>.bicep` (e.g., `modules/networking.bicep`, `modules/compute.bicep`)
-- Declare parameters for all inputs (tags, location, names, etc.)
-- Declare outputs for values needed by other modules or the root template
-
-**Module design principles**:
-- Group resources by logical domain: `networking.bicep`, `compute.bicep`, `storage.bicep`, etc.
-- Each module should be self-contained — it receives everything it needs via parameters
-- Pass `commonTags` as an `object` parameter and use `union()` with any resource-specific tags
-- Keep inter-module dependencies explicit via output references
-
-**Example module call in main.bicep**:
+**Common Tags**:
 ```bicep
-// Resource Group
-resource resourceGroup 'Microsoft.Resources/resourceGroups@2024-03-01' = {
-  name: resourceGroupName
-  location: location
-  tags: commonTags
+var commonTags = {
+  Environment: 'Lab'
+  Project: '<EXAM>'
+  Domain: toUpper(substring(domain, 0, 1)) + substring(domain, 1)
+  Purpose: replace(topic, '-', ' ')
+  Owner: owner
+  DateCreated: dateCreated
+  DeploymentMethod: 'Bicep'
 }
+```
 
-// Networking module
+**Outputs**: Include resource IDs, validation properties, and **generated passwords** (sensitive)
+
+### Module Design
+
+**When to use modules**: ≥3 related resources in logical groupings
+
+**Module principles**:
+- Group by domain (networking.bicep, compute.bicep, storage.bicep)
+- Self-contained with parameters for all inputs
+- Pass commonTags as object parameter, use union() for resource-specific tags
+- Explicit dependencies via output references
+
+**Example**:
+```bicep
 module networking 'modules/networking.bicep' = {
   scope: resourceGroup
   name: 'networking-deployment'
@@ -460,89 +442,24 @@ module networking 'modules/networking.bicep' = {
     tags: commonTags
   }
 }
-
-// Compute module
-module compute 'modules/compute.bicep' = {
-  scope: resourceGroup
-  name: 'compute-deployment'
-  params: {
-    location: location
-    subnetId: networking.outputs.subnetId
-    vmSize: 'Standard_B2s'
-    tags: commonTags
-  }
-}
-```
-
-**Example module file** (`modules/networking.bicep`):
-```bicep
-@description('Azure region for resources')
-param location string
-
-@description('Name of the virtual network')
-param vnetName string
-
-@description('Tags to apply to all resources')
-param tags object
-
-resource vnet 'Microsoft.Network/virtualNetworks@2024-05-01' = {
-  name: vnetName
-  location: location
-  tags: tags
-  properties: {
-    addressSpace: {
-      addressPrefixes: ['10.0.0.0/16']
-    }
-  }
-}
-
-@description('The resource ID of the virtual network')
-output vnetId string = vnet.id
-```
-
-**Note**: The resource group is typically defined in `main.bicep` (as a subscription-scoped deployment) and modules are scoped to it.
-
-**bicep.ps1**:
-- Always copy `bicep.ps1` from `<EXAM>/hands-on-labs/_shared/bicep/bicep.ps1` into the lab's `bicep/` folder so it sits beside `main.bicep`
-
-Example copy command:
-```bash
-cp <EXAM>/hands-on-labs/_shared/bicep/bicep.ps1 <EXAM>/hands-on-labs/<domain>/lab-<topic>/bicep/bicep.ps1
 ```
 
 ### Deployment Stacks & bicep.ps1
 
-The `bicep.ps1` wrapper script manages deployment stacks with built-in subscription safety.
+**Copy bicep.ps1**: Always copy from `<EXAM>/hands-on-labs/_shared/bicep/bicep.ps1` to lab's `bicep/` folder
 
-**Stack Naming**: The script auto-derives stack names from `main.bicepparam`:
-- Pattern: `stack-<domain>-<topic>` (extracted from domain/topic parameters)
-- Example: If `domain = "networking"` and `topic = "vnet-peering"`, stack name is `stack-networking-vnet-peering`
+**Stack Naming**: Auto-derived as `stack-<domain>-<topic>` from parameters
 
-**Available Commands**:
-```powershell
-.\bicep.ps1 validate       # Validates Bicep syntax
-.\bicep.ps1 plan           # Shows what-if preview (requires subscription validation)
-.\bicep.ps1 apply          # Deploys with subscription-level stack (validates subscription first)
-.\bicep.ps1 destroy        # Removes stack and all resources (validates subscription first)
-.\bicep.ps1 show           # Shows current stack details
-.\bicep.ps1 list           # Lists all stacks in subscription
-```
+**Commands**:
+- `.\bicep.ps1 validate` - Validates syntax
+- `.\bicep.ps1 plan` - What-if preview
+- `.\bicep.ps1 apply` - Deploy stack
+- `.\bicep.ps1 destroy` - Remove all resources
+- `.\bicep.ps1 show` - Stack details
 
-**Subscription Safety**: The script validates you're using the correct lab subscription before any deployment operations. It will block operations targeting wrong subscriptions.
+**Subscription Safety**: Script validates correct lab subscription before operations
 
-**Direct Azure CLI Alternative** (not recommended - use bicep.ps1 instead):
-```bash
-# Only use if bicep.ps1 is unavailable
-az stack sub create \
-  --name stack-<domain>-<topic> \
-  --location eastus \
-  --template-file main.bicep \
-  --parameters main.bicepparam \
-  --deny-settings-mode none \
-  --action-on-unmanage deleteAll
-```
-
-### Bicep Validation Steps
+### Validation Steps
 
 After generating files, you must run these commands in the terminal and include the output in your response:
 
@@ -745,28 +662,22 @@ terraform destroy
 ## Workflow
 
 1. **Determine exam** from workspace context or prompt user if unclear
-2. **Read governance file** for exam-specific domains and requirements
+2. **Read GOVERNANCE.md** for exam-specific domains, naming conventions, and all compliance requirements
 3. **Analyze** the exam question scenario provided
 4. **Identify** required Azure resources and their configuration
 5. **Create** directory structure under `<EXAM>/hands-on-labs/<domain>/lab-<topic>/`
 6. **Copy** `bicep.ps1` into the lab's `bicep/` folder for Bicep labs
 7. **Generate** infrastructure code (Terraform OR Bicep as specified)
+   - Apply naming conventions from GOVERNANCE.md
+   - Include required tags from GOVERNANCE.md
+   - Follow tool-specific standards from GOVERNANCE.md
 8. **Create terraform.tfvars** (Terraform only) with lab subscription ID: `e091f6e7-031a-4924-97bb-8c983ca5d21a`
 9. **Validate** the code using appropriate tool commands
-  - **Terraform**: Always run `terraform init`, `terraform validate`, and `terraform plan`
-  - **Bicep**: Always run `bicep.ps1 validate` and `bicep.ps1 plan`
+   - **Terraform**: Run `terraform init`, `terraform validate`, `terraform plan`
+   - **Bicep**: Run `.\bicep.ps1 validate`, `.\bicep.ps1 plan`
 10. **Create** comprehensive README.md with all required sections
 11. **Include** validation/testing scripts if complex verification is needed
-12. **Verify** all governance standards are met:
-    - [ ] Exam determined correctly
-    - [ ] Resource group naming follows pattern with correct exam prefix
-    - [ ] All resources have required tags (with correct Project value)
-    - [ ] Resource names follow conventions
-    - [ ] Domain is valid for the exam
-    - [ ] Location is `eastus` (or allowed region)
-    - [ ] Code follows header format with correct exam context
-    - [ ] terraform.tfvars created with correct subscription ID
-    - [ ] Validation commands run successfully
+12. **Verify** all GOVERNANCE.md standards are met - consult the pre-deployment checklist in GOVERNANCE.md
 
 ---
 
@@ -775,12 +686,11 @@ terraform destroy
 After creating the lab, provide:
 
 1. **Lab Summary**: Brief description of what was created
-2. **File List**: All files created with their paths (including terraform.tfvars with subscription ID confirmation)
-3. **Validation Results**: Output from validation commands (including confirmation that terraform.tfvars exists)
+2. **File List**: All files created with their paths
+3. **Validation Results**: Output from validation commands
 4. **Quick Start**: Condensed deployment steps
-5. **Next Steps**: Suggestions for additional learning or variations
-
-**CRITICAL Validation**: Confirm terraform.tfvars contains subscription ID `e091f6e7-031a-4924-97bb-8c983ca5d21a`
+5. **Governance Compliance**: Confirm alignment with GOVERNANCE.md standards
+6. **Next Steps**: Suggestions for additional learning or variations
 
 ---
 
