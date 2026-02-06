@@ -39,6 +39,29 @@ Adapt resource types and domains accordingly based on the exam context.
 
 ---
 
+## Cost Optimization Principles
+
+**CRITICAL**: All labs must use cost-effective resources to minimize Azure spending:
+
+### Virtual Machines
+- **Default**: Use `Standard_B2s` (2 vCPU, 4 GB RAM) for general-purpose VMs
+- **Minimum**: Use `Standard_B1s` (1 vCPU, 1 GB RAM) for simple scenarios
+- **Only use D-series or higher** if the exam question explicitly requires higher performance, memory, or specific capabilities
+
+### Other Resources
+- **Storage Accounts**: Use Standard LRS (Locally Redundant Storage) unless redundancy is required
+- **Load Balancers**: Use Basic SKU for simple scenarios; Standard SKU only when required
+- **Public IPs**: Use Basic SKU unless Standard is required for specific features
+- **App Services**: Use Free or Basic tier unless specific features require higher tiers
+- **SQL Database**: Use Basic or S0 tier for labs unless performance testing is the objective
+
+### General Guidelines
+- Choose the smallest SKU/tier that demonstrates the required functionality
+- Use spot instances or reserved capacity only if cost optimization is the learning objective
+- Document in README if higher-cost resources are necessary and why
+
+---
+
 ## Lab Structure & Coding Standards
 
 ### Directory Layout
@@ -49,11 +72,17 @@ Create the following structure in `<EXAM>/hands-on-labs/<domain>/lab-<topic>/`:
 lab-<topic>/
 ├── README.md
 ├── terraform/  OR  bicep/
-│   ├── main.tf (or main.bicep)
+│   ├── main.tf (or main.bicep)           # Orchestration only - calls modules
 │   ├── variables.tf (or main.bicepparam)
 │   ├── outputs.tf (or outputs.bicep)
 │   ├── providers.tf (Terraform only)
-│   └── terraform.tfvars (Terraform - with lab subscription ID)
+│   ├── terraform.tfvars (Terraform - with lab subscription ID)
+│   └── modules/                           # Resource modules (when applicable)
+│       ├── <resource-group>/              # e.g., networking/, compute/, storage/
+│       │   ├── main.tf (or <module>.bicep)
+│       │   ├── variables.tf (or parameters in module)
+│       │   └── outputs.tf (or outputs in module)
+│       └── ...
 └── validation/
     └── test-<scenario>.ps1 (optional validation scripts)
 ```
@@ -190,15 +219,57 @@ variable "owner" {
 }
 ```
 
-**main.tf**:
+**main.tf** (orchestration layer):
 - Define locals for resource group name and common tags
 - Use standardized naming patterns
-- Apply common_tags to all resources
+- Call modules for resource creation — keep `main.tf` as a thin orchestration layer
+- Pass `common_tags`, `location`, and naming values into modules
+- **Do NOT define individual resources directly in `main.tf`** when a module is more appropriate
 
 **outputs.tf**:
 - Output resource IDs
 - Output connection strings (if applicable)
 - Output any important resource properties for validation
+- Reference module outputs (e.g., `module.networking.vnet_id`)
+
+### Terraform Modules
+
+**When to create modules**: Use modules when the lab creates **3 or more related resources** within a logical grouping (e.g., networking, compute, storage). For very simple labs with only 1-2 resources total, modules are optional.
+
+**Module structure** — each module in `modules/<group>/`:
+- `main.tf` — resource definitions
+- `variables.tf` — input variables (tags, location, names, etc.)
+- `outputs.tf` — values needed by other modules or root outputs
+
+**Module design principles**:
+- Group resources by logical domain: `modules/networking/`, `modules/compute/`, `modules/storage/`, etc.
+- Each module should be self-contained — it receives everything it needs via variables
+- Pass `common_tags` as a `map(string)` variable and merge with any resource-specific tags
+- Keep inter-module dependencies explicit via output references
+
+**Example module call in main.tf**:
+```hcl
+module "networking" {
+  source = "./modules/networking"
+
+  resource_group_name = azurerm_resource_group.lab.name
+  location            = var.location
+  vnet_name           = "vnet-lab"
+  tags                = local.common_tags
+}
+
+module "compute" {
+  source = "./modules/compute"
+
+  resource_group_name = azurerm_resource_group.lab.name
+  location            = var.location
+  subnet_id           = module.networking.subnet_id
+  vm_size             = "Standard_B2s"
+  tags                = local.common_tags
+}
+```
+
+**Note**: The resource group itself is typically defined in `main.tf` (not in a module) since most modules need its name as an input.
 
 **terraform.tfvars**:
 
@@ -260,12 +331,14 @@ Confirm these commands succeed before considering the task complete.
 
 ### File Structure
 
-**main.bicep**:
+**main.bicep** (orchestration layer):
 - Use `@allowed()` decorator for domain parameter
 - Define commonTags variable
 - Use kebab-case for resource symbolic names
 - Apply tags to all resources
 - Use latest stable API versions
+- Call modules for resource creation — keep `main.bicep` as a thin orchestration layer
+- **Do NOT define individual resources directly in `main.bicep`** when a module is more appropriate
 
 **main.bicepparam**:
 ```bicep
@@ -277,9 +350,86 @@ param location = 'eastus'
 param owner = 'Greg Tate'
 ```
 
-**outputs.bicep** (or outputs in main.bicep):
+**outputs** (in main.bicep):
 - Output resource IDs
 - Output relevant properties for validation
+- Reference module outputs (e.g., `networking.outputs.vnetId`)
+
+### Bicep Modules
+
+**When to create modules**: Use modules when the lab creates **3 or more related resources** within a logical grouping (e.g., networking, compute, storage). For very simple labs with only 1-2 resources total, modules are optional.
+
+**Module structure** — each module in `modules/`:
+- `modules/<group>.bicep` (e.g., `modules/networking.bicep`, `modules/compute.bicep`)
+- Declare parameters for all inputs (tags, location, names, etc.)
+- Declare outputs for values needed by other modules or the root template
+
+**Module design principles**:
+- Group resources by logical domain: `networking.bicep`, `compute.bicep`, `storage.bicep`, etc.
+- Each module should be self-contained — it receives everything it needs via parameters
+- Pass `commonTags` as an `object` parameter and use `union()` with any resource-specific tags
+- Keep inter-module dependencies explicit via output references
+
+**Example module call in main.bicep**:
+```bicep
+// Resource Group
+resource resourceGroup 'Microsoft.Resources/resourceGroups@2024-03-01' = {
+  name: resourceGroupName
+  location: location
+  tags: commonTags
+}
+
+// Networking module
+module networking 'modules/networking.bicep' = {
+  scope: resourceGroup
+  name: 'networking-deployment'
+  params: {
+    location: location
+    vnetName: 'vnet-lab'
+    tags: commonTags
+  }
+}
+
+// Compute module
+module compute 'modules/compute.bicep' = {
+  scope: resourceGroup
+  name: 'compute-deployment'
+  params: {
+    location: location
+    subnetId: networking.outputs.subnetId
+    vmSize: 'Standard_B2s'
+    tags: commonTags
+  }
+}
+```
+
+**Example module file** (`modules/networking.bicep`):
+```bicep
+@description('Azure region for resources')
+param location string
+
+@description('Name of the virtual network')
+param vnetName string
+
+@description('Tags to apply to all resources')
+param tags object
+
+resource vnet 'Microsoft.Network/virtualNetworks@2024-05-01' = {
+  name: vnetName
+  location: location
+  tags: tags
+  properties: {
+    addressSpace: {
+      addressPrefixes: ['10.0.0.0/16']
+    }
+  }
+}
+
+@description('The resource ID of the virtual network')
+output vnetId string = vnet.id
+```
+
+**Note**: The resource group is typically defined in `main.bicep` (as a subscription-scoped deployment) and modules are scoped to it.
 
 **bicep.ps1**:
 - Always copy `bicep.ps1` from `<EXAM>/hands-on-labs/_shared/bicep/bicep.ps1` into the lab's `bicep/` folder so it sits beside `main.bicep`
@@ -355,6 +505,11 @@ Create a comprehensive README with this structure:
 ## Solution Architecture
 
 [Describe the Azure resources needed and their relationships]
+
+**Cost Optimization**: This lab uses cost-effective resources:
+- VMs: Standard_B2s (or B1s for minimal scenarios)
+- [List other cost-optimized resource SKUs/tiers used]
+- [Note if any higher-cost resources are required and why]
 
 ## Prerequisites
 
