@@ -3,6 +3,8 @@ name: Hands-on Lab
 description: Creates a hands-on lab from an exam question scenario using Terraform or Bicep, following governance standards
 ---
 
+
+
 # Hands-on Lab Generator
 
 You are tasked with creating a comprehensive hands-on lab based on an exam question scenario. The lab must follow strict governance standards and produce working, validated infrastructure-as-code.
@@ -137,50 +139,6 @@ Every file must have a header section:
 
 **Stack Naming (Bicep)**: `stack-<domain>-<topic>`
 - Example: `stack-networking-vnet-peering`
-
----
-
-## Azure Resource Configuration Best Practices
-
-When creating Azure resources, follow these configuration best practices to avoid common deployment errors:
-
-### Load Balancer with Outbound Rules
-
-**CRITICAL**: When configuring Standard Load Balancers with BOTH load balancing rules AND outbound rules that share the same frontend IP configuration:
-
-- **Always set `disableOutboundSnat: true`** on the load balancing rule
-- This prevents SNAT port allocation conflicts between the two rule types
-- Azure requires this when a frontend IP is referenced by both rule types
-
-Example (Bicep):
-```bicep
-loadBalancingRules: [
-  {
-    name: 'my-lb-rule'
-    properties: {
-      // ... other properties ...
-      disableOutboundSnat: true  // REQUIRED when frontend IP is also in outbound rules
-    }
-  }
-]
-```
-
-Example (Terraform):
-```hcl
-resource "azurerm_lb_rule" "example" {
-  # ... other properties ...
-  disable_outbound_snat = true  # REQUIRED when frontend IP is also in outbound rules
-}
-```
-
-**Error if omitted**: `LoadBalancingRuleMustDisableSNATSinceSameFrontendIPConfigurationIsReferencedByOutboundRule`
-
-### Other Common Pitfalls
-
-- **Network Security Groups**: Ensure required ports are open for service functionality (e.g., port 80 for HTTP, 443 for HTTPS)
-- **Public IP SKUs**: Standard Load Balancers require Standard SKU public IPs, not Basic
-- **Subnet Delegation**: Some services (e.g., Azure Container Instances, Azure Databricks) require subnet delegation
-- **Resource Dependencies**: Use explicit `dependsOn` only when implicit dependencies don't capture the relationship
 
 ---
 
@@ -333,7 +291,9 @@ module "compute" {
 
 **Note**: The resource group itself is typically defined in `main.tf` (not in a module) since most modules need its name as an input.
 
-### terraform.tfvars Template
+### terraform.tfvars File Structure
+
+Every Terraform lab must include a `terraform.tfvars` file with the lab subscription ID and any overrides:
 
 ```hcl
 # -------------------------------------------------------------------------
@@ -684,6 +644,133 @@ terraform destroy
 - [Relevant Microsoft Learn modules]
 - [Azure documentation links]
 ```
+
+---
+
+## Azure Resource Configuration Best Practices
+
+When creating Azure resources, follow these configuration best practices to avoid common deployment errors:
+
+### Load Balancer with Outbound Rules
+
+**CRITICAL**: When configuring Standard Load Balancers with BOTH load balancing rules AND outbound rules that share the same frontend IP configuration:
+
+- **Always set `disableOutboundSnat: true`** on the load balancing rule
+- This prevents SNAT port allocation conflicts between the two rule types
+- Azure requires this when a frontend IP is referenced by both rule types
+
+Example (Bicep):
+```bicep
+loadBalancingRules: [
+  {
+    name: 'my-lb-rule'
+    properties: {
+      // ... other properties ...
+      disableOutboundSnat: true  // REQUIRED when frontend IP is also in outbound rules
+    }
+  }
+]
+```
+
+Example (Terraform):
+```hcl
+resource "azurerm_lb_rule" "example" {
+  # ... other properties ...
+  disable_outbound_snat = true  # REQUIRED when frontend IP is also in outbound rules
+}
+```
+
+**Error if omitted**: `LoadBalancingRuleMustDisableSNATSinceSameFrontendIPConfigurationIsReferencedByOutboundRule`
+
+### VMs with Public IPs Cannot Use Load Balancer Outbound Rules
+
+**CRITICAL**: VMs with instance-level public IP addresses **cannot** be in a backend pool that has outbound rules configured.
+
+**Error**: `NicWithPublicIpCannotReferencePoolWithOutboundRule`
+
+**Solution**: Create **two separate backend pools**:
+1. **Inbound backend pool**: For load balancing rules (can contain all VMs)
+2. **Outbound backend pool**: For outbound rules (only VMs **without** public IPs)
+
+Example (Bicep):
+```bicep
+backendAddressPools: [
+  {
+    name: 'backend-inbound'   // All VMs for load balancing
+  }
+  {
+    name: 'backend-outbound'  // Only VMs without public IPs
+  }
+]
+
+loadBalancingRules: [
+  {
+    name: 'rule-http'
+    properties: {
+      backendAddressPool: {
+        id: resourceId('...', 'backend-inbound')  // All VMs
+      }
+      disableOutboundSnat: true
+    }
+  }
+]
+
+outboundRules: [
+  {
+    name: 'outbound-rule'
+    properties: {
+      backendAddressPool: {
+        id: resourceId('...', 'backend-outbound')  // Only VMs without public IPs
+      }
+    }
+  }
+]
+```
+
+Example (Terraform):
+```hcl
+resource "azurerm_lb_backend_address_pool" "inbound" {
+  name            = "backend-inbound"
+  loadbalancer_id = azurerm_lb.example.id
+}
+
+resource "azurerm_lb_backend_address_pool" "outbound" {
+  name            = "backend-outbound"
+  loadbalancer_id = azurerm_lb.example.id
+}
+
+# VM with public IP - only in inbound pool
+resource "azurerm_network_interface_backend_address_pool_association" "vm01_inbound" {
+  network_interface_id    = azurerm_network_interface.vm01.id
+  ip_configuration_name   = "ipconfig1"
+  backend_address_pool_id = azurerm_lb_backend_address_pool.inbound.id
+}
+
+# VMs without public IPs - in both pools
+resource "azurerm_network_interface_backend_address_pool_association" "vm02_inbound" {
+  network_interface_id    = azurerm_network_interface.vm02.id
+  ip_configuration_name   = "ipconfig1"
+  backend_address_pool_id = azurerm_lb_backend_address_pool.inbound.id
+}
+
+resource "azurerm_network_interface_backend_address_pool_association" "vm02_outbound" {
+  network_interface_id    = azurerm_network_interface.vm02.id
+  ip_configuration_name   = "ipconfig1"
+  backend_address_pool_id = azurerm_lb_backend_address_pool.outbound.id
+}
+```
+
+**Why this happens**:
+- VMs with public IPs already have a direct path to the internet
+- Outbound rules would conflict with this existing route
+- Azure prevents this configuration to avoid ambiguity
+
+### Other Common Pitfalls
+
+- **Network Security Groups**: Ensure required ports are open for service functionality (e.g., port 80 for HTTP, 443 for HTTPS)
+- **Public IP SKUs**: Standard Load Balancers require Standard SKU public IPs, not Basic
+- **Subnet Delegation**: Some services (e.g., Azure Container Instances, Azure Databricks) require subnet delegation
+- **Resource Dependencies**: Use explicit `dependsOn` only when implicit dependencies don't capture the relationship
 
 ---
 
