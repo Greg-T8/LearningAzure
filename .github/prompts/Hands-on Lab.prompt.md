@@ -364,6 +364,14 @@ Confirm these commands succeed before considering the task complete.
 - Apply tags to all resources
 - Use latest stable API versions
 
+**bicep.ps1**:
+- Always copy `bicep.ps1` from `<EXAM>/hands-on-labs/_shared/bicep/bicep.ps1` into the lab's `bicep/` folder so it sits beside `main.bicep`
+
+Example copy command:
+```bash
+cp <EXAM>/hands-on-labs/_shared/bicep/bicep.ps1 <EXAM>/hands-on-labs/<domain>/lab-<topic>/bicep/bicep.ps1
+```
+
 **main.bicepparam**:
 ```bicep
 using './main.bicep'
@@ -448,12 +456,13 @@ Follow the workspace coding guidelines:
 3. **Analyze** the exam question scenario provided
 4. **Identify** required Azure resources and their configuration
 5. **Create** directory structure under `<EXAM>/hands-on-labs/<domain>/lab-<topic>/`
-6. **Generate** infrastructure code (Terraform OR Bicep as specified)
-7. **Create terraform.tfvars** (Terraform only) with lab subscription ID: `e091f6e7-031a-4924-97bb-8c983ca5d21a`
-8. **Validate** the code using appropriate tool commands
-9. **Create** comprehensive README.md with all required sections
-10. **Include** validation/testing scripts if complex verification is needed
-11. **Verify** all governance standards are met:
+6. **Copy** `bicep.ps1` into the lab's `bicep/` folder for Bicep labs
+7. **Generate** infrastructure code (Terraform OR Bicep as specified)
+8. **Create terraform.tfvars** (Terraform only) with lab subscription ID: `e091f6e7-031a-4924-97bb-8c983ca5d21a`
+9. **Validate** the code using appropriate tool commands
+10. **Create** comprehensive README.md with all required sections
+11. **Include** validation/testing scripts if complex verification is needed
+12. **Verify** all governance standards are met:
     - [ ] Exam determined correctly
     - [ ] Resource group naming follows pattern with correct exam prefix
     - [ ] All resources have required tags (with correct Project value)

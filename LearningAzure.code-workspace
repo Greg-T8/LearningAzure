@@ -131,7 +131,8 @@
         "eval": false,
         "Invoke-Expression": false,
         "iex": false,
-        "terraform": true
+        "terraform": true,
+        "az": true
     }
   }
 }
