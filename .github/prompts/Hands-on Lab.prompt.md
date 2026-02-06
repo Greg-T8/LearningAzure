@@ -497,6 +497,34 @@ Create a comprehensive README with this structure:
 
 [Describe the Azure resources needed and their relationships]
 
+### Architecture Diagram
+
+**When to include**: Add a Mermaid diagram when the lab involves:
+- Multiple interconnected Azure resources (3 or more)
+- Network topologies (VNets, subnets, peering, NSGs)
+- Data flows between services
+- Complex dependencies or relationships
+- Multi-tier architectures
+
+**When to skip**: Simple labs with 1-2 resources or straightforward single-service scenarios may not need a diagram.
+
+```mermaid
+graph TD
+    A[Resource 1] -->|relationship| B[Resource 2]
+    B --> C[Resource 3]
+    C --> D[Resource 4]
+
+    style A fill:#0078d4,color:#fff
+    style B fill:#0078d4,color:#fff
+    style C fill:#0078d4,color:#fff
+    style D fill:#0078d4,color:#fff
+```
+
+**Example diagram types**:
+- `graph TD` (top-down) or `graph LR` (left-right) for resource relationships
+- `flowchart` for deployment flows or data pipelines
+- `sequenceDiagram` for API interactions or authentication flows
+
 **Cost Optimization**: This lab uses cost-effective resources:
 - VMs: Standard_B2s (or B1s for minimal scenarios)
 - [List other cost-optimized resource SKUs/tiers used]
@@ -676,6 +704,7 @@ terraform destroy
    - **Terraform**: Run `terraform init`, `terraform validate`, `terraform plan`
    - **Bicep**: Run `.\bicep.ps1 validate`, `.\bicep.ps1 plan`
 10. **Create** comprehensive README.md with all required sections
+    - Include a Mermaid diagram in the Solution Architecture section when the lab involves multiple interconnected resources, network topologies, or complex dependencies
 11. **Include** validation/testing scripts if complex verification is needed
 12. **Verify** all GOVERNANCE.md standards are met - consult the pre-deployment checklist in GOVERNANCE.md
 
