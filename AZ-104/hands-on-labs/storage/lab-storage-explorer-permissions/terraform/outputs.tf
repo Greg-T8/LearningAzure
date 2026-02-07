@@ -64,21 +64,20 @@ output "next_steps" {
     To test Storage Explorer permission scenarios:
 
     1. Assign RBAC roles to users/service principals:
-       - Storage Blob Data Reader (data plane only)
-       - Storage Blob Data Contributor (data plane only)
-       - Reader (management plane read)
+       - Read role (management plane) - can see containers but NOT browse contents
+       - Storage Blob Data Reader (data plane) - CAN browse blob contents
+       - Storage Blob Data Contributor (data plane) - CAN browse and modify blob contents
 
     2. Test with Azure Storage Explorer:
        - Try to browse storage accounts with different role assignments
-       - Observe permission errors
+       - Observe: Read role shows containers but cannot browse
+       - Observe: Data plane roles allow browsing contents
 
-    3. Test with resource locks (optional):
-       - Redeploy with enable_readonly_lock = true
-       - Try to list account keys (should fail)
+    3. Test with resource locks:
+       - ReadOnly lock prevents listing account keys (causes error)
+       - CanNotDelete lock does NOT prevent access (allows normal operation)
 
     Storage Accounts Created:
     - ${module.storage.storage_account_unlocked_name} (no locks)
-    ${var.enable_readonly_lock ? "- ${module.storage.storage_account_readonly_lock_name} (ReadOnly lock)" : ""}
-    ${var.enable_cannotdelete_lock ? "- ${module.storage.storage_account_cannotdelete_lock_name} (CanNotDelete lock)" : ""}
-  EOT
-}
+    ${var.enable_readonly_lock ? "- ${module.storage.storage_account_readonly_lock_name} (ReadOnly lock - prevents key listing)" : ""}
+    ${var.enable_cannotdelete_lock ? "- ${module.storage.storage_account_cannotdelete_lock_name} (CanNotDelete lock - allows access)" : ""}

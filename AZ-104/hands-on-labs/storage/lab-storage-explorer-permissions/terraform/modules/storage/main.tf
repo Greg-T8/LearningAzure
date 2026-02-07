@@ -89,11 +89,11 @@ resource "azurerm_storage_container" "cannotdelete_blob" {
   container_access_type = "private"
 }
 
-# CanNotDelete resource lock (does NOT prevent key listing)
+# CanNotDelete resource lock
 resource "azurerm_management_lock" "cannotdelete" {
   count      = var.enable_cannotdelete_lock ? 1 : 0
   name       = "lock-cannotdelete"
   scope      = azurerm_storage_account.cannotdelete_lock[0].id
   lock_level = "CanNotDelete"
-  notes      = "Prevents resource deletion but allows key listing - Storage Explorer should work"
+  notes      = "Prevents resource deletion but allows key listing - Storage Explorer should work normally"
 }

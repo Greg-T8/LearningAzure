@@ -15,7 +15,7 @@ param(
     [string]$UserPrincipalName,
 
     [Parameter(Mandatory = $false)]
-    [ValidateSet('StorageBlobDataReader', 'StorageBlobDataContributor', 'Reader', 'Contributor')]
+    [ValidateSet('Storage Blob Data Reader', 'Storage Blob Data Contributor', 'Read', 'Reader', 'Contributor')]
     [string]$RoleToAssign
 )
 
@@ -86,7 +86,13 @@ $Main = {
                 -ErrorAction Stop
 
             Write-Host "  ✓ Role assignment successful" -ForegroundColor Green
-            Write-Host "`n  Test this user in Azure Storage Explorer:" -ForegroundColor Cyan
+            Write-Host "`n  Tes			.\test-storage-permissions.ps1 `
+				-ResourceGroupName az104-storage-storage-explorer-permissions-tf `
+				-UserPrincipalName IsaiahL@637djb.onmicrosoft.com `
+				-RoleToAssign "Storage Blob Data Reader"				.\test-storage-permissions.ps1 `
+					-ResourceGroupName az104-storage-storage-explorer-permissions-tf `
+					-UserPrincipalName IsaiahL@637djb.onmicrosoft.com `
+					-RoleToAssign "Storage Blob Data Reader"t this user in Azure Storage Explorer:" -ForegroundColor Cyan
             Write-Host "    1. Open Azure Storage Explorer" -ForegroundColor White
             Write-Host "    2. Sign in as $UserPrincipalName" -ForegroundColor White
             Write-Host "    3. Try to browse $($sa.StorageAccountName)" -ForegroundColor White
@@ -103,21 +109,28 @@ $Main = {
 
 Storage Explorer Error: "Unable to list resources in account due to inadequate permissions"
 
-Two main reasons for this error:
+Two correct reasons for this error:
 
-1. Storage Blob Data Reader/Contributor Role ONLY
-   - These are data plane roles (Azure RBAC for data access)
-   - They do NOT grant permission to list account keys
-   - Storage Explorer tries to use account keys by default
-   - Solution: User needs Reader role (management plane) OR use Azure AD auth in Storage Explorer
+1. Read Role (Management Plane Only)
+   - Provides management plane access (can see containers)
+   - Does NOT provide data plane access (cannot browse contents)
+   - User can see the storage account exists but cannot access blob data
+   - Solution: Add Storage Blob Data Reader/Contributor role OR use full Contributor role
 
 2. ReadOnly Resource Lock
    - Prevents the listKeys operation (POST action)
    - Storage Explorer cannot retrieve account keys
    - Solution: Remove the ReadOnly lock OR use Azure AD auth
 
-Note: CanNotDelete lock does NOT prevent key listing
-      It only prevents resource deletion
+Common misconceptions (INCORRECT answers):
+
+✗ Storage Blob Data Reader/Contributor roles - Users with these roles CAN browse contents
+   - These are data plane roles that provide direct blob access
+   - They work with Azure AD authentication in Storage Explorer
+
+✗ CanNotDelete lock - Does NOT prevent Storage Explorer access
+   - Only prevents resource deletion
+   - Does not block listKeys operation
 
 "@ -ForegroundColor White
 
