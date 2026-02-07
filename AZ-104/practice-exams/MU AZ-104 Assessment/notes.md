@@ -336,7 +336,7 @@ The solution is either:
 
 </details>
 
-Hands-on Lab: [lab-storage-explorer-permissions](AZ-104\hands-on-labs\storage\lab-storage-explorer-permissions\README.md)
+Hands-on Lab: [lab-storage-explorer-permissions](AZ-104/hands-on-labs/storage/lab-storage-explorer-permissions/README.md)
 
 ---
 
