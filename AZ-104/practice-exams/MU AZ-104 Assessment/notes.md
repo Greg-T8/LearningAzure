@@ -16,7 +16,12 @@ I took this assessment on Friday, January 30th, after reviewing the Microsoft Le
 
 <img src='.img/2026-01-30-06-23-36.png' width=700>
 
+<details>
+<summary>Click to expand details</summary>
+
 <img src='.img/2026-01-30-06-25-12.png' width=700>
+
+</details>
 
 ---
 
@@ -332,8 +337,6 @@ The solution is either:
 - Use authentication methods that don't require listing keys (Azure AD, SAS tokens)
 
 </details>
-
-Hands-on Lab: [lab-storage-explorer-rbac-permissions](AZ-104\hands-on-labs\storage\lab-storage-explorer-rbac-permissions\terraform)
 
 ---
 
