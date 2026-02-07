@@ -12,7 +12,7 @@ Practice exam from TutorialsDojo for AI-900: Azure AI Fundamentals.
 
 ## Wrong Answers
 
-<img src='.img/2026-02-03-04-53-47.png' width=700> 
+<img src='.img/2026-02-03-04-53-47.png' width=700>
 
 <details>
 <summary>Click to expand explanation</summary>
@@ -77,8 +77,7 @@ For AI-900, Azure AI Document Intelligence is about **document OCR and structure
 * [https://learn.microsoft.com/azure/ai-services/document-intelligence/prebuilt/receipts](https://learn.microsoft.com/azure/ai-services/document-intelligence/prebuilt/receipts)
 * [https://learn.microsoft.com/azure/ai-services/document-intelligence/prebuilt/forms](https://learn.microsoft.com/azure/ai-services/document-intelligence/prebuilt/forms)
 
-
-<img src='.img/2026-02-03-05-03-00.png' width=700> 
+<img src='.img/2026-02-03-05-03-00.png' width=700>
 
 </details>
 
@@ -114,7 +113,7 @@ If translation or images are involved, Azure AI Language is not the correct choi
 [https://learn.microsoft.com/azure/ai-services/translator/overview](https://learn.microsoft.com/azure/ai-services/translator/overview)
 [https://learn.microsoft.com/azure/ai-services/computer-vision/overview](https://learn.microsoft.com/azure/ai-services/computer-vision/overview)
 
-<img src='.img/2026-02-03-05-09-46.png' width=300> 
+<img src='.img/2026-02-03-05-09-46.png' width=300>
 
 </details>
 
@@ -144,7 +143,6 @@ For Azure exams:
 * [https://learn.microsoft.com/azure/ai-services/face/overview](https://learn.microsoft.com/azure/ai-services/face/overview)
 * [https://learn.microsoft.com/training/modules/analyze-images-computer-vision/](https://learn.microsoft.com/training/modules/analyze-images-computer-vision/)
 * [https://learn.microsoft.com/training/modules/detect-analyze-faces/](https://learn.microsoft.com/training/modules/detect-analyze-faces/)
-
 
 </details>
 
@@ -179,7 +177,6 @@ On Microsoft exams, **clustering = grouping similar items**. Do not assume clust
 * [https://learn.microsoft.com/en-us/training/modules/describe-machine-learning-workloads/](https://learn.microsoft.com/en-us/training/modules/describe-machine-learning-workloads/)
 * [https://learn.microsoft.com/en-us/training/modules/describe-artificial-intelligence-workloads/](https://learn.microsoft.com/en-us/training/modules/describe-artificial-intelligence-workloads/)
 
-
 </details>
 
 ---
@@ -203,7 +200,6 @@ This question set is testing your ability to distinguish **forecasting/regressio
 
 **Key takeaway**
 If the scenario emphasizes **unusual, abnormal, or unexpected patterns**, the correct classification is **anomaly detection**. If it emphasizes **predicting a future value**, it is **forecasting/regression**.
-
 
 <img src='.img/2026-02-03-05-24-58.png' width=700>  
 
@@ -253,7 +249,7 @@ If the scenario emphasizes **unusual, abnormal, or unexpected patterns**, the co
 
 ---
 
-<img src='.img/2026-02-05-06-06-27.png' width=700> 
+<img src='.img/2026-02-05-06-06-27.png' width=700>
 
 <details>
 <summary>Click to expand explanation</summary>
@@ -262,14 +258,13 @@ If the scenario emphasizes **unusual, abnormal, or unexpected patterns**, the co
 
 Speech synthesis refers to **text-to-speech**—generating spoken audio from text. In this scenario, your spoken English is being converted into Spanish in real time. The core capability being used is **language translation**, not speech generation. While speech services may be involved under the hood, the task is not creating
 
-
 </details>
 
 ---
 
-<img src='.img/2026-02-05-06-11-03.png' width=700> 
+<img src='.img/2026-02-05-06-11-03.png' width=700>
 
-<details open>
+<details>
 <summary>Click to expand explanation</summary>
 
 **Why the selected answers are wrong**
@@ -301,11 +296,7 @@ Custom Vision is strictly for **image classification and object detection**.
 
 * No stable Microsoft Learn link can be guaranteed for this specific exam concept.
 
-
 </details>
-
-
-
 
 ## Correctly Answered but Uncertain Questions
 
@@ -344,6 +335,135 @@ If the prompt says **“create/generate additional features,”** the answer is 
 * [https://learn.microsoft.com/en-us/azure/machine-learning/concept-automated-ml#featurization](https://learn.microsoft.com/en-us/azure/machine-learning/concept-automated-ml#featurization)
 * [https://learn.microsoft.com/en-us/training/modules/introduction-to-azure-machine-learning/](https://learn.microsoft.com/en-us/training/modules/introduction-to-azure-machine-learning/)
 
+</details>
+
+---
+
+<img src='.img/2026-02-07-05-51-23.png' width=700>
+
+<details open>
+<summary>Click to expand explanation</summary>
+
+**Why the selected answer is wrong (Anomaly Detection)**
+Anomaly detection is used to identify unusual patterns or outliers compared to a normal baseline (for example, defective items, fraud, or sensor spikes). The scenario is not about detecting rare or abnormal parcels. It is about **identifying parcels that meet a known physical characteristic (size)** and sorting them accordingly. That is classification or measurement, not anomaly detection.
+
+**Why the correct answer is correct (Computer Vision)**
+Computer vision is designed to **analyze images or video to detect, measure, and classify physical objects**. Identifying parcels of a certain size requires visual input (camera images) and object detection or measurement, which is a core computer vision workload. This aligns directly with warehouse automation scenarios such as package sorting, quality inspection, and object recognition.
+
+**Why the other options are incorrect**
+
+* **Natural Language Processing**: Used for understanding or generating text and speech, not for analyzing physical objects or images.
+* **Conversational AI**: Used for chatbots and voice assistants, not for visual inspection or sorting tasks.
+
+**Key takeaway**
+When the problem involves **seeing, detecting, measuring, or classifying physical objects**, the correct AI workload is **computer vision**, not anomaly detection.
+
+**References**
+
+* No stable Microsoft Learn link can be guaranteed for this specific exam concept.
+
+</details>
+
+---
+
+<img src='.img/2026-02-07-05-58-54.png' width=700>
+
+<details>
+<summary>Click to expand explanation</summary>
+
+**Why the selected answer is wrong**
+
+The third statement is **true**, but it was marked **No**.
+That is why the score is 2/3.
+
+The statement says that evaluating a model using the same data it was trained on can lead to overfitting and poor performance on unseen data. That is a correct concept in machine learning fundamentals.
+
+**Why the statement is correct**
+
+Evaluating on training data often produces **overly optimistic results** because the model has already seen that data. This masks overfitting, where the model learns patterns specific to the training set rather than generalizable patterns.
+
+While overfitting is caused by model complexity and training behavior, **evaluating only on training data prevents you from detecting overfitting**, which is exactly why the statement is considered correct in an exam context.
+
+For AI-900, the key idea being tested is:
+
+* Training data ≠ evaluation data
+* Proper evaluation requires validation or test data
+* Using the same data hides generalization problems
+
+**Why the other statements are correct**
+
+* **Cross-validation**: Correctly described as splitting data into multiple folds to train and validate across different subsets. This improves reliability of performance estimates.
+* **Model evaluation beyond accuracy**: Correctly emphasizes bias, variance, underfitting, overfitting, and generalization—core ML evaluation concepts.
+
+**Common exam trap**
+
+The trap is interpreting the third statement too literally and thinking:
+“Overfitting happens during training, not evaluation.”
+
+While technically true, **AI-900 expects the broader conceptual interpretation**: evaluating on training data leads to misleading conclusions and is closely associated with overfitting risk.
+
+**Key takeaway**
+
+For Microsoft exams, treat this as a rule of thumb:
+
+* Training data → learn
+* Validation/test data → evaluate
+* Same data for both → unreliable results and overfitting risk
+
+---
+
+**References**
+
+* No stable Microsoft Learn link can be guaranteed for this specific exam concept.
+
+</details>
+
+---
+
+<img src='.img/2026-02-07-06-10-26.png' width=700>
+
+<details>
+<summary>Click to expand explanation</summary>
+
+**Why the selected answer is incorrect**
+
+The statement **“A validation set can indicate the most important features in the input data”** is **false**, but it was marked **Yes**.
+
+A validation set does not determine feature importance. Its role is to **evaluate model performance during training**, typically to compare models or tune hyperparameters and detect overfitting. It measures *how well* the model performs, not *why* it performs that way.
+
+**Why the correct answer is No**
+
+Feature importance comes from **model-specific interpretation techniques**, not from the validation dataset itself. Examples include:
+
+* Coefficients in linear or logistic regression
+* Feature importance scores in decision trees or random forests
+* Regularization effects (for example, L1/LASSO)
+* Model explainability tools (such as SHAP or permutation importance)
+
+The validation set may reveal that performance improves or degrades when certain features are included, but it **does not directly identify or rank feature importance**. That distinction is critical for exam questions.
+
+**Why the other statements are correct**
+
+* **“A validation set is used to adjust the weights and biases of a model during training”** → **Incorrect (No)**
+  Weights and biases are updated using the **training set**. The validation set is not used for gradient updates.
+
+* **“A validation set is used to assess the model’s performance on unseen data”** → **Correct (Yes)**
+  This is the primary purpose of the validation set during training. It evaluates generalization before final testing.
+
+**Key takeaway**
+
+On Microsoft exams, remember this rule of thumb:
+
+* **Training set** → learns weights and biases
+* **Validation set** → evaluates performance and tunes hyperparameters
+* **Test set** → final, unbiased evaluation
+* **Feature importance** → comes from the model or interpretability methods, **not** the validation set
+
+**References**
+
+* [https://learn.microsoft.com/en-us/azure/well-architected/security/design-segmentation](https://learn.microsoft.com/en-us/azure/well-architected/security/design-segmentation)
+* [https://learn.microsoft.com/en-us/azure/architecture/data-guide/technology-choices/natural-language-processing](https://learn.microsoft.com/en-us/azure/architecture/data-guide/technology-choices/natural-language-processing)
+* [https://learn.microsoft.com/en-us/azure/machine-learning/how-to-use-automated-ml-for-ml-models?view=azureml-api-2](https://learn.microsoft.com/en-us/azure/machine-learning/how-to-use-automated-ml-for-ml-models?view=azureml-api-2)
 
 </details>
 
