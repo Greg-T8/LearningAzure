@@ -1,4 +1,4 @@
-# TutorialsDojo AI-900: Azure AI Fundamentals Practice Exam
+# Tutorials Dojo AI-900 Practice Exam - Review Mode Set 1
 
 ## Overview
 
