@@ -86,34 +86,6 @@ graph TD
 - No compute resources required
 - Minimal storage used (blob containers and file shares with no significant data)
 
-## Prerequisites
-
-- Azure CLI installed and authenticated
-- Terraform (>= 1.0) installed
-- Azure subscription with appropriate permissions
-- Resource provider registered: `Microsoft.Storage`
-
-### Terraform Prerequisites
-
-**CRITICAL:** Switch to Lab Azure profile before any Terraform operations:
-
-```powershell
-Use-AzProfile Lab
-```
-
-Ensure you have a `terraform.tfvars` file with your subscription ID:
-
-```bash
-# The terraform.tfvars should contain:
-lab_subscription_id = "e091f6e7-031a-4924-97bb-8c983ca5d21a"
-```
-
-Register the storage provider if needed:
-
-```bash
-az provider register --namespace Microsoft.Storage
-```
-
 ## Lab Objectives
 
 1. Deploy storage accounts with different permission configurations
@@ -121,66 +93,6 @@ az provider register --namespace Microsoft.Storage
 3. Test Azure Storage Explorer authentication behavior
 4. Observe the impact of resource locks on key listing operations
 5. Implement solutions to resolve Storage Explorer permission errors
-
-## Deployment
-
-### Terraform Deployment
-
-1. **CRITICAL:** Switch to Lab Azure profile:
-
-   ```powershell
-   Use-AzProfile Lab
-   ```
-
-2. Navigate to the terraform directory:
-
-   ```bash
-   cd terraform
-   ```
-
-3. Verify `terraform.tfvars` exists with your subscription ID:
-
-   ```bash
-   # File should already exist with lab subscription ID
-   cat terraform.tfvars
-   ```
-
-4. Initialize Terraform:
-
-   ```bash
-   terraform init
-   ```
-
-5. Validate the configuration:
-
-   ```bash
-   terraform validate
-   ```
-
-6. Review the planned changes:
-
-   ```bash
-   terraform plan
-   ```
-
-7. Deploy the infrastructure:
-
-   ```bash
-   terraform apply
-   ```
-
-8. (Optional) Deploy with resource locks to test those scenarios:
-
-   ```bash
-   # Test ReadOnly lock scenario
-   terraform apply -var="enable_readonly_lock=true"
-   
-   # Test CanNotDelete lock scenario
-   terraform apply -var="enable_cannotdelete_lock=true"
-   
-   # Test both scenarios
-   terraform apply -var="enable_readonly_lock=true" -var="enable_cannotdelete_lock=true"
-   ```
 
 ## Validation Steps
 
@@ -349,34 +261,6 @@ To use Azure AD authentication instead of account keys:
 3. Ensure "Use Azure Active Directory" is enabled
 4. Sign in with an account that has appropriate data plane roles
 5. Browse should work with Storage Blob Data Reader/Contributor roles
-
-## Cleanup
-
-### Terraform Cleanup
-
-**CRITICAL:** Ensure you're using the Lab profile before cleanup:
-
-```powershell
-Use-AzProfile Lab
-```
-
-```bash
-cd terraform
-terraform destroy
-```
-
-**Note:** If ReadOnly resource lock is enabled, you may need to remove it first:
-
-```bash
-# Remove ReadOnly lock before destroying (if enabled)
-az lock delete --name lock-readonly --resource-group az104-storage-storage-explorer-permissions-tf
-
-# CanNotDelete lock can be removed by terraform destroy
-# Then destroy
-terraform destroy
-```
-
-**Important:** ReadOnly locks prevent management operations including `terraform destroy`. CanNotDelete locks allow modifications but prevent deletion.
 
 ## Key Learning Points
 
