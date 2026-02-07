@@ -6,11 +6,11 @@ Practice exam from TutorialsDojo for AI-900: Azure AI Fundamentals.
 
 ## Assessment Results
 
-[Add screenshot of assessment results]
+<img src='.img/2026-02-07-06-58-21.png' width=700>
 
 ---
 
-## Wrong Answers
+## Wrong or Unsure Answers
 
 <img src='.img/2026-02-03-04-53-47.png' width=700>
 
@@ -298,7 +298,7 @@ Custom Vision is strictly for **image classification and object detection**.
 
 </details>
 
-## Correctly Answered but Uncertain Questions
+---
 
 <img src='.img/2026-02-03-05-29-19.png' width=700>
 
@@ -341,7 +341,7 @@ If the prompt says **“create/generate additional features,”** the answer is 
 
 <img src='.img/2026-02-07-05-51-23.png' width=700>
 
-<details open>
+<details>
 <summary>Click to expand explanation</summary>
 
 **Why the selected answer is wrong (Anomaly Detection)**
