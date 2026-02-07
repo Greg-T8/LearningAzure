@@ -1,4 +1,4 @@
-# Lab: AzCopy Authorization Methods for Azure Storage
+# Lab: AzCopy Authentication Methods for Blob and File Storage
 
 ## Exam Question Scenario
 
@@ -10,412 +10,333 @@ Your commands target only the file share or the account.
 
 **Which authorization methods can you use to copy each storage type?**
 
-- **Blob storage**: Microsoft Entra ID, access keys, and SAS
-- **File storage**: Microsoft Entra ID only
-
 ## Scenario Analysis
 
-This scenario tests your understanding of AzCopy authorization methods and their compatibility with different Azure Storage services:
+This scenario tests understanding of AzCopy's authentication capabilities across different storage types. The key distinction is that **Blob Storage and File Storage support different authentication methods** when using AzCopy.
 
-1. **AzCopy** is a command-line utility for copying data to and from Azure Storage
-2. **Authorization methods** vary by storage service type (Blob vs File)
-3. **Blob Storage** supports multiple authorization methods:
-   - Microsoft Entra ID (OAuth 2.0)
-   - Storage account access keys
-   - Shared Access Signatures (SAS)
-4. **File Storage** has more limited authorization options when used with AzCopy:
-   - Microsoft Entra ID only (when targeting file share or account)
-   - Note: Access keys and SAS work for file storage, but NOT when commands target the file share or account level (as specified in the scenario)
+### Critical Understanding
+
+**Blob Storage** supports all three authentication methods:
+
+- ✅ Microsoft Entra ID (Azure AD)
+- ✅ Storage Account Access Keys
+- ✅ Shared Access Signatures (SAS)
+
+**File Storage (Azure Files)** has **limited authentication support**:
+
+- ❌ Microsoft Entra ID (NOT supported or very limited with AzCopy)
+- ✅ Storage Account Access Keys
+- ✅ Shared Access Signatures (SAS)
+
+### Common Misconception
+
+Many assume that since Azure AD authentication works for Blob Storage with AzCopy, it would also work for File Storage. However, **AzCopy's Azure AD integration is primarily designed for Blob Storage and ADLS Gen2**, not Azure Files.
 
 ## Solution Architecture
 
-This lab deploys infrastructure to demonstrate and test all supported (and unsupported) AzCopy authorization methods with both Blob and File storage services.
+This lab creates a destination storage account (DevStore) and two source storage accounts to demonstrate different authentication methods with AzCopy:
+
+1. **DevStore** - Destination storage account with both Blob and File storage
+2. **Source Blob Storage** - Source storage account for blob data
+3. **Source File Storage** - Source storage account for file share data
+
+### Resources Created
+
+- 3 Storage Accounts (Standard_LRS, hot tier)
+- 2 Blob Containers (in DevStore and source blob storage)
+- 2 File Shares (in DevStore and source file storage)
+- Sample test files uploaded to source storage
+- Role assignments for Entra ID authentication (Blob only)
+- SAS tokens generated for both storage types
 
 ### Architecture Diagram
 
 ```mermaid
-graph LR
-    User[User with<br/>Entra ID] -->|AzCopy commands| Source[Source Storage<br/>Account]
-    User -->|AzCopy commands| Target[Target Storage<br/>Account<br/>DevStore]
+graph TD
+    A[Source Blob Storage] -->|Entra ID Auth| D[DevStore Blob Container]
+    A -->|Access Keys| D
+    A -->|SAS Token| D
     
-    Source -->|Contains| BlobSrc[Blob Container<br/>data]
-    Source -->|Contains| FileSrc[File Share<br/>files]
+    B[Source File Storage] -->|Access Keys| E[DevStore File Share]
+    B -->|SAS Token| E
+    B -.->|NOT Supported| E
     
-    Target -->|Contains| BlobTgt[Blob Container<br/>data]
-    Target -->|Contains| FileTgt[File Share<br/>files]
+    C[Your Identity] -->|Entra ID Login| A
+    C -->|Account Keys| A
+    C -->|Account Keys| B
     
-    User -->|Has Role| BlobRole[Storage Blob Data<br/>Contributor]
-    User -->|Has Role| FileRole[Storage File Data SMB<br/>Share Contributor]
-    
-    BlobRole -.->|Authorizes| Source
-    BlobRole -.->|Authorizes| Target
-    FileRole -.->|Authorizes| Source
-    FileRole -.->|Authorizes| Target
-
-    style Source fill:#0078d4,color:#fff
-    style Target fill:#0078d4,color:#fff
-    style BlobSrc fill:#50e6ff,color:#000
-    style FileSrc fill:#50e6ff,color:#000
-    style BlobTgt fill:#50e6ff,color:#000
-    style FileTgt fill:#50e6ff,color:#000
-    style User fill:#00bcf2,color:#fff
-    style BlobRole fill:#f2f2f2,color:#000
-    style FileRole fill:#f2f2f2,color:#000
+    style D fill:#0078d4,color:#fff
+    style E fill:#0078d4,color:#fff
+    style B stroke-dasharray: 5 5
 ```
-
-### Resources Deployed
-
-| Resource | Name | Purpose |
-|----------|------|---------|
-| Resource Group | `az104-storage-azcopy-auth-methods-bicep` | Container for all lab resources |
-| Source Storage Account | `staz104azcopyauthsrc` | Source storage with sample data |
-| Target Storage Account | `staz104azcopyauthtgt` | Target storage (DevStore equivalent) |
-| Blob Containers | `data` (in both accounts) | Storage for blob data |
-| File Shares | `files` (in both accounts) | Storage for file data |
-| Role Assignments | Storage Blob Data Contributor | Enables Entra ID auth for blobs |
-| Role Assignments | Storage File Data SMB Share Contributor | Enables Entra ID auth for files |
-
-**Cost Optimization**: This lab uses cost-effective resources:
-
-- Storage Accounts: Standard LRS (Locally Redundant Storage)
-- File Shares: 5 GB quota (minimal allocation)
-- No compute resources or premium storage tiers
-
-## Prerequisites
-
-- Azure CLI installed and authenticated
-- Bicep CLI (installed automatically with Azure CLI)
-- Azure subscription with appropriate permissions
-- AzCopy installed ([Download AzCopy](https://aka.ms/downloadazcopy))
-- PowerShell 7.0 or later
-
-**CRITICAL**: Before executing ANY Azure CLI or Bicep commands, you MUST switch to the Lab Azure profile:
-
-```powershell
-Use-AzProfile Lab
-```
-
-This ensures all commands execute in the correct Lab subscription environment. The profile switch persists for the terminal session.
 
 ## Lab Objectives
 
-1. Deploy storage accounts with both Blob and File storage services
-2. Configure Microsoft Entra ID authorization using RBAC role assignments
-3. Test AzCopy with Microsoft Entra ID authentication for blob storage
-4. Test AzCopy with storage account keys for blob storage
-5. Test AzCopy with SAS tokens for blob storage
-6. Test AzCopy with Microsoft Entra ID authentication for file storage
-7. Understand the limitations of authorization methods for file storage with AzCopy
+1. **Create storage infrastructure** - Deploy storage accounts with blob containers and file shares
+2. **Understand authentication differences** - Learn which auth methods work with each storage type
+3. **Test Blob authentication methods**:
+   - Microsoft Entra ID authentication (`azcopy login`)
+   - Storage Account Access Keys (environment variable or connection string)
+   - SAS Token authentication
+4. **Test File authentication methods**:
+   - Storage Account Access Keys
+   - SAS Token authentication
+   - Verify Azure AD is NOT supported for File Storage
+5. **Document results** - Validate which methods succeed and which fail
 
-## Deployment
+## Prerequisites
 
-### Bicep Deployment
-
-1. **CRITICAL**: Switch to Lab Azure profile:
-
-   ```powershell
-   Use-AzProfile Lab
-   ```
-
-2. Navigate to the bicep directory:
-
-   ```bash
-   cd AZ-104/hands-on-labs/storage/lab-azcopy-auth-methods/bicep
-   ```
-
-3. **Update the parameter file** with your Microsoft Entra ID user object ID:
-
-   ```powershell
-   # Get your user object ID
-   az ad signed-in-user show --query id -o tsv
-   
-   # Edit main.bicepparam and replace <YOUR_OBJECT_ID> with the actual value
-   ```
-
-4. Validate the Bicep template:
-
-   ```powershell
-   .\bicep.ps1 validate
-   ```
-
-5. Review the planned changes (what-if):
-
-   ```powershell
-   .\bicep.ps1 plan
-   ```
-
-6. Deploy the infrastructure:
-
-   ```powershell
-   .\bicep.ps1 apply
-   ```
-
-7. Wait for deployment to complete (approximately 2-3 minutes)
-
-8. **Important**: After deployment, wait 5-10 minutes for role assignments to propagate before testing AzCopy commands with Microsoft Entra ID authentication.
-
-## Validation Steps
-
-### 1. Verify Resources Are Deployed
-
-```powershell
-# List resources in the resource group
-az resource list --resource-group az104-storage-azcopy-auth-methods-bicep -o table
-
-# Verify storage accounts
-az storage account list --resource-group az104-storage-azcopy-auth-methods-bicep -o table
-
-# Verify blob containers
-az storage container list --account-name staz104azcopyauthsrc --auth-mode login -o table
-az storage container list --account-name staz104azcopyauthtgt --auth-mode login -o table
-
-# Verify file shares
-az storage share list --account-name staz104azcopyauthsrc --auth-mode login -o table
-az storage share list --account-name staz104azcopyauthtgt --auth-mode login -o table
-```
-
-### 2. Create Sample Test Data
-
-```powershell
-# Create a local test file
-echo "This is test data for AzCopy authorization methods lab" > testfile.txt
-
-# Upload test file to source blob container using Entra ID
-az storage blob upload `
-  --account-name staz104azcopyauthsrc `
-  --container-name data `
-  --name testfile.txt `
-  --file testfile.txt `
-  --auth-mode login
-
-# Upload test file to source file share using Entra ID
-az storage file upload `
-  --account-name staz104azcopyauthsrc `
-  --share-name files `
-  --source testfile.txt `
-  --path testfile.txt `
-  --auth-mode login
-
-# Verify uploads
-az storage blob list --account-name staz104azcopyauthsrc --container-name data --auth-mode login -o table
-az storage file list --account-name staz104azcopyauthsrc --share-name files --auth-mode login -o table
-```
+- **AzCopy installed** - Download from [Microsoft](https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-v10)
+- **Azure CLI or PowerShell** - For retrieving storage keys and generating SAS tokens
+- **Contributor or Storage Blob Data Contributor role** - For Entra ID authentication tests
 
 ## Testing the Solution
 
-### Test 1: Blob Storage with Microsoft Entra ID
-
-**Expected Result**: ✅ SUCCESS
+After deploying the lab infrastructure, the validation script will help test all authentication methods. Run it to test systematically:
 
 ```powershell
-# Login to Azure (if not already logged in)
-azcopy login --tenant-id (az account show --query tenantId -o tsv)
+# Navigate to validation directory
+cd validation/
 
-# Copy blob using Microsoft Entra ID
-azcopy copy `
-  "https://staz104azcopyauthsrc.blob.core.windows.net/data/testfile.txt" `
-  "https://staz104azcopyauthtgt.blob.core.windows.net/data/testfile-entra.txt"
-
-# Verify the file was copied
-az storage blob list --account-name staz104azcopyauthtgt --container-name data --auth-mode login -o table
+# Run the authentication test script
+.\test-azcopy-auth.ps1
 ```
 
-### Test 2: Blob Storage with Access Keys
+### Manual Testing Steps
 
-**Expected Result**: ✅ SUCCESS
+#### 1. Test Blob Storage with Entra ID ✅
 
 ```powershell
-# Get source storage account key
-$sourceKey = (az storage account keys list --account-name staz104azcopyauthsrc --query "[0].value" -o tsv)
+# Login with Azure AD
+azcopy login
 
-# Get target storage account key
-$targetKey = (az storage account keys list --account-name staz104azcopyauthtgt --query "[0].value" -o tsv)
-
-# Copy blob using access keys
-azcopy copy `
-  "https://staz104azcopyauthsrc.blob.core.windows.net/data/testfile.txt?$sourceKey" `
-  "https://staz104azcopyauthtgt.blob.core.windows.net/data/testfile-key.txt?$targetKey"
-
-# Verify the file was copied
-az storage blob list --account-name staz104azcopyauthtgt --container-name data --auth-mode login -o table
+# Copy blob using Entra ID auth
+azcopy copy "https://sourceblob.blob.core.windows.net/container/file.txt" `
+    "https://devstore.blob.core.windows.net/container/"
 ```
 
-### Test 3: Blob Storage with SAS Token
+**Expected**: ✅ Success
 
-**Expected Result**: ✅ SUCCESS
+#### 2. Test Blob Storage with Access Keys ✅
 
 ```powershell
-# Generate SAS token for source container (valid for 1 hour)
-$sourceSas = (az storage container generate-sas `
-  --account-name staz104azcopyauthsrc `
-  --name data `
-  --permissions r `
-  --expiry (Get-Date).AddHours(1).ToString("yyyy-MM-ddTHH:mm:ssZ") `
-  --auth-mode key `
-  --account-key $sourceKey `
-  -o tsv)
+# Set account key as environment variable
+$env:AZCOPY_ACCOUNT_KEY = "<access-key>"
 
-# Generate SAS token for target container (valid for 1 hour)
-$targetSas = (az storage container generate-sas `
-  --account-name staz104azcopyauthtgt `
-  --name data `
-  --permissions w `
-  --expiry (Get-Date).AddHours(1).ToString("yyyy-MM-ddTHH:mm:ssZ") `
-  --auth-mode key `
-  --account-key $targetKey `
-  -o tsv)
-
-# Copy blob using SAS tokens
-azcopy copy `
-  "https://staz104azcopyauthsrc.blob.core.windows.net/data/testfile.txt?$sourceSas" `
-  "https://staz104azcopyauthtgt.blob.core.windows.net/data/testfile-sas.txt?$targetSas"
-
-# Verify the file was copied
-az storage blob list --account-name staz104azcopyauthtgt --container-name data --auth-mode login -o table
+# Copy blob using access key
+azcopy copy "https://sourceblob.blob.core.windows.net/container/file.txt" `
+    "https://devstore.blob.core.windows.net/container/"
 ```
 
-### Test 4: File Storage with Microsoft Entra ID
+**Expected**: ✅ Success
 
-**Expected Result**: ✅ SUCCESS
+#### 3. Test Blob Storage with SAS Token ✅
 
 ```powershell
-# Ensure you're logged in with AzCopy
-azcopy login --tenant-id (az account show --query tenantId -o tsv)
-
-# Copy file using Microsoft Entra ID
-azcopy copy `
-  "https://staz104azcopyauthsrc.file.core.windows.net/files/testfile.txt" `
-  "https://staz104azcopyauthtgt.file.core.windows.net/files/testfile-entra.txt"
-
-# Verify the file was copied
-az storage file list --account-name staz104azcopyauthtgt --share-name files --auth-mode login -o table
+# Copy blob using SAS (append to URL)
+azcopy copy "https://sourceblob.blob.core.windows.net/container/file.txt?<sas-token>" `
+    "https://devstore.blob.core.windows.net/container/?<dest-sas-token>"
 ```
 
-### Test 5: File Storage with Access Keys (Target Account Level)
+**Expected**: ✅ Success
 
-**Expected Result**: ❌ FAILURE - Access keys do not work for file share/account level operations in AzCopy
+#### 4. Test File Storage with Entra ID ❌
 
 ```powershell
-# Attempt to copy file using access keys (targeting account)
-# This will fail because the scenario specifies "commands target only the file share or the account"
-azcopy copy `
-  "https://staz104azcopyauthsrc.file.core.windows.net/files/testfile.txt?$sourceKey" `
-  "https://staz104azcopyauthtgt.file.core.windows.net/files/testfile-key.txt?$targetKey"
+# Login with Azure AD
+azcopy login
 
-# Expected error: Authentication method not supported for Azure Files when targeting share/account level
+# Attempt to copy file using Entra ID auth
+azcopy copy "https://sourcefile.file.core.windows.net/share/file.txt" `
+    "https://devstore.file.core.windows.net/share/"
 ```
 
-**Note**: Access keys DO work with Azure Files when using Azure Portal, Storage Explorer, or when mounting file shares. The limitation is specific to AzCopy when targeting the file share or account endpoints (as stated in the exam scenario).
+**Expected**: ❌ **FAIL** - Azure AD not supported for File Storage with AzCopy
 
-### Test 6: File Storage with SAS Token (Target Account Level)
-
-**Expected Result**: ❌ FAILURE - SAS tokens do not work for file share/account level operations in AzCopy (per the scenario constraints)
+#### 5. Test File Storage with Access Keys ✅
 
 ```powershell
-# Generate SAS token for source file share
-$sourceFileSas = (az storage share generate-sas `
-  --account-name staz104azcopyauthsrc `
-  --name files `
-  --permissions r `
-  --expiry (Get-Date).AddHours(1).ToString("yyyy-MM-ddTHH:mm:ssZ") `
-  --account-key $sourceKey `
-  -o tsv)
+# Set account key as environment variable
+$env:AZCOPY_ACCOUNT_KEY = "<access-key>"
 
-# Generate SAS token for target file share
-$targetFileSas = (az storage share generate-sas `
-  --account-name staz104azcopyauthtgt `
-  --name files `
-  --permissions w `
-  --expiry (Get-Date).AddHours(1).ToString("yyyy-MM-ddTHH:mm:ssZ") `
-  --account-key $targetKey `
-  -o tsv)
-
-# Attempt to copy file using SAS tokens (targeting account)
-azcopy copy `
-  "https://staz104azcopyauthsrc.file.core.windows.net/files/testfile.txt?$sourceFileSas" `
-  "https://staz104azcopyauthtgt.file.core.windows.net/files/testfile-sas.txt?$targetFileSas"
-
-# Expected error: Authentication method not supported for Azure Files when targeting share/account level
+# Copy file using access key
+azcopy copy "https://sourcefile.file.core.windows.net/share/file.txt" `
+    "https://devstore.file.core.windows.net/share/"
 ```
 
-## Cleanup
+**Expected**: ✅ Success
 
-### Bicep Cleanup
-
-**CRITICAL**: Ensure you're using the Lab profile before cleanup:
+#### 6. Test File Storage with SAS Token ✅
 
 ```powershell
-Use-AzProfile Lab
+# Copy file using SAS (append to URL)
+azcopy copy "https://sourcefile.file.core.windows.net/share/file.txt?<sas-token>" `
+    "https://devstore.file.core.windows.net/share/?<dest-sas-token>"
 ```
 
-Remove all resources using the deployment stack:
+**Expected**: ✅ Success
 
-```powershell
-.\bicep.ps1 destroy
-```
+## Validation Criteria
 
-This will delete:
+The lab is successful when you can verify:
 
-- The deployment stack
-- The resource group
-- All storage accounts and their contents
-- All role assignments
+- ✅ All three authentication methods work for **Blob Storage**
+- ✅ Access Keys and SAS work for **File Storage**
+- ❌ Azure AD authentication **FAILS** for **File Storage**
+- ✅ Files successfully copied to destination containers/shares
+- ✅ Appropriate error messages when using unsupported authentication
 
 ## Key Learning Points
 
-1. **AzCopy Authorization Flexibility**: AzCopy supports multiple authorization methods, but compatibility varies by service type
+### 1. Authentication Support Varies by Storage Type
 
-2. **Blob Storage Authorization (Flexible)**:
-   - Microsoft Entra ID (OAuth 2.0) - Recommended for security
-   - Storage account access keys - Full access, not recommended for production
-   - Shared Access Signatures (SAS) - Time-limited, granular permissions
+**Blob Storage** has comprehensive authentication support in AzCopy:
 
-3. **File Storage Authorization (Limited with AzCopy)**:
-   - Microsoft Entra ID ONLY when commands target the file share or account endpoints
-   - Access keys and SAS work at file-level but not share/account level with AzCopy
-   - This is a key distinction from Blob Storage
+- Microsoft Entra ID (preferred for user access)
+- Access Keys (full control)
+- SAS tokens (delegated permissions)
 
-4. **Security Best Practices**:
-   - Prefer Microsoft Entra ID authentication (most secure, supports MFA, conditional access)
-   - Use SAS tokens for time-limited, least-privilege access
-   - Avoid sharing storage account keys (they provide full access)
+**File Storage** has limited authentication support:
 
-5. **Role-Based Access Control (RBAC)**:
-   - `Storage Blob Data Contributor` role enables Entra ID auth for blob operations
-   - `Storage File Data SMB Share Contributor` role enables Entra ID auth for file operations
-   - Role assignments may take 5-10 minutes to propagate
+- Access Keys (full control)
+- SAS tokens (delegated permissions)
+- **NO Azure AD support** with AzCopy
 
-6. **AzCopy Login**:
-   - Run `azcopy login` to authenticate with Microsoft Entra ID
-   - Tokens are cached for subsequent operations
-   - Use `azcopy logout` to clear cached credentials
+### 2. Why Azure AD Doesn't Work for File Storage
+
+- AzCopy's Azure AD implementation is optimized for **Blob Storage and ADLS Gen2**
+- Azure Files uses **SMB protocol** for primary access, which has different authentication flows
+- Azure Files does support Azure AD for **SMB-based access** (not AzCopy)
+- AzCopy primarily uses REST APIs, where File Storage has limited Azure AD support
+
+### 3. Best Practices for Production
+
+**For Blob Storage**:
+
+- ✅ **Use Azure AD** for user-driven operations (azcopy login)
+- ✅ **Use SAS tokens** for application access with limited scope
+- ⚠️ **Avoid access keys** in production (use only for testing/admin)
+
+**For File Storage**:
+
+- ✅ **Use SAS tokens** for AzCopy operations
+- ✅ **Use Azure AD** for SMB mount access (not AzCopy)
+- ⚠️ **Avoid access keys** in production scripts
+
+### 4. SAS Token Scope
+
+When the scenario states "commands target only the file share or the account," this hints at:
+
+- **File share level**: Use SAS tokens scoped to the specific share
+- **Account level**: Use account keys for full access
+
+SAS tokens can be scoped to:
+
+- Container/share level (recommended)
+- Account level (broader access)
+- Specific operations (read, write, list, delete)
+
+### 5. Security Considerations
+
+**Access Keys**:
+
+- Grant full control to the entire storage account
+- Should be rotated regularly
+- Use Azure Key Vault for storage in production
+
+**SAS Tokens**:
+
+- Can be scoped to specific resources and operations
+- Can have expiration times
+- Can be revoked (stored access policy)
+
+**Azure AD**:
+
+- Most secure option (when supported)
+- Integrates with Azure RBAC
+- Supports conditional access policies
+
+## Common Errors and Solutions
+
+### Error: "Failed to perform storage operation using Azure AD"
+
+**Cause**: Attempting to use Azure AD authentication with File Storage
+
+**Solution**: Use SAS token or access key instead
+
+```powershell
+# Wrong - Azure AD with File Storage
+azcopy login
+azcopy copy "https://source.file.core.windows.net/share/file.txt" "dest"
+
+# Correct - SAS token with File Storage
+azcopy copy "https://source.file.core.windows.net/share/file.txt?<sas>" "dest"
+```
+
+### Error: "Authentication failed"
+
+**Cause**: Missing or incorrect authentication method
+
+**Solution**: Verify authentication method is set correctly
+
+```powershell
+# For access keys, ensure environment variable is set
+$env:AZCOPY_ACCOUNT_KEY = "<key>"
+
+# For SAS, ensure token is appended to URL (with ? for first parameter)
+```
+
+### Error: "This request is not authorized to perform this operation"
+
+**Cause**: SAS token missing required permissions or has expired
+
+**Solution**: Generate new SAS with appropriate permissions (read, write, list)
 
 ## Related AZ-104 Exam Objectives
 
-This lab addresses the following AZ-104 (Azure Administrator) exam objectives:
+This lab covers the following AZ-104 exam objectives:
 
-**Implement and manage storage (15-20%)**:
+### Implement and manage storage (15-20%)
 
-- Configure access to Azure Storage:
-  - Configure authentication methods (storage account access keys, SAS, Microsoft Entra ID)
-  - Configure Azure Storage with Azure AD authentication
-  - Implement role-based access control (RBAC) for storage
+- **Configure access to storage**
+  - Configure Azure Storage firewalls and virtual networks
+  - Manage access keys and SAS tokens
+  - Configure Azure AD authentication for storage accounts
+  
+- **Manage data in Azure Storage**
+  - Use AzCopy to transfer data
+  - Configure object replication
+  - Import and export data using Azure Import/Export service
 
-- Manage data in Azure Storage accounts:
-  - Use AzCopy to move data
-  - Configure Azure Storage authentication
+### Manage identities and governance in Azure (20-25%)
 
-**Manage identities and governance in Azure (15-20%)**:
-
-- Manage Azure role-based access control (RBAC):
-  - Assign built-in Azure RBAC roles
-  - Create custom RBAC roles
+- **Manage Azure Active Directory (AD) objects**
+  - Configure Azure AD authentication for Azure resources
+  - Assign RBAC roles at different scopes
 
 ## Additional Resources
 
-- [Get started with AzCopy](https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-v10)
-- [Authorize access to blobs with AzCopy and Microsoft Entra ID](https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-authorize-azure-active-directory)
-- [Authorize access to Azure files with AzCopy](https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-files)
-- [Azure Storage security overview](https://learn.microsoft.com/en-us/azure/storage/common/storage-security-guide)
-- [Use the Azure CLI to assign an Azure role for access to blob and queue data](https://learn.microsoft.com/en-us/azure/storage/blobs/assign-azure-role-data-access)
+### Microsoft Learn Modules
+
+- [Copy and move blobs with AzCopy](https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-blobs)
+- [Transfer data with AzCopy and file storage](https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-files)
 - [Authorize access to data in Azure Storage](https://learn.microsoft.com/en-us/azure/storage/common/authorize-data-access)
+- [Grant limited access with SAS](https://learn.microsoft.com/en-us/azure/storage/common/storage-sas-overview)
+
+### Azure Documentation
+
+- [Get started with AzCopy](https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-v10)
+- [Authorize access to blobs with Azure AD](https://learn.microsoft.com/en-us/azure/storage/blobs/authorize-access-azure-active-directory)
+- [Azure Files authentication overview](https://learn.microsoft.com/en-us/azure/storage/files/storage-files-active-directory-overview)
+- [Storage account access keys](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage)
+
+### Related Labs
+
+- [lab-storage-explorer-permissions](../lab-storage-explorer-permissions/README.md) - Understanding RBAC for Storage Explorer
+- [lab-object-replication](../lab-object-replication/README.md) - Blob replication with change feed
+
+---
+
+**Author**: Greg Tate  
+**Context**: AZ-104 Lab - Storage authentication methods with AzCopy  
+**Date**: February 7, 2026

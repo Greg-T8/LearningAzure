@@ -442,6 +442,8 @@ Confirm these commands succeed before considering the task complete.
 
 Create a comprehensive README with this structure:
 
+**CRITICAL**: Do NOT include deployment instructions (e.g., "terraform init", ".\bicep.ps1 apply") in the README. Deployment steps are standardized across all labs and documented in GOVERNANCE.md. Users familiar with the lab structure already know how to deploy.
+
 ```markdown
 # Lab: [Lab Title]
 
@@ -490,6 +492,10 @@ graph TD
 1. [Objective 1]
 2. [Objective 2]
 3. [Objective 3]
+
+## Prerequisites
+
+[List any prerequisites beyond standard lab setup, such as specific tools, CLI extensions, or prior knowledge required]
 
 ## Testing the Solution
 
