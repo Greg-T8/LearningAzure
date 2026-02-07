@@ -503,3 +503,91 @@ That statement clearly aligns with **Transparency**. Transparency requires that 
 * [https://learn.microsoft.com/en-us/azure/machine-learning/concept-responsible-ai?view=azureml-api-2#privacy-and-security](https://learn.microsoft.com/en-us/azure/machine-learning/concept-responsible-ai?view=azureml-api-2#privacy-and-security)
 
 </details>
+
+---
+
+<img src='.img/2026-02-07-06-41-13.png' width=700>
+
+<details>
+<summary>Click to expand explanation</summary>
+
+**Why your selected answer is incorrect**
+
+You selected **The model ID** and **The authentication key**.
+
+The **authentication key** is required and is correct.
+The **model ID** is not required once the model is deployed as a web service. After deployment, clients do not interact with the model artifact directly; they interact with the endpoint that hosts it. The model ID is used internally by Azure Machine Learning for model management, versioning, and deployment—not for runtime inferencing calls.
+
+**Why the correct answers are correct**
+
+The correct answers are **The REST endpoint** and **The authentication key**.
+
+* **The REST endpoint** is the HTTP URL exposed when a model is deployed to an online endpoint. Clients send inference requests to this URL using standard REST calls.
+* **The authentication key** secures the endpoint. Each request must include this key to authorize access to the deployed service.
+
+Together, these two details are sufficient to submit input data and receive predictions from the deployed model.
+
+**Why the other options are incorrect**
+
+* **The scoring endpoint**: This is a terminology trap. While “scoring endpoint” is sometimes used informally, in Azure Machine Learning exam context the deployed service is accessed via a **REST endpoint**. The exam expects the REST endpoint terminology.
+* **The data preprocessing script**: Preprocessing logic is part of model training or deployment configuration. It is not required by clients consuming the web service.
+* **The model ID**: Identifies the model within Azure Machine Learning but plays no role in calling a deployed endpoint.
+
+**Key takeaway**
+
+For real-time inferencing in Azure Machine Learning, clients only need:
+
+* The **REST endpoint** (where to send requests)
+* The **authentication key** (to authorize requests)
+
+Everything else is handled within the deployed service.
+
+**References**
+
+* [https://learn.microsoft.com/en-us/azure/machine-learning/concept-automated-ml?view=azureml-api-2](https://learn.microsoft.com/en-us/azure/machine-learning/concept-automated-ml?view=azureml-api-2)
+* [https://learn.microsoft.com/en-us/azure/machine-learning/how-to-deploy-with-rest?view=azureml-api-2](https://learn.microsoft.com/en-us/azure/machine-learning/how-to-deploy-with-rest?view=azureml-api-2)
+* [https://learn.microsoft.com/en-us/azure/ai-services/language-service/conversational-language-understanding/how-to/train-model?tabs=language-studio](https://learn.microsoft.com/en-us/azure/ai-services/language-service/conversational-language-understanding/how-to/train-model?tabs=language-studio)
+
+</details>
+
+---
+
+<img src='.img/2026-02-07-06-48-54.png' width=700>
+
+<details>
+<summary>Click to expand explanation</summary>
+
+**Why the selected answer is wrong**
+
+**Utilize Azure AI Vision Image Analysis** is incorrect because Image Analysis is a **prebuilt, general-purpose service**. While it can identify objects and describe scenes, it is not designed to reliably detect **custom product types** or return **precise bounding boxes for each product on shelves**. For retail shelf analysis, you need consistent, fine-grained localization of many similar objects, which Image Analysis does not guarantee.
+
+**Why the correct answer is correct**
+
+**Create a project in Azure AI Custom Vision using object detection as a project type** is correct because **object detection is explicitly designed to identify multiple objects in an image and return their exact locations using bounding boxes**. This directly matches the requirement to detect **where products are located on shelves**.
+
+Custom Vision Object Detection allows you to:
+
+* Train a model on **your specific products**
+* Detect **multiple instances** of products in a single image
+* Retrieve **precise coordinates** (bounding boxes) for each product
+
+This makes it the appropriate choice for retail scenarios such as shelf auditing, planogram compliance, and inventory visibility.
+
+**Why the other options are incorrect**
+
+**Launch a project in Azure AI Custom Vision using classification as project types** is incorrect because image classification only answers **“what is in the image”**, not **“where is it”**. Classification does not provide bounding boxes or object locations.
+
+**Implement Azure AI Vision Optical Character Recognition (OCR)** is incorrect because OCR is designed to **extract text from images**, not to identify or locate physical objects like products on shelves.
+
+**Key takeaway**
+
+When a question involves **finding the location of objects within an image**, the exam is testing knowledge of **object detection**, not image analysis, classification, or OCR.
+
+**References**
+
+* [https://learn.microsoft.com/en-us/azure/ai-services/custom-vision-service/get-started-build-detector](https://learn.microsoft.com/en-us/azure/ai-services/custom-vision-service/get-started-build-detector)
+* [https://learn.microsoft.com/en-us/azure/ai-services/custom-vision-service/](https://learn.microsoft.com/en-us/azure/ai-services/custom-vision-service/)
+
+</details>
+
+---
