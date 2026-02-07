@@ -468,3 +468,38 @@ On Microsoft exams, remember this rule of thumb:
 </details>
 
 ---
+
+<img src='.img/2026-02-07-06-35-06.png' width=700>
+
+<details>
+<summary>Click to expand explanation</summary>
+
+**Why the selected answer is incorrect**
+
+The item **“Every transaction process must be logged so that verified authorities can determine the reasoning behind any transaction”** was matched to **Reliability and Safety**, which is incorrect.
+Reliability and Safety focuses on **consistent operation, robustness, fault tolerance, and preventing harm** (for example, system uptime, handling failures safely, or avoiding unsafe behavior). Logging decisions for later inspection does not address system stability or safety mechanisms.
+
+**Why the correct answer is Transparency**
+
+That statement clearly aligns with **Transparency**. Transparency requires that AI systems provide **traceability and explainability**, so that humans can understand how and why a decision was made. Logging transactions and decision reasoning is a textbook transparency requirement, enabling audits and accountability.
+
+**Why the other matches are correct**
+
+* **Fairness** – “The algorithm should not favor customers from any specific region or income group”
+  This directly addresses bias and equal treatment, which is the core of the Fairness principle.
+
+* **Privacy and Security** – “Bank details should only be accessible to verified authorities”
+  This focuses on protecting sensitive data and restricting access to authorized parties, which is exactly what Privacy and Security covers.
+
+**Key takeaway**
+
+* **Transparency** = explainability, traceability, decision logging
+* **Reliability and Safety** = dependable operation, resilience, and preventing harm
+  Confusing auditability with system robustness is a common exam trap.
+
+**References**
+
+* [https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/innovate/best-practices/trusted-ai](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/innovate/best-practices/trusted-ai)
+* [https://learn.microsoft.com/en-us/azure/machine-learning/concept-responsible-ai?view=azureml-api-2#privacy-and-security](https://learn.microsoft.com/en-us/azure/machine-learning/concept-responsible-ai?view=azureml-api-2#privacy-and-security)
+
+</details>
