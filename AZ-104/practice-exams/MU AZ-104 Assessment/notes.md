@@ -336,6 +336,8 @@ The solution is either:
 
 </details>
 
+Hands-on Lab: [lab-storage-explorer-permissions](AZ-104\hands-on-labs\storage\lab-storage-explorer-permissions\README.md)
+
 ---
 
 <img src='.img/2026-01-30-05-58-51.png' width=700>
