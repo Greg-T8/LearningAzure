@@ -8,7 +8,7 @@
 
 ## Overview
 
-Notes and insights from the MeasureUp practice assessment for AZ-104. I took this assessment on Friday, January 30th, after reviewing the Microsoft Learn content and the John Savill video course, but prior to completing the hands-on labs and practice exams.
+Notes and insights from the MeasureUp practice assessment for AZ-104. I took this assessment on Friday, January 30th, after reviewing the Microsoft Learn content and the John Savill video course.
 
 ## Assessment Results
 
