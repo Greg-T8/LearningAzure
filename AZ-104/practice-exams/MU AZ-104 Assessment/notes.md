@@ -6,6 +6,13 @@
   * [Configure Microsoft Entra SSPR For Specific Users](#configure-microsoft-entra-sspr-for-specific-users)
   * [Configure Azure Cost Center Tags and Cost Analysis](#configure-azure-cost-center-tags-and-cost-analysis)
   * [Diagnose Storage Explorer Permission Errors](#diagnose-storage-explorer-permission-errors)
+  * [Configure AzCopy Authentication for Blob and File Storage](#configure-azcopy-authentication-for-blob-and-file-storage)
+  * [Configure Object Replication Between Storage Accounts](#configure-object-replication-between-storage-accounts)
+  * [Configure Lifecycle Management Policy for Azure Storage](#configure-lifecycle-management-policy-for-azure-storage)
+  * [Identify Blob Write Operations That Create New Versions](#identify-blob-write-operations-that-create-new-versions)
+  * [Configure Azure App Service Plan for Website Hosting](#configure-azure-app-service-plan-for-website-hosting)
+  * [Prepare Azure App Service for Web App Republication](#prepare-azure-app-service-for-web-app-republication)
+  * [Configure Standard Load Balancer Outbound Traffic and IP Allocation](#configure-standard-load-balancer-outbound-traffic-and-ip-allocation)
 * [Correctly Answered but Unsure Questions](#correctly-answered-but-unsure-questions)
 * [Correctly Answered Questions](#correctly-answered-questions)
 
@@ -357,9 +364,25 @@ The solution is either:
 </details>
 
 ---
----
+
+### Configure AzCopy Authentication for Blob and File Storage
+
+You create a new storage account named DevStore for Azure Blob Storage and Azure File Storage. You plan to use AzCopy to copy data from blob storage and file storage in other storage accounts to DevStore. You have access to the storage account access keys for the source storage accounts and for DevStore. You also have valid Microsoft Entra user accounts and shared access signatures (SAS) with access to the source data.
+
+You need to identify the authorization methods you can use to copy the data to DevStore.
+
+Which authorization methods can you use to copy each storage type? To answer, select the appropriate options from the drop-down menus.
+
+Blob storage: $PLACEHOLDER$
+
+File storage: $PLACEHOLDER$
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
 
 <img src='.img/2026-01-30-05-58-51.png' width=700>
+
+</details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
@@ -457,7 +480,21 @@ azcopy copy "source" "https://devstore.file.core.windows.net/share"
 
 ---
 
+### Configure Object Replication Between Storage Accounts
+
+You plan to configure object replication between storage accounts in two different regions. You need to ensure that Azure Storage features are configured to support object storage replication. You want to minimize the configuration changes that you make.
+
+How should you configure the Azure Storage features? To answer, select the configuration settings from the drop-down menus.
+
+Change feed: Source account only  
+Blob versioning: Both source and destination accounts  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
 <img src='.img/2026-01-30-05-31-43.png' width=700>
+
+</details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
@@ -580,7 +617,30 @@ You had the logic completely reversed - change feed on the wrong end, and versio
 
 ---
 
+### Configure Lifecycle Management Policy for Azure Storage
+
+Your company has an Azure Subscription with several resources deployed. The subscription is managed by a Cloud Service Provider. You plan to migrate archive data into Azure Blob Storage and you have used Azure Storage Explorer to complete the initial bulk upload.
+
+To complete the task, you need to create a lifecycle management policy using PowerShell to transfer data that has not been modified in the last 30 days from the existing hot storage tier into the cool storage tier.
+
+Which four cmdlets should you run in sequence to complete this goal? To answer, move the appropriate cmdlets to the answer area and arrange them in order.
+
+Available cmdlets:
+
+* Add-AzStorageAccountManagementPolicyAction  
+* New-AzStorageAccountManagementPolicyFilter  
+* New-AzStorageBlobInventoryPolicyRule  
+* New-AzStorageAccountManagementPolicyRule  
+* New-AzStorageBlobInventoryPolicyFilter  
+* Set-AzStorageAccountManagementPolicy  
+* Set-AzStorageBlobInventoryPolicy  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
 <img src='.img/2026-01-30-05-50-54.png' width=700>
+
+</details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
@@ -714,7 +774,28 @@ Set-AzStorageBlobInventoryPolicy                # \u2717 Wrong!
 
 ---
 
+### Identify Blob Write Operations That Create New Versions
+
+Your organization is using Azure Blobs for storing data. You enable blob versioning for a storage account.
+
+You need to determine which write operations create a new version.
+
+Which four write operations create a new version? Each correct answer presents a complete solution.
+
+A. Put Blob  
+B. Append Block  
+C. Put Block List  
+D. Copy Blob  
+E. Set Blob Metadata  
+F. Put Blob From URL  
+G. Put Page  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
 <img src='.img/2026-01-30-06-01-29.png' width=700>
+
+</details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
@@ -752,7 +833,30 @@ The four versioning operations are **Put Blob**, **Put Block List**, **Copy Blob
 
 ---
 
+### Configure Azure App Service Plan for Website Hosting
+
+You have to provide a website hosting environment that meets the following scalability and security requirements:
+
+* At peak loads, the web application should be able to scale up to 10 host instances.
+* The web application storage requirements are minimal and will not exceed 5 GB.
+* The web application will perform complex calculations and will require enhanced compute capabilities.
+* The virtual machines where the web applications are hosted should be dedicated to your company only.
+
+You need to propose an Azure App Service to host the application. The solution must ensure minimal costs.
+
+Which Azure App Service plan should you use?
+
+A. Premium V3  
+B. Isolated  
+C. Standard  
+D. Shared  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
 <img src='.img/2026-01-30-05-38-46.png' width=700>
+
+</details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
@@ -829,7 +933,28 @@ On Azure exams, when you see:
 
 ---
 
+### Prepare Azure App Service for Web App Republication
+
+You are developing a new web app. The source code is located in an Azure DevOps Git repository. Before you move the web app into production, its functionality must be reviewed by your test users.
+
+You need to prepare the target environment to be ready to republish the web app.
+
+Which four commands should you run in sequence? To answer, move the appropriate commands from the list of possible commands to the answer area and arrange them in the correct order.
+
+Available options:
+
+* Publish-AzWebApp  
+* New-AzAppServicePlan  
+* New-AzResourceGroup  
+* New-AzWebAppSlot  
+* Start-AzWebAppSlot  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
 <img src='.img/2026-01-30-06-12-43.png' width=700>
+
+</details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
@@ -847,8 +972,6 @@ Specific issues with your sequence:
 * You created infrastructure only; no deployment occurred.
 
 This is a common exam trap: confusing *environment preparation* with *application deployment*.
-
----
 
 **Why the correct answer is right**
 
@@ -872,14 +995,10 @@ This sequence ensures:
 * The web app actually contains code to test.
 * The environment is truly “ready to republish,” per the wording of the question.
 
----
-
 **Key takeaway**
 
 On Azure exams, **“prepare the environment to republish” always includes deploying code**, not just creating resources.
 If a deployment-related command is available (like `Publish-AzWebApp`) and the scenario involves testers or validation, it is almost always required.
-
----
 
 **References**
 
@@ -891,8 +1010,31 @@ If a deployment-related command is available (like `Publish-AzWebApp`) and the s
 </details>
 
 ---
+---
+
+### Configure Standard Load Balancer Outbound Traffic and IP Allocation
+
+You deploy three Windows virtual machines (VMs) named VM01, VM02, and VM03 that host the front-end layer of a web application. You configure a Standard Load Balancer named LB01. VM01, VM02, and VM03 are configured as part of the backend pool for LB01. You configure a load balancing rule for Transmission Control Protocol (TCP) traffic only.
+
+You also configure three public static IP addresses named IP01, IP02, and IP03 which are assigned as follows:
+
+* IP01 is assigned to VM01.  
+* IP02 and IP03 are assigned to LB01.  
+
+For each of the following statements, select Yes if the statement is true. Otherwise, select No.
+
+| STATEMENT | YES | NO |
+|-----------|-----|-----|
+| Outbound flow on VM01 will always use IP02. | | |
+| Outbound flow on LB01 uses IP02 and IP03 at the same time. | | |
+| Outbound flow on VM03 will use IP02 or IP03 for User Datagram Protocol (UDP) traffic. | | |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
 
 <img src='.img/2026-01-30-05-53-50.png' width=700>
+
+</details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
