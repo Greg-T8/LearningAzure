@@ -2,7 +2,7 @@
 
 * [Overview](#overview)
 * [Assessment Results](#assessment-results)
-* [Wrong Answers Review](#wrong-answers-review)
+* [Wrong and Unsure Answers Review](#wrong-and-unsure-answers-review)
   * [Configure Microsoft Entra SSPR For Specific Users](#configure-microsoft-entra-sspr-for-specific-users)
   * [Configure Azure Cost Center Tags and Cost Analysis](#configure-azure-cost-center-tags-and-cost-analysis)
   * [Diagnose Storage Explorer Permission Errors](#diagnose-storage-explorer-permission-errors)
@@ -21,6 +21,8 @@
   * [Resolve Azure App Service Pricing Tier for Runtime Requirements](#resolve-azure-app-service-pricing-tier-for-runtime-requirements)
   * [Resolve Azure App Service Pricing Tier for Runtime Requirements](#resolve-azure-app-service-pricing-tier-for-runtime-requirements-1)
   * [Diagnose Network Watcher Tool for Web Server Packet Flow](#diagnose-network-watcher-tool-for-web-server-packet-flow)
+  * [Recover Azure VM from Deleted Backup](#recover-azure-vm-from-deleted-backup)
+  * [Resolve Azure App Service Pricing Tier for Runtime Requirements](#resolve-azure-app-service-pricing-tier-for-runtime-requirements-2)
 
 ## Overview
 
@@ -28,10 +30,54 @@ Notes and insights from the MeasureUp practice assessment for AZ-104. I took thi
 
 ## Assessment Results
 
-<img src='.img/2026-01-30-06-23-36.png' width=700>
+**Overall Results**  
+
+| Metric | Value |
+|--------|-------|
+| **Score** | 44.00% |
+| **Status** | Failed |
+| **Duration** | 01:01:28 |
+| **Total Questions** | 30 |
+| **Correct Answers** | 13 (43%) |
+| **Incorrect Answers** | 17 (57%) |
+| **Unanswered** | 0 (0%) |
+
+**Results by Domain**  
+
+| Domain | Score |
+|--------|-------|
+| Manage Azure identities and governance | 33% |
+| Implement and manage storage | 33% |
+| Deploy and manage Azure compute resources | 56% |
+| Implement and manage virtual networking | 67% |
+| Monitor and maintain Azure resources | 33% |
+
+**Results by Objective**
+
+| Domain | Objective | Score |
+|--------|-----------|-------|
+| **Manage Azure identities and governance** | | **33%** |
+| | Manage Microsoft Entra users and groups | 0% |
+| | Manage access to Azure resources | 50% |
+| | Manage Azure subscriptions and governance | 33% |
+| **Implement and manage storage** | | **33%** |
+| | Configure access to storage | 100% |
+| | Configure and manage storage accounts | 0% |
+| | Configure Azure Files and Azure Blob Storage | 33% |
+| **Deploy and manage Azure compute resources** | | **56%** |
+| | Create and configure virtual machines | 100% |
+| | Create and configure Azure App Service | 67% |
+| **Implement and manage virtual networking** | | **67%** |
+| | Configure secure access to virtual networks | 100% |
+| | Configure name resolution and load balancing | 60% |
+| **Monitor and maintain Azure resources** | | **33%** |
+| | Monitor resources in Azure | 25% |
+| | Implement backup and recovery | 50% |
 
 <details>
 <summary>Click to expand details</summary>
+
+<img src='.img/2026-01-30-06-23-36.png' width=700>
 
 <img src='.img/2026-01-30-06-25-12.png' width=700>
 
@@ -39,7 +85,7 @@ Notes and insights from the MeasureUp practice assessment for AZ-104. I took thi
 
 ---
 
-## Wrong Answers Review
+## Wrong and Unsure Answers Review
 
 ### Configure Microsoft Entra SSPR For Specific Users
 
@@ -1540,7 +1586,6 @@ ACU/vCPU is a **relative CPU performance indicator**. Higher numbers mean **fast
 </details>
 
 ---
----
 
 ### Diagnose Network Watcher Tool for Web Server Packet Flow
 
@@ -1617,7 +1662,25 @@ It does **not** answer: *“Can the VM actually accept this connection?”*
 
 ---
 
+### Recover Azure VM from Deleted Backup
+
+An Infrastructure-as-a-Service (IaaS) virtual machine (VM) named VM10 is backed up to an Azure Recovery Services vault. VM10 and all of its restore points are deleted by mistake.
+
+You need to recover VM10.
+
+How many days does VM10's data remain available for recovery?
+
+A. 365 days  
+B. 30 days  
+C. 14 days  
+D. 90 days  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
 <img src='.img/2026-01-30-05-24-56.png' width=700>
+
+</details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
@@ -1638,7 +1701,23 @@ For Azure IaaS VMs protected by a Recovery Services vault, **soft delete provide
 
 ---
 
+### Resolve Azure App Service Pricing Tier for Runtime Requirements
+
+You deploy an Azure web app named MyApp. MyApp runs in a Free pricing tier service plan named MyPlan. During testing, you discover that MyApp stops after 60 minutes and that it cannot be restarted until the next day.
+
+You need to ensure that MyApp can run eight hours each day during the testing period. You want to keep the additional costs incurred to a minimum.
+
+Does changing the pricing tier for MyPlan to Basic B1 meet the goal?
+
+A. Yes  
+B. No  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
 <img src='.img/2026-01-30-06-17-46.png' width=700>
+
+</details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
