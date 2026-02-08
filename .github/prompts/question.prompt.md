@@ -18,6 +18,7 @@ You are given a screenshot image that contains the context of an exam-style ques
   2. Immediately below the title: the **exam question transcribed as text** from the screenshot
      - Include the question prompt and any visible answer choices
      - **Format answer choices on separate lines** (e.g., A. ... on one line, B. ... on the next line)
+     - **Add two spaces at the end of each answer choice line** to ensure proper markdown line breaks
      - Preserve key wording (service names, errors, settings) as seen
   3. Then wrap the image tag in a `<details>` block:
      - `<details>`
