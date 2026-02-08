@@ -169,3 +169,48 @@ If audio is being converted into text without changing languages, the workload i
 </details>
 
 ---
+
+### Computer Vision Tagging for Automatic Image Classification
+
+Category: AI-900 – Describe Features of Computer Vision Workloads on Azure
+
+You're working on a project that involves automatically tagging images with relevant keywords based on their content. You want to identify objects, scenes, and activities present in the images to create accurate tags. What should you use to analyze the images?
+
+A. Image Classification model  
+B. Optical Character Recognition (OCR) tool  
+C. Image Segmentation model  
+D. Spatial Analysis  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-02-08-06-32-42.png' width=700>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Why the selected answer is wrong (Spatial Analysis)**
+Spatial Analysis is about understanding how people move through a physical space over time (for example, counting people entering/exiting a zone, dwell time, or triggering events based on movement patterns). It is not designed to generate descriptive content tags like “beach,” “dog,” or “playing soccer” from an image.
+
+**Why the correct answer is correct (Image classification model)**
+Image classification is specifically used to assign one or more labels to an image based on what’s in it. For “automatically tagging images with relevant keywords” (objects, scenes, activities), classification is the exam-aligned fit because it outputs categories/tags that you can use directly as keywords.
+
+**Why the other options are incorrect or less appropriate**
+
+* **Optical Character Recognition (OCR) tool**: Extracts text that appears in an image (signs, documents). It doesn’t identify visual objects/scenes/activities unless those are literally written in the image.
+* **Image Segmentation model**: Splits an image into pixel-level regions (what pixels belong to which object). That’s useful when you need precise boundaries or per-pixel labeling, not when your goal is primarily “generate tags/keywords for the whole image.”
+
+**Key takeaway**
+For keyword tagging based on visual content, choose **image classification**. Use **segmentation** only when you need pixel-level regions, **OCR** for extracting text, and **spatial analysis** for movement/occupancy patterns over time.
+
+**References**
+
+* [https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview-image-analysis?tabs=4-0](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview-image-analysis?tabs=4-0)
+* [https://learn.microsoft.com/en-us/azure/cognitive-services/computer-vision/overview-identity](https://learn.microsoft.com/en-us/azure/cognitive-services/computer-vision/overview-identity)
+* [https://learn.microsoft.com/en-us/training/modules/analyze-images-computer-vision/](https://learn.microsoft.com/en-us/training/modules/analyze-images-computer-vision/)
+
+</details>
+
+---
