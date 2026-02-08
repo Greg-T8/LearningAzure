@@ -33,7 +33,7 @@ For each of the following items, choose Yes if the statement is true or choose N
 
 </details>
 
-<details open>
+<details>
 <summary>💡 Click to expand explanation</summary>
 
 **Why the selected answer is wrong**
@@ -70,6 +70,58 @@ Customer segmentation and topic grouping are clustering; grade prediction is cla
 * [https://learn.microsoft.com/en-us/azure/architecture/data-guide/technology-choices/natural-language-processing](https://learn.microsoft.com/en-us/azure/architecture/data-guide/technology-choices/natural-language-processing)
 * [https://learn.microsoft.com/en-us/azure/ai-services/language-service/overview](https://learn.microsoft.com/en-us/azure/ai-services/language-service/overview)
 * [https://learn.microsoft.com/en-us/azure/machine-learning/component-reference/k-means-clustering?view=azureml-api-2#understand-k-means-clustering](https://learn.microsoft.com/en-us/azure/machine-learning/component-reference/k-means-clustering?view=azureml-api-2#understand-k-means-clustering)
+
+</details>
+
+---
+
+### Azure Machine Learning Designer Capabilities
+
+Category: AI-900 – Describe Fundamental Principles of Machine Learning on Azure
+
+For each of the following items, choose Yes if the statement is true or choose No if the statement is false. Take note that each correct item is worth one point.
+
+| Questions | Yes | No |
+|-----------|-----|-----|
+| Azure Machine Learning designer enables you to create and customize web-based user interfaces for your machine learning models. | ☑ | ☐ |
+| Azure Machine Learning designer enables you to execute custom Python or R code | ☑ | ☐ |
+| Azure Machine Learning designer includes pre-built modules for training deep neural networks. | ☑ | ☐ |
+| Azure Machine Learning designer supports integration with external cloud storage providers. | ☑ | ☐ |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-02-08-06-10-04.png' width=700>
+
+</details>
+
+<details open>
+<summary>💡 Click to expand explanation</summary>
+
+**Why the selected answer is incorrect**
+
+You marked **Yes** for the statement *“Azure Machine Learning designer enables you to create and customize web-based user interfaces for your machine learning models.”*
+This is incorrect. Azure Machine Learning designer is **not** a UI-building tool. It does not create or customize web-based user interfaces for end users. Its purpose is to visually design, train, and evaluate machine learning pipelines, not to build application front ends or dashboards.
+
+**Why the correct answer is No**
+
+Azure Machine Learning designer is a **drag-and-drop pipeline authoring tool** inside Azure Machine Learning. It focuses on data preparation, model training, evaluation, and deployment workflows. Web-based user interfaces for models are typically created using services like Azure App Service, Azure Static Web Apps, or frameworks such as Flask, FastAPI, or Streamlit—outside of the designer.
+
+**Why the other answers are correct**
+
+* **Execute custom Python or R code** — Correct. Designer supports custom code execution through components that run Python or R scripts as part of a pipeline.
+* **Includes pre-built modules for training deep neural networks** — Correct. Designer provides built-in components for deep learning scenarios, including neural network training modules.
+* **Supports integration with external cloud storage providers** — Correct. Designer can work with data stored in cloud storage services that are connected to the Azure Machine Learning workspace.
+
+**Key takeaway**
+
+Azure Machine Learning designer is for **building machine learning pipelines**, not for **building user interfaces**. UI creation happens after deployment and uses separate Azure services.
+
+**References**
+
+* [https://learn.microsoft.com/en-us/azure/machine-learning/concept-designer?view=azureml-api-2](https://learn.microsoft.com/en-us/azure/machine-learning/concept-designer?view=azureml-api-2)
+* [https://learn.microsoft.com/en-us/azure/machine-learning/concept-automated-ml?view=azureml-api-2](https://learn.microsoft.com/en-us/azure/machine-learning/concept-automated-ml?view=azureml-api-2)
+* [https://learn.microsoft.com/en-us/azure/machine-learning/how-to-select-algorithms?view=azureml-api-1](https://learn.microsoft.com/en-us/azure/machine-learning/how-to-select-algorithms?view=azureml-api-1)
 
 </details>
 
