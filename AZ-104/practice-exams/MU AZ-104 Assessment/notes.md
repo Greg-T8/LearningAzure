@@ -3,6 +3,7 @@
 * [Overview](#overview)
 * [Assessment Results](#assessment-results)
 * [Wrong Answers Review](#wrong-answers-review)
+  * [Configure Microsoft Entra SSPR For Specific Users](#configure-microsoft-entra-sspr-for-specific-users)
 * [Correctly Answered but Unsure Questions](#correctly-answered-but-unsure-questions)
 * [Correctly Answered Questions](#correctly-answered-questions)
 
@@ -24,6 +25,51 @@ Notes and insights from the MeasureUp practice assessment for AZ-104. I took thi
 ---
 
 ## Wrong Answers Review
+
+### Configure Microsoft Entra SSPR For Specific Users
+
+You are asked to configure Self-Service Password Reset (SSPR) for a subset of users in your organization.
+
+You need to configure SSPR to meet the following requirements:
+
+* You should be able to add and remove users who are allowed to use SSPR to reset their passwords.
+* The users should provide one additional piece of personal information before they are allowed to reset their passwords.
+
+Which four actions should you perform in sequence to meet the goal? To answer, move the appropriate actions from the list of possible actions to the answer area and arrange them in order.
+
+**Available options:**
+
+* Enable SSPR with the All option.
+* Add users to the SSPR list of users.
+* Register an authentication method for SSPR.
+* Create a Microsoft Entra group and add users to the group.
+* Select the Microsoft Entra group for which you want to allow SSPR.
+* Enable SSPR with the Selected option.
+
+<details>
+<summary>Click to expand screenshot</summary>
+
+<img src='.img/2026-01-30-05-33-53.png' width=700>
+
+</details>
+
+<details open>
+<summary>💡 Click to expand explanation</summary>
+
+</details>
+
+<details>
+<summary>🔬 Click to expand hands-on lab</summary>
+
+</details>
+
+---
+
+---
+---
+---
+
+### Configure Microsoft Entra SSPR For Specific Users
 
 <img src='.img/2026-01-30-05-33-53.png' width=700>
 
@@ -431,6 +477,13 @@ azcopy copy "source" "https://devstore.file.core.windows.net/share"
 **Key Takeaway:**
 
 **Microsoft Entra ID authentication is NOT supported for Azure Files with AzCopy**, unlike Blob storage where it works perfectly. For File storage, you must use **SAS tokens or access keys**. Don't assume that authentication methods work the same across all storage types!
+
+</details>
+
+<details>
+<summary>🔬 Click to expand hands-on lab</summary>
+
+**Related Lab:** [lab-azcopy-auth-methods](/AZ-104/hands-on-labs/storage/lab-azcopy-auth-methods/README.md)
 
 </details>
 

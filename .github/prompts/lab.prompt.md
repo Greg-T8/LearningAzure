@@ -1,5 +1,5 @@
 ---
-name: Hands-on Lab
+name: Lab
 description: Creates a hands-on lab from an exam question scenario using Terraform or Bicep, following governance standards
 ---
 
