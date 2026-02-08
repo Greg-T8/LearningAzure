@@ -18,6 +18,7 @@
   * [Configure Azure Monitor Alert Notification Rate Limits](#configure-azure-monitor-alert-notification-rate-limits)
   * [Enable Boot Diagnostics for Azure Virtual Machines](#enable-boot-diagnostics-for-azure-virtual-machines)
   * [Recover Configuration File from Azure VM Backup](#recover-configuration-file-from-azure-vm-backup)
+  * [Resolve Azure App Service Pricing Tier for Runtime Requirements](#resolve-azure-app-service-pricing-tier-for-runtime-requirements)
 
 ## Overview
 
@@ -1339,7 +1340,6 @@ Premium storage accounts and storage account v1 are **not supported**, regardles
 </details>
 
 ---
----
 
 ### Recover Configuration File from Azure VM Backup
 
@@ -1407,7 +1407,23 @@ Azure Recovery Services vault overview
 
 ---
 
+### Resolve Azure App Service Pricing Tier for Runtime Requirements
+
+You deploy an Azure web app named MyApp. MyApps runs in a Free pricing tier service plan named MyPlan. During testing, you discover that MyApp stops after 60 minutes and that it cannot be restarted until the next day.
+
+You need to ensure that MyApp can run eight hours each day during the testing period. You want to keep the additional costs incurred to a minimum.
+
+Does changing the pricing tier for MyPlan to Shared D1 meet the goal?
+
+A. Yes  
+B. No  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
 <img src='.img/2026-01-30-06-17-12.png' width=700>
+
+</details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
@@ -1434,6 +1450,7 @@ To meet “run 8 hours each day,” you need a plan where you **don’t get stop
 
 </details>
 
+---
 ---
 
 <img src='.img/2026-01-30-06-18-07.png' width=700>
