@@ -13,6 +13,8 @@
   * [Configure Azure App Service Plan for Website Hosting](#configure-azure-app-service-plan-for-website-hosting)
   * [Prepare Azure App Service for Web App Republication](#prepare-azure-app-service-for-web-app-republication)
   * [Configure Standard Load Balancer Outbound Traffic and IP Allocation](#configure-standard-load-balancer-outbound-traffic-and-ip-allocation)
+  * [Diagnose Internal Load Balancer Hairpin Traffic Failure](#diagnose-internal-load-balancer-hairpin-traffic-failure)
+  * [Configure Azure Monitor Alert for Database CPU Usage](#configure-azure-monitor-alert-for-database-cpu-usage)
 * [Correctly Answered but Unsure Questions](#correctly-answered-but-unsure-questions)
 * [Correctly Answered Questions](#correctly-answered-questions)
 
@@ -1010,7 +1012,6 @@ If a deployment-related command is available (like `Publish-AzWebApp`) and the s
 </details>
 
 ---
----
 
 ### Configure Standard Load Balancer Outbound Traffic and IP Allocation
 
@@ -1074,7 +1075,29 @@ For each of the following statements, select Yes if the statement is true. Other
 
 ---
 
+### Diagnose Internal Load Balancer Hairpin Traffic Failure
+
+You are an Azure administrator at an independent software vendor. Your company is using an Azure internal load balancer that is configured inside an Azure virtual network (VNet).
+
+Your virtual machines (VMs) comprising the backend pool VM behind the load balancer are listed as healthy and respond to the health probes. However, the backend VMs are not responding to traffic on the configured data port.
+
+You diagnose and find that one of the participant backend VMs is trying to access the internal load balancer frontend, resulting in the failure of data flow.
+
+You need to troubleshoot this issue.
+
+Which two actions should you perform? Each correct answer presents a complete solution.
+
+A. Combine the Azure internal load balancer with a third-party proxy (e.g., Nginx).  
+B. Configure separate backend pool VMs per application.  
+C. Evaluate the network security groups (NSGs) configured on the backend VM, list them, and reconfigure the NSG rules on the backend VMs.  
+D. Use internal Application Gateway with HTTP/HTTPS.  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
 <img src='.img/2026-01-30-05-30-07.png' width=700>
+
+</details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
@@ -1133,31 +1156,58 @@ Azure **Internal Load Balancer does not support backend VMs accessing the ILB fr
 </details>
 
 ---
+---
+
+### Configure Azure Monitor Alert for Database CPU Usage
+
+Your company has a line-of-business (LOB) application that uses Azure SQL Database for storing transactional information. Your company also has System Center Service Manager deployed.
+
+You need to configure an alert when the database reaches 70% of central processing unit (CPU) usage. When this alert rises, you need to notify several users by email and by SMS. You also need to automatically create a ticket in the IT service management (ITSM) system. Your solution should require minimum administrative effort.
+
+Which two actions should you perform? Each correct answer presents part of the solution.
+
+A. Configure System Center Service Manager with Azure Automation.  
+B. Configure one action group with two actions: one for email and SMS notification and one for IT service management (ITSM) ticket creation.  
+C. Configure an IT Service Management Connector (ITSMC).  
+D. Configure two action groups: one for email and SMS notification and one for IT service management (ITSM) ticket creation.  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
 
 <img src='.img/2026-01-30-05-26-15.png' width=700>
+
+</details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
 
-**Why the selected answer is wrong**
+**The correct answers are B and C.**
 
-“Configure two action groups: one for email and SMS notification and one for IT service management (ITSM) ticket creation” adds unnecessary administrative overhead. Azure Monitor alert rules can reference a **single action group** that contains multiple actions. Splitting actions into separate action groups does not provide additional capability here and violates the requirement for *minimum administrative effort*. This is a common exam trap—assuming separation is required when Azure already supports multiple actions per action group.
+**Why B is correct:**
+Azure Monitor action groups are designed to consolidate multiple notification and automation actions into a single reusable unit. One action group can contain email, SMS, voice, webhook, Logic App, Automation Runbook, and ITSM actions together. This design allows you to configure all required notifications and ticket creation in a single action group, which minimizes administrative overhead and is the recommended approach.
 
-**Why the correct answers are right**
+**Why C is correct:**
+ITSM ticket creation in Azure Monitor requires an IT Service Management Connector (ITSMC) to bridge Azure Monitor alerts with system-center or third-party ITSM systems. Without the ITSMC, Azure Monitor cannot create incidents or tickets in Service Manager, regardless of how the action group is configured.
 
-“Configure one action group with two actions: one for email and SMS notification and one for IT service management (ITSM) ticket creation” is correct because Azure Monitor action groups are explicitly designed to fan out multiple notification and automation actions from a single alert. One action group can include email, SMS, voice, webhook, Logic App, and ITSM actions together, making it the simplest and lowest-effort configuration.
+**Why A is incorrect:**
+While Azure Automation can integrate with Azure Monitor, it is not a requirement for basic ITSM alerting. The ITSMC provides direct integration without needing custom automation runbooks.
 
-“Configure an IT Service Management Connector (ITSMC)” is correct because System Center Service Manager integration with Azure Monitor alerts requires the ITSM Connector. The connector enables Azure Monitor to automatically create incidents in the ITSM system when alerts fire. Without the ITSMC, ticket creation is not possible regardless of how the action group is configured.
+**Why D is incorrect:**
+Creating separate action groups for different notification types adds unnecessary complexity and administrative effort. Azure Monitor is designed to support multiple actions within a single action group, making D an inefficient solution.
 
-**Key takeaway**
+**Key takeaway:**
+For Azure Monitor alerts requiring multiple notification methods and ITSM integration, use a **single action group with multiple actions** and configure an **ITSM Connector** for Service Manager integration. This minimizes administrative overhead and follows Azure best practices.
 
-For Azure Monitor alerts, use **one action group with multiple actions** whenever possible, and remember that **ITSM ticket creation requires an ITSM Connector**. The exam consistently favors solutions that minimize configuration objects while using native Azure Monitor capabilities.
+</details>
 
-**References**
+<details>
+<summary>🔬 Click to expand hands-on lab</summary>
 
-* [https://learn.microsoft.com/azure/azure-monitor/alerts/action-groups](https://learn.microsoft.com/azure/azure-monitor/alerts/action-groups)
-* [https://learn.microsoft.com/azure/azure-monitor/alerts/itsmc-overview](https://learn.microsoft.com/azure/azure-monitor/alerts/itsmc-overview)
-* [https://learn.microsoft.com/azure/azure-monitor/alerts/alerts-overview](https://learn.microsoft.com/azure/azure-monitor/alerts/alerts-overview)
+Related resources:
+
+- [Create and manage action groups in Azure Monitor](https://learn.microsoft.com/azure/azure-monitor/alerts/action-groups)
+- [IT Service Management Connector overview](https://learn.microsoft.com/azure/azure-monitor/alerts/itsmc-overview)
+- [Create metric alerts for Azure SQL Database](https://learn.microsoft.com/azure/azure-sql/database/alerts-insights-configure-portal)
 
 </details>
 
