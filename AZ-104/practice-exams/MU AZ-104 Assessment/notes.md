@@ -17,8 +17,7 @@
   * [Configure Azure Monitor Alert for Database CPU Usage](#configure-azure-monitor-alert-for-database-cpu-usage)
   * [Configure Azure Monitor Alert Notification Rate Limits](#configure-azure-monitor-alert-notification-rate-limits)
   * [Enable Boot Diagnostics for Azure Virtual Machines](#enable-boot-diagnostics-for-azure-virtual-machines)
-* [Correctly Answered but Unsure Questions](#correctly-answered-but-unsure-questions)
-* [Correctly Answered Questions](#correctly-answered-questions)
+  * [Recover Configuration File from Azure VM Backup](#recover-configuration-file-from-azure-vm-backup)
 
 ## Overview
 
@@ -1342,7 +1341,29 @@ Premium storage accounts and storage account v1 are **not supported**, regardles
 ---
 ---
 
+### Recover Configuration File from Azure VM Backup
+
+You have two Azure virtual machines (VMs) named VM1 and VM2 running Windows Server 2019. The VMs are backed up by an Azure Recovery Services vault. A configuration file on VM1 was updated, and you need to restore it to a version from six days ago.
+
+You need to perform this action as quickly as possible without affecting other system files.
+
+Which four actions should you perform in sequence? To answer, move the appropriate actions from the list of actions to the answer area and arrange them in the correct order.
+
+**Available options:**
+
+* Start the file recovery process and select the recovery point of six days ago.
+* Download and execute the PowerShell script to mount the recovery volume.
+* Copy the file from the mounted volume to the VM.
+* Unmount the volumes.
+* Restore the disk containing the configuration file.
+* Restore the VM to a previous state.
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
 <img src='.img/2026-01-30-05-41-40.png' width=700>
+
+</details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
@@ -1482,11 +1503,9 @@ The **ACU/vCPU** column indicates the **relative CPU performance available per v
 
 ACU/vCPU is a **relative CPU performance indicator**. Higher numbers mean **faster CPUs per core**, typically reflecting newer App Service hardware generations.
 
----
-
 </details>
 
-## Correctly Answered but Unsure Questions
+---
 
 <img src='.img/2026-01-30-05-24-16.png' width=700>
 
@@ -1593,47 +1612,3 @@ Free/Shared App Service plans can stop apps when usage quotas are exceeded; movi
 </details>
 
 ---
-
-## Correctly Answered Questions
-
-<img src='.img/2026-01-30-05-55-46.png' width=700>
-
----
-
-<img src='.img/2026-01-30-05-57-13.png' width=700>
-
----
-
-<img src='.img/2026-01-30-05-59-35.png' width=700>
-
----
-
-<img src='.img/2026-01-30-06-00-11.png' width=700>
-
----
-
-<img src='.img/2026-01-30-06-03-32.png' width=700>
-
----
-
-<img src='.img/2026-01-30-06-06-46.png' width=700>
-
----
-
-<img src='.img/2026-01-30-06-08-51.png' width=700>
-
----
-
-<img src='.img/2026-01-30-06-10-09.png' width=700>
-
----
-
-<img src='.img/2026-01-30-06-15-31.png' width=700>
-
----
-
-<img src='.img/2026-01-30-06-21-46.png' width=700>
-
----
-
-<img src='.img/2026-01-30-06-23-03.png' width=700>
