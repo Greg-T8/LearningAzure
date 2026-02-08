@@ -20,6 +20,7 @@
   * [Recover Configuration File from Azure VM Backup](#recover-configuration-file-from-azure-vm-backup)
   * [Resolve Azure App Service Pricing Tier for Runtime Requirements](#resolve-azure-app-service-pricing-tier-for-runtime-requirements)
   * [Resolve Azure App Service Pricing Tier for Runtime Requirements](#resolve-azure-app-service-pricing-tier-for-runtime-requirements-1)
+  * [Diagnose Network Watcher Tool for Web Server Packet Flow](#diagnose-network-watcher-tool-for-web-server-packet-flow)
 
 ## Overview
 
@@ -1541,7 +1542,25 @@ ACU/vCPU is a **relative CPU performance indicator**. Higher numbers mean **fast
 ---
 ---
 
+### Diagnose Network Watcher Tool for Web Server Packet Flow
+
+Your company hosts its infrastructure in Azure. The infrastructure consists of virtual machines (VMs), storage (managed disks and Azure file shares) and multiple networks (VNets and subnets). The service desk is seeing an influx of support tickets that have been logged in the last 24 hours regarding intermittent connectivity issues to a web server. After some initial investigation, the support ticket has been escalated to you.
+
+You need to use the relevant Network Watcher diagnostic tool to check if packets are being allowed or denied to the web server.
+
+Which Network Watcher diagnostic tool should you use?
+
+A. IP flow verify  
+B. Next hop  
+C. Effective security rules  
+D. Connection troubleshoot  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
 <img src='.img/2026-01-30-05-24-16.png' width=700>
+
+</details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
