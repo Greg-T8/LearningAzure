@@ -19,6 +19,7 @@
   * [Enable Boot Diagnostics for Azure Virtual Machines](#enable-boot-diagnostics-for-azure-virtual-machines)
   * [Recover Configuration File from Azure VM Backup](#recover-configuration-file-from-azure-vm-backup)
   * [Resolve Azure App Service Pricing Tier for Runtime Requirements](#resolve-azure-app-service-pricing-tier-for-runtime-requirements)
+  * [Resolve Azure App Service Pricing Tier for Runtime Requirements](#resolve-azure-app-service-pricing-tier-for-runtime-requirements-1)
 
 ## Overview
 
@@ -1451,9 +1452,24 @@ To meet “run 8 hours each day,” you need a plan where you **don’t get stop
 </details>
 
 ---
----
+
+### Resolve Azure App Service Pricing Tier for Runtime Requirements
+
+You deploy an Azure web app named MyApp. MyApp runs in a Free pricing tier service plan named MyPlan. During testing, you discover that MyApp stops after 60 minutes and that it cannot be restarted until the next day.
+
+You need to ensure that MyApp can run eight hours each day during the testing period. You want to keep the additional costs incurred to a minimum.
+
+Does changing the pricing tier for MyPlan to Standard S1 meet the goal?
+
+A. Yes  
+B. No  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
 
 <img src='.img/2026-01-30-06-18-07.png' width=700>
+
+</details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
@@ -1522,6 +1538,7 @@ ACU/vCPU is a **relative CPU performance indicator**. Higher numbers mean **fast
 
 </details>
 
+---
 ---
 
 <img src='.img/2026-01-30-05-24-16.png' width=700>
