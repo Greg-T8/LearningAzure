@@ -5,6 +5,7 @@
 * [Wrong Answers Review](#wrong-answers-review)
   * [Configure Microsoft Entra SSPR For Specific Users](#configure-microsoft-entra-sspr-for-specific-users)
   * [Configure Azure Cost Center Tags and Cost Analysis](#configure-azure-cost-center-tags-and-cost-analysis)
+  * [Diagnose Storage Explorer Permission Errors](#diagnose-storage-explorer-permission-errors)
 * [Correctly Answered but Unsure Questions](#correctly-answered-but-unsure-questions)
 * [Correctly Answered Questions](#correctly-answered-questions)
 
@@ -104,10 +105,10 @@ You need to provide cost center information. Your solution should minimize admin
 
 What two actions should you perform? Each correct answer presents part of the solution.
 
-A. Instruct the accounting department to use the Azure Account Center.
-B. Create a tag named CostCenter and assign it to each resource group.
-C. Instruct the accounting department to use the Cost Analysis blade in the subscription panel.
-D. Create a tag named CostCenter and assign it to each resource.
+A. Instruct the accounting department to use the Azure Account Center.  
+B. Create a tag named CostCenter and assign it to each resource group.  
+C. Instruct the accounting department to use the Cost Analysis blade in the subscription panel.  
+D. Create a tag named CostCenter and assign it to each resource.  
 
 <details>
 <summary>📸 Click to expand screenshot</summary>
@@ -171,22 +172,28 @@ For cost center allocation:
 
 </details>
 
+---
+
+### Diagnose Storage Explorer Permission Errors
+
+You have storage accounts in your Azure subscription with blob containers and file shares configured. Some users access these storage accounts using Azure Storage Explorer and are reporting an error when they try to browse the storage account contents.
+
+You need to resolve the issue.
+
+What are two possible reasons why users are getting this error message? Each correct answer presents a complete solution.
+
+A. Your users have the Storage Blob Data Reader role assigned in the storage accounts.  
+B. There is a ReadOnly resource lock configured.  
+C. There is a CanNotDelete resource lock configured.  
+D. Your users have the Read role assigned in the storage accounts.  
+E. Your users have the Storage Blob Data Contributor role assigned in the storage accounts.  
+
 <details>
-<summary>🔬 Click to expand hands-on lab</summary>
-
-</details>
-
----
-
-<img src='.img/2026-01-30-06-20-49.png' width=700>
-
-<details></details>
-
----
-
+<summary>📸 Click to expand screenshot</summary>
 <img src='.img/2026-01-30-05-46-07.png' width=700>
 
-<img src='.img/2026-01-30-05-42-04.png' width=400>
+<img src='.img/2026-02-08-04-07-45.png' width=400>
+</details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
@@ -349,6 +356,7 @@ The solution is either:
 
 </details>
 
+---
 ---
 
 <img src='.img/2026-01-30-05-58-51.png' width=700>
