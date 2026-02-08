@@ -95,7 +95,7 @@ For each of the following items, choose Yes if the statement is true or choose N
 
 </details>
 
-<details open>
+<details>
 <summary>💡 Click to expand explanation</summary>
 
 **Why the selected answer is incorrect**
@@ -122,6 +122,49 @@ Azure Machine Learning designer is for **building machine learning pipelines**, 
 * [https://learn.microsoft.com/en-us/azure/machine-learning/concept-designer?view=azureml-api-2](https://learn.microsoft.com/en-us/azure/machine-learning/concept-designer?view=azureml-api-2)
 * [https://learn.microsoft.com/en-us/azure/machine-learning/concept-automated-ml?view=azureml-api-2](https://learn.microsoft.com/en-us/azure/machine-learning/concept-automated-ml?view=azureml-api-2)
 * [https://learn.microsoft.com/en-us/azure/machine-learning/how-to-select-algorithms?view=azureml-api-1](https://learn.microsoft.com/en-us/azure/machine-learning/how-to-select-algorithms?view=azureml-api-1)
+
+</details>
+
+---
+
+### Speech Recognition in Natural Language Processing
+
+While conducting an online workshop, the spoken content is converted into text subtitles for participants to follow along in near-real-time. The process of transcribing the speech into subtitles in the same language for the audience is an example of _______.
+
+A. Speech Recognition  
+B. Translation  
+C. Sentiment Analysis  
+D. Named Entity Recognition  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-02-08-06-29-45.png' width=700>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Why the selected answer is wrong (Translation)**
+Translation converts content from one language to another. In this scenario, the spoken content is converted into text **in the same language**. No language change occurs, so translation does not apply.
+
+**Why the correct answer is correct (Speech Recognition)**
+Speech recognition (speech-to-text) converts spoken language into written text. Generating near-real-time subtitles from live speech is a direct example of speech recognition. This is the exact capability used for live captioning and transcription scenarios.
+
+**Why the other options are incorrect**
+
+* **Sentiment analysis** focuses on identifying emotional tone or opinion in text, not converting speech to text.
+* **Speech synthesis** converts text into spoken audio, which is the reverse of what the scenario describes.
+
+**Key takeaway**
+If audio is being converted into text without changing languages, the workload is **speech recognition**, not translation or text analytics.
+
+**References**
+
+* [https://learn.microsoft.com/en-us/azure/architecture/data-guide/technology-choices/natural-language-processing](https://learn.microsoft.com/en-us/azure/architecture/data-guide/technology-choices/natural-language-processing)
+* [https://learn.microsoft.com/en-us/azure/ai-services/language-service/overview](https://learn.microsoft.com/en-us/azure/ai-services/language-service/overview)
+* [https://learn.microsoft.com/en-us/azure/ai-services/language-service/key-phrase-extraction/overview](https://learn.microsoft.com/en-us/azure/ai-services/language-service/key-phrase-extraction/overview)
 
 </details>
 
