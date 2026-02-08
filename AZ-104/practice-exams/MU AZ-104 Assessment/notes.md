@@ -15,6 +15,9 @@
   * [Deploy and manage Azure compute resources](#deploy-and-manage-azure-compute-resources)
     * [Configure Azure App Service Plan for Website Hosting](#configure-azure-app-service-plan-for-website-hosting)
     * [Prepare Azure App Service for Web App Republication](#prepare-azure-app-service-for-web-app-republication)
+    * [Resolve Azure App Service Pricing Tier for Runtime Requirements](#resolve-azure-app-service-pricing-tier-for-runtime-requirements)
+    * [Resolve Azure App Service Pricing Tier for Runtime Requirements](#resolve-azure-app-service-pricing-tier-for-runtime-requirements-1)
+    * [Resolve Azure App Service Pricing Tier for Runtime Requirements](#resolve-azure-app-service-pricing-tier-for-runtime-requirements-2)
   * [Implement and manage virtual networking](#implement-and-manage-virtual-networking)
     * [Configure Standard Load Balancer Outbound Traffic and IP Allocation](#configure-standard-load-balancer-outbound-traffic-and-ip-allocation)
     * [Diagnose Internal Load Balancer Hairpin Traffic Failure](#diagnose-internal-load-balancer-hairpin-traffic-failure)
@@ -23,11 +26,8 @@
     * [Configure Azure Monitor Alert Notification Rate Limits](#configure-azure-monitor-alert-notification-rate-limits)
     * [Enable Boot Diagnostics for Azure Virtual Machines](#enable-boot-diagnostics-for-azure-virtual-machines)
     * [Recover Configuration File from Azure VM Backup](#recover-configuration-file-from-azure-vm-backup)
-    * [Resolve Azure App Service Pricing Tier for Runtime Requirements](#resolve-azure-app-service-pricing-tier-for-runtime-requirements)
-    * [Resolve Azure App Service Pricing Tier for Runtime Requirements](#resolve-azure-app-service-pricing-tier-for-runtime-requirements-1)
     * [Diagnose Network Watcher Tool for Web Server Packet Flow](#diagnose-network-watcher-tool-for-web-server-packet-flow)
     * [Recover Azure VM from Deleted Backup](#recover-azure-vm-from-deleted-backup)
-    * [Resolve Azure App Service Pricing Tier for Runtime Requirements](#resolve-azure-app-service-pricing-tier-for-runtime-requirements-2)
 
 ## Overview
 
@@ -1052,6 +1052,182 @@ If a deployment-related command is available (like `Publish-AzWebApp`) and the s
 
 ---
 
+#### Resolve Azure App Service Pricing Tier for Runtime Requirements
+
+You deploy an Azure web app named MyApp. MyApps runs in a Free pricing tier service plan named MyPlan. During testing, you discover that MyApp stops after 60 minutes and that it cannot be restarted until the next day.
+
+You need to ensure that MyApp can run eight hours each day during the testing period. You want to keep the additional costs incurred to a minimum.
+
+Does changing the pricing tier for MyPlan to Shared D1 meet the goal?
+
+A. Yes  
+B. No  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-01-30-06-17-12.png' width=700>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Why the selected answer is wrong (Yes)**
+Moving from **Free (F1)** to **Shared (D1)** increases the daily CPU quota, but it **does not remove quotas**. Your symptom ("stops after 60 minutes and can't be restarted until the next day") matches hitting the **CPU (Day)** quota, which causes the app to be stopped until the quota resets. In Shared (D1), the app can still hit **CPU (Day)** and be stopped again—just later—so it won't reliably run **8 hours/day**.
+
+**Why the correct answer is correct (No)**
+To meet "run 8 hours each day," you need a plan where you **don't get stopped due to Free/Shared quotas**. That generally means moving to a **Dedicated compute** tier (Basic/Standard/Premium), where the app runs on dedicated VMs and the Free/Shared CPU (Day) quota enforcement doesn't apply in the same way. Shared (D1) remains a shared-compute tier with quota enforcement, so it doesn't meet the requirement.
+
+**Why other options are incorrect or less appropriate**
+
+* **Stay on Free (F1):** guaranteed to stop once the quota is exceeded (as observed).
+* **Shared (D1):** still quota-enforced; may extend runtime but not to the required 8 hours consistently.
+* **Basic (B1) or higher:** costs more than Shared, but it's the minimum tier change that aligns with the requirement to keep the app running during the testing window.
+
+**Key takeaway**
+**Free and Shared tiers have CPU quotas that can stop the app until the daily reset.** If you need predictable multi-hour runtime, move to a **Dedicated compute** tier (Basic or higher).
+
+**References**
+
+* [https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans](https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans)
+* [https://learn.microsoft.com/en-us/azure/app-service/web-sites-monitor](https://learn.microsoft.com/en-us/azure/app-service/web-sites-monitor)
+
+</details>
+
+---
+
+#### Resolve Azure App Service Pricing Tier for Runtime Requirements
+
+You deploy an Azure web app named MyApp. MyApp runs in a Free pricing tier service plan named MyPlan. During testing, you discover that MyApp stops after 60 minutes and that it cannot be restarted until the next day.
+
+You need to ensure that MyApp can run eight hours each day during the testing period. You want to keep the additional costs incurred to a minimum.
+
+Does changing the pricing tier for MyPlan to Standard S1 meet the goal?
+
+A. Yes  
+B. No  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-01-30-06-18-07.png' width=700>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Correct answer: No**
+
+**Why the selected answer is incorrect**
+Changing the App Service plan from **Free (F1)** to **Standard S1** does remove the 60-minute daily execution limit, so the app can run for eight hours per day. However, the solution also explicitly requires keeping **additional costs to a minimum**. Standard S1 is **not the lowest-cost plan** that satisfies the runtime requirement, so the solution does not fully meet the goal.
+
+**Why the correct answer is correct**
+While Standard S1 technically works from a functionality standpoint, it fails the cost-minimization requirement. A **Basic (B1)** plan would also allow the app to run continuously beyond 60 minutes and is **cheaper than Standard S1**, making S1 an unnecessarily expensive choice for testing.
+
+**Why other options are less appropriate**
+
+* Staying on **Free (F1)** is not viable because of the enforced 60-minute daily limit and the inability to restart the app the same day.
+* Moving to **Standard S1** overprovisions features (such as scaling and advanced capabilities) that are not required for this scenario and increases cost unnecessarily.
+
+**Key takeaway**
+For App Service questions, always evaluate both **technical capability and cost efficiency**. If multiple plans meet the runtime requirement, the **lowest-cost qualifying tier** is the correct exam choice.
+
+**References**
+
+* [https://learn.microsoft.com/azure/app-service/overview-hosting-plans](https://learn.microsoft.com/azure/app-service/overview-hosting-plans)
+* [https://learn.microsoft.com/azure/app-service/management-scale-up](https://learn.microsoft.com/azure/app-service/management-scale-up)
+* [https://learn.microsoft.com/azure/app-service/operating-system-functionality#app-service-plan-tiers](https://learn.microsoft.com/azure/app-service/operating-system-functionality#app-service-plan-tiers)
+
+<img src='.img/2026-02-05-02-52-17.png' width=600>
+
+**What the ACU/vCPU column represents**
+
+The **ACU/vCPU** column indicates the **relative CPU performance available per virtual CPU** for that App Service plan.
+
+**ACU (Azure Compute Unit)**
+
+* ACU is a **normalized performance score**, not a physical measurement.
+* Microsoft uses it to compare CPU performance **across different underlying hardware generations**.
+* Higher ACU means **more compute power per vCPU**.
+
+**How to read the values**
+
+* **N/A (Free F1 / Shared D1)**
+  These tiers don't provide dedicated vCPUs. They run on shared infrastructure with enforced time quotas, so ACU isn't applicable.
+
+* **100 ACU**
+  Baseline compute performance. This is common for **Basic (B-series)** and **Standard (S-series)** plans and many legacy Premium plans.
+
+* **195 ACU / 210 ACU**
+  Indicates **newer, faster CPU hardware** (for example, Premium v3 or Premium v2).
+  Each vCPU delivers roughly **~2× the compute performance** of a 100 ACU vCPU.
+
+**What this means in practice (exam-relevant)**
+
+* ACU is about **CPU speed per vCPU**, not total compute.
+* Total compute = **ACU × number of vCPUs**.
+* Two plans with the same vCPU count but different ACU values will have **different performance**.
+* ACU does **not** change memory, storage, features, or scaling rules—only relative CPU power.
+
+**Common exam trap**
+
+* Assuming "1 vCPU = same performance everywhere."
+  This is incorrect. A **1-vCPU plan at 195 ACU** is significantly faster than **1 vCPU at 100 ACU**.
+
+**Key takeaway**
+
+ACU/vCPU is a **relative CPU performance indicator**. Higher numbers mean **faster CPUs per core**, typically reflecting newer App Service hardware generations.
+
+</details>
+
+---
+
+#### Resolve Azure App Service Pricing Tier for Runtime Requirements
+
+You deploy an Azure web app named MyApp. MyApp runs in a Free pricing tier service plan named MyPlan. During testing, you discover that MyApp stops after 60 minutes and that it cannot be restarted until the next day.
+
+You need to ensure that MyApp can run eight hours each day during the testing period. You want to keep the additional costs incurred to a minimum.
+
+Does changing the pricing tier for MyPlan to Basic B1 meet the goal?
+
+A. Yes  
+B. No  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-01-30-06-17-46.png' width=700>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Why "Yes" is correct**
+Changing the App Service plan from **Free (F1)** to **Basic (B1)** removes the **Free/Shared quota enforcement** behavior. In Free/Shared tiers, Azure enforces CPU/Bandwidth quotas; when the app exceeds its quota (for example, CPU (Day)), the app is **stopped until the quota resets** (which matches "stops after 60 minutes" and "can't be restarted until the next day"). Scaling up to a dedicated tier (Basic) avoids those per-app CPU-minute/day quotas, allowing the app to run for the required **8 hours/day**.
+
+**Why "No" would be a trap**
+A common misconception is that "Free just means no SLA" or "it only affects performance." In reality, Free/Shared tiers have **hard quotas** that can stop the app for the rest of the day once exceeded.
+
+**Cost reasoning (exam perspective)**
+Basic **B1** is typically the lowest-cost **dedicated compute** App Service plan tier. Since the requirement is to run several hours daily, moving to the cheapest dedicated tier is the minimal-cost way to meet the runtime goal.
+
+**Key takeaway**
+Free/Shared App Service plans can stop apps when usage quotas are exceeded; moving to a dedicated tier like **Basic B1** eliminates that daily CPU-minute quota enforcement and meets the 8-hours/day requirement.
+
+<img src='.img/2026-02-05-04-17-27.png' width=800>
+
+**References**
+
+* [https://learn.microsoft.com/en-us/azure/app-service/web-sites-monitor](https://learn.microsoft.com/en-us/azure/app-service/web-sites-monitor)
+* [https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans](https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans)
+
+</details>
+
+---
+
 ### Implement and manage virtual networking
 
 #### Configure Standard Load Balancer Outbound Traffic and IP Allocation
@@ -1448,138 +1624,6 @@ Azure Recovery Services vault overview
 
 ---
 
-#### Resolve Azure App Service Pricing Tier for Runtime Requirements
-
-You deploy an Azure web app named MyApp. MyApps runs in a Free pricing tier service plan named MyPlan. During testing, you discover that MyApp stops after 60 minutes and that it cannot be restarted until the next day.
-
-You need to ensure that MyApp can run eight hours each day during the testing period. You want to keep the additional costs incurred to a minimum.
-
-Does changing the pricing tier for MyPlan to Shared D1 meet the goal?
-
-A. Yes  
-B. No  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-01-30-06-17-12.png' width=700>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Why the selected answer is wrong (Yes)**
-Moving from **Free (F1)** to **Shared (D1)** increases the daily CPU quota, but it **does not remove quotas**. Your symptom (“stops after 60 minutes and can’t be restarted until the next day”) matches hitting the **CPU (Day)** quota, which causes the app to be stopped until the quota resets. In Shared (D1), the app can still hit **CPU (Day)** and be stopped again—just later—so it won’t reliably run **8 hours/day**.
-
-**Why the correct answer is correct (No)**
-To meet “run 8 hours each day,” you need a plan where you **don’t get stopped due to Free/Shared quotas**. That generally means moving to a **Dedicated compute** tier (Basic/Standard/Premium), where the app runs on dedicated VMs and the Free/Shared CPU (Day) quota enforcement doesn’t apply in the same way. Shared (D1) remains a shared-compute tier with quota enforcement, so it doesn’t meet the requirement.
-
-**Why other options are incorrect or less appropriate**
-
-* **Stay on Free (F1):** guaranteed to stop once the quota is exceeded (as observed).
-* **Shared (D1):** still quota-enforced; may extend runtime but not to the required 8 hours consistently.
-* **Basic (B1) or higher:** costs more than Shared, but it’s the minimum tier change that aligns with the requirement to keep the app running during the testing window.
-
-**Key takeaway**
-**Free and Shared tiers have CPU quotas that can stop the app until the daily reset.** If you need predictable multi-hour runtime, move to a **Dedicated compute** tier (Basic or higher).
-
-**References**
-
-* [https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans](https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans)
-* [https://learn.microsoft.com/en-us/azure/app-service/web-sites-monitor](https://learn.microsoft.com/en-us/azure/app-service/web-sites-monitor)
-
-</details>
-
----
-
-#### Resolve Azure App Service Pricing Tier for Runtime Requirements
-
-You deploy an Azure web app named MyApp. MyApp runs in a Free pricing tier service plan named MyPlan. During testing, you discover that MyApp stops after 60 minutes and that it cannot be restarted until the next day.
-
-You need to ensure that MyApp can run eight hours each day during the testing period. You want to keep the additional costs incurred to a minimum.
-
-Does changing the pricing tier for MyPlan to Standard S1 meet the goal?
-
-A. Yes  
-B. No  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-01-30-06-18-07.png' width=700>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Correct answer: No**
-
-**Why the selected answer is incorrect**
-Changing the App Service plan from **Free (F1)** to **Standard S1** does remove the 60-minute daily execution limit, so the app can run for eight hours per day. However, the solution also explicitly requires keeping **additional costs to a minimum**. Standard S1 is **not the lowest-cost plan** that satisfies the runtime requirement, so the solution does not fully meet the goal.
-
-**Why the correct answer is correct**
-While Standard S1 technically works from a functionality standpoint, it fails the cost-minimization requirement. A **Basic (B1)** plan would also allow the app to run continuously beyond 60 minutes and is **cheaper than Standard S1**, making S1 an unnecessarily expensive choice for testing.
-
-**Why other options are less appropriate**
-
-* Staying on **Free (F1)** is not viable because of the enforced 60-minute daily limit and the inability to restart the app the same day.
-* Moving to **Standard S1** overprovisions features (such as scaling and advanced capabilities) that are not required for this scenario and increases cost unnecessarily.
-
-**Key takeaway**
-For App Service questions, always evaluate both **technical capability and cost efficiency**. If multiple plans meet the runtime requirement, the **lowest-cost qualifying tier** is the correct exam choice.
-
-**References**
-
-* [https://learn.microsoft.com/azure/app-service/overview-hosting-plans](https://learn.microsoft.com/azure/app-service/overview-hosting-plans)
-* [https://learn.microsoft.com/azure/app-service/management-scale-up](https://learn.microsoft.com/azure/app-service/management-scale-up)
-* [https://learn.microsoft.com/azure/app-service/operating-system-functionality#app-service-plan-tiers](https://learn.microsoft.com/azure/app-service/operating-system-functionality#app-service-plan-tiers)
-
-<img src='.img/2026-02-05-02-52-17.png' width=600>
-
-**What the ACU/vCPU column represents**
-
-The **ACU/vCPU** column indicates the **relative CPU performance available per virtual CPU** for that App Service plan.
-
-**ACU (Azure Compute Unit)**
-
-* ACU is a **normalized performance score**, not a physical measurement.
-* Microsoft uses it to compare CPU performance **across different underlying hardware generations**.
-* Higher ACU means **more compute power per vCPU**.
-
-**How to read the values**
-
-* **N/A (Free F1 / Shared D1)**
-  These tiers don’t provide dedicated vCPUs. They run on shared infrastructure with enforced time quotas, so ACU isn’t applicable.
-
-* **100 ACU**
-  Baseline compute performance. This is common for **Basic (B-series)** and **Standard (S-series)** plans and many legacy Premium plans.
-
-* **195 ACU / 210 ACU**
-  Indicates **newer, faster CPU hardware** (for example, Premium v3 or Premium v2).
-  Each vCPU delivers roughly **~2× the compute performance** of a 100 ACU vCPU.
-
-**What this means in practice (exam-relevant)**
-
-* ACU is about **CPU speed per vCPU**, not total compute.
-* Total compute = **ACU × number of vCPUs**.
-* Two plans with the same vCPU count but different ACU values will have **different performance**.
-* ACU does **not** change memory, storage, features, or scaling rules—only relative CPU power.
-
-**Common exam trap**
-
-* Assuming “1 vCPU = same performance everywhere.”
-  This is incorrect. A **1-vCPU plan at 195 ACU** is significantly faster than **1 vCPU at 100 ACU**.
-
-**Key takeaway**
-
-ACU/vCPU is a **relative CPU performance indicator**. Higher numbers mean **faster CPUs per core**, typically reflecting newer App Service hardware generations.
-
-</details>
-
----
-
 #### Diagnose Network Watcher Tool for Web Server Packet Flow
 
 Your company hosts its infrastructure in Azure. The infrastructure consists of virtual machines (VMs), storage (managed disks and Azure file shares) and multiple networks (VNets and subnets). The service desk is seeing an influx of support tickets that have been logged in the last 24 hours regarding intermittent connectivity issues to a web server. After some initial investigation, the support ticket has been escalated to you.
@@ -1689,50 +1733,6 @@ For Azure IaaS VMs protected by a Recovery Services vault, **soft delete provide
 **References**
 
 * [Soft delete for virtual machines](https://learn.microsoft.com/en-us/azure/backup/soft-delete-virtual-machines?utm_source=chatgpt.com&tabs=azure-portal)
-
-</details>
-
----
-
-#### Resolve Azure App Service Pricing Tier for Runtime Requirements
-
-You deploy an Azure web app named MyApp. MyApp runs in a Free pricing tier service plan named MyPlan. During testing, you discover that MyApp stops after 60 minutes and that it cannot be restarted until the next day.
-
-You need to ensure that MyApp can run eight hours each day during the testing period. You want to keep the additional costs incurred to a minimum.
-
-Does changing the pricing tier for MyPlan to Basic B1 meet the goal?
-
-A. Yes  
-B. No  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-01-30-06-17-46.png' width=700>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Why “Yes” is correct**
-Changing the App Service plan from **Free (F1)** to **Basic (B1)** removes the **Free/Shared quota enforcement** behavior. In Free/Shared tiers, Azure enforces CPU/Bandwidth quotas; when the app exceeds its quota (for example, CPU (Day)), the app is **stopped until the quota resets** (which matches “stops after 60 minutes” and “can’t be restarted until the next day”). Scaling up to a dedicated tier (Basic) avoids those per-app CPU-minute/day quotas, allowing the app to run for the required **8 hours/day**.
-
-**Why “No” would be a trap**
-A common misconception is that “Free just means no SLA” or “it only affects performance.” In reality, Free/Shared tiers have **hard quotas** that can stop the app for the rest of the day once exceeded.
-
-**Cost reasoning (exam perspective)**
-Basic **B1** is typically the lowest-cost **dedicated compute** App Service plan tier. Since the requirement is to run several hours daily, moving to the cheapest dedicated tier is the minimal-cost way to meet the runtime goal.
-
-**Key takeaway**
-Free/Shared App Service plans can stop apps when usage quotas are exceeded; moving to a dedicated tier like **Basic B1** eliminates that daily CPU-minute quota enforcement and meets the 8-hours/day requirement.
-
-<img src='.img/2026-02-05-04-17-27.png' width=800>
-
-**References**
-
-* [https://learn.microsoft.com/en-us/azure/app-service/web-sites-monitor](https://learn.microsoft.com/en-us/azure/app-service/web-sites-monitor)
-* [https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans](https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans)
 
 </details>
 
