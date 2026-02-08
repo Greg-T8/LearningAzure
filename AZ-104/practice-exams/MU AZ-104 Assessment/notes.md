@@ -4,6 +4,7 @@
 * [Assessment Results](#assessment-results)
 * [Wrong Answers Review](#wrong-answers-review)
   * [Configure Microsoft Entra SSPR For Specific Users](#configure-microsoft-entra-sspr-for-specific-users)
+  * [Configure Azure Cost Center Tags and Cost Analysis](#configure-azure-cost-center-tags-and-cost-analysis)
 * [Correctly Answered but Unsure Questions](#correctly-answered-but-unsure-questions)
 * [Correctly Answered Questions](#correctly-answered-questions)
 
@@ -47,31 +48,11 @@ Which four actions should you perform in sequence to meet the goal? To answer, m
 * Enable SSPR with the Selected option.
 
 <details>
-<summary>Click to expand screenshot</summary>
+<summary>📸 Click to expand screenshot</summary>
 
 <img src='.img/2026-01-30-05-33-53.png' width=700>
 
 </details>
-
-<details open>
-<summary>💡 Click to expand explanation</summary>
-
-</details>
-
-<details>
-<summary>🔬 Click to expand hands-on lab</summary>
-
-</details>
-
----
-
----
----
----
-
-### Configure Microsoft Entra SSPR For Specific Users
-
-<img src='.img/2026-01-30-05-33-53.png' width=700>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
@@ -113,59 +94,27 @@ You must **configure the authentication requirements and enable SSPR** before yo
 
 ---
 
-<img src='.img/2026-01-30-06-03-01.png' width=700>
+### Configure Azure Cost Center Tags and Cost Analysis
+
+Your company has an Azure Subscription with several resources deployed. The subscription is managed by a Cloud Service Provider.
+
+The accounting department is currently granted the billing reader role, so they are able to see cost-related information. They need to get a better understanding of the costs so they can assign them to the correct cost center.
+
+You need to provide cost center information. Your solution should minimize administrative effort.
+
+What two actions should you perform? Each correct answer presents part of the solution.
+
+A. Instruct the accounting department to use the Azure Account Center.
+B. Create a tag named CostCenter and assign it to each resource group.
+C. Instruct the accounting department to use the Cost Analysis blade in the subscription panel.
+D. Create a tag named CostCenter and assign it to each resource.
 
 <details>
-<summary>💡 Click to expand explanation</summary>
-
-Looking at your selected answers, I can help you understand why this approach doesn't meet the requirements.
-
-**Your Selected Answer:**
-
-1. ✓ Assign the built-in Contributor role to the SalesDepartment group for the RG1 resource group
-2. ✗ Assign the built-in Reader role to the SalesDepartment group at the subscription level
-
-**The Problem with Your Answer:**
-
-**The second selection violates the least privilege principle:**
-
-When you assign **Reader at the subscription level**, the Sales team gets read access to **ALL** resource groups in the subscription, including:
-
-- RG1 ✓ (needed)
-- RG2 ✓ (needed)
-- **RG3 ✗ (NOT allowed by requirements)**
-
-The requirement explicitly states: "The Sales team should be able to read resources in RG1 and RG2 **only**."
-
-**The Correct Answer Should Be:**
-
-1. **Assign the built-in Contributor role to the SalesDepartment group for the RG1 resource group** ✓
-   - Allows creating resources in RG1
-   - Allows reading resources in RG1
-   - Does NOT allow assigning permissions (Contributor lacks this ability)
-
-2. **Assign the built-in Reader role to the SalesDepartment group for the RG2 resource group** ✓
-   - Allows reading resources in RG2 only
-   - Does NOT allow creating resources
-   - No access to RG3
-
-**Why This Meets All Requirements:**
-
-✓ Read resources in RG1 and RG2 only (not RG3)  
-✓ Create resources in only RG1  
-✓ Cannot assign permissions (Contributor doesn't include this)  
-✓ Cannot create resource groups (no subscription-level permissions)  
-✓ Follows least privilege principle
-
-**Key Takeaway:**
-
-Avoid assigning roles at higher scopes (like subscription level) when you can achieve the same result at lower scopes (resource group level). Always grant the minimum access needed at the most specific scope possible.
-
-</details>
-
----
+<summary>📸 Click to expand screenshot</summary>
 
 <img src='.img/2026-01-30-06-20-49.png' width=700>
+
+</details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
@@ -221,6 +170,17 @@ For cost center allocation:
 - Cost Analysis allows filtering and grouping by tags to assign costs to cost centers
 
 </details>
+
+<details>
+<summary>🔬 Click to expand hands-on lab</summary>
+
+</details>
+
+---
+
+<img src='.img/2026-01-30-06-20-49.png' width=700>
+
+<details></details>
 
 ---
 
