@@ -3,26 +3,31 @@
 * [Overview](#overview)
 * [Assessment Results](#assessment-results)
 * [Wrong and Unsure Answers Review](#wrong-and-unsure-answers-review)
-  * [Configure Microsoft Entra SSPR For Specific Users](#configure-microsoft-entra-sspr-for-specific-users)
-  * [Configure Azure Cost Center Tags and Cost Analysis](#configure-azure-cost-center-tags-and-cost-analysis)
-  * [Diagnose Storage Explorer Permission Errors](#diagnose-storage-explorer-permission-errors)
-  * [Configure AzCopy Authentication for Blob and File Storage](#configure-azcopy-authentication-for-blob-and-file-storage)
-  * [Configure Object Replication Between Storage Accounts](#configure-object-replication-between-storage-accounts)
-  * [Configure Lifecycle Management Policy for Azure Storage](#configure-lifecycle-management-policy-for-azure-storage)
-  * [Identify Blob Write Operations That Create New Versions](#identify-blob-write-operations-that-create-new-versions)
-  * [Configure Azure App Service Plan for Website Hosting](#configure-azure-app-service-plan-for-website-hosting)
-  * [Prepare Azure App Service for Web App Republication](#prepare-azure-app-service-for-web-app-republication)
-  * [Configure Standard Load Balancer Outbound Traffic and IP Allocation](#configure-standard-load-balancer-outbound-traffic-and-ip-allocation)
-  * [Diagnose Internal Load Balancer Hairpin Traffic Failure](#diagnose-internal-load-balancer-hairpin-traffic-failure)
-  * [Configure Azure Monitor Alert for Database CPU Usage](#configure-azure-monitor-alert-for-database-cpu-usage)
-  * [Configure Azure Monitor Alert Notification Rate Limits](#configure-azure-monitor-alert-notification-rate-limits)
-  * [Enable Boot Diagnostics for Azure Virtual Machines](#enable-boot-diagnostics-for-azure-virtual-machines)
-  * [Recover Configuration File from Azure VM Backup](#recover-configuration-file-from-azure-vm-backup)
-  * [Resolve Azure App Service Pricing Tier for Runtime Requirements](#resolve-azure-app-service-pricing-tier-for-runtime-requirements)
-  * [Resolve Azure App Service Pricing Tier for Runtime Requirements](#resolve-azure-app-service-pricing-tier-for-runtime-requirements-1)
-  * [Diagnose Network Watcher Tool for Web Server Packet Flow](#diagnose-network-watcher-tool-for-web-server-packet-flow)
-  * [Recover Azure VM from Deleted Backup](#recover-azure-vm-from-deleted-backup)
-  * [Resolve Azure App Service Pricing Tier for Runtime Requirements](#resolve-azure-app-service-pricing-tier-for-runtime-requirements-2)
+  * [Manage Azure identities and governance](#manage-azure-identities-and-governance)
+    * [Configure Microsoft Entra SSPR For Specific Users](#configure-microsoft-entra-sspr-for-specific-users)
+    * [Configure Azure Cost Center Tags and Cost Analysis](#configure-azure-cost-center-tags-and-cost-analysis)
+  * [Implement and manage storage](#implement-and-manage-storage)
+    * [Diagnose Storage Explorer Permission Errors](#diagnose-storage-explorer-permission-errors)
+    * [Configure AzCopy Authentication for Blob and File Storage](#configure-azcopy-authentication-for-blob-and-file-storage)
+    * [Configure Object Replication Between Storage Accounts](#configure-object-replication-between-storage-accounts)
+    * [Configure Lifecycle Management Policy for Azure Storage](#configure-lifecycle-management-policy-for-azure-storage)
+    * [Identify Blob Write Operations That Create New Versions](#identify-blob-write-operations-that-create-new-versions)
+  * [Deploy and manage Azure compute resources](#deploy-and-manage-azure-compute-resources)
+    * [Configure Azure App Service Plan for Website Hosting](#configure-azure-app-service-plan-for-website-hosting)
+    * [Prepare Azure App Service for Web App Republication](#prepare-azure-app-service-for-web-app-republication)
+  * [Implement and manage virtual networking](#implement-and-manage-virtual-networking)
+    * [Configure Standard Load Balancer Outbound Traffic and IP Allocation](#configure-standard-load-balancer-outbound-traffic-and-ip-allocation)
+    * [Diagnose Internal Load Balancer Hairpin Traffic Failure](#diagnose-internal-load-balancer-hairpin-traffic-failure)
+  * [Monitor and maintain Azure resources](#monitor-and-maintain-azure-resources)
+    * [Configure Azure Monitor Alert for Database CPU Usage](#configure-azure-monitor-alert-for-database-cpu-usage)
+    * [Configure Azure Monitor Alert Notification Rate Limits](#configure-azure-monitor-alert-notification-rate-limits)
+    * [Enable Boot Diagnostics for Azure Virtual Machines](#enable-boot-diagnostics-for-azure-virtual-machines)
+    * [Recover Configuration File from Azure VM Backup](#recover-configuration-file-from-azure-vm-backup)
+    * [Resolve Azure App Service Pricing Tier for Runtime Requirements](#resolve-azure-app-service-pricing-tier-for-runtime-requirements)
+    * [Resolve Azure App Service Pricing Tier for Runtime Requirements](#resolve-azure-app-service-pricing-tier-for-runtime-requirements-1)
+    * [Diagnose Network Watcher Tool for Web Server Packet Flow](#diagnose-network-watcher-tool-for-web-server-packet-flow)
+    * [Recover Azure VM from Deleted Backup](#recover-azure-vm-from-deleted-backup)
+    * [Resolve Azure App Service Pricing Tier for Runtime Requirements](#resolve-azure-app-service-pricing-tier-for-runtime-requirements-2)
 
 ## Overview
 
@@ -52,28 +57,6 @@ Notes and insights from the MeasureUp practice assessment for AZ-104. I took thi
 | Implement and manage virtual networking | 67% |
 | Monitor and maintain Azure resources | 33% |
 
-**Results by Objective**
-
-| Domain | Objective | Score |
-|--------|-----------|-------|
-| **Manage Azure identities and governance** | | **33%** |
-| | Manage Microsoft Entra users and groups | 0% |
-| | Manage access to Azure resources | 50% |
-| | Manage Azure subscriptions and governance | 33% |
-| **Implement and manage storage** | | **33%** |
-| | Configure access to storage | 100% |
-| | Configure and manage storage accounts | 0% |
-| | Configure Azure Files and Azure Blob Storage | 33% |
-| **Deploy and manage Azure compute resources** | | **56%** |
-| | Create and configure virtual machines | 100% |
-| | Create and configure Azure App Service | 67% |
-| **Implement and manage virtual networking** | | **67%** |
-| | Configure secure access to virtual networks | 100% |
-| | Configure name resolution and load balancing | 60% |
-| **Monitor and maintain Azure resources** | | **33%** |
-| | Monitor resources in Azure | 25% |
-| | Implement backup and recovery | 50% |
-
 <details>
 <summary>Click to expand details</summary>
 
@@ -87,7 +70,9 @@ Notes and insights from the MeasureUp practice assessment for AZ-104. I took thi
 
 ## Wrong and Unsure Answers Review
 
-### Configure Microsoft Entra SSPR For Specific Users
+### Manage Azure identities and governance
+
+#### Configure Microsoft Entra SSPR For Specific Users
 
 You are asked to configure Self-Service Password Reset (SSPR) for a subset of users in your organization.
 
@@ -154,7 +139,7 @@ You must **configure the authentication requirements and enable SSPR** before yo
 
 ---
 
-### Configure Azure Cost Center Tags and Cost Analysis
+#### Configure Azure Cost Center Tags and Cost Analysis
 
 Your company has an Azure Subscription with several resources deployed. The subscription is managed by a Cloud Service Provider.
 
@@ -233,7 +218,9 @@ For cost center allocation:
 
 ---
 
-### Diagnose Storage Explorer Permission Errors
+### Implement and manage storage
+
+#### Diagnose Storage Explorer Permission Errors
 
 You have storage accounts in your Azure subscription with blob containers and file shares configured. Some users access these storage accounts using Azure Storage Explorer and are reporting an error when they try to browse the storage account contents.
 
@@ -417,7 +404,7 @@ The solution is either:
 
 ---
 
-### Configure AzCopy Authentication for Blob and File Storage
+#### Configure AzCopy Authentication for Blob and File Storage
 
 You create a new storage account named DevStore for Azure Blob Storage and Azure File Storage. You plan to use AzCopy to copy data from blob storage and file storage in other storage accounts to DevStore. You have access to the storage account access keys for the source storage accounts and for DevStore. You also have valid Microsoft Entra user accounts and shared access signatures (SAS) with access to the source data.
 
@@ -532,7 +519,7 @@ azcopy copy "source" "https://devstore.file.core.windows.net/share"
 
 ---
 
-### Configure Object Replication Between Storage Accounts
+#### Configure Object Replication Between Storage Accounts
 
 You plan to configure object replication between storage accounts in two different regions. You need to ensure that Azure Storage features are configured to support object storage replication. You want to minimize the configuration changes that you make.
 
@@ -669,7 +656,7 @@ You had the logic completely reversed - change feed on the wrong end, and versio
 
 ---
 
-### Configure Lifecycle Management Policy for Azure Storage
+#### Configure Lifecycle Management Policy for Azure Storage
 
 Your company has an Azure Subscription with several resources deployed. The subscription is managed by a Cloud Service Provider. You plan to migrate archive data into Azure Blob Storage and you have used Azure Storage Explorer to complete the initial bulk upload.
 
@@ -826,7 +813,7 @@ Set-AzStorageBlobInventoryPolicy                # \u2717 Wrong!
 
 ---
 
-### Identify Blob Write Operations That Create New Versions
+#### Identify Blob Write Operations That Create New Versions
 
 Your organization is using Azure Blobs for storing data. You enable blob versioning for a storage account.
 
@@ -885,7 +872,9 @@ The four versioning operations are **Put Blob**, **Put Block List**, **Copy Blob
 
 ---
 
-### Configure Azure App Service Plan for Website Hosting
+### Deploy and manage Azure compute resources
+
+#### Configure Azure App Service Plan for Website Hosting
 
 You have to provide a website hosting environment that meets the following scalability and security requirements:
 
@@ -985,7 +974,7 @@ On Azure exams, when you see:
 
 ---
 
-### Prepare Azure App Service for Web App Republication
+#### Prepare Azure App Service for Web App Republication
 
 You are developing a new web app. The source code is located in an Azure DevOps Git repository. Before you move the web app into production, its functionality must be reviewed by your test users.
 
@@ -1063,7 +1052,9 @@ If a deployment-related command is available (like `Publish-AzWebApp`) and the s
 
 ---
 
-### Configure Standard Load Balancer Outbound Traffic and IP Allocation
+### Implement and manage virtual networking
+
+#### Configure Standard Load Balancer Outbound Traffic and IP Allocation
 
 You deploy three Windows virtual machines (VMs) named VM01, VM02, and VM03 that host the front-end layer of a web application. You configure a Standard Load Balancer named LB01. VM01, VM02, and VM03 are configured as part of the backend pool for LB01. You configure a load balancing rule for Transmission Control Protocol (TCP) traffic only.
 
@@ -1125,7 +1116,7 @@ For each of the following statements, select Yes if the statement is true. Other
 
 ---
 
-### Diagnose Internal Load Balancer Hairpin Traffic Failure
+#### Diagnose Internal Load Balancer Hairpin Traffic Failure
 
 You are an Azure administrator at an independent software vendor. Your company is using an Azure internal load balancer that is configured inside an Azure virtual network (VNet).
 
@@ -1207,7 +1198,9 @@ Azure **Internal Load Balancer does not support backend VMs accessing the ILB fr
 
 ---
 
-### Configure Azure Monitor Alert for Database CPU Usage
+### Monitor and maintain Azure resources
+
+#### Configure Azure Monitor Alert for Database CPU Usage
 
 Your company has a line-of-business (LOB) application that uses Azure SQL Database for storing transactional information. Your company also has System Center Service Manager deployed.
 
@@ -1262,7 +1255,7 @@ Related resources:
 
 ---
 
-### Configure Azure Monitor Alert Notification Rate Limits
+#### Configure Azure Monitor Alert Notification Rate Limits
 
 Your company has an Azure Subscription and an Azure SQL Database. You configure an Azure Monitor alert rule named Alert1 that is triggered when the database CPU usage exceeds 70%. Alert1 fires approximately every minute.
 
@@ -1324,7 +1317,7 @@ Related resources:
 
 ---
 
-### Enable Boot Diagnostics for Azure Virtual Machines
+#### Enable Boot Diagnostics for Azure Virtual Machines
 
 You have two Azure Virtual Machines (VMs) and three storage accounts provisioned in an Azure subscription. The subscription configuration is shown in the exhibit.
 
@@ -1389,7 +1382,7 @@ Premium storage accounts and storage account v1 are **not supported**, regardles
 
 ---
 
-### Recover Configuration File from Azure VM Backup
+#### Recover Configuration File from Azure VM Backup
 
 You have two Azure virtual machines (VMs) named VM1 and VM2 running Windows Server 2019. The VMs are backed up by an Azure Recovery Services vault. A configuration file on VM1 was updated, and you need to restore it to a version from six days ago.
 
@@ -1455,7 +1448,7 @@ Azure Recovery Services vault overview
 
 ---
 
-### Resolve Azure App Service Pricing Tier for Runtime Requirements
+#### Resolve Azure App Service Pricing Tier for Runtime Requirements
 
 You deploy an Azure web app named MyApp. MyApps runs in a Free pricing tier service plan named MyPlan. During testing, you discover that MyApp stops after 60 minutes and that it cannot be restarted until the next day.
 
@@ -1500,7 +1493,7 @@ To meet “run 8 hours each day,” you need a plan where you **don’t get stop
 
 ---
 
-### Resolve Azure App Service Pricing Tier for Runtime Requirements
+#### Resolve Azure App Service Pricing Tier for Runtime Requirements
 
 You deploy an Azure web app named MyApp. MyApp runs in a Free pricing tier service plan named MyPlan. During testing, you discover that MyApp stops after 60 minutes and that it cannot be restarted until the next day.
 
@@ -1587,7 +1580,7 @@ ACU/vCPU is a **relative CPU performance indicator**. Higher numbers mean **fast
 
 ---
 
-### Diagnose Network Watcher Tool for Web Server Packet Flow
+#### Diagnose Network Watcher Tool for Web Server Packet Flow
 
 Your company hosts its infrastructure in Azure. The infrastructure consists of virtual machines (VMs), storage (managed disks and Azure file shares) and multiple networks (VNets and subnets). The service desk is seeing an influx of support tickets that have been logged in the last 24 hours regarding intermittent connectivity issues to a web server. After some initial investigation, the support ticket has been escalated to you.
 
@@ -1662,7 +1655,7 @@ It does **not** answer: *“Can the VM actually accept this connection?”*
 
 ---
 
-### Recover Azure VM from Deleted Backup
+#### Recover Azure VM from Deleted Backup
 
 An Infrastructure-as-a-Service (IaaS) virtual machine (VM) named VM10 is backed up to an Azure Recovery Services vault. VM10 and all of its restore points are deleted by mistake.
 
@@ -1701,7 +1694,7 @@ For Azure IaaS VMs protected by a Recovery Services vault, **soft delete provide
 
 ---
 
-### Resolve Azure App Service Pricing Tier for Runtime Requirements
+#### Resolve Azure App Service Pricing Tier for Runtime Requirements
 
 You deploy an Azure web app named MyApp. MyApp runs in a Free pricing tier service plan named MyPlan. During testing, you discover that MyApp stops after 60 minutes and that it cannot be restarted until the next day.
 
