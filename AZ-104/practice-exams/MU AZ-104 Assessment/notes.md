@@ -15,6 +15,8 @@
   * [Configure Standard Load Balancer Outbound Traffic and IP Allocation](#configure-standard-load-balancer-outbound-traffic-and-ip-allocation)
   * [Diagnose Internal Load Balancer Hairpin Traffic Failure](#diagnose-internal-load-balancer-hairpin-traffic-failure)
   * [Configure Azure Monitor Alert for Database CPU Usage](#configure-azure-monitor-alert-for-database-cpu-usage)
+  * [Configure Azure Monitor Alert Notification Rate Limits](#configure-azure-monitor-alert-notification-rate-limits)
+  * [Enable Boot Diagnostics for Azure Virtual Machines](#enable-boot-diagnostics-for-azure-virtual-machines)
 * [Correctly Answered but Unsure Questions](#correctly-answered-but-unsure-questions)
 * [Correctly Answered Questions](#correctly-answered-questions)
 
@@ -1156,7 +1158,6 @@ Azure **Internal Load Balancer does not support backend VMs accessing the ILB fr
 </details>
 
 ---
----
 
 ### Configure Azure Monitor Alert for Database CPU Usage
 
@@ -1213,47 +1214,88 @@ Related resources:
 
 ---
 
+### Configure Azure Monitor Alert Notification Rate Limits
+
+Your company has an Azure Subscription and an Azure SQL Database. You configure an Azure Monitor alert rule named Alert1 that is triggered when the database CPU usage exceeds 70%. Alert1 fires approximately every minute.
+
+You configure an action group with the following notification methods:
+
+* Email alerts  
+* Voice alerts  
+* SMS alerts  
+
+For each of the following statements, select Yes if the statement is true. Otherwise, select No.
+
+| STATEMENT | YES | NO |
+|-----------|-----|-----|
+| How many alert notifications will be generated for each type of alert per hour? | Email: 60, Voice: 4, SMS: 60 | |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
 <img src='.img/2026-01-30-06-20-01.png' width=700>
+
+</details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
 
 **Why the selected answer is wrong**
 
-* The dropdown values shown (Email **60**, Voice **4**, SMS **60** per hour) don’t match Azure Monitor’s **service-level notification rate limits** for action groups. Even if an alert fires every minute, Azure Monitor will **throttle notifications per recipient** (email address/phone number) based on those limits—not based on the alert frequency.
+The dropdown values shown (Email 60, Voice 4, SMS 60 per hour) don't match Azure Monitor's service-level notification rate limits for action groups. Even if an alert fires every minute, Azure Monitor will throttle notifications per recipient based on those limits—not based on the alert frequency.
 
 **Why the correct answer is right**
+
 Azure Monitor action group notification limits (production) are:
 
-* **Email:** **No more than 100 emails per hour** per email address (per region). ([Microsoft Learn][1])
-* **SMS:** **No more than 1 SMS every 5 minutes** per phone number ⇒ 60 / 5 = **12 per hour**. ([Microsoft Learn][1])
-* **Voice:** **No more than 1 voice call every 5 minutes** per phone number ⇒ 60 / 5 = **12 per hour**. ([Microsoft Learn][1])
+* **Email:** No more than 100 emails per hour per email address (per region)
+* **SMS:** No more than 1 SMS every 5 minutes per phone number ⇒ 12 per hour
+* **Voice:** No more than 1 voice call every 5 minutes per phone number ⇒ 12 per hour
 
-So, with Alert1 firing every minute (60 times/hour), the **maximum notifications actually sent per hour** are:
+So, with Alert1 firing every minute (60 times/hour), the maximum notifications actually sent per hour are:
 
-* **Email:** **60** (because the alert only fires 60 times/hour, which is under the 100/hour cap) ([Microsoft Learn][1])
-* **SMS:** **12** (throttled by 1 per 5 minutes) ([Microsoft Learn][1])
-* **Voice:** **12** (throttled by 1 per 5 minutes) ([Microsoft Learn][1])
+* **Email:** 60 (because the alert only fires 60 times/hour, which is under the 100/hour cap)
+* **SMS:** 12 (throttled by 1 per 5 minutes)
+* **Voice:** 12 (throttled by 1 per 5 minutes)
 
 **Key takeaway**
-Action group notification “rate limiting” questions are testing that **notification throttles are per recipient**, and for **SMS/voice** they effectively translate to **12/hour** (1 per 5 minutes). Email has a higher cap (100/hour), so the alert’s firing rate (60/hour) becomes the limiting factor. ([Microsoft Learn][2])
 
-**References**
+Action group notification "rate limiting" is per recipient, and for SMS/voice it effectively translates to 12/hour (1 per 5 minutes). Email has a higher cap (100/hour), so the alert's firing rate (60/hour) becomes the limiting factor.
 
-* Azure Monitor service limits (Action groups: Email/SMS/Voice limits): [https://learn.microsoft.com/en-us/azure/azure-monitor/fundamentals/service-limits](https://learn.microsoft.com/en-us/azure/azure-monitor/fundamentals/service-limits#action-groups)
-* Create and manage action groups in Azure Monitor (rate limiting behavior overview): [https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/action-groups](https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/action-groups)
-* Troubleshoot Azure Monitor alerts and notifications (SMS/voice throttling explanation): [https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-troubleshoot](https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-troubleshoot)
+Related resources:
 
-[1]: https://learn.microsoft.com/en-us/azure/azure-monitor/fundamentals/service-limits "Azure Monitor service limits - Azure Monitor | Microsoft Learn"
-[2]: https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/action-groups?utm_source=chatgpt.com "Create and manage action groups in Azure Monitor"
+* [Azure Monitor service limits](https://learn.microsoft.com/en-us/azure/azure-monitor/fundamentals/service-limits#action-groups)
+* [Create and manage action groups in Azure Monitor](https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/action-groups)
+
+</details>
+
+<details>
+<summary>🔬 Click to expand hands-on lab</summary>
 
 </details>
 
 ---
 
+### Enable Boot Diagnostics for Azure Virtual Machines
+
+You have two Azure Virtual Machines (VMs) and three storage accounts provisioned in an Azure subscription. The subscription configuration is shown in the exhibit.
+
+You need to enable boot diagnostics in the Azure VMs using the available storage accounts.
+
+Which storage accounts should you use? To answer, select the appropriate options from the drop-down menus.
+
+Enable boot diagnostics in vm1 by using $PLACEHOLDER$
+
+Enable boot diagnostics in vm2 by using $PLACEHOLDER$
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
 <img src='.img/2026-01-30-05-36-07.png' width=700>
 
 <img src='.img/2026-01-30-05-34-11.png' width=500>
+
+</details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
@@ -1297,6 +1339,7 @@ Premium storage accounts and storage account v1 are **not supported**, regardles
 
 </details>
 
+---
 ---
 
 <img src='.img/2026-01-30-05-41-40.png' width=700>

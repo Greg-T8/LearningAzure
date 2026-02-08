@@ -28,19 +28,20 @@ You are given a screenshot image that contains the context of an exam-style ques
   4. Add an explanation block (open by default):
      - `<details open>`
      - `<summary>💡 Click to expand explanation</summary>`
-     - (empty placeholder for explanation content)
+     - **Leave completely empty** (blank line only)
      - `</details>`
   5. Add a hands-on lab block:
      - `<details>`
      - `<summary>🔬 Click to expand hands-on lab</summary>`
-     - (empty placeholder for lab link)
+     - **Leave completely empty** (blank line only)
      - `</details>`
+- **CRITICAL**: Do not fill in any content inside the explanation or hands-on lab blocks. They must remain empty.
 - If the screenshot is ambiguous, return exactly: `UNCLEAR: Need more context or a short description of the screenshot` (and nothing else).
 - Keep the title short and focused: **3–10 words**, maximum **60 characters**.
 - Use **Title Case** (capitalize main words) and prefer a **noun phrase** or short label (e.g., "Troubleshooting Azure AD Connect Sync Errors").
 - Include the technology or service when clearly identifiable (e.g., "Azure AD", "Azure VNet", "Azure CLI", "Bicep").
 - Avoid phrasing as a question or using leading words such as "How to" or "What is".
-- Do not add explanations, answers, or reasoning—only the title, the question text, and the wrapped image.
+- Do not add explanations, answers, or reasoning—only the title, the question text, the wrapped image, and empty placeholder blocks.
 
 ---
 
@@ -86,7 +87,8 @@ You are given a screenshot image that contains the context of an exam-style ques
 
 ## Notes
 - If multiple titles are equally reasonable, choose the most specific and action-oriented one.
-- The explanation and hands-on lab blocks are provided as empty placeholders for you to fill in later.
+- The explanation and hands-on lab blocks **must remain completely empty**—they are placeholders for manual completion later.
+- Do not generate or suggest any content for the explanation or lab sections.
 - Usage:
   1. In your notes file, select the existing `<img ...>` line you want wrapped (or place the cursor where you want the output inserted).
   2. Run `/question` in the editor - the output will automatically insert at the cursor position.
