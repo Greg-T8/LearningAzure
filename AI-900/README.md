@@ -14,6 +14,7 @@
 | 1        | Microsoft Learn  | [Microsoft Learning Paths](./learning-paths/README.md) | ✅     | 1/14/26 | 1/21/26   | 7    |
 | 2        | Video            | [John Savill's Training](./video-courses/savill/README.md)          | ✅     |  1/29/26       | 1/31/26   | 3    |
 | 3        | Practice Exams   | [Practice Exams](./practice-exams/README.md)        | 🚧     | 1/31/26        |           |      |
+| 4        | Exam             |                                                     | 🕒     |         | 2/9/26    |      |
 
 **Legend:** 🕒 Not Started | 🚧 In Progress | ✅ Complete
 
