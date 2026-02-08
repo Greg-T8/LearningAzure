@@ -28,7 +28,7 @@ Notes and insights from the MeasureUp practice assessment for AZ-104. I took thi
 <img src='.img/2026-01-30-05-33-53.png' width=700>
 
 <details>
-<summary>Click to expand explanation</summary>
+<summary>💡 Click to expand explanation</summary>
 
 **Your Answer vs. The Correct Sequence**
 
@@ -70,7 +70,7 @@ You must **configure the authentication requirements and enable SSPR** before yo
 <img src='.img/2026-01-30-06-03-01.png' width=700>
 
 <details>
-<summary>Click to expand explanation</summary>
+<summary>💡 Click to expand explanation</summary>
 
 Looking at your selected answers, I can help you understand why this approach doesn't meet the requirements.
 
@@ -122,7 +122,7 @@ Avoid assigning roles at higher scopes (like subscription level) when you can ac
 <img src='.img/2026-01-30-06-20-49.png' width=700>
 
 <details>
-<summary>Click to expand explanation</summary>
+<summary>💡 Click to expand explanation</summary>
 
 Looking at your selected answers, I can help you understand what went wrong.
 
@@ -183,7 +183,7 @@ For cost center allocation:
 <img src='.img/2026-01-30-05-42-04.png' width=400>
 
 <details>
-<summary>Click to expand explanation</summary>
+<summary>💡 Click to expand explanation</summary>
 
 Looking at your selected answers, I can see you've made the same mistake again with this question (which appears to be the same as image 3).
 
@@ -336,14 +336,19 @@ The solution is either:
 
 </details>
 
-Hands-on Lab: [lab-storage-explorer-permissions](/AZ-104/hands-on-labs/storage/lab-storage-explorer-permissions/README.md)
+<details>
+<summary>🔬 Click to expand hands-on lab</summary>
+
+**Related Lab:** [lab-storage-explorer-permissions](/AZ-104/hands-on-labs/storage/lab-storage-explorer-permissions/README.md)
+
+</details>
 
 ---
 
 <img src='.img/2026-01-30-05-58-51.png' width=700>
 
 <details>
-<summary>Click to expand explanation</summary>
+<summary>💡 Click to expand explanation</summary>
 
 Looking at your answer, I can explain why you got the File storage authorization wrong.
 
@@ -434,7 +439,7 @@ azcopy copy "source" "https://devstore.file.core.windows.net/share"
 <img src='.img/2026-01-30-05-31-43.png' width=700>
 
 <details>
-<summary>Click to expand explanation</summary>
+<summary>💡 Click to expand explanation</summary>
 
 Looking at your answer, I can explain why you got the object replication configuration wrong.
 
@@ -557,7 +562,7 @@ You had the logic completely reversed - change feed on the wrong end, and versio
 <img src='.img/2026-01-30-05-50-54.png' width=700>
 
 <details>
-<summary>Click to expand explanation</summary>
+<summary>💡 Click to expand explanation</summary>
 
 You're absolutely right! Let me correct my response.
 
@@ -691,7 +696,7 @@ Set-AzStorageBlobInventoryPolicy                # \u2717 Wrong!
 <img src='.img/2026-01-30-06-01-29.png' width=700>
 
 <details>
-<summary>Click to expand explanation</summary>
+<summary>💡 Click to expand explanation</summary>
 
 You're absolutely correct to question this. I made an error in my original response.
 
@@ -729,7 +734,7 @@ The four versioning operations are **Put Blob**, **Put Block List**, **Copy Blob
 <img src='.img/2026-01-30-05-38-46.png' width=700>
 
 <details>
-<summary>Click to expand explanation</summary>
+<summary>💡 Click to expand explanation</summary>
 
 **Why the selected answer is wrong (Isolated)**
 You chose **Isolated**, which corresponds to an App Service Environment (ASE). While this does meet the requirement that compute resources are **dedicated to your company**, it is **not a minimal-cost solution**. Isolated plans are designed for scenarios requiring **network isolation, private endpoints, and high compliance**, and they carry **significantly higher fixed costs** (ASE infrastructure + workers), regardless of scale.
@@ -806,7 +811,7 @@ On Azure exams, when you see:
 <img src='.img/2026-01-30-06-12-43.png' width=700>
 
 <details>
-<summary>Click to expand explanation</summary>
+<summary>💡 Click to expand explanation</summary>
 
 **Why the selected answer is wrong**
 
@@ -869,7 +874,7 @@ If a deployment-related command is available (like `Publish-AzWebApp`) and the s
 <img src='.img/2026-01-30-05-53-50.png' width=700>
 
 <details>
-<summary>Click to expand explanation</summary>
+<summary>💡 Click to expand explanation</summary>
 
 **Why your selected answers are incorrect**
 
@@ -909,7 +914,7 @@ If a deployment-related command is available (like `Publish-AzWebApp`) and the s
 <img src='.img/2026-01-30-05-30-07.png' width=700>
 
 <details>
-<summary>Click to expand explanation</summary>
+<summary>💡 Click to expand explanation</summary>
 
 **Why the selected answer is wrong**
 
@@ -969,7 +974,7 @@ Azure **Internal Load Balancer does not support backend VMs accessing the ILB fr
 <img src='.img/2026-01-30-05-26-15.png' width=700>
 
 <details>
-<summary>Click to expand explanation</summary>
+<summary>💡 Click to expand explanation</summary>
 
 **Why the selected answer is wrong**
 
@@ -998,7 +1003,7 @@ For Azure Monitor alerts, use **one action group with multiple actions** wheneve
 <img src='.img/2026-01-30-06-20-01.png' width=700>
 
 <details>
-<summary>Click to expand explanation</summary>
+<summary>💡 Click to expand explanation</summary>
 
 **Why the selected answer is wrong**
 
@@ -1038,7 +1043,7 @@ Action group notification “rate limiting” questions are testing that **notif
 <img src='.img/2026-01-30-05-34-11.png' width=500>
 
 <details>
-<summary>Click to expand explanation</summary>
+<summary>💡 Click to expand explanation</summary>
 
 **Why the selected answers are wrong**
 
@@ -1084,7 +1089,7 @@ Premium storage accounts and storage account v1 are **not supported**, regardles
 <img src='.img/2026-01-30-05-41-40.png' width=700>
 
 <details>
-<summary>Click to expand explanation</summary>
+<summary>💡 Click to expand explanation</summary>
 
 **Why the selected answer is wrong**
 
@@ -1128,7 +1133,7 @@ Azure Recovery Services vault overview
 <img src='.img/2026-01-30-06-17-12.png' width=700>
 
 <details>
-<summary>Click to expand explanation</summary>
+<summary>💡 Click to expand explanation</summary>
 
 **Why the selected answer is wrong (Yes)**
 Moving from **Free (F1)** to **Shared (D1)** increases the daily CPU quota, but it **does not remove quotas**. Your symptom (“stops after 60 minutes and can’t be restarted until the next day”) matches hitting the **CPU (Day)** quota, which causes the app to be stopped until the quota resets. In Shared (D1), the app can still hit **CPU (Day)** and be stopped again—just later—so it won’t reliably run **8 hours/day**.
@@ -1157,7 +1162,7 @@ To meet “run 8 hours each day,” you need a plan where you **don’t get stop
 <img src='.img/2026-01-30-06-18-07.png' width=700>
 
 <details>
-<summary>Click to expand explanation</summary>
+<summary>💡 Click to expand explanation</summary>
 
 **Correct answer: No**
 
@@ -1230,7 +1235,7 @@ ACU/vCPU is a **relative CPU performance indicator**. Higher numbers mean **fast
 <img src='.img/2026-01-30-05-24-16.png' width=700>
 
 <details>
-<summary>Click to expand explanation</summary>
+<summary>💡 Click to expand explanation</summary>
 
 **Why the selected answer is correct (IP flow verify)**
 IP flow verify is the Network Watcher tool specifically designed to determine whether traffic is **allowed or denied** to or from a VM. You define the 5-tuple (source IP, destination IP, source port, destination port, protocol), and Azure evaluates the effective NSG rules applied to the NIC and subnet to return an **Allow** or **Deny** decision. This directly answers the requirement to check whether packets are being allowed or denied to the web server.
@@ -1287,7 +1292,7 @@ It does **not** answer: *“Can the VM actually accept this connection?”*
 <img src='.img/2026-01-30-05-24-56.png' width=700>
 
 <details>
-<summary>Click to expand explanation</summary>
+<summary>💡 Click to expand explanation</summary>
 
 **Why the selected answer is right**
 Azure Backup uses **Soft Delete** for Azure IaaS VM backups. When a VM and its backup data are deleted (intentionally or accidentally), the backup data is **retained for 14 days** in a soft-deleted state. During this window, the VM’s backup data can be recovered by undeleting the backup item from the Recovery Services vault. After 14 days, the data is permanently deleted and cannot be recovered.
@@ -1308,7 +1313,7 @@ For Azure IaaS VMs protected by a Recovery Services vault, **soft delete provide
 <img src='.img/2026-01-30-06-17-46.png' width=700>
 
 <details>
-<summary>Click to expand explanation</summary>
+<summary>💡 Click to expand explanation</summary>
 
 **Why “Yes” is correct**
 Changing the App Service plan from **Free (F1)** to **Basic (B1)** removes the **Free/Shared quota enforcement** behavior. In Free/Shared tiers, Azure enforces CPU/Bandwidth quotas; when the app exceeds its quota (for example, CPU (Day)), the app is **stopped until the quota resets** (which matches “stops after 60 minutes” and “can’t be restarted until the next day”). Scaling up to a dedicated tier (Basic) avoids those per-app CPU-minute/day quotas, allowing the app to run for the required **8 hours/day**.
