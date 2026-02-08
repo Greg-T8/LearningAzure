@@ -214,3 +214,86 @@ For keyword tagging based on visual content, choose **image classification**. Us
 </details>
 
 ---
+
+### Azure AI Speech Service for Speech-to-Text and Translation
+
+For each of the following items, choose Yes if the statement is true or choose No if the statement is false. Take note that each correct item is worth one point.
+
+| Questions | Yes | No |
+|-----------|-----|-----|
+| You can apply the Azure AI Language service to a legal deposition transcript, automatically identifying and extracting relevant names, dates, and legal terms for more efficient document analysis. | ☑ | ☐ |
+| You can use the Azure AI Speech service to convert a customer order call in one language into text, then translate it to another language for processing and fulfillment by an international team. | ☑ | ☐ |
+| You can utilize the Azure AI Speech service to convert an interview with a non-English-speaking participant into written text, making it easier for researchers to analyze and reference the conversation. | ☐ | ☑ |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-02-08-06-56-27.png' width=700>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Why your selected answer is wrong**
+
+You marked **No** for the statement about using Azure AI Speech to convert an interview with a non-English-speaking participant into written text. That is incorrect because Azure AI Speech explicitly supports **speech-to-text for multiple languages**. The service can transcribe spoken audio regardless of whether the speaker is using English, as long as the language is supported.
+
+**Why the statement is correct**
+
+Azure AI Speech is designed to convert spoken language into text. This includes interviews conducted in non-English languages. The resulting transcription can then be analyzed, searched, quoted, or archived, which directly matches the scenario described. No additional service is required just to produce written text from spoken language.
+
+**Why the other statements are correct**
+
+* Using **Azure AI Language** to analyze a legal deposition transcript is valid. The Language service performs entity recognition and information extraction on text, such as identifying names, dates, and domain-specific terms.
+* Using **Azure AI Speech** to transcribe a customer call and translate it into another language is also valid. The Speech service supports both speech-to-text and speech translation, which fits an international processing workflow.
+
+**Key takeaway**
+
+If the task involves **converting spoken audio into text**, even for non-English speakers, **Azure AI Speech** is the correct service. Marking that scenario as “No” is a common exam trap that incorrectly assumes language limitations.
+
+**References**
+
+* [https://learn.microsoft.com/en-us/azure/architecture/data-guide/technology-choices/natural-language-processing](https://learn.microsoft.com/en-us/azure/architecture/data-guide/technology-choices/natural-language-processing)
+* [https://learn.microsoft.com/en-us/azure/ai-services/language-service/overview](https://learn.microsoft.com/en-us/azure/ai-services/language-service/overview)
+* [https://medium.com/@hitesh.hinduja/navigating-azure-ai-an-extensive-guide-to-language-vision-speech-decision-and-azure-open-ai-3da656668591](https://medium.com/@hitesh.hinduja/navigating-azure-ai-an-extensive-guide-to-language-vision-speech-decision-and-azure-open-ai-3da656668591)
+
+Yes. In this context, **Azure AI Speech translation is a separate capability from the Azure AI Translator service**, even though they are closely related and often confused on exams.
+
+**How they are different**
+
+* **Azure AI Speech (Speech Translation)**
+
+  * Starts with **audio** as input
+  * Performs **speech-to-text** and can **translate spoken language directly into another language**
+  * Designed for real-time or near–real-time scenarios such as calls, meetings, interviews, and live conversations
+  * Exam keyword: *spoken audio → translated output*
+
+* **Azure AI Translator (Text Translation)**
+
+  * Starts with **text** as input
+  * Translates text from one language to another
+  * Used after transcription, or when the source is already written (documents, chat logs, UI strings)
+  * Exam keyword: *text → translated text*
+
+**Why this matters for the exam**
+
+In your question scenario, the workflow is:
+
+Spoken interview (non-English) → written text
+
+That requirement is fully satisfied by **Azure AI Speech alone**. Translation is optional and only needed if the output must be in a different language. You do **not** need Azure Translator unless you are explicitly given **text-only input** or a **separate translation step** is called out.
+
+**Exam rule of thumb**
+
+* Audio involved → **Azure AI Speech**
+* Text only → **Azure AI Translator**
+* Audio + translation in one step → **Azure AI Speech (speech translation)**
+
+**References**
+
+* No stable Microsoft Learn link can be guaranteed for this specific exam concept.
+
+</details>
+
+---
