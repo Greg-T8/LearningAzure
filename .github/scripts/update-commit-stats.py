@@ -58,7 +58,8 @@ def get_commits_by_path(days=7):
     return commits_by_date_cert
 
 def calculate_hours(timestamps):
-    """Calculate hours between first and last commit"""
+    """Calculate hours between first and last commit
+    For weekdays (Mon-Fri), caps the end time at 8:00 AM Central"""
     if not timestamps or len(timestamps) == 0:
         return 0.0
 
@@ -71,6 +72,12 @@ def calculate_hours(timestamps):
     # Get earliest and latest
     earliest = min(dt_objects)
     latest = max(dt_objects)
+
+    # For weekdays (Mon=0 to Fri=4), cap the latest time at 8:00 AM
+    if earliest.weekday() < 5:  # Monday through Friday
+        work_start = earliest.replace(hour=8, minute=0, second=0)
+        if latest > work_start:
+            latest = work_start
 
     # Calculate difference in hours
     time_diff = latest - earliest

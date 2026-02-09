@@ -84,6 +84,8 @@ This will update your local README.md with current commit statistics.
 ## 📝 Notes
 
 - Activity is measured in hours (time between first and last commit of the day)
+- **Weekdays (Mon-Fri)**: Last commit time is capped at 8:00 AM Central (work start time)
+- **Weekends**: No time cap applied
 - Single commits count as 0h of activity (no time span)
 - Files are categorized by their path prefix (AI-102/, AZ-104/, AI-900/)
 - Repo-level commits (.github/, README.md) are tracked separately but not displayed in the statistics table
