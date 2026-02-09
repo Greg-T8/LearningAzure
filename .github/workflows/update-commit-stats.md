@@ -20,9 +20,13 @@ Python script that:
 1. Analyzes git commit history for the last 7 days
 2. Groups commits by certification (AI-102, AZ-104, AI-900)
 3. Calculates hours of activity (time between first and last commit per day)
-4. Generates a markdown table with daily activity hours
-5. Updates the README.md file between the markers
-6. Displays timestamp in Central Time (CST/CDT)
+4. Calculates running totals since each certification's start date:
+   - AI-900: Started 1/14/26
+   - AZ-104: Started 1/14/26
+   - AI-102: Started 2/9/26
+5. Generates a markdown table with daily activity hours, weekly totals, and running totals
+6. Updates the README.md file between the markers
+7. Displays timestamp in Central Time (CST/CDT)
 
 ## 🔧 How It Works
 
@@ -37,7 +41,8 @@ Python script that:
    - Date (formatted as "Day, Mon DD")
    - Hours of activity per certification
    - Daily totals
-   - Week totals
+   - Weekly totals (sum of last 7 days)
+   - Running totals (cumulative hours since each certification's start date)
    - 🟢 indicators for active days
 4. Updates README.md between `<!-- COMMIT_STATS_START -->` and `<!-- COMMIT_STATS_END -->` markers
 5. Commits and pushes changes if any updates were made
@@ -50,7 +55,8 @@ Python script that:
 | Tue, Jan 27 | 🟢 8.5h | 🟢 6.2h | 🟢 2.3h | **17.0h** |
 | Mon, Jan 26 |  |  |  |  |
 ...
-| **Total** | **42.5h** | **38.7h** | **15.3h** | **96.5h** |
+| **Weekly Total** | **42.5h** | **38.7h** | **15.3h** | **96.5h** |
+| **Running Total** | **142.3h** | **168.9h** | **45.7h** | **356.9h** |
 
 *🟢 = Activity on this day (hours between first and last commit in that certification folder)*
 *Last updated: January 27, 2026 at 14:09 CST*
@@ -94,6 +100,11 @@ This will update your local README.md with current commit statistics.
 - Dates and timestamps are shown in Central Time (CST/CDT)
 - The table shows the most recent 7 days (rolling window)
 - Activity indicator (🟢) appears next to any day with activity hours > 0
+- **Weekly Total**: Sum of hours for the last 7 days
+- **Running Total**: Cumulative hours since each certification's start date:
+  - AI-900 started: 1/14/26
+  - AZ-104 started: 1/14/26
+  - AI-102 started: 2/9/26
 
 ---
 

@@ -11,9 +11,10 @@ from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 from collections import defaultdict
 
-def get_commits_by_path(days=7):
-    """Get commit timestamps by path for the last N days"""
-    since_date = (datetime.now() - timedelta(days=days)).strftime('%Y-%m-%d')
+def get_commits_by_path(days=7, since_date=None):
+    """Get commit timestamps by path for the last N days or since a specific date"""
+    if since_date is None:
+        since_date = (datetime.now() - timedelta(days=days)).strftime('%Y-%m-%d')
 
     # Get all commits since the date with file paths and timestamps
     cmd = [
@@ -85,6 +86,32 @@ def calculate_hours(timestamps):
 
     return round(hours, 1)
 
+def calculate_running_totals():
+    """Calculate running totals since each certification's start date"""
+    # Start dates for each certification
+    start_dates = {
+        'AI-900': '2026-01-14',
+        'AZ-104': '2026-01-14',
+        'AI-102': '2026-02-09'
+    }
+
+    running_totals = {}
+
+    # Calculate running total for each certification
+    for cert, start_date in start_dates.items():
+        # Get all commits since start date
+        commits = get_commits_by_path(since_date=start_date)
+
+        # Calculate total hours across all days
+        total_hours = 0.0
+        for date_commits in commits.values():
+            if cert in date_commits:
+                total_hours += calculate_hours(date_commits[cert])
+
+        running_totals[cert] = total_hours
+
+    return running_totals
+
 def generate_commit_table(commits_by_date_cert, days=7):
     """Generate markdown table for commit statistics"""
 
@@ -129,9 +156,17 @@ def generate_commit_table(commits_by_date_cert, days=7):
 
         table += f"| {formatted_date} | {ai102_str} | {az104_str} | {ai900_str} | {total_str} |\n"
 
-    # Add totals row
-    grand_total = total_ai102 + total_az104 + total_ai900
-    table += f"| **Total** | **{total_ai102:.1f}h** | **{total_az104:.1f}h** | **{total_ai900:.1f}h** | **{grand_total:.1f}h** |\n"
+    # Add weekly totals row
+    weekly_total = total_ai102 + total_az104 + total_ai900
+    table += f"| **Weekly Total** | **{total_ai102:.1f}h** | **{total_az104:.1f}h** | **{total_ai900:.1f}h** | **{weekly_total:.1f}h** |\n"
+
+    # Calculate and add running totals row
+    running_totals = calculate_running_totals()
+    running_ai102 = running_totals.get('AI-102', 0.0)
+    running_az104 = running_totals.get('AZ-104', 0.0)
+    running_ai900 = running_totals.get('AI-900', 0.0)
+    running_grand_total = running_ai102 + running_az104 + running_ai900
+    table += f"| **Running Total** | **{running_ai102:.1f}h** | **{running_az104:.1f}h** | **{running_ai900:.1f}h** | **{running_grand_total:.1f}h** |\n"
 
     table += "\n*🟢 = Activity on this day (hours between first and last commit in that certification folder)*\n"
 
