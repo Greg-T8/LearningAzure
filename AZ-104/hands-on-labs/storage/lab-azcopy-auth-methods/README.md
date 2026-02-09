@@ -140,14 +140,27 @@ az storage copy -s "https://sourceblob.blob.core.windows.net/container/file.txt"
 #### 2. Test Blob Storage with Access Keys ✅
 
 ```powershell
-# Copy blob using access key (specify with --account-key parameter)
-az storage copy -s "https://sourceblob.blob.core.windows.net/container/file.txt" `
-    -d "https://devstore.blob.core.windows.net/container/" `
-    --destination-account-name devstore `
-    --destination-account-key "<access-key>"
+# Retrieve account keys
+$sourceKey = az storage account keys list --account-name staz104azcopyauthsrc --query "[0].value" -o tsv
+$destKey = az storage account keys list --account-name staz104azcopyauthtgt --query "[0].value" -o tsv
+
+# Copy blob using access keys (use account/container/blob flags, not URLs)
+az storage copy `
+    --source-account-name staz104azcopyauthsrc `
+    --source-container data `
+    --source-blob "test.pdf" `
+    --source-account-key $sourceKey `
+    --destination-account-name staz104azcopyauthtgt `
+    --destination-container data `
+    --destination-blob "test.pdf" `
+    --account-key $destKey
 ```
 
 **Expected**: ✅ Success
+
+> **Important**: When using access keys, use the `--source-account-name`, `--source-container`, `--source-blob` pattern instead of full URLs. Azure CLI constructs the URLs internally. Provide `--source-account-key` for source and `--account-key` for destination.
+
+<img src='.img/2026-02-09-04-33-10.png' width=700>
 
 #### 3. Test Blob Storage with SAS Token ✅
 
