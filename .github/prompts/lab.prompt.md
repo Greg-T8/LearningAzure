@@ -20,12 +20,14 @@ You are tasked with creating a comprehensive hands-on lab based on an exam quest
 2. Look for exam folder in workspace structure (e.g., AZ-104, AI-900, AZ-305)
 3. If unclear, ask the user which exam this lab is for
 
-Use the exam identifier throughout (e.g., "AZ-104", "AI-900") and lowercase prefix (e.g., "az104", "ai900").
+Use the exam identifier throughout (e.g., "AZ-104", "AI-102") and lowercase prefix (e.g., "az104", "ai102").
+
+**Note**: Not all exam folders may have full governance support. Check GOVERNANCE.md for currently supported exams.
 
 ### Governance File
 
 **CRITICAL**: Read and strictly follow the governance requirements in:
-- `#file:<EXAM>/hands-on-labs/GOVERNANCE.md` (replace `<EXAM>` with the determined exam)
+- `#file:GOVERNANCE.md` (located in workspace root)
 
 The GOVERNANCE.md file is the **single source of truth** for:
 - Naming conventions (resource groups, resources, deployment stacks)
@@ -43,7 +45,7 @@ The GOVERNANCE.md file is the **single source of truth** for:
 Different exams focus on different Azure services:
 
 - **AZ-104** (Azure Administrator): Infrastructure resources (VMs, Networks, Storage, Identity)
-- **AI-900** (Azure AI Fundamentals): Cognitive Services, Azure AI services, Machine Learning basics
+- **AI-102** (AI Engineer Associate): Azure OpenAI, Cognitive Services, AI solutions, ML models
 - **AZ-305** (Azure Solutions Architect): Complex architectures, multi-service integrations
 - **DP-203** (Azure Data Engineer): Data Factory, Synapse, Databricks, Storage
 - **AZ-400** (DevOps Engineer): Pipelines, Container registries, monitoring, deployment
@@ -691,7 +693,7 @@ Create a Terraform hands-on lab for the following AZ-104 exam question:
 ```
 
 ```
-Create a Bicep hands-on lab for the following AI-900 exam question:
+Create a Bicep hands-on lab for the following AI-102 exam question:
 
 [Paste exam question here]
 ```
@@ -709,7 +711,7 @@ Create a Terraform hands-on lab for the following exam question:
 If you cannot determine the exam from context or the user's request, ask:
 
 ```
-Which exam is this lab for? (e.g., AZ-104, AI-900, AZ-305)
+Which exam is this lab for? (e.g., AZ-104, AI-102, AZ-305)
 ```
 
 Then proceed with the appropriate exam-specific configuration.
