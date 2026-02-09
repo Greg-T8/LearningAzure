@@ -46,7 +46,7 @@ Python script that:
    - Color-coded activity indicators:
      - 🟡 Light Yellow: Low activity (< 1 hour)
      - 🟢 Green: Medium activity (1-2 hours)
-     - 🔴 Red: High activity (> 2 hours)
+     - 🟣 Purple: High activity (> 2 hours)
 4. Updates README.md between `<!-- COMMIT_STATS_START -->` and `<!-- COMMIT_STATS_END -->` markers
 5. Commits and pushes changes if any updates were made
 
@@ -55,13 +55,13 @@ Python script that:
 ```markdown
 | Date | AI-102 | AZ-104 | AI-900 | Total |
 |------|--------|--------|--------|-------|
-| Tue, Jan 27 | 🔴 8.5h | 🔴 6.2h | 🟢 2.3h | **17.0h** |
+| Tue, Jan 27 | 🟣 8.5h | 🟣 6.2h | 🟢 2.3h | **17.0h** |
 | Mon, Jan 26 | 🟡 0.5h |  |  | **0.5h** |
 ...
 | **Weekly Total** | **42.5h** | **38.7h** | **15.3h** | **96.5h** |
 | ***Running Total*** | ***142.3h*** | ***168.9h*** | ***45.7h*** | ***356.9h*** |
 
-*Activity Levels: 🟡 Low (< 1hr) | 🟢 Medium (1-2hrs) | 🔴 High (> 2hrs)*
+*Activity Levels: 🟡 Low (< 1hr) | 🟢 Medium (1-2hrs) | 🟣 High (> 2hrs)*
 
 *Hours = time between first and last commit of the day in that certification folder*
 *Last updated: January 27, 2026 at 14:09 CST*
@@ -107,7 +107,7 @@ This will update your local README.md with current commit statistics.
 - Activity indicators use a color scale:
   - 🟡 Light Yellow: Low activity (< 1 hour)
   - 🟢 Green: Medium activity (1-2 hours)
-  - 🔴 Red: High activity (> 2 hours)
+  - 🟣 Purple: High activity (> 2 hours)
 - **Weekly Total**: Sum of hours for the last 7 days (bold formatting)
 - ***Running Total***: Cumulative hours since each certification's start date (bold + italic for emphasis):
   - AI-900 started: 1/14/26
