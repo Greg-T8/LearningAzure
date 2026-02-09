@@ -122,10 +122,10 @@ def generate_commit_table(commits_by_date_cert, days=7):
         formatted_date = date_obj.strftime('%a, %b %d')
 
         # Use emoji indicators for activity
-        ai102_str = f"{'🟢 ' if ai102_hours > 0 else ''}{ai102_hours}h" if ai102_hours > 0 else "0h"
-        az104_str = f"{'🟢 ' if az104_hours > 0 else ''}{az104_hours}h" if az104_hours > 0 else "0h"
-        ai900_str = f"{'🟢 ' if ai900_hours > 0 else ''}{ai900_hours}h" if ai900_hours > 0 else "0h"
-        total_str = f"**{daily_total:.1f}h**" if daily_total > 0 else "0h"
+        ai102_str = f"🟢 {ai102_hours}h" if ai102_hours > 0 else ""
+        az104_str = f"🟢 {az104_hours}h" if az104_hours > 0 else ""
+        ai900_str = f"🟢 {ai900_hours}h" if ai900_hours > 0 else ""
+        total_str = f"**{daily_total:.1f}h**" if daily_total > 0 else ""
 
         table += f"| {formatted_date} | {ai102_str} | {az104_str} | {ai900_str} | {total_str} |\n"
 
