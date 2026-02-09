@@ -24,20 +24,20 @@ Comprehensive study notes, progress trackers, practice exams, and hands-on labs 
 <!-- COMMIT_STATS_START -->
 ## 📈 Recent Activity (Last 7 Days)
 
-| Date | AI-900 | AZ-104 | Total |
-|------|--------|--------|-------|
-| Mon, Feb 09 | 🟢 6 | 🟢 13 | **19** |
-| Sun, Feb 08 | 🟢 13 | 🟢 29 | **42** |
-| Sat, Feb 07 | 🟢 13 | 🟢 38 | **51** |
-| Fri, Feb 06 | 0 | 🟢 11 | **11** |
-| Thu, Feb 05 | 🟢 7 | 🟢 62 | **69** |
-| Wed, Feb 04 | 🟢 50 | 🟢 249 | **299** |
-| Tue, Feb 03 | 🟢 19 | 🟢 17 | **36** |
-| **Total** | **108** | **419** | **527** |
+| Date | AI-102 | AZ-104 | AI-900 | Total |
+|------|--------|--------|--------|-------|
+| Mon, Feb 09 | 🟢 23 | 🟢 13 | 🟢 9 | **45** |
+| Sun, Feb 08 | 0 | 🟢 29 | 🟢 13 | **42** |
+| Sat, Feb 07 | 0 | 🟢 38 | 🟢 13 | **51** |
+| Fri, Feb 06 | 0 | 🟢 11 | 0 | **11** |
+| Thu, Feb 05 | 0 | 🟢 62 | 🟢 7 | **69** |
+| Wed, Feb 04 | 0 | 🟢 249 | 🟢 50 | **299** |
+| Tue, Feb 03 | 0 | 🟢 17 | 🟢 19 | **36** |
+| **Total** | **23** | **419** | **111** | **553** |
 
 *🟢 = Activity on this day (commits with file changes in that certification folder)*
 
-*Last updated: February 09, 2026 at 08:22 CST*
+*Last updated: February 09, 2026 at 11:14 CST*
 
 <!-- COMMIT_STATS_END -->
 
