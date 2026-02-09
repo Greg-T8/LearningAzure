@@ -86,6 +86,17 @@ def calculate_hours(timestamps):
 
     return round(hours, 1)
 
+def get_activity_emoji(hours):
+    """Return color-coded emoji based on activity hours"""
+    if hours == 0:
+        return ""
+    elif hours < 1.0:
+        return "🟡"  # Yellow - Low activity
+    elif hours <= 2.0:
+        return "🟠"  # Orange - Medium activity
+    else:
+        return "🟢"  # Green - High activity
+
 def calculate_running_totals():
     """Calculate running totals since each certification's start date"""
     # Start dates for each certification
@@ -148,10 +159,14 @@ def generate_commit_table(commits_by_date_cert, days=7):
         date_obj = datetime.strptime(date, '%Y-%m-%d')
         formatted_date = date_obj.strftime('%a, %b %d')
 
-        # Use emoji indicators for activity
-        ai102_str = f"🟢 {ai102_hours}h" if ai102_hours > 0 else ""
-        az104_str = f"🟢 {az104_hours}h" if az104_hours > 0 else ""
-        ai900_str = f"🟢 {ai900_hours}h" if ai900_hours > 0 else ""
+        # Use color-coded emoji indicators for activity
+        ai102_emoji = get_activity_emoji(ai102_hours)
+        az104_emoji = get_activity_emoji(az104_hours)
+        ai900_emoji = get_activity_emoji(ai900_hours)
+
+        ai102_str = f"{ai102_emoji} {ai102_hours}h" if ai102_hours > 0 else ""
+        az104_str = f"{az104_emoji} {az104_hours}h" if az104_hours > 0 else ""
+        ai900_str = f"{ai900_emoji} {ai900_hours}h" if ai900_hours > 0 else ""
         total_str = f"**{daily_total:.1f}h**" if daily_total > 0 else ""
 
         table += f"| {formatted_date} | {ai102_str} | {az104_str} | {ai900_str} | {total_str} |\n"
@@ -168,7 +183,8 @@ def generate_commit_table(commits_by_date_cert, days=7):
     running_grand_total = running_ai102 + running_az104 + running_ai900
     table += f"| **Running Total** | **{running_ai102:.1f}h** | **{running_az104:.1f}h** | **{running_ai900:.1f}h** | **{running_grand_total:.1f}h** |\n"
 
-    table += "\n*🟢 = Activity on this day (hours between first and last commit in that certification folder)*\n"
+    table += "\n*Activity Levels: 🟡 Low (< 1hr) | 🟠 Medium (1-2hrs) | 🟢 High (> 2hrs)*\n"
+    table += "*Hours = time between first and last commit of the day in that certification folder*\n"
 
     # Get current time in Central timezone
     central_time = datetime.now(ZoneInfo('America/Chicago'))

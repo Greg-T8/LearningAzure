@@ -43,7 +43,10 @@ Python script that:
    - Daily totals
    - Weekly totals (sum of last 7 days)
    - Running totals (cumulative hours since each certification's start date)
-   - 🟢 indicators for active days
+   - Color-coded activity indicators:
+     - 🟡 Yellow: Low activity (< 1 hour)
+     - 🟠 Orange: Medium activity (1-2 hours)
+     - 🟢 Green: High activity (> 2 hours)
 4. Updates README.md between `<!-- COMMIT_STATS_START -->` and `<!-- COMMIT_STATS_END -->` markers
 5. Commits and pushes changes if any updates were made
 
@@ -52,13 +55,14 @@ Python script that:
 ```markdown
 | Date | AI-102 | AZ-104 | AI-900 | Total |
 |------|--------|--------|--------|-------|
-| Tue, Jan 27 | 🟢 8.5h | 🟢 6.2h | 🟢 2.3h | **17.0h** |
-| Mon, Jan 26 |  |  |  |  |
+| Tue, Jan 27 | 🟢 8.5h | 🟢 6.2h | � 2.3h | **17.0h** |
+| Mon, Jan 26 | 🟡 0.5h |  |  | **0.5h** |
 ...
 | **Weekly Total** | **42.5h** | **38.7h** | **15.3h** | **96.5h** |
 | **Running Total** | **142.3h** | **168.9h** | **45.7h** | **356.9h** |
 
-*🟢 = Activity on this day (hours between first and last commit in that certification folder)*
+*Activity Levels: 🟡 Low (< 1hr) | 🟠 Medium (1-2hrs) | 🟢 High (> 2hrs)*
+*Hours = time between first and last commit of the day in that certification folder*
 *Last updated: January 27, 2026 at 14:09 CST*
 ```
 
@@ -99,7 +103,10 @@ This will update your local README.md with current commit statistics.
 - The workflow uses `[skip ci]` in commit messages to avoid triggering itself
 - Dates and timestamps are shown in Central Time (CST/CDT)
 - The table shows the most recent 7 days (rolling window)
-- Activity indicator (🟢) appears next to any day with activity hours > 0
+- Activity indicators use a color scale:
+  - 🟡 Yellow: Low activity (< 1 hour)
+  - 🟠 Orange: Medium activity (1-2 hours)
+  - 🟢 Green: High activity (> 2 hours)
 - **Weekly Total**: Sum of hours for the last 7 days
 - **Running Total**: Cumulative hours since each certification's start date:
   - AI-900 started: 1/14/26
