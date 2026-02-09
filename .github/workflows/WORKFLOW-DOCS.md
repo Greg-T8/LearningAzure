@@ -5,16 +5,20 @@ This directory contains the GitHub Actions workflow that automatically updates c
 ## 📁 Files
 
 ### `workflows/update-commit-stats.yml`
+
 The GitHub Actions workflow file that runs the statistics update.
 
 **Triggers:**
+
 - **Daily**: Automatically at 8:00 AM Central Time (14:00 UTC)
 - **Manual**: Can be triggered manually from the Actions tab
 
 ### `scripts/update-commit-stats.py`
+
 Python script that:
+
 1. Analyzes git commit history for the last 7 days
-2. Groups commits by certification (AI-900, AZ-104)
+2. Groups commits by certification (AI-102, AZ-104, AI-900)
 3. Generates a markdown table with daily commit counts
 4. Updates the README.md file between the markers
 5. Displays timestamp in Central Time (CST/CDT)
@@ -24,8 +28,9 @@ Python script that:
 1. The workflow checks out the repository with full git history
 2. Python script runs to analyze commits:
    - Looks at the last 7 days of commits
-   - Categorizes files by path (AI-900/, AZ-104/)
+   - Categorizes files by path (AI-102/, AZ-104/, AI-900/)
    - Counts commits per day per certification
+   - Also tracks repo-level commits (.github/, README.md) separately
 3. Generates a markdown table with:
    - Date (formatted as "Day, Mon DD")
    - Commits per certification
@@ -38,14 +43,14 @@ Python script that:
 ## 📊 Table Format
 
 ```markdown
-| Date | AI-900 | AZ-104 | Total |
-|------|--------|--------|-------|
-| Tue, Jan 27 | 🟢 87 | 🟢 60 | **147** |
-| Mon, Jan 26 | 0 | 0 | 0 |
+| Date | AI-102 | AZ-104 | AI-900 | Total |
+|------|--------|--------|--------|-------|
+| Tue, Jan 27 | 🟢 87 | 🟢 60 | 🟢 15 | **162** |
+| Mon, Jan 26 | 0 | 0 | 0 | 0 |
 ...
-| **Total** | **156** | **195** | **351** |
+| **Total** | **156** | **195** | **42** | **393** |
 
-*🟢 = Activity on this day*
+*🟢 = Activity on this day (commits with file changes in that certification folder)*
 *Last updated: January 27, 2026 at 14:09 CST*
 ```
 
@@ -77,7 +82,8 @@ This will update your local README.md with current commit statistics.
 ## 📝 Notes
 
 - The commit count is based on files changed, not individual commits
-- Files are categorized by their path prefix (AI-900/, AZ-104/)
+- Files are categorized by their path prefix (AI-102/, AZ-104/, AI-900/)
+- Repo-level commits (.github/, README.md) are tracked separately but not displayed in the statistics table
 - The workflow uses `[skip ci]` in commit messages to avoid triggering itself
 - Dates and timestamps are shown in Central Time (CST/CDT)
 - The table shows the most recent 7 days (rolling window)
@@ -85,4 +91,4 @@ This will update your local README.md with current commit statistics.
 
 ---
 
-*Last updated: January 28, 2026*
+*Last updated: February 9, 2026*
