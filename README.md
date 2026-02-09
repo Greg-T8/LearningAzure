@@ -4,7 +4,7 @@
 
 This repository documents my journey learning Microsoft Azure — from certification preparation to staying current with the latest platform updates and best practices.
 
-[![AI-900](https://img.shields.io/badge/AI--900-In%20Progress-yellow)](AI-900/) [![AZ-104](https://img.shields.io/badge/AZ--104-In%20Progress-yellow)](AZ-104/) ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/Greg-T8/LearningAzure) ![GitHub last commit](https://img.shields.io/github/last-commit/Greg-T8/LearningAzure)
+[![AI-900](https://img.shields.io/badge/AI--900-In%20Progress-yellow)](AI-900/) [![AI-102](https://img.shields.io/badge/AI--102-Not%20Started-lightgrey)](AI-102/) [![AZ-104](https://img.shields.io/badge/AZ--104-In%20Progress-yellow)](AZ-104/) ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/Greg-T8/LearningAzure) ![GitHub last commit](https://img.shields.io/github/last-commit/Greg-T8/LearningAzure)
 </div>
 
 ---
@@ -14,6 +14,7 @@ This repository documents my journey learning Microsoft Azure — from certifica
 Comprehensive study notes, progress trackers, practice exams, and hands-on labs for each certification:
 
 - 📘 [**AI-900 Progress**](AI-900/README.md) — Azure AI Fundamentals
+- 📙 [**AI-102 Progress**](AI-102/README.md) — Azure AI Engineer Associate
 - 📗 [**AZ-104 Progress**](AZ-104/README.md) — Azure Administrator
 
 ---
