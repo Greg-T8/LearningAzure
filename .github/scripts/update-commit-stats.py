@@ -91,11 +91,11 @@ def get_activity_emoji(hours):
     if hours == 0:
         return ""
     elif hours < 1.0:
-        return "🟡"  # Yellow - Low activity
+        return "🟡"  # Light yellow - Low activity
     elif hours <= 2.0:
-        return "🟠"  # Orange - Medium activity
+        return "🟢"  # Green - Medium activity
     else:
-        return "🟢"  # Green - High activity
+        return "🔴"  # Red - High activity
 
 def calculate_running_totals():
     """Calculate running totals since each certification's start date"""
@@ -183,8 +183,8 @@ def generate_commit_table(commits_by_date_cert, days=7):
     running_grand_total = running_ai102 + running_az104 + running_ai900
     table += f"| **Running Total** | **{running_ai102:.1f}h** | **{running_az104:.1f}h** | **{running_ai900:.1f}h** | **{running_grand_total:.1f}h** |\n"
 
-    table += "\n*Activity Levels: 🟡 Low (< 1hr) | 🟠 Medium (1-2hrs) | 🟢 High (> 2hrs)*\n"
-    table += "*Hours = time between first and last commit of the day in that certification folder*\n"
+    table += "\n*Activity Levels: 🟡 Low (< 1hr) | � Medium (1-2hrs) | 🔴 High (> 2hrs)*\n"
+    table += "\n*Hours = time between first and last commit of the day in that certification folder*\n"
 
     # Get current time in Central timezone
     central_time = datetime.now(ZoneInfo('America/Chicago'))
