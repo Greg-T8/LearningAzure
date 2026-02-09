@@ -13,7 +13,7 @@ This repository documents my journey learning Microsoft Azure — from certifica
 
 ## 📚 Certifications
 
-Comprehensive study notes, progress trackers, practice exams, and hands-on labs for each certification:
+Progress trackers, detailed study notes, practice exams, and custom hands-on labs built from Terraform and Bicep:
 
 - 📙 [**AI-102**](AI-102/README.md) — Azure AI Engineer Associate
 - 📗 [**AZ-104**](AZ-104/README.md) — Azure Administrator
