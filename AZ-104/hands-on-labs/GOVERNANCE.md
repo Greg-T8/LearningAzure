@@ -210,6 +210,7 @@ These standards prevent common deployment errors and ensure reliable infrastruct
 ### Subnet Delegation
 
 Some services require subnet delegation:
+
 - Azure Container Instances: `Microsoft.ContainerInstance/containerGroups`
 - Azure Databricks: `Microsoft.Databricks/workspaces`
 - Azure NetApp Files: `Microsoft.NetApp/volumes`
@@ -234,30 +235,33 @@ Every lab directory must include a `README.md` with:
 1. **Lab Overview**
    - Brief description of what the lab demonstrates
    - AZ-104 exam objective reference (e.g., "Configure and manage virtual networks (25-30%)")
-   
+
 2. **Prerequisites**
    - Azure CLI or PowerShell requirements
    - Required permissions (e.g., Contributor on subscription)
    - Any pre-existing resources needed
-   
+
 3. **Deployment Steps**
+
    ```bash
    # Terraform example
    terraform init
    terraform plan -var="domain=networking" -var="topic=vnet-peering"
    terraform apply -auto-approve
    ```
+
    ```powershell
    # Bicep example
    ./bicep.ps1 Plan
    ./bicep.ps1 Deploy
    ```
-   
+
 4. **Validation Steps**
    - How to verify the deployment worked
    - Expected outcomes or tests to run
-   
+
 5. **Cleanup Procedure**
+
    ```bash
    # Terraform
    terraform destroy -auto-approve
@@ -275,6 +279,28 @@ Every lab directory must include a `README.md` with:
 
 ### Terraform Standards
 
+#### Provider Selection: AzureRM vs AzAPI
+
+**Use AzureRM provider for all AZ-104 labs** unless a specific feature absolutely requires AzAPI.
+
+| Provider | When to Use | Characteristics |
+|----------|-------------|-----------------|
+| **AzureRM** (Standard) | Default for all labs | ✅ Mature, well-documented<br>✅ Strongly-typed with IntelliSense<br>✅ Best for learning and production<br>✅ Comprehensive resource coverage |
+| **AzAPI** (Advanced) | Only when AzureRM lacks a feature | ⚠️ Direct REST API access<br>⚠️ More complex, less intuitive<br>⚠️ For preview/bleeding-edge features<br>⚠️ Requires Azure REST API knowledge |
+
+**Rationale**: AzureRM is the appropriate choice for certification labs because it's:
+
+- Industry standard for Azure infrastructure-as-code
+- Better documented with more examples
+- Easier to read and understand
+- More aligned with exam objectives and real-world usage
+
+**AzAPI use cases** (rare in AZ-104 context):
+
+- A brand-new Azure service not yet in AzureRM
+- Preview feature with no AzureRM support
+- Specific property not exposed by AzureRM resource
+
 #### Required Versions
 
 ```hcl
@@ -290,6 +316,12 @@ terraform {
     # random = {
     #   source  = "hashicorp/random"
     #   version = "~> 3.0"
+    # }
+    #
+    # Only add azapi if absolutely necessary for a specific unsupported feature:
+    # azapi = {
+    #   source  = "Azure/azapi"
+    #   version = "~> 2.0"
     # }
   }
 }
@@ -322,11 +354,13 @@ lab-<topic>/
 
 - Use `terraform.tfvars` for local values (gitignored)
 - **Required content**:
+
   ```hcl
   lab_subscription_id = "e091f6e7-031a-4924-97bb-8c983ca5d21a"
   location = "eastus"
   owner    = "Greg Tate"
   ```
+
 - Provide `terraform.tfvars.example` as template
 - Document all variables in `variables.tf` with descriptions
 - **Never** store admin passwords in variable files
@@ -336,11 +370,13 @@ lab-<topic>/
 **When to create modules**: Use modules when the lab creates **3 or more related resources** within a logical grouping (e.g., networking, compute, storage). For very simple labs with only 1-2 resources total, modules are optional.
 
 **Module structure** — each module in `modules/<group>/`:
+
 - `main.tf` — resource definitions
 - `variables.tf` — input variables (tags, location, names, etc.)
 - `outputs.tf` — values needed by other modules or root outputs
 
 **Module design principles**:
+
 - **Group by logical domain**: `modules/networking/`, `modules/compute/`, `modules/storage/`
 - **Self-contained**: Each module receives everything it needs via variables
 - **Tag passing**: Pass `common_tags` as a `map(string)` variable and merge with resource-specific tags
@@ -348,6 +384,7 @@ lab-<topic>/
 - **Resource group placement**: Typically define resource group in `main.tf` (not in a module) since most modules need its name as input
 
 **Orchestration layer** (`main.tf`):
+
 - Keep `main.tf` thin — it should primarily call modules
 - Define resource group, locals (common_tags, resource_group_name), and module calls
 - Pass `common_tags`, `location`, and naming values into modules
@@ -360,6 +397,7 @@ lab-<topic>/
 **CRITICAL**: Automatically generate friendly admin passwords that are easy to type but meet complexity requirements.
 
 **Terraform approach**:
+
 ```hcl
 # In providers.tf, add to required_providers:
 random = {
@@ -386,12 +424,14 @@ output "admin_password" {
 ```
 
 **Friendly password patterns** (all meet complexity requirements):
+
 - `AzureLab2026!` - Simple, memorable
 - `LabPassword${variation}!` - Pattern with variation
 - `Learning@Azure123` - Descriptive
 - `Demo${year}Pass!` - Year-based
 
 **Requirements**:
+
 - Must include: uppercase, lowercase, numbers, special characters
 - Output passwords so users can access resources
 - Mark password outputs as `sensitive = true`
@@ -448,11 +488,13 @@ lab-<topic>/
 **When to create modules**: Use modules when the lab creates **3 or more related resources** within a logical grouping. For very simple labs with only 1-2 resources total, modules are optional.
 
 **Module structure** — each module in `modules/`:
+
 - `modules/<group>.bicep` (e.g., `modules/networking.bicep`, `modules/compute.bicep`)
 - Declare parameters for all inputs (tags, location, names, etc.)
 - Declare outputs for values needed by other modules or root template
 
 **Module design principles**:
+
 - **Group by logical domain**: `networking.bicep`, `compute.bicep`, `storage.bicep`
 - **Self-contained**: Each module receives everything it needs via parameters
 - **Tag passing**: Pass `commonTags` as an `object` parameter, use `union()` for resource-specific tags
@@ -460,6 +502,7 @@ lab-<topic>/
 - **Resource group placement**: Typically define resource group in `main.bicep` (subscription-scoped), modules are scoped to it
 
 **Orchestration layer** (`main.bicep`):
+
 - Keep `main.bicep` thin — it should primarily call modules
 - Define resource group, commonTags variable, and module calls
 - Use `@allowed()` decorator for domain parameter validation
@@ -471,6 +514,7 @@ lab-<topic>/
 **Password Generation for Lab Environments**:
 
 **Bicep approach**:
+
 ```bicep
 // In main.bicep:
 var adminPassword = 'AzureLab${uniqueString(resourceGroup().id, '2026')}!'
@@ -484,12 +528,14 @@ output adminPassword string = adminPassword
 ```
 
 **Friendly password patterns** (all meet complexity requirements):
+
 - `AzureLab2026!` - Simple, memorable
 - `LabPassword${variation}!` - Pattern with variation
 - `Learning@Azure123` - Descriptive
 - `Demo${year}Pass!` - Year-based
 
 **Requirements**:
+
 - Must include: uppercase, lowercase, numbers, special characters
 - Output passwords so users can access resources
 - Ensure complexity requirements are met
@@ -610,21 +656,25 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 Before deploying any lab:
 
 ### Naming & Organization
+
 - [ ] Resource group follows `az104-<domain>-<topic>-<deployment_method>` pattern
 - [ ] Resource names follow defined prefix patterns
 - [ ] Deployment stack (Bicep) follows `stack-<domain>-<topic>` pattern
 
 ### Tagging & Metadata
+
 - [ ] All resources include required tags: `Environment`, `Project`, `Domain`, `Purpose`, `Owner`, `DateCreated`, `DeploymentMethod`
 - [ ] `DateCreated` set to current date for cleanup tracking
 
 ### Configuration
+
 - [ ] Location is in allowed regions (`eastus`, `eastus2`, `westus2`)
 - [ ] VM sizes are cost-appropriate (`Standard_B2s` or smaller)
 - [ ] VM auto-shutdown configured for 7:00 PM EST
 - [ ] Resource counts within limits (VMs ≤4, Public IPs ≤5, etc.)
 
 ### Documentation
+
 - [ ] README.md includes lab overview and AZ-104 exam objective
 - [ ] README.md documents prerequisites and required permissions
 - [ ] README.md provides deployment steps with example commands
@@ -633,13 +683,16 @@ Before deploying any lab:
 - [ ] Parameter file example provided (`.tfvars.example` or `.bicepparam`)
 
 ### Code Quality
-- [ ] **Terraform:** Version constraints specified (`>= 1.5.0`)
+
+- [ ] **Terraform:** Using AzureRM provider (not AzAPI) unless specific feature requires it
+- [ ] **Terraform:** Version constraints specified (`>= 1.0`)
 - [ ] **Terraform:** `terraform.tfvars` in `.gitignore`
 - [ ] **Bicep:** `bicepconfig.json` present with linter rules
 - [ ] **Bicep:** Deployment script (`bicep.ps1`) included
 - [ ] Sensitive values use appropriate security mechanisms
 
 ### Testing
+
 - [ ] Deployment tested and validates successfully
 - [ ] Cleanup/destroy commands tested and verified
 - [ ] No orphaned resources remain after cleanup
