@@ -165,12 +165,48 @@ az storage copy `
 #### 3. Test Blob Storage with SAS Token ✅
 
 ```powershell
-# Copy blob using SAS token (append to URL or use --sas-token parameter)
-az storage copy -s "https://sourceblob.blob.core.windows.net/container/file.txt?<sas-token>" `
-    -d "https://devstore.blob.core.windows.net/container/?<dest-sas-token>"
+# Retrieve account keys (needed for SAS generation)
+$sourceKey = az storage account keys list --account-name staz104azcopyauthsrc --query "[0].value" -o tsv
+$destKey = az storage account keys list --account-name staz104azcopyauthtgt --query "[0].value" -o tsv
+
+# Generate SAS tokens (valid for 1 hour)
+$expiry = (Get-Date).AddHours(1).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")
+
+$srcSas = az storage container generate-sas `
+    --account-name staz104azcopyauthsrc `
+    --account-key $sourceKey `
+    --name data `
+    --permissions racwdl `
+    --expiry $expiry `
+    -o tsv
+
+$tgtSas = az storage container generate-sas `
+    --account-name staz104azcopyauthtgt `
+    --account-key $destKey `
+    --name data `
+    --permissions racwdl `
+    --expiry $expiry `
+    -o tsv
+
+# Copy blob using SAS tokens (use account/container/blob flags, not URLs)
+az storage copy `
+    --source-account-name staz104azcopyauthsrc `
+    --source-sas `"$srcSas`" `
+    --source-container data `
+    --source-blob "test.pdf" `
+    --destination-account-name staz104azcopyauthtgt `
+    --sas-token `"$tgtSas`" `
+    --destination-container data `
+    --destination-blob "test.pdf"
 ```
 
 **Expected**: ✅ Success
+
+> **PowerShell Gotcha**: SAS tokens contain `&` characters that PowerShell interprets as command separators. Use backtick escaping: `` `"$srcSas`" `` or single quotes: `'$srcSas'` to prevent parsing errors like "sp is not recognized as a command".
+
+> **Note**: Use `--account-key` for SAS generation (more reliable than `--auth-mode login`). Use `--source-sas` for source SAS token and `--sas-token` for destination SAS token. Use `--destination-account-name` (not `--account-name`) for the destination. Azure CLI constructs the URLs internally.
+
+<img src='.img/2026-02-09-04-50-09.png' width=700>
 
 #### 4. Test File Storage with Entra ID ❌
 
@@ -206,6 +242,8 @@ az storage copy -s "https://sourcefile.file.core.windows.net/share/file.txt?<sas
 ```
 
 **Expected**: ✅ Success
+
+> **PowerShell Gotcha**: If using variables with SAS tokens, escape them: `` -s "https://...?`"$sasToken`"" `` to prevent `&` characters from being interpreted as command separators.
 
 ## Validation Criteria
 
@@ -315,6 +353,23 @@ az storage copy -s "https://source.file.core.windows.net/share/file.txt?<sas>" -
 az storage copy -s "source" -d "dest" --destination-account-key "<key>"
 
 # For SAS, ensure token is appended to URL (with ? for first parameter)
+```
+
+### Error: "'sp' is not recognized as a command" or "'sv' is not recognized as a command"
+
+**Cause**: PowerShell is interpreting `&` characters in SAS tokens as command separators
+
+**Solution**: Escape the SAS token variable with backticks or use single quotes
+
+```powershell
+# Wrong - PowerShell parses & as command separator
+--source-sas "$srcSas"
+
+# Correct - Backtick escape prevents parsing
+--source-sas `"$srcSas`"
+
+# Also correct - Single quotes prevent variable expansion parsing
+--source-sas '$srcSas'
 ```
 
 ### Error: "This request is not authorized to perform this operation"
