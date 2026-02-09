@@ -1,8 +1,6 @@
 ---
 name: question
 description: Generates a title + question text and wraps the screenshot image in a <details> block
-target: editor
-mode: insert
 ---
 
 # Exam Question Title Generator 🔖
@@ -10,6 +8,7 @@ mode: insert
 ## ⚠️ CRITICAL SCREENSHOT REQUIREMENT ⚠️
 
 ### MANDATORY WORKFLOW - FOLLOW THESE STEPS IN ORDER:
+
 1. **ANALYZE THE ATTACHED IMAGE**: Look at the image that is attached/visible in the current context (this contains the screenshot you need to analyze)
 2. **READ THE EDITOR**: Examine the editor content that appears BELOW the current cursor position
 3. **FIND THE IMAGE TAG**: Locate the FIRST `<img>` tag below the cursor and extract its `src` attribute path
@@ -18,6 +17,7 @@ mode: insert
 6. **REUSE THE PATH**: Use the image path from step 3 (found below cursor) in your output's `<img>` tag
 
 ### CRITICAL RULES:
+
 - **ANALYZE** the screenshot image that you can actually see/view in the current context
 - **REUSE THE PATH** from the `<img>` tag found below the cursor in the editor
 - **DO NOT** hallucinate, make up content, or reuse text from other questions in the file
@@ -33,6 +33,7 @@ You are given a screenshot image that contains the context of an exam-style ques
 ## Requirements ✅
 
 ### IMAGE ANALYSIS WORKFLOW (MANDATORY):
+
 1. **Analyze Visible Screenshot**: Look at the screenshot image that is visible/attached in the current context - THIS is what you analyze
 2. **Read Editor Content**: Look at the content in the editor that appears BELOW the cursor position
 3. **Extract Image Path**: Find the FIRST `<img src='...'` tag below cursor and extract the file path from the `src` attribute
@@ -42,6 +43,7 @@ You are given a screenshot image that contains the context of an exam-style ques
 7. **Reuse Path**: Use the image path from step 3 (from editor) in your output's `<img>` tag
 
 ### OUTPUT FORMAT:
+
 - **ANALYZE**: The screenshot image that is visible/attached in your context
 - **REUSE PATH**: The image path from the `<img>` tag found below the cursor
 - **DO NOT** hallucinate or make up content - only describe what you actually see in the visible screenshot
@@ -56,11 +58,11 @@ You are given a screenshot image that contains the context of an exam-style ques
   3. Then wrap the image tag in a `<details>` block:
      - `<details>`
      - `<summary>📸 Click to expand screenshot</summary>`
-    - Insert a blank line
-    - **CRITICAL: Create an `<img>` tag using the SAME path from the screenshot below the cursor** (format: `<img src='PATH_FROM_CURSOR_IMAGE' width=700>`)
-    - **DO NOT change the image path—reuse the exact path from the img tag below the cursor**
-    - Insert a blank line
-     - `</details>`
+  - Insert a blank line
+  - **CRITICAL: Create an `<img>` tag using the SAME path from the screenshot below the cursor** (format: `<img src='PATH_FROM_CURSOR_IMAGE' width=700>`)
+  - **DO NOT change the image path—reuse the exact path from the img tag below the cursor**
+  - Insert a blank line
+  - `</details>`
   4. Add an explanation block (open by default):
      - `<details open>`
      - `<summary>💡 Click to expand explanation</summary>`
@@ -86,6 +88,7 @@ You are given a screenshot image that contains the context of an exam-style ques
 ---
 
 ## Style Tips 💡
+
 - Prefer active, outcome-oriented titles: "Fix", "Troubleshoot", "Resolve", "Configure", "Identify".
 - Avoid punctuation at the end (no question marks or exclamation marks).
 - Keep it exam-appropriate and neutral — concise and specific.
@@ -95,14 +98,17 @@ You are given a screenshot image that contains the context of an exam-style ques
 ## Examples (Input → Output)
 
 ### COMPLETE WORKFLOW EXAMPLE:
+
 **What I can see:** A screenshot image showing a question titled "Identifying Machine Learning Model Deployment Options" asking which Azure service to use to host a trained ML model as a web service endpoint. Answer choices visible are: A. Azure Machine Learning designer, B. Azure Machine Learning Endpoints, C. Azure Synapse Analytics, D. Azure Data Factory
 
 **Editor content below cursor shows:**
+
 ```
 <img src='.img/2026-02-08-ml-deployment.png' width=700>
 ```
 
 **Workflow:**
+
 - **Step 1**: I can SEE a screenshot about ML model deployment options
 - **Step 2**: Read editor below cursor
 - **Step 3**: Found img path: `.img/2026-02-08-ml-deployment.png`
@@ -112,6 +118,7 @@ You are given a screenshot image that contains the context of an exam-style ques
 - **Step 7**: Use the path from step 3 in output
 
 **Output:**
+
 ```
 ### Identifying Machine Learning Model Deployment Options
 You need to deploy a trained machine learning model to production so that client applications can consume predictions in real-time. Which Azure service should you use to host the model and expose it as a web service endpoint?
@@ -141,9 +148,12 @@ D. Azure Data Factory
 ---
 
 ### MORE EXAMPLES:
+
 - Screenshot: Azure AD Connect sync error showing object deletion failures
   Output:
+
   ### Troubleshooting Azure AD Connect Sync Failures
+
   Your Azure AD Connect sync is failing with object deletion errors. Which action should you take?
   A. ...
   B. ...
@@ -178,6 +188,7 @@ D. Azure Data Factory
 ---
 
 ## Notes
+
 - **MANDATORY IMAGE VIEWING**: You absolutely MUST analyze the visible screenshot image before generating any output. If you generate content without viewing the screenshot, your output will be wrong.
 - Before generating, ask yourself: "Have I actually seen the screenshot image and analyzed what's in it?" If no, stop - you cannot proceed.
 - **TWO-PART PROCESS**: (1) Analyze the screenshot you can see, (2) Get the file path from the editor below cursor, (3) Use that path in output.
