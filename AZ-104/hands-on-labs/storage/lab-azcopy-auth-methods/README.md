@@ -135,6 +135,8 @@ az storage copy -s "https://sourceblob.blob.core.windows.net/container/file.txt"
 
 **Expected**: ✅ Success
 
+<img src='.img/2026-02-09-04-12-06.png' width=700>
+
 #### 2. Test Blob Storage with Access Keys ✅
 
 ```powershell
