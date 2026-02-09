@@ -45,6 +45,8 @@ def get_commits_by_path(days=7):
             # Determine certification from path
             if line.startswith('AI-900/'):
                 commits_by_date_cert[current_date]['AI-900'] += 1
+            elif line.startswith('AI-102/'):
+                commits_by_date_cert[current_date]['AI-102'] += 1
             elif line.startswith('AZ-104/'):
                 commits_by_date_cert[current_date]['AZ-104'] += 1
             elif line.startswith('.github/') or line == 'README.md':
@@ -63,34 +65,38 @@ def generate_commit_table(commits_by_date_cert, days=7):
 
     # Build table
     table = "## 📈 Recent Activity (Last 7 Days)\n\n"
-    table += "| Date | AI-900 | AZ-104 | Total |\n"
-    table += "|------|--------|--------|-------|\n"
+    table += "| Date | AI-102 | AZ-104 | AI-900 | Total |\n"
+    table += "|------|--------|--------|--------|-------|\n"
 
-    total_ai900 = 0
+    total_ai102 = 0
     total_az104 = 0
+    total_ai900 = 0
 
     for date in dates:
-        ai900 = commits_by_date_cert.get(date, {}).get('AI-900', 0)
+        ai102 = commits_by_date_cert.get(date, {}).get('AI-102', 0)
         az104 = commits_by_date_cert.get(date, {}).get('AZ-104', 0)
-        daily_total = ai900 + az104
+        ai900 = commits_by_date_cert.get(date, {}).get('AI-900', 0)
+        daily_total = ai102 + az104 + ai900
 
-        total_ai900 += ai900
+        total_ai102 += ai102
         total_az104 += az104
+        total_ai900 += ai900
 
         # Format date as Mon, Oct 29
         date_obj = datetime.strptime(date, '%Y-%m-%d')
         formatted_date = date_obj.strftime('%a, %b %d')
 
         # Use emoji indicators for activity
-        ai900_str = f"{'🟢 ' if ai900 > 0 else ''}{ai900}"
+        ai102_str = f"{'🟢 ' if ai102 > 0 else ''}{ai102}"
         az104_str = f"{'🟢 ' if az104 > 0 else ''}{az104}"
+        ai900_str = f"{'🟢 ' if ai900 > 0 else ''}{ai900}"
         total_str = f"**{daily_total}**" if daily_total > 0 else "0"
 
-        table += f"| {formatted_date} | {ai900_str} | {az104_str} | {total_str} |\n"
+        table += f"| {formatted_date} | {ai102_str} | {az104_str} | {ai900_str} | {total_str} |\n"
 
     # Add totals row
-    grand_total = total_ai900 + total_az104
-    table += f"| **Total** | **{total_ai900}** | **{total_az104}** | **{grand_total}** |\n"
+    grand_total = total_ai102 + total_az104 + total_ai900
+    table += f"| **Total** | **{total_ai102}** | **{total_az104}** | **{total_ai900}** | **{grand_total}** |\n"
 
     table += "\n*🟢 = Activity on this day (commits with file changes in that certification folder)*\n"
 
