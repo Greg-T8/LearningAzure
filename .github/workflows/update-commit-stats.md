@@ -59,7 +59,7 @@ Python script that:
 | Mon, Jan 26 | 🟡 0.5h |  |  | **0.5h** |
 ...
 | **Weekly Total** | **42.5h** | **38.7h** | **15.3h** | **96.5h** |
-| **Running Total** | **142.3h** | **168.9h** | **45.7h** | **356.9h** |
+| ***Running Total*** | ***142.3h*** | ***168.9h*** | ***45.7h*** | ***356.9h*** |
 
 *Activity Levels: 🟡 Low (< 1hr) | 🟢 Medium (1-2hrs) | 🔴 High (> 2hrs)*
 
@@ -108,8 +108,8 @@ This will update your local README.md with current commit statistics.
   - 🟡 Light Yellow: Low activity (< 1 hour)
   - 🟢 Green: Medium activity (1-2 hours)
   - 🔴 Red: High activity (> 2 hours)
-- **Weekly Total**: Sum of hours for the last 7 days
-- **Running Total**: Cumulative hours since each certification's start date:
+- **Weekly Total**: Sum of hours for the last 7 days (bold formatting)
+- ***Running Total***: Cumulative hours since each certification's start date (bold + italic for emphasis):
   - AI-900 started: 1/14/26
   - AZ-104 started: 1/14/26
   - AI-102 started: 2/9/26
