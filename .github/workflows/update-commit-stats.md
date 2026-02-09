@@ -48,7 +48,7 @@ Python script that:
 | Date | AI-102 | AZ-104 | AI-900 | Total |
 |------|--------|--------|--------|-------|
 | Tue, Jan 27 | 🟢 8.5h | 🟢 6.2h | 🟢 2.3h | **17.0h** |
-| Mon, Jan 26 | 0h | 0h | 0h | 0h |
+| Mon, Jan 26 |  |  |  |  |
 ...
 | **Total** | **42.5h** | **38.7h** | **15.3h** | **96.5h** |
 
@@ -87,6 +87,7 @@ This will update your local README.md with current commit statistics.
 - **Weekdays (Mon-Fri)**: Last commit time is capped at 8:00 AM Central (work start time)
 - **Weekends**: No time cap applied
 - Single commits count as 0h of activity (no time span)
+- Days with 0h activity show as blank cells in the table
 - Files are categorized by their path prefix (AI-102/, AZ-104/, AI-900/)
 - Repo-level commits (.github/, README.md) are tracked separately but not displayed in the statistics table
 - The workflow uses `[skip ci]` in commit messages to avoid triggering itself
