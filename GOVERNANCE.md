@@ -1,6 +1,6 @@
 # Hands-On Labs Governance Policy
 
-Standards and naming conventions for all Terraform and Bicep implementations across Azure certification labs (AI-102, AI-900, AZ-104, etc.).
+Standards and naming conventions for all Terraform and Bicep implementations across Azure certification labs (AI-102, AZ-104, etc.).
 
 ---
 
@@ -20,7 +20,7 @@ All resources **must** include these tags:
 | Tag | Description | Example |
 |-----|-------------|---------|
 | `Environment` | Fixed value | `Lab` |
-| `Project` | Certification context | `AI-102`, `AI-900`, `AZ-104` |
+| `Project` | Certification context | `AI-102`, `AZ-104` |
 | `Domain` | Exam domain or area | `Networking`, `AI-Services`, `Computer-Vision` |
 | `Purpose` | What the lab demonstrates | `VNet Peering`, `DALL-E Image Generation` |
 | `Owner` | Your identifier | `Greg Tate` |
@@ -40,10 +40,10 @@ All resources **must** include these tags:
 | `storage` | Storage Accounts, Blob Containers, File Shares, Disks | AZ-104, AI-102 |
 | `compute` | Virtual Machines, VM Scale Sets, Availability Sets, App Services | AZ-104 |
 | `monitoring` | Log Analytics Workspaces, Recovery Services Vaults, Action Groups, Alerts | AZ-104 |
-| `ai-services` | Cognitive Services (OpenAI, Vision, Language, Speech, etc.), AI Foundry, Cognitive Deployments | AI-102, AI-900 |
-| `generative-ai` | Azure OpenAI, Model Deployments (GPT-4, DALL-E, etc.), Prompt Flow | AI-102, AI-900 |
-| `computer-vision` | Computer Vision, Custom Vision, Face API, Form Recognizer/Document Intelligence | AI-102, AI-900 |
-| `nlp` | Language Service, Translator, Speech Services | AI-102, AI-900 |
+| `ai-services` | Cognitive Services (OpenAI, Vision, Language, Speech, etc.), Microsoft Foundry, Cognitive Deployments | AI-102 |
+| `generative-ai` | Azure OpenAI, Model Deployments (GPT-4, DALL-E, etc.), Prompt Flow | AI-102 |
+| `computer-vision` | Computer Vision, Custom Vision, Face API, Form Recognizer/Document Intelligence | AI-102 |
+| `nlp` | Language Service, Translator, Speech Services | AI-102 |
 
 ---
 
@@ -55,8 +55,8 @@ All resources **must** include these tags:
 
 | Segment | Description | Allowed Values |
 |---------|-------------|----------------|
-| `<exam>` | Certification exam code (lowercase) | `ai102`, `ai900`, `az104` |
-| `<domain>` | Exam domain or service area | AZ-104: `identity`, `networking`, `storage`, `compute`, `monitoring`<br>AI-102/AI-900: `ai-services`, `generative-ai`, `computer-vision`, `nlp`, `knowledge-mining` |
+| `<exam>` | Certification exam code (lowercase) | `ai102`, `az104` |
+| `<domain>` | Exam domain or service area | AZ-104: `identity`, `networking`, `storage`, `compute`, `monitoring`<br>AI-102: `ai-services`, `generative-ai`, `computer-vision`, `nlp`, `knowledge-mining` |
 | `<topic>` | Lab topic (kebab-case) | e.g., `vnet-peering`, `dalle-image-gen`, `custom-vision` |
 | `<deployment_method>` | IaC tool used | `tf` (Terraform), `bicep` (Bicep) |
 
@@ -98,7 +98,7 @@ All resources **must** include these tags:
 | Log Analytics Workspace | `law` | `law-central` | |
 | Recovery Services Vault | `rsv` | `rsv-backup` | |
 
-#### Azure AI Services Resources (AI-102, AI-900)
+#### Azure AI Services Resources (AI-102)
 
 | Resource Type | Prefix | Example | Notes |
 |---------------|--------|---------|-------|
@@ -113,8 +113,8 @@ All resources **must** include these tags:
 | Form Recognizer/Document Intelligence | `doc` | `doc-invoice-lab` | Document processing |
 | AI Search (Cognitive Search) | `srch` | `srch-knowledge-lab` | Cognitive/AI Search service |
 | Cognitive Deployment (Model) | `deploy` | `deploy-gpt4`, `deploy-dalle3` | Model deployment within OpenAI account |
-| AI Foundry Hub | `aih` | `aih-project-hub` | AI Foundry hub resource |
-| AI Foundry Project | `aip` | `aip-genai-lab` | AI Foundry project resource |
+| Microsoft Foundry Hub | `mfh` | `mfh-project-hub` | Microsoft Foundry hub resource |
+| Microsoft Foundry Project | `mfp` | `mfp-genai-lab` | Microsoft Foundry project resource |
 | Storage Account (AI outputs) | `st<exam><topic>` | `stai102dalle01`, `stai102img01` | For storing AI-generated content |
 
 **AI Resource Naming Notes:**
@@ -181,7 +181,7 @@ All resources **must** include these tags:
 | SQL Database | Basic or S0 tier | Higher tiers only for performance testing |
 | Managed Disks | Standard HDD | Premium SSD only when required |
 
-#### Azure AI Services Resources (AI-102, AI-900)
+#### Azure AI Services Resources (AI-102)
 
 | Resource Type | Default SKU/Tier | Notes |
 |---------------|------------------|-------|
@@ -345,7 +345,7 @@ Every lab directory must include a `README.md` with:
    - Azure CLI or PowerShell requirements
    - Required permissions (e.g., Contributor on subscription)
    - Any pre-existing resources needed
-   - For AI labs: API version requirements, model availability
+   - For AI-102 labs: API version requirements, model availability
 
 3. **Deployment Steps**
 
@@ -367,7 +367,7 @@ Every lab directory must include a `README.md` with:
    - Expected outcomes or tests to run
    - For AI labs: Include sample API calls, expected responses
 
-5. **Testing AI Services** (AI-102/AI-900 specific)
+5. **Testing AI Services** (AI-102 specific)
    - Connection string / endpoint / key retrieval
    - Sample REST API calls or SDK code
    - Expected outputs (images, text, analysis results)
@@ -724,8 +724,8 @@ variable "exam" {
   description = "Certification exam code (lowercase)"
   type        = string
   validation {
-    condition     = contains(["ai102", "ai900", "az104"], var.exam)
-    error_message = "Exam must be: ai102, ai900, or az104."
+    condition     = contains(["ai102", "az104"], var.exam)
+    error_message = "Exam must be: ai102 or az104."
   }
 }
 
@@ -788,8 +788,8 @@ variable "exam" {
   type        = string
   default     = "ai102"
   validation {
-    condition     = contains(["ai102", "ai900", "az104"], var.exam)
-    error_message = "Exam must be: ai102, ai900, or az104."
+    condition     = contains(["ai102", "az104"], var.exam)
+    error_message = "Exam must be: ai102 or az104."
   }
 }
 
@@ -963,7 +963,7 @@ output "storage_container_name" {
 
 targetScope = 'subscription'
 
-@allowed(['ai102', 'ai900', 'az104'])
+@allowed(['ai102', 'az104'])
 param exam string = 'ai102'
 
 @allowed(['ai-services', 'generative-ai', 'computer-vision', 'nlp', 'knowledge-mining'])
@@ -1096,7 +1096,7 @@ Before deploying any lab:
 ### Tagging & Metadata
 
 - [ ] All resources include required tags: `Environment`, `Project`, `Domain`, `Purpose`, `Owner`, `DateCreated`, `DeploymentMethod`
-- [ ] `Project` tag uses uppercase exam code (AI-102, AI-900, AZ-104)
+- [ ] `Project` tag uses uppercase exam code (AI-102, AZ-104)
 - [ ] `DateCreated` set to current date for cleanup tracking
 
 ### Configuration
@@ -1272,5 +1272,5 @@ resource "azurerm_cognitive_account" "cv_prediction" {
 
 | Date | Version | Changes |
 |------|---------|---------|
-| 2026-02-09 | 2.0 | Extended governance to AI-102 and AI-900; added Azure AI services naming; multi-exam support |
+| 2026-02-09 | 2.0 | Extended governance to AI-102; added Azure AI services naming; multi-exam support |
 | 2026-01-15 | 1.0 | Initial AZ-104 governance policy |
