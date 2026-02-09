@@ -27,17 +27,17 @@ Comprehensive study notes, progress trackers, practice exams, and hands-on labs 
 | Date | AI-102 | AZ-104 | AI-900 | Total |
 |------|--------|--------|--------|-------|
 | Mon, Feb 09 | 🟢 1.1h | 🟢 2.9h | 🟢 2.4h | **6.4h** |
-| Sun, Feb 08 | 0h | 🟢 2.9h | 🟢 1.0h | **3.9h** |
-| Sat, Feb 07 | 0h | 🟢 2.7h | 🟢 0.6h | **3.3h** |
-| Fri, Feb 06 | 0h | 🟢 3.7h | 0h | **3.7h** |
-| Thu, Feb 05 | 0h | 🟢 5.1h | 🟢 0.4h | **5.5h** |
-| Wed, Feb 04 | 0h | 🟢 5.0h | 0h | **5.0h** |
-| Tue, Feb 03 | 0h | 🟢 1.4h | 🟢 0.7h | **2.1h** |
+| Sun, Feb 08 |  | 🟢 2.9h | 🟢 1.0h | **3.9h** |
+| Sat, Feb 07 |  | 🟢 2.7h | 🟢 0.6h | **3.3h** |
+| Fri, Feb 06 |  | 🟢 3.7h |  | **3.7h** |
+| Thu, Feb 05 |  | 🟢 5.1h | 🟢 0.4h | **5.5h** |
+| Wed, Feb 04 |  | 🟢 5.0h |  | **5.0h** |
+| Tue, Feb 03 |  | 🟢 1.4h | 🟢 0.7h | **2.1h** |
 | **Total** | **1.1h** | **23.7h** | **5.1h** | **29.9h** |
 
 *🟢 = Activity on this day (hours between first and last commit in that certification folder)*
 
-*Last updated: February 09, 2026 at 12:05 CST*
+*Last updated: February 09, 2026 at 12:07 CST*
 
 <!-- COMMIT_STATS_END -->
 
