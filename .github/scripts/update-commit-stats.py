@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """
 Update commit statistics in README.md
-Tracks commits per certification for the last 7 days
+Tracks hours of activity per certification for the last 7 days
+(Hours = time between first and last commit of the day)
 """
 
 import subprocess
@@ -11,16 +12,16 @@ from zoneinfo import ZoneInfo
 from collections import defaultdict
 
 def get_commits_by_path(days=7):
-    """Get commit counts by path for the last N days"""
+    """Get commit timestamps by path for the last N days"""
     since_date = (datetime.now() - timedelta(days=days)).strftime('%Y-%m-%d')
 
-    # Get all commits since the date with file paths
+    # Get all commits since the date with file paths and timestamps
     cmd = [
         'git', 'log',
         f'--since={since_date}',
         '--name-only',
         '--pretty=format:%H|%ad|%s',
-        '--date=format:%Y-%m-%d'
+        '--date=format:%Y-%m-%d %H:%M:%S'
     ]
 
     result = subprocess.run(cmd, capture_output=True, text=True)
@@ -29,30 +30,53 @@ def get_commits_by_path(days=7):
         print(f"Error running git log: {result.stderr}")
         return {}
 
-    # Parse commits and group by date and certification
-    commits_by_date_cert = defaultdict(lambda: defaultdict(int))
+    # Parse commits and group timestamps by date and certification
+    commits_by_date_cert = defaultdict(lambda: defaultdict(list))
 
     lines = result.stdout.strip().split('\n')
     current_commit = None
+    current_datetime = None
     current_date = None
 
     for line in lines:
         if '|' in line:  # Commit info line
             parts = line.split('|')
             if len(parts) >= 2:
-                current_date = parts[1]
-        elif line.strip() and current_date:  # File path line
+                current_datetime = parts[1]
+                current_date = current_datetime.split()[0]  # Extract just the date
+        elif line.strip() and current_datetime:  # File path line
             # Determine certification from path
             if line.startswith('AI-900/'):
-                commits_by_date_cert[current_date]['AI-900'] += 1
+                commits_by_date_cert[current_date]['AI-900'].append(current_datetime)
             elif line.startswith('AI-102/'):
-                commits_by_date_cert[current_date]['AI-102'] += 1
+                commits_by_date_cert[current_date]['AI-102'].append(current_datetime)
             elif line.startswith('AZ-104/'):
-                commits_by_date_cert[current_date]['AZ-104'] += 1
+                commits_by_date_cert[current_date]['AZ-104'].append(current_datetime)
             elif line.startswith('.github/') or line == 'README.md':
-                commits_by_date_cert[current_date]['Repo'] += 1
+                commits_by_date_cert[current_date]['Repo'].append(current_datetime)
 
     return commits_by_date_cert
+
+def calculate_hours(timestamps):
+    """Calculate hours between first and last commit"""
+    if not timestamps or len(timestamps) == 0:
+        return 0.0
+
+    if len(timestamps) == 1:
+        return 0.0  # Single commit = 0 hours of activity
+
+    # Parse timestamps
+    dt_objects = [datetime.strptime(ts, '%Y-%m-%d %H:%M:%S') for ts in timestamps]
+
+    # Get earliest and latest
+    earliest = min(dt_objects)
+    latest = max(dt_objects)
+
+    # Calculate difference in hours
+    time_diff = latest - earliest
+    hours = time_diff.total_seconds() / 3600
+
+    return round(hours, 1)
 
 def generate_commit_table(commits_by_date_cert, days=7):
     """Generate markdown table for commit statistics"""
@@ -68,37 +92,41 @@ def generate_commit_table(commits_by_date_cert, days=7):
     table += "| Date | AI-102 | AZ-104 | AI-900 | Total |\n"
     table += "|------|--------|--------|--------|-------|\n"
 
-    total_ai102 = 0
-    total_az104 = 0
-    total_ai900 = 0
+    total_ai102 = 0.0
+    total_az104 = 0.0
+    total_ai900 = 0.0
 
     for date in dates:
-        ai102 = commits_by_date_cert.get(date, {}).get('AI-102', 0)
-        az104 = commits_by_date_cert.get(date, {}).get('AZ-104', 0)
-        ai900 = commits_by_date_cert.get(date, {}).get('AI-900', 0)
-        daily_total = ai102 + az104 + ai900
+        ai102_timestamps = commits_by_date_cert.get(date, {}).get('AI-102', [])
+        az104_timestamps = commits_by_date_cert.get(date, {}).get('AZ-104', [])
+        ai900_timestamps = commits_by_date_cert.get(date, {}).get('AI-900', [])
 
-        total_ai102 += ai102
-        total_az104 += az104
-        total_ai900 += ai900
+        ai102_hours = calculate_hours(ai102_timestamps)
+        az104_hours = calculate_hours(az104_timestamps)
+        ai900_hours = calculate_hours(ai900_timestamps)
+        daily_total = ai102_hours + az104_hours + ai900_hours
+
+        total_ai102 += ai102_hours
+        total_az104 += az104_hours
+        total_ai900 += ai900_hours
 
         # Format date as Mon, Oct 29
         date_obj = datetime.strptime(date, '%Y-%m-%d')
         formatted_date = date_obj.strftime('%a, %b %d')
 
         # Use emoji indicators for activity
-        ai102_str = f"{'🟢 ' if ai102 > 0 else ''}{ai102}"
-        az104_str = f"{'🟢 ' if az104 > 0 else ''}{az104}"
-        ai900_str = f"{'🟢 ' if ai900 > 0 else ''}{ai900}"
-        total_str = f"**{daily_total}**" if daily_total > 0 else "0"
+        ai102_str = f"{'🟢 ' if ai102_hours > 0 else ''}{ai102_hours}h" if ai102_hours > 0 else "0h"
+        az104_str = f"{'🟢 ' if az104_hours > 0 else ''}{az104_hours}h" if az104_hours > 0 else "0h"
+        ai900_str = f"{'🟢 ' if ai900_hours > 0 else ''}{ai900_hours}h" if ai900_hours > 0 else "0h"
+        total_str = f"**{daily_total:.1f}h**" if daily_total > 0 else "0h"
 
         table += f"| {formatted_date} | {ai102_str} | {az104_str} | {ai900_str} | {total_str} |\n"
 
     # Add totals row
     grand_total = total_ai102 + total_az104 + total_ai900
-    table += f"| **Total** | **{total_ai102}** | **{total_az104}** | **{total_ai900}** | **{grand_total}** |\n"
+    table += f"| **Total** | **{total_ai102:.1f}h** | **{total_az104:.1f}h** | **{total_ai900:.1f}h** | **{grand_total:.1f}h** |\n"
 
-    table += "\n*🟢 = Activity on this day (commits with file changes in that certification folder)*\n"
+    table += "\n*🟢 = Activity on this day (hours between first and last commit in that certification folder)*\n"
 
     # Get current time in Central timezone
     central_time = datetime.now(ZoneInfo('America/Chicago'))

@@ -19,9 +19,10 @@ Python script that:
 
 1. Analyzes git commit history for the last 7 days
 2. Groups commits by certification (AI-102, AZ-104, AI-900)
-3. Generates a markdown table with daily commit counts
-4. Updates the README.md file between the markers
-5. Displays timestamp in Central Time (CST/CDT)
+3. Calculates hours of activity (time between first and last commit per day)
+4. Generates a markdown table with daily activity hours
+5. Updates the README.md file between the markers
+6. Displays timestamp in Central Time (CST/CDT)
 
 ## 🔧 How It Works
 
@@ -29,11 +30,12 @@ Python script that:
 2. Python script runs to analyze commits:
    - Looks at the last 7 days of commits
    - Categorizes files by path (AI-102/, AZ-104/, AI-900/)
-   - Counts commits per day per certification
+   - Tracks commit timestamps per day per certification
+   - Calculates hours of activity (time between first and last commit of the day)
    - Also tracks repo-level commits (.github/, README.md) separately
 3. Generates a markdown table with:
    - Date (formatted as "Day, Mon DD")
-   - Commits per certification
+   - Hours of activity per certification
    - Daily totals
    - Week totals
    - 🟢 indicators for active days
@@ -45,12 +47,12 @@ Python script that:
 ```markdown
 | Date | AI-102 | AZ-104 | AI-900 | Total |
 |------|--------|--------|--------|-------|
-| Tue, Jan 27 | 🟢 87 | 🟢 60 | 🟢 15 | **162** |
-| Mon, Jan 26 | 0 | 0 | 0 | 0 |
+| Tue, Jan 27 | 🟢 8.5h | 🟢 6.2h | 🟢 2.3h | **17.0h** |
+| Mon, Jan 26 | 0h | 0h | 0h | 0h |
 ...
-| **Total** | **156** | **195** | **42** | **393** |
+| **Total** | **42.5h** | **38.7h** | **15.3h** | **96.5h** |
 
-*🟢 = Activity on this day (commits with file changes in that certification folder)*
+*🟢 = Activity on this day (hours between first and last commit in that certification folder)*
 *Last updated: January 27, 2026 at 14:09 CST*
 ```
 
@@ -81,13 +83,14 @@ This will update your local README.md with current commit statistics.
 
 ## 📝 Notes
 
-- The commit count is based on files changed, not individual commits
+- Activity is measured in hours (time between first and last commit of the day)
+- Single commits count as 0h of activity (no time span)
 - Files are categorized by their path prefix (AI-102/, AZ-104/, AI-900/)
 - Repo-level commits (.github/, README.md) are tracked separately but not displayed in the statistics table
 - The workflow uses `[skip ci]` in commit messages to avoid triggering itself
 - Dates and timestamps are shown in Central Time (CST/CDT)
 - The table shows the most recent 7 days (rolling window)
-- Activity indicator (🟢) appears next to any day with commits
+- Activity indicator (🟢) appears next to any day with activity hours > 0
 
 ---
 
