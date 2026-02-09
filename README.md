@@ -33,11 +33,12 @@ Progress trackers, detailed study notes, practice exams, and custom hands-on lab
 | Thu, Feb 05 |  | 🟢 5.1h | 🟢 0.4h | **5.5h** |
 | Wed, Feb 04 |  | 🟢 5.0h |  | **5.0h** |
 | Tue, Feb 03 |  | 🟢 1.4h | 🟢 0.7h | **2.1h** |
-| **Total** | **1.1h** | **23.7h** | **5.1h** | **29.9h** |
+| **Weekly Total** | **1.1h** | **23.7h** | **5.1h** | **29.9h** |
+| **Running Total** | **0.0h** | **55.7h** | **21.7h** | **77.4h** |
 
 *🟢 = Activity on this day (hours between first and last commit in that certification folder)*
 
-*Last updated: February 09, 2026 at 12:07 CST*
+*Last updated: February 09, 2026 at 12:29 CST*
 
 <!-- COMMIT_STATS_END -->
 
