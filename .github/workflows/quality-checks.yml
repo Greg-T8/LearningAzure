@@ -6,7 +6,7 @@
 # -------------------------------------------------------------------------
 
 # Workflow name
-name: quality-checks
+name: Quality Checks
 
 # Workflow triggers: run on all branches, PRs, and weekday schedule for link checks
 on:
