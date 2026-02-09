@@ -361,6 +361,8 @@ These reminders ensure smooth participation, access to content after the event, 
 
 ![Slide 6](2026_AVS_Bootcamp_Day_3_Notes_images/slide_006.png)
 
+[Jump to 2:12](https://gtatepubliceus01.blob.core.windows.net/downloads/2026_AVS_Bootcamp_Day3.mp4#t=5025)
+
 ### Key Points
 
 - Introduction to the AVS Bootcamp 2026 event.

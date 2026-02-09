@@ -91,62 +91,32 @@ module targetStorage 'modules/storage-account.bicep' = {
   }
 }
 
-// Role Assignment: Storage Blob Data Contributor on Source Storage
-module sourceBlobRoleAssignment 'modules/role-assignment.bicep' = {
+// Role Assignment: Storage Blob Data Contributor (applies to all storage accounts in RG)
+module blobRoleAssignment 'modules/role-assignment.bicep' = {
   scope: labResourceGroup
-  name: 'source-blob-role-assignment'
+  name: 'blob-role-assignment'
   params: {
     principalId: userObjectId
     roleDefinitionId: storageBlobDataContributorRoleId
-    resourceName: sourceStorageName
-    resourceType: 'Microsoft.Storage/storageAccounts'
+    resourceName: resourceGroupName
   }
   dependsOn: [
     sourceStorage
-  ]
-}
-
-// Role Assignment: Storage Blob Data Contributor on Target Storage
-module targetBlobRoleAssignment 'modules/role-assignment.bicep' = {
-  scope: labResourceGroup
-  name: 'target-blob-role-assignment'
-  params: {
-    principalId: userObjectId
-    roleDefinitionId: storageBlobDataContributorRoleId
-    resourceName: targetStorageName
-    resourceType: 'Microsoft.Storage/storageAccounts'
-  }
-  dependsOn: [
     targetStorage
   ]
 }
 
-// Role Assignment: Storage File Data SMB Share Contributor on Source Storage
-module sourceFileRoleAssignment 'modules/role-assignment.bicep' = {
+// Role Assignment: Storage File Data SMB Share Contributor (applies to all storage accounts in RG)
+module fileRoleAssignment 'modules/role-assignment.bicep' = {
   scope: labResourceGroup
-  name: 'source-file-role-assignment'
+  name: 'file-role-assignment'
   params: {
     principalId: userObjectId
     roleDefinitionId: storageFileDataSmbShareContributorRoleId
-    resourceName: sourceStorageName
-    resourceType: 'Microsoft.Storage/storageAccounts'
+    resourceName: resourceGroupName
   }
   dependsOn: [
     sourceStorage
-  ]
-}
-
-// Role Assignment: Storage File Data SMB Share Contributor on Target Storage
-module targetFileRoleAssignment 'modules/role-assignment.bicep' = {
-  scope: labResourceGroup
-  name: 'target-file-role-assignment'
-  params: {
-    principalId: userObjectId
-    roleDefinitionId: storageFileDataSmbShareContributorRoleId
-    resourceName: targetStorageName
-    resourceType: 'Microsoft.Storage/storageAccounts'
-  }
-  dependsOn: [
     targetStorage
   ]
 }

@@ -18,4 +18,4 @@ param owner = 'Greg Tate'
 
 // IMPORTANT: Replace with your Microsoft Entra ID user object ID
 // To get your object ID, run: az ad signed-in-user show --query id -o tsv
-param userObjectId = '1441d598-b3c1-461e-8bdb-12ec864891e5'
+param userObjectId = 'b73b073d-262b-43c4-aaee-492e68f4cc51'

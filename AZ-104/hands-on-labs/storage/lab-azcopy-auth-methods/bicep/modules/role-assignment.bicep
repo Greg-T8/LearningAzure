@@ -16,9 +16,6 @@ param roleDefinitionId string
 @description('Name of the resource to assign the role on')
 param resourceName string
 
-@description('Type of the resource (e.g., Microsoft.Storage/storageAccounts)')
-param resourceType string
-
 // Variables
 var roleAssignmentName = guid(principalId, roleDefinitionId, resourceName)
 
