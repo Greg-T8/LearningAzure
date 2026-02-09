@@ -183,7 +183,7 @@ def generate_commit_table(commits_by_date_cert, days=7):
     running_grand_total = running_ai102 + running_az104 + running_ai900
     table += f"| ***Running Total*** | ***{running_ai102:.1f}h*** | ***{running_az104:.1f}h*** | ***{running_ai900:.1f}h*** | ***{running_grand_total:.1f}h*** |\n"
 
-    table += "\n*Activity Levels: 🟡 Low (< 1hr) | 🟢 Medium (1-2hrs) | � High (> 2hrs)*\n"
+    table += "\n*Activity Levels: 🟡 Low (< 1hr) | 🟢 Medium (1-2hrs) | 🟣 High (> 2hrs)*\n"
     table += "\n*Hours = time between first and last commit of the day in that certification folder*\n"
 
     # Get current time in Central timezone
