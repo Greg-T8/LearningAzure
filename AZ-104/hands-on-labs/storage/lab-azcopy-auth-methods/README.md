@@ -215,11 +215,14 @@ az storage copy `
 az login
 
 # Attempt to copy file using Entra ID auth
-az storage copy -s "https://sourcefile.file.core.windows.net/share/file.txt" `
-    -d "https://devstore.file.core.windows.net/share/"
+az storage copy -s "https://staz104azcopyauthsrc.file.core.windows.net/files/test.pdf" `
+    -d "https://staz104azcopyauthtgt.file.core.windows.net/files/" `
+    --auth-mode login
 ```
 
 **Expected**: ❌ **FAIL** - Azure AD not supported for File Storage with Azure CLI copy command
+
+<img src='.img/2026-02-10-04-17-13.png' width=700>
 
 #### 5. Test File Storage with Access Keys ✅
 
@@ -361,90 +364,6 @@ SAS tokens can be scoped to:
 - Most secure option (when supported)
 - Integrates with Azure RBAC
 - Supports conditional access policies
-
-## Common Errors and Solutions
-
-### Error: "Failed to perform storage operation using Azure AD"
-
-**Cause**: Attempting to use Azure AD authentication with File Storage
-
-**Solution**: Use SAS token or access key instead
-
-```powershell
-# Wrong - Azure AD with File Storage
-az login
-az storage copy -s "https://source.file.core.windows.net/share/file.txt" -d "dest"
-
-# Correct - SAS token with File Storage
-az storage copy -s "https://source.file.core.windows.net/share/file.txt?<sas>" -d "dest"
-```
-
-### Error: "Authentication failed"
-
-**Cause**: Missing or incorrect authentication method
-
-**Solution**: Verify authentication method is set correctly
-
-```powershell
-# For access keys, use the --destination-account-key parameter
-az storage copy -s "source" -d "dest" --destination-account-key "<key>"
-
-# For SAS, ensure token is appended to URL (with ? for first parameter)
-```
-
-### Error: "'sp' is not recognized as a command" or "'sv' is not recognized as a command"
-
-**Cause**: PowerShell is interpreting `&` characters in SAS tokens as command separators
-
-**Solution**: Escape the SAS token variable with backticks or use single quotes
-
-```powershell
-# Wrong - PowerShell parses & as command separator
---source-sas "$srcSas"
-
-# Correct - Backtick escape prevents parsing
---source-sas `"$srcSas`"
-
-# Also correct - Single quotes prevent variable expansion parsing
---source-sas '$srcSas'
-```
-
-### Error: "This request is not authorized to perform this operation"
-
-**Cause**: SAS token missing required permissions or has expired
-
-**Solution**: Generate new SAS with appropriate permissions (read, write, list)
-
-## Related AZ-104 Exam Objectives
-
-This lab covers the following AZ-104 exam objectives:
-
-### Implement and manage storage (15-20%)
-
-- **Configure access to storage**
-  - Configure Azure Storage firewalls and virtual networks
-  - Manage access keys and SAS tokens
-  - Configure Azure AD authentication for storage accounts
-  
-- **Manage data in Azure Storage**
-  - Use Azure CLI copy command to transfer data
-  - Configure object replication
-  - Import and export data using Azure Import/Export service
-
-### Manage identities and governance in Azure (20-25%)
-
-- **Manage Azure Active Directory (AD) objects**
-  - Configure Azure AD authentication for Azure resources
-  - Assign RBAC roles at different scopes
-
-## Additional Resources
-
-### Microsoft Learn Modules
-
-- [Copy blobs with Azure CLI](https://learn.microsoft.com/en-us/cli/azure/storage/blob/copy)
-- [Azure CLI storage commands](https://learn.microsoft.com/en-us/cli/azure/storage)
-- [Authorize access to data in Azure Storage](https://learn.microsoft.com/en-us/azure/storage/common/authorize-data-access)
-- [Grant limited access with SAS](https://learn.microsoft.com/en-us/azure/storage/common/storage-sas-overview)
 
 ### Azure Documentation
 
