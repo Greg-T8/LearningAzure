@@ -8,7 +8,7 @@ This section documents my progress through AZ-104 practice exams with  explanati
 | :--- | :--- | :---: |
 | [MeasureUp Assessment](./MU%20AZ-104%20Assessment/notes.md) | 2026-01-30 | 44% |
 
-Practice exam sources: [MeasureUp](https://www.measureup.com/), [Tutorials Dojo](https://tutorialsdojo.com/), [Microsoft](https://learn.microsoft.com/en-us/credentials/)
+Practice exam sources: [MeasureUp](https://www.measureup.com/) | [Tutorials Dojo](https://tutorialsdojo.com/) | [Microsoft](https://learn.microsoft.com/en-us/credentials/)
 
 ---
 
