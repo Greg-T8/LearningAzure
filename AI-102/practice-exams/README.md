@@ -1,12 +1,20 @@
 # Practice Exams - AI-102
 
-**Platforms:** [MeasureUp](https://www.measureup.com/) | [Microsoft Practice Assessment](https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-engineer/practice/assessment?assessment-type=practice&assessmentId=61&practice-assessment-type=certification)
-
----
+This section documents my progress through AI-102 practice exams with explanations and hands-on labs.
 
 ## Practice Test Score History
 
 | Test Type | Date | Overall Score |
 | :--- | :--- | :---: |
 
+Practice exam sources: [MeasureUp](https://www.measureup.com/) | [Tutorials Dojo](https://tutorialsdojo.com/) | [Microsoft](https://learn.microsoft.com/en-us/credentials/)
+
 ---
+
+## Practice Exam Strategy
+
+📝 For each practice exam, I **document questions** I answer incorrectly or feel uncertain about. I research the correct answers and **provide detailed explanations** within expandable tags for easy reference.
+
+🛠️ For challenging questions, I go beyond theoretical study by building **hands-on labs** using **Infrastructure as Code (Terraform or Bicep)**. These labs replicate the practice question scenarios in actual Azure environments, with links provided alongside each question.
+
+✨ This approach transforms difficult exam scenarios into tangible, hands-on experience. It bridges the gap between certification study and real-world Azure AI engineering skills.

@@ -1,6 +1,6 @@
-# AI-102: Designing and Implementing a Microsoft Azure AI Solution — Study Guide
+# AI-102: Designing and Implementing a Microsoft Azure AI Solution
 
-**Objective:** Achieve the **AI-102: Azure AI Engineer Associate** certification using a structured, multi-resource study approach.
+**Objective:** Achieve the **AI-102: Azure AI Engineer Associate** certification using a hands-on labs and practice exams approach.
 
 - **Certification Page:** [AI-102: Azure AI Engineer Associate](https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-engineer/?practice-assessment-type=certification)
 - **Official Study Guide:** [AI-102 Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/ai-102)
@@ -11,9 +11,9 @@
 
 | Priority | Modality         | My Notes                                                        | Status | Started | Completed | Days |
 | :------- | :--------------- | :-------------------------------------------------------------- | :----- | :------ | :-------- | :--- |
-| 1        | Microsoft Learn  | [Microsoft Learning Paths](./learning-paths/README.md)          | 🕒     |         |           |      |
+| 1        | Practice Exams & Hands-on Labs | [Practice Exams](./practice-exams/README.md) <br> [Hands-on Labs](./hands-on-labs/README.md) | 🚧     | 2/10/26        |           |      |
 | 2        | Video            | [Video Courses](./video-courses/savill/README.md)               | 🕒     |         |           |      |
-| 3        | Practice Exams   | [Practice Exams](./practice-exams/README.md)                    | 🕒     |         |           |      |
+| 3        | Microsoft Learn  | [Microsoft Learning Paths](./learning-paths/README.md)          | 🕒     |         |           |      |
 
 **Legend:** 🕒 Not Started | 🚧 In Progress | ✅ Complete
 
