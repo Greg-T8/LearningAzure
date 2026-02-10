@@ -6,7 +6,9 @@ This page catalogs hands-on labs built from practice exam questions. Each lab us
 
 ## 🧪 Labs
 
-TBD
+### Generative AI
+
+- **[DALL-E Image Generation with Azure OpenAI](generative-ai/lab-dalle-image-gen/README.md)** - Test DALL-E 3 image generation capabilities, model parameters, and Azure AI Foundry portal features
 
 ---
 
@@ -26,8 +28,8 @@ Refer to [GOVERNANCE.md](../../GOVERNANCE.md) for complete guidelines on naming,
 
 ## 📈 Lab Statistics
 
-- **Total Labs**: 0
-- **Generative AI**: 0
+- **Total Labs**: 1
+- **Generative AI**: 1
 - **Agentic**: 0
 - **Computer Vision**: 0
 - **Natural Language Processing**: 0
