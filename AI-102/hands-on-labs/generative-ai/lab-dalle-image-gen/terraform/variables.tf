@@ -64,9 +64,3 @@ variable "image_model_name" {
   type        = string
   default     = "dall-e-3"
 }
-
-variable "image_model_version" {
-  description = "DALL-E model version"
-  type        = string
-  default     = "3"
-}

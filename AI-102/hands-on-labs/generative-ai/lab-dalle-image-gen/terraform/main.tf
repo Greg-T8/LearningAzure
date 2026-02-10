@@ -61,9 +61,8 @@ resource "azurerm_cognitive_deployment" "dalle" {
   cognitive_account_id = azurerm_cognitive_account.openai.id
 
   model {
-    format  = "OpenAI"
-    name    = var.image_model_name
-    version = var.image_model_version
+    format = "OpenAI"
+    name   = var.image_model_name
   }
 
   sku {
@@ -90,6 +89,6 @@ resource "azurerm_storage_account" "images" {
 # Blob container for storing generated images
 resource "azurerm_storage_container" "images" {
   name                  = "images"
-  storage_account_name  = azurerm_storage_account.images.name
+  storage_account_id    = azurerm_storage_account.images.id
   container_access_type = "private"
 }
