@@ -31,13 +31,13 @@ When an image is pasted into chat, analyze it and generate structured, exam-styl
 * 3–10 words
 * Title Case
 * ≤60 characters
-* Neutral, exam-appropriate (not phrased as a question)
+* Neutral, exam-appropriate
 
 ---
 
 ### **2. Question Prompt**
 
-* Transcribe the full prompt exactly as shown in the image
+* Transcribe the full prompt exactly as shown
 * Preserve paragraph breaks
 * Do **not** add interpretation or explanation
 
@@ -47,7 +47,7 @@ When an image is pasted into chat, analyze it and generate structured, exam-styl
 
 #### **A. Yes / No Statements**
 
-If the question asks to evaluate multiple statements as **Yes / No**, format them as a table:
+If the question evaluates multiple statements as **Yes / No**, format as:
 
 ```markdown
 | Statement | Yes | No |
@@ -64,13 +64,13 @@ Rules:
 * Do not preselect answers
 * Preserve wording exactly
 
-#### **B. Multiple Choice (if applicable)**
+#### **B. Multiple Choice**
 
-If choices are labeled A, B, C, D:
+If the question uses labeled options (A, B, C, D):
 
 * One choice per line
 * Preserve labels and wording
-* Add **two spaces at end of each line**
+* Add **two spaces at the end of each line**
 
 ---
 
@@ -85,12 +85,6 @@ If choices are labeled A, B, C, D:
 </details>
 ```
 
-**CRITICAL RULES**
-
-* This must be the **only image** in the output
-* Do **not** include the image before or after this block
-* Do **not** include comments or placeholders
-
 ---
 
 ### **5. Explanation Placeholder (open, empty)**
@@ -102,15 +96,24 @@ If choices are labeled A, B, C, D:
 </details>
 ```
 
-* Must remain completely empty
-* Do not add text, bullets, or hints
+* Leave completely empty
+* Do not add content of any kind
 
 ---
 
-### **6. Blank Line**
+### **6. Related Lab Line**
 
-* Reserved for optional related lab (manual use later)
-* Do not populate automatically
+Immediately below the explanation `</details>` tag, add **exactly**:
+
+```
+▶ Related Lab: <insert link>
+```
+
+Rules:
+
+* Always include the line
+* Do not insert or guess a link
+* Leave `<insert link>` unchanged for manual completion
 
 ---
 
