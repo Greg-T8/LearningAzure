@@ -113,6 +113,14 @@ Or specify parameters manually:
     -DeploymentName "deploy-dalle3"
 ```
 
+<img src='.img/2026-02-10-06-19-10.png' width=700>
+
+<img src='.img/2026-02-10-06-19-38.png' width=300>
+
+<img src='.img/2026-02-10-06-20-17.png' width=400>
+
+<img src='.img/2026-02-10-06-20-38.png' width=300>
+
 ### Option 2: Python Testing Script
 
 First, set environment variables with your deployment details:
