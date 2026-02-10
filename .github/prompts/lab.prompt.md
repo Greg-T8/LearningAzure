@@ -517,6 +517,17 @@ graph TD
 
 - [Relevant Microsoft Learn modules]
 - [Azure documentation links]
+
+## Related Labs
+
+**Format for related labs**: Use a simple inline link with a right-pointing triangle (▶) indicator, not an expandable details tab. This keeps the documentation clean and provides quick access to related content.
+
+Example:
+```markdown
+▶ **Related Lab:** [lab-storage-explorer-permissions](/AZ-104/hands-on-labs/storage/lab-storage-explorer-permissions/README.md)
+```
+
+Include related labs where they provide additional context, complementary skills, or demonstrate similar concepts with different resource types. Typically include 0-2 related labs per question/section.
 ```
 
 ---

@@ -505,12 +505,7 @@ azcopy copy "source" "https://devstore.file.core.windows.net/share"
 
 </details>
 
-<details>
-<summary>🔬 Click to expand hands-on lab</summary>
-
-**Related Lab:** [lab-azcopy-auth-methods](/AZ-104/hands-on-labs/storage/lab-azcopy-auth-methods/README.md)
-
-</details>
+▶ **Related Lab:** [lab-azcopy-auth-methods](/AZ-104/hands-on-labs/storage/lab-azcopy-auth-methods/README.md)
 
 ---
 
