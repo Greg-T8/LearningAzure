@@ -224,14 +224,25 @@ az storage copy -s "https://sourcefile.file.core.windows.net/share/file.txt" `
 #### 5. Test File Storage with Access Keys ✅
 
 ```powershell
-# Copy file using access key (specify with --account-key parameter)
-az storage copy -s "https://sourcefile.file.core.windows.net/share/file.txt" `
-    -d "https://devstore.file.core.windows.net/share/" `
-    --destination-account-name devstore `
-    --destination-account-key "<access-key>"
+# Retrieve account keys for both source and destination
+$sourceKey = az storage account keys list --account-name staz104azcopyauthsrc --query "[0].value" -o tsv
+$destKey = az storage account keys list --account-name staz104azcopyauthtgt --query "[0].value" -o tsv
+
+# Copy file using access keys (use URLs with account-key parameters)
+az storage copy `
+    -s "https://staz104azcopyauthsrc.file.core.windows.net/files/test.pdf" `
+    -d "https://staz104azcopyauthtgt.file.core.windows.net/files/" `
+    --source-account-key $sourceKey `
+    --account-key $destKey
 ```
 
 **Expected**: ✅ Success
+
+<img src='.img/2026-02-10-04-09-38.png' width=700>
+
+> **Important**: When using access keys with file storage URLs, provide `--source-account-key` for the source account and `--account-key` for the destination account. The source account key is required to authenticate and read the source file share.
+
+> **Note**: Unlike blob storage with access keys (which uses `--source-account-name`, `--source-container`, etc.), file storage access key authentication uses full URLs with account keys specified separately. This is because file shares don't support the same account/container/blob naming structure as blobs.
 
 #### 6. Test File Storage with SAS Token ✅
 
