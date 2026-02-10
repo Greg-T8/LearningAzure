@@ -56,9 +56,15 @@ Ongoing learning beyond certification prep, including tracking Azure updates and
 
 ## 📖 Learning Approach
 
-My exam preparation follows a structured approach designed to reinforce concepts through the following learning modalities:
+My exam preparation follows a practice exam-driven methodology that emphasizes hands-on experience:
 
-1. **Microsoft Learning Paths** — Establish a solid foundation of core knowledge
-2. **Video courses** — Visual reinforcement and deeper exploration of complex topics
-3. **Practice Exams** — Assess readiness and identify knowledge gaps before taking the certification exam
-4. **Hands-on Labs** — Practical experience using Terraform or Bicep, generated from practice exam questions
+### Primary Learning Method
+
+1. **Practice Exams** — Identify knowledge gaps by attempting practice exam questions
+2. **Hands-on Labs** — For each question I get wrong or am unsure about, I build a dedicated environment tailored to that exam question using Terraform or Bicep
+3. **Documentation** — Document the hands-on experience to reinforce learning and create reference materials
+
+### Supplementary Learning
+
+- **Video Training** — Deeper exploration of complex topics through resources like [John Savill's YouTube channel](https://www.youtube.com/@NTFAQGuy)
+- **Microsoft Learning Paths** — Structured learning content to supplement hands-on experience
