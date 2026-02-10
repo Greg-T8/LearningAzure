@@ -2,7 +2,7 @@
 
 # 🌩️ Learning Azure
 
-This repository documents my Azure learning journey, from certification prep to ongoing learning and staying current with Azure updates.
+This repository documents my Azure learning journey, from certification prep to staying current with Azure updates.
 
 [![AI-102](https://img.shields.io/badge/AI--102-In%20Progress-yellow)](AI-102/) [![AZ-104](https://img.shields.io/badge/AZ--104-In%20Progress-yellow)](AZ-104/) ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/Greg-T8/LearningAzure) ![GitHub last commit](https://img.shields.io/github/last-commit/Greg-T8/LearningAzure)
 
