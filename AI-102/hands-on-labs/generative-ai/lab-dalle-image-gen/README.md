@@ -139,6 +139,8 @@ cd ../validation
 python test-dalle-python.py
 ```
 
+<img src='.img/2026-02-10-06-37-43.png' width=700>
+
 ### Option 3: Azure AI Foundry Portal
 
 1. Navigate to [Azure AI Foundry](https://ai.azure.com)
