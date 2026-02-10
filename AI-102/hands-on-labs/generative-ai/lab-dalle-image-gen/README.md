@@ -153,6 +153,10 @@ python test-dalle-python.py
    - Click **Generate**
    - Observe the **View code** button for Python/C#/JavaScript examples
 
+<img src='.img/2026-02-10-06-39-54.png' width=700>
+
+<img src='.img/2026-02-10-06-41-21.png' width=700>
+
 ### Option 4: Manual REST API Testing
 
 ```powershell
