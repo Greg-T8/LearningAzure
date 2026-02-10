@@ -68,12 +68,12 @@ You are given a screenshot image that contains the context of an exam-style ques
      - `<summary>💡 Click to expand explanation</summary>`
      - **Leave completely empty** (blank line only)
      - `</details>`
-  5. Add a hands-on lab block:
-     - `<details>`
-     - `<summary>🔬 Click to expand hands-on lab</summary>`
-     - **Leave completely empty** (blank line only)
-     - `</details>`
-- **CRITICAL**: Do not fill in any content inside the explanation or hands-on lab blocks. They must remain empty.
+  5. Add a related lab link (if applicable):
+     - **Leave blank line for manual completion**
+     - When completed, format should be: `▶ **Related Lab:** [lab-name](/path/to/lab/README.md)`
+     - Only include if a relevant hands-on lab exists
+- **CRITICAL**: Do not fill in any content inside the explanation block. It must remain empty.
+- **CRITICAL**: The related lab line should be left as a blank line - it will be manually filled in later if a related lab exists.
 - **CRITICAL**: The screenshot image path MUST come from the img tag found BELOW the cursor. Do not use images from other locations.
 - **CRITICAL**: Only analyze and reference the FIRST img tag that appears BELOW the cursor position. Ignore all img tags above the cursor.
 - **CRITICAL**: Analyze the screenshot image that is visible in your context. Get the file path from the editor below the cursor. Content = from screenshot you can see; Path = from editor.
@@ -139,10 +139,7 @@ D. Azure Data Factory
 
 </details>
 
-<details>
-<summary>🔬 Click to expand hands-on lab</summary>
 
-</details>
 ```
 
 ---
@@ -169,10 +166,7 @@ D. Azure Data Factory
 
   </details>
 
-  <details>
-  <summary>🔬 Click to expand hands-on lab</summary>
 
-  </details>
 
 - Screenshot: Azure Portal showing VNet peering misconfigured between subscriptions
   Output: ### Fix Azure Virtual Network Peering Across Subscriptions
@@ -193,8 +187,9 @@ D. Azure Data Factory
 - Before generating, ask yourself: "Have I actually seen the screenshot image and analyzed what's in it?" If no, stop - you cannot proceed.
 - **TWO-PART PROCESS**: (1) Analyze the screenshot you can see, (2) Get the file path from the editor below cursor, (3) Use that path in output.
 - If multiple titles are equally reasonable, choose the most specific and action-oriented one.
-- The explanation and hands-on lab blocks **must remain completely empty**—they are placeholders for manual completion later.
-- Do not generate or suggest any content for the explanation or lab sections.
+- The explanation block **must remain completely empty**—it is a placeholder for manual completion later.
+- A blank line should be added after the explanation block for the optional related lab link (format: `▶ **Related Lab:** [lab-name](/path/to/lab/README.md)`).
+- Do not generate or suggest any content for the explanation section or related lab link.
 - **SCREENSHOT REMINDER**: Analyze the screenshot image that is visible in your context. Extract the image PATH from the `<img>` tag below the cursor, then use that path in your output. The content comes from the visible screenshot; the path comes from the editor.
 - Usage:
   1. In your notes file, paste the screenshot image below where you want the question to be inserted.
@@ -204,4 +199,4 @@ D. Azure Data Factory
      - Find the `<img>` tag below the cursor to get the file path
      - Generate content based on the screenshot it analyzed
      - Use the path from the editor in the output
-  4. The output will include the screenshot image PATH from the img tag found below the cursor, wrapped in the `<details>` block, followed by empty explanation and lab blocks.
+  4. The output will include the screenshot image PATH from the img tag found below the cursor, wrapped in the `<details>` block, followed by an empty explanation block and a blank line for the optional related lab link.
