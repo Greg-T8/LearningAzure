@@ -121,6 +121,8 @@ Or specify parameters manually:
 
 <img src='.img/2026-02-10-06-20-38.png' width=300>
 
+<img src='.img/2026-02-10-06-22-37.png' width=500>
+
 ### Option 2: Python Testing Script
 
 First, set environment variables with your deployment details:
