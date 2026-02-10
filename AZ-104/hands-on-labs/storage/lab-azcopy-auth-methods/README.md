@@ -236,12 +236,38 @@ az storage copy -s "https://sourcefile.file.core.windows.net/share/file.txt" `
 #### 6. Test File Storage with SAS Token ✅
 
 ```powershell
-# Copy file using SAS token (append to URL or use --sas-token parameter)
-az storage copy -s "https://sourcefile.file.core.windows.net/share/file.txt?<sas-token>" `
-    -d "https://devstore.file.core.windows.net/share/?<dest-sas-token>"
+# Retrieve account keys
+$sourceKey = az storage account keys list --account-name staz104azcopyauthsrc --query "[0].value" -o tsv
+$destKey = az storage account keys list --account-name staz104azcopyauthtgt --query "[0].value" -o tsv
+
+# Generate SAS tokens for file shares (valid for 1 hour)
+$expiry = (Get-Date).AddHours(1).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")
+
+$srcSas = az storage share generate-sas `
+    --account-name staz104azcopyauthsrc `
+    --account-key $sourceKey `
+    --name files `
+    --permissions rcl `
+    --expiry $expiry `
+    -o tsv
+
+$tgtSas = az storage share generate-sas `
+    --account-name staz104azcopyauthtgt `
+    --account-key $destKey `
+    --name files `
+    --permissions rwcld `
+    --expiry $expiry `
+    -o tsv
+
+# Copy file using SAS tokens (append to URL)
+az storage copy `
+    -s "https://staz104azcopyauthsrc.file.core.windows.net/files/test.pdf?`"$srcSas`"" `
+    -d "https://staz104azcopyauthtgt.file.core.windows.net/files/?`"$tgtSas`""
 ```
 
 **Expected**: ✅ Success
+
+<img src='.img/2026-02-10-04-04-33.png' width=700>
 
 > **PowerShell Gotcha**: If using variables with SAS tokens, escape them: `` -s "https://...?`"$sasToken`"" `` to prevent `&` characters from being interpreted as command separators.
 
