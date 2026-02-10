@@ -186,6 +186,10 @@ $response = Invoke-RestMethod -Method Post -Uri $apiUrl `
 $response.data[0].url
 ```
 
+<img src='.img/2026-02-10-06-44-04.png' width=700>
+
+<img src='.img/2026-02-10-06-44-24.png' width=700>
+
 ### Expected Results
 
 The tests will demonstrate:
