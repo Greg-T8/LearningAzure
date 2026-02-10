@@ -110,16 +110,6 @@ The authentication principles and methods covered in this lab apply equally to b
 
 ## Testing the Solution
 
-After deploying the lab infrastructure, the validation script will help test all authentication methods. Run it to test systematically:
-
-```powershell
-# Navigate to validation directory
-cd validation/
-
-# Run the authentication test script
-.\test-az-copy-auth.ps1
-```
-
 ### Manual Testing Steps
 
 #### 1. Test Blob Storage with Entra ID ✅
