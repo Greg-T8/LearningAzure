@@ -14,7 +14,7 @@ Practice exam sources: [MeasureUp](https://www.measureup.com/), [Tutorials Dojo]
 
 ## Practice Exam Strategy
 
-📝 For each practice exam, I document questions I answer incorrectly or feel uncertain about. I thoroughly research the correct answers and provide detailed explanations within expandable tags for easy reference.
+📝 For each practice exam, I document questions I answer incorrectly or feel uncertain about. I research the correct answers and provide detailed explanations within expandable tags for easy reference.
 
 🛠️ For challenging questions, I go beyond theoretical study by building hands-on labs using Infrastructure as Code (Terraform or Bicep). These labs replicate the practice question scenarios in actual Azure environments, with links provided alongside each question.
 
