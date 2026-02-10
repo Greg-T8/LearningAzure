@@ -395,12 +395,7 @@ The solution is either:
 
 </details>
 
-<details>
-<summary>🔬 Click to expand hands-on lab</summary>
-
-**Related Lab:** [lab-storage-explorer-permissions](/AZ-104/hands-on-labs/storage/lab-storage-explorer-permissions/README.md)
-
-</details>
+▶ **Related Lab:** [lab-storage-explorer-permissions](/AZ-104/hands-on-labs/storage/lab-storage-explorer-permissions/README.md)
 
 ---
 
