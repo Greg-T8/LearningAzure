@@ -1,65 +1,60 @@
 # AZ-104 Hands-On Labs
 
-Practice environments for AZ-104 exam topics using Terraform and Azure Bicep.
+This page catalogs hands-on labs built from practice exam questions. Each lab uses Terraform or Azure Bicep to create dedicated environments for testing specific AZ-104 concepts.
 
-## Folder Structure
+* [📦 Storage Labs](#-storage-labs)
+  * [Configure Azure Storage Object Replication](#configure-azure-storage-object-replication)
+  * [Azure Storage Explorer Permission Troubleshooting](#azure-storage-explorer-permission-troubleshooting)
+  * [Azure CLI Copy Authentication Methods for Blob and File Storage](#azure-cli-copy-authentication-methods-for-blob-and-file-storage)
+* [💻 Compute Labs](#-compute-labs)
+  * [App Service Pricing Tiers](#app-service-pricing-tiers)
+* [📊 Monitoring Labs](#-monitoring-labs)
+  * [Azure Monitor Alert Notification Rate Limits](#azure-monitor-alert-notification-rate-limits)
+* [📈 Lab Statistics](#-lab-statistics)
 
-| Folder | AZ-104 Domain |
-|--------|---------------|
-| `identity-governance/` | Manage identities and governance |
-| `networking/` | Configure and manage virtual networking |
-| `storage/` | Implement and manage storage |
-| `compute/` | Deploy and manage Azure compute resources |
-| `monitoring/` | Monitor and backup Azure resources |
-| `_shared/` | Reusable modules for Terraform and Bicep |
+---
 
-## Prerequisites
+## 📦 Storage Labs
 
-- Azure subscription
-- [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) with Bicep
-- [Terraform CLI](https://developer.hashicorp.com/terraform/downloads)
+### [Configure Azure Storage Object Replication](storage/lab-object-replication/README.md)
 
-## Lab Structure
+Understanding blob versioning and change feed prerequisites for object replication between storage accounts across regions.
 
-Each lab follows this pattern:
+### [Azure Storage Explorer Permission Troubleshooting](storage/lab-storage-explorer-permissions/README.md)
 
-```
-lab-name/
-├── README.md          # Objectives, exam reference, validation steps
-├── terraform/         # Terraform implementation
-│   ├── main.tf
-│   ├── variables.tf
-│   └── outputs.tf
-└── bicep/             # Bicep implementation
-    ├── main.bicep
-    └── main.bicepparam
-```
+Diagnosing and resolving permission issues when users cannot browse storage account contents using Azure Storage Explorer. Covers resource locks and RBAC roles.
 
-## Lifecycle Commands
+### [Azure CLI Copy Authentication Methods for Blob and File Storage](storage/lab-azcopy-auth-methods/README.md)
 
-### Terraform
+Comparing authentication method support (Azure AD, Access Keys, SAS) differences between Blob Storage and File Storage when using Azure CLI copy commands.
 
-```powershell
-cd <domain>/<lab>/terraform
-terraform init && terraform apply
-# ... capture documentation ...
-terraform destroy -auto-approve
-```
+---
 
-### Bicep with Deployment Stacks
+## 💻 Compute Labs
 
-```powershell
-cd <domain>/<lab>/bicep
+### [App Service Pricing Tiers](compute/lab-app-service-tiers/README.md)
 
-# Deploy
-az stack group create --name "<lab-name>" --resource-group "<rg-name>" `
-    --template-file main.bicep --action-on-unmanage deleteAll --deny-settings-mode none
+Testing CPU time limits across Free, Shared, and Basic App Service tiers to understand runtime restrictions and cost trade-offs.
 
-# Destroy
-az stack group delete --name "<lab-name>" --resource-group "<rg-name>" `
-    --action-on-unmanage deleteAll --yes
-```
+---
 
-## Cost Management
+## 📊 Monitoring Labs
 
-⚠️ **Always destroy resources immediately after capturing documentation to minimize costs.**
+### [Azure Monitor Alert Notification Rate Limits](monitoring/lab-alert-notification-rate-limits/README.md)
+
+Understanding rate limiting behavior for email, voice, and SMS notifications in Azure Monitor action groups.
+
+---
+
+## 📈 Lab Statistics
+
+- **Total Labs**: 5
+- **Storage**: 3
+- **Compute**: 1
+- **Monitoring**: 1
+- **Identity & Governance**: 0
+- **Networking**: 0
+
+---
+
+*Last updated: February 10, 2026*

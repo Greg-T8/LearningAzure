@@ -11,9 +11,9 @@
 
 | Priority | Modality         | My Notes                                                        | Status | Started | Completed | Days |
 | :------- | :--------------- | :-------------------------------------------------------------- | :----- | :------ | :-------- | :--- |
-| 1        | Microsoft Learn | [Microsoft Learning Paths](./learning-paths/README.md)          | ✅     | 1/14/26 | 1/25/26   | 11   |
+| 3        | Practice Exams & Hands-on Labs   | [Practice Exams](./practice-exams/README.md) & [Hands-on Labs](./hands-on-labs/README.md)          | 🚧    | 2/2/26        |           |      |
 | 2        | Video            | [John Savill's Training](./video-courses/savill/README.md) | ✅    | 1/29/26 | 2/1/26          | 4      |
-| 3        | Practice Exams   | [MeasureUp Practice Exams](./practice-exams/README.md)          | 🚧    | 2/2/26        |           |      |
+| 1        | Microsoft Learn | [Microsoft Learning Paths](./learning-paths/README.md)          | ✅     | 1/14/26 | 1/25/26   | 11   |
 
 **Legend:** 🕒 Not Started | 🚧 In Progress | ✅ Complete
 
@@ -38,6 +38,7 @@
 **Skills Measured**
 
 **Manage Microsoft Entra users and groups**
+
 - Create users and groups
 - Manage user and group properties
 - Manage licenses in Microsoft Entra ID
@@ -45,11 +46,13 @@
 - Configure self-service password reset (SSPR)
 
 **Manage access to Azure resources**
+
 - Manage built-in Azure roles
 - Assign roles at different scopes
 - Interpret access assignments
 
 **Manage Azure subscriptions and governance**
+
 - Implement and manage Azure Policy
 - Configure resource locks
 - Apply and manage tags on resources
@@ -65,6 +68,7 @@
 **Skills Measured**
 
 **Configure access to storage**
+
 - Configure Azure Storage firewalls and virtual networks
 - Create and use shared access signature (SAS) tokens
 - Configure stored access policies
@@ -72,6 +76,7 @@
 - Configure identity-based access for Azure Files
 
 **Configure and manage storage accounts**
+
 - Create and configure storage accounts
 - Configure Azure Storage redundancy
 - Configure object replication
@@ -79,6 +84,7 @@
 - Manage data by using Azure Storage Explorer and AzCopy
 
 **Configure Azure Files and Azure Blob Storage**
+
 - Create and configure a file share in Azure Storage
 - Create and configure a container in Blob Storage
 - Configure storage tiers
@@ -94,6 +100,7 @@
 **Skills Measured**
 
 **Automate deployment of resources by using Azure Resource Manager (ARM) templates or Bicep files**
+
 - Interpret an Azure Resource Manager template or a Bicep file
 - Modify an existing Azure Resource Manager template
 - Modify an existing Bicep file
@@ -101,6 +108,7 @@
 - Export a deployment as an Azure Resource Manager template or convert an Azure Resource Manager template to a Bicep file
 
 **Create and configure virtual machines**
+
 - Create a virtual machine
 - Configure Azure Disk Encryption
 - Move a virtual machine to another resource group, subscription, or region
@@ -110,12 +118,14 @@
 - Deploy and configure an Azure Virtual Machine Scale Sets
 
 **Provision and manage containers in the Azure portal**
+
 - Create and manage an Azure container registry
 - Provision a container by using Azure Container Instances
 - Provision a container by using Azure Container Apps
 - Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps
 
 **Create and configure Azure App Service**
+
 - Provision an App Service plan
 - Configure scaling for an App Service plan
 - Create an App Service
@@ -132,6 +142,7 @@
 **Skills Measured**
 
 **Configure and manage virtual networks in Azure**
+
 - Create and configure virtual networks and subnets
 - Create and configure virtual network peering
 - Configure public IP addresses
@@ -139,6 +150,7 @@
 - Troubleshoot network connectivity
 
 **Configure secure access to virtual networks**
+
 - Create and configure network security groups (NSGs) and application security groups
 - Evaluate effective security rules in NSGs
 - Implement Azure Bastion
@@ -146,6 +158,7 @@
 - Configure private endpoints for Azure PaaS
 
 **Configure name resolution and load balancing**
+
 - Configure Azure DNS
 - Configure an internal or public load balancer
 - Troubleshoot load balancing
@@ -157,6 +170,7 @@
 **Skills Measured**
 
 **Monitor resources in Azure**
+
 - Interpret metrics in Azure Monitor
 - Configure log settings in Azure Monitor
 - Query and analyze logs in Azure Monitor
@@ -165,6 +179,7 @@
 - Use Azure Network Watcher and Connection Monitor
 
 **Implement backup and recovery**
+
 - Create a Recovery Services vault
 - Create an Azure Backup vault
 - Create and configure a backup policy
