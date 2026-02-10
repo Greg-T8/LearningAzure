@@ -4,8 +4,9 @@ This section documents my progress through AI-102 practice exams with explanatio
 
 ## Practice Test Score History
 
-| Test Type | Date | Overall Score |
-| :--- | :--- | :---: |
+| Test Type | Started | Completed | Overall Score |
+| :--- | :--- | :--- | :---: |
+| [MeasureUp AI-102 Practice Exam](./MeasureUp_AI-102_PracticeExam/notes.md) | 2/10/26 | | TBD |
 
 Practice exam sources: [MeasureUp](https://www.measureup.com/) | [Tutorials Dojo](https://tutorialsdojo.com/) | [Microsoft](https://learn.microsoft.com/en-us/credentials/)
 
