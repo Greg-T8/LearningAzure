@@ -862,6 +862,8 @@ The four versioning operations are **Put Blob**, **Put Block List**, **Copy Blob
 
 </details>
 
+▶ **Related Lab:** [lab-blob-versioning](../../hands-on-labs/storage/lab-blob-versioning/README.md)
+
 ---
 
 ### Deploy and manage Azure compute resources
