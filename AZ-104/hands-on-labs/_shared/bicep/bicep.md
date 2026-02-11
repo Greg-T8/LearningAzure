@@ -17,6 +17,7 @@ Prevents accidental deployments to wrong Azure subscriptions by:
 ## Architecture
 
 The script deploys a **subscription-scoped** Bicep template that:
+
 - Creates the resource group
 - Calls a module to deploy resources into that resource group
 - Manages everything as a single deployment stack
@@ -36,18 +37,20 @@ main.bicepparam
 ## Usage
 
 ```powershell
-.\bicep-safe.ps1 <action> [options]
+.\bicep.ps1 <action> [options]
 ```
 
 ### Actions
 
 | Action | Description | Auto-Derives Stack Name? |
 |--------|-------------|-------------------------|
-| `create` | Deploy subscription-scoped stack (creates RG + resources) | ✅ Yes |
-| `delete` | Delete stack and all managed resources (including RG) | ✅ Yes |
+| `apply` | Deploy subscription-scoped stack (creates RG + resources) | ✅ Yes |
+| `destroy` | Delete stack and all managed resources (including RG) | ✅ Yes |
 | `show` | Show deployment stack details | ✅ Yes |
+| `output` | Retrieve deployment outputs as PowerShell object | ✅ Yes |
 | `list` | List all subscription-scoped deployment stacks | N/A |
 | `validate` | Validate Bicep template syntax | N/A |
+| `plan` | Show what-if analysis for deployment | N/A |
 
 ### Parameters
 
@@ -62,6 +65,7 @@ main.bicepparam
 ### Auto-Derived Stack Names
 
 The script automatically derives the stack name from your parameters file:
+
 - Parses `domain` and `topic` parameters
 - Constructs: `stack-{domain}-{topic}`
 - Example: `stack-compute-app-service-tiers`
@@ -70,76 +74,112 @@ The script automatically derives the stack name from your parameters file:
 
 ## Examples
 
-### Create Deployment Stack (Auto-Named)
+### Apply Deployment Stack (Auto-Named)
 
 ```powershell
 # From the bicep directory - stack name auto-derived
-.\bicep-safe.ps1 create
+.\bicep.ps1 apply
 
 # Output:
 # 📋 Auto-derived stack name: stack-compute-app-service-tiers
-# 📦 Deploying subscription-scoped stack (creates RG and resources)...
+# 📦 Applying subscription-scoped stack (creates RG and resources)...
 ```
 
-### Create with Explicit Stack Name
+### Apply with Explicit Stack Name
 
 ```powershell
-.\bicep-safe.ps1 create -StackName "my-custom-stack"
+.\bicep.ps1 apply -StackName "my-custom-stack"
 ```
 
-### Create with Custom Files
+### Apply with Custom Files
 
 ```powershell
-.\bicep-safe.ps1 create `
+.\bicep.ps1 apply `
     -TemplateFile "custom.bicep" `
     -ParametersFile "custom.bicepparam"
 ```
 
-### Create with Runtime Parameter Override
+### Apply with Runtime Parameter Override
 
 ```powershell
-.\bicep-safe.ps1 create --parameters skuName=B1
+.\bicep.ps1 apply --parameters skuName=B1
 ```
 
-### Delete Deployment Stack
+### Destroy Deployment Stack
 
 ```powershell
 # Auto-derives stack name and deletes everything (RG + resources)
-.\bicep-safe.ps1 delete
+.\bicep.ps1 destroy
 
 # Or with explicit name
-.\bicep-safe.ps1 delete -StackName "stack-compute-app-service-tiers"
+.\bicep.ps1 destroy -StackName "stack-compute-app-service-tiers"
 ```
 
 ### Show Stack Details
 
 ```powershell
 # Show full stack details
-.\bicep-safe.ps1 show
+.\bicep.ps1 show
 
 # Show with explicit name
-.\bicep-safe.ps1 show -StackName "stack-compute-app-service-tiers"
+.\bicep.ps1 show -StackName "stack-compute-app-service-tiers"
 
 # Show only managed resources
-.\bicep-safe.ps1 show -StackName "stack-compute-app-service-tiers" `
+.\bicep.ps1 show -StackName "stack-compute-app-service-tiers" `
     --query "resources[].id" -o table
+```
+
+### Get Deployment Outputs
+
+```powershell
+# Retrieve outputs from the deployment (auto-derives stack name)
+.\bicep.ps1 output
+
+# Output:
+# 📋 Auto-derived stack name: stack-compute-app-service-tiers
+# 📤 Retrieving deployment outputs from stack: stack-compute-app-service-tiers
+# 🔍 Querying deployment: stack-compute-app-service-tiers
+#
+# appServicePlanId : /subscriptions/.../resourceGroups/rg-compute-app-service-tiers/providers/Microsoft.Web/serverfarms/asp-...
+# appUrl           : https://app-....azurewebsites.net
+
+# Or with explicit stack name
+.\bicep.ps1 output -StackName "stack-compute-app-service-tiers"
+
+# Use output in scripts
+$outputs = .\bicep.ps1 output
+Write-Host "App URL: $($outputs.appUrl)"
 ```
 
 ### List All Stacks
 
 ```powershell
 # List all subscription-scoped stacks
-.\bicep-safe.ps1 list
+.\bicep.ps1 list
 ```
 
 ### Validate Template
 
 ```powershell
 # Validate Bicep syntax
-.\bicep-safe.ps1 validate
+.\bicep.ps1 validate
 
 # Or with explicit file
-.\bicep-safe.ps1 validate -TemplateFile "main.bicep"
+.\bicep.ps1 validate -TemplateFile "main.bicep"
+```
+
+### Plan Deployment (What-If)
+
+```powershell
+# Show what changes will be made without deploying
+.\bicep.ps1 plan
+
+# Output:
+# 📋 Planning (What-If): main.bicep
+# Resource changes: 5 to create, 0 to modify, 0 to delete
+
+# Or with explicit file
+.\bicep.ps1 plan -TemplateFile "main.bicep"
 ```
 
 ---
@@ -226,12 +266,14 @@ $LabSubscriptionName = "Your Subscription Name"
 
 ## Comparison with Direct `az stack` Commands
 
-| Task | bicep-safe.ps1 | Direct az stack |
-|------|----------------|-----------------|
-| **Deploy** | `.\bicep-safe.ps1 create` | `az stack sub create --name stack-compute-app-service-tiers --location eastus --template-file main.bicep --parameters main.bicepparam --action-on-unmanage deleteAll --deny-settings-mode none --yes` |
+| Task | bicep.ps1 | Direct az stack |
+|------|-----------|-----------------||
+| **Deploy** | `.\bicep.ps1 apply` | `az stack sub create --name stack-compute-app-service-tiers --location eastus --template-file main.bicep --parameters main.bicepparam --action-on-unmanage deleteAll --deny-settings-mode none --yes` |
 | **Subscription Check** | ✅ Automatic | ❌ Manual |
 | **Stack Naming** | ✅ Auto-derived | ❌ Manual |
-| **Cleanup** | `.\bicep-safe.ps1 delete` | `az stack sub delete --name stack-compute-app-service-tiers --action-on-unmanage deleteAll --yes` |
+| **Get Outputs** | `.\bicep.ps1 output` | `az deployment sub show --name <deployment-name> --query 'properties.outputs'` |
+| **What-If** | `.\bicep.ps1 plan` | `az deployment sub what-if --location eastus --template-file main.bicep --parameters main.bicepparam` |
+| **Cleanup** | `.\bicep.ps1 destroy` | `az stack sub delete --name stack-compute-app-service-tiers --action-on-unmanage deleteAll --yes` |
 
 ---
 
@@ -244,13 +286,16 @@ Use this wrapper in all Bicep labs for simplified workflows:
 cd hands-on-labs/compute/lab-app-service-tiers/bicep
 
 # Deploy (auto-derives stack name from main.bicepparam)
-..\..\..\_shared\bicep-safe.ps1 create
+..\..\..\_shared\bicep.ps1 apply
+
+# Get deployment outputs
+..\..\..\_shared\bicep.ps1 output
 
 # Show status
-..\..\..\_shared\bicep-safe.ps1 show
+..\..\..\_shared\bicep.ps1 show
 
 # Cleanup (removes RG and all resources)
-..\..\..\_shared\bicep-safe.ps1 delete
+..\..\..\_shared\bicep.ps1 destroy
 ```
 
 ### Alternative: Use Relative Path from Root
@@ -260,7 +305,10 @@ cd hands-on-labs/compute/lab-app-service-tiers/bicep
 cd hands-on-labs/compute/lab-app-service-tiers/bicep
 
 # Deploy
-.\_shared\bicep-safe.ps1 create
+.\_shared\bicep.ps1 apply
+
+# Get outputs
+.\_shared\bicep.ps1 output
 ```
 
 ---
@@ -288,8 +336,8 @@ If redeploying, the script will update the existing stack. To start fresh:
 
 ```powershell
 # Delete first, then recreate
-.\bicep-safe.ps1 delete
-.\bicep-safe.ps1 create
+.\bicep.ps1 destroy
+.\bicep.ps1 apply
 ```
 
 ### Wrong Location for Subscription-Scoped Deployment
@@ -297,5 +345,5 @@ If redeploying, the script will update the existing stack. To start fresh:
 If you see a location-related error, specify the location explicitly:
 
 ```powershell
-.\bicep-safe.ps1 create -Location "westus2"
+.\bicep.ps1 apply -Location "westus2"
 ```

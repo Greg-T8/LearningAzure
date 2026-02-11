@@ -113,10 +113,12 @@ cd bicep
 Get the storage account name and resource group from the deployment:
 
 ```powershell
-$outputs = .\bicep.ps1 show | ConvertFrom-Json
-$storageAccountName = $outputs.properties.outputs.storageAccountName.value
-$resourceGroupName = $outputs.properties.outputs.resourceGroupName.value
+$outputs = .\bicep.ps1 output
+$storageAccountName = $outputs.storageAccountName
+$resourceGroupName = $outputs.resourceGroupName
 ```
+
+**Note:** The `output` action returns a PowerShell custom object with direct property access to deployment output values.
 
 ### Step 3: Run Version Testing Script
 
