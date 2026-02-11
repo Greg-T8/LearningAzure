@@ -1,17 +1,3 @@
-# -------------------------------------------------------------------------
-
-# Program: README.md
-
-# Description: Lab guide for Azure AI Search query performance with partitions
-
-# Context: AI-102 Lab - Improve Azure AI Search query performance with partitions
-
-# Author: Greg Tate
-
-# Date: 2026-02-11
-
-# -------------------------------------------------------------------------
-
 # Lab: Azure AI Search — Improve Query Performance with Partitions
 
 ## Exam Question Scenario
