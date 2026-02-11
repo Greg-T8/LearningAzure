@@ -118,44 +118,40 @@ Use-AzProfile Lab
 $outputs = terraform output -json | ConvertFrom-Json
 
 # Verify blob versioning is enabled on both accounts
-Get-AzStorageAccount `
+Get-AzStorageBlobServiceProperty `
     -ResourceGroupName $outputs.resource_group_name.value `
-    -Name $outputs.source_storage_account_name.value |
-    Select-Object StorageAccountName, @{
-        Name       = 'VersioningEnabled'
-        Expression = { $_.BlobProperties.IsVersioningEnabled }
-    }
+    -StorageAccountName $outputs.source_storage_account_name.value |
+    Select-Object StorageAccountName, IsVersioningEnabled
 
-Get-AzStorageAccount `
+Get-AzStorageBlobServiceProperty `
     -ResourceGroupName $outputs.resource_group_name.value `
-    -Name $outputs.destination_storage_account_name.value |
-    Select-Object StorageAccountName, @{
-        Name       = 'VersioningEnabled'
-        Expression = { $_.BlobProperties.IsVersioningEnabled }
-    }
+    -StorageAccountName $outputs.destination_storage_account_name.value |
+    Select-Object StorageAccountName, IsVersioningEnabled
 ```
 
-**Expected**: Both accounts show `VersioningEnabled: True`
+**Expected**: Both accounts show `IsVersioningEnabled: True`
+
+<img src='.img/2026-02-11-03-54-01.png' width=700>
 
 ### Step 2: Verify Change Feed Configuration
 
 ```powershell
 # Verify change feed on source account (should be enabled)
-Get-AzStorageAccount `
+Get-AzStorageBlobServiceProperty `
     -ResourceGroupName $outputs.resource_group_name.value `
-    -Name $outputs.source_storage_account_name.value |
+    -StorageAccountName $outputs.source_storage_account_name.value |
     Select-Object StorageAccountName, @{
         Name       = 'ChangeFeedEnabled'
-        Expression = { $_.BlobProperties.ChangeFeed.Enabled }
+        Expression = { $_.ChangeFeed.Enabled }
     }
 
 # Verify change feed on destination account (should be false/not required)
-Get-AzStorageAccount `
+Get-AzStorageBlobServiceProperty `
     -ResourceGroupName $outputs.resource_group_name.value `
-    -Name $outputs.destination_storage_account_name.value |
+    -StorageAccountName $outputs.destination_storage_account_name.value |
     Select-Object StorageAccountName, @{
         Name       = 'ChangeFeedEnabled'
-        Expression = { $_.BlobProperties.ChangeFeed.Enabled }
+        Expression = { $_.ChangeFeed.Enabled }
     }
 ```
 

@@ -644,6 +644,8 @@ You had the logic completely reversed - change feed on the wrong end, and versio
 
 </details>
 
+▶ **Related Lab:** [lab-object-replication](../../hands-on-labs/storage/lab-object-replication/README.md)
+
 ---
 
 #### Configure Lifecycle Management Policy for Azure Storage

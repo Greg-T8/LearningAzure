@@ -357,7 +357,6 @@ SAS tokens can be scoped to:
 
 ### Azure Documentation
 
-- [Azure CLI storage copy command](https://learn.microsoft.com/en-us/cli/azure/storage/copy)
 - [Get started with standalone AzCopy](https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-v10) - For advanced scenarios
 - [Copy and move blobs with AzCopy](https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-blobs)
 - [Authorize access to blobs with Azure AD](https://learn.microsoft.com/en-us/azure/storage/blobs/authorize-access-azure-active-directory)
