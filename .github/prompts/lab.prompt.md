@@ -22,15 +22,15 @@ Create a working, validated hands-on lab from an exam-question scenario using **
   * Cleanup/teardown commands or sections
   * “Deployment Steps”, “Cleanup”, “Lab Structure” directory trees
 
-**README required sections**
+**README required sections (in this order)**
 
-* Exam Question Scenario (verbatim, incl. options)
-* Scenario Analysis
+* Exam Question Scenario (verbatim options, **DO NOT mark or reveal the correct answer**)
 * Solution Architecture
 * Architecture Diagram (Mermaid) **only if** 3+ interconnected resources
 * Lab Objectives (3–5)
 * Prerequisites
 * Testing the Solution (validation steps, not deployment steps)
+* Scenario Analysis (explain correct answer and why other options are wrong)
 * Key Learning Points (5–8)
 * Related <EXAM> Exam Objectives
 * Additional Resources

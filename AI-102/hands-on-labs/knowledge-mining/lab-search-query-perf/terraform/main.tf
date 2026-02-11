@@ -85,6 +85,6 @@ resource "azurerm_storage_account" "data" {
 # Create a blob container for sample documents
 resource "azurerm_storage_container" "documents" {
   name                  = "documents"
-  storage_account_name  = azurerm_storage_account.data.name
+  storage_account_id    = azurerm_storage_account.data.id
   container_access_type = "private"
 }

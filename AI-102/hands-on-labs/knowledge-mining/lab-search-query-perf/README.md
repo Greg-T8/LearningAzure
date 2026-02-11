@@ -10,25 +10,8 @@ What should you do to improve performance of slow-running queries?
 
 - Add fields to the index.
 - Add replicas.
-- **Add partitions.** ✅
+- Add partitions.
 - Convert fields to complex types.
-
----
-
-## Scenario Analysis
-
-The critical detail is that queries remain slow **even with no load** on the service. This eliminates concurrent query volume as the root cause and rules out replicas (which handle query throughput by adding copies of the index to serve more simultaneous requests).
-
-**Why each option is correct or incorrect:**
-
-| Option | Verdict | Reasoning |
-|--------|---------|-----------|
-| **Add fields to the index** | ❌ | Adding more fields increases index size and can make queries slower, not faster |
-| **Add replicas** | ❌ | Replicas add copies of the index to handle more concurrent queries. Since queries are slow even with no load, throughput is not the issue |
-| **Add partitions** | ✅ | Partitions split the index across physical shards, enabling parallel query processing. This directly improves individual query latency |
-| **Convert fields to complex types** | ❌ | Complex types restructure data but don't inherently improve query speed; they can add overhead |
-
-**Partitions** distribute index data across multiple physical storage units. When a query runs, Azure AI Search can process it in parallel across all partitions, reducing the time needed to scan and return results. This is the correct approach when individual queries are intrinsically slow regardless of load.
 
 ---
 
@@ -102,6 +85,23 @@ Modify `partition_count` in `terraform.tfvars` and redeploy to observe the scali
 - **1 partition**: Index on a single shard (original slow scenario)
 - **2 partitions**: Index split across 2 shards (improved query parallelism)
 - **3 partitions**: Index split across 3 shards (maximum for Basic SKU)
+
+---
+
+## Scenario Analysis
+
+The critical detail is that queries remain slow **even with no load** on the service. This eliminates concurrent query volume as the root cause and rules out replicas (which handle query throughput by adding copies of the index to serve more simultaneous requests).
+
+**Why each option is correct or incorrect:**
+
+| Option | Verdict | Reasoning |
+|--------|---------|--------|
+| **Add fields to the index** | ❌ | Adding more fields increases index size and can make queries slower, not faster |
+| **Add replicas** | ❌ | Replicas add copies of the index to handle more concurrent queries. Since queries are slow even with no load, throughput is not the issue |
+| **Add partitions** | ✅ | Partitions split the index across physical shards, enabling parallel query processing. This directly improves individual query latency |
+| **Convert fields to complex types** | ❌ | Complex types restructure data but don't inherently improve query speed; they can add overhead |
+
+**Partitions** distribute index data across multiple physical storage units. When a query runs, Azure AI Search can process it in parallel across all partitions, reducing the time needed to scan and return results. This is the correct approach when individual queries are intrinsically slow regardless of load.
 
 ---
 

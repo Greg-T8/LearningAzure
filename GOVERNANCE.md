@@ -283,6 +283,39 @@ These standards prevent common deployment errors and ensure reliable infrastruct
 - **Basic Load Balancers** can use **Basic SKU** public IPs
 - Standard SKU IPs support availability zones; Basic SKU does not
 
+### Storage Containers and File Shares
+
+**CRITICAL**: `azurerm_storage_container` and `azurerm_storage_share` resources require `storage_account_id` (not `storage_account_name`). The `storage_account_name` argument is deprecated and will be removed in AzureRM provider v5.0.
+
+- **Always use `storage_account_id`** referencing the storage account's `.id` attribute
+- **Do not use `storage_account_name`** referencing the storage account's `.name` attribute
+
+**Correct:**
+
+```hcl
+resource "azurerm_storage_container" "example" {
+  name                  = "documents"
+  storage_account_id    = azurerm_storage_account.data.id
+  container_access_type = "private"
+}
+
+resource "azurerm_storage_share" "example" {
+  name                 = "fileshare"
+  storage_account_id   = azurerm_storage_account.data.id
+  quota                = 5
+}
+```
+
+**Incorrect (deprecated):**
+
+```hcl
+resource "azurerm_storage_container" "example" {
+  name                  = "documents"
+  storage_account_name  = azurerm_storage_account.data.name  # DEPRECATED
+  container_access_type = "private"
+}
+```
+
 ### Azure AI Services Configuration
 
 #### Cognitive Services / OpenAI Accounts
@@ -913,7 +946,7 @@ resource "azurerm_storage_account" "images" {
 
 resource "azurerm_storage_container" "images" {
   name                  = "images"
-  storage_account_name  = azurerm_storage_account.images.name
+  storage_account_id    = azurerm_storage_account.images.id
   container_access_type = "private"
 }
 
@@ -1272,5 +1305,6 @@ resource "azurerm_cognitive_account" "cv_prediction" {
 
 | Date | Version | Changes |
 |------|---------|---------|
+| 2026-02-11 | 2.1 | Added Storage Container/Share `storage_account_id` migration guidance; deprecated `storage_account_name` usage |
 | 2026-02-09 | 2.0 | Extended governance to AI-102; added Azure AI services naming; multi-exam support |
 | 2026-01-15 | 1.0 | Initial AZ-104 governance policy |

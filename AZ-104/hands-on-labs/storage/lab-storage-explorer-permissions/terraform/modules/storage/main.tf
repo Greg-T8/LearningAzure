@@ -27,14 +27,14 @@ resource "azurerm_storage_account" "unlocked" {
 # Blob container in unlocked storage account
 resource "azurerm_storage_container" "unlocked_blob" {
   name                  = "documents"
-  storage_account_name  = azurerm_storage_account.unlocked.name
+  storage_account_id    = azurerm_storage_account.unlocked.id
   container_access_type = "private"
 }
 
 # File share in unlocked storage account
 resource "azurerm_storage_share" "unlocked_file" {
   name                 = "fileshare"
-  storage_account_name = azurerm_storage_account.unlocked.name
+  storage_account_id   = azurerm_storage_account.unlocked.id
   quota                = 5
 }
 
@@ -55,7 +55,7 @@ resource "azurerm_storage_account" "readonly_lock" {
 resource "azurerm_storage_container" "readonly_blob" {
   count                 = var.enable_readonly_lock ? 1 : 0
   name                  = "documents"
-  storage_account_name  = azurerm_storage_account.readonly_lock[0].name
+  storage_account_id    = azurerm_storage_account.readonly_lock[0].id
   container_access_type = "private"
 }
 
@@ -85,7 +85,7 @@ resource "azurerm_storage_account" "cannotdelete_lock" {
 resource "azurerm_storage_container" "cannotdelete_blob" {
   count                 = var.enable_cannotdelete_lock ? 1 : 0
   name                  = "documents"
-  storage_account_name  = azurerm_storage_account.cannotdelete_lock[0].name
+  storage_account_id    = azurerm_storage_account.cannotdelete_lock[0].id
   container_access_type = "private"
 }
 
