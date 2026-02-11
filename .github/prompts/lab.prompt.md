@@ -351,13 +351,15 @@ Confirm these commands succeed before considering the task complete.
 
 **CRITICAL**: Consult `GOVERNANCE.md` for complete Bicep standards (configuration, file structure, parameter files).
 
+**CRITICAL - bicep.ps1 Script**: ALWAYS copy the exact `bicep.ps1` script from `<EXAM>/hands-on-labs/_shared/bicep/bicep.ps1`. DO NOT create a custom version or modify the script. Use the standardized actions: `apply`, `destroy`, `show`, `list`, `validate`, `plan`.
+
 ### File Structure Overview
 
 Create these files following GOVERNANCE.md specifications:
 - **main.bicep**: Thin orchestration layer with @allowed() decorator for domain, commonTags variable
 - **main.bicepparam**: Parameter values (domain, topic, location, owner)
 - **modules/*.bicep**: Logical resource groupings (when ≥3 related resources)
-- **bicep.ps1**: Deployment wrapper script (copy from `_shared/bicep/bicep.ps1`)
+- **bicep.ps1**: Deployment wrapper script (**MUST copy exact file from `_shared/bicep/bicep.ps1` - DO NOT create custom version**)
 
 ### Key Requirements
 
@@ -408,7 +410,22 @@ module networking 'modules/networking.bicep' = {
 
 ### Deployment Stacks & bicep.ps1
 
-**Copy bicep.ps1**: Always copy from `<EXAM>/hands-on-labs/_shared/bicep/bicep.ps1` to lab's `bicep/` folder
+**⚠️ CRITICAL - DO NOT CREATE CUSTOM VERSIONS ⚠️**
+
+**ALWAYS copy the exact bicep.ps1 script** from `<EXAM>/hands-on-labs/_shared/bicep/bicep.ps1` to the lab's `bicep/` folder:
+
+```powershell
+Copy-Item -Path "<EXAM>/hands-on-labs/_shared/bicep/bicep.ps1" `
+          -Destination "<EXAM>/hands-on-labs/<domain>/lab-<topic>/bicep/bicep.ps1"
+```
+
+**DO NOT**:
+- ❌ Create a custom version of bicep.ps1
+- ❌ Modify the script's action names or behavior
+- ❌ Write your own deployment wrapper
+- ❌ Use different action names (e.g., 'create'/'delete' instead of 'apply'/'destroy')
+
+**USE ONLY**: The standardized shared script with actions: `apply`, `destroy`, `show`, `list`, `validate`, `plan`
 
 **Stack Naming**: Auto-derived as `stack-<domain>-<topic>` from parameters
 
@@ -666,7 +683,7 @@ resource "azurerm_network_interface_backend_address_pool_association" "vm02_outb
 3. **Analyze** the exam question scenario provided
 4. **Identify** required Azure resources and their configuration
 5. **Create** directory structure under `<EXAM>/hands-on-labs/<domain>/lab-<topic>/`
-6. **Copy** `bicep.ps1` into the lab's `bicep/` folder for Bicep labs
+6. **Copy bicep.ps1** (Bicep labs only) - Use `Copy-Item` to copy the exact shared script from `<EXAM>/hands-on-labs/_shared/bicep/bicep.ps1` to lab's `bicep/` folder. DO NOT create a custom version.
 7. **Generate** infrastructure code (Terraform OR Bicep as specified)
    - Apply naming conventions from GOVERNANCE.md
    - Include required tags from GOVERNANCE.md
