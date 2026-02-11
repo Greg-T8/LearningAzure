@@ -136,7 +136,7 @@ cd ..\scripts
 
 **Note:** The script automatically creates and cleans up temporary files for each blob operation test.
 
-<img src='.img/2026-02-11-06-10-01.png' width=700>
+<img src='.img/2026-02-11-06-10-01.png' width=500>
 
 ### Step 4: Analyze Results
 
