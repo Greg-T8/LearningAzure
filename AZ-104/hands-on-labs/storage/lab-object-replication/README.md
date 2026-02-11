@@ -160,6 +160,8 @@ Get-AzStorageBlobServiceProperty `
 - Source account: `ChangeFeedEnabled: True`
 - Destination account: `ChangeFeedEnabled: False` (minimized configuration)
 
+<img src='.img/2026-02-11-03-55-17.png' width=700>
+
 ### Step 3: Test Object Replication
 
 ```powershell
