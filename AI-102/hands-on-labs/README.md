@@ -4,11 +4,26 @@ This page catalogs hands-on labs built from practice exam questions. Each lab us
 
 ---
 
+## 📈 Lab Statistics
+
+- **Total Labs**: 2
+- **Generative AI**: 1
+- **Agentic**: 0
+- **Computer Vision**: 0
+- **Natural Language Processing**: 0
+- **Knowledge Mining**: 1
+
+---
+
 ## 🧪 Labs
 
 ### Generative AI
 
 - **[DALL-E Image Generation with Azure OpenAI](generative-ai/lab-dalle-image-gen/README.md)** - Test DALL-E 3 image generation capabilities, model parameters, and Azure AI Foundry portal features
+
+### Knowledge Mining
+
+- **[Azure AI Search — Improve Query Performance with Partitions](knowledge-mining/lab-search-query-perf/README.md)** - Deploy Azure AI Search with multiple partitions to optimize query performance and understand the difference between partitions and replicas
 
 ---
 
@@ -25,16 +40,3 @@ All labs in this repository are built following the comprehensive governance pol
 Refer to [GOVERNANCE.md](../../GOVERNANCE.md) for complete guidelines on naming, tagging, resource limits, and deployment standards.
 
 ---
-
-## 📈 Lab Statistics
-
-- **Total Labs**: 1
-- **Generative AI**: 1
-- **Agentic**: 0
-- **Computer Vision**: 0
-- **Natural Language Processing**: 0
-- **Knowledge Mining**: 0
-
----
-
-*Last updated: February 10, 2026*
