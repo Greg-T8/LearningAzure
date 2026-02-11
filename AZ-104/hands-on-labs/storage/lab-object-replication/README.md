@@ -211,6 +211,12 @@ Get-AzStorageObjectReplicationPolicy `
 
 **Expected**: Replication policy with source and destination container mappings.
 
+<img src='.img/2026-02-11-04-04-21.png' width=800>
+
+Replication policy exists both on the source and target accounts, confirming the replication configuration is in place.
+
+<img src='.img/2026-02-11-04-06-00.png' width=700>
+
 ## Key Learning Points
 
 - **Blob versioning is required on both accounts** for object replication to work
