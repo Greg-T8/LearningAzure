@@ -37,6 +37,4 @@ All labs in this repository are built following the comprehensive governance pol
 - **Code quality standards** with proper header comments and structured code
 - **Best practices** for infrastructure-as-code patterns in Terraform and Bicep
 
-Refer to [GOVERNANCE.md](../../GOVERNANCE.md) for complete guidelines on naming, tagging, resource limits, and deployment standards.
-
 ---
