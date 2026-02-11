@@ -197,6 +197,8 @@ Get-AzStorageBlob `
 
 <img src='.img/2026-02-11-04-03-06.png' width=700>
 
+**Note:** It really took about 2 minutes for the blob to replicate, demonstrating the asynchronous nature of object replication.
+
 <img src='.img/2026-02-11-04-03-27.png' width=900>
 
 ### Step 4: Verify Replication Policy
