@@ -1,14 +1,16 @@
-# Practice Exams - AI-102
+# Practice Exam Questions - AI-102
 
 This section documents my progress through AI-102 practice exams with explanations and hands-on labs.
 
 ---
 
-## Practice Exam Strategy
+## Learning Strategy
 
 🧪 For learning, I approach each question with a **lab-first mindset**. Based on the question scenario, I generate labs specific to the question, with each lab defined by **Infrastructure as Code (Terraform or Bicep)**.
 
 📖 From there, I generate a **Lab Guide** that offers step-by-step instructions for addressing the scenario in question. Steps could involve **Azure CLI**, **Azure portal**, or **custom code**.
+
+🔄 I **complete the lab first**, gaining hands-on experience with the scenario. After completing the lab, I answer the practice exam questions based on what I learned. I then **research the correct answers** and provide detailed explanations in the expandable sections for future reference.
 
 ✨ This hands-on approach transforms exam scenarios into tangible, practical experience. It bridges the gap between certification study and real-world Azure AI engineering skills.
 
