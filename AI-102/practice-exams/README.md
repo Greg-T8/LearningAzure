@@ -106,6 +106,6 @@ What should you do to improve performance of slow-running queries?
 
 </details>
 
-▶ Related Lab: [lab-search-query-perf](../../hands-on-labs/knowledge-mining/lab-search-query-perf/README.md)
+▶ Related Lab: [lab-search-query-perf](../hands-on-labs/knowledge-mining/lab-search-query-perf/README.md)
 
 ---
