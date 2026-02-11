@@ -10,6 +10,7 @@ This page catalogs hands-on labs built from practice exam questions. Each lab us
   * [Configure Azure Storage Object Replication](storage/lab-object-replication/README.md)
   * [Azure Storage Explorer Permission Troubleshooting](storage/lab-storage-explorer-permissions/README.md)
   * [Azure CLI Copy Authentication Methods for Blob and File Storage](storage/lab-azcopy-auth-methods/README.md)
+  * [Azure Blob Versioning Write Operations](storage/lab-blob-versioning/README.md)
 * Compute Labs
   * [App Service Pricing Tiers](compute/lab-app-service-tiers/README.md)
 * Monitoring Labs
@@ -33,8 +34,8 @@ Refer to [GOVERNANCE.md](../../GOVERNANCE.md) for complete guidelines on naming,
 
 ## 📈 Lab Statistics
 
-- **Total Labs**: 5
-- **Storage**: 3
+- **Total Labs**: 6
+- **Storage**: 4
 - **Compute**: 1
 - **Monitoring**: 1
 - **Identity & Governance**: 0
@@ -42,4 +43,4 @@ Refer to [GOVERNANCE.md](../../GOVERNANCE.md) for complete guidelines on naming,
 
 ---
 
-*Last updated: February 10, 2026*
+*Last updated: February 11, 2026*
