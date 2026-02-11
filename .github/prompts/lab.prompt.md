@@ -11,6 +11,45 @@ You are tasked with creating a comprehensive hands-on lab based on an exam quest
 
 ---
 
+## 🚨 CRITICAL RULES - READ FIRST 🚨
+
+Before creating any lab, understand these **NON-NEGOTIABLE** requirements:
+
+### 1. bicep.ps1 Script (Bicep Labs Only)
+**❌ NEVER** create a custom `bicep.ps1` script
+**✅ ALWAYS** copy the exact file from `<EXAM>/hands-on-labs/_shared/bicep/bicep.ps1`
+
+```powershell
+Copy-Item -Path "<EXAM>/hands-on-labs/_shared/bicep/bicep.ps1" `
+          -Destination "<lab-folder>/bicep/bicep.ps1"
+```
+
+### 2. README.md Structure
+**❌ NEVER** include deployment commands or procedures in README.md
+**✅ ALWAYS** use the complete README.md template with ALL required sections
+
+**Forbidden in README:**
+- Deployment commands (`terraform apply`, `.\bicep.ps1 apply`)
+- Cleanup commands (`terraform destroy`, `az group delete`)
+- "Deployment Steps" or "Cleanup" sections
+- "Lab Structure" directory trees
+
+**Required in README:**
+- Exam Question Scenario
+- Scenario Analysis
+- Solution Architecture (with diagram if 3+ resources)
+- Lab Objectives
+- Prerequisites
+- Testing the Solution
+- Key Learning Points
+- Related Exam Objectives
+- Additional Resources
+- Related Labs
+
+**Reference the README COMPLIANCE CHECKLIST** (in README.md Requirements section) before finalizing.
+
+---
+
 ## Exam Context
 
 ### Determine Exam
@@ -457,11 +496,47 @@ Confirm these commands succeed before considering the task complete.
 
 ---
 
+## README.md Requirements
+
+### ⚠️ CRITICAL README COMPLIANCE CHECKLIST ⚠️
+
+Before finalizing the README.md, verify ALL requirements are met:
+
+#### ✅ MUST INCLUDE (Required Sections):
+- [ ] **Exam Question Scenario** - Exact question text with all options (A, B, C, etc.)
+- [ ] **Scenario Analysis** - Breakdown of requirements and key concepts
+- [ ] **Solution Architecture** - Description of resources and relationships
+- [ ] **Architecture Diagram** - Mermaid diagram (if 3+ interconnected resources)
+- [ ] **Lab Objectives** - Numbered list of learning objectives (3-5 items)
+- [ ] **Prerequisites** - Tools, knowledge, or setup required beyond standard labs
+- [ ] **Testing the Solution** - Step-by-step validation procedures
+- [ ] **Key Learning Points** - Bullet list of key takeaways (5-8 items)
+- [ ] **Related <EXAM> Exam Objectives** - Exam domains/objectives covered
+- [ ] **Additional Resources** - Microsoft Learn modules and documentation links
+- [ ] **Related Labs** - Links to complementary labs (0-2 labs, ▶ format)
+
+#### ❌ MUST NOT INCLUDE (Forbidden Content):
+- [ ] ❌ Deployment commands (`terraform init`, `terraform apply`, `terraform destroy`)
+- [ ] ❌ Bicep deployment commands (`.\bicep.ps1 apply`, `.\bicep.ps1 destroy`)
+- [ ] ❌ Direct Azure CLI deployment commands (`az deployment group create`)
+- [ ] ❌ PowerShell deployment cmdlets (`New-AzResourceGroupDeployment`)
+- [ ] ❌ "Cleanup" or "Teardown" sections with deletion commands
+- [ ] ❌ "Deployment Steps" sections explaining how to run infrastructure code
+- [ ] ❌ "Lab Structure" directory tree diagrams
+- [ ] ❌ Step-by-step infrastructure deployment procedures
+
+#### 📋 Why No Deployment Instructions?
+- Deployment procedures are **standardized** across all labs
+- Fully documented in **GOVERNANCE.md**
+- Users familiar with lab structure already know: `.\bicep.ps1 apply` or `terraform apply`
+- Keeps README focused on **learning objectives** and **solution architecture**
+- Prevents inconsistency across lab documentation
+
+---
+
 ## README.md Template
 
-Create a comprehensive README with this structure:
-
-**CRITICAL**: Do NOT include deployment instructions (e.g., "terraform init", ".\bicep.ps1 apply") in the README. Deployment steps are standardized across all labs and documented in GOVERNANCE.md. Users familiar with the lab structure already know how to deploy.
+**CRITICAL**: Use this EXACT template structure. Do NOT deviate or create simplified versions.
 
 ```markdown
 # Lab: [Lab Title]
@@ -692,8 +767,12 @@ resource "azurerm_network_interface_backend_address_pool_association" "vm02_outb
 9. **Validate** the code using appropriate tool commands
    - **Terraform**: Run `terraform init`, `terraform validate`, `terraform plan`
    - **Bicep**: Run `.\bicep.ps1 validate`, `.\bicep.ps1 plan`
-10. **Create** comprehensive README.md with all required sections
-    - Include a Mermaid diagram in the Solution Architecture section when the lab involves multiple interconnected resources, network topologies, or complex dependencies
+10. **Create README.md** - Use the EXACT template structure with ALL required sections
+   - ✅ Verify against the README COMPLIANCE CHECKLIST (see README.md Requirements section)
+   - ✅ Include ALL required sections: Exam Question Scenario, Scenario Analysis, Solution Architecture, Architecture Diagram (if applicable), Lab Objectives, Prerequisites, Testing the Solution, Key Learning Points, Related Exam Objectives, Additional Resources, Related Labs
+   - ❌ DO NOT include deployment commands or procedures
+   - ❌ DO NOT include cleanup/teardown sections
+   - ❌ DO NOT include "Lab Structure" directory trees
 11. **Include** validation/testing scripts if complex verification is needed
 12. **Verify** all GOVERNANCE.md standards are met - consult the pre-deployment checklist in GOVERNANCE.md
 
@@ -706,9 +785,10 @@ After creating the lab, provide:
 1. **Lab Summary**: Brief description of what was created
 2. **File List**: All files created with their paths
 3. **Validation Results**: Output from validation commands
-4. **Quick Start**: Condensed deployment steps
+4. **README Compliance**: Confirm all required sections present and forbidden content excluded (reference the README COMPLIANCE CHECKLIST)
 5. **Governance Compliance**: Confirm alignment with GOVERNANCE.md standards
-6. **Next Steps**: Suggestions for additional learning or variations
+6. **Quick Start**: Condensed deployment steps
+7. **Next Steps**: Suggestions for additional learning or variations
 
 ---
 
