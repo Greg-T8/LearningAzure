@@ -29,16 +29,13 @@ For each exam's hands-on-labs directory:
 
 ### 2. Update the README.md
 
-For the main hands-on-labs README.md:
+For the main hands-on-labs README.md, sections must appear in this order:
 
-**Labs Section (`## 🧪 Labs`)**
+**1. Title and Description**
 
-* Organize labs by domain (Storage, Compute, Monitoring, Generative AI, etc.)
-* List each lab with a markdown link to its README
-* Format: `[Lab Title](domain/lab-folder/README.md) - Brief description`
-* Keep labs within each domain in alphabetical order
+* Keep the existing title and introductory text unchanged
 
-**Lab Statistics Section (`## 📈 Lab Statistics`)**
+**2. Lab Statistics Section (`## 📈 Lab Statistics`)**
 
 * Update `Total Labs` count
 * Update individual domain counts
@@ -46,9 +43,16 @@ For the main hands-on-labs README.md:
   * For AI-102: Generative AI, Agentic, Computer Vision, Natural Language Processing, Knowledge Mining
   * For AZ-104: Storage, Compute, Monitoring, Identity & Governance, Networking
 
-**Last Updated Date**
+**3. Labs Section (`## 🧪 Labs`)**
 
-* Update to current date in format: `*Last updated: February 11, 2026*`
+* Organize labs by domain (Storage, Compute, Monitoring, Generative AI, etc.)
+* List each lab with a markdown link to its README
+* Format: `- **[Lab Title](domain/lab-folder/README.md)** - Brief description`
+* Keep labs within each domain in alphabetical order
+
+**4. Governance & Standards Section (`## 📋 Governance & Standards`)**
+
+* Keep the existing governance section unchanged
 
 ### 3. Required Sections (do not modify)
 
