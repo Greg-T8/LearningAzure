@@ -147,19 +147,6 @@ The script will output a formatted table showing:
 - Version count before and after the operation
 - Success/error status
 
-### Step 5: Verify Manually (Optional)
-
-List all versions of a specific blob:
-
-```powershell
-az storage blob list `
-    --account-name $storageAccountName `
-    --container-name test-container `
-    --prefix test-putblob.txt `
-    --include v `
-    --auth-mode login
-```
-
 ## Expected Results
 
 ### Operations That Create New Versions ✓
