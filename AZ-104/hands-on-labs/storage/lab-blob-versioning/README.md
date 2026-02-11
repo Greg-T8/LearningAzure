@@ -215,4 +215,4 @@ This lab covers the following AZ-104 exam objective areas:
 
 ## Related Labs
 
-▶ **Related Lab:** [lab-storage-lifecycle-management](../lab-storage-lifecycle-management/) - Configure lifecycle management policies for blob versioning and tier transitions
+▶ Related Lab: [lab-object-replication](../lab-object-replication/README.md) - Configure cross-region blob replication using versioning and change feed

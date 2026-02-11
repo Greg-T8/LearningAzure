@@ -319,3 +319,7 @@ To use Azure AD authentication instead of account keys:
 - [Azure resource locks](https://learn.microsoft.com/azure/azure-resource-manager/management/lock-resources)
 - [Azure Storage Explorer](https://azure.microsoft.com/products/storage/storage-explorer/)
 - [Troubleshoot Storage Explorer](https://learn.microsoft.com/azure/storage/common/storage-explorer-troubleshooting)
+
+## Related Labs
+
+▶ Related Lab: [lab-azcopy-auth-methods](../lab-azcopy-auth-methods/README.md) - Test authentication methods for Azure storage operations

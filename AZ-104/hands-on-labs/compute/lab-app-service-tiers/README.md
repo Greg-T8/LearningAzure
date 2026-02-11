@@ -248,6 +248,7 @@ az group delete --name "az104-compute-app-service-tiers-bicep" --yes --no-wait
 ---
 
 # Comparison: Terraform vs Bicepbicep-safe.ps1 delete` or `az stack group delete` |
+
 | **Plan/Preview** | `terraform plan` | `az deployment group what-if` |
 | **Variables** | `terraform.tfvars` | `main.bicepparam` |
 | **Provider Lock** | Explicit subscription ID | Validated by wrapper script |
@@ -276,7 +277,12 @@ _Record your observations here after running the lab:_
 **Does changing to Shared D1 meet the goal?**
 
 The exam says **Yes**, but consider:
+
 - D1 provides 240 CPU minutes/day (4× more than F1)
 - "CPU minutes" ≠ "wall-clock minutes" for low-traffic apps
 - An idle app consumes minimal CPU, so 240 CPU minutes could sustain 8+ hours of light testing
 - For guaranteed 8 hours regardless of load, Basic B1 (no daily limit) is required
+
+## Related Labs
+
+_No related labs exist yet in this domain._

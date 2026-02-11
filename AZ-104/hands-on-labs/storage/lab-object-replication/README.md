@@ -251,3 +251,7 @@ This lab covers the following AZ-104 exam objectives:
 - [Blob versioning overview](https://learn.microsoft.com/en-us/azure/storage/blobs/versioning-overview)
 - [Change feed support in Azure Blob Storage](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blob-change-feed)
 - [AZ-104: Implement and manage storage](https://learn.microsoft.com/en-us/training/paths/az-104-manage-storage/)
+
+## Related Labs
+
+▶ Related Lab: [lab-blob-versioning](../lab-blob-versioning/README.md) - Understand which blob write operations create new versions

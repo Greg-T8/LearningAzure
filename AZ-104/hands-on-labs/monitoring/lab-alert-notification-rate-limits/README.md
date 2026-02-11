@@ -33,6 +33,7 @@ Given Alert1 fires **60 times per hour** (once per minute):
 | **SMS** | 1 per 5 min | **12** | Max 12 SMS per hour (1 every 5 minutes) |
 
 ⚠️ **Exam Note**: Some practice exams may show slightly different values. The documented Azure limits are:
+
 - Email: No more than 100 emails per hour
 - Voice: No more than 5 voice calls per hour
 - SMS: No more than 1 SMS every 5 minutes (12 per hour)
@@ -149,3 +150,7 @@ Azure enforces rate limits to prevent notification flooding:
 - [Action groups](https://learn.microsoft.com/azure/azure-monitor/alerts/action-groups)
 - [Rate limiting for voice, SMS, emails](https://learn.microsoft.com/azure/azure-monitor/alerts/action-groups#rate-limiting)
 - [Azure Monitor alerts overview](https://learn.microsoft.com/azure/azure-monitor/alerts/alerts-overview)
+
+## Related Labs
+
+*No related labs exist yet in this domain.*
