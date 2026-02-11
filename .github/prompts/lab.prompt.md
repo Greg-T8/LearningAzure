@@ -74,9 +74,11 @@ lab-<topic>/
     └── test-*.ps1          # optional
 ```
 
-## Required header block (all files)
+## Required header block (code files only)
 
-Include a header block at top of every created file:
+Include a header block at the top of all **code files** (Terraform `.tf`, Bicep `.bicep`, PowerShell `.ps1`).
+
+**Do NOT include header blocks in README.md or other markdown documentation files.**
 
 ```
 # -------------------------------------------------------------------------
