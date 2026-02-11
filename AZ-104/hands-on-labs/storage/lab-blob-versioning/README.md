@@ -120,16 +120,23 @@ $resourceGroupName = $outputs.resourceGroupName
 
 **Note:** The `output` action returns a PowerShell custom object with direct property access to deployment output values.
 
+<img src='.img/2026-02-11-05-33-07.png' width=500>
+
 ### Step 3: Run Version Testing Script
 
-Execute the comprehensive test script:
+Switch to the Lab Azure profile and execute the comprehensive test script:
 
 ```powershell
+Use-AzProfile Lab
 cd ..\scripts
 .\Test-BlobVersioning.ps1 `
     -ResourceGroupName $resourceGroupName `
     -StorageAccountName $storageAccountName
 ```
+
+**Note:** The script automatically creates and cleans up temporary files for each blob operation test.
+
+<img src='.img/2026-02-11-06-10-01.png' width=700>
 
 ### Step 4: Analyze Results
 
@@ -167,6 +174,9 @@ az storage blob list `
 1. **Append Block** - Appends data to append blob in-place
 2. **Set Blob Metadata** - Modifies metadata only, not blob content
 3. **Put Page** - Updates page ranges within page blob in-place
+
+> **⚠️ Important Note on Set Blob Metadata:**  
+> The exam question indicates that Set Blob Metadata should NOT create a new version. However, empirical testing with Azure Storage SDK shows that setting metadata using `ICloudBlob.SetMetadata()` **DOES** create a new version in practice. This may represent a change in Azure's behavior since the exam was authored, or the exam answer may be based on different Azure SDK methods or configurations. When answering exam questions, follow the documented answer (metadata does NOT create versions), but be aware that actual Azure behavior may differ.
 
 ## Key Learning Points
 

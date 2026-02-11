@@ -178,12 +178,15 @@ $Helpers = {
             [string]$BlobName
         )
 
+        # Note: -Blob and -IncludeVersion cannot be used together
+        # Use -Prefix instead and filter for exact match
         $versions = Get-AzStorageBlob `
             -Container $ContainerName `
-            -Blob $BlobName `
+            -Prefix $BlobName `
             -Context $script:context `
             -IncludeVersion `
-            -ErrorAction SilentlyContinue
+            -ErrorAction SilentlyContinue |
+            Where-Object { $_.Name -eq $BlobName }
 
         return ($versions | Measure-Object).Count
     }
@@ -206,17 +209,24 @@ $Helpers = {
         Write-Host "Testing: $testName..." -ForegroundColor Yellow
 
         try {
+            # Clean up any existing blob from previous test runs
+            Remove-AzStorageBlob -Container $ContainerName -Blob $blobName -Context $script:context -Force -ErrorAction SilentlyContinue | Out-Null
+            Start-Sleep -Seconds 1
+
             # Create initial blob
             $content = "Initial content - $(Get-Date)"
-            $bytes = [System.Text.Encoding]::UTF8.GetBytes($content)
+            $tempFile = New-TemporaryFile
+            Set-Content -Path $tempFile.FullName -Value $content -NoNewline
 
             # Upload the initial blob content
             Set-AzStorageBlobContent `
+                -File $tempFile.FullName `
                 -Container $ContainerName `
-                -Blob $blobName `
                 -Blob $blobName `
                 -Context $script:context `
                 -Force | Out-Null
+
+            Remove-Item -Path $tempFile.FullName -Force
 
             # Wait for Azure to process the operation
             Start-Sleep -Seconds 2
@@ -227,12 +237,17 @@ $Helpers = {
             # Perform the actual test: Overwrite the blob with new content
             # This simulates replacing a file in storage (e.g., updating a config file)
             $newContent = "Updated content - $(Get-Date)"
+            $tempFile2 = New-TemporaryFile
+            Set-Content -Path $tempFile2.FullName -Value $newContent -NoNewline
 
             Set-AzStorageBlobContent `
+                -File $tempFile2.FullName `
                 -Container $ContainerName `
                 -Blob $blobName `
                 -Context $script:context `
                 -Force | Out-Null
+
+            Remove-Item -Path $tempFile2.FullName -Force
 
             # Wait for Azure to process the operation
             Start-Sleep -Seconds 2
@@ -283,14 +298,24 @@ $Helpers = {
         Write-Host "Testing: $testName..." -ForegroundColor Yellow
 
         try {
+            # Clean up any existing blob from previous test runs
+            Remove-AzStorageBlob -Container $ContainerName -Blob $blobName -Context $script:context -Force -ErrorAction SilentlyContinue | Out-Null
+            Start-Sleep -Seconds 1
+
             # Create append blob - a special blob type optimized for sequential writes
             # Append blobs are commonly used for log files and event streams
+            $tempFile = New-TemporaryFile
+            "Initial append content" | Set-Content -Path $tempFile.FullName -NoNewline
+
             $null = Set-AzStorageBlobContent `
+                -File $tempFile.FullName `
                 -Container $ContainerName `
                 -Blob $blobName `
                 -Context $script:context `
                 -BlobType Append `
                 -Force
+
+            Remove-Item -Path $tempFile.FullName -Force
 
             # Wait for Azure to process the blob creation
             Start-Sleep -Seconds 2
@@ -312,7 +337,7 @@ $Helpers = {
             $cloudBlob.ICloudBlob.AppendBlock(
                 (New-Object System.IO.MemoryStream(, $appendData)),
                 $null
-            )
+            ) | Out-Null
 
             # Wait for Azure to process the append operation
             Start-Sleep -Seconds 2
@@ -364,12 +389,22 @@ $Helpers = {
         Write-Host "Testing: $testName..." -ForegroundColor Yellow
 
         try {
+            # Clean up any existing blob from previous test runs
+            Remove-AzStorageBlob -Container $ContainerName -Blob $blobName -Context $script:context -Force -ErrorAction SilentlyContinue | Out-Null
+            Start-Sleep -Seconds 1
+
             # Create initial blob
+            $tempFile = New-TemporaryFile
+            "Initial content" | Set-Content -Path $tempFile.FullName -NoNewline
+
             Set-AzStorageBlobContent `
+                -File $tempFile.FullName `
                 -Container $ContainerName `
                 -Blob $blobName `
                 -Context $script:context `
                 -Force | Out-Null
+
+            Remove-Item -Path $tempFile.FullName -Force
 
             Start-Sleep -Seconds 2
 
@@ -442,21 +477,37 @@ $Helpers = {
         Write-Host "Testing: $testName..." -ForegroundColor Yellow
 
         try {
+            # Clean up any existing blobs from previous test runs
+            Remove-AzStorageBlob -Container $ContainerName -Blob $sourceBlobName -Context $script:context -Force -ErrorAction SilentlyContinue | Out-Null
+            Remove-AzStorageBlob -Container $ContainerName -Blob $destBlobName -Context $script:context -Force -ErrorAction SilentlyContinue | Out-Null
+            Start-Sleep -Seconds 1
+
             # Create source blob
             $content = "Source content - $(Get-Date)"
+            $tempFile1 = New-TemporaryFile
+            Set-Content -Path $tempFile1.FullName -Value $content -NoNewline
 
             Set-AzStorageBlobContent `
+                -File $tempFile1.FullName `
                 -Container $ContainerName `
                 -Blob $sourceBlobName `
                 -Context $script:context `
                 -Force | Out-Null
 
+            Remove-Item -Path $tempFile1.FullName -Force
+
             # Create destination blob
+            $tempFile2 = New-TemporaryFile
+            "Destination content" | Set-Content -Path $tempFile2.FullName -NoNewline
+
             Set-AzStorageBlobContent `
+                -File $tempFile2.FullName `
                 -Container $ContainerName `
                 -Blob $destBlobName `
                 -Context $script:context `
                 -Force | Out-Null
+
+            Remove-Item -Path $tempFile2.FullName -Force
 
             Start-Sleep -Seconds 2
 
@@ -524,12 +575,22 @@ $Helpers = {
         Write-Host "Testing: $testName..." -ForegroundColor Yellow
 
         try {
+            # Clean up any existing blob from previous test runs
+            Remove-AzStorageBlob -Container $ContainerName -Blob $blobName -Context $script:context -Force -ErrorAction SilentlyContinue | Out-Null
+            Start-Sleep -Seconds 1
+
             # Create blob
+            $tempFile = New-TemporaryFile
+            "Initial content" | Set-Content -Path $tempFile.FullName -NoNewline
+
             Set-AzStorageBlobContent `
+                -File $tempFile.FullName `
                 -Container $ContainerName `
                 -Blob $blobName `
                 -Context $script:context `
                 -Force | Out-Null
+
+            Remove-Item -Path $tempFile.FullName -Force
 
             Start-Sleep -Seconds 2
 
@@ -592,27 +653,45 @@ $Helpers = {
         Write-Host "Testing: $testName..." -ForegroundColor Yellow
 
         try {
+            # Clean up any existing blobs from previous test runs
+            Remove-AzStorageBlob -Container $ContainerName -Blob $sourceBlobName -Context $script:context -Force -ErrorAction SilentlyContinue | Out-Null
+            Remove-AzStorageBlob -Container $ContainerName -Blob $destBlobName -Context $script:context -Force -ErrorAction SilentlyContinue | Out-Null
+            Start-Sleep -Seconds 1
+
             # Create source blob
+            $tempFile1 = New-TemporaryFile
+            "Source content" | Set-Content -Path $tempFile1.FullName -NoNewline
+
             Set-AzStorageBlobContent `
+                -File $tempFile1.FullName `
                 -Container $ContainerName `
                 -Blob $sourceBlobName `
                 -Context $script:context `
                 -Force | Out-Null
 
+            Remove-Item -Path $tempFile1.FullName -Force
+
             # Create destination blob
+            $tempFile2 = New-TemporaryFile
+            "Destination content" | Set-Content -Path $tempFile2.FullName -NoNewline
+
             Set-AzStorageBlobContent `
+                -File $tempFile2.FullName `
                 -Container $ContainerName `
                 -Blob $destBlobName `
                 -Context $script:context `
                 -Force | Out-Null
+
+            Remove-Item -Path $tempFile2.FullName -Force
 
             Start-Sleep -Seconds 2
 
             $versionsBefore = Get-BlobVersionCount -BlobName $destBlobName
 
             # Get source blob URL with SAS token
-            $startTime = Get-Date
-            $expiryTime = $startTime.AddHours(1)
+            # Set start time 15 minutes in past to account for clock skew between client and Azure servers
+            $startTime = (Get-Date).AddMinutes(-15)
+            $expiryTime = (Get-Date).AddHours(1)
 
             $sasToken = New-AzStorageBlobSASToken `
                 -Container $ContainerName `
@@ -622,14 +701,14 @@ $Helpers = {
                 -ExpiryTime $expiryTime `
                 -Context $script:context
 
-            $sourceUrl = "https://$StorageAccountName.blob.core.windows.net/$ContainerName/$sourceBlobName$sasToken"
+            $sourceUrl = "https://$($StorageAccountName).blob.core.windows.net/$($ContainerName)/$($sourceBlobName)?$($sasToken)"
 
             # Copy from URL (similar to Put Blob From URL)
             Start-AzStorageBlobCopy `
                 -AbsoluteUri $sourceUrl `
                 -DestContainer $ContainerName `
                 -DestBlob $destBlobName `
-                -Context $script:context `
+                -DestContext $script:context `
                 -Force | Out-Null
 
             Start-Sleep -Seconds 3
@@ -690,12 +769,20 @@ $Helpers = {
             if (-not $pageBlob) {
                 # Create new page blob - the .vhd extension hints at its primary use case
                 # Page blobs are the underlying storage for Azure VM disks
+                $tempFile = New-TemporaryFile
+                # Page blobs require 512-byte alignment - create a 512-byte file
+                $initialData = New-Object byte[] 512
+                [System.IO.File]::WriteAllBytes($tempFile.FullName, $initialData)
+
                 $null = Set-AzStorageBlobContent `
+                    -File $tempFile.FullName `
                     -Container $ContainerName `
                     -Blob $blobName `
                     -BlobType Page `
                     -Context $script:context `
                     -Force
+
+                Remove-Item -Path $tempFile.FullName -Force
             }
 
             # Wait for Azure to process the blob creation
@@ -797,7 +884,18 @@ $Helpers = {
                     Name       = 'Versions After'
                     Expression = { $_.VersionsAfter }
                 },
-                Status `
+                @{
+                    Name       = 'Status'
+                    Expression = {
+                        # Truncate status to prevent wrapping issues
+                        if ($_.Status.Length -gt 50) {
+                            $_.Status.Substring(0, 47) + '...'
+                        } else {
+                            $_.Status
+                        }
+                    }
+                    Width      = 50
+                } `
                 -AutoSize
 
         Write-Host "`nOperations that create new versions:" -ForegroundColor Green
