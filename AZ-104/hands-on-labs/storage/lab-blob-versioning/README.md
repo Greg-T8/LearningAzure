@@ -1,104 +1,219 @@
 # Lab: Azure Blob Versioning Write Operations
 
-## Overview
+## Exam Question Scenario
 
-This lab demonstrates which write operations create new blob versions when blob versioning is enabled on an Azure Storage account.
+Your organization is using Azure Blobs for storing data. You enable blob versioning for a storage account.
 
-## Objectives
+You need to determine which write operations create a new version.
 
-- Deploy a storage account with blob versioning enabled
-- Test different write operations
-- Identify which operations create new versions
-- Observe version history
+Which four write operations create a new version? Each correct answer presents a complete solution.
+
+A. Put Blob  
+B. Append Block  
+C. Put Block List  
+D. Copy Blob  
+E. Set Blob Metadata  
+F. Put Blob From URL  
+G. Put Page  
+
+## Scenario Analysis
+
+This scenario tests understanding of Azure Blob Storage versioning behavior, specifically:
+
+1. **Blob Versioning** - A feature that automatically maintains previous versions of blobs when they are modified or deleted
+2. **Write Operations** - Different API operations that modify blob data have different versioning behaviors
+3. **Version Creation** - Understanding which operations trigger the creation of a new version snapshot
+
+The key requirement is to identify which write operations create new versions versus those that modify blobs in-place without versioning.
+
+**Core Concepts:**
+
+- **Versioning-triggering operations** replace the entire blob content, creating a new version
+- **In-place modifications** update blob data without creating new versions (Append Block, Put Page for existing pages)
+- **Metadata-only changes** modify blob properties but may or may not trigger versioning depending on the operation
+
+## Solution Architecture
+
+This lab deploys a Storage Account with blob versioning enabled and provides a comprehensive testing script to validate which write operations create new versions.
+
+### Architecture Components
+
+1. **Storage Account** (Standard_LRS)
+   - Blob versioning enabled
+   - Delete retention policy (7 days)
+   - Container delete retention policy (7 days)
+   - Hot access tier
+
+    <img src='.img/2026-02-11-04-39-37.png' width=500>
+
+2. **Blob Container** (`test-container`)
+   - Private access level
+   - Used for all versioning tests
+
+3. **Test Script** (`Test-BlobVersioning.ps1`)
+   - Tests all seven write operations
+   - Tracks version counts before/after each operation
+   - Reports which operations create versions
+
+### Architecture Diagram
+
+```mermaid
+graph TD
+    A[Storage Account<br/>Versioning Enabled] --> B[Blob Container<br/>test-container]
+    B --> C[Test Blobs]
+    C --> D[Version History]
+    
+    E[Test Script] -->|Put Blob| C
+    E -->|Append Block| C
+    E -->|Put Block List| C
+    E -->|Copy Blob| C
+    E -->|Set Metadata| C
+    E -->|Put Blob From URL| C
+    E -->|Put Page| C
+    
+    C -->|Tracks Versions| D
+    D -->|Result Report| F[Version Analysis]
+
+    style A fill:#0078d4,color:#fff
+    style B fill:#0078d4,color:#fff
+    style C fill:#50e6ff,color:#000
+    style D fill:#50e6ff,color:#000
+    style E fill:#00c85a,color:#fff
+    style F fill:#ffd700,color:#000
+```
+
+## Lab Objectives
+
+1. Deploy an Azure Storage Account with blob versioning enabled
+2. Execute all seven blob write operations against test blobs
+3. Observe and measure version creation for each operation
+4. Identify the four operations that create new versions
+5. Understand the difference between version-creating and in-place operations
 
 ## Prerequisites
 
-- Azure subscription
-- Azure CLI or PowerShell Az module
-- Terraform (optional, for infrastructure deployment)
+- Azure subscription with appropriate permissions
+- PowerShell 7.0 or later with Az module installed
+- Basic understanding of Azure Blob Storage concepts
+- Familiarity with blob operations and REST API concepts
 
-## Lab Structure
+## Testing the Solution
 
-```
-lab-blob-versioning/
-├── README.md (this file)
-├── bicep/
-│   ├── main.bicep
-│   ├── main.bicepparam
-│   └── storage.bicep
-└── scripts/
-    └── Test-BlobVersioning.ps1
-```
+### Step 1: Deploy Infrastructure
 
-## Deployment Steps
-
-### Option 1: Deploy with Bicep
-
-```bash
-# Deploy the infrastructure
-az deployment group create \
-  --resource-group <your-rg-name> \
-  --template-file bicep/main.bicep \
-  --parameters bicep/main.bicepparam
-```
-
-### Option 2: Deploy with PowerShell
+Use the standardized Bicep deployment process (see GOVERNANCE.md for detailed instructions):
 
 ```powershell
-# Deploy using PowerShell
-New-AzResourceGroupDeployment `
-  -ResourceGroupName <your-rg-name> `
-  -TemplateFile .\bicep\main.bicep `
-  -TemplateParameterFile .\bicep\main.bicepparam
+cd bicep
+.\bicep.ps1 apply
 ```
 
-## Testing Write Operations
+### Step 2: Retrieve Deployment Outputs
 
-Run the test script to verify which operations create new versions:
+Get the storage account name and resource group from the deployment:
 
 ```powershell
-.\scripts\Test-BlobVersioning.ps1 `
-  -ResourceGroupName <your-rg-name> `
-  -StorageAccountName <storage-account-name>
+$outputs = .\bicep.ps1 show | ConvertFrom-Json
+$storageAccountName = $outputs.properties.outputs.storageAccountName.value
+$resourceGroupName = $outputs.properties.outputs.resourceGroupName.value
+```
+
+### Step 3: Run Version Testing Script
+
+Execute the comprehensive test script:
+
+```powershell
+cd ..\scripts
+.\Test-BlobVersioning.ps1 `
+    -ResourceGroupName $resourceGroupName `
+    -StorageAccountName $storageAccountName
+```
+
+### Step 4: Analyze Results
+
+The script will output a formatted table showing:
+
+- Each write operation tested
+- Whether a version was created (✓ Yes / ✗ No)
+- Version count before and after the operation
+- Success/error status
+
+### Step 5: Verify Manually (Optional)
+
+List all versions of a specific blob:
+
+```powershell
+az storage blob list `
+    --account-name $storageAccountName `
+    --container-name test-container `
+    --prefix test-putblob.txt `
+    --include v `
+    --auth-mode login
 ```
 
 ## Expected Results
 
-The following operations should create new versions:
+### Operations That Create New Versions ✓
 
-- Put Blob
-- Put Block List
-- Copy Blob
-- Put Blob From URL
+1. **Put Blob** - Replaces entire blob content
+2. **Put Block List** - Commits block list, creating new blob version
+3. **Copy Blob** - Destination blob gets new version
+4. **Put Blob From URL** - Creates blob from URL source
 
-The following operations should NOT create new versions:
+### Operations That Do NOT Create New Versions ✗
 
-- Append Block
-- Set Blob Metadata
-- Put Page (when updating existing pages)
+1. **Append Block** - Appends data to append blob in-place
+2. **Set Blob Metadata** - Modifies metadata only, not blob content
+3. **Put Page** - Updates page ranges within page blob in-place
 
-## Verification
+## Key Learning Points
 
-After running the tests, verify versions using:
+- **Blob versioning automatically preserves previous states** when blobs are overwritten or deleted, providing point-in-time recovery
+- **Only operations that replace the entire blob** (Put Blob, Put Block List, Copy Blob, Put Blob From URL) create new versions
+- **In-place modifications** (Append Block, Put Page) optimize for sequential write patterns without versioning overhead
+- **Metadata operations** don't trigger versioning since they don't modify blob content
+- **Version retention policies** can be configured to automatically delete old versions after a specified period
+- **Versioning has storage cost implications** since each version consumes storage space
+- **Block blobs, append blobs, and page blobs** all support versioning but have different operational characteristics
 
-```powershell
-# List all versions of a blob
-az storage blob list \
-  --account-name <storage-account-name> \
-  --container-name test-container \
-  --prefix test-blob.txt \
-  --include v \
-  --auth-mode login
-```
+## Related AZ-104 Exam Objectives
 
-## Cleanup
+This lab covers the following AZ-104 exam objective areas:
 
-```bash
-# Delete the resource group
-az group delete --name <your-rg-name> --yes --no-wait
-```
+**Implement and manage storage (15-20%)**
 
-## References
+- Configure Azure Storage accounts
+- Configure blob storage
+- Manage data by using Azure Storage Explorer and AzCopy
+- Configure Azure Files and Azure Blob Storage
 
-- [Blob versioning documentation](https://docs.microsoft.com/azure/storage/blobs/versioning-overview)
-- [Enable blob versioning](https://docs.microsoft.com/azure/storage/blobs/versioning-enable)
+**Skills validated:**
+
+- Understanding blob versioning configuration and behavior
+- Using PowerShell to interact with Azure Storage
+- Testing and validating storage features
+- Analyzing storage operation outcomes
+
+## Additional Resources
+
+### Microsoft Learn Modules
+
+- [Configure blob storage](https://learn.microsoft.com/training/modules/configure-blob-storage/)
+- [Manage Azure Blob Storage lifecycle](https://learn.microsoft.com/training/modules/manage-azure-blob-storage-lifecycle/)
+
+### Azure Documentation
+
+- [Blob versioning overview](https://learn.microsoft.com/azure/storage/blobs/versioning-overview)
+- [Enable and manage blob versioning](https://learn.microsoft.com/azure/storage/blobs/versioning-enable)
+- [Blob versioning FAQ](https://learn.microsoft.com/azure/storage/blobs/versioning-overview#blob-versioning-faq)
+- [Azure Blob Storage REST API reference](https://learn.microsoft.com/rest/api/storageservices/blob-service-rest-api)
+
+### Related Concepts
+
+- [Soft delete for blobs](https://learn.microsoft.com/azure/storage/blobs/soft-delete-blob-overview)
+- [Blob snapshots](https://learn.microsoft.com/azure/storage/blobs/snapshots-overview)
+- [Point-in-time restore for block blobs](https://learn.microsoft.com/azure/storage/blobs/point-in-time-restore-overview)
+
+## Related Labs
+
+▶ **Related Lab:** [lab-storage-lifecycle-management](../lab-storage-lifecycle-management/) - Configure lifecycle management policies for blob versioning and tier transitions
