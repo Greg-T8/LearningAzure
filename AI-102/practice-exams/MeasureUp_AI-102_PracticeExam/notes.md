@@ -64,3 +64,34 @@ For exam purposes, remember:
 ▶ Related Lab: [lab-dalle-image-gen](/AI-102/hands-on-labs/generative-ai/lab-dalle-image-gen/README.md)
 
 ---
+
+### Azure AI Search Query Performance Optimization
+
+You use Azure AI Search to index your organization's documents and data.
+
+Users report that some queries are slow. You repeat the users' queries when there is no load on the service and the queries are still slow.
+
+What should you do to improve performance of slow-running queries?
+
+| Statement | Yes | No |
+|----------|-----|----|
+| Add fields to the index. | ☐ | ☐ |
+| Add replicas. | ☐ | ☐ |
+| Add partitions. | ☐ | ☐ |
+| Convert fields to complex types. | ☐ | ☐ |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-02-11-06-31-10.png' width=700>
+
+</details>
+
+<details open>
+<summary>💡 Click to expand explanation</summary>
+
+</details>
+
+▶ Related Lab: [lab-search-query-perf](../../hands-on-labs/knowledge-mining/lab-search-query-perf/README.md)
+
+---
