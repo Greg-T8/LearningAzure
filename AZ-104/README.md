@@ -11,7 +11,8 @@
 
 | Priority | Modality         | My Notes                                                        | Status | Started | Completed | Days |
 | :------- | :--------------- | :-------------------------------------------------------------- | :----- | :------ | :-------- | :--- |
-| 1        | Practice Exams & Hands-on Labs   | [Practice Exams](./practice-exams/README.md) <br> [Hands-on Labs](./hands-on-labs/README.md) | 🚧    | 2/2/26  |           |      |
+| 1        | Hands-on Labs    | [Hands-on Labs](./hands-on-labs/README.md)                      | 🚧    | 2/2/26  |           |      |
+| 1        | Practice Exams   | [Practice Exams](./practice-exams/README.md)                    | 🚧    | 2/2/26  |           |      |
 | 2        | Video            | [John Savill's Training](./video-courses/savill/README.md) | ✅    | 1/29/26 | 2/1/26          | 4      |
 | 3        | Microsoft Learn | [Microsoft Learning Paths](./learning-paths/README.md)          | ✅     | 1/14/26 | 1/25/26   | 11   |
 
