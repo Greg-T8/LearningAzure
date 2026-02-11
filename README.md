@@ -1,8 +1,6 @@
 <div align="center">
 
-# <img src="./.assets/Azure_Advisor.svg" width="64" height="64" alt="Learning Azure" style="vertical-align: middle;" />
-
-# Learning Azure
+# <img src="./.assets/Azure_Advisor.svg" width="36" height="36" alt="Learning Azure" style="vertical-align: middle; margin-right: 10px;" /> Learning Azure
 
 This repository documents my Azure learning journey, from certification prep to staying current with Azure updates.
 
