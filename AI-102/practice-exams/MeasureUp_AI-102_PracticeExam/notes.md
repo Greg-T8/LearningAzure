@@ -23,8 +23,41 @@ For each of the following statements, select Yes if the statement is true. Other
 
 </details>
 
-<details open>
+<details>
 <summary>💡 Click to expand explanation</summary>
+
+**Why the statements are correct**
+
+**Prefilled Python code reflecting your settings is available — Yes**
+
+The Azure AI Foundry DALL·E playground generates prefilled Python code based on the configuration you select in the UI. This allows you to copy code that already includes your prompt, image size, and other generation settings. This is designed to simplify moving from testing in the playground to application integration.
+
+**You can set the size of the generated images to 1024x1024 — Yes**
+
+The DALL·E model supports specific image sizes, including 1024x1024. The explanation confirms that the model supports 1024x1024, 1024x1792, and 1792x1024. These can be configured in the playground settings.
+
+**You can save generated images in JPEG format — No**
+
+At the time described, DALL·E in Azure AI Foundry supports only PNG output. JPEG is not supported directly from the model output, so this statement is false.
+
+**Key takeaway**
+
+The question tests knowledge of:
+
+* Playground-to-code integration capability
+* Supported image sizes
+* Supported output formats
+
+For exam purposes, remember:
+
+* Prefilled SDK code is available in Azure AI Foundry.
+* 1024x1024 is a valid supported size.
+* PNG is supported; JPEG is not.
+
+**References**
+
+* [https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/dall-e](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/dall-e)
+* [https://learn.microsoft.com/en-us/azure/ai-services/openai/quickstart?pivots=programming-language-python&tabs=command-line%2Cpython-new](https://learn.microsoft.com/en-us/azure/ai-services/openai/quickstart?pivots=programming-language-python&tabs=command-line%2Cpython-new)
 
 </details>
 
