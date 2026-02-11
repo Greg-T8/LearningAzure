@@ -60,9 +60,9 @@ Notes and insights from the MeasureUp practice assessment for AZ-104. I took thi
 <details>
 <summary>Click to expand details</summary>
 
-<img src='.img/2026-01-30-06-23-36.png' width=700>
+<img src='../.img/2026-01-30-06-23-36.png' width=700>
 
-<img src='.img/2026-01-30-06-25-12.png' width=700>
+<img src='../.img/2026-01-30-06-25-12.png' width=700>
 
 </details>
 
@@ -95,7 +95,7 @@ Which four actions should you perform in sequence to meet the goal? To answer, m
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-01-30-05-33-53.png' width=700>
+<img src='../.img/2026-01-30-05-33-53.png' width=700>
 
 </details>
 
@@ -157,7 +157,7 @@ D. Create a tag named CostCenter and assign it to each resource.
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-01-30-06-20-49.png' width=700>
+<img src='../.img/2026-01-30-06-20-49.png' width=700>
 
 </details>
 
@@ -236,9 +236,9 @@ E. Your users have the Storage Blob Data Contributor role assigned in the storag
 
 <details>
 <summary>📸 Click to expand screenshot</summary>
-<img src='.img/2026-01-30-05-46-07.png' width=700>
+<img src='../.img/2026-01-30-05-46-07.png' width=700>
 
-<img src='.img/2026-02-08-04-07-45.png' width=400>
+<img src='../.img/2026-02-08-04-07-45.png' width=400>
 </details>
 
 <details>
@@ -414,7 +414,7 @@ File storage: $PLACEHOLDER$
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-01-30-05-58-51.png' width=700>
+<img src='../.img/2026-01-30-05-58-51.png' width=700>
 
 </details>
 
@@ -521,7 +521,7 @@ Blob versioning: Both source and destination accounts
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-01-30-05-31-43.png' width=700>
+<img src='../.img/2026-01-30-05-31-43.png' width=700>
 
 </details>
 
@@ -638,9 +638,9 @@ You had the logic completely reversed - change feed on the wrong end, and versio
 - [Enable and manage blob versioning](https://learn.microsoft.com/en-us/azure/storage/blobs/versioning-enable?tabs=portal)
 - [Change feed support in Azure Blob Storage](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blob-change-feed?tabs=azure-portal)
 
-<img src='.img/2026-02-02-04-12-42.png' width=700>
+<img src='../.img/2026-02-02-04-12-42.png' width=700>
 
-<img src='.img/2026-02-02-04-15-32.png' width=600>
+<img src='../.img/2026-02-02-04-15-32.png' width=600>
 
 </details>
 
@@ -669,7 +669,7 @@ Available cmdlets:
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-01-30-05-50-54.png' width=700>
+<img src='../.img/2026-01-30-05-50-54.png' width=700>
 
 </details>
 
@@ -824,7 +824,7 @@ G. Put Page
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-01-30-06-01-29.png' width=700>
+<img src='../.img/2026-01-30-06-01-29.png' width=700>
 
 </details>
 
@@ -858,7 +858,7 @@ The four versioning operations are **Put Blob**, **Put Block List**, **Copy Blob
 
 - [Blob versioning - How blob versioning works](https://learn.microsoft.com/en-us/azure/storage/blobs/versioning-overview#how-blob-versioning-works)
 
-<img src='.img/2026-02-02-04-41-46.png' width=600>
+<img src='../.img/2026-02-02-04-41-46.png' width=600>
 
 </details>
 
@@ -889,7 +889,7 @@ D. Shared
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-01-30-05-38-46.png' width=700>
+<img src='../.img/2026-01-30-05-38-46.png' width=700>
 
 </details>
 
@@ -956,7 +956,7 @@ On Azure exams, when you see:
 
 ➡️ **Standard is too weak**, **Isolated is too expensive**, **Premium V3 is the correct balance**.
 
-<img src='.img/2026-02-03-03-22-57.png' width=700>
+<img src='../.img/2026-02-03-03-22-57.png' width=700>
 
 **References**
 
@@ -987,7 +987,7 @@ Available options:
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-01-30-06-12-43.png' width=700>
+<img src='../.img/2026-01-30-06-12-43.png' width=700>
 
 </details>
 
@@ -1060,7 +1060,7 @@ B. No
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-01-30-06-17-12.png' width=700>
+<img src='../.img/2026-01-30-06-17-12.png' width=700>
 
 </details>
 
@@ -1105,7 +1105,7 @@ B. No
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-01-30-06-18-07.png' width=700>
+<img src='../.img/2026-01-30-06-18-07.png' width=700>
 
 </details>
 
@@ -1134,7 +1134,7 @@ For App Service questions, always evaluate both **technical capability and cost 
 * [https://learn.microsoft.com/azure/app-service/management-scale-up](https://learn.microsoft.com/azure/app-service/management-scale-up)
 * [https://learn.microsoft.com/azure/app-service/operating-system-functionality#app-service-plan-tiers](https://learn.microsoft.com/azure/app-service/operating-system-functionality#app-service-plan-tiers)
 
-<img src='.img/2026-02-05-02-52-17.png' width=600>
+<img src='../.img/2026-02-05-02-52-17.png' width=600>
 
 **What the ACU/vCPU column represents**
 
@@ -1192,7 +1192,7 @@ B. No
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-01-30-06-17-46.png' width=700>
+<img src='../.img/2026-01-30-06-17-46.png' width=700>
 
 </details>
 
@@ -1211,7 +1211,7 @@ Basic **B1** is typically the lowest-cost **dedicated compute** App Service plan
 **Key takeaway**
 Free/Shared App Service plans can stop apps when usage quotas are exceeded; moving to a dedicated tier like **Basic B1** eliminates that daily CPU-minute quota enforcement and meets the 8-hours/day requirement.
 
-<img src='.img/2026-02-05-04-17-27.png' width=800>
+<img src='../.img/2026-02-05-04-17-27.png' width=800>
 
 **References**
 
@@ -1244,7 +1244,7 @@ For each of the following statements, select Yes if the statement is true. Other
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-01-30-05-53-50.png' width=700>
+<img src='../.img/2026-01-30-05-53-50.png' width=700>
 
 </details>
 
@@ -1306,7 +1306,7 @@ D. Use internal Application Gateway with HTTP/HTTPS.
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-01-30-05-30-07.png' width=700>
+<img src='../.img/2026-01-30-05-30-07.png' width=700>
 
 </details>
 
@@ -1386,7 +1386,7 @@ D. Configure two action groups: one for email and SMS notification and one for I
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-01-30-05-26-15.png' width=700>
+<img src='../.img/2026-01-30-05-26-15.png' width=700>
 
 </details>
 
@@ -1444,7 +1444,7 @@ For each of the following statements, select Yes if the statement is true. Other
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-01-30-06-20-01.png' width=700>
+<img src='../.img/2026-01-30-06-20-01.png' width=700>
 
 </details>
 
@@ -1502,9 +1502,9 @@ Enable boot diagnostics in vm2 by using $PLACEHOLDER$
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-01-30-05-36-07.png' width=700>
+<img src='../.img/2026-01-30-05-36-07.png' width=700>
 
-<img src='.img/2026-01-30-05-34-11.png' width=500>
+<img src='../.img/2026-01-30-05-34-11.png' width=500>
 
 </details>
 
@@ -1539,7 +1539,7 @@ Boot diagnostics requires:
 
 Premium storage accounts and storage account v1 are **not supported**, regardless of region or resource group.
 
-<img src='.img/2026-02-03-04-29-59.png' width=700>
+<img src='../.img/2026-02-03-04-29-59.png' width=700>
 
 **References**  
 
@@ -1572,7 +1572,7 @@ Which four actions should you perform in sequence? To answer, move the appropria
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-01-30-05-41-40.png' width=700>
+<img src='../.img/2026-01-30-05-41-40.png' width=700>
 
 </details>
 
@@ -1634,7 +1634,7 @@ D. Connection troubleshoot
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-01-30-05-24-16.png' width=700>
+<img src='../.img/2026-01-30-05-24-16.png' width=700>
 
 </details>
 
@@ -1709,7 +1709,7 @@ D. 90 days
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-01-30-05-24-56.png' width=700>
+<img src='../.img/2026-01-30-05-24-56.png' width=700>
 
 </details>
 
@@ -1722,7 +1722,7 @@ Azure Backup uses **Soft Delete** for Azure IaaS VM backups. When a VM and its b
 **Key takeaway**
 For Azure IaaS VMs protected by a Recovery Services vault, **soft delete provides a fixed 14-day recovery window** after deletion—independent of the configured backup retention policy.
 
-<img src='.img/2026-02-04-03-04-12.png' width=500>
+<img src='../.img/2026-02-04-03-04-12.png' width=500>
 
 **References**
 
