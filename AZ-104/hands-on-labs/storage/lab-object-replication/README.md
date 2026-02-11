@@ -193,6 +193,12 @@ Get-AzStorageBlob `
 
 **Expected**: The `test-blob.txt` should appear in the destination container after replication completes.
 
+<img src='.img/2026-02-11-04-02-41.png' width=700>
+
+<img src='.img/2026-02-11-04-03-06.png' width=700>
+
+<img src='.img/2026-02-11-04-03-27.png' width=900>
+
 ### Step 4: Verify Replication Policy
 
 ```powershell
