@@ -1,6 +1,6 @@
 # AI-102 Hands-On Labs
 
-This page catalogs hands-on labs built from practice exam questions. Each lab uses Terraform or Azure Bicep to create dedicated environments for testing specific AZ-102 concepts
+This page catalogs hands-on labs built from practice exam questions. Each lab uses Terraform or Azure Bicep to create dedicated environments for testing specific AI-102 concepts.
 
 ---
 

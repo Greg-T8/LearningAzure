@@ -4,17 +4,33 @@ This page catalogs hands-on labs built from practice exam questions. Each lab us
 
 ---
 
+## 📈 Lab Statistics
+
+- **Total Labs**: 6
+- **Storage**: 4
+- **Compute**: 1
+- **Monitoring**: 1
+- **Identity & Governance**: 0
+- **Networking**: 0
+
+---
+
 ## 🧪 Labs
 
-* Storage Labs
-  * [Configure Azure Storage Object Replication](storage/lab-object-replication/README.md)
-  * [Azure Storage Explorer Permission Troubleshooting](storage/lab-storage-explorer-permissions/README.md)
-  * [Azure CLI Copy Authentication Methods for Blob and File Storage](storage/lab-azcopy-auth-methods/README.md)
-  * [Azure Blob Versioning Write Operations](storage/lab-blob-versioning/README.md)
-* Compute Labs
-  * [App Service Pricing Tiers](compute/lab-app-service-tiers/README.md)
-* Monitoring Labs
-  * [Azure Monitor Alert Notification Rate Limits](monitoring/lab-alert-notification-rate-limits/README.md)
+### Storage
+
+- **[Azure Blob Versioning Write Operations](storage/lab-blob-versioning/README.md)** - Identify which blob write operations create new versions when versioning is enabled
+- **[Azure CLI Copy Authentication Methods for Blob and File Storage](storage/lab-azcopy-auth-methods/README.md)** - Test authentication method differences between blob and file storage for AzCopy operations
+- **[Azure Storage Explorer Permission Troubleshooting](storage/lab-storage-explorer-permissions/README.md)** - Diagnose and resolve permission issues when accessing storage accounts through Storage Explorer
+- **[Configure Azure Storage Object Replication](storage/lab-object-replication/README.md)** - Configure blob versioning and change feed to support cross-region object replication
+
+### Compute
+
+- **[App Service Pricing Tiers](compute/lab-app-service-tiers/README.md)** - Test App Service pricing tier limitations and upgrade paths for runtime requirements
+
+### Monitoring
+
+- **[Azure Monitor Alert Notification Rate Limits](monitoring/lab-alert-notification-rate-limits/README.md)** - Understand notification rate limits for email, SMS, and voice alerts in Azure Monitor action groups
 
 ---
 
@@ -28,19 +44,4 @@ All labs in this repository are built following the comprehensive governance pol
 - **Code quality standards** with proper header comments and structured code
 - **Best practices** for infrastructure-as-code patterns in Terraform and Bicep
 
-Refer to [GOVERNANCE.md](../../GOVERNANCE.md) for complete guidelines on naming, tagging, resource limits, and deployment standards.
-
 ---
-
-## 📈 Lab Statistics
-
-- **Total Labs**: 6
-- **Storage**: 4
-- **Compute**: 1
-- **Monitoring**: 1
-- **Identity & Governance**: 0
-- **Networking**: 0
-
----
-
-*Last updated: February 11, 2026*
