@@ -152,3 +152,35 @@ Complex types increase index size and storage requirements. This can degrade per
 ▶ Related Lab: [lab-search-query-perf](../hands-on-labs/knowledge-mining/lab-search-query-perf/README.md)
 
 ---
+
+### Azure AI Content Safety Features Available
+
+You are an AI developer at a social media company. Your company wants to use AI solutions to improve aspects of user-generated content management. You are exploring the capabilities of Azure AI Content Safety.
+
+You need to identify which features are currently available in Azure AI Content Safety Studio.
+
+Which two features should you identify? Each correct answer presents a complete solution.
+
+| Statement | Yes | No |
+|----------|-----|----|
+| Creating traits and highlighting reels | ☐ | ☐ |
+| Search for exact moments in videos | ☐ | ☐ |
+| Hunting for security threats with search-and-query tools | ☐ | ☐ |
+| Moderating image content | ☐ | ☐ |
+| Moderating text content | ☐ | ☐ |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-02-12-06-20-51.png' width=700>
+
+</details>
+
+<details open>
+<summary>💡 Click to expand explanation</summary>
+
+</details>
+
+▶ Related Lab: <insert link>
+
+---
