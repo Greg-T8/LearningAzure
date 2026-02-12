@@ -947,7 +947,7 @@ On Azure exams, when you see:
 
 </details>
 
-▶ **Related Lab:** []()
+▶ **Related Lab:** [lab-app-service-plan-tiers](../hands-on-labs/compute/lab-app-service-plan-tiers/README.md)
 
 ---
 
