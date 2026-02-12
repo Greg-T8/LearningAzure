@@ -339,8 +339,6 @@
 
 <img src='.img/2026-01-29-03-45-35.png' width=500>
 
-
-
 **Definitions**  
 
 - **Cloud Account**: A user account created directly in the cloud tenant.  
@@ -527,7 +525,7 @@
 - Configurable authentication methods and policies for password reset.  
 - Role-based access control with emphasis on privileged roles like Global Administrator.
 
-<img src='.img/2026-01-29-03-56-25.png' width=700> 
+<img src='.img/2026-01-29-03-56-25.png' width=700>
 
 **Definitions**  
 
@@ -572,7 +570,7 @@
 - Permissions granted via roles in an administrative unit apply only to objects within that unit.  
 - Adding a group to an administrative unit does not automatically grant role permissions over the users in that group; users must be explicitly added to the administrative unit for role permissions to apply.  
 
-<img src='.img/2026-01-29-03-57-07.png' width=700> 
+<img src='.img/2026-01-29-03-57-07.png' width=700>
 
 <img src='.img/2026-01-29-03-57-31.png' width=700>
 
@@ -1056,7 +1054,7 @@
 
 <img src='.img/2026-01-30-03-06-12.png' width=500>
 
-<img src='.img/2026-01-30-03-07-01.png' width=700> 
+<img src='.img/2026-01-30-03-07-01.png' width=700>
 
 **Definitions**  
 
@@ -1132,7 +1130,7 @@
 - A VNet exists within a single Azure subscription and region (cannot span multiple subscriptions or regions).  
 - VNets are defined by one or more IPv4 CIDR ranges, commonly private IP ranges (RFC 1918), but can also include custom or public IP ranges (with limitations).  
 - VNets are subdivided into subnets, which are subsets of the VNet’s IP address space.  
-- Subnets are regional resources and can span multiple Availability Zones within the same region. 
+- Subnets are regional resources and can span multiple Availability Zones within the same region.
 - **Each subnet loses 5 IP addresses due to reserved addresses for network, broadcast, gateway, and DNS purposes.**
 - Resources connect to VNets via virtual NICs that receive private IP addresses allocated by Azure DHCP.
 - Public IP addresses can be associated with resources for internet accessibility, but private IPs are not internet routable by default.
@@ -1325,7 +1323,7 @@
 
 - **Network Security Group (NSG)**: A collection of security rules that allow or deny inbound and outbound network traffic to Azure resources.  
 - **Service Tag**: A label representing a group of IP address prefixes for specific Azure services, used to simplify NSG rule management.  
-- **Application Security Group (ASG)**: **A logical grouping of NICs that allows NSG rules to be applied based on application roles rather than IP addresses.** 
+- **Application Security Group (ASG)**: **A logical grouping of NICs that allows NSG rules to be applied based on application roles rather than IP addresses.**
 - **Priority (in NSG rules)**: A numeric value determining the order of rule evaluation; lower numbers have higher priority.
 - **Azure Firewall**: A managed, first-party network virtual appliance that provides advanced filtering, NAT, and traffic inspection capabilities.
 
@@ -1513,7 +1511,6 @@
 - Internet egress requires explicit configuration in Azure gateways/firewalls (default egress is deprecated)  
 - Virtual Network (VNet) subnet sizing considerations for gateway subnets  
 - VPN gateway types: policy-based (static routing) vs route-based (dynamic routing)  
-
 
 **Definitions**  
 
@@ -1850,7 +1847,7 @@
 - Deploys into a dedicated subnet called the Azure Bastion subnet.  
 - Different SKUs (Basic, Standard) offer varying levels of functionality and scalability.  
 
-<img src='.img/2026-01-31-03-20-56.png' width=700> 
+<img src='.img/2026-01-31-03-20-56.png' width=700>
 
 **Definitions**  
 
@@ -1938,7 +1935,7 @@
 - Two SKUs exist: Basic (free) and Standard (paid), with different capabilities and SLAs.  
 - Floating IP allows the back-end resource to see the front-end IP instead of its own IP.  
 
-<img src='.img/2026-01-31-03-26-59.png' width=500> 
+<img src='.img/2026-01-31-03-26-59.png' width=500>
 
 **Definitions**  
 
@@ -2005,7 +2002,6 @@
 
 <img src='.img/2026-01-31-03-32-29.png' width=700>
 
-
 **Definitions**
 
 - **Floating IP**: A feature where the backend pool member sees the frontend IP address instead of its own IP, useful for certain communication scenarios.
@@ -2057,7 +2053,7 @@
 - Can route traffic to various Azure endpoints such as PaaS services, web apps, public IPs, IPv4/IPv6 addresses, nested endpoints, or even other Traffic Manager profiles.  
 - Time to live (TTL) can be configured to control DNS record caching duration.
 
-<img src='.img/2026-01-31-03-36-12.png' width=700> 
+<img src='.img/2026-01-31-03-36-12.png' width=700>
 
 **Definitions**  
 
@@ -2099,7 +2095,7 @@
 - Supports global failover: if one region goes down, traffic is routed to another region.  
 - Layer 7 global load balancing is handled separately by Azure Front Door.
 
-<img src='.img/2026-01-31-03-36-55.png' width=500> 
+<img src='.img/2026-01-31-03-36-55.png' width=500>
 
 **Definitions**  
 
@@ -2150,7 +2146,7 @@
 - Premium SKU includes advanced features like Microsoft-managed WAF rule sets and bot protection.  
 - Features path-based routing and a rules engine for flexible traffic management.
 
-<img src='.img/2026-01-31-03-41-10.png' width=700> 
+<img src='.img/2026-01-31-03-41-10.png' width=700>
 
 **Definitions**  
 
@@ -2204,7 +2200,7 @@
 
 <img src='.img/2026-01-31-03-50-48.png' width=700>
 
-<img src='.img/2026-01-31-03-51-42.png' width=700> 
+<img src='.img/2026-01-31-03-51-42.png' width=700>
 
 <img src='.img/2026-01-31-03-52-46.png' width=700>
 
@@ -2330,7 +2326,7 @@
 
 <img src='.img/2026-01-31-04-04-03.png' width=700>
 
-<img src='.img/2026-01-31-04-05-26.png' width=900> 
+<img src='.img/2026-01-31-04-05-26.png' width=900>
 
 <img src='.img/2026-01-31-04-06-13.png' width=700>
 
@@ -2392,8 +2388,7 @@
 
 Can manually trigger failover:
 
-<img src='.img/2026-01-31-04-07-59.png' width=700> 
-
+<img src='.img/2026-01-31-04-07-59.png' width=700>
 
 **Definitions**  
 
@@ -2436,7 +2431,7 @@ Can manually trigger failover:
 
 <img src='.img/2026-01-31-04-10-13.png' width=500>
 
-<img src='.img/2026-01-31-04-08-58.png' width=700> 
+<img src='.img/2026-01-31-04-08-58.png' width=700>
 
 **Definitions**  
 
@@ -2475,7 +2470,7 @@ Can manually trigger failover:
 - Azure File Sync enables synchronization between on-premises Windows file shares and Azure Files.  
 - Tiering capability in Azure File Sync allows offloading less-used files to the cloud to save local storage space.  
 
-<img src='.img/2026-01-31-04-11-16.png' width=700> 
+<img src='.img/2026-01-31-04-11-16.png' width=700>
 
 <img src='.img/2026-01-31-04-13-19.png' width=500>
 
@@ -2531,7 +2526,7 @@ SAS on the account level:
 
 SAS on the blob level:
 
-<img src='.img/2026-01-31-04-16-25.png' width=500> 
+<img src='.img/2026-01-31-04-16-25.png' width=500>
 
 **Definitions**  
 
@@ -2582,7 +2577,7 @@ SAS on the blob level:
 
 <img src='.img/2026-01-31-04-17-49.png' width=500>
 
-<img src='.img/2026-01-31-04-18-24.png' width=700> 
+<img src='.img/2026-01-31-04-18-24.png' width=700>
 
 <img src='.img/2026-01-31-04-18-33.png' width=500>
 
@@ -2791,7 +2786,6 @@ SAS on the blob level:
 - Secure access to VMs is recommended via Azure Bastion to avoid exposing public IPs and reduce attack surface.  
 - Physical hosts and racks correspond to fault domains within data centers, important for availability considerations.
 
-
 <img src='.img/2026-02-01-05-01-29.png' width=700>
 
 <img src='.img/2026-02-01-05-01-06.png' width=700>
@@ -2851,7 +2845,7 @@ SAS on the blob level:
 - Availability Zones are physically separate locations within an Azure region that isolate power, cooling, networking, and control planes.  
 - Availability Zones offer higher fault tolerance than Availability Sets by protecting against entire data center or power substation failures.  
 
-<img src='.img/2026-02-01-05-02-34.png' width=700> 
+<img src='.img/2026-02-01-05-02-34.png' width=700>
 
 **Definitions**  
 
@@ -3109,7 +3103,7 @@ SAS on the blob level:
 - Guest OS monitoring is possible via Azure Monitor agent and guest metrics.  
 - Alerts can be created based on activity logs, metrics, or log queries to proactively notify issues.
 
-<img src='.img/2026-02-01-05-21-21.png' width=700> 
+<img src='.img/2026-02-01-05-21-21.png' width=700>
 
 <img src='.img/2026-02-01-05-22-45.png' width=700>
 
@@ -3224,7 +3218,7 @@ SAS on the blob level:
 - Tables within a workspace can be configured to use either analytics or basic logs.  
 - Network Watcher integrates with Log Analytics for network health and troubleshooting.
 
-<img src='.img/2026-02-01-05-27-51.png' width=500> 
+<img src='.img/2026-02-01-05-27-51.png' width=500>
 
 <img src='.img/2026-02-01-05-30-30.png' width=500>
 
