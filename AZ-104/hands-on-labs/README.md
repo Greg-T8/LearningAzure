@@ -6,9 +6,9 @@ This page catalogs hands-on labs built from practice exam questions. Each lab us
 
 ## 📈 Lab Statistics
 
-- **Total Labs**: 6
+- **Total Labs**: 7
 - **Storage**: 4
-- **Compute**: 1
+- **Compute**: 2
 - **Monitoring**: 1
 - **Identity & Governance**: 0
 - **Networking**: 0
@@ -26,7 +26,8 @@ This page catalogs hands-on labs built from practice exam questions. Each lab us
 
 ### Compute
 
-- **[App Service Pricing Tiers](compute/lab-app-service-tiers/README.md)** - Test App Service pricing tier limitations and upgrade paths for runtime requirements
+- **[App Service Plan Tiers](compute/lab-app-service-plan-tiers/README.md)** - Compare App Service plan tiers, autoscale limits, and isolation requirements for exam scenarios
+- **[App Service Republication with Deployment Slots](compute/lab-app-service-republication/README.md)** - Provision an App Service environment and deployment slot to support republishing for test-user review
 
 ### Monitoring
 

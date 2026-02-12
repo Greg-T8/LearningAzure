@@ -254,4 +254,4 @@ This lab covers the following AZ-104 exam objectives:
 
 ## Related Labs
 
-▶ Related Lab: [lab-blob-versioning](../lab-blob-versioning/README.md) - Understand which blob write operations create new versions
+▶ Related Lab: [lab-blob-versioning](../../storage/lab-blob-versioning/README.md)

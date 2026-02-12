@@ -197,4 +197,4 @@ Azure AI Content Safety Studio provides the following core features:
 
 ## Related Labs
 
-No related labs currently exist in this workspace.
+▶ Related Lab: [lab-dalle-image-gen](../../generative-ai/lab-dalle-image-gen/README.md)

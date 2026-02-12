@@ -142,4 +142,4 @@ The Premium V3 tier is the correct answer because it is the most cost-effective 
 
 ## Related Labs
 
-*(No related labs currently available)*
+▶ Related Lab: [lab-app-service-republication](../../compute/lab-app-service-republication/README.md)

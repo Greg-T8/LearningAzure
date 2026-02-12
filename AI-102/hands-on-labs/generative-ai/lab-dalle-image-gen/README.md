@@ -262,4 +262,4 @@ az group delete --name ai102-generative-ai-dalle-image-gen-tf --yes --no-wait
 
 ## Related Labs
 
-*No related labs exist yet in this domain.*
+▶ Related Lab: [lab-content-safety](../../ai-services/lab-content-safety/README.md)

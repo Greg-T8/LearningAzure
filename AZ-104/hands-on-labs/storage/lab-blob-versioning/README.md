@@ -215,4 +215,4 @@ This lab covers the following AZ-104 exam objective areas:
 
 ## Related Labs
 
-▶ Related Lab: [lab-object-replication](../lab-object-replication/README.md) - Configure cross-region blob replication using versioning and change feed
+▶ Related Lab: [lab-object-replication](../../storage/lab-object-replication/README.md)

@@ -365,8 +365,7 @@ SAS tokens can be scoped to:
 
 ### Related Labs
 
-- [lab-storage-explorer-permissions](../lab-storage-explorer-permissions/README.md) - Understanding RBAC for Storage Explorer
-- [lab-object-replication](../lab-object-replication/README.md) - Blob replication with change feed
+▶ Related Lab: [lab-storage-explorer-permissions](../../storage/lab-storage-explorer-permissions/README.md)
 
 ---
 
