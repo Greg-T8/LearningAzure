@@ -71,18 +71,37 @@ After deployment, confirm the partition and replica counts:
 
 ### 3. Query the Search REST API
 
-Retrieve the service status and confirm partition allocation:
+Retrieve the service statistics to verify resource quotas and limits:
 
 ```powershell
-$searchName = terraform -chdir=terraform output -raw search_service_name
-$adminKey = terraform -chdir=terraform output -raw search_primary_key
+$searchName = terraform -chdir="../terraform" output -raw search_service_name; $searchName
+$adminKey = terraform -chdir="../terraform" output -raw search_primary_key; $adminKey
 
-# Check service statistics
-Invoke-RestMethod `
+# Get service statistics
+$stats = Invoke-RestMethod `
     -Uri "https://$searchName.search.windows.net/servicestats?api-version=2024-07-01" `
     -Headers @{ "api-key" = $adminKey } `
     -Method GET
+
+# Display formatted statistics
+$stats | ConvertTo-Json -Depth 10
+
+# Display key metrics
+Write-Host "`n=== Service Quotas ===" -ForegroundColor Cyan
+Write-Host "Indexes: $($stats.counters.indexesCount.usage) / $($stats.counters.indexesCount.quota)"
+Write-Host "Storage: $([math]::Round($stats.counters.storageSize.usage / 1GB, 2)) GB / $([math]::Round($stats.counters.storageSize.quota / 1GB, 2)) GB"
+Write-Host "Max storage per index: $([math]::Round($stats.limits.maxStoragePerIndex / 1GB, 2)) GB"
+Write-Host "Max fields per index: $($stats.limits.maxFieldsPerIndex)"
 ```
+
+<img src='.img/2026-02-12-05-50-32.png' width=600>
+
+**Key Metrics Explained:**
+
+- **counters.storageSize.quota**: Total storage available (Basic tier = ~30 GB)
+- **counters.indexesCount.quota**: Maximum number of indexes (Basic tier = 15)
+- **limits.maxStoragePerIndex**: Maximum storage per individual index
+- **limits.maxFieldsPerIndex**: Maximum searchable fields per index
 
 ### 4. Compare Partition Configurations
 
