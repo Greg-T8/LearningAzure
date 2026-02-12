@@ -165,6 +165,16 @@ Include a header block at the top of all **code files** (Terraform `.tf`, Bicep 
   * Allowed regions/locations
   * Terraform/Bicep standards (providers/versions/state conventions, etc.)
 
+## Subscription validation (all modalities)
+
+**All labs must validate deployment to the correct lab subscription before provisioning resources.**
+
+Lab Subscription ID: `e091f6e7-031a-4924-97bb-8c983ca5d21a`
+
+* **Terraform**: Include in `terraform.tfvars` as `lab_subscription_id` variable
+* **Bicep**: Validate subscription context in deployment script or parameter file
+* **Scripted**: Include subscription validation in deploy script before resource creation
+
 ## Terraform-specific rules (when Terraform chosen)
 
 * `terraform.tfvars` must exist and include:
@@ -181,6 +191,8 @@ Include a header block at the top of all **code files** (Terraform `.tf`, Bicep 
 * Use modules when there are **3+ related resources** in logical grouping.
 * Copy shared `bicep.ps1` exactly (non-negotiable).
 * Use wrapper actions only: `validate`, `plan`, `apply`, `destroy`, `show`, `list`.
+* Include subscription ID validation in deployment wrapper or parameter file:
+  * Validate current Azure context targets `e091f6e7-031a-4924-97bb-8c983ca5d21a`
 
 ## Common Azure configuration pitfalls (apply when relevant)
 
@@ -213,9 +225,24 @@ When the lab includes these patterns, enforce them to avoid deployment failure:
 Run and include output:
 
 * `Use-AzProfile Lab`
+* Subscription validation: Verify script checks for lab subscription ID `e091f6e7-031a-4924-97bb-8c983ca5d21a`
 * PowerShell: `Test-ScriptFileInfo -Path .\scripts\deploy.ps1` (if using script metadata)
 * Syntax validation: `Get-Command .\scripts\deploy.ps1 -Syntax`
 * Dry-run validation (use `-WhatIf` where supported or echo-mode execution)
+
+**Required subscription check pattern for PowerShell scripts:**
+
+```powershell
+function Confirm-LabSubscription {
+    $expectedSubscriptionId = 'e091f6e7-031a-4924-97bb-8c983ca5d21a'
+    $currentSubscription = (Get-AzContext).Subscription.Id
+    
+    if ($currentSubscription -ne $expectedSubscriptionId) {
+        Write-Error "Not connected to lab subscription. Expected: $expectedSubscriptionId, Current: $currentSubscription"
+        exit 1
+    }
+}
+```
 
 ## Final response format
 
