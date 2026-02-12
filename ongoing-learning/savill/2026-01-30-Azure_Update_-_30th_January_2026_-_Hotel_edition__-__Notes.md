@@ -21,7 +21,7 @@
 * [Tenant Configuration Management APIs Preview](#tenant-configuration-management-apis-preview)
 * [Closing Remarks](#closing-remarks)
 
-<img src='.img/2026-01-30-09-57-54.png' width=400> 
+<img src='.img/2026-01-30-09-57-54.png' width=400>
 
 ## Introduction and Setup
 
@@ -31,7 +31,6 @@
 
 - Overview of updated learning resources for Azure
 - Introduction to the new passkey profile rollout across tenants
-
 
 **Definitions**
 
@@ -100,8 +99,6 @@
 - Availability of AMD-based VM SKUs with significant CPU improvements.
 - Upcoming deprecation of Python 3.10 support for Azure Functions.
 
-
-
 **Definitions**
 
 - **Azure Command Launcher for Java (Jazz command)**: A preview tool that replaces the regular Java command in the JVM to automatically set optimized parameters for cloud environments, improving performance and efficiency across Azure Compute Services.
@@ -112,9 +109,7 @@
 - **V7 SKUs (D, E, A, F series)**: Azure VM SKUs powered by 5th Gen AMD EPYC processors with Zen 5 cores, offering up to 35% CPU improvement over V6 SKUs.
 - **Python 3.10 Support for Azure Functions**: Support ending in early October; users must upgrade to Python 3.13 or above.
 
-<img src='.img/2026-01-30-10-16-24.png' width=400> 
-
-
+<img src='.img/2026-01-30-10-16-24.png' width=400>
 
 **Key Facts**
 

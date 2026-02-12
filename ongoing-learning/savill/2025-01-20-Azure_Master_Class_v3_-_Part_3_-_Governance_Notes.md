@@ -117,8 +117,6 @@
 - Standards may come from internal policies or external regulatory compliance (industry, country).
 - Cloud environments have shared responsibility models that impact governance.
 
-
-
 **Definitions**
 
 - **Governance**: The process and mechanisms to enforce organizational rules, policies, and standards on cloud resource provisioning and usage to ensure compliance, security, and operational control.
@@ -395,7 +393,7 @@
 
 ## Organizing management groups
 
-https://youtu.be/t-i4XrygWCc?si=e5CMrkBytA-S-00Z&t=1115
+<https://youtu.be/t-i4XrygWCc?si=e5CMrkBytA-S-00Z&t=1115>
 
 **Timestamp**: 00:17:25 – 00:20:12
 

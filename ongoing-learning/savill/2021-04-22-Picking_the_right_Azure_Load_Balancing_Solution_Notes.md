@@ -10,21 +10,22 @@
 
 ## Table of Contents
 
-- [Introduction](#introduction)
-- [Why we have multiple resources](#why-we-have-multiple-resources)
-- [Understanding the requirements](#understanding-the-requirements)
-- [Traffic layers](#traffic-layers)
-- [Understanding the type of traffic](#understanding-the-type-of-traffic)
-- [Azure Load Balancer](#azure-load-balancer)
-- [Azure App Gateway](#azure-app-gateway)
-- [Global balancing](#global-balancing)
-- [Azure Front Door](#azure-front-door)
-- [Azure Global Load Balancer](#azure-global-load-balancer)
-- [Azure Traffic Manager](#azure-traffic-manager)
-- [Internal NVA global balancing](#internal-nva-global-balancing)
-- [Summary of solutions](#summary-of-solutions)
-- [Azure Portal Load balancing help me choose](#azure-portal-load-balancing-help-me-choose)
-- [End](#end)
+* [Table of Contents](#table-of-contents)
+* [Introduction](#introduction)
+* [Why we have multiple resources](#why-we-have-multiple-resources)
+* [Understanding the requirements](#understanding-the-requirements)
+* [Traffic layers](#traffic-layers)
+* [Understanding the type of traffic](#understanding-the-type-of-traffic)
+* [Azure Load Balancer](#azure-load-balancer)
+* [Azure App Gateway](#azure-app-gateway)
+* [Global balancing](#global-balancing)
+* [Azure Front Door](#azure-front-door)
+* [Azure Global Load Balancer](#azure-global-load-balancer)
+* [Azure Traffic Manager](#azure-traffic-manager)
+* [Internal NVA global balancing](#internal-nva-global-balancing)
+* [Summary of solutions](#summary-of-solutions)
+* [Azure Portal Load balancing help me choose](#azure-portal-load-balancing-help-me-choose)
+* [End](#end)
 
 ## Introduction
 
@@ -513,7 +514,7 @@
 **Definitions**
 
 - **Azure Traffic Manager**: A DNS-based traffic load balancer that directs client requests to the most appropriate service endpoint based on configured routing methods.
-- **CNAME Record (Alias)**: A DNS record that maps an alias name (e.g., www.saviletech.net) to another DNS name (e.g., saviletm.trafficmanager.net), enabling Traffic Manager integration with custom domains.
+- **CNAME Record (Alias)**: A DNS record that maps an alias name (e.g., <www.saviletech.net>) to another DNS name (e.g., saviletm.trafficmanager.net), enabling Traffic Manager integration with custom domains.
 - **TTL (Time To Live)**: The duration DNS records are cached by clients or DNS servers before a new lookup is performed.
 
 **Key Facts**
@@ -522,15 +523,15 @@
 - Traffic Manager only works with public-facing endpoints.
 - DNS TTL impacts how quickly traffic switches after an endpoint failure; shorter TTLs reduce failover delay but increase DNS query load.
 - Example Traffic Manager profile name used: Saviletm.trafficmanager.net.
-- Alias example: www.tm.saviletech.net as a CNAME to the Traffic Manager DNS name.
+- Alias example: <www.tm.saviletech.net> as a CNAME to the Traffic Manager DNS name.
 - Routing method example used: Performance (based on DNS latency).
 - Endpoints in the example were public Azure load balancers in different regions.
 
 **Examples**
 
 - Created a Traffic Manager profile named Saviletm.trafficmanager.net pointing to multiple backends.
-- Created a DNS alias www.tm.saviletech.net as a CNAME pointing to Saviletm.trafficmanager.net.
-- DNS lookup chain: www.tm.saviletech.net → Saviletm.trafficmanager.net → public endpoint (e.g., Azure load balancer in South Central region).
+- Created a DNS alias <www.tm.saviletech.net> as a CNAME pointing to Saviletm.trafficmanager.net.
+- DNS lookup chain: <www.tm.saviletech.net> → Saviletm.trafficmanager.net → public endpoint (e.g., Azure load balancer in South Central region).
 - Used performance routing to direct users to the closest endpoint based on DNS latency.
 
 **Key Takeaways 🎯**

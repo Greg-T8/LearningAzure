@@ -182,15 +182,15 @@
 - Multiple passkey profiles can be created and targeted to different user groups.
 - Registration campaigns will shift from SMS/phone call methods to passkey-based authentication.
 
-<img src='.img/2026-01-29-05-16-36.png' width=700> 
+<img src='.img/2026-01-29-05-16-36.png' width=700>
 
-<img src='.img/2026-01-29-05-16-48.png' width=700> 
+<img src='.img/2026-01-29-05-16-48.png' width=700>
 
-<img src='.img/2026-01-29-05-17-27.png' width=700> 
+<img src='.img/2026-01-29-05-17-27.png' width=700>
 
-<img src='.img/2026-01-29-05-17-58.png' width=700> 
+<img src='.img/2026-01-29-05-17-58.png' width=700>
 
-<img src='.img/2026-01-29-05-18-24.png' width=700> 
+<img src='.img/2026-01-29-05-18-24.png' width=700>
 
 **Definitions**
 
@@ -241,7 +241,7 @@
 - Configuration changes maintain existing settings but add flexibility for targeting different user groups.
 - Ability to enable device bound passkeys for sensitive users and synced passkeys for general users.
 
-<img src='.img/2026-01-29-05-19-23.png' width=700> 
+<img src='.img/2026-01-29-05-19-23.png' width=700>
 
 **Definitions**
 
