@@ -111,6 +111,8 @@ Modify `partition_count` in `terraform.tfvars` and redeploy to observe the scali
 - **2 partitions**: Index split across 2 shards (improved query parallelism)
 - **3 partitions**: Index split across 3 shards (maximum for Basic SKU)
 
+<img src='.img/2026-02-12-06-07-35.png' width=600>
+
 ---
 
 ## Scenario Analysis

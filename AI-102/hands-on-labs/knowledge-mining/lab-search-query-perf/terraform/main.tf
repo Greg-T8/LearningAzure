@@ -23,7 +23,7 @@ locals {
     Domain           = title(replace(var.domain, "-", " "))
     Purpose          = "Search Query Performance"
     Owner            = var.owner
-    DateCreated      = formatdate("YYYY-MM-DD", timestamp())
+    DateCreated      = var.date_created
     DeploymentMethod = "Terraform"
   }
 }

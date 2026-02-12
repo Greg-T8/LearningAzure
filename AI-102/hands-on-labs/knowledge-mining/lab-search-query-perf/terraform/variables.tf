@@ -56,6 +56,16 @@ variable "owner" {
   default     = "Greg Tate"
 }
 
+variable "date_created" {
+  description = "Date the lab resources were created (YYYY-MM-DD format)"
+  type        = string
+
+  validation {
+    condition     = can(regex("^\\d{4}-\\d{2}-\\d{2}$", var.date_created))
+    error_message = "Date must be in YYYY-MM-DD format."
+  }
+}
+
 variable "search_sku" {
   description = "Azure AI Search SKU (basic supports up to 3 partitions)"
   type        = string
@@ -70,7 +80,7 @@ variable "search_sku" {
 variable "partition_count" {
   description = "Number of search partitions (split index for parallel query processing)"
   type        = number
-  default     = 2
+  default     = 3
 
   validation {
     condition     = var.partition_count >= 1 && var.partition_count <= 3
@@ -81,7 +91,7 @@ variable "partition_count" {
 variable "replica_count" {
   description = "Number of search replicas (for query throughput, not individual query speed)"
   type        = number
-  default     = 1
+  default     = 3
 
   validation {
     condition     = var.replica_count >= 1 && var.replica_count <= 3
