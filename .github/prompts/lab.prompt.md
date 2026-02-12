@@ -37,6 +37,14 @@ Use when:
 
 **Default to IaaC unless the exam question clearly requires scripting or manual steps.**
 
+### IaaC choice selection
+
+When IaaC is determined to be the appropriate deployment method, **ask the user** whether they want to use:
+* **Terraform**, or
+* **Bicep**
+
+Do not assume or auto-select between Terraform and Bicep—always prompt for user preference.
+
 ## Non-negotiables
 
 ### Bicep wrapper script
