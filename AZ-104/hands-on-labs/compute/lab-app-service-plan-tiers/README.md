@@ -20,7 +20,7 @@ Which Azure App Service plan should you use?
 
 ## Solution Architecture
 
-This lab deploys an Azure App Service Plan with a Web App and autoscale configuration to demonstrate the scaling capabilities discussed in the exam question. A **Standard S1** tier is deployed for cost efficiency, while the Scenario Analysis section below explains the correct answer for the exam.
+This lab deploys an Azure App Service Plan with a Web App and autoscale configuration to demonstrate the scaling capabilities discussed in the exam question. A **Standard S1** tier is deployed for cost efficiency, while the Scenario Analysis section below explains why **Premium V3** is the correct answer for the exam.
 
 Key design decisions:
 
@@ -28,7 +28,7 @@ Key design decisions:
 - **Autoscale rules** are configured based on CPU percentage thresholds
 - The Web App runs on Linux with Node.js runtime for simplicity
 
-> **Cost Note:** The Isolated tier requires an App Service Environment (ASE), which costs ~$1,000+/month. This lab uses Standard S1 (~$70/month) to demonstrate autoscale concepts while keeping costs manageable.
+> **Cost Note:** Premium V3 tiers cost $200-800+/month depending on the SKU, while Standard S1 costs ~$70/month. This lab uses Standard S1 to demonstrate autoscale concepts while keeping costs manageable for learning purposes.
 
 ## Architecture Diagram
 
@@ -84,31 +84,45 @@ graph TD
 
 ## Scenario Analysis
 
-**Correct Answer: Isolated**
+**Correct Answer: Premium V3**
 
-The Isolated tier is the correct answer because it is the **only** App Service plan tier that provides dedicated virtual machines on dedicated infrastructure. Here is why each option is right or wrong:
+The Premium V3 tier is the correct answer because it is the most cost-effective option that satisfies **all four requirements**. Here is why each option is right or wrong:
 
 | Option | Verdict | Explanation |
 |--------|---------|-------------|
-| **Isolated** | Correct | Runs on a dedicated App Service Environment (ASE) with dedicated VMs. Supports up to 100 instances, enhanced compute, and provides physical network isolation. Meets ALL requirements including dedicated hardware. |
-| **Premium V3** | Incorrect | Provides enhanced compute capabilities and up to 30 instances, but runs on **shared infrastructure** — the underlying physical servers may host other Azure customers' workloads. Does not satisfy the "dedicated to your company only" requirement. |
-| **Standard** | Incorrect | Supports autoscale up to 10 instances but uses shared infrastructure and offers less compute power than Premium. Does not meet the dedicated VMs or enhanced compute requirements. |
-| **Shared** | Incorrect | Apps run on shared VMs with other customers' apps. No autoscale, no dedicated VMs, limited compute. Fails almost every requirement except minimal cost. |
+| **Premium V3** | ✅ Correct | Runs apps on dedicated Azure VMs (not shared with other customers). Supports autoscale up to 30 instances (exceeds the 10-instance requirement). Provides **enhanced compute capabilities** with higher-performance SKUs (more CPU cores and memory) compared to Standard. While more expensive than Standard, it's the cheapest tier that meets the "enhanced compute" requirement. |
+| **Isolated** | ❌ Incorrect | Provides dedicated VMs on dedicated infrastructure (via App Service Environment). Supports up to 100 instances with maximum compute power. However, it is significantly more expensive (~$1,000+/month for ASE alone) compared to Premium V3. Since Premium V3 already meets all requirements, Isolated fails the "minimal cost" constraint. |
+| **Standard** | ❌ Incorrect | Supports autoscale up to 10 instances (meets scaling requirement) and runs on dedicated VMs (meets the "dedicated to your company" requirement). However, Standard tier uses **lower-performance SKUs** than Premium tiers and does **not** provide "enhanced compute capabilities" for complex calculations. Fails the enhanced compute requirement. |
+| **Shared** | ❌ Incorrect | Apps run on shared VMs with other customers' apps (multi-tenant compute). No autoscale support, no dedicated VMs, limited compute power. Fails nearly every requirement except minimal cost. Not suitable for production workloads. |
 
-**Key distinction:** In Standard and Premium tiers, the VMs are dedicated to *your apps* but the underlying physical hardware is shared with other Azure customers. The Isolated tier provides dedicated physical infrastructure through an App Service Environment (ASE), ensuring the hardware itself is used only by your organization.
+### Key Distinctions
 
-**Cost consideration:** While the question asks for "minimal costs," the Isolated tier is the cheapest option that meets ALL requirements. A cheaper tier would fail the dedicated infrastructure requirement.
+**What "dedicated to your company" means:**
+
+- In **Free and Shared** tiers: Apps run on VMs shared with other customers' apps (multi-tenant)
+- In **Standard, Premium, and Premium V3** tiers: Apps run on dedicated VMs that are **not shared with other customers**; only your apps share these VMs
+- In **Isolated** tier (ASE): Apps run on dedicated VMs **and** the underlying physical infrastructure is also dedicated (network and compute isolation)
+
+**The deciding factors:**
+
+1. **Shared tier is eliminated** immediately (no dedicated VMs, no autoscale)
+2. **Standard vs Premium V3**: Both provide dedicated VMs and autoscale to 10+ instances. The "enhanced compute capabilities" requirement pushes you to **Premium V3**, which offers higher-performance SKUs
+3. **Premium V3 vs Isolated**: Both meet all functional requirements, but Premium V3 is significantly cheaper. Isolated only makes sense if you need the additional network/security isolation (not mentioned in the scenario)
+
+**Cost consideration:** While the question asks for "minimal costs," this means the **least expensive option that satisfies all requirements**. Premium V3 is cheaper than Isolated while still meeting the enhanced compute requirement that Standard cannot satisfy.
 
 ## Key Learning Points
 
-1. **App Service Plan tiers** define the compute resources, scaling limits, and isolation level for hosted web apps
-2. **Shared tier** runs apps on VMs shared with other customers — unsuitable for any dedicated compute requirement
-3. **Standard tier** supports autoscale up to 10 instances with dedicated VMs, but on shared physical infrastructure
-4. **Premium V3** offers enhanced compute and up to 30 instances, but still uses shared physical infrastructure
-5. **Isolated tier** (via ASE) provides fully dedicated physical infrastructure — the only tier meeting the "dedicated to your company" requirement
-6. **Autoscale** is available in Standard, Premium, and Isolated tiers but NOT in Free, Shared, or Basic tiers
-7. When exam questions say "dedicated to your company only," this specifically indicates the need for an App Service Environment (Isolated tier)
-8. Always evaluate ALL requirements before choosing the cheapest option — "minimal cost" means the least expensive option that satisfies every constraint
+1. **App Service Plan tiers** define the compute resources (VM size, performance), scaling limits, and isolation level for hosted web apps
+2. **Shared tier** runs apps on VMs shared with other Azure customers' apps (multi-tenant) — unsuitable for any dedicated compute requirement
+3. **Standard tier** provides dedicated VMs (not shared with other customers) and supports autoscale up to 10 instances, but uses **lower-performance compute** than Premium tiers
+4. **Premium V3** provides dedicated VMs with **enhanced compute capabilities** — higher-performance SKUs with more CPU cores and memory than Standard, and supports autoscale up to 30 instances
+5. **Isolated tier** (via App Service Environment) provides both dedicated VMs **and** dedicated underlying infrastructure with network isolation — the highest level of isolation but also the most expensive
+6. **"Dedicated to your company"** in exam questions typically means dedicated VMs (Standard, Premium, and Isolated all qualify) — not necessarily dedicated physical infrastructure
+7. **Autoscale** is available in Standard, Premium, and Isolated tiers but NOT in Free, Shared, or Basic tiers
+8. **Enhanced compute capabilities** specifically refers to higher-performance VM SKUs (more CPU, memory) — this is where Premium tiers differentiate from Standard
+9. When evaluating "minimal cost," choose the **least expensive tier that satisfies ALL requirements** — not simply the cheapest tier available
+10. **Cost hierarchy** (cheapest to most expensive for production): Standard < Premium V3 < Isolated (with ASE)
 
 ## Related AZ-104 Exam Objectives
 

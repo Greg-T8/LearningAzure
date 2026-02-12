@@ -34,9 +34,9 @@ output "autoscale_setting_name" {
 output "tier_comparison" {
   description = "App Service Plan tier comparison for exam reference"
   value = {
-    shared     = "Shared compute, no dedicated VMs, no autoscale, max 0 instances"
-    standard   = "Dedicated VMs (shared infrastructure), autoscale up to 10 instances"
-    premium_v3 = "Dedicated VMs (shared infrastructure), enhanced compute, autoscale up to 30 instances"
-    isolated   = "Dedicated VMs on dedicated infrastructure (ASE), autoscale up to 100 instances"
+    shared     = "Multi-tenant VMs (shared with other customers' apps), no autoscale, limited compute"
+    standard   = "Dedicated VMs (not shared with customers), autoscale up to 10, standard compute performance"
+    premium_v3 = "Dedicated VMs (not shared with customers), autoscale up to 30, enhanced compute with high-performance SKUs"
+    isolated   = "Dedicated VMs on dedicated infrastructure (ASE), network + compute isolation, autoscale up to 100, highest cost"
   }
 }
