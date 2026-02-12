@@ -947,6 +947,8 @@ On Azure exams, when you see:
 
 </details>
 
+▶ **Related Lab:** []()
+
 ---
 
 #### Prepare Azure App Service for Web App Republication
