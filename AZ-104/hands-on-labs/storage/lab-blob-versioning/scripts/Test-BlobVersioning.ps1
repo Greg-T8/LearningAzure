@@ -426,17 +426,21 @@ $Helpers = {
 
             # Step 1: Upload blocks individually using Put Block REST operation
             # This stages the blocks but doesn't commit them to the blob yet
+            # PutBlock signature: PutBlock(blockId, blockData, contentChecksum, accessCondition, options, operationContext)
             $stream1 = New-Object System.IO.MemoryStream(, $bytes1)
-            $blockBlob.ICloudBlob.PutBlock($blockId1, $stream1)
+            $blockBlob.ICloudBlob.PutBlock($blockId1, $stream1, $null, $null, $null, $null)
             $stream1.Dispose()
 
             $stream2 = New-Object System.IO.MemoryStream(, $bytes2)
-            $blockBlob.ICloudBlob.PutBlock($blockId2, $stream2)
+            $blockBlob.ICloudBlob.PutBlock($blockId2, $stream2, $null, $null, $null, $null)
             $stream2.Dispose()
 
             # Step 2: Commit the block list using Put Block List REST operation
             # This creates the final blob from the committed blocks
-            $blockBlob.ICloudBlob.PutBlockList(@($blockId1, $blockId2))
+            # PutBlockList signature: PutBlockList(blockList, accessCondition, options, operationContext)
+            # blockList must be IEnumerable[String], so we use List[String] type
+            [System.Collections.Generic.List[string]]$blockListToCommit = @($blockId1, $blockId2)
+            $blockBlob.ICloudBlob.PutBlockList($blockListToCommit, $null, $null, $null)
 
             Start-Sleep -Seconds 2
 
