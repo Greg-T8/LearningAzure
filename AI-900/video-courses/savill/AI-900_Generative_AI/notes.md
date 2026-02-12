@@ -262,7 +262,7 @@ Encoder -decoder architecture:
 
 <img src='.img/2026-01-30-05-03-18.png' width=500>
 
-<img src='.img/2026-01-30-05-04-18.png' width=700> 
+<img src='.img/2026-01-30-05-04-18.png' width=700>
 
 **Definitions**  
 
@@ -485,11 +485,6 @@ Encoder -decoder architecture:
 - Prompt engineering is an important discipline focused on crafting precise and explicit prompts to improve AI output quality.
 
 
-
-**Definitions**  
-
-- **Microsoft Copilot**: An orchestrator that integrates large language model capabilities into Microsoft products (e.g., Word, Teams, Security Dashboard, Dynamics, Windows 11), facilitating user interactions by interpreting and acting on user prompts.  
-- **Prompt Engineering**: The practice of designing and refining user prompts to ensure clear, explicit instructions that drive high-quality AI responses.
 
 **Key Facts**  
 
@@ -749,15 +744,11 @@ Encoder -decoder architecture:
 - Grounding the model with external data sources (internet search, databases, HR systems) is important for domain-specific or updated knowledge.  
 - Microsoft offers tools like the Semantic Kernel to orchestrate calls to the language model and integrate with other Azure services like Azure AI Search.
 
-<img src='.img/2026-01-31-04-38-31.png' width=700> 
+<img src='.img/2026-01-31-04-38-31.png' width=700>
 
-<img src='.img/2026-01-31-04-38-46.png' width=700> 
+<img src='.img/2026-01-31-04-38-46.png' width=700>
 
-<img src='.img/2026-01-31-04-39-21.png' width=500> 
-
-**Definitions**  
-
-- **Azure OpenAI Studio**: A web interface within Azure that allows users to manage OpenAI model deployments, view keys/endpoints, and interact with models via a playground.  
+<img src='.img/2026-01-31-04-39-21.png' width=500>
 - **System Instructions (System Message)**: Predefined prompts that set the context or role for the AI model to follow during interaction.  
 - **Few-shot Examples**: Sample input-output pairs provided to the model to guide its behavior and improve response relevance.  
 - **Semantic Kernel**: A Microsoft service that acts as an orchestrator to integrate large language models with other services and data sources.
@@ -854,11 +845,7 @@ Encoder -decoder architecture:
 
 <img src='.img/2026-01-31-04-44-50.png' width=300>
 
-<img src='.img/2026-01-31-04-47-06.png' width=700> 
-
-**Definitions**  
-
-- **Identify**: The process of determining potential harms that could arise from an AI system.  
+<img src='.img/2026-01-31-04-47-06.png' width=700>
 - **Measure**: Quantifying the likelihood and severity of identified harms using clear metrics.  
 - **Mitigate**: Applying safeguards such as filters and prompt engineering to reduce or prevent harms.  
 - **Operate**: The continuous management and enforcement of responsible AI practices during AI deployment.  

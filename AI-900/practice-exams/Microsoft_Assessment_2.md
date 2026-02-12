@@ -315,7 +315,7 @@ When a question asks about unified access to multiple Azure AI capabilities thro
 
 ## Unsure but Correctly Answered
 
-<img src='.img/2026-02-02-05-20-18.png' width=700> 
+<img src='.img/2026-02-02-05-20-18.png' width=700>
 
 <details>
 <summary>Click to expand explanation</summary>
@@ -338,7 +338,6 @@ On Microsoft exams, any question about **explaining AI behavior, setting expecta
 
 * [https://learn.microsoft.com/training/modules/understand-responsible-ai/](https://learn.microsoft.com/training/modules/understand-responsible-ai/)
 * [https://learn.microsoft.com/training/modules/identify-principles-practices-responsible-ai/](https://learn.microsoft.com/training/modules/identify-principles-practices-responsible-ai/)
-
 
 </details>
 
@@ -369,7 +368,6 @@ If the question asks for what *enables* modern image classification, the answer 
 [https://learn.microsoft.com/en-us/training/modules/understand-classification/](https://learn.microsoft.com/en-us/training/modules/understand-classification/)
 [https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview)
 [https://learn.microsoft.com/en-us/training/paths/get-started-computer-vision/](https://learn.microsoft.com/en-us/training/paths/get-started-computer-vision/)
-
 
 </details>
 

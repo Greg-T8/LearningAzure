@@ -1,6 +1,7 @@
 # Module 5: Introduction to generative AI and agents
 
 **Link:** [Microsoft Learn](https://learn.microsoft.com/en-us/training/modules/fundamentals-generative-ai/)
+
 * [Large language models (LLMs)](#large-language-models-llms)
 * [Prompts](#prompts)
 * [AI agents](#ai-agents)
@@ -59,7 +60,7 @@
   * Uses embeddings to predict the **next most probable token**.
   * Applies attention and a feed-forward neural network during prediction.
 
-<img src='.img/2026-01-19-04-42-46.png' width=700> 
+<img src='.img/2026-01-19-04-42-46.png' width=700>
 
 **Initial Vectors and Positional Encoding**
 
@@ -82,7 +83,7 @@
 * Embeddings exist in a **multi-dimensional vector space**.
 * **Cosine similarity** measures semantic closeness between tokens.
 
-<img src='.img/2026-01-19-04-43-15.png' width=700> 
+<img src='.img/2026-01-19-04-43-15.png' width=700>
 
 **Predicting Completions from Prompts**
 

@@ -203,13 +203,9 @@
 - Based on testing results, models may be released or further trained/tweaked.  
 - There are different types of training, including supervised learning where data is labeled.
 
-<img src='.img/2026-01-29-04-38-21.png' width=500> 
+<img src='.img/2026-01-29-04-38-21.png' width=500>
 
-<img src='.img/2026-01-29-04-40-33.png' width=700> 
-
-**Definitions**  
-
-- **Features**: The input data values or attributes used to describe aspects of the data (e.g., pictures of numbers, temperature readings).  
+<img src='.img/2026-01-29-04-40-33.png' width=700>
 - **Label**: The correct answer or category associated with each feature in the training data (e.g., "orange," "#1").  
 - **Model**: The output of the training process; a system that can predict labels for new data based on learned relationships.  
 - **Supervised Learning**: A type of machine learning where the training data includes both features and their correct labels.
@@ -255,11 +251,7 @@
 - Unsupervised learning involves unlabeled data and focuses on clustering or grouping based on similarities.  
 - Azure Machine Learning Studio supports creating custom models, importing and labeling datasets, training, testing, and deploying models.
 
-<img src='.img/2026-01-29-04-43-37.png' width=700> 
-
-**Definitions**  
-
-- **Supervised learning**: Training with data that has known labels.  
+<img src='.img/2026-01-29-04-43-37.png' width=700>
 - **Regression**: A type of supervised learning where the output is numeric (e.g., predicting house prices).  
 - **Classification**: A type of supervised learning where the output is a category or class.  
 - **Binary classification**: Classification with two mutually exclusive classes (e.g., will a viewer like a video or not).  
@@ -302,11 +294,7 @@
 - Deployment options include on-premises containers, Azure Kubernetes Service (AKS), and Azure Container Instances (ACI).  
 - Azure ML Studio supports both custom model training and access to pre-built models.
 
-<img src='.img/2026-01-29-04-43-57.png' width=700> 
-
-<img src='.img/2026-01-29-04-44-37.png' width=200>
-
-**Definitions**  
+<img src='.img/2026-01-29-04-43-57.png' width=700>
 
 - **Azure Machine Learning Studio**: An Azure cloud service that facilitates custom training, testing, and deployment of machine learning models.  
 - **Container**: A lightweight, standalone, executable package that includes everything needed to run a piece of software, such as a trained ML model, in different environments.
@@ -347,11 +335,9 @@
 - The softmax function is commonly used at the output layer to convert raw values into a probability distribution.  
 - Training large models requires massive computational resources (e.g., 10,000+ GPUs over months).  
 - For most users, retraining large models is impractical; instead, techniques like prompt engineering and retrieval-augmented generation (RAG) are used.  
-- Smaller neural networks can be trained effectively with less data and computational power for specific tasks.  
+- Smaller neural networks can be trained effectively with less data and computational power for specific tasks.
 
-<img src='.img/2026-01-29-04-48-10.png' width=600> 
-
-**Definitions**  
+<img src='.img/2026-01-29-04-48-10.png' width=600>
 
 - **Deep learning**: A subset of machine learning using multi-layered neural networks to model complex data relationships.  
 - **Neuron (Activation function)**: A computational unit in a neural network that processes input values and decides whether to activate (pass a value) or output zero.  
@@ -395,10 +381,7 @@
 - Different types of machine learning approaches  
 - Artificial Intelligence (AI) as rule-based or explicitly programmed behavior  
 - Machine Learning (ML) using labeled data for prediction, labeling, and classification  
-- Deep Learning leveraging neural networks for advanced tasks 
-
-**Definitions**  
-
+- Deep Learning leveraging neural networks for advanced tasks
 - **Artificial Intelligence (AI)**: Systems where behavior is explicitly programmed or rules are written to perform tasks (e.g., early chess computers).  
 - **Machine Learning (ML)**: Algorithms trained on labeled data to predict or classify new data.  
 - **Deep Learning**: Use of neural networks to model complex patterns and perform sophisticated tasks.  
@@ -439,20 +422,15 @@
 - Azure OpenAI and AI Search are special service types with different availability and pricing models.  
 - AI services expose REST endpoints for applications to interact with, typically using HTTP and JSON.
 
-<img src='.img/2026-01-29-04-54-45.png' width=500> 
+<img src='.img/2026-01-29-04-54-45.png' width=500>
 
 <img src='.img/2026-01-29-04-55-14.png' width=700>
 
 <img src='.img/2026-01-29-04-56-08.png' width=200>
 
-<img src='.img/2026-01-29-04-56-55.png' width=700> 
+<img src='.img/2026-01-29-04-56-55.png' width=700>
 
 <img src='.img/2026-01-29-04-58-26.png' width=400>
-
-
-**Definitions**  
-
-- **Optical Character Recognition (OCR)**: Technology to read and extract text from images.  
 - **Document Intelligence**: AI capability to understand and extract data from documents such as forms and invoices.  
 - **Knowledge Mining**: Process of extracting, indexing, and enriching information from various data types to make it searchable and usable by other applications.  
 - **Single Service Resource**: An Azure AI resource dedicated to one specific AI capability (e.g., computer vision, face API).  
@@ -501,11 +479,7 @@
 
 <img src='.img/2026-01-29-04-59-56.png' width=400>
 
-<img src='.img/2026-01-29-05-00-42.png' width=700> 
-
-**Definitions**  
-
-- **Endpoint**: A URL address exposed by an AI service that an application connects to for interaction.  
+<img src='.img/2026-01-29-05-00-42.png' width=700>
 - **REST Endpoint**: An HTTP-based interface that accepts requests and returns JSON responses.  
 - **SDK (Software Development Kit)**: A set of libraries that simplify interacting with REST endpoints in a programming language.  
 - **Key**: A secret token used to authenticate and authorize access to an AI service endpoint.  
@@ -641,7 +615,7 @@
 
 <img src='.img/2026-01-30-04-15-53.png' width=500>
 
-<img src='.img/2026-01-30-04-16-32.png' width=700> 
+<img src='.img/2026-01-30-04-16-32.png' width=700>
 
 <img src='.img/2026-01-30-04-16-55.png' width=700>
 
@@ -767,7 +741,7 @@
 
 <img src='.img/2026-01-30-04-31-25.png' width=700>
 
-<img src='.img/2026-01-30-04-31-34.png' width=700> 
+<img src='.img/2026-01-30-04-31-34.png' width=700>
 
 **Definitions**  
 
@@ -860,11 +834,6 @@
 - Useful for handling larger amounts of text requiring translation across languages.
 
 
-
-**Definitions**  
-
-- **Translation Service**: A service that translates text or documents from one language to another, with support for custom language dictionaries and filters.  
-- **Custom Language Dictionary**: A user-defined set of domain- or industry-specific terms that the translation service uses to improve accuracy.  
 - **Profanity Filter**: A filter that removes or censors offensive language during translation.  
 - **Selective Translation**: A feature that allows certain words (e.g., brand names like "Azure") to remain untranslated.
 

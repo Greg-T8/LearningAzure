@@ -1,5 +1,6 @@
-<img src='.img/2026-01-31-05-38-37.png' width=700>
+# Microsoft Assessment 1
 
+<img src='.img/2026-01-31-05-38-37.png' width=700>
 
 ---
 
@@ -586,9 +587,6 @@ You got confused because object detection *does* involve classifying each object
 
 ---
 
-
-
-
 ## Correct Answers
 
 <img src='.img/2026-01-31-04-52-51.png' width=700>
@@ -598,7 +596,6 @@ You got confused because object detection *does* involve classifying each object
 <img src='.img/2026-01-31-04-54-11.png' width=700>
 
 ---
-
 
 <img src='.img/2026-01-31-04-55-43.png' width=700>
 
@@ -668,7 +665,6 @@ You got confused because object detection *does* involve classifying each object
 
 ---
 
-
 <img src='.img/2026-01-31-05-19-07.png' width=700>
 
 ---
@@ -693,9 +689,7 @@ You got confused because object detection *does* involve classifying each object
 
 ---
 
-
 <img src='.img/2026-01-31-05-24-33.png' width=700>
-
 
 ---
 
@@ -723,7 +717,6 @@ You got confused because object detection *does* involve classifying each object
 
 ---
 
-
 <img src='.img/2026-01-31-05-31-47.png' width=700>
 
 ---
@@ -739,7 +732,6 @@ You got confused because object detection *does* involve classifying each object
 <img src='.img/2026-01-31-05-33-49.png' width=700>
 
 ---
-
 
 <img src='.img/2026-01-31-05-34-56.png' width=700>
 

@@ -1,6 +1,7 @@
 # Module 7: Introduction to text analysis concepts
 
 **Link:** [Microsoft Learn](https://learn.microsoft.com/en-us/training/modules/introduction-language/)
+
 * [Introduction to text analysis concepts](#introduction-to-text-analysis-concepts)
 * [Tokenization](#tokenization)
 * [Statistical text analysis](#statistical-text-analysis)
@@ -69,7 +70,7 @@
 
 ## Tokenization
 
-[Module Reference]()
+[Module Reference](https://learn.microsoft.com/training/modules/introduction-language/)
 
 **Overview**
 
@@ -229,7 +230,7 @@
   * **Nodes**: sentences (or words)
   * **Edges**: weighted by similarity (e.g., word overlap, cosine similarity)
 
-<img src='.img/2026-01-19-05-09-47.png' width=500> 
+<img src='.img/2026-01-19-05-09-47.png' width=500>
 
 **TextRank Process**
 

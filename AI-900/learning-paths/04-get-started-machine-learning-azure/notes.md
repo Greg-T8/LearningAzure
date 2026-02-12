@@ -1,6 +1,7 @@
 # Module 4: Get started with machine learning in Azure
 
 **Link:** [Microsoft Learn](https://learn.microsoft.com/en-us/training/modules/design-machine-learning-model-training-solution/)
+
 * [Introduction](#introduction)
 * [Define the problem](#define-the-problem)
 * [Get and prepare data](#get-and-prepare-data)
@@ -352,7 +353,7 @@
     * Batch inferencing
   * Importing and managing models from a model catalog
 
-<img src='.img/2026-01-19-04-35-33.png' width=700> 
+<img src='.img/2026-01-19-04-35-33.png' width=700>
 
 **Provisioning Azure Machine Learning resources**
 
@@ -527,7 +528,5 @@
 * **Batch compute scales down when not in use**
 
 ---
-
-
 
 *Last updated: 2026-01-16*

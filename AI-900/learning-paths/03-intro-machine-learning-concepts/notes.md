@@ -1,6 +1,7 @@
 # Module 3: Introduction to machine learning concepts
 
 **Link:** [Microsoft Learn](https://learn.microsoft.com/en-us/training/modules/fundamentals-machine-learning/)
+
 * [Machine learning models](#machine-learning-models)
 * [Types of machine learning model](#types-of-machine-learning-model)
 * [Regression](#regression)
@@ -419,7 +420,6 @@
 
 ---
 
-
 ## Multiclass classification
 
 [Module Reference](https://learn.microsoft.com/training/modules/introduction-to-machine-learning-concepts/)
@@ -731,6 +731,5 @@
 * Training is computationally intensive and best suited for **GPUs**.
 
 ---
-
 
 *Last updated: 2026-01-16*

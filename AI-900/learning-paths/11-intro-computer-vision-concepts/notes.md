@@ -8,7 +8,6 @@
 * [Vision transformers and multimodal models](#vision-transformers-and-multimodal-models)
 * [Image generation](#image-generation)
 
-
 ---
 
 ## Computer vision tasks and techniques
@@ -191,7 +190,6 @@
 * This requires **machine learning models** trained on large volumes of images.
 * A **convolutional neural network (CNN)** is one of the most common deep learning architectures used for computer vision.
 
-
 **What is a CNN**
 
 * A CNN is a **deep learning architecture** that uses **filters** to extract numeric features from images.
@@ -351,7 +349,7 @@
 * Iterations progressively add **visual structure**
 * Each step refines the image to better match the prompt
 
-<img src='.img/2026-01-21-04-41-56.png' width=700> 
+<img src='.img/2026-01-21-04-41-56.png' width=700>
 
 **Video generation**
 

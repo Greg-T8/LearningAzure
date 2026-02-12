@@ -526,5 +526,4 @@ Azure organizes access and management using a structured hierarchy:
 
 ---
 
-
 *Last updated: 2026-01-16*

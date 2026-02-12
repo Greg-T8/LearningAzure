@@ -27,7 +27,7 @@
 | 10  | [Get started with speech in Microsoft Foundry](https://learn.microsoft.com/en-us/training/modules/recognize-synthesize-speech/)                          | ✅    | 1/20/26 | [notes](10-get-started-speech-foundry/notes.md)                     |
 | 11  | [Introduction to computer vision concepts](https://learn.microsoft.com/en-us/training/modules/introduction-computer-vision/)                             | ✅    | 1/21/26         | [notes](11-intro-computer-vision-concepts/notes.md)                 |
 | 12  | [Get started with computer vision in Microsoft Foundry](https://learn.microsoft.com/en-us/training/modules/get-started-computer-vision-azure/)           | ✅     | 1/21/26         | [notes](12-get-started-computer-vision-foundry/notes.md)            |
-| 13  | [Introduction to AI-powered information extraction concepts](https://learn.microsoft.com/en-us/training/modules/introduction-information-extraction/)    | ✅    | 1/21/26         | [notes](13-intro-information-extraction-concepts/notes.md)  | 
+| 13  | [Introduction to AI-powered information extraction concepts](https://learn.microsoft.com/en-us/training/modules/introduction-information-extraction/)    | ✅    | 1/21/26         | [notes](13-intro-information-extraction-concepts/notes.md)  |
 | 13  | [Get started with AI-powered information extraction in Microsoft Foundry](https://learn.microsoft.com/en-us/training/modules/ai-information-extraction/) | ✅    | 1/21/26         | [notes](14-get-started-information-extraction-foundry/notes.md)     |
 
 **Legend:** 🕒 Not Started | 🚧 In Progress | ✅ Complete

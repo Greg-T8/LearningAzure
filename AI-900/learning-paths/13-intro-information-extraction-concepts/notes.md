@@ -1,6 +1,7 @@
 # Module 13: Introduction to AI-powered information extraction concepts
 
 **Link:** [Microsoft Learn](https://learn.microsoft.com/en-us/training/modules/introduction-information-extraction/)
+
 * [Introduction to AI-powered information extraction concepts](#introduction-to-ai-powered-information-extraction-concepts)
 * [Overview of information extraction](#overview-of-information-extraction)
 * [Optical character recognition (OCR)](#optical-character-recognition-ocr)
@@ -21,7 +22,6 @@
   * **Images**
   * Emerging support for **videos** and **audio recordings**
 * The module focuses on **documents and images**, while acknowledging broader AI capabilities
-
 
 **Information Extraction Scenarios**
 

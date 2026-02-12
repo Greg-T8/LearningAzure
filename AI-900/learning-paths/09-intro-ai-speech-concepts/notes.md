@@ -160,8 +160,6 @@
 
 ---
 
-
-
 ## Introduction to AI speech concepts – Speech recognition
 
 [Module Reference](https://learn.microsoft.com/en-us/training/modules/introduction-ai-speech/3-speech-recognition?pivots=text)
