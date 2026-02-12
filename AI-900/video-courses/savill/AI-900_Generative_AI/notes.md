@@ -480,11 +480,9 @@ Encoder -decoder architecture:
 - Microsoft is a major partner and investor in OpenAI, owning a significant stake (~49%).  
 - Microsoft provides the data center infrastructure (Azure cloud with GPUs) that OpenAI uses for training large language models (LLMs).  
 - Microsoft hosts its own instances of OpenAI’s models within its Azure cloud, running under its own regulatory and trust boundaries.  
-- Microsoft Copilots act as orchestrators that integrate LLM capabilities across various Microsoft products and services.  
-- The quality of user prompts is critical to the effectiveness of Copilots and the responses generated.  
+- Microsoft Copilots act as orchestrators that integrate LLM capabilities across various Microsoft products and services.
+- The quality of user prompts is critical to the effectiveness of Copilots and the responses generated.
 - Prompt engineering is an important discipline focused on crafting precise and explicit prompts to improve AI output quality.
-
-
 
 **Key Facts**  
 

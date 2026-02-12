@@ -253,7 +253,6 @@ The pipeline is your project structure — without it, there's nowhere to put yo
 
 </details>
 
-
 ---
 
 <img src='.img/2026-01-31-05-23-10.png' width=700>

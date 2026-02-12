@@ -829,10 +829,9 @@
 
 - Translation service works primarily with text, documents, and custom language sets.  
 - Customization allows defining domain- or industry-specific language for more accurate translations.  
-- Translation can include filters such as profanity filters or selective translation filters to exclude certain words from being translated.  
-- The service supports both text translation and speech translation (speech-to-speech).  
+- Translation can include filters such as profanity filters or selective translation filters to exclude certain words from being translated.
+- The service supports both text translation and speech translation (speech-to-speech).
 - Useful for handling larger amounts of text requiring translation across languages.
-
 
 - **Profanity Filter**: A filter that removes or censors offensive language during translation.  
 - **Selective Translation**: A feature that allows certain words (e.g., brand names like "Azure") to remain untranslated.
