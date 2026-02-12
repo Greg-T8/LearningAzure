@@ -181,6 +181,6 @@ Which two features should you identify? Each correct answer presents a complete 
 
 </details>
 
-▶ Related Lab: <insert link>
+▶ Related Lab: [lab-content-safety](../hands-on-labs/ai-services/lab-content-safety/README.md)
 
 ---
