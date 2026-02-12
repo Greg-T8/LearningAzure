@@ -69,3 +69,35 @@ My exam preparation follows a practice exam-driven methodology that emphasizes h
 
 - **Video Training** — Conceptual overviews and expert perspectives through resources like [John Savill's YouTube channel](https://www.youtube.com/@NTFAQGuy)
 - **Microsoft Learning Paths** — Structured learning content to supplement hands-on experience
+
+---
+
+## 🛠️ Development
+
+### Markdown Linting
+
+This repository uses [markdownlint-cli2](https://github.com/DavidAnson/markdownlint-cli2) to ensure consistent markdown formatting across all documentation.
+
+**Prerequisites:**
+
+- Node.js and npm installed
+
+**Installation:**
+
+```bash
+npm install
+```
+
+**Run markdownlint on all folders:**
+
+```bash
+npm run lint:md
+```
+
+**Auto-fix fixable issues:**
+
+```bash
+npm run lint:md:fix
+```
+
+The tool will scan all markdown files (`.md`) across all folders in the workspace, using the configuration defined in `.markdownlint-cli2.jsonc` and `.markdownlint.yml`.
