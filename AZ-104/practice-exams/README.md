@@ -1027,6 +1027,8 @@ If a deployment-related command is available (like `Publish-AzWebApp`) and the s
 
 </details>
 
+▶ **Related Lab:** [lab-app-service-republication](../hands-on-labs/compute/lab-app-service-republication/README.md)
+
 ---
 
 #### Resolve Azure App Service Pricing Tier for Runtime Requirements
