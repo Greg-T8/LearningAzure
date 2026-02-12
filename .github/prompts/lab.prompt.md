@@ -66,8 +66,8 @@ Do not assume or auto-select between Terraform and Bicep—always prompt for use
 * Solution Architecture
 * Architecture Diagram (Mermaid) **only if** 3+ interconnected resources
 * Lab Objectives (3–5)
-* Prerequisites
 * Lab Structure (directory tree showing key files - **keep brief**)
+* Prerequisites
 * Deployment (deployment commands/steps - **keep brief**)
 * Testing the Solution (validation steps, not deployment steps)
 * Cleanup (teardown commands/steps - **keep brief**)
