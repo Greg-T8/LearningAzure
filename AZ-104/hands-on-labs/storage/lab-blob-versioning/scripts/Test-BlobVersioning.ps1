@@ -410,25 +410,33 @@ $Helpers = {
 
             $versionsBefore = Get-BlobVersionCount -BlobName $blobName
 
-            # Upload using block operations
-            $blockId = [Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes("block1"))
-            $content = "Block content - $(Get-Date)"
-            $bytes = [System.Text.Encoding]::UTF8.GetBytes($content)
+            # Upload using block operations - explicitly call Put Block followed by Put Block List
+            $blockId1 = [Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes("block1"))
+            $blockId2 = [Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes("block2"))
+            $content1 = "Block content 1 - $(Get-Date)"
+            $content2 = "Block content 2 - $(Get-Date)"
+            $bytes1 = [System.Text.Encoding]::UTF8.GetBytes($content1)
+            $bytes2 = [System.Text.Encoding]::UTF8.GetBytes($content2)
 
-            # Note: PowerShell Az module abstracts this, so using Set-AzStorageBlobContent
-            # which internally uses Put Block List for larger files
-            $tempFile = New-TemporaryFile
-
-            Set-Content -Path $tempFile.FullName -Value $content
-
-            Set-AzStorageBlobContent `
-                -File $tempFile.FullName `
+            # Get the block blob object to use Put Block REST operations
+            $blockBlob = Get-AzStorageBlob `
                 -Container $ContainerName `
                 -Blob $blobName `
-                -Context $script:context `
-                -Force | Out-Null
+                -Context $script:context
 
-            Remove-Item -Path $tempFile.FullName -Force
+            # Step 1: Upload blocks individually using Put Block REST operation
+            # This stages the blocks but doesn't commit them to the blob yet
+            $stream1 = New-Object System.IO.MemoryStream(, $bytes1)
+            $blockBlob.ICloudBlob.PutBlock($blockId1, $stream1)
+            $stream1.Dispose()
+
+            $stream2 = New-Object System.IO.MemoryStream(, $bytes2)
+            $blockBlob.ICloudBlob.PutBlock($blockId2, $stream2)
+            $stream2.Dispose()
+
+            # Step 2: Commit the block list using Put Block List REST operation
+            # This creates the final blob from the committed blocks
+            $blockBlob.ICloudBlob.PutBlockList(@($blockId1, $blockId2))
 
             Start-Sleep -Seconds 2
 
@@ -703,13 +711,15 @@ $Helpers = {
 
             $sourceUrl = "https://$($StorageAccountName).blob.core.windows.net/$($ContainerName)/$($sourceBlobName)?$($sasToken)"
 
-            # Copy from URL (similar to Put Blob From URL)
-            Start-AzStorageBlobCopy `
-                -AbsoluteUri $sourceUrl `
-                -DestContainer $ContainerName `
-                -DestBlob $destBlobName `
-                -DestContext $script:context `
-                -Force | Out-Null
+            # Perform Put Blob From URL operation - server-side copy from URL without client bandwidth
+            # This REST operation creates/replaces the destination blob with content from a URL
+            $destBlob = Get-AzStorageBlob `
+                -Container $ContainerName `
+                -Blob $destBlobName `
+                -Context $script:context
+
+            # Call the REST operation equivalent through the cloud blob object
+            $destBlob.ICloudBlob.StartCopy($sourceUrl) | Out-Null
 
             Start-Sleep -Seconds 3
 
@@ -797,7 +807,7 @@ $Helpers = {
                 -Blob $blobName `
                 -Context $script:context
 
-            # Perform the actual test: Write a 512-byte page at a specific offset
+            # Perform the actual test: Write a 512-byte page at a specific offset using Put Page REST operation
             # This simulates how VM disks work - writing specific sectors without touching others
             # Key difference from Put Blob: This updates a SPECIFIC RANGE, not the entire blob
             # Create 512-byte aligned data (page blobs require 512-byte alignment)
@@ -809,9 +819,11 @@ $Helpers = {
 
             $stream = New-Object System.IO.MemoryStream(, $pageData)
 
-            # Write to page offset 0 (first 512 bytes of the blob)
+            # Write to page offset 0 (first 512 bytes of the blob) using Put Page REST operation
             # In a real VM disk, this could be writing to a specific file system sector
+            # This is an in-place update that doesn't create a version - critical for VM performance
             $pageBlob.ICloudBlob.WritePages($stream, 0)
+            $stream.Dispose()
 
             # Wait for Azure to process the page write
             Start-Sleep -Seconds 2
