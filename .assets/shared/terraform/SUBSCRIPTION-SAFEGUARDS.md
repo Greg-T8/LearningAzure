@@ -154,6 +154,7 @@ terraform destroy -auto-approve
 **Cause**: Logged into wrong Azure subscription
 
 **Fix**:
+
 ```powershell
 # Check current subscription
 az account show --query "{Name:name, Id:id}"

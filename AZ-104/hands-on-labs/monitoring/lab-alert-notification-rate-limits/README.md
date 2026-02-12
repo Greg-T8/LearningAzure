@@ -54,7 +54,7 @@ Given Alert1 fires **60 times per hour** (once per minute):
 
 ---
 
-# Terraform Deployment
+## Terraform Deployment
 
 ## First-Time Setup
 
