@@ -2,9 +2,6 @@
 
 **Objective:** Achieve the **AI-102: Azure AI Engineer Associate** certification using a hands-on labs and practice exams approach.
 
-- **Certification Page:** [AI-102: Azure AI Engineer Associate](https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-engineer/?practice-assessment-type=certification)
-- **Official Study Guide:** [AI-102 Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/ai-102)
-
 ---
 
 ## 📚 Learning Modality Progress Tracker
@@ -19,6 +16,9 @@
 **Legend:** 🕒 Not Started | 🚧 In Progress | ✅ Complete
 
 ---
+
+- **Certification Page:** [AI-102: Azure AI Engineer Associate](https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-engineer/?practice-assessment-type=certification)
+- **Official Study Guide:** [AI-102 Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/ai-102)
 
 ## 📊 Exam Domains
 
