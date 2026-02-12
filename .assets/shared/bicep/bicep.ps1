@@ -194,38 +194,6 @@ $Helpers = {
         $command = @()
 
         switch ($Action) {
-            'apply' {
-                $command += "az stack sub create"
-                $command += "--name `"$StackName`""
-                $command += "--location `"$Location`""
-                $command += "--template-file `"$TemplateFile`""
-
-                if (-not [string]::IsNullOrEmpty($ParametersFile)) {
-                    $command += "--parameters `"$ParametersFile`""
-                }
-
-                $command += "--action-on-unmanage deleteAll"
-                $command += "--deny-settings-mode none"
-                $command += "--yes"
-            }
-
-            'destroy' {
-                $command += "az stack sub delete"
-                $command += "--name `"$StackName`""
-                $command += "--action-on-unmanage deleteAll"
-                $command += "--yes"
-            }
-
-            'show' {
-                $command += "az stack sub show"
-                $command += "--name `"$StackName`""
-            }
-
-            'list' {
-                $command += "az stack sub list"
-                $command += "-o table"
-            }
-
             'validate' {
                 $command += "az bicep build"
                 $command += "--file `"$TemplateFile`""
@@ -246,6 +214,38 @@ $Helpers = {
                 if (-not [string]::IsNullOrEmpty($ParametersFile)) {
                     $command += "--parameters `"$ParametersFile`""
                 }
+            }
+
+            'apply' {
+                $command += "az stack sub create"
+                $command += "--name `"$StackName`""
+                $command += "--location `"$Location`""
+                $command += "--template-file `"$TemplateFile`""
+
+                if (-not [string]::IsNullOrEmpty($ParametersFile)) {
+                    $command += "--parameters `"$ParametersFile`""
+                }
+
+                $command += "--action-on-unmanage deleteAll"
+                $command += "--deny-settings-mode none"
+                $command += "--yes"
+            }
+
+            'show' {
+                $command += "az stack sub show"
+                $command += "--name `"$StackName`""
+            }
+
+            'list' {
+                $command += "az stack sub list"
+                $command += "-o table"
+            }
+
+            'destroy' {
+                $command += "az stack sub delete"
+                $command += "--name `"$StackName`""
+                $command += "--action-on-unmanage deleteAll"
+                $command += "--yes"
             }
         }
 
