@@ -1,0 +1,20 @@
+{
+  // Configuration for markdownlint-cli2
+  // This file configures the tool to run on all markdown files in all folders
+  
+  // Files to lint - include all markdown files in the workspace
+  "globs": [
+    "**/*.md"
+  ],
+  
+  // Files/directories to ignore
+  "ignores": [
+    "**/node_modules/**"
+  ],
+  
+  // Use the .markdownlint.yml configuration file for rules
+  "config": {
+    // Extend from the existing .markdownlint.yml file
+    "extends": ".markdownlint.yml"
+  }
+}

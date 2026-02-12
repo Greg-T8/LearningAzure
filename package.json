@@ -1,0 +1,26 @@
+{
+  "name": "learningazure",
+  "version": "1.0.0",
+  "description": "<!-- markdownlint-disable-next-line MD041 --> <div align=\"center\">",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint:md": "markdownlint-cli2",
+    "lint:md:fix": "markdownlint-cli2 --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Greg-T8/LearningAzure.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Greg-T8/LearningAzure/issues"
+  },
+  "homepage": "https://github.com/Greg-T8/LearningAzure#readme",
+  "devDependencies": {
+    "markdownlint-cli2": "^0.20.0"
+  }
+}
