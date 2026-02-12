@@ -161,11 +161,11 @@
 - It uses modern internet protocols for authentication and authorization, such as OAuth 2, OpenID Connect, SAML, and WS-Fed.  
 - Communication with Entra ID happens over HTTPS (port 443) using TLS encryption, making it internet-friendly without requiring multiple network ports.  
 - Entra ID contrasts with traditional on-premises Active Directory Domain Services (AD DS), which uses protocols like Kerberos, NTLM, and LDAP and requires multiple ports on private networks.  
-- Interaction with Entra ID is primarily done through Microsoft Graph API, which uses REST-based calls over HTTPS.  
-- Entra ID has a flat structure, unlike AD DS which has organizational units; however, Entra ID supports administrative units for granular permission delegation.  
-- Common practice involves syncing on-premises AD DS to Entra ID, with AD DS as the source of truth.  
+- Interaction with Entra ID is primarily done through Microsoft Graph API, which uses REST-based calls over HTTPS.
+- Entra ID has a flat structure, unlike AD DS which has organizational units; however, Entra ID supports administrative units for granular permission delegation.
+- Common practice involves syncing on-premises AD DS to Entra ID, with AD DS as the source of truth.
 
-<img src='.img/2026-01-29-03-37-11.png' width=500> 
+<img src='.img/2026-01-29-03-37-11.png' width=500>
 
 **Definitions**  
 
@@ -249,11 +249,11 @@
 **Key Concepts**  
 
 - An Entra tenant represents an organization’s dedicated instance containing users, groups, devices, applications, and policies.  
-- Tenants are global instances, independent of Azure subscriptions.  
-- Custom domains can be added and verified to a tenant, replacing the default onmicrosoft.com domain.  
+- Tenants are global instances, independent of Azure subscriptions.
+- Custom domains can be added and verified to a tenant, replacing the default onmicrosoft.com domain.
 - Tenants support company branding to customize user experience during sign-in and access.
 
-<img src='.img/2026-01-29-03-41-02.png' width=700> 
+<img src='.img/2026-01-29-03-41-02.png' width=700>
 
 **Definitions**  
 
@@ -291,10 +291,9 @@
 - Company branding customization within an Entra tenant  
 - User experience interface tweaks related to branding  
 - Customizable elements include backgrounds, background images, and logon messages  
-- Use of special characters in messages to apply formatting (e.g., bold, underline)  
+- Use of special characters in messages to apply formatting (e.g., bold, underline)
 
 <img src='.img/2026-01-29-03-41-50.png' width=700>
-
 
 **Definitions**  
 
@@ -615,13 +614,13 @@
 - Deployment options include zonal (within a single AZ) or zone-redundant (spanning multiple AZs) for higher availability.  
 - Azure has many global regions, each with different availability zone support and sustainability info.  
 - Regions are paired for safe deployment rollouts and disaster recovery, usually within the same geopolitical boundary.  
-- Pairings are used by Microsoft for staged rollouts but customers are not required to use paired regions exclusively.  
-- Selecting regions depends on latency, data sovereignty, and resiliency needs.  
+- Pairings are used by Microsoft for staged rollouts but customers are not required to use paired regions exclusively.
+- Selecting regions depends on latency, data sovereignty, and resiliency needs.
 - Subscriptions are the deployment boundary and trust a specific tenant.
 
-<img src='.img/2026-01-29-03-59-20.png' width=700> 
+<img src='.img/2026-01-29-03-59-20.png' width=700>
 
-https://datacenters.microsoft.com/globe/explore/
+[Microsoft Datacenter Infrastructure Map](https://datacenters.microsoft.com/globe/explore/)
 
 <img src='.img/2026-01-29-04-02-45.png' width=500>
 
@@ -629,10 +628,7 @@ https://datacenters.microsoft.com/globe/explore/
 
 <img src='.img/2026-01-29-04-04-35.png' width=700>
 
-<img src='.img/2026-01-29-04-05-35.png' width=700> 
-
-
-
+<img src='.img/2026-01-29-04-05-35.png' width=700>
 
 **Definitions**  
 
@@ -682,10 +678,10 @@ https://datacenters.microsoft.com/globe/explore/
 - Management groups enable centralized governance, role assignment, policy enforcement, and budget tracking across multiple subscriptions.  
 - Policies, roles, and budgets set at management group levels are **inherited** by all child management groups and subscriptions.  
 - Governance includes role-based access control (RBAC), Azure Policy for enforcing rules, and budget management for financial control.  
-- The hierarchy can be structured based on geography, business units, environment (prod/non-prod), or other organizational needs.  
+- The hierarchy can be structured based on geography, business units, environment (prod/non-prod), or other organizational needs.
 - Cost management and billing tools are available at subscription and management group levels to monitor and forecast spending.
 
-<img src='.img/2026-01-29-04-07-47.png' width=500> 
+<img src='.img/2026-01-29-04-07-47.png' width=500>
 
 <img src='.img/2026-01-29-04-08-38.png' width=700>
 
@@ -749,9 +745,9 @@ https://datacenters.microsoft.com/globe/explore/
 
 <img src='.img/2026-01-29-04-10-37.png' width=700>
 
-<img src='.img/2026-01-29-04-11-14.png' width=700> 
+<img src='.img/2026-01-29-04-11-14.png' width=700>
 
-<img src='.img/2026-01-29-04-12-17.png' width=500> 
+<img src='.img/2026-01-29-04-12-17.png' width=500>
 
 <img src='.img/2026-01-29-04-12-25.png' width=500>
 
@@ -797,10 +793,10 @@ https://datacenters.microsoft.com/globe/explore/
 - Multiple resource groups can exist within a single subscription, but resource groups cannot be nested inside one another.  
 - Role-Based Access Control (RBAC), policies, and budgets can be applied at the resource group level for granular management.  
 - Resources such as virtual machines, storage accounts, load balancers, etc., are created inside resource groups.  
-- **Resource groups are used to logically group resources that are provisioned, run, and decommissioned together**.  
+- **Resource groups are used to logically group resources that are provisioned, run, and decommissioned together**.
 - Grouping resources by application or functionality helps with access control, policy application, and cost tracking.
 
-<img src='.img/2026-01-29-04-13-51.png' width=500> 
+<img src='.img/2026-01-29-04-13-51.png' width=500>
 
 **Definitions**  
 
@@ -898,7 +894,6 @@ https://datacenters.microsoft.com/globe/explore/
 
 <img src='.img/2026-01-29-04-23-15.png' width=700>
 
-
 **Definitions**  
 
 - **Tag**: A key-value pair assigned to Azure resources, resource groups, or subscriptions to store metadata for organizational or billing purposes.  
@@ -942,12 +937,12 @@ https://datacenters.microsoft.com/globe/explore/
 - Policy effects include deny, audit, and deploy if not exists, among others.  
 - Starting with audit mode is recommended before enforcing deny to avoid unintended disruptions.  
 - Policies and initiatives can be assigned at different scopes: management group, subscription, or resource group.  
-- Microsoft provides built-in policy definitions and initiatives, including large sets like the Azure Defender for Cloud initiative.  
-- Regulatory compliance initiatives (e.g., FedRAMP, HIPAA, ISO) require a paid Azure plan.  
+- Microsoft provides built-in policy definitions and initiatives, including large sets like the Azure Defender for Cloud initiative.
+- Regulatory compliance initiatives (e.g., FedRAMP, HIPAA, ISO) require a paid Azure plan.
 
-<img src='.img/2026-01-29-04-24-31.png' width=700> 
+<img src='.img/2026-01-29-04-24-31.png' width=700>
 
-<img src='.img/2026-01-29-04-25-10.png' width=500> 
+<img src='.img/2026-01-29-04-25-10.png' width=500>
 
 **Definitions**  
 
@@ -1065,16 +1060,16 @@ https://datacenters.microsoft.com/globe/explore/
 
 **Definitions**  
 
-- **Cannot delete lock**: Prevents deletion of the resource but allows modifications.  
-- **Read only lock**: Prevents any modifications, including writes, to the resource.  
-- **Control plane**: The management layer of Azure where resources are created, configured, or deleted.  
-- **Data plane**: The layer where data operations occur, such as writing or deleting records inside a resource (e.g., database entries, blobs). 
+- **Cannot delete lock**: Prevents deletion of the resource but allows modifications.
+- **Read only lock**: Prevents any modifications, including writes, to the resource.
+- **Control plane**: The management layer of Azure where resources are created, configured, or deleted.
+- **Data plane**: The layer where data operations occur, such as writing or deleting records inside a resource (e.g., database entries, blobs).
 
 **Key Facts**  
 
-- Locks only restrict actions on the control plane, not on the data plane.  
-- Even with a delete lock on a storage account, you can still delete blobs inside it because blob operations happen on the data plane.  
-- Locks are inherited from higher levels (subscription/resource group) down to resources.  
+- Locks only restrict actions on the control plane, not on the data plane.
+- Even with a delete lock on a storage account, you can still delete blobs inside it because blob operations happen on the data plane.
+- Locks are inherited from higher levels (subscription/resource group) down to resources.
 
 **Examples**  
 
@@ -1138,12 +1133,12 @@ https://datacenters.microsoft.com/globe/explore/
 - VNets are defined by one or more IPv4 CIDR ranges, commonly private IP ranges (RFC 1918), but can also include custom or public IP ranges (with limitations).  
 - VNets are subdivided into subnets, which are subsets of the VNet’s IP address space.  
 - Subnets are regional resources and can span multiple Availability Zones within the same region. 
-- **Each subnet loses 5 IP addresses due to reserved addresses for network, broadcast, gateway, and DNS purposes.**  
-- Resources connect to VNets via virtual NICs that receive private IP addresses allocated by Azure DHCP.  
-- Public IP addresses can be associated with resources for internet accessibility, but private IPs are not internet routable by default.  
-- Public IPs come in Standard and Basic SKUs; Standard is recommended as Basic is being retired by September 2025.  
-- Azure supports bringing your own public IP prefixes (ranges) with specific size requirements and validation processes.  
-- For outbound internet access, explicit configuration is required (e.g., public IP, NAT gateway, Azure Firewall, or Standard Load Balancer with outbound rules) as implicit internet access is being deprecated.  
+- **Each subnet loses 5 IP addresses due to reserved addresses for network, broadcast, gateway, and DNS purposes.**
+- Resources connect to VNets via virtual NICs that receive private IP addresses allocated by Azure DHCP.
+- Public IP addresses can be associated with resources for internet accessibility, but private IPs are not internet routable by default.
+- Public IPs come in Standard and Basic SKUs; Standard is recommended as Basic is being retired by September 2025.
+- Azure supports bringing your own public IP prefixes (ranges) with specific size requirements and validation processes.
+- For outbound internet access, explicit configuration is required (e.g., public IP, NAT gateway, Azure Firewall, or Standard Load Balancer with outbound rules) as implicit internet access is being deprecated.
 
 <img src='.img/2026-01-30-03-10-57.png' width=500>
 
@@ -1331,15 +1326,15 @@ https://datacenters.microsoft.com/globe/explore/
 - **Network Security Group (NSG)**: A collection of security rules that allow or deny inbound and outbound network traffic to Azure resources.  
 - **Service Tag**: A label representing a group of IP address prefixes for specific Azure services, used to simplify NSG rule management.  
 - **Application Security Group (ASG)**: **A logical grouping of NICs that allows NSG rules to be applied based on application roles rather than IP addresses.** 
-- **Priority (in NSG rules)**: A numeric value determining the order of rule evaluation; lower numbers have higher priority.  
+- **Priority (in NSG rules)**: A numeric value determining the order of rule evaluation; lower numbers have higher priority.
 - **Azure Firewall**: A managed, first-party network virtual appliance that provides advanced filtering, NAT, and traffic inspection capabilities.
 
-**Key Facts**  
+**Key Facts**
 
-- NSG rule priority ranges from 1 (highest) to 65,500 (lowest).  
-- Default NSG rules allow all traffic within the virtual network and outbound internet traffic, and deny other inbound traffic by default.  
-- Service tags include options like "Internet," "AzureLoadBalancer," and region-specific Azure services.  
-- Application Security Groups must be in the same region as the NSG.  
+- NSG rule priority ranges from 1 (highest) to 65,500 (lowest).
+- Default NSG rules allow all traffic within the virtual network and outbound internet traffic, and deny other inbound traffic by default.
+- Service tags include options like "Internet," "AzureLoadBalancer," and region-specific Azure services.
+- Application Security Groups must be in the same region as the NSG.
 - NSGs can filter traffic by protocol (TCP/UDP), port, source, and destination.  
 - Effective routes for a NIC show how traffic is routed, including peering and user-defined routes.
 
@@ -1522,11 +1517,11 @@ https://datacenters.microsoft.com/globe/explore/
 
 **Definitions**  
 
-- **Private DNS Zone**: A DNS zone used internally within Azure for private name resolution, isolated from the public internet.  
-- **Public DNS Zone**: A DNS zone published to the internet for public name resolution.  
-- **Gateway Subnet**: A subnet within a VNet dedicated to hosting VPN gateways or ExpressRoute gateways.  
-- **Policy-based VPN**: A VPN type using static routing, limited to one tunnel, considered legacy and not recommended.  
-- **Route-based VPN**: A VPN type using dynamic routing, supports multiple tunnels, and is the preferred modern approach.  
+- **Private DNS Zone**: A DNS zone used internally within Azure for private name resolution, isolated from the public internet.
+- **Public DNS Zone**: A DNS zone published to the internet for public name resolution.
+- **Gateway Subnet**: A subnet within a VNet dedicated to hosting VPN gateways or ExpressRoute gateways.
+- **Policy-based VPN**: A VPN type using static routing, limited to one tunnel, considered legacy and not recommended.
+- **Route-based VPN**: A VPN type using dynamic routing, supports multiple tunnels, and is the preferred modern approach.
 
 **Key Facts**  
 
@@ -1859,12 +1854,12 @@ https://datacenters.microsoft.com/globe/explore/
 
 **Definitions**  
 
-- **Azure Bastion**: A managed service that enables secure and seamless RDP/SSH connectivity to VMs directly through the Azure portal or CLI without exposing public IP addresses.  
-- **Azure Bastion Subnet**: A dedicated subnet (with a /26 address space) where the Azure Bastion service is deployed.  
+- **Azure Bastion**: A managed service that enables secure and seamless RDP/SSH connectivity to VMs directly through the Azure portal or CLI without exposing public IP addresses.
+- **Azure Bastion Subnet**: A dedicated subnet (with a /26 address space) where the Azure Bastion service is deployed.
 
-**Key Facts**  
+**Key Facts**
 
-- Azure Bastion subnet size: /26.  
+- Azure Bastion subnet size: /26.
 - Basic SKU: Connects only to VMs within the same virtual network.  
 - Standard SKU:  
   - Supports connections to VMs in paired virtual networks.  
@@ -1947,12 +1942,12 @@ https://datacenters.microsoft.com/globe/explore/
 
 **Definitions**  
 
-- **Azure Load Balancer**: A Layer 4 load balancing service in Azure that distributes incoming TCP/UDP traffic across multiple back-end resources.  
-- **Front-end IP**: The IP address exposed by the load balancer to receive incoming traffic; can be internal or external.  
-- **Back-end Pool**: A group of IP addresses or NICs that receive traffic from the load balancer.  
-- **Health Probe**: A mechanism to check the health and availability of back-end pool members.  
-- **Load Balancing Rule**: Configuration that maps incoming traffic to back-end pool members based on matching tuples.  
-- **Tuples**: Sets of parameters used to define traffic matching rules:  
+- **Azure Load Balancer**: A Layer 4 load balancing service in Azure that distributes incoming TCP/UDP traffic across multiple back-end resources.
+- **Front-end IP**: The IP address exposed by the load balancer to receive incoming traffic; can be internal or external.
+- **Back-end Pool**: A group of IP addresses or NICs that receive traffic from the load balancer.
+- **Health Probe**: A mechanism to check the health and availability of back-end pool members.
+- **Load Balancing Rule**: Configuration that maps incoming traffic to back-end pool members based on matching tuples.
+- **Tuples**: Sets of parameters used to define traffic matching rules:
   - 5-tuple: destination IP, source IP, destination port, source port, protocol  
   - 3-tuple: destination IP, source IP, protocol  
   - 2-tuple: destination IP, source IP (ignores protocol)  
@@ -2011,13 +2006,13 @@ https://datacenters.microsoft.com/globe/explore/
 <img src='.img/2026-01-31-03-32-29.png' width=700>
 
 
-**Definitions**  
+**Definitions**
 
-- **Floating IP**: A feature where the backend pool member sees the frontend IP address instead of its own IP, useful for certain communication scenarios.  
-- **Listener**: A configuration on the App Gateway that listens on a specific port and protocol for incoming traffic.  
-- **Rule**: Defines how traffic received by a listener is routed to backend pools; can be basic (all traffic to one backend) or path-based.  
-- **Web Application Firewall (WAF)**: A security feature integrated with App Gateway that protects against common web vulnerabilities as defined by OWASP.  
-- **Multisite Listener**: Allows multiple listeners on the same port differentiated by the hostname (FQDN) in the request, enabling hosting multiple sites on one IP and port.  
+- **Floating IP**: A feature where the backend pool member sees the frontend IP address instead of its own IP, useful for certain communication scenarios.
+- **Listener**: A configuration on the App Gateway that listens on a specific port and protocol for incoming traffic.
+- **Rule**: Defines how traffic received by a listener is routed to backend pools; can be basic (all traffic to one backend) or path-based.
+- **Web Application Firewall (WAF)**: A security feature integrated with App Gateway that protects against common web vulnerabilities as defined by OWASP.
+- **Multisite Listener**: Allows multiple listeners on the same port differentiated by the hostname (FQDN) in the request, enabling hosting multiple sites on one IP and port.
 - **SSL/TLS Termination**: Offloading the SSL/TLS decryption from backend servers to the App Gateway.
 
 **Key Facts**  
@@ -2066,12 +2061,12 @@ https://datacenters.microsoft.com/globe/explore/
 
 **Definitions**  
 
-- **Azure Traffic Manager**: A DNS-based global traffic routing service that directs client requests to the most appropriate endpoint based on configured routing methods.  
+- **Azure Traffic Manager**: A DNS-based global traffic routing service that directs client requests to the most appropriate endpoint based on configured routing methods.
 
-**Key Facts**  
+**Key Facts**
 
-- Traffic Manager uses DNS resolution to direct traffic, not direct packet forwarding.  
-- It supports routing to any endpoint reachable by DNS, including Azure services and external IP addresses.  
+- Traffic Manager uses DNS resolution to direct traffic, not direct packet forwarding.
+- It supports routing to any endpoint reachable by DNS, including Azure services and external IP addresses.
 - Routing methods include priority, weighted, performance (closest endpoint), geographic, multi-value, and subnet.  
 - TTL setting controls how long DNS responses are cached before re-querying for updated routing.  
 - Can be nested by pointing to another Traffic Manager profile for complex routing scenarios.
@@ -2108,12 +2103,12 @@ https://datacenters.microsoft.com/globe/explore/
 
 **Definitions**  
 
-- **Cross Region Load Balancer**: A Layer 4 global load balancing solution in Azure that provides a single public IP address routing traffic to multiple regional load balancers using anycast.  
+- **Cross Region Load Balancer**: A Layer 4 global load balancing solution in Azure that provides a single public IP address routing traffic to multiple regional load balancers using anycast.
 - **Anycast IP**: An IP addressing method where the same IP is advertised from multiple locations, and client traffic is routed to the nearest or best-performing endpoint.
 
-**Key Facts**  
+**Key Facts**
 
-- The cross region Load Balancer uses a public global IP address.  
+- The cross region Load Balancer uses a public global IP address.
 - It points to "N" number of regional load balancers (scalable to multiple regions).  
 - Microsoft WAN provides the anycast presence and routing.  
 - It is primarily a Layer 4 solution for public services.  
@@ -2213,10 +2208,9 @@ https://datacenters.microsoft.com/globe/explore/
 
 <img src='.img/2026-01-31-03-52-46.png' width=700>
 
-<img src='.img/2026-01-31-03-56-38.png' width=500> 
+<img src='.img/2026-01-31-03-56-38.png' width=500>
 
-<img src='.img/2026-01-31-04-03-20.png' width=700> 
-
+<img src='.img/2026-01-31-04-03-20.png' width=700>
 
 **Definitions**  
 
@@ -2338,10 +2332,9 @@ https://datacenters.microsoft.com/globe/explore/
 
 <img src='.img/2026-01-31-04-05-26.png' width=900> 
 
-<img src='.img/2026-01-31-04-06-13.png' width=700> 
+<img src='.img/2026-01-31-04-06-13.png' width=700>
 
 <img src='.img/2026-01-31-04-06-27.png' width=700>
-
 
 **Definitions**  
 
@@ -2404,8 +2397,8 @@ Can manually trigger failover:
 
 **Definitions**  
 
-- **Lifecycle management**: A system to create rules that automatically move or delete data based on access patterns, age, or other filters to optimize storage costs and accessibility.  
-- **Access tiers**: Different storage performance and cost levels (e.g., hot, cool, cold, archive) that data can be moved between depending on usage.  
+- **Lifecycle management**: A system to create rules that automatically move or delete data based on access patterns, age, or other filters to optimize storage costs and accessibility.
+- **Access tiers**: Different storage performance and cost levels (e.g., hot, cool, cold, archive) that data can be moved between depending on usage.
 
 **Key Facts**  
 
@@ -2449,11 +2442,11 @@ Can manually trigger failover:
 
 - **Object replication**: A feature that allows copying blobs from one container in a storage account to another container in a different storage account, potentially in a different region, with customizable rules and filters.
 
-**Key Facts**  
+**Key Facts**
 
-- Default replication is limited to paired regions and cannot be configured beyond that.  
-- Object replication allows replication to any storage account and container, not limited to paired regions.  
-- Replication rules can be defined to specify which containers replicate to which targets.  
+- Default replication is limited to paired regions and cannot be configured beyond that.
+- Object replication allows replication to any storage account and container, not limited to paired regions.
+- Replication rules can be defined to specify which containers replicate to which targets.
 - Filters can be applied to control the scope of replication.
 
 **Examples**  
@@ -2488,11 +2481,11 @@ Can manually trigger failover:
 
 **Definitions**  
 
-- **Azure Files**: A cloud service that offers fully managed file shares accessible via SMB protocol, supporting various performance tiers and data protection features.  
-- **Soft Delete**: A feature that allows recovery of deleted files for a configurable retention period (between 1 and 365 days).  
-- **Azure File Sync**: A service that synchronizes file shares between on-premises Windows servers and Azure Files, enabling hybrid file storage solutions.  
-- **Sync Group**: A logical grouping in Azure File Sync that contains one cloud endpoint and up to 100 server endpoints to synchronize data.  
-- **Tiering**: A feature in Azure File Sync that moves infrequently accessed files to the cloud while keeping placeholders locally, freeing up on-premises storage.  
+- **Azure Files**: A cloud service that offers fully managed file shares accessible via SMB protocol, supporting various performance tiers and data protection features.
+- **Soft Delete**: A feature that allows recovery of deleted files for a configurable retention period (between 1 and 365 days).
+- **Azure File Sync**: A service that synchronizes file shares between on-premises Windows servers and Azure Files, enabling hybrid file storage solutions.
+- **Sync Group**: A logical grouping in Azure File Sync that contains one cloud endpoint and up to 100 server endpoints to synchronize data.
+- **Tiering**: A feature in Azure File Sync that moves infrequently accessed files to the cloud while keeping placeholders locally, freeing up on-premises storage.
 
 **Key Facts**  
 
@@ -2542,10 +2535,10 @@ SAS on the blob level:
 
 **Definitions**  
 
-- **Access Keys**: Two keys provided per storage account to authenticate and authorize access; having two allows key rotation without service interruption.  
-- **Data Plane Role-Based Access Control (RBAC)**: Permissions assigned to users or service principals specifically for data operations (e.g., Blob Data Reader, Blob Data Contributor).  
-- **Shared Access Signature (SAS)**: A token signed by an access key that grants limited and time-bound access to storage resources at either the account or service level.  
-- **Customer Managed Key (CMK)**: Encryption key stored and managed in Azure Key Vault, used instead of platform-managed keys for encrypting storage data.  
+- **Access Keys**: Two keys provided per storage account to authenticate and authorize access; having two allows key rotation without service interruption.
+- **Data Plane Role-Based Access Control (RBAC)**: Permissions assigned to users or service principals specifically for data operations (e.g., Blob Data Reader, Blob Data Contributor).
+- **Shared Access Signature (SAS)**: A token signed by an access key that grants limited and time-bound access to storage resources at either the account or service level.
+- **Customer Managed Key (CMK)**: Encryption key stored and managed in Azure Key Vault, used instead of platform-managed keys for encrypting storage data.
 
 **Key Facts**  
 
@@ -2592,7 +2585,6 @@ SAS on the blob level:
 <img src='.img/2026-01-31-04-18-24.png' width=700> 
 
 <img src='.img/2026-01-31-04-18-33.png' width=500>
-
 
 **Definitions**  
 
@@ -2802,7 +2794,7 @@ SAS on the blob level:
 
 <img src='.img/2026-02-01-05-01-29.png' width=700>
 
-<img src='.img/2026-02-01-05-01-06.png' width=700> 
+<img src='.img/2026-02-01-05-01-06.png' width=700>
 
 **Definitions**  
 
@@ -2863,10 +2855,10 @@ SAS on the blob level:
 
 **Definitions**  
 
-- **Azure Bastion**: A managed jump box service that enables secure and seamless RDP/SSH connectivity to VMs without exposing them to the public internet.  
-- **Fault Domain**: A logical group of hardware (e.g., a rack) that shares a common power source and network switch, representing a potential point of failure.  
-- **Availability Set**: A grouping of VMs that are distributed across multiple fault domains to ensure resiliency against hardware failures within a data center.  
-- **Availability Zone**: Physically separate zones within an Azure region, each with independent power, cooling, networking, and control planes, designed to protect against larger-scale failures.  
+- **Azure Bastion**: A managed jump box service that enables secure and seamless RDP/SSH connectivity to VMs without exposing them to the public internet.
+- **Fault Domain**: A logical group of hardware (e.g., a rack) that shares a common power source and network switch, representing a potential point of failure.
+- **Availability Set**: A grouping of VMs that are distributed across multiple fault domains to ensure resiliency against hardware failures within a data center.
+- **Availability Zone**: Physically separate zones within an Azure region, each with independent power, cooling, networking, and control planes, designed to protect against larger-scale failures.
 
 **Key Facts**  
 
@@ -3123,8 +3115,6 @@ SAS on the blob level:
 
 <img src='.img/2026-02-01-05-22-55.png' width=600>
 
-**Definitions**  
-
 - **Activity Log**: A free log that records control plane changes at the subscription level.  
 - **Diagnostic Settings**: Configuration that enables collection of logs and metrics from resources and defines where to send them.  
 - **Azure Monitor Metrics**: Time-based signals from resources that are free and provide workload-specific metrics.  
@@ -3239,8 +3229,6 @@ SAS on the blob level:
 <img src='.img/2026-02-01-05-30-30.png' width=500>
 
 <img src='.img/2026-02-01-05-30-46.png' width=500>
-
-**Definitions**  
 
 - **Log Analytics Workspace**: A centralized repository for collecting, storing, and analyzing log data using Kusto Query Language (KQL).  
 - **Analytics Logs**: Full-featured logs with complete KQL support, longer retention (30-90 days interactive), and higher cost.  
