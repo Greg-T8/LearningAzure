@@ -103,8 +103,49 @@ What should you do to improve performance of slow-running queries?
 
 </details>
 
-<details open>
+<details>
 <summary>💡 Click to expand explanation</summary>
+
+**Why the selected answer is correct (Add partitions)**
+
+Partitions in Azure AI Search split the index across multiple physical storage and compute resources. When a single query is slow even with no load on the service, the issue is not concurrency — it is the amount of data being processed per query.
+
+Adding partitions increases the data processing capacity for each query because the index is distributed and searched in parallel across more compute resources. This improves performance for large indexes and complex queries.
+
+In exam terms:
+
+* **Partitions = scale for data volume and query performance**
+* **Replicas = scale for concurrency and availability**
+
+Since the queries are slow even without load, the correct action is to increase partitions.
+
+---
+
+**Why the other options are incorrect**
+
+**Add replicas**
+Replicas help handle more simultaneous users and provide high availability. They do not make a single query execute faster. Since there is no load on the service, replicas will not solve the problem.
+
+**Add fields to the index**
+Adding fields increases index size and can negatively impact performance. If anything, reducing unnecessary fields can improve performance.
+
+**Convert fields to complex types**
+Complex types increase index size and storage requirements. This can degrade performance rather than improve it.
+
+---
+
+**Key takeaway**
+
+* Slow queries under no load → add partitions
+* Slow queries under heavy load → add replicas
+* Larger index size generally reduces performance
+
+---
+
+**References**
+
+* [https://learn.microsoft.com/en-us/azure/search/search-performance-tips](https://learn.microsoft.com/en-us/azure/search/search-performance-tips)
+* [https://learn.microsoft.com/en-us/azure/search/search-capacity-planning](https://learn.microsoft.com/en-us/azure/search/search-capacity-planning)
 
 </details>
 
