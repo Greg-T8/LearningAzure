@@ -193,7 +193,7 @@ az storage copy `
 **Expected**: ✅ Success
 
 > **PowerShell Gotcha**: SAS tokens contain `&` characters that PowerShell interprets as command separators. Use backtick escaping: `` `"$srcSas`" `` or single quotes: `'$srcSas'` to prevent parsing errors like "sp is not recognized as a command".
-
+>
 > **Note**: Use `--account-key` for SAS generation (more reliable than `--auth-mode login`). Use `--source-sas` for source SAS token and `--sas-token` for destination SAS token. Use `--destination-account-name` (not `--account-name`) for the destination. Azure CLI constructs the URLs internally.
 
 <img src='.img/2026-02-09-04-50-09.png' width=700>
@@ -234,7 +234,7 @@ az storage copy `
 <img src='.img/2026-02-10-04-09-38.png' width=700>
 
 > **Important**: When using access keys with file storage URLs, provide `--source-account-key` for the source account and `--account-key` for the destination account. The source account key is required to authenticate and read the source file share.
-
+>
 > **Note**: Unlike blob storage with access keys (which uses `--source-account-name`, `--source-container`, etc.), file storage access key authentication uses full URLs with account keys specified separately. This is because file shares don't support the same account/container/blob naming structure as blobs.
 
 #### 6. Test File Storage with SAS Token ✅

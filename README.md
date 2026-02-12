@@ -1,3 +1,4 @@
+<!-- markdownlint-disable-next-line MD041 -->
 <div align="center">
 
 # <img src="./.assets/Azure_Advisor.svg" width="36" height="36" alt="Learning Azure" style="vertical-align: middle; margin-right: 10px;" /> Learning Azure

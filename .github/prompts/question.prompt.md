@@ -3,7 +3,7 @@ name: question
 description: Generates a title + question text and wraps the screenshot image in a <details> block
 ---
 
-## **Inline Chat Instructions (Single Screenshot, Structured Questions)**
+# **Inline Chat Instructions (Single Screenshot, Structured Questions)**
 
 **Goal:**
 When an image is pasted into chat, analyze it and generate structured, exam-style output. The screenshot must appear **only once**, inside a collapsible section.
@@ -128,6 +128,7 @@ Rules:
   ```
   ERROR: No image pasted to analyze.
   ```
+
 * If the image content is ambiguous:
 
   ```
