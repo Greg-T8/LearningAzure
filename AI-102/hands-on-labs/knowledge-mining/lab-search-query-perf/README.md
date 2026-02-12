@@ -113,6 +113,28 @@ Modify `partition_count` in `terraform.tfvars` and redeploy to observe the scali
 
 <img src='.img/2026-02-12-06-07-35.png' width=600>
 
+**Note:** It took around 30 minutes for the service to scale.
+
+<img src='.img/2026-02-12-06-39-02.png' width=600>
+
+Updated statistics:
+
+<img src='.img/2026-02-12-06-40-14.png' width=500>
+
+| Metric                      | 1 replica / 2 partitions      | 3 replicas / 3 partitions     | Change    |
+| --------------------------- | ----------------------------- | ----------------------------- | --------- |
+| Index quota                 | 15                            | 15                            | No change |
+| Indexer quota               | 15                            | 15                   | No change |
+| Data source quota           | 15                            | 15                            | No change |
+| Skillset quota              | 15                            | 15                            | No change |
+| Synonym maps                | 3                             | 3                             | No change |
+| **Storage quota (service)** | 32,212,254,720 bytes (~30 GB) | 48,318,382,080 bytes (~45 GB) | **+50%**  |
+| **Vector index quota**      | 10,737,418,240 bytes (~10 GB) | 16,106,127,360 bytes (~15 GB) | **+50%**  |
+| **Max storage per index**   | ~30 GB                        | ~45 GB                        | **+50%**  |
+| Max fields per index        | 1000                          | 1000                          | No change |
+| Field nesting depth         | 10                            | 10                            | No change |
+| Complex collection fields   | 40                            | 40                            | No change |
+
 ---
 
 ## Scenario Analysis
