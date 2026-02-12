@@ -17,6 +17,8 @@ Standards and naming conventions for all Terraform and Bicep implementations acr
 
 All resources **must** include these tags:
 
+> **IMPORTANT**: For `DateCreated`, always use a **static value** (e.g., via variable/parameter), never dynamic functions like `timestamp()` (Terraform) or `utcNow()` (Bicep). Dynamic values cause Terraform/Bicep to detect tag changes on every plan/deployment, forcing unnecessary resource updates.
+
 | Tag | Description | Example |
 |-----|-------------|---------|
 | `Environment` | Fixed value | `Lab` |
@@ -504,8 +506,9 @@ lab-<topic>/
 
   ```hcl
   lab_subscription_id = "e091f6e7-031a-4924-97bb-8c983ca5d21a"
-  location = "eastus"
-  owner    = "Greg Tate"
+  location            = "eastus"
+  owner               = "Greg Tate"
+  date_created        = "2026-02-12"
   ```
 
 - Provide `terraform.tfvars.example` as template
@@ -782,6 +785,16 @@ variable "owner" {
   default     = "Greg Tate"
 }
 
+variable "date_created" {
+  description = "Date the lab resources were created (YYYY-MM-DD format)"
+  type        = string
+
+  validation {
+    condition     = can(regex("^\\\\d{4}-\\\\d{2}-\\\\d{2}$", var.date_created))
+    error_message = "Date must be in YYYY-MM-DD format."
+  }
+}
+
 locals {
   resource_group_name = "${var.exam}-${var.domain}-${var.topic}-tf"
   
@@ -791,7 +804,7 @@ locals {
     Domain      = title(var.domain)
     Purpose     = replace(title(var.topic), "-", " ")
     Owner       = var.owner
-    DateCreated = formatdate("YYYY-MM-DD", timestamp())
+    DateCreated = var.date_created
     DeploymentMethod = "Terraform"
   }
 }
@@ -854,6 +867,16 @@ variable "owner" {
   default     = "Greg Tate"
 }
 
+variable "date_created" {
+  description = "Date the lab resources were created (YYYY-MM-DD format)"
+  type        = string
+
+  validation {
+    condition     = can(regex("^\\\\d{4}-\\\\d{2}-\\\\d{2}$", var.date_created))
+    error_message = "Date must be in YYYY-MM-DD format."
+  }
+}
+
 variable "image_model_name" {
   description = "DALL-E model name"
   type        = string
@@ -875,7 +898,7 @@ locals {
     Domain           = title(replace(var.domain, "-", " "))
     Purpose          = "DALL-E Image Generation"
     Owner            = var.owner
-    DateCreated      = formatdate("YYYY-MM-DD", timestamp())
+    DateCreated      = var.date_created
     DeploymentMethod = "Terraform"
   }
 }
@@ -1005,7 +1028,7 @@ param domain string = 'generative-ai'
 param topic string = 'dalle-image-gen'
 param location string = 'eastus'
 param owner string = 'Greg Tate'
-param dateCreated string = utcNow('yyyy-MM-dd')
+param dateCreated string = '2026-02-09'
 
 param imageModelName string = 'dall-e-3'
 param imageModelVersion string = '1.0'
