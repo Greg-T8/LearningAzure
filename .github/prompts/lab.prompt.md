@@ -14,6 +14,7 @@ Create a working, validated hands-on lab from an exam-question scenario using th
 ### When to use Infrastructure as Code (Terraform or Bicep) - **PREFERRED**
 
 Use when:
+
 * Question involves deploying/provisioning Azure resources
 * Scenario requires repeatable infrastructure deployment
 * Focus is on resource configuration and architecture
@@ -22,6 +23,7 @@ Use when:
 ### When to use Scripted (PowerShell/Azure CLI)
 
 Use when:
+
 * Question explicitly asks for command sequences
 * Scenario involves imperative operations or workflows
 * Focus is on operational tasks, not resource provisioning
@@ -30,6 +32,7 @@ Use when:
 ### When to use Manual (Portal/UI)
 
 Use when:
+
 * Question tests knowledge of Azure Portal navigation
 * Scenario requires interactive UI features (e.g., specific portal blades)
 * Focus is on understanding portal workflows
@@ -40,6 +43,7 @@ Use when:
 ### IaaC choice selection
 
 When IaaC is determined to be the appropriate deployment method, **ask the user** whether they want to use:
+
 * **Terraform**, or
 * **Bicep**
 
@@ -54,11 +58,7 @@ Do not assume or auto-select between Terraform and Bicep—always prompt for use
 
 ### README.md rules
 
-* README must use the **required section set** and **must not** include:
-
-  * Deployment commands (Terraform/Bicep/Az CLI/PowerShell)
-  * Cleanup/teardown commands or sections
-  * “Deployment Steps”, “Cleanup”, “Lab Structure” directory trees
+* README must use the **required section set** in the order specified below.
 
 **README required sections (in this order)**
 
@@ -67,7 +67,10 @@ Do not assume or auto-select between Terraform and Bicep—always prompt for use
 * Architecture Diagram (Mermaid) **only if** 3+ interconnected resources
 * Lab Objectives (3–5)
 * Prerequisites
+* Lab Structure (directory tree showing key files - **keep brief**)
+* Deployment (deployment commands/steps - **keep brief**)
 * Testing the Solution (validation steps, not deployment steps)
+* Cleanup (teardown commands/steps - **keep brief**)
 * Scenario Analysis (explain correct answer and why other options are wrong)
 * Key Learning Points (5–8)
 * Related <EXAM> Exam Objectives
@@ -191,6 +194,7 @@ When the lab includes these patterns, enforce them to avoid deployment failure:
 ### For IaaC labs
 
 **Terraform:**
+
 * `Use-AzProfile Lab`
 * `Test-Path terraform.tfvars`
 * `terraform init`
@@ -199,6 +203,7 @@ When the lab includes these patterns, enforce them to avoid deployment failure:
 * `terraform plan`
 
 **Bicep:**
+
 * `Use-AzProfile Lab`
 * `.\bicep.ps1 validate`
 * `.\bicep.ps1 plan`
@@ -206,19 +211,20 @@ When the lab includes these patterns, enforce them to avoid deployment failure:
 ### For Scripted labs
 
 Run and include output:
+
 * `Use-AzProfile Lab`
 * PowerShell: `Test-ScriptFileInfo -Path .\scripts\deploy.ps1` (if using script metadata)
 * Syntax validation: `Get-Command .\scripts\deploy.ps1 -Syntax`
 * Dry-run validation (use `-WhatIf` where supported or echo-mode execution)
 
+## Final response format
+
 1. **Deployment Method Decision** (explain why IaaC/Scripted/Manual was chosen)
 2. Lab Summary
 3. File List (paths)
 4. Validation Results (command output)
-5. README Compliance confirmation (required sections present; forbidden content absent)
+5. README Compliance confirmation (all required sections present in correct order)
 6. Governance Compliance confirmation (explicitly state you followed GOVERNANCE.md)
-
-**Do not** include "Quick Start deployment steps" in the response if you want strict consistency with "no deployment procedures" guidance. If you want a Quick Start, keep it to **references** (e.g., "Use the standard procedure in GOVERNANCE.md") with no commands.
 
 ## Invocation examples
 
@@ -226,16 +232,5 @@ Run and include output:
 * "Create a Terraform hands-on lab for this <EXAM> question: …" (force IaaC)
 * "Create a scripted hands-on lab for this <EXAM> question: …" (force scripted)
 * "Create a Bicep hands-on lab for this <EXAM> question: …" (force Bicep)
-2. File List (paths)
-3. Validation Results (command output)
-4. README Compliance confirmation (required sections present; forbidden content absent)
-5. Governance Compliance confirmation (explicitly state you followed GOVERNANCE.md)
-
-**Do not** include “Quick Start deployment steps” in the response if you want strict consistency with “no deployment procedures” guidance. If you want a Quick Start, keep it to **references** (e.g., “Use the standard procedure in GOVERNANCE.md”) with no commands.
-
-## Invocation examples
-
-* “Create a Terraform hands-on lab for this <EXAM> question: …”
-* “Create a Bicep hands-on lab for this <EXAM> question: …”
 
 ```
