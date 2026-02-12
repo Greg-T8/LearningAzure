@@ -53,8 +53,10 @@ After deployment, confirm the partition and replica counts:
 # Run the validation script from the validation/ folder
 .\Test-SearchPartitions.ps1 `
     -ResourceGroupName "ai102-knowledge-mining-search-query-perf-tf" `
-    -SearchServiceName (terraform -chdir=../terraform output -raw search_service_name)
+    -SearchServiceName (terraform -chdir="../terraform" output -raw search_service_name)
 ```
+
+<img src='.img/2026-02-12-05-42-27.png' width=600>
 
 ### 2. Check Partition Count via Azure Portal
 
@@ -62,6 +64,10 @@ After deployment, confirm the partition and replica counts:
 2. Go to **Settings** → **Scale**
 3. Verify **Partitions** is set to **2** and **Replicas** is set to **1**
 4. Note that the Basic tier allows scaling up to 3 partitions
+
+<img src='.img/2026-02-12-05-44-58.png' width=700>
+
+<img src='.img/2026-02-12-05-45-39.png' width=500>
 
 ### 3. Query the Search REST API
 
