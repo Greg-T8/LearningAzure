@@ -7,7 +7,7 @@
 
 ---
 
-### 📚 Learning Modality Progress Tracker
+## 📚 Learning Modality Progress Tracker
 
 | Priority | Modality         | My Notes                                                        | Status | Started | Completed | Days |
 | :------- | :--------------- | :-------------------------------------------------------------- | :----- | :------ | :-------- | :--- |
