@@ -641,9 +641,9 @@ lab-<topic>/
 
 #### Deployment Scripts
 
-- **Always copy** `bicep.ps1` from exam-specific `_shared/bicep/bicep.ps1` folder to lab's `bicep/` folder
-  - Example: `AZ-104/hands-on-labs/_shared/bicep/bicep.ps1`
-  - Example: `AI-102/hands-on-labs/_shared/bicep/bicep.ps1`
+- **Always copy** `bicep.ps1` from `.assets/shared/bicep/bicep.ps1` folder to lab's `bicep/` folder
+  - Location: `.assets/shared/bicep/bicep.ps1` (workspace root)
+  - Copy to: `<EXAM>/hands-on-labs/<domain>/lab-<topic>/bicep/bicep.ps1`
 - Script provides: validate, plan, apply, destroy, show, list commands
 - Use deployment stacks for easier cleanup
 - Stack naming: Auto-derived as `stack-<domain>-<topic>` from parameters

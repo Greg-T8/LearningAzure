@@ -283,32 +283,34 @@ Use this wrapper in all Bicep labs for simplified workflows:
 
 ```powershell
 # From any lab's bicep/ directory
-cd hands-on-labs/compute/lab-app-service-tiers/bicep
+cd AZ-104/hands-on-labs/compute/lab-app-service-tiers/bicep
 
 # Deploy (auto-derives stack name from main.bicepparam)
-..\..\..\_shared\bicep.ps1 apply
+.\bicep.ps1 apply
 
 # Get deployment outputs
-..\..\..\_shared\bicep.ps1 output
+.\bicep.ps1 output
 
 # Show status
-..\..\..\_shared\bicep.ps1 show
+.\bicep.ps1 show
 
 # Cleanup (removes RG and all resources)
-..\..\..\_shared\bicep.ps1 destroy
+.\bicep.ps1 destroy
 ```
 
-### Alternative: Use Relative Path from Root
+**Note:** The `bicep.ps1` script should be copied from `.assets/shared/bicep/bicep.ps1` to each lab's `bicep/` directory.
+
+**Note:** The `bicep.ps1` script should be copied from `.assets/shared/bicep/bicep.ps1` to each lab's `bicep/` directory.
+
+### Alternative: Call Directly from Shared Location
 
 ```powershell
-# From repository root
-cd hands-on-labs/compute/lab-app-service-tiers/bicep
-
-# Deploy
-.\_shared\bicep.ps1 apply
+# From lab's bicep/ directory (e.g., AZ-104/hands-on-labs/compute/lab-name/bicep/)
+# Call shared script using relative path (5 levels up to root, then down to .assets/shared)
+& "..\..\..\..\..\..\.assets\shared\bicep\bicep.ps1" apply
 
 # Get outputs
-.\_shared\bicep.ps1 output
+& "..\..\..\..\..\..\.assets\shared\bicep\bicep.ps1" output
 ```
 
 ---

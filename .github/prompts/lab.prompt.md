@@ -12,7 +12,7 @@ Create a working, validated hands-on lab from an exam-question scenario using **
 ### Bicep wrapper script
 
 * For **Bicep labs only**: **Do not create or modify** `bicep.ps1`.
-* **Always copy** it from: `<EXAM>/hands-on-labs/_shared/bicep/bicep.ps1` into the lab’s `bicep/` folder.
+* **Always copy** it from: `.assets/shared/bicep/bicep.ps1` (workspace root) into the lab's `bicep/` folder.
 
 ### README.md rules
 

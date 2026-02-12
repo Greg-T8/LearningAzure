@@ -42,24 +42,24 @@ variables.tf (lab_subscription_id variable)
 For each lab, copy these shared files to your `terraform/` directory:
 
 ```powershell
-# From lab terraform folder
-Copy-Item ..\..\..\_shared\terraform\providers.tf .\
-Copy-Item ..\..\..\..\..\_shared\terraform\subscription-guard.tf .\
+# From lab terraform folder (e.g., AZ-104/hands-on-labs/domain/lab-name/terraform/)
+Copy-Item ..\..\..\..\..\..\..\..\..\assets\shared\terraform\providers.tf .\
+Copy-Item ..\..\..\..\..\..\..\..\..\assets\shared\terraform\subscription-guard.tf .\
 ```
 
 Or use symbolic links to avoid duplication:
 
 ```powershell
 # From lab terraform folder
-New-Item -ItemType SymbolicLink -Name "providers.tf" -Target "..\..\..\..\_shared\terraform\providers.tf"
-New-Item -ItemType SymbolicLink -Name "subscription-guard.tf" -Target "..\..\..\..\_shared\terraform\subscription-guard.tf"
+New-Item -ItemType SymbolicLink -Name "providers.tf" -Target "..\..\..\..\..\..\..\..\..\assets\shared\terraform\providers.tf"
+New-Item -ItemType SymbolicLink -Name "subscription-guard.tf" -Target "..\..\..\..\..\..\..\..\..\assets\shared\terraform\subscription-guard.tf"
 ```
 
 ### Step 2: Create terraform.tfvars
 
 ```powershell
 # From lab terraform folder
-Copy-Item ..\..\..\_shared\terraform\terraform.tfvars.template .\terraform.tfvars
+Copy-Item ..\..\..\..\..\..\..\..\..\assets\shared\terraform\terraform.tfvars.template .\terraform.tfvars
 ```
 
 ### Step 3: Configure Your Subscription
@@ -181,19 +181,23 @@ az account show --query "id" -o tsv
 ## File Locations
 
 ```
-hands-on-labs/
-├── _shared/
+.assets/
+├── shared/
 │   ├── terraform/
 │   │   ├── providers.tf                    ← Copy to each lab
 │   │   ├── subscription-guard.tf           ← Copy to each lab
 │   │   └── terraform.tfvars.template       ← Copy & customize per lab
+│   └── bicep/
+│       └── bicep.ps1                       ← Copy to each Bicep lab
 │
-├── compute/
-│   └── lab-app-service-tiers/
-│       └── terraform/
-│           ├── providers.tf                ← (copied from _shared)
-│           ├── subscription-guard.tf       ← (copied from _shared)
-│           ├── terraform.tfvars            ← (created from template)
+<EXAM>/
+└── hands-on-labs/
+    └── <domain>/
+        └── lab-<topic>/
+            └── terraform/
+                ├── providers.tf            ← (copied from .assets/shared)
+                ├── subscription-guard.tf   ← (copied from .assets/shared)
+                ├── terraform.tfvars        ← (created from template)
 │           ├── main.tf
 │           ├── variables.tf
 │           └── outputs.tf

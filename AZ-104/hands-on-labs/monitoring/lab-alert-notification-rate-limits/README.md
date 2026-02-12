@@ -62,7 +62,7 @@ Given Alert1 fires **60 times per hour** (once per minute):
 cd terraform
 
 # Copy the tfvars template and configure your settings
-Copy-Item ..\..\..\_shared\terraform\terraform.tfvars.template .\terraform.tfvars
+Copy-Item ..\..\..\..\..\..\..\..\..\..\assets\shared\terraform\terraform.tfvars.template .\terraform.tfvars
 
 # Edit terraform.tfvars with your values:
 # - lab_subscription_id = "your-subscription-id"

@@ -60,12 +60,27 @@ graph TD
 ## Testing the Solution
 
 1. **Verify App Service Plan tier:** In the Azure Portal, navigate to the App Service Plan and confirm it is running on the Standard S1 tier
+
+<img src='.img/2026-02-12-03-08-25.png' width=700>
+
 2. **Verify Web App deployment:** Open the Web App URL from the Terraform outputs and confirm it loads (default placeholder page)
+
+<img src='.img/2026-02-12-03-02-55.png' width=600>
+
+<img src='.img/2026-02-12-03-03-23.png' width=600>
+
 3. **Inspect autoscale configuration:**
    - Navigate to the App Service Plan > **Scale out (App Service plan)**
    - Verify the autoscale setting shows: minimum = 1, maximum = 10, default = 1
    - Confirm the CPU-based scale-out rule (> 70%) and scale-in rule (< 30%)
+
+<img src='.img/2026-02-12-03-05-28.png' width=600>
+
+<img src='.img/2026-02-12-03-07-03.png' width=600>
+
 4. **Review tier limitations:** In the portal, explore the **Scale up (App Service plan)** blade and compare available tiers to understand what each provides
+
+<img src='.img/2026-02-12-03-07-48.png' width=700>
 
 ## Scenario Analysis
 
@@ -98,6 +113,7 @@ The Isolated tier is the correct answer because it is the **only** App Service p
 ## Related AZ-104 Exam Objectives
 
 - **Deploy and manage Azure compute resources (20–25%)**
+-
   - Create and configure an Azure App Service
   - Configure scaling for an App Service
   - Configure App Service plans
