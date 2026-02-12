@@ -2266,7 +2266,6 @@ Deployment slot settings fall into three categories:
 
 <img src='.img/2026-01-24-05-00-57.png' width=500>
 
-
 1. **Reserve your domain name**
 
    * You can purchase a domain directly in the **Azure portal**

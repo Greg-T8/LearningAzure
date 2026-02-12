@@ -39,7 +39,6 @@
 * [How Azure Network Watcher works](#how-azure-network-watcher-works)
 * [When to use Azure Network Watcher](#when-to-use-azure-network-watcher)
 
-
 ---
 
 <!-- omit in toc -->
@@ -2760,7 +2759,6 @@ Azure creates additional system routes when these capabilities are enabled:
 ## How Azure Application Gateway works
 
 [Module Reference](https://learn.microsoft.com/training/modules/introduction-to-azure-application-gateway/)
-
 
 <img src='.img/2026-01-21-03-25-07.png' width=700>
 

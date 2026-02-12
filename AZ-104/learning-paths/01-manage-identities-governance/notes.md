@@ -815,7 +815,6 @@ Here's a simplified table breaking down the Microsoft Entra ID features by editi
 }
 ```
 
-
 **Policy Logic Example Notes**
 
 * Resources such as **Microsoft.AzureActiveDirectory/b2cDirectories** may be excluded when fields (like location) do not represent Azure regions.
@@ -1159,7 +1158,7 @@ Each evaluated resource is assigned one compliance state:
 
    * Start with a small production ring
    * Gradually expand scope
- 
+
 <img src='.img/2026-01-17-05-57-37.png' width=800>
 
 **Reacting to Policy State Changes**
@@ -1496,6 +1495,5 @@ Admins can enable:
 * Cloud sync provides **higher availability** than Entra Connect
 
 ---
-
 
 *Last updated: 2026-01-14*

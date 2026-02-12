@@ -1,6 +1,7 @@
 # Learning Path 5: Monitor and Back Up Resources
 
 **Link:** [Microsoft Learn](https://learn.microsoft.com/en-us/training/paths/az-104-monitor-backup-resources/)
+
 * [Introduction to Azure Backup](#introduction-to-azure-backup)
 * [What is Azure Backup?](#what-is-azure-backup)
 * [How Azure Backup works](#how-azure-backup-works)
@@ -112,7 +113,7 @@ Azure Backup supports backing up the following resources:
 * Eliminates the need to deploy or manage backup servers or backup storage.
 * Backup storage is **automatically managed and scaled** by Azure.
 
-<img src='.img/2026-01-25-05-16-45.png' width=700> 
+<img src='.img/2026-01-25-05-16-45.png' width=700>
 
 **Azure Backup Definition**
 
@@ -131,7 +132,7 @@ Azure Backup supports backing up the following resources:
   * **Azure Blobs**
   * **Azure Kubernetes clusters**
 
-<img src='.img/2026-01-25-05-17-28.png' width=700> 
+<img src='.img/2026-01-25-05-17-28.png' width=700>
 
 **When to Use Azure Backup**
 
@@ -230,7 +231,7 @@ Azure Backup supports backing up the following resources:
     * Supports compliance-based retention requirements
   * Each tier has different **RTOs** and pricing
 
-<img src='.img/2026-01-25-05-20-31.png' width=700> 
+<img src='.img/2026-01-25-05-20-31.png' width=700>
 
 * **Data Plane – Availability and Security**
 
@@ -263,7 +264,7 @@ Azure Backup supports backing up the following resources:
     * Centralized management (“single pane of glass”)
     * Supports multiple workloads, vaults, subscriptions, regions, and Azure Lighthouse tenants
 
-<img src='.img/2026-01-25-05-20-51.png' width=700> 
+<img src='.img/2026-01-25-05-20-51.png' width=700>
 
 **What Data Is Backed Up**
 
@@ -296,8 +297,7 @@ Azure Backup supports backing up the following resources:
 | Selective disk backup    | Backup selected VM disks only         | Supported via Enhanced policy                  |
 | Transaction log          | Point-in-time recovery                | Every **15 minutes** maximum                   |
 
-<img src='.img/2026-01-25-05-21-08.png' width=700> 
-
+<img src='.img/2026-01-25-05-21-08.png' width=700>
 
 **Key Facts to Remember**
 
@@ -373,7 +373,7 @@ Azure Backup supports backing up the following resources:
   * Long-term retention
   * Centralized management
 
-<img src='.img/2026-01-25-05-27-09.png' width=700> 
+<img src='.img/2026-01-25-05-27-09.png' width=700>
 
 **Compliance and Retention**
 
@@ -571,7 +571,7 @@ Azure Backup supports backing up the following resources:
 * Acts as a **role-based access control (RBAC) boundary** for secure access.
 * Used to monitor and manage backup and restore operations.
 
-<img src='.img/2026-01-25-05-34-13.png' width=700> 
+<img src='.img/2026-01-25-05-34-13.png' width=700>
 
 **Snapshots**
 
@@ -659,7 +659,7 @@ Azure Backup supports backing up the following resources:
 * **Enhanced soft delete** protects backups from accidental or malicious deletion.
 * Enhanced soft delete can be locked **always on** for additional protection.
 
-<img src='.img/2026-01-25-05-37-12.png' width=700> 
+<img src='.img/2026-01-25-05-37-12.png' width=700>
 
 **Key Facts to Remember**
 
@@ -827,7 +827,7 @@ az backup protection backup-now \
     * Storage usage
     * Job status
 
-<img src='.img/2026-01-25-05-41-32.png' width=700> 
+<img src='.img/2026-01-25-05-41-32.png' width=700>
 
 **Key Facts to Remember**
 

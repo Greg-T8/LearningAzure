@@ -28,7 +28,6 @@
 * [Use Azure Storage Explorer](#use-azure-storage-explorer)
 * [Consider Azure File Sync](#consider-azure-file-sync)
 
-
 ---
 
 <!-- omit in toc -->
@@ -42,7 +41,6 @@
 | 4 | [Configure Azure Files](https://learn.microsoft.com/en-us/training/modules/configure-azure-files-file-sync/) | ✅ | 1/22/26 |
 
 **Legend:** 🕒 Not Started | 🚧 In Progress | ✅ Complete
-
 
 ---
 
@@ -66,7 +64,7 @@
   * **IaaS virtual machines**
   * **PaaS cloud services**
 
-<img src='.img/2026-01-21-04-01-05.png' width=700> 
+<img src='.img/2026-01-21-04-01-05.png' width=700>
 
 **Categories of Data Supported**
 
@@ -170,7 +168,7 @@
 
 [Module Reference](https://learn.microsoft.com/training/modules/configure-storage-accounts/)
 
-<img src='.img/2026-01-21-04-03-23.png' width=700> 
+<img src='.img/2026-01-21-04-03-23.png' width=700>
 
 **Azure Blob Storage**
 
@@ -362,7 +360,6 @@
   * Across **geographically paired regions**
 * Replication helps meet Azure Storage **SLA** even during failures.
 
-
 **Locally Redundant Storage (LRS)**
 
 * **Lowest-cost** replication option
@@ -391,7 +388,7 @@
   * **Not available in all regions**
   * Converting to ZRS requires **physical data movement**
 
-<img src='.img/2026-01-21-04-09-39.png' width=400> 
+<img src='.img/2026-01-21-04-09-39.png' width=400>
 
 **Geo-Redundant Storage (GRS)**
 
@@ -521,7 +518,7 @@
   * `<storage-account>.blob.core.windows.net`
 * DNS CNAME record points the subdomain to the storage endpoint
 
-<img src='.img/2026-01-21-04-16-52.png' width=700> 
+<img src='.img/2026-01-21-04-16-52.png' width=700>
 
 **Key Facts to Remember**
 
@@ -547,7 +544,7 @@
   * Specific **subnets** within virtual networks
   * Specific **public IP addresses or IP ranges**
 
-<img src='.img/2026-01-21-04-14-32.png' width=700> 
+<img src='.img/2026-01-21-04-14-32.png' width=700>
 
 **Service Endpoints**
 
@@ -559,7 +556,7 @@
   * File
 * These base URLs are used to construct the full address for individual storage resources.
 
-<img src='.img/2026-01-21-04-14-57.png' width=700> 
+<img src='.img/2026-01-21-04-14-57.png' width=700>
 
 **Configuration Considerations**
 
@@ -589,7 +586,6 @@
 * Blob = **Binary Large Object**
 * Also referred to as **object storage** or **container storage**
 * Supports **text and binary data** (documents, images, videos, application installers)
-
 
 **Blob Storage Architecture**
 
@@ -672,7 +668,7 @@
 
     * Allows anonymous **read and list access to the container and all blobs**
 
-<img src='.img/2026-01-22-03-12-30.png' width=700> 
+<img src='.img/2026-01-22-03-12-30.png' width=700>
 
 **Key Facts to Remember**
 
@@ -814,7 +810,6 @@
 * Each rule consists of an **If–Then** structure.
 
 <img src='.img/2026-01-22-03-18-40.png' width=700>
- 
 **If Clause (Evaluation Condition)**
 
 * Determines when the rule is applied.
@@ -1442,7 +1437,7 @@
 
 ## Create customer-managed keys
 
-[Module Reference]()
+[Module Reference](https://learn.microsoft.com/training/modules/configure-storage-security/)
 
 **Overview**
 
@@ -1642,7 +1637,7 @@
 
 ## Manage Azure file shares
 
-[Module Reference]()
+[Module Reference](https://learn.microsoft.com/training/modules/configure-azure-files-file-sync/)
 
 **Azure Files Protocol Support**
 
