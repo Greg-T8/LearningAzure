@@ -106,7 +106,7 @@ If the question uses labeled options (A, B, C, D):
 Immediately below the explanation `</details>` tag, add **exactly**:
 
 ```
-▶ Related Lab: <insert link>
+▶ Related Lab: []()
 ```
 
 Rules:
