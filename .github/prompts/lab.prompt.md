@@ -5,7 +5,37 @@ description: Creates a hands-on lab from an exam question scenario using Terrafo
 
 # Hands-on Lab Generator
 
-Create a working, validated hands-on lab from an exam-question scenario using **Terraform or Bicep**, strictly compliant with `GOVERNANCE.md` (workspace root). Treat `GOVERNANCE.md` as the single source of truth for naming, tagging, locations, versions, structure, and deployment standards.
+Create a working, validated hands-on lab from an exam-question scenario using the **most appropriate deployment method**, strictly compliant with `GOVERNANCE.md` (workspace root). Treat `GOVERNANCE.md` as the single source of truth for naming, tagging, locations, versions, structure, and deployment standards.
+
+## Deployment method evaluation
+
+**Analyze the exam question to determine the best-fit deployment method. Preference order: IaaC > Scripted > Manual (UI).**
+
+### When to use Infrastructure as Code (Terraform or Bicep) - **PREFERRED**
+
+Use when:
+* Question involves deploying/provisioning Azure resources
+* Scenario requires repeatable infrastructure deployment
+* Focus is on resource configuration and architecture
+* Example: "Deploy a VM with specific networking configuration"
+
+### When to use Scripted (PowerShell/Azure CLI)
+
+Use when:
+* Question explicitly asks for command sequences
+* Scenario involves imperative operations or workflows
+* Focus is on operational tasks, not resource provisioning
+* Example: "Run these commands to configure deployment slots" or "Prepare App Service for republication"
+
+### When to use Manual (Portal/UI)
+
+Use when:
+* Question tests knowledge of Azure Portal navigation
+* Scenario requires interactive UI features (e.g., specific portal blades)
+* Focus is on understanding portal workflows
+* Example: "Configure monitoring alerts through Azure Portal"
+
+**Default to IaaC unless the exam question clearly requires scripting or manual steps.**
 
 ## Non-negotiables
 
@@ -60,6 +90,8 @@ If a higher-cost resource is required, explain why in README (architecture/analy
 Create under:
 `<EXAM>/hands-on-labs/<domain>/lab-<topic>/`
 
+### For IaaC labs (Terraform or Bicep)
+
 ```
 lab-<topic>/
 ├── README.md
@@ -72,6 +104,28 @@ lab-<topic>/
 │   └── modules/            # when applicable
 └── validation/
     └── test-*.ps1          # optional
+```
+
+### For Scripted labs (PowerShell/Azure CLI)
+
+```
+lab-<topic>/
+├── README.md
+├── scripts/
+│   ├── deploy.ps1 OR deploy.sh
+│   ├── config.ps1 OR config.sh   # if needed
+│   └── cleanup.ps1 OR cleanup.sh
+└── validation/
+    └── test-*.ps1          # optional
+```
+
+### For Manual labs (Portal/UI)
+
+```
+lab-<topic>/
+├── README.md
+└── screenshots/            # optional, if helpful
+    └── step-*.png
 ```
 
 ## Required header block (code files only)
@@ -126,10 +180,9 @@ When the lab includes these patterns, enforce them to avoid deployment failure:
 
 ## Validation requirements (must run and capture output)
 
-### Terraform
+### For IaaC labs
 
-Run and include output:
-
+**Terraform:**
 * `Use-AzProfile Lab`
 * `Test-Path terraform.tfvars`
 * `terraform init`
@@ -137,19 +190,34 @@ Run and include output:
 * `terraform fmt`
 * `terraform plan`
 
-### Bicep
-
-Run and include output:
-
+**Bicep:**
 * `Use-AzProfile Lab`
 * `.\bicep.ps1 validate`
 * `.\bicep.ps1 plan`
 
-## Output package (assistant response)
+### For Scripted labs
 
-Provide:
+Run and include output:
+* `Use-AzProfile Lab`
+* PowerShell: `Test-ScriptFileInfo -Path .\scripts\deploy.ps1` (if using script metadata)
+* Syntax validation: `Get-Command .\scripts\deploy.ps1 -Syntax`
+* Dry-run validation (use `-WhatIf` where supported or echo-mode execution)
 
-1. Lab Summary
+1. **Deployment Method Decision** (explain why IaaC/Scripted/Manual was chosen)
+2. Lab Summary
+3. File List (paths)
+4. Validation Results (command output)
+5. README Compliance confirmation (required sections present; forbidden content absent)
+6. Governance Compliance confirmation (explicitly state you followed GOVERNANCE.md)
+
+**Do not** include "Quick Start deployment steps" in the response if you want strict consistency with "no deployment procedures" guidance. If you want a Quick Start, keep it to **references** (e.g., "Use the standard procedure in GOVERNANCE.md") with no commands.
+
+## Invocation examples
+
+* "Create a hands-on lab for this <EXAM> question: …" (auto-selects method)
+* "Create a Terraform hands-on lab for this <EXAM> question: …" (force IaaC)
+* "Create a scripted hands-on lab for this <EXAM> question: …" (force scripted)
+* "Create a Bicep hands-on lab for this <EXAM> question: …" (force Bicep)
 2. File List (paths)
 3. Validation Results (command output)
 4. README Compliance confirmation (required sections present; forbidden content absent)
