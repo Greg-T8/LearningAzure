@@ -140,6 +140,13 @@
         "Get-Command": true,
         "Use-AzProfile": true,
         "Y": true
-    }
+    },
+    "terminal.integrated.profiles.windows": {
+        "PowerShell Lab": {
+            "source": "PowerShell",
+            "args": ["-NoExit", "-Command", "Use-AzProfile Lab"]
+        }
+    },
+    "terminal.integrated.defaultProfile.windows": "PowerShell Lab"
   }
 }
