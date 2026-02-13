@@ -14,7 +14,11 @@ from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 
 
-CERTIFICATIONS = ('AI-102', 'AZ-104', 'AI-900')
+CERTIFICATIONS = {
+    'AI-102': '2026-02-09',
+    'AZ-104': '2026-01-14',
+    'AI-900': '2026-01-14'
+}
 
 
 def main() -> None:
@@ -272,17 +276,10 @@ def calculate_running_totals() -> dict[str, float]:
     Returns:
         Dict mapping certification names to running total hours
     """
-    # Map certification to start date
-    start_dates = {
-        'AI-900': '2026-01-14',
-        'AZ-104': '2026-01-14',
-        'AI-102': '2026-02-09'
-    }
-
     running_totals = {}
 
     # Calculate cumulative hours for each certification
-    for cert, start_date in start_dates.items():
+    for cert, start_date in CERTIFICATIONS.items():
         commits = get_commits_by_path(since_date=start_date)
 
         # Sum hours across all days
