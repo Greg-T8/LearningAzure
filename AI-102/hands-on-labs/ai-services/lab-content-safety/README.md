@@ -102,6 +102,8 @@ Navigate to [Content Safety Studio](https://contentsafety.cognitive.azure.com) a
 4. Review the severity levels: 0-Safe, 2-Low, 4-Medium, 6-High
 5. Check the **Accepted/Rejected** result based on your filter configuration
 
+<img src='.img/2026-02-13-05-50-12.png' width=700>
+
 ### 4. Test via REST API
 
 Retrieve endpoint and key:
