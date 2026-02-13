@@ -115,6 +115,8 @@ terraform output -raw content_safety_primary_key
 
 Test text moderation API:
 
+**Bash:**
+
 ```bash
 ENDPOINT=$(terraform output -raw content_safety_endpoint)
 KEY=$(terraform output -raw content_safety_primary_key)
@@ -128,12 +130,31 @@ curl -X POST "${ENDPOINT}/contentsafety/text:analyze?api-version=2024-09-01" \
   }'
 ```
 
+**PowerShell:**
+
+```powershell
+$endpoint = terraform output -raw content_safety_endpoint
+$key = terraform output -raw content_safety_primary_key
+
+curl -X POST "$endpoint/contentsafety/text:analyze?api-version=2024-09-01" `
+  -H "Ocp-Apim-Subscription-Key: $key" `
+  -H "Content-Type: application/json" `
+  -d '{
+    "text": "This is a sample text for content safety analysis.",
+    "categories": ["Hate", "SelfHarm", "Sexual", "Violence"]
+  }'
+```
+
+<img src='.img/2026-02-13-05-53-45.png' width=600>
+
 ### 5. Run Validation Script (Optional)
 
 ```powershell
 cd ../validation
 .\test-content-safety.ps1
 ```
+
+<img src='.img/2026-02-13-05-57-21.png' width=700>
 
 ---
 

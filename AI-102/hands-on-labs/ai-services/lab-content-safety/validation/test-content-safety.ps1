@@ -8,6 +8,9 @@ Confirms resource deployment, subscription context, and validates Content Safety
 .CONTEXT
 AI-102 Lab - Azure AI Content Safety text and image moderation
 
+.PARAMETER Text
+The text string to analyze for content safety. Defaults to a safe sample text.
+
 .AUTHOR
 Greg Tate
 
@@ -17,7 +20,9 @@ Date: 2026-02-12
 #>
 
 [CmdletBinding()]
-param()
+param(
+    [string]$Text = "This is a safe sample text for content safety analysis."
+)
 
 $script:ExpectedSubscriptionId = 'e091f6e7-031a-4924-97bb-8c983ca5d21a'
 
@@ -32,7 +37,8 @@ $Main = {
         -ResourceName $outputs.Name
     $textModeration = Test-TextModeration `
         -Endpoint $outputs.Endpoint `
-        -Key $outputs.Key
+        -Key $outputs.Key `
+        -Text $Text
     Show-ValidationSummary -ResourceExists $resourceExists -TextModeration $textModeration
 }
 
@@ -114,7 +120,8 @@ $Helpers = {
 
         param(
             [string]$Endpoint,
-            [string]$Key
+            [string]$Key,
+            [string]$Text
         )
 
         Write-Host "`n--- Testing Text Moderation ---" -ForegroundColor Cyan
@@ -127,7 +134,7 @@ $Helpers = {
         }
 
         $body = @{
-            text       = "This is a safe sample text for content safety analysis."
+            text       = $Text
             categories = @("Hate", "SelfHarm", "Sexual", "Violence")
         } | ConvertTo-Json
 
