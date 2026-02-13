@@ -11,7 +11,7 @@ Standards and naming conventions for all Terraform and Bicep implementations acr
 | Setting | Value | Rationale |
 |---------|-------|-----------|
 | Default Region | `eastus` | Cost-effective, wide service availability |
-| Allowed Regions | `eastus`, `eastus2`, `westus2` | Limit to minimize latency and cost |
+| Allowed Regions | All US regions (e.g., `eastus`, `eastus2`, `westus`, `westus2`, `westus3`, `centralus`, `northcentralus`, `southcentralus`, etc.) | Maximum flexibility for resource availability; minimize latency within US |
 
 ### Tagging Policy
 
@@ -114,6 +114,7 @@ All resources **must** include these tags:
 | Speech Service | `speech` | `speech-tts-lab` | Speech-to-text/text-to-speech |
 | Form Recognizer/Document Intelligence | `doc` | `doc-invoice-lab` | Document processing |
 | AI Search (Cognitive Search) | `srch` | `srch-knowledge-lab` | Cognitive/AI Search service |
+| Cosmos DB (for AI Agents) | `cosmos` | `cosmos-agent-a6mh64` | Serverless; thread storage for AI Agent Service |
 | Cognitive Deployment (Model) | `deploy` | `deploy-gpt4`, `deploy-dalle3` | Model deployment within OpenAI account |
 | Microsoft Foundry Hub | `mfh` | `mfh-project-hub` | Microsoft Foundry hub resource |
 | Microsoft Foundry Project | `mfp` | `mfp-genai-lab` | Microsoft Foundry project resource |
@@ -269,6 +270,15 @@ These standards prevent common deployment errors and ensure reliable infrastruct
 
 **Error if omitted**: `LoadBalancingRuleMustDisableSNATSinceSameFrontendIPConfigurationIsReferencedByOutboundRule`
 
+### Network Interfaces and Backend Pools
+
+**CRITICAL**: A VM's Network Interface (NIC) with an instance-level public IP address **cannot** be added to a Load Balancer's outbound rule backend pool.
+
+- **Problem**: Azure does not allow NICs with direct public IPs in outbound rule backend pools
+- **Solution**: Use separate backend pools for inbound and outbound rules when VMs have instance public IPs
+- **Alternative**: Remove instance public IPs from VMs if they will use Load Balancer outbound rules for internet access
+- **Common scenario**: VM with Bastion access (no public IP needed) can safely use outbound rule backend pool
+
 ### Network Security Groups
 
 - Ensure required ports are open for service functionality:
@@ -345,6 +355,23 @@ resource "azurerm_storage_container" "example" {
 - Create blob container with private access
 - Consider lifecycle management for cleanup of generated outputs
 
+#### Managed Identity RBAC for AI Agent Service
+
+**CRITICAL**: When deploying Azure AI Agent Service (standard setup with BYOS), the project's System-Assigned Managed Identity requires **both control plane and data plane permissions**. Missing control plane roles will cause capability host creation to fail with `CapabilityHostOperationFailed` or authorization errors.
+
+| Service | Data Plane Role | Control Plane Role (Azure RBAC) | Why Control Plane Is Needed |
+|---------|-----------------|--------------------------------|-----------------------------|
+| Cosmos DB | Cosmos DB SQL Data Contributor (`sqlRoleAssignments`) | **Cosmos DB Operator** (`230815da-be43-4aae-9cb4-875f7bd000aa`) | Capability host must create the `enterprise_memory` database via ARM APIs |
+| Storage | Storage Blob Data Contributor + Storage Blob Data Owner (with ABAC condition) | (none required) | Data plane sufficient for blob operations |
+| AI Search | Search Index Data Contributor | Search Service Contributor | Both planes needed for index management |
+
+**Key points:**
+
+- **Data plane** roles allow read/write of data within the service (documents, blobs, indexes)
+- **Control plane** roles allow reading metadata, creating databases, and managing service configuration via ARM
+- The Cosmos DB Operator role is **not documented** in official AI Agent Service setup guides but is **required** — without it, the capability host cannot verify or create the Cosmos DB database and the deployment fails
+- The Storage Blob Data Owner role **must** include an ABAC condition restricting access to containers matching `<workspaceId>*-azureml-agent` — this is the container pattern used by the agent service for file uploads
+
 ### Subnet Delegation
 
 Some services require subnet delegation:
@@ -361,6 +388,62 @@ Some services require subnet delegation:
   - Relationship is not captured by resource references
   - Timing/sequencing is critical (e.g., role assignments after resource creation)
 - Document why explicit dependencies are needed with comments
+
+### Preview API Resources and Failed Provisioning States
+
+**CRITICAL**: Resources deployed using preview API versions (e.g., `2025-04-01-preview`) can enter an unrecoverable `provisioningState: "Failed"` state. When this happens, subsequent deployment retries will fail with generic errors like `"Update operation failed"` because Azure cannot update a resource stuck in a failed state.
+
+**Symptoms:**
+
+- Deployment fails, retry produces the same error even after fixing the root cause
+- `az resource list` shows the resource with `provisioningState: "Failed"`
+- Deployment stack reports `CapabilityHostOperationFailed` or similar with no actionable detail
+
+**Resolution pattern:**
+
+1. Identify the failed resource:
+
+   ```powershell
+   az resource list --resource-group <rg> \
+     --query "[?properties.provisioningState=='Failed'].{name:name, type:type}" -o table
+   ```
+
+2. Delete the stuck resource via REST API (deployment stacks may not auto-clean these):
+
+   ```powershell
+   az rest --method DELETE \
+     --url "https://management.azure.com/<resource-id>?api-version=<preview-version>"
+   ```
+
+3. Wait 30–60 seconds for backend cleanup and RBAC propagation
+4. Retry the deployment
+
+**Applies to:** Capability hosts, preview Cognitive Services features, AI Foundry project resources, and other resources using preview API versions.
+
+**Prevention:**
+
+- When a module depends on RBAC assignments (e.g., capability hosts depending on role assignments), use explicit `dependsOn` to ensure permissions propagate before the dependent resource is created
+- For Bicep deployment stacks, failed resources from a preview API sometimes need manual deletion before the stack can successfully update
+- Cosmos DB accounts that fail during provisioning often cannot be updated and must be deleted before retrying (use `az cosmosdb delete` or delete the containing resource group)
+
+### Validation Script Requirements
+
+**Child resource name handling**: Azure REST APIs may return child resource names in hierarchical format (e.g., `parentName/childName` instead of just `childName`). Validation scripts that use these names in subsequent REST calls must extract only the child segment.
+
+**Pattern:**
+
+```powershell
+# Azure may return 'parentAccount/projectName' — extract child segment
+$projectFullName = az rest --method get --url "<list-url>" --query "value[0].name" -o tsv
+$project = ($projectFullName -split '/')[-1]
+```
+
+**Best practices for validation scripts:**
+
+- Always validate that discovery steps return non-empty values before running tests
+- Use defensive parsing for all REST API responses (null checks, array bounds)
+- Test validation scripts against actual deployed resources immediately after first successful deployment
+- Don't assume consistent name formats across different API versions
 
 ---
 
@@ -1157,7 +1240,8 @@ Before deploying any lab:
 
 ### Configuration
 
-- [ ] Location is in allowed regions (`eastus`, `eastus2`, `westus2`)
+- [ ] Location is in allowed US regions (default: `eastus`; any US region permitted per Location Policy)
+- [ ] **AI-specific**: Regional capacity validated for all required services (run capacity checks for AI Search, Cosmos DB, model availability)
 - [ ] Resource SKUs are cost-appropriate:
   - VMs: `Standard_B2s` or smaller
   - AI Services: F0 (Free) or S0 (Standard) tier
@@ -1328,6 +1412,7 @@ resource "azurerm_cognitive_account" "cv_prediction" {
 
 | Date | Version | Changes |
 |------|---------|---------|
+| 2026-02-13 | 2.2 | Added AI Agent Service RBAC requirements (control plane + data plane); preview API failed state recovery; Cosmos DB naming; validation script best practices; regional capacity validation guidance |
 | 2026-02-11 | 2.1 | Added Storage Container/Share `storage_account_id` migration guidance; deprecated `storage_account_name` usage |
 | 2026-02-09 | 2.0 | Extended governance to AI-102; added Azure AI services naming; multi-exam support |
 | 2026-01-15 | 1.0 | Initial AZ-104 governance policy |

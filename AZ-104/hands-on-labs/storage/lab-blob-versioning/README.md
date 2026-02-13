@@ -101,7 +101,7 @@ graph TD
 
 ### Step 1: Deploy Infrastructure
 
-Use the standardized Bicep deployment process (see GOVERNANCE.md for detailed instructions):
+Use the standardized Bicep deployment process (see Governance-Lab.md for detailed instructions):
 
 ```powershell
 cd bicep

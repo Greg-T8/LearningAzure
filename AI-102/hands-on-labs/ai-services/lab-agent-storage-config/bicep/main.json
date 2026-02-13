@@ -1,0 +1,938 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "metadata": {
+    "_generator": {
+      "name": "bicep",
+      "version": "0.40.2.10011",
+      "templateHash": "3233589990695154060"
+    }
+  },
+  "parameters": {
+    "exam": {
+      "type": "string",
+      "defaultValue": "ai102",
+      "allowedValues": [
+        "ai102",
+        "az104"
+      ],
+      "metadata": {
+        "description": "Certification exam code"
+      }
+    },
+    "domain": {
+      "type": "string",
+      "defaultValue": "ai-services",
+      "allowedValues": [
+        "ai-services",
+        "generative-ai",
+        "computer-vision",
+        "nlp",
+        "knowledge-mining"
+      ],
+      "metadata": {
+        "description": "AI-102 exam domain"
+      }
+    },
+    "topic": {
+      "type": "string",
+      "defaultValue": "agent-storage-config",
+      "metadata": {
+        "description": "Lab topic in kebab-case"
+      }
+    },
+    "location": {
+      "type": "string",
+      "defaultValue": "eastus",
+      "metadata": {
+        "description": "Azure region for resources"
+      }
+    },
+    "owner": {
+      "type": "string",
+      "defaultValue": "Greg Tate",
+      "metadata": {
+        "description": "Lab owner"
+      }
+    },
+    "dateCreated": {
+      "type": "string",
+      "metadata": {
+        "description": "Resource creation date (YYYY-MM-DD, static value)"
+      }
+    },
+    "modelName": {
+      "type": "string",
+      "defaultValue": "gpt-4.1",
+      "metadata": {
+        "description": "The name of the model to deploy"
+      }
+    },
+    "modelFormat": {
+      "type": "string",
+      "defaultValue": "OpenAI",
+      "metadata": {
+        "description": "The model provider format"
+      }
+    },
+    "modelVersion": {
+      "type": "string",
+      "defaultValue": "2025-04-14",
+      "metadata": {
+        "description": "The model version"
+      }
+    },
+    "modelSkuName": {
+      "type": "string",
+      "defaultValue": "GlobalStandard",
+      "metadata": {
+        "description": "The SKU name for model deployment"
+      }
+    },
+    "modelCapacity": {
+      "type": "int",
+      "defaultValue": 40,
+      "metadata": {
+        "description": "Tokens per minute (TPM) capacity"
+      }
+    }
+  },
+  "variables": {
+    "resourceGroupName": "[format('{0}-{1}-{2}-bicep', parameters('exam'), parameters('domain'), parameters('topic'))]",
+    "uniqueSuffix": "[substring(uniqueString(subscription().id, variables('resourceGroupName')), 0, 6)]",
+    "aiAccountName": "[toLower(format('cog-agent-{0}', variables('uniqueSuffix')))]",
+    "projectName": "[toLower(format('mfp-agent-{0}', variables('uniqueSuffix')))]",
+    "storageName": "[toLower(format('stai102agent{0}', variables('uniqueSuffix')))]",
+    "cosmosDBName": "[toLower(format('cosmos-agent-{0}', variables('uniqueSuffix')))]",
+    "aiSearchName": "[toLower(format('srch-agent-{0}', variables('uniqueSuffix')))]",
+    "commonTags": {
+      "Environment": "Lab",
+      "Project": "[toUpper(parameters('exam'))]",
+      "Domain": "AI Services",
+      "Purpose": "Agent Storage Configuration",
+      "Owner": "[parameters('owner')]",
+      "DateCreated": "[parameters('dateCreated')]",
+      "DeploymentMethod": "Bicep"
+    }
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Resources/resourceGroups",
+      "apiVersion": "2024-03-01",
+      "name": "[variables('resourceGroupName')]",
+      "location": "[parameters('location')]",
+      "tags": "[variables('commonTags')]"
+    },
+    {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2025-04-01",
+      "name": "agent-dependencies-deployment",
+      "resourceGroup": "[variables('resourceGroupName')]",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {
+          "location": {
+            "value": "[parameters('location')]"
+          },
+          "storageName": {
+            "value": "[variables('storageName')]"
+          },
+          "cosmosDBName": {
+            "value": "[variables('cosmosDBName')]"
+          },
+          "aiSearchName": {
+            "value": "[variables('aiSearchName')]"
+          },
+          "commonTags": {
+            "value": "[variables('commonTags')]"
+          }
+        },
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.40.2.10011",
+              "templateHash": "13481780475286847866"
+            }
+          },
+          "parameters": {
+            "location": {
+              "type": "string",
+              "metadata": {
+                "description": "Azure region for resources"
+              }
+            },
+            "storageName": {
+              "type": "string",
+              "metadata": {
+                "description": "Name of the storage account"
+              }
+            },
+            "cosmosDBName": {
+              "type": "string",
+              "metadata": {
+                "description": "Name of the Cosmos DB account"
+              }
+            },
+            "aiSearchName": {
+              "type": "string",
+              "metadata": {
+                "description": "Name of the AI Search service"
+              }
+            },
+            "commonTags": {
+              "type": "object",
+              "metadata": {
+                "description": "Common tags for all resources"
+              }
+            }
+          },
+          "resources": [
+            {
+              "type": "Microsoft.Storage/storageAccounts",
+              "apiVersion": "2023-05-01",
+              "name": "[parameters('storageName')]",
+              "location": "[parameters('location')]",
+              "kind": "StorageV2",
+              "sku": {
+                "name": "Standard_LRS"
+              },
+              "properties": {
+                "minimumTlsVersion": "TLS1_2",
+                "allowBlobPublicAccess": false,
+                "publicNetworkAccess": "Enabled",
+                "networkAcls": {
+                  "bypass": "AzureServices",
+                  "defaultAction": "Allow"
+                },
+                "allowSharedKeyAccess": false
+              },
+              "tags": "[union(parameters('commonTags'), createObject('Purpose', 'Agent File Storage (BYOS)'))]"
+            },
+            {
+              "type": "Microsoft.DocumentDB/databaseAccounts",
+              "apiVersion": "2024-11-15",
+              "name": "[parameters('cosmosDBName')]",
+              "location": "[parameters('location')]",
+              "kind": "GlobalDocumentDB",
+              "properties": {
+                "consistencyPolicy": {
+                  "defaultConsistencyLevel": "Session"
+                },
+                "disableLocalAuth": true,
+                "enableAutomaticFailover": false,
+                "enableMultipleWriteLocations": false,
+                "enableFreeTier": false,
+                "locations": [
+                  {
+                    "locationName": "[parameters('location')]",
+                    "failoverPriority": 0,
+                    "isZoneRedundant": false
+                  }
+                ],
+                "databaseAccountOfferType": "Standard",
+                "capabilities": [
+                  {
+                    "name": "EnableServerless"
+                  }
+                ]
+              },
+              "tags": "[union(parameters('commonTags'), createObject('Purpose', 'Agent Thread Storage'))]"
+            },
+            {
+              "type": "Microsoft.Search/searchServices",
+              "apiVersion": "2024-06-01-preview",
+              "name": "[parameters('aiSearchName')]",
+              "location": "[parameters('location')]",
+              "identity": {
+                "type": "SystemAssigned"
+              },
+              "properties": {
+                "disableLocalAuth": false,
+                "authOptions": {
+                  "aadOrApiKey": {
+                    "aadAuthFailureMode": "http401WithBearerChallenge"
+                  }
+                },
+                "hostingMode": "default",
+                "partitionCount": 1,
+                "publicNetworkAccess": "enabled",
+                "replicaCount": 1,
+                "semanticSearch": "disabled"
+              },
+              "sku": {
+                "name": "basic"
+              },
+              "tags": "[union(parameters('commonTags'), createObject('Purpose', 'Agent Vector Store'))]"
+            }
+          ],
+          "outputs": {
+            "storageName": {
+              "type": "string",
+              "metadata": {
+                "description": "Storage account name"
+              },
+              "value": "[parameters('storageName')]"
+            },
+            "storageId": {
+              "type": "string",
+              "metadata": {
+                "description": "Storage account ID"
+              },
+              "value": "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageName'))]"
+            },
+            "cosmosDBName": {
+              "type": "string",
+              "metadata": {
+                "description": "Cosmos DB account name"
+              },
+              "value": "[parameters('cosmosDBName')]"
+            },
+            "cosmosDBId": {
+              "type": "string",
+              "metadata": {
+                "description": "Cosmos DB account ID"
+              },
+              "value": "[resourceId('Microsoft.DocumentDB/databaseAccounts', parameters('cosmosDBName'))]"
+            },
+            "aiSearchName": {
+              "type": "string",
+              "metadata": {
+                "description": "AI Search service name"
+              },
+              "value": "[parameters('aiSearchName')]"
+            },
+            "aiSearchId": {
+              "type": "string",
+              "metadata": {
+                "description": "AI Search service ID"
+              },
+              "value": "[resourceId('Microsoft.Search/searchServices', parameters('aiSearchName'))]"
+            }
+          }
+        }
+      },
+      "dependsOn": [
+        "[subscriptionResourceId('Microsoft.Resources/resourceGroups', variables('resourceGroupName'))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2025-04-01",
+      "name": "ai-foundry-deployment",
+      "resourceGroup": "[variables('resourceGroupName')]",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {
+          "location": {
+            "value": "[parameters('location')]"
+          },
+          "aiAccountName": {
+            "value": "[variables('aiAccountName')]"
+          },
+          "projectName": {
+            "value": "[variables('projectName')]"
+          },
+          "modelName": {
+            "value": "[parameters('modelName')]"
+          },
+          "modelFormat": {
+            "value": "[parameters('modelFormat')]"
+          },
+          "modelVersion": {
+            "value": "[parameters('modelVersion')]"
+          },
+          "modelSkuName": {
+            "value": "[parameters('modelSkuName')]"
+          },
+          "modelCapacity": {
+            "value": "[parameters('modelCapacity')]"
+          },
+          "storageName": {
+            "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'agent-dependencies-deployment'), '2025-04-01').outputs.storageName.value]"
+          },
+          "cosmosDBName": {
+            "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'agent-dependencies-deployment'), '2025-04-01').outputs.cosmosDBName.value]"
+          },
+          "aiSearchName": {
+            "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'agent-dependencies-deployment'), '2025-04-01').outputs.aiSearchName.value]"
+          },
+          "commonTags": {
+            "value": "[variables('commonTags')]"
+          }
+        },
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.40.2.10011",
+              "templateHash": "17063288278613825727"
+            }
+          },
+          "parameters": {
+            "location": {
+              "type": "string",
+              "metadata": {
+                "description": "Azure region for resources"
+              }
+            },
+            "aiAccountName": {
+              "type": "string",
+              "metadata": {
+                "description": "AI Services account name"
+              }
+            },
+            "projectName": {
+              "type": "string",
+              "metadata": {
+                "description": "AI Foundry project name"
+              }
+            },
+            "modelName": {
+              "type": "string",
+              "metadata": {
+                "description": "Model name to deploy"
+              }
+            },
+            "modelFormat": {
+              "type": "string",
+              "metadata": {
+                "description": "Model format (provider)"
+              }
+            },
+            "modelVersion": {
+              "type": "string",
+              "metadata": {
+                "description": "Model version"
+              }
+            },
+            "modelSkuName": {
+              "type": "string",
+              "metadata": {
+                "description": "Model deployment SKU"
+              }
+            },
+            "modelCapacity": {
+              "type": "int",
+              "metadata": {
+                "description": "Model TPM capacity"
+              }
+            },
+            "storageName": {
+              "type": "string",
+              "metadata": {
+                "description": "Storage account name for connection"
+              }
+            },
+            "cosmosDBName": {
+              "type": "string",
+              "metadata": {
+                "description": "Cosmos DB account name for connection"
+              }
+            },
+            "aiSearchName": {
+              "type": "string",
+              "metadata": {
+                "description": "AI Search service name for connection"
+              }
+            },
+            "commonTags": {
+              "type": "object",
+              "metadata": {
+                "description": "Common tags for all resources"
+              }
+            }
+          },
+          "resources": [
+            {
+              "type": "Microsoft.CognitiveServices/accounts/projects/connections",
+              "apiVersion": "2025-04-01-preview",
+              "name": "[format('{0}/{1}/{2}', parameters('aiAccountName'), parameters('projectName'), parameters('storageName'))]",
+              "properties": {
+                "category": "AzureStorageAccount",
+                "target": "[reference(resourceId('Microsoft.Storage/storageAccounts', parameters('storageName')), '2023-05-01').primaryEndpoints.blob]",
+                "authType": "AAD",
+                "metadata": {
+                  "ApiType": "Azure",
+                  "ResourceId": "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageName'))]",
+                  "location": "[reference(resourceId('Microsoft.Storage/storageAccounts', parameters('storageName')), '2023-05-01', 'full').location]"
+                }
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.CognitiveServices/accounts/projects', parameters('aiAccountName'), parameters('projectName'))]"
+              ]
+            },
+            {
+              "type": "Microsoft.CognitiveServices/accounts/projects/connections",
+              "apiVersion": "2025-04-01-preview",
+              "name": "[format('{0}/{1}/{2}', parameters('aiAccountName'), parameters('projectName'), parameters('cosmosDBName'))]",
+              "properties": {
+                "category": "CosmosDB",
+                "target": "[reference(resourceId('Microsoft.DocumentDB/databaseAccounts', parameters('cosmosDBName')), '2024-11-15').documentEndpoint]",
+                "authType": "AAD",
+                "metadata": {
+                  "ApiType": "Azure",
+                  "ResourceId": "[resourceId('Microsoft.DocumentDB/databaseAccounts', parameters('cosmosDBName'))]",
+                  "location": "[reference(resourceId('Microsoft.DocumentDB/databaseAccounts', parameters('cosmosDBName')), '2024-11-15', 'full').location]"
+                }
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.CognitiveServices/accounts/projects', parameters('aiAccountName'), parameters('projectName'))]"
+              ]
+            },
+            {
+              "type": "Microsoft.CognitiveServices/accounts/projects/connections",
+              "apiVersion": "2025-04-01-preview",
+              "name": "[format('{0}/{1}/{2}', parameters('aiAccountName'), parameters('projectName'), parameters('aiSearchName'))]",
+              "properties": {
+                "category": "CognitiveSearch",
+                "target": "[format('https://{0}.search.windows.net', parameters('aiSearchName'))]",
+                "authType": "AAD",
+                "metadata": {
+                  "ApiType": "Azure",
+                  "ResourceId": "[resourceId('Microsoft.Search/searchServices', parameters('aiSearchName'))]",
+                  "location": "[reference(resourceId('Microsoft.Search/searchServices', parameters('aiSearchName')), '2024-06-01-preview', 'full').location]"
+                }
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.CognitiveServices/accounts/projects', parameters('aiAccountName'), parameters('projectName'))]"
+              ]
+            },
+            {
+              "type": "Microsoft.CognitiveServices/accounts",
+              "apiVersion": "2025-04-01-preview",
+              "name": "[parameters('aiAccountName')]",
+              "location": "[parameters('location')]",
+              "sku": {
+                "name": "S0"
+              },
+              "kind": "AIServices",
+              "identity": {
+                "type": "SystemAssigned"
+              },
+              "properties": {
+                "allowProjectManagement": true,
+                "customSubDomainName": "[parameters('aiAccountName')]",
+                "networkAcls": {
+                  "defaultAction": "Allow",
+                  "virtualNetworkRules": [],
+                  "ipRules": []
+                },
+                "publicNetworkAccess": "Enabled",
+                "disableLocalAuth": false
+              },
+              "tags": "[union(parameters('commonTags'), createObject('Purpose', 'AI Agent Service Account'))]"
+            },
+            {
+              "type": "Microsoft.CognitiveServices/accounts/deployments",
+              "apiVersion": "2025-04-01-preview",
+              "name": "[format('{0}/{1}', parameters('aiAccountName'), parameters('modelName'))]",
+              "sku": {
+                "capacity": "[parameters('modelCapacity')]",
+                "name": "[parameters('modelSkuName')]"
+              },
+              "properties": {
+                "model": {
+                  "name": "[parameters('modelName')]",
+                  "format": "[parameters('modelFormat')]",
+                  "version": "[parameters('modelVersion')]"
+                }
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.CognitiveServices/accounts', parameters('aiAccountName'))]"
+              ]
+            },
+            {
+              "type": "Microsoft.CognitiveServices/accounts/projects",
+              "apiVersion": "2025-04-01-preview",
+              "name": "[format('{0}/{1}', parameters('aiAccountName'), parameters('projectName'))]",
+              "location": "[parameters('location')]",
+              "identity": {
+                "type": "SystemAssigned"
+              },
+              "properties": {
+                "description": "AI Agent Service lab project for storage configuration testing",
+                "displayName": "Agent Storage Config Lab"
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.CognitiveServices/accounts', parameters('aiAccountName'))]"
+              ]
+            }
+          ],
+          "outputs": {
+            "aiAccountName": {
+              "type": "string",
+              "metadata": {
+                "description": "AI Services account name"
+              },
+              "value": "[parameters('aiAccountName')]"
+            },
+            "projectName": {
+              "type": "string",
+              "metadata": {
+                "description": "AI Foundry project name"
+              },
+              "value": "[parameters('projectName')]"
+            },
+            "projectPrincipalId": {
+              "type": "string",
+              "metadata": {
+                "description": "Project managed identity principal ID (used for RBAC)"
+              },
+              "value": "[reference(resourceId('Microsoft.CognitiveServices/accounts/projects', parameters('aiAccountName'), parameters('projectName')), '2025-04-01-preview', 'full').identity.principalId]"
+            },
+            "projectWorkspaceId": {
+              "type": "string",
+              "metadata": {
+                "description": "Project workspace ID (used for container name conditions)"
+              },
+              "value": "[reference(resourceId('Microsoft.CognitiveServices/accounts/projects', parameters('aiAccountName'), parameters('projectName')), '2025-04-01-preview').internalId]"
+            },
+            "storageConnectionName": {
+              "type": "string",
+              "metadata": {
+                "description": "Storage connection name (referenced by capability host)"
+              },
+              "value": "[parameters('storageName')]"
+            },
+            "cosmosDBConnectionName": {
+              "type": "string",
+              "metadata": {
+                "description": "Cosmos DB connection name (referenced by capability host)"
+              },
+              "value": "[parameters('cosmosDBName')]"
+            },
+            "aiSearchConnectionName": {
+              "type": "string",
+              "metadata": {
+                "description": "AI Search connection name (referenced by capability host)"
+              },
+              "value": "[parameters('aiSearchName')]"
+            },
+            "aiServicesEndpoint": {
+              "type": "string",
+              "metadata": {
+                "description": "AI Services endpoint URL"
+              },
+              "value": "[reference(resourceId('Microsoft.CognitiveServices/accounts', parameters('aiAccountName')), '2025-04-01-preview').endpoint]"
+            }
+          }
+        }
+      },
+      "dependsOn": [
+        "[extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'agent-dependencies-deployment')]",
+        "[subscriptionResourceId('Microsoft.Resources/resourceGroups', variables('resourceGroupName'))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2025-04-01",
+      "name": "role-assignments-deployment",
+      "resourceGroup": "[variables('resourceGroupName')]",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {
+          "storageName": {
+            "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'agent-dependencies-deployment'), '2025-04-01').outputs.storageName.value]"
+          },
+          "aiSearchName": {
+            "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'agent-dependencies-deployment'), '2025-04-01').outputs.aiSearchName.value]"
+          },
+          "cosmosDBName": {
+            "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'agent-dependencies-deployment'), '2025-04-01').outputs.cosmosDBName.value]"
+          },
+          "projectPrincipalId": {
+            "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'ai-foundry-deployment'), '2025-04-01').outputs.projectPrincipalId.value]"
+          },
+          "workspaceId": {
+            "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'ai-foundry-deployment'), '2025-04-01').outputs.projectWorkspaceId.value]"
+          }
+        },
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.40.2.10011",
+              "templateHash": "12427340353007360464"
+            }
+          },
+          "parameters": {
+            "storageName": {
+              "type": "string",
+              "metadata": {
+                "description": "Storage account name"
+              }
+            },
+            "aiSearchName": {
+              "type": "string",
+              "metadata": {
+                "description": "AI Search service name"
+              }
+            },
+            "cosmosDBName": {
+              "type": "string",
+              "metadata": {
+                "description": "Cosmos DB account name"
+              }
+            },
+            "projectPrincipalId": {
+              "type": "string",
+              "metadata": {
+                "description": "Project managed identity principal ID"
+              }
+            },
+            "workspaceId": {
+              "type": "string",
+              "metadata": {
+                "description": "Project workspace ID (GUID for container name conditions)"
+              }
+            }
+          },
+          "variables": {
+            "containerCondition": "[format('((!(ActionMatches{{''Microsoft.Storage/storageAccounts/blobServices/containers/blobs/tags/read''}}) AND !(ActionMatches{{''Microsoft.Storage/storageAccounts/blobServices/containers/blobs/filter/action''}}) AND !(ActionMatches{{''Microsoft.Storage/storageAccounts/blobServices/containers/blobs/tags/write''}}) ) OR (@Resource[Microsoft.Storage/storageAccounts/blobServices/containers:name] StringStartsWithIgnoreCase ''{0}'' AND @Resource[Microsoft.Storage/storageAccounts/blobServices/containers:name] StringLikeIgnoreCase ''*-azureml-agent''))', parameters('workspaceId'))]"
+          },
+          "resources": [
+            {
+              "type": "Microsoft.Authorization/roleAssignments",
+              "apiVersion": "2022-04-01",
+              "scope": "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageName'))]",
+              "name": "[guid(resourceId('Microsoft.Storage/storageAccounts', parameters('storageName')), parameters('projectPrincipalId'), resourceId('Microsoft.Authorization/roleDefinitions', 'ba92f5b4-2d11-453d-a403-e96b0029c9fe'))]",
+              "properties": {
+                "principalId": "[parameters('projectPrincipalId')]",
+                "roleDefinitionId": "[resourceId('Microsoft.Authorization/roleDefinitions', 'ba92f5b4-2d11-453d-a403-e96b0029c9fe')]",
+                "principalType": "ServicePrincipal"
+              }
+            },
+            {
+              "type": "Microsoft.Authorization/roleAssignments",
+              "apiVersion": "2022-04-01",
+              "scope": "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageName'))]",
+              "name": "[guid(resourceId('Microsoft.Storage/storageAccounts', parameters('storageName')), parameters('projectPrincipalId'), resourceId('Microsoft.Authorization/roleDefinitions', 'b7e6dc6d-f1e8-4753-8033-0f276bb0955b'), parameters('workspaceId'))]",
+              "properties": {
+                "principalId": "[parameters('projectPrincipalId')]",
+                "roleDefinitionId": "[resourceId('Microsoft.Authorization/roleDefinitions', 'b7e6dc6d-f1e8-4753-8033-0f276bb0955b')]",
+                "principalType": "ServicePrincipal",
+                "conditionVersion": "2.0",
+                "condition": "[variables('containerCondition')]"
+              }
+            },
+            {
+              "type": "Microsoft.Authorization/roleAssignments",
+              "apiVersion": "2022-04-01",
+              "scope": "[resourceId('Microsoft.Search/searchServices', parameters('aiSearchName'))]",
+              "name": "[guid(resourceId('Microsoft.Search/searchServices', parameters('aiSearchName')), parameters('projectPrincipalId'), resourceId('Microsoft.Authorization/roleDefinitions', '8ebe5a00-799e-43f5-93ac-243d3dce84a7'))]",
+              "properties": {
+                "principalId": "[parameters('projectPrincipalId')]",
+                "roleDefinitionId": "[resourceId('Microsoft.Authorization/roleDefinitions', '8ebe5a00-799e-43f5-93ac-243d3dce84a7')]",
+                "principalType": "ServicePrincipal"
+              }
+            },
+            {
+              "type": "Microsoft.Authorization/roleAssignments",
+              "apiVersion": "2022-04-01",
+              "scope": "[resourceId('Microsoft.Search/searchServices', parameters('aiSearchName'))]",
+              "name": "[guid(resourceId('Microsoft.Search/searchServices', parameters('aiSearchName')), parameters('projectPrincipalId'), resourceId('Microsoft.Authorization/roleDefinitions', '7ca78c08-252a-4471-8644-bb5ff32d4ba0'))]",
+              "properties": {
+                "principalId": "[parameters('projectPrincipalId')]",
+                "roleDefinitionId": "[resourceId('Microsoft.Authorization/roleDefinitions', '7ca78c08-252a-4471-8644-bb5ff32d4ba0')]",
+                "principalType": "ServicePrincipal"
+              }
+            },
+            {
+              "type": "Microsoft.DocumentDB/databaseAccounts/sqlRoleAssignments",
+              "apiVersion": "2024-11-15",
+              "name": "[format('{0}/{1}', parameters('cosmosDBName'), guid(resourceId('Microsoft.DocumentDB/databaseAccounts', parameters('cosmosDBName')), parameters('projectPrincipalId'), 'cosmos-builtin-data-contributor'))]",
+              "properties": {
+                "principalId": "[parameters('projectPrincipalId')]",
+                "roleDefinitionId": "[format('{0}/sqlRoleDefinitions/00000000-0000-0000-0000-000000000002', resourceId('Microsoft.DocumentDB/databaseAccounts', parameters('cosmosDBName')))]",
+                "scope": "[resourceId('Microsoft.DocumentDB/databaseAccounts', parameters('cosmosDBName'))]"
+              }
+            },
+            {
+              "type": "Microsoft.Authorization/roleAssignments",
+              "apiVersion": "2022-04-01",
+              "scope": "[resourceId('Microsoft.DocumentDB/databaseAccounts', parameters('cosmosDBName'))]",
+              "name": "[guid(resourceId('Microsoft.DocumentDB/databaseAccounts', parameters('cosmosDBName')), parameters('projectPrincipalId'), resourceId('Microsoft.Authorization/roleDefinitions', '230815da-be43-4aae-9cb4-875f7bd000aa'))]",
+              "properties": {
+                "principalId": "[parameters('projectPrincipalId')]",
+                "roleDefinitionId": "[resourceId('Microsoft.Authorization/roleDefinitions', '230815da-be43-4aae-9cb4-875f7bd000aa')]",
+                "principalType": "ServicePrincipal"
+              }
+            }
+          ]
+        }
+      },
+      "dependsOn": [
+        "[extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'agent-dependencies-deployment')]",
+        "[extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'ai-foundry-deployment')]",
+        "[subscriptionResourceId('Microsoft.Resources/resourceGroups', variables('resourceGroupName'))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2025-04-01",
+      "name": "capability-host-deployment",
+      "resourceGroup": "[variables('resourceGroupName')]",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {
+          "aiAccountName": {
+            "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'ai-foundry-deployment'), '2025-04-01').outputs.aiAccountName.value]"
+          },
+          "projectName": {
+            "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'ai-foundry-deployment'), '2025-04-01').outputs.projectName.value]"
+          },
+          "storageConnectionName": {
+            "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'ai-foundry-deployment'), '2025-04-01').outputs.storageConnectionName.value]"
+          },
+          "cosmosDBConnectionName": {
+            "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'ai-foundry-deployment'), '2025-04-01').outputs.cosmosDBConnectionName.value]"
+          },
+          "aiSearchConnectionName": {
+            "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'ai-foundry-deployment'), '2025-04-01').outputs.aiSearchConnectionName.value]"
+          }
+        },
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.40.2.10011",
+              "templateHash": "16144833259724613101"
+            }
+          },
+          "parameters": {
+            "aiAccountName": {
+              "type": "string",
+              "metadata": {
+                "description": "AI Services account name"
+              }
+            },
+            "projectName": {
+              "type": "string",
+              "metadata": {
+                "description": "AI Foundry project name"
+              }
+            },
+            "storageConnectionName": {
+              "type": "string",
+              "metadata": {
+                "description": "Storage connection name for file uploads"
+              }
+            },
+            "cosmosDBConnectionName": {
+              "type": "string",
+              "metadata": {
+                "description": "Cosmos DB connection name for thread storage"
+              }
+            },
+            "aiSearchConnectionName": {
+              "type": "string",
+              "metadata": {
+                "description": "AI Search connection name for vector store"
+              }
+            }
+          },
+          "resources": [
+            {
+              "type": "Microsoft.CognitiveServices/accounts/capabilityHosts",
+              "apiVersion": "2025-04-01-preview",
+              "name": "[format('{0}/{1}', parameters('aiAccountName'), 'caphost-account')]",
+              "properties": {
+                "capabilityHostKind": "Agents"
+              }
+            },
+            {
+              "type": "Microsoft.CognitiveServices/accounts/projects/capabilityHosts",
+              "apiVersion": "2025-04-01-preview",
+              "name": "[format('{0}/{1}/{2}', parameters('aiAccountName'), parameters('projectName'), 'caphost-project')]",
+              "properties": {
+                "capabilityHostKind": "Agents",
+                "storageConnections": [
+                  "[parameters('storageConnectionName')]"
+                ],
+                "threadStorageConnections": [
+                  "[parameters('cosmosDBConnectionName')]"
+                ],
+                "vectorStoreConnections": [
+                  "[parameters('aiSearchConnectionName')]"
+                ]
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.CognitiveServices/accounts/capabilityHosts', parameters('aiAccountName'), 'caphost-account')]"
+              ]
+            }
+          ]
+        }
+      },
+      "dependsOn": [
+        "[extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'ai-foundry-deployment')]",
+        "[subscriptionResourceId('Microsoft.Resources/resourceGroups', variables('resourceGroupName'))]",
+        "[extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'role-assignments-deployment')]"
+      ]
+    }
+  ],
+  "outputs": {
+    "resourceGroupName": {
+      "type": "string",
+      "metadata": {
+        "description": "Resource group name"
+      },
+      "value": "[variables('resourceGroupName')]"
+    },
+    "aiAccountName": {
+      "type": "string",
+      "metadata": {
+        "description": "AI Services account name"
+      },
+      "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'ai-foundry-deployment'), '2025-04-01').outputs.aiAccountName.value]"
+    },
+    "projectName": {
+      "type": "string",
+      "metadata": {
+        "description": "AI Foundry project name"
+      },
+      "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'ai-foundry-deployment'), '2025-04-01').outputs.projectName.value]"
+    },
+    "projectPrincipalId": {
+      "type": "string",
+      "metadata": {
+        "description": "Project managed identity principal ID"
+      },
+      "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'ai-foundry-deployment'), '2025-04-01').outputs.projectPrincipalId.value]"
+    },
+    "storageName": {
+      "type": "string",
+      "metadata": {
+        "description": "Storage account name"
+      },
+      "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'agent-dependencies-deployment'), '2025-04-01').outputs.storageName.value]"
+    },
+    "aiServicesEndpoint": {
+      "type": "string",
+      "metadata": {
+        "description": "AI Services endpoint"
+      },
+      "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'ai-foundry-deployment'), '2025-04-01').outputs.aiServicesEndpoint.value]"
+    }
+  }
+}

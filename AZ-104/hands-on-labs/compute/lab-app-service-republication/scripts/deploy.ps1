@@ -38,7 +38,7 @@ $RandomSuffix       = -join ((97..122) | Get-Random -Count 6 | ForEach-Object { 
 $WebAppName         = "app-republish-$RandomSuffix"
 $DateCreated        = (Get-Date -Format 'yyyy-MM-dd')
 
-# Required tags per GOVERNANCE.md
+# Required tags per Governance-Lab.md
 $Tags = @{
     Environment      = 'Lab'
     Project          = 'AZ-104'

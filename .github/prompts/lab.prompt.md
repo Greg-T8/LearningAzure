@@ -196,10 +196,128 @@ Lab Subscription ID: `e091f6e7-031a-4924-97bb-8c983ca5d21a`
 
 ## Common Azure configuration pitfalls (apply when relevant)
 
-When the lab includes these patterns, enforce them to avoid deployment failure:
+Consult the **Azure Resource Configuration Best Practices** section in `Governance-Lab.md` (workspace root) for detailed guidance on:
 
-* Standard LB with outbound rules sharing frontend IP: set `disableOutboundSnat` / `disable_outbound_snat = true`
-* VM NIC with instance public IP cannot be in outbound-rule backend pool: split inbound/outbound pools
+* Load Balancer outbound SNAT configuration
+* Network Interface and backend pool constraints
+* AI Agent Service RBAC requirements (control plane + data plane roles)
+* Preview API resource failure handling and recovery
+* Validation script best practices
+* And other deployment patterns to avoid common failures
+
+All configuration standards in `Governance-Lab.md` are mandatory for lab implementations.
+
+## Regional resource availability validation
+
+**Before finalizing deployment configuration**, validate that the selected region has capacity for the required resource types and SKUs.
+
+This validation applies to **all deployment methods** (Terraform, Bicep, and scripted deployments).
+
+### Validation approaches
+
+Use Azure CLI commands to query resource provider capabilities directly:
+
+#### Check VM SKU availability
+
+```powershell
+# Check if a specific VM SKU is available in target regions
+$vmSize = 'Standard_B2s'
+$regions = @('eastus', 'westus3', 'southcentralus', 'northcentralus')
+
+foreach ($region in $regions) {
+    $skus = az vm list-skus --location $region --size $vmSize --output json | ConvertFrom-Json
+    if ($skus.Count -gt 0) {
+        $restrictions = $skus[0].restrictions
+        if ($null -eq $restrictions -or $restrictions.Count -eq 0) {
+            Write-Host "$region : $vmSize AVAILABLE" -ForegroundColor Green
+        } else {
+            Write-Host "$region : $vmSize RESTRICTED" -ForegroundColor Yellow
+        }
+    } else {
+        Write-Host "$region : $vmSize NOT AVAILABLE" -ForegroundColor Red
+    }
+}
+```
+
+#### Check Cognitive Services / Azure OpenAI availability
+
+```powershell
+# Check Azure OpenAI or Cognitive Services SKU availability
+$regions = @('eastus', 'westus3', 'southcentralus', 'northcentralus')
+$kind = 'OpenAI'  # or 'CognitiveServices', 'ComputerVision', 'TextAnalytics', etc.
+
+foreach ($region in $regions) {
+    $skus = az cognitiveservices account list-skus --location $region --kind $kind 2>&1
+    if ($LASTEXITCODE -eq 0) {
+        Write-Host "$region : $kind AVAILABLE" -ForegroundColor Green
+    } else {
+        Write-Host "$region : $kind NOT AVAILABLE" -ForegroundColor Red
+    }
+}
+```
+
+#### Check AI Search availability
+
+```powershell
+# Check if AI Search is available (query resource provider)
+$regions = @('eastus', 'westus3', 'southcentralus', 'northcentralus')
+$provider = az provider show --namespace Microsoft.Search --query "resourceTypes[?resourceType=='searchServices'].locations" -o json | ConvertFrom-Json
+
+foreach ($region in $regions) {
+    $normalizedRegion = $region -replace '\s', ''
+    $isAvailable = $provider -contains $region -or $provider -contains $normalizedRegion
+    if ($isAvailable) {
+        Write-Host "$region : AI Search AVAILABLE" -ForegroundColor Green
+    } else {
+        Write-Host "$region : AI Search NOT AVAILABLE" -ForegroundColor Red
+    }
+}
+```
+
+### When to perform regional validation
+
+* **High-demand resources**: Azure OpenAI, AI Search, GPU-enabled VMs, specialized SKUs
+* **Limited availability services**: Preview features, region-specific services
+* **Multiple region options**: When Governance-Lab.md allows flexibility and you need to select optimal region
+* **Multi-service labs**: When a lab deploys 3+ interdependent Azure services (e.g., AI Services + Cosmos DB + AI Search), validate capacity for **ALL** services in the same region before committing — capacity varies independently per service and per region
+
+### Multi-service regional validation
+
+**CRITICAL**: When a lab requires multiple services that are independently capacity-constrained, validate ALL of them together in the target region. Do not assume that availability of one service guarantees availability of others.
+
+**Services known to have regional capacity constraints (as of 2026-02):**
+
+| Service | Known Constraints |
+|---------|-------------------|
+| Azure AI Services (kind: `AIServices`) | High-demand regions frequently at capacity (eastus, eastus2) |
+| Azure Cosmos DB (serverless) | Intermittent capacity issues in popular regions |
+| Azure AI Search (`basic` SKU) | `ResourcesForSkuUnavailable` in some regions (observed in eastus2) |
+| GPT model deployments | Model availability is region-specific; not all models in all regions |
+
+**Validation approach**: Use ARM deployment validation (`az deployment group validate`) with a minimal test template for each constrained service before committing to a region. This is non-destructive and faster than actual deployment:
+
+```powershell
+# Example: Validate AI Search basic SKU availability in a region
+$template = @'
+{"$schema":"https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+"contentVersion":"1.0.0.0","parameters":{"loc":{"type":"string"}},
+"resources":[{"type":"Microsoft.Search/searchServices","apiVersion":"2024-06-01-preview",
+"name":"captest-temp","location":"[parameters('loc')]","sku":{"name":"basic"},
+"properties":{"replicaCount":1,"partitionCount":1}}]}
+'@
+$template | Set-Content "$env:TEMP\search-test.json"
+$result = az deployment group validate --resource-group <temp-rg> --template-file "$env:TEMP\search-test.json" --parameters loc=<region> 2>&1
+if ($LASTEXITCODE -eq 0) { Write-Host "AVAILABLE" } else { Write-Host "UNAVAILABLE" }
+```
+
+**If the default region fails capacity checks**, select an alternative US region (per Location Policy) where ALL required services are available. Document the validated region in the parameter file with a comment explaining why.
+
+### Documentation in README
+
+If regional availability is critical or limited:
+
+* Include a note in **Deployment** section about validated regions
+* Example: "This lab has been validated in `eastus` and `westus2`. If deploying to another region, verify Azure OpenAI availability first."
 
 ## Validation requirements (must run and capture output)
 
