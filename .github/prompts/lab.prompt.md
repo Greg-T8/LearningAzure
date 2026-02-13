@@ -5,7 +5,7 @@ description: Creates a hands-on lab from an exam question scenario using Terrafo
 
 # Hands-on Lab Generator
 
-Create a working, validated hands-on lab from an exam-question scenario using the **most appropriate deployment method**, strictly compliant with `GOVERNANCE.md` (workspace root). Treat `GOVERNANCE.md` as the single source of truth for naming, tagging, locations, versions, structure, and deployment standards.
+Create a working, validated hands-on lab from an exam-question scenario using the **most appropriate deployment method**, strictly compliant with `Governance-Lab.md` (workspace root). Treat `Governance-Lab.md` as the single source of truth for naming, tagging, locations, versions, structure, and deployment standards.
 
 ## Deployment method evaluation
 
@@ -84,7 +84,7 @@ Do not assume or auto-select between Terraform and Bicep—always prompt for use
 
    * `<EXAM>` (e.g., `AZ-104`)
    * `<exam-prefix>` lowercase (e.g., `az104`)
-3. Confirm exam support constraints by checking `GOVERNANCE.md` (if it limits supported exams/domains).
+3. Confirm exam support constraints by checking `Governance-Lab.md` (if it limits supported exams/domains).
 
 ## Cost guardrails (default to cheapest viable)
 
@@ -157,7 +157,7 @@ Include a header block at the top of all **code files** (Terraform `.tf`, Bicep 
 
 ## Governance compliance
 
-* Follow `GOVERNANCE.md` for:
+* Follow `Governance-Lab.md` for:
 
   * Resource group naming
   * Resource naming prefixes
@@ -251,7 +251,7 @@ function Confirm-LabSubscription {
 3. File List (paths)
 4. Validation Results (command output)
 5. README Compliance confirmation (all required sections present in correct order)
-6. Governance Compliance confirmation (explicitly state you followed GOVERNANCE.md)
+6. Governance Compliance confirmation (explicitly state you followed Governance-Lab.md)
 
 ## Invocation examples
 
