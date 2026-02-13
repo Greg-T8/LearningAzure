@@ -95,15 +95,21 @@ cd AZ-104/hands-on-labs/compute/lab-app-service-plan-quotas/bicep
    - The Shared D1 tier increases CPU quota to **240 minutes per day** (4 hours)
    - Note: Still insufficient for 8-hour requirement at full CPU utilization
 
+    <img src='.img/2026-02-13-04-41-26.png' width=500>
+
 4. **Scale Up to Basic B1:** Select the **Basic B1** tier and apply:
    - Verify: `az appservice plan show --name asp-quota-lab --resource-group az104-compute-app-service-plan-quotas-bicep --query "sku"`
    - The Basic tier removes the daily CPU quota restriction — the app can run continuously
    - Compare pricing vs. tier features in the **Scale up** blade
 
+    <img src='.img/2026-02-13-04-42-44.png' width=500>
+
 5. **Compare Tier Features:** While on the Scale up blade, review the feature comparison table across tiers:
    - Free/Shared: Daily CPU quotas, no custom domains (Free), no SSL (Free)
    - Basic: No CPU quotas, custom domains, manual scaling
    - Standard+: Autoscale, deployment slots, VNet integration
+
+<img src='.img/2026-02-13-04-42-06.png' width=700>
 
 ## Cleanup
 
