@@ -142,4 +142,6 @@ The Premium V3 tier is the correct answer because it is the most cost-effective 
 
 ## Related Labs
 
-*(No related labs currently available)*
+▶ Related Lab: [lab-app-service-plan-quotas](../lab-app-service-plan-quotas/README.md) - Understand CPU quota limitations of Free and Shared tiers
+
+▶ Related Lab: [lab-app-service-republication](../lab-app-service-republication/README.md) - Use deployment slots which require Standard tier or above

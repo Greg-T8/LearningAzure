@@ -6,12 +6,12 @@ This page catalogs hands-on labs built from practice exam questions. Each lab us
 
 ## 📈 Lab Statistics
 
-- **Total Labs**: 6
+- **Total Labs**: 9
 - **Storage**: 4
-- **Compute**: 1
+- **Compute**: 3
 - **Monitoring**: 1
 - **Identity & Governance**: 0
-- **Networking**: 0
+- **Networking**: 1
 
 ---
 
@@ -26,11 +26,17 @@ This page catalogs hands-on labs built from practice exam questions. Each lab us
 
 ### Compute
 
-- **[App Service Pricing Tiers](compute/lab-app-service-tiers/README.md)** - Test App Service pricing tier limitations and upgrade paths for runtime requirements
+- **[App Service Plan CPU Quotas](compute/lab-app-service-plan-quotas/README.md)** - Understand CPU quota limitations of Free and Shared tiers and learn why Basic B1 is the minimum tier that removes daily CPU quotas
+- **[App Service Plan Tiers](compute/lab-app-service-plan-tiers/README.md)** - Explore App Service pricing tier capabilities, scaling limits, and choose the right tier for specific requirements
+- **[App Service Republication with Deployment Slots](compute/lab-app-service-republication/README.md)** - Use deployment slots to enable test users to review the web app before it reaches production
 
 ### Monitoring
 
 - **[Azure Monitor Alert Notification Rate Limits](monitoring/lab-alert-notification-rate-limits/README.md)** - Understand notification rate limits for email, SMS, and voice alerts in Azure Monitor action groups
+
+### Networking
+
+- **[Configure Standard Load Balancer Outbound Traffic and IP Allocation](networking/lab-slb-outbound-traffic/README.md)** - Learn how outbound traffic and IP allocation work with Azure Standard Load Balancers including TCP/UDP protocol rules
 
 ---
 

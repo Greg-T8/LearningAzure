@@ -6,9 +6,10 @@ This page catalogs hands-on labs built from practice exam questions. Each lab us
 
 ## 📈 Lab Statistics
 
-- **Total Labs**: 2
+- **Total Labs**: 3
 - **Generative AI**: 1
 - **Agentic**: 0
+- **AI Services**: 1
 - **Computer Vision**: 0
 - **Natural Language Processing**: 0
 - **Knowledge Mining**: 1
@@ -20,6 +21,10 @@ This page catalogs hands-on labs built from practice exam questions. Each lab us
 ### Generative AI
 
 - **[DALL-E Image Generation with Azure OpenAI](generative-ai/lab-dalle-image-gen/README.md)** - Test DALL-E 3 image generation capabilities, model parameters, and Azure AI Foundry portal features
+
+### AI Services
+
+- **[Azure AI Content Safety - Text and Image Moderation](ai-services/lab-content-safety/README.md)** - AI-powered text and image content moderation for sexual content, violence, hate, and self-harm detection
 
 ### Knowledge Mining
 
