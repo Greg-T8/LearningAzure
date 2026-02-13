@@ -121,6 +121,10 @@ cd AZ-104/hands-on-labs/compute/lab-app-service-republication/scripts
 
 <img src='.img/2026-02-13-03-11-03.png' width=700>
 
+<img src='.img/2026-02-13-03-12-22.png' width=700>
+
+<img src='.img/2026-02-13-03-14-22.png' width=900>
+
 ## Scenario Analysis
 
 **Correct Answer: New-AzResourceGroup → New-AzAppServicePlan → New-AzWebAppSlot → Publish-AzWebApp**
