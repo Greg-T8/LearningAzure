@@ -1271,6 +1271,8 @@ For each of the following statements, select Yes if the statement is true. Other
 
 </details>
 
+▶ **Related Lab:** [lab-slb-outbound-traffic](../hands-on-labs/networking/lab-slb-outbound-traffic/README.md)
+
 ---
 
 #### Diagnose Internal Load Balancer Hairpin Traffic Failure
