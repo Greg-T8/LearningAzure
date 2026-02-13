@@ -176,11 +176,37 @@ Which two features should you identify? Each correct answer presents a complete 
 
 </details>
 
-<details open>
+<details>
 <summary>💡 Click to expand explanation</summary>
+
+**Why the selected answers are correct**
+
+Azure AI Content Safety Studio currently supports:
+
+* **Moderating image content**
+* **Moderating text content**
+
+These are core capabilities of Azure AI Content Safety. The studio allows you to test and configure filters for harmful categories (such as violence, hate, sexual content, and self-harm) across both text and images. You can adjust sensitivity thresholds and export configurations for implementation in your applications. This aligns directly with improving user-generated content management.
+
+**Why the other options are incorrect**
+
+* **Hunting for security threats with search-and-query tools**
+  This is a capability of Azure Sentinel (SIEM/SOAR), not Azure AI Content Safety. Content Safety focuses on moderation, not threat hunting or security analytics.
+
+* **Creating trails and highlighting reels**
+  This is a feature of Azure AI Video Indexer, which analyzes video content and can generate highlights. It is unrelated to content moderation in Content Safety Studio.
+
+* **Search for exact moments in videos**
+  This is also a Video Indexer capability. Azure AI Content Safety does not analyze video timelines or enable moment-level video search.
+
+**Key takeaway**
+
+Azure AI Content Safety Studio is designed specifically for **text and image moderation**. Video analysis, highlight generation, and security threat hunting belong to other Azure services.
 
 </details>
 
 ▶ Related Lab: [lab-content-safety](../hands-on-labs/ai-services/lab-content-safety/README.md)
 
 ---
+
+<img src='.img/2026-02-13-06-02-43.png' width=700>
