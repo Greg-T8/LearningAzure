@@ -67,7 +67,6 @@ resource projectCapabilityHost 'Microsoft.CognitiveServices/accounts/projects/ca
   name: 'caphost-project'
   parent: project
   properties: {
-    capabilityHostKind: 'Agents'
     storageConnections: [storageConnectionName]
     threadStorageConnections: [cosmosDBConnectionName]
     vectorStoreConnections: [aiSearchConnectionName]

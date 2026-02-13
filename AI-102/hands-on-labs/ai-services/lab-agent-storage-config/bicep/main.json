@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.40.2.10011",
-      "templateHash": "3233589990695154060"
+      "templateHash": "15803390943513457683"
     }
   },
   "parameters": {
@@ -817,7 +817,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.40.2.10011",
-              "templateHash": "16144833259724613101"
+              "templateHash": "13994093610620948959"
             }
           },
           "parameters": {
@@ -866,7 +866,6 @@
               "apiVersion": "2025-04-01-preview",
               "name": "[format('{0}/{1}/{2}', parameters('aiAccountName'), parameters('projectName'), 'caphost-project')]",
               "properties": {
-                "capabilityHostKind": "Agents",
                 "storageConnections": [
                   "[parameters('storageConnectionName')]"
                 ],
