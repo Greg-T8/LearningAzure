@@ -84,7 +84,7 @@ Navigate to [Content Safety Studio](https://contentsafety.cognitive.azure.com) a
 
 1. In Content Safety Studio, select **Moderate text content**
 
-<img src='.img/2026-02-13-05-31-58.png' width=900>
+<img src='.img/2026-02-13-05-31-58.png' width=700>
 
 2. Enter sample text (e.g., a social media comment with potentially harmful content)
 3. Click **Run test**
@@ -92,7 +92,7 @@ Navigate to [Content Safety Studio](https://contentsafety.cognitive.azure.com) a
 5. Adjust **Configure filters** to set allowed/prohibited severity levels
 6. Use **View Code** to export the API call
 
-<img src='.img/2026-02-13-05-34-11.png' width=700>
+<img src='.img/2026-02-13-05-48-24.png' width=700>
 
 ### 3. Test Image Moderation
 
