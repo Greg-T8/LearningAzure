@@ -41,8 +41,9 @@ resource "azurerm_cognitive_account" "content_safety" {
   location            = azurerm_resource_group.lab.location
   resource_group_name = azurerm_resource_group.lab.name
 
-  kind     = "ContentSafety"
-  sku_name = var.content_safety_sku
+  kind                  = "ContentSafety"
+  sku_name              = var.content_safety_sku
+  custom_subdomain_name = "cog-content-safety-${random_string.suffix.result}"
 
   # Lab-friendly settings
   public_network_access_enabled = true
