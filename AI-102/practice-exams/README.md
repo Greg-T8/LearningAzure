@@ -210,3 +210,34 @@ Azure AI Content Safety Studio is designed specifically for **text and image mod
 ---
 
 <img src='.img/2026-02-13-06-02-43.png' width=700>
+
+### Azure AI Agent Service File Upload Configuration Issues
+
+You are investigating an issue where user file uploads to an Azure AI Agent Service are failing after implementing a standard agent setup that uses your own storage account resource. You have confirmed that the Azure Storage account exists and has sufficient capacity.
+
+You need to identify the configurations that are causing the upload failure.
+
+Which two configurations should you identify? Each correct answer presents a complete solution.
+
+| Statement | Yes | No |
+|----------|-----|----|
+| The Azure AI Search resource assigned to the project's capability host has an incorrect connection string to Azure Storage. | ☐ | ☐ |
+| The project-managed identity is assigned the Storage Account Contributor role at the subscription level instead of the storage account. | ☐ | ☐ |
+| The Azure Storage account connected to the project's capability host is missing a manually created container named uploaded-files. | ☐ | ☐ |
+| The project-managed identity lacks the Storage Blob Data Owner role on the <workspaceid>-agents-blobstore container. | ☐ | ☐ |
+| The project's capability host was set with an incorrect connection string to the Azure Storage resource. | ☐ | ☐ |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src=".img/2026-02-13-06-02-43.png" width=700>
+
+</details>
+
+<details open>
+<summary>💡 Click to expand explanation</summary>
+
+</details>
+
+▶ Related Lab: []()
+
