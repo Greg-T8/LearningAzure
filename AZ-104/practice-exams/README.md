@@ -1074,6 +1074,8 @@ To meet "run 8 hours each day," you need a plan where you **don't get stopped du
 
 </details>
 
+▶ **Related Lab:** [lab-app-service-plan-quotas](../hands-on-labs/compute/lab-app-service-plan-quotas/README.md)
+
 ---
 
 #### Resolve Azure App Service Pricing Tier for Runtime Requirements
