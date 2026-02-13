@@ -115,6 +115,8 @@ cd AZ-104/hands-on-labs/compute/lab-app-service-republication/scripts
 .\cleanup.ps1
 ```
 
+<img src='.img/2026-02-13-03-07-10.png' width=700>
+
 ## Scenario Analysis
 
 **Correct Answer: New-AzResourceGroup → New-AzAppServicePlan → New-AzWebAppSlot → Publish-AzWebApp**
