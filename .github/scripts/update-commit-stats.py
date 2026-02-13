@@ -3,6 +3,7 @@
 Update commit statistics in README.md
 Tracks hours of activity per certification for the last 7 days
 (Hours = time between first and last commit of the day)
+When certification activity windows overlap, overlap time is split evenly.
 """
 
 import subprocess
@@ -10,6 +11,9 @@ import re
 from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 from collections import defaultdict
+
+
+CERTIFICATIONS = ('AI-102', 'AZ-104', 'AI-900')
 
 def get_commits_by_path(days=7, since_date=None):
     """Get commit timestamps by path for the last N days or since a specific date"""
@@ -58,14 +62,17 @@ def get_commits_by_path(days=7, since_date=None):
 
     return commits_by_date_cert
 
-def calculate_hours(timestamps):
-    """Calculate hours between first and last commit
-    For weekdays (Mon-Fri), caps the end time at 8:00 AM Central"""
+def get_activity_interval(timestamps):
+    """Get activity interval (earliest, latest) for a set of timestamps.
+
+    For weekdays (Mon-Fri), caps the end time at 8:00 AM local date time.
+    Returns None if the interval cannot produce positive duration.
+    """
     if not timestamps or len(timestamps) == 0:
-        return 0.0
+        return None
 
     if len(timestamps) == 1:
-        return 0.0  # Single commit = 0 hours of activity
+        return None  # Single commit = 0 hours of activity
 
     # Parse timestamps
     dt_objects = [datetime.strptime(ts, '%Y-%m-%d %H:%M:%S') for ts in timestamps]
@@ -80,11 +87,70 @@ def calculate_hours(timestamps):
         if latest > work_start:
             latest = work_start
 
-    # Calculate difference in hours
+    if latest <= earliest:
+        return None
+
+    return earliest, latest
+
+
+def calculate_hours(timestamps):
+    """Calculate hours between first and last commit after weekday cap."""
+    interval = get_activity_interval(timestamps)
+
+    if interval is None:
+        return 0.0
+
+    earliest, latest = interval
     time_diff = latest - earliest
     hours = time_diff.total_seconds() / 3600
 
     return round(hours, 1)
+
+
+def split_overlapping_hours(date_commits):
+    """Split overlapping activity windows evenly across certifications.
+
+    For each certification, build a daily activity interval from first to last
+    commit (with weekday cap applied). If intervals overlap, overlapping
+    segments are divided equally among all active certifications in that segment.
+    """
+    intervals_by_cert = {}
+
+    for cert in CERTIFICATIONS:
+        timestamps = date_commits.get(cert, [])
+        interval = get_activity_interval(timestamps)
+        if interval is not None:
+            intervals_by_cert[cert] = interval
+
+    if not intervals_by_cert:
+        return {cert: 0.0 for cert in CERTIFICATIONS}
+
+    events = []
+    for cert, (start, end) in intervals_by_cert.items():
+        events.append((start, 'start', cert))
+        events.append((end, 'end', cert))
+
+    events.sort(key=lambda event: (event[0], 0 if event[1] == 'end' else 1))
+
+    allocated_hours = {cert: 0.0 for cert in CERTIFICATIONS}
+    active_certs = set()
+    previous_time = None
+
+    for current_time, event_type, cert in events:
+        if previous_time is not None and current_time > previous_time and active_certs:
+            segment_hours = (current_time - previous_time).total_seconds() / 3600
+            split_hours = segment_hours / len(active_certs)
+            for active_cert in active_certs:
+                allocated_hours[active_cert] += split_hours
+
+        if event_type == 'start':
+            active_certs.add(cert)
+        else:
+            active_certs.discard(cert)
+
+        previous_time = current_time
+
+    return allocated_hours
 
 def get_activity_emoji(hours):
     """Return color-coded emoji based on activity hours"""
@@ -113,13 +179,13 @@ def calculate_running_totals():
         # Get all commits since start date
         commits = get_commits_by_path(since_date=start_date)
 
-        # Calculate total hours across all days
+        # Calculate total hours across all days (overlap-aware)
         total_hours = 0.0
         for date_commits in commits.values():
-            if cert in date_commits:
-                total_hours += calculate_hours(date_commits[cert])
+            day_hours = split_overlapping_hours(date_commits)
+            total_hours += day_hours.get(cert, 0.0)
 
-        running_totals[cert] = total_hours
+        running_totals[cert] = round(total_hours, 1)
 
     return running_totals
 
@@ -142,13 +208,12 @@ def generate_commit_table(commits_by_date_cert, days=7):
     total_ai900 = 0.0
 
     for date in dates:
-        ai102_timestamps = commits_by_date_cert.get(date, {}).get('AI-102', [])
-        az104_timestamps = commits_by_date_cert.get(date, {}).get('AZ-104', [])
-        ai900_timestamps = commits_by_date_cert.get(date, {}).get('AI-900', [])
+        date_commits = commits_by_date_cert.get(date, {})
+        split_hours = split_overlapping_hours(date_commits)
 
-        ai102_hours = calculate_hours(ai102_timestamps)
-        az104_hours = calculate_hours(az104_timestamps)
-        ai900_hours = calculate_hours(ai900_timestamps)
+        ai102_hours = round(split_hours.get('AI-102', 0.0), 1)
+        az104_hours = round(split_hours.get('AZ-104', 0.0), 1)
+        ai900_hours = round(split_hours.get('AI-900', 0.0), 1)
         daily_total = ai102_hours + az104_hours + ai900_hours
 
         total_ai102 += ai102_hours

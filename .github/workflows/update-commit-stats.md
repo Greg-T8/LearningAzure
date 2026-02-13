@@ -20,6 +20,7 @@ Python script that:
 1. Analyzes git commit history for the last 7 days
 2. Groups commits by certification (AI-102, AZ-104, AI-900)
 3. Calculates hours of activity (time between first and last commit per day)
+  - If certification timeframes overlap on the same day, overlap time is split evenly
 4. Calculates running totals since each certification's start date:
    - AI-900: Started 1/14/26
    - AZ-104: Started 1/14/26
@@ -36,6 +37,7 @@ Python script that:
    - Categorizes files by path (AI-102/, AZ-104/, AI-900/)
    - Tracks commit timestamps per day per certification
    - Calculates hours of activity (time between first and last commit of the day)
+  - Splits overlapping certification windows evenly to avoid double-counting concurrent time
    - Also tracks repo-level commits (.github/, README.md) separately
 3. Generates a markdown table with:
    - Date (formatted as "Day, Mon DD")
@@ -95,6 +97,7 @@ This will update your local README.md with current commit statistics.
 ## 📝 Notes
 
 - Activity is measured in hours (time between first and last commit of the day)
+- Overlapping certification timeframes are split evenly across active certifications
 - **Weekdays (Mon-Fri)**: Last commit time is capped at 8:00 AM Central (work start time)
 - **Weekends**: No time cap applied
 - Single commits count as 0h of activity (no time span)
