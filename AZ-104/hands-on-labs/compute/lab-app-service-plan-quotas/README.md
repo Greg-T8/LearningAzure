@@ -75,20 +75,30 @@ cd AZ-104/hands-on-labs/compute/lab-app-service-plan-quotas/bicep
 
 ## Testing the Solution
 
-1. **Verify Deployment:** Run `.\bicep.ps1 output` to retrieve the web app URL, then open it in a browser to confirm the app is running
+1. **Verify Deployment:** Run `.\bicep.ps1 output` to retrieve the web app URL, then open it in a browser to confirm the app is running.
 
-2. **Check CPU Quota (Free F1):** In the Azure Portal, navigate to the App Service Plan → **Quotas** blade and observe:
-   - CPU Time quota: **60 minutes per day**
-   - Memory quota and other limits
+<img src='.img/2026-02-13-03-41-50.png' width=700>
 
-3. **Scale Up to Shared D1:** Navigate to the App Service Plan → **Scale up (App Service plan)** blade:
+2. **Understand CPU Quota Limits (Free F1):** Use Azure CLI to verify the tier's quota limits:
+
+   ```powershell
+   az appservice plan show --name asp-quota-lab --resource-group az104-compute-app-service-plan-quotas-bicep --query "sku"
+   ```
+
+   The Free F1 tier has a **60 CPU minutes/day** limit (documented in [Azure App Service limits](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits#app-service-limits))
+
+    <img src='.img/2026-02-13-04-35-05.png' width=500>
+
+3. **Scale Up to Shared D1:** In the Azure Portal, navigate to the App Service Plan → **Scale up (App Service plan)** blade:
    - Select the **Shared D1** tier and apply
-   - Return to the **Quotas** blade and observe the new CPU Time quota: **240 minutes per day**
-   - Note: 240 CPU minutes = 4 hours — still insufficient for an 8-hour requirement at full CPU utilization
+   - Verify with: `az appservice plan show --name asp-quota-lab --resource-group az104-compute-app-service-plan-quotas-bicep --query "sku"`
+   - The Shared D1 tier increases CPU quota to **240 minutes per day** (4 hours)
+   - Note: Still insufficient for 8-hour requirement at full CPU utilization
 
 4. **Scale Up to Basic B1:** Select the **Basic B1** tier and apply:
-   - Return to the **Quotas** blade and observe that the daily CPU quota restriction is removed
-   - The app can now run continuously without a CPU time limit
+   - Verify: `az appservice plan show --name asp-quota-lab --resource-group az104-compute-app-service-plan-quotas-bicep --query "sku"`
+   - The Basic tier removes the daily CPU quota restriction — the app can run continuously
+   - Compare pricing vs. tier features in the **Scale up** blade
 
 5. **Compare Tier Features:** While on the Scale up blade, review the feature comparison table across tiers:
    - Free/Shared: Daily CPU quotas, no custom domains (Free), no SSL (Free)
