@@ -49,6 +49,30 @@ All resources **must** include these tags:
 
 ---
 
+## Exam-Specific Domain Guidelines
+
+### AI-102 Domains
+
+| Domain | Common Topics | Key Resources |
+|--------|---------------|---------------|
+| `generative-ai` | Azure OpenAI, GPT models, DALL-E, embeddings, prompt engineering | `oai`, `deploy`, `st` (for outputs) |
+| `computer-vision` | Computer Vision, Custom Vision, Face API, Form Recognizer | `cv`, `cvtr`, `cvpr`, `doc` |
+| `nlp` | Language Service, Translator, sentiment analysis, entity recognition | `lang`, `trans` |
+| `knowledge-mining` | AI Search, indexers, skillsets, knowledge stores | `srch`, `st` (for data sources) |
+| `ai-services` | Multi-service accounts, Cognitive Services configuration | `cog` |
+
+### AZ-104 Domains
+
+| Domain | Common Topics | Key Resources |
+|--------|---------------|---------------|
+| `identity` | RBAC, Azure AD, managed identities, Key Vault | Resource Groups, RBAC, `kv` |
+| `networking` | VNets, subnets, NSGs, load balancers, peering, Bastion | `vnet`, `snet`, `nsg`, `lb`, `pip`, `bas` |
+| `storage` | Storage accounts, blob lifecycle, file shares, disks | `st`, blob containers, file shares, `disk` |
+| `compute` | VMs, availability sets, VM scale sets, App Services | `vm`, `avset`, `vmss`, `app` |
+| `monitoring` | Log Analytics, backup, alerts, diagnostics | `law`, `rsv`, action groups |
+
+---
+
 ## Naming Conventions
 
 ### Resource Group Naming
@@ -209,6 +233,375 @@ All resources **must** include these tags:
 
 ---
 
+## Soft-Delete Resource Management
+
+### Overview
+
+Several Azure resource types use soft-delete protection, which prevents immediate recreation with the same name and can block resource group deletion. For lab environments with frequent destroy/recreate cycles, you must purge soft-deleted resources.
+
+### Resources Requiring Purge Scripts
+
+| Resource Type | Soft-Delete Period | Purge Required | Impact on Labs |
+|---------------|-------------------|----------------|----------------|
+| **Cognitive Services** | 48 hours | ✅ Yes | Name collision on redeploy |
+| **Key Vault** | 7-90 days | ✅ Yes | Name collision on redeploy |
+| **API Management** | 48 hours | ✅ Yes | Name collision on redeploy |
+| **Recovery Services Vault** | 14 days | ✅ Yes | Blocks resource group deletion |
+| **Application Insights** | 14 days | ⚠️ No manual purge | Must wait or rename |
+| **Log Analytics Workspace** | 14 days | ⚠️ No manual purge | Must wait or rename |
+
+### Integration with Deployment Scripts
+
+**Best Practice**: Integrate purge logic into your destroy workflow (e.g., in `bicep.ps1` destroy action or Terraform wrapper scripts).
+
+**Pattern**:
+
+1. Query resources before deletion
+2. Execute deletion/destroy
+3. If successful, purge soft-deleted items
+4. Handle purge failures gracefully
+
+### Purge Commands by Resource Type
+
+#### Cognitive Services (AI Services, OpenAI, etc.)
+
+**Azure CLI**:
+
+```powershell
+# Purge a single account
+az cognitiveservices account purge `
+    --name <account-name> `
+    --resource-group <rg-name> `
+    --location <location>
+
+# List all soft-deleted accounts
+az cognitiveservices account list-deleted
+
+# Purge all deleted accounts in a subscription (scripting)
+$deletedAccounts = az cognitiveservices account list-deleted --query "[].{name:name, location:location, resourceGroup:resourceGroup}" -o json | ConvertFrom-Json
+
+foreach ($account in $deletedAccounts) {
+    az cognitiveservices account purge `
+        --name $account.name `
+        --resource-group $account.resourceGroup `
+        --location $account.location
+}
+```
+
+**PowerShell (Az module)**:
+
+```powershell
+# Purge a single account
+Remove-AzCognitiveServicesAccountPurge `
+    -Name <account-name> `
+    -ResourceGroupName <rg-name> `
+    -Location <location>
+
+# List soft-deleted accounts
+Get-AzCognitiveServicesDeletedAccount
+
+# Purge all deleted accounts
+Get-AzCognitiveServicesDeletedAccount | ForEach-Object {
+    Remove-AzCognitiveServicesAccountPurge `
+        -Name $_.AccountName `
+        -ResourceGroupName $_.ResourceGroupName `
+        -Location $_.Location
+}
+```
+
+#### Key Vault
+
+**Azure CLI**:
+
+```powershell
+# Purge a single vault
+az keyvault purge --name <vault-name>
+
+# List all soft-deleted vaults
+az keyvault list-deleted
+
+# Purge all deleted vaults in a subscription
+$deletedVaults = az keyvault list-deleted --query "[].{name:name}" -o json | ConvertFrom-Json
+
+foreach ($vault in $deletedVaults) {
+    az keyvault purge --name $vault.name
+}
+```
+
+**PowerShell (Az module)**:
+
+```powershell
+# Purge a single vault
+Remove-AzKeyVault -VaultName <vault-name> -InRemovedState -Location <location>
+
+# List soft-deleted vaults
+Get-AzKeyVault -InRemovedState
+
+# Purge all deleted vaults
+Get-AzKeyVault -InRemovedState | ForEach-Object {
+    Remove-AzKeyVault -VaultName $_.VaultName -InRemovedState -Location $_.Location -Force
+}
+```
+
+#### API Management
+
+**Azure CLI**:
+
+```powershell
+# Purge a single service
+az apim deletedservice purge `
+    --service-name <apim-name> `
+    --location <location>
+
+# List all soft-deleted services
+az apim deletedservice list
+
+# Purge all deleted services
+$deletedApims = az apim deletedservice list --query "[].{name:name, location:location}" -o json | ConvertFrom-Json
+
+foreach ($apim in $deletedApims) {
+    az apim deletedservice purge `
+        --service-name $apim.name `
+        --location $apim.location
+}
+```
+
+**PowerShell (Az module)**:
+
+```powershell
+# Purge a single service
+Remove-AzApiManagement -Name <apim-name> -ResourceGroupName <rg-name> -Location <location> -DeletedService
+
+# Note: Az.ApiManagement module has limited soft-delete support; prefer Azure CLI
+```
+
+#### Recovery Services Vault
+
+**Important**: Recovery vaults cannot be deleted until all backup data (including soft-deleted) is removed.
+
+**Disable soft-delete** (before or after vault creation):
+
+```powershell
+# Azure CLI
+az backup vault backup-properties set `
+    --name <vault-name> `
+    --resource-group <rg-name> `
+    --soft-delete-feature-state Disable
+
+# PowerShell
+Set-AzRecoveryServicesVaultProperty `
+    -VaultId <vault-id> `
+    -SoftDeleteFeatureState Disable
+```
+
+**Delete all backup items**:
+
+```powershell
+# This is complex; usually need to:
+# 1. Stop protection with delete data for each backup item
+# 2. Delete backup items
+# 3. Then delete the vault
+
+# For lab environments, disable soft-delete BEFORE creating backups
+```
+
+**Lab Best Practice**: Configure vaults with soft-delete disabled from the start:
+
+**Terraform**:
+
+```hcl
+resource "azurerm_recovery_services_vault" "vault" {
+  name                = "rsv-backup"
+  location            = azurerm_resource_group.lab.location
+  resource_group_name = azurerm_resource_group.lab.name
+  sku                 = "Standard"
+  
+  soft_delete_enabled = false  # Disable for lab environments
+}
+```
+
+**Bicep**:
+
+```bicep
+resource vault 'Microsoft.RecoveryServices/vaults@2023-01-01' = {
+  name: 'rsv-backup'
+  location: location
+  sku: {
+    name: 'Standard'
+  }
+  properties: {
+    securitySettings: {
+      softDeleteSettings: {
+        softDeleteState: 'Disabled'  // Disable for lab environments
+      }
+    }
+  }
+}
+```
+
+#### Application Insights & Log Analytics Workspace
+
+**No manual purge available**. These resources:
+
+- Cannot be purged during the 14-day retention period
+- Must either wait for automatic expiration or use different names on redeployment
+
+**Lab Workaround**:
+
+```powershell
+# Use unique suffixes for each deployment
+$suffix = Get-Random -Minimum 1000 -Maximum 9999
+$workspaceName = "law-central-$suffix"
+$appInsightsName = "appi-webapp-$suffix"
+```
+
+Or use date-based naming:
+
+```powershell
+$dateSuffix = Get-Date -Format "MMdd"
+$workspaceName = "law-central-$dateSuffix"
+```
+
+### Example: Integrated Bicep Destroy Script
+
+The `bicep.ps1` wrapper script demonstrates the proper pattern:
+
+```powershell
+function Invoke-DestroyAction {
+    # 1. Capture resources before destroy
+    $cogAccounts = Get-CognitiveServicesAccounts -StackName $script:StackName
+    
+    # 2. Execute destroy
+    Write-Host "Destroying deployment stack..." -ForegroundColor Cyan
+    az stack sub delete --name $script:StackName --action-on-unmanage deleteAll --yes
+    $destroyExitCode = $LASTEXITCODE
+    
+    # 3. Purge soft-deleted resources if destroy succeeded
+    if ($destroyExitCode -eq 0 -and $cogAccounts.Count -gt 0) {
+        Invoke-PurgeCognitiveServices -Accounts $cogAccounts
+    }
+    
+    exit $destroyExitCode
+}
+
+function Invoke-PurgeCognitiveServices {
+    param([array]$Accounts)
+    
+    Write-Host "Purging soft-deleted Cognitive Services accounts..." -ForegroundColor Cyan
+    
+    foreach ($account in $Accounts) {
+        az cognitiveservices account purge `
+            --name $account.name `
+            --resource-group $account.resourceGroup `
+            --location $account.location 2>$null
+        
+        if ($LASTEXITCODE -eq 0) {
+            Write-Host "✅ Purged: $($account.name)" -ForegroundColor Green
+        } else {
+            Write-Host "⚠️ Could not purge: $($account.name)" -ForegroundColor Yellow
+        }
+    }
+}
+```
+
+### Example: Terraform Wrapper Script
+
+Create a `deploy.ps1` wrapper for Terraform:
+
+```powershell
+# deploy.ps1
+param(
+    [Parameter(Mandatory = $true)]
+    [ValidateSet('plan', 'apply', 'destroy')]
+    [string]$Action
+)
+
+function Invoke-TerraformDestroy {
+    # Capture resource names before destroy
+    $cogAccounts = terraform output -json cognitive_accounts | ConvertFrom-Json
+    $keyVaults = terraform output -json key_vaults | ConvertFrom-Json
+    
+    # Execute terraform destroy
+    terraform destroy -auto-approve
+    
+    if ($LASTEXITCODE -eq 0) {
+        # Purge Cognitive Services
+        foreach ($account in $cogAccounts) {
+            az cognitiveservices account purge `
+                --name $account.name `
+                --resource-group $account.resource_group `
+                --location $account.location
+        }
+        
+        # Purge Key Vaults
+        foreach ($vault in $keyVaults) {
+            az keyvault purge --name $vault.name
+        }
+    }
+}
+
+switch ($Action) {
+    'plan' { terraform plan }
+    'apply' { terraform apply -auto-approve }
+    'destroy' { Invoke-TerraformDestroy }
+}
+```
+
+**Required Terraform outputs** for purge tracking:
+
+```hcl
+# outputs.tf
+output "cognitive_accounts" {
+  description = "Cognitive Services accounts for purge tracking"
+  value = [
+    for account in azurerm_cognitive_account.all : {
+      name           = account.name
+      resource_group = account.resource_group_name
+      location       = account.location
+    }
+  ]
+}
+
+output "key_vaults" {
+  description = "Key Vaults for purge tracking"
+  value = [
+    for vault in azurerm_key_vault.all : {
+      name     = vault.name
+      location = vault.location
+    }
+  ]
+}
+```
+
+### Purge Verification
+
+After purging, verify resources are fully removed:
+
+```powershell
+# Check Cognitive Services
+az cognitiveservices account list-deleted
+
+# Check Key Vaults
+az keyvault list-deleted
+
+# Check API Management
+az apim deletedservice list
+
+# Should return empty arrays if purge succeeded
+```
+
+### Best Practices Summary
+
+1. **Always integrate purge logic** into destroy workflows for resources with soft-delete
+2. **Capture resource metadata before deletion** (names, locations, resource groups)
+3. **Handle purge failures gracefully** - warn but don't fail the entire operation
+4. **Verify purge completion** before marking destroy as successful
+5. **For Recovery Vaults**: Disable soft-delete during creation in lab environments
+6. **For Application Insights/Log Analytics**: Use unique naming patterns to avoid conflicts
+7. **Document purge requirements** in lab README files
+
+---
+
 ## Code Style Standards
 
 ### Header Comments
@@ -253,197 +646,6 @@ All code files (Terraform, Bicep, PowerShell) **must** include a header comment 
 - **Terraform**: Use snake_case for resource names, variables, locals
 - **Bicep**: Use camelCase for parameters, variables; kebab-case for symbolic resource names
 - **Both**: Resource name values must follow Azure naming prefixes (see Resource Naming section)
-
----
-
-## Azure Resource Configuration Best Practices
-
-These standards prevent common deployment errors and ensure reliable infrastructure code.
-
-### Load Balancers with Outbound Rules
-
-**CRITICAL**: When configuring Standard Load Balancers with BOTH load balancing rules AND outbound rules that share the same frontend IP configuration:
-
-- **Always set `disableOutboundSnat: true`** (Bicep) or `disable_outbound_snat = true` (Terraform) on the load balancing rule
-- This prevents SNAT port allocation conflicts between the two rule types
-- Azure requires this when a frontend IP is referenced by both rule types
-
-**Error if omitted**: `LoadBalancingRuleMustDisableSNATSinceSameFrontendIPConfigurationIsReferencedByOutboundRule`
-
-### Network Interfaces and Backend Pools
-
-**CRITICAL**: A VM's Network Interface (NIC) with an instance-level public IP address **cannot** be added to a Load Balancer's outbound rule backend pool.
-
-- **Problem**: Azure does not allow NICs with direct public IPs in outbound rule backend pools
-- **Solution**: Use separate backend pools for inbound and outbound rules when VMs have instance public IPs
-- **Alternative**: Remove instance public IPs from VMs if they will use Load Balancer outbound rules for internet access
-- **Common scenario**: VM with Bastion access (no public IP needed) can safely use outbound rule backend pool
-
-### Network Security Groups
-
-- Ensure required ports are open for service functionality:
-  - Port 80 for HTTP
-  - Port 443 for HTTPS
-  - Port 22 for SSH (Linux)
-  - Port 3389 for RDP (Windows)
-- Document any custom ports in README
-- Use specific source IP ranges when possible (avoid 0.0.0.0/0 except for public-facing services)
-
-### Public IP SKU Compatibility
-
-- **Standard Load Balancers** require **Standard SKU** public IPs (not Basic)
-- **Basic Load Balancers** can use **Basic SKU** public IPs
-- Standard SKU IPs support availability zones; Basic SKU does not
-
-### Storage Containers and File Shares
-
-**CRITICAL**: `azurerm_storage_container` and `azurerm_storage_share` resources require `storage_account_id` (not `storage_account_name`). The `storage_account_name` argument is deprecated and will be removed in AzureRM provider v5.0.
-
-- **Always use `storage_account_id`** referencing the storage account's `.id` attribute
-- **Do not use `storage_account_name`** referencing the storage account's `.name` attribute
-
-**Correct:**
-
-```hcl
-resource "azurerm_storage_container" "example" {
-  name                  = "documents"
-  storage_account_id    = azurerm_storage_account.data.id
-  container_access_type = "private"
-}
-
-resource "azurerm_storage_share" "example" {
-  name                 = "fileshare"
-  storage_account_id   = azurerm_storage_account.data.id
-  quota                = 5
-}
-```
-
-**Incorrect (deprecated):**
-
-```hcl
-resource "azurerm_storage_container" "example" {
-  name                  = "documents"
-  storage_account_name  = azurerm_storage_account.data.name  # DEPRECATED
-  container_access_type = "private"
-}
-```
-
-### Azure AI Services Configuration
-
-#### Cognitive Services / OpenAI Accounts
-
-- **Public network access**: Enable for lab environments (`public_network_access_enabled = true`)
-- **Private endpoints**: Optional for advanced scenarios; adds complexity
-- **Authentication**:
-  - **Key-based auth**: Default for labs (easiest to test)
-  - **Managed identity**: Better for production patterns; requires RBAC setup
-- **SKU selection**: Use S0 for OpenAI (no free tier); F0/S0 for other Cognitive Services
-
-#### Model Deployments (Azure OpenAI)
-
-- **Model name and version**: Region-dependent; validate availability before deployment
-  - Common models: `gpt-4`, `gpt-4-turbo`, `gpt-35-turbo`, `dall-e-3`, `text-embedding-ada-002`
-  - Versions vary: `0613`, `1.0`, `2024-02-15-preview`, etc.
-- **Deployment name**: Descriptive, matches model purpose (e.g., `deploy-gpt4`, `img-dalle`)
-- **Scale type**: `Standard` for most labs; `Provisioned` for high-throughput scenarios
-- **Capacity**: Start minimal; Azure OpenAI uses token-based throttling
-- **API version**: Pin in client code/scripts (e.g., `2024-10-21`); changes frequently
-
-#### Storage for AI Outputs
-
-- Use dedicated storage account for AI-generated content (images, documents, etc.)
-- Create blob container with private access
-- Consider lifecycle management for cleanup of generated outputs
-
-#### Managed Identity RBAC for AI Agent Service
-
-**CRITICAL**: When deploying Azure AI Agent Service (standard setup with BYOS), the project's System-Assigned Managed Identity requires **both control plane and data plane permissions**. Missing control plane roles will cause capability host creation to fail with `CapabilityHostOperationFailed` or authorization errors.
-
-| Service | Data Plane Role | Control Plane Role (Azure RBAC) | Why Control Plane Is Needed |
-|---------|-----------------|--------------------------------|-----------------------------|
-| Cosmos DB | Cosmos DB SQL Data Contributor (`sqlRoleAssignments`) | **Cosmos DB Operator** (`230815da-be43-4aae-9cb4-875f7bd000aa`) | Capability host must create the `enterprise_memory` database via ARM APIs |
-| Storage | Storage Blob Data Contributor + Storage Blob Data Owner (with ABAC condition) | (none required) | Data plane sufficient for blob operations |
-| AI Search | Search Index Data Contributor | Search Service Contributor | Both planes needed for index management |
-
-**Key points:**
-
-- **Data plane** roles allow read/write of data within the service (documents, blobs, indexes)
-- **Control plane** roles allow reading metadata, creating databases, and managing service configuration via ARM
-- The Cosmos DB Operator role is **not documented** in official AI Agent Service setup guides but is **required** — without it, the capability host cannot verify or create the Cosmos DB database and the deployment fails
-- The Storage Blob Data Owner role **must** include an ABAC condition restricting access to containers matching `<workspaceId>*-azureml-agent` — this is the container pattern used by the agent service for file uploads
-
-### Subnet Delegation
-
-Some services require subnet delegation:
-
-- Azure Container Instances: `Microsoft.ContainerInstance/containerGroups`
-- Azure Databricks: `Microsoft.Databricks/workspaces`
-- Azure NetApp Files: `Microsoft.NetApp/volumes`
-- Document delegation requirements in README
-
-### Resource Dependencies
-
-- Prefer **implicit dependencies** (resource references) over explicit `depends_on`/`dependsOn`
-- Use **explicit dependencies** only when:
-  - Relationship is not captured by resource references
-  - Timing/sequencing is critical (e.g., role assignments after resource creation)
-- Document why explicit dependencies are needed with comments
-
-### Preview API Resources and Failed Provisioning States
-
-**CRITICAL**: Resources deployed using preview API versions (e.g., `2025-04-01-preview`) can enter an unrecoverable `provisioningState: "Failed"` state. When this happens, subsequent deployment retries will fail with generic errors like `"Update operation failed"` because Azure cannot update a resource stuck in a failed state.
-
-**Symptoms:**
-
-- Deployment fails, retry produces the same error even after fixing the root cause
-- `az resource list` shows the resource with `provisioningState: "Failed"`
-- Deployment stack reports `CapabilityHostOperationFailed` or similar with no actionable detail
-
-**Resolution pattern:**
-
-1. Identify the failed resource:
-
-   ```powershell
-   az resource list --resource-group <rg> \
-     --query "[?properties.provisioningState=='Failed'].{name:name, type:type}" -o table
-   ```
-
-2. Delete the stuck resource via REST API (deployment stacks may not auto-clean these):
-
-   ```powershell
-   az rest --method DELETE \
-     --url "https://management.azure.com/<resource-id>?api-version=<preview-version>"
-   ```
-
-3. Wait 30–60 seconds for backend cleanup and RBAC propagation
-4. Retry the deployment
-
-**Applies to:** Capability hosts, preview Cognitive Services features, AI Foundry project resources, and other resources using preview API versions.
-
-**Prevention:**
-
-- When a module depends on RBAC assignments (e.g., capability hosts depending on role assignments), use explicit `dependsOn` to ensure permissions propagate before the dependent resource is created
-- For Bicep deployment stacks, failed resources from a preview API sometimes need manual deletion before the stack can successfully update
-- Cosmos DB accounts that fail during provisioning often cannot be updated and must be deleted before retrying (use `az cosmosdb delete` or delete the containing resource group)
-
-### Validation Script Requirements
-
-**Child resource name handling**: Azure REST APIs may return child resource names in hierarchical format (e.g., `parentName/childName` instead of just `childName`). Validation scripts that use these names in subsequent REST calls must extract only the child segment.
-
-**Pattern:**
-
-```powershell
-# Azure may return 'parentAccount/projectName' — extract child segment
-$projectFullName = az rest --method get --url "<list-url>" --query "value[0].name" -o tsv
-$project = ($projectFullName -split '/')[-1]
-```
-
-**Best practices for validation scripts:**
-
-- Always validate that discovery steps return non-empty values before running tests
-- Use defensive parsing for all REST API responses (null checks, array bounds)
-- Test validation scripts against actual deployed resources immediately after first successful deployment
-- Don't assume consistent name formats across different API versions
 
 ---
 
@@ -1384,27 +1586,288 @@ resource "azurerm_cognitive_account" "cv_prediction" {
 
 ---
 
-## Exam-Specific Domain Guidelines
+## Azure Resource Configuration Best Practices
 
-### AI-102 Domains
+These standards prevent common deployment errors and ensure reliable infrastructure code.
 
-| Domain | Common Topics | Key Resources |
-|--------|---------------|---------------|
-| `generative-ai` | Azure OpenAI, GPT models, DALL-E, embeddings, prompt engineering | `oai`, `deploy`, `st` (for outputs) |
-| `computer-vision` | Computer Vision, Custom Vision, Face API, Form Recognizer | `cv`, `cvtr`, `cvpr`, `doc` |
-| `nlp` | Language Service, Translator, sentiment analysis, entity recognition | `lang`, `trans` |
-| `knowledge-mining` | AI Search, indexers, skillsets, knowledge stores | `srch`, `st` (for data sources) |
-| `ai-services` | Multi-service accounts, Cognitive Services configuration | `cog` |
+### Load Balancers with Outbound Rules
 
-### AZ-104 Domains
+**CRITICAL**: When configuring Standard Load Balancers with BOTH load balancing rules AND outbound rules that share the same frontend IP configuration:
 
-| Domain | Common Topics | Key Resources |
-|--------|---------------|---------------|
-| `identity` | RBAC, Azure AD, managed identities, Key Vault | Resource Groups, RBAC, `kv` |
-| `networking` | VNets, subnets, NSGs, load balancers, peering, Bastion | `vnet`, `snet`, `nsg`, `lb`, `pip`, `bas` |
-| `storage` | Storage accounts, blob lifecycle, file shares, disks | `st`, blob containers, file shares, `disk` |
-| `compute` | VMs, availability sets, VM scale sets, App Services | `vm`, `avset`, `vmss`, `app` |
-| `monitoring` | Log Analytics, backup, alerts, diagnostics | `law`, `rsv`, action groups |
+- **Always set `disableOutboundSnat: true`** (Bicep) or `disable_outbound_snat = true` (Terraform) on the load balancing rule
+- This prevents SNAT port allocation conflicts between the two rule types
+- Azure requires this when a frontend IP is referenced by both rule types
+
+**Error if omitted**: `LoadBalancingRuleMustDisableSNATSinceSameFrontendIPConfigurationIsReferencedByOutboundRule`
+
+### Network Interfaces and Backend Pools
+
+**CRITICAL**: A VM's Network Interface (NIC) with an instance-level public IP address **cannot** be added to a Load Balancer's outbound rule backend pool.
+
+- **Problem**: Azure does not allow NICs with direct public IPs in outbound rule backend pools
+- **Solution**: Use separate backend pools for inbound and outbound rules when VMs have instance public IPs
+- **Alternative**: Remove instance public IPs from VMs if they will use Load Balancer outbound rules for internet access
+- **Common scenario**: VM with Bastion access (no public IP needed) can safely use outbound rule backend pool
+
+### Network Security Groups
+
+- Ensure required ports are open for service functionality:
+  - Port 80 for HTTP
+  - Port 443 for HTTPS
+  - Port 22 for SSH (Linux)
+  - Port 3389 for RDP (Windows)
+- Document any custom ports in README
+- Use specific source IP ranges when possible (avoid 0.0.0.0/0 except for public-facing services)
+
+### Public IP SKU Compatibility
+
+- **Standard Load Balancers** require **Standard SKU** public IPs (not Basic)
+- **Basic Load Balancers** can use **Basic SKU** public IPs
+- Standard SKU IPs support availability zones; Basic SKU does not
+
+### Storage Containers and File Shares
+
+**CRITICAL**: `azurerm_storage_container` and `azurerm_storage_share` resources require `storage_account_id` (not `storage_account_name`). The `storage_account_name` argument is deprecated and will be removed in AzureRM provider v5.0.
+
+- **Always use `storage_account_id`** referencing the storage account's `.id` attribute
+- **Do not use `storage_account_name`** referencing the storage account's `.name` attribute
+
+**Correct:**
+
+```hcl
+resource "azurerm_storage_container" "example" {
+  name                  = "documents"
+  storage_account_id    = azurerm_storage_account.data.id
+  container_access_type = "private"
+}
+
+resource "azurerm_storage_share" "example" {
+  name                 = "fileshare"
+  storage_account_id   = azurerm_storage_account.data.id
+  quota                = 5
+}
+```
+
+**Incorrect (deprecated):**
+
+```hcl
+resource "azurerm_storage_container" "example" {
+  name                  = "documents"
+  storage_account_name  = azurerm_storage_account.data.name  # DEPRECATED
+  container_access_type = "private"
+}
+```
+
+### Azure AI Services Configuration
+
+#### Cognitive Services / OpenAI Accounts
+
+- **Public network access**: Enable for lab environments (`public_network_access_enabled = true`)
+- **Private endpoints**: Optional for advanced scenarios; adds complexity
+- **Authentication**:
+  - **Key-based auth**: Default for labs (easiest to test)
+  - **Managed identity**: Better for production patterns; requires RBAC setup
+- **SKU selection**: Use S0 for OpenAI (no free tier); F0/S0 for other Cognitive Services
+
+#### Model Deployments (Azure OpenAI)
+
+- **Model name and version**: Region-dependent; validate availability before deployment
+  - Common models: `gpt-4`, `gpt-4-turbo`, `gpt-35-turbo`, `dall-e-3`, `text-embedding-ada-002`
+  - Versions vary: `0613`, `1.0`, `2024-02-15-preview`, etc.
+- **Deployment name**: Descriptive, matches model purpose (e.g., `deploy-gpt4`, `img-dalle`)
+- **Scale type**: `Standard` for most labs; `Provisioned` for high-throughput scenarios
+- **Capacity**: Start minimal; Azure OpenAI uses token-based throttling
+- **API version**: Pin in client code/scripts (e.g., `2024-10-21`); changes frequently
+
+#### Storage for AI Outputs
+
+- Use dedicated storage account for AI-generated content (images, documents, etc.)
+- Create blob container with private access
+- Consider lifecycle management for cleanup of generated outputs
+
+#### Managed Identity RBAC for AI Agent Service
+
+**CRITICAL**: When deploying Azure AI Agent Service (standard setup with BYOS), the project's System-Assigned Managed Identity requires **both control plane and data plane permissions**. Missing control plane roles will cause capability host creation to fail with `CapabilityHostOperationFailed` or authorization errors.
+
+| Service | Data Plane Role | Control Plane Role (Azure RBAC) | Why Control Plane Is Needed |
+|---------|-----------------|--------------------------------|-----------------------------|
+| Cosmos DB | Cosmos DB SQL Data Contributor (`sqlRoleAssignments`) | **Cosmos DB Operator** (`230815da-be43-4aae-9cb4-875f7bd000aa`) | Capability host must create the `enterprise_memory` database via ARM APIs |
+| Storage | Storage Blob Data Contributor + Storage Blob Data Owner (with ABAC condition) | (none required) | Data plane sufficient for blob operations |
+| AI Search | Search Index Data Contributor | Search Service Contributor | Both planes needed for index management |
+
+**Key points:**
+
+- **Data plane** roles allow read/write of data within the service (documents, blobs, indexes)
+- **Control plane** roles allow reading metadata, creating databases, and managing service configuration via ARM
+- The Cosmos DB Operator role is **not documented** in official AI Agent Service setup guides but is **required** — without it, the capability host cannot verify or create the Cosmos DB database and the deployment fails
+- The Storage Blob Data Owner role **must** include an ABAC condition restricting access to containers matching `<workspaceId>*-azureml-agent` — this is the container pattern used by the agent service for file uploads
+
+#### Cognitive Services Soft-Delete and Purge (Bicep)
+
+**CRITICAL**: Cognitive Services accounts (Azure OpenAI, AI Services multi-service accounts, etc.) are **soft-deleted** when destroyed and remain in a deleted-but-not-purged state for a retention period. Attempting to redeploy with the same name during this period fails with `FlagMustBeSetForRestore` error.
+
+**Problem**: This breaks the deploy/destroy/redeploy cycle essential for lab development and testing.
+
+**Solution**: Implement automatic purge in Bicep deployment scripts (`bicep.ps1`) to ensure clean redeployment cycles:
+
+1. **Before stack deletion**: Query and capture Cognitive Services account metadata (name, location, resource group)
+2. **After stack deletion**: Automatically purge soft-deleted accounts
+
+**Implementation pattern** (add to `bicep.ps1`):
+
+```powershell
+function Invoke-DestroyAction {
+    # Capture Cognitive Services accounts before destroy
+    $cogAccounts = Get-CognitiveServicesAccounts -StackName $script:StackName
+
+    # Destroy the stack
+    $command = New-StackCommand -Action 'destroy' -StackName $script:StackName
+    Invoke-Expression $command
+    $destroyExitCode = $LASTEXITCODE
+
+    # Purge soft-deleted accounts after successful destroy
+    if ($destroyExitCode -eq 0 -and $cogAccounts.Count -gt 0) {
+        Invoke-PurgeCognitiveServices -Accounts $cogAccounts
+    }
+
+    exit $destroyExitCode
+}
+
+function Get-CognitiveServicesAccounts {
+    param([string]$StackName)
+
+    $stackJson = az stack sub show --name $StackName -o json 2>$null
+    if ($LASTEXITCODE -ne 0) { return @() }
+
+    $stack = $stackJson | ConvertFrom-Json
+    $cogResources = $stack.resources |
+        Where-Object { $_.id -match 'Microsoft.CognitiveServices/accounts' -and $_.id -notmatch '/projects/' }
+
+    $accounts = @()
+    foreach ($res in $cogResources) {
+        # Extract name and resource group from resource ID
+        $parts = $res.id -split '/'
+        $rgIndex = [array]::IndexOf($parts, 'resourceGroups') + 1
+        $nameIndex = [array]::IndexOf($parts, 'accounts') + 1
+
+        $accountJson = az cognitiveservices account show `
+            --name $parts[$nameIndex] `
+            --resource-group $parts[$rgIndex] `
+            --query '{name:name, location:location, resourceGroup:resourceGroup}' `
+            -o json 2>$null
+
+        if ($LASTEXITCODE -eq 0 -and $accountJson) {
+            $accounts += ($accountJson | ConvertFrom-Json)
+        }
+    }
+
+    return $accounts
+}
+
+function Invoke-PurgeCognitiveServices {
+    param([array]$Accounts)
+
+    Write-Host "`n🧹 Purging soft-deleted Cognitive Services accounts..." -ForegroundColor Cyan
+
+    foreach ($account in $Accounts) {
+        Write-Host "   Purging: $($account.name) in $($account.location)" -ForegroundColor Gray
+
+        az cognitiveservices account purge `
+            --name $account.name `
+            --resource-group $account.resourceGroup `
+            --location $account.location 2>$null
+
+        if ($LASTEXITCODE -eq 0) {
+            Write-Host "   ✅ Purged: $($account.name)" -ForegroundColor Green
+        } else {
+            Write-Host "   ⚠️  Could not purge: $($account.name) (may need manual cleanup)" -ForegroundColor Yellow
+        }
+    }
+}
+```
+
+**Key points:**
+
+- **Do not use `restore: true` in Bicep** — this causes `CanNotRestoreANonExistingResource` error on first deployment or after successful purge
+- **Purge command**: `az cognitiveservices account purge --name <name> --resource-group <rg> --location <location>`
+- **Manual cleanup**: If purge automation fails, manually list and purge: `az cognitiveservices account list-deleted` and `az cognitiveservices account purge`
+- **Applies to**: Azure OpenAI accounts, AI Services multi-service accounts, and all Cognitive Services single-service accounts
+- **Retention period**: Varies by service; purge makes the name immediately available for reuse
+
+**Why this matters for labs**: AI-102 labs frequently iterate on deployments during development. Without automatic purge, developers must manually clean up soft-deleted resources or wait for retention periods to expire, which disrupts the development workflow.
+
+### Subnet Delegation
+
+Some services require subnet delegation:
+
+- Azure Container Instances: `Microsoft.ContainerInstance/containerGroups`
+- Azure Databricks: `Microsoft.Databricks/workspaces`
+- Azure NetApp Files: `Microsoft.NetApp/volumes`
+- Document delegation requirements in README
+
+### Resource Dependencies
+
+- Prefer **implicit dependencies** (resource references) over explicit `depends_on`/`dependsOn`
+- Use **explicit dependencies** only when:
+  - Relationship is not captured by resource references
+  - Timing/sequencing is critical (e.g., role assignments after resource creation)
+- Document why explicit dependencies are needed with comments
+
+### Preview API Resources and Failed Provisioning States
+
+**CRITICAL**: Resources deployed using preview API versions (e.g., `2025-04-01-preview`) can enter an unrecoverable `provisioningState: "Failed"` state. When this happens, subsequent deployment retries will fail with generic errors like `"Update operation failed"` because Azure cannot update a resource stuck in a failed state.
+
+**Symptoms:**
+
+- Deployment fails, retry produces the same error even after fixing the root cause
+- `az resource list` shows the resource with `provisioningState: "Failed"`
+- Deployment stack reports `CapabilityHostOperationFailed` or similar with no actionable detail
+
+**Resolution pattern:**
+
+1. Identify the failed resource:
+
+   ```powershell
+   az resource list --resource-group <rg> \
+     --query "[?properties.provisioningState=='Failed'].{name:name, type:type}" -o table
+   ```
+
+2. Delete the stuck resource via REST API (deployment stacks may not auto-clean these):
+
+   ```powershell
+   az rest --method DELETE \
+     --url "https://management.azure.com/<resource-id>?api-version=<preview-version>"
+   ```
+
+3. Wait 30–60 seconds for backend cleanup and RBAC propagation
+4. Retry the deployment
+
+**Applies to:** Capability hosts, preview Cognitive Services features, AI Foundry project resources, and other resources using preview API versions.
+
+**Prevention:**
+
+- When a module depends on RBAC assignments (e.g., capability hosts depending on role assignments), use explicit `dependsOn` to ensure permissions propagate before the dependent resource is created
+- For Bicep deployment stacks, failed resources from a preview API sometimes need manual deletion before the stack can successfully update
+- Cosmos DB accounts that fail during provisioning often cannot be updated and must be deleted before retrying (use `az cosmosdb delete` or delete the containing resource group)
+
+### Validation Script Requirements
+
+**Child resource name handling**: Azure REST APIs may return child resource names in hierarchical format (e.g., `parentName/childName` instead of just `childName`). Validation scripts that use these names in subsequent REST calls must extract only the child segment.
+
+**Pattern:**
+
+```powershell
+# Azure may return 'parentAccount/projectName' — extract child segment
+$projectFullName = az rest --method get --url "<list-url>" --query "value[0].name" -o tsv
+$project = ($projectFullName -split '/')[-1]
+```
+
+**Best practices for validation scripts:**
+
+- Always validate that discovery steps return non-empty values before running tests
+- Use defensive parsing for all REST API responses (null checks, array bounds)
+- Test validation scripts against actual deployed resources immediately after first successful deployment
+- Don't assume consistent name formats across different API versions
 
 ---
 
