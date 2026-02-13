@@ -80,6 +80,8 @@ cd AZ-104/hands-on-labs/compute/lab-app-service-republication/scripts
 .\deploy.ps1
 ```
 
+<img src='.img/2026-02-13-03-07-10.png' width=700>
+
 ## Testing the Solution
 
 1. **Verify resource group exists:**
@@ -108,15 +110,6 @@ cd AZ-104/hands-on-labs/compute/lab-app-service-republication/scripts
    .\validation\test-app-service.ps1
    ```
 
-## Cleanup
-
-```powershell
-cd AZ-104/hands-on-labs/compute/lab-app-service-republication/scripts
-.\cleanup.ps1
-```
-
-<img src='.img/2026-02-13-03-07-10.png' width=700>
-
 <img src='.img/2026-02-13-03-10-14.png' width=700>
 
 <img src='.img/2026-02-13-03-11-03.png' width=700>
@@ -124,6 +117,15 @@ cd AZ-104/hands-on-labs/compute/lab-app-service-republication/scripts
 <img src='.img/2026-02-13-03-12-22.png' width=700>
 
 <img src='.img/2026-02-13-03-14-22.png' width=900>
+
+## Cleanup
+
+```powershell
+cd AZ-104/hands-on-labs/compute/lab-app-service-republication/scripts
+.\cleanup.ps1
+```
+
+<img src='.img/2026-02-13-03-17-53.png' width=700>
 
 ## Scenario Analysis
 
