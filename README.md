@@ -27,21 +27,21 @@ Progress trackers, detailed study notes, practice exams, and hands-on labs:
 
 | Date | AI-102 | AZ-104 | AI-900 | Total |
 |------|--------|--------|--------|-------|
-| Fri, Feb 13 | 🟢 2.0h | 🟢 2.0h |  | **4.0h** |
-| Thu, Feb 12 | 🟣 3.7h | 🟣 5.4h |  | **9.1h** |
-| Wed, Feb 11 | 🟢 1.5h | 🟣 4.1h |  | **5.6h** |
+| Fri, Feb 13 | 🟢 1.4h | 🟣 3.5h |  | **4.9h** |
+| Thu, Feb 12 | 🟢 1.8h | 🟣 3.5h |  | **5.3h** |
+| Wed, Feb 11 | 🟡 0.7h | 🟣 3.3h |  | **4.0h** |
 | Tue, Feb 10 | 🟢 1.8h | 🟣 2.1h |  | **3.9h** |
-| Mon, Feb 09 | 🟢 1.1h | 🟣 2.9h | 🟣 2.4h | **6.4h** |
+| Mon, Feb 09 | 🟡 0.4h | 🟣 2.3h | 🟢 1.7h | **4.4h** |
 | Sun, Feb 08 |  | 🟣 2.9h | 🟢 1.0h | **3.9h** |
 | Sat, Feb 07 |  | 🟣 2.7h | 🟡 0.6h | **3.3h** |
-| **Weekly Total** | **10.1h** | **22.1h** | **4.0h** | **36.2h** |
-| ***Running Total*** | ***9.0h*** | ***69.3h*** | ***21.7h*** | ***100.0h*** |
+| **Weekly Total** | **6.1h** | **20.3h** | **3.3h** | **29.7h** |
+| ***Running Total*** | ***5.8h*** | ***65.2h*** | ***18.8h*** | ***89.8h*** |
 
 *Activity Levels: 🟡 Low (< 1hr) | 🟢 Medium (1-2hrs) | 🟣 High (> 2hrs)*
 
 *Hours = time between first and last commit of the day in that certification folder*
 
-*Last updated: February 13, 2026 at 08:16 CST*
+*Last updated: February 13, 2026 at 09:17 CST*
 
 <!-- COMMIT_STATS_END -->
 
