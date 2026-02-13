@@ -3,6 +3,8 @@ name: question
 description: Replace selected image line with formatted question from pasted screenshot
 ---
 
+# Question Extraction Prompt
+
 **TASK: Replace the selected `<img>` line with formatted question structure.**
 
 1. Extract all text and content from the pasted screenshot image
