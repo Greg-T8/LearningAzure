@@ -221,10 +221,7 @@ All Infrastructure as Code labs must follow this sequence:
 1. **Design** — Complete architecture design and identify all Azure services
 2. **Code** — Implement Terraform/Bicep configuration with modules
 3. **Validate Syntax** — Run `terraform validate` or `bicep build` to verify syntax
-4. **Regional Capacity Test** — Perform capacity validation for services listed in Section 10
-5. **Final Validation** — Run `terraform plan` or deployment preview to verify end-to-end configuration
-
-**Do not skip Step 4** for labs deploying capacity-constrained services (see Section 10 for the authoritative list). Discovering regional capacity issues after completing code wastes time and may require region changes or SKU adjustments.
+4. **Final Validation** — Run `terraform plan` or deployment preview to verify end-to-end configuration
 
 ---
 
@@ -243,11 +240,8 @@ Test-Path terraform.tfvars
 terraform init
 terraform validate
 terraform fmt
-# Perform regional capacity tests here (Section 10) before final plan
 terraform plan
 ```
-
-**Note:** Regional capacity testing must occur after `terraform validate` and before `terraform plan` for labs with capacity-constrained services (see Section 10 for the list).
 
 ### 7.2 Bicep
 
@@ -269,11 +263,8 @@ terraform plan
 ```
 Use-AzProfile Lab
 .\bicep.ps1 validate
-# Perform regional capacity tests here (Section 10) before plan
 .\bicep.ps1 plan
 ```
-
-**Note:** Regional capacity testing must occur after `bicep.ps1 validate` and before `bicep.ps1 plan` for labs with capacity-constrained services (see Section 10 for the list).
 
 ---
 
@@ -305,50 +296,7 @@ All governance standards are mandatory.
 
 ---
 
-## 10. Regional Validation
-
-**Prerequisites**: Complete architecture and code design. Identify ALL Azure services needed before performing regional validation.
-
-For only the following services that tend to have capacity issues, perform regional validation before ANY deployment:
-
-- Cosmos DB
-- AI Search
-- OpenAI
-
-### Step 1: Deployment Capacity Test
-
-Test capacity via dry-run or validation API before actual deployment:
-
-Example:
-
-```powershell
-# Test Cosmos DB capacity with minimal specifications
-$testDeployment = az cosmosdb create --resource-group test-rg `
-    --name "test-cosmos-$((Get-Random))" --kind GlobalDocumentDB `
-    --locations regionName=$region failoverPriority=0 `
-    --default-consistency-level Session --capabilities EnableServerless `
-    --dry-run 2>&1
-
-if ($testDeployment -match "ServiceUnavailable|quota") {
-    Write-Host "⚠️  Cosmos DB capacity unavailable in $region"
-    Write-Host "Consider alternate region or quota request"
-}
-```
-
-### Step 2: Region Fallback Logic
-
-If Step 1 fails with `ServiceUnavailable` or quota error:
-
-1. Try next approved region (westus2 → eastus2 → centralus)
-2. Update variable file (terraform.tfvars or bicep params)
-3. Rerun validation
-4. Document chosen region and validation date in README
-
-Region is **not final** until all services validate together in Step 2.
-
----
-
-## 11. Final Response Format
+## 10. Final Response Format
 
 Respond with:
 
@@ -361,7 +309,7 @@ Respond with:
 
 ---
 
-## 12. Invocation Examples
+## 11. Invocation Examples
 
 * Create a hands-on lab for this `<EXAM>` question: …
 * Create a Terraform hands-on lab for this `<EXAM>` question: …

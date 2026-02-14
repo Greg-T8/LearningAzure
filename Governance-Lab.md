@@ -10,10 +10,11 @@ Standards for all Terraform and Bicep labs (AI-102, AZ-104).
 
 ### 1.1 Location
 
-| Setting         | Value         |
-| --------------- | ------------- |
-| Default Region  | `eastus`      |
-| Allowed Regions | Any US region |
+| Setting          | Value                               |
+| ---------------- | ----------------------------------- |
+| Default Region   | `eastus`                            |
+| Fallback Regions | `westus2`, `eastus2`, `centralus`   |
+| Allowed Regions  | Any US region                       |
 
 Use `eastus` unless capacity requires fallback.
 
