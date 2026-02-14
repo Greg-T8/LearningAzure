@@ -1,6 +1,9 @@
 ---
 name: Lab
 description: Generates a governance-compliant hands-on lab from an exam scenario using Terraform, Bicep, Scripted, or Manual methods
+agent: Lab-Orchestrator
+tools:
+  - agent
 ---
 
 # Hands-on Lab Generator
