@@ -261,6 +261,23 @@ azurerm ~> 4.0
 random ~> 3.0
 ```
 
+#### Lab Environment Configuration
+
+For lab environments, configure provider to allow resource group deletion even if resources remain:
+
+```hcl
+provider "azurerm" {
+  features {
+    resource_group {
+      prevent_deletion_if_contains_resources = false
+    }
+  }
+  subscription_id = var.lab_subscription_id
+}
+```
+
+This ensures `terraform destroy` can complete even if orphaned resources exist.
+
 ---
 
 ### 7.2 State
@@ -346,6 +363,16 @@ bicepconfig.json
 * Must copy shared `bicep.ps1`
 * Use stack deployments
 * Allowed commands: validate, plan, apply, destroy, show, list
+
+#### Lab Environment Cleanup
+
+The `destroy` command must include `--force-deletion-types` to ensure complete resource group cleanup:
+
+```powershell
+az stack sub delete --name $stackName --yes --force-deletion-types $forceTypes
+```
+
+Wrapper script handles orphaned resources automatically.
 
 ---
 
