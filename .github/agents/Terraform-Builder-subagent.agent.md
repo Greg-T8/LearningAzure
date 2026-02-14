@@ -43,6 +43,15 @@ You receive from the orchestrator:
 4. **Generate README** following the `lab-readme-authoring` skill's 14-section structure
 5. **Generate validation script** following the pattern in the `terraform-scaffolding` skill
 
+## File Creation Directive
+
+**CRITICAL**: You must CREATE all files using the `createFile` and `createDirectory` tools. Do NOT just describe or list the files — physically create them in the workspace at the specified paths.
+
+- Use `createDirectory` to create the lab folder structure
+- Use `createFile` for every Terraform file, script, README, and supporting document
+- The files you create are templates that the user will deploy later — you are NOT deploying them to Azure
+- Validation commands (`terraform validate`, `terraform fmt`) are acceptable, but do NOT run `terraform apply` or deployment commands
+
 ## Output
 
 Return to the orchestrator:
