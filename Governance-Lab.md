@@ -187,6 +187,8 @@ Terraform:
 ```
 soft_delete_enabled = false
 purge_soft_delete_on_destroy = true
+purge_protected_items_from_vault_on_destroy = true    # For Recovery Vault
+permanently_delete_on_destroy = true                  # For Log Analytics
 ```
 
 Bicep:
@@ -313,17 +315,25 @@ Principles:
 
 Module organization takes precedence over inline dependency wiring. Pass `principal_id` as input for RBAC assignments within modules.
 
+**Design prioritizations:**
+
+* Structure over speed — proper organization enables lab reuse
+* Domain separation — each Azure resource type is a distinct module
+* Explicit wiring — parameter passing documents dependencies
+
 Example structure:
 
 ```
 modules/
 ├── ai-foundry/      # AI Services, monitoring
-├── storage/         # Storage Account
-├── ai-search/       # AI Search + role assignments
-├── cosmos-db/       # Cosmos DB + role assignments
+├── storage/         # Storage Account + RBAC
+├── ai-search/       # AI Search + RBAC
+├── cosmos-db/       # Cosmos DB + RBAC
 ├── key-vault/       # Key Vault
 └── orchestration/   # Project, connections, capability hosts
 ```
+
+**Anti-pattern:** Consolidating BYO resources (Storage, Cosmos, Search) into a single module with AI Foundry. Keep resource domains separate.
 
 ---
 
