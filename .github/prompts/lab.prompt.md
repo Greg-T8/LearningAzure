@@ -308,7 +308,7 @@ All governance standards are mandatory.
 
 ## 10. Regional Validation
 
-For labs deploying capacity-constrained services (e.g., Cosmos DB, AI Search, OpenAI), verify provider availability in target region before deployment.
+For labs deploying regionally constrained services, verify provider availability in target region before deployment.
 
 Check provider availability:
 
