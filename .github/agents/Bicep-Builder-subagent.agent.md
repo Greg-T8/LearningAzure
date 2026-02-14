@@ -3,19 +3,7 @@ name: Bicep-Builder-subagent
 description: Generates governance-compliant Bicep code, README, and validation scripts from a lab plan. Runs as a subagent only.
 model: 'GPT-5.3-Codex'
 user-invokable: false
-tools:
-  - readFile
-  - listDirectory
-  - fileSearch
-  - textSearch
-  - createFile
-  - createDirectory
-  - editFiles
-  - runInTerminal
-  - getTerminalOutput
-  - problems
-  - fetch
-  - microsoftdocs/*
+tools: ["readFile", "listDirectory", "fileSearch", "textSearch", "createFile", "createDirectory", "editFiles", "runInTerminal", "getTerminalOutput", "problems", "fetch", "microsoftdocs/*"]
 handoffs:
   - label: Review Generated Code
     agent: Lab-Reviewer-subagent

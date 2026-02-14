@@ -3,14 +3,7 @@ name: Lab-Planner
 description: Analyzes exam scenarios, extracts metadata, designs architecture, and produces a structured lab plan with module breakdown and file list.
 model: 'Claude Sonnet 4.5'
 user-invokable: false
-tools:
-  - readFile
-  - listDirectory
-  - fileSearch
-  - textSearch
-  - codebase
-  - fetch
-  - microsoftdocs/*
+tools: ["readFile", "listDirectory", "fileSearch", "textSearch", "codebase", "fetch", "microsoftdocs/*"]
 handoffs:
   - label: Build This Lab
     agent: Lab-Orchestrator

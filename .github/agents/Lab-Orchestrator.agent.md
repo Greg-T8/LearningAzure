@@ -3,20 +3,7 @@ name: Lab-Orchestrator
 description: Main conductor agent for hands-on lab creation. Delegates planning, code generation, and governance review to context-isolated subagents.
 model: 'Claude Sonnet 4.5'
 user-invokable: true
-tools:
-  - agent
-  - readFile
-  - listDirectory
-  - fileSearch
-  - textSearch
-  - createFile
-  - createDirectory
-  - editFiles
-  - fetch
-  - runInTerminal
-  - getTerminalOutput
-  - todos
-  - problems
+tools: ["agent", "readFile", "listDirectory", "fileSearch", "textSearch", "createFile", "createDirectory", "editFiles", "fetch", "runInTerminal", "getTerminalOutput", "todos", "problems"]
 agents:
   - Lab-Planner
   - Terraform-Builder-subagent
