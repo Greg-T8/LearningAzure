@@ -288,10 +288,24 @@ Use modules when 2+ related resources.
 
 Principles:
 
-* Domain grouping
-* Self-contained
-* Pass `common_tags`
-* Thin orchestration layer
+* Domain grouping (one concern per module)
+* Self-contained with clear inputs/outputs
+* Pass `common_tags` and identity references
+* Thin orchestration layer in `main.tf`
+
+Module organization takes precedence over inline dependency wiring. Pass `principal_id` as input for RBAC assignments within modules.
+
+Example structure:
+
+```
+modules/
+├── ai-foundry/      # AI Services, monitoring
+├── storage/         # Storage Account
+├── ai-search/       # AI Search + role assignments
+├── cosmos-db/       # Cosmos DB + role assignments
+├── key-vault/       # Key Vault
+└── orchestration/   # Project, connections, capability hosts
+```
 
 ---
 

@@ -214,6 +214,20 @@ Rules specific to IaaC and scripted deployment platforms.
 
 Use the Microsoft Docs MCP for the latest guidance on API requirements.
 
+### Required Workflow Order (IaaC)
+
+All Infrastructure as Code labs must follow this sequence:
+
+1. **Design** — Complete architecture design and identify all Azure services
+2. **Code** — Implement Terraform/Bicep configuration with modules
+3. **Validate Syntax** — Run `terraform validate` or `bicep build` to verify syntax
+4. **Regional Capacity Test** — Perform capacity validation for services listed in Section 10
+5. **Final Validation** — Run `terraform plan` or deployment preview to verify end-to-end configuration
+
+**Do not skip Step 4** for labs deploying capacity-constrained services (see Section 10 for the authoritative list). Discovering regional capacity issues after completing code wastes time and may require region changes or SKU adjustments.
+
+---
+
 ### 7.1 Terraform
 
 * `terraform.tfvars` must include lab subscription ID
@@ -221,7 +235,7 @@ Use the Microsoft Docs MCP for the latest guidance on API requirements.
 * Use `hashicorp/random` for lab-safe passwords
 * Output sensitive values properly
 
-#### Required Validation Commands
+#### Required Validation Sequence
 
 ```
 Use-AzProfile Lab
@@ -229,8 +243,11 @@ Test-Path terraform.tfvars
 terraform init
 terraform validate
 terraform fmt
+# Perform regional capacity tests here (Section 10) before final plan
 terraform plan
 ```
+
+**Note:** Regional capacity testing must occur after `terraform validate` and before `terraform plan` for labs with capacity-constrained services (see Section 10 for the list).
 
 ### 7.2 Bicep
 
@@ -247,13 +264,16 @@ terraform plan
   * list
 * Validate subscription context
 
-#### Required Commands
+#### Required Validation Sequence
 
 ```
 Use-AzProfile Lab
 .\bicep.ps1 validate
+# Perform regional capacity tests here (Section 10) before plan
 .\bicep.ps1 plan
 ```
+
+**Note:** Regional capacity testing must occur after `bicep.ps1 validate` and before `bicep.ps1 plan` for labs with capacity-constrained services (see Section 10 for the list).
 
 ---
 
