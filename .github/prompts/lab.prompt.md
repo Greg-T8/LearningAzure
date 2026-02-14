@@ -207,48 +207,59 @@ If higher tier required, explain in README analysis (not deployment steps).
 
 ---
 
-## 7. Regional Validation (Mandatory for IaaC)
+## 7. Regional Validation (After Architecture Design, Before Code)
+
+**Prerequisites**: Complete architecture design. Identify ALL Azure services needed before validating.
 
 Before deployment, confirm region supports:
 
-* All required services
-* All SKUs
+* All required services and SKUs
 * All models (if AI)
+* **Subscription capacity** (Cosmos DB, specialized services often constrained)
 * All preview features
 
-Regional validation is **mandatory** and must be completed before proceeding to ANY deployment phase.
+Regional validation is **mandatory** before ANY deployment phase.
 
-### Validation Options
+### Three-Step Validation Process
 
-#### Azure CLI
+#### Step 1: Provider & Service Registration
 
-```
-az vm list-skus --location <region> --size <size>
-az cognitiveservices account list-skus --location <region>
-```
-
-#### ARM Validation (Recommended)
-
-```
-az deployment group validate --resource-group <rg> ...
-```
-
-#### Terraform Pre-Check
-
-```
-terraform plan -target=<resource>
+```powershell
+# Verify each service is available in region via provider manifest
+$services = @("Microsoft.CognitiveServices", "Microsoft.DocumentDB", "Microsoft.Search")
+foreach ($provider in $services) {
+    $locations = az provider show --namespace $provider `
+        --query "resourceTypes[*].locations[]" -o tsv
+    if ($locations -match $region) { Write-Host "✅ Available" }
+}
 ```
 
-If capacity fails:
+#### Step 2: Deployment Capacity Test
 
-1. Select approved US region
-2. Revalidate all services
-3. Document validated region in:
+For services with strict quota limits (Cosmos DB, AI Search, OpenAI), test capacity via dry-run or validation API before actual deployment:
 
-   * Variables/params
-   * README
+```powershell
+# Catch ServiceUnavailable / quota errors in pre-check
+az deployment group validate --resource-group test-rg --template-file main.bicep
+```
 
-Region is not final until all services validate together.
+#### Step 3: Region Fallback Logic
+
+If Step 2 fails with `ServiceUnavailable` or quota error:
+
+1. Try next approved region (westus2 → eastus2 → centralus)
+2. Update variable file (terraform.tfvars or bicep params)
+3. Rerun validation
+4. Document chosen region and validation date in README
+
+Create a **validation script** (`validate-regional-capacity.ps1` or equivalent) that:
+
+* Checks provider registration
+* Tests deployment capacity
+* Auto-updates config if fallback succeeds
+* Documents which region was validated
+
+Region is **not final** until all services validate together in Step 2.
 
 ---
 
