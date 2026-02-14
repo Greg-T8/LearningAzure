@@ -1,4 +1,4 @@
-# Hands-On Labs Governance Policy (Condensed)
+# Hands-On Labs Governance Policy
 
 Standards for all Terraform and Bicep labs (AI-102, AZ-104).
 
@@ -177,23 +177,7 @@ If not purgeable → use unique naming.
 
 ---
 
-### 4.2 Recommended Strategy
-
-Use **Standalone Purge Script**:
-
-```
-.assets/shared/scripts/Purge-SoftDeletedResources.ps1
-```
-
-Advantages:
-
-* Tool-agnostic
-* Easier maintenance
-* Works across Terraform, Bicep, CLI
-
----
-
-### 4.3 Recovery Vault Labs
+### 4.2 Disable Soft-Delete (When Possible)
 
 Disable soft-delete during creation:
 
@@ -201,6 +185,7 @@ Terraform:
 
 ```
 soft_delete_enabled = false
+purge_soft_delete_on_destroy = true
 ```
 
 Bicep:
@@ -265,7 +250,7 @@ Each lab must include:
 ### 7.1 Provider
 
 Use **AzureRM** by default.
-Use AzAPI only if AzureRM lacks required feature.
+Use azure/AzAPI only if azure/AzureRM lacks required feature.
 
 Required:
 
@@ -299,7 +284,7 @@ Never store secrets.
 
 ### 7.4 Modules
 
-Use modules when 3+ related resources.
+Use modules when 2+ related resources.
 
 Principles:
 
@@ -351,7 +336,7 @@ bicepconfig.json
 
 ### 8.3 Modules
 
-Use when 3+ related resources.
+Use when 2+ related resources.
 
 * Self-contained
 * Pass `commonTags`
@@ -370,25 +355,25 @@ Production → Key Vault.
 
 ---
 
-## 9. AI Deployment Patterns
+## 9. Azure Configuration Guardrails
 
-### OpenAI Multi-Model
+### 9.1 AI Deployment Patterns
+
+#### OpenAI Multi-Model
 
 Single account, multiple deployments (GPT-4 + embeddings).
 
-### Multi-Service Cognitive
+#### Multi-Service Cognitive
 
 One account serving Vision, Language, Speech.
 
-### Custom Vision
+#### Custom Vision
 
 Separate Training + Prediction resources.
 
 ---
 
-## 10. Azure Configuration Guardrails
-
-### 10.1 Load Balancer SNAT
+### 9.2 Load Balancer SNAT
 
 If frontend used for inbound + outbound rules:
 
@@ -398,13 +383,13 @@ disableOutboundSnat = true
 
 ---
 
-### 10.2 NIC + Public IP + Outbound Rule Conflict
+### 9.3 NIC + Public IP + Outbound Rule Conflict
 
 NIC with instance public IP cannot join outbound backend pool.
 
 ---
 
-### 10.3 Storage Containers (Terraform)
+### 9.4 Storage Containers (Terraform)
 
 Use:
 
@@ -416,7 +401,7 @@ Not `storage_account_name`.
 
 ---
 
-### 10.4 AI Services
+### 9.5 AI Services
 
 * Enable public network access (lab only)
 * Validate model availability per region
@@ -425,7 +410,7 @@ Not `storage_account_name`.
 
 ---
 
-### 10.5 AI Agent Service RBAC
+### 9.6 AI Agent Service RBAC
 
 Requires both:
 
@@ -436,25 +421,7 @@ Missing control-plane role causes capability host failure.
 
 ---
 
-## 11. Lab Lifecycle Policy
-
-| State     | Action                          |
-| --------- | ------------------------------- |
-| Active    | Maintain                        |
-| Reference | Keep documented                 |
-| Archived  | Move to archived/               |
-| Deleted   | Remove repo + destroy resources |
-
-Archive process:
-
-1. Move directory
-2. Update README index
-3. Record reason/date
-4. Destroy Azure resources
-
----
-
-## 12. Pre-Deployment Checklist (Condensed)
+## 10. Pre-Deployment Checklist (Condensed)
 
 ### Naming
 

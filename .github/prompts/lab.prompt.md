@@ -6,6 +6,7 @@ description: Generates a governance-compliant hands-on lab from an exam scenario
 # Hands-on Lab Generator
 
 Create a fully working lab from an exam scenario using the **most appropriate deployment method**, strictly aligned to `Governance-Lab.md` (workspace root).
+
 `Governance-Lab.md` is the single source of truth for naming, tagging, regions, versions, and standards.
 
 ---
@@ -111,7 +112,7 @@ README must contain:
 
 1. Exam Question Scenario (verbatim options, no correct answer revealed)
 2. Solution Architecture
-3. Architecture Diagram (Mermaid if 3+ interconnected resources)
+3. Architecture Diagram (Mermaid if 2+ interconnected resources)
 4. Lab Objectives (3–5)
 5. Lab Structure (brief tree)
 6. Prerequisites
@@ -207,70 +208,20 @@ If higher tier required, explain in README analysis (not deployment steps).
 
 ---
 
-## 7. Regional Validation (After Architecture Design, Before Code)
+## 7. Deployment Platform Rules
 
-**Prerequisites**: Complete architecture design. Identify ALL Azure services needed before validating.
+Rules specific to IaaC and scripted deployment platforms.
 
-Before deployment, confirm region supports:
+Use the Microsoft Docs MCP for the latest guidance on API requirements.
 
-* All required services and SKUs
-* All models (if AI)
-* **Subscription capacity** (Cosmos DB, specialized services often constrained)
-* All preview features
-
-Regional validation is **mandatory** before ANY deployment phase.
-
-### Three-Step Validation Process
-
-#### Step 1: Provider & Service Registration
-
-```powershell
-# Verify each service is available in region via provider manifest
-$services = @("Microsoft.CognitiveServices", "Microsoft.DocumentDB", "Microsoft.Search")
-foreach ($provider in $services) {
-    $locations = az provider show --namespace $provider `
-        --query "resourceTypes[*].locations[]" -o tsv
-    if ($locations -match $region) { Write-Host "✅ Available" }
-}
-```
-
-#### Step 2: Deployment Capacity Test
-
-For services with strict quota limits (Cosmos DB, AI Search, OpenAI), test capacity via dry-run or validation API before actual deployment:
-
-```powershell
-# Catch ServiceUnavailable / quota errors in pre-check
-az deployment group validate --resource-group test-rg --template-file main.bicep
-```
-
-#### Step 3: Region Fallback Logic
-
-If Step 2 fails with `ServiceUnavailable` or quota error:
-
-1. Try next approved region (westus2 → eastus2 → centralus)
-2. Update variable file (terraform.tfvars or bicep params)
-3. Rerun validation
-4. Document chosen region and validation date in README
-
-Create a **validation script** (`validate-regional-capacity.ps1` or equivalent) that:
-
-* Checks provider registration
-* Tests deployment capacity
-* Auto-updates config if fallback succeeds
-* Documents which region was validated
-
-Region is **not final** until all services validate together in Step 2.
-
----
-
-## 8. Terraform Rules
+### 7.1 Terraform
 
 * `terraform.tfvars` must include lab subscription ID
 * Use modules when deploying multiple resource types
 * Use `hashicorp/random` for lab-safe passwords
 * Output sensitive values properly
 
-### Required Validation Commands
+#### Required Validation Commands
 
 ```
 Use-AzProfile Lab
@@ -281,9 +232,7 @@ terraform fmt
 terraform plan
 ```
 
----
-
-## 9. Bicep Rules
+### 7.2 Bicep
 
 * Use `main.bicep` + `main.bicepparam`
 * Use modules when deploying multiple resource types
@@ -298,7 +247,7 @@ terraform plan
   * list
 * Validate subscription context
 
-### Required Commands
+#### Required Commands
 
 ```
 Use-AzProfile Lab
@@ -308,7 +257,7 @@ Use-AzProfile Lab
 
 ---
 
-## 10. Scripted Validation
+## 8. Scripted Validation
 
 Must include and capture:
 
@@ -322,7 +271,7 @@ Get-Command -Syntax
 
 ---
 
-## 11. Common Azure Pitfalls
+## 9. Common Azure Pitfalls
 
 Follow `Governance-Lab.md` for:
 
@@ -336,7 +285,50 @@ All governance standards are mandatory.
 
 ---
 
-## 12. Final Response Format
+## 10. Regional Validation
+
+**Prerequisites**: Complete architecture and code design. Identify ALL Azure services needed before performing regional validation.
+
+For only the following services that tend to have capacity issues, perform regional validation before ANY deployment:
+
+- Cosmos DB
+- AI Search
+- OpenAI
+
+### Step 1: Deployment Capacity Test
+
+Test capacity via dry-run or validation API before actual deployment:
+
+Example:
+
+```powershell
+# Test Cosmos DB capacity with minimal specifications
+$testDeployment = az cosmosdb create --resource-group test-rg `
+    --name "test-cosmos-$((Get-Random))" --kind GlobalDocumentDB `
+    --locations regionName=$region failoverPriority=0 `
+    --default-consistency-level Session --capabilities EnableServerless `
+    --dry-run 2>&1
+
+if ($testDeployment -match "ServiceUnavailable|quota") {
+    Write-Host "⚠️  Cosmos DB capacity unavailable in $region"
+    Write-Host "Consider alternate region or quota request"
+}
+```
+
+### Step 2: Region Fallback Logic
+
+If Step 1 fails with `ServiceUnavailable` or quota error:
+
+1. Try next approved region (westus2 → eastus2 → centralus)
+2. Update variable file (terraform.tfvars or bicep params)
+3. Rerun validation
+4. Document chosen region and validation date in README
+
+Region is **not final** until all services validate together in Step 2.
+
+---
+
+## 11. Final Response Format
 
 Respond with:
 
@@ -349,7 +341,7 @@ Respond with:
 
 ---
 
-## 13. Invocation Examples
+## 12. Invocation Examples
 
 * Create a hands-on lab for this `<EXAM>` question: …
 * Create a Terraform hands-on lab for this `<EXAM>` question: …
