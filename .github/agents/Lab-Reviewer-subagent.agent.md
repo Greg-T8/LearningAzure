@@ -1,8 +1,25 @@
 ---
 name: Lab-Reviewer-subagent
 description: Reviews generated lab content for governance compliance, README structure, and code quality. Returns PASS/FAIL with specific violations. Runs as a subagent only.
-model: claude-haiku-4-5
+model: 'Claude Haiku 4.5'
 user-invokable: false
+tools:
+  - readFile
+  - listDirectory
+  - fileSearch
+  - textSearch
+  - codebase
+  - problems
+user-invokable: false
+handoffs:
+  - label: Finalize Lab
+    agent: Lab-Orchestrator
+    prompt: The review passed. Proceed to finalize the lab and present the summary.
+    send: false
+  - label: Fix & Resubmit
+    agent: Lab-Orchestrator
+    prompt: The review found violations. Apply the reviewer's fixes and resubmit for another review cycle.
+    send: false
 ---
 
 # Lab Reviewer Subagent
@@ -12,6 +29,7 @@ You are the **Lab Reviewer** — a compliance gate that validates all generated 
 ## Inputs
 
 You receive:
+
 - All generated lab files (code, README, validation scripts)
 - Lab metadata (exam, domain, topic, deployment method)
 

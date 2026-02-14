@@ -1,14 +1,32 @@
 ---
 name: Lab-Orchestrator
 description: Main conductor agent for hands-on lab creation. Delegates planning, code generation, and governance review to context-isolated subagents.
-model: claude-sonnet-4-5
+model: 'Claude Sonnet 4.5'
+user-invokable: true
 tools:
   - agent
+  - readFile
+  - listDirectory
+  - fileSearch
+  - textSearch
+  - createFile
+  - createDirectory
+  - editFiles
+  - fetch
+  - runInTerminal
+  - getTerminalOutput
+  - todos
+  - problems
 agents:
   - Lab-Planner
   - Terraform-Builder-subagent
   - Bicep-Builder-subagent
   - Lab-Reviewer-subagent
+handoffs:
+  - label: Plan a New Lab
+    agent: Lab-Planner
+    prompt: Analyze the following exam scenario and produce a structured lab plan.
+    send: false
 ---
 
 # Lab Orchestrator
@@ -55,12 +73,14 @@ Based on the user's method choice:
 - **Scripted/Manual** → Generate directly (no subagent needed for these simpler cases)
 
 The builder subagent returns:
+
 - All generated files (code + README + validation scripts)
 - A summary of what was created
 
 ### Phase 4: Review
 
 Delegate to **Lab-Reviewer-subagent** with all generated content. The reviewer checks:
+
 - Governance compliance (naming, tags, regions, SKUs)
 - README sections in exact required order (14 sections)
 - Validation sequence presence (validate → capacity test → plan)
@@ -73,6 +93,7 @@ The reviewer returns a **PASS/FAIL** report with specific violations and fixes.
 ### Phase 5: Remediate (if needed)
 
 If the reviewer returns FAIL:
+
 1. Apply the reviewer's fixes
 2. Re-submit to the reviewer for a second pass
 3. Repeat until PASS (max 2 remediation cycles)
@@ -98,7 +119,7 @@ Present the final output to the user:
 - If a subagent fails or returns incomplete results, retry once, then report the issue to the user
 - Keep responses concise and action-oriented
 
-## Handoff Buttons
+## Decision Gates
 
 Use clear decision points to let the user steer:
 

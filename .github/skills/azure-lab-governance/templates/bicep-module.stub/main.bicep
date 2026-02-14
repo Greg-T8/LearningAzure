@@ -34,6 +34,7 @@ var resourceGroupName = '<exam>-<domain>-<topic>-bicep'
 
 // Create the resource group
 resource rg 'Microsoft.Resources/resourceGroups@2024-03-01' = {
+  #disable-next-line BCP416
   name: resourceGroupName
   location: location
   tags: commonTags
