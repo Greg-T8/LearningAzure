@@ -1,68 +1,62 @@
 ---
 name: lab-readme-authoring
-description: 'Generate and validate README.md files for Azure hands-on labs with the required 14-section structure, Mermaid diagrams, and governance-compliant formatting. Use when creating a lab README, validating README section order, or generating lab documentation for AI-102 or AZ-104.'
-user-invokable: false
+description: Procedures for generating lab README.md content, section by section. Section order is defined in shared-contract R-011.
 ---
 
 # Lab README Authoring
 
-Standards and templates for generating lab README.md files. Every lab README must contain exactly 14 sections in the order specified below.
+Procedures for generating README content for Azure hands-on labs. Section order and count are defined in `shared-contract` R-011 — this skill defines the content guidelines for each section.
 
 ## When to Use
 
-- Creating a README for a new hands-on lab
-- Validating an existing README has all required sections in order
-- Generating specific README sections (scenario, architecture, objectives, etc.)
-- Adding Mermaid architecture diagrams
+- Writing README content for a new lab
+- Validating README content completeness
+- Generating specific sections of a lab README
+
+---
 
 ## README Template
 
-Use the template at `.github/skills/azure-lab-governance/templates/README.template.md` as the starting point.
+Starting template: `.github/skills/azure-lab-governance/templates/README.template.md` (see `azure-lab-governance` R-160).
 
-## Required Sections (Exact Order)
+---
 
-The README must contain these 14 sections in this exact sequence:
+## R-140: Per-Section Content Guidelines
 
-### 1. Exam Question Scenario
+Section order: see `shared-contract` R-011.
+
+### Section 1: Exam Question Scenario
 
 ```markdown
 ## Exam Question
 
 > **Exam**: [EXAM] — [Domain]
 
-[Paste verbatim exam question with all answer options. Do NOT reveal the correct answer.]
+[Verbatim exam question with all answer options]
 ```
 
-- Include the complete question text verbatim
-- List all answer options (A, B, C, D or Yes/No)
-- Do NOT indicate which answer is correct in this section
+- Include complete question text exactly as provided.
+- List all answer options.
+- **Do NOT reveal the correct answer in this section.**
 
-### 2. Solution Architecture
+### Section 2: Solution Architecture
 
 ```markdown
 ## Solution Architecture
 
-[2-4 sentences describing the architecture and design decisions.]
+[2-4 sentences from the architecture summary]
 ```
 
-### 3. Architecture Diagram
+### Section 3: Architecture Diagram
 
 ```markdown
 ## Architecture Diagram
-
-\`\`\`mermaid
-graph TD
-    A[Resource Group] --> B[Resource 1]
-    A --> C[Resource 2]
-\`\`\`
 ```
 
-- **Required** when 2+ interconnected resources are deployed
-- Use Mermaid `graph TD` (top-down) or `graph LR` (left-right)
-- Include resource names matching governance naming conventions
-- Show dependencies and relationships
+- See `shared-contract` R-013 for when a diagram is required.
+- Include Mermaid code block if required; otherwise include a brief note.
 
-### 4. Lab Objectives
+### Section 4: Lab Objectives
 
 ```markdown
 ## Lab Objectives
@@ -72,150 +66,105 @@ graph TD
 3. [Objective 3]
 ```
 
-- Include 3–5 specific, measurable objectives
-- Align with the exam question's focus areas
+- 3–5 specific, measurable objectives aligned with the exam question.
 
-### 5. Lab Structure
+### Section 5: Lab Structure
 
 ```markdown
 ## Lab Structure
-
-\`\`\`
-lab-<topic>/
-├── README.md
-├── terraform/
-│   ├── main.tf
-│   └── ...
-└── validation/
-\`\`\`
 ```
 
-- Show the actual file tree of the lab
+- Show the actual file tree of the lab.
 
-### 6. Prerequisites
+### Section 6: Prerequisites
 
 ```markdown
 ## Prerequisites
 
 - Azure subscription with required permissions
 - Azure CLI installed and authenticated
-- Terraform >= 1.0 installed (or Bicep tools)
+- [Terraform >= 1.0 | Bicep CLI] installed
 - PowerShell 7+ with Az module
 ```
 
-### 7. Deployment
+- Adapt to the deployment method.
 
-```markdown
-## Deployment
+### Section 7: Deployment
 
-\`\`\`bash
-cd terraform
-terraform init
-terraform validate
-terraform plan
-terraform apply
-\`\`\`
-```
+- Include the validation sequence from `shared-contract` R-018 for IaaC labs.
+- Keep deployment instructions brief and actionable.
 
-- Keep deployment instructions brief
-- Include validation sequence: validate → capacity test (if needed) → plan → apply
+### Section 8: Testing the Solution
 
-### 8. Testing the Solution
+- Step-by-step validation with specific commands or portal navigation.
+- Include expected outcomes for each step.
 
-```markdown
-## Testing the Solution
-
-[Step-by-step validation instructions with specific commands or portal checks.]
-```
-
-- Provide concrete, actionable testing steps
-- Include expected outcomes
-
-### 9. Cleanup
+### Section 9: Cleanup
 
 ```markdown
 ## Cleanup
 
-\`\`\`bash
-terraform destroy -auto-approve
-\`\`\`
-
 > Destroy within 7 days per governance policy.
 ```
 
-- Include the 7-day cleanup reminder
-- Note purge requirements for soft-delete resources
+- Include cleanup command for the deployment method.
+- Note purge requirements for soft-delete resources (`shared-contract` R-016).
 
-### 10. Scenario Analysis
+### Section 10: Scenario Analysis
 
 ```markdown
 ## Scenario Analysis
 
 ### Correct Answer: [Letter]
 
-[Explain why this is correct.]
+[Explanation]
 
 ### Why Other Options Are Incorrect
 
-- **[Option A]**: [Reasoning]
-- **[Option B]**: [Reasoning]
-- **[Option C]**: [Reasoning]
+- **[Option]**: [Reasoning]
 ```
 
-- Reveal and explain the correct answer
-- Provide reasoning for every incorrect option
+- This is the **only section** where the correct answer is revealed.
+- Provide reasoning for every incorrect option.
 
-### 11. Key Learning Points
+### Section 11: Key Learning Points
+
+- 5–8 concise, actionable points focused on exam-relevant knowledge.
+
+### Section 12: Related Objectives
+
+- Link to specific exam objective references.
+
+### Section 13: Additional Resources
+
+- Links to official Microsoft documentation.
+- Relevant Learn modules or training paths.
+
+### Section 14: Related Labs
 
 ```markdown
-## Key Learning Points
-
-1. [Point 1]
-2. [Point 2]
-3. [Point 3]
-4. [Point 4]
-5. [Point 5]
+▶ Related Lab: [lab-folder-name](../../domain/lab-folder-name/README.md)
 ```
 
-- Include 5–8 concise, actionable learning points
-- Focus on exam-relevant knowledge
+- 0–2 related labs using relative paths.
 
-### 12. Related Objectives
+---
 
-```markdown
-## Related [EXAM] Objectives
+## R-141: Template Reference
 
-- [Objective reference 1]
-- [Objective reference 2]
-```
+Starting template: `.github/skills/azure-lab-governance/templates/README.template.md`
 
-### 13. Additional Resources
+---
 
-```markdown
-## Additional Resources
+## R-142: Rules
 
-- [Resource 1](URL)
-- [Resource 2](URL)
-```
+- **No code header block** in README (`shared-contract` R-012 applies to code files only).
+- Correct answer revealed **only** in Section 10.
+- All 14 sections must appear, even if brief.
+- Use Mermaid diagrams only when meaningful (`shared-contract` R-013).
 
-- Link to official Microsoft documentation
-- Include relevant Learn modules or training paths
+---
 
-### 14. Related Labs
+## R-143: When-to-Use Criteria
 
-```markdown
-## Related Labs
-
-- [Related Lab 1](relative-path) — Brief description
-```
-
-- Link 0–2 related labs using relative paths
-- Use format: `▶ Related Lab: [lab-folder-name](../../domain/lab-folder-name/README.md)`
-
-## Rules
-
-- **Do NOT include a code header block** in the README
-- **Correct answer is only revealed in Section 10** (Scenario Analysis), never in Section 1
-- All sections must appear even if brief
-- Use Mermaid diagrams only when meaningful (2+ interconnected resources)
-- Deployment instructions reference the validation sequence
+Use this skill when creating or validating README content for a hands-on lab.

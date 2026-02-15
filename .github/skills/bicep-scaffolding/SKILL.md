@@ -1,82 +1,61 @@
 ---
 name: bicep-scaffolding
-description: 'Generate governance-compliant Bicep code for Azure hands-on labs. Provides module patterns, stack naming, parameter conventions, deployment wrapper, and cleanup configuration. Use when building Bicep labs, generating .bicep files, or scaffolding Bicep module structure for AI-102 or AZ-104.'
-user-invokable: false
+description: Bicep code generation procedures and patterns for Azure hands-on labs. Cross-cutting rules are in the shared-contract skill.
 ---
 
 # Bicep Scaffolding
 
-Bicep-specific code generation patterns, templates, and conventions for Azure hands-on labs. All generated code must comply with the `azure-lab-governance` skill.
+Bicep-specific code generation procedures. All cross-cutting rules (naming, tags, SKUs, regions, limits) are defined in the `shared-contract` skill — reference by ID, do not restate.
 
 ## When to Use
 
 - Generating Bicep code for a lab
-- Scaffolding a new Bicep lab from a plan
-- Creating Bicep modules for Azure resources
-- Configuring parameters, stack deployments, and wrapper scripts
-- Applying naming, tagging, password, and SKU patterns in Bicep
+- Scaffolding a new Bicep module structure
+- Applying Bicep-specific patterns (scope, stack, wrapper, parameters)
 
-## Templates
+---
 
-Starter templates are in the `azure-lab-governance` skill at:
+## Starter Templates
+
+Located in `azure-lab-governance` skill (see R-160):
 `.github/skills/azure-lab-governance/templates/bicep-module.stub/`
 
 Files: `main.bicep`, `main.bicepparam`
 
-Use these as the starting point for every new lab. Replace `<EXAM>`, `<Domain>`, `<topic>`, `<scenario>`, and `<YYYY-MM-DD>` placeholders.
+---
 
-## Required Files
+## R-130: Required Files
 
-Every Bicep lab must include:
+| File               | Content                                                       |
+| ------------------ | ------------------------------------------------------------- |
+| `main.bicep`       | Root module with `targetScope = 'subscription'`               |
+| `main.bicepparam`  | Per R-136                                                     |
+| `bicepconfig.json` | Bicep lint/compile configuration                              |
+| `bicep.ps1`        | Deployment wrapper — copy from shared, never modify (see R-135) |
 
-| File | Purpose |
-|------|---------|
-| `main.bicep` | Root module with `targetScope = 'subscription'` |
-| `main.bicepparam` | Parameter file |
-| `bicepconfig.json` | Bicep configuration |
-| `bicep.ps1` | Deployment wrapper (copy from shared — do NOT modify) |
+---
 
-## Deployment Scope
+## R-131: Deployment Scope
 
-- Use `targetScope = 'subscription'` for labs creating resource groups
-- Use stack deployments via the wrapper script
+Use `targetScope = 'subscription'` for labs that create resource groups. Use stack deployments via the wrapper script.
 
-## Stack Naming
+---
 
-```
-stack-<domain>-<topic>
-```
+## R-132: Module File Pattern
 
-No exam code in stack name.
+Each module is a `.bicep` file in `modules/`:
 
-## Module Rules
+- Accepts `location`, `tags` (object), and cross-module references as parameters.
+- Outputs resource IDs, endpoints, principal IDs.
+- Uses `@description()` decorators on all parameters.
 
-- Create modules when 2+ related resource types exist
-- One concern per module (domain grouping)
-- Each module gets its own `.bicep` file in `modules/`
-- Pass `commonTags` object to all modules
-- Pass identity references as explicit parameters for RBAC
-- Root `main.bicep` orchestrates modules — minimal direct resource definitions
+Module organization rules: see `shared-contract` R-022.
 
-## Header Block
+---
 
-Include in ALL `.bicep` files:
+## R-133: Parameter Conventions
 
-```
-// -------------------------------------------------------------------------
-// Program: [filename]
-// Description: [purpose]
-// Context: [EXAM] Lab - [scenario]
-// Author: Greg Tate
-// Date: [YYYY-MM-DD]
-// -------------------------------------------------------------------------
-```
-
-## Parameter Conventions
-
-- Use `camelCase` for parameter names
-- Include descriptions via `@description()` decorator
-- Provide governance-compliant defaults where possible
+Use `camelCase` for parameter names (see `shared-contract` R-021). Include `@description()` decorator on every parameter. Provide governance-compliant defaults where possible.
 
 ```bicep
 @description('Azure region for resource deployment')
@@ -89,79 +68,31 @@ param owner string = 'Greg Tate'
 param dateCreated string
 ```
 
-## Naming & Tags
+---
 
-- Resource group: `<exam>-<domain>-<topic>-bicep`
-- Resources: `<type>-<topic>[-instance]` per governance prefix tables
-- All resources must include the 7 required tags via `commonTags`
-- `DateCreated` must be a static string parameter (never use `utcNow()`)
+## R-134: Password Implementation
 
-Common tags pattern in `main.bicep`:
+See `shared-contract` R-024 for rules. Use `uniqueString()` or static pattern. Mark with `@secure()` decorator.
 
-```bicep
-var commonTags = {
-  Environment: 'Lab'
-  Project: '<EXAM>'
-  Domain: '<Domain>'
-  Purpose: '<Purpose>'
-  Owner: owner
-  DateCreated: dateCreated
-  DeploymentMethod: 'Bicep'
-}
-```
+---
 
-## Password Generation
+## R-135: Deployment Wrapper (bicep.ps1)
 
-- Use `uniqueString()` or static pattern for lab-safe passwords
-- Pattern: `AzureLab2026!` style (meets complexity)
-- Mark with `@secure()` decorator
+- **Must copy** shared `bicep.ps1` — never create a custom one.
+- Allowed commands: `validate`, `plan`, `apply`, `destroy`, `show`, `list`.
+- Script validates subscription context automatically.
 
-## Default SKUs
+Stack naming: see `shared-contract` R-004.
 
-| Resource | Default |
-|----------|---------|
-| VM | `Standard_B2s` (or `Standard_B1s` if sufficient) |
-| Storage | Standard LRS |
-| Load Balancer | Basic |
-| Public IP | Basic |
-| OpenAI | S0 |
-| Cognitive Services | F0 → S0 |
-| AI Search | Free / Basic |
-
-## Soft-Delete Configuration
-
-Disable soft-delete at creation:
-
-```bicep
-softDeleteState: 'Disabled'
-```
-
-## Deployment Wrapper (bicep.ps1)
-
-- Must copy shared `bicep.ps1` — never create a custom one
-- Only allowed commands: `validate`, `plan`, `apply`, `destroy`, `show`, `list`
-- Script validates subscription context automatically
-
-## Cleanup
-
-The `destroy` command must include force-deletion for complete resource group cleanup:
+Cleanup destroy command:
 
 ```powershell
 az stack sub delete --name $stackName --yes --force-deletion-types $forceTypes
 ```
 
-## Validation Script
+---
 
-Generate a PowerShell validation script in `validation/` that:
-
-- Confirms lab subscription context (reference `Confirm-LabSubscription` from governance skill)
-- Validates deployed resources exist
-- Tests key functionality
-- Uses the `$Main` / `$Helpers` script pattern
-
-## main.bicepparam
-
-Always pre-populate:
+## R-136: main.bicepparam Template
 
 ```bicep-params
 using './main.bicep'
@@ -170,3 +101,21 @@ param location = 'eastus'
 param owner = 'Greg Tate'
 param dateCreated = '<YYYY-MM-DD>'
 ```
+
+---
+
+## R-137: Soft-Delete Implementation
+
+See `shared-contract` R-016 for the resource table and Bicep disable pattern. Apply to all resources in the R-016 table that are deployed in the lab.
+
+---
+
+## R-138: Validation Script Pattern
+
+Generate a PowerShell script in `validation/` that:
+
+1. Sources `Confirm-LabSubscription` from the `azure-lab-governance` skill (see R-161).
+2. Validates deployed resources exist.
+3. Tests key functionality.
+4. Uses the `$Main` / `$Helpers` script block pattern.
+5. Includes code header per `shared-contract` R-012.

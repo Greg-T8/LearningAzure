@@ -1,31 +1,30 @@
 ---
 name: terraform-scaffolding
-description: 'Generate governance-compliant Terraform code for Azure hands-on labs. Provides provider configuration, module patterns, naming conventions, password generation, SKU defaults, and soft-delete settings. Use when building Terraform labs, generating .tf files, or scaffolding Terraform module structure for AI-102 or AZ-104.'
-user-invokable: false
+description: Terraform code generation procedures and patterns for Azure hands-on labs. Cross-cutting rules are in the shared-contract skill.
 ---
 
 # Terraform Scaffolding
 
-Terraform-specific code generation patterns, templates, and conventions for Azure hands-on labs. All generated code must comply with the `azure-lab-governance` skill.
+Terraform-specific code generation procedures. All cross-cutting rules (naming, tags, SKUs, regions, limits) are defined in the `shared-contract` skill — reference by ID, do not restate.
 
 ## When to Use
 
 - Generating Terraform code for a lab
-- Scaffolding a new Terraform lab from a plan
-- Creating Terraform modules for Azure resources
-- Configuring providers, state, and variables
-- Applying naming, tagging, password, and SKU patterns in Terraform
+- Scaffolding a new Terraform module structure
+- Applying Terraform-specific patterns (provider, state, passwords, soft-delete)
 
-## Templates
+---
 
-Starter templates are in the `azure-lab-governance` skill at:
+## Starter Templates
+
+Located in `azure-lab-governance` skill (see R-160):
 `.github/skills/azure-lab-governance/templates/terraform-module.stub/`
 
 Files: `main.tf`, `variables.tf`, `outputs.tf`, `providers.tf`, `terraform.tfvars`
 
-Use these as the starting point for every new lab. Replace `<EXAM>`, `<Domain>`, `<topic>`, `<scenario>`, and `<YYYY-MM-DD>` placeholders.
+---
 
-## Provider & Version Configuration
+## R-120: Provider / Version Configuration
 
 Every `providers.tf` must contain:
 
@@ -54,117 +53,69 @@ provider "azurerm" {
 }
 ```
 
-## State Management
+Use AzureRM by default. Use AzAPI only if AzureRM lacks a required feature.
 
-- **Local state only** — never configure remote backend
-- `.tfstate*` must be in `.gitignore`
+---
 
-## Required File Structure
+## R-121: State Management
 
-Every Terraform lab must include:
+- Local state only — never configure remote backend.
+- Ensure `.tfstate*` is in `.gitignore`.
 
-| File | Purpose |
-|------|---------|
-| `providers.tf` | Provider and version configuration |
-| `main.tf` | Thin orchestration: locals, resource group, module calls |
-| `variables.tf` | Input variables (always include `lab_subscription_id`, `location`, `owner`, `date_created`) |
-| `outputs.tf` | Useful outputs (resource group name, key endpoints) |
-| `terraform.tfvars` | Pre-populated with lab subscription ID and defaults |
+---
 
-## Module Rules
+## R-122: Required File Structure
 
-- Create modules when 2+ related resource types exist
-- One concern per module (domain grouping)
-- Each module gets: `main.tf`, `variables.tf`, `outputs.tf`
-- Pass `common_tags` map to all modules
-- Pass identity references (e.g., `principal_id`) as explicit inputs for RBAC
-- Root `main.tf` contains **only orchestration** — no resource definitions except the resource group
+| File              | Content                                                                     |
+| ----------------- | --------------------------------------------------------------------------- |
+| `providers.tf`    | Per R-120                                                                   |
+| `main.tf`         | Thin orchestration: locals, resource group, module calls. Tags per `shared-contract` R-023 |
+| `variables.tf`    | Must include: `lab_subscription_id`, `location`, `owner`, `date_created`    |
+| `outputs.tf`      | Resource group name, key endpoints, sensitive values                        |
+| `terraform.tfvars`| Per R-125                                                                   |
 
-## Header Block
+---
 
-Include in ALL `.tf` files:
+## R-123: Module File Pattern
 
-```
-# -------------------------------------------------------------------------
-# Program: [filename]
-# Description: [purpose]
-# Context: [EXAM] Lab - [scenario]
-# Author: Greg Tate
-# Date: [YYYY-MM-DD]
-# -------------------------------------------------------------------------
-```
+Each module directory contains:
 
-## Naming & Tags
+- `main.tf` — resource definitions
+- `variables.tf` — inputs (must accept `tags` map + resource IDs from other modules)
+- `outputs.tf` — resource IDs, endpoints, principal IDs
 
-- Resource group: `<exam>-<domain>-<topic>-tf`
-- Resources: `<type>-<topic>[-instance]` per governance prefix tables
-- All resources must include the 7 required tags via `common_tags`
-- `DateCreated` must be a static string (never use `timestamp()`)
+Module organization rules: see `shared-contract` R-022.
 
-Common tags pattern in `main.tf`:
+---
+
+## R-124: Password Generation
+
+See `shared-contract` R-024 for the canonical pattern and rules. Terraform implementation uses `hashicorp/random`. Never define passwords as input variables. Output as `sensitive = true`.
+
+---
+
+## R-125: terraform.tfvars Template
 
 ```hcl
-locals {
-  resource_group_name = "<exam>-<domain>-<topic>-tf"
-
-  common_tags = {
-    Environment      = "Lab"
-    Project          = "<EXAM>"
-    Domain           = "<Domain>"
-    Purpose          = "<Purpose>"
-    Owner            = var.owner
-    DateCreated      = var.date_created
-    DeploymentMethod = "Terraform"
-  }
-}
+lab_subscription_id = "e091f6e7-031a-4924-97bb-8c983ca5d21a"
+location            = "eastus"
+owner               = "Greg Tate"
+date_created        = "<YYYY-MM-DD>"
 ```
 
-## Password Generation (Lab-Safe)
+Subscription ID: see `shared-contract` R-020.
 
-Use `hashicorp/random` for passwords. Never define passwords as input variables.
+---
 
-```hcl
-resource "random_password" "admin" {
-  length           = 16
-  special          = true
-  override_special = "!@#$%"
-}
-```
+## R-126: Soft-Delete Implementation
 
-Pattern: `AzureLab2026!` style — must meet Azure complexity requirements.
-Output as `sensitive = true`.
+See `shared-contract` R-016 for the resource table and Terraform disable patterns. Apply those settings to all resources in the R-016 table that are deployed in the lab.
 
-## Default SKUs
+---
 
-| Resource | Default |
-|----------|---------|
-| VM | `Standard_B2s` (or `Standard_B1s` if sufficient) |
-| Storage | Standard LRS |
-| Load Balancer | Basic |
-| Public IP | Basic |
-| SQL | Basic / S0 |
-| Disk | Standard HDD |
-| OpenAI | S0 |
-| Cognitive Services | F0 → S0 |
-| Computer Vision | F0 |
-| Language | F0 |
-| Speech | F0 |
-| AI Search | Free / Basic |
+## R-127: Storage Container Pattern
 
-## Soft-Delete Configuration
-
-Disable soft-delete at creation for lab resources:
-
-```hcl
-soft_delete_enabled               = false
-purge_soft_delete_on_destroy      = true
-permanently_delete_on_destroy     = true   # Log Analytics
-purge_protected_items_from_vault_on_destroy = true  # Recovery Vault
-```
-
-## Storage Containers
-
-Always use `storage_account_id` (not `storage_account_name`):
+See `shared-contract` R-025. Always use `storage_account_id` (not `storage_account_name`):
 
 ```hcl
 resource "azurerm_storage_container" "example" {
@@ -173,22 +124,14 @@ resource "azurerm_storage_container" "example" {
 }
 ```
 
-## Validation Script
+---
 
-Generate a PowerShell validation script in `validation/` that:
+## R-128: Validation Script Pattern
 
-- Confirms lab subscription context (reference `Confirm-LabSubscription` from governance skill)
-- Validates deployed resources exist
-- Tests key functionality (endpoints, connectivity)
-- Uses the `$Main` / `$Helpers` script pattern
+Generate a PowerShell script in `validation/` that:
 
-## terraform.tfvars
-
-Always pre-populate:
-
-```hcl
-lab_subscription_id = "e091f6e7-031a-4924-97bb-8c983ca5d21a"
-location            = "eastus"
-owner               = "Greg Tate"
-date_created        = "<YYYY-MM-DD>"
-```
+1. Sources `Confirm-LabSubscription` from the `azure-lab-governance` skill (see R-161).
+2. Validates deployed resources exist (using `Get-AzResource` or `az resource list`).
+3. Tests key functionality (endpoints, connectivity).
+4. Uses the `$Main` / `$Helpers` script block pattern.
+5. Includes code header per `shared-contract` R-012.

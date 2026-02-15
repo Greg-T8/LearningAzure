@@ -1,100 +1,59 @@
 ---
 name: azure-lab-governance
-description: Governance policy for Azure hands-on labs — enforces naming conventions, required tags, region rules, cost guardrails, README structure, Terraform standards, Bicep standards, soft-delete/purge management, and code quality for AI-102 and AZ-104 exam labs.
+description: Template and script inventory for Azure hands-on labs. All cross-cutting rules are in the shared-contract skill.
 ---
 
-# Azure Lab Governance Skill
+# Azure Lab Governance
 
-## When to Use
+Physical templates and scripts for lab scaffolding. All rules (naming, tags, regions, SKUs, etc.) are defined in the `shared-contract` skill — this skill is an inventory of starter files only.
 
-This skill applies to any task involving:
+For the full Azure governance policy document, see `Governance-Lab.md` at the workspace root.
 
-- Creating, reviewing, or modifying hands-on labs (Terraform, Bicep, Scripted, Manual)
-- Validating lab compliance with naming, tagging, region, or cost standards
-- Generating README documentation for labs
-- Reviewing lab code for governance adherence
+---
 
-## How to Apply
+## R-160: Template Inventory
 
-1. **Load the full policy** from [Governance-Lab.md](Governance-Lab.md) in this skill folder (authoritative copy mirrors workspace root)
-2. **Enforce all rules** — governance is mandatory, not advisory
-3. **Report violations** as PASS/FAIL with specific rule references
+### Terraform Starter
 
-## Quick Reference
+Path: `.github/skills/azure-lab-governance/templates/terraform-module.stub/`
 
-### Naming
+| File              | Contents                                    |
+| ----------------- | ------------------------------------------- |
+| `main.tf`         | Locals, resource group, module call stubs   |
+| `variables.tf`    | Standard input variables                    |
+| `outputs.tf`      | Resource group name output                  |
+| `providers.tf`    | AzureRM + random provider config            |
+| `terraform.tfvars`| Pre-populated defaults                      |
 
-- **Resource Group**: `<exam>-<domain>-<topic>-<deployment>` (e.g., `az104-networking-vnet-peering-tf`)
-- **Resources**: `<type>-<topic>[-instance]` using standard prefixes
-- **Bicep Stacks**: `stack-<domain>-<topic>` (no exam code)
+### Bicep Starter
 
-### Required Tags (All Resources)
+Path: `.github/skills/azure-lab-governance/templates/bicep-module.stub/`
 
-| Tag              | Rule                                      |
-| ---------------- | ----------------------------------------- |
-| Environment      | Always `Lab`                              |
-| Project          | `AI-102` or `AZ-104` (uppercase)          |
-| Domain           | e.g., Networking, Storage, Generative AI  |
-| Purpose          | Descriptive (e.g., VNet Peering)          |
-| Owner            | `Greg Tate`                               |
-| DateCreated      | Static `YYYY-MM-DD` — no dynamic functions |
-| DeploymentMethod | `Terraform` or `Bicep`                    |
+| File              | Contents                                     |
+| ----------------- | -------------------------------------------- |
+| `main.bicep`      | Root module with subscription scope, tags, RG |
+| `main.bicepparam` | Pre-populated parameters                     |
 
-### Regions
+### README Template
 
-- Default: `eastus`
-- Fallback: `westus2` → `eastus2` → `centralus`
-- Only US regions allowed
+Path: `.github/skills/azure-lab-governance/templates/README.template.md`
 
-### Deployment Method Priority
+14-section skeleton matching `shared-contract` R-011.
 
-**IaaC > Scripted > Manual** — always prefer IaaC unless clearly inappropriate.
-If IaaC, **ask user**: Terraform or Bicep (never auto-select).
+---
 
-### Validation Sequence (IaaC)
+## R-161: Script Inventory
 
-1. Design — identify all Azure services
-2. Code — implement configuration
-3. Validate Syntax — `terraform validate` or `bicep build`
-4. Regional Capacity Test — for constrained services
-5. Final Validation — `terraform plan` or deployment preview
+### Confirm-LabSubscription.ps1
 
-### Soft-Delete & Purge
+Path: `.github/skills/azure-lab-governance/scripts/Confirm-LabSubscription.ps1`
 
-Resources requiring purge attention: Cognitive Services (48h), Key Vault (7-90d), API Management (48h), Recovery Vault (14d).
-Disable soft-delete at creation when possible.
+Pre-deployment guardrail that validates the active Azure subscription matches the lab subscription (`shared-contract` R-020).
 
-### README Sections (Exact Order)
+---
 
-1. Exam Question Scenario
-2. Solution Architecture
-3. Architecture Diagram (Mermaid if 2+ interconnected resources)
-4. Lab Objectives
-5. Lab Structure
-6. Prerequisites
-7. Deployment
-8. Testing the Solution
-9. Cleanup
-10. Scenario Analysis
-11. Key Learning Points
-12. Related Objectives
-13. Additional Resources
-14. Related Labs
+## R-162: Governance-Lab.md Reference
 
-### Code Standards
+Full Azure governance policy: `Governance-Lab.md` at workspace root.
 
-- Header block in all `.tf`, `.bicep`, `.ps1` files
-- AzureRM provider by default; AzAPI only if needed
-- Modules when 2+ related resource types
-- Local state only; `.tfstate*` in `.gitignore`
-- Lab-safe passwords via `hashicorp/random`
-
-### Cost Guardrails
-
-- Use lowest viable SKUs (VM: `Standard_B2s`, Storage: Standard LRS)
-- Max per lab: 4 VMs, 5 Public IPs, 3 Storage Accounts, 4 VNets
-- Destroy within 7 days; track via `DateCreated`
-
-## Full Policy
-
-For complete details on any rule, consult [Governance-Lab.md](Governance-Lab.md) in this skill folder.
+This is the authoritative document for Azure-specific implementation details beyond what the `shared-contract` covers (e.g., detailed Azure service behavior, SNAT edge cases, NIC conflict specifics).
