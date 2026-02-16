@@ -131,28 +131,77 @@ After deployment, validate the architecture matches the exam scenario:
 # 1. Verify VM01 has an instance-level public IP (IP01)
 $vm01Nic = Get-AzNetworkInterface -Name 'nic-vm-web-01' -ResourceGroupName 'az104-networking-slb-outbound-traffic-tf'
 $vm01Nic.IpConfigurations[0].PublicIpAddress.Id  # Should reference pip-vm-01
+```
 
+<img src='.img/2026-02-16-03-43-01.png' width=900>
+
+```powershell
 # 2. Verify LB has two frontend IP configurations (IP02, IP03)
 $lb = Get-AzLoadBalancer -Name 'lb-public' -ResourceGroupName 'az104-networking-slb-outbound-traffic-tf'
 $lb.FrontendIpConfigurations | Select-Object Name  # Should show frontend-ip-02 and frontend-ip-03
+```
 
+<img src='.img/2026-02-16-03-43-57.png' width=700>
+
+```powershell
 # 3. Verify inbound pool has all 3 VMs
 $inboundPool = $lb.BackendAddressPools | Where-Object { $_.Name -eq 'pool-inbound' }
 $inboundPool.BackendIpConfigurations.Count  # Should be 3
+```
 
+<img src='.img/2026-02-16-03-44-45.png' width=500>
+
+```powershell
 # 4. Verify outbound pool has only VM02 and VM03 (not VM01)
 $outboundPool = $lb.BackendAddressPools | Where-Object { $_.Name -eq 'pool-outbound' }
 $outboundPool.BackendIpConfigurations.Count  # Should be 2
+```
 
+<img src='.img/2026-02-16-03-45-21.png' width=600>
+
+```powershell
 # 5. Verify LB rule has disable_outbound_snat = true
 $lb.LoadBalancingRules[0].DisableOutboundSnat  # Should be True
+```
 
+<img src='.img/2026-02-16-03-46-04.png' width=600>
+
+> **Note – Load Balancer Rule SNAT vs Outbound Rule SNAT**
+>
+> In a Standard Azure Load Balancer, outbound SNAT can be configured in two places (see below):
+>
+> * **Load balancing rule (implicit SNAT)**
+>   When enabled, the frontend IP of the load balancing rule is used to provide outbound internet access for the backend pool. This method uses default port allocation and offers limited control. It is primarily intended for simple scenarios and is not recommended for controlled outbound connectivity.
+>
+> * **Outbound rule (explicit SNAT)**
+>   This is the recommended approach for managing outbound traffic. It allows you to:
+>
+>   * Select specific frontend IPs for egress
+>   * Control SNAT port allocation per instance
+>   * Configure idle timeout and TCP reset behavior
+>   * Scale outbound capacity more predictably
+>
+> When both a load balancing rule and an outbound rule exist, disable outbound SNAT on the load balancing rule to avoid conflicts and ensure that the outbound rule exclusively controls egress behavior.
+
+<img src='.img/2026-02-16-03-56-33.png' width=900>
+
+<img src='.img/2026-02-16-03-52-47.png' width=900>
+
+```powershell
 # 6. Verify outbound rule protocol is TCP only
 $lb.OutboundRules[0].Protocol  # Should be Tcp
+```
 
+<img src='.img/2026-02-16-03-53-59.png' width=600>
+
+```powershell
 # 7. Verify outbound rule uses both frontend IPs
 $lb.OutboundRules[0].FrontendIpConfigurations.Count  # Should be 2
+```
 
+<img src='.img/2026-02-16-03-54-22.png' width=700>
+
+```powershell
 # 8. Get all public IP addresses for reference
 Get-AzPublicIpAddress -ResourceGroupName 'az104-networking-slb-outbound-traffic-tf' |
     Select-Object Name, IpAddress
