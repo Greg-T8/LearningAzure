@@ -1,32 +1,33 @@
 ---
 name: Lab-Orchestrator
 description: Coordinating agent for lab creation. Sequences phases, delegates to phase agents, tracks state, manages handoffs. Contains no domain logic.
-model: 'Claude Sonnet 4.5'
+model: 'Claude Haiku 4.5'
 user-invokable: true
-tools: []
+tools: [agent/runSubagent]
 handoffs:
   - label: Intake
     agent: Intake
     prompt: Ingest the exam question and extract metadata.
-    send: true
-  - label: Design Lab
-    agent: Lab-Designer
+    send: false
+    model: Claude Sonnet 4.5 (copilot)
+  - agent: Lab-Designer
+    label: Design Lab
     prompt: Design the lab architecture and generate README.
     send: false
-  - label: Build Lab
-    agent: Lab-Builder
+  - agent: Lab-Builder
+    label: Build Lab
     prompt: Generate all IaC code and scripts.
     send: false
-  - label: Review Lab
-    agent: Lab-Reviewer
+  - agent: Lab-Reviewer
+    label: Review Lab
     prompt: Review all generated content for compliance.
     send: false
-  - label: Remediate
-    agent: Lab-Remediator
+  - agent: Lab-Remediator
+    label: Remediate
     prompt: Fix review violations.
     send: false
-  - label: Finalize
-    agent: Lab-Finalizer
+  - agent: Lab-Finalizer
+    label: Finalize
     prompt: Present the final lab deliverables.
     send: false
 ---
@@ -73,7 +74,6 @@ metadata:
   exam:             string      # AI-102 | AZ-104
   domain:           string      # e.g., Networking
   topic:            string      # e.g., vnet-peering
-  correct_answer:   string      # e.g., B
   key_services:     string[]    # e.g., [VNet, NSG, Route Table]
 deployment_method:  string      # Terraform | Bicep | Scripted | Manual
 ```

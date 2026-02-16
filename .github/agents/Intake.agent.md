@@ -4,11 +4,6 @@ description: Phase 1 agent — ingests exam questions (screenshot or text), extr
 model: 'Claude Sonnet 4.5'
 user-invokable: false
 tools: ["readFile", "listDirectory", "fileSearch", "textSearch", "codebase", "fetch"]
-handoffs:
-  - label: Return to Orchestrator
-    agent: Lab-Orchestrator
-    prompt: Intake complete. Proceed to Design phase.
-    send: false
 ---
 
 # Intake Agent — Phase 1
