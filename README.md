@@ -27,21 +27,21 @@ Progress trackers, detailed study notes, practice exams, and hands-on labs:
 
 | Date | AI-102 | AZ-104 | Total |
 |------|--------|--------|-------|
-| Mon, Feb 16 |  |  |  |
+| Mon, Feb 16 |  | 🟡 0.7h | **0.7h** |
 | Sun, Feb 15 |  |  |  |
 | Sat, Feb 14 |  |  |  |
 | Fri, Feb 13 | 🟢 1.4h | 🟣 3.5h | **4.9h** |
 | Thu, Feb 12 | 🟢 1.8h | 🟣 3.5h | **5.3h** |
 | Wed, Feb 11 | 🟡 0.7h | 🟣 3.3h | **4.0h** |
 | Tue, Feb 10 | 🟢 1.8h | 🟣 2.1h | **3.9h** |
-| **Weekly Total** | **5.7h** | **12.4h** | **18.1h** |
-| ***Running Total*** | ***6.5h*** | ***68.5h*** | ***75.0h*** |
+| **Weekly Total** | **5.7h** | **13.1h** | **18.8h** |
+| ***Running Total*** | ***5.8h*** | ***68.4h*** | ***74.2h*** |
 
 *Activity Levels: 🟡 Low (< 1hr) | 🟢 Medium (1-2hrs) | 🟣 High (> 2hrs)*
 
 *Hours = time between first and last commit of the day in that certification folder*
 
-*Last updated: February 16, 2026 at 03:21 CST*
+*Last updated: February 16, 2026 at 08:00 CST*
 
 <!-- COMMIT_STATS_END -->
 
