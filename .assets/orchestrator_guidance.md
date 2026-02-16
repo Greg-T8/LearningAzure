@@ -1,3 +1,5 @@
+# Lab Orchestrator Guidance
+
 ## Target end state
 
 Create a **Lab Orchestrator** custom agent that delegates to **context-isolated subagents** for (1) planning, (2) code generation, and (3) governance/README review—similar to the conductor-delegate pattern used by Copilot Atlas. ([GitHub][1])

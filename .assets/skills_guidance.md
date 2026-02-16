@@ -1,3 +1,5 @@
+# Skills Guidance
+
 ## How Copilot Atlas “uses skills” (in that repo)
 
 Copilot Atlas is primarily a **custom-agent prompt pack** (Atlas + subagents) that uses a conductor/delegate pattern: a main orchestrator agent delegates planning/implementation/review work to specialized subagents. ([GitHub][1])
