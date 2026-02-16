@@ -1,7 +1,7 @@
 # -------------------------------------------------------------------------
 # Program: update-commit-stats.py
 # Description: Update commit statistics in README.md tracking activity per
-#              certification (AI-102, AZ-104, AI-900) for the last 7 days.
+#              certification (AI-102, AZ-104) for the last 7 days.
 #              Hours calculated as time between first and last commit per day.
 #              Overlapping activity windows are split evenly.
 # Author: Greg Tate
@@ -11,14 +11,15 @@ import re
 import subprocess
 from collections import defaultdict
 from datetime import datetime, timedelta
-from zoneinfo import ZoneInfo
+from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 
 CERTIFICATIONS = {
     'AI-102': '2026-02-09',
-    'AZ-104': '2026-01-14',
-    'AI-900': '2026-01-14'
+    'AZ-104': '2026-01-14'
 }
+NON_EXAM_CATEGORY = 'Non-Exam Dev'
+TRACKED_CATEGORIES = list(CERTIFICATIONS.keys()) + [NON_EXAM_CATEGORY]
 
 
 def main() -> None:
@@ -61,7 +62,7 @@ def get_commits_by_path(
         since_date: Specific date to start from (overrides days parameter)
 
     Returns:
-        dict: Commits grouped by date and certification
+        dict: Commits grouped by date and tracked activity category
     """
     if since_date is None:
         since_date = (
@@ -99,13 +100,9 @@ def get_commits_by_path(
             if len(parts) >= 2:
                 current_datetime = parts[1]
                 current_date = current_datetime.split()[0]
-        # Categorize file paths by certification
+        # Categorize file paths by certification or non-exam development
         elif line.strip() and current_datetime:
-            if line.startswith('AI-900/'):
-                commits_by_date_cert[current_date]['AI-900'].append(
-                    current_datetime
-                )
-            elif line.startswith('AI-102/'):
+            if line.startswith('AI-102/'):
                 commits_by_date_cert[current_date]['AI-102'].append(
                     current_datetime
                 )
@@ -113,8 +110,10 @@ def get_commits_by_path(
                 commits_by_date_cert[current_date]['AZ-104'].append(
                     current_datetime
                 )
-            elif line.startswith('.github/') or line == 'README.md':
-                commits_by_date_cert[current_date]['Repo'].append(
+            elif line.startswith('AI-900/'):
+                continue
+            else:
+                commits_by_date_cert[current_date][NON_EXAM_CATEGORY].append(
                     current_datetime
                 )
 
@@ -202,14 +201,14 @@ def split_overlapping_hours(
     # Build activity intervals for each certification
     intervals_by_cert = {}
 
-    for cert in CERTIFICATIONS:
+    for cert in TRACKED_CATEGORIES:
         timestamps = date_commits.get(cert, [])
         interval = get_activity_interval(timestamps)
         if interval is not None:
             intervals_by_cert[cert] = interval
 
     if not intervals_by_cert:
-        return {cert: 0.0 for cert in CERTIFICATIONS}
+        return {cert: 0.0 for cert in TRACKED_CATEGORIES}
 
     # Create events for interval start and end points
     events = []
@@ -223,7 +222,7 @@ def split_overlapping_hours(
     )
 
     # Process events and allocate hours
-    allocated_hours = {cert: 0.0 for cert in CERTIFICATIONS}
+    allocated_hours = {cert: 0.0 for cert in TRACKED_CATEGORIES}
     active_certs = set()
     previous_time = None
 
@@ -274,21 +273,26 @@ def calculate_running_totals() -> dict[str, float]:
     """Calculate running totals since each certification's start date.
 
     Returns:
-        Dict mapping certification names to running total hours
+        Dict mapping activity category names to running total hours
     """
-    running_totals = {}
+    running_totals = {category: 0.0 for category in TRACKED_CATEGORIES}
+    non_exam_start_date = min(CERTIFICATIONS.values())
+    start_dates = {
+        **CERTIFICATIONS,
+        NON_EXAM_CATEGORY: non_exam_start_date
+    }
 
-    # Calculate cumulative hours for each certification
-    for cert, start_date in CERTIFICATIONS.items():
+    # Calculate cumulative hours for each tracked category
+    for category, start_date in start_dates.items():
         commits = get_commits_by_path(since_date=start_date)
 
         # Sum hours across all days
         total_hours = 0.0
         for date_commits in commits.values():
             day_hours = split_overlapping_hours(date_commits)
-            total_hours += day_hours.get(cert, 0.0)
+            total_hours += day_hours.get(category, 0.0)
 
-        running_totals[cert] = round(total_hours, 1)
+        running_totals[category] = round(total_hours, 1)
 
     return running_totals
 
@@ -316,13 +320,15 @@ def generate_commit_table(
 
     # Initialize markdown table
     table = "## 📈 Recent Activity (Last 7 Days)\n\n"
-    table += "| Date | AI-102 | AZ-104 | AI-900 | Total |\n"
-    table += "|------|--------|--------|--------|-------|\n"
+    table += (
+        "| Date | AI-102 | AZ-104 | Total | Non-Exam Dev |\n"
+    )
+    table += "|------|--------|--------|-------|--------------|\n"
 
     # Initialize weekly totals
     total_ai102 = 0.0
     total_az104 = 0.0
-    total_ai900 = 0.0
+    total_non_exam = 0.0
 
     # Process each day
     for date in dates:
@@ -332,13 +338,13 @@ def generate_commit_table(
         # Extract hours for each certification
         ai102_hours = round(split_hours.get('AI-102', 0.0), 1)
         az104_hours = round(split_hours.get('AZ-104', 0.0), 1)
-        ai900_hours = round(split_hours.get('AI-900', 0.0), 1)
-        daily_total = ai102_hours + az104_hours + ai900_hours
+        non_exam_hours = round(split_hours.get(NON_EXAM_CATEGORY, 0.0), 1)
+        daily_total = ai102_hours + az104_hours
 
         # Accumulate weekly totals
         total_ai102 += ai102_hours
         total_az104 += az104_hours
-        total_ai900 += ai900_hours
+        total_non_exam += non_exam_hours
 
         # Format date string
         date_obj = datetime.strptime(date, '%Y-%m-%d')
@@ -347,7 +353,7 @@ def generate_commit_table(
         # Build hour strings with color-coded emoji
         ai102_emoji = get_activity_emoji(ai102_hours)
         az104_emoji = get_activity_emoji(az104_hours)
-        ai900_emoji = get_activity_emoji(ai900_hours)
+        non_exam_emoji = get_activity_emoji(non_exam_hours)
 
         ai102_str = (
             f"{ai102_emoji} {ai102_hours}h" if ai102_hours > 0 else ""
@@ -355,8 +361,10 @@ def generate_commit_table(
         az104_str = (
             f"{az104_emoji} {az104_hours}h" if az104_hours > 0 else ""
         )
-        ai900_str = (
-            f"{ai900_emoji} {ai900_hours}h" if ai900_hours > 0 else ""
+        non_exam_str = (
+            f"{non_exam_emoji} {non_exam_hours}h"
+            if non_exam_hours > 0
+            else ""
         )
         total_str = (
             f"**{daily_total:.1f}h**" if daily_total > 0 else ""
@@ -364,27 +372,27 @@ def generate_commit_table(
 
         table += (
             f"| {formatted_date} | {ai102_str} | {az104_str} | "
-            f"{ai900_str} | {total_str} |\n"
+            f"{total_str} | {non_exam_str} |\n"
         )
 
     # Add weekly totals row
-    weekly_total = total_ai102 + total_az104 + total_ai900
+    weekly_total = total_ai102 + total_az104
     table += (
         f"| **Weekly Total** | **{total_ai102:.1f}h** | "
-        f"**{total_az104:.1f}h** | **{total_ai900:.1f}h** | "
-        f"**{weekly_total:.1f}h** |\n"
+        f"**{total_az104:.1f}h** | "
+        f"**{weekly_total:.1f}h** | **{total_non_exam:.1f}h** |\n"
     )
 
     # Calculate and add running totals row
     running_totals = calculate_running_totals()
     running_ai102 = running_totals.get('AI-102', 0.0)
     running_az104 = running_totals.get('AZ-104', 0.0)
-    running_ai900 = running_totals.get('AI-900', 0.0)
-    running_grand_total = running_ai102 + running_az104 + running_ai900
+    running_non_exam = running_totals.get(NON_EXAM_CATEGORY, 0.0)
+    running_grand_total = running_ai102 + running_az104
     table += (
         f"| ***Running Total*** | ***{running_ai102:.1f}h*** | "
-        f"***{running_az104:.1f}h*** | ***{running_ai900:.1f}h*** | "
-        f"***{running_grand_total:.1f}h*** |\n"
+        f"***{running_az104:.1f}h*** | "
+        f"***{running_grand_total:.1f}h*** | ***{running_non_exam:.1f}h*** |\n"
     )
 
     # Add legend and metadata
@@ -394,11 +402,14 @@ def generate_commit_table(
     )
     table += (
         "\n*Hours = time between first and last commit of the day "
-        "in that certification folder*\n"
+        "in that tracked category (exam folder or non-exam path)*\n"
     )
 
-    # Add timestamp in Central timezone
-    central_time = datetime.now(ZoneInfo('America/Chicago'))
+    # Add timestamp in Central timezone (fallback to local timezone if missing)
+    try:
+        central_time = datetime.now(ZoneInfo('America/Chicago'))
+    except ZoneInfoNotFoundError:
+        central_time = datetime.now().astimezone()
     table += (
         f"\n*Last updated: "
         f"{central_time.strftime('%B %d, %Y at %H:%M %Z')}*\n"

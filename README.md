@@ -25,23 +25,23 @@ Progress trackers, detailed study notes, practice exams, and hands-on labs:
 <!-- COMMIT_STATS_START -->
 ## 📈 Recent Activity (Last 7 Days)
 
-| Date | AI-102 | AZ-104 | AI-900 | Total |
-|------|--------|--------|--------|-------|
-| Sat, Feb 14 |  |  |  |  |
-| Fri, Feb 13 | 🟢 1.4h | 🟣 3.5h |  | **4.9h** |
-| Thu, Feb 12 | 🟢 1.8h | 🟣 3.5h |  | **5.3h** |
-| Wed, Feb 11 | 🟡 0.7h | 🟣 3.3h |  | **4.0h** |
-| Tue, Feb 10 | 🟢 1.8h | 🟣 2.1h |  | **3.9h** |
-| Mon, Feb 09 | 🟡 0.4h | 🟣 2.3h | 🟢 1.7h | **4.4h** |
-| Sun, Feb 08 |  | 🟣 2.9h | 🟢 1.0h | **3.9h** |
-| **Weekly Total** | **6.1h** | **17.6h** | **2.7h** | **26.4h** |
-| ***Running Total*** | ***5.8h*** | ***65.2h*** | ***18.8h*** | ***89.8h*** |
+| Date | AI-102 | AZ-104 | Total | Non-Exam Dev |
+|------|--------|--------|-------|--------------|
+| Mon, Feb 16 |  |  |  |  |
+| Sun, Feb 15 |  |  |  |  |
+| Sat, Feb 14 |  |  |  | 🟣 12.5h |
+| Fri, Feb 13 | 🟢 1.0h | 🟣 3.0h | **4.0h** | 🟡 0.8h |
+| Thu, Feb 12 | 🟢 1.2h | 🟣 2.1h | **3.3h** | 🟢 2.0h |
+| Wed, Feb 11 | 🟡 0.5h | 🟢 2.0h | **2.5h** | 🟢 1.6h |
+| Tue, Feb 10 | 🟡 0.9h | 🟢 1.0h | **1.9h** | 🟣 3.5h |
+| **Weekly Total** | **3.6h** | **8.1h** | **11.7h** | **20.4h** |
+| ***Running Total*** | ***4.0h*** | ***51.8h*** | ***55.8h*** | ***124.3h*** |
 
 *Activity Levels: 🟡 Low (< 1hr) | 🟢 Medium (1-2hrs) | 🟣 High (> 2hrs)*
 
-*Hours = time between first and last commit of the day in that certification folder*
+*Hours = time between first and last commit of the day in that tracked category (exam folder or non-exam path)*
 
-*Last updated: February 14, 2026 at 08:07 CST*
+*Last updated: February 16, 2026 at 03:10 Central Standard Time*
 
 <!-- COMMIT_STATS_END -->
 
