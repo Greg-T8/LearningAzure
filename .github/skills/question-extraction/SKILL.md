@@ -5,7 +5,7 @@ description: Procedure for extracting structured metadata from exam questions (s
 
 # Question Extraction
 
-Procedure for extracting structured metadata from Azure certification exam questions. Used by the Intake agent (Phase 1).
+Procedure for extracting structured metadata from Azure certification exam questions. Used by the Lab-Intake agent (Phase 1).
 
 ## When to Use
 

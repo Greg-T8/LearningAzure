@@ -1,6 +1,6 @@
 ---
 name: CreateLab
-description: Create a governance-compliant hands-on lab from an exam scenario
+description: Calls the Lab Orchestrator to generate a complete hands-on lab from an exam question or scenario.
 agent: Lab-Orchestrator
 tools:
   - agent

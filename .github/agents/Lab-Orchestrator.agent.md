@@ -5,31 +5,36 @@ model: 'Claude Haiku 4.5'
 user-invokable: true
 tools: [agent/runSubagent]
 handoffs:
-  - label: Intake
-    agent: Intake
+  - label: Lab-Intake
+    agent: Lab-Intake
     prompt: Ingest the exam question and extract metadata.
-    send: false
+    send: true
     model: Claude Sonnet 4.5 (copilot)
   - agent: Lab-Designer
     label: Design Lab
     prompt: Design the lab architecture and generate README.
     send: false
+    model: Claude Sonnet 4.5 (copilot)
   - agent: Lab-Builder
     label: Build Lab
     prompt: Generate all IaC code and scripts.
     send: false
+    model: GPT-5.3-Codex (copilot)
   - agent: Lab-Reviewer
     label: Review Lab
     prompt: Review all generated content for compliance.
     send: false
+    model: Claude Sonnet 4.5 (copilot)
   - agent: Lab-Remediator
     label: Remediate
     prompt: Fix review violations.
     send: false
+    model: GPT-5.3-Codex (copilot)
   - agent: Lab-Finalizer
     label: Finalize
     prompt: Present the final lab deliverables.
     send: false
+    model: Claude Sonnet 4.5 (copilot)
 ---
 
 # Lab Orchestrator
@@ -54,7 +59,7 @@ Execute phases in this exact order:
 
 | Phase | Agent           | Purpose                                                     |
 | ----- | --------------- | ----------------------------------------------------------- |
-| 1     | Intake          | Ingest exam question, extract metadata, resolve deployment method |
+| 1     | Lab-Intake      | Ingest exam question, extract metadata, resolve deployment method |
 | 2     | Lab-Designer    | Architecture, diagram, naming, modules, file tree, README   |
 | 3     | Lab-Builder     | Generate IaC code/modules + validation scripts              |
 | 4     | Lab-Reviewer    | Validate compliance, produce pass/fail report               |
@@ -139,7 +144,7 @@ Pause for user confirmation at these points:
 
 | Gate | After Phase | Prompt                                                     |
 | ---- | ----------- | ---------------------------------------------------------- |
-| G1   | 1 (Intake)  | "Does this metadata and deployment method look correct?"   |
+| G1   | 1 (Lab-Intake) | "Does this metadata and deployment method look correct?"   |
 | G2   | 2 (Design)  | "Does this architecture and module plan look correct?"     |
 | G3   | 4 (Review)  | If PASS → "Finalize?" · If FAIL → "Apply fixes and re-review?" |
 
