@@ -144,13 +144,16 @@ generated_files:       map[path → content]
 
 ## R-033: Decision Gates
 
-Pause for user confirmation at these points:
+Pause for user confirmation at each stage:
 
-| Gate | After Phase | Prompt                                                     |
-| ---- | ----------- | ---------------------------------------------------------- |
-| G1   | 1 (Lab-Intake) | "Does this metadata and deployment method look correct?"   |
-| G2   | 2 (Design)  | "Does this architecture and module plan look correct?"     |
-| G3   | 4 (Review)  | If PASS → "Finalize?" · If FAIL → "Apply fixes and re-review?" |
+| Gate | Stage | Prompt                                                     |
+| ---- | ----- | ---------------------------------------------------------- |
+| G0   | Before Lab-Intake | "Ready to proceed with lab creation from exam question?"  |
+| G1   | After 1 (Lab-Intake) | "Does this metadata and deployment method look correct?"   |
+| G2   | After 2 (Lab-Designer) | "Does this architecture and module plan look correct?"   |
+| G3   | After 3 (Lab-Builder) | "Does the generated code structure look correct?"         |
+| G4   | After 4 (Lab-Reviewer) | If PASS → "Proceed to finalization?" · If FAIL → "Proceed to remediation?" |
+| G5   | After 5 (Lab-Remediator) | "Apply fixes and re-review?" (only if Phase 4 = FAIL)    |
 
 ---
 
