@@ -185,7 +185,7 @@ $lb.LoadBalancingRules[0].DisableOutboundSnat  # Should be True
 
 <img src='.img/2026-02-16-03-56-33.png' width=900>
 
-<img src='.img/2026-02-16-03-52-47.png' width=900>
+<img src='.img/2026-02-16-04-16-25.png' width=900>
 
 ```powershell
 # 6. Verify outbound rule protocol is TCP only
@@ -206,6 +206,8 @@ $lb.OutboundRules[0].FrontendIpConfigurations.Count  # Should be 2
 Get-AzPublicIpAddress -ResourceGroupName 'az104-networking-slb-outbound-traffic-tf' |
     Select-Object Name, IpAddress
 ```
+
+<img src='.img/2026-02-16-04-12-37.png' width=600>
 
 To test actual outbound behavior, RDP into each VM and check the outbound IP:
 
