@@ -1,24 +1,198 @@
 ---
 name: Lab
-description: Generates a governance-compliant hands-on lab from an exam scenario
-agent: Lab-Orchestrator
-tools:
-  - agent
+description: Generates a governance-compliant hands-on lab from an exam scenario using Terraform, Bicep, Scripted, or Manual methods
 ---
 
 # Hands-on Lab Generator
 
-Create a fully working hands-on lab from an exam scenario.
+Create a fully working lab from an exam scenario using the **most appropriate deployment method**, strictly aligned to `Governance-Lab.md` (workspace root).
 
-Paste the exam question below and the Lab Orchestrator will:
+`Governance-Lab.md` is the single source of truth for naming, tagging, regions, versions, and standards.
 
-1. **Plan** — Analyze the scenario, extract metadata, design architecture (via `lab-planning` skill)
-2. **Select method** — Choose deployment method (IaaC > Scripted > Manual) and ask you to pick Terraform or Bicep
-3. **Build** — Generate all code and documentation (via `terraform-scaffolding` / `bicep-scaffolding` and `lab-readme-authoring` skills)
-4. **Review** — Validate governance compliance (via `lab-review-checklist` skill)
-5. **Finalize** — Deliver the complete lab with a summary
+---
 
-All standards enforced by the `azure-lab-governance` skill.
+## 1. Deployment Method Selection
+
+Evaluate the scenario and choose the best-fit method.
+
+### Priority Order
+
+**IaaC > Scripted > Manual (Portal/UI)**
+Default to IaaC unless clearly inappropriate.
+
+### Infrastructure as Code (Preferred)
+
+Use when:
+
+* Deploying Azure resources
+* Architecture/configuration focus
+* Repeatable provisioning required
+
+Examples:
+
+* Deploy VM with networking
+* Provision App Service + SQL
+
+#### IaaC Choice (Mandatory Prompt)
+
+Ask user to choose:
+
+* Terraform
+* Bicep
+
+Do not auto-select.
+
+---
+
+### Scripted (PowerShell/Azure CLI)
+
+Use when:
+
+* Question explicitly requires commands
+* Imperative workflows/configuration
+* Operational focus
+
+---
+
+### Manual (Portal/UI)
+
+Use when:
+
+* Portal navigation is tested
+* UI workflows are core to the question
+
+---
+
+## 2. Mandatory Standards
+
+### Governance
+
+All labs must follow `Governance-Lab.md` for:
+
+* Naming conventions
+* Resource group patterns
+* Required tags (on all resources)
+* Allowed regions
+* Provider/version/state standards
+* Configuration best practices
+
+---
+
+### Subscription Validation (All Labs)
+
+Must validate deployment to:
+
+```
+e091f6e7-031a-4924-97bb-8c983ca5d21a
+```
+
+* Terraform → `terraform.tfvars` variable
+* Bicep → validate in wrapper or param file
+* Scripted → validate before resource creation
+
+Required PowerShell pattern:
+
+```powershell
+function Confirm-LabSubscription {
+    $expectedSubscriptionId = 'e091f6e7-031a-4924-97bb-8c983ca5d21a'
+    $currentSubscription = (Get-AzContext).Subscription.Id
+    
+    if ($currentSubscription -ne $expectedSubscriptionId) {
+        Write-Error "Not connected to lab subscription."
+        exit 1
+    }
+}
+```
+
+---
+
+## 3. README Requirements (Exact Order)
+
+README must contain:
+
+1. Exam Question Scenario (verbatim options, no correct answer revealed)
+2. Solution Architecture
+3. Architecture Diagram (Mermaid if 2+ interconnected resources)
+4. Lab Objectives (3–5)
+5. Lab Structure (brief tree)
+6. Prerequisites
+7. Deployment (brief)
+8. Testing the Solution
+9. Cleanup (brief)
+10. Scenario Analysis (correct + incorrect reasoning)
+11. Key Learning Points (5–8)
+12. Related `<EXAM>` Objectives
+13. Additional Resources
+14. Related Labs (0–2)
+
+---
+
+## 4. Folder Structure
+
+Create under:
+
+```
+<EXAM>/hands-on-labs/<domain>/lab-<topic>/
+```
+
+### IaaC
+
+```
+lab-<topic>/
+├── README.md
+├── terraform/ OR bicep/
+│   ├── main.*
+│   ├── variables.* / params
+│   ├── outputs.*
+│   ├── providers.tf (Terraform)
+│   ├── terraform.tfvars (Terraform)
+│   └── modules/ (if needed)
+└── validation/
+```
+
+Use modules when deploying multiple resource types.
+
+---
+
+### Scripted
+
+```
+lab-<topic>/
+├── README.md
+├── scripts/
+│   ├── deploy.*
+│   ├── config.* (if needed)
+│   └── cleanup.*
+└── validation/
+```
+
+---
+
+### Manual
+
+```
+lab-<topic>/
+├── README.md
+└── screenshots/ (optional)
+```
+
+---
+
+## 5. Code Header Block (Code Files Only)
+
+Include in `.tf`, `.bicep`, `.ps1`:
+
+```
+# -------------------------------------------------------------------------
+# Program: [filename]
+# Description: [purpose]
+# Context: <EXAM> Lab - [scenario]
+# Author: Greg Tate
+# Date: [YYYY-MM-DD]
+# -------------------------------------------------------------------------
+```
+
+Do not include in README.
 
 ---
 
