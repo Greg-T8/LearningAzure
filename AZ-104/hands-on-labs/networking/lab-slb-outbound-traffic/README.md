@@ -214,11 +214,23 @@ To test actual outbound behavior, RDP into each VM and check the outbound IP:
 ```powershell
 # From within VM01 (should show IP01 / pip-vm-01 address)
 Invoke-RestMethod -Uri 'https://api.ipify.org'
+```
 
+Confirming that public traffic from VM01 uses IP01 (instance-level PIP) instead of IP02/IP03 (LB frontend IPs):
+
+<img src='.img/2026-02-16-04-23-15.png' width=700>
+
+```powershell
 # From within VM02 or VM03 (should show IP02 or IP03 for TCP connections)
 # TCP test - will use outbound rule IPs
 Invoke-WebRequest -Uri 'https://api.ipify.org' -UseBasicParsing
+```
 
+Confirming that TCP traffic from VM02/VM03 uses IP02/IP03 (LB frontend IPs) due to the outbound rule:
+
+<img src='.img/2026-02-16-04-29-42.png' width=700>
+
+```powershell
 # UDP test from VM02/VM03 - will fail (no outbound rule for UDP)
 # Standard LB blocks outbound for protocols not covered by rules
 ```
