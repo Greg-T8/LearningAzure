@@ -38,6 +38,16 @@ You are the **Lab Orchestrator** — a coordinating agent that sequences phases,
 
 ---
 
+## TEMPORARY WORKAROUND
+
+**Do not call #tool:agent/runSubagent automatically.**
+
+Due to a bug where subagent handoffs don't respect model changes (<https://github.com/microsoft/vscode/issues/295449>), you must **not** automatically invoke the `runSubagent` tool. Instead, prompt the user to manually click the appropriate handoff button to proceed to the next phase.
+
+This rule will be removed once the bug is resolved.
+
+---
+
 ## R-030: Phase Sequence
 
 Execute phases in this exact order:
