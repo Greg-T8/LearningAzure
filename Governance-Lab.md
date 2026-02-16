@@ -161,6 +161,19 @@ Start free when available.
 
 ---
 
+### 3.4 Auto-Shutdown Schedule
+
+Enable daily auto-shutdown on all VMs to control costs:
+
+- **Time:** 8:00 AM Central Time
+- **Timezone:** Central Standard Time
+- **Notification:** Disabled (for lab environments)
+
+Terraform: Use `azurerm_dev_test_global_vm_shutdown_schedule` resource.
+Bicep: Use `Microsoft.DevTestLab/schedules` (namespace: microsoft.devtestlab/schedules).
+
+---
+
 ## 4. Soft-Delete & Purge Management
 
 ### 4.1 Resources Requiring Purge
