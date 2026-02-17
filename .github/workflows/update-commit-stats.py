@@ -434,7 +434,8 @@ def generate_commit_table(
     )
     table += (
         "\n*Total = first to last commit of day (cap at 8:00 AM), "
-        "Exam = AI-102 + AZ-104, Other = Total - Exam*\n"
+        "Exam = AI-102 + AZ-104, "
+        "Other = Lab workflow and automation design, content structure and development*\n"
     )
 
     # Add timestamp in Central timezone (fallback to local timezone if missing)
