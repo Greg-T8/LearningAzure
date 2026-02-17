@@ -90,14 +90,21 @@ def get_commits_by_path(
     lines = result.stdout.strip().split('\n')
     current_datetime = None
     current_date = None
+    current_message = None
 
     for line in lines:
         # Parse commit metadata when line contains pipe separator
         if '|' in line:
             parts = line.split('|')
-            if len(parts) >= 2:
+            if len(parts) >= 3:
                 current_datetime = parts[1]
                 current_date = current_datetime.split()[0]
+                current_message = parts[2]
+
+                # Skip automated workflow commits
+                if '[skip ci]' in current_message or 'Update commit statistics' in current_message:
+                    current_datetime = None
+                    continue
 
                 # Track all commits for total daily activity window
                 commits_by_date_cert[current_date]['__all__'].append(
@@ -147,10 +154,10 @@ def get_activity_interval(
     earliest = min(dt_objects)
     latest = max(dt_objects)
 
-    # Cap end time at 8:00 AM
-    work_start = earliest.replace(hour=8, minute=0, second=0)
-    if latest > work_start:
-        latest = work_start
+    # Cap end time at 8:00 AM only if commits extend beyond it
+    morning_cap = earliest.replace(hour=8, minute=0, second=0)
+    if latest > morning_cap:
+        latest = morning_cap
 
     if latest <= earliest:
         return None
@@ -312,10 +319,17 @@ def calculate_running_totals() -> dict[str, float]:
 
     # Sum other hours across all days
     for date_commits in commits.values():
-        split_hours = split_overlapping_hours(date_commits)
-        exam_hours = sum(split_hours.get(cert, 0.0) for cert in CERTIFICATIONS)
-        total_hours = calculate_hours_raw(date_commits.get('__all__', []))
-        other_hours = max(0.0, total_hours - exam_hours)
+        # Calculate exam commit window (combined AI-102 + AZ-104)
+        exam_commits = []
+        exam_commits.extend(date_commits.get('AI-102', []))
+        exam_commits.extend(date_commits.get('AZ-104', []))
+        exam_window_hours = calculate_hours_raw(exam_commits)
+
+        # Calculate all commits window
+        all_window_hours = calculate_hours_raw(date_commits.get('__all__', []))
+
+        # Other = time beyond exam window
+        other_hours = max(0.0, all_window_hours - exam_window_hours)
         running_other_total += other_hours
 
     running_totals['Other'] = round(running_other_total, 1)
@@ -360,12 +374,24 @@ def generate_commit_table(
         date_commits = commits_by_date_cert.get(date, {})
         split_hours = split_overlapping_hours(date_commits)
 
-        # Extract hours for each certification
+        # Calculate exam commit window (combined AI-102 + AZ-104)
+        exam_commits = []
+        exam_commits.extend(date_commits.get('AI-102', []))
+        exam_commits.extend(date_commits.get('AZ-104', []))
+        exam_window_hours = calculate_hours_raw(exam_commits)
+
+        # Extract hours for each certification from the split
         ai102_raw_hours = split_hours.get('AI-102', 0.0)
         az104_raw_hours = split_hours.get('AZ-104', 0.0)
-        exam_raw_hours = ai102_raw_hours + az104_raw_hours
-        total_raw_hours = calculate_hours_raw(date_commits.get('__all__', []))
-        other_raw_hours = max(0.0, total_raw_hours - exam_raw_hours)
+
+        # Calculate all commits window
+        all_window_hours = calculate_hours_raw(date_commits.get('__all__', []))
+
+        # Other = time beyond exam window (if non-exam commits extend it)
+        other_raw_hours = max(0.0, all_window_hours - exam_window_hours)
+
+        # Total is the larger of exam window or all window
+        total_raw_hours = max(exam_window_hours, all_window_hours)
 
         ai102_hours = round(ai102_raw_hours, 1)
         az104_hours = round(az104_raw_hours, 1)
