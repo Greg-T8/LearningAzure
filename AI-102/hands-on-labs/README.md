@@ -6,9 +6,9 @@ This page catalogs hands-on labs built from practice exam questions. Each lab us
 
 ## 📈 Lab Statistics
 
-- **Total Labs**: 3
+- **Total Labs**: 4
 - **Generative AI**: 1
-- **Agentic**: 0
+- **Agentic**: 1
 - **AI Services**: 1
 - **Computer Vision**: 0
 - **Natural Language Processing**: 0
@@ -21,6 +21,10 @@ This page catalogs hands-on labs built from practice exam questions. Each lab us
 ### Generative AI
 
 - **[DALL-E Image Generation with Azure OpenAI](generative-ai/lab-dalle-image-gen/README.md)** - Test DALL-E 3 image generation capabilities, model parameters, and Azure AI Foundry portal features
+
+### Agentic
+
+- **[Azure AI Agent Service File Upload Configuration](agentic/lab-agent-file-upload-config/README.md)** - Configure standard agent setup with correct RBAC roles for BYO storage, Cosmos DB, and AI Search resources
 
 ### AI Services
 

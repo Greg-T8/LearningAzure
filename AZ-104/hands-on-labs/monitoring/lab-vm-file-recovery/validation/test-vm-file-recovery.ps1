@@ -28,7 +28,6 @@ Program: test-vm-file-recovery.ps1
 
 # Configuration
 $ResourceGroupName = 'az104-monitoring-vm-file-recovery-bicep'
-$VaultName = 'rsv-file-recovery'
 $PolicyName = 'policy-daily-vm'
 $VmName = 'vm-file-recovery'
 
@@ -85,13 +84,14 @@ $Helpers = {
     }
 
     function Test-RecoveryVault {
-        # Verify Recovery Services vault exists
+        # Verify Recovery Services vault exists (discovers vault with random suffix)
         Write-Host "[Test 2] Recovery Services Vault..." -NoNewline
 
-        $vault = Get-AzRecoveryServicesVault `
+        $vaults = Get-AzRecoveryServicesVault `
             -ResourceGroupName $ResourceGroupName `
-            -Name $VaultName `
             -ErrorAction SilentlyContinue
+
+        $vault = $vaults | Where-Object { $_.Name -like 'rsv-file-recovery-*' } | Select-Object -First 1
 
         if (-not $vault) {
             Write-Host " FAIL" -ForegroundColor Red
@@ -106,10 +106,11 @@ $Helpers = {
         # Verify backup policy exists with correct configuration
         Write-Host "[Test 3] Backup Policy..." -NoNewline
 
-        $vault = Get-AzRecoveryServicesVault `
+        $vaults = Get-AzRecoveryServicesVault `
             -ResourceGroupName $ResourceGroupName `
-            -Name $VaultName `
             -ErrorAction SilentlyContinue
+
+        $vault = $vaults | Where-Object { $_.Name -like 'rsv-file-recovery-*' } | Select-Object -First 1
 
         if (-not $vault) {
             Write-Host " SKIP" -ForegroundColor Yellow
@@ -158,10 +159,11 @@ $Helpers = {
         # Verify VM backup protection is enabled
         Write-Host "[Test 5] Backup Protection..." -NoNewline
 
-        $vault = Get-AzRecoveryServicesVault `
+        $vaults = Get-AzRecoveryServicesVault `
             -ResourceGroupName $ResourceGroupName `
-            -Name $VaultName `
             -ErrorAction SilentlyContinue
+
+        $vault = $vaults | Where-Object { $_.Name -like 'rsv-file-recovery-*' } | Select-Object -First 1
 
         if (-not $vault) {
             Write-Host " SKIP" -ForegroundColor Yellow

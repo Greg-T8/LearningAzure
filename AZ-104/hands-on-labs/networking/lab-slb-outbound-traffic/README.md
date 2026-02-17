@@ -293,4 +293,4 @@ To enable UDP outbound, you would need to either:
 
 ## Related Labs
 
-No related labs currently exist in the networking domain.
+▶ Related Lab: [lab-ilb-backend-access](../lab-ilb-backend-access/README.md) - Troubleshoot Internal Load Balancer hairpin limitation using proxy-based solutions

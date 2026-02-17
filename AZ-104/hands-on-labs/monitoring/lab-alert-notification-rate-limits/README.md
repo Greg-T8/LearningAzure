@@ -153,4 +153,4 @@ Azure enforces rate limits to prevent notification flooding:
 
 ## Related Labs
 
-*No related labs exist yet in this domain.*
+▶ Related Lab: [lab-vm-file-recovery](../lab-vm-file-recovery/README.md) - Practice file-level recovery from Azure VM backup using Recovery Services vault

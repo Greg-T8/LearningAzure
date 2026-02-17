@@ -40,7 +40,7 @@ This lab deploys a Windows Server 2019 VM backed up by an Azure Recovery Service
 ```mermaid
 graph TD
     subgraph RG["az104-monitoring-vm-file-recovery-bicep"]
-        RSV["rsv-file-recovery<br/>Recovery Services Vault"]
+        RSV["rsv-file-recovery-xxxx<br/>Recovery Services Vault<br/>(random suffix)"]
         subgraph VNET["vnet-file-recovery"]
             SNET["snet-default"]
             BSNET["AzureBastionSubnet"]
@@ -125,8 +125,9 @@ cd AZ-104/hands-on-labs/monitoring/lab-vm-file-recovery/bicep
 ### Step 1: Verify the Recovery Services Vault and Backup
 
 ```powershell
-# 1. Verify Recovery Services vault exists
-$rsv = Get-AzRecoveryServicesVault -ResourceGroupName 'az104-monitoring-vm-file-recovery-bicep'
+# 1. Verify Recovery Services vault exists (vault name includes random 4-char suffix)
+$vaults = Get-AzRecoveryServicesVault -ResourceGroupName 'az104-monitoring-vm-file-recovery-bicep'
+$rsv = $vaults | Where-Object { $_.Name -like 'rsv-file-recovery-*' } | Select-Object -First 1
 $rsv | Format-Table Name, Location, ResourceGroupName
 ```
 <!-- Screenshot -->
@@ -280,4 +281,4 @@ Azure Backup's **file-level recovery** (also called Item Level Recovery or ILR) 
 
 ## Related Labs
 
-- None currently available
+▶ Related Lab: [lab-alert-notification-rate-limits](../lab-alert-notification-rate-limits/README.md) - Understand notification rate limits for Azure Monitor action groups

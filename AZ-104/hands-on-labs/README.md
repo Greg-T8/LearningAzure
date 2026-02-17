@@ -6,12 +6,12 @@ This page catalogs hands-on labs built from practice exam questions. Each lab us
 
 ## 📈 Lab Statistics
 
-- **Total Labs**: 9
+- **Total Labs**: 12
 - **Storage**: 4
 - **Compute**: 3
-- **Monitoring**: 1
+- **Monitoring**: 2
 - **Identity & Governance**: 0
-- **Networking**: 1
+- **Networking**: 2
 
 ---
 
@@ -33,10 +33,12 @@ This page catalogs hands-on labs built from practice exam questions. Each lab us
 ### Monitoring
 
 - **[Azure Monitor Alert Notification Rate Limits](monitoring/lab-alert-notification-rate-limits/README.md)** - Understand notification rate limits for email, SMS, and voice alerts in Azure Monitor action groups
+- **[Recover Configuration File from Azure VM Backup](monitoring/lab-vm-file-recovery/README.md)** - Practice file-level recovery from Azure VM backup using Recovery Services vault
 
 ### Networking
 
 - **[Configure Standard Load Balancer Outbound Traffic and IP Allocation](networking/lab-slb-outbound-traffic/README.md)** - Learn how outbound traffic and IP allocation work with Azure Standard Load Balancers including TCP/UDP protocol rules
+- **[Troubleshoot Internal Load Balancer Backend VM Access](networking/lab-ilb-backend-access/README.md)** - Diagnose and resolve hairpin/loopback limitation when backend VMs access their own ILB frontend
 
 ---
 

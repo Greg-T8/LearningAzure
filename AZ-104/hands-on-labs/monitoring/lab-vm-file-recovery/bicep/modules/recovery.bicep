@@ -24,7 +24,8 @@ param resourceGroupName string
 // -------------------------------------------------------------------------
 // Variables
 // -------------------------------------------------------------------------
-var vaultName = 'rsv-file-recovery'
+var uniqueSuffix = substring(uniqueString(resourceGroup().id), 0, 4)
+var vaultName = 'rsv-file-recovery-${uniqueSuffix}'
 var policyName = 'policy-daily-vm'
 var backupFabric = 'Azure'
 var protectionContainer = 'iaasvmcontainer;iaasvmcontainerv2;${resourceGroupName};${vmName}'
