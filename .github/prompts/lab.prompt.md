@@ -279,10 +279,9 @@ terraform plan
 
   * validate
   * plan
-  * apply
-  * destroy
   * show
   * list
+  * output
 * Validate subscription context
 
 #### Required Validation Sequence
