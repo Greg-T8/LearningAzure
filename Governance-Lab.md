@@ -96,6 +96,26 @@ OpenAI accounts require random suffix for global uniqueness.
 
 ---
 
+#### Unique Naming Decision Tree
+
+Use random suffixes when resources require global uniqueness or cannot be immediately recreated.
+
+**Decision criteria (check in order):**
+
+1. **Global uniqueness required?** (Storage, Key Vault, OpenAI) → **Use random suffix**
+2. **Soft-delete cannot be disabled?** (Cognitive Services, API Management) → **Use random suffix**
+3. **Backup items block deletion?** (Recovery Vault with protected VMs) → **Use random suffix**
+4. **Otherwise** → No random suffix needed
+
+**Random suffix format:**
+
+- **Bicep:** `${resourcePrefix}-${topic}-${uniqueString(resourceGroup().id)}`
+- **Terraform:** `${resourcePrefix}-${topic}-${random_string.suffix.result}`
+- **Length:** 4 lowercase alphanumeric characters
+- **Examples:** `rsv-vm-file-recovery-7k3m`, `kv-app-secrets-9x2p`, `oai-dalle-gen-4h8n`
+
+---
+
 ### 2.3 Bicep Stack Naming
 
 ```
@@ -189,18 +209,20 @@ Bicep: Use `Microsoft.DevTestLab/schedules` (namespace: microsoft.devtestlab/sch
 
 ## 4. Soft-Delete & Purge Management
 
-### 4.1 Resources Requiring Purge
+### 4.1 Soft-Delete Retention Periods
 
-| Resource           | Retention | Manual Purge |
-| ------------------ | --------- | ------------ |
-| Cognitive Services | 48 hrs    | Yes          |
-| Key Vault          | 7–90 days | Yes          |
-| API Management     | 48 hrs    | Yes          |
-| Recovery Vault     | 14 days   | Yes          |
-| App Insights       | 14 days   | No           |
-| Log Analytics      | 14 days   | No           |
+| Resource           | Retention | Manual Purge | Unique Name Required |
+| ------------------ | --------- | ------------ | -------------------- |
+| Cognitive Services | 48 hrs    | Yes          | Yes (soft-delete)    |
+| Key Vault          | 7–90 days | Yes          | Yes (soft-delete)    |
+| API Management     | 48 hrs    | Yes          | Yes (soft-delete)    |
+| Recovery Vault     | 14 days   | Yes          | Yes (backup items)*  |
+| App Insights       | 14 days   | No           | No (disable soft-delete) |
+| Log Analytics      | 14 days   | No           | No (disable soft-delete) |
 
-If not purgeable → use unique naming.
+*Recovery Vault requires unique naming even with soft-delete disabled because backup items can prevent immediate re-creation.
+
+**Refer to §2.2 Unique Naming Decision Tree for complete criteria.**
 
 ---
 
