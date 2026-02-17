@@ -1,6 +1,7 @@
 ---
 name: azure-lab-governance
 description: Template and script inventory for Azure hands-on labs. All cross-cutting rules are in the shared-contract skill.
+user-invokable: false
 ---
 
 # Azure Lab Governance

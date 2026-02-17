@@ -1,6 +1,7 @@
 ---
 name: lab-review-checklist
 description: 10-category compliance checklist and evaluation procedure for lab review. All check items reference shared-contract requirement IDs.
+user-invokable: false
 ---
 
 # Lab Review Checklist

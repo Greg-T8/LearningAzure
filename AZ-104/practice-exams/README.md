@@ -1403,17 +1403,6 @@ For Azure Monitor alerts requiring multiple notification methods and ITSM integr
 
 </details>
 
-<details>
-<summary>🔬 Click to expand hands-on lab</summary>
-
-Related resources:
-
-- [Create and manage action groups in Azure Monitor](https://learn.microsoft.com/azure/azure-monitor/alerts/action-groups)
-- [IT Service Management Connector overview](https://learn.microsoft.com/azure/azure-monitor/alerts/itsmc-overview)
-- [Create metric alerts for Azure SQL Database](https://learn.microsoft.com/azure/azure-sql/database/alerts-insights-configure-portal)
-
-</details>
-
 ---
 
 #### Configure Azure Monitor Alert Notification Rate Limits
@@ -1468,11 +1457,6 @@ Related resources:
 
 * [Azure Monitor service limits](https://learn.microsoft.com/en-us/azure/azure-monitor/fundamentals/service-limits#action-groups)
 * [Create and manage action groups in Azure Monitor](https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/action-groups)
-
-</details>
-
-<details>
-<summary>🔬 Click to expand hands-on lab</summary>
 
 </details>
 
@@ -1606,6 +1590,8 @@ Azure Recovery Services vault overview
 [https://learn.microsoft.com/azure/backup/backup-azure-recovery-services-vault-overview](https://learn.microsoft.com/azure/backup/backup-azure-recovery-services-vault-overview)
 
 </details>
+
+▶ **Related Lab:** [lab-vm-file-recovery](../hands-on-labs/monitoring/lab-vm-file-recovery/README.md)
 
 ---
 

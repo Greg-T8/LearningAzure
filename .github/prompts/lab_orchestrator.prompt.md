@@ -1,5 +1,5 @@
 ---
-name: CreateLab
+name: LabOrchestrator
 description: Calls the Lab Orchestrator to generate a complete hands-on lab from an exam question or scenario.
 agent: Lab-Orchestrator
 tools:

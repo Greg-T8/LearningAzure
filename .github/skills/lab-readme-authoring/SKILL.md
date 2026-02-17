@@ -1,6 +1,7 @@
 ---
 name: lab-readme-authoring
 description: Procedures for generating lab README.md content, section by section. Section order is defined in shared-contract R-011.
+user-invokable: false
 ---
 
 # Lab README Authoring

@@ -1,7 +1,7 @@
 ---
 name: lab-catalog-updater
 description: 'Scan and update hands-on-labs README.md files with accurate lab catalogs, statistics, and cross-references. Use when asked to update lab README, refresh lab catalog, update lab statistics, or update Related Labs sections for AI-102, AZ-104, or AI-900.'
-user-invokable: true
+user-invokable: false
 argument-hint: '[exam] [scope]'
 ---
 

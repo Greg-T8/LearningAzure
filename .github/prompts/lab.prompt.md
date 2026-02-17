@@ -1,5 +1,5 @@
 ---
-name: Lab
+name: LabPrompt
 description: Generates a governance-compliant hands-on lab from an exam scenario using Terraform, Bicep, Scripted, or Manual methods
 ---
 
