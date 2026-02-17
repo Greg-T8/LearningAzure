@@ -122,7 +122,7 @@ def get_activity_interval(
 ) -> tuple[datetime, datetime] | None:
     """Get activity interval (earliest, latest) for a set of timestamps.
 
-    For weekdays (Mon-Fri), caps the end time at 8:00 AM local date.
+    Caps the end time at 8:00 AM local date for all days.
     Returns None if interval cannot produce positive duration.
 
     Args:
@@ -147,11 +147,10 @@ def get_activity_interval(
     earliest = min(dt_objects)
     latest = max(dt_objects)
 
-    # Cap weekday end time at 8:00 AM
-    if earliest.weekday() < 5:
-        work_start = earliest.replace(hour=8, minute=0, second=0)
-        if latest > work_start:
-            latest = work_start
+    # Cap end time at 8:00 AM
+    work_start = earliest.replace(hour=8, minute=0, second=0)
+    if latest > work_start:
+        latest = work_start
 
     if latest <= earliest:
         return None
@@ -160,7 +159,7 @@ def get_activity_interval(
 
 
 def calculate_hours(timestamps: list[str]) -> float:
-    """Calculate hours between first and last commit after weekday cap.
+    """Calculate hours between first and last commit after 8:00 AM cap.
 
     Args:
         timestamps: List of timestamp strings
@@ -434,7 +433,7 @@ def generate_commit_table(
         "🟣 High (> 2hrs)*\n"
     )
     table += (
-        "\n*Total = first to last commit of day (weekday cap at 8:00 AM), "
+        "\n*Total = first to last commit of day (cap at 8:00 AM), "
         "Exam = AI-102 + AZ-104, Other = Total - Exam*\n"
     )
 
