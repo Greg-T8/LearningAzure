@@ -13,7 +13,7 @@ The GitHub Actions workflow file that runs the statistics update.
 - **Daily**: Automatically at 8:00 AM Central Time (14:00 UTC)
 - **Manual**: Can be triggered manually from the Actions tab
 
-### `scripts/update-commit-stats.py`
+### `workflows/update-commit-stats.py`
 
 Python script that:
 
@@ -89,7 +89,7 @@ You can test the script locally before pushing:
 
 ```bash
 # From the repository root
-python3 .github/scripts/update-commit-stats.py
+python3 .github/workflows/update-commit-stats.py
 ```
 
 This will update your local README.md with current commit statistics.

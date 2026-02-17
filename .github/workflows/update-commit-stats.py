@@ -98,6 +98,11 @@ def get_commits_by_path(
             if len(parts) >= 2:
                 current_datetime = parts[1]
                 current_date = current_datetime.split()[0]
+
+                # Track all commits for total daily activity window
+                commits_by_date_cert[current_date]['__all__'].append(
+                    current_datetime
+                )
         # Categorize file paths by certification
         elif line.strip() and current_datetime:
             if line.startswith('AI-102/'):
@@ -173,6 +178,26 @@ def calculate_hours(timestamps: list[str]) -> float:
     hours = time_diff.total_seconds() / 3600
 
     return round(hours, 1)
+
+
+def calculate_hours_raw(timestamps: list[str]) -> float:
+    """Calculate unrounded hours between first and last commit.
+
+    Args:
+        timestamps: List of timestamp strings
+
+    Returns:
+        Hours of activity as a float
+    """
+    interval = get_activity_interval(timestamps)
+
+    if interval is None:
+        return 0.0
+
+    earliest, latest = interval
+    time_diff = latest - earliest
+
+    return time_diff.total_seconds() / 3600
 
 
 def split_overlapping_hours(
@@ -281,6 +306,21 @@ def calculate_running_totals() -> dict[str, float]:
 
         running_totals[cert] = round(total_hours, 1)
 
+    # Calculate cumulative other hours from earliest certification start date
+    earliest_start_date = min(CERTIFICATIONS.values())
+    commits = get_commits_by_path(since_date=earliest_start_date)
+    running_other_total = 0.0
+
+    # Sum other hours across all days
+    for date_commits in commits.values():
+        split_hours = split_overlapping_hours(date_commits)
+        exam_hours = sum(split_hours.get(cert, 0.0) for cert in CERTIFICATIONS)
+        total_hours = calculate_hours_raw(date_commits.get('__all__', []))
+        other_hours = max(0.0, total_hours - exam_hours)
+        running_other_total += other_hours
+
+    running_totals['Other'] = round(running_other_total, 1)
+
     return running_totals
 
 
@@ -307,12 +347,14 @@ def generate_commit_table(
 
     # Initialize markdown table
     table = "## 📈 Recent Activity (Last 7 Days)\n\n"
-    table += "| Date | AI-102 | AZ-104 | Total |\n"
-    table += "|------|--------|--------|-------|\n"
+    table += "| Date | AI-102 | AZ-104 | Other | Total |\n"
+    table += "|------|--------|--------|-------|-------|\n"
 
     # Initialize weekly totals
     total_ai102 = 0.0
     total_az104 = 0.0
+    total_other = 0.0
+    total_all = 0.0
 
     # Process each day
     for date in dates:
@@ -320,13 +362,22 @@ def generate_commit_table(
         split_hours = split_overlapping_hours(date_commits)
 
         # Extract hours for each certification
-        ai102_hours = round(split_hours.get('AI-102', 0.0), 1)
-        az104_hours = round(split_hours.get('AZ-104', 0.0), 1)
-        daily_total = ai102_hours + az104_hours
+        ai102_raw_hours = split_hours.get('AI-102', 0.0)
+        az104_raw_hours = split_hours.get('AZ-104', 0.0)
+        exam_raw_hours = ai102_raw_hours + az104_raw_hours
+        total_raw_hours = calculate_hours_raw(date_commits.get('__all__', []))
+        other_raw_hours = max(0.0, total_raw_hours - exam_raw_hours)
+
+        ai102_hours = round(ai102_raw_hours, 1)
+        az104_hours = round(az104_raw_hours, 1)
+        other_hours = round(other_raw_hours, 1)
+        daily_total = round(total_raw_hours, 1)
 
         # Accumulate weekly totals
         total_ai102 += ai102_hours
         total_az104 += az104_hours
+        total_other += other_hours
+        total_all += daily_total
 
         # Format date string
         date_obj = datetime.strptime(date, '%Y-%m-%d')
@@ -335,6 +386,7 @@ def generate_commit_table(
         # Build hour strings with color-coded emoji
         ai102_emoji = get_activity_emoji(ai102_hours)
         az104_emoji = get_activity_emoji(az104_hours)
+        other_emoji = get_activity_emoji(other_hours)
 
         ai102_str = (
             f"{ai102_emoji} {ai102_hours}h" if ai102_hours > 0 else ""
@@ -342,31 +394,37 @@ def generate_commit_table(
         az104_str = (
             f"{az104_emoji} {az104_hours}h" if az104_hours > 0 else ""
         )
+        other_str = (
+            f"{other_emoji} {other_hours}h" if other_hours > 0 else ""
+        )
         total_str = (
             f"**{daily_total:.1f}h**" if daily_total > 0 else ""
         )
 
         table += (
             f"| {formatted_date} | {ai102_str} | {az104_str} | "
+            f"{other_str} | "
             f"{total_str} |\n"
         )
 
     # Add weekly totals row
-    weekly_total = total_ai102 + total_az104
     table += (
         f"| **Weekly Total** | **{total_ai102:.1f}h** | "
         f"**{total_az104:.1f}h** | "
-        f"**{weekly_total:.1f}h** |\n"
+        f"**{total_other:.1f}h** | "
+        f"**{total_all:.1f}h** |\n"
     )
 
     # Calculate and add running totals row
     running_totals = calculate_running_totals()
     running_ai102 = running_totals.get('AI-102', 0.0)
     running_az104 = running_totals.get('AZ-104', 0.0)
-    running_grand_total = running_ai102 + running_az104
+    running_other = running_totals.get('Other', 0.0)
+    running_grand_total = running_ai102 + running_az104 + running_other
     table += (
         f"| ***Running Total*** | ***{running_ai102:.1f}h*** | "
         f"***{running_az104:.1f}h*** | "
+        f"***{running_other:.1f}h*** | "
         f"***{running_grand_total:.1f}h*** |\n"
     )
 
@@ -376,8 +434,8 @@ def generate_commit_table(
         "🟣 High (> 2hrs)*\n"
     )
     table += (
-        "\n*Hours = time between first and last commit of the day "
-        "in that certification folder*\n"
+        "\n*Total = first to last commit of day (weekday cap at 8:00 AM), "
+        "Exam = AI-102 + AZ-104, Other = Total - Exam*\n"
     )
 
     # Add timestamp in Central timezone (fallback to local timezone if missing)

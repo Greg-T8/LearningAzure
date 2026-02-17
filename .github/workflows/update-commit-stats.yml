@@ -29,7 +29,7 @@ jobs:
 
       - name: Generate commit statistics
         run: |
-          python3 .github/scripts/update-commit-stats.py
+          python3 .github/workflows/update-commit-stats.py
 
       - name: Commit and push if changes
         run: |
