@@ -92,6 +92,8 @@ Pattern:
 
 OpenAI accounts require random suffix for global uniqueness.
 
+**Note:** Resources with purge protection (§4.1) require unique names with random suffix.
+
 ---
 
 ### 2.3 Bicep Stack Naming
