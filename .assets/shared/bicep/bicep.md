@@ -46,7 +46,7 @@ main.bicepparam
 |--------|-------------|-------------------------|
 | `apply` | Deploy subscription-scoped stack (creates RG + resources) | ✅ Yes |
 | `destroy` | Delete stack and all managed resources (including RG) | ✅ Yes |
-| `show` | Show deployment stack details | ✅ Yes |
+| `show` | Show deployment stack state (name, provisioning state, resource count) | ✅ Yes |
 | `output` | Retrieve deployment outputs as PowerShell object | ✅ Yes |
 | `list` | List all subscription-scoped deployment stacks | N/A |
 | `validate` | Validate Bicep template syntax | N/A |
@@ -118,11 +118,20 @@ The script automatically derives the stack name from your parameters file:
 ### Show Stack Details
 
 ```powershell
-# Show full stack details
+# Show stack with name, state, and resource count (default)
 .\bicep.ps1 show
+
+# Output:
+# Name                               State              Resources
+# ---------------------------------  -----------------  -----------
+# stack-monitoring-vm-file-recovery  Succeeded          5
 
 # Show with explicit name
 .\bicep.ps1 show -StackName "stack-compute-app-service-tiers"
+
+# Show full JSON details with custom query
+.\bicep.ps1 show -StackName "stack-compute-app-service-tiers" `
+    --query "." -o json
 
 # Show only managed resources
 .\bicep.ps1 show -StackName "stack-compute-app-service-tiers" `
@@ -272,6 +281,7 @@ $LabSubscriptionName = "Your Subscription Name"
 | **Subscription Check** | ✅ Automatic | ❌ Manual |
 | **Stack Naming** | ✅ Auto-derived | ❌ Manual |
 | **Get Outputs** | `.\bicep.ps1 output` | `az deployment sub show --name <deployment-name> --query 'properties.outputs'` |
+| **Show State** | `.\bicep.ps1 show` | `az stack sub show --name stack-compute-app-service-tiers --query "{name:name, state:provisioningState, resources:resources.length(@)}" -o table` |
 | **What-If** | `.\bicep.ps1 plan` | `az deployment sub what-if --location eastus --template-file main.bicep --parameters main.bicepparam` |
 | **Cleanup** | `.\bicep.ps1 destroy` | `az stack sub delete --name stack-compute-app-service-tiers --action-on-unmanage deleteAll --yes` |
 

@@ -298,14 +298,25 @@ $Helpers = {
     }
 
     function Invoke-ShowAction {
-        # Show deployment stack details
+        # Show deployment stack details with state
 
         if ([string]::IsNullOrEmpty($script:StackName)) {
             Write-Host "⛔ ERROR: -StackName required for 'show'" -ForegroundColor Red
             exit 1
         }
 
-        $command = New-StackCommand -Action 'show' -StackName $script:StackName
+        # Default query includes name, state, and resource count
+        $defaultQuery = '{name:name, state:provisioningState, resources:resources.length(@)}'
+
+        # If user provided custom query via AdditionalArgs, use raw show command
+        if ($AdditionalArgs -match '--query') {
+            $command = New-StackCommand -Action 'show' -StackName $script:StackName
+        }
+        else {
+            # Use enhanced default query
+            $command = "az stack sub show --name `"$script:StackName`" --query `"$defaultQuery`" -o table"
+        }
+
         Write-Host "🚀 Running: $command" -ForegroundColor Gray
         Write-Host ""
         Invoke-Expression $command
