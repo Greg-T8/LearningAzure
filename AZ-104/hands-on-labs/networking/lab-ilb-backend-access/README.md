@@ -125,16 +125,28 @@ $lb = Get-AzLoadBalancer -Name 'lb-internal' -ResourceGroupName 'az104-networkin
 $lb.FrontendIpConfigurations[0].PrivateIpAddress  # Should be 10.0.1.10
 ```
 
+<img src='.img/2026-02-17-02-35-00.png' width=700>
+
+<img src='.img/2026-02-17-02-39-28.png' width=700>
+
 ```powershell
 # 2. Verify backend pool has 2 VMs
 $pool = $lb.BackendAddressPools | Where-Object { $_.Name -eq 'pool-backend' }
 $pool.BackendIpConfigurations.Count  # Should be 2
 ```
 
+<img src='.img/2026-02-17-02-38-17.png' width=700>
+
+<img src='.img/2026-02-17-02-40-08.png' width=700>
+
 ```powershell
 # 3. Verify health probe is configured for TCP:80
 $lb.Probes[0] | Select-Object Name, Protocol, Port
 ```
+
+<img src='.img/2026-02-17-02-38-39.png' width=700>
+
+<img src='.img/2026-02-17-02-40-53.png' width=800>
 
 ```powershell
 # 4. Test hairpin failure: backend VM cannot reach ILB frontend
@@ -145,6 +157,8 @@ Invoke-AzVMRunCommand `
     -ScriptString 'curl -s --connect-timeout 5 --max-time 10 http://10.0.1.10 2>&1 || echo "HAIRPIN_FAILED"'
 # Expected: timeout or connection failure
 ```
+
+<img src='.img/2026-02-17-02-42-42.png' width=700>
 
 ```powershell
 # 5. Test proxy solution: backend VM reaches content via proxy

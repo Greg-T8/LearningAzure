@@ -35,9 +35,10 @@ locals {
     packages:
       - nginx
     runcmd:
-      - echo "<h1>Hello from $(hostname)</h1><p>Private IP: $(hostname -I | awk '{print $1}')</p>" > /var/www/html/index.html
-      - systemctl enable nginx
-      - systemctl restart nginx
+      - [ bash, -lc, 'mkdir -p /var/www/html' ]
+      - [ bash, -lc, 'echo "<h1>Hello from $(hostname)</h1><p>Private IP: $(hostname -I | awk ''{print $1}'')</p>" > /var/www/html/index.html' ]
+      - [ systemctl, enable, nginx ]
+      - [ systemctl, restart, nginx ]
   CLOUDINIT
 
   # Cloud-init for Nginx reverse proxy VM pointing to ILB frontend
@@ -60,8 +61,8 @@ locals {
               }
           }
     runcmd:
-      - systemctl enable nginx
-      - systemctl restart nginx
+      - [ systemctl, enable, nginx ]
+      - [ systemctl, restart, nginx ]
   CLOUDINIT
 }
 
