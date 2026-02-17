@@ -1355,7 +1355,7 @@ Azure **Internal Load Balancer does not support backend VMs accessing the ILB fr
 
 </details>
 
-▶ **Related Lab:** [lab-alert-notification-rate-limits](../hands-on-labs/monitoring/lab-alert-notification-rate-limits/README.md)
+▶ **Related Lab:** [lab-ilb-backend-access](../hands-on-labs/networking/lab-ilb-backend-access/README.md)
 
 ---
 
