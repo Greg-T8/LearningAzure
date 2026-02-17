@@ -161,6 +161,17 @@ Start free when available.
 
 ---
 
+#### Remote Access
+
+| Service        | Default              |
+| -------------- | -------------------- |
+| Bastion        | Developer / Basic    |
+| Public IP      | Only when required   |
+
+**Prefer bastion service over public IPs** for VM access to reduce costs and improve security.
+
+---
+
 ### 3.4 Auto-Shutdown Schedule
 
 Enable daily auto-shutdown on all VMs to control costs:
@@ -483,6 +494,59 @@ Requires both:
 * Control plane roles (e.g., Cosmos DB Operator)
 
 Missing control-plane role causes capability host failure.
+
+---
+
+### 9.7 Cloud-Init Best Practices
+
+#### Use Array Form for runcmd
+
+Always use array form for `runcmd` entries to prevent YAML parsing issues with colons and special characters:
+
+**Correct:**
+
+```yaml
+runcmd:
+  - [ bash, -lc, 'mkdir -p /var/www/html' ]
+  - [ bash, -lc, 'echo "<h1>Hello from $(hostname)</h1><p>Private IP: $(hostname -I | awk ''{print $1}'')</p>" > /var/www/html/index.html' ]
+  - [ systemctl, enable, nginx ]
+  - [ systemctl, restart, nginx ]
+```
+
+**Avoid (string form with colons):**
+
+```yaml
+runcmd:
+  - echo "Text with: colon" > file.txt  # May parse as key:value
+```
+
+#### Key Points
+
+* Unquoted `:` in string-form commands can be misinterpreted as YAML mappings
+* Array form `[ bash, -lc, '...' ]` ensures shell expansion and avoids YAML pitfalls
+* In YAML single-quoted strings, escape literal `'` by doubling: `''{print $1}''`
+* Include `mkdir -p` commands to ensure directories exist before writing files
+* Validate with `sudo cloud-init schema --system` after deployment
+
+---
+
+### 9.8 Remote Access Strategy
+
+**Prefer bastion service over public IPs** for VM remote access:
+
+* Use **Developer SKU** (lowest cost) or Basic for lab environments
+* Public IPs only when solution explicitly requires external access
+* Reduces cost (no per-VM public IP charges)
+* Improves security (no direct internet exposure)
+
+**When public IP is appropriate:**
+
+* Load balancer frontend (required for inbound traffic)
+* NAT Gateway (required for outbound scenarios)
+* Application Gateway / Front Door (web traffic)
+* Exam scenario explicitly tests public IP configuration
+
+For all other VM access scenarios, use bastion.
 
 ---
 

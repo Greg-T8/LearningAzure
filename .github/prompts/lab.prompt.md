@@ -125,6 +125,23 @@ README must contain:
 13. Additional Resources
 14. Related Labs (0–2)
 
+**Testing the Solution Note:** Split code blocks by step, allowing screenshot insertion between each step.
+
+Example:
+
+```powershell
+# 1. Verify resource
+$resource = Get-Az... 
+$resource.Property  # Expected value
+```
+<!-- Screenshot -->
+<img src='.img/example_screenshot.png' width=700>
+
+```powershell
+# 2. Verify next configuration
+$config = Get-Az...
+```
+
 ---
 
 ## 4. Folder Structure
@@ -202,7 +219,10 @@ Default to lowest viable SKU:
 
 * VM → `Standard_B2s` (or B1s if sufficient)
 * Storage → Standard LRS
+* Bastion → Developer or Basic SKU
 * Lowest App Service / SQL tier unless required
+
+**Remote Access:** Prefer bastion service over public IPs for VM access. Use public IPs only when solution explicitly requires external connectivity (load balancer frontend, NAT gateway, exam scenario requires it).
 
 If higher tier required, explain in README analysis (not deployment steps).
 
