@@ -53,26 +53,11 @@ resource vault 'Microsoft.RecoveryServices/vaults@2024-04-30-preview' = {
 }
 
 // -------------------------------------------------------------------------
-// Vault storage configuration - Locally Redundant for lab cost savings
-// -------------------------------------------------------------------------
-resource storageConfig 'Microsoft.RecoveryServices/vaults/backupstorageconfig@2024-04-30-preview' = {
-  parent: vault
-  name: 'vaultstorageconfig'
-  properties: {
-    storageModelType: 'LocallyRedundant'
-    crossRegionRestoreFlag: false
-  }
-}
-
-// -------------------------------------------------------------------------
 // Daily backup policy - 7 day retention
 // -------------------------------------------------------------------------
 resource backupPolicy 'Microsoft.RecoveryServices/vaults/backupPolicies@2024-04-30-preview' = {
   parent: vault
   name: policyName
-  dependsOn: [
-    storageConfig
-  ]
   properties: {
     backupManagementType: 'AzureIaasVM'
     instantRpRetentionRangeInDays: 2
