@@ -131,6 +131,7 @@ def get_activity_interval(
 
     Caps the end time at 8:00 AM local date for all days.
     Returns None if interval cannot produce positive duration.
+    For single commits, assumes 1-hour activity window.
 
     Args:
         timestamps: List of timestamp strings in format '%Y-%m-%d %H:%M:%S'
@@ -141,14 +142,26 @@ def get_activity_interval(
     if not timestamps:
         return None
 
-    if len(timestamps) == 1:
-        return None
-
     # Parse timestamps into datetime objects
     dt_objects = [
         datetime.strptime(ts, '%Y-%m-%d %H:%M:%S')
         for ts in timestamps
     ]
+
+    # For single commit, assume 1-hour activity window
+    if len(timestamps) == 1:
+        earliest = dt_objects[0]
+        latest = earliest + timedelta(hours=1)
+
+        # Cap end time at 8:00 AM
+        morning_cap = earliest.replace(hour=8, minute=0, second=0)
+        if latest > morning_cap:
+            latest = morning_cap
+
+        if latest <= earliest:
+            return None
+
+        return earliest, latest
 
     # Determine earliest and latest commit times
     earliest = min(dt_objects)
