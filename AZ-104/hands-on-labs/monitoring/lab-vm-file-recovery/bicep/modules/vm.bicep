@@ -120,7 +120,7 @@ resource configScript 'Microsoft.Compute/virtualMachines/extensions@2024-07-01' 
     typeHandlerVersion: '1.10'
     autoUpgradeMinorVersion: true
     settings: {
-      commandToExecute: 'powershell -Command "New-Item -Path C:\\Config -ItemType Directory -Force; Set-Content -Path C:\\Config\\app.config -Value \'\'<configuration><appSettings><add key=Version value=2.0 /><add key=Environment value=Production /><add key=LastUpdated value=2026-02-17 /></appSettings></configuration>\'\'"'
+      commandToExecute: 'powershell -Command "New-Item -Path C:\\Config -ItemType Directory -Force; @(\'[Application]\', \'Version=2.0\', \'Environment=Production\', \'LastUpdated=2026-02-17\') | Out-File -FilePath C:\\Config\\app.config -Encoding ASCII"'
     }
   }
 }
