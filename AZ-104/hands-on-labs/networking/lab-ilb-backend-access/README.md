@@ -148,6 +148,10 @@ $lb.Probes[0] | Select-Object Name, Protocol, Port
 
 <img src='.img/2026-02-17-02-40-53.png' width=800>
 
+For the following tests, I put VM2 in a downed admin state to force traffic to VM1 for consistent results.
+
+<img src='.img/2026-02-17-03-45-27.png' width=700>
+
 ```powershell
 # 4. Test hairpin failure: backend VM cannot reach ILB frontend
 Invoke-AzVMRunCommand `
@@ -158,7 +162,7 @@ Invoke-AzVMRunCommand `
 # Expected: timeout or connection failure
 ```
 
-<img src='.img/2026-02-17-02-42-42.png' width=700>
+<img src='.img/2026-02-17-03-42-15.png' width=700>
 
 ```powershell
 # 5. Test proxy solution: backend VM reaches content via proxy
@@ -170,6 +174,8 @@ Invoke-AzVMRunCommand `
 # Expected: "Hello from vm-backend-01" or "Hello from vm-backend-02"
 ```
 
+<img src='.img/2026-02-17-03-44-10.png' width=700>
+
 ```powershell
 # 6. Control test: non-pool VM can access ILB frontend directly
 Invoke-AzVMRunCommand `
@@ -180,11 +186,15 @@ Invoke-AzVMRunCommand `
 # Expected: "Hello from vm-backend-01" or "Hello from vm-backend-02"
 ```
 
+<img src='.img/2026-02-17-03-46-30.png' width=700>
+
 ```powershell
 # 7. Run the full validation script
 cd AZ-104/hands-on-labs/networking/lab-ilb-backend-access/validation
 .\test-ilb-backend-access.ps1
 ```
+
+<img src='.img/2026-02-17-03-50-07.png' width=700>
 
 ## Cleanup
 
