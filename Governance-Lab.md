@@ -12,11 +12,13 @@ Standards for all Terraform and Bicep labs (AI-102, AZ-104).
 
 | Setting          | Value                               |
 | ---------------- | ----------------------------------- |
-| Default Region   | `eastus`                            |
-| Fallback Regions | `westus2`, `eastus2`, `centralus`   |
+| Default Region   | `centralus`                         |
+| Fallback Regions | `eastus2`, `westus2`, `northcentralus` |
 | Allowed Regions  | Any US region                       |
 
-Use `eastus` unless capacity requires fallback.
+Use `centralus` unless capacity requires fallback.
+
+**Important:** Central US supports Bastion Developer SKU. If deploying Bastion in a different region, verify it supports Developer SKU at <https://learn.microsoft.com/en-us/azure/bastion/quickstart-host-portal?tabs=developer>
 
 ---
 
@@ -562,6 +564,13 @@ runcmd:
 * Public IPs only when solution explicitly requires external access
 * Reduces cost (no per-VM public IP charges)
 * Improves security (no direct internet exposure)
+
+**Bastion Developer SKU requirements:**
+
+* Only available in select regions (see §1.1 Location)
+* Default region (Central US) supports Developer SKU
+* If using a different region, verify support: <https://learn.microsoft.com/en-us/azure/bastion/quickstart-host-portal?tabs=developer>
+* Change to a supported region if Developer SKU is required
 
 **When public IP is appropriate:**
 
