@@ -148,7 +148,6 @@ $config = Get-Az...
 
 Use this base theme for all diagrams (Azure gray background + neutral cards):
 
-````markdown
 ```mermaid
 %%{init: {
   "theme": "base",
@@ -166,11 +165,9 @@ Use this base theme for all diagrams (Azure gray background + neutral cards):
   }
 }}%%
 ```
-````
 
 Add these class definitions to each diagram:
 
-````markdown
 ```mermaid
 %% Core (AZ-104)
 classDef compute   fill:#914BB0,stroke:#6E2E8E,color:#FFFFFF,stroke-width:1.5px;
@@ -189,7 +186,6 @@ classDef aiSearch  fill:#00A3A3,stroke:#006A6A,color:#001516,stroke-width:1.5px;
 classDef aiML      fill:#2B88D8,stroke:#1B5B93,color:#FFFFFF,stroke-width:1.5px;
 classDef aiBot     fill:#3A96DD,stroke:#245F8C,color:#FFFFFF,stroke-width:1.5px;
 ```
-````
 
 Usage example:
 
