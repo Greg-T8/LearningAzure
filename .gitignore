@@ -103,5 +103,25 @@ ehthumbs.db
 desktop.ini
 
 # -------------------------------------------------------------------
+# Binary Executables
+# -------------------------------------------------------------------
+
+# Windows executables and libraries
+*.exe
+*.dll
+*.sys
+*.msi
+
+# Linux/Unix/macOS executables and libraries
+*.o
+*.out
+*.a
+*.dylib
+
+# Compiled binaries (generic pattern)
+/bin/
+/dist/
+
+# -------------------------------------------------------------------
 # End of file
 # -------------------------------------------------------------------
