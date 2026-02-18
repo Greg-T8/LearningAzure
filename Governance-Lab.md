@@ -583,6 +583,26 @@ For all other VM access scenarios, use bastion.
 
 ---
 
+### 9.9 Recovery Services Vault — Instant Restore Point Collection
+
+Azure Backup always creates a separate resource group for instant restore point collections. By default this is `AzureBackupRG_<Geo>_<number>`. Control the name via the backup policy.
+
+**Requirement:** Set `instantRPDetails.azureBackupRGNamePrefix` to keep the restore point RG identifiable alongside the lab RG.
+
+**Pattern:** `<lab-resource-group>-rpc-` → Azure appends `1`, yielding `<lab-resource-group>-rpc-1`.
+
+**Bicep:**
+
+```bicep
+instantRPDetails: {
+  azureBackupRGNamePrefix: '${resourceGroupName}-rpc-'
+}
+```
+
+**Cleanup:** This RG is created by the Backup service at runtime and is outside the deployment stack — delete it manually after destroy. Document in the lab README.
+
+---
+
 ## 10. Pre-Deployment Checklist (Condensed)
 
 ### Naming

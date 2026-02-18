@@ -253,7 +253,13 @@ cd AZ-104/hands-on-labs/monitoring/lab-vm-file-recovery/bicep
 .\bicep.ps1 destroy
 ```
 
-> **Note:** Recovery Services vaults have a 14-day soft-delete retention. If backup items exist, you may need to stop backup and delete backup data before the vault can be removed.
+> **Note:** The deployment stack removes the lab resource group and all managed resources. Azure Backup also creates a separate resource group (`az104-monitoring-vm-file-recovery-bicep-rpc-1`) for instant restore point collections — this is an Azure platform requirement. Delete it manually if it persists after stack destruction:
+>
+> ```powershell
+> Remove-AzResourceGroup -Name 'az104-monitoring-vm-file-recovery-bicep-rpc-1' -Force
+> ```
+>
+> Recovery Services vaults have a 14-day soft-delete retention. If backup items exist, you may need to stop backup and delete backup data before the vault can be removed.
 
 ---
 

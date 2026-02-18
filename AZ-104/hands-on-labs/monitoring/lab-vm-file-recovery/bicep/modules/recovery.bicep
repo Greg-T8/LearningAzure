@@ -30,6 +30,7 @@ var policyName = 'policy-daily-vm'
 var backupFabric = 'Azure'
 var protectionContainer = 'iaasvmcontainer;iaasvmcontainerv2;${resourceGroupName};${vmName}'
 var protectedItem = 'vm;iaasvmcontainerv2;${resourceGroupName};${vmName}'
+var restorePointRGPrefix = '${resourceGroupName}-rpc-'
 
 // -------------------------------------------------------------------------
 // Recovery Services Vault
@@ -61,6 +62,9 @@ resource backupPolicy 'Microsoft.RecoveryServices/vaults/backupPolicies@2024-04-
   properties: {
     backupManagementType: 'AzureIaasVM'
     instantRpRetentionRangeInDays: 2
+    instantRPDetails: {
+      azureBackupRGNamePrefix: restorePointRGPrefix
+    }
     schedulePolicy: {
       schedulePolicyType: 'SimpleSchedulePolicy'
       scheduleRunFrequency: 'Daily'
@@ -107,3 +111,6 @@ output vaultId string = vault.id
 
 @description('Backup policy name')
 output backupPolicyName string = backupPolicy.name
+
+@description('Restore point collection resource group name')
+output restorePointRGName string = '${restorePointRGPrefix}1'

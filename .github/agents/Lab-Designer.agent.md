@@ -3,7 +3,7 @@ name: Lab-Designer
 description: Phase 2 agent — designs lab architecture, generates Mermaid diagram, applies naming, plans modules, writes README.
 model: 'Claude Sonnet 4.5'
 user-invokable: false
-tools: ["readFile", "listDirectory", "fileSearch", "textSearch", "codebase", "fetch", "createFile", "createDirectory", "editFiles", "microsoftdocs/*"]
+tools: ["readFile", "listDirectory", "fileSearch", "textSearch", "codebase", "fetch", "createFile", "createDirectory", "editFiles", "microsoftdocs/*", "vscode.mermaid-chat-features/renderMermaidDiagram"]
 ---
 
 # Lab Designer — Phase 2

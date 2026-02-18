@@ -3,7 +3,7 @@ name: Lab-Orchestrator
 description: Coordinating agent for lab creation. Sequences phases, delegates to phase agents, tracks state, manages handoffs. Contains no domain logic.
 model: 'Claude Haiku 4.5'
 user-invokable: true
-tools: [read/readFile, agent/runSubagent, vscode.mermaid-chat-features/renderMermaidDiagram]
+tools: [read/readFile, agent/runSubagent]
 handoffs:
   - label: Lab-Intake
     agent: Lab-Intake

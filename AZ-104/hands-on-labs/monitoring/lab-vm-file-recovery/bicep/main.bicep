@@ -120,3 +120,6 @@ output vaultName string = recovery.outputs.vaultName
 
 @description('Backup policy name')
 output backupPolicyName string = recovery.outputs.backupPolicyName
+
+@description('Restore point collection resource group name')
+output restorePointRGName string = recovery.outputs.restorePointRGName
