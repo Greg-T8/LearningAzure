@@ -144,7 +144,65 @@ $config = Get-Az...
 
 ---
 
-## 4. Folder Structure
+## 4. Mermaid Diagram Styling
+
+Use this base theme for all diagrams (Azure gray background + neutral cards):
+
+````markdown
+```mermaid
+%%{init: {
+  "theme": "base",
+  "themeVariables": {
+    "background": "#3B3B3B",
+    "primaryColor": "#4A4A4A",
+    "primaryTextColor": "#F2F2F2",
+    "primaryBorderColor": "#8A8A8A",
+    "lineColor": "#C8C8C8",
+    "clusterBkg": "#333333",
+    "clusterBorder": "#8A8A8A",
+    "edgeLabelBackground": "#3B3B3B",
+    "fontFamily": "Segoe UI, Roboto, Arial, sans-serif",
+    "fontSize": "14px"
+  }
+}}%%
+```
+````
+
+Add these class definitions to each diagram:
+
+````markdown
+```mermaid
+%% Core (AZ-104)
+classDef compute   fill:#914BB0,stroke:#6E2E8E,color:#FFFFFF,stroke-width:1.5px;
+classDef network   fill:#50C878,stroke:#2E8B57,color:#0B1A10,stroke-width:1.5px;
+classDef security  fill:#DC3545,stroke:#A61B29,color:#FFFFFF,stroke-width:1.5px;
+classDef storage   fill:#FFA500,stroke:#B36B00,color:#1A1200,stroke-width:1.5px;
+classDef recovery  fill:#0078D4,stroke:#0B5CAD,color:#FFFFFF,stroke-width:1.5px;
+classDef identity  fill:#00B7C3,stroke:#007C86,color:#001417,stroke-width:1.5px;
+classDef monitor   fill:#FFB900,stroke:#B37A00,color:#1A1300,stroke-width:1.5px;
+classDef governance fill:#9B9B9B,stroke:#6B6B6B,color:#111111,stroke-width:1.5px;
+
+%% AI-102
+classDef aiCore    fill:#5C2D91,stroke:#3D1E60,color:#FFFFFF,stroke-width:1.5px;
+classDef aiOpenAI  fill:#C239B3,stroke:#7A1F6F,color:#FFFFFF,stroke-width:1.5px;
+classDef aiSearch  fill:#00A3A3,stroke:#006A6A,color:#001516,stroke-width:1.5px;
+classDef aiML      fill:#2B88D8,stroke:#1B5B93,color:#FFFFFF,stroke-width:1.5px;
+classDef aiBot     fill:#3A96DD,stroke:#245F8C,color:#FFFFFF,stroke-width:1.5px;
+```
+````
+
+Usage example:
+
+```
+vm["VM"]:::compute
+vnet["VNet"]:::network
+entra["Entra ID"]:::identity
+openai["Azure OpenAI"]:::aiOpenAI
+```
+
+---
+
+## 5. Folder Structure
 
 Create under:
 
@@ -195,7 +253,7 @@ lab-<topic>/
 
 ---
 
-## 5. Code Header Block (Code Files Only)
+## 6. Code Header Block (Code Files Only)
 
 Include in `.tf`, `.bicep`, `.ps1`:
 
@@ -213,7 +271,7 @@ Do not include in README.
 
 ---
 
-## 6. Cost Guardrails
+## 7. Cost Guardrails
 
 Default to lowest viable SKU:
 
@@ -228,7 +286,7 @@ If higher tier required, explain in README analysis (not deployment steps).
 
 ---
 
-## 7. Deployment Platform Rules
+## 8. Deployment Platform Rules
 
 Rules specific to IaaC and scripted deployment platforms.
 
@@ -241,14 +299,14 @@ All Infrastructure as Code labs must follow this sequence:
 1. **Design** — Complete architecture design and identify all Azure services
 2. **Code** — Implement Terraform/Bicep configuration with modules
 3. **Validate Syntax** — Run `terraform validate` or `bicep build` to verify syntax
-4. **Regional Capacity Test** — Perform capacity validation for services listed in Section 10
+4. **Regional Capacity Test** — Perform capacity validation for services listed in Section 11
 5. **Final Validation** — Run `terraform plan` or deployment preview to verify end-to-end configuration
 
-**Do not skip Step 4** for labs deploying capacity-constrained services (see Section 10 for the authoritative list). Discovering regional capacity issues after completing code wastes time and may require region changes or SKU adjustments.
+**Do not skip Step 4** for labs deploying capacity-constrained services (see Section 11 for the authoritative list). Discovering regional capacity issues after completing code wastes time and may require region changes or SKU adjustments.
 
 ---
 
-### 7.1 Terraform
+### 8.1 Terraform
 
 * `terraform.tfvars` must include lab subscription ID
 * Provider must set `prevent_deletion_if_contains_resources = false` for lab cleanup
@@ -264,13 +322,13 @@ Test-Path terraform.tfvars
 terraform init
 terraform validate
 terraform fmt
-# Perform regional capacity tests here (Section 10) before final plan
+# Perform regional capacity tests here (Section 11) before final plan
 terraform plan
 ```
 
-**Note:** Regional capacity testing must occur after `terraform validate` and before `terraform plan` for labs with capacity-constrained services (see Section 10 for the list).
+**Note:** Regional capacity testing must occur after `terraform validate` and before `terraform plan` for labs with capacity-constrained services (see Section 11 for the list).
 
-### 7.2 Bicep
+### 8.2 Bicep
 
 * Use `main.bicep` + `main.bicepparam`
 * Use modules when deploying multiple resource types
@@ -289,15 +347,15 @@ terraform plan
 ```
 Use-AzProfile Lab
 .\bicep.ps1 validate
-# Perform regional capacity tests here (Section 10) before plan
+# Perform regional capacity tests here (Section 11) before plan
 .\bicep.ps1 plan
 ```
 
-**Note:** Regional capacity testing must occur after `bicep.ps1 validate` and before `bicep.ps1 plan` for labs with capacity-constrained services (see Section 10 for the list).
+**Note:** Regional capacity testing must occur after `bicep.ps1 validate` and before `bicep.ps1 plan` for labs with capacity-constrained services (see Section 11 for the list).
 
 ---
 
-## 8. Scripted Validation
+## 9. Scripted Validation
 
 Must include and capture:
 
@@ -311,7 +369,7 @@ Get-Command -Syntax
 
 ---
 
-## 9. Common Azure Pitfalls
+## 10. Common Azure Pitfalls
 
 Follow `Governance-Lab.md` for:
 
@@ -325,7 +383,7 @@ All governance standards are mandatory.
 
 ---
 
-## 10. Regional Validation
+## 11. Regional Validation
 
 For labs deploying regionally constrained services, verify provider availability in target region before deployment.
 
@@ -351,7 +409,7 @@ Update `terraform.tfvars` or `main.bicepparam` with chosen region and document i
 
 ---
 
-## 11. Final Response Format
+## 12. Final Response Format
 
 Respond with:
 
@@ -364,7 +422,7 @@ Respond with:
 
 ---
 
-## 12. Invocation Examples
+## 13. Invocation Examples
 
 * Create a hands-on lab for this `<EXAM>` question: …
 * Create a Terraform hands-on lab for this `<EXAM>` question: …
