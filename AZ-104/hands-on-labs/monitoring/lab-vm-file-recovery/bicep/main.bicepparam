@@ -13,7 +13,7 @@ param domain = 'monitoring'
 param topic = 'vm-file-recovery'
 
 // Azure region
-param location = 'eastus'
+param location = 'centralus'
 
 // Lab owner
 param owner = 'Greg Tate'

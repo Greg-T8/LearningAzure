@@ -16,7 +16,7 @@ param domain string = 'monitoring'
 param topic string = 'vm-file-recovery'
 
 @description('Azure region for resources')
-param location string = 'eastus'
+param location string = 'centralus'
 
 @description('Lab owner for tagging')
 param owner string = 'Greg Tate'
