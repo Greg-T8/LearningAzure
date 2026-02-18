@@ -38,6 +38,7 @@ This lab deploys a Windows Server 2019 VM backed up by an Azure Recovery Service
 ## Architecture Diagram
 
 ```mermaid
+%%{init: {'theme':'base', 'themeVariables': { 'primaryColor':'#e0e0e0','primaryBorderColor':'#666','lineColor':'#444','secondaryColor':'#d0d0d0','tertiaryColor':'#f5f5f5'}}}%%
 graph TD
     subgraph RG["az104-monitoring-vm-file-recovery-bicep"]
         RSV["rsv-file-recovery-xxxx<br/>Recovery Services Vault<br/>(random suffix)"]
@@ -54,6 +55,18 @@ graph TD
     VM1 --> SNET
     BAS --> BSNET
     NSG --> SNET
+
+    classDef vaultStyle fill:#0078D4,stroke:#004578,stroke-width:2px,color:#fff
+    classDef vmStyle fill:#914BB0,stroke:#5E2F74,stroke-width:2px,color:#fff
+    classDef networkStyle fill:#50C878,stroke:#2E7D5B,stroke-width:2px,color:#fff
+    classDef bastionStyle fill:#FF8C00,stroke:#CC7000,stroke-width:2px,color:#fff
+    classDef securityStyle fill:#DC3545,stroke:#A71D2A,stroke-width:2px,color:#fff
+
+    class RSV vaultStyle
+    class VM1 vmStyle
+    class SNET,BSNET networkStyle
+    class BAS bastionStyle
+    class NSG securityStyle
 ```
 
 ---
