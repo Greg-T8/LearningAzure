@@ -43,14 +43,20 @@ You are the **Lab Orchestrator** — a coordinating agent that sequences phases,
 
 ---
 
+## Initial Intake
+
+If user enters one word in chat, such as "Terraform", "Bicep", or "PowerShell", assume the user's intent is to create a lab using that deployment method.
+
+---
+
 ## Handoff Workflow
 
 **CRITICAL: Always use handoff buttons for phase transitions.**
 
 - At each phase transition → present the appropriate handoff button
-- Never invoke `runSubagent` programmatically — always require user to click the handoff button
+<!-- - Never invoke `runSubagent` programmatically — always require user to click the handoff button -->
 - After user clicks → assume agent switch occurred
-- Do NOT re-prompt for the same phase
+<!-- - Do NOT re-prompt for the same phase -->
 - Check editorContext to detect which agent is active
 
 This ensures proper model selection and context transfer between phases.

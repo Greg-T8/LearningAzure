@@ -146,24 +146,30 @@ $config = Get-Az...
 
 ## 4. Mermaid Diagram Styling
 
-Use this base theme for all diagrams (Azure gray background + neutral cards):
+Use this base theme for all diagrams (light gray background + neutral cards):
 
 ```mermaid
 %%{init: {
   "theme": "base",
   "themeVariables": {
-    "background": "#3B3B3B",
-    "primaryColor": "#4A4A4A",
-    "primaryTextColor": "#F2F2F2",
-    "primaryBorderColor": "#8A8A8A",
-    "lineColor": "#C8C8C8",
-    "clusterBkg": "#333333",
-    "clusterBorder": "#8A8A8A",
-    "edgeLabelBackground": "#3B3B3B",
+    "background": "#F5F5F5",
+    "primaryColor": "#E8E8E8",
+    "primaryTextColor": "#333333",
+    "primaryBorderColor": "#999999",
+    "lineColor": "#666666",
+    "clusterBkg": "#FAFAFA",
+    "clusterBorder": "#CCCCCC",
+    "edgeLabelBackground": "#F5F5F5",
     "fontFamily": "Segoe UI, Roboto, Arial, sans-serif",
     "fontSize": "14px"
   }
 }}%%
+```
+
+For subnet/VNet containers, apply a prominent light blue border to improve visual hierarchy:
+
+```mermaid
+style VNET stroke:#4A90E2,stroke-width:2.5px
 ```
 
 Add these class definitions to each diagram:
