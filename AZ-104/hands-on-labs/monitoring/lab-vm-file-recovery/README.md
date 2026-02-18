@@ -38,7 +38,21 @@ This lab deploys a Windows Server 2019 VM backed up by an Azure Recovery Service
 ## Architecture Diagram
 
 ```mermaid
-%%{init: {'theme':'base', 'themeVariables': { 'primaryColor':'#e0e0e0','primaryBorderColor':'#666','lineColor':'#444','secondaryColor':'#d0d0d0','tertiaryColor':'#f5f5f5'}}}%%
+%%{init: {
+  "theme": "base",
+  "themeVariables": {
+    "background": "#F5F5F5",
+    "primaryColor": "#E8E8E8",
+    "primaryTextColor": "#333333",
+    "primaryBorderColor": "#999999",
+    "lineColor": "#666666",
+    "clusterBkg": "#FAFAFA",
+    "clusterBorder": "#CCCCCC",
+    "edgeLabelBackground": "#F5F5F5",
+    "fontFamily": "Segoe UI, Roboto, Arial, sans-serif",
+    "fontSize": "14px"
+  }
+}}%%
 graph TD
     subgraph RG["az104-monitoring-vm-file-recovery-bicep"]
         RSV["rsv-file-recovery-xxxx<br/>Recovery Services Vault<br/>(random suffix)"]
@@ -56,17 +70,23 @@ graph TD
     BAS --> BSNET
     NSG --> SNET
 
-    classDef vaultStyle fill:#0078D4,stroke:#004578,stroke-width:2px,color:#fff
-    classDef vmStyle fill:#914BB0,stroke:#5E2F74,stroke-width:2px,color:#fff
-    classDef networkStyle fill:#50C878,stroke:#2E7D5B,stroke-width:2px,color:#fff
-    classDef bastionStyle fill:#FF8C00,stroke:#CC7000,stroke-width:2px,color:#fff
-    classDef securityStyle fill:#DC3545,stroke:#A71D2A,stroke-width:2px,color:#fff
+    %% Core (AZ-104)
+    classDef compute   fill:#914BB0,stroke:#6E2E8E,color:#FFFFFF,stroke-width:1.5px;
+    classDef network   fill:#50C878,stroke:#2E8B57,color:#0B1A10,stroke-width:1.5px;
+    classDef security  fill:#DC3545,stroke:#A61B29,color:#FFFFFF,stroke-width:1.5px;
+    classDef storage   fill:#FFA500,stroke:#B36B00,color:#1A1200,stroke-width:1.5px;
+    classDef recovery  fill:#0078D4,stroke:#0B5CAD,color:#FFFFFF,stroke-width:1.5px;
+    classDef identity  fill:#00B7C3,stroke:#007C86,color:#001417,stroke-width:1.5px;
+    classDef monitor   fill:#FFB900,stroke:#B37A00,color:#1A1300,stroke-width:1.5px;
+    classDef governance fill:#9B9B9B,stroke:#6B6B6B,color:#111111,stroke-width:1.5px;
 
-    class RSV vaultStyle
-    class VM1 vmStyle
-    class SNET,BSNET networkStyle
-    class BAS bastionStyle
-    class NSG securityStyle
+    class RSV recovery
+    class VM1 compute
+    class SNET,BSNET network
+    class BAS network
+    class NSG security
+
+    style VNET stroke:#4A90E2,stroke-width:2.5px
 ```
 
 ---
@@ -144,7 +164,7 @@ $rsv = $vaults | Where-Object { $_.Name -like 'rsv-file-recovery-*' } | Select-O
 $rsv | Format-Table Name, Location, ResourceGroupName
 ```
 <!-- Screenshot -->
-<img src='.img/01_recovery_vault.png' width=700>
+<img src='.img/2026-02-18-03-27-10.png' width=700>
 
 ```powershell
 # 2. Set vault context and verify backup item
@@ -162,7 +182,7 @@ $backupItem = Get-AzRecoveryServicesBackupItem `
 $backupItem | Format-Table Name, ProtectionStatus, LatestRecoveryPoint
 ```
 <!-- Screenshot -->
-<img src='.img/02_backup_item.png' width=700>
+<img src='.img/2026-02-18-03-28-37.png' width=700>
 
 ### Step 2: Initiate File-Level Recovery
 
@@ -175,7 +195,7 @@ $recoveryPoints = Get-AzRecoveryServicesBackupRecoveryPoint `
 $recoveryPoints | Format-Table RecoveryPointType, RecoveryPointTime, RecoveryPointId -AutoSize
 ```
 <!-- Screenshot -->
-<img src='.img/03_recovery_points.png' width=700>
+<img src='.img/2026-02-18-03-31-02.png' width=700>
 
 ```powershell
 # 4. Start file recovery and generate the mount script
@@ -189,7 +209,9 @@ Write-Host "Script path: $($fileRecoveryScript.OsType)"
 Write-Host "Password: $($fileRecoveryScript.Password)"
 ```
 <!-- Screenshot -->
-<img src='.img/04_file_recovery_script.png' width=700>
+<img src='.img/2026-02-18-03-34-22.png' width=700>
+
+<img src='.img/2026-02-18-03-33-53.png' width=700>
 
 ### Step 3: Mount, Copy, and Unmount (On the VM)
 
