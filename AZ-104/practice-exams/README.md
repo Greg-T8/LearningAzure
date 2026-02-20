@@ -28,6 +28,7 @@
     * [Recover Configuration File from Azure VM Backup](#recover-configuration-file-from-azure-vm-backup)
     * [Diagnose Network Watcher Tool for Web Server Packet Flow](#diagnose-network-watcher-tool-for-web-server-packet-flow)
     * [Recover Azure VM from Deleted Backup](#recover-azure-vm-from-deleted-backup)
+* [MeasureUp Practice Exam - Hard Difficulty - Exam AZ-104: Microsoft Azure Administrator](#measureup-practice-exam---hard-difficulty---exam-az-104-microsoft-azure-administrator)
 
 ---
 
@@ -1708,3 +1709,9 @@ For Azure IaaS VMs protected by a Recovery Services vault, **soft delete provide
 </details>
 
 ---
+
+## MeasureUp Practice Exam - Hard Difficulty - Exam AZ-104: Microsoft Azure Administrator
+
+---
+
+<img src='.img/2026-02-20-06-34-47.png' width=700>
