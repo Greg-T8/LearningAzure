@@ -119,6 +119,8 @@ If only the main question screenshot is provided (no expanded-dropdown screensho
 <!-- Dropdown options not yet provided. Paste screenshots of each expanded drop-down to populate. -->
 ```
 
+Reference the following example for a complete Multiple Drop-Down question with all screenshots provided:  [Example - Multiple Drop-Down](Example%20-%20Multiple-Drop-Down.md)
+
 ---
 
 ### Screenshot Block (collapsed)
