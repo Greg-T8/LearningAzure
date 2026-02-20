@@ -223,14 +223,16 @@ Write-Host "Password: $($fileRecoveryScript.Password)"
 #    (Run the script downloaded in Step 4 on the VM)
 ```
 <!-- Screenshot -->
-<img src='.img/05_mount_volume.png' width=700>
+<img src='.img/2026-02-20-06-02-28.png' width=700>
+
+<img src='.img/2026-02-20-06-04-37.png' width=700>
 
 ```powershell
 # 6. Copy the configuration file from the mounted recovery volume
 #    Example: Copy-Item "F:\Windows\System32\config\app.config" "C:\Config\app.config"
 ```
 <!-- Screenshot -->
-<img src='.img/06_copy_file.png' width=700>
+<img src='.img/2026-02-20-06-05-47.png' width=700>
 
 ```powershell
 # 7. Unmount the recovery volumes
@@ -239,7 +241,9 @@ Disable-AzRecoveryServicesBackupRPMountScript `
     -VaultId $rsv.ID
 ```
 <!-- Screenshot -->
-<img src='.img/07_unmount_volumes.png' width=700>
+<img src='.img/2026-02-20-06-06-57.png' width=700>
+
+<img src='.img/2026-02-20-06-07-29.png' width=700>
 
 ---
 
