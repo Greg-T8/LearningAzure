@@ -17,7 +17,7 @@
       "/^rg\\b.*\\s(--pre|--hostname-bin)\\b/": false,
       "/^sed\\b.*;W/": false,
       "/^sed\\b.*\\s(-[a-zA-Z]*(e|f)[a-zA-Z]*|--expression|--file)\\b/": false,
-      "/^sed\\b.*s\\/.*\\/.*\\\/[ew]/": false,
+      "/^sed\\b.*s\\/.*\\/.*\\/[ew]/": false,
       "/^sort\\b.*\\s-(o|S)\\b/": false,
       "/^tree\\b.*\\s-o\\b/": false,
       "chmod": false,
@@ -132,6 +132,7 @@
       "which": true,
       "Write-Host": true,
       "Write-Output": true,
+      "Rename-Item": true
     },
     "terminal.integrated.profiles.windows": {
       "PowerShell Lab": {
