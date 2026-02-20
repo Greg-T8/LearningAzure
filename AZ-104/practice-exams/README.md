@@ -1714,4 +1714,3 @@ For Azure IaaS VMs protected by a Recovery Services vault, **soft delete provide
 
 ---
 
-<img src='.img/2026-02-20-06-34-47.png' width=700>
