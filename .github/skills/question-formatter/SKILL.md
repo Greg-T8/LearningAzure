@@ -1,7 +1,7 @@
 ---
 name: question-formatter
 description: 'Extract exam questions from pasted screenshot images and format them as structured markdown. Use when asked to extract a question from an image, format an exam question, or replace an image tag with formatted question content.'
-user-invokable: false
+user-invokable: true
 argument-hint: '[image or selection]'
 ---
 
@@ -18,6 +18,7 @@ Extracts exam question content from pasted screenshot images and formats it as s
 
 1. Extract all text and content from the pasted screenshot image
 2. Format using the output structure below
+3. Call `replace_string_in_file` with the selected `<img>` line as `oldString` and the formatted output as `newString`
 
 ## Output Structure
 
@@ -81,7 +82,8 @@ Always include. Leave link empty for manual completion.
 ## Rules
 
 - Extract content **ONLY** from the pasted screenshot image
+- Only replace the selected `<img>` line — do **NOT** modify any other content in the file
 - Use ☐ (unchecked boxes) for Yes/No tables
 - Do **NOT** infer, solve, or explain answers
-- Do **NOT** modify existing content in the document
 - Preserve exact wording from image
+- Do not separate sections with horizontal lines or any formatting beyond what is specified above
