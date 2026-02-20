@@ -82,10 +82,13 @@ Always include. Leave link empty for manual completion.
 
 ## Rules
 
+* Only replace the selected text (the `<img>` line)
+* Do not modify any other content in the file.
+* Preserve surrounding whitespace and formatting.
+* Preserve exact wording from image
 * Extract content ONLY from the pasted screenshot image
 * Use ☐ (unchecked boxes) for Yes/No tables
 * Do NOT infer, solve, or explain answers
-* Do NOT modify existing content in the document
-* Preserve exact wording from image
+* Do not separate sections with horizontal lines or any other formatting beyond what is specified above.
 
 ---
