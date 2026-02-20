@@ -213,6 +213,8 @@ Write-Host "Password: $($fileRecoveryScript.Password)"
 
 <img src='.img/2026-02-18-03-33-53.png' width=700>
 
+<img src='.img/2026-02-20-06-10-51.png' width=700>
+
 ### Step 3: Mount, Copy, and Unmount (On the VM)
 
 > **Important:** Steps 5-7 must be run on VM1 itself via Bastion connection.
