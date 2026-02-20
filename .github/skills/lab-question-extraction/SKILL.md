@@ -1,6 +1,7 @@
 ---
-name: question-extraction
+name: lab-question-extraction
 description: Procedure for extracting structured metadata from exam questions (screenshot or text).
+user-invokable: false
 ---
 
 # Question Extraction

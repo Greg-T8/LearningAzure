@@ -12,7 +12,7 @@ You are the **Lab-Intake Agent**. You ingest exam questions (screenshot or text)
 
 ## Skills
 
-- **`question-extraction`** — Procedure for extracting metadata from exam questions.
+- **`lab-question-extraction`** — Procedure for extracting metadata from exam questions.
 
 ---
 
@@ -30,7 +30,7 @@ If the input is ambiguous or incomplete, ask the user for clarification before p
 
 ## R-041: Metadata Extraction
 
-Extract the following from the exam question. Procedure is defined in `question-extraction` skill (R-100 through R-102):
+Extract the following from the exam question. Procedure is defined in `lab-question-extraction` skill (R-100 through R-102):
 
 | Field          | Description                                                     |
 | -------------- | --------------------------------------------------------------- |

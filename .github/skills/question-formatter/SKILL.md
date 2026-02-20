@@ -1,7 +1,7 @@
 ---
 name: question-formatter
 description: 'Extract exam questions from pasted screenshot images and format them as structured markdown. Use when asked to extract a question from an image, format an exam question, or replace an image tag with formatted question content.'
-user-invokable: true
+user-invokable: false
 argument-hint: '[image or selection]'
 ---
 
