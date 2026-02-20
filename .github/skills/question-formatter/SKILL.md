@@ -13,15 +13,11 @@ Extracts exam question content from pasted screenshot images and formats it as s
 
 - Extracting text from a pasted exam question screenshot
 - Formatting an exam question into the standard markdown structure
-- Replacing an `<img>` line in a practice exam file with formatted content
 
 ## Process
 
 1. Extract all text and content from the pasted screenshot image
 2. Format using the output structure below
-3. Replace the selected `<img>` line using `replace_string_in_file` with the formatted output
-
-**Do NOT** read or modify other parts of the file. Only replace the selected image tag.
 
 ## Output Structure
 
