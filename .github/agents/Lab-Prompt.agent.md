@@ -1,7 +1,10 @@
 ---
 name: LabPrompt
 description: Generates a governance-compliant hands-on lab from an exam scenario using Terraform, Bicep, Scripted, or Manual methods
+model: 'Claude Opus 4.6'
+tools: []
 ---
+
 
 # Hands-on Lab Generator
 
