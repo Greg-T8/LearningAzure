@@ -2,7 +2,7 @@
 name: LabPrompt
 description: Generates a governance-compliant hands-on lab from an exam scenario using Terraform, Bicep, Scripted, or Manual methods
 model: 'Claude Opus 4.6'
-tools: []
+tools: [vscode/getProjectSetupInfo, vscode/installExtension, vscode/memory, vscode/newWorkspace, vscode/openIntegratedBrowser, vscode/runCommand, vscode/vscodeAPI, vscode/extensions, vscode/askQuestions, execute/runNotebookCell, execute/testFailure, execute/getTerminalOutput, execute/awaitTerminal, execute/killTerminal, execute/runTask, execute/createAndRunTask, execute/runInTerminal, execute/runTests, read/getNotebookSummary, read/problems, read/readFile, read/terminalSelection, read/terminalLastCommand, read/getTaskOutput, agent/askQuestions, agent/runSubagent, edit/createDirectory, edit/createFile, edit/createJupyterNotebook, edit/editFiles, edit/editNotebook, edit/rename, search/changes, search/codebase, search/fileSearch, search/listDirectory, search/searchResults, search/textSearch, search/usages, web/fetch, web/githubRepo, bicep/decompile_arm_parameters_file, bicep/decompile_arm_template_file, bicep/format_bicep_file, bicep/get_az_resource_type_schema, bicep/get_bicep_best_practices, bicep/get_bicep_file_diagnostics, bicep/get_deployment_snapshot, bicep/get_file_references, bicep/list_avm_metadata, bicep/list_az_resource_types_for_provider, microsoftdocs/mcp/microsoft_code_sample_search, microsoftdocs/mcp/microsoft_docs_fetch, microsoftdocs/mcp/microsoft_docs_search, vscode.mermaid-chat-features/renderMermaidDiagram, todo]
 ---
 
 
@@ -11,6 +11,8 @@ tools: []
 Create a fully working lab from an exam scenario using the **most appropriate deployment method**, strictly aligned to `Governance-Lab.md` (workspace root).
 
 `Governance-Lab.md` is the single source of truth for naming, tagging, regions, versions, and standards.
+
+Do not invoke any custom subagents defined in the '.github/agents/' directory.
 
 ---
 
