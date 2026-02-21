@@ -10,7 +10,7 @@ handoffs:
     agent: Lab-Intake
     prompt: Ingest the exam question and extract metadata.
     send: true
-    model: Claude Sonnet 4.5 (copilot)
+    model: GPT-5 mini (copilot)
   - agent: Lab-Designer
     label: Design Lab
     prompt: Design the lab architecture and generate README.
@@ -73,7 +73,7 @@ When entering the response, the user typically provides a screenshot/attachment 
 
 When the user attaches a screenshot or pasted image containing an exam question:
 
-1. **Read the lab-question-extractor skill** — Load `.github/skills/lab-question-extractor/SKILL.md` to understand the formatting rules.
+1. **Read the lab-question-extractor skill** — Load `.github/skills/lab-question-extractor/SKILL.md` to understand the formatting rules (Title, Prompt, and Answer sections only — ignore appendices).
 2. **Extract question text directly** — Use your native vision capability to read the attached image. You have vision; subagents launched via `runSubagent` or handoff buttons do **not** receive image attachments and cannot read image files. Do **not** pass the image path to any subagent.
 3. **Format the extracted content** — Apply the formatting rules from the skill (title, prompt, answer section by question type). Do **NOT** reveal the correct answer.
 4. **Proceed to R-038** — Use the formatted content to generate the pre-handoff summary.
