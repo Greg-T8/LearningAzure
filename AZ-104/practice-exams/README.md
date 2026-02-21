@@ -1812,7 +1812,7 @@ D. Number of virtual CPUs
 
 </details>
 
-<details open>
+<details>
 <summary>💡 Click to expand explanation</summary>
 
 **Why the selected answer is correct (Number of data disks)**
@@ -1835,10 +1835,10 @@ When resizing a VM, Azure validates that all currently attached resources (data 
 
 **References**
 
-* <https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/public-ip-addresses>
-* <https://learn.microsoft.com/en-us/azure/virtual-machines/managed-disks-overview>
-* <https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/overview?tabs=breakdownseries%2Cgeneralsizelist%2Ccomputesizelist%2Cmemorysizelist%2Cstoragesizelist%2Cgpusizelist%2Cfpgasizelist%2Chpcsizelist>
+* [Sizes for virtual machines in Azure](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/overview?tabs=breakdownseries%2Cgeneralsizelist%2Ccomputesizelist%2Cmemorysizelist%2Cstoragesizelist%2Cgpusizelist%2Cfpgasizelist%2Chpcsizelist)
+* [Introduction to Azure managed disks](https://learn.microsoft.com/en-us/azure/virtual-machines/managed-disks-overview)
+* [Public IP addresses](https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/public-ip-addresses)
 
 </details>
 
-▶ Related Lab: []()
+---
