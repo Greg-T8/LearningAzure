@@ -1,9 +1,10 @@
 ---
 name: Lab-Orchestrator
 description: Coordinating agent for lab creation. Sequences phases, delegates to phase agents, tracks state, manages handoffs. Contains no domain logic.
-model: 'Claude Sonnet 4.6 (copilot)'
+model: 'GPT-5 mini'
 user-invokable: true
-tools: [read/readFile, agent/runSubagent, edit/createDirectory, edit/createFile]
+# tools: [read/readFile, agent/runSubagent, edit/createDirectory, edit/createFile]
+tools: [read/readFile, agent/runSubagent]
 handoffs:
   - label: Lab-Intake
     agent: Lab-Intake
@@ -72,12 +73,10 @@ When entering the response, the user typically provides a screenshot/attachment 
 
 When the user attaches a screenshot or pasted image containing an exam question:
 
-1. **Locate the image path** — Identify the workspace-relative path of the attached image (VS Code stores pasted images in the default image directory).
-2. **Invoke the `exam-question-extractor` skill as a subagent** — Call `runSubagent` and pass the **absolute image file path** in the prompt. The subagent reads `.github/skills/exam-question-extractor/SKILL.md`, opens the image at the supplied path, extracts question text, and returns the fully formatted markdown output.
-3. **Use the skill output** — Treat the formatted markdown as the extracted exam question. Do **NOT** reveal the correct answer.
-4. **Proceed to R-038** — Use the extracted content to generate the pre-handoff summary.
-
-**CRITICAL:** Sub-agents launched via `runSubagent` or handoff buttons do not receive image attachments. The orchestrator must resolve the image path and pass it explicitly in the subagent prompt.
+1. **Read the exam-question-extractor skill** — Load `.github/skills/exam-question-extractor/SKILL.md` to understand the formatting rules.
+2. **Extract question text directly** — Use your native vision capability to read the attached image. You have vision; subagents launched via `runSubagent` or handoff buttons do **not** receive image attachments and cannot read image files. Do **not** pass the image path to any subagent.
+3. **Format the extracted content** — Apply the formatting rules from the skill (title, prompt, answer section by question type). Do **NOT** reveal the correct answer.
+4. **Proceed to R-038** — Use the formatted content to generate the pre-handoff summary.
 
 If the image is unreadable (corrupt, too small, or obscured), ask the user to paste the question as text before continuing.
 
@@ -86,6 +85,18 @@ If the image is unreadable (corrupt, too small, or obscured), ask the user to pa
 ## R-038: Pre-Handoff Summary Output
 
 Before presenting the G0 decision gate and the Lab-Intake handoff button, output the **exact exam question** as extracted and formatted by the `exam-question-extractor` skill (`.github/skills/exam-question-extractor/SKILL.md`).
+
+Introduce the question with this exact phrase:
+
+> Here is the transcribed exam question:
+
+Then render the question inside a horizontal rule border to make it visually distinct:
+
+```
+---
+<formatted question content here>
+---
+```
 
 Follow all output structure rules from that skill:
 
