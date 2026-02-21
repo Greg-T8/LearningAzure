@@ -21,7 +21,8 @@ This skill operates in one of two modes depending on how it is invoked.
 
 ### Mode 2: Lab Orchestrator
 
-- **Invocation:** Called as a subagent from the Lab Orchestrator agent. The image is pasted in the Copilot Chat pane.
+- **Invocation:** Called as a subagent from the Lab Orchestrator agent. The orchestrator passes the **absolute file path** of the exam question image in the subagent prompt. Read the image from that path.
+- **Input:** The subagent prompt contains the image file path (e.g., `c:\Users\...\image.png`). Use `read_file` or the image at that path to extract question content.
 - **Output:** Title + Prompt + Answer sections only. Do **not** include the Screenshot Block, Explanation Placeholder, or Related Lab Line.
 - **Action:** Return the formatted markdown text directly. Do **not** call `replace_string_in_file`.
 

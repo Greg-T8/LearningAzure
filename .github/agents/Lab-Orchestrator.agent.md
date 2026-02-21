@@ -68,22 +68,16 @@ If user enters one word in chat, such as "Terraform", "Bicep", or "PowerShell", 
 
 When entering the response, the user typically provides a screenshot/attachment of the exam question. Consider this attachment to be the exam question you should work with.
 
-## Image Input Handling
+### Image Input Handling
 
 When the user attaches a screenshot or pasted image containing an exam question:
 
-1. **Save the image** — Write the attached image to `.assets/temp/<descriptive-filename>.png` in the workspace root. Use a short, descriptive filename based on the apparent topic (e.g., `az104-nsg-question.png`).
-2. **Construct an `<img>` tag** — Build an image reference using the saved path:
+1. **Locate the image path** — Identify the workspace-relative path of the attached image (VS Code stores pasted images in the default image directory).
+2. **Invoke the `exam-question-extractor` skill as a subagent** — Call `runSubagent` and pass the **absolute image file path** in the prompt. The subagent reads `.github/skills/exam-question-extractor/SKILL.md`, opens the image at the supplied path, extracts question text, and returns the fully formatted markdown output.
+3. **Use the skill output** — Treat the formatted markdown as the extracted exam question. Do **NOT** reveal the correct answer.
+4. **Proceed to R-038** — Use the extracted content to generate the pre-handoff summary.
 
-   ```html
-   <img src=".assets/temp/<descriptive-filename>.png">
-   ```
-
-3. **Invoke the `exam-question-extractor` skill** — Read `.github/skills/exam-question-extractor/SKILL.md` and process the `<img>` tag as the selected input. The skill extracts question text and returns the fully formatted markdown output.
-4. **Use the skill output** — Treat the formatted markdown as the extracted exam question. Do **NOT** reveal the correct answer.
-5. **Proceed to R-038** — Use the extracted content to generate the pre-handoff summary.
-
-**CRITICAL:** Sub-agents launched via `runSubagent` or handoff buttons do not receive image attachments. The image must be saved and the skill must be invoked **before any handoff**.
+**CRITICAL:** Sub-agents launched via `runSubagent` or handoff buttons do not receive image attachments. The orchestrator must resolve the image path and pass it explicitly in the subagent prompt.
 
 If the image is unreadable (corrupt, too small, or obscured), ask the user to paste the question as text before continuing.
 
