@@ -1,89 +1,180 @@
 ---
 name: exam-question-extractor
-description: 'Extract exam questions from pasted screenshot images and format them as structured markdown. Operates in two modes: Image Replacement mode (inline chat, replaces selected img tag) and Extract Only mode (direct chat or Lab Orchestrator, returns title/prompt/answer only).' 
+description: "Extract exam questions from pasted screenshot images and format them as structured markdown. Operates in two modes: Image Replacement mode (inline chat, replaces selected img tag) and Extract Only mode (returns title/prompt/answer only)."
 user-invokable: true
-argument-hint: '[image or selection]'
+argument-hint: "[image attachment and/or selection]"
 ---
 
 # Question Formatter
 
-Extracts exam question content from pasted screenshot images and formats it as structured markdown for practice exam files.
+Extracts exam question content from screenshot images and formats it as structured markdown for practice exam files.
+
+---
+
+## Critical Vision Requirement
+
+Text extraction **must always come from screenshot image(s) attached or pasted into the current chat**.
+
+If an image is not attached in the active chat context, image extraction cannot occur.
+
+---
 
 ## Modes of Operation
 
-This skill operates in one of two modes depending on how it is invoked.
+This skill operates in one of two modes depending on invocation context.
+
+---
 
 ### Mode 1: Image Replacement
 
-- **Invocation:** User highlights an `<img>` line in a markdown file and invokes this skill from inline chat.
-- **Output:** Title + Prompt + Answer + Screenshot Block + Explanation Placeholder + Related Lab Line.
-- **Action:** Call `replace_string_in_file` with the selected `<img>` line as `oldString` and the formatted output as `newString`.
+Mode 1 activates when:
+
+1. The user has selected an `<img>` line inside a markdown file.
+2. The corresponding screenshot image(s) are **attached/pasted in the current chat**.
+
+If **either requirement is missing**, automatically **fall back to Mode 2 (Extract Only)**.
+
+#### Output
+
+Include:
+
+- Title  
+- Prompt  
+- Answer  
+- Screenshot Block  
+- Explanation Placeholder  
+- Related Lab Line
+
+#### Action
+
+Call:
+
+```
+replace_string_in_file
+
+```
+
+- `oldString` = exact selected `<img>` line(s)
+- `newString` = fully formatted output
+
+Only replace the selected content.
+
+---
 
 ### Mode 2: Extract Only
 
-- **Invocation:** Either invoked directly through chat (user pastes a screenshot image and asks to extract the question) **or** called by the Lab Orchestrator as part of a larger workflow. In both cases the image is available in the current chat context — no subagent is used.
-- **Input:** The image is available in the chat context. Subagents launched via `runSubagent` or handoff buttons do not receive image attachments and cannot read binary image files, so image extraction must always happen in the active chat context.
-- **Output:** Title + Prompt + Answer sections only. Do **not** include the Screenshot Block, Explanation Placeholder, or Related Lab Line.
-- **Action:** Format and output the extracted content directly. Do **not** call `replace_string_in_file`.
-- ⛔ **Prohibited output:** `<details>`, `<summary>`, Explanation Placeholder, and Related Lab Line are Image Replacement artefacts and are **never valid** in Extract Only output.
+Triggered when:
+
+- Invoked directly via chat, **or**
+- Called by Lab Orchestrator workflows.
+
+#### Output
+
+Return **only**:
+
+- Title
+- Prompt
+- Answer
+
+#### Prohibited Output
+
+The following are **never valid** in Extract Only mode:
+
+- `<details>`
+- `<summary>`
+- Screenshot Block
+- Explanation Placeholder
+- `▶ Related Lab:` line
+
+#### Action
+
+Return formatted markdown directly.
+
+Do **not** call `replace_string_in_file`.
+
+---
 
 ## Process
 
-1. Determine the active mode (Image Replacement or Extract Only) based on invocation context — use **Extract Only** when invoked directly in chat with an attached image and no `<img>` line selected, or when called by the Lab Orchestrator
+1. Determine active mode using the Mode Gate below.
 
-   **Mode gate — resolve this before writing any output:**
-   - Selected `<img>` line in an open file → **Image Replacement.** Output: Title + Prompt + Answer + Screenshot Block + Explanation Placeholder + Related Lab Line.
-   - Otherwise (direct chat with image, or Lab Orchestrator call) → **Extract Only.** Output: Title + Prompt + Answer **only.** Any `<details>` tag in your output is a mistake — stop and remove it before responding.
+### Mode Gate (Resolve First)
 
-2. Extract all text and content from the pasted screenshot image
-3. Identify the question type (Yes/No, Multiple Choice, or Multiple Drop-Down)
-4. Format using the output structure below, applying the correct answer section for the type
-5. **Image Replacement mode only:** Append the Screenshot Block, Explanation Placeholder, and Related Lab Line
-6. **Image Replacement mode:** Call `replace_string_in_file` to replace the selected `<img>` line
-7. **Extract Only mode:** Return the formatted markdown directly
+- Selected `<img>` line(s) **AND** screenshot image(s) attached in chat  
+  → **Image Replacement Mode**
+
+- Otherwise  
+  → **Extract Only Mode**
+
+If Image Replacement requirements are not fully satisfied, automatically downgrade to Extract Only.
+
+---
+
+2. Extract all visible text from attached screenshot image(s).
+3. Identify question type:
+   - Yes / No
+   - Multiple Choice
+   - Multiple Drop-Down
+4. Format Title, Prompt, and Answer.
+5. Image Replacement mode only:
+   - Append Screenshot Block
+   - Append Explanation Placeholder
+   - Append Related Lab Line
+6. Image Replacement mode:
+   - Call `replace_string_in_file`.
+7. Extract Only mode:
+   - Return markdown output directly.
+
+---
 
 ## Output Structure
 
 ### Title
 
-Generate a concise title (3–10 words, Title Case, exam-appropriate):
+Create a concise exam-appropriate title (3–10 words).
 
 ```markdown
 ### <Title Extracted From Image>
 ```
 
-### Prompt Section
-
-Transcribe the full question prompt exactly as shown in the image. Preserve paragraph breaks and formatting.
-
-If the question contains a PowerShell command that is long or difficult to read on a single line, break it across multiple lines using a backtick (`` ` ``) at the end of each continued line. Align continuation lines for readability.
-
-For Multiple Drop-Down questions, see the additional prompt rules in that subsection.
-
-### Answer Section
-
-Format the answer section according to the question type detected in the image.
-
 ---
 
-#### Type 1: Yes / No
+### Prompt
 
-Use when the image shows a matrix of statements with Yes/No columns.
+Transcribe the question exactly as shown.
 
-```markdown
-| Statement | Yes | No |
-|----------|-----|----|
-| <Statement text from image> | ☐ | ☐ |
-| <Statement text from image> | ☐ | ☐ |
+Rules:
+
+* Preserve wording and paragraph breaks.
+* Maintain layout fidelity.
+* Long PowerShell commands may wrap using backticks:
+
+```
+Get-AzSomething `
+    -Parameter value `
+    -Another value
 ```
 
 ---
 
-#### Type 2: Multiple Choice
+### Answer Section
 
-Use when the image shows lettered options (A, B, C, D, …).
+Choose format based on detected question type.
 
-List each option on a separate line with its label. Add two spaces at end of each line for line breaks.
+---
+
+#### Type 1 — Yes / No
+
+```markdown
+| Statement | Yes | No |
+|----------|-----|----|
+| <Statement text> | ☐ | ☐ |
+| <Statement text> | ☐ | ☐ |
+```
+
+---
+
+#### Type 2 — Multiple Choice
 
 ```markdown
 A. <Option text>  
@@ -92,39 +183,37 @@ C. <Option text>
 D. <Option text>  
 ```
 
+(two trailing spaces per line required)
+
 ---
 
-#### Type 3: Multiple Drop-Down (Fill-in-the-Blank)
+#### Type 3 — Multiple Drop-Down (Fill-in-the-Blank)
 
-Use when the image shows a question with one or more inline drop-down selectors (displayed as **"Select"** or **"Select ▼"** in the UI). The user will supply:
+Used when UI shows **Select** or **Select ▼** controls.
 
-1. A screenshot of the main question (drop-downs shown as "Select")
-2. One or more follow-up screenshots showing the expanded options for each drop-down
+##### Prompt Rules
 
-The number of drop-downs will vary by question. Number the placeholders sequentially in the order they appear in the question, top-to-bottom or left-to-right.
+* Replace dropdowns with numbered placeholders:
 
-**Prompt rules for this type:**
-
-- Reproduce the question layout as faithfully as possible.
-- Replace each drop-down with a numbered placeholder: `[Select 1 ▼]`, `[Select 2 ▼]`, etc., numbered top-to-bottom or left-to-right as they appear in the image.
-- If the question uses a table layout, preserve it:
-
-```markdown
-| <Column header> | <Column header> |
-|-----------------|-----------------|
-| <Label text>    | [Select 1 ▼]    |
-| <Label text>    | [Select 2 ▼]    |
+```
+[Select 1 ▼]
+[Select 2 ▼]
 ```
 
-- If the drop-downs are inline within a sentence, keep them inline:
+* Preserve tables if present:
 
 ```markdown
-You need to configure [Select 1 ▼] so that [Select 2 ▼] can access the resource.
+| Column | Setting |
+|--------|---------|
+| Item A | [Select 1 ▼] |
+| Item B | [Select 2 ▼] |
 ```
 
-**Answer format:**
+* Inline dropdowns remain inline.
 
-List the options for each drop-down, extracted from the follow-up screenshots. Use bullet lines with ○ (open circle) for each option.
+##### Answer Format
+
+If dropdown option screenshots exist:
 
 ```markdown
 **Select 1 options:**  
@@ -138,43 +227,44 @@ List the options for each drop-down, extracted from the follow-up screenshots. U
 ○ Option C  
 ```
 
-The number of options must match the number of drop-down placeholders in the prompt, and the order of options must match the order of placeholders.
-
-Reference the following example for a complete Multiple Drop-Down question with all screenshots provided:  [Example - Multiple Drop-Down](Example%20-%20Multiple-Drop-Down.md)
-
-If only the main question screenshot is provided (no expanded-dropdown screenshots), output the placeholder markers in the prompt and omit the options list. Add a comment so the user knows to supply them:
+If option screenshots are missing:
 
 ```markdown
 <!-- Dropdown options not yet provided. Paste screenshots of each expanded drop-down to populate. -->
 ```
 
+Reference example:
+
+```
+Example - Multiple-Drop-Down.md
+```
+
 ---
 
-### Screenshot Block (collapsed) — Image Replacement Mode Only
+## Image Replacement Appendices (Mode 1 Only)
+
+### Screenshot Block (Collapsed)
+
+Include **all selected `<img>` lines** inside one block.
 
 ```html
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src="<path from selected line>" width=700>
+<img src="<path>" width=700>
 
 </details>
 ```
 
-For Multiple Drop-Down questions with additional screenshots, include all images inside a single collapsed block:
+Rules:
 
-```html
-<details>
-<summary>📸 Click to expand screenshot</summary>
+* Preserve original `src`.
+* Keep existing width if present; otherwise normalize to `width=700`.
+* Maintain original image order.
 
-<img src="<main question screenshot path>" width=700>
-<img src="<dropdown 1 screenshot path>" width=700>
-<img src="<dropdown 2 screenshot path>" width=700>
+---
 
-</details>
-```
-
-### Explanation Placeholder (open, empty) — Image Replacement Mode Only
+### Explanation Placeholder (Empty)
 
 ```html
 <details open>
@@ -183,38 +273,50 @@ For Multiple Drop-Down questions with additional screenshots, include all images
 </details>
 ```
 
-Leave completely empty — no content inside.
+Must remain completely empty.
 
-### Related Lab Line — Image Replacement Mode Only
+---
+
+### Related Lab Line
 
 ```markdown
 ▶ Related Lab: []()
 ```
 
-Always include in Image Replacement mode. Leave link empty for manual completion.
+Always included in Image Replacement mode.
+
+---
 
 ## Rules
 
 ### Both Modes
 
-- Extract content **ONLY** from the pasted screenshot image(s)
-- Use ☐ (unchecked boxes) for Yes/No tables
-- Use ○ (open circles) for Multiple Drop-Down option lists
-- Do **NOT** infer, solve, or explain answers
-- Preserve exact wording from image
-- Do not separate sections with horizontal lines or any formatting beyond what is specified above
-- For Multiple Drop-Down questions, number the `[Select ▼]` placeholders sequentially to match them with their option lists
+* Extract content **ONLY from images attached in chat**.
+* Preserve exact wording.
+* Do not infer answers.
+* Use:
+  * ☐ for Yes/No tables
+  * ○ for dropdown options
+* Do not add formatting beyond defined templates.
+* Number dropdown placeholders sequentially.
+
+---
 
 ### Image Replacement Mode Only
 
-- Only replace the selected `<img>` line — do **NOT** modify any other content in the file
-- Include Screenshot Block, Explanation Placeholder, and Related Lab Line after the Answer section
+* Replace **only** the selected `<img>` line(s).
+* Preserve indentation of the selection.
+* `oldString` must exactly match selected text (including whitespace).
 
-### Extract Only Mode (Direct Chat or Lab Orchestrator)
+---
 
-- Return the formatted markdown (Title + Prompt + Answer) directly — do **not** write to any file
-- Do **not** include the Screenshot Block, Explanation Placeholder, or Related Lab Line
-- ⛔ Before finalizing output, verify it contains **none** of the following — if any are present, remove them before responding:
-  - Any `<details>` or `<summary>` tag
-  - The Explanation Placeholder block
-  - The `▶ Related Lab:` line
+### Extract Only Mode
+
+Before responding, verify output contains NONE of:
+
+* `<details>`
+* `<summary>`
+* Explanation Placeholder
+* `▶ Related Lab:` line
+
+If any appear, remove them before sending output.
