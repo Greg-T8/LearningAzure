@@ -147,7 +147,7 @@ $vms = Get-AzVM -ResourceGroupName 'az104-monitoring-metrics-batch-api-tf'
 $vms | Select-Object Name, Location | Format-Table -AutoSize  # Expected: 2 VMs in centralus
 ```
 <!-- Screenshot -->
-<img src='.img/01_verify_vms.png' width=700>
+<img src='.img/2026-02-21-04-41-59.png' width=600>
 
 ```powershell
 # 2. Retrieve metric definitions for a VM (shows available multi-dimensional metrics)
@@ -158,7 +158,7 @@ Get-AzMetricDefinition -ResourceId $vmId |
     Format-Table -AutoSize
 ```
 <!-- Screenshot -->
-<img src='.img/02_metric_definitions.png' width=700>
+<img src='.img/2026-02-21-04-44-11.png' width=700>
 
 ```powershell
 # 3. Query individual VM CPU metrics (standard approach)
@@ -168,16 +168,29 @@ Get-AzMetric -ResourceId $vmId -MetricName 'Percentage CPU' -TimeGrain 00:05:00 
     Select-Object -Last 3 TimeStamp, Average
 ```
 <!-- Screenshot -->
-<img src='.img/03_individual_metrics.png' width=700>
+<img src='.img/2026-02-21-04-47-09.png' width=700>
 
 ```powershell
 # 4. Call the metrics:getBatch API for both VMs in a single request
-$context = Get-AzContext
+$context        = Get-AzContext
 $subscriptionId = $context.Subscription.Id
-$location = $vms[0].Location
-$token = (Get-AzAccessToken -ResourceUrl 'https://metrics.monitor.azure.com').Token
+$location       = $vms[0].Location
+$tokenResponse  = Get-AzAccessToken -ResourceUrl 'https://metrics.monitor.azure.com'
+$token          = $tokenResponse.Token | ConvertFrom-SecureString -AsPlainText
 
-$batchUri = "https://${location}.metrics.monitor.azure.com/subscriptions/${subscriptionId}/metrics:getBatch?api-version=2024-02-01&metricnames=Percentage CPU&metricNamespace=Microsoft.Compute/virtualMachines&timespan=PT1H&interval=PT5M&aggregation=Average"
+$endTime       = (Get-Date).ToUniversalTime()
+$startTime     = $endTime.AddHours(-1)
+$startTimeText = $startTime.ToString('o')
+$endTimeText   = $endTime.ToString('o')
+
+$batchUri = "https://${location}.metrics.monitor.azure.com/subscriptions/${subscriptionId}/metrics:getBatch" +
+  "?api-version=2024-02-01" +
+  "&metricnames=Percentage CPU" +
+  "&metricNamespace=Microsoft.Compute/virtualMachines" +
+  "&starttime=${startTimeText}" +
+  "&endtime=${endTimeText}" +
+  "&interval=PT5M" +
+  "&aggregation=Average"
 
 $body = @{ resourceids = @($vms[0].Id, $vms[1].Id) } | ConvertTo-Json
 
@@ -193,14 +206,14 @@ $response.values | ForEach-Object {
 }
 ```
 <!-- Screenshot -->
-<img src='.img/04_batch_api_response.png' width=700>
+<img src='.img/2026-02-21-05-01-14.png' width=700>
 
 ```powershell
 # 5. Run the full validation script
 .\validation\Confirm-MetricsBatchApi.ps1
 ```
 <!-- Screenshot -->
-<img src='.img/05_validation_complete.png' width=700>
+<img src='.img/2026-02-21-05-02-10.png' width=700> 
 
 ---
 

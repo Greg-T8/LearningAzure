@@ -132,9 +132,9 @@ $Helpers = {
         Write-Host "`n=== metrics:getBatch API Test ===" -ForegroundColor Cyan
 
         $vms = Get-AzVM -ResourceGroupName $ResourceGroupName
-        $context = Get-AzContext
+        $context        = Get-AzContext
         $subscriptionId = $context.Subscription.Id
-        $location = $vms[0].Location
+        $location       = $vms[0].Location
 
         # Build list of VM resource IDs
         $resourceIds = $vms | Select-Object -ExpandProperty Id
@@ -143,11 +143,25 @@ $Helpers = {
             Write-Host "  $id" -ForegroundColor Yellow
         }
 
-        # Get access token for Azure Monitor
-        $token = (Get-AzAccessToken -ResourceUrl "https://metrics.monitor.azure.com").Token
+        # Get access token for Azure Monitor and convert SecureString to plain text
+        $tokenResponse  = Get-AzAccessToken -ResourceUrl "https://metrics.monitor.azure.com"
+        $token          = $tokenResponse.Token | ConvertFrom-SecureString -AsPlainText
+
+        # Build a 1-hour UTC window required by metrics:getBatch
+        $endTime       = (Get-Date).ToUniversalTime()
+        $startTime     = $endTime.AddHours(-1)
+        $startTimeText = $startTime.ToString('o')
+        $endTimeText   = $endTime.ToString('o')
 
         # Build batch API request
-        $batchUri = "https://${location}.metrics.monitor.azure.com/subscriptions/${subscriptionId}/metrics:getBatch?api-version=2024-02-01&metricnames=Percentage CPU&metricNamespace=Microsoft.Compute/virtualMachines&timespan=PT1H&interval=PT5M&aggregation=Average"
+        $batchUri = "https://${location}.metrics.monitor.azure.com/subscriptions/${subscriptionId}/metrics:getBatch" +
+            "?api-version=2024-02-01" +
+            "&metricnames=Percentage CPU" +
+            "&metricNamespace=Microsoft.Compute/virtualMachines" +
+            "&starttime=${startTimeText}" +
+            "&endtime=${endTimeText}" +
+            "&interval=PT5M" +
+            "&aggregation=Average"
 
         $body = @{
             resourceids = $resourceIds
