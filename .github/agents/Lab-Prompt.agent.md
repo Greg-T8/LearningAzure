@@ -1,5 +1,5 @@
 ---
-name: LabPrompt
+name: Lab-Prompt
 description: Generates a governance-compliant hands-on lab from an exam scenario using Terraform, Bicep, Scripted, or Manual methods
 model: 'Claude Opus 4.6'
 tools: [vscode/getProjectSetupInfo, vscode/installExtension, vscode/memory, vscode/newWorkspace, vscode/openIntegratedBrowser, vscode/runCommand, vscode/vscodeAPI, vscode/extensions, vscode/askQuestions, execute/runNotebookCell, execute/testFailure, execute/getTerminalOutput, execute/awaitTerminal, execute/killTerminal, execute/runTask, execute/createAndRunTask, execute/runInTerminal, execute/runTests, read/getNotebookSummary, read/problems, read/readFile, read/terminalSelection, read/terminalLastCommand, read/getTaskOutput, agent/askQuestions, agent/runSubagent, edit/createDirectory, edit/createFile, edit/createJupyterNotebook, edit/editFiles, edit/editNotebook, edit/rename, search/changes, search/codebase, search/fileSearch, search/listDirectory, search/searchResults, search/textSearch, search/usages, web/fetch, web/githubRepo, bicep/decompile_arm_parameters_file, bicep/decompile_arm_template_file, bicep/format_bicep_file, bicep/get_az_resource_type_schema, bicep/get_bicep_best_practices, bicep/get_bicep_file_diagnostics, bicep/get_deployment_snapshot, bicep/get_file_references, bicep/list_avm_metadata, bicep/list_az_resource_types_for_provider, microsoftdocs/mcp/microsoft_code_sample_search, microsoftdocs/mcp/microsoft_docs_fetch, microsoftdocs/mcp/microsoft_docs_search, vscode.mermaid-chat-features/renderMermaidDiagram, todo]
@@ -16,7 +16,20 @@ Do not invoke any custom subagents defined in the '.github/agents/' directory.
 
 ---
 
-## 1. Deployment Method Selection
+## 1. Image Input Handling
+
+When the user attaches a screenshot or pasted image containing an exam question:
+
+* **Use built-in vision directly** — Do NOT express uncertainty or look for an OCR tool. Read the image and extract the question text immediately.
+* Follow the `exam-question-extractor` skill (`.github/skills/exam-question-extractor/SKILL.md`) for the extraction methodology: identify question type (Multiple Choice, Yes/No, Multiple Drop-Down), transcribe the full prompt verbatim, and capture all answer options exactly as shown.
+* Do **NOT** reveal the correct answer during extraction.
+* Proceed to Section 2 with the extracted question as the exam scenario.
+
+If the image is unreadable (corrupt, too small, or obscured), ask the user to paste the question as text before continuing.
+
+---
+
+## 2. Deployment Method Selection
 
 Evaluate the scenario and choose the best-fit method.
 
@@ -68,7 +81,7 @@ Use when:
 
 ---
 
-## 2. Mandatory Standards
+## 3. Mandatory Standards
 
 ### Governance
 
@@ -111,7 +124,7 @@ function Confirm-LabSubscription {
 
 ---
 
-## 3. README Requirements (Exact Order)
+## 4. README Requirements (Exact Order)
 
 README must contain:
 
@@ -149,7 +162,7 @@ $config = Get-Az...
 
 ---
 
-## 4. Mermaid Diagram Styling
+## 5. Mermaid Diagram Styling
 
 Use this base theme for all diagrams (light gray background + neutral cards):
 
@@ -217,7 +230,7 @@ openai["Azure OpenAI"]:::aiOpenAI
 
 ---
 
-## 5. Folder Structure
+## 6. Folder Structure
 
 Create under:
 
@@ -268,7 +281,7 @@ lab-<topic>/
 
 ---
 
-## 6. Code Header Block (Code Files Only)
+## 7. Code Header Block (Code Files Only)
 
 Include in `.tf`, `.bicep`, `.ps1`:
 
@@ -286,7 +299,7 @@ Do not include in README.
 
 ---
 
-## 7. Cost Guardrails
+## 8. Cost Guardrails
 
 Default to lowest viable SKU:
 
@@ -301,7 +314,7 @@ If higher tier required, explain in README analysis (not deployment steps).
 
 ---
 
-## 8. Deployment Platform Rules
+## 9. Deployment Platform Rules
 
 Rules specific to IaaC and scripted deployment platforms.
 
@@ -314,14 +327,14 @@ All Infrastructure as Code labs must follow this sequence:
 1. **Design** — Complete architecture design and identify all Azure services
 2. **Code** — Implement Terraform/Bicep configuration with modules
 3. **Validate Syntax** — Run `terraform validate` or `bicep build` to verify syntax
-4. **Regional Capacity Test** — Perform capacity validation for services listed in Section 11
+4. **Regional Capacity Test** — Perform capacity validation for services listed in Section 12
 5. **Final Validation** — Run `terraform plan` or deployment preview to verify end-to-end configuration
 
-**Do not skip Step 4** for labs deploying capacity-constrained services (see Section 11 for the authoritative list). Discovering regional capacity issues after completing code wastes time and may require region changes or SKU adjustments.
+**Do not skip Step 4** for labs deploying capacity-constrained services (see Section 12 for the authoritative list). Discovering regional capacity issues after completing code wastes time and may require region changes or SKU adjustments.
 
 ---
 
-### 8.1 Terraform
+### 9.1 Terraform
 
 * `terraform.tfvars` must include lab subscription ID
 * Provider must set `prevent_deletion_if_contains_resources = false` for lab cleanup
@@ -337,13 +350,13 @@ Test-Path terraform.tfvars
 terraform init
 terraform validate
 terraform fmt
-# Perform regional capacity tests here (Section 11) before final plan
+# Perform regional capacity tests here (Section 12) before final plan
 terraform plan
 ```
 
 **Note:** Regional capacity testing must occur after `terraform validate` and before `terraform plan` for labs with capacity-constrained services (see Section 11 for the list).
 
-### 8.2 Bicep
+### 9.2 Bicep
 
 * Use `main.bicep` + `main.bicepparam`
 * Use modules when deploying multiple resource types
@@ -362,7 +375,7 @@ terraform plan
 ```
 Use-AzProfile Lab
 .\bicep.ps1 validate
-# Perform regional capacity tests here (Section 11) before plan
+# Perform regional capacity tests here (Section 12) before plan
 .\bicep.ps1 plan
 ```
 
@@ -370,7 +383,7 @@ Use-AzProfile Lab
 
 ---
 
-## 9. Scripted Validation
+## 10. Scripted Validation
 
 Must include and capture:
 
@@ -384,7 +397,7 @@ Get-Command -Syntax
 
 ---
 
-## 10. Common Azure Pitfalls
+## 11. Common Azure Pitfalls
 
 Follow `Governance-Lab.md` for:
 
@@ -398,7 +411,7 @@ All governance standards are mandatory.
 
 ---
 
-## 11. Regional Validation
+## 12. Regional Validation
 
 For labs deploying regionally constrained services, verify provider availability in target region before deployment.
 
@@ -424,7 +437,7 @@ Update `terraform.tfvars` or `main.bicepparam` with chosen region and document i
 
 ---
 
-## 12. Final Response Format
+## 13. Final Response Format
 
 Respond with:
 
@@ -437,7 +450,7 @@ Respond with:
 
 ---
 
-## 13. Invocation Examples
+## 14. Invocation Examples
 
 * Create a hands-on lab for this `<EXAM>` question: …
 * Create a Terraform hands-on lab for this `<EXAM>` question: …
