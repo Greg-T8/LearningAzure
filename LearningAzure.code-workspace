@@ -132,7 +132,8 @@
       "which": true,
       "Write-Host": true,
       "Write-Output": true,
-      "Rename-Item": true
+      "Rename-Item": true,
+      "Get-AzAccessToken": true
     },
     "terminal.integrated.profiles.windows": {
       "PowerShell Lab": {
