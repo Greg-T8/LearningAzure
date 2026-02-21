@@ -31,6 +31,9 @@
 * [MeasureUp Practice Exam - Hard Difficulty - Exam AZ-104: Microsoft Azure Administrator](#measureup-practice-exam---hard-difficulty---exam-az-104-microsoft-azure-administrator)
   * [Load Balancer Metrics Batch API](#load-balancer-metrics-batch-api)
   * [VM Resize Failure Cause](#vm-resize-failure-cause)
+  * [Encrypt VM Disk With Key Vault](#encrypt-vm-disk-with-key-vault)
+  * [Prompt Section](#prompt-section)
+  * [Answer Section](#answer-section)
 
 ---
 
@@ -1842,3 +1845,60 @@ When resizing a VM, Azure validates that all currently attached resources (data 
 </details>
 
 ---
+
+### Encrypt VM Disk With Key Vault
+
+### Prompt Section
+
+You have a subscription named SubscriptionA that hosts the following resources:
+
+- A key vault named mySecureVault in a resource group named myKeyVaultResourceGroup.
+- A virtual machine (VM) named mySecureVM in a resource group named myVirtualMachineResourceGroup.
+
+You need to write a PowerShell script that will encrypt the disk for mySecureVM using the keys stored in the mySecureVault.
+
+How should you complete the script? To answer, select the appropriate options from the drop-down menus.
+
+$keyVaultRG = 'myKeyVaultResourceGroup';
+$vmRG = 'myVirtualMachineResourceGroup';
+$vmName = 'mySecureVM';
+$keyVaultName = 'mySecureVault';
+
+$keyVault = Get-AzKeyVault [Select 1 ▼] $keyVaultName -ResourceGroupName $keyVaultRG;
+$diskEncryptionKeyVaultUrl = [Select 2 ▼];
+$keyVaultId = [Select 3 ▼];
+
+Set-AzVMDiskEncryptionExtension -ResourceGroupName [Select 4 ▼] -DiskEncryptionKeyVaultUrl $diskEncryptionKeyVaultUrl -DiskEncryptionKeyVaultId $keyVaultId -VMName $vmName;
+
+### Answer Section
+
+**Select 1 options:**  
+○ Name  
+○ VaultName  
+
+**Select 2 options:**  
+○ keyVault.Path  
+○ keyVault.Url  
+○ keyVault.VaultUri  
+
+**Select 3 options:**  
+○ keyVault.Id  
+○ keyVault.ResourceId  
+
+**Select 4 options:**  
+○ keyVaultRG  
+○ vmRG  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-02-21-06-00-46.png' width=700>
+
+</details>
+
+<details open>
+<summary>💡 Click to expand explanation</summary>
+
+</details>
+
+▶ Related Lab: []()
