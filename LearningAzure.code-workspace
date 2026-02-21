@@ -8,6 +8,15 @@
     }
   ],
   "settings": {
+    "chat.agentSkillsLocations": {
+      ".agents/skills": true,
+      ".claude/skills": true,
+      ".github/skills": true,
+      "~/.agents/skills": true,
+      "~/.claude/skills": true,
+      "~/.copilot/skills": true,
+      "~/LocalCode/Agent-Toolkit/skills": true
+    },
     "chat.instructionsFilesLocations": {
       ".claude/rules": true,
       ".github/instructions": true,
