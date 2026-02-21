@@ -32,8 +32,6 @@
   * [Load Balancer Metrics Batch API](#load-balancer-metrics-batch-api)
   * [VM Resize Failure Cause](#vm-resize-failure-cause)
   * [Encrypt VM Disk With Key Vault](#encrypt-vm-disk-with-key-vault)
-  * [Prompt Section](#prompt-section)
-  * [Answer Section](#answer-section)
 
 ---
 
@@ -1848,8 +1846,6 @@ When resizing a VM, Azure validates that all currently attached resources (data 
 
 ### Encrypt VM Disk With Key Vault
 
-### Prompt Section
-
 You have a subscription named SubscriptionA that hosts the following resources:
 
 - A key vault named mySecureVault in a resource group named myKeyVaultResourceGroup.
@@ -1859,6 +1855,7 @@ You need to write a PowerShell script that will encrypt the disk for mySecureVM 
 
 How should you complete the script? To answer, select the appropriate options from the drop-down menus.
 
+```powershell
 $keyVaultRG = 'myKeyVaultResourceGroup';
 $vmRG = 'myVirtualMachineResourceGroup';
 $vmName = 'mySecureVM';
@@ -1869,8 +1866,7 @@ $diskEncryptionKeyVaultUrl = [Select 2 ▼];
 $keyVaultId = [Select 3 ▼];
 
 Set-AzVMDiskEncryptionExtension -ResourceGroupName [Select 4 ▼] -DiskEncryptionKeyVaultUrl $diskEncryptionKeyVaultUrl -DiskEncryptionKeyVaultId $keyVaultId -VMName $vmName;
-
-### Answer Section
+```
 
 **Select 1 options:**  
 ○ Name  
@@ -1892,7 +1888,7 @@ Set-AzVMDiskEncryptionExtension -ResourceGroupName [Select 4 ▼] -DiskEncryptio
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-02-21-06-00-46.png' width=700>
+<img src='.img/2026-02-21-15-24-34.png' width=700>
 
 </details>
 
@@ -1902,5 +1898,3 @@ Set-AzVMDiskEncryptionExtension -ResourceGroupName [Select 4 ▼] -DiskEncryptio
 </details>
 
 ▶ Related Lab: []()
-
----

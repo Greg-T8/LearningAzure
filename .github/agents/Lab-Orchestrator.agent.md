@@ -73,7 +73,7 @@ When entering the response, the user typically provides a screenshot/attachment 
 
 When the user attaches a screenshot or pasted image containing an exam question:
 
-1. **Read the exam-question-extractor skill** — Load `.github/skills/exam-question-extractor/SKILL.md` to understand the formatting rules.
+1. **Read the lab-question-extractor skill** — Load `.github/skills/lab-question-extractor/SKILL.md` to understand the formatting rules.
 2. **Extract question text directly** — Use your native vision capability to read the attached image. You have vision; subagents launched via `runSubagent` or handoff buttons do **not** receive image attachments and cannot read image files. Do **not** pass the image path to any subagent.
 3. **Format the extracted content** — Apply the formatting rules from the skill (title, prompt, answer section by question type). Do **NOT** reveal the correct answer.
 4. **Proceed to R-038** — Use the formatted content to generate the pre-handoff summary.
@@ -84,7 +84,7 @@ If the image is unreadable (corrupt, too small, or obscured), ask the user to pa
 
 ## R-038: Pre-Handoff Summary Output
 
-Before presenting the G0 decision gate and the Lab-Intake handoff button, output the **exact exam question** as extracted and formatted by the `exam-question-extractor` skill (`.github/skills/exam-question-extractor/SKILL.md`).
+Before presenting the G0 decision gate and the Lab-Intake handoff button, output the **exact exam question** as extracted and formatted by the `lab-question-extractor` skill (`.github/skills/lab-question-extractor/SKILL.md`).
 
 Introduce the question with this exact phrase:
 
@@ -103,9 +103,6 @@ Follow all output structure rules from that skill:
 - Generate the `### <Title>` heading
 - Transcribe the full question prompt verbatim
 - Format the answer section using the correct type (Yes/No, Multiple Choice, or Multiple Drop-Down)
-- Include the `📸 Click to expand screenshot` collapsed block (if an image was attached)
-- Include the empty `💡 Click to expand explanation` block
-- Include the `▶ Related Lab: []()` line
 
 After the formatted question, append a single line indicating the deployment method:
 

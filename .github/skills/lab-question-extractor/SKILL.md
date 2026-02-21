@@ -1,13 +1,12 @@
 ---
-name: exam-question-extractor
-description: "Extract exam questions from pasted screenshot images and format them as structured markdown. Replaces selected img tag(s) in a markdown file with the fully formatted question."
-user-invokable: true
-argument-hint: "[image attachment and/or selection]"
+name: lab-question-extractor
+description: "Extract exam questions from screenshot images or text and return structured title/prompt/answer markdown. Used by Lab Orchestrator workflows."
+user-invokable: false
 ---
 
-# Question Formatter
+# Lab Question Extractor
 
-Extracts exam question content from screenshot images and formats it as structured markdown for practice exam files.
+Extracts exam question content from screenshot images or text and returns structured markdown (title, prompt, answer only). Used by the Lab Orchestrator and Lab-Intake agent for lab creation workflows.
 
 ---
 
@@ -15,49 +14,31 @@ Extracts exam question content from screenshot images and formats it as structur
 
 Text extraction **must always come from screenshot image(s) attached or pasted into the current chat**.
 
-If an image is not attached in the active chat context, image extraction cannot occur.
+If an image is not attached in the active chat context, image extraction cannot occur. If the question is provided as text, parse it directly.
 
 ---
 
 ## Output
 
-Include:
+Return **only**:
 
-- Title  
-- Prompt  
-- Answer  
-- Screenshot Block  
-- Explanation Placeholder  
-- Related Lab Line
+- Title
+- Prompt
+- Answer
 
-## Action
-
-Call:
-
-```
-replace_string_in_file
-
-```
-
-- `oldString` = exact selected `<img>` line(s)
-- `newString` = fully formatted output
-
-Only replace the selected content.
+Do **not** include screenshot blocks, explanation placeholders, or related lab lines.
 
 ---
 
 ## Process
 
-1. Extract all visible text from attached screenshot image(s).
+1. Extract all visible text from attached screenshot image(s) or parse provided text.
 2. Identify question type:
    - Yes / No
    - Multiple Choice
    - Multiple Drop-Down
 3. Format Title, Prompt, and Answer.
-4. Append Screenshot Block.
-5. Append Explanation Placeholder.
-6. Append Related Lab Line.
-7. Call `replace_string_in_file`.
+4. Return markdown output directly.
 
 ---
 
@@ -81,14 +62,6 @@ Rules:
 
 * Preserve wording and paragraph breaks.
 * Maintain layout fidelity.
-* If the prompt contains a PowerShell script or command block, enclose it in a fenced code block with `powershell` syntax:
-
-````markdown
-```powershell
-Get-AzSomething -Parameter value
-```
-````
-
 * Long PowerShell commands over 80 characters may wrap using backticks:
 
 ```
@@ -173,52 +146,16 @@ If option screenshots are missing:
 <!-- Dropdown options not yet provided. Paste screenshots of each expanded drop-down to populate. -->
 ```
 
-Reference example:
-
-```
-Example - Multiple-Drop-Down.md
-```
-
 ---
 
-## Appendices
+## Metadata Extraction
 
-### Screenshot Block (Collapsed)
+After formatting the question, also extract and return these fields:
 
-Include **all selected `<img>` lines** inside one block.
-
-```html
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src="<path>" width=700>
-
-</details>
-```
-
-Rules:
-
-* Preserve original `src`.
-* Keep existing width if present; otherwise normalize to `width=700`.
-* Maintain original image order.
-
----
-
-### Explanation Placeholder (Empty)
-
-```html
-<details open>
-<summary>💡 Click to expand explanation</summary>
-
-</details>
-```
-
-Must remain completely empty.
-
----
-
-### Related Lab Line
-
-```markdown
-▶ Related Lab: []()
-```
+| Field          | How to Determine                                                                          |
+| -------------- | ----------------------------------------------------------------------------------------- |
+| exam           | From surrounding context, or infer: Azure admin topics → AZ-104, AI/ML topics → AI-102   |
+| domain         | Map primary topic to Azure domain: Networking, Storage, Compute, Identity & Governance, Monitoring, Generative AI, Computer Vision, NLP, Knowledge Mining, Agentic |
+| topic          | Create a hyphenated lowercase slug from the specific skill tested (e.g., `vnet-peering`, `blob-versioning`, `dalle-image-gen`) |
+| correct_answer | Identify the correct option using Azure technical knowledge                               |
+| key_services   | List all Azure services that must be deployed to demonstrate the concept                  |
