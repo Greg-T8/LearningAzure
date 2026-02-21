@@ -1,9 +1,9 @@
 ---
 name: Lab-Orchestrator
 description: Coordinating agent for lab creation. Sequences phases, delegates to phase agents, tracks state, manages handoffs. Contains no domain logic.
-model: 'Claude Opus 4.6 (copilot)'
+model: 'Claude Sonnet 4.6 (copilot)'
 user-invokable: true
-tools: [read/readFile, agent/runSubagent]
+tools: [read/readFile, agent/runSubagent, edit/createDirectory, edit/createFile]
 handoffs:
   - label: Lab-Intake
     agent: Lab-Intake
@@ -72,10 +72,18 @@ When entering the response, the user typically provides a screenshot/attachment 
 
 When the user attaches a screenshot or pasted image containing an exam question:
 
-* **Use built-in vision directly** — Do NOT express uncertainty or look for an OCR tool. Read the image and extract the question text immediately.
-* Follow the `exam-question-extractor` skill (`.github/skills/exam-question-extractor/SKILL.md`) for the extraction methodology: identify question type (Multiple Choice, Yes/No, Multiple Drop-Down), transcribe the full prompt verbatim, and capture all answer options exactly as shown.
-* Do **NOT** reveal the correct answer during extraction.
-* Proceed to Section 2 with the extracted question as the exam scenario.
+1. **Save the image** — Write the attached image to `.assets/temp/<descriptive-filename>.png` in the workspace root. Use a short, descriptive filename based on the apparent topic (e.g., `az104-nsg-question.png`).
+2. **Construct an `<img>` tag** — Build an image reference using the saved path:
+
+   ```html
+   <img src=".assets/temp/<descriptive-filename>.png">
+   ```
+
+3. **Invoke the `exam-question-extractor` skill** — Read `.github/skills/exam-question-extractor/SKILL.md` and process the `<img>` tag as the selected input. The skill extracts question text and returns the fully formatted markdown output.
+4. **Use the skill output** — Treat the formatted markdown as the extracted exam question. Do **NOT** reveal the correct answer.
+5. **Proceed to R-038** — Use the extracted content to generate the pre-handoff summary.
+
+**CRITICAL:** Sub-agents launched via `runSubagent` or handoff buttons do not receive image attachments. The image must be saved and the skill must be invoked **before any handoff**.
 
 If the image is unreadable (corrupt, too small, or obscured), ask the user to paste the question as text before continuing.
 
