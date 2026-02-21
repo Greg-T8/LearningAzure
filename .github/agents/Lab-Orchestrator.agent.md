@@ -1,7 +1,7 @@
 ---
 name: Lab-Orchestrator
 description: Coordinating agent for lab creation. Sequences phases, delegates to phase agents, tracks state, manages handoffs. Contains no domain logic.
-model: 'Claude Haiku 4.5'
+model: 'Claude Opus 4.6 (copilot)'
 user-invokable: true
 tools: [read/readFile, agent/runSubagent]
 handoffs:
@@ -68,22 +68,39 @@ If user enters one word in chat, such as "Terraform", "Bicep", or "PowerShell", 
 
 When entering the response, the user typically provides a screenshot/attachment of the exam question. Consider this attachment to be the exam question you should work with.
 
+## Image Input Handling
+
+When the user attaches a screenshot or pasted image containing an exam question:
+
+* **Use built-in vision directly** — Do NOT express uncertainty or look for an OCR tool. Read the image and extract the question text immediately.
+* Follow the `exam-question-extractor` skill (`.github/skills/exam-question-extractor/SKILL.md`) for the extraction methodology: identify question type (Multiple Choice, Yes/No, Multiple Drop-Down), transcribe the full prompt verbatim, and capture all answer options exactly as shown.
+* Do **NOT** reveal the correct answer during extraction.
+* Proceed to Section 2 with the extracted question as the exam scenario.
+
+If the image is unreadable (corrupt, too small, or obscured), ask the user to paste the question as text before continuing.
+
 ---
 
 ## R-038: Pre-Handoff Summary Output
 
-Before presenting the G0 decision gate and the Lab-Intake handoff button, produce a brief **Exam Question Summary** for the user using the following format:
+Before presenting the G0 decision gate and the Lab-Intake handoff button, output the **exact exam question** as extracted and formatted by the `exam-question-extractor` skill (`.github/skills/exam-question-extractor/SKILL.md`).
+
+Follow all output structure rules from that skill:
+
+- Generate the `### <Title>` heading
+- Transcribe the full question prompt verbatim
+- Format the answer section using the correct type (Yes/No, Multiple Choice, or Multiple Drop-Down)
+- Include the `📸 Click to expand screenshot` collapsed block (if an image was attached)
+- Include the empty `💡 Click to expand explanation` block
+- Include the `▶ Related Lab: []()` line
+
+After the formatted question, append a single line indicating the deployment method:
 
 ```
-**Exam Question Summary:**
-
-- **Topic:** <one-line description of the subject being tested>
-- **Context:** <one-line description of the scenario or situation in the question>
-- **Task:** <one-line description of what the question asks the user to do>
-- **Deployment Method:** <Terraform | Bicep | Scripted | Manual>
+**Deployment Method:** <Terraform | Bicep | Scripted | Manual>
 ```
 
-Derive all four fields from the attached exam question and the deployment method supplied by the user. Do not ask clarifying questions — infer from available context.
+Do not ask clarifying questions — infer all fields from the attached exam question and the deployment method supplied by the user.
 
 ---
 
