@@ -1725,6 +1725,7 @@ You want to proactively monitor the data path availability and perform health pr
 
 You create the following metrics:getBatch API request shown below:
 
+```
 POST /subscriptions/87654765-4321-9999-1251-4532243211xfe/metrics:getBatch?metricNamespace=microsoft.compute/virtualMachines&api-version=2023-03-01-preview
 Host: eastus.metrics.monitor.azure.com
 Content-Type: application/json
@@ -1733,6 +1734,7 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJh...XaTddvfcFlgsas
    "resourceids":[".../virtualMachines/vmss-002_1sdf4cc9",
    ".../virtualMachines/vmss-003_s1187c3h"]
 }
+```
 
 You need to retrieve multi-dimensional definitions and metrics programmatically via APIs.
 
