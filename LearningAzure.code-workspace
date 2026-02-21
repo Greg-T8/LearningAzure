@@ -164,6 +164,7 @@
     "workbench.colorCustomizations": {
       "titleBar.activeBackground": "#4683ca",
       "titleBar.inactiveBackground": "#3668a3"
-    }
+    },
+    "powershell.cwd": "LearningAzure"
   }
 }
