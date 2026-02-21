@@ -1,6 +1,6 @@
 ---
 name: exam-question-extractor
-description: 'Extract exam questions from pasted screenshot images and format them as structured markdown. Use when asked to extract a question from an image, format an exam question, or replace an image tag with formatted question content.'
+description: 'Extract exam questions from pasted screenshot images and format them as structured markdown. Operates in two modes: Image Replacement mode (inline chat, replaces selected img tag) and Lab Orchestrator mode (subagent, returns prompt and answer only).'
 user-invokable: true
 argument-hint: '[image or selection]'
 ---
@@ -9,17 +9,31 @@ argument-hint: '[image or selection]'
 
 Extracts exam question content from pasted screenshot images and formats it as structured markdown for practice exam files.
 
-## When to Use
+## Modes of Operation
 
-- Extracting text from a pasted exam question screenshot
-- Formatting an exam question into the standard markdown structure
+This skill operates in one of two modes depending on how it is invoked.
+
+### Mode 1: Image Replacement
+
+- **Invocation:** User highlights an `<img>` line in a markdown file and invokes this skill from inline chat.
+- **Output:** Title + Prompt + Answer + Screenshot Block + Explanation Placeholder + Related Lab Line.
+- **Action:** Call `replace_string_in_file` with the selected `<img>` line as `oldString` and the formatted output as `newString`.
+
+### Mode 2: Lab Orchestrator
+
+- **Invocation:** Called as a subagent from the Lab Orchestrator agent. The image is pasted in the Copilot Chat pane.
+- **Output:** Title + Prompt + Answer sections only. Do **not** include the Screenshot Block, Explanation Placeholder, or Related Lab Line.
+- **Action:** Return the formatted markdown text directly. Do **not** call `replace_string_in_file`.
 
 ## Process
 
-1. Extract all text and content from the pasted screenshot image
-2. Identify the question type (Yes/No, Multiple Choice, or Multiple Drop-Down)
-3. Format using the output structure below, applying the correct answer section for the type
-4. Call `replace_string_in_file` with the selected `<img>` line as `oldString` and the formatted output as `newString`
+1. Determine the active mode (Image Replacement or Lab Orchestrator) based on invocation context
+2. Extract all text and content from the pasted screenshot image
+3. Identify the question type (Yes/No, Multiple Choice, or Multiple Drop-Down)
+4. Format using the output structure below, applying the correct answer section for the type
+5. **Image Replacement mode only:** Append the Screenshot Block, Explanation Placeholder, and Related Lab Line
+6. **Image Replacement mode:** Call `replace_string_in_file` to replace the selected `<img>` line
+7. **Lab Orchestrator mode:** Return the formatted markdown directly
 
 ## Output Structure
 
@@ -113,17 +127,17 @@ List the options for each drop-down, extracted from the follow-up screenshots. U
 ○ Option C  
 ```
 
+Reference the following example for a complete Multiple Drop-Down question with all screenshots provided:  [Example - Multiple Drop-Down](Example%20-%20Multiple-Drop-Down.md)
+
 If only the main question screenshot is provided (no expanded-dropdown screenshots), output the placeholder markers in the prompt and omit the options list. Add a comment so the user knows to supply them:
 
 ```markdown
 <!-- Dropdown options not yet provided. Paste screenshots of each expanded drop-down to populate. -->
 ```
 
-Reference the following example for a complete Multiple Drop-Down question with all screenshots provided:  [Example - Multiple Drop-Down](Example%20-%20Multiple-Drop-Down.md)
-
 ---
 
-### Screenshot Block (collapsed)
+### Screenshot Block (collapsed) — Image Replacement Mode Only
 
 ```html
 <details>
@@ -147,7 +161,7 @@ For Multiple Drop-Down questions with additional screenshots, include all images
 </details>
 ```
 
-### Explanation Placeholder (open, empty)
+### Explanation Placeholder (open, empty) — Image Replacement Mode Only
 
 ```html
 <details open>
@@ -158,21 +172,32 @@ For Multiple Drop-Down questions with additional screenshots, include all images
 
 Leave completely empty — no content inside.
 
-### Related Lab Line
+### Related Lab Line — Image Replacement Mode Only
 
 ```markdown
 ▶ Related Lab: []()
 ```
 
-Always include. Leave link empty for manual completion.
+Always include in Image Replacement mode. Leave link empty for manual completion.
 
 ## Rules
 
+### Both Modes
+
 - Extract content **ONLY** from the pasted screenshot image(s)
-- Only replace the selected `<img>` line — do **NOT** modify any other content in the file
 - Use ☐ (unchecked boxes) for Yes/No tables
 - Use ○ (open circles) for Multiple Drop-Down option lists
 - Do **NOT** infer, solve, or explain answers
 - Preserve exact wording from image
 - Do not separate sections with horizontal lines or any formatting beyond what is specified above
 - For Multiple Drop-Down questions, number the `[Select ▼]` placeholders sequentially to match them with their option lists
+
+### Image Replacement Mode Only
+
+- Only replace the selected `<img>` line — do **NOT** modify any other content in the file
+- Include Screenshot Block, Explanation Placeholder, and Related Lab Line after the Answer section
+
+### Lab Orchestrator Mode Only
+
+- Return the formatted markdown (Title + Prompt + Answer) directly — do **not** write to any file
+- Do **not** include the Screenshot Block, Explanation Placeholder, or Related Lab Line
