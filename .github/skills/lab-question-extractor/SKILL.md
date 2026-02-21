@@ -62,6 +62,7 @@ Rules:
 
 * Preserve wording and paragraph breaks.
 * Maintain layout fidelity.
+* If the question contains a PowerShell command or script, enclose it in a fenced code block tagged `powershell`.
 * Long PowerShell commands over 80 characters may wrap using backticks:
 
 ```
@@ -70,11 +71,21 @@ Get-AzSomething `
     -Another value
 ```
 
+#### Cohesion — Prevent Visual Segmentation
+
+The title, scenario text, code block (if any), and answer options must render as **one continuous question** — not as separate visual fragments.
+
+* **Do not** wrap the question output in horizontal-rule (`---`) delimiters. Horizontal rules create hard visual breaks that segment the question when rendered.
+* **Do not** insert extra headings, horizontal rules, or blank separator lines between the scenario text, the code block, and the answer options (regardless of question type).
+* The only horizontal rule allowed is a single `---` followed by two blank lines **after** the answer options to separate the question from any metadata that follows.
+
 ---
 
 ### Answer Section
 
 Choose format based on detected question type.
+
+> **Important:** After all answer options, add a single horizontal rule (`---`) followed by two blank lines to segment the answers from any metadata that follows.
 
 ---
 
@@ -105,6 +116,8 @@ D. <Option text>
 #### Type 3 — Multiple Drop-Down (Fill-in-the-Blank)
 
 Used when UI shows **Select** or **Select ▼** controls.
+
+> **Cohesion reminder:** When a code block contains dropdown placeholders, output the scenario text → code block → dropdown options as one continuous flow with no horizontal rules or extra headings between them. The dropdown options list is part of the same question and must directly follow the code block.
 
 * Replace dropdowns with numbered placeholders:
 
@@ -145,17 +158,3 @@ If option screenshots are missing:
 ```markdown
 <!-- Dropdown options not yet provided. Paste screenshots of each expanded drop-down to populate. -->
 ```
-
----
-
-## Metadata Extraction
-
-After formatting the question, also extract and return these fields:
-
-| Field          | How to Determine                                                                          |
-| -------------- | ----------------------------------------------------------------------------------------- |
-| exam           | From surrounding context, or infer: Azure admin topics → AZ-104, AI/ML topics → AI-102   |
-| domain         | Map primary topic to Azure domain: Networking, Storage, Compute, Identity & Governance, Monitoring, Generative AI, Computer Vision, NLP, Knowledge Mining, Agentic |
-| topic          | Create a hyphenated lowercase slug from the specific skill tested (e.g., `vnet-peering`, `blob-versioning`, `dalle-image-gen`) |
-| correct_answer | Identify the correct option using Azure technical knowledge                               |
-| key_services   | List all Azure services that must be deployed to demonstrate the concept                  |
