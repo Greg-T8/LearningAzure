@@ -172,7 +172,9 @@ $keyVault = Get-AzKeyVault -VaultName $kvName -ResourceGroupName $rgName
 $keyVault.EnabledForDiskEncryption  # Expected: True
 ```
 <!-- Screenshot -->
-<img src='.img/step1_keyvault_config.png' width=700>
+<img src='.img/2026-02-22-04-51-39.png' width=500>  
+
+<img src='.img/2026-02-22-04-52-16.png' width=500>
 
 ### Step 2: Retrieve Key Vault Properties (Exam Scenario)
 
@@ -182,7 +184,7 @@ $keyVault.VaultUri     # The disk encryption key vault URL
 $keyVault.ResourceId   # The disk encryption key vault ID
 ```
 <!-- Screenshot -->
-<img src='.img/step2_keyvault_properties.png' width=700>
+<img src='.img/2026-02-22-04-54-11.png' width=700>
 
 ### Step 3: Encrypt the VM Disk
 
@@ -198,7 +200,9 @@ Set-AzVMDiskEncryptionExtension -ResourceGroupName $rgName `
     -Force
 ```
 <!-- Screenshot -->
-<img src='.img/step3_encrypt_disk.png' width=700>
+<img src='.img/2026-02-22-04-56-58.png' width=600>
+
+[Set-AzVMDiskEncryptionExtension](https://learn.microsoft.com/en-us/powershell/module/az.compute/set-azvmdiskencryptionextension?view=azps-15.3.0&viewFallbackFrom=azps-14.5.0) - Enables encryption on a running IaaS virtual machine in Azure.
 
 ### Step 4: Verify Encryption Status
 
@@ -209,7 +213,7 @@ $status.OsVolumeEncrypted        # Expected: Encrypted
 $status.DataVolumesEncrypted     # Expected: NoDiskFound (no data disks)
 ```
 <!-- Screenshot -->
-<img src='.img/step4_verify_encryption.png' width=700>
+<img src='.img/2026-02-22-04-57-35.png' width=600>
 
 ---
 
