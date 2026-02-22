@@ -128,85 +128,260 @@ terraform apply -auto-approve
 
 ## Testing the Solution
 
-### 1. Verify RBAC Role Assignment
+Each step below maps to one of the five exam answer options (A–E). You will prove which configurations actually cause file upload failures and which do not.
 
-Check that Storage Blob Data Owner is assigned to the AI Services managed identity:
+### Setup — Collect Resource Identifiers
+
+All subsequent steps reference these variables. Run this block first from the Terraform directory:
 
 ```powershell
-# Get the managed identity principal ID
-$principalId = terraform output -raw ai_services_principal_id
-$storageId = terraform output -raw storage_account_id
+cd AI-102/hands-on-labs/agentic/lab-agent-byo-storage/terraform
 
-# List role assignments on the storage account
+# Retrieve resource identifiers from Terraform outputs
+$rgName      = terraform output -raw resource_group_name
+$storageName = terraform output -raw storage_account_name
+$storageId   = terraform output -raw storage_account_id
+$principalId = terraform output -raw ai_services_principal_id
+
+# Confirm all resources are deployed
+Get-AzResource -ResourceGroupName $rgName |
+    Select-Object ResourceType, Name |
+    Format-Table -AutoSize
+```
+
+<!-- Screenshot -->
+<img src='.img/setup_resources.png' width=700>
+
+---
+
+### 1. Test Answer A (Correct) — Data Plane Access Requires Storage Blob Data Owner
+
+The exam states that file uploads fail when the managed identity lacks `Storage Blob Data Owner`. This step proves that data plane operations — creating containers, uploading blobs, reading them back — require this specific role.
+
+**1a. Confirm the role is assigned:**
+
+```powershell
+# Verify Storage Blob Data Owner on the managed identity
 Get-AzRoleAssignment -Scope $storageId -PrincipalId $principalId |
     Select-Object RoleDefinitionName, Scope |
     Format-Table -AutoSize
 ```
 
 <!-- Screenshot -->
-<img src='.img/rbac_role_assignment.png' width=700>
+<img src='.img/step1a_role_assignment.png' width=700>
 
-### 2. Demonstrate Management Plane vs Data Plane
-
-Show that Storage Account Contributor does NOT grant blob access:
+**1b. Perform a full data plane roundtrip (create → upload → read → list):**
 
 ```powershell
-# Storage Account Contributor = management plane only
-# These management operations WOULD work:
-$storage = Get-AzStorageAccount -ResourceGroupName (terraform output -raw resource_group_name) `
-    -Name (terraform output -raw storage_account_name)
-$storage.Sku  # Can read account properties
-```
+# Create a storage context using Entra ID authentication (data plane)
+$ctx = New-AzStorageContext -StorageAccountName $storageName -UseConnectedAccount
 
-<!-- Screenshot -->
-<img src='.img/management_plane_demo.png' width=700>
-
-```powershell
-# Storage Blob Data Owner = data plane access
-# These data plane operations WILL work because the correct role is assigned:
-$ctx = New-AzStorageContext -StorageAccountName (terraform output -raw storage_account_name) `
-    -UseConnectedAccount
-
-# Create a test container (simulates agent blobstore auto-creation)
+# Create a test container (simulates agent auto-creating <workspaceId>-agents-blobstore)
 New-AzStorageContainer -Name "test-agent-blobstore" -Context $ctx -Permission Off
-Get-AzStorageContainer -Context $ctx | Format-Table Name, LastModified
+
+# Upload a test blob (simulates a user uploading a file to the agent)
+"Agent file upload test — validates data plane access" |
+    Out-File -FilePath "test-upload.txt" -Encoding utf8
+
+Set-AzStorageBlobContent -Container "test-agent-blobstore" `
+    -File "test-upload.txt" -Blob "test-upload.txt" `
+    -Context $ctx -Force
+
+# Read back the blob (simulates the agent retrieving an uploaded file)
+Get-AzStorageBlobContent -Container "test-agent-blobstore" `
+    -Blob "test-upload.txt" -Destination "test-download.txt" `
+    -Context $ctx -Force
+
+Get-Content "test-download.txt"
+
+# List container contents
+Get-AzStorageBlob -Container "test-agent-blobstore" -Context $ctx |
+    Select-Object Name, Length, LastModified |
+    Format-Table -AutoSize
 ```
 
 <!-- Screenshot -->
-<img src='.img/data_plane_demo.png' width=700>
+<img src='.img/step1b_data_plane_roundtrip.png' width=700>
 
-### 3. Verify BYO Resource Connections
+All operations succeed because `Storage Blob Data Owner` grants full data plane access. Without this role, every blob operation fails with `AuthorizationPermissionMismatch`, which is exactly the file upload failure described in the exam scenario.
 
-Confirm all BYO resources are deployed and accessible for capability host connections:
+> **Conclusion:** Answer A is **correct**. The managed identity must have `Storage Blob Data Owner` for file uploads to work.
+
+---
+
+### 2. Test Answer B (Wrong) — Storage Account Contributor Has Zero Data Plane Permissions
+
+The exam suggests `Storage Account Contributor` at the wrong scope is the problem. This step proves that **scope is irrelevant** — the role itself has no data plane permissions at any scope.
+
+**2a. Compare the two roles by inspecting their permission sets:**
 
 ```powershell
-$rgName = terraform output -raw resource_group_name
+# Retrieve both role definitions
+$dataOwner   = Get-AzRoleDefinition "Storage Blob Data Owner"
+$contributor = Get-AzRoleDefinition "Storage Account Contributor"
 
-# Storage endpoint (used in storageConnections)
+# Storage Account Contributor — management plane actions only
+Write-Host "`n--- Storage Account Contributor ---" -ForegroundColor Yellow
+Write-Host "Actions (Management Plane):" -ForegroundColor Cyan
+$contributor.Actions |
+    Where-Object { $_ -like '*storage*' } |
+    ForEach-Object { Write-Host "  $_" }
+
+Write-Host "`nDataActions (Data Plane):" -ForegroundColor Cyan
+if ($contributor.DataActions.Count -eq 0) {
+    Write-Host "  (none — cannot read, write, or delete blobs)" -ForegroundColor Red
+}
+
+# Storage Blob Data Owner — data plane actions
+Write-Host "`n--- Storage Blob Data Owner ---" -ForegroundColor Green
+Write-Host "Actions (Management Plane):" -ForegroundColor Cyan
+$dataOwner.Actions | ForEach-Object { Write-Host "  $_" }
+
+Write-Host "`nDataActions (Data Plane):" -ForegroundColor Cyan
+$dataOwner.DataActions | ForEach-Object { Write-Host "  $_" }
+```
+
+<!-- Screenshot -->
+<img src='.img/step2a_role_comparison.png' width=700>
+
+**2b. Demonstrate that management plane operations work but data plane operations require a different role:**
+
+```powershell
+# Management plane: reading storage account properties works with Contributor
+$storage = Get-AzStorageAccount -ResourceGroupName $rgName -Name $storageName
+Write-Host "Account Kind:  $($storage.Kind)"
+Write-Host "SKU:           $($storage.Sku.Name)"
+Write-Host "Access Tier:   $($storage.AccessTier)"
+Write-Host "Blob Endpoint: $($storage.PrimaryEndpoints.Blob)"
+
+# These are management plane reads — they work because we have subscription-level access.
+# But blob operations (create/upload/read/delete) require DataActions, which
+# Storage Account Contributor does not have.
+```
+
+<!-- Screenshot -->
+<img src='.img/step2b_management_plane.png' width=700>
+
+The `DataActions` list for `Storage Account Contributor` is empty. It cannot perform any blob operations — no reads, no writes, no deletes — regardless of whether it is scoped to the subscription or the storage account.
+
+> **Conclusion:** Answer B is **wrong**. The issue is not scope (subscription vs. storage account). The issue is that `Storage Account Contributor` is a management plane role with zero data plane permissions.
+
+---
+
+### 3. Test Answer C (Wrong) — AI Search Connection Is Independent of File Uploads
+
+The exam suggests an incorrect AI Search connection string causes file uploads to fail. This step proves that the AI Search connection (`vectorStoreConnections`) is independent of the storage connection (`storageConnections`).
+
+```powershell
+# Show each BYO resource and its role in the capability host
 $storageEndpoint = terraform output -raw storage_primary_blob_endpoint
-Write-Host "Storage Blob Endpoint: $storageEndpoint"
+$cosmosEndpoint  = terraform output -raw cosmosdb_endpoint
+$searchName      = terraform output -raw search_service_name
 
-# Cosmos DB endpoint (used in threadStorageConnections)
-$cosmosEndpoint = terraform output -raw cosmosdb_endpoint
-Write-Host "Cosmos DB Endpoint: $cosmosEndpoint"
+Write-Host "`n--- Capability Host Connection Mapping ---" -ForegroundColor Cyan
 
-# AI Search name (used in vectorStoreConnections)
-$searchName = terraform output -raw search_service_name
-Write-Host "AI Search Service: $searchName"
+Write-Host "`n  storageConnections → BYO Storage (file uploads)" -ForegroundColor Green
+Write-Host "    Endpoint: $storageEndpoint"
+Write-Host "    Failure:  Wrong value breaks file uploads (Answer E)"
+
+Write-Host "`n  threadStorageConnections → Cosmos DB (conversations)" -ForegroundColor Green
+Write-Host "    Endpoint: $cosmosEndpoint"
+Write-Host "    Failure:  Wrong value breaks thread storage (not in question)"
+
+Write-Host "`n  vectorStoreConnections → AI Search (knowledge retrieval)" -ForegroundColor Green
+Write-Host "    Endpoint: https://$searchName.search.windows.net"
+Write-Host "    Failure:  Wrong value breaks vector search, NOT file uploads"
 ```
 
 <!-- Screenshot -->
-<img src='.img/byo_connections.png' width=700>
+<img src='.img/step3_connection_mapping.png' width=700>
 
-### 4. Clean Up Test Container
+Each BYO resource connects to the capability host through a separate property. The storage connection handles file uploads; the AI Search connection handles vector store operations. A misconfigured AI Search connection would cause vector search failures, not file upload failures.
+
+> **Conclusion:** Answer C is **wrong**. AI Search misconfigurations affect vector operations, not file uploads. These are independent failure domains.
+
+---
+
+### 4. Test Answer D (Wrong) — Agent Service Auto-Creates Containers
+
+The exam suggests that a missing manually created `uploaded-files` container causes failures. This step proves that the agent service creates its own containers automatically — no manual creation is required.
 
 ```powershell
-$ctx = New-AzStorageContext -StorageAccountName (terraform output -raw storage_account_name) `
-    -UseConnectedAccount
-Remove-AzStorageContainer -Name "test-agent-blobstore" -Context $ctx -Force
+# List all containers in the BYO storage account
+$ctx = New-AzStorageContext -StorageAccountName $storageName -UseConnectedAccount
+$containers = Get-AzStorageContainer -Context $ctx
+
+if ($containers.Count -eq 0) {
+    Write-Host "No pre-created containers exist — this is expected." -ForegroundColor Gray
+    Write-Host "The agent service was never told to create 'uploaded-files'."
+}
+else {
+    Write-Host "Existing containers:" -ForegroundColor Cyan
+    $containers | Select-Object Name, LastModified | Format-Table -AutoSize
+}
+
+# The only container is "test-agent-blobstore" from our Step 1 test.
+# The agent service auto-creates a container named <workspaceId>-agents-blobstore.
+# No manual container creation is needed — the service manages this internally
+# as long as the managed identity has Storage Blob Data Owner (data plane access).
 ```
 
-### 5. Run Validation Script
+<!-- Screenshot -->
+<img src='.img/step4_auto_containers.png' width=700>
+
+> **Conclusion:** Answer D is **wrong**. The agent service automatically provisions containers following the pattern `<workspaceId>-agents-blobstore`. There is no requirement to manually create an `uploaded-files` container.
+
+---
+
+### 5. Test Answer E (Correct) — Wrong Storage Connection String Prevents All File Operations
+
+The exam states that an incorrect connection string to the storage resource in the capability host causes failures. This step shows why the storage endpoint must be exact.
+
+```powershell
+# The capability host's storageConnections property must point to the correct endpoint.
+$correctEndpoint = terraform output -raw storage_primary_blob_endpoint
+Write-Host "Correct storage blob endpoint:" -ForegroundColor Green
+Write-Host "  $correctEndpoint"
+
+# Demonstrate what happens with a wrong endpoint — the context cannot connect.
+# This simulates what the agent service experiences with a misconfigured connection.
+try {
+    $badCtx = New-AzStorageContext -StorageAccountName "nonexiststorage99999" -UseConnectedAccount
+    New-AzStorageContainer -Name "will-fail" -Context $badCtx -Permission Off -ErrorAction Stop
+    Write-Host "[UNEXPECTED] Operation succeeded — check your test" -ForegroundColor Red
+}
+catch {
+    Write-Host "`nExpected failure with wrong storage endpoint:" -ForegroundColor Yellow
+    Write-Host "  $($_.Exception.Message)" -ForegroundColor Red
+}
+
+# With the correct connection, operations work
+Write-Host "`nCorrect connection — operations succeed:" -ForegroundColor Green
+$goodCtx = New-AzStorageContext -StorageAccountName $storageName -UseConnectedAccount
+Get-AzStorageContainer -Context $goodCtx |
+    Select-Object Name, LastModified |
+    Format-Table -AutoSize
+```
+
+<!-- Screenshot -->
+<img src='.img/step5_connection_string.png' width=700>
+
+When the capability host references the wrong storage account (or a malformed connection), the agent service cannot resolve the endpoint. All file operations — uploads, reads, container creation — fail immediately.
+
+> **Conclusion:** Answer E is **correct**. The capability host's `storageConnections` must point to the correct BYO storage account. A wrong connection string prevents all file operations.
+
+---
+
+### 6. Clean Up Test Resources
+
+```powershell
+# Remove the test container and downloaded files from the earlier steps
+$ctx = New-AzStorageContext -StorageAccountName $storageName -UseConnectedAccount
+Remove-AzStorageContainer -Name "test-agent-blobstore" -Context $ctx -Force
+Remove-Item "test-upload.txt", "test-download.txt" -ErrorAction SilentlyContinue
+```
+
+### 7. Run Validation Script
 
 ```powershell
 cd ../validation

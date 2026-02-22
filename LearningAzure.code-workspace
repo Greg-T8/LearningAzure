@@ -148,7 +148,15 @@
       "which": true,
       "Write-Host": true,
       "Write-Output": true,
-      "xargs": false
+      "xargs": false,
+      "/^cd \"c:/Users/gregt/LocalCode/LearningAzure/AI-102/hands-on-labs/agentic/lab-agent-byo-storage/terraform\"; tf state list$/": {
+        "approve": true,
+        "matchCommandLine": true
+      },
+      "/^cd \"c:/Users/gregt/LocalCode/LearningAzure/AI-102/hands-on-labs/agentic/lab-agent-byo-storage/terraform\"; tf plan$/": {
+        "approve": true,
+        "matchCommandLine": true
+      }
     },
     "terminal.integrated.defaultProfile.windows": "PowerShell Lab",
     "terminal.integrated.profiles.windows": {
