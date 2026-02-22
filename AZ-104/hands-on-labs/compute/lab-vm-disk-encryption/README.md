@@ -215,6 +215,12 @@ $status.DataVolumesEncrypted     # Expected: NoDiskFound (no data disks)
 <!-- Screenshot -->
 <img src='.img/2026-02-22-04-57-35.png' width=600>
 
+<img src='.img/2026-02-22-04-59-07.png' width=600>
+
+> BEK stands for BitLocker Encryption Key.
+
+<img src='.img/2026-02-22-05-00-22.png' width=700>  
+
 ---
 
 ## Cleanup
