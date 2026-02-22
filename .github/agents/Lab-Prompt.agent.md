@@ -1,8 +1,9 @@
 ---
 name: Lab-Prompt
 description: Generates a governance-compliant hands-on lab from an exam scenario using Terraform, Bicep, Scripted, or Manual methods
-model: 'Claude Sonnet 4.6 (copilot)'
-user-invokable: false
+model: 'Claude Opus 4.6 (copilot)'
+agents: []
+user-invokable: true
 tools: [vscode/getProjectSetupInfo, vscode/installExtension, vscode/memory, vscode/newWorkspace, vscode/openIntegratedBrowser, vscode/runCommand, vscode/vscodeAPI, vscode/extensions, vscode/askQuestions, execute/runNotebookCell, execute/testFailure, execute/getTerminalOutput, execute/awaitTerminal, execute/killTerminal, execute/runTask, execute/createAndRunTask, execute/runInTerminal, execute/runTests, read/getNotebookSummary, read/problems, read/readFile, read/terminalSelection, read/terminalLastCommand, read/getTaskOutput, agent/askQuestions, agent/runSubagent, edit/createDirectory, edit/createFile, edit/createJupyterNotebook, edit/editFiles, edit/editNotebook, edit/rename, search/changes, search/codebase, search/fileSearch, search/listDirectory, search/searchResults, search/textSearch, search/usages, web/fetch, web/githubRepo, bicep/decompile_arm_parameters_file, bicep/decompile_arm_template_file, bicep/format_bicep_file, bicep/get_az_resource_type_schema, bicep/get_bicep_best_practices, bicep/get_bicep_file_diagnostics, bicep/get_deployment_snapshot, bicep/get_file_references, bicep/list_avm_metadata, bicep/list_az_resource_types_for_provider, microsoftdocs/mcp/microsoft_code_sample_search, microsoftdocs/mcp/microsoft_docs_fetch, microsoftdocs/mcp/microsoft_docs_search, vscode.mermaid-chat-features/renderMermaidDiagram, todo]
 ---
 
@@ -22,7 +23,7 @@ Do not invoke any custom subagents defined in the '.github/agents/' directory.
 When the user attaches a screenshot or pasted image containing an exam question:
 
 * **Use built-in vision directly** — Do NOT express uncertainty or look for an OCR tool. Read the image and extract the question text immediately.
-* Follow the `exam-question-extractor` skill (`.github/skills/exam-question-extractor/SKILL.md`) for the extraction methodology: identify question type (Multiple Choice, Yes/No, Multiple Drop-Down), transcribe the full prompt verbatim, and capture all answer options exactly as shown.
+* Follow the `lab-question-extractor` skill (`.github/skills/lab-question-extractor/SKILL.md`) for the extraction methodology: identify question type (Multiple Choice, Yes/No, Multiple Drop-Down), transcribe the full prompt verbatim, and capture all answer options exactly as shown.
 * Do **NOT** reveal the correct answer during extraction.
 * Proceed to Section 2 with the extracted question as the exam scenario.
 

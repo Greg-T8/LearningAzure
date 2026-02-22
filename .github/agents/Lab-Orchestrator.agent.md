@@ -3,8 +3,7 @@ name: Lab-Orchestrator
 description: Coordinating agent for lab creation. Sequences phases, delegates to phase agents, tracks state, manages handoffs. Contains no domain logic.
 model: 'GPT-5 mini'
 user-invokable: true
-# tools: [read/readFile, agent/runSubagent, edit/createDirectory, edit/createFile]
-tools: [read/readFile, agent/runSubagent]
+tools: [read/readFile, agent/runSubagent, edit/createDirectory, edit/createFile]
 handoffs:
   - label: Lab-Intake
     agent: Lab-Intake
@@ -86,6 +85,8 @@ If the image is unreadable (corrupt, too small, or obscured), ask the user to pa
 
 Before presenting the G0 decision gate and the Lab-Intake handoff button, output the **exact exam question** as extracted and formatted by the `lab-question-extractor` skill (`.github/skills/lab-question-extractor/SKILL.md`).
 
+**The formatted question MUST be rendered directly in the chat response** — not summarized, not paraphrased, not omitted. This is the primary visual output for the user.
+
 Introduce the question with this exact phrase:
 
 > Here is the transcribed exam question:
@@ -111,6 +112,27 @@ After the formatted question, append a single line indicating the deployment met
 ```
 
 Do not ask clarifying questions — infer all fields from the attached exam question and the deployment method supplied by the user.
+
+---
+
+## R-039: Save Exam Question to File
+
+After completing R-038, persist the formatted exam question so downstream agents can read it from disk rather than receiving it inline:
+
+1. **Create the temp directory** — Ensure `.assets/temp/` exists (use `createDirectory` if needed).
+2. **Derive a descriptive filename** — Convert the `### <Title>` generated in R-038 to a lowercase-kebab-case filename. Remove filler words (a, an, the, using, for) and special characters; keep meaningful nouns and verbs. Examples:
+   - "Encrypt a VM Disk Using Key Vault Keys" → `vm-disk-encryption-keyvault.md`
+   - "Configure VNet Peering Between Two Virtual Networks" → `vnet-peering-two-networks.md`
+   - "Assign an Azure Role to a User" → `role-assignment-user.md`
+3. **Write the file** — Save the full R-038 output (title heading, question prompt, answer section, and deployment method line) to:
+
+   ```
+   .assets/temp/<derived-filename>.md
+   ```
+
+4. **Pass the file path** — When handing off to Lab-Intake (and all subsequent phase agents), include the derived file path in the handoff context. Subagents will read the exam question from this file instead of receiving inline text.
+
+This file is the **single source of truth** for the exam question throughout the pipeline. Do not pass the exam question as inline text to any subagent.
 
 ---
 
@@ -157,7 +179,7 @@ Phase 5 is skipped when Phase 4 returns PASS.
 ### Phase 1 → Phase 2
 
 ```
-exam_question:      string      # verbatim question text
+exam_question_file: string      # path to .assets/temp/<derived-filename>.md (set during R-039)
 metadata:
   exam:             string      # AI-102 | AZ-104
   domain:           string      # e.g., Networking
@@ -217,7 +239,7 @@ Pause for user confirmation at each stage:
 
 | Gate | Stage | Prompt                                                     |
 | ---- | ----- | ---------------------------------------------------------- |
-| G0   | Before Lab-Intake | "Ready to proceed with lab creation from exam question?"  |
+| G0   | Before Lab-Intake | "Ready to proceed with metadata processing?"  |
 | G1   | After 1 (Lab-Intake) | "Does this metadata and deployment method look correct?"   |
 | G2   | After 2 (Lab-Designer) | "Does this architecture and module plan look correct?"   |
 | G3   | After 3 (Lab-Builder) | "Does the generated code structure look correct?"         |

@@ -1897,4 +1897,4 @@ Set-AzVMDiskEncryptionExtension -ResourceGroupName [Select 4 ▼] -DiskEncryptio
 
 </details>
 
-▶ Related Lab: []()
+▶ Related Lab: [lab-vm-disk-encryption](../hands-on-labs/compute/lab-vm-disk-encryption/README.md)

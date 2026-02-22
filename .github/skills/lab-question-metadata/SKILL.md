@@ -40,9 +40,9 @@ If the user explicitly states the exam, use their value.
 
 ### domain
 
-Map the question's subject to one of these domains:
+Map the question's subject to one of the **exact** domain names listed below. These are closed sets — do **not** invent, abbreviate, or substitute domain names. Values like `Security`, `Encryption`, `Access Control`, or any name not in the tables below are **invalid**.
 
-**AZ-104 domains:**
+**AZ-104 domains (closed set — use these exact strings):**
 
 | Domain                                | Example Topics                                       |
 | ------------------------------------- | ---------------------------------------------------- |
@@ -53,7 +53,14 @@ Map the question's subject to one of these domains:
 | Networking                            | VNets, peering, NSGs, load balancers, DNS, VPN, ExpressRoute |
 | Monitoring                            | Monitor, alerts, Log Analytics, diagnostics           |
 
-**AI-102 domains:**
+> **Cross-cutting topics:** When a question spans multiple domains, choose the domain of the **primary resource being acted on**, not a supporting service. Examples:
+>
+> - VM disk encryption using Key Vault → **Compute** (the VM is the primary target)
+> - Key Vault access policies for a storage account → **Storage**
+> - NSG rules protecting a VM → **Networking** (the NSG is the primary resource)
+> - RBAC role assignment on a resource group → **Identity**
+
+**AI-102 domains (closed set — use these exact strings):**
 
 | Domain                                | Example Topics                                       |
 | ------------------------------------- | ---------------------------------------------------- |
@@ -64,7 +71,7 @@ Map the question's subject to one of these domains:
 | Knowledge Mining                      | AI Search, indexers, skillsets, knowledge stores      |
 | Agentic                               | AI agents, orchestration, Semantic Kernel            |
 
-**AI-900 domains:**
+**AI-900 domains (closed set — use these exact strings):**
 
 | Domain                                | Example Topics                                       |
 | ------------------------------------- | ---------------------------------------------------- |
@@ -104,11 +111,11 @@ List the Azure services that the question and correct answer require:
 
 ## R-102: Validation Checklist
 
-Before returning metadata, verify:
+Before returning metadata, verify **every** item:
 
 - [ ] All five fields are populated
 - [ ] `exam` matches one of: `AI-102`, `AZ-104`, `AI-900`
-- [ ] `domain` matches a domain from R-101 tables
+- [ ] `domain` is an **exact string** from the R-101 closed-set tables for the matched exam — reject any value not in the table
 - [ ] `topic` is kebab-case, 2–4 words, no special characters
 - [ ] `correct_answer` is defensible against official Azure documentation
 - [ ] `key_services` contains at least one service
@@ -116,17 +123,31 @@ Before returning metadata, verify:
 
 If any field cannot be confidently determined, flag it and ask the user for clarification.
 
+> **Common mistake:** Agents sometimes produce domain names like "Security", "Encryption", or "Key Management" — these are **not** valid domains for any exam. Re-read the R-101 tables and choose the correct domain based on the primary resource.
+
+---
+
+## R-103: Output Formatting Rules
+
+All output **must** follow these formatting rules:
+
+1. **Field order** — Always emit fields in this exact sequence: Exam, Domain, Topic, Correct Answer, Key Services. Never reorder.
+2. **Capitalization** — Field labels and values use Title Case (e.g., `Compute`, not `compute`; `Azure Key Vault`, not `azure key vault`). The only exception is `topic`, which is always kebab-case lowercase.
+3. **No extra fields** — Do not add fields beyond the five defined in R-100.
+
 ---
 
 ## Output Format
 
-Return metadata as a structured block:
+Return metadata as a structured block with fields in this **exact order**:
 
 ```
 ### Metadata
 - Exam: [AI-102 | AZ-104 | AI-900]
-- Domain: [domain name]
-- Topic: [topic-slug]
+- Domain: [exact domain from R-101 tables]
+- Topic: [kebab-case-slug]
 - Correct Answer: [answer]
-- Key Services: [comma-separated list]
+- Key Services: [comma-separated list using official Azure names]
 ```
+
+> **Output contract:** Any consumer of this output (e.g., Lab-Intake agent) relies on this exact field order and capitalization. Do not deviate.
