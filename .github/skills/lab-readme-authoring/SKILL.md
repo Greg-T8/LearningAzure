@@ -33,11 +33,17 @@ Section order: see `shared-contract` R-011.
 
 > **Exam**: [EXAM] — [Domain]
 
-[Verbatim exam question with all answer options]
+### <Title from intake>
+
+*<Question Type>*
+
+<Scenario text, options, and answer table — copied verbatim from intake file>
 ```
 
-- Include complete question text exactly as provided.
-- List all answer options.
+- The `## Exam Question` heading and `> **Exam**` context line are the only new content.
+- Everything below them **must be copied verbatim** from the intake file (everything before `## Phase 1 — Metadata Output`).
+- Preserve the Lab-Intake format exactly: H3 title, italic question type, paragraph breaks, lettered options with trailing spaces, answer tables, code blocks, and blank-token syntax.
+- Do **not** restructure, re-wrap, renumber, or paraphrase any part of the question.
 - **Do NOT reveal the correct answer in this section.**
 
 ### Section 2: Solution Architecture

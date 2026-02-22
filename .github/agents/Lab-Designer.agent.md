@@ -78,7 +78,7 @@ Procedure defined in `architecture-design` skill R-113.
 Generate README using `lab-readme-authoring` skill procedures:
 
 - Follow `shared-contract` R-011 section order
-- Section 1: verbatim exam question (correct answer NOT revealed)
+- **Section 1**: Copy the exam question **verbatim** from the intake file (everything before `## Phase 1 — Metadata Output`). Preserve the Lab-Intake format exactly — H3 title, italic question type, scenario text, lettered options, answer tables/blanks. The only additions are the `## Exam Question` heading and `> **Exam**: [EXAM] — [Domain]` context line above the copied block. Do **not** restructure or paraphrase.
 - Section 10: reveal and explain correct + incorrect answers
 - All 14 sections present
 
