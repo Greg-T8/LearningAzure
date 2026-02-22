@@ -209,8 +209,6 @@ Azure AI Content Safety Studio is designed specifically for **text and image mod
 
 ---
 
-<img src='.img/2026-02-13-06-02-43.png' width=700>
-
 ### Azure AI Agent Service File Upload Configuration Issues
 
 You are investigating an issue where user file uploads to an Azure AI Agent Service are failing after implementing a standard agent setup that uses your own storage account resource. You have confirmed that the Azure Storage account exists and has sufficient capacity.
