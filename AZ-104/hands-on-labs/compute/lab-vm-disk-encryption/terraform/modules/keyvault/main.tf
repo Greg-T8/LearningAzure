@@ -25,7 +25,7 @@ resource "azurerm_key_vault" "lab" {
   sku_name                    = "standard"
   soft_delete_retention_days  = 7
   purge_protection_enabled    = false
-  enable_rbac_authorization   = false
+  rbac_authorization_enabled  = false
   enabled_for_disk_encryption = true
 
   # Access policy for the deploying user

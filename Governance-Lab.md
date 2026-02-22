@@ -330,6 +330,16 @@ provider "azurerm" {
 
 This ensures `terraform destroy` can complete even if orphaned resources exist.
 
+#### Provider Deprecation Guidance
+
+When using `azurerm_key_vault`, use:
+
+```hcl
+rbac_authorization_enabled = true|false
+```
+
+Do not use the deprecated `enable_rbac_authorization` argument.
+
 ---
 
 ### 7.2 State
