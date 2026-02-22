@@ -189,10 +189,10 @@ Start free when available.
 
 | Service        | Default              |
 | -------------- | -------------------- |
-| Bastion        | Developer / Basic    |
+| Bastion        | Developer (Required) |
 | Public IP      | Only when required   |
 
-**Prefer bastion service over public IPs** for VM access to reduce costs and improve security.
+**Deploy Azure Bastion for all VM labs and use Bastion Developer SKU for each VM.**
 
 ---
 
@@ -568,9 +568,14 @@ runcmd:
 
 ### 9.8 Remote Access Strategy
 
-**Prefer bastion service over public IPs** for VM remote access:
+**Bastion is required for VM remote access in all labs:**
 
-* Use **Developer SKU** (lowest cost) or Basic for lab environments
+* Deploy Azure Bastion whenever a VM is deployed
+* Use **Developer SKU** for each VM access scenario
+* Do not use Basic SKU for standard lab VM access
+
+**Public IP usage policy:**
+
 * Public IPs only when solution explicitly requires external access
 * Reduces cost (no per-VM public IP charges)
 * Improves security (no direct internet exposure)
@@ -580,7 +585,7 @@ runcmd:
 * Only available in select regions (see §1.1 Location)
 * Default region (Central US) supports Developer SKU
 * If using a different region, verify support: <https://learn.microsoft.com/en-us/azure/bastion/quickstart-host-portal?tabs=developer>
-* Change to a supported region if Developer SKU is required
+* If Developer SKU is unsupported, move the lab to a supported US region
 
 **When public IP is appropriate:**
 
@@ -632,6 +637,7 @@ instantRPDetails: {
 * US region
 * Capacity validated (AI/Search/Cosmos/GPU)
 * Cost-appropriate SKUs
+* Bastion Developer SKU configured for all VM labs
 
 ### Documentation
 
