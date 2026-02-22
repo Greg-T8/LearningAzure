@@ -11,50 +11,27 @@ You need to configure Azure DNS to support the requirements.
 How should you complete the Azure PowerShell script? To answer, select the appropriate options from the drop-down menus.
 
 ```powershell
-[Select 1 ▼] -Name "@" -RecordType A -ZoneName "company1.com"
--ResourceGroupName "MyResourceGroup" -Ttl [Select 2 ▼] -DnsRecords `
-[Select 3 ▼] -Ipv4Address "1.2.3.4"
+___[1]___ -Name "@" -RecordType A -ZoneName "company1.com"
+-ResourceGroupName "MyResourceGroup" -Ttl ___[2]___ -DnsRecords `
+___[3]___ -Ipv4Address "1.2.3.4"
 $aRecords = @()
-$aRecords += [Select 4 ▼] -Ipv4Address "2.3.4.5"
-$aRecords += [Select 5 ▼] -Ipv4Address "3.4.5.6"
-[Select 6 ▼] -Name "www" -ZoneName "company1.com"
--ResourceGroupName MyResourceGroup -Ttl [Select 7 ▼] -RecordType A -DnsRecords $aRecords
+$aRecords += ___[4]___ -Ipv4Address "2.3.4.5"
+$aRecords += ___[5]___ -Ipv4Address "3.4.5.6"
+___[6]___ -Name "www" -ZoneName "company1.com"
+-ResourceGroupName MyResourceGroup -Ttl ___[7]___ -RecordType A -DnsRecords $aRecords
 ```
 
-**Select 1 options:**  
-○ New-AzDnsRecordConfig  
-○ New-AzDnsRecordSet  
-○ New-AzDnsZone  
+Drop-Down Options:
 
-**Select 2 options:**  
-○ 1  
-○ 60  
-○ 3600  
-
-**Select 3 options:**  
-○ New-AzDnsRecordConfig  
-○ New-AzDnsRecordSet  
-○ Set-AzDnsRecordConfig  
-
-**Select 4 options:**  
-○ New-AzDnsRecordConfig  
-○ New-AzDnsRecordSet  
-○ Set-AzDnsRecordConfig  
-
-**Select 5 options:**  
-○ New-AzDnsRecordConfig  
-○ New-AzDnsRecordSet  
-○ Set-AzDnsRecordConfig  
-
-**Select 6 options:**  
-○ New-AzDnsRecordConfig  
-○ New-AzDnsRecordSet  
-○ Set-AzDnsRecordConfig  
-
-**Select 7 options:**  
-○ 1  
-○ 60  
-○ 3600  
+| Blank | Options |
+|-------|---------|
+| [1] | New-AzDnsRecordConfig / New-AzDnsRecordSet / New-AzDnsZone |
+| [2] | 1 / 60 / 3600 |
+| [3] | New-AzDnsRecordConfig / New-AzDnsRecordSet / Set-AzDnsRecordConfig |
+| [4] | New-AzDnsRecordConfig / New-AzDnsRecordSet / Set-AzDnsRecordConfig |
+| [5] | New-AzDnsRecordConfig / New-AzDnsRecordSet / Set-AzDnsRecordConfig |
+| [6] | New-AzDnsRecordConfig / New-AzDnsRecordSet / Set-AzDnsRecordConfig |
+| [7] | 1 / 60 / 3600 |
 
 <details>
 <summary>📸 Click to expand screenshot</summary>

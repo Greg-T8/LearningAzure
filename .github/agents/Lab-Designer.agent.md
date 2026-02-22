@@ -19,7 +19,7 @@ You are the **Lab Designer**. You produce the complete lab blueprint: architectu
 
 ## Inputs
 
-Phase 1 output (see `Lab-Orchestrator` R-032: Phase 1 → Phase 2).
+The Orchestrator passes a single file path (the `exam_question_file` from R-032). This file is the cumulative pipeline artifact — it contains the exam question (written by the Orchestrator in R-039) followed by the Phase 1 metadata block (appended by Lab-Metadata in R-043a). Read this file to obtain both the exam question and all metadata fields.
 
 ---
 
