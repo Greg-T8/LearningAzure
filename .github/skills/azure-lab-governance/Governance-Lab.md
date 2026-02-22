@@ -186,9 +186,9 @@ Terraform:
 
 ```
 soft_delete_enabled = false
-purge_soft_delete_on_destroy = true
-purge_protected_items_from_vault_on_destroy = true    # For Recovery Vault
-permanently_delete_on_destroy = true                  # For Log Analytics
+purge_soft_delete_on_destroy = false                   # Unique names eliminate need to purge; false speeds up destroy
+purge_protected_items_from_vault_on_destroy = true     # For Recovery Vault
+permanently_delete_on_destroy = true                   # For Log Analytics
 ```
 
 Bicep:

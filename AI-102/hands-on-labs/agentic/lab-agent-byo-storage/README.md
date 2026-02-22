@@ -7,9 +7,9 @@ You are investigating an issue where user file uploads to an Azure AI Agent Serv
 **Which two configurations should you identify? Each correct answer presents a complete solution.**
 
 - A. The project-managed identity lacks the Storage Blob Data Owner role on the `<workspaceId>-agents-blobstore` container.
-- B. The Azure Storage account connected to the project's capability host is missing a manually created container named `uploaded-files`.
+- B. The project-managed identity is assigned the Storage Account Contributor role at the subscription level instead of the storage account.
 - C. The Azure AI Search resource assigned to the project's capability host has an incorrect connection string to Azure Storage.
-- D. The project-managed identity is assigned the Storage Account Contributor role at the subscription level instead of the storage account.
+- D. The Azure Storage account connected to the project's capability host is missing a manually created container named `uploaded-files`.
 - E. The project's capability host was set with an incorrect connection string to the Azure Storage resource.
 
 ---
@@ -243,9 +243,9 @@ The capability host configuration stores the connection to each BYO resource. Th
 
 | Option | Why It's Wrong |
 |--------|---------------|
-| **B. Missing manually created `uploaded-files` container** | The agent service **automatically provisions** two blob storage containers in the BYO storage account — one for files and one for intermediate system data (chunks, embeddings). There is no requirement to manually create a container named `uploaded-files`. The auto-created container follows the pattern `<workspaceId>-agents-blobstore`. |
+| **B. Storage Account Contributor at subscription level** | Storage Account Contributor is a **management plane** role. It allows managing the storage account resource itself (configuration, keys, policies) but does **not** grant data plane access to read or write blob data. Even at the correct scope (storage account instead of subscription), this role cannot perform blob operations. The correct role is **Storage Blob Data Owner** (data plane). |
 | **C. AI Search has incorrect connection string to Azure Storage** | Azure AI Search handles **vector storage for retrieval and search**, not file uploads. The AI Search `vectorStoreConnections` property in the capability host is independent of the `storageConnections` property. An incorrect AI Search connection would affect vector search operations, not file uploads. |
-| **D. Storage Account Contributor at subscription level** | Storage Account Contributor is a **management plane** role. It allows managing the storage account resource itself (configuration, keys, policies) but does **not** grant data plane access to read or write blob data. Even at the correct scope (storage account instead of subscription), this role cannot perform blob operations. The correct role is **Storage Blob Data Owner** (data plane). |
+| **D. Missing manually created `uploaded-files` container** | The agent service **automatically provisions** two blob storage containers in the BYO storage account — one for files and one for intermediate system data (chunks, embeddings). There is no requirement to manually create a container named `uploaded-files`. The auto-created container follows the pattern `<workspaceId>-agents-blobstore`. |
 
 ---
 

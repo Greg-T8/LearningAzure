@@ -230,7 +230,7 @@ cd terraform
 terraform destroy -auto-approve
 ```
 
-> **Note:** Destroy within 7 days per lab governance policy. Key Vault enters soft-delete state after destruction — the `purge_soft_delete_on_destroy` provider feature purges it automatically.
+> **Note:** Destroy within 7 days per lab governance policy. Key Vault enters soft-delete state after destruction. Because lab Key Vaults use unique names (random suffix), purging is not required — the soft-deleted vault expires automatically without blocking redeployment.
 
 ---
 

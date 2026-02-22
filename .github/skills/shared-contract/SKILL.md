@@ -297,7 +297,7 @@ If not purgeable → use unique naming.
 
 ```hcl
 soft_delete_enabled                          = false
-purge_soft_delete_on_destroy                 = true
+purge_soft_delete_on_destroy                 = false   # Unique names eliminate need to purge; false speeds up destroy
 permanently_delete_on_destroy                = true    # Log Analytics
 purge_protected_items_from_vault_on_destroy  = true    # Recovery Vault
 ```

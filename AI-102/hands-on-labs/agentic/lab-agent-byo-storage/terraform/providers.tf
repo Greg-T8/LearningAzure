@@ -30,11 +30,11 @@ provider "azurerm" {
     }
 
     cognitive_account {
-      purge_soft_delete_on_destroy = true
+      purge_soft_delete_on_destroy = false
     }
 
     key_vault {
-      purge_soft_delete_on_destroy = true
+      purge_soft_delete_on_destroy = false
     }
   }
 
