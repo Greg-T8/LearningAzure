@@ -2,6 +2,7 @@
 name: lab-question-extractor
 description: "Extract exam questions from screenshot images or text and return structured title/prompt/answer markdown. Used by Lab Orchestrator workflows."
 user-invokable: true
+disable-model-invocation: false
 ---
 
 # Lab Question Extractor
