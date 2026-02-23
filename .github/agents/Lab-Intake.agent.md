@@ -373,7 +373,8 @@ After extracting the exam question per R-039, this agent derives a filename, sav
    b. Remove filler words: `a`, `an`, `the`, `using`, `for`, `to`, `with`, `and`, `or`.
    c. Remove all special characters (punctuation, parentheses, etc.).
    d. Keep all meaningful nouns and verbs.
-   e. Result becomes the filename: `.assets/temp/<derived-slug>.md`
+   e. **MANDATORY: 2–4 word range** — The final slug must contain **between 2 and 4 hyphen-separated words** (inclusive). If the result exceeds 4 words after applying steps a–d, condense or drop the least essential words to reach 4 words or fewer. If the result is fewer than 2 words, expand by retaining the next most meaningful word from the title.
+   f. Result becomes the filename: `.assets/temp/<derived-slug>.md`
 2. **Save to file** — Use `createFile` to write the formatted question markdown to `.assets/temp/<derived-slug>.md`.
 3. **Validate** — Use `readFile` to confirm the file was written correctly and the `### <Title>` heading is present.
 
@@ -458,6 +459,7 @@ Derive the kebab-case slug directly from the `### <Title>` heading in the exam q
 3. Remove filler words: `a`, `an`, `the`, `using`, `for`, `to`, `with`, `and`, `or`.
 4. Remove all special characters (punctuation, parentheses, etc.).
 5. Keep all meaningful nouns and verbs.
+6. **MANDATORY: 4-word maximum** — The final slug must contain **no more than 4 hyphen-separated words**. If the result exceeds 4 words after applying steps 1–5, condense or drop the least essential words to reach 4 words or fewer.
 
 Examples (matching the R-039 filename derivation rules):
 

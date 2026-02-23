@@ -1952,4 +1952,4 @@ D. Set-AzVmssVM
 
 </details>
 
-▶ Related Lab: []()
+▶ Related Lab: [lab-vmss-rolling-upgrade](../hands-on-labs/compute/lab-vmss-rolling-upgrade/README.md)
