@@ -21,6 +21,7 @@ Python script that:
 2. Groups commits by certification (AI-102, AZ-104)
 3. Calculates hours of activity (time between first and last commit per day)
   Certification overlaps on the same day are split evenly.
+  Weekend hours after 8:00 AM count only when 2+ commits occur in the same hour.
 
 4. Calculates running totals since each certification's start date:
    - AZ-104: Started 1/14/26
@@ -65,7 +66,7 @@ Python script that:
 
 *Activity Levels: 🟡 Low (< 1hr) | 🟢 Medium (1-2hrs) | 🟣 High (> 2hrs)*
 
-*Hours = time between first and last commit of the day in that certification folder*
+*Hours = time between first and last commit window (up to 8:00 AM) plus weekend post-8:00 AM hours with 2+ commits in the same hour*
 *Last updated: January 27, 2026 at 14:09 CST*
 ```
 
@@ -96,11 +97,11 @@ This will update your local README.md with current commit statistics.
 
 ## 📝 Notes
 
-- Activity is measured in hours (time between first and last commit of the day)
+- Activity is measured in hours from commit patterns
 - Overlapping certification timeframes are split evenly across active certifications
 - **Weekdays (Mon-Fri)**: Last commit time is capped at 8:00 AM Central (work start time)
-- **Weekends**: No time cap applied
-- Single commits count as 0h of activity (no time span)
+- **Weekends (after 8:00 AM)**: Each hour counts only if that hour has more than one commit
+- Single commits still count as 0h unless they are part of a qualifying weekend hour bucket
 - Days with 0h activity show as blank cells in the table
 - Files are categorized by their path prefix (AI-102/, AZ-104/)
 - The workflow uses `[skip ci]` in commit messages to avoid triggering itself

@@ -19,6 +19,8 @@ CERTIFICATIONS = {
     'AZ-104': '2026-01-14'
 }
 
+WORKDAY_START_HOUR = 8
+
 
 def main() -> None:
     """Main function that orchestrates commit statistics update.
@@ -153,8 +155,12 @@ def get_activity_interval(
         earliest = dt_objects[0]
         latest = earliest + timedelta(hours=1)
 
-        # Cap end time at 8:00 AM
-        morning_cap = earliest.replace(hour=8, minute=0, second=0)
+        # Cap end time at configured workday start hour
+        morning_cap = earliest.replace(
+            hour=WORKDAY_START_HOUR,
+            minute=0,
+            second=0
+        )
         if latest > morning_cap:
             latest = morning_cap
 
@@ -167,8 +173,12 @@ def get_activity_interval(
     earliest = min(dt_objects)
     latest = max(dt_objects)
 
-    # Cap end time at 8:00 AM only if commits extend beyond it
-    morning_cap = earliest.replace(hour=8, minute=0, second=0)
+    # Cap end time at configured workday start hour only if needed
+    morning_cap = earliest.replace(
+        hour=WORKDAY_START_HOUR,
+        minute=0,
+        second=0
+    )
     if latest > morning_cap:
         latest = morning_cap
 
@@ -176,6 +186,79 @@ def get_activity_interval(
         return None
 
     return earliest, latest
+
+
+def get_activity_intervals(
+    timestamps: list[str]
+) -> list[tuple[datetime, datetime]]:
+    """Get activity intervals including weekend dense post-8AM blocks.
+
+    Base interval behavior remains first-to-last commit capped at 8:00 AM.
+    On weekends, each hour at or after 8:00 AM counts as +1h only when
+    more than one commit exists in that hour.
+
+    Args:
+        timestamps: List of timestamp strings
+
+    Returns:
+        List of activity intervals
+    """
+    if not timestamps:
+        return []
+
+    # Parse timestamps into datetime objects for weekend-hour grouping
+    dt_objects = [
+        datetime.strptime(ts, '%Y-%m-%d %H:%M:%S')
+        for ts in timestamps
+    ]
+
+    # Add legacy pre-8AM interval behavior
+    intervals = []
+    base_interval = get_activity_interval(timestamps)
+    if base_interval is not None:
+        intervals.append(base_interval)
+
+    # Add weekend post-8AM dense-hour intervals
+    if dt_objects[0].weekday() >= 5:
+        hourly_commit_counts = defaultdict(int)
+
+        # Count commits in each post-8AM hour bucket
+        for commit_time in dt_objects:
+            if commit_time.hour >= WORKDAY_START_HOUR:
+                hour_bucket = commit_time.replace(
+                    minute=0,
+                    second=0,
+                    microsecond=0
+                )
+                hourly_commit_counts[hour_bucket] += 1
+
+        # Only count hour buckets with more than one commit
+        for hour_bucket, commit_count in hourly_commit_counts.items():
+            if commit_count > 1:
+                intervals.append(
+                    (hour_bucket, hour_bucket + timedelta(hours=1))
+                )
+
+    return intervals
+
+
+def get_interval_hours(
+    intervals: list[tuple[datetime, datetime]]
+) -> float:
+    """Calculate total hours from a list of intervals.
+
+    Args:
+        intervals: List of (start_datetime, end_datetime) intervals
+
+    Returns:
+        Total interval hours
+    """
+    # Sum each interval duration in hours
+    return sum(
+        (end - start).total_seconds() / 3600
+        for start, end in intervals
+        if end > start
+    )
 
 
 def calculate_hours(timestamps: list[str]) -> float:
@@ -187,15 +270,11 @@ def calculate_hours(timestamps: list[str]) -> float:
     Returns:
         Hours of activity rounded to 1 decimal place
     """
-    interval = get_activity_interval(timestamps)
-
-    if interval is None:
+    intervals = get_activity_intervals(timestamps)
+    if not intervals:
         return 0.0
 
-    earliest, latest = interval
-    time_diff = latest - earliest
-    hours = time_diff.total_seconds() / 3600
-
+    hours = get_interval_hours(intervals)
     return round(hours, 1)
 
 
@@ -208,15 +287,11 @@ def calculate_hours_raw(timestamps: list[str]) -> float:
     Returns:
         Hours of activity as a float
     """
-    interval = get_activity_interval(timestamps)
-
-    if interval is None:
+    intervals = get_activity_intervals(timestamps)
+    if not intervals:
         return 0.0
 
-    earliest, latest = interval
-    time_diff = latest - earliest
-
-    return time_diff.total_seconds() / 3600
+    return get_interval_hours(intervals)
 
 
 def split_overlapping_hours(
@@ -235,22 +310,23 @@ def split_overlapping_hours(
         Dict mapping certification names to allocated hours
     """
     # Build activity intervals for each certification
-    intervals_by_cert = {}
+    intervals_by_cert = defaultdict(list)
 
     for cert in CERTIFICATIONS:
         timestamps = date_commits.get(cert, [])
-        interval = get_activity_interval(timestamps)
-        if interval is not None:
-            intervals_by_cert[cert] = interval
+        intervals = get_activity_intervals(timestamps)
+        if intervals:
+            intervals_by_cert[cert].extend(intervals)
 
     if not intervals_by_cert:
         return {cert: 0.0 for cert in CERTIFICATIONS}
 
     # Create events for interval start and end points
     events = []
-    for cert, (start, end) in intervals_by_cert.items():
-        events.append((start, 'start', cert))
-        events.append((end, 'end', cert))
+    for cert, cert_intervals in intervals_by_cert.items():
+        for start, end in cert_intervals:
+            events.append((start, 'start', cert))
+            events.append((end, 'end', cert))
 
     # Sort events chronologically
     events.sort(
@@ -472,7 +548,7 @@ def generate_commit_table(
         "🟣 High (> 2hrs)*\n"
     )
     table += (
-        "\n*Total = first to last commit of day (early mornings to 8:00 AM)*  \n"
+        "\n*Total = base window to 8:00 AM plus qualifying weekend post-8:00 AM hourly blocks*  \n"
         "*Other = Lab workflow and automation design, content structure and development*  \n"
     )
 
