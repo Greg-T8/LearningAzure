@@ -72,12 +72,12 @@ graph TB
     PROJ -.->|"Auto-managed"| THREADS
     PROJ -.->|"Auto-managed"| VECTOR
 
-    classDef aiCore    fill:#5C2D91,stroke:#3D1E60,color:#FFFFFF,stroke-width:1.5px;
+    classDef aiCore    fill:#CCADE0,stroke:#4A2275,color:#1A0A2D,stroke-width:1.5px;
     classDef project   fill:#0078D4,stroke:#005A9E,color:#FFFFFF,stroke-width:1.5px;
     classDef model     fill:#107C10,stroke:#0B5E0B,color:#FFFFFF,stroke-width:1.5px;
     classDef script    fill:#FFB900,stroke:#B38200,color:#1A1200,stroke-width:1.5px;
-    classDef storage   fill:#FFA500,stroke:#B36B00,color:#1A1200,stroke-width:1.5px;
-    classDef aiSearch  fill:#00A3A3,stroke:#006A6A,color:#001516,stroke-width:1.5px;
+    classDef storage   fill:#FDE0B8,stroke:#C07A1A,color:#2A1800,stroke-width:1.5px;
+    classDef aiSearch  fill:#ADE0E0,stroke:#1A7A7A,color:#082525,stroke-width:1.5px;
 ```
 
 ---
@@ -133,6 +133,8 @@ terraform plan
 terraform apply -auto-approve
 ```
 
+<img src='.img/2026-02-23-05-05-29.png' width=600>
+
 After deployment, install the Python SDK dependencies:
 
 ```bash
@@ -149,6 +151,8 @@ $env:MODEL_DEPLOYMENT_NAME = terraform output -raw model_deployment_name
 cd ../scripts
 ```
 
+<img src='.img/2026-02-23-05-15-21.png' width=600>
+
 ---
 
 ## Testing the Solution
@@ -162,6 +166,8 @@ This lab is structured as three progressive exercises. Each script builds on con
 ```powershell
 python 01_basic_agent.py
 ```
+
+<img src='.img/2026-02-23-05-24-21.png' width=700>
 
 **What to observe**:
 
