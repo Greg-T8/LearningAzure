@@ -208,6 +208,14 @@ python 02_file_search_agent.py
 - The agent can cite specific numbers, policies, and details from the uploaded document
 - Vector stores can contain multiple files — the search spans all indexed content
 
+**Note**: I initially received an error regarding token rate limits. The default limit for the gpt-4o-mini deployment is 1000 tokens per minute, which is not sufficient for the file processing step. I increased the limit to 145,000, and that resolved the issue.
+
+<img src='.img/2026-02-23-05-57-34.png' width=600>
+
+<img src='.img/2026-02-23-05-58-28.png' width=600>
+
+<img src='.img/2026-02-23-05-59-11.png' width=600>
+
 ---
 
 ### Script 3: Multi-Turn Conversation with Knowledge Retrieval (`03_multi_turn_agent.py`)
