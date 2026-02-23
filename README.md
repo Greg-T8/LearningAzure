@@ -27,22 +27,22 @@ Progress trackers, detailed study notes, practice exams, and hands-on labs:
 
 | Date | AI-102 | AZ-104 | Other | Total |
 |------|--------|--------|-------|-------|
-| Sun, Feb 22 | 🟢 1.4h | 🟢 1.9h |  | **3.3h** |
+| Mon, Feb 23 | 🟡 0.7h | 🟣 2.2h | 🟡 0.1h | **3.0h** |
+| Sun, Feb 22 | 🟢 1.5h | 🟢 1.9h |  | **3.4h** |
 | Sat, Feb 21 |  | 🟣 3.5h |  | **3.5h** |
 | Fri, Feb 20 |  | 🟢 1.9h |  | **1.9h** |
 | Thu, Feb 19 |  |  |  |  |
 | Wed, Feb 18 |  | 🟣 2.1h |  | **2.1h** |
 | Tue, Feb 17 | 🟡 0.6h | 🟣 3.8h |  | **4.3h** |
-| Mon, Feb 16 |  | 🟡 0.7h | 🟣 4.0h | **4.8h** |
-| **Weekly Total** | **2.0h** | **13.9h** | **4.0h** | **19.9h** |
-| ***Running Total*** | ***7.8h*** | ***75.6h*** | ***34.8h*** | ***118.2h*** |
+| **Weekly Total** | **2.8h** | **15.4h** | **0.1h** | **18.2h** |
+| ***Running Total*** | ***8.6h*** | ***77.7h*** | ***34.9h*** | ***121.2h*** |
 
 *Activity Levels: 🟡 Low (< 1hr) | 🟢 Medium (1-2hrs) | 🟣 High (> 2hrs)*
 
 *Total = first to last commit of day (early mornings to 8:00 AM)*  
 *Other = Lab workflow and automation design, content structure and development*  
 
-*Last updated: February 22, 2026 at 08:07 CST*
+*Last updated: February 23, 2026 at 06:29 CST*
 
 <!-- COMMIT_STATS_END -->
 
