@@ -146,6 +146,8 @@ Use-AzProfile Lab
 
 <img src='.img/2026-02-23-04-19-43.png' width=900>
 
+<img src='.img/2026-02-23-04-27-20.png' width=900>
+
 ---
 
 ## Testing the Solution
@@ -186,6 +188,8 @@ $vmss.VirtualMachineProfile.StorageProfile.DataDisks |
 
 <img src='.img/2026-02-23-04-23-32.png' width=600>
 
+<img src='.img/2026-02-23-04-29-54.png' width=900>
+
 ### Step 3: Verify Rolling Upgrade Policy Settings
 
 ```powershell
@@ -194,7 +198,11 @@ $vmss.UpgradePolicy.RollingUpgradePolicy | Format-List
 ```
 
 <!-- Screenshot -->
-<img src='.img/step3_rolling_policy.png' width=700>
+<img src='.img/2026-02-23-04-26-50.png' width=600>
+
+<img src='.img/2026-02-23-04-25-20.png' width=600>
+
+<img src='.img/2026-02-23-04-28-33.png' width=800>
 
 ### Step 4: Apply VMSS Model Change Using Update-AzVmss
 
@@ -210,7 +218,7 @@ Update-AzVmss `
 ```
 
 <!-- Screenshot -->
-<img src='.img/step4_update_vmss.png' width=700>
+<img src='.img/2026-02-23-04-32-53.png' width=600>
 
 ### Step 5: Monitor Rolling Upgrade Progress
 
@@ -224,7 +232,13 @@ Get-AzVmssRollingUpgrade `
 > **Note:** If the rolling upgrade completes quickly, this command may return an error indicating no active rolling upgrade. This is expected for a 2-instance VMSS.
 
 <!-- Screenshot -->
-<img src='.img/step5_rolling_status.png' width=700>
+<img src='.img/2026-02-23-04-31-37.png' width=800>
+
+<img src='.img/2026-02-23-04-32-37.png' width=600>
+
+<img src='.img/2026-02-23-04-33-36.png' width=600>
+
+<img src='.img/2026-02-23-04-34-28.png' width=600>
 
 ### Step 6: Verify Updated Instance Configuration
 
@@ -237,7 +251,9 @@ Get-AzVmssVM `
 ```
 
 <!-- Screenshot -->
-<img src='.img/step6_verify_instances.png' width=700>
+<img src='.img/2026-02-23-04-35-15.png' width=600>
+
+<img src='.img/2026-02-23-04-36-09.png' width=800>
 
 ---
 
