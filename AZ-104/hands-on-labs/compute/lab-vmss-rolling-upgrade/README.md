@@ -172,8 +172,9 @@ $vmss.Sku.Capacity             # Expected: 2
 ### Step 2: Verify OS and Data Disk Profile
 
 ```powershell
-# Check current OS disk configuration
-$vmss.VirtualMachineProfile.StorageProfile.OsDisk | Format-List
+# Check current OS profile configuration
+$vmss.VirtualMachineProfile.OsProfile |
+    Format-List ComputerNamePrefix, AdminUsername
 
 # Check current data disk configuration (32 GB data disk at LUN 0)
 $vmss.VirtualMachineProfile.StorageProfile.DataDisks |
@@ -207,7 +208,10 @@ $vmss.UpgradePolicy.RollingUpgradePolicy | Format-List
 ### Step 4: Apply VMSS Model Change Using Update-AzVmss
 
 ```powershell
-# Update the data disk size from 32 GB to 64 GB (modifies the VMSS model)
+# Update OS profile and data disk profile on the VMSS model
+$vmss.VirtualMachineProfile.OsProfile.ComputerNamePrefix = 'vmssupg'
+
+# Update the data disk size from 32 GB to 64 GB
 $vmss.VirtualMachineProfile.StorageProfile.DataDisks[0].DiskSizeGB = 64
 
 # Apply the change — this triggers an automatic rolling upgrade
@@ -243,6 +247,17 @@ Get-AzVmssRollingUpgrade `
 ### Step 6: Verify Updated Instance Configuration
 
 ```powershell
+# Re-read the VMSS model and verify profile changes
+$updatedVmss = Get-AzVmss `
+    -ResourceGroupName 'az104-compute-vmss-rolling-upgrade-bicep' `
+    -VMScaleSetName 'vmss-rolling-upgrade'
+
+$updatedVmss.VirtualMachineProfile.OsProfile |
+    Format-List ComputerNamePrefix, AdminUsername
+
+$updatedVmss.VirtualMachineProfile.StorageProfile.DataDisks |
+    Format-Table Lun, DiskSizeGB, CreateOption, Caching
+
 # Verify all instances have the latest model applied
 Get-AzVmssVM `
     -ResourceGroupName 'az104-compute-vmss-rolling-upgrade-bicep' `
@@ -276,7 +291,7 @@ cd AZ-104/hands-on-labs/compute/lab-vmss-rolling-upgrade/bicep
 
 The two-step workflow is:
 
-1. **Modify the VMSS object** in memory (e.g., change disk size, image reference)
+1. **Modify the VMSS object** in memory (e.g., change `osProfile.computerNamePrefix` and data disk size)
 2. **Call `Update-AzVmss`** to persist the model change — the Rolling policy then handles propagation
 
 ### Why Other Options Are Incorrect
@@ -291,7 +306,7 @@ The two-step workflow is:
 
 ## Key Learning Points
 
-1. **`Update-AzVmss`** modifies the VMSS model (image reference, disk profile, extensions, etc.) and is the correct cmdlet to apply scale-set-wide changes
+1. **`Update-AzVmss`** modifies the VMSS model (OS profile, disk profile, image reference, extensions, etc.) and is the correct cmdlet to apply scale-set-wide changes
 2. With **Rolling upgrade policy**, model changes trigger automatic batched upgrades to existing instances — no manual per-instance action is needed
 3. Rolling upgrades require **health monitoring** — either a load balancer health probe or the Application Health Extension
 4. **Rolling upgrade policy settings** control batch size (`maxBatchInstancePercent`), unhealthy thresholds, and pause duration between batches
