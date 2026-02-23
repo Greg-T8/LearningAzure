@@ -193,6 +193,8 @@ python 01_basic_agent.py
 python 02_file_search_agent.py
 ```
 
+<img src='.img/2026-02-23-06-01-08.png' width=600>
+
 **What to observe**:
 
 - A synthetic "Contoso Employee Handbook" is created and uploaded to the agent service
@@ -225,6 +227,8 @@ python 02_file_search_agent.py
 ```powershell
 python 03_multi_turn_agent.py
 ```
+
+<img src='.img/2026-02-23-06-08-24.png' width=700>
 
 **What to observe**:
 
@@ -263,6 +267,8 @@ The validation script confirms:
 - gpt-4o-mini model deployment is active
 - RBAC roles are assigned for the deployer
 - Project endpoint is reachable
+
+<img src='.img/2026-02-23-06-20-15.png' width=600>
 
 ---
 
