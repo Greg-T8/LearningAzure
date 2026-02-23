@@ -463,4 +463,4 @@ The capability host configuration stores the connection to each BYO resource. Th
 
 ## Related Labs
 
-- [Azure AI Content Safety](../ai-services/lab-content-safety/) — Deploys a Cognitive Services account with managed identity, similar RBAC patterns
+- **[Azure AI Agent Service - Essentials: Threads, Files, and Vector Stores](../lab-agent-essentials/README.md)** - Learn core agent service concepts with Microsoft-managed infrastructure

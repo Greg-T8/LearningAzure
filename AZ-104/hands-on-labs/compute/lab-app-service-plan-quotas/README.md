@@ -172,4 +172,4 @@ The minimum tier that satisfies the requirement is **Basic B1** because:
 
 ## Related Labs
 
-- ▶ [App Service Plan Tiers](../lab-app-service-plan-tiers/) — explores tier selection based on scaling and compute requirements
+- **[App Service Plan Tiers](../lab-app-service-plan-tiers/README.md)** - Explore App Service pricing tier capabilities, scaling limits, and choose the right tier for specific requirements

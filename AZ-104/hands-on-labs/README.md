@@ -6,12 +6,12 @@ This page catalogs hands-on labs built from practice exam questions. Each lab us
 
 ## 📈 Lab Statistics
 
-- **Total Labs**: 12
+- **Total Labs**: 14
 - **Storage**: 4
-- **Compute**: 3
+- **Compute**: 5
 - **Monitoring**: 2
 - **Identity & Governance**: 0
-- **Networking**: 2
+- **Networking**: 3
 
 ---
 
@@ -29,6 +29,8 @@ This page catalogs hands-on labs built from practice exam questions. Each lab us
 - **[App Service Plan CPU Quotas](compute/lab-app-service-plan-quotas/README.md)** - Understand CPU quota limitations of Free and Shared tiers and learn why Basic B1 is the minimum tier that removes daily CPU quotas
 - **[App Service Plan Tiers](compute/lab-app-service-plan-tiers/README.md)** - Explore App Service pricing tier capabilities, scaling limits, and choose the right tier for specific requirements
 - **[App Service Republication with Deployment Slots](compute/lab-app-service-republication/README.md)** - Use deployment slots to enable test users to review the web app before it reaches production
+- **[Azure VM Disk Encryption with Key Vault](compute/lab-vm-disk-encryption/README.md)** - Encrypt VM disks using Azure Key Vault and PowerShell
+- **[VMSS Rolling Upgrade - Update-AzVmss](compute/lab-vmss-rolling-upgrade/README.md)** - Demonstrate rolling upgrade policies for VM scale sets
 
 ### Monitoring
 
@@ -38,7 +40,8 @@ This page catalogs hands-on labs built from practice exam questions. Each lab us
 ### Networking
 
 - **[Configure Standard Load Balancer Outbound Traffic and IP Allocation](networking/lab-slb-outbound-traffic/README.md)** - Learn how outbound traffic and IP allocation work with Azure Standard Load Balancers including TCP/UDP protocol rules
-- **[Troubleshoot Internal Load Balancer Backend VM Access](networking/lab-ilb-backend-access/README.md)** - Diagnose and resolve hairpin/loopback limitation when backend VMs access their own ILB frontend
+- **[Configure Internal Load Balancer Backend Access](networking/lab-ilb-backend-access/README.md)** - Configure backend access for internal load balancers
+- **[Configure VNet Peering](networking/lab-vnet-peering/README.md)** - Set up VNet peering to enable communication between virtual networks
 
 ---
 

@@ -6,10 +6,10 @@ This page catalogs hands-on labs built from practice exam questions. Each lab us
 
 ## 📈 Lab Statistics
 
-- **Total Labs**: 4
+- **Total Labs**: 6
 - **Generative AI**: 1
-- **Agentic**: 1
-- **AI Services**: 1
+- **Agentic**: 2
+- **AI Services**: 2
 - **Computer Vision**: 0
 - **Natural Language Processing**: 0
 - **Knowledge Mining**: 1
@@ -24,15 +24,17 @@ This page catalogs hands-on labs built from practice exam questions. Each lab us
 
 ### Agentic
 
-- **[Azure AI Agent Service File Upload Configuration](agentic/lab-agent-file-upload-config/README.md)** - Configure standard agent setup with correct RBAC roles for BYO storage, Cosmos DB, and AI Search resources
+- **[Azure AI Agent Service - BYO Storage Configuration and RBAC](agentic/lab-agent-byo-storage/README.md)** - Configure standard agent setup with correct RBAC roles for BYO storage, Cosmos DB, and AI Search resources
+- **[Azure AI Agent Service - Essentials: Threads, Files, and Vector Stores](agentic/lab-agent-essentials/README.md)** - Learn core agent service concepts with Microsoft-managed infrastructure
 
 ### AI Services
 
 - **[Azure AI Content Safety - Text and Image Moderation](ai-services/lab-content-safety/README.md)** - AI-powered text and image content moderation for sexual content, violence, hate, and self-harm detection
+- **[Azure AI Document Intelligence - Prebuilt Invoice Model](ai-services/lab-doc-intelligence-invoice/README.md)** - Automate invoice processing with prebuilt models for key field extraction
 
 ### Knowledge Mining
 
-- **[Azure AI Search — Improve Query Performance with Partitions](knowledge-mining/lab-search-query-perf/README.md)** - Deploy Azure AI Search with multiple partitions to optimize query performance and understand the difference between partitions and replicas
+- **[Azure AI Search - Improve Query Performance with Partitions](knowledge-mining/lab-search-query-perf/README.md)** - Deploy Azure AI Search with multiple partitions to optimize query performance and understand the difference between partitions and replicas
 
 ---
 

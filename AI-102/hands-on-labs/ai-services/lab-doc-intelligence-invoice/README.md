@@ -292,4 +292,4 @@ Azure AI Document Intelligence was designed from the ground up to use JSON as it
 
 ## Related Labs
 
-- [Azure AI Content Safety](../lab-content-safety/) — Another AI Services lab deploying a Cognitive Services account for content moderation
+- **[Azure AI Content Safety - Text and Image Moderation](../lab-content-safety/README.md)** - AI-powered text and image content moderation for sexual content, violence, hate, and self-harm detection

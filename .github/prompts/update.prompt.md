@@ -1,5 +1,5 @@
 ---
-name: Update
+name: Update-Lab-References
 description: Updates hands-on-lab README files to reflect the latest labs in the repository
 ---
 
