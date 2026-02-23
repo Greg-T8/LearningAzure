@@ -171,7 +171,15 @@
     },
     "workbench.colorCustomizations": {
       "titleBar.activeBackground": "#4683ca",
-      "titleBar.inactiveBackground": "#3668a3"
+      "titleBar.inactiveBackground": "#3668a3",
+      "diffEditor.insertedTextBackground": "#003a66",
+      "diffEditor.removedTextBackground": "#663300",
+      "diffEditor.insertedLineBackground": "#002b4d",
+      "diffEditor.removedLineBackground": "#4d2600",
+      "editorGutter.addedBackground": "#2f81f7",
+      "editorGutter.deletedBackground": "#ff9e3d",
+      "editorOverviewRuler.addedForeground": "#58a6ff",
+      "editorOverviewRuler.deletedForeground": "#ffb86b"
     },
     "powershell.cwd": "LearningAzure"
   }
