@@ -464,3 +464,12 @@ The capability host configuration stores the connection to each BYO resource. Th
 ## Related Labs
 
 - **[Azure AI Agent Service - Essentials: Threads, Files, and Vector Stores](../lab-agent-essentials/README.md)** - Learn core agent service concepts with Microsoft-managed infrastructure
+
+### ▶ Related Labs
+
+- ▶ Related Lab: [lab-agent-essentials](../lab-agent-essentials/README.md)
+
+### ▶ Related Practice Exam Questions
+
+- ▶ Practice Question: [Azure AI Agent Service - RBAC](../../../../practice-exams/ai-102/agent-rbac.md)
+- ▶ Practice Question: [Azure AI Agent Service - BYO Storage](../../../../practice-exams/ai-102/byo-storage.md)

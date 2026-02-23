@@ -293,3 +293,12 @@ Azure AI Document Intelligence was designed from the ground up to use JSON as it
 ## Related Labs
 
 - **[Azure AI Content Safety - Text and Image Moderation](../lab-content-safety/README.md)** - AI-powered text and image content moderation for sexual content, violence, hate, and self-harm detection
+
+### ▶ Related Labs
+
+- ▶ Related Lab: [lab-content-safety](../lab-content-safety/README.md)
+
+### ▶ Related Practice Exam Questions
+
+- ▶ Practice Question: [Azure AI Document Intelligence - Prebuilt Invoice](../../../../practice-exams/ai-102/doc-intelligence-invoice.md)
+- ▶ Practice Question: [Azure AI Document Intelligence - Key Field Extraction](../../../../practice-exams/ai-102/key-field-extraction.md)

@@ -1,11 +1,13 @@
 ---
 name: Update-Lab-References
-description: Updates hands-on-lab README files to reflect the latest labs in the repository
+description: Updates hands-on-lab README files to reflect the latest labs in the repository, including related practice exam question links
 ---
 
 # Hands-on Lab README Updater
 
 Update the hands-on-labs README.md files to accurately reflect all labs in the repository.
+
+Also update individual lab README files to include a dedicated related practice exam question links section near the bottom (next to Related Labs).
 
 Uses the `lab-catalog-updater` skill for the full scanning, updating, and validation workflow.
 
@@ -21,3 +23,4 @@ Uses the `lab-catalog-updater` skill for the full scanning, updating, and valida
 - "Update AI-102 hands-on-labs README with latest labs"
 - "Refresh the lab catalog in AZ-104"
 - "Update Related Labs sections across all labs"
+- "Add Related Practice Exam Questions sections across all labs"

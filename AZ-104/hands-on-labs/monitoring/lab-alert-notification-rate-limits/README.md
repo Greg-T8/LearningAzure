@@ -153,4 +153,11 @@ Azure enforces rate limits to prevent notification flooding:
 
 ## Related Labs
 
-▶ Related Lab: [lab-vm-file-recovery](../lab-vm-file-recovery/README.md) - Practice file-level recovery from Azure VM backup using Recovery Services vault
+### ▶ Related Labs
+
+- ▶ Related Lab: [lab-vm-file-recovery](../lab-vm-file-recovery/README.md)
+
+### ▶ Related Practice Exam Questions
+
+- ▶ Practice Question: [Azure Monitor Alerts](../../../../practice-exams/az-104/monitor-alerts.md)
+- ▶ Practice Question: [Azure Notification Limits](../../../../practice-exams/az-104/notification-limits.md)

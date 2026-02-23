@@ -173,3 +173,12 @@ The minimum tier that satisfies the requirement is **Basic B1** because:
 ## Related Labs
 
 - **[App Service Plan Tiers](../lab-app-service-plan-tiers/README.md)** - Explore App Service pricing tier capabilities, scaling limits, and choose the right tier for specific requirements
+
+### ▶ Related Labs
+
+- ▶ Related Lab: [lab-app-service-plan-tiers](../lab-app-service-plan-tiers/README.md)
+
+### ▶ Related Practice Exam Questions
+
+- ▶ Practice Question: [Azure App Service Plans](../../../../practice-exams/az-104/app-service-plans.md)
+- ▶ Practice Question: [Azure Compute Quotas](../../../../practice-exams/az-104/compute-quotas.md)

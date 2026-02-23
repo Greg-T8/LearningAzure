@@ -351,3 +351,12 @@ The capability host in a standard setup references connections to each of these 
 ## Related Labs
 
 - **[Azure AI Agent Service - BYO Storage Configuration and RBAC](../lab-agent-byo-storage/README.md)** - Configure standard agent setup with correct RBAC roles for BYO storage, Cosmos DB, and AI Search resources
+
+### ▶ Related Labs
+
+- ▶ Related Lab: [lab-agent-byo-storage](../lab-agent-byo-storage/README.md)
+
+### ▶ Related Practice Exam Questions
+
+- ▶ Practice Question: [Azure AI Agent Service - Essentials](../../../../practice-exams/ai-102/agent-essentials.md)
+- ▶ Practice Question: [Azure AI Agent Service - Threads and Files](../../../../practice-exams/ai-102/threads-files.md)

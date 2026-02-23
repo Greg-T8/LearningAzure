@@ -226,3 +226,12 @@ Azure AI Content Safety Studio provides the following core features:
 ## Related Labs
 
 - **[Azure AI Document Intelligence - Prebuilt Invoice Model](../lab-doc-intelligence-invoice/README.md)** - Automate invoice processing with prebuilt models for key field extraction
+
+### ▶ Related Labs
+
+- ▶ Related Lab: [lab-doc-intelligence-invoice](../lab-doc-intelligence-invoice/README.md)
+
+### ▶ Related Practice Exam Questions
+
+- ▶ Practice Question: [Azure AI Content Safety - Text Moderation](../../../../practice-exams/ai-102/content-safety-text.md)
+- ▶ Practice Question: [Azure AI Content Safety - Image Moderation](../../../../practice-exams/ai-102/content-safety-image.md)

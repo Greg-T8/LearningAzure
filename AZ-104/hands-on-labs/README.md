@@ -4,7 +4,7 @@ This page catalogs hands-on labs built from practice exam questions. Each lab us
 
 ---
 
-## 📈 Lab Statistics
+## 📊 Lab Statistics
 
 - **Total Labs**: 14
 - **Storage**: 4

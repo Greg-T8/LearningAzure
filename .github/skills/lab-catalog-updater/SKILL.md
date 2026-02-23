@@ -1,6 +1,6 @@
 ---
 name: lab-catalog-updater
-description: 'Scan and update hands-on-labs README.md files with accurate lab catalogs, statistics, and cross-references. Use when asked to update lab README, refresh lab catalog, update lab statistics, or update Related Labs sections for AI-102, AZ-104, or AI-900.'
+description: 'Scan and update hands-on-labs README.md files with accurate lab catalogs, statistics, and cross-references. Use when asked to update lab README, refresh lab catalog, update lab statistics, or update Related Labs and Related Practice Exam Questions sections for AI-102, AZ-104, or AI-900.'
 user-invokable: false
 argument-hint: '[exam] [scope]'
 ---
@@ -14,6 +14,7 @@ Scans hands-on-labs directories and updates README.md files with accurate lab ca
 - Updating hands-on-labs README files after adding or removing labs
 - Refreshing lab statistics and counts
 - Updating Related Labs cross-references in individual lab READMEs
+- Updating Related Practice Exam Questions links in individual lab READMEs
 - Auditing lab catalog accuracy
 
 ## Scope
@@ -36,6 +37,7 @@ For each exam's hands-on-labs directory:
    - Lab title (from the `# Lab:` heading)
    - Brief description (from context or "Solution Architecture" section)
    - Current Related Labs section (if present)
+   - Current Related Practice Exam Questions section (if present)
    - Core concepts and topics covered
 4. Build a catalog of all labs with their domains, titles, and key concepts
 
@@ -80,7 +82,25 @@ For each individual lab's README.md:
 - Use relative paths from the current lab location
 - Maintain the `▶` arrow prefix
 
-### Step 4: Protected Sections
+### Step 4: Update Related Practice Exam Questions Sections
+
+For each individual lab's README.md:
+
+1. Locate the "Related Practice Exam Questions" section near the end of the file (adjacent to Related Labs)
+2. If the section does not exist, add it near the bottom next to the Related Labs section
+3. Identify 1–3 relevant practice exam questions based on matching services, skills, and objectives
+4. Add links using repository-relative paths to the applicable practice exam markdown location
+5. Format each entry as: `▶ Practice Question: [Question Title](relative/path/to/question.md)`
+
+**Related Practice Exam Questions Guidelines:**
+
+- Keep links tightly aligned to the lab's primary objectives
+- Prefer question links from the same exam track (AI-102, AZ-104, AI-900)
+- Limit to 3 question links maximum
+- Use relative paths from the current lab location
+- Maintain the `▶` arrow prefix
+
+### Step 5: Protected Sections
 
 Do NOT modify:
 
@@ -98,6 +118,8 @@ After updating:
 4. Check that no labs are duplicated or missing
 5. Verify Related Labs sections contain appropriate cross-references
 6. Confirm all relative paths in Related Labs sections are correct
+7. Verify Related Practice Exam Questions sections are present and correctly placed near Related Labs
+8. Confirm all practice question links resolve to existing markdown files
 
 ## Output Summary
 
@@ -107,3 +129,4 @@ After completing updates, report:
 2. **File List** — All README.md files updated
 3. **Lab Inventory** — Complete list of labs found
 4. **Related Labs Summary** — Labs with new or updated cross-references
+5. **Practice Question Summary** — Labs with new or updated Related Practice Exam Questions links
