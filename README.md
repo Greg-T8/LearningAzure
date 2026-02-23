@@ -16,8 +16,8 @@ This repository documents my Azure learning journey, from certification prep to 
 
 Progress trackers, detailed study notes, practice exams, and hands-on labs:
 
-- 📗 [**AZ-104**](AZ-104/README.md) — Azure Administrator Associate
-- 📙 [**AI-102**](AI-102/README.md) — Azure AI Engineer Associate
+- 📗 [**AZ-104**](AZ-104/README.md) — Azure Administrator Associate (*started 1/15/26*)
+- 📙 [**AI-102**](AI-102/README.md) — Azure AI Engineer Associate (*started 2/10/26*)
 - 📘 [**AI-900**](AI-900/README.md) — Azure AI Fundamentals (*completed 2/9/26*)
 
 ---
