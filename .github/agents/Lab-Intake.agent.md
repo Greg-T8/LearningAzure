@@ -548,7 +548,7 @@ After extracting metadata per R-041 and **before** returning output, run this va
 If any check fails, **fix the value before returning output**. Do not return output with validation failures.
 
 > **Common mistake — skipping file write:** The most frequent intake failure is generating metadata in the chat response but never writing it to the file. Check 6 above catches this. If the heading is missing from the file, you **must** append the metadata block before completing intake.
-
+>
 > **Common mistake — invalid domains:** Agents sometimes produce domain names like "Security", "Encryption", or "Key Management" — these are **not** valid domains for any exam. Re-read the R-041 domain tables and choose the correct domain based on the primary resource.
 
 ---
