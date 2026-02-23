@@ -438,7 +438,14 @@ Map the question's subject to one of the **exact** domain names listed below. Th
 | NLP                                   | Language Understanding, text analytics, translation, QnA |
 | Computer Vision                       | Image analysis, OCR, Custom Vision, Face, Video Indexer |
 | Knowledge Mining                      | AI Search, indexers, skillsets, knowledge stores      |
-| Agentic                               | AI agents, orchestration, Semantic Kernel            |
+| Agentic                               | AI agents, Azure AI Agent Service, capability host, agent file uploads, agent storage, orchestration, Semantic Kernel |
+
+> **Cross-cutting topics (AI-102):** When a question involves infrastructure configuration (RBAC, storage, connection strings) for a specific AI service, choose the domain of the **primary AI service**, not the supporting resource. Examples:
+>
+> - Storage role assignments for Azure AI Agent Service → **Agentic** (the agent service is the primary subject)
+> - Capability host or file upload configuration for agents → **Agentic**
+> - API key rotation for a multi-service AI resource → **AI Services**
+> - Indexer connectivity to a blob container → **Knowledge Mining** (the search indexer is the primary resource)
 
 **AI-900 domains (closed set — use these exact strings):**
 
@@ -455,20 +462,25 @@ Map the question's subject to one of the **exact** domain names listed below. Th
 Derive the kebab-case slug directly from the `### <Title>` heading in the exam question file:
 
 1. Extract the title text from the level-3 heading (e.g., `### Encrypt a VM Disk Using Key Vault Keys`).
-2. Convert to lowercase and replace spaces with hyphens.
-3. Remove filler words: `a`, `an`, `the`, `using`, `for`, `to`, `with`, `and`, `or`.
-4. Remove all special characters (punctuation, parentheses, etc.).
-5. Keep all meaningful nouns and verbs.
-6. **MANDATORY: 4-word maximum** — The final slug must contain **no more than 4 hyphen-separated words**. If the result exceeds 4 words after applying steps 1–5, condense or drop the least essential words to reach 4 words or fewer.
+2. **Strip exam-task verbs** — Remove verbs that describe what the exam asks the test-taker to do (e.g., `Identify`, `Determine`, `Select`, `Choose`, `Evaluate`, `Recommend`, `Troubleshoot`). These describe the exam action, not the Azure concept. Replace with the **technical subject** of the question.
+3. **Focus on the Azure concept** — The slug must name the Azure resource, feature, or configuration being tested — not the diagnostic or decision-making action. Ask: *"What Azure thing is being configured or deployed?"* and use that as the slug's core.
+4. **Nominalize action verbs** — Convert remaining action verbs to noun forms (e.g., `Encrypt` → `encryption`, `Configure` → `config`, `Assign` → `assignment`, `Enable` → `versioning`).
+5. Convert to lowercase and replace spaces with hyphens.
+6. Remove filler words: `a`, `an`, `the`, `using`, `for`, `to`, `with`, `and`, `or`.
+7. Remove all special characters (punctuation, parentheses, etc.).
+8. Keep all meaningful nouns.
+9. **MANDATORY: 4-word maximum** — The final slug must contain **no more than 4 hyphen-separated words**. If the result exceeds 4 words after applying steps 1–8, condense or drop the least essential words to reach 4 words or fewer.
 
-Examples (matching the R-039 filename derivation rules):
+Examples:
 
-| Title | Topic Slug |
-| ----- | ---------- |
-| Encrypt a VM Disk Using Key Vault Keys | `vm-disk-encryption-keyvault` |
-| Configure VNet Peering Between Two Virtual Networks | `vnet-peering-two-networks` |
-| Assign an Azure Role to a User | `role-assignment-user` |
-| Enable Blob Versioning on a Storage Account | `blob-versioning-storage-account` |
+| Title | Topic Slug | Reasoning |
+| ----- | ---------- | --------- |
+| Encrypt a VM Disk Using Key Vault Keys | `vm-disk-encryption-keyvault` | "Encrypt" → nominalized to "encryption" |
+| Configure VNet Peering Between Two Virtual Networks | `vnet-peering-config` | "Configure" → nominalized to "config"; concept is VNet peering |
+| Assign an Azure Role to a User | `role-assignment-user` | "Assign" → nominalized to "assignment" |
+| Enable Blob Versioning on a Storage Account | `blob-versioning-storage` | "Enable" → dropped; concept is blob versioning |
+| Identify Upload Failure | `agent-upload-config` | "Identify" is an exam-task verb → stripped; concept is agent upload configuration |
+| Determine the Correct Firewall Rule | `firewall-rule-config` | "Determine" is an exam-task verb → stripped; concept is firewall rule configuration |
 
 #### KeyServices
 
@@ -494,17 +506,15 @@ The deployment method is provided by the user at intake time.
 
 Return a structured block. **Field order and capitalization are mandatory** — always emit fields in the exact sequence shown below.
 
-```
 ## Phase 1 — Metadata Output
 
 ### Metadata
+
 - Exam: [AI-102 | AZ-104 | AI-900]
 - Domain: [exact domain from R-041 closed-set tables]
 - Topic: [kebab-case-slug]
 - Key Services: [comma-separated list, Title Case, official Azure names]
 - Deployment Method: [Terraform | Bicep | Scripted | Manual]
-
-```
 
 ### Formatting Rules
 
