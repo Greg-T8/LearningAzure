@@ -22,3 +22,6 @@ param dateCreated = '2026-02-23'
 
 // Admin username for VMSS instances
 param adminUsername = 'azureadmin'
+
+// Admin password for VMSS instances (lab-safe static value)
+param adminPassword = 'AzureLab2026!'

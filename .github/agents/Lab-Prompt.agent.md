@@ -166,69 +166,16 @@ $config = Get-Az...
 
 ## 5. Mermaid Diagram Styling
 
-Use this base theme for all diagrams (light gray background + neutral cards):
+Follow the `mermaid-styling` skill (`.github/skills/mermaid-styling/SKILL.md`) for all diagram styling:
 
-````markdown
-```mermaid
-%%{init: {
-  "theme": "base",
-  "themeVariables": {
-    "background": "#F5F5F5",
-    "primaryColor": "#E8E8E8",
-    "primaryTextColor": "#333333",
-    "primaryBorderColor": "#999999",
-    "lineColor": "#666666",
-    "clusterBkg": "#FAFAFA",
-    "clusterBorder": "#CCCCCC",
-    "edgeLabelBackground": "#F5F5F5",
-    "fontFamily": "Segoe UI, Roboto, Arial, sans-serif",
-    "fontSize": "14px"
-  }
-}}%%
-```
-````
+- **M-001** — Base theme (neutral canvas)
+- **M-002** — AZ-104 class definitions
+- **M-003** — AI-102 class definitions
+- **M-004** — Container styling (VNet/subnet borders)
+- **M-005** — Usage pattern (`:::` syntax)
+- **M-006** — Design principles
 
-For subnet/VNet containers, apply a prominent light blue border to improve visual hierarchy:
-
-````markdown
-```mermaid
-style VNET stroke:#4A90E2,stroke-width:2.5px
-```
-````
-
-Add these class definitions to each diagram:
-
-````markdown
-```mermaid
-%% Core (AZ-104)
-classDef compute   fill:#914BB0,stroke:#6E2E8E,color:#FFFFFF,stroke-width:1.5px;
-classDef network   fill:#50C878,stroke:#2E8B57,color:#0B1A10,stroke-width:1.5px;
-classDef security  fill:#DC3545,stroke:#A61B29,color:#FFFFFF,stroke-width:1.5px;
-classDef storage   fill:#FFA500,stroke:#B36B00,color:#1A1200,stroke-width:1.5px;
-classDef recovery  fill:#0078D4,stroke:#0B5CAD,color:#FFFFFF,stroke-width:1.5px;
-classDef identity  fill:#00B7C3,stroke:#007C86,color:#001417,stroke-width:1.5px;
-classDef monitor   fill:#FFB900,stroke:#B37A00,color:#1A1300,stroke-width:1.5px;
-classDef governance fill:#9B9B9B,stroke:#6B6B6B,color:#111111,stroke-width:1.5px;
-
-%% AI-102
-classDef aiCore    fill:#5C2D91,stroke:#3D1E60,color:#FFFFFF,stroke-width:1.5px;
-classDef aiOpenAI  fill:#C239B3,stroke:#7A1F6F,color:#FFFFFF,stroke-width:1.5px;
-classDef aiSearch  fill:#00A3A3,stroke:#006A6A,color:#001516,stroke-width:1.5px;
-classDef aiML      fill:#2B88D8,stroke:#1B5B93,color:#FFFFFF,stroke-width:1.5px;
-classDef aiBot     fill:#3A96DD,stroke:#245F8C,color:#FFFFFF,stroke-width:1.5px;
-```
-````
-
-Usage example:
-
-````markdown
-```
-vm["VM"]:::compute
-vnet["VNet"]:::network
-entra["Entra ID"]:::identity
-openai["Azure OpenAI"]:::aiOpenAI
-```
-````
+Load the skill and apply every applicable rule when generating a Mermaid diagram.
 
 ---
 

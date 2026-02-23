@@ -31,6 +31,10 @@ param dateCreated string
 @description('Admin username for VMSS instances')
 param adminUsername string = 'azureadmin'
 
+@description('Admin password for VMSS instances')
+@secure()
+param adminPassword string
+
 // -------------------------------------------------------------------------
 // Local variables for naming and tagging
 // -------------------------------------------------------------------------
@@ -108,8 +112,10 @@ module vmss 'modules/vmss.bicep' = {
     commonTags: commonTags
     vmssName: vmssName
     adminUsername: adminUsername
+    adminPassword: adminPassword
     subnetId: network.outputs.subnetId
     backendPoolId: loadbalancer.outputs.backendPoolId
+    healthProbeId: loadbalancer.outputs.healthProbeId
   }
 }
 

@@ -131,6 +131,9 @@ resource lb 'Microsoft.Network/loadBalancers@2024-05-01' = {
 @description('Load balancer backend pool resource ID')
 output backendPoolId string = lb.properties.backendAddressPools[0].id
 
+@description('Load balancer health probe resource ID')
+output healthProbeId string = lb.properties.probes[0].id
+
 @description('Load balancer public IP address')
 output publicIpAddress string = publicIp.properties.ipAddress
 

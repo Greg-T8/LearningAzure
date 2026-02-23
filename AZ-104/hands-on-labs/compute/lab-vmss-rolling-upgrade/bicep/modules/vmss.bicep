@@ -19,18 +19,22 @@ param vmssName string
 @description('Admin username for VMSS instances')
 param adminUsername string
 
+@description('Admin password for VMSS instances')
+@secure()
+param adminPassword string
+
 @description('Subnet resource ID for VMSS NIC configuration')
 param subnetId string
 
 @description('Load balancer backend pool resource ID')
 param backendPoolId string
 
+@description('Load balancer health probe resource ID')
+param healthProbeId string
+
 // -------------------------------------------------------------------------
 // Local variables
 // -------------------------------------------------------------------------
-
-// Lab-safe admin password — generated internally per R-024
-var adminPassword = 'AzureLab2026!'
 
 // Cloud-init script to install nginx (provides health probe endpoint on port 80)
 var cloudInitScript = '''
@@ -116,6 +120,9 @@ resource vmss 'Microsoft.Compute/virtualMachineScaleSets@2024-07-01' = {
 
       // Network profile — connects to LB backend pool via subnet
       networkProfile: {
+        healthProbe: {
+          id: healthProbeId
+        }
         networkInterfaceConfigurations: [
           {
             name: 'nic-vmss'

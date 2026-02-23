@@ -45,36 +45,35 @@ This lab deploys a Virtual Machine Scale Set with a Rolling upgrade policy behin
     "fontSize": "14px"
   }
 }}%%
+flowchart LR
+    classDef compute    fill:#DCC8EB,stroke:#7B4FA0,color:#2D1045,stroke-width:1.5px;
+    classDef network    fill:#C2E6CE,stroke:#3D8B57,color:#102B18,stroke-width:1.5px;
+    classDef security   fill:#F2C0C4,stroke:#B5333D,color:#3A0A0E,stroke-width:1.5px;
+    classDef storage    fill:#FDE0B8,stroke:#C07A1A,color:#2A1800,stroke-width:1.5px;
+    classDef recovery   fill:#B8D8F2,stroke:#2A6BAD,color:#0D2240,stroke-width:1.5px;
+    classDef identity   fill:#B0E2E8,stroke:#1A7C86,color:#082628,stroke-width:1.5px;
+    classDef monitor    fill:#FFE4AA,stroke:#A07A00,color:#2A1C00,stroke-width:1.5px;
+    classDef governance fill:#D5D5D5,stroke:#6B6B6B,color:#1A1A1A,stroke-width:1.5px;
 
-graph TD
-  subgraph RG["az104-compute-vmss-rolling-upgrade-bicep"]
-    subgraph VNET["vnet-vmss-rolling-upgrade (10.0.0.0/16)"]
-      subgraph SUBNET["snet-vmss (10.0.1.0/24)"]
-        VMSS["vmss-rolling-upgrade<br/>2x Standard_B2s<br/>Rolling Upgrade Policy"]
-      end
+    admin["Admin updates VMSS model<br/>(OS + Data Disk Profile)"]:::governance
+    model["VMSS Model (latest)"]:::compute
+    policy["Upgrade Policy: Rolling"]:::network
+    cmd["Start-AzVmssRollingOSUpgrade"]:::compute
+    health["Health Probe / App Health Checks"]:::monitor
+
+    subgraph VMSS["VM Scale Set Instances"]
+      vm1["VM Instance 1"]:::compute
+      vm2["VM Instance 2"]:::compute
+      vm3["VM Instance 3"]:::compute
     end
-    NSG["nsg-vmss"]
-    PIP["pip-lb-vmss<br/>Standard Static"]
-    LB["lb-vmss<br/>Standard LB"]
-  end
 
-  PIP --> LB
-  LB -->|"Backend Pool<br/>Health Probe TCP:80"| VMSS
-  NSG -->|"Associated"| SUBNET
+    admin --> model --> policy --> cmd
+    cmd --> vm1 --> vm2 --> vm3
+    health -. validate before next batch .-> vm1
+    health -. validate before next batch .-> vm2
+    health -. validate before next batch .-> vm3
 
-  %% Core (AZ-104)
-  classDef compute   fill:#914BB0,stroke:#6E2E8E,color:#FFFFFF,stroke-width:1.5px;
-  classDef network   fill:#50C878,stroke:#2E8B57,color:#0B1A10,stroke-width:1.5px;
-  classDef security  fill:#DC3545,stroke:#A61B29,color:#FFFFFF,stroke-width:1.5px;
-
-  VMSS:::compute
-  VNET:::network
-  SUBNET:::network
-  NSG:::security
-  PIP:::network
-  LB:::network
-
-  style VNET stroke:#4A90E2,stroke-width:2.5px
+    style VMSS stroke:#4A90E2,stroke-width:2.5px
 ```
 
 ---
