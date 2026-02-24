@@ -2,8 +2,8 @@
 # Program: update-commit-stats.py
 # Description: Update commit statistics in README.md tracking activity per
 #              certification (AI-102, AZ-104) for the last 7 days.
-#              Hours calculated as time between first and last commit per day.
-#              Overlapping activity windows are split evenly.
+#              Hours are calculated as commit-to-commit deltas where the
+#              earlier commit determines the category.
 # Author: Greg Tate
 # -------------------------------------------------------------------------
 
@@ -30,10 +30,13 @@ def main() -> None:
     print("📊 Generating commit statistics...")
 
     # Retrieve commits from the last 7 days
-    commits = get_commits_by_path(days=7)
+    commits = get_commit_records(days=7)
+
+    # Calculate daily category hours from commit-to-commit deltas
+    daily_hours = calculate_daily_category_hours(commits)
 
     # Generate markdown table from commit data
-    table = generate_commit_table(commits, days=7)
+    table = generate_commit_table(daily_hours, days=7)
 
     print("\nGenerated table:")
     print(table)
@@ -51,18 +54,18 @@ def main() -> None:
 # Helper Functions
 # -------------------------------------------------------------------------
 
-def get_commits_by_path(
+def get_commit_records(
     days: int = 7,
     since_date: str | None = None
-) -> dict:
-    """Get commit timestamps by path for the last N days or since date.
+) -> list[dict]:
+    """Get commit records with timestamp and certification categories.
 
     Args:
         days: Number of days to look back (default: 7)
         since_date: Specific date to start from (overrides days parameter)
 
     Returns:
-        dict: Commits grouped by date and certification
+        List of commit records sorted oldest-to-newest
     """
     if since_date is None:
         since_date = (
@@ -75,7 +78,7 @@ def get_commits_by_path(
         'log',
         f'--since={since_date}',
         '--name-only',
-        '--pretty=format:%H|%ad|%s',
+        '--pretty=format:__COMMIT__|%H|%ad|%s',
         '--date=format:%Y-%m-%d %H:%M:%S'
     ]
 
@@ -84,282 +87,271 @@ def get_commits_by_path(
 
     if result.returncode != 0:
         print(f"Error running git log: {result.stderr}")
-        return {}
-
-    # Parse commits and organize by date and certification
-    commits_by_date_cert = defaultdict(lambda: defaultdict(list))
-
-    lines = result.stdout.strip().split('\n')
-    current_datetime = None
-    current_date = None
-    current_message = None
-
-    for line in lines:
-        # Parse commit metadata when line contains pipe separator
-        if '|' in line:
-            parts = line.split('|')
-            if len(parts) >= 3:
-                current_datetime = parts[1]
-                current_date = current_datetime.split()[0]
-                current_message = parts[2]
-
-                # Skip automated workflow commits
-                if '[skip ci]' in current_message or 'Update commit statistics' in current_message:
-                    current_datetime = None
-                    continue
-
-                # Track all commits for total daily activity window
-                commits_by_date_cert[current_date]['__all__'].append(
-                    current_datetime
-                )
-        # Categorize file paths by certification
-        elif line.strip() and current_datetime:
-            if line.startswith('AI-102/'):
-                commits_by_date_cert[current_date]['AI-102'].append(
-                    current_datetime
-                )
-            elif line.startswith('AZ-104/'):
-                commits_by_date_cert[current_date]['AZ-104'].append(
-                    current_datetime
-                )
-
-    return commits_by_date_cert
-
-
-def get_activity_interval(
-    timestamps: list[str]
-) -> tuple[datetime, datetime] | None:
-    """Get activity interval (earliest, latest) for a set of timestamps.
-
-    Caps the end time at 8:00 AM local date for all days.
-    Returns None if interval cannot produce positive duration.
-    For single commits, assumes 1-hour activity window.
-
-    Args:
-        timestamps: List of timestamp strings in format '%Y-%m-%d %H:%M:%S'
-
-    Returns:
-        Tuple of (earliest_datetime, latest_datetime) or None
-    """
-    if not timestamps:
-        return None
-
-    # Parse timestamps into datetime objects
-    dt_objects = [
-        datetime.strptime(ts, '%Y-%m-%d %H:%M:%S')
-        for ts in timestamps
-    ]
-
-    # For single commit, assume 1-hour activity window
-    if len(timestamps) == 1:
-        earliest = dt_objects[0]
-        latest = earliest + timedelta(hours=1)
-
-        # Cap end time at configured workday start hour
-        morning_cap = earliest.replace(
-            hour=WORKDAY_START_HOUR,
-            minute=0,
-            second=0
-        )
-        if latest > morning_cap:
-            latest = morning_cap
-
-        if latest <= earliest:
-            return None
-
-        return earliest, latest
-
-    # Determine earliest and latest commit times
-    earliest = min(dt_objects)
-    latest = max(dt_objects)
-
-    # Cap end time at configured workday start hour only if needed
-    morning_cap = earliest.replace(
-        hour=WORKDAY_START_HOUR,
-        minute=0,
-        second=0
-    )
-    if latest > morning_cap:
-        latest = morning_cap
-
-    if latest <= earliest:
-        return None
-
-    return earliest, latest
-
-
-def get_activity_intervals(
-    timestamps: list[str]
-) -> list[tuple[datetime, datetime]]:
-    """Get activity intervals including weekend dense post-8AM blocks.
-
-    Base interval behavior remains first-to-last commit capped at 8:00 AM.
-    On weekends, each hour at or after 8:00 AM counts as +1h only when
-    more than one commit exists in that hour.
-
-    Args:
-        timestamps: List of timestamp strings
-
-    Returns:
-        List of activity intervals
-    """
-    if not timestamps:
         return []
 
-    # Parse timestamps into datetime objects for weekend-hour grouping
-    dt_objects = [
-        datetime.strptime(ts, '%Y-%m-%d %H:%M:%S')
-        for ts in timestamps
+    # Parse commits and capture file path categories per commit
+    commits = []
+    lines = result.stdout.splitlines()
+    current_commit = None
+
+    for line in lines:
+        # Start a new commit record when marker is encountered
+        if line.startswith('__COMMIT__|'):
+            if current_commit is not None:
+                commits.append(current_commit)
+
+            parts = line.split('|', 3)
+            if len(parts) < 4:
+                current_commit = None
+                continue
+
+            commit_message = parts[3]
+
+            # Skip automated workflow commits
+            if (
+                '[skip ci]' in commit_message
+                or 'Update commit statistics' in commit_message
+            ):
+                current_commit = None
+                continue
+
+            commit_time = datetime.strptime(
+                parts[2],
+                '%Y-%m-%d %H:%M:%S'
+            )
+            current_commit = {
+                'timestamp': commit_time,
+                'certifications': set()
+            }
+            continue
+
+        # Categorize file paths by certification
+        if current_commit is not None and line.strip():
+            if line.startswith('AI-102/'):
+                current_commit['certifications'].add('AI-102')
+            elif line.startswith('AZ-104/'):
+                current_commit['certifications'].add('AZ-104')
+
+    if current_commit is not None:
+        commits.append(current_commit)
+
+    # Return commits sorted oldest-to-newest for delta calculations
+    commits.sort(key=lambda commit: commit['timestamp'])
+    return commits
+
+
+def get_category_weights(
+    certifications: set[str]
+) -> dict[str, float]:
+    """Map a commit's categories to allocation weights.
+
+    Args:
+        certifications: Certifications touched by the earlier commit
+
+    Returns:
+        Allocation weights for AI-102, AZ-104, or Other
+    """
+    exam_categories = [
+        cert
+        for cert in CERTIFICATIONS
+        if cert in certifications
     ]
 
-    # Add legacy pre-8AM interval behavior
-    intervals = []
-    base_interval = get_activity_interval(timestamps)
-    if base_interval is not None:
-        intervals.append(base_interval)
+    if not exam_categories:
+        return {'Other': 1.0}
 
-    # Add weekend post-8AM dense-hour intervals
-    if dt_objects[0].weekday() >= 5:
-        hourly_commit_counts = defaultdict(int)
-
-        # Count commits in each post-8AM hour bucket
-        for commit_time in dt_objects:
-            if commit_time.hour >= WORKDAY_START_HOUR:
-                hour_bucket = commit_time.replace(
-                    minute=0,
-                    second=0,
-                    microsecond=0
-                )
-                hourly_commit_counts[hour_bucket] += 1
-
-        # Only count hour buckets with more than one commit
-        for hour_bucket, commit_count in hourly_commit_counts.items():
-            if commit_count > 1:
-                intervals.append(
-                    (hour_bucket, hour_bucket + timedelta(hours=1))
-                )
-
-    return intervals
+    split_weight = 1.0 / len(exam_categories)
+    return {
+        cert: split_weight
+        for cert in exam_categories
+    }
 
 
-def get_interval_hours(
-    intervals: list[tuple[datetime, datetime]]
+def get_overlap_hours(
+    segment_start: datetime,
+    segment_end: datetime,
+    window_start: datetime,
+    window_end: datetime
 ) -> float:
-    """Calculate total hours from a list of intervals.
+    """Get overlap hours between a segment and an allowed window."""
+    overlap_start = max(segment_start, window_start)
+    overlap_end = min(segment_end, window_end)
 
-    Args:
-        intervals: List of (start_datetime, end_datetime) intervals
-
-    Returns:
-        Total interval hours
-    """
-    # Sum each interval duration in hours
-    return sum(
-        (end - start).total_seconds() / 3600
-        for start, end in intervals
-        if end > start
-    )
-
-
-def calculate_hours(timestamps: list[str]) -> float:
-    """Calculate hours between first and last commit after 8:00 AM cap.
-
-    Args:
-        timestamps: List of timestamp strings
-
-    Returns:
-        Hours of activity rounded to 1 decimal place
-    """
-    intervals = get_activity_intervals(timestamps)
-    if not intervals:
+    if overlap_end <= overlap_start:
         return 0.0
 
-    hours = get_interval_hours(intervals)
-    return round(hours, 1)
+    return (overlap_end - overlap_start).total_seconds() / 3600
 
 
-def calculate_hours_raw(timestamps: list[str]) -> float:
-    """Calculate unrounded hours between first and last commit.
+def get_weekend_dense_hour_windows(
+    commits: list[dict]
+) -> dict[str, list[tuple[datetime, datetime]]]:
+    """Build qualified weekend post-8AM hour windows.
 
-    Args:
-        timestamps: List of timestamp strings
-
-    Returns:
-        Hours of activity as a float
-    """
-    intervals = get_activity_intervals(timestamps)
-    if not intervals:
-        return 0.0
-
-    return get_interval_hours(intervals)
-
-
-def split_overlapping_hours(
-    date_commits: dict
-) -> dict[str, float]:
-    """Split overlapping activity windows evenly across certifications.
-
-    For each certification, build a daily activity interval from first to last
-    commit (with weekday cap applied). When intervals overlap, overlapping
-    segments are divided equally among active certifications.
+    A weekend hour bucket qualifies only when it has more than one commit.
 
     Args:
-        date_commits: Dict mapping certification names to timestamp lists
+        commits: Commit records used to count hour density
 
     Returns:
-        Dict mapping certification names to allocated hours
+        Dict keyed by YYYY-MM-DD with list of qualified hour windows
     """
-    # Build activity intervals for each certification
-    intervals_by_cert = defaultdict(list)
+    dense_hour_counts = defaultdict(int)
 
-    for cert in CERTIFICATIONS:
-        timestamps = date_commits.get(cert, [])
-        intervals = get_activity_intervals(timestamps)
-        if intervals:
-            intervals_by_cert[cert].extend(intervals)
+    # Count commits in weekend post-8AM hour buckets
+    for commit in commits:
+        commit_time = commit['timestamp']
 
-    if not intervals_by_cert:
-        return {cert: 0.0 for cert in CERTIFICATIONS}
-
-    # Create events for interval start and end points
-    events = []
-    for cert, cert_intervals in intervals_by_cert.items():
-        for start, end in cert_intervals:
-            events.append((start, 'start', cert))
-            events.append((end, 'end', cert))
-
-    # Sort events chronologically
-    events.sort(
-        key=lambda event: (event[0], 0 if event[1] == 'end' else 1)
-    )
-
-    # Process events and allocate hours
-    allocated_hours = {cert: 0.0 for cert in CERTIFICATIONS}
-    active_certs = set()
-    previous_time = None
-
-    for current_time, event_type, cert in events:
-        # Allocate segment hours evenly across active certifications
         if (
-            previous_time is not None
-            and current_time > previous_time
-            and active_certs
+            commit_time.weekday() >= 5
+            and commit_time.hour >= WORKDAY_START_HOUR
         ):
-            segment_hours = (
-                (current_time - previous_time).total_seconds() / 3600
+            hour_bucket = commit_time.replace(
+                minute=0,
+                second=0,
+                microsecond=0
             )
-            split_hours = segment_hours / len(active_certs)
-            for active_cert in active_certs:
-                allocated_hours[active_cert] += split_hours
+            dense_hour_counts[hour_bucket] += 1
 
-        if event_type == 'start':
-            active_certs.add(cert)
-        else:
-            active_certs.discard(cert)
+    # Build windows only for hour buckets with more than one commit
+    windows_by_date = defaultdict(list)
+    for hour_bucket, commit_count in dense_hour_counts.items():
+        if commit_count > 1:
+            date_key = hour_bucket.strftime('%Y-%m-%d')
+            windows_by_date[date_key].append(
+                (hour_bucket, hour_bucket + timedelta(hours=1))
+            )
 
-        previous_time = current_time
+    # Sort windows for deterministic processing
+    for date_key in windows_by_date:
+        windows_by_date[date_key].sort(key=lambda window: window[0])
 
-    return allocated_hours
+    return dict(windows_by_date)
+
+
+def get_allowed_hours_by_day(
+    start_time: datetime,
+    end_time: datetime,
+    weekend_windows: dict[str, list[tuple[datetime, datetime]]]
+) -> dict[str, float]:
+    """Calculate allowed hours by day for a commit-to-commit segment.
+
+    Weekday rule: only hours before 8:00 AM count.
+    Weekend rule: before 8:00 AM counts, plus dense post-8AM hour windows.
+
+    Args:
+        start_time: Start of segment (earlier commit)
+        end_time: End of segment (later commit)
+        weekend_windows: Qualified weekend post-8AM windows by date
+
+    Returns:
+        Dict of YYYY-MM-DD to allowed hours for the segment
+    """
+    if end_time <= start_time:
+        return {}
+
+    hours_by_day = defaultdict(float)
+    cursor = start_time
+
+    while cursor < end_time:
+        day_start = cursor.replace(
+            hour=0,
+            minute=0,
+            second=0,
+            microsecond=0
+        )
+        next_day = day_start + timedelta(days=1)
+        segment_end = min(end_time, next_day)
+        date_key = day_start.strftime('%Y-%m-%d')
+
+        # Always allow pre-8AM hours
+        pre8_end = day_start.replace(
+            hour=WORKDAY_START_HOUR,
+            minute=0,
+            second=0,
+            microsecond=0
+        )
+        hours_by_day[date_key] += get_overlap_hours(
+            cursor,
+            segment_end,
+            day_start,
+            pre8_end
+        )
+
+        # On weekends, also allow dense post-8AM hour windows
+        if day_start.weekday() >= 5:
+            for window_start, window_end in weekend_windows.get(
+                date_key,
+                []
+            ):
+                hours_by_day[date_key] += get_overlap_hours(
+                    cursor,
+                    segment_end,
+                    window_start,
+                    window_end
+                )
+
+        cursor = segment_end
+
+    return {
+        date_key: hours
+        for date_key, hours in hours_by_day.items()
+        if hours > 0
+    }
+
+
+def calculate_daily_category_hours(
+    commits: list[dict]
+) -> dict[str, dict[str, float]]:
+    """Calculate daily hours by category from commit-to-commit deltas.
+
+    Each delta is assigned to the earlier commit's category.
+
+    Args:
+        commits: Commit records sorted oldest-to-newest
+
+    Returns:
+        Dict of date to category hour totals including Total
+    """
+    daily_hours = defaultdict(
+        lambda: {
+            'AI-102': 0.0,
+            'AZ-104': 0.0,
+            'Other': 0.0,
+            'Total': 0.0
+        }
+    )
+
+    if len(commits) < 2:
+        return {}
+
+    weekend_windows = get_weekend_dense_hour_windows(commits)
+
+    # Allocate each commit-to-commit segment to the earlier commit category
+    for index in range(len(commits) - 1):
+        earlier_commit = commits[index]
+        later_commit = commits[index + 1]
+
+        segment_hours_by_day = get_allowed_hours_by_day(
+            earlier_commit['timestamp'],
+            later_commit['timestamp'],
+            weekend_windows
+        )
+
+        if not segment_hours_by_day:
+            continue
+
+        category_weights = get_category_weights(
+            earlier_commit['certifications']
+        )
+
+        for date_key, segment_hours in segment_hours_by_day.items():
+            daily_hours[date_key]['Total'] += segment_hours
+
+            for category, weight in category_weights.items():
+                daily_hours[date_key][category] += segment_hours * weight
+
+    return dict(daily_hours)
 
 
 def get_activity_emoji(hours: float) -> str:
@@ -391,35 +383,25 @@ def calculate_running_totals() -> dict[str, float]:
 
     # Calculate cumulative hours for each certification
     for cert, start_date in CERTIFICATIONS.items():
-        commits = get_commits_by_path(since_date=start_date)
+        commits = get_commit_records(since_date=start_date)
+        daily_hours = calculate_daily_category_hours(commits)
 
-        # Sum hours across all days
+        # Sum certification hours across all days
         total_hours = 0.0
-        for date_commits in commits.values():
-            day_hours = split_overlapping_hours(date_commits)
+        for day_hours in daily_hours.values():
             total_hours += day_hours.get(cert, 0.0)
 
         running_totals[cert] = round(total_hours, 1)
 
     # Calculate cumulative other hours from earliest certification start date
     earliest_start_date = min(CERTIFICATIONS.values())
-    commits = get_commits_by_path(since_date=earliest_start_date)
+    commits = get_commit_records(since_date=earliest_start_date)
+    daily_hours = calculate_daily_category_hours(commits)
     running_other_total = 0.0
 
     # Sum other hours across all days
-    for date_commits in commits.values():
-        # Calculate exam commit window (combined AI-102 + AZ-104)
-        exam_commits = []
-        exam_commits.extend(date_commits.get('AI-102', []))
-        exam_commits.extend(date_commits.get('AZ-104', []))
-        exam_window_hours = calculate_hours_raw(exam_commits)
-
-        # Calculate all commits window
-        all_window_hours = calculate_hours_raw(date_commits.get('__all__', []))
-
-        # Other = time beyond exam window
-        other_hours = max(0.0, all_window_hours - exam_window_hours)
-        running_other_total += other_hours
+    for day_hours in daily_hours.values():
+        running_other_total += day_hours.get('Other', 0.0)
 
     running_totals['Other'] = round(running_other_total, 1)
 
@@ -427,13 +409,13 @@ def calculate_running_totals() -> dict[str, float]:
 
 
 def generate_commit_table(
-    commits_by_date_cert: dict,
+    daily_hours: dict[str, dict[str, float]],
     days: int = 7
 ) -> str:
     """Generate markdown table for commit statistics.
 
     Args:
-        commits_by_date_cert: Commit data grouped by date and certification
+        daily_hours: Daily category hours produced from commit deltas
         days: Number of days to include in table (default: 7)
 
     Returns:
@@ -460,27 +442,11 @@ def generate_commit_table(
 
     # Process each day
     for date in dates:
-        date_commits = commits_by_date_cert.get(date, {})
-        split_hours = split_overlapping_hours(date_commits)
-
-        # Calculate exam commit window (combined AI-102 + AZ-104)
-        exam_commits = []
-        exam_commits.extend(date_commits.get('AI-102', []))
-        exam_commits.extend(date_commits.get('AZ-104', []))
-        exam_window_hours = calculate_hours_raw(exam_commits)
-
-        # Extract hours for each certification from the split
-        ai102_raw_hours = split_hours.get('AI-102', 0.0)
-        az104_raw_hours = split_hours.get('AZ-104', 0.0)
-
-        # Calculate all commits window
-        all_window_hours = calculate_hours_raw(date_commits.get('__all__', []))
-
-        # Other = time beyond exam window (if non-exam commits extend it)
-        other_raw_hours = max(0.0, all_window_hours - exam_window_hours)
-
-        # Total is the larger of exam window or all window
-        total_raw_hours = max(exam_window_hours, all_window_hours)
+        day_hours = daily_hours.get(date, {})
+        ai102_raw_hours = day_hours.get('AI-102', 0.0)
+        az104_raw_hours = day_hours.get('AZ-104', 0.0)
+        other_raw_hours = day_hours.get('Other', 0.0)
+        total_raw_hours = day_hours.get('Total', 0.0)
 
         ai102_hours = round(ai102_raw_hours, 1)
         az104_hours = round(az104_raw_hours, 1)
@@ -548,7 +514,8 @@ def generate_commit_table(
         "🟣 High (> 2hrs)*\n"
     )
     table += (
-        "\n*Total = base window to 8:00 AM plus qualifying weekend post-8:00 AM hourly blocks*  \n"
+        "\n*Total = sum of commit-to-commit deltas where the earlier commit determines category*  \n"
+        "*Time rules = pre-8:00 AM hours plus qualifying weekend post-8:00 AM hourly blocks*  \n"
         "*Other = Lab workflow and automation design, content structure and development*  \n"
     )
 

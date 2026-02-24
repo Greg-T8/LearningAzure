@@ -50,6 +50,12 @@ Once both inputs are available, proceed with question extraction (R-039).
 
 ---
 
+## CRITICAL — Silent Processing Until R-046
+
+> **No chat output is permitted during R-039 through R-045.** All extraction, file writes, metadata derivation, and validation happen silently in working memory and via tool calls. The **only** user-facing output for the entire intake cycle is the single canonical review block defined in R-046. Any intermediate rendering of the extracted question or metadata to chat — even as a "preview" — violates this directive and causes duplicate output.
+
+---
+
 ## R-039: Exam Question Extraction
 
 This agent is responsible for extracting exam question content from screenshot images or text and formatting it as structured markdown (title, prompt, answer only). This section embeds the complete extraction rules formerly maintained in the `lab-question-extractor` skill.
@@ -76,13 +82,15 @@ Your **only** job is to reproduce the question exactly as stated with full fidel
 
 ### Output
 
-Return **only**:
+Produce **only** the following components (held in working memory — **do not render to chat yet**):
 
 - Title
 - Prompt
 - Answer
 
 Do **not** include screenshot blocks, explanation placeholders, or related lab lines.
+
+> **Reminder:** This output is for internal processing only. It will be written to a file (R-040) and shown to the user exactly once in R-046. Do not render it to chat at this stage.
 
 ---
 
@@ -97,7 +105,7 @@ Do **not** include screenshot blocks, explanation placeholders, or related lab l
    - Case Study (Solution Evaluation)
    - Drag-and-Drop Matching
 3. Format Title, Prompt, and Answer.
-4. Return markdown output directly.
+4. Hold the formatted markdown in working memory (do **not** render to chat — output is deferred to R-046).
 
 ---
 
@@ -371,14 +379,19 @@ After extracting the exam question per R-039, this agent derives a filename, sav
 1. **Derive filename** — From the extracted `### <Title>` heading:
    a. Convert to lowercase and replace spaces with hyphens.
    b. Remove filler words: `a`, `an`, `the`, `using`, `for`, `to`, `with`, `and`, `or`.
+   b1. Remove deployment-method terms from the slug candidate: `terraform`, `bicep`, `scripted`, `manual`, `powershell`, `ps`, `bash`, `cli`, `arm`, `json`, `yaml`, `yml`. These terms must never appear in the derived slug.
    c. Remove all special characters (punctuation, parentheses, etc.).
    d. Keep all meaningful nouns and verbs.
    e. **MANDATORY: 2–4 word range** — The final slug must contain **between 2 and 4 hyphen-separated words** (inclusive). If the result exceeds 4 words after applying steps a–d, condense or drop the least essential words to reach 4 words or fewer. If the result is fewer than 2 words, expand by retaining the next most meaningful word from the title.
-   f. Result becomes the filename: `.assets/temp/<derived-slug>.md`
+   f. **MANDATORY: 23–36 character range** — The final slug must be **between 23 and 36 characters** (inclusive), counting hyphens.
+   g. **Abbreviate if needed** — If the slug exceeds 36 characters, abbreviate least-critical words while preserving core Azure meaning (examples: `configuration` -> `config`, `intelligence` -> `intel`, `management` -> `mgmt`, `document` -> `doc`). If the slug is under 23 characters, retain the next most meaningful word from the title before abbreviating anything else.
+   h. Result becomes the filename: `.assets/temp/<derived-slug>.md`
 2. **Save to file** — Use `createFile` to write the formatted question markdown to `.assets/temp/<derived-slug>.md`.
 3. **Validate** — Use `readFile` to confirm the file was written correctly and the `### <Title>` heading is present.
 
 All downstream processing (R-041 onwards) uses the content from this file.
+
+> **No chat output.** File creation and validation are silent tool operations. Do not render the extracted question or metadata to the user at this stage — that happens once in R-046.
 
 ---
 
@@ -467,9 +480,12 @@ Derive the kebab-case slug directly from the `### <Title>` heading in the exam q
 4. **Nominalize action verbs** — Convert remaining action verbs to noun forms (e.g., `Encrypt` → `encryption`, `Configure` → `config`, `Assign` → `assignment`, `Enable` → `versioning`).
 5. Convert to lowercase and replace spaces with hyphens.
 6. Remove filler words: `a`, `an`, `the`, `using`, `for`, `to`, `with`, `and`, `or`.
+6a. Remove deployment-method terms: `terraform`, `bicep`, `scripted`, `manual`, `powershell`, `ps`, `bash`, `cli`, `arm`, `json`, `yaml`, `yml`. Deployment type must not be encoded in `Topic`.
 7. Remove all special characters (punctuation, parentheses, etc.).
 8. Keep all meaningful nouns.
 9. **MANDATORY: 4-word maximum** — The final slug must contain **no more than 4 hyphen-separated words**. If the result exceeds 4 words after applying steps 1–8, condense or drop the least essential words to reach 4 words or fewer.
+10. **MANDATORY: 23–36 character range** — The final slug must be **between 23 and 36 characters** (inclusive), counting hyphens.
+11. **Abbreviate if needed** — If the slug exceeds 36 characters, abbreviate least-critical words while preserving core Azure meaning (examples: `configuration` -> `config`, `intelligence` -> `intel`, `management` -> `mgmt`, `document` -> `doc`). If the slug is under 23 characters, retain the next most meaningful word from the title before abbreviating anything else.
 
 Examples:
 
@@ -537,6 +553,8 @@ This makes the input file the **cumulative artifact** for the pipeline. Downstre
 
 > **Why this matters:** Downstream agents (Lab-Design, Lab-Scaffolder) read metadata from this file. If you skip this step, the entire pipeline stalls.
 
+> **No chat output.** The metadata append and verification are silent tool operations. Do not render the metadata block to the user at this stage — it will be shown exactly once in R-046.
+
 ---
 
 ## R-044: Post-Extraction Validation Gate
@@ -549,7 +567,8 @@ After extracting metadata per R-041 and **before** returning output, run this va
 4. **Completeness check** — Confirm all five metadata fields are populated (including Deployment Method from user input).
 5. **Field-level checks:**
    - [ ] `Exam` matches one of: `AI-102`, `AZ-104`, `AI-900`
-   - [ ] `Topic` is kebab-case, 2–4 words, no special characters
+   - [ ] `Topic` is kebab-case, 2–4 words, 23–36 characters, no special characters
+   - [ ] `Topic` does not contain deployment-method terms (`terraform`, `bicep`, `powershell`, etc.)
    - [ ] `Key Services` contains at least one service
    - [ ] `Key Services` entries use official Azure naming
    - [ ] `Deployment Method` matches one of: `Terraform`, `Bicep`, `Scripted`, `Manual`
@@ -574,10 +593,12 @@ Intake is complete when **all** of the following are true. The file-write criter
 - [ ] Field order matches R-043 (Exam, Domain, Topic, Key Services, Deployment Method)
 - [ ] All values use correct capitalization (Title Case, except Topic)
 - [ ] Topic was derived from the exam question title heading per R-041
+- [ ] Topic length is between 23 and 36 characters (inclusive)
+- [ ] Topic does not contain deployment-method terms (`terraform`, `bicep`, `powershell`, etc.)
 - [ ] Deployment method was captured from the user's input (R-042)
 - [ ] Exam question was extracted from screenshot/text per R-039 and saved to file per R-040
 - [ ] Output matches R-043 schema
-- [ ] R-044 validation gate passed (all 6 checks)
+- [ ] R-044 validation gate passed (all 7 checks)
 
 ---
 
@@ -591,7 +612,23 @@ After R-045 acceptance criteria are met:
 4. Wait for the user to confirm the output is correct.
 5. Once the user confirms, hand off to the **Lab-Designer** agent, passing the temp file path as context.
 
-> **Critical:** You **must** render the extracted question and metadata content directly in the chat response. Do **not** simply refer the user to the file — always show the content inline for review.
+### Single-Render Rule (No Duplicate Chat Output)
+
+> **HARD RULE — ZERO TOLERANCE FOR DUPLICATION.** The extracted question and metadata must appear in chat **exactly once** per intake cycle. Any second rendering — whether a "preview", "summary", intermediate progress update, or post-save confirmation that repeats the content — is a violation. There are no exceptions.
+
+To enforce this:
+
+1. **R-039 through R-045 are completely silent.** No extracted question text, no metadata fields, no partial previews may appear in chat during these steps. All work happens via tool calls and working memory only.
+2. **R-046 is the single render point.** The first and only time the user sees the extracted question and metadata in chat is the R-046 review block below.
+3. Do not send a pre-save preview and then a post-save replay of the same content.
+4. After rendering the R-046 review block, any follow-up message before user confirmation must be **status-only** (for example: `File write verified.`) and must **not** reprint the extracted question or metadata.
+5. If the user asks for changes, re-render **once** after applying edits, replacing the prior version rather than echoing the same content again.
+
+> **Critical:** You **must** render the extracted question and metadata content directly in the chat response as part of this R-046 block. Do **not** simply refer the user to the file — always show the content inline for review.
+
+> **Critical:** The inline review content is a single canonical output block for that intake cycle. Do not duplicate it in additional confirmation messages.
+
+> **Common mistake — early rendering:** The most frequent duplication failure is rendering the extracted question or metadata to chat during R-039, R-040, or R-043 (before reaching R-046). This produces a "preview" that then gets repeated when R-046 emits its canonical review block. The fix: emit **nothing** to chat until you reach this point.
 
 State:
 

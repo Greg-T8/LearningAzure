@@ -16,6 +16,13 @@ Create a fully working lab from an exam scenario using the **most appropriate de
 
 Do not invoke any custom subagents defined in the '.github/agents/' directory.
 
+Active exam scope for lab placement is strictly limited to:
+
+* `AZ-104`
+* `AI-102`
+
+`AI-900` is not an allowed destination for new labs. If a scenario originates from AI-900 content, map it to the closest valid active exam objective (`AZ-104` or `AI-102`) and document that mapping in the README scenario analysis.
+
 ---
 
 ## 1. Image Input Handling
@@ -141,7 +148,7 @@ README must contain:
 9. Cleanup (brief)
 10. Scenario Analysis (correct + incorrect reasoning)
 11. Key Learning Points (5–8)
-12. Related `<EXAM>` Objectives
+12. Related `<EXAM>` Objectives (`AZ-104` or `AI-102` only)
 13. Additional Resources
 14. Related Labs (0–2)
 
@@ -184,7 +191,7 @@ Load the skill and apply every applicable rule when generating a Mermaid diagram
 Create under:
 
 ```
-<EXAM>/hands-on-labs/<domain>/lab-<topic>/
+<EXAM>/hands-on-labs/<domain>/lab-<topic>/  where `<EXAM>` ∈ {`AZ-104`, `AI-102`}
 ```
 
 ### IaaC
@@ -401,9 +408,9 @@ Respond with:
 
 ## 14. Invocation Examples
 
-* Create a hands-on lab for this `<EXAM>` question: …
-* Create a Terraform hands-on lab for this `<EXAM>` question: …
-* Create a scripted hands-on lab for this `<EXAM>` question: …
-* Create a Bicep hands-on lab for this `<EXAM>` question: …
+* Create a hands-on lab for this `AZ-104` question: …
+* Create a hands-on lab for this `AI-102` question: …
+* Create a Terraform hands-on lab for this `AZ-104` question: …
+* Create a Bicep hands-on lab for this `AI-102` question: …
 
 ---
