@@ -150,7 +150,7 @@ Get-AzResource -ResourceGroupName $rgName |
 ```
 
 <!-- Screenshot -->
-<img src='.img/setup_resources.png' width=700>
+<img src='.img/2026-02-24-05-13-34.png' width=600>
 
 ---
 
