@@ -1,0 +1,205 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
+  "languageVersion": "2.0",
+  "contentVersion": "1.0.0.0",
+  "metadata": {
+    "_generator": {
+      "name": "bicep",
+      "version": "0.40.2.10011",
+      "templateHash": "15115626109400955532"
+    }
+  },
+  "parameters": {
+    "domain": {
+      "type": "string",
+      "defaultValue": "ai-services",
+      "allowedValues": [
+        "ai-services",
+        "agentic",
+        "computer-vision",
+        "generative-ai",
+        "knowledge-mining",
+        "nlp"
+      ],
+      "metadata": {
+        "description": "AI-102 exam domain"
+      }
+    },
+    "topic": {
+      "type": "string",
+      "defaultValue": "doc-intel-invoice",
+      "metadata": {
+        "description": "Lab topic in kebab-case"
+      }
+    },
+    "location": {
+      "type": "string",
+      "defaultValue": "eastus",
+      "metadata": {
+        "description": "Azure region for resources"
+      }
+    },
+    "owner": {
+      "type": "string",
+      "defaultValue": "Greg Tate",
+      "metadata": {
+        "description": "Lab owner for tagging"
+      }
+    },
+    "dateCreated": {
+      "type": "string",
+      "metadata": {
+        "description": "Static date for DateCreated tag (YYYY-MM-DD)"
+      }
+    }
+  },
+  "variables": {
+    "resourceGroupName": "[format('ai102-{0}-{1}-bicep', parameters('domain'), parameters('topic'))]",
+    "commonTags": {
+      "Environment": "Lab",
+      "Project": "AI-102",
+      "Domain": "AI Services",
+      "Purpose": "Document Intelligence Invoice",
+      "Owner": "[parameters('owner')]",
+      "DateCreated": "[parameters('dateCreated')]",
+      "DeploymentMethod": "Bicep"
+    }
+  },
+  "resources": {
+    "rg": {
+      "type": "Microsoft.Resources/resourceGroups",
+      "apiVersion": "2024-03-01",
+      "name": "[variables('resourceGroupName')]",
+      "location": "[parameters('location')]",
+      "tags": "[variables('commonTags')]"
+    },
+    "documentIntelligence": {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2025-04-01",
+      "name": "[format('documentIntelligence-{0}', uniqueString('documentIntelligence', deployment().name))]",
+      "resourceGroup": "[variables('resourceGroupName')]",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {
+          "location": {
+            "value": "[parameters('location')]"
+          },
+          "tags": {
+            "value": "[variables('commonTags')]"
+          }
+        },
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.40.2.10011",
+              "templateHash": "18225347143488694587"
+            }
+          },
+          "parameters": {
+            "location": {
+              "type": "string",
+              "metadata": {
+                "description": "Azure region for resources"
+              }
+            },
+            "tags": {
+              "type": "object",
+              "metadata": {
+                "description": "Resource tags"
+              }
+            }
+          },
+          "variables": {
+            "accountName": "[format('di-invoice-{0}', uniqueString(resourceGroup().id))]"
+          },
+          "resources": [
+            {
+              "type": "Microsoft.CognitiveServices/accounts",
+              "apiVersion": "2024-10-01",
+              "name": "[variables('accountName')]",
+              "location": "[parameters('location')]",
+              "tags": "[parameters('tags')]",
+              "kind": "FormRecognizer",
+              "sku": {
+                "name": "F0"
+              },
+              "properties": {
+                "publicNetworkAccess": "Enabled",
+                "customSubDomainName": "[variables('accountName')]"
+              }
+            }
+          ],
+          "outputs": {
+            "accountName": {
+              "type": "string",
+              "metadata": {
+                "description": "Document Intelligence account name"
+              },
+              "value": "[variables('accountName')]"
+            },
+            "endpoint": {
+              "type": "string",
+              "metadata": {
+                "description": "Document Intelligence endpoint"
+              },
+              "value": "[reference(resourceId('Microsoft.CognitiveServices/accounts', variables('accountName')), '2024-10-01').endpoint]"
+            },
+            "resourceId": {
+              "type": "string",
+              "metadata": {
+                "description": "Document Intelligence resource ID"
+              },
+              "value": "[resourceId('Microsoft.CognitiveServices/accounts', variables('accountName'))]"
+            }
+          }
+        }
+      },
+      "dependsOn": [
+        "rg"
+      ]
+    }
+  },
+  "outputs": {
+    "resourceGroupName": {
+      "type": "string",
+      "metadata": {
+        "description": "Resource group name"
+      },
+      "value": "[variables('resourceGroupName')]"
+    },
+    "resourceGroupId": {
+      "type": "string",
+      "metadata": {
+        "description": "Resource group ID"
+      },
+      "value": "[subscriptionResourceId('Microsoft.Resources/resourceGroups', variables('resourceGroupName'))]"
+    },
+    "location": {
+      "type": "string",
+      "metadata": {
+        "description": "Location"
+      },
+      "value": "[reference('rg', '2024-03-01', 'full').location]"
+    },
+    "documentIntelligenceName": {
+      "type": "string",
+      "metadata": {
+        "description": "Document Intelligence account name"
+      },
+      "value": "[reference('documentIntelligence').outputs.accountName.value]"
+    },
+    "documentIntelligenceEndpoint": {
+      "type": "string",
+      "metadata": {
+        "description": "Document Intelligence endpoint"
+      },
+      "value": "[reference('documentIntelligence').outputs.endpoint.value]"
+    }
+  }
+}
