@@ -4,29 +4,40 @@
 #              certification (AI-102, AZ-104) for the last 7 days.
 #              Hours calculated as time between first and last commit per day.
 #              Overlapping activity windows are split evenly.
+# Context: LearningAzure repository - commit statistics automation
 # Author: Greg Tate
 # -------------------------------------------------------------------------
 
+#region IMPORTS
+import argparse
 import re
 import subprocess
+import sys
 from collections import defaultdict
 from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
+#endregion
 
 
+#region CONSTANTS
 CERTIFICATIONS = {
     'AI-102': '2026-02-09',
-    'AZ-104': '2026-01-14'
+    'AZ-104': '2026-01-14',
 }
 
 WORKDAY_START_HOUR = 8
+#endregion
 
 
-def main() -> None:
+#region MAIN WORKFLOW
+def main() -> int:
     """Main function that orchestrates commit statistics update.
 
     Retrieves recent commits, generates activity table, and updates README.md.
     """
+    args = parse_arguments()
+
+    # Show progress status in the console.
     print("📊 Generating commit statistics...")
 
     # Retrieve commits from the last 7 days
@@ -35,21 +46,52 @@ def main() -> None:
     # Generate markdown table from commit data
     table = generate_commit_table(commits, days=7)
 
+    # Display the generated table output.
     print("\nGenerated table:")
     print(table)
+
+    # Exit after displaying generated table in console-only mode
+    if args.console_only:
+        print("\nℹ️ Console-only mode enabled; README.md was not updated.")
+        return 0
 
     # Update README with new statistics
     success = update_readme(table)
 
+    # Return appropriate process status code.
     if success:
         print("\n✅ Commit statistics updated successfully!")
+        return 0
     else:
         print("\n❌ Failed to update README.md")
-        exit(1)
+        return 1
+    #endregion
 
 
 # Helper Functions
 # -------------------------------------------------------------------------
+
+#region HELPER FUNCTIONS
+
+def parse_arguments() -> argparse.Namespace:
+    """Parse command-line arguments for commit statistics generation.
+
+    Returns:
+        Parsed command-line arguments
+    """
+    parser = argparse.ArgumentParser(
+        description=(
+            "Generate commit statistics for LearningAzure and optionally "
+            "update README.md."
+        )
+    )
+    parser.add_argument(
+        '--console-only',
+        action='store_true',
+        help='Print generated commit statistics to console without updating README.md.',
+    )
+    return parser.parse_args()
+
 
 def get_commits_by_path(
     days: int = 7,
@@ -82,6 +124,7 @@ def get_commits_by_path(
     # Execute git log command
     result = subprocess.run(cmd, capture_output=True, text=True)
 
+    # Exit early if git command failed.
     if result.returncode != 0:
         print(f"Error running git log: {result.stderr}")
         return {}
@@ -94,6 +137,7 @@ def get_commits_by_path(
     current_date = None
     current_message = None
 
+    # Iterate through git log output lines to map commits to certifications.
     for line in lines:
         # Parse commit metadata when line contains pipe separator
         if '|' in line:
@@ -338,6 +382,7 @@ def split_overlapping_hours(
     active_certs = set()
     previous_time = None
 
+    # Walk through sorted events and split overlapping time segments.
     for current_time, event_type, cert in events:
         # Allocate segment hours evenly across active certifications
         if (
@@ -606,11 +651,14 @@ def update_readme(new_table: str) -> bool:
 
     print("✅ README.md updated successfully")
     return True
+#endregion
 
 
 # -------------------------------------------------------------------------
 # Script Entry Point
 # -------------------------------------------------------------------------
 
+#region SCRIPT ENTRY POINT
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
+#endregion

@@ -86,14 +86,33 @@ The workflow requires `contents: write` permission to update the README file. Th
 
 ## 🛠️ Testing Locally
 
-You can test the script locally before pushing:
+You can run the script locally in two modes:
+
+### Console-only mode (preview without writing)
+
+Use `--console-only` to print the generated statistics table to the console without modifying `README.md`. This is useful for validating numbers before committing:
+
+```bash
+# From the repository root
+python3 .github/workflows/update-commit-stats.py --console-only
+```
+
+### Full update mode
+
+Run without arguments to update your local `README.md` with current commit statistics:
 
 ```bash
 # From the repository root
 python3 .github/workflows/update-commit-stats.py
 ```
 
-This will update your local README.md with current commit statistics.
+### CLI options
+
+| Option | Description |
+|--------|-------------|
+| *(none)* | Generate stats and update `README.md` |
+| `--console-only` | Print stats to console; skip `README.md` update |
+| `--help` | Display usage information |
 
 ## 📝 Notes
 
@@ -110,4 +129,4 @@ This will update your local README.md with current commit statistics.
 
 ---
 
-*Last updated: February 9, 2026*
+*Last updated: February 24, 2026*
