@@ -183,6 +183,8 @@ $vmss.VirtualMachineProfile.StorageProfile.DataDisks |
 
 <!-- Screenshot -->
 
+<img src='.img/2026-02-24-03-27-19.png' width=600>
+
 <img src='.img/2026-02-23-04-24-05.png' width=600>
 
 <img src='.img/2026-02-23-04-22-47.png' width=600>
@@ -190,6 +192,8 @@ $vmss.VirtualMachineProfile.StorageProfile.DataDisks |
 <img src='.img/2026-02-23-04-23-32.png' width=600>
 
 <img src='.img/2026-02-23-04-29-54.png' width=900>
+
+<img src='.img/2026-02-24-03-28-12.png' width=600>
 
 ### Step 3: Verify Rolling Upgrade Policy Settings
 
