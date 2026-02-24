@@ -336,7 +336,7 @@ else {
 ```
 
 <!-- Screenshot -->
-<img src='.img/step4_auto_containers.png' width=700>
+<img src='.img/2026-02-24-05-32-29.png' width=600>
 
 > **Conclusion:** Answer D is **wrong**. The agent service automatically provisions containers following the pattern `<workspaceId>-agents-blobstore`. There is no requirement to manually create an `uploaded-files` container.
 
