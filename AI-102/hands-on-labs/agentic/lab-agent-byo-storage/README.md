@@ -177,7 +177,7 @@ Get-AzRoleAssignment -Scope $storageId -PrincipalId $principalId |
 ```
 
 <!-- Screenshot -->
-<img src='.img/step1a_role_assignment.png' width=700>
+<img src='.img/2026-02-24-05-19-21.png' width=600>
 
 **1b. Perform a full data plane roundtrip (create → upload → read → list):**
 
@@ -210,7 +210,7 @@ Get-AzStorageBlob -Container "test-agent-blobstore" -Context $ctx |
 ```
 
 <!-- Screenshot -->
-<img src='.img/step1b_data_plane_roundtrip.png' width=700>
+<img src='.img/2026-02-24-05-21-43.png' width=600>
 
 All operations succeed because `Storage Blob Data Owner` grants full data plane access. Without this role, every blob operation fails with `AuthorizationPermissionMismatch`, which is exactly the file upload failure described in the exam scenario.
 
@@ -251,7 +251,7 @@ $dataOwner.DataActions | ForEach-Object { Write-Host "  $_" }
 ```
 
 <!-- Screenshot -->
-<img src='.img/step2a_role_comparison.png' width=700>
+<img src='.img/2026-02-24-05-26-41.png' width=600>
 
 **2b. Demonstrate that management plane operations work but data plane operations require a different role:**
 
@@ -269,7 +269,7 @@ Write-Host "Blob Endpoint: $($storage.PrimaryEndpoints.Blob)"
 ```
 
 <!-- Screenshot -->
-<img src='.img/step2b_management_plane.png' width=700>
+<img src='.img/2026-02-24-05-27-21.png' width=600>
 
 The `DataActions` list for `Storage Account Contributor` is empty. It cannot perform any blob operations — no reads, no writes, no deletes — regardless of whether it is scoped to the subscription or the storage account.
 
