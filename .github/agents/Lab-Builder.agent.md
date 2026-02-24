@@ -5,9 +5,9 @@ model: 'GPT-5.3-Codex'
 user-invokable: false
 tools: ["readFile", "listDirectory", "fileSearch", "textSearch", "createFile", "createDirectory", "editFiles", "runInTerminal", "getTerminalOutput", "problems", "fetch", "microsoftdocs/*"]
 handoffs:
-  - label: Return to Orchestrator
-    agent: Lab-Orchestrator
-    prompt: Build complete. Proceed to Review phase.
+  - label: Lab Reviewer
+    agent: Lab-Reviewer
+    prompt: "Build complete. Handing off to Lab-Reviewer for Phase 4 governance review."
     send: false
 ---
 

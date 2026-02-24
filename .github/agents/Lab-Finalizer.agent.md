@@ -4,11 +4,7 @@ description: Phase 6 agent — assembles and presents the final lab deliverables
 model: 'Claude Haiku 4.5'
 user-invokable: false
 tools: ["readFile", "listDirectory", "fileSearch"]
-handoffs:
-  - label: Return to Orchestrator
-    agent: Lab-Orchestrator
-    prompt: Lab finalized and ready for delivery.
-    send: false
+handoffs: []
 ---
 
 # Lab Finalizer — Phase 6

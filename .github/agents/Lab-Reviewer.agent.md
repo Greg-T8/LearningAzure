@@ -6,12 +6,12 @@ user-invokable: false
 tools: ["readFile", "listDirectory", "fileSearch", "textSearch", "codebase", "problems"]
 handoffs:
   - label: Finalize Lab
-    agent: Lab-Orchestrator
-    prompt: The review passed. Proceed to finalize the lab.
+    agent: Lab-Finalizer
+    prompt: "Review passed. Handing off to Lab-Finalizer for Phase 6 delivery."
     send: false
   - label: Fix & Resubmit
-    agent: Lab-Orchestrator
-    prompt: The review found violations. Apply fixes and resubmit.
+    agent: Lab-Remediator
+    prompt: "Review found violations. Handing off to Lab-Remediator for Phase 5 fixes."
     send: false
 ---
 
