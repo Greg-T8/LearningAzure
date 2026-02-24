@@ -3,7 +3,7 @@ name: Lab-Designer
 description: Phase 2 agent — designs lab architecture, generates Mermaid diagram, applies naming, plans modules, writes README.
 model: 'GPT-4o'
 user-invokable: true
-tools: ["readFile", "listDirectory", "fileSearch", "textSearch", "codebase", "fetch", "createFile", "createDirectory", "editFiles", "microsoftdocs/*", "vscode.mermaid-chat-features/renderMermaidDiagram"]
+tools: [vscode/askQuestions, read/readFile, edit/createDirectory, edit/createFile, edit/editFiles, search/codebase, search/fileSearch, search/listDirectory, search/textSearch, web/fetch, vscode.mermaid-chat-features/renderMermaidDiagram]
 handoffs:
   - label: Lab Builder
     agent: Lab-Builder
