@@ -19,8 +19,8 @@ Python script that:
 
 1. Analyzes git commit history for the last 7 days
 2. Groups commits by certification (AI-102, AZ-104)
-3. Calculates hours of activity as commit-to-commit deltas
-  The earlier commit dictates the time category (AI-102, AZ-104, or Other).
+3. Calculates hours of activity (time between first and last commit per day)
+  Certification overlaps on the same day are split evenly.
   Weekend hours after 8:00 AM count only when 2+ commits occur in the same hour.
 
 4. Calculates running totals since each certification's start date:
@@ -36,8 +36,8 @@ Python script that:
 1. The workflow checks out the repository with full git history
 2. Python script runs to analyze commits:
   Looks at the last 7 days of commits, categorizes files by path
-  (AI-102/, AZ-104/), computes commit-to-commit time deltas,
-  and assigns each delta based on the earlier commit category.
+  (AI-102/, AZ-104/), tracks timestamps per day, calculates hours,
+  and splits overlapping activity windows evenly.
 
 3. Generates a markdown table with:
    - Date (formatted as "Day, Mon DD")
@@ -66,7 +66,7 @@ Python script that:
 
 *Activity Levels: 🟡 Low (< 1hr) | 🟢 Medium (1-2hrs) | 🟣 High (> 2hrs)*
 
-*Hours = commit-to-commit deltas assigned by earlier commit category, with 8:00 AM and weekend dense-hour rules applied*
+*Hours = time between first and last commit window (up to 8:00 AM) plus weekend post-8:00 AM hours with 2+ commits in the same hour*
 *Last updated: January 27, 2026 at 14:09 CST*
 ```
 
@@ -98,7 +98,7 @@ This will update your local README.md with current commit statistics.
 ## 📝 Notes
 
 - Activity is measured in hours from commit patterns
-- Each commit-to-commit delta is assigned by the earlier commit's category
+- Overlapping certification timeframes are split evenly across active certifications
 - **Weekdays (Mon-Fri)**: Last commit time is capped at 8:00 AM Central (work start time)
 - **Weekends (after 8:00 AM)**: Each hour counts only if that hour has more than one commit
 - Single commits still count as 0h unless they are part of a qualifying weekend hour bucket
