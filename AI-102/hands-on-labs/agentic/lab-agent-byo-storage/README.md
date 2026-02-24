@@ -152,6 +152,15 @@ Get-AzResource -ResourceGroupName $rgName |
 <!-- Screenshot -->
 <img src='.img/2026-02-24-05-13-34.png' width=600>
 
+```powershell
+az ad sp show `
+  --id $principalId `
+  --query "{Name:displayName, AppId:appId, Type:servicePrincipalType}" ` 
+  -o table
+```
+
+<img src='.img/2026-02-24-05-17-20.png' width=600>
+
 ---
 
 ### 1. Test Answer A (Correct) — Data Plane Access Requires Storage Blob Data Owner
