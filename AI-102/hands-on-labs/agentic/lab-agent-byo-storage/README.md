@@ -373,7 +373,7 @@ Get-AzStorageContainer -Context $goodCtx |
 ```
 
 <!-- Screenshot -->
-<img src='.img/step5_connection_string.png' width=700>
+<img src='.img/2026-02-24-05-36-13.png' width=600>
 
 When the capability host references the wrong storage account (or a malformed connection), the agent service cannot resolve the endpoint. All file operations — uploads, reads, container creation — fail immediately.
 
