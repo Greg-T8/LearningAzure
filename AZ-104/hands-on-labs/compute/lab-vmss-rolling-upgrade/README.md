@@ -226,7 +226,7 @@ Update-AzVmss `
 ```
 
 <!-- Screenshot -->
-<img src='.img/2026-02-23-04-32-53.png' width=600>
+<img src='.img/2026-02-24-03-29-25.png' width=600>
 
 ### Step 5: Monitor Rolling Upgrade Progress
 
