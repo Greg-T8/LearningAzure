@@ -232,8 +232,40 @@ Which two configurations should you identify? Each correct answer presents a com
 
 </details>
 
-<details open>
+<details>
 <summary>💡 Click to expand explanation</summary>
+
+**Why the selected answers are correct**
+
+**The project-managed identity lacks the Storage Blob Data Owner role on the `<workspaceid>-agents-blobstore` container — Yes**
+
+When using your own storage account with Azure AI Agent Service, the project's managed identity must have the **Storage Blob Data Owner** role scoped specifically to the agents blob container. Without this role, the agent service cannot read or write blob data during file uploads, causing the operation to fail. Assigning the role at the wrong scope or assigning an insufficient role will produce the same failure.
+
+**The project's capability host was set with an incorrect connection string to the Azure Storage resource — Yes**
+
+The capability host configuration binds the Azure AI project to the specific storage account used for agent operations. If the connection string in the capability host is incorrect or points to the wrong storage account, the agent service cannot locate or access the storage resource. This is a direct misconfiguration that causes upload failures regardless of whether the storage account itself is healthy.
+
+**Why the other options are incorrect**
+
+**The Azure AI Search resource has an incorrect connection string to Azure Storage**
+Azure AI Search is used for indexing and retrieval, not for managing file upload operations in Azure AI Agent Service. A misconfigured Azure AI Search connection string would affect search-based retrieval, not blob file uploads directly.
+
+**The project-managed identity is assigned the Storage Account Contributor role at the subscription level instead of the storage account**
+Storage Account Contributor is a management-plane role. It grants the ability to manage the storage account configuration, not to read or write blob data. Even correctly scoped, this role does not grant the data-plane permissions required for file uploads. The correct role is Storage Blob Data Owner, scoped to the container.
+
+**The Azure Storage account is missing a manually created container named `uploaded-files`**
+Azure AI Agent Service automatically creates and manages the required containers in the connected storage account. There is no requirement to manually pre-create a container with a specific name. This is not a valid cause of the failure.
+
+**Key takeaway**
+
+When configuring Azure AI Agent Service with bring-your-own storage, two things must be correct: the capability host must reference the storage account using a valid connection string, and the project's managed identity must hold the Storage Blob Data Owner role scoped to the agents blob container. Management-plane roles and auto-created containers are not factors in upload failures.
+
+**References**
+
+* [Standard Agent Setup](https://learn.microsoft.com/en-us/azure/ai-foundry/agents/concepts/standard-agent-setup?view=foundry-classic)  
+* [Use Your Own Resources](https://learn.microsoft.com/en-us/azure/ai-foundry/agents/how-to/use-your-own-resources?view=foundry-classic)  
+* [Assign Azure Role Data Access](https://learn.microsoft.com/en-us/azure/storage/blobs/assign-azure-role-data-access?tabs=portal)  
+* [Built-in Roles for Storage](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles/storage)
 
 </details>
 
@@ -243,3 +275,31 @@ Which two configurations should you identify? Each correct answer presents a com
 * [lab-agent-storage-config](../hands-on-labs/ai-services/lab-agent-storage-config/README.md)
 
 ---
+
+### Automating Invoice Processing with Azure AI Document Intelligence
+
+Your company wants to automate the processing of incoming invoices using Azure AI Document Intelligence.  
+
+You test the prebuilt invoice model of Azure AI Document Intelligence with a sample invoice.  
+
+For each of the following statements, select Yes if the statement is true. Otherwise, select No.  
+
+| Statement | Yes | No |
+|-----------|-----|----|
+| The results of the invoice analysis can be downloaded in XML format. | ☐ | ☐ |
+| You can access prebuilt invoice model from Document Intelligence Studio. | ☐ | ☐ |
+| You can access prebuilt invoice model from C# Software Development Kit (SDK). | ☐ | ☐ |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src="c:\\Users\\gregt\\LocalCode\\LearningAzure\\AI-102\\practice-exams\\.img\\2026-02-24-05-49-36.png" width=600>
+
+</details>
+
+<details open>
+<summary>💡 Click to expand explanation</summary>
+
+</details>
+
+▶ Related Lab: []()
