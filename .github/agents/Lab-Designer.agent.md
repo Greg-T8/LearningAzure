@@ -55,10 +55,10 @@ Procedure defined in `architecture-design` skill R-111.
 
 ### MANDATORY: Render Mermaid Diagram in Chat
 
-When a Mermaid diagram is generated (i.e., the lab meets the R-013 criteria of 2+ interconnected resources):
+When a Mermaid diagram is generated (i.e., the lab meets the R-013 criteria):
 
-1. **Always call `renderMermaidDiagram`** to render the diagram visually in the chat response during R-058.
-2. Include the raw Mermaid code block in the chat output **and** call the tool — do both.
+1. **Do NOT call `renderMermaidDiagram` outside of the R-058 output.** The tool call must be made **inline within the R-058 design output text**, at the exact position of the `### Mermaid Diagram` section. This means interleaving the tool call with the surrounding chat text so the rendered diagram appears inside the design output block — not before or after it.
+2. Include the raw Mermaid code block in the chat output **and** call the tool — do both, at the same position within R-058.
 3. Apply styling from the `mermaid-styling` skill (M-001 base theme + M-002/M-003 class definitions for the matching exam).
 4. If the diagram is not required, state `Not required — fewer than 2 interconnected resources` and do **not** call the tool.
 
@@ -143,7 +143,7 @@ Phase 2 is complete when:
 After R-057 acceptance criteria are met:
 
 1. **Display the design output inline** — Render the complete Phase 2 output directly in the chat response so the user can review it without opening files.
-2. **Render Mermaid diagram** — If a diagram was generated, call `renderMermaidDiagram` to display it visually in addition to the code block.
+2. **Render Mermaid diagram inline** — If a diagram was generated, call `renderMermaidDiagram` **at the exact position** of the `### Mermaid Diagram` section within the R-058 output text. The tool call must be interleaved with the surrounding chat text so the rendered image appears inside the design output — never before or after the output block. Include both the tool call and the raw code block at that position.
 3. State the lab folder path and list all created files.
 4. Wait for the user to confirm the output is correct.
 5. Once the user confirms, hand off to the **Lab-Builder** agent.
@@ -190,10 +190,12 @@ State:
 [full file tree]
 
 ### Capacity-Constrained Services
-[list per shared-contract R-019, or "None"]
+[list services and their provider namespaces per shared-contract R-019, or "None"]
+[Do NOT include CLI/PowerShell validation commands — those are in the shared-contract]
 
 ### Soft-Delete / Purge Considerations
-[list per shared-contract R-016, or "None"]
+[list services, retention periods, and whether manual purge is required per shared-contract R-016, or "None"]
+[Do NOT include CLI/PowerShell purge commands — those are in the shared-contract]
 
 **Files Created**
 

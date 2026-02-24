@@ -456,8 +456,8 @@ After extracting the exam question per R-039, this agent derives a filename, sav
    c. Remove all special characters (punctuation, parentheses, etc.).
    d. Keep all meaningful nouns and verbs.
    e. **MANDATORY: 2–4 word range** — The final slug must contain **between 2 and 4 hyphen-separated words** (inclusive). If the result exceeds 4 words after applying steps a–d, condense or drop the least essential words to reach 4 words or fewer. If the result is fewer than 2 words, expand by retaining the next most meaningful word from the title.
-   f. **MANDATORY: 23–36 character range** — The final slug must be **between 23 and 36 characters** (inclusive), counting hyphens.
-   g. **Abbreviate if needed** — If the slug exceeds 36 characters, abbreviate least-critical words while preserving core Azure meaning (examples: `configuration` -> `config`, `intelligence` -> `intel`, `management` -> `mgmt`, `document` -> `doc`). If the slug is under 23 characters, retain the next most meaningful word from the title before abbreviating anything else.
+   f. **MANDATORY: 25-character maximum** — The final slug must be **no more than 25 characters** (inclusive), counting hyphens.
+   g. **Abbreviate if needed** — If the slug exceeds 25 characters, abbreviate least-critical words while preserving core Azure meaning (examples: `configuration` -> `config`, `intelligence` -> `intel`, `management` -> `mgmt`, `document` -> `doc`).
    h. Result becomes the filename: `.assets/temp/<derived-slug>.md`
 2. **Save to file** — Use `createFile` to write the formatted question markdown to `.assets/temp/<derived-slug>.md`.
 3. **Validate** — Use `readFile` to confirm the file was written correctly and the `## <Title>` heading is present.
@@ -495,7 +495,7 @@ If the user explicitly states the exam, use their value.
 
 #### Domain
 
-Map the question's subject to one of the **exact** domain names listed below. These are closed sets — do **not** invent, abbreviate, or substitute domain names. Values like `Security`, `Encryption`, `Access Control`, or any name not in the tables below are **invalid**.
+Map the question's subject to one of the **exact** domain names listed below. These are closed sets — do **not** invent, abbreviate, or substitute domain names. The **only** valid domain values are those that appear in the **Domain** column of the exam-specific table below. Any value not found verbatim in that column — including Azure service names, product names, or technology areas like `Security`, `Encryption`, `Access Control`, `Document Intelligence`, `Speech`, or `Bot Service` — is **invalid** and must never be used as a domain.
 
 **AZ-104 domains (closed set — use these exact strings):**
 
@@ -519,7 +519,7 @@ Map the question's subject to one of the **exact** domain names listed below. Th
 
 | Domain                                | Example Topics                                       |
 | ------------------------------------- | ---------------------------------------------------- |
-| AI Services                           | Multi-service accounts, keys, endpoints, regions     |
+| AI Services                           | Multi-service accounts, keys, endpoints, regions, Document Intelligence, Speech, Translator |
 | Generative AI                         | OpenAI, prompt engineering, embeddings, RAG          |
 | NLP                                   | Language Understanding, text analytics, translation, QnA |
 | Computer Vision                       | Image analysis, OCR, Custom Vision, Face, Video Indexer |
@@ -531,6 +531,8 @@ Map the question's subject to one of the **exact** domain names listed below. Th
 > - Storage role assignments for Azure AI Agent Service → **Agentic** (the agent service is the primary subject)
 > - Capability host or file upload configuration for agents → **Agentic**
 > - API key rotation for a multi-service AI resource → **AI Services**
+> - Document Intelligence invoice analysis → **AI Services** (Document Intelligence is an AI service, not a domain)
+> - Speech-to-text transcription → **AI Services** (Speech is an AI service, not a domain)
 > - Indexer connectivity to a blob container → **Knowledge Mining** (the search indexer is the primary resource)
 
 **AI-900 domains (closed set — use these exact strings):**
@@ -557,8 +559,8 @@ Derive the kebab-case slug directly from the `## <Title>` heading in the exam qu
 7. Remove all special characters (punctuation, parentheses, etc.).
 8. Keep all meaningful nouns.
 9. **MANDATORY: 4-word maximum** — The final slug must contain **no more than 4 hyphen-separated words**. If the result exceeds 4 words after applying steps 1–8, condense or drop the least essential words to reach 4 words or fewer.
-10. **MANDATORY: 23–36 character range** — The final slug must be **between 23 and 36 characters** (inclusive), counting hyphens.
-11. **Abbreviate if needed** — If the slug exceeds 36 characters, abbreviate least-critical words while preserving core Azure meaning (examples: `configuration` -> `config`, `intelligence` -> `intel`, `management` -> `mgmt`, `document` -> `doc`). If the slug is under 23 characters, retain the next most meaningful word from the title before abbreviating anything else.
+10. **MANDATORY: 25-character maximum** — The final slug must be **no more than 25 characters** (inclusive), counting hyphens.
+11. **Abbreviate if needed** — If the slug exceeds 25 characters, abbreviate least-critical words while preserving core Azure meaning (examples: `configuration` -> `config`, `intelligence` -> `intel`, `management` -> `mgmt`, `document` -> `doc`).
 
 Examples:
 
@@ -609,7 +611,7 @@ Return a structured block. **Field order and capitalization are mandatory** — 
 
 1. **Field order** — Emit fields in exactly this sequence: Exam, Domain, Topic, Key Services, Deployment Method. Never reorder.
 2. **Capitalization** — All field labels and values use Title Case (e.g., `Compute`, not `compute`; `Azure Key Vault`, not `azure key vault`). The only exception is `Topic`, which is always kebab-case lowercase.
-3. **Domain values** — Must be an **exact string** from the R-041 closed-set domain tables. Values like `Security`, `Encryption`, or `Key Management` are **never valid**.
+3. **Domain values** — Must be an **exact string** from the R-041 closed-set domain tables. Only these values are valid for each exam. Values like `Security`, `Encryption`, `Key Management`, `Document Intelligence`, `Speech`, or `Bot Service` are **never valid** domains — they are service names, not domains. If the question is about one of these services, map it to the correct parent domain (e.g., Document Intelligence → `AI Services`).
 
 ### MANDATORY: Persist Output to Input File
 
@@ -634,13 +636,13 @@ This makes the input file the **cumulative artifact** for the pipeline. Downstre
 
 After extracting metadata per R-041 and **before** returning output, run this validation:
 
-1. **Domain check** — Confirm the `Domain` value is an exact string from the R-041 closed-set tables for the identified exam. If not, re-derive using the cross-cutting topic guidance in R-041.
+1. **Domain check** — Confirm the `Domain` value is an **exact, verbatim string** from the **Domain column** of the R-041 closed-set table for the identified exam. Compare character-by-character. If the value does not appear verbatim in the Domain column, it is invalid — re-derive using the cross-cutting topic guidance and example-topics mapping in R-041. Common violators: `Document Intelligence`, `Speech`, `Bot Service`, `Translator` — these are **service names**, not domains.
 2. **Field order check** — Confirm the five metadata fields appear in the order specified by R-043.
 3. **Capitalization check** — Confirm all values use Title Case (except `Topic` which is kebab-case lowercase).
 4. **Completeness check** — Confirm all five metadata fields are populated (including Deployment Method from user input).
 5. **Field-level checks:**
    - [ ] `Exam` matches one of: `AI-102`, `AZ-104`, `AI-900`
-   - [ ] `Topic` is kebab-case, 2–4 words, 23–36 characters, no special characters
+   - [ ] `Topic` is kebab-case, 2–4 words, ≤25 characters, no special characters
    - [ ] `Topic` does not contain deployment-method terms (`terraform`, `bicep`, `powershell`, etc.)
    - [ ] `Key Services` contains at least one service
    - [ ] `Key Services` entries use official Azure naming
@@ -656,7 +658,7 @@ If any check fails, **fix the value before returning output**. Do not return out
 
 > **Common mistake — skipping file write:** The most frequent intake failure is generating metadata in the chat response but never writing it to the file. Check 7 above catches this. If the heading is missing from the file, you **must** append the metadata block before completing intake.
 >
-> **Common mistake — invalid domains:** Agents sometimes produce domain names like "Security", "Encryption", or "Key Management" — these are **not** valid domains for any exam. Re-read the R-041 domain tables and choose the correct domain based on the primary resource.
+> **Common mistake — invalid domains:** Agents sometimes produce domain names like "Security", "Encryption", "Key Management", "Document Intelligence", "Speech", or "Bot Service" — these are **not** valid domains for any exam. They are Azure service or technology names, not domains. Re-read the R-041 domain tables and choose the correct domain based on the primary resource. For AI-102, questions about Document Intelligence, Speech, or Translator must map to **AI Services**.
 >
 > **Common mistake — markdownlint failures:** The most frequent markdownlint failures are trailing spaces, extra blank lines, malformed table separators, and heading-level skips. Normalize formatting before returning output.
 
@@ -673,7 +675,7 @@ Intake is complete when **all** of the following are true. The file-write criter
 - [ ] Field order matches R-043 (Exam, Domain, Topic, Key Services, Deployment Method)
 - [ ] All values use correct capitalization (Title Case, except Topic)
 - [ ] Topic was derived from the exam question title heading per R-041
-- [ ] Topic length is between 23 and 36 characters (inclusive)
+- [ ] Topic length is 25 characters or fewer
 - [ ] Topic does not contain deployment-method terms (`terraform`, `bicep`, `powershell`, etc.)
 - [ ] Deployment method was captured from the user's input (R-042)
 - [ ] Exam question was extracted from screenshot/text per R-039 and saved to file per R-040
