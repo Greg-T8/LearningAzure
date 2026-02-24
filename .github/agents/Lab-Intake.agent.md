@@ -4,7 +4,7 @@ description: "Intake agent — extracts exam questions from screenshots, formats
 agent: ['Lab-Designer']
 model: 'GPT-4o'
 user-invokable: true
-tools: [read/readFile, edit/createDirectory, edit/createFile, edit/editFiles, search/codebase, search/fileSearch, search/listDirectory, search/textSearch, web/fetch]
+tools: [vscode/askQuestions, read/readFile, edit/createDirectory, edit/createFile, edit/editFiles, search/codebase, search/fileSearch, search/listDirectory, search/textSearch, web/fetch]
 handoffs:
   - label: Lab Designer
     agent: Lab-Designer
@@ -38,13 +38,54 @@ You can type a single word (e.g., "Terraform") along with an attached screenshot
 
 ---
 
+### Unclear-Request Questions
+
+If the user's intent is **not clear** — including cases where the user sends a vague message, a bare screenshot with no other context, or a message that does not specify both an exam type and a deployment method — use the `VSCode/askQuestions` tool to resolve the ambiguity.
+
+#### When to call `VSCode/askQuestions`
+
+- The user sends a screenshot but **no deployment method** → ask the deployment-method question.
+- The user sends a message with **no screenshot and no clear request** → ask both exam-type and deployment-method questions.
+- The user sends a screenshot and a deployment method but the **exam type cannot be confidently inferred** from the question content → ask the exam-type question.
+
+#### `askQuestions` format
+
+Call `VSCode/askQuestions` with explicit options. The user can select an option or provide the mapped value.
+
+**Deployment method question:**
+
+```
+Which deployment method should I use?
+
+1. `Terraform`
+2. `Bicep`
+3. `Scripted`
+4. `Manual`
+```
+
+**Exam type question:**
+
+```
+Which exam is this question for?
+
+1. `AI-102`
+2. `AZ-104`
+3. `AI-900`
+```
+
+If **both** are missing, ask exam type first, then deployment method in the same `VSCode/askQuestions` call (question order must match this sequence).
+
+Once the user responds, capture the values and proceed with extraction.
+
 ## Initial Intake
 
 If the user enters one word in chat, such as "Terraform", "Bicep", "Scripted", or "Manual", treat that as the deployment method.
 
 When entering the response, the user typically provides a screenshot/attachment of the exam question. Consider this attachment to be the exam question you should work with.
 
-If the user provides a screenshot but no deployment method, ask them to specify one before proceeding.
+If the user provides a screenshot but no deployment method, call `VSCode/askQuestions` with the deployment-method options from the Unclear-Request Questions section above instead of asking an open-ended question.
+
+If the request is ambiguous or incomplete (for example, a bare screenshot, a vague message, or no clear exam context), call `VSCode/askQuestions` with the appropriate options per the Unclear-Request Questions rules before proceeding.
 
 Once both inputs are available, proceed with question extraction (R-039).
 
@@ -530,7 +571,7 @@ The deployment method is provided by the user at intake time.
 
 1. **Capture the method** — Read the deployment method from the user's input (e.g., `Terraform`, `Bicep`, `Scripted`, or `Manual`).
 2. **Include it in output** — Include it verbatim in the intake output schema (R-043).
-3. **Prompt if missing** — If the user does not provide a deployment method, ask them to specify one before proceeding. Valid values: `Terraform`, `Bicep`, `Scripted`, `Manual`.
+3. **Prompt if missing** — If the user does not provide a deployment method, call `VSCode/askQuestions` with the deployment-method options from the Unclear-Request Questions section. Valid values: `Terraform`, `Bicep`, `Scripted`, `Manual`.
 
 ---
 
