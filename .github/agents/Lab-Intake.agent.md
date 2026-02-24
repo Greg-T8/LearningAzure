@@ -56,6 +56,27 @@ Once both inputs are available, proceed with question extraction (R-039).
 
 ---
 
+## R-038A: Markdownlint Compliance (Required)
+
+All markdown written to `.assets/temp/<derived-slug>.md` **must** conform to markdownlint-style rules.
+
+Apply these output constraints to the final temp file content:
+
+1. Start the file with a single H1 heading: `# Lab Intake Artifact`.
+2. Render the extracted question title as an H2 heading: `## <Title>`.
+3. Use exactly one blank line between blocks. Do not use multiple consecutive blank lines.
+4. Use fenced code blocks with language tags when applicable (for example `powershell`, `markdown`).
+5. Use valid markdown table syntax:
+   - Header row and separator row column counts must match.
+   - Separator row uses hyphens with single pipes (for example `|---|---|`).
+   - Do not add extra trailing pipes.
+7. Keep heading structure ordered and non-skipping (`#` -> `##` -> `###`).
+6. Do not wrap the temp-file output with decorative horizontal-rule wrappers.
+
+This requirement applies to both the extracted question block and the appended metadata block.
+
+---
+
 ## R-039: Exam Question Extraction
 
 This agent is responsible for extracting exam question content from screenshot images or text and formatting it as structured markdown (title, prompt, answer only). This section embeds the complete extraction rules formerly maintained in the `lab-question-extractor` skill.
@@ -118,7 +139,7 @@ Create a concise exam-appropriate title (3–10 words).
 Immediately below the title, render the detected question type in italics.
 
 ```markdown
-### <Title Extracted From Image>
+## <Title Extracted From Image>
 
 *<Question Type>*
 ```
@@ -158,7 +179,7 @@ Choose format based on detected question type.
 
 ```markdown
 | Statement | Yes | No |
-|----------|-----|----||
+|---|---|---|
 | <Statement text> | ☐ | ☐ |
 | <Statement text> | ☐ | ☐ |
 ```
@@ -193,7 +214,7 @@ ___[2]___
 
 ```markdown
 | Column | Setting |
-|--------|---------||
+|---|---|
 | Item A | ___[1]___ |
 | Item B | ___[2]___ |
 ```
@@ -208,7 +229,7 @@ If dropdown option screenshots exist, list choices in a single table exactly lik
 Drop-Down Options:
 
 | Blank | Options |
-|-------|---------||
+|---|---|
 | [1] | Option A / Option B / Option C |
 | [2] | Option A / Option B / Option C |
 ```
@@ -290,7 +311,7 @@ List each solution in the order the sub-questions appear (one row per screenshot
 
 ```markdown
 | Solution | Yes | No |
-|----------|-----|----||
+|---|---|---|
 | 1. <Solution text from Question 1> | ☐ | ☐ |
 | 2. <Solution text from Question 2> | ☐ | ☐ |
 | 3. <Solution text from Question 3> | ☐ | ☐ |
@@ -342,31 +363,26 @@ Apply the following formatting rules to the entire response.
 
 #### Title
 
-Render the question title as a markdown level 3 header:
+Render the question title as a markdown level 2 header:
 
 ```markdown
-### <Title>
+## <Title>
 ```
 
 #### Response Wrapper
 
-Surround the entire response with horizontal rule lines. Include two blank lines before and after each horizontal rule:
+Use this markdownlint-safe structure for the temp file content:
 
 ```markdown
+# Lab Intake Artifact
 
----
-
-
-### <Title>
+## <Title>
 
 *<Question Type>*
 
 <Prompt>
 
 <Answer>
-
-
----
 
 ```
 
@@ -376,7 +392,7 @@ Surround the entire response with horizontal rule lines. Include two blank lines
 
 After extracting the exam question per R-039, this agent derives a filename, saves the formatted question to disk, and uses that file as the cumulative artifact for all downstream processing.
 
-1. **Derive filename** — From the extracted `### <Title>` heading:
+1. **Derive filename** — From the extracted `## <Title>` heading:
    a. Convert to lowercase and replace spaces with hyphens.
    b. Remove filler words: `a`, `an`, `the`, `using`, `for`, `to`, `with`, `and`, `or`.
    b1. Remove deployment-method terms from the slug candidate: `terraform`, `bicep`, `scripted`, `manual`, `powershell`, `ps`, `bash`, `cli`, `arm`, `json`, `yaml`, `yml`. These terms must never appear in the derived slug.
@@ -387,7 +403,7 @@ After extracting the exam question per R-039, this agent derives a filename, sav
    g. **Abbreviate if needed** — If the slug exceeds 36 characters, abbreviate least-critical words while preserving core Azure meaning (examples: `configuration` -> `config`, `intelligence` -> `intel`, `management` -> `mgmt`, `document` -> `doc`). If the slug is under 23 characters, retain the next most meaningful word from the title before abbreviating anything else.
    h. Result becomes the filename: `.assets/temp/<derived-slug>.md`
 2. **Save to file** — Use `createFile` to write the formatted question markdown to `.assets/temp/<derived-slug>.md`.
-3. **Validate** — Use `readFile` to confirm the file was written correctly and the `### <Title>` heading is present.
+3. **Validate** — Use `readFile` to confirm the file was written correctly and the `## <Title>` heading is present.
 
 All downstream processing (R-041 onwards) uses the content from this file.
 
@@ -472,9 +488,9 @@ Map the question's subject to one of the **exact** domain names listed below. Th
 
 #### Topic
 
-Derive the kebab-case slug directly from the `### <Title>` heading in the exam question file:
+Derive the kebab-case slug directly from the `## <Title>` heading in the exam question file:
 
-1. Extract the title text from the level-3 heading (e.g., `### Encrypt a VM Disk Using Key Vault Keys`).
+1. Extract the title text from the level-2 heading (e.g., `## Encrypt a VM Disk Using Key Vault Keys`).
 2. **Strip exam-task verbs** — Remove verbs that describe what the exam asks the test-taker to do (e.g., `Identify`, `Determine`, `Select`, `Choose`, `Evaluate`, `Recommend`, `Troubleshoot`). These describe the exam action, not the Azure concept. Replace with the **technical subject** of the question.
 3. **Focus on the Azure concept** — The slug must name the Azure resource, feature, or configuration being tested — not the diagnostic or decision-making action. Ask: *"What Azure thing is being configured or deployed?"* and use that as the slug's core.
 4. **Nominalize action verbs** — Convert remaining action verbs to noun forms (e.g., `Encrypt` → `encryption`, `Configure` → `config`, `Assign` → `assignment`, `Enable` → `versioning`).
@@ -552,7 +568,7 @@ After generating the metadata block above and passing the validation gate (R-044
 This makes the input file the **cumulative artifact** for the pipeline. Downstream agents (e.g., Lab-Design) will read both the exam question and the metadata from this same file.
 
 > **Why this matters:** Downstream agents (Lab-Design, Lab-Scaffolder) read metadata from this file. If you skip this step, the entire pipeline stalls.
-
+>
 > **No chat output.** The metadata append and verification are silent tool operations. Do not render the metadata block to the user at this stage — it will be shown exactly once in R-046.
 
 ---
@@ -572,13 +588,20 @@ After extracting metadata per R-041 and **before** returning output, run this va
    - [ ] `Key Services` contains at least one service
    - [ ] `Key Services` entries use official Azure naming
    - [ ] `Deployment Method` matches one of: `Terraform`, `Bicep`, `Scripted`, `Manual`
-6. **File persistence check** — Use `readFile` to re-read the input file and confirm the `## Phase 1 — Metadata Output` heading exists in the file content. If it does not, the R-043 persist step was skipped — go back and execute it now before proceeding.
+6. **Markdownlint check** — Confirm the temp file uses markdownlint-safe formatting:
+   - [ ] First line is `# Lab Intake Artifact`
+   - [ ] No trailing whitespace
+   - [ ] No multiple consecutive blank lines
+   - [ ] Table separator rows are valid and have matching column counts
+7. **File persistence check** — Use `readFile` to re-read the input file and confirm the `## Phase 1 — Metadata Output` heading exists in the file content. If it does not, the R-043 persist step was skipped — go back and execute it now before proceeding.
 
 If any check fails, **fix the value before returning output**. Do not return output with validation failures.
 
-> **Common mistake — skipping file write:** The most frequent intake failure is generating metadata in the chat response but never writing it to the file. Check 6 above catches this. If the heading is missing from the file, you **must** append the metadata block before completing intake.
+> **Common mistake — skipping file write:** The most frequent intake failure is generating metadata in the chat response but never writing it to the file. Check 7 above catches this. If the heading is missing from the file, you **must** append the metadata block before completing intake.
 >
 > **Common mistake — invalid domains:** Agents sometimes produce domain names like "Security", "Encryption", or "Key Management" — these are **not** valid domains for any exam. Re-read the R-041 domain tables and choose the correct domain based on the primary resource.
+>
+> **Common mistake — markdownlint failures:** The most frequent markdownlint failures are trailing spaces, extra blank lines, malformed table separators, and heading-level skips. Normalize formatting before returning output.
 
 ---
 
@@ -587,7 +610,7 @@ If any check fails, **fix the value before returning output**. Do not return out
 Intake is complete when **all** of the following are true. The file-write criteria (items 1–2) are **blocking** — intake cannot pass without them.
 
 - [ ] Metadata block was appended to the input file using `editFiles` (R-043 persist step)
-- [ ] File-write verified: `readFile` confirms the `## Phase 1 — Metadata Output` heading exists in the input file (R-044 check 6)
+- [ ] File-write verified: `readFile` confirms the `## Phase 1 — Metadata Output` heading exists in the input file (R-044 check 7)
 - [ ] All metadata fields are populated
 - [ ] Domain is an exact match from R-041 closed-set tables
 - [ ] Field order matches R-043 (Exam, Domain, Topic, Key Services, Deployment Method)
@@ -598,7 +621,8 @@ Intake is complete when **all** of the following are true. The file-write criter
 - [ ] Deployment method was captured from the user's input (R-042)
 - [ ] Exam question was extracted from screenshot/text per R-039 and saved to file per R-040
 - [ ] Output matches R-043 schema
-- [ ] R-044 validation gate passed (all 7 checks)
+- [ ] Temp file content is markdownlint-compliant per R-038A and R-044 check 6
+- [ ] R-044 validation gate passed (all 8 checks)
 
 ---
 
@@ -625,9 +649,9 @@ To enforce this:
 5. If the user asks for changes, re-render **once** after applying edits, replacing the prior version rather than echoing the same content again.
 
 > **Critical:** You **must** render the extracted question and metadata content directly in the chat response as part of this R-046 block. Do **not** simply refer the user to the file — always show the content inline for review.
-
+>
 > **Critical:** The inline review content is a single canonical output block for that intake cycle. Do not duplicate it in additional confirmation messages.
-
+>
 > **Common mistake — early rendering:** The most frequent duplication failure is rendering the extracted question or metadata to chat during R-039, R-040, or R-043 (before reaching R-046). This produces a "preview" that then gets repeated when R-046 emits its canonical review block. The fix: emit **nothing** to chat until you reach this point.
 
 State:
