@@ -303,7 +303,7 @@ Write-Host "    Failure:  Wrong value breaks vector search, NOT file uploads"
 ```
 
 <!-- Screenshot -->
-<img src='.img/step3_connection_mapping.png' width=700>
+<img src='.img/2026-02-24-05-30-57.png' width=600>
 
 Each BYO resource connects to the capability host through a separate property. The storage connection handles file uploads; the AI Search connection handles vector store operations. A misconfigured AI Search connection would cause vector search failures, not file upload failures.
 
