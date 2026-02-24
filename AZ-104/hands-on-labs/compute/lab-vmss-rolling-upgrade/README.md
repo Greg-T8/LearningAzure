@@ -165,6 +165,7 @@ $vmss.Sku.Capacity             # Expected: 2
 ```
 
 <!-- Screenshot -->
+
 <img src='.img/2026-02-23-04-20-43.png' width=600>
 
 <img src='.img/2026-02-23-04-21-51.png' width=600>
@@ -190,6 +191,10 @@ $vmss.VirtualMachineProfile.StorageProfile.DataDisks |
 <img src='.img/2026-02-23-04-22-47.png' width=600>
 
 <img src='.img/2026-02-23-04-23-32.png' width=600>
+
+<img src='.img/2026-02-24-03-34-01.png' width=600>
+
+<img src='.img/2026-02-24-03-36-15.png' width=600>
 
 <img src='.img/2026-02-23-04-29-54.png' width=900>
 
@@ -227,6 +232,12 @@ Update-AzVmss `
 
 <!-- Screenshot -->
 <img src='.img/2026-02-24-03-29-25.png' width=600>
+
+**Note**: Changing the computer prefix is not allowed.The rest of the procedure is conducted without changing the computer prefix.
+
+<img src='.img/2026-02-24-03-30-53.png' width=600>
+
+However, you are able to change other properties such as the admin username and admin password.
 
 ### Step 5: Monitor Rolling Upgrade Progress
 
