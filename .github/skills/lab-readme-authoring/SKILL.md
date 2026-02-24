@@ -60,8 +60,9 @@ Section order: see `shared-contract` R-011.
 ## Architecture Diagram
 ```
 
-- See `shared-contract` R-013 for when a diagram is required.
-- Include Mermaid code block if required; otherwise include a brief note.
+- A Mermaid diagram is **always required** (`shared-contract` R-013).
+- When 2+ interconnected resources: diagram the resource topology.
+- When fewer than 2 interconnected resources: diagram the overall process reflective of the exam question.
 
 ### Section 4: Lab Objectives
 

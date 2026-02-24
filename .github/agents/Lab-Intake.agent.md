@@ -44,9 +44,12 @@ If the user's intent is **not clear** — including cases where the user sends a
 
 #### When to call `VSCode/askQuestions`
 
-- The user sends a screenshot but **no deployment method** → ask the deployment-method question.
-- The user sends a message with **no screenshot and no clear request** → ask both exam-type and deployment-method questions.
-- The user sends a screenshot and a deployment method but the **exam type cannot be confidently inferred** from the question content → ask the exam-type question.
+- The user sends a screenshot but **no deployment method** → ask the deployment-method question only.
+- The user sends a **deployment-method keyword** but no screenshot → do **not** ask about the deployment method; ask only for the exam question (screenshot or text). If the exam type also cannot be inferred, add the exam-type question as well.
+- The user sends a message with **no screenshot and no recognizable deployment-method keyword** → ask both exam-type and deployment-method questions.
+- The user sends a screenshot and a deployment method but the **exam type cannot be confidently inferred** from the question content → ask the exam-type question only.
+
+> **NEVER re-ask for the deployment method** when the user's message already contains a deployment-method keyword (`Terraform`, `Bicep`, `Scripted`, or `Manual`). Doing so is a UX violation.
 
 #### `askQuestions` format
 
@@ -79,13 +82,24 @@ Once the user responds, capture the values and proceed with extraction.
 
 ## Initial Intake
 
-If the user enters one word in chat, such as "Terraform", "Bicep", "Scripted", or "Manual", treat that as the deployment method.
+### Deployment-Method Keywords
+
+The following words are **deployment-method keywords** (case-insensitive): `Terraform`, `Bicep`, `Scripted`, `Manual`.
+
+If the user's message is — or contains — exactly one of these keywords, **immediately capture it as the deployment method**. Do **not** call `VSCode/askQuestions` to confirm or re-ask — the user has already told you.
+
+### Processing Logic
+
+After checking for a deployment-method keyword, evaluate what you have:
+
+| Has deployment method? | Has screenshot / text? | Action |
+|---|---|---|
+| Yes | Yes | Proceed directly to R-039 — no questions needed. |
+| Yes | No | The deployment method is captured. Ask **only** for the exam question (screenshot or text). Do **not** ask for the deployment method again. |
+| No | Yes | Call `VSCode/askQuestions` with the deployment-method options only. |
+| No | No | Call `VSCode/askQuestions` per the Unclear-Request Questions rules. |
 
 When entering the response, the user typically provides a screenshot/attachment of the exam question. Consider this attachment to be the exam question you should work with.
-
-If the user provides a screenshot but no deployment method, call `VSCode/askQuestions` with the deployment-method options from the Unclear-Request Questions section above instead of asking an open-ended question.
-
-If the request is ambiguous or incomplete (for example, a bare screenshot, a vague message, or no clear exam context), call `VSCode/askQuestions` with the appropriate options per the Unclear-Request Questions rules before proceeding.
 
 Once both inputs are available, proceed with question extraction (R-039).
 
@@ -176,6 +190,8 @@ Do **not** include screenshot blocks, explanation placeholders, or related lab l
 #### Title
 
 Create a concise exam-appropriate title (3–10 words).
+
+> **CRITICAL — No deployment-method terms in the title.** The title must describe the Azure concept being tested, not the deployment tooling. Never include words like `Terraform`, `Bicep`, `Scripted`, `Manual`, `PowerShell`, `CLI`, `ARM`, or `JSON` in the title. If the source question mentions a deployment tool, omit it from the title.
 
 Immediately below the title, render the detected question type in italics.
 
@@ -436,7 +452,7 @@ After extracting the exam question per R-039, this agent derives a filename, sav
 1. **Derive filename** — From the extracted `## <Title>` heading:
    a. Convert to lowercase and replace spaces with hyphens.
    b. Remove filler words: `a`, `an`, `the`, `using`, `for`, `to`, `with`, `and`, `or`.
-   b1. Remove deployment-method terms from the slug candidate: `terraform`, `bicep`, `scripted`, `manual`, `powershell`, `ps`, `bash`, `cli`, `arm`, `json`, `yaml`, `yml`. These terms must never appear in the derived slug.
+   b1. **CRITICAL — Remove deployment-method terms** from the slug candidate: `terraform`, `bicep`, `scripted`, `manual`, `powershell`, `ps`, `bash`, `cli`, `arm`, `json`, `yaml`, `yml`. These terms must **never** appear in the derived slug. If any remain after this step, remove them before proceeding.
    c. Remove all special characters (punctuation, parentheses, etc.).
    d. Keep all meaningful nouns and verbs.
    e. **MANDATORY: 2–4 word range** — The final slug must contain **between 2 and 4 hyphen-separated words** (inclusive). If the result exceeds 4 words after applying steps a–d, condense or drop the least essential words to reach 4 words or fewer. If the result is fewer than 2 words, expand by retaining the next most meaningful word from the title.
@@ -537,7 +553,7 @@ Derive the kebab-case slug directly from the `## <Title>` heading in the exam qu
 4. **Nominalize action verbs** — Convert remaining action verbs to noun forms (e.g., `Encrypt` → `encryption`, `Configure` → `config`, `Assign` → `assignment`, `Enable` → `versioning`).
 5. Convert to lowercase and replace spaces with hyphens.
 6. Remove filler words: `a`, `an`, `the`, `using`, `for`, `to`, `with`, `and`, `or`.
-6a. Remove deployment-method terms: `terraform`, `bicep`, `scripted`, `manual`, `powershell`, `ps`, `bash`, `cli`, `arm`, `json`, `yaml`, `yml`. Deployment type must not be encoded in `Topic`.
+6a. **CRITICAL — Remove deployment-method terms:** Strip these words from the slug unconditionally: `terraform`, `bicep`, `scripted`, `manual`, `powershell`, `ps`, `bash`, `cli`, `arm`, `json`, `yaml`, `yml`. Deployment type must **never** appear in the `Topic` slug. If the slug still contains any of these terms after this step, remove them before proceeding. This rule is non-negotiable.
 7. Remove all special characters (punctuation, parentheses, etc.).
 8. Keep all meaningful nouns.
 9. **MANDATORY: 4-word maximum** — The final slug must contain **no more than 4 hyphen-separated words**. If the result exceeds 4 words after applying steps 1–8, condense or drop the least essential words to reach 4 words or fewer.

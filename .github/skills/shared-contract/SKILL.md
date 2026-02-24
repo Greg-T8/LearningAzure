@@ -239,11 +239,12 @@ Use `//` for `.bicep` files, `#` for `.tf` and `.ps1`.
 
 ## R-013: Mermaid Diagram Criteria
 
-- **Required** when 2+ interconnected resources are deployed
-- Use `graph TD` (top-down) or `graph LR` (left-right)
+- **Always required** — every lab README must include a Mermaid diagram
+- When 2+ interconnected resources are deployed, diagram the resource topology (dependencies, network paths, data flow)
+- When fewer than 2 interconnected resources, diagram the **overall process** reflective of the exam question (e.g., data flow from source → service → output, access methods, decision paths)
+- Use `graph TD` (top-down) for hierarchical layouts or `graph LR` (left-right) for pipeline / process flows
 - Resource names must match governance naming conventions
 - Show dependencies and relationships
-- If not required, include a brief note instead of omitting the section
 
 ---
 

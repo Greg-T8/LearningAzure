@@ -34,7 +34,9 @@ Given metadata (exam, domain, topic, key_services):
 
 Apply criteria from `shared-contract` R-013.
 
-If diagram is required (2+ interconnected resources):
+A Mermaid diagram is **always required** (`shared-contract` R-013).
+
+### When 2+ interconnected resources exist
 
 1. Choose layout: `graph TD` (top-down) for hierarchical, `graph LR` (left-right) for pipeline/flow.
 2. Use governance-compliant resource names (`shared-contract` R-001 / R-002 / R-003).
@@ -42,11 +44,19 @@ If diagram is required (2+ interconnected resources):
 4. Draw lines for dependencies (network containment, access paths, data flow).
 5. Use subgraphs for logical groupings (e.g., subnets within a VNet).
 
+### When fewer than 2 interconnected resources
+
+1. Diagram the **overall process** reflective of the exam question.
+2. Show the end-to-end flow: data source → Azure service → output / consumer.
+3. Include access methods, decision points, or output formats when they are the focus of the question.
+4. Prefer `graph LR` (left-right) for process / pipeline flows.
+
 Common topology patterns:
 
 - **Hub-spoke**: Subgraphs for hub and spoke VNets.
 - **Multi-tier**: Top-down flow from frontend to backend.
 - **AI pipeline**: Left-right flow from data source through processing to output.
+- **Process / access flow**: Left-right flow showing how users or clients interact with a single service.
 
 ---
 
