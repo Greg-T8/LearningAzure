@@ -296,6 +296,8 @@ Update-AzVmss `
     -VirtualMachineScaleSet $vmss
 ```
 
+<img src='.img/2026-02-25-04-55-01.png' width=500>
+
 <img src='.img/2026-02-25-03-41-01.png' width=600>
 
 ### Step 8: Observe Model Updated but Disk Resources Unchanged
@@ -335,7 +337,9 @@ $resp = Invoke-AzRestMethod -Method GET -Path $apiPath
     } | Format-Table
 ```
 
-<!-- Screenshot -->
+<img src='.img/2026-02-25-04-52-18.png' width=600>
+
+<img src='.img/2026-02-25-04-57-58.png' width=800>
 
 **Result**: The VMSS model is updated to 64 GB and `LatestModelApplied = True`, but the actual data disks on existing instances remain at 32 GB. `Update-AzVmss` updated the desired state — it did **not** resize the already-provisioned disk resources.
 
@@ -355,7 +359,7 @@ Get-AzVmssVM -ResourceGroupName $rg -VMScaleSetName $vmssName |
     }
 ```
 
-<!-- Screenshot -->
+<img src='.img/2026-02-25-04-59-47.png' width=600>
 
 > **Warning:** `-ReimageAll` destroys all disks on the instance and recreates them from the VMSS model. This is safe for stateless workloads. For stateful instances, back up data before reimaging.
 
@@ -378,7 +382,9 @@ $resp = Invoke-AzRestMethod -Method GET -Path $apiPath
     } | Format-Table
 ```
 
-<!-- Screenshot -->
+<img src='.img/2026-02-25-05-00-13.png' width=600>
+
+<img src='.img/2026-02-25-05-00-35.png' width=800>
 
 **Result**: After reimaging with `Set-AzVmssVM -ReimageAll`, the instances are rebuilt from the updated VMSS model. The data disks are now 64 GB — matching the model's desired state
 
