@@ -316,22 +316,28 @@ Get-AzVmssVM -ResourceGroupName $rg -VMScaleSetName $vmssName |
 <img src='.img/2026-02-25-03-41-47.png' width=600>
 
 ```powershell
-# Check the ACTUAL managed disk resources — still 32 GB
-Get-AzVmssVM -ResourceGroupName $rg -VMScaleSetName $vmssName |
+# Check ACTUAL data disk size on each instance via REST API
+# Note: Get-AzVmssVM uses an older API versionthat omits diskSizeGB for
+# Uniform-mode VMSS instances. Invoke-AzRestMethod with api-version
+# 2024-07-01 returns the provisioned size.
+$sub     = (Get-AzContext).Subscription.Id
+$apiPath = "/subscriptions/$sub/resourceGroups/$rg/providers" +
+           "/Microsoft.Compute/virtualMachineScaleSets/$vmssName" +
+           "/virtualMachines?api-version=2024-07-01"
+
+$resp = Invoke-AzRestMethod -Method GET -Path $apiPath
+($resp.Content | ConvertFrom-Json).value |
     ForEach-Object {
-        $diskId = $_.StorageProfile.DataDisks[0].ManagedDisk.Id
-        $disk   = Get-AzDisk -ResourceId $diskId
         [pscustomobject]@{
-            InstanceId = $_.InstanceId
-            DiskName   = $disk.Name
-            DiskSizeGB = $disk.DiskSizeGB
+            InstanceId = $_.instanceId
+            DiskSizeGB = $_.properties.storageProfile.dataDisks[0].diskSizeGB
         }
     } | Format-Table
 ```
 
 <!-- Screenshot -->
 
-**Result**: The VMSS model is updated to 64 GB and `LatestModelApplied = True`, but the actual managed disk resources attached to existing instances remain at 32 GB. `Update-AzVmss` updated the desired state — it did **not** resize the already-provisioned disk resources.
+**Result**: The VMSS model is updated to 64 GB and `LatestModelApplied = True`, but the actual data disks on existing instances remain at 32 GB. `Update-AzVmss` updated the desired state — it did **not** resize the already-provisioned disk resources.
 
 ### Step 9: Apply Change to Existing Instances Using Set-AzVmssVM
 
@@ -356,15 +362,18 @@ Get-AzVmssVM -ResourceGroupName $rg -VMScaleSetName $vmssName |
 ### Step 10: Verify Data Disks Rebuilt at 64 GB
 
 ```powershell
-# Verify actual managed disk resources are now 64 GB
-Get-AzVmssVM -ResourceGroupName $rg -VMScaleSetName $vmssName |
+# Verify actual data disk size is now 64 GB via REST API
+$sub     = (Get-AzContext).Subscription.Id
+$apiPath = "/subscriptions/$sub/resourceGroups/$rg/providers" +
+           "/Microsoft.Compute/virtualMachineScaleSets/$vmssName" +
+           "/virtualMachines?api-version=2024-07-01"
+
+$resp = Invoke-AzRestMethod -Method GET -Path $apiPath
+($resp.Content | ConvertFrom-Json).value |
     ForEach-Object {
-        $diskId = $_.StorageProfile.DataDisks[0].ManagedDisk.Id
-        $disk   = Get-AzDisk -ResourceId $diskId
         [pscustomobject]@{
-            InstanceId = $_.InstanceId
-            DiskName   = $disk.Name
-            DiskSizeGB = $disk.DiskSizeGB
+            InstanceId = $_.instanceId
+            DiskSizeGB = $_.properties.storageProfile.dataDisks[0].diskSizeGB
         }
     } | Format-Table
 ```
