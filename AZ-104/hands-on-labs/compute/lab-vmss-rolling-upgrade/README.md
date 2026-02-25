@@ -157,7 +157,7 @@ Use-AzProfile Lab
 .\bicep.ps1 apply
 ```
 
-<!-- Screenshot -->
+<img src='.img/2026-02-25-03-18-14.png' width=900>
 
 ---
 
@@ -181,7 +181,7 @@ $vmss.UpgradePolicy.Mode      # Expected: Rolling
 $vmss.Sku.Capacity             # Expected: 2
 ```
 
-<!-- Screenshot -->
+<img src='.img/2026-02-25-03-15-36.png' width=600>
 
 ### Step 2: Verify OS Profile and Data Disk Configuration
 
@@ -195,7 +195,7 @@ $vmss.VirtualMachineProfile.StorageProfile.DataDisks |
     Format-Table Lun, DiskSizeGB, CreateOption, Caching
 ```
 
-<!-- Screenshot -->
+<img src='.img/2026-02-25-03-16-07.png' width=600>
 
 ### Step 3: Verify Rolling Upgrade Policy Settings
 
@@ -204,7 +204,7 @@ $vmss.VirtualMachineProfile.StorageProfile.DataDisks |
 $vmss.UpgradePolicy.RollingUpgradePolicy | Format-List
 ```
 
-<!-- Screenshot -->
+<img src='.img/2026-02-25-03-17-31.png' width=600>
 
 ---
 
