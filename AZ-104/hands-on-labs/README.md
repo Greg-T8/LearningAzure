@@ -6,10 +6,10 @@ This page catalogs hands-on labs built from practice exam questions. Each lab us
 
 ## 📊 Lab Statistics
 
-- **Total Labs**: 14
+- **Total Labs**: 15
 - **Storage**: 4
 - **Compute**: 5
-- **Monitoring**: 2
+- **Monitoring**: 3
 - **Identity & Governance**: 0
 - **Networking**: 3
 
@@ -35,6 +35,7 @@ This page catalogs hands-on labs built from practice exam questions. Each lab us
 ### Monitoring
 
 - **[Azure Monitor Alert Notification Rate Limits](monitoring/lab-alert-notification-rate-limits/README.md)** - Understand notification rate limits for email, SMS, and voice alerts in Azure Monitor action groups
+- **[Azure Monitor Metrics - Batch API and Aggregations](monitoring/lab-metrics-batch-api/README.md)** - Query multiple metrics using the Azure Monitor Metrics batch API with aggregations
 - **[Recover Configuration File from Azure VM Backup](monitoring/lab-vm-file-recovery/README.md)** - Practice file-level recovery from Azure VM backup using Recovery Services vault
 
 ### Networking

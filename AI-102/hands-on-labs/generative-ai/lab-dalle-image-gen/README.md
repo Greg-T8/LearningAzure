@@ -264,7 +264,7 @@ az group delete --name ai102-generative-ai-dalle-image-gen-tf --yes --no-wait
 
 ### ▶ Related Labs
 
-- ▶ Related Lab: [lab-search-query-perf](../knowledge-mining/lab-search-query-perf/README.md)
+- ▶ Related Lab: [lab-search-query-perf](../../knowledge-mining/lab-search-query-perf/README.md)
 
 ### ▶ Related Practice Exam Questions
 

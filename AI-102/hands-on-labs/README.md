@@ -6,10 +6,10 @@ This page catalogs hands-on labs built from practice exam questions. Each lab us
 
 ## 📊 Lab Statistics
 
-- **Total Labs**: 6
+- **Total Labs**: 5
 - **Generative AI**: 1
 - **Agentic**: 2
-- **AI Services**: 2
+- **AI Services**: 1
 - **Computer Vision**: 0
 - **Natural Language Processing**: 0
 - **Knowledge Mining**: 1
@@ -30,7 +30,6 @@ This page catalogs hands-on labs built from practice exam questions. Each lab us
 ### AI Services
 
 - **[Azure AI Content Safety - Text and Image Moderation](ai-services/lab-content-safety/README.md)** - AI-powered text and image content moderation for sexual content, violence, hate, and self-harm detection
-- **[Azure AI Document Intelligence - Prebuilt Invoice Model](ai-services/lab-doc-intelligence-invoice/README.md)** - Automate invoice processing with prebuilt models for key field extraction
 
 ### Knowledge Mining
 

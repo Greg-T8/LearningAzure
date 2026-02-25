@@ -40,14 +40,18 @@ You can type a single word (e.g., "Terraform") along with an attached screenshot
 
 ### Unclear-Request Questions
 
-If the user's intent is **not clear** — including cases where the user sends a vague message, a bare screenshot with no other context, or a message that does not specify both an exam type and a deployment method — use the `VSCode/askQuestions` tool to resolve the ambiguity.
+If the user's intent is **not clear** — including cases where the user sends a vague message, a bare screenshot with no other context, or a message that does not specify a deployment method — use the `VSCode/askQuestions` tool to resolve the ambiguity.
+
+> **CRITICAL — Exam-Type Inference First, Ask Later**
+>
+> The exam type (`AI-102`, `AZ-104`, `AI-900`) must **always** be inferred from the question content using the R-041 clue table — **never** asked about preemptively. Do **not** include an exam-type question in any `VSCode/askQuestions` call until **after** the question content has been extracted and analyzed. Only if the extracted content is genuinely ambiguous — meaning the clues match multiple exams equally or match none — may you fall back to asking the user. Asking the user about the exam type before analyzing the question content is a **UX violation**.
 
 #### When to call `VSCode/askQuestions`
 
-- The user sends a screenshot but **no deployment method** → ask the deployment-method question only.
-- The user sends a **deployment-method keyword** but no screenshot → do **not** ask about the deployment method; ask only for the exam question (screenshot or text). If the exam type also cannot be inferred, add the exam-type question as well.
-- The user sends a message with **no screenshot and no recognizable deployment-method keyword** → ask both exam-type and deployment-method questions.
-- The user sends a screenshot and a deployment method but the **exam type cannot be confidently inferred** from the question content → ask the exam-type question only.
+- The user sends a screenshot but **no deployment method** → ask the deployment-method question only. Do **not** ask about the exam type — infer it from the question content during R-041.
+- The user sends a **deployment-method keyword** but no screenshot → do **not** ask about the deployment method; ask only for the exam question (screenshot or text). Do **not** ask about the exam type at this stage — wait until the question content is available, then infer the exam type during R-041.
+- The user sends a message with **no screenshot and no recognizable deployment-method keyword** → ask for the deployment method only. Do **not** ask about the exam type — wait until the question content is available, then infer the exam type during R-041.
+- **(Post-extraction fallback only)** After extracting the question content in R-039 and attempting exam-type inference in R-041, the content is **genuinely ambiguous** (clues match multiple exams equally or match none) → ask the exam-type question as a last resort.
 
 > **NEVER re-ask for the deployment method** when the user's message already contains a deployment-method keyword (`Terraform`, `Bicep`, `Scripted`, or `Manual`). Doing so is a UX violation.
 
@@ -76,7 +80,7 @@ Which exam is this question for?
 3. `AI-900`
 ```
 
-If **both** are missing, ask exam type first, then deployment method in the same `VSCode/askQuestions` call (question order must match this sequence).
+The exam-type question is reserved for **post-extraction fallback only** (see R-041). Never include it in an initial `VSCode/askQuestions` call before the question content has been analyzed.
 
 Once the user responds, capture the values and proceed with extraction.
 
@@ -94,10 +98,10 @@ After checking for a deployment-method keyword, evaluate what you have:
 
 | Has deployment method? | Has screenshot / text? | Action |
 |---|---|---|
-| Yes | Yes | Proceed directly to R-039 — no questions needed. |
-| Yes | No | The deployment method is captured. Ask **only** for the exam question (screenshot or text). Do **not** ask for the deployment method again. |
-| No | Yes | Call `VSCode/askQuestions` with the deployment-method options only. |
-| No | No | Call `VSCode/askQuestions` per the Unclear-Request Questions rules. |
+| Yes | Yes | Proceed directly to R-039 — no questions needed. Exam type will be inferred from question content in R-041. |
+| Yes | No | The deployment method is captured. Ask **only** for the exam question (screenshot or text). Do **not** ask for the deployment method again. Do **not** ask about the exam type — it will be inferred after extraction. |
+| No | Yes | Call `VSCode/askQuestions` with the deployment-method options only. Do **not** ask about the exam type — it will be inferred from question content in R-041. |
+| No | No | Call `VSCode/askQuestions` with the deployment-method options only. Do **not** ask about the exam type at this stage. |
 
 When entering the response, the user typically provides a screenshot/attachment of the exam question. Consider this attachment to be the exam question you should work with.
 
@@ -456,9 +460,10 @@ After extracting the exam question per R-039, this agent derives a filename, sav
    c. Remove all special characters (punctuation, parentheses, etc.).
    d. Keep all meaningful nouns and verbs.
    e. **MANDATORY: 2–4 word range** — The final slug must contain **between 2 and 4 hyphen-separated words** (inclusive). If the result exceeds 4 words after applying steps a–d, condense or drop the least essential words to reach 4 words or fewer. If the result is fewer than 2 words, expand by retaining the next most meaningful word from the title.
-   f. **MANDATORY: 25-character maximum** — The final slug must be **no more than 25 characters** (inclusive), counting hyphens.
-   g. **Abbreviate if needed** — If the slug exceeds 25 characters, abbreviate least-critical words while preserving core Azure meaning (examples: `configuration` -> `config`, `intelligence` -> `intel`, `management` -> `mgmt`, `document` -> `doc`).
-   h. Result becomes the filename: `.assets/temp/<derived-slug>.md`
+   f. **MANDATORY: 25-character maximum (hard limit)** — The final slug must be **no more than 25 characters** (inclusive), counting hyphens.
+   g. **Abbreviate and re-check until compliant** — If the slug exceeds 25 characters, abbreviate least-critical words while preserving core Azure meaning (examples: `configuration` -> `config`, `intelligence` -> `intel`, `management` -> `mgmt`, `document` -> `doc`), then re-count characters.
+   h. **NON-NEGOTIABLE ENFORCEMENT** — If the slug is still over 25 characters after abbreviation, remove the least essential remaining word(s) and re-check. Repeat until length is <=25.
+   i. Result becomes the filename: `.assets/temp/<derived-slug>.md`
 2. **Save to file** — Use `createFile` to write the formatted question markdown to `.assets/temp/<derived-slug>.md`.
 3. **Validate** — Use `readFile` to confirm the file was written correctly and the `## <Title>` heading is present.
 
@@ -483,6 +488,10 @@ Extract **all** of the following fields from the exam question:
 
 #### Exam
 
+> **MANDATORY — Infer First, Ask Never (Unless Ambiguous)**
+>
+> You **must** determine the exam type from the extracted question content using the clue table below. This is the **primary** method. Do **not** ask the user which exam a question belongs to unless the content is genuinely ambiguous — meaning the clues match multiple exams with equal confidence or match none at all. In practice, the vast majority of exam questions contain sufficient clues to determine the exam reliably.
+
 Determine the exam from contextual clues in the question:
 
 | Clue                                                        | Exam     |
@@ -492,6 +501,8 @@ Determine the exam from contextual clues in the question:
 | Foundational AI concepts, responsible AI, machine learning basics, Azure AI Foundry overview | `AI-900` |
 
 If the user explicitly states the exam, use their value.
+
+**Fallback only:** If — after extracting the full question text and evaluating all clues — the exam type remains genuinely ambiguous, call `VSCode/askQuestions` with the exam-type question. This is the **only** circumstance in which asking about the exam type is permitted.
 
 #### Domain
 
@@ -559,14 +570,15 @@ Derive the kebab-case slug directly from the `## <Title>` heading in the exam qu
 7. Remove all special characters (punctuation, parentheses, etc.).
 8. Keep all meaningful nouns.
 9. **MANDATORY: 4-word maximum** — The final slug must contain **no more than 4 hyphen-separated words**. If the result exceeds 4 words after applying steps 1–8, condense or drop the least essential words to reach 4 words or fewer.
-10. **MANDATORY: 25-character maximum** — The final slug must be **no more than 25 characters** (inclusive), counting hyphens.
-11. **Abbreviate if needed** — If the slug exceeds 25 characters, abbreviate least-critical words while preserving core Azure meaning (examples: `configuration` -> `config`, `intelligence` -> `intel`, `management` -> `mgmt`, `document` -> `doc`).
+10. **MANDATORY: 25-character maximum (hard limit)** — The final slug must be **no more than 25 characters** (inclusive), counting hyphens.
+11. **Abbreviate and re-check until compliant** — If the slug exceeds 25 characters, abbreviate least-critical words while preserving core Azure meaning (examples: `configuration` -> `config`, `intelligence` -> `intel`, `management` -> `mgmt`, `document` -> `doc`), then re-count characters.
+12. **NON-NEGOTIABLE ENFORCEMENT** — If the slug is still over 25 characters after abbreviation, remove the least essential remaining word(s) and re-check. Repeat until length is <=25. Do not proceed to metadata output, file append, validation pass, or handoff with a slug over 25 characters.
 
 Examples:
 
 | Title | Topic Slug | Reasoning |
 | ----- | ---------- | --------- |
-| Encrypt a VM Disk Using Key Vault Keys | `vm-disk-encryption-keyvault` | "Encrypt" → nominalized to "encryption" |
+| Encrypt a VM Disk Using Key Vault Keys | `vm-disk-keyvault-encr` | "Encrypt" → nominalized to "encryption", then abbreviated to meet <=25 chars |
 | Configure VNet Peering Between Two Virtual Networks | `vnet-peering-config` | "Configure" → nominalized to "config"; concept is VNet peering |
 | Assign an Azure Role to a User | `role-assignment-user` | "Assign" → nominalized to "assignment" |
 | Enable Blob Versioning on a Storage Account | `blob-versioning-storage` | "Enable" → dropped; concept is blob versioning |
@@ -643,6 +655,7 @@ After extracting metadata per R-041 and **before** returning output, run this va
 5. **Field-level checks:**
    - [ ] `Exam` matches one of: `AI-102`, `AZ-104`, `AI-900`
    - [ ] `Topic` is kebab-case, 2–4 words, ≤25 characters, no special characters
+   - [ ] `Topic` length was explicitly counted (including hyphens) and is <=25 before output
    - [ ] `Topic` does not contain deployment-method terms (`terraform`, `bicep`, `powershell`, etc.)
    - [ ] `Key Services` contains at least one service
    - [ ] `Key Services` entries use official Azure naming
@@ -655,6 +668,8 @@ After extracting metadata per R-041 and **before** returning output, run this va
 7. **File persistence check** — Use `readFile` to re-read the input file and confirm the `## Phase 1 — Metadata Output` heading exists in the file content. If it does not, the R-043 persist step was skipped — go back and execute it now before proceeding.
 
 If any check fails, **fix the value before returning output**. Do not return output with validation failures.
+
+> **Hard failure condition — Topic length:** A `Topic` slug longer than 25 characters is a blocking failure. You must shorten and re-validate until it is <=25. Never emit, persist, or hand off metadata containing an over-limit slug.
 
 > **Common mistake — skipping file write:** The most frequent intake failure is generating metadata in the chat response but never writing it to the file. Check 7 above catches this. If the heading is missing from the file, you **must** append the metadata block before completing intake.
 >
