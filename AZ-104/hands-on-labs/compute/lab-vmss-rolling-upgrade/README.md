@@ -238,7 +238,9 @@ Update-AzVmss `
     -VirtualMachineScaleSet $vmss
 ```
 
-<!-- Screenshot -->
+<img src='.img/2026-02-25-03-34-29.png' width=800>
+
+<img src='.img/2026-02-25-03-35-56.png' width=600>
 
 ### Step 5: Monitor Rolling Upgrade Progress
 
@@ -249,7 +251,7 @@ Get-AzVmssRollingUpgrade -ResourceGroupName $rg -VMScaleSetName $vmssName
 
 > **Note:** If the rolling upgrade completes quickly, this command may return an error indicating no active rolling upgrade. This is expected for a 2-instance VMSS.
 
-<!-- Screenshot -->
+<img src='.img/2026-02-25-03-35-29.png' width=600>
 
 ### Step 6: Verify Extension Applied to All Instances
 
@@ -264,9 +266,13 @@ $updatedVmss.VirtualMachineProfile.ExtensionProfile.Extensions |
     Format-Table Name, Publisher, Type
 ```
 
-<!-- Screenshot -->
+<img src='.img/2026-02-25-03-36-47.png' width=600>
+
+<img src='.img/2026-02-25-03-37-12.png' width=600>
 
 **Result**: The rolling upgrade automatically propagated the extension to both instances. No per-instance action was needed. This is the expected behavior for model changes like extensions, image references, and SKU changes.
+
+<img src='.img/2026-02-25-03-38-08.png' width=800>
 
 ---
 
@@ -290,7 +296,7 @@ Update-AzVmss `
     -VirtualMachineScaleSet $vmss
 ```
 
-<!-- Screenshot -->
+<img src='.img/2026-02-25-03-41-01.png' width=600>
 
 ### Step 8: Observe Model Updated but Disk Resources Unchanged
 
@@ -305,7 +311,9 @@ Get-AzVmssVM -ResourceGroupName $rg -VMScaleSetName $vmssName |
     Format-Table Name, LatestModelApplied
 ```
 
-<!-- Screenshot -->
+<img src='.img/2026-02-25-03-41-31.png' width=600>
+
+<img src='.img/2026-02-25-03-41-47.png' width=600>
 
 ```powershell
 # Check the ACTUAL managed disk resources — still 32 GB
