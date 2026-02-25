@@ -77,7 +77,6 @@ Which exam is this question for?
 
 1. `AI-102`
 2. `AZ-104`
-3. `AI-900`
 ```
 
 The exam-type question is reserved for **post-extraction fallback only** (see R-041). Never include it in an initial `VSCode/askQuestions` call before the question content has been analyzed.
@@ -197,12 +196,12 @@ Create a concise exam-appropriate title (3–10 words).
 
 > **CRITICAL — No deployment-method terms in the title.** The title must describe the Azure concept being tested, not the deployment tooling. Never include words like `Terraform`, `Bicep`, `Scripted`, `Manual`, `PowerShell`, `CLI`, `ARM`, or `JSON` in the title. If the source question mentions a deployment tool, omit it from the title.
 
-Immediately below the title, render the detected question type in italics.
+Immediately below the title, render the detected question type prefixed with the literal label `Question Type:` followed by the determined question type in *italics*.
 
 ```markdown
 ## <Title Extracted From Image>
 
-*<Question Type>*
+Question Type: *<Question Type>*
 ```
 
 ---
@@ -439,7 +438,7 @@ Use this markdownlint-safe structure for the temp file content:
 
 ## <Title>
 
-*<Question Type>*
+Question Type: *<Question Type>*
 
 <Prompt>
 
@@ -451,25 +450,82 @@ Use this markdownlint-safe structure for the temp file content:
 
 ## R-040: Input Acceptance & File Persistence
 
-After extracting the exam question per R-039, this agent derives a filename, saves the formatted question to disk, and uses that file as the cumulative artifact for all downstream processing.
+After extracting the exam question per R-039, this agent uses the following procedure to derive the slug used for both the topic and filename.
 
-1. **Derive filename** — From the extracted `## <Title>` heading:
-   a. Convert to lowercase and replace spaces with hyphens.
-   b. Remove filler words: `a`, `an`, `the`, `using`, `for`, `to`, `with`, `and`, `or`.
-   b1. **CRITICAL — Remove deployment-method terms** from the slug candidate: `terraform`, `bicep`, `scripted`, `manual`, `powershell`, `ps`, `bash`, `cli`, `arm`, `json`, `yaml`, `yml`. These terms must **never** appear in the derived slug. If any remain after this step, remove them before proceeding.
-   c. Remove all special characters (punctuation, parentheses, etc.).
-   d. Keep all meaningful nouns and verbs.
-   e. **MANDATORY: 2–4 word range** — The final slug must contain **between 2 and 4 hyphen-separated words** (inclusive). If the result exceeds 4 words after applying steps a–d, condense or drop the least essential words to reach 4 words or fewer. If the result is fewer than 2 words, expand by retaining the next most meaningful word from the title.
-   f. **MANDATORY: 25-character maximum (hard limit)** — The final slug must be **no more than 25 characters** (inclusive), counting hyphens.
-   g. **Abbreviate and re-check until compliant** — If the slug exceeds 25 characters, abbreviate least-critical words while preserving core Azure meaning (examples: `configuration` -> `config`, `intelligence` -> `intel`, `management` -> `mgmt`, `document` -> `doc`), then re-count characters.
-   h. **NON-NEGOTIABLE ENFORCEMENT** — If the slug is still over 25 characters after abbreviation, remove the least essential remaining word(s) and re-check. Repeat until length is <=25.
-   i. Result becomes the filename: `.assets/temp/<derived-slug>.md`
-2. **Save to file** — Use `createFile` to write the formatted question markdown to `.assets/temp/<derived-slug>.md`.
-3. **Validate** — Use `readFile` to confirm the file was written correctly and the `## <Title>` heading is present.
+Derive topic slug (hard-gated; cannot proceed until PASS)
 
-All downstream processing (R-041 onwards) uses the content from this file.
+**Goal:** produce `<derived-slug>` that satisfies **both**:
 
-> **No chat output.** File creation and validation are silent tool operations. Do not render the extracted question or metadata to the user at this stage — that happens once in R-046.
+* `2 <= word_count <= 4`
+* `char_count <= 25` (including hyphens)
+
+### 1A. Build the initial slug candidate
+
+1. Start from the extracted `## <Title>` heading.
+2. Normalize:
+
+   * lowercase
+   * replace whitespace with `-`
+   * remove punctuation/special characters (including parentheses)
+   * collapse repeated hyphens to a single `-`
+   * trim leading/trailing hyphens
+3. Remove terms:
+
+   * **Filler words** (remove wherever they appear as standalone words): `a`, `an`, `the`, `using`, `for`, `to`, `with`, `and`, `or`
+   * **Deployment-method terms (must never appear in the slug):** `terraform`, `bicep`, `scripted`, `manual`, `powershell`, `ps`, `bash`, `cli`, `arm`, `json`, `yaml`, `yml`
+4. Keep remaining meaningful nouns/verbs (preserve original order).
+
+### 1B. Counting rules (mandatory; no alternate interpretation)
+
+* `word_count` = number of hyphen-delimited tokens in the slug
+
+  * Example: `auto-invoice-processing` → `3` words
+* `char_count` = total characters in the slug **including hyphens**
+
+### 1C. Single enforcement loop (must repeat until both PASS)
+
+Run this loop **immediately after 1A** and after **every** change to the slug:
+
+1. **Run the checkpoint (always):**
+
+   * Compute `word_count` and `char_count`
+   * Record **both** using this exact format:
+
+```
+SLUG GATE CHECK:
+slug       = "<slug>"
+word_count = <N>  → 2 <= <N> <= 4?  [PASS/FAIL]
+char_count = <N>  → <N> <= 25?       [PASS/FAIL]
+```
+
+2. **If word_count FAIL (fix word_count first):**
+
+   * If `word_count > 4`: drop the **least essential** token(s) until `word_count == 4`
+   * If `word_count < 2`: add the next most meaningful token from the Title
+   * After any change: **re-run the checkpoint** (Step 1C.1).
+   * **Do not** attempt abbreviation while word_count is failing.
+
+3. **Else if char_count FAIL (word_count already PASS):**
+
+   * Abbreviate least-critical words using this table (prefer the change that saves the most characters while staying unambiguous):
+
+     * `authentication` → `auth`
+     * `authorization` → `authz`
+     * `automate` → `auto`
+     * `configuration` → `config`
+     * `document` → `doc`
+     * `intelligence` → `intel`
+     * `management` → `mgmt`
+   * Avoid ambiguous truncations (e.g., don’t create `proc`).
+   * Re-run the checkpoint.
+   * If still `char_count > 25`: remove the least essential remaining token(s), then re-run the checkpoint.
+   * Repeat until PASS.
+
+### 1D. Result + final pre-create assertion (required)
+
+* Filename: `.assets/temp/<derived-slug>.md`
+* **Immediately before Step 2 (createFile), run the checkpoint one last time.**
+* If either line is FAIL, return to **1C**; do not continue.
 
 ---
 
@@ -558,23 +614,11 @@ Map the question's subject to one of the **exact** domain names listed below. Th
 
 #### Topic
 
-Derive the kebab-case slug directly from the `## <Title>` heading in the exam question file:
+> **CRITICAL — Single Source of Truth.** The `Topic` slug is **not re-derived here**. It is the `<derived-slug>` already produced and validated in R-040. Copy it verbatim. Do not re-interpret the title, re-apply transformation rules, or produce a second independent slug. Any independent derivation here will diverge from the filename and is a bug.
 
-1. Extract the title text from the level-2 heading (e.g., `## Encrypt a VM Disk Using Key Vault Keys`).
-2. **Strip exam-task verbs** — Remove verbs that describe what the exam asks the test-taker to do (e.g., `Identify`, `Determine`, `Select`, `Choose`, `Evaluate`, `Recommend`, `Troubleshoot`). These describe the exam action, not the Azure concept. Replace with the **technical subject** of the question.
-3. **Focus on the Azure concept** — The slug must name the Azure resource, feature, or configuration being tested — not the diagnostic or decision-making action. Ask: *"What Azure thing is being configured or deployed?"* and use that as the slug's core.
-4. **Nominalize action verbs** — Convert remaining action verbs to noun forms (e.g., `Encrypt` → `encryption`, `Configure` → `config`, `Assign` → `assignment`, `Enable` → `versioning`).
-5. Convert to lowercase and replace spaces with hyphens.
-6. Remove filler words: `a`, `an`, `the`, `using`, `for`, `to`, `with`, `and`, `or`.
-6a. **CRITICAL — Remove deployment-method terms:** Strip these words from the slug unconditionally: `terraform`, `bicep`, `scripted`, `manual`, `powershell`, `ps`, `bash`, `cli`, `arm`, `json`, `yaml`, `yml`. Deployment type must **never** appear in the `Topic` slug. If the slug still contains any of these terms after this step, remove them before proceeding. This rule is non-negotiable.
-7. Remove all special characters (punctuation, parentheses, etc.).
-8. Keep all meaningful nouns.
-9. **MANDATORY: 4-word maximum** — The final slug must contain **no more than 4 hyphen-separated words**. If the result exceeds 4 words after applying steps 1–8, condense or drop the least essential words to reach 4 words or fewer.
-10. **MANDATORY: 25-character maximum (hard limit)** — The final slug must be **no more than 25 characters** (inclusive), counting hyphens.
-11. **Abbreviate and re-check until compliant** — If the slug exceeds 25 characters, abbreviate least-critical words while preserving core Azure meaning (examples: `configuration` -> `config`, `intelligence` -> `intel`, `management` -> `mgmt`, `document` -> `doc`), then re-count characters.
-12. **NON-NEGOTIABLE ENFORCEMENT** — If the slug is still over 25 characters after abbreviation, remove the least essential remaining word(s) and re-check. Repeat until length is <=25. Do not proceed to metadata output, file append, validation pass, or handoff with a slug over 25 characters.
+Set `Topic` = `<derived-slug>` from R-040.
 
-Examples:
+Examples of what this means in practice:
 
 | Title | Topic Slug | Reasoning |
 | ----- | ---------- | --------- |
@@ -655,7 +699,7 @@ After extracting metadata per R-041 and **before** returning output, run this va
 5. **Field-level checks:**
    - [ ] `Exam` matches one of: `AI-102`, `AZ-104`, `AI-900`
    - [ ] `Topic` is kebab-case, 2–4 words, ≤25 characters, no special characters
-   - [ ] `Topic` length was explicitly counted (including hyphens) and is <=25 before output
+   - [ ] `Topic` is identical to the `<derived-slug>` produced and gate-checked in R-040 (not independently re-derived)
    - [ ] `Topic` does not contain deployment-method terms (`terraform`, `bicep`, `powershell`, etc.)
    - [ ] `Key Services` contains at least one service
    - [ ] `Key Services` entries use official Azure naming
@@ -689,8 +733,8 @@ Intake is complete when **all** of the following are true. The file-write criter
 - [ ] Domain is an exact match from R-041 closed-set tables
 - [ ] Field order matches R-043 (Exam, Domain, Topic, Key Services, Deployment Method)
 - [ ] All values use correct capitalization (Title Case, except Topic)
-- [ ] Topic was derived from the exam question title heading per R-041
-- [ ] Topic length is 25 characters or fewer
+- [ ] Topic was derived from the exam question title heading per R-040 and copied verbatim into R-041 metadata
+- [ ] Topic length verified via R-040 gate checkpoint (both PASS)
 - [ ] Topic does not contain deployment-method terms (`terraform`, `bicep`, `powershell`, etc.)
 - [ ] Deployment method was captured from the user's input (R-042)
 - [ ] Exam question was extracted from screenshot/text per R-039 and saved to file per R-040
