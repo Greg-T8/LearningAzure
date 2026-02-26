@@ -1,14 +1,15 @@
 ---
 name: Lab-Designer
 description: Phase 2 agent — creates the Lab README file and presents a summary for user review and approval, then hands off to Lab-Builder.
-model: 'GPT-4o'
+model: 'Claude Sonnet 4.6'
 user-invokable: true
-tools: [vscode/askQuestions, read/readFile, edit/createDirectory, edit/createFile, edit/editFiles, search/codebase, search/fileSearch, search/listDirectory, search/textSearch, web/fetch, vscode.mermaid-chat-features/renderMermaidDiagram]
+tools: [vscode/askQuestions, read/readFile, edit/createDirectory, edit/createFile, edit/editFiles, search/codebase, search/fileSearch, search/listDirectory, search/textSearch, web/fetch]
 handoffs:
   - label: Lab Builder
     agent: Lab-Builder
     prompt: "Design complete. Handing off to Lab-Builder with approved README context for Phase 3 build."
     send: false
+    model: 'GPT-5.3-Codex (copilot)'
 ---
 
 # Lab Designer — Phase 2
@@ -103,10 +104,9 @@ Phase 2 is complete when:
 After R-057 acceptance criteria are met:
 
 1. **Create the lab folder and README file** — Create the target lab folder (e.g., `<EXAM>/hands-on-labs/<domain>/lab-<topic>/`) and write the complete README.md to it.
-2. **Render Mermaid diagram inline** — If the README contains a Mermaid diagram, call `renderMermaidDiagram` to display it in the chat summary.
-3. **Present a structured summary in chat** — Show a concise summary of the README (see Output Format below) so the user can review the design without scrolling through the full document. Include a link to the created README file.
-4. Wait for the user to confirm the design is correct.
-5. Once the user confirms, hand off to the **Lab-Builder** agent.
+2. **Present a structured summary in chat** — Show a concise summary of the README (see Output Format below) so the user can review the design without scrolling through the full document. Include a link to the created README file.
+3. Wait for the user to confirm the design is correct.
+4. Once the user confirms, hand off to the **Lab-Builder** agent.
 
 ### Single-Render Rule (No Duplicate Chat Output)
 
@@ -143,21 +143,27 @@ State:
 | SKU / Tier          | <tier selections>                          |
 | Region              | <region>                                   |
 
-### Architecture Diagram
-
-<render Mermaid diagram here via renderMermaidDiagram tool call>
-
-### Lab Objectives
+**Lab Objectives**
 
 <numbered list of 3–5 objectives>
 
-### Lab Structure
+**Lab Structure**
 
 <file tree>
 
-### Scenario Answer Preview
+**Scenario Answer Preview**
 
-<1–2 sentence hint of the correct answer without full explanation — e.g., "Tables / Files / Objects projection mapping">
+<Concise statement of the correct answer(s) with brief reasoning.
+For single-answer questions, state the correct option and a one-line rationale.
+For matching/mapping questions, use a compact table — e.g.:
+
+| Scenario | Answer |
+|---|---|
+| OCR rows from PDFs | Tables Projection |
+| JPEG image extraction | Files Projection |
+| Key phrase JSON output | Objects Projection |
+
+Keep to 3–5 lines maximum. Full analysis is in Section 10 of the README.>
 
 ---
 
