@@ -302,4 +302,4 @@ For each of the following statements, select Yes if the statement is true. Other
 
 </details>
 
-▶ Related Lab: []()
+▶ Related Lab: [lab-doc-intelligence-invoice](../hands-on-labs/ai-services/lab-doc-intelligence-invoice/README.md)
