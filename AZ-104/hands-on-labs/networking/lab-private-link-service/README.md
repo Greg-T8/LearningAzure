@@ -47,16 +47,16 @@ For each of the following statements, select Yes if the statement is true. Other
 
 ## Solution Architecture
 
-This lab deploys a complete Private Link Service environment that demonstrates how `privateLinkServiceNetworkPolicies` works on subnets, how source NAT IPs are selected, and how ACL filtering applies to other resources in the subnet. The architecture includes:
+This lab deploys a complete Private Link Service environment that demonstrates how `privateLinkServiceNetworkPolicies` works on subnets, how source NAT IPs are selected, and how NSG security rules apply to other resources in the subnet. The architecture includes:
 
 - **Provider VNet** (`vnet-provider`, 10.1.0.0/16) with two subnets:
-  - `snet-backend` (10.1.1.0/24) — hosts the backend VM with NSG (ACL) filtering
+  - `snet-backend` (10.1.1.0/24) — hosts the backend VM with NSG security-rule filtering
   - `snet-pls` (10.1.4.0/24) — hosts the ILB frontend and PLS NAT IP, with `privateLinkServiceNetworkPolicies` disabled
 - **Standard Internal Load Balancer** (`lb-private-link`) with frontend IP in the PLS subnet
 - **Linux VM** (`vm-web`) running nginx behind the ILB as the backend service
 - **Private Link Service** (`pls-web`) connected to the ILB frontend, with NAT IP sourced from the PLS subnet
 - **Consumer VNet** (`vnet-consumer`, 10.2.0.0/16) with a Private Endpoint (`pe-web`) connecting to the PLS
-- **NSG** (`nsg-backend`) on the backend subnet demonstrating that ACL filtering still applies to non-PLS resources
+- **NSG** (`nsg-backend`) on the backend subnet demonstrating that NSG security rules still apply to non-PLS resources
 - **Azure Bastion** (Developer SKU) for secure VM access
 
 ### Architecture Diagram
@@ -88,7 +88,7 @@ graph TB
                 PLS["pls-web<br/>(Private Link Service)<br/>NAT IP: dynamic"]:::network
             end
 
-            subgraph BackendSubnet["snet-backend (10.1.1.0/24)<br/>NSG: nsg-backend (ACL filtering)"]
+            subgraph BackendSubnet["snet-backend (10.1.1.0/24)<br/>NSG: nsg-backend (security-rule filtering)"]
                 VM["vm-web<br/>(Standard_B2s)<br/>nginx"]:::compute
             end
         end
@@ -121,7 +121,7 @@ graph TB
 
 1. Deploy a Private Link Service with a Standard Internal Load Balancer and understand the subnet network policy requirement
 2. Observe how `privateLinkServiceNetworkPolicies: Disabled` applies only to the PLS source NAT IP, not to all resources in the subnet
-3. Verify that NSG (ACL) filtering continues to apply to other resources in the same VNet
+3. Verify that NSG security-rule filtering continues to apply to other resources in the same VNet
 4. Create a consumer Private Endpoint and validate cross-VNet private connectivity through Private Link
 5. Understand how the Azure portal automatically configures subnet network policies when creating a Private Link Service
 
@@ -232,10 +232,10 @@ $peNic.IpConfigurations[0].PrivateIpAddress  # IP in consumer VNet (10.2.1.x)
 <img src='.img/2026-02-26-04-52-00.png' width=600>
 
 ```powershell
-# 6. Verify NSG (ACL) filtering is active on the backend subnet
+# 6. Verify NSG security-rule filtering is active on the backend subnet
 $nsg = Get-AzNetworkSecurityGroup -Name 'nsg-backend' -ResourceGroupName 'az104-networking-private-link-service-tf'
 $nsg.SecurityRules | Select-Object Name, Direction, Access, Protocol, DestinationPortRange
-# NSG rules apply to other resources — ACL filtering is NOT bypassed
+# NSG rules apply to other resources and are not bypassed
 ```
 
 <!-- Screenshot -->
@@ -281,18 +281,20 @@ When creating a Private Link Service through the Azure portal, the portal **auto
 
 However, when deploying via ARM templates, Terraform, Bicep, or Azure CLI, you **must explicitly set** this property to `Disabled` (or `false`) before creating the Private Link Service. The ARM template in the exam question correctly includes this setting, which would be necessary for a non-portal deployment.
 
-### Statement 3: "For other resources in the subnet, network traffic is filtered by Access Control Lists (ACL)" — **YES**
+### Statement 3: "For other resources in the subnet, network traffic is filtered by Access Control Lists (ACL)" — **NO**
 
-Disabling `privateLinkServiceNetworkPolicies` does **not** exempt the entire subnet from network security filtering. Only the PLS source NAT IP bypasses NSG rules. All other resources deployed in the subnet — VMs, NICs, other services — continue to have their network traffic filtered by NSGs (Access Control Lists).
+Disabling `privateLinkServiceNetworkPolicies` does **not** exempt the entire subnet from network security filtering. Only the PLS source NAT IP bypasses NSG rules. All other resources deployed in the subnet — VMs, NICs, other services — continue to have their network traffic filtered by **NSG security rules**.
 
-This is demonstrated in the lab by the `nsg-backend` security group on the backend subnet: the NSG rules (Allow-HTTP, Allow-SSH) continue to filter traffic for the VM, even though the PLS subnet in the same VNet has network policies disabled. The policy disable is scoped exclusively to Private Link Service source IPs.
+The reason the exam marks this statement as **No** is terminology: in Azure networking, subnet/NIC traffic filtering is done by NSGs, not by a feature formally called ACL in this context. ACL wording is typically used for services such as Azure Data Lake Storage ACLs, not for VNet packet filtering.
+
+In this lab, `nsg-backend` proves the behavior remains enforced for non-PLS resources (for example, Allow-HTTP and Allow-SSH). So the behavior is correct, but the wording in Statement 3 is imprecise, which is why MeasureUp expects **No**.
 
 ## Key Learning Points
 
 1. **`privateLinkServiceNetworkPolicies` is subnet-level** — The setting is configured per subnet, not per VNet or per resource. Only subnets hosting PLS NAT IPs need it disabled.
 2. **Policy disable targets only PLS source NAT IPs** — When disabled, NSG bypass applies only to the specific private IP selected as the PLS source IP, not to all resources in the subnet.
 3. **Azure portal auto-configures the setting** — The portal automatically disables network policies on the subnet when creating a Private Link Service, but CLI/ARM/Terraform/Bicep deployments require explicit configuration.
-4. **Other resources retain ACL filtering** — VMs, NICs, and other resources in the subnet (or other subnets) continue to have traffic filtered by NSGs regardless of the PLS policy setting.
+4. **Other resources retain NSG security-rule filtering** — VMs, NICs, and other resources in the subnet (or other subnets) continue to have traffic filtered by NSGs regardless of the PLS policy setting.
 5. **Standard ILB is required** — Private Link Service requires a Standard SKU Internal Load Balancer; Basic SKU and public load balancers are not supported.
 6. **PLS NAT IP and ILB frontend can share a subnet** — The PLS NAT IP and the ILB frontend IP configuration can reside in the same subnet, which must have `privateLinkServiceNetworkPolicies` disabled.
 7. **Private Endpoint provides cross-VNet access** — Consumers in a different VNet (or subscription/tenant) connect to the PLS through a Private Endpoint, receiving a private IP in their own address space.
