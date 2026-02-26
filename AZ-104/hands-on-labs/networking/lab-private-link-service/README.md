@@ -180,18 +180,24 @@ $plsSubnet = $vnet.Subnets | Where-Object Name -eq 'snet-pls'
 $plsSubnet.PrivateLinkServiceNetworkPolicies  # Expected: Disabled
 ```
 
-<!-- Screenshot -->
-<img src='.img/01-pls-subnet-policies.png' width=700>
+<!-- Screenshot -->$p
+<img src='.img/2026-02-26-04-15-03.png' width=800>
+
+<img src='.img/2026-02-26-04-15-59.png' width=800>
 
 ```powershell
 # 2. Verify the Private Link Service exists and show its NAT IP (source IP)
 $pls = Get-AzPrivateLinkService -Name 'pls-web' -ResourceGroupName 'az104-networking-private-link-service-tf'
-$pls.IpConfigurations | Select-Object Name, PrivateIPAddress, Primary
+Get-AzNetworkInterface -ResourceId $pls.NetworkInterfaces[0].Id |
+    Select-Object -ExpandProperty IpConfigurations |
+    Select-Object Name, PrivateIpAddress, Primary, PrivateIpAllocationMethod
 # The NAT IP is the specific IP that the disabled network policy applies to
 ```
 
 <!-- Screenshot -->
-<img src='.img/02-pls-nat-ip.png' width=700>
+<img src='.img/2026-02-26-04-43-15.png' width=800>
+
+<img src='.img/2026-02-26-04-44-11.png' width=800>
 
 ```powershell
 # 3. Verify the PLS is connected to the Standard Internal Load Balancer
