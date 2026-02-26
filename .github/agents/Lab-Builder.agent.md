@@ -4,8 +4,9 @@ description: Phase 3 agent — generates IaC code, modules, and validation scrip
 model: 'GPT-5.3-Codex'
 user-invokable: true
 tools: ["readFile", "listDirectory", "fileSearch", "textSearch", "createFile", "createDirectory", "editFiles", "runInTerminal", "getTerminalOutput", "problems", "fetch", "microsoftdocs/*"]
+agent: ['Lab-Reviewer']
 handoffs:
-  - label: Lab Reviewer
+  - label: Review Lab
     agent: Lab-Reviewer
     prompt: "Build complete. Handing off to Lab-Reviewer for Phase 4 governance review."
     send: true
@@ -237,7 +238,7 @@ State:
 **Validation Output**
 
 <Brief summary of terraform init/plan or az bicep build result.
-If passed: "terraform plan completed successfully — no errors detected."
+If passed: "`terraform plan` completed successfully — no errors detected."
 If failed: list remaining errors with file and line references.>
 
 ---

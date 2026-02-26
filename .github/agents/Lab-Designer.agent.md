@@ -5,7 +5,7 @@ model: 'Claude Sonnet 4.6'
 user-invokable: true
 tools: [vscode/askQuestions, read/readFile, edit/createDirectory, edit/createFile, edit/editFiles, search/codebase, search/fileSearch, search/listDirectory, search/textSearch, web/fetch]
 handoffs:
-  - label: Lab Builder
+  - label: Build Lab
     agent: Lab-Builder
     prompt: "Design complete. Handing off to Lab-Builder with approved README context for Phase 3 build."
     send: true

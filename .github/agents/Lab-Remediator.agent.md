@@ -5,7 +5,7 @@ model: 'GPT-5.3-Codex'
 user-invokable: true
 tools: ["readFile", "listDirectory", "fileSearch", "textSearch", "createFile", "createDirectory", "editFiles", "runInTerminal", "getTerminalOutput", "problems"]
 handoffs:
-  - label: Re-Review
+  - label: Re-review Lab
     agent: Lab-Reviewer
     prompt: "Remediation complete. Handing off to Lab-Reviewer for re-review."
     send: true

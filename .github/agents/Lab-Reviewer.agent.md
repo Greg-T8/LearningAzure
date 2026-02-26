@@ -3,6 +3,7 @@ name: Lab-Reviewer
 description: Phase 4 agent — validates all generated content against governance standards and produces a structured pass/fail report.
 model: 'Gemini 3.1 Pro (Preview)'
 user-invokable: true
+agent: ['Lab-Finalizer']
 tools: ["readFile", "listDirectory", "fileSearch", "textSearch", "codebase", "problems"]
 handoffs:
   - label: Finalize Lab
@@ -10,11 +11,6 @@ handoffs:
     prompt: "Review passed. Handing off to Lab-Finalizer for Phase 6 delivery."
     send: true
     model: 'Claude Haiku 4.5 (copilot)'
-  - label: Fix & Resubmit
-    agent: Lab-Remediator
-    prompt: "Review found violations. Handing off to Lab-Remediator for Phase 5 fixes."
-    send: true
-    model: 'GPT-5.3-Codex (copilot)'
 ---
 
 # Lab Reviewer — Phase 4
@@ -129,9 +125,9 @@ Phase 4 is complete when:
 After R-075 acceptance criteria are met:
 
 1. **Present a structured review summary in chat** — Show the review report (see Output Format below) so the user can see the results.
-2. **Automatically hand off based on the review outcome** — Do not wait for user input. Route immediately:
-   - **If overall PASS** → Hand off to **Lab-Finalizer** for Phase 6 delivery.
-   - **If overall FAIL** → Hand off to **Lab-Remediator** for Phase 5 fixes.
+2. **Route based on the review outcome:**
+   - **If overall PASS** → Automatically hand off to **Lab-Finalizer** for Phase 6 delivery. Do not wait for user input.
+   - **If overall FAIL** → Stop and present the results. Do **not** automatically hand off. The user decides the next step.
 
 ### Single-Render Rule (No Duplicate Chat Output)
 
@@ -201,9 +197,9 @@ Automatically handing off to Lab-Finalizer for Phase 6 delivery.
 <If FAIL:>
 Governance violations found — <count> fix(es) required before delivery.
 
-Automatically handing off to Lab-Remediator for Phase 5 fixes, then re-review.
+Review the Required Fixes table above and address each violation before re-submitting for review.
 ```
 
 > **Critical:** Do **not** render full file contents in chat. The generated code lives in the workspace files. The chat summary provides enough context for the user to decide the next step.
 >
-> **Automatic routing:** The review cycle proceeds automatically based on PASS/FAIL outcome. No user intervention is required.
+> **Automatic routing:** The Lab-Finalizer handoff happens automatically only when the review outcome is **PASS**. When the outcome is **FAIL**, the agent stops after presenting the report and waits for the user to take action.
