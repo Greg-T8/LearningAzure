@@ -205,7 +205,7 @@ $pls.LoadBalancerFrontendIpConfigurations | Select-Object Id
 ```
 
 <!-- Screenshot -->
-<img src='.img/03-pls-lb-connection.png' width=700>
+<img src='.img/2026-02-26-04-48-27.png' width=800>
 
 ```powershell
 # 4. Verify the Private Endpoint exists and its connection is approved
@@ -214,7 +214,9 @@ $pe.PrivateLinkServiceConnections[0].PrivateLinkServiceConnectionState.Status  #
 ```
 
 <!-- Screenshot -->
-<img src='.img/04-pe-connection-status.png' width=700>
+<img src='.img/2026-02-26-04-50-56.png' width=800>
+
+<img src='.img/2026-02-26-04-50-18.png' width=800>
 
 ```powershell
 # 5. Get the Private Endpoint's private IP (consumer access point)
@@ -223,7 +225,9 @@ $peNic.IpConfigurations[0].PrivateIpAddress  # IP in consumer VNet (10.2.1.x)
 ```
 
 <!-- Screenshot -->
-<img src='.img/05-pe-private-ip.png' width=700>
+<img src='.img/2026-02-26-04-51-38.png' width=600>
+
+<img src='.img/2026-02-26-04-52-00.png' width=600>
 
 ```powershell
 # 6. Verify NSG (ACL) filtering is active on the backend subnet
