@@ -454,10 +454,9 @@ After extracting the exam question per R-039, this agent uses the following proc
 
 Derive topic slug (hard-gated; cannot proceed until PASS)
 
-**Goal:** produce `<derived-slug>` that satisfies **both**:
+**Goal:** produce `<derived-slug>` that satisfies:
 
-* `2 <= word_count <= 4`
-* `char_count <= 25` (including hyphens)
+**MANDATORY** `char_count <= 25` (including hyphens)
 
 ### 1A. Build the initial slug candidate
 
@@ -474,38 +473,28 @@ Derive topic slug (hard-gated; cannot proceed until PASS)
    * **Filler words** (remove wherever they appear as standalone words): `a`, `an`, `the`, `using`, `for`, `to`, `with`, `and`, `or`
    * **Deployment-method terms (must never appear in the slug):** `terraform`, `bicep`, `scripted`, `manual`, `powershell`, `ps`, `bash`, `cli`, `arm`, `json`, `yaml`, `yml`
 4. Keep remaining meaningful nouns/verbs (preserve original order).
+5. Don't include the term 'azure' — the presence of Azure in the question is implied and does not add value to the slug.
 
 ### 1B. Counting rules (mandatory; no alternate interpretation)
 
-* `word_count` = number of hyphen-delimited tokens in the slug
-
-  * Example: `auto-invoice-processing` → `3` words
 * `char_count` = total characters in the slug **including hyphens**
 
-### 1C. Single enforcement loop (must repeat until both PASS)
+### 1C. Single enforcement loop (must repeat until PASS)
 
 Run this loop **immediately after 1A** and after **every** change to the slug:
 
 1. **Run the checkpoint (always):**
 
-   * Compute `word_count` and `char_count`
-   * Record **both** using this exact format:
+   * Compute `char_count`
+   * Record using this exact format:
 
 ```
 SLUG GATE CHECK:
 slug       = "<slug>"
-word_count = <N>  → 2 <= <N> <= 4?  [PASS/FAIL]
-char_count = <N>  → <N> <= 25?       [PASS/FAIL]
+char_count = <N>  → <N> <= 25?  [PASS/FAIL]
 ```
 
-2. **If word_count FAIL (fix word_count first):**
-
-   * If `word_count > 4`: drop the **least essential** token(s) until `word_count == 4`
-   * If `word_count < 2`: add the next most meaningful token from the Title
-   * After any change: **re-run the checkpoint** (Step 1C.1).
-   * **Do not** attempt abbreviation while word_count is failing.
-
-3. **Else if char_count FAIL (word_count already PASS):**
+2. **If char_count FAIL:**
 
    * Abbreviate least-critical words using this table (prefer the change that saves the most characters while staying unambiguous):
 
@@ -525,7 +514,7 @@ char_count = <N>  → <N> <= 25?       [PASS/FAIL]
 
 * Filename: `.assets/temp/<derived-slug>.md`
 * **Immediately before Step 2 (createFile), run the checkpoint one last time.**
-* If either line is FAIL, return to **1C**; do not continue.
+* If FAIL, return to **1C**; do not continue.
 
 ---
 
@@ -698,7 +687,7 @@ After extracting metadata per R-041 and **before** returning output, run this va
 4. **Completeness check** — Confirm all five metadata fields are populated (including Deployment Method from user input).
 5. **Field-level checks:**
    - [ ] `Exam` matches one of: `AI-102`, `AZ-104`, `AI-900`
-   - [ ] `Topic` is kebab-case, 2–4 words, ≤25 characters, no special characters
+   - [ ] `Topic` is kebab-case, ≤25 characters, no special characters
    - [ ] `Topic` is identical to the `<derived-slug>` produced and gate-checked in R-040 (not independently re-derived)
    - [ ] `Topic` does not contain deployment-method terms (`terraform`, `bicep`, `powershell`, etc.)
    - [ ] `Key Services` contains at least one service
@@ -734,7 +723,7 @@ Intake is complete when **all** of the following are true. The file-write criter
 - [ ] Field order matches R-043 (Exam, Domain, Topic, Key Services, Deployment Method)
 - [ ] All values use correct capitalization (Title Case, except Topic)
 - [ ] Topic was derived from the exam question title heading per R-040 and copied verbatim into R-041 metadata
-- [ ] Topic length verified via R-040 gate checkpoint (both PASS)
+- [ ] Topic length verified via R-040 gate checkpoint (PASS)
 - [ ] Topic does not contain deployment-method terms (`terraform`, `bicep`, `powershell`, etc.)
 - [ ] Deployment method was captured from the user's input (R-042)
 - [ ] Exam question was extracted from screenshot/text per R-039 and saved to file per R-040
