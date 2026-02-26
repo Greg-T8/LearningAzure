@@ -8,7 +8,7 @@ handoffs:
   - label: Lab Builder
     agent: Lab-Builder
     prompt: "Design complete. Handing off to Lab-Builder with approved README context for Phase 3 build."
-    send: false
+    send: true
     model: 'GPT-5.3-Codex (copilot)'
 ---
 

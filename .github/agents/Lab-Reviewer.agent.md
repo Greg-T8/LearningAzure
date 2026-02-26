@@ -8,12 +8,12 @@ handoffs:
   - label: Finalize Lab
     agent: Lab-Finalizer
     prompt: "Review passed. Handing off to Lab-Finalizer for Phase 6 delivery."
-    send: false
+    send: true
     model: 'Claude Haiku 4.5 (copilot)'
   - label: Fix & Resubmit
     agent: Lab-Remediator
     prompt: "Review found violations. Handing off to Lab-Remediator for Phase 5 fixes."
-    send: false
+    send: true
     model: 'GPT-5.3-Codex (copilot)'
 ---
 
@@ -128,10 +128,10 @@ Phase 4 is complete when:
 
 After R-075 acceptance criteria are met:
 
-1. **Present a structured review summary in chat** — Show the review report (see Output Format below) so the user can review the results and decide the next step.
-2. Wait for the user to choose one of two actions:
-   - **Finalize Lab** — Hand off to **Lab-Finalizer** for Phase 6 delivery.
-   - **Fix & Resubmit** — Hand off to **Lab-Remediator** for Phase 5 fixes.
+1. **Present a structured review summary in chat** — Show the review report (see Output Format below) so the user can see the results.
+2. **Automatically hand off based on the review outcome** — Do not wait for user input. Route immediately:
+   - **If overall PASS** → Hand off to **Lab-Finalizer** for Phase 6 delivery.
+   - **If overall FAIL** → Hand off to **Lab-Remediator** for Phase 5 fixes.
 
 ### Single-Render Rule (No Duplicate Chat Output)
 
@@ -196,17 +196,14 @@ If all categories PASSed, omit the Required Fixes section entirely.>
 <If PASS:>
 All governance checks passed. Ready to finalize.
 
-Please confirm to proceed:
-- **Finalize Lab** → Hand off to Lab-Finalizer for Phase 6 delivery.
+Automatically handing off to Lab-Finalizer for Phase 6 delivery.
 
 <If FAIL:>
 Governance violations found — <count> fix(es) required before delivery.
 
-Please choose an action:
-- **Fix & Resubmit** → Hand off to Lab-Remediator for Phase 5 fixes, then re-review.
-- **Finalize Lab** → Override and hand off to Lab-Finalizer (not recommended with open violations).
+Automatically handing off to Lab-Remediator for Phase 5 fixes, then re-review.
 ```
 
 > **Critical:** Do **not** render full file contents in chat. The generated code lives in the workspace files. The chat summary provides enough context for the user to decide the next step.
 >
-> **User action required:** The review cycle does not proceed automatically. The user must explicitly choose to finalize or fix before handoff occurs.
+> **Automatic routing:** The review cycle proceeds automatically based on PASS/FAIL outcome. No user intervention is required.

@@ -8,13 +8,8 @@ handoffs:
   - label: Re-Review
     agent: Lab-Reviewer
     prompt: "Remediation complete. Handing off to Lab-Reviewer for re-review."
-    send: false
+    send: true
     model: 'Gemini 3.1 Pro (copilot)'
-  - label: Finalize Lab
-    agent: Lab-Finalizer
-    prompt: "Remediation complete and verified. Handing off to Lab-Finalizer for Phase 6 delivery."
-    send: false
-    model: 'Claude Haiku 4.5 (copilot)'
 ---
 
 # Lab Remediator — Phase 5
@@ -119,10 +114,8 @@ Phase 5 is complete when:
 
 After R-084 acceptance criteria are met:
 
-1. **Present a structured remediation summary in chat** — Show the changes applied and verification results (see Output Format below) so the user can review before deciding the next step.
-2. Wait for the user to choose one of two actions:
-   - **Re-Review** — Hand off to **Lab-Reviewer** for Phase 4 re-review (recommended for complex or multi-category fixes).
-   - **Finalize Lab** — Hand off to **Lab-Finalizer** for Phase 6 delivery (only if all fixes are verified and syntax validation passed).
+1. **Present a structured remediation summary in chat** — Show the changes applied and verification results (see Output Format below) so the user can see what was fixed.
+2. **Automatically hand off to Lab-Reviewer for Phase 4 re-review** — Do not wait for user input. After rendering the summary, immediately hand off to Lab-Reviewer. The reviewer will determine whether the fixes pass or if another remediation cycle is needed.
 
 ### Single-Render Rule (No Duplicate Chat Output)
 
@@ -169,11 +162,9 @@ If not applicable: "No syntax validation required.">
 
 **Remediation complete.** All fixes applied and verified.
 
-Please choose an action:
-- **Re-Review** → Hand off to Lab-Reviewer for Phase 4 re-review.
-- **Finalize Lab** → Hand off to Lab-Finalizer for Phase 6 delivery.
+Automatically handing off to Lab-Reviewer for Phase 4 re-review.
 ```
 
 > **Critical:** Do **not** render full file contents in chat. The updated code lives in the workspace files. The chat summary provides enough context for the user to decide the next step.
 >
-> **User action required:** The remediation cycle does not proceed automatically. The user must explicitly choose to re-review or finalize before handoff occurs.
+> **Automatic routing:** The remediation cycle proceeds automatically. After fixes are applied, Lab-Reviewer re-reviews to confirm compliance. The Reviewer will route to Finalizer on PASS or back to Remediator on FAIL.

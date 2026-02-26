@@ -8,7 +8,7 @@ handoffs:
   - label: Lab Reviewer
     agent: Lab-Reviewer
     prompt: "Build complete. Handing off to Lab-Reviewer for Phase 4 governance review."
-    send: false
+    send: true
     model: 'Gemini 3.1 Pro (copilot)'
 ---
 
@@ -185,9 +185,8 @@ You must CREATE all files — do not just describe or list them.
 
 After R-066 acceptance criteria are met:
 
-1. **Present a structured summary in chat** — Show a concise summary of the build (see Output Format below) so the user can review before governance review.
-2. Wait for the user to confirm the build is correct.
-3. Once the user confirms, hand off to the **Lab-Reviewer** agent.
+1. **Present a structured summary in chat** — Show a concise summary of the build (see Output Format below) so the user can review the build.
+2. **Automatically hand off to the Lab-Reviewer agent** — Do not wait for user confirmation. After rendering the summary, immediately hand off to Lab-Reviewer for Phase 4 governance review.
 
 ### Single-Render Rule (No Duplicate Chat Output)
 
@@ -245,9 +244,7 @@ If failed: list remaining errors with file and line references.>
 
 **Build complete.** All files created in the lab folder.
 
-Please confirm the build is correct, or let me know what needs to be adjusted.
-
-Once confirmed, I'll hand off to Lab-Reviewer to begin Phase 4 (governance review).
+Automatically handing off to Lab-Reviewer for Phase 4 governance review.
 ```
 
 > **Critical:** Do **not** render full file contents in chat. The generated code lives in the workspace files. The chat summary provides enough context for the user to approve or request changes.

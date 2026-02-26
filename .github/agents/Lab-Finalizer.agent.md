@@ -1,7 +1,7 @@
 ---
 name: Lab-Finalizer
 description: Phase 6 agent — assembles and presents the final lab deliverables.
-model: 'Claude Haiku 4.5'
+model: 'GPT-4o'
 user-invokable: false
 tools: ["readFile", "listDirectory", "fileSearch"]
 handoffs: []
@@ -16,6 +16,8 @@ You are the **Lab Finalizer**. You assemble all outputs from previous phases int
 ## Inputs
 
 The Lab Reviewer (Phase 4) or Lab Remediator (Phase 5) passes the path to the **lab folder** (e.g., `<EXAM>/hands-on-labs/<domain>/lab-<topic>/`). This folder contains the complete, reviewed lab content.
+
+> **CRITICAL — Resolve the lab folder path.** The placeholder `<EXAM>/hands-on-labs/<domain>/lab-<topic>/` must be replaced with the **actual workspace-relative path** (e.g., `AI-102/hands-on-labs/ai-services/lab-azure-ai-content-safety/`) in all output. Never render the generic placeholder template in final chat output.
 
 Read the files in the lab folder to assemble the final deliverables:
 
@@ -92,8 +94,8 @@ Phase 6 is complete when:
 
 After R-095 acceptance criteria are met:
 
-1. **Present the final lab delivery summary in chat** — Show the complete deliverable summary (see Output Format below) so the user can confirm the lab is ready.
-2. No further handoff is required — Phase 6 is the terminal phase.
+1. **Present the final lab delivery summary in chat** — Show the complete deliverable summary (see Output Format below).
+2. No further handoff is required — Phase 6 is the terminal phase. Do **not** ask the user to confirm or proceed; this is the final output.
 
 ### Single-Render Rule (No Duplicate Chat Output)
 
@@ -114,7 +116,7 @@ State:
 ```
 **Phase 6 — Lab Delivery**
 
-**Lab folder:** `<EXAM>/hands-on-labs/<domain>/lab-<topic>/`
+**Lab folder:** `<actual workspace-relative lab path>`
 
 ---
 
