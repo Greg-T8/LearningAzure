@@ -188,10 +188,31 @@ $Helpers = {
                 Write-Host "[PASS] PLS has $($natIpConfig.Count) NAT IP configuration(s)" -ForegroundColor Green
 
                 # Show the source NAT IP
-                $primaryNat = $natIpConfig | Where-Object Primary -eq $true
+                $primaryNat = $natIpConfig | Where-Object Primary -eq $true | Select-Object -First 1
                 if ($primaryNat) {
-                    Write-Host "       Primary NAT IP: $($primaryNat.PrivateIPAddress)" -ForegroundColor Cyan
-                    Write-Host "       (This is the source IP that privateLinkServiceNetworkPolicies applies to)"
+                    $primaryNatIp = $primaryNat.PrivateIPAddress
+
+                    # For dynamic NAT allocation, resolve the runtime IP from the PLS-managed NIC.
+                    if (-not $primaryNatIp -and $pls.NetworkInterfaces.Count -ge 1) {
+                        $plsNic = Get-AzNetworkInterface -ResourceId $pls.NetworkInterfaces[0].Id -ErrorAction SilentlyContinue
+                        if ($plsNic) {
+                            $primaryNicIpConfig = $plsNic.IpConfigurations | Where-Object { $_.Primary -eq $true -and $_.Name -eq $primaryNat.Name } | Select-Object -First 1
+                            if (-not $primaryNicIpConfig) {
+                                $primaryNicIpConfig = $plsNic.IpConfigurations | Where-Object Primary -eq $true | Select-Object -First 1
+                            }
+
+                            if ($primaryNicIpConfig) {
+                                $primaryNatIp = $primaryNicIpConfig.PrivateIpAddress
+                            }
+                        }
+                    }
+
+                    if ($primaryNatIp) {
+                        Write-Host "       Primary NAT IP: $primaryNatIp" -ForegroundColor Cyan
+                        Write-Host "       (This is the source IP that privateLinkServiceNetworkPolicies applies to)"
+                    } else {
+                        Write-Host "[INFO] Primary NAT IP is not currently populated in Az.PrivateLinkService output" -ForegroundColor Yellow
+                    }
                 }
             } else {
                 Write-Host "[FAIL] PLS has no NAT IP configurations" -ForegroundColor Red

@@ -180,8 +180,10 @@ $plsSubnet = $vnet.Subnets | Where-Object Name -eq 'snet-pls'
 $plsSubnet.PrivateLinkServiceNetworkPolicies  # Expected: Disabled
 ```
 
-<!-- Screenshot -->$p
+<!-- Screenshot -->
 <img src='.img/2026-02-26-04-15-03.png' width=800>
+
+> The setting shown below refers to Private Endpoint policy, which is distinct from `privateLinkServiceNetworkPolicies`. The portal does not expose a setting for PLS network policies because it automatically disables it when creating the PLS.
 
 <img src='.img/2026-02-26-04-15-59.png' width=800>
 
@@ -237,7 +239,7 @@ $nsg.SecurityRules | Select-Object Name, Direction, Access, Protocol, Destinatio
 ```
 
 <!-- Screenshot -->
-<img src='.img/06-nsg-rules.png' width=700>
+<img src='.img/2026-02-26-04-55-02.png' width=800>
 
 ```powershell
 # 7. Verify the backend subnet still has default network policies enabled
@@ -247,7 +249,7 @@ $backendSubnet.PrivateLinkServiceNetworkPolicies  # Expected: Enabled
 ```
 
 <!-- Screenshot -->
-<img src='.img/07-backend-subnet-policies.png' width=700>
+<img src='.img/2026-02-26-04-56-01.png' width=600>
 
 ```powershell
 # 8. Run the full validation script
@@ -255,7 +257,8 @@ $backendSubnet.PrivateLinkServiceNetworkPolicies  # Expected: Enabled
 ```
 
 <!-- Screenshot -->
-<img src='.img/08-validation-results.png' width=700>
+
+<img src='.img/2026-02-26-05-27-37.png' width=600>
 
 ## Cleanup
 
