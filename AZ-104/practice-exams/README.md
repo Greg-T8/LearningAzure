@@ -33,6 +33,7 @@
   * [VM Resize Failure Cause](#vm-resize-failure-cause)
   * [Encrypt VM Disk With Key Vault](#encrypt-vm-disk-with-key-vault)
   * [Apply Change to VMSS OS and Data Disk Profile](#apply-change-to-vmss-os-and-data-disk-profile)
+  * [Configure Private Link Service Source IP](#configure-private-link-service-source-ip)
 
 ---
 
@@ -1979,3 +1980,62 @@ For real-world scenarios, `Update-AzVmss` is the preferred cmdlet to update the 
 </details>
 
 ▶ Related Lab: [lab-vmss-rolling-upgrade](../hands-on-labs/compute/lab-vmss-rolling-upgrade/README.md)
+
+---
+
+### Configure Private Link Service Source IP
+
+You are an Azure administrator for an e-commerce company. Your organization wants to access Azure SQL Database services and Azure-hosted customer-owned resources over a private endpoint in your virtual network (VNet).
+
+You use Azure Private Link service to achieve the desired outcome.
+
+You need to select a source IP address for your Azure Private Link service.
+
+You have created the following JSON code in order to use an Azure Resource Manager (ARM) template.
+
+```json
+{
+  "name": "orgvirtualN",
+  "type": "Microsoft.Network/virtualNetworks",
+  "apiVersion": "2023-02-01",
+  "location": "EastUS",
+  "properties": {
+    "addressSpace": {
+      "addressPrefixes": [
+        "10.1.0.0/16"
+      ]
+    },
+    "subnets": [
+      {
+        "name": "default",
+        "properties": {
+          "addressPrefix": "10.1.4.0/24",
+          "privateLinkServiceNetworkPolicies": "Disabled"
+        }
+      }
+    ]
+  }
+}
+```
+
+For each of the following statements, select Yes if the statement is true. Otherwise, select No.
+
+| Statement | Yes | No |
+|-----------|-----|----|
+| The "privateLinkServiceNetworkPolicies": "Disabled" setting is only applicable for the specific private IP address you select as the source IP of the Private Link service. | ☐ | ☐ |
+| The "privateLinkServiceNetworkPolicies": "Disabled" setting is configured automatically if you are using Azure portal to create a Private Link service. | ☐ | ☐ |
+| For other resources in the subnet, network traffic is filtered by Access Control Lists (ACL). | ☐ | ☐ |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-02-26-03-33-48.png' width=600>
+
+</details>
+
+<details open>
+<summary>💡 Click to expand explanation</summary>
+
+</details>
+
+▶ Related Lab: [lab-private-link-service](../hands-on-labs/networking/lab-private-link-service/README.md)
