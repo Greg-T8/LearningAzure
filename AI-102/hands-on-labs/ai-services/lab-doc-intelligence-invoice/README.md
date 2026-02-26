@@ -308,7 +308,7 @@ Azure AI Document Intelligence returns analysis results exclusively in **JSON fo
 
 ### Statement 2: Document Intelligence Studio — Yes
 
-**Document Intelligence Studio** (https://documentintelligence.ai.azure.com/) is the web-based interface for Azure AI Document Intelligence. It provides access to all prebuilt models including the invoice model. Users can upload sample documents, test models interactively, and view extracted fields — all without writing code.
+**Document Intelligence Studio** (<https://documentintelligence.ai.azure.com/>) is the web-based interface for Azure AI Document Intelligence. It provides access to all prebuilt models including the invoice model. Users can upload sample documents, test models interactively, and view extracted fields — all without writing code.
 
 ### Statement 3: C# SDK — Yes
 
