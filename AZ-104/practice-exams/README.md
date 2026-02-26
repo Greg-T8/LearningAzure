@@ -2036,6 +2036,22 @@ For each of the following statements, select Yes if the statement is true. Other
 <details open>
 <summary>💡 Click to expand explanation</summary>
 
+**Why statement 1 is true**  
+The privateLinkServiceNetworkPolicies:"Disabled" setting disables subnet-level network policies for the specific private IP used by the Private Link service source IP. It applies to that chosen private IP (the Private Link endpoint) so you can accept inbound Private Link connections.
+
+**Why statement 2 is true**  
+When you create a Private Link service through the Azure portal, the portal configures the required privateLinkServiceNetworkPolicies disablement automatically. When using ARM/CLI/PowerShell you must set the property explicitly.
+
+**Why statement 3 is false**  
+Access Control Lists (ACLs) refer to data-level access (for example, ADLS folder ACLs) and do not filter subnet network traffic. Network traffic for resources in the subnet is controlled by network security group (NSG) rules and other network policy mechanisms.
+
+**Key takeaway**  
+Disabling privateLinkServiceNetworkPolicies is a per‑private‑IP (per Private Link source IP) setting; the portal can handle it for you, but templates/CLI/PowerShell require you to set it explicitly. Network traffic filtering is enforced by NSGs, not ACLs.
+
+**References**
+
+- [Disable Private Link Service Network Policy](https://learn.microsoft.com/en-us/azure/private-link/disable-private-link-service-network-policy?tabs=private-link-network-policy-powershell)
+
 </details>
 
 ▶ Related Lab: [lab-private-link-service](../hands-on-labs/networking/lab-private-link-service/README.md)
