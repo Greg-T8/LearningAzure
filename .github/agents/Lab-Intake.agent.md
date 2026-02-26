@@ -89,6 +89,12 @@ Once the user responds, capture the values and proceed with extraction.
 
 The following words are **deployment-method keywords** (case-insensitive): `Terraform`, `Bicep`, `Scripted`, `Manual`.
 
+Other acceptable variants include:
+
+- `tf` → `Terraform`
+- `bp` → `Bicep`
+- `ps` or `powershell` → `Scripted`
+
 If the user's message is — or contains — exactly one of these keywords, **immediately capture it as the deployment method**. Do **not** call `VSCode/askQuestions` to confirm or re-ask — the user has already told you.
 
 ### Processing Logic
@@ -505,6 +511,7 @@ char_count = <N>  → <N> <= 25?  [PASS/FAIL]
      * `document` → `doc`
      * `intelligence` → `intel`
      * `management` → `mgmt`
+     * 'service' → 'svc'
    * Avoid ambiguous truncations (e.g., don’t create `proc`).
    * Re-run the checkpoint.
    * If still `char_count > 25`: remove the least essential remaining token(s), then re-run the checkpoint.

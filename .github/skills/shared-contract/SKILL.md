@@ -479,3 +479,32 @@ Target pattern: `AzureLab2026!`
 - **AI Agent RBAC**: Requires both data plane + control plane roles (e.g., Cosmos DB Operator)
 
 For full details, see `Governance-Lab.md` at the workspace root.
+
+---
+
+## R-026: Bastion Dependency Ordering (Required)
+
+Azure Bastion Developer SKU requires the VNet to be in **Succeeded** state. Creating Bastion in parallel with subnet resources causes a `BastionHostVirtualNetworkNotFound` race condition.
+
+**Always declare an explicit dependency** so Bastion creation waits for all networking resources to complete.
+
+**Terraform** — add `depends_on` to the module that contains `azurerm_bastion_host`:
+
+```hcl
+module "compute" {
+  # ...
+  depends_on = [module.networking]
+}
+```
+
+**Bicep** — add `dependsOn` to the Bastion resource or module:
+
+```bicep
+resource bastion 'Microsoft.Network/bastionHosts@2024-10-01' = {
+  name: bastionName
+  // ...
+  dependsOn: [
+    networkingModule
+  ]
+}
+```

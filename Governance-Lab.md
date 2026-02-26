@@ -395,6 +395,19 @@ modules/
 
 **Anti-pattern:** Consolidating BYO resources (Storage, Cosmos, Search) into a single module with AI Foundry. Keep resource domains separate.
 
+#### Bastion Dependency Ordering (Required)
+
+When deploying Azure Bastion, enforce explicit orchestration ordering so Bastion is created only after VNet/subnet resources are fully provisioned (Succeeded state).
+
+Terraform pattern:
+
+```hcl
+module "compute" {
+  # ...
+  depends_on = [module.networking]
+}
+```
+
 ---
 
 ### 7.5 Password Generation (Lab-Safe)
@@ -453,6 +466,22 @@ Use when 2+ related resources.
 * Self-contained
 * Pass `commonTags`
 * Thin `main.bicep`
+
+#### Bastion Dependency Ordering (Required)
+
+When deploying Azure Bastion in Bicep, declare explicit `dependsOn` so Bastion deployment waits for networking modules/resources to complete.
+
+Bicep pattern:
+
+```bicep
+resource bastion 'Microsoft.Network/bastionHosts@2024-10-01' = {
+  name: bastionName
+  # ...
+  dependsOn: [
+    networkingModule
+  ]
+}
+```
 
 ---
 
