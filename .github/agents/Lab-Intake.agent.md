@@ -500,8 +500,8 @@ Derive topic slug (hard-gated; cannot proceed until PASS)
 
    * **Filler words** (remove wherever they appear as standalone words): `a`, `an`, `the`, `using`, `for`, `to`, `with`, `and`, `or`
    * **Deployment-method terms (must never appear in the slug):** `terraform`, `bicep`, `scripted`, `manual`, `powershell`, `ps`, `bash`, `cli`, `arm`, `json`, `yaml`, `yml`
+   * **Implied terms** (remove wherever they appear as standalone words): `azure` — the presence of Azure is implied in every exam question and does not add value to the slug
 4. Keep remaining meaningful nouns/verbs (preserve original order).
-5. Don't include the term 'azure' — the presence of Azure in the question is implied and does not add value to the slug.
 
 ### 1B. Counting rules (mandatory; no alternate interpretation)
 
