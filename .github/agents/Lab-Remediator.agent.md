@@ -8,8 +8,11 @@ handoffs:
   - label: Re-review Lab
     agent: Lab-Reviewer
     prompt: "Remediation complete. Handing off to Lab-Reviewer for re-review."
-    send: true
     model: 'Gemini 3.1 Pro (copilot)'
+  - label: Finalize Lab
+    agent: Lab-Finalizer
+    prompt: "Remediation complete. Handing off to Lab-Finalizer for Phase 6 delivery."
+    model: 'Claude Haiku 4.5 (copilot)'
 ---
 
 # Lab Remediator — Phase 5
@@ -115,7 +118,7 @@ Phase 5 is complete when:
 After R-084 acceptance criteria are met:
 
 1. **Present a structured remediation summary in chat** — Show the changes applied and verification results (see Output Format below) so the user can see what was fixed.
-2. **Automatically hand off to Lab-Reviewer for Phase 4 re-review** — Do not wait for user input. After rendering the summary, immediately hand off to Lab-Reviewer. The reviewer will determine whether the fixes pass or if another remediation cycle is needed.
+2. **Wait for manual handoff** — After rendering the summary, the user will manually hand off to **Lab-Reviewer** for Phase 4 re-review, or directly to **Lab-Finalizer** if the user is confident the fixes are sufficient. Do not invoke either agent automatically.
 
 ### Single-Render Rule (No Duplicate Chat Output)
 
@@ -162,9 +165,9 @@ If not applicable: "No syntax validation required.">
 
 **Remediation complete.** All fixes applied and verified.
 
-Automatically handing off to Lab-Reviewer for Phase 4 re-review.
+Ready for handoff to Lab-Reviewer for Phase 4 re-review, or Lab-Finalizer if fixes are confirmed sufficient.
 ```
 
 > **Critical:** Do **not** render full file contents in chat. The updated code lives in the workspace files. The chat summary provides enough context for the user to decide the next step.
 >
-> **Automatic routing:** The remediation cycle proceeds automatically. After fixes are applied, Lab-Reviewer re-reviews to confirm compliance. The Reviewer will route to Finalizer on PASS or back to Remediator on FAIL.
+> **Manual routing:** Both handoffs require the user to initiate. Typically the user hands off to Lab-Reviewer for re-review. If the user is confident the fixes are sufficient, they may hand off directly to Lab-Finalizer instead.
