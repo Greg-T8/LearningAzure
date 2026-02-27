@@ -22,7 +22,7 @@ param adminUsername string
 @secure()
 param adminPassword string
 
-var storageAccountName = 'staz104sftp${substring(uniqueString(resourceGroup().id), 0, 11)}'
+var storageAccountName = 'staz104sftpcapture'
 
 resource nic 'Microsoft.Network/networkInterfaces@2024-05-01' = {
   name: 'nic-vm-01'

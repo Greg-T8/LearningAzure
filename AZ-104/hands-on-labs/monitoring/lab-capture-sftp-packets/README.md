@@ -231,6 +231,10 @@ New-AzNetworkWatcherPacketCapture -NetworkWatcher $networkWatcher `
     -TimeLimitInSeconds 60 -Filter $filter1
 ```
 
+<img src='.img/2026-02-27-05-05-33.png' width=600>
+
+<img src='.img/2026-02-27-05-10-42.png' width=800>
+
 ### Step 5: Verify Packet Capture Status
 
 ```powershell
@@ -239,6 +243,10 @@ Get-AzNetworkWatcherPacketCapture -NetworkWatcher $networkWatcher `
     -PacketCaptureName "Capture-SFTP-Traffic" |
     Select-Object Name, ProvisioningState, @{N='Status';E={$_.CaptureStatus}}
 ```
+
+<img src='.img/2026-02-27-05-06-50.png' width=600>
+
+<img src='.img/2026-02-27-05-06-14.png' width=900>
 
 ### Step 6: Stop and Remove Packet Capture
 
@@ -251,6 +259,10 @@ Stop-AzNetworkWatcherPacketCapture -NetworkWatcher $networkWatcher `
 Remove-AzNetworkWatcherPacketCapture -NetworkWatcher $networkWatcher `
     -PacketCaptureName "Capture-SFTP-Traffic"
 ```
+
+<img src='.img/2026-02-27-05-08-24.png' width=600>
+
+<img src='.img/2026-02-27-05-07-51.png' width=600>
 
 ---
 
