@@ -9,7 +9,7 @@ handoffs:
   - label: Finalize Lab
     agent: Lab-Finalizer
     prompt: "Review passed. Handing off to Lab-Finalizer for Phase 6 delivery."
-    model: 'Claude Haiku 4.5 (copilot)'
+    model: 'GPT-4o (copilot)'
   - label: Remediate Lab
     agent: Lab-Remediator
     prompt: "Review failed. Handing off to Lab-Remediator for Phase 5 remediation."

@@ -1,7 +1,7 @@
 ---
 name: Lab-Designer
 description: Phase 2 agent — creates the Lab README file and presents a summary for user review and approval, then hands off to Lab-Builder.
-model: 'Claude Sonnet 4.6'
+model: 'Claude Opus 4.6'
 user-invokable: true
 tools: [vscode/askQuestions, read/readFile, edit/createDirectory, edit/createFile, edit/editFiles, search/codebase, search/fileSearch, search/listDirectory, search/textSearch, web/fetch]
 handoffs:

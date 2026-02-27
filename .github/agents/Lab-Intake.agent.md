@@ -10,7 +10,7 @@ handoffs:
     agent: Lab-Designer
     prompt: "Intake complete. Handing off to Lab-Designer with file path context for Phase 2 design."
     send: true
-    model: 'Claude Sonnet 4.6 (copilot)'
+    model: 'Claude Opus 4.6 (copilot)'
 ---
 
 # Lab-Intake Agent
