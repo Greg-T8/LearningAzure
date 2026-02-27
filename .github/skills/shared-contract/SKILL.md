@@ -508,3 +508,27 @@ resource bastion 'Microsoft.Network/bastionHosts@2024-10-01' = {
   ]
 }
 ```
+
+---
+
+## R-027: README-to-IaC Resource Name Consistency
+
+All resource names referenced in the README **must exactly match** the names defined in the IaC code. The README (authored in Phase 2) establishes the intended names. The IaC code (generated in Phase 3) must implement those same names.
+
+This applies to all resource types: resource groups, VMs, storage accounts, VNets, NSGs, Key Vaults, and any other named Azure resource.
+
+### Scope
+
+| README Section | What to Check |
+|---|---|
+| Architecture Diagram | Node labels and resource name annotations |
+| Deployment | Resource group name, stack name, all `-Name` values |
+| Testing the Solution | All `-Name`, `-ResourceGroupName`, and `-StorageAccountId` references |
+| Cleanup | Resource group names, purge targets |
+| Scenario Analysis | Code snippets referencing deployed resources |
+
+### Enforcement
+
+- The Lab-Reviewer (Phase 4) must cross-reference every resource name in the README against the corresponding name in the IaC code.
+- Any mismatch — in either direction — is a Category 1 Naming Compliance FAIL.
+- The fix must align the IaC name to the README, or update the README to reflect the actual IaC name, before delivery.

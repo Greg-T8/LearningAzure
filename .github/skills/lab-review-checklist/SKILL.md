@@ -24,6 +24,8 @@ Compliance checklist and evaluation procedure for validating generated lab conte
 - [ ] Resources use correct prefixes per `shared-contract` R-002 / R-003
 - [ ] Bicep stack name (if applicable) per `shared-contract` R-004
 - [ ] No naming convention violations
+- [ ] All resource names referenced in README match names defined in IaC code per `shared-contract` R-027
+- [ ] All resource names defined in IaC code match names referenced in README per `shared-contract` R-027
 
 ### Category 2: Required Tags
 

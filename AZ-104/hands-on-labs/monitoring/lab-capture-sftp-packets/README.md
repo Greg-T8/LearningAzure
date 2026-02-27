@@ -165,6 +165,8 @@ cd AZ-104/hands-on-labs/monitoring/lab-capture-sftp-packets/bicep
 
 > **Note:** Network Watcher is auto-provisioned by Azure in the `NetworkWatcherRG` resource group when a virtual network is created. The Network Watcher VM extension is deployed on the VM by Bicep to enable packet capture.
 
+<img src='.img/2026-02-27-04-08-39.png' width=600>
+
 ---
 
 ## Testing the Solution
@@ -177,6 +179,8 @@ Get-AzResource -ResourceGroupName 'az104-monitoring-capture-sftp-packets-bicep' 
     Format-Table Name, ResourceType, Location
 ```
 
+<img src='.img/2026-02-27-04-09-54.png' width=600>
+
 ### Step 2: Verify the Network Watcher Extension
 
 ```powershell
@@ -185,6 +189,10 @@ Get-AzVMExtension -ResourceGroupName 'az104-monitoring-capture-sftp-packets-bice
     -VMName 'vm-01' -Name 'NetworkWatcherAgentLinux' |
     Select-Object Name, ProvisioningState
 ```
+
+<img src='.img/2026-02-27-04-10-36.png' width=600>
+
+<img src='.img/2026-02-27-04-10-29.png' width=600>
 
 ### Step 3: Get the Network Watcher Instance
 
@@ -198,6 +206,8 @@ $res = Get-AzResource | Where-Object {
 $networkWatcher = Get-AzNetworkWatcher -Name $res.Name -ResourceGroupName $res.ResourceGroupName
 $networkWatcher | Format-Table Name, Location, ResourceGroupName
 ```
+
+<img src='.img/2026-02-27-04-12-09.png' width=600>
 
 ### Step 4: Configure and Start Packet Capture
 
