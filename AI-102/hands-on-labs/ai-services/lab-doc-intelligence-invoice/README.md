@@ -38,7 +38,7 @@ This lab deploys an Azure AI Document Intelligence (Form Recognizer) resource to
     "primaryColor": "#E8E8E8",
     "primaryTextColor": "#333333",
     "primaryBorderColor": "#999999",
-    "lineColor": "#666666",
+    "lineColor": "#0f0d0d",
     "clusterBkg": "#FAFAFA",
     "clusterBorder": "#CCCCCC",
     "edgeLabelBackground": "#F5F5F5",
@@ -166,6 +166,8 @@ terraform plan
 terraform apply
 ```
 
+<img src='.img/2026-02-27-05-25-03.png' width=900>
+
 ---
 
 ## Testing the Solution
@@ -177,11 +179,11 @@ terraform apply
 $rgName = terraform output -raw resource_group_name
 $cogName = terraform output -raw cognitive_account_name
 $account = Get-AzCognitiveServicesAccount -ResourceGroupName $rgName -Name $cogName
-$account | Format-List Name, Kind, Sku, Endpoint
+$account | Format-List AccountName, Kind, @{n='Sku';e={$_.Sku.Name}}, Endpoint
 # Expected: Kind = FormRecognizer, Sku = F0
 ```
 
-<!-- Screenshot -->
+<img src='.img/2026-02-27-05-42-31.png' width=600>
 
 ### Step 2: Verify the Storage Account
 
@@ -193,7 +195,7 @@ $storage | Format-List StorageAccountName, Sku, Location
 # Expected: Sku = Standard_LRS
 ```
 
-<!-- Screenshot -->
+<img src='.img/2026-02-27-05-43-00.png' width=600>
 
 ### Step 3: Analyze a Sample Invoice via REST API
 
@@ -220,6 +222,9 @@ Write-Host "Operation URL: $operationUrl"
 ```
 
 <!-- Screenshot -->
+[Invoice Sample](https://raw.githubusercontent.com/Azure-Samples/cognitive-services-REST-api-samples/master/curl/form-recognizer/sample-invoice.pdf)
+
+<img src='.img/2026-02-27-05-47-28.png' width=600>
 
 ### Step 4: Retrieve and Verify JSON Results
 
