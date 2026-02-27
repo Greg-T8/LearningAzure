@@ -92,22 +92,21 @@ Pattern:
 | Cosmos DB           | cosmos          |
 | Storage (AI output) | st<exam><topic> |
 
-OpenAI accounts require random suffix for global uniqueness.
+OpenAI accounts require random suffix because Cognitive Services resources enter soft-deleted state on deletion (§4.1).
 
-**Note:** Resources with purge protection (§4.1) require unique names with random suffix.
+**Note:** Only resources subject to soft-delete retention (§4.1) require unique names with random suffix. All other resources — including storage accounts — use static names.
 
 ---
 
 #### Unique Naming Decision Tree
 
-Use random suffixes when resources require global uniqueness or cannot be immediately recreated.
+Use **static, predictable names by default**. Random suffixes are only permitted for resources that enter a soft-deleted state and cannot be immediately recreated with the same name.
 
 **Decision criteria (check in order):**
 
-1. **Global uniqueness required?** (Storage, Key Vault, OpenAI) → **Use random suffix**
-2. **Soft-delete cannot be disabled?** (Cognitive Services, API Management) → **Use random suffix**
-3. **Backup items block deletion?** (Recovery Vault with protected VMs) → **Use random suffix**
-4. **Otherwise** → No random suffix needed
+1. **Resource enters soft-deleted state and name is reserved during retention?** (Cognitive Services, Key Vault, API Management) → **Use random suffix**
+2. **Backup items block deletion and prevent name reuse?** (Recovery Vault with protected VMs) → **Use random suffix**
+3. **Otherwise** → **No random suffix** — use a static name, even for globally unique resources (Storage, etc.)
 
 **Random suffix format:**
 
@@ -213,16 +212,16 @@ Bicep: Use `Microsoft.DevTestLab/schedules` (namespace: microsoft.devtestlab/sch
 
 ### 4.1 Soft-Delete Retention Periods
 
-| Resource           | Retention | Manual Purge | Unique Name Required |
-| ------------------ | --------- | ------------ | -------------------- |
-| Cognitive Services | 48 hrs    | Yes          | Yes (soft-delete)    |
-| Key Vault          | 7–90 days | Yes          | Yes (soft-delete)    |
-| API Management     | 48 hrs    | Yes          | Yes (soft-delete)    |
-| Recovery Vault     | 14 days   | Yes          | Yes (backup items)*  |
-| App Insights       | 14 days   | No           | No (disable soft-delete) |
-| Log Analytics      | 14 days   | No           | No (disable soft-delete) |
+Only resources in this table whose names are reserved during soft-delete retention require random suffixes (§2.2 Decision Tree). All other resources use static names.
 
-*Recovery Vault requires unique naming even with soft-delete disabled because backup items can prevent immediate re-creation.
+| Resource           | Retention | Manual Purge | Random Suffix Required |
+| ------------------ | --------- | ------------ | ---------------------- |
+| Cognitive Services | 48 hrs    | Yes          | Yes — name reserved during retention |
+| Key Vault          | 7–90 days | Yes          | Yes — name reserved during retention |
+| API Management     | 48 hrs    | Yes          | Yes — name reserved during retention |
+| Recovery Vault     | 14 days   | Yes          | Yes — backup items block name reuse |
+| App Insights       | 14 days   | No           | No — soft-delete can be disabled |
+| Log Analytics      | 14 days   | No           | No — soft-delete can be disabled |
 
 **Refer to §2.2 Unique Naming Decision Tree for complete criteria.**
 

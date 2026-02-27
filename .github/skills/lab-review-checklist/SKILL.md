@@ -24,8 +24,10 @@ Compliance checklist and evaluation procedure for validating generated lab conte
 - [ ] Resources use correct prefixes per `shared-contract` R-002 / R-003
 - [ ] Bicep stack name (if applicable) per `shared-contract` R-004
 - [ ] No naming convention violations
-- [ ] All resource names referenced in README match names defined in IaC code per `shared-contract` R-027
-- [ ] All resource names defined in IaC code match names referenced in README per `shared-contract` R-027
+- [ ] All resource names are static unless resource is subject to soft-delete name reservation per `shared-contract` R-027 / R-028
+- [ ] Random suffixes used only for soft-delete resources listed in `shared-contract` R-028
+- [ ] All resource names referenced in README match names defined in IaC code per `shared-contract` R-029
+- [ ] All resource names defined in IaC code match names referenced in README per `shared-contract` R-029
 
 ### Category 2: Required Tags
 
@@ -84,7 +86,8 @@ Compliance checklist and evaluation procedure for validating generated lab conte
 - [ ] Soft-delete disabled where possible per `shared-contract` R-016
 - [ ] Purge flags set for applicable resources
 - [ ] Purge documented in cleanup section
-- [ ] Unique naming for non-purgeable resources
+- [ ] Random suffix applied only to soft-delete resources per `shared-contract` R-028
+- [ ] Non-soft-delete resources use static names (no `uniqueString()` / `random_string`) per `shared-contract` R-027
 
 ### Category 10: Subscription Validation
 

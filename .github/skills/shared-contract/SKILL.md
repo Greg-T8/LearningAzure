@@ -28,34 +28,38 @@ Example: `az104-networking-vnet-peering-tf`
 
 Pattern: `<prefix>-<topic>[-instance]`
 
-| Resource       | Prefix                       |
-| -------------- | ---------------------------- |
-| VNet           | vnet                         |
-| Subnet         | snet                         |
-| NSG            | nsg                          |
-| VM             | vm                           |
-| Storage        | st\<exam\>\<topic\> (no hyphens) |
-| Load Balancer  | lb                           |
-| Key Vault      | kv                           |
-| Log Analytics  | law                          |
-| Recovery Vault | rsv                          |
+All names are **static by default**. Random suffixes are only added for resources subject to soft-delete retention (see R-028).
+
+| Resource       | Prefix                              | Random Suffix? |
+| -------------- | ----------------------------------- | -------------- |
+| VNet           | vnet                                | No             |
+| Subnet         | snet                                | No             |
+| NSG            | nsg                                 | No             |
+| VM             | vm                                  | No             |
+| Storage        | st\<exam\>\<topic\> (no hyphens)     | No             |
+| Load Balancer  | lb                                  | No             |
+| Key Vault      | kv                                  | R-028          |
+| Log Analytics  | law                                 | No             |
+| Recovery Vault | rsv                                 | R-028          |
 
 ---
 
 ## R-003: Resource Naming — AI-102 Prefixes
 
-| Resource            | Prefix          |
-| ------------------- | --------------- |
-| OpenAI              | oai             |
-| Multi-service       | cog             |
-| Vision              | cv              |
-| Language            | lang            |
-| AI Search           | srch            |
-| Deployment          | deploy          |
-| Cosmos DB           | cosmos          |
-| Storage (AI output) | st\<exam\>\<topic\> |
+All names are **static by default**. Random suffixes are only added for resources subject to soft-delete retention (see R-028).
 
-OpenAI accounts require random suffix for global uniqueness.
+| Resource            | Prefix               | Random Suffix? |
+| ------------------- | -------------------- | -------------- |
+| OpenAI              | oai                  | R-028          |
+| Multi-service       | cog                  | R-028          |
+| Vision              | cv                   | R-028          |
+| Language            | lang                 | R-028          |
+| AI Search           | srch                 | No             |
+| Deployment          | deploy               | No             |
+| Cosmos DB           | cosmos               | No             |
+| Storage (AI output) | st\<exam\>\<topic\>   | No             |
+
+Cognitive Services resources (OpenAI, Multi-service, Vision, Language) require random suffix because they enter soft-deleted state on deletion — see R-028.
 
 ---
 
@@ -281,16 +285,16 @@ Use `//` for `.bicep` files, `#` for `.tf` and `.ps1`.
 
 ### Resources Requiring Purge
 
-| Resource           | Retention | Manual Purge |
-| ------------------ | --------- | ------------ |
-| Cognitive Services | 48 hrs    | Yes          |
-| Key Vault          | 7–90 days | Yes          |
-| API Management     | 48 hrs    | Yes          |
-| Recovery Vault     | 14 days   | Yes          |
-| App Insights       | 14 days   | No           |
-| Log Analytics      | 14 days   | No           |
+| Resource           | Retention | Manual Purge | Requires Random Suffix (R-028) |
+| ------------------ | --------- | ------------ | ------------------------------ |
+| Cognitive Services | 48 hrs    | Yes          | Yes — name reserved during retention |
+| Key Vault          | 7–90 days | Yes          | Yes — name reserved during retention |
+| API Management     | 48 hrs    | Yes          | Yes — name reserved during retention |
+| Recovery Vault     | 14 days   | Yes          | Yes — backup items block name reuse |
+| App Insights       | 14 days   | No           | No — soft-delete can be disabled |
+| Log Analytics      | 14 days   | No           | No — soft-delete can be disabled |
 
-If not purgeable → use unique naming.
+Only resources whose names are reserved during soft-delete retention require random suffixes (see R-028). All other resources use static names.
 
 ### Disable Patterns
 
@@ -511,7 +515,50 @@ resource bastion 'Microsoft.Network/bastionHosts@2024-10-01' = {
 
 ---
 
-## R-027: README-to-IaC Resource Name Consistency
+## R-027: Static Names by Default
+
+All resource names **must be static and predictable** unless the resource is subject to soft-delete name reservation (see R-028).
+
+- **Static name**: A literal string with no runtime-generated components (`uniqueString()`, `random_string`, etc.).
+- Storage accounts, VMs, VNets, NSGs, subnets, load balancers, and all other non-soft-delete resources use static names.
+- This keeps README code blocks, architecture diagrams, and testing steps simple and reproducible.
+
+---
+
+## R-028: Random Suffix — Soft-Delete Resources Only
+
+Random suffixes are **only permitted** for resources that enter a soft-deleted state where the name is reserved during the retention period. These are listed in R-016.
+
+### Resources Requiring Random Suffix
+
+| Resource           | Reason |
+| ------------------ | ------ |
+| Cognitive Services | Name reserved 48 hrs after deletion |
+| Key Vault          | Name reserved 7–90 days after deletion |
+| API Management     | Name reserved 48 hrs after deletion |
+| Recovery Vault     | Backup items block immediate name reuse |
+
+### Random Suffix Format
+
+**Bicep:** `'${resourcePrefix}${topic}${uniqueString(resourceGroup().id)}'`
+
+**Terraform:** `"${resourcePrefix}-${topic}-${random_string.suffix.result}"`
+
+**Length:** 4 lowercase alphanumeric characters.
+
+### Resources That Do NOT Get Random Suffix
+
+Even if globally unique (e.g., storage accounts), these resources do **not** need random suffixes because their names are released immediately on deletion:
+
+- Storage Accounts
+- AI Search
+- Cosmos DB
+- Log Analytics (soft-delete can be disabled)
+- App Insights (soft-delete can be disabled)
+
+---
+
+## R-029: README-to-IaC Resource Name Consistency
 
 All resource names referenced in the README **must exactly match** the names defined in the IaC code. The README (authored in Phase 2) establishes the intended names. The IaC code (generated in Phase 3) must implement those same names.
 
@@ -532,3 +579,4 @@ This applies to all resource types: resource groups, VMs, storage accounts, VNet
 - The Lab-Reviewer (Phase 4) must cross-reference every resource name in the README against the corresponding name in the IaC code.
 - Any mismatch — in either direction — is a Category 1 Naming Compliance FAIL.
 - The fix must align the IaC name to the README, or update the README to reflect the actual IaC name, before delivery.
+- If the IaC uses a random suffix for a resource that should have a static name per R-027/R-028, flag it as a Naming Compliance FAIL.
