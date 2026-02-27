@@ -9,10 +9,12 @@ handoffs:
     agent: Lab-Reviewer
     prompt: "Remediation complete. Handing off to Lab-Reviewer for re-review."
     model: 'Gemini 3.1 Pro (copilot)'
+    send: true
   - label: Finalize Lab
     agent: Lab-Finalizer
     prompt: "Remediation complete. Handing off to Lab-Finalizer for Phase 6 delivery."
     model: 'GPT-4o (copilot)'
+    send: true
 ---
 
 # Lab Remediator — Phase 5

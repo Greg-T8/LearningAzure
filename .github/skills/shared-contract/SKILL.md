@@ -452,9 +452,9 @@ var commonTags = {
 
 ## R-024: Password Generation
 
-Must meet Azure complexity. Never define as input variable. Output as sensitive.
+Must meet Azure complexity. Mark as `@secure()` (Bicep) or sensitive (Terraform). May be specified in a parameters file.
 
-**Terraform:** Use `hashicorp/random`.
+**Terraform:** Use `hashicorp/random` or supply via `terraform.tfvars`.
 
 ```hcl
 resource "random_password" "admin" {
@@ -464,7 +464,7 @@ resource "random_password" "admin" {
 }
 ```
 
-**Bicep:** Use `uniqueString()` or static pattern. Mark `@secure()`.
+**Bicep:** Use `uniqueString()`, static pattern, or supply in `.bicepparam`. Mark `@secure()`.
 
 Target pattern: `AzureLab2026!`
 

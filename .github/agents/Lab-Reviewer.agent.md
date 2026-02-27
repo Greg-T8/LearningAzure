@@ -10,10 +10,12 @@ handoffs:
     agent: Lab-Finalizer
     prompt: "Review passed. Handing off to Lab-Finalizer for Phase 6 delivery."
     model: 'GPT-4o (copilot)'
+    send: true
   - label: Remediate Lab
     agent: Lab-Remediator
     prompt: "Review failed. Handing off to Lab-Remediator for Phase 5 remediation."
     model: 'GPT-5.3-Codex (copilot)'
+    send: true
 ---
 
 # Lab Reviewer — Phase 4

@@ -10,6 +10,7 @@ handoffs:
     agent: Lab-Reviewer
     prompt: "Build complete. Handing off to Lab-Reviewer for Phase 4 governance review."
     model: 'Gemini 3.1 Pro (copilot)'
+    send: true
 ---
 
 # Lab Builder — Phase 3
