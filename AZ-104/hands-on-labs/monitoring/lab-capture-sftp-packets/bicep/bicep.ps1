@@ -101,7 +101,7 @@ $Helpers = {
         }
 
         # Bicepparam format: param paramName = 'value' or param paramName = "value"
-        if ($content -match "param\s+$ParamName\s*=\s*['\""]([^'\""]+)['\""]") {
+        if ($content -match "param\s+$ParamName\s*=\s*['""]([^'""]+)['""]") {
             return $Matches[1]
         }
 
@@ -196,34 +196,34 @@ $Helpers = {
         switch ($Action) {
             'validate' {
                 $command += "az bicep build"
-                $command += "--file `\"$TemplateFile`\""
+                $command += "--file `"$TemplateFile`""
                 $command += "&& az deployment sub validate"
-                $command += "--location `\"$Location`\""
-                $command += "--template-file `\"$TemplateFile`\""
+                $command += "--location `"$Location`""
+                $command += "--template-file `"$TemplateFile`""
 
                 if (-not [string]::IsNullOrEmpty($ParametersFile)) {
-                    $command += "--parameters `\"$ParametersFile`\""
+                    $command += "--parameters `"$ParametersFile`""
                 }
             }
 
             'plan' {
                 $command += "az deployment sub what-if"
-                $command += "--location `\"$Location`\""
-                $command += "--template-file `\"$TemplateFile`\""
+                $command += "--location `"$Location`""
+                $command += "--template-file `"$TemplateFile`""
 
                 if (-not [string]::IsNullOrEmpty($ParametersFile)) {
-                    $command += "--parameters `\"$ParametersFile`\""
+                    $command += "--parameters `"$ParametersFile`""
                 }
             }
 
             'apply' {
                 $command += "az stack sub create"
-                $command += "--name `\"$StackName`\""
-                $command += "--location `\"$Location`\""
-                $command += "--template-file `\"$TemplateFile`\""
+                $command += "--name `"$StackName`""
+                $command += "--location `"$Location`""
+                $command += "--template-file `"$TemplateFile`""
 
                 if (-not [string]::IsNullOrEmpty($ParametersFile)) {
-                    $command += "--parameters `\"$ParametersFile`\""
+                    $command += "--parameters `"$ParametersFile`""
                 }
 
                 $command += "--action-on-unmanage deleteAll"
@@ -233,7 +233,7 @@ $Helpers = {
 
             'show' {
                 $command += "az stack sub show"
-                $command += "--name `\"$StackName`\""
+                $command += "--name `"$StackName`""
             }
 
             'list' {
@@ -243,7 +243,7 @@ $Helpers = {
 
             'destroy' {
                 $command += "az stack sub delete"
-                $command += "--name `\"$StackName`\""
+                $command += "--name `"$StackName`""
                 $command += "--action-on-unmanage deleteAll"
                 $command += "--yes"
             }
@@ -314,7 +314,7 @@ $Helpers = {
         }
         else {
             # Use enhanced default query
-            $command = "az stack sub show --name `\"$script:StackName`\" --query `\"$defaultQuery`\" -o table"
+            $command = "az stack sub show --name `"$script:StackName`" --query `"$defaultQuery`" -o table"
         }
 
         Write-Host "🚀 Running: $command" -ForegroundColor Gray

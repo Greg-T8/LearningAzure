@@ -2,7 +2,7 @@
 
 ## Exam Question
 
-> **Exam**: AZ-104 — Networking
+> **Exam**: AZ-104 — Monitoring & Backup
 
 ### Capture SFTP Packets with Network Watcher
 
@@ -70,7 +70,7 @@ This lab deploys a virtual machine (VM01) within a virtual network, along with a
   }
 }}%%
 graph TD
-    subgraph RG["az104-networking-capture-sftp-packets-bicep"]
+    subgraph RG["az104-monitoring-capture-sftp-packets-bicep"]
         SA["staz104sftpcapture<br/>Storage Account"]
         subgraph VNET["vnet-capture-sftp-packets"]
             SNET["snet-capture-sftp-packets<br/>10.0.0.0/24"]
@@ -151,7 +151,7 @@ lab-capture-sftp-packets/
 Use-AzProfile Lab
 
 # Navigate to bicep directory
-cd AZ-104/hands-on-labs/networking/lab-capture-sftp-packets/bicep
+cd AZ-104/hands-on-labs/monitoring/lab-capture-sftp-packets/bicep
 
 # Validate the template
 .\bicep.ps1 validate
@@ -173,7 +173,7 @@ cd AZ-104/hands-on-labs/networking/lab-capture-sftp-packets/bicep
 
 ```powershell
 # Verify resource group and resources
-Get-AzResource -ResourceGroupName 'az104-networking-capture-sftp-packets-bicep' |
+Get-AzResource -ResourceGroupName 'az104-monitoring-capture-sftp-packets-bicep' |
     Format-Table Name, ResourceType, Location
 ```
 
@@ -181,7 +181,7 @@ Get-AzResource -ResourceGroupName 'az104-networking-capture-sftp-packets-bicep' 
 
 ```powershell
 # Confirm Network Watcher extension is installed on vm-01
-Get-AzVMExtension -ResourceGroupName 'az104-networking-capture-sftp-packets-bicep' `
+Get-AzVMExtension -ResourceGroupName 'az104-monitoring-capture-sftp-packets-bicep' `
     -VMName 'vm-01' -Name 'NetworkWatcherAgentLinux' |
     Select-Object Name, ProvisioningState
 ```
@@ -203,11 +203,11 @@ $networkWatcher | Format-Table Name, Location, ResourceGroupName
 
 ```powershell
 # Get the storage account for capture data
-$diagnosticSA = Get-AzStorageAccount -ResourceGroupName 'az104-networking-capture-sftp-packets-bicep' `
+$diagnosticSA = Get-AzStorageAccount -ResourceGroupName 'az104-monitoring-capture-sftp-packets-bicep' `
     -Name 'staz104sftpcapture'
 
 # Get the VM reference
-$vm = Get-AzVM -ResourceGroupName 'az104-networking-capture-sftp-packets-bicep' -Name 'vm-01'
+$vm = Get-AzVM -ResourceGroupName 'az104-monitoring-capture-sftp-packets-bicep' -Name 'vm-01'
 
 # Create the packet capture filter targeting SFTP (TCP port 22)
 $filter1 = New-AzPacketCaptureFilterConfig -Protocol TCP `
@@ -249,7 +249,7 @@ Remove-AzNetworkWatcherPacketCapture -NetworkWatcher $networkWatcher `
 Destroy all lab resources within 7 days per governance policy.
 
 ```powershell
-cd AZ-104/hands-on-labs/networking/lab-capture-sftp-packets/bicep
+cd AZ-104/hands-on-labs/monitoring/lab-capture-sftp-packets/bicep
 
 .\bicep.ps1 destroy
 ```
@@ -324,4 +324,4 @@ cd AZ-104/hands-on-labs/networking/lab-capture-sftp-packets/bicep
 
 ## Related Labs
 
-▶ Related Lab: [lab-vnet-peering](../lab-vnet-peering/README.md) — Configure virtual network peering between Azure VNets
+▶ Related Lab: [lab-vnet-peering](../../networking/lab-vnet-peering/README.md) — Configure virtual network peering between Azure VNets

@@ -8,7 +8,7 @@
 
 [CmdletBinding()]
 param()
-$ResourceGroupName = 'az104-networking-capture-sftp-packets-bicep'
+$ResourceGroupName = 'az104-monitoring-capture-sftp-packets-bicep'
 $VmName = 'vm-01'
 $NetworkWatcherRegion = 'eastus'
 $Main = {

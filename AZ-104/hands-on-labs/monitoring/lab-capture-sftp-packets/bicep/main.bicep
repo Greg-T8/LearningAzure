@@ -10,7 +10,7 @@ targetScope = 'subscription'
 
 @description('AZ-104 exam domain')
 @allowed(['identity', 'networking', 'storage', 'compute', 'monitoring'])
-param domain string = 'networking'
+param domain string = 'monitoring'
 
 @description('Lab topic in kebab-case')
 param topic string = 'capture-sftp-packets'
@@ -35,7 +35,7 @@ var resourceGroupName = 'az104-${domain}-${topic}-bicep'
 var commonTags = {
   Environment: 'Lab'
   Project: 'AZ-104'
-  Domain: 'Networking'
+  Domain: 'Monitoring'
   Purpose: 'Capture SFTP Packets'
   Owner: owner
   DateCreated: dateCreated

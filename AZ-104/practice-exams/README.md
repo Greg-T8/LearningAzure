@@ -2126,4 +2126,4 @@ References
 
 </details>
 
-▶ Related Lab: [lab-capture-sftp-packets](../hands-on-labs/networking/lab-capture-sftp-packets/README.md)
+▶ Related Lab: [lab-capture-sftp-packets](../hands-on-labs/monitoring/lab-capture-sftp-packets/README.md)

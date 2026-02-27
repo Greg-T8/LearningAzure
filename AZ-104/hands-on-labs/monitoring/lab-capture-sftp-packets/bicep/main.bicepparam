@@ -8,7 +8,7 @@
 
 using './main.bicep'
 
-param domain = 'networking'
+param domain = 'monitoring'
 param topic = 'capture-sftp-packets'
 param location = 'eastus'
 param owner = 'Greg Tate'
