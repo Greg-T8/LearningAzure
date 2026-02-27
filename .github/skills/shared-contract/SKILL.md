@@ -580,3 +580,28 @@ This applies to all resource types: resource groups, VMs, storage accounts, VNet
 - Any mismatch — in either direction — is a Category 1 Naming Compliance FAIL.
 - The fix must align the IaC name to the README, or update the README to reflect the actual IaC name, before delivery.
 - If the IaC uses a random suffix for a resource that should have a static name per R-027/R-028, flag it as a Naming Compliance FAIL.
+
+---
+
+## R-030: Command-Line Fidelity
+
+All command-line snippets in README **Testing the Solution**, **Deployment**, and **Validation** sections must be syntactically correct and produce the stated expected output when run against the deployed resources.
+
+### What to Check
+
+| Check | Description |
+|-------|-------------|
+| Property names | Cmdlet output properties must match the actual object model (e.g., `AccountName` not `Name` for `Get-AzCognitiveServicesAccount`; `StorageAccountName` not `Name` for `Get-AzStorageAccount`) |
+| Nested properties | Properties that return complex objects must be expanded to show the intended value (e.g., `$account.Sku.Name` not `$account.Sku` when the expected output is a SKU tier string) |
+| Format expressions | `Format-List` / `Format-Table` expressions must reference properties that exist on the object; use calculated properties (`@{n=...;e=...}`) when expanding nested values |
+| Cmdlet parameters | All `-ParameterName` values must be valid for the cmdlet being invoked |
+| Variable references | Variables set in earlier steps must be reachable in later steps within the same README section |
+| Expected output comments | `# Expected:` comments must match what the command actually returns |
+| API versions | REST API `api-version` values must be current and valid for the service |
+| Pipeline correctness | Piped commands must accept the preceding output type |
+
+### Enforcement
+
+- The Lab-Reviewer (Phase 4) evaluates command-line fidelity as **Category 11**.
+- A FAIL in Category 11 does not block delivery on its own, but each issue must include an actionable fix.
+- Common violations: wrong property names, unexpanded nested objects, stale API versions, invalid parameter names.

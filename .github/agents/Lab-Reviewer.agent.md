@@ -49,7 +49,7 @@ Read every file in the lab folder to perform the governance review:
 
 ## R-070: Execute Review Checklist
 
-Run the full 10-category checklist defined in `lab-review-checklist` skill R-150. Each check item references `shared-contract` requirements by ID.
+Run the full 11-category checklist defined in `lab-review-checklist` skill R-150. Each check item references `shared-contract` requirements by ID.
 
 Categories (owned entirely by `lab-review-checklist` skill):
 
@@ -63,6 +63,7 @@ Categories (owned entirely by `lab-review-checklist` skill):
 8. Cost & Limits
 9. Soft-Delete & Purge
 10. Subscription Validation
+11. Command-Line Fidelity
 
 ---
 
@@ -109,7 +110,7 @@ Use `shared-contract` R-014 report schema.
 
 Phase 4 is complete when:
 
-- [ ] All 10 checklist categories evaluated
+- [ ] All 11 checklist categories evaluated
 - [ ] Report follows `shared-contract` R-014 schema
 - [ ] Every FAIL includes actionable fix instruction (R-072)
 - [ ] Overall verdict is PASS or FAIL
@@ -179,6 +180,7 @@ State:
 | 8  | Cost & Limits          | PASS/FAIL| <brief explanation>              |
 | 9  | Soft-Delete & Purge    | PASS/FAIL| <brief explanation>              |
 | 10 | Subscription Validation| PASS/FAIL| <brief explanation>              |
+| 11 | Command-Line Fidelity  | PASS/FAIL| <brief explanation>              |
 
 <If any category FAILed, include the Required Fixes section below.
 If all categories PASSed, omit the Required Fixes section entirely.>

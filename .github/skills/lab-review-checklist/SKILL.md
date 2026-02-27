@@ -1,6 +1,6 @@
 ---
 name: lab-review-checklist
-description: 10-category compliance checklist and evaluation procedure for lab review. All check items reference shared-contract requirement IDs.
+description: 11-category compliance checklist and evaluation procedure for lab review. All check items reference shared-contract requirement IDs.
 user-invokable: false
 ---
 
@@ -16,7 +16,7 @@ Compliance checklist and evaluation procedure for validating generated lab conte
 
 ---
 
-## R-150: 10-Category Checklist
+## R-150: 11-Category Checklist
 
 ### Category 1: Naming Compliance
 
@@ -96,6 +96,17 @@ Compliance checklist and evaluation procedure for validating generated lab conte
 - [ ] Bicep: subscription context validated
 - [ ] Validation script checks subscription
 
+### Category 11: Command-Line Fidelity
+
+- [ ] Cmdlet output property names match actual object model per `shared-contract` R-030
+- [ ] Nested/complex properties expanded correctly (e.g., `Sku.Name` not `Sku`) per `shared-contract` R-030
+- [ ] `Format-List` / `Format-Table` expressions reference valid properties; calculated properties used for nested values per `shared-contract` R-030
+- [ ] All cmdlet `-ParameterName` values are valid per `shared-contract` R-030
+- [ ] Variables set in earlier steps are reachable in later steps within the same section per `shared-contract` R-030
+- [ ] `# Expected:` comments match actual command output per `shared-contract` R-030
+- [ ] REST API `api-version` values are current and valid per `shared-contract` R-030
+- [ ] Pipeline commands accept the preceding output type per `shared-contract` R-030
+
 ---
 
 ## R-151: Review Procedure
@@ -110,7 +121,7 @@ Compliance checklist and evaluation procedure for validating generated lab conte
 ## R-152: Evaluation Rules
 
 - A single FAIL in categories 1, 2, 4, or 5 → overall FAIL (critical).
-- FAILs in categories 3, 6–10 → overall FAIL.
+- FAILs in categories 3, 6–11 → overall FAIL.
 - Every FAIL must include actionable fix instructions.
 - Do not approve labs that skip capacity validation for services in `shared-contract` R-019.
 
