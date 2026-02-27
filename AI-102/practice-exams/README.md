@@ -293,13 +293,36 @@ For each of the following statements, select Yes if the statement is true. Other
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src="c:\\Users\\gregt\\LocalCode\\LearningAzure\\AI-102\\practice-exams\\.img\\2026-02-24-05-49-36.png" width=600>
+<img src='.img/2026-02-27-05-14-25.png' width=600>
 
 </details>
 
 <details open>
 <summary>💡 Click to expand explanation</summary>
 
-</details>
+**Correct answers**
+
+- The results of the invoice analysis can be downloaded in XML format. — No  
+- You can access prebuilt invoice model from Document Intelligence Studio. — Yes  
+- You can access prebuilt invoice model from C# Software Development Kit (SDK). — Yes
+
+**Why these answers are correct**
+
+- Document Intelligence export formats: The service and its web UI provide JSON-based outputs for analysis results. The platform does not offer a native XML export for invoice analysis results, so answering "No" for XML download is correct.
+- Access via Document Intelligence Studio: Document Intelligence Studio exposes the prebuilt invoice model in the studio UI, letting you run and inspect analyses and experiment with prebuilt and custom models without writing code. That makes "Yes" correct for Studio access.
+- Access via C# SDK: Azure AI Document Intelligence exposes prebuilt models through SDKs (C#, Python, Java, JavaScript), so you can call the prebuilt invoice model programmatically from C# applications. That makes "Yes" correct for the C# SDK.
+
+**Why other interpretations are wrong**
+
+- Expecting an XML export is a common trap; the product's supported export is JSON in the web interface. Relying on XML would require additional transformation steps outside the service.
+- Believing the prebuilt model is only available through the UI or only via code is incorrect; Microsoft provides both the Studio web experience and SDK integrations for prebuilt models.
+
+**Key takeaway**
+
+- Use Document Intelligence Studio or the SDKs to run the prebuilt invoice model. Export and integration workflows expect JSON from the service; convert to XML only if an external requirement mandates it.
+
+**References**
+
+- No stable Microsoft Learn link can be guaranteed for this specific exam concept.
 
 ▶ Related Lab: [lab-doc-intelligence-invoice](../hands-on-labs/ai-services/lab-doc-intelligence-invoice/README.md)
