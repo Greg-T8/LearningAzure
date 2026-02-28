@@ -2,7 +2,7 @@
 name: Lab-Finalizer
 description: Phase 6 agent — assembles and presents the final lab deliverables.
 model: 'GPT-4o'
-user-invokable: false
+user-invokable: true
 tools: ["readFile", "listDirectory", "fileSearch"]
 handoffs: []
 ---
