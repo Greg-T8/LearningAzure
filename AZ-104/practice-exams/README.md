@@ -1532,6 +1532,8 @@ Premium storage accounts and storage account v1 are **not supported**, regardles
 
 </details>
 
+▶ **Related Lab:** []()
+
 ---
 
 #### Recover Configuration File from Azure VM Backup
@@ -2103,7 +2105,7 @@ Drop-Down Options:
 
 </details>
 
-<details open>
+<details>
 <summary>💡 Click to expand explanation</summary>
 
 **Why the selected answer is wrong**  
@@ -2127,3 +2129,5 @@ References
 </details>
 
 ▶ Related Lab: [lab-capture-sftp-packets](../hands-on-labs/monitoring/lab-capture-sftp-packets/README.md)
+
+---
