@@ -3,7 +3,7 @@ name: Lab-Finalizer
 description: Phase 6 agent — assembles and presents the final lab deliverables.
 model: 'GPT-4o'
 user-invokable: true
-tools: ["readFile", "listDirectory", "fileSearch"]
+tools: ["readFile", "listDirectory", "fileSearch", "textSearch", "editFiles"]
 handoffs: []
 ---
 
@@ -86,7 +86,41 @@ Phase 6 is complete when:
 - [ ] All 5 sections of R-098 output are present
 - [ ] File list matches actual files created in workspace
 - [ ] Review confirmation references actual PASS report
+- [ ] R-096 practice-exam back-link check completed
 - [ ] R-098 handoff gate rendered exactly once
+
+---
+
+## R-096: Practice-Exam Back-Link
+
+After assembly and before R-098 output, check whether the relevant practice-exam question already links back to this lab. If a link is missing, add one.
+
+### Procedure
+
+1. **Identify the exam.** Derive `<EXAM>` from the lab folder path (e.g., `AI-102`, `AZ-104`).
+2. **Search for a matching question.** Use `textSearch` to scan `<EXAM>/practice-exams/README.md` for `###` headings whose topic matches the lab scenario (keywords from Section 1 or the lab folder name).
+3. **If no matching question is found,** skip — report `N/A (no matching practice-exam question)` in R-098 § 6.
+4. **If a matching question is found,** check whether a `▶ Related Lab:` or `▶ Related Labs:` block beneath that question already contains a link to this lab folder.
+5. **If the link already exists,** skip — report `✓ already linked` in R-098 § 6.
+6. **If the link is missing,** use `editFiles` to insert a back-link using the established format:
+
+   **Single lab (no existing Related Labs block below the question):**
+
+   ```
+   ▶ Related Lab: [lab-<topic>](../hands-on-labs/<domain>/lab-<topic>/README.md)
+   ```
+
+   Insert this line immediately after the question's closing `</details>` tag, preceded by a blank line.
+
+   **Appending to an existing `▶ Related Labs:` block:**
+
+   ```
+   * [lab-<topic>](../hands-on-labs/<domain>/lab-<topic>/README.md)
+   ```
+
+   Append as a new bullet under the existing list.
+
+> This step runs silently — no chat output until R-098.
 
 ---
 
@@ -146,6 +180,9 @@ State:
 ### 5. Compliance
 - README: ✓ 14 sections, correct order
 - Governance: ✓ naming, tags, regions, SKUs compliant
+
+### 6. Practice-Exam Back-Link
+- [✓ linked / ✓ already linked / N/A (no matching practice-exam question)]
 
 ---
 
