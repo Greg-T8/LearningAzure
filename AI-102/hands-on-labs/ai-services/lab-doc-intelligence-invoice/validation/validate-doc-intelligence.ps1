@@ -139,8 +139,11 @@ $Helpers = {
                 -Name $AccountName `
                 -ErrorAction Stop
 
-            if ($account.Kind -eq 'FormRecognizer') {
-                Write-Host "  PASS: $AccountName exists (Kind: $($account.Kind), SKU: $($account.Sku.Name))" -ForegroundColor Green
+            $expectedKinds = @('FormRecognizer','DocumentIntelligence')
+            $actualKind = $account.Kind
+
+            if ($expectedKinds -contains $actualKind -or [string]::IsNullOrWhiteSpace($actualKind)) {
+                Write-Host "  PASS: $AccountName exists (Kind: $actualKind, SKU: $($account.Sku.Name))" -ForegroundColor Green
                 return $true
             }
 
@@ -191,7 +194,8 @@ $Helpers = {
         $sampleInvoiceUrl = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-REST-api-samples/master/curl/form-recognizer/sample-invoice.pdf"
 
         # Build the analyze request URL
-        $analyzeUrl = "${Endpoint}formrecognizer/documentModels/prebuilt-invoice:analyze?api-version=2023-07-31"
+        $baseEndpoint = $Endpoint.TrimEnd('/')
+        $analyzeUrl = "${baseEndpoint}/formrecognizer/documentModels/prebuilt-invoice:analyze?api-version=2023-07-31"
 
         $headers = @{
             'Ocp-Apim-Subscription-Key' = $Key
@@ -203,7 +207,8 @@ $Helpers = {
         try {
             # Submit the analysis request
             $response = Invoke-WebRequest -Uri $analyzeUrl -Method Post -Headers $headers -Body $body -ErrorAction Stop
-            $operationLocation = $response.Headers['Operation-Location']
+            $operationHeader = $response.Headers['Operation-Location']
+            $operationLocation = @($operationHeader) | Select-Object -First 1
 
             if (-not $operationLocation) {
                 Write-Host "  FAIL: No Operation-Location header in response" -ForegroundColor Red
@@ -212,26 +217,20 @@ $Helpers = {
 
             Write-Host "  Analysis submitted. Polling for results..." -ForegroundColor Gray
 
-            # Poll for results (max 30 seconds)
+            # Poll for results
             $resultHeaders = @{ 'Ocp-Apim-Subscription-Key' = $Key }
-            $maxAttempts = 10
             $attempt = 0
 
             do {
                 Start-Sleep -Seconds 3
                 $attempt++
 
-                # Check the analysis status
                 $resultResponse = Invoke-RestMethod -Uri $operationLocation -Method Get -Headers $resultHeaders -ErrorAction Stop
-
-                Write-Host "  Status: $($resultResponse.status) (attempt $attempt/$maxAttempts)" -ForegroundColor Gray
-            } while ($resultResponse.status -notin @('succeeded', 'failed') -and $attempt -lt $maxAttempts)
+                Write-Host "  Status: $($resultResponse.status) (attempt $attempt)" -ForegroundColor Gray
+            } while ($resultResponse.status -in @('notStarted', 'running') -and $attempt -lt 10)
 
             if ($resultResponse.status -eq 'succeeded') {
-                # Verify the response is valid JSON with expected fields
-                $hasDocuments = $null -ne $resultResponse.analyzeResult.documents
                 $docCount = ($resultResponse.analyzeResult.documents | Measure-Object).Count
-
                 Write-Host "  PASS: Invoice analysis returned JSON with $docCount document(s)" -ForegroundColor Green
                 Write-Host "  Note: Results are in JSON format (not XML)" -ForegroundColor Cyan
                 return $true

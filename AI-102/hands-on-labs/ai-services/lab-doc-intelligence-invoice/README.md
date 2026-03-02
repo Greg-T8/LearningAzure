@@ -208,7 +208,8 @@ $key = terraform output -raw cognitive_account_key
 $sampleUrl = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-REST-api-samples/master/curl/form-recognizer/sample-invoice.pdf"
 
 # Build the request
-$analyzeUrl = "${endpoint}formrecognizer/documentModels/prebuilt-invoice:analyze?api-version=2023-07-31"
+$baseEndpoint = $endpoint.TrimEnd('/')
+$analyzeUrl = "${baseEndpoint}/formrecognizer/documentModels/prebuilt-invoice:analyze?api-version=2023-07-31"
 $headers = @{
     'Ocp-Apim-Subscription-Key' = $key
     'Content-Type'              = 'application/json'
@@ -217,11 +218,16 @@ $body = @{ urlSource = $sampleUrl } | ConvertTo-Json
 
 # Submit the analysis request
 $response = Invoke-WebRequest -Uri $analyzeUrl -Method Post -Headers $headers -Body $body
-$operationUrl = $response.Headers['Operation-Location']
+$operationHeader = $response.Headers['Operation-Location']
+$operationUrl = @($operationHeader) | Select-Object -First 1
+
 Write-Host "Operation URL: $operationUrl"
 ```
 
 <!-- Screenshot -->
+
+<img src='.img/2026-03-02-05-58-43.png' width=800>
+
 [Invoice Sample](https://raw.githubusercontent.com/Azure-Samples/cognitive-services-REST-api-samples/master/curl/form-recognizer/sample-invoice.pdf)
 
 <img src='.img/2026-02-27-05-47-28.png' width=600>
@@ -229,21 +235,37 @@ Write-Host "Operation URL: $operationUrl"
 ### Step 4: Retrieve and Verify JSON Results
 
 ```powershell
-# Wait for processing to complete
-Start-Sleep -Seconds 10
-
-# Get the analysis results
+# Poll the operation URL until processing completes
 $resultHeaders = @{ 'Ocp-Apim-Subscription-Key' = $key }
-$result = Invoke-RestMethod -Uri $operationUrl -Method Get -Headers $resultHeaders
+$maxAttempts = 12
+$attempt = 0
+
+do {
+  Start-Sleep -Seconds 3
+  $attempt++
+  $result = Invoke-RestMethod -Uri $operationUrl -Method Get -Headers $resultHeaders
+  Write-Host "Polling attempt $attempt - status: $($result.status)"
+}
+while ($result.status -in @('notStarted', 'running') -and $attempt -lt $maxAttempts)
+
+if ($result.status -ne 'succeeded') {
+  throw "Invoice analysis did not succeed. Final status: $($result.status)"
+}
 
 # Verify the response is JSON (not XML)
 Write-Host "Response type: $($result.GetType().Name)"
 Write-Host "Status: $($result.status)"
 
 # Display extracted invoice fields
-$result.analyzeResult.documents[0].fields | Format-List
+$document = $result.analyzeResult.documents | Select-Object -First 1
+if (-not $document) {
+  throw "No analyzed document was returned in the response."
+}
+
+$document.fields | Format-List
 ```
 
+<img src='.img/2026-03-02-05-59-44.png' width=800>
 <!-- Screenshot -->
 
 ### Step 5: Confirm the Output Format is JSON
@@ -257,6 +279,7 @@ $jsonOutput.Substring(0, [Math]::Min(500, $jsonOutput.Length))
 # Note: There is NO option to download results in XML format
 ```
 
+<img src='.img/2026-03-02-06-01-26.png' width=600>
 <!-- Screenshot -->
 
 ### Step 6: Verify Document Intelligence Studio Access
@@ -270,6 +293,12 @@ Write-Host "You CAN access the prebuilt invoice model from Document Intelligence
 Write-Host "Navigate to the URL above, sign in, and select 'Invoices' under Prebuilt models."
 ```
 
+<img src='.img/2026-03-02-06-02-31.png' width=700>
+
+<img src='.img/2026-03-02-06-04-42.png' width=600>
+
+<img src='.img/2026-03-02-06-05-36.png' width=800>
+
 <!-- Screenshot -->
 
 ### Step 7: Run the Validation Script
@@ -280,6 +309,7 @@ cd ../validation
 .\validate-doc-intelligence.ps1
 ```
 
+<img src='.img/2026-03-02-06-17-48.png' width=600>
 <!-- Screenshot -->
 
 ---
