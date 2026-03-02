@@ -23,6 +23,18 @@
     },
     "chat.tools.terminal.autoApprove": {
       ".\\bicep.ps1": true,
+      "/^Set-Location \"c:\\\\Users\\\\gregt\\\\LocalCode\\\\Learning\\\\LearningAzure\\\\AZ-104\\\\hands-on-labs\\\\storage\\\\lab-blob-storage-lifecycle\\\\terraform\"; terraform init$/": {
+        "approve": true,
+        "matchCommandLine": true
+      },
+      "/^terraform plan -out=tfplan$/": {
+        "approve": true,
+        "matchCommandLine": true
+      },
+      "/^terraform plan -out=tfplan -no-color$/": {
+        "approve": true,
+        "matchCommandLine": true
+      }
     },
     "terminal.integrated.defaultProfile.windows": "PowerShell Lab",
     "terminal.integrated.profiles.windows": {
