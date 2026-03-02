@@ -191,13 +191,7 @@ Get-AzStorageAccount -ResourceGroupName $rgName |
     Format-Table StorageAccountName, Kind, @{n='SkuName';e={$_.Sku.Name}}, PrimaryLocation
 ```
 
-Expected output:
-
-| StorageAccountName | Kind      | SkuName      | PrimaryLocation |
-|--------------------|-----------|--------------|-----------------|
-| staz104boot1       | StorageV2 | Premium_LRS  | centralus       |
-| staz104boot2       | Storage   | Standard_LRS | eastus          |
-| staz104boot3       | StorageV2 | Standard_GRS | centralus       |
+<img src='.img/2026-03-02-03-44-04.png' width=600>
 
 ### Step 3: Verify VMs Are Deployed Without Boot Diagnostics
 
@@ -210,6 +204,8 @@ $vm1.DiagnosticsProfile.BootDiagnostics.Enabled  # Expected: not set or False
 $vm2.DiagnosticsProfile.BootDiagnostics.Enabled  # Expected: not set or False
 ```
 
+<img src='.img/2026-03-02-03-49-15.png' width=600>
+
 ### Step 4: Enable Boot Diagnostics on vm-boot-1
 
 ```powershell
@@ -217,6 +213,10 @@ $vm2.DiagnosticsProfile.BootDiagnostics.Enabled  # Expected: not set or False
 Set-AzVMBootDiagnostic -VM $vm1 -Enable -ResourceGroupName $rgName -StorageAccountName 'staz104boot3'
 Update-AzVM -ResourceGroupName $rgName -VM $vm1
 ```
+
+<img src='.img/2026-03-02-03-59-39.png' width=600>
+
+<img src='.img/2026-03-02-03-59-55.png' width=600>
 
 ### Step 5: Enable Boot Diagnostics on vm-boot-2
 
