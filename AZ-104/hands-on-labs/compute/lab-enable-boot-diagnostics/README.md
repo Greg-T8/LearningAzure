@@ -262,30 +262,52 @@ do {
 
 <img src='.img/2026-03-02-04-22-15.png' width=600>
 
-### Step 8: Retrieve and View Boot Diagnostics Output
+### Step 8: Retrieve and View Linux VM Boot Diagnostics Output (vm-boot-1)
 
 ```powershell
-# Download boot diagnostics artifacts to a local folder
+# Download Linux VM boot diagnostics artifacts to a local folder
 $diagPath = Join-Path $PWD 'bootdiag-output'
 New-Item -ItemType Directory -Path $diagPath -Force | Out-Null
 
 # vm-boot-1 is Ubuntu, so use -Linux
 $vm1Diag = Get-AzVMBootDiagnosticsData -ResourceGroupName $rgName -Name 'vm-boot-1' -Linux -LocalPath $diagPath
 
+# List downloaded files for vm-boot-1
+Get-ChildItem -Path $diagPath -Filter '*vm-boot-1*' | Format-Table Name, Length, LastWriteTime
+
+# Display recent serial log lines for vm-boot-1
+Get-ChildItem -Path $diagPath -Filter '*vm-boot-1*serial*.log' | ForEach-Object { Get-Content $_.FullName -Tail 40 }
+
+# Open downloaded screenshot file for vm-boot-1
+Get-ChildItem -Path $diagPath -Filter '*vm-boot-1*screen*.bmp' | Select-Object -First 1 | ForEach-Object { Start-Process $_.FullName }
+```
+
+<img src='.img/2026-03-02-04-29-30.png' width=800>
+
+<img src='.img/2026-03-02-04-30-46.png' width=400>
+
+### Step 9: Retrieve and View Windows VM Boot Diagnostics Output (vm-boot-2)
+
+```powershell
+# Use the same output folder created in Step 8
+$diagPath = Join-Path $PWD 'bootdiag-output'
+
 # vm-boot-2 is Windows, so use -Windows (requires -LocalPath)
 $vm2Diag = Get-AzVMBootDiagnosticsData -ResourceGroupName $rgName -Name 'vm-boot-2' -Windows -LocalPath $diagPath
 
-# List downloaded files (serial logs and screenshots)
-Get-ChildItem -Path $diagPath | Format-Table Name, Length, LastWriteTime
+# List downloaded files for vm-boot-2
+Get-ChildItem -Path $diagPath -Filter '*vm-boot-2*' | Format-Table Name, Length, LastWriteTime
 
-# Display recent serial log lines for both VMs
-Get-ChildItem -Path $diagPath -Filter '*vm-boot-1*serial*.log' | ForEach-Object { Get-Content $_.FullName -Tail 40 }
+# Display recent serial log lines for vm-boot-2
 Get-ChildItem -Path $diagPath -Filter '*vm-boot-2*serial*.log' | ForEach-Object { Get-Content $_.FullName -Tail 40 }
 
-# Open downloaded screenshot files
-Get-ChildItem -Path $diagPath -Filter '*vm-boot-1*screen*.bmp' | Select-Object -First 1 | ForEach-Object { Start-Process $_.FullName }
+# Open downloaded screenshot file for vm-boot-2
 Get-ChildItem -Path $diagPath -Filter '*vm-boot-2*screen*.bmp' | Select-Object -First 1 | ForEach-Object { Start-Process $_.FullName }
 ```
+
+<img src='.img/2026-03-02-04-31-40.png' width=600>
+
+<img src='.img/2026-03-02-04-31-00.png' width=400>
 
 ---
 
