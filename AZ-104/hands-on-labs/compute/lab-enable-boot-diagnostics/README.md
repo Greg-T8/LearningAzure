@@ -226,6 +226,8 @@ Set-AzVMBootDiagnostic -VM $vm2 -Enable -ResourceGroupName $rgName -StorageAccou
 Update-AzVM -ResourceGroupName $rgName -VM $vm2
 ```
 
+<img src='.img/2026-03-02-04-01-28.png' width=600>
+
 ### Step 6: Verify Boot Diagnostics Configuration
 
 ```powershell
@@ -238,6 +240,51 @@ $vm1.DiagnosticsProfile.BootDiagnostics.StorageUri  # Expected: https://staz104b
 
 $vm2.DiagnosticsProfile.BootDiagnostics.Enabled    # Expected: True
 $vm2.DiagnosticsProfile.BootDiagnostics.StorageUri  # Expected: https://staz104boot2.blob.core.windows.net/
+```
+
+<img src='.img/2026-03-02-04-11-08.png' width=600>
+
+### Step 7: Generate New Boot Diagnostics Content
+
+```powershell
+# Trigger a reboot on both VMs to generate fresh boot screenshot and serial log entries
+Restart-AzVM -ResourceGroupName $rgName -Name 'vm-boot-1' -NoWait
+Restart-AzVM -ResourceGroupName $rgName -Name 'vm-boot-2' -NoWait
+
+# Wait for both VMs to return to running state
+do {
+  Start-Sleep -Seconds 10
+  $state1 = (Get-AzVM -ResourceGroupName $rgName -Name 'vm-boot-1' -Status).Statuses[-1].DisplayStatus
+  $state2 = (Get-AzVM -ResourceGroupName $rgName -Name 'vm-boot-2' -Status).Statuses[-1].DisplayStatus
+  "$state1 | $state2"
+} while ($state1 -ne 'VM running' -or $state2 -ne 'VM running')
+```
+
+<img src='.img/2026-03-02-04-22-15.png' width=600>
+
+### Step 8: Retrieve and View Boot Diagnostics Output
+
+```powershell
+# Download boot diagnostics artifacts to a local folder
+$diagPath = Join-Path $PWD 'bootdiag-output'
+New-Item -ItemType Directory -Path $diagPath -Force | Out-Null
+
+# vm-boot-1 is Ubuntu, so use -Linux
+$vm1Diag = Get-AzVMBootDiagnosticsData -ResourceGroupName $rgName -Name 'vm-boot-1' -Linux -LocalPath $diagPath
+
+# vm-boot-2 is Windows, so use -Windows (requires -LocalPath)
+$vm2Diag = Get-AzVMBootDiagnosticsData -ResourceGroupName $rgName -Name 'vm-boot-2' -Windows -LocalPath $diagPath
+
+# List downloaded files (serial logs and screenshots)
+Get-ChildItem -Path $diagPath | Format-Table Name, Length, LastWriteTime
+
+# Display recent serial log lines for both VMs
+Get-ChildItem -Path $diagPath -Filter '*vm-boot-1*serial*.log' | ForEach-Object { Get-Content $_.FullName -Tail 40 }
+Get-ChildItem -Path $diagPath -Filter '*vm-boot-2*serial*.log' | ForEach-Object { Get-Content $_.FullName -Tail 40 }
+
+# Open downloaded screenshot files
+Get-ChildItem -Path $diagPath -Filter '*vm-boot-1*screen*.bmp' | Select-Object -First 1 | ForEach-Object { Start-Process $_.FullName }
+Get-ChildItem -Path $diagPath -Filter '*vm-boot-2*screen*.bmp' | Select-Object -First 1 | ForEach-Object { Start-Process $_.FullName }
 ```
 
 ---
