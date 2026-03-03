@@ -1,9 +1,9 @@
 # -------------------------------------------------------------------------
 # Program: update-commit-stats.py
-# Description: Update commit statistics in README.md tracking activity per
-#              certification (AI-102, AZ-104) for the last 7 days.
-#              Hours calculated as time between first and last commit per day.
-#              Overlapping activity windows are split evenly.
+# Description: Update commit statistics in README.md using a diff-based
+#              approach. For consecutive pre-8AM commits on the same day,
+#              the time delta is credited to the first commit's exam folder.
+#              Weekend post-8AM commits receive a flat 0.5h credit each.
 # Context: LearningAzure repository - commit statistics automation
 # Author: Greg Tate
 # -------------------------------------------------------------------------
@@ -14,6 +14,7 @@ import re
 import subprocess
 import sys
 from collections import defaultdict
+from dataclasses import dataclass
 from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 #endregion
@@ -25,7 +26,22 @@ CERTIFICATIONS = {
     'AZ-104': '2026-01-14',
 }
 
+EXAM_FOLDERS = sorted(CERTIFICATIONS.keys())
+TABLE_COLUMNS = EXAM_FOLDERS + ['Other']
+
 WORKDAY_START_HOUR = 8
+WEEKEND_FLAT_HOURS = 0.5
+#endregion
+
+
+#region DATA CLASSES
+@dataclass
+class Commit:
+    """Represents a single git commit with its assigned category."""
+
+    timestamp: datetime
+    category: str
+    message: str
 #endregion
 
 
@@ -35,18 +51,18 @@ def main() -> int:
 
     Retrieves recent commits, generates activity table, and updates README.md.
     """
-    args = parse_arguments()
+    args = parse_argument()
 
-    # Show progress status in the console.
-    print("📊 Generating commit statistics...")
+    # Show progress status in the console
+    print("📊 Generating commit statistics (diff-based)...")
 
     # Retrieve commits from the last 7 days
-    commits = get_commits_by_path(days=7)
+    commits = get_commit_list(days=7)
 
     # Generate markdown table from commit data
-    table = generate_commit_table(commits, days=7)
+    table = build_commit_table(commits, days=7)
 
-    # Display the generated table output.
+    # Display the generated table output
     print("\nGenerated table:")
     print(table)
 
@@ -58,14 +74,14 @@ def main() -> int:
     # Update README with new statistics
     success = update_readme(table)
 
-    # Return appropriate process status code.
+    # Return appropriate process status code
     if success:
         print("\n✅ Commit statistics updated successfully!")
         return 0
     else:
         print("\n❌ Failed to update README.md")
         return 1
-    #endregion
+#endregion
 
 
 # Helper Functions
@@ -73,7 +89,7 @@ def main() -> int:
 
 #region HELPER FUNCTIONS
 
-def parse_arguments() -> argparse.Namespace:
+def parse_argument() -> argparse.Namespace:
     """Parse command-line arguments for commit statistics generation.
 
     Returns:
@@ -81,30 +97,54 @@ def parse_arguments() -> argparse.Namespace:
     """
     parser = argparse.ArgumentParser(
         description=(
-            "Generate commit statistics for LearningAzure and optionally "
-            "update README.md."
+            "Generate commit statistics (diff-based) for "
+            "LearningAzure and optionally update README.md."
         )
     )
     parser.add_argument(
         '--console-only',
         action='store_true',
-        help='Print generated commit statistics to console without updating README.md.',
+        help=(
+            'Print generated commit statistics to console '
+            'without updating README.md.'
+        ),
     )
     return parser.parse_args()
 
 
-def get_commits_by_path(
+def classify_commit(file_paths: list[str]) -> str:
+    """Determine category for a commit based on its changed file paths.
+
+    Checks exam folders in alphabetical order. First match wins.
+    Falls back to 'Other' when no exam folder matches.
+
+    Args:
+        file_paths: List of file paths changed in the commit
+
+    Returns:
+        Exam folder name or 'Other'
+    """
+    # Check each exam folder in alphabetical priority order
+    for exam_folder in EXAM_FOLDERS:
+        for path in file_paths:
+            if path.startswith(f'{exam_folder}/'):
+                return exam_folder
+
+    return 'Other'
+
+
+def get_commit_list(
     days: int = 7,
     since_date: str | None = None
-) -> dict:
-    """Get commit timestamps by path for the last N days or since date.
+) -> list['Commit']:
+    """Get chronologically sorted list of commits with categories.
 
     Args:
         days: Number of days to look back (default: 7)
         since_date: Specific date to start from (overrides days parameter)
 
     Returns:
-        dict: Commits grouped by date and certification
+        List of Commit objects sorted by timestamp (oldest first)
     """
     if since_date is None:
         since_date = (
@@ -113,298 +153,127 @@ def get_commits_by_path(
 
     # Build git command to retrieve commits with timestamps and paths
     cmd = [
-        'git',
-        'log',
+        'git', 'log',
         f'--since={since_date}',
         '--name-only',
         '--pretty=format:%H|%ad|%s',
-        '--date=format:%Y-%m-%d %H:%M:%S'
+        '--date=format:%Y-%m-%d %H:%M:%S',
     ]
 
     # Execute git log command
     result = subprocess.run(cmd, capture_output=True, text=True)
 
-    # Exit early if git command failed.
+    # Exit early if git command failed
     if result.returncode != 0:
         print(f"Error running git log: {result.stderr}")
-        return {}
+        return []
 
-    # Parse commits and organize by date and certification
-    commits_by_date_cert = defaultdict(lambda: defaultdict(list))
-
+    # Parse commits from git log output
+    commits: list[Commit] = []
     lines = result.stdout.strip().split('\n')
-    current_datetime = None
-    current_date = None
-    current_message = None
+    current_timestamp: datetime | None = None
+    current_message: str | None = None
+    current_files: list[str] = []
 
-    # Iterate through git log output lines to map commits to certifications.
+    # Iterate through git log output to build commit objects
     for line in lines:
+
         # Parse commit metadata when line contains pipe separator
         if '|' in line:
             parts = line.split('|')
             if len(parts) >= 3:
-                current_datetime = parts[1]
-                current_date = current_datetime.split()[0]
+
+                # Save previous commit if one is in progress
+                if current_timestamp is not None:
+                    category = classify_commit(current_files)
+                    commits.append(Commit(
+                        timestamp=current_timestamp,
+                        category=category,
+                        message=current_message,
+                    ))
+
+                datetime_str = parts[1]
                 current_message = parts[2]
 
                 # Skip automated workflow commits
-                if '[skip ci]' in current_message or 'Update commit statistics' in current_message:
-                    current_datetime = None
+                if (
+                    '[skip ci]' in current_message
+                    or 'Update commit statistics' in current_message
+                ):
+                    current_timestamp = None
+                    current_files = []
                     continue
 
-                # Track all commits for total daily activity window
-                commits_by_date_cert[current_date]['__all__'].append(
-                    current_datetime
+                # Parse timestamp and reset file list
+                current_timestamp = datetime.strptime(
+                    datetime_str, '%Y-%m-%d %H:%M:%S'
                 )
-        # Categorize file paths by certification
-        elif line.strip() and current_datetime:
-            if line.startswith('AI-102/'):
-                commits_by_date_cert[current_date]['AI-102'].append(
-                    current_datetime
-                )
-            elif line.startswith('AZ-104/'):
-                commits_by_date_cert[current_date]['AZ-104'].append(
-                    current_datetime
-                )
+                current_files = []
 
-    return commits_by_date_cert
+        # Collect file paths for the current commit
+        elif line.strip() and current_timestamp is not None:
+            current_files.append(line.strip())
 
+    # Save the final commit in the output
+    if current_timestamp is not None:
+        category = classify_commit(current_files)
+        commits.append(Commit(
+            timestamp=current_timestamp,
+            category=category,
+            message=current_message,
+        ))
 
-def get_activity_interval(
-    timestamps: list[str]
-) -> tuple[datetime, datetime] | None:
-    """Get activity interval (earliest, latest) for a set of timestamps.
+    # Sort commits chronologically (oldest first)
+    commits.sort(key=lambda c: c.timestamp)
 
-    Caps the end time at 8:00 AM local date for all days.
-    Returns None if interval cannot produce positive duration.
-    For single commits, assumes 1-hour activity window.
-
-    Args:
-        timestamps: List of timestamp strings in format '%Y-%m-%d %H:%M:%S'
-
-    Returns:
-        Tuple of (earliest_datetime, latest_datetime) or None
-    """
-    if not timestamps:
-        return None
-
-    # Parse timestamps into datetime objects
-    dt_objects = [
-        datetime.strptime(ts, '%Y-%m-%d %H:%M:%S')
-        for ts in timestamps
-    ]
-
-    # For single commit, assume 1-hour activity window
-    if len(timestamps) == 1:
-        earliest = dt_objects[0]
-        latest = earliest + timedelta(hours=1)
-
-        # Cap end time at configured workday start hour
-        morning_cap = earliest.replace(
-            hour=WORKDAY_START_HOUR,
-            minute=0,
-            second=0
-        )
-        if latest > morning_cap:
-            latest = morning_cap
-
-        if latest <= earliest:
-            return None
-
-        return earliest, latest
-
-    # Determine earliest and latest commit times
-    earliest = min(dt_objects)
-    latest = max(dt_objects)
-
-    # Cap end time at configured workday start hour only if needed
-    morning_cap = earliest.replace(
-        hour=WORKDAY_START_HOUR,
-        minute=0,
-        second=0
-    )
-    if latest > morning_cap:
-        latest = morning_cap
-
-    if latest <= earliest:
-        return None
-
-    return earliest, latest
+    return commits
 
 
-def get_activity_intervals(
-    timestamps: list[str]
-) -> list[tuple[datetime, datetime]]:
-    """Get activity intervals including weekend dense post-8AM blocks.
-
-    Base interval behavior remains first-to-last commit capped at 8:00 AM.
-    On weekends, each hour at or after 8:00 AM counts as +1h only when
-    more than one commit exists in that hour.
-
-    Args:
-        timestamps: List of timestamp strings
-
-    Returns:
-        List of activity intervals
-    """
-    if not timestamps:
-        return []
-
-    # Parse timestamps into datetime objects for weekend-hour grouping
-    dt_objects = [
-        datetime.strptime(ts, '%Y-%m-%d %H:%M:%S')
-        for ts in timestamps
-    ]
-
-    # Add legacy pre-8AM interval behavior
-    intervals = []
-    base_interval = get_activity_interval(timestamps)
-    if base_interval is not None:
-        intervals.append(base_interval)
-
-    # Add weekend post-8AM dense-hour intervals
-    if dt_objects[0].weekday() >= 5:
-        hourly_commit_counts = defaultdict(int)
-
-        # Count commits in each post-8AM hour bucket
-        for commit_time in dt_objects:
-            if commit_time.hour >= WORKDAY_START_HOUR:
-                hour_bucket = commit_time.replace(
-                    minute=0,
-                    second=0,
-                    microsecond=0
-                )
-                hourly_commit_counts[hour_bucket] += 1
-
-        # Only count hour buckets with more than one commit
-        for hour_bucket, commit_count in hourly_commit_counts.items():
-            if commit_count > 1:
-                intervals.append(
-                    (hour_bucket, hour_bucket + timedelta(hours=1))
-                )
-
-    return intervals
-
-
-def get_interval_hours(
-    intervals: list[tuple[datetime, datetime]]
-) -> float:
-    """Calculate total hours from a list of intervals.
-
-    Args:
-        intervals: List of (start_datetime, end_datetime) intervals
-
-    Returns:
-        Total interval hours
-    """
-    # Sum each interval duration in hours
-    return sum(
-        (end - start).total_seconds() / 3600
-        for start, end in intervals
-        if end > start
-    )
-
-
-def calculate_hours(timestamps: list[str]) -> float:
-    """Calculate hours between first and last commit after 8:00 AM cap.
-
-    Args:
-        timestamps: List of timestamp strings
-
-    Returns:
-        Hours of activity rounded to 1 decimal place
-    """
-    intervals = get_activity_intervals(timestamps)
-    if not intervals:
-        return 0.0
-
-    hours = get_interval_hours(intervals)
-    return round(hours, 1)
-
-
-def calculate_hours_raw(timestamps: list[str]) -> float:
-    """Calculate unrounded hours between first and last commit.
-
-    Args:
-        timestamps: List of timestamp strings
-
-    Returns:
-        Hours of activity as a float
-    """
-    intervals = get_activity_intervals(timestamps)
-    if not intervals:
-        return 0.0
-
-    return get_interval_hours(intervals)
-
-
-def split_overlapping_hours(
-    date_commits: dict
+def calculate_daily_hour(
+    day_commits: list['Commit'],
+    date: datetime
 ) -> dict[str, float]:
-    """Split overlapping activity windows evenly across certifications.
+    """Calculate hours per category for a single day using diff approach.
 
-    For each certification, build a daily activity interval from first to last
-    commit (with weekday cap applied). When intervals overlap, overlapping
-    segments are divided equally among active certifications.
+    Pre-8AM commits: consecutive time diffs credited to first commit's
+    folder. Weekend post-8AM commits: flat 0.5h credited to each commit's
+    folder.
 
     Args:
-        date_commits: Dict mapping certification names to timestamp lists
+        day_commits: List of Commit objects for the day
+        date: Date object for weekend detection
 
     Returns:
-        Dict mapping certification names to allocated hours
+        Dict mapping category names to hours
     """
-    # Build activity intervals for each certification
-    intervals_by_cert = defaultdict(list)
+    hours: dict[str, float] = defaultdict(float)
 
-    for cert in CERTIFICATIONS:
-        timestamps = date_commits.get(cert, [])
-        intervals = get_activity_intervals(timestamps)
-        if intervals:
-            intervals_by_cert[cert].extend(intervals)
+    # Separate pre-8AM and post-8AM commits
+    pre_8am = [
+        c for c in day_commits
+        if c.timestamp.hour < WORKDAY_START_HOUR
+    ]
+    post_8am = [
+        c for c in day_commits
+        if c.timestamp.hour >= WORKDAY_START_HOUR
+    ]
 
-    if not intervals_by_cert:
-        return {cert: 0.0 for cert in CERTIFICATIONS}
+    # Pre-8AM: credit time diff between consecutive commits to first commit
+    pre_8am.sort(key=lambda c: c.timestamp)
+    for i in range(len(pre_8am) - 1):
+        diff_seconds = (
+            pre_8am[i + 1].timestamp - pre_8am[i].timestamp
+        ).total_seconds()
+        diff_hours = diff_seconds / 3600
+        hours[pre_8am[i].category] += diff_hours
 
-    # Create events for interval start and end points
-    events = []
-    for cert, cert_intervals in intervals_by_cert.items():
-        for start, end in cert_intervals:
-            events.append((start, 'start', cert))
-            events.append((end, 'end', cert))
+    # Weekend post-8AM: flat 0.5h per commit
+    is_weekend = date.weekday() >= 5
+    if is_weekend:
+        for commit in post_8am:
+            hours[commit.category] += WEEKEND_FLAT_HOURS
 
-    # Sort events chronologically
-    events.sort(
-        key=lambda event: (event[0], 0 if event[1] == 'end' else 1)
-    )
-
-    # Process events and allocate hours
-    allocated_hours = {cert: 0.0 for cert in CERTIFICATIONS}
-    active_certs = set()
-    previous_time = None
-
-    # Walk through sorted events and split overlapping time segments.
-    for current_time, event_type, cert in events:
-        # Allocate segment hours evenly across active certifications
-        if (
-            previous_time is not None
-            and current_time > previous_time
-            and active_certs
-        ):
-            segment_hours = (
-                (current_time - previous_time).total_seconds() / 3600
-            )
-            split_hours = segment_hours / len(active_certs)
-            for active_cert in active_certs:
-                allocated_hours[active_cert] += split_hours
-
-        if event_type == 'start':
-            active_certs.add(cert)
-        else:
-            active_certs.discard(cert)
-
-        previous_time = current_time
-
-    return allocated_hours
+    return dict(hours)
 
 
 def get_activity_emoji(hours: float) -> str:
@@ -426,59 +295,53 @@ def get_activity_emoji(hours: float) -> str:
         return "🟣"
 
 
-def calculate_running_totals() -> dict[str, float]:
+def calculate_running_total() -> dict[str, float]:
     """Calculate running totals since each certification's start date.
 
     Returns:
-        Dict mapping certification names to running total hours
+        Dict mapping category names to cumulative hours
     """
-    running_totals = {}
+    # Get commits from the earliest certification start date
+    earliest_start = min(CERTIFICATIONS.values())
+    all_commits = get_commit_list(since_date=earliest_start)
 
-    # Calculate cumulative hours for each certification
-    for cert, start_date in CERTIFICATIONS.items():
-        commits = get_commits_by_path(since_date=start_date)
+    # Group commits by date
+    commits_by_date: dict[str, list[Commit]] = defaultdict(list)
+    for commit in all_commits:
+        date_str = commit.timestamp.strftime('%Y-%m-%d')
+        commits_by_date[date_str].append(commit)
 
-        # Sum hours across all days
-        total_hours = 0.0
-        for date_commits in commits.values():
-            day_hours = split_overlapping_hours(date_commits)
-            total_hours += day_hours.get(cert, 0.0)
+    # Accumulate hours per category filtered by certification start dates
+    running: dict[str, float] = defaultdict(float)
+    for date_str, day_commits in commits_by_date.items():
+        date_obj = datetime.strptime(date_str, '%Y-%m-%d')
+        daily = calculate_daily_hour(day_commits, date_obj)
 
-        running_totals[cert] = round(total_hours, 1)
+        # Add hours to each category, respecting start dates for certs
+        for category, cat_hours in daily.items():
+            if category in CERTIFICATIONS:
+                cert_start = CERTIFICATIONS[category]
 
-    # Calculate cumulative other hours from earliest certification start date
-    earliest_start_date = min(CERTIFICATIONS.values())
-    commits = get_commits_by_path(since_date=earliest_start_date)
-    running_other_total = 0.0
+                # Only count hours from dates on or after the cert start
+                if date_str >= cert_start:
+                    running[category] += cat_hours
+            else:
 
-    # Sum other hours across all days
-    for date_commits in commits.values():
-        # Calculate exam commit window (combined AI-102 + AZ-104)
-        exam_commits = []
-        exam_commits.extend(date_commits.get('AI-102', []))
-        exam_commits.extend(date_commits.get('AZ-104', []))
-        exam_window_hours = calculate_hours_raw(exam_commits)
+                # 'Other' counts from the earliest start date
+                running[category] += cat_hours
 
-        # Calculate all commits window
-        all_window_hours = calculate_hours_raw(date_commits.get('__all__', []))
-
-        # Other = time beyond exam window
-        other_hours = max(0.0, all_window_hours - exam_window_hours)
-        running_other_total += other_hours
-
-    running_totals['Other'] = round(running_other_total, 1)
-
-    return running_totals
+    # Round all values
+    return {k: round(v, 1) for k, v in running.items()}
 
 
-def generate_commit_table(
-    commits_by_date_cert: dict,
+def build_commit_table(
+    commits: list['Commit'],
     days: int = 7
 ) -> str:
     """Generate markdown table for commit statistics.
 
     Args:
-        commits_by_date_cert: Commit data grouped by date and certification
+        commits: List of Commit objects
         days: Number of days to include in table (default: 7)
 
     Returns:
@@ -486,118 +349,115 @@ def generate_commit_table(
     """
     # Build list of dates in reverse chronological order
     dates = []
-    for i in range(0, days):
+    for i in range(days):
         date = (
             datetime.now() - timedelta(days=i)
         ).strftime('%Y-%m-%d')
         dates.append(date)
 
-    # Initialize markdown table
+    # Group commits by date
+    commits_by_date: dict[str, list[Commit]] = defaultdict(list)
+    for commit in commits:
+        date_str = commit.timestamp.strftime('%Y-%m-%d')
+        commits_by_date[date_str].append(commit)
+
+    # Initialize markdown table header
     table = "## 📈 Recent Activity (Last 7 Days)\n\n"
-    table += "| Date | AI-102 | AZ-104 | Other | Total |\n"
-    table += "|------|--------|--------|-------|-------|\n"
+    header_cols = " | ".join(TABLE_COLUMNS)
+    table += f"| Date | {header_cols} | Total |\n"
+
+    # Build separator row
+    sep_cols = "|".join(["------" for _ in TABLE_COLUMNS])
+    table += f"|------|{sep_cols}|-------|\n"
 
     # Initialize weekly totals
-    total_ai102 = 0.0
-    total_az104 = 0.0
-    total_other = 0.0
-    total_all = 0.0
+    weekly_totals = {col: 0.0 for col in TABLE_COLUMNS}
+    weekly_grand_total = 0.0
 
-    # Process each day
+    # Process each day in reverse chronological order
     for date in dates:
-        date_commits = commits_by_date_cert.get(date, {})
-        split_hours = split_overlapping_hours(date_commits)
-
-        # Calculate exam commit window (combined AI-102 + AZ-104)
-        exam_commits = []
-        exam_commits.extend(date_commits.get('AI-102', []))
-        exam_commits.extend(date_commits.get('AZ-104', []))
-        exam_window_hours = calculate_hours_raw(exam_commits)
-
-        # Extract hours for each certification from the split
-        ai102_raw_hours = split_hours.get('AI-102', 0.0)
-        az104_raw_hours = split_hours.get('AZ-104', 0.0)
-
-        # Calculate all commits window
-        all_window_hours = calculate_hours_raw(date_commits.get('__all__', []))
-
-        # Other = time beyond exam window (if non-exam commits extend it)
-        other_raw_hours = max(0.0, all_window_hours - exam_window_hours)
-
-        # Total is the larger of exam window or all window
-        total_raw_hours = max(exam_window_hours, all_window_hours)
-
-        ai102_hours = round(ai102_raw_hours, 1)
-        az104_hours = round(az104_raw_hours, 1)
-        other_hours = round(other_raw_hours, 1)
-        daily_total = round(total_raw_hours, 1)
-
-        # Accumulate weekly totals
-        total_ai102 += ai102_hours
-        total_az104 += az104_hours
-        total_other += other_hours
-        total_all += daily_total
-
-        # Format date string
+        day_commits = commits_by_date.get(date, [])
         date_obj = datetime.strptime(date, '%Y-%m-%d')
+
+        # Calculate daily hours per category
+        daily = (
+            calculate_daily_hour(day_commits, date_obj)
+            if day_commits
+            else {}
+        )
+        daily_total = 0.0
+
+        # Build column values for each category
+        col_values = []
+        for col in TABLE_COLUMNS:
+            raw_hours = daily.get(col, 0.0)
+            rounded = round(raw_hours, 1)
+            weekly_totals[col] += rounded
+            daily_total += rounded
+
+            # Format cell with activity emoji
+            emoji = get_activity_emoji(rounded)
+            if rounded > 0:
+                col_values.append(f"{emoji} {rounded}h")
+            else:
+                col_values.append("")
+
+        # Accumulate grand total
+        daily_total = round(daily_total, 1)
+        weekly_grand_total += daily_total
+
+        # Format date display string
         formatted_date = date_obj.strftime('%a, %b %d')
-
-        # Build hour strings with color-coded emoji
-        ai102_emoji = get_activity_emoji(ai102_hours)
-        az104_emoji = get_activity_emoji(az104_hours)
-        other_emoji = get_activity_emoji(other_hours)
-
-        ai102_str = (
-            f"{ai102_emoji} {ai102_hours}h" if ai102_hours > 0 else ""
-        )
-        az104_str = (
-            f"{az104_emoji} {az104_hours}h" if az104_hours > 0 else ""
-        )
-        other_str = (
-            f"{other_emoji} {other_hours}h" if other_hours > 0 else ""
-        )
         total_str = (
             f"**{daily_total:.1f}h**" if daily_total > 0 else ""
         )
 
+        # Build table row
+        col_str = " | ".join(col_values)
         table += (
-            f"| {formatted_date} | {ai102_str} | {az104_str} | "
-            f"{other_str} | "
+            f"| {formatted_date} | {col_str} | "
             f"{total_str} |\n"
         )
 
     # Add weekly totals row
+    weekly_cols = " | ".join(
+        f"**{weekly_totals[col]:.1f}h**"
+        for col in TABLE_COLUMNS
+    )
     table += (
-        f"| **Weekly Total** | **{total_ai102:.1f}h** | "
-        f"**{total_az104:.1f}h** | "
-        f"**{total_other:.1f}h** | "
-        f"**{total_all:.1f}h** |\n"
+        f"| **Weekly Total** | {weekly_cols} | "
+        f"**{weekly_grand_total:.1f}h** |\n"
     )
 
     # Calculate and add running totals row
-    running_totals = calculate_running_totals()
-    running_ai102 = running_totals.get('AI-102', 0.0)
-    running_az104 = running_totals.get('AZ-104', 0.0)
-    running_other = running_totals.get('Other', 0.0)
-    running_grand_total = running_ai102 + running_az104 + running_other
+    running = calculate_running_total()
+    running_cols = []
+    running_grand = 0.0
+    for col in TABLE_COLUMNS:
+        val = running.get(col, 0.0)
+        running_grand += val
+        running_cols.append(f"***{val:.1f}h***")
+    running_str = " | ".join(running_cols)
     table += (
-        f"| ***Running Total*** | ***{running_ai102:.1f}h*** | "
-        f"***{running_az104:.1f}h*** | "
-        f"***{running_other:.1f}h*** | "
-        f"***{running_grand_total:.1f}h*** |\n"
+        f"| ***Running Total*** | {running_str} | "
+        f"***{running_grand:.1f}h*** |\n"
     )
 
     # Add legend and metadata
     table += (
-        "\n*Activity Levels: 🟡 Low (< 1hr) | 🟢 Medium (1-2hrs) | "
+        "\n*Activity Levels: "
+        "🟡 Low (< 1hr) | 🟢 Medium (1-2hrs) | "
         "🟣 High (> 2hrs)*\n"
     )
     table += (
-        "\n*Total = base window to 8:00 AM plus qualifying weekend post-8:00 AM hourly blocks*  \n"
-        "*Other = Lab workflow and automation design, content structure and development*  \n"
+        "\n*Pre-8 AM: time between consecutive commits "
+        "credited to first commit's folder*  \n"
+        "*Weekends after 8 AM: 0.5h flat per commit*  \n"
+        "*Other = Lab workflow and automation design, "
+        "content structure and development*  \n"
     )
 
-    # Add timestamp in Central timezone (fallback to local timezone if missing)
+    # Add timestamp in Central timezone (fallback to local)
     try:
         central_time = datetime.now(ZoneInfo('America/Chicago'))
     except ZoneInfoNotFoundError:
@@ -619,6 +479,7 @@ def update_readme(new_table: str) -> bool:
     Returns:
         True if update succeeded, False otherwise
     """
+    # Read current README content
     with open('README.md', 'r', encoding='utf-8') as f:
         content = f.read()
 
@@ -628,21 +489,34 @@ def update_readme(new_table: str) -> bool:
 
     # Replace existing section or insert new one
     if start_marker in content and end_marker in content:
+
         # Update existing section between markers
-        pattern = f"{re.escape(start_marker)}.*?{re.escape(end_marker)}"
-        new_section = f"{start_marker}\n{new_table}\n{end_marker}"
-        new_content = re.sub(pattern, new_section, content, flags=re.DOTALL)
+        pattern = (
+            f"{re.escape(start_marker)}.*?{re.escape(end_marker)}"
+        )
+        new_section = (
+            f"{start_marker}\n{new_table}\n{end_marker}"
+        )
+        new_content = re.sub(
+            pattern, new_section, content, flags=re.DOTALL
+        )
     else:
+
         # Insert after badges section
         insert_after = "</div>\n\n---\n\n## 🎯 About"
         if insert_after in content:
-            new_section = f"\n\n{start_marker}\n{new_table}\n{end_marker}"
+            new_section = (
+                f"\n\n{start_marker}\n{new_table}\n{end_marker}"
+            )
             new_content = content.replace(
                 insert_after,
-                insert_after + new_section
+                insert_after + new_section,
             )
         else:
-            print("Warning: Could not find insertion point in README.md")
+            print(
+                "Warning: Could not find insertion point "
+                "in README.md"
+            )
             return False
 
     # Write updated content back to file
