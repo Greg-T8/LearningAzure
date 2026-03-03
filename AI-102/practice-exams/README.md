@@ -297,7 +297,7 @@ For each of the following statements, select Yes if the statement is true. Other
 
 </details>
 
-<details open>
+<details>
 <summary>💡 Click to expand explanation</summary>
 
 **Correct answers**
@@ -326,3 +326,5 @@ For each of the following statements, select Yes if the statement is true. Other
 - No stable Microsoft Learn link can be guaranteed for this specific exam concept.
 
 ▶ Related Lab: [lab-doc-intelligence-invoice](../hands-on-labs/ai-services/lab-doc-intelligence-invoice/README.md)
+
+---
