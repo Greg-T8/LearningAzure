@@ -72,18 +72,24 @@ Make a **single** edit that replaces the selected `<img>` line(s) with the fully
 ## Process
 
 1. From the attached screenshot image(s), extract all visible text.
-2. Identify question type:
+2. **Detect answer state:** Inspect the screenshot for signs that the question has already been submitted and graded — for example, a selected answer highlighted in green or red, a ✓ / ✗ icon, or an "Correct" / "Incorrect" banner. Mark the question as **answered** if any such indicator is present; otherwise mark it as **blank**.
+3. Identify question type:
    - Yes / No
    - Multiple Choice
    - Multiple Drop-Down
    - Drag-and-Drop Sequencing
    - Case Study (Solution Evaluation)
    - Drag-and-Drop Matching
-3. Format Title, Prompt, and Answer.
-4. Append Screenshot Block.
-5. Append Explanation Placeholder.
-6. Append Related Lab Line.
-7. Replace **only** the selected `<img>` line(s) with the assembled output. Make exactly one edit. Do not touch any other part of the file.
+4. Format Title, Prompt, and Answer.
+5. Append Screenshot Block.
+6. Append Explanation Placeholder (see rule below).
+7. Append Related Lab Line.
+8. Replace **only** the selected `<img>` line(s) with the assembled output. Make exactly one edit. Do not touch any other part of the file.
+
+### Explanation Block Rule
+
+- If the question is **blank** (no answer selected), append the empty explanation placeholder.
+- If the question is **answered** (correct or incorrect indicator visible), invoke the **exam-question-explanation** skill using the same screenshot(s) to generate the explanation, then insert that explanation inside the `<details open>` block instead of leaving it empty.
 
 ---
 
@@ -344,16 +350,18 @@ Rules:
 
 ---
 
-### Explanation Placeholder (Empty)
+### Explanation Placeholder
 
 ```html
-<details open>
+<details>
 <summary>💡 Click to expand explanation</summary>
 
 </details>
 ```
 
-Must remain completely empty.
+**Blank questions:** Leave the block completely empty (no content between the tags).
+
+**Answered questions:** Invoke the **exam-question-explanation** skill with the same screenshot(s) and insert its output between the opening and closing tags. Do not leave the block empty when an answer state is detected.
 
 ---
 
