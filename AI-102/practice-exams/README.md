@@ -328,3 +328,50 @@ For each of the following statements, select Yes if the statement is true. Other
 ▶ Related Lab: [lab-doc-intelligence-invoice](../hands-on-labs/ai-services/lab-doc-intelligence-invoice/README.md)
 
 ---
+
+### Serverless API Deployment
+
+A media company is building an interactive content creation tool using Azure AI.
+
+The company wants to generate creative, diverse headlines and taglines from keywords with moderate latency. The tool must cost-efficiently handle unpredictable usage spikes, with costs primarily driven by token consumption.
+
+You need to select an Azure AI deployment strategy to meet these requirements.
+
+Which strategy should you select?
+
+A. A model run as a batch deployment  
+B. A model hosted on a managed compute with fine-tuning  
+C. A model that utilize provisioned throughput units (PTUs)  
+D. A model accessible via a serverless API  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-03-05-20-00.png' width=600>
+
+</details>
+
+<details open>
+<summary>💡 Click to expand explanation</summary>
+
+You should select a model accessible via a serverless API. This approach directly addresses the requirements for cost-efficiency with unpredictable spikes and costs primarily driven by token consumption, as you typically pay only for the tokens processed with automatic scaling and no idle compute cost.
+
+You should not select a model that is hosted on a managed compute with fine-tuning. While it can provide the required creativity and a managed compute supports interactive use with moderate latency, this setup is often less cost-efficient for unpredictable usage compared to serverless options. The fixed cost of running compute instances does not align with costs primarily driven by token consumption and scaling down to zero during idle periods as a serverless model.
+
+You should not select a model that utilizes provisioned throughput units (PTUs). You can use PTUs to ensure performance for interactivity and creative output with moderate latency. However, PTUs become less cost-efficient when demand is highly variable or unpredictable, as you pay for fixed reserved capacity that may sit idle, conflicting with handling unpredictable usage spikes cost-efficiently.
+
+You should not select a model run as a batch deployment. Running a model as a batch deployment is designed for asynchronous processing of large datasets. It is unsuitable for an interactive content creation tool that requires immediate, real-time responses with moderate latency for a user.
+
+References
+
+[Deploy models as standard deployments](https://learn.microsoft.com/en-us/azure/foundry-classic/how-to/deploy-models-serverless?tabs=azure-direct&pivots=ai-foundry-portal)
+
+How to deploy and inference a managed compute deployment with code
+
+What is provisioned throughput?
+
+Getting started with Azure OpenAI batch deployments
+
+</details>
+
+▶ Related Lab: []()
