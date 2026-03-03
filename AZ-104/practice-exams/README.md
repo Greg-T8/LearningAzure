@@ -42,6 +42,7 @@
   * [Modify Stored Access Policy](#modify-stored-access-policy)
   * [Tagging Policy](#tagging-policy)
   * [Convert Array to Object](#convert-array-to-object)
+  * [Azure Policy Not Functioning](#azure-policy-not-functioning)
 
 ---
 
@@ -2550,6 +2551,73 @@ References
 
 * [Bicep Functions Lambda - ToObject](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-functions-lambda#toobject)
 * [Bicep Functions Lambda - Map](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-functions-lambda#map)p>
+
+</details>
+
+---
+
+### Azure Policy Not Functioning
+
+A company has an existing on-premises environment and a newly created Azure subscription. You need to start testing cloud features and services with a view to eventually migrating the company environment to the Cloud. You have been given Global Administrator rights and the Scheduled Patching Contributor role on the subscription level, and you need to test Azure Policy first.
+
+You have downloaded version 2.62 of the Azure Command-Line-Interface (CLI) to configure new policies, but you find that the Azure Policies you are creating are not working with your subscription.
+
+You need to find the cause of this problem.
+
+What is causing the Azure Policy to not function with your subscription when using the Azure CLI?
+
+A. Your version of the Azure CLI needs updating.  
+B. You do not have the relevant role assignment to manage Azure Policy.  
+C. You do not have the relevant access to the subscription.  
+D. You have not registered the Azure Policy Insights resource provider.  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-03-04-46-56.png' width=600>
+
+</details>
+
+<details open>
+<summary>💡 Click to expand explanation</summary>
+
+The cause of the issue is that you have not registered the Azure Policy Insights resource provider. Azure Policy requires the Azure Policy Insights resource provider to be registered in your subscription to function properly. If this resource provider is not registered, the policies you create will not work as expected. To resolve this issue, you can register the resource provider using the Azure CLI with the following command:
+
+```powershell
+az provider register --namespace 'Microsoft.PolicyInsights'
+```
+
+Microsoft.PolicyInsights backs the insights and compliance side of Azure Policy, including:
+
+Policy compliance state
+
+Policy evaluation results
+
+Remediation tasks
+
+Policy events and historical data
+
+Policy state queries via REST/CLI
+
+When you run commands such as:
+
+az policy state list
+
+az policy event list
+
+az policy remediation create
+
+those operations rely on this provider.
+
+The cause of the issue is not that you do not have the relevant access to the subscription. You have been given Global Administrator rights, which is sufficient to manage Azure Policy.
+
+The cause of the issue is not that your version of the Azure CLI needs updating. While keeping the Azure CLI updated is important, version 2.62 is recent enough to support Azure Policy commands.
+
+The cause of the issue is not that you do not have the relevant role assignment to manage Azure Policy. The Global Administrator role provides the necessary permissions to manage Azure Policy. By registering the Azure Policy Insights resource provider, you should be able to test and use Azure Policy successfully.
+
+References
+
+[Azure Policy overview - Azure RBAC permissions in Azure Policy](https://learn.microsoft.com/en-us/azure/governance/policy/overview#azure-rbac-permissions-in-azure-policy)
 
 </details>
 
