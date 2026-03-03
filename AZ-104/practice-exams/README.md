@@ -1908,7 +1908,7 @@ Set-AzVMDiskEncryptionExtension -ResourceGroupName [Select 4 ▼] `
 
 </details>
 
-<details open>
+<details>
 <summary>💡 Click to expand explanation</summary>
 
 **Why the correct answers are correct**
@@ -1960,7 +1960,7 @@ D. Set-AzVmssVM
 
 </details>
 
-<details open>
+<details>
 <summary>💡 Click to expand explanation</summary>
 
 **Why the selected answer is correct (Set-AzVmssVM)**
@@ -2203,7 +2203,7 @@ For each of the following statements, select Yes if the statement is true. Other
 
 </details>
 
-<details open>
+<details>
 <summary>💡 Click to expand explanation</summary>
 
 </details>
@@ -2395,7 +2395,7 @@ C. Execute a Set Container ACL operation with public read access for blobs only.
 
 </details>
 
-<details open>
+<details>
 <summary>💡 Click to expand explanation</summary>
 
 In this scenario, you are using a stored access policy that acts as an additional level of control over shared access signature (SAS) on the server side for file shares. The access policy for an SAS consists of the start time, expiry time, and permissions for the signature. To create or modify a stored access policy, call the Set ACL operation for the resource (Set Container ACL, Set Queue ACL, Set Table ACL, or Set Share ACL) with a request body that specifies the terms of the access policy. An important point to note here is that, for a file share, you need to execute a Set Share ACL operation, which only supports the Server Message Block (SMB) protocol as the enabled file share protocol.
