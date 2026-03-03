@@ -39,6 +39,7 @@
   * [Configure DNS Records for App Service](#configure-dns-records-for-app-service)
   * [Resource dependencies in Bicep](#resource-dependencies-in-bicep)
   * [Azure Storage Redundancy Recommendation](#azure-storage-redundancy-recommendation)
+  * [Modify Stored Access Policy](#modify-stored-access-policy)
 
 ---
 
@@ -2367,4 +2368,42 @@ References
 
 </details>
 
-▶ Related Lab: []()
+---
+
+### Modify Stored Access Policy
+
+You are an Azure administrator for a manufacturing organization. You are using shared access signature (SAS) to configure control over storage accounts.
+
+You create a stored access policy as an additional level of control over SAS on the server side for file shares.
+
+You need to modify a stored access policy.
+
+What should you do?
+
+A. Execute a Set Share ACL operation with the SMB protocol.  
+B. Execute a Set Table ACL operation.  
+C. Execute a Set Container ACL operation with public read access for blobs only.  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-03-03-53-49.png' width=600>
+
+</details>
+
+<details open>
+<summary>💡 Click to expand explanation</summary>
+
+In this scenario, you are using a stored access policy that acts as an additional level of control over shared access signature (SAS) on the server side for file shares. The access policy for an SAS consists of the start time, expiry time, and permissions for the signature. To create or modify a stored access policy, call the Set ACL operation for the resource (Set Container ACL, Set Queue ACL, Set Table ACL, or Set Share ACL) with a request body that specifies the terms of the access policy. An important point to note here is that, for a file share, you need to execute a Set Share ACL operation, which only supports the Server Message Block (SMB) protocol as the enabled file share protocol.
+
+You should not execute a Set Table ACL operation. The Set Table ACL operation sets the stored access policies for the table that can be used with SAS. In this scenario, since you want to modify stored access policies for an Azure File share, you need to use the Set Share ACL with SMB.
+
+You should not execute a Set Container ACL operation with public read access for blobs only. The Set Container ACL operation with public read access for blobs only will mean that Blob data within a container could be read via anonymous request, but container data is not available. In this scenario, since you are aiming to modify stored access policies for an Azure File share, you need to use the Set Share ACL with SMB.
+
+References
+
+[Define a stored access policy](https://learn.microsoft.com/en-us/rest/api/storageservices/define-stored-access-policy)
+
+</details>
+
+---
