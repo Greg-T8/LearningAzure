@@ -43,6 +43,7 @@
   * [Tagging Policy](#tagging-policy)
   * [Convert Array to Object](#convert-array-to-object)
   * [Azure Policy Not Functioning](#azure-policy-not-functioning)
+  * [IMDS Load Balancer Metadata Error](#imds-load-balancer-metadata-error)
 
 ---
 
@@ -2530,7 +2531,7 @@ Drop-Down Options:
 
 </details>
 
-<details open>
+<details>
 <summary>💡 Click to expand explanation</summary>
 
 Lambda expressions (or lambda functions) are essentially blocks of code that can be passed as an argument. They can take multiple parameters but are restricted to a single line of code. In this scenario, you need to convert an array to an object with a custom key function and optional custom value function. To do this, you should use the toObject lambda function. In this scenario, you use the toObject with two required parameters: output twocats object = toObject(cats, entry => entry.name), which produces the following output:
@@ -2578,7 +2579,7 @@ D. You have not registered the Azure Policy Insights resource provider.
 
 </details>
 
-<details open>
+<details>
 <summary>💡 Click to expand explanation</summary>
 
 The cause of the issue is that you have not registered the Azure Policy Insights resource provider. Azure Policy requires the Azure Policy Insights resource provider to be registered in your subscription to function properly. If this resource provider is not registered, the policies you create will not work as expected. To resolve this issue, you can register the resource provider using the Azure CLI with the following command:
@@ -2622,3 +2623,54 @@ References
 </details>
 
 ---
+
+### IMDS Load Balancer Metadata Error
+
+Your organization is using an Azure Load Balancer service. You are the Azure administrator in your organization.
+
+You are tasked with retrieving Load Balancer information using Azure Instance Metadata Service (IMDS).
+
+You see the following error message:
+
+Error code: 404; No load balancer metadata is found.
+
+You need to troubleshoot this issue.
+
+Which two things can you infer from the error message? Each correct answer presents a complete solution.
+
+A. There is a rate limit.  
+B. The path is misconfigured.  
+C. The load balancer has the Basic instead of the Standard SKU.  
+D. The virtual machine is not associated with a load balancer.  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-03-04-57-09.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+The Azure Instance Metadata Service (IMDS) provides information about currently running virtual machine instances. You can use the SKU, storage, network configurations, and upcoming maintenance events-related information effectively for managing and configuring the virtual machines. In this scenario, since the retrieved data from IMDS displays the No load balancer metadata is found error message, this could be owing to either of the following two reasons:
+
+1. The virtual machine is not associated with a load balancer.
+
+2. The load balancer has the Basic instead of Standard SKU.
+
+The error code does not indicate a misconfiguration of the path. In such a case, you would see Error 404, but with a different error message displayed:
+
+404; API is not found: Path = "<UrlPath>", Method = "<Method>".
+
+The error code does not indicate a rate limit. In this case, you would see Error 429 displayed with the "Too many requests" message.
+
+<img src='.img/2026-03-03-05-00-22.png' width=600>
+
+<img src='.img/2026-03-03-05-03-19.png' width=600>
+
+References
+
+- <https://learn.microsoft.com/en-us/azure/virtual-machines/instance-metadata-service?tabs=windows>
+
+</details>
