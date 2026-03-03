@@ -36,6 +36,7 @@
   * [Configure Private Link Service Source IP](#configure-private-link-service-source-ip)
   * [Capture SFTP Packets with Network Watcher](#capture-sftp-packets-with-network-watcher)
   * [Lifecycle Management Policy Configuration](#lifecycle-management-policy-configuration)
+  * [Configure DNS Records for App Service](#configure-dns-records-for-app-service)
 
 ---
 
@@ -2201,3 +2202,61 @@ For each of the following statements, select Yes if the statement is true. Other
 </details>
 
 ▶ Related Lab: [lab-blob-storage-lifecycle](../hands-on-labs/storage/lab-blob-storage-lifecycle/README.md)
+
+---
+
+### Configure DNS Records for App Service
+
+Your company plans to release a new web application called 'appilcations'. This application is deployed by using an App Service in Azure and will be available to users of the company1.com domain. You have already purchased the company1.com domain name.
+
+You configure the company1.com Azure DNS zone and delegate it to Azure DNS.
+
+You need to ensure that web application can be accessed by using the company1.com domain name.
+
+You decide to use PowerShell to accomplish this task.
+
+How should you complete the command? To answer, select the appropriate options from the drop-down menus.
+
+```powershell
+New-AzDnsRecordSet -Name ___[1]___ -RecordType ___[2]___ `
+  -ZoneName "company1.com" -ResourceGroupName "APP-RG" -Ttl 600 `
+  -DnsRecords (New-AzDnsRecordConfig `
+  -IPv4Address "<IP address>")
+
+New-AzDnsRecordSet -ZoneName company1.com -ResourceGroupName APP-RG `
+  -Name ___[3]___ -RecordType ___[4]___ -Ttl 600 `
+  -DnsRecords (New-AzDnsRecordConfig -Value "appilcations.azurewebsites.net")
+```
+
+Drop-Down Options:
+
+<!-- Dropdown options not yet provided. Paste screenshots of each expanded drop-down to populate. -->
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-03-03-06-02.png' width=600>
+
+</details>
+
+<details open>
+<summary>💡 Click to expand explanation</summary>
+**Why the selected answers are correct**  
+Create an A record named "@" with RecordType "A" to map the root of company1.com to the App Service's IPv4 address. Create a TXT record named "@" with RecordType "TXT" and value "appilcations.azurewebsites.net" so App Service can verify domain ownership and configure the custom domain settings.
+
+**Why other options are incorrect**  
+
+- CNAME/CNAME-like approaches are wrong for the root (@"") because a CNAME cannot coexist with other records at the zone apex and cannot point to an IPv4 address.  
+- AAAA is for IPv6 addresses; the App Service verification here requires an IPv4 A record.  
+- Using literal names like "company1.com", "www.company1.com", or "appilcations.azurewebsites.net" as the Name value would either be redundant, create the wrong record target, or prevent apex records from working as intended.
+
+**Key takeaway**  
+Use an A record (Name "@", RecordType "A") for the IPv4 mapping of the root domain and a TXT record (Name "@", RecordType "TXT") for App Service domain verification; avoid CNAME at the zone apex and do not use AAAA unless you have an IPv6 IP.
+
+References
+
+* [DNS Web Sites Custom Domain](https://learn.microsoft.com/en-us/azure/dns/dns-web-sites-custom-domain?tabs=azure-portal)
+
+</details>
+
+▶ Related Lab: []()
