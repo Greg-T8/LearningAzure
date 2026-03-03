@@ -41,6 +41,7 @@
   * [Azure Storage Redundancy Recommendation](#azure-storage-redundancy-recommendation)
   * [Modify Stored Access Policy](#modify-stored-access-policy)
   * [Tagging Policy](#tagging-policy)
+  * [Convert Array to Object](#convert-array-to-object)
 
 ---
 
@@ -2490,4 +2491,66 @@ You should use deny for the effect property. The "then" block specifies the effe
 
 </details>
 
-▶ Related Lab: [lab-policy-tagging](../hands-on-labs/governance/lab-policy-tagging/README.md)
+---
+
+### Convert Array to Object
+
+You are an Azure administrator for a company. You are deploying Azure resources using Bicep and you want to use Lambda functions to handle an array.
+
+You need to convert an array to an object with a custom key function and optional custom value function to produce the following output:
+
+{"MrFunny":{"name":"MrFunny","age":2},"MrNaughty":{"name":"MrNaughty","age":3}}
+
+Which Lambda function should you use to complete the code snippet below? To answer, select the appropriate option from the drop-down menu.
+
+```
+var cats = [
+  {
+    name: 'MrFunny'
+    age: 2
+  }
+  {
+    name: 'MrNaughty'
+    age: 3
+  }
+]
+
+output twocats object = ___[1]___ (cats, entry => entry.name)
+```
+
+Drop-Down Options:
+
+<!-- Dropdown options not yet provided. Paste screenshots of each expanded drop-down to populate. -->
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-03-04-28-34.png' width=600>
+
+</details>
+
+<details open>
+<summary>💡 Click to expand explanation</summary>
+
+Lambda expressions (or lambda functions) are essentially blocks of code that can be passed as an argument. They can take multiple parameters but are restricted to a single line of code. In this scenario, you need to convert an array to an object with a custom key function and optional custom value function. To do this, you should use the toObject lambda function. In this scenario, you use the toObject with two required parameters: output twocats object = toObject(cats, entry => entry.name), which produces the following output:
+
+{"MrFunny":{"name":"MrFunny","age":2},"MrNaughty":{"name":"MrNaughty","age":3}}
+
+You should not use the map lambda function. You would use map lambda function when you want to apply a custom mapping function to each element of an array.
+
+You should not use the reduce lambda function. You would use the reduce lambda function when you want to reduce an array with a custom reduce function. This would not produce the desired output since the return value is an array and not an object.
+
+You should not use sort lambda function. You would use the sort lambda function when you want to sort an array with a custom sort function.
+
+<img src='.img/2026-03-03-04-32-17.png' width=600>
+
+<img src='.img/2026-03-03-04-32-49.png' width=600>
+
+References
+
+* [Bicep Functions Lambda - ToObject](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-functions-lambda#toobject)
+* [Bicep Functions Lambda - Map](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-functions-lambda#map)p>
+
+</details>
+
+---
