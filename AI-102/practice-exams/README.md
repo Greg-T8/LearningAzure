@@ -325,6 +325,8 @@ For each of the following statements, select Yes if the statement is true. Other
 
 - No stable Microsoft Learn link can be guaranteed for this specific exam concept.
 
+</details>
+
 ▶ Related Lab: [lab-doc-intelligence-invoice](../hands-on-labs/ai-services/lab-doc-intelligence-invoice/README.md)
 
 ---
@@ -351,7 +353,7 @@ D. A model accessible via a serverless API
 
 </details>
 
-<details open>
+<details>
 <summary>💡 Click to expand explanation</summary>
 
 You should select a model accessible via a serverless API. This approach directly addresses the requirements for cost-efficiency with unpredictable spikes and costs primarily driven by token consumption, as you typically pay only for the tokens processed with automatic scaling and no idle compute cost.
@@ -364,14 +366,9 @@ You should not select a model run as a batch deployment. Running a model as a ba
 
 References
 
-[Deploy models as standard deployments](https://learn.microsoft.com/en-us/azure/foundry-classic/how-to/deploy-models-serverless?tabs=azure-direct&pivots=ai-foundry-portal)
-
-How to deploy and inference a managed compute deployment with code
-
-What is provisioned throughput?
-
-Getting started with Azure OpenAI batch deployments
+* [Deploy models as standard deployments](https://learn.microsoft.com/en-us/azure/foundry-classic/how-to/deploy-models-serverless?tabs=azure-direct&pivots=ai-foundry-portal)
+* [How to deploy and inference a managed compute deployment with code](https://learn.microsoft.com/en-us/azure/foundry-classic/how-to/deploy-models-managed?pivots=ai-foundry-portal)
+* [What is provisioned throughput?](https://learn.microsoft.com/en-us/azure/foundry/openai/concepts/provisioned-throughput?tabs=global-ptum)
+* [Getting started with Azure OpenAI batch deployments](https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/batch?tabs=global-batch%2Cstandard-input%2Cpython-secure&pivots=ai-foundry-portal)
 
 </details>
-
-▶ Related Lab: []()
