@@ -40,6 +40,7 @@
   * [Resource dependencies in Bicep](#resource-dependencies-in-bicep)
   * [Azure Storage Redundancy Recommendation](#azure-storage-redundancy-recommendation)
   * [Modify Stored Access Policy](#modify-stored-access-policy)
+  * [Tagging Policy](#tagging-policy)
 
 ---
 
@@ -2407,3 +2408,86 @@ References
 </details>
 
 ---
+
+### Tagging Policy
+
+You are developing a policy that will deny the creation of any resource that does not have an environment tag with a value of either dev, qa, or prod.
+
+You need to ensure that only resources that support tagging are checked by the policy.
+
+How should you configure the policy? To answer, complete the JSON template by selecting the correct options from the drop-down menus.
+
+```json
+{
+  "properties": {
+    "displayName": "Tagging Policy",
+    "policyType": "Custom",
+    "mode": "___[1]___",
+    "policyRule": {
+      "if": {
+        "field": "___[2]___",
+        "___[3]___": ["dev", "qa", "prod"]
+      },
+      "then": {
+        "effect": "___[4]___"
+      }
+    }
+  },
+  "name": "policyDefinition01",
+  "type": "Microsoft.Authorization/policyDefinitions"
+}
+```
+
+Drop-Down Options:
+
+| Blank | Options |
+|-------|---------|
+| [1] | Indexed / All / Supported |
+| [2] | [tags[Environment]] / Environment / tag:Environment |
+| [3] | notIn / eq / notContains |
+| [4] | deny / audit / append |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-03-04-10-10.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+The should configure the policy as follows:
+
+```json
+{
+  "properties": {
+    "displayName": "Tagging Policy",
+    "policyType": "Custom",
+    "mode": "Indexed",
+    "policyRule": {
+      "if": {
+        "field": "[tags[Environment]]",
+        "notIn": ["dev, qa, prod"]
+      },
+      "then": {
+        "effect": "deny"
+      }
+    }
+  },
+  "name": "policyDefinition01",
+  "type": "Microsoft.Authorization/policyDefinitions"
+}
+```
+
+You should use Indexed for the mode property. Indexed policies check whether a resource supports a feature before it checks for it. Selecting All would try to apply the policy to all resources even if the resource does not support tagging. Supported is not a valid option for the mode property.
+
+You should use [tags[Environment]] as the field value. You should not select Environment because there is no field for Azure resources named Environment. You should not select tag:Environment because tags are an array.
+
+You should use notIn for the check condition. If the tag value for Environment is not in dev, qa, and prod, you want to deny the creation of the resource. You should not select eq or notContains. Neither can be applied to check for an array value. They will check for string values.
+
+You should use deny for the effect property. The "then" block specifies the effect to apply if the policy rule block evaluates to false. In this case, you want to deny creation. You should not use audit because that would allow creation and generate a compliance log entry. You should not use append because it would add an empty Environment tag to the resource and not set a value equal to either dev, qa, or prod.
+
+</details>
+
+▶ Related Lab: [lab-policy-tagging](../hands-on-labs/governance/lab-policy-tagging/README.md)
