@@ -89,7 +89,7 @@ Make a **single** edit that replaces the selected `<img>` line(s) with the fully
 ### Explanation Block Rule
 
 - If the question is **blank** (no answer selected), append the empty explanation placeholder.
-- If the question is **answered** (correct or incorrect indicator visible), invoke the **exam-question-explanation** skill using the same screenshot(s) to generate the explanation, then insert that explanation inside the `<details open>` block instead of leaving it empty.
+- If the question is **answered** (correct or incorrect indicator visible), invoke the **exam-question-explanation** skill using the same screenshot(s) to generate the explanation, then insert that explanation inside the `<details>` block instead of leaving it empty.
 
 ---
 
