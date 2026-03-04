@@ -2776,7 +2776,7 @@ You can apply customized coloring in the Availability threshold section.
 
 <img src='.img/2026-03-04-05-01-35.png' width=600>
 
-<img src='.img/2026-03-04-05-09-02.png' width=600>
+<img src='.img/2026-03-04-05-09-02.png' width=800>
 
 References
 
@@ -2784,3 +2784,5 @@ References
 - [Storage Insights Overview](https://learn.microsoft.com/en-us/azure/storage/common/storage-insights-overview?toc=%2Fazure%2Fazure-monitor%2Ftoc.json)
 
 </details>
+
+---
