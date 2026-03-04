@@ -350,10 +350,10 @@ Rules:
 
 ---
 
-### Explanation Placeholder
+### Explanation Placeholder (Open)
 
 ```html
-<details>
+<details open>
 <summary>💡 Click to expand explanation</summary>
 
 </details>

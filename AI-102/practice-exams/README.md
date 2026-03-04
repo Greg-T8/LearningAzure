@@ -374,3 +374,52 @@ References
 * [Getting started with Azure OpenAI batch deployments](https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/batch?tabs=global-batch%2Cstandard-input%2Cpython-secure&pivots=ai-foundry-portal)
 
 </details>
+
+---
+
+### Speech-to-Speech Translation Class
+
+You want to enable speech-to-speech translation in your app. You deploy a new Azure AI Speech service resource in your Azure subscription and install the Speech software development kit (SDK) for .Net on your computer.
+
+You need to call the Azure AI Speech service using the Speech SDK.
+
+Which class should you instantiate first?
+
+A. SpeechTranslationConfig  
+B. TranslationRecognizer  
+C. SpeechRecognizer  
+D. SpeechSynthesizer  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-04-05-50-01.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+You should instantiate the SpeechTranslationConfig class first. SpeechTranslationConfig creates an instance of a speech translation configuration. You pass through its constructor's parameters all the relevant access details of your Speech service such as your key, associated region, endpoint, host, or authorization token.
+
+You should not instantiate the SpeechRecognizer class first. SpeechRecognizer can be used to transcribe into text the speech that arrives via the computer's microphone, from an audio file, or from other audio input streams.
+
+You should not instantiate the SpeechSynthesizer class first. SpeechSynthesizer can be used to synthesize speech and output it to the computer's speakers, an audio file, or an audio stream.
+
+You should not instantiate the TranslationRecognizer class first. TranslationRecognizer can be used to translate an input speech into a text or speech output. However, you should create an instance of the SpeechTranslationConfig class first before you can instantiate the TranslationRecognizer class.
+
+> https://learn.microsoft.com/en-us/azure/ai-services/speech-service/get-started-speech-translation?tabs=windows&pivots=programming-language-csharp#translate-speech-from-a-microphone
+
+<img src='.img/2026-03-04-06-02-15.png' width=600> 
+
+
+
+References
+
+- [Speech Translation](https://learn.microsoft.com/en-us/azure/ai-services/speech-service/speech-translation)
+- [Get Started Speech Translation](https://learn.microsoft.com/en-us/azure/ai-services/speech-service/get-started-speech-translation?tabs=windows&pivots=programming-language-csharp)
+- [SpeechRecognizer](https://learn.microsoft.com/en-us/dotnet/api/microsoft.cognitiveservices.speech.speechrecognizer?view=azure-dotnet)
+- [SpeechSynthesizer](https://learn.microsoft.com/en-us/dotnet/api/system.speech.synthesis.speechsynthesizer?view=netframework-4.8)
+- [TranslationRecognizer](https://learn.microsoft.com/en-us/dotnet/api/microsoft.cognitiveservices.speech.translation.translationrecognizer?view=azure-dotnet)
+
+</details>
