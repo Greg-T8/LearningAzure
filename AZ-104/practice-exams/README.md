@@ -2632,7 +2632,7 @@ You are tasked with retrieving Load Balancer information using Azure Instance Me
 
 You see the following error message:
 
-Error code: 404; No load balancer metadata is found.
+`Error code: 404; No load balancer metadata is found.`
 
 You need to troubleshoot this issue.
 
@@ -2653,7 +2653,9 @@ D. The virtual machine is not associated with a load balancer.
 <details>
 <summary>💡 Click to expand explanation</summary>
 
-The Azure Instance Metadata Service (IMDS) provides information about currently running virtual machine instances. You can use the SKU, storage, network configurations, and upcoming maintenance events-related information effectively for managing and configuring the virtual machines. In this scenario, since the retrieved data from IMDS displays the No load balancer metadata is found error message, this could be owing to either of the following two reasons:
+The Azure Instance Metadata Service (IMDS) provides information about currently running virtual machine instances. The Instance Metadata Service is only accessible from within a running virtual machine instance on a non-routable IP address.
+
+You can use the SKU, storage, network configurations, and upcoming maintenance events-related information effectively for managing and configuring the virtual machines. In this scenario, since the retrieved data from IMDS displays the No load balancer metadata is found error message, this could be owing to either of the following two reasons:
 
 1. The virtual machine is not associated with a load balancer.
 
