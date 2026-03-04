@@ -1543,8 +1543,6 @@ Premium storage accounts and storage account v1 are **not supported**, regardles
 
 </details>
 
-▶ **Related Lab:** []()
-
 ---
 
 #### Recover Configuration File from Azure VM Backup
