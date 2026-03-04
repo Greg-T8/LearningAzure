@@ -408,11 +408,14 @@ You should not instantiate the SpeechSynthesizer class first. SpeechSynthesizer 
 
 You should not instantiate the TranslationRecognizer class first. TranslationRecognizer can be used to translate an input speech into a text or speech output. However, you should create an instance of the SpeechTranslationConfig class first before you can instantiate the TranslationRecognizer class.
 
-> https://learn.microsoft.com/en-us/azure/ai-services/speech-service/get-started-speech-translation?tabs=windows&pivots=programming-language-csharp#translate-speech-from-a-microphone
+- SpeechTranslationConfig Class - Speech translation configuration.
+- TranslationRecognizer Class - Translates speech input into text and synthesized speech in one or more target languages.
+- SpeechRecognizer Class - Transcribes speech into text. Speech can arrive via microphone, audio file, or other audio input stream.
+- SpeechSynthesizer Class - Provides access to the functionality of an installed speech synthesis engine.
 
-<img src='.img/2026-03-04-06-02-15.png' width=600> 
+> <https://learn.microsoft.com/en-us/azure/ai-services/speech-service/get-started-speech-translation?tabs=windows&pivots=programming-language-csharp#translate-speech-from-a-microphone>
 
-
+<img src='.img/2026-03-04-06-02-15.png' width=600>
 
 References
 
@@ -423,3 +426,48 @@ References
 - [TranslationRecognizer](https://learn.microsoft.com/en-us/dotnet/api/microsoft.cognitiveservices.speech.translation.translationrecognizer?view=azure-dotnet)
 
 </details>
+
+---
+
+### Sentiment Analysis - Mixed Document
+
+You want to test the Sentiment Analysis feature of the Azure AI Language API.
+
+You submit your document for analysis. The Azure AI Language API labels your document as mixed with a confidence score of 0.9.
+
+What combination of sentences can generate such results?
+
+A. At least one sentence is positive, and the rest are negative.  
+B. All sentences in the document are neutral.  
+C. At least one sentence is positive, and the rest are neutral.  
+D. At least one sentence is negative, and the rest are neutral.  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-04-06-18-29.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+Such results can be generated when at least one sentence is positive and the rest are negative. For your document to be labeled as mixed, at least one sentence should be positive and at least one sentence should be negative.
+
+A combination where all the sentences in the document are neutral will not be labeled as mixed. When all the sentences in the document are labeled as neutral, then on the document level the Azure AI Language API will also return the neutral label.
+
+A combination where at least one sentence is negative and the rest are neutral will not be labeled as mixed. If there is at least one negative sentence, no positive sentences, and the rest are neutral, then the Azure AI Language API will label the document as negative.
+
+A combination where at least one sentence is positive and the rest are neutral will not be labeled as mixed. If there is at least one positive sentence, no negative sentences, and the rest are neutral, then the Azure AI Language API will label the document as positive.
+
+<img src='.img/2026-03-04-06-23-19.png' width=600>
+
+References
+
+- [Language Service - Overview](https://learn.microsoft.com/en-gb/azure/ai-services/language-service/overview)
+- [Sentiment Opinion Mining - Overview](https://learn.microsoft.com/en-gb/azure/ai-services/language-service/sentiment-opinion-mining/overview)
+- [Sentiment Opinion Mining - Call API](https://learn.microsoft.com/en-us/azure/ai-services/language-service/sentiment-opinion-mining/how-to/call-api)
+
+</details>
+
+---
