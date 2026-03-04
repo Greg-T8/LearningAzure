@@ -364,6 +364,8 @@ You should not select a model that utilizes provisioned throughput units (PTUs).
 
 You should not select a model run as a batch deployment. Running a model as a batch deployment is designed for asynchronous processing of large datasets. It is unsuitable for an interactive content creation tool that requires immediate, real-time responses with moderate latency for a user.
 
+<img src='.img/2026-03-04-05-34-43.png' width=600>
+
 References
 
 * [Deploy models as standard deployments](https://learn.microsoft.com/en-us/azure/foundry-classic/how-to/deploy-models-serverless?tabs=azure-direct&pivots=ai-foundry-portal)
