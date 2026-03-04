@@ -2669,8 +2669,11 @@ The error code does not indicate a rate limit. In this case, you would see Error
 
 <img src='.img/2026-03-03-05-03-19.png' width=600>
 
+> Basic Load Balancer SKU was retired in 2025.
+
 References
 
-- <https://learn.microsoft.com/en-us/azure/virtual-machines/instance-metadata-service?tabs=windows>
+- [Instance Metadata Service](https://learn.microsoft.com/en-us/azure/virtual-machines/instance-metadata-service?tabs=windows)
+- [Load Balancer SKUs](https://learn.microsoft.com/en-us/azure/load-balancer/skus?utm_source=chatgpt.com)>
 
 </details>
