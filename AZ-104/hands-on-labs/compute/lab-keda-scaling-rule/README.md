@@ -155,6 +155,14 @@ cd AZ-104/hands-on-labs/compute/lab-keda-scaling-rule/bicep
 .\bicep.ps1 apply
 ```
 
+<img src='.img/2026-03-05-05-44-53.png' width=600>
+
+<img src='.img/2026-03-05-05-45-32.png' width=600>
+
+<img src='.img/2026-03-05-05-45-56.png' width=600>
+
+<img src='.img/2026-03-05-05-46-57.png' width=600>
+
 ---
 
 ## Testing the Solution
@@ -172,6 +180,8 @@ az containerapp show `
     -o table
 # Expected: Name = ca-keda-scaling-rule, MinReplicas = 0, MaxReplicas = 32
 ```
+
+<img src='.img/2026-03-05-05-48-38.png' width=600>
 
 ### Step 2 — Verify KEDA Scaling Rule Configuration
 
