@@ -26,7 +26,9 @@ Example: `az104-networking-vnet-peering-tf`
 
 ## R-002: Resource Naming — AZ-104 Prefixes
 
-Pattern: `<prefix>-<topic>[-instance]`
+Pattern: `<prefix>-<role>[-instance]`
+
+- `<role>` describes the resource's **function in the lab scenario** — NOT the lab topic (see R-031).
 
 All names are **static by default**. Random suffixes are only added for resources subject to soft-delete retention (see R-028).
 
@@ -36,7 +38,7 @@ All names are **static by default**. Random suffixes are only added for resource
 | Subnet         | snet                                | No             |
 | NSG            | nsg                                 | No             |
 | VM             | vm                                  | No             |
-| Storage        | st\<exam\>\<topic\> (no hyphens)     | No             |
+| Storage        | st\<exam\>\<role\> (no hyphens)      | No             |
 | Load Balancer  | lb                                  | No             |
 | Key Vault      | kv                                  | R-028          |
 | Log Analytics  | law                                 | No             |
@@ -45,6 +47,10 @@ All names are **static by default**. Random suffixes are only added for resource
 ---
 
 ## R-003: Resource Naming — AI-102 Prefixes
+
+Pattern: `<prefix>-<role>[-instance]`
+
+- `<role>` describes the resource's **function in the lab scenario** — NOT the lab topic (see R-031).
 
 All names are **static by default**. Random suffixes are only added for resources subject to soft-delete retention (see R-028).
 
@@ -57,7 +63,7 @@ All names are **static by default**. Random suffixes are only added for resource
 | AI Search           | srch                 | No             |
 | Deployment          | deploy               | No             |
 | Cosmos DB           | cosmos               | No             |
-| Storage (AI output) | st\<exam\>\<topic\>   | No             |
+| Storage (AI output) | st\<exam\>\<role\>    | No             |
 
 Cognitive Services resources (OpenAI, Multi-service, Vision, Language) require random suffix because they enter soft-deleted state on deletion — see R-028.
 
@@ -605,3 +611,52 @@ All command-line snippets in README **Testing the Solution**, **Deployment**, an
 - The Lab-Reviewer (Phase 4) evaluates command-line fidelity as **Category 11**.
 - A FAIL in Category 11 does not block delivery on its own, but each issue must include an actionable fix.
 - Common violations: wrong property names, unexpanded nested objects, stale API versions, invalid parameter names.
+
+---
+
+## R-031: Role-Based Resource Names (No Topic Echo)
+
+Resource names must describe the resource's **role or function** in the lab scenario — never echo the lab topic.
+
+### Why
+
+When every resource is named `<prefix>-<topic>`, the names imply each resource IS the concept being studied rather than a resource that DEMONSTRATES the concept. This creates confusion, especially for resources that configure or contain the feature under study.
+
+### Rule
+
+- The **resource group** retains the topic-based name per R-001 (e.g., `az104-compute-keda-scaling-rule-bicep`).
+- Individual **resources** within the lab use scenario-appropriate role names that describe what the resource does.
+- Each resource should have a **distinct, practical name** — avoid giving every resource the same suffix.
+
+### Examples
+
+**Lab: `lab-keda-scaling-rule`** (Container App with KEDA scaling)
+
+| Resource Type              | Bad (topic echo)         | Good (role-based)         |
+| -------------------------- | ------------------------ | ------------------------- |
+| Container App              | ca-keda-scaling-rule     | ca-order-processor        |
+| Container Apps Environment | cae-keda-scaling-rule    | cae-lab                   |
+| Service Bus Namespace      | sbns-keda-scaling-rule   | sbns-orders               |
+| Log Analytics Workspace    | law-keda-scaling-rule    | law-monitoring             |
+
+**Lab: `lab-vnet-peering`** (Two peered VNets)
+
+| Resource Type | Bad (topic echo)    | Good (role-based)   |
+| ------------- | ------------------- | ------------------- |
+| VNet          | vnet-vnet-peering-1 | vnet-hub            |
+| VNet          | vnet-vnet-peering-2 | vnet-spoke          |
+| NSG           | nsg-vnet-peering    | nsg-web-tier        |
+
+**Lab: `lab-blob-versioning`** (Storage with versioning enabled)
+
+| Resource Type   | Bad (topic echo)        | Good (role-based)        |
+| --------------- | ----------------------- | ------------------------ |
+| Storage Account | staz104blobversioning   | staz104documents         |
+| Log Analytics   | law-blob-versioning     | law-monitoring           |
+
+### Choosing Good Role Names
+
+- Ask: "What does this resource represent in the scenario?" — not "What concept does this lab teach?"
+- Draw names from the workload domain: `orders`, `web-frontend`, `monitoring`, `hub`, `spoke`, `documents`, `media`, `inventory`.
+- Supporting infrastructure can use generic role names: `law-monitoring`, `cae-lab`, `nsg-default`.
+- Keep names short (1–2 words after the prefix).

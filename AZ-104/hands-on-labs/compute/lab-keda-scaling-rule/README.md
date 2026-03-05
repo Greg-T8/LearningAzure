@@ -183,6 +183,8 @@ az containerapp show `
 
 <img src='.img/2026-03-05-05-48-38.png' width=600>
 
+<img src='.img/2026-03-05-06-04-56.png' width=700>
+
 ### Step 2 — Verify KEDA Scaling Rule Configuration
 
 ```powershell
@@ -194,6 +196,10 @@ az containerapp show `
     -o json
 # Expected: name = "azure-servicebus-queue-rule", custom.type = "azure-servicebus", custom.metadata.messageCount = "15"
 ```
+
+<img src='.img/2026-03-05-05-58-56.png' width=600>
+
+<img src='.img/2026-03-05-06-00-52.png' width=600>
 
 ### Step 3 — Verify Service Bus Queue
 
@@ -207,6 +213,12 @@ az servicebus queue show `
     -o table
 # Expected: Name = my-sample-queue, Status = Active
 ```
+
+<img src='.img/2026-03-05-06-05-45.png' width=500>
+
+<img src='.img/2026-03-05-06-09-00.png' width=700>
+
+<img src='.img/2026-03-05-06-10-40.png' width=500>
 
 ### Step 4 — Observe Scaling Behavior
 

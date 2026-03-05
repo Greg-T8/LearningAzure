@@ -24,6 +24,8 @@ Compliance checklist and evaluation procedure for validating generated lab conte
 - [ ] Resources use correct prefixes per `shared-contract` R-002 / R-003
 - [ ] Bicep stack name (if applicable) per `shared-contract` R-004
 - [ ] No naming convention violations
+- [ ] Resource names describe role/function, not lab topic per `shared-contract` R-031
+- [ ] Each resource has a distinct, scenario-appropriate name (no uniform topic echo) per `shared-contract` R-031
 - [ ] All resource names are static unless resource is subject to soft-delete name reservation per `shared-contract` R-027 / R-028
 - [ ] Random suffixes used only for soft-delete resources listed in `shared-contract` R-028
 - [ ] All resource names referenced in README match names defined in IaC code per `shared-contract` R-029
