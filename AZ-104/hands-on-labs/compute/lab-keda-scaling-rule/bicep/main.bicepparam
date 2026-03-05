@@ -19,4 +19,4 @@ param owner = 'Greg Tate'
 param dateCreated = '2026-03-05'
 
 // Lab placeholder for Service Bus scaler authentication.
-param serviceBusConnectionString = 'Endpoint=sb://service-bus-namespace.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=REPLACE_ME'
+param serviceBusConnectionString = 'Endpoint=sb://sbns-orders.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=REPLACE_ME'

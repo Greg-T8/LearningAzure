@@ -71,15 +71,15 @@ This lab deploys an Azure Container Apps environment with a container app that u
 graph TD
     RG["Resource Group<br/>az104-compute-keda-scaling-rule-bicep"]:::governance
 
-    subgraph CAE["Container Apps Environment<br/>cae-keda-scaling-rule"]
-        CA["Container App<br/>ca-keda-scaling-rule"]:::compute
+    subgraph CAE["Container Apps Environment<br/>cae-lab"]
+        CA["Container App<br/>ca-order-processor"]:::compute
     end
 
-    subgraph SBNS["Service Bus Namespace<br/>sbns-keda-scaling-rule"]
+    subgraph SBNS["Service Bus Namespace<br/>sbns-orders"]
         SBQ["Queue<br/>my-sample-queue"]:::storage
     end
 
-    LAW["Log Analytics Workspace<br/>law-keda-scaling-rule"]:::monitor
+    LAW["Log Analytics Workspace<br/>law-monitoring"]:::monitor
 
     RG --> CAE
     RG --> SBNS
@@ -174,11 +174,11 @@ $rg = 'az104-compute-keda-scaling-rule-bicep'
 
 # Verify the Container App exists and check scaling configuration
 az containerapp show `
-    --name ca-keda-scaling-rule `
+    --name ca-order-processor `
     --resource-group $rg `
     --query '{Name:name, MinReplicas:properties.template.scale.minReplicas, MaxReplicas:properties.template.scale.maxReplicas}' `
     -o table
-# Expected: Name = ca-keda-scaling-rule, MinReplicas = 0, MaxReplicas = 32
+# Expected: Name = ca-order-processor, MinReplicas = 0, MaxReplicas = 32
 ```
 
 <img src='.img/2026-03-05-05-48-38.png' width=600>
@@ -190,7 +190,7 @@ az containerapp show `
 ```powershell
 # Check the scaling rules on the container app
 az containerapp show `
-    --name ca-keda-scaling-rule `
+    --name ca-order-processor `
     --resource-group $rg `
     --query 'properties.template.scale.rules[0]' `
     -o json
@@ -206,7 +206,7 @@ az containerapp show `
 ```powershell
 # Verify the Service Bus queue exists
 az servicebus queue show `
-    --namespace-name sbns-keda-scaling-rule `
+    --namespace-name sbns-orders `
     --resource-group $rg `
     --name my-sample-queue `
     --query '{Name:name, Status:status}' `
@@ -231,10 +231,26 @@ Send test messages to `my-sample-queue` using the Azure Portal (Service Bus Expl
 ```powershell
 # Check current replica count
 az containerapp replica list `
-    --name ca-keda-scaling-rule `
+    --name ca-order-processor `
     --resource-group $rg `
-    --query 'length(@)'
+    --query "[] | length(@)"
 ```
+
+Prior to sending any messages:
+
+<img src='.img/2026-03-05-06-21-13.png' width=500>
+
+After sending 15 messages:
+
+<img src='.img/2026-03-05-06-22-20.png' width=600>
+
+<img src='.img/2026-03-05-06-25-16.png' width=500>
+
+<img src='.img/2026-03-05-06-26-37.png' width=600>
+
+Sending 30 messages:
+
+<img src='.img/2026-03-05-06-26-25.png' width=600>
 
 ---
 

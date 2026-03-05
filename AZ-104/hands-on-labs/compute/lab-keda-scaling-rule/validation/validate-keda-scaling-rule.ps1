@@ -29,10 +29,10 @@ param()
 
 # Static resource names from the approved lab design.
 $ResourceGroupName = 'az104-compute-keda-scaling-rule-bicep'
-$ContainerAppName = 'ca-keda-scaling-rule'
-$ContainerAppEnvironmentName = 'cae-keda-scaling-rule'
-$LogAnalyticsWorkspaceName = 'law-keda-scaling-rule'
-$ServiceBusNamespaceName = 'sbns-keda-scaling-rule'
+$ContainerAppName = 'ca-order-processor'
+$ContainerAppEnvironmentName = 'cae-lab'
+$LogAnalyticsWorkspaceName = 'law-monitoring'
+$ServiceBusNamespaceName = 'sbns-orders'
 $QueueName = 'my-sample-queue'
 
 $Main = {

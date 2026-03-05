@@ -37,10 +37,10 @@ param serviceBusConnectionString string
 // -------------------------------------------------------------------------
 
 var resourceGroupName = 'az104-${domain}-${topic}-bicep'
-var containerAppEnvironmentName = 'cae-keda-scaling-rule'
-var containerAppName = 'ca-keda-scaling-rule'
-var logAnalyticsWorkspaceName = 'law-keda-scaling-rule'
-var serviceBusNamespaceName = 'sbns-keda-scaling-rule'
+var containerAppEnvironmentName = 'cae-lab'
+var containerAppName = 'ca-order-processor'
+var logAnalyticsWorkspaceName = 'law-monitoring'
+var serviceBusNamespaceName = 'sbns-orders'
 var serviceBusQueueName = 'my-sample-queue'
 
 var commonTags = {
