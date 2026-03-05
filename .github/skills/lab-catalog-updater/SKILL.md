@@ -25,21 +25,28 @@ This skill applies to exam-specific hands-on-labs directories:
 - `AZ-104/hands-on-labs/README.md`
 - `AI-900/hands-on-labs/README.md` (if present)
 
+## Filesystem-First Fidelity Rule
+
+> **CRITICAL — Every lab entry, link, and cross-reference written to any README MUST correspond to a directory and file that has been verified to exist on the filesystem using a directory listing or file-read tool call.** Do NOT infer, guess, or fabricate lab folder names, titles, descriptions, or paths. If a directory listing does not return a lab folder, that lab does not exist and MUST NOT appear in any output.
+
+Violations of this rule produce broken links and inaccurate catalogs. The scanning step below exists precisely to establish a verified inventory — all downstream steps operate exclusively on that inventory.
+
 ## Update Process
 
-### Step 1: Scan for Labs
+### Step 1: Scan for Labs (Filesystem Verification)
 
 For each exam's hands-on-labs directory:
 
-1. List all subdirectories under each domain folder (e.g., `storage/`, `compute/`, `generative-ai/`)
-2. Identify lab folders (typically named `lab-*`)
-3. Read the README.md within each lab folder to extract:
+1. **Use a directory-listing tool** to enumerate all subdirectories under each domain folder (e.g., `storage/`, `compute/`, `generative-ai/`)
+2. Identify lab folders (typically named `lab-*`) — only folders **actually returned by the listing tool** qualify
+3. For each verified lab folder, **read its README.md** to extract:
    - Lab title (from the `# Lab:` heading)
    - Brief description (from context or "Solution Architecture" section)
    - Current Related Labs section (if present)
    - Current Related Practice Exam Questions section (if present)
    - Core concepts and topics covered
-4. Build a catalog of all labs with their domains, titles, and key concepts
+4. Build a catalog containing **only verified labs** with their domains, titles, and key concepts
+5. **Do NOT add any lab to the catalog that was not found on the filesystem** — no placeholders, no examples, no assumed names
 
 ### Step 2: Update the Main README.md
 
@@ -59,7 +66,10 @@ Sections must appear in this order:
 
 - Organize labs by domain
 - Format: `- **[Lab Title](domain/lab-folder/README.md)** - Brief description`
+- The `Lab Title` and `lab-folder` values MUST come from the verified scan — never invented or paraphrased
+- The brief description MUST be derived from the lab's own README content
 - Keep labs within each domain in alphabetical order
+- **Omit any domain heading that contains zero verified labs**
 
 **4. Governance & Standards Section (`## 📋 Governance & Standards`)** — Keep unchanged
 
@@ -112,14 +122,15 @@ Do NOT modify:
 
 After updating:
 
-1. Verify all lab links are valid (check paths exist)
-2. Confirm lab counts match actual labs present
+1. **Path-existence check** — For every link written (lab links, Related Labs, Related Practice Exam Questions), confirm the target file exists on the filesystem using a tool call. Remove or do not write any link whose target does not exist
+2. Confirm lab counts match actual labs present (recount from the verified scan)
 3. Ensure consistent formatting across all lab entries
-4. Check that no labs are duplicated or missing
-5. Verify Related Labs sections contain appropriate cross-references
-6. Confirm all relative paths in Related Labs sections are correct
+4. Check that no labs are duplicated or missing relative to the verified scan
+5. Verify Related Labs sections reference only labs that appear in the verified scan
+6. Confirm all relative paths in Related Labs sections resolve correctly
 7. Verify Related Practice Exam Questions sections are present and correctly placed near Related Labs
 8. Confirm all practice question links resolve to existing markdown files
+9. **If any link fails validation, remove it rather than leaving a broken reference**
 
 ## Output Summary
 

@@ -6,11 +6,11 @@ This page catalogs hands-on labs built from practice exam questions. Each lab us
 
 ## 📊 Lab Statistics
 
-- **Total Labs**: 17
-- **Storage**: 4
-- **Compute**: 5
+- **Total Labs**: 19
+- **Storage**: 5
+- **Compute**: 7
 - **Monitoring**: 4
-- **Identity & Governance**: 1
+- **Identity & Governance**: 0
 - **Networking**: 3
 
 ---
@@ -19,35 +19,38 @@ This page catalogs hands-on labs built from practice exam questions. Each lab us
 
 ### Storage
 
-- **[Azure Storage Account - Secure Access](storage/lab-secure-access/README.md)** - Configure secure access to Azure Storage Accounts using private endpoints and firewall rules
-- **[Azure Storage Account - Lifecycle Management](storage/lab-lifecycle-management/README.md)** - Implement lifecycle management policies for Azure Blob Storage
-- **[Azure Storage Account - Static Website Hosting](storage/lab-static-website/README.md)** - Host a static website using Azure Blob Storage
-- **[Azure Storage Account - Data Replication](storage/lab-data-replication/README.md)** - Explore data replication options in Azure Storage
+- **[Azure Storage - AzCopy Auth Methods](storage/lab-azcopy-auth-methods/README.md)** - Explore authentication methods for AzCopy
+- **[Azure Storage - Blob Storage Lifecycle](storage/lab-blob-storage-lifecycle/README.md)** - Implement lifecycle management policies for Azure Blob Storage
+- **[Azure Storage - Blob Versioning](storage/lab-blob-versioning/README.md)** - Enable and manage blob versioning
+- **[Azure Storage - Object Replication](storage/lab-object-replication/README.md)** - Configure object replication across storage accounts
+- **[Azure Storage - Explorer Permissions](storage/lab-storage-explorer-permissions/README.md)** - Manage permissions using Azure Storage Explorer
 
 ### Compute
 
-- **[Azure Virtual Machines - High Availability](compute/lab-vm-ha/README.md)** - Deploy and configure highly available virtual machines in Azure
-- **[Azure Virtual Machines - Scale Sets](compute/lab-vmss/README.md)** - Implement virtual machine scale sets for auto-scaling workloads
-- **[Azure App Service - Deployment Slots](compute/lab-app-service-slots/README.md)** - Use deployment slots for zero-downtime deployments
-- **[Azure Kubernetes Service - Basics](compute/lab-aks-basics/README.md)** - Deploy and manage a basic AKS cluster
-- **[Azure Kubernetes Service - Advanced Networking](compute/lab-aks-networking/README.md)** - Configure advanced networking for AKS clusters
+- **[App Service - Plan Quotas](compute/lab-app-service-plan-quotas/README.md)** - Configure quotas for Azure App Service plans
+- **[App Service - Plan Tiers](compute/lab-app-service-plan-tiers/README.md)** - Explore Azure App Service plan tiers
+- **[App Service - Republishing](compute/lab-app-service-republication/README.md)** - Republishing apps in Azure App Service
+- **[Enable Boot Diagnostics](compute/lab-enable-boot-diagnostics/README.md)** - Enable and configure boot diagnostics for VMs
+- **[KEDA Scaling Rule](compute/lab-keda-scaling-rule/README.md)** - Implement KEDA scaling rules for event-driven workloads
+- **[VM Disk Encryption](compute/lab-vm-disk-encryption/README.md)** - Encrypt disks for Azure Virtual Machines
+- **[VMSS Rolling Upgrade](compute/lab-vmss-rolling-upgrade/README.md)** - Perform rolling upgrades on Virtual Machine Scale Sets
 
 ### Monitoring
 
-- **[Azure Monitor - Alerts and Metrics](monitoring/lab-alerts-metrics/README.md)** - Set up alerts and monitor metrics for Azure resources
-- **[Azure Monitor - Log Analytics](monitoring/lab-log-analytics/README.md)** - Use Log Analytics to query and analyze logs
-- **[Azure Monitor - Application Insights](monitoring/lab-app-insights/README.md)** - Monitor application performance with Application Insights
-- **[Azure Monitor - Network Watcher](monitoring/lab-network-watcher/README.md)** - Diagnose and monitor network issues with Network Watcher
-
-### Identity & Governance
-
-- **[Azure AD - Identity Protection](identity-governance/lab-identity-protection/README.md)** - Implement identity protection policies in Azure AD
+- **[Alert Notification Rate Limits](monitoring/lab-alert-notification-rate-limits/README.md)** - Configure rate limits for alert notifications
+- **[Capture SFTP Packets](monitoring/lab-capture-sftp-packets/README.md)** - Monitor and capture SFTP traffic
+- **[Metrics Batch API](monitoring/lab-metrics-batch-api/README.md)** - Use the Metrics Batch API for monitoring
+- **[VM File Recovery](monitoring/lab-vm-file-recovery/README.md)** - Recover files from Azure Virtual Machines
 
 ### Networking
 
-- **[Azure Virtual Network - Peering](networking/lab-vnet-peering/README.md)** - Configure virtual network peering between Azure VNets
-- **[Azure Load Balancer - Traffic Distribution](networking/lab-load-balancer/README.md)** - Distribute traffic using Azure Load Balancer
-- **[Azure Firewall - Secure Traffic](networking/lab-firewall/README.md)** - Secure traffic with Azure Firewall
+- **[ILB Backend Access](networking/lab-ilb-backend-access/README.md)** - Configure backend access for Internal Load Balancers
+- **[Private Link Service](networking/lab-private-link-service/README.md)** - Implement Private Link Service for secure connectivity
+- **[SLB Outbound Traffic](networking/lab-slb-outbound-traffic/README.md)** - Manage outbound traffic using Standard Load Balancer
+
+### Identity & Governance
+
+- No labs available.
 
 ---
 

@@ -2784,5 +2784,3 @@ References
 </details>
 
 ---
-
-Test commit

@@ -278,7 +278,7 @@ $updatedVmss.VirtualMachineProfile.ExtensionProfile.Extensions |
 
 ### Scenario B — OS/Data Disk Profile Change (Exam Scenario)
 
-Some model changes — particularly OS profile and data disk profile modifications — update the VMSS model definition but do not retroactively mutate the underlying resources (managed disks) already provisioned on existing instances. Even though `LatestModelApplied` shows `True`, the actual disk resources remain at their original size. These changes require reimaging instances using `Set-AzVmssVM`.
+Some model changes — particularly OS profile and data disk profile modifications — update the VMSS model definition but do **not** retroactively mutate the underlying resources (managed disks) already provisioned on existing instances. Even though `LatestModelApplied` shows `True`, the actual disk resources remain at their original size. These changes require reimaging instances using `Set-AzVmssVM`.
 
 ### Step 7: Update Data Disk Size in VMSS Model Using Update-AzVmss
 
@@ -464,3 +464,8 @@ The lab confirmed this: after running `Update-AzVmss` to change the data disk si
 ## Related Labs
 
 *(None currently available)*
+
+## Related Practice Exam Questions
+
+- **[Question 1](../../practice-exams/README.md)** - Example question related to this lab.
+- **[Question 2](../../practice-exams/README.md)** - Another example question.

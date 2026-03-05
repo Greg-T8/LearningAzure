@@ -11,6 +11,10 @@ Also update individual lab README files to include a dedicated related practice 
 
 Uses the `lab-catalog-updater` skill for the full scanning, updating, and validation workflow.
 
+## Link Fidelity Requirement
+
+> **Every lab link, Related Lab cross-reference, and Related Practice Exam Question link MUST be verified against the filesystem before it is written.** Use directory-listing and file-read tool calls to confirm that lab folders and target markdown files actually exist. Never generate, guess, or infer lab folder names or paths — only reference items confirmed to exist on disk. If a path cannot be verified, omit it.
+
 ## Scope
 
 - `AI-102/hands-on-labs/README.md`

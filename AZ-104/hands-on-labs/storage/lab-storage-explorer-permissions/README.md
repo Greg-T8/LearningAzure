@@ -323,3 +323,8 @@ To use Azure AD authentication instead of account keys:
 ## Related Labs
 
 ▶ Related Lab: [lab-azcopy-auth-methods](../lab-azcopy-auth-methods/README.md) - Test authentication methods for Azure storage operations
+
+## Related Practice Exam Questions
+
+- **[Question 1](../../practice-exams/README.md)** - Example question related to this lab.
+- **[Question 2](../../practice-exams/README.md)** - Another example question.
