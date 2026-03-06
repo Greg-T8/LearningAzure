@@ -15,6 +15,8 @@
 
 **Legend:** 🕒 Not Started | 🚧 In Progress | ✅ Complete
 
+📝 **[Study Log](./StudyLog.md)** — Session-by-session study time tracker
+
 ---
 
 ## 📌 Reference Links
