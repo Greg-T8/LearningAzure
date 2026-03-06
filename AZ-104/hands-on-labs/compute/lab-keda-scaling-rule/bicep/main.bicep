@@ -28,10 +28,6 @@ param owner string = 'Greg Tate'
 @description('Date created for tagging (static value, YYYY-MM-DD)')
 param dateCreated string
 
-@description('Service Bus connection string used by the KEDA scaler')
-@secure()
-param serviceBusConnectionString string
-
 // -------------------------------------------------------------------------
 // Local variables for naming and tagging
 // -------------------------------------------------------------------------
@@ -93,7 +89,7 @@ module containerApps 'modules/container-apps.bicep' = {
     logAnalyticsWorkspaceName: logAnalyticsWorkspaceName
     serviceBusNamespaceName: messaging.outputs.serviceBusNamespaceName
     queueName: messaging.outputs.queueName
-    serviceBusConnectionString: serviceBusConnectionString
+    serviceBusConnectionString: messaging.outputs.serviceBusConnectionString
   }
 }
 

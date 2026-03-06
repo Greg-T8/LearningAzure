@@ -60,3 +60,9 @@ output serviceBusNamespaceName string = serviceBusNamespace.name
 
 @description('Service Bus queue name')
 output queueName string = queueName
+
+@description('Service Bus connection string for KEDA scaler authentication')
+output serviceBusConnectionString string = listKeys(
+  '${serviceBusNamespace.id}/AuthorizationRules/RootManageSharedAccessKey',
+  serviceBusNamespace.apiVersion
+).primaryConnectionString

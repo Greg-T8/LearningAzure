@@ -236,6 +236,14 @@ Sent 50 messages in Service Bus Explorer:
 
 <img src='.img/2026-03-06-04-57-50.png' width=600>
 
+<img src='.img/2026-03-06-05-37-03.png' width=600>
+
+Observed 4 replicas after 30 seconds:
+
+<img src='.img/2026-03-06-05-35-00.png' width=600>
+
+<img src='.img/2026-03-06-05-36-01.png' width=600>
+
 ---
 
 ## Cleanup
@@ -263,6 +271,8 @@ cd AZ-104/hands-on-labs/compute/lab-keda-scaling-rule/bicep
 
 KEDA's default `pollingInterval` is **30 seconds**. Since the scaling rule in the code snippet does not override this value, KEDA checks the Azure Service Bus queue (`my-sample-queue`) for its current message count every 30 seconds. This is a built-in KEDA default that applies to all scalers unless explicitly configured otherwise in the `metadata` section.
 
+<img src='.img/2026-03-06-05-38-01.png' width=600>
+
 ### Statement 2: If the queue length is > 15, KEDA scales the app by adding one new instance — No
 
 The `messageCount` metadata value of `"15"` does **not** act as a simple threshold that adds one replica when exceeded. Instead, KEDA uses it as a **ratio** to calculate the desired number of replicas:
@@ -281,6 +291,10 @@ For example:
 
 KEDA performs **proportional scaling** — it calculates the total number of replicas needed to process all queued messages at the target rate, rather than incrementally adding one replica each time the threshold is exceeded.
 
+<https://learn.microsoft.com/en-us/azure/container-apps/scale-app?pivots=azure-cli#scale-behavior>
+
+<img src='.img/2026-03-06-05-43-55.png' width=600>
+
 ### Statement 3: The code snippet uses the TriggerAuthentication type — No
 
 The code snippet does **not** include any authentication configuration. For KEDA to use `TriggerAuthentication`, the scaling rule would need an explicit `auth` section referencing a `TriggerAuthentication` object, such as:
@@ -295,6 +309,10 @@ The code snippet does **not** include any authentication configuration. For KEDA
 ```
 
 The snippet only defines the scaler `type` and `metadata` — there is no `auth` property, no `secretTargetRef`, and no reference to a `TriggerAuthentication` resource. In Azure Container Apps, credential management for KEDA scalers is typically handled through Container App secrets referenced in an `auth` array — but this snippet omits that configuration entirely.
+
+<img src='.img/2026-03-06-05-49-21.png' width=400>
+
+<img src='.img/2026-03-06-05-49-30.png' width=600>
 
 ---
 
