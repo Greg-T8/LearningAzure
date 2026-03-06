@@ -46,6 +46,7 @@
   * [IMDS Load Balancer Metadata Error](#imds-load-balancer-metadata-error)
   * [Delete Soft-Deleted File Share](#delete-soft-deleted-file-share)
   * [Storage Insights Overview](#storage-insights-overview)
+  * [Configure Scaling Rules in Azure Container Apps](#configure-scaling-rules-in-azure-container-apps)
 
 ---
 
@@ -2785,4 +2786,77 @@ References
 
 ---
 
-test
+### Configure Scaling Rules in Azure Container Apps
+
+You are an Azure Administrator for a company. Your company is using Azure Container Apps to run containerized applications. You are tasked with configuring scaling rules in Azure Container Apps.
+
+You are using a custom Container Apps scaling rule based on any ScaledObject-based Kubernetes-based Event Driven Autoscaler (KEDA) scaler specification. The default scale rule is applied to your container application.
+
+You have created the following scale rule in JSON as shown below:
+
+```json
+{
+  "minReplicas": 0,
+  "maxReplicas": 32,
+  "rules": [
+    {
+      "name": "azure-servicebus-queue-rule",
+      "custom": {
+        "type": "azure-servicebus",
+        "metadata": {
+          "queueName": "my-sample-queue",
+          "namespace": "service-bus-namespace",
+          "messageCount": "15"
+        }
+      }
+    }
+  ]
+}
+```
+
+You need to implement the solution.
+
+For each of the following statements, select Yes if the statement is true. Otherwise, select No.
+
+| Statement | Yes | No |
+|-----------|-----|----|
+| KEDA checks my-sample-queue once every 30 seconds. | ☐ | ☐ |
+| If the queue length is > 15, KEDA scales the app by adding one new instance (aka replica). | ☐ | ☐ |
+| The code snippet uses the TriggerAuthentication type for the authentication of objects. | ☐ | ☐ |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-06-05-55-39.png' width=600>
+
+</details>
+
+<details open>
+<summary>💡 Click to expand explanation</summary>
+
+<img src='.img/2026-03-06-05-57-51.png' width=600>
+
+**Why the selected answers are correct**
+
+KEDA polls the Azure Service Bus queue on a 30-second interval by default for ScaledObject-based scalers, so the statement that KEDA checks `my-sample-queue` every 30 seconds is accurate. The `messageCount` metadata value ("15") is the threshold used to trigger scaling when the number of active messages exceeds that value.
+
+When the threshold is exceeded, KEDA initiates a scale-up. The initial scale-up step adds at least one replica; KEDA's scale-up behavior then proceeds by increasing replicas according to its step pattern (the first step starts with a single new replica and can grow in subsequent steps up to the configured maximum, here `maxReplicas: 32`). Therefore the statement that KEDA scales the app by adding one new instance when the queue length is greater than 15 is consistent with the scaler's initial scale-up behavior.
+
+**Why the selected answer is wrong**
+
+The code snippet does not include a `triggerAuthentication` (or `authenticationRef`) entry or any `TriggerAuthentication` object references. For KEDA to use a `TriggerAuthentication`, the scaled object must reference a `TriggerAuthentication` resource and that resource must define `secretTargetRef` entries that point to the required secrets. Because the JSON shown only contains the `custom` scaler and its `metadata`, the statement that the snippet uses the `TriggerAuthentication` type for authentication is incorrect.
+
+**Key takeaway**
+
+The JSON defines an Azure Service Bus scaler with a `messageCount` threshold and a `maxReplicas` cap. KEDA's default polling interval (30s) and its scale-up behavior explain why the first two statements are treated as true in the exam content, while authentication requires a separate `TriggerAuthentication` configuration which is not present in the snippet.
+
+**References**
+
+- [Scale App](https://learn.microsoft.com/en-us/azure/container-apps/scale-app?pivots=azure-resource-manager)
+- [Scalers](https://keda.sh/docs/2.11/scalers/)
+- [Scaling Deployments](https://keda.sh/docs/2.11/concepts/scaling-deployments/)
+- [Authentication](https://keda.sh/docs/2.11/concepts/authentication/)
+
+</details>
+
+▶ Related Lab: [lab-keda-scaling-rule](../hands-on-labs/compute/lab-keda-scaling-rule/README.md)
