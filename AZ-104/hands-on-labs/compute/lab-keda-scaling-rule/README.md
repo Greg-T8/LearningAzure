@@ -155,13 +155,9 @@ cd AZ-104/hands-on-labs/compute/lab-keda-scaling-rule/bicep
 .\bicep.ps1 apply
 ```
 
-<img src='.img/2026-03-05-05-44-53.png' width=600>
+<img src='.img/2026-03-06-04-30-49.png' width=600>
 
-<img src='.img/2026-03-05-05-45-32.png' width=600>
-
-<img src='.img/2026-03-05-05-45-56.png' width=600>
-
-<img src='.img/2026-03-05-05-46-57.png' width=600>
+<img src='.img/2026-03-06-04-53-13.png' width=600>
 
 ---
 
@@ -181,9 +177,9 @@ az containerapp show `
 # Expected: Name = ca-order-processor, MinReplicas = 0, MaxReplicas = 32
 ```
 
-<img src='.img/2026-03-05-05-48-38.png' width=600>
+<img src='.img/2026-03-06-04-31-42.png' width=600>
 
-<img src='.img/2026-03-05-06-04-56.png' width=700>
+<img src='.img/2026-03-06-04-32-38.png' width=600>
 
 ### Step 2 — Verify KEDA Scaling Rule Configuration
 
@@ -197,9 +193,9 @@ az containerapp show `
 # Expected: name = "azure-servicebus-queue-rule", custom.type = "azure-servicebus", custom.metadata.messageCount = "15"
 ```
 
-<img src='.img/2026-03-05-05-58-56.png' width=600>
+<img src='.img/2026-03-06-04-33-24.png' width=600>
 
-<img src='.img/2026-03-05-06-00-52.png' width=600>
+<img src='.img/2026-03-06-04-33-59.png' width=600>
 
 ### Step 3 — Verify Service Bus Queue
 
@@ -214,11 +210,11 @@ az servicebus queue show `
 # Expected: Name = my-sample-queue, Status = Active
 ```
 
-<img src='.img/2026-03-05-06-05-45.png' width=500>
+<img src='.img/2026-03-06-04-34-33.png' width=500>
 
-<img src='.img/2026-03-05-06-09-00.png' width=700>
+<img src='.img/2026-03-06-04-37-01.png' width=600>
 
-<img src='.img/2026-03-05-06-10-40.png' width=500>
+<img src='.img/2026-03-06-04-37-47.png' width=600>
 
 ### Step 4 — Observe Scaling Behavior
 
@@ -236,21 +232,9 @@ az containerapp replica list `
     --query "[] | length(@)"
 ```
 
-Prior to sending any messages:
+Sent 50 messages in Service Bus Explorer:
 
-<img src='.img/2026-03-05-06-21-13.png' width=500>
-
-After sending 15 messages:
-
-<img src='.img/2026-03-05-06-22-20.png' width=600>
-
-<img src='.img/2026-03-05-06-25-16.png' width=500>
-
-<img src='.img/2026-03-05-06-26-37.png' width=600>
-
-Sending 30 messages:
-
-<img src='.img/2026-03-05-06-26-25.png' width=600>
+<img src='.img/2026-03-06-04-57-50.png' width=600>
 
 ---
 
