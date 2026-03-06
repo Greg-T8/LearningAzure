@@ -294,3 +294,7 @@ To enable UDP outbound, you would need to either:
 ## Related Labs
 
 ▶ Related Lab: [lab-ilb-backend-access](../lab-ilb-backend-access/README.md) - Troubleshoot Internal Load Balancer hairpin limitation using proxy-based solutions
+
+## Related Practice Exam Questions
+
+- ▶ Practice Question: [Configure Standard Load Balancer Outbound Traffic and IP Allocation](../../../practice-exams/README.md#configure-standard-load-balancer-outbound-traffic-and-ip-allocation)

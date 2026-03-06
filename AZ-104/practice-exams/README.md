@@ -2831,7 +2831,7 @@ For each of the following statements, select Yes if the statement is true. Other
 
 </details>
 
-<details open>
+<details>
 <summary>💡 Click to expand explanation</summary>
 
 <img src='.img/2026-03-06-05-57-51.png' width=600>

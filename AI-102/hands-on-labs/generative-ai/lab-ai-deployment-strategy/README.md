@@ -264,3 +264,7 @@ A serverless API deployment (Standard tier in Azure OpenAI) is billed pay-per-to
 ## Related Labs
 
 ▶ Related Lab: [lab-dalle-image-gen](../../generative-ai/lab-dalle-image-gen/README.md)
+
+## Related Practice Exam Questions
+
+- ▶ Practice Question: [Serverless API Deployment](../../../practice-exams/README.md#serverless-api-deployment)

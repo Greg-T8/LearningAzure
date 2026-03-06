@@ -181,4 +181,8 @@ The exam question omits `New-AzWebApp` from the options, but in practice you **m
 
 ## Related Labs
 
-- ▶ [App Service Plan Tiers](../lab-app-service-plan-tiers/) — Explore App Service Plan tier differences and autoscale configuration
+- ▶ Related Lab: [lab-app-service-plan-tiers](../lab-app-service-plan-tiers/README.md) — Explore App Service Plan tier differences and autoscale configuration
+
+## Related Practice Exam Questions
+
+- ▶ Practice Question: [Prepare Azure App Service for Web App Republication](../../../practice-exams/README.md#prepare-azure-app-service-for-web-app-republication)

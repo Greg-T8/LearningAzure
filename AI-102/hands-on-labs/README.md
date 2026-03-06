@@ -6,8 +6,8 @@ This page catalogs hands-on labs built from practice exam questions. Each lab us
 
 ## 📊 Lab Statistics
 
-- **Total Labs**: 6
-- **Generative AI**: 1
+- **Total Labs**: 7
+- **Generative AI**: 2
 - **Agentic**: 2
 - **AI Services**: 2
 - **Computer Vision**: 0
@@ -21,6 +21,7 @@ This page catalogs hands-on labs built from practice exam questions. Each lab us
 ### Generative AI
 
 - **[DALL-E Image Generation with Azure OpenAI](generative-ai/lab-dalle-image-gen/README.md)** - Test DALL-E 3 image generation capabilities, model parameters, and Azure AI Foundry portal features
+- **[Select an Azure AI Deployment Strategy](generative-ai/lab-ai-deployment-strategy/README.md)** - Compare standard, provisioned, and batch Azure OpenAI deployments to choose the right option for interactive workloads with unpredictable demand
 
 ### Agentic
 

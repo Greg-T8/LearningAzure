@@ -328,4 +328,9 @@ Azure Backup's **file-level recovery** (also called Item Level Recovery or ILR) 
 
 ## Related Labs
 
-▶ Related Lab: [lab-alert-notification-rate-limits](../lab-alert-notification-rate-limits/README.md) - Understand notification rate limits for Azure Monitor action groups
+▶ Related Lab: [lab-enable-boot-diagnostics](../../compute/lab-enable-boot-diagnostics/README.md) - Pair VM troubleshooting signals with backup and recovery validation steps
+
+## Related Practice Exam Questions
+
+- ▶ Practice Question: [Recover Configuration File from Azure VM Backup](../../../practice-exams/README.md#recover-configuration-file-from-azure-vm-backup)
+- ▶ Practice Question: [Recover Azure VM from Deleted Backup](../../../practice-exams/README.md#recover-azure-vm-from-deleted-backup)

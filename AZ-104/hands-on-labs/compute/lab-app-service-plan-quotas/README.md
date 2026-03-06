@@ -180,5 +180,5 @@ The minimum tier that satisfies the requirement is **Basic B1** because:
 
 ### ▶ Related Practice Exam Questions
 
-- ▶ Practice Question: [Azure App Service Plans](../../../../practice-exams/az-104/app-service-plans.md)
-- ▶ Practice Question: [Azure Compute Quotas](../../../../practice-exams/az-104/compute-quotas.md)
+- ▶ Practice Question: [Configure Azure App Service Plan for Website Hosting](../../../practice-exams/README.md#configure-azure-app-service-plan-for-website-hosting)
+- ▶ Practice Question: [Resolve Azure App Service Pricing Tier for Runtime Requirements](../../../practice-exams/README.md#resolve-azure-app-service-pricing-tier-for-runtime-requirements)

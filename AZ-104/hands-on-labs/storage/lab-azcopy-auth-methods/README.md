@@ -368,6 +368,10 @@ SAS tokens can be scoped to:
 - [lab-storage-explorer-permissions](../lab-storage-explorer-permissions/README.md) - Understanding RBAC for Storage Explorer
 - [lab-object-replication](../lab-object-replication/README.md) - Blob replication with change feed
 
+## Related Practice Exam Questions
+
+- ▶ Practice Question: [Configure AzCopy Authentication for Blob and File Storage](../../../practice-exams/README.md#configure-azcopy-authentication-for-blob-and-file-storage)
+
 ---
 
 **Author**: Greg Tate  

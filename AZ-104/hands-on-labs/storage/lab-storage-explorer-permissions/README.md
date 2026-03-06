@@ -326,5 +326,4 @@ To use Azure AD authentication instead of account keys:
 
 ## Related Practice Exam Questions
 
-- **[Question 1](../../practice-exams/README.md)** - Example question related to this lab.
-- **[Question 2](../../practice-exams/README.md)** - Another example question.
+- ▶ Practice Question: [Diagnose Storage Explorer Permission Errors](../../../practice-exams/README.md#diagnose-storage-explorer-permission-errors)

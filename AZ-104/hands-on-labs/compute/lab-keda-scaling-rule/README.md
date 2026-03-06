@@ -349,3 +349,7 @@ The snippet only defines the scaler `type` and `metadata` — there is no `auth`
 ## Related Labs
 
 ▶ Related Lab: [lab-app-service-plan-quotas](../lab-app-service-plan-quotas/README.md) — App Service Plan CPU quota behavior and tier scaling
+
+## Related Practice Exam Questions
+
+- ▶ Practice Question: [Configure Scaling Rules in Azure Container Apps](../../../practice-exams/README.md#configure-scaling-rules-in-azure-container-apps)

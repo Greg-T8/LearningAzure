@@ -264,9 +264,8 @@ az group delete --name ai102-generative-ai-dalle-image-gen-tf --yes --no-wait
 
 ### ▶ Related Labs
 
-- ▶ Related Lab: [lab-search-query-perf](../../knowledge-mining/lab-search-query-perf/README.md)
+- ▶ Related Lab: [lab-ai-deployment-strategy](../lab-ai-deployment-strategy/README.md)
 
 ### ▶ Related Practice Exam Questions
 
-- ▶ Practice Question: [Azure OpenAI - DALL-E Image Generation](../../../../practice-exams/ai-102/dalle-image-gen.md)
-- ▶ Practice Question: [Azure OpenAI - Model Parameters](../../../../practice-exams/ai-102/model-parameters.md)
+- ▶ Practice Question: [Azure OpenAI Image Generation and DALL-E Configuration](../../../practice-exams/README.md#azure-openai-image-generation-and-dall-e-configuration)

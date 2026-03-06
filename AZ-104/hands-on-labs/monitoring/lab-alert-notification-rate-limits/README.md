@@ -159,5 +159,4 @@ Azure enforces rate limits to prevent notification flooding:
 
 ### ▶ Related Practice Exam Questions
 
-- ▶ Practice Question: [Azure Monitor Alerts](../../../../practice-exams/az-104/monitor-alerts.md)
-- ▶ Practice Question: [Azure Notification Limits](../../../../practice-exams/az-104/notification-limits.md)
+- ▶ Practice Question: [Configure Azure Monitor Alert Notification Rate Limits](../../../practice-exams/README.md#configure-azure-monitor-alert-notification-rate-limits)

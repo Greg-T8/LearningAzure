@@ -346,4 +346,8 @@ cd AZ-104/hands-on-labs/monitoring/lab-capture-sftp-packets/bicep
 
 ## Related Labs
 
-▶ Related Lab: [lab-vnet-peering](../../networking/lab-vnet-peering/README.md) — Configure virtual network peering between Azure VNets
+▶ Related Lab: [lab-ilb-backend-access](../../networking/lab-ilb-backend-access/README.md) — Troubleshoot network traffic paths and backend connectivity issues in Azure
+
+## Related Practice Exam Questions
+
+- ▶ Practice Question: [Capture SFTP Packets with Network Watcher](../../../practice-exams/README.md#capture-sftp-packets-with-network-watcher)

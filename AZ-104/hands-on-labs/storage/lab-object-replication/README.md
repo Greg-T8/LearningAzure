@@ -255,3 +255,7 @@ This lab covers the following AZ-104 exam objectives:
 ## Related Labs
 
 ▶ Related Lab: [lab-blob-versioning](../lab-blob-versioning/README.md) - Understand which blob write operations create new versions
+
+## Related Practice Exam Questions
+
+- ▶ Practice Question: [Configure Object Replication Between Storage Accounts](../../../practice-exams/README.md#configure-object-replication-between-storage-accounts)

@@ -213,7 +213,7 @@ $response.values | ForEach-Object {
 .\validation\Confirm-MetricsBatchApi.ps1
 ```
 <!-- Screenshot -->
-<img src='.img/2026-02-21-05-02-10.png' width=700> 
+<img src='.img/2026-02-21-05-02-10.png' width=700>
 
 ---
 
@@ -281,3 +281,7 @@ terraform destroy
 ## Related Labs
 
 - [Azure Monitor Alert Notification Rate Limits](../lab-alert-notification-rate-limits/README.md) — Understand notification rate limits for alert actions in Azure Monitor
+
+## Related Practice Exam Questions
+
+- ▶ Practice Question: [Load Balancer Metrics Batch API](../../../practice-exams/README.md#load-balancer-metrics-batch-api)

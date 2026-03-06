@@ -480,5 +480,4 @@ The capability host configuration stores the connection to each BYO resource. Th
 
 ### ▶ Related Practice Exam Questions
 
-- ▶ Practice Question: [Azure AI Agent Service - RBAC](../../../../practice-exams/ai-102/agent-rbac.md)
-- ▶ Practice Question: [Azure AI Agent Service - BYO Storage](../../../../practice-exams/ai-102/byo-storage.md)
+- ▶ Practice Question: [Azure AI Agent Service File Upload Configuration Issues](../../../practice-exams/README.md#azure-ai-agent-service-file-upload-configuration-issues)

@@ -189,9 +189,8 @@ The critical detail is that queries remain slow **even with no load** on the ser
 
 ### ▶ Related Labs
 
-- ▶ Related Lab: [lab-dalle-image-gen](../generative-ai/lab-dalle-image-gen/README.md)
+- ▶ Related Lab: [lab-agent-byo-storage](../../agentic/lab-agent-byo-storage/README.md)
 
 ### ▶ Related Practice Exam Questions
 
-- ▶ Practice Question: [Azure AI Search - Query Performance](../../../../practice-exams/ai-102/search-query-performance.md)
-- ▶ Practice Question: [Azure AI Search - Partitions vs Replicas](../../../../practice-exams/ai-102/partitions-vs-replicas.md)
+- ▶ Practice Question: [Azure AI Search Query Performance Optimization](../../../practice-exams/README.md#azure-ai-search-query-performance-optimization)

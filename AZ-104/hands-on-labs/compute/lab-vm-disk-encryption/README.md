@@ -315,4 +315,8 @@ Set-AzVMDiskEncryptionExtension -ResourceGroupName $vmRG `
 
 ## Related Labs
 
-- [Lab: App Service Plan Quotas](../lab-app-service-plan-quotas/) — Compute resource management fundamentals
+- ▶ Related Lab: [lab-enable-boot-diagnostics](../lab-enable-boot-diagnostics/README.md) — Combine VM troubleshooting signals with disk protection and recovery planning
+
+## Related Practice Exam Questions
+
+- ▶ Practice Question: [Encrypt VM Disk With Key Vault](../../../practice-exams/README.md#encrypt-vm-disk-with-key-vault)

@@ -233,5 +233,4 @@ Azure AI Content Safety Studio provides the following core features:
 
 ### ▶ Related Practice Exam Questions
 
-- ▶ Practice Question: [Azure AI Content Safety - Text Moderation](../../../../practice-exams/ai-102/content-safety-text.md)
-- ▶ Practice Question: [Azure AI Content Safety - Image Moderation](../../../../practice-exams/ai-102/content-safety-image.md)
+- ▶ Practice Question: [Azure AI Content Safety Features Available](../../../practice-exams/README.md#azure-ai-content-safety-features-available)

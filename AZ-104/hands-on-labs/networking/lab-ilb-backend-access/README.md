@@ -267,4 +267,8 @@ The scenario confirms this is not an NSG issue: the VMs are listed as healthy an
 
 ## Related Labs
 
-- [Configure Standard Load Balancer Outbound Traffic and IP Allocation](../lab-slb-outbound-traffic/) — Covers Standard public Load Balancer outbound rules, SNAT behavior, and multi-frontend IP allocation
+- ▶ Related Lab: [lab-slb-outbound-traffic](../lab-slb-outbound-traffic/README.md) — Covers Standard public Load Balancer outbound rules, SNAT behavior, and multi-frontend IP allocation
+
+## Related Practice Exam Questions
+
+- ▶ Practice Question: [Diagnose Internal Load Balancer Hairpin Traffic Failure](../../../practice-exams/README.md#diagnose-internal-load-balancer-hairpin-traffic-failure)

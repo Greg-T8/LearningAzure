@@ -467,5 +467,4 @@ The lab confirmed this: after running `Update-AzVmss` to change the data disk si
 
 ## Related Practice Exam Questions
 
-- **[Question 1](../../practice-exams/README.md)** - Example question related to this lab.
-- **[Question 2](../../practice-exams/README.md)** - Another example question.
+- ▶ Practice Question: [Apply Change to VMSS OS and Data Disk Profile](../../../practice-exams/README.md#apply-change-to-vmss-os-and-data-disk-profile)

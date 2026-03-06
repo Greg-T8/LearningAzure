@@ -391,4 +391,8 @@ cd bicep
 
 ## Related Labs
 
-- [Lab: VM Disk Encryption with Key Vault](../lab-vm-disk-encryption/) — VM operations and Key Vault integration
+- ▶ Related Lab: [lab-vm-disk-encryption](../lab-vm-disk-encryption/README.md) — Pair VM startup troubleshooting with disk security and Key Vault-backed protection
+
+## Related Practice Exam Questions
+
+- ▶ Practice Question: [Enable Boot Diagnostics for Azure Virtual Machines](../../../practice-exams/README.md#enable-boot-diagnostics-for-azure-virtual-machines)

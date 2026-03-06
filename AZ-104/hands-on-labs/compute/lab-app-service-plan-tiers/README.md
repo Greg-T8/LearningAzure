@@ -145,3 +145,8 @@ The Premium V3 tier is the correct answer because it is the most cost-effective 
 ▶ Related Lab: [lab-app-service-plan-quotas](../lab-app-service-plan-quotas/README.md) - Understand CPU quota limitations of Free and Shared tiers
 
 ▶ Related Lab: [lab-app-service-republication](../lab-app-service-republication/README.md) - Use deployment slots which require Standard tier or above
+
+## Related Practice Exam Questions
+
+- ▶ Practice Question: [Resolve Azure App Service Pricing Tier for Runtime Requirements](../../../practice-exams/README.md#resolve-azure-app-service-pricing-tier-for-runtime-requirements)
+- ▶ Practice Question: [Configure Azure App Service Plan for Website Hosting](../../../practice-exams/README.md#configure-azure-app-service-plan-for-website-hosting)

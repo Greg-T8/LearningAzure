@@ -318,4 +318,8 @@ In this lab, `nsg-backend` proves the behavior remains enforced for non-PLS reso
 
 ## Related Labs
 
-▶ Related Lab: [lab-vnet-peering](../lab-vnet-peering/README.md) - Configure VNet peering for cross-network connectivity
+▶ Related Lab: [lab-ilb-backend-access](../lab-ilb-backend-access/README.md) - Compare private connectivity patterns and backend access troubleshooting for internal services
+
+## Related Practice Exam Questions
+
+- ▶ Practice Question: [Configure Private Link Service Source IP](../../../practice-exams/README.md#configure-private-link-service-source-ip)

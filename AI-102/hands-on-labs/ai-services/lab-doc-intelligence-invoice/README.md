@@ -385,3 +385,7 @@ The **Azure.AI.FormRecognizer** NuGet package provides the C# SDK for Azure AI D
 ## Related Labs
 
 - [lab-content-safety](../lab-content-safety/README.md) — Azure AI Content Safety text and image moderation
+
+## Related Practice Exam Questions
+
+- ▶ Practice Question: [Automating Invoice Processing with Azure AI Document Intelligence](../../../practice-exams/README.md#automating-invoice-processing-with-azure-ai-document-intelligence)

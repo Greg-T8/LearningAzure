@@ -382,3 +382,7 @@ This statement is incorrect for two reasons:
 
 ▶ Related Lab: [lab-blob-versioning](../../storage/lab-blob-versioning/README.md)
 ▶ Related Lab: [lab-object-replication](../../storage/lab-object-replication/README.md)
+
+## Related Practice Exam Questions
+
+- ▶ Practice Question: [Configure Lifecycle Management Policy for Azure Storage](../../../practice-exams/README.md#configure-lifecycle-management-policy-for-azure-storage)

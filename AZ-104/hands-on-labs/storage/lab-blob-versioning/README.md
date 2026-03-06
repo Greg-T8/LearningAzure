@@ -221,5 +221,4 @@ This lab covers the following AZ-104 exam objective areas:
 
 ### ▶ Related Practice Exam Questions
 
-- ▶ Practice Question: [Azure Blob Versioning](../../../../practice-exams/az-104/blob-versioning.md)
-- ▶ Practice Question: [Azure Storage Operations](../../../../practice-exams/az-104/storage-operations.md)
+- ▶ Practice Question: [Identify Blob Write Operations That Create New Versions](../../../practice-exams/README.md#identify-blob-write-operations-that-create-new-versions)
