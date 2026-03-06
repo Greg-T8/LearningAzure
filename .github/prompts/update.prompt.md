@@ -26,6 +26,17 @@ Uses the `lab-catalog-updater` skill for the full scanning, updating, and valida
 - Search all practice exam question README files (for example under any `practice-exams` folders and individual assessment MDs such as `Microsoft_Assessment_*.md`, `TutorialsDojo_*.md`, etc.) and ensure any `<details>` blocks that include the `open` attribute (for example `<details open>`) are changed to plain `<details>` so explanations are collapsed by default.
 - Include this check as part of the updater run so individual exam README files have their explanation blocks collapsed when rendered.
 
+## Remove Unused Images
+
+After all README and practice exam updates are complete, run the unused image cleanup script to remove images from `.img` folders that are no longer referenced by any markdown file:
+
+```powershell
+& ".assets\scripts\Remove-UnusedImages.ps1"
+```
+
+- Run with `-WhatIf` first to preview what will be deleted before committing to removal.
+- The script scans every `.img` directory in the workspace and deletes any image file not referenced by a sibling markdown file.
+
 ## Invocation Examples
 
 - "Update the hands-on-labs README files"
