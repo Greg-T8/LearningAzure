@@ -569,9 +569,6 @@ def build_commit_table(
     )
     table += (
         "\n*Study sessions: start/end commits define session boundaries*  \n"
-        "*Pre-8 AM (non-session): time between consecutive commits "
-        "credited to first commit's folder*  \n"
-        "*Weekends after 8 AM (non-session): 0.5h flat per commit*  \n"
         "*Other = Lab workflow and automation design, "
         "content structure and development*  \n"
     )
