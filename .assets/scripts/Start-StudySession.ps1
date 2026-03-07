@@ -1,11 +1,12 @@
 <#
 .SYNOPSIS
-Log the start of a study session to the exam's StudyLog.md.
+Manage study sessions for certification exam tracking.
 
 .DESCRIPTION
-Appends a new row to the StudyLog.md markdown table for the specified exam,
-recording the session number, date, and start time. End, Duration, and Notes
-columns are left blank for the user to fill in when the session concludes.
+Manages study session tracking for certification exams. Supports two actions:
+Start — appends a new row to StudyLog.md with session number, date, and start time.
+End — closes the active session with end time and duration.
+Start also auto-closes any currently active session before opening a new session.
 
 .CONTEXT
 LearningAzure repository — certification study tracking.
@@ -19,6 +20,9 @@ Program: Start-StudySession.ps1
 
 [CmdletBinding()]
 param(
+    [ValidateSet('Start', 'End')]
+    [string]$Action = 'Start',
+
     [Parameter(Mandatory)]
     [ValidateSet('AI-102', 'AZ-104')]
     [string]$ExamName
@@ -27,18 +31,41 @@ param(
 # Configuration
 $RepoRoot = Resolve-Path -Path (Join-Path -Path $PSScriptRoot -ChildPath '..\..')
 $StudyLogFile = Join-Path -Path $RepoRoot -ChildPath "$ExamName\StudyLog.md"
+$AllExams = @('AI-102', 'AZ-104')
 
 $Main = {
     . $Helpers
 
-    Confirm-StudyLogExists
     Confirm-GitRepository
     Sync-Repository
-    $NextSession = Get-NextSessionNumber
-    Add-SessionEntry -SessionNumber $NextSession
-    Save-StudyLogChange -SessionNumber $NextSession
-    Show-Confirmation -SessionNumber $NextSession
-}
+
+    # Route to the appropriate action handler
+    switch ($Action) {
+        'Start' {
+            # End any currently active session before starting a new one
+            $sourceExam = Find-ActiveExam
+            if ($sourceExam) {
+                $sourceLog = Join-Path -Path $RepoRoot -ChildPath "$sourceExam\StudyLog.md"
+                $sourceSession = Get-ActiveSessionNumber -LogFile $sourceLog
+                Close-SessionEntry -SessionNumber $sourceSession -LogFile $sourceLog
+                Push-StudyLogChange -SessionNumber $sourceSession -Type 'end' -Exam $sourceExam
+                Show-Confirmation -Message "Study session #$sourceSession ended for $sourceExam"
+            }
+
+            Confirm-StudyLogExists
+            $session = Get-NextSessionNumber
+            Add-SessionEntry -SessionNumber $session
+            Push-StudyLogChange -SessionNumber $session -Type 'start'
+            Show-Confirmation -Message "Study session #$session started for $ExamName"
+        }
+        'End' {
+            Confirm-StudyLogExists
+            $session = Get-ActiveSessionNumber
+            Close-SessionEntry -SessionNumber $session
+            Push-StudyLogChange -SessionNumber $session -Type 'end'
+            Show-Confirmation -Message "Study session #$session ended for $ExamName"
+        }
+    }
 
 $Helpers = {
     function Confirm-StudyLogExists {
@@ -46,36 +73,6 @@ $Helpers = {
         if (-not (Test-Path -Path $StudyLogFile)) {
             throw "StudyLog.md not found at '$StudyLogFile'. Please create it first."
         }
-    }
-
-    function Get-NextSessionNumber {
-        # Count existing data rows in the markdown table to determine the next session number
-        $lines = Get-Content -Path $StudyLogFile
-
-        $dataRows = $lines |
-            Where-Object { $_ -match '^\|\s*\d+\s*\|' }
-
-        if ($dataRows) {
-            return ($dataRows | Measure-Object).Count + 1
-        }
-
-        return 1
-    }
-
-    function Add-SessionEntry {
-        # Append a new session row with the current date and start time
-        param(
-            [Parameter(Mandatory)]
-            [int]$SessionNumber
-        )
-
-        $now  = Get-Date
-        $date  = $now.ToString('M/d/yy')
-        $start = $now.ToString('h:mm tt')
-
-        $row = "| $SessionNumber | $date | $start |  |  |  |"
-
-        Add-Content -Path $StudyLogFile -Value $row
     }
 
     function Confirm-GitRepository {
@@ -88,34 +85,168 @@ $Helpers = {
     }
 
     function Sync-Repository {
-        # Pull latest remote changes with merge semantics to absorb periodic statistics commits
+        # Pull latest remote changes to absorb periodic statistics commits
         git -C $RepoRoot pull --no-rebase --no-edit
 
         if ($LASTEXITCODE -ne 0) {
-            throw 'Failed to pull remote changes before updating the study log.'
+            throw 'Failed to pull remote changes.'
         }
     }
 
-    function Save-StudyLogChange {
-        # Stage, commit, and push the updated study log for this session start
+    function Get-NextSessionNumber {
+        # Count existing data rows to determine the next session number
+        $lines = Get-Content -Path $StudyLogFile
+
+        $dataRows = $lines |
+            Where-Object { $_ -match '^\|\s*\d+\s*\|' }
+
+        if ($dataRows) {
+            return ($dataRows | Measure-Object).Count + 1
+        }
+
+        return 1
+    }
+
+    function Get-ActiveSessionNumber {
+        # Find the last open session (started but not ended) in a study log
+        param([string]$LogFile = $StudyLogFile)
+
+        $lines = Get-Content -Path $LogFile
+
+        $dataRows = $lines |
+            Where-Object { $_ -match '^\|\s*\d+\s*\|' }
+
+        if (-not $dataRows) {
+            throw "No sessions found in '$LogFile'."
+        }
+
+        # Check the last data row for an empty End column
+        $lastRow = if ($dataRows -is [array]) { $dataRows[-1] } else { $dataRows }
+        $columns = $lastRow -split '\|'
+
+        if ([string]::IsNullOrWhiteSpace($columns[4])) {
+            return [int]$columns[1].Trim()
+        }
+
+        throw "No active session found in '$LogFile'. The last session is already closed."
+    }
+
+    function Find-ActiveExam {
+        # Search all exam logs for an open session to determine the active exam
+        foreach ($exam in $AllExams) {
+            $logFile = Join-Path -Path $RepoRoot -ChildPath "$exam\StudyLog.md"
+
+            if (-not (Test-Path -Path $logFile)) { continue }
+
+            $lines = Get-Content -Path $logFile
+
+            $dataRows = $lines |
+                Where-Object { $_ -match '^\|\s*\d+\s*\|' }
+
+            if (-not $dataRows) { continue }
+
+            # Return the exam name when its last session has no End time
+            $lastRow = if ($dataRows -is [array]) { $dataRows[-1] } else { $dataRows }
+            $columns = $lastRow -split '\|'
+
+            if ([string]::IsNullOrWhiteSpace($columns[4])) {
+                return $exam
+            }
+        }
+
+        return $null
+    }
+
+    function Add-SessionEntry {
+        # Append a new session row with the current date and start time
         param(
             [Parameter(Mandatory)]
             [int]$SessionNumber
         )
 
-        $relativeLogPath = "$ExamName/StudyLog.md"
-        $commitMessage = "docs($ExamName): start study session #$SessionNumber"
+        $now   = Get-Date
+        $date  = $now.ToString('M/d/yy')
+        $start = $now.ToString('h:mm tt')
 
+        $row = "| $SessionNumber | $date | $start |  |  |  |"
+
+        Add-Content -Path $StudyLogFile -Value $row
+    }
+
+    function Close-SessionEntry {
+        # Update the active session row with end time and calculated duration
+        param(
+            [Parameter(Mandatory)]
+            [int]$SessionNumber,
+
+            [string]$LogFile = $StudyLogFile
+        )
+
+        $lines = Get-Content -Path $LogFile
+        $now = Get-Date
+
+        # Search from the bottom for the matching session row
+        for ($i = $lines.Count - 1; $i -ge 0; $i--) {
+            if ($lines[$i] -match ('^\|\s*' + $SessionNumber + '\s*\|')) {
+                $columns = $lines[$i] -split '\|'
+
+                # Parse start datetime from Date and Start columns
+                $dateStr  = $columns[2].Trim()
+                $startStr = $columns[3].Trim()
+                $startDateTime = [datetime]::ParseExact(
+                    "$dateStr $startStr",
+                    'M/d/yy h:mm tt',
+                    $null
+                )
+
+                # Calculate session duration
+                $duration    = $now - $startDateTime
+                $hours       = [math]::Floor($duration.TotalHours)
+                $minutes     = $duration.Minutes
+                $durationStr = '{0}h {1}m' -f $hours, $minutes
+
+                # Update End and Duration columns
+                $endStr      = $now.ToString('h:mm tt')
+                $columns[4]  = " $endStr "
+                $columns[5]  = " $durationStr "
+                $lines[$i]   = $columns -join '|'
+
+                break
+            }
+        }
+
+        Set-Content -Path $LogFile -Value $lines
+    }
+
+    function Push-StudyLogChange {
+        # Stage, commit, and push the study log change
+        param(
+            [Parameter(Mandatory)]
+            [int]$SessionNumber,
+
+            [Parameter(Mandatory)]
+            [ValidateSet('start', 'end')]
+            [string]$Type,
+
+            [string]$Exam = $ExamName
+        )
+
+        $relativeLogPath = "$Exam/StudyLog.md"
+        $commitMessage   = "docs($Exam): $Type study session #$SessionNumber"
+
+        # Stage the study log file
         git -C $RepoRoot add -- $relativeLogPath
         if ($LASTEXITCODE -ne 0) {
             throw "Failed to stage '$relativeLogPath'."
         }
 
+        # Commit the change
         git -C $RepoRoot commit -m $commitMessage
         if ($LASTEXITCODE -ne 0) {
             throw "Failed to commit changes for '$relativeLogPath'."
         }
 
+        # Push with retry after sync
         git -C $RepoRoot push
         if ($LASTEXITCODE -ne 0) {
             Sync-Repository
@@ -128,21 +259,17 @@ $Helpers = {
     }
 
     function Show-Confirmation {
-        # Display a summary of the logged session entry
-        param(
-            [Parameter(Mandatory)]
-            [int]$SessionNumber
-        )
+        # Display session action summary
+        param([Parameter(Mandatory)] [string]$Message)
 
-        $now   = Get-Date
-        $date  = $now.ToString('M/d/yy')
-        $start = $now.ToString('h:mm tt')
+        $now  = Get-Date
+        $date = $now.ToString('M/d/yy')
+        $time = $now.ToString('h:mm tt')
 
         Write-Output ''
-        Write-Output "  Study session #$SessionNumber started for $ExamName"
+        Write-Output "  $Message"
         Write-Output "  Date : $date"
-        Write-Output "  Start: $start"
-        Write-Output "  Log  : $StudyLogFile"
+        Write-Output "  Time : $time"
         Write-Output '  Git  : committed and pushed'
         Write-Output ''
     }

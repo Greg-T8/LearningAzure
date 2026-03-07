@@ -21,11 +21,19 @@ Python script that:
 2. Assigns each commit to one category (AI-102, AZ-104, or Other)
   using changed file paths; exam-folder priority is alphabetical
   (AI-102 before AZ-104)
-3. Calculates hours of activity using a diff-based model:
-  time between consecutive commits before 8:00 AM is credited to
-  the first commit's category
-4. Applies weekend exception: commits at/after 8:00 AM on Sat/Sun
-  are credited as flat 0.5h each (no diffs)
+3. Detects study session boundaries from commit messages:
+   - Start: `docs(EXAM): start study session #N`
+   - End: `docs(EXAM): end study session #N`
+4. Calculates hours using a session-aware diff model:
+   - **Matched sessions (start + end):** time between consecutive
+     commits within the session window is credited to each commit's
+     category, regardless of time of day. Non-exam commits during a
+     session are credited to "Other".
+   - **Non-session commits (pre-8 AM):** time between consecutive
+     commits credited to the first commit's category
+   - **Non-session weekends (post-8 AM):** flat 0.5h per commit
+5. If a session has only a start or only an end commit, those commits
+   fall through to the standard pre-8 AM / weekend rules
 
 5. Calculates running totals since each certification's start date:
    - AZ-104: Started 1/14/26
@@ -40,9 +48,10 @@ Python script that:
 1. The workflow checks out the repository with full git history
 2. Python script runs to analyze commits:
   Looks at the last 7 days of commits, classifies each commit into
-  AI-102/AZ-104/Other, credits pre-8:00 AM consecutive commit deltas
-  to the first commit's category, and applies the weekend 0.5h rule
-  for commits after 8:00 AM.
+  AI-102/AZ-104/Other, detects study session start/end commit pairs,
+  credits session time using diff-based approach regardless of
+  time of day, and applies pre-8 AM diff / weekend 0.5h rules for
+  non-session commits.
 
 3. Generates a markdown table with:
    - Date (formatted as "Day, Mon DD")
@@ -126,10 +135,17 @@ python3 .github/workflows/update-commit-stats.py
 - Commits are assigned to AI-102/AZ-104/Other by file-path classification
 - If a commit includes multiple exam folders, alphabetical priority applies
   (AI-102 before AZ-104)
-- **Mon-Sun (before 8:00 AM)**: Hours come from diffs between consecutive commits,
-  credited to the first commit's category
-- **Sat/Sun (after 8:00 AM)**: Each commit is credited as 0.5h (no diffs)
-- A single pre-8:00 AM commit on a day contributes 0h (no following commit to diff)
+- **Study sessions**: When both `docs(EXAM): start study session #N` and
+  `docs(EXAM): end study session #N` commits exist, all commits within that
+  window use diff-based crediting regardless of time of day
+- **Non-exam commits during a session** (e.g., workflow changes) are credited
+  to "Other" — they do not inflate exam hours
+- **Mon-Sun (before 8:00 AM, outside sessions)**: Hours come from diffs between
+  consecutive commits, credited to the first commit's category
+- **Sat/Sun (after 8:00 AM, outside sessions)**: Each commit is credited as 0.5h
+  (no diffs)
+- If a session has only a start or only an end commit, those commits fall through
+  to the standard pre-8 AM / weekend rules
 - Days with 0h activity show as blank cells in the table
 - Files outside exam folders are credited to `Other`
 - The workflow uses `[skip ci]` in commit messages to avoid triggering itself
@@ -138,4 +154,4 @@ python3 .github/workflows/update-commit-stats.py
 
 ---
 
-*Last updated: March 3, 2026*
+*Last updated: March 7, 2026*

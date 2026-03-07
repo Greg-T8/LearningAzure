@@ -31,6 +31,13 @@ TABLE_COLUMNS = EXAM_FOLDERS + ['Other']
 
 WORKDAY_START_HOUR = 8
 WEEKEND_FLAT_HOURS = 0.5
+
+SESSION_START_PATTERN = re.compile(
+    r'^docs\(([^)]+)\): start study session #(\d+)$'
+)
+SESSION_END_PATTERN = re.compile(
+    r'^docs\(([^)]+)\): end study session #(\d+)$'
+)
 #endregion
 
 
@@ -42,6 +49,16 @@ class Commit:
     timestamp: datetime
     category: str
     message: str
+
+
+@dataclass
+class StudySession:
+    """Represents a matched study session with start and end commits."""
+
+    exam: str
+    session_number: int
+    start_commit: 'Commit'
+    end_commit: 'Commit'
 #endregion
 
 
@@ -131,6 +148,79 @@ def classify_commit(file_paths: list[str]) -> str:
                 return exam_folder
 
     return 'Other'
+
+
+def find_study_sessions(
+    commits: list['Commit'],
+) -> list['StudySession']:
+    """Identify matched study session start/end pairs from commit messages.
+
+    Scans commits for standardized session start/end messages and returns
+    only sessions that have both a start and end commit.
+
+    Args:
+        commits: List of Commit objects to scan
+
+    Returns:
+        List of StudySession objects with matched start/end pairs
+    """
+    starts: dict[tuple[str, int], Commit] = {}
+    ends: dict[tuple[str, int], Commit] = {}
+
+    # Classify each commit as a session start, end, or neither
+    for commit in commits:
+        start_match = SESSION_START_PATTERN.match(commit.message)
+        if start_match:
+            key = (
+                start_match.group(1),
+                int(start_match.group(2)),
+            )
+            starts[key] = commit
+            continue
+
+        end_match = SESSION_END_PATTERN.match(commit.message)
+        if end_match:
+            key = (
+                end_match.group(1),
+                int(end_match.group(2)),
+            )
+            ends[key] = commit
+
+    # Build session objects only for pairs with both start and end
+    sessions: list[StudySession] = []
+    for key, start in starts.items():
+        if key in ends:
+            sessions.append(StudySession(
+                exam=key[0],
+                session_number=key[1],
+                start_commit=start,
+                end_commit=ends[key],
+            ))
+
+    return sessions
+
+
+def is_in_session(
+    commit: 'Commit',
+    sessions: list['StudySession'],
+) -> bool:
+    """Check if a commit falls within any matched study session window.
+
+    Args:
+        commit: The commit to check
+        sessions: List of matched study sessions
+
+    Returns:
+        True if the commit's timestamp is within a session window
+    """
+    for session in sessions:
+        if (
+            session.start_commit.timestamp
+            <= commit.timestamp
+            <= session.end_commit.timestamp
+        ):
+            return True
+    return False
 
 
 def get_commit_list(
@@ -231,30 +321,54 @@ def get_commit_list(
 
 def calculate_daily_hour(
     day_commits: list['Commit'],
-    date: datetime
+    date: datetime,
+    sessions: list['StudySession'] | None = None,
 ) -> dict[str, float]:
-    """Calculate hours per category for a single day using diff approach.
+    """Calculate hours per category for a single day.
 
-    Pre-8AM commits: consecutive time diffs credited to first commit's
-    folder. Weekend post-8AM commits: flat 0.5h credited to each commit's
-    folder.
+    Commits within matched study sessions use diff-based calculation
+    regardless of time of day. Remaining commits use the original
+    pre-8AM diff / weekend flat rules.
 
     Args:
         day_commits: List of Commit objects for the day
         date: Date object for weekend detection
+        sessions: Optional list of matched study sessions
 
     Returns:
         Dict mapping category names to hours
     """
+    if sessions is None:
+        sessions = []
+
     hours: dict[str, float] = defaultdict(float)
 
-    # Separate pre-8AM and post-8AM commits
-    pre_8am = [
+    # Partition commits into session-covered and uncovered
+    in_session = [
         c for c in day_commits
+        if is_in_session(c, sessions)
+    ]
+    out_session = [
+        c for c in day_commits
+        if not is_in_session(c, sessions)
+    ]
+
+    # Session commits: diff between consecutive pairs, all hours count
+    in_session.sort(key=lambda c: c.timestamp)
+    for i in range(len(in_session) - 1):
+        diff_seconds = (
+            in_session[i + 1].timestamp
+            - in_session[i].timestamp
+        ).total_seconds()
+        hours[in_session[i].category] += diff_seconds / 3600
+
+    # Non-session pre-8AM: existing diff approach
+    pre_8am = [
+        c for c in out_session
         if c.timestamp.hour < WORKDAY_START_HOUR
     ]
     post_8am = [
-        c for c in day_commits
+        c for c in out_session
         if c.timestamp.hour >= WORKDAY_START_HOUR
     ]
 
@@ -305,6 +419,9 @@ def calculate_running_total() -> dict[str, float]:
     earliest_start = min(CERTIFICATIONS.values())
     all_commits = get_commit_list(since_date=earliest_start)
 
+    # Find study sessions from the full commit history
+    sessions = find_study_sessions(all_commits)
+
     # Group commits by date
     commits_by_date: dict[str, list[Commit]] = defaultdict(list)
     for commit in all_commits:
@@ -315,7 +432,7 @@ def calculate_running_total() -> dict[str, float]:
     running: dict[str, float] = defaultdict(float)
     for date_str, day_commits in commits_by_date.items():
         date_obj = datetime.strptime(date_str, '%Y-%m-%d')
-        daily = calculate_daily_hour(day_commits, date_obj)
+        daily = calculate_daily_hour(day_commits, date_obj, sessions)
 
         # Add hours to each category, respecting start dates for certs
         for category, cat_hours in daily.items():
@@ -369,7 +486,8 @@ def build_commit_table(
     # Build separator row
     sep_cols = "|".join(["------" for _ in TABLE_COLUMNS])
     table += f"|------|{sep_cols}|-------|\n"
-
+    # Find study sessions for session-aware time calculation
+    sessions = find_study_sessions(commits)
     # Initialize weekly totals
     weekly_totals = {col: 0.0 for col in TABLE_COLUMNS}
     weekly_grand_total = 0.0
@@ -381,7 +499,7 @@ def build_commit_table(
 
         # Calculate daily hours per category
         daily = (
-            calculate_daily_hour(day_commits, date_obj)
+            calculate_daily_hour(day_commits, date_obj, sessions)
             if day_commits
             else {}
         )
@@ -450,9 +568,10 @@ def build_commit_table(
         "🟣 High (> 2hrs)*\n"
     )
     table += (
-        "\n*Pre-8 AM: time between consecutive commits "
+        "\n*Study sessions: start/end commits define session boundaries*  \n"
+        "*Pre-8 AM (non-session): time between consecutive commits "
         "credited to first commit's folder*  \n"
-        "*Weekends after 8 AM: 0.5h flat per commit*  \n"
+        "*Weekends after 8 AM (non-session): 0.5h flat per commit*  \n"
         "*Other = Lab workflow and automation design, "
         "content structure and development*  \n"
     )
