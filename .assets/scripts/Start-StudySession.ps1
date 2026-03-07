@@ -66,6 +66,7 @@ $Main = {
             Show-Confirmation -Message "Study session #$session ended for $ExamName"
         }
     }
+}
 
 $Helpers = {
     function Confirm-StudyLogExists {

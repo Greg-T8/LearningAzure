@@ -34,7 +34,8 @@
       "/^terraform plan -out=tfplan -no-color$/": {
         "approve": true,
         "matchCommandLine": true
-      }
+      },
+      ".\\Start-StudySession.ps1": true
     },
     "terminal.integrated.defaultProfile.windows": "PowerShell Lab",
     "terminal.integrated.profiles.windows": {

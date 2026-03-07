@@ -18,10 +18,11 @@ If the user specified an exam name, use it. Otherwise, ask:
 > 1. **AI-102** — Azure AI Engineer Associate
 > 2. **AZ-104** — Microsoft Azure Administrator
 
-Once the exam is known, run:
+Once the exam is known, change to the scripts folder and run:
 
 ```powershell
-& ".assets/scripts/Start-StudySession.ps1" -ExamName "<exam>"
+Set-Location ".assets/scripts"
+.\Start-StudySession.ps1 -ExamName "<exam>"
 ```
 
 Replace `<exam>` with the selected value (`AI-102` or `AZ-104`).
