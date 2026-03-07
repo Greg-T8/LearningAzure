@@ -31,23 +31,24 @@ Progress trackers, detailed study notes, practice exams, and hands-on labs:
 
 | Date | AI-102 | AZ-104 | Other | Total |
 |------|------|------|------|-------|
+| Sat, Mar 07 |  | 🟣 2.2h | 🟡 0.5h | **2.7h** |
 | Fri, Mar 06 | 🟡 0.5h | 🟡 0.7h | 🟡 0.8h | **2.0h** |
 | Thu, Mar 05 |  | 🟢 1.0h | 🟡 0.6h | **1.6h** |
 | Wed, Mar 04 | 🟡 0.8h | 🟢 1.7h |  | **2.5h** |
 | Tue, Mar 03 | 🟡 0.8h | 🟢 1.9h | 🟡 0.2h | **2.9h** |
 | Mon, Mar 02 | 🟡 0.1h | 🟣 2.6h |  | **2.7h** |
 | Sun, Mar 01 |  |  |  |  |
-| Sat, Feb 28 |  |  |  |  |
-| **Weekly Total** | **2.2h** | **7.9h** | **1.6h** | **11.7h** |
-| ***Running Total*** | ***17.3h*** | ***67.8h*** | ***50.6h*** | ***135.7h*** |
+| **Weekly Total** | **2.2h** | **10.1h** | **2.1h** | **14.4h** |
+| ***Running Total*** | ***17.3h*** | ***70.0h*** | ***51.1h*** | ***138.4h*** |
 
 *Activity Levels: 🟡 Low (< 1hr) | 🟢 Medium (1-2hrs) | 🟣 High (> 2hrs)*
 
-*Pre-8 AM: time between consecutive commits credited to first commit's folder*  
-*Weekends after 8 AM: 0.5h flat per commit*  
+*Study sessions: start/end commits define session boundaries*  
+*Pre-8 AM (non-session): time between consecutive commits credited to first commit's folder*  
+*Weekends after 8 AM (non-session): 0.5h flat per commit*  
 *Other = Lab workflow and automation design, content structure and development*  
 
-*Last updated: March 06, 2026 at 08:12 CST*
+*Last updated: March 07, 2026 at 08:04 CST*
 
 <!-- COMMIT_STATS_END -->
 
