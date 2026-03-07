@@ -33,6 +33,7 @@ $Main = {
 
     Confirm-StudyLogExists
     Confirm-GitRepository
+    Sync-Repository
     $NextSession = Get-NextSessionNumber
     Add-SessionEntry -SessionNumber $NextSession
     Save-StudyLogChange -SessionNumber $NextSession
@@ -86,6 +87,15 @@ $Helpers = {
         }
     }
 
+    function Sync-Repository {
+        # Pull latest remote changes with merge semantics to absorb periodic statistics commits
+        git -C $RepoRoot pull --no-rebase --no-edit
+
+        if ($LASTEXITCODE -ne 0) {
+            throw 'Failed to pull remote changes before updating the study log.'
+        }
+    }
+
     function Save-StudyLogChange {
         # Stage, commit, and push the updated study log for this session start
         param(
@@ -108,7 +118,12 @@ $Helpers = {
 
         git -C $RepoRoot push
         if ($LASTEXITCODE -ne 0) {
-            throw 'Failed to push committed changes.'
+            Sync-Repository
+
+            git -C $RepoRoot push
+            if ($LASTEXITCODE -ne 0) {
+                throw 'Failed to push committed changes after syncing remote updates.'
+            }
         }
     }
 
