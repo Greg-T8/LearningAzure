@@ -9,3 +9,4 @@ This log tracks individual study sessions for the **AZ-104** exam. Each entry is
 | # | Date | Start | End | Duration | Notes |
 |:--|:-----|:------|:----|:---------|:------|
 | 1 | 3/7/26 | 2:21 PM | 2:39 PM | 0h 18m |  |
+| 2 | 3/8/26 | 4:58 AM |  |  |  |
