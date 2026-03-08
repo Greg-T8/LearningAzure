@@ -3,9 +3,9 @@
 Manage study sessions for certification exam tracking.
 
 .DESCRIPTION
-Manages study session tracking for certification exams. Supports two actions:
+Manages study session tracking for certification exams. Supports start/stop actions:
 Start — appends a new row to StudyLog.md with session number, date, and start time.
-End — closes the active session with end time and duration.
+End/Stop — closes the active session with end time and duration.
 Start also auto-closes any currently active session before opening a new session.
 
 .CONTEXT
@@ -20,17 +20,16 @@ Program: Start-StudySession.ps1
 
 [CmdletBinding()]
 param(
-    [ValidateSet('Start', 'End')]
+    [ValidateSet('Start', 'Stop', 'End')]
     [string]$Action = 'Start',
 
-    [Parameter(Mandatory)]
     [ValidateSet('AI-102', 'AZ-104')]
     [string]$ExamName
 )
 
 # Configuration
 $RepoRoot = Resolve-Path -Path (Join-Path -Path $PSScriptRoot -ChildPath '..\..')
-$StudyLogFile = Join-Path -Path $RepoRoot -ChildPath "$ExamName\StudyLog.md"
+$StudyLogFile = $null
 $AllExams = @('AI-102', 'AZ-104')
 
 $Main = {
@@ -42,6 +41,12 @@ $Main = {
     # Route to the appropriate action handler
     switch ($Action) {
         'Start' {
+            if (-not $ExamName) {
+                throw "ExamName is required when Action is 'Start'."
+            }
+
+            $script:StudyLogFile = Join-Path -Path $RepoRoot -ChildPath "$ExamName\StudyLog.md"
+
             # End any currently active session before starting a new one
             $sourceExam = Find-ActiveExam
             if ($sourceExam) {
@@ -55,15 +60,32 @@ $Main = {
             Confirm-StudyLogExists
             $session = Get-NextSessionNumber
             Add-SessionEntry -SessionNumber $session
-            Push-StudyLogChange -SessionNumber $session -Type 'start'
+            Push-StudyLogChange -SessionNumber $session -Type 'start' -Exam $ExamName
             Show-Confirmation -Message "Study session #$session started for $ExamName"
         }
+        'Stop' {
+            $sourceExam = Find-ActiveExam
+            if (-not $sourceExam) {
+                throw 'No active study session found in any exam study log.'
+            }
+
+            $sourceLog = Join-Path -Path $RepoRoot -ChildPath "$sourceExam\StudyLog.md"
+            $sourceSession = Get-ActiveSessionNumber -LogFile $sourceLog
+            Close-SessionEntry -SessionNumber $sourceSession -LogFile $sourceLog
+            Push-StudyLogChange -SessionNumber $sourceSession -Type 'end' -Exam $sourceExam
+            Show-Confirmation -Message "Study session #$sourceSession ended for $sourceExam"
+        }
         'End' {
-            Confirm-StudyLogExists
-            $session = Get-ActiveSessionNumber
-            Close-SessionEntry -SessionNumber $session
-            Push-StudyLogChange -SessionNumber $session -Type 'end'
-            Show-Confirmation -Message "Study session #$session ended for $ExamName"
+            $sourceExam = Find-ActiveExam
+            if (-not $sourceExam) {
+                throw 'No active study session found in any exam study log.'
+            }
+
+            $sourceLog = Join-Path -Path $RepoRoot -ChildPath "$sourceExam\StudyLog.md"
+            $sourceSession = Get-ActiveSessionNumber -LogFile $sourceLog
+            Close-SessionEntry -SessionNumber $sourceSession -LogFile $sourceLog
+            Push-StudyLogChange -SessionNumber $sourceSession -Type 'end' -Exam $sourceExam
+            Show-Confirmation -Message "Study session #$sourceSession ended for $sourceExam"
         }
     }
 }
@@ -87,7 +109,7 @@ $Helpers = {
 
     function Sync-Repository {
         # Pull latest remote changes to absorb periodic statistics commits
-        git -C $RepoRoot pull --no-rebase --no-edit
+        git -C $RepoRoot pull --quiet --no-rebase --no-edit
 
         if ($LASTEXITCODE -ne 0) {
             throw 'Failed to pull remote changes.'
@@ -242,17 +264,17 @@ $Helpers = {
         }
 
         # Commit the change
-        git -C $RepoRoot commit -m $commitMessage
+        git -C $RepoRoot commit --quiet -m $commitMessage
         if ($LASTEXITCODE -ne 0) {
             throw "Failed to commit changes for '$relativeLogPath'."
         }
 
         # Push with retry after sync
-        git -C $RepoRoot push
+        git -C $RepoRoot push --quiet
         if ($LASTEXITCODE -ne 0) {
             Sync-Repository
 
-            git -C $RepoRoot push
+            git -C $RepoRoot push --quiet
             if ($LASTEXITCODE -ne 0) {
                 throw 'Failed to push committed changes after syncing remote updates.'
             }
