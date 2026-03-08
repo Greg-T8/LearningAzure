@@ -100,7 +100,7 @@ Make a **single** edit that replaces the selected `<img>` line(s) with the fully
 Create a concise exam-appropriate title (3–10 words).
 
 ```markdown
-### <Title Extracted From Image>
+#### <Title Extracted From Image>
 ```
 
 ---

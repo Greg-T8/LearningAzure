@@ -1,64 +1,69 @@
 # Practice Exam Questions - AZ-104
 
-* [Manage Microsoft Entra users and groups](#manage-microsoft-entra-users-and-groups)
-  * [Configure Microsoft Entra SSPR For Specific Users](#configure-microsoft-entra-sspr-for-specific-users)
-* [Manage Azure subscriptions and governance](#manage-azure-subscriptions-and-governance)
-  * [Configure Azure Cost Center Tags and Cost Analysis](#configure-azure-cost-center-tags-and-cost-analysis)
-  * [Tagging Policy](#tagging-policy)
-  * [Azure Policy Not Functioning](#azure-policy-not-functioning)
-* [Configure access to storage](#configure-access-to-storage)
-  * [Diagnose Storage Explorer Permission Errors](#diagnose-storage-explorer-permission-errors)
-  * [Configure AzCopy Authentication for Blob and File Storage](#configure-azcopy-authentication-for-blob-and-file-storage)
-  * [Modify Stored Access Policy](#modify-stored-access-policy)
-* [Configure and manage storage accounts](#configure-and-manage-storage-accounts)
-  * [Configure Object Replication Between Storage Accounts](#configure-object-replication-between-storage-accounts)
-  * [Azure Storage Redundancy Recommendation](#azure-storage-redundancy-recommendation)
-* [Configure Azure Files and Azure Blob Storage](#configure-azure-files-and-azure-blob-storage)
-  * [Configure Lifecycle Management Policy for Azure Storage](#configure-lifecycle-management-policy-for-azure-storage)
-  * [Identify Blob Write Operations That Create New Versions](#identify-blob-write-operations-that-create-new-versions)
-  * [Lifecycle Management Policy Configuration](#lifecycle-management-policy-configuration)
-  * [Delete Soft-Deleted File Share](#delete-soft-deleted-file-share)
-* [Automate deployment of resources by using Azure Resource Manager (ARM) templates or Bicep files](#automate-deployment-of-resources-by-using-azure-resource-manager-arm-templates-or-bicep-files)
-  * [Resource dependencies in Bicep](#resource-dependencies-in-bicep)
-  * [Convert Array to Object](#convert-array-to-object)
-* [Create and configure virtual machines](#create-and-configure-virtual-machines)
-  * [VM Resize Failure Cause](#vm-resize-failure-cause)
-  * [Encrypt VM Disk With Key Vault](#encrypt-vm-disk-with-key-vault)
-  * [Apply Change to VMSS OS and Data Disk Profile](#apply-change-to-vmss-os-and-data-disk-profile)
-* [Provision and manage containers in the Azure portal](#provision-and-manage-containers-in-the-azure-portal)
-  * [Configure Scaling Rules in Azure Container Apps](#configure-scaling-rules-in-azure-container-apps)
-* [Create and configure Azure App Service](#create-and-configure-azure-app-service)
-  * [Configure Azure App Service Plan for Website Hosting](#configure-azure-app-service-plan-for-website-hosting)
-  * [Prepare Azure App Service for Web App Republication](#prepare-azure-app-service-for-web-app-republication)
-  * [Resolve Azure App Service Pricing Tier for Runtime Requirements](#resolve-azure-app-service-pricing-tier-for-runtime-requirements)
-  * [Resolve Azure App Service Pricing Tier for Runtime Requirements](#resolve-azure-app-service-pricing-tier-for-runtime-requirements-1)
-  * [Resolve Azure App Service Pricing Tier for Runtime Requirements](#resolve-azure-app-service-pricing-tier-for-runtime-requirements-2)
-* [Configure secure access to virtual networks](#configure-secure-access-to-virtual-networks)
-  * [Configure Private Link Service Source IP](#configure-private-link-service-source-ip)
-* [Configure name resolution and load balancing](#configure-name-resolution-and-load-balancing)
-  * [Configure Standard Load Balancer Outbound Traffic and IP Allocation](#configure-standard-load-balancer-outbound-traffic-and-ip-allocation)
-  * [Diagnose Internal Load Balancer Hairpin Traffic Failure](#diagnose-internal-load-balancer-hairpin-traffic-failure)
-  * [Configure DNS Records for App Service](#configure-dns-records-for-app-service)
-  * [IMDS Load Balancer Metadata Error](#imds-load-balancer-metadata-error)
-* [Monitor resources in Azure](#monitor-resources-in-azure)
-  * [Configure Azure Monitor Alert for Database CPU Usage](#configure-azure-monitor-alert-for-database-cpu-usage)
-  * [Configure Azure Monitor Alert Notification Rate Limits](#configure-azure-monitor-alert-notification-rate-limits)
-  * [Enable Boot Diagnostics for Azure Virtual Machines](#enable-boot-diagnostics-for-azure-virtual-machines)
-  * [Diagnose Network Watcher Tool for Web Server Packet Flow](#diagnose-network-watcher-tool-for-web-server-packet-flow)
-  * [Load Balancer Metrics Batch API](#load-balancer-metrics-batch-api)
-  * [Capture SFTP Packets with Network Watcher](#capture-sftp-packets-with-network-watcher)
-  * [Storage Insights Overview](#storage-insights-overview)
-* [Implement backup and recovery](#implement-backup-and-recovery)
-  * [Recover Configuration File from Azure VM Backup](#recover-configuration-file-from-azure-vm-backup)
-  * [Recover Azure VM from Deleted Backup](#recover-azure-vm-from-deleted-backup)
+* [Manage Azure identities and governance](#manage-azure-identities-and-governance)
+  * [Manage Microsoft Entra users and groups](#manage-microsoft-entra-users-and-groups)
+    * [Configure Microsoft Entra SSPR For Specific Users](#configure-microsoft-entra-sspr-for-specific-users)
+  * [Manage Azure subscriptions and governance](#manage-azure-subscriptions-and-governance)
+    * [Configure Azure Cost Center Tags and Cost Analysis](#configure-azure-cost-center-tags-and-cost-analysis)
+    * [Tagging Policy](#tagging-policy)
+    * [Azure Policy Not Functioning](#azure-policy-not-functioning)
+* [Implement and manage storage](#implement-and-manage-storage)
+  * [Configure access to storage](#configure-access-to-storage)
+    * [Diagnose Storage Explorer Permission Errors](#diagnose-storage-explorer-permission-errors)
+    * [Configure AzCopy Authentication for Blob and File Storage](#configure-azcopy-authentication-for-blob-and-file-storage)
+    * [Modify Stored Access Policy](#modify-stored-access-policy)
+  * [Configure and manage storage accounts](#configure-and-manage-storage-accounts)
+    * [Configure Object Replication Between Storage Accounts](#configure-object-replication-between-storage-accounts)
+    * [Azure Storage Redundancy Recommendation](#azure-storage-redundancy-recommendation)
+  * [Configure Azure Files and Azure Blob Storage](#configure-azure-files-and-azure-blob-storage)
+    * [Configure Lifecycle Management Policy for Azure Storage](#configure-lifecycle-management-policy-for-azure-storage)
+    * [Identify Blob Write Operations That Create New Versions](#identify-blob-write-operations-that-create-new-versions)
+    * [Lifecycle Management Policy Configuration](#lifecycle-management-policy-configuration)
+    * [Delete Soft-Deleted File Share](#delete-soft-deleted-file-share)
+* [Deploy and manage Azure compute resources](#deploy-and-manage-azure-compute-resources)
+  * [Automate deployment of resources by using Azure Resource Manager (ARM) templates or Bicep files](#automate-deployment-of-resources-by-using-azure-resource-manager-arm-templates-or-bicep-files)
+    * [Resource dependencies in Bicep](#resource-dependencies-in-bicep)
+    * [Convert Array to Object](#convert-array-to-object)
+  * [Create and configure virtual machines](#create-and-configure-virtual-machines)
+    * [VM Resize Failure Cause](#vm-resize-failure-cause)
+    * [Encrypt VM Disk With Key Vault](#encrypt-vm-disk-with-key-vault)
+    * [Apply Change to VMSS OS and Data Disk Profile](#apply-change-to-vmss-os-and-data-disk-profile)
+  * [Provision and manage containers in the Azure portal](#provision-and-manage-containers-in-the-azure-portal)
+    * [Configure Scaling Rules in Azure Container Apps](#configure-scaling-rules-in-azure-container-apps)
+  * [Create and configure Azure App Service](#create-and-configure-azure-app-service)
+    * [Configure Azure App Service Plan for Website Hosting](#configure-azure-app-service-plan-for-website-hosting)
+    * [Prepare Azure App Service for Web App Republication](#prepare-azure-app-service-for-web-app-republication)
+    * [Resolve Azure App Service Pricing Tier for Runtime Requirements](#resolve-azure-app-service-pricing-tier-for-runtime-requirements)
+    * [Resolve Azure App Service Pricing Tier for Runtime Requirements](#resolve-azure-app-service-pricing-tier-for-runtime-requirements-1)
+    * [Resolve Azure App Service Pricing Tier for Runtime Requirements](#resolve-azure-app-service-pricing-tier-for-runtime-requirements-2)
+* [Implement and manage virtual networking](#implement-and-manage-virtual-networking)
+  * [Configure secure access to virtual networks](#configure-secure-access-to-virtual-networks)
+    * [Configure Private Link Service Source IP](#configure-private-link-service-source-ip)
+  * [Configure name resolution and load balancing](#configure-name-resolution-and-load-balancing)
+    * [Configure Standard Load Balancer Outbound Traffic and IP Allocation](#configure-standard-load-balancer-outbound-traffic-and-ip-allocation)
+    * [Diagnose Internal Load Balancer Hairpin Traffic Failure](#diagnose-internal-load-balancer-hairpin-traffic-failure)
+    * [Configure DNS Records for App Service](#configure-dns-records-for-app-service)
+    * [IMDS Load Balancer Metadata Error](#imds-load-balancer-metadata-error)
+* [Monitor and maintain Azure resources](#monitor-and-maintain-azure-resources)
+  * [Monitor resources in Azure](#monitor-resources-in-azure)
+    * [Configure Azure Monitor Alert for Database CPU Usage](#configure-azure-monitor-alert-for-database-cpu-usage)
+    * [Configure Azure Monitor Alert Notification Rate Limits](#configure-azure-monitor-alert-notification-rate-limits)
+    * [Enable Boot Diagnostics for Azure Virtual Machines](#enable-boot-diagnostics-for-azure-virtual-machines)
+    * [Diagnose Network Watcher Tool for Web Server Packet Flow](#diagnose-network-watcher-tool-for-web-server-packet-flow)
+    * [Load Balancer Metrics Batch API](#load-balancer-metrics-batch-api)
+    * [Capture SFTP Packets with Network Watcher](#capture-sftp-packets-with-network-watcher)
+    * [Storage Insights Overview](#storage-insights-overview)
+  * [Implement backup and recovery](#implement-backup-and-recovery)
+    * [Recover Configuration File from Azure VM Backup](#recover-configuration-file-from-azure-vm-backup)
+    * [Recover Azure VM from Deleted Backup](#recover-azure-vm-from-deleted-backup)
 
 ---
 
-# Manage Azure identities and governance
+## Manage Azure identities and governance
 
-## Manage Microsoft Entra users and groups
+### Manage Microsoft Entra users and groups
 
-### Configure Microsoft Entra SSPR For Specific Users
+#### Configure Microsoft Entra SSPR For Specific Users
 
 **Exam Task:** Configure self-service password reset (SSPR)
 
@@ -127,9 +132,9 @@ You must **configure the authentication requirements and enable SSPR** before yo
 
 ---
 
-## Manage Azure subscriptions and governance
+### Manage Azure subscriptions and governance
 
-### Configure Azure Cost Center Tags and Cost Analysis
+#### Configure Azure Cost Center Tags and Cost Analysis
 
 **Exam Task:** Apply and manage tags on resources · Manage costs by using alerts, budgets, and Azure Advisor recommendations
 
@@ -210,7 +215,7 @@ For cost center allocation:
 
 ---
 
-### Tagging Policy
+#### Tagging Policy
 
 **Exam Task:** Implement and manage Azure Policy · Apply and manage tags on resources
 
@@ -295,7 +300,7 @@ You should use deny for the effect property. The "then" block specifies the effe
 
 ---
 
-### Azure Policy Not Functioning
+#### Azure Policy Not Functioning
 
 **Exam Task:** Implement and manage Azure Policy
 
@@ -364,11 +369,11 @@ References
 
 ---
 
-# Implement and manage storage
+## Implement and manage storage
 
-## Configure access to storage
+### Configure access to storage
 
-### Diagnose Storage Explorer Permission Errors
+#### Diagnose Storage Explorer Permission Errors
 
 **Exam Task:** Manage access keys
 
@@ -549,7 +554,7 @@ The solution is either:
 
 ---
 
-### Configure AzCopy Authentication for Blob and File Storage
+#### Configure AzCopy Authentication for Blob and File Storage
 
 **Exam Task:** Create and use shared access signature (SAS) tokens · Manage access keys · Configure identity-based access for Azure Files
 
@@ -661,7 +666,7 @@ azcopy copy "source" "https://devstore.file.core.windows.net/share"
 
 ---
 
-### Modify Stored Access Policy
+#### Modify Stored Access Policy
 
 **Exam Task:** Configure stored access policies
 
@@ -701,9 +706,9 @@ References
 
 ---
 
-## Configure and manage storage accounts
+### Configure and manage storage accounts
 
-### Configure Object Replication Between Storage Accounts
+#### Configure Object Replication Between Storage Accounts
 
 **Exam Task:** Configure object replication
 
@@ -844,7 +849,7 @@ You had the logic completely reversed - change feed on the wrong end, and versio
 
 ---
 
-### Azure Storage Redundancy Recommendation
+#### Azure Storage Redundancy Recommendation
 
 **Exam Task:** Configure Azure Storage redundancy
 
@@ -887,9 +892,9 @@ References
 
 ---
 
-## Configure Azure Files and Azure Blob Storage
+### Configure Azure Files and Azure Blob Storage
 
-### Configure Lifecycle Management Policy for Azure Storage
+#### Configure Lifecycle Management Policy for Azure Storage
 
 **Exam Task:** Configure blob lifecycle management
 
@@ -1048,7 +1053,7 @@ Set-AzStorageBlobInventoryPolicy                # \u2717 Wrong!
 
 ---
 
-### Identify Blob Write Operations That Create New Versions
+#### Identify Blob Write Operations That Create New Versions
 
 **Exam Task:** Configure blob versioning
 
@@ -1111,7 +1116,7 @@ The four versioning operations are **Put Blob**, **Put Block List**, **Copy Blob
 
 ---
 
-### Lifecycle Management Policy Configuration
+#### Lifecycle Management Policy Configuration
 
 **Exam Task:** Configure blob lifecycle management
 
@@ -1184,7 +1189,7 @@ For each of the following statements, select Yes if the statement is true. Other
 
 ---
 
-### Delete Soft-Deleted File Share
+#### Delete Soft-Deleted File Share
 
 **Exam Task:** Configure snapshots and soft delete for Azure Files
 
@@ -1232,11 +1237,11 @@ References
 
 ---
 
-# Deploy and manage Azure compute resources
+## Deploy and manage Azure compute resources
 
-## Automate deployment of resources by using Azure Resource Manager (ARM) templates or Bicep files
+### Automate deployment of resources by using Azure Resource Manager (ARM) templates or Bicep files
 
-### Resource dependencies in Bicep
+#### Resource dependencies in Bicep
 
 **Exam Task:** Interpret an Azure Resource Manager template or a Bicep file
 
@@ -1299,7 +1304,7 @@ References
 
 ---
 
-### Convert Array to Object
+#### Convert Array to Object
 
 **Exam Task:** Modify an existing Bicep file
 
@@ -1363,9 +1368,9 @@ References
 
 ---
 
-## Create and configure virtual machines
+### Create and configure virtual machines
 
-### VM Resize Failure Cause
+#### VM Resize Failure Cause
 
 **Exam Task:** Manage virtual machine sizes
 
@@ -1424,7 +1429,7 @@ When resizing a VM, Azure validates that all currently attached resources (data 
 
 ---
 
-### Encrypt VM Disk With Key Vault
+#### Encrypt VM Disk With Key Vault
 
 **Exam Task:** Configure Azure Disk Encryption
 
@@ -1508,7 +1513,7 @@ When encrypting a VM disk with Azure Key Vault, `Get-AzKeyVault` uses `-VaultNam
 
 ---
 
-### Apply Change to VMSS OS and Data Disk Profile
+#### Apply Change to VMSS OS and Data Disk Profile
 
 **Exam Task:** Deploy and configure an Azure Virtual Machine Scale Sets
 
@@ -1565,9 +1570,9 @@ For real-world scenarios, `Update-AzVmss` is the preferred cmdlet to update the 
 
 ---
 
-## Provision and manage containers in the Azure portal
+### Provision and manage containers in the Azure portal
 
-### Configure Scaling Rules in Azure Container Apps
+#### Configure Scaling Rules in Azure Container Apps
 
 **Exam Task:** Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps
 
@@ -1646,9 +1651,9 @@ The JSON defines an Azure Service Bus scaler with a `messageCount` threshold and
 
 ---
 
-## Create and configure Azure App Service
+### Create and configure Azure App Service
 
-### Configure Azure App Service Plan for Website Hosting
+#### Configure Azure App Service Plan for Website Hosting
 
 **Exam Task:** Provision an App Service plan
 
@@ -1752,7 +1757,7 @@ On Azure exams, when you see:
 
 ---
 
-### Prepare Azure App Service for Web App Republication
+#### Prepare Azure App Service for Web App Republication
 
 **Exam Task:** Create an App Service · Configure deployment slots for an App Service
 
@@ -1834,7 +1839,7 @@ If a deployment-related command is available (like `Publish-AzWebApp`) and the s
 
 ---
 
-### Resolve Azure App Service Pricing Tier for Runtime Requirements
+#### Resolve Azure App Service Pricing Tier for Runtime Requirements
 
 **Exam Task:** Provision an App Service plan · Configure scaling for an App Service plan
 
@@ -1883,7 +1888,7 @@ To meet "run 8 hours each day," you need a plan where you **don't get stopped du
 
 ---
 
-### Resolve Azure App Service Pricing Tier for Runtime Requirements
+#### Resolve Azure App Service Pricing Tier for Runtime Requirements
 
 **Exam Task:** Provision an App Service plan · Configure scaling for an App Service plan
 
@@ -1972,7 +1977,7 @@ ACU/vCPU is a **relative CPU performance indicator**. Higher numbers mean **fast
 
 ---
 
-### Resolve Azure App Service Pricing Tier for Runtime Requirements
+#### Resolve Azure App Service Pricing Tier for Runtime Requirements
 
 **Exam Task:** Provision an App Service plan · Configure scaling for an App Service plan
 
@@ -2018,11 +2023,11 @@ Free/Shared App Service plans can stop apps when usage quotas are exceeded; movi
 
 ---
 
-# Implement and manage virtual networking
+## Implement and manage virtual networking
 
-## Configure secure access to virtual networks
+### Configure secure access to virtual networks
 
-### Configure Private Link Service Source IP
+#### Configure Private Link Service Source IP
 
 **Exam Task:** Configure private endpoints for Azure PaaS
 
@@ -2099,9 +2104,9 @@ Disabling privateLinkServiceNetworkPolicies is a per‑private‑IP (per Private
 
 ---
 
-## Configure name resolution and load balancing
+### Configure name resolution and load balancing
 
-### Configure Standard Load Balancer Outbound Traffic and IP Allocation
+#### Configure Standard Load Balancer Outbound Traffic and IP Allocation
 
 **Exam Task:** Configure an internal or public load balancer
 
@@ -2167,7 +2172,7 @@ For each of the following statements, select Yes if the statement is true. Other
 
 ---
 
-### Diagnose Internal Load Balancer Hairpin Traffic Failure
+#### Diagnose Internal Load Balancer Hairpin Traffic Failure
 
 **Exam Task:** Troubleshoot load balancing
 
@@ -2253,7 +2258,7 @@ Azure **Internal Load Balancer does not support backend VMs accessing the ILB fr
 
 ---
 
-### Configure DNS Records for App Service
+#### Configure DNS Records for App Service
 
 **Exam Task:** Configure Azure DNS
 
@@ -2315,7 +2320,7 @@ References
 
 ---
 
-### IMDS Load Balancer Metadata Error
+#### IMDS Load Balancer Metadata Error
 
 **Exam Task:** Troubleshoot load balancing
 
@@ -2375,11 +2380,11 @@ References
 
 ---
 
-# Monitor and maintain Azure resources
+## Monitor and maintain Azure resources
 
-## Monitor resources in Azure
+### Monitor resources in Azure
 
-### Configure Azure Monitor Alert for Database CPU Usage
+#### Configure Azure Monitor Alert for Database CPU Usage
 
 **Exam Task:** Set up alert rules, action groups, and alert processing rules in Azure Monitor
 
@@ -2425,7 +2430,7 @@ For Azure Monitor alerts requiring multiple notification methods and ITSM integr
 
 ---
 
-### Configure Azure Monitor Alert Notification Rate Limits
+#### Configure Azure Monitor Alert Notification Rate Limits
 
 **Exam Task:** Set up alert rules, action groups, and alert processing rules in Azure Monitor
 
@@ -2484,7 +2489,7 @@ Related resources:
 
 ---
 
-### Enable Boot Diagnostics for Azure Virtual Machines
+#### Enable Boot Diagnostics for Azure Virtual Machines
 
 **Exam Task:** Configure and interpret monitoring of virtual machines, storage accounts, and networks by using Azure Monitor Insights
 
@@ -2551,7 +2556,7 @@ Premium storage accounts and storage account v1 are **not supported**, regardles
 
 ---
 
-### Diagnose Network Watcher Tool for Web Server Packet Flow
+#### Diagnose Network Watcher Tool for Web Server Packet Flow
 
 **Exam Task:** Use Azure Network Watcher and Connection Monitor
 
@@ -2628,7 +2633,7 @@ It does **not** answer: *“Can the VM actually accept this connection?”*
 
 ---
 
-### Load Balancer Metrics Batch API
+#### Load Balancer Metrics Batch API
 
 **Exam Task:** Interpret metrics in Azure Monitor
 
@@ -2700,7 +2705,7 @@ The metrics:getBatch API reduces throttling risk by batching multi-resource metr
 
 ---
 
-### Capture SFTP Packets with Network Watcher
+#### Capture SFTP Packets with Network Watcher
 
 **Exam Task:** Use Azure Network Watcher and Connection Monitor
 
@@ -2773,7 +2778,7 @@ References
 
 ---
 
-### Storage Insights Overview
+#### Storage Insights Overview
 
 **Exam Task:** Configure and interpret monitoring of virtual machines, storage accounts, and networks by using Azure Monitor Insights
 
@@ -2832,9 +2837,9 @@ References
 
 ---
 
-## Implement backup and recovery
+### Implement backup and recovery
 
-### Recover Configuration File from Azure VM Backup
+#### Recover Configuration File from Azure VM Backup
 
 **Exam Task:** Perform backup and restore operations by using Azure Backup
 
@@ -2904,7 +2909,7 @@ Azure Recovery Services vault overview
 
 ---
 
-### Recover Azure VM from Deleted Backup
+#### Recover Azure VM from Deleted Backup
 
 **Exam Task:** Perform backup and restore operations by using Azure Backup
 

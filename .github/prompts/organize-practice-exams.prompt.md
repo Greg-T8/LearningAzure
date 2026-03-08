@@ -9,10 +9,10 @@ Reorganize a practice exam `README.md` to group questions under their correct ex
 
 ## Target Files
 
-| Exam   | Practice Exam File                 | Domain Reference                                       |
-| ------ | ---------------------------------- | ------------------------------------------------------ |
-| AZ-104 | `AZ-104/practice-exams/README.md`  | `AZ-104/README.md` — Domain Quick Reference section    |
-| AI-102 | `AI-102/practice-exams/README.md`  | `AI-102/README.md` — Domain Quick Reference section    |
+| Exam   | Practice Exam File                 | Domain Reference                                       | Coverage Table                                              |
+| ------ | ---------------------------------- | ------------------------------------------------------ | ----------------------------------------------------------- |
+| AZ-104 | `AZ-104/practice-exams/README.md`  | `AZ-104/README.md` — Domain Quick Reference section    | `AZ-104/README.md` — Practice Exam Coverage section         |
+| AI-102 | `AI-102/practice-exams/README.md`  | `AI-102/README.md` — Domain Quick Reference section    | `AI-102/README.md` — Practice Exam Coverage section         |
 
 If no exam is specified, ask which exam to process.
 
@@ -20,19 +20,19 @@ If no exam is specified, ask which exam to process.
 
 ### Heading Hierarchy
 
-| Element         | Heading       | Notes                                                                       |
-| --------------- | ------------- | --------------------------------------------------------------------------- |
-| Page identifier | Bold text     | `**Practice Exam Questions - <EXAM>** · <N> questions` (not a heading)      |
-| Domain          | `#`           | Matches the domain name from the exam README                                |
-| Skill           | `##`          | Matches the skill name from the exam README                                 |
-| Question        | `###`         | Existing question title — preserved exactly                                 |
+| Element    | Heading | Notes                                                    |
+| ---------- | ------- | -------------------------------------------------------- |
+| Page title | `#`     | `# Practice Exam Questions - <EXAM>` (single H1)        |
+| Domain     | `##`    | Matches the domain name from the exam README             |
+| Skill      | `###`   | Matches the skill name from the exam README              |
+| Question   | `####`  | Existing question title — preserved exactly              |
 
-Using bold text (instead of `#`) for the page identifier keeps domains as the sole `#` headings, which produces a clean GitHub sidebar TOC where domains are top-level entries and skills are nested beneath them.
+A single `#` page title satisfies markdown linters (one H1 per file). Domains at `##` appear as top-level entries in the GitHub sidebar TOC with skills nested beneath them.
 
 ### Example
 
 ```markdown
-**Practice Exam Questions - AZ-104** · 38 questions
+# Practice Exam Questions - AZ-104
 
 * [Manage Azure identities and governance](#manage-azure-identities-and-governance)
   * [Manage Microsoft Entra users and groups](#manage-microsoft-entra-users-and-groups)
@@ -40,11 +40,11 @@ Using bold text (instead of `#`) for the page identifier keeps domains as the so
 
 ---
 
-# Manage Azure identities and governance
+## Manage Azure identities and governance
 
-## Manage Microsoft Entra users and groups
+### Manage Microsoft Entra users and groups
 
-### Configure Microsoft Entra SSPR For Specific Users
+#### Configure Microsoft Entra SSPR For Specific Users
 
 **Exam Task:** Configure self-service password reset (SSPR)
 
@@ -53,7 +53,7 @@ You are asked to configure Self-Service Password Reset (SSPR)…
 
 ### Exam Task Metadata
 
-Immediately after each `###` question heading (separated by a blank line), insert:
+Immediately after each `####` question heading (separated by a blank line), insert:
 
 ```markdown
 **Exam Task:** Task description
@@ -106,7 +106,7 @@ Each domain typically has 2–4 skills, and each skill has 3–8 tasks.
 
 Read the practice exam README and extract every question block. A question block:
 
-- Starts at a heading (`###` or `####`)
+- Starts at a heading (`####`)
 - Ends at the next `---` separator or end of file
 - Includes **everything**: question text, answer options, `<details>` blocks (screenshots, explanations), `▶ Related Lab:` links
 
@@ -133,12 +133,22 @@ After writing, confirm:
 - All original questions are present (count check)
 - No question content was altered
 - Every question has an **Exam Task** metadata line
-- Heading levels are correct (`#` / `##` / `###`)
+- Heading levels are correct (`#` / `##` / `###` / `####`)
+
+### Step 6 — Update Coverage Table
+
+Open the exam's main README and locate the **Practice Exam Coverage** section (between `<!-- BEGIN COVERAGE TABLE -->` and `<!-- END COVERAGE TABLE -->` markers). Update the **Qs** column for every task row:
+
+1. Parse all `**Exam Task:**` lines from the practice exam (split multi-task entries on ` · `).
+2. Count occurrences per task.
+3. Write the count into the matching row's **Qs** column. Tasks with no matching questions get `0`.
+
+The table structure (domains, skills, and task names) must match the Domain Quick Reference exactly — do not add or remove rows. Only the **Qs** values change.
 
 ## Rules
 
 - **Do not** alter question text, answer options, screenshots, `<details>` blocks, explanation content, or `▶ Related Lab:` links.
-- **Do** normalize question heading levels to `###`.
+- **Do** normalize question heading levels to `####`.
 - **Do** insert the `**Exam Task:**` metadata line after each question heading.
 - **Do** remove any previous domain/section headings from the source (they will be regenerated).
 - If the file already follows this structure from a previous run, strip existing `**Exam Task:**` lines before re-inserting them (idempotent).
