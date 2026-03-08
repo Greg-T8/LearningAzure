@@ -23,14 +23,22 @@ param(
     [ValidateSet('Start', 'Stop', 'End')]
     [string]$Action = 'Start',
 
-    [ValidateSet('AI-102', 'AZ-104')]
+    [ValidateSet('AI-102', 'AZ-104', 'Other')]
     [string]$ExamName
 )
 
 # Configuration
 $RepoRoot = Resolve-Path -Path (Join-Path -Path $PSScriptRoot -ChildPath '..\..')
 $StudyLogFile = $null
-$AllExams = @('AI-102', 'AZ-104')
+$AllExams = @('AI-102', 'AZ-104', 'Other')
+$ExamFolderMap = @{
+    'AI-102' = 'AI-102'
+    'AZ-104' = 'AZ-104'
+    'Other'  = '.assets\workflow-development'
+}
+$ExamLogFileMap = @{
+    'Other' = 'WorkLog.md'
+}
 
 $Main = {
     . $Helpers
@@ -45,12 +53,16 @@ $Main = {
                 throw "ExamName is required when Action is 'Start'."
             }
 
-            $script:StudyLogFile = Join-Path -Path $RepoRoot -ChildPath "$ExamName\StudyLog.md"
+            $folder = Resolve-ExamFolder -Exam $ExamName
+            $logFileName = Resolve-ExamLogFileName -Exam $ExamName
+            $script:StudyLogFile = Join-Path -Path $RepoRoot -ChildPath "$folder\$logFileName"
 
             # End any currently active session before starting a new one
             $sourceExam = Find-ActiveExam
             if ($sourceExam) {
-                $sourceLog = Join-Path -Path $RepoRoot -ChildPath "$sourceExam\StudyLog.md"
+                $sourceFolder = Resolve-ExamFolder -Exam $sourceExam
+                $sourceLogFileName = Resolve-ExamLogFileName -Exam $sourceExam
+                $sourceLog = Join-Path -Path $RepoRoot -ChildPath "$sourceFolder\$sourceLogFileName"
                 $sourceSession = Get-ActiveSessionNumber -LogFile $sourceLog
                 Close-SessionEntry -SessionNumber $sourceSession -LogFile $sourceLog
                 Push-StudyLogChange -SessionNumber $sourceSession -Type 'end' -Exam $sourceExam
@@ -69,7 +81,9 @@ $Main = {
                 throw 'No active study session found in any exam study log.'
             }
 
-            $sourceLog = Join-Path -Path $RepoRoot -ChildPath "$sourceExam\StudyLog.md"
+            $sourceFolder = Resolve-ExamFolder -Exam $sourceExam
+            $sourceLogFileName = Resolve-ExamLogFileName -Exam $sourceExam
+            $sourceLog = Join-Path -Path $RepoRoot -ChildPath "$sourceFolder\$sourceLogFileName"
             $sourceSession = Get-ActiveSessionNumber -LogFile $sourceLog
             Close-SessionEntry -SessionNumber $sourceSession -LogFile $sourceLog
             Push-StudyLogChange -SessionNumber $sourceSession -Type 'end' -Exam $sourceExam
@@ -81,7 +95,9 @@ $Main = {
                 throw 'No active study session found in any exam study log.'
             }
 
-            $sourceLog = Join-Path -Path $RepoRoot -ChildPath "$sourceExam\StudyLog.md"
+            $sourceFolder = Resolve-ExamFolder -Exam $sourceExam
+            $sourceLogFileName = Resolve-ExamLogFileName -Exam $sourceExam
+            $sourceLog = Join-Path -Path $RepoRoot -ChildPath "$sourceFolder\$sourceLogFileName"
             $sourceSession = Get-ActiveSessionNumber -LogFile $sourceLog
             Close-SessionEntry -SessionNumber $sourceSession -LogFile $sourceLog
             Push-StudyLogChange -SessionNumber $sourceSession -Type 'end' -Exam $sourceExam
@@ -91,6 +107,28 @@ $Main = {
 }
 
 $Helpers = {
+    function Resolve-ExamFolder {
+        # Map an exam name to its workspace folder using the ExamFolderMap
+        param([Parameter(Mandatory)] [string]$Exam)
+
+        if ($ExamFolderMap.ContainsKey($Exam)) {
+            return $ExamFolderMap[$Exam]
+        }
+
+        return $Exam
+    }
+
+    function Resolve-ExamLogFileName {
+        # Map an exam name to its log filename and default to StudyLog.md
+        param([Parameter(Mandatory)] [string]$Exam)
+
+        if ($ExamLogFileMap.ContainsKey($Exam)) {
+            return $ExamLogFileMap[$Exam]
+        }
+
+        return 'StudyLog.md'
+    }
+
     function Confirm-StudyLogExists {
         # Verify the StudyLog.md file is present in the exam folder
         if (-not (Test-Path -Path $StudyLogFile)) {
@@ -157,7 +195,9 @@ $Helpers = {
     function Find-ActiveExam {
         # Search all exam logs for an open session to determine the active exam
         foreach ($exam in $AllExams) {
-            $logFile = Join-Path -Path $RepoRoot -ChildPath "$exam\StudyLog.md"
+            $folder = Resolve-ExamFolder -Exam $exam
+            $logFileName = Resolve-ExamLogFileName -Exam $exam
+            $logFile = Join-Path -Path $RepoRoot -ChildPath "$folder\$logFileName"
 
             if (-not (Test-Path -Path $logFile)) { continue }
 
@@ -254,7 +294,9 @@ $Helpers = {
             [string]$Exam = $ExamName
         )
 
-        $relativeLogPath = "$Exam/StudyLog.md"
+        $folder          = Resolve-ExamFolder -Exam $Exam
+        $logFileName     = Resolve-ExamLogFileName -Exam $Exam
+        $relativeLogPath = "$folder/$logFileName"
         $commitMessage   = "docs($Exam): $Type study session #$SessionNumber"
 
         # Stage the study log file
