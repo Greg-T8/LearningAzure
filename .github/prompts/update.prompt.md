@@ -42,6 +42,8 @@ Use the `lab-catalog-updater` skill to scan and update hands-on-labs README file
 
 Use the `practice-exam-organizer` skill to reorganize practice exam questions by domain/skill/task hierarchy, insert `**Exam Task:**` metadata, and update the coverage table on each exam README.
 
+> **MANDATORY FULL PIPELINE — NO SHORT-CIRCUITING.** You MUST execute every step of the practice-exam-organizer skill (Load → Parse → Classify → Assemble → Verify → Update Coverage). The presence of existing `**Exam Task:**` metadata or existing domain headings does NOT mean questions are correctly placed. A question's `**Exam Task:**` value may not match the domain/skill section it currently sits under. You MUST classify every question against the domain structure and move any misplaced questions to the correct section. Skipping classification because "metadata already exists" is a critical error.
+
 ### 3. Collapse Explanation Blocks
 
 Search all practice exam question README files (under `practice-exams/` folders and individual assessment MDs such as `Microsoft_Assessment_*.md`, `TutorialsDojo_*.md`, etc.) and ensure any `<details>` blocks that include the `open` attribute (e.g., `<details open>`) are changed to plain `<details>` so explanations are collapsed by default.

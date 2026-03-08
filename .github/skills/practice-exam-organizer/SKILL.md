@@ -98,6 +98,10 @@ Handle duplicate question titles by appending `-1`, `-2` to anchors (GitHub-styl
 
 If the practice exam file contains non-question content at the top (e.g., a "Learning Strategy" section in AI-102), preserve it between the page title and the TOC.
 
+## Mandatory Execution Guarantee
+
+> **EVERY step below MUST be executed in full — no step may be skipped or short-circuited.** Even when the file already has `**Exam Task:**` metadata and domain/skill headings from a previous run, you MUST still: (1) parse every question block, (2) classify each question against the domain structure, (3) detect and move any misplaced questions, and (4) regenerate the file with the correct ordering. The existence of prior structure does NOT guarantee correctness — questions may have been appended to the wrong section. Treat every invocation as a full reorganization pass.
+
 ## Workflow
 
 ### Step 1 — Load the Domain Structure
@@ -122,13 +126,23 @@ Preserve each block's full content exactly.
 
 ### Step 3 — Classify Each Question
 
+> **This step is MANDATORY and must not be skipped.** Do not assume a question is correctly placed because it already appears under a domain/skill heading. You must independently verify every question's classification.
+
 For every question block, determine:
 
 1. **Domain** — Which of the exam's domains this question primarily tests
 2. **Skill** — Which skill area under that domain
 3. **Task(s)** — Which specific task(s) from the skill's task list
 
-Use the question's scenario, answer choices, and explanation to inform classification. When a question spans multiple domains or skills, assign it to the **primary** one being tested.
+Classification sources (use ALL of these, in priority order):
+
+1. **`**Exam Task:**` metadata** — If the question already has an Exam Task line, match its value against the domain structure map from Step 1 to determine the correct domain and skill. This is the most reliable signal.
+2. **Question scenario and answer choices** — Use the question's content to confirm or override the classification.
+3. **Explanation content** — Use references and context from the explanation to resolve ambiguity.
+
+When a question spans multiple domains or skills, assign it to the **primary** one being tested.
+
+**Misplacement detection:** After classifying, compare the question's determined domain/skill against the section it currently occupies. If they differ, the question MUST be moved. Log each move for the output summary.
 
 ### Step 4 — Assemble and Write
 
@@ -172,3 +186,4 @@ Each domain is a `###` heading, each skill is a `####` heading, and each skill h
 - **Do** insert the `**Exam Task:**` metadata line after each question heading.
 - **Do** remove any previous domain/section headings from the source (they will be regenerated).
 - If the file already follows this structure from a previous run, strip existing `**Exam Task:**` lines before re-inserting them (idempotent).
+- **Never skip reorganization because the file "looks organized."** Questions may be under the wrong heading. The full classify-and-reassemble pipeline must run every time.
