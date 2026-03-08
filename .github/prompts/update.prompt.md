@@ -1,15 +1,14 @@
 ---
-name: Update-Lab-References
-description: Updates hands-on-lab README files to reflect the latest labs in the repository, including related practice exam question links
+name: Update-Exam-And-Lab-Pages
+description: Updates top-level exam READMEs, hands-on-lab catalogs, and practice exam question pages across all exams
 ---
 
-# Hands-on Lab README Updater
+# Exam & Lab Page Updater
 
-Update the hands-on-labs README.md files to accurately reflect all labs in the repository.
+Performs a full refresh of top-level exam pages, hands-on-lab catalogs, and practice exam question pages.
 
-Also update individual lab README files to include a dedicated related practice exam question links section near the bottom (next to Related Labs).
-
-Uses the `lab-catalog-updater` skill for the full scanning, updating, and validation workflow.
+Uses the `lab-catalog-updater` skill for lab scanning, catalog updates, and cross-references.
+Uses the `practice-exam-organizer` skill to reorganize practice exam questions and update coverage tables.
 
 ## Link Fidelity Requirement
 
@@ -17,18 +16,39 @@ Uses the `lab-catalog-updater` skill for the full scanning, updating, and valida
 
 ## Scope
 
+### Hands-on Lab Catalogs
+
 - `AI-102/hands-on-labs/README.md`
 - `AZ-104/hands-on-labs/README.md`
 - `AI-900/hands-on-labs/README.md` (if present)
 
-## Practice Exam README Fix
+### Practice Exam Pages
 
-- Search all practice exam question README files (for example under any `practice-exams` folders and individual assessment MDs such as `Microsoft_Assessment_*.md`, `TutorialsDojo_*.md`, etc.) and ensure any `<details>` blocks that include the `open` attribute (for example `<details open>`) are changed to plain `<details>` so explanations are collapsed by default.
-- Include this check as part of the updater run so individual exam README files have their explanation blocks collapsed when rendered.
+- `AZ-104/practice-exams/README.md`
+- `AI-102/practice-exams/README.md`
 
-## Remove Unused Images
+### Exam READMEs (Coverage Tables)
 
-After all README and practice exam updates are complete, run the unused image cleanup script to remove images from `.img` folders that are no longer referenced by any markdown file:
+- `AZ-104/README.md` — Practice Exam Coverage section
+- `AI-102/README.md` — Practice Exam Coverage section
+
+## Workflow
+
+### 1. Update Lab Catalogs
+
+Use the `lab-catalog-updater` skill to scan and update hands-on-labs README files, lab statistics, Related Labs cross-references, and Related Practice Exam Questions links.
+
+### 2. Organize Practice Exam Questions
+
+Use the `practice-exam-organizer` skill to reorganize practice exam questions by domain/skill/task hierarchy, insert `**Exam Task:**` metadata, and update the coverage table on each exam README.
+
+### 3. Collapse Explanation Blocks
+
+Search all practice exam question README files (under `practice-exams/` folders and individual assessment MDs such as `Microsoft_Assessment_*.md`, `TutorialsDojo_*.md`, etc.) and ensure any `<details>` blocks that include the `open` attribute (e.g., `<details open>`) are changed to plain `<details>` so explanations are collapsed by default.
+
+### 4. Remove Unused Images
+
+After all updates are complete, run the unused image cleanup script:
 
 ```powershell
 & ".assets\scripts\Remove-UnusedImages.ps1"
@@ -39,8 +59,10 @@ After all README and practice exam updates are complete, run the unused image cl
 
 ## Invocation Examples
 
+- "Update everything"
 - "Update the hands-on-labs README files"
+- "Organize AZ-104 practice exam questions"
 - "Update AI-102 hands-on-labs README with latest labs"
 - "Refresh the lab catalog in AZ-104"
 - "Update Related Labs sections across all labs"
-- "Add Related Practice Exam Questions sections across all labs"
+- "Update practice exam coverage tables"

@@ -1,11 +1,19 @@
 ---
-name: Organize-Practice-Exam-Questions
-description: Reorganize practice exam questions by domain, skill, and task metadata for any certification exam
+name: practice-exam-organizer
+description: 'Reorganize practice exam questions by domain, skill, and task metadata for any certification exam, then update the coverage table on the exam README. Use when asked to organize practice exams, classify exam questions by domain, or update practice exam coverage.'
+user-invokable: false
+argument-hint: '[exam]'
 ---
 
-# Organize Practice Exam Questions by Domain Structure
+# Practice Exam Organizer
 
-Reorganize a practice exam `README.md` to group questions under their correct exam domain and skill headings, with task-level metadata on each question.
+Reorganize a practice exam `README.md` to group questions under their correct exam domain and skill headings, with task-level metadata on each question. After reorganizing, update the coverage table on the exam's main README.
+
+## When to Use
+
+- Organizing or reorganizing practice exam questions by domain structure
+- Classifying exam questions into domain → skill → task hierarchy
+- Updating the Practice Exam Coverage table after questions are added or removed
 
 ## Target Files
 
@@ -69,7 +77,7 @@ Task descriptions **must match the exact wording** from the exam README's Domain
 
 ### Table of Contents
 
-After the bold page identifier, generate a nested bullet-point TOC with anchor links:
+After the page title, generate a nested bullet-point TOC with anchor links:
 
 ```markdown
 * [Domain Name](#domain-anchor)
@@ -88,7 +96,7 @@ Handle duplicate question titles by appending `-1`, `-2` to anchors (GitHub-styl
 
 ### Introductory Content
 
-If the practice exam file contains non-question content at the top (e.g., a "Learning Strategy" section in AI-102), preserve it between the page identifier and the TOC.
+If the practice exam file contains non-question content at the top (e.g., a "Learning Strategy" section in AI-102), preserve it between the page title and the TOC.
 
 ## Workflow
 
@@ -164,9 +172,3 @@ Each domain is a `###` heading, each skill is a `####` heading, and each skill h
 - **Do** insert the `**Exam Task:**` metadata line after each question heading.
 - **Do** remove any previous domain/section headings from the source (they will be regenerated).
 - If the file already follows this structure from a previous run, strip existing `**Exam Task:**` lines before re-inserting them (idempotent).
-
-## Invocation Examples
-
-- "Organize AZ-104 practice exam questions"
-- "Organize AI-102 practice exams by domain"
-- "Re-classify practice exam questions for 104"
