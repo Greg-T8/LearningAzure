@@ -1,5 +1,7 @@
 # Practice Exam Questions - AZ-104
 
+Accounts for questions missed or unsure about in the practice exams.
+
 * [Manage Azure identities and governance](#manage-azure-identities-and-governance)
   * [Manage Microsoft Entra users and groups](#manage-microsoft-entra-users-and-groups)
     * [Configure Microsoft Entra SSPR For Specific Users](#configure-microsoft-entra-sspr-for-specific-users)
@@ -56,6 +58,7 @@
   * [Implement backup and recovery](#implement-backup-and-recovery)
     * [Recover Configuration File from Azure VM Backup](#recover-configuration-file-from-azure-vm-backup)
     * [Recover Azure VM from Deleted Backup](#recover-azure-vm-from-deleted-backup)
+    * [Retrieve the Catalog Identifier for Entitlement Management](#retrieve-the-catalog-identifier-for-entitlement-management)
 
 ---
 
@@ -2949,3 +2952,58 @@ For Azure IaaS VMs protected by a Recovery Services vault, **soft delete provide
 </details>
 
 ---
+
+#### Retrieve the Catalog Identifier for Entitlement Management
+
+**Exam Task:** Manage identity and access lifecycle using Microsoft Entra ID Governance
+
+Your organization is using Microsoft Entra ID Governance. You are the Azure administrator in the organization.
+
+You are using Microsoft Graph PowerShell to provide and manage identity and access lifecycle at scale for all users and groups within the organization.
+
+You have a group named Sales. You need to grant users in the Sales group the adequate level of access using entitlement management. Your organization's policy dictates the use of the general catalog.
+
+What should you do first?
+
+A. Retrieve the catalog resources.  
+B. Retrieve the resource roles assigned to the catalog.  
+C. Retrieve the catalog identifier.  
+D. Add the Sales group to the catalog.  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-08-06-34-08.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Why the selected answer is correct (C)**
+
+In this scenario, you are essentially managing access to resources in your organization. You are using Microsoft Entra ID entitlement management with Microsoft Graph PowerShell v1.0. Since the users and group already exist, you need to initiate the process by getting the catalog identifier.
+
+An access package is a collection of resources that is governed by policies. Access packages are defined in containers called catalogs. However, to add resources to the catalog, you will require details of the catalog identifier. Thus, you should retrieve the catalog identifier as the initial step by using the following command:
+
+```powershell
+Get-MgIdentityGovernanceEntitlementManagementCatalog -Filter "DisplayName eq 'General'" | Format-List
+```
+
+**Why the other options are incorrect**
+
+* **A. Retrieve the catalog resources**: You should get the catalog resources as a later step. To be able to do this, you will require the identifier that is assigned to the group resource in the catalog.
+* **B. Retrieve the resource roles assigned to the catalog**: This should be done at a later stage. The access package assigns users to the roles of a resource, which in the case of a group used in an access package is typically the member role. You will need this role when you add a resource role to the access package.
+* **D. Add the Sales group to the catalog**: This is the second step. To add the group to the catalog, you need the properties of a group object, which represents the resource.
+
+**Key takeaway**
+
+When working with Microsoft Entra ID entitlement management and access packages, the **first step is always to retrieve the catalog identifier**. This identifier is required before you can add resources, assign roles, or add groups to the access package.
+
+**References**
+
+* [Microsoft Graph PowerShell overview](https://learn.microsoft.com/en-us/powershell/microsoftgraph/overview)
+* [What is entitlement management?](https://learn.microsoft.com/en-us/entra/id-governance/entitlement-management-overview)
+* [Tutorial: Manage access to resources in Microsoft Entra entitlement management using Microsoft Graph PowerShell](https://learn.microsoft.com/en-us/powershell/microsoftgraph/tutorial-entitlement-management?view=graph-powershell-1.0)
+
+</details>

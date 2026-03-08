@@ -143,7 +143,19 @@ Open the exam's main README and locate the **Practice Exam Coverage** section (b
 2. Count occurrences per task.
 3. Write the count into the matching row's **Qs** column. Tasks with no matching questions get `0`.
 
-The table structure (domains, skills, and task names) must match the Domain Quick Reference exactly — do not add or remove rows. Only the **Qs** values change.
+The coverage table uses this structure — do not add or remove headings or rows, only update **Qs** values:
+
+```markdown
+### Domain N: <Domain Name> (<Weight>)
+
+#### <Skill Name>
+
+| Task | Qs |
+| :--- | -: |
+| <task description> | <count> |
+```
+
+Each domain is a `###` heading, each skill is a `####` heading, and each skill has a two-column table (Task, Qs). Task names must match the Domain Quick Reference exactly.
 
 ## Rules
 
