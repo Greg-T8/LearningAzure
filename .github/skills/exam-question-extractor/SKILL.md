@@ -114,9 +114,7 @@ Identify the question's domain, skill, and task(s) from the exam's README covera
 ```markdown
 **Domain:** <domain name (omit weight)>
 **Skill:** <skill name>
-**Task:**
-- <task 1>
-- <task 2>
+**Task:** <task>
 ```
 
 Rules:
@@ -124,11 +122,23 @@ Rules:
 * **Source of truth:** Read the exam's README (e.g., `AZ-104/README.md`) and use its domain → skill → task hierarchy. Domain names are the `### Domain N: …` headings (omit the weight percentage). Skill names are the `####` sub-headings. Tasks are the table rows under each skill.
 * Use exact wording from the README for domain and skill names.
 * For tasks, use the most specific task wording. Apply best-effort reasoning when the question spans topics — pick the closest match(es).
-* If a question maps to a single task, use a single bullet: `- <task>`.
-* If a question maps to multiple tasks (even across different skills), list each on its own bullet line.
+* If a question maps to a single task, place it inline on the header line: `**Task:** <task>`.
+* If a question maps to multiple tasks (even across different skills), use a header plus bullets:
+
+    `**Task:**`
+
+    `- <task 1>`
+
+    `- <task 2>`
 * Insert a blank line after the metadata block before the prompt text begins.
 
 Example:
+
+```markdown
+**Domain:** Manage Azure Identities and Governance
+**Skill:** Manage Azure subscriptions and governance
+**Task:** Apply and manage tags on resources
+```
 
 ```markdown
 **Domain:** Manage Azure Identities and Governance

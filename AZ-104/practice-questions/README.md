@@ -72,7 +72,9 @@ Accounts for questions missed or unsure about in the practice exams.
 
 #### Configure Microsoft Entra SSPR For Specific Users
 
-**Exam Task:** Configure self-service password reset (SSPR)
+**Domain:** Manage Azure identities and governance
+**Skill:** Manage Microsoft Entra users and groups
+**Task:** Configure self-service password reset (SSPR)
 
 You are asked to configure Self-Service Password Reset (SSPR) for a subset of users in your organization.
 
@@ -143,7 +145,12 @@ You must **configure the authentication requirements and enable SSPR** before yo
 
 #### Configure Azure Cost Center Tags and Cost Analysis
 
-**Exam Task:** Apply and manage tags on resources · Manage costs by using alerts, budgets, and Azure Advisor recommendations
+**Domain:** Manage Azure identities and governance
+**Skill:** Manage Azure subscriptions and governance
+**Task:**
+
+- Apply and manage tags on resources
+- Manage costs by using alerts, budgets, and Azure Advisor recommendations
 
 Your company has an Azure Subscription with several resources deployed. The subscription is managed by a Cloud Service Provider.
 
@@ -224,7 +231,12 @@ For cost center allocation:
 
 #### Tagging Policy
 
-**Exam Task:** Implement and manage Azure Policy · Apply and manage tags on resources
+**Domain:** Manage Azure identities and governance
+**Skill:** Manage Azure subscriptions and governance
+**Task:**
+
+- Implement and manage Azure Policy
+- Apply and manage tags on resources
 
 You are developing a policy that will deny the creation of any resource that does not have an environment tag with a value of either dev, qa, or prod.
 
@@ -309,7 +321,9 @@ You should use deny for the effect property. The "then" block specifies the effe
 
 #### Azure Policy Not Functioning
 
-**Exam Task:** Implement and manage Azure Policy
+**Domain:** Manage Azure identities and governance
+**Skill:** Manage Azure subscriptions and governance
+**Task:** Implement and manage Azure Policy
 
 A company has an existing on-premises environment and a newly created Azure subscription. You need to start testing cloud features and services with a view to eventually migrating the company environment to the Cloud. You have been given Global Administrator rights and the Scheduled Patching Contributor role on the subscription level, and you need to test Azure Policy first.
 
@@ -382,7 +396,9 @@ References
 
 #### Diagnose Storage Explorer Permission Errors
 
-**Exam Task:** Manage access keys
+**Domain:** Implement and manage storage
+**Skill:** Configure access to storage
+**Task:** Manage access keys
 
 You have storage accounts in your Azure subscription with blob containers and file shares configured. Some users access these storage accounts using Azure Storage Explorer and are reporting an error when they try to browse the storage account contents.
 
@@ -563,7 +579,13 @@ The solution is either:
 
 #### Configure AzCopy Authentication for Blob and File Storage
 
-**Exam Task:** Create and use shared access signature (SAS) tokens · Manage access keys · Configure identity-based access for Azure Files
+**Domain:** Implement and manage storage
+**Skill:** Configure access to storage
+**Task:**
+
+- Create and use shared access signature (SAS) tokens
+- Manage access keys
+- Configure identity-based access for Azure Files
 
 You create a new storage account named DevStore for Azure Blob Storage and Azure File Storage. You plan to use AzCopy to copy data from blob storage and file storage in other storage accounts to DevStore. You have access to the storage account access keys for the source storage accounts and for DevStore. You also have valid Microsoft Entra user accounts and shared access signatures (SAS) with access to the source data.
 
@@ -675,7 +697,9 @@ azcopy copy "source" "https://devstore.file.core.windows.net/share"
 
 #### Modify Stored Access Policy
 
-**Exam Task:** Configure stored access policies
+**Domain:** Implement and manage storage
+**Skill:** Configure access to storage
+**Task:** Configure stored access policies
 
 You are an Azure administrator for a manufacturing organization. You are using shared access signature (SAS) to configure control over storage accounts.
 
@@ -717,7 +741,9 @@ References
 
 #### Configure Object Replication Between Storage Accounts
 
-**Exam Task:** Configure object replication
+**Domain:** Implement and manage storage
+**Skill:** Configure and manage storage accounts
+**Task:** Configure object replication
 
 You plan to configure object replication between storage accounts in two different regions. You need to ensure that Azure Storage features are configured to support object storage replication. You want to minimize the configuration changes that you make.
 
@@ -858,7 +884,9 @@ You had the logic completely reversed - change feed on the wrong end, and versio
 
 #### Azure Storage Redundancy Recommendation
 
-**Exam Task:** Configure Azure Storage redundancy
+**Domain:** Implement and manage storage
+**Skill:** Configure and manage storage accounts
+**Task:** Configure Azure Storage redundancy
 
 You are a Cloud engineer who works for a global organization with offices all around the world. The organization currently uses Azure to host its infrastructure, including file shares. It uses premium zone-redundant storage (ZRS) accounts for its existing file storage in Azure, as well as Azure Files workloads.
 
@@ -903,7 +931,9 @@ References
 
 #### Configure Lifecycle Management Policy for Azure Storage
 
-**Exam Task:** Configure blob lifecycle management
+**Domain:** Implement and manage storage
+**Skill:** Configure Azure Files and Azure Blob Storage
+**Task:** Configure blob lifecycle management
 
 Your company has an Azure Subscription with several resources deployed. The subscription is managed by a Cloud Service Provider. You plan to migrate archive data into Azure Blob Storage and you have used Azure Storage Explorer to complete the initial bulk upload.
 
@@ -1062,7 +1092,9 @@ Set-AzStorageBlobInventoryPolicy                # \u2717 Wrong!
 
 #### Identify Blob Write Operations That Create New Versions
 
-**Exam Task:** Configure blob versioning
+**Domain:** Implement and manage storage
+**Skill:** Configure Azure Files and Azure Blob Storage
+**Task:** Configure blob versioning
 
 Your organization is using Azure Blobs for storing data. You enable blob versioning for a storage account.
 
@@ -1125,7 +1157,9 @@ The four versioning operations are **Put Blob**, **Put Block List**, **Copy Blob
 
 #### Lifecycle Management Policy Configuration
 
-**Exam Task:** Configure blob lifecycle management
+**Domain:** Implement and manage storage
+**Skill:** Configure Azure Files and Azure Blob Storage
+**Task:** Configure blob lifecycle management
 
 Your company implements block blob storage in a general-purpose version 2 (GPv2) storage account and uses the following rule to help optimize storage costs:
 
@@ -1198,7 +1232,9 @@ For each of the following statements, select Yes if the statement is true. Other
 
 #### Delete Soft-Deleted File Share
 
-**Exam Task:** Configure snapshots and soft delete for Azure Files
+**Domain:** Implement and manage storage
+**Skill:** Configure Azure Files and Azure Blob Storage
+**Task:** Configure snapshots and soft delete for Azure Files
 
 Your company is using Azure Files for storing files. You are the Azure administrator in your company.
 
@@ -1250,7 +1286,9 @@ References
 
 #### Resource dependencies in Bicep
 
-**Exam Task:** Interpret an Azure Resource Manager template or a Bicep file
+**Domain:** Deploy and manage Azure compute resources
+**Skill:** Automate deployment of resources by using Azure Resource Manager (ARM) templates or Bicep files
+**Task:** Interpret an Azure Resource Manager template or a Bicep file
 
 You are an Azure Administrator for an eCommerce organization. You are deploying Azure resources and have created a Bicep file as shown below:
 
@@ -1313,7 +1351,9 @@ References
 
 #### Convert Array to Object
 
-**Exam Task:** Modify an existing Bicep file
+**Domain:** Deploy and manage Azure compute resources
+**Skill:** Automate deployment of resources by using Azure Resource Manager (ARM) templates or Bicep files
+**Task:** Modify an existing Bicep file
 
 You are an Azure administrator for a company. You are deploying Azure resources using Bicep and you want to use Lambda functions to handle an array.
 
@@ -1379,7 +1419,9 @@ References
 
 #### VM Resize Failure Cause
 
-**Exam Task:** Manage virtual machine sizes
+**Domain:** Deploy and manage Azure compute resources
+**Skill:** Create and configure virtual machines
+**Task:** Manage virtual machine sizes
 
 You have a Linux virtual machine (VM) named VM1 that runs in Azure. VM1 has the following properties:
 
@@ -1438,7 +1480,9 @@ When resizing a VM, Azure validates that all currently attached resources (data 
 
 #### Encrypt VM Disk With Key Vault
 
-**Exam Task:** Configure Azure Disk Encryption
+**Domain:** Deploy and manage Azure compute resources
+**Skill:** Create and configure virtual machines
+**Task:** Configure Azure Disk Encryption
 
 You have a subscription named SubscriptionA that hosts the following resources:
 
@@ -1522,7 +1566,9 @@ When encrypting a VM disk with Azure Key Vault, `Get-AzKeyVault` uses `-VaultNam
 
 #### Apply Change to VMSS OS and Data Disk Profile
 
-**Exam Task:** Deploy and configure an Azure Virtual Machine Scale Sets
+**Domain:** Deploy and manage Azure compute resources
+**Skill:** Create and configure virtual machines
+**Task:** Deploy and configure an Azure Virtual Machine Scale Sets
 
 You deploy a virtual machine scale set (VMSS) to support a critical application. The upgrade policy for the VMSS is set to Rolling.
 
@@ -1581,7 +1627,9 @@ For real-world scenarios, `Update-AzVmss` is the preferred cmdlet to update the 
 
 #### Configure Scaling Rules in Azure Container Apps
 
-**Exam Task:** Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps
+**Domain:** Deploy and manage Azure compute resources
+**Skill:** Provision and manage containers in the Azure portal
+**Task:** Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps
 
 You are an Azure Administrator for a company. Your company is using Azure Container Apps to run containerized applications. You are tasked with configuring scaling rules in Azure Container Apps.
 
@@ -1662,7 +1710,9 @@ The JSON defines an Azure Service Bus scaler with a `messageCount` threshold and
 
 #### Configure Azure App Service Plan for Website Hosting
 
-**Exam Task:** Provision an App Service plan
+**Domain:** Deploy and manage Azure compute resources
+**Skill:** Create and configure Azure App Service
+**Task:** Provision an App Service plan
 
 You have to provide a website hosting environment that meets the following scalability and security requirements:
 
@@ -1766,7 +1816,12 @@ On Azure exams, when you see:
 
 #### Prepare Azure App Service for Web App Republication
 
-**Exam Task:** Create an App Service · Configure deployment slots for an App Service
+**Domain:** Deploy and manage Azure compute resources
+**Skill:** Create and configure Azure App Service
+**Task:**
+
+- Create an App Service
+- Configure deployment slots for an App Service
 
 You are developing a new web app. The source code is located in an Azure DevOps Git repository. Before you move the web app into production, its functionality must be reviewed by your test users.
 
@@ -1848,7 +1903,12 @@ If a deployment-related command is available (like `Publish-AzWebApp`) and the s
 
 #### Resolve Azure App Service Pricing Tier for Runtime Requirements
 
-**Exam Task:** Provision an App Service plan · Configure scaling for an App Service plan
+**Domain:** Deploy and manage Azure compute resources
+**Skill:** Create and configure Azure App Service
+**Task:**
+
+- Provision an App Service plan
+- Configure scaling for an App Service plan
 
 You deploy an Azure web app named MyApp. MyApps runs in a Free pricing tier service plan named MyPlan. During testing, you discover that MyApp stops after 60 minutes and that it cannot be restarted until the next day.
 
@@ -1897,7 +1957,12 @@ To meet "run 8 hours each day," you need a plan where you **don't get stopped du
 
 #### Resolve Azure App Service Pricing Tier for Runtime Requirements
 
-**Exam Task:** Provision an App Service plan · Configure scaling for an App Service plan
+**Domain:** Deploy and manage Azure compute resources
+**Skill:** Create and configure Azure App Service
+**Task:**
+
+- Provision an App Service plan
+- Configure scaling for an App Service plan
 
 You deploy an Azure web app named MyApp. MyApp runs in a Free pricing tier service plan named MyPlan. During testing, you discover that MyApp stops after 60 minutes and that it cannot be restarted until the next day.
 
@@ -1986,7 +2051,12 @@ ACU/vCPU is a **relative CPU performance indicator**. Higher numbers mean **fast
 
 #### Resolve Azure App Service Pricing Tier for Runtime Requirements
 
-**Exam Task:** Provision an App Service plan · Configure scaling for an App Service plan
+**Domain:** Deploy and manage Azure compute resources
+**Skill:** Create and configure Azure App Service
+**Task:**
+
+- Provision an App Service plan
+- Configure scaling for an App Service plan
 
 You deploy an Azure web app named MyApp. MyApp runs in a Free pricing tier service plan named MyPlan. During testing, you discover that MyApp stops after 60 minutes and that it cannot be restarted until the next day.
 
@@ -2036,7 +2106,9 @@ Free/Shared App Service plans can stop apps when usage quotas are exceeded; movi
 
 #### Configure Private Link Service Source IP
 
-**Exam Task:** Configure private endpoints for Azure PaaS
+**Domain:** Implement and manage virtual networking
+**Skill:** Configure secure access to virtual networks
+**Task:** Configure private endpoints for Azure PaaS
 
 You are an Azure administrator for an e-commerce company. Your organization wants to access Azure SQL Database services and Azure-hosted customer-owned resources over a private endpoint in your virtual network (VNet).
 
@@ -2115,7 +2187,9 @@ Disabling privateLinkServiceNetworkPolicies is a per‑private‑IP (per Private
 
 #### Configure Standard Load Balancer Outbound Traffic and IP Allocation
 
-**Exam Task:** Configure an internal or public load balancer
+**Domain:** Implement and manage virtual networking
+**Skill:** Configure name resolution and load balancing
+**Task:** Configure an internal or public load balancer
 
 You deploy three Windows virtual machines (VMs) named VM01, VM02, and VM03 that host the front-end layer of a web application. You configure a Standard Load Balancer named LB01. VM01, VM02, and VM03 are configured as part of the backend pool for LB01. You configure a load balancing rule for Transmission Control Protocol (TCP) traffic only.
 
@@ -2181,7 +2255,9 @@ For each of the following statements, select Yes if the statement is true. Other
 
 #### Diagnose Internal Load Balancer Hairpin Traffic Failure
 
-**Exam Task:** Troubleshoot load balancing
+**Domain:** Implement and manage virtual networking
+**Skill:** Configure name resolution and load balancing
+**Task:** Troubleshoot load balancing
 
 You are an Azure administrator at an independent software vendor. Your company is using an Azure internal load balancer that is configured inside an Azure virtual network (VNet).
 
@@ -2267,7 +2343,9 @@ Azure **Internal Load Balancer does not support backend VMs accessing the ILB fr
 
 #### Configure DNS Records for App Service
 
-**Exam Task:** Configure Azure DNS
+**Domain:** Implement and manage virtual networking
+**Skill:** Configure name resolution and load balancing
+**Task:** Configure Azure DNS
 
 Your company plans to release a new web application called 'appilcations'. This application is deployed by using an App Service in Azure and will be available to users of the company1.com domain. You have already purchased the company1.com domain name.
 
@@ -2329,7 +2407,9 @@ References
 
 #### IMDS Load Balancer Metadata Error
 
-**Exam Task:** Troubleshoot load balancing
+**Domain:** Implement and manage virtual networking
+**Skill:** Configure name resolution and load balancing
+**Task:** Troubleshoot load balancing
 
 Your organization is using an Azure Load Balancer service. You are the Azure administrator in your organization.
 
@@ -2393,7 +2473,9 @@ References
 
 #### Configure Azure Monitor Alert for Database CPU Usage
 
-**Exam Task:** Set up alert rules, action groups, and alert processing rules in Azure Monitor
+**Domain:** Monitor and maintain Azure resources
+**Skill:** Monitor resources in Azure
+**Task:** Set up alert rules, action groups, and alert processing rules in Azure Monitor
 
 Your company has a line-of-business (LOB) application that uses Azure SQL Database for storing transactional information. Your company also has System Center Service Manager deployed.
 
@@ -2439,7 +2521,9 @@ For Azure Monitor alerts requiring multiple notification methods and ITSM integr
 
 #### Configure Azure Monitor Alert Notification Rate Limits
 
-**Exam Task:** Set up alert rules, action groups, and alert processing rules in Azure Monitor
+**Domain:** Monitor and maintain Azure resources
+**Skill:** Monitor resources in Azure
+**Task:** Set up alert rules, action groups, and alert processing rules in Azure Monitor
 
 Your company has an Azure Subscription and an Azure SQL Database. You configure an Azure Monitor alert rule named Alert1 that is triggered when the database CPU usage exceeds 70%. Alert1 fires approximately every minute.
 
@@ -2498,7 +2582,9 @@ Related resources:
 
 #### Enable Boot Diagnostics for Azure Virtual Machines
 
-**Exam Task:** Configure and interpret monitoring of virtual machines, storage accounts, and networks by using Azure Monitor Insights
+**Domain:** Monitor and maintain Azure resources
+**Skill:** Monitor resources in Azure
+**Task:** Configure and interpret monitoring of virtual machines, storage accounts, and networks by using Azure Monitor Insights
 
 You have two Azure Virtual Machines (VMs) and three storage accounts provisioned in an Azure subscription. The subscription configuration is shown in the exhibit.
 
@@ -2565,7 +2651,9 @@ Premium storage accounts and storage account v1 are **not supported**, regardles
 
 #### Diagnose Network Watcher Tool for Web Server Packet Flow
 
-**Exam Task:** Use Azure Network Watcher and Connection Monitor
+**Domain:** Monitor and maintain Azure resources
+**Skill:** Monitor resources in Azure
+**Task:** Use Azure Network Watcher and Connection Monitor
 
 Your company hosts its infrastructure in Azure. The infrastructure consists of virtual machines (VMs), storage (managed disks and Azure file shares) and multiple networks (VNets and subnets). The service desk is seeing an influx of support tickets that have been logged in the last 24 hours regarding intermittent connectivity issues to a web server. After some initial investigation, the support ticket has been escalated to you.
 
@@ -2642,7 +2730,9 @@ It does **not** answer: *“Can the VM actually accept this connection?”*
 
 #### Load Balancer Metrics Batch API
 
-**Exam Task:** Interpret metrics in Azure Monitor
+**Domain:** Monitor and maintain Azure resources
+**Skill:** Monitor resources in Azure
+**Task:** Interpret metrics in Azure Monitor
 
 Your company uses an Azure standard public load balancer. You are the Azure administrator at your company.
 
@@ -2714,7 +2804,9 @@ The metrics:getBatch API reduces throttling risk by batching multi-resource metr
 
 #### Capture SFTP Packets with Network Watcher
 
-**Exam Task:** Use Azure Network Watcher and Connection Monitor
+**Domain:** Monitor and maintain Azure resources
+**Skill:** Monitor resources in Azure
+**Task:** Use Azure Network Watcher and Connection Monitor
 
 You deploy several virtual machines (VMs) for different purposes. You deploy Network Watcher in the East US region.
 
@@ -2787,7 +2879,9 @@ References
 
 #### Storage Insights Overview
 
-**Exam Task:** Configure and interpret monitoring of virtual machines, storage accounts, and networks by using Azure Monitor Insights
+**Domain:** Monitor and maintain Azure resources
+**Skill:** Monitor resources in Azure
+**Task:** Configure and interpret monitoring of virtual machines, storage accounts, and networks by using Azure Monitor Insights
 
 You are an Azure administrator at a retail organization. Your organization uses 4,500 Azure storage accounts across two Azure subscriptions.
 
@@ -2848,7 +2942,9 @@ References
 
 #### Recover Configuration File from Azure VM Backup
 
-**Exam Task:** Perform backup and restore operations by using Azure Backup
+**Domain:** Monitor and maintain Azure resources
+**Skill:** Implement backup and recovery
+**Task:** Perform backup and restore operations by using Azure Backup
 
 You have two Azure virtual machines (VMs) named VM1 and VM2 running Windows Server 2019. The VMs are backed up by an Azure Recovery Services vault. A configuration file on VM1 was updated, and you need to restore it to a version from six days ago.
 
@@ -2918,7 +3014,9 @@ Azure Recovery Services vault overview
 
 #### Recover Azure VM from Deleted Backup
 
-**Exam Task:** Perform backup and restore operations by using Azure Backup
+**Domain:** Monitor and maintain Azure resources
+**Skill:** Implement backup and recovery
+**Task:** Perform backup and restore operations by using Azure Backup
 
 An Infrastructure-as-a-Service (IaaS) virtual machine (VM) named VM10 is backed up to an Azure Recovery Services vault. VM10 and all of its restore points are deleted by mistake.
 
@@ -2959,7 +3057,9 @@ For Azure IaaS VMs protected by a Recovery Services vault, **soft delete provide
 
 #### Retrieve the Catalog Identifier for Entitlement Management
 
-**Exam Task:** Manage identity and access lifecycle using Microsoft Entra ID Governance
+**Domain:** Manage Azure identities and governance
+**Skill:** Manage access to Azure resources
+**Task:** Manage identity and access lifecycle using Microsoft Entra ID Governance
 
 Your organization is using Microsoft Entra ID Governance. You are the Azure administrator in the organization.
 
@@ -3017,6 +3117,10 @@ In Microsoft Entra ID entitlement management, a **catalog** is the container tha
 
 #### Interpret Role Assignments
 
+**Domain:** Manage Azure identities and governance
+**Skill:** Manage access to Azure resources
+**Task:** Interpret access assignments
+
 You are tasked with assigning Azure role-based access control (Azure RBAC) roles to users in your company.
 
 You are trying to interpret access assignments for UserA. You want to validate the role assignments for UserA scoped to the groups of which UserA is a member.
@@ -3073,6 +3177,10 @@ You should not use the `--include-classic-administrators` parameter. You should 
 
 #### Azure Policy Effects Verification
 
+**Domain:** Manage Azure identities and governance
+**Skill:** Manage Azure subscriptions and governance
+**Task:** Implement and manage Azure Policy
+
 Your company requires all resources deployed in Azure to be assigned to a cost center.
 
 You use a tag named CostCenter to assign each resource to the correct cost center. This tag has a set of valid values assigned.
@@ -3127,6 +3235,10 @@ References
 
 #### Append Tag Using PowerShell
 
+**Domain:** Manage Azure identities and governance
+**Skill:** Manage Azure subscriptions and governance
+**Task:** Apply and manage tags on resources
+
 You use taxonomic tags to logically organize resources and to make billing reporting easier.
 
 You use Azure PowerShell to append an additional tag on a storage account named corptorage99. The code is as follows:
@@ -3180,6 +3292,10 @@ You should not refactor the code by using the Azure Command-Line Interface (CLI)
 ---
 
 #### Move Resources Between Resource Groups
+
+**Domain:** Manage Azure identities and governance
+**Skill:** Manage Azure subscriptions and governance
+**Task:** Manage resource groups
 
 You deploy an application in a resource group named App-RG01 in your Azure subscription.
 

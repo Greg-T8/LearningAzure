@@ -85,7 +85,7 @@ Task-level question counts from [Practice Questions](./practice-questions/README
 | Task | Qs |
 | :--- | -: |
 | Implement content moderation solutions | 0 |
-| Configure responsible AI insights, including content safety | 0 |
+| Configure responsible AI insights, including content safety | 1 |
 | Implement responsible AI, including content filters and blocklists | 0 |
 | Prevent harmful behavior, including prompt shields and harm detection | 0 |
 | Design a responsible AI governance framework | 0 |
@@ -112,7 +112,7 @@ Task-level question counts from [Practice Questions](./practice-questions/README
 | Provision an Azure OpenAI in Foundry Models resource | 0 |
 | Select and deploy an Azure OpenAI model | 0 |
 | Submit prompts to generate code and natural language responses | 0 |
-| Use the DALL-E model to generate images | 0 |
+| Use the DALL-E model to generate images | 1 |
 | Integrate Azure OpenAI into your own application | 0 |
 | Use large multimodal models in Azure OpenAI | 0 |
 
@@ -122,7 +122,7 @@ Task-level question counts from [Practice Questions](./practice-questions/README
 | :--- | -: |
 | Configure parameters to control generative behavior | 0 |
 | Configure model monitoring and diagnostic settings, including performance and resource consumption | 0 |
-| Optimize and manage resources for deployment, including scalability and foundational model updates | 0 |
+| Optimize and manage resources for deployment, including scalability and foundational model updates | 1 |
 | Enable tracing and collect feedback | 0 |
 | Implement model reflection | 0 |
 | Deploy containers for use on local and edge devices | 0 |
@@ -137,7 +137,7 @@ Task-level question counts from [Practice Questions](./practice-questions/README
 | Task | Qs |
 | :--- | -: |
 | Understand the role and use cases of an agent | 0 |
-| Configure the necessary resources to build an agent | 0 |
+| Configure the necessary resources to build an agent | 1 |
 | Create an agent with the Microsoft Foundry Agent Service | 0 |
 | Implement complex agents with Microsoft Agent Framework | 0 |
 | Implement complex workflows including orchestration for a multi-agent solution, multiple users, and autonomous capabilities | 0 |
@@ -182,7 +182,7 @@ Task-level question counts from [Practice Questions](./practice-questions/README
 | Task | Qs |
 | :--- | -: |
 | Extract key phrases and entities | 0 |
-| Determine sentiment of text | 0 |
+| Determine sentiment of text | 1 |
 | Detect the language used in text | 0 |
 | Detect personally identifiable information (PII) in text | 0 |
 | Translate text and documents by using the Azure Translator in Foundry Tools service | 0 |
@@ -196,7 +196,7 @@ Task-level question counts from [Practice Questions](./practice-questions/README
 | Improve text-to-speech by using Speech Synthesis Markup Language (SSML) | 0 |
 | Implement custom speech solutions with Azure Speech in Foundry Tools | 0 |
 | Implement intent and keyword recognition with Azure Speech in Foundry Tools | 0 |
-| Translate speech-to-speech and speech-to-text by using the Azure Speech in Foundry Tools service | 0 |
+| Translate speech-to-speech and speech-to-text by using the Azure Speech in Foundry Tools service | 1 |
 
 #### Implement custom language models
 
@@ -225,7 +225,7 @@ Task-level question counts from [Practice Questions](./practice-questions/README
 | Create data sources and indexers | 0 |
 | Implement custom skills and include them in a skillset | 0 |
 | Create and run an indexer | 0 |
-| Query an index, including syntax, sorting, filtering, and wildcards | 0 |
+| Query an index, including syntax, sorting, filtering, and wildcards | 1 |
 | Manage Knowledge Store projections, including file, object, and table projections | 0 |
 | Implement semantic and vector store solutions | 0 |
 
@@ -234,7 +234,7 @@ Task-level question counts from [Practice Questions](./practice-questions/README
 | Task | Qs |
 | :--- | -: |
 | Provision a Document Intelligence resource | 0 |
-| Use prebuilt models to extract data from documents | 0 |
+| Use prebuilt models to extract data from documents | 1 |
 | Implement a custom document intelligence model | 0 |
 | Train, test, and publish a custom document intelligence model | 0 |
 | Create a composed document intelligence model | 0 |
