@@ -39,7 +39,7 @@
 
 ---
 
-## Practice Exam Coverage
+## � Practice Exam Coverage
 
 Task-level question counts from [Practice Exams](./practice-exams/README.md). Tasks with **0** have no practice questions yet.
 

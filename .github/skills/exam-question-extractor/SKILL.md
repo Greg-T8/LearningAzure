@@ -57,6 +57,7 @@ Your **only** job is to reproduce the question exactly as stated with full fidel
 Include:
 
 - Title  
+- Exam Task  
 - Prompt  
 - Answer  
 - Screenshot Block  
@@ -73,18 +74,19 @@ Make a **single** edit that replaces the selected `<img>` line(s) with the fully
 
 1. From the attached screenshot image(s), extract all visible text.
 2. **Detect answer state:** Inspect the screenshot for signs that the question has already been submitted and graded — for example, a selected answer highlighted in green or red, a ✓ / ✗ icon, or an "Correct" / "Incorrect" banner. Mark the question as **answered** if any such indicator is present; otherwise mark it as **blank**.
-3. Identify question type:
+3. **Identify exam task(s):** Determine which AZ-104 exam task(s) the question tests. Use the official exam skills outline to select the most specific matching task(s). Format as a bold label followed by the task name(s).
+4. Identify question type:
    - Yes / No
    - Multiple Choice
    - Multiple Drop-Down
    - Drag-and-Drop Sequencing
    - Case Study (Solution Evaluation)
    - Drag-and-Drop Matching
-4. Format Title, Prompt, and Answer.
-5. Append Screenshot Block.
-6. Append Explanation Placeholder (see rule below).
-7. Append Related Lab Line.
-8. Replace **only** the selected `<img>` line(s) with the assembled output. Make exactly one edit. Do not touch any other part of the file.
+5. Format Title, Exam Task, Prompt, and Answer.
+6. Append Screenshot Block.
+7. Append Explanation Placeholder (see rule below).
+8. Append Related Lab Line.
+9. Replace **only** the selected `<img>` line(s) with the assembled output. Make exactly one edit. Do not touch any other part of the file.
 
 ### Explanation Block Rule
 
@@ -102,6 +104,22 @@ Create a concise exam-appropriate title (3–10 words).
 ```markdown
 #### <Title Extracted From Image>
 ```
+
+---
+
+### Exam Task
+
+Identify the relevant exam task(s) from the AZ-104 skills outline that the question tests. Place this line immediately after the title, before the prompt text.
+
+```markdown
+**Exam Task:** <exam task name(s)>
+```
+
+Rules:
+
+* Use the most specific task wording from the official exam skills outline (e.g., "Configure self-service password reset (SSPR)", not the broader skill area).
+* If a question maps to multiple tasks, separate them with " · " (space-dot-space), e.g., `**Exam Task:** Apply and manage tags on resources · Manage costs by using alerts, budgets, and Azure Advisor recommendations`.
+* Insert a blank line after the Exam Task line before the prompt text begins.
 
 ---
 
