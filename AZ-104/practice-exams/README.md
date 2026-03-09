@@ -59,6 +59,7 @@ Accounts for questions missed or unsure about in the practice exams.
     * [Recover Configuration File from Azure VM Backup](#recover-configuration-file-from-azure-vm-backup)
     * [Recover Azure VM from Deleted Backup](#recover-azure-vm-from-deleted-backup)
     * [Retrieve the Catalog Identifier for Entitlement Management](#retrieve-the-catalog-identifier-for-entitlement-management)
+    * [Interpret Role Assignments](#interpret-role-assignments)
 
 ---
 
@@ -3008,3 +3009,61 @@ In Microsoft Entra ID entitlement management, a **catalog** is the container tha
 * [Tutorial: Manage access to resources in Microsoft Entra entitlement management using Microsoft Graph PowerShell](https://learn.microsoft.com/en-us/powershell/microsoftgraph/tutorial-entitlement-management?view=graph-powershell-1.0)
 
 </details>
+
+---
+
+#### Interpret Role Assignments
+
+You are tasked with assigning Azure role-based access control (Azure RBAC) roles to users in your company.
+
+You are trying to interpret access assignments for UserA. You want to validate the role assignments for UserA scoped to the groups of which UserA is a member.
+
+You need to complete the Azure CLI command shown below.
+
+Which cmdlets should you use? To answer, complete the commands by selecting the correct parts from the drop-down menus.
+
+```bash
+az role assignment ___[1]___ ___[2]___ --assignee UserA@myorg.com\ \
+  --output json --query '[].{principalName:principalName, \
+  roleDefinitionName:roleDefinitionName, scope:scope}'
+```
+
+Drop-Down Options:
+
+<!-- Dropdown options not yet provided. Paste screenshots of each expanded drop-down to populate. -->
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-09-03-48-14.png' width=600>
+
+</details>
+
+<details open>
+<summary>💡 Click to expand explanation</summary>
+
+Azure role-based access control (Azure RBAC) is the authorization system you use to manage access to Azure resources. To determine what resources users, groups, service principals, or managed identities have access to, you need to list their role assignments. You could further adjust access control by updating the role assignments, or create new ones. In this scenario, you are using the Azure CLI to interpret access assignments for a user named UserA in your company. Additionally, you need to retrieve information on the extra assignments to the groups of which UserA is a member. You should complete the CLI command as follows:
+
+```bash
+az role assignment list --include-groups --assignee UserA@myorg.com \
+  --output json --query '[].{principalName:principalName, \
+  roleDefinitionName:roleDefinitionName, scope:scope}'
+```
+
+You should use the `list` command and the `--include-groups` parameter. The `list` command lists the role assignments for the <UserA@myorg.com> user. The parameter retrieves information on the extra assignments to the groups of which UserA is a member.
+
+You should not use the `create` command. You can use the `create` command when you want to create a new role assignment for a user, group, or service principal.
+
+You should not use the `list-changelogs` command. You should use the `list-changelogs` command when you want to retrieve and exhibit the changelogs for role assignments.
+
+You should not use the `update` command. You should use the `update` command when you want to update an existing role assignment for a user, group, or service principal.
+
+You should not use the `--all` parameter. You should use this parameter when you want to retrieve and display all assignments under the current subscription. It is turned off by default.
+
+You should not use the `--include-inherited` parameter. You should use this parameter when you want to retrieve and display all assignments including assignments applied on parent scopes.
+
+You should not use the `--include-classic-administrators` parameter. You should use this parameter when you want to retrieve and exhibit all default role assignments for subscription classic administrators, or co-admins.
+
+</details>
+
+---
