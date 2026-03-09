@@ -60,6 +60,7 @@ Accounts for questions missed or unsure about in the practice exams.
     * [Recover Azure VM from Deleted Backup](#recover-azure-vm-from-deleted-backup)
     * [Retrieve the Catalog Identifier for Entitlement Management](#retrieve-the-catalog-identifier-for-entitlement-management)
     * [Interpret Role Assignments](#interpret-role-assignments)
+    * [Azure Policy Effects Verification](#azure-policy-effects-verification)
 
 ---
 
@@ -3067,3 +3068,56 @@ You should not use the `--include-classic-administrators` parameter. You should 
 </details>
 
 ---
+
+#### Azure Policy Effects Verification
+
+Your company requires all resources deployed in Azure to be assigned to a cost center.
+
+You use a tag named CostCenter to assign each resource to the correct cost center. This tag has a set of valid values assigned.
+
+Some of the resources deployed in your subscription already have a value assigned to the CostCenter tag.
+
+You decide to deploy a subscription policy to verify that all resources in the subscription have a valid value assigned.
+
+For each of the following statements, select Yes if the statement is true. Otherwise, select No.
+
+| Statement | Yes | No |
+|----------|-----|----|
+| The Deny effect is evaluated first. | ☐ | ☐ |
+| The Append effect modifies the value of an existing field in a resource. | ☐ | ☐ |
+| The Audit effect will create a warning event in the activity log for non-compliant resources. | ☐ | ☐ |
+| The DeployIfNotExists effect is only evaluated if the request executed by the Resource Provider returns a success status code. | ☐ | ☐ |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-09-03-54-46.png' width=600>
+
+</details>
+
+<details open>
+<summary>💡 Click to expand explanation</summary>
+
+The Deny effect is not evaluated first. When a policy is evaluated, the Disabled effect is always evaluated first to decide whether the rule should be evaluated afterwards. The correct order of evaluation of the policy effects is: Disabled, Append, Deny and Audit.
+
+The Append effect does not modify the value of an existing field in a resource. The Append effect adds additional fields during the creation or update of a resource. If the field already exists in the resource and the values in the resource and the policy are different, then the policy acts as a deny and rejects the request.
+
+The Audit effect will create a warning event in the activity log for non-compliant resources. The audit effect is evaluated last, before the Resource Provider handles a create or update request. You typically use the audit effect when you want to track non-compliant resources.
+
+The DeployIfNotExists effect is only evaluated if the request executed by the Resource Provider returns a success status code. Once the effect has been evaluated, it is triggered if the resource does not exist or if the resource defined by ExistenceCondition is evaluated as false.
+
+<img src='.img/2026-03-09-03-56-52.png' width=600>
+
+<img src='.img/2026-03-09-03-58-31.png' width=600> 
+
+<img src='.img/2026-03-09-04-01-30.png' width=600>
+
+<img src='.img/2026-03-09-04-02-34.png' width=600>
+
+
+References
+
+* [Understand Azure Policy effects](https://learn.microsoft.com/en-us/azure/governance/policy/concepts/effect-basics)
+* [Azure Policy Samples](https://learn.microsoft.com/en-us/azure/governance/policy/samples/)
+
+</details>
