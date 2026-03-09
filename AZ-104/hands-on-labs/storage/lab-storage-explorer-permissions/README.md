@@ -25,7 +25,7 @@ You need to resolve the issue.
 1. **ReadOnly resource lock** - Prevents the `listKeys` operation required by Storage Explorer
 2. **Read role assigned** - Management plane access only, lacks data plane permissions to browse blob contents
 
-**Lab Validation:** These answers have been verified through hands-on lab testing and are consistent with the analysis documented in the [MeasureUp AZ-104 Assessment notes](/AZ-104/practice-exams/MU%20AZ-104%20Assessment/notes.md#wrong-answers-review).
+**Lab Validation:** These answers have been verified through hands-on lab testing and are consistent with the analysis documented in the [MeasureUp AZ-104 Assessment notes](/AZ-104/practice-questions/MU%20AZ-104%20Assessment/notes.md#wrong-answers-review).
 
 ## Scenario Analysis
 
@@ -326,4 +326,4 @@ To use Azure AD authentication instead of account keys:
 
 ## Related Practice Exam Questions
 
-- ▶ Practice Question: [Diagnose Storage Explorer Permission Errors](../../../practice-exams/README.md#diagnose-storage-explorer-permission-errors)
+- ▶ Practice Question: [Diagnose Storage Explorer Permission Errors](../../../practice-questions/README.md#diagnose-storage-explorer-permission-errors)

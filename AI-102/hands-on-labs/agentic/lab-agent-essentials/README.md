@@ -358,4 +358,4 @@ The capability host in a standard setup references connections to each of these 
 
 ### ▶ Related Practice Exam Questions
 
-- ▶ Practice Question: [Azure AI Agent Service File Upload Configuration Issues](../../../practice-exams/README.md#azure-ai-agent-service-file-upload-configuration-issues)
+- ▶ Practice Question: [Azure AI Agent Service File Upload Configuration Issues](../../../practice-questions/README.md#azure-ai-agent-service-file-upload-configuration-issues)

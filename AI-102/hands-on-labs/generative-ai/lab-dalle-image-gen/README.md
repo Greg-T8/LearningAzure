@@ -268,4 +268,4 @@ az group delete --name ai102-generative-ai-dalle-image-gen-tf --yes --no-wait
 
 ### ▶ Related Practice Exam Questions
 
-- ▶ Practice Question: [Azure OpenAI Image Generation and DALL-E Configuration](../../../practice-exams/README.md#azure-openai-image-generation-and-dall-e-configuration)
+- ▶ Practice Question: [Azure OpenAI Image Generation and DALL-E Configuration](../../../practice-questions/README.md#azure-openai-image-generation-and-dall-e-configuration)

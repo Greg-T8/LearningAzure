@@ -385,4 +385,4 @@ This statement is incorrect for two reasons:
 
 ## Related Practice Exam Questions
 
-- ▶ Practice Question: [Configure Lifecycle Management Policy for Azure Storage](../../../practice-exams/README.md#configure-lifecycle-management-policy-for-azure-storage)
+- ▶ Practice Question: [Configure Lifecycle Management Policy for Azure Storage](../../../practice-questions/README.md#configure-lifecycle-management-policy-for-azure-storage)

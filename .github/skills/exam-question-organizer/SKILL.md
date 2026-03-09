@@ -19,8 +19,8 @@ Reorganize a practice exam `README.md` to group questions under their correct ex
 
 | Exam   | Practice Exam File                 | Domain Reference                                       | Coverage Table                                              |
 | ------ | ---------------------------------- | ------------------------------------------------------ | ----------------------------------------------------------- |
-| AZ-104 | `AZ-104/practice-exams/README.md`  | `AZ-104/README.md` — Domain Quick Reference section    | `AZ-104/README.md` — Practice Exam Coverage section         |
-| AI-102 | `AI-102/practice-exams/README.md`  | `AI-102/README.md` — Domain Quick Reference section    | `AI-102/README.md` — Practice Exam Coverage section         |
+| AZ-104 | `AZ-104/practice-questions/README.md`  | `AZ-104/README.md` — Domain Quick Reference section    | `AZ-104/README.md` — Practice Exam Coverage section         |
+| AI-102 | `AI-102/practice-questions/README.md`  | `AI-102/README.md` — Domain Quick Reference section    | `AI-102/README.md` — Practice Exam Coverage section         |
 
 If no exam is specified, ask which exam to process.
 

@@ -352,4 +352,4 @@ The snippet only defines the scaler `type` and `metadata` — there is no `auth`
 
 ## Related Practice Exam Questions
 
-- ▶ Practice Question: [Configure Scaling Rules in Azure Container Apps](../../../practice-exams/README.md#configure-scaling-rules-in-azure-container-apps)
+- ▶ Practice Question: [Configure Scaling Rules in Azure Container Apps](../../../practice-questions/README.md#configure-scaling-rules-in-azure-container-apps)

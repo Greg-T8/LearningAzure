@@ -350,4 +350,4 @@ cd AZ-104/hands-on-labs/monitoring/lab-capture-sftp-packets/bicep
 
 ## Related Practice Exam Questions
 
-- ▶ Practice Question: [Capture SFTP Packets with Network Watcher](../../../practice-exams/README.md#capture-sftp-packets-with-network-watcher)
+- ▶ Practice Question: [Capture SFTP Packets with Network Watcher](../../../practice-questions/README.md#capture-sftp-packets-with-network-watcher)

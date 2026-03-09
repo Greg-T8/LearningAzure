@@ -322,4 +322,4 @@ In this lab, `nsg-backend` proves the behavior remains enforced for non-PLS reso
 
 ## Related Practice Exam Questions
 
-- ▶ Practice Question: [Configure Private Link Service Source IP](../../../practice-exams/README.md#configure-private-link-service-source-ip)
+- ▶ Practice Question: [Configure Private Link Service Source IP](../../../practice-questions/README.md#configure-private-link-service-source-ip)

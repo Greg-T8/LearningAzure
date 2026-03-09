@@ -297,4 +297,4 @@ To enable UDP outbound, you would need to either:
 
 ## Related Practice Exam Questions
 
-- ▶ Practice Question: [Configure Standard Load Balancer Outbound Traffic and IP Allocation](../../../practice-exams/README.md#configure-standard-load-balancer-outbound-traffic-and-ip-allocation)
+- ▶ Practice Question: [Configure Standard Load Balancer Outbound Traffic and IP Allocation](../../../practice-questions/README.md#configure-standard-load-balancer-outbound-traffic-and-ip-allocation)

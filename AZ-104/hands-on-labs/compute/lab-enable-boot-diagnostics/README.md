@@ -395,4 +395,4 @@ cd bicep
 
 ## Related Practice Exam Questions
 
-- ▶ Practice Question: [Enable Boot Diagnostics for Azure Virtual Machines](../../../practice-exams/README.md#enable-boot-diagnostics-for-azure-virtual-machines)
+- ▶ Practice Question: [Enable Boot Diagnostics for Azure Virtual Machines](../../../practice-questions/README.md#enable-boot-diagnostics-for-azure-virtual-machines)

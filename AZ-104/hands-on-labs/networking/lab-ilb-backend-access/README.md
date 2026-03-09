@@ -271,4 +271,4 @@ The scenario confirms this is not an NSG issue: the VMs are listed as healthy an
 
 ## Related Practice Exam Questions
 
-- ▶ Practice Question: [Diagnose Internal Load Balancer Hairpin Traffic Failure](../../../practice-exams/README.md#diagnose-internal-load-balancer-hairpin-traffic-failure)
+- ▶ Practice Question: [Diagnose Internal Load Balancer Hairpin Traffic Failure](../../../practice-questions/README.md#diagnose-internal-load-balancer-hairpin-traffic-failure)

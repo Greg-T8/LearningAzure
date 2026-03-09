@@ -1,11 +1,11 @@
 ---
-name: exam-question-explanation
+name: exam-question-explainer
 description: 'Explain Microsoft Azure exam question outcomes from screenshots. Use when asked to explain why an exam answer is correct or incorrect, or to analyze a practice exam question result.'
 user-invokable: true
 argument-hint: '[image or selection]'
 ---
 
-# Exam Question Explanation
+# Exam Question Explainer
 
 Explains the reasoning behind Microsoft Azure practice exam question outcomes from pasted screenshots.
 

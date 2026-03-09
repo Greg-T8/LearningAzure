@@ -193,4 +193,4 @@ The critical detail is that queries remain slow **even with no load** on the ser
 
 ### ▶ Related Practice Exam Questions
 
-- ▶ Practice Question: [Azure AI Search Query Performance Optimization](../../../practice-exams/README.md#azure-ai-search-query-performance-optimization)
+- ▶ Practice Question: [Azure AI Search Query Performance Optimization](../../../practice-questions/README.md#azure-ai-search-query-performance-optimization)

@@ -221,4 +221,4 @@ This lab covers the following AZ-104 exam objective areas:
 
 ### ▶ Related Practice Exam Questions
 
-- ▶ Practice Question: [Identify Blob Write Operations That Create New Versions](../../../practice-exams/README.md#identify-blob-write-operations-that-create-new-versions)
+- ▶ Practice Question: [Identify Blob Write Operations That Create New Versions](../../../practice-questions/README.md#identify-blob-write-operations-that-create-new-versions)

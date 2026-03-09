@@ -148,5 +148,5 @@ The Premium V3 tier is the correct answer because it is the most cost-effective 
 
 ## Related Practice Exam Questions
 
-- ▶ Practice Question: [Resolve Azure App Service Pricing Tier for Runtime Requirements](../../../practice-exams/README.md#resolve-azure-app-service-pricing-tier-for-runtime-requirements)
-- ▶ Practice Question: [Configure Azure App Service Plan for Website Hosting](../../../practice-exams/README.md#configure-azure-app-service-plan-for-website-hosting)
+- ▶ Practice Question: [Resolve Azure App Service Pricing Tier for Runtime Requirements](../../../practice-questions/README.md#resolve-azure-app-service-pricing-tier-for-runtime-requirements)
+- ▶ Practice Question: [Configure Azure App Service Plan for Website Hosting](../../../practice-questions/README.md#configure-azure-app-service-plan-for-website-hosting)

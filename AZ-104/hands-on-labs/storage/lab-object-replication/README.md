@@ -258,4 +258,4 @@ This lab covers the following AZ-104 exam objectives:
 
 ## Related Practice Exam Questions
 
-- ▶ Practice Question: [Configure Object Replication Between Storage Accounts](../../../practice-exams/README.md#configure-object-replication-between-storage-accounts)
+- ▶ Practice Question: [Configure Object Replication Between Storage Accounts](../../../practice-questions/README.md#configure-object-replication-between-storage-accounts)

@@ -24,8 +24,8 @@ Uses the `exam-question-organizer` skill to reorganize practice exam questions a
 
 ### Practice Exam Pages
 
-- `AZ-104/practice-exams/README.md`
-- `AI-102/practice-exams/README.md`
+- `AZ-104/practice-questions/README.md`
+- `AI-102/practice-questions/README.md`
 
 ### Exam READMEs (Coverage Tables)
 
@@ -46,7 +46,7 @@ Use the `exam-question-organizer` skill to reorganize practice exam questions by
 
 ### 3. Collapse Explanation Blocks
 
-Search all practice exam question README files (under `practice-exams/` folders and individual assessment MDs such as `Microsoft_Assessment_*.md`, `TutorialsDojo_*.md`, etc.) and ensure any `<details>` blocks that include the `open` attribute (e.g., `<details open>`) are changed to plain `<details>` so explanations are collapsed by default.
+Search all practice exam question README files (under `practice-questions/` folders and individual assessment MDs such as `Microsoft_Assessment_*.md`, `TutorialsDojo_*.md`, etc.) and ensure any `<details>` blocks that include the `open` attribute (e.g., `<details open>`) are changed to plain `<details>` so explanations are collapsed by default.
 
 ### 4. Remove Unused Images
 

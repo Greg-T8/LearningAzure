@@ -267,4 +267,4 @@ A serverless API deployment (Standard tier in Azure OpenAI) is billed pay-per-to
 
 ## Related Practice Exam Questions
 
-- ▶ Practice Question: [Serverless API Deployment](../../../practice-exams/README.md#serverless-api-deployment)
+- ▶ Practice Question: [Serverless API Deployment](../../../practice-questions/README.md#serverless-api-deployment)

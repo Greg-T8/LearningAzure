@@ -370,7 +370,7 @@ SAS tokens can be scoped to:
 
 ## Related Practice Exam Questions
 
-- ▶ Practice Question: [Configure AzCopy Authentication for Blob and File Storage](../../../practice-exams/README.md#configure-azcopy-authentication-for-blob-and-file-storage)
+- ▶ Practice Question: [Configure AzCopy Authentication for Blob and File Storage](../../../practice-questions/README.md#configure-azcopy-authentication-for-blob-and-file-storage)
 
 ---
 

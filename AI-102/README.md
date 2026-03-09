@@ -9,7 +9,7 @@
 | Priority | Modality         | My Notes                                                        | Status | Started | Completed | Days |
 | :------- | :--------------- | :-------------------------------------------------------------- | :----- | :------ | :-------- | :--- |
 | 1        | Hands-on Labs    | [Hands-on Labs](./hands-on-labs/README.md)                      | 🚧     | 2/10/26        |           |      |
-| 1        | Practice Exams   | [Practice Exams](./practice-exams/README.md)                    | 🚧     | 2/10/26        |           |      |
+| 1        | Practice Questions   | [Practice Questions](./practice-questions/README.md)                    | 🚧     | 2/10/26        |           |      |
 | 2        | Video            | [Video Courses](./video-courses/savill/README.md)               | 🕒     |         |           |      |
 | 3        | Microsoft Learn  | [Microsoft Learning Paths](./learning-paths/README.md)          | 🕒     |         |           |      |
 
@@ -41,7 +41,7 @@
 
 ## � Practice Exam Coverage
 
-Task-level question counts from [Practice Exams](./practice-exams/README.md). Tasks with **0** have no practice questions yet.
+Task-level question counts from [Practice Questions](./practice-questions/README.md). Tasks with **0** have no practice questions yet.
 
 <!-- BEGIN COVERAGE TABLE -->
 

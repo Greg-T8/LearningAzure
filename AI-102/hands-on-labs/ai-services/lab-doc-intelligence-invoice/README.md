@@ -388,4 +388,4 @@ The **Azure.AI.FormRecognizer** NuGet package provides the C# SDK for Azure AI D
 
 ## Related Practice Exam Questions
 
-- ▶ Practice Question: [Automating Invoice Processing with Azure AI Document Intelligence](../../../practice-exams/README.md#automating-invoice-processing-with-azure-ai-document-intelligence)
+- ▶ Practice Question: [Automating Invoice Processing with Azure AI Document Intelligence](../../../practice-questions/README.md#automating-invoice-processing-with-azure-ai-document-intelligence)

@@ -27,7 +27,7 @@ This is the highest-priority rule. It overrides all other formatting instincts.
 ### How to construct the edit
 
 - **`oldString`** = the exact `<img …>` line(s) currently selected — copy them verbatim, nothing more.
-- **`newString`** = the fully formatted question output (Title → Prompt → Answer → Screenshot Block → Explanation Placeholder → Related Lab Line).
+- **`newString`** = the fully formatted question output (Title → Exam Metadata → Prompt → Answer → Screenshot Block → Explanation Placeholder → Related Lab Line).
 - If the edit tool requires surrounding context lines for uniqueness, include the minimum necessary context but do **not** alter those context lines in `newString`.
 
 > **Self-check before submitting:** Does your edit change anything outside the selected `<img>` line(s)? If yes, discard and redo.
@@ -57,7 +57,7 @@ Your **only** job is to reproduce the question exactly as stated with full fidel
 Include:
 
 - Title  
-- Exam Task  
+- Exam Metadata (Domain / Skill / Task)  
 - Prompt  
 - Answer  
 - Screenshot Block  
@@ -74,7 +74,7 @@ Make a **single** edit that replaces the selected `<img>` line(s) with the fully
 
 1. From the attached screenshot image(s), extract all visible text.
 2. **Detect answer state:** Inspect the screenshot for signs that the question has already been submitted and graded — for example, a selected answer highlighted in green or red, a ✓ / ✗ icon, or an "Correct" / "Incorrect" banner. Mark the question as **answered** if any such indicator is present; otherwise mark it as **blank**.
-3. **Identify exam task(s):** Determine which AZ-104 exam task(s) the question tests. Use the official exam skills outline to select the most specific matching task(s). Format as a bold label followed by the task name(s).
+3. **Identify exam metadata:** Determine the practice-exam file's parent exam (e.g., AZ-104, AI-102, AI-900). Read the corresponding exam README (e.g., `AZ-104/README.md`) to locate the domain/skill/task hierarchy. Match the question to the most specific domain, skill, and task(s) using best-effort reasoning.
 4. Identify question type:
    - Yes / No
    - Multiple Choice
@@ -82,7 +82,7 @@ Make a **single** edit that replaces the selected `<img>` line(s) with the fully
    - Drag-and-Drop Sequencing
    - Case Study (Solution Evaluation)
    - Drag-and-Drop Matching
-5. Format Title, Exam Task, Prompt, and Answer.
+5. Format Title, Exam Metadata, Prompt, and Answer.
 6. Append Screenshot Block.
 7. Append Explanation Placeholder (see rule below).
 8. Append Related Lab Line.
@@ -91,7 +91,7 @@ Make a **single** edit that replaces the selected `<img>` line(s) with the fully
 ### Explanation Block Rule
 
 - If the question is **blank** (no answer selected), append the empty explanation placeholder.
-- If the question is **answered** (correct or incorrect indicator visible), invoke the **exam-question-explanation** skill using the same screenshot(s) to generate the explanation, then insert that explanation inside the `<details>` block instead of leaving it empty.
+- If the question is **answered** (correct or incorrect indicator visible), invoke the **exam-question-explainer** skill using the same screenshot(s) to generate the explanation, then insert that explanation inside the `<details>` block instead of leaving it empty.
 
 ---
 
@@ -107,19 +107,36 @@ Create a concise exam-appropriate title (3–10 words).
 
 ---
 
-### Exam Task
+### Exam Metadata
 
-Identify the relevant exam task(s) from the AZ-104 skills outline that the question tests. Place this line immediately after the title, before the prompt text.
+Identify the question's domain, skill, and task(s) from the exam's README coverage table. Place this block immediately after the title, before the prompt text.
 
 ```markdown
-**Exam Task:** <exam task name(s)>
+**Domain:** <domain name (omit weight)>
+**Skill:** <skill name>
+**Task:**
+- <task 1>
+- <task 2>
 ```
 
 Rules:
 
-* Use the most specific task wording from the official exam skills outline (e.g., "Configure self-service password reset (SSPR)", not the broader skill area).
-* If a question maps to multiple tasks, separate them with " · " (space-dot-space), e.g., `**Exam Task:** Apply and manage tags on resources · Manage costs by using alerts, budgets, and Azure Advisor recommendations`.
-* Insert a blank line after the Exam Task line before the prompt text begins.
+* **Source of truth:** Read the exam's README (e.g., `AZ-104/README.md`) and use its domain → skill → task hierarchy. Domain names are the `### Domain N: …` headings (omit the weight percentage). Skill names are the `####` sub-headings. Tasks are the table rows under each skill.
+* Use exact wording from the README for domain and skill names.
+* For tasks, use the most specific task wording. Apply best-effort reasoning when the question spans topics — pick the closest match(es).
+* If a question maps to a single task, use a single bullet: `- <task>`.
+* If a question maps to multiple tasks (even across different skills), list each on its own bullet line.
+* Insert a blank line after the metadata block before the prompt text begins.
+
+Example:
+
+```markdown
+**Domain:** Manage Azure Identities and Governance
+**Skill:** Manage Azure subscriptions and governance
+**Task:**
+- Apply and manage tags on resources
+- Manage costs by using alerts, budgets, and Azure Advisor recommendations
+```
 
 ---
 
@@ -379,7 +396,7 @@ Rules:
 
 **Blank questions:** Leave the block completely empty (no content between the tags).
 
-**Answered questions:** Invoke the **exam-question-explanation** skill with the same screenshot(s) and insert its output between the opening and closing tags. Do not leave the block empty when an answer state is detected.
+**Answered questions:** Invoke the **exam-question-explainer** skill with the same screenshot(s) and insert its output between the opening and closing tags. Do not leave the block empty when an answer state is detected.
 
 ---
 

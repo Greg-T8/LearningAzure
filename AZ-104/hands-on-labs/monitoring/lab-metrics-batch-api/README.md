@@ -284,4 +284,4 @@ terraform destroy
 
 ## Related Practice Exam Questions
 
-- ▶ Practice Question: [Load Balancer Metrics Batch API](../../../practice-exams/README.md#load-balancer-metrics-batch-api)
+- ▶ Practice Question: [Load Balancer Metrics Batch API](../../../practice-questions/README.md#load-balancer-metrics-batch-api)

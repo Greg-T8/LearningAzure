@@ -185,4 +185,4 @@ The exam question omits `New-AzWebApp` from the options, but in practice you **m
 
 ## Related Practice Exam Questions
 
-- ▶ Practice Question: [Prepare Azure App Service for Web App Republication](../../../practice-exams/README.md#prepare-azure-app-service-for-web-app-republication)
+- ▶ Practice Question: [Prepare Azure App Service for Web App Republication](../../../practice-questions/README.md#prepare-azure-app-service-for-web-app-republication)

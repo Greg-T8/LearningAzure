@@ -319,4 +319,4 @@ Set-AzVMDiskEncryptionExtension -ResourceGroupName $vmRG `
 
 ## Related Practice Exam Questions
 
-- ▶ Practice Question: [Encrypt VM Disk With Key Vault](../../../practice-exams/README.md#encrypt-vm-disk-with-key-vault)
+- ▶ Practice Question: [Encrypt VM Disk With Key Vault](../../../practice-questions/README.md#encrypt-vm-disk-with-key-vault)

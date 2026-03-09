@@ -332,5 +332,5 @@ Azure Backup's **file-level recovery** (also called Item Level Recovery or ILR) 
 
 ## Related Practice Exam Questions
 
-- ▶ Practice Question: [Recover Configuration File from Azure VM Backup](../../../practice-exams/README.md#recover-configuration-file-from-azure-vm-backup)
-- ▶ Practice Question: [Recover Azure VM from Deleted Backup](../../../practice-exams/README.md#recover-azure-vm-from-deleted-backup)
+- ▶ Practice Question: [Recover Configuration File from Azure VM Backup](../../../practice-questions/README.md#recover-configuration-file-from-azure-vm-backup)
+- ▶ Practice Question: [Recover Azure VM from Deleted Backup](../../../practice-questions/README.md#recover-azure-vm-from-deleted-backup)
