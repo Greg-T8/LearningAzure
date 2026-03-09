@@ -18,7 +18,7 @@ You are the **Lab Designer**. Your sole deliverable is the complete **Lab README
 
 ## Skills
 
-- **`architecture-design`** — Procedures for architecture summaries, Mermaid diagrams, module breakdowns, and file trees.
+- **`lab-architecture-design`** — Procedures for architecture summaries, Mermaid diagrams, module breakdowns, and file trees.
 - **`lab-readme-authoring`** — Procedures for generating README content per section.
 - **`mermaid-styling`** — Base theme, class definitions, and visual hierarchy rules for all lab architecture diagrams.
 
@@ -51,9 +51,9 @@ Generate the complete Lab README using the `lab-readme-authoring` skill procedur
 Follow `lab-readme-authoring` R-140 for per-section content guidelines. Key requirements:
 
 - **Section 1 (Exam Question):** Copy the exam question **verbatim** from the intake file (everything before `## Phase 1 — Metadata Output`). Preserve the Lab-Intake format exactly — H3 title, italic question type, scenario text, lettered options, answer tables/blanks. The only additions are the `## Exam Question` heading and `> **Exam**: [EXAM] — [Domain]` context line above the copied block. Do **not** restructure or paraphrase. Do **not** reveal the correct answer.
-- **Section 2 (Solution Architecture):** 2–4 sentence description. Procedure: `architecture-design` R-110.
-- **Section 3 (Architecture Diagram):** Mermaid diagram per `shared-contract` R-013. Styling per `mermaid-styling` skill (M-001 base theme + M-002/M-003 class definitions). Procedure: `architecture-design` R-111.
-- **Section 5 (Lab Structure):** File tree per `shared-contract` R-010. Procedure: `architecture-design` R-113.
+- **Section 2 (Solution Architecture):** 2–4 sentence description. Procedure: `lab-architecture-design` R-110.
+- **Section 3 (Architecture Diagram):** Mermaid diagram per `shared-contract` R-013. Styling per `mermaid-styling` skill (M-001 base theme + M-002/M-003 class definitions). Procedure: `lab-architecture-design` R-111.
+- **Section 5 (Lab Structure):** File tree per `shared-contract` R-010. Procedure: `lab-architecture-design` R-113.
 - **Section 10 (Scenario Analysis):** Reveal correct answer(s) with reasoning. Explain why each incorrect option is wrong. This is the **only** section where the correct answer appears.
 
 ### Naming and Governance
@@ -72,7 +72,7 @@ Apply throughout the README content:
 
 ### Module Breakdown
 
-When the file tree includes modules, apply `architecture-design` R-112:
+When the file tree includes modules, apply `lab-architecture-design` R-112:
 
 - Group by domain concern, one module per group
 - Plan `common_tags` / `commonTags` passthrough

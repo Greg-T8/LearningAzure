@@ -17,8 +17,8 @@ Terraform-specific code generation procedures. All cross-cutting rules (naming, 
 
 ## Starter Templates
 
-Located in `azure-lab-governance` skill (see R-160):
-`.github/skills/azure-lab-governance/templates/terraform-module.stub/`
+Located in `lab-azure-governance` skill (see R-160):
+`.github/skills/lab-azure-governance/templates/terraform-module.stub/`
 
 Files: `main.tf`, `variables.tf`, `outputs.tf`, `providers.tf`, `terraform.tfvars`
 
@@ -130,7 +130,7 @@ resource "azurerm_storage_container" "example" {
 
 Generate a PowerShell script in `validation/` that:
 
-1. Sources `Confirm-LabSubscription` from the `azure-lab-governance` skill (see R-161).
+1. Sources `Confirm-LabSubscription` from the `lab-azure-governance` skill (see R-161).
 2. Validates deployed resources exist (using `Get-AzResource` or `az resource list`).
 3. Tests key functionality (endpoints, connectivity).
 4. Uses the `$Main` / `$Helpers` script block pattern.

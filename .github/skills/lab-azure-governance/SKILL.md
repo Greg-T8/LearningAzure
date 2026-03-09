@@ -1,5 +1,5 @@
 ---
-name: azure-lab-governance
+name: lab-azure-governance
 description: Template and script inventory for Azure hands-on labs. All cross-cutting rules are in the shared-contract skill.
 user-invokable: false
 ---
@@ -16,7 +16,7 @@ For the full Azure governance policy document, see `Governance-Lab.md` at the wo
 
 ### Terraform Starter
 
-Path: `.github/skills/azure-lab-governance/templates/terraform-module.stub/`
+Path: `.github/skills/lab-azure-governance/templates/terraform-module.stub/`
 
 | File              | Contents                                    |
 | ----------------- | ------------------------------------------- |
@@ -28,7 +28,7 @@ Path: `.github/skills/azure-lab-governance/templates/terraform-module.stub/`
 
 ### Bicep Starter
 
-Path: `.github/skills/azure-lab-governance/templates/bicep-module.stub/`
+Path: `.github/skills/lab-azure-governance/templates/bicep-module.stub/`
 
 | File              | Contents                                     |
 | ----------------- | -------------------------------------------- |
@@ -37,7 +37,7 @@ Path: `.github/skills/azure-lab-governance/templates/bicep-module.stub/`
 
 ### README Template
 
-Path: `.github/skills/azure-lab-governance/templates/README.template.md`
+Path: `.github/skills/lab-azure-governance/templates/README.template.md`
 
 14-section skeleton matching `shared-contract` R-011.
 
@@ -47,7 +47,7 @@ Path: `.github/skills/azure-lab-governance/templates/README.template.md`
 
 ### Confirm-LabSubscription.ps1
 
-Path: `.github/skills/azure-lab-governance/scripts/Confirm-LabSubscription.ps1`
+Path: `.github/skills/lab-azure-governance/scripts/Confirm-LabSubscription.ps1`
 
 Pre-deployment guardrail that validates the active Azure subscription matches the lab subscription (`shared-contract` R-020).
 

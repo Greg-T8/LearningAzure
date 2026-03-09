@@ -36,7 +36,7 @@ Copilot decides to use a skill based on the **skill’s `description`**. When re
 1. **Remove** `skills:` from your `.agent.md` frontmatter.
 2. Put your skill under a supported location, e.g.:
 
-   * `.github/skills/azure-lab-governance/SKILL.md` ([Visual Studio Code][3])
+   * `.github/skills/lab-azure-governance/SKILL.md` ([Visual Studio Code][3])
 3. If you insist on keeping a nonstandard `skills/` folder at repo root, add it via `chat.agentSkillsLocations` (VS Code supports adding extra search locations). ([Visual Studio Code][3])
 4. Make sure the skill frontmatter has at least:
 
@@ -63,7 +63,7 @@ In `Lab-Orchestrator.agent.md`, change frontmatter from:
 tools:
   - agent
 skills:
-  - azure-lab-governance
+  - lab-azure-governance
 ```
 
 to:

@@ -18,7 +18,7 @@ Procedures for generating README content for Azure hands-on labs. Section order 
 
 ## README Template
 
-Starting template: `.github/skills/azure-lab-governance/templates/README.template.md` (see `azure-lab-governance` R-160).
+Starting template: `.github/skills/lab-azure-governance/templates/README.template.md` (see `lab-azure-governance` R-160).
 
 ---
 
@@ -160,7 +160,7 @@ Section order: see `shared-contract` R-011.
 
 ## R-141: Template Reference
 
-Starting template: `.github/skills/azure-lab-governance/templates/README.template.md`
+Starting template: `.github/skills/lab-azure-governance/templates/README.template.md`
 
 ---
 

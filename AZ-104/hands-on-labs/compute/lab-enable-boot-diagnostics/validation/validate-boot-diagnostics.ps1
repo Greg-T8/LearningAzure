@@ -34,7 +34,7 @@ $Vm2Name = 'vm-boot-2'
 $Storage1Name = 'staz104boot1'
 $Storage2Name = 'staz104boot2'
 $Storage3Name = 'staz104boot3'
-$ConfirmSubscriptionScript = Join-Path -Path $PSScriptRoot -ChildPath '..\..\..\..\..\.github\skills\azure-lab-governance\scripts\Confirm-LabSubscription.ps1'
+$ConfirmSubscriptionScript = Join-Path -Path $PSScriptRoot -ChildPath '..\..\..\..\..\.\.github\skills\lab-azure-governance\scripts\Confirm-LabSubscription.ps1'
 
 $Main = {
     # Load helper functions for validation tasks.

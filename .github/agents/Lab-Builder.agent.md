@@ -26,7 +26,7 @@ Load the skill matching the deployment method:
 
 Also reference:
 
-- **`azure-lab-governance`** — Template and script file inventory (starter files, see R-160/R-161).
+- **`lab-azure-governance`** — Template and script file inventory (starter files, see R-160/R-161).
 
 ---
 
@@ -91,7 +91,7 @@ Generate all code files following:
 Generate a PowerShell validation script following:
 
 - `terraform-scaffolding` R-128 or `bicep-scaffolding` R-138 (depending on method)
-- Reference `Confirm-LabSubscription.ps1` from `azure-lab-governance` skill R-161
+- Reference `Confirm-LabSubscription.ps1` from `lab-azure-governance` skill R-161
 
 ---
 

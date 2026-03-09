@@ -13,7 +13,7 @@ $VmName = 'vm-01'
 $NetworkWatcherRegion = 'eastus'
 $Main = {
     . $Helpers
-    $confirmScriptPath = Join-Path $PSScriptRoot '..\..\..\..\..\.github\skills\azure-lab-governance\scripts\Confirm-LabSubscription.ps1'
+$confirmScriptPath = Join-Path $PSScriptRoot '..\..\..\..\..\.\.github\skills\lab-azure-governance\scripts\Confirm-LabSubscription.ps1'
     if (-not (Test-Path $confirmScriptPath)) {
         Write-Error "Confirm-LabSubscription script not found: $confirmScriptPath"
         exit 1

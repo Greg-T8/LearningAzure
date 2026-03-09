@@ -17,8 +17,8 @@ Bicep-specific code generation procedures. All cross-cutting rules (naming, tags
 
 ## Starter Templates
 
-Located in `azure-lab-governance` skill (see R-160):
-`.github/skills/azure-lab-governance/templates/bicep-module.stub/`
+Located in `lab-azure-governance` skill (see R-160):
+`.github/skills/lab-azure-governance/templates/bicep-module.stub/`
 
 Files: `main.bicep`, `main.bicepparam`
 
@@ -114,7 +114,7 @@ See `shared-contract` R-016 for the resource table and Bicep disable pattern. Ap
 
 Generate a PowerShell script in `validation/` that:
 
-1. Sources `Confirm-LabSubscription` from the `azure-lab-governance` skill (see R-161).
+1. Sources `Confirm-LabSubscription` from the `lab-azure-governance` skill (see R-161).
 2. Validates deployed resources exist.
 3. Tests key functionality.
 4. Uses the `$Main` / `$Helpers` script block pattern.

@@ -40,7 +40,7 @@ $Main = {
 $Helpers = {
     function Confirm-Subscription {
         # Run the shared subscription guardrail script for the lab subscription.
-        $subscriptionScriptPath = Join-Path -Path $PSScriptRoot -ChildPath "../../../../../.github/skills/azure-lab-governance/scripts/Confirm-LabSubscription.ps1"
+        $subscriptionScriptPath = Join-Path -Path $PSScriptRoot -ChildPath "../../../../../.github/skills/lab-azure-governance/scripts/Confirm-LabSubscription.ps1"
 
         if (-not (Test-Path -Path $subscriptionScriptPath)) {
             throw "Confirm-LabSubscription script was not found at '$subscriptionScriptPath'."

@@ -1,5 +1,5 @@
 ---
-name: architecture-design
+name: lab-architecture-design
 description: Procedures for producing architecture summaries, Mermaid diagrams, module breakdowns, and file trees from extracted metadata.
 ---
 

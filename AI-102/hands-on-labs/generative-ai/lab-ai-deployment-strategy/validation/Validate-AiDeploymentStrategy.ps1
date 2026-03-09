@@ -41,7 +41,7 @@ $Helpers = {
     function Confirm-LabSubscriptionContext {
         # Run the shared subscription guardrail before validation checks.
         $repositoryRoot = Resolve-Path -Path (Join-Path -Path $PSScriptRoot -ChildPath '..\..\..\..\..')
-        $confirmScriptPath = Join-Path -Path $repositoryRoot -ChildPath '.github\skills\azure-lab-governance\scripts\Confirm-LabSubscription.ps1'
+        $confirmScriptPath = Join-Path -Path $repositoryRoot -ChildPath '.github\skills\lab-azure-governance\scripts\Confirm-LabSubscription.ps1'
 
         if (-not (Test-Path -Path $confirmScriptPath)) {
             throw "Required script not found: $confirmScriptPath"
