@@ -3146,7 +3146,7 @@ Drop-Down Options:
 
 </details>
 
-<details open>
+<details>
 <summary>💡 Click to expand explanation</summary>
 
 Azure role-based access control (Azure RBAC) is the authorization system you use to manage access to Azure resources. To determine what resources users, groups, service principals, or managed identities have access to, you need to list their role assignments. You could further adjust access control by updating the role assignments, or create new ones. In this scenario, you are using the Azure CLI to interpret access assignments for a user named UserA in your company. Additionally, you need to retrieve information on the extra assignments to the groups of which UserA is a member. You should complete the CLI command as follows:
@@ -3205,7 +3205,7 @@ For each of the following statements, select Yes if the statement is true. Other
 
 </details>
 
-<details open>
+<details>
 <summary>💡 Click to expand explanation</summary>
 
 The Deny effect is not evaluated first. When a policy is evaluated, the Disabled effect is always evaluated first to decide whether the rule should be evaluated afterwards. The correct order of evaluation of the policy effects is: Disabled, Append, Deny and Audit.
@@ -3266,7 +3266,7 @@ D. Refactor the code by using the Azure Command-Line Interface (CLI).
 
 </details>
 
-<details open>
+<details>
 <summary>💡 Click to expand explanation</summary>
 
 You should edit the script to call the Add() method after getting the resource to append the new tag as shown in the second line of this refactored Azure PowerShell code:
@@ -3322,7 +3322,7 @@ You need to move all resources in App-RG01 to a new resource group named App-RG0
 
 </details>
 
-<details open>
+<details>
 <summary>💡 Click to expand explanation</summary>
 
 You need to delete the Secure Sockets Layer (SSL) certificate from each App Service before moving it to the new resource group. You cannot move an App Service with an SSL certificate configured since in our use-case scenario, you are using the free App Service managed Secure Sockets Layer (SSL) certificate. You need to delete the certificate first, move the App Service, and then upload the certificate again.
