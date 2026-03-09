@@ -15,14 +15,55 @@ Reorganize a practice exam `README.md` to group questions under their correct ex
 - Classifying exam questions into domain → skill → task hierarchy
 - Updating the Practice Exam Coverage table after questions are added or removed
 
+## Prerequisites
+
+Every question block **must** already have `**Domain:**`, `**Skill:**`, and `**Task:**` metadata lines immediately after its `####` heading. These metadata lines are the single source of truth for classification — the script does not infer classification from question content.
+
+If questions are missing metadata, add the metadata manually before running the organizer. Use the exam README's coverage table to find the correct domain, skill, and task values.
+
 ## Target Files
 
-| Exam   | Practice Exam File                 | Domain Reference                                       | Coverage Table                                              |
-| ------ | ---------------------------------- | ------------------------------------------------------ | ----------------------------------------------------------- |
-| AZ-104 | `AZ-104/practice-questions/README.md`  | `AZ-104/README.md` — Domain Quick Reference section    | `AZ-104/README.md` — Practice Exam Coverage section         |
-| AI-102 | `AI-102/practice-questions/README.md`  | `AI-102/README.md` — Domain Quick Reference section    | `AI-102/README.md` — Practice Exam Coverage section         |
+| Exam   | Practice Exam File                     | Domain Reference                                    | Coverage Table                                      |
+| ------ | -------------------------------------- | --------------------------------------------------- | --------------------------------------------------- |
+| AZ-104 | `AZ-104/practice-questions/README.md`  | `AZ-104/README.md` — Practice Exam Coverage section | `AZ-104/README.md` — Practice Exam Coverage section |
+| AI-102 | `AI-102/practice-questions/README.md`  | `AI-102/README.md` — Practice Exam Coverage section | `AI-102/README.md` — Practice Exam Coverage section |
 
 If no exam is specified, ask which exam to process.
+
+## Script
+
+The reorganizer is implemented as a deterministic PowerShell script:
+
+```
+.assets/scripts/Invoke-PracticeExamReorganizer.ps1
+```
+
+### Usage
+
+```powershell
+# Preview changes without modifying files
+.assets/scripts/Invoke-PracticeExamReorganizer.ps1 -ExamName AZ-104 -WhatIf -Verbose
+
+# Execute reorganization
+.assets/scripts/Invoke-PracticeExamReorganizer.ps1 -ExamName AZ-104 -Verbose
+```
+
+### What the Script Does
+
+1. **Loads domain structure** — Parses the exam README's coverage table (`<!-- BEGIN COVERAGE TABLE -->` to `<!-- END COVERAGE TABLE -->`) to extract the canonical domain → skill → task ordering.
+2. **Parses question blocks** — Extracts every `####` question block with its `**Domain:**`, `**Skill:**`, and `**Task:**` metadata. Preserves full body content exactly (question text, answer options, `<details>` blocks, `▶ Related Lab:` links).
+3. **Sorts by canonical order** — Orders questions by domain index, then skill index (from the exam README), preserving relative order within each skill.
+4. **Regenerates file** — Writes the reorganized file with proper `#`/`##`/`###`/`####` heading hierarchy, nested TOC with anchor links (including GitHub-style `-1`, `-2` dedup for duplicates), and `---` separators between questions.
+5. **Updates coverage table** — Counts questions per task from metadata and updates the Qs column in the exam README's coverage table.
+6. **Verifies** — Confirms question count matches, all metadata is present, and reports any gaps or unrecognized domain/skill values.
+
+### Warnings
+
+The script emits warnings for:
+
+- **Unrecognized domain/skill** — When a question's `**Skill:**` value does not match any skill in the exam README's coverage table. These questions sort to the end of their domain group. Fix the metadata to match the exact wording from the exam README.
+- **Metadata gaps** — When questions are missing `**Domain:**`, `**Skill:**`, or `**Task:**` lines. Add the missing metadata before re-running.
+- **Count mismatch** — When the number of questions written differs from the number parsed. This indicates a parsing bug.
 
 ## Output Structure
 
@@ -31,61 +72,44 @@ If no exam is specified, ask which exam to process.
 | Element    | Heading | Notes                                                    |
 | ---------- | ------- | -------------------------------------------------------- |
 | Page title | `#`     | `# Practice Exam Questions - <EXAM>` (single H1)        |
-| Domain     | `##`    | Matches the domain name from the exam README             |
-| Skill      | `###`   | Matches the skill name from the exam README              |
+| Domain     | `##`    | Matches the domain name from the question metadata       |
+| Skill      | `###`   | Matches the skill name from the question metadata        |
 | Question   | `####`  | Existing question title — preserved exactly              |
 
-A single `#` page title satisfies markdown linters (one H1 per file). Domains at `##` appear as top-level entries in the GitHub sidebar TOC with skills nested beneath them.
+### Question Metadata Format
 
-### Example
+Immediately after each `####` question heading (separated by a blank line):
 
-```markdown
-# Practice Exam Questions - AZ-104
-
-* [Manage Azure identities and governance](#manage-azure-identities-and-governance)
-  * [Manage Microsoft Entra users and groups](#manage-microsoft-entra-users-and-groups)
-    * [Configure Microsoft Entra SSPR For Specific Users](#configure-microsoft-entra-sspr-for-specific-users)
-
----
-
-## Manage Azure identities and governance
-
-### Manage Microsoft Entra users and groups
-
-#### Configure Microsoft Entra SSPR For Specific Users
-
-**Exam Task:** Configure self-service password reset (SSPR)
-
-You are asked to configure Self-Service Password Reset (SSPR)…
-```
-
-### Exam Task Metadata
-
-Immediately after each `####` question heading (separated by a blank line), insert:
+**Single task:**
 
 ```markdown
-**Exam Task:** Task description
+**Domain:** <domain name>
+**Skill:** <skill name>
+**Task:** <task description>
 ```
 
-If a question maps to multiple tasks, join them with ` · ` (space-middle-dot-space):
+**Multiple tasks:**
 
 ```markdown
-**Exam Task:** Apply and manage tags on resources · Manage costs by using alerts, budgets, and Azure Advisor recommendations
+**Domain:** <domain name>
+**Skill:** <skill name>
+**Task:**
+
+- <task description 1>
+- <task description 2>
 ```
 
-Task descriptions **must match the exact wording** from the exam README's Domain Quick Reference section.
+Task descriptions **must match the exact wording** from the exam README's coverage table.
 
 ### Table of Contents
 
-After the page title, generate a nested bullet-point TOC with anchor links:
+After the page title, a nested bullet-point TOC with anchor links:
 
 ```markdown
 * [Domain Name](#domain-anchor)
   * [Skill Name](#skill-anchor)
     * [Question Title](#question-anchor)
 ```
-
-Handle duplicate question titles by appending `-1`, `-2` to anchors (GitHub-style).
 
 ### Ordering Rules
 
@@ -94,96 +118,36 @@ Handle duplicate question titles by appending `-1`, `-2` to anchors (GitHub-styl
 3. **Questions** within a skill preserve their relative order from the source file.
 4. **Omit** skills that have no questions assigned to them.
 
-### Introductory Content
-
-If the practice exam file contains non-question content at the top (e.g., a "Learning Strategy" section in AI-102), preserve it between the page title and the TOC.
-
-## Mandatory Execution Guarantee
-
-> **EVERY step below MUST be executed in full — no step may be skipped or short-circuited.** Even when the file already has `**Exam Task:**` metadata and domain/skill headings from a previous run, you MUST still: (1) parse every question block, (2) classify each question against the domain structure, (3) detect and move any misplaced questions, and (4) regenerate the file with the correct ordering. The existence of prior structure does NOT guarantee correctness — questions may have been appended to the wrong section. Treat every invocation as a full reorganization pass.
-
 ## Workflow
 
-### Step 1 — Load the Domain Structure
+### Step 1 — Run the Script
 
-Read the exam's main README (e.g., `AZ-104/README.md`) and extract the **Domain Quick Reference** section. Build a structured map:
+Execute the reorganizer script for the target exam:
 
-```
-Domain → Skill → [Task, Task, …]
-```
-
-Each domain typically has 2–4 skills, and each skill has 3–8 tasks.
-
-### Step 2 — Parse Existing Questions
-
-Read the practice exam README and extract every question block. A question block:
-
-- Starts at a heading (`####`)
-- Ends at the next `---` separator or end of file
-- Includes **everything**: question text, answer options, `<details>` blocks (screenshots, explanations), `▶ Related Lab:` links
-
-Preserve each block's full content exactly.
-
-### Step 3 — Classify Each Question
-
-> **This step is MANDATORY and must not be skipped.** Do not assume a question is correctly placed because it already appears under a domain/skill heading. You must independently verify every question's classification.
-
-For every question block, determine:
-
-1. **Domain** — Which of the exam's domains this question primarily tests
-2. **Skill** — Which skill area under that domain
-3. **Task(s)** — Which specific task(s) from the skill's task list
-
-Classification sources (use ALL of these, in priority order):
-
-1. **`**Exam Task:**` metadata** — If the question already has an Exam Task line, match its value against the domain structure map from Step 1 to determine the correct domain and skill. This is the most reliable signal.
-2. **Question scenario and answer choices** — Use the question's content to confirm or override the classification.
-3. **Explanation content** — Use references and context from the explanation to resolve ambiguity.
-
-When a question spans multiple domains or skills, assign it to the **primary** one being tested.
-
-**Misplacement detection:** After classifying, compare the question's determined domain/skill against the section it currently occupies. If they differ, the question MUST be moved. Log each move for the output summary.
-
-### Step 4 — Assemble and Write
-
-Generate the reorganized file with the structure defined above. For files with 20+ questions, write a temporary Python script to assemble the output reliably (parse blocks, apply the classification map, generate TOC and body, then write). Delete the script after use.
-
-### Step 5 — Verify
-
-After writing, confirm:
-
-- All original questions are present (count check)
-- No question content was altered
-- Every question has an **Exam Task** metadata line
-- Heading levels are correct (`#` / `##` / `###` / `####`)
-
-### Step 6 — Update Coverage Table
-
-Open the exam's main README and locate the **Practice Exam Coverage** section (between `<!-- BEGIN COVERAGE TABLE -->` and `<!-- END COVERAGE TABLE -->` markers). Update the **Qs** column for every task row:
-
-1. Parse all `**Exam Task:**` lines from the practice exam (split multi-task entries on ` · `).
-2. Count occurrences per task.
-3. Write the count into the matching row's **Qs** column. Tasks with no matching questions get `0`.
-
-The coverage table uses this structure — do not add or remove headings or rows, only update **Qs** values:
-
-```markdown
-### Domain N: <Domain Name> (<Weight>)
-
-#### <Skill Name>
-
-| Task | Qs |
-| :--- | -: |
-| <task description> | <count> |
+```powershell
+.assets/scripts/Invoke-PracticeExamReorganizer.ps1 -ExamName <EXAM> -Verbose
 ```
 
-Each domain is a `###` heading, each skill is a `####` heading, and each skill has a two-column table (Task, Qs). Task names must match the Domain Quick Reference exactly.
+### Step 2 — Review Output
+
+Check the script's summary output for:
+
+- Question count verification (parsed vs. written)
+- Metadata completeness (all Domain/Skill/Task present)
+- Warnings about unrecognized domain/skill values
+
+### Step 3 — Fix Issues (if any)
+
+If warnings were reported:
+
+1. **Unrecognized domain/skill** — Edit the question's metadata to match the exact wording from the exam README's coverage table, then re-run the script.
+2. **Missing metadata** — Add `**Domain:**`, `**Skill:**`, and `**Task:**` lines to the question block, then re-run.
+3. **Count mismatch** — Investigate the practice questions file for parsing edge cases (missing `---` separators, malformed headings).
 
 ## Rules
 
 - **Do not** alter question text, answer options, screenshots, `<details>` blocks, explanation content, or `▶ Related Lab:` links.
 - **Do** normalize question heading levels to `####`.
-- **Do** insert the `**Exam Task:**` metadata line after each question heading.
-- **Do** remove any previous domain/section headings from the source (they will be regenerated).
-- If the file already follows this structure from a previous run, strip existing `**Exam Task:**` lines before re-inserting them (idempotent).
-- **Never skip reorganization because the file "looks organized."** Questions may be under the wrong heading. The full classify-and-reassemble pipeline must run every time.
+- **Do** ensure every question has `**Domain:**`, `**Skill:**`, and `**Task:**` metadata.
+- Metadata is the **single source of truth** for classification — no LLM inference is used.
+- The script is **idempotent** — running it multiple times produces the same result.

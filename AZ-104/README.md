@@ -15,7 +15,7 @@
 
 **Legend:** 🕒 Not Started | 🚧 In Progress | ✅ Complete
 
-📝 **[Study Log](./StudyLog.md)** — Session-by-session study time tracker
+**[Study Log](./StudyLog.md)** — Session-by-session study time tracker
 
 ---
 
@@ -62,16 +62,16 @@ Task-level question counts from [Practice Questions](./practice-questions/README
 | :--- | -: |
 | Manage built-in Azure roles | 0 |
 | Assign roles at different scopes | 0 |
-| Interpret access assignments | 0 |
+| Interpret access assignments | 1 |
 
 #### Manage Azure subscriptions and governance
 
 | Task | Qs |
 | :--- | -: |
-| Implement and manage Azure Policy | 2 |
+| Implement and manage Azure Policy | 3 |
 | Configure resource locks | 0 |
-| Apply and manage tags on resources | 2 |
-| Manage resource groups | 0 |
+| Apply and manage tags on resources | 3 |
+| Manage resource groups | 1 |
 | Manage subscriptions | 0 |
 | Manage costs by using alerts, budgets, and Azure Advisor recommendations | 1 |
 | Configure management groups | 0 |
@@ -196,7 +196,7 @@ Task-level question counts from [Practice Questions](./practice-questions/README
 | Configure log settings in Azure Monitor | 0 |
 | Query and analyze logs in Azure Monitor | 0 |
 | Set up alert rules, action groups, and alert processing rules in Azure Monitor | 2 |
-| Configure and interpret monitoring of VMs, storage accounts, and networks by using Azure Monitor Insights | 2 |
+| Configure and interpret monitoring of VMs, storage accounts, and networks by using Azure Monitor Insights | 0 |
 | Use Azure Network Watcher and Connection Monitor | 2 |
 
 #### Implement backup and recovery
