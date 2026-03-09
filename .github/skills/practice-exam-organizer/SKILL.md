@@ -1,7 +1,7 @@
 ---
 name: practice-exam-organizer
 description: 'Reorganize practice exam questions by domain, skill, and task metadata for any certification exam, then update the coverage table on the exam README. Use when asked to organize practice exams, classify exam questions by domain, or update practice exam coverage.'
-user-invokable: false
+user-invokable: true
 argument-hint: '[exam]'
 ---
 
