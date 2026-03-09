@@ -32,14 +32,14 @@ Given metadata (exam, domain, topic, key_services):
 
 ## R-111: Mermaid Diagram Procedure
 
-Apply criteria from `shared-contract` R-013.
+Apply criteria from `lab-shared-contract` R-013.
 
-A Mermaid diagram is **always required** (`shared-contract` R-013).
+A Mermaid diagram is **always required** (`lab-shared-contract` R-013).
 
 ### When 2+ interconnected resources exist
 
 1. Choose layout: `graph TD` (top-down) for hierarchical, `graph LR` (left-right) for pipeline/flow.
-2. Use governance-compliant resource names (`shared-contract` R-001 / R-002 / R-003).
+2. Use governance-compliant resource names (`lab-shared-contract` R-001 / R-002 / R-003).
 3. Show resource group as the root container.
 4. Draw lines for dependencies (network containment, access paths, data flow).
 5. Use subgraphs for logical groupings (e.g., subnets within a VNet).
@@ -62,7 +62,7 @@ Common topology patterns:
 
 ## R-112: Module Breakdown Procedure
 
-Apply `shared-contract` R-022 (module rule).
+Apply `lab-shared-contract` R-022 (module rule).
 
 1. List all Azure resources from the architecture.
 2. Group by domain concern:
@@ -79,7 +79,7 @@ Apply `shared-contract` R-022 (module rule).
 
 ## R-113: File Tree Procedure
 
-Apply `shared-contract` R-010 (lab folder structure).
+Apply `lab-shared-contract` R-010 (lab folder structure).
 
 1. Select the matching structure template for the deployment method.
 2. Replace `<EXAM>`, `<domain>`, `<topic>` with actual values (lowercase).

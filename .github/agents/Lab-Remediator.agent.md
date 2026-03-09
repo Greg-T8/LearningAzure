@@ -38,7 +38,7 @@ Extract from the review report:
 
 - Each FAIL item with its category number and description
 - The file path and exact change specified in the fix instruction
-- The `shared-contract` requirement ID being violated
+- The `lab-shared-contract` requirement ID being violated
 
 ---
 
@@ -68,7 +68,7 @@ Extract from the review report passed by Lab-Reviewer:
 
 - Each FAIL item with its category and result
 - The file path and exact change specified in the fix instruction
-- The `shared-contract` requirement ID being violated
+- The `lab-shared-contract` requirement ID being violated
 
 ---
 
@@ -78,7 +78,7 @@ For each FAIL item:
 
 1. Locate the target file in the workspace.
 2. Apply the exact change specified in the fix instruction.
-3. If a fix is ambiguous, use the referenced `shared-contract` requirement to determine the correct resolution.
+3. If a fix is ambiguous, use the referenced `lab-shared-contract` requirement to determine the correct resolution.
 
 ---
 
@@ -87,8 +87,8 @@ For each FAIL item:
 Produce a numbered list of all changes made:
 
 ```
-1. [file]: [what changed] — fixes shared-contract R-0xx
-2. [file]: [what changed] — fixes shared-contract R-0xx
+1. [file]: [what changed] — fixes lab-shared-contract R-0xx
+2. [file]: [what changed] — fixes lab-shared-contract R-0xx
 ```
 
 ---

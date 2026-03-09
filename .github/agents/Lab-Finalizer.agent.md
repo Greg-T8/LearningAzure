@@ -68,7 +68,7 @@ Present:
 Present:
 
 - Review PASS confirmation with check counts
-- README compliance (14 sections, correct order per `shared-contract` R-011)
+- README compliance (14 sections, correct order per `lab-shared-contract` R-011)
 - Governance compliance (naming per R-001, tags per R-005, regions per R-006, SKUs per R-007/R-008)
 
 ---

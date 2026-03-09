@@ -21,8 +21,8 @@ You are the **Lab Builder**. You generate all IaC code, modules, and validation 
 
 Load the skill matching the deployment method:
 
-- **`terraform-scaffolding`** — Terraform code generation procedures and patterns.
-- **`bicep-scaffolding`** — Bicep code generation procedures and patterns.
+- **`lab-iaac-terraform`** — Terraform code generation procedures and patterns.
+- **`lab-iaac-bicep`** — Bicep code generation procedures and patterns.
 
 Also reference:
 
@@ -56,33 +56,33 @@ Read this README to extract:
 
 Generate all code files following:
 
-- `shared-contract` R-012 (code header block in every file)
-- `shared-contract` R-023 (common tags pattern)
-- `shared-contract` R-005 (all 7 tags)
-- `shared-contract` R-021 (language style)
-- `shared-contract` R-022 (module rule)
+- `lab-shared-contract` R-012 (code header block in every file)
+- `lab-shared-contract` R-023 (common tags pattern)
+- `lab-shared-contract` R-005 (all 7 tags)
+- `lab-shared-contract` R-021 (language style)
+- `lab-shared-contract` R-022 (module rule)
 
 ### Terraform Path
 
-- Provider config: `terraform-scaffolding` R-120
-- File structure: `terraform-scaffolding` R-122
-- Module pattern: `terraform-scaffolding` R-123
-- Password generation: `terraform-scaffolding` R-124
-- terraform.tfvars: `terraform-scaffolding` R-125
-- Soft-delete: see `shared-contract` R-016 disable patterns
-- Storage containers: see `shared-contract` R-025
-- State management: `terraform-scaffolding` R-121
+- Provider config: `lab-iaac-terraform` R-120
+- File structure: `lab-iaac-terraform` R-122
+- Module pattern: `lab-iaac-terraform` R-123
+- Password generation: `lab-iaac-terraform` R-124
+- terraform.tfvars: `lab-iaac-terraform` R-125
+- Soft-delete: see `lab-shared-contract` R-016 disable patterns
+- Storage containers: see `lab-shared-contract` R-025
+- State management: `lab-iaac-terraform` R-121
 
 ### Bicep Path
 
-- Required files: `bicep-scaffolding` R-130
-- Deployment scope: `bicep-scaffolding` R-131
-- Module pattern: `bicep-scaffolding` R-132
-- Parameter conventions: `bicep-scaffolding` R-133
-- Password: `bicep-scaffolding` R-134
-- Wrapper script: `bicep-scaffolding` R-135
-- main.bicepparam: `bicep-scaffolding` R-136
-- Soft-delete: see `shared-contract` R-016 disable patterns
+- Required files: `lab-iaac-bicep` R-130
+- Deployment scope: `lab-iaac-bicep` R-131
+- Module pattern: `lab-iaac-bicep` R-132
+- Parameter conventions: `lab-iaac-bicep` R-133
+- Password: `lab-iaac-bicep` R-134
+- Wrapper script: `lab-iaac-bicep` R-135
+- main.bicepparam: `lab-iaac-bicep` R-136
+- Soft-delete: see `lab-shared-contract` R-016 disable patterns
 
 ---
 
@@ -90,7 +90,7 @@ Generate all code files following:
 
 Generate a PowerShell validation script following:
 
-- `terraform-scaffolding` R-128 or `bicep-scaffolding` R-138 (depending on method)
+- `lab-iaac-terraform` R-128 or `lab-iaac-bicep` R-138 (depending on method)
 - Reference `Confirm-LabSubscription.ps1` from `lab-azure-governance` skill R-161
 
 ---
@@ -99,7 +99,7 @@ Generate a PowerShell validation script following:
 
 **CRITICAL**: Physically create all files using `createFile` and `createDirectory` tools.
 
-- Create the full lab folder structure per `shared-contract` R-010
+- Create the full lab folder structure per `lab-shared-contract` R-010
 - Create every code file, script, and README
 - You are generating templates — do **NOT** deploy to Azure
 
@@ -109,10 +109,10 @@ Generate a PowerShell validation script following:
 
 All generated code must comply with:
 
-- `shared-contract` R-012 (header block)
-- `shared-contract` R-016 (soft-delete disable patterns)
-- `shared-contract` R-024 (password generation)
-- `shared-contract` R-025 (Azure guardrails)
+- `lab-shared-contract` R-012 (header block)
+- `lab-shared-contract` R-016 (soft-delete disable patterns)
+- `lab-shared-contract` R-024 (password generation)
+- `lab-shared-contract` R-025 (Azure guardrails)
 
 ---
 
@@ -163,7 +163,7 @@ Phase 3 is complete when:
 
 - [ ] All files from the README file tree are created in workspace
 - [ ] Code headers present in all `.tf` / `.bicep` / `.ps1` files
-- [ ] All 7 tags applied to every resource (`shared-contract` R-005)
+- [ ] All 7 tags applied to every resource (`lab-shared-contract` R-005)
 - [ ] Module structure matches README module breakdown
 - [ ] Validation script created
 - [ ] `terraform.tfvars` / `main.bicepparam` populated with defaults

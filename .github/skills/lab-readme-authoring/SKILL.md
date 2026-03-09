@@ -1,12 +1,12 @@
 ---
 name: lab-readme-authoring
-description: Procedures for generating lab README.md content, section by section. Section order is defined in shared-contract R-011.
+description: Procedures for generating lab README.md content, section by section. Section order is defined in lab-shared-contract R-011.
 user-invokable: false
 ---
 
 # Lab README Authoring
 
-Procedures for generating README content for Azure hands-on labs. Section order and count are defined in `shared-contract` R-011 — this skill defines the content guidelines for each section.
+Procedures for generating README content for Azure hands-on labs. Section order and count are defined in `lab-shared-contract` R-011 — this skill defines the content guidelines for each section.
 
 ## When to Use
 
@@ -24,7 +24,7 @@ Starting template: `.github/skills/lab-azure-governance/templates/README.templat
 
 ## R-140: Per-Section Content Guidelines
 
-Section order: see `shared-contract` R-011.
+Section order: see `lab-shared-contract` R-011.
 
 ### Section 1: Exam Question Scenario
 
@@ -60,7 +60,7 @@ Section order: see `shared-contract` R-011.
 ## Architecture Diagram
 ```
 
-- A Mermaid diagram is **always required** (`shared-contract` R-013).
+- A Mermaid diagram is **always required** (`lab-shared-contract` R-013).
 - When 2+ interconnected resources: diagram the resource topology.
 - When fewer than 2 interconnected resources: diagram the overall process reflective of the exam question.
 
@@ -99,7 +99,7 @@ Section order: see `shared-contract` R-011.
 
 ### Section 7: Deployment
 
-- Include the validation sequence from `shared-contract` R-018 for IaaC labs.
+- Include the validation sequence from `lab-shared-contract` R-018 for IaaC labs.
 - Keep deployment instructions brief and actionable.
 
 ### Section 8: Testing the Solution
@@ -116,7 +116,7 @@ Section order: see `shared-contract` R-011.
 ```
 
 - Include cleanup command for the deployment method.
-- Note purge requirements for soft-delete resources (`shared-contract` R-016).
+- Note purge requirements for soft-delete resources (`lab-shared-contract` R-016).
 
 ### Section 10: Scenario Analysis
 
@@ -166,10 +166,10 @@ Starting template: `.github/skills/lab-azure-governance/templates/README.templat
 
 ## R-142: Rules
 
-- **No code header block** in README (`shared-contract` R-012 applies to code files only).
+- **No code header block** in README (`lab-shared-contract` R-012 applies to code files only).
 - Correct answer revealed **only** in Section 10.
 - All 14 sections must appear, even if brief.
-- Use Mermaid diagrams only when meaningful (`shared-contract` R-013).
+- Use Mermaid diagrams only when meaningful (`lab-shared-contract` R-013).
 
 ---
 

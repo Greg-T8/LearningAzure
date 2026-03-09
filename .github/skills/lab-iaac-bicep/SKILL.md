@@ -1,11 +1,11 @@
 ---
-name: bicep-scaffolding
-description: Bicep code generation procedures and patterns for Azure hands-on labs. Cross-cutting rules are in the shared-contract skill.
+name: lab-iaac-bicep
+description: Bicep code generation procedures and patterns for Azure hands-on labs. Cross-cutting rules are in the lab-shared-contract skill.
 ---
 
 # Bicep Scaffolding
 
-Bicep-specific code generation procedures. All cross-cutting rules (naming, tags, SKUs, regions, limits) are defined in the `shared-contract` skill — reference by ID, do not restate.
+Bicep-specific code generation procedures. All cross-cutting rules (naming, tags, SKUs, regions, limits) are defined in the `lab-shared-contract` skill — reference by ID, do not restate.
 
 ## When to Use
 
@@ -49,13 +49,13 @@ Each module is a `.bicep` file in `modules/`:
 - Outputs resource IDs, endpoints, principal IDs.
 - Uses `@description()` decorators on all parameters.
 
-Module organization rules: see `shared-contract` R-022.
+Module organization rules: see `lab-shared-contract` R-022.
 
 ---
 
 ## R-133: Parameter Conventions
 
-Use `camelCase` for parameter names (see `shared-contract` R-021). Include `@description()` decorator on every parameter. Provide governance-compliant defaults where possible.
+Use `camelCase` for parameter names (see `lab-shared-contract` R-021). Include `@description()` decorator on every parameter. Provide governance-compliant defaults where possible.
 
 ```bicep
 @description('Azure region for resource deployment')
@@ -72,7 +72,7 @@ param dateCreated string
 
 ## R-134: Password Implementation
 
-See `shared-contract` R-024 for rules. Use `uniqueString()` or static pattern. Mark with `@secure()` decorator.
+See `lab-shared-contract` R-024 for rules. Use `uniqueString()` or static pattern. Mark with `@secure()` decorator.
 
 ---
 
@@ -82,7 +82,7 @@ See `shared-contract` R-024 for rules. Use `uniqueString()` or static pattern. M
 - Allowed commands: `validate`, `plan`, `apply`, `destroy`, `show`, `list`.
 - Script validates subscription context automatically.
 
-Stack naming: see `shared-contract` R-004.
+Stack naming: see `lab-shared-contract` R-004.
 
 Cleanup destroy command:
 
@@ -106,7 +106,7 @@ param dateCreated = '<YYYY-MM-DD>'
 
 ## R-137: Soft-Delete Implementation
 
-See `shared-contract` R-016 for the resource table and Bicep disable pattern. Apply to all resources in the R-016 table that are deployed in the lab.
+See `lab-shared-contract` R-016 for the resource table and Bicep disable pattern. Apply to all resources in the R-016 table that are deployed in the lab.
 
 ---
 
@@ -118,4 +118,4 @@ Generate a PowerShell script in `validation/` that:
 2. Validates deployed resources exist.
 3. Tests key functionality.
 4. Uses the `$Main` / `$Helpers` script block pattern.
-5. Includes code header per `shared-contract` R-012.
+5. Includes code header per `lab-shared-contract` R-012.

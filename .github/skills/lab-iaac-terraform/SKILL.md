@@ -1,11 +1,11 @@
 ---
-name: terraform-scaffolding
-description: Terraform code generation procedures and patterns for Azure hands-on labs. Cross-cutting rules are in the shared-contract skill.
+name: lab-iaac-terraform
+description: Terraform code generation procedures and patterns for Azure hands-on labs. Cross-cutting rules are in the lab-shared-contract skill.
 ---
 
 # Terraform Scaffolding
 
-Terraform-specific code generation procedures. All cross-cutting rules (naming, tags, SKUs, regions, limits) are defined in the `shared-contract` skill — reference by ID, do not restate.
+Terraform-specific code generation procedures. All cross-cutting rules (naming, tags, SKUs, regions, limits) are defined in the `lab-shared-contract` skill — reference by ID, do not restate.
 
 ## When to Use
 
@@ -69,7 +69,7 @@ Use AzureRM by default. Use AzAPI only if AzureRM lacks a required feature.
 | File              | Content                                                                     |
 | ----------------- | --------------------------------------------------------------------------- |
 | `providers.tf`    | Per R-120                                                                   |
-| `main.tf`         | Thin orchestration: locals, resource group, module calls. Tags per `shared-contract` R-023 |
+| `main.tf`         | Thin orchestration: locals, resource group, module calls. Tags per `lab-shared-contract` R-023 |
 | `variables.tf`    | Must include: `lab_subscription_id`, `location`, `owner`, `date_created`    |
 | `outputs.tf`      | Resource group name, key endpoints, sensitive values                        |
 | `terraform.tfvars`| Per R-125                                                                   |
@@ -84,13 +84,13 @@ Each module directory contains:
 - `variables.tf` — inputs (must accept `tags` map + resource IDs from other modules)
 - `outputs.tf` — resource IDs, endpoints, principal IDs
 
-Module organization rules: see `shared-contract` R-022.
+Module organization rules: see `lab-shared-contract` R-022.
 
 ---
 
 ## R-124: Password Generation
 
-See `shared-contract` R-024 for the canonical pattern and rules. Terraform implementation uses `hashicorp/random`. Never define passwords as input variables. Output as `sensitive = true`.
+See `lab-shared-contract` R-024 for the canonical pattern and rules. Terraform implementation uses `hashicorp/random`. Never define passwords as input variables. Output as `sensitive = true`.
 
 ---
 
@@ -103,19 +103,19 @@ owner               = "Greg Tate"
 date_created        = "<YYYY-MM-DD>"
 ```
 
-Subscription ID: see `shared-contract` R-020.
+Subscription ID: see `lab-shared-contract` R-020.
 
 ---
 
 ## R-126: Soft-Delete Implementation
 
-See `shared-contract` R-016 for the resource table and Terraform disable patterns. Apply those settings to all resources in the R-016 table that are deployed in the lab.
+See `lab-shared-contract` R-016 for the resource table and Terraform disable patterns. Apply those settings to all resources in the R-016 table that are deployed in the lab.
 
 ---
 
 ## R-127: Storage Container Pattern
 
-See `shared-contract` R-025. Always use `storage_account_id` (not `storage_account_name`):
+See `lab-shared-contract` R-025. Always use `storage_account_id` (not `storage_account_name`):
 
 ```hcl
 resource "azurerm_storage_container" "example" {
@@ -134,4 +134,4 @@ Generate a PowerShell script in `validation/` that:
 2. Validates deployed resources exist (using `Get-AzResource` or `az resource list`).
 3. Tests key functionality (endpoints, connectivity).
 4. Uses the `$Main` / `$Helpers` script block pattern.
-5. Includes code header per `shared-contract` R-012.
+5. Includes code header per `lab-shared-contract` R-012.

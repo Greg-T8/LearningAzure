@@ -1,5 +1,5 @@
 ---
-name: shared-contract
+name: lab-shared-contract
 description: Single source of truth for cross-cutting rules referenced by all agents and skills in the lab pipeline. Every requirement has a unique ID (R-0xx).
 ---
 

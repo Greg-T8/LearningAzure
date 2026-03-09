@@ -1,12 +1,12 @@
 ---
 name: lab-azure-governance
-description: Template and script inventory for Azure hands-on labs. All cross-cutting rules are in the shared-contract skill.
+description: Template and script inventory for Azure hands-on labs. All cross-cutting rules are in the lab-shared-contract skill.
 user-invokable: false
 ---
 
 # Azure Lab Governance
 
-Physical templates and scripts for lab scaffolding. All rules (naming, tags, regions, SKUs, etc.) are defined in the `shared-contract` skill — this skill is an inventory of starter files only.
+Physical templates and scripts for lab scaffolding. All rules (naming, tags, regions, SKUs, etc.) are defined in the `lab-shared-contract` skill — this skill is an inventory of starter files only.
 
 For the full Azure governance policy document, see `Governance-Lab.md` at the workspace root.
 
@@ -39,7 +39,7 @@ Path: `.github/skills/lab-azure-governance/templates/bicep-module.stub/`
 
 Path: `.github/skills/lab-azure-governance/templates/README.template.md`
 
-14-section skeleton matching `shared-contract` R-011.
+14-section skeleton matching `lab-shared-contract` R-011.
 
 ---
 
@@ -49,7 +49,7 @@ Path: `.github/skills/lab-azure-governance/templates/README.template.md`
 
 Path: `.github/skills/lab-azure-governance/scripts/Confirm-LabSubscription.ps1`
 
-Pre-deployment guardrail that validates the active Azure subscription matches the lab subscription (`shared-contract` R-020).
+Pre-deployment guardrail that validates the active Azure subscription matches the lab subscription (`lab-shared-contract` R-020).
 
 ---
 
@@ -57,4 +57,4 @@ Pre-deployment guardrail that validates the active Azure subscription matches th
 
 Full Azure governance policy: `Governance-Lab.md` at workspace root.
 
-This is the authoritative document for Azure-specific implementation details beyond what the `shared-contract` covers (e.g., detailed Azure service behavior, SNAT edge cases, NIC conflict specifics).
+This is the authoritative document for Azure-specific implementation details beyond what the `lab-shared-contract` covers (e.g., detailed Azure service behavior, SNAT edge cases, NIC conflict specifics).

@@ -49,7 +49,7 @@ Read every file in the lab folder to perform the governance review:
 
 ## R-070: Execute Review Checklist
 
-Run the full 11-category checklist defined in `lab-review-checklist` skill R-150. Each check item references `shared-contract` requirements by ID.
+Run the full 11-category checklist defined in `lab-review-checklist` skill R-150. Each check item references `lab-shared-contract` requirements by ID.
 
 Categories (owned entirely by `lab-review-checklist` skill):
 
@@ -69,7 +69,7 @@ Categories (owned entirely by `lab-review-checklist` skill):
 
 ## R-071: Structured Pass/Fail Report
 
-Produce report per `shared-contract` R-014 schema:
+Produce report per `lab-shared-contract` R-014 schema:
 
 - Overall PASS or FAIL
 - Per-category PASS/FAIL with explanations
@@ -83,7 +83,7 @@ For every FAIL item, provide:
 
 - The specific file and location
 - The exact change needed
-- The `shared-contract` requirement being violated (by ID)
+- The `lab-shared-contract` requirement being violated (by ID)
 
 ---
 
@@ -102,7 +102,7 @@ FAILs in other categories also produce an overall FAIL but are flagged separatel
 
 ## R-074: Output Schema
 
-Use `shared-contract` R-014 report schema.
+Use `lab-shared-contract` R-014 report schema.
 
 ---
 
@@ -111,7 +111,7 @@ Use `shared-contract` R-014 report schema.
 Phase 4 is complete when:
 
 - [ ] All 11 checklist categories evaluated
-- [ ] Report follows `shared-contract` R-014 schema
+- [ ] Report follows `lab-shared-contract` R-014 schema
 - [ ] Every FAIL includes actionable fix instruction (R-072)
 - [ ] Overall verdict is PASS or FAIL
 - [ ] R-078 handoff gate rendered exactly once
@@ -121,7 +121,7 @@ Phase 4 is complete when:
 ## R-076: Strict Enforcement
 
 - Governance is mandatory, not advisory.
-- Do not approve labs that skip capacity validation for services listed in `shared-contract` R-019.
+- Do not approve labs that skip capacity validation for services listed in `lab-shared-contract` R-019.
 - Do not waive critical category failures.
 
 ---

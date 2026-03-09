@@ -1,12 +1,12 @@
 ---
 name: lab-review-checklist
-description: 11-category compliance checklist and evaluation procedure for lab review. All check items reference shared-contract requirement IDs.
+description: 11-category compliance checklist and evaluation procedure for lab review. All check items reference lab-shared-contract requirement IDs.
 user-invokable: false
 ---
 
 # Lab Review Checklist
 
-Compliance checklist and evaluation procedure for validating generated lab content. Report format is defined in `shared-contract` R-014.
+Compliance checklist and evaluation procedure for validating generated lab content. Report format is defined in `lab-shared-contract` R-014.
 
 ## When to Use
 
@@ -20,20 +20,20 @@ Compliance checklist and evaluation procedure for validating generated lab conte
 
 ### Category 1: Naming Compliance
 
-- [ ] Resource group follows `shared-contract` R-001
-- [ ] Resources use correct prefixes per `shared-contract` R-002 / R-003
-- [ ] Bicep stack name (if applicable) per `shared-contract` R-004
+- [ ] Resource group follows `lab-shared-contract` R-001
+- [ ] Resources use correct prefixes per `lab-shared-contract` R-002 / R-003
+- [ ] Bicep stack name (if applicable) per `lab-shared-contract` R-004
 - [ ] No naming convention violations
-- [ ] Resource names describe role/function, not lab topic per `shared-contract` R-031
-- [ ] Each resource has a distinct, scenario-appropriate name (no uniform topic echo) per `shared-contract` R-031
-- [ ] All resource names are static unless resource is subject to soft-delete name reservation per `shared-contract` R-027 / R-028
-- [ ] Random suffixes used only for soft-delete resources listed in `shared-contract` R-028
-- [ ] All resource names referenced in README match names defined in IaC code per `shared-contract` R-029
-- [ ] All resource names defined in IaC code match names referenced in README per `shared-contract` R-029
+- [ ] Resource names describe role/function, not lab topic per `lab-shared-contract` R-031
+- [ ] Each resource has a distinct, scenario-appropriate name (no uniform topic echo) per `lab-shared-contract` R-031
+- [ ] All resource names are static unless resource is subject to soft-delete name reservation per `lab-shared-contract` R-027 / R-028
+- [ ] Random suffixes used only for soft-delete resources listed in `lab-shared-contract` R-028
+- [ ] All resource names referenced in README match names defined in IaC code per `lab-shared-contract` R-029
+- [ ] All resource names defined in IaC code match names referenced in README per `lab-shared-contract` R-029
 
 ### Category 2: Required Tags
 
-- [ ] All 7 tags present per `shared-contract` R-005
+- [ ] All 7 tags present per `lab-shared-contract` R-005
 - [ ] `Project` is uppercase
 - [ ] `DateCreated` is static (no dynamic functions)
 - [ ] `Environment` is `Lab`
@@ -41,73 +41,73 @@ Compliance checklist and evaluation procedure for validating generated lab conte
 
 ### Category 3: Region Rules
 
-- [ ] Default region is `eastus` per `shared-contract` R-006
+- [ ] Default region is `eastus` per `lab-shared-contract` R-006
 - [ ] Only US regions used
 - [ ] Fallback chain documented if non-default region
 
 ### Category 4: README Structure
 
-- [ ] All 14 sections present per `shared-contract` R-011
+- [ ] All 14 sections present per `lab-shared-contract` R-011
 - [ ] Sections in correct order
-- [ ] Mermaid diagram present when required per `shared-contract` R-013
+- [ ] Mermaid diagram present when required per `lab-shared-contract` R-013
 - [ ] Correct answer NOT in Section 1, only in Section 10 (per `lab-readme-authoring` R-142)
 
 ### Category 5: Validation Sequence
 
-- [ ] Syntax validation step present per `shared-contract` R-018
-- [ ] Regional capacity test present for constrained services per `shared-contract` R-019
+- [ ] Syntax validation step present per `lab-shared-contract` R-018
+- [ ] Regional capacity test present for constrained services per `lab-shared-contract` R-019
 - [ ] Final validation step present
 - [ ] Steps in correct order
 
 ### Category 6: Code Quality
 
-- [ ] Header block in all code files per `shared-contract` R-012
+- [ ] Header block in all code files per `lab-shared-contract` R-012
 - [ ] Header includes: Program, Description, Context, Author, Date
 - [ ] No header in README (per `lab-readme-authoring` R-142)
-- [ ] Correct provider/version constraints (per `terraform-scaffolding` R-120 or Bicep equivalents)
+- [ ] Correct provider/version constraints (per `lab-iaac-terraform` R-120 or Bicep equivalents)
 - [ ] Local state only (no remote backend)
 - [ ] Secrets handled properly
 - [ ] Sensitive outputs marked
 
 ### Category 7: Module Structure
 
-- [ ] Modules used when 2+ types per `shared-contract` R-022
+- [ ] Modules used when 2+ types per `lab-shared-contract` R-022
 - [ ] One concern per module
 - [ ] Thin root orchestration
-- [ ] Tags passed to all modules per `shared-contract` R-023
+- [ ] Tags passed to all modules per `lab-shared-contract` R-023
 - [ ] No anti-pattern: unrelated resources in one module
 
 ### Category 8: Cost & Limits
 
-- [ ] SKUs match `shared-contract` R-007 / R-008
-- [ ] Resource counts within `shared-contract` R-009
-- [ ] Cleanup references 7-day policy per `shared-contract` R-015
+- [ ] SKUs match `lab-shared-contract` R-007 / R-008
+- [ ] Resource counts within `lab-shared-contract` R-009
+- [ ] Cleanup references 7-day policy per `lab-shared-contract` R-015
 
 ### Category 9: Soft-Delete & Purge
 
-- [ ] Soft-delete disabled where possible per `shared-contract` R-016
+- [ ] Soft-delete disabled where possible per `lab-shared-contract` R-016
 - [ ] Purge flags set for applicable resources
 - [ ] Purge documented in cleanup section
-- [ ] Random suffix applied only to soft-delete resources per `shared-contract` R-028
-- [ ] Non-soft-delete resources use static names (no `uniqueString()` / `random_string`) per `shared-contract` R-027
+- [ ] Random suffix applied only to soft-delete resources per `lab-shared-contract` R-028
+- [ ] Non-soft-delete resources use static names (no `uniqueString()` / `random_string`) per `lab-shared-contract` R-027
 
 ### Category 10: Subscription Validation
 
-- [ ] Lab subscription ID correct per `shared-contract` R-020
+- [ ] Lab subscription ID correct per `lab-shared-contract` R-020
 - [ ] Terraform: ID in `terraform.tfvars`
 - [ ] Bicep: subscription context validated
 - [ ] Validation script checks subscription
 
 ### Category 11: Command-Line Fidelity
 
-- [ ] Cmdlet output property names match actual object model per `shared-contract` R-030
-- [ ] Nested/complex properties expanded correctly (e.g., `Sku.Name` not `Sku`) per `shared-contract` R-030
-- [ ] `Format-List` / `Format-Table` expressions reference valid properties; calculated properties used for nested values per `shared-contract` R-030
-- [ ] All cmdlet `-ParameterName` values are valid per `shared-contract` R-030
-- [ ] Variables set in earlier steps are reachable in later steps within the same section per `shared-contract` R-030
-- [ ] `# Expected:` comments match actual command output per `shared-contract` R-030
-- [ ] REST API `api-version` values are current and valid per `shared-contract` R-030
-- [ ] Pipeline commands accept the preceding output type per `shared-contract` R-030
+- [ ] Cmdlet output property names match actual object model per `lab-shared-contract` R-030
+- [ ] Nested/complex properties expanded correctly (e.g., `Sku.Name` not `Sku`) per `lab-shared-contract` R-030
+- [ ] `Format-List` / `Format-Table` expressions reference valid properties; calculated properties used for nested values per `lab-shared-contract` R-030
+- [ ] All cmdlet `-ParameterName` values are valid per `lab-shared-contract` R-030
+- [ ] Variables set in earlier steps are reachable in later steps within the same section per `lab-shared-contract` R-030
+- [ ] `# Expected:` comments match actual command output per `lab-shared-contract` R-030
+- [ ] REST API `api-version` values are current and valid per `lab-shared-contract` R-030
+- [ ] Pipeline commands accept the preceding output type per `lab-shared-contract` R-030
 
 ---
 
@@ -116,7 +116,7 @@ Compliance checklist and evaluation procedure for validating generated lab conte
 1. Read all generated files in the lab folder.
 2. Evaluate every item in each of the 10 categories.
 3. Mark PASS or FAIL with a specific explanation.
-4. Produce report per `shared-contract` R-014.
+4. Produce report per `lab-shared-contract` R-014.
 
 ---
 
@@ -125,7 +125,7 @@ Compliance checklist and evaluation procedure for validating generated lab conte
 - A single FAIL in categories 1, 2, 4, or 5 → overall FAIL (critical).
 - FAILs in categories 3, 6–11 → overall FAIL.
 - Every FAIL must include actionable fix instructions.
-- Do not approve labs that skip capacity validation for services in `shared-contract` R-019.
+- Do not approve labs that skip capacity validation for services in `lab-shared-contract` R-019.
 
 ---
 

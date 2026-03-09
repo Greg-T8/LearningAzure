@@ -8,7 +8,7 @@ description: Updates top-level exam READMEs, hands-on-lab catalogs, and practice
 Performs a full refresh of top-level exam pages, hands-on-lab catalogs, and practice exam question pages.
 
 Uses the `lab-catalog-updater` skill for lab scanning, catalog updates, and cross-references.
-Uses the `practice-exam-organizer` skill to reorganize practice exam questions and update coverage tables.
+Uses the `exam-question-organizer` skill to reorganize practice exam questions and update coverage tables.
 
 ## Link Fidelity Requirement
 
@@ -40,9 +40,9 @@ Use the `lab-catalog-updater` skill to scan and update hands-on-labs README file
 
 ### 2. Organize Practice Exam Questions
 
-Use the `practice-exam-organizer` skill to reorganize practice exam questions by domain/skill/task hierarchy, insert `**Exam Task:**` metadata, and update the coverage table on each exam README.
+Use the `exam-question-organizer` skill to reorganize practice exam questions by domain/skill/task hierarchy, insert `**Exam Task:**` metadata, and update the coverage table on each exam README.
 
-> **MANDATORY FULL PIPELINE — NO SHORT-CIRCUITING.** You MUST execute every step of the practice-exam-organizer skill (Load → Parse → Classify → Assemble → Verify → Update Coverage). The presence of existing `**Exam Task:**` metadata or existing domain headings does NOT mean questions are correctly placed. A question's `**Exam Task:**` value may not match the domain/skill section it currently sits under. You MUST classify every question against the domain structure and move any misplaced questions to the correct section. Skipping classification because "metadata already exists" is a critical error.
+> **MANDATORY FULL PIPELINE — NO SHORT-CIRCUITING.** You MUST execute every step of the exam-question-organizer skill (Load → Parse → Classify → Assemble → Verify → Update Coverage). The presence of existing `**Exam Task:**` metadata or existing domain headings does NOT mean questions are correctly placed. A question's `**Exam Task:**` value may not match the domain/skill section it currently sits under. You MUST classify every question against the domain structure and move any misplaced questions to the correct section. Skipping classification because "metadata already exists" is a critical error.
 
 ### 3. Collapse Explanation Blocks
 
