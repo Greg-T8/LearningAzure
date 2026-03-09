@@ -3000,6 +3000,8 @@ Get-MgIdentityGovernanceEntitlementManagementCatalog -Filter "DisplayName eq 'Ge
 
 When working with Microsoft Entra ID entitlement management and access packages, the **first step is always to retrieve the catalog identifier**. This identifier is required before you can add resources, assign roles, or add groups to the access package.
 
+In Microsoft Entra ID entitlement management, a **catalog** is the container that holds resources (such as groups, applications, and SharePoint sites) that can be granted through access packages. The **General catalog** is the default catalog in every tenant and is typically used for organization-wide resources that many users may request. Administrators add resources to the catalog, define the available resource roles, bundle them into **access packages**, and then apply policies that control who can request access and how it is approved and reviewed. When automating this process with Microsoft Graph PowerShell, the **catalog identifier must be retrieved first**, because most entitlement-management operations require the catalog ID before resources, access packages, or policies can be created or managed.
+
 **References**
 
 * [What is entitlement management?](https://learn.microsoft.com/en-us/entra/id-governance/entitlement-management-overview)
