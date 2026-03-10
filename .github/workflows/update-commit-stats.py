@@ -31,6 +31,7 @@ TABLE_COLUMNS = EXAM_FOLDERS + ['Other']
 
 WORKDAY_START_HOUR = 8
 WEEKEND_FLAT_HOURS = 0.5
+MAX_DIFF_HOURS = 2.5
 
 SESSION_START_PATTERN = re.compile(
     r'^docs\(([^)]+)\): start study session #(\d+)$'
@@ -164,8 +165,8 @@ def find_study_sessions(
     Returns:
         List of StudySession objects with matched start/end pairs
     """
-    starts: dict[tuple[str, int], Commit] = {}
-    ends: dict[tuple[str, int], Commit] = {}
+    open_starts: dict[tuple[str, int], Commit] = {}
+    sessions: list[StudySession] = []
 
     # Classify each commit as a session start, end, or neither
     for commit in commits:
@@ -175,7 +176,7 @@ def find_study_sessions(
                 start_match.group(1),
                 int(start_match.group(2)),
             )
-            starts[key] = commit
+            open_starts[key] = commit
             continue
 
         end_match = SESSION_END_PATTERN.match(commit.message)
@@ -184,20 +185,33 @@ def find_study_sessions(
                 end_match.group(1),
                 int(end_match.group(2)),
             )
-            ends[key] = commit
+            # Build session only when a matching start exists.
+            if key in open_starts:
+                sessions.append(StudySession(
+                    exam=key[0],
+                    session_number=key[1],
+                    start_commit=open_starts[key],
+                    end_commit=commit,
+                ))
 
-    # Build session objects only for pairs with both start and end
-    sessions: list[StudySession] = []
-    for key, start in starts.items():
-        if key in ends:
-            sessions.append(StudySession(
-                exam=key[0],
-                session_number=key[1],
-                start_commit=start,
-                end_commit=ends[key],
-            ))
+                # Close this session key after it is paired.
+                del open_starts[key]
 
     return sessions
+
+
+def get_capped_diff_hours(start: datetime, end: datetime) -> float:
+    """Return capped, non-negative diff hours between two timestamps.
+
+    Args:
+        start: Start timestamp
+        end: End timestamp
+
+    Returns:
+        Time difference in hours capped at MAX_DIFF_HOURS
+    """
+    diff_hours = max(0.0, (end - start).total_seconds() / 3600)
+    return min(diff_hours, MAX_DIFF_HOURS)
 
 
 def is_in_session(
@@ -343,24 +357,35 @@ def calculate_daily_hour(
 
     hours: dict[str, float] = defaultdict(float)
 
-    # Partition commits into session-covered and uncovered
-    in_session = [
-        c for c in day_commits
-        if is_in_session(c, sessions)
-    ]
+    # Calculate session-first diffs inside each matched session pair.
+    # This prevents cross-session chaining while prioritizing explicit sessions.
+    covered_commit_ids: set[int] = set()
+    for session in sessions:
+        session_commits = [
+            c for c in day_commits
+            if (
+                session.start_commit.timestamp
+                <= c.timestamp
+                <= session.end_commit.timestamp
+            )
+        ]
+        session_commits.sort(key=lambda c: c.timestamp)
+
+        for i in range(len(session_commits) - 1):
+            diff_hours = get_capped_diff_hours(
+                session_commits[i].timestamp,
+                session_commits[i + 1].timestamp,
+            )
+            hours[session_commits[i].category] += diff_hours
+
+        for commit in session_commits:
+            covered_commit_ids.add(id(commit))
+
+    # Use regular commit fallback for any commit not covered by sessions.
     out_session = [
         c for c in day_commits
-        if not is_in_session(c, sessions)
+        if id(c) not in covered_commit_ids
     ]
-
-    # Session commits: diff between consecutive pairs, all hours count
-    in_session.sort(key=lambda c: c.timestamp)
-    for i in range(len(in_session) - 1):
-        diff_seconds = (
-            in_session[i + 1].timestamp
-            - in_session[i].timestamp
-        ).total_seconds()
-        hours[in_session[i].category] += diff_seconds / 3600
 
     # Non-session pre-8AM: existing diff approach
     pre_8am = [
@@ -375,10 +400,10 @@ def calculate_daily_hour(
     # Pre-8AM: credit time diff between consecutive commits to first commit
     pre_8am.sort(key=lambda c: c.timestamp)
     for i in range(len(pre_8am) - 1):
-        diff_seconds = (
-            pre_8am[i + 1].timestamp - pre_8am[i].timestamp
-        ).total_seconds()
-        diff_hours = diff_seconds / 3600
+        diff_hours = get_capped_diff_hours(
+            pre_8am[i].timestamp,
+            pre_8am[i + 1].timestamp,
+        )
         hours[pre_8am[i].category] += diff_hours
 
     # Weekend post-8AM: flat 0.5h per commit
