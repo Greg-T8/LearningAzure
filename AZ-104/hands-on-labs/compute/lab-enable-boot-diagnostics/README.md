@@ -1,5 +1,9 @@
 # Lab: Enable Boot Diagnostics for Azure VMs
 
+**Domain:** Monitor and Maintain Azure Resources
+**Skill:** Monitor resources in Azure
+**Task:** Configure and interpret monitoring of VMs, storage accounts, and networks by using Azure Monitor Insights
+
 ## Exam Question Scenario
 
 > **Exam**: AZ-104 — Compute

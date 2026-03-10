@@ -1,5 +1,9 @@
 # Lab: Azure AI Search — Improve Query Performance with Partitions
 
+**Domain:** Implement Knowledge Mining and Information Extraction Solutions
+**Skill:** Implement an Azure AI Search solution
+**Task:** Query an index, including syntax, sorting, filtering, and wildcards
+
 ## Exam Question Scenario
 
 You use Azure AI Search to index your organization's documents and data.

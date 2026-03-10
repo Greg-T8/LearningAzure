@@ -1,5 +1,9 @@
 # Configure Blob Storage Lifecycle Management
 
+**Domain:** Implement and Manage Storage
+**Skill:** Configure Azure Files and Azure Blob Storage
+**Task:** Configure blob lifecycle management
+
 ## Exam Question
 
 > **Exam**: AZ-104 — Storage

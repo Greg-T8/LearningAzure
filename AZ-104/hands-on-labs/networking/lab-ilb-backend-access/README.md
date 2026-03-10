@@ -1,5 +1,9 @@
 # Troubleshoot Internal Load Balancer Backend VM Access
 
+**Domain:** Implement and Manage Virtual Networking
+**Skill:** Configure name resolution and load balancing
+**Task:** Troubleshoot load balancing
+
 ## Exam Question Scenario
 
 You are an Azure administrator at an independent software vendor. Your company is using an Azure internal load balancer that is configured inside an Azure virtual network (VNet).

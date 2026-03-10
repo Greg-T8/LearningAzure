@@ -1,5 +1,9 @@
 # VMSS Rolling Upgrade — Set-AzVmssVM
 
+**Domain:** Deploy and Manage Azure Compute Resources
+**Skill:** Create and configure virtual machines
+**Task:** Deploy and configure an Azure Virtual Machine Scale Sets
+
 ## Exam Question
 
 > **Exam**: AZ-104 — Compute

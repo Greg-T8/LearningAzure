@@ -1,3 +1,9 @@
+# Lab: Select an Azure AI Deployment Strategy
+
+**Domain:** Implement Generative AI Solutions
+**Skill:** Optimize and operationalize a generative AI solution
+**Task:** Optimize and manage resources for deployment, including scalability and foundational model updates
+
 ## Exam Question
 
 > **Exam**: AI-102 — Generative AI

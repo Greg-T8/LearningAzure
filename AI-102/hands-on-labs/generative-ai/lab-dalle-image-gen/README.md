@@ -1,5 +1,9 @@
 # Lab: DALL-E Image Generation with Azure OpenAI
 
+**Domain:** Implement Generative AI Solutions
+**Skill:** Use Azure OpenAI in Foundry Models to generate content
+**Task:** Use the DALL-E model to generate images
+
 ## Exam Question Scenario
 
 You are an AI Engineer. You are developing an application that uses Azure OpenAI to generate images from natural language prompts.

@@ -1,5 +1,9 @@
 # Lab: Azure Blob Versioning Write Operations
 
+**Domain:** Implement and Manage Storage
+**Skill:** Configure Azure Files and Azure Blob Storage
+**Task:** Configure blob versioning
+
 ## Exam Question Scenario
 
 Your organization is using Azure Blobs for storing data. You enable blob versioning for a storage account.

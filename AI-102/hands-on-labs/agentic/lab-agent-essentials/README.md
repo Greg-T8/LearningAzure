@@ -1,5 +1,9 @@
 # Azure AI Agent Service — Essentials: Threads, Files, and Vector Stores
 
+**Domain:** Implement an Agentic Solution
+**Skill:** Create custom agents
+**Task:** Configure the necessary resources to build an agent
+
 ## Exam Question Scenario
 
 You are designing an Azure AI Agent Service solution that helps employees search company policies using uploaded documents. The solution must maintain conversation history across multiple interactions and use a vector store for semantic document retrieval.

@@ -1,5 +1,9 @@
 # Configure KEDA Scaling Rule for Azure Container Apps
 
+**Domain:** Deploy and Manage Azure Compute Resources
+**Skill:** Provision and manage containers in the Azure portal
+**Task:** Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps
+
 ## Exam Question
 
 > **Exam**: AZ-104 — Compute

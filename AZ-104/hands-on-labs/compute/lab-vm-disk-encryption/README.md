@@ -1,5 +1,9 @@
 # Lab: Azure VM Disk Encryption with Key Vault
 
+**Domain:** Deploy and Manage Azure Compute Resources
+**Skill:** Create and configure virtual machines
+**Task:** Configure Azure Disk Encryption
+
 ## Exam Question Scenario
 
 **Type:** Multiple Drop-Down

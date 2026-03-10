@@ -1,5 +1,9 @@
 # Azure AI Content Safety - Text and Image Moderation
 
+**Domain:** Plan and Manage an Azure AI Solution
+**Skill:** Implement AI solutions responsibly
+**Task:** Configure responsible AI insights, including content safety
+
 ## Exam Question Scenario
 
 You are an AI developer at a social media company. Your company wants to use AI solutions to improve aspects of user-generated content management. You are exploring the capabilities of Azure AI Content Safety. You need to identify which features are currently available in Azure AI Content Safety Studio.

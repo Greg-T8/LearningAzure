@@ -1,5 +1,9 @@
 # Lab: Azure Monitor Metrics Batch API
 
+**Domain:** Monitor and Maintain Azure Resources
+**Skill:** Monitor resources in Azure
+**Task:** Interpret metrics in Azure Monitor
+
 ## Exam Question Scenario
 
 You have an Azure subscription that contains virtual machines. You have the following JSON request body for a REST API call:

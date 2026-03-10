@@ -1,5 +1,9 @@
 # Lab: Azure Storage Explorer Permission Troubleshooting
 
+**Domain:** Implement and Manage Storage
+**Skill:** Configure and manage storage accounts
+**Task:** Manage data by using Azure Storage Explorer and AzCopy
+
 ## Exam Question Scenario
 
 You have storage accounts in your Azure subscription for different purposes. The storage accounts have blob containers and file shares configured.

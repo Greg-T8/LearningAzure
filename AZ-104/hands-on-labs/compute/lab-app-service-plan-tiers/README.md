@@ -1,5 +1,9 @@
 # App Service Plan Tiers
 
+**Domain:** Deploy and Manage Azure Compute Resources
+**Skill:** Create and configure Azure App Service
+**Task:** Configure scaling for an App Service plan
+
 ## Exam Question Scenario
 
 You have to provide a website hosting environment that meets the following scalability and security requirements:

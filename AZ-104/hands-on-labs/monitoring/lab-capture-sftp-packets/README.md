@@ -1,5 +1,9 @@
 # Lab: Capture SFTP Packets with Network Watcher
 
+**Domain:** Monitor and Maintain Azure Resources
+**Skill:** Monitor resources in Azure
+**Task:** Use Azure Network Watcher and Connection Monitor
+
 ## Exam Question
 
 > **Exam**: AZ-104 — Monitoring & Backup

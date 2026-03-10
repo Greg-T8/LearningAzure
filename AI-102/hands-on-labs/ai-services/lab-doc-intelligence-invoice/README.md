@@ -1,5 +1,9 @@
 # Lab: Document Intelligence Invoice Model Capabilities
 
+**Domain:** Implement Knowledge Mining and Information Extraction Solutions
+**Skill:** Implement an Azure Document Intelligence in Foundry Tools solution
+**Task:** Use prebuilt models to extract data from documents
+
 ## Exam Question
 
 > **Exam**: AI-102 — Implement knowledge mining and document intelligence solutions

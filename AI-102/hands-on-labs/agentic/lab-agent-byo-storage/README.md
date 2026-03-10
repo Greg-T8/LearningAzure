@@ -1,5 +1,9 @@
 # Azure AI Agent Service — BYO Storage Configuration and RBAC
 
+**Domain:** Implement an Agentic Solution
+**Skill:** Create custom agents
+**Task:** Configure the necessary resources to build an agent
+
 ## Exam Question Scenario
 
 You are investigating an issue where user file uploads to an Azure AI Agent Service are failing after implementing a standard agent setup that uses your own storage account resource. You have confirmed that the Azure Storage account exists and has sufficient capacity. You need to identify the configurations that are causing the upload failure.

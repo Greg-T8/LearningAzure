@@ -1,5 +1,9 @@
 # Lab: Configure Azure Storage Object Replication
 
+**Domain:** Implement and Manage Storage
+**Skill:** Configure and manage storage accounts
+**Task:** Configure object replication
+
 ## Exam Question Scenario
 
 You plan to configure object replication between storage accounts in two different regions.

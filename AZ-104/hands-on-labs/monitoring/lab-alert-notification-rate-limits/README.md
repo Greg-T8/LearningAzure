@@ -1,10 +1,8 @@
 # Lab: Azure Monitor Alert Notification Rate Limits
 
-## Exam Reference
-
-- **Source**: AZ-104 Practice Exam - Azure Monitor
-- **Domain**: Monitor and Backup Azure Resources
-- **Topic**: Azure Monitor Alerts and Action Groups
+**Domain:** Monitor and Maintain Azure Resources
+**Skill:** Monitor resources in Azure
+**Task:** Set up alert rules, action groups, and alert processing rules in Azure Monitor
 
 ## Scenario
 
