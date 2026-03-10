@@ -1,8 +1,6 @@
 # Practice Exam Questions - AI-102
 
-This section documents my progress through AI-102 practice exams with explanations and hands-on labs.
-
----
+Accounts for questions missed or unsure about in the practice exams.
 
 * [Plan and Manage an Azure AI Solution](#plan-and-manage-an-azure-ai-solution)
   * [Implement AI solutions responsibly](#implement-ai-solutions-responsibly)
@@ -445,7 +443,6 @@ In exam terms:
 
 Since the queries are slow even without load, the correct action is to increase partitions.
 
----
 
 **Why the other options are incorrect**
 
@@ -458,7 +455,6 @@ Adding fields increases index size and can negatively impact performance. If any
 **Convert fields to complex types**
 Complex types increase index size and storage requirements. This can degrade performance rather than improve it.
 
----
 
 **Key takeaway**
 
@@ -466,7 +462,6 @@ Complex types increase index size and storage requirements. This can degrade per
 * Slow queries under heavy load → add replicas
 * Larger index size generally reduces performance
 
----
 
 **References**
 
@@ -539,4 +534,3 @@ For each of the following statements, select Yes if the statement is true. Other
 ▶ Related Lab: [lab-doc-intelligence-invoice](../hands-on-labs/ai-services/lab-doc-intelligence-invoice/README.md)
 
 ---
-

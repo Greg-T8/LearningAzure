@@ -214,6 +214,21 @@ def get_capped_diff_hours(start: datetime, end: datetime) -> float:
     return min(diff_hours, MAX_DIFF_HOURS)
 
 
+def map_session_exam_to_category(exam: str) -> str:
+    """Map a session exam label to a table category.
+
+    Args:
+        exam: Session exam label from commit message
+
+    Returns:
+        Category used in the stats table
+    """
+    if exam in EXAM_FOLDERS:
+        return exam
+
+    return 'Other'
+
+
 def is_in_session(
     commit: 'Commit',
     sessions: list['StudySession'],
@@ -358,9 +373,11 @@ def calculate_daily_hour(
     hours: dict[str, float] = defaultdict(float)
 
     # Calculate session-first diffs inside each matched session pair.
-    # This prevents cross-session chaining while prioritizing explicit sessions.
+    # Credit matched session time to the session exam category.
+    # This preserves explicit session intent and avoids file-based drift.
     covered_commit_ids: set[int] = set()
     for session in sessions:
+        session_category = map_session_exam_to_category(session.exam)
         session_commits = [
             c for c in day_commits
             if (
@@ -376,7 +393,7 @@ def calculate_daily_hour(
                 session_commits[i].timestamp,
                 session_commits[i + 1].timestamp,
             )
-            hours[session_commits[i].category] += diff_hours
+            hours[session_category] += diff_hours
 
         for commit in session_commits:
             covered_commit_ids.add(id(commit))
