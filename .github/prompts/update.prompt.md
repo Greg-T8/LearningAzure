@@ -46,7 +46,14 @@ Use the `exam-question-organizer` skill to reorganize practice exam questions by
 
 ### 3. Collapse Explanation Blocks
 
-Search all practice exam question README files (under `practice-questions/` folders and individual assessment MDs such as `Microsoft_Assessment_*.md`, `TutorialsDojo_*.md`, etc.) and ensure any `<details>` blocks that include the `open` attribute (e.g., `<details open>`) are changed to plain `<details>` so explanations are collapsed by default.
+Run the collapse script to ensure all `<details>` blocks default to collapsed:
+
+```powershell
+& ".assets\scripts\Invoke-CollapseDetailBlock.ps1"
+```
+
+- Run with `-WhatIf` first to preview which files contain open detail blocks.
+- The script scans every `practice-questions/` directory and replaces `<details open>` with `<details>`.
 
 ### 4. Remove Unused Images
 
@@ -56,7 +63,6 @@ After all updates are complete, run the unused image cleanup script:
 & ".assets\scripts\Remove-UnusedImages.ps1"
 ```
 
-- Run with `-WhatIf` first to preview what will be deleted before committing to removal.
 - The script scans every `.img` directory in the workspace and deletes any image file not referenced by a sibling markdown file.
 
 ## Invocation Examples
