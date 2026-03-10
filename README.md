@@ -17,11 +17,7 @@ This repository documents my Azure learning journey, from certification prep to 
 Progress trackers, detailed study notes, practice exams, and hands-on labs:
 
 - 📗 [**AZ-104**](AZ-104/README.md) — Azure Administrator Associate (*started 1/15/26*)
-  - [Hands-on Labs](AZ-104/hands-on-labs/README.md)
-  - [Practice Questions](AZ-104/practice-questions/README.md)
 - 📙 [**AI-102**](AI-102/README.md) — Azure AI Engineer Associate (*started 2/10/26*)
-  - [Hands-on Labs](AI-102/hands-on-labs/README.md)
-  - [Practice Questions](AI-102/practice-questions/README.md)
 - 📘 [**AI-900**](AI-900/README.md) — Azure AI Fundamentals (*completed 2/9/26*)
 
 ---
@@ -49,14 +45,6 @@ Progress trackers, detailed study notes, practice exams, and hands-on labs:
 *Last updated: March 09, 2026 at 09:19 CDT*
 
 <!-- COMMIT_STATS_END -->
-
----
-
-## 🔄 Staying Current with Azure
-
-Ongoing learning beyond certification prep, including tracking Azure updates and deep dives.
-
-- 📝 [**Ongoing Learning Activity**](ongoing-learning/README.md)
 
 ---
 
