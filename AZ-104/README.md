@@ -72,7 +72,7 @@ Task-level question counts from [Practice Questions](./practice-questions/README
 | Configure resource locks | 2 |
 | Apply and manage tags on resources | 3 |
 | Manage resource groups | 1 |
-| Manage subscriptions | 0 |
+| Manage subscriptions | 1 |
 | Manage costs by using alerts, budgets, and Azure Advisor recommendations | 1 |
 | Configure management groups | 0 |
 
