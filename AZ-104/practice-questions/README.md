@@ -5,27 +5,30 @@ Accounts for questions missed or unsure about in the practice exams.
 * [Manage Azure identities and governance](#manage-azure-identities-and-governance)
   * [Manage Microsoft Entra users and groups](#manage-microsoft-entra-users-and-groups)
     * [Configure Microsoft Entra SSPR For Specific Users](#configure-microsoft-entra-sspr-for-specific-users)
+  * [Manage access to Azure resources](#manage-access-to-azure-resources)
+    * [Interpret Role Assignments](#interpret-role-assignments)
+    * [Retrieve the Catalog Identifier for Entitlement Management](#retrieve-the-catalog-identifier-for-entitlement-management)
   * [Manage Azure subscriptions and governance](#manage-azure-subscriptions-and-governance)
-    * [Configure Azure Cost Center Tags and Cost Analysis](#configure-azure-cost-center-tags-and-cost-analysis)
+    * [Azure Policy Effects Verification](#azure-policy-effects-verification)
+    * [Append Tag Using PowerShell](#append-tag-using-powershell)
+    * [Move Resources Between Resource Groups](#move-resources-between-resource-groups)
     * [Tagging Policy](#tagging-policy)
     * [Azure Policy Not Functioning](#azure-policy-not-functioning)
+    * [Configure Azure Cost Center Tags and Cost Analysis](#configure-azure-cost-center-tags-and-cost-analysis)
 * [Implement and manage storage](#implement-and-manage-storage)
   * [Configure access to storage](#configure-access-to-storage)
-    * [Diagnose Storage Explorer Permission Errors](#diagnose-storage-explorer-permission-errors)
     * [Configure AzCopy Authentication for Blob and File Storage](#configure-azcopy-authentication-for-blob-and-file-storage)
+    * [Diagnose Storage Explorer Permission Errors](#diagnose-storage-explorer-permission-errors)
     * [Modify Stored Access Policy](#modify-stored-access-policy)
   * [Configure and manage storage accounts](#configure-and-manage-storage-accounts)
-    * [Configure Object Replication Between Storage Accounts](#configure-object-replication-between-storage-accounts)
     * [Azure Storage Redundancy Recommendation](#azure-storage-redundancy-recommendation)
+    * [Configure Object Replication Between Storage Accounts](#configure-object-replication-between-storage-accounts)
   * [Configure Azure Files and Azure Blob Storage](#configure-azure-files-and-azure-blob-storage)
-    * [Configure Lifecycle Management Policy for Azure Storage](#configure-lifecycle-management-policy-for-azure-storage)
-    * [Identify Blob Write Operations That Create New Versions](#identify-blob-write-operations-that-create-new-versions)
-    * [Lifecycle Management Policy Configuration](#lifecycle-management-policy-configuration)
     * [Delete Soft-Deleted File Share](#delete-soft-deleted-file-share)
+    * [Identify Blob Write Operations That Create New Versions](#identify-blob-write-operations-that-create-new-versions)
+    * [Configure Lifecycle Management Policy for Azure Storage](#configure-lifecycle-management-policy-for-azure-storage)
+    * [Lifecycle Management Policy Configuration](#lifecycle-management-policy-configuration)
 * [Deploy and manage Azure compute resources](#deploy-and-manage-azure-compute-resources)
-  * [Automate deployment of resources by using Azure Resource Manager (ARM) templates or Bicep files](#automate-deployment-of-resources-by-using-azure-resource-manager-arm-templates-or-bicep-files)
-    * [Resource dependencies in Bicep](#resource-dependencies-in-bicep)
-    * [Convert Array to Object](#convert-array-to-object)
   * [Create and configure virtual machines](#create-and-configure-virtual-machines)
     * [VM Resize Failure Cause](#vm-resize-failure-cause)
     * [Encrypt VM Disk With Key Vault](#encrypt-vm-disk-with-key-vault)
@@ -33,36 +36,34 @@ Accounts for questions missed or unsure about in the practice exams.
   * [Provision and manage containers in the Azure portal](#provision-and-manage-containers-in-the-azure-portal)
     * [Configure Scaling Rules in Azure Container Apps](#configure-scaling-rules-in-azure-container-apps)
   * [Create and configure Azure App Service](#create-and-configure-azure-app-service)
-    * [Configure Azure App Service Plan for Website Hosting](#configure-azure-app-service-plan-for-website-hosting)
-    * [Prepare Azure App Service for Web App Republication](#prepare-azure-app-service-for-web-app-republication)
     * [Resolve Azure App Service Pricing Tier for Runtime Requirements](#resolve-azure-app-service-pricing-tier-for-runtime-requirements)
     * [Resolve Azure App Service Pricing Tier for Runtime Requirements](#resolve-azure-app-service-pricing-tier-for-runtime-requirements-1)
+    * [Prepare Azure App Service for Web App Republication](#prepare-azure-app-service-for-web-app-republication)
+    * [Configure Azure App Service Plan for Website Hosting](#configure-azure-app-service-plan-for-website-hosting)
     * [Resolve Azure App Service Pricing Tier for Runtime Requirements](#resolve-azure-app-service-pricing-tier-for-runtime-requirements-2)
+  * [Automate deployment of resources by using Azure Resource Manager (ARM) templates or Bicep files](#automate-deployment-of-resources-by-using-azure-resource-manager-arm-templates-or-bicep-files)
+    * [Resource dependencies in Bicep](#resource-dependencies-in-bicep)
+    * [Convert Array to Object](#convert-array-to-object)
 * [Implement and manage virtual networking](#implement-and-manage-virtual-networking)
   * [Configure secure access to virtual networks](#configure-secure-access-to-virtual-networks)
     * [Configure Private Link Service Source IP](#configure-private-link-service-source-ip)
   * [Configure name resolution and load balancing](#configure-name-resolution-and-load-balancing)
-    * [Configure Standard Load Balancer Outbound Traffic and IP Allocation](#configure-standard-load-balancer-outbound-traffic-and-ip-allocation)
-    * [Diagnose Internal Load Balancer Hairpin Traffic Failure](#diagnose-internal-load-balancer-hairpin-traffic-failure)
-    * [Configure DNS Records for App Service](#configure-dns-records-for-app-service)
     * [IMDS Load Balancer Metadata Error](#imds-load-balancer-metadata-error)
+    * [Configure DNS Records for App Service](#configure-dns-records-for-app-service)
+    * [Diagnose Internal Load Balancer Hairpin Traffic Failure](#diagnose-internal-load-balancer-hairpin-traffic-failure)
+    * [Configure Standard Load Balancer Outbound Traffic and IP Allocation](#configure-standard-load-balancer-outbound-traffic-and-ip-allocation)
 * [Monitor and maintain Azure resources](#monitor-and-maintain-azure-resources)
   * [Monitor resources in Azure](#monitor-resources-in-azure)
-    * [Configure Azure Monitor Alert for Database CPU Usage](#configure-azure-monitor-alert-for-database-cpu-usage)
     * [Configure Azure Monitor Alert Notification Rate Limits](#configure-azure-monitor-alert-notification-rate-limits)
     * [Enable Boot Diagnostics for Azure Virtual Machines](#enable-boot-diagnostics-for-azure-virtual-machines)
     * [Diagnose Network Watcher Tool for Web Server Packet Flow](#diagnose-network-watcher-tool-for-web-server-packet-flow)
-    * [Load Balancer Metrics Batch API](#load-balancer-metrics-batch-api)
     * [Capture SFTP Packets with Network Watcher](#capture-sftp-packets-with-network-watcher)
     * [Storage Insights Overview](#storage-insights-overview)
+    * [Configure Azure Monitor Alert for Database CPU Usage](#configure-azure-monitor-alert-for-database-cpu-usage)
+    * [Load Balancer Metrics Batch API](#load-balancer-metrics-batch-api)
   * [Implement backup and recovery](#implement-backup-and-recovery)
     * [Recover Configuration File from Azure VM Backup](#recover-configuration-file-from-azure-vm-backup)
     * [Recover Azure VM from Deleted Backup](#recover-azure-vm-from-deleted-backup)
-    * [Retrieve the Catalog Identifier for Entitlement Management](#retrieve-the-catalog-identifier-for-entitlement-management)
-    * [Interpret Role Assignments](#interpret-role-assignments)
-    * [Azure Policy Effects Verification](#azure-policy-effects-verification)
-    * [Append Tag Using PowerShell](#append-tag-using-powershell)
-    * [Move Resources Between Resource Groups](#move-resources-between-resource-groups)
 
 ---
 
@@ -141,89 +142,301 @@ You must **configure the authentication requirements and enable SSPR** before yo
 
 ---
 
-### Manage Azure subscriptions and governance
+### Manage access to Azure resources
 
-#### Configure Azure Cost Center Tags and Cost Analysis
+#### Interpret Role Assignments
 
 **Domain:** Manage Azure identities and governance
-**Skill:** Manage Azure subscriptions and governance
-**Task:**
+**Skill:** Manage access to Azure resources
+**Task:** Interpret access assignments
 
-- Apply and manage tags on resources
-- Manage costs by using alerts, budgets, and Azure Advisor recommendations
+You are tasked with assigning Azure role-based access control (Azure RBAC) roles to users in your company.
 
-Your company has an Azure Subscription with several resources deployed. The subscription is managed by a Cloud Service Provider.
+You are trying to interpret access assignments for UserA. You want to validate the role assignments for UserA scoped to the groups of which UserA is a member.
 
-The accounting department is currently granted the billing reader role, so they are able to see cost-related information. They need to get a better understanding of the costs so they can assign them to the correct cost center.
+You need to complete the Azure CLI command shown below.
 
-You need to provide cost center information. Your solution should minimize administrative effort.
+Which cmdlets should you use? To answer, complete the commands by selecting the correct parts from the drop-down menus.
 
-What two actions should you perform? Each correct answer presents part of the solution.
+```bash
+az role assignment ___[1]___ ___[2]___ --assignee UserA@myorg.com\ \
+  --output json --query '[].{principalName:principalName, \
+  roleDefinitionName:roleDefinitionName, scope:scope}'
+```
 
-A. Instruct the accounting department to use the Azure Account Center.  
-B. Create a tag named CostCenter and assign it to each resource group.  
-C. Instruct the accounting department to use the Cost Analysis blade in the subscription panel.  
-D. Create a tag named CostCenter and assign it to each resource.  
+Drop-Down Options:
+
+<!-- Dropdown options not yet provided. Paste screenshots of each expanded drop-down to populate. -->
 
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-01-30-06-20-49.png' width=700>
+<img src='.img/2026-03-09-03-48-14.png' width=600>
 
 </details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
 
-Looking at your selected answers, I can help you understand what went wrong.
+Azure role-based access control (Azure RBAC) is the authorization system you use to manage access to Azure resources. To determine what resources users, groups, service principals, or managed identities have access to, you need to list their role assignments. You could further adjust access control by updating the role assignments, or create new ones. In this scenario, you are using the Azure CLI to interpret access assignments for a user named UserA in your company. Additionally, you need to retrieve information on the extra assignments to the groups of which UserA is a member. You should complete the CLI command as follows:
 
-**Your Selected Answers:**
+```bash
+az role assignment list --include-groups --assignee UserA@myorg.com \
+  --output json --query '[].{principalName:principalName, \
+  roleDefinitionName:roleDefinitionName, scope:scope}'
+```
 
-1. ✗ Create a tag named CostCenter and assign it to each **resource group**
-2. ✓ Instruct the accounting department to use the Cost Analysis blade in the subscription panel
+You should use the `list` command and the `--include-groups` parameter. The `list` command lists the role assignments for the <UserA@myorg.com> user. The parameter retrieves information on the extra assignments to the groups of which UserA is a member.
 
-**The Problem with Your Answer:**
+You should not use the `create` command. You can use the `create` command when you want to create a new role assignment for a user, group, or service principal.
 
-You got **one correct** (Cost Analysis), but your tagging strategy is at the **wrong level of granularity**.
+You should not use the `list-changelogs` command. You should use the `list-changelogs` command when you want to retrieve and exhibit the changelogs for role assignments.
 
-**Why Resource Group Tagging is Insufficient:**
+You should not use the `update` command. You should use the `update` command when you want to update an existing role assignment for a user, group, or service principal.
 
-**Resource group-level tags** can cause issues when:
+You should not use the `--all` parameter. You should use this parameter when you want to retrieve and display all assignments under the current subscription. It is turned off by default.
 
-- Multiple resources in the same resource group belong to **different cost centers**
-- You need **granular cost allocation** at the resource level
-- Resources are moved between resource groups
+You should not use the `--include-inherited` parameter. You should use this parameter when you want to retrieve and display all assignments including assignments applied on parent scopes.
 
-For example, if RG1 contains:
+You should not use the `--include-classic-administrators` parameter. You should use this parameter when you want to retrieve and exhibit all default role assignments for subscription classic administrators, or co-admins.
 
-- 5 VMs for Cost Center A
-- 3 VMs for Cost Center B
+</details>
 
-Tagging the resource group only gives you one cost center value, preventing accurate cost allocation.
+---
 
-**The Correct Answers Should Be:**
+#### Retrieve the Catalog Identifier for Entitlement Management
 
-1. **Create a tag named CostCenter and assign it to each resource** ✓
-   - Provides granular cost tracking at the resource level
-   - Each resource can be assigned to its specific cost center
-   - More accurate cost allocation
+**Domain:** Manage Azure identities and governance
+**Skill:** Manage access to Azure resources
+**Task:** Manage identity and access lifecycle using Microsoft Entra ID Governance
 
-2. **Instruct the accounting department to use the Cost Analysis blade in the subscription panel** ✓
-   - This is the correct tool for CSP-managed subscriptions
-   - Azure Account Center is NOT available for CSP subscriptions
-   - Cost Analysis can filter and group costs by tags
+Your organization is using Microsoft Entra ID Governance. You are the Azure administrator in the organization.
 
-**Why "Azure Account Center" is Wrong:**
+You are using Microsoft Graph PowerShell to provide and manage identity and access lifecycle at scale for all users and groups within the organization.
 
-The **Azure Account Center** is not accessible in **Cloud Service Provider (CSP) managed subscriptions**. Only direct Enterprise Agreement (EA) or other subscription types have access to it.
+You have a group named Sales. You need to grant users in the Sales group the adequate level of access using entitlement management. Your organization's policy dictates the use of the general catalog.
 
-**Key Takeaway:**
+What should you do first?
 
-For cost center allocation:
+A. Retrieve the catalog resources.  
+B. Retrieve the resource roles assigned to the catalog.  
+C. Retrieve the catalog identifier.  
+D. Add the Sales group to the catalog.  
 
-- Tag at the **resource level** (not resource group level) for accurate, granular tracking
-- Use **Cost Analysis** (not Account Center) for CSP subscriptions
-- Cost Analysis allows filtering and grouping by tags to assign costs to cost centers
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-08-06-34-08.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Why the selected answer is correct (C)**
+
+In this scenario, you are essentially managing access to resources in your organization. You are using Microsoft Entra ID entitlement management with Microsoft Graph PowerShell v1.0. Since the users and group already exist, you need to initiate the process by getting the catalog identifier.
+
+An access package is a collection of resources that is governed by policies. Access packages are defined in containers called catalogs. However, to add resources to the catalog, you will require details of the catalog identifier. Thus, you should retrieve the catalog identifier as the initial step by using the following command:
+
+```powershell
+Get-MgIdentityGovernanceEntitlementManagementCatalog -Filter "DisplayName eq 'General'" | Format-List
+```
+
+**Why the other options are incorrect**
+
+* **A. Retrieve the catalog resources**: You should get the catalog resources as a later step. To be able to do this, you will require the identifier that is assigned to the group resource in the catalog.
+* **B. Retrieve the resource roles assigned to the catalog**: This should be done at a later stage. The access package assigns users to the roles of a resource, which in the case of a group used in an access package is typically the member role. You will need this role when you add a resource role to the access package.
+* **D. Add the Sales group to the catalog**: This is the second step. To add the group to the catalog, you need the properties of a group object, which represents the resource.
+
+**Key takeaway**
+
+When working with Microsoft Entra ID entitlement management and access packages, the **first step is always to retrieve the catalog identifier**. This identifier is required before you can add resources, assign roles, or add groups to the access package.
+
+In Microsoft Entra ID entitlement management, a **catalog** is the container that holds resources (such as groups, applications, and SharePoint sites) that can be granted through access packages. The **General catalog** is the default catalog in every tenant and is typically used for organization-wide resources that many users may request. Administrators add resources to the catalog, define the available resource roles, bundle them into **access packages**, and then apply policies that control who can request access and how it is approved and reviewed. When automating this process with Microsoft Graph PowerShell, the **catalog identifier must be retrieved first**, because most entitlement-management operations require the catalog ID before resources, access packages, or policies can be created or managed.
+
+**References**
+
+* [What is entitlement management?](https://learn.microsoft.com/en-us/entra/id-governance/entitlement-management-overview)
+* [Tutorial: Manage access to resources in Microsoft Entra entitlement management using Microsoft Graph PowerShell](https://learn.microsoft.com/en-us/powershell/microsoftgraph/tutorial-entitlement-management?view=graph-powershell-1.0)
+
+</details>
+
+---
+
+### Manage Azure subscriptions and governance
+
+#### Azure Policy Effects Verification
+
+**Domain:** Manage Azure identities and governance
+**Skill:** Manage Azure subscriptions and governance
+**Task:** Implement and manage Azure Policy
+
+Your company requires all resources deployed in Azure to be assigned to a cost center.
+
+You use a tag named CostCenter to assign each resource to the correct cost center. This tag has a set of valid values assigned.
+
+Some of the resources deployed in your subscription already have a value assigned to the CostCenter tag.
+
+You decide to deploy a subscription policy to verify that all resources in the subscription have a valid value assigned.
+
+For each of the following statements, select Yes if the statement is true. Otherwise, select No.
+
+| Statement | Yes | No |
+|----------|-----|----|
+| The Deny effect is evaluated first. | ☐ | ☐ |
+| The Append effect modifies the value of an existing field in a resource. | ☐ | ☐ |
+| The Audit effect will create a warning event in the activity log for non-compliant resources. | ☐ | ☐ |
+| The DeployIfNotExists effect is only evaluated if the request executed by the Resource Provider returns a success status code. | ☐ | ☐ |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-09-03-54-46.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+The Deny effect is not evaluated first. When a policy is evaluated, the Disabled effect is always evaluated first to decide whether the rule should be evaluated afterwards. The correct order of evaluation of the policy effects is: Disabled, Append, Deny and Audit.
+
+The Append effect does not modify the value of an existing field in a resource. The Append effect adds additional fields during the creation or update of a resource. If the field already exists in the resource and the values in the resource and the policy are different, then the policy acts as a deny and rejects the request.
+
+The Audit effect will create a warning event in the activity log for non-compliant resources. The audit effect is evaluated last, before the Resource Provider handles a create or update request. You typically use the audit effect when you want to track non-compliant resources.
+
+The DeployIfNotExists effect is only evaluated if the request executed by the Resource Provider returns a success status code. Once the effect has been evaluated, it is triggered if the resource does not exist or if the resource defined by ExistenceCondition is evaluated as false.
+
+<img src='.img/2026-03-09-03-56-52.png' width=600>
+
+<img src='.img/2026-03-09-03-58-31.png' width=600>
+
+<img src='.img/2026-03-09-04-01-30.png' width=600>
+
+<img src='.img/2026-03-09-04-02-34.png' width=600>
+
+References
+
+* [Understand Azure Policy effects](https://learn.microsoft.com/en-us/azure/governance/policy/concepts/effect-basics)
+* [Azure Policy Samples](https://learn.microsoft.com/en-us/azure/governance/policy/samples/)
+
+</details>
+
+---
+
+#### Append Tag Using PowerShell
+
+**Domain:** Manage Azure identities and governance
+**Skill:** Manage Azure subscriptions and governance
+**Task:** Apply and manage tags on resources
+
+You use taxonomic tags to logically organize resources and to make billing reporting easier.
+
+You use Azure PowerShell to append an additional tag on a storage account named corptorage99. The code is as follows:
+
+```powershell
+$r = Get-AzResource -ResourceName "corptorage99" -ResourceGroupName "prod-rg"
+Set-AzResource -Tag @{Dept="IT"} -ResourceId $r.ResourceId -Force
+```
+
+The code returns unexpected results.
+
+You need to append the additional tag as quickly as possible.
+
+What should you do?
+
+A. Edit the script to call the Add() method after getting the resource to append the new tag.  
+B. Assign the Enforce tag and its value Azure Policy to the resource group.  
+C. Deploy the tag by using an Azure Resource Manager (ARM) template.  
+D. Refactor the code by using the Azure Command-Line Interface (CLI).  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-09-04-08-19.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+You should edit the script to call the Add() method after getting the resource to append the new tag as shown in the second line of this refactored Azure PowerShell code:
+
+```powershell
+$r = Get-AzResource -ResourceName "corptorage99" -ResourceGroupName "prod-rg"
+$r.Tags.Add("Dept", "IT")
+Set-AzResource -Tag $r.Tags -ResourceId $r.ResourceId -Force
+```
+
+Unless you call the Add() method, the Set-AzResource cmdlet will overwrite any existing taxonomic tags on the resource. The Add() method preserves existing tags and includes one or more tags to the resource tag list.
+
+You should not deploy the tag by using an Azure Resource Manager (ARM) template. Doing so is unnecessary in this case because the Azure PowerShell is mostly complete as-is. Furthermore, you must find the solution as quickly as possible.
+
+You should not assign the Enforce tag and its value Azure Policy to the resource group. Azure Policy is a governance feature that helps businesses enforce compliance in resource creation. In this case, the solution involves too much administrative overhead to be a viable option. Moreover, the scenario makes no mention of the need for governance policy in specific terms.
+
+You should not refactor the code by using the Azure Command-Line Interface (CLI). Either Azure PowerShell or Azure CLI can be used to institute this solution. It makes no sense to change the development language, since you have already completed most of the code in PowerShell.
+
+<img src='.img/2026-03-09-04-11-46.png' width=600>
+
+</details>
+
+---
+
+#### Move Resources Between Resource Groups
+
+**Domain:** Manage Azure identities and governance
+**Skill:** Manage Azure subscriptions and governance
+**Task:** Manage resource groups
+
+You deploy an application in a resource group named App-RG01 in your Azure subscription.
+
+App-RG01 contains the following components:
+
+- Two App Services, each with a free App Service managed Secure Sockets Layer (SSL) certificate
+- A peered virtual network (VNet)
+- Redis cache deployed in the VNet
+- A Standard Load Balancer
+
+You need to move all resources in App-RG01 to a new resource group named App-RG02. For each of the following statements, select Yes if the statement is true. Otherwise, select No.
+
+| STATEMENT | YES | NO |
+|-----------|-----|----|
+| You need to delete the SSL certificate from each App Service before moving it to the new resource group. | ☐ | ☐ |
+| You can move the Standard Load Balancer across two Azure subscriptions. | ☐ | ☐ |
+| You need to disable the peer before moving the VNet. | ☐ | ☐ |
+| You can move the VNet within the same subscription. | ☐ | ☐ |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-09-04-14-38.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+You need to delete the Secure Sockets Layer (SSL) certificate from each App Service before moving it to the new resource group. You cannot move an App Service with an SSL certificate configured since in our use-case scenario, you are using the free App Service managed Secure Sockets Layer (SSL) certificate. You need to delete the certificate first, move the App Service, and then upload the certificate again.
+
+You cannot move the Standard Load Balancer across two Azure subscriptions. Within a single Azure subscription, Resource Group move operations for both Standard Load Balancer and standard Public IP are allowed. But for a Standard Load Balancer, move operations across Azure Subscriptions are not allowed.
+
+You need to disable the peer before moving the VNet. When you want to move a VNet with a peer configured, you need to disable it before moving the VNet. When you move a VNet, you need to move all of its dependent resources.
+
+You can move the VNet within the same subscription. When you want to move a VNet, you also need to move all of its dependent resources. In this case, you also need to move the Redis cache, which can be moved only within the same subscription. Because you want to move the resources from App-RG01 to App-RG02, which is in the same subscription, you can move the VNet with no problem.
+
+<img src='.img/2026-03-09-04-16-58.png' width=600>
+
+<img src='.img/2026-03-09-04-18-10.png' width=600>
+
+<img src='.img/2026-03-09-04-19-07.png' width=600>
+
+<img src='.img/2026-03-09-04-20-30.png' width=600>
+
+References
+
+* [Move resources to a new resource group or subscription](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/move-resource-group-and-subscription?tabs=azure-cli)
+* [Move networking resources to new resource group or subscription](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/move-limitations/networking-move-limitations)
+* [Azure Load Balancer SKUs](https://learn.microsoft.com/en-us/azure/load-balancer/skus)
 
 </details>
 
@@ -390,9 +603,213 @@ References
 
 ---
 
+#### Configure Azure Cost Center Tags and Cost Analysis
+
+**Domain:** Manage Azure identities and governance
+**Skill:** Manage Azure subscriptions and governance
+**Task:**
+
+- Apply and manage tags on resources
+- Manage costs by using alerts, budgets, and Azure Advisor recommendations
+
+Your company has an Azure Subscription with several resources deployed. The subscription is managed by a Cloud Service Provider.
+
+The accounting department is currently granted the billing reader role, so they are able to see cost-related information. They need to get a better understanding of the costs so they can assign them to the correct cost center.
+
+You need to provide cost center information. Your solution should minimize administrative effort.
+
+What two actions should you perform? Each correct answer presents part of the solution.
+
+A. Instruct the accounting department to use the Azure Account Center.  
+B. Create a tag named CostCenter and assign it to each resource group.  
+C. Instruct the accounting department to use the Cost Analysis blade in the subscription panel.  
+D. Create a tag named CostCenter and assign it to each resource.  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-01-30-06-20-49.png' width=700>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+Looking at your selected answers, I can help you understand what went wrong.
+
+**Your Selected Answers:**
+
+1. ✗ Create a tag named CostCenter and assign it to each **resource group**
+2. ✓ Instruct the accounting department to use the Cost Analysis blade in the subscription panel
+
+**The Problem with Your Answer:**
+
+You got **one correct** (Cost Analysis), but your tagging strategy is at the **wrong level of granularity**.
+
+**Why Resource Group Tagging is Insufficient:**
+
+**Resource group-level tags** can cause issues when:
+
+- Multiple resources in the same resource group belong to **different cost centers**
+- You need **granular cost allocation** at the resource level
+- Resources are moved between resource groups
+
+For example, if RG1 contains:
+
+- 5 VMs for Cost Center A
+- 3 VMs for Cost Center B
+
+Tagging the resource group only gives you one cost center value, preventing accurate cost allocation.
+
+**The Correct Answers Should Be:**
+
+1. **Create a tag named CostCenter and assign it to each resource** ✓
+   - Provides granular cost tracking at the resource level
+   - Each resource can be assigned to its specific cost center
+   - More accurate cost allocation
+
+2. **Instruct the accounting department to use the Cost Analysis blade in the subscription panel** ✓
+   - This is the correct tool for CSP-managed subscriptions
+   - Azure Account Center is NOT available for CSP subscriptions
+   - Cost Analysis can filter and group costs by tags
+
+**Why "Azure Account Center" is Wrong:**
+
+The **Azure Account Center** is not accessible in **Cloud Service Provider (CSP) managed subscriptions**. Only direct Enterprise Agreement (EA) or other subscription types have access to it.
+
+**Key Takeaway:**
+
+For cost center allocation:
+
+- Tag at the **resource level** (not resource group level) for accurate, granular tracking
+- Use **Cost Analysis** (not Account Center) for CSP subscriptions
+- Cost Analysis allows filtering and grouping by tags to assign costs to cost centers
+
+</details>
+
+---
+
 ## Implement and manage storage
 
 ### Configure access to storage
+
+#### Configure AzCopy Authentication for Blob and File Storage
+
+**Domain:** Implement and manage storage
+**Skill:** Configure access to storage
+**Task:**
+
+- Create and use shared access signature (SAS) tokens
+- Manage access keys
+- Configure identity-based access for Azure Files
+
+You create a new storage account named DevStore for Azure Blob Storage and Azure File Storage. You plan to use AzCopy to copy data from blob storage and file storage in other storage accounts to DevStore. You have access to the storage account access keys for the source storage accounts and for DevStore. You also have valid Microsoft Entra user accounts and shared access signatures (SAS) with access to the source data.
+
+You need to identify the authorization methods you can use to copy the data to DevStore.
+
+Which authorization methods can you use to copy each storage type? To answer, select the appropriate options from the drop-down menus.
+
+Blob storage: $PLACEHOLDER$
+
+File storage: $PLACEHOLDER$
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-01-30-05-58-51.png' width=700>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+Looking at your answer, I can explain why you got the File storage authorization wrong.
+
+**Your Answer:**
+
+- **Blob storage**: Microsoft Entra ID, access keys, and SAS ✓
+- **File storage**: Microsoft Entra ID only ✗
+
+**The Problem:**
+
+You selected **Microsoft Entra ID only** for File storage, which is incorrect because:
+
+**1. Microsoft Entra ID has LIMITED/NO support for Azure Files with AzCopy:**
+
+While Microsoft Entra ID (Azure AD) works excellently for **Blob storage** with AzCopy, it has **very limited or no support** for **Azure Files** (File shares).
+
+AzCopy's Azure AD authentication is primarily designed for:
+
+- ✓ Blob storage
+- ✓ Azure Data Lake Storage Gen2
+- ✗ Azure Files (not supported or very limited)
+
+**2. You Excluded Valid Methods:**
+
+The scenario explicitly states:
+> "You have access to the storage account access keys for the source storage accounts and for DevStore. You also have valid Microsoft Entra user accounts and **shared access signatures (SAS)**."
+
+For Azure Files, AzCopy **DOES support**:
+
+- ✓ **SAS tokens** - Fully supported and commonly used
+- ✓ **Access keys** - Supported
+- ✗ **Microsoft Entra ID** - Not supported/limited
+
+**The Correct Answer Should Be:**
+
+- **Blob storage**: Microsoft Entra ID, access keys, and SAS ✓
+- **File storage**: **Access keys and SAS** (or possibly just SAS)
+
+**Why This Matters:**
+
+The critical distinction:
+
+| Storage Type | Entra ID | Access Keys | SAS |
+|-------------|----------|-------------|-----|
+| **Blob Storage** | ✓ Yes | ✓ Yes | ✓ Yes |
+| **File Storage** | ✗ Limited/No | ✓ Yes | ✓ Yes |
+
+**Key Detail: "Commands target only the file share or the account":**
+
+This hint suggests:
+
+- **File share level**: Use SAS tokens (most common)
+- **Account level**: Use access keys
+
+Both are valid for Azure Files, but **not** Microsoft Entra ID.
+
+**AzCopy Command Examples:**
+
+**For Blob (with Entra ID):**
+
+```bash
+azcopy login
+azcopy copy "source" "https://devstore.blob.core.windows.net/container"
+```
+
+**For File Storage (with SAS):**
+
+```bash
+azcopy copy "source" "https://devstore.file.core.windows.net/share?<SAS-token>"
+```
+
+**For File Storage (with Account Key):**
+
+```bash
+# Set environment variable
+export AZCOPY_ACCOUNT_KEY="<account-key>"
+azcopy copy "source" "https://devstore.file.core.windows.net/share"
+```
+
+**Key Takeaway:**
+
+**Microsoft Entra ID authentication is NOT supported for Azure Files with AzCopy**, unlike Blob storage where it works perfectly. For File storage, you must use **SAS tokens or access keys**. Don't assume that authentication methods work the same across all storage types!
+
+</details>
+
+▶ **Related Lab:** [lab-azcopy-auth-methods](/AZ-104/hands-on-labs/storage/lab-azcopy-auth-methods/README.md)
+
+---
 
 #### Diagnose Storage Explorer Permission Errors
 
@@ -577,124 +994,6 @@ The solution is either:
 
 ---
 
-#### Configure AzCopy Authentication for Blob and File Storage
-
-**Domain:** Implement and manage storage
-**Skill:** Configure access to storage
-**Task:**
-
-- Create and use shared access signature (SAS) tokens
-- Manage access keys
-- Configure identity-based access for Azure Files
-
-You create a new storage account named DevStore for Azure Blob Storage and Azure File Storage. You plan to use AzCopy to copy data from blob storage and file storage in other storage accounts to DevStore. You have access to the storage account access keys for the source storage accounts and for DevStore. You also have valid Microsoft Entra user accounts and shared access signatures (SAS) with access to the source data.
-
-You need to identify the authorization methods you can use to copy the data to DevStore.
-
-Which authorization methods can you use to copy each storage type? To answer, select the appropriate options from the drop-down menus.
-
-Blob storage: $PLACEHOLDER$
-
-File storage: $PLACEHOLDER$
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-01-30-05-58-51.png' width=700>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-Looking at your answer, I can explain why you got the File storage authorization wrong.
-
-**Your Answer:**
-
-- **Blob storage**: Microsoft Entra ID, access keys, and SAS ✓
-- **File storage**: Microsoft Entra ID only ✗
-
-**The Problem:**
-
-You selected **Microsoft Entra ID only** for File storage, which is incorrect because:
-
-**1. Microsoft Entra ID has LIMITED/NO support for Azure Files with AzCopy:**
-
-While Microsoft Entra ID (Azure AD) works excellently for **Blob storage** with AzCopy, it has **very limited or no support** for **Azure Files** (File shares).
-
-AzCopy's Azure AD authentication is primarily designed for:
-
-- ✓ Blob storage
-- ✓ Azure Data Lake Storage Gen2
-- ✗ Azure Files (not supported or very limited)
-
-**2. You Excluded Valid Methods:**
-
-The scenario explicitly states:
-> "You have access to the storage account access keys for the source storage accounts and for DevStore. You also have valid Microsoft Entra user accounts and **shared access signatures (SAS)**."
-
-For Azure Files, AzCopy **DOES support**:
-
-- ✓ **SAS tokens** - Fully supported and commonly used
-- ✓ **Access keys** - Supported
-- ✗ **Microsoft Entra ID** - Not supported/limited
-
-**The Correct Answer Should Be:**
-
-- **Blob storage**: Microsoft Entra ID, access keys, and SAS ✓
-- **File storage**: **Access keys and SAS** (or possibly just SAS)
-
-**Why This Matters:**
-
-The critical distinction:
-
-| Storage Type | Entra ID | Access Keys | SAS |
-|-------------|----------|-------------|-----|
-| **Blob Storage** | ✓ Yes | ✓ Yes | ✓ Yes |
-| **File Storage** | ✗ Limited/No | ✓ Yes | ✓ Yes |
-
-**Key Detail: "Commands target only the file share or the account":**
-
-This hint suggests:
-
-- **File share level**: Use SAS tokens (most common)
-- **Account level**: Use access keys
-
-Both are valid for Azure Files, but **not** Microsoft Entra ID.
-
-**AzCopy Command Examples:**
-
-**For Blob (with Entra ID):**
-
-```bash
-azcopy login
-azcopy copy "source" "https://devstore.blob.core.windows.net/container"
-```
-
-**For File Storage (with SAS):**
-
-```bash
-azcopy copy "source" "https://devstore.file.core.windows.net/share?<SAS-token>"
-```
-
-**For File Storage (with Account Key):**
-
-```bash
-# Set environment variable
-export AZCOPY_ACCOUNT_KEY="<account-key>"
-azcopy copy "source" "https://devstore.file.core.windows.net/share"
-```
-
-**Key Takeaway:**
-
-**Microsoft Entra ID authentication is NOT supported for Azure Files with AzCopy**, unlike Blob storage where it works perfectly. For File storage, you must use **SAS tokens or access keys**. Don't assume that authentication methods work the same across all storage types!
-
-</details>
-
-▶ **Related Lab:** [lab-azcopy-auth-methods](/AZ-104/hands-on-labs/storage/lab-azcopy-auth-methods/README.md)
-
----
-
 #### Modify Stored Access Policy
 
 **Domain:** Implement and manage storage
@@ -738,6 +1037,51 @@ References
 ---
 
 ### Configure and manage storage accounts
+
+#### Azure Storage Redundancy Recommendation
+
+**Domain:** Implement and manage storage
+**Skill:** Configure and manage storage accounts
+**Task:** Configure Azure Storage redundancy
+
+You are a Cloud engineer who works for a global organization with offices all around the world. The organization currently uses Azure to host its infrastructure, including file shares. It uses premium zone-redundant storage (ZRS) accounts for its existing file storage in Azure, as well as Azure Files workloads.
+
+The company is planning to open new offices in the Azure (Europe) UK South region.
+
+You need to decide which option for Azure Storage you should use based on Microsoft's current recommendations.
+
+Which solution should you recommend?
+
+A. Read-access geo-redundant storage (RA-GRS) with six replications.  
+B. Locally redundant storage (LRS) with three replications.  
+C. Zone-redundant storage (ZRS) with three replications.  
+D. Geo-redundant storage (GRS) with six replications.  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-03-03-46-17.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+You should recommend Zone-redundant storage (ZRS) with three replications. Zone-redundant storage (ZRS) with three replications is the correct choice because ZRS replicates your data across multiple availability zones within the same region. This provides high availability and durability, protecting against both local hardware failures and zone-level failures, making it ideal for a global organization with critical Azure Files workloads.
+
+You should not recommend Locally redundant storage (LRS) with three replications. Microsoft does not recommend using LRS as it copies your data synchronously three times within a single physical location in the primary region. LRS provides at least 99.9999999999 (11 nines) durability of objects over a given year. LRS is the lowest-cost redundancy option but offers the least durability compared to other options. This is a poor architectural choice since in case the primary region goes down owing to a region-wide failure, you could possibly face a data loss.
+
+You should not recommend Geo-redundant storage (GRS) with six replications. GRS replicates your data to a secondary region, providing higher durability by ensuring data is available even if the primary region fails. However, GRS does not offer read access to the secondary region unless a failover occurs, which might not meet the needs for high availability and quick access in a multi-office setup.
+
+You should not recommend Read-access geo-redundant storage (RA-GRS) with six replications. RA-GRS provides the same redundancy as GRS but with read access to the secondary region. While this offers better availability than GRS, it might still not be the best choice for performance-sensitive applications that require low-latency access to data across multiple zones within a region.
+
+References
+
+[Azure Storage redundancy](https://learn.microsoft.com/azure/storage/common/storage-redundancy)
+
+</details>
+
+---
 
 #### Configure Object Replication Between Storage Accounts
 
@@ -882,52 +1226,122 @@ You had the logic completely reversed - change feed on the wrong end, and versio
 
 ---
 
-#### Azure Storage Redundancy Recommendation
+### Configure Azure Files and Azure Blob Storage
+
+#### Delete Soft-Deleted File Share
 
 **Domain:** Implement and manage storage
-**Skill:** Configure and manage storage accounts
-**Task:** Configure Azure Storage redundancy
+**Skill:** Configure Azure Files and Azure Blob Storage
+**Task:** Configure snapshots and soft delete for Azure Files
 
-You are a Cloud engineer who works for a global organization with offices all around the world. The organization currently uses Azure to host its infrastructure, including file shares. It uses premium zone-redundant storage (ZRS) accounts for its existing file storage in Azure, as well as Azure Files workloads.
+Your company is using Azure Files for storing files. You are the Azure administrator in your company.
 
-The company is planning to open new offices in the Azure (Europe) UK South region.
+You need to permanently delete an Azure file share that has been soft deleted.
 
-You need to decide which option for Azure Storage you should use based on Microsoft's current recommendations.
+You execute the PowerShell command shown below:
 
-Which solution should you recommend?
+```powershell
+Update-AzStorageFilesServiceProperty `
+  -ResourceGroupName $resourceGroupName `
+  -StorageAccountName $storageAccountName `
+  -EnableShareDeleteRetentionPolicy $false
+```
 
-A. Read-access geo-redundant storage (RA-GRS) with six replications.  
-B. Locally redundant storage (LRS) with three replications.  
-C. Zone-redundant storage (ZRS) with three replications.  
-D. Geo-redundant storage (GRS) with six replications.  
+Which statement is correct regarding this command?
+
+A. The PowerShell command undeletes the file share.  
+B. The PowerShell command disables soft delete on your storage account and permanently deletes an Azure file share that has been soft deleted.  
+C. The PowerShell command only disables soft delete on your storage account.  
+D. The PowerShell command does not disable soft delete on your storage account.  
 
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-03-03-03-46-17.png' width=600>
+<img src='.img/2026-03-04-04-27-15.png' width=600>
 
 </details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
 
-You should recommend Zone-redundant storage (ZRS) with three replications. Zone-redundant storage (ZRS) with three replications is the correct choice because ZRS replicates your data across multiple availability zones within the same region. This provides high availability and durability, protecting against both local hardware failures and zone-level failures, making it ideal for a global organization with critical Azure Files workloads.
+To permanently delete a file share that has been soft deleted, you must undelete it, disable soft delete, and then delete it again. The provided PowerShell command, which uses the `-EnableShareDeleteRetentionPolicy $false` parameter value, only disables soft delete on your storage account, but this does not permanently delete a file share as is the desired outcome in this scenario. Thus, the option that the PowerShell command only disables soft delete on your storage account is the correct choice.
 
-You should not recommend Locally redundant storage (LRS) with three replications. Microsoft does not recommend using LRS as it copies your data synchronously three times within a single physical location in the primary region. LRS provides at least 99.9999999999 (11 nines) durability of objects over a given year. LRS is the lowest-cost redundancy option but offers the least durability compared to other options. This is a poor architectural choice since in case the primary region goes down owing to a region-wide failure, you could possibly face a data loss.
+The PowerShell command does not undelete the file share. To permanently delete a file share that has been soft deleted, you must undelete it, disable soft delete, and then delete it again.
 
-You should not recommend Geo-redundant storage (GRS) with six replications. GRS replicates your data to a secondary region, providing higher durability by ensuring data is available even if the primary region fails. However, GRS does not offer read access to the secondary region unless a failover occurs, which might not meet the needs for high availability and quick access in a multi-office setup.
-
-You should not recommend Read-access geo-redundant storage (RA-GRS) with six replications. RA-GRS provides the same redundancy as GRS but with read access to the secondary region. While this offers better availability than GRS, it might still not be the best choice for performance-sensitive applications that require low-latency access to data across multiple zones within a region.
+<img src='.img/2026-03-04-04-36-13.png' width=600>
 
 References
 
-[Azure Storage redundancy](https://learn.microsoft.com/azure/storage/common/storage-redundancy)
+- [Prevent File Share Deletion](https://learn.microsoft.com/en-us/azure/storage/files/storage-files-prevent-file-share-deletion?tabs=azure-portal)
 
 </details>
 
 ---
 
-### Configure Azure Files and Azure Blob Storage
+#### Identify Blob Write Operations That Create New Versions
+
+**Domain:** Implement and manage storage
+**Skill:** Configure Azure Files and Azure Blob Storage
+**Task:** Configure blob versioning
+
+Your organization is using Azure Blobs for storing data. You enable blob versioning for a storage account.
+
+You need to determine which write operations create a new version.
+
+Which four write operations create a new version? Each correct answer presents a complete solution.
+
+A. Put Blob  
+B. Append Block  
+C. Put Block List  
+D. Copy Blob  
+E. Set Blob Metadata  
+F. Put Blob From URL  
+G. Put Page  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-01-30-06-01-29.png' width=700>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+You're absolutely correct to question this. I made an error in my original response.
+
+**The correct four operations that create new versions are:**
+
+1. **Put Blob** ✓ (You selected this correctly)
+2. **Put Block List** (You did not select this)
+3. **Copy Blob** (You did not select this)
+4. **Set Blob Metadata** (You did not select this)
+
+**Why your selected answers were wrong:**
+
+- **Append Block** – Does NOT create a new version. It appends data to an append blob without overwriting the blob itself.
+- **Put Blob From URL** – I incorrectly stated this creates a version. The documentation does NOT list this as a versioning operation. While it creates or overwrites a blob, it's not explicitly mentioned in Microsoft's versioning documentation as triggering a new version.
+- **Put Page** – Does NOT create a new version. It updates page ranges within a page blob in place.
+
+**Why Set Blob Metadata creates a version:**
+
+I incorrectly stated that metadata changes don't trigger versioning. According to Microsoft's documentation, **Set Blob Metadata** is explicitly listed as a write operation that creates a new version. This is a key exam concept: metadata changes are considered blob modifications that warrant version tracking.
+
+**Key takeaway:**
+
+The four versioning operations are **Put Blob**, **Put Block List**, **Copy Blob**, and **Set Blob Metadata**. These are the operations Microsoft explicitly lists in their documentation. Don't assume operations like "Put Blob From URL" trigger versioning unless explicitly documented.
+
+**References:**
+
+- [Blob versioning - How blob versioning works](https://learn.microsoft.com/en-us/azure/storage/blobs/versioning-overview#how-blob-versioning-works)
+
+<img src='.img/2026-02-02-04-41-46.png' width=600>
+
+</details>
+
+▶ **Related Lab:** [lab-blob-versioning](../../hands-on-labs/storage/lab-blob-versioning/README.md)
+
+---
 
 #### Configure Lifecycle Management Policy for Azure Storage
 
@@ -1090,71 +1504,6 @@ Set-AzStorageBlobInventoryPolicy                # \u2717 Wrong!
 
 ---
 
-#### Identify Blob Write Operations That Create New Versions
-
-**Domain:** Implement and manage storage
-**Skill:** Configure Azure Files and Azure Blob Storage
-**Task:** Configure blob versioning
-
-Your organization is using Azure Blobs for storing data. You enable blob versioning for a storage account.
-
-You need to determine which write operations create a new version.
-
-Which four write operations create a new version? Each correct answer presents a complete solution.
-
-A. Put Blob  
-B. Append Block  
-C. Put Block List  
-D. Copy Blob  
-E. Set Blob Metadata  
-F. Put Blob From URL  
-G. Put Page  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-01-30-06-01-29.png' width=700>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-You're absolutely correct to question this. I made an error in my original response.
-
-**The correct four operations that create new versions are:**
-
-1. **Put Blob** ✓ (You selected this correctly)
-2. **Put Block List** (You did not select this)
-3. **Copy Blob** (You did not select this)
-4. **Set Blob Metadata** (You did not select this)
-
-**Why your selected answers were wrong:**
-
-- **Append Block** – Does NOT create a new version. It appends data to an append blob without overwriting the blob itself.
-- **Put Blob From URL** – I incorrectly stated this creates a version. The documentation does NOT list this as a versioning operation. While it creates or overwrites a blob, it's not explicitly mentioned in Microsoft's versioning documentation as triggering a new version.
-- **Put Page** – Does NOT create a new version. It updates page ranges within a page blob in place.
-
-**Why Set Blob Metadata creates a version:**
-
-I incorrectly stated that metadata changes don't trigger versioning. According to Microsoft's documentation, **Set Blob Metadata** is explicitly listed as a write operation that creates a new version. This is a key exam concept: metadata changes are considered blob modifications that warrant version tracking.
-
-**Key takeaway:**
-
-The four versioning operations are **Put Blob**, **Put Block List**, **Copy Blob**, and **Set Blob Metadata**. These are the operations Microsoft explicitly lists in their documentation. Don't assume operations like "Put Blob From URL" trigger versioning unless explicitly documented.
-
-**References:**
-
-- [Blob versioning - How blob versioning works](https://learn.microsoft.com/en-us/azure/storage/blobs/versioning-overview#how-blob-versioning-works)
-
-<img src='.img/2026-02-02-04-41-46.png' width=600>
-
-</details>
-
-▶ **Related Lab:** [lab-blob-versioning](../../hands-on-labs/storage/lab-blob-versioning/README.md)
-
----
-
 #### Lifecycle Management Policy Configuration
 
 **Domain:** Implement and manage storage
@@ -1230,190 +1579,7 @@ For each of the following statements, select Yes if the statement is true. Other
 
 ---
 
-#### Delete Soft-Deleted File Share
-
-**Domain:** Implement and manage storage
-**Skill:** Configure Azure Files and Azure Blob Storage
-**Task:** Configure snapshots and soft delete for Azure Files
-
-Your company is using Azure Files for storing files. You are the Azure administrator in your company.
-
-You need to permanently delete an Azure file share that has been soft deleted.
-
-You execute the PowerShell command shown below:
-
-```powershell
-Update-AzStorageFilesServiceProperty `
-  -ResourceGroupName $resourceGroupName `
-  -StorageAccountName $storageAccountName `
-  -EnableShareDeleteRetentionPolicy $false
-```
-
-Which statement is correct regarding this command?
-
-A. The PowerShell command undeletes the file share.  
-B. The PowerShell command disables soft delete on your storage account and permanently deletes an Azure file share that has been soft deleted.  
-C. The PowerShell command only disables soft delete on your storage account.  
-D. The PowerShell command does not disable soft delete on your storage account.  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-04-04-27-15.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-To permanently delete a file share that has been soft deleted, you must undelete it, disable soft delete, and then delete it again. The provided PowerShell command, which uses the `-EnableShareDeleteRetentionPolicy $false` parameter value, only disables soft delete on your storage account, but this does not permanently delete a file share as is the desired outcome in this scenario. Thus, the option that the PowerShell command only disables soft delete on your storage account is the correct choice.
-
-The PowerShell command does not undelete the file share. To permanently delete a file share that has been soft deleted, you must undelete it, disable soft delete, and then delete it again.
-
-<img src='.img/2026-03-04-04-36-13.png' width=600>
-
-References
-
-- [Prevent File Share Deletion](https://learn.microsoft.com/en-us/azure/storage/files/storage-files-prevent-file-share-deletion?tabs=azure-portal)
-
-</details>
-
----
-
 ## Deploy and manage Azure compute resources
-
-### Automate deployment of resources by using Azure Resource Manager (ARM) templates or Bicep files
-
-#### Resource dependencies in Bicep
-
-**Domain:** Deploy and manage Azure compute resources
-**Skill:** Automate deployment of resources by using Azure Resource Manager (ARM) templates or Bicep files
-**Task:** Interpret an Azure Resource Manager template or a Bicep file
-
-You are an Azure Administrator for an eCommerce organization. You are deploying Azure resources and have created a Bicep file as shown below:
-
-```bicep
-resource PrimaryDnsZone 'Microsoft.Network/dnszones@2018-05-01' = {
-  name: 'myZone'
-  location: 'global'
-}
-
-resource otherResource 'Microsoft.Example/examples@2023-05-01' = {
-  name: 'egResource'
-  properties: {
-    // get read-only DNS zone property
-    nameServers: PrimaryDnsZone.properties.nameServers
-  }
-}
-
-resource otherZone 'Microsoft.Network/dnszones@2023-06-01' = {
-  name: 'demoZone2'
-  location: 'global'
-  dependsOn: [
-    PrimaryDnsZone
-  ]
-}
-```
-
-For each of the following statements, select Yes if the statement is true. Otherwise, select No.
-
-| Statement | Yes | No |
-|----------|-----|----|
-| The resource named otherResource is implicitly dependent on PrimaryDnsZone. | ☐ | ☐ |
-| The resource named otherZone is implicitly dependent on PrimaryDnsZone. | ☐ | ☐ |
-| Azure Resource Manager deploys the PrimaryDnsZone and otherZone resources in parallel. | ☐ | ☐ |
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-03-03-30-51.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-There are two kinds of resource dependencies in Azure Bicep. An implicit dependency is created when one resource declaration references another resource in the same deployment. The other type is referred to as an explicit dependency, where you use the dependsOn property. The dependsOn property accepts an array of resource identifiers, so you can specify more than one dependency. You can specify a nested resource dependency by using the :: operator.
-
-The resource named otherResource is implicitly dependent on PrimaryDnsZone. The `nameServers: PrimaryDnsZone.properties.nameServers` in otherResource uses an implicit dependency.
-
-The resource named otherZone is not implicitly dependent on PrimaryDnsZone. The otherZone uses the `dependsOn: [ PrimaryDnsZone ]`, which denotes that otherZone resource uses an explicit dependency.
-
-Azure Resource Manager (ARM) does not deploy the PrimaryDnsZone and otherZone resources in parallel. ARM only deploys resources in parallel if the resources are not dependent on one another. In this scenario, since the otherZone resource is explicitly dependent on the PrimaryDnsZone resource, ARM will not deploy the resources in parallel.
-
-References
-
-* [Resource dependencies in Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/resource-dependencies)
-
-</details>
-
----
-
-#### Convert Array to Object
-
-**Domain:** Deploy and manage Azure compute resources
-**Skill:** Automate deployment of resources by using Azure Resource Manager (ARM) templates or Bicep files
-**Task:** Modify an existing Bicep file
-
-You are an Azure administrator for a company. You are deploying Azure resources using Bicep and you want to use Lambda functions to handle an array.
-
-You need to convert an array to an object with a custom key function and optional custom value function to produce the following output:
-
-{"MrFunny":{"name":"MrFunny","age":2},"MrNaughty":{"name":"MrNaughty","age":3}}
-
-Which Lambda function should you use to complete the code snippet below? To answer, select the appropriate option from the drop-down menu.
-
-```
-var cats = [
-  {
-    name: 'MrFunny'
-    age: 2
-  }
-  {
-    name: 'MrNaughty'
-    age: 3
-  }
-]
-
-output twocats object = ___[1]___ (cats, entry => entry.name)
-```
-
-Drop-Down Options:
-
-<!-- Dropdown options not yet provided. Paste screenshots of each expanded drop-down to populate. -->
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-03-04-28-34.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-Lambda expressions (or lambda functions) are essentially blocks of code that can be passed as an argument. They can take multiple parameters but are restricted to a single line of code. In this scenario, you need to convert an array to an object with a custom key function and optional custom value function. To do this, you should use the toObject lambda function. In this scenario, you use the toObject with two required parameters: output twocats object = toObject(cats, entry => entry.name), which produces the following output:
-
-{"MrFunny":{"name":"MrFunny","age":2},"MrNaughty":{"name":"MrNaughty","age":3}}
-
-You should not use the map lambda function. You would use map lambda function when you want to apply a custom mapping function to each element of an array.
-
-You should not use the reduce lambda function. You would use the reduce lambda function when you want to reduce an array with a custom reduce function. This would not produce the desired output since the return value is an array and not an object.
-
-You should not use sort lambda function. You would use the sort lambda function when you want to sort an array with a custom sort function.
-
-<img src='.img/2026-03-03-04-32-17.png' width=600>
-
-<img src='.img/2026-03-03-04-32-49.png' width=600>
-
-References
-
-* [Bicep Functions Lambda - ToObject](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-functions-lambda#toobject)
-* [Bicep Functions Lambda - Map](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-functions-lambda#map)p>
-
-</details>
-
----
 
 ### Create and configure virtual machines
 
@@ -1708,6 +1874,198 @@ The JSON defines an Azure Service Bus scaler with a `messageCount` threshold and
 
 ### Create and configure Azure App Service
 
+#### Resolve Azure App Service Pricing Tier for Runtime Requirements
+
+**Domain:** Deploy and manage Azure compute resources
+**Skill:** Create and configure Azure App Service
+**Task:**
+
+- Provision an App Service plan
+- Configure scaling for an App Service plan
+
+You deploy an Azure web app named MyApp. MyApp runs in a Free pricing tier service plan named MyPlan. During testing, you discover that MyApp stops after 60 minutes and that it cannot be restarted until the next day.
+
+You need to ensure that MyApp can run eight hours each day during the testing period. You want to keep the additional costs incurred to a minimum.
+
+Does changing the pricing tier for MyPlan to Basic B1 meet the goal?
+
+A. Yes  
+B. No  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-01-30-06-17-46.png' width=700>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Why "Yes" is correct**
+Changing the App Service plan from **Free (F1)** to **Basic (B1)** removes the **Free/Shared quota enforcement** behavior. In Free/Shared tiers, Azure enforces CPU/Bandwidth quotas; when the app exceeds its quota (for example, CPU (Day)), the app is **stopped until the quota resets** (which matches "stops after 60 minutes" and "can't be restarted until the next day"). Scaling up to a dedicated tier (Basic) avoids those per-app CPU-minute/day quotas, allowing the app to run for the required **8 hours/day**.
+
+**Why "No" would be a trap**
+A common misconception is that "Free just means no SLA" or "it only affects performance." In reality, Free/Shared tiers have **hard quotas** that can stop the app for the rest of the day once exceeded.
+
+**Cost reasoning (exam perspective)**
+Basic **B1** is typically the lowest-cost **dedicated compute** App Service plan tier. Since the requirement is to run several hours daily, moving to the cheapest dedicated tier is the minimal-cost way to meet the runtime goal.
+
+**Key takeaway**
+Free/Shared App Service plans can stop apps when usage quotas are exceeded; moving to a dedicated tier like **Basic B1** eliminates that daily CPU-minute quota enforcement and meets the 8-hours/day requirement.
+
+<img src='.img/2026-02-05-04-17-27.png' width=800>
+
+**References**
+
+* [https://learn.microsoft.com/en-us/azure/app-service/web-sites-monitor](https://learn.microsoft.com/en-us/azure/app-service/web-sites-monitor)
+* [https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans](https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans)
+
+</details>
+
+---
+
+#### Resolve Azure App Service Pricing Tier for Runtime Requirements
+
+**Domain:** Deploy and manage Azure compute resources
+**Skill:** Create and configure Azure App Service
+**Task:**
+
+- Provision an App Service plan
+- Configure scaling for an App Service plan
+
+You deploy an Azure web app named MyApp. MyApps runs in a Free pricing tier service plan named MyPlan. During testing, you discover that MyApp stops after 60 minutes and that it cannot be restarted until the next day.
+
+You need to ensure that MyApp can run eight hours each day during the testing period. You want to keep the additional costs incurred to a minimum.
+
+Does changing the pricing tier for MyPlan to Shared D1 meet the goal?
+
+A. Yes  
+B. No  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-01-30-06-17-12.png' width=700>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Why the selected answer is wrong (Yes)**
+Moving from **Free (F1)** to **Shared (D1)** increases the daily CPU quota, but it **does not remove quotas**. Your symptom ("stops after 60 minutes and can't be restarted until the next day") matches hitting the **CPU (Day)** quota, which causes the app to be stopped until the quota resets. In Shared (D1), the app can still hit **CPU (Day)** and be stopped again—just later—so it won't reliably run **8 hours/day**.
+
+**Why the correct answer is correct (No)**
+To meet "run 8 hours each day," you need a plan where you **don't get stopped due to Free/Shared quotas**. That generally means moving to a **Dedicated compute** tier (Basic/Standard/Premium), where the app runs on dedicated VMs and the Free/Shared CPU (Day) quota enforcement doesn't apply in the same way. Shared (D1) remains a shared-compute tier with quota enforcement, so it doesn't meet the requirement.
+
+**Why other options are incorrect or less appropriate**
+
+* **Stay on Free (F1):** guaranteed to stop once the quota is exceeded (as observed).
+* **Shared (D1):** still quota-enforced; may extend runtime but not to the required 8 hours consistently.
+* **Basic (B1) or higher:** costs more than Shared, but it's the minimum tier change that aligns with the requirement to keep the app running during the testing window.
+
+**Key takeaway**
+**Free and Shared tiers have CPU quotas that can stop the app until the daily reset.** If you need predictable multi-hour runtime, move to a **Dedicated compute** tier (Basic or higher).
+
+**References**
+
+* [https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans](https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans)
+* [https://learn.microsoft.com/en-us/azure/app-service/web-sites-monitor](https://learn.microsoft.com/en-us/azure/app-service/web-sites-monitor)
+
+</details>
+
+▶ **Related Lab:** [lab-app-service-plan-quotas](../hands-on-labs/compute/lab-app-service-plan-quotas/README.md)
+
+---
+
+#### Prepare Azure App Service for Web App Republication
+
+**Domain:** Deploy and manage Azure compute resources
+**Skill:** Create and configure Azure App Service
+**Task:**
+
+- Create an App Service
+- Configure deployment slots for an App Service
+
+You are developing a new web app. The source code is located in an Azure DevOps Git repository. Before you move the web app into production, its functionality must be reviewed by your test users.
+
+You need to prepare the target environment to be ready to republish the web app.
+
+Which four commands should you run in sequence? To answer, move the appropriate commands from the list of possible commands to the answer area and arrange them in the correct order.
+
+Available options:
+
+* Publish-AzWebApp  
+* New-AzAppServicePlan  
+* New-AzResourceGroup  
+* New-AzWebAppSlot  
+* Start-AzWebAppSlot  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-01-30-06-12-43.png' width=700>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Why the selected answer is wrong**
+
+Your sequence prepares Azure infrastructure objects but **never deploys the application code** from the Azure DevOps Git repository.
+The exam question explicitly states that the target environment must be ready to **republish the web app** so test users can review functionality. That implies pushing code into an App Service (or slot), not just provisioning resources.
+
+Specific issues with your sequence:
+
+* **New-AzWebAppSlot** is unnecessary unless the question explicitly mentions deployment slots. Slots are optional, not required to republish.
+* **Start-AzWebAppSlot** is redundant in most exam scenarios. Newly created web apps and slots start automatically.
+* **Publish-AzWebApp** (or equivalent deployment command) is missing, which is the key step that actually deploys the application.
+* You created infrastructure only; no deployment occurred.
+
+This is a common exam trap: confusing *environment preparation* with *application deployment*.
+
+**Why the correct answer is right**
+
+The correct sequence includes the deployment step and follows the required dependency order:
+
+1. **New-AzResourceGroup**
+   A resource group must exist before any App Service resources can be created.
+
+2. **New-AzAppServicePlan**
+   An App Service Plan is required before creating a web app.
+
+3. **New-AzWebApp**
+   Creates the App Service that will host the application.
+
+4. **Publish-AzWebApp**
+   Deploys the application code so testers can access and validate functionality.
+
+This sequence ensures:
+
+* Infrastructure dependencies are respected.
+* The web app actually contains code to test.
+* The environment is truly “ready to republish,” per the wording of the question.
+
+**Key takeaway**
+
+On Azure exams, **“prepare the environment to republish” always includes deploying code**, not just creating resources.
+If a deployment-related command is available (like `Publish-AzWebApp`) and the scenario involves testers or validation, it is almost always required.
+
+**References**
+
+* [https://learn.microsoft.com/azure/app-service/overview](https://learn.microsoft.com/azure/app-service/overview)
+* [https://learn.microsoft.com/powershell/module/az.websites/new-azwebapp](https://learn.microsoft.com/powershell/module/az.websites/new-azwebapp)
+* [https://learn.microsoft.com/powershell/module/az.websites/publish-azwebapp](https://learn.microsoft.com/powershell/module/az.websites/publish-azwebapp)
+* [https://learn.microsoft.com/azure/app-service/deploy-local-git](https://learn.microsoft.com/azure/app-service/deploy-local-git)
+
+</details>
+
+▶ **Related Lab:** [lab-app-service-republication](../hands-on-labs/compute/lab-app-service-republication/README.md)
+
+---
+
 #### Configure Azure App Service Plan for Website Hosting
 
 **Domain:** Deploy and manage Azure compute resources
@@ -1814,147 +2172,6 @@ On Azure exams, when you see:
 
 ---
 
-#### Prepare Azure App Service for Web App Republication
-
-**Domain:** Deploy and manage Azure compute resources
-**Skill:** Create and configure Azure App Service
-**Task:**
-
-- Create an App Service
-- Configure deployment slots for an App Service
-
-You are developing a new web app. The source code is located in an Azure DevOps Git repository. Before you move the web app into production, its functionality must be reviewed by your test users.
-
-You need to prepare the target environment to be ready to republish the web app.
-
-Which four commands should you run in sequence? To answer, move the appropriate commands from the list of possible commands to the answer area and arrange them in the correct order.
-
-Available options:
-
-* Publish-AzWebApp  
-* New-AzAppServicePlan  
-* New-AzResourceGroup  
-* New-AzWebAppSlot  
-* Start-AzWebAppSlot  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-01-30-06-12-43.png' width=700>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Why the selected answer is wrong**
-
-Your sequence prepares Azure infrastructure objects but **never deploys the application code** from the Azure DevOps Git repository.
-The exam question explicitly states that the target environment must be ready to **republish the web app** so test users can review functionality. That implies pushing code into an App Service (or slot), not just provisioning resources.
-
-Specific issues with your sequence:
-
-* **New-AzWebAppSlot** is unnecessary unless the question explicitly mentions deployment slots. Slots are optional, not required to republish.
-* **Start-AzWebAppSlot** is redundant in most exam scenarios. Newly created web apps and slots start automatically.
-* **Publish-AzWebApp** (or equivalent deployment command) is missing, which is the key step that actually deploys the application.
-* You created infrastructure only; no deployment occurred.
-
-This is a common exam trap: confusing *environment preparation* with *application deployment*.
-
-**Why the correct answer is right**
-
-The correct sequence includes the deployment step and follows the required dependency order:
-
-1. **New-AzResourceGroup**
-   A resource group must exist before any App Service resources can be created.
-
-2. **New-AzAppServicePlan**
-   An App Service Plan is required before creating a web app.
-
-3. **New-AzWebApp**
-   Creates the App Service that will host the application.
-
-4. **Publish-AzWebApp**
-   Deploys the application code so testers can access and validate functionality.
-
-This sequence ensures:
-
-* Infrastructure dependencies are respected.
-* The web app actually contains code to test.
-* The environment is truly “ready to republish,” per the wording of the question.
-
-**Key takeaway**
-
-On Azure exams, **“prepare the environment to republish” always includes deploying code**, not just creating resources.
-If a deployment-related command is available (like `Publish-AzWebApp`) and the scenario involves testers or validation, it is almost always required.
-
-**References**
-
-* [https://learn.microsoft.com/azure/app-service/overview](https://learn.microsoft.com/azure/app-service/overview)
-* [https://learn.microsoft.com/powershell/module/az.websites/new-azwebapp](https://learn.microsoft.com/powershell/module/az.websites/new-azwebapp)
-* [https://learn.microsoft.com/powershell/module/az.websites/publish-azwebapp](https://learn.microsoft.com/powershell/module/az.websites/publish-azwebapp)
-* [https://learn.microsoft.com/azure/app-service/deploy-local-git](https://learn.microsoft.com/azure/app-service/deploy-local-git)
-
-</details>
-
-▶ **Related Lab:** [lab-app-service-republication](../hands-on-labs/compute/lab-app-service-republication/README.md)
-
----
-
-#### Resolve Azure App Service Pricing Tier for Runtime Requirements
-
-**Domain:** Deploy and manage Azure compute resources
-**Skill:** Create and configure Azure App Service
-**Task:**
-
-- Provision an App Service plan
-- Configure scaling for an App Service plan
-
-You deploy an Azure web app named MyApp. MyApps runs in a Free pricing tier service plan named MyPlan. During testing, you discover that MyApp stops after 60 minutes and that it cannot be restarted until the next day.
-
-You need to ensure that MyApp can run eight hours each day during the testing period. You want to keep the additional costs incurred to a minimum.
-
-Does changing the pricing tier for MyPlan to Shared D1 meet the goal?
-
-A. Yes  
-B. No  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-01-30-06-17-12.png' width=700>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Why the selected answer is wrong (Yes)**
-Moving from **Free (F1)** to **Shared (D1)** increases the daily CPU quota, but it **does not remove quotas**. Your symptom ("stops after 60 minutes and can't be restarted until the next day") matches hitting the **CPU (Day)** quota, which causes the app to be stopped until the quota resets. In Shared (D1), the app can still hit **CPU (Day)** and be stopped again—just later—so it won't reliably run **8 hours/day**.
-
-**Why the correct answer is correct (No)**
-To meet "run 8 hours each day," you need a plan where you **don't get stopped due to Free/Shared quotas**. That generally means moving to a **Dedicated compute** tier (Basic/Standard/Premium), where the app runs on dedicated VMs and the Free/Shared CPU (Day) quota enforcement doesn't apply in the same way. Shared (D1) remains a shared-compute tier with quota enforcement, so it doesn't meet the requirement.
-
-**Why other options are incorrect or less appropriate**
-
-* **Stay on Free (F1):** guaranteed to stop once the quota is exceeded (as observed).
-* **Shared (D1):** still quota-enforced; may extend runtime but not to the required 8 hours consistently.
-* **Basic (B1) or higher:** costs more than Shared, but it's the minimum tier change that aligns with the requirement to keep the app running during the testing window.
-
-**Key takeaway**
-**Free and Shared tiers have CPU quotas that can stop the app until the daily reset.** If you need predictable multi-hour runtime, move to a **Dedicated compute** tier (Basic or higher).
-
-**References**
-
-* [https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans](https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans)
-* [https://learn.microsoft.com/en-us/azure/app-service/web-sites-monitor](https://learn.microsoft.com/en-us/azure/app-service/web-sites-monitor)
-
-</details>
-
-▶ **Related Lab:** [lab-app-service-plan-quotas](../hands-on-labs/compute/lab-app-service-plan-quotas/README.md)
-
----
-
 #### Resolve Azure App Service Pricing Tier for Runtime Requirements
 
 **Domain:** Deploy and manage Azure compute resources
@@ -2049,52 +2266,134 @@ ACU/vCPU is a **relative CPU performance indicator**. Higher numbers mean **fast
 
 ---
 
-#### Resolve Azure App Service Pricing Tier for Runtime Requirements
+### Automate deployment of resources by using Azure Resource Manager (ARM) templates or Bicep files
+
+#### Resource dependencies in Bicep
 
 **Domain:** Deploy and manage Azure compute resources
-**Skill:** Create and configure Azure App Service
-**Task:**
+**Skill:** Automate deployment of resources by using Azure Resource Manager (ARM) templates or Bicep files
+**Task:** Interpret an Azure Resource Manager template or a Bicep file
 
-- Provision an App Service plan
-- Configure scaling for an App Service plan
+You are an Azure Administrator for an eCommerce organization. You are deploying Azure resources and have created a Bicep file as shown below:
 
-You deploy an Azure web app named MyApp. MyApp runs in a Free pricing tier service plan named MyPlan. During testing, you discover that MyApp stops after 60 minutes and that it cannot be restarted until the next day.
+```bicep
+resource PrimaryDnsZone 'Microsoft.Network/dnszones@2018-05-01' = {
+  name: 'myZone'
+  location: 'global'
+}
 
-You need to ensure that MyApp can run eight hours each day during the testing period. You want to keep the additional costs incurred to a minimum.
+resource otherResource 'Microsoft.Example/examples@2023-05-01' = {
+  name: 'egResource'
+  properties: {
+    // get read-only DNS zone property
+    nameServers: PrimaryDnsZone.properties.nameServers
+  }
+}
 
-Does changing the pricing tier for MyPlan to Basic B1 meet the goal?
+resource otherZone 'Microsoft.Network/dnszones@2023-06-01' = {
+  name: 'demoZone2'
+  location: 'global'
+  dependsOn: [
+    PrimaryDnsZone
+  ]
+}
+```
 
-A. Yes  
-B. No  
+For each of the following statements, select Yes if the statement is true. Otherwise, select No.
+
+| Statement | Yes | No |
+|----------|-----|----|
+| The resource named otherResource is implicitly dependent on PrimaryDnsZone. | ☐ | ☐ |
+| The resource named otherZone is implicitly dependent on PrimaryDnsZone. | ☐ | ☐ |
+| Azure Resource Manager deploys the PrimaryDnsZone and otherZone resources in parallel. | ☐ | ☐ |
 
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-01-30-06-17-46.png' width=700>
+<img src='.img/2026-03-03-03-30-51.png' width=600>
 
 </details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
 
-**Why "Yes" is correct**
-Changing the App Service plan from **Free (F1)** to **Basic (B1)** removes the **Free/Shared quota enforcement** behavior. In Free/Shared tiers, Azure enforces CPU/Bandwidth quotas; when the app exceeds its quota (for example, CPU (Day)), the app is **stopped until the quota resets** (which matches "stops after 60 minutes" and "can't be restarted until the next day"). Scaling up to a dedicated tier (Basic) avoids those per-app CPU-minute/day quotas, allowing the app to run for the required **8 hours/day**.
+There are two kinds of resource dependencies in Azure Bicep. An implicit dependency is created when one resource declaration references another resource in the same deployment. The other type is referred to as an explicit dependency, where you use the dependsOn property. The dependsOn property accepts an array of resource identifiers, so you can specify more than one dependency. You can specify a nested resource dependency by using the :: operator.
 
-**Why "No" would be a trap**
-A common misconception is that "Free just means no SLA" or "it only affects performance." In reality, Free/Shared tiers have **hard quotas** that can stop the app for the rest of the day once exceeded.
+The resource named otherResource is implicitly dependent on PrimaryDnsZone. The `nameServers: PrimaryDnsZone.properties.nameServers` in otherResource uses an implicit dependency.
 
-**Cost reasoning (exam perspective)**
-Basic **B1** is typically the lowest-cost **dedicated compute** App Service plan tier. Since the requirement is to run several hours daily, moving to the cheapest dedicated tier is the minimal-cost way to meet the runtime goal.
+The resource named otherZone is not implicitly dependent on PrimaryDnsZone. The otherZone uses the `dependsOn: [ PrimaryDnsZone ]`, which denotes that otherZone resource uses an explicit dependency.
 
-**Key takeaway**
-Free/Shared App Service plans can stop apps when usage quotas are exceeded; moving to a dedicated tier like **Basic B1** eliminates that daily CPU-minute quota enforcement and meets the 8-hours/day requirement.
+Azure Resource Manager (ARM) does not deploy the PrimaryDnsZone and otherZone resources in parallel. ARM only deploys resources in parallel if the resources are not dependent on one another. In this scenario, since the otherZone resource is explicitly dependent on the PrimaryDnsZone resource, ARM will not deploy the resources in parallel.
 
-<img src='.img/2026-02-05-04-17-27.png' width=800>
+References
 
-**References**
+* [Resource dependencies in Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/resource-dependencies)
 
-* [https://learn.microsoft.com/en-us/azure/app-service/web-sites-monitor](https://learn.microsoft.com/en-us/azure/app-service/web-sites-monitor)
-* [https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans](https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans)
+</details>
+
+---
+
+#### Convert Array to Object
+
+**Domain:** Deploy and manage Azure compute resources
+**Skill:** Automate deployment of resources by using Azure Resource Manager (ARM) templates or Bicep files
+**Task:** Modify an existing Bicep file
+
+You are an Azure administrator for a company. You are deploying Azure resources using Bicep and you want to use Lambda functions to handle an array.
+
+You need to convert an array to an object with a custom key function and optional custom value function to produce the following output:
+
+{"MrFunny":{"name":"MrFunny","age":2},"MrNaughty":{"name":"MrNaughty","age":3}}
+
+Which Lambda function should you use to complete the code snippet below? To answer, select the appropriate option from the drop-down menu.
+
+```
+var cats = [
+  {
+    name: 'MrFunny'
+    age: 2
+  }
+  {
+    name: 'MrNaughty'
+    age: 3
+  }
+]
+
+output twocats object = ___[1]___ (cats, entry => entry.name)
+```
+
+Drop-Down Options:
+
+<!-- Dropdown options not yet provided. Paste screenshots of each expanded drop-down to populate. -->
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-03-04-28-34.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+Lambda expressions (or lambda functions) are essentially blocks of code that can be passed as an argument. They can take multiple parameters but are restricted to a single line of code. In this scenario, you need to convert an array to an object with a custom key function and optional custom value function. To do this, you should use the toObject lambda function. In this scenario, you use the toObject with two required parameters: output twocats object = toObject(cats, entry => entry.name), which produces the following output:
+
+{"MrFunny":{"name":"MrFunny","age":2},"MrNaughty":{"name":"MrNaughty","age":3}}
+
+You should not use the map lambda function. You would use map lambda function when you want to apply a custom mapping function to each element of an array.
+
+You should not use the reduce lambda function. You would use the reduce lambda function when you want to reduce an array with a custom reduce function. This would not produce the desired output since the return value is an array and not an object.
+
+You should not use sort lambda function. You would use the sort lambda function when you want to sort an array with a custom sort function.
+
+<img src='.img/2026-03-03-04-32-17.png' width=600>
+
+<img src='.img/2026-03-03-04-32-49.png' width=600>
+
+References
+
+* [Bicep Functions Lambda - ToObject](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-functions-lambda#toobject)
+* [Bicep Functions Lambda - Map](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-functions-lambda#map)p>
 
 </details>
 
@@ -2185,71 +2484,129 @@ Disabling privateLinkServiceNetworkPolicies is a per‑private‑IP (per Private
 
 ### Configure name resolution and load balancing
 
-#### Configure Standard Load Balancer Outbound Traffic and IP Allocation
+#### IMDS Load Balancer Metadata Error
 
 **Domain:** Implement and manage virtual networking
 **Skill:** Configure name resolution and load balancing
-**Task:** Configure an internal or public load balancer
+**Task:** Troubleshoot load balancing
 
-You deploy three Windows virtual machines (VMs) named VM01, VM02, and VM03 that host the front-end layer of a web application. You configure a Standard Load Balancer named LB01. VM01, VM02, and VM03 are configured as part of the backend pool for LB01. You configure a load balancing rule for Transmission Control Protocol (TCP) traffic only.
+Your organization is using an Azure Load Balancer service. You are the Azure administrator in your organization.
 
-You also configure three public static IP addresses named IP01, IP02, and IP03 which are assigned as follows:
+You are tasked with retrieving Load Balancer information using Azure Instance Metadata Service (IMDS).
 
-* IP01 is assigned to VM01.  
-* IP02 and IP03 are assigned to LB01.  
+You see the following error message:
 
-For each of the following statements, select Yes if the statement is true. Otherwise, select No.
+`Error code: 404; No load balancer metadata is found.`
 
-| STATEMENT | YES | NO |
-|-----------|-----|-----|
-| Outbound flow on VM01 will always use IP02. | | |
-| Outbound flow on LB01 uses IP02 and IP03 at the same time. | | |
-| Outbound flow on VM03 will use IP02 or IP03 for User Datagram Protocol (UDP) traffic. | | |
+You need to troubleshoot this issue.
+
+Which two things can you infer from the error message? Each correct answer presents a complete solution.
+
+A. There is a rate limit.  
+B. The path is misconfigured.  
+C. The load balancer has the Basic instead of the Standard SKU.  
+D. The virtual machine is not associated with a load balancer.  
 
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-01-30-05-53-50.png' width=700>
+<img src='.img/2026-03-03-04-57-09.png' width=600>
 
 </details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
 
-**Why your selected answers are incorrect**
+The Azure Instance Metadata Service (IMDS) provides information about currently running virtual machine instances. The Instance Metadata Service is only accessible from within a running virtual machine instance on a non-routable IP address.
 
-* **Outbound flow on LB01 uses IP02 and IP03 at the same time — you selected No (incorrect).**
-  A *Standard* Load Balancer with multiple outbound public IP addresses can use **multiple SNAT IPs concurrently**. Azure hashes outbound flows (per 5-tuple) across the available frontend public IPs. This means LB01 **can actively use both IP02 and IP03 at the same time**, even though any single flow uses only one IP.
+You can use the SKU, storage, network configurations, and upcoming maintenance events-related information effectively for managing and configuring the virtual machines. In this scenario, since the retrieved data from IMDS displays the No load balancer metadata is found error message, this could be owing to either of the following two reasons:
 
-* **Outbound flow on VM03 will use IP02 or IP03 for UDP traffic — you selected Yes (incorrect).**
-  Your load balancing rule is configured for **TCP only**. UDP traffic is **not associated with the load balancer rule**, so it does **not** use the load balancer’s outbound SNAT IPs (IP02/IP03). Instead, UDP outbound traffic from VM03 uses the VM’s **own assigned public IP if present**, or default outbound behavior if not. The presence of a TCP-only rule is the key trap here.
+1. The virtual machine is not associated with a load balancer.
 
-**Why the correct answers are correct**
+2. The load balancer has the Basic instead of Standard SKU.
 
-* **Outbound flow on VM01 will always use IP02 — No (correct).**
-  VM01 has its own public IP (IP01). Azure prefers a VM’s **directly assigned public IP** for outbound traffic over load balancer SNAT. Therefore, VM01 does not “always” use IP02.
+The error code does not indicate a misconfiguration of the path. In such a case, you would see Error 404, but with a different error message displayed:
 
-* **Outbound flow on LB01 uses IP02 and IP03 at the same time — Yes (correct).**
-  Standard Load Balancer supports **multiple outbound frontend IPs**, distributing outbound connections across them. This increases SNAT port capacity and resiliency.
+404; API is not found: Path = "<UrlPath>", Method = "<Method>".
 
-* **Outbound flow on VM03 will use IP02 or IP03 for UDP traffic — No (correct).**
-  Since the load balancing rule is TCP-only, UDP traffic bypasses the load balancer’s SNAT configuration entirely.
+The error code does not indicate a rate limit. In this case, you would see Error 429 displayed with the "Too many requests" message.
 
-**Key takeaway**
+<img src='.img/2026-03-03-05-00-22.png' width=600>
 
-* **Standard Load Balancer outbound SNAT applies only to traffic matching its rules (TCP in this case).**
-* **Multiple outbound public IPs can be used concurrently.**
-* **A VM’s own public IP always takes precedence for outbound traffic.**
+<img src='.img/2026-03-03-05-03-19.png' width=600>
 
-**References**
+> Basic Load Balancer SKU was retired in 2025.
 
-* [https://learn.microsoft.com/azure/load-balancer/load-balancer-outbound-connections](https://learn.microsoft.com/azure/load-balancer/load-balancer-outbound-connections)
-* [https://learn.microsoft.com/azure/load-balancer/load-balancer-standard-overview](https://learn.microsoft.com/azure/load-balancer/load-balancer-standard-overview)
-* [https://learn.microsoft.com/azure/virtual-network/ip-services/public-ip-addresses](https://learn.microsoft.com/azure/virtual-network/ip-services/public-ip-addresses)
+References
+
+- [Instance Metadata Service](https://learn.microsoft.com/en-us/azure/virtual-machines/instance-metadata-service?tabs=windows)
+- [Load Balancer SKUs](https://learn.microsoft.com/en-us/azure/load-balancer/skus)
 
 </details>
 
-▶ **Related Lab:** [lab-slb-outbound-traffic](../hands-on-labs/networking/lab-slb-outbound-traffic/README.md)
+---
+
+#### Configure DNS Records for App Service
+
+**Domain:** Implement and manage virtual networking
+**Skill:** Configure name resolution and load balancing
+**Task:** Configure Azure DNS
+
+Your company plans to release a new web application called 'appilcations'. This application is deployed by using an App Service in Azure and will be available to users of the company1.com domain. You have already purchased the company1.com domain name.
+
+You configure the company1.com Azure DNS zone and delegate it to Azure DNS.
+
+You need to ensure that web application can be accessed by using the company1.com domain name.
+
+You decide to use PowerShell to accomplish this task.
+
+How should you complete the command? To answer, select the appropriate options from the drop-down menus.
+
+```powershell
+New-AzDnsRecordSet -Name ___[1]___ -RecordType ___[2]___ `
+  -ZoneName "company1.com" -ResourceGroupName "APP-RG" -Ttl 600 `
+  -DnsRecords (New-AzDnsRecordConfig `
+  -IPv4Address "<IP address>")
+
+New-AzDnsRecordSet -ZoneName company1.com -ResourceGroupName APP-RG `
+  -Name ___[3]___ -RecordType ___[4]___ -Ttl 600 `
+  -DnsRecords (New-AzDnsRecordConfig -Value "appilcations.azurewebsites.net")
+```
+
+Drop-Down Options:
+
+<!-- Dropdown options not yet provided. Paste screenshots of each expanded drop-down to populate. -->
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-03-03-06-02.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+**Why the selected answers are correct**  
+Create an A record named "@" with RecordType "A" to map the root of company1.com to the App Service's IPv4 address. Create a TXT record named "@" with RecordType "TXT" and value "appilcations.azurewebsites.net" so App Service can verify domain ownership and configure the custom domain settings.
+
+**Why other options are incorrect**  
+
+- CNAME/CNAME-like approaches are wrong for the root (@"") because a CNAME cannot coexist with other records at the zone apex and cannot point to an IPv4 address.  
+- AAAA is for IPv6 addresses; the App Service verification here requires an IPv4 A record.  
+- Using literal names like "company1.com", "www.company1.com", or "appilcations.azurewebsites.net" as the Name value would either be redundant, create the wrong record target, or prevent apex records from working as intended.
+
+**Key takeaway**  
+Use an A record (Name "@", RecordType "A") for the IPv4 mapping of the root domain and a TXT record (Name "@", RecordType "TXT") for App Service domain verification; avoid CNAME at the zone apex and do not use AAAA unless you have an IPv6 IP.
+
+<img src='.img/2026-03-03-03-19-52.png' width=600>
+
+<img src='.img/2026-03-03-03-20-54.png' width=600>
+
+References
+
+* [DNS Web Sites Custom Domain](https://learn.microsoft.com/en-us/azure/dns/dns-web-sites-custom-domain?tabs=azure-portal)
+
+</details>
 
 ---
 
@@ -2341,183 +2698,77 @@ Azure **Internal Load Balancer does not support backend VMs accessing the ILB fr
 
 ---
 
-#### Configure DNS Records for App Service
+#### Configure Standard Load Balancer Outbound Traffic and IP Allocation
 
 **Domain:** Implement and manage virtual networking
 **Skill:** Configure name resolution and load balancing
-**Task:** Configure Azure DNS
+**Task:** Configure an internal or public load balancer
 
-Your company plans to release a new web application called 'appilcations'. This application is deployed by using an App Service in Azure and will be available to users of the company1.com domain. You have already purchased the company1.com domain name.
+You deploy three Windows virtual machines (VMs) named VM01, VM02, and VM03 that host the front-end layer of a web application. You configure a Standard Load Balancer named LB01. VM01, VM02, and VM03 are configured as part of the backend pool for LB01. You configure a load balancing rule for Transmission Control Protocol (TCP) traffic only.
 
-You configure the company1.com Azure DNS zone and delegate it to Azure DNS.
+You also configure three public static IP addresses named IP01, IP02, and IP03 which are assigned as follows:
 
-You need to ensure that web application can be accessed by using the company1.com domain name.
+* IP01 is assigned to VM01.  
+* IP02 and IP03 are assigned to LB01.  
 
-You decide to use PowerShell to accomplish this task.
+For each of the following statements, select Yes if the statement is true. Otherwise, select No.
 
-How should you complete the command? To answer, select the appropriate options from the drop-down menus.
-
-```powershell
-New-AzDnsRecordSet -Name ___[1]___ -RecordType ___[2]___ `
-  -ZoneName "company1.com" -ResourceGroupName "APP-RG" -Ttl 600 `
-  -DnsRecords (New-AzDnsRecordConfig `
-  -IPv4Address "<IP address>")
-
-New-AzDnsRecordSet -ZoneName company1.com -ResourceGroupName APP-RG `
-  -Name ___[3]___ -RecordType ___[4]___ -Ttl 600 `
-  -DnsRecords (New-AzDnsRecordConfig -Value "appilcations.azurewebsites.net")
-```
-
-Drop-Down Options:
-
-<!-- Dropdown options not yet provided. Paste screenshots of each expanded drop-down to populate. -->
+| STATEMENT | YES | NO |
+|-----------|-----|-----|
+| Outbound flow on VM01 will always use IP02. | | |
+| Outbound flow on LB01 uses IP02 and IP03 at the same time. | | |
+| Outbound flow on VM03 will use IP02 or IP03 for User Datagram Protocol (UDP) traffic. | | |
 
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-03-03-03-06-02.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-**Why the selected answers are correct**  
-Create an A record named "@" with RecordType "A" to map the root of company1.com to the App Service's IPv4 address. Create a TXT record named "@" with RecordType "TXT" and value "appilcations.azurewebsites.net" so App Service can verify domain ownership and configure the custom domain settings.
-
-**Why other options are incorrect**  
-
-- CNAME/CNAME-like approaches are wrong for the root (@"") because a CNAME cannot coexist with other records at the zone apex and cannot point to an IPv4 address.  
-- AAAA is for IPv6 addresses; the App Service verification here requires an IPv4 A record.  
-- Using literal names like "company1.com", "www.company1.com", or "appilcations.azurewebsites.net" as the Name value would either be redundant, create the wrong record target, or prevent apex records from working as intended.
-
-**Key takeaway**  
-Use an A record (Name "@", RecordType "A") for the IPv4 mapping of the root domain and a TXT record (Name "@", RecordType "TXT") for App Service domain verification; avoid CNAME at the zone apex and do not use AAAA unless you have an IPv6 IP.
-
-<img src='.img/2026-03-03-03-19-52.png' width=600>
-
-<img src='.img/2026-03-03-03-20-54.png' width=600>
-
-References
-
-* [DNS Web Sites Custom Domain](https://learn.microsoft.com/en-us/azure/dns/dns-web-sites-custom-domain?tabs=azure-portal)
-
-</details>
-
----
-
-#### IMDS Load Balancer Metadata Error
-
-**Domain:** Implement and manage virtual networking
-**Skill:** Configure name resolution and load balancing
-**Task:** Troubleshoot load balancing
-
-Your organization is using an Azure Load Balancer service. You are the Azure administrator in your organization.
-
-You are tasked with retrieving Load Balancer information using Azure Instance Metadata Service (IMDS).
-
-You see the following error message:
-
-`Error code: 404; No load balancer metadata is found.`
-
-You need to troubleshoot this issue.
-
-Which two things can you infer from the error message? Each correct answer presents a complete solution.
-
-A. There is a rate limit.  
-B. The path is misconfigured.  
-C. The load balancer has the Basic instead of the Standard SKU.  
-D. The virtual machine is not associated with a load balancer.  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-03-04-57-09.png' width=600>
+<img src='.img/2026-01-30-05-53-50.png' width=700>
 
 </details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
 
-The Azure Instance Metadata Service (IMDS) provides information about currently running virtual machine instances. The Instance Metadata Service is only accessible from within a running virtual machine instance on a non-routable IP address.
+**Why your selected answers are incorrect**
 
-You can use the SKU, storage, network configurations, and upcoming maintenance events-related information effectively for managing and configuring the virtual machines. In this scenario, since the retrieved data from IMDS displays the No load balancer metadata is found error message, this could be owing to either of the following two reasons:
+* **Outbound flow on LB01 uses IP02 and IP03 at the same time — you selected No (incorrect).**
+  A *Standard* Load Balancer with multiple outbound public IP addresses can use **multiple SNAT IPs concurrently**. Azure hashes outbound flows (per 5-tuple) across the available frontend public IPs. This means LB01 **can actively use both IP02 and IP03 at the same time**, even though any single flow uses only one IP.
 
-1. The virtual machine is not associated with a load balancer.
+* **Outbound flow on VM03 will use IP02 or IP03 for UDP traffic — you selected Yes (incorrect).**
+  Your load balancing rule is configured for **TCP only**. UDP traffic is **not associated with the load balancer rule**, so it does **not** use the load balancer’s outbound SNAT IPs (IP02/IP03). Instead, UDP outbound traffic from VM03 uses the VM’s **own assigned public IP if present**, or default outbound behavior if not. The presence of a TCP-only rule is the key trap here.
 
-2. The load balancer has the Basic instead of Standard SKU.
+**Why the correct answers are correct**
 
-The error code does not indicate a misconfiguration of the path. In such a case, you would see Error 404, but with a different error message displayed:
+* **Outbound flow on VM01 will always use IP02 — No (correct).**
+  VM01 has its own public IP (IP01). Azure prefers a VM’s **directly assigned public IP** for outbound traffic over load balancer SNAT. Therefore, VM01 does not “always” use IP02.
 
-404; API is not found: Path = "<UrlPath>", Method = "<Method>".
+* **Outbound flow on LB01 uses IP02 and IP03 at the same time — Yes (correct).**
+  Standard Load Balancer supports **multiple outbound frontend IPs**, distributing outbound connections across them. This increases SNAT port capacity and resiliency.
 
-The error code does not indicate a rate limit. In this case, you would see Error 429 displayed with the "Too many requests" message.
+* **Outbound flow on VM03 will use IP02 or IP03 for UDP traffic — No (correct).**
+  Since the load balancing rule is TCP-only, UDP traffic bypasses the load balancer’s SNAT configuration entirely.
 
-<img src='.img/2026-03-03-05-00-22.png' width=600>
+**Key takeaway**
 
-<img src='.img/2026-03-03-05-03-19.png' width=600>
+* **Standard Load Balancer outbound SNAT applies only to traffic matching its rules (TCP in this case).**
+* **Multiple outbound public IPs can be used concurrently.**
+* **A VM’s own public IP always takes precedence for outbound traffic.**
 
-> Basic Load Balancer SKU was retired in 2025.
+**References**
 
-References
-
-- [Instance Metadata Service](https://learn.microsoft.com/en-us/azure/virtual-machines/instance-metadata-service?tabs=windows)
-- [Load Balancer SKUs](https://learn.microsoft.com/en-us/azure/load-balancer/skus)
+* [https://learn.microsoft.com/azure/load-balancer/load-balancer-outbound-connections](https://learn.microsoft.com/azure/load-balancer/load-balancer-outbound-connections)
+* [https://learn.microsoft.com/azure/load-balancer/load-balancer-standard-overview](https://learn.microsoft.com/azure/load-balancer/load-balancer-standard-overview)
+* [https://learn.microsoft.com/azure/virtual-network/ip-services/public-ip-addresses](https://learn.microsoft.com/azure/virtual-network/ip-services/public-ip-addresses)
 
 </details>
+
+▶ **Related Lab:** [lab-slb-outbound-traffic](../hands-on-labs/networking/lab-slb-outbound-traffic/README.md)
 
 ---
 
 ## Monitor and maintain Azure resources
 
 ### Monitor resources in Azure
-
-#### Configure Azure Monitor Alert for Database CPU Usage
-
-**Domain:** Monitor and maintain Azure resources
-**Skill:** Monitor resources in Azure
-**Task:** Set up alert rules, action groups, and alert processing rules in Azure Monitor
-
-Your company has a line-of-business (LOB) application that uses Azure SQL Database for storing transactional information. Your company also has System Center Service Manager deployed.
-
-You need to configure an alert when the database reaches 70% of central processing unit (CPU) usage. When this alert rises, you need to notify several users by email and by SMS. You also need to automatically create a ticket in the IT service management (ITSM) system. Your solution should require minimum administrative effort.
-
-Which two actions should you perform? Each correct answer presents part of the solution.
-
-A. Configure System Center Service Manager with Azure Automation.  
-B. Configure one action group with two actions: one for email and SMS notification and one for IT service management (ITSM) ticket creation.  
-C. Configure an IT Service Management Connector (ITSMC).  
-D. Configure two action groups: one for email and SMS notification and one for IT service management (ITSM) ticket creation.  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-01-30-05-26-15.png' width=700>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**The correct answers are B and C.**
-
-**Why B is correct:**
-Azure Monitor action groups are designed to consolidate multiple notification and automation actions into a single reusable unit. One action group can contain email, SMS, voice, webhook, Logic App, Automation Runbook, and ITSM actions together. This design allows you to configure all required notifications and ticket creation in a single action group, which minimizes administrative overhead and is the recommended approach.
-
-**Why C is correct:**
-ITSM ticket creation in Azure Monitor requires an IT Service Management Connector (ITSMC) to bridge Azure Monitor alerts with system-center or third-party ITSM systems. Without the ITSMC, Azure Monitor cannot create incidents or tickets in Service Manager, regardless of how the action group is configured.
-
-**Why A is incorrect:**
-While Azure Automation can integrate with Azure Monitor, it is not a requirement for basic ITSM alerting. The ITSMC provides direct integration without needing custom automation runbooks.
-
-**Why D is incorrect:**
-Creating separate action groups for different notification types adds unnecessary complexity and administrative effort. Azure Monitor is designed to support multiple actions within a single action group, making D an inefficient solution.
-
-**Key takeaway:**
-For Azure Monitor alerts requiring multiple notification methods and ITSM integration, use a **single action group with multiple actions** and configure an **ITSM Connector** for Service Manager integration. This minimizes administrative overhead and follows Azure best practices.
-
-</details>
-
----
 
 #### Configure Azure Monitor Alert Notification Rate Limits
 
@@ -2728,80 +2979,6 @@ It does **not** answer: *“Can the VM actually accept this connection?”*
 
 ---
 
-#### Load Balancer Metrics Batch API
-
-**Domain:** Monitor and maintain Azure resources
-**Skill:** Monitor resources in Azure
-**Task:** Interpret metrics in Azure Monitor
-
-Your company uses an Azure standard public load balancer. You are the Azure administrator at your company.
-
-You have been tasked with troubleshooting common outbound connectivity issues with Azure Load Balancer.
-
-You want to proactively monitor the data path availability and perform health probe status checks on the load balancer.
-
-You create the following metrics:getBatch API request shown below:
-
-```
-POST /subscriptions/87654765-4321-9999-1251-4532243211xfe/metrics:getBatch?metricNamespace=microsoft.compute/virtualMachines&api-version=2023-03-01-preview
-Host: eastus.metrics.monitor.azure.com
-Content-Type: application/json
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJh...XaTddvfcFlgsas
-{
-   "resourceids":[".../virtualMachines/vmss-002_1sdf4cc9",
-   ".../virtualMachines/vmss-003_s1187c3h"]
-}
-```
-
-You need to retrieve multi-dimensional definitions and metrics programmatically via APIs.
-
-For each of the following statements, select Yes if the statement is true. Otherwise, select No.
-
-| Statement | Yes | No |
-|----------|-----|----|
-| The metrics:getBatch API here allows you to prevent throttling and performance issues when querying multiple resources in a single REST request. | ☐ | ☐ |
-| Both VMs vmss-002_1sdf4cc9 and vmss-003_s1187c3h can be spread across multiple Azure regions. | ☐ | ☐ |
-| Both VMs vmss-002_1sdf4cc9 and vmss-003_s1187c3h must be the same resource type. | ☐ | ☐ |
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-02-20-16-52-36.png' width=700>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Why Statement 1 is Yes (correct)**
-
-The metrics:getBatch API was designed to query metrics for multiple resources in a single HTTP request. Rather than issuing one API call per resource — which scales poorly and can trigger throttling — batching all resource IDs into a single POST reduces the total number of requests against Azure Monitor's metrics endpoint. Preventing throttling and improving performance when querying multiple resources is the primary purpose of the batch endpoint.
-
-**Why Statement 2 is No (correct)**
-
-The metrics:getBatch endpoint is a **regional endpoint**. In the example, the host is `eastus.metrics.monitor.azure.com`, which means all resources in the batch must exist in the **East US region**. Resources spread across multiple Azure regions cannot be combined in a single batch call. If you need metrics from resources in different regions, you must issue separate batch calls against each region's respective endpoint.
-
-**Why Statement 3 is Yes (correct)**
-
-Each metrics:getBatch request includes a single `metricNamespace` query parameter. In the example, that value is `microsoft.compute/virtualMachines`. All resource IDs submitted in the request body must belong to that same resource type and namespace. You cannot mix resource types (for example, virtual machines and load balancers) within a single batch request.
-
-**Key takeaway**
-
-The metrics:getBatch API reduces throttling risk by batching multi-resource metric queries into a single request, but it enforces two important constraints: all resources must be in the **same Azure region** (determined by the regional endpoint hostname), and all resources must be the **same resource type** (determined by the `metricNamespace` parameter).
-
-**References**
-
-* [How to migrate from the metrics API to the getBatch API](https://learn.microsoft.com/en-us/azure/azure-monitor/metrics/migrate-to-batch-api?tabs=individual-response)
-* [Troubleshoot Azure Load Balancer outbound connectivity issues](https://learn.microsoft.com/en-us/azure/load-balancer/troubleshoot-outbound-connection)
-* [Standard load balancer diagnostics with metrics, alerts, and resource health](https://learn.microsoft.com/en-us/azure/load-balancer/load-balancer-standard-diagnostics)
-* [Azure monitoring REST API walkthrough](https://learn.microsoft.com/en-us/azure/azure-monitor/platform/rest-api-walkthrough?tabs=rest%2Cportal)
-
-</details>
-
-▶ Related Lab: [lab-metrics-batch-api](../hands-on-labs/monitoring/lab-metrics-batch-api/README.md)
-
----
-
 #### Capture SFTP Packets with Network Watcher
 
 **Domain:** Monitor and maintain Azure resources
@@ -2938,6 +3115,128 @@ References
 
 ---
 
+#### Configure Azure Monitor Alert for Database CPU Usage
+
+**Domain:** Monitor and maintain Azure resources
+**Skill:** Monitor resources in Azure
+**Task:** Set up alert rules, action groups, and alert processing rules in Azure Monitor
+
+Your company has a line-of-business (LOB) application that uses Azure SQL Database for storing transactional information. Your company also has System Center Service Manager deployed.
+
+You need to configure an alert when the database reaches 70% of central processing unit (CPU) usage. When this alert rises, you need to notify several users by email and by SMS. You also need to automatically create a ticket in the IT service management (ITSM) system. Your solution should require minimum administrative effort.
+
+Which two actions should you perform? Each correct answer presents part of the solution.
+
+A. Configure System Center Service Manager with Azure Automation.  
+B. Configure one action group with two actions: one for email and SMS notification and one for IT service management (ITSM) ticket creation.  
+C. Configure an IT Service Management Connector (ITSMC).  
+D. Configure two action groups: one for email and SMS notification and one for IT service management (ITSM) ticket creation.  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-01-30-05-26-15.png' width=700>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**The correct answers are B and C.**
+
+**Why B is correct:**
+Azure Monitor action groups are designed to consolidate multiple notification and automation actions into a single reusable unit. One action group can contain email, SMS, voice, webhook, Logic App, Automation Runbook, and ITSM actions together. This design allows you to configure all required notifications and ticket creation in a single action group, which minimizes administrative overhead and is the recommended approach.
+
+**Why C is correct:**
+ITSM ticket creation in Azure Monitor requires an IT Service Management Connector (ITSMC) to bridge Azure Monitor alerts with system-center or third-party ITSM systems. Without the ITSMC, Azure Monitor cannot create incidents or tickets in Service Manager, regardless of how the action group is configured.
+
+**Why A is incorrect:**
+While Azure Automation can integrate with Azure Monitor, it is not a requirement for basic ITSM alerting. The ITSMC provides direct integration without needing custom automation runbooks.
+
+**Why D is incorrect:**
+Creating separate action groups for different notification types adds unnecessary complexity and administrative effort. Azure Monitor is designed to support multiple actions within a single action group, making D an inefficient solution.
+
+**Key takeaway:**
+For Azure Monitor alerts requiring multiple notification methods and ITSM integration, use a **single action group with multiple actions** and configure an **ITSM Connector** for Service Manager integration. This minimizes administrative overhead and follows Azure best practices.
+
+</details>
+
+---
+
+#### Load Balancer Metrics Batch API
+
+**Domain:** Monitor and maintain Azure resources
+**Skill:** Monitor resources in Azure
+**Task:** Interpret metrics in Azure Monitor
+
+Your company uses an Azure standard public load balancer. You are the Azure administrator at your company.
+
+You have been tasked with troubleshooting common outbound connectivity issues with Azure Load Balancer.
+
+You want to proactively monitor the data path availability and perform health probe status checks on the load balancer.
+
+You create the following metrics:getBatch API request shown below:
+
+```
+POST /subscriptions/87654765-4321-9999-1251-4532243211xfe/metrics:getBatch?metricNamespace=microsoft.compute/virtualMachines&api-version=2023-03-01-preview
+Host: eastus.metrics.monitor.azure.com
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJh...XaTddvfcFlgsas
+{
+   "resourceids":[".../virtualMachines/vmss-002_1sdf4cc9",
+   ".../virtualMachines/vmss-003_s1187c3h"]
+}
+```
+
+You need to retrieve multi-dimensional definitions and metrics programmatically via APIs.
+
+For each of the following statements, select Yes if the statement is true. Otherwise, select No.
+
+| Statement | Yes | No |
+|----------|-----|----|
+| The metrics:getBatch API here allows you to prevent throttling and performance issues when querying multiple resources in a single REST request. | ☐ | ☐ |
+| Both VMs vmss-002_1sdf4cc9 and vmss-003_s1187c3h can be spread across multiple Azure regions. | ☐ | ☐ |
+| Both VMs vmss-002_1sdf4cc9 and vmss-003_s1187c3h must be the same resource type. | ☐ | ☐ |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-02-20-16-52-36.png' width=700>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Why Statement 1 is Yes (correct)**
+
+The metrics:getBatch API was designed to query metrics for multiple resources in a single HTTP request. Rather than issuing one API call per resource — which scales poorly and can trigger throttling — batching all resource IDs into a single POST reduces the total number of requests against Azure Monitor's metrics endpoint. Preventing throttling and improving performance when querying multiple resources is the primary purpose of the batch endpoint.
+
+**Why Statement 2 is No (correct)**
+
+The metrics:getBatch endpoint is a **regional endpoint**. In the example, the host is `eastus.metrics.monitor.azure.com`, which means all resources in the batch must exist in the **East US region**. Resources spread across multiple Azure regions cannot be combined in a single batch call. If you need metrics from resources in different regions, you must issue separate batch calls against each region's respective endpoint.
+
+**Why Statement 3 is Yes (correct)**
+
+Each metrics:getBatch request includes a single `metricNamespace` query parameter. In the example, that value is `microsoft.compute/virtualMachines`. All resource IDs submitted in the request body must belong to that same resource type and namespace. You cannot mix resource types (for example, virtual machines and load balancers) within a single batch request.
+
+**Key takeaway**
+
+The metrics:getBatch API reduces throttling risk by batching multi-resource metric queries into a single request, but it enforces two important constraints: all resources must be in the **same Azure region** (determined by the regional endpoint hostname), and all resources must be the **same resource type** (determined by the `metricNamespace` parameter).
+
+**References**
+
+* [How to migrate from the metrics API to the getBatch API](https://learn.microsoft.com/en-us/azure/azure-monitor/metrics/migrate-to-batch-api?tabs=individual-response)
+* [Troubleshoot Azure Load Balancer outbound connectivity issues](https://learn.microsoft.com/en-us/azure/load-balancer/troubleshoot-outbound-connection)
+* [Standard load balancer diagnostics with metrics, alerts, and resource health](https://learn.microsoft.com/en-us/azure/load-balancer/load-balancer-standard-diagnostics)
+* [Azure monitoring REST API walkthrough](https://learn.microsoft.com/en-us/azure/azure-monitor/platform/rest-api-walkthrough?tabs=rest%2Cportal)
+
+</details>
+
+▶ Related Lab: [lab-metrics-batch-api](../hands-on-labs/monitoring/lab-metrics-batch-api/README.md)
+
+---
+
 ### Implement backup and recovery
 
 #### Recover Configuration File from Azure VM Backup
@@ -3055,296 +3354,4 @@ For Azure IaaS VMs protected by a Recovery Services vault, **soft delete provide
 
 ---
 
-#### Retrieve the Catalog Identifier for Entitlement Management
-
-**Domain:** Manage Azure identities and governance
-**Skill:** Manage access to Azure resources
-**Task:** Manage identity and access lifecycle using Microsoft Entra ID Governance
-
-Your organization is using Microsoft Entra ID Governance. You are the Azure administrator in the organization.
-
-You are using Microsoft Graph PowerShell to provide and manage identity and access lifecycle at scale for all users and groups within the organization.
-
-You have a group named Sales. You need to grant users in the Sales group the adequate level of access using entitlement management. Your organization's policy dictates the use of the general catalog.
-
-What should you do first?
-
-A. Retrieve the catalog resources.  
-B. Retrieve the resource roles assigned to the catalog.  
-C. Retrieve the catalog identifier.  
-D. Add the Sales group to the catalog.  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-08-06-34-08.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Why the selected answer is correct (C)**
-
-In this scenario, you are essentially managing access to resources in your organization. You are using Microsoft Entra ID entitlement management with Microsoft Graph PowerShell v1.0. Since the users and group already exist, you need to initiate the process by getting the catalog identifier.
-
-An access package is a collection of resources that is governed by policies. Access packages are defined in containers called catalogs. However, to add resources to the catalog, you will require details of the catalog identifier. Thus, you should retrieve the catalog identifier as the initial step by using the following command:
-
-```powershell
-Get-MgIdentityGovernanceEntitlementManagementCatalog -Filter "DisplayName eq 'General'" | Format-List
-```
-
-**Why the other options are incorrect**
-
-* **A. Retrieve the catalog resources**: You should get the catalog resources as a later step. To be able to do this, you will require the identifier that is assigned to the group resource in the catalog.
-* **B. Retrieve the resource roles assigned to the catalog**: This should be done at a later stage. The access package assigns users to the roles of a resource, which in the case of a group used in an access package is typically the member role. You will need this role when you add a resource role to the access package.
-* **D. Add the Sales group to the catalog**: This is the second step. To add the group to the catalog, you need the properties of a group object, which represents the resource.
-
-**Key takeaway**
-
-When working with Microsoft Entra ID entitlement management and access packages, the **first step is always to retrieve the catalog identifier**. This identifier is required before you can add resources, assign roles, or add groups to the access package.
-
-In Microsoft Entra ID entitlement management, a **catalog** is the container that holds resources (such as groups, applications, and SharePoint sites) that can be granted through access packages. The **General catalog** is the default catalog in every tenant and is typically used for organization-wide resources that many users may request. Administrators add resources to the catalog, define the available resource roles, bundle them into **access packages**, and then apply policies that control who can request access and how it is approved and reviewed. When automating this process with Microsoft Graph PowerShell, the **catalog identifier must be retrieved first**, because most entitlement-management operations require the catalog ID before resources, access packages, or policies can be created or managed.
-
-**References**
-
-* [What is entitlement management?](https://learn.microsoft.com/en-us/entra/id-governance/entitlement-management-overview)
-* [Tutorial: Manage access to resources in Microsoft Entra entitlement management using Microsoft Graph PowerShell](https://learn.microsoft.com/en-us/powershell/microsoftgraph/tutorial-entitlement-management?view=graph-powershell-1.0)
-
-</details>
-
----
-
-#### Interpret Role Assignments
-
-**Domain:** Manage Azure identities and governance
-**Skill:** Manage access to Azure resources
-**Task:** Interpret access assignments
-
-You are tasked with assigning Azure role-based access control (Azure RBAC) roles to users in your company.
-
-You are trying to interpret access assignments for UserA. You want to validate the role assignments for UserA scoped to the groups of which UserA is a member.
-
-You need to complete the Azure CLI command shown below.
-
-Which cmdlets should you use? To answer, complete the commands by selecting the correct parts from the drop-down menus.
-
-```bash
-az role assignment ___[1]___ ___[2]___ --assignee UserA@myorg.com\ \
-  --output json --query '[].{principalName:principalName, \
-  roleDefinitionName:roleDefinitionName, scope:scope}'
-```
-
-Drop-Down Options:
-
-<!-- Dropdown options not yet provided. Paste screenshots of each expanded drop-down to populate. -->
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-09-03-48-14.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-Azure role-based access control (Azure RBAC) is the authorization system you use to manage access to Azure resources. To determine what resources users, groups, service principals, or managed identities have access to, you need to list their role assignments. You could further adjust access control by updating the role assignments, or create new ones. In this scenario, you are using the Azure CLI to interpret access assignments for a user named UserA in your company. Additionally, you need to retrieve information on the extra assignments to the groups of which UserA is a member. You should complete the CLI command as follows:
-
-```bash
-az role assignment list --include-groups --assignee UserA@myorg.com \
-  --output json --query '[].{principalName:principalName, \
-  roleDefinitionName:roleDefinitionName, scope:scope}'
-```
-
-You should use the `list` command and the `--include-groups` parameter. The `list` command lists the role assignments for the <UserA@myorg.com> user. The parameter retrieves information on the extra assignments to the groups of which UserA is a member.
-
-You should not use the `create` command. You can use the `create` command when you want to create a new role assignment for a user, group, or service principal.
-
-You should not use the `list-changelogs` command. You should use the `list-changelogs` command when you want to retrieve and exhibit the changelogs for role assignments.
-
-You should not use the `update` command. You should use the `update` command when you want to update an existing role assignment for a user, group, or service principal.
-
-You should not use the `--all` parameter. You should use this parameter when you want to retrieve and display all assignments under the current subscription. It is turned off by default.
-
-You should not use the `--include-inherited` parameter. You should use this parameter when you want to retrieve and display all assignments including assignments applied on parent scopes.
-
-You should not use the `--include-classic-administrators` parameter. You should use this parameter when you want to retrieve and exhibit all default role assignments for subscription classic administrators, or co-admins.
-
-</details>
-
----
-
-#### Azure Policy Effects Verification
-
-**Domain:** Manage Azure identities and governance
-**Skill:** Manage Azure subscriptions and governance
-**Task:** Implement and manage Azure Policy
-
-Your company requires all resources deployed in Azure to be assigned to a cost center.
-
-You use a tag named CostCenter to assign each resource to the correct cost center. This tag has a set of valid values assigned.
-
-Some of the resources deployed in your subscription already have a value assigned to the CostCenter tag.
-
-You decide to deploy a subscription policy to verify that all resources in the subscription have a valid value assigned.
-
-For each of the following statements, select Yes if the statement is true. Otherwise, select No.
-
-| Statement | Yes | No |
-|----------|-----|----|
-| The Deny effect is evaluated first. | ☐ | ☐ |
-| The Append effect modifies the value of an existing field in a resource. | ☐ | ☐ |
-| The Audit effect will create a warning event in the activity log for non-compliant resources. | ☐ | ☐ |
-| The DeployIfNotExists effect is only evaluated if the request executed by the Resource Provider returns a success status code. | ☐ | ☐ |
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-09-03-54-46.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-The Deny effect is not evaluated first. When a policy is evaluated, the Disabled effect is always evaluated first to decide whether the rule should be evaluated afterwards. The correct order of evaluation of the policy effects is: Disabled, Append, Deny and Audit.
-
-The Append effect does not modify the value of an existing field in a resource. The Append effect adds additional fields during the creation or update of a resource. If the field already exists in the resource and the values in the resource and the policy are different, then the policy acts as a deny and rejects the request.
-
-The Audit effect will create a warning event in the activity log for non-compliant resources. The audit effect is evaluated last, before the Resource Provider handles a create or update request. You typically use the audit effect when you want to track non-compliant resources.
-
-The DeployIfNotExists effect is only evaluated if the request executed by the Resource Provider returns a success status code. Once the effect has been evaluated, it is triggered if the resource does not exist or if the resource defined by ExistenceCondition is evaluated as false.
-
-<img src='.img/2026-03-09-03-56-52.png' width=600>
-
-<img src='.img/2026-03-09-03-58-31.png' width=600>
-
-<img src='.img/2026-03-09-04-01-30.png' width=600>
-
-<img src='.img/2026-03-09-04-02-34.png' width=600>
-
-References
-
-* [Understand Azure Policy effects](https://learn.microsoft.com/en-us/azure/governance/policy/concepts/effect-basics)
-* [Azure Policy Samples](https://learn.microsoft.com/en-us/azure/governance/policy/samples/)
-
-</details>
-
----
-
-#### Append Tag Using PowerShell
-
-**Domain:** Manage Azure identities and governance
-**Skill:** Manage Azure subscriptions and governance
-**Task:** Apply and manage tags on resources
-
-You use taxonomic tags to logically organize resources and to make billing reporting easier.
-
-You use Azure PowerShell to append an additional tag on a storage account named corptorage99. The code is as follows:
-
-```powershell
-$r = Get-AzResource -ResourceName "corptorage99" -ResourceGroupName "prod-rg"
-Set-AzResource -Tag @{Dept="IT"} -ResourceId $r.ResourceId -Force
-```
-
-The code returns unexpected results.
-
-You need to append the additional tag as quickly as possible.
-
-What should you do?
-
-A. Edit the script to call the Add() method after getting the resource to append the new tag.  
-B. Assign the Enforce tag and its value Azure Policy to the resource group.  
-C. Deploy the tag by using an Azure Resource Manager (ARM) template.  
-D. Refactor the code by using the Azure Command-Line Interface (CLI).  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-09-04-08-19.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-You should edit the script to call the Add() method after getting the resource to append the new tag as shown in the second line of this refactored Azure PowerShell code:
-
-```powershell
-$r = Get-AzResource -ResourceName "corptorage99" -ResourceGroupName "prod-rg"
-$r.Tags.Add("Dept", "IT")
-Set-AzResource -Tag $r.Tags -ResourceId $r.ResourceId -Force
-```
-
-Unless you call the Add() method, the Set-AzResource cmdlet will overwrite any existing taxonomic tags on the resource. The Add() method preserves existing tags and includes one or more tags to the resource tag list.
-
-You should not deploy the tag by using an Azure Resource Manager (ARM) template. Doing so is unnecessary in this case because the Azure PowerShell is mostly complete as-is. Furthermore, you must find the solution as quickly as possible.
-
-You should not assign the Enforce tag and its value Azure Policy to the resource group. Azure Policy is a governance feature that helps businesses enforce compliance in resource creation. In this case, the solution involves too much administrative overhead to be a viable option. Moreover, the scenario makes no mention of the need for governance policy in specific terms.
-
-You should not refactor the code by using the Azure Command-Line Interface (CLI). Either Azure PowerShell or Azure CLI can be used to institute this solution. It makes no sense to change the development language, since you have already completed most of the code in PowerShell.
-
-<img src='.img/2026-03-09-04-11-46.png' width=600>
-
-</details>
-
----
-
-#### Move Resources Between Resource Groups
-
-**Domain:** Manage Azure identities and governance
-**Skill:** Manage Azure subscriptions and governance
-**Task:** Manage resource groups
-
-You deploy an application in a resource group named App-RG01 in your Azure subscription.
-
-App-RG01 contains the following components:
-
-- Two App Services, each with a free App Service managed Secure Sockets Layer (SSL) certificate
-- A peered virtual network (VNet)
-- Redis cache deployed in the VNet
-- A Standard Load Balancer
-
-You need to move all resources in App-RG01 to a new resource group named App-RG02. For each of the following statements, select Yes if the statement is true. Otherwise, select No.
-
-| STATEMENT | YES | NO |
-|-----------|-----|----|
-| You need to delete the SSL certificate from each App Service before moving it to the new resource group. | ☐ | ☐ |
-| You can move the Standard Load Balancer across two Azure subscriptions. | ☐ | ☐ |
-| You need to disable the peer before moving the VNet. | ☐ | ☐ |
-| You can move the VNet within the same subscription. | ☐ | ☐ |
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-09-04-14-38.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-You need to delete the Secure Sockets Layer (SSL) certificate from each App Service before moving it to the new resource group. You cannot move an App Service with an SSL certificate configured since in our use-case scenario, you are using the free App Service managed Secure Sockets Layer (SSL) certificate. You need to delete the certificate first, move the App Service, and then upload the certificate again.
-
-You cannot move the Standard Load Balancer across two Azure subscriptions. Within a single Azure subscription, Resource Group move operations for both Standard Load Balancer and standard Public IP are allowed. But for a Standard Load Balancer, move operations across Azure Subscriptions are not allowed.
-
-You need to disable the peer before moving the VNet. When you want to move a VNet with a peer configured, you need to disable it before moving the VNet. When you move a VNet, you need to move all of its dependent resources.
-
-You can move the VNet within the same subscription. When you want to move a VNet, you also need to move all of its dependent resources. In this case, you also need to move the Redis cache, which can be moved only within the same subscription. Because you want to move the resources from App-RG01 to App-RG02, which is in the same subscription, you can move the VNet with no problem.
-
-<img src='.img/2026-03-09-04-16-58.png' width=600>
-
-<img src='.img/2026-03-09-04-18-10.png' width=600>
-
-<img src='.img/2026-03-09-04-19-07.png' width=600>
-
-<img src='.img/2026-03-09-04-20-30.png' width=600>
-
-References
-
-* [Move resources to a new resource group or subscription](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/move-resource-group-and-subscription?tabs=azure-cli)
-* [Move networking resources to new resource group or subscription](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/move-limitations/networking-move-limitations)
-* [Azure Load Balancer SKUs](https://learn.microsoft.com/en-us/azure/load-balancer/skus)
-
-</details>
+<img src='.img/2026-03-10-04-08-46.png' width=600>
