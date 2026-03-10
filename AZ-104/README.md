@@ -62,7 +62,7 @@ Task-level question counts from [Practice Questions](./practice-questions/README
 | :--- | -: |
 | Manage built-in Azure roles | 0 |
 | Assign roles at different scopes | 0 |
-| Interpret access assignments | 1 |
+| Interpret access assignments | 2 |
 
 #### Manage Azure subscriptions and governance
 
