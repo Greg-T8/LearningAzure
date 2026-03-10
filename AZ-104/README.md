@@ -69,7 +69,7 @@ Task-level question counts from [Practice Questions](./practice-questions/README
 | Task | Qs |
 | :--- | -: |
 | Implement and manage Azure Policy | 3 |
-| Configure resource locks | 0 |
+| Configure resource locks | 2 |
 | Apply and manage tags on resources | 3 |
 | Manage resource groups | 1 |
 | Manage subscriptions | 0 |
