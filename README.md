@@ -31,22 +31,22 @@ Progress trackers, detailed study notes, practice exams, and hands-on labs:
 
 | Date | AI-102 | AZ-104 | Other | Total |
 |------|------|------|------|-------|
-| Mon, Mar 09 | 🟣 2.2h | 🟢 1.2h | 🟡 0.7h | **4.1h** |
-| Sun, Mar 08 |  | 🟣 12.2h |  | **12.2h** |
-| Sat, Mar 07 |  | 🟣 2.5h | 🟡 0.9h | **3.4h** |
+| Tue, Mar 10 | 🟡 0.1h | 🟢 1.0h | 🟢 1.5h | **2.6h** |
+| Mon, Mar 09 |  | 🟢 1.2h | 🟣 2.8h | **4.0h** |
+| Sun, Mar 08 |  | 🟣 5.1h |  | **5.1h** |
+| Sat, Mar 07 |  | 🟣 2.5h | 🟢 1.0h | **3.5h** |
 | Fri, Mar 06 | 🟡 0.5h | 🟡 0.7h | 🟡 0.8h | **2.0h** |
 | Thu, Mar 05 |  | 🟢 1.0h | 🟡 0.6h | **1.6h** |
 | Wed, Mar 04 | 🟡 0.8h | 🟢 1.7h |  | **2.5h** |
-| Tue, Mar 03 | 🟡 0.8h | 🟢 1.9h | 🟡 0.2h | **2.9h** |
-| **Weekly Total** | **4.3h** | **21.2h** | **3.2h** | **28.7h** |
-| ***Running Total*** | ***19.5h*** | ***83.7h*** | ***52.2h*** | ***155.4h*** |
+| **Weekly Total** | **1.4h** | **13.2h** | **6.7h** | **21.3h** |
+| ***Running Total*** | ***17.4h*** | ***77.6h*** | ***55.8h*** | ***150.8h*** |
 
 *Activity Levels: 🟡 Low (< 1hr) | 🟢 Medium (1-2hrs) | 🟣 High (> 2hrs)*
 
 *Study sessions: start/end commits define session boundaries*  
 *Other = Lab workflow and automation design, content structure and development*  
 
-*Last updated: March 09, 2026 at 09:19 CDT*
+*Last updated: March 10, 2026 at 09:18 CDT*
 
 <!-- COMMIT_STATS_END -->
 
