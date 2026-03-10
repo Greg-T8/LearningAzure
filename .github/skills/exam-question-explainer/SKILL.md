@@ -60,6 +60,8 @@ If **no official explanation is provided**, rely on exam-aligned reasoning as us
 - Do **not** restate the full question unless necessary for clarity.
 - Do **not** include any markdown headings (for example, `##`).
 - Use **bold text** to structure sections (for example: **Why the selected answer is wrong**, **Why the selected answer is correct**, **Why other options are incorrect**, **Key takeaway**).
+- Wrap command names, cmdlet names, CLI commands, and parameter names in inline code (e.g., `New-AzManagementGroupSubscription`, `Remove-AzResourceLock`, `--resource-group`).
+- Wrap referenced Azure resource names, subscription names, resource group names, storage account names, VM names, and other named objects in inline code (e.g., `rgmarketing`, `sub020`, `STA01`, `VM1`).
 
 ## Hyperlink Rules (Explanation Body)
 

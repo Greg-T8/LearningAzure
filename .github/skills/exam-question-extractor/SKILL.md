@@ -150,6 +150,15 @@ Example:
 
 ---
 
+### Inline Code Formatting
+
+Apply these rules across **all** generated output (prompt, explanation, and any other text):
+
+* Wrap command names, cmdlet names, CLI commands, and parameter names in inline code (e.g., `New-AzManagementGroupSubscription`, `Remove-AzResourceLock`, `--resource-group`).
+* Wrap referenced Azure resource names, subscription names, resource group names, storage account names, VM names, and other named objects in inline code (e.g., `rgmarketing`, `sub020`, `STA01`, `VM1`).
+
+---
+
 ### Prompt
 
 Transcribe the question exactly as shown.
