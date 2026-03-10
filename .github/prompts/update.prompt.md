@@ -33,24 +33,41 @@ Uses `Update-CoverageTable.ps1` to update the Qs and Labs columns in each exam R
 - `AZ-104/README.md` — Exam Coverage section
 - `AI-102/README.md` — Exam Coverage section
 
+## Execution Model
+
+> **Run each step individually.** Execute one command at a time, wait for it to finish, check the output for errors or warnings, and only proceed to the next step after the previous one succeeds. Do NOT chain all commands into a single terminal call.
+
 ## Workflow
 
-### 1. Update Lab Catalogs
+### 1. Update Lab Catalogs (Agent Task — No Script)
 
-Use the `lab-catalog-updater` skill to scan and update hands-on-labs README files, lab statistics, Related Labs cross-references, and Related Practice Exam Questions links.
+This step has **no automation script**. Read and follow the `lab-catalog-updater` skill to perform it:
 
-### 2. Organize Practice Exam Questions
+1. Use directory-listing tools to enumerate every `lab-*` folder under each exam's `hands-on-labs/` subdirectories.
+2. Read each lab's `README.md` to extract its title, description, and metadata.
+3. Update the main `hands-on-labs/README.md` for AI-102, AZ-104, and AI-900 with accurate lab catalogs and statistics.
+4. Update Related Labs and Related Practice Exam Questions sections in each individual lab README.
 
-Use the `exam-question-organizer` skill to reorganize practice exam questions by domain/skill/task hierarchy, insert `**Exam Task:**` metadata, and sort questions under correct domain/skill headings.
+### 2. Organize Practice Exam Questions (Script)
 
-> **MANDATORY FULL PIPELINE — NO SHORT-CIRCUITING.** You MUST execute every step of the exam-question-organizer skill (Load → Parse → Classify → Assemble → Verify → Update Coverage). The presence of existing `**Exam Task:**` metadata or existing domain headings does NOT mean questions are correctly placed. A question's `**Exam Task:**` value may not match the domain/skill section it currently sits under. You MUST classify every question against the domain structure and move any misplaced questions to the correct section. Skipping classification because "metadata already exists" is a critical error.
+Run the reorganizer script for each exam. The script reads `**Task:**` metadata from each question block, sorts questions by the canonical domain → skill ordering from the exam README, and regenerates the file.
 
-### 3. Update Coverage Tables
+```powershell
+& ".assets\scripts\Invoke-PracticeExamReorganizer.ps1" -ExamName AZ-104 -Verbose
+& ".assets\scripts\Invoke-PracticeExamReorganizer.ps1" -ExamName AI-102 -Verbose
+```
 
-Run the coverage table script to update both the Qs and Labs columns in each exam README:
+After running, check the summary output for warnings about unrecognized domain/skill values or metadata gaps. Fix any issues and re-run before proceeding.
+
+### 3. Update Coverage Tables (Script)
+
+Run the coverage table script for each exam, one at a time:
 
 ```powershell
 & ".assets\scripts\Update-CoverageTable.ps1" -ExamName AZ-104 -Verbose
+```
+
+```powershell
 & ".assets\scripts\Update-CoverageTable.ps1" -ExamName AI-102 -Verbose
 ```
 
@@ -58,7 +75,7 @@ Run the coverage table script to update both the Qs and Labs columns in each exa
 - It updates the `Qs` and `Labs` columns between `<!-- BEGIN COVERAGE TABLE -->` and `<!-- END COVERAGE TABLE -->` markers.
 - This is the **authoritative source** for coverage table values — it supersedes any coverage update performed by the reorganizer script.
 
-### 4. Collapse Explanation Blocks
+### 4. Collapse Explanation Blocks (Script)
 
 Run the collapse script to ensure all `<details>` blocks default to collapsed:
 
@@ -66,10 +83,10 @@ Run the collapse script to ensure all `<details>` blocks default to collapsed:
 & ".assets\scripts\Invoke-CollapseDetailBlock.ps1"
 ```
 
-- Run with `-WhatIf` first to preview which files contain open detail blocks.
 - The script scans every `practice-questions/` directory and replaces `<details open>` with `<details>`.
+- If no open blocks are found, the script reports "No open detail blocks found" and exits successfully.
 
-### 5. Remove Unused Images
+### 5. Remove Unused Images (Script)
 
 After all updates are complete, run the unused image cleanup script:
 

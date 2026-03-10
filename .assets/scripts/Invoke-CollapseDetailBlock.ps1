@@ -83,7 +83,8 @@ $Helpers = {
             })
         }
 
-        return $results
+        # Wrap in array operator to prevent PowerShell from unrolling an empty list to $null
+        return , $results
     }
 
     function Show-Summary {
