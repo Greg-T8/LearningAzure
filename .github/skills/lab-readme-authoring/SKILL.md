@@ -26,6 +26,32 @@ Starting template: `.github/skills/lab-azure-governance/templates/README.templat
 
 Section order: see `lab-shared-contract` R-011.
 
+### Section 0: Title and Exam Coverage Metadata
+
+The H1 title is followed immediately by exam coverage metadata. These lines are used by `Update-CoverageTable.ps1` to populate the Exam Coverage table in each exam README.
+
+```markdown
+# <Lab Title>
+
+**Domain:** <Exam Domain from intake>
+**Skill:** <Skill from intake>
+**Task:** <Task from intake>
+```
+
+Rules:
+
+- Use the `Exam Domain`, `Skill`, and `Task` values from the intake metadata (R-041/R-043) — **not** the folder-path `Domain`.
+- Use exact wording — these values are copied verbatim from the exam README hierarchy.
+- If the intake specifies multiple tasks, use a header plus bullets:
+
+```markdown
+**Task:**
+- <task 1>
+- <task 2>
+```
+
+- Insert a blank line after the metadata block before the first `##` section heading.
+
 ### Section 1: Exam Question Scenario
 
 ```markdown

@@ -38,9 +38,9 @@
 
 ---
 
-## 📈 Practice Exam Coverage
+## 📊 Exam Coverage
 
-Task-level question counts from [Practice Questions](./practice-questions/README.md). Tasks with **0** have no practice questions yet.
+Task-level coverage from [Practice Questions](./practice-questions/README.md) and [Hands-on Labs](./hands-on-labs/README.md). Tasks with **0** have no coverage yet.
 
 <!-- BEGIN COVERAGE TABLE -->
 
@@ -48,167 +48,167 @@ Task-level question counts from [Practice Questions](./practice-questions/README
 
 #### Manage Microsoft Entra users and groups
 
-| Task | Qs |
-| :--- | -: |
-| Create users and groups | 0 |
-| Manage user and group properties | 0 |
-| Manage licenses in Microsoft Entra ID | 0 |
-| Manage external users | 0 |
-| Configure self-service password reset (SSPR) | 1 |
+| Task | Qs | Labs |
+| :--- | -: | -: |
+| Create users and groups | 0 | 0 |
+| Manage user and group properties | 0 | 0 |
+| Manage licenses in Microsoft Entra ID | 0 | 0 |
+| Manage external users | 0 | 0 |
+| Configure self-service password reset (SSPR) | 1 | 0 |
 
 #### Manage access to Azure resources
 
-| Task | Qs |
-| :--- | -: |
-| Manage built-in Azure roles | 0 |
-| Assign roles at different scopes | 0 |
-| Interpret access assignments | 2 |
+| Task | Qs | Labs |
+| :--- | -: | -: |
+| Manage built-in Azure roles | 0 | 0 |
+| Assign roles at different scopes | 0 | 0 |
+| Interpret access assignments | 2 | 0 |
 
 #### Manage Azure subscriptions and governance
 
-| Task | Qs |
-| :--- | -: |
-| Implement and manage Azure Policy | 3 |
-| Configure resource locks | 2 |
-| Apply and manage tags on resources | 3 |
-| Manage resource groups | 1 |
-| Manage subscriptions | 1 |
-| Manage costs by using alerts, budgets, and Azure Advisor recommendations | 1 |
-| Configure management groups | 0 |
+| Task | Qs | Labs |
+| :--- | -: | -: |
+| Implement and manage Azure Policy | 3 | 0 |
+| Configure resource locks | 2 | 0 |
+| Apply and manage tags on resources | 3 | 0 |
+| Manage resource groups | 1 | 0 |
+| Manage subscriptions | 1 | 0 |
+| Manage costs by using alerts, budgets, and Azure Advisor recommendations | 1 | 0 |
+| Configure management groups | 0 | 0 |
 
 ### Domain 2: Implement and Manage Storage (15–20%)
 
 #### Configure access to storage
 
-| Task | Qs |
-| :--- | -: |
-| Configure Azure Storage firewalls and virtual networks | 0 |
-| Create and use shared access signature (SAS) tokens | 1 |
-| Configure stored access policies | 1 |
-| Manage access keys | 2 |
-| Configure identity-based access for Azure Files | 1 |
+| Task | Qs | Labs |
+| :--- | -: | -: |
+| Configure Azure Storage firewalls and virtual networks | 0 | 0 |
+| Create and use shared access signature (SAS) tokens | 1 | 0 |
+| Configure stored access policies | 1 | 0 |
+| Manage access keys | 2 | 0 |
+| Configure identity-based access for Azure Files | 1 | 0 |
 
 #### Configure and manage storage accounts
 
-| Task | Qs |
-| :--- | -: |
-| Create and configure storage accounts | 0 |
-| Configure Azure Storage redundancy | 1 |
-| Configure object replication | 1 |
-| Configure storage account encryption | 0 |
-| Manage data by using Azure Storage Explorer and AzCopy | 0 |
+| Task | Qs | Labs |
+| :--- | -: | -: |
+| Create and configure storage accounts | 0 | 0 |
+| Configure Azure Storage redundancy | 1 | 0 |
+| Configure object replication | 1 | 1 |
+| Configure storage account encryption | 0 | 0 |
+| Manage data by using Azure Storage Explorer and AzCopy | 0 | 2 |
 
 #### Configure Azure Files and Azure Blob Storage
 
-| Task | Qs |
-| :--- | -: |
-| Create and configure a file share in Azure Storage | 0 |
-| Create and configure a container in Blob Storage | 0 |
-| Configure storage tiers | 0 |
-| Configure soft delete for blobs and containers | 0 |
-| Configure snapshots and soft delete for Azure Files | 1 |
-| Configure blob lifecycle management | 2 |
-| Configure blob versioning | 1 |
+| Task | Qs | Labs |
+| :--- | -: | -: |
+| Create and configure a file share in Azure Storage | 0 | 0 |
+| Create and configure a container in Blob Storage | 0 | 0 |
+| Configure storage tiers | 0 | 0 |
+| Configure soft delete for blobs and containers | 0 | 0 |
+| Configure snapshots and soft delete for Azure Files | 1 | 0 |
+| Configure blob lifecycle management | 2 | 1 |
+| Configure blob versioning | 1 | 1 |
 
 ### Domain 3: Deploy and Manage Azure Compute Resources (20–25%)
 
 #### Automate deployment of resources by using ARM templates or Bicep files
 
-| Task | Qs |
-| :--- | -: |
-| Interpret an Azure Resource Manager template or a Bicep file | 1 |
-| Modify an existing Azure Resource Manager template | 0 |
-| Modify an existing Bicep file | 1 |
-| Deploy resources by using an ARM template or a Bicep file | 0 |
-| Export a deployment as an ARM template or convert an ARM template to a Bicep file | 0 |
+| Task | Qs | Labs |
+| :--- | -: | -: |
+| Interpret an Azure Resource Manager template or a Bicep file | 1 | 0 |
+| Modify an existing Azure Resource Manager template | 0 | 0 |
+| Modify an existing Bicep file | 1 | 0 |
+| Deploy resources by using an ARM template or a Bicep file | 0 | 0 |
+| Export a deployment as an ARM template or convert an ARM template to a Bicep file | 0 | 0 |
 
 #### Create and configure virtual machines
 
-| Task | Qs |
-| :--- | -: |
-| Create a virtual machine | 0 |
-| Configure Azure Disk Encryption | 1 |
-| Move a VM to another resource group, subscription, or region | 0 |
-| Manage virtual machine sizes | 1 |
-| Manage virtual machine disks | 0 |
-| Deploy VMs to availability zones and availability sets | 0 |
-| Deploy and configure an Azure Virtual Machine Scale Sets | 1 |
+| Task | Qs | Labs |
+| :--- | -: | -: |
+| Create a virtual machine | 0 | 0 |
+| Configure Azure Disk Encryption | 1 | 1 |
+| Move a VM to another resource group, subscription, or region | 0 | 0 |
+| Manage virtual machine sizes | 1 | 0 |
+| Manage virtual machine disks | 0 | 0 |
+| Deploy VMs to availability zones and availability sets | 0 | 0 |
+| Deploy and configure an Azure Virtual Machine Scale Sets | 1 | 1 |
 
 #### Provision and manage containers in the Azure portal
 
-| Task | Qs |
-| :--- | -: |
-| Create and manage an Azure container registry | 0 |
-| Provision a container by using Azure Container Instances | 0 |
-| Provision a container by using Azure Container Apps | 0 |
-| Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps | 1 |
+| Task | Qs | Labs |
+| :--- | -: | -: |
+| Create and manage an Azure container registry | 0 | 0 |
+| Provision a container by using Azure Container Instances | 0 | 0 |
+| Provision a container by using Azure Container Apps | 0 | 0 |
+| Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps | 1 | 1 |
 
 #### Create and configure Azure App Service
 
-| Task | Qs |
-| :--- | -: |
-| Provision an App Service plan | 4 |
-| Configure scaling for an App Service plan | 3 |
-| Create an App Service | 1 |
-| Configure certificates and TLS for an App Service | 0 |
-| Map an existing custom DNS name to an App Service | 0 |
-| Configure backup for an App Service | 0 |
-| Configure networking settings for an App Service | 0 |
-| Configure deployment slots for an App Service | 1 |
+| Task | Qs | Labs |
+| :--- | -: | -: |
+| Provision an App Service plan | 4 | 1 |
+| Configure scaling for an App Service plan | 3 | 1 |
+| Create an App Service | 1 | 0 |
+| Configure certificates and TLS for an App Service | 0 | 0 |
+| Map an existing custom DNS name to an App Service | 0 | 0 |
+| Configure backup for an App Service | 0 | 0 |
+| Configure networking settings for an App Service | 0 | 0 |
+| Configure deployment slots for an App Service | 1 | 1 |
 
 ### Domain 4: Implement and Manage Virtual Networking (15–20%)
 
 #### Configure and manage virtual networks in Azure
 
-| Task | Qs |
-| :--- | -: |
-| Create and configure virtual networks and subnets | 0 |
-| Create and configure virtual network peering | 0 |
-| Configure public IP addresses | 0 |
-| Configure user-defined network routes | 0 |
-| Troubleshoot network connectivity | 0 |
+| Task | Qs | Labs |
+| :--- | -: | -: |
+| Create and configure virtual networks and subnets | 0 | 0 |
+| Create and configure virtual network peering | 0 | 0 |
+| Configure public IP addresses | 0 | 0 |
+| Configure user-defined network routes | 0 | 0 |
+| Troubleshoot network connectivity | 0 | 0 |
 
 #### Configure secure access to virtual networks
 
-| Task | Qs |
-| :--- | -: |
-| Create and configure NSGs and application security groups | 0 |
-| Evaluate effective security rules in NSGs | 0 |
-| Implement Azure Bastion | 0 |
-| Configure service endpoints for Azure PaaS | 0 |
-| Configure private endpoints for Azure PaaS | 1 |
+| Task | Qs | Labs |
+| :--- | -: | -: |
+| Create and configure NSGs and application security groups | 0 | 0 |
+| Evaluate effective security rules in NSGs | 0 | 0 |
+| Implement Azure Bastion | 0 | 0 |
+| Configure service endpoints for Azure PaaS | 0 | 0 |
+| Configure private endpoints for Azure PaaS | 1 | 1 |
 
 #### Configure name resolution and load balancing
 
-| Task | Qs |
-| :--- | -: |
-| Configure Azure DNS | 1 |
-| Configure an internal or public load balancer | 1 |
-| Troubleshoot load balancing | 2 |
+| Task | Qs | Labs |
+| :--- | -: | -: |
+| Configure Azure DNS | 1 | 0 |
+| Configure an internal or public load balancer | 1 | 1 |
+| Troubleshoot load balancing | 2 | 1 |
 
 ### Domain 5: Monitor and Maintain Azure Resources (10–15%)
 
 #### Monitor resources in Azure
 
-| Task | Qs |
-| :--- | -: |
-| Interpret metrics in Azure Monitor | 1 |
-| Configure log settings in Azure Monitor | 0 |
-| Query and analyze logs in Azure Monitor | 0 |
-| Set up alert rules, action groups, and alert processing rules in Azure Monitor | 2 |
-| Configure and interpret monitoring of VMs, storage accounts, and networks by using Azure Monitor Insights | 0 |
-| Use Azure Network Watcher and Connection Monitor | 2 |
+| Task | Qs | Labs |
+| :--- | -: | -: |
+| Interpret metrics in Azure Monitor | 1 | 1 |
+| Configure log settings in Azure Monitor | 0 | 0 |
+| Query and analyze logs in Azure Monitor | 0 | 0 |
+| Set up alert rules, action groups, and alert processing rules in Azure Monitor | 2 | 1 |
+| Configure and interpret monitoring of VMs, storage accounts, and networks by using Azure Monitor Insights | 0 | 1 |
+| Use Azure Network Watcher and Connection Monitor | 2 | 1 |
 
 #### Implement backup and recovery
 
-| Task | Qs |
-| :--- | -: |
-| Create a Recovery Services vault | 0 |
-| Create an Azure Backup vault | 0 |
-| Create and configure a backup policy | 0 |
-| Perform backup and restore operations by using Azure Backup | 2 |
-| Configure Azure Site Recovery for Azure resources | 0 |
-| Perform a failover to a secondary region by using Site Recovery | 0 |
-| Configure and interpret reports and alerts for backups | 0 |
+| Task | Qs | Labs |
+| :--- | -: | -: |
+| Create a Recovery Services vault | 0 | 0 |
+| Create an Azure Backup vault | 0 | 0 |
+| Create and configure a backup policy | 0 | 0 |
+| Perform backup and restore operations by using Azure Backup | 2 | 1 |
+| Configure Azure Site Recovery for Azure resources | 0 | 0 |
+| Perform a failover to a secondary region by using Site Recovery | 0 | 0 |
+| Configure and interpret reports and alerts for backups | 0 | 0 |
 
 <!-- END COVERAGE TABLE -->

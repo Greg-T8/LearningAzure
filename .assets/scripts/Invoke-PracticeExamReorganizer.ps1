@@ -499,7 +499,7 @@ $Helpers = {
             }
         }
 
-        # Read the exam README and update Qs values
+        # Read the exam README and update Qs values (preserving Labs column)
         $lines = Get-Content -Path $ExamReadme -Encoding UTF8
         $output = [System.Collections.Generic.List[string]]::new()
         $inCoverage = $false
@@ -518,10 +518,12 @@ $Helpers = {
                 continue
             }
 
-            if ($inCoverage -and $line -match '^\|\s+(?!Task\b|:---)(.+?)\s+\|\s+\d+\s+\|') {
+            # Match 3-column rows: | <task> | <qs> | <labs> |
+            if ($inCoverage -and $line -match '^\|\s+(?!Task\b|:---)(.+?)\s+\|\s+\d+\s+\|\s+(\d+)\s+\|') {
                 $taskName = $Matches[1].Trim()
+                $existingLabs = $Matches[2]
                 $count = if ($taskCounts.ContainsKey($taskName)) { $taskCounts[$taskName] } else { 0 }
-                $newLine = "| $taskName | $count |"
+                $newLine = "| $taskName | $count | $existingLabs |"
                 $output.Add($newLine)
                 $updated++
             }

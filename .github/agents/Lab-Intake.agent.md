@@ -2,7 +2,7 @@
 name: Lab-Intake
 description: "Intake agent — extracts exam questions from screenshots, formats structured markdown, derives metadata, persists output to temp file, and hands off to Lab-Designer."
 agent: ['Lab-Designer']
-model: 'GPT-4o'
+model: 'GPT-5 mini'
 user-invokable: true
 tools: [vscode/askQuestions, read/readFile, edit/createDirectory, edit/createFile, edit/editFiles, search/codebase, search/fileSearch, search/listDirectory, search/textSearch, web/fetch]
 handoffs:
@@ -555,6 +555,9 @@ Extract **all** of the following fields from the exam question:
 | ---------------- | -------- | ------------------------------------------------------------------ |
 | `Exam`           | string   | Certification code: `AI-102`, `AZ-104`, or `AI-900`               |
 | `Domain`         | string   | Azure domain (e.g., Networking, Storage, Generative AI)            |
+| `Exam Domain`    | string   | Full domain name from exam README `### Domain N:` heading (omit weight) |
+| `Skill`          | string   | Skill name from exam README `####` sub-heading                     |
+| `Task`           | string or string[] | Most specific task(s) from exam README skill tables       |
 | `Topic`          | string   | Kebab-case slug for naming (e.g., `vnet-peering`, `blob-versioning`) |
 | `KeyServices`   | string[] | Azure services the lab must deploy (e.g., `[VNet, NSG, Route Table]`) |
 
@@ -647,6 +650,41 @@ Examples of what this means in practice:
 | Identify Upload Failure | `agent-upload-config` | "Identify" is an exam-task verb → stripped; concept is agent upload configuration |
 | Determine the Correct Firewall Rule | `firewall-rule-config` | "Determine" is an exam-task verb → stripped; concept is firewall rule configuration |
 
+#### Exam Domain, Skill, and Task
+
+Identify the question's exam domain, skill, and task(s) from the exam README's coverage hierarchy. This mirrors the metadata produced by the `exam-question-extractor` skill and is used by `Update-CoverageTable.ps1` to populate the Exam Coverage table.
+
+**Source of truth:** Read the exam's README (e.g., `AZ-104/README.md`) and use its domain → skill → task hierarchy.
+
+* **Exam Domain** — The `### Domain N: …` headings (omit the weight percentage). Example: `Implement and Manage Virtual Networking`, not `Implement and Manage Virtual Networking (15–20%)`.
+* **Skill** — The `####` sub-headings under each domain.
+* **Task** — The table rows under each skill.
+
+Rules:
+
+* Use **exact wording** from the README for exam domain and skill names.
+* For tasks, use the most specific task wording. Apply best-effort reasoning when the question spans topics — pick the closest match(es).
+* If a question maps to a **single task**, the value is a single string.
+* If a question maps to **multiple tasks** (even across different skills), list them as separate bullet items.
+
+Example (single task):
+
+```
+- Exam Domain: Implement and Manage Virtual Networking
+- Skill: Configure and manage virtual networks in Azure
+- Task: Create and configure virtual network peering
+```
+
+Example (multiple tasks):
+
+```
+- Exam Domain: Manage Azure Identities and Governance
+- Skill: Manage Azure subscriptions and governance
+- Task:
+  - Apply and manage tags on resources
+  - Manage costs by using alerts, budgets, and Azure Advisor recommendations
+```
+
 #### KeyServices
 
 List the Azure services that the question and correct answer require:
@@ -677,15 +715,25 @@ Return a structured block. **Field order and capitalization are mandatory** — 
 
 - Exam: [AI-102 | AZ-104 | AI-900]
 - Domain: [exact domain from R-041 closed-set tables]
+- Exam Domain: [full domain name from exam README — omit weight]
+- Skill: [skill name from exam README]
+- Task: [task(s) from exam README]
 - Topic: [kebab-case-slug]
 - Key Services: [comma-separated list, Title Case, official Azure names]
 - Deployment Method: [Terraform | Bicep | Scripted | Manual]
 
 ### Formatting Rules
 
-1. **Field order** — Emit fields in exactly this sequence: Exam, Domain, Topic, Key Services, Deployment Method. Never reorder.
+1. **Field order** — Emit fields in exactly this sequence: Exam, Domain, Exam Domain, Skill, Task, Topic, Key Services, Deployment Method. Never reorder.
 2. **Capitalization** — All field labels and values use Title Case (e.g., `Compute`, not `compute`; `Azure Key Vault`, not `azure key vault`). The only exception is `Topic`, which is always kebab-case lowercase.
 3. **Domain values** — Must be an **exact string** from the R-041 closed-set domain tables. Only these values are valid for each exam. Values like `Security`, `Encryption`, `Key Management`, `Document Intelligence`, `Speech`, or `Bot Service` are **never valid** domains — they are service names, not domains. If the question is about one of these services, map it to the correct parent domain (e.g., Document Intelligence → `AI Services`).
+4. **Exam Domain, Skill, and Task values** — Must use **exact wording** from the exam README's `### Domain N:` headings (omit weight), `####` sub-headings, and task table rows respectively. These are distinct from the `Domain` field, which is the simplified folder-path domain.
+5. **Task format** — If a question maps to a single task, use a single inline value. If it maps to multiple tasks, use a bulleted list indented with two spaces:
+   ```
+   - Task:
+     - <task 1>
+     - <task 2>
+   ```
 
 ### MANDATORY: Persist Output to Input File
 
@@ -711,10 +759,15 @@ This makes the input file the **cumulative artifact** for the pipeline. Downstre
 After extracting metadata per R-041 and **before** returning output, run this validation:
 
 1. **Domain check** — Confirm the `Domain` value is an **exact, verbatim string** from the **Domain column** of the R-041 closed-set table for the identified exam. Compare character-by-character. If the value does not appear verbatim in the Domain column, it is invalid — re-derive using the cross-cutting topic guidance and example-topics mapping in R-041. Common violators: `Document Intelligence`, `Speech`, `Bot Service`, `Translator` — these are **service names**, not domains.
-2. **Field order check** — Confirm the five metadata fields appear in the order specified by R-043.
-3. **Capitalization check** — Confirm all values use Title Case (except `Topic` which is kebab-case lowercase).
-4. **Completeness check** — Confirm all five metadata fields are populated (including Deployment Method from user input).
-5. **Field-level checks:**
+2. **Exam coverage metadata check** — Confirm the `Exam Domain`, `Skill`, and `Task` values use **exact wording** from the exam README's hierarchy:
+   - [ ] `Exam Domain` matches a `### Domain N: …` heading from the exam README (weight percentage omitted)
+   - [ ] `Skill` matches a `####` sub-heading under the identified domain
+   - [ ] `Task` matches one or more table rows under the identified skill
+   - [ ] All three values are populated
+3. **Field order check** — Confirm the eight metadata fields appear in the order specified by R-043.
+4. **Capitalization check** — Confirm all values use Title Case (except `Topic` which is kebab-case lowercase).
+5. **Completeness check** — Confirm all eight metadata fields are populated (including Deployment Method from user input).
+6. **Field-level checks:**
    - [ ] `Exam` matches one of: `AI-102`, `AZ-104`, `AI-900`
    - [ ] `Topic` is kebab-case, ≤25 characters, no special characters
    - [ ] `Topic` is identical to the `<derived-slug>` produced and gate-checked in R-040 (not independently re-derived)
@@ -722,20 +775,22 @@ After extracting metadata per R-041 and **before** returning output, run this va
    - [ ] `Key Services` contains at least one service
    - [ ] `Key Services` entries use official Azure naming
    - [ ] `Deployment Method` matches one of: `Terraform`, `Bicep`, `Scripted`, `Manual`
-6. **Markdownlint check** — Confirm the temp file uses markdownlint-safe formatting:
+7. **Markdownlint check** — Confirm the temp file uses markdownlint-safe formatting:
    - [ ] First line is `# Lab Intake Artifact`
    - [ ] No trailing whitespace
    - [ ] No multiple consecutive blank lines
    - [ ] Table separator rows are valid and have matching column counts
-7. **File persistence check** — Use `readFile` to re-read the input file and confirm the `## Phase 1 — Metadata Output` heading exists in the file content. If it does not, the R-043 persist step was skipped — go back and execute it now before proceeding.
+8. **File persistence check** — Use `readFile` to re-read the input file and confirm the `## Phase 1 — Metadata Output` heading exists in the file content. If it does not, the R-043 persist step was skipped — go back and execute it now before proceeding.
 
 If any check fails, **fix the value before returning output**. Do not return output with validation failures.
 
 > **Hard failure condition — Topic length:** A `Topic` slug longer than 25 characters is a blocking failure. You must shorten and re-validate until it is <=25. Never emit, persist, or hand off metadata containing an over-limit slug.
 
-> **Common mistake — skipping file write:** The most frequent intake failure is generating metadata in the chat response but never writing it to the file. Check 7 above catches this. If the heading is missing from the file, you **must** append the metadata block before completing intake.
+> **Common mistake — skipping file write:** The most frequent intake failure is generating metadata in the chat response but never writing it to the file. Check 8 above catches this. If the heading is missing from the file, you **must** append the metadata block before completing intake.
 >
 > **Common mistake — invalid domains:** Agents sometimes produce domain names like "Security", "Encryption", "Key Management", "Document Intelligence", "Speech", or "Bot Service" — these are **not** valid domains for any exam. They are Azure service or technology names, not domains. Re-read the R-041 domain tables and choose the correct domain based on the primary resource. For AI-102, questions about Document Intelligence, Speech, or Translator must map to **AI Services**.
+>
+> **Common mistake — exam coverage metadata wording:** `Exam Domain`, `Skill`, and `Task` must use the **exact wording** from the exam README. Do not paraphrase, abbreviate, or substitute synonyms. Read the exam README hierarchy and copy the strings verbatim.
 >
 > **Common mistake — markdownlint failures:** The most frequent markdownlint failures are trailing spaces, extra blank lines, malformed table separators, and heading-level skips. Normalize formatting before returning output.
 
@@ -749,7 +804,10 @@ Intake is complete when **all** of the following are true. The file-write criter
 - [ ] File-write verified: `readFile` confirms the `## Phase 1 — Metadata Output` heading exists in the input file (R-044 check 7)
 - [ ] All metadata fields are populated
 - [ ] Domain is an exact match from R-041 closed-set tables
-- [ ] Field order matches R-043 (Exam, Domain, Topic, Key Services, Deployment Method)
+- [ ] Exam Domain uses exact wording from exam README `### Domain N:` heading (weight omitted)
+- [ ] Skill uses exact wording from exam README `####` sub-heading
+- [ ] Task uses exact wording from exam README skill table rows
+- [ ] Field order matches R-043 (Exam, Domain, Exam Domain, Skill, Task, Topic, Key Services, Deployment Method)
 - [ ] All values use correct capitalization (Title Case, except Topic)
 - [ ] Topic was derived from the exam question title heading per R-040 and copied verbatim into R-041 metadata
 - [ ] Topic length verified via R-040 gate checkpoint (PASS)
@@ -757,7 +815,7 @@ Intake is complete when **all** of the following are true. The file-write criter
 - [ ] Deployment method was captured from the user's input (R-042)
 - [ ] Exam question was extracted from screenshot/text per R-039 and saved to file per R-040
 - [ ] Output matches R-043 schema
-- [ ] Temp file content is markdownlint-compliant per R-038A and R-044 check 6
+- [ ] Temp file content is markdownlint-compliant per R-038A and R-044 check 7
 - [ ] R-044 validation gate passed (all 8 checks)
 
 ---

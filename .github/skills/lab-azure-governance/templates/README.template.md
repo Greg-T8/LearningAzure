@@ -1,5 +1,9 @@
 # Lab: [Title]
 
+**Domain:** [Exam Domain from intake]
+**Skill:** [Skill from intake]
+**Task:** [Task from intake]
+
 ## Exam Question
 
 > **Exam**: [EXAM] — [Domain]
