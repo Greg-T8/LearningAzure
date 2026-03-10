@@ -15,7 +15,7 @@ LearningAzure repository — certification study tracking.
 Greg Tate
 
 .NOTES
-Program: Start-StudySession.ps1
+Program: Invoke-AzStudySession.ps1
 #>
 
 [CmdletBinding()]
@@ -23,21 +23,21 @@ param(
     [ValidateSet('Start', 'Stop', 'End')]
     [string]$Action = 'Start',
 
-    [ValidateSet('AI-102', 'AZ-104', 'Other')]
-    [string]$ExamName
+    [ValidateSet('AI-102', 'AZ-104', 'WorkflowDevelopment')]
+    [string]$Mode
 )
 
 # Configuration
 $RepoRoot = Resolve-Path -Path (Join-Path -Path $PSScriptRoot -ChildPath '..\..')
 $StudyLogFile = $null
-$AllExams = @('AI-102', 'AZ-104', 'Other')
+$AllExams = @('AI-102', 'AZ-104', 'WorkflowDevelopment')
 $ExamFolderMap = @{
     'AI-102' = 'AI-102'
     'AZ-104' = 'AZ-104'
-    'Other'  = '.assets\workflow-development'
+    'WorkflowDevelopment' = '.assets\workflow-development'
 }
 $ExamLogFileMap = @{
-    'Other' = 'WorkLog.md'
+    'WorkflowDevelopment' = 'WorkLog.md'
 }
 
 $Main = {
@@ -49,12 +49,12 @@ $Main = {
     # Route to the appropriate action handler
     switch ($Action) {
         'Start' {
-            if (-not $ExamName) {
-                throw "ExamName is required when Action is 'Start'."
+            if (-not $Mode) {
+                throw "Mode is required when Action is 'Start'."
             }
 
-            $folder = Resolve-ExamFolder -Exam $ExamName
-            $logFileName = Resolve-ExamLogFileName -Exam $ExamName
+            $folder = Resolve-ExamFolder -Exam $Mode
+            $logFileName = Resolve-ExamLogFileName -Exam $Mode
             $script:StudyLogFile = Join-Path -Path $RepoRoot -ChildPath "$folder\$logFileName"
 
             # End any currently active session before starting a new one
@@ -72,8 +72,8 @@ $Main = {
             Confirm-StudyLogExists
             $session = Get-NextSessionNumber
             Add-SessionEntry -SessionNumber $session
-            Push-StudyLogChange -SessionNumber $session -Type 'start' -Exam $ExamName
-            Show-Confirmation -Message "Study session #$session started for $ExamName"
+            Push-StudyLogChange -SessionNumber $session -Type 'start' -Exam $Mode
+            Show-Confirmation -Message "Study session #$session started for $Mode"
         }
         'Stop' {
             $sourceExam = Find-ActiveExam
@@ -291,7 +291,7 @@ $Helpers = {
             [ValidateSet('start', 'end')]
             [string]$Type,
 
-            [string]$Exam = $ExamName
+            [string]$Exam = $Mode
         )
 
         $folder          = Resolve-ExamFolder -Exam $Exam
