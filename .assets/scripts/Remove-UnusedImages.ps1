@@ -32,7 +32,7 @@ $Main = {
 
     $repoRoot = Get-RepoRoot
     $imgDirectories = Get-ImgDirectory -Root $repoRoot
-    $results = Find-UnusedImage -ImgDirectories $imgDirectories
+    $results = @(Find-UnusedImage -ImgDirectories $imgDirectories)
     Remove-UnusedImage -UnusedImages $results
     Show-Summary -UnusedImages $results
 }
@@ -45,6 +45,14 @@ $Helpers = {
             return (Resolve-Path -Path $Path).Path
         }
 
+        # Prefer the actual Git repository root when no path is provided
+        $gitRoot = & git -C $PSScriptRoot rev-parse --show-toplevel 2>$null
+
+        if ($LASTEXITCODE -eq 0 -and -not [string]::IsNullOrWhiteSpace($gitRoot)) {
+            return (Resolve-Path -Path $gitRoot.Trim()).Path
+        }
+
+        # Fallback to the expected repository layout relative to this script
         return (Resolve-Path -Path (Join-Path -Path $PSScriptRoot -ChildPath '..\..')).Path
     }
 
@@ -112,16 +120,22 @@ $Helpers = {
             }
         }
 
-        return $unused
+        return $unused.ToArray()
     }
 
     function Remove-UnusedImage {
         # Delete each unreferenced image file, respecting -WhatIf
+        [CmdletBinding(SupportsShouldProcess)]
         param(
             [Parameter(Mandatory)]
+            [AllowNull()]
             [AllowEmptyCollection()]
             [object[]]$UnusedImages
         )
+
+        if (-not $UnusedImages) {
+            return
+        }
 
         foreach ($image in $UnusedImages) {
             if ($PSCmdlet.ShouldProcess($image.FullName, 'Remove unreferenced image')) {
