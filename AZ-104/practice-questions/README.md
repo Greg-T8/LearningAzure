@@ -21,10 +21,11 @@ Accounts for questions missed or unsure about in the practice exams.
     * [Implement resource locks](#implement-resource-locks)
 * [Implement and manage storage](#implement-and-manage-storage)
   * [Configure access to storage](#configure-access-to-storage)
+    * [Modify Stored Access Policy](#modify-stored-access-policy)
+    * [Diagnose Storage Explorer Permission Errors](#diagnose-storage-explorer-permission-errors)
+    * [Shared Access Signature (SAS) practices](#shared-access-signature-sas-practices)
     * [Configure AzCopy Authentication for Blob and File Storage](#configure-azcopy-authentication-for-blob-and-file-storage)
     * [Configure storage account network access](#configure-storage-account-network-access)
-    * [Diagnose Storage Explorer Permission Errors](#diagnose-storage-explorer-permission-errors)
-    * [Modify Stored Access Policy](#modify-stored-access-policy)
   * [Configure and manage storage accounts](#configure-and-manage-storage-accounts)
     * [Azure Storage Redundancy Recommendation](#azure-storage-redundancy-recommendation)
     * [Configure Object Replication Between Storage Accounts](#configure-object-replication-between-storage-accounts)
@@ -35,9 +36,9 @@ Accounts for questions missed or unsure about in the practice exams.
     * [Identify Blob Write Operations That Create New Versions](#identify-blob-write-operations-that-create-new-versions)
 * [Deploy and manage Azure compute resources](#deploy-and-manage-azure-compute-resources)
   * [Create and configure virtual machines](#create-and-configure-virtual-machines)
-    * [Encrypt VM Disk With Key Vault](#encrypt-vm-disk-with-key-vault)
-    * [Apply Change to VMSS OS and Data Disk Profile](#apply-change-to-vmss-os-and-data-disk-profile)
     * [VM Resize Failure Cause](#vm-resize-failure-cause)
+    * [Apply Change to VMSS OS and Data Disk Profile](#apply-change-to-vmss-os-and-data-disk-profile)
+    * [Encrypt VM Disk With Key Vault](#encrypt-vm-disk-with-key-vault)
   * [Provision and manage containers in the Azure portal](#provision-and-manage-containers-in-the-azure-portal)
     * [Configure Scaling Rules in Azure Container Apps](#configure-scaling-rules-in-azure-container-apps)
   * [Create and configure Azure App Service](#create-and-configure-azure-app-service)
@@ -55,8 +56,8 @@ Accounts for questions missed or unsure about in the practice exams.
   * [Configure name resolution and load balancing](#configure-name-resolution-and-load-balancing)
     * [IMDS Load Balancer Metadata Error](#imds-load-balancer-metadata-error)
     * [Configure Standard Load Balancer Outbound Traffic and IP Allocation](#configure-standard-load-balancer-outbound-traffic-and-ip-allocation)
-    * [Diagnose Internal Load Balancer Hairpin Traffic Failure](#diagnose-internal-load-balancer-hairpin-traffic-failure)
     * [Configure DNS Records for App Service](#configure-dns-records-for-app-service)
+    * [Diagnose Internal Load Balancer Hairpin Traffic Failure](#diagnose-internal-load-balancer-hairpin-traffic-failure)
 * [Monitor and maintain Azure resources](#monitor-and-maintain-azure-resources)
   * [Monitor resources in Azure](#monitor-resources-in-azure)
     * [Configure Azure Monitor Alert Notification Rate Limits](#configure-azure-monitor-alert-notification-rate-limits)
@@ -67,9 +68,8 @@ Accounts for questions missed or unsure about in the practice exams.
     * [Enable Boot Diagnostics for Azure Virtual Machines](#enable-boot-diagnostics-for-azure-virtual-machines)
     * [Diagnose Network Watcher Tool for Web Server Packet Flow](#diagnose-network-watcher-tool-for-web-server-packet-flow)
   * [Implement backup and recovery](#implement-backup-and-recovery)
-    * [Recover Azure VM from Deleted Backup](#recover-azure-vm-from-deleted-backup)
     * [Recover Configuration File from Azure VM Backup](#recover-configuration-file-from-azure-vm-backup)
-    * [Shared Access Signature (SAS) practices](#shared-access-signature-sas-practices)
+    * [Recover Azure VM from Deleted Backup](#recover-azure-vm-from-deleted-backup)
 
 ---
 
@@ -892,6 +892,283 @@ You should not configure a Read-only lock on TST01-RG and TST02-RG. This configu
 
 ### Configure access to storage
 
+#### Modify Stored Access Policy
+
+**Domain:** Implement and manage storage
+**Skill:** Configure access to storage
+**Task:** Configure stored access policies
+
+You are an Azure administrator for a manufacturing organization. You are using shared access signature (SAS) to configure control over storage accounts.
+
+You create a stored access policy as an additional level of control over SAS on the server side for file shares.
+
+You need to modify a stored access policy.
+
+What should you do?
+
+A. Execute a Set Share ACL operation with the SMB protocol.  
+B. Execute a Set Table ACL operation.  
+C. Execute a Set Container ACL operation with public read access for blobs only.  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-03-03-53-49.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+In this scenario, you are using a stored access policy that acts as an additional level of control over shared access signature (SAS) on the server side for file shares. The access policy for an SAS consists of the start time, expiry time, and permissions for the signature. To create or modify a stored access policy, call the Set ACL operation for the resource (Set Container ACL, Set Queue ACL, Set Table ACL, or Set Share ACL) with a request body that specifies the terms of the access policy. An important point to note here is that, for a file share, you need to execute a Set Share ACL operation, which only supports the Server Message Block (SMB) protocol as the enabled file share protocol.
+
+You should not execute a Set Table ACL operation. The Set Table ACL operation sets the stored access policies for the table that can be used with SAS. In this scenario, since you want to modify stored access policies for an Azure File share, you need to use the Set Share ACL with SMB.
+
+You should not execute a Set Container ACL operation with public read access for blobs only. The Set Container ACL operation with public read access for blobs only will mean that Blob data within a container could be read via anonymous request, but container data is not available. In this scenario, since you are aiming to modify stored access policies for an Azure File share, you need to use the Set Share ACL with SMB.
+
+References
+
+[Define a stored access policy](https://learn.microsoft.com/en-us/rest/api/storageservices/define-stored-access-policy)
+
+</details>
+
+---
+
+#### Diagnose Storage Explorer Permission Errors
+
+**Domain:** Implement and manage storage
+**Skill:** Configure access to storage
+**Task:** Manage access keys
+
+You have storage accounts in your Azure subscription with blob containers and file shares configured. Some users access these storage accounts using Azure Storage Explorer and are reporting an error when they try to browse the storage account contents.
+
+You need to resolve the issue.
+
+What are two possible reasons why users are getting this error message? Each correct answer presents a complete solution.
+
+A. Your users have the Storage Blob Data Reader role assigned in the storage accounts.  
+B. There is a ReadOnly resource lock configured.  
+C. There is a CanNotDelete resource lock configured.  
+D. Your users have the Read role assigned in the storage accounts.  
+E. Your users have the Storage Blob Data Contributor role assigned in the storage accounts.  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+<img src='.img/2026-01-30-05-46-07.png' width=700>
+
+<img src='.img/2026-02-08-04-07-45.png' width=400>
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+Looking at your selected answers, I can see you've made the same mistake again with this question (which appears to be the same as image 3).
+
+**Your Selected Answers:**
+
+1. ✗ Your users have the Storage Blob Data Reader role assigned in the storage accounts
+2. ✗ Your users have the Storage Blob Data Contributor role assigned in the storage accounts
+
+**The Problem - You're Still Selecting SOLUTIONS Instead of PROBLEMS:**
+
+The error message clearly states:
+> "**Unable to list resources in account due to inadequate permissions**. Permission to list containers or to list account keys is required."
+
+You selected answers that indicate users **already have proper data access roles**. If they had Storage Blob Data Reader or Contributor, they **wouldn't be getting this error** - the problem would already be solved!
+
+**The Correct Answers Should Be:**
+
+1. **Your users have the Read role assigned in the storage accounts** ✓
+   - **This IS a problem**: The generic "Read" role only provides management plane access
+   - It does NOT grant data plane access to browse blob/file contents
+   - Users can see the storage account exists but cannot access the data inside
+
+2. **There is a ReadOnly resource lock configured** ✓
+   - **This IS a problem**: ReadOnly locks can block operations in Storage Explorer
+   - Locks can override permissions and prevent certain actions
+
+**Understanding the Logic:**
+
+**Error exists** = Something is wrong/missing
+
+- ❌ "Users have Storage Blob Data Reader" = No error (they have correct access)
+- ✓ "Users have Read role" = Error! (they lack data plane access)
+- ✓ "ReadOnly lock configured" = Error! (lock blocks operations)
+
+**Key Takeaway:**
+
+When a question asks for "**reasons why users are getting an error**," you need to identify what's **CAUSING the problem** (wrong role, locks), not what would **FIX the problem** (correct roles).
+
+**More Detail:**
+
+Great question! Let me explain how ReadOnly locks interact with Azure Storage Explorer and why they can cause issues.
+
+**What ReadOnly Locks Do:**
+
+**ReadOnly locks** in Azure prevent **any modifications** to a resource, including:
+
+- Changing resource configuration
+- Modifying properties
+- Regenerating access keys
+- Updating firewall rules
+- ANY write operation at the management plane
+
+**How Storage Explorer Accesses Storage:**
+
+Azure Storage Explorer can authenticate and access storage using **multiple methods**:
+
+**1. Account Keys (Management Plane):**
+
+- Storage Explorer attempts to **list and retrieve storage account keys**
+- This is a **write-equivalent operation** (POST request to list keys)
+- ReadOnly lock **BLOCKS** this operation
+- Result: ❌ Access denied
+
+**2. Azure AD / RBAC (Data Plane):**
+
+- Uses your Azure AD identity with data plane roles
+- Directly accesses blobs/files without needing account keys
+- ReadOnly lock does **NOT** block this
+- Result: ✓ Should work
+
+**3. SAS Tokens:**
+
+- Uses pre-generated shared access signatures
+- ReadOnly lock does **NOT** block this
+- Result: ✓ Should work
+
+**Why ReadOnly Locks Cause the Error:**
+
+When Storage Explorer opens and tries to browse a storage account:
+
+```
+1. Storage Explorer connects to storage account
+2. Attempts to list containers/shares
+3. Tries to retrieve account keys (common default method)
+4. POST /listKeys operation is attempted
+5. ReadOnly lock intercepts: "NO MODIFICATIONS ALLOWED"
+6. Error: "Unable to list resources due to inadequate permissions"
+```
+
+**The Confusing Part:**
+
+The error message says "**inadequate permissions**," but it's actually:
+
+- Not about RBAC permissions ✗
+- About the **lock preventing the listKeys operation** ✓
+
+Even if you have **Owner** or **Contributor** role, the ReadOnly lock **overrides** your permissions and blocks management plane operations.
+
+**Visual Representation:**
+
+```
+Without ReadOnly Lock:
+User → Storage Explorer → List Keys API → ✓ Success → Browse Storage
+
+With ReadOnly Lock:
+User → Storage Explorer → List Keys API → ✗ BLOCKED by Lock → Error Message
+```
+
+**How to Verify This is the Issue:**
+
+1. Check if a ReadOnly lock exists:
+
+   ```
+   Storage Account → Locks → See "ReadOnly" lock
+   ```
+
+2. Remove the lock temporarily and test Storage Explorer
+   - If it works now, the lock was the problem
+
+**Solutions When ReadOnly Lock Exists:**
+
+**Option 1: Remove the Lock** (if policy allows)
+
+- Not always possible due to governance requirements
+
+**Option 2: Use Azure AD Authentication**
+
+- In Storage Explorer, explicitly connect using "Azure AD"
+- Assign proper data plane roles (Storage Blob Data Reader)
+- Bypasses the need for account keys
+
+**Option 3: Use SAS Tokens**
+
+- Generate SAS token before the lock was applied
+- Connect to storage using SAS URL
+
+**Option 4: Use Azure Portal**
+
+- Portal has built-in handling for locked resources
+- May provide better error messages
+
+**Key Takeaway:**
+
+ReadOnly locks block the **listKeys operation** that Storage Explorer commonly uses for authentication. While users might have proper RBAC permissions, the lock creates a hard stop at the management plane level, preventing Storage Explorer from retrieving the keys needed to access the data using the default authentication method.
+
+The solution is either:
+
+- Remove the lock, OR
+- Use authentication methods that don't require listing keys (Azure AD, SAS tokens)
+
+</details>
+
+▶ **Related Lab:** [lab-storage-explorer-permissions](/AZ-104/hands-on-labs/storage/lab-storage-explorer-permissions/README.md)
+
+---
+
+#### Shared Access Signature (SAS) practices
+
+**Domain:** Implement and Manage Storage
+**Skill:** Configure access to storage
+**Task:** Create and use shared access signature (SAS) tokens
+
+Your company is developing a .NET application that stores part of the information in an Azure Storage account. The application will be installed on end users' computers.
+
+You want to ensure that the information stored in the storage account is accessed in a secure way, so you ask the developers to use a shared access signature (SAS) when accessing said information. You want to make the required configurations on the storage account to follow security best practices and enable access to the account with immediate effect.
+
+For each of the following statements, select Yes if the statement is true. Otherwise, select No.
+
+| STATEMENT | YES | NO |
+|-----------|-----|----|
+| You should configure a stored access policy. | ☐ | ☐ |
+| You should set the shared access signature (SAS) start time to now. | ☐ | ☐ |
+| You should validate data that has been written using a SAS. | ☐ | ☐ |
+| One option for revoking a SAS is by deleting a stored access policy. | ☐ | ☐ |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-11-04-16-22.png' width=700>
+
+</details>
+
+<details open>
+<summary>💡 Click to expand explanation</summary>
+
+You can configure a stored access policy. When you use a shared access signature (SAS), you have two different options. You can either use an ad-hoc SAS or configure a stored access policy. By using an ad-hoc SAS, you specify the start time, expiration time, and permissions in the Uniform Resource Identifier (URI). If someone copies this URI, they will have the same level of access as the corresponding user. This means that this type of SAS can be used by anyone in the world. By configuring a stored access policy, you define the start time, expiration time, and permissions in the policy and then associate a SAS with that policy. You can associate more than one SAS with the same policy.
+
+You should not set the SAS start time to now. When you set the start time of a SAS to now, there can be slight differences in the clocks of the servers that host the storage account. These differences could lead to an access problem for a few minutes after the configuration. If you need your SAS to be available as soon as possible, you should set the start time to 15 minutes before the current time, or you can just not set the start time. Not setting the start time parameter means that the SAS will be active immediately.
+
+You should validate data that has been written using a SAS. When the user uses a SAS, the information they write to the storage account can cause problems, such as communication issues or corruption. Because of this, it is a best practice to validate the data written to the storage account after it is written and before the information is used by any other service or application.
+
+You can revoke a SAS by deleting a stored access policy. If you associate a SAS with a stored access policy, the start time, expiration time, and permissions are inherited from the policy. If you remove the policy, you are invalidating the SAS, thus making it unusable. Keep in mind that if you remove a stored access policy with an associated SAS and then create another stored access policy with the exact same name as the original policy, the associated SAS will be enabled again.
+
+<img src='.img/2026-03-11-04-19-52.png' width=600>
+
+<img src='.img/2026-03-11-04-20-50.png' width=600>
+
+<img src='.img/2026-03-11-04-22-57.png' width=600>
+
+References
+
+* [Grant limited access to Azure Storage resources using shared access signatures (SAS)](https://learn.microsoft.com/en-us/azure/storage/common/storage-sas-overview)
+* [Create a stored access policy](https://learn.microsoft.com/en-us/azure/storage/common/storage-stored-access-policy-define-dotnet?toc=%2Fazure%2Fstorage%2Fblobs%2Ftoc.json&bc=%2Fazure%2Fstorage%2Fblobs%2Fbreadcrumb%2Ftoc.json)
+
+</details>
+
+---
+
 #### Configure AzCopy Authentication for Blob and File Storage
 
 **Domain:** Implement and manage storage
@@ -1096,231 +1373,6 @@ You should not use the `Logging`, `None`, or `Metrics` values. These are valid f
 * [Azure Storage firewall rules](https://learn.microsoft.com/en-us/azure/storage/common/storage-network-security)
 * [Update-AzStorageAccountNetworkRuleSet](https://learn.microsoft.com/en-us/powershell/module/az.storage/update-azstorageaccountnetworkruleset?view=azps-15.4.0&viewFallbackFrom=azps-2.6.0)
 * [Add-AzStorageAccountNetworkRule](https://learn.microsoft.com/en-us/powershell/module/az.storage/add-azstorageaccountnetworkrule?view=azps-15.4.0)
-
-</details>
-
----
-
-#### Diagnose Storage Explorer Permission Errors
-
-**Domain:** Implement and manage storage
-**Skill:** Configure access to storage
-**Task:** Manage access keys
-
-You have storage accounts in your Azure subscription with blob containers and file shares configured. Some users access these storage accounts using Azure Storage Explorer and are reporting an error when they try to browse the storage account contents.
-
-You need to resolve the issue.
-
-What are two possible reasons why users are getting this error message? Each correct answer presents a complete solution.
-
-A. Your users have the Storage Blob Data Reader role assigned in the storage accounts.  
-B. There is a ReadOnly resource lock configured.  
-C. There is a CanNotDelete resource lock configured.  
-D. Your users have the Read role assigned in the storage accounts.  
-E. Your users have the Storage Blob Data Contributor role assigned in the storage accounts.  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-<img src='.img/2026-01-30-05-46-07.png' width=700>
-
-<img src='.img/2026-02-08-04-07-45.png' width=400>
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-Looking at your selected answers, I can see you've made the same mistake again with this question (which appears to be the same as image 3).
-
-**Your Selected Answers:**
-
-1. ✗ Your users have the Storage Blob Data Reader role assigned in the storage accounts
-2. ✗ Your users have the Storage Blob Data Contributor role assigned in the storage accounts
-
-**The Problem - You're Still Selecting SOLUTIONS Instead of PROBLEMS:**
-
-The error message clearly states:
-> "**Unable to list resources in account due to inadequate permissions**. Permission to list containers or to list account keys is required."
-
-You selected answers that indicate users **already have proper data access roles**. If they had Storage Blob Data Reader or Contributor, they **wouldn't be getting this error** - the problem would already be solved!
-
-**The Correct Answers Should Be:**
-
-1. **Your users have the Read role assigned in the storage accounts** ✓
-   - **This IS a problem**: The generic "Read" role only provides management plane access
-   - It does NOT grant data plane access to browse blob/file contents
-   - Users can see the storage account exists but cannot access the data inside
-
-2. **There is a ReadOnly resource lock configured** ✓
-   - **This IS a problem**: ReadOnly locks can block operations in Storage Explorer
-   - Locks can override permissions and prevent certain actions
-
-**Understanding the Logic:**
-
-**Error exists** = Something is wrong/missing
-
-- ❌ "Users have Storage Blob Data Reader" = No error (they have correct access)
-- ✓ "Users have Read role" = Error! (they lack data plane access)
-- ✓ "ReadOnly lock configured" = Error! (lock blocks operations)
-
-**Key Takeaway:**
-
-When a question asks for "**reasons why users are getting an error**," you need to identify what's **CAUSING the problem** (wrong role, locks), not what would **FIX the problem** (correct roles).
-
-**More Detail:**
-
-Great question! Let me explain how ReadOnly locks interact with Azure Storage Explorer and why they can cause issues.
-
-**What ReadOnly Locks Do:**
-
-**ReadOnly locks** in Azure prevent **any modifications** to a resource, including:
-
-- Changing resource configuration
-- Modifying properties
-- Regenerating access keys
-- Updating firewall rules
-- ANY write operation at the management plane
-
-**How Storage Explorer Accesses Storage:**
-
-Azure Storage Explorer can authenticate and access storage using **multiple methods**:
-
-**1. Account Keys (Management Plane):**
-
-- Storage Explorer attempts to **list and retrieve storage account keys**
-- This is a **write-equivalent operation** (POST request to list keys)
-- ReadOnly lock **BLOCKS** this operation
-- Result: ❌ Access denied
-
-**2. Azure AD / RBAC (Data Plane):**
-
-- Uses your Azure AD identity with data plane roles
-- Directly accesses blobs/files without needing account keys
-- ReadOnly lock does **NOT** block this
-- Result: ✓ Should work
-
-**3. SAS Tokens:**
-
-- Uses pre-generated shared access signatures
-- ReadOnly lock does **NOT** block this
-- Result: ✓ Should work
-
-**Why ReadOnly Locks Cause the Error:**
-
-When Storage Explorer opens and tries to browse a storage account:
-
-```
-1. Storage Explorer connects to storage account
-2. Attempts to list containers/shares
-3. Tries to retrieve account keys (common default method)
-4. POST /listKeys operation is attempted
-5. ReadOnly lock intercepts: "NO MODIFICATIONS ALLOWED"
-6. Error: "Unable to list resources due to inadequate permissions"
-```
-
-**The Confusing Part:**
-
-The error message says "**inadequate permissions**," but it's actually:
-
-- Not about RBAC permissions ✗
-- About the **lock preventing the listKeys operation** ✓
-
-Even if you have **Owner** or **Contributor** role, the ReadOnly lock **overrides** your permissions and blocks management plane operations.
-
-**Visual Representation:**
-
-```
-Without ReadOnly Lock:
-User → Storage Explorer → List Keys API → ✓ Success → Browse Storage
-
-With ReadOnly Lock:
-User → Storage Explorer → List Keys API → ✗ BLOCKED by Lock → Error Message
-```
-
-**How to Verify This is the Issue:**
-
-1. Check if a ReadOnly lock exists:
-
-   ```
-   Storage Account → Locks → See "ReadOnly" lock
-   ```
-
-2. Remove the lock temporarily and test Storage Explorer
-   - If it works now, the lock was the problem
-
-**Solutions When ReadOnly Lock Exists:**
-
-**Option 1: Remove the Lock** (if policy allows)
-
-- Not always possible due to governance requirements
-
-**Option 2: Use Azure AD Authentication**
-
-- In Storage Explorer, explicitly connect using "Azure AD"
-- Assign proper data plane roles (Storage Blob Data Reader)
-- Bypasses the need for account keys
-
-**Option 3: Use SAS Tokens**
-
-- Generate SAS token before the lock was applied
-- Connect to storage using SAS URL
-
-**Option 4: Use Azure Portal**
-
-- Portal has built-in handling for locked resources
-- May provide better error messages
-
-**Key Takeaway:**
-
-ReadOnly locks block the **listKeys operation** that Storage Explorer commonly uses for authentication. While users might have proper RBAC permissions, the lock creates a hard stop at the management plane level, preventing Storage Explorer from retrieving the keys needed to access the data using the default authentication method.
-
-The solution is either:
-
-- Remove the lock, OR
-- Use authentication methods that don't require listing keys (Azure AD, SAS tokens)
-
-</details>
-
-▶ **Related Lab:** [lab-storage-explorer-permissions](/AZ-104/hands-on-labs/storage/lab-storage-explorer-permissions/README.md)
-
----
-
-#### Modify Stored Access Policy
-
-**Domain:** Implement and manage storage
-**Skill:** Configure access to storage
-**Task:** Configure stored access policies
-
-You are an Azure administrator for a manufacturing organization. You are using shared access signature (SAS) to configure control over storage accounts.
-
-You create a stored access policy as an additional level of control over SAS on the server side for file shares.
-
-You need to modify a stored access policy.
-
-What should you do?
-
-A. Execute a Set Share ACL operation with the SMB protocol.  
-B. Execute a Set Table ACL operation.  
-C. Execute a Set Container ACL operation with public read access for blobs only.  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-03-03-53-49.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-In this scenario, you are using a stored access policy that acts as an additional level of control over shared access signature (SAS) on the server side for file shares. The access policy for an SAS consists of the start time, expiry time, and permissions for the signature. To create or modify a stored access policy, call the Set ACL operation for the resource (Set Container ACL, Set Queue ACL, Set Table ACL, or Set Share ACL) with a request body that specifies the terms of the access policy. An important point to note here is that, for a file share, you need to execute a Set Share ACL operation, which only supports the Server Message Block (SMB) protocol as the enabled file share protocol.
-
-You should not execute a Set Table ACL operation. The Set Table ACL operation sets the stored access policies for the table that can be used with SAS. In this scenario, since you want to modify stored access policies for an Azure File share, you need to use the Set Share ACL with SMB.
-
-You should not execute a Set Container ACL operation with public read access for blobs only. The Set Container ACL operation with public read access for blobs only will mean that Blob data within a container could be read via anonymous request, but container data is not available. In this scenario, since you are aiming to modify stored access policies for an Azure File share, you need to use the Set Share ACL with SMB.
-
-References
-
-[Define a stored access policy](https://learn.microsoft.com/en-us/rest/api/storageservices/define-stored-access-policy)
 
 </details>
 
@@ -1873,6 +1925,126 @@ The four versioning operations are **Put Blob**, **Put Block List**, **Copy Blob
 
 ### Create and configure virtual machines
 
+#### VM Resize Failure Cause
+
+**Domain:** Deploy and manage Azure compute resources
+**Skill:** Create and configure virtual machines
+**Task:** Manage virtual machine sizes
+
+You have a Linux virtual machine (VM) named VM1 that runs in Azure. VM1 has the following properties:
+
+- Size: Standard_D4s_v3
+- Number of virtual CPUs: four
+- Storage type: Premium
+- Number of data disks: eight
+- Public IP address: Standard SKU
+
+You attempt to resize the VM to the Standard_D2s_v3 size, but the resize operation fails.
+
+Which VM property is the most likely cause of the failure?
+
+A. Public IP address  
+B. Number of data disks  
+C. Storage type  
+D. Number of virtual CPUs  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-02-21-05-43-55.png' width=700>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Why the selected answer is correct (Number of data disks)**
+
+The Standard_D2s_v3 size supports a maximum of **4 data disks**. VM1 currently has **8 data disks** attached. When Azure attempts to resize the VM, it validates that the target size can accommodate all currently attached resources. Because 8 data disks exceeds the 4-disk limit of Standard_D2s_v3, the resize operation is blocked. This is the most likely cause of the failure.
+
+**Why the other options are incorrect**
+
+**Public IP address — Standard SKU**
+A Standard SKU public IP address is compatible with both Standard_D4s_v3 and Standard_D2s_v3. IP address SKU has no bearing on VM size compatibility and would not cause a resize failure.
+
+**Storage type — Premium**
+Both Standard_D4s_v3 and Standard_D2s_v3 support Premium storage (indicated by the "s" in the size name). Premium storage compatibility is not a constraint that would block this resize.
+
+**Number of virtual CPUs**
+Resizing from 4 vCPUs to 2 vCPUs is a valid downscale operation. Azure does not block a resize based on reducing vCPU count. The operating system and applications may be affected, but Azure will not prevent the operation for this reason alone.
+
+**Key takeaway**
+When resizing a VM, Azure validates that all currently attached resources (data disks, NICs, etc.) fall within the limits of the target size. If the number of attached data disks exceeds the maximum supported by the target VM size, the resize will fail. Always check the target size's data disk limit before attempting to resize down.
+
+**References**
+
+* [Sizes for virtual machines in Azure](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/overview?tabs=breakdownseries%2Cgeneralsizelist%2Ccomputesizelist%2Cmemorysizelist%2Cstoragesizelist%2Cgpusizelist%2Chpcsizelist)
+* [Introduction to Azure managed disks](https://learn.microsoft.com/en-us/azure/virtual-machines/managed-disks-overview)
+* [Public IP addresses](https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/public-ip-addresses)
+
+</details>
+
+---
+
+#### Apply Change to VMSS OS and Data Disk Profile
+
+**Domain:** Deploy and manage Azure compute resources
+**Skill:** Create and configure virtual machines
+**Task:** Deploy and configure an Azure Virtual Machine Scale Sets
+
+You deploy a virtual machine scale set (VMSS) to support a critical application. The upgrade policy for the VMSS is set to Rolling.
+
+You need to apply a change in the scale set OS and Data disk Profile for the VMSS to the existing VM images.
+
+Which PowerShell cmdlet should you use?
+
+A. Update-AzVmss  
+B. Start-AzVmssRollingOSUpgrade  
+C. Update-AzVmssInstance  
+D. Set-AzVmssVM  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-02-23-03-46-35.png' width=700>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Why the selected answer is correct (Set-AzVmssVM)**
+
+The exam suggests using the `Set-AzVmssVM` cmdlet because it directly applies changes to the scale set OS and Data disk Profile for each existing instance. This cmdlet is used for manual updates to individual instances, bypassing the scale set model and upgrade policy.
+
+**Why the other options are incorrect**
+
+**Update-AzVmss**
+This cmdlet updates the VMSS model, which defines the configuration for all instances in the scale set. When the upgrade policy is set to Rolling, changes to the model are automatically propagated to existing instances in batches, ensuring application availability. While this cmdlet works in practice for updating the OS and Data disk Profile, the exam question may be emphasizing direct instance-level updates, which `Set-AzVmssVM` provides.
+
+**Start-AzVmssRollingOSUpgrade**
+This cmdlet is used to upgrade existing VM instances to the latest available platform image OS version. It does not apply changes to the scale set OS or Data disk Profile.
+
+**Update-AzVmssInstance**
+This cmdlet is used to update an instance when the VMSS upgrade policy is set to Manual. It does not include changes to the scale set OS and Data disk Profile.
+
+**Key takeaway**
+For real-world scenarios, `Update-AzVmss` is the preferred cmdlet to update the VMSS model and propagate changes to all instances when using a Rolling upgrade policy. However, the exam question appears to focus on direct instance-level updates, which aligns with the `Set-AzVmssVM` cmdlet.
+
+**References**
+
+* [Modify a Virtual Machine Scale Set](https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-upgrade-scale-set)
+* [Set-AzVmssVM](https://learn.microsoft.com/en-us/powershell/module/az.compute/set-azvmssvm)
+* [Update-AzVmss](https://learn.microsoft.com/en-us/powershell/module/az.compute/update-azvmss)
+* [Update-AzVmssInstance](https://learn.microsoft.com/en-us/powershell/module/az.compute/update-azvmssinstance)
+* [Start-AzVmssRollingOSUpgrade](https://learn.microsoft.com/en-us/powershell/module/az.compute/start-azvmssrollingosupgrade)
+
+</details>
+
+▶ Related Lab: [lab-vmss-rolling-upgrade](../hands-on-labs/compute/lab-vmss-rolling-upgrade/README.md)
+
+---
+
 #### Encrypt VM Disk With Key Vault
 
 **Domain:** Deploy and manage Azure compute resources
@@ -1956,126 +2128,6 @@ When encrypting a VM disk with Azure Key Vault, `Get-AzKeyVault` uses `-VaultNam
 </details>
 
 ▶ Related Lab: [lab-vm-disk-encryption](../hands-on-labs/compute/lab-vm-disk-encryption/README.md)
-
----
-
-#### Apply Change to VMSS OS and Data Disk Profile
-
-**Domain:** Deploy and manage Azure compute resources
-**Skill:** Create and configure virtual machines
-**Task:** Deploy and configure an Azure Virtual Machine Scale Sets
-
-You deploy a virtual machine scale set (VMSS) to support a critical application. The upgrade policy for the VMSS is set to Rolling.
-
-You need to apply a change in the scale set OS and Data disk Profile for the VMSS to the existing VM images.
-
-Which PowerShell cmdlet should you use?
-
-A. Update-AzVmss  
-B. Start-AzVmssRollingOSUpgrade  
-C. Update-AzVmssInstance  
-D. Set-AzVmssVM  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-02-23-03-46-35.png' width=700>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Why the selected answer is correct (Set-AzVmssVM)**
-
-The exam suggests using the `Set-AzVmssVM` cmdlet because it directly applies changes to the scale set OS and Data disk Profile for each existing instance. This cmdlet is used for manual updates to individual instances, bypassing the scale set model and upgrade policy.
-
-**Why the other options are incorrect**
-
-**Update-AzVmss**
-This cmdlet updates the VMSS model, which defines the configuration for all instances in the scale set. When the upgrade policy is set to Rolling, changes to the model are automatically propagated to existing instances in batches, ensuring application availability. While this cmdlet works in practice for updating the OS and Data disk Profile, the exam question may be emphasizing direct instance-level updates, which `Set-AzVmssVM` provides.
-
-**Start-AzVmssRollingOSUpgrade**
-This cmdlet is used to upgrade existing VM instances to the latest available platform image OS version. It does not apply changes to the scale set OS or Data disk Profile.
-
-**Update-AzVmssInstance**
-This cmdlet is used to update an instance when the VMSS upgrade policy is set to Manual. It does not include changes to the scale set OS and Data disk Profile.
-
-**Key takeaway**
-For real-world scenarios, `Update-AzVmss` is the preferred cmdlet to update the VMSS model and propagate changes to all instances when using a Rolling upgrade policy. However, the exam question appears to focus on direct instance-level updates, which aligns with the `Set-AzVmssVM` cmdlet.
-
-**References**
-
-* [Modify a Virtual Machine Scale Set](https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-upgrade-scale-set)
-* [Set-AzVmssVM](https://learn.microsoft.com/en-us/powershell/module/az.compute/set-azvmssvm)
-* [Update-AzVmss](https://learn.microsoft.com/en-us/powershell/module/az.compute/update-azvmss)
-* [Update-AzVmssInstance](https://learn.microsoft.com/en-us/powershell/module/az.compute/update-azvmssinstance)
-* [Start-AzVmssRollingOSUpgrade](https://learn.microsoft.com/en-us/powershell/module/az.compute/start-azvmssrollingosupgrade)
-
-</details>
-
-▶ Related Lab: [lab-vmss-rolling-upgrade](../hands-on-labs/compute/lab-vmss-rolling-upgrade/README.md)
-
----
-
-#### VM Resize Failure Cause
-
-**Domain:** Deploy and manage Azure compute resources
-**Skill:** Create and configure virtual machines
-**Task:** Manage virtual machine sizes
-
-You have a Linux virtual machine (VM) named VM1 that runs in Azure. VM1 has the following properties:
-
-- Size: Standard_D4s_v3
-- Number of virtual CPUs: four
-- Storage type: Premium
-- Number of data disks: eight
-- Public IP address: Standard SKU
-
-You attempt to resize the VM to the Standard_D2s_v3 size, but the resize operation fails.
-
-Which VM property is the most likely cause of the failure?
-
-A. Public IP address  
-B. Number of data disks  
-C. Storage type  
-D. Number of virtual CPUs  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-02-21-05-43-55.png' width=700>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Why the selected answer is correct (Number of data disks)**
-
-The Standard_D2s_v3 size supports a maximum of **4 data disks**. VM1 currently has **8 data disks** attached. When Azure attempts to resize the VM, it validates that the target size can accommodate all currently attached resources. Because 8 data disks exceeds the 4-disk limit of Standard_D2s_v3, the resize operation is blocked. This is the most likely cause of the failure.
-
-**Why the other options are incorrect**
-
-**Public IP address — Standard SKU**
-A Standard SKU public IP address is compatible with both Standard_D4s_v3 and Standard_D2s_v3. IP address SKU has no bearing on VM size compatibility and would not cause a resize failure.
-
-**Storage type — Premium**
-Both Standard_D4s_v3 and Standard_D2s_v3 support Premium storage (indicated by the "s" in the size name). Premium storage compatibility is not a constraint that would block this resize.
-
-**Number of virtual CPUs**
-Resizing from 4 vCPUs to 2 vCPUs is a valid downscale operation. Azure does not block a resize based on reducing vCPU count. The operating system and applications may be affected, but Azure will not prevent the operation for this reason alone.
-
-**Key takeaway**
-When resizing a VM, Azure validates that all currently attached resources (data disks, NICs, etc.) fall within the limits of the target size. If the number of attached data disks exceeds the maximum supported by the target VM size, the resize will fail. Always check the target size's data disk limit before attempting to resize down.
-
-**References**
-
-* [Sizes for virtual machines in Azure](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/overview?tabs=breakdownseries%2Cgeneralsizelist%2Ccomputesizelist%2Cmemorysizelist%2Cstoragesizelist%2Cgpusizelist%2Chpcsizelist)
-* [Introduction to Azure managed disks](https://learn.microsoft.com/en-us/azure/virtual-machines/managed-disks-overview)
-* [Public IP addresses](https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/public-ip-addresses)
-
-</details>
 
 ---
 
@@ -2904,6 +2956,70 @@ For each of the following statements, select Yes if the statement is true. Other
 
 ---
 
+#### Configure DNS Records for App Service
+
+**Domain:** Implement and manage virtual networking
+**Skill:** Configure name resolution and load balancing
+**Task:** Configure Azure DNS
+
+Your company plans to release a new web application called 'appilcations'. This application is deployed by using an App Service in Azure and will be available to users of the company1.com domain. You have already purchased the company1.com domain name.
+
+You configure the company1.com Azure DNS zone and delegate it to Azure DNS.
+
+You need to ensure that web application can be accessed by using the company1.com domain name.
+
+You decide to use PowerShell to accomplish this task.
+
+How should you complete the command? To answer, select the appropriate options from the drop-down menus.
+
+```powershell
+New-AzDnsRecordSet -Name ___[1]___ -RecordType ___[2]___ `
+  -ZoneName "company1.com" -ResourceGroupName "APP-RG" -Ttl 600 `
+  -DnsRecords (New-AzDnsRecordConfig `
+  -IPv4Address "<IP address>")
+
+New-AzDnsRecordSet -ZoneName company1.com -ResourceGroupName APP-RG `
+  -Name ___[3]___ -RecordType ___[4]___ -Ttl 600 `
+  -DnsRecords (New-AzDnsRecordConfig -Value "appilcations.azurewebsites.net")
+```
+
+Drop-Down Options:
+
+<!-- Dropdown options not yet provided. Paste screenshots of each expanded drop-down to populate. -->
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-03-03-06-02.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+**Why the selected answers are correct**  
+Create an A record named "@" with RecordType "A" to map the root of company1.com to the App Service's IPv4 address. Create a TXT record named "@" with RecordType "TXT" and value "appilcations.azurewebsites.net" so App Service can verify domain ownership and configure the custom domain settings.
+
+**Why other options are incorrect**  
+
+- CNAME/CNAME-like approaches are wrong for the root (@"") because a CNAME cannot coexist with other records at the zone apex and cannot point to an IPv4 address.  
+- AAAA is for IPv6 addresses; the App Service verification here requires an IPv4 A record.  
+- Using literal names like "company1.com", "www.company1.com", or "appilcations.azurewebsites.net" as the Name value would either be redundant, create the wrong record target, or prevent apex records from working as intended.
+
+**Key takeaway**  
+Use an A record (Name "@", RecordType "A") for the IPv4 mapping of the root domain and a TXT record (Name "@", RecordType "TXT") for App Service domain verification; avoid CNAME at the zone apex and do not use AAAA unless you have an IPv6 IP.
+
+<img src='.img/2026-03-03-03-19-52.png' width=600>
+
+<img src='.img/2026-03-03-03-20-54.png' width=600>
+
+References
+
+* [DNS Web Sites Custom Domain](https://learn.microsoft.com/en-us/azure/dns/dns-web-sites-custom-domain?tabs=azure-portal)
+
+</details>
+
+---
+
 #### Diagnose Internal Load Balancer Hairpin Traffic Failure
 
 **Domain:** Implement and manage virtual networking
@@ -2989,70 +3105,6 @@ Azure **Internal Load Balancer does not support backend VMs accessing the ILB fr
 </details>
 
 ▶ **Related Lab:** [lab-ilb-backend-access](../hands-on-labs/networking/lab-ilb-backend-access/README.md)
-
----
-
-#### Configure DNS Records for App Service
-
-**Domain:** Implement and manage virtual networking
-**Skill:** Configure name resolution and load balancing
-**Task:** Configure Azure DNS
-
-Your company plans to release a new web application called 'appilcations'. This application is deployed by using an App Service in Azure and will be available to users of the company1.com domain. You have already purchased the company1.com domain name.
-
-You configure the company1.com Azure DNS zone and delegate it to Azure DNS.
-
-You need to ensure that web application can be accessed by using the company1.com domain name.
-
-You decide to use PowerShell to accomplish this task.
-
-How should you complete the command? To answer, select the appropriate options from the drop-down menus.
-
-```powershell
-New-AzDnsRecordSet -Name ___[1]___ -RecordType ___[2]___ `
-  -ZoneName "company1.com" -ResourceGroupName "APP-RG" -Ttl 600 `
-  -DnsRecords (New-AzDnsRecordConfig `
-  -IPv4Address "<IP address>")
-
-New-AzDnsRecordSet -ZoneName company1.com -ResourceGroupName APP-RG `
-  -Name ___[3]___ -RecordType ___[4]___ -Ttl 600 `
-  -DnsRecords (New-AzDnsRecordConfig -Value "appilcations.azurewebsites.net")
-```
-
-Drop-Down Options:
-
-<!-- Dropdown options not yet provided. Paste screenshots of each expanded drop-down to populate. -->
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-03-03-06-02.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-**Why the selected answers are correct**  
-Create an A record named "@" with RecordType "A" to map the root of company1.com to the App Service's IPv4 address. Create a TXT record named "@" with RecordType "TXT" and value "appilcations.azurewebsites.net" so App Service can verify domain ownership and configure the custom domain settings.
-
-**Why other options are incorrect**  
-
-- CNAME/CNAME-like approaches are wrong for the root (@"") because a CNAME cannot coexist with other records at the zone apex and cannot point to an IPv4 address.  
-- AAAA is for IPv6 addresses; the App Service verification here requires an IPv4 A record.  
-- Using literal names like "company1.com", "www.company1.com", or "appilcations.azurewebsites.net" as the Name value would either be redundant, create the wrong record target, or prevent apex records from working as intended.
-
-**Key takeaway**  
-Use an A record (Name "@", RecordType "A") for the IPv4 mapping of the root domain and a TXT record (Name "@", RecordType "TXT") for App Service domain verification; avoid CNAME at the zone apex and do not use AAAA unless you have an IPv6 IP.
-
-<img src='.img/2026-03-03-03-19-52.png' width=600>
-
-<img src='.img/2026-03-03-03-20-54.png' width=600>
-
-References
-
-* [DNS Web Sites Custom Domain](https://learn.microsoft.com/en-us/azure/dns/dns-web-sites-custom-domain?tabs=azure-portal)
-
-</details>
 
 ---
 
@@ -3529,49 +3581,6 @@ It does **not** answer: *“Can the VM actually accept this connection?”*
 
 ### Implement backup and recovery
 
-#### Recover Azure VM from Deleted Backup
-
-**Domain:** Monitor and maintain Azure resources
-**Skill:** Implement backup and recovery
-**Task:** Perform backup and restore operations by using Azure Backup
-
-An Infrastructure-as-a-Service (IaaS) virtual machine (VM) named VM10 is backed up to an Azure Recovery Services vault. VM10 and all of its restore points are deleted by mistake.
-
-You need to recover VM10.
-
-How many days does VM10's data remain available for recovery?
-
-A. 365 days  
-B. 30 days  
-C. 14 days  
-D. 90 days  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-01-30-05-24-56.png' width=700>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Why the selected answer is right**
-Azure Backup uses **Soft Delete** for Azure IaaS VM backups. When a VM and its backup data are deleted (intentionally or accidentally), the backup data is **retained for 14 days** in a soft-deleted state. During this window, the VM’s backup data can be recovered by undeleting the backup item from the Recovery Services vault. After 14 days, the data is permanently deleted and cannot be recovered.
-
-**Key takeaway**
-For Azure IaaS VMs protected by a Recovery Services vault, **soft delete provides a fixed 14-day recovery window** after deletion—independent of the configured backup retention policy.
-
-<img src='.img/2026-02-04-03-04-12.png' width=500>
-
-**References**
-
-* [Soft delete for virtual machines](https://learn.microsoft.com/en-us/azure/backup/soft-delete-virtual-machines?utm_source=chatgpt.com&tabs=azure-portal)
-
-</details>
-
----
-
 #### Recover Configuration File from Azure VM Backup
 
 **Domain:** Monitor and maintain Azure resources
@@ -3644,52 +3653,47 @@ Azure Recovery Services vault overview
 
 ---
 
-#### Shared Access Signature (SAS) practices
+#### Recover Azure VM from Deleted Backup
 
-**Domain:** Implement and Manage Storage
-**Skill:** Configure access to storage
-**Task:** Create and use shared access signature (SAS) tokens
+**Domain:** Monitor and maintain Azure resources
+**Skill:** Implement backup and recovery
+**Task:** Perform backup and restore operations by using Azure Backup
 
-Your company is developing a .NET application that stores part of the information in an Azure Storage account. The application will be installed on end users' computers.
+An Infrastructure-as-a-Service (IaaS) virtual machine (VM) named VM10 is backed up to an Azure Recovery Services vault. VM10 and all of its restore points are deleted by mistake.
 
-You want to ensure that the information stored in the storage account is accessed in a secure way, so you ask the developers to use a shared access signature (SAS) when accessing said information. You want to make the required configurations on the storage account to follow security best practices and enable access to the account with immediate effect.
+You need to recover VM10.
 
-For each of the following statements, select Yes if the statement is true. Otherwise, select No.
+How many days does VM10's data remain available for recovery?
 
-| STATEMENT | YES | NO |
-|-----------|-----|----|
-| You should configure a stored access policy. | ☐ | ☐ |
-| You should set the shared access signature (SAS) start time to now. | ☐ | ☐ |
-| You should validate data that has been written using a SAS. | ☐ | ☐ |
-| One option for revoking a SAS is by deleting a stored access policy. | ☐ | ☐ |
+A. 365 days  
+B. 30 days  
+C. 14 days  
+D. 90 days  
 
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-03-11-04-16-22.png' width=700>
+<img src='.img/2026-01-30-05-24-56.png' width=700>
 
 </details>
 
-<details open>
+<details>
 <summary>💡 Click to expand explanation</summary>
 
-You can configure a stored access policy. When you use a shared access signature (SAS), you have two different options. You can either use an ad-hoc SAS or configure a stored access policy. By using an ad-hoc SAS, you specify the start time, expiration time, and permissions in the Uniform Resource Identifier (URI). If someone copies this URI, they will have the same level of access as the corresponding user. This means that this type of SAS can be used by anyone in the world. By configuring a stored access policy, you define the start time, expiration time, and permissions in the policy and then associate a SAS with that policy. You can associate more than one SAS with the same policy.
+**Why the selected answer is right**
+Azure Backup uses **Soft Delete** for Azure IaaS VM backups. When a VM and its backup data are deleted (intentionally or accidentally), the backup data is **retained for 14 days** in a soft-deleted state. During this window, the VM’s backup data can be recovered by undeleting the backup item from the Recovery Services vault. After 14 days, the data is permanently deleted and cannot be recovered.
 
-You should not set the SAS start time to now. When you set the start time of a SAS to now, there can be slight differences in the clocks of the servers that host the storage account. These differences could lead to an access problem for a few minutes after the configuration. If you need your SAS to be available as soon as possible, you should set the start time to 15 minutes before the current time, or you can just not set the start time. Not setting the start time parameter means that the SAS will be active immediately.
+**Key takeaway**
+For Azure IaaS VMs protected by a Recovery Services vault, **soft delete provides a fixed 14-day recovery window** after deletion—independent of the configured backup retention policy.
 
-You should validate data that has been written using a SAS. When the user uses a SAS, the information they write to the storage account can cause problems, such as communication issues or corruption. Because of this, it is a best practice to validate the data written to the storage account after it is written and before the information is used by any other service or application.
+<img src='.img/2026-02-04-03-04-12.png' width=500>
 
-You can revoke a SAS by deleting a stored access policy. If you associate a SAS with a stored access policy, the start time, expiration time, and permissions are inherited from the policy. If you remove the policy, you are invalidating the SAS, thus making it unusable. Keep in mind that if you remove a stored access policy with an associated SAS and then create another stored access policy with the exact same name as the original policy, the associated SAS will be enabled again.
+**References**
 
-<img src='.img/2026-03-11-04-19-52.png' width=600>
-
-<img src='.img/2026-03-11-04-20-50.png' width=600>
-
-<img src='.img/2026-03-11-04-22-57.png' width=600>
-
-References
-
-* [Grant limited access to Azure Storage resources using shared access signatures (SAS)](https://learn.microsoft.com/en-us/azure/storage/common/storage-sas-overview)
-* [Create a stored access policy](https://learn.microsoft.com/en-us/azure/storage/common/storage-stored-access-policy-define-dotnet?toc=%2Fazure%2Fstorage%2Fblobs%2Ftoc.json&bc=%2Fazure%2Fstorage%2Fblobs%2Fbreadcrumb%2Ftoc.json)
+* [Soft delete for virtual machines](https://learn.microsoft.com/en-us/azure/backup/soft-delete-virtual-machines?utm_source=chatgpt.com&tabs=azure-portal)
 
 </details>
+
+---
+
+<img src='.img/2026-03-11-04-28-34.png' width=600>
