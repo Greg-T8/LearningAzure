@@ -2,6 +2,10 @@
 
 **Objective:** Achieve the **AZ-104: Microsoft Azure Administrator** certification using a hands-on labs and practice exams approach.
 
+- **Certification Page:** [AZ-104: Microsoft Azure Administrator](https://learn.microsoft.com/en-us/credentials/certifications/azure-administrator/?practice-assessment-type=certification#certification-prepare-for-the-exam)
+- **Official Study Guide:** [AZ-104 Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104)
+- **Study Log:** [Session-by-session study time tracker](./StudyLog.md)
+
 ---
 
 ## 📚 Learning Modality Progress Tracker
@@ -14,15 +18,6 @@
 | 3        | Microsoft Learn | [Microsoft Learning Paths](./learning-paths/README.md)          | ✅     | 1/14/26 | 1/25/26   | 11   |
 
 **Legend:** 🕒 Not Started | 🚧 In Progress | ✅ Complete
-
-**[Study Log](./StudyLog.md)** — Session-by-session study time tracker
-
----
-
-## 📌 Reference Links
-
-- **Certification Page:** [AZ-104: Microsoft Azure Administrator](https://learn.microsoft.com/en-us/credentials/certifications/azure-administrator/?practice-assessment-type=certification#certification-prepare-for-the-exam)
-- **Official Study Guide:** [AZ-104 Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104)
 
 ---
 
