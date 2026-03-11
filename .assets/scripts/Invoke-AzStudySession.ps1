@@ -4,7 +4,7 @@ Manage study sessions for certification exam tracking.
 
 .DESCRIPTION
 Manages study session tracking for certification exams. Supports start/stop actions:
-Start — appends a new row to StudyLog.md with session number, date, and start time.
+Start — inserts a new row at the top of StudyLog.md with session number, date, and start time.
 End/Stop — closes the active session with end time and duration.
 Start also auto-closes any currently active session before opening a new session.
 
@@ -171,7 +171,7 @@ $Helpers = {
     }
 
     function Get-ActiveSessionNumber {
-        # Find the last open session (started but not ended) in a study log
+        # Find the most recent open session (started but not ended) in a study log
         param([string]$LogFile = $StudyLogFile)
 
         $lines = Get-Content -Path $LogFile
@@ -183,15 +183,15 @@ $Helpers = {
             throw "No sessions found in '$LogFile'."
         }
 
-        # Check the last data row for an empty End column
-        $lastRow = if ($dataRows -is [array]) { $dataRows[-1] } else { $dataRows }
-        $columns = $lastRow -split '\|'
+        # Check the first data row for an empty End column (latest entry is at the top)
+        $firstRow = if ($dataRows -is [array]) { $dataRows[0] } else { $dataRows }
+        $columns = $firstRow -split '\|'
 
         if ([string]::IsNullOrWhiteSpace($columns[4])) {
             return [int]$columns[1].Trim()
         }
 
-        throw "No active session found in '$LogFile'. The last session is already closed."
+        throw "No active session found in '$LogFile'. The latest session is already closed."
     }
 
     function Find-ActiveExam {
@@ -210,9 +210,9 @@ $Helpers = {
 
             if (-not $dataRows) { continue }
 
-            # Return the exam name when its last session has no End time
-            $lastRow = if ($dataRows -is [array]) { $dataRows[-1] } else { $dataRows }
-            $columns = $lastRow -split '\|'
+            # Return the exam name when its latest session has no End time (top of table)
+            $firstRow = if ($dataRows -is [array]) { $dataRows[0] } else { $dataRows }
+            $columns = $firstRow -split '\|'
 
             if ([string]::IsNullOrWhiteSpace($columns[4])) {
                 return $exam
@@ -223,7 +223,7 @@ $Helpers = {
     }
 
     function Add-SessionEntry {
-        # Append a new session row with the current date and start time
+        # Insert a new session row at the top of the table (after the header separator)
         param(
             [Parameter(Mandatory)]
             [int]$SessionNumber,
@@ -236,9 +236,31 @@ $Helpers = {
         $start = $now.ToString('h:mm tt')
         $safeNotes = ConvertTo-LogNote -Notes $Notes
 
-        $row = "| $SessionNumber | $date | $start |  |  | $safeNotes |"
+        $row   = "| $SessionNumber | $date | $start |  |  | $safeNotes |"
+        $lines = Get-Content -Path $StudyLogFile
 
-        Add-Content -Path $StudyLogFile -Value $row
+        # Find the separator line and insert the new row right after it
+        $insertIndex = $null
+        for ($i = 0; $i -lt $lines.Count; $i++) {
+            if ($lines[$i] -match '^\|:') {
+                $insertIndex = $i + 1
+                break
+            }
+        }
+
+        if ($null -eq $insertIndex) {
+            throw "Table header separator not found in '$StudyLogFile'."
+        }
+
+        # Build updated content with the new row inserted at the top of the data rows
+        $updated = @()
+        $updated += $lines[0..($insertIndex - 1)]
+        $updated += $row
+        if ($insertIndex -lt $lines.Count) {
+            $updated += $lines[$insertIndex..($lines.Count - 1)]
+        }
+
+        Set-Content -Path $StudyLogFile -Value $updated
     }
 
     function ConvertTo-LogNote {
@@ -267,8 +289,8 @@ $Helpers = {
         $lines = Get-Content -Path $LogFile
         $now = Get-Date
 
-        # Search from the bottom for the matching session row
-        for ($i = $lines.Count - 1; $i -ge 0; $i--) {
+        # Search from the top for the matching session row (latest entries are first)
+        for ($i = 0; $i -lt $lines.Count; $i++) {
             if ($lines[$i] -match ('^\|\s*' + $SessionNumber + '\s*\|')) {
                 $columns = $lines[$i] -split '\|'
 
