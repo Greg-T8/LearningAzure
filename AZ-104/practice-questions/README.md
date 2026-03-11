@@ -3685,10 +3685,11 @@ You can revoke a SAS by deleting a stored access policy. If you associate a SAS 
 
 <img src='.img/2026-03-11-04-20-50.png' width=600>
 
+<img src='.img/2026-03-11-04-22-57.png' width=600>
+
 References
 
 * [Grant limited access to Azure Storage resources using shared access signatures (SAS)](https://learn.microsoft.com/en-us/azure/storage/common/storage-sas-overview)
+* [Create a stored access policy](https://learn.microsoft.com/en-us/azure/storage/common/storage-stored-access-policy-define-dotnet?toc=%2Fazure%2Fstorage%2Fblobs%2Ftoc.json&bc=%2Fazure%2Fstorage%2Fblobs%2Fbreadcrumb%2Ftoc.json)
 
 </details>
-
-▶ Related Lab: []()
