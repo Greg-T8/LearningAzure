@@ -43,11 +43,8 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 <!-- BEGIN COVERAGE TABLE -->
 
 <a id="domain-1"></a>
-
-### Domain 1: Plan and Manage an Azure AI Solution (20–25%)
-
 <details>
-<summary>23 tasks — 1 Q · 1 Lab</summary>
+<summary><b>Domain 1: Plan and Manage an Azure AI Solution (20–25%)</b> — 23 tasks · 1 Q · 1 Lab</summary>
 
 | Skill | Task | Qs | Labs |
 | :--- | :--- | -: | -: |
@@ -78,11 +75,8 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 </details>
 
 <a id="domain-2"></a>
-
-### Domain 2: Implement Generative AI Solutions (15–20%)
-
 <details>
-<summary>23 tasks — 2 Qs · 2 Labs</summary>
+<summary><b>Domain 2: Implement Generative AI Solutions (15–20%)</b> — 23 tasks · 2 Qs · 2 Labs</summary>
 
 | Skill | Task | Qs | Labs |
 | :--- | :--- | -: | -: |
@@ -113,11 +107,8 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 </details>
 
 <a id="domain-3"></a>
-
-### Domain 3: Implement an Agentic Solution (5–10%)
-
 <details>
-<summary>6 tasks — 1 Q · 2 Labs</summary>
+<summary><b>Domain 3: Implement an Agentic Solution (5–10%)</b> — 6 tasks · 1 Q · 2 Labs</summary>
 
 | Skill | Task | Qs | Labs |
 | :--- | :--- | -: | -: |
@@ -131,11 +122,8 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 </details>
 
 <a id="domain-4"></a>
-
-### Domain 4: Implement Computer Vision Solutions (10–15%)
-
 <details>
-<summary>15 tasks — 0 Qs · 0 Labs</summary>
+<summary><b>Domain 4: Implement Computer Vision Solutions (10–15%)</b> — 15 tasks · 0 Qs · 0 Labs</summary>
 
 | Skill | Task | Qs | Labs |
 | :--- | :--- | -: | -: |
@@ -158,11 +146,8 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 </details>
 
 <a id="domain-5"></a>
-
-### Domain 5: Implement Natural Language Processing Solutions (15–20%)
-
 <details>
-<summary>23 tasks — 2 Qs · 0 Labs</summary>
+<summary><b>Domain 5: Implement Natural Language Processing Solutions (15–20%)</b> — 23 tasks · 2 Qs · 0 Labs</summary>
 
 | Skill | Task | Qs | Labs |
 | :--- | :--- | -: | -: |
@@ -193,11 +178,8 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 </details>
 
 <a id="domain-6"></a>
-
-### Domain 6: Implement Knowledge Mining and Information Extraction Solutions (15–20%)
-
 <details>
-<summary>16 tasks — 2 Qs · 2 Labs</summary>
+<summary><b>Domain 6: Implement Knowledge Mining and Information Extraction Solutions (15–20%)</b> — 16 tasks · 2 Qs · 2 Labs</summary>
 
 | Skill | Task | Qs | Labs |
 | :--- | :--- | -: | -: |

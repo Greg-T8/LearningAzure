@@ -42,11 +42,8 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 <!-- BEGIN COVERAGE TABLE -->
 
 <a id="domain-1"></a>
-
-### Domain 1: Manage Azure Identities and Governance (20–25%)
-
 <details>
-<summary>15 tasks — 14 Qs · 0 Labs</summary>
+<summary><b>Domain 1: Manage Azure Identities and Governance (20–25%)</b> — 15 tasks · 14 Qs · 0 Labs</summary>
 
 | Skill | Task | Qs | Labs |
 | :--- | :--- | -: | -: |
@@ -69,11 +66,8 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 </details>
 
 <a id="domain-2"></a>
-
-### Domain 2: Implement and Manage Storage (15–20%)
-
 <details>
-<summary>17 tasks — 16 Qs · 5 Labs</summary>
+<summary><b>Domain 2: Implement and Manage Storage (15–20%)</b> — 17 tasks · 16 Qs · 5 Labs</summary>
 
 | Skill | Task | Qs | Labs |
 | :--- | :--- | -: | -: |
@@ -98,11 +92,8 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 </details>
 
 <a id="domain-3"></a>
-
-### Domain 3: Deploy and Manage Azure Compute Resources (20–25%)
-
 <details>
-<summary>24 tasks — 15 Qs · 6 Labs</summary>
+<summary><b>Domain 3: Deploy and Manage Azure Compute Resources (20–25%)</b> — 24 tasks · 15 Qs · 6 Labs</summary>
 
 | Skill | Task | Qs | Labs |
 | :--- | :--- | -: | -: |
@@ -134,11 +125,8 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 </details>
 
 <a id="domain-4"></a>
-
-### Domain 4: Implement and Manage Virtual Networking (15–20%)
-
 <details>
-<summary>13 tasks — 5 Qs · 3 Labs</summary>
+<summary><b>Domain 4: Implement and Manage Virtual Networking (15–20%)</b> — 13 tasks · 5 Qs · 3 Labs</summary>
 
 | Skill | Task | Qs | Labs |
 | :--- | :--- | -: | -: |
@@ -159,11 +147,8 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 </details>
 
 <a id="domain-5"></a>
-
-### Domain 5: Monitor and Maintain Azure Resources (10–15%)
-
 <details>
-<summary>13 tasks — 7 Qs · 5 Labs</summary>
+<summary><b>Domain 5: Monitor and Maintain Azure Resources (10–15%)</b> — 13 tasks · 7 Qs · 5 Labs</summary>
 
 | Skill | Task | Qs | Labs |
 | :--- | :--- | -: | -: |
