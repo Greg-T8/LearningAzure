@@ -73,6 +73,7 @@ Accounts for questions missed or unsure about in the practice exams.
   * [Implement backup and recovery](#implement-backup-and-recovery)
     * [Recover Azure VM from Deleted Backup](#recover-azure-vm-from-deleted-backup)
     * [Recover Configuration File from Azure VM Backup](#recover-configuration-file-from-azure-vm-backup)
+    * [Rotate compromised storage account keys](#rotate-compromised-storage-account-keys)
 
 ---
 
@@ -3797,3 +3798,64 @@ Azure Recovery Services vault overview
 ▶ **Related Lab:** [lab-vm-file-recovery](../hands-on-labs/monitoring/lab-vm-file-recovery/README.md)
 
 ---
+
+#### Rotate compromised storage account keys
+
+**Domain:** Implement and Manage Storage
+**Skill:** Configure and manage storage accounts
+**Task:** Manage access keys
+
+You have two storage account keys: `key1` and `key2`. Your apps and services use `key1`, and you maintain `key2` as a backup key.
+
+You are concerned that both keys may have been compromised. You want to use the Azure portal to regenerate them without interrupting access to the storage account.
+
+Which five actions should you perform in sequence? To answer, move the appropriate actions from the list of possible actions to the answer area and arrange them in the correct order.
+
+Available options:
+
+A. Regenerate `key1` using the Azure portal.  
+B. Update connection strings in all relevant apps and services to use `key1`.  
+C. Regenerate `key2` using the Azure portal.  
+D. Update connection strings in all relevant apps and services to use `key2`.  
+E. Verify that all apps and services are running correctly using the new key. Regenerate `key2`.  
+F. Create a new Key using the Azure Portal called key3
+
+Select and order 5:
+
+| Step | Action |
+|------|--------|
+| 1 | |
+| 2 | |
+| 3 | |
+| 4 | |
+| 5 | |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-11-04-43-07.png' width=700>
+
+</details>
+
+<details open>
+<summary>💡 Click to expand explanation</summary>
+
+You should perform the following steps in order:
+
+1. Regenerate `key2` using the Azure portal.  
+2. Update connection strings in all relevant apps and services to use `key2`.  
+3. Regenerate `key1` using the Azure portal.  
+4. Update connection strings in all relevant apps and services to use `key1`.  
+5. Verify that all apps and services are running correctly using the new key. Regenerate `key2`.
+
+You should first regenerate `key2` using the Azure portal. This ensures that you are not using any key that has been compromised in the past. This is very important since, in this scenario, you are concerned that both keys may have been compromised. After regenerating the `key2`, you should then proceed to update the connection strings for all the relevant apps to use `key2`, then regenerate `key1` as it is not the primary key now.
+
+Next, you should update the connection strings for all the relevant apps to use newly generated `key1`, then regenerate `key2` as it is not the primary key. This is important because the apps and services will not be able to use the previous primary key after it is regenerated.
+
+Finally, you should check that all apps and services are working correctly. As a final step, as a best practice, you should regenerate `key2` again.
+
+You do not need to create a new key called key3 as you can regenerate both `key1` and `key2`, which will mitigate any security concerns if the keys have been compromised.
+
+<img src='.img/2026-03-11-04-45-26.png' width=600>
+
+</details>
