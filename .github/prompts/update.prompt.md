@@ -10,6 +10,7 @@ Performs a full refresh of top-level exam pages, hands-on-lab catalogs, and prac
 Uses the `lab-catalog-updater` skill for lab scanning, catalog updates, and cross-references.
 Uses the `exam-question-organizer` skill to reorganize practice exam questions by domain/skill/task hierarchy.
 Uses `Update-CoverageTable.ps1` to update the Qs and Labs columns in each exam README's coverage table.
+Uses `Update-ProgressTrackerDays.ps1` to refresh the Days column in each exam's progress tracker.
 
 ## Link Fidelity Requirement
 
@@ -75,7 +76,19 @@ Run the coverage table script for each exam, one at a time:
 - It updates the `Qs` and `Labs` columns between `<!-- BEGIN COVERAGE TABLE -->` and `<!-- END COVERAGE TABLE -->` markers.
 - This is the **authoritative source** for coverage table values — it supersedes any coverage update performed by the reorganizer script.
 
-### 4. Collapse Explanation Blocks (Script)
+### 4. Update Progress Tracker Days (Script)
+
+Run the progress tracker days script to refresh elapsed days for in-progress items:
+
+```powershell
+& ".assets\scripts\Update-ProgressTrackerDays.ps1" -Verbose
+```
+
+- The script auto-discovers all exam READMEs containing progress tracker tables.
+- For in-progress (🚧) items with a Started date, it calculates days elapsed from Started to today.
+- Completed (✅) and not-started (🕒) items are skipped.
+
+### 5. Collapse Explanation Blocks (Script)
 
 Run the collapse script to ensure all `<details>` blocks default to collapsed:
 
@@ -86,7 +99,7 @@ Run the collapse script to ensure all `<details>` blocks default to collapsed:
 - The script scans every `practice-questions/` directory and replaces `<details open>` with `<details>`.
 - If no open blocks are found, the script reports "No open detail blocks found" and exits successfully.
 
-### 5. Remove Unused Images (Script)
+### 6. Remove Unused Images (Script)
 
 After all updates are complete, run the unused image cleanup script:
 

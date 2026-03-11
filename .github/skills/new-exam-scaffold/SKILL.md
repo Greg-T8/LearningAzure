@@ -306,6 +306,10 @@ $ExamFolderMap = @{
 }
 ```
 
+#### `Update-ProgressTrackerDays.ps1`
+
+No changes required. This script auto-discovers all exam READMEs containing a progress tracker table. New exams are picked up automatically when their README includes the standard `| Priority | Modality | ... | Days |` header row.
+
 ### 2.5 Skills
 
 #### `lab-catalog-updater/SKILL.md`
