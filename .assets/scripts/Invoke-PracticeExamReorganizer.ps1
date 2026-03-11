@@ -89,26 +89,27 @@ $Helpers = {
                     Skills = [System.Collections.Generic.List[hashtable]]::new()
                 }
                 $domains.Add($currentDomain)
+                $currentSkill = $null
                 continue
             }
 
-            # Skill heading: #### <Skill Name>
-            if ($line -match '^####\s+(.+)$') {
-                $currentSkill = @{
-                    Name  = $Matches[1]
-                    Tasks = [System.Collections.Generic.List[string]]::new()
-                }
+            # Task row (4-column format): | <skill-or-empty> | <task> | <qs> | <labs> |
+            if ($currentDomain -and $line -match '^\|\s*(.*?)\s*\|\s*(?!Task\b|:---)(.+?)\s+\|\s+\d+\s+\|\s+\d+\s+\|') {
+                $skillName = $Matches[1].Trim()
+                $taskName = $Matches[2].Trim()
 
-                if ($currentDomain) {
+                # Non-empty skill column starts a new skill group
+                if ($skillName) {
+                    $currentSkill = @{
+                        Name  = $skillName
+                        Tasks = [System.Collections.Generic.List[string]]::new()
+                    }
                     $currentDomain.Skills.Add($currentSkill)
                 }
 
-                continue
-            }
-
-            # Task row: | <task description> | <count> |
-            if ($currentSkill -and $line -match '^\|\s+(?!Task\b|:---)(.+?)\s+\|\s+\d+\s+\|') {
-                $currentSkill.Tasks.Add($Matches[1].Trim())
+                if ($currentSkill) {
+                    $currentSkill.Tasks.Add($taskName)
+                }
             }
         }
 
@@ -518,12 +519,13 @@ $Helpers = {
                 continue
             }
 
-            # Match 3-column rows: | <task> | <qs> | <labs> |
-            if ($inCoverage -and $line -match '^\|\s+(?!Task\b|:---)(.+?)\s+\|\s+\d+\s+\|\s+(\d+)\s+\|') {
-                $taskName = $Matches[1].Trim()
-                $existingLabs = $Matches[2]
+            # Match 4-column rows: | <skill-or-empty> | <task> | <qs> | <labs> |
+            if ($inCoverage -and $line -match '^\|\s*(.*?)\s*\|\s*(?!Task\b|:---)(.+?)\s+\|\s+\d+\s+\|\s+(\d+)\s+\|') {
+                $skillCell = $Matches[1].Trim()
+                $taskName = $Matches[2].Trim()
+                $existingLabs = $Matches[3]
                 $count = if ($taskCounts.ContainsKey($taskName)) { $taskCounts[$taskName] } else { 0 }
-                $newLine = "| $taskName | $count | $existingLabs |"
+                $newLine = "| $skillCell | $taskName | $count | $existingLabs |"
                 $output.Add($newLine)
                 $updated++
             }

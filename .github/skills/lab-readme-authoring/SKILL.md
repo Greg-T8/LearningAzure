@@ -52,7 +52,11 @@ Rules:
 
 - Insert a blank line after the metadata block before the first `##` section heading.
 
-### Section 1: Exam Question Scenario
+### Section 1: Exam Question Scenario / Exam Task
+
+Content depends on the `Intake Mode` field from the Phase 1 metadata.
+
+**Question Mode (`Intake Mode: Question`):**
 
 ```markdown
 ## Exam Question
@@ -71,6 +75,23 @@ Rules:
 - Preserve the Lab-Intake format exactly: H3 title, italic question type, paragraph breaks, lettered options with trailing spaces, answer tables, code blocks, and blank-token syntax.
 - Do **not** restructure, re-wrap, renumber, or paraphrase any part of the question.
 - **Do NOT reveal the correct answer in this section.**
+
+**Task Mode (`Intake Mode: Task`):**
+
+```markdown
+## Exam Task
+
+> **Exam**: [EXAM] — [Domain]
+
+### <Task name>
+
+<Task overview and learning objectives — copied verbatim from intake file>
+```
+
+- The `## Exam Task` heading and `> **Exam**` context line are the only new content.
+- Everything below them **must be copied verbatim** from the intake file (everything before `## Phase 1 — Metadata Output`).
+- Preserve the Lab-Intake format exactly: task overview paragraphs, numbered learning objectives.
+- Do **not** restructure or paraphrase.
 
 ### Section 2: Solution Architecture
 
@@ -144,7 +165,11 @@ Rules:
 - Include cleanup command for the deployment method.
 - Note purge requirements for soft-delete resources (`lab-shared-contract` R-016).
 
-### Section 10: Scenario Analysis
+### Section 10: Scenario Analysis / Task Deep Dive
+
+Content depends on the `Intake Mode` field from the Phase 1 metadata.
+
+**Question Mode (`Intake Mode: Question`):**
 
 ```markdown
 ## Scenario Analysis
@@ -160,6 +185,32 @@ Rules:
 
 - This is the **only section** where the correct answer is revealed.
 - Provide reasoning for every incorrect option.
+
+**Task Mode (`Intake Mode: Task`):**
+
+```markdown
+## Task Deep Dive
+
+### Key Concepts
+
+[Core concepts and terminology the user must understand]
+
+### Best Practices
+
+[Recommended configurations, patterns, and approaches]
+
+### Common Pitfalls
+
+[Frequent mistakes and misconceptions to avoid]
+
+### Exam Relevance
+
+[How this task typically appears on the exam — question patterns, tested scenarios, depth of knowledge expected]
+```
+
+- Cover the task comprehensively to bring the user up to speed.
+- Reference findings from the question bank scan (if related practice questions were found).
+- Keep each sub-section concise (3–5 bullet points or short paragraphs).
 
 ### Section 11: Key Learning Points
 

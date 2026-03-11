@@ -5,7 +5,9 @@ Update the exam README coverage table with practice question and lab counts.
 .DESCRIPTION
 Scans practice question metadata (**Domain:**/**Skill:**/**Task:**) and lab README
 metadata to count items per task, then updates the Qs and Labs columns in the exam
-README coverage table between the BEGIN/END COVERAGE TABLE markers.
+README coverage table between the BEGIN/END COVERAGE TABLE markers. Also updates
+domain-level <summary> tags and the coverage dashboard between BEGIN/END COVERAGE
+DASHBOARD markers.
 
 .CONTEXT
 LearningAzure repository — exam coverage tracking for practice questions and labs.
@@ -38,6 +40,7 @@ $Main = {
     $questionCounts = Get-QuestionCount
     $labCounts = Get-LabCount
     Update-CoverageTable -QuestionCounts $questionCounts -LabCounts $labCounts
+    Update-CoverageDashboard -QuestionCounts $questionCounts -LabCounts $labCounts
 }
 
 #region HELPER FUNCTIONS
@@ -183,7 +186,7 @@ $Helpers = {
     }
 
     function Update-CoverageTable {
-        # Replace Qs and Labs values in the exam README coverage table
+        # Replace Qs and Labs values and update <summary> tags in the coverage table
         param(
             [Parameter(Mandatory)]
             [hashtable]$QuestionCounts,
@@ -197,6 +200,12 @@ $Helpers = {
         $inCoverage = $false
         $updatedRows = 0
 
+        # Domain-level tracking for <summary> updates
+        $domainTaskCount = 0
+        $domainQs = 0
+        $domainLabs = 0
+        $pendingSummaryIndex = -1
+
         foreach ($line in $lines) {
             # Detect coverage table boundaries
             if ($line -match '<!-- BEGIN COVERAGE TABLE -->') {
@@ -206,19 +215,54 @@ $Helpers = {
             }
 
             if ($line -match '<!-- END COVERAGE TABLE -->') {
+                # Flush pending summary for the last domain
+                if ($pendingSummaryIndex -ge 0) {
+                    $output[$pendingSummaryIndex] = "<summary>$domainTaskCount tasks — $domainQs Qs · $domainLabs Labs</summary>"
+                }
                 $inCoverage = $false
                 $output.Add($line)
                 continue
             }
 
-            # Update task rows: | <task> | <qs> | <labs> |
-            if ($inCoverage -and $line -match '^\|\s+(?!Task\b|:---)(.+?)\s+\|\s+\d+\s+\|\s+\d+\s+\|') {
-                $taskName = $Matches[1].Trim()
+            if (-not $inCoverage) {
+                $output.Add($line)
+                continue
+            }
+
+            # Domain heading (###) — flush previous domain's summary and reset
+            if ($line -match '^### Domain \d+:') {
+                if ($pendingSummaryIndex -ge 0) {
+                    $output[$pendingSummaryIndex] = "<summary>$domainTaskCount tasks — $domainQs Qs · $domainLabs Labs</summary>"
+                }
+                $domainTaskCount = 0
+                $domainQs = 0
+                $domainLabs = 0
+                $pendingSummaryIndex = -1
+                $output.Add($line)
+                continue
+            }
+
+            # <summary> line — record its index for later update
+            if ($line -match '^<summary>') {
+                $pendingSummaryIndex = $output.Count
+                $output.Add($line)
+                continue
+            }
+
+            # Update 4-column task rows: | <skill-or-empty> | <task> | <qs> | <labs> |
+            if ($line -match '^\|\s*(.*?)\s*\|\s*(?!Task\b|:---)(.+?)\s+\|\s+\d+\s+\|\s+\d+\s+\|') {
+                $skillCell = $Matches[1].Trim()
+                $taskName = $Matches[2].Trim()
                 $qs = if ($QuestionCounts.ContainsKey($taskName)) { $QuestionCounts[$taskName] } else { 0 }
                 $labs = if ($LabCounts.ContainsKey($taskName)) { $LabCounts[$taskName] } else { 0 }
-                $newLine = "| $taskName | $qs | $labs |"
+                $newLine = "| $skillCell | $taskName | $qs | $labs |"
                 $output.Add($newLine)
                 $updatedRows++
+
+                # Accumulate for domain summary
+                $domainTaskCount++
+                $domainQs += $qs
+                $domainLabs += $labs
             }
             else {
                 $output.Add($line)
@@ -237,6 +281,98 @@ $Helpers = {
         Write-Host "  Practice questions: $totalQs"
         Write-Host "  Hands-on labs:      $totalLabs"
         Write-Host "  Table rows updated: $updatedRows"
+    }
+
+    function Update-CoverageDashboard {
+        # Regenerate the coverage dashboard with domain-level aggregates
+        param(
+            [Parameter(Mandatory)]
+            [hashtable]$QuestionCounts,
+
+            [Parameter(Mandatory)]
+            [hashtable]$LabCounts
+        )
+
+        $lines = Get-Content -Path $ExamReadme -Encoding UTF8
+
+        # First pass: compute domain-level aggregates from coverage table
+        $domainStats = [ordered]@{}
+        $currentDomain = $null
+        $inCoverage = $false
+
+        foreach ($line in $lines) {
+            if ($line -match '<!-- BEGIN COVERAGE TABLE -->') { $inCoverage = $true; continue }
+            if ($line -match '<!-- END COVERAGE TABLE -->') { break }
+            if (-not $inCoverage) { continue }
+
+            # Domain heading
+            if ($line -match '^### Domain (\d+):') {
+                $domainNum = $Matches[1]
+                $currentDomain = @{ Qs = 0; Labs = 0; Tasks = 0; Covered = 0 }
+                $domainStats[$domainNum] = $currentDomain
+                continue
+            }
+
+            # Task row (4-column format: | skill | task | qs | labs |)
+            if ($null -ne $currentDomain -and $line -match '^\|\s*(.*?)\s*\|\s*(?!Task\b|:---)(.+?)\s+\|\s+\d+\s+\|\s+\d+\s+\|') {
+                $taskName = $Matches[2].Trim()
+                $qs = if ($QuestionCounts.ContainsKey($taskName)) { $QuestionCounts[$taskName] } else { 0 }
+                $labs = if ($LabCounts.ContainsKey($taskName)) { $LabCounts[$taskName] } else { 0 }
+                $currentDomain.Tasks++
+                $currentDomain.Qs += $qs
+                $currentDomain.Labs += $labs
+                if ($qs -gt 0 -or $labs -gt 0) { $currentDomain.Covered++ }
+            }
+        }
+
+        # Second pass: update dashboard rows
+        $output = [System.Collections.Generic.List[string]]::new()
+        $inDashboard = $false
+        $updatedRows = 0
+
+        foreach ($line in $lines) {
+            if ($line -match '<!-- BEGIN COVERAGE DASHBOARD -->') {
+                $inDashboard = $true
+                $output.Add($line)
+                continue
+            }
+
+            if ($line -match '<!-- END COVERAGE DASHBOARD -->') {
+                $inDashboard = $false
+                $output.Add($line)
+                continue
+            }
+
+            # Dashboard data row: | [N. Domain Name](#domain-n) | weight | ... |
+            if ($inDashboard -and $line -match '^\|\s*\[(\d+)\.') {
+                $domainNum = $Matches[1]
+                if ($domainStats.Contains($domainNum)) {
+                    $stats = $domainStats[$domainNum]
+                    $pct = if ($stats.Tasks -gt 0) { [math]::Floor(($stats.Covered / $stats.Tasks) * 100) } else { 0 }
+                    $indicator = if ($pct -ge 66) { '🟢' } elseif ($pct -ge 33) { '🟡' } else { '🔴' }
+
+                    # Preserve domain link and weight columns from existing line
+                    $cells = ($line.TrimStart('|').TrimEnd('|')) -split '\|'
+                    $domainLink = $cells[0].Trim()
+                    $weight = $cells[1].Trim()
+
+                    $newLine = "| $domainLink | $weight | $($stats.Qs) | $($stats.Labs) | $($stats.Covered) / $($stats.Tasks) | $indicator |"
+                    $output.Add($newLine)
+                    $updatedRows++
+                }
+                else {
+                    $output.Add($line)
+                }
+                continue
+            }
+
+            $output.Add($line)
+        }
+
+        if ($updatedRows -gt 0 -and $PSCmdlet.ShouldProcess($ExamReadme, "Update $updatedRows coverage dashboard rows")) {
+            Set-Content -Path $ExamReadme -Value ($output -join "`n") -Encoding UTF8 -NoNewline
+            Write-Host "Updated $updatedRows dashboard rows in $ExamReadme" -ForegroundColor Green
+        }
     }
 }
 #endregion

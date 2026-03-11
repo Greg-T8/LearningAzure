@@ -212,7 +212,7 @@ Start free tier when available.
 
 Every lab README must contain these sections in this exact sequence:
 
-1. Exam Question Scenario
+1. Exam Question Scenario / Exam Task (depends on `Intake Mode`)
 2. Solution Architecture
 3. Architecture Diagram
 4. Lab Objectives
@@ -221,7 +221,7 @@ Every lab README must contain these sections in this exact sequence:
 7. Deployment
 8. Testing the Solution
 9. Cleanup
-10. Scenario Analysis
+10. Scenario Analysis / Task Deep Dive (depends on `Intake Mode`)
 11. Key Learning Points
 12. Related Objectives
 13. Additional Resources

@@ -1,6 +1,6 @@
 ---
 name: Lab-Designer
-description: Phase 2 agent — creates the Lab README file and presents a summary for user review and approval, then hands off to Lab-Builder.
+description: Phase 2 agent — creates the Lab README file and presents a summary for user review and approval, then hands off to Lab-Builder. Supports both question-based and task-based intake modes.
 model: 'Claude Opus 4.6'
 user-invokable: true
 tools: [vscode/askQuestions, read/readFile, edit/createDirectory, edit/createFile, edit/editFiles, search/codebase, search/fileSearch, search/listDirectory, search/textSearch, web/fetch]
@@ -38,7 +38,14 @@ You are the **Lab Designer**. Your sole deliverable is the complete **Lab README
 
 ## Inputs
 
-The Orchestrator passes a single file path (the `exam_question_file` from R-032). This file is the cumulative pipeline artifact — it contains the exam question (written by the Orchestrator in R-039) followed by the Phase 1 metadata block (appended by Lab-Metadata in R-043a). Read this file to obtain both the exam question and all metadata fields.
+The Orchestrator passes a single file path (the `exam_question_file` from R-032). This file is the cumulative pipeline artifact. Read this file to obtain the intake content and all metadata fields.
+
+**Detect intake mode** by reading the `Intake Mode` field from the `## Phase 1 — Metadata Output` block:
+
+- **`Intake Mode: Question`** — The file contains an extracted exam question (written by Lab-Intake in R-039) followed by the Phase 1 metadata block.
+- **`Intake Mode: Task`** — The file contains a task overview and learning objectives (written by Lab-Intake in R-048) followed by the Phase 1 metadata block.
+
+The intake mode determines how Section 1 and Section 10 of the README are generated. All other sections follow the same procedure regardless of mode.
 
 ---
 
@@ -50,11 +57,27 @@ Generate the complete Lab README using the `lab-readme-authoring` skill procedur
 
 Follow `lab-readme-authoring` R-140 for per-section content guidelines. Key requirements:
 
-- **Section 1 (Exam Question):** Copy the exam question **verbatim** from the intake file (everything before `## Phase 1 — Metadata Output`). Preserve the Lab-Intake format exactly — H3 title, italic question type, scenario text, lettered options, answer tables/blanks. The only additions are the `## Exam Question` heading and `> **Exam**: [EXAM] — [Domain]` context line above the copied block. Do **not** restructure or paraphrase. Do **not** reveal the correct answer.
+- **Section 1 (Exam Question / Exam Task):** Content depends on intake mode:
+  - **Question Mode (`Intake Mode: Question`):** Copy the exam question **verbatim** from the intake file (everything before `## Phase 1 — Metadata Output`). Preserve the Lab-Intake format exactly — H3 title, italic question type, scenario text, lettered options, answer tables/blanks. The only additions are the `## Exam Question` heading and `> **Exam**: [EXAM] — [Domain]` context line above the copied block. Do **not** restructure or paraphrase. Do **not** reveal the correct answer.
+  - **Task Mode (`Intake Mode: Task`):** Copy the task overview **verbatim** from the intake file (everything before `## Phase 1 — Metadata Output`). The section heading is `## Exam Task` instead of `## Exam Question`. Preserve the Lab-Intake format exactly — task overview, learning objectives. The only additions are the `## Exam Task` heading and `> **Exam**: [EXAM] — [Domain]` context line above the copied block.
 - **Section 2 (Solution Architecture):** 2–4 sentence description. Procedure: `lab-architecture-design` R-110.
 - **Section 3 (Architecture Diagram):** Mermaid diagram per `lab-shared-contract` R-013. Styling per `mermaid-styling` skill (M-001 base theme + M-002/M-003 class definitions). Procedure: `lab-architecture-design` R-111.
 - **Section 5 (Lab Structure):** File tree per `lab-shared-contract` R-010. Procedure: `lab-architecture-design` R-113.
-- **Section 10 (Scenario Analysis):** Reveal correct answer(s) with reasoning. Explain why each incorrect option is wrong. This is the **only** section where the correct answer appears.
+- **Section 10 (Scenario Analysis / Task Deep Dive):** Content depends on intake mode:
+  - **Question Mode:** Reveal correct answer(s) with reasoning. Explain why each incorrect option is wrong. This is the **only** section where the correct answer appears.
+  - **Task Mode:** Provide a **Task Deep Dive** covering: (a) key concepts and terminology, (b) best practices and common configurations, (c) common pitfalls and misconceptions, (d) how this task typically appears on exams. The section heading is `## Task Deep Dive` instead of `## Scenario Analysis`.
+
+### Question Bank Scanning (Task Mode Only)
+
+When `Intake Mode: Task`, **before** generating the README, scan the practice questions folder for the identified exam (e.g., `AZ-104/practice-questions/`, `AI-102/practice-questions/`) to find questions related to the task. This helps calibrate the lab’s depth and focus:
+
+1. Search practice question files for the task name, related keywords, and associated Azure services.
+2. Note the types of questions asked (multiple choice, drag-and-drop, yes/no) and the specific scenarios tested.
+3. Use these findings to inform:
+   - The depth and specificity of lab objectives (Section 4)
+   - The resources deployed and configured in the lab
+   - The Task Deep Dive content (Section 10) — address the same scenarios and pitfalls that exam questions test
+4. If no related questions are found, design the lab based on the task description and official Microsoft documentation scope.
 
 ### Naming and Governance
 
@@ -87,13 +110,15 @@ Hold all content in working memory — do **not** render to chat until R-058.
 Phase 2 is complete when:
 
 - [ ] README contains all 14 sections in correct order (`lab-shared-contract` R-011)
-- [ ] Exam question copied verbatim from intake file (Section 1)
+- [ ] Intake content copied verbatim from intake file (Section 1): exam question for Question Mode, task overview for Task Mode
+- [ ] Section 1 heading is `## Exam Question` (Question Mode) or `## Exam Task` (Task Mode)
 - [ ] Architecture summary is 2–4 sentences (Section 2)
 - [ ] Mermaid diagram present if criteria met (`lab-shared-contract` R-013) (Section 3)
 - [ ] All resource names follow `lab-shared-contract` R-001 / R-002 / R-003
 - [ ] File tree matches `lab-shared-contract` R-010 (Section 5)
-- [ ] Scenario analysis covers correct and incorrect answers (Section 10)
-- [ ] Correct answer revealed **only** in Section 10
+- [ ] Section 10 content matches intake mode: Scenario Analysis (Question Mode) or Task Deep Dive (Task Mode)
+- [ ] For Question Mode: correct answer revealed **only** in Section 10
+- [ ] For Task Mode: question bank scanning was performed and findings informed the design
 - [ ] **README.md created** in the target lab folder
 - [ ] R-058 handoff gate rendered exactly once
 
@@ -153,7 +178,9 @@ State:
 
 **Scenario Answer Preview**
 
-<Concise statement of the correct answer(s) with brief reasoning.
+<Content depends on intake mode:
+
+Question Mode — Concise statement of the correct answer(s) with brief reasoning.
 For single-answer questions, state the correct option and a one-line rationale.
 For matching/mapping questions, use a compact table — e.g.:
 
@@ -162,6 +189,14 @@ For matching/mapping questions, use a compact table — e.g.:
 | OCR rows from PDFs | Tables Projection |
 | JPEG image extraction | Files Projection |
 | Key phrase JSON output | Objects Projection |
+
+Task Mode — Brief summary of what the lab teaches:
+
+| Focus Area | Key Takeaway |
+|---|---|
+| Budget Alerts | Configure thresholds at 50%, 80%, 100% of budget |
+| Azure Advisor | Review and act on cost optimization recommendations |
+| Cost Analysis | Use filters and grouping to identify spending patterns |
 
 Keep to 3–5 lines maximum. Full analysis is in Section 10 of the README.>
 
