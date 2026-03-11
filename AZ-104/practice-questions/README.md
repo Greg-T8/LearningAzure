@@ -70,6 +70,7 @@ Accounts for questions missed or unsure about in the practice exams.
   * [Implement backup and recovery](#implement-backup-and-recovery)
     * [Recover Configuration File from Azure VM Backup](#recover-configuration-file-from-azure-vm-backup)
     * [Recover Azure VM from Deleted Backup](#recover-azure-vm-from-deleted-backup)
+    * [Provide least-privilege access to a report](#provide-least-privilege-access-to-a-report)
 
 ---
 
@@ -3696,4 +3697,45 @@ For Azure IaaS VMs protected by a Recovery Services vault, **soft delete provide
 
 ---
 
-<img src='.img/2026-03-11-04-28-34.png' width=600>
+#### Provide least-privilege access to a report
+
+**Domain:** Implement and Manage Storage
+**Skill:** Configure access to storage
+**Task:** Create and use shared access signature (SAS) tokens
+
+You create a binary large object (blob) storage account named `reportstorage99` that contains archival reports from past corporate board meetings.
+
+A board member requests access to a specific report. The member does not have a Microsoft Entra user account. Moreover, they have access only to a web browser on his Google Chromebook device.
+
+To fulfill the request, you will provide the board member with least-privilege access to the requested report while maintaining security compliance and minimizing administrative overhead.
+
+What should you do?
+
+A. Deploy a point-to-site (P2S) virtual private network (VPN) connection on the board member's Chromebook and grant the board member role-based access control (RBAC) access to the report.  
+B. Generate a shared access signature (SAS) token for the report and share the Uniform Resource Locator (URL) with the board member.  
+C. Copy the report to an Azure File Service share and provide the board member with a PowerShell connection script.  
+D. Create a Microsoft Entra account for the board member and grant him role-based access control (RBAC) access to the storage account.  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-11-04-28-34.png' width=700>
+
+</details>
+
+<details open>
+<summary>💡 Click to expand explanation</summary>
+
+You should generate a shared access signature (SAS) token for the report and share the Uniform Resource Locator (URL) with the board member. SAS enables you to define time-limited read-only or read-write access to Azure storage account resources. It is important that you set the time restriction properly because the SAS includes no authentication. Any person with access to the URL can access the target resource(s) within the token's lifetime. In this case, you both minimize administrative effort as well as maintain security compliance because the SAS token points only to a single file, not the entire blob container that hosts the requested report.
+
+You should not create a Microsoft Entra account for the board member and grant him role-based access control (RBAC) access to the storage account. First, it requires significant management overhead to create and manage Microsoft Entra accounts, even for external (guest) users. Second, SAS and not RBAC is the way Azure provides screened access to individual storage account resources. You can use RBAC roles only at the storage account scope.
+
+You should not copy the report to an Azure File Service share and provide the board member with a PowerShell connection script. Here you create security and governance problems by creating multiple copies of the source report, as well as producing unnecessary administrative complexity.
+
+You should not deploy a point-to-site (P2S) VPN connection on the board member's Chromebook and grant the board member RBAC access to the report. The scenario stipulates that the board member is limited to using a web browser on his Chromebook. Furthermore, the Azure P2S VPN client is supported only on Windows, macOS, and endorsed Linux distributions. Chrome OS is not supported.
+
+References
+
+* Grant limited access to Azure Storage resources using shared access signatures (SAS)
+
+</details>
