@@ -24,7 +24,9 @@ param(
     [string]$Action = 'Start',
 
     [ValidateSet('AI-102', 'AZ-104', 'WorkflowDevelopment')]
-    [string]$Mode
+    [string]$Mode,
+
+    [string]$Notes
 )
 
 # Configuration
@@ -71,7 +73,7 @@ $Main = {
 
             Confirm-StudyLogExists
             $session = Get-NextSessionNumber
-            Add-SessionEntry -SessionNumber $session
+            Add-SessionEntry -SessionNumber $session -Notes $Notes
             Push-StudyLogChange -SessionNumber $session -Type 'start' -Exam $Mode
             Show-Confirmation -Message "Study session #$session started for $Mode"
         }
@@ -85,7 +87,7 @@ $Main = {
             $sourceLogFileName = Resolve-ExamLogFileName -Exam $sourceExam
             $sourceLog = Join-Path -Path $RepoRoot -ChildPath "$sourceFolder\$sourceLogFileName"
             $sourceSession = Get-ActiveSessionNumber -LogFile $sourceLog
-            Close-SessionEntry -SessionNumber $sourceSession -LogFile $sourceLog
+            Close-SessionEntry -SessionNumber $sourceSession -LogFile $sourceLog -Notes $Notes
             Push-StudyLogChange -SessionNumber $sourceSession -Type 'end' -Exam $sourceExam
             Show-Confirmation -Message "Study session #$sourceSession ended for $sourceExam"
         }
@@ -99,7 +101,7 @@ $Main = {
             $sourceLogFileName = Resolve-ExamLogFileName -Exam $sourceExam
             $sourceLog = Join-Path -Path $RepoRoot -ChildPath "$sourceFolder\$sourceLogFileName"
             $sourceSession = Get-ActiveSessionNumber -LogFile $sourceLog
-            Close-SessionEntry -SessionNumber $sourceSession -LogFile $sourceLog
+            Close-SessionEntry -SessionNumber $sourceSession -LogFile $sourceLog -Notes $Notes
             Push-StudyLogChange -SessionNumber $sourceSession -Type 'end' -Exam $sourceExam
             Show-Confirmation -Message "Study session #$sourceSession ended for $sourceExam"
         }
@@ -224,16 +226,31 @@ $Helpers = {
         # Append a new session row with the current date and start time
         param(
             [Parameter(Mandatory)]
-            [int]$SessionNumber
+            [int]$SessionNumber,
+
+            [string]$Notes
         )
 
         $now   = Get-Date
         $date  = $now.ToString('M/d/yy')
         $start = $now.ToString('h:mm tt')
+        $safeNotes = ConvertTo-LogNote -Notes $Notes
 
-        $row = "| $SessionNumber | $date | $start |  |  |  |"
+        $row = "| $SessionNumber | $date | $start |  |  | $safeNotes |"
 
         Add-Content -Path $StudyLogFile -Value $row
+    }
+
+    function ConvertTo-LogNote {
+        # Normalize user note text so markdown table formatting is preserved
+        param([string]$Notes)
+
+        if ([string]::IsNullOrWhiteSpace($Notes)) {
+            return ''
+        }
+
+        $normalized = $Notes.Trim() -replace '\|', '\\|'
+        return $normalized
     }
 
     function Close-SessionEntry {
@@ -242,7 +259,9 @@ $Helpers = {
             [Parameter(Mandatory)]
             [int]$SessionNumber,
 
-            [string]$LogFile = $StudyLogFile
+            [string]$LogFile = $StudyLogFile,
+
+            [string]$Notes
         )
 
         $lines = Get-Content -Path $LogFile
@@ -272,6 +291,20 @@ $Helpers = {
                 $endStr      = $now.ToString('h:mm tt')
                 $columns[4]  = " $endStr "
                 $columns[5]  = " $durationStr "
+
+                # Append a user-provided note to the Notes column when supplied
+                $safeNotes = ConvertTo-LogNote -Notes $Notes
+                if (-not [string]::IsNullOrWhiteSpace($safeNotes)) {
+                    $existingNotes = $columns[6].Trim()
+
+                    if ([string]::IsNullOrWhiteSpace($existingNotes)) {
+                        $columns[6] = " $safeNotes "
+                    }
+                    else {
+                        $columns[6] = " $existingNotes; $safeNotes "
+                    }
+                }
+
                 $lines[$i]   = $columns -join '|'
 
                 break
