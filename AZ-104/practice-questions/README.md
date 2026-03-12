@@ -19,14 +19,14 @@ Accounts for questions missed or unsure about in the practice exams.
     * [Azure Policy Effects Verification](#azure-policy-effects-verification)
     * [Tagging Policy](#tagging-policy)
     * [Azure Policy Not Functioning](#azure-policy-not-functioning)
-* [Implement and manage storage](#implement-and-manage-storage)
+* [Implement and Manage Storage](#implement-and-manage-storage)
   * [Configure access to storage](#configure-access-to-storage)
+    * [Shared Access Signature (SAS) practices](#shared-access-signature-sas-practices)
+    * [Configure storage account network access](#configure-storage-account-network-access)
+    * [Configure AzCopy Authentication for Blob and File Storage](#configure-azcopy-authentication-for-blob-and-file-storage)
     * [Diagnose Storage Explorer Permission Errors](#diagnose-storage-explorer-permission-errors)
     * [Modify Stored Access Policy](#modify-stored-access-policy)
     * [Provide least-privilege access to a report](#provide-least-privilege-access-to-a-report)
-    * [Configure AzCopy Authentication for Blob and File Storage](#configure-azcopy-authentication-for-blob-and-file-storage)
-    * [Configure storage account network access](#configure-storage-account-network-access)
-    * [Shared Access Signature (SAS) practices](#shared-access-signature-sas-practices)
   * [Configure and manage storage accounts](#configure-and-manage-storage-accounts)
     * [Configure Object Replication Between Storage Accounts](#configure-object-replication-between-storage-accounts)
     * [Rotate compromised storage account keys](#rotate-compromised-storage-account-keys)
@@ -40,9 +40,9 @@ Accounts for questions missed or unsure about in the practice exams.
     * [SAS key configuration scenarios](#sas-key-configuration-scenarios)
 * [Deploy and Manage Azure Compute Resources](#deploy-and-manage-azure-compute-resources)
   * [Automate deployment of resources by using ARM templates or Bicep files](#automate-deployment-of-resources-by-using-arm-templates-or-bicep-files)
+    * [Case Study — Solution Evaluation](#case-study-solution-evaluation)
     * [Export ARM Template](#export-arm-template)
     * [Edit ARM Template to Inherit Resource Group Location](#edit-arm-template-to-inherit-resource-group-location)
-    * [Case Study — Solution Evaluation](#case-study--solution-evaluation)
   * [Create and configure virtual machines](#create-and-configure-virtual-machines)
     * [VM Resize Failure Cause](#vm-resize-failure-cause)
     * [Encrypt VM Disk With Key Vault](#encrypt-vm-disk-with-key-vault)
@@ -58,14 +58,16 @@ Accounts for questions missed or unsure about in the practice exams.
   * [Automate deployment of resources by using Azure Resource Manager (ARM) templates or Bicep files](#automate-deployment-of-resources-by-using-azure-resource-manager-arm-templates-or-bicep-files)
     * [Convert Array to Object](#convert-array-to-object)
     * [Resource dependencies in Bicep](#resource-dependencies-in-bicep)
-* [Implement and manage virtual networking](#implement-and-manage-virtual-networking)
+* [Implement and Manage Virtual Networking](#implement-and-manage-virtual-networking)
+  * [Configure and manage virtual networks in Azure](#configure-and-manage-virtual-networks-in-azure)
+    * [Configure Layered Network Security](#configure-layered-network-security)
   * [Configure secure access to virtual networks](#configure-secure-access-to-virtual-networks)
     * [Configure Private Link Service Source IP](#configure-private-link-service-source-ip)
   * [Configure name resolution and load balancing](#configure-name-resolution-and-load-balancing)
+    * [Configure DNS Records for App Service](#configure-dns-records-for-app-service)
     * [Configure Standard Load Balancer Outbound Traffic and IP Allocation](#configure-standard-load-balancer-outbound-traffic-and-ip-allocation)
     * [Diagnose Internal Load Balancer Hairpin Traffic Failure](#diagnose-internal-load-balancer-hairpin-traffic-failure)
     * [IMDS Load Balancer Metadata Error](#imds-load-balancer-metadata-error)
-    * [Configure DNS Records for App Service](#configure-dns-records-for-app-service)
 * [Monitor and maintain Azure resources](#monitor-and-maintain-azure-resources)
   * [Monitor resources in Azure](#monitor-resources-in-azure)
     * [Capture SFTP Packets with Network Watcher](#capture-sftp-packets-with-network-watcher)
@@ -78,7 +80,6 @@ Accounts for questions missed or unsure about in the practice exams.
   * [Implement backup and recovery](#implement-backup-and-recovery)
     * [Recover Configuration File from Azure VM Backup](#recover-configuration-file-from-azure-vm-backup)
     * [Recover Azure VM from Deleted Backup](#recover-azure-vm-from-deleted-backup)
-    * [Configure Layered Network Security](#configure-layered-network-security)
 
 ---
 
@@ -897,9 +898,270 @@ References
 
 ---
 
-## Implement and manage storage
+## Implement and Manage Storage
 
 ### Configure access to storage
+
+#### Shared Access Signature (SAS) practices
+
+**Domain:** Implement and Manage Storage
+**Skill:** Configure access to storage
+**Task:** Create and use shared access signature (SAS) tokens
+
+Your company is developing a .NET application that stores part of the information in an Azure Storage account. The application will be installed on end users' computers.
+
+You want to ensure that the information stored in the storage account is accessed in a secure way, so you ask the developers to use a shared access signature (SAS) when accessing said information. You want to make the required configurations on the storage account to follow security best practices and enable access to the account with immediate effect.
+
+For each of the following statements, select Yes if the statement is true. Otherwise, select No.
+
+| STATEMENT | YES | NO |
+|-----------|-----|----|
+| You should configure a stored access policy. | ☐ | ☐ |
+| You should set the shared access signature (SAS) start time to now. | ☐ | ☐ |
+| You should validate data that has been written using a SAS. | ☐ | ☐ |
+| One option for revoking a SAS is by deleting a stored access policy. | ☐ | ☐ |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-11-04-16-22.png' width=700>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+You can configure a stored access policy. When you use a shared access signature (SAS), you have two different options. You can either use an ad-hoc SAS or configure a stored access policy. By using an ad-hoc SAS, you specify the start time, expiration time, and permissions in the Uniform Resource Identifier (URI). If someone copies this URI, they will have the same level of access as the corresponding user. This means that this type of SAS can be used by anyone in the world. By configuring a stored access policy, you define the start time, expiration time, and permissions in the policy and then associate a SAS with that policy. You can associate more than one SAS with the same policy.
+
+You should not set the SAS start time to now. When you set the start time of a SAS to now, there can be slight differences in the clocks of the servers that host the storage account. These differences could lead to an access problem for a few minutes after the configuration. If you need your SAS to be available as soon as possible, you should set the start time to 15 minutes before the current time, or you can just not set the start time. Not setting the start time parameter means that the SAS will be active immediately.
+
+You should validate data that has been written using a SAS. When the user uses a SAS, the information they write to the storage account can cause problems, such as communication issues or corruption. Because of this, it is a best practice to validate the data written to the storage account after it is written and before the information is used by any other service or application.
+
+You can revoke a SAS by deleting a stored access policy. If you associate a SAS with a stored access policy, the start time, expiration time, and permissions are inherited from the policy. If you remove the policy, you are invalidating the SAS, thus making it unusable. Keep in mind that if you remove a stored access policy with an associated SAS and then create another stored access policy with the exact same name as the original policy, the associated SAS will be enabled again.
+
+<img src='.img/2026-03-11-04-19-52.png' width=600>
+
+<img src='.img/2026-03-11-04-20-50.png' width=600>
+
+<img src='.img/2026-03-11-04-22-57.png' width=600>
+
+References
+
+* [Grant limited access to Azure Storage resources using shared access signatures (SAS)](https://learn.microsoft.com/en-us/azure/storage/common/storage-sas-overview)
+* [Create a stored access policy](https://learn.microsoft.com/en-us/azure/storage/common/storage-stored-access-policy-define-dotnet?toc=%2Fazure%2Fstorage%2Fblobs%2Ftoc.json&bc=%2Fazure%2Fstorage%2Fblobs%2Fbreadcrumb%2Ftoc.json)
+
+</details>
+
+---
+
+#### Configure storage account network access
+
+**Domain:** Implement and Manage Storage
+**Skill:** Configure access to storage
+**Task:** Configure Azure Storage firewalls and virtual networks
+
+You deploy a new storage account named `storage01` in a resource group named `RG01`.
+
+You need to ensure that the App Services, the backup vault, and the event hub can access the new storage account. Access should be enabled from within Azure only, and not via public internet.
+
+You decide to use PowerShell to configure all the settings.
+
+How should you complete the command string? To answer, select the appropriate options from the drop-down menus.
+
+```powershell
+Get-AzVirtualNetwork -ResourceGroupName "RG01" -Name "VNET01" |
+  Set-AzVirtualNetworkSubnetConfig -Name "VSUBNET01" \
+    -AddressPrefix "10.0.0.0/24" -ServiceEndpoint "___[1]___" \
+  | Set-AzVirtualNetwork
+
+$subnet = Get-AzVirtualNetwork -ResourceGroupName "RG01" -Name "VNET01"
+Get-AzVirtualNetworkSubnetConfig -Name "VSUBNET01"
+
+___[2]___ -ResourceGroupName "RG01" \
+  -Name "storage01" -VirtualNetworkResourceId $subnet.Id
+
+___[3]___ -ResourceGroupName "RG01" \
+  -Name "storage01" -Bypass ___[4]___
+```
+
+Drop-Down Options:
+
+| Blank | Options |
+|-------|---------|
+| [1] | AzureServices / Logging / Metrics / Microsoft.Storage / None |
+| [2] | Add-AzStorageAccountNetworkRule / Remove-AzStorageAccountNetworkRuleSet / Set-AzStorageAccount / Update-AzStorageAccountNetworkRuleSet |
+| [3] | Add-AzStorageAccountNetworkRule / Remove-AzStorageAccountNetworkRuleSet / Set-AzStorageAccount / Update-AzStorageAccountNetworkRuleSet |
+| [4] | AzureServices / Logging / Metrics / Microsoft.Storage / None |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-11-03-48-09.png' width=700>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+You should run the following script to ensure that the backup vault and the event hub services have access to the storage account:
+
+```powershell
+Get-AzVirtualNetwork -ResourceGroupName "RG01" -Name "VNET01" |
+Set-AzVirtualNetworkSubnetConfig -Name "VSUBNET01" \
+    -AddressPrefix "10.0.0.0/24" -ServiceEndpoint "Microsoft.Storage" \
+| Set-AzVirtualNetwork
+
+$subnet = Get-AzVirtualNetwork -ResourceGroupName "RG01" -Name "VNET01"
+Get-AzVirtualNetworkSubnetConfig -Name "VSUBNET01"
+
+Add-AzStorageAccountNetworkRule -ResourceGroupName "RG01" \
+    -Name "storage01" -VirtualNetworkResourceId $subnet.Id
+
+Update-AzStorageAccountNetworkRuleSet -ResourceGroupName "RG01" \
+    -Name "storage01" -Bypass AzureServices
+```
+
+You should use `Microsoft.Storage` as the service endpoint. Using the `Set-AzVirtualNetworkSubnetConfig` cmdlet enables the service endpoint on the subnet `VSUBNET01` for a storage account. This will allow connections to the virtual subnet from the storage account. This cmdlet makes modifications only to the memory representation of the virtual network. You need to run `Set-AzVirtualNetwork` to make the changes persistent.
+
+You should use the `Add-AzStorageAccountNetworkRule` cmdlet to add a firewall exception on the `NetworkRule` property in the storage account. This will allow communication from the virtual subnet to the storage account.
+
+You should use the `Update-AzStorageAccountNetworkRuleSet` cmdlet. This cmdlet also updates the `NetworkRule` property. It allows you to modify the `NetworkRule` property to allow other Azure services, like Backup or Event Hubs, to have access to the storage account.
+
+You should use `AzureServices` for the `-Bypass` parameter. This way, you instruct the `Update-AzStorageAccountNetworkRuleSet` cmdlet to allow connections from other Azure services. Allowed values are `AzureServices`, `Metrics`, `Logging`, and `None`.
+
+You should not use the `Set-AzStorageAccount` cmdlet. You can use this cmdlet to modify a storage account, but not the `NetworkRule` property of the storage account. You typically use this cmdlet when you want to set a tag to a storage account, update a customer domain, or update the type of the account.
+
+You should not use the `Remove-AzStorageAccountNetworkRuleSet` cmdlet. You use this cmdlet to remove a `NetworkRule` property from the storage account. In this scenario, you need to add and modify a new network rule, not remove it.
+
+You should not use the `Logging`, `None`, or `Metrics` values. These are valid for the `-Bypass` parameter for `Update-AzStorageAccountNetworkRuleSet`. Use the `None` value when you want to remove the access to all Azure services, including monitoring and logging services. Use the `Metrics` or `Logging` values when you want to allow access to monitoring or logging Azure Services respectively.
+
+**References**:  
+
+* [Azure Storage firewall rules](https://learn.microsoft.com/en-us/azure/storage/common/storage-network-security)
+* [Update-AzStorageAccountNetworkRuleSet](https://learn.microsoft.com/en-us/powershell/module/az.storage/update-azstorageaccountnetworkruleset?view=azps-15.4.0&viewFallbackFrom=azps-2.6.0)
+* [Add-AzStorageAccountNetworkRule](https://learn.microsoft.com/en-us/powershell/module/az.storage/add-azstorageaccountnetworkrule?view=azps-15.4.0)
+
+</details>
+
+---
+
+#### Configure AzCopy Authentication for Blob and File Storage
+
+**Domain:** Implement and manage storage
+**Skill:** Configure access to storage
+**Task:**
+
+- Create and use shared access signature (SAS) tokens
+- Manage access keys
+- Configure identity-based access for Azure Files
+
+You create a new storage account named DevStore for Azure Blob Storage and Azure File Storage. You plan to use AzCopy to copy data from blob storage and file storage in other storage accounts to DevStore. You have access to the storage account access keys for the source storage accounts and for DevStore. You also have valid Microsoft Entra user accounts and shared access signatures (SAS) with access to the source data.
+
+You need to identify the authorization methods you can use to copy the data to DevStore.
+
+Which authorization methods can you use to copy each storage type? To answer, select the appropriate options from the drop-down menus.
+
+Blob storage: $PLACEHOLDER$
+
+File storage: $PLACEHOLDER$
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-01-30-05-58-51.png' width=700>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+Looking at your answer, I can explain why you got the File storage authorization wrong.
+
+**Your Answer:**
+
+- **Blob storage**: Microsoft Entra ID, access keys, and SAS ✓
+- **File storage**: Microsoft Entra ID only ✗
+
+**The Problem:**
+
+You selected **Microsoft Entra ID only** for File storage, which is incorrect because:
+
+**1. Microsoft Entra ID has LIMITED/NO support for Azure Files with AzCopy:**
+
+While Microsoft Entra ID (Azure AD) works excellently for **Blob storage** with AzCopy, it has **very limited or no support** for **Azure Files** (File shares).
+
+AzCopy's Azure AD authentication is primarily designed for:
+
+- ✓ Blob storage
+- ✓ Azure Data Lake Storage Gen2
+- ✗ Azure Files (not supported or very limited)
+
+**2. You Excluded Valid Methods:**
+
+The scenario explicitly states:
+> "You have access to the storage account access keys for the source storage accounts and for DevStore. You also have valid Microsoft Entra user accounts and **shared access signatures (SAS)**."
+
+For Azure Files, AzCopy **DOES support**:
+
+- ✓ **SAS tokens** - Fully supported and commonly used
+- ✓ **Access keys** - Supported
+- ✗ **Microsoft Entra ID** - Not supported/limited
+
+**The Correct Answer Should Be:**
+
+- **Blob storage**: Microsoft Entra ID, access keys, and SAS ✓
+- **File storage**: **Access keys and SAS** (or possibly just SAS)
+
+**Why This Matters:**
+
+The critical distinction:
+
+| Storage Type | Entra ID | Access Keys | SAS |
+|-------------|----------|-------------|-----|
+| **Blob Storage** | ✓ Yes | ✓ Yes | ✓ Yes |
+| **File Storage** | ✗ Limited/No | ✓ Yes | ✓ Yes |
+
+**Key Detail: "Commands target only the file share or the account":**
+
+This hint suggests:
+
+- **File share level**: Use SAS tokens (most common)
+- **Account level**: Use access keys
+
+Both are valid for Azure Files, but **not** Microsoft Entra ID.
+
+**AzCopy Command Examples:**
+
+**For Blob (with Entra ID):**
+
+```bash
+azcopy login
+azcopy copy "source" "https://devstore.blob.core.windows.net/container"
+```
+
+**For File Storage (with SAS):**
+
+```bash
+azcopy copy "source" "https://devstore.file.core.windows.net/share?<SAS-token>"
+```
+
+**For File Storage (with Account Key):**
+
+```bash
+# Set environment variable
+export AZCOPY_ACCOUNT_KEY="<account-key>"
+azcopy copy "source" "https://devstore.file.core.windows.net/share"
+```
+
+**Key Takeaway:**
+
+**Microsoft Entra ID authentication is NOT supported for Azure Files with AzCopy**, unlike Blob storage where it works perfectly. For File storage, you must use **SAS tokens or access keys**. Don't assume that authentication methods work the same across all storage types!
+
+</details>
+
+▶ **Related Lab:** [lab-azcopy-auth-methods](/AZ-104/hands-on-labs/storage/lab-azcopy-auth-methods/README.md)
+
+---
 
 #### Diagnose Storage Explorer Permission Errors
 
@@ -1166,267 +1428,6 @@ You should not deploy a point-to-site (P2S) VPN connection on the board member's
 References
 
 * Grant limited access to Azure Storage resources using shared access signatures (SAS)
-
-</details>
-
----
-
-#### Configure AzCopy Authentication for Blob and File Storage
-
-**Domain:** Implement and manage storage
-**Skill:** Configure access to storage
-**Task:**
-
-- Create and use shared access signature (SAS) tokens
-- Manage access keys
-- Configure identity-based access for Azure Files
-
-You create a new storage account named DevStore for Azure Blob Storage and Azure File Storage. You plan to use AzCopy to copy data from blob storage and file storage in other storage accounts to DevStore. You have access to the storage account access keys for the source storage accounts and for DevStore. You also have valid Microsoft Entra user accounts and shared access signatures (SAS) with access to the source data.
-
-You need to identify the authorization methods you can use to copy the data to DevStore.
-
-Which authorization methods can you use to copy each storage type? To answer, select the appropriate options from the drop-down menus.
-
-Blob storage: $PLACEHOLDER$
-
-File storage: $PLACEHOLDER$
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-01-30-05-58-51.png' width=700>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-Looking at your answer, I can explain why you got the File storage authorization wrong.
-
-**Your Answer:**
-
-- **Blob storage**: Microsoft Entra ID, access keys, and SAS ✓
-- **File storage**: Microsoft Entra ID only ✗
-
-**The Problem:**
-
-You selected **Microsoft Entra ID only** for File storage, which is incorrect because:
-
-**1. Microsoft Entra ID has LIMITED/NO support for Azure Files with AzCopy:**
-
-While Microsoft Entra ID (Azure AD) works excellently for **Blob storage** with AzCopy, it has **very limited or no support** for **Azure Files** (File shares).
-
-AzCopy's Azure AD authentication is primarily designed for:
-
-- ✓ Blob storage
-- ✓ Azure Data Lake Storage Gen2
-- ✗ Azure Files (not supported or very limited)
-
-**2. You Excluded Valid Methods:**
-
-The scenario explicitly states:
-> "You have access to the storage account access keys for the source storage accounts and for DevStore. You also have valid Microsoft Entra user accounts and **shared access signatures (SAS)**."
-
-For Azure Files, AzCopy **DOES support**:
-
-- ✓ **SAS tokens** - Fully supported and commonly used
-- ✓ **Access keys** - Supported
-- ✗ **Microsoft Entra ID** - Not supported/limited
-
-**The Correct Answer Should Be:**
-
-- **Blob storage**: Microsoft Entra ID, access keys, and SAS ✓
-- **File storage**: **Access keys and SAS** (or possibly just SAS)
-
-**Why This Matters:**
-
-The critical distinction:
-
-| Storage Type | Entra ID | Access Keys | SAS |
-|-------------|----------|-------------|-----|
-| **Blob Storage** | ✓ Yes | ✓ Yes | ✓ Yes |
-| **File Storage** | ✗ Limited/No | ✓ Yes | ✓ Yes |
-
-**Key Detail: "Commands target only the file share or the account":**
-
-This hint suggests:
-
-- **File share level**: Use SAS tokens (most common)
-- **Account level**: Use access keys
-
-Both are valid for Azure Files, but **not** Microsoft Entra ID.
-
-**AzCopy Command Examples:**
-
-**For Blob (with Entra ID):**
-
-```bash
-azcopy login
-azcopy copy "source" "https://devstore.blob.core.windows.net/container"
-```
-
-**For File Storage (with SAS):**
-
-```bash
-azcopy copy "source" "https://devstore.file.core.windows.net/share?<SAS-token>"
-```
-
-**For File Storage (with Account Key):**
-
-```bash
-# Set environment variable
-export AZCOPY_ACCOUNT_KEY="<account-key>"
-azcopy copy "source" "https://devstore.file.core.windows.net/share"
-```
-
-**Key Takeaway:**
-
-**Microsoft Entra ID authentication is NOT supported for Azure Files with AzCopy**, unlike Blob storage where it works perfectly. For File storage, you must use **SAS tokens or access keys**. Don't assume that authentication methods work the same across all storage types!
-
-</details>
-
-▶ **Related Lab:** [lab-azcopy-auth-methods](/AZ-104/hands-on-labs/storage/lab-azcopy-auth-methods/README.md)
-
----
-
-#### Configure storage account network access
-
-**Domain:** Implement and Manage Storage
-**Skill:** Configure access to storage
-**Task:** Configure Azure Storage firewalls and virtual networks
-
-You deploy a new storage account named `storage01` in a resource group named `RG01`.
-
-You need to ensure that the App Services, the backup vault, and the event hub can access the new storage account. Access should be enabled from within Azure only, and not via public internet.
-
-You decide to use PowerShell to configure all the settings.
-
-How should you complete the command string? To answer, select the appropriate options from the drop-down menus.
-
-```powershell
-Get-AzVirtualNetwork -ResourceGroupName "RG01" -Name "VNET01" |
-  Set-AzVirtualNetworkSubnetConfig -Name "VSUBNET01" \
-    -AddressPrefix "10.0.0.0/24" -ServiceEndpoint "___[1]___" \
-  | Set-AzVirtualNetwork
-
-$subnet = Get-AzVirtualNetwork -ResourceGroupName "RG01" -Name "VNET01"
-Get-AzVirtualNetworkSubnetConfig -Name "VSUBNET01"
-
-___[2]___ -ResourceGroupName "RG01" \
-  -Name "storage01" -VirtualNetworkResourceId $subnet.Id
-
-___[3]___ -ResourceGroupName "RG01" \
-  -Name "storage01" -Bypass ___[4]___
-```
-
-Drop-Down Options:
-
-| Blank | Options |
-|-------|---------|
-| [1] | AzureServices / Logging / Metrics / Microsoft.Storage / None |
-| [2] | Add-AzStorageAccountNetworkRule / Remove-AzStorageAccountNetworkRuleSet / Set-AzStorageAccount / Update-AzStorageAccountNetworkRuleSet |
-| [3] | Add-AzStorageAccountNetworkRule / Remove-AzStorageAccountNetworkRuleSet / Set-AzStorageAccount / Update-AzStorageAccountNetworkRuleSet |
-| [4] | AzureServices / Logging / Metrics / Microsoft.Storage / None |
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-11-03-48-09.png' width=700>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-You should run the following script to ensure that the backup vault and the event hub services have access to the storage account:
-
-```powershell
-Get-AzVirtualNetwork -ResourceGroupName "RG01" -Name "VNET01" |
-Set-AzVirtualNetworkSubnetConfig -Name "VSUBNET01" \
-    -AddressPrefix "10.0.0.0/24" -ServiceEndpoint "Microsoft.Storage" \
-| Set-AzVirtualNetwork
-
-$subnet = Get-AzVirtualNetwork -ResourceGroupName "RG01" -Name "VNET01"
-Get-AzVirtualNetworkSubnetConfig -Name "VSUBNET01"
-
-Add-AzStorageAccountNetworkRule -ResourceGroupName "RG01" \
-    -Name "storage01" -VirtualNetworkResourceId $subnet.Id
-
-Update-AzStorageAccountNetworkRuleSet -ResourceGroupName "RG01" \
-    -Name "storage01" -Bypass AzureServices
-```
-
-You should use `Microsoft.Storage` as the service endpoint. Using the `Set-AzVirtualNetworkSubnetConfig` cmdlet enables the service endpoint on the subnet `VSUBNET01` for a storage account. This will allow connections to the virtual subnet from the storage account. This cmdlet makes modifications only to the memory representation of the virtual network. You need to run `Set-AzVirtualNetwork` to make the changes persistent.
-
-You should use the `Add-AzStorageAccountNetworkRule` cmdlet to add a firewall exception on the `NetworkRule` property in the storage account. This will allow communication from the virtual subnet to the storage account.
-
-You should use the `Update-AzStorageAccountNetworkRuleSet` cmdlet. This cmdlet also updates the `NetworkRule` property. It allows you to modify the `NetworkRule` property to allow other Azure services, like Backup or Event Hubs, to have access to the storage account.
-
-You should use `AzureServices` for the `-Bypass` parameter. This way, you instruct the `Update-AzStorageAccountNetworkRuleSet` cmdlet to allow connections from other Azure services. Allowed values are `AzureServices`, `Metrics`, `Logging`, and `None`.
-
-You should not use the `Set-AzStorageAccount` cmdlet. You can use this cmdlet to modify a storage account, but not the `NetworkRule` property of the storage account. You typically use this cmdlet when you want to set a tag to a storage account, update a customer domain, or update the type of the account.
-
-You should not use the `Remove-AzStorageAccountNetworkRuleSet` cmdlet. You use this cmdlet to remove a `NetworkRule` property from the storage account. In this scenario, you need to add and modify a new network rule, not remove it.
-
-You should not use the `Logging`, `None`, or `Metrics` values. These are valid for the `-Bypass` parameter for `Update-AzStorageAccountNetworkRuleSet`. Use the `None` value when you want to remove the access to all Azure services, including monitoring and logging services. Use the `Metrics` or `Logging` values when you want to allow access to monitoring or logging Azure Services respectively.
-
-**References**:  
-
-* [Azure Storage firewall rules](https://learn.microsoft.com/en-us/azure/storage/common/storage-network-security)
-* [Update-AzStorageAccountNetworkRuleSet](https://learn.microsoft.com/en-us/powershell/module/az.storage/update-azstorageaccountnetworkruleset?view=azps-15.4.0&viewFallbackFrom=azps-2.6.0)
-* [Add-AzStorageAccountNetworkRule](https://learn.microsoft.com/en-us/powershell/module/az.storage/add-azstorageaccountnetworkrule?view=azps-15.4.0)
-
-</details>
-
----
-
-#### Shared Access Signature (SAS) practices
-
-**Domain:** Implement and Manage Storage
-**Skill:** Configure access to storage
-**Task:** Create and use shared access signature (SAS) tokens
-
-Your company is developing a .NET application that stores part of the information in an Azure Storage account. The application will be installed on end users' computers.
-
-You want to ensure that the information stored in the storage account is accessed in a secure way, so you ask the developers to use a shared access signature (SAS) when accessing said information. You want to make the required configurations on the storage account to follow security best practices and enable access to the account with immediate effect.
-
-For each of the following statements, select Yes if the statement is true. Otherwise, select No.
-
-| STATEMENT | YES | NO |
-|-----------|-----|----|
-| You should configure a stored access policy. | ☐ | ☐ |
-| You should set the shared access signature (SAS) start time to now. | ☐ | ☐ |
-| You should validate data that has been written using a SAS. | ☐ | ☐ |
-| One option for revoking a SAS is by deleting a stored access policy. | ☐ | ☐ |
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-11-04-16-22.png' width=700>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-You can configure a stored access policy. When you use a shared access signature (SAS), you have two different options. You can either use an ad-hoc SAS or configure a stored access policy. By using an ad-hoc SAS, you specify the start time, expiration time, and permissions in the Uniform Resource Identifier (URI). If someone copies this URI, they will have the same level of access as the corresponding user. This means that this type of SAS can be used by anyone in the world. By configuring a stored access policy, you define the start time, expiration time, and permissions in the policy and then associate a SAS with that policy. You can associate more than one SAS with the same policy.
-
-You should not set the SAS start time to now. When you set the start time of a SAS to now, there can be slight differences in the clocks of the servers that host the storage account. These differences could lead to an access problem for a few minutes after the configuration. If you need your SAS to be available as soon as possible, you should set the start time to 15 minutes before the current time, or you can just not set the start time. Not setting the start time parameter means that the SAS will be active immediately.
-
-You should validate data that has been written using a SAS. When the user uses a SAS, the information they write to the storage account can cause problems, such as communication issues or corruption. Because of this, it is a best practice to validate the data written to the storage account after it is written and before the information is used by any other service or application.
-
-You can revoke a SAS by deleting a stored access policy. If you associate a SAS with a stored access policy, the start time, expiration time, and permissions are inherited from the policy. If you remove the policy, you are invalidating the SAS, thus making it unusable. Keep in mind that if you remove a stored access policy with an associated SAS and then create another stored access policy with the exact same name as the original policy, the associated SAS will be enabled again.
-
-<img src='.img/2026-03-11-04-19-52.png' width=600>
-
-<img src='.img/2026-03-11-04-20-50.png' width=600>
-
-<img src='.img/2026-03-11-04-22-57.png' width=600>
-
-References
-
-* [Grant limited access to Azure Storage resources using shared access signatures (SAS)](https://learn.microsoft.com/en-us/azure/storage/common/storage-sas-overview)
-* [Create a stored access policy](https://learn.microsoft.com/en-us/azure/storage/common/storage-stored-access-policy-define-dotnet?toc=%2Fazure%2Fstorage%2Fblobs%2Ftoc.json&bc=%2Fazure%2Fstorage%2Fblobs%2Fbreadcrumb%2Ftoc.json)
 
 </details>
 
@@ -2096,6 +2097,71 @@ In the fourth scenario, you would have connection failure with read, write, and 
 
 ### Automate deployment of resources by using ARM templates or Bicep files
 
+#### Case Study — Solution Evaluation
+
+**Domain:** Deploy and Manage Azure Compute Resources
+**Skill:** Automate deployment of resources by using ARM templates or Bicep files
+**Task:** Deploy resources by using an ARM template or a Bicep file
+
+*Case Study — Solution Evaluation*
+
+This case study contains a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.
+
+You have an Azure resource group named `RG1`. `RG1` contains a Linux virtual machine (VM) named `VM1`.
+
+You need to automate the deployment of 20 additional Linux VMs. The new VMs should be based upon `VM1`'s configuration.
+
+Does this solution meet the goal?
+
+| Solution | Yes | No |
+|----------|-----|----|
+| 1. From the virtual machine's Export Template settings blade, you click Deploy and edit the parameters. | ☐ | ☐ |
+| 2. You store the Linux VM properties in a template and deploy the additional VMs by editing the template parameter values for each additional VM. | ☐ | ☐ |
+| 3. From the resource group's Policies blade, you click Assign policy. | ☐ | ☐ |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-12-03-58-37.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+Solution 1 Explanation:
+
+This solution does not meet the goal. Every deployment in Azure is described in a template in JavaScript Object Notation (JSON) format. You can access the underlying template from the Export Template settings blade of the VM resource, and then deploy a single new instance of a resource by modifying the template parameters. However, you would need to do this 20 times in order to create 20 VMs, and therefore it is not an automatic process.
+
+Solution 2 Explanation:
+
+This solution meets the goal. The Templates blade in the Azure portal enables you to store JavaScript Object Notation (JSON) documents that automate Azure resource deployment. In this case, to automate the deployment of 20 additional Linux VMs based on `VM1`'s configuration, you can use an Azure Resource Manager (ARM) template. Steps:
+
+1. Export `VM1`'s configuration by using **Export template** in the portal to get the ARM template for the VM.
+2. Modify the exported ARM template to introduce parameters for items that will vary between VMs (for example, VM name, IP assignment, and any unique identifiers).
+3. Create a parameter file (`parameters.json`) that defines the values for the 20 new VMs (names, sizes, and other settings).
+4. Deploy the template with the parameter file using CLI or PowerShell, for example:
+
+```powershell
+az deployment group create --resource-group MyResourceGroup --template-file ./template.json --parameters @parameters.json
+```
+
+5. Automate the process by scripting updates to the parameter file and running the deployment in a loop. For example, a simple shell loop can iterate and deploy multiple parameter sets.
+
+Solution 3 Explanation:
+
+This solution does not meet the goal. To automate the deployment of the 20 additional VMs, you should access the virtual machine's underlying JSON template and deploy the new resources by using the template and custom deployment parameters. Azure Policy is a governance product that enforces rules (for example, allowed regions or VM types) and helps ensure compliance, but it does not perform bulk VM provisioning based on an existing VM's configuration.
+
+References
+
+* [Export an Azure Resource Manager template from an existing resource](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/export-template-portal)
+* [Deploy resources with ARM templates](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/deploy-templates-azure-cli)
+* [Azure Policy overview](https://learn.microsoft.com/en-us/azure/governance/policy/overview)
+
+</details>
+
+---
+
 #### Export ARM Template
 
 **Domain:** Deploy and Manage Azure Compute Resources
@@ -2201,71 +2267,6 @@ You should not use the `New-AzResourceGroup` cmdlet with the `-Location` paramet
 - [Set resource location in ARM template](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/resource-location?tabs=azure-powershell)
 - [Understand the structure and syntax of ARM templates](https://learn.microsoft.com/azure/azure-resource-manager/templates/syntax)
 - [Deploy resources with ARM templates and Azure PowerShell](https://learn.microsoft.com/azure/azure-resource-manager/templates/deploy-powershell)
-
-</details>
-
----
-
-#### Case Study — Solution Evaluation
-
-**Domain:** Deploy and Manage Azure Compute Resources
-**Skill:** Automate deployment of resources by using ARM templates or Bicep files
-**Task:** Deploy resources by using an ARM template or a Bicep file
-
-*Case Study — Solution Evaluation*
-
-This case study contains a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.
-
-You have an Azure resource group named `RG1`. `RG1` contains a Linux virtual machine (VM) named `VM1`.
-
-You need to automate the deployment of 20 additional Linux VMs. The new VMs should be based upon `VM1`'s configuration.
-
-Does this solution meet the goal?
-
-| Solution | Yes | No |
-|----------|-----|----|
-| 1. From the virtual machine's Export Template settings blade, you click Deploy and edit the parameters. | ☐ | ☐ |
-| 2. You store the Linux VM properties in a template and deploy the additional VMs by editing the template parameter values for each additional VM. | ☐ | ☐ |
-| 3. From the resource group's Policies blade, you click Assign policy. | ☐ | ☐ |
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-12-03-58-37.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-Solution 1 Explanation:
-
-This solution does not meet the goal. Every deployment in Azure is described in a template in JavaScript Object Notation (JSON) format. You can access the underlying template from the Export Template settings blade of the VM resource, and then deploy a single new instance of a resource by modifying the template parameters. However, you would need to do this 20 times in order to create 20 VMs, and therefore it is not an automatic process.
-
-Solution 2 Explanation:
-
-This solution meets the goal. The Templates blade in the Azure portal enables you to store JavaScript Object Notation (JSON) documents that automate Azure resource deployment. In this case, to automate the deployment of 20 additional Linux VMs based on `VM1`'s configuration, you can use an Azure Resource Manager (ARM) template. Steps:
-
-1. Export `VM1`'s configuration by using **Export template** in the portal to get the ARM template for the VM.
-2. Modify the exported ARM template to introduce parameters for items that will vary between VMs (for example, VM name, IP assignment, and any unique identifiers).
-3. Create a parameter file (`parameters.json`) that defines the values for the 20 new VMs (names, sizes, and other settings).
-4. Deploy the template with the parameter file using CLI or PowerShell, for example:
-
-```powershell
-az deployment group create --resource-group MyResourceGroup --template-file ./template.json --parameters @parameters.json
-```
-
-5. Automate the process by scripting updates to the parameter file and running the deployment in a loop. For example, a simple shell loop can iterate and deploy multiple parameter sets.
-
-Solution 3 Explanation:
-
-This solution does not meet the goal. To automate the deployment of the 20 additional VMs, you should access the virtual machine's underlying JSON template and deploy the new resources by using the template and custom deployment parameters. Azure Policy is a governance product that enforces rules (for example, allowed regions or VM types) and helps ensure compliance, but it does not perform bulk VM provisioning based on an existing VM's configuration.
-
-References
-
-* [Export an Azure Resource Manager template from an existing resource](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/export-template-portal)
-* [Deploy resources with ARM templates](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/deploy-templates-azure-cli)
-* [Azure Policy overview](https://learn.microsoft.com/en-us/azure/governance/policy/overview)
 
 </details>
 
@@ -3089,7 +3090,138 @@ References
 
 ---
 
-## Implement and manage virtual networking
+## Implement and Manage Virtual Networking
+
+### Configure and manage virtual networks in Azure
+
+#### Configure Layered Network Security
+
+**Domain:** Implement and Manage Virtual Networking
+**Skill:** Configure and manage virtual networks in Azure
+**Task:**
+
+- Create and configure virtual networks and subnets
+- Configure service endpoints for Azure PaaS
+
+Your company is planning to deploy a new application in its Azure subscription. You are asked to configure the required infrastructure for the new application.
+
+The new application must be deployed in a layered infrastructure. This infrastructure consists of the following layers:
+
+- Front-end servers
+- Back-end servers
+- Database
+
+The frontend and backend layers will use Azure virtual machines (VMs). The database layer will be deployed using Azure SQL Database.
+
+You start configuring the networking infrastructure. You need to ensure that you can apply security filtering on each layer independently. Your solution should require the minimum administrative effort.
+
+Which four actions should you perform in sequence? To answer, move the appropriate actions from the list of possible actions to the answer area and arrange them in the correct order.
+
+A. Create a resource group.  
+B. Create a single virtual network (VNet).  
+C. Create two subnets.  
+D. Create three subnets.  
+E. Create a virtual network (VNet) for each layer.  
+F. Configure peering on each virtual network (VNet).  
+G. Enable service endpoints for the subnets.  
+
+Select and order 4:
+
+| Step | Action |
+|------|--------|
+| 1 | |
+| 2 | |
+| 3 | |
+| 4 | |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-12-04-36-53.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**You should perform the following actions in order:**
+
+1. **Create a resource group**
+2. **Create a single virtual network (VNet).**
+3. **Create two subnets.**
+4. **Enable service endpoints for the subnets.**
+
+**First,** you should create a new resource group. Because you are deploying a whole new infrastructure for this application, you should create a new resource group and put all new resources in this new resource group.
+
+**Next,** you should create a single VNet. This VNet will provide connectivity between all the elements of the application.
+
+**Next,** you should create two subnets in the new VNet. You should assign a subnet for the front-end layer, and another for the back-end layer. You should not create a subnet for the Azure SQL Database, because this is deployed in its own internal network that you cannot customize. You can also create a network security group (NSG) for each subnet so that you can manage security on each subnet independently.
+
+**Finally,** you should enable service endpoints for the subnets within the VNet. You should also enable the service endpoint in the Azure SQL Database. This way, your database can directly connect to VMs deployed in the front-end and back-end subnets, and vice versa.
+
+**You should not configure peering on each VNet.** VNet peering allows you to connect different VNets so resources on each VNet can communicate with each other. In this scenario, there is no need to configure peering because creating a single VNet satisfies your communication needs.
+
+**You should not create a VNet for each layer.** Although creating a VNet for each layer could solve your communication requirements, this requires much more effort than using a single VNet. Each VNet still requires at least one subnet. Creating multiple VNets for this scenario would also require the configuration of peering between each VNet. There is no need to configure a VNet for the data layer because you will use Azure SQL Database, which does not require a VNet.
+
+**You should not create three subnets.** You need to configure a subnet for the front-end layer and another for the back-end layer. There is no need to configure an additional subnet for the data layer because Azure SQL Database has all its networking requirements configured internally.
+
+<details>
+<summary><b>More Details:</b></summary>
+
+> Help me understand here, is Microsoft recommending private endpoints over service endpoints? Give me some historical context.
+
+<img src='.img/2026-03-12-05-00-39.png' width=600>
+
+Yes. In that note, Microsoft is signaling a **preference for Private Link/private endpoints over service endpoints** for new designs where the goal is the strongest private access model. The wording is explicit: the current service endpoints article says Microsoft recommends **Azure Private Link and private endpoints** for secure and private access. ([Microsoft Learn][1])
+
+What that means in practice:
+
+* **Service endpoints**: your workload stays in your subnet, but it still connects to the Azure service’s **public endpoint**. The traffic is optimized onto the Microsoft backbone, and the service can recognize the source subnet/VNet. Microsoft’s docs say DNS still resolves to the service’s **public IP** with service endpoints. ([Microsoft Learn][1])
+* **Private endpoints**: the Azure service is exposed to you through a **private IP inside your VNet**. Microsoft describes this as “bringing the service into your virtual network.” This is the more isolated model and is what enables “private-only” patterns when paired with disabling public access. ([Microsoft Learn][2])
+
+So the recommendation is:
+
+* **Use private endpoints when you want true private access, tighter isolation, and the option to shut off public exposure.**
+* **Use service endpoints when you want something simpler and lighter-weight, and public endpoints are still acceptable.** ([Microsoft Learn][3])
+
+Historical context:
+
+**1. Service endpoints came first as the earlier VNet-to-PaaS security model.**
+Microsoft’s own comparison blog describes service endpoints as the **first** approach used to lock down multi-tenant Azure services. They solved an early problem: “How do I let only my VNet reach this PaaS service without opening it broadly to the internet?” But the service still remained outside your VNet, on a public endpoint. ([TECHCOMMUNITY.MICROSOFT.COM][4])
+
+**2. Private Link/private endpoints came later to address stricter isolation requirements.**
+As customers wanted stronger controls, reduced data-exfiltration risk, private-only access from on-premises, and the ability to avoid public endpoints entirely, Microsoft introduced Private Link. The private endpoint model assigns a private IP from your VNet and routes traffic privately over Microsoft’s backbone. ([Microsoft Learn][5])
+
+**3. The modern guidance shifted accordingly.**
+Microsoft still documents and supports service endpoints, but their newer guidance increasingly points customers toward private endpoints when feasible, especially for security-sensitive architectures. That is why the service endpoints doc now carries that recommendation box. ([Microsoft Learn][1])
+
+The easiest mental model is:
+
+* **Service endpoint = private subnet talking to a public service endpoint**
+* **Private endpoint = private subnet talking to a private IP for that service** ([Microsoft Learn][1])
+
+So, your screenshot should be read as:
+
+**“Service endpoints still exist and still work, but Microsoft generally prefers private endpoints for secure private access going forward.”** ([Microsoft Learn][1])
+
+[1]: https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-service-endpoints-overview?utm_source=chatgpt.com "Azure virtual network service endpoints"
+[2]: https://learn.microsoft.com/en-us/azure/private-link/private-endpoint-overview?utm_source=chatgpt.com "What is a private endpoint? - Azure Private Link"
+[3]: https://learn.microsoft.com/en-us/azure/private-link/private-link-faq?utm_source=chatgpt.com "Azure Private Link frequently asked questions (FAQ)"
+[4]: https://techcommunity.microsoft.com/blog/coreinfrastructureandsecurityblog/service-endpoints-vs-private-endpoints/3962134?utm_source=chatgpt.com "Service Endpoints vs Private Endpoints"
+[5]: https://learn.microsoft.com/en-us/azure/private-link/private-link-overview?utm_source=chatgpt.com "What is Azure Private Link?"
+
+</details>
+
+**References**:  
+
+<https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-service-endpoints-overview>
+<https://learn.microsoft.com/en-us/azure/app-service/tutorial-secure-ntier-app>
+
+</details>
+
+▶ Related Lab: []()
+
+---
 
 ### Configure secure access to virtual networks
 
@@ -3173,6 +3305,70 @@ Disabling privateLinkServiceNetworkPolicies is a per‑private‑IP (per Private
 ---
 
 ### Configure name resolution and load balancing
+
+#### Configure DNS Records for App Service
+
+**Domain:** Implement and manage virtual networking
+**Skill:** Configure name resolution and load balancing
+**Task:** Configure Azure DNS
+
+Your company plans to release a new web application called 'appilcations'. This application is deployed by using an App Service in Azure and will be available to users of the company1.com domain. You have already purchased the company1.com domain name.
+
+You configure the company1.com Azure DNS zone and delegate it to Azure DNS.
+
+You need to ensure that web application can be accessed by using the company1.com domain name.
+
+You decide to use PowerShell to accomplish this task.
+
+How should you complete the command? To answer, select the appropriate options from the drop-down menus.
+
+```powershell
+New-AzDnsRecordSet -Name ___[1]___ -RecordType ___[2]___ `
+  -ZoneName "company1.com" -ResourceGroupName "APP-RG" -Ttl 600 `
+  -DnsRecords (New-AzDnsRecordConfig `
+  -IPv4Address "<IP address>")
+
+New-AzDnsRecordSet -ZoneName company1.com -ResourceGroupName APP-RG `
+  -Name ___[3]___ -RecordType ___[4]___ -Ttl 600 `
+  -DnsRecords (New-AzDnsRecordConfig -Value "appilcations.azurewebsites.net")
+```
+
+Drop-Down Options:
+
+<!-- Dropdown options not yet provided. Paste screenshots of each expanded drop-down to populate. -->
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-03-03-06-02.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+**Why the selected answers are correct**  
+Create an A record named "@" with RecordType "A" to map the root of company1.com to the App Service's IPv4 address. Create a TXT record named "@" with RecordType "TXT" and value "appilcations.azurewebsites.net" so App Service can verify domain ownership and configure the custom domain settings.
+
+**Why other options are incorrect**  
+
+- CNAME/CNAME-like approaches are wrong for the root (@"") because a CNAME cannot coexist with other records at the zone apex and cannot point to an IPv4 address.  
+- AAAA is for IPv6 addresses; the App Service verification here requires an IPv4 A record.  
+- Using literal names like "company1.com", "www.company1.com", or "appilcations.azurewebsites.net" as the Name value would either be redundant, create the wrong record target, or prevent apex records from working as intended.
+
+**Key takeaway**  
+Use an A record (Name "@", RecordType "A") for the IPv4 mapping of the root domain and a TXT record (Name "@", RecordType "TXT") for App Service domain verification; avoid CNAME at the zone apex and do not use AAAA unless you have an IPv6 IP.
+
+<img src='.img/2026-03-03-03-19-52.png' width=600>
+
+<img src='.img/2026-03-03-03-20-54.png' width=600>
+
+References
+
+* [DNS Web Sites Custom Domain](https://learn.microsoft.com/en-us/azure/dns/dns-web-sites-custom-domain?tabs=azure-portal)
+
+</details>
+
+---
 
 #### Configure Standard Load Balancer Outbound Traffic and IP Allocation
 
@@ -3387,70 +3583,6 @@ References
 
 - [Instance Metadata Service](https://learn.microsoft.com/en-us/azure/virtual-machines/instance-metadata-service?tabs=windows)
 - [Load Balancer SKUs](https://learn.microsoft.com/en-us/azure/load-balancer/skus)
-
-</details>
-
----
-
-#### Configure DNS Records for App Service
-
-**Domain:** Implement and manage virtual networking
-**Skill:** Configure name resolution and load balancing
-**Task:** Configure Azure DNS
-
-Your company plans to release a new web application called 'appilcations'. This application is deployed by using an App Service in Azure and will be available to users of the company1.com domain. You have already purchased the company1.com domain name.
-
-You configure the company1.com Azure DNS zone and delegate it to Azure DNS.
-
-You need to ensure that web application can be accessed by using the company1.com domain name.
-
-You decide to use PowerShell to accomplish this task.
-
-How should you complete the command? To answer, select the appropriate options from the drop-down menus.
-
-```powershell
-New-AzDnsRecordSet -Name ___[1]___ -RecordType ___[2]___ `
-  -ZoneName "company1.com" -ResourceGroupName "APP-RG" -Ttl 600 `
-  -DnsRecords (New-AzDnsRecordConfig `
-  -IPv4Address "<IP address>")
-
-New-AzDnsRecordSet -ZoneName company1.com -ResourceGroupName APP-RG `
-  -Name ___[3]___ -RecordType ___[4]___ -Ttl 600 `
-  -DnsRecords (New-AzDnsRecordConfig -Value "appilcations.azurewebsites.net")
-```
-
-Drop-Down Options:
-
-<!-- Dropdown options not yet provided. Paste screenshots of each expanded drop-down to populate. -->
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-03-03-06-02.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-**Why the selected answers are correct**  
-Create an A record named "@" with RecordType "A" to map the root of company1.com to the App Service's IPv4 address. Create a TXT record named "@" with RecordType "TXT" and value "appilcations.azurewebsites.net" so App Service can verify domain ownership and configure the custom domain settings.
-
-**Why other options are incorrect**  
-
-- CNAME/CNAME-like approaches are wrong for the root (@"") because a CNAME cannot coexist with other records at the zone apex and cannot point to an IPv4 address.  
-- AAAA is for IPv6 addresses; the App Service verification here requires an IPv4 A record.  
-- Using literal names like "company1.com", "www.company1.com", or "appilcations.azurewebsites.net" as the Name value would either be redundant, create the wrong record target, or prevent apex records from working as intended.
-
-**Key takeaway**  
-Use an A record (Name "@", RecordType "A") for the IPv4 mapping of the root domain and a TXT record (Name "@", RecordType "TXT") for App Service domain verification; avoid CNAME at the zone apex and do not use AAAA unless you have an IPv6 IP.
-
-<img src='.img/2026-03-03-03-19-52.png' width=600>
-
-<img src='.img/2026-03-03-03-20-54.png' width=600>
-
-References
-
-* [DNS Web Sites Custom Domain](https://learn.microsoft.com/en-us/azure/dns/dns-web-sites-custom-domain?tabs=azure-portal)
 
 </details>
 
@@ -4043,83 +4175,3 @@ For Azure IaaS VMs protected by a Recovery Services vault, **soft delete provide
 </details>
 
 ---
-
-#### Configure Layered Network Security
-
-**Domain:** Implement and Manage Virtual Networking
-**Skill:** Configure and manage virtual networks in Azure
-**Task:**
-
-- Create and configure virtual networks and subnets
-- Configure service endpoints for Azure PaaS
-
-Your company is planning to deploy a new application in its Azure subscription. You are asked to configure the required infrastructure for the new application.
-
-The new application must be deployed in a layered infrastructure. This infrastructure consists of the following layers:
-
-- Front-end servers
-- Back-end servers
-- Database
-
-The frontend and backend layers will use Azure virtual machines (VMs). The database layer will be deployed using Azure SQL Database.
-
-You start configuring the networking infrastructure. You need to ensure that you can apply security filtering on each layer independently. Your solution should require the minimum administrative effort.
-
-Which four actions should you perform in sequence? To answer, move the appropriate actions from the list of possible actions to the answer area and arrange them in the correct order.
-
-A. Create a resource group.  
-B. Create a single virtual network (VNet).  
-C. Create two subnets.  
-D. Create three subnets.  
-E. Create a virtual network (VNet) for each layer.  
-F. Configure peering on each virtual network (VNet).  
-G. Enable service endpoints for the subnets.  
-
-Select and order 4:
-
-| Step | Action |
-|------|--------|
-| 1 | |
-| 2 | |
-| 3 | |
-| 4 | |
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-12-04-36-53.png' width=600>
-
-</details>
-
-<details open>
-<summary>💡 Click to expand explanation</summary>
-
-**You should perform the following actions in order:**
-
-1. **Create a resource group**
-2. **Create a single virtual network (VNet).**
-3. **Create two subnets.**
-4. **Enable service endpoints for the subnets.**
-
-**First,** you should create a new resource group. Because you are deploying a whole new infrastructure for this application, you should create a new resource group and put all new resources in this new resource group.
-
-**Next,** you should create a single VNet. This VNet will provide connectivity between all the elements of the application.
-
-**Next,** you should create two subnets in the new VNet. You should assign a subnet for the front-end layer, and another for the back-end layer. You should not create a subnet for the Azure SQL Database, because this is deployed in its own internal network that you cannot customize. You can also create a network security group (NSG) for each subnet so that you can manage security on each subnet independently.
-
-**Finally,** you should enable service endpoints for the subnets within the VNet. You should also enable the service endpoint in the Azure SQL Database. This way, your database can directly connect to VMs deployed in the front-end and back-end subnets, and vice versa.
-
-**You should not configure peering on each VNet.** VNet peering allows you to connect different VNets so resources on each VNet can communicate with each other. In this scenario, there is no need to configure peering because creating a single VNet satisfies your communication needs.
-
-**You should not create a VNet for each layer.** Although creating a VNet for each layer could solve your communication requirements, this requires much more effort than using a single VNet. Each VNet still requires at least one subnet. Creating multiple VNets for this scenario would also require the configuration of peering between each VNet. There is no need to configure a VNet for the data layer because you will use Azure SQL Database, which does not require a VNet.
-
-**You should not create three subnets.** You need to configure a subnet for the front-end layer and another for the back-end layer. There is no need to configure an additional subnet for the data layer because Azure SQL Database has all its networking requirements configured internally.
-
-**References**:  
-
-<https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-service-endpoints-overview>
-<https://learn.microsoft.com/en-us/azure/app-service/tutorial-secure-ntier-app>
-
-</details>
-
-▶ Related Lab: []()

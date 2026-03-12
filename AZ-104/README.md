@@ -130,7 +130,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 
 | Skill | Task | Qs | Labs |
 | :--- | :--- | -: | -: |
-| Configure and manage virtual networks in Azure | Create and configure virtual networks and subnets | 0 | 0 |
+| Configure and manage virtual networks in Azure | Create and configure virtual networks and subnets | 1 | 0 |
 |  | Create and configure virtual network peering | 0 | 0 |
 |  | Configure public IP addresses | 0 | 0 |
 |  | Configure user-defined network routes | 0 | 0 |
@@ -138,7 +138,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 | Configure secure access to virtual networks | Create and configure NSGs and application security groups | 0 | 0 |
 |  | Evaluate effective security rules in NSGs | 0 | 0 |
 |  | Implement Azure Bastion | 0 | 0 |
-|  | Configure service endpoints for Azure PaaS | 0 | 0 |
+|  | Configure service endpoints for Azure PaaS | 1 | 0 |
 |  | Configure private endpoints for Azure PaaS | 1 | 1 |
 | Configure name resolution and load balancing | Configure Azure DNS | 1 | 0 |
 |  | Configure an internal or public load balancer | 1 | 1 |
