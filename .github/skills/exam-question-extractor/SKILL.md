@@ -417,6 +417,8 @@ Rules:
 
 **Answered questions:** Invoke the **exam-question-explainer** skill with the same screenshot(s) and insert its output between the opening and closing tags. Do not leave the block empty when an answer state is detected.
 
+**Explanation formatting:** All section topic labels inside the explanation (for example, **Solution 1 Explanation:**, **References**, **Key takeaway**) must be **bold** — wrapped in `**…**`. No plain-text section labels are allowed.
+
 ---
 
 ### Related Lab Line

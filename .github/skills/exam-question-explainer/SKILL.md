@@ -59,7 +59,7 @@ If **no official explanation is provided**, rely on exam-aligned reasoning as us
 - Call out common misconceptions or traps reflected in incorrect options.
 - Do **not** restate the full question unless necessary for clarity.
 - Do **not** include any markdown headings (for example, `##`).
-- Use **bold text** to structure sections (for example: **Why the selected answer is wrong**, **Why the selected answer is correct**, **Why other options are incorrect**, **Key takeaway**).
+- Use **bold text** for **every** section topic label — no exceptions. Every label that introduces a new topic or section must be wrapped in `**…**`. Examples: **Why the selected answer is wrong**, **Why the selected answer is correct**, **Why other options are incorrect**, **Key takeaway**, **Solution 1 Explanation:**, **Solution 2 Explanation:**, **References**.
 - Wrap command names, cmdlet names, CLI commands, and parameter names in inline code (e.g., `New-AzManagementGroupSubscription`, `Remove-AzResourceLock`, `--resource-group`).
 - Wrap referenced Azure resource names, subscription names, resource group names, storage account names, VM names, and other named objects in inline code (e.g., `rgmarketing`, `sub020`, `STA01`, `VM1`).
 
