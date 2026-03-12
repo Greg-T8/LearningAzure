@@ -21,12 +21,12 @@ Accounts for questions missed or unsure about in the practice exams.
     * [Azure Policy Not Functioning](#azure-policy-not-functioning)
 * [Implement and Manage Storage](#implement-and-manage-storage)
   * [Configure access to storage](#configure-access-to-storage)
+    * [Provide least-privilege access to a report](#provide-least-privilege-access-to-a-report)
+    * [Modify Stored Access Policy](#modify-stored-access-policy)
+    * [Diagnose Storage Explorer Permission Errors](#diagnose-storage-explorer-permission-errors)
     * [Shared Access Signature (SAS) practices](#shared-access-signature-sas-practices)
     * [Configure storage account network access](#configure-storage-account-network-access)
     * [Configure AzCopy Authentication for Blob and File Storage](#configure-azcopy-authentication-for-blob-and-file-storage)
-    * [Diagnose Storage Explorer Permission Errors](#diagnose-storage-explorer-permission-errors)
-    * [Modify Stored Access Policy](#modify-stored-access-policy)
-    * [Provide least-privilege access to a report](#provide-least-privilege-access-to-a-report)
   * [Configure and manage storage accounts](#configure-and-manage-storage-accounts)
     * [Configure Object Replication Between Storage Accounts](#configure-object-replication-between-storage-accounts)
     * [Rotate compromised storage account keys](#rotate-compromised-storage-account-keys)
@@ -40,9 +40,9 @@ Accounts for questions missed or unsure about in the practice exams.
     * [SAS key configuration scenarios](#sas-key-configuration-scenarios)
 * [Deploy and Manage Azure Compute Resources](#deploy-and-manage-azure-compute-resources)
   * [Automate deployment of resources by using ARM templates or Bicep files](#automate-deployment-of-resources-by-using-arm-templates-or-bicep-files)
-    * [Case Study — Solution Evaluation](#case-study-solution-evaluation)
-    * [Export ARM Template](#export-arm-template)
     * [Edit ARM Template to Inherit Resource Group Location](#edit-arm-template-to-inherit-resource-group-location)
+    * [Export ARM Template](#export-arm-template)
+    * [Case Study — Solution Evaluation](#case-study-solution-evaluation)
   * [Create and configure virtual machines](#create-and-configure-virtual-machines)
     * [VM Resize Failure Cause](#vm-resize-failure-cause)
     * [Encrypt VM Disk With Key Vault](#encrypt-vm-disk-with-key-vault)
@@ -60,6 +60,7 @@ Accounts for questions missed or unsure about in the practice exams.
     * [Resource dependencies in Bicep](#resource-dependencies-in-bicep)
 * [Implement and Manage Virtual Networking](#implement-and-manage-virtual-networking)
   * [Configure and manage virtual networks in Azure](#configure-and-manage-virtual-networks-in-azure)
+    * [VNet Peering with ExpressRoute](#vnet-peering-with-expressroute)
     * [Configure Layered Network Security](#configure-layered-network-security)
   * [Configure secure access to virtual networks](#configure-secure-access-to-virtual-networks)
     * [Configure Private Link Service Source IP](#configure-private-link-service-source-ip)
@@ -78,8 +79,8 @@ Accounts for questions missed or unsure about in the practice exams.
     * [Diagnose Network Watcher Tool for Web Server Packet Flow](#diagnose-network-watcher-tool-for-web-server-packet-flow)
     * [Configure Azure Monitor Alert Notification Rate Limits](#configure-azure-monitor-alert-notification-rate-limits)
   * [Implement backup and recovery](#implement-backup-and-recovery)
-    * [Recover Configuration File from Azure VM Backup](#recover-configuration-file-from-azure-vm-backup)
     * [Recover Azure VM from Deleted Backup](#recover-azure-vm-from-deleted-backup)
+    * [Recover Configuration File from Azure VM Backup](#recover-configuration-file-from-azure-vm-backup)
 
 ---
 
@@ -902,6 +903,276 @@ References
 
 ### Configure access to storage
 
+#### Provide least-privilege access to a report
+
+**Domain:** Implement and Manage Storage
+**Skill:** Configure access to storage
+**Task:** Create and use shared access signature (SAS) tokens
+
+You create a binary large object (blob) storage account named `reportstorage99` that contains archival reports from past corporate board meetings.
+
+A board member requests access to a specific report. The member does not have a Microsoft Entra user account. Moreover, they have access only to a web browser on his Google Chromebook device.
+
+To fulfill the request, you will provide the board member with least-privilege access to the requested report while maintaining security compliance and minimizing administrative overhead.
+
+What should you do?
+
+A. Deploy a point-to-site (P2S) virtual private network (VPN) connection on the board member's Chromebook and grant the board member role-based access control (RBAC) access to the report.  
+B. Generate a shared access signature (SAS) token for the report and share the Uniform Resource Locator (URL) with the board member.  
+C. Copy the report to an Azure File Service share and provide the board member with a PowerShell connection script.  
+D. Create a Microsoft Entra account for the board member and grant him role-based access control (RBAC) access to the storage account.  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-11-04-28-34.png' width=700>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+You should generate a shared access signature (SAS) token for the report and share the Uniform Resource Locator (URL) with the board member. SAS enables you to define time-limited read-only or read-write access to Azure storage account resources. It is important that you set the time restriction properly because the SAS includes no authentication. Any person with access to the URL can access the target resource(s) within the token's lifetime. In this case, you both minimize administrative effort as well as maintain security compliance because the SAS token points only to a single file, not the entire blob container that hosts the requested report.
+
+You should not create a Microsoft Entra account for the board member and grant him role-based access control (RBAC) access to the storage account. First, it requires significant management overhead to create and manage Microsoft Entra accounts, even for external (guest) users. Second, SAS and not RBAC is the way Azure provides screened access to individual storage account resources. You can use RBAC roles only at the storage account scope.
+
+You should not copy the report to an Azure File Service share and provide the board member with a PowerShell connection script. Here you create security and governance problems by creating multiple copies of the source report, as well as producing unnecessary administrative complexity.
+
+You should not deploy a point-to-site (P2S) VPN connection on the board member's Chromebook and grant the board member RBAC access to the report. The scenario stipulates that the board member is limited to using a web browser on his Chromebook. Furthermore, the Azure P2S VPN client is supported only on Windows, macOS, and endorsed Linux distributions. Chrome OS is not supported.
+
+References
+
+* Grant limited access to Azure Storage resources using shared access signatures (SAS)
+
+</details>
+
+---
+
+#### Modify Stored Access Policy
+
+**Domain:** Implement and manage storage
+**Skill:** Configure access to storage
+**Task:** Configure stored access policies
+
+You are an Azure administrator for a manufacturing organization. You are using shared access signature (SAS) to configure control over storage accounts.
+
+You create a stored access policy as an additional level of control over SAS on the server side for file shares.
+
+You need to modify a stored access policy.
+
+What should you do?
+
+A. Execute a Set Share ACL operation with the SMB protocol.  
+B. Execute a Set Table ACL operation.  
+C. Execute a Set Container ACL operation with public read access for blobs only.  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-03-03-53-49.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+In this scenario, you are using a stored access policy that acts as an additional level of control over shared access signature (SAS) on the server side for file shares. The access policy for an SAS consists of the start time, expiry time, and permissions for the signature. To create or modify a stored access policy, call the Set ACL operation for the resource (Set Container ACL, Set Queue ACL, Set Table ACL, or Set Share ACL) with a request body that specifies the terms of the access policy. An important point to note here is that, for a file share, you need to execute a Set Share ACL operation, which only supports the Server Message Block (SMB) protocol as the enabled file share protocol.
+
+You should not execute a Set Table ACL operation. The Set Table ACL operation sets the stored access policies for the table that can be used with SAS. In this scenario, since you want to modify stored access policies for an Azure File share, you need to use the Set Share ACL with SMB.
+
+You should not execute a Set Container ACL operation with public read access for blobs only. The Set Container ACL operation with public read access for blobs only will mean that Blob data within a container could be read via anonymous request, but container data is not available. In this scenario, since you are aiming to modify stored access policies for an Azure File share, you need to use the Set Share ACL with SMB.
+
+References
+
+[Define a stored access policy](https://learn.microsoft.com/en-us/rest/api/storageservices/define-stored-access-policy)
+
+</details>
+
+---
+
+#### Diagnose Storage Explorer Permission Errors
+
+**Domain:** Implement and manage storage
+**Skill:** Configure access to storage
+**Task:** Manage access keys
+
+You have storage accounts in your Azure subscription with blob containers and file shares configured. Some users access these storage accounts using Azure Storage Explorer and are reporting an error when they try to browse the storage account contents.
+
+You need to resolve the issue.
+
+What are two possible reasons why users are getting this error message? Each correct answer presents a complete solution.
+
+A. Your users have the Storage Blob Data Reader role assigned in the storage accounts.  
+B. There is a ReadOnly resource lock configured.  
+C. There is a CanNotDelete resource lock configured.  
+D. Your users have the Read role assigned in the storage accounts.  
+E. Your users have the Storage Blob Data Contributor role assigned in the storage accounts.  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+<img src='.img/2026-01-30-05-46-07.png' width=700>
+
+<img src='.img/2026-02-08-04-07-45.png' width=400>
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+Looking at your selected answers, I can see you've made the same mistake again with this question (which appears to be the same as image 3).
+
+**Your Selected Answers:**
+
+1. ✗ Your users have the Storage Blob Data Reader role assigned in the storage accounts
+2. ✗ Your users have the Storage Blob Data Contributor role assigned in the storage accounts
+
+**The Problem - You're Still Selecting SOLUTIONS Instead of PROBLEMS:**
+
+The error message clearly states:
+> "**Unable to list resources in account due to inadequate permissions**. Permission to list containers or to list account keys is required."
+
+You selected answers that indicate users **already have proper data access roles**. If they had Storage Blob Data Reader or Contributor, they **wouldn't be getting this error** - the problem would already be solved!
+
+**The Correct Answers Should Be:**
+
+1. **Your users have the Read role assigned in the storage accounts** ✓
+   - **This IS a problem**: The generic "Read" role only provides management plane access
+   - It does NOT grant data plane access to browse blob/file contents
+   - Users can see the storage account exists but cannot access the data inside
+
+2. **There is a ReadOnly resource lock configured** ✓
+   - **This IS a problem**: ReadOnly locks can block operations in Storage Explorer
+   - Locks can override permissions and prevent certain actions
+
+**Understanding the Logic:**
+
+**Error exists** = Something is wrong/missing
+
+- ❌ "Users have Storage Blob Data Reader" = No error (they have correct access)
+- ✓ "Users have Read role" = Error! (they lack data plane access)
+- ✓ "ReadOnly lock configured" = Error! (lock blocks operations)
+
+**Key Takeaway:**
+
+When a question asks for "**reasons why users are getting an error**," you need to identify what's **CAUSING the problem** (wrong role, locks), not what would **FIX the problem** (correct roles).
+
+**More Detail:**
+
+Great question! Let me explain how ReadOnly locks interact with Azure Storage Explorer and why they can cause issues.
+
+**What ReadOnly Locks Do:**
+
+**ReadOnly locks** in Azure prevent **any modifications** to a resource, including:
+
+- Changing resource configuration
+- Modifying properties
+- Regenerating access keys
+- Updating firewall rules
+- ANY write operation at the management plane
+
+**How Storage Explorer Accesses Storage:**
+
+Azure Storage Explorer can authenticate and access storage using **multiple methods**:
+
+**1. Account Keys (Management Plane):**
+
+- Storage Explorer attempts to **list and retrieve storage account keys**
+- This is a **write-equivalent operation** (POST request to list keys)
+- ReadOnly lock **BLOCKS** this operation
+- Result: ❌ Access denied
+
+**2. Azure AD / RBAC (Data Plane):**
+
+- Uses your Azure AD identity with data plane roles
+- Directly accesses blobs/files without needing account keys
+- ReadOnly lock does **NOT** block this
+- Result: ✓ Should work
+
+**3. SAS Tokens:**
+
+- Uses pre-generated shared access signatures
+- ReadOnly lock does **NOT** block this
+- Result: ✓ Should work
+
+**Why ReadOnly Locks Cause the Error:**
+
+When Storage Explorer opens and tries to browse a storage account:
+
+```
+1. Storage Explorer connects to storage account
+2. Attempts to list containers/shares
+3. Tries to retrieve account keys (common default method)
+4. POST /listKeys operation is attempted
+5. ReadOnly lock intercepts: "NO MODIFICATIONS ALLOWED"
+6. Error: "Unable to list resources due to inadequate permissions"
+```
+
+**The Confusing Part:**
+
+The error message says "**inadequate permissions**," but it's actually:
+
+- Not about RBAC permissions ✗
+- About the **lock preventing the listKeys operation** ✓
+
+Even if you have **Owner** or **Contributor** role, the ReadOnly lock **overrides** your permissions and blocks management plane operations.
+
+**Visual Representation:**
+
+```
+Without ReadOnly Lock:
+User → Storage Explorer → List Keys API → ✓ Success → Browse Storage
+
+With ReadOnly Lock:
+User → Storage Explorer → List Keys API → ✗ BLOCKED by Lock → Error Message
+```
+
+**How to Verify This is the Issue:**
+
+1. Check if a ReadOnly lock exists:
+
+   ```
+   Storage Account → Locks → See "ReadOnly" lock
+   ```
+
+2. Remove the lock temporarily and test Storage Explorer
+   - If it works now, the lock was the problem
+
+**Solutions When ReadOnly Lock Exists:**
+
+**Option 1: Remove the Lock** (if policy allows)
+
+- Not always possible due to governance requirements
+
+**Option 2: Use Azure AD Authentication**
+
+- In Storage Explorer, explicitly connect using "Azure AD"
+- Assign proper data plane roles (Storage Blob Data Reader)
+- Bypasses the need for account keys
+
+**Option 3: Use SAS Tokens**
+
+- Generate SAS token before the lock was applied
+- Connect to storage using SAS URL
+
+**Option 4: Use Azure Portal**
+
+- Portal has built-in handling for locked resources
+- May provide better error messages
+
+**Key Takeaway:**
+
+ReadOnly locks block the **listKeys operation** that Storage Explorer commonly uses for authentication. While users might have proper RBAC permissions, the lock creates a hard stop at the management plane level, preventing Storage Explorer from retrieving the keys needed to access the data using the default authentication method.
+
+The solution is either:
+
+- Remove the lock, OR
+- Use authentication methods that don't require listing keys (Azure AD, SAS tokens)
+
+</details>
+
+▶ **Related Lab:** [lab-storage-explorer-permissions](/AZ-104/hands-on-labs/storage/lab-storage-explorer-permissions/README.md)
+
+---
+
 #### Shared Access Signature (SAS) practices
 
 **Domain:** Implement and Manage Storage
@@ -1160,276 +1431,6 @@ azcopy copy "source" "https://devstore.file.core.windows.net/share"
 </details>
 
 ▶ **Related Lab:** [lab-azcopy-auth-methods](/AZ-104/hands-on-labs/storage/lab-azcopy-auth-methods/README.md)
-
----
-
-#### Diagnose Storage Explorer Permission Errors
-
-**Domain:** Implement and manage storage
-**Skill:** Configure access to storage
-**Task:** Manage access keys
-
-You have storage accounts in your Azure subscription with blob containers and file shares configured. Some users access these storage accounts using Azure Storage Explorer and are reporting an error when they try to browse the storage account contents.
-
-You need to resolve the issue.
-
-What are two possible reasons why users are getting this error message? Each correct answer presents a complete solution.
-
-A. Your users have the Storage Blob Data Reader role assigned in the storage accounts.  
-B. There is a ReadOnly resource lock configured.  
-C. There is a CanNotDelete resource lock configured.  
-D. Your users have the Read role assigned in the storage accounts.  
-E. Your users have the Storage Blob Data Contributor role assigned in the storage accounts.  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-<img src='.img/2026-01-30-05-46-07.png' width=700>
-
-<img src='.img/2026-02-08-04-07-45.png' width=400>
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-Looking at your selected answers, I can see you've made the same mistake again with this question (which appears to be the same as image 3).
-
-**Your Selected Answers:**
-
-1. ✗ Your users have the Storage Blob Data Reader role assigned in the storage accounts
-2. ✗ Your users have the Storage Blob Data Contributor role assigned in the storage accounts
-
-**The Problem - You're Still Selecting SOLUTIONS Instead of PROBLEMS:**
-
-The error message clearly states:
-> "**Unable to list resources in account due to inadequate permissions**. Permission to list containers or to list account keys is required."
-
-You selected answers that indicate users **already have proper data access roles**. If they had Storage Blob Data Reader or Contributor, they **wouldn't be getting this error** - the problem would already be solved!
-
-**The Correct Answers Should Be:**
-
-1. **Your users have the Read role assigned in the storage accounts** ✓
-   - **This IS a problem**: The generic "Read" role only provides management plane access
-   - It does NOT grant data plane access to browse blob/file contents
-   - Users can see the storage account exists but cannot access the data inside
-
-2. **There is a ReadOnly resource lock configured** ✓
-   - **This IS a problem**: ReadOnly locks can block operations in Storage Explorer
-   - Locks can override permissions and prevent certain actions
-
-**Understanding the Logic:**
-
-**Error exists** = Something is wrong/missing
-
-- ❌ "Users have Storage Blob Data Reader" = No error (they have correct access)
-- ✓ "Users have Read role" = Error! (they lack data plane access)
-- ✓ "ReadOnly lock configured" = Error! (lock blocks operations)
-
-**Key Takeaway:**
-
-When a question asks for "**reasons why users are getting an error**," you need to identify what's **CAUSING the problem** (wrong role, locks), not what would **FIX the problem** (correct roles).
-
-**More Detail:**
-
-Great question! Let me explain how ReadOnly locks interact with Azure Storage Explorer and why they can cause issues.
-
-**What ReadOnly Locks Do:**
-
-**ReadOnly locks** in Azure prevent **any modifications** to a resource, including:
-
-- Changing resource configuration
-- Modifying properties
-- Regenerating access keys
-- Updating firewall rules
-- ANY write operation at the management plane
-
-**How Storage Explorer Accesses Storage:**
-
-Azure Storage Explorer can authenticate and access storage using **multiple methods**:
-
-**1. Account Keys (Management Plane):**
-
-- Storage Explorer attempts to **list and retrieve storage account keys**
-- This is a **write-equivalent operation** (POST request to list keys)
-- ReadOnly lock **BLOCKS** this operation
-- Result: ❌ Access denied
-
-**2. Azure AD / RBAC (Data Plane):**
-
-- Uses your Azure AD identity with data plane roles
-- Directly accesses blobs/files without needing account keys
-- ReadOnly lock does **NOT** block this
-- Result: ✓ Should work
-
-**3. SAS Tokens:**
-
-- Uses pre-generated shared access signatures
-- ReadOnly lock does **NOT** block this
-- Result: ✓ Should work
-
-**Why ReadOnly Locks Cause the Error:**
-
-When Storage Explorer opens and tries to browse a storage account:
-
-```
-1. Storage Explorer connects to storage account
-2. Attempts to list containers/shares
-3. Tries to retrieve account keys (common default method)
-4. POST /listKeys operation is attempted
-5. ReadOnly lock intercepts: "NO MODIFICATIONS ALLOWED"
-6. Error: "Unable to list resources due to inadequate permissions"
-```
-
-**The Confusing Part:**
-
-The error message says "**inadequate permissions**," but it's actually:
-
-- Not about RBAC permissions ✗
-- About the **lock preventing the listKeys operation** ✓
-
-Even if you have **Owner** or **Contributor** role, the ReadOnly lock **overrides** your permissions and blocks management plane operations.
-
-**Visual Representation:**
-
-```
-Without ReadOnly Lock:
-User → Storage Explorer → List Keys API → ✓ Success → Browse Storage
-
-With ReadOnly Lock:
-User → Storage Explorer → List Keys API → ✗ BLOCKED by Lock → Error Message
-```
-
-**How to Verify This is the Issue:**
-
-1. Check if a ReadOnly lock exists:
-
-   ```
-   Storage Account → Locks → See "ReadOnly" lock
-   ```
-
-2. Remove the lock temporarily and test Storage Explorer
-   - If it works now, the lock was the problem
-
-**Solutions When ReadOnly Lock Exists:**
-
-**Option 1: Remove the Lock** (if policy allows)
-
-- Not always possible due to governance requirements
-
-**Option 2: Use Azure AD Authentication**
-
-- In Storage Explorer, explicitly connect using "Azure AD"
-- Assign proper data plane roles (Storage Blob Data Reader)
-- Bypasses the need for account keys
-
-**Option 3: Use SAS Tokens**
-
-- Generate SAS token before the lock was applied
-- Connect to storage using SAS URL
-
-**Option 4: Use Azure Portal**
-
-- Portal has built-in handling for locked resources
-- May provide better error messages
-
-**Key Takeaway:**
-
-ReadOnly locks block the **listKeys operation** that Storage Explorer commonly uses for authentication. While users might have proper RBAC permissions, the lock creates a hard stop at the management plane level, preventing Storage Explorer from retrieving the keys needed to access the data using the default authentication method.
-
-The solution is either:
-
-- Remove the lock, OR
-- Use authentication methods that don't require listing keys (Azure AD, SAS tokens)
-
-</details>
-
-▶ **Related Lab:** [lab-storage-explorer-permissions](/AZ-104/hands-on-labs/storage/lab-storage-explorer-permissions/README.md)
-
----
-
-#### Modify Stored Access Policy
-
-**Domain:** Implement and manage storage
-**Skill:** Configure access to storage
-**Task:** Configure stored access policies
-
-You are an Azure administrator for a manufacturing organization. You are using shared access signature (SAS) to configure control over storage accounts.
-
-You create a stored access policy as an additional level of control over SAS on the server side for file shares.
-
-You need to modify a stored access policy.
-
-What should you do?
-
-A. Execute a Set Share ACL operation with the SMB protocol.  
-B. Execute a Set Table ACL operation.  
-C. Execute a Set Container ACL operation with public read access for blobs only.  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-03-03-53-49.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-In this scenario, you are using a stored access policy that acts as an additional level of control over shared access signature (SAS) on the server side for file shares. The access policy for an SAS consists of the start time, expiry time, and permissions for the signature. To create or modify a stored access policy, call the Set ACL operation for the resource (Set Container ACL, Set Queue ACL, Set Table ACL, or Set Share ACL) with a request body that specifies the terms of the access policy. An important point to note here is that, for a file share, you need to execute a Set Share ACL operation, which only supports the Server Message Block (SMB) protocol as the enabled file share protocol.
-
-You should not execute a Set Table ACL operation. The Set Table ACL operation sets the stored access policies for the table that can be used with SAS. In this scenario, since you want to modify stored access policies for an Azure File share, you need to use the Set Share ACL with SMB.
-
-You should not execute a Set Container ACL operation with public read access for blobs only. The Set Container ACL operation with public read access for blobs only will mean that Blob data within a container could be read via anonymous request, but container data is not available. In this scenario, since you are aiming to modify stored access policies for an Azure File share, you need to use the Set Share ACL with SMB.
-
-References
-
-[Define a stored access policy](https://learn.microsoft.com/en-us/rest/api/storageservices/define-stored-access-policy)
-
-</details>
-
----
-
-#### Provide least-privilege access to a report
-
-**Domain:** Implement and Manage Storage
-**Skill:** Configure access to storage
-**Task:** Create and use shared access signature (SAS) tokens
-
-You create a binary large object (blob) storage account named `reportstorage99` that contains archival reports from past corporate board meetings.
-
-A board member requests access to a specific report. The member does not have a Microsoft Entra user account. Moreover, they have access only to a web browser on his Google Chromebook device.
-
-To fulfill the request, you will provide the board member with least-privilege access to the requested report while maintaining security compliance and minimizing administrative overhead.
-
-What should you do?
-
-A. Deploy a point-to-site (P2S) virtual private network (VPN) connection on the board member's Chromebook and grant the board member role-based access control (RBAC) access to the report.  
-B. Generate a shared access signature (SAS) token for the report and share the Uniform Resource Locator (URL) with the board member.  
-C. Copy the report to an Azure File Service share and provide the board member with a PowerShell connection script.  
-D. Create a Microsoft Entra account for the board member and grant him role-based access control (RBAC) access to the storage account.  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-11-04-28-34.png' width=700>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-You should generate a shared access signature (SAS) token for the report and share the Uniform Resource Locator (URL) with the board member. SAS enables you to define time-limited read-only or read-write access to Azure storage account resources. It is important that you set the time restriction properly because the SAS includes no authentication. Any person with access to the URL can access the target resource(s) within the token's lifetime. In this case, you both minimize administrative effort as well as maintain security compliance because the SAS token points only to a single file, not the entire blob container that hosts the requested report.
-
-You should not create a Microsoft Entra account for the board member and grant him role-based access control (RBAC) access to the storage account. First, it requires significant management overhead to create and manage Microsoft Entra accounts, even for external (guest) users. Second, SAS and not RBAC is the way Azure provides screened access to individual storage account resources. You can use RBAC roles only at the storage account scope.
-
-You should not copy the report to an Azure File Service share and provide the board member with a PowerShell connection script. Here you create security and governance problems by creating multiple copies of the source report, as well as producing unnecessary administrative complexity.
-
-You should not deploy a point-to-site (P2S) VPN connection on the board member's Chromebook and grant the board member RBAC access to the report. The scenario stipulates that the board member is limited to using a web browser on his Chromebook. Furthermore, the Azure P2S VPN client is supported only on Windows, macOS, and endorsed Linux distributions. Chrome OS is not supported.
-
-References
-
-* Grant limited access to Azure Storage resources using shared access signatures (SAS)
-
-</details>
 
 ---
 
@@ -2097,66 +2098,56 @@ In the fourth scenario, you would have connection failure with read, write, and 
 
 ### Automate deployment of resources by using ARM templates or Bicep files
 
-#### Case Study — Solution Evaluation
+#### Edit ARM Template to Inherit Resource Group Location
 
 **Domain:** Deploy and Manage Azure Compute Resources
 **Skill:** Automate deployment of resources by using ARM templates or Bicep files
-**Task:** Deploy resources by using an ARM template or a Bicep file
+**Task:** Modify an existing Azure Resource Manager template
 
-*Case Study — Solution Evaluation*
+You have an Azure Resource Manager (ARM) template for creating a Windows virtual machine. You got this template from an existing resource group with a single virtual machine, using the automation script option.
 
-This case study contains a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.
+You want to reuse this template for other deployments. You need all the resources in the resource group to be in the same location.
 
-You have an Azure resource group named `RG1`. `RG1` contains a Linux virtual machine (VM) named `VM1`.
+What should you do?
 
-You need to automate the deployment of 20 additional Linux VMs. The new VMs should be based upon `VM1`'s configuration.
-
-Does this solution meet the goal?
-
-| Solution | Yes | No |
-|----------|-----|----|
-| 1. From the virtual machine's Export Template settings blade, you click Deploy and edit the parameters. | ☐ | ☐ |
-| 2. You store the Linux VM properties in a template and deploy the additional VMs by editing the template parameter values for each additional VM. | ☐ | ☐ |
-| 3. From the resource group's Policies blade, you click Assign policy. | ☐ | ☐ |
+A. Use the Azure portal and create a resource group in the desired location. Then use the `New-AzResourceGroupDeployment` cmdlet using the newly created resource group.  
+B. Edit the parameters file and add a new parameter named location of type string with the default value of `[resourceGroup().location]`.  
+C. Use the `New-AzResourceGroup` cmdlet with the `-Location` parameter to create a resource group in the desired location. Then use the `New-AzResourceGroupDeployment` cmdlet using the newly created resource group.  
+D. Edit the template file and update each location parameter with the value `[resourceGroup().location]`.  
 
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-03-12-03-58-37.png' width=600>
+<img src='.img/2026-03-12-04-14-06.png' width=600>
 
 </details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
 
-Solution 1 Explanation:
+**Explanation:**
 
-This solution does not meet the goal. Every deployment in Azure is described in a template in JavaScript Object Notation (JSON) format. You can access the underlying template from the Export Template settings blade of the VM resource, and then deploy a single new instance of a resource by modifying the template parameters. However, you would need to do this 20 times in order to create 20 VMs, and therefore it is not an automatic process.
+You should edit the template file and update each location parameter with the value `[resourceGroup().location]`. The `resourceGroup()` function gets the resource group object that will be used to deploy the template. This way, all resources in the template will use the same location as the resource group. You need to ensure that all resources are supported in the location that you are using for the resource group.
 
-Solution 2 Explanation:
+**Why you should not choose B:**
 
-This solution meets the goal. The Templates blade in the Azure portal enables you to store JavaScript Object Notation (JSON) documents that automate Azure resource deployment. In this case, to automate the deployment of 20 additional Linux VMs based on `VM1`'s configuration, you can use an Azure Resource Manager (ARM) template. Steps:
+You should not edit the parameters file and add a new parameter named `location` of type string with the default value of `[resourceGroup().location]`. This is the first step in centralizing the location value in the template, but you also need to update the location parameter in the template file with the value `[parameters('location')]`.
 
-1. Export `VM1`'s configuration by using **Export template** in the portal to get the ARM template for the VM.
-2. Modify the exported ARM template to introduce parameters for items that will vary between VMs (for example, VM name, IP assignment, and any unique identifiers).
-3. Create a parameter file (`parameters.json`) that defines the values for the 20 new VMs (names, sizes, and other settings).
-4. Deploy the template with the parameter file using CLI or PowerShell, for example:
+**Why you should not choose A:**
 
-```powershell
-az deployment group create --resource-group MyResourceGroup --template-file ./template.json --parameters @parameters.json
-```
+You should not use the Azure portal and create a resource group in the desired location and then use the `New-AzResourceGroupDeployment` cmdlet using the newly created resource group. If the resource group is deployed in a different location to the location configured in the template file, the resources will be deployed in different locations. You need to modify the location parameter in the template file to the value `[resourceGroup().location]` to inherit the location from the parent resource group.
 
-5. Automate the process by scripting updates to the parameter file and running the deployment in a loop. For example, a simple shell loop can iterate and deploy multiple parameter sets.
+**Why you should not choose C:**
 
-Solution 3 Explanation:
+You should not use the `New-AzResourceGroup` cmdlet with the `-Location` parameter to create a resource group in the desired location and then use the `New-AzResourceGroupDeployment` cmdlet using the newly created resource group. If the resource group is deployed in a different location to the location configured in the template file, the resources will be deployed in different locations. You need to modify the location parameter in the template file to the value `[resourceGroup().location]` to inherit the location from the parent resource group.
 
-This solution does not meet the goal. To automate the deployment of the 20 additional VMs, you should access the virtual machine's underlying JSON template and deploy the new resources by using the template and custom deployment parameters. Azure Policy is a governance product that enforces rules (for example, allowed regions or VM types) and helps ensure compliance, but it does not perform bulk VM provisioning based on an existing VM's configuration.
+<img src='.img/2026-03-12-04-30-49.png' width=600>
 
-References
+**References**
 
-* [Export an Azure Resource Manager template from an existing resource](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/export-template-portal)
-* [Deploy resources with ARM templates](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/deploy-templates-azure-cli)
-* [Azure Policy overview](https://learn.microsoft.com/en-us/azure/governance/policy/overview)
+- [Set resource location in ARM template](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/resource-location?tabs=azure-powershell)
+- [Understand the structure and syntax of ARM templates](https://learn.microsoft.com/azure/azure-resource-manager/templates/syntax)
+- [Deploy resources with ARM templates and Azure PowerShell](https://learn.microsoft.com/azure/azure-resource-manager/templates/deploy-powershell)
 
 </details>
 
@@ -2217,56 +2208,66 @@ References
 
 ---
 
-#### Edit ARM Template to Inherit Resource Group Location
+#### Case Study — Solution Evaluation
 
 **Domain:** Deploy and Manage Azure Compute Resources
 **Skill:** Automate deployment of resources by using ARM templates or Bicep files
-**Task:** Modify an existing Azure Resource Manager template
+**Task:** Deploy resources by using an ARM template or a Bicep file
 
-You have an Azure Resource Manager (ARM) template for creating a Windows virtual machine. You got this template from an existing resource group with a single virtual machine, using the automation script option.
+*Case Study — Solution Evaluation*
 
-You want to reuse this template for other deployments. You need all the resources in the resource group to be in the same location.
+This case study contains a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.
 
-What should you do?
+You have an Azure resource group named `RG1`. `RG1` contains a Linux virtual machine (VM) named `VM1`.
 
-A. Use the Azure portal and create a resource group in the desired location. Then use the `New-AzResourceGroupDeployment` cmdlet using the newly created resource group.  
-B. Edit the parameters file and add a new parameter named location of type string with the default value of `[resourceGroup().location]`.  
-C. Use the `New-AzResourceGroup` cmdlet with the `-Location` parameter to create a resource group in the desired location. Then use the `New-AzResourceGroupDeployment` cmdlet using the newly created resource group.  
-D. Edit the template file and update each location parameter with the value `[resourceGroup().location]`.  
+You need to automate the deployment of 20 additional Linux VMs. The new VMs should be based upon `VM1`'s configuration.
+
+Does this solution meet the goal?
+
+| Solution | Yes | No |
+|----------|-----|----|
+| 1. From the virtual machine's Export Template settings blade, you click Deploy and edit the parameters. | ☐ | ☐ |
+| 2. You store the Linux VM properties in a template and deploy the additional VMs by editing the template parameter values for each additional VM. | ☐ | ☐ |
+| 3. From the resource group's Policies blade, you click Assign policy. | ☐ | ☐ |
 
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-03-12-04-14-06.png' width=600>
+<img src='.img/2026-03-12-03-58-37.png' width=600>
 
 </details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
 
-**Explanation:**
+Solution 1 Explanation:
 
-You should edit the template file and update each location parameter with the value `[resourceGroup().location]`. The `resourceGroup()` function gets the resource group object that will be used to deploy the template. This way, all resources in the template will use the same location as the resource group. You need to ensure that all resources are supported in the location that you are using for the resource group.
+This solution does not meet the goal. Every deployment in Azure is described in a template in JavaScript Object Notation (JSON) format. You can access the underlying template from the Export Template settings blade of the VM resource, and then deploy a single new instance of a resource by modifying the template parameters. However, you would need to do this 20 times in order to create 20 VMs, and therefore it is not an automatic process.
 
-**Why you should not choose B:**
+Solution 2 Explanation:
 
-You should not edit the parameters file and add a new parameter named `location` of type string with the default value of `[resourceGroup().location]`. This is the first step in centralizing the location value in the template, but you also need to update the location parameter in the template file with the value `[parameters('location')]`.
+This solution meets the goal. The Templates blade in the Azure portal enables you to store JavaScript Object Notation (JSON) documents that automate Azure resource deployment. In this case, to automate the deployment of 20 additional Linux VMs based on `VM1`'s configuration, you can use an Azure Resource Manager (ARM) template. Steps:
 
-**Why you should not choose A:**
+1. Export `VM1`'s configuration by using **Export template** in the portal to get the ARM template for the VM.
+2. Modify the exported ARM template to introduce parameters for items that will vary between VMs (for example, VM name, IP assignment, and any unique identifiers).
+3. Create a parameter file (`parameters.json`) that defines the values for the 20 new VMs (names, sizes, and other settings).
+4. Deploy the template with the parameter file using CLI or PowerShell, for example:
 
-You should not use the Azure portal and create a resource group in the desired location and then use the `New-AzResourceGroupDeployment` cmdlet using the newly created resource group. If the resource group is deployed in a different location to the location configured in the template file, the resources will be deployed in different locations. You need to modify the location parameter in the template file to the value `[resourceGroup().location]` to inherit the location from the parent resource group.
+```powershell
+az deployment group create --resource-group MyResourceGroup --template-file ./template.json --parameters @parameters.json
+```
 
-**Why you should not choose C:**
+5. Automate the process by scripting updates to the parameter file and running the deployment in a loop. For example, a simple shell loop can iterate and deploy multiple parameter sets.
 
-You should not use the `New-AzResourceGroup` cmdlet with the `-Location` parameter to create a resource group in the desired location and then use the `New-AzResourceGroupDeployment` cmdlet using the newly created resource group. If the resource group is deployed in a different location to the location configured in the template file, the resources will be deployed in different locations. You need to modify the location parameter in the template file to the value `[resourceGroup().location]` to inherit the location from the parent resource group.
+Solution 3 Explanation:
 
-<img src='.img/2026-03-12-04-30-49.png' width=600>
+This solution does not meet the goal. To automate the deployment of the 20 additional VMs, you should access the virtual machine's underlying JSON template and deploy the new resources by using the template and custom deployment parameters. Azure Policy is a governance product that enforces rules (for example, allowed regions or VM types) and helps ensure compliance, but it does not perform bulk VM provisioning based on an existing VM's configuration.
 
-**References**
+References
 
-- [Set resource location in ARM template](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/resource-location?tabs=azure-powershell)
-- [Understand the structure and syntax of ARM templates](https://learn.microsoft.com/azure/azure-resource-manager/templates/syntax)
-- [Deploy resources with ARM templates and Azure PowerShell](https://learn.microsoft.com/azure/azure-resource-manager/templates/deploy-powershell)
+* [Export an Azure Resource Manager template from an existing resource](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/export-template-portal)
+* [Deploy resources with ARM templates](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/deploy-templates-azure-cli)
+* [Azure Policy overview](https://learn.microsoft.com/en-us/azure/governance/policy/overview)
 
 </details>
 
@@ -3093,6 +3094,55 @@ References
 ## Implement and Manage Virtual Networking
 
 ### Configure and manage virtual networks in Azure
+
+#### VNet Peering with ExpressRoute
+
+**Domain:** Implement and Manage Virtual Networking
+**Skill:** Configure and manage virtual networks in Azure
+**Task:** Create and configure virtual network peering
+
+You are asked to configure a subnet named SUBNET1 that is part of a virtual network named VNET1. Hosts on SUBNET1 need to be able to reach resources on a virtual network named VNET2 and also reach a proxy server that scans all outbound internet requests being made by resources hosted on SUBNET1.
+
+The proxy server is hosted on your on-premises network. You have an ExpressRoute circuit named EXP-ROUTE1 configured between VNET2 and your on-premises network.
+
+You want VNET1 to use EXP-ROUTE1 to reach the proxy server. To minimize costs, your solution must not require the creation of additional resources.
+
+Which two actions should you perform? Each correct answer presents part of the solution.
+
+A. Create a virtual network (VNet) gateway in VNET1.  
+B. Configure VNET2 peering to use the remote gateway.  
+C. Link the virtual network (VNet) gateway in VNET1 with EXP-ROUTE1.  
+D. Configure VNET1 peering to use the remote gateway.  
+E. Configure virtual network (VNet) peering between VNET1 and VNET2.  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-12-05-10-59.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Solution explanation:**
+
+You should configure virtual network (VNet) peering between VNET1 and VNET2. You should also set VNET1 to use the remote gateway. The peering will provide connectivity between VNET1 and VNET2 by internally sharing routes to the corresponding IP address ranges. For VNET1 to leverage the EXP-ROUTE1 to connect to the on-premises network, you would have to ensure that the peering connection on VNET1 uses the gateway device attached to VNET2. This gateway is what is used by the EXP-ROUTE1 ExpressRoute circuit.
+
+You should not set VNET2 peering to use the remote gateway. Because VNET2 is configured with an ExpressRoute circuit, VNET2 already has a VNet gateway on its gateway subnet. Trying to set VNET2 to use the remote gateway will generate an error message stating that the configuration is not possible.
+
+You should not create a VNet gateway in VNET1 and link that with EXP-ROUTE1. These two steps would provide connectivity to resources hosted on VNET1, enabling them to use EXP-ROUTE1, but it would not provide connectivity between VNET1 and VNET2. It would also increase the cost because you would need to add an additional VNet gateway device in VNET1.
+
+**References**
+
+* [Virtual network peering](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-peering)
+* [What is Azure ExpressRoute?](https://learn.microsoft.com/en-us/azure/expressroute/what-is-expressroute)
+* [About ExpressRoute virtual network gateways](https://learn.microsoft.com/en-us/azure/expressroute/expressroute-howto-vnet-gateway)
+* [Tutorial: Connect a virtual network to an ExpressRoute circuit using the Azure portal](https://learn.microsoft.com/en-us/azure/expressroute/expressroute-howto-portal-circuit-portal)
+
+</details>
+
+---
 
 #### Configure Layered Network Security
 
@@ -4061,6 +4111,49 @@ Related resources:
 
 ### Implement backup and recovery
 
+#### Recover Azure VM from Deleted Backup
+
+**Domain:** Monitor and maintain Azure resources
+**Skill:** Implement backup and recovery
+**Task:** Perform backup and restore operations by using Azure Backup
+
+An Infrastructure-as-a-Service (IaaS) virtual machine (VM) named VM10 is backed up to an Azure Recovery Services vault. VM10 and all of its restore points are deleted by mistake.
+
+You need to recover VM10.
+
+How many days does VM10's data remain available for recovery?
+
+A. 365 days  
+B. 30 days  
+C. 14 days  
+D. 90 days  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-01-30-05-24-56.png' width=700>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Why the selected answer is right**
+Azure Backup uses **Soft Delete** for Azure IaaS VM backups. When a VM and its backup data are deleted (intentionally or accidentally), the backup data is **retained for 14 days** in a soft-deleted state. During this window, the VM’s backup data can be recovered by undeleting the backup item from the Recovery Services vault. After 14 days, the data is permanently deleted and cannot be recovered.
+
+**Key takeaway**
+For Azure IaaS VMs protected by a Recovery Services vault, **soft delete provides a fixed 14-day recovery window** after deletion—independent of the configured backup retention policy.
+
+<img src='.img/2026-02-04-03-04-12.png' width=500>
+
+**References**
+
+* [Soft delete for virtual machines](https://learn.microsoft.com/en-us/azure/backup/soft-delete-virtual-machines?utm_source=chatgpt.com&tabs=azure-portal)
+
+</details>
+
+---
+
 #### Recover Configuration File from Azure VM Backup
 
 **Domain:** Monitor and maintain Azure resources
@@ -4130,48 +4223,5 @@ Azure Recovery Services vault overview
 </details>
 
 ▶ **Related Lab:** [lab-vm-file-recovery](../hands-on-labs/monitoring/lab-vm-file-recovery/README.md)
-
----
-
-#### Recover Azure VM from Deleted Backup
-
-**Domain:** Monitor and maintain Azure resources
-**Skill:** Implement backup and recovery
-**Task:** Perform backup and restore operations by using Azure Backup
-
-An Infrastructure-as-a-Service (IaaS) virtual machine (VM) named VM10 is backed up to an Azure Recovery Services vault. VM10 and all of its restore points are deleted by mistake.
-
-You need to recover VM10.
-
-How many days does VM10's data remain available for recovery?
-
-A. 365 days  
-B. 30 days  
-C. 14 days  
-D. 90 days  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-01-30-05-24-56.png' width=700>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Why the selected answer is right**
-Azure Backup uses **Soft Delete** for Azure IaaS VM backups. When a VM and its backup data are deleted (intentionally or accidentally), the backup data is **retained for 14 days** in a soft-deleted state. During this window, the VM’s backup data can be recovered by undeleting the backup item from the Recovery Services vault. After 14 days, the data is permanently deleted and cannot be recovered.
-
-**Key takeaway**
-For Azure IaaS VMs protected by a Recovery Services vault, **soft delete provides a fixed 14-day recovery window** after deletion—independent of the configured backup retention policy.
-
-<img src='.img/2026-02-04-03-04-12.png' width=500>
-
-**References**
-
-* [Soft delete for virtual machines](https://learn.microsoft.com/en-us/azure/backup/soft-delete-virtual-machines?utm_source=chatgpt.com&tabs=azure-portal)
-
-</details>
 
 ---
