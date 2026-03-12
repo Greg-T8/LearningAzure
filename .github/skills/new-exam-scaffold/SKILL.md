@@ -96,9 +96,32 @@ Follow the established format from existing exams. Include:
 1. **Title** — `# <EXAM>: <Full Title> — Study Guide`
 2. **Objective statement** with credential name
 3. **Links** — Certification page, study guide, study log
-4. **Progress Tracker** — Table with Hands-on Labs, Practice Questions, Video, Microsoft Learn rows. All status `🕒` (Not Started) unless a start date is provided.
-5. **Coverage Dashboard** — Between `<!-- BEGIN COVERAGE DASHBOARD -->` and `<!-- END COVERAGE DASHBOARD -->` markers. One row per domain with anchor links (`#domain-1`, etc.), weights, and zero counts.
+4. **Progress Tracker** — `## 📚 Progress Tracker` section with the table format below, followed by a legend line. All status `🕒` (Not Started) unless a start date is provided.
+5. **Coverage Dashboard** — `## 📊 Exam Coverage` header, a preamble sentence linking to practice questions and labs, then the dashboard between `<!-- BEGIN COVERAGE DASHBOARD -->` and `<!-- END COVERAGE DASHBOARD -->` markers. One row per domain with anchor links (`#domain-1`, etc.), weights, and zero counts.
 6. **Coverage Table** — Between `<!-- BEGIN COVERAGE TABLE -->` and `<!-- END COVERAGE TABLE -->` markers. Full domain → skill → task hierarchy with `| Qs | Labs |` columns initialized to `0 | 0`.
+
+**Progress Tracker format** (must match this exact header for `Update-ProgressTrackerDays.ps1` auto-discovery):
+
+```markdown
+## 📚 Progress Tracker
+
+| Priority | Modality         | My Notes                                                        | Status | Started | Completed | Days |
+| :------- | :--------------- | :-------------------------------------------------------------- | :----- | :------ | :-------- | :--- |
+| 1        | Hands-on Labs    | [Hands-on Labs](./hands-on-labs/README.md)                      | 🕒     |         |           |      |
+| 1        | Practice Questions   | [Practice Questions](./practice-questions/README.md)        | 🕒     |         |           |      |
+| 2        | Video            | [Video Courses](./video-courses/savill/README.md)               | 🕒     |         |           |      |
+| 3        | Microsoft Learn  | [Microsoft Learning Paths](./learning-paths/README.md)          | 🕒     |         |           |      |
+
+**Legend:** 🕒 Not Started | 🚧 In Progress | ✅ Complete
+```
+
+**Coverage section preamble:**
+
+```markdown
+## 📊 Exam Coverage
+
+Task-level coverage from [Practice Questions](./practice-questions/README.md) and [Hands-on Labs](./hands-on-labs/README.md).
+```
 
 **Domain sections** use the compact `<details>/<summary>` format (no `###` headings):
 
@@ -281,7 +304,7 @@ Add the exam code to the `ValidateSet`:
 
 #### `Invoke-AzStudySession.ps1`
 
-Three updates required:
+Four updates required:
 
 1. **`ValidateSet`** on the `$Mode` parameter:
 
@@ -306,19 +329,41 @@ $ExamFolderMap = @{
 }
 ```
 
+4. **`$ExamLogFileMap`** hashtable — only add an entry if the new exam's log file is **not** `StudyLog.md` (the default). Standard exams using `StudyLog.md` do **not** need an entry here:
+
+```powershell
+$ExamLogFileMap = @{
+    'WorkflowDevelopment' = 'WorkLog.md'
+}
+```
+
 #### `Update-ProgressTrackerDays.ps1`
 
-No changes required. This script auto-discovers all exam READMEs containing a progress tracker table. New exams are picked up automatically when their README includes the standard `| Priority | Modality | ... | Days |` header row.
+No changes required. This script auto-discovers all exam READMEs by scanning top-level directories (excluding `.`-prefixed) for `README.md` files whose progress tracker table matches this header pattern:
+
+```
+| Priority | Modality | My Notes | Status | Started | Completed | Days |
+```
+
+New exams are picked up automatically when their README includes this exact header row. The script updates the `Days` column for `🚧` (in-progress) rows by computing elapsed days from the `Started` date.
 
 ### 2.5 Skills
 
 #### `lab-catalog-updater/SKILL.md`
 
-Add the exam to the **Scope** section:
+Add the exam to the **Scope** section and define its **domain ordering**:
 
 ```markdown
 - `<NEW-EXAM>/hands-on-labs/README.md`
 ```
+
+Also add a domain ordering entry following the existing pattern:
+
+```markdown
+- **<NEW-EXAM>:** <Domain1>, <Domain2>, ...
+```
+
+The domain ordering determines how labs are grouped and sequenced in the catalog.
 
 #### `exam-question-organizer/SKILL.md`
 
