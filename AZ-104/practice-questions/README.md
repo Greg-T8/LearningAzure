@@ -3135,10 +3135,10 @@ You should not create a VNet gateway in VNET1 and link that with EXP-ROUTE1. The
 
 **References**
 
-* [Virtual network peering](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-peering)
-* [What is Azure ExpressRoute?](https://learn.microsoft.com/en-us/azure/expressroute/what-is-expressroute)
-* [About ExpressRoute virtual network gateways](https://learn.microsoft.com/en-us/azure/expressroute/expressroute-howto-vnet-gateway)
-* [Tutorial: Connect a virtual network to an ExpressRoute circuit using the Azure portal](https://learn.microsoft.com/en-us/azure/expressroute/expressroute-howto-portal-circuit-portal)
+* [Virtual network peering](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview)
+* [What is Azure ExpressRoute?](https://learn.microsoft.com/en-us/azure/expressroute/expressroute-introduction)
+* [About ExpressRoute virtual network gateways](https://learn.microsoft.com/en-us/azure/expressroute/expressroute-about-virtual-network-gateways)
+* [Tutorial: Connect a virtual network to an ExpressRoute circuit using the Azure portal](https://learn.microsoft.com/en-us/azure/expressroute/expressroute-howto-linkvnet-portal-resource-manager)
 
 </details>
 
