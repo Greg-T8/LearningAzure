@@ -82,14 +82,21 @@ $Helpers = {
                 continue
             }
 
-            # Domain heading: ### Domain N: <Name> (<Weight>)
-            if ($line -match '^### Domain \d+:\s+(.+?)\s+\(') {
-                $currentDomain = @{
-                    Name   = $Matches[1]
-                    Skills = [System.Collections.Generic.List[hashtable]]::new()
+            # Domain heading (legacy markdown): ### Domain N: <Name> (<Weight>)
+            # Domain heading (current details format): <summary><b>Domain N: <Name> (<Weight>)</b> ...
+            if ($line -match '^### Domain \d+:\s+(.+?)\s+\(' -or $line -match 'Domain \d+:\s+(.+?)\s+\(') {
+                $domainName = $Matches[1].Trim()
+
+                # Avoid adding the same domain twice if both header-like lines appear in one section.
+                if (-not $currentDomain -or $currentDomain.Name -ne $domainName) {
+                    $currentDomain = @{
+                        Name   = $domainName
+                        Skills = [System.Collections.Generic.List[hashtable]]::new()
+                    }
+                    $domains.Add($currentDomain)
+                    $currentSkill = $null
                 }
-                $domains.Add($currentDomain)
-                $currentSkill = $null
+
                 continue
             }
 

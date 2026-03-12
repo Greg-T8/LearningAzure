@@ -101,7 +101,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 |  | Modify an existing Azure Resource Manager template | 0 | 0 |
 |  | Modify an existing Bicep file | 1 | 0 |
 |  | Deploy resources by using an ARM template or a Bicep file | 0 | 0 |
-|  | Export a deployment as an ARM template or convert an ARM template to a Bicep file | 0 | 0 |
+|  | Export a deployment as an ARM template or convert an ARM template to a Bicep file | 1 | 0 |
 | Create and configure virtual machines | Create a virtual machine | 0 | 0 |
 |  | Configure Azure Disk Encryption | 1 | 1 |
 |  | Move a VM to another resource group, subscription, or region | 0 | 0 |
