@@ -173,7 +173,7 @@ $config = Get-Az...
 
 ## 5. Mermaid Diagram Styling
 
-Follow the `mermaid-styling` skill (`.github/skills/mermaid-styling/SKILL.md`) for all diagram styling:
+Follow the `mermaid-styling` skill (`~/LocalCode/Agent-Toolkit/skills/mermaid-styling/SKILL.md`) for all diagram styling:
 
 - **M-001** — Base theme (neutral canvas)
 - **M-002** — AZ-104 class definitions
