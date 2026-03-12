@@ -21,13 +21,13 @@ Accounts for questions missed or unsure about in the practice exams.
     * [Azure Policy Not Functioning](#azure-policy-not-functioning)
 * [Implement and Manage Storage](#implement-and-manage-storage)
   * [Configure access to storage](#configure-access-to-storage)
-    * [Provide least-privilege access to a report](#provide-least-privilege-access-to-a-report)
+    * [Configure storage account network access](#configure-storage-account-network-access)
+    * [SAS key configuration scenarios](#sas-key-configuration-scenarios)
+    * [Modify Stored Access Policy](#modify-stored-access-policy)
     * [Configure AzCopy Authentication for Blob and File Storage](#configure-azcopy-authentication-for-blob-and-file-storage)
     * [Shared Access Signature (SAS) practices](#shared-access-signature-sas-practices)
+    * [Provide least-privilege access to a report](#provide-least-privilege-access-to-a-report)
     * [Diagnose Storage Explorer Permission Errors](#diagnose-storage-explorer-permission-errors)
-    * [Modify Stored Access Policy](#modify-stored-access-policy)
-    * [SAS key configuration scenarios](#sas-key-configuration-scenarios)
-    * [Configure storage account network access](#configure-storage-account-network-access)
   * [Configure and manage storage accounts](#configure-and-manage-storage-accounts)
     * [Configure Object Replication Between Storage Accounts](#configure-object-replication-between-storage-accounts)
     * [Rotate compromised storage account keys](#rotate-compromised-storage-account-keys)
@@ -39,11 +39,11 @@ Accounts for questions missed or unsure about in the practice exams.
     * [Delete Soft-Deleted File Share](#delete-soft-deleted-file-share)
 * [Deploy and Manage Azure Compute Resources](#deploy-and-manage-azure-compute-resources)
   * [Automate deployment of resources by using ARM templates or Bicep files](#automate-deployment-of-resources-by-using-arm-templates-or-bicep-files)
-    * [Case Study — Solution Evaluation](#case-study-solution-evaluation)
-    * [Edit ARM Template to Inherit Resource Group Location](#edit-arm-template-to-inherit-resource-group-location)
-    * [Convert Array to Object](#convert-array-to-object)
-    * [Resource dependencies in Bicep](#resource-dependencies-in-bicep)
     * [Export ARM Template](#export-arm-template)
+    * [Resource dependencies in Bicep](#resource-dependencies-in-bicep)
+    * [Edit ARM Template to Inherit Resource Group Location](#edit-arm-template-to-inherit-resource-group-location)
+    * [Case Study — Solution Evaluation](#case-study-solution-evaluation)
+    * [Convert Array to Object](#convert-array-to-object)
   * [Create and configure virtual machines](#create-and-configure-virtual-machines)
     * [VM Resize Failure Cause](#vm-resize-failure-cause)
     * [Encrypt VM Disk With Key Vault](#encrypt-vm-disk-with-key-vault)
@@ -58,8 +58,8 @@ Accounts for questions missed or unsure about in the practice exams.
     * [Prepare Azure App Service for Web App Republication](#prepare-azure-app-service-for-web-app-republication)
 * [Implement and Manage Virtual Networking](#implement-and-manage-virtual-networking)
   * [Configure and manage virtual networks in Azure](#configure-and-manage-virtual-networks-in-azure)
-    * [VNet Peering with ExpressRoute](#vnet-peering-with-expressroute)
     * [Configure Layered Network Security](#configure-layered-network-security)
+    * [VNet Peering with ExpressRoute](#vnet-peering-with-expressroute)
   * [Configure secure access to virtual networks](#configure-secure-access-to-virtual-networks)
     * [Configure Private Link Service Source IP](#configure-private-link-service-source-ip)
   * [Configure name resolution and load balancing](#configure-name-resolution-and-load-balancing)
@@ -901,46 +901,186 @@ References
 
 ### Configure access to storage
 
-#### Provide least-privilege access to a report
+#### Configure storage account network access
 
 **Domain:** Implement and Manage Storage
 **Skill:** Configure access to storage
-**Task:** Create and use shared access signature (SAS) tokens
+**Task:** Configure Azure Storage firewalls and virtual networks
 
-You create a binary large object (blob) storage account named `reportstorage99` that contains archival reports from past corporate board meetings.
+You deploy a new storage account named `storage01` in a resource group named `RG01`.
 
-A board member requests access to a specific report. The member does not have a Microsoft Entra user account. Moreover, they have access only to a web browser on his Google Chromebook device.
+You need to ensure that the App Services, the backup vault, and the event hub can access the new storage account. Access should be enabled from within Azure only, and not via public internet.
 
-To fulfill the request, you will provide the board member with least-privilege access to the requested report while maintaining security compliance and minimizing administrative overhead.
+You decide to use PowerShell to configure all the settings.
 
-What should you do?
+How should you complete the command string? To answer, select the appropriate options from the drop-down menus.
 
-A. Deploy a point-to-site (P2S) virtual private network (VPN) connection on the board member's Chromebook and grant the board member role-based access control (RBAC) access to the report.  
-B. Generate a shared access signature (SAS) token for the report and share the Uniform Resource Locator (URL) with the board member.  
-C. Copy the report to an Azure File Service share and provide the board member with a PowerShell connection script.  
-D. Create a Microsoft Entra account for the board member and grant him role-based access control (RBAC) access to the storage account.  
+```powershell
+Get-AzVirtualNetwork -ResourceGroupName "RG01" -Name "VNET01" |
+  Set-AzVirtualNetworkSubnetConfig -Name "VSUBNET01" \
+    -AddressPrefix "10.0.0.0/24" -ServiceEndpoint "___[1]___" \
+  | Set-AzVirtualNetwork
+
+$subnet = Get-AzVirtualNetwork -ResourceGroupName "RG01" -Name "VNET01"
+Get-AzVirtualNetworkSubnetConfig -Name "VSUBNET01"
+
+___[2]___ -ResourceGroupName "RG01" \
+  -Name "storage01" -VirtualNetworkResourceId $subnet.Id
+
+___[3]___ -ResourceGroupName "RG01" \
+  -Name "storage01" -Bypass ___[4]___
+```
+
+Drop-Down Options:
+
+| Blank | Options |
+|-------|---------|
+| [1] | AzureServices / Logging / Metrics / Microsoft.Storage / None |
+| [2] | Add-AzStorageAccountNetworkRule / Remove-AzStorageAccountNetworkRuleSet / Set-AzStorageAccount / Update-AzStorageAccountNetworkRuleSet |
+| [3] | Add-AzStorageAccountNetworkRule / Remove-AzStorageAccountNetworkRuleSet / Set-AzStorageAccount / Update-AzStorageAccountNetworkRuleSet |
+| [4] | AzureServices / Logging / Metrics / Microsoft.Storage / None |
 
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-03-11-04-28-34.png' width=700>
+<img src='.img/2026-03-11-03-48-09.png' width=700>
 
 </details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
 
-You should generate a shared access signature (SAS) token for the report and share the Uniform Resource Locator (URL) with the board member. SAS enables you to define time-limited read-only or read-write access to Azure storage account resources. It is important that you set the time restriction properly because the SAS includes no authentication. Any person with access to the URL can access the target resource(s) within the token's lifetime. In this case, you both minimize administrative effort as well as maintain security compliance because the SAS token points only to a single file, not the entire blob container that hosts the requested report.
+You should run the following script to ensure that the backup vault and the event hub services have access to the storage account:
 
-You should not create a Microsoft Entra account for the board member and grant him role-based access control (RBAC) access to the storage account. First, it requires significant management overhead to create and manage Microsoft Entra accounts, even for external (guest) users. Second, SAS and not RBAC is the way Azure provides screened access to individual storage account resources. You can use RBAC roles only at the storage account scope.
+```powershell
+Get-AzVirtualNetwork -ResourceGroupName "RG01" -Name "VNET01" |
+Set-AzVirtualNetworkSubnetConfig -Name "VSUBNET01" \
+    -AddressPrefix "10.0.0.0/24" -ServiceEndpoint "Microsoft.Storage" \
+| Set-AzVirtualNetwork
 
-You should not copy the report to an Azure File Service share and provide the board member with a PowerShell connection script. Here you create security and governance problems by creating multiple copies of the source report, as well as producing unnecessary administrative complexity.
+$subnet = Get-AzVirtualNetwork -ResourceGroupName "RG01" -Name "VNET01"
+Get-AzVirtualNetworkSubnetConfig -Name "VSUBNET01"
 
-You should not deploy a point-to-site (P2S) VPN connection on the board member's Chromebook and grant the board member RBAC access to the report. The scenario stipulates that the board member is limited to using a web browser on his Chromebook. Furthermore, the Azure P2S VPN client is supported only on Windows, macOS, and endorsed Linux distributions. Chrome OS is not supported.
+Add-AzStorageAccountNetworkRule -ResourceGroupName "RG01" \
+    -Name "storage01" -VirtualNetworkResourceId $subnet.Id
+
+Update-AzStorageAccountNetworkRuleSet -ResourceGroupName "RG01" \
+    -Name "storage01" -Bypass AzureServices
+```
+
+You should use `Microsoft.Storage` as the service endpoint. Using the `Set-AzVirtualNetworkSubnetConfig` cmdlet enables the service endpoint on the subnet `VSUBNET01` for a storage account. This will allow connections to the virtual subnet from the storage account. This cmdlet makes modifications only to the memory representation of the virtual network. You need to run `Set-AzVirtualNetwork` to make the changes persistent.
+
+You should use the `Add-AzStorageAccountNetworkRule` cmdlet to add a firewall exception on the `NetworkRule` property in the storage account. This will allow communication from the virtual subnet to the storage account.
+
+You should use the `Update-AzStorageAccountNetworkRuleSet` cmdlet. This cmdlet also updates the `NetworkRule` property. It allows you to modify the `NetworkRule` property to allow other Azure services, like Backup or Event Hubs, to have access to the storage account.
+
+You should use `AzureServices` for the `-Bypass` parameter. This way, you instruct the `Update-AzStorageAccountNetworkRuleSet` cmdlet to allow connections from other Azure services. Allowed values are `AzureServices`, `Metrics`, `Logging`, and `None`.
+
+You should not use the `Set-AzStorageAccount` cmdlet. You can use this cmdlet to modify a storage account, but not the `NetworkRule` property of the storage account. You typically use this cmdlet when you want to set a tag to a storage account, update a customer domain, or update the type of the account.
+
+You should not use the `Remove-AzStorageAccountNetworkRuleSet` cmdlet. You use this cmdlet to remove a `NetworkRule` property from the storage account. In this scenario, you need to add and modify a new network rule, not remove it.
+
+You should not use the `Logging`, `None`, or `Metrics` values. These are valid for the `-Bypass` parameter for `Update-AzStorageAccountNetworkRuleSet`. Use the `None` value when you want to remove the access to all Azure services, including monitoring and logging services. Use the `Metrics` or `Logging` values when you want to allow access to monitoring or logging Azure Services respectively.
+
+**References**:  
+
+* [Azure Storage firewall rules](https://learn.microsoft.com/en-us/azure/storage/common/storage-network-security)
+* [Update-AzStorageAccountNetworkRuleSet](https://learn.microsoft.com/en-us/powershell/module/az.storage/update-azstorageaccountnetworkruleset?view=azps-15.4.0&viewFallbackFrom=azps-2.6.0)
+* [Add-AzStorageAccountNetworkRule](https://learn.microsoft.com/en-us/powershell/module/az.storage/add-azstorageaccountnetworkrule?view=azps-15.4.0)
+
+</details>
+
+---
+
+#### SAS key configuration scenarios
+
+**Domain:** Implement and manage storage
+**Skill:** Configure access to storage
+**Task:** Create and use shared access signature (SAS) tokens
+
+You have a storage account named `salesstorage` in a subscription named `SalesSubscription`. You create a container in a blob storage named `salecontainer`.
+
+You create the shared access signature (SAS) shown in the exhibit.
+
+You try to carry out actions from several computers at different times using the SAS key1 configurations shown in the exhibit.
+
+What level of access would be available in each scenario? To answer, select the appropriate options from the drop-down menus.
+
+| Configuration | Value | Action | Action result |
+|---------------|-------|--------|---------------|
+| 151.112.10.6 | March 4th, 2020 at 11 AM | Connect to Storage Account | ***[1]*** |
+| 151.112.11.6 | March 4th, 2020 at 12 AM | Connect to Storage Account | ***[2]*** |
+| 151.112.10.6 | March 10th, 2020 at 10 AM | Create a Container | ***[3]*** |
+| 151.112.10.6 | March 10th, 2020 at 12 AM | Read a File Share | ***[4]*** |
+
+Drop-Down Options:
+
+| Blank | Options |
+|-------|---------|
+| [1] | Connection success with read, write, and list access / Connection failure with read, write, and list access / Connection failure with read access |
+| [2] | Connection success with read, write, and list access / Connection failure with read, write, and list access / Connection failure with read access |
+| [3] | Connection success with read, write, and list access / Connection failure with read, write, and list access / Connection failure with read access |
+| [4] | Connection success with read, write, and list access / Connection failure with read, write, and list access / Connection failure with read access |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-11-04-35-29.png' width=700>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+In the first scenario, you would have connection success with read, write, and list access, because the IP address and the dates meet the criteria when the shared access signature (SAS) key1 is active.
+
+In the second scenario, you would have connection failure with read, write, and list access, because the IP address does not fall in the allowed IP address range. Additionally, it would also fail because the start time is 12am on March 4th, 2020, for the request, but the SAS token starts at 11am on March 4th, 2020.
+
+In the third scenario, you would have connection failure with read, write, and list access, because the permissions provided for the SAS key1 do not grant permissions to create a new container.
+
+In the fourth scenario, you would have connection failure with read, write, and list access, because the permissions granted are only for blob containers and not file shares.
+
+</details>
+
+---
+
+#### Modify Stored Access Policy
+
+**Domain:** Implement and manage storage
+**Skill:** Configure access to storage
+**Task:** Configure stored access policies
+
+You are an Azure administrator for a manufacturing organization. You are using shared access signature (SAS) to configure control over storage accounts.
+
+You create a stored access policy as an additional level of control over SAS on the server side for file shares.
+
+You need to modify a stored access policy.
+
+What should you do?
+
+A. Execute a Set Share ACL operation with the SMB protocol.  
+B. Execute a Set Table ACL operation.  
+C. Execute a Set Container ACL operation with public read access for blobs only.  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-03-03-53-49.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+In this scenario, you are using a stored access policy that acts as an additional level of control over shared access signature (SAS) on the server side for file shares. The access policy for an SAS consists of the start time, expiry time, and permissions for the signature. To create or modify a stored access policy, call the Set ACL operation for the resource (Set Container ACL, Set Queue ACL, Set Table ACL, or Set Share ACL) with a request body that specifies the terms of the access policy. An important point to note here is that, for a file share, you need to execute a Set Share ACL operation, which only supports the Server Message Block (SMB) protocol as the enabled file share protocol.
+
+You should not execute a Set Table ACL operation. The Set Table ACL operation sets the stored access policies for the table that can be used with SAS. In this scenario, since you want to modify stored access policies for an Azure File share, you need to use the Set Share ACL with SMB.
+
+You should not execute a Set Container ACL operation with public read access for blobs only. The Set Container ACL operation with public read access for blobs only will mean that Blob data within a container could be read via anonymous request, but container data is not available. In this scenario, since you are aiming to modify stored access policies for an Azure File share, you need to use the Set Share ACL with SMB.
 
 References
 
-* Grant limited access to Azure Storage resources using shared access signatures (SAS)
+[Define a stored access policy](https://learn.microsoft.com/en-us/rest/api/storageservices/define-stored-access-policy)
 
 </details>
 
@@ -1111,6 +1251,51 @@ References
 
 * [Grant limited access to Azure Storage resources using shared access signatures (SAS)](https://learn.microsoft.com/en-us/azure/storage/common/storage-sas-overview)
 * [Create a stored access policy](https://learn.microsoft.com/en-us/azure/storage/common/storage-stored-access-policy-define-dotnet?toc=%2Fazure%2Fstorage%2Fblobs%2Ftoc.json&bc=%2Fazure%2Fstorage%2Fblobs%2Fbreadcrumb%2Ftoc.json)
+
+</details>
+
+---
+
+#### Provide least-privilege access to a report
+
+**Domain:** Implement and Manage Storage
+**Skill:** Configure access to storage
+**Task:** Create and use shared access signature (SAS) tokens
+
+You create a binary large object (blob) storage account named `reportstorage99` that contains archival reports from past corporate board meetings.
+
+A board member requests access to a specific report. The member does not have a Microsoft Entra user account. Moreover, they have access only to a web browser on his Google Chromebook device.
+
+To fulfill the request, you will provide the board member with least-privilege access to the requested report while maintaining security compliance and minimizing administrative overhead.
+
+What should you do?
+
+A. Deploy a point-to-site (P2S) virtual private network (VPN) connection on the board member's Chromebook and grant the board member role-based access control (RBAC) access to the report.  
+B. Generate a shared access signature (SAS) token for the report and share the Uniform Resource Locator (URL) with the board member.  
+C. Copy the report to an Azure File Service share and provide the board member with a PowerShell connection script.  
+D. Create a Microsoft Entra account for the board member and grant him role-based access control (RBAC) access to the storage account.  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-11-04-28-34.png' width=700>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+You should generate a shared access signature (SAS) token for the report and share the Uniform Resource Locator (URL) with the board member. SAS enables you to define time-limited read-only or read-write access to Azure storage account resources. It is important that you set the time restriction properly because the SAS includes no authentication. Any person with access to the URL can access the target resource(s) within the token's lifetime. In this case, you both minimize administrative effort as well as maintain security compliance because the SAS token points only to a single file, not the entire blob container that hosts the requested report.
+
+You should not create a Microsoft Entra account for the board member and grant him role-based access control (RBAC) access to the storage account. First, it requires significant management overhead to create and manage Microsoft Entra accounts, even for external (guest) users. Second, SAS and not RBAC is the way Azure provides screened access to individual storage account resources. You can use RBAC roles only at the storage account scope.
+
+You should not copy the report to an Azure File Service share and provide the board member with a PowerShell connection script. Here you create security and governance problems by creating multiple copies of the source report, as well as producing unnecessary administrative complexity.
+
+You should not deploy a point-to-site (P2S) VPN connection on the board member's Chromebook and grant the board member RBAC access to the report. The scenario stipulates that the board member is limited to using a web browser on his Chromebook. Furthermore, the Azure P2S VPN client is supported only on Windows, macOS, and endorsed Linux distributions. Chrome OS is not supported.
+
+References
+
+* Grant limited access to Azure Storage resources using shared access signatures (SAS)
 
 </details>
 
@@ -1296,191 +1481,6 @@ The solution is either:
 </details>
 
 ▶ **Related Lab:** [lab-storage-explorer-permissions](/AZ-104/hands-on-labs/storage/lab-storage-explorer-permissions/README.md)
-
----
-
-#### Modify Stored Access Policy
-
-**Domain:** Implement and manage storage
-**Skill:** Configure access to storage
-**Task:** Configure stored access policies
-
-You are an Azure administrator for a manufacturing organization. You are using shared access signature (SAS) to configure control over storage accounts.
-
-You create a stored access policy as an additional level of control over SAS on the server side for file shares.
-
-You need to modify a stored access policy.
-
-What should you do?
-
-A. Execute a Set Share ACL operation with the SMB protocol.  
-B. Execute a Set Table ACL operation.  
-C. Execute a Set Container ACL operation with public read access for blobs only.  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-03-03-53-49.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-In this scenario, you are using a stored access policy that acts as an additional level of control over shared access signature (SAS) on the server side for file shares. The access policy for an SAS consists of the start time, expiry time, and permissions for the signature. To create or modify a stored access policy, call the Set ACL operation for the resource (Set Container ACL, Set Queue ACL, Set Table ACL, or Set Share ACL) with a request body that specifies the terms of the access policy. An important point to note here is that, for a file share, you need to execute a Set Share ACL operation, which only supports the Server Message Block (SMB) protocol as the enabled file share protocol.
-
-You should not execute a Set Table ACL operation. The Set Table ACL operation sets the stored access policies for the table that can be used with SAS. In this scenario, since you want to modify stored access policies for an Azure File share, you need to use the Set Share ACL with SMB.
-
-You should not execute a Set Container ACL operation with public read access for blobs only. The Set Container ACL operation with public read access for blobs only will mean that Blob data within a container could be read via anonymous request, but container data is not available. In this scenario, since you are aiming to modify stored access policies for an Azure File share, you need to use the Set Share ACL with SMB.
-
-References
-
-[Define a stored access policy](https://learn.microsoft.com/en-us/rest/api/storageservices/define-stored-access-policy)
-
-</details>
-
----
-
-#### SAS key configuration scenarios
-
-**Domain:** Implement and manage storage
-**Skill:** Configure access to storage
-**Task:** Create and use shared access signature (SAS) tokens
-
-You have a storage account named `salesstorage` in a subscription named `SalesSubscription`. You create a container in a blob storage named `salecontainer`.
-
-You create the shared access signature (SAS) shown in the exhibit.
-
-You try to carry out actions from several computers at different times using the SAS key1 configurations shown in the exhibit.
-
-What level of access would be available in each scenario? To answer, select the appropriate options from the drop-down menus.
-
-| Configuration | Value | Action | Action result |
-|---------------|-------|--------|---------------|
-| 151.112.10.6 | March 4th, 2020 at 11 AM | Connect to Storage Account | ***[1]*** |
-| 151.112.11.6 | March 4th, 2020 at 12 AM | Connect to Storage Account | ***[2]*** |
-| 151.112.10.6 | March 10th, 2020 at 10 AM | Create a Container | ***[3]*** |
-| 151.112.10.6 | March 10th, 2020 at 12 AM | Read a File Share | ***[4]*** |
-
-Drop-Down Options:
-
-| Blank | Options |
-|-------|---------|
-| [1] | Connection success with read, write, and list access / Connection failure with read, write, and list access / Connection failure with read access |
-| [2] | Connection success with read, write, and list access / Connection failure with read, write, and list access / Connection failure with read access |
-| [3] | Connection success with read, write, and list access / Connection failure with read, write, and list access / Connection failure with read access |
-| [4] | Connection success with read, write, and list access / Connection failure with read, write, and list access / Connection failure with read access |
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-11-04-35-29.png' width=700>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-In the first scenario, you would have connection success with read, write, and list access, because the IP address and the dates meet the criteria when the shared access signature (SAS) key1 is active.
-
-In the second scenario, you would have connection failure with read, write, and list access, because the IP address does not fall in the allowed IP address range. Additionally, it would also fail because the start time is 12am on March 4th, 2020, for the request, but the SAS token starts at 11am on March 4th, 2020.
-
-In the third scenario, you would have connection failure with read, write, and list access, because the permissions provided for the SAS key1 do not grant permissions to create a new container.
-
-In the fourth scenario, you would have connection failure with read, write, and list access, because the permissions granted are only for blob containers and not file shares.
-
-</details>
-
----
-
-#### Configure storage account network access
-
-**Domain:** Implement and Manage Storage
-**Skill:** Configure access to storage
-**Task:** Configure Azure Storage firewalls and virtual networks
-
-You deploy a new storage account named `storage01` in a resource group named `RG01`.
-
-You need to ensure that the App Services, the backup vault, and the event hub can access the new storage account. Access should be enabled from within Azure only, and not via public internet.
-
-You decide to use PowerShell to configure all the settings.
-
-How should you complete the command string? To answer, select the appropriate options from the drop-down menus.
-
-```powershell
-Get-AzVirtualNetwork -ResourceGroupName "RG01" -Name "VNET01" |
-  Set-AzVirtualNetworkSubnetConfig -Name "VSUBNET01" \
-    -AddressPrefix "10.0.0.0/24" -ServiceEndpoint "___[1]___" \
-  | Set-AzVirtualNetwork
-
-$subnet = Get-AzVirtualNetwork -ResourceGroupName "RG01" -Name "VNET01"
-Get-AzVirtualNetworkSubnetConfig -Name "VSUBNET01"
-
-___[2]___ -ResourceGroupName "RG01" \
-  -Name "storage01" -VirtualNetworkResourceId $subnet.Id
-
-___[3]___ -ResourceGroupName "RG01" \
-  -Name "storage01" -Bypass ___[4]___
-```
-
-Drop-Down Options:
-
-| Blank | Options |
-|-------|---------|
-| [1] | AzureServices / Logging / Metrics / Microsoft.Storage / None |
-| [2] | Add-AzStorageAccountNetworkRule / Remove-AzStorageAccountNetworkRuleSet / Set-AzStorageAccount / Update-AzStorageAccountNetworkRuleSet |
-| [3] | Add-AzStorageAccountNetworkRule / Remove-AzStorageAccountNetworkRuleSet / Set-AzStorageAccount / Update-AzStorageAccountNetworkRuleSet |
-| [4] | AzureServices / Logging / Metrics / Microsoft.Storage / None |
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-11-03-48-09.png' width=700>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-You should run the following script to ensure that the backup vault and the event hub services have access to the storage account:
-
-```powershell
-Get-AzVirtualNetwork -ResourceGroupName "RG01" -Name "VNET01" |
-Set-AzVirtualNetworkSubnetConfig -Name "VSUBNET01" \
-    -AddressPrefix "10.0.0.0/24" -ServiceEndpoint "Microsoft.Storage" \
-| Set-AzVirtualNetwork
-
-$subnet = Get-AzVirtualNetwork -ResourceGroupName "RG01" -Name "VNET01"
-Get-AzVirtualNetworkSubnetConfig -Name "VSUBNET01"
-
-Add-AzStorageAccountNetworkRule -ResourceGroupName "RG01" \
-    -Name "storage01" -VirtualNetworkResourceId $subnet.Id
-
-Update-AzStorageAccountNetworkRuleSet -ResourceGroupName "RG01" \
-    -Name "storage01" -Bypass AzureServices
-```
-
-You should use `Microsoft.Storage` as the service endpoint. Using the `Set-AzVirtualNetworkSubnetConfig` cmdlet enables the service endpoint on the subnet `VSUBNET01` for a storage account. This will allow connections to the virtual subnet from the storage account. This cmdlet makes modifications only to the memory representation of the virtual network. You need to run `Set-AzVirtualNetwork` to make the changes persistent.
-
-You should use the `Add-AzStorageAccountNetworkRule` cmdlet to add a firewall exception on the `NetworkRule` property in the storage account. This will allow communication from the virtual subnet to the storage account.
-
-You should use the `Update-AzStorageAccountNetworkRuleSet` cmdlet. This cmdlet also updates the `NetworkRule` property. It allows you to modify the `NetworkRule` property to allow other Azure services, like Backup or Event Hubs, to have access to the storage account.
-
-You should use `AzureServices` for the `-Bypass` parameter. This way, you instruct the `Update-AzStorageAccountNetworkRuleSet` cmdlet to allow connections from other Azure services. Allowed values are `AzureServices`, `Metrics`, `Logging`, and `None`.
-
-You should not use the `Set-AzStorageAccount` cmdlet. You can use this cmdlet to modify a storage account, but not the `NetworkRule` property of the storage account. You typically use this cmdlet when you want to set a tag to a storage account, update a customer domain, or update the type of the account.
-
-You should not use the `Remove-AzStorageAccountNetworkRuleSet` cmdlet. You use this cmdlet to remove a `NetworkRule` property from the storage account. In this scenario, you need to add and modify a new network rule, not remove it.
-
-You should not use the `Logging`, `None`, or `Metrics` values. These are valid for the `-Bypass` parameter for `Update-AzStorageAccountNetworkRuleSet`. Use the `None` value when you want to remove the access to all Azure services, including monitoring and logging services. Use the `Metrics` or `Logging` values when you want to allow access to monitoring or logging Azure Services respectively.
-
-**References**:  
-
-* [Azure Storage firewall rules](https://learn.microsoft.com/en-us/azure/storage/common/storage-network-security)
-* [Update-AzStorageAccountNetworkRuleSet](https://learn.microsoft.com/en-us/powershell/module/az.storage/update-azstorageaccountnetworkruleset?view=azps-15.4.0&viewFallbackFrom=azps-2.6.0)
-* [Add-AzStorageAccountNetworkRule](https://learn.microsoft.com/en-us/powershell/module/az.storage/add-azstorageaccountnetworkrule?view=azps-15.4.0)
-
-</details>
 
 ---
 
@@ -2094,187 +2094,56 @@ References
 
 ### Automate deployment of resources by using ARM templates or Bicep files
 
-#### Case Study — Solution Evaluation
+#### Export ARM Template
 
 **Domain:** Deploy and Manage Azure Compute Resources
 **Skill:** Automate deployment of resources by using ARM templates or Bicep files
-**Task:** Deploy resources by using an ARM template or a Bicep file
+**Task:** Export a deployment as an ARM template or convert an ARM template to a Bicep file
 
-*Case Study — Solution Evaluation*
+You deploy a line of business (LOB) application. All resources that are part of the LOB application are deployed in a single resource group. The resources were added in different phases.
 
-This case study contains a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.
+You need to export the current configuration of the LOB application resources to an Azure Resource Manager (ARM) template. You will later use this template for deploying the LOB application infrastructure in different environments for testing or development purposes.
 
-You have an Azure resource group named `RG1`. `RG1` contains a Linux virtual machine (VM) named `VM1`.
+You are using the Complete mode for ARM deployment.
 
-You need to automate the deployment of 20 additional Linux VMs. The new VMs should be based upon `VM1`'s configuration.
+For each of the following statements, select Yes if the statement is true. Otherwise, select No.
 
-Does this solution meet the goal?
-
-| Solution | Yes | No |
+| Statement | Yes | No |
 |----------|-----|----|
-| 1. From the virtual machine's Export Template settings blade, you click Deploy and edit the parameters. | ☐ | ☐ |
-| 2. You store the Linux VM properties in a template and deploy the additional VMs by editing the template parameter values for each additional VM. | ☐ | ☐ |
-| 3. From the resource group's Policies blade, you click Assign policy. | ☐ | ☐ |
+| You need to export the Azure Resource Manager (ARM) template from the latest deployment. | ☐ | ☐ |
+| Each deployment contains only the resources that have been added in that deployment. | ☐ | ☐ |
+| The parameters file contains the values used during the deployment. | ☐ | ☐ |
+| The template contains the scripts needed for deploying the template. | ☐ | ☐ |
 
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-03-12-03-58-37.png' width=600>
+<img src='.img/2026-03-12-03-11-57.png' width=600>
 
 </details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
 
-Solution 1 Explanation:
+You do not need to export the Azure Resource Manager (ARM) template from the latest deployment. In this scenario, the line of business (LOB) application was deployed in several phases. The latest deployment will export only the latest resources added to the application. If you want to export the ARM template with all the resources needed for the LOB application, you will need to export the ARM template from the resource group.
 
-This solution does not meet the goal. Every deployment in Azure is described in a template in JavaScript Object Notation (JSON) format. You can access the underlying template from the Export Template settings blade of the VM resource, and then deploy a single new instance of a resource by modifying the template parameters. However, you would need to do this 20 times in order to create 20 VMs, and therefore it is not an automatic process.
+Each deployment contains only the resources that have been added in that deployment. When deploying your resources, you specify that the deployment is either an Incremental update or a Complete update. The difference between these two modes is how the Resource Manager handles existing resources in the resource group that are not in the template. In this scenario, since you are using the Complete mode, each deployment contains only the resources that have been added in that deployment and the Resource Manager will delete all the resources that exist in the resource group but are not specified in the template. On the other hand, in an Incremental mode, the Resource Manager leaves unchanged resources that exist in the resource group but are not specified in the template. Resources in the template are added to the resource group.
 
-Solution 2 Explanation:
+The parameters file contains the values used during the deployment. The parameters file is a JSON file that stores all the parameters used in the ARM template. You can use this file to reuse the template in different deployments, just changing the values of the parameters file. If you use this file in templates created from resource groups, you need to make significant edits to the template before you can effectively use the parameters file.
 
-This solution meets the goal. The Templates blade in the Azure portal enables you to store JavaScript Object Notation (JSON) documents that automate Azure resource deployment. In this case, to automate the deployment of 20 additional Linux VMs based on `VM1`'s configuration, you can use an Azure Resource Manager (ARM) template. Steps:
+The template does not contain the scripts needed for deploying the template. When you download an ARM template from a deployment or a resource group, the downloaded package contains only the ARM template and the parameters file. You can reference Azure CLI scripts or a PowerShell script in the Azure docs linked in the export template pane.
 
-1. Export `VM1`'s configuration by using **Export template** in the portal to get the ARM template for the VM.
-2. Modify the exported ARM template to introduce parameters for items that will vary between VMs (for example, VM name, IP assignment, and any unique identifiers).
-3. Create a parameter file (`parameters.json`) that defines the values for the 20 new VMs (names, sizes, and other settings).
-4. Deploy the template with the parameter file using CLI or PowerShell, for example:
+<img src='.img/2026-03-12-03-47-36.png' width=600>
 
-```powershell
-az deployment group create --resource-group MyResourceGroup --template-file ./template.json --parameters @parameters.json
-```
-
-5. Automate the process by scripting updates to the parameter file and running the deployment in a loop. For example, a simple shell loop can iterate and deploy multiple parameter sets.
-
-Solution 3 Explanation:
-
-This solution does not meet the goal. To automate the deployment of the 20 additional VMs, you should access the virtual machine's underlying JSON template and deploy the new resources by using the template and custom deployment parameters. Azure Policy is a governance product that enforces rules (for example, allowed regions or VM types) and helps ensure compliance, but it does not perform bulk VM provisioning based on an existing VM's configuration.
+<img src='.img/2026-03-12-03-31-11.png' width=600>
 
 References
 
-* [Export an Azure Resource Manager template from an existing resource](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/export-template-portal)
-* [Deploy resources with ARM templates](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/deploy-templates-azure-cli)
-* [Azure Policy overview](https://learn.microsoft.com/en-us/azure/governance/policy/overview)
-
-</details>
-
----
-
-#### Edit ARM Template to Inherit Resource Group Location
-
-**Domain:** Deploy and Manage Azure Compute Resources
-**Skill:** Automate deployment of resources by using ARM templates or Bicep files
-**Task:** Modify an existing Azure Resource Manager template
-
-You have an Azure Resource Manager (ARM) template for creating a Windows virtual machine. You got this template from an existing resource group with a single virtual machine, using the automation script option.
-
-You want to reuse this template for other deployments. You need all the resources in the resource group to be in the same location.
-
-What should you do?
-
-A. Use the Azure portal and create a resource group in the desired location. Then use the `New-AzResourceGroupDeployment` cmdlet using the newly created resource group.  
-B. Edit the parameters file and add a new parameter named location of type string with the default value of `[resourceGroup().location]`.  
-C. Use the `New-AzResourceGroup` cmdlet with the `-Location` parameter to create a resource group in the desired location. Then use the `New-AzResourceGroupDeployment` cmdlet using the newly created resource group.  
-D. Edit the template file and update each location parameter with the value `[resourceGroup().location]`.  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-12-04-14-06.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Explanation:**
-
-You should edit the template file and update each location parameter with the value `[resourceGroup().location]`. The `resourceGroup()` function gets the resource group object that will be used to deploy the template. This way, all resources in the template will use the same location as the resource group. You need to ensure that all resources are supported in the location that you are using for the resource group.
-
-**Why you should not choose B:**
-
-You should not edit the parameters file and add a new parameter named `location` of type string with the default value of `[resourceGroup().location]`. This is the first step in centralizing the location value in the template, but you also need to update the location parameter in the template file with the value `[parameters('location')]`.
-
-**Why you should not choose A:**
-
-You should not use the Azure portal and create a resource group in the desired location and then use the `New-AzResourceGroupDeployment` cmdlet using the newly created resource group. If the resource group is deployed in a different location to the location configured in the template file, the resources will be deployed in different locations. You need to modify the location parameter in the template file to the value `[resourceGroup().location]` to inherit the location from the parent resource group.
-
-**Why you should not choose C:**
-
-You should not use the `New-AzResourceGroup` cmdlet with the `-Location` parameter to create a resource group in the desired location and then use the `New-AzResourceGroupDeployment` cmdlet using the newly created resource group. If the resource group is deployed in a different location to the location configured in the template file, the resources will be deployed in different locations. You need to modify the location parameter in the template file to the value `[resourceGroup().location]` to inherit the location from the parent resource group.
-
-<img src='.img/2026-03-12-04-30-49.png' width=600>
-
-**References**
-
-- [Set resource location in ARM template](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/resource-location?tabs=azure-powershell)
-- [Understand the structure and syntax of ARM templates](https://learn.microsoft.com/azure/azure-resource-manager/templates/syntax)
-- [Deploy resources with ARM templates and Azure PowerShell](https://learn.microsoft.com/azure/azure-resource-manager/templates/deploy-powershell)
-
-</details>
-
----
-
-#### Convert Array to Object
-
-**Domain:** Deploy and Manage Azure Compute Resources
-**Skill:** Automate deployment of resources by using ARM templates or Bicep files
-**Task:** Modify an existing Bicep file
-
-You are an Azure administrator for a company. You are deploying Azure resources using Bicep and you want to use Lambda functions to handle an array.
-
-You need to convert an array to an object with a custom key function and optional custom value function to produce the following output:
-
-{"MrFunny":{"name":"MrFunny","age":2},"MrNaughty":{"name":"MrNaughty","age":3}}
-
-Which Lambda function should you use to complete the code snippet below? To answer, select the appropriate option from the drop-down menu.
-
-```
-var cats = [
-  {
-    name: 'MrFunny'
-    age: 2
-  }
-  {
-    name: 'MrNaughty'
-    age: 3
-  }
-]
-
-output twocats object = ___[1]___ (cats, entry => entry.name)
-```
-
-Drop-Down Options:
-
-<!-- Dropdown options not yet provided. Paste screenshots of each expanded drop-down to populate. -->
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-03-04-28-34.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-Lambda expressions (or lambda functions) are essentially blocks of code that can be passed as an argument. They can take multiple parameters but are restricted to a single line of code. In this scenario, you need to convert an array to an object with a custom key function and optional custom value function. To do this, you should use the toObject lambda function. In this scenario, you use the toObject with two required parameters: output twocats object = toObject(cats, entry => entry.name), which produces the following output:
-
-{"MrFunny":{"name":"MrFunny","age":2},"MrNaughty":{"name":"MrNaughty","age":3}}
-
-You should not use the map lambda function. You would use map lambda function when you want to apply a custom mapping function to each element of an array.
-
-You should not use the reduce lambda function. You would use the reduce lambda function when you want to reduce an array with a custom reduce function. This would not produce the desired output since the return value is an array and not an object.
-
-You should not use sort lambda function. You would use the sort lambda function when you want to sort an array with a custom sort function.
-
-<img src='.img/2026-03-03-04-32-17.png' width=600>
-
-<img src='.img/2026-03-03-04-32-49.png' width=600>
-
-References
-
-* [Bicep Functions Lambda - ToObject](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-functions-lambda#toobject)
-* [Bicep Functions Lambda - Map](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-functions-lambda#map)p>
+- [Use Azure portal to export a template](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/export-template-portal)
+- [Understand the structure and syntax of ARM templates](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/syntax)
+- [Azure Resource Manager deployment modes: COMPLETE versus INCREMENTAL](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/deployment-modes)
+- [Azure Resource Manager deployment modes](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/deployment-modes)
+- [Manage Azure resources by using Azure CLI](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resources-cli)
 
 </details>
 
@@ -2345,56 +2214,187 @@ References
 
 ---
 
-#### Export ARM Template
+#### Edit ARM Template to Inherit Resource Group Location
 
 **Domain:** Deploy and Manage Azure Compute Resources
 **Skill:** Automate deployment of resources by using ARM templates or Bicep files
-**Task:** Export a deployment as an ARM template or convert an ARM template to a Bicep file
+**Task:** Modify an existing Azure Resource Manager template
 
-You deploy a line of business (LOB) application. All resources that are part of the LOB application are deployed in a single resource group. The resources were added in different phases.
+You have an Azure Resource Manager (ARM) template for creating a Windows virtual machine. You got this template from an existing resource group with a single virtual machine, using the automation script option.
 
-You need to export the current configuration of the LOB application resources to an Azure Resource Manager (ARM) template. You will later use this template for deploying the LOB application infrastructure in different environments for testing or development purposes.
+You want to reuse this template for other deployments. You need all the resources in the resource group to be in the same location.
 
-You are using the Complete mode for ARM deployment.
+What should you do?
 
-For each of the following statements, select Yes if the statement is true. Otherwise, select No.
-
-| Statement | Yes | No |
-|----------|-----|----|
-| You need to export the Azure Resource Manager (ARM) template from the latest deployment. | ☐ | ☐ |
-| Each deployment contains only the resources that have been added in that deployment. | ☐ | ☐ |
-| The parameters file contains the values used during the deployment. | ☐ | ☐ |
-| The template contains the scripts needed for deploying the template. | ☐ | ☐ |
+A. Use the Azure portal and create a resource group in the desired location. Then use the `New-AzResourceGroupDeployment` cmdlet using the newly created resource group.  
+B. Edit the parameters file and add a new parameter named location of type string with the default value of `[resourceGroup().location]`.  
+C. Use the `New-AzResourceGroup` cmdlet with the `-Location` parameter to create a resource group in the desired location. Then use the `New-AzResourceGroupDeployment` cmdlet using the newly created resource group.  
+D. Edit the template file and update each location parameter with the value `[resourceGroup().location]`.  
 
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-03-12-03-11-57.png' width=600>
+<img src='.img/2026-03-12-04-14-06.png' width=600>
 
 </details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
 
-You do not need to export the Azure Resource Manager (ARM) template from the latest deployment. In this scenario, the line of business (LOB) application was deployed in several phases. The latest deployment will export only the latest resources added to the application. If you want to export the ARM template with all the resources needed for the LOB application, you will need to export the ARM template from the resource group.
+**Explanation:**
 
-Each deployment contains only the resources that have been added in that deployment. When deploying your resources, you specify that the deployment is either an Incremental update or a Complete update. The difference between these two modes is how the Resource Manager handles existing resources in the resource group that are not in the template. In this scenario, since you are using the Complete mode, each deployment contains only the resources that have been added in that deployment and the Resource Manager will delete all the resources that exist in the resource group but are not specified in the template. On the other hand, in an Incremental mode, the Resource Manager leaves unchanged resources that exist in the resource group but are not specified in the template. Resources in the template are added to the resource group.
+You should edit the template file and update each location parameter with the value `[resourceGroup().location]`. The `resourceGroup()` function gets the resource group object that will be used to deploy the template. This way, all resources in the template will use the same location as the resource group. You need to ensure that all resources are supported in the location that you are using for the resource group.
 
-The parameters file contains the values used during the deployment. The parameters file is a JSON file that stores all the parameters used in the ARM template. You can use this file to reuse the template in different deployments, just changing the values of the parameters file. If you use this file in templates created from resource groups, you need to make significant edits to the template before you can effectively use the parameters file.
+**Why you should not choose B:**
 
-The template does not contain the scripts needed for deploying the template. When you download an ARM template from a deployment or a resource group, the downloaded package contains only the ARM template and the parameters file. You can reference Azure CLI scripts or a PowerShell script in the Azure docs linked in the export template pane.
+You should not edit the parameters file and add a new parameter named `location` of type string with the default value of `[resourceGroup().location]`. This is the first step in centralizing the location value in the template, but you also need to update the location parameter in the template file with the value `[parameters('location')]`.
 
-<img src='.img/2026-03-12-03-47-36.png' width=600>
+**Why you should not choose A:**
 
-<img src='.img/2026-03-12-03-31-11.png' width=600>
+You should not use the Azure portal and create a resource group in the desired location and then use the `New-AzResourceGroupDeployment` cmdlet using the newly created resource group. If the resource group is deployed in a different location to the location configured in the template file, the resources will be deployed in different locations. You need to modify the location parameter in the template file to the value `[resourceGroup().location]` to inherit the location from the parent resource group.
+
+**Why you should not choose C:**
+
+You should not use the `New-AzResourceGroup` cmdlet with the `-Location` parameter to create a resource group in the desired location and then use the `New-AzResourceGroupDeployment` cmdlet using the newly created resource group. If the resource group is deployed in a different location to the location configured in the template file, the resources will be deployed in different locations. You need to modify the location parameter in the template file to the value `[resourceGroup().location]` to inherit the location from the parent resource group.
+
+<img src='.img/2026-03-12-04-30-49.png' width=600>
+
+**References**
+
+- [Set resource location in ARM template](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/resource-location?tabs=azure-powershell)
+- [Understand the structure and syntax of ARM templates](https://learn.microsoft.com/azure/azure-resource-manager/templates/syntax)
+- [Deploy resources with ARM templates and Azure PowerShell](https://learn.microsoft.com/azure/azure-resource-manager/templates/deploy-powershell)
+
+</details>
+
+---
+
+#### Case Study — Solution Evaluation
+
+**Domain:** Deploy and Manage Azure Compute Resources
+**Skill:** Automate deployment of resources by using ARM templates or Bicep files
+**Task:** Deploy resources by using an ARM template or a Bicep file
+
+*Case Study — Solution Evaluation*
+
+This case study contains a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.
+
+You have an Azure resource group named `RG1`. `RG1` contains a Linux virtual machine (VM) named `VM1`.
+
+You need to automate the deployment of 20 additional Linux VMs. The new VMs should be based upon `VM1`'s configuration.
+
+Does this solution meet the goal?
+
+| Solution | Yes | No |
+|----------|-----|----|
+| 1. From the virtual machine's Export Template settings blade, you click Deploy and edit the parameters. | ☐ | ☐ |
+| 2. You store the Linux VM properties in a template and deploy the additional VMs by editing the template parameter values for each additional VM. | ☐ | ☐ |
+| 3. From the resource group's Policies blade, you click Assign policy. | ☐ | ☐ |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-12-03-58-37.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+Solution 1 Explanation:
+
+This solution does not meet the goal. Every deployment in Azure is described in a template in JavaScript Object Notation (JSON) format. You can access the underlying template from the Export Template settings blade of the VM resource, and then deploy a single new instance of a resource by modifying the template parameters. However, you would need to do this 20 times in order to create 20 VMs, and therefore it is not an automatic process.
+
+Solution 2 Explanation:
+
+This solution meets the goal. The Templates blade in the Azure portal enables you to store JavaScript Object Notation (JSON) documents that automate Azure resource deployment. In this case, to automate the deployment of 20 additional Linux VMs based on `VM1`'s configuration, you can use an Azure Resource Manager (ARM) template. Steps:
+
+1. Export `VM1`'s configuration by using **Export template** in the portal to get the ARM template for the VM.
+2. Modify the exported ARM template to introduce parameters for items that will vary between VMs (for example, VM name, IP assignment, and any unique identifiers).
+3. Create a parameter file (`parameters.json`) that defines the values for the 20 new VMs (names, sizes, and other settings).
+4. Deploy the template with the parameter file using CLI or PowerShell, for example:
+
+```powershell
+az deployment group create --resource-group MyResourceGroup --template-file ./template.json --parameters @parameters.json
+```
+
+5. Automate the process by scripting updates to the parameter file and running the deployment in a loop. For example, a simple shell loop can iterate and deploy multiple parameter sets.
+
+Solution 3 Explanation:
+
+This solution does not meet the goal. To automate the deployment of the 20 additional VMs, you should access the virtual machine's underlying JSON template and deploy the new resources by using the template and custom deployment parameters. Azure Policy is a governance product that enforces rules (for example, allowed regions or VM types) and helps ensure compliance, but it does not perform bulk VM provisioning based on an existing VM's configuration.
 
 References
 
-- [Use Azure portal to export a template](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/export-template-portal)
-- [Understand the structure and syntax of ARM templates](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/syntax)
-- [Azure Resource Manager deployment modes: COMPLETE versus INCREMENTAL](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/deployment-modes)
-- [Azure Resource Manager deployment modes](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/deployment-modes)
-- [Manage Azure resources by using Azure CLI](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resources-cli)
+* [Export an Azure Resource Manager template from an existing resource](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/export-template-portal)
+* [Deploy resources with ARM templates](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/deploy-templates-azure-cli)
+* [Azure Policy overview](https://learn.microsoft.com/en-us/azure/governance/policy/overview)
+
+</details>
+
+---
+
+#### Convert Array to Object
+
+**Domain:** Deploy and Manage Azure Compute Resources
+**Skill:** Automate deployment of resources by using ARM templates or Bicep files
+**Task:** Modify an existing Bicep file
+
+You are an Azure administrator for a company. You are deploying Azure resources using Bicep and you want to use Lambda functions to handle an array.
+
+You need to convert an array to an object with a custom key function and optional custom value function to produce the following output:
+
+{"MrFunny":{"name":"MrFunny","age":2},"MrNaughty":{"name":"MrNaughty","age":3}}
+
+Which Lambda function should you use to complete the code snippet below? To answer, select the appropriate option from the drop-down menu.
+
+```
+var cats = [
+  {
+    name: 'MrFunny'
+    age: 2
+  }
+  {
+    name: 'MrNaughty'
+    age: 3
+  }
+]
+
+output twocats object = ___[1]___ (cats, entry => entry.name)
+```
+
+Drop-Down Options:
+
+<!-- Dropdown options not yet provided. Paste screenshots of each expanded drop-down to populate. -->
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-03-04-28-34.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+Lambda expressions (or lambda functions) are essentially blocks of code that can be passed as an argument. They can take multiple parameters but are restricted to a single line of code. In this scenario, you need to convert an array to an object with a custom key function and optional custom value function. To do this, you should use the toObject lambda function. In this scenario, you use the toObject with two required parameters: output twocats object = toObject(cats, entry => entry.name), which produces the following output:
+
+{"MrFunny":{"name":"MrFunny","age":2},"MrNaughty":{"name":"MrNaughty","age":3}}
+
+You should not use the map lambda function. You would use map lambda function when you want to apply a custom mapping function to each element of an array.
+
+You should not use the reduce lambda function. You would use the reduce lambda function when you want to reduce an array with a custom reduce function. This would not produce the desired output since the return value is an array and not an object.
+
+You should not use sort lambda function. You would use the sort lambda function when you want to sort an array with a custom sort function.
+
+<img src='.img/2026-03-03-04-32-17.png' width=600>
+
+<img src='.img/2026-03-03-04-32-49.png' width=600>
+
+References
+
+* [Bicep Functions Lambda - ToObject](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-functions-lambda#toobject)
+* [Bicep Functions Lambda - Map](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-functions-lambda#map)p>
 
 </details>
 
@@ -3089,55 +3089,6 @@ If a deployment-related command is available (like `Publish-AzWebApp`) and the s
 
 ### Configure and manage virtual networks in Azure
 
-#### VNet Peering with ExpressRoute
-
-**Domain:** Implement and Manage Virtual Networking
-**Skill:** Configure and manage virtual networks in Azure
-**Task:** Create and configure virtual network peering
-
-You are asked to configure a subnet named SUBNET1 that is part of a virtual network named VNET1. Hosts on SUBNET1 need to be able to reach resources on a virtual network named VNET2 and also reach a proxy server that scans all outbound internet requests being made by resources hosted on SUBNET1.
-
-The proxy server is hosted on your on-premises network. You have an ExpressRoute circuit named EXP-ROUTE1 configured between VNET2 and your on-premises network.
-
-You want VNET1 to use EXP-ROUTE1 to reach the proxy server. To minimize costs, your solution must not require the creation of additional resources.
-
-Which two actions should you perform? Each correct answer presents part of the solution.
-
-A. Create a virtual network (VNet) gateway in VNET1.  
-B. Configure VNET2 peering to use the remote gateway.  
-C. Link the virtual network (VNet) gateway in VNET1 with EXP-ROUTE1.  
-D. Configure VNET1 peering to use the remote gateway.  
-E. Configure virtual network (VNet) peering between VNET1 and VNET2.  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-12-05-10-59.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Solution explanation:**
-
-You should configure virtual network (VNet) peering between VNET1 and VNET2. You should also set VNET1 to use the remote gateway. The peering will provide connectivity between VNET1 and VNET2 by internally sharing routes to the corresponding IP address ranges. For VNET1 to leverage the EXP-ROUTE1 to connect to the on-premises network, you would have to ensure that the peering connection on VNET1 uses the gateway device attached to VNET2. This gateway is what is used by the EXP-ROUTE1 ExpressRoute circuit.
-
-You should not set VNET2 peering to use the remote gateway. Because VNET2 is configured with an ExpressRoute circuit, VNET2 already has a VNet gateway on its gateway subnet. Trying to set VNET2 to use the remote gateway will generate an error message stating that the configuration is not possible.
-
-You should not create a VNet gateway in VNET1 and link that with EXP-ROUTE1. These two steps would provide connectivity to resources hosted on VNET1, enabling them to use EXP-ROUTE1, but it would not provide connectivity between VNET1 and VNET2. It would also increase the cost because you would need to add an additional VNet gateway device in VNET1.
-
-**References**
-
-* [Virtual network peering](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview)
-* [What is Azure ExpressRoute?](https://learn.microsoft.com/en-us/azure/expressroute/expressroute-introduction)
-* [About ExpressRoute virtual network gateways](https://learn.microsoft.com/en-us/azure/expressroute/expressroute-about-virtual-network-gateways)
-* [Tutorial: Connect a virtual network to an ExpressRoute circuit using the Azure portal](https://learn.microsoft.com/en-us/azure/expressroute/expressroute-howto-linkvnet-portal-resource-manager)
-
-</details>
-
----
-
 #### Configure Layered Network Security
 
 **Domain:** Implement and Manage Virtual Networking
@@ -3260,6 +3211,55 @@ So, your screenshot should be read as:
 
 <https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-service-endpoints-overview>
 <https://learn.microsoft.com/en-us/azure/app-service/tutorial-secure-ntier-app>
+
+</details>
+
+---
+
+#### VNet Peering with ExpressRoute
+
+**Domain:** Implement and Manage Virtual Networking
+**Skill:** Configure and manage virtual networks in Azure
+**Task:** Create and configure virtual network peering
+
+You are asked to configure a subnet named SUBNET1 that is part of a virtual network named VNET1. Hosts on SUBNET1 need to be able to reach resources on a virtual network named VNET2 and also reach a proxy server that scans all outbound internet requests being made by resources hosted on SUBNET1.
+
+The proxy server is hosted on your on-premises network. You have an ExpressRoute circuit named EXP-ROUTE1 configured between VNET2 and your on-premises network.
+
+You want VNET1 to use EXP-ROUTE1 to reach the proxy server. To minimize costs, your solution must not require the creation of additional resources.
+
+Which two actions should you perform? Each correct answer presents part of the solution.
+
+A. Create a virtual network (VNet) gateway in VNET1.  
+B. Configure VNET2 peering to use the remote gateway.  
+C. Link the virtual network (VNet) gateway in VNET1 with EXP-ROUTE1.  
+D. Configure VNET1 peering to use the remote gateway.  
+E. Configure virtual network (VNet) peering between VNET1 and VNET2.  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-12-05-10-59.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Solution explanation:**
+
+You should configure virtual network (VNet) peering between VNET1 and VNET2. You should also set VNET1 to use the remote gateway. The peering will provide connectivity between VNET1 and VNET2 by internally sharing routes to the corresponding IP address ranges. For VNET1 to leverage the EXP-ROUTE1 to connect to the on-premises network, you would have to ensure that the peering connection on VNET1 uses the gateway device attached to VNET2. This gateway is what is used by the EXP-ROUTE1 ExpressRoute circuit.
+
+You should not set VNET2 peering to use the remote gateway. Because VNET2 is configured with an ExpressRoute circuit, VNET2 already has a VNet gateway on its gateway subnet. Trying to set VNET2 to use the remote gateway will generate an error message stating that the configuration is not possible.
+
+You should not create a VNet gateway in VNET1 and link that with EXP-ROUTE1. These two steps would provide connectivity to resources hosted on VNET1, enabling them to use EXP-ROUTE1, but it would not provide connectivity between VNET1 and VNET2. It would also increase the cost because you would need to add an additional VNet gateway device in VNET1.
+
+**References**
+
+* [Virtual network peering](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview)
+* [What is Azure ExpressRoute?](https://learn.microsoft.com/en-us/azure/expressroute/expressroute-introduction)
+* [About ExpressRoute virtual network gateways](https://learn.microsoft.com/en-us/azure/expressroute/expressroute-about-virtual-network-gateways)
+* [Tutorial: Connect a virtual network to an ExpressRoute circuit using the Azure portal](https://learn.microsoft.com/en-us/azure/expressroute/expressroute-howto-linkvnet-portal-resource-manager)
 
 </details>
 
