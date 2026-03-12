@@ -610,8 +610,7 @@ def build_commit_table(
         "🟣 High (> 2hrs)*\n"
     )
     table += (
-        "\n*Study sessions: start/end commits define session boundaries*  \n"
-        "*Other = Lab workflow and automation design, "
+        "\n*Other = Lab workflow and automation design, "
         "content structure and development*  \n"
     )
 
