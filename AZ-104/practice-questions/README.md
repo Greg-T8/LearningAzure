@@ -3269,8 +3269,6 @@ So, your screenshot should be read as:
 
 </details>
 
-▶ Related Lab: []()
-
 ---
 
 ### Configure secure access to virtual networks

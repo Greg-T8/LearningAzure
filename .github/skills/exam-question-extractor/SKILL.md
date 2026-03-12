@@ -438,7 +438,7 @@ When a question is **answered** (explanation is generated), you **must** extract
 * [Link title](URL)
 ```
 
-* If the URL is not readable in the screenshot (clipped or too small), use the visible link title text and construct the most likely Microsoft Learn URL. If you cannot determine a plausible URL, use the title text as a plain-text bullet instead of a dead link.
+* If the URL is not readable in the screenshot (clipped or too small), emit the visible link title as a **plain-text bullet** (e.g., `* Virtual network peering`). **Never guess or construct a URL.** The downstream **exam-question-explainer** skill will resolve plain-text titles into full markdown links via the **markdown-link-resolver** skill.
 * If a partially visible reference is cut off mid-word, extract as much text as is legible and append an ellipsis (`…`).
 * **Self-check:** Before finalizing the explanation, re-examine the bottom 20% of each screenshot specifically for a References section. If references are present and missing from your output, add them before submitting.
 * If no references section is visible in the screenshot, do not fabricate one.

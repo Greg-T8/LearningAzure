@@ -5,7 +5,8 @@ Collapse open detail blocks in practice exam markdown files.
 .DESCRIPTION
 Scans markdown files under practice-questions folders and individual assessment
 files for HTML detail elements with the open attribute and removes it so
-explanations render collapsed by default.
+explanations render collapsed by default. Also removes empty related-lab lines
+such as "▶ Related Lab: []()".
 
 .CONTEXT
 LearningAzure repository — practice exam content formatting.
@@ -23,12 +24,13 @@ param()
 # Configuration
 $RepoRoot = Resolve-Path -Path (Join-Path -Path $PSScriptRoot -ChildPath '..\..')
 $Pattern = '<details\s+open\s*>'
+$EmptyRelatedLabPattern = '^[ \t]*▶\s*(?:\*\*)?Related Lab:(?:\*\*)?\s*\[\s*\]\(\s*\)\s*(?:\r?\n)?'
 
 $Main = {
     . $Helpers
 
     $files = Get-TargetFile
-    $results = Update-DetailBlock -Files $files
+    $results = Update-MarkdownFormatting -Files $files
     Show-Summary -Results $results
 }
 
@@ -52,8 +54,8 @@ $Helpers = {
         return $mdFiles
     }
 
-    function Update-DetailBlock {
-        # Replace <details open> with <details> in each file that contains matches
+    function Update-MarkdownFormatting {
+        # Apply markdown formatting cleanup in each file that contains matches
         param(
             [Parameter(Mandatory)]
             [AllowEmptyCollection()]
@@ -65,21 +67,35 @@ $Helpers = {
         foreach ($file in $Files) {
             $content = Get-Content -Path $file.FullName -Raw
 
-            # Count matches before replacing
-            $matchCount = ([regex]::Matches($content, $Pattern, 'IgnoreCase')).Count
+            # Count current matches before replacing
+            $detailBlockCount = ([regex]::Matches($content, $Pattern, 'IgnoreCase')).Count
+            $emptyRelatedLabCount = ([regex]::Matches($content, $EmptyRelatedLabPattern, 'IgnoreCase,Multiline')).Count
 
-            if ($matchCount -eq 0) { continue }
+            if ($detailBlockCount -eq 0 -and $emptyRelatedLabCount -eq 0) { continue }
 
             # Build the corrected content
             $updated = [regex]::Replace($content, $Pattern, '<details>', 'IgnoreCase')
+            $updated = [regex]::Replace($updated, $EmptyRelatedLabPattern, '', 'IgnoreCase,Multiline')
 
-            if ($PSCmdlet.ShouldProcess($file.FullName, "Collapse $matchCount detail block(s)")) {
+            # Build a concise action message for WhatIf/ShouldProcess output
+            $changeParts = [System.Collections.Generic.List[string]]::new()
+
+            if ($detailBlockCount -gt 0) {
+                $changeParts.Add("Collapse $detailBlockCount detail block(s)")
+            }
+
+            if ($emptyRelatedLabCount -gt 0) {
+                $changeParts.Add("Remove $emptyRelatedLabCount empty related lab line(s)")
+            }
+
+            if ($PSCmdlet.ShouldProcess($file.FullName, ($changeParts -join '; '))) {
                 Set-Content -Path $file.FullName -Value $updated -NoNewline
             }
 
             $results.Add([PSCustomObject]@{
-                File  = $file.FullName
-                Count = $matchCount
+                File                 = $file.FullName
+                DetailBlockCount     = $detailBlockCount
+                EmptyRelatedLabCount = $emptyRelatedLabCount
             })
         }
 
@@ -88,7 +104,7 @@ $Helpers = {
     }
 
     function Show-Summary {
-        # Display a summary of files updated and total blocks collapsed
+        # Display a summary of files updated and total formatting changes
         param(
             [Parameter(Mandatory)]
             [AllowEmptyCollection()]
@@ -96,20 +112,35 @@ $Helpers = {
         )
 
         if (-not $Results -or $Results.Count -eq 0) {
-            Write-Host "`nNo open detail blocks found. All explanations are already collapsed." -ForegroundColor Green
+            Write-Host "`nNo open detail blocks or empty related lab lines found." -ForegroundColor Green
             return
         }
 
-        $totalBlocks = ($Results | Measure-Object -Property Count -Sum).Sum
-        $action = if ($WhatIfPreference) { 'would be collapsed' } else { 'collapsed' }
+        $totalDetailBlocks = ($Results | Measure-Object -Property DetailBlockCount -Sum).Sum
+        $totalEmptyRelatedLabs = ($Results | Measure-Object -Property EmptyRelatedLabCount -Sum).Sum
+        $actionDetail = if ($WhatIfPreference) { 'would be collapsed' } else { 'collapsed' }
+        $actionEmptyLab = if ($WhatIfPreference) { 'would be removed' } else { 'removed' }
 
         Write-Host "`n--- Summary ---" -ForegroundColor Cyan
-        Write-Host "$totalBlocks detail block(s) $action across $($Results.Count) file(s)" -ForegroundColor Cyan
+        Write-Host "$totalDetailBlocks detail block(s) $actionDetail across $($Results.Count) file(s)" -ForegroundColor Cyan
+        Write-Host "$totalEmptyRelatedLabs empty related lab line(s) $actionEmptyLab across $($Results.Count) file(s)" -ForegroundColor Cyan
 
         foreach ($result in $Results) {
             # Show workspace-relative path for readability
             $relativePath = $result.File.Replace("$RepoRoot\", '')
-            Write-Host "  $relativePath — $($result.Count) block(s)" -ForegroundColor Gray
+
+            # Show only change types that actually occurred in the file
+            $changeDescriptions = [System.Collections.Generic.List[string]]::new()
+
+            if ($result.DetailBlockCount -gt 0) {
+                $changeDescriptions.Add("$($result.DetailBlockCount) detail block(s)")
+            }
+
+            if ($result.EmptyRelatedLabCount -gt 0) {
+                $changeDescriptions.Add("$($result.EmptyRelatedLabCount) empty related lab line(s)")
+            }
+
+            Write-Host "  $relativePath — $($changeDescriptions -join ', ')" -ForegroundColor Gray
         }
     }
 }
