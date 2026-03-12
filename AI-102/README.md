@@ -44,7 +44,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 
 <a id="domain-1"></a>
 <details>
-<summary><b>Domain 1: Plan and Manage an Azure AI Solution (20–25%)</b> — 23 tasks · 1 Q · 1 Lab</summary>
+<summary><b>Domain 1: Plan and Manage an Azure AI Solution (20–25%)</b> — 23 tasks · 1 Qs · 1 Labs</summary>
 
 | Skill | Task | Qs | Labs |
 | :--- | :--- | -: | -: |
@@ -108,7 +108,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 
 <a id="domain-3"></a>
 <details>
-<summary><b>Domain 3: Implement an Agentic Solution (5–10%)</b> — 6 tasks · 1 Q · 2 Labs</summary>
+<summary><b>Domain 3: Implement an Agentic Solution (5–10%)</b> — 6 tasks · 1 Qs · 2 Labs</summary>
 
 | Skill | Task | Qs | Labs |
 | :--- | :--- | -: | -: |
