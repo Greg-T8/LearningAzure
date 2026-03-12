@@ -91,7 +91,7 @@ Make a **single** edit that replaces the selected `<img>` line(s) with the fully
 ### Explanation Block Rule
 
 - If the question is **blank** (no answer selected), append the empty explanation placeholder.
-- If the question is **answered** (correct or incorrect indicator visible), invoke the **exam-question-explainer** skill using the same screenshot(s) to generate the explanation, then insert that explanation inside the `<details>` block instead of leaving it empty.
+- If the question is **answered** (correct or incorrect indicator visible), invoke the **exam-question-explainer** skill using the same screenshot(s) to generate the explanation, then insert that explanation inside the `<details>` block instead of leaving it empty. You **must** also extract any visible References section from the screenshot (see **References Extraction** appendix).
 
 ---
 
@@ -418,6 +418,30 @@ Rules:
 **Answered questions:** Invoke the **exam-question-explainer** skill with the same screenshot(s) and insert its output between the opening and closing tags. Do not leave the block empty when an answer state is detected.
 
 **Explanation formatting:** All section topic labels inside the explanation (for example, **Solution 1 Explanation:**, **References**, **Key takeaway**) must be **bold** — wrapped in `**…**`. No plain-text section labels are allowed.
+
+---
+
+### References Extraction (Mandatory for Answered Questions)
+
+When a question is **answered** (explanation is generated), you **must** extract and include any **References** section visible in the screenshot.
+
+#### Rules
+
+* **Scan the full image**, including the bottom edge. References typically appear as colored hyperlink text at the very end of the explanation area and are easy to miss.
+* If a "References" heading or labeled link list is visible anywhere in the screenshot, extract **every** listed reference — even if partially clipped at the image boundary.
+* Format each reference as a bullet-point markdown link inside the explanation `<details>` block under a bold **References** label:
+
+```markdown
+**References**
+
+* [Link title](URL)
+* [Link title](URL)
+```
+
+* If the URL is not readable in the screenshot (clipped or too small), use the visible link title text and construct the most likely Microsoft Learn URL. If you cannot determine a plausible URL, use the title text as a plain-text bullet instead of a dead link.
+* If a partially visible reference is cut off mid-word, extract as much text as is legible and append an ellipsis (`…`).
+* **Self-check:** Before finalizing the explanation, re-examine the bottom 20% of each screenshot specifically for a References section. If references are present and missing from your output, add them before submitting.
+* If no references section is visible in the screenshot, do not fabricate one.
 
 ---
 
