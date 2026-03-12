@@ -42,7 +42,7 @@ Accounts for questions missed or unsure about in the practice exams.
   * [Automate deployment of resources by using ARM templates or Bicep files](#automate-deployment-of-resources-by-using-arm-templates-or-bicep-files)
     * [Export ARM Template](#export-arm-template)
     * [Edit ARM Template to Inherit Resource Group Location](#edit-arm-template-to-inherit-resource-group-location)
-    * [Case Study — Solution Evaluation](#case-study-solution-evaluation)
+    * [Case Study — Solution Evaluation](#case-study--solution-evaluation)
   * [Create and configure virtual machines](#create-and-configure-virtual-machines)
     * [VM Resize Failure Cause](#vm-resize-failure-cause)
     * [Encrypt VM Disk With Key Vault](#encrypt-vm-disk-with-key-vault)
@@ -78,6 +78,7 @@ Accounts for questions missed or unsure about in the practice exams.
   * [Implement backup and recovery](#implement-backup-and-recovery)
     * [Recover Configuration File from Azure VM Backup](#recover-configuration-file-from-azure-vm-backup)
     * [Recover Azure VM from Deleted Backup](#recover-azure-vm-from-deleted-backup)
+    * [Configure Layered Network Security](#configure-layered-network-security)
 
 ---
 
@@ -4042,3 +4043,83 @@ For Azure IaaS VMs protected by a Recovery Services vault, **soft delete provide
 </details>
 
 ---
+
+#### Configure Layered Network Security
+
+**Domain:** Implement and Manage Virtual Networking
+**Skill:** Configure and manage virtual networks in Azure
+**Task:**
+
+- Create and configure virtual networks and subnets
+- Configure service endpoints for Azure PaaS
+
+Your company is planning to deploy a new application in its Azure subscription. You are asked to configure the required infrastructure for the new application.
+
+The new application must be deployed in a layered infrastructure. This infrastructure consists of the following layers:
+
+- Front-end servers
+- Back-end servers
+- Database
+
+The frontend and backend layers will use Azure virtual machines (VMs). The database layer will be deployed using Azure SQL Database.
+
+You start configuring the networking infrastructure. You need to ensure that you can apply security filtering on each layer independently. Your solution should require the minimum administrative effort.
+
+Which four actions should you perform in sequence? To answer, move the appropriate actions from the list of possible actions to the answer area and arrange them in the correct order.
+
+A. Create a resource group.  
+B. Create a single virtual network (VNet).  
+C. Create two subnets.  
+D. Create three subnets.  
+E. Create a virtual network (VNet) for each layer.  
+F. Configure peering on each virtual network (VNet).  
+G. Enable service endpoints for the subnets.  
+
+Select and order 4:
+
+| Step | Action |
+|------|--------|
+| 1 | |
+| 2 | |
+| 3 | |
+| 4 | |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-12-04-36-53.png' width=600>
+
+</details>
+
+<details open>
+<summary>💡 Click to expand explanation</summary>
+
+**You should perform the following actions in order:**
+
+1. **Create a resource group**
+2. **Create a single virtual network (VNet).**
+3. **Create two subnets.**
+4. **Enable service endpoints for the subnets.**
+
+**First,** you should create a new resource group. Because you are deploying a whole new infrastructure for this application, you should create a new resource group and put all new resources in this new resource group.
+
+**Next,** you should create a single VNet. This VNet will provide connectivity between all the elements of the application.
+
+**Next,** you should create two subnets in the new VNet. You should assign a subnet for the front-end layer, and another for the back-end layer. You should not create a subnet for the Azure SQL Database, because this is deployed in its own internal network that you cannot customize. You can also create a network security group (NSG) for each subnet so that you can manage security on each subnet independently.
+
+**Finally,** you should enable service endpoints for the subnets within the VNet. You should also enable the service endpoint in the Azure SQL Database. This way, your database can directly connect to VMs deployed in the front-end and back-end subnets, and vice versa.
+
+**You should not configure peering on each VNet.** VNet peering allows you to connect different VNets so resources on each VNet can communicate with each other. In this scenario, there is no need to configure peering because creating a single VNet satisfies your communication needs.
+
+**You should not create a VNet for each layer.** Although creating a VNet for each layer could solve your communication requirements, this requires much more effort than using a single VNet. Each VNet still requires at least one subnet. Creating multiple VNets for this scenario would also require the configuration of peering between each VNet. There is no need to configure a VNet for the data layer because you will use Azure SQL Database, which does not require a VNet.
+
+**You should not create three subnets.** You need to configure a subnet for the front-end layer and another for the back-end layer. There is no need to configure an additional subnet for the data layer because Azure SQL Database has all its networking requirements configured internally.
+
+**References**:  
+
+<https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-service-endpoints-overview>
+<https://learn.microsoft.com/en-us/azure/app-service/tutorial-secure-ntier-app>
+
+</details>
+
+▶ Related Lab: []()
