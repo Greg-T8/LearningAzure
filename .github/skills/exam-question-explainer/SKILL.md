@@ -87,17 +87,20 @@ Rules:
 - Must appear **last**
 - Must be formatted as a **bulleted list**
 - **One item per bullet**
-- If the input contains reference links:
+- If the input contains reference links (full URLs):
   - **All valid input links must be included**
   - Links must be copied **exactly as provided**
-- If the input contains **no links at all**, use this fallback bullet verbatim:
+- If the input contains **plain-text page titles without URLs** (e.g., "Understand the structure and syntax of ARM templates"):
+  - Invoke the **markdown-link-resolver** skill to resolve each title into a full markdown link (`- [Title](URL)`)
+  - Use the resolved links in the **References** section
+- If the input contains **no references at all** (no links and no page titles), use this fallback bullet verbatim:
   - `No stable Microsoft Learn link can be guaranteed for this specific exam concept.`
 
 ## Prohibited Behaviors
 
 - Dropping valid links that appear in the input
 - Replacing provided links with fallback text
-- Guessing or constructing new Microsoft Learn URLs
+- Guessing or constructing new Microsoft Learn URLs without using the markdown-link-resolver skill
 - Modifying or "cleaning up" provided URLs
 - Contradicting an official exam explanation
 - Including URLs outside the **References** section
@@ -109,7 +112,8 @@ Before returning a response, confirm:
 - The **References** section exists and is last
 - No URLs appear outside **References**
 - **All reference links present in the input are preserved in the output**
-- Fallback text is used **only when no links exist in the input**
+- **Plain-text page titles from the input have been resolved to full markdown links via the markdown-link-resolver skill**
+- Fallback text is used **only when no references exist in the input** (no links and no page titles)
 - Official exam explanations (if provided) are incorporated and respected
 
 If any condition fails, the response must be rewritten before returning.
