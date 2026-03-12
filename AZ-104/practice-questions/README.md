@@ -77,6 +77,7 @@ Accounts for questions missed or unsure about in the practice exams.
     * [Recover Configuration File from Azure VM Backup](#recover-configuration-file-from-azure-vm-backup)
     * [Recover Azure VM from Deleted Backup](#recover-azure-vm-from-deleted-backup)
     * [Case Study — Solution Evaluation](#case-study--solution-evaluation)
+    * [Edit ARM Template to Inherit Resource Group Location](#edit-arm-template-to-inherit-resource-group-location)
 
 ---
 
@@ -3986,3 +3987,55 @@ References
 </details>
 
 ---
+
+#### Edit ARM Template to Inherit Resource Group Location
+
+**Domain:** Deploy and Manage Azure Compute Resources
+**Skill:** Automate deployment of resources by using ARM templates or Bicep files
+**Task:** Modify an existing Azure Resource Manager template
+
+You have an Azure Resource Manager (ARM) template for creating a Windows virtual machine. You got this template from an existing resource group with a single virtual machine, using the automation script option.
+
+You want to reuse this template for other deployments. You need all the resources in the resource group to be in the same location.
+
+What should you do?
+
+A. Use the Azure portal and create a resource group in the desired location. Then use the `New-AzResourceGroupDeployment` cmdlet using the newly created resource group.  
+B. Edit the parameters file and add a new parameter named location of type string with the default value of `[resourceGroup().location]`.  
+C. Use the `New-AzResourceGroup` cmdlet with the `-Location` parameter to create a resource group in the desired location. Then use the `New-AzResourceGroupDeployment` cmdlet using the newly created resource group.  
+D. Edit the template file and update each location parameter with the value `[resourceGroup().location]`.  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-12-04-14-06.png' width=600>
+
+</details>
+
+<details open>
+<summary>💡 Click to expand explanation</summary>
+
+**Explanation:**
+
+You should edit the template file and update each location parameter with the value `[resourceGroup().location]`. The `resourceGroup()` function gets the resource group object that will be used to deploy the template. This way, all resources in the template will use the same location as the resource group. You need to ensure that all resources are supported in the location that you are using for the resource group.
+
+**Why you should not choose B:**
+
+You should not edit the parameters file and add a new parameter named `location` of type string with the default value of `[resourceGroup().location]`. This is the first step in centralizing the location value in the template, but you also need to update the location parameter in the template file with the value `[parameters('location')]`.
+
+**Why you should not choose A:**
+
+You should not use the Azure portal and create a resource group in the desired location and then use the `New-AzResourceGroupDeployment` cmdlet using the newly created resource group. If the resource group is deployed in a different location to the location configured in the template file, the resources will be deployed in different locations. You need to modify the location parameter in the template file to the value `[resourceGroup().location]` to inherit the location from the parent resource group.
+
+**Why you should not choose C:**
+
+You should not use the `New-AzResourceGroup` cmdlet with the `-Location` parameter to create a resource group in the desired location and then use the `New-AzResourceGroupDeployment` cmdlet using the newly created resource group. If the resource group is deployed in a different location to the location configured in the template file, the resources will be deployed in different locations. You need to modify the location parameter in the template file to the value `[resourceGroup().location]` to inherit the location from the parent resource group.
+
+**References**
+
+- [Understand the structure and syntax of ARM templates](https://learn.microsoft.com/azure/azure-resource-manager/templates/syntax)
+- [Deploy resources with ARM templates and Azure PowerShell](https://learn.microsoft.com/azure/azure-resource-manager/templates/deploy-powershell)
+
+</details>
+
+▶ Related Lab: []()
