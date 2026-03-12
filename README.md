@@ -45,20 +45,3 @@ Progress trackers, detailed study notes, practice exams, and hands-on labs:
 *Last updated: March 11, 2026 at 09:17 CDT*
 
 <!-- COMMIT_STATS_END -->
-
----
-
-## 📖 Learning Approach
-
-My exam preparation follows a practice exam-driven methodology that emphasizes hands-on experience:
-
-### Primary Learning Method
-
-1. **Practice Exams** — Identify knowledge gaps by attempting practice exam questions
-2. **Hands-on Labs** — For each question I get wrong or am unsure about, I build a dedicated environment tailored to that exam question using Terraform or Bicep
-3. **Documentation** — Document the hands-on experience to reinforce learning and create reference materials
-
-### Supplementary Learning
-
-- **Video Training** — Conceptual overviews and expert perspectives through resources like [John Savill's YouTube channel](https://www.youtube.com/@NTFAQGuy)
-- **Microsoft Learning Paths** — Structured learning content to supplement hands-on experience
