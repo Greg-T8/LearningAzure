@@ -128,7 +128,12 @@ $Helpers = {
     function Get-LabCount {
         # Parse lab README metadata to count labs per task
         $taskCounts = @{}
-        $labReadmes = Get-ChildItem -Path $LabsDir -Filter 'README.md' -Recurse -File
+        $catalogReadme = Join-Path -Path $LabsDir -ChildPath 'README.md'
+        $labReadmes = Get-ChildItem -Path $LabsDir -Filter 'README.md' -Recurse -File |
+            Where-Object {
+                # Only include specific lab READMEs (for example: */lab-*/README.md)
+                $_.FullName -ne $catalogReadme -and (Split-Path -Path $_.DirectoryName -Leaf) -like 'lab-*'
+            }
 
         foreach ($readme in $labReadmes) {
             $lines = Get-Content -Path $readme.FullName -Encoding UTF8
@@ -165,7 +170,8 @@ $Helpers = {
             }
 
             if ($tasks.Count -eq 0) {
-                Write-Warning "No **Task:** metadata found in $($readme.FullName)"
+                $labFolder = Split-Path -Path $readme.DirectoryName -Leaf
+                Write-Warning "No **Task:** metadata found in lab '$labFolder'. README path: $($readme.FullName)"
                 continue
             }
 
@@ -205,6 +211,8 @@ $Helpers = {
         $domainQs = 0
         $domainLabs = 0
         $pendingSummaryIndex = -1
+        $summarySuffixPattern = '(?:\\u2014|—).*</summary>$'
+        $summarySuffix = "— $domainTaskCount tasks · $domainQs Qs · $domainLabs Labs</summary>"
 
         foreach ($line in $lines) {
             # Detect coverage table boundaries
@@ -217,7 +225,8 @@ $Helpers = {
             if ($line -match '<!-- END COVERAGE TABLE -->') {
                 # Flush pending summary for the last domain
                 if ($pendingSummaryIndex -ge 0) {
-                    $output[$pendingSummaryIndex] = "<summary>$domainTaskCount tasks — $domainQs Qs · $domainLabs Labs</summary>"
+                    $summarySuffix = "— $domainTaskCount tasks · $domainQs Qs · $domainLabs Labs</summary>"
+                    $output[$pendingSummaryIndex] = $output[$pendingSummaryIndex] -replace $summarySuffixPattern, $summarySuffix
                 }
                 $inCoverage = $false
                 $output.Add($line)
@@ -229,21 +238,15 @@ $Helpers = {
                 continue
             }
 
-            # Domain heading (###) — flush previous domain's summary and reset
-            if ($line -match '^### Domain \d+:') {
+            # Domain <summary> line — flush previous domain's summary and record new index
+            if ($line -match '^<summary><b>(Domain \d+:.+?)</b>') {
                 if ($pendingSummaryIndex -ge 0) {
-                    $output[$pendingSummaryIndex] = "<summary>$domainTaskCount tasks — $domainQs Qs · $domainLabs Labs</summary>"
+                    $summarySuffix = "— $domainTaskCount tasks · $domainQs Qs · $domainLabs Labs</summary>"
+                    $output[$pendingSummaryIndex] = $output[$pendingSummaryIndex] -replace $summarySuffixPattern, $summarySuffix
                 }
                 $domainTaskCount = 0
                 $domainQs = 0
                 $domainLabs = 0
-                $pendingSummaryIndex = -1
-                $output.Add($line)
-                continue
-            }
-
-            # <summary> line — record its index for later update
-            if ($line -match '^<summary>') {
                 $pendingSummaryIndex = $output.Count
                 $output.Add($line)
                 continue
@@ -340,6 +343,15 @@ $Helpers = {
             if ($line -match '<!-- END COVERAGE DASHBOARD -->') {
                 $inDashboard = $false
                 $output.Add($line)
+                continue
+            }
+
+            # Totals line — regenerate with current counts
+            if ($inDashboard -and $line -match '^\*\*Totals:\*\*') {
+                $totalQs = ($QuestionCounts.Values | Measure-Object -Sum).Sum
+                $totalLabs = ($LabCounts.Values | Measure-Object -Sum).Sum
+                $output.Add("**Totals:** $totalQs practice questions · $totalLabs hands-on labs")
+                $updatedRows++
                 continue
             }
 
