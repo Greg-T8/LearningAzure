@@ -8,6 +8,7 @@ This log tracks individual study sessions for the **AZ-104** exam. Fill in **End
 
 | # | Date | Start | End | Duration | Notes |
 |:--|:-----|:------|:----|:---------|:------|
+| 9 | 3/13/26 | 4:59 AM |  |  | Deploy and Manage Azure Compute Resources |
 | 8 | 3/13/26 | 3:33 AM | 4:59 AM | 1h 26m | Monitor resources in Azure |
 | 7 | 3/12/26 | 4:34 AM | 5:30 AM | 0h 56m | Virtual networking |
 | 6 | 3/12/26 | 3:05 AM | 4:32 AM | 1h 27m | ARM templates |
