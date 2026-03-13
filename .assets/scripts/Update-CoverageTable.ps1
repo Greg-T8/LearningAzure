@@ -308,8 +308,8 @@ $Helpers = {
             if ($line -match '<!-- END COVERAGE TABLE -->') { break }
             if (-not $inCoverage) { continue }
 
-            # Domain heading
-            if ($line -match '^### Domain (\d+):') {
+            # Domain heading (supports both markdown heading and details summary formats)
+            if ($line -match '^### Domain (\d+):' -or $line -match '^<summary><b>Domain (\d+):') {
                 $domainNum = $Matches[1]
                 $currentDomain = @{ Qs = 0; Labs = 0; Tasks = 0; Covered = 0 }
                 $domainStats[$domainNum] = $currentDomain
@@ -368,7 +368,7 @@ $Helpers = {
                     $domainLink = $cells[0].Trim()
                     $weight = $cells[1].Trim()
 
-                    $newLine = "| $domainLink | $weight | $($stats.Qs) | $($stats.Labs) | $($stats.Covered) / $($stats.Tasks) | $indicator |"
+                    $newLine = "| $domainLink | $weight | $($stats.Qs) | $($stats.Labs) | $($stats.Covered) / $($stats.Tasks) ($pct%) | $indicator |"
                     $output.Add($newLine)
                     $updatedRows++
                 }

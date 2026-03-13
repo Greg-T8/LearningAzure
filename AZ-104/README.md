@@ -29,13 +29,13 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 
 | Domain | Weight | Qs | Labs | Tasks Covered | Status |
 | :----- | :----- | -: | ---: | :------------ | :----: |
-| [1. Identities & Governance](#domain-1) | 20–25% | 14 | 0 | 8 / 15 | 🟡 |
-| [2. Storage](#domain-2) | 15–20% | 16 | 5 | 11 / 17 | 🟡 |
-| [3. Compute](#domain-3) | 20–25% | 15 | 6 | 10 / 24 | 🟡 |
-| [4. Networking](#domain-4) | 15–20% | 5 | 3 | 4 / 13 | 🔴 |
-| [5. Monitoring & Backup](#domain-5) | 10–15% | 7 | 5 | 5 / 13 | 🟡 |
+| [1. Identities & Governance](#domain-1) | 20–25% | 14 | 0 | 8 / 15 (53%) | 🟡 |
+| [2. Storage](#domain-2) | 15–20% | 16 | 5 | 11 / 17 (64%) | 🟡 |
+| [3. Compute](#domain-3) | 20–25% | 18 | 6 | 13 / 24 (54%) | 🟡 |
+| [4. Networking](#domain-4) | 15–20% | 8 | 3 | 7 / 13 (53%) | 🟡 |
+| [5. Monitoring & Backup](#domain-5) | 10–15% | 9 | 5 | 5 / 13 (38%) | 🟡 |
 
-**Totals:** 138 practice questions · 19 hands-on labs
+**Totals:** 140 practice questions · 19 hands-on labs
 
 **Legend:** 🟢 Strong (≥66%) · 🟡 Partial (33–65%) · 🔴 Low (<33%) — "Covered" = task has ≥1 practice question or ≥1 lab
 
@@ -152,7 +152,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 
 <a id="domain-5"></a>
 <details>
-<summary><b>Domain 5: Monitor and Maintain Azure Resources (10–15%)</b> — 13 tasks · 7 Qs · 5 Labs</summary>
+<summary><b>Domain 5: Monitor and Maintain Azure Resources (10–15%)</b> — 13 tasks · 9 Qs · 5 Labs</summary>
 
 | Skill | Task | Qs | Labs |
 | :--- | :--- | -: | -: |
