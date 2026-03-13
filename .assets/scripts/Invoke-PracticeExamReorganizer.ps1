@@ -31,6 +31,7 @@ $RepoRoot = Resolve-Path -Path (Join-Path -Path $PSScriptRoot -ChildPath '..\..'
 $ExamDir = Join-Path -Path $RepoRoot -ChildPath $ExamName
 $ExamReadme = Join-Path -Path $ExamDir -ChildPath 'README.md'
 $PracticeFile = Join-Path -Path $ExamDir -ChildPath 'practice-questions\README.md'
+$CollapseDetailScript = Join-Path -Path $PSScriptRoot -ChildPath 'Invoke-CollapseDetailBlock.ps1'
 
 $Main = {
     . $Helpers
@@ -42,6 +43,7 @@ $Main = {
     $output = Build-PracticeFile -DomainStructure $domainStructure -SortedBlocks $sortedBlocks
     Write-PracticeFile -Content $output
     Update-CoverageTable -DomainStructure $domainStructure -SortedBlocks $sortedBlocks
+    Invoke-CollapseDetailBlock
     Show-Summary -OriginalCount $questionBlocks.Count -SortedBlocks $sortedBlocks
 }
 
@@ -544,6 +546,23 @@ $Helpers = {
         if ($PSCmdlet.ShouldProcess($ExamReadme, "Update $updated coverage table rows")) {
             Set-Content -Path $ExamReadme -Value ($output -join "`n") -Encoding UTF8 -NoNewline
             Write-Host "Updated $updated coverage table rows in $ExamReadme" -ForegroundColor Green
+        }
+    }
+
+    function Invoke-CollapseDetailBlock {
+        # Invoke the markdown cleanup script to collapse open details after reorganization
+        if (-not (Test-Path -Path $CollapseDetailScript)) {
+            throw "Collapse detail script not found: $CollapseDetailScript"
+        }
+
+        $invokeParams = @{
+            ErrorAction = 'Stop'
+            Verbose     = [bool]$PSBoundParameters.ContainsKey('Verbose')
+            WhatIf      = [bool]$WhatIfPreference
+        }
+
+        if ($PSCmdlet.ShouldProcess($CollapseDetailScript, 'Invoke detail block collapse cleanup')) {
+            & $CollapseDetailScript @invokeParams
         }
     }
 
