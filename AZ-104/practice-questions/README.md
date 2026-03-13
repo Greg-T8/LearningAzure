@@ -21,13 +21,13 @@ Accounts for questions missed or unsure about in the practice exams.
     * [Azure Policy Not Functioning](#azure-policy-not-functioning)
 * [Implement and Manage Storage](#implement-and-manage-storage)
   * [Configure access to storage](#configure-access-to-storage)
-    * [Provide least-privilege access to a report](#provide-least-privilege-access-to-a-report)
+    * [Configure storage account network access](#configure-storage-account-network-access)
+    * [SAS key configuration scenarios](#sas-key-configuration-scenarios)
+    * [Shared Access Signature (SAS) practices](#shared-access-signature-sas-practices)
     * [Configure AzCopy Authentication for Blob and File Storage](#configure-azcopy-authentication-for-blob-and-file-storage)
     * [Modify Stored Access Policy](#modify-stored-access-policy)
+    * [Provide least-privilege access to a report](#provide-least-privilege-access-to-a-report)
     * [Diagnose Storage Explorer Permission Errors](#diagnose-storage-explorer-permission-errors)
-    * [Shared Access Signature (SAS) practices](#shared-access-signature-sas-practices)
-    * [SAS key configuration scenarios](#sas-key-configuration-scenarios)
-    * [Configure storage account network access](#configure-storage-account-network-access)
   * [Configure and manage storage accounts](#configure-and-manage-storage-accounts)
     * [Configure Object Replication Between Storage Accounts](#configure-object-replication-between-storage-accounts)
     * [Rotate compromised storage account keys](#rotate-compromised-storage-account-keys)
@@ -39,12 +39,13 @@ Accounts for questions missed or unsure about in the practice exams.
     * [Delete Soft-Deleted File Share](#delete-soft-deleted-file-share)
 * [Deploy and Manage Azure Compute Resources](#deploy-and-manage-azure-compute-resources)
   * [Automate deployment of resources by using ARM templates or Bicep files](#automate-deployment-of-resources-by-using-arm-templates-or-bicep-files)
-    * [Edit ARM Template to Inherit Resource Group Location](#edit-arm-template-to-inherit-resource-group-location)
-    * [Export ARM Template](#export-arm-template)
-    * [Case Study — Solution Evaluation](#case-study-solution-evaluation)
-    * [Convert Array to Object](#convert-array-to-object)
-    * [Deployment Mode Deleted Resources](#deployment-mode-deleted-resources)
     * [Resource dependencies in Bicep](#resource-dependencies-in-bicep)
+    * [Deployment Mode Deleted Resources](#deployment-mode-deleted-resources)
+    * [Convert Array to Object](#convert-array-to-object)
+    * [Complete ARM template deployment command](#complete-arm-template-deployment-command)
+    * [Export ARM Template](#export-arm-template)
+    * [Edit ARM Template to Inherit Resource Group Location](#edit-arm-template-to-inherit-resource-group-location)
+    * [Case Study — Solution Evaluation](#case-study-solution-evaluation)
   * [Create and configure virtual machines](#create-and-configure-virtual-machines)
     * [VM Resize Failure Cause](#vm-resize-failure-cause)
     * [Encrypt VM Disk With Key Vault](#encrypt-vm-disk-with-key-vault)
@@ -52,11 +53,11 @@ Accounts for questions missed or unsure about in the practice exams.
   * [Provision and manage containers in the Azure portal](#provision-and-manage-containers-in-the-azure-portal)
     * [Configure Scaling Rules in Azure Container Apps](#configure-scaling-rules-in-azure-container-apps)
   * [Create and configure Azure App Service](#create-and-configure-azure-app-service)
-    * [Prepare Azure App Service for Web App Republication](#prepare-azure-app-service-for-web-app-republication)
     * [Resolve Azure App Service Pricing Tier for Runtime Requirements](#resolve-azure-app-service-pricing-tier-for-runtime-requirements)
-    * [Configure Azure App Service Plan for Website Hosting](#configure-azure-app-service-plan-for-website-hosting)
     * [Resolve Azure App Service Pricing Tier for Runtime Requirements](#resolve-azure-app-service-pricing-tier-for-runtime-requirements-1)
     * [Resolve Azure App Service Pricing Tier for Runtime Requirements](#resolve-azure-app-service-pricing-tier-for-runtime-requirements-2)
+    * [Prepare Azure App Service for Web App Republication](#prepare-azure-app-service-for-web-app-republication)
+    * [Configure Azure App Service Plan for Website Hosting](#configure-azure-app-service-plan-for-website-hosting)
 * [Implement and Manage Virtual Networking](#implement-and-manage-virtual-networking)
   * [Configure and manage virtual networks in Azure](#configure-and-manage-virtual-networks-in-azure)
     * [VNet Peering with ExpressRoute](#vnet-peering-with-expressroute)
@@ -64,10 +65,10 @@ Accounts for questions missed or unsure about in the practice exams.
   * [Configure secure access to virtual networks](#configure-secure-access-to-virtual-networks)
     * [Configure Private Link Service Source IP](#configure-private-link-service-source-ip)
   * [Configure name resolution and load balancing](#configure-name-resolution-and-load-balancing)
+    * [IMDS Load Balancer Metadata Error](#imds-load-balancer-metadata-error)
     * [Configure Standard Load Balancer Outbound Traffic and IP Allocation](#configure-standard-load-balancer-outbound-traffic-and-ip-allocation)
     * [Diagnose Internal Load Balancer Hairpin Traffic Failure](#diagnose-internal-load-balancer-hairpin-traffic-failure)
     * [Configure DNS Records for App Service](#configure-dns-records-for-app-service)
-    * [IMDS Load Balancer Metadata Error](#imds-load-balancer-metadata-error)
 * [Monitor and maintain Azure resources](#monitor-and-maintain-azure-resources)
   * [Monitor resources in Azure](#monitor-resources-in-azure)
     * [Configure Azure Monitor Alert Notification Rate Limits](#configure-azure-monitor-alert-notification-rate-limits)
@@ -904,46 +905,196 @@ References
 
 ### Configure access to storage
 
-#### Provide least-privilege access to a report
+#### Configure storage account network access
 
 **Domain:** Implement and Manage Storage
 **Skill:** Configure access to storage
-**Task:** Create and use shared access signature (SAS) tokens
+**Task:** Configure Azure Storage firewalls and virtual networks
 
-You create a binary large object (blob) storage account named `reportstorage99` that contains archival reports from past corporate board meetings.
+You deploy a new storage account named `storage01` in a resource group named `RG01`.
 
-A board member requests access to a specific report. The member does not have a Microsoft Entra user account. Moreover, they have access only to a web browser on his Google Chromebook device.
+You need to ensure that the App Services, the backup vault, and the event hub can access the new storage account. Access should be enabled from within Azure only, and not via public internet.
 
-To fulfill the request, you will provide the board member with least-privilege access to the requested report while maintaining security compliance and minimizing administrative overhead.
+You decide to use PowerShell to configure all the settings.
 
-What should you do?
+How should you complete the command string? To answer, select the appropriate options from the drop-down menus.
 
-A. Deploy a point-to-site (P2S) virtual private network (VPN) connection on the board member's Chromebook and grant the board member role-based access control (RBAC) access to the report.  
-B. Generate a shared access signature (SAS) token for the report and share the Uniform Resource Locator (URL) with the board member.  
-C. Copy the report to an Azure File Service share and provide the board member with a PowerShell connection script.  
-D. Create a Microsoft Entra account for the board member and grant him role-based access control (RBAC) access to the storage account.  
+```powershell
+Get-AzVirtualNetwork -ResourceGroupName "RG01" -Name "VNET01" |
+  Set-AzVirtualNetworkSubnetConfig -Name "VSUBNET01" \
+    -AddressPrefix "10.0.0.0/24" -ServiceEndpoint "___[1]___" \
+  | Set-AzVirtualNetwork
+
+$subnet = Get-AzVirtualNetwork -ResourceGroupName "RG01" -Name "VNET01"
+Get-AzVirtualNetworkSubnetConfig -Name "VSUBNET01"
+
+___[2]___ -ResourceGroupName "RG01" \
+  -Name "storage01" -VirtualNetworkResourceId $subnet.Id
+
+___[3]___ -ResourceGroupName "RG01" \
+  -Name "storage01" -Bypass ___[4]___
+```
+
+Drop-Down Options:
+
+| Blank | Options |
+|-------|---------|
+| [1] | AzureServices / Logging / Metrics / Microsoft.Storage / None |
+| [2] | Add-AzStorageAccountNetworkRule / Remove-AzStorageAccountNetworkRuleSet / Set-AzStorageAccount / Update-AzStorageAccountNetworkRuleSet |
+| [3] | Add-AzStorageAccountNetworkRule / Remove-AzStorageAccountNetworkRuleSet / Set-AzStorageAccount / Update-AzStorageAccountNetworkRuleSet |
+| [4] | AzureServices / Logging / Metrics / Microsoft.Storage / None |
 
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-03-11-04-28-34.png' width=700>
+<img src='.img/2026-03-11-03-48-09.png' width=700>
 
 </details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
 
-You should generate a shared access signature (SAS) token for the report and share the Uniform Resource Locator (URL) with the board member. SAS enables you to define time-limited read-only or read-write access to Azure storage account resources. It is important that you set the time restriction properly because the SAS includes no authentication. Any person with access to the URL can access the target resource(s) within the token's lifetime. In this case, you both minimize administrative effort as well as maintain security compliance because the SAS token points only to a single file, not the entire blob container that hosts the requested report.
+You should run the following script to ensure that the backup vault and the event hub services have access to the storage account:
 
-You should not create a Microsoft Entra account for the board member and grant him role-based access control (RBAC) access to the storage account. First, it requires significant management overhead to create and manage Microsoft Entra accounts, even for external (guest) users. Second, SAS and not RBAC is the way Azure provides screened access to individual storage account resources. You can use RBAC roles only at the storage account scope.
+```powershell
+Get-AzVirtualNetwork -ResourceGroupName "RG01" -Name "VNET01" |
+Set-AzVirtualNetworkSubnetConfig -Name "VSUBNET01" \
+    -AddressPrefix "10.0.0.0/24" -ServiceEndpoint "Microsoft.Storage" \
+| Set-AzVirtualNetwork
 
-You should not copy the report to an Azure File Service share and provide the board member with a PowerShell connection script. Here you create security and governance problems by creating multiple copies of the source report, as well as producing unnecessary administrative complexity.
+$subnet = Get-AzVirtualNetwork -ResourceGroupName "RG01" -Name "VNET01"
+Get-AzVirtualNetworkSubnetConfig -Name "VSUBNET01"
 
-You should not deploy a point-to-site (P2S) VPN connection on the board member's Chromebook and grant the board member RBAC access to the report. The scenario stipulates that the board member is limited to using a web browser on his Chromebook. Furthermore, the Azure P2S VPN client is supported only on Windows, macOS, and endorsed Linux distributions. Chrome OS is not supported.
+Add-AzStorageAccountNetworkRule -ResourceGroupName "RG01" \
+    -Name "storage01" -VirtualNetworkResourceId $subnet.Id
+
+Update-AzStorageAccountNetworkRuleSet -ResourceGroupName "RG01" \
+    -Name "storage01" -Bypass AzureServices
+```
+
+You should use `Microsoft.Storage` as the service endpoint. Using the `Set-AzVirtualNetworkSubnetConfig` cmdlet enables the service endpoint on the subnet `VSUBNET01` for a storage account. This will allow connections to the virtual subnet from the storage account. This cmdlet makes modifications only to the memory representation of the virtual network. You need to run `Set-AzVirtualNetwork` to make the changes persistent.
+
+You should use the `Add-AzStorageAccountNetworkRule` cmdlet to add a firewall exception on the `NetworkRule` property in the storage account. This will allow communication from the virtual subnet to the storage account.
+
+You should use the `Update-AzStorageAccountNetworkRuleSet` cmdlet. This cmdlet also updates the `NetworkRule` property. It allows you to modify the `NetworkRule` property to allow other Azure services, like Backup or Event Hubs, to have access to the storage account.
+
+You should use `AzureServices` for the `-Bypass` parameter. This way, you instruct the `Update-AzStorageAccountNetworkRuleSet` cmdlet to allow connections from other Azure services. Allowed values are `AzureServices`, `Metrics`, `Logging`, and `None`.
+
+You should not use the `Set-AzStorageAccount` cmdlet. You can use this cmdlet to modify a storage account, but not the `NetworkRule` property of the storage account. You typically use this cmdlet when you want to set a tag to a storage account, update a customer domain, or update the type of the account.
+
+You should not use the `Remove-AzStorageAccountNetworkRuleSet` cmdlet. You use this cmdlet to remove a `NetworkRule` property from the storage account. In this scenario, you need to add and modify a new network rule, not remove it.
+
+You should not use the `Logging`, `None`, or `Metrics` values. These are valid for the `-Bypass` parameter for `Update-AzStorageAccountNetworkRuleSet`. Use the `None` value when you want to remove the access to all Azure services, including monitoring and logging services. Use the `Metrics` or `Logging` values when you want to allow access to monitoring or logging Azure Services respectively.
+
+**References**:  
+
+* [Azure Storage firewall rules](https://learn.microsoft.com/en-us/azure/storage/common/storage-network-security)
+* [Update-AzStorageAccountNetworkRuleSet](https://learn.microsoft.com/en-us/powershell/module/az.storage/update-azstorageaccountnetworkruleset?view=azps-15.4.0&viewFallbackFrom=azps-2.6.0)
+* [Add-AzStorageAccountNetworkRule](https://learn.microsoft.com/en-us/powershell/module/az.storage/add-azstorageaccountnetworkrule?view=azps-15.4.0)
+
+</details>
+
+---
+
+#### SAS key configuration scenarios
+
+**Domain:** Implement and manage storage
+**Skill:** Configure access to storage
+**Task:** Create and use shared access signature (SAS) tokens
+
+You have a storage account named `salesstorage` in a subscription named `SalesSubscription`. You create a container in a blob storage named `salecontainer`.
+
+You create the shared access signature (SAS) shown in the exhibit.
+
+You try to carry out actions from several computers at different times using the SAS key1 configurations shown in the exhibit.
+
+What level of access would be available in each scenario? To answer, select the appropriate options from the drop-down menus.
+
+| Configuration | Value | Action | Action result |
+|---------------|-------|--------|---------------|
+| 151.112.10.6 | March 4th, 2020 at 11 AM | Connect to Storage Account | ***[1]*** |
+| 151.112.11.6 | March 4th, 2020 at 12 AM | Connect to Storage Account | ***[2]*** |
+| 151.112.10.6 | March 10th, 2020 at 10 AM | Create a Container | ***[3]*** |
+| 151.112.10.6 | March 10th, 2020 at 12 AM | Read a File Share | ***[4]*** |
+
+Drop-Down Options:
+
+| Blank | Options |
+|-------|---------|
+| [1] | Connection success with read, write, and list access / Connection failure with read, write, and list access / Connection failure with read access |
+| [2] | Connection success with read, write, and list access / Connection failure with read, write, and list access / Connection failure with read access |
+| [3] | Connection success with read, write, and list access / Connection failure with read, write, and list access / Connection failure with read access |
+| [4] | Connection success with read, write, and list access / Connection failure with read, write, and list access / Connection failure with read access |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-11-04-35-29.png' width=700>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+In the first scenario, you would have connection success with read, write, and list access, because the IP address and the dates meet the criteria when the shared access signature (SAS) key1 is active.
+
+In the second scenario, you would have connection failure with read, write, and list access, because the IP address does not fall in the allowed IP address range. Additionally, it would also fail because the start time is 12am on March 4th, 2020, for the request, but the SAS token starts at 11am on March 4th, 2020.
+
+In the third scenario, you would have connection failure with read, write, and list access, because the permissions provided for the SAS key1 do not grant permissions to create a new container.
+
+In the fourth scenario, you would have connection failure with read, write, and list access, because the permissions granted are only for blob containers and not file shares.
+
+</details>
+
+---
+
+#### Shared Access Signature (SAS) practices
+
+**Domain:** Implement and Manage Storage
+**Skill:** Configure access to storage
+**Task:** Create and use shared access signature (SAS) tokens
+
+Your company is developing a .NET application that stores part of the information in an Azure Storage account. The application will be installed on end users' computers.
+
+You want to ensure that the information stored in the storage account is accessed in a secure way, so you ask the developers to use a shared access signature (SAS) when accessing said information. You want to make the required configurations on the storage account to follow security best practices and enable access to the account with immediate effect.
+
+For each of the following statements, select Yes if the statement is true. Otherwise, select No.
+
+| STATEMENT | YES | NO |
+|-----------|-----|----|
+| You should configure a stored access policy. | ☐ | ☐ |
+| You should set the shared access signature (SAS) start time to now. | ☐ | ☐ |
+| You should validate data that has been written using a SAS. | ☐ | ☐ |
+| One option for revoking a SAS is by deleting a stored access policy. | ☐ | ☐ |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-11-04-16-22.png' width=700>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+You can configure a stored access policy. When you use a shared access signature (SAS), you have two different options. You can either use an ad-hoc SAS or configure a stored access policy. By using an ad-hoc SAS, you specify the start time, expiration time, and permissions in the Uniform Resource Identifier (URI). If someone copies this URI, they will have the same level of access as the corresponding user. This means that this type of SAS can be used by anyone in the world. By configuring a stored access policy, you define the start time, expiration time, and permissions in the policy and then associate a SAS with that policy. You can associate more than one SAS with the same policy.
+
+You should not set the SAS start time to now. When you set the start time of a SAS to now, there can be slight differences in the clocks of the servers that host the storage account. These differences could lead to an access problem for a few minutes after the configuration. If you need your SAS to be available as soon as possible, you should set the start time to 15 minutes before the current time, or you can just not set the start time. Not setting the start time parameter means that the SAS will be active immediately.
+
+You should validate data that has been written using a SAS. When the user uses a SAS, the information they write to the storage account can cause problems, such as communication issues or corruption. Because of this, it is a best practice to validate the data written to the storage account after it is written and before the information is used by any other service or application.
+
+You can revoke a SAS by deleting a stored access policy. If you associate a SAS with a stored access policy, the start time, expiration time, and permissions are inherited from the policy. If you remove the policy, you are invalidating the SAS, thus making it unusable. Keep in mind that if you remove a stored access policy with an associated SAS and then create another stored access policy with the exact same name as the original policy, the associated SAS will be enabled again.
+
+<img src='.img/2026-03-11-04-19-52.png' width=600>
+
+<img src='.img/2026-03-11-04-20-50.png' width=600>
+
+<img src='.img/2026-03-11-04-22-57.png' width=600>
 
 References
 
-* Grant limited access to Azure Storage resources using shared access signatures (SAS)
+* [Grant limited access to Azure Storage resources using shared access signatures (SAS)](https://learn.microsoft.com/en-us/azure/storage/common/storage-sas-overview)
+* [Create a stored access policy](https://learn.microsoft.com/en-us/azure/storage/common/storage-stored-access-policy-define-dotnet?toc=%2Fazure%2Fstorage%2Fblobs%2Ftoc.json&bc=%2Fazure%2Fstorage%2Fblobs%2Fbreadcrumb%2Ftoc.json)
 
 </details>
 
@@ -1104,6 +1255,51 @@ You should not execute a Set Container ACL operation with public read access for
 References
 
 [Define a stored access policy](https://learn.microsoft.com/en-us/rest/api/storageservices/define-stored-access-policy)
+
+</details>
+
+---
+
+#### Provide least-privilege access to a report
+
+**Domain:** Implement and Manage Storage
+**Skill:** Configure access to storage
+**Task:** Create and use shared access signature (SAS) tokens
+
+You create a binary large object (blob) storage account named `reportstorage99` that contains archival reports from past corporate board meetings.
+
+A board member requests access to a specific report. The member does not have a Microsoft Entra user account. Moreover, they have access only to a web browser on his Google Chromebook device.
+
+To fulfill the request, you will provide the board member with least-privilege access to the requested report while maintaining security compliance and minimizing administrative overhead.
+
+What should you do?
+
+A. Deploy a point-to-site (P2S) virtual private network (VPN) connection on the board member's Chromebook and grant the board member role-based access control (RBAC) access to the report.  
+B. Generate a shared access signature (SAS) token for the report and share the Uniform Resource Locator (URL) with the board member.  
+C. Copy the report to an Azure File Service share and provide the board member with a PowerShell connection script.  
+D. Create a Microsoft Entra account for the board member and grant him role-based access control (RBAC) access to the storage account.  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-11-04-28-34.png' width=700>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+You should generate a shared access signature (SAS) token for the report and share the Uniform Resource Locator (URL) with the board member. SAS enables you to define time-limited read-only or read-write access to Azure storage account resources. It is important that you set the time restriction properly because the SAS includes no authentication. Any person with access to the URL can access the target resource(s) within the token's lifetime. In this case, you both minimize administrative effort as well as maintain security compliance because the SAS token points only to a single file, not the entire blob container that hosts the requested report.
+
+You should not create a Microsoft Entra account for the board member and grant him role-based access control (RBAC) access to the storage account. First, it requires significant management overhead to create and manage Microsoft Entra accounts, even for external (guest) users. Second, SAS and not RBAC is the way Azure provides screened access to individual storage account resources. You can use RBAC roles only at the storage account scope.
+
+You should not copy the report to an Azure File Service share and provide the board member with a PowerShell connection script. Here you create security and governance problems by creating multiple copies of the source report, as well as producing unnecessary administrative complexity.
+
+You should not deploy a point-to-site (P2S) VPN connection on the board member's Chromebook and grant the board member RBAC access to the report. The scenario stipulates that the board member is limited to using a web browser on his Chromebook. Furthermore, the Azure P2S VPN client is supported only on Windows, macOS, and endorsed Linux distributions. Chrome OS is not supported.
+
+References
+
+* Grant limited access to Azure Storage resources using shared access signatures (SAS)
 
 </details>
 
@@ -1289,201 +1485,6 @@ The solution is either:
 </details>
 
 ▶ **Related Lab:** [lab-storage-explorer-permissions](/AZ-104/hands-on-labs/storage/lab-storage-explorer-permissions/README.md)
-
----
-
-#### Shared Access Signature (SAS) practices
-
-**Domain:** Implement and Manage Storage
-**Skill:** Configure access to storage
-**Task:** Create and use shared access signature (SAS) tokens
-
-Your company is developing a .NET application that stores part of the information in an Azure Storage account. The application will be installed on end users' computers.
-
-You want to ensure that the information stored in the storage account is accessed in a secure way, so you ask the developers to use a shared access signature (SAS) when accessing said information. You want to make the required configurations on the storage account to follow security best practices and enable access to the account with immediate effect.
-
-For each of the following statements, select Yes if the statement is true. Otherwise, select No.
-
-| STATEMENT | YES | NO |
-|-----------|-----|----|
-| You should configure a stored access policy. | ☐ | ☐ |
-| You should set the shared access signature (SAS) start time to now. | ☐ | ☐ |
-| You should validate data that has been written using a SAS. | ☐ | ☐ |
-| One option for revoking a SAS is by deleting a stored access policy. | ☐ | ☐ |
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-11-04-16-22.png' width=700>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-You can configure a stored access policy. When you use a shared access signature (SAS), you have two different options. You can either use an ad-hoc SAS or configure a stored access policy. By using an ad-hoc SAS, you specify the start time, expiration time, and permissions in the Uniform Resource Identifier (URI). If someone copies this URI, they will have the same level of access as the corresponding user. This means that this type of SAS can be used by anyone in the world. By configuring a stored access policy, you define the start time, expiration time, and permissions in the policy and then associate a SAS with that policy. You can associate more than one SAS with the same policy.
-
-You should not set the SAS start time to now. When you set the start time of a SAS to now, there can be slight differences in the clocks of the servers that host the storage account. These differences could lead to an access problem for a few minutes after the configuration. If you need your SAS to be available as soon as possible, you should set the start time to 15 minutes before the current time, or you can just not set the start time. Not setting the start time parameter means that the SAS will be active immediately.
-
-You should validate data that has been written using a SAS. When the user uses a SAS, the information they write to the storage account can cause problems, such as communication issues or corruption. Because of this, it is a best practice to validate the data written to the storage account after it is written and before the information is used by any other service or application.
-
-You can revoke a SAS by deleting a stored access policy. If you associate a SAS with a stored access policy, the start time, expiration time, and permissions are inherited from the policy. If you remove the policy, you are invalidating the SAS, thus making it unusable. Keep in mind that if you remove a stored access policy with an associated SAS and then create another stored access policy with the exact same name as the original policy, the associated SAS will be enabled again.
-
-<img src='.img/2026-03-11-04-19-52.png' width=600>
-
-<img src='.img/2026-03-11-04-20-50.png' width=600>
-
-<img src='.img/2026-03-11-04-22-57.png' width=600>
-
-References
-
-* [Grant limited access to Azure Storage resources using shared access signatures (SAS)](https://learn.microsoft.com/en-us/azure/storage/common/storage-sas-overview)
-* [Create a stored access policy](https://learn.microsoft.com/en-us/azure/storage/common/storage-stored-access-policy-define-dotnet?toc=%2Fazure%2Fstorage%2Fblobs%2Ftoc.json&bc=%2Fazure%2Fstorage%2Fblobs%2Fbreadcrumb%2Ftoc.json)
-
-</details>
-
----
-
-#### SAS key configuration scenarios
-
-**Domain:** Implement and manage storage
-**Skill:** Configure access to storage
-**Task:** Create and use shared access signature (SAS) tokens
-
-You have a storage account named `salesstorage` in a subscription named `SalesSubscription`. You create a container in a blob storage named `salecontainer`.
-
-You create the shared access signature (SAS) shown in the exhibit.
-
-You try to carry out actions from several computers at different times using the SAS key1 configurations shown in the exhibit.
-
-What level of access would be available in each scenario? To answer, select the appropriate options from the drop-down menus.
-
-| Configuration | Value | Action | Action result |
-|---------------|-------|--------|---------------|
-| 151.112.10.6 | March 4th, 2020 at 11 AM | Connect to Storage Account | ***[1]*** |
-| 151.112.11.6 | March 4th, 2020 at 12 AM | Connect to Storage Account | ***[2]*** |
-| 151.112.10.6 | March 10th, 2020 at 10 AM | Create a Container | ***[3]*** |
-| 151.112.10.6 | March 10th, 2020 at 12 AM | Read a File Share | ***[4]*** |
-
-Drop-Down Options:
-
-| Blank | Options |
-|-------|---------|
-| [1] | Connection success with read, write, and list access / Connection failure with read, write, and list access / Connection failure with read access |
-| [2] | Connection success with read, write, and list access / Connection failure with read, write, and list access / Connection failure with read access |
-| [3] | Connection success with read, write, and list access / Connection failure with read, write, and list access / Connection failure with read access |
-| [4] | Connection success with read, write, and list access / Connection failure with read, write, and list access / Connection failure with read access |
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-11-04-35-29.png' width=700>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-In the first scenario, you would have connection success with read, write, and list access, because the IP address and the dates meet the criteria when the shared access signature (SAS) key1 is active.
-
-In the second scenario, you would have connection failure with read, write, and list access, because the IP address does not fall in the allowed IP address range. Additionally, it would also fail because the start time is 12am on March 4th, 2020, for the request, but the SAS token starts at 11am on March 4th, 2020.
-
-In the third scenario, you would have connection failure with read, write, and list access, because the permissions provided for the SAS key1 do not grant permissions to create a new container.
-
-In the fourth scenario, you would have connection failure with read, write, and list access, because the permissions granted are only for blob containers and not file shares.
-
-</details>
-
----
-
-#### Configure storage account network access
-
-**Domain:** Implement and Manage Storage
-**Skill:** Configure access to storage
-**Task:** Configure Azure Storage firewalls and virtual networks
-
-You deploy a new storage account named `storage01` in a resource group named `RG01`.
-
-You need to ensure that the App Services, the backup vault, and the event hub can access the new storage account. Access should be enabled from within Azure only, and not via public internet.
-
-You decide to use PowerShell to configure all the settings.
-
-How should you complete the command string? To answer, select the appropriate options from the drop-down menus.
-
-```powershell
-Get-AzVirtualNetwork -ResourceGroupName "RG01" -Name "VNET01" |
-  Set-AzVirtualNetworkSubnetConfig -Name "VSUBNET01" \
-    -AddressPrefix "10.0.0.0/24" -ServiceEndpoint "___[1]___" \
-  | Set-AzVirtualNetwork
-
-$subnet = Get-AzVirtualNetwork -ResourceGroupName "RG01" -Name "VNET01"
-Get-AzVirtualNetworkSubnetConfig -Name "VSUBNET01"
-
-___[2]___ -ResourceGroupName "RG01" \
-  -Name "storage01" -VirtualNetworkResourceId $subnet.Id
-
-___[3]___ -ResourceGroupName "RG01" \
-  -Name "storage01" -Bypass ___[4]___
-```
-
-Drop-Down Options:
-
-| Blank | Options |
-|-------|---------|
-| [1] | AzureServices / Logging / Metrics / Microsoft.Storage / None |
-| [2] | Add-AzStorageAccountNetworkRule / Remove-AzStorageAccountNetworkRuleSet / Set-AzStorageAccount / Update-AzStorageAccountNetworkRuleSet |
-| [3] | Add-AzStorageAccountNetworkRule / Remove-AzStorageAccountNetworkRuleSet / Set-AzStorageAccount / Update-AzStorageAccountNetworkRuleSet |
-| [4] | AzureServices / Logging / Metrics / Microsoft.Storage / None |
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-11-03-48-09.png' width=700>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-You should run the following script to ensure that the backup vault and the event hub services have access to the storage account:
-
-```powershell
-Get-AzVirtualNetwork -ResourceGroupName "RG01" -Name "VNET01" |
-Set-AzVirtualNetworkSubnetConfig -Name "VSUBNET01" \
-    -AddressPrefix "10.0.0.0/24" -ServiceEndpoint "Microsoft.Storage" \
-| Set-AzVirtualNetwork
-
-$subnet = Get-AzVirtualNetwork -ResourceGroupName "RG01" -Name "VNET01"
-Get-AzVirtualNetworkSubnetConfig -Name "VSUBNET01"
-
-Add-AzStorageAccountNetworkRule -ResourceGroupName "RG01" \
-    -Name "storage01" -VirtualNetworkResourceId $subnet.Id
-
-Update-AzStorageAccountNetworkRuleSet -ResourceGroupName "RG01" \
-    -Name "storage01" -Bypass AzureServices
-```
-
-You should use `Microsoft.Storage` as the service endpoint. Using the `Set-AzVirtualNetworkSubnetConfig` cmdlet enables the service endpoint on the subnet `VSUBNET01` for a storage account. This will allow connections to the virtual subnet from the storage account. This cmdlet makes modifications only to the memory representation of the virtual network. You need to run `Set-AzVirtualNetwork` to make the changes persistent.
-
-You should use the `Add-AzStorageAccountNetworkRule` cmdlet to add a firewall exception on the `NetworkRule` property in the storage account. This will allow communication from the virtual subnet to the storage account.
-
-You should use the `Update-AzStorageAccountNetworkRuleSet` cmdlet. This cmdlet also updates the `NetworkRule` property. It allows you to modify the `NetworkRule` property to allow other Azure services, like Backup or Event Hubs, to have access to the storage account.
-
-You should use `AzureServices` for the `-Bypass` parameter. This way, you instruct the `Update-AzStorageAccountNetworkRuleSet` cmdlet to allow connections from other Azure services. Allowed values are `AzureServices`, `Metrics`, `Logging`, and `None`.
-
-You should not use the `Set-AzStorageAccount` cmdlet. You can use this cmdlet to modify a storage account, but not the `NetworkRule` property of the storage account. You typically use this cmdlet when you want to set a tag to a storage account, update a customer domain, or update the type of the account.
-
-You should not use the `Remove-AzStorageAccountNetworkRuleSet` cmdlet. You use this cmdlet to remove a `NetworkRule` property from the storage account. In this scenario, you need to add and modify a new network rule, not remove it.
-
-You should not use the `Logging`, `None`, or `Metrics` values. These are valid for the `-Bypass` parameter for `Update-AzStorageAccountNetworkRuleSet`. Use the `None` value when you want to remove the access to all Azure services, including monitoring and logging services. Use the `Metrics` or `Logging` values when you want to allow access to monitoring or logging Azure Services respectively.
-
-**References**:  
-
-* [Azure Storage firewall rules](https://learn.microsoft.com/en-us/azure/storage/common/storage-network-security)
-* [Update-AzStorageAccountNetworkRuleSet](https://learn.microsoft.com/en-us/powershell/module/az.storage/update-azstorageaccountnetworkruleset?view=azps-15.4.0&viewFallbackFrom=azps-2.6.0)
-* [Add-AzStorageAccountNetworkRule](https://learn.microsoft.com/en-us/powershell/module/az.storage/add-azstorageaccountnetworkrule?view=azps-15.4.0)
-
-</details>
 
 ---
 
@@ -2097,176 +2098,113 @@ References
 
 ### Automate deployment of resources by using ARM templates or Bicep files
 
-#### Edit ARM Template to Inherit Resource Group Location
+#### Resource dependencies in Bicep
 
 **Domain:** Deploy and Manage Azure Compute Resources
 **Skill:** Automate deployment of resources by using ARM templates or Bicep files
-**Task:** Modify an existing Azure Resource Manager template
+**Task:** Interpret an Azure Resource Manager template or a Bicep file
 
-You have an Azure Resource Manager (ARM) template for creating a Windows virtual machine. You got this template from an existing resource group with a single virtual machine, using the automation script option.
+You are an Azure Administrator for an eCommerce organization. You are deploying Azure resources and have created a Bicep file as shown below:
 
-You want to reuse this template for other deployments. You need all the resources in the resource group to be in the same location.
+```bicep
+resource PrimaryDnsZone 'Microsoft.Network/dnszones@2018-05-01' = {
+  name: 'myZone'
+  location: 'global'
+}
 
-What should you do?
+resource otherResource 'Microsoft.Example/examples@2023-05-01' = {
+  name: 'egResource'
+  properties: {
+    // get read-only DNS zone property
+    nameServers: PrimaryDnsZone.properties.nameServers
+  }
+}
 
-A. Use the Azure portal and create a resource group in the desired location. Then use the `New-AzResourceGroupDeployment` cmdlet using the newly created resource group.  
-B. Edit the parameters file and add a new parameter named location of type string with the default value of `[resourceGroup().location]`.  
-C. Use the `New-AzResourceGroup` cmdlet with the `-Location` parameter to create a resource group in the desired location. Then use the `New-AzResourceGroupDeployment` cmdlet using the newly created resource group.  
-D. Edit the template file and update each location parameter with the value `[resourceGroup().location]`.  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-12-04-14-06.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Explanation:**
-
-You should edit the template file and update each location parameter with the value `[resourceGroup().location]`. The `resourceGroup()` function gets the resource group object that will be used to deploy the template. This way, all resources in the template will use the same location as the resource group. You need to ensure that all resources are supported in the location that you are using for the resource group.
-
-**Why you should not choose B:**
-
-You should not edit the parameters file and add a new parameter named `location` of type string with the default value of `[resourceGroup().location]`. This is the first step in centralizing the location value in the template, but you also need to update the location parameter in the template file with the value `[parameters('location')]`.
-
-**Why you should not choose A:**
-
-You should not use the Azure portal and create a resource group in the desired location and then use the `New-AzResourceGroupDeployment` cmdlet using the newly created resource group. If the resource group is deployed in a different location to the location configured in the template file, the resources will be deployed in different locations. You need to modify the location parameter in the template file to the value `[resourceGroup().location]` to inherit the location from the parent resource group.
-
-**Why you should not choose C:**
-
-You should not use the `New-AzResourceGroup` cmdlet with the `-Location` parameter to create a resource group in the desired location and then use the `New-AzResourceGroupDeployment` cmdlet using the newly created resource group. If the resource group is deployed in a different location to the location configured in the template file, the resources will be deployed in different locations. You need to modify the location parameter in the template file to the value `[resourceGroup().location]` to inherit the location from the parent resource group.
-
-<img src='.img/2026-03-12-04-30-49.png' width=600>
-
-**References**
-
-- [Set resource location in ARM template](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/resource-location?tabs=azure-powershell)
-- [Understand the structure and syntax of ARM templates](https://learn.microsoft.com/azure/azure-resource-manager/templates/syntax)
-- [Deploy resources with ARM templates and Azure PowerShell](https://learn.microsoft.com/azure/azure-resource-manager/templates/deploy-powershell)
-
-</details>
-
----
-
-#### Export ARM Template
-
-**Domain:** Deploy and Manage Azure Compute Resources
-**Skill:** Automate deployment of resources by using ARM templates or Bicep files
-**Task:** Export a deployment as an ARM template or convert an ARM template to a Bicep file
-
-You deploy a line of business (LOB) application. All resources that are part of the LOB application are deployed in a single resource group. The resources were added in different phases.
-
-You need to export the current configuration of the LOB application resources to an Azure Resource Manager (ARM) template. You will later use this template for deploying the LOB application infrastructure in different environments for testing or development purposes.
-
-You are using the Complete mode for ARM deployment.
+resource otherZone 'Microsoft.Network/dnszones@2023-06-01' = {
+  name: 'demoZone2'
+  location: 'global'
+  dependsOn: [
+    PrimaryDnsZone
+  ]
+}
+```
 
 For each of the following statements, select Yes if the statement is true. Otherwise, select No.
 
 | Statement | Yes | No |
 |----------|-----|----|
-| You need to export the Azure Resource Manager (ARM) template from the latest deployment. | ☐ | ☐ |
-| Each deployment contains only the resources that have been added in that deployment. | ☐ | ☐ |
-| The parameters file contains the values used during the deployment. | ☐ | ☐ |
-| The template contains the scripts needed for deploying the template. | ☐ | ☐ |
+| The resource named otherResource is implicitly dependent on PrimaryDnsZone. | ☐ | ☐ |
+| The resource named otherZone is implicitly dependent on PrimaryDnsZone. | ☐ | ☐ |
+| Azure Resource Manager deploys the PrimaryDnsZone and otherZone resources in parallel. | ☐ | ☐ |
 
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-03-12-03-11-57.png' width=600>
+<img src='.img/2026-03-03-03-30-51.png' width=600>
 
 </details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
 
-You do not need to export the Azure Resource Manager (ARM) template from the latest deployment. In this scenario, the line of business (LOB) application was deployed in several phases. The latest deployment will export only the latest resources added to the application. If you want to export the ARM template with all the resources needed for the LOB application, you will need to export the ARM template from the resource group.
+There are two kinds of resource dependencies in Azure Bicep. An implicit dependency is created when one resource declaration references another resource in the same deployment. The other type is referred to as an explicit dependency, where you use the dependsOn property. The dependsOn property accepts an array of resource identifiers, so you can specify more than one dependency. You can specify a nested resource dependency by using the :: operator.
 
-Each deployment contains only the resources that have been added in that deployment. When deploying your resources, you specify that the deployment is either an Incremental update or a Complete update. The difference between these two modes is how the Resource Manager handles existing resources in the resource group that are not in the template. In this scenario, since you are using the Complete mode, each deployment contains only the resources that have been added in that deployment and the Resource Manager will delete all the resources that exist in the resource group but are not specified in the template. On the other hand, in an Incremental mode, the Resource Manager leaves unchanged resources that exist in the resource group but are not specified in the template. Resources in the template are added to the resource group.
+The resource named otherResource is implicitly dependent on PrimaryDnsZone. The `nameServers: PrimaryDnsZone.properties.nameServers` in otherResource uses an implicit dependency.
 
-The parameters file contains the values used during the deployment. The parameters file is a JSON file that stores all the parameters used in the ARM template. You can use this file to reuse the template in different deployments, just changing the values of the parameters file. If you use this file in templates created from resource groups, you need to make significant edits to the template before you can effectively use the parameters file.
+The resource named otherZone is not implicitly dependent on PrimaryDnsZone. The otherZone uses the `dependsOn: [ PrimaryDnsZone ]`, which denotes that otherZone resource uses an explicit dependency.
 
-The template does not contain the scripts needed for deploying the template. When you download an ARM template from a deployment or a resource group, the downloaded package contains only the ARM template and the parameters file. You can reference Azure CLI scripts or a PowerShell script in the Azure docs linked in the export template pane.
-
-<img src='.img/2026-03-12-03-47-36.png' width=600>
-
-<img src='.img/2026-03-12-03-31-11.png' width=600>
+Azure Resource Manager (ARM) does not deploy the PrimaryDnsZone and otherZone resources in parallel. ARM only deploys resources in parallel if the resources are not dependent on one another. In this scenario, since the otherZone resource is explicitly dependent on the PrimaryDnsZone resource, ARM will not deploy the resources in parallel.
 
 References
 
-- [Use Azure portal to export a template](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/export-template-portal)
-- [Understand the structure and syntax of ARM templates](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/syntax)
-- [Azure Resource Manager deployment modes: COMPLETE versus INCREMENTAL](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/deployment-modes)
-- [Azure Resource Manager deployment modes](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/deployment-modes)
-- [Manage Azure resources by using Azure CLI](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resources-cli)
+* [Resource dependencies in Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/resource-dependencies)
 
 </details>
 
 ---
 
-#### Case Study — Solution Evaluation
+#### Deployment Mode Deleted Resources
 
 **Domain:** Deploy and Manage Azure Compute Resources
 **Skill:** Automate deployment of resources by using ARM templates or Bicep files
 **Task:** Deploy resources by using an ARM template or a Bicep file
 
-*Case Study — Solution Evaluation*
+You have a resource group named `APP-RG` that consists of several resources.
 
-This case study contains a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.
+You are asked to add a storage account to the resource group. You decide to deploy the new storage account by using an Azure Resource Manager (ARM) template and the `New-AzResourceGroupDeployment` cmdlet. This template does not contain any linked or nested templates.
 
-You have an Azure resource group named `RG1`. `RG1` contains a Linux virtual machine (VM) named `VM1`.
+After the deployment finishes successfully, you realize that all the resources in the resource group have been deleted except for the newly created storage account.
 
-You need to automate the deployment of 20 additional Linux VMs. The new VMs should be based upon `VM1`'s configuration.
+Why did this happen?
 
-Does this solution meet the goal?
-
-| Solution | Yes | No |
-|----------|-----|----|
-| 1. From the virtual machine's Export Template settings blade, you click Deploy and edit the parameters. | ☐ | ☐ |
-| 2. You store the Linux VM properties in a template and deploy the additional VMs by editing the template parameter values for each additional VM. | ☐ | ☐ |
-| 3. From the resource group's Policies blade, you click Assign policy. | ☐ | ☐ |
+A. The template contains the mode parameter with the value Incremental.  
+B. The template contains the mode parameter with the value Complete.  
+C. You did not use the -mode parameter with the `New-AzResourceGroupDeployment` cmdlet.  
+D. You used the -mode complete parameter with the `New-AzResourceGroupDeployment` cmdlet.  
 
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-03-12-03-58-37.png' width=600>
+<img src='.img/2026-03-13-05-11-11.png' width=600>
 
 </details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
 
-Solution 1 Explanation:
+**Explanation**
 
-This solution does not meet the goal. Every deployment in Azure is described in a template in JavaScript Object Notation (JSON) format. You can access the underlying template from the Export Template settings blade of the VM resource, and then deploy a single new instance of a resource by modifying the template parameters. However, you would need to do this 20 times in order to create 20 VMs, and therefore it is not an automatic process.
+Resources in the resource group were deleted except for the newly-created storage account because you used the `-mode complete` parameter with the `New-AzResourceGroupDeployment` cmdlet. The `New-AzResourceGroupDeployment` cmdlet has two deployment modes: incremental and complete. When you use the complete mode, all resources in the resource group that are not included in the template are deleted.
 
-Solution 2 Explanation:
+Using the `-mode` parameter with the `New-AzResourceGroupDeployment` cmdlet was not the cause when you did not specify it. When you do not use the `-mode` parameter, you are using the default incremental deployment mode. In this mode, any resource that is not present in the template is maintained in the resource group. If a resource in the resource group is present in the template and any parameters in the template differ from the values in the resource group, those values are updated in the resource present in Azure. You should use this mode when deploying the template.
 
-This solution meets the goal. The Templates blade in the Azure portal enables you to store JavaScript Object Notation (JSON) documents that automate Azure resource deployment. In this case, to automate the deployment of 20 additional Linux VMs based on `VM1`'s configuration, you can use an Azure Resource Manager (ARM) template. Steps:
+The cause was not the template containing the mode parameter with the value Complete or Incremental. The template that you are using does not contain any linked or nested templates, so the mode parameter should not be present in the template with either value. This parameter is part of the deployment resource type and is typically used with nested or linked templates. Complete and incremental deployment modes behave the same way as in the `New-AzResourceGroupDeployment` cmdlet.
 
-1. Export `VM1`'s configuration by using **Export template** in the portal to get the ARM template for the VM.
-2. Modify the exported ARM template to introduce parameters for items that will vary between VMs (for example, VM name, IP assignment, and any unique identifiers).
-3. Create a parameter file (`parameters.json`) that defines the values for the 20 new VMs (names, sizes, and other settings).
-4. Deploy the template with the parameter file using CLI or PowerShell, for example:
+**References**
 
-```powershell
-az deployment group create --resource-group MyResourceGroup --template-file ./template.json --parameters @parameters.json
-```
-
-5. Automate the process by scripting updates to the parameter file and running the deployment in a loop. For example, a simple shell loop can iterate and deploy multiple parameter sets.
-
-Solution 3 Explanation:
-
-This solution does not meet the goal. To automate the deployment of the 20 additional VMs, you should access the virtual machine's underlying JSON template and deploy the new resources by using the template and custom deployment parameters. Azure Policy is a governance product that enforces rules (for example, allowed regions or VM types) and helps ensure compliance, but it does not perform bulk VM provisioning based on an existing VM's configuration.
-
-References
-
-* [Export an Azure Resource Manager template from an existing resource](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/export-template-portal)
-* [Deploy resources with ARM templates](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/deploy-templates-azure-cli)
-* [Azure Policy overview](https://learn.microsoft.com/en-us/azure/governance/policy/overview)
+* [Deploy resources with ARM templates and Azure PowerShell](https://learn.microsoft.com/azure/azure-resource-manager/templates/deploy-powershell)
+* [Microsoft.Resources deployments](https://learn.microsoft.com/azure/templates/microsoft.resources/deployments)
+* [New-AzResourceGroupDeployment](https://learn.microsoft.com/powershell/module/az.resources/new-azresourcegroupdeployment?view=azps-15.4.0)
 
 </details>
 
@@ -2338,113 +2276,240 @@ References
 
 ---
 
-#### Deployment Mode Deleted Resources
+#### Complete ARM template deployment command
 
 **Domain:** Deploy and Manage Azure Compute Resources
 **Skill:** Automate deployment of resources by using ARM templates or Bicep files
 **Task:** Deploy resources by using an ARM template or a Bicep file
 
-You have a resource group named `APP-RG` that consists of several resources.
+You are adding a resource group deployment from an Azure Resource Manager (ARM) template that already exists. The template is stored in a web-based repository. You have already created the resource group named `ResourceGroup1`.
 
-You are asked to add a storage account to the resource group. You decide to deploy the new storage account by using an Azure Resource Manager (ARM) template and the `New-AzResourceGroupDeployment` cmdlet. This template does not contain any linked or nested templates.
+You need to deploy the resources from the resource group deployment. `$ResourceTemplate` is the location of the source template file.
 
-After the deployment finishes successfully, you realize that all the resources in the resource group have been deleted except for the newly created storage account.
+How should you complete the command string? To answer, complete the commands by selecting the correct parts from the drop-down menus.
 
-Why did this happen?
+```powershell
+___[1]___ -ResourceGroupName "ResourceGroup1" ___[2]___ $ResourceTemplate
+```
 
-A. The template contains the mode parameter with the value Incremental.  
-B. The template contains the mode parameter with the value Complete.  
-C. You did not use the -mode parameter with the `New-AzResourceGroupDeployment` cmdlet.  
-D. You used the -mode complete parameter with the `New-AzResourceGroupDeployment` cmdlet.  
+Drop-Down Options:
+
+| Blank | Options |
+|-------|---------|
+| [1] | `-Select-` / `New-AzResource` / `New-AzResourceGroup` / `New-AzResourceGroupDeployment` |
+| [2] | `-Select-` / `-TemplateFile` / `-TemplateObject` / `-TemplateUri` |
 
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-03-13-05-11-11.png' width=600>
+<img src='.img/2026-03-13-05-26-05.png' width=600>
 
 </details>
 
-<details open>
+<details>
 <summary>💡 Click to expand explanation</summary>
 
-**Explanation**
+**Solution Explanation:**
 
-Resources in the resource group were deleted except for the newly-created storage account because you used the `-mode complete` parameter with the `New-AzResourceGroupDeployment` cmdlet. The `New-AzResourceGroupDeployment` cmdlet has two deployment modes: incremental and complete. When you use the complete mode, all resources in the resource group that are not included in the template are deleted.
+You should complete the command string as follows:
 
-Using the `-mode` parameter with the `New-AzResourceGroupDeployment` cmdlet was not the cause when you did not specify it. When you do not use the `-mode` parameter, you are using the default incremental deployment mode. In this mode, any resource that is not present in the template is maintained in the resource group. If a resource in the resource group is present in the template and any parameters in the template differ from the values in the resource group, those values are updated in the resource present in Azure. You should use this mode when deploying the template.
+```powershell
+New-AzResourceGroupDeployment -ResourceGroupName "ResourceGroup1" -TemplateUri $ResourceTemplate
+```
 
-The cause was not the template containing the mode parameter with the value Complete or Incremental. The template that you are using does not contain any linked or nested templates, so the mode parameter should not be present in the template with either value. This parameter is part of the deployment resource type and is typically used with nested or linked templates. Complete and incremental deployment modes behave the same way as in the `New-AzResourceGroupDeployment` cmdlet.
+The `New-AzResourceGroupDeployment` cmdlet is used to deploy a resource group deployment from a template. The `-TemplateUri` parameter is used to specify the template location (URI) and filename for a remote template.
+
+You should not use the `New-AzResourceGroup` cmdlet. This is used to create a new resource group with a specified name. You would have used this cmdlet to create `ResourceGroup1`.
+
+You should not use the `New-AzResource` cmdlet. This is used to create a specific resource.
+
+You should not use the `-TemplateFile` parameter. This is used to specify the path and filename of a locally stored template file.
+
+You should not use the `-TemplateObject` parameter. This is used to specify a hash table used to represent a template.
+
+<img src='.img/2026-03-13-05-29-46.png' width=600>
 
 **References**
 
 * [Deploy resources with ARM templates and Azure PowerShell](https://learn.microsoft.com/azure/azure-resource-manager/templates/deploy-powershell)
-* [Microsoft.Resources deployments](https://learn.microsoft.com/azure/templates/microsoft.resources/deployments)
 * [New-AzResourceGroupDeployment](https://learn.microsoft.com/powershell/module/az.resources/new-azresourcegroupdeployment?view=azps-15.4.0)
+* [New-AzResourceGroup](https://learn.microsoft.com/powershell/module/az.resources/new-azresourcegroup?view=azps-15.4.0)
+* [New-AzResource](https://learn.microsoft.com/powershell/module/az.resources/new-azresource?view=azps-15.4.0)
 
 </details>
 
 ---
 
-#### Resource dependencies in Bicep
+#### Export ARM Template
 
 **Domain:** Deploy and Manage Azure Compute Resources
 **Skill:** Automate deployment of resources by using ARM templates or Bicep files
-**Task:** Interpret an Azure Resource Manager template or a Bicep file
+**Task:** Export a deployment as an ARM template or convert an ARM template to a Bicep file
 
-You are an Azure Administrator for an eCommerce organization. You are deploying Azure resources and have created a Bicep file as shown below:
+You deploy a line of business (LOB) application. All resources that are part of the LOB application are deployed in a single resource group. The resources were added in different phases.
 
-```bicep
-resource PrimaryDnsZone 'Microsoft.Network/dnszones@2018-05-01' = {
-  name: 'myZone'
-  location: 'global'
-}
+You need to export the current configuration of the LOB application resources to an Azure Resource Manager (ARM) template. You will later use this template for deploying the LOB application infrastructure in different environments for testing or development purposes.
 
-resource otherResource 'Microsoft.Example/examples@2023-05-01' = {
-  name: 'egResource'
-  properties: {
-    // get read-only DNS zone property
-    nameServers: PrimaryDnsZone.properties.nameServers
-  }
-}
-
-resource otherZone 'Microsoft.Network/dnszones@2023-06-01' = {
-  name: 'demoZone2'
-  location: 'global'
-  dependsOn: [
-    PrimaryDnsZone
-  ]
-}
-```
+You are using the Complete mode for ARM deployment.
 
 For each of the following statements, select Yes if the statement is true. Otherwise, select No.
 
 | Statement | Yes | No |
 |----------|-----|----|
-| The resource named otherResource is implicitly dependent on PrimaryDnsZone. | ☐ | ☐ |
-| The resource named otherZone is implicitly dependent on PrimaryDnsZone. | ☐ | ☐ |
-| Azure Resource Manager deploys the PrimaryDnsZone and otherZone resources in parallel. | ☐ | ☐ |
+| You need to export the Azure Resource Manager (ARM) template from the latest deployment. | ☐ | ☐ |
+| Each deployment contains only the resources that have been added in that deployment. | ☐ | ☐ |
+| The parameters file contains the values used during the deployment. | ☐ | ☐ |
+| The template contains the scripts needed for deploying the template. | ☐ | ☐ |
 
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-03-03-03-30-51.png' width=600>
+<img src='.img/2026-03-12-03-11-57.png' width=600>
 
 </details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
 
-There are two kinds of resource dependencies in Azure Bicep. An implicit dependency is created when one resource declaration references another resource in the same deployment. The other type is referred to as an explicit dependency, where you use the dependsOn property. The dependsOn property accepts an array of resource identifiers, so you can specify more than one dependency. You can specify a nested resource dependency by using the :: operator.
+You do not need to export the Azure Resource Manager (ARM) template from the latest deployment. In this scenario, the line of business (LOB) application was deployed in several phases. The latest deployment will export only the latest resources added to the application. If you want to export the ARM template with all the resources needed for the LOB application, you will need to export the ARM template from the resource group.
 
-The resource named otherResource is implicitly dependent on PrimaryDnsZone. The `nameServers: PrimaryDnsZone.properties.nameServers` in otherResource uses an implicit dependency.
+Each deployment contains only the resources that have been added in that deployment. When deploying your resources, you specify that the deployment is either an Incremental update or a Complete update. The difference between these two modes is how the Resource Manager handles existing resources in the resource group that are not in the template. In this scenario, since you are using the Complete mode, each deployment contains only the resources that have been added in that deployment and the Resource Manager will delete all the resources that exist in the resource group but are not specified in the template. On the other hand, in an Incremental mode, the Resource Manager leaves unchanged resources that exist in the resource group but are not specified in the template. Resources in the template are added to the resource group.
 
-The resource named otherZone is not implicitly dependent on PrimaryDnsZone. The otherZone uses the `dependsOn: [ PrimaryDnsZone ]`, which denotes that otherZone resource uses an explicit dependency.
+The parameters file contains the values used during the deployment. The parameters file is a JSON file that stores all the parameters used in the ARM template. You can use this file to reuse the template in different deployments, just changing the values of the parameters file. If you use this file in templates created from resource groups, you need to make significant edits to the template before you can effectively use the parameters file.
 
-Azure Resource Manager (ARM) does not deploy the PrimaryDnsZone and otherZone resources in parallel. ARM only deploys resources in parallel if the resources are not dependent on one another. In this scenario, since the otherZone resource is explicitly dependent on the PrimaryDnsZone resource, ARM will not deploy the resources in parallel.
+The template does not contain the scripts needed for deploying the template. When you download an ARM template from a deployment or a resource group, the downloaded package contains only the ARM template and the parameters file. You can reference Azure CLI scripts or a PowerShell script in the Azure docs linked in the export template pane.
+
+<img src='.img/2026-03-12-03-47-36.png' width=600>
+
+<img src='.img/2026-03-12-03-31-11.png' width=600>
 
 References
 
-* [Resource dependencies in Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/resource-dependencies)
+- [Use Azure portal to export a template](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/export-template-portal)
+- [Understand the structure and syntax of ARM templates](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/syntax)
+- [Azure Resource Manager deployment modes: COMPLETE versus INCREMENTAL](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/deployment-modes)
+- [Azure Resource Manager deployment modes](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/deployment-modes)
+- [Manage Azure resources by using Azure CLI](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resources-cli)
+
+</details>
+
+---
+
+#### Edit ARM Template to Inherit Resource Group Location
+
+**Domain:** Deploy and Manage Azure Compute Resources
+**Skill:** Automate deployment of resources by using ARM templates or Bicep files
+**Task:** Modify an existing Azure Resource Manager template
+
+You have an Azure Resource Manager (ARM) template for creating a Windows virtual machine. You got this template from an existing resource group with a single virtual machine, using the automation script option.
+
+You want to reuse this template for other deployments. You need all the resources in the resource group to be in the same location.
+
+What should you do?
+
+A. Use the Azure portal and create a resource group in the desired location. Then use the `New-AzResourceGroupDeployment` cmdlet using the newly created resource group.  
+B. Edit the parameters file and add a new parameter named location of type string with the default value of `[resourceGroup().location]`.  
+C. Use the `New-AzResourceGroup` cmdlet with the `-Location` parameter to create a resource group in the desired location. Then use the `New-AzResourceGroupDeployment` cmdlet using the newly created resource group.  
+D. Edit the template file and update each location parameter with the value `[resourceGroup().location]`.  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-12-04-14-06.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Explanation:**
+
+You should edit the template file and update each location parameter with the value `[resourceGroup().location]`. The `resourceGroup()` function gets the resource group object that will be used to deploy the template. This way, all resources in the template will use the same location as the resource group. You need to ensure that all resources are supported in the location that you are using for the resource group.
+
+**Why you should not choose B:**
+
+You should not edit the parameters file and add a new parameter named `location` of type string with the default value of `[resourceGroup().location]`. This is the first step in centralizing the location value in the template, but you also need to update the location parameter in the template file with the value `[parameters('location')]`.
+
+**Why you should not choose A:**
+
+You should not use the Azure portal and create a resource group in the desired location and then use the `New-AzResourceGroupDeployment` cmdlet using the newly created resource group. If the resource group is deployed in a different location to the location configured in the template file, the resources will be deployed in different locations. You need to modify the location parameter in the template file to the value `[resourceGroup().location]` to inherit the location from the parent resource group.
+
+**Why you should not choose C:**
+
+You should not use the `New-AzResourceGroup` cmdlet with the `-Location` parameter to create a resource group in the desired location and then use the `New-AzResourceGroupDeployment` cmdlet using the newly created resource group. If the resource group is deployed in a different location to the location configured in the template file, the resources will be deployed in different locations. You need to modify the location parameter in the template file to the value `[resourceGroup().location]` to inherit the location from the parent resource group.
+
+<img src='.img/2026-03-12-04-30-49.png' width=600>
+
+**References**
+
+- [Set resource location in ARM template](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/resource-location?tabs=azure-powershell)
+- [Understand the structure and syntax of ARM templates](https://learn.microsoft.com/azure/azure-resource-manager/templates/syntax)
+- [Deploy resources with ARM templates and Azure PowerShell](https://learn.microsoft.com/azure/azure-resource-manager/templates/deploy-powershell)
+
+</details>
+
+---
+
+#### Case Study — Solution Evaluation
+
+**Domain:** Deploy and Manage Azure Compute Resources
+**Skill:** Automate deployment of resources by using ARM templates or Bicep files
+**Task:** Deploy resources by using an ARM template or a Bicep file
+
+*Case Study — Solution Evaluation*
+
+This case study contains a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.
+
+You have an Azure resource group named `RG1`. `RG1` contains a Linux virtual machine (VM) named `VM1`.
+
+You need to automate the deployment of 20 additional Linux VMs. The new VMs should be based upon `VM1`'s configuration.
+
+Does this solution meet the goal?
+
+| Solution | Yes | No |
+|----------|-----|----|
+| 1. From the virtual machine's Export Template settings blade, you click Deploy and edit the parameters. | ☐ | ☐ |
+| 2. You store the Linux VM properties in a template and deploy the additional VMs by editing the template parameter values for each additional VM. | ☐ | ☐ |
+| 3. From the resource group's Policies blade, you click Assign policy. | ☐ | ☐ |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-12-03-58-37.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+Solution 1 Explanation:
+
+This solution does not meet the goal. Every deployment in Azure is described in a template in JavaScript Object Notation (JSON) format. You can access the underlying template from the Export Template settings blade of the VM resource, and then deploy a single new instance of a resource by modifying the template parameters. However, you would need to do this 20 times in order to create 20 VMs, and therefore it is not an automatic process.
+
+Solution 2 Explanation:
+
+This solution meets the goal. The Templates blade in the Azure portal enables you to store JavaScript Object Notation (JSON) documents that automate Azure resource deployment. In this case, to automate the deployment of 20 additional Linux VMs based on `VM1`'s configuration, you can use an Azure Resource Manager (ARM) template. Steps:
+
+1. Export `VM1`'s configuration by using **Export template** in the portal to get the ARM template for the VM.
+2. Modify the exported ARM template to introduce parameters for items that will vary between VMs (for example, VM name, IP assignment, and any unique identifiers).
+3. Create a parameter file (`parameters.json`) that defines the values for the 20 new VMs (names, sizes, and other settings).
+4. Deploy the template with the parameter file using CLI or PowerShell, for example:
+
+```powershell
+az deployment group create --resource-group MyResourceGroup --template-file ./template.json --parameters @parameters.json
+```
+
+5. Automate the process by scripting updates to the parameter file and running the deployment in a loop. For example, a simple shell loop can iterate and deploy multiple parameter sets.
+
+Solution 3 Explanation:
+
+This solution does not meet the goal. To automate the deployment of the 20 additional VMs, you should access the virtual machine's underlying JSON template and deploy the new resources by using the template and custom deployment parameters. Azure Policy is a governance product that enforces rules (for example, allowed regions or VM types) and helps ensure compliance, but it does not perform bulk VM provisioning based on an existing VM's configuration.
+
+References
+
+* [Export an Azure Resource Manager template from an existing resource](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/export-template-portal)
+* [Deploy resources with ARM templates](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/deploy-templates-azure-cli)
+* [Azure Policy overview](https://learn.microsoft.com/en-us/azure/governance/policy/overview)
 
 </details>
 
@@ -2743,90 +2808,108 @@ The JSON defines an Azure Service Bus scaler with a `messageCount` threshold and
 
 ### Create and configure Azure App Service
 
-#### Prepare Azure App Service for Web App Republication
+#### Resolve Azure App Service Pricing Tier for Runtime Requirements
 
 **Domain:** Deploy and manage Azure compute resources
 **Skill:** Create and configure Azure App Service
 **Task:**
 
-- Create an App Service
-- Configure deployment slots for an App Service
+- Provision an App Service plan
+- Configure scaling for an App Service plan
 
-You are developing a new web app. The source code is located in an Azure DevOps Git repository. Before you move the web app into production, its functionality must be reviewed by your test users.
+You deploy an Azure web app named MyApp. MyApps runs in a Free pricing tier service plan named MyPlan. During testing, you discover that MyApp stops after 60 minutes and that it cannot be restarted until the next day.
 
-You need to prepare the target environment to be ready to republish the web app.
+You need to ensure that MyApp can run eight hours each day during the testing period. You want to keep the additional costs incurred to a minimum.
 
-Which four commands should you run in sequence? To answer, move the appropriate commands from the list of possible commands to the answer area and arrange them in the correct order.
+Does changing the pricing tier for MyPlan to Shared D1 meet the goal?
 
-Available options:
-
-* Publish-AzWebApp  
-* New-AzAppServicePlan  
-* New-AzResourceGroup  
-* New-AzWebAppSlot  
-* Start-AzWebAppSlot  
+A. Yes  
+B. No  
 
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-01-30-06-12-43.png' width=700>
+<img src='.img/2026-01-30-06-17-12.png' width=700>
 
 </details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
 
-**Why the selected answer is wrong**
+**Why the selected answer is wrong (Yes)**
+Moving from **Free (F1)** to **Shared (D1)** increases the daily CPU quota, but it **does not remove quotas**. Your symptom ("stops after 60 minutes and can't be restarted until the next day") matches hitting the **CPU (Day)** quota, which causes the app to be stopped until the quota resets. In Shared (D1), the app can still hit **CPU (Day)** and be stopped again—just later—so it won't reliably run **8 hours/day**.
 
-Your sequence prepares Azure infrastructure objects but **never deploys the application code** from the Azure DevOps Git repository.
-The exam question explicitly states that the target environment must be ready to **republish the web app** so test users can review functionality. That implies pushing code into an App Service (or slot), not just provisioning resources.
+**Why the correct answer is correct (No)**
+To meet "run 8 hours each day," you need a plan where you **don't get stopped due to Free/Shared quotas**. That generally means moving to a **Dedicated compute** tier (Basic/Standard/Premium), where the app runs on dedicated VMs and the Free/Shared CPU (Day) quota enforcement doesn't apply in the same way. Shared (D1) remains a shared-compute tier with quota enforcement, so it doesn't meet the requirement.
 
-Specific issues with your sequence:
+**Why other options are incorrect or less appropriate**
 
-* **New-AzWebAppSlot** is unnecessary unless the question explicitly mentions deployment slots. Slots are optional, not required to republish.
-* **Start-AzWebAppSlot** is redundant in most exam scenarios. Newly created web apps and slots start automatically.
-* **Publish-AzWebApp** (or equivalent deployment command) is missing, which is the key step that actually deploys the application.
-* You created infrastructure only; no deployment occurred.
-
-This is a common exam trap: confusing *environment preparation* with *application deployment*.
-
-**Why the correct answer is right**
-
-The correct sequence includes the deployment step and follows the required dependency order:
-
-1. **New-AzResourceGroup**
-   A resource group must exist before any App Service resources can be created.
-
-2. **New-AzAppServicePlan**
-   An App Service Plan is required before creating a web app.
-
-3. **New-AzWebApp**
-   Creates the App Service that will host the application.
-
-4. **Publish-AzWebApp**
-   Deploys the application code so testers can access and validate functionality.
-
-This sequence ensures:
-
-* Infrastructure dependencies are respected.
-* The web app actually contains code to test.
-* The environment is truly “ready to republish,” per the wording of the question.
+* **Stay on Free (F1):** guaranteed to stop once the quota is exceeded (as observed).
+* **Shared (D1):** still quota-enforced; may extend runtime but not to the required 8 hours consistently.
+* **Basic (B1) or higher:** costs more than Shared, but it's the minimum tier change that aligns with the requirement to keep the app running during the testing window.
 
 **Key takeaway**
-
-On Azure exams, **“prepare the environment to republish” always includes deploying code**, not just creating resources.
-If a deployment-related command is available (like `Publish-AzWebApp`) and the scenario involves testers or validation, it is almost always required.
+**Free and Shared tiers have CPU quotas that can stop the app until the daily reset.** If you need predictable multi-hour runtime, move to a **Dedicated compute** tier (Basic or higher).
 
 **References**
 
-* [https://learn.microsoft.com/azure/app-service/overview](https://learn.microsoft.com/azure/app-service/overview)
-* [https://learn.microsoft.com/powershell/module/az.websites/new-azwebapp](https://learn.microsoft.com/powershell/module/az.websites/new-azwebapp)
-* [https://learn.microsoft.com/powershell/module/az.websites/publish-azwebapp](https://learn.microsoft.com/powershell/module/az.websites/publish-azwebapp)
-* [https://learn.microsoft.com/azure/app-service/deploy-local-git](https://learn.microsoft.com/azure/app-service/deploy-local-git)
+* [https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans](https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans)
+* [https://learn.microsoft.com/en-us/azure/app-service/web-sites-monitor](https://learn.microsoft.com/en-us/azure/app-service/web-sites-monitor)
 
 </details>
 
-▶ **Related Lab:** [lab-app-service-republication](../hands-on-labs/compute/lab-app-service-republication/README.md)
+▶ **Related Lab:** [lab-app-service-plan-quotas](../hands-on-labs/compute/lab-app-service-plan-quotas/README.md)
+
+---
+
+#### Resolve Azure App Service Pricing Tier for Runtime Requirements
+
+**Domain:** Deploy and manage Azure compute resources
+**Skill:** Create and configure Azure App Service
+**Task:**
+
+- Provision an App Service plan
+- Configure scaling for an App Service plan
+
+You deploy an Azure web app named MyApp. MyApp runs in a Free pricing tier service plan named MyPlan. During testing, you discover that MyApp stops after 60 minutes and that it cannot be restarted until the next day.
+
+You need to ensure that MyApp can run eight hours each day during the testing period. You want to keep the additional costs incurred to a minimum.
+
+Does changing the pricing tier for MyPlan to Basic B1 meet the goal?
+
+A. Yes  
+B. No  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-01-30-06-17-46.png' width=700>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Why "Yes" is correct**
+Changing the App Service plan from **Free (F1)** to **Basic (B1)** removes the **Free/Shared quota enforcement** behavior. In Free/Shared tiers, Azure enforces CPU/Bandwidth quotas; when the app exceeds its quota (for example, CPU (Day)), the app is **stopped until the quota resets** (which matches "stops after 60 minutes" and "can't be restarted until the next day"). Scaling up to a dedicated tier (Basic) avoids those per-app CPU-minute/day quotas, allowing the app to run for the required **8 hours/day**.
+
+**Why "No" would be a trap**
+A common misconception is that "Free just means no SLA" or "it only affects performance." In reality, Free/Shared tiers have **hard quotas** that can stop the app for the rest of the day once exceeded.
+
+**Cost reasoning (exam perspective)**
+Basic **B1** is typically the lowest-cost **dedicated compute** App Service plan tier. Since the requirement is to run several hours daily, moving to the cheapest dedicated tier is the minimal-cost way to meet the runtime goal.
+
+**Key takeaway**
+Free/Shared App Service plans can stop apps when usage quotas are exceeded; moving to a dedicated tier like **Basic B1** eliminates that daily CPU-minute quota enforcement and meets the 8-hours/day requirement.
+
+<img src='.img/2026-02-05-04-17-27.png' width=800>
+
+**References**
+
+* [https://learn.microsoft.com/en-us/azure/app-service/web-sites-monitor](https://learn.microsoft.com/en-us/azure/app-service/web-sites-monitor)
+* [https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans](https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans)
+
+</details>
 
 ---
 
@@ -2921,6 +3004,93 @@ The **ACU/vCPU** column indicates the **relative CPU performance available per v
 ACU/vCPU is a **relative CPU performance indicator**. Higher numbers mean **faster CPUs per core**, typically reflecting newer App Service hardware generations.
 
 </details>
+
+---
+
+#### Prepare Azure App Service for Web App Republication
+
+**Domain:** Deploy and manage Azure compute resources
+**Skill:** Create and configure Azure App Service
+**Task:**
+
+- Create an App Service
+- Configure deployment slots for an App Service
+
+You are developing a new web app. The source code is located in an Azure DevOps Git repository. Before you move the web app into production, its functionality must be reviewed by your test users.
+
+You need to prepare the target environment to be ready to republish the web app.
+
+Which four commands should you run in sequence? To answer, move the appropriate commands from the list of possible commands to the answer area and arrange them in the correct order.
+
+Available options:
+
+* Publish-AzWebApp  
+* New-AzAppServicePlan  
+* New-AzResourceGroup  
+* New-AzWebAppSlot  
+* Start-AzWebAppSlot  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-01-30-06-12-43.png' width=700>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Why the selected answer is wrong**
+
+Your sequence prepares Azure infrastructure objects but **never deploys the application code** from the Azure DevOps Git repository.
+The exam question explicitly states that the target environment must be ready to **republish the web app** so test users can review functionality. That implies pushing code into an App Service (or slot), not just provisioning resources.
+
+Specific issues with your sequence:
+
+* **New-AzWebAppSlot** is unnecessary unless the question explicitly mentions deployment slots. Slots are optional, not required to republish.
+* **Start-AzWebAppSlot** is redundant in most exam scenarios. Newly created web apps and slots start automatically.
+* **Publish-AzWebApp** (or equivalent deployment command) is missing, which is the key step that actually deploys the application.
+* You created infrastructure only; no deployment occurred.
+
+This is a common exam trap: confusing *environment preparation* with *application deployment*.
+
+**Why the correct answer is right**
+
+The correct sequence includes the deployment step and follows the required dependency order:
+
+1. **New-AzResourceGroup**
+   A resource group must exist before any App Service resources can be created.
+
+2. **New-AzAppServicePlan**
+   An App Service Plan is required before creating a web app.
+
+3. **New-AzWebApp**
+   Creates the App Service that will host the application.
+
+4. **Publish-AzWebApp**
+   Deploys the application code so testers can access and validate functionality.
+
+This sequence ensures:
+
+* Infrastructure dependencies are respected.
+* The web app actually contains code to test.
+* The environment is truly “ready to republish,” per the wording of the question.
+
+**Key takeaway**
+
+On Azure exams, **“prepare the environment to republish” always includes deploying code**, not just creating resources.
+If a deployment-related command is available (like `Publish-AzWebApp`) and the scenario involves testers or validation, it is almost always required.
+
+**References**
+
+* [https://learn.microsoft.com/azure/app-service/overview](https://learn.microsoft.com/azure/app-service/overview)
+* [https://learn.microsoft.com/powershell/module/az.websites/new-azwebapp](https://learn.microsoft.com/powershell/module/az.websites/new-azwebapp)
+* [https://learn.microsoft.com/powershell/module/az.websites/publish-azwebapp](https://learn.microsoft.com/powershell/module/az.websites/publish-azwebapp)
+* [https://learn.microsoft.com/azure/app-service/deploy-local-git](https://learn.microsoft.com/azure/app-service/deploy-local-git)
+
+</details>
+
+▶ **Related Lab:** [lab-app-service-republication](../hands-on-labs/compute/lab-app-service-republication/README.md)
 
 ---
 
@@ -3027,111 +3197,6 @@ On Azure exams, when you see:
 </details>
 
 ▶ **Related Lab:** [lab-app-service-plan-tiers](../hands-on-labs/compute/lab-app-service-plan-tiers/README.md)
-
----
-
-#### Resolve Azure App Service Pricing Tier for Runtime Requirements
-
-**Domain:** Deploy and manage Azure compute resources
-**Skill:** Create and configure Azure App Service
-**Task:**
-
-- Provision an App Service plan
-- Configure scaling for an App Service plan
-
-You deploy an Azure web app named MyApp. MyApp runs in a Free pricing tier service plan named MyPlan. During testing, you discover that MyApp stops after 60 minutes and that it cannot be restarted until the next day.
-
-You need to ensure that MyApp can run eight hours each day during the testing period. You want to keep the additional costs incurred to a minimum.
-
-Does changing the pricing tier for MyPlan to Basic B1 meet the goal?
-
-A. Yes  
-B. No  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-01-30-06-17-46.png' width=700>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Why "Yes" is correct**
-Changing the App Service plan from **Free (F1)** to **Basic (B1)** removes the **Free/Shared quota enforcement** behavior. In Free/Shared tiers, Azure enforces CPU/Bandwidth quotas; when the app exceeds its quota (for example, CPU (Day)), the app is **stopped until the quota resets** (which matches "stops after 60 minutes" and "can't be restarted until the next day"). Scaling up to a dedicated tier (Basic) avoids those per-app CPU-minute/day quotas, allowing the app to run for the required **8 hours/day**.
-
-**Why "No" would be a trap**
-A common misconception is that "Free just means no SLA" or "it only affects performance." In reality, Free/Shared tiers have **hard quotas** that can stop the app for the rest of the day once exceeded.
-
-**Cost reasoning (exam perspective)**
-Basic **B1** is typically the lowest-cost **dedicated compute** App Service plan tier. Since the requirement is to run several hours daily, moving to the cheapest dedicated tier is the minimal-cost way to meet the runtime goal.
-
-**Key takeaway**
-Free/Shared App Service plans can stop apps when usage quotas are exceeded; moving to a dedicated tier like **Basic B1** eliminates that daily CPU-minute quota enforcement and meets the 8-hours/day requirement.
-
-<img src='.img/2026-02-05-04-17-27.png' width=800>
-
-**References**
-
-* [https://learn.microsoft.com/en-us/azure/app-service/web-sites-monitor](https://learn.microsoft.com/en-us/azure/app-service/web-sites-monitor)
-* [https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans](https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans)
-
-</details>
-
----
-
-#### Resolve Azure App Service Pricing Tier for Runtime Requirements
-
-**Domain:** Deploy and manage Azure compute resources
-**Skill:** Create and configure Azure App Service
-**Task:**
-
-- Provision an App Service plan
-- Configure scaling for an App Service plan
-
-You deploy an Azure web app named MyApp. MyApps runs in a Free pricing tier service plan named MyPlan. During testing, you discover that MyApp stops after 60 minutes and that it cannot be restarted until the next day.
-
-You need to ensure that MyApp can run eight hours each day during the testing period. You want to keep the additional costs incurred to a minimum.
-
-Does changing the pricing tier for MyPlan to Shared D1 meet the goal?
-
-A. Yes  
-B. No  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-01-30-06-17-12.png' width=700>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Why the selected answer is wrong (Yes)**
-Moving from **Free (F1)** to **Shared (D1)** increases the daily CPU quota, but it **does not remove quotas**. Your symptom ("stops after 60 minutes and can't be restarted until the next day") matches hitting the **CPU (Day)** quota, which causes the app to be stopped until the quota resets. In Shared (D1), the app can still hit **CPU (Day)** and be stopped again—just later—so it won't reliably run **8 hours/day**.
-
-**Why the correct answer is correct (No)**
-To meet "run 8 hours each day," you need a plan where you **don't get stopped due to Free/Shared quotas**. That generally means moving to a **Dedicated compute** tier (Basic/Standard/Premium), where the app runs on dedicated VMs and the Free/Shared CPU (Day) quota enforcement doesn't apply in the same way. Shared (D1) remains a shared-compute tier with quota enforcement, so it doesn't meet the requirement.
-
-**Why other options are incorrect or less appropriate**
-
-* **Stay on Free (F1):** guaranteed to stop once the quota is exceeded (as observed).
-* **Shared (D1):** still quota-enforced; may extend runtime but not to the required 8 hours consistently.
-* **Basic (B1) or higher:** costs more than Shared, but it's the minimum tier change that aligns with the requirement to keep the app running during the testing window.
-
-**Key takeaway**
-**Free and Shared tiers have CPU quotas that can stop the app until the daily reset.** If you need predictable multi-hour runtime, move to a **Dedicated compute** tier (Basic or higher).
-
-**References**
-
-* [https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans](https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans)
-* [https://learn.microsoft.com/en-us/azure/app-service/web-sites-monitor](https://learn.microsoft.com/en-us/azure/app-service/web-sites-monitor)
-
-</details>
-
-▶ **Related Lab:** [lab-app-service-plan-quotas](../hands-on-labs/compute/lab-app-service-plan-quotas/README.md)
 
 ---
 
@@ -3398,6 +3463,68 @@ Disabling privateLinkServiceNetworkPolicies is a per‑private‑IP (per Private
 
 ### Configure name resolution and load balancing
 
+#### IMDS Load Balancer Metadata Error
+
+**Domain:** Implement and manage virtual networking
+**Skill:** Configure name resolution and load balancing
+**Task:** Troubleshoot load balancing
+
+Your organization is using an Azure Load Balancer service. You are the Azure administrator in your organization.
+
+You are tasked with retrieving Load Balancer information using Azure Instance Metadata Service (IMDS).
+
+You see the following error message:
+
+`Error code: 404; No load balancer metadata is found.`
+
+You need to troubleshoot this issue.
+
+Which two things can you infer from the error message? Each correct answer presents a complete solution.
+
+A. There is a rate limit.  
+B. The path is misconfigured.  
+C. The load balancer has the Basic instead of the Standard SKU.  
+D. The virtual machine is not associated with a load balancer.  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-03-04-57-09.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+The Azure Instance Metadata Service (IMDS) provides information about currently running virtual machine instances. The Instance Metadata Service is only accessible from within a running virtual machine instance on a non-routable IP address.
+
+You can use the SKU, storage, network configurations, and upcoming maintenance events-related information effectively for managing and configuring the virtual machines. In this scenario, since the retrieved data from IMDS displays the No load balancer metadata is found error message, this could be owing to either of the following two reasons:
+
+1. The virtual machine is not associated with a load balancer.
+
+2. The load balancer has the Basic instead of Standard SKU.
+
+The error code does not indicate a misconfiguration of the path. In such a case, you would see Error 404, but with a different error message displayed:
+
+404; API is not found: Path = "<UrlPath>", Method = "<Method>".
+
+The error code does not indicate a rate limit. In this case, you would see Error 429 displayed with the "Too many requests" message.
+
+<img src='.img/2026-03-03-05-00-22.png' width=600>
+
+<img src='.img/2026-03-03-05-03-19.png' width=600>
+
+> Basic Load Balancer SKU was retired in 2025.
+
+References
+
+- [Instance Metadata Service](https://learn.microsoft.com/en-us/azure/virtual-machines/instance-metadata-service?tabs=windows)
+- [Load Balancer SKUs](https://learn.microsoft.com/en-us/azure/load-balancer/skus)
+
+</details>
+
+---
+
 #### Configure Standard Load Balancer Outbound Traffic and IP Allocation
 
 **Domain:** Implement and manage virtual networking
@@ -3613,68 +3740,6 @@ Use an A record (Name "@", RecordType "A") for the IPv4 mapping of the root doma
 References
 
 * [DNS Web Sites Custom Domain](https://learn.microsoft.com/en-us/azure/dns/dns-web-sites-custom-domain?tabs=azure-portal)
-
-</details>
-
----
-
-#### IMDS Load Balancer Metadata Error
-
-**Domain:** Implement and manage virtual networking
-**Skill:** Configure name resolution and load balancing
-**Task:** Troubleshoot load balancing
-
-Your organization is using an Azure Load Balancer service. You are the Azure administrator in your organization.
-
-You are tasked with retrieving Load Balancer information using Azure Instance Metadata Service (IMDS).
-
-You see the following error message:
-
-`Error code: 404; No load balancer metadata is found.`
-
-You need to troubleshoot this issue.
-
-Which two things can you infer from the error message? Each correct answer presents a complete solution.
-
-A. There is a rate limit.  
-B. The path is misconfigured.  
-C. The load balancer has the Basic instead of the Standard SKU.  
-D. The virtual machine is not associated with a load balancer.  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-03-04-57-09.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-The Azure Instance Metadata Service (IMDS) provides information about currently running virtual machine instances. The Instance Metadata Service is only accessible from within a running virtual machine instance on a non-routable IP address.
-
-You can use the SKU, storage, network configurations, and upcoming maintenance events-related information effectively for managing and configuring the virtual machines. In this scenario, since the retrieved data from IMDS displays the No load balancer metadata is found error message, this could be owing to either of the following two reasons:
-
-1. The virtual machine is not associated with a load balancer.
-
-2. The load balancer has the Basic instead of Standard SKU.
-
-The error code does not indicate a misconfiguration of the path. In such a case, you would see Error 404, but with a different error message displayed:
-
-404; API is not found: Path = "<UrlPath>", Method = "<Method>".
-
-The error code does not indicate a rate limit. In this case, you would see Error 429 displayed with the "Too many requests" message.
-
-<img src='.img/2026-03-03-05-00-22.png' width=600>
-
-<img src='.img/2026-03-03-05-03-19.png' width=600>
-
-> Basic Load Balancer SKU was retired in 2025.
-
-References
-
-- [Instance Metadata Service](https://learn.microsoft.com/en-us/azure/virtual-machines/instance-metadata-service?tabs=windows)
-- [Load Balancer SKUs](https://learn.microsoft.com/en-us/azure/load-balancer/skus)
 
 </details>
 
