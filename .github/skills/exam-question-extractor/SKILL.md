@@ -443,6 +443,10 @@ When a question is **answered** (explanation is generated), you **must** extract
 * **Self-check:** Before finalizing the explanation, re-examine the bottom 20% of each screenshot specifically for a References section. If references are present and missing from your output, add them before submitting.
 * If no references section is visible in the screenshot, do not fabricate one.
 
+#### ⛔ References Validation Gate (Mandatory for Answered Questions)
+
+Before submitting the final edit, scan every `*` or `-` bullet under the **References** label in the generated explanation. **Every** bullet must be a full markdown link (`[Title](URL)`). If any bullet is plain text (no URL), you **must** invoke the **markdown-link-resolver** skill to resolve it before inserting the edit. Do not submit the edit with unresolved plain-text reference bullets.
+
 ---
 
 ### Related Lab Line
