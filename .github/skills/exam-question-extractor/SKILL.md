@@ -119,7 +119,7 @@ Identify the question's domain, skill, and task(s) from the exam's README covera
 
 Rules:
 
-* **Source of truth:** Read the exam's README (e.g., `AZ-104/README.md`) and use its domain → skill → task hierarchy. Domain names are the `### Domain N: …` headings (omit the weight percentage). Skill names are the `####` sub-headings. Tasks are the table rows under each skill.
+* **Source of truth:** Read the exam's README (e.g., `AZ-104/README.md`) and locate the **Coverage Table** between the `<!-- BEGIN COVERAGE TABLE -->` and `<!-- END COVERAGE TABLE -->` markers. Each domain is a collapsible `<details>` block whose `<summary>` contains the domain name and weight (omit the weight percentage when emitting the domain). Inside each block is a pipe-delimited table with four columns: **Skill | Task | Qs | Labs**. Read the **first column** for the skill name and the **second column** for the task name. Skill names appear only in the first row of each skill group — subsequent rows in the same group leave the Skill cell empty (they inherit the skill from the nearest non-empty Skill cell above).
 * Use exact wording from the README for domain and skill names.
 * For tasks, use the most specific task wording. Apply best-effort reasoning when the question spans topics — pick the closest match(es).
 * If a question maps to a single task, place it inline on the header line: `**Task:** <task>`.
@@ -446,6 +446,16 @@ When a question is **answered** (explanation is generated), you **must** extract
 #### ⛔ References Validation Gate (Mandatory for Answered Questions)
 
 Before submitting the final edit, scan every `*` or `-` bullet under the **References** label in the generated explanation. **Every** bullet must be a full markdown link (`[Title](URL)`). If any bullet is plain text (no URL), you **must** invoke the **markdown-link-resolver** skill to resolve it before inserting the edit. Do not submit the edit with unresolved plain-text reference bullets.
+
+---
+
+### ⛔ Metadata Validation Gate
+
+Before submitting the final edit, verify:
+
+1. The `**Skill:**` value appears **verbatim** in the **Skill column** (first column) of the coverage table — not in the Task column.
+2. The `**Task:**` value appears **verbatim** in the **Task column** (second column) of the coverage table.
+3. If the Skill and Task values are **identical**, that is almost certainly an error — re-read the coverage table and correct the Skill value.
 
 ---
 
