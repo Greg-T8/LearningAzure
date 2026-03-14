@@ -1,14 +1,8 @@
-<!-- markdownlint-disable-next-line MD041 -->
-<div align="center">
-
 # <img src="./.assets/Azure_Advisor.svg" width="36" height="36" alt="Learning Azure" style="vertical-align: middle; margin-right: 10px;" /> Learning Azure
 
 This repository documents my Azure learning journey, from certification prep to staying current with Azure updates.
 
-[![AI-102](https://img.shields.io/badge/AI--102-In%20Progress-yellow)](AI-102/) [![AZ-104](https://img.shields.io/badge/AZ--104-In%20Progress-yellow)](AZ-104/) ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/Greg-T8/LearningAzure) ![GitHub last commit](https://img.shields.io/github/last-commit/Greg-T8/LearningAzure)
-
-[![AI-900](https://img.shields.io/badge/AI--900-Completed-green)](AI-900/)
-</div>
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/Greg-T8/LearningAzure) ![GitHub last commit](https://img.shields.io/github/last-commit/Greg-T8/LearningAzure)
 
 ---
 
@@ -16,9 +10,11 @@ This repository documents my Azure learning journey, from certification prep to 
 
 Progress trackers, detailed study notes, practice exams, and hands-on labs:
 
-- 📗 [**AZ-104**](AZ-104/README.md) — Azure Administrator Associate (*started 1/15/26*)
-- 📙 [**AI-102**](AI-102/README.md) — Azure AI Engineer Associate (*started 2/10/26*)
-- 📘 [**AI-900**](AI-900/README.md) — Azure AI Fundamentals (*completed 2/9/26*)
+| Exam | Description | Status | Started |
+|------|-------------|--------|---------|
+| 📗 [**AZ-104**](AZ-104/README.md) | Azure Administrator Associate | In Progress | 1/15/26 |
+| 📙 [**AI-102**](AI-102/README.md) | Azure AI Engineer Associate | Halted (Retiring) | 2/10/26 |
+| 📘 [**AI-900**](AI-900/README.md) | Azure AI Fundamentals | Completed | 2/9/26 |
 
 ---
 
