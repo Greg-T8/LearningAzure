@@ -10,7 +10,7 @@ tools: [vscode/getProjectSetupInfo, vscode/installExtension, vscode/memory, vsco
 
 # Hands-on Lab Generator
 
-Create a fully working lab from an exam scenario using the **most appropriate deployment method**, strictly aligned to `Governance-Lab.md` (workspace root).
+Create a fully working lab from an exam scenario using the **most appropriate deployment method**, strictly aligned to `Governance-Lab.md` (`.assets/shared/`).
 
 `Governance-Lab.md` is the single source of truth for naming, tagging, regions, versions, and standards.
 

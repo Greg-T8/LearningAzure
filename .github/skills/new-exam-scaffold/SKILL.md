@@ -161,7 +161,7 @@ Session-by-session study time tracker. Managed by `Invoke-AzStudySession.ps1`.
 
 Practice labs that reinforce exam objectives through real Azure deployments.
 
-All labs follow the governance policies in [Governance-Lab.md](../../Governance-Lab.md).
+All labs follow the governance policies in [Governance-Lab.md](../../../.assets/shared/Governance-Lab.md).
 
 ---
 
@@ -180,7 +180,7 @@ All labs follow the governance policies in [Governance-Lab.md](../../Governance-
 
 ## 📋 Governance & Standards
 
-- **Governance Policy:** [Governance-Lab.md](../../Governance-Lab.md)
+- **Governance Policy:** [Governance-Lab.md](../../../.assets/shared/Governance-Lab.md)
 - **Shared Contract:** [lab-shared-contract](../../.github/skills/lab-shared-contract/SKILL.md)
 ```
 

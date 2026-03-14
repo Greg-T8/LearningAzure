@@ -56,7 +56,7 @@ This page catalogs hands-on labs built from practice exam questions. Each lab us
 
 ## 📋 Governance & Standards
 
-All labs in this repository are built following the comprehensive governance policy documented in [Governance-Lab.md](../../Governance-Lab.md). This ensures:
+All labs in this repository are built following the comprehensive governance policy documented in [Governance-Lab.md](../../.assets/shared/Governance-Lab.md). This ensures:
 
 - **Consistent naming conventions** for resource groups and resources
 - **Standardized tagging** across all deployments for tracking and cleanup

@@ -7,7 +7,7 @@ description: Single source of truth for cross-cutting rules referenced by all ag
 
 Authoritative cross-cutting rules for the hands-on lab pipeline. Every requirement is identified by a unique ID (`R-0xx`). Other files **MUST** reference these IDs — never restate the rule.
 
-For the full Azure governance implementation policy, see `Governance-Lab.md` at the workspace root.
+For the full Azure governance implementation policy, see `Governance-Lab.md` at `.assets/shared/Governance-Lab.md`.
 
 ---
 
@@ -488,7 +488,7 @@ Target pattern: `AzureLab2026!`
 - **AI Services**: Enable public network access for labs; validate model availability per region; start minimal capacity; output keys as sensitive
 - **AI Agent RBAC**: Requires both data plane + control plane roles (e.g., Cosmos DB Operator)
 
-For full details, see `Governance-Lab.md` at the workspace root.
+For full details, see `Governance-Lab.md` at `.assets/shared/Governance-Lab.md`.
 
 ---
 

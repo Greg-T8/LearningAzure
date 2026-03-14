@@ -8,7 +8,7 @@ user-invokable: false
 
 Physical templates and scripts for lab scaffolding. All rules (naming, tags, regions, SKUs, etc.) are defined in the `lab-shared-contract` skill — this skill is an inventory of starter files only.
 
-For the full Azure governance policy document, see `Governance-Lab.md` at the workspace root.
+For the full Azure governance policy document, see `Governance-Lab.md` at `.assets/shared/Governance-Lab.md`.
 
 ---
 
@@ -55,6 +55,6 @@ Pre-deployment guardrail that validates the active Azure subscription matches th
 
 ## R-162: Governance-Lab.md Reference
 
-Full Azure governance policy: `Governance-Lab.md` at workspace root.
+Full Azure governance policy: `Governance-Lab.md` at `.assets/shared/Governance-Lab.md`.
 
 This is the authoritative document for Azure-specific implementation details beyond what the `lab-shared-contract` covers (e.g., detailed Azure service behavior, SNAT edge cases, NIC conflict specifics).
