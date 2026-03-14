@@ -10,28 +10,28 @@ This repository documents my Azure learning journey, from certification prep to 
 
 Progress trackers, detailed study notes, practice exams, and hands-on labs:
 
-| Exam | Description | Status | Started |
+| Exam | Description | Status | Duration |
 |------|-------------|--------|---------|
-| 📗 [**AZ-104**](AZ-104/README.md) | Azure Administrator Associate | In Progress | 1/15/26 |
-| 📙 [**AI-102**](AI-102/README.md) | Azure AI Engineer Associate | Halted (Retiring) | 2/10/26 |
-| 📘 [**AI-900**](AI-900/README.md) | Azure AI Fundamentals | Completed | 2/9/26 |
+| 📗 [**AZ-104**](AZ-104/README.md) | Azure Administrator Associate | In Progress | 1/15/26 – 3/14/26 (58d) |
+| 📙 [**AI-102**](AI-102/README.md) | Azure AI Engineer Associate | Halted (Retiring) | 2/10/26 – 3/14/26 (32d) |
+| 📘 [**AI-900**](AI-900/README.md) | Azure AI Fundamentals | Completed | 1/14/26 – 2/9/26 (26d) |
 
 ---
 
 <!-- COMMIT_STATS_START -->
 ## 📈 Recent Activity (Last 7 Days)
 
-| Date | AI-102 | AZ-104 | Other | Total |
-|------|------|------|------|-------|
-| Fri, Mar 13 |  | 🟣 2.3h |  | **2.3h** |
-| Thu, Mar 12 |  | 🟣 2.4h | 🟡 0.7h | **3.1h** |
-| Wed, Mar 11 |  | 🟢 1.2h | 🟢 1.9h | **3.1h** |
-| Tue, Mar 10 | 🟡 0.1h | 🟢 1.0h | 🟢 1.5h | **2.6h** |
-| Mon, Mar 09 |  | 🟢 1.2h | 🟣 2.8h | **4.0h** |
-| Sun, Mar 08 |  | 🟣 5.1h |  | **5.1h** |
-| Sat, Mar 07 |  | 🟣 2.5h | 🟢 1.0h | **3.5h** |
-| **Weekly Total** | **0.1h** | **15.7h** | **7.9h** | **23.7h** |
-| ***Running Total*** | ***17.4h*** | ***83.5h*** | ***58.4h*** | ***159.3h*** |
+| Date | AZ-104 | Other | Total |
+|------|------|------|-------|
+| Fri, Mar 13 | 🟣 2.3h |  | **2.3h** |
+| Thu, Mar 12 | 🟣 2.4h | 🟡 0.7h | **3.1h** |
+| Wed, Mar 11 | 🟢 1.2h | 🟢 1.9h | **3.1h** |
+| Tue, Mar 10 | 🟢 1.0h | 🟢 1.6h | **2.6h** |
+| Mon, Mar 09 | 🟢 1.2h | 🟣 2.8h | **4.0h** |
+| Sun, Mar 08 | 🟣 5.1h |  | **5.1h** |
+| Sat, Mar 07 | 🟣 2.5h | 🟢 1.0h | **3.5h** |
+| **Weekly Total** | **15.7h** | **8.0h** | **23.7h** |
+| ***Running Total*** | ***83.5h*** | ***75.8h*** | ***159.3h*** |
 
 *Activity Levels: 🟡 Low (< 1hr) | 🟢 Medium (1-2hrs) | 🟣 High (> 2hrs)*
 

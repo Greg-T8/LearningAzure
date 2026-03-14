@@ -22,7 +22,6 @@ from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 #region CONSTANTS
 CERTIFICATIONS = {
-    'AI-102': '2026-02-09',
     'AZ-104': '2026-01-14',
 }
 

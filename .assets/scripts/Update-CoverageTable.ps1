@@ -28,6 +28,7 @@ param(
 
 # Configuration
 $RepoRoot = Resolve-Path -Path (Join-Path -Path $PSScriptRoot -ChildPath '..\..')
+$MainReadme = Join-Path -Path $RepoRoot -ChildPath 'README.md'
 $ExamDir = Join-Path -Path $RepoRoot -ChildPath $ExamName
 $ExamReadme = Join-Path -Path $ExamDir -ChildPath 'README.md'
 $PracticeFile = Join-Path -Path $ExamDir -ChildPath 'practice-questions\README.md'
@@ -41,6 +42,7 @@ $Main = {
     $labCounts = Get-LabCount
     Update-CoverageTable -QuestionCounts $questionCounts -LabCounts $labCounts
     Update-CoverageDashboard -QuestionCounts $questionCounts -LabCounts $labCounts
+    Update-InProgressDuration
 }
 
 #region HELPER FUNCTIONS
@@ -58,6 +60,84 @@ $Helpers = {
 
         if (-not (Test-Path -Path $LabsDir)) {
             throw "Labs directory not found: $LabsDir"
+        }
+
+        if (-not (Test-Path -Path $MainReadme)) {
+            throw "Main README not found: $MainReadme"
+        }
+    }
+
+    function Update-InProgressDuration {
+        [CmdletBinding(SupportsShouldProcess)]
+
+        # Update Duration day counts for all In Progress certifications in root README
+        $lines = Get-Content -Path $MainReadme -Encoding UTF8
+        $output = [System.Collections.Generic.List[string]]::new()
+        $updatedRows = 0
+        $today = (Get-Date).Date
+        $dateFormats = @(
+            'M/d/yy',
+            'M/d/yyyy',
+            'MM/dd/yy',
+            'MM/dd/yyyy'
+        )
+
+        foreach ($line in $lines) {
+            # Match any 4-column markdown table row
+            if ($line -match '^\|\s*(.+?)\s*\|\s*(.+?)\s*\|\s*(.+?)\s*\|\s*(.+?)\s*\|$') {
+                $examCell = $Matches[1].Trim()
+                $descriptionCell = $Matches[2].Trim()
+                $statusCell = $Matches[3].Trim()
+                $durationCell = $Matches[4].Trim()
+
+                # Recalculate duration only for active exams
+                if ($statusCell -eq 'In Progress') {
+                    if ($durationCell -match '(\d{1,2}/\d{1,2}/\d{2,4})') {
+                        $startDateText = $Matches[1]
+                        $startDate = $null
+
+                        foreach ($format in $dateFormats) {
+                            try {
+                                $startDate = [datetime]::ParseExact(
+                                    $startDateText,
+                                    $format,
+                                    [System.Globalization.CultureInfo]::InvariantCulture
+                                )
+                                break
+                            }
+                            catch {
+                                continue
+                            }
+                        }
+
+                        if ($null -ne $startDate) {
+                            $days = ($today - $startDate.Date).Days
+                            $todayText = $today.ToString('M/d/yy')
+                            $newDuration = "$startDateText – $todayText (${days}d)"
+                            $output.Add("| $examCell | $descriptionCell | $statusCell | $newDuration |")
+                            $updatedRows++
+                            continue
+                        }
+
+                        Write-Warning "Could not parse start date '$startDateText' in row: $line"
+                    }
+                    else {
+                        Write-Warning "No start date found for In Progress row: $line"
+                    }
+                }
+            }
+
+            $output.Add($line)
+        }
+
+        if ($updatedRows -gt 0) {
+            if ($WhatIfPreference) {
+                Write-Host "What if: Performing the operation \"Update $updatedRows duration values for In Progress exams\" on target \"$MainReadme\"."
+            }
+            else {
+                Set-Content -Path $MainReadme -Value ($output -join "`n") -Encoding UTF8 -NoNewline
+                Write-Host "Updated $updatedRows in-progress duration values in $MainReadme" -ForegroundColor Green
+            }
         }
     }
 
@@ -192,6 +272,8 @@ $Helpers = {
     }
 
     function Update-CoverageTable {
+        [CmdletBinding(SupportsShouldProcess)]
+
         # Replace Qs and Labs values and update <summary> tags in the coverage table
         param(
             [Parameter(Mandatory)]
@@ -272,7 +354,10 @@ $Helpers = {
             }
         }
 
-        if ($PSCmdlet.ShouldProcess($ExamReadme, "Update $updatedRows coverage table rows")) {
+        if ($WhatIfPreference) {
+            Write-Host "What if: Performing the operation \"Update $updatedRows coverage table rows\" on target \"$ExamReadme\"."
+        }
+        else {
             Set-Content -Path $ExamReadme -Value ($output -join "`n") -Encoding UTF8 -NoNewline
             Write-Host "Updated $updatedRows coverage rows in $ExamReadme" -ForegroundColor Green
         }
@@ -287,6 +372,8 @@ $Helpers = {
     }
 
     function Update-CoverageDashboard {
+        [CmdletBinding(SupportsShouldProcess)]
+
         # Regenerate the coverage dashboard with domain-level aggregates
         param(
             [Parameter(Mandatory)]
@@ -381,9 +468,14 @@ $Helpers = {
             $output.Add($line)
         }
 
-        if ($updatedRows -gt 0 -and $PSCmdlet.ShouldProcess($ExamReadme, "Update $updatedRows coverage dashboard rows")) {
-            Set-Content -Path $ExamReadme -Value ($output -join "`n") -Encoding UTF8 -NoNewline
-            Write-Host "Updated $updatedRows dashboard rows in $ExamReadme" -ForegroundColor Green
+        if ($updatedRows -gt 0) {
+            if ($WhatIfPreference) {
+                Write-Host "What if: Performing the operation \"Update $updatedRows coverage dashboard rows\" on target \"$ExamReadme\"."
+            }
+            else {
+                Set-Content -Path $ExamReadme -Value ($output -join "`n") -Encoding UTF8 -NoNewline
+                Write-Host "Updated $updatedRows dashboard rows in $ExamReadme" -ForegroundColor Green
+            }
         }
     }
 }

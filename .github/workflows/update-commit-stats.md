@@ -18,9 +18,8 @@ The GitHub Actions workflow file that runs the statistics update.
 Python script that:
 
 1. Analyzes git commit history for the last 7 days
-2. Assigns each commit to one category (AI-102, AZ-104, or Other)
+2. Assigns each commit to one category (AZ-104 or Other)
   using changed file paths; exam-folder priority is alphabetical
-  (AI-102 before AZ-104)
 3. Detects study session boundaries from commit messages:
    - Start: `docs(EXAM): start study session #N`
    - End: `docs(EXAM): end study session #N`
@@ -33,22 +32,20 @@ Python script that:
      commits credited to the first commit's category
    - **Non-session weekends (post-8 AM):** flat 0.5h per commit
 5. If a session has only a start or only an end commit, those commits
-   fall through to the standard pre-8 AM / weekend rules
-
-5. Calculates running totals since each certification's start date:
+  fall through to the standard pre-8 AM / weekend rules
+6. Calculates running totals since each certification's start date:
    - AZ-104: Started 1/14/26
-   - AI-102: Started 2/9/26
-6. Generates a markdown table with daily activity hours, weekly totals, and
+7. Generates a markdown table with daily activity hours, weekly totals, and
   running totals for exam folders
-7. Updates the README.md file between the markers
-8. Displays timestamp in Central Time (CST/CDT)
+8. Updates the README.md file between the markers
+9. Displays timestamp in Central Time (CST/CDT)
 
 ## 🔧 How It Works
 
 1. The workflow checks out the repository with full git history
 2. Python script runs to analyze commits:
   Looks at the last 7 days of commits, classifies each commit into
-  AI-102/AZ-104/Other, detects study session start/end commit pairs,
+  AZ-104/Other, detects study session start/end commit pairs,
   credits session time using diff-based approach regardless of
   time of day, and applies pre-8 AM diff / weekend 0.5h rules for
   non-session commits.
@@ -70,13 +67,13 @@ Python script that:
 ## 📊 Table Format
 
 ```markdown
-| Date | AI-102 | AZ-104 | Other | Total |
-|------|--------|--------|-------|-------|
-| Tue, Jan 27 | 🟢 1.4h | 🟡 0.8h | 🟡 0.4h | **2.6h** |
-| Mon, Jan 26 | 🟡 0.5h |  |  | **0.5h** |
+| Date | AZ-104 | Other | Total |
+|------|--------|-------|-------|
+| Tue, Jan 27 | 🟡 0.8h | 🟡 0.4h | **1.2h** |
+| Mon, Jan 26 |  |  | |
 ...
-| **Weekly Total** | **12.5h** | **10.7h** | **3.2h** | **26.4h** |
-| ***Running Total*** | ***142.3h*** | ***168.9h*** | ***21.4h*** | ***332.6h*** |
+| **Weekly Total** | **10.7h** | **3.2h** | **13.9h** |
+| ***Running Total*** | ***168.9h*** | ***21.4h*** | ***190.3h*** |
 
 *Activity Levels: 🟡 Low (< 1hr) | 🟢 Medium (1-2hrs) | 🟣 High (> 2hrs)*
 
@@ -132,9 +129,7 @@ python3 .github/workflows/update-commit-stats.py
 ## 📝 Notes
 
 - Activity is measured in hours from commit patterns
-- Commits are assigned to AI-102/AZ-104/Other by file-path classification
-- If a commit includes multiple exam folders, alphabetical priority applies
-  (AI-102 before AZ-104)
+- Commits are assigned to AZ-104/Other by file-path classification
 - **Study sessions**: When both `docs(EXAM): start study session #N` and
   `docs(EXAM): end study session #N` commits exist, all commits within that
   window use diff-based crediting regardless of time of day
