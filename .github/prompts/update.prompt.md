@@ -20,19 +20,19 @@ Uses `Update-ProgressTrackerDays.ps1` to refresh the Days column in each exam's 
 
 ### Hands-on Lab Catalogs
 
-- `AI-102/hands-on-labs/README.md`
-- `AZ-104/hands-on-labs/README.md`
-- `AI-900/hands-on-labs/README.md` (if present)
+- `certs/AI-102/hands-on-labs/README.md`
+- `certs/AZ-104/hands-on-labs/README.md`
+- `certs/AI-900/hands-on-labs/README.md` (if present)
 
 ### Practice Exam Pages
 
-- `AZ-104/practice-questions/README.md`
-- `AI-102/practice-questions/README.md`
+- `certs/AZ-104/practice-questions/README.md`
+- `certs/AI-102/practice-questions/README.md`
 
 ### Exam READMEs (Coverage Tables)
 
-- `AZ-104/README.md` — Exam Coverage section
-- `AI-102/README.md` — Exam Coverage section
+- `certs/AZ-104/README.md` — Exam Coverage section
+- `certs/AI-102/README.md` — Exam Coverage section
 
 ## Execution Model
 

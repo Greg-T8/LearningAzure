@@ -122,7 +122,7 @@ lab-slb-outbound-traffic/
 Use-AzProfile Lab
 
 # Navigate to the terraform directory
-cd AZ-104/hands-on-labs/networking/lab-slb-outbound-traffic/terraform
+cd certs/AZ-104/hands-on-labs/networking/lab-slb-outbound-traffic/terraform
 
 # Initialize, plan, and apply
 terraform init
@@ -245,7 +245,7 @@ Confirming that TCP traffic from VM02/VM03 uses IP02/IP03 (LB frontend IPs) due 
 ## Cleanup
 
 ```powershell
-cd AZ-104/hands-on-labs/networking/lab-slb-outbound-traffic/terraform
+cd certs/AZ-104/hands-on-labs/networking/lab-slb-outbound-traffic/terraform
 terraform destroy -auto-approve
 ```
 

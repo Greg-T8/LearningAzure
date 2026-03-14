@@ -175,7 +175,7 @@ AZ-104/hands-on-labs/storage/lab-blob-storage-lifecycle/
 ### 1. Navigate to the Terraform directory
 
 ```powershell
-cd AZ-104/hands-on-labs/storage/lab-blob-storage-lifecycle/terraform
+cd certs/AZ-104/hands-on-labs/storage/lab-blob-storage-lifecycle/terraform
 ```
 
 ### 2. Validate and deploy
@@ -322,7 +322,7 @@ Remove-Item $tempFile2.FullName
 > Destroy within 7 days per governance policy.
 
 ```powershell
-cd AZ-104/hands-on-labs/storage/lab-blob-storage-lifecycle/terraform
+cd certs/AZ-104/hands-on-labs/storage/lab-blob-storage-lifecycle/terraform
 terraform destroy -auto-approve
 ```
 

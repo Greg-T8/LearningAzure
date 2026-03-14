@@ -22,7 +22,7 @@ This demonstrates the interplay between:
 - Vector store (AI Search in standard setup): Enables semantic search over the document
 
 Usage:
-    cd AI-102/hands-on-labs/agentic/lab-agent-essentials/terraform
+    cd certs/AI-102/hands-on-labs/agentic/lab-agent-essentials/terraform
     $env:PROJECT_ENDPOINT = terraform output -raw project_endpoint
     $env:MODEL_DEPLOYMENT_NAME = terraform output -raw model_deployment_name
     cd ../scripts

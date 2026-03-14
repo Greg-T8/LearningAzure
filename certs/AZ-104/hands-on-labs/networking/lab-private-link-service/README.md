@@ -166,7 +166,7 @@ lab-private-link-service/
 Use-AzProfile Lab
 
 # Navigate to the terraform directory
-cd AZ-104/hands-on-labs/networking/lab-private-link-service/terraform
+cd certs/AZ-104/hands-on-labs/networking/lab-private-link-service/terraform
 
 # Initialize, plan, and apply
 terraform init
@@ -270,7 +270,7 @@ $backendSubnet.PrivateLinkServiceNetworkPolicies  # Expected: Enabled
 ## Cleanup
 
 ```powershell
-cd AZ-104/hands-on-labs/networking/lab-private-link-service/terraform
+cd certs/AZ-104/hands-on-labs/networking/lab-private-link-service/terraform
 terraform destroy -auto-approve
 ```
 

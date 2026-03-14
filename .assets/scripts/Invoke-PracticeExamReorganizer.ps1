@@ -28,7 +28,7 @@ param(
 
 # Configuration
 $RepoRoot = Resolve-Path -Path (Join-Path -Path $PSScriptRoot -ChildPath '..\..')
-$ExamDir = Join-Path -Path $RepoRoot -ChildPath $ExamName
+$ExamDir = Join-Path -Path $RepoRoot -ChildPath "certs\$ExamName"
 $ExamReadme = Join-Path -Path $ExamDir -ChildPath 'README.md'
 $PracticeFile = Join-Path -Path $ExamDir -ChildPath 'practice-questions\README.md'
 $CollapseDetailScript = Join-Path -Path $PSScriptRoot -ChildPath 'Invoke-CollapseDetailBlock.ps1'

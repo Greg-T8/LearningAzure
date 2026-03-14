@@ -61,8 +61,8 @@ $Main = {
     foreach ($exam in $exams) {
         Write-Host "`n=== Processing $exam ===" -ForegroundColor Cyan
 
-        $labsDir = Join-Path -Path $RepoRoot -ChildPath "$exam\hands-on-labs"
-        $practiceFile = Join-Path -Path $RepoRoot -ChildPath "$exam\practice-questions\README.md"
+        $labsDir = Join-Path -Path $RepoRoot -ChildPath "certs\$exam\hands-on-labs"
+        $practiceFile = Join-Path -Path $RepoRoot -ChildPath "certs\$exam\practice-questions\README.md"
 
         if (-not (Test-Path -Path $labsDir)) {
             Write-Warning "Labs directory not found: $labsDir — skipping $exam"
@@ -96,7 +96,8 @@ $Helpers = {
         }
 
         # Auto-discover exams that have a hands-on-labs directory
-        $discovered = Get-ChildItem -Path $RepoRoot -Directory |
+        $certsDir = Join-Path -Path $RepoRoot -ChildPath 'certs'
+        $discovered = Get-ChildItem -Path $certsDir -Directory |
             Where-Object { Test-Path (Join-Path -Path $_.FullName -ChildPath 'hands-on-labs') } |
             Select-Object -ExpandProperty Name |
             Where-Object { $DomainConfig.ContainsKey($_) }

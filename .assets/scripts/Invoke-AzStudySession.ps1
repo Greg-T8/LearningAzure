@@ -34,8 +34,8 @@ $RepoRoot = Resolve-Path -Path (Join-Path -Path $PSScriptRoot -ChildPath '..\..'
 $StudyLogFile = $null
 $AllExams = @('AI-102', 'AZ-104', 'WorkflowDevelopment')
 $ExamFolderMap = @{
-    'AI-102' = 'AI-102'
-    'AZ-104' = 'AZ-104'
+    'AI-102' = 'certs\AI-102'
+    'AZ-104' = 'certs\AZ-104'
     'WorkflowDevelopment' = '.assets\workflow-development'
 }
 $ExamLogFileMap = @{

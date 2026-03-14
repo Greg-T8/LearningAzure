@@ -687,7 +687,7 @@ Examples of what this means in practice:
 
 Identify the question's exam domain, skill, and task(s) from the exam README's coverage hierarchy. This mirrors the metadata produced by the `exam-question-extractor` skill and is used by `Update-CoverageTable.ps1` to populate the Exam Coverage table.
 
-**Source of truth:** Read the exam's README (e.g., `AZ-104/README.md`) and use its domain → skill → task hierarchy.
+**Source of truth:** Read the exam's README (e.g., `certs/AZ-104/README.md`) and use its domain → skill → task hierarchy.
 
 * **Exam Domain** — The `### Domain N: …` headings (omit the weight percentage). Example: `Implement and Manage Virtual Networking`, not `Implement and Manage Virtual Networking (15–20%)`.
 * **Skill** — The `####` sub-headings under each domain.
@@ -945,7 +945,7 @@ When the user provides a task name, search the exam README files to locate the t
 
 ### Task Search Procedure
 
-1. **Read exam READMEs** — Read the coverage tables from `AZ-104/README.md`, `AI-102/README.md`, and `AI-900/README.md`.
+1. **Read exam READMEs** — Read the coverage tables from `certs/AZ-104/README.md`, `certs/AI-102/README.md`, and `certs/AI-900/README.md`.
 2. **Match the task** — Search for the user-provided task name across all exam README task tables. Use case-insensitive substring matching. The task name must match a table row under a `####` skill heading.
 3. **Derive metadata from the match:**
    - **Exam** — The exam code (`AI-102`, `AZ-104`, or `AI-900`) from the README where the task was found.

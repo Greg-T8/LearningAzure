@@ -124,7 +124,7 @@ lab-agent-byo-storage/
 ## Deployment
 
 ```bash
-cd AI-102/hands-on-labs/agentic/lab-agent-byo-storage/terraform
+cd certs/AI-102/hands-on-labs/agentic/lab-agent-byo-storage/terraform
 Use-AzProfile Lab
 terraform init
 terraform plan
@@ -142,7 +142,7 @@ Each step below maps to one of the five exam answer options (A–E). You will pr
 All subsequent steps reference these variables. Run this block first from the Terraform directory:
 
 ```powershell
-cd AI-102/hands-on-labs/agentic/lab-agent-byo-storage/terraform
+cd certs/AI-102/hands-on-labs/agentic/lab-agent-byo-storage/terraform
 
 # Retrieve resource identifiers from Terraform outputs
 $rgName      = terraform output -raw resource_group_name
@@ -412,7 +412,7 @@ cd ../validation
 ## Cleanup
 
 ```bash
-cd AI-102/hands-on-labs/agentic/lab-agent-byo-storage/terraform
+cd certs/AI-102/hands-on-labs/agentic/lab-agent-byo-storage/terraform
 terraform destroy -auto-approve
 ```
 

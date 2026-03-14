@@ -17,7 +17,7 @@ You are the **Lab Finalizer**. You assemble all outputs from previous phases int
 
 The Lab Reviewer (Phase 4) or Lab Remediator (Phase 5) passes the path to the **lab folder** (e.g., `<EXAM>/hands-on-labs/<domain>/lab-<topic>/`). This folder contains the complete, reviewed lab content.
 
-> **CRITICAL — Resolve the lab folder path.** The placeholder `<EXAM>/hands-on-labs/<domain>/lab-<topic>/` must be replaced with the **actual workspace-relative path** (e.g., `AI-102/hands-on-labs/ai-services/lab-azure-ai-content-safety/`) in all output. Never render the generic placeholder template in final chat output.
+> **CRITICAL — Resolve the lab folder path.** The placeholder `<EXAM>/hands-on-labs/<domain>/lab-<topic>/` must be replaced with the **actual workspace-relative path** (e.g., `certs/AI-102/hands-on-labs/ai-services/lab-azure-ai-content-safety/`) in all output. Never render the generic placeholder template in final chat output.
 
 Read the files in the lab folder to assemble the final deliverables:
 

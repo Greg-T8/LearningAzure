@@ -135,7 +135,7 @@ lab-metrics-batch-api/
 ## Deployment
 
 ```bash
-cd AZ-104/hands-on-labs/monitoring/lab-metrics-batch-api/terraform
+cd certs/AZ-104/hands-on-labs/monitoring/lab-metrics-batch-api/terraform
 terraform init
 terraform validate
 terraform plan
@@ -227,7 +227,7 @@ $response.values | ForEach-Object {
 ## Cleanup
 
 ```bash
-cd AZ-104/hands-on-labs/monitoring/lab-metrics-batch-api/terraform
+cd certs/AZ-104/hands-on-labs/monitoring/lab-metrics-batch-api/terraform
 terraform destroy
 ```
 

@@ -144,7 +144,7 @@ def classify_commit(file_paths: list[str]) -> str:
     # Check each exam folder in alphabetical priority order
     for exam_folder in EXAM_FOLDERS:
         for path in file_paths:
-            if path.startswith(f'{exam_folder}/'):
+            if path.startswith(f'certs/{exam_folder}/'):
                 return exam_folder
 
     return 'Other'

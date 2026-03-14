@@ -29,7 +29,7 @@ param(
 # Configuration
 $RepoRoot = Resolve-Path -Path (Join-Path -Path $PSScriptRoot -ChildPath '..\..')
 $MainReadme = Join-Path -Path $RepoRoot -ChildPath 'README.md'
-$ExamDir = Join-Path -Path $RepoRoot -ChildPath $ExamName
+$ExamDir = Join-Path -Path $RepoRoot -ChildPath "certs\$ExamName"
 $ExamReadme = Join-Path -Path $ExamDir -ChildPath 'README.md'
 $PracticeFile = Join-Path -Path $ExamDir -ChildPath 'practice-questions\README.md'
 $LabsDir = Join-Path -Path $ExamDir -ChildPath 'hands-on-labs'

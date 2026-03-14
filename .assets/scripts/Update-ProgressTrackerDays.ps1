@@ -46,10 +46,11 @@ $Main = {
 $Helpers = {
 
     function Find-ProgressTrackerReadme {
-        # Scan top-level directories for README.md files containing a progress tracker table
+        # Scan certs/ directories for README.md files containing a progress tracker table
         $results = [System.Collections.Generic.List[string]]::new()
 
-        $dirs = Get-ChildItem -Path $RepoRoot -Directory |
+        $certsDir = Join-Path -Path $RepoRoot -ChildPath 'certs'
+        $dirs = Get-ChildItem -Path $certsDir -Directory |
             Where-Object { $_.Name -notmatch '^\.' }
 
         foreach ($dir in $dirs) {

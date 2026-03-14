@@ -17,7 +17,7 @@ In a standard agent setup, threads are stored in Azure Cosmos DB.
 In a basic setup, Microsoft manages thread storage internally.
 
 Usage:
-    cd AI-102/hands-on-labs/agentic/lab-agent-essentials/terraform
+    cd certs/AI-102/hands-on-labs/agentic/lab-agent-essentials/terraform
     $env:PROJECT_ENDPOINT = terraform output -raw project_endpoint
     $env:MODEL_DEPLOYMENT_NAME = terraform output -raw model_deployment_name
     cd ../scripts

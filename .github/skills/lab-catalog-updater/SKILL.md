@@ -21,9 +21,9 @@ Scans hands-on-labs directories and updates README.md files with accurate lab ca
 
 This skill applies to exam-specific hands-on-labs directories:
 
-- `AI-102/hands-on-labs/README.md`
-- `AZ-104/hands-on-labs/README.md`
-- `AI-900/hands-on-labs/README.md` (if present)
+- `certs/AI-102/hands-on-labs/README.md`
+- `certs/AZ-104/hands-on-labs/README.md`
+- `certs/AI-900/hands-on-labs/README.md` (if present)
 
 ## Filesystem-First Fidelity Rule
 

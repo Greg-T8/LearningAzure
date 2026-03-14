@@ -145,7 +145,7 @@ lab-vm-file-recovery/
 Use-AzProfile Lab
 
 # Navigate to bicep directory
-cd AZ-104/hands-on-labs/monitoring/lab-vm-file-recovery/bicep
+cd certs/AZ-104/hands-on-labs/monitoring/lab-vm-file-recovery/bicep
 
 # Validate the template
 .\bicep.ps1 validate
@@ -262,7 +262,7 @@ Disable-AzRecoveryServicesBackupRPMountScript `
 Destroy all lab resources within 7 days per governance policy.
 
 ```powershell
-cd AZ-104/hands-on-labs/monitoring/lab-vm-file-recovery/bicep
+cd certs/AZ-104/hands-on-labs/monitoring/lab-vm-file-recovery/bicep
 
 .\bicep.ps1 destroy
 ```

@@ -164,7 +164,7 @@ lab-enable-boot-diagnostics/
 Use-AzProfile Lab
 
 # Navigate to bicep directory
-cd AZ-104/hands-on-labs/compute/lab-enable-boot-diagnostics/bicep
+cd certs/AZ-104/hands-on-labs/compute/lab-enable-boot-diagnostics/bicep
 
 # Validate the template
 .\bicep.ps1 validate

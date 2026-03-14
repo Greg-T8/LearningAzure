@@ -72,7 +72,7 @@ lab-content-safety/
 ## Deployment
 
 ```bash
-cd AI-102/hands-on-labs/ai-services/lab-content-safety/terraform
+cd certs/AI-102/hands-on-labs/ai-services/lab-content-safety/terraform
 Use-AzProfile Lab
 terraform init
 terraform plan
@@ -168,7 +168,7 @@ cd ../validation
 ## Cleanup
 
 ```bash
-cd AI-102/hands-on-labs/ai-services/lab-content-safety/terraform
+cd certs/AI-102/hands-on-labs/ai-services/lab-content-safety/terraform
 terraform destroy -auto-approve
 ```
 

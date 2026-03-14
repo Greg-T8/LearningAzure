@@ -42,7 +42,7 @@ variables.tf (lab_subscription_id variable)
 For each lab, copy these shared files to your `terraform/` directory:
 
 ```powershell
-# From lab terraform folder (e.g., AZ-104/hands-on-labs/domain/lab-name/terraform/)
+# From lab terraform folder (e.g., certs/AZ-104/hands-on-labs/domain/lab-name/terraform/)
 Copy-Item ..\..\..\..\..\..\..\..\..\assets\shared\terraform\providers.tf .\
 Copy-Item ..\..\..\..\..\..\..\..\..\assets\shared\terraform\subscription-guard.tf .\
 ```

@@ -74,7 +74,7 @@ lab-app-service-plan-quotas/
 ## Deployment
 
 ```powershell
-cd AZ-104/hands-on-labs/compute/lab-app-service-plan-quotas/bicep
+cd certs/AZ-104/hands-on-labs/compute/lab-app-service-plan-quotas/bicep
 .\bicep.ps1 validate
 .\bicep.ps1 plan
 .\bicep.ps1 apply
@@ -121,7 +121,7 @@ cd AZ-104/hands-on-labs/compute/lab-app-service-plan-quotas/bicep
 ## Cleanup
 
 ```powershell
-cd AZ-104/hands-on-labs/compute/lab-app-service-plan-quotas/bicep
+cd certs/AZ-104/hands-on-labs/compute/lab-app-service-plan-quotas/bicep
 .\bicep.ps1 destroy
 ```
 

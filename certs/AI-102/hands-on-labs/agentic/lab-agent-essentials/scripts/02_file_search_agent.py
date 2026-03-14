@@ -17,7 +17,7 @@ Demonstrates the file upload → vector store → file search pipeline:
 4. Ask questions and observe how the agent retrieves information with citations
 
 Usage:
-    cd AI-102/hands-on-labs/agentic/lab-agent-essentials/terraform
+    cd certs/AI-102/hands-on-labs/agentic/lab-agent-essentials/terraform
     $env:PROJECT_ENDPOINT = terraform output -raw project_endpoint
     $env:MODEL_DEPLOYMENT_NAME = terraform output -raw model_deployment_name
     cd ../scripts

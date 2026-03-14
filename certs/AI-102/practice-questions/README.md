@@ -157,7 +157,7 @@ For exam purposes, remember:
 
 </details>
 
-▶ Related Lab: [lab-dalle-image-gen](/AI-102/hands-on-labs/generative-ai/lab-dalle-image-gen/README.md)
+▶ Related Lab: [lab-dalle-image-gen](/certs/AI-102/hands-on-labs/generative-ai/lab-dalle-image-gen/README.md)
 
 ---
 

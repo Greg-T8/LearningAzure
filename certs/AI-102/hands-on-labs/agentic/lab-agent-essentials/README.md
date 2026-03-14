@@ -134,7 +134,7 @@ lab-agent-essentials/
 ## Deployment
 
 ```bash
-cd AI-102/hands-on-labs/agentic/lab-agent-essentials/terraform
+cd certs/AI-102/hands-on-labs/agentic/lab-agent-essentials/terraform
 terraform init
 terraform plan
 terraform apply -auto-approve
@@ -284,7 +284,7 @@ The validation script confirms:
 > Destroy within 7 days per governance policy.
 
 ```bash
-cd AI-102/hands-on-labs/agentic/lab-agent-essentials/terraform
+cd certs/AI-102/hands-on-labs/agentic/lab-agent-essentials/terraform
 terraform destroy -auto-approve
 ```
 

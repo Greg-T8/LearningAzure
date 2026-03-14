@@ -293,7 +293,7 @@ Use this wrapper in all Bicep labs for simplified workflows:
 
 ```powershell
 # From any lab's bicep/ directory
-cd AZ-104/hands-on-labs/compute/lab-app-service-tiers/bicep
+cd certs/AZ-104/hands-on-labs/compute/lab-app-service-tiers/bicep
 
 # Deploy (auto-derives stack name from main.bicepparam)
 .\bicep.ps1 apply
@@ -315,7 +315,7 @@ cd AZ-104/hands-on-labs/compute/lab-app-service-tiers/bicep
 ### Alternative: Call Directly from Shared Location
 
 ```powershell
-# From lab's bicep/ directory (e.g., AZ-104/hands-on-labs/compute/lab-name/bicep/)
+# From lab's bicep/ directory (e.g., certs/AZ-104/hands-on-labs/compute/lab-name/bicep/)
 # Call shared script using relative path (5 levels up to root, then down to .assets/shared)
 & "..\..\..\..\..\..\.assets\shared\bicep\bicep.ps1" apply
 

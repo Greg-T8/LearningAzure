@@ -1034,7 +1034,7 @@ azcopy copy "source" "https://devstore.file.core.windows.net/share"
 
 </details>
 
-▶ **Related Lab:** [lab-azcopy-auth-methods](/AZ-104/hands-on-labs/storage/lab-azcopy-auth-methods/README.md)
+▶ **Related Lab:** [lab-azcopy-auth-methods](/certs/AZ-104/hands-on-labs/storage/lab-azcopy-auth-methods/README.md)
 
 ---
 
@@ -1269,7 +1269,7 @@ The solution is either:
 
 </details>
 
-▶ **Related Lab:** [lab-storage-explorer-permissions](/AZ-104/hands-on-labs/storage/lab-storage-explorer-permissions/README.md)
+▶ **Related Lab:** [lab-storage-explorer-permissions](/certs/AZ-104/hands-on-labs/storage/lab-storage-explorer-permissions/README.md)
 
 ---
 

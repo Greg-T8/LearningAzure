@@ -45,7 +45,7 @@ Python script that:
 1. The workflow checks out the repository with full git history
 2. Python script runs to analyze commits:
   Looks at the last 7 days of commits, classifies each commit into
-  AZ-104/Other, detects study session start/end commit pairs,
+  AZ-104/Other (by checking certs/ folder prefix), detects study session start/end commit pairs,
   credits session time using diff-based approach regardless of
   time of day, and applies pre-8 AM diff / weekend 0.5h rules for
   non-session commits.
@@ -129,7 +129,7 @@ python3 .github/workflows/update-commit-stats.py
 ## 📝 Notes
 
 - Activity is measured in hours from commit patterns
-- Commits are assigned to AZ-104/Other by file-path classification
+- Commits are assigned to AZ-104/Other by file-path classification (certs/<exam>/ prefix)
 - **Study sessions**: When both `docs(EXAM): start study session #N` and
   `docs(EXAM): end study session #N` commits exist, all commits within that
   window use diff-based crediting regardless of time of day

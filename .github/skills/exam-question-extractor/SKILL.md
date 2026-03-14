@@ -74,7 +74,7 @@ Make a **single** edit that replaces the selected `<img>` line(s) with the fully
 
 1. From the attached screenshot image(s), extract all visible text.
 2. **Detect answer state:** Inspect the screenshot for signs that the question has already been submitted and graded — for example, a selected answer highlighted in green or red, a ✓ / ✗ icon, or an "Correct" / "Incorrect" banner. Mark the question as **answered** if any such indicator is present; otherwise mark it as **blank**.
-3. **Identify exam metadata:** Determine the practice-exam file's parent exam (e.g., AZ-104, AI-102, AI-900). Read the corresponding exam README (e.g., `AZ-104/README.md`) to locate the domain/skill/task hierarchy. Match the question to the most specific domain, skill, and task(s) using best-effort reasoning.
+3. **Identify exam metadata:** Determine the practice-exam file's parent exam (e.g., AZ-104, AI-102, AI-900). Read the corresponding exam README (e.g., `certs/AZ-104/README.md`) to locate the domain/skill/task hierarchy. Match the question to the most specific domain, skill, and task(s) using best-effort reasoning.
 4. Identify question type:
    - Yes / No
    - Multiple Choice
@@ -119,7 +119,7 @@ Identify the question's domain, skill, and task(s) from the exam's README covera
 
 Rules:
 
-* **Source of truth:** Read the exam's README (e.g., `AZ-104/README.md`) and locate the **Coverage Table** between the `<!-- BEGIN COVERAGE TABLE -->` and `<!-- END COVERAGE TABLE -->` markers. Each domain is a collapsible `<details>` block whose `<summary>` contains the domain name and weight (omit the weight percentage when emitting the domain). Inside each block is a pipe-delimited table with four columns: **Skill | Task | Qs | Labs**. Read the **first column** for the skill name and the **second column** for the task name. Skill names appear only in the first row of each skill group — subsequent rows in the same group leave the Skill cell empty (they inherit the skill from the nearest non-empty Skill cell above).
+* **Source of truth:** Read the exam's README (e.g., `certs/AZ-104/README.md`) and locate the **Coverage Table** between the `<!-- BEGIN COVERAGE TABLE -->` and `<!-- END COVERAGE TABLE -->` markers. Each domain is a collapsible `<details>` block whose `<summary>` contains the domain name and weight (omit the weight percentage when emitting the domain). Inside each block is a pipe-delimited table with four columns: **Skill | Task | Qs | Labs**. Read the **first column** for the skill name and the **second column** for the task name. Skill names appear only in the first row of each skill group — subsequent rows in the same group leave the Skill cell empty (they inherit the skill from the nearest non-empty Skill cell above).
 * **Skill enumeration (mandatory):** Before writing the `**Skill:**` value, enumerate all distinct non-empty values from the **Skill** column in the coverage table and select only from that set. Never synthesize a skill name from task wording.
 * Use exact wording from the README for domain and skill names.
 * For tasks, use the most specific task wording. Apply best-effort reasoning when the question spans topics — pick the closest match(es).

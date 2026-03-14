@@ -80,7 +80,7 @@ lab-app-service-republication/
 Use-AzProfile Lab
 
 # Run the deployment script
-cd AZ-104/hands-on-labs/compute/lab-app-service-republication/scripts
+cd certs/AZ-104/hands-on-labs/compute/lab-app-service-republication/scripts
 .\deploy.ps1
 ```
 
@@ -125,7 +125,7 @@ cd AZ-104/hands-on-labs/compute/lab-app-service-republication/scripts
 ## Cleanup
 
 ```powershell
-cd AZ-104/hands-on-labs/compute/lab-app-service-republication/scripts
+cd certs/AZ-104/hands-on-labs/compute/lab-app-service-republication/scripts
 .\cleanup.ps1
 ```
 

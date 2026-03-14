@@ -150,7 +150,7 @@ lab-keda-scaling-rule/
 ## Deployment
 
 ```powershell
-cd AZ-104/hands-on-labs/compute/lab-keda-scaling-rule/bicep
+cd certs/AZ-104/hands-on-labs/compute/lab-keda-scaling-rule/bicep
 
 # Validate syntax
 .\bicep.ps1 validate
@@ -256,7 +256,7 @@ Observed 4 replicas after 30 seconds:
 ## Cleanup
 
 ```powershell
-cd AZ-104/hands-on-labs/compute/lab-keda-scaling-rule/bicep
+cd certs/AZ-104/hands-on-labs/compute/lab-keda-scaling-rule/bicep
 .\bicep.ps1 destroy
 ```
 

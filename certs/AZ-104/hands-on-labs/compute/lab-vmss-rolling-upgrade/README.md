@@ -142,7 +142,7 @@ lab-vmss-rolling-upgrade/
 ### 1. Navigate to the Bicep Directory
 
 ```powershell
-cd AZ-104/hands-on-labs/compute/lab-vmss-rolling-upgrade/bicep
+cd certs/AZ-104/hands-on-labs/compute/lab-vmss-rolling-upgrade/bicep
 ```
 
 ### 2. Validate the Template
@@ -402,7 +402,7 @@ $resp = Invoke-AzRestMethod -Method GET -Path $apiPath
 > Destroy within 7 days per governance policy.
 
 ```powershell
-cd AZ-104/hands-on-labs/compute/lab-vmss-rolling-upgrade/bicep
+cd certs/AZ-104/hands-on-labs/compute/lab-vmss-rolling-upgrade/bicep
 .\bicep.ps1 destroy
 ```
 

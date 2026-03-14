@@ -191,7 +191,7 @@ Load the skill and apply every applicable rule when generating a Mermaid diagram
 Create under:
 
 ```
-<EXAM>/hands-on-labs/<domain>/lab-<topic>/  where `<EXAM>` ∈ {`AZ-104`, `AI-102`}
+certs/<EXAM>/hands-on-labs/<domain>/lab-<topic>/  where `<EXAM>` ∈ {`AZ-104`, `AI-102`}
 ```
 
 ### IaaC

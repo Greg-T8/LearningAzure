@@ -161,7 +161,7 @@ lab-capture-sftp-packets/
 Use-AzProfile Lab
 
 # Navigate to bicep directory
-cd AZ-104/hands-on-labs/monitoring/lab-capture-sftp-packets/bicep
+cd certs/AZ-104/hands-on-labs/monitoring/lab-capture-sftp-packets/bicep
 
 # Validate the template
 .\bicep.ps1 validate
@@ -281,7 +281,7 @@ Remove-AzNetworkWatcherPacketCapture -NetworkWatcher $networkWatcher `
 Destroy all lab resources within 7 days per governance policy.
 
 ```powershell
-cd AZ-104/hands-on-labs/monitoring/lab-capture-sftp-packets/bicep
+cd certs/AZ-104/hands-on-labs/monitoring/lab-capture-sftp-packets/bicep
 
 .\bicep.ps1 destroy
 ```

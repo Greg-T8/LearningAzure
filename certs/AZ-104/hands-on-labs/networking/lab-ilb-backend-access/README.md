@@ -115,7 +115,7 @@ lab-ilb-backend-access/
 Use-AzProfile Lab
 
 # Navigate to the terraform directory
-cd AZ-104/hands-on-labs/networking/lab-ilb-backend-access/terraform
+cd certs/AZ-104/hands-on-labs/networking/lab-ilb-backend-access/terraform
 
 # Initialize, plan, and apply
 terraform init
@@ -198,7 +198,7 @@ Invoke-AzVMRunCommand `
 
 ```powershell
 # 7. Run the full validation script
-cd AZ-104/hands-on-labs/networking/lab-ilb-backend-access/validation
+cd certs/AZ-104/hands-on-labs/networking/lab-ilb-backend-access/validation
 .\test-ilb-backend-access.ps1
 ```
 
@@ -207,7 +207,7 @@ cd AZ-104/hands-on-labs/networking/lab-ilb-backend-access/validation
 ## Cleanup
 
 ```powershell
-cd AZ-104/hands-on-labs/networking/lab-ilb-backend-access/terraform
+cd certs/AZ-104/hands-on-labs/networking/lab-ilb-backend-access/terraform
 terraform destroy -auto-approve
 ```
 
