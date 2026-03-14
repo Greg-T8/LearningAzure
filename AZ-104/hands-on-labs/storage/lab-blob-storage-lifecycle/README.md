@@ -4,6 +4,10 @@
 **Skill:** Configure Azure Files and Azure Blob Storage
 **Task:** Configure blob lifecycle management
 
+**Practice Exam Questions:**
+- [Configure Lifecycle Management Policy for Azure Storage](../../../practice-questions/README.md#configure-lifecycle-management-policy-for-azure-storage)
+- [Lifecycle Management Policy Configuration](../../../practice-questions/README.md#lifecycle-management-policy-configuration)
+
 ## Exam Question
 
 > **Exam**: AZ-104 — Storage
@@ -379,14 +383,3 @@ This statement is incorrect for two reasons:
 - [Blob rehydration from the archive tier](https://learn.microsoft.com/en-us/azure/storage/blobs/archive-rehydrate-overview)
 - [Blob versioning](https://learn.microsoft.com/en-us/azure/storage/blobs/versioning-overview)
 - [Terraform azurerm_storage_management_policy](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_management_policy)
-
----
-
-## Related Labs
-
-▶ Related Lab: [lab-blob-versioning](../../storage/lab-blob-versioning/README.md)
-▶ Related Lab: [lab-object-replication](../../storage/lab-object-replication/README.md)
-
-## Related Practice Exam Questions
-
-- ▶ Practice Question: [Configure Lifecycle Management Policy for Azure Storage](../../../practice-questions/README.md#configure-lifecycle-management-policy-for-azure-storage)

@@ -4,6 +4,11 @@
 **Skill:** Monitor resources in Azure
 **Task:** Set up alert rules, action groups, and alert processing rules in Azure Monitor
 
+**Practice Exam Questions:**
+- [Configure Azure Monitor Alert Notification Rate Limits](../../../practice-questions/README.md#configure-azure-monitor-alert-notification-rate-limits)
+- [Azure Advisor alerts with Bicep](../../../practice-questions/README.md#azure-advisor-alerts-with-bicep)
+- [Configure Azure Monitor Alert for Database CPU Usage](../../../practice-questions/README.md#configure-azure-monitor-alert-for-database-cpu-usage)
+
 ## Scenario
 
 You have an Azure subscription named **Subscription1**. You create an alert rule in Azure Monitor named **Alert1**. Alert1 is configured to generate email, voice, and SMS alerts. You determine that Alert1 fires every minute.
@@ -148,13 +153,3 @@ Azure enforces rate limits to prevent notification flooding:
 - [Action groups](https://learn.microsoft.com/azure/azure-monitor/alerts/action-groups)
 - [Rate limiting for voice, SMS, emails](https://learn.microsoft.com/azure/azure-monitor/alerts/action-groups#rate-limiting)
 - [Azure Monitor alerts overview](https://learn.microsoft.com/azure/azure-monitor/alerts/alerts-overview)
-
-## Related Labs
-
-### ▶ Related Labs
-
-- ▶ Related Lab: [lab-vm-file-recovery](../lab-vm-file-recovery/README.md)
-
-### ▶ Related Practice Exam Questions
-
-- ▶ Practice Question: [Configure Azure Monitor Alert Notification Rate Limits](../../../practice-questions/README.md#configure-azure-monitor-alert-notification-rate-limits)

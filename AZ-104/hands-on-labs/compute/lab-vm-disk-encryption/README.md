@@ -4,6 +4,9 @@
 **Skill:** Create and configure virtual machines
 **Task:** Configure Azure Disk Encryption
 
+**Practice Exam Questions:**
+- [Encrypt VM Disk With Key Vault](../../../practice-questions/README.md#encrypt-vm-disk-with-key-vault)
+
 ## Exam Question Scenario
 
 **Type:** Multiple Drop-Down
@@ -314,13 +317,3 @@ Set-AzVMDiskEncryptionExtension -ResourceGroupName $vmRG `
 - [Get-AzKeyVault Reference](https://learn.microsoft.com/en-us/powershell/module/az.keyvault/get-azkeyvault)
 - [Create and Configure a Key Vault for ADE](https://learn.microsoft.com/en-us/azure/virtual-machines/windows/disk-encryption-key-vault)
 - [Azure Disk Encryption Scenarios](https://learn.microsoft.com/en-us/azure/virtual-machines/windows/disk-encryption-windows)
-
----
-
-## Related Labs
-
-- ▶ Related Lab: [lab-enable-boot-diagnostics](../lab-enable-boot-diagnostics/README.md) — Combine VM troubleshooting signals with disk protection and recovery planning
-
-## Related Practice Exam Questions
-
-- ▶ Practice Question: [Encrypt VM Disk With Key Vault](../../../practice-questions/README.md#encrypt-vm-disk-with-key-vault)

@@ -4,6 +4,9 @@
 **Skill:** Monitor resources in Azure
 **Task:** Interpret metrics in Azure Monitor
 
+**Practice Exam Questions:**
+- [Load Balancer Metrics Batch API](../../../practice-questions/README.md#load-balancer-metrics-batch-api)
+
 ## Exam Question Scenario
 
 You have an Azure subscription that contains virtual machines. You have the following JSON request body for a REST API call:
@@ -279,13 +282,3 @@ terraform destroy
 - [Azure Monitor Metrics Overview](https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/data-platform-metrics)
 - [Multi-dimensional Metrics](https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/metrics-custom-overview#multi-dimensional-metrics)
 - [Azure Monitor REST API Throttling](https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/metrics-throttling)
-
----
-
-## Related Labs
-
-- [Azure Monitor Alert Notification Rate Limits](../lab-alert-notification-rate-limits/README.md) — Understand notification rate limits for alert actions in Azure Monitor
-
-## Related Practice Exam Questions
-
-- ▶ Practice Question: [Load Balancer Metrics Batch API](../../../practice-questions/README.md#load-balancer-metrics-batch-api)

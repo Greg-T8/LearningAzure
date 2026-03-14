@@ -2,6 +2,7 @@
 
 This page catalogs hands-on labs built from practice exam questions. Each lab uses Terraform or Azure Bicep to create dedicated environments for testing specific AZ-104 concepts.
 
+
 ---
 
 ## 📊 Lab Statistics
@@ -19,38 +20,38 @@ This page catalogs hands-on labs built from practice exam questions. Each lab us
 
 ### Storage
 
-- **[Azure Storage - AzCopy Auth Methods](storage/lab-azcopy-auth-methods/README.md)** - Explore authentication methods for AzCopy
-- **[Azure Storage - Blob Storage Lifecycle](storage/lab-blob-storage-lifecycle/README.md)** - Implement lifecycle management policies for Azure Blob Storage
-- **[Azure Storage - Blob Versioning](storage/lab-blob-versioning/README.md)** - Enable and manage blob versioning
-- **[Azure Storage - Object Replication](storage/lab-object-replication/README.md)** - Configure object replication across storage accounts
-- **[Azure Storage - Explorer Permissions](storage/lab-storage-explorer-permissions/README.md)** - Manage permissions using Azure Storage Explorer
+- **[Azure Blob Versioning Write Operations](storage/lab-blob-versioning/README.md)** - This lab deploys a Storage Account with blob versioning enabled and provides a comprehensive testing script to valida...
+- **[Azure CLI Copy Authentication Methods for Blob and File Storage](storage/lab-azcopy-auth-methods/README.md)** - This lab creates a destination storage account (DevStore) and two source storage accounts to demonstrate different au...
+- **[Azure Storage Explorer Permission Troubleshooting](storage/lab-storage-explorer-permissions/README.md)** - This lab creates storage accounts with different configurations to demonstrate the permission issues:
+- **[Configure Azure Storage Object Replication](storage/lab-object-replication/README.md)** - This lab creates two storage accounts in different Azure regions with object replication configured between them.
+- **[Configure Blob Storage Lifecycle Management](storage/lab-blob-storage-lifecycle/README.md)** - This lab deploys a GPv2 storage account with blob versioning enabled and a lifecycle management policy that automates...
 
 ### Compute
 
-- **[App Service - Plan Quotas](compute/lab-app-service-plan-quotas/README.md)** - Configure quotas for Azure App Service plans
-- **[App Service - Plan Tiers](compute/lab-app-service-plan-tiers/README.md)** - Explore Azure App Service plan tiers
-- **[App Service - Republishing](compute/lab-app-service-republication/README.md)** - Republishing apps in Azure App Service
-- **[Enable Boot Diagnostics](compute/lab-enable-boot-diagnostics/README.md)** - Enable and configure boot diagnostics for VMs
-- **[KEDA Scaling Rule](compute/lab-keda-scaling-rule/README.md)** - Implement KEDA scaling rules for event-driven workloads
-- **[VM Disk Encryption](compute/lab-vm-disk-encryption/README.md)** - Encrypt disks for Azure Virtual Machines
-- **[VMSS Rolling Upgrade](compute/lab-vmss-rolling-upgrade/README.md)** - Perform rolling upgrades on Virtual Machine Scale Sets
+- **[App Service Plan CPU Quotas](compute/lab-app-service-plan-quotas/README.md)** - This lab deploys an Azure App Service Plan on the **Free F1 tier** with a simple Web App to let you observe and explo...
+- **[App Service Plan Tiers](compute/lab-app-service-plan-tiers/README.md)** - This lab deploys an Azure App Service Plan with a Web App and autoscale configuration to demonstrate the scaling capa...
+- **[App Service Republication with Deployment Slots](compute/lab-app-service-republication/README.md)** - This lab uses Azure PowerShell commands to prepare an App Service environment with deployment slots for web app repub...
+- **[Azure VM Disk Encryption with Key Vault](compute/lab-vm-disk-encryption/README.md)** - This lab deploys the infrastructure required to practice Azure Disk Encryption (ADE) with Key Vault:
+- **[Configure KEDA Scaling Rule for Azure Container Apps](compute/lab-keda-scaling-rule/README.md)** - This lab deploys an Azure Container Apps environment with a container app that uses a KEDA-based custom scaling rule ...
+- **[Enable Boot Diagnostics for Azure VMs](compute/lab-enable-boot-diagnostics/README.md)** - This lab deploys a multi-region environment with two virtual machines and three storage accounts to demonstrate Azure...
+- **[VMSS Rolling Upgrade — Set-AzVmssVM](compute/lab-vmss-rolling-upgrade/README.md)** - This lab deploys a Virtual Machine Scale Set with a Rolling upgrade policy behind a Standard Load Balancer.
 
 ### Monitoring
 
-- **[Alert Notification Rate Limits](monitoring/lab-alert-notification-rate-limits/README.md)** - Configure rate limits for alert notifications
-- **[Capture SFTP Packets](monitoring/lab-capture-sftp-packets/README.md)** - Monitor and capture SFTP traffic
-- **[Metrics Batch API](monitoring/lab-metrics-batch-api/README.md)** - Use the Metrics Batch API for monitoring
-- **[VM File Recovery](monitoring/lab-vm-file-recovery/README.md)** - Recover files from Azure Virtual Machines
-
-### Networking
-
-- **[ILB Backend Access](networking/lab-ilb-backend-access/README.md)** - Configure backend access for Internal Load Balancers
-- **[Private Link Service](networking/lab-private-link-service/README.md)** - Implement Private Link Service for secure connectivity
-- **[SLB Outbound Traffic](networking/lab-slb-outbound-traffic/README.md)** - Manage outbound traffic using Standard Load Balancer
+- **[Azure Monitor Alert Notification Rate Limits](monitoring/lab-alert-notification-rate-limits/README.md)** - Hands-on lab
+- **[Azure Monitor Metrics Batch API](monitoring/lab-metrics-batch-api/README.md)** - This lab deploys two Linux VMs in the same region and resource group.
+- **[Capture SFTP Packets with Network Watcher](monitoring/lab-capture-sftp-packets/README.md)** - This lab deploys a virtual machine (VM01) within a virtual network, along with a diagnostic storage account, to demon...
+- **[Recover Configuration File from Azure VM Backup](monitoring/lab-vm-file-recovery/README.md)** - This lab deploys a Windows Server 2019 VM backed up by an Azure Recovery Services vault.
 
 ### Identity & Governance
 
 - No labs available.
+
+### Networking
+
+- **[Azure Private Link Service Network Policies](networking/lab-private-link-service/README.md)** - This lab deploys a complete Private Link Service environment that demonstrates how `privateLinkServiceNetworkPolicies...
+- **[Configure Standard Load Balancer Outbound Traffic and IP Allocation](networking/lab-slb-outbound-traffic/README.md)** - This lab deploys a Standard Load Balancer environment that demonstrates how outbound traffic and IP allocation work w...
+- **[Troubleshoot Internal Load Balancer Backend VM Access](networking/lab-ilb-backend-access/README.md)** - This lab deploys an Internal Load Balancer environment that demonstrates the **hairpin/loopback limitation** — a back...
 
 ---
 

@@ -12,12 +12,10 @@
 
 | Priority | Modality         | My Notes                                                        | Status | Started | Completed | Days |
 | :------- | :--------------- | :-------------------------------------------------------------- | :----- | :------ | :-------- | :--- |
-| 1        | Hands-on Labs    | [Hands-on Labs](./hands-on-labs/README.md)                      | 🚧     | 2/10/26 |           | 32 |
-| 1        | Practice Questions   | [Practice Questions](./practice-questions/README.md)                    | 🚧     | 2/10/26 |           | 32 |
-| 2        | Video            | [Video Courses](./video-courses/savill/README.md)               | 🕒     |         |           |      |
-| 3        | Microsoft Learn  | [Microsoft Learning Paths](./learning-paths/README.md)          | 🕒     |         |           |      |
-
-**Legend:** 🕒 Not Started | 🚧 In Progress | ✅ Complete
+| 1        | Hands-on Labs    | [Hands-on Labs](./hands-on-labs/README.md)                      | In Progress | 2/10/26 |           | 32 |
+| 1        | Practice Questions   | [Practice Questions](./practice-questions/README.md)                    | In Progress | 2/10/26 |           | 32 |
+| 2        | Video            | [Video Courses](./video-courses/savill/README.md)               | Not Started |         |           |      |
+| 3        | Microsoft Learn  | [Microsoft Learning Paths](./learning-paths/README.md)          | Not Started |         |           |      |
 
 ---
 

@@ -4,6 +4,9 @@
 **Skill:** Configure secure access to virtual networks
 **Task:** Configure private endpoints for Azure PaaS
 
+**Practice Exam Questions:**
+- [Configure Private Link Service Source IP](../../../practice-questions/README.md#configure-private-link-service-source-ip)
+
 ## Exam Question Scenario
 
 You are an Azure administrator for an e-commerce company. Your organization wants to access Azure SQL Database services and Azure-hosted customer-owned resources over a private endpoint in your virtual network (VNet).
@@ -319,11 +322,3 @@ In this lab, `nsg-backend` proves the behavior remains enforced for non-PLS reso
 - [Manage network policies for private endpoints](https://learn.microsoft.com/en-us/azure/private-link/disable-private-endpoint-network-policy)
 - [Create a Private Link Service — Azure portal](https://learn.microsoft.com/en-us/azure/private-link/create-private-link-service-portal)
 - [Tutorial: Create a Private Link Service using Terraform](https://learn.microsoft.com/en-us/azure/private-link/create-private-link-service-terraform)
-
-## Related Labs
-
-▶ Related Lab: [lab-ilb-backend-access](../lab-ilb-backend-access/README.md) - Compare private connectivity patterns and backend access troubleshooting for internal services
-
-## Related Practice Exam Questions
-
-- ▶ Practice Question: [Configure Private Link Service Source IP](../../../practice-questions/README.md#configure-private-link-service-source-ip)

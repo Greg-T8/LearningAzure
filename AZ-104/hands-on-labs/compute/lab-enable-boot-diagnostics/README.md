@@ -4,6 +4,9 @@
 **Skill:** Monitor resources in Azure
 **Task:** Configure and interpret monitoring of VMs, storage accounts, and networks by using Azure Monitor Insights
 
+**Practice Exam Questions:**
+- [Enable Guest OS Diagnostics](../../../practice-questions/README.md#enable-guest-os-diagnostics)
+
 ## Exam Question Scenario
 
 > **Exam**: AZ-104 — Compute
@@ -390,13 +393,3 @@ cd bicep
 - [Storage Account Overview](https://learn.microsoft.com/azure/storage/common/storage-account-overview)
 - [General Purpose v1 vs. v2 Storage Accounts](https://learn.microsoft.com/azure/storage/common/storage-account-overview#types-of-storage-accounts)
 - [Set-AzVMBootDiagnostic Reference](https://learn.microsoft.com/powershell/module/az.compute/set-azvmbootdiagnostic)
-
----
-
-## Related Labs
-
-- ▶ Related Lab: [lab-vm-disk-encryption](../lab-vm-disk-encryption/README.md) — Pair VM startup troubleshooting with disk security and Key Vault-backed protection
-
-## Related Practice Exam Questions
-
-- ▶ Practice Question: [Enable Boot Diagnostics for Azure Virtual Machines](../../../practice-questions/README.md#enable-boot-diagnostics-for-azure-virtual-machines)

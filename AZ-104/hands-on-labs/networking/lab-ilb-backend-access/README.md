@@ -4,6 +4,10 @@
 **Skill:** Configure name resolution and load balancing
 **Task:** Troubleshoot load balancing
 
+**Practice Exam Questions:**
+- [IMDS Load Balancer Metadata Error](../../../practice-questions/README.md#imds-load-balancer-metadata-error)
+- [Diagnose Internal Load Balancer Hairpin Traffic Failure](../../../practice-questions/README.md#diagnose-internal-load-balancer-hairpin-traffic-failure)
+
 ## Exam Question Scenario
 
 You are an Azure administrator at an independent software vendor. Your company is using an Azure internal load balancer that is configured inside an Azure virtual network (VNet).
@@ -268,11 +272,3 @@ The scenario confirms this is not an NSG issue: the VMs are listed as healthy an
 - [Azure Application Gateway overview](https://learn.microsoft.com/en-us/azure/application-gateway/overview)
 - [Outbound connections in Azure](https://learn.microsoft.com/en-us/azure/load-balancer/load-balancer-outbound-connections)
 - [Azure Load Balancer SKU comparison](https://learn.microsoft.com/en-us/azure/load-balancer/skus)
-
-## Related Labs
-
-- ▶ Related Lab: [lab-slb-outbound-traffic](../lab-slb-outbound-traffic/README.md) — Covers Standard public Load Balancer outbound rules, SNAT behavior, and multi-frontend IP allocation
-
-## Related Practice Exam Questions
-
-- ▶ Practice Question: [Diagnose Internal Load Balancer Hairpin Traffic Failure](../../../practice-questions/README.md#diagnose-internal-load-balancer-hairpin-traffic-failure)

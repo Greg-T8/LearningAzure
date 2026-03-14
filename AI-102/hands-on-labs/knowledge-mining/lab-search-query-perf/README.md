@@ -4,6 +4,9 @@
 **Skill:** Implement an Azure AI Search solution
 **Task:** Query an index, including syntax, sorting, filtering, and wildcards
 
+**Practice Exam Questions:**
+- [Azure AI Search Query Performance Optimization](../../../practice-questions/README.md#azure-ai-search-query-performance-optimization)
+
 ## Exam Question Scenario
 
 You use Azure AI Search to index your organization's documents and data.
@@ -186,15 +189,3 @@ The critical detail is that queries remain slow **even with no load** on the ser
 - [Partitions and replicas in Azure AI Search](https://learn.microsoft.com/en-us/azure/search/search-manage#scale-replicas-and-partitions)
 - [Performance tips for Azure AI Search](https://learn.microsoft.com/en-us/azure/search/search-performance-tips)
 - [Azure AI Search pricing](https://azure.microsoft.com/en-us/pricing/details/search/)
-
----
-
-## Related Labs
-
-### ▶ Related Labs
-
-- ▶ Related Lab: [lab-agent-byo-storage](../../agentic/lab-agent-byo-storage/README.md)
-
-### ▶ Related Practice Exam Questions
-
-- ▶ Practice Question: [Azure AI Search Query Performance Optimization](../../../practice-questions/README.md#azure-ai-search-query-performance-optimization)

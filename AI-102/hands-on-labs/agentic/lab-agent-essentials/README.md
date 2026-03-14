@@ -4,6 +4,9 @@
 **Skill:** Create custom agents
 **Task:** Configure the necessary resources to build an agent
 
+**Practice Exam Questions:**
+- [Azure AI Agent Service File Upload Configuration Issues](../../../practice-questions/README.md#azure-ai-agent-service-file-upload-configuration-issues)
+
 ## Exam Question Scenario
 
 You are designing an Azure AI Agent Service solution that helps employees search company policies using uploaded documents. The solution must maintain conversation history across multiple interactions and use a vector store for semantic document retrieval.
@@ -349,17 +352,3 @@ The capability host in a standard setup references connections to each of these 
 - [Azure AI Agent Service SDK reference](https://learn.microsoft.com/python/api/overview/azure/ai-projects-readme)
 - [Use Terraform to manage Microsoft Foundry resources](https://learn.microsoft.com/azure/ai-foundry/how-to/create-resource-terraform)
 - [Foundry Terraform samples (GitHub)](https://github.com/azure-ai-foundry/foundry-samples/tree/main/infrastructure/infrastructure-setup-terraform)
-
----
-
-## Related Labs
-
-- **[Azure AI Agent Service - BYO Storage Configuration and RBAC](../lab-agent-byo-storage/README.md)** - Configure standard agent setup with correct RBAC roles for BYO storage, Cosmos DB, and AI Search resources
-
-### ▶ Related Labs
-
-- ▶ Related Lab: [lab-agent-byo-storage](../lab-agent-byo-storage/README.md)
-
-### ▶ Related Practice Exam Questions
-
-- ▶ Practice Question: [Azure AI Agent Service File Upload Configuration Issues](../../../practice-questions/README.md#azure-ai-agent-service-file-upload-configuration-issues)

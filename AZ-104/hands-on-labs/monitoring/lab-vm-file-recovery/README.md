@@ -4,6 +4,10 @@
 **Skill:** Implement backup and recovery
 **Task:** Perform backup and restore operations by using Azure Backup
 
+**Practice Exam Questions:**
+- [Recover Azure VM from Deleted Backup](../../../practice-questions/README.md#recover-azure-vm-from-deleted-backup)
+- [Recover Configuration File from Azure VM Backup](../../../practice-questions/README.md#recover-configuration-file-from-azure-vm-backup)
+
 ## Exam Question Scenario
 
 You have two Azure virtual machines (VMs) named VM1 and VM2 running Windows Server 2019. The VMs are backed up by an Azure Recovery Services vault. A configuration file on VM1 was updated, and you need to restore it to a version from six days ago.
@@ -327,14 +331,3 @@ Azure Backup's **file-level recovery** (also called Item Level Recovery or ILR) 
 - [About Azure VM backup](https://learn.microsoft.com/en-us/azure/backup/backup-azure-vms-introduction)
 - [Recovery Services vault overview](https://learn.microsoft.com/en-us/azure/backup/backup-azure-recovery-services-vault-overview)
 - [Azure Backup pricing](https://azure.microsoft.com/en-us/pricing/details/backup/)
-
----
-
-## Related Labs
-
-▶ Related Lab: [lab-enable-boot-diagnostics](../../compute/lab-enable-boot-diagnostics/README.md) - Pair VM troubleshooting signals with backup and recovery validation steps
-
-## Related Practice Exam Questions
-
-- ▶ Practice Question: [Recover Configuration File from Azure VM Backup](../../../practice-questions/README.md#recover-configuration-file-from-azure-vm-backup)
-- ▶ Practice Question: [Recover Azure VM from Deleted Backup](../../../practice-questions/README.md#recover-azure-vm-from-deleted-backup)

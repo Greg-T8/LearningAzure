@@ -4,6 +4,9 @@
 **Skill:** Provision and manage containers in the Azure portal
 **Task:** Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps
 
+**Practice Exam Questions:**
+- [Configure Scaling Rules in Azure Container Apps](../../../practice-questions/README.md#configure-scaling-rules-in-azure-container-apps)
+
 ## Exam Question
 
 > **Exam**: AZ-104 — Compute
@@ -347,13 +350,3 @@ The snippet only defines the scaler `type` and `metadata` — there is no `auth`
 - [Azure Container Apps overview](https://learn.microsoft.com/azure/container-apps/overview)
 - [KEDA concepts and architecture](https://keda.sh/docs/latest/concepts/)
 - [Azure Service Bus messaging overview](https://learn.microsoft.com/azure/service-bus-messaging/service-bus-messaging-overview)
-
----
-
-## Related Labs
-
-▶ Related Lab: [lab-app-service-plan-quotas](../lab-app-service-plan-quotas/README.md) — App Service Plan CPU quota behavior and tier scaling
-
-## Related Practice Exam Questions
-
-- ▶ Practice Question: [Configure Scaling Rules in Azure Container Apps](../../../practice-questions/README.md#configure-scaling-rules-in-azure-container-apps)

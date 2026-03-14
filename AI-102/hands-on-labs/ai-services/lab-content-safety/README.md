@@ -4,6 +4,9 @@
 **Skill:** Implement AI solutions responsibly
 **Task:** Configure responsible AI insights, including content safety
 
+**Practice Exam Questions:**
+- [Azure AI Content Safety Features Available](../../../practice-questions/README.md#azure-ai-content-safety-features-available)
+
 ## Exam Question Scenario
 
 You are an AI developer at a social media company. Your company wants to use AI solutions to improve aspects of user-generated content management. You are exploring the capabilities of Azure AI Content Safety. You need to identify which features are currently available in Azure AI Content Safety Studio.
@@ -224,17 +227,3 @@ Azure AI Content Safety Studio provides the following core features:
 - [Quickstart: Analyze image content](https://learn.microsoft.com/azure/ai-services/content-safety/quickstart-image)
 - [Harm categories concept guide](https://learn.microsoft.com/azure/ai-services/content-safety/concepts/harm-categories)
 - [Content Safety FAQ](https://learn.microsoft.com/azure/ai-services/content-safety/faq)
-
----
-
-## Related Labs
-
-- **[Azure AI Document Intelligence - Prebuilt Invoice Model](../lab-doc-intelligence-invoice/README.md)** - Automate invoice processing with prebuilt models for key field extraction
-
-### ▶ Related Labs
-
-- ▶ Related Lab: [lab-doc-intelligence-invoice](../lab-doc-intelligence-invoice/README.md)
-
-### ▶ Related Practice Exam Questions
-
-- ▶ Practice Question: [Azure AI Content Safety Features Available](../../../practice-questions/README.md#azure-ai-content-safety-features-available)

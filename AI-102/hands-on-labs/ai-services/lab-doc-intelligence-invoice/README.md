@@ -4,6 +4,9 @@
 **Skill:** Implement an Azure Document Intelligence in Foundry Tools solution
 **Task:** Use prebuilt models to extract data from documents
 
+**Practice Exam Questions:**
+- [Automating Invoice Processing with Azure AI Document Intelligence](../../../practice-questions/README.md#automating-invoice-processing-with-azure-ai-document-intelligence)
+
 ## Exam Question
 
 > **Exam**: AI-102 — Implement knowledge mining and document intelligence solutions
@@ -383,13 +386,3 @@ The **Azure.AI.FormRecognizer** NuGet package provides the C# SDK for Azure AI D
 - [Document Intelligence Studio](https://documentintelligence.ai.azure.com/)
 - [Document Intelligence C# SDK quickstart](https://learn.microsoft.com/azure/ai-services/document-intelligence/quickstarts/get-started-sdks-rest-api)
 - [Document Intelligence REST API reference](https://learn.microsoft.com/rest/api/aiservices/document-models/analyze-document)
-
----
-
-## Related Labs
-
-- [lab-content-safety](../lab-content-safety/README.md) — Azure AI Content Safety text and image moderation
-
-## Related Practice Exam Questions
-
-- ▶ Practice Question: [Automating Invoice Processing with Azure AI Document Intelligence](../../../practice-questions/README.md#automating-invoice-processing-with-azure-ai-document-intelligence)

@@ -4,6 +4,9 @@
 **Skill:** Create custom agents
 **Task:** Configure the necessary resources to build an agent
 
+**Practice Exam Questions:**
+- [Azure AI Agent Service File Upload Configuration Issues](../../../practice-questions/README.md#azure-ai-agent-service-file-upload-configuration-issues)
+
 ## Exam Question Scenario
 
 You are investigating an issue where user file uploads to an Azure AI Agent Service are failing after implementing a standard agent setup that uses your own storage account resource. You have confirmed that the Azure Storage account exists and has sufficient capacity. You need to identify the configurations that are causing the upload failure.
@@ -471,17 +474,3 @@ The capability host configuration stores the connection to each BYO resource. Th
 - [Use Terraform to manage Microsoft Foundry resources](https://learn.microsoft.com/azure/ai-foundry/how-to/create-resource-terraform)
 - [Azure Storage RBAC roles](https://learn.microsoft.com/azure/storage/blobs/authorize-access-azure-active-directory)
 - [Foundry Terraform samples (GitHub)](https://github.com/azure-ai-foundry/foundry-samples/tree/main/infrastructure/infrastructure-setup-terraform)
-
----
-
-## Related Labs
-
-- **[Azure AI Agent Service - Essentials: Threads, Files, and Vector Stores](../lab-agent-essentials/README.md)** - Learn core agent service concepts with Microsoft-managed infrastructure
-
-### ▶ Related Labs
-
-- ▶ Related Lab: [lab-agent-essentials](../lab-agent-essentials/README.md)
-
-### ▶ Related Practice Exam Questions
-
-- ▶ Practice Question: [Azure AI Agent Service File Upload Configuration Issues](../../../practice-questions/README.md#azure-ai-agent-service-file-upload-configuration-issues)

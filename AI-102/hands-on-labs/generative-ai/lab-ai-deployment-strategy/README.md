@@ -4,6 +4,9 @@
 **Skill:** Optimize and operationalize a generative AI solution
 **Task:** Optimize and manage resources for deployment, including scalability and foundational model updates
 
+**Practice Exam Questions:**
+- [Serverless API Deployment](../../../practice-questions/README.md#serverless-api-deployment)
+
 ## Exam Question
 
 > **Exam**: AI-102 — Generative AI
@@ -264,13 +267,3 @@ A serverless API deployment (Standard tier in Azure OpenAI) is billed pay-per-to
 - [Azure OpenAI batch API](https://learn.microsoft.com/azure/ai-services/openai/how-to/batch)
 - [Fine-tuning overview](https://learn.microsoft.com/azure/ai-services/openai/how-to/fine-tuning)
 - [AI-102 study guide — Develop Generative AI solutions](https://learn.microsoft.com/credentials/certifications/resources/study-guides/ai-102)
-
----
-
-## Related Labs
-
-▶ Related Lab: [lab-dalle-image-gen](../../generative-ai/lab-dalle-image-gen/README.md)
-
-## Related Practice Exam Questions
-
-- ▶ Practice Question: [Serverless API Deployment](../../../practice-questions/README.md#serverless-api-deployment)

@@ -4,6 +4,12 @@
 **Skill:** Monitor resources in Azure
 **Task:** Use Azure Network Watcher and Connection Monitor
 
+**Practice Exam Questions:**
+- [Diagnose Network Watcher Tool for Web Server Packet Flow](../../../practice-questions/README.md#diagnose-network-watcher-tool-for-web-server-packet-flow)
+- [Determine filtering rule with Network Watcher](../../../practice-questions/README.md#determine-filtering-rule-with-network-watcher)
+- [Test TCP Connectivity with Network Watcher](../../../practice-questions/README.md#test-tcp-connectivity-with-network-watcher)
+- [Capture SFTP Packets with Network Watcher](../../../practice-questions/README.md#capture-sftp-packets-with-network-watcher)
+
 ## Exam Question
 
 > **Exam**: AZ-104 — Monitoring & Backup
@@ -345,13 +351,3 @@ cd AZ-104/hands-on-labs/monitoring/lab-capture-sftp-packets/bicep
 - [Network Watcher VM extension for Linux](https://learn.microsoft.com/en-us/azure/virtual-machines/extensions/network-watcher-linux)
 - [New-AzNetworkWatcherPacketCapture reference](https://learn.microsoft.com/en-us/powershell/module/az.network/new-aznetworkwatcherpacketcapture)
 - [New-AzPacketCaptureFilterConfig reference](https://learn.microsoft.com/en-us/powershell/module/az.network/new-azpacketcapturefilterconfig)
-
----
-
-## Related Labs
-
-▶ Related Lab: [lab-ilb-backend-access](../../networking/lab-ilb-backend-access/README.md) — Troubleshoot network traffic paths and backend connectivity issues in Azure
-
-## Related Practice Exam Questions
-
-- ▶ Practice Question: [Capture SFTP Packets with Network Watcher](../../../practice-questions/README.md#capture-sftp-packets-with-network-watcher)

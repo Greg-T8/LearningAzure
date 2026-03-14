@@ -4,6 +4,9 @@
 **Skill:** Configure name resolution and load balancing
 **Task:** Configure an internal or public load balancer
 
+**Practice Exam Questions:**
+- [Configure Standard Load Balancer Outbound Traffic and IP Allocation](../../../practice-questions/README.md#configure-standard-load-balancer-outbound-traffic-and-ip-allocation)
+
 ## Exam Question Scenario
 
 You deploy three Windows virtual machines (VMs) named VM01, VM02, and VM03 that host the front-end layer of a web application. You configure a Standard Load Balancer named LB01. VM01, VM02, and VM03 are configured as part of the backend pool for LB01. You configure a load balancing rule for Transmission Control Protocol (TCP) traffic only.
@@ -294,11 +297,3 @@ To enable UDP outbound, you would need to either:
 - [Standard Load Balancer and Public IP addresses](https://learn.microsoft.com/en-us/azure/load-balancer/load-balancer-standard-overview)
 - [Default outbound access in Azure](https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/default-outbound-access)
 - [SNAT for outbound connections](https://learn.microsoft.com/en-us/azure/load-balancer/load-balancer-outbound-connections#snat)
-
-## Related Labs
-
-▶ Related Lab: [lab-ilb-backend-access](../lab-ilb-backend-access/README.md) - Troubleshoot Internal Load Balancer hairpin limitation using proxy-based solutions
-
-## Related Practice Exam Questions
-
-- ▶ Practice Question: [Configure Standard Load Balancer Outbound Traffic and IP Allocation](../../../practice-questions/README.md#configure-standard-load-balancer-outbound-traffic-and-ip-allocation)

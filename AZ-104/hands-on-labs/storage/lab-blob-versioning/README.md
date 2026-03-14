@@ -4,6 +4,9 @@
 **Skill:** Configure Azure Files and Azure Blob Storage
 **Task:** Configure blob versioning
 
+**Practice Exam Questions:**
+- [Identify Blob Write Operations That Create New Versions](../../../practice-questions/README.md#identify-blob-write-operations-that-create-new-versions)
+
 ## Exam Question Scenario
 
 Your organization is using Azure Blobs for storing data. You enable blob versioning for a storage account.
@@ -216,13 +219,3 @@ This lab covers the following AZ-104 exam objective areas:
 - [Soft delete for blobs](https://learn.microsoft.com/azure/storage/blobs/soft-delete-blob-overview)
 - [Blob snapshots](https://learn.microsoft.com/azure/storage/blobs/snapshots-overview)
 - [Point-in-time restore for block blobs](https://learn.microsoft.com/azure/storage/blobs/point-in-time-restore-overview)
-
-## Related Labs
-
-### ▶ Related Labs
-
-- ▶ Related Lab: [lab-object-replication](../lab-object-replication/README.md)
-
-### ▶ Related Practice Exam Questions
-
-- ▶ Practice Question: [Identify Blob Write Operations That Create New Versions](../../../practice-questions/README.md#identify-blob-write-operations-that-create-new-versions)

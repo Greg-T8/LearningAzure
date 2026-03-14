@@ -4,6 +4,9 @@
 **Skill:** Create and configure virtual machines
 **Task:** Deploy and configure an Azure Virtual Machine Scale Sets
 
+**Practice Exam Questions:**
+- [Apply Change to VMSS OS and Data Disk Profile](../../../practice-questions/README.md#apply-change-to-vmss-os-and-data-disk-profile)
+
 ## Exam Question
 
 > **Exam**: AZ-104 — Compute
@@ -462,13 +465,3 @@ The lab confirmed this: after running `Update-AzVmss` to change the data disk si
 - [Set-AzVmssVM Reference](https://learn.microsoft.com/en-us/powershell/module/az.compute/set-azvmssvm)
 - [Rolling Upgrades for VMSS](https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-rolling-upgrade)
 - [Standard Load Balancer and VMSS](https://learn.microsoft.com/en-us/azure/load-balancer/load-balancer-standard-virtual-machine-scale-sets)
-
----
-
-## Related Labs
-
-*(None currently available)*
-
-## Related Practice Exam Questions
-
-- ▶ Practice Question: [Apply Change to VMSS OS and Data Disk Profile](../../../practice-questions/README.md#apply-change-to-vmss-os-and-data-disk-profile)

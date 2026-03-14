@@ -4,6 +4,9 @@
 **Skill:** Create and configure Azure App Service
 **Task:** Provision an App Service plan
 
+**Practice Exam Questions:**
+- [Configure Azure App Service Plan for Website Hosting](../../../practice-questions/README.md#configure-azure-app-service-plan-for-website-hosting)
+
 ## Exam Question Scenario
 
 You deploy an Azure web app named MyApp. MyApps runs in a Free pricing tier service plan named MyPlan. During testing, you discover that MyApp stops after 60 minutes and that it cannot be restarted until the next day.
@@ -173,16 +176,3 @@ The minimum tier that satisfies the requirement is **Basic B1** because:
 - [Azure App Service limits](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits#app-service-limits)
 - [Scale up an app in Azure App Service](https://learn.microsoft.com/en-us/azure/app-service/manage-scale-up)
 - [App Service pricing](https://azure.microsoft.com/en-us/pricing/details/app-service/windows/)
-
-## Related Labs
-
-- **[App Service Plan Tiers](../lab-app-service-plan-tiers/README.md)** - Explore App Service pricing tier capabilities, scaling limits, and choose the right tier for specific requirements
-
-### ▶ Related Labs
-
-- ▶ Related Lab: [lab-app-service-plan-tiers](../lab-app-service-plan-tiers/README.md)
-
-### ▶ Related Practice Exam Questions
-
-- ▶ Practice Question: [Configure Azure App Service Plan for Website Hosting](../../../practice-questions/README.md#configure-azure-app-service-plan-for-website-hosting)
-- ▶ Practice Question: [Resolve Azure App Service Pricing Tier for Runtime Requirements](../../../practice-questions/README.md#resolve-azure-app-service-pricing-tier-for-runtime-requirements)

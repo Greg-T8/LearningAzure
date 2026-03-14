@@ -4,6 +4,9 @@
 **Skill:** Use Azure OpenAI in Foundry Models to generate content
 **Task:** Use the DALL-E model to generate images
 
+**Practice Exam Questions:**
+- [Azure OpenAI Image Generation and DALL-E Configuration](../../../practice-questions/README.md#azure-openai-image-generation-and-dall-e-configuration)
+
 ## Exam Question Scenario
 
 You are an AI Engineer. You are developing an application that uses Azure OpenAI to generate images from natural language prompts.
@@ -263,13 +266,3 @@ az group delete --name ai102-generative-ai-dalle-image-gen-tf --yes --no-wait
 - [DALL-E 3 Model Overview](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#dall-e-models)
 - [Responsible AI for Image Generation](https://learn.microsoft.com/azure/ai-services/openai/concepts/dall-e-safety)
 - [Azure OpenAI Service Quotas and Limits](https://learn.microsoft.com/azure/ai-services/openai/quotas-limits)
-
-## Related Labs
-
-### ▶ Related Labs
-
-- ▶ Related Lab: [lab-ai-deployment-strategy](../lab-ai-deployment-strategy/README.md)
-
-### ▶ Related Practice Exam Questions
-
-- ▶ Practice Question: [Azure OpenAI Image Generation and DALL-E Configuration](../../../practice-questions/README.md#azure-openai-image-generation-and-dall-e-configuration)
