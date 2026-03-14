@@ -249,8 +249,8 @@ Drop-Down Options:
 
 | Blank | Options |
 |-------|---------|
-| [1] | Option A / Option B / Option C |
-| [2] | Option A / Option B / Option C |
+| `[1]` | Option A / Option B / Option C |
+| `[2]` | Option A / Option B / Option C |
 ```
 
 If option screenshots are missing:
