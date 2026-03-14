@@ -1,2 +1,3 @@
 Compute - 13/42
-Networking - 5/35
+Networking - 13/35
+Monitoring - 8/27
