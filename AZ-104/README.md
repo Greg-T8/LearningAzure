@@ -12,8 +12,8 @@
 
 | Priority | Modality         | My Notes                                                        | Status | Started | Completed | Days |
 | :------- | :--------------- | :-------------------------------------------------------------- | :----- | :------ | :-------- | :--- |
-| 1        | Hands-on Labs    | [Hands-on Labs](./hands-on-labs/README.md)                      | 🚧    | 2/2/26  |           | 38 |
-| 1        | Practice Questions   | [Practice Questions](./practice-questions/README.md)                    | 🚧    | 2/2/26  |           | 38 |
+| 1        | Hands-on Labs    | [Hands-on Labs](./hands-on-labs/README.md)                      | 🚧    | 2/2/26  |           | 40 |
+| 1        | Practice Questions   | [Practice Questions](./practice-questions/README.md)                    | 🚧    | 2/2/26  |           | 40 |
 | 2        | Video            | [John Savill's Training](./video-courses/savill/README.md) | ✅    | 1/29/26 | 2/1/26          | 4      |
 | 3        | Microsoft Learn | [Microsoft Learning Paths](./learning-paths/README.md)          | ✅     | 1/14/26 | 1/25/26   | 11   |
 
@@ -30,12 +30,12 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 | Domain | Weight | Qs | Labs | Tasks Covered | Status |
 | :----- | :----- | -: | ---: | :------------ | :----: |
 | [1. Identities & Governance](#domain-1) | 20–25% | 14 | 0 | 8 / 15 (53%) | 🟡 |
-| [2. Storage](#domain-2) | 15–20% | 16 | 5 | 11 / 17 (64%) | 🟡 |
-| [3. Compute](#domain-3) | 20–25% | 18 | 6 | 13 / 24 (54%) | 🟡 |
-| [4. Networking](#domain-4) | 15–20% | 8 | 3 | 7 / 13 (53%) | 🟡 |
-| [5. Monitoring & Backup](#domain-5) | 10–15% | 9 | 5 | 5 / 13 (38%) | 🟡 |
+| [2. Storage](#domain-2) | 15–20% | 17 | 5 | 11 / 17 (64%) | 🟡 |
+| [3. Compute](#domain-3) | 20–25% | 21 | 6 | 13 / 24 (54%) | 🟡 |
+| [4. Networking](#domain-4) | 15–20% | 10 | 3 | 8 / 13 (61%) | 🟡 |
+| [5. Monitoring & Backup](#domain-5) | 10–15% | 10 | 5 | 5 / 13 (38%) | 🟡 |
 
-**Totals:** 140 practice questions · 19 hands-on labs
+**Totals:** 152 practice questions · 19 hands-on labs
 
 **Legend:** 🟢 Strong (≥66%) · 🟡 Partial (33–65%) · 🔴 Low (<33%) — "Covered" = task has ≥1 practice question or ≥1 lab
 
@@ -71,7 +71,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 
 <a id="domain-2"></a>
 <details>
-<summary><b>Domain 2: Implement and Manage Storage (15–20%)</b> — 17 tasks · 16 Qs · 5 Labs</summary>
+<summary><b>Domain 2: Implement and Manage Storage (15–20%)</b> — 17 tasks · 17 Qs · 5 Labs</summary>
 
 | Skill | Task | Qs | Labs |
 | :--- | :--- | -: | -: |
@@ -97,7 +97,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 
 <a id="domain-3"></a>
 <details>
-<summary><b>Domain 3: Deploy and Manage Azure Compute Resources (20–25%)</b> — 24 tasks · 18 Qs · 6 Labs</summary>
+<summary><b>Domain 3: Deploy and Manage Azure Compute Resources (20–25%)</b> — 24 tasks · 21 Qs · 6 Labs</summary>
 
 | Skill | Task | Qs | Labs |
 | :--- | :--- | -: | -: |
@@ -130,7 +130,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 
 <a id="domain-4"></a>
 <details>
-<summary><b>Domain 4: Implement and Manage Virtual Networking (15–20%)</b> — 13 tasks · 8 Qs · 3 Labs</summary>
+<summary><b>Domain 4: Implement and Manage Virtual Networking (15–20%)</b> — 13 tasks · 10 Qs · 3 Labs</summary>
 
 | Skill | Task | Qs | Labs |
 | :--- | :--- | -: | -: |
@@ -152,7 +152,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 
 <a id="domain-5"></a>
 <details>
-<summary><b>Domain 5: Monitor and Maintain Azure Resources (10–15%)</b> — 13 tasks · 9 Qs · 5 Labs</summary>
+<summary><b>Domain 5: Monitor and Maintain Azure Resources (10–15%)</b> — 13 tasks · 10 Qs · 5 Labs</summary>
 
 | Skill | Task | Qs | Labs |
 | :--- | :--- | -: | -: |
