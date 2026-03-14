@@ -41,7 +41,7 @@ Accounts for questions missed or unsure about in the practice exams.
   * [Automate deployment of resources by using ARM templates or Bicep files](#automate-deployment-of-resources-by-using-arm-templates-or-bicep-files)
     * [Edit ARM Template to Inherit Resource Group Location](#edit-arm-template-to-inherit-resource-group-location)
     * [Complete ARM template deployment command](#complete-arm-template-deployment-command)
-    * [Case Study — Solution Evaluation](#case-study-solution-evaluation)
+    * [Case Study — Solution Evaluation](#case-study--solution-evaluation)
     * [Export ARM Template](#export-arm-template)
     * [Convert Array to Object](#convert-array-to-object)
     * [Resource dependencies in Bicep](#resource-dependencies-in-bicep)
@@ -71,7 +71,7 @@ Accounts for questions missed or unsure about in the practice exams.
     * [Diagnose Internal Load Balancer Hairpin Traffic Failure](#diagnose-internal-load-balancer-hairpin-traffic-failure)
     * [IMDS Load Balancer Metadata Error](#imds-load-balancer-metadata-error)
   * [Create and configure virtual networks in Azure](#create-and-configure-virtual-networks-in-azure)
-    * [VNet Peering — Missing Reverse Peering](#vnet-peering-missing-reverse-peering)
+    * [VNet Peering — Missing Reverse Peering](#vnet-peering--missing-reverse-peering)
 * [Monitor and maintain Azure resources](#monitor-and-maintain-azure-resources)
   * [Monitor resources in Azure](#monitor-resources-in-azure)
     * [Load Balancer Metrics Batch API](#load-balancer-metrics-batch-api)
@@ -3809,7 +3809,7 @@ References
 #### VNet Peering — Missing Reverse Peering
 
 **Domain:** Implement and Manage Virtual Networking
-**Skill:** Create and configure virtual networks in Azure
+**Skill:** Configure and manage virtual networks in Azure
 **Task:** Create and configure virtual network peering
 
 You have two Azure virtual machines (VMs) running Windows as shown in the first exhibit.
