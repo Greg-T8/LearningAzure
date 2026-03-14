@@ -158,7 +158,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 | :--- | :--- | -: | -: |
 | Monitor resources in Azure | Interpret metrics in Azure Monitor | 1 | 1 |
 |  | Configure log settings in Azure Monitor | 0 | 0 |
-|  | Query and analyze logs in Azure Monitor | 0 | 0 |
+|  | Query and analyze logs in Azure Monitor | 1 | 0 |
 |  | Set up alert rules, action groups, and alert processing rules in Azure Monitor | 3 | 1 |
 |  | Configure and interpret monitoring of VMs, storage accounts, and networks by using Azure Monitor Insights | 1 | 1 |
 |  | Use Azure Network Watcher and Connection Monitor | 4 | 1 |
