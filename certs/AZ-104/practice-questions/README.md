@@ -40,7 +40,7 @@ Accounts for questions missed or unsure about in the practice exams.
     * [Identify Blob Write Operations That Create New Versions](#identify-blob-write-operations-that-create-new-versions)
 * [Deploy and Manage Azure Compute Resources](#deploy-and-manage-azure-compute-resources)
   * [Automate deployment of resources by using ARM templates or Bicep files](#automate-deployment-of-resources-by-using-arm-templates-or-bicep-files)
-    * [Case Study — Solution Evaluation](#case-study-solution-evaluation)
+    * [Case Study — Solution Evaluation](#case-study--solution-evaluation)
     * [Edit ARM Template to Inherit Resource Group Location](#edit-arm-template-to-inherit-resource-group-location)
     * [Export ARM Template](#export-arm-template)
     * [Deployment Mode Deleted Resources](#deployment-mode-deleted-resources)
@@ -67,8 +67,8 @@ Accounts for questions missed or unsure about in the practice exams.
 * [Implement and Manage Virtual Networking](#implement-and-manage-virtual-networking)
   * [Configure and manage virtual networks in Azure](#configure-and-manage-virtual-networks-in-azure)
     * [Configure Layered Network Security](#configure-layered-network-security)
-    * [Case Study — Container Group Placement](#case-study-container-group-placement)
-    * [VNet Peering — Missing Reverse Peering](#vnet-peering-missing-reverse-peering)
+    * [Case Study — Container Group Placement](#case-study--container-group-placement)
+    * [VNet Peering — Missing Reverse Peering](#vnet-peering--missing-reverse-peering)
     * [VNet Peering with ExpressRoute](#vnet-peering-with-expressroute)
   * [Configure secure access to virtual networks](#configure-secure-access-to-virtual-networks)
     * [Configure Private Link Service Source IP](#configure-private-link-service-source-ip)
@@ -97,6 +97,7 @@ Accounts for questions missed or unsure about in the practice exams.
   * [Implement backup and recovery](#implement-backup-and-recovery)
     * [Recover Configuration File from Azure VM Backup](#recover-configuration-file-from-azure-vm-backup)
     * [Recover Azure VM from Deleted Backup](#recover-azure-vm-from-deleted-backup)
+    * [Change VM Availability Set Assignment](#change-vm-availability-set-assignment)
 
 ---
 
@@ -5570,3 +5571,59 @@ For Azure IaaS VMs protected by a Recovery Services vault, **soft delete provide
 </details>
 
 ---
+
+#### Change VM Availability Set Assignment
+
+**Domain:** Deploy and Manage Azure Compute Resources
+**Skill:** Create and configure virtual machines
+**Task:** Deploy VMs to availability zones and availability sets
+
+You have a Microsoft Azure subscription named Sub1.
+
+You deploy a Windows Server 2016 virtual machine (VM) named `VM1` to Sub1.
+
+You need to change the availability set assignment for VM1.
+
+What should you do?
+
+A. Migrate VM1 to another Azure region.  
+B. Move VM1 to a different availability zone.  
+C. Assign VM1 to the new availability set.  
+D. Redeploy VM1 from a recovery point.  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-15-06-07-58.png' width=600>
+
+</details>
+
+<details open>
+<summary>💡 Click to expand explanation</summary>
+
+**Explanation**
+
+You should redeploy `VM1` from a recovery point. In Azure, you can assign a virtual machine (VM) to an availability set only during initial deployment. Therefore, to reassign the VM to another availability set, you would need to perform the following actions:
+
+1. **Make a backup of the current VM**
+2. **Delete the current VM**
+3. **Deploy a new VM based on the most recent restore point to the correct availability set**
+
+You should not move `VM1` to a different availability zone because availability zones are mutually exclusive from availability sets.
+
+You should not assign `VM1` to the new availability set because, as mentioned previously, this is not a supported action in the Azure service fabric.
+
+You should not migrate `VM1` to another Azure region because by definition members of the same availability set must reside in the same region.
+
+<img src='.img/2026-03-15-06-13-19.png' width=600>
+
+<img src='.img/2026-03-15-06-14-15.png' width=600>
+
+**References**
+
+* Change the availability set for a VM using Azure PowerShell
+* What are Azure regions and availability zones?
+* Availability options for Azure Virtual Machines
+* Move VMs to another Azure region
+
+</details>
