@@ -1615,7 +1615,7 @@ Create a **new App Service plan** when:
 
 ## Scale up and scale out Azure App Service
 
-[Module Reference]([URL](https://learn.microsoft.com/en-us/training/modules/configure-app-service-plans/4-scale-up-scale-out))
+[Module Reference](https://learn.microsoft.com/en-us/training/modules/configure-app-service-plans/4-scale-up-scale-out)
 
 **Azure App Service Scaling Methods**
 

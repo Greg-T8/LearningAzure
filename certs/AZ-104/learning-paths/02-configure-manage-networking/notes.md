@@ -200,7 +200,7 @@
 
 ## Create virtual networks
 
-[Module Reference](URL)
+[Module Reference](https://learn.microsoft.com/en-us/training/modules/configure-virtual-networks/create-virtual-networks)
 
 **Overview**
 
@@ -506,7 +506,7 @@
 
 ## Exercise: Create and configure virtual networks
 
-[Module Reference](URL)
+[Module Reference](https://learn.microsoft.com/en-us/training/modules/configure-virtual-networks/)
 
 **Exercise scenario**
 
@@ -555,7 +555,7 @@
 
 ## Implement network security groups
 
-[Module Reference](URL)
+[Module Reference](https://learn.microsoft.com/en-us/training/modules/configure-network-security-groups/)
 
 **Network Security Group (NSG) Overview**
 
@@ -611,7 +611,7 @@
 
 ## Determine network security group rules
 
-[Module Reference](URL)
+[Module Reference](https://learn.microsoft.com/en-us/training/modules/configure-network-security-groups/)
 
 **Security Rules Overview**
 
@@ -843,7 +843,7 @@
 
 ## Implement application security groups
 
-[Module Reference](URL)
+[Module Reference](https://learn.microsoft.com/en-us/training/modules/configure-network-security-groups/)
 
 **Application Security Groups (ASGs) Overview**
 
@@ -2399,7 +2399,7 @@ Azure creates additional system routes when these capabilities are enabled:
 
 ## What is Azure Load Balancer?
 
-[Module Reference]([URL](https://learn.microsoft.com/en-us/training/modules/intro-to-azure-load-balancer/2-what-is-azure-load-balancer))
+[Module Reference](https://learn.microsoft.com/en-us/training/modules/intro-to-azure-load-balancer/2-what-is-azure-load-balancer)
 
 **Load Balancing Overview**
 

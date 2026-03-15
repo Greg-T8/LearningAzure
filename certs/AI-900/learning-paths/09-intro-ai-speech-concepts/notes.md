@@ -49,7 +49,7 @@
 
 ## Speech-enabled solutions
 
-[Module Reference](URL)
+[Module Reference](https://learn.microsoft.com/en-us/training/modules/introduction-ai-speech/)
 
 **Overview**
 
@@ -211,7 +211,7 @@
 * Output is a **sequence of feature vectors**, one per frame.
 * Each vector contains **13 MFCC values** representing spectral shape.
 
-<img src='.img/2026-01-20-04-41-23.png' width=700>
+<!-- Screenshot placeholder -->
 
 **Acoustic Modeling**
 

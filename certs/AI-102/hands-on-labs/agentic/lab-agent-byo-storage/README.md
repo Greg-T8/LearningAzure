@@ -5,6 +5,7 @@
 **Task:** Configure the necessary resources to build an agent
 
 **Practice Exam Questions:**
+
 - [Azure AI Agent Service File Upload Configuration Issues](../../../practice-questions/README.md#azure-ai-agent-service-file-upload-configuration-issues)
 
 ## Exam Question Scenario
@@ -405,7 +406,7 @@ cd ../validation
 ```
 
 <!-- Screenshot -->
-<img src='.img/validation_script.png' width=700>
+<img src='.img/2026-02-24-05-36-13.png' width=700>
 
 ---
 

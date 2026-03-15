@@ -157,7 +157,7 @@ For exam purposes, remember:
 
 </details>
 
-▶ Related Lab: [lab-dalle-image-gen](/certs/AI-102/hands-on-labs/generative-ai/lab-dalle-image-gen/README.md)
+▶ Related Lab: [lab-dalle-image-gen](../hands-on-labs/generative-ai/lab-dalle-image-gen/README.md)
 
 ---
 
@@ -284,7 +284,7 @@ When configuring Azure AI Agent Service with bring-your-own storage, two things 
 ▶ Related Labs:
 
 * [lab-agent-essentials](../hands-on-labs/agentic/lab-agent-essentials/README.md)
-* [lab-agent-storage-config](../hands-on-labs/ai-services/lab-agent-storage-config/README.md)
+* [lab-agent-byo-storage](../hands-on-labs/agentic/lab-agent-byo-storage/README.md)
 
 ---
 
@@ -443,7 +443,6 @@ In exam terms:
 
 Since the queries are slow even without load, the correct action is to increase partitions.
 
-
 **Why the other options are incorrect**
 
 **Add replicas**
@@ -455,13 +454,11 @@ Adding fields increases index size and can negatively impact performance. If any
 **Convert fields to complex types**
 Complex types increase index size and storage requirements. This can degrade performance rather than improve it.
 
-
 **Key takeaway**
 
 * Slow queries under no load → add partitions
 * Slow queries under heavy load → add replicas
 * Larger index size generally reduces performance
-
 
 **References**
 

@@ -363,7 +363,7 @@ Here's a simplified table breaking down the Microsoft Entra ID features by editi
 
 ## Azure Policy design principles
 
-[Module Reference](URL)
+[Module Reference](https://learn.microsoft.com/en-us/training/modules/sovereignty-policy-initiatives)
 
 **Governance Overview**
 
@@ -971,7 +971,7 @@ Here's a simplified table breaking down the Microsoft Entra ID features by editi
 
 ## Evaluation of resources through Azure Policy
 
-[Module Reference](URL)
+[Module Reference](https://learn.microsoft.com/en-us/training/modules/sovereignty-policy-initiatives)
 
 **Overview**
 

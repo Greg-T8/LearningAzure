@@ -1500,7 +1500,7 @@ The solution is either:
 
 </details>
 
-▶ **Related Lab:** [lab-storage-explorer-permissions](/certs/AZ-104/hands-on-labs/storage/lab-storage-explorer-permissions/README.md)
+▶ **Related Lab:** [lab-storage-explorer-permissions](../hands-on-labs/storage/lab-storage-explorer-permissions/README.md)
 
 ---
 
@@ -1618,7 +1618,7 @@ azcopy copy "source" "https://devstore.file.core.windows.net/share"
 
 </details>
 
-▶ **Related Lab:** [lab-azcopy-auth-methods](/certs/AZ-104/hands-on-labs/storage/lab-azcopy-auth-methods/README.md)
+▶ **Related Lab:** [lab-azcopy-auth-methods](../hands-on-labs/storage/lab-azcopy-auth-methods/README.md)
 
 ---
 
@@ -1763,7 +1763,7 @@ You had the logic completely reversed - change feed on the wrong end, and versio
 
 </details>
 
-▶ **Related Lab:** [lab-object-replication](../../hands-on-labs/storage/lab-object-replication/README.md)
+▶ **Related Lab:** [lab-object-replication](../hands-on-labs/storage/lab-object-replication/README.md)
 
 ---
 
@@ -2224,7 +2224,7 @@ The four versioning operations are **Put Blob**, **Put Block List**, **Copy Blob
 
 </details>
 
-▶ **Related Lab:** [lab-blob-versioning](../../hands-on-labs/storage/lab-blob-versioning/README.md)
+▶ **Related Lab:** [lab-blob-versioning](../hands-on-labs/storage/lab-blob-versioning/README.md)
 
 ---
 

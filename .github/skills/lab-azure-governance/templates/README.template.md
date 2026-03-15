@@ -125,11 +125,11 @@ terraform destroy -auto-approve
 
 ## Additional Resources
 
-- [Resource 1](URL)
-- [Resource 2](URL)
+- [Resource 1](https://example.com/resource-1)
+- [Resource 2](https://example.com/resource-2)
 
 ---
 
 ## Related Labs
 
-- [Related Lab 1](relative-path) — Brief description
+- [Related Lab 1](https://example.com/related-lab) — Brief description

@@ -12,7 +12,7 @@
 
 ## What is an AI application?
 
-[Module Reference](URL)
+[Module Reference](https://learn.microsoft.com/en-us/training/modules/get-started-ai-in-foundry/)
 
 **Artificial Intelligence (AI)**
 

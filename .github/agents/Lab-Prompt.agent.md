@@ -162,7 +162,7 @@ $resource = Get-Az...
 $resource.Property  # Expected value
 ```
 <!-- Screenshot -->
-<img src='.img/example_screenshot.png' width=700>
+<!-- Screenshot placeholder -->
 
 ```powershell
 # 2. Verify next configuration
