@@ -4,6 +4,9 @@
 **Skill:** Create and configure Azure App Service
 **Task:** Configure scaling for an App Service plan
 
+**Practice Exam Questions:**
+- [App Service autoscale instance count calculation](../../../practice-questions/README.md#app-service-autoscale-instance-count-calculation)
+
 ## Exam Question Scenario
 
 You have to provide a website hosting environment that meets the following scalability and security requirements:

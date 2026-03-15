@@ -7,6 +7,7 @@
 **Practice Exam Questions:**
 - [Identify Blob Write Operations That Create New Versions](../../../practice-questions/README.md#identify-blob-write-operations-that-create-new-versions)
 
+
 ## Exam Question Scenario
 
 Your organization is using Azure Blobs for storing data. You enable blob versioning for a storage account.

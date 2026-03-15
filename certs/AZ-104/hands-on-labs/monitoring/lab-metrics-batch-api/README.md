@@ -7,6 +7,7 @@
 **Practice Exam Questions:**
 - [Load Balancer Metrics Batch API](../../../practice-questions/README.md#load-balancer-metrics-batch-api)
 
+
 ## Exam Question Scenario
 
 You have an Azure subscription that contains virtual machines. You have the following JSON request body for a REST API call:

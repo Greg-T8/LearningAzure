@@ -5,8 +5,9 @@
 **Task:** Perform backup and restore operations by using Azure Backup
 
 **Practice Exam Questions:**
-- [Recover Azure VM from Deleted Backup](../../../practice-questions/README.md#recover-azure-vm-from-deleted-backup)
 - [Recover Configuration File from Azure VM Backup](../../../practice-questions/README.md#recover-configuration-file-from-azure-vm-backup)
+- [Recover Azure VM from Deleted Backup](../../../practice-questions/README.md#recover-azure-vm-from-deleted-backup)
+
 
 ## Exam Question Scenario
 
