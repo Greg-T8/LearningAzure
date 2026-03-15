@@ -38,8 +38,8 @@ jobs:
         id: lychee
         uses: lycheeverse/lychee-action@v2
         with:
-          # Recursively scan markdown files; verbose output helps debug broken links
-          args: "--no-progress --verbose **/*.md"
+          # Recursively scan markdown files; default output reports failures without listing successful 200 responses
+          args: "--no-progress **/*.md"
         env:
           # Provide token to increase rate limits for external link checks
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
