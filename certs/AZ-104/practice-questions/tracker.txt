@@ -1,3 +1,10 @@
-Compute - 13/42
+Compute - 
+- (1-15) Automate deployment of resources by using Azure Resource Manager (ARM) templates or Bicep files
+	- 1-13 
+- (16-23) Create and configure virtual machines
+- (24-26) Provision and manage containers in the Azure portal
+	- 24
+- (27-42) Create and configure Azure App Service
+
 Networking - 13/35
 Monitoring - 16/27
