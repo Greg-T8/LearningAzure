@@ -111,7 +111,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 |  | Manage virtual machine disks | 0 | 0 |
 |  | Deploy VMs to availability zones and availability sets | 0 | 0 |
 |  | Deploy and configure an Azure Virtual Machine Scale Sets | 1 | 1 |
-| Provision and manage containers in the Azure portal | Create and manage an Azure container registry | 0 | 0 |
+| Provision and manage containers in the Azure portal | Create and manage an Azure container registry | 1 | 0 |
 |  | Provision a container by using Azure Container Instances | 0 | 0 |
 |  | Provision a container by using Azure Container Apps | 0 | 0 |
 |  | Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps | 1 | 1 |
