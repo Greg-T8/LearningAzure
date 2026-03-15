@@ -22,13 +22,12 @@ Program: Update-LabReferences.ps1
 
 [CmdletBinding(SupportsShouldProcess)]
 param(
-    [Parameter()]
-    [ValidateSet('AI-102', 'AZ-104', 'AI-900')]
     [string[]]$ExamName
 )
 
 # Configuration
 $RepoRoot = Resolve-Path -Path (Join-Path -Path $PSScriptRoot -ChildPath '..\..')
+$GetActiveExamScript = Join-Path -Path $PSScriptRoot -ChildPath 'Get-ActiveExam.ps1'
 
 # Domain display names keyed by exam → folder name
 $DomainConfig = @{
@@ -90,17 +89,26 @@ $Main = {
 $Helpers = {
 
     function Get-TargetExam {
-        # Return exams to process — from parameter or auto-discover
+        # Return exams from parameter or auto-discover active exams from README
         if ($ExamName) {
             return $ExamName
         }
 
-        # Auto-discover exams that have a hands-on-labs directory
-        $certsDir = Join-Path -Path $RepoRoot -ChildPath 'certs'
-        $discovered = Get-ChildItem -Path $certsDir -Directory |
-            Where-Object { Test-Path (Join-Path -Path $_.FullName -ChildPath 'hands-on-labs') } |
-            Select-Object -ExpandProperty Name |
-            Where-Object { $DomainConfig.ContainsKey($_) }
+        if (-not (Test-Path -Path $GetActiveExamScript)) {
+            throw "Active exam discovery script not found: $GetActiveExamScript"
+        }
+
+        # Get active exams that have a hands-on-labs directory
+        $activeExams = & $GetActiveExamScript
+        $discovered = [System.Collections.Generic.List[string]]::new()
+
+        foreach ($exam in $activeExams) {
+            $labsDir = Join-Path -Path $RepoRoot -ChildPath "certs\$exam\hands-on-labs"
+
+            if (Test-Path -Path $labsDir) {
+                $discovered.Add($exam)
+            }
+        }
 
         Write-Verbose "Auto-discovered exams: $($discovered -join ', ')"
         return $discovered
@@ -446,6 +454,36 @@ $Helpers = {
         }
     }
 
+    function Get-DomainDisplayConfig {
+        # Return domain folder → display name mapping, using explicit config or auto-discovery
+        param([Parameter(Mandatory)] [string]$Exam)
+
+        if ($DomainConfig.ContainsKey($Exam)) {
+            return $DomainConfig[$Exam]
+        }
+
+        # Auto-discover domain folders under hands-on-labs
+        $labsDir = Join-Path -Path $RepoRoot -ChildPath "certs\$Exam\hands-on-labs"
+
+        if (-not (Test-Path -Path $labsDir)) {
+            return [ordered]@{}
+        }
+
+        $config = [ordered]@{}
+
+        Get-ChildItem -Path $labsDir -Directory |
+            Where-Object { $_.Name -notmatch '^\.' } |
+            Sort-Object Name |
+            ForEach-Object {
+                $displayName = ($_.Name -split '-' | ForEach-Object {
+                    $_.Substring(0, 1).ToUpper() + $_.Substring(1)
+                }) -join ' '
+                $config[$_.Name] = $displayName
+            }
+
+        return $config
+    }
+
     function Update-CatalogReadme {
         # Regenerate the hands-on-labs/README.md with statistics and lab listings
         param(
@@ -465,9 +503,10 @@ $Helpers = {
             return
         }
 
-        $domains = $DomainConfig[$Exam]
-        if (-not $domains) {
-            Write-Warning "No domain config for $Exam"
+        $domains = Get-DomainDisplayConfig -Exam $Exam
+
+        if ($domains.Count -eq 0) {
+            Write-Warning "No domain folders found for $Exam"
             return
         }
 

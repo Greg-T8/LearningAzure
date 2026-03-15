@@ -23,7 +23,6 @@ param(
     [ValidateSet('Start', 'Stop', 'End')]
     [string]$Action = 'Start',
 
-    [ValidateSet('AI-102', 'AZ-104', 'WorkflowDevelopment')]
     [string]$Mode,
 
     [string]$Notes
@@ -32,10 +31,8 @@ param(
 # Configuration
 $RepoRoot = Resolve-Path -Path (Join-Path -Path $PSScriptRoot -ChildPath '..\..')
 $StudyLogFile = $null
-$AllExams = @('AI-102', 'AZ-104', 'WorkflowDevelopment')
+$GetActiveExamScript = Join-Path -Path $PSScriptRoot -ChildPath 'Get-ActiveExam.ps1'
 $ExamFolderMap = @{
-    'AI-102' = 'certs\AI-102'
-    'AZ-104' = 'certs\AZ-104'
     'WorkflowDevelopment' = '.assets\workflow-development'
 }
 $ExamLogFileMap = @{
@@ -54,6 +51,9 @@ $Main = {
             if (-not $Mode) {
                 throw "Mode is required when Action is 'Start'."
             }
+
+            # Validate Mode against active exams and WorkflowDevelopment
+            Confirm-ValidMode -Mode $Mode
 
             $folder = Resolve-ExamFolder -Exam $Mode
             $logFileName = Resolve-ExamLogFileName -Exam $Mode
@@ -110,14 +110,14 @@ $Main = {
 
 $Helpers = {
     function Resolve-ExamFolder {
-        # Map an exam name to its workspace folder using the ExamFolderMap
+        # Map an exam name to its workspace folder, defaulting to certs\<exam>
         param([Parameter(Mandatory)] [string]$Exam)
 
         if ($ExamFolderMap.ContainsKey($Exam)) {
             return $ExamFolderMap[$Exam]
         }
 
-        return $Exam
+        return "certs\$Exam"
     }
 
     function Resolve-ExamLogFileName {
@@ -196,7 +196,9 @@ $Helpers = {
 
     function Find-ActiveExam {
         # Search all exam logs for an open session to determine the active exam
-        foreach ($exam in $AllExams) {
+        $allExams = Get-AllExamWithLog
+
+        foreach ($exam in $allExams) {
             $folder = Resolve-ExamFolder -Exam $exam
             $logFileName = Resolve-ExamLogFileName -Exam $exam
             $logFile = Join-Path -Path $RepoRoot -ChildPath "$folder\$logFileName"
@@ -220,6 +222,53 @@ $Helpers = {
         }
 
         return $null
+    }
+
+    function Get-AllExamWithLog {
+        # Discover all exams that have a study or work log file
+        $allExams = [System.Collections.Generic.List[string]]::new()
+
+        # Scan certs/ for exams with StudyLog.md
+        $certsDir = Join-Path -Path $RepoRoot -ChildPath 'certs'
+
+        if (Test-Path -Path $certsDir) {
+            Get-ChildItem -Path $certsDir -Directory |
+                Where-Object { $_.Name -notmatch '^\.' } |
+                ForEach-Object {
+                    $logFile = Join-Path -Path $_.FullName -ChildPath 'StudyLog.md'
+
+                    if (Test-Path -Path $logFile) {
+                        $allExams.Add($_.Name)
+                    }
+                }
+        }
+
+        # Check WorkflowDevelopment
+        $wfFolder = Resolve-ExamFolder -Exam 'WorkflowDevelopment'
+        $wfLogName = Resolve-ExamLogFileName -Exam 'WorkflowDevelopment'
+        $wfLog = Join-Path -Path $RepoRoot -ChildPath "$wfFolder\$wfLogName"
+
+        if (Test-Path -Path $wfLog) {
+            $allExams.Add('WorkflowDevelopment')
+        }
+
+        return $allExams
+    }
+
+    function Confirm-ValidMode {
+        # Validate that the requested mode is an active exam or WorkflowDevelopment
+        param([Parameter(Mandatory)] [string]$Mode)
+
+        if ($Mode -eq 'WorkflowDevelopment') {
+            return
+        }
+
+        $activeExams = & $GetActiveExamScript
+
+        if ($Mode -notin $activeExams) {
+            $validModes = @($activeExams) + @('WorkflowDevelopment')
+            throw "Mode '$Mode' is not active. Valid modes: $($validModes -join ', ')"
+        }
     }
 
     function Add-SessionEntry {

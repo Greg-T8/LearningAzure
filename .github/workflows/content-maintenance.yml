@@ -1,0 +1,50 @@
+# -------------------------------------------------------------------------
+# Program: content-maintenance.yml
+# Description: Automated content maintenance — update trackers, coverage, lab refs, and cleanup
+# Context: Learning Azure - repository content maintenance pipeline
+# Author: Greg Tate
+# -------------------------------------------------------------------------
+
+name: Content Maintenance
+
+# Workflow triggers: daily schedule and manual dispatch
+on:
+  schedule:
+    # Run daily at 8:30am Central time (14:30 UTC)
+    - cron: '30 14 * * *'
+  workflow_dispatch:
+    inputs:
+      reorganize:
+        description: 'Also reorganize practice exam questions'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  maintain:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout repository with full history for accurate date calculations
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Run the controller script with optional reorganize flag
+      - name: Run content maintenance
+        shell: pwsh
+        run: |
+          $params = @{}
+          if ('${{ github.event.inputs.reorganize }}' -eq 'true') {
+            $params['Reorganize'] = $true
+          }
+          ./.assets/scripts/Invoke-ContentMaintenance.ps1 @params
+
+      # Commit and push any changes made by maintenance scripts
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add -A
+          git diff --quiet && git diff --staged --quiet || (git commit -m "🔧 Content maintenance [skip ci]" && git push)

@@ -21,32 +21,61 @@ Program: Update-CoverageTable.ps1
 
 [CmdletBinding(SupportsShouldProcess)]
 param(
-    [Parameter(Mandatory)]
-    [ValidateSet('AI-102', 'AZ-104')]
-    [string]$ExamName
+    [string[]]$ExamName
 )
 
 # Configuration
 $RepoRoot = Resolve-Path -Path (Join-Path -Path $PSScriptRoot -ChildPath '..\..')
 $MainReadme = Join-Path -Path $RepoRoot -ChildPath 'README.md'
-$ExamDir = Join-Path -Path $RepoRoot -ChildPath "certs\$ExamName"
-$ExamReadme = Join-Path -Path $ExamDir -ChildPath 'README.md'
-$PracticeFile = Join-Path -Path $ExamDir -ChildPath 'practice-questions\README.md'
-$LabsDir = Join-Path -Path $ExamDir -ChildPath 'hands-on-labs'
+$GetActiveExamScript = Join-Path -Path $PSScriptRoot -ChildPath 'Get-ActiveExam.ps1'
 
 $Main = {
     . $Helpers
 
-    Confirm-InputFile
-    $questionCounts = Get-QuestionCount
-    $labCounts = Get-LabCount
-    Update-CoverageTable -QuestionCounts $questionCounts -LabCounts $labCounts
-    Update-CoverageDashboard -QuestionCounts $questionCounts -LabCounts $labCounts
+    $exams = Get-TargetExam
+
+    # Update coverage for each exam
+    foreach ($exam in $exams) {
+        Write-Host "`n=== Updating coverage for $exam ===" -ForegroundColor Cyan
+        $ExamName = $exam
+        $ExamDir = Join-Path -Path $RepoRoot -ChildPath "certs\$exam"
+        $ExamReadme = Join-Path -Path $ExamDir -ChildPath 'README.md'
+        $PracticeFile = Join-Path -Path $ExamDir -ChildPath 'practice-questions\README.md'
+        $LabsDir = Join-Path -Path $ExamDir -ChildPath 'hands-on-labs'
+
+        Confirm-InputFile
+        $questionCounts = Get-QuestionCount
+        $labCounts = Get-LabCount
+        Update-CoverageTable -QuestionCounts $questionCounts -LabCounts $labCounts
+        Update-CoverageDashboard -QuestionCounts $questionCounts -LabCounts $labCounts
+    }
+
+    # Update In Progress duration once for all exams
     Update-InProgressDuration
 }
 
 #region HELPER FUNCTIONS
 $Helpers = {
+
+    function Get-TargetExam {
+        # Return exams from parameter or auto-discover active exams from README
+        if ($ExamName) {
+            return $ExamName
+        }
+
+        if (-not (Test-Path -Path $GetActiveExamScript)) {
+            throw "Active exam discovery script not found: $GetActiveExamScript"
+        }
+
+        $discovered = & $GetActiveExamScript
+
+        if (-not $discovered) {
+            throw 'No active exams found in main README.'
+        }
+
+        Write-Verbose "Auto-discovered exams: $($discovered -join ', ')"
+        return $discovered
+    }
 
     function Confirm-InputFile {
         # Validate that required files and directories exist

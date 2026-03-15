@@ -21,34 +21,63 @@ Program: Invoke-PracticeExamReorganizer.ps1
 
 [CmdletBinding(SupportsShouldProcess)]
 param(
-    [Parameter(Mandatory)]
-    [ValidateSet('AI-102', 'AZ-104')]
-    [string]$ExamName
+    [string[]]$ExamName
 )
 
 # Configuration
 $RepoRoot = Resolve-Path -Path (Join-Path -Path $PSScriptRoot -ChildPath '..\..')
-$ExamDir = Join-Path -Path $RepoRoot -ChildPath "certs\$ExamName"
-$ExamReadme = Join-Path -Path $ExamDir -ChildPath 'README.md'
-$PracticeFile = Join-Path -Path $ExamDir -ChildPath 'practice-questions\README.md'
 $CollapseDetailScript = Join-Path -Path $PSScriptRoot -ChildPath 'Invoke-CollapseDetailBlock.ps1'
+$GetActiveExamScript = Join-Path -Path $PSScriptRoot -ChildPath 'Get-ActiveExam.ps1'
 
 $Main = {
     . $Helpers
 
-    Confirm-InputFile
-    $domainStructure = Get-DomainStructure
-    $questionBlocks = Get-QuestionBlock
-    $sortedBlocks = Sort-QuestionBlock -DomainStructure $domainStructure -QuestionBlocks $questionBlocks
-    $output = Build-PracticeFile -DomainStructure $domainStructure -SortedBlocks $sortedBlocks
-    Write-PracticeFile -Content $output
-    Update-CoverageTable -DomainStructure $domainStructure -SortedBlocks $sortedBlocks
+    $exams = Get-TargetExam
+
+    # Reorganize practice questions for each exam
+    foreach ($exam in $exams) {
+        Write-Host "`n=== Reorganizing $exam ===" -ForegroundColor Cyan
+        $ExamName = $exam
+        $ExamDir = Join-Path -Path $RepoRoot -ChildPath "certs\$exam"
+        $ExamReadme = Join-Path -Path $ExamDir -ChildPath 'README.md'
+        $PracticeFile = Join-Path -Path $ExamDir -ChildPath 'practice-questions\README.md'
+
+        Confirm-InputFile
+        $domainStructure = Get-DomainStructure
+        $questionBlocks = Get-QuestionBlock
+        $sortedBlocks = Sort-QuestionBlock -DomainStructure $domainStructure -QuestionBlocks $questionBlocks
+        $output = Build-PracticeFile -DomainStructure $domainStructure -SortedBlocks $sortedBlocks
+        Write-PracticeFile -Content $output
+        Update-CoverageTable -DomainStructure $domainStructure -SortedBlocks $sortedBlocks
+        Show-Summary -OriginalCount $questionBlocks.Count -SortedBlocks $sortedBlocks
+    }
+
+    # Collapse detail blocks once after all exams are processed
     Invoke-CollapseDetailBlock
-    Show-Summary -OriginalCount $questionBlocks.Count -SortedBlocks $sortedBlocks
 }
 
 #region HELPER FUNCTIONS
 $Helpers = {
+
+    function Get-TargetExam {
+        # Return exams from parameter or auto-discover active exams from README
+        if ($ExamName) {
+            return $ExamName
+        }
+
+        if (-not (Test-Path -Path $GetActiveExamScript)) {
+            throw "Active exam discovery script not found: $GetActiveExamScript"
+        }
+
+        $discovered = & $GetActiveExamScript
+
+        if (-not $discovered) {
+            throw 'No active exams found in main README.'
+        }
+
+        Write-Verbose "Auto-discovered exams: $($discovered -join ', ')"
+        return $discovered
+    }
 
     function Confirm-InputFile {
         # Validate that the exam README and practice questions file exist
