@@ -4,8 +4,8 @@ Update the Days column in exam README progress trackers.
 
 .DESCRIPTION
 Scans each exam README for a progress tracker table and updates the Days
-column for in-progress (🚧) items. Calculates days elapsed from the Started
-date to today. Completed (✅) and not-started (🕒) items are skipped.
+column for In Progress items. Calculates days elapsed from the Started
+date to today. Completed and Not Started items are skipped.
 Automatically discovers exam READMEs that contain progress tracker tables.
 
 .CONTEXT
@@ -120,10 +120,10 @@ $Helpers = {
             $modality = $cells[2].Trim()
 
             # Skip completed items
-            if ($status -match '✅') { continue }
+            if ($status -eq 'Completed') { continue }
 
             # Skip non-in-progress items
-            if ($status -notmatch '🚧') { continue }
+            if ($status -ne 'In Progress') { continue }
 
             # Skip if no start date
             if ([string]::IsNullOrWhiteSpace($started)) { continue }
