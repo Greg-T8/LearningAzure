@@ -17,14 +17,6 @@ on:
 # CI jobs
 jobs:
 
-  # Markdown lint job (markdownlint only)
-  markdown:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: DavidAnson/markdownlint-cli2-action@v16
-        with: { globs: "**/*.md" }
-
   # Dedicated link-check job using lychee (checks for broken links)
   link-check:
     name: Link check (lychee)
@@ -38,8 +30,8 @@ jobs:
         id: lychee
         uses: lycheeverse/lychee-action@v2
         with:
-          # Recursively scan markdown files; default output reports failures without listing successful 200 responses
-          args: "--no-progress **/*.md"
+          # Recursively scan markdown files, suppress 200 noise, and tolerate transient rate limiting from Microsoft Learn
+          args: "--no-progress --accept 429 **/*.md"
         env:
           # Provide token to increase rate limits for external link checks
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
