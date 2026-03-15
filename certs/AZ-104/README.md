@@ -117,7 +117,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 |  | Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps | 1 | 1 |
 | Create and configure Azure App Service | Provision an App Service plan | 4 | 1 |
 |  | Configure scaling for an App Service plan | 4 | 1 |
-|  | Create an App Service | 1 | 0 |
+|  | Create an App Service | 2 | 0 |
 |  | Configure certificates and TLS for an App Service | 0 | 0 |
 |  | Map an existing custom DNS name to an App Service | 0 | 0 |
 |  | Configure backup for an App Service | 0 | 0 |
