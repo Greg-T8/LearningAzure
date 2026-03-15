@@ -5,6 +5,7 @@ Compute:
 - (24-26) Provision and manage containers in the Azure portal
 	- 24-26 (Complete)
 - (27-42) Create and configure Azure App Service
+	- 27-31 (In Progress)
 
 Networking - 13/35
 Monitoring - 16/27
