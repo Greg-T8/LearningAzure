@@ -3,8 +3,9 @@
 Update commit statistics in README.md using a diff-based approach.
 
 .DESCRIPTION
-Analyzes git commit history for the last 7 days, assigns each commit to a
-certification category (AZ-104, Other) based on changed file paths, detects
+Analyzes git commit history for the last 7 days, assigns each commit to active
+certification categories (auto-discovered from README via Get-ActiveExam plus
+Other) based on changed file paths, detects
 study session boundaries from commit messages, and calculates hours using a
 session-aware diff model:
   - Matched sessions (start + end): time between consecutive commits within
@@ -34,12 +35,13 @@ param(
 )
 
 #region CONFIGURATION
-$Certifications = @{
-    'AZ-104' = '2026-01-14'
-}
+$RepoRoot = Resolve-Path -Path (Join-Path -Path $PSScriptRoot -ChildPath '..\..')
+$MainReadme = Join-Path -Path $RepoRoot -ChildPath 'README.md'
+$GetActiveExamScript = Join-Path -Path $PSScriptRoot -ChildPath 'Get-ActiveExam.ps1'
 
-$ExamFolders   = @($Certifications.Keys | Sort-Object)
-$TableColumns  = $ExamFolders + @('Other')
+$CertificationStartDates = @{}
+$ExamFolders = @()
+$TableColumns = @('Other')
 
 $WorkdayStartHour  = 8
 $WeekendFlatHours  = 0.5
@@ -51,6 +53,11 @@ $SessionEndPattern   = '^docs\(([^)]+)\): end study session #(\d+)$'
 
 $Main = {
     . $Helpers
+
+    # Discover target exams and load certification start dates from the root README
+    [string[]]$ExamFolders = @(Get-TargetExam)
+    $CertificationStartDates = Get-CertificationStartDateMap -ExamNames $ExamFolders
+    [string[]]$TableColumns = @($ExamFolders) + @('Other')
 
     Write-Host "Generating commit statistics (diff-based)..."
 
@@ -84,6 +91,91 @@ $Main = {
 
 #region HELPER FUNCTIONS
 $Helpers = {
+
+    function Get-TargetExam {
+        # Return active exams discovered from the shared Get-ActiveExam utility
+        if (-not (Test-Path -Path $GetActiveExamScript)) {
+            throw "Active exam discovery script not found: $GetActiveExamScript"
+        }
+
+        $discovered = & $GetActiveExamScript
+
+        if (-not $discovered) {
+            throw 'No active exams found in main README.'
+        }
+
+        return @($discovered | Sort-Object)
+    }
+
+    function Get-CertificationStartDateMap {
+        # Parse certification start dates from the root README certifications table
+        param(
+            [string[]]$ExamNames
+        )
+
+        if (-not (Test-Path -Path $MainReadme)) {
+            throw "Main README not found: $MainReadme"
+        }
+
+        $lineByExam = @{}
+        $lines = Get-Content -Path $MainReadme -Encoding UTF8
+
+        foreach ($line in $lines) {
+            if ($line -notmatch '^\|') { continue }
+            if ($line -match '^\|\s*Exam\s*\|' -or $line -match '^\|\s*[-:]') { continue }
+
+            if ($line -match '\[\*\*([A-Z]+-\d+)\*\*\]') {
+                $lineByExam[$Matches[1]] = $line
+            }
+        }
+
+        $result = @{}
+        foreach ($exam in $ExamNames) {
+            if (-not $lineByExam.ContainsKey($exam)) {
+                throw "Certification row not found for active exam '$exam' in $MainReadme"
+            }
+
+            $cells = $lineByExam[$exam] -split '\|'
+            if ($cells.Count -lt 5) {
+                throw "Malformed certifications table row for exam '$exam'"
+            }
+
+            $durationCell = $cells[4].Trim()
+            if ($durationCell -notmatch '(\d{1,2}/\d{1,2}/\d{2,4})') {
+                throw "Could not parse start date for exam '$exam' from duration '$durationCell'"
+            }
+
+            $startDate = Get-NormalizedDateString -DateText $Matches[1]
+            $result[$exam] = $startDate
+        }
+
+        return $result
+    }
+
+    function Get-NormalizedDateString {
+        # Normalize a certification start date to yyyy-MM-dd for consistent comparisons
+        param(
+            [Parameter(Mandatory)]
+            [string]$DateText
+        )
+
+        [datetime]$parsedDate = [datetime]::MinValue
+        [string[]]$dateFormats = @(
+            'M/d/yy',
+            'M/d/yyyy',
+            'MM/dd/yy',
+            'MM/dd/yyyy'
+        )
+
+        $culture = [System.Globalization.CultureInfo]::InvariantCulture
+        $styles = [System.Globalization.DateTimeStyles]::None
+
+        if (-not [datetime]::TryParseExact($DateText, $dateFormats, $culture, $styles, [ref]$parsedDate)) {
+            throw "Could not parse certification start date '$DateText'"
+        }
+
+        return $parsedDate.ToString('yyyy-MM-dd')
+    }
 
     function Get-ClassifiedCategory {
         # Determine category for a commit based on its changed file paths
@@ -350,14 +442,14 @@ $Helpers = {
         )
 
         if ($Hours -eq 0)     { return '' }
-        if ($Hours -lt 1.0)   { return [char]0x1F7E1 }   # yellow circle
-        if ($Hours -le 2.0)   { return [char]0x1F7E2 }   # green circle
-        return [char]0x1F7E3                               # purple circle
+        if ($Hours -lt 1.0)   { return '🟡' }
+        if ($Hours -le 2.0)   { return '🟢' }
+        return '🟣'
     }
 
     function Get-RunningTotal {
         # Calculate running totals since each certification's start date
-        $earliestStart = ($Certifications.Values | Sort-Object | Select-Object -First 1)
+        $earliestStart = ($CertificationStartDates.Values | Sort-Object | Select-Object -First 1)
         $allCommits = Get-CommitList -SinceDate $earliestStart
 
         # Find study sessions from the full commit history
@@ -384,8 +476,8 @@ $Helpers = {
             foreach ($category in $daily.Keys) {
                 $catHours = $daily[$category]
 
-                if ($Certifications.ContainsKey($category)) {
-                    $certStart = $Certifications[$category]
+                if ($CertificationStartDates.ContainsKey($category)) {
+                    $certStart = $CertificationStartDates[$category]
 
                     # Only count hours from dates on or after the cert start
                     if ($dateStr -ge $certStart) {
@@ -520,10 +612,7 @@ $Helpers = {
         $table += "| ***Running Total*** | $runningStr | ***$($runningGrand.ToString('0.0'))h*** |`n"
 
         # Add legend and metadata
-        $table += "`n*Activity Levels: " +
-            [char]0x1F7E1 + " Low (< 1hr) | " +
-            [char]0x1F7E2 + " Medium (1-2hrs) | " +
-            [char]0x1F7E3 + " High (> 2hrs)*`n"
+        $table += "`n*Activity Levels: 🟡 Low (< 1hr) | 🟢 Medium (1-2hrs) | 🟣 High (> 2hrs)*`n"
 
         $table += "`n*Other = Lab workflow and automation design, content structure and development*  `n"
 
