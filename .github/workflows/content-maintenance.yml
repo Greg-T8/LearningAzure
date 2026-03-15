@@ -30,6 +30,8 @@ jobs:
       # Checkout repository with full history for accurate date calculations
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       # Run the controller script with optional reorganize flag
       - name: Run content maintenance
