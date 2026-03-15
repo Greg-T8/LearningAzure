@@ -281,4 +281,4 @@ terraform destroy
 - [Azure Monitor Metrics Batch API Reference](https://learn.microsoft.com/en-us/rest/api/monitor/metrics-batch)
 - [Azure Monitor Metrics Overview](https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/data-platform-metrics)
 - [Multi-dimensional Metrics](https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/metrics-custom-overview#multi-dimensional-metrics)
-- [Azure Monitor REST API Throttling](https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/metrics-throttling)
+- Azure Monitor REST API Throttling

@@ -6,7 +6,7 @@
 
 ## Introduction
 
-[Module Reference](https://learn.microsoft.com/training/modules/get-started-ai-powered-information-extraction-microsoft-foundry/)
+Module Reference
 
 **Overview**
 
@@ -64,7 +64,7 @@
 
 ## Azure AI services for information extraction
 
-[Module Reference](https://learn.microsoft.com/training/modules/get-started-ai-powered-information-extraction-microsoft-foundry/azure-ai-services-information-extraction)
+[Module Reference](link removedazure-ai-services-information-extraction)
 
 **Overview**
 
@@ -147,7 +147,7 @@
 
 ## Extract information with Azure Vision
 
-[Module Reference](https://learn.microsoft.com/training/modules/get-started-ai-powered-information-extraction-microsoft-foundry/)
+Module Reference
 
 **Azure Vision Image Analysis – Use Cases**
 
@@ -226,7 +226,7 @@
 
 ## Extract multimodal information with Azure Content Understanding
 
-[Module Reference](https://learn.microsoft.com/training/modules/extract-multimodal-information-azure-content-understanding)
+Module Reference
 
 **Overview**
 
@@ -313,7 +313,7 @@
 
 ## Extract information from forms with Azure Document Intelligence
 
-[Module Reference](https://learn.microsoft.com/training/modules/extract-information-from-forms-with-azure-document-intelligence/)
+Module Reference
 
 **Azure Document Intelligence Overview**
 

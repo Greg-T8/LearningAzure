@@ -264,5 +264,5 @@ az group delete --name ai102-generative-ai-dalle-image-gen-tf --yes --no-wait
 - [Image Generation API Reference](https://learn.microsoft.com/azure/ai-services/openai/reference#image-generation)
 - [Azure AI Foundry Portal](https://ai.azure.com)
 - [DALL-E 3 Model Overview](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#dall-e-models)
-- [Responsible AI for Image Generation](https://learn.microsoft.com/azure/ai-services/openai/concepts/dall-e-safety)
+- Responsible AI for Image Generation
 - [Azure OpenAI Service Quotas and Limits](https://learn.microsoft.com/azure/ai-services/openai/quotas-limits)

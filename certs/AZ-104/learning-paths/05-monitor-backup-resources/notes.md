@@ -555,7 +555,7 @@ Azure Backup supports backing up the following resources:
 
 ## Back up an Azure virtual machine by using Azure Backup
 
-[Module Reference](https://learn.microsoft.com/en-us/training/modules/protect-virtual-machines-by-using-azure-backup/)
+Module Reference
 
 **Overview**
 
@@ -842,7 +842,7 @@ az backup protection backup-now \
 
 ## Restore virtual machine data
 
-[Module Reference](https://learn.microsoft.com/en-us/training/modules/protect-virtual-machines-using-azure-backup/restore-virtual-machine-data)
+Module Reference
 
 **Overview**
 
@@ -979,7 +979,7 @@ az backup protection backup-now \
 
 ## Exercise - Restore Azure virtual machine data
 
-[Module Reference](https://learn.microsoft.com/en-us/training/modules/protect-your-virtual-machines-by-using-azure-backup/)
+Module Reference
 
 **Scenario Overview**
 

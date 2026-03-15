@@ -10,7 +10,7 @@
 
 ## Understand speech recognition and synthesis
 
-[Module Reference](https://learn.microsoft.com/training/modules/get-started-speech-microsoft-foundry/)
+Module Reference
 
 **Speech Recognition**
 
@@ -74,7 +74,7 @@
 
 ## Get started with speech on Azure
 
-[Module Reference](https://learn.microsoft.com/training/modules/get-started-speech-microsoft-foundry/)
+Module Reference
 
 **Azure Speech Service Overview**
 
@@ -191,7 +191,7 @@
 
 ## Use Azure Speech
 
-[Module Reference](https://learn.microsoft.com/training/modules/get-started-speech-microsoft-foundry/use-azure-speech)
+[Module Reference](link removeduse-azure-speech)
 
 **Ways to use Azure Speech**
 

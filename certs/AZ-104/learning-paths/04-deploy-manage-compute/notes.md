@@ -583,7 +583,7 @@ New-AzVm `
 
 ## Manage the availability of your Azure VMs
 
-[Module Reference](https://learn.microsoft.com/training/modules/manage-availability-azure-vms/)
+Module Reference
 
 **Availability**
 
@@ -715,7 +715,7 @@ New-AzVm `
 
 ## Back up your virtual machines
 
-[Module Reference](https://learn.microsoft.com/training/modules/intro-to-azure-virtual-machines/backup-your-virtual-machines)
+Module Reference
 
 **Overview**
 
@@ -806,7 +806,7 @@ New-AzVm `
 
 ## Plan for maintenance and downtime
 
-[Module Reference](https://learn.microsoft.com/training/modules/configure-virtual-machine-availability/plan-for-maintenance-and-downtime)
+Module Reference
 
 **Maintenance Planning Overview**
 
@@ -875,7 +875,7 @@ New-AzVm `
 
 ## Create availability sets
 
-[Module Reference](https://learn.microsoft.com/training/modules/configure-virtual-machine-availability/create-availability-sets)
+Module Reference
 
 **Overview**
 
@@ -941,7 +941,7 @@ New-AzVm `
 
 ## Review update domains and fault domains
 
-[Module Reference](https://learn.microsoft.com/training/modules/availability-virtual-machines/)
+Module Reference
 
 **Azure Virtual Machine Availability Sets**
 
@@ -1011,7 +1011,7 @@ New-AzVm `
 
 ## Review availability zones
 
-[Module Reference](https://learn.microsoft.com/training/modules/configure-virtual-machine-availability/review-availability-zones)
+Module Reference
 
 **Availability Zones Overview**
 
@@ -1075,7 +1075,7 @@ New-AzVm `
 
 ## Compare vertical and horizontal scaling
 
-[Module Reference](https://learn.microsoft.com/training/modules/configure-virtual-machine-availability/compare-vertical-horizontal-scaling)
+Module Reference
 
 **Scalability Overview**
 
@@ -1169,7 +1169,7 @@ New-AzVm `
 
 ## Create Virtual Machine Scale Sets
 
-[Module Reference](https://learn.microsoft.com/training/modules/configure-virtual-machine-availability/create-virtual-machine-scale-sets)
+Module Reference
 
 **Overview**
 
@@ -1241,7 +1241,7 @@ New-AzVm `
 
 ## Implement autoscale
 
-[Module Reference](https://learn.microsoft.com/training/modules/configure-virtual-machine-availability/implement-autoscale)
+Module Reference
 
 **Overview**
 
@@ -1372,7 +1372,7 @@ New-AzVm `
 
 ## Implement Azure App Service plans
 
-[Module Reference](https://learn.microsoft.com/training/modules/configure-azure-app-service-plans/)
+Module Reference
 
 **What an App Service plan is**
 
@@ -1445,7 +1445,7 @@ Create a **new App Service plan** when:
 
 ## Determine Azure App Service plan pricing
 
-[Module Reference](https://learn.microsoft.com/training/modules/configure-azure-app-service-plans/)
+Module Reference
 
 **Overview**
 
@@ -1690,7 +1690,7 @@ Create a **new App Service plan** when:
 
 ## Configure Azure App Service autoscale
 
-[Module Reference](https://learn.microsoft.com/training/modules/configure-azure-app-service-plans/)
+Module Reference
 
 **Autoscale Overview**
 
@@ -1870,7 +1870,7 @@ Create a **new App Service plan** when:
 
 ## Create an app with App Service
 
-[Module Reference](https://learn.microsoft.com/training/modules/create-app-service-app/)
+Module Reference
 
 **App Service App Types**
 
@@ -1965,7 +1965,7 @@ Create a **new App Service plan** when:
 
 ## Explore continuous integration and deployment
 
-[Module Reference](https://learn.microsoft.com/training/modules/configure-azure-app-service/)
+Module Reference
 
 **Overview**
 
@@ -2046,7 +2046,7 @@ Create a **new App Service plan** when:
 
 ## Create deployment slots
 
-[Module Reference](https://learn.microsoft.com/training/modules/configure-azure-app-service/create-deployment-slots)
+[Module Reference](link removedcreate-deployment-slots)
 
 **Overview**
 
@@ -2099,7 +2099,7 @@ Create a **new App Service plan** when:
 
 ## Add deployment slots
 
-[Module Reference](https://learn.microsoft.com/training/modules/configure-azure-app-service/)
+Module Reference
 
 **Overview**
 
@@ -2168,7 +2168,7 @@ Deployment slot settings fall into three categories:
 
 ## Secure your App Service app
 
-[Module Reference](https://learn.microsoft.com/training/modules/secure-your-app-service-app/)
+Module Reference
 
 **Overview**
 
@@ -2234,7 +2234,7 @@ Deployment slot settings fall into three categories:
 
 ## Create custom domain names
 
-[Module Reference](https://learn.microsoft.com/training/modules/configure-azure-app-service/)
+Module Reference
 
 **Default Domain Behavior**
 
@@ -2316,7 +2316,7 @@ Deployment slot settings fall into three categories:
 
 ## Back up and restore your App Service app
 
-[Module Reference](https://learn.microsoft.com/training/modules/backup-restore-azure-app-service/)
+Module Reference
 
 **Backup and Restore Overview**
 
@@ -2402,7 +2402,7 @@ Deployment slot settings fall into three categories:
 
 ## Use Azure Application Insights
 
-[Module Reference](https://learn.microsoft.com/training/modules/configure-azure-app-service/)
+Module Reference
 
 **Overview**
 
@@ -2488,7 +2488,7 @@ Deployment slot settings fall into three categories:
 
 ## Exercise: Implement Web Apps
 
-[Module Reference](https://learn.microsoft.com/training/modules/configure-azure-app-service/)
+Module Reference
 
 **Lab Scenario**
 
@@ -2534,7 +2534,7 @@ Deployment slot settings fall into three categories:
 
 ## Compare containers to virtual machines
 
-[Module Reference](https://learn.microsoft.com/training/modules/compare-containers-virtual-machines/)
+Module Reference
 
 **Overview**
 
@@ -2644,7 +2644,7 @@ Deployment slot settings fall into three categories:
 
 ## Implement container groups
 
-[Module Reference](https://learn.microsoft.com/training/modules/configure-azure-container-instances/implement-container-groups)
+Module Reference
 
 **Container Group Overview**
 

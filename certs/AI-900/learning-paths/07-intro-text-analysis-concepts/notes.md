@@ -11,7 +11,7 @@
 
 ## Introduction to text analysis concepts
 
-[Module Reference](https://learn.microsoft.com/training/modules/introduction-text-analysis/)
+Module Reference
 
 **Overview**
 
@@ -258,7 +258,7 @@
 
 ## Semantic language models
 
-[Module Reference](https://learn.microsoft.com/training/modules/introduction-text-analysis/semantic-language-models)
+[Module Reference](link removedsemantic-language-models)
 
 **Overview**
 

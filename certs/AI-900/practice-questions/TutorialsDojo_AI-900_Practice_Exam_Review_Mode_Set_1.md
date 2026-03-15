@@ -74,8 +74,8 @@ For AI-900, Azure AI Document Intelligence is about **document OCR and structure
 **References**
 
 * [https://learn.microsoft.com/azure/ai-services/document-intelligence/overview](https://learn.microsoft.com/azure/ai-services/document-intelligence/overview)
-* [https://learn.microsoft.com/azure/ai-services/document-intelligence/prebuilt/receipts](https://learn.microsoft.com/azure/ai-services/document-intelligence/prebuilt/receipts)
-* [https://learn.microsoft.com/azure/ai-services/document-intelligence/prebuilt/forms](https://learn.microsoft.com/azure/ai-services/document-intelligence/prebuilt/forms)
+* link removed
+* link removed
 
 <img src='.img/2026-02-03-05-03-00.png' width=700>
 
@@ -140,7 +140,7 @@ For Azure exams:
 **References**
 
 * [https://learn.microsoft.com/azure/ai-services/computer-vision/overview](https://learn.microsoft.com/azure/ai-services/computer-vision/overview)
-* [https://learn.microsoft.com/azure/ai-services/face/overview](https://learn.microsoft.com/azure/ai-services/face/overview)
+* link removed
 * [https://learn.microsoft.com/training/modules/analyze-images-computer-vision/](https://learn.microsoft.com/training/modules/analyze-images-computer-vision/)
 * [https://learn.microsoft.com/training/modules/detect-analyze-faces/](https://learn.microsoft.com/training/modules/detect-analyze-faces/)
 
@@ -174,8 +174,8 @@ On Microsoft exams, **clustering = grouping similar items**. Do not assume clust
 
 **References**
 
-* [https://learn.microsoft.com/en-us/training/modules/describe-machine-learning-workloads/](https://learn.microsoft.com/en-us/training/modules/describe-machine-learning-workloads/)
-* [https://learn.microsoft.com/en-us/training/modules/describe-artificial-intelligence-workloads/](https://learn.microsoft.com/en-us/training/modules/describe-artificial-intelligence-workloads/)
+* link removed
+* link removed
 
 </details>
 
@@ -204,9 +204,9 @@ If the scenario emphasizes **unusual, abnormal, or unexpected patterns**, the co
 <img src='.img/2026-02-03-05-24-58.png' width=700>  
 
 **References**
-[https://learn.microsoft.com/en-us/training/modules/describe-machine-learning/](https://learn.microsoft.com/en-us/training/modules/describe-machine-learning/)
+link removed
 [https://learn.microsoft.com/en-us/training/modules/fundamentals-machine-learning/](https://learn.microsoft.com/en-us/training/modules/fundamentals-machine-learning/)
-[https://learn.microsoft.com/en-us/azure/architecture/data-guide/scenarios/anomaly-detection](https://learn.microsoft.com/en-us/azure/architecture/data-guide/scenarios/anomaly-detection)
+link removed
 
 </details>
 
@@ -333,7 +333,7 @@ If the prompt says **“create/generate additional features,”** the answer is 
 * [Feature engineering](https://learn.microsoft.com/en-us/azure/machine-learning/concept-automated-ml?view=azureml-api-2#feature-engineering)
 * [https://learn.microsoft.com/en-us/azure/architecture/data-science-process/create-features](https://learn.microsoft.com/en-us/azure/architecture/data-science-process/create-features)
 * [https://learn.microsoft.com/en-us/azure/machine-learning/concept-automated-ml#featurization](https://learn.microsoft.com/en-us/azure/machine-learning/concept-automated-ml#featurization)
-* [https://learn.microsoft.com/en-us/training/modules/introduction-to-azure-machine-learning/](https://learn.microsoft.com/en-us/training/modules/introduction-to-azure-machine-learning/)
+* link removed
 
 </details>
 

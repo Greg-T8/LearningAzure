@@ -12,7 +12,7 @@
 
 ## Computer vision tasks and techniques
 
-[Module Reference](https://learn.microsoft.com/training/modules/introduction-computer-vision-concepts/)
+Module Reference
 
 **Computer Vision Overview**
 
@@ -182,7 +182,7 @@
 
 ## Convolutional neural networks
 
-[Module Reference](https://learn.microsoft.com/training/modules/introduction-computer-vision-concepts/)
+Module Reference
 
 **Overview**
 
@@ -249,7 +249,7 @@
 
 ## Vision transformers and multimodal models
 
-[Module Reference](https://learn.microsoft.com/training/modules/introduction-computer-vision-concepts/)
+Module Reference
 
 **CNNs in Computer Vision**
 

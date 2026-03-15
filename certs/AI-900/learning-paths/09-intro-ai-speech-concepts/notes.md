@@ -11,7 +11,7 @@
 
 ## Introduction to AI Speech Concepts
 
-[Module Reference](https://learn.microsoft.com/training/modules/introduction-ai-speech-concepts/)
+Module Reference
 
 **Overview**
 
@@ -300,7 +300,7 @@
 
 ## Speech synthesis
 
-[Module Reference](https://learn.microsoft.com/training/modules/introduction-to-ai-speech-concepts/)
+Module Reference
 
 **Overview**
 

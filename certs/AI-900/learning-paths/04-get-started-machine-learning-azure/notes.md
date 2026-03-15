@@ -13,7 +13,7 @@
 
 ## Introduction
 
-[Module Reference](https://learn.microsoft.com/training/modules/get-started-with-machine-learning-in-azure/)
+Module Reference
 
 **Purpose of the Module**
 
@@ -76,7 +76,7 @@
 
 ## Define the problem
 
-[Module Reference](https://learn.microsoft.com/training/modules/get-started-with-machine-learning-in-azure/)
+Module Reference
 
 **Purpose of defining the problem**
 
@@ -146,7 +146,7 @@
 
 ## Get and prepare data
 
-[Module Reference](https://learn.microsoft.com/training/modules/get-started-machine-learning-azure/)
+Module Reference
 
 **Overview**
 
@@ -243,7 +243,7 @@
 
 ## Train the model
 
-[Module Reference](https://learn.microsoft.com/training/modules/get-started-machine-learning-azure/)
+Module Reference
 
 **Factors that influence which training service to use**
 
@@ -330,7 +330,7 @@
 
 ## Use Azure Machine Learning studio
 
-[Module Reference](https://learn.microsoft.com/training/modules/get-started-machine-learning-azure/)
+Module Reference
 
 **Azure Machine Learning studio overview**
 
@@ -438,7 +438,7 @@
 
 ## Integrate a model
 
-[Module Reference](https://learn.microsoft.com/training/modules/get-started-machine-learning-azure/)
+Module Reference
 
 **Deploy a model to an endpoint**
 

@@ -14,7 +14,7 @@
 
 ## Machine learning models
 
-[Module Reference](https://learn.microsoft.com/training/modules/intro-to-machine-learning-concepts/)
+Module Reference
 
 **Definition of a Machine Learning Model**
 
@@ -94,7 +94,7 @@
 
 ## Types of machine learning model
 
-[Module Reference](https://learn.microsoft.com/training/modules/introduction-machine-learning-concepts/)
+Module Reference
 
 **Overview**
 
@@ -190,7 +190,7 @@
 
 ## Regression
 
-[Module Reference](https://learn.microsoft.com/training/modules/introduction-to-machine-learning-concepts/)
+Module Reference
 
 **What Regression Is**
 
@@ -284,7 +284,7 @@
 
 ## Binary classification
 
-[Module Reference](https://learn.microsoft.com/training/modules/introduction-to-machine-learning-concepts/)
+Module Reference
 
 **Overview**
 
@@ -422,7 +422,7 @@
 
 ## Multiclass classification
 
-[Module Reference](https://learn.microsoft.com/training/modules/introduction-to-machine-learning-concepts/)
+Module Reference
 
 **Definition**
 
@@ -619,7 +619,7 @@
 
 ## Deep learning
 
-[Module Reference](https://learn.microsoft.com/training/modules/introduction-to-machine-learning-concepts/)
+Module Reference
 
 **Overview**
 

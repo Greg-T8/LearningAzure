@@ -347,7 +347,7 @@ The capability host in a standard setup references connections to each of these 
 ## Additional Resources
 
 - [Quickstart: Create an agent](https://learn.microsoft.com/azure/ai-foundry/agents/quickstart)
-- [How file search works in Azure AI Agent Service](https://learn.microsoft.com/azure/ai-foundry/agents/concepts/file-search)
+- How file search works in Azure AI Agent Service
 - [Standard agent setup with BYO resources](https://learn.microsoft.com/azure/ai-foundry/agents/concepts/standard-agent-setup)
 - [Azure AI Agent Service SDK reference](https://learn.microsoft.com/python/api/overview/azure/ai-projects-readme)
 - [Use Terraform to manage Microsoft Foundry resources](https://learn.microsoft.com/azure/ai-foundry/how-to/create-resource-terraform)

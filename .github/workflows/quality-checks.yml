@@ -31,7 +31,7 @@ jobs:
         uses: lycheeverse/lychee-action@v2
         with:
           # Recursively scan markdown files, suppress 200 noise, and tolerate transient rate limiting from Microsoft Learn
-          args: "--no-progress --accept 429 **/*.md"
+          args: "--no-progress --accept 200,429 **/*.md"
         env:
           # Provide token to increase rate limits for external link checks
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

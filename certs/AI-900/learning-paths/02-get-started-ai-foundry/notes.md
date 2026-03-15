@@ -123,7 +123,7 @@
 
 ## Components of an AI application
 
-[Module Reference](https://learn.microsoft.com/training/modules/introduction-to-ai-in-azure/)
+Module Reference
 
 **Overview**
 
@@ -216,7 +216,7 @@
 
 ## Microsoft Foundry for AI
 
-[Module Reference](https://learn.microsoft.com/training/modules/get-started-ai-microsoft-foundry/)
+Module Reference
 
 **Overview**
 
@@ -338,7 +338,7 @@
 
 ## Get started with Foundry
 
-[Module Reference](https://learn.microsoft.com/training/modules/get-started-ai-foundry/)
+Module Reference
 
 **Foundry Project Basics**
 
@@ -432,7 +432,7 @@
 
 ## Understand Azure
 
-[Module Reference](https://learn.microsoft.com/training/modules/get-started-with-ai-in-microsoft-foundry/)
+Module Reference
 
 **What is Microsoft Azure**
 

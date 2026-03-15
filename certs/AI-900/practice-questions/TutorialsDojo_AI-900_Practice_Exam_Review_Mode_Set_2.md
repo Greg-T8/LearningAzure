@@ -256,7 +256,7 @@ If the task involves **converting spoken audio into text**, even for non-English
 
 * [https://learn.microsoft.com/en-us/azure/architecture/data-guide/technology-choices/natural-language-processing](https://learn.microsoft.com/en-us/azure/architecture/data-guide/technology-choices/natural-language-processing)
 * [https://learn.microsoft.com/en-us/azure/ai-services/language-service/overview](https://learn.microsoft.com/en-us/azure/ai-services/language-service/overview)
-* [https://medium.com/@hitesh.hinduja/navigating-azure-ai-an-extensive-guide-to-language-vision-speech-decision-and-azure-open-ai-3da656668591](https://medium.com/@hitesh.hinduja/navigating-azure-ai-an-extensive-guide-to-language-vision-speech-decision-and-azure-open-ai-3da656668591)
+* External blog reference removed
 
 Yes. In this context, **Azure AI Speech translation is a separate capability from the Azure AI Translator service**, even though they are closely related and often confused on exams.
 

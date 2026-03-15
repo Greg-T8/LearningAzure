@@ -533,7 +533,7 @@
 
 ## Secure storage endpoints
 
-[Module Reference](https://learn.microsoft.com/training/modules/configure-storage-accounts/secure-storage-endpoints)
+Module Reference
 
 **Firewall and Virtual Network Settings**
 
@@ -578,7 +578,7 @@
 
 ## Implement Azure Blob Storage
 
-[Module Reference](https://learn.microsoft.com/training/modules/configure-azure-blob-storage/)
+Module Reference
 
 **Overview**
 
@@ -634,7 +634,7 @@
 
 ## Create blob containers
 
-[Module Reference](https://learn.microsoft.com/training/modules/configure-azure-blob-storage/)
+Module Reference
 
 **Containers and Blobs Overview**
 
@@ -683,7 +683,7 @@
 
 ## Assign blob access tiers
 
-[Module Reference](https://learn.microsoft.com/training/modules/configure-azure-blob-storage/assign-blob-access-tiers)
+[Module Reference](link removedassign-blob-access-tiers)
 
 **Overview**
 
@@ -766,7 +766,7 @@
 
 ## Add blob lifecycle management rules
 
-[Module Reference](https://learn.microsoft.com/training/modules/configure-azure-blob-storage/add-blob-lifecycle-management-rules)
+[Module Reference](link removedadd-blob-lifecycle-management-rules)
 
 **Overview**
 
@@ -847,7 +847,7 @@
 
 ## Determine blob object replication
 
-[Module Reference](https://learn.microsoft.com/training/modules/configure-azure-blob-storage/)
+Module Reference
 
 **Overview**
 
@@ -925,7 +925,7 @@
 
 ## Manage blobs
 
-[Module Reference](https://learn.microsoft.com/training/modules/configure-azure-blob-storage/manage-blobs)
+[Module Reference](link removedmanage-blobs)
 
 **Blob Types**
 
@@ -1046,7 +1046,7 @@
 
 ## Review Azure Storage security strategies
 
-[Module Reference](https://learn.microsoft.com/training/modules/configure-azure-storage-security/)
+Module Reference
 
 **Azure Storage Security Overview**
 
@@ -1138,7 +1138,7 @@
 
 ## Create shared access signatures
 
-[Module Reference](https://learn.microsoft.com/training/modules/configure-azure-storage-security/)
+Module Reference
 
 **Shared access signature (SAS) overview**
 
@@ -1254,7 +1254,7 @@
 
 ## Identify URI and SAS parameters
 
-[Module Reference](https://learn.microsoft.com/training/modules/configure-azure-storage-security/)
+Module Reference
 
 **Overview**
 
@@ -1351,7 +1351,7 @@
 
 ## Determine Azure Storage encryption
 
-[Module Reference](https://learn.microsoft.com/training/modules/configure-azure-storage-security/)
+Module Reference
 
 **Azure Storage Encryption Overview**
 
@@ -1563,7 +1563,7 @@
 
 ## Compare storage for file shares and blob data
 
-[Module Reference](https://learn.microsoft.com/training/modules/compare-storage-file-shares-blob-data/)
+Module Reference
 
 **Azure Files Overview**
 
@@ -1722,7 +1722,7 @@
 
 ## Create file share snapshots
 
-[Module Reference](https://learn.microsoft.com/training/modules/configure-azure-files/)
+Module Reference
 
 **Overview**
 
@@ -1901,7 +1901,7 @@
 
 ## Consider Azure File Sync
 
-[Module Reference](https://learn.microsoft.com/training/modules/configure-azure-files/consider-azure-file-sync)
+[Module Reference](link removedconsider-azure-file-sync)
 
 **Overview**
 

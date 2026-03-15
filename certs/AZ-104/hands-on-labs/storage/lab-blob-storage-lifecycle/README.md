@@ -370,7 +370,7 @@ This statement is incorrect for two reasons:
 
 ## Related Objectives
 
-- [AZ-104: Configure Azure Blob Storage — Manage the data lifecycle](https://learn.microsoft.com/en-us/training/modules/configure-blob-storage/8-determine-blob-storage-lifecycle-rules)
+- AZ-104: Configure Azure Blob Storage — Manage the data lifecycle
 - [AZ-104: Implement and manage storage — Configure blob lifecycle management](https://learn.microsoft.com/en-us/certifications/resources/study-guides/az-104#implement-and-manage-storage-15-20)
 
 ---

@@ -128,7 +128,7 @@
 
 ## Create subnets
 
-[Module Reference](https://learn.microsoft.com/training/modules/configure-virtual-networks/create-subnets)
+Module Reference
 
 **Overview**
 
@@ -200,7 +200,7 @@
 
 ## Create virtual networks
 
-[Module Reference](https://learn.microsoft.com/en-us/training/modules/configure-virtual-networks/create-virtual-networks)
+Module Reference
 
 **Overview**
 
@@ -249,7 +249,7 @@
 
 ## Plan IP addressing
 
-[Module Reference](https://learn.microsoft.com/training/modules/configure-virtual-networks/plan-ip-addressing)
+Module Reference
 
 **Overview**
 
@@ -313,7 +313,7 @@
 
 ## Create public IP addressing
 
-[Module Reference](https://learn.microsoft.com/training/modules/configure-virtual-networks/create-public-ip-addressing)
+Module Reference
 
 **Overview**
 
@@ -371,7 +371,7 @@
 
 ## Associate public IP addresses
 
-[Module Reference](https://learn.microsoft.com/training/modules/configure-virtual-networks/associate-public-ip-addresses)
+Module Reference
 
 **Overview**
 
@@ -440,7 +440,7 @@
 
 ## Allocate or assign private IP addresses
 
-[Module Reference](https://learn.microsoft.com/training/modules/configure-virtual-networks/allocate-or-assign-private-ip-addresses)
+Module Reference
 
 **Overview**
 
@@ -1413,7 +1413,7 @@ Azure DNS is built on **Azure Resource Manager**, providing:
 
 ## Determine Azure Virtual Network peering uses
 
-[Module Reference](https://learn.microsoft.com/training/modules/configure-azure-virtual-network-peering/)
+Module Reference
 
 **Azure Virtual Network Peering Overview**
 
@@ -1487,7 +1487,7 @@ Azure DNS is built on **Azure Resource Manager**, providing:
 
 ## Determine gateway transit and connectivity
 
-[Module Reference](https://learn.microsoft.com/training/modules/configure-azure-virtual-network-peering/)
+Module Reference
 
 **Gateway Transit Overview**
 
@@ -1624,7 +1624,7 @@ When VPN gateway transit is allowed, the gateway can:
 
 ## Extend peering with user-defined routes and service chaining
 
-[Module Reference](https://learn.microsoft.com/training/modules/configure-azure-virtual-network-peering/)
+Module Reference
 
 **Nontransitive Virtual Network Peering**
 
@@ -1696,7 +1696,7 @@ When VPN gateway transit is allowed, the gateway can:
 
 ## Exercise - Implement Intersite Connectivity
 
-[Module Reference](https://learn.microsoft.com/training/modules/configure-azure-virtual-network-peering/)
+Module Reference
 
 **Lab Scenario**
 
@@ -1900,7 +1900,7 @@ Azure creates additional system routes when these capabilities are enabled:
 
 ## Exercise - Create custom routes
 
-[Module Reference](https://learn.microsoft.com/training/modules/manage-control-traffic-flow-with-routes/)
+Module Reference
 
 **Scenario and Goal**
 
@@ -2017,7 +2017,7 @@ Azure creates additional system routes when these capabilities are enabled:
 
 ## What is an NVA?
 
-[Module Reference](https://learn.microsoft.com/training/modules/manage-control-traffic-flow-azure-deployment-routes/)
+Module Reference
 
 **Definition**
 
@@ -2127,7 +2127,7 @@ Azure creates additional system routes when these capabilities are enabled:
 
 ## Exercise - Create an NVA and virtual machines
 
-[Module Reference](https://learn.microsoft.com/training/modules/manage-control-traffic-flow-azure-deployment-routes/)
+Module Reference
 
 **Purpose of the Exercise**
 
@@ -2235,7 +2235,7 @@ Azure creates additional system routes when these capabilities are enabled:
 
 ## Exercise - Route traffic through the NVA
 
-[Module Reference](https://learn.microsoft.com/training/modules/manage-control-traffic-flow-with-routes/)
+Module Reference
 
 **Exercise Overview**
 
@@ -2474,7 +2474,7 @@ Azure creates additional system routes when these capabilities are enabled:
 
 ## How Azure Load Balancer works
 
-[Module Reference](https://learn.microsoft.com/training/modules/intro-to-azure-load-balancer/how-azure-load-balancer-works)
+Module Reference
 
 **Azure Load Balancer Overview**
 
@@ -2638,7 +2638,7 @@ Azure creates additional system routes when these capabilities are enabled:
 
 ## When to use Azure Load Balancer
 
-[Module Reference](https://learn.microsoft.com/training/modules/intro-to-azure-load-balancer/when-to-use-azure-load-balancer)
+Module Reference
 
 **When to Use Azure Load Balancer**
 
@@ -2758,7 +2758,7 @@ Azure creates additional system routes when these capabilities are enabled:
 
 ## How Azure Application Gateway works
 
-[Module Reference](https://learn.microsoft.com/training/modules/introduction-to-azure-application-gateway/)
+Module Reference
 
 <img src='.img/2026-01-21-03-25-07.png' width=700>
 
@@ -2994,7 +2994,7 @@ Azure creates additional system routes when these capabilities are enabled:
 
 ## What is Azure Network Watcher?
 
-[Module Reference](https://learn.microsoft.com/training/modules/introduction-to-azure-network-watcher/)
+Module Reference
 
 **Overview**
 
@@ -3120,7 +3120,7 @@ Azure creates additional system routes when these capabilities are enabled:
 
 ## How Azure Network Watcher works
 
-[Module Reference](https://learn.microsoft.com/training/modules/introduction-to-azure-network-watcher/how-azure-network-watcher-works)
+[Module Reference](link removedhow-azure-network-watcher-works)
 
 **Availability and Access**
 
@@ -3315,7 +3315,7 @@ Azure creates additional system routes when these capabilities are enabled:
 
 ## When to use Azure Network Watcher
 
-[Module Reference](https://learn.microsoft.com/training/modules/introduction-to-azure-network-watcher/)
+Module Reference
 
 **Overview**
 

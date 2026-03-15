@@ -10,7 +10,7 @@
 
 ## Large language models (LLMs)
 
-[Module Reference](https://learn.microsoft.com/training/modules/introduction-to-generative-ai-and-agents/large-language-models)
+[Module Reference](link removedlarge-language-models)
 
 **Overview**
 
@@ -112,7 +112,7 @@
 
 ## Prompts
 
-[Module Reference](https://learn.microsoft.com/training/modules/introduction-to-generative-ai-and-agents/)
+Module Reference
 
 **Prompt Definition**
 
@@ -215,7 +215,7 @@ There are **two main types** of prompts:
 
 ## AI agents
 
-[Module Reference](https://learn.microsoft.com/training/modules/introduction-generative-ai-agents/ai-agents)
+Module Reference
 
 **What is an AI agent**
 

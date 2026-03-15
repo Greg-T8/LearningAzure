@@ -102,7 +102,7 @@
 
 ## Overview of information extraction
 
-[Module Reference](https://learn.microsoft.com/training/modules/intro-ai-powered-information-extraction-concepts/)
+Module Reference
 
 **Information Extraction Overview**
 
@@ -189,7 +189,7 @@
 
 ## Optical character recognition (OCR)
 
-[Module Reference](https://learn.microsoft.com/training/modules/introduction-to-ai-powered-information-extraction-concepts/)
+Module Reference
 
 **Definition**
 
@@ -370,7 +370,7 @@
 
 ## Field extraction and mapping
 
-[Module Reference](https://learn.microsoft.com/training/modules/introduction-to-ai-powered-information-extraction-concepts/)
+Module Reference
 
 **Field Extraction Overview**
 

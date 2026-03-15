@@ -522,7 +522,7 @@ Here's a simplified table breaking down the Microsoft Entra ID features by editi
 
 ## Azure Policy resources
 
-[Module Reference](https://learn.microsoft.com/training/modules/azure-policy/azure-policy-resources)
+Module Reference
 
 **Overview**
 
@@ -691,7 +691,7 @@ Here's a simplified table breaking down the Microsoft Entra ID features by editi
 
 ## Azure Policy definitions
 
-[Module Reference](https://learn.microsoft.com/training/modules/azure-policy-initiatives/azure-policy-definitions)
+Module Reference
 
 **Overview**
 
@@ -1340,7 +1340,7 @@ Events can be handled by:
 
 ## What is self-service password reset in Microsoft Entra ID?
 
-[Module Reference](https://learn.microsoft.com/training/modules/allow-users-reset-passwords/)
+Module Reference
 
 **Business Problem Addressed**
 

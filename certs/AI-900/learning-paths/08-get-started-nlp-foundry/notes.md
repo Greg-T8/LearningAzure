@@ -12,7 +12,7 @@
 
 ## Understand natural language processing on Azure
 
-[Module Reference](https://learn.microsoft.com/training/modules/get-started-text-analysis-foundry/)
+Module Reference
 
 **Core Natural Language Processing (NLP) Tasks**
 
@@ -50,7 +50,7 @@
 
 ## Understand Azure Language's text analysis capabilities
 
-[Module Reference](https://learn.microsoft.com/training/modules/get-started-text-analysis-microsoft-fabric/)
+Module Reference
 
 **Azure Language Overview**
 
@@ -110,7 +110,7 @@
 | DateTime              | TimeRange   | “6pm to 7pm”                                            |
 | DateTime              | Duration    | “1 minute and 45 seconds”                               |
 | DateTime              | Set         | “every Tuesday”                                         |
-| URL                   | —           | “[https://www.bing.com”](https://www.bing.com”)         |
+| URL                   | —           | <https://www.bing.com>                                    |
 | Email                 | —           | “[support@microsoft.com](mailto:support@microsoft.com)” |
 | US-based Phone Number | —           | “(312) 555-0176”                                        |
 | IP Address            | —           | “10.0.1.125”                                            |
@@ -166,7 +166,7 @@
 
 ## Azure Language's conversational AI capabilities
 
-[Module Reference](https://learn.microsoft.com/training/modules/get-started-text-analysis-microsoft-foundry/)
+Module Reference
 
 **Overview**
 
@@ -288,7 +288,7 @@
 
 ## Get started in Microsoft Foundry
 
-[Module Reference](https://learn.microsoft.com/training/modules/get-started-text-analysis-microsoft-foundry/)
+Module Reference
 
 **Overview**
 

@@ -11,7 +11,7 @@
 
 ## Understand Foundry Tools for computer vision
 
-[Module Reference](https://learn.microsoft.com/training/modules/get-started-with-computer-vision-in-microsoft-foundry/)
+Module Reference
 
 **Overview**
 
@@ -85,7 +85,7 @@
 
 ## Understand Azure Vision Image Analysis Capabilities
 
-[Module Reference](https://learn.microsoft.com/training/modules/get-started-with-computer-vision/)
+Module Reference
 
 **Image Analysis Capabilities (No Customization Required)**
 
@@ -189,7 +189,7 @@
 
 ## Understand Azure Vision's Face service capabilities
 
-[Module Reference](https://learn.microsoft.com/training/modules/get-started-computer-vision-microsoft-foundry/)
+Module Reference
 
 **Overview**
 
@@ -268,7 +268,7 @@
 
 ## Get started in Microsoft Foundry portal
 
-[Module Reference](https://learn.microsoft.com/training/modules/get-started-computer-vision-microsoft-foundry/)
+Module Reference
 
 **Azure Vision Overview**
 

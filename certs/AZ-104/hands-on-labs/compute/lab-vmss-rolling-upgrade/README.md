@@ -463,5 +463,5 @@ The lab confirmed this: after running `Update-AzVmss` to change the data disk si
 - [Reimage VMSS Instances](https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-reimage-virtual-machine)
 - [Update-AzVmss Reference](https://learn.microsoft.com/en-us/powershell/module/az.compute/update-azvmss)
 - [Set-AzVmssVM Reference](https://learn.microsoft.com/en-us/powershell/module/az.compute/set-azvmssvm)
-- [Rolling Upgrades for VMSS](https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-rolling-upgrade)
+- Rolling Upgrades for VMSS
 - [Standard Load Balancer and VMSS](https://learn.microsoft.com/en-us/azure/load-balancer/load-balancer-standard-virtual-machine-scale-sets)

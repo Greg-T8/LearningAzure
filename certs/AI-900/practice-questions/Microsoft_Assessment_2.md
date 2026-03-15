@@ -336,8 +336,8 @@ On Microsoft exams, any question about **explaining AI behavior, setting expecta
 
 **References**
 
-* [https://learn.microsoft.com/training/modules/understand-responsible-ai/](https://learn.microsoft.com/training/modules/understand-responsible-ai/)
-* [https://learn.microsoft.com/training/modules/identify-principles-practices-responsible-ai/](https://learn.microsoft.com/training/modules/identify-principles-practices-responsible-ai/)
+* link removed
+* link removed
 
 </details>
 
@@ -365,9 +365,9 @@ On Microsoft exams, remember the distinction:
 If the question asks for what *enables* modern image classification, the answer is almost always **deep learning**.
 
 **References**
-[https://learn.microsoft.com/en-us/training/modules/understand-classification/](https://learn.microsoft.com/en-us/training/modules/understand-classification/)
+link removed
 [https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview)
-[https://learn.microsoft.com/en-us/training/paths/get-started-computer-vision/](https://learn.microsoft.com/en-us/training/paths/get-started-computer-vision/)
+link removed
 
 </details>
 

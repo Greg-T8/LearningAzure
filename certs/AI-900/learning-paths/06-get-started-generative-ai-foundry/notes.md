@@ -145,7 +145,7 @@
 
 ## Understand Foundry's model catalog
 
-[Module Reference](https://learn.microsoft.com/training/modules/get-started-generative-ai-microsoft-foundry/)
+Module Reference
 
 **Microsoft Foundry Model Catalog**
 
@@ -197,7 +197,7 @@
 
 ## Understand Foundry capabilities
 
-[Module Reference](https://learn.microsoft.com/training/modules/get-started-generative-ai-microsoft-foundry/understand-foundry-capabilities)
+[Module Reference](link removedunderstand-foundry-capabilities)
 
 **Foundry Structure**
 

@@ -321,4 +321,4 @@ In this lab, `nsg-backend` proves the behavior remains enforced for non-PLS reso
 - [What is Azure Private Endpoint?](https://learn.microsoft.com/en-us/azure/private-link/private-endpoint-overview)
 - [Manage network policies for private endpoints](https://learn.microsoft.com/en-us/azure/private-link/disable-private-endpoint-network-policy)
 - [Create a Private Link Service — Azure portal](https://learn.microsoft.com/en-us/azure/private-link/create-private-link-service-portal)
-- [Tutorial: Create a Private Link Service using Terraform](https://learn.microsoft.com/en-us/azure/private-link/create-private-link-service-terraform)
+- Tutorial: Create a Private Link Service using Terraform

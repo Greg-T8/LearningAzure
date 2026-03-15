@@ -2290,7 +2290,7 @@ This solution does not meet the goal. To automate the deployment of the 20 addit
 References
 
 * [Export an Azure Resource Manager template from an existing resource](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/export-template-portal)
-* [Deploy resources with ARM templates](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/deploy-templates-azure-cli)
+* Deploy resources with ARM templates
 * [Azure Policy overview](https://learn.microsoft.com/en-us/azure/governance/policy/overview)
 
 </details>
@@ -3495,7 +3495,7 @@ Choose **Isolated (ASE)** only when **network isolation or compliance requiremen
 
 * [https://learn.microsoft.com/azure/app-service/overview-hosting-plans](https://learn.microsoft.com/azure/app-service/overview-hosting-plans)
 * [https://learn.microsoft.com/azure/app-service/environment/overview](https://learn.microsoft.com/azure/app-service/environment/overview)
-* [https://learn.microsoft.com/azure/app-service/plan-manage-costs](https://learn.microsoft.com/azure/app-service/plan-manage-costs)
+* link removed
 
 **Why Standard is not the correct answer**
 
@@ -3535,7 +3535,7 @@ On Azure exams, when you see:
 **References**
 
 * [https://learn.microsoft.com/azure/app-service/overview-hosting-plans](https://learn.microsoft.com/azure/app-service/overview-hosting-plans)
-* [https://learn.microsoft.com/azure/app-service/plan-manage-costs](https://learn.microsoft.com/azure/app-service/plan-manage-costs)
+* link removed
 * [https://learn.microsoft.com/azure/app-service/environment/overview](https://learn.microsoft.com/azure/app-service/environment/overview)
 
 </details>
@@ -3642,7 +3642,7 @@ For App Service questions, always evaluate both **technical capability and cost 
 **References**
 
 * [https://learn.microsoft.com/azure/app-service/overview-hosting-plans](https://learn.microsoft.com/azure/app-service/overview-hosting-plans)
-* [https://learn.microsoft.com/azure/app-service/management-scale-up](https://learn.microsoft.com/azure/app-service/management-scale-up)
+* link removed
 * [https://learn.microsoft.com/azure/app-service/operating-system-functionality#app-service-plan-tiers](https://learn.microsoft.com/azure/app-service/operating-system-functionality#app-service-plan-tiers)
 
 <img src='.img/2026-02-05-02-52-17.png' width=600>
@@ -4707,8 +4707,8 @@ Azure Advisor recommendations are emitted as **events in the Azure Activity Log*
 * [Quickstart: Create Azure Advisor alerts on new recommendations using Bicep](https://learn.microsoft.com/azure/advisor/advisor-alerts-bicep)
 * [Microsoft.Insights actionGroups](https://learn.microsoft.com/azure/azure-monitor/platform/action-groups)
 * [Microsoft.Insights activityLogAlerts](https://learn.microsoft.com/azure/azure-monitor/platform/activity-log-alerts)
-* [Microsoft.Insights alertrules](https://learn.microsoft.com/azure/azure-monitor/platform/alertrules)
-* [Microsoft.Insights dataCollectionRules](https://learn.microsoft.com/azure/azure-monitor/essentials/data-collection-rule)
+* Microsoft.Insights alertrules
+* Microsoft.Insights dataCollectionRules
 * [Microsoft.Insights metricAlerts](https://learn.microsoft.com/azure/azure-monitor/alerts/alerts-metric-overview)
 
 </details>
@@ -5393,7 +5393,7 @@ You should not use the Test-Connection PowerShell command. Although this will te
 
 * [What is Azure Network Watcher?](https://learn.microsoft.com/azure/network-watcher/network-watcher-monitoring-overview)
 * [Introduction to Azure Network Watcher IP flow verify](https://learn.microsoft.com/azure/network-watcher/network-watcher-ip-flow-verify-overview)
-* [Network Performance Monitor solution in Azure](https://learn.microsoft.com/azure/network-performance-monitor/)
+* Network Performance Monitor solution in Azure
 
 </details>
 
@@ -5518,7 +5518,7 @@ Azure VM file recovery
 [https://learn.microsoft.com/azure/backup/backup-azure-restore-files-from-vm](https://learn.microsoft.com/azure/backup/backup-azure-restore-files-from-vm)
 
 Restore Azure VM data using Azure Backup
-[https://learn.microsoft.com/azure/backup/backup-azure-vms-restore](https://learn.microsoft.com/azure/backup/backup-azure-vms-restore)
+link removed
 
 Azure Recovery Services vault overview
 [https://learn.microsoft.com/azure/backup/backup-azure-recovery-services-vault-overview](https://learn.microsoft.com/azure/backup/backup-azure-recovery-services-vault-overview)
