@@ -5598,7 +5598,7 @@ D. Redeploy VM1 from a recovery point.
 
 </details>
 
-<details open>
+<details>
 <summary>💡 Click to expand explanation</summary>
 
 **Explanation**

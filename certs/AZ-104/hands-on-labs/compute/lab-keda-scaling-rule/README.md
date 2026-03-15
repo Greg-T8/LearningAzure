@@ -7,6 +7,8 @@
 **Practice Exam Questions:**
 - [Configure Scaling Rules in Azure Container Apps](../../../practice-questions/README.md#configure-scaling-rules-in-azure-container-apps)
 
+
+
 ## Exam Question
 
 > **Exam**: AZ-104 — Compute

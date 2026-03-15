@@ -2,6 +2,8 @@
 
 This page catalogs hands-on labs built from practice exam questions. Each lab uses Terraform or Azure Bicep to create dedicated environments for testing specific AZ-104 concepts.
 
+
+
 ---
 
 ## 📊 Lab Statistics

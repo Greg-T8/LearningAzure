@@ -7,6 +7,8 @@
 **Practice Exam Questions:**
 - [Encrypt VM Disk With Key Vault](../../../practice-questions/README.md#encrypt-vm-disk-with-key-vault)
 
+
+
 ## Exam Question Scenario
 
 **Type:** Multiple Drop-Down

@@ -5,7 +5,10 @@
 **Task:** Provision an App Service plan
 
 **Practice Exam Questions:**
+- [App Service pricing tier for autoscale](../../../practice-questions/README.md#app-service-pricing-tier-for-autoscale)
 - [Configure Azure App Service Plan for Website Hosting](../../../practice-questions/README.md#configure-azure-app-service-plan-for-website-hosting)
+
+
 
 ## Exam Question Scenario
 

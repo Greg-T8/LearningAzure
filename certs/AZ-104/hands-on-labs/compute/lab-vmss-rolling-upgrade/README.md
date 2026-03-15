@@ -7,6 +7,8 @@
 **Practice Exam Questions:**
 - [Apply Change to VMSS OS and Data Disk Profile](../../../practice-questions/README.md#apply-change-to-vmss-os-and-data-disk-profile)
 
+
+
 ## Exam Question
 
 > **Exam**: AZ-104 — Compute

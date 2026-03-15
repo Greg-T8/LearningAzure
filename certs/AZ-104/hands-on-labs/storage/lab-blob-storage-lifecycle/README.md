@@ -5,8 +5,10 @@
 **Task:** Configure blob lifecycle management
 
 **Practice Exam Questions:**
-- [Configure Lifecycle Management Policy for Azure Storage](../../../practice-questions/README.md#configure-lifecycle-management-policy-for-azure-storage)
 - [Lifecycle Management Policy Configuration](../../../practice-questions/README.md#lifecycle-management-policy-configuration)
+- [Configure Lifecycle Management Policy for Azure Storage](../../../practice-questions/README.md#configure-lifecycle-management-policy-for-azure-storage)
+
+
 
 ## Exam Question
 
