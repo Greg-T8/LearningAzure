@@ -9,6 +9,7 @@
 - [Recover Azure VM from Deleted Backup](../../../practice-questions/README.md#recover-azure-vm-from-deleted-backup)
 
 
+
 ## Exam Question Scenario
 
 You have two Azure virtual machines (VMs) named VM1 and VM2 running Windows Server 2019. The VMs are backed up by an Azure Recovery Services vault. A configuration file on VM1 was updated, and you need to restore it to a version from six days ago.

@@ -9,6 +9,7 @@
 - [Diagnose Internal Load Balancer Hairpin Traffic Failure](../../../practice-questions/README.md#diagnose-internal-load-balancer-hairpin-traffic-failure)
 
 
+
 ## Exam Question Scenario
 
 You are an Azure administrator at an independent software vendor. Your company is using an Azure internal load balancer that is configured inside an Azure virtual network (VNet).

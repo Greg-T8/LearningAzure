@@ -8,6 +8,7 @@
 - [Configure Object Replication Between Storage Accounts](../../../practice-questions/README.md#configure-object-replication-between-storage-accounts)
 
 
+
 ## Exam Question Scenario
 
 You plan to configure object replication between storage accounts in two different regions.

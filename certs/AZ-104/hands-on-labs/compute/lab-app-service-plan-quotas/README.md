@@ -9,6 +9,7 @@
 - [Configure Azure App Service Plan for Website Hosting](../../../practice-questions/README.md#configure-azure-app-service-plan-for-website-hosting)
 
 
+
 ## Exam Question Scenario
 
 You deploy an Azure web app named MyApp. MyApps runs in a Free pricing tier service plan named MyPlan. During testing, you discover that MyApp stops after 60 minutes and that it cannot be restarted until the next day.

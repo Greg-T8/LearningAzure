@@ -10,6 +10,7 @@
 - [Configure Azure Monitor Alert Notification Rate Limits](../../../practice-questions/README.md#configure-azure-monitor-alert-notification-rate-limits)
 
 
+
 ## Scenario
 
 You have an Azure subscription named **Subscription1**. You create an alert rule in Azure Monitor named **Alert1**. Alert1 is configured to generate email, voice, and SMS alerts. You determine that Alert1 fires every minute.

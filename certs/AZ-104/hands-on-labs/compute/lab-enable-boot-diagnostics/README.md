@@ -8,6 +8,7 @@
 - [Enable Guest OS Diagnostics](../../../practice-questions/README.md#enable-guest-os-diagnostics)
 
 
+
 ## Exam Question Scenario
 
 > **Exam**: AZ-104 — Compute

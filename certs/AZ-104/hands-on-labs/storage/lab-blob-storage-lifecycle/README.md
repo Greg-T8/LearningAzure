@@ -9,6 +9,7 @@
 - [Configure Lifecycle Management Policy for Azure Storage](../../../practice-questions/README.md#configure-lifecycle-management-policy-for-azure-storage)
 
 
+
 ## Exam Question
 
 > **Exam**: AZ-104 — Storage
