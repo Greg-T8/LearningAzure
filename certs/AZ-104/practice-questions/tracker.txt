@@ -1,7 +1,8 @@
 Compute:
 - (1-15) Automate deployment of resources by using Azure Resource Manager (ARM) templates or Bicep files
-	- 1-13 
+	- 1-13 (In Progress)
 - (16-23) Create and configure virtual machines
+	- 16-17 (In Progress)
 - (24-26) Provision and manage containers in the Azure portal
 	- 24-26 (Complete)
 - (27-42) Create and configure Azure App Service
