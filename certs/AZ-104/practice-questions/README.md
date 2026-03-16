@@ -43,7 +43,7 @@ Accounts for questions missed or unsure about in the practice exams.
     * [Resource dependencies in Bicep](#resource-dependencies-in-bicep)
     * [Convert Array to Object](#convert-array-to-object)
     * [Complete ARM template deployment command](#complete-arm-template-deployment-command)
-    * [Case Study — Solution Evaluation](#case-study-solution-evaluation)
+    * [Case Study — Solution Evaluation](#case-study--solution-evaluation)
     * [Edit ARM Template to Inherit Resource Group Location](#edit-arm-template-to-inherit-resource-group-location)
     * [Export ARM Template](#export-arm-template)
     * [Deployment Mode Deleted Resources](#deployment-mode-deleted-resources)
@@ -68,8 +68,8 @@ Accounts for questions missed or unsure about in the practice exams.
 * [Implement and Manage Virtual Networking](#implement-and-manage-virtual-networking)
   * [Configure and manage virtual networks in Azure](#configure-and-manage-virtual-networks-in-azure)
     * [Configure Layered Network Security](#configure-layered-network-security)
-    * [Case Study — Container Group Placement](#case-study-container-group-placement)
-    * [VNet Peering — Missing Reverse Peering](#vnet-peering-missing-reverse-peering)
+    * [Case Study — Container Group Placement](#case-study--container-group-placement)
+    * [VNet Peering — Missing Reverse Peering](#vnet-peering--missing-reverse-peering)
     * [VNet Peering with ExpressRoute](#vnet-peering-with-expressroute)
   * [Configure secure access to virtual networks](#configure-secure-access-to-virtual-networks)
     * [Design NSG to Block RDP from Internet](#design-nsg-to-block-rdp-from-internet)
@@ -98,9 +98,10 @@ Accounts for questions missed or unsure about in the practice exams.
   * [Implement backup and recovery](#implement-backup-and-recovery)
     * [Move Recovery Services vault](#move-recovery-services-vault)
     * [Recover Azure VM from Deleted Backup](#recover-azure-vm-from-deleted-backup)
-    * [Site Recovery — Recovery Steps](#site-recovery-recovery-steps)
+    * [Site Recovery — Recovery Steps](#site-recovery--recovery-steps)
     * [Recover Configuration File from Azure VM Backup](#recover-configuration-file-from-azure-vm-backup)
     * [Backup Pre-Check Warning Cause](#backup-pre-check-warning-cause)
+    * [Restore VM from backup (availability set)](#restore-vm-from-backup-availability-set)
 
 ---
 
@@ -6106,3 +6107,63 @@ Because of this, **application-consistent backups are preferred for production w
 </details>
 
 ---
+
+#### Restore VM from backup (availability set)
+
+**Domain:** Monitor and Maintain Azure Resources
+**Skill:** Implement backup and recovery
+**Task:** Perform backup and restore operations by using Azure Backup
+
+Your company has an Azure subscription and they use Azure Backup to protect the deployed virtual machines (VMs). Your subscription includes a VM named `VMS1` that runs Windows Server 2019. `VMS1` is configured as a part of an availability set and it is backed up through machine-level backup. `VMS1` is mistakenly deleted.
+
+You need to restore `VMS1` from backup and configure `VMS1` as part of the same availability set.
+
+Which three actions should you perform in sequence? To answer, move the appropriate actions from the list of possible actions to the answer area and arrange them in the correct order.
+
+A. Select Restore Disks as the Restore Type and restore the data.  
+B. Select Replace existing as the Restore Type and restore the data.  
+C. Manually create a new VM.  
+
+Select and order 3:
+
+| Step | Action |
+|------|--------|
+| 1 | |
+| 2 | |
+| 3 | |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-16-04-41-52.png' width=600>
+
+</details>
+
+<details open>
+<summary>💡 Click to expand explanation</summary>
+
+**Explanation**
+
+You should perform the following actions in order:
+
+1. **Select a restore point for `VMS1` in the Azure Recovery Services vault**
+2. **Select Restore Disks as the Restore Type and restore the data.**
+3. **Fetch and deploy the deployment template from the Azure Recovery Services vault.**
+
+You should run a `Restore Disks` restoration and recreate `VMS1` from the restored disk when restoring a VM that has been configured as a part of an availability set. Begin by choosing the restore point from which you want to restore, and then select `Restore Disks` as your `Restore Type`. You can then restore the data, but you still need to recreate the VM. To do this, fetch and then deploy the deployment template from the Azure Recovery Services vault.
+
+After using the `Restore Disks` restore type, you also have the option of attaching the disk to an existing VM.
+
+There is no need to manually create a new VM. You will use the deployment template to create the VM.
+
+You should not choose `Create a virtual machine` or `Replace existing` as the Restore Type. You should use `Create a virtual machine` to create a simple VM based on a VM restore point. You should use `Replace existing` to replace the disk on an existing VM.
+
+<img src='.img/2026-03-16-04-47-59.png' width=600>
+
+**References**
+
+* [How to restore Azure VM data in Azure portal](https://learn.microsoft.com/azure/backup/backup-azure-arm-restore-vms)
+* [Availability options for Azure Virtual Machines](https://learn.microsoft.com/azure/virtual-machines/availability)
+* [Tutorial: Restore a VM with Azure CLI](https://learn.microsoft.com/azure/backup/tutorial-restore-disk)
+
+</details>
