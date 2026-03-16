@@ -14,4 +14,5 @@ Monitoring - 16/27
 - (1-15) Monitor resource in Azure
 	- 1-15 (Complete)
 - (16-27) Implement backup and recovery
+	- 16-22 (In Progress)
 	
