@@ -134,7 +134,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 | :--- | :--- | -: | -: |
 | Configure and manage virtual networks in Azure | Create and configure virtual networks and subnets | 2 | 0 |
 |  | Create and configure virtual network peering | 2 | 0 |
-|  | Configure public IP addresses | 0 | 0 |
+|  | Configure public IP addresses | 1 | 0 |
 |  | Configure user-defined network routes | 0 | 0 |
 |  | Troubleshoot network connectivity | 0 | 0 |
 | Configure secure access to virtual networks | Create and configure NSGs and application security groups | 1 | 0 |

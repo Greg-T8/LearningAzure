@@ -9,6 +9,12 @@ Compute:
 	- 27-31 (In Progress)
 
 Networking - 13/35
+- (1-11) Configure and manage virtual networks in Azure
+	- 1-11 (Complete)
+- (12-23) Configure secure access to virtual networks
+	- 13 (In Progress)
+- (24-35) Configure name resolution and load balancing
+	- (Not Started)
 
 Monitoring - 16/27
 - (1-15) Monitor resource in Azure
