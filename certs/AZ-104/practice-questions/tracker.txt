@@ -9,4 +9,9 @@ Compute:
 	- 27-31 (In Progress)
 
 Networking - 13/35
+
 Monitoring - 16/27
+- (1-15) Monitor resource in Azure
+	- 1-15 (Complete)
+- (16-27) Implement backup and recovery
+	

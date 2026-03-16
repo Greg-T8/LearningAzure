@@ -164,7 +164,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 |  | Create an Azure Backup vault | 0 | 0 |
 |  | Create and configure a backup policy | 0 | 0 |
 |  | Perform backup and restore operations by using Azure Backup | 2 | 1 |
-|  | Configure Azure Site Recovery for Azure resources | 0 | 0 |
+|  | Configure Azure Site Recovery for Azure resources | 1 | 0 |
 |  | Perform a failover to a secondary region by using Site Recovery | 0 | 0 |
 |  | Configure and interpret reports and alerts for backups | 0 | 0 |
 
