@@ -42,7 +42,7 @@ Accounts for questions missed or unsure about in the practice exams.
   * [Automate deployment of resources by using ARM templates or Bicep files](#automate-deployment-of-resources-by-using-arm-templates-or-bicep-files)
     * [Convert Array to Object](#convert-array-to-object)
     * [Complete ARM template deployment command](#complete-arm-template-deployment-command)
-    * [Case Study — Solution Evaluation](#case-study-solution-evaluation)
+    * [Case Study — Solution Evaluation](#case-study--solution-evaluation)
     * [Edit ARM Template to Inherit Resource Group Location](#edit-arm-template-to-inherit-resource-group-location)
     * [Export ARM Template](#export-arm-template)
     * [Deployment Mode Deleted Resources](#deployment-mode-deleted-resources)
@@ -68,8 +68,8 @@ Accounts for questions missed or unsure about in the practice exams.
 * [Implement and Manage Virtual Networking](#implement-and-manage-virtual-networking)
   * [Configure and manage virtual networks in Azure](#configure-and-manage-virtual-networks-in-azure)
     * [Configure Layered Network Security](#configure-layered-network-security)
-    * [Case Study — Container Group Placement](#case-study-container-group-placement)
-    * [VNet Peering — Missing Reverse Peering](#vnet-peering-missing-reverse-peering)
+    * [Case Study — Container Group Placement](#case-study--container-group-placement)
+    * [VNet Peering — Missing Reverse Peering](#vnet-peering--missing-reverse-peering)
     * [VNet Peering with ExpressRoute](#vnet-peering-with-expressroute)
   * [Configure secure access to virtual networks](#configure-secure-access-to-virtual-networks)
     * [Configure Private Link Service Source IP](#configure-private-link-service-source-ip)
@@ -97,9 +97,10 @@ Accounts for questions missed or unsure about in the practice exams.
     * [Load Balancer Metrics Batch API](#load-balancer-metrics-batch-api)
   * [Implement backup and recovery](#implement-backup-and-recovery)
     * [Recover Azure VM from Deleted Backup](#recover-azure-vm-from-deleted-backup)
-    * [Site Recovery — Recovery Steps](#site-recovery-recovery-steps)
+    * [Site Recovery — Recovery Steps](#site-recovery--recovery-steps)
     * [Recover Configuration File from Azure VM Backup](#recover-configuration-file-from-azure-vm-backup)
     * [Move Recovery Services vault](#move-recovery-services-vault)
+    * [Backup Pre-Check Warning Cause](#backup-pre-check-warning-cause)
 
 ---
 
@@ -5966,3 +5967,140 @@ You should not run the `Set-AzResource` cmdlet. This cmdlet is used to configure
 </details>
 
 ---
+
+#### Backup Pre-Check Warning Cause
+
+**Domain:** Monitor and Maintain Azure Resources
+**Skill:** Implement backup and recovery
+**Task:** Configure and interpret reports and alerts for backups
+
+Your company has an Azure subscription. You create an Azure Recovery Services vault named `RSV1`. You have a virtual machine (VM) named `VM1` that is deployed in the East US region. You create a backup policy to back up `VM1` to `RSV1` on a recurring schedule. You are preparing to run your first backup and the Backup Pre-Check status displays a Warning status.
+
+You need to determine the possible cause of this status.
+
+Which condition would result in a Warning status?
+
+A. `VM1` is an unmanaged Azure VM encrypted with BitLocker encryption keys (BEKs).  
+B. The most recent VM agent has not been installed on `VM1`.  
+C. `VM1` is unable to communicate with the Azure Backup service.  
+D. `VM1` has a non-premium storage account.  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-16-04-27-00.png' width=600>
+
+</details>
+
+<details open>
+<summary>💡 Click to expand explanation</summary>
+
+One possible reason for a Warning status during the Backup Pre-check is that the most recent VM agent has not been installed on `VM1`. A Warning status indicates that the backup process might fail. The report status provides recommended steps to ensure successful backups.
+
+A Critical status would be reported if `VM1` was unable to communicate with the Azure Backup service. A Critical status indicates that the current VM configuration will result in a backup failure.
+
+A situation in which `VM1` has a non-premium storage account would not result in a Warning status. This is a supported configuration.
+
+Having `VM1` as an unmanaged Azure VM encrypted with BEK would not result in a Warning status. Backups of managed and unmanaged VMs encrypted with BEK are supported by Azure Backup.
+
+<img src='.img/2026-03-16-04-34-23.png' width=600>
+
+<img src='.img/2026-03-16-04-35-37.png' width=600>
+
+**More Detail**:
+
+In Azure VM Backup, the consistency level describes **how clean the data state is when the snapshot of the VM disks is taken**. The three common levels are crash-consistent, file-system consistent, and application-consistent.
+
+**Crash-consistent backup**
+
+A crash-consistent backup captures the VM disks exactly as they exist at the moment the snapshot is taken, **without coordinating with the operating system or applications inside the VM**. Azure simply freezes the disks briefly and takes a snapshot.
+
+Conceptually, it is the same state the system would be in if the VM suddenly lost power.
+
+Characteristics:
+
+* No interaction with the guest OS
+* No flushing of memory buffers to disk
+* No coordination with applications such as SQL Server or Exchange
+* Recovery relies on the OS performing normal crash recovery when the VM boots
+
+When the VM is restored from this backup:
+
+* The operating system performs filesystem recovery (similar to after a power outage)
+* Databases or applications perform their own recovery using logs
+
+Because of this, the restored VM may contain **partially written data or incomplete transactions**, though most modern filesystems and databases are designed to recover from this condition.
+
+Typical scenarios:
+
+* Backing up stateless or low-risk workloads
+* Backup of stopped or deallocated VMs
+* Situations where application-level consistency is not required
+
+**File-system consistent backup**
+
+A file-system consistent backup coordinates with the **guest operating system** so that filesystem buffers are flushed to disk before the snapshot occurs.
+
+This means:
+
+* The OS flushes pending writes from memory to disk
+* Files are in a clean state
+* The filesystem does not require repair on restore
+
+However:
+
+* Applications are **not quiesced**
+* Databases or services may still have in-memory transactions not yet written to disk
+
+The result is that **files are consistent**, but applications may still require recovery.
+
+**Application-consistent backup**
+
+An application-consistent backup coordinates with **both the operating system and supported applications**.
+
+Azure Backup uses mechanisms such as:
+
+* **VSS (Volume Shadow Copy Service)** on Windows
+* Pre/post scripts or filesystem freeze operations on Linux
+
+During this process:
+
+1. Applications are asked to pause writes
+2. In-memory data is flushed to disk
+3. Transactions are committed
+4. The snapshot is taken
+5. Applications resume
+
+This produces the cleanest possible backup.
+
+Benefits:
+
+* Databases are transactionally consistent
+* Applications do not require recovery on restore
+* No data loss beyond the last committed transaction
+
+**Key differences**
+
+Crash-consistent backups simulate an unexpected power loss and require the OS and applications to recover during startup.
+
+File-system consistent backups ensure the filesystem itself is clean, but applications might still need recovery.
+
+Application-consistent backups coordinate with applications so that both the filesystem and application data are fully consistent at the time of backup.
+
+**Practical example**
+
+Suppose a VM runs SQL Server:
+
+* **Crash-consistent backup:** SQL Server detects an unexpected shutdown and replays transaction logs during startup.
+* **File-system consistent backup:** the NTFS filesystem is clean, but SQL Server still performs transaction recovery.
+* **Application-consistent backup:** SQL Server flushes transactions before the snapshot, so the database starts immediately without recovery.
+
+Because of this, **application-consistent backups are preferred for production workloads**, while crash-consistent backups are mainly used when application coordination is not available or the VM is stopped.
+
+**References**
+
+* [What is the Azure Backup service?](https://learn.microsoft.com/azure/backup/backup-overview)
+* [Introducing Backup Pre-Checks for Backup of Azure VMs](https://learn.microsoft.com/azure/backup/backup-azure-manage-windows-server#monitor-backup-jobs-and-alerts)
+* [An overview of Azure VM backup](https://learn.microsoft.com/azure/backup/backup-azure-vms-introduction)
+
+</details>
