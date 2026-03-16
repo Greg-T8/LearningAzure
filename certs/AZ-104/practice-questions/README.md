@@ -21,14 +21,14 @@ Accounts for questions missed or unsure about in the practice exams.
     * [Move subscription between management groups](#move-subscription-between-management-groups)
 * [Implement and Manage Storage](#implement-and-manage-storage)
   * [Configure access to storage](#configure-access-to-storage)
-    * [Provide least-privilege access to a report](#provide-least-privilege-access-to-a-report)
-    * [Configure AzCopy Authentication for Blob and File Storage](#configure-azcopy-authentication-for-blob-and-file-storage)
-    * [Shared Access Signature (SAS) practices](#shared-access-signature-sas-practices)
-    * [Diagnose Storage Explorer Permission Errors](#diagnose-storage-explorer-permission-errors)
-    * [Secure Storage Access from Subnet](#secure-storage-access-from-subnet)
-    * [SAS key configuration scenarios](#sas-key-configuration-scenarios)
     * [Configure storage account network access](#configure-storage-account-network-access)
+    * [SAS key configuration scenarios](#sas-key-configuration-scenarios)
+    * [Secure Storage Access from Subnet](#secure-storage-access-from-subnet)
     * [Modify Stored Access Policy](#modify-stored-access-policy)
+    * [Shared Access Signature (SAS) practices](#shared-access-signature-sas-practices)
+    * [Configure AzCopy Authentication for Blob and File Storage](#configure-azcopy-authentication-for-blob-and-file-storage)
+    * [Provide least-privilege access to a report](#provide-least-privilege-access-to-a-report)
+    * [Diagnose Storage Explorer Permission Errors](#diagnose-storage-explorer-permission-errors)
   * [Configure and manage storage accounts](#configure-and-manage-storage-accounts)
     * [Configure Object Replication Between Storage Accounts](#configure-object-replication-between-storage-accounts)
     * [Rotate compromised storage account keys](#rotate-compromised-storage-account-keys)
@@ -40,22 +40,22 @@ Accounts for questions missed or unsure about in the practice exams.
     * [Identify Blob Write Operations That Create New Versions](#identify-blob-write-operations-that-create-new-versions)
 * [Deploy and Manage Azure Compute Resources](#deploy-and-manage-azure-compute-resources)
   * [Automate deployment of resources by using ARM templates or Bicep files](#automate-deployment-of-resources-by-using-arm-templates-or-bicep-files)
-    * [Deployment Mode Deleted Resources](#deployment-mode-deleted-resources)
-    * [Export ARM Template](#export-arm-template)
-    * [Edit ARM Template to Inherit Resource Group Location](#edit-arm-template-to-inherit-resource-group-location)
-    * [Case Study — Solution Evaluation](#case-study--solution-evaluation)
-    * [Export resource group template](#export-resource-group-template)
-    * [Convert Array to Object](#convert-array-to-object)
-    * [Resource dependencies in Bicep](#resource-dependencies-in-bicep)
     * [Complete ARM template deployment command](#complete-arm-template-deployment-command)
+    * [Resource dependencies in Bicep](#resource-dependencies-in-bicep)
+    * [Convert Array to Object](#convert-array-to-object)
+    * [Export resource group template](#export-resource-group-template)
+    * [Deployment Mode Deleted Resources](#deployment-mode-deleted-resources)
+    * [Edit ARM Template to Inherit Resource Group Location](#edit-arm-template-to-inherit-resource-group-location)
+    * [Export ARM Template](#export-arm-template)
+    * [Case Study — Solution Evaluation](#case-study-solution-evaluation)
   * [Create and configure virtual machines](#create-and-configure-virtual-machines)
+    * [Encrypt VM Disk With Key Vault](#encrypt-vm-disk-with-key-vault)
     * [Change VM Availability Set Assignment](#change-vm-availability-set-assignment)
     * [Apply Change to VMSS OS and Data Disk Profile](#apply-change-to-vmss-os-and-data-disk-profile)
     * [VM Resize Failure Cause](#vm-resize-failure-cause)
-    * [Encrypt VM Disk With Key Vault](#encrypt-vm-disk-with-key-vault)
   * [Provision and manage containers in the Azure portal](#provision-and-manage-containers-in-the-azure-portal)
-    * [Azure Container Registry roles for pulling images](#azure-container-registry-roles-for-pulling-images)
     * [Configure Scaling Rules in Azure Container Apps](#configure-scaling-rules-in-azure-container-apps)
+    * [Azure Container Registry roles for pulling images](#azure-container-registry-roles-for-pulling-images)
   * [Create and configure Azure App Service](#create-and-configure-azure-app-service)
     * [Configure Azure App Service Plan for Website Hosting](#configure-azure-app-service-plan-for-website-hosting)
     * [App Service pricing tier for autoscale](#app-service-pricing-tier-for-autoscale)
@@ -67,43 +67,43 @@ Accounts for questions missed or unsure about in the practice exams.
     * [Resolve Azure App Service Pricing Tier for Runtime Requirements](#resolve-azure-app-service-pricing-tier-for-runtime-requirements-2)
 * [Implement and Manage Virtual Networking](#implement-and-manage-virtual-networking)
   * [Configure and manage virtual networks in Azure](#configure-and-manage-virtual-networks-in-azure)
-    * [VNet Peering with ExpressRoute](#vnet-peering-with-expressroute)
-    * [VNet Peering — Missing Reverse Peering](#vnet-peering--missing-reverse-peering)
-    * [Standard Load Balancer public IPs](#standard-load-balancer-public-ips)
+    * [Case Study — Container Group Placement](#case-study-container-group-placement)
     * [Configure Layered Network Security](#configure-layered-network-security)
-    * [Case Study — Container Group Placement](#case-study--container-group-placement)
+    * [VNet Peering with ExpressRoute](#vnet-peering-with-expressroute)
+    * [VNet Peering — Missing Reverse Peering](#vnet-peering-missing-reverse-peering)
+    * [Standard Load Balancer public IPs](#standard-load-balancer-public-ips)
   * [Configure secure access to virtual networks](#configure-secure-access-to-virtual-networks)
     * [Configure Private Link Service Source IP](#configure-private-link-service-source-ip)
     * [Design NSG to Block RDP from Internet](#design-nsg-to-block-rdp-from-internet)
   * [Configure name resolution and load balancing](#configure-name-resolution-and-load-balancing)
+    * [Configure DNS Records for App Service](#configure-dns-records-for-app-service)
+    * [Configure Standard Load Balancer Outbound Traffic and IP Allocation](#configure-standard-load-balancer-outbound-traffic-and-ip-allocation)
+    * [Connect VNet to Private DNS Zone](#connect-vnet-to-private-dns-zone)
     * [Diagnose Internal Load Balancer Hairpin Traffic Failure](#diagnose-internal-load-balancer-hairpin-traffic-failure)
     * [IMDS Load Balancer Metadata Error](#imds-load-balancer-metadata-error)
-    * [Configure Standard Load Balancer Outbound Traffic and IP Allocation](#configure-standard-load-balancer-outbound-traffic-and-ip-allocation)
-    * [Configure DNS Records for App Service](#configure-dns-records-for-app-service)
-* [Monitor and Maintain Azure Resources](#monitor-and-maintain-azure-resources)
+* [Monitor and maintain Azure resources](#monitor-and-maintain-azure-resources)
   * [Monitor resources in Azure](#monitor-resources-in-azure)
-    * [Enable Guest OS Diagnostics](#enable-guest-os-diagnostics)
-    * [Load Balancer Metrics Batch API](#load-balancer-metrics-batch-api)
-    * [Azure Advisor alerts with Bicep](#azure-advisor-alerts-with-bicep)
-    * [Capture SFTP Packets with Network Watcher](#capture-sftp-packets-with-network-watcher)
-    * [Pinning query results to a dashboard](#pinning-query-results-to-a-dashboard)
-    * [Enable Boot Diagnostics for Azure Virtual Machines](#enable-boot-diagnostics-for-azure-virtual-machines)
-    * [Configure Azure Monitor Alert Notification Rate Limits](#configure-azure-monitor-alert-notification-rate-limits)
-    * [Determine filtering rule with Network Watcher](#determine-filtering-rule-with-network-watcher)
-    * [Diagnose Network Watcher Tool for Web Server Packet Flow](#diagnose-network-watcher-tool-for-web-server-packet-flow)
-    * [Test TCP Connectivity with Network Watcher](#test-tcp-connectivity-with-network-watcher)
-    * [Configure App Service Diagnostics](#configure-app-service-diagnostics)
-    * [Configure Azure Monitor Alert Notification Rate Limits](#configure-azure-monitor-alert-notification-rate-limits-1)
-    * [Storage Insights Overview](#storage-insights-overview)
     * [Configure Azure Monitor Alert for Database CPU Usage](#configure-azure-monitor-alert-for-database-cpu-usage)
+    * [Storage Insights Overview](#storage-insights-overview)
+    * [Configure Azure Monitor Alert Notification Rate Limits](#configure-azure-monitor-alert-notification-rate-limits)
+    * [Configure App Service Diagnostics](#configure-app-service-diagnostics)
+    * [Diagnose Network Watcher Tool for Web Server Packet Flow](#diagnose-network-watcher-tool-for-web-server-packet-flow)
+    * [Determine filtering rule with Network Watcher](#determine-filtering-rule-with-network-watcher)
+    * [Test TCP Connectivity with Network Watcher](#test-tcp-connectivity-with-network-watcher)
+    * [Enable Boot Diagnostics for Azure Virtual Machines](#enable-boot-diagnostics-for-azure-virtual-machines)
+    * [Pinning query results to a dashboard](#pinning-query-results-to-a-dashboard)
+    * [Capture SFTP Packets with Network Watcher](#capture-sftp-packets-with-network-watcher)
+    * [Azure Advisor alerts with Bicep](#azure-advisor-alerts-with-bicep)
+    * [Load Balancer Metrics Batch API](#load-balancer-metrics-batch-api)
+    * [Configure Azure Monitor Alert Notification Rate Limits](#configure-azure-monitor-alert-notification-rate-limits-1)
+    * [Enable Guest OS Diagnostics](#enable-guest-os-diagnostics)
   * [Implement backup and recovery](#implement-backup-and-recovery)
+    * [Recover Configuration File from Azure VM Backup](#recover-configuration-file-from-azure-vm-backup)
     * [Restore VM from backup (availability set)](#restore-vm-from-backup-availability-set)
     * [Backup Pre-Check Warning Cause](#backup-pre-check-warning-cause)
     * [Move Recovery Services vault](#move-recovery-services-vault)
     * [Recover Azure VM from Deleted Backup](#recover-azure-vm-from-deleted-backup)
-    * [Site Recovery — Recovery Steps](#site-recovery--recovery-steps)
-    * [Recover Configuration File from Azure VM Backup](#recover-configuration-file-from-azure-vm-backup)
-    * [Connect VNet to Private DNS Zone](#connect-vnet-to-private-dns-zone)
+    * [Site Recovery — Recovery Steps](#site-recovery-recovery-steps)
 
 ---
 
@@ -932,46 +932,351 @@ References
 
 ### Configure access to storage
 
-#### Provide least-privilege access to a report
+#### Configure storage account network access
 
 **Domain:** Implement and Manage Storage
 **Skill:** Configure access to storage
-**Task:** Create and use shared access signature (SAS) tokens
+**Task:** Configure Azure Storage firewalls and virtual networks
 
-You create a binary large object (blob) storage account named `reportstorage99` that contains archival reports from past corporate board meetings.
+You deploy a new storage account named `storage01` in a resource group named `RG01`.
 
-A board member requests access to a specific report. The member does not have a Microsoft Entra user account. Moreover, they have access only to a web browser on his Google Chromebook device.
+You need to ensure that the App Services, the backup vault, and the event hub can access the new storage account. Access should be enabled from within Azure only, and not via public internet.
 
-To fulfill the request, you will provide the board member with least-privilege access to the requested report while maintaining security compliance and minimizing administrative overhead.
+You decide to use PowerShell to configure all the settings.
 
-What should you do?
+How should you complete the command string? To answer, select the appropriate options from the drop-down menus.
 
-A. Deploy a point-to-site (P2S) virtual private network (VPN) connection on the board member's Chromebook and grant the board member role-based access control (RBAC) access to the report.  
-B. Generate a shared access signature (SAS) token for the report and share the Uniform Resource Locator (URL) with the board member.  
-C. Copy the report to an Azure File Service share and provide the board member with a PowerShell connection script.  
-D. Create a Microsoft Entra account for the board member and grant him role-based access control (RBAC) access to the storage account.  
+```powershell
+Get-AzVirtualNetwork -ResourceGroupName "RG01" -Name "VNET01" |
+  Set-AzVirtualNetworkSubnetConfig -Name "VSUBNET01" \
+    -AddressPrefix "10.0.0.0/24" -ServiceEndpoint "___[1]___" \
+  | Set-AzVirtualNetwork
+
+$subnet = Get-AzVirtualNetwork -ResourceGroupName "RG01" -Name "VNET01"
+Get-AzVirtualNetworkSubnetConfig -Name "VSUBNET01"
+
+___[2]___ -ResourceGroupName "RG01" \
+  -Name "storage01" -VirtualNetworkResourceId $subnet.Id
+
+___[3]___ -ResourceGroupName "RG01" \
+  -Name "storage01" -Bypass ___[4]___
+```
+
+Drop-Down Options:
+
+| Blank | Options |
+|-------|---------|
+| [1] | AzureServices / Logging / Metrics / Microsoft.Storage / None |
+| [2] | Add-AzStorageAccountNetworkRule / Remove-AzStorageAccountNetworkRuleSet / Set-AzStorageAccount / Update-AzStorageAccountNetworkRuleSet |
+| [3] | Add-AzStorageAccountNetworkRule / Remove-AzStorageAccountNetworkRuleSet / Set-AzStorageAccount / Update-AzStorageAccountNetworkRuleSet |
+| [4] | AzureServices / Logging / Metrics / Microsoft.Storage / None |
 
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-03-11-04-28-34.png' width=700>
+<img src='.img/2026-03-11-03-48-09.png' width=700>
 
 </details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
 
-You should generate a shared access signature (SAS) token for the report and share the Uniform Resource Locator (URL) with the board member. SAS enables you to define time-limited read-only or read-write access to Azure storage account resources. It is important that you set the time restriction properly because the SAS includes no authentication. Any person with access to the URL can access the target resource(s) within the token's lifetime. In this case, you both minimize administrative effort as well as maintain security compliance because the SAS token points only to a single file, not the entire blob container that hosts the requested report.
+You should run the following script to ensure that the backup vault and the event hub services have access to the storage account:
 
-You should not create a Microsoft Entra account for the board member and grant him role-based access control (RBAC) access to the storage account. First, it requires significant management overhead to create and manage Microsoft Entra accounts, even for external (guest) users. Second, SAS and not RBAC is the way Azure provides screened access to individual storage account resources. You can use RBAC roles only at the storage account scope.
+```powershell
+Get-AzVirtualNetwork -ResourceGroupName "RG01" -Name "VNET01" |
+Set-AzVirtualNetworkSubnetConfig -Name "VSUBNET01" \
+    -AddressPrefix "10.0.0.0/24" -ServiceEndpoint "Microsoft.Storage" \
+| Set-AzVirtualNetwork
 
-You should not copy the report to an Azure File Service share and provide the board member with a PowerShell connection script. Here you create security and governance problems by creating multiple copies of the source report, as well as producing unnecessary administrative complexity.
+$subnet = Get-AzVirtualNetwork -ResourceGroupName "RG01" -Name "VNET01"
+Get-AzVirtualNetworkSubnetConfig -Name "VSUBNET01"
 
-You should not deploy a point-to-site (P2S) VPN connection on the board member's Chromebook and grant the board member RBAC access to the report. The scenario stipulates that the board member is limited to using a web browser on his Chromebook. Furthermore, the Azure P2S VPN client is supported only on Windows, macOS, and endorsed Linux distributions. Chrome OS is not supported.
+Add-AzStorageAccountNetworkRule -ResourceGroupName "RG01" \
+    -Name "storage01" -VirtualNetworkResourceId $subnet.Id
+
+Update-AzStorageAccountNetworkRuleSet -ResourceGroupName "RG01" \
+    -Name "storage01" -Bypass AzureServices
+```
+
+You should use `Microsoft.Storage` as the service endpoint. Using the `Set-AzVirtualNetworkSubnetConfig` cmdlet enables the service endpoint on the subnet `VSUBNET01` for a storage account. This will allow connections to the virtual subnet from the storage account. This cmdlet makes modifications only to the memory representation of the virtual network. You need to run `Set-AzVirtualNetwork` to make the changes persistent.
+
+You should use the `Add-AzStorageAccountNetworkRule` cmdlet to add a firewall exception on the `NetworkRule` property in the storage account. This will allow communication from the virtual subnet to the storage account.
+
+You should use the `Update-AzStorageAccountNetworkRuleSet` cmdlet. This cmdlet also updates the `NetworkRule` property. It allows you to modify the `NetworkRule` property to allow other Azure services, like Backup or Event Hubs, to have access to the storage account.
+
+You should use `AzureServices` for the `-Bypass` parameter. This way, you instruct the `Update-AzStorageAccountNetworkRuleSet` cmdlet to allow connections from other Azure services. Allowed values are `AzureServices`, `Metrics`, `Logging`, and `None`.
+
+You should not use the `Set-AzStorageAccount` cmdlet. You can use this cmdlet to modify a storage account, but not the `NetworkRule` property of the storage account. You typically use this cmdlet when you want to set a tag to a storage account, update a customer domain, or update the type of the account.
+
+You should not use the `Remove-AzStorageAccountNetworkRuleSet` cmdlet. You use this cmdlet to remove a `NetworkRule` property from the storage account. In this scenario, you need to add and modify a new network rule, not remove it.
+
+You should not use the `Logging`, `None`, or `Metrics` values. These are valid for the `-Bypass` parameter for `Update-AzStorageAccountNetworkRuleSet`. Use the `None` value when you want to remove the access to all Azure services, including monitoring and logging services. Use the `Metrics` or `Logging` values when you want to allow access to monitoring or logging Azure Services respectively.
+
+**References**:  
+
+* [Azure Storage firewall rules](https://learn.microsoft.com/en-us/azure/storage/common/storage-network-security)
+* [Update-AzStorageAccountNetworkRuleSet](https://learn.microsoft.com/en-us/powershell/module/az.storage/update-azstorageaccountnetworkruleset?view=azps-15.4.0&viewFallbackFrom=azps-2.6.0)
+* [Add-AzStorageAccountNetworkRule](https://learn.microsoft.com/en-us/powershell/module/az.storage/add-azstorageaccountnetworkrule?view=azps-15.4.0)
+
+</details>
+
+---
+
+#### SAS key configuration scenarios
+
+**Domain:** Implement and manage storage
+**Skill:** Configure access to storage
+**Task:** Create and use shared access signature (SAS) tokens
+
+You have a storage account named `salesstorage` in a subscription named `SalesSubscription`. You create a container in a blob storage named `salecontainer`.
+
+You create the shared access signature (SAS) shown in the exhibit.
+
+You try to carry out actions from several computers at different times using the SAS key1 configurations shown in the exhibit.
+
+What level of access would be available in each scenario? To answer, select the appropriate options from the drop-down menus.
+
+| Configuration | Value | Action | Action result |
+|---------------|-------|--------|---------------|
+| 151.112.10.6 | March 4th, 2020 at 11 AM | Connect to Storage Account | ***[1]*** |
+| 151.112.11.6 | March 4th, 2020 at 12 AM | Connect to Storage Account | ***[2]*** |
+| 151.112.10.6 | March 10th, 2020 at 10 AM | Create a Container | ***[3]*** |
+| 151.112.10.6 | March 10th, 2020 at 12 AM | Read a File Share | ***[4]*** |
+
+Drop-Down Options:
+
+| Blank | Options |
+|-------|---------|
+| [1] | Connection success with read, write, and list access / Connection failure with read, write, and list access / Connection failure with read access |
+| [2] | Connection success with read, write, and list access / Connection failure with read, write, and list access / Connection failure with read access |
+| [3] | Connection success with read, write, and list access / Connection failure with read, write, and list access / Connection failure with read access |
+| [4] | Connection success with read, write, and list access / Connection failure with read, write, and list access / Connection failure with read access |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-11-04-35-29.png' width=700>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+In the first scenario, you would have connection success with read, write, and list access, because the IP address and the dates meet the criteria when the shared access signature (SAS) key1 is active.
+
+In the second scenario, you would have connection failure with read, write, and list access, because the IP address does not fall in the allowed IP address range. Additionally, it would also fail because the start time is 12am on March 4th, 2020, for the request, but the SAS token starts at 11am on March 4th, 2020.
+
+In the third scenario, you would have connection failure with read, write, and list access, because the permissions provided for the SAS key1 do not grant permissions to create a new container.
+
+In the fourth scenario, you would have connection failure with read, write, and list access, because the permissions granted are only for blob containers and not file shares.
+
+</details>
+
+---
+
+#### Secure Storage Access from Subnet
+
+**Domain:** Implement and Manage Storage
+**Skill:** Configure access to storage
+**Task:** Configure Azure Storage firewalls and virtual networks
+
+You manage an Azure Storage Account named `storage1`.
+
+Storage1 is used exclusively by an application running in an Azure Virtual Machine (VM). The Azure VM uses a virtual network (`vnet1`). `vnet1` is configured with the address range `10.0.0.0/16`. `appSubnet` is a subnet of `vnet1` configured with the address range `10.0.0.0/24`. `storageSubnet` is a subnet of `vnet1` configured with the address range `10.0.10.0/24`.
+
+The Azure VM is configured to use the `appSubnet`. As a security requirement, you must secure `storage1` to allow network connections that originate from `appSubnet` only. All resources are provisioned in a resource group named `rg1`.
+
+You need to configure the network access rule to meet the requirements.
+
+How should you configure the network access rule? To answer, select the appropriate options from the drop-down menus.
+
+```powershell
+___[1]___ `
+    -ResourceGroupName "rg1" `
+    -Name "storage1" `
+    -DefaultAction Deny
+
+Get-AzVirtualNetwork -ResourceGroupName "rg1" -Name "vnet1" |
+  ___[2]___ -Name "___[3]___" `
+    -AddressPrefix "___[4]___" `
+    -ServiceEndpoints "Microsoft.Storage" |
+  Set-AzVirtualNetwork
+
+$subnet = Get-AzVirtualNetwork -ResourceGroupName "rg1" -Name "vnet1" |
+  Get-AzVirtualNetworkSubnetConfig -Name "___[5]___"
+
+___[6]___ `
+    -ResourceGroupName "rg1" `
+    -Name "storage1" `
+    -VirtualNetworkResourceId $subnet.Id
+```
+
+Drop-Down Options:
+
+| Blank | Options |
+|-------|---------|
+| `[1]` | -Select- / Add-AzStorageAccountNetworkRule / Set-AzVirtualNetworkSubnetConfig / Update-AzStorageAccountNetworkRuleSet |
+| `[2]` | -Select- / Add-AzStorageAccountNetworkRule / Set-AzVirtualNetworkSubnetConfig / Update-AzStorageAccountNetworkRuleSet |
+| `[3]` | -Select- / appSubnet / storageSubnet |
+| `[4]` | -Select- / 10.0.1.0/24 / 10.0.0.0/24 / 10.0.0.0/16 |
+| `[5]` | -Select- / appSubnet / storageSubnet |
+| `[6]` | -Select- / Add-AzStorageAccountNetworkRule / Set-AzVirtualNetworkSubnetConfig / Update-AzStorageAccountNetworkRuleSet |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-14-03-46-56.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Explanation**
+
+You should complete the cmdlets as shown below:
+
+```powershell
+Update-AzStorageAccountNetworkRuleSet `
+    -ResourceGroupName "rg1" `
+    -Name "storage1" `
+    -DefaultAction Deny
+
+Get-AzVirtualNetwork -ResourceGroupName "rg1" -Name "vnet1" |
+  Set-AzVirtualNetworkSubnetConfig -Name "appSubnet" `
+    -AddressPrefix "10.0.0.0/24" `
+    -ServiceEndpoints "Microsoft.Storage" |
+  Set-AzVirtualNetwork
+
+$subnet = Get-AzVirtualNetwork -ResourceGroupName "rg1" -Name "vnet1" |
+  Get-AzVirtualNetworkSubnetConfig -Name "appSubnet"
+
+Add-AzStorageAccountNetworkRule `
+    -ResourceGroupName "rg1" `
+    -Name "storage1" `
+    -VirtualNetworkResourceId $subnet.Id
+```
+
+**Solution Explanation:**
+
+First, use `Update-AzStorageAccountNetworkRuleSet` to block public access to the storage account by setting `-DefaultAction` to `Deny`. Next, enable a service endpoint for Azure Storage on `appSubnet` by using `Set-AzVirtualNetworkSubnetConfig` with `-ServiceEndpoints "Microsoft.Storage"` and the address prefix `10.0.0.0/24`. This allows you to identify the origin trail and route traffic through the optimized Azure Storage path. Finally, add a virtual network rule for the storage account by using `Add-AzStorageAccountNetworkRule` with the subnet's resource ID, so that only network traffic from `appSubnet` can access `storage1`.
+
+**More Detail**:  
+
+To restrict an Azure Storage account so that only a specific subnet can access it, two configurations are required. First, the subnet must enable a **service endpoint** for `Microsoft.Storage`. This is done with `Set-AzVirtualNetworkSubnetConfig`, which updates the subnet configuration within the virtual network object. Even if the subnet already exists, the command still requires specifying the **AddressPrefix** because the cmdlet reconstructs the subnet configuration object before the updated virtual network is committed with `Set-AzVirtualNetwork`.
+
+Second, the storage account firewall must be configured. The firewall behavior is controlled by the **NetworkRuleSet**, which contains the default access rule along with lists of explicitly allowed networks and IP ranges. The cmdlet `Update-AzStorageAccountNetworkRuleSet` sets the `DefaultAction` (for example, **Deny**) to block all traffic by default. Then `Add-AzStorageAccountNetworkRule` adds the specific subnet to the allowed list. This command does not change the firewall’s default behavior; it only appends an entry to the list of permitted networks.
+
+```
+Storage Account
+ └─ NetworkRuleSet
+     ├─ DefaultAction (Allow / Deny)
+     ├─ VirtualNetworkRules
+     │    └─ Allowed subnets
+     └─ IpRules
+          └─ Allowed IP ranges
+```
+
+With `DefaultAction` set to **Deny**, Azure evaluates requests by first checking whether the source matches an entry in `VirtualNetworkRules` or `IpRules`. If it does, access is allowed; otherwise the request is denied by the default rule.
+
+**References**
+
+* [Configure Azure Storage firewalls and virtual networks](https://learn.microsoft.com/azure/storage/common/storage-network-security)
+
+</details>
+
+---
+
+#### Modify Stored Access Policy
+
+**Domain:** Implement and manage storage
+**Skill:** Configure access to storage
+**Task:** Configure stored access policies
+
+You are an Azure administrator for a manufacturing organization. You are using shared access signature (SAS) to configure control over storage accounts.
+
+You create a stored access policy as an additional level of control over SAS on the server side for file shares.
+
+You need to modify a stored access policy.
+
+What should you do?
+
+A. Execute a Set Share ACL operation with the SMB protocol.  
+B. Execute a Set Table ACL operation.  
+C. Execute a Set Container ACL operation with public read access for blobs only.  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-03-03-53-49.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+In this scenario, you are using a stored access policy that acts as an additional level of control over shared access signature (SAS) on the server side for file shares. The access policy for an SAS consists of the start time, expiry time, and permissions for the signature. To create or modify a stored access policy, call the Set ACL operation for the resource (Set Container ACL, Set Queue ACL, Set Table ACL, or Set Share ACL) with a request body that specifies the terms of the access policy. An important point to note here is that, for a file share, you need to execute a Set Share ACL operation, which only supports the Server Message Block (SMB) protocol as the enabled file share protocol.
+
+You should not execute a Set Table ACL operation. The Set Table ACL operation sets the stored access policies for the table that can be used with SAS. In this scenario, since you want to modify stored access policies for an Azure File share, you need to use the Set Share ACL with SMB.
+
+You should not execute a Set Container ACL operation with public read access for blobs only. The Set Container ACL operation with public read access for blobs only will mean that Blob data within a container could be read via anonymous request, but container data is not available. In this scenario, since you are aiming to modify stored access policies for an Azure File share, you need to use the Set Share ACL with SMB.
 
 References
 
-* Grant limited access to Azure Storage resources using shared access signatures (SAS)
+[Define a stored access policy](https://learn.microsoft.com/en-us/rest/api/storageservices/define-stored-access-policy)
+
+</details>
+
+---
+
+#### Shared Access Signature (SAS) practices
+
+**Domain:** Implement and Manage Storage
+**Skill:** Configure access to storage
+**Task:** Create and use shared access signature (SAS) tokens
+
+Your company is developing a .NET application that stores part of the information in an Azure Storage account. The application will be installed on end users' computers.
+
+You want to ensure that the information stored in the storage account is accessed in a secure way, so you ask the developers to use a shared access signature (SAS) when accessing said information. You want to make the required configurations on the storage account to follow security best practices and enable access to the account with immediate effect.
+
+For each of the following statements, select Yes if the statement is true. Otherwise, select No.
+
+| STATEMENT | YES | NO |
+|-----------|-----|----|
+| You should configure a stored access policy. | ☐ | ☐ |
+| You should set the shared access signature (SAS) start time to now. | ☐ | ☐ |
+| You should validate data that has been written using a SAS. | ☐ | ☐ |
+| One option for revoking a SAS is by deleting a stored access policy. | ☐ | ☐ |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-11-04-16-22.png' width=700>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+You can configure a stored access policy. When you use a shared access signature (SAS), you have two different options. You can either use an ad-hoc SAS or configure a stored access policy. By using an ad-hoc SAS, you specify the start time, expiration time, and permissions in the Uniform Resource Identifier (URI). If someone copies this URI, they will have the same level of access as the corresponding user. This means that this type of SAS can be used by anyone in the world. By configuring a stored access policy, you define the start time, expiration time, and permissions in the policy and then associate a SAS with that policy. You can associate more than one SAS with the same policy.
+
+You should not set the SAS start time to now. When you set the start time of a SAS to now, there can be slight differences in the clocks of the servers that host the storage account. These differences could lead to an access problem for a few minutes after the configuration. If you need your SAS to be available as soon as possible, you should set the start time to 15 minutes before the current time, or you can just not set the start time. Not setting the start time parameter means that the SAS will be active immediately.
+
+You should validate data that has been written using a SAS. When the user uses a SAS, the information they write to the storage account can cause problems, such as communication issues or corruption. Because of this, it is a best practice to validate the data written to the storage account after it is written and before the information is used by any other service or application.
+
+You can revoke a SAS by deleting a stored access policy. If you associate a SAS with a stored access policy, the start time, expiration time, and permissions are inherited from the policy. If you remove the policy, you are invalidating the SAS, thus making it unusable. Keep in mind that if you remove a stored access policy with an associated SAS and then create another stored access policy with the exact same name as the original policy, the associated SAS will be enabled again.
+
+<img src='.img/2026-03-11-04-19-52.png' width=600>
+
+<img src='.img/2026-03-11-04-20-50.png' width=600>
+
+<img src='.img/2026-03-11-04-22-57.png' width=600>
+
+References
+
+* [Grant limited access to Azure Storage resources using shared access signatures (SAS)](https://learn.microsoft.com/en-us/azure/storage/common/storage-sas-overview)
+* [Create a stored access policy](https://learn.microsoft.com/en-us/azure/storage/common/storage-stored-access-policy-define-dotnet?toc=%2Fazure%2Fstorage%2Fblobs%2Ftoc.json&bc=%2Fazure%2Fstorage%2Fblobs%2Fbreadcrumb%2Ftoc.json)
 
 </details>
 
@@ -1095,53 +1400,46 @@ azcopy copy "source" "https://devstore.file.core.windows.net/share"
 
 ---
 
-#### Shared Access Signature (SAS) practices
+#### Provide least-privilege access to a report
 
 **Domain:** Implement and Manage Storage
 **Skill:** Configure access to storage
 **Task:** Create and use shared access signature (SAS) tokens
 
-Your company is developing a .NET application that stores part of the information in an Azure Storage account. The application will be installed on end users' computers.
+You create a binary large object (blob) storage account named `reportstorage99` that contains archival reports from past corporate board meetings.
 
-You want to ensure that the information stored in the storage account is accessed in a secure way, so you ask the developers to use a shared access signature (SAS) when accessing said information. You want to make the required configurations on the storage account to follow security best practices and enable access to the account with immediate effect.
+A board member requests access to a specific report. The member does not have a Microsoft Entra user account. Moreover, they have access only to a web browser on his Google Chromebook device.
 
-For each of the following statements, select Yes if the statement is true. Otherwise, select No.
+To fulfill the request, you will provide the board member with least-privilege access to the requested report while maintaining security compliance and minimizing administrative overhead.
 
-| STATEMENT | YES | NO |
-|-----------|-----|----|
-| You should configure a stored access policy. | ☐ | ☐ |
-| You should set the shared access signature (SAS) start time to now. | ☐ | ☐ |
-| You should validate data that has been written using a SAS. | ☐ | ☐ |
-| One option for revoking a SAS is by deleting a stored access policy. | ☐ | ☐ |
+What should you do?
+
+A. Deploy a point-to-site (P2S) virtual private network (VPN) connection on the board member's Chromebook and grant the board member role-based access control (RBAC) access to the report.  
+B. Generate a shared access signature (SAS) token for the report and share the Uniform Resource Locator (URL) with the board member.  
+C. Copy the report to an Azure File Service share and provide the board member with a PowerShell connection script.  
+D. Create a Microsoft Entra account for the board member and grant him role-based access control (RBAC) access to the storage account.  
 
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-03-11-04-16-22.png' width=700>
+<img src='.img/2026-03-11-04-28-34.png' width=700>
 
 </details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
 
-You can configure a stored access policy. When you use a shared access signature (SAS), you have two different options. You can either use an ad-hoc SAS or configure a stored access policy. By using an ad-hoc SAS, you specify the start time, expiration time, and permissions in the Uniform Resource Identifier (URI). If someone copies this URI, they will have the same level of access as the corresponding user. This means that this type of SAS can be used by anyone in the world. By configuring a stored access policy, you define the start time, expiration time, and permissions in the policy and then associate a SAS with that policy. You can associate more than one SAS with the same policy.
+You should generate a shared access signature (SAS) token for the report and share the Uniform Resource Locator (URL) with the board member. SAS enables you to define time-limited read-only or read-write access to Azure storage account resources. It is important that you set the time restriction properly because the SAS includes no authentication. Any person with access to the URL can access the target resource(s) within the token's lifetime. In this case, you both minimize administrative effort as well as maintain security compliance because the SAS token points only to a single file, not the entire blob container that hosts the requested report.
 
-You should not set the SAS start time to now. When you set the start time of a SAS to now, there can be slight differences in the clocks of the servers that host the storage account. These differences could lead to an access problem for a few minutes after the configuration. If you need your SAS to be available as soon as possible, you should set the start time to 15 minutes before the current time, or you can just not set the start time. Not setting the start time parameter means that the SAS will be active immediately.
+You should not create a Microsoft Entra account for the board member and grant him role-based access control (RBAC) access to the storage account. First, it requires significant management overhead to create and manage Microsoft Entra accounts, even for external (guest) users. Second, SAS and not RBAC is the way Azure provides screened access to individual storage account resources. You can use RBAC roles only at the storage account scope.
 
-You should validate data that has been written using a SAS. When the user uses a SAS, the information they write to the storage account can cause problems, such as communication issues or corruption. Because of this, it is a best practice to validate the data written to the storage account after it is written and before the information is used by any other service or application.
+You should not copy the report to an Azure File Service share and provide the board member with a PowerShell connection script. Here you create security and governance problems by creating multiple copies of the source report, as well as producing unnecessary administrative complexity.
 
-You can revoke a SAS by deleting a stored access policy. If you associate a SAS with a stored access policy, the start time, expiration time, and permissions are inherited from the policy. If you remove the policy, you are invalidating the SAS, thus making it unusable. Keep in mind that if you remove a stored access policy with an associated SAS and then create another stored access policy with the exact same name as the original policy, the associated SAS will be enabled again.
-
-<img src='.img/2026-03-11-04-19-52.png' width=600>
-
-<img src='.img/2026-03-11-04-20-50.png' width=600>
-
-<img src='.img/2026-03-11-04-22-57.png' width=600>
+You should not deploy a point-to-site (P2S) VPN connection on the board member's Chromebook and grant the board member RBAC access to the report. The scenario stipulates that the board member is limited to using a web browser on his Chromebook. Furthermore, the Azure P2S VPN client is supported only on Windows, macOS, and endorsed Linux distributions. Chrome OS is not supported.
 
 References
 
-* [Grant limited access to Azure Storage resources using shared access signatures (SAS)](https://learn.microsoft.com/en-us/azure/storage/common/storage-sas-overview)
-* [Create a stored access policy](https://learn.microsoft.com/en-us/azure/storage/common/storage-stored-access-policy-define-dotnet?toc=%2Fazure%2Fstorage%2Fblobs%2Ftoc.json&bc=%2Fazure%2Fstorage%2Fblobs%2Fbreadcrumb%2Ftoc.json)
+* Grant limited access to Azure Storage resources using shared access signatures (SAS)
 
 </details>
 
@@ -1327,304 +1625,6 @@ The solution is either:
 </details>
 
 ▶ **Related Lab:** [lab-storage-explorer-permissions](../hands-on-labs/storage/lab-storage-explorer-permissions/README.md)
-
----
-
-#### Secure Storage Access from Subnet
-
-**Domain:** Implement and Manage Storage
-**Skill:** Configure access to storage
-**Task:** Configure Azure Storage firewalls and virtual networks
-
-You manage an Azure Storage Account named `storage1`.
-
-Storage1 is used exclusively by an application running in an Azure Virtual Machine (VM). The Azure VM uses a virtual network (`vnet1`). `vnet1` is configured with the address range `10.0.0.0/16`. `appSubnet` is a subnet of `vnet1` configured with the address range `10.0.0.0/24`. `storageSubnet` is a subnet of `vnet1` configured with the address range `10.0.10.0/24`.
-
-The Azure VM is configured to use the `appSubnet`. As a security requirement, you must secure `storage1` to allow network connections that originate from `appSubnet` only. All resources are provisioned in a resource group named `rg1`.
-
-You need to configure the network access rule to meet the requirements.
-
-How should you configure the network access rule? To answer, select the appropriate options from the drop-down menus.
-
-```powershell
-___[1]___ `
-    -ResourceGroupName "rg1" `
-    -Name "storage1" `
-    -DefaultAction Deny
-
-Get-AzVirtualNetwork -ResourceGroupName "rg1" -Name "vnet1" |
-  ___[2]___ -Name "___[3]___" `
-    -AddressPrefix "___[4]___" `
-    -ServiceEndpoints "Microsoft.Storage" |
-  Set-AzVirtualNetwork
-
-$subnet = Get-AzVirtualNetwork -ResourceGroupName "rg1" -Name "vnet1" |
-  Get-AzVirtualNetworkSubnetConfig -Name "___[5]___"
-
-___[6]___ `
-    -ResourceGroupName "rg1" `
-    -Name "storage1" `
-    -VirtualNetworkResourceId $subnet.Id
-```
-
-Drop-Down Options:
-
-| Blank | Options |
-|-------|---------|
-| `[1]` | -Select- / Add-AzStorageAccountNetworkRule / Set-AzVirtualNetworkSubnetConfig / Update-AzStorageAccountNetworkRuleSet |
-| `[2]` | -Select- / Add-AzStorageAccountNetworkRule / Set-AzVirtualNetworkSubnetConfig / Update-AzStorageAccountNetworkRuleSet |
-| `[3]` | -Select- / appSubnet / storageSubnet |
-| `[4]` | -Select- / 10.0.1.0/24 / 10.0.0.0/24 / 10.0.0.0/16 |
-| `[5]` | -Select- / appSubnet / storageSubnet |
-| `[6]` | -Select- / Add-AzStorageAccountNetworkRule / Set-AzVirtualNetworkSubnetConfig / Update-AzStorageAccountNetworkRuleSet |
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-14-03-46-56.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Explanation**
-
-You should complete the cmdlets as shown below:
-
-```powershell
-Update-AzStorageAccountNetworkRuleSet `
-    -ResourceGroupName "rg1" `
-    -Name "storage1" `
-    -DefaultAction Deny
-
-Get-AzVirtualNetwork -ResourceGroupName "rg1" -Name "vnet1" |
-  Set-AzVirtualNetworkSubnetConfig -Name "appSubnet" `
-    -AddressPrefix "10.0.0.0/24" `
-    -ServiceEndpoints "Microsoft.Storage" |
-  Set-AzVirtualNetwork
-
-$subnet = Get-AzVirtualNetwork -ResourceGroupName "rg1" -Name "vnet1" |
-  Get-AzVirtualNetworkSubnetConfig -Name "appSubnet"
-
-Add-AzStorageAccountNetworkRule `
-    -ResourceGroupName "rg1" `
-    -Name "storage1" `
-    -VirtualNetworkResourceId $subnet.Id
-```
-
-**Solution Explanation:**
-
-First, use `Update-AzStorageAccountNetworkRuleSet` to block public access to the storage account by setting `-DefaultAction` to `Deny`. Next, enable a service endpoint for Azure Storage on `appSubnet` by using `Set-AzVirtualNetworkSubnetConfig` with `-ServiceEndpoints "Microsoft.Storage"` and the address prefix `10.0.0.0/24`. This allows you to identify the origin trail and route traffic through the optimized Azure Storage path. Finally, add a virtual network rule for the storage account by using `Add-AzStorageAccountNetworkRule` with the subnet's resource ID, so that only network traffic from `appSubnet` can access `storage1`.
-
-**More Detail**:  
-
-To restrict an Azure Storage account so that only a specific subnet can access it, two configurations are required. First, the subnet must enable a **service endpoint** for `Microsoft.Storage`. This is done with `Set-AzVirtualNetworkSubnetConfig`, which updates the subnet configuration within the virtual network object. Even if the subnet already exists, the command still requires specifying the **AddressPrefix** because the cmdlet reconstructs the subnet configuration object before the updated virtual network is committed with `Set-AzVirtualNetwork`.
-
-Second, the storage account firewall must be configured. The firewall behavior is controlled by the **NetworkRuleSet**, which contains the default access rule along with lists of explicitly allowed networks and IP ranges. The cmdlet `Update-AzStorageAccountNetworkRuleSet` sets the `DefaultAction` (for example, **Deny**) to block all traffic by default. Then `Add-AzStorageAccountNetworkRule` adds the specific subnet to the allowed list. This command does not change the firewall’s default behavior; it only appends an entry to the list of permitted networks.
-
-```
-Storage Account
- └─ NetworkRuleSet
-     ├─ DefaultAction (Allow / Deny)
-     ├─ VirtualNetworkRules
-     │    └─ Allowed subnets
-     └─ IpRules
-          └─ Allowed IP ranges
-```
-
-With `DefaultAction` set to **Deny**, Azure evaluates requests by first checking whether the source matches an entry in `VirtualNetworkRules` or `IpRules`. If it does, access is allowed; otherwise the request is denied by the default rule.
-
-**References**
-
-* [Configure Azure Storage firewalls and virtual networks](https://learn.microsoft.com/azure/storage/common/storage-network-security)
-
-</details>
-
----
-
-#### SAS key configuration scenarios
-
-**Domain:** Implement and manage storage
-**Skill:** Configure access to storage
-**Task:** Create and use shared access signature (SAS) tokens
-
-You have a storage account named `salesstorage` in a subscription named `SalesSubscription`. You create a container in a blob storage named `salecontainer`.
-
-You create the shared access signature (SAS) shown in the exhibit.
-
-You try to carry out actions from several computers at different times using the SAS key1 configurations shown in the exhibit.
-
-What level of access would be available in each scenario? To answer, select the appropriate options from the drop-down menus.
-
-| Configuration | Value | Action | Action result |
-|---------------|-------|--------|---------------|
-| 151.112.10.6 | March 4th, 2020 at 11 AM | Connect to Storage Account | ***[1]*** |
-| 151.112.11.6 | March 4th, 2020 at 12 AM | Connect to Storage Account | ***[2]*** |
-| 151.112.10.6 | March 10th, 2020 at 10 AM | Create a Container | ***[3]*** |
-| 151.112.10.6 | March 10th, 2020 at 12 AM | Read a File Share | ***[4]*** |
-
-Drop-Down Options:
-
-| Blank | Options |
-|-------|---------|
-| [1] | Connection success with read, write, and list access / Connection failure with read, write, and list access / Connection failure with read access |
-| [2] | Connection success with read, write, and list access / Connection failure with read, write, and list access / Connection failure with read access |
-| [3] | Connection success with read, write, and list access / Connection failure with read, write, and list access / Connection failure with read access |
-| [4] | Connection success with read, write, and list access / Connection failure with read, write, and list access / Connection failure with read access |
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-11-04-35-29.png' width=700>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-In the first scenario, you would have connection success with read, write, and list access, because the IP address and the dates meet the criteria when the shared access signature (SAS) key1 is active.
-
-In the second scenario, you would have connection failure with read, write, and list access, because the IP address does not fall in the allowed IP address range. Additionally, it would also fail because the start time is 12am on March 4th, 2020, for the request, but the SAS token starts at 11am on March 4th, 2020.
-
-In the third scenario, you would have connection failure with read, write, and list access, because the permissions provided for the SAS key1 do not grant permissions to create a new container.
-
-In the fourth scenario, you would have connection failure with read, write, and list access, because the permissions granted are only for blob containers and not file shares.
-
-</details>
-
----
-
-#### Configure storage account network access
-
-**Domain:** Implement and Manage Storage
-**Skill:** Configure access to storage
-**Task:** Configure Azure Storage firewalls and virtual networks
-
-You deploy a new storage account named `storage01` in a resource group named `RG01`.
-
-You need to ensure that the App Services, the backup vault, and the event hub can access the new storage account. Access should be enabled from within Azure only, and not via public internet.
-
-You decide to use PowerShell to configure all the settings.
-
-How should you complete the command string? To answer, select the appropriate options from the drop-down menus.
-
-```powershell
-Get-AzVirtualNetwork -ResourceGroupName "RG01" -Name "VNET01" |
-  Set-AzVirtualNetworkSubnetConfig -Name "VSUBNET01" \
-    -AddressPrefix "10.0.0.0/24" -ServiceEndpoint "___[1]___" \
-  | Set-AzVirtualNetwork
-
-$subnet = Get-AzVirtualNetwork -ResourceGroupName "RG01" -Name "VNET01"
-Get-AzVirtualNetworkSubnetConfig -Name "VSUBNET01"
-
-___[2]___ -ResourceGroupName "RG01" \
-  -Name "storage01" -VirtualNetworkResourceId $subnet.Id
-
-___[3]___ -ResourceGroupName "RG01" \
-  -Name "storage01" -Bypass ___[4]___
-```
-
-Drop-Down Options:
-
-| Blank | Options |
-|-------|---------|
-| [1] | AzureServices / Logging / Metrics / Microsoft.Storage / None |
-| [2] | Add-AzStorageAccountNetworkRule / Remove-AzStorageAccountNetworkRuleSet / Set-AzStorageAccount / Update-AzStorageAccountNetworkRuleSet |
-| [3] | Add-AzStorageAccountNetworkRule / Remove-AzStorageAccountNetworkRuleSet / Set-AzStorageAccount / Update-AzStorageAccountNetworkRuleSet |
-| [4] | AzureServices / Logging / Metrics / Microsoft.Storage / None |
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-11-03-48-09.png' width=700>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-You should run the following script to ensure that the backup vault and the event hub services have access to the storage account:
-
-```powershell
-Get-AzVirtualNetwork -ResourceGroupName "RG01" -Name "VNET01" |
-Set-AzVirtualNetworkSubnetConfig -Name "VSUBNET01" \
-    -AddressPrefix "10.0.0.0/24" -ServiceEndpoint "Microsoft.Storage" \
-| Set-AzVirtualNetwork
-
-$subnet = Get-AzVirtualNetwork -ResourceGroupName "RG01" -Name "VNET01"
-Get-AzVirtualNetworkSubnetConfig -Name "VSUBNET01"
-
-Add-AzStorageAccountNetworkRule -ResourceGroupName "RG01" \
-    -Name "storage01" -VirtualNetworkResourceId $subnet.Id
-
-Update-AzStorageAccountNetworkRuleSet -ResourceGroupName "RG01" \
-    -Name "storage01" -Bypass AzureServices
-```
-
-You should use `Microsoft.Storage` as the service endpoint. Using the `Set-AzVirtualNetworkSubnetConfig` cmdlet enables the service endpoint on the subnet `VSUBNET01` for a storage account. This will allow connections to the virtual subnet from the storage account. This cmdlet makes modifications only to the memory representation of the virtual network. You need to run `Set-AzVirtualNetwork` to make the changes persistent.
-
-You should use the `Add-AzStorageAccountNetworkRule` cmdlet to add a firewall exception on the `NetworkRule` property in the storage account. This will allow communication from the virtual subnet to the storage account.
-
-You should use the `Update-AzStorageAccountNetworkRuleSet` cmdlet. This cmdlet also updates the `NetworkRule` property. It allows you to modify the `NetworkRule` property to allow other Azure services, like Backup or Event Hubs, to have access to the storage account.
-
-You should use `AzureServices` for the `-Bypass` parameter. This way, you instruct the `Update-AzStorageAccountNetworkRuleSet` cmdlet to allow connections from other Azure services. Allowed values are `AzureServices`, `Metrics`, `Logging`, and `None`.
-
-You should not use the `Set-AzStorageAccount` cmdlet. You can use this cmdlet to modify a storage account, but not the `NetworkRule` property of the storage account. You typically use this cmdlet when you want to set a tag to a storage account, update a customer domain, or update the type of the account.
-
-You should not use the `Remove-AzStorageAccountNetworkRuleSet` cmdlet. You use this cmdlet to remove a `NetworkRule` property from the storage account. In this scenario, you need to add and modify a new network rule, not remove it.
-
-You should not use the `Logging`, `None`, or `Metrics` values. These are valid for the `-Bypass` parameter for `Update-AzStorageAccountNetworkRuleSet`. Use the `None` value when you want to remove the access to all Azure services, including monitoring and logging services. Use the `Metrics` or `Logging` values when you want to allow access to monitoring or logging Azure Services respectively.
-
-**References**:  
-
-* [Azure Storage firewall rules](https://learn.microsoft.com/en-us/azure/storage/common/storage-network-security)
-* [Update-AzStorageAccountNetworkRuleSet](https://learn.microsoft.com/en-us/powershell/module/az.storage/update-azstorageaccountnetworkruleset?view=azps-15.4.0&viewFallbackFrom=azps-2.6.0)
-* [Add-AzStorageAccountNetworkRule](https://learn.microsoft.com/en-us/powershell/module/az.storage/add-azstorageaccountnetworkrule?view=azps-15.4.0)
-
-</details>
-
----
-
-#### Modify Stored Access Policy
-
-**Domain:** Implement and manage storage
-**Skill:** Configure access to storage
-**Task:** Configure stored access policies
-
-You are an Azure administrator for a manufacturing organization. You are using shared access signature (SAS) to configure control over storage accounts.
-
-You create a stored access policy as an additional level of control over SAS on the server side for file shares.
-
-You need to modify a stored access policy.
-
-What should you do?
-
-A. Execute a Set Share ACL operation with the SMB protocol.  
-B. Execute a Set Table ACL operation.  
-C. Execute a Set Container ACL operation with public read access for blobs only.  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-03-03-53-49.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-In this scenario, you are using a stored access policy that acts as an additional level of control over shared access signature (SAS) on the server side for file shares. The access policy for an SAS consists of the start time, expiry time, and permissions for the signature. To create or modify a stored access policy, call the Set ACL operation for the resource (Set Container ACL, Set Queue ACL, Set Table ACL, or Set Share ACL) with a request body that specifies the terms of the access policy. An important point to note here is that, for a file share, you need to execute a Set Share ACL operation, which only supports the Server Message Block (SMB) protocol as the enabled file share protocol.
-
-You should not execute a Set Table ACL operation. The Set Table ACL operation sets the stored access policies for the table that can be used with SAS. In this scenario, since you want to modify stored access policies for an Azure File share, you need to use the Set Share ACL with SMB.
-
-You should not execute a Set Container ACL operation with public read access for blobs only. The Set Container ACL operation with public read access for blobs only will mean that Blob data within a container could be read via anonymous request, but container data is not available. In this scenario, since you are aiming to modify stored access policies for an Azure File share, you need to use the Set Share ACL with SMB.
-
-References
-
-[Define a stored access policy](https://learn.microsoft.com/en-us/rest/api/storageservices/define-stored-access-policy)
-
-</details>
 
 ---
 
@@ -2238,249 +2238,33 @@ The four versioning operations are **Put Blob**, **Put Block List**, **Copy Blob
 
 ### Automate deployment of resources by using ARM templates or Bicep files
 
-#### Deployment Mode Deleted Resources
+#### Complete ARM template deployment command
 
 **Domain:** Deploy and Manage Azure Compute Resources
 **Skill:** Automate deployment of resources by using ARM templates or Bicep files
 **Task:** Deploy resources by using an ARM template or a Bicep file
 
-You have a resource group named `APP-RG` that consists of several resources.
+You are adding a resource group deployment from an Azure Resource Manager (ARM) template that already exists. The template is stored in a web-based repository. You have already created the resource group named `ResourceGroup1`.
 
-You are asked to add a storage account to the resource group. You decide to deploy the new storage account by using an Azure Resource Manager (ARM) template and the `New-AzResourceGroupDeployment` cmdlet. This template does not contain any linked or nested templates.
+You need to deploy the resources from the resource group deployment. `$ResourceTemplate` is the location of the source template file.
 
-After the deployment finishes successfully, you realize that all the resources in the resource group have been deleted except for the newly created storage account.
-
-Why did this happen?
-
-A. The template contains the mode parameter with the value Incremental.  
-B. The template contains the mode parameter with the value Complete.  
-C. You did not use the -mode parameter with the `New-AzResourceGroupDeployment` cmdlet.  
-D. You used the -mode complete parameter with the `New-AzResourceGroupDeployment` cmdlet.  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-13-05-11-11.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Explanation**
-
-Resources in the resource group were deleted except for the newly-created storage account because you used the `-mode complete` parameter with the `New-AzResourceGroupDeployment` cmdlet. The `New-AzResourceGroupDeployment` cmdlet has two deployment modes: incremental and complete. When you use the complete mode, all resources in the resource group that are not included in the template are deleted.
-
-Using the `-mode` parameter with the `New-AzResourceGroupDeployment` cmdlet was not the cause when you did not specify it. When you do not use the `-mode` parameter, you are using the default incremental deployment mode. In this mode, any resource that is not present in the template is maintained in the resource group. If a resource in the resource group is present in the template and any parameters in the template differ from the values in the resource group, those values are updated in the resource present in Azure. You should use this mode when deploying the template.
-
-The cause was not the template containing the mode parameter with the value Complete or Incremental. The template that you are using does not contain any linked or nested templates, so the mode parameter should not be present in the template with either value. This parameter is part of the deployment resource type and is typically used with nested or linked templates. Complete and incremental deployment modes behave the same way as in the `New-AzResourceGroupDeployment` cmdlet.
-
-**References**
-
-* [Deploy resources with ARM templates and Azure PowerShell](https://learn.microsoft.com/azure/azure-resource-manager/templates/deploy-powershell)
-* [Microsoft.Resources deployments](https://learn.microsoft.com/azure/templates/microsoft.resources/deployments)
-* [New-AzResourceGroupDeployment](https://learn.microsoft.com/powershell/module/az.resources/new-azresourcegroupdeployment?view=azps-15.4.0)
-
-</details>
-
----
-
-#### Export ARM Template
-
-**Domain:** Deploy and Manage Azure Compute Resources
-**Skill:** Automate deployment of resources by using ARM templates or Bicep files
-**Task:** Export a deployment as an ARM template or convert an ARM template to a Bicep file
-
-You deploy a line of business (LOB) application. All resources that are part of the LOB application are deployed in a single resource group. The resources were added in different phases.
-
-You need to export the current configuration of the LOB application resources to an Azure Resource Manager (ARM) template. You will later use this template for deploying the LOB application infrastructure in different environments for testing or development purposes.
-
-You are using the Complete mode for ARM deployment.
-
-For each of the following statements, select Yes if the statement is true. Otherwise, select No.
-
-| Statement | Yes | No |
-|----------|-----|----|
-| You need to export the Azure Resource Manager (ARM) template from the latest deployment. | ☐ | ☐ |
-| Each deployment contains only the resources that have been added in that deployment. | ☐ | ☐ |
-| The parameters file contains the values used during the deployment. | ☐ | ☐ |
-| The template contains the scripts needed for deploying the template. | ☐ | ☐ |
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-12-03-11-57.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-You do not need to export the Azure Resource Manager (ARM) template from the latest deployment. In this scenario, the line of business (LOB) application was deployed in several phases. The latest deployment will export only the latest resources added to the application. If you want to export the ARM template with all the resources needed for the LOB application, you will need to export the ARM template from the resource group.
-
-Each deployment contains only the resources that have been added in that deployment. When deploying your resources, you specify that the deployment is either an Incremental update or a Complete update. The difference between these two modes is how the Resource Manager handles existing resources in the resource group that are not in the template. In this scenario, since you are using the Complete mode, each deployment contains only the resources that have been added in that deployment and the Resource Manager will delete all the resources that exist in the resource group but are not specified in the template. On the other hand, in an Incremental mode, the Resource Manager leaves unchanged resources that exist in the resource group but are not specified in the template. Resources in the template are added to the resource group.
-
-The parameters file contains the values used during the deployment. The parameters file is a JSON file that stores all the parameters used in the ARM template. You can use this file to reuse the template in different deployments, just changing the values of the parameters file. If you use this file in templates created from resource groups, you need to make significant edits to the template before you can effectively use the parameters file.
-
-The template does not contain the scripts needed for deploying the template. When you download an ARM template from a deployment or a resource group, the downloaded package contains only the ARM template and the parameters file. You can reference Azure CLI scripts or a PowerShell script in the Azure docs linked in the export template pane.
-
-<img src='.img/2026-03-12-03-47-36.png' width=600>
-
-<img src='.img/2026-03-12-03-31-11.png' width=600>
-
-References
-
-- [Use Azure portal to export a template](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/export-template-portal)
-- [Understand the structure and syntax of ARM templates](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/syntax)
-- [Azure Resource Manager deployment modes: COMPLETE versus INCREMENTAL](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/deployment-modes)
-- [Azure Resource Manager deployment modes](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/deployment-modes)
-- [Manage Azure resources by using Azure CLI](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resources-cli)
-
-</details>
-
----
-
-#### Edit ARM Template to Inherit Resource Group Location
-
-**Domain:** Deploy and Manage Azure Compute Resources
-**Skill:** Automate deployment of resources by using ARM templates or Bicep files
-**Task:** Modify an existing Azure Resource Manager template
-
-You have an Azure Resource Manager (ARM) template for creating a Windows virtual machine. You got this template from an existing resource group with a single virtual machine, using the automation script option.
-
-You want to reuse this template for other deployments. You need all the resources in the resource group to be in the same location.
-
-What should you do?
-
-A. Use the Azure portal and create a resource group in the desired location. Then use the `New-AzResourceGroupDeployment` cmdlet using the newly created resource group.  
-B. Edit the parameters file and add a new parameter named location of type string with the default value of `[resourceGroup().location]`.  
-C. Use the `New-AzResourceGroup` cmdlet with the `-Location` parameter to create a resource group in the desired location. Then use the `New-AzResourceGroupDeployment` cmdlet using the newly created resource group.  
-D. Edit the template file and update each location parameter with the value `[resourceGroup().location]`.  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-12-04-14-06.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Explanation:**
-
-You should edit the template file and update each location parameter with the value `[resourceGroup().location]`. The `resourceGroup()` function gets the resource group object that will be used to deploy the template. This way, all resources in the template will use the same location as the resource group. You need to ensure that all resources are supported in the location that you are using for the resource group.
-
-**Why you should not choose B:**
-
-You should not edit the parameters file and add a new parameter named `location` of type string with the default value of `[resourceGroup().location]`. This is the first step in centralizing the location value in the template, but you also need to update the location parameter in the template file with the value `[parameters('location')]`.
-
-**Why you should not choose A:**
-
-You should not use the Azure portal and create a resource group in the desired location and then use the `New-AzResourceGroupDeployment` cmdlet using the newly created resource group. If the resource group is deployed in a different location to the location configured in the template file, the resources will be deployed in different locations. You need to modify the location parameter in the template file to the value `[resourceGroup().location]` to inherit the location from the parent resource group.
-
-**Why you should not choose C:**
-
-You should not use the `New-AzResourceGroup` cmdlet with the `-Location` parameter to create a resource group in the desired location and then use the `New-AzResourceGroupDeployment` cmdlet using the newly created resource group. If the resource group is deployed in a different location to the location configured in the template file, the resources will be deployed in different locations. You need to modify the location parameter in the template file to the value `[resourceGroup().location]` to inherit the location from the parent resource group.
-
-<img src='.img/2026-03-12-04-30-49.png' width=600>
-
-**References**
-
-- [Set resource location in ARM template](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/resource-location?tabs=azure-powershell)
-- [Understand the structure and syntax of ARM templates](https://learn.microsoft.com/azure/azure-resource-manager/templates/syntax)
-- [Deploy resources with ARM templates and Azure PowerShell](https://learn.microsoft.com/azure/azure-resource-manager/templates/deploy-powershell)
-
-</details>
-
----
-
-#### Case Study — Solution Evaluation
-
-**Domain:** Deploy and Manage Azure Compute Resources
-**Skill:** Automate deployment of resources by using ARM templates or Bicep files
-**Task:** Deploy resources by using an ARM template or a Bicep file
-
-*Case Study — Solution Evaluation*
-
-This case study contains a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.
-
-You have an Azure resource group named `RG1`. `RG1` contains a Linux virtual machine (VM) named `VM1`.
-
-You need to automate the deployment of 20 additional Linux VMs. The new VMs should be based upon `VM1`'s configuration.
-
-Does this solution meet the goal?
-
-| Solution | Yes | No |
-|----------|-----|----|
-| 1. From the virtual machine's Export Template settings blade, you click Deploy and edit the parameters. | ☐ | ☐ |
-| 2. You store the Linux VM properties in a template and deploy the additional VMs by editing the template parameter values for each additional VM. | ☐ | ☐ |
-| 3. From the resource group's Policies blade, you click Assign policy. | ☐ | ☐ |
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-12-03-58-37.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-Solution 1 Explanation:
-
-This solution does not meet the goal. Every deployment in Azure is described in a template in JavaScript Object Notation (JSON) format. You can access the underlying template from the Export Template settings blade of the VM resource, and then deploy a single new instance of a resource by modifying the template parameters. However, you would need to do this 20 times in order to create 20 VMs, and therefore it is not an automatic process.
-
-Solution 2 Explanation:
-
-This solution meets the goal. The Templates blade in the Azure portal enables you to store JavaScript Object Notation (JSON) documents that automate Azure resource deployment. In this case, to automate the deployment of 20 additional Linux VMs based on `VM1`'s configuration, you can use an Azure Resource Manager (ARM) template. Steps:
-
-1. Export `VM1`'s configuration by using **Export template** in the portal to get the ARM template for the VM.
-2. Modify the exported ARM template to introduce parameters for items that will vary between VMs (for example, VM name, IP assignment, and any unique identifiers).
-3. Create a parameter file (`parameters.json`) that defines the values for the 20 new VMs (names, sizes, and other settings).
-4. Deploy the template with the parameter file using CLI or PowerShell, for example:
+How should you complete the command string? To answer, complete the commands by selecting the correct parts from the drop-down menus.
 
 ```powershell
-az deployment group create --resource-group MyResourceGroup --template-file ./template.json --parameters @parameters.json
+___[1]___ -ResourceGroupName "ResourceGroup1" ___[2]___ $ResourceTemplate
 ```
 
-5. Automate the process by scripting updates to the parameter file and running the deployment in a loop. For example, a simple shell loop can iterate and deploy multiple parameter sets.
+Drop-Down Options:
 
-Solution 3 Explanation:
-
-This solution does not meet the goal. To automate the deployment of the 20 additional VMs, you should access the virtual machine's underlying JSON template and deploy the new resources by using the template and custom deployment parameters. Azure Policy is a governance product that enforces rules (for example, allowed regions or VM types) and helps ensure compliance, but it does not perform bulk VM provisioning based on an existing VM's configuration.
-
-References
-
-* [Export an Azure Resource Manager template from an existing resource](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/export-template-portal)
-* Deploy resources with ARM templates
-* [Azure Policy overview](https://learn.microsoft.com/en-us/azure/governance/policy/overview)
-
-</details>
-
----
-
-#### Export resource group template
-
-**Domain:** Deploy and Manage Azure Compute Resources
-**Skill:** Automate deployment of resources by using ARM templates or Bicep files
-**Task:** Export a deployment as an ARM template or convert an ARM template to a Bicep file
-
-An Azure resource group was initially deployed from an Azure Resource Manager (ARM) template. Resources have since been added and modified manually through the Azure portal.
-
-You need to create a new template based on the current state of the resource group.
-
-Which PowerShell cmdlet should you use?
-
-A. `New-AzResourceGroupDeployment`  
-B. `Save-AzResourceGroupDeploymentTemplate`  
-C. `Save-AzDeploymentTemplate`  
-D. `Export-AzResourceGroup`  
+| Blank | Options |
+|-------|---------|
+| [1] | `-Select-` / `New-AzResource` / `New-AzResourceGroup` / `New-AzResourceGroupDeployment` |
+| [2] | `-Select-` / `-TemplateFile` / `-TemplateObject` / `-TemplateUri` |
 
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-03-13-05-35-52.png' width=600>
+<img src='.img/2026-03-13-05-26-05.png' width=600>
 
 </details>
 
@@ -2489,27 +2273,95 @@ D. `Export-AzResourceGroup`
 
 **Solution Explanation:**
 
-You should use the `Export-AzResourceGroup` cmdlet. This cmdlet captures a specified resource group and saves it as a template to a JSON or Bicep file. This gives you a way to create a template based on the current resources in a resource group. You also have the option of exporting a running resource group as a template from the Azure portal.
+You should complete the command string as follows:
 
-You should not use the `Save-AzResourceGroupDeploymentTemplate` cmdlet. This saves a resource group deployment, not the current resource group, to a file — you must specify both the deployment name and the resource group name.
+```powershell
+New-AzResourceGroupDeployment -ResourceGroupName "ResourceGroup1" -TemplateUri $ResourceTemplate
+```
 
-You should not use the `Save-AzDeploymentTemplate` cmdlet. This saves an existing deployment template to a file.
+The `New-AzResourceGroupDeployment` cmdlet is used to deploy a resource group deployment from a template. The `-TemplateUri` parameter is used to specify the template location (URI) and filename for a remote template.
 
-You should not use the `New-AzResourceGroupDeployment` cmdlet. This cmdlet is used to apply a template to an existing resource group, not to create a new template file.
+You should not use the `New-AzResourceGroup` cmdlet. This is used to create a new resource group with a specified name. You would have used this cmdlet to create `ResourceGroup1`.
 
-<img src='.img/2026-03-13-05-39-29.png' width=600>
+You should not use the `New-AzResource` cmdlet. This is used to create a specific resource.
 
-<img src='.img/2026-03-13-05-39-56.png' width=600>
+You should not use the `-TemplateFile` parameter. This is used to specify the path and filename of a locally stored template file.
 
-<img src='.img/2026-03-13-05-40-12.png' width=600>
+You should not use the `-TemplateObject` parameter. This is used to specify a hash table used to represent a template.
+
+<img src='.img/2026-03-13-05-29-46.png' width=600>
 
 **References**
 
-* [Use Azure portal to export a template](https://learn.microsoft.com/azure/azure-resource-manager/templates/export-template-portal)
-* [Save-AzResourceGroupDeploymentTemplate](https://learn.microsoft.com/powershell/module/az.resources/save-azresourcegroupdeploymenttemplate?view=azps-15.4.0)
-* [Export-AzResourceGroup](https://learn.microsoft.com/powershell/module/az.resources/export-azresourcegroup?view=azps-15.4.0)
+* [Deploy resources with ARM templates and Azure PowerShell](https://learn.microsoft.com/azure/azure-resource-manager/templates/deploy-powershell)
 * [New-AzResourceGroupDeployment](https://learn.microsoft.com/powershell/module/az.resources/new-azresourcegroupdeployment?view=azps-15.4.0)
-* [Save-AzDeploymentTemplate](https://learn.microsoft.com/powershell/module/az.resources/save-azdeploymenttemplate?view=azps-15.4.0)
+* [New-AzResourceGroup](https://learn.microsoft.com/powershell/module/az.resources/new-azresourcegroup?view=azps-15.4.0)
+* [New-AzResource](https://learn.microsoft.com/powershell/module/az.resources/new-azresource?view=azps-15.4.0)
+
+</details>
+
+---
+
+#### Resource dependencies in Bicep
+
+**Domain:** Deploy and Manage Azure Compute Resources
+**Skill:** Automate deployment of resources by using ARM templates or Bicep files
+**Task:** Interpret an Azure Resource Manager template or a Bicep file
+
+You are an Azure Administrator for an eCommerce organization. You are deploying Azure resources and have created a Bicep file as shown below:
+
+```bicep
+resource PrimaryDnsZone 'Microsoft.Network/dnszones@2018-05-01' = {
+  name: 'myZone'
+  location: 'global'
+}
+
+resource otherResource 'Microsoft.Example/examples@2023-05-01' = {
+  name: 'egResource'
+  properties: {
+    // get read-only DNS zone property
+    nameServers: PrimaryDnsZone.properties.nameServers
+  }
+}
+
+resource otherZone 'Microsoft.Network/dnszones@2023-06-01' = {
+  name: 'demoZone2'
+  location: 'global'
+  dependsOn: [
+    PrimaryDnsZone
+  ]
+}
+```
+
+For each of the following statements, select Yes if the statement is true. Otherwise, select No.
+
+| Statement | Yes | No |
+|----------|-----|----|
+| The resource named otherResource is implicitly dependent on PrimaryDnsZone. | ☐ | ☐ |
+| The resource named otherZone is implicitly dependent on PrimaryDnsZone. | ☐ | ☐ |
+| Azure Resource Manager deploys the PrimaryDnsZone and otherZone resources in parallel. | ☐ | ☐ |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-03-03-30-51.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+There are two kinds of resource dependencies in Azure Bicep. An implicit dependency is created when one resource declaration references another resource in the same deployment. The other type is referred to as an explicit dependency, where you use the dependsOn property. The dependsOn property accepts an array of resource identifiers, so you can specify more than one dependency. You can specify a nested resource dependency by using the :: operator.
+
+The resource named otherResource is implicitly dependent on PrimaryDnsZone. The `nameServers: PrimaryDnsZone.properties.nameServers` in otherResource uses an implicit dependency.
+
+The resource named otherZone is not implicitly dependent on PrimaryDnsZone. The otherZone uses the `dependsOn: [ PrimaryDnsZone ]`, which denotes that otherZone resource uses an explicit dependency.
+
+Azure Resource Manager (ARM) does not deploy the PrimaryDnsZone and otherZone resources in parallel. ARM only deploys resources in parallel if the resources are not dependent on one another. In this scenario, since the otherZone resource is explicitly dependent on the PrimaryDnsZone resource, ARM will not deploy the resources in parallel.
+
+References
+
+* [Resource dependencies in Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/resource-dependencies)
 
 </details>
 
@@ -2581,98 +2433,27 @@ References
 
 ---
 
-#### Resource dependencies in Bicep
+#### Export resource group template
 
 **Domain:** Deploy and Manage Azure Compute Resources
 **Skill:** Automate deployment of resources by using ARM templates or Bicep files
-**Task:** Interpret an Azure Resource Manager template or a Bicep file
+**Task:** Export a deployment as an ARM template or convert an ARM template to a Bicep file
 
-You are an Azure Administrator for an eCommerce organization. You are deploying Azure resources and have created a Bicep file as shown below:
+An Azure resource group was initially deployed from an Azure Resource Manager (ARM) template. Resources have since been added and modified manually through the Azure portal.
 
-```bicep
-resource PrimaryDnsZone 'Microsoft.Network/dnszones@2018-05-01' = {
-  name: 'myZone'
-  location: 'global'
-}
+You need to create a new template based on the current state of the resource group.
 
-resource otherResource 'Microsoft.Example/examples@2023-05-01' = {
-  name: 'egResource'
-  properties: {
-    // get read-only DNS zone property
-    nameServers: PrimaryDnsZone.properties.nameServers
-  }
-}
+Which PowerShell cmdlet should you use?
 
-resource otherZone 'Microsoft.Network/dnszones@2023-06-01' = {
-  name: 'demoZone2'
-  location: 'global'
-  dependsOn: [
-    PrimaryDnsZone
-  ]
-}
-```
-
-For each of the following statements, select Yes if the statement is true. Otherwise, select No.
-
-| Statement | Yes | No |
-|----------|-----|----|
-| The resource named otherResource is implicitly dependent on PrimaryDnsZone. | ☐ | ☐ |
-| The resource named otherZone is implicitly dependent on PrimaryDnsZone. | ☐ | ☐ |
-| Azure Resource Manager deploys the PrimaryDnsZone and otherZone resources in parallel. | ☐ | ☐ |
+A. `New-AzResourceGroupDeployment`  
+B. `Save-AzResourceGroupDeploymentTemplate`  
+C. `Save-AzDeploymentTemplate`  
+D. `Export-AzResourceGroup`  
 
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-03-03-03-30-51.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-There are two kinds of resource dependencies in Azure Bicep. An implicit dependency is created when one resource declaration references another resource in the same deployment. The other type is referred to as an explicit dependency, where you use the dependsOn property. The dependsOn property accepts an array of resource identifiers, so you can specify more than one dependency. You can specify a nested resource dependency by using the :: operator.
-
-The resource named otherResource is implicitly dependent on PrimaryDnsZone. The `nameServers: PrimaryDnsZone.properties.nameServers` in otherResource uses an implicit dependency.
-
-The resource named otherZone is not implicitly dependent on PrimaryDnsZone. The otherZone uses the `dependsOn: [ PrimaryDnsZone ]`, which denotes that otherZone resource uses an explicit dependency.
-
-Azure Resource Manager (ARM) does not deploy the PrimaryDnsZone and otherZone resources in parallel. ARM only deploys resources in parallel if the resources are not dependent on one another. In this scenario, since the otherZone resource is explicitly dependent on the PrimaryDnsZone resource, ARM will not deploy the resources in parallel.
-
-References
-
-* [Resource dependencies in Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/resource-dependencies)
-
-</details>
-
----
-
-#### Complete ARM template deployment command
-
-**Domain:** Deploy and Manage Azure Compute Resources
-**Skill:** Automate deployment of resources by using ARM templates or Bicep files
-**Task:** Deploy resources by using an ARM template or a Bicep file
-
-You are adding a resource group deployment from an Azure Resource Manager (ARM) template that already exists. The template is stored in a web-based repository. You have already created the resource group named `ResourceGroup1`.
-
-You need to deploy the resources from the resource group deployment. `$ResourceTemplate` is the location of the source template file.
-
-How should you complete the command string? To answer, complete the commands by selecting the correct parts from the drop-down menus.
-
-```powershell
-___[1]___ -ResourceGroupName "ResourceGroup1" ___[2]___ $ResourceTemplate
-```
-
-Drop-Down Options:
-
-| Blank | Options |
-|-------|---------|
-| [1] | `-Select-` / `New-AzResource` / `New-AzResourceGroup` / `New-AzResourceGroupDeployment` |
-| [2] | `-Select-` / `-TemplateFile` / `-TemplateObject` / `-TemplateUri` |
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-13-05-26-05.png' width=600>
+<img src='.img/2026-03-13-05-35-52.png' width=600>
 
 </details>
 
@@ -2681,36 +2462,341 @@ Drop-Down Options:
 
 **Solution Explanation:**
 
-You should complete the command string as follows:
+You should use the `Export-AzResourceGroup` cmdlet. This cmdlet captures a specified resource group and saves it as a template to a JSON or Bicep file. This gives you a way to create a template based on the current resources in a resource group. You also have the option of exporting a running resource group as a template from the Azure portal.
 
-```powershell
-New-AzResourceGroupDeployment -ResourceGroupName "ResourceGroup1" -TemplateUri $ResourceTemplate
-```
+You should not use the `Save-AzResourceGroupDeploymentTemplate` cmdlet. This saves a resource group deployment, not the current resource group, to a file — you must specify both the deployment name and the resource group name.
 
-The `New-AzResourceGroupDeployment` cmdlet is used to deploy a resource group deployment from a template. The `-TemplateUri` parameter is used to specify the template location (URI) and filename for a remote template.
+You should not use the `Save-AzDeploymentTemplate` cmdlet. This saves an existing deployment template to a file.
 
-You should not use the `New-AzResourceGroup` cmdlet. This is used to create a new resource group with a specified name. You would have used this cmdlet to create `ResourceGroup1`.
+You should not use the `New-AzResourceGroupDeployment` cmdlet. This cmdlet is used to apply a template to an existing resource group, not to create a new template file.
 
-You should not use the `New-AzResource` cmdlet. This is used to create a specific resource.
+<img src='.img/2026-03-13-05-39-29.png' width=600>
 
-You should not use the `-TemplateFile` parameter. This is used to specify the path and filename of a locally stored template file.
+<img src='.img/2026-03-13-05-39-56.png' width=600>
 
-You should not use the `-TemplateObject` parameter. This is used to specify a hash table used to represent a template.
+<img src='.img/2026-03-13-05-40-12.png' width=600>
 
-<img src='.img/2026-03-13-05-29-46.png' width=600>
+**References**
+
+* [Use Azure portal to export a template](https://learn.microsoft.com/azure/azure-resource-manager/templates/export-template-portal)
+* [Save-AzResourceGroupDeploymentTemplate](https://learn.microsoft.com/powershell/module/az.resources/save-azresourcegroupdeploymenttemplate?view=azps-15.4.0)
+* [Export-AzResourceGroup](https://learn.microsoft.com/powershell/module/az.resources/export-azresourcegroup?view=azps-15.4.0)
+* [New-AzResourceGroupDeployment](https://learn.microsoft.com/powershell/module/az.resources/new-azresourcegroupdeployment?view=azps-15.4.0)
+* [Save-AzDeploymentTemplate](https://learn.microsoft.com/powershell/module/az.resources/save-azdeploymenttemplate?view=azps-15.4.0)
+
+</details>
+
+---
+
+#### Deployment Mode Deleted Resources
+
+**Domain:** Deploy and Manage Azure Compute Resources
+**Skill:** Automate deployment of resources by using ARM templates or Bicep files
+**Task:** Deploy resources by using an ARM template or a Bicep file
+
+You have a resource group named `APP-RG` that consists of several resources.
+
+You are asked to add a storage account to the resource group. You decide to deploy the new storage account by using an Azure Resource Manager (ARM) template and the `New-AzResourceGroupDeployment` cmdlet. This template does not contain any linked or nested templates.
+
+After the deployment finishes successfully, you realize that all the resources in the resource group have been deleted except for the newly created storage account.
+
+Why did this happen?
+
+A. The template contains the mode parameter with the value Incremental.  
+B. The template contains the mode parameter with the value Complete.  
+C. You did not use the -mode parameter with the `New-AzResourceGroupDeployment` cmdlet.  
+D. You used the -mode complete parameter with the `New-AzResourceGroupDeployment` cmdlet.  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-13-05-11-11.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Explanation**
+
+Resources in the resource group were deleted except for the newly-created storage account because you used the `-mode complete` parameter with the `New-AzResourceGroupDeployment` cmdlet. The `New-AzResourceGroupDeployment` cmdlet has two deployment modes: incremental and complete. When you use the complete mode, all resources in the resource group that are not included in the template are deleted.
+
+Using the `-mode` parameter with the `New-AzResourceGroupDeployment` cmdlet was not the cause when you did not specify it. When you do not use the `-mode` parameter, you are using the default incremental deployment mode. In this mode, any resource that is not present in the template is maintained in the resource group. If a resource in the resource group is present in the template and any parameters in the template differ from the values in the resource group, those values are updated in the resource present in Azure. You should use this mode when deploying the template.
+
+The cause was not the template containing the mode parameter with the value Complete or Incremental. The template that you are using does not contain any linked or nested templates, so the mode parameter should not be present in the template with either value. This parameter is part of the deployment resource type and is typically used with nested or linked templates. Complete and incremental deployment modes behave the same way as in the `New-AzResourceGroupDeployment` cmdlet.
 
 **References**
 
 * [Deploy resources with ARM templates and Azure PowerShell](https://learn.microsoft.com/azure/azure-resource-manager/templates/deploy-powershell)
+* [Microsoft.Resources deployments](https://learn.microsoft.com/azure/templates/microsoft.resources/deployments)
 * [New-AzResourceGroupDeployment](https://learn.microsoft.com/powershell/module/az.resources/new-azresourcegroupdeployment?view=azps-15.4.0)
-* [New-AzResourceGroup](https://learn.microsoft.com/powershell/module/az.resources/new-azresourcegroup?view=azps-15.4.0)
-* [New-AzResource](https://learn.microsoft.com/powershell/module/az.resources/new-azresource?view=azps-15.4.0)
+
+</details>
+
+---
+
+#### Edit ARM Template to Inherit Resource Group Location
+
+**Domain:** Deploy and Manage Azure Compute Resources
+**Skill:** Automate deployment of resources by using ARM templates or Bicep files
+**Task:** Modify an existing Azure Resource Manager template
+
+You have an Azure Resource Manager (ARM) template for creating a Windows virtual machine. You got this template from an existing resource group with a single virtual machine, using the automation script option.
+
+You want to reuse this template for other deployments. You need all the resources in the resource group to be in the same location.
+
+What should you do?
+
+A. Use the Azure portal and create a resource group in the desired location. Then use the `New-AzResourceGroupDeployment` cmdlet using the newly created resource group.  
+B. Edit the parameters file and add a new parameter named location of type string with the default value of `[resourceGroup().location]`.  
+C. Use the `New-AzResourceGroup` cmdlet with the `-Location` parameter to create a resource group in the desired location. Then use the `New-AzResourceGroupDeployment` cmdlet using the newly created resource group.  
+D. Edit the template file and update each location parameter with the value `[resourceGroup().location]`.  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-12-04-14-06.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Explanation:**
+
+You should edit the template file and update each location parameter with the value `[resourceGroup().location]`. The `resourceGroup()` function gets the resource group object that will be used to deploy the template. This way, all resources in the template will use the same location as the resource group. You need to ensure that all resources are supported in the location that you are using for the resource group.
+
+**Why you should not choose B:**
+
+You should not edit the parameters file and add a new parameter named `location` of type string with the default value of `[resourceGroup().location]`. This is the first step in centralizing the location value in the template, but you also need to update the location parameter in the template file with the value `[parameters('location')]`.
+
+**Why you should not choose A:**
+
+You should not use the Azure portal and create a resource group in the desired location and then use the `New-AzResourceGroupDeployment` cmdlet using the newly created resource group. If the resource group is deployed in a different location to the location configured in the template file, the resources will be deployed in different locations. You need to modify the location parameter in the template file to the value `[resourceGroup().location]` to inherit the location from the parent resource group.
+
+**Why you should not choose C:**
+
+You should not use the `New-AzResourceGroup` cmdlet with the `-Location` parameter to create a resource group in the desired location and then use the `New-AzResourceGroupDeployment` cmdlet using the newly created resource group. If the resource group is deployed in a different location to the location configured in the template file, the resources will be deployed in different locations. You need to modify the location parameter in the template file to the value `[resourceGroup().location]` to inherit the location from the parent resource group.
+
+<img src='.img/2026-03-12-04-30-49.png' width=600>
+
+**References**
+
+- [Set resource location in ARM template](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/resource-location?tabs=azure-powershell)
+- [Understand the structure and syntax of ARM templates](https://learn.microsoft.com/azure/azure-resource-manager/templates/syntax)
+- [Deploy resources with ARM templates and Azure PowerShell](https://learn.microsoft.com/azure/azure-resource-manager/templates/deploy-powershell)
+
+</details>
+
+---
+
+#### Export ARM Template
+
+**Domain:** Deploy and Manage Azure Compute Resources
+**Skill:** Automate deployment of resources by using ARM templates or Bicep files
+**Task:** Export a deployment as an ARM template or convert an ARM template to a Bicep file
+
+You deploy a line of business (LOB) application. All resources that are part of the LOB application are deployed in a single resource group. The resources were added in different phases.
+
+You need to export the current configuration of the LOB application resources to an Azure Resource Manager (ARM) template. You will later use this template for deploying the LOB application infrastructure in different environments for testing or development purposes.
+
+You are using the Complete mode for ARM deployment.
+
+For each of the following statements, select Yes if the statement is true. Otherwise, select No.
+
+| Statement | Yes | No |
+|----------|-----|----|
+| You need to export the Azure Resource Manager (ARM) template from the latest deployment. | ☐ | ☐ |
+| Each deployment contains only the resources that have been added in that deployment. | ☐ | ☐ |
+| The parameters file contains the values used during the deployment. | ☐ | ☐ |
+| The template contains the scripts needed for deploying the template. | ☐ | ☐ |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-12-03-11-57.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+You do not need to export the Azure Resource Manager (ARM) template from the latest deployment. In this scenario, the line of business (LOB) application was deployed in several phases. The latest deployment will export only the latest resources added to the application. If you want to export the ARM template with all the resources needed for the LOB application, you will need to export the ARM template from the resource group.
+
+Each deployment contains only the resources that have been added in that deployment. When deploying your resources, you specify that the deployment is either an Incremental update or a Complete update. The difference between these two modes is how the Resource Manager handles existing resources in the resource group that are not in the template. In this scenario, since you are using the Complete mode, each deployment contains only the resources that have been added in that deployment and the Resource Manager will delete all the resources that exist in the resource group but are not specified in the template. On the other hand, in an Incremental mode, the Resource Manager leaves unchanged resources that exist in the resource group but are not specified in the template. Resources in the template are added to the resource group.
+
+The parameters file contains the values used during the deployment. The parameters file is a JSON file that stores all the parameters used in the ARM template. You can use this file to reuse the template in different deployments, just changing the values of the parameters file. If you use this file in templates created from resource groups, you need to make significant edits to the template before you can effectively use the parameters file.
+
+The template does not contain the scripts needed for deploying the template. When you download an ARM template from a deployment or a resource group, the downloaded package contains only the ARM template and the parameters file. You can reference Azure CLI scripts or a PowerShell script in the Azure docs linked in the export template pane.
+
+<img src='.img/2026-03-12-03-47-36.png' width=600>
+
+<img src='.img/2026-03-12-03-31-11.png' width=600>
+
+References
+
+- [Use Azure portal to export a template](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/export-template-portal)
+- [Understand the structure and syntax of ARM templates](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/syntax)
+- [Azure Resource Manager deployment modes: COMPLETE versus INCREMENTAL](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/deployment-modes)
+- [Azure Resource Manager deployment modes](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/deployment-modes)
+- [Manage Azure resources by using Azure CLI](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resources-cli)
+
+</details>
+
+---
+
+#### Case Study — Solution Evaluation
+
+**Domain:** Deploy and Manage Azure Compute Resources
+**Skill:** Automate deployment of resources by using ARM templates or Bicep files
+**Task:** Deploy resources by using an ARM template or a Bicep file
+
+*Case Study — Solution Evaluation*
+
+This case study contains a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.
+
+You have an Azure resource group named `RG1`. `RG1` contains a Linux virtual machine (VM) named `VM1`.
+
+You need to automate the deployment of 20 additional Linux VMs. The new VMs should be based upon `VM1`'s configuration.
+
+Does this solution meet the goal?
+
+| Solution | Yes | No |
+|----------|-----|----|
+| 1. From the virtual machine's Export Template settings blade, you click Deploy and edit the parameters. | ☐ | ☐ |
+| 2. You store the Linux VM properties in a template and deploy the additional VMs by editing the template parameter values for each additional VM. | ☐ | ☐ |
+| 3. From the resource group's Policies blade, you click Assign policy. | ☐ | ☐ |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-12-03-58-37.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+Solution 1 Explanation:
+
+This solution does not meet the goal. Every deployment in Azure is described in a template in JavaScript Object Notation (JSON) format. You can access the underlying template from the Export Template settings blade of the VM resource, and then deploy a single new instance of a resource by modifying the template parameters. However, you would need to do this 20 times in order to create 20 VMs, and therefore it is not an automatic process.
+
+Solution 2 Explanation:
+
+This solution meets the goal. The Templates blade in the Azure portal enables you to store JavaScript Object Notation (JSON) documents that automate Azure resource deployment. In this case, to automate the deployment of 20 additional Linux VMs based on `VM1`'s configuration, you can use an Azure Resource Manager (ARM) template. Steps:
+
+1. Export `VM1`'s configuration by using **Export template** in the portal to get the ARM template for the VM.
+2. Modify the exported ARM template to introduce parameters for items that will vary between VMs (for example, VM name, IP assignment, and any unique identifiers).
+3. Create a parameter file (`parameters.json`) that defines the values for the 20 new VMs (names, sizes, and other settings).
+4. Deploy the template with the parameter file using CLI or PowerShell, for example:
+
+```powershell
+az deployment group create --resource-group MyResourceGroup --template-file ./template.json --parameters @parameters.json
+```
+
+5. Automate the process by scripting updates to the parameter file and running the deployment in a loop. For example, a simple shell loop can iterate and deploy multiple parameter sets.
+
+Solution 3 Explanation:
+
+This solution does not meet the goal. To automate the deployment of the 20 additional VMs, you should access the virtual machine's underlying JSON template and deploy the new resources by using the template and custom deployment parameters. Azure Policy is a governance product that enforces rules (for example, allowed regions or VM types) and helps ensure compliance, but it does not perform bulk VM provisioning based on an existing VM's configuration.
+
+References
+
+* [Export an Azure Resource Manager template from an existing resource](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/export-template-portal)
+* Deploy resources with ARM templates
+* [Azure Policy overview](https://learn.microsoft.com/en-us/azure/governance/policy/overview)
 
 </details>
 
 ---
 
 ### Create and configure virtual machines
+
+#### Encrypt VM Disk With Key Vault
+
+**Domain:** Deploy and manage Azure compute resources
+**Skill:** Create and configure virtual machines
+**Task:** Configure Azure Disk Encryption
+
+You have a subscription named SubscriptionA that hosts the following resources:
+
+- A key vault named mySecureVault in a resource group named myKeyVaultResourceGroup.
+- A virtual machine (VM) named mySecureVM in a resource group named myVirtualMachineResourceGroup.
+
+You need to write a PowerShell script that will encrypt the disk for mySecureVM using the keys stored in the mySecureVault.
+
+How should you complete the script? To answer, select the appropriate options from the drop-down menus.
+
+```powershell
+$keyVaultRG = 'myKeyVaultResourceGroup';
+$vmRG = 'myVirtualMachineResourceGroup';
+$vmName = 'mySecureVM';
+$keyVaultName = 'mySecureVault';
+
+$keyVault = Get-AzKeyVault [Select 1 ▼] $keyVaultName -ResourceGroupName $keyVaultRG;
+$diskEncryptionKeyVaultUrl = [Select 2 ▼];
+$keyVaultId = [Select 3 ▼];
+
+Set-AzVMDiskEncryptionExtension -ResourceGroupName [Select 4 ▼] `
+  -DiskEncryptionKeyVaultUrl $diskEncryptionKeyVaultUrl `  
+  -DiskEncryptionKeyVaultId $keyVaultId -VMName $vmName;
+```
+
+**Select 1 options:**  
+○ Name  
+○ VaultName  
+
+**Select 2 options:**  
+○ keyVault.Path  
+○ keyVault.Url  
+○ keyVault.VaultUri  
+
+**Select 3 options:**  
+○ keyVault.Id  
+○ keyVault.ResourceId  
+
+**Select 4 options:**  
+○ keyVaultRG  
+○ vmRG  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-02-21-15-24-34.png' width=700>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Why the correct answers are correct**
+
+**Select 1 — VaultName**
+The `Get-AzKeyVault` cmdlet uses the `-VaultName` parameter to identify the key vault by name. There is no `-Name` parameter on this cmdlet. Using `-Name` would cause the command to fail entirely, so `-VaultName` is the only valid choice.
+
+**Select 2 — keyVault.VaultUri**
+The `$diskEncryptionKeyVaultUrl` variable must hold the URI of the key vault. The correct property on the object returned by `Get-AzKeyVault` is `.VaultUri`. The `.Path` property does not exist on this object, and `.Url` is not a valid property either. VaultUri is the documented property that returns the vault endpoint URL required by `Set-AzVMDiskEncryptionExtension`.
+
+**Select 3 — keyVault.ResourceId**
+The `-DiskEncryptionKeyVaultId` parameter requires the Azure Resource Manager resource ID of the key vault. The correct property is `.ResourceId`. The `.Id` property is not a valid property on the key vault object returned by `Get-AzKeyVault`. ResourceId returns the full ARM resource identifier in the format `/subscriptions/.../resourceGroups/.../providers/Microsoft.KeyVault/vaults/...`.
+
+**Select 4 — vmRG**
+The `-ResourceGroupName` parameter on `Set-AzVMDiskEncryptionExtension` must reference the resource group where the **VM** resides, not where the key vault resides. The extension is applied to the VM, so Azure needs the VM's resource group to locate it. Using `$keyVaultRG` would point to the wrong resource group and the cmdlet would fail to find the VM.
+
+**Key takeaway**
+When encrypting a VM disk with Azure Key Vault, `Get-AzKeyVault` uses `-VaultName` (not `-Name`), the vault URL comes from `.VaultUri`, the vault resource ID comes from `.ResourceId`, and `Set-AzVMDiskEncryptionExtension` requires the **VM's resource group**, not the key vault's resource group.
+
+**References**
+
+* [Get-AzKeyVault](https://learn.microsoft.com/en-us/powershell/module/az.keyvault/get-azkeyvault)
+* [Set-AzVMDiskEncryptionExtension](https://learn.microsoft.com/en-us/powershell/module/az.compute/set-azvmdiskencryptionextension)
+* [Azure Disk Encryption scenarios on Windows VMs](https://learn.microsoft.com/en-us/azure/virtual-machines/windows/disk-encryption-windows)
+
+</details>
+
+▶ Related Lab: [lab-vm-disk-encryption](../hands-on-labs/compute/lab-vm-disk-encryption/README.md)
+
+---
 
 #### Change VM Availability Set Assignment
 
@@ -2890,148 +2976,7 @@ When resizing a VM, Azure validates that all currently attached resources (data 
 
 ---
 
-#### Encrypt VM Disk With Key Vault
-
-**Domain:** Deploy and manage Azure compute resources
-**Skill:** Create and configure virtual machines
-**Task:** Configure Azure Disk Encryption
-
-You have a subscription named SubscriptionA that hosts the following resources:
-
-- A key vault named mySecureVault in a resource group named myKeyVaultResourceGroup.
-- A virtual machine (VM) named mySecureVM in a resource group named myVirtualMachineResourceGroup.
-
-You need to write a PowerShell script that will encrypt the disk for mySecureVM using the keys stored in the mySecureVault.
-
-How should you complete the script? To answer, select the appropriate options from the drop-down menus.
-
-```powershell
-$keyVaultRG = 'myKeyVaultResourceGroup';
-$vmRG = 'myVirtualMachineResourceGroup';
-$vmName = 'mySecureVM';
-$keyVaultName = 'mySecureVault';
-
-$keyVault = Get-AzKeyVault [Select 1 ▼] $keyVaultName -ResourceGroupName $keyVaultRG;
-$diskEncryptionKeyVaultUrl = [Select 2 ▼];
-$keyVaultId = [Select 3 ▼];
-
-Set-AzVMDiskEncryptionExtension -ResourceGroupName [Select 4 ▼] `
-  -DiskEncryptionKeyVaultUrl $diskEncryptionKeyVaultUrl `  
-  -DiskEncryptionKeyVaultId $keyVaultId -VMName $vmName;
-```
-
-**Select 1 options:**  
-○ Name  
-○ VaultName  
-
-**Select 2 options:**  
-○ keyVault.Path  
-○ keyVault.Url  
-○ keyVault.VaultUri  
-
-**Select 3 options:**  
-○ keyVault.Id  
-○ keyVault.ResourceId  
-
-**Select 4 options:**  
-○ keyVaultRG  
-○ vmRG  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-02-21-15-24-34.png' width=700>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Why the correct answers are correct**
-
-**Select 1 — VaultName**
-The `Get-AzKeyVault` cmdlet uses the `-VaultName` parameter to identify the key vault by name. There is no `-Name` parameter on this cmdlet. Using `-Name` would cause the command to fail entirely, so `-VaultName` is the only valid choice.
-
-**Select 2 — keyVault.VaultUri**
-The `$diskEncryptionKeyVaultUrl` variable must hold the URI of the key vault. The correct property on the object returned by `Get-AzKeyVault` is `.VaultUri`. The `.Path` property does not exist on this object, and `.Url` is not a valid property either. VaultUri is the documented property that returns the vault endpoint URL required by `Set-AzVMDiskEncryptionExtension`.
-
-**Select 3 — keyVault.ResourceId**
-The `-DiskEncryptionKeyVaultId` parameter requires the Azure Resource Manager resource ID of the key vault. The correct property is `.ResourceId`. The `.Id` property is not a valid property on the key vault object returned by `Get-AzKeyVault`. ResourceId returns the full ARM resource identifier in the format `/subscriptions/.../resourceGroups/.../providers/Microsoft.KeyVault/vaults/...`.
-
-**Select 4 — vmRG**
-The `-ResourceGroupName` parameter on `Set-AzVMDiskEncryptionExtension` must reference the resource group where the **VM** resides, not where the key vault resides. The extension is applied to the VM, so Azure needs the VM's resource group to locate it. Using `$keyVaultRG` would point to the wrong resource group and the cmdlet would fail to find the VM.
-
-**Key takeaway**
-When encrypting a VM disk with Azure Key Vault, `Get-AzKeyVault` uses `-VaultName` (not `-Name`), the vault URL comes from `.VaultUri`, the vault resource ID comes from `.ResourceId`, and `Set-AzVMDiskEncryptionExtension` requires the **VM's resource group**, not the key vault's resource group.
-
-**References**
-
-* [Get-AzKeyVault](https://learn.microsoft.com/en-us/powershell/module/az.keyvault/get-azkeyvault)
-* [Set-AzVMDiskEncryptionExtension](https://learn.microsoft.com/en-us/powershell/module/az.compute/set-azvmdiskencryptionextension)
-* [Azure Disk Encryption scenarios on Windows VMs](https://learn.microsoft.com/en-us/azure/virtual-machines/windows/disk-encryption-windows)
-
-</details>
-
-▶ Related Lab: [lab-vm-disk-encryption](../hands-on-labs/compute/lab-vm-disk-encryption/README.md)
-
----
-
 ### Provision and manage containers in the Azure portal
-
-#### Azure Container Registry roles for pulling images
-
-**Domain:** Deploy and Manage Azure Compute Resources
-**Skill:** Provision and manage containers in the Azure portal
-**Task:** Create and manage an Azure container registry
-
-Your organization is using Azure Container Registry for storing and managing container images and related artifacts for various DevOps projects. You are an Azure administrator in the organization. You have been tasked with setting up appropriate authentication methods with an Azure container registry.
-
-You assign a Microsoft Entra service principal to your registry.
-
-You need to identify which Azure container registry roles would allow pull of a non-quarantined image from the registry.
-
-Which three roles should you identify? Each correct answer presents part of the solution.
-
-A. AcrPush  
-B. AcrImageSigner  
-C. AcrPull  
-D. AcrDelete  
-E. Owner  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-15-05-21-54.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-There are several ways to authenticate with an Azure Container Registry. In this scenario, you use the Microsoft Entra service principal to authenticate applications and container orchestrators to an Azure container registry. Applications and container orchestrators can perform unattended, or "headless," authentication by using a Microsoft Entra service principal. Service principals allow Azure role-based access control (Azure RBAC) to a registry. There are three roles that can be assigned to a registry that would allow pull of a non-quarantined image from the registry:
-
-1. **AcrPull:** pull. The ability to docker pull a non-quarantined image, or pull another supported artifact such as a Helm chart, from a registry. It requires authentication with the registry using the authorized identity.
-
-2. **AcrPush:** pull and push. Push denotes the ability to docker push an image, or push another supported artifact such as a Helm chart, to a registry. It requires authentication with the registry using the authorized identity.
-
-3. **Owner:** pull, push, and assign roles to other users. An Owner role/permission can access resource manager, create or delete registry, push image, pull image, delete image data and change policies. The only action that an Owner role/permission cannot do is to sign images.
-
-You should not use the **AcrDelete** role. This role provides the ability to delete container images, or delete other supported artifacts such as Helm charts, from a registry.
-
-You should not use the **AcrImageSigner** role. This role provides the ability to sign images, usually assigned to an automated process, which would use a service principal.
-
-<img src='.img/2026-03-15-05-27-30.png' width=600>
-
-**References**
-
-* [Introduction to Container registries in Azure](https://learn.microsoft.com/azure/container-registry/)
-* [Authenticate with an Azure container registry](https://learn.microsoft.com/azure/container-registry/container-registry-authentication)
-* [Azure Container Registry authentication with service principals](https://learn.microsoft.com/azure/container-registry/container-registry-auth-service-principal)
-* [Azure Container Registry roles and permissions](https://learn.microsoft.com/azure/container-registry/container-registry-roles)
-
-</details>
-
----
 
 #### Configure Scaling Rules in Azure Container Apps
 
@@ -3111,6 +3056,61 @@ The JSON defines an Azure Service Bus scaler with a `messageCount` threshold and
 </details>
 
 ▶ Related Lab: [lab-keda-scaling-rule](../hands-on-labs/compute/lab-keda-scaling-rule/README.md)
+
+---
+
+#### Azure Container Registry roles for pulling images
+
+**Domain:** Deploy and Manage Azure Compute Resources
+**Skill:** Provision and manage containers in the Azure portal
+**Task:** Create and manage an Azure container registry
+
+Your organization is using Azure Container Registry for storing and managing container images and related artifacts for various DevOps projects. You are an Azure administrator in the organization. You have been tasked with setting up appropriate authentication methods with an Azure container registry.
+
+You assign a Microsoft Entra service principal to your registry.
+
+You need to identify which Azure container registry roles would allow pull of a non-quarantined image from the registry.
+
+Which three roles should you identify? Each correct answer presents part of the solution.
+
+A. AcrPush  
+B. AcrImageSigner  
+C. AcrPull  
+D. AcrDelete  
+E. Owner  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-15-05-21-54.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+There are several ways to authenticate with an Azure Container Registry. In this scenario, you use the Microsoft Entra service principal to authenticate applications and container orchestrators to an Azure container registry. Applications and container orchestrators can perform unattended, or "headless," authentication by using a Microsoft Entra service principal. Service principals allow Azure role-based access control (Azure RBAC) to a registry. There are three roles that can be assigned to a registry that would allow pull of a non-quarantined image from the registry:
+
+1. **AcrPull:** pull. The ability to docker pull a non-quarantined image, or pull another supported artifact such as a Helm chart, from a registry. It requires authentication with the registry using the authorized identity.
+
+2. **AcrPush:** pull and push. Push denotes the ability to docker push an image, or push another supported artifact such as a Helm chart, to a registry. It requires authentication with the registry using the authorized identity.
+
+3. **Owner:** pull, push, and assign roles to other users. An Owner role/permission can access resource manager, create or delete registry, push image, pull image, delete image data and change policies. The only action that an Owner role/permission cannot do is to sign images.
+
+You should not use the **AcrDelete** role. This role provides the ability to delete container images, or delete other supported artifacts such as Helm charts, from a registry.
+
+You should not use the **AcrImageSigner** role. This role provides the ability to sign images, usually assigned to an automated process, which would use a service principal.
+
+<img src='.img/2026-03-15-05-27-30.png' width=600>
+
+**References**
+
+* [Introduction to Container registries in Azure](https://learn.microsoft.com/azure/container-registry/)
+* [Authenticate with an Azure container registry](https://learn.microsoft.com/azure/container-registry/container-registry-authentication)
+* [Azure Container Registry authentication with service principals](https://learn.microsoft.com/azure/container-registry/container-registry-auth-service-principal)
+* [Azure Container Registry roles and permissions](https://learn.microsoft.com/azure/container-registry/container-registry-roles)
+
+</details>
 
 ---
 
@@ -3811,6 +3811,264 @@ ACU/vCPU is a **relative CPU performance indicator**. Higher numbers mean **fast
 
 ### Configure and manage virtual networks in Azure
 
+#### Case Study — Container Group Placement
+
+**Domain:** Implement and Manage Virtual Networking
+**Skill:** Configure and manage virtual networks in Azure
+**Task:** Create and configure virtual networks and subnets
+
+*Case Study — Solution Evaluation*
+
+This case study contains a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.
+
+Your company has an Azure subscription. This includes a virtual network (VNet) named `VNet1` with the subnets shown below.
+
+| Subnet | Address prefix | Deployed resources |
+|--------|----------------|-------------------|
+| `Subnet1` | 10.0.0.0/24 | Virtual machines `VM1`, `VM2`, `VM3`, `VM4` |
+| `Subnet2` | 10.0.1.0/24 | Virtual machines `VM5`, `VM6` |
+| `Subnet3` | 10.0.4.0/24 | Container group `MyCon01` |
+
+The company is deploying a new Azure container group on `VNet1`. The container instances need to communicate with `VM5` and `VM6`.
+
+You need to determine an appropriate location for deploying the container group.
+
+Does this solution meet the goal?
+
+| Solution | Yes | No |
+|----------|-----|----|
+| 1. You create the container group on `Subnet2`. | ☐ | ☐ |
+| 2. You create the container group on `Subnet3`. | ☐ | ☐ |
+| 3. You create a new subnet to host the container group when you create the container group. | ☐ | ☐ |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-15-05-05-23.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Solution 1 Explanation:**
+
+This solution does not meet the goal. You cannot deploy a container group on a subnet that already contains resources such as virtual machines (VMs).
+
+**Solution 2 Explanation:**
+
+This solution meets the goal. You can deploy a container group on a subnet that already hosts a container group, or on a subnet that does not host any resources, or you can create a new subnet when you create the container group.
+
+**Solution 3 Explanation:**
+
+This solution meets the goal for the same reasons as Solution 2 — creating a dedicated subnet for the container group is a valid approach.
+
+<img src='.img/2026-03-15-05-15-02.png' width=600>
+
+**More Detail**:  
+
+Azure Container Instances (ACI) was originally introduced as a serverless container runtime that allowed containers to run quickly in Azure without managing virtual machines or orchestration platforms. In its early design, container groups ran on shared Microsoft-managed infrastructure and networking was primarily public. Containers could expose a public IP address or DNS label, and outbound connectivity was handled through Azure-managed networking. This design worked well for lightweight tasks such as batch jobs, short-lived compute, and simple internet-facing services, but it created limitations for enterprise workloads because containers could not easily access private resources inside a virtual network.
+
+Early ACI networking looked like this:
+
+```
+Container Group
+      │
+      ▼
+Azure-managed networking
+      │
+      ▼
+Public IP / DNS
+      │
+      ▼
+Internet
+```
+
+As organizations began adopting containers for more complex applications, the need for private connectivity became more apparent. Enterprises required containers to communicate with resources such as private databases, internal APIs, storage accounts protected by network rules, and on-premises systems connected through VPN or ExpressRoute. To address these requirements, Microsoft introduced the ability to deploy container groups into a virtual network. When a container group is deployed into a delegated subnet within a virtual network, it can communicate with other resources in that network, use internal DNS resolution, and be subject to network security controls such as network security groups or Azure Firewall.
+
+The initial implementation of virtual network integration used a resource called a network profile. In this model, a network profile defined the networking configuration for the container group and linked the container to a specific subnet within a virtual network.
+
+```
+Container Group
+      │
+      ▼
+Network Profile
+      │
+      ▼
+Delegated Subnet
+      │
+      ▼
+Virtual Network
+```
+
+However, this approach added complexity to deployments because administrators had to create and reference an additional resource when using ARM templates or SDKs. Microsoft later simplified the architecture by removing the need for network profiles in newer API versions and allowing container groups to be deployed directly into a delegated subnet.
+
+Modern deployments now follow a simpler model:
+
+```
+Container Group
+      │
+      ▼
+Delegated Subnet
+      │
+      ▼
+Virtual Network
+      │
+      ├── Private Azure resources
+      └── On-premises networks (VPN / ExpressRoute)
+```
+
+Today, Azure Container Instances require the subnet to be delegated specifically to the ACI service. This delegation allows Azure to manage IP address allocation and container networking internally because containers are still hosted on platform-managed infrastructure rather than traditional virtual machines with dedicated NICs. The subnet must be dedicated to container groups, and outbound connectivity typically requires a NAT gateway when containers are deployed inside a virtual network.
+
+The evolution of ACI networking can be summarized as follows:
+
+| Era                    | Architecture                                   | Networking Model                                               |
+| ---------------------- | ---------------------------------------------- | -------------------------------------------------------------- |
+| Initial release        | Container groups on shared infrastructure      | Public networking with optional public IP                      |
+| Early VNet integration | Container groups attached via Network Profiles | Access to resources inside VNets                               |
+| Modern implementation  | Direct deployment to delegated subnet          | Simplified architecture, NAT gateway for outbound connectivity |
+
+This progression reflects Azure’s broader transition from simple internet-facing container workloads toward enterprise scenarios that require private networking, hybrid connectivity, and tighter security controls within virtual networks.
+
+**References**
+
+* [Virtual network scenarios and resources](https://learn.microsoft.com/azure/container-instances/container-instances-virtual-network-concepts)
+* [What is Azure Container Instances?](https://learn.microsoft.com/azure/container-instances/container-instances-overview)
+* [Deploy container instances into an Azure virtual network](https://learn.microsoft.com/azure/container-instances/container-instances-vnet)
+* [Quickstart: Deploy a container instance in Azure using Azure PowerShell](https://learn.microsoft.com/azure/container-instances/container-instances-quickstart-powershell)
+* [Quickstart: Deploy a container instance in Azure using the Azure CLI](https://learn.microsoft.com/azure/container-instances/container-instances-quickstart)
+
+</details>
+
+---
+
+#### Configure Layered Network Security
+
+**Domain:** Implement and Manage Virtual Networking
+**Skill:** Configure and manage virtual networks in Azure
+**Task:**
+
+- Create and configure virtual networks and subnets
+- Configure service endpoints for Azure PaaS
+
+Your company is planning to deploy a new application in its Azure subscription. You are asked to configure the required infrastructure for the new application.
+
+The new application must be deployed in a layered infrastructure. This infrastructure consists of the following layers:
+
+- Front-end servers
+- Back-end servers
+- Database
+
+The frontend and backend layers will use Azure virtual machines (VMs). The database layer will be deployed using Azure SQL Database.
+
+You start configuring the networking infrastructure. You need to ensure that you can apply security filtering on each layer independently. Your solution should require the minimum administrative effort.
+
+Which four actions should you perform in sequence? To answer, move the appropriate actions from the list of possible actions to the answer area and arrange them in the correct order.
+
+A. Create a resource group.  
+B. Create a single virtual network (VNet).  
+C. Create two subnets.  
+D. Create three subnets.  
+E. Create a virtual network (VNet) for each layer.  
+F. Configure peering on each virtual network (VNet).  
+G. Enable service endpoints for the subnets.  
+
+Select and order 4:
+
+| Step | Action |
+|------|--------|
+| 1 | |
+| 2 | |
+| 3 | |
+| 4 | |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-12-04-36-53.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**You should perform the following actions in order:**
+
+1. **Create a resource group**
+2. **Create a single virtual network (VNet).**
+3. **Create two subnets.**
+4. **Enable service endpoints for the subnets.**
+
+**First,** you should create a new resource group. Because you are deploying a whole new infrastructure for this application, you should create a new resource group and put all new resources in this new resource group.
+
+**Next,** you should create a single VNet. This VNet will provide connectivity between all the elements of the application.
+
+**Next,** you should create two subnets in the new VNet. You should assign a subnet for the front-end layer, and another for the back-end layer. You should not create a subnet for the Azure SQL Database, because this is deployed in its own internal network that you cannot customize. You can also create a network security group (NSG) for each subnet so that you can manage security on each subnet independently.
+
+**Finally,** you should enable service endpoints for the subnets within the VNet. You should also enable the service endpoint in the Azure SQL Database. This way, your database can directly connect to VMs deployed in the front-end and back-end subnets, and vice versa.
+
+**You should not configure peering on each VNet.** VNet peering allows you to connect different VNets so resources on each VNet can communicate with each other. In this scenario, there is no need to configure peering because creating a single VNet satisfies your communication needs.
+
+**You should not create a VNet for each layer.** Although creating a VNet for each layer could solve your communication requirements, this requires much more effort than using a single VNet. Each VNet still requires at least one subnet. Creating multiple VNets for this scenario would also require the configuration of peering between each VNet. There is no need to configure a VNet for the data layer because you will use Azure SQL Database, which does not require a VNet.
+
+**You should not create three subnets.** You need to configure a subnet for the front-end layer and another for the back-end layer. There is no need to configure an additional subnet for the data layer because Azure SQL Database has all its networking requirements configured internally.
+
+<details>
+<summary><b>More Details:</b></summary>
+
+> Help me understand here, is Microsoft recommending private endpoints over service endpoints? Give me some historical context.
+
+<img src='.img/2026-03-12-05-00-39.png' width=600>
+
+Yes. In that note, Microsoft is signaling a **preference for Private Link/private endpoints over service endpoints** for new designs where the goal is the strongest private access model. The wording is explicit: the current service endpoints article says Microsoft recommends **Azure Private Link and private endpoints** for secure and private access. ([Microsoft Learn][1])
+
+What that means in practice:
+
+* **Service endpoints**: your workload stays in your subnet, but it still connects to the Azure service’s **public endpoint**. The traffic is optimized onto the Microsoft backbone, and the service can recognize the source subnet/VNet. Microsoft’s docs say DNS still resolves to the service’s **public IP** with service endpoints. ([Microsoft Learn][1])
+* **Private endpoints**: the Azure service is exposed to you through a **private IP inside your VNet**. Microsoft describes this as “bringing the service into your virtual network.” This is the more isolated model and is what enables “private-only” patterns when paired with disabling public access. ([Microsoft Learn][2])
+
+So the recommendation is:
+
+* **Use private endpoints when you want true private access, tighter isolation, and the option to shut off public exposure.**
+* **Use service endpoints when you want something simpler and lighter-weight, and public endpoints are still acceptable.** ([Microsoft Learn][3])
+
+Historical context:
+
+**1. Service endpoints came first as the earlier VNet-to-PaaS security model.**
+Microsoft’s own comparison blog describes service endpoints as the **first** approach used to lock down multi-tenant Azure services. They solved an early problem: “How do I let only my VNet reach this PaaS service without opening it broadly to the internet?” But the service still remained outside your VNet, on a public endpoint. ([TECHCOMMUNITY.MICROSOFT.COM][4])
+
+**2. Private Link/private endpoints came later to address stricter isolation requirements.**
+As customers wanted stronger controls, reduced data-exfiltration risk, private-only access from on-premises, and the ability to avoid public endpoints entirely, Microsoft introduced Private Link. The private endpoint model assigns a private IP from your VNet and routes traffic privately over Microsoft’s backbone. ([Microsoft Learn][5])
+
+**3. The modern guidance shifted accordingly.**
+Microsoft still documents and supports service endpoints, but their newer guidance increasingly points customers toward private endpoints when feasible, especially for security-sensitive architectures. That is why the service endpoints doc now carries that recommendation box. ([Microsoft Learn][1])
+
+The easiest mental model is:
+
+* **Service endpoint = private subnet talking to a public service endpoint**
+* **Private endpoint = private subnet talking to a private IP for that service** ([Microsoft Learn][1])
+
+So, your screenshot should be read as:
+
+**“Service endpoints still exist and still work, but Microsoft generally prefers private endpoints for secure private access going forward.”** ([Microsoft Learn][1])
+
+[1]: https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-service-endpoints-overview?utm_source=chatgpt.com "Azure virtual network service endpoints"
+[2]: https://learn.microsoft.com/en-us/azure/private-link/private-endpoint-overview?utm_source=chatgpt.com "What is a private endpoint? - Azure Private Link"
+[3]: https://learn.microsoft.com/en-us/azure/private-link/private-link-faq?utm_source=chatgpt.com "Azure Private Link frequently asked questions (FAQ)"
+[4]: https://techcommunity.microsoft.com/blog/coreinfrastructureandsecurityblog/service-endpoints-vs-private-endpoints/3962134?utm_source=chatgpt.com "Service Endpoints vs Private Endpoints"
+[5]: https://learn.microsoft.com/en-us/azure/private-link/private-link-overview?utm_source=chatgpt.com "What is Azure Private Link?"
+
+</details>
+
+**References**:  
+
+<https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-service-endpoints-overview>
+<https://learn.microsoft.com/en-us/azure/app-service/tutorial-secure-ntier-app>
+
+</details>
+
+---
+
 #### VNet Peering with ExpressRoute
 
 **Domain:** Implement and Manage Virtual Networking
@@ -4003,264 +4261,6 @@ You cannot specify the IP address of a public IP resource. Even if you use the s
 
 ---
 
-#### Configure Layered Network Security
-
-**Domain:** Implement and Manage Virtual Networking
-**Skill:** Configure and manage virtual networks in Azure
-**Task:**
-
-- Create and configure virtual networks and subnets
-- Configure service endpoints for Azure PaaS
-
-Your company is planning to deploy a new application in its Azure subscription. You are asked to configure the required infrastructure for the new application.
-
-The new application must be deployed in a layered infrastructure. This infrastructure consists of the following layers:
-
-- Front-end servers
-- Back-end servers
-- Database
-
-The frontend and backend layers will use Azure virtual machines (VMs). The database layer will be deployed using Azure SQL Database.
-
-You start configuring the networking infrastructure. You need to ensure that you can apply security filtering on each layer independently. Your solution should require the minimum administrative effort.
-
-Which four actions should you perform in sequence? To answer, move the appropriate actions from the list of possible actions to the answer area and arrange them in the correct order.
-
-A. Create a resource group.  
-B. Create a single virtual network (VNet).  
-C. Create two subnets.  
-D. Create three subnets.  
-E. Create a virtual network (VNet) for each layer.  
-F. Configure peering on each virtual network (VNet).  
-G. Enable service endpoints for the subnets.  
-
-Select and order 4:
-
-| Step | Action |
-|------|--------|
-| 1 | |
-| 2 | |
-| 3 | |
-| 4 | |
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-12-04-36-53.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**You should perform the following actions in order:**
-
-1. **Create a resource group**
-2. **Create a single virtual network (VNet).**
-3. **Create two subnets.**
-4. **Enable service endpoints for the subnets.**
-
-**First,** you should create a new resource group. Because you are deploying a whole new infrastructure for this application, you should create a new resource group and put all new resources in this new resource group.
-
-**Next,** you should create a single VNet. This VNet will provide connectivity between all the elements of the application.
-
-**Next,** you should create two subnets in the new VNet. You should assign a subnet for the front-end layer, and another for the back-end layer. You should not create a subnet for the Azure SQL Database, because this is deployed in its own internal network that you cannot customize. You can also create a network security group (NSG) for each subnet so that you can manage security on each subnet independently.
-
-**Finally,** you should enable service endpoints for the subnets within the VNet. You should also enable the service endpoint in the Azure SQL Database. This way, your database can directly connect to VMs deployed in the front-end and back-end subnets, and vice versa.
-
-**You should not configure peering on each VNet.** VNet peering allows you to connect different VNets so resources on each VNet can communicate with each other. In this scenario, there is no need to configure peering because creating a single VNet satisfies your communication needs.
-
-**You should not create a VNet for each layer.** Although creating a VNet for each layer could solve your communication requirements, this requires much more effort than using a single VNet. Each VNet still requires at least one subnet. Creating multiple VNets for this scenario would also require the configuration of peering between each VNet. There is no need to configure a VNet for the data layer because you will use Azure SQL Database, which does not require a VNet.
-
-**You should not create three subnets.** You need to configure a subnet for the front-end layer and another for the back-end layer. There is no need to configure an additional subnet for the data layer because Azure SQL Database has all its networking requirements configured internally.
-
-<details>
-<summary><b>More Details:</b></summary>
-
-> Help me understand here, is Microsoft recommending private endpoints over service endpoints? Give me some historical context.
-
-<img src='.img/2026-03-12-05-00-39.png' width=600>
-
-Yes. In that note, Microsoft is signaling a **preference for Private Link/private endpoints over service endpoints** for new designs where the goal is the strongest private access model. The wording is explicit: the current service endpoints article says Microsoft recommends **Azure Private Link and private endpoints** for secure and private access. ([Microsoft Learn][1])
-
-What that means in practice:
-
-* **Service endpoints**: your workload stays in your subnet, but it still connects to the Azure service’s **public endpoint**. The traffic is optimized onto the Microsoft backbone, and the service can recognize the source subnet/VNet. Microsoft’s docs say DNS still resolves to the service’s **public IP** with service endpoints. ([Microsoft Learn][1])
-* **Private endpoints**: the Azure service is exposed to you through a **private IP inside your VNet**. Microsoft describes this as “bringing the service into your virtual network.” This is the more isolated model and is what enables “private-only” patterns when paired with disabling public access. ([Microsoft Learn][2])
-
-So the recommendation is:
-
-* **Use private endpoints when you want true private access, tighter isolation, and the option to shut off public exposure.**
-* **Use service endpoints when you want something simpler and lighter-weight, and public endpoints are still acceptable.** ([Microsoft Learn][3])
-
-Historical context:
-
-**1. Service endpoints came first as the earlier VNet-to-PaaS security model.**
-Microsoft’s own comparison blog describes service endpoints as the **first** approach used to lock down multi-tenant Azure services. They solved an early problem: “How do I let only my VNet reach this PaaS service without opening it broadly to the internet?” But the service still remained outside your VNet, on a public endpoint. ([TECHCOMMUNITY.MICROSOFT.COM][4])
-
-**2. Private Link/private endpoints came later to address stricter isolation requirements.**
-As customers wanted stronger controls, reduced data-exfiltration risk, private-only access from on-premises, and the ability to avoid public endpoints entirely, Microsoft introduced Private Link. The private endpoint model assigns a private IP from your VNet and routes traffic privately over Microsoft’s backbone. ([Microsoft Learn][5])
-
-**3. The modern guidance shifted accordingly.**
-Microsoft still documents and supports service endpoints, but their newer guidance increasingly points customers toward private endpoints when feasible, especially for security-sensitive architectures. That is why the service endpoints doc now carries that recommendation box. ([Microsoft Learn][1])
-
-The easiest mental model is:
-
-* **Service endpoint = private subnet talking to a public service endpoint**
-* **Private endpoint = private subnet talking to a private IP for that service** ([Microsoft Learn][1])
-
-So, your screenshot should be read as:
-
-**“Service endpoints still exist and still work, but Microsoft generally prefers private endpoints for secure private access going forward.”** ([Microsoft Learn][1])
-
-[1]: https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-service-endpoints-overview?utm_source=chatgpt.com "Azure virtual network service endpoints"
-[2]: https://learn.microsoft.com/en-us/azure/private-link/private-endpoint-overview?utm_source=chatgpt.com "What is a private endpoint? - Azure Private Link"
-[3]: https://learn.microsoft.com/en-us/azure/private-link/private-link-faq?utm_source=chatgpt.com "Azure Private Link frequently asked questions (FAQ)"
-[4]: https://techcommunity.microsoft.com/blog/coreinfrastructureandsecurityblog/service-endpoints-vs-private-endpoints/3962134?utm_source=chatgpt.com "Service Endpoints vs Private Endpoints"
-[5]: https://learn.microsoft.com/en-us/azure/private-link/private-link-overview?utm_source=chatgpt.com "What is Azure Private Link?"
-
-</details>
-
-**References**:  
-
-<https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-service-endpoints-overview>
-<https://learn.microsoft.com/en-us/azure/app-service/tutorial-secure-ntier-app>
-
-</details>
-
----
-
-#### Case Study — Container Group Placement
-
-**Domain:** Implement and Manage Virtual Networking
-**Skill:** Configure and manage virtual networks in Azure
-**Task:** Create and configure virtual networks and subnets
-
-*Case Study — Solution Evaluation*
-
-This case study contains a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.
-
-Your company has an Azure subscription. This includes a virtual network (VNet) named `VNet1` with the subnets shown below.
-
-| Subnet | Address prefix | Deployed resources |
-|--------|----------------|-------------------|
-| `Subnet1` | 10.0.0.0/24 | Virtual machines `VM1`, `VM2`, `VM3`, `VM4` |
-| `Subnet2` | 10.0.1.0/24 | Virtual machines `VM5`, `VM6` |
-| `Subnet3` | 10.0.4.0/24 | Container group `MyCon01` |
-
-The company is deploying a new Azure container group on `VNet1`. The container instances need to communicate with `VM5` and `VM6`.
-
-You need to determine an appropriate location for deploying the container group.
-
-Does this solution meet the goal?
-
-| Solution | Yes | No |
-|----------|-----|----|
-| 1. You create the container group on `Subnet2`. | ☐ | ☐ |
-| 2. You create the container group on `Subnet3`. | ☐ | ☐ |
-| 3. You create a new subnet to host the container group when you create the container group. | ☐ | ☐ |
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-15-05-05-23.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Solution 1 Explanation:**
-
-This solution does not meet the goal. You cannot deploy a container group on a subnet that already contains resources such as virtual machines (VMs).
-
-**Solution 2 Explanation:**
-
-This solution meets the goal. You can deploy a container group on a subnet that already hosts a container group, or on a subnet that does not host any resources, or you can create a new subnet when you create the container group.
-
-**Solution 3 Explanation:**
-
-This solution meets the goal for the same reasons as Solution 2 — creating a dedicated subnet for the container group is a valid approach.
-
-<img src='.img/2026-03-15-05-15-02.png' width=600>
-
-**More Detail**:  
-
-Azure Container Instances (ACI) was originally introduced as a serverless container runtime that allowed containers to run quickly in Azure without managing virtual machines or orchestration platforms. In its early design, container groups ran on shared Microsoft-managed infrastructure and networking was primarily public. Containers could expose a public IP address or DNS label, and outbound connectivity was handled through Azure-managed networking. This design worked well for lightweight tasks such as batch jobs, short-lived compute, and simple internet-facing services, but it created limitations for enterprise workloads because containers could not easily access private resources inside a virtual network.
-
-Early ACI networking looked like this:
-
-```
-Container Group
-      │
-      ▼
-Azure-managed networking
-      │
-      ▼
-Public IP / DNS
-      │
-      ▼
-Internet
-```
-
-As organizations began adopting containers for more complex applications, the need for private connectivity became more apparent. Enterprises required containers to communicate with resources such as private databases, internal APIs, storage accounts protected by network rules, and on-premises systems connected through VPN or ExpressRoute. To address these requirements, Microsoft introduced the ability to deploy container groups into a virtual network. When a container group is deployed into a delegated subnet within a virtual network, it can communicate with other resources in that network, use internal DNS resolution, and be subject to network security controls such as network security groups or Azure Firewall.
-
-The initial implementation of virtual network integration used a resource called a network profile. In this model, a network profile defined the networking configuration for the container group and linked the container to a specific subnet within a virtual network.
-
-```
-Container Group
-      │
-      ▼
-Network Profile
-      │
-      ▼
-Delegated Subnet
-      │
-      ▼
-Virtual Network
-```
-
-However, this approach added complexity to deployments because administrators had to create and reference an additional resource when using ARM templates or SDKs. Microsoft later simplified the architecture by removing the need for network profiles in newer API versions and allowing container groups to be deployed directly into a delegated subnet.
-
-Modern deployments now follow a simpler model:
-
-```
-Container Group
-      │
-      ▼
-Delegated Subnet
-      │
-      ▼
-Virtual Network
-      │
-      ├── Private Azure resources
-      └── On-premises networks (VPN / ExpressRoute)
-```
-
-Today, Azure Container Instances require the subnet to be delegated specifically to the ACI service. This delegation allows Azure to manage IP address allocation and container networking internally because containers are still hosted on platform-managed infrastructure rather than traditional virtual machines with dedicated NICs. The subnet must be dedicated to container groups, and outbound connectivity typically requires a NAT gateway when containers are deployed inside a virtual network.
-
-The evolution of ACI networking can be summarized as follows:
-
-| Era                    | Architecture                                   | Networking Model                                               |
-| ---------------------- | ---------------------------------------------- | -------------------------------------------------------------- |
-| Initial release        | Container groups on shared infrastructure      | Public networking with optional public IP                      |
-| Early VNet integration | Container groups attached via Network Profiles | Access to resources inside VNets                               |
-| Modern implementation  | Direct deployment to delegated subnet          | Simplified architecture, NAT gateway for outbound connectivity |
-
-This progression reflects Azure’s broader transition from simple internet-facing container workloads toward enterprise scenarios that require private networking, hybrid connectivity, and tighter security controls within virtual networks.
-
-**References**
-
-* [Virtual network scenarios and resources](https://learn.microsoft.com/azure/container-instances/container-instances-virtual-network-concepts)
-* [What is Azure Container Instances?](https://learn.microsoft.com/azure/container-instances/container-instances-overview)
-* [Deploy container instances into an Azure virtual network](https://learn.microsoft.com/azure/container-instances/container-instances-vnet)
-* [Quickstart: Deploy a container instance in Azure using Azure PowerShell](https://learn.microsoft.com/azure/container-instances/container-instances-quickstart-powershell)
-* [Quickstart: Deploy a container instance in Azure using the Azure CLI](https://learn.microsoft.com/azure/container-instances/container-instances-quickstart)
-
-</details>
-
----
-
 ### Configure secure access to virtual networks
 
 #### Configure Private Link Service Source IP
@@ -4403,6 +4403,246 @@ You should not use TCP `5985` in your NSG rule because `5985` is the default por
 ---
 
 ### Configure name resolution and load balancing
+
+#### Configure DNS Records for App Service
+
+**Domain:** Implement and manage virtual networking
+**Skill:** Configure name resolution and load balancing
+**Task:** Configure Azure DNS
+
+Your company plans to release a new web application called 'appilcations'. This application is deployed by using an App Service in Azure and will be available to users of the company1.com domain. You have already purchased the company1.com domain name.
+
+You configure the company1.com Azure DNS zone and delegate it to Azure DNS.
+
+You need to ensure that web application can be accessed by using the company1.com domain name.
+
+You decide to use PowerShell to accomplish this task.
+
+How should you complete the command? To answer, select the appropriate options from the drop-down menus.
+
+```powershell
+New-AzDnsRecordSet -Name ___[1]___ -RecordType ___[2]___ `
+  -ZoneName "company1.com" -ResourceGroupName "APP-RG" -Ttl 600 `
+  -DnsRecords (New-AzDnsRecordConfig `
+  -IPv4Address "<IP address>")
+
+New-AzDnsRecordSet -ZoneName company1.com -ResourceGroupName APP-RG `
+  -Name ___[3]___ -RecordType ___[4]___ -Ttl 600 `
+  -DnsRecords (New-AzDnsRecordConfig -Value "appilcations.azurewebsites.net")
+```
+
+Drop-Down Options:
+
+<!-- Dropdown options not yet provided. Paste screenshots of each expanded drop-down to populate. -->
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-03-03-06-02.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+**Why the selected answers are correct**  
+Create an A record named "@" with RecordType "A" to map the root of company1.com to the App Service's IPv4 address. Create a TXT record named "@" with RecordType "TXT" and value "appilcations.azurewebsites.net" so App Service can verify domain ownership and configure the custom domain settings.
+
+**Why other options are incorrect**  
+
+- CNAME/CNAME-like approaches are wrong for the root (@"") because a CNAME cannot coexist with other records at the zone apex and cannot point to an IPv4 address.  
+- AAAA is for IPv6 addresses; the App Service verification here requires an IPv4 A record.  
+- Using literal names like "company1.com", "www.company1.com", or "appilcations.azurewebsites.net" as the Name value would either be redundant, create the wrong record target, or prevent apex records from working as intended.
+
+**Key takeaway**  
+Use an A record (Name "@", RecordType "A") for the IPv4 mapping of the root domain and a TXT record (Name "@", RecordType "TXT") for App Service domain verification; avoid CNAME at the zone apex and do not use AAAA unless you have an IPv6 IP.
+
+<img src='.img/2026-03-03-03-19-52.png' width=600>
+
+<img src='.img/2026-03-03-03-20-54.png' width=600>
+
+References
+
+* [DNS Web Sites Custom Domain](https://learn.microsoft.com/en-us/azure/dns/dns-web-sites-custom-domain?tabs=azure-portal)
+
+</details>
+
+---
+
+#### Configure Standard Load Balancer Outbound Traffic and IP Allocation
+
+**Domain:** Implement and manage virtual networking
+**Skill:** Configure name resolution and load balancing
+**Task:** Configure an internal or public load balancer
+
+You deploy three Windows virtual machines (VMs) named VM01, VM02, and VM03 that host the front-end layer of a web application. You configure a Standard Load Balancer named LB01. VM01, VM02, and VM03 are configured as part of the backend pool for LB01. You configure a load balancing rule for Transmission Control Protocol (TCP) traffic only.
+
+You also configure three public static IP addresses named IP01, IP02, and IP03 which are assigned as follows:
+
+* IP01 is assigned to VM01.  
+* IP02 and IP03 are assigned to LB01.  
+
+For each of the following statements, select Yes if the statement is true. Otherwise, select No.
+
+| STATEMENT | YES | NO |
+|-----------|-----|-----|
+| Outbound flow on VM01 will always use IP02. | | |
+| Outbound flow on LB01 uses IP02 and IP03 at the same time. | | |
+| Outbound flow on VM03 will use IP02 or IP03 for User Datagram Protocol (UDP) traffic. | | |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-01-30-05-53-50.png' width=700>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Why your selected answers are incorrect**
+
+* **Outbound flow on LB01 uses IP02 and IP03 at the same time — you selected No (incorrect).**
+  A *Standard* Load Balancer with multiple outbound public IP addresses can use **multiple SNAT IPs concurrently**. Azure hashes outbound flows (per 5-tuple) across the available frontend public IPs. This means LB01 **can actively use both IP02 and IP03 at the same time**, even though any single flow uses only one IP.
+
+* **Outbound flow on VM03 will use IP02 or IP03 for UDP traffic — you selected Yes (incorrect).**
+  Your load balancing rule is configured for **TCP only**. UDP traffic is **not associated with the load balancer rule**, so it does **not** use the load balancer’s outbound SNAT IPs (IP02/IP03). Instead, UDP outbound traffic from VM03 uses the VM’s **own assigned public IP if present**, or default outbound behavior if not. The presence of a TCP-only rule is the key trap here.
+
+**Why the correct answers are correct**
+
+* **Outbound flow on VM01 will always use IP02 — No (correct).**
+  VM01 has its own public IP (IP01). Azure prefers a VM’s **directly assigned public IP** for outbound traffic over load balancer SNAT. Therefore, VM01 does not “always” use IP02.
+
+* **Outbound flow on LB01 uses IP02 and IP03 at the same time — Yes (correct).**
+  Standard Load Balancer supports **multiple outbound frontend IPs**, distributing outbound connections across them. This increases SNAT port capacity and resiliency.
+
+* **Outbound flow on VM03 will use IP02 or IP03 for UDP traffic — No (correct).**
+  Since the load balancing rule is TCP-only, UDP traffic bypasses the load balancer’s SNAT configuration entirely.
+
+**Key takeaway**
+
+* **Standard Load Balancer outbound SNAT applies only to traffic matching its rules (TCP in this case).**
+* **Multiple outbound public IPs can be used concurrently.**
+* **A VM’s own public IP always takes precedence for outbound traffic.**
+
+**References**
+
+* [https://learn.microsoft.com/azure/load-balancer/load-balancer-outbound-connections](https://learn.microsoft.com/azure/load-balancer/load-balancer-outbound-connections)
+* [https://learn.microsoft.com/azure/load-balancer/load-balancer-standard-overview](https://learn.microsoft.com/azure/load-balancer/load-balancer-standard-overview)
+* [https://learn.microsoft.com/azure/virtual-network/ip-services/public-ip-addresses](https://learn.microsoft.com/azure/virtual-network/ip-services/public-ip-addresses)
+
+</details>
+
+▶ **Related Lab:** [lab-slb-outbound-traffic](../hands-on-labs/networking/lab-slb-outbound-traffic/README.md)
+
+---
+
+#### Connect VNet to Private DNS Zone
+
+**Domain:** Implement and Manage Virtual Networking
+**Skill:** Configure name resolution and load balancing
+**Task:** Configure Azure DNS
+
+You need to connect a virtual network (`VNet`) to a private Domain Name System (`DNS zone`) to support new application namespaces in the new private zone. The `VNet` already has virtual machines (`VMs`) assigned to it and has existing private DNS zones assigned.
+
+What should you do first?
+
+A. Set the existing VMs to support the new DNS zone via the Windows Server IP Configuration DNS settings app.  
+B. Set up a new VNet, assign the private DNS zone to this VNet, and move the existing VMs to it.  
+C. Remove the existing VMs from the VNet.  
+D. Add the new private DNS zone to the existing VNet.  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-16-05-06-48.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+To complete this task, you should just add the new private Domain Name System (`DNS`) zone to the existing virtual network (`VNet`). When adding a new private DNS zone to an existing `VNet` that already has private zones assigned, you do not need to complete any other task other than adding the zone.
+
+You do not need to remove the existing `VMs` from the `VNet`. This would have been a requirement if the `VNet` did not already have private DNS zones linked to it.
+
+Setting up a new `VNet`, assigning the private DNS zone to this `VNet`, and moving the existing `VMs` to it would satisfy the connectivity to the new private DNS zone, but the existing linked private zones would be lost.
+
+<img src='.img/2026-03-16-05-11-33.png' width=600>
+
+<img src='.img/2026-03-16-05-12-25.png' width=600>
+
+**More Detail**:  
+
+The gap is in the **specific condition attached to that limitation**.
+
+The documentation line says:
+
+> *A specific virtual network can be linked to only one private zone **if automatic registration of VM DNS records is enabled***.
+
+That condition is easy to miss. The restriction applies **only when the VNet link is configured with auto-registration enabled**.
+
+Azure Private DNS actually supports **two different link types** between a VNet and a private DNS zone:
+
+**1. Registration virtual network**
+
+* Auto-registration **enabled**
+* Azure automatically creates A records for VMs in the zone
+* A VNet **can be linked as a registration network to only one private DNS zone**
+
+**2. Resolution virtual network**
+
+* Auto-registration **disabled**
+* The VNet can **resolve records from the zone**
+* No automatic VM record creation
+* A VNet **can be linked to many zones**
+
+So the rule is really:
+
+| Link Type    | Auto-registration | Max zones per VNet |
+| ------------ | ----------------- | ------------------ |
+| Registration | Enabled           | **1**              |
+| Resolution   | Disabled          | **Many**           |
+
+How this applies to the exam question:
+
+The question simply says the VNet already has private DNS zones assigned. It **does not say auto-registration is enabled**. Therefore Azure allows linking the VNet to **another private DNS zone**.
+
+Operationally, Azure would treat the VNet as:
+
+* **Registration VNet for one zone** (if enabled)
+* **Resolution VNet for additional zones**
+
+Example scenario:
+
+```
+VNet: prod-vnet
+
+Linked zones:
+corp.internal        (auto-registration enabled)
+database.internal    (resolution only)
+apps.internal        (resolution only)
+```
+
+VMs automatically register only in `corp.internal`, but they can resolve records in all three zones.
+
+Why the other answers are wrong:
+
+* **Setting DNS in the VM OS** does not integrate with Azure Private DNS zones.
+* **Creating a new VNet and moving VMs** is unnecessary because VNets can link to multiple zones.
+* **Removing VMs from the VNet** is unrelated to DNS zone linking.
+
+The key takeaway for exams:
+
+**A VNet can link to many private DNS zones, but it can be the auto-registration network for only one zone.**
+
+**References**
+
+* [Tutorial: Host your domain in Azure DNS](https://learn.microsoft.com/azure/dns/dns-delegate-domain-azure-dns)
+* [What is Azure Private DNS?](https://learn.microsoft.com/azure/dns/private-dns-overview)
+
+</details>
+
+---
 
 #### Diagnose Internal Load Balancer Hairpin Traffic Failure
 
@@ -4554,536 +4794,114 @@ References
 
 ---
 
-#### Configure Standard Load Balancer Outbound Traffic and IP Allocation
-
-**Domain:** Implement and manage virtual networking
-**Skill:** Configure name resolution and load balancing
-**Task:** Configure an internal or public load balancer
-
-You deploy three Windows virtual machines (VMs) named VM01, VM02, and VM03 that host the front-end layer of a web application. You configure a Standard Load Balancer named LB01. VM01, VM02, and VM03 are configured as part of the backend pool for LB01. You configure a load balancing rule for Transmission Control Protocol (TCP) traffic only.
-
-You also configure three public static IP addresses named IP01, IP02, and IP03 which are assigned as follows:
-
-* IP01 is assigned to VM01.  
-* IP02 and IP03 are assigned to LB01.  
-
-For each of the following statements, select Yes if the statement is true. Otherwise, select No.
-
-| STATEMENT | YES | NO |
-|-----------|-----|-----|
-| Outbound flow on VM01 will always use IP02. | | |
-| Outbound flow on LB01 uses IP02 and IP03 at the same time. | | |
-| Outbound flow on VM03 will use IP02 or IP03 for User Datagram Protocol (UDP) traffic. | | |
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-01-30-05-53-50.png' width=700>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Why your selected answers are incorrect**
-
-* **Outbound flow on LB01 uses IP02 and IP03 at the same time — you selected No (incorrect).**
-  A *Standard* Load Balancer with multiple outbound public IP addresses can use **multiple SNAT IPs concurrently**. Azure hashes outbound flows (per 5-tuple) across the available frontend public IPs. This means LB01 **can actively use both IP02 and IP03 at the same time**, even though any single flow uses only one IP.
-
-* **Outbound flow on VM03 will use IP02 or IP03 for UDP traffic — you selected Yes (incorrect).**
-  Your load balancing rule is configured for **TCP only**. UDP traffic is **not associated with the load balancer rule**, so it does **not** use the load balancer’s outbound SNAT IPs (IP02/IP03). Instead, UDP outbound traffic from VM03 uses the VM’s **own assigned public IP if present**, or default outbound behavior if not. The presence of a TCP-only rule is the key trap here.
-
-**Why the correct answers are correct**
-
-* **Outbound flow on VM01 will always use IP02 — No (correct).**
-  VM01 has its own public IP (IP01). Azure prefers a VM’s **directly assigned public IP** for outbound traffic over load balancer SNAT. Therefore, VM01 does not “always” use IP02.
-
-* **Outbound flow on LB01 uses IP02 and IP03 at the same time — Yes (correct).**
-  Standard Load Balancer supports **multiple outbound frontend IPs**, distributing outbound connections across them. This increases SNAT port capacity and resiliency.
-
-* **Outbound flow on VM03 will use IP02 or IP03 for UDP traffic — No (correct).**
-  Since the load balancing rule is TCP-only, UDP traffic bypasses the load balancer’s SNAT configuration entirely.
-
-**Key takeaway**
-
-* **Standard Load Balancer outbound SNAT applies only to traffic matching its rules (TCP in this case).**
-* **Multiple outbound public IPs can be used concurrently.**
-* **A VM’s own public IP always takes precedence for outbound traffic.**
-
-**References**
-
-* [https://learn.microsoft.com/azure/load-balancer/load-balancer-outbound-connections](https://learn.microsoft.com/azure/load-balancer/load-balancer-outbound-connections)
-* [https://learn.microsoft.com/azure/load-balancer/load-balancer-standard-overview](https://learn.microsoft.com/azure/load-balancer/load-balancer-standard-overview)
-* [https://learn.microsoft.com/azure/virtual-network/ip-services/public-ip-addresses](https://learn.microsoft.com/azure/virtual-network/ip-services/public-ip-addresses)
-
-</details>
-
-▶ **Related Lab:** [lab-slb-outbound-traffic](../hands-on-labs/networking/lab-slb-outbound-traffic/README.md)
-
----
-
-#### Configure DNS Records for App Service
-
-**Domain:** Implement and manage virtual networking
-**Skill:** Configure name resolution and load balancing
-**Task:** Configure Azure DNS
-
-Your company plans to release a new web application called 'appilcations'. This application is deployed by using an App Service in Azure and will be available to users of the company1.com domain. You have already purchased the company1.com domain name.
-
-You configure the company1.com Azure DNS zone and delegate it to Azure DNS.
-
-You need to ensure that web application can be accessed by using the company1.com domain name.
-
-You decide to use PowerShell to accomplish this task.
-
-How should you complete the command? To answer, select the appropriate options from the drop-down menus.
-
-```powershell
-New-AzDnsRecordSet -Name ___[1]___ -RecordType ___[2]___ `
-  -ZoneName "company1.com" -ResourceGroupName "APP-RG" -Ttl 600 `
-  -DnsRecords (New-AzDnsRecordConfig `
-  -IPv4Address "<IP address>")
-
-New-AzDnsRecordSet -ZoneName company1.com -ResourceGroupName APP-RG `
-  -Name ___[3]___ -RecordType ___[4]___ -Ttl 600 `
-  -DnsRecords (New-AzDnsRecordConfig -Value "appilcations.azurewebsites.net")
-```
-
-Drop-Down Options:
-
-<!-- Dropdown options not yet provided. Paste screenshots of each expanded drop-down to populate. -->
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-03-03-06-02.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-**Why the selected answers are correct**  
-Create an A record named "@" with RecordType "A" to map the root of company1.com to the App Service's IPv4 address. Create a TXT record named "@" with RecordType "TXT" and value "appilcations.azurewebsites.net" so App Service can verify domain ownership and configure the custom domain settings.
-
-**Why other options are incorrect**  
-
-- CNAME/CNAME-like approaches are wrong for the root (@"") because a CNAME cannot coexist with other records at the zone apex and cannot point to an IPv4 address.  
-- AAAA is for IPv6 addresses; the App Service verification here requires an IPv4 A record.  
-- Using literal names like "company1.com", "www.company1.com", or "appilcations.azurewebsites.net" as the Name value would either be redundant, create the wrong record target, or prevent apex records from working as intended.
-
-**Key takeaway**  
-Use an A record (Name "@", RecordType "A") for the IPv4 mapping of the root domain and a TXT record (Name "@", RecordType "TXT") for App Service domain verification; avoid CNAME at the zone apex and do not use AAAA unless you have an IPv6 IP.
-
-<img src='.img/2026-03-03-03-19-52.png' width=600>
-
-<img src='.img/2026-03-03-03-20-54.png' width=600>
-
-References
-
-* [DNS Web Sites Custom Domain](https://learn.microsoft.com/en-us/azure/dns/dns-web-sites-custom-domain?tabs=azure-portal)
-
-</details>
-
----
-
-## Monitor and Maintain Azure Resources
+## Monitor and maintain Azure resources
 
 ### Monitor resources in Azure
 
-#### Enable Guest OS Diagnostics
-
-**Domain:** Monitor and Maintain Azure Resources
-**Skill:** Monitor resources in Azure
-**Task:** Configure and interpret monitoring of VMs, storage accounts, and networks by using Azure Monitor Insights
-
-You have an Azure subscription that contains a Windows Server 2019 virtual machine (VM) named VM1.
-
-You need to enable guest operating system (OS) diagnostics for VM1 by using Azure Cloud Shell.
-
-How should you complete the Azure PowerShell command? To answer, select the appropriate options from the drop-down menus.
-
-```powershell
-$vmRg = "prod"
-$vm = "vm1"
-$path = "config.xml"
-Set-AzVMDiagnosticsExtension ___[1]___ -ResourceGroupName $vmRg `
--VMName $vm -DiagnosticsConfiguration ___[2]___ $path
-```
-
-Drop-Down Options:
-
-| Blank | Options |
-|-------|---------|
-| [1] | -Select- / -DefaultProfile / -DiagnosticsConfigurationPath / -StorageContext |
-| [2] | -Select- / Set-AzDiagnosticSetting / Set-AzVMBootdiagnostic / Set-AzVMDiagnosticsExtension |
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-13-03-38-09.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Solution Explanation:**
-
-You should use the `Set-AzVMDiagnosticsExtension` cmdlet with the `-DiagnosticsConfigurationPath` parameter so that the command accepts an Extensible Markup Language (XML) configuration file and enables guest OS diagnostics on the target VM. The correct command is:
-
-```powershell
-Set-AzVMDiagnosticsExtension -ResourceGroupName $vmRg `
-  -VMName $vm -DiagnosticsConfigurationPath $path
-```
-
-`Set-AzVMDiagnosticsExtension` configures the VM extension that enables Azure to collect diagnostics telemetry from Performance Monitor and Event Logs and forward it to destinations such as a storage account or an Azure Log Analytics workspace. The `-DiagnosticsConfigurationPath` parameter expects the path to an XML diagnostics configuration file.
-
-Do not use `Set-AzDiagnosticSetting` for this task because that cmdlet configures platform diagnostic settings (resource-level diagnostic settings) and does not enable guest OS diagnostics inside the VM. Also avoid `Set-AzVMBootDiagnostic` — that cmdlet configures boot diagnostics (screenshot and serial console capture) and does not enable guest-level diagnostics.
-
-**References**
-
-- [Use PowerShell to enable Azure Diagnostics in a virtual machine running Windows](https://learn.microsoft.com/azure/virtual-machines/extensions/diagnostics-windows#enable-the-diagnostics-extension-if-you-use-the-resource-manager-deployment-model)
-- [Set-AzVMDiagnosticsExtension](https://learn.microsoft.com/powershell/module/az.compute/set-azvmdiagnosticsextension?view=azps-15.4.0)
-- [Set-AzDiagnosticSetting](https://learn.microsoft.com/powershell/module/az.monitor/set-azdiagnosticsetting?view=azps-0.10.0)
-- [Set-AzVMBootDiagnostic](https://learn.microsoft.com/powershell/module/az.compute/set-azvmbootdiagnostic?view=azps-15.4.0)
-
-</details>
-
----
-
-#### Load Balancer Metrics Batch API
+#### Configure Azure Monitor Alert for Database CPU Usage
 
 **Domain:** Monitor and maintain Azure resources
-**Skill:** Monitor resources in Azure
-**Task:** Interpret metrics in Azure Monitor
-
-Your company uses an Azure standard public load balancer. You are the Azure administrator at your company.
-
-You have been tasked with troubleshooting common outbound connectivity issues with Azure Load Balancer.
-
-You want to proactively monitor the data path availability and perform health probe status checks on the load balancer.
-
-You create the following metrics:getBatch API request shown below:
-
-```
-POST /subscriptions/87654765-4321-9999-1251-4532243211xfe/metrics:getBatch?metricNamespace=microsoft.compute/virtualMachines&api-version=2023-03-01-preview
-Host: eastus.metrics.monitor.azure.com
-Content-Type: application/json
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJh...XaTddvfcFlgsas
-{
-   "resourceids":[".../virtualMachines/vmss-002_1sdf4cc9",
-   ".../virtualMachines/vmss-003_s1187c3h"]
-}
-```
-
-You need to retrieve multi-dimensional definitions and metrics programmatically via APIs.
-
-For each of the following statements, select Yes if the statement is true. Otherwise, select No.
-
-| Statement | Yes | No |
-|----------|-----|----|
-| The metrics:getBatch API here allows you to prevent throttling and performance issues when querying multiple resources in a single REST request. | ☐ | ☐ |
-| Both VMs vmss-002_1sdf4cc9 and vmss-003_s1187c3h can be spread across multiple Azure regions. | ☐ | ☐ |
-| Both VMs vmss-002_1sdf4cc9 and vmss-003_s1187c3h must be the same resource type. | ☐ | ☐ |
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-02-20-16-52-36.png' width=700>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Why Statement 1 is Yes (correct)**
-
-The metrics:getBatch API was designed to query metrics for multiple resources in a single HTTP request. Rather than issuing one API call per resource — which scales poorly and can trigger throttling — batching all resource IDs into a single POST reduces the total number of requests against Azure Monitor's metrics endpoint. Preventing throttling and improving performance when querying multiple resources is the primary purpose of the batch endpoint.
-
-**Why Statement 2 is No (correct)**
-
-The metrics:getBatch endpoint is a **regional endpoint**. In the example, the host is `eastus.metrics.monitor.azure.com`, which means all resources in the batch must exist in the **East US region**. Resources spread across multiple Azure regions cannot be combined in a single batch call. If you need metrics from resources in different regions, you must issue separate batch calls against each region's respective endpoint.
-
-**Why Statement 3 is Yes (correct)**
-
-Each metrics:getBatch request includes a single `metricNamespace` query parameter. In the example, that value is `microsoft.compute/virtualMachines`. All resource IDs submitted in the request body must belong to that same resource type and namespace. You cannot mix resource types (for example, virtual machines and load balancers) within a single batch request.
-
-**Key takeaway**
-
-The metrics:getBatch API reduces throttling risk by batching multi-resource metric queries into a single request, but it enforces two important constraints: all resources must be in the **same Azure region** (determined by the regional endpoint hostname), and all resources must be the **same resource type** (deterined by the `metricNamespace` parameter).
-
-**References**
-
-* [How to migrate from the metrics API to the getBatch API](https://learn.microsoft.com/en-us/azure/azure-monitor/metrics/migrate-to-batch-api?tabs=individual-response)
-* [Troubleshoot Azure Load Balancer outbound connectivity issues](https://learn.microsoft.com/en-us/azure/load-balancer/troubleshoot-outbound-connection)
-* [Standard load balancer diagnostics with metrics, alerts, and resource health](https://learn.microsoft.com/en-us/azure/load-balancer/load-balancer-standard-diagnostics)
-* [Azure monitoring REST API walkthrough](https://learn.microsoft.com/en-us/azure/azure-monitor/platform/rest-api-walkthrough?tabs=rest%2Cportal)
-
-</details>
-
-▶ Related Lab: [lab-metrics-batch-api](../hands-on-labs/monitoring/lab-metrics-batch-api/README.md)
-
----
-
-#### Azure Advisor alerts with Bicep
-
-**Domain:** Monitor and Maintain Azure Resources
 **Skill:** Monitor resources in Azure
 **Task:** Set up alert rules, action groups, and alert processing rules in Azure Monitor
 
-Your organization is using Azure Advisor to optimize your Azure deployments.
+Your company has a line-of-business (LOB) application that uses Azure SQL Database for storing transactional information. Your company also has System Center Service Manager deployed.
 
-You want to set up an alert for new recommendations from Azure Advisor using Bicep.
+You need to configure an alert when the database reaches 70% of central processing unit (CPU) usage. When this alert rises, you need to notify several users by email and by SMS. You also need to automatically create a ticket in the IT service management (ITSM) system. Your solution should require minimum administrative effort.
 
-You need to define the Azure resources in the Bicep file named `main.bicep`.
+Which two actions should you perform? Each correct answer presents part of the solution.
 
-Which two resources should you use? Each correct answer presents part of the solution.
-
-A. `Microsoft.Insights/metricAlerts`  
-B. `Microsoft.Insights/alertrules`  
-C. `Microsoft.Insights/dataCollectionRules`  
-D. `Microsoft.Insights/actionGroups`  
-E. `Microsoft.Insights/activityLogAlerts`  
+A. Configure System Center Service Manager with Azure Automation.  
+B. Configure one action group with two actions: one for email and SMS notification and one for IT service management (ITSM) ticket creation.  
+C. Configure an IT Service Management Connector (ITSMC).  
+D. Configure two action groups: one for email and SMS notification and one for IT service management (ITSM) ticket creation.  
 
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-03-13-05-43-29.png' width=600>
+<img src='.img/2026-01-30-05-26-15.png' width=700>
 
 </details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
 
-**Explanation**
+**The correct answers are B and C.**
 
-In this scenario, you are using Azure Bicep to set up alerts for Azure Advisor. Bicep is a domain-specific language (DSL) that uses declarative syntax to deploy Azure resources. It provides concise syntax, reliable type safety, and support for code reuse. You should use the below Azure resources in the `main.bicep` file.
+**Why B is correct:**
+Azure Monitor action groups are designed to consolidate multiple notification and automation actions into a single reusable unit. One action group can contain email, SMS, voice, webhook, Logic App, Automation Runbook, and ITSM actions together. This design allows you to configure all required notifications and ticket creation in a single action group, which minimizes administrative overhead and is the recommended approach.
 
-1. `Microsoft.Insights/actionGroups`: The `actionGroups` resource type is supported in Bicep for Azure Advisor. You need to mention `name`, `location`, `tags` and `properties`.
-2. `Microsoft.Insights/activityLogAlerts`: The `activityLogAlerts` resource type is supported in Bicep for Azure Advisor. You need to mention `name`, `location`, `tags` and `properties`. Since Azure Activity Log Alerts is a global service, the location of the rules should always be `global`.
+**Why C is correct:**
+ITSM ticket creation in Azure Monitor requires an IT Service Management Connector (ITSMC) to bridge Azure Monitor alerts with system-center or third-party ITSM systems. Without the ITSMC, Azure Monitor cannot create incidents or tickets in Service Manager, regardless of how the action group is configured.
 
-You should not use `Microsoft.Insights/alertrules`. You should use this resource type when you want to use `Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria` for the `odata.type` property. In this scenario, since you are setting up alerts for Azure Advisor, the `main.bicep` file should have the `actionGroups` and `activityLogAlerts` resource types only.
+**Why A is incorrect:**
+While Azure Automation can integrate with Azure Monitor, it is not a requirement for basic ITSM alerting. The ITSMC provides direct integration without needing custom automation runbooks.
 
-You should not use `Microsoft.Insights/dataCollectionRules`. You should use this resource type when you want to gather information from different sources including `dataFlows`, `dataSources`, `iisLogs`, `logFiles`, `performanceCounters`, `syslog`, `windowsEventLogs`, etc. In this scenario, since you are setting up alerts for Azure Advisor, the `main.bicep` file should have the `actionGroups` and `activityLogAlerts` resource types only.
+**Why D is incorrect:**
+Creating separate action groups for different notification types adds unnecessary complexity and administrative effort. Azure Monitor is designed to support multiple actions within a single action group, making D an inefficient solution.
 
-You should not use `Microsoft.Insights/metricAlerts`. This field allows for specifying custom properties, which would be appended to the alert payload sent as input to the webhook. You should use this resource type when you want to define custom properties, which would be appended to the alert payload sent as input via webhooks.
-
-**Further explanation**:  
-
-Azure Advisor recommendations are emitted as **events in the Azure Activity Log**, not as metrics. Therefore, the correct alert rule resource is **`Microsoft.Insights/activityLogAlerts`**, which monitors Activity Log events such as the *Recommendation* category generated by Azure Advisor. Azure alerts also require a defined response, which is handled by an **`Microsoft.Insights/actionGroups`** resource. The activity log alert detects the Advisor recommendation event, and the action group specifies what action occurs when the alert fires (for example, email or webhook notification). Thus, both **activityLogAlerts** (the alert rule) and **actionGroups** (the alert action) are required.
-
-<img src='.img/2026-03-13-05-51-06.png' width=400>
-
-`Microsoft.Insights/alertrules` is incorrect because it belongs to an **older, deprecated Azure Monitor alerting model** used before the current alert resource types were introduced. Microsoft replaced this legacy resource with newer alert types such as **`metricAlerts`**, **`scheduledQueryRules`**, and **`activityLogAlerts`**. Since Azure Advisor recommendations appear as **Activity Log events**, the modern and supported resource for this scenario is **`Microsoft.Insights/activityLogAlerts`**, not the legacy `alertrules`.
-
-**References**
-
-* [Introduction to Azure Advisor](https://learn.microsoft.com/en-us/azure/advisor/)
-* [Quickstart: Create Azure Advisor alerts on new recommendations using Bicep](https://learn.microsoft.com/azure/advisor/advisor-alerts-bicep)
-* [Microsoft.Insights actionGroups](https://learn.microsoft.com/azure/azure-monitor/platform/action-groups)
-* [Microsoft.Insights activityLogAlerts](https://learn.microsoft.com/azure/azure-monitor/platform/activity-log-alerts)
-* Microsoft.Insights alertrules
-* Microsoft.Insights dataCollectionRules
-* [Microsoft.Insights metricAlerts](https://learn.microsoft.com/azure/azure-monitor/alerts/alerts-metric-overview)
+**Key takeaway:**
+For Azure Monitor alerts requiring multiple notification methods and ITSM integration, use a **single action group with multiple actions** and configure an **ITSM Connector** for Service Manager integration. This minimizes administrative overhead and follows Azure best practices.
 
 </details>
 
 ---
 
-#### Capture SFTP Packets with Network Watcher
-
-**Domain:** Monitor and maintain Azure resources
-**Skill:** Monitor resources in Azure
-**Task:** Use Azure Network Watcher and Connection Monitor
-
-You deploy several virtual machines (VMs) for different purposes. You deploy Network Watcher in the East US region.
-
-You see some odd traffic on a virtual machine named VM01. This machine is making connections to an unknown Secure File Transfer Protocol (SFTP) service.
-
-You need to configure a filter for capturing those packets for the unknown SFTP service. You decide to use PowerShell for this task.
-
-How should you complete the PowerShell script? To answer, select the appropriate options from the drop-down menus.
-
-```powershell
-$res = Get-AzResource | Where {$_.ResourceType -eq ___[1]___ -and $_.Location -eq "EastUS"}
-
-$networkWatcher = Get-AzNetworkWatcher -Name $res.Name -ResourceGroupName $res.ResourceGroupName
-$diagnosticSA = Get-AzStorageAccount -ResourceGroupName Diagnostics-RG `
-  -Name "Diagnostics-Storage"
-
-$filter1 = New-AzPacketCaptureFilterConfig -Protocol TCP `
-  -RemoteIPAddress ___[2]___ `
-  -LocalIPAddress "10.0.0.3" -LocalPort ___[3]___ -RemotePort ___[4]___
-
-New-AzNetworkWatcherPacketCapture -NetworkWatcher ___[5]___ `
-  -TargetVirtualMachineId $vm.Id `
-  -PacketCaptureName "Capture SFTP Traffic" -StorageAccountId $diagnosticSA.Id `
-  -TimeLimitInSeconds 60 -Filter $filter1
-```
-
-Drop-Down Options:
-
-| Blank | Options |
-|-------|---------|
-| [1] | -Select- / Microsoft.Network/networkWatchers / Microsoft.Network/networkWatchers/packetCaptures |
-| [2] | -Select- / "0.0.0.0" / "0.0.0.0-255.255.255.255" |
-| [3] | -Select- / "0" / "1-65535" / "20;21" / "20-21" / "22" |
-| [4] | -Select- / "0" / "1-65535" / "20;21" / "20-21" / "22" |
-| [5] | -Select- / New-AzNetworkWatcher / New-AzNetworkWatcherPacketCapture |
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-02-27-03-19-02.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Why the selected answer is wrong**  
-The filter and cmdlet choices in the original answer are incorrect for capturing unknown SFTP traffic. You should target the Network Watcher resource type, use a remote IP range that captures any possible destination, allow the full dynamic range for the local (ephemeral) port, and filter for the SFTP service port.
-
-**Why the correct answer is correct**  
-
-- Use Microsoft.Network/networkWatchers to find the existing Network Watcher in the East US region.  
-- Use "0.0.0.0-255.255.255.255" for -RemoteIPAddress because you do not know the remote SFTP server IP; this selects any remote address the VM may contact.  
-- Use "1-65535" for -LocalPort because outgoing connections use ephemeral local ports chosen dynamically by the OS.  
-- Use "22" for -RemotePort because SFTP runs over SSH (TCP port 22).  
-- Use New-AzNetworkWatcherPacketCapture with -NetworkWatcher $networkWatcher and -Filter $filter1 to start a packet capture on the existing Network Watcher; this cmdlet applies the filter to the VM capture and stores results in the specified storage account.
-
-**Key takeaway**  
-When creating a packet capture for unknown outbound service endpoints, allow any remote IP, permit the full local ephemeral port range, filter on the known service port (22 for SFTP), and run the capture with New-AzNetworkWatcherPacketCapture against the existing Network Watcher.
-
-References
-
-* [Manage Packet Captures with Network Watcher](https://learn.microsoft.com/en-us/azure/network-watcher/packet-capture-manage?tabs=portal)
-
-</details>
-
-▶ Related Lab: [lab-capture-sftp-packets](../hands-on-labs/monitoring/lab-capture-sftp-packets/README.md)
-
----
-
-#### Pinning query results to a dashboard
-
-**Domain:** Monitor and Maintain Azure Resources
-**Skill:** Monitor resources in Azure
-**Task:** Query and analyze logs in Azure Monitor
-
-Your company has an Azure subscription. You create an Azure Log Analytics workspace (Azure Monitor log) and collect data from various data sources. You run an Azure Monitor log query. You want to display the tabular data as a chart pinned to a shared dashboard.
-
-You create an Application Insights Overview dashboard.
-
-You need to identify restrictions when pinning a result chart to a dashboard.
-
-For each of the following statements, select Yes if the statement is true. Otherwise, select No.
-
-| STATEMENT | YES | NO |
-|-----------|-----|-----|
-| Data displayed in the chart is limited to no more than 30 days. | ☐ | ☐ |
-| Data displayed in the chart is limited to up to four columns and the top seven rows. | ☐ | ☐ |
-| Chart types are limited to line and stacked column only. | ☐ | ☐ |
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-14-04-53-31.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-Unless the `render` operator is specified in your query, data from an Azure Monitor log is returned as a table. You have the option of formatting the data as a chart with multiple chart formats supported including line, column, stacked column, and pie.
-
-When the result is pinned to a dashboard, the result is limited to no more than 30 days.
-
-Data displayed in the chart is not limited to up to four columns and the top seven rows. This limit applies to tabular data pinned to a dashboard.
-
-Chart types are not limited to line and stacked column only. Other chart formats are also supported, with the pie chart as a popular option for displaying summary data.
-
-<img src='.img/2026-03-14-04-59-56.png' width=600>
-
-<img src='.img/2026-03-14-04-55-03.png' width=600>
-
-**References**
-
-* [Azure Monitor Metrics Overview](https://learn.microsoft.com/en-us/azure/azure-monitor/metrics/data-platform-metrics)
-* [Create and share dashboards that visualize data in Azure Monitor Logs](https://learn.microsoft.com/en-us/azure/azure-monitor/visualize/tutorial-logs-dashboards)
-* [Log Analytics tutorial](https://learn.microsoft.com/azure/azure-monitor/logs/log-analytics-tutorial)
-* [Log queries in Azure Monitor](https://learn.microsoft.com/azure/azure-monitor/logs/log-query-overview)
-* [Chart visualizations](https://learn.microsoft.com/azure/azure-monitor/visualize/workbooks-chart-visualizations)
-* [Application Insights Overview dashboard](https://learn.microsoft.com/azure/azure-monitor/app/overview-dashboard)
-
-</details>
-
----
-
-#### Enable Boot Diagnostics for Azure Virtual Machines
+#### Storage Insights Overview
 
 **Domain:** Monitor and maintain Azure resources
 **Skill:** Monitor resources in Azure
 **Task:** Configure and interpret monitoring of virtual machines, storage accounts, and networks by using Azure Monitor Insights
 
-You have two Azure Virtual Machines (VMs) and three storage accounts provisioned in an Azure subscription. The subscription configuration is shown in the exhibit.
+You are an Azure administrator at a retail organization. Your organization uses 4,500 Azure storage accounts across two Azure subscriptions.
 
-You need to enable boot diagnostics in the Azure VMs using the available storage accounts.
+You have been tasked with performing an audit by implementing the following:
 
-Which storage accounts should you use? To answer, select the appropriate options from the drop-down menus.
+1. Identification of storage accounts with no use.  
+2. Enabling of viewing interactive storage metrics for 4,500 Azure storage accounts across both Azure subscriptions.  
+3. Customized dashboard coloring for availability.
 
-Enable boot diagnostics in vm1 by using $PLACEHOLDER$
+You have decided to use the Storage Insights view in Azure Monitor.
 
-Enable boot diagnostics in vm2 by using $PLACEHOLDER$
+You need to implement the solution.
+
+For each of the following statements, select Yes if the statement is true. Otherwise, select No.
+
+| STATEMENT | YES | NO |
+|-----------|-----|----|
+| You can sort your storage accounts in ascending order by using the Transactions column to identify storage accounts with no use. | ☐ | ☐ |
+| The Overview workbook for selected subscriptions will exhibit up to 500 storage accounts. | ☐ | ☐ |
+| You can apply customized coloring in the Availability threshold section. | ☐ | ☐ |
 
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-01-30-05-36-07.png' width=700>
-
-<img src='.img/2026-01-30-05-34-11.png' width=500>
+<img src='.img/2026-03-04-04-42-35.png' width=600>
 
 </details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
 
-**Why the selected answers are wrong**
+Storage Insights is a dashboard on top of Azure Storage metrics and logs. You can use Storage Insights to examine the transaction volume and used capacity of all your accounts.
 
-* **Using storage1 for vm1**
-  Boot diagnostics **cannot use a Premium storage account**. Boot diagnostics requires a **Standard** storage account (Blob service). `storage1` is explicitly a **Premium storage account**, so it is not eligible, even though it is in the same region and resource group as vm1.
+You can sort your storage accounts in ascending order by using the Transactions column in the Storage Insights view in Azure Monitor to identify storage accounts with no use.
 
-* **Using storage2 for vm2**
-  While `storage2` is a Standard storage account, it is a **Storage account v1 (Classic)**. Boot diagnostics **does not support storage account v1**. Only **Storage account v2 (General-purpose v2)** or supported Standard accounts are valid.
+The Overview workbook for selected subscriptions will not exhibit up to 500 storage accounts. In the Overview workbook, which displays data for a selected subscription, the table displays interactive storage metrics and service availability state. The data is displayed for up to five storage accounts grouped together. If you select all or multiple storage accounts in the scope selector, up to 200 storage accounts will be returned. In this scenario, since you have 4,500 Azure storage accounts across two Azure subscriptions, if you select both Azure subscriptions, only 200 accounts would be displayed at a maximum.
 
-**Why the correct answers are right**
+You can apply customized coloring in the Availability threshold section.
 
-* **vm1 → storage3**
-  `storage3` is a **Storage account v2**, which is supported for boot diagnostics. It is also in the **same region (Central US)** as vm1.
-  Replication type (GRS vs LRS) and resource group **do not matter** for boot diagnostics—only account type and region do.
+<img src='.img/2026-03-04-04-53-05.png' width=600>
 
-* **vm2 → storage3**
-  Boot diagnostics **does not require the storage account to be in the same resource group**, but it **must be in the same region** as the VM.
-  vm2 is in **East US**, so none of the available accounts in East US meet the requirements (`storage2` fails due to v1). Therefore, **storage3 is the only valid supported account**, and this question is testing that **account type restrictions override resource group and replication considerations**.
+<img src='.img/2026-03-04-05-01-25.png' width=600>
 
-**Key takeaway**
+<img src='.img/2026-03-04-05-01-35.png' width=600>
 
-Boot diagnostics requires:
+<img src='.img/2026-03-04-05-09-02.png' width=800>
 
-* **Standard storage**
-* **Storage account v2**
-* **Same region as the VM**
+References
 
-Premium storage accounts and storage account v1 are **not supported**, regardless of region or resource group.
-
-<img src='.img/2026-02-03-04-29-59.png' width=700>
-
-**References**  
-
-* [Limitations](https://learn.microsoft.com/en-us/azure/virtual-machines/boot-diagnostics#limitations)
-* [https://learn.microsoft.com/azure/virtual-machines/boot-diagnostics](https://learn.microsoft.com/azure/virtual-machines/boot-diagnostics)
-* [https://learn.microsoft.com/azure/storage/common/storage-account-overview](https://learn.microsoft.com/azure/storage/common/storage-account-overview)
-* [https://learn.microsoft.com/azure/virtual-machines/troubleshooting/boot-diagnostics#requirements](https://learn.microsoft.com/azure/virtual-machines/troubleshooting/boot-diagnostics#requirements)
+- [Blob Storage Monitoring Scenarios](https://learn.microsoft.com/en-us/azure/storage/blobs/blob-storage-monitoring-scenarios)
+- [Storage Insights Overview](https://learn.microsoft.com/en-us/azure/storage/common/storage-insights-overview?toc=%2Fazure%2Fazure-monitor%2Ftoc.json)
 
 </details>
 
@@ -5091,39 +4909,195 @@ Premium storage accounts and storage account v1 are **not supported**, regardles
 
 #### Configure Azure Monitor Alert Notification Rate Limits
 
-**Domain:** Monitor and Maintain Azure Resources
+**Domain:** Monitor and maintain Azure resources
 **Skill:** Monitor resources in Azure
 **Task:** Set up alert rules, action groups, and alert processing rules in Azure Monitor
 
-Your company has an Azure subscription named Subscription1. You create an alert rule in Azure Monitor named Alert1. Alert1 is configured to generate email, voice, and SMS alerts. You determine that Alert1 fires every minute.
+Your company has an Azure Subscription and an Azure SQL Database. You configure an Azure Monitor alert rule named Alert1 that is triggered when the database CPU usage exceeds 70%. Alert1 fires approximately every minute.
 
-You configure an action group for Alert1 to manage how often alert notifications are sent. You need to determine how many alert notifications will be sent when rate limits are configured at their maximum values.
+You configure an action group with the following notification methods:
 
-How many alert notifications will be generated for each type of alert per hour? To answer, select the correct number of notifications from the drop-down menu.
+* Email alerts  
+* Voice alerts  
+* SMS alerts  
+
+For each of the following statements, select Yes if the statement is true. Otherwise, select No.
+
+| STATEMENT | YES | NO |
+|-----------|-----|-----|
+| How many alert notifications will be generated for each type of alert per hour? | Email: 60, Voice: 4, SMS: 60 | |
 
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-03-14-05-13-42.png' width=600>
+<img src='.img/2026-01-30-06-20-01.png' width=700>
 
 </details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
 
-**Solution Explanation:**
+**Why the selected answer is wrong**
 
-The maximum rate limit will result in 60 email alerts per hour. The maximum number of alerts supported through action group configuration settings is up to 100 notifications per hour. Because Alert1 is firing 60 times an hour, each will result in a notification.
+The dropdown values shown (Email 60, Voice 4, SMS 60 per hour) don't match Azure Monitor's service-level notification rate limits for action groups. Even if an alert fires every minute, Azure Monitor will throttle notifications per recipient based on those limits—not based on the alert frequency.
 
-Both Voice and SMS notifications are limited to no more than one notification every five minutes. This means that both voice and SMS will be limited to no more than 12 notifications per hour.
+**Why the correct answer is right**
 
-<img src='.img/2026-03-14-05-16-19.png' width=600>
+Azure Monitor action group notification limits (production) are:
+
+* **Email:** No more than 100 emails per hour per email address (per region)
+* **SMS:** No more than 1 SMS every 5 minutes per phone number ⇒ 12 per hour
+* **Voice:** No more than 1 voice call every 5 minutes per phone number ⇒ 12 per hour
+
+So, with Alert1 firing every minute (60 times/hour), the maximum notifications actually sent per hour are:
+
+* **Email:** 60 (because the alert only fires 60 times/hour, which is under the 100/hour cap)
+* **SMS:** 12 (throttled by 1 per 5 minutes)
+* **Voice:** 12 (throttled by 1 per 5 minutes)
+
+**Key takeaway**
+
+Action group notification "rate limiting" is per recipient, and for SMS/voice it effectively translates to 12/hour (1 per 5 minutes). Email has a higher cap (100/hour), so the alert's firing rate (60/hour) becomes the limiting factor.
+
+Related resources:
+
+* [Azure Monitor service limits](https://learn.microsoft.com/en-us/azure/azure-monitor/fundamentals/service-limits#action-groups)
+* [Create and manage action groups in Azure Monitor](https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/action-groups)
+
+</details>
+
+---
+
+#### Configure App Service Diagnostics
+
+**Domain:** Monitor and Maintain Azure Resources
+**Skill:** Monitor resources in Azure
+**Task:** Configure log settings in Azure Monitor
+
+You have an ASP.NET Core application running in a Windows App Service.
+
+The application generates log messages that should be stored for at least one week.
+
+You need to enable diagnostics logging and only store logs with the severity level of Warning or higher.
+
+How should you configure the diagnostics logging? To answer, select the appropriate options from the drop-down menus.
+
+Diagnostics logging: ***[1]***
+
+Severity level: ***[2]***
+
+<!-- Dropdown options not yet provided. Paste screenshots of each expanded drop-down to populate. -->
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-14-05-21-26.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+You should enable the `Application Logging (Blob)` diagnostics logging. This setting can store logs that are generated by the application in Blob Storage. You can access the application logs stored for more than one week.
+
+You should also configure the severity level to `Warning`. You should use the `Warning` severity level to store only Warning, Error, and Critical log messages.
+
+You should not enable the `Application Logging (Filesystem)` diagnostics logging. This setting saves the application log directly in the App Service filesystem. This option should be used only for debugging purposes because it is enabled for only 12 hours before turning itself off.
+
+You should not enable the `Detailed Error Messages` diagnostics logging. This setting can store detailed error pages in HTML format that are hidden from clients using the application.
+
+You should not enable the `Web server logging (Storage)` diagnostics logging. This setting can store raw HTTP request data from the webserver in a Blob Storage. You can use this setting in Windows App Services only.
+
+You should not configure the severity level to `Error`. This severity level stores Error and Critical log messages. However, log messages with the Warning severity level will not be stored.
+
+You should not configure the severity level to `Information` or `Verbose`. These severity levels store Warning, Error, and Critical log messages. However, they also store Info log messages for Information level, and also Trace for Verbose level, storing more log messages than necessary by the requirements.
+
+<img src='.img/2026-03-14-05-26-02.png' width=600>
+
+<img src='.img/2026-03-14-05-26-12.png' width=600>
 
 **References**
 
-* [Azure Monitor service limits](https://learn.microsoft.com/en-us/azure/azure-monitor/fundamentals/service-limits)
-* [What are Azure Monitor alerts?](https://learn.microsoft.com/azure/azure-monitor/alerts/alerts-overview)
-* [Action groups](https://learn.microsoft.com/azure/azure-monitor/alerts/action-groups)
+* [Enable diagnostic logging for apps in Azure App Service](https://learn.microsoft.com/azure/app-service/troubleshoot-diagnostic-logs)
+
+</details>
+
+---
+
+#### Diagnose Network Watcher Tool for Web Server Packet Flow
+
+**Domain:** Monitor and maintain Azure resources
+**Skill:** Monitor resources in Azure
+**Task:** Use Azure Network Watcher and Connection Monitor
+
+Your company hosts its infrastructure in Azure. The infrastructure consists of virtual machines (VMs), storage (managed disks and Azure file shares) and multiple networks (VNets and subnets). The service desk is seeing an influx of support tickets that have been logged in the last 24 hours regarding intermittent connectivity issues to a web server. After some initial investigation, the support ticket has been escalated to you.
+
+You need to use the relevant Network Watcher diagnostic tool to check if packets are being allowed or denied to the web server.
+
+Which Network Watcher diagnostic tool should you use?
+
+A. IP flow verify  
+B. Next hop  
+C. Effective security rules  
+D. Connection troubleshoot  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-01-30-05-24-16.png' width=700>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Why the selected answer is correct (IP flow verify)**
+IP flow verify is the Network Watcher tool specifically designed to determine whether traffic is **allowed or denied** to or from a VM. You define the 5-tuple (source IP, destination IP, source port, destination port, protocol), and Azure evaluates the effective NSG rules applied to the NIC and subnet to return an **Allow** or **Deny** decision. This directly answers the requirement to check whether packets are being allowed or denied to the web server.
+
+**Why the other options are incorrect**
+
+* **Next hop**: Shows where traffic is routed (e.g., Internet, virtual appliance, VNet peering). It does not evaluate security rules or allow/deny decisions.
+* **Effective security rules**: Lists the merged NSG rules applied to a NIC or subnet, but does not simulate a specific packet flow or return an explicit allow/deny result for given traffic.
+* **Connection troubleshoot**: Tests end-to-end connectivity between a source and destination and identifies potential failures, but it is broader than required and not focused on evaluating packet allow/deny decisions at the NSG level.
+
+**Key takeaway**
+When the question asks whether packets are **allowed or denied**, the correct Network Watcher tool is **IP flow verify**.
+
+**References**
+
+* [https://learn.microsoft.com/azure/network-watcher/network-watcher-ip-flow-verify-overview](https://learn.microsoft.com/azure/network-watcher/network-watcher-ip-flow-verify-overview)
+* [https://learn.microsoft.com/azure/network-watcher/network-watcher-monitoring-overview](https://learn.microsoft.com/azure/network-watcher/network-watcher-monitoring-overview)
+* [https://learn.microsoft.com/azure/virtual-network/security-overview](https://learn.microsoft.com/azure/virtual-network/security-overview)
+
+No. **Windows Firewall rules do not impact IP flow verify results.**
+
+**Why**
+IP flow verify evaluates traffic **only at the Azure networking layer**, specifically:
+
+* Network Security Groups (NSGs) applied to the **subnet** and **NIC**
+* Azure’s effective security rule evaluation (priority-based NSG processing)
+
+It does **not** inspect or consider:
+
+* Guest OS firewalls (Windows Firewall, iptables, etc.)
+* Application-level listeners or services
+* VM-level routing inside the OS
+
+**Common exam trap**
+It is easy to assume that “packet allowed or denied” includes the OS firewall. On Azure exams, **IP flow verify = NSG evaluation only**. If IP flow verify returns **Allow** but connectivity still fails, the next suspects are:
+
+* Windows Firewall rules
+* Application not listening on the port
+* Local OS routing or security software
+
+**Key takeaway**
+IP flow verify answers: *“Would Azure networking allow this packet?”*
+It does **not** answer: *“Can the VM actually accept this connection?”*
+
+**References**
+
+* [https://learn.microsoft.com/azure/network-watcher/network-watcher-ip-flow-verify-overview](https://learn.microsoft.com/azure/network-watcher/network-watcher-ip-flow-verify-overview)
+* [https://learn.microsoft.com/azure/virtual-network/network-security-groups-overview](https://learn.microsoft.com/azure/virtual-network/network-security-groups-overview)
 
 </details>
 
@@ -5213,85 +5187,6 @@ DefaultRule_AllowVnetOutbound  65000  Allow  Outbound  *
 
 ---
 
-#### Diagnose Network Watcher Tool for Web Server Packet Flow
-
-**Domain:** Monitor and maintain Azure resources
-**Skill:** Monitor resources in Azure
-**Task:** Use Azure Network Watcher and Connection Monitor
-
-Your company hosts its infrastructure in Azure. The infrastructure consists of virtual machines (VMs), storage (managed disks and Azure file shares) and multiple networks (VNets and subnets). The service desk is seeing an influx of support tickets that have been logged in the last 24 hours regarding intermittent connectivity issues to a web server. After some initial investigation, the support ticket has been escalated to you.
-
-You need to use the relevant Network Watcher diagnostic tool to check if packets are being allowed or denied to the web server.
-
-Which Network Watcher diagnostic tool should you use?
-
-A. IP flow verify  
-B. Next hop  
-C. Effective security rules  
-D. Connection troubleshoot  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-01-30-05-24-16.png' width=700>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Why the selected answer is correct (IP flow verify)**
-IP flow verify is the Network Watcher tool specifically designed to determine whether traffic is **allowed or denied** to or from a VM. You define the 5-tuple (source IP, destination IP, source port, destination port, protocol), and Azure evaluates the effective NSG rules applied to the NIC and subnet to return an **Allow** or **Deny** decision. This directly answers the requirement to check whether packets are being allowed or denied to the web server.
-
-**Why the other options are incorrect**
-
-* **Next hop**: Shows where traffic is routed (e.g., Internet, virtual appliance, VNet peering). It does not evaluate security rules or allow/deny decisions.
-* **Effective security rules**: Lists the merged NSG rules applied to a NIC or subnet, but does not simulate a specific packet flow or return an explicit allow/deny result for given traffic.
-* **Connection troubleshoot**: Tests end-to-end connectivity between a source and destination and identifies potential failures, but it is broader than required and not focused on evaluating packet allow/deny decisions at the NSG level.
-
-**Key takeaway**
-When the question asks whether packets are **allowed or denied**, the correct Network Watcher tool is **IP flow verify**.
-
-**References**
-
-* [https://learn.microsoft.com/azure/network-watcher/network-watcher-ip-flow-verify-overview](https://learn.microsoft.com/azure/network-watcher/network-watcher-ip-flow-verify-overview)
-* [https://learn.microsoft.com/azure/network-watcher/network-watcher-monitoring-overview](https://learn.microsoft.com/azure/network-watcher/network-watcher-monitoring-overview)
-* [https://learn.microsoft.com/azure/virtual-network/security-overview](https://learn.microsoft.com/azure/virtual-network/security-overview)
-
-No. **Windows Firewall rules do not impact IP flow verify results.**
-
-**Why**
-IP flow verify evaluates traffic **only at the Azure networking layer**, specifically:
-
-* Network Security Groups (NSGs) applied to the **subnet** and **NIC**
-* Azure’s effective security rule evaluation (priority-based NSG processing)
-
-It does **not** inspect or consider:
-
-* Guest OS firewalls (Windows Firewall, iptables, etc.)
-* Application-level listeners or services
-* VM-level routing inside the OS
-
-**Common exam trap**
-It is easy to assume that “packet allowed or denied” includes the OS firewall. On Azure exams, **IP flow verify = NSG evaluation only**. If IP flow verify returns **Allow** but connectivity still fails, the next suspects are:
-
-* Windows Firewall rules
-* Application not listening on the port
-* Local OS routing or security software
-
-**Key takeaway**
-IP flow verify answers: *“Would Azure networking allow this packet?”*
-It does **not** answer: *“Can the VM actually accept this connection?”*
-
-**References**
-
-* [https://learn.microsoft.com/azure/network-watcher/network-watcher-ip-flow-verify-overview](https://learn.microsoft.com/azure/network-watcher/network-watcher-ip-flow-verify-overview)
-* [https://learn.microsoft.com/azure/virtual-network/network-security-groups-overview](https://learn.microsoft.com/azure/virtual-network/network-security-groups-overview)
-
-</details>
-
----
-
 #### Test TCP Connectivity with Network Watcher
 
 **Domain:** Monitor and maintain Azure resources
@@ -5343,86 +5238,472 @@ You should not use the Test-Connection PowerShell command. Although this will te
 
 ---
 
-#### Configure App Service Diagnostics
+#### Enable Boot Diagnostics for Azure Virtual Machines
 
-**Domain:** Monitor and Maintain Azure Resources
+**Domain:** Monitor and maintain Azure resources
 **Skill:** Monitor resources in Azure
-**Task:** Configure log settings in Azure Monitor
+**Task:** Configure and interpret monitoring of virtual machines, storage accounts, and networks by using Azure Monitor Insights
 
-You have an ASP.NET Core application running in a Windows App Service.
+You have two Azure Virtual Machines (VMs) and three storage accounts provisioned in an Azure subscription. The subscription configuration is shown in the exhibit.
 
-The application generates log messages that should be stored for at least one week.
+You need to enable boot diagnostics in the Azure VMs using the available storage accounts.
 
-You need to enable diagnostics logging and only store logs with the severity level of Warning or higher.
+Which storage accounts should you use? To answer, select the appropriate options from the drop-down menus.
 
-How should you configure the diagnostics logging? To answer, select the appropriate options from the drop-down menus.
+Enable boot diagnostics in vm1 by using $PLACEHOLDER$
 
-Diagnostics logging: ***[1]***
-
-Severity level: ***[2]***
-
-<!-- Dropdown options not yet provided. Paste screenshots of each expanded drop-down to populate. -->
+Enable boot diagnostics in vm2 by using $PLACEHOLDER$
 
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-03-14-05-21-26.png' width=600>
+<img src='.img/2026-01-30-05-36-07.png' width=700>
+
+<img src='.img/2026-01-30-05-34-11.png' width=500>
 
 </details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
 
-You should enable the `Application Logging (Blob)` diagnostics logging. This setting can store logs that are generated by the application in Blob Storage. You can access the application logs stored for more than one week.
+**Why the selected answers are wrong**
 
-You should also configure the severity level to `Warning`. You should use the `Warning` severity level to store only Warning, Error, and Critical log messages.
+* **Using storage1 for vm1**
+  Boot diagnostics **cannot use a Premium storage account**. Boot diagnostics requires a **Standard** storage account (Blob service). `storage1` is explicitly a **Premium storage account**, so it is not eligible, even though it is in the same region and resource group as vm1.
 
-You should not enable the `Application Logging (Filesystem)` diagnostics logging. This setting saves the application log directly in the App Service filesystem. This option should be used only for debugging purposes because it is enabled for only 12 hours before turning itself off.
+* **Using storage2 for vm2**
+  While `storage2` is a Standard storage account, it is a **Storage account v1 (Classic)**. Boot diagnostics **does not support storage account v1**. Only **Storage account v2 (General-purpose v2)** or supported Standard accounts are valid.
 
-You should not enable the `Detailed Error Messages` diagnostics logging. This setting can store detailed error pages in HTML format that are hidden from clients using the application.
+**Why the correct answers are right**
 
-You should not enable the `Web server logging (Storage)` diagnostics logging. This setting can store raw HTTP request data from the webserver in a Blob Storage. You can use this setting in Windows App Services only.
+* **vm1 → storage3**
+  `storage3` is a **Storage account v2**, which is supported for boot diagnostics. It is also in the **same region (Central US)** as vm1.
+  Replication type (GRS vs LRS) and resource group **do not matter** for boot diagnostics—only account type and region do.
 
-You should not configure the severity level to `Error`. This severity level stores Error and Critical log messages. However, log messages with the Warning severity level will not be stored.
+* **vm2 → storage3**
+  Boot diagnostics **does not require the storage account to be in the same resource group**, but it **must be in the same region** as the VM.
+  vm2 is in **East US**, so none of the available accounts in East US meet the requirements (`storage2` fails due to v1). Therefore, **storage3 is the only valid supported account**, and this question is testing that **account type restrictions override resource group and replication considerations**.
 
-You should not configure the severity level to `Information` or `Verbose`. These severity levels store Warning, Error, and Critical log messages. However, they also store Info log messages for Information level, and also Trace for Verbose level, storing more log messages than necessary by the requirements.
+**Key takeaway**
 
-<img src='.img/2026-03-14-05-26-02.png' width=600>
+Boot diagnostics requires:
 
-<img src='.img/2026-03-14-05-26-12.png' width=600>
+* **Standard storage**
+* **Storage account v2**
+* **Same region as the VM**
 
-**References**
+Premium storage accounts and storage account v1 are **not supported**, regardless of region or resource group.
 
-* [Enable diagnostic logging for apps in Azure App Service](https://learn.microsoft.com/azure/app-service/troubleshoot-diagnostic-logs)
+<img src='.img/2026-02-03-04-29-59.png' width=700>
+
+**References**  
+
+* [Limitations](https://learn.microsoft.com/en-us/azure/virtual-machines/boot-diagnostics#limitations)
+* [https://learn.microsoft.com/azure/virtual-machines/boot-diagnostics](https://learn.microsoft.com/azure/virtual-machines/boot-diagnostics)
+* [https://learn.microsoft.com/azure/storage/common/storage-account-overview](https://learn.microsoft.com/azure/storage/common/storage-account-overview)
+* [https://learn.microsoft.com/azure/virtual-machines/troubleshooting/boot-diagnostics#requirements](https://learn.microsoft.com/azure/virtual-machines/troubleshooting/boot-diagnostics#requirements)
 
 </details>
 
 ---
 
-#### Configure Azure Monitor Alert Notification Rate Limits
+#### Pinning query results to a dashboard
 
-**Domain:** Monitor and maintain Azure resources
+**Domain:** Monitor and Maintain Azure Resources
 **Skill:** Monitor resources in Azure
-**Task:** Set up alert rules, action groups, and alert processing rules in Azure Monitor
+**Task:** Query and analyze logs in Azure Monitor
 
-Your company has an Azure Subscription and an Azure SQL Database. You configure an Azure Monitor alert rule named Alert1 that is triggered when the database CPU usage exceeds 70%. Alert1 fires approximately every minute.
+Your company has an Azure subscription. You create an Azure Log Analytics workspace (Azure Monitor log) and collect data from various data sources. You run an Azure Monitor log query. You want to display the tabular data as a chart pinned to a shared dashboard.
 
-You configure an action group with the following notification methods:
+You create an Application Insights Overview dashboard.
 
-* Email alerts  
-* Voice alerts  
-* SMS alerts  
+You need to identify restrictions when pinning a result chart to a dashboard.
 
 For each of the following statements, select Yes if the statement is true. Otherwise, select No.
 
 | STATEMENT | YES | NO |
 |-----------|-----|-----|
-| How many alert notifications will be generated for each type of alert per hour? | Email: 60, Voice: 4, SMS: 60 | |
+| Data displayed in the chart is limited to no more than 30 days. | ☐ | ☐ |
+| Data displayed in the chart is limited to up to four columns and the top seven rows. | ☐ | ☐ |
+| Chart types are limited to line and stacked column only. | ☐ | ☐ |
 
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-01-30-06-20-01.png' width=700>
+<img src='.img/2026-03-14-04-53-31.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+Unless the `render` operator is specified in your query, data from an Azure Monitor log is returned as a table. You have the option of formatting the data as a chart with multiple chart formats supported including line, column, stacked column, and pie.
+
+When the result is pinned to a dashboard, the result is limited to no more than 30 days.
+
+Data displayed in the chart is not limited to up to four columns and the top seven rows. This limit applies to tabular data pinned to a dashboard.
+
+Chart types are not limited to line and stacked column only. Other chart formats are also supported, with the pie chart as a popular option for displaying summary data.
+
+<img src='.img/2026-03-14-04-59-56.png' width=600>
+
+<img src='.img/2026-03-14-04-55-03.png' width=600>
+
+**References**
+
+* [Azure Monitor Metrics Overview](https://learn.microsoft.com/en-us/azure/azure-monitor/metrics/data-platform-metrics)
+* [Create and share dashboards that visualize data in Azure Monitor Logs](https://learn.microsoft.com/en-us/azure/azure-monitor/visualize/tutorial-logs-dashboards)
+* [Log Analytics tutorial](https://learn.microsoft.com/azure/azure-monitor/logs/log-analytics-tutorial)
+* [Log queries in Azure Monitor](https://learn.microsoft.com/azure/azure-monitor/logs/log-query-overview)
+* [Chart visualizations](https://learn.microsoft.com/azure/azure-monitor/visualize/workbooks-chart-visualizations)
+* [Application Insights Overview dashboard](https://learn.microsoft.com/azure/azure-monitor/app/overview-dashboard)
+
+</details>
+
+---
+
+#### Capture SFTP Packets with Network Watcher
+
+**Domain:** Monitor and maintain Azure resources
+**Skill:** Monitor resources in Azure
+**Task:** Use Azure Network Watcher and Connection Monitor
+
+You deploy several virtual machines (VMs) for different purposes. You deploy Network Watcher in the East US region.
+
+You see some odd traffic on a virtual machine named VM01. This machine is making connections to an unknown Secure File Transfer Protocol (SFTP) service.
+
+You need to configure a filter for capturing those packets for the unknown SFTP service. You decide to use PowerShell for this task.
+
+How should you complete the PowerShell script? To answer, select the appropriate options from the drop-down menus.
+
+```powershell
+$res = Get-AzResource | Where {$_.ResourceType -eq ___[1]___ -and $_.Location -eq "EastUS"}
+
+$networkWatcher = Get-AzNetworkWatcher -Name $res.Name -ResourceGroupName $res.ResourceGroupName
+$diagnosticSA = Get-AzStorageAccount -ResourceGroupName Diagnostics-RG `
+  -Name "Diagnostics-Storage"
+
+$filter1 = New-AzPacketCaptureFilterConfig -Protocol TCP `
+  -RemoteIPAddress ___[2]___ `
+  -LocalIPAddress "10.0.0.3" -LocalPort ___[3]___ -RemotePort ___[4]___
+
+New-AzNetworkWatcherPacketCapture -NetworkWatcher ___[5]___ `
+  -TargetVirtualMachineId $vm.Id `
+  -PacketCaptureName "Capture SFTP Traffic" -StorageAccountId $diagnosticSA.Id `
+  -TimeLimitInSeconds 60 -Filter $filter1
+```
+
+Drop-Down Options:
+
+| Blank | Options |
+|-------|---------|
+| [1] | -Select- / Microsoft.Network/networkWatchers / Microsoft.Network/networkWatchers/packetCaptures |
+| [2] | -Select- / "0.0.0.0" / "0.0.0.0-255.255.255.255" |
+| [3] | -Select- / "0" / "1-65535" / "20;21" / "20-21" / "22" |
+| [4] | -Select- / "0" / "1-65535" / "20;21" / "20-21" / "22" |
+| [5] | -Select- / New-AzNetworkWatcher / New-AzNetworkWatcherPacketCapture |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-02-27-03-19-02.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Why the selected answer is wrong**  
+The filter and cmdlet choices in the original answer are incorrect for capturing unknown SFTP traffic. You should target the Network Watcher resource type, use a remote IP range that captures any possible destination, allow the full dynamic range for the local (ephemeral) port, and filter for the SFTP service port.
+
+**Why the correct answer is correct**  
+
+- Use Microsoft.Network/networkWatchers to find the existing Network Watcher in the East US region.  
+- Use "0.0.0.0-255.255.255.255" for -RemoteIPAddress because you do not know the remote SFTP server IP; this selects any remote address the VM may contact.  
+- Use "1-65535" for -LocalPort because outgoing connections use ephemeral local ports chosen dynamically by the OS.  
+- Use "22" for -RemotePort because SFTP runs over SSH (TCP port 22).  
+- Use New-AzNetworkWatcherPacketCapture with -NetworkWatcher $networkWatcher and -Filter $filter1 to start a packet capture on the existing Network Watcher; this cmdlet applies the filter to the VM capture and stores results in the specified storage account.
+
+**Key takeaway**  
+When creating a packet capture for unknown outbound service endpoints, allow any remote IP, permit the full local ephemeral port range, filter on the known service port (22 for SFTP), and run the capture with New-AzNetworkWatcherPacketCapture against the existing Network Watcher.
+
+References
+
+* [Manage Packet Captures with Network Watcher](https://learn.microsoft.com/en-us/azure/network-watcher/packet-capture-manage?tabs=portal)
+
+</details>
+
+▶ Related Lab: [lab-capture-sftp-packets](../hands-on-labs/monitoring/lab-capture-sftp-packets/README.md)
+
+---
+
+#### Azure Advisor alerts with Bicep
+
+**Domain:** Monitor and Maintain Azure Resources
+**Skill:** Monitor resources in Azure
+**Task:** Set up alert rules, action groups, and alert processing rules in Azure Monitor
+
+Your organization is using Azure Advisor to optimize your Azure deployments.
+
+You want to set up an alert for new recommendations from Azure Advisor using Bicep.
+
+You need to define the Azure resources in the Bicep file named `main.bicep`.
+
+Which two resources should you use? Each correct answer presents part of the solution.
+
+A. `Microsoft.Insights/metricAlerts`  
+B. `Microsoft.Insights/alertrules`  
+C. `Microsoft.Insights/dataCollectionRules`  
+D. `Microsoft.Insights/actionGroups`  
+E. `Microsoft.Insights/activityLogAlerts`  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-13-05-43-29.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Explanation**
+
+In this scenario, you are using Azure Bicep to set up alerts for Azure Advisor. Bicep is a domain-specific language (DSL) that uses declarative syntax to deploy Azure resources. It provides concise syntax, reliable type safety, and support for code reuse. You should use the below Azure resources in the `main.bicep` file.
+
+1. `Microsoft.Insights/actionGroups`: The `actionGroups` resource type is supported in Bicep for Azure Advisor. You need to mention `name`, `location`, `tags` and `properties`.
+2. `Microsoft.Insights/activityLogAlerts`: The `activityLogAlerts` resource type is supported in Bicep for Azure Advisor. You need to mention `name`, `location`, `tags` and `properties`. Since Azure Activity Log Alerts is a global service, the location of the rules should always be `global`.
+
+You should not use `Microsoft.Insights/alertrules`. You should use this resource type when you want to use `Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria` for the `odata.type` property. In this scenario, since you are setting up alerts for Azure Advisor, the `main.bicep` file should have the `actionGroups` and `activityLogAlerts` resource types only.
+
+You should not use `Microsoft.Insights/dataCollectionRules`. You should use this resource type when you want to gather information from different sources including `dataFlows`, `dataSources`, `iisLogs`, `logFiles`, `performanceCounters`, `syslog`, `windowsEventLogs`, etc. In this scenario, since you are setting up alerts for Azure Advisor, the `main.bicep` file should have the `actionGroups` and `activityLogAlerts` resource types only.
+
+You should not use `Microsoft.Insights/metricAlerts`. This field allows for specifying custom properties, which would be appended to the alert payload sent as input to the webhook. You should use this resource type when you want to define custom properties, which would be appended to the alert payload sent as input via webhooks.
+
+**Further explanation**:  
+
+Azure Advisor recommendations are emitted as **events in the Azure Activity Log**, not as metrics. Therefore, the correct alert rule resource is **`Microsoft.Insights/activityLogAlerts`**, which monitors Activity Log events such as the *Recommendation* category generated by Azure Advisor. Azure alerts also require a defined response, which is handled by an **`Microsoft.Insights/actionGroups`** resource. The activity log alert detects the Advisor recommendation event, and the action group specifies what action occurs when the alert fires (for example, email or webhook notification). Thus, both **activityLogAlerts** (the alert rule) and **actionGroups** (the alert action) are required.
+
+<img src='.img/2026-03-13-05-51-06.png' width=400>
+
+`Microsoft.Insights/alertrules` is incorrect because it belongs to an **older, deprecated Azure Monitor alerting model** used before the current alert resource types were introduced. Microsoft replaced this legacy resource with newer alert types such as **`metricAlerts`**, **`scheduledQueryRules`**, and **`activityLogAlerts`**. Since Azure Advisor recommendations appear as **Activity Log events**, the modern and supported resource for this scenario is **`Microsoft.Insights/activityLogAlerts`**, not the legacy `alertrules`.
+
+**References**
+
+* [Introduction to Azure Advisor](https://learn.microsoft.com/en-us/azure/advisor/)
+* [Quickstart: Create Azure Advisor alerts on new recommendations using Bicep](https://learn.microsoft.com/azure/advisor/advisor-alerts-bicep)
+* [Microsoft.Insights actionGroups](https://learn.microsoft.com/azure/azure-monitor/platform/action-groups)
+* [Microsoft.Insights activityLogAlerts](https://learn.microsoft.com/azure/azure-monitor/platform/activity-log-alerts)
+* Microsoft.Insights alertrules
+* Microsoft.Insights dataCollectionRules
+* [Microsoft.Insights metricAlerts](https://learn.microsoft.com/azure/azure-monitor/alerts/alerts-metric-overview)
+
+</details>
+
+---
+
+#### Load Balancer Metrics Batch API
+
+**Domain:** Monitor and maintain Azure resources
+**Skill:** Monitor resources in Azure
+**Task:** Interpret metrics in Azure Monitor
+
+Your company uses an Azure standard public load balancer. You are the Azure administrator at your company.
+
+You have been tasked with troubleshooting common outbound connectivity issues with Azure Load Balancer.
+
+You want to proactively monitor the data path availability and perform health probe status checks on the load balancer.
+
+You create the following metrics:getBatch API request shown below:
+
+```
+POST /subscriptions/87654765-4321-9999-1251-4532243211xfe/metrics:getBatch?metricNamespace=microsoft.compute/virtualMachines&api-version=2023-03-01-preview
+Host: eastus.metrics.monitor.azure.com
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJh...XaTddvfcFlgsas
+{
+   "resourceids":[".../virtualMachines/vmss-002_1sdf4cc9",
+   ".../virtualMachines/vmss-003_s1187c3h"]
+}
+```
+
+You need to retrieve multi-dimensional definitions and metrics programmatically via APIs.
+
+For each of the following statements, select Yes if the statement is true. Otherwise, select No.
+
+| Statement | Yes | No |
+|----------|-----|----|
+| The metrics:getBatch API here allows you to prevent throttling and performance issues when querying multiple resources in a single REST request. | ☐ | ☐ |
+| Both VMs vmss-002_1sdf4cc9 and vmss-003_s1187c3h can be spread across multiple Azure regions. | ☐ | ☐ |
+| Both VMs vmss-002_1sdf4cc9 and vmss-003_s1187c3h must be the same resource type. | ☐ | ☐ |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-02-20-16-52-36.png' width=700>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Why Statement 1 is Yes (correct)**
+
+The metrics:getBatch API was designed to query metrics for multiple resources in a single HTTP request. Rather than issuing one API call per resource — which scales poorly and can trigger throttling — batching all resource IDs into a single POST reduces the total number of requests against Azure Monitor's metrics endpoint. Preventing throttling and improving performance when querying multiple resources is the primary purpose of the batch endpoint.
+
+**Why Statement 2 is No (correct)**
+
+The metrics:getBatch endpoint is a **regional endpoint**. In the example, the host is `eastus.metrics.monitor.azure.com`, which means all resources in the batch must exist in the **East US region**. Resources spread across multiple Azure regions cannot be combined in a single batch call. If you need metrics from resources in different regions, you must issue separate batch calls against each region's respective endpoint.
+
+**Why Statement 3 is Yes (correct)**
+
+Each metrics:getBatch request includes a single `metricNamespace` query parameter. In the example, that value is `microsoft.compute/virtualMachines`. All resource IDs submitted in the request body must belong to that same resource type and namespace. You cannot mix resource types (for example, virtual machines and load balancers) within a single batch request.
+
+**Key takeaway**
+
+The metrics:getBatch API reduces throttling risk by batching multi-resource metric queries into a single request, but it enforces two important constraints: all resources must be in the **same Azure region** (determined by the regional endpoint hostname), and all resources must be the **same resource type** (deterined by the `metricNamespace` parameter).
+
+**References**
+
+* [How to migrate from the metrics API to the getBatch API](https://learn.microsoft.com/en-us/azure/azure-monitor/metrics/migrate-to-batch-api?tabs=individual-response)
+* [Troubleshoot Azure Load Balancer outbound connectivity issues](https://learn.microsoft.com/en-us/azure/load-balancer/troubleshoot-outbound-connection)
+* [Standard load balancer diagnostics with metrics, alerts, and resource health](https://learn.microsoft.com/en-us/azure/load-balancer/load-balancer-standard-diagnostics)
+* [Azure monitoring REST API walkthrough](https://learn.microsoft.com/en-us/azure/azure-monitor/platform/rest-api-walkthrough?tabs=rest%2Cportal)
+
+</details>
+
+▶ Related Lab: [lab-metrics-batch-api](../hands-on-labs/monitoring/lab-metrics-batch-api/README.md)
+
+---
+
+#### Configure Azure Monitor Alert Notification Rate Limits
+
+**Domain:** Monitor and Maintain Azure Resources
+**Skill:** Monitor resources in Azure
+**Task:** Set up alert rules, action groups, and alert processing rules in Azure Monitor
+
+Your company has an Azure subscription named Subscription1. You create an alert rule in Azure Monitor named Alert1. Alert1 is configured to generate email, voice, and SMS alerts. You determine that Alert1 fires every minute.
+
+You configure an action group for Alert1 to manage how often alert notifications are sent. You need to determine how many alert notifications will be sent when rate limits are configured at their maximum values.
+
+How many alert notifications will be generated for each type of alert per hour? To answer, select the correct number of notifications from the drop-down menu.
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-14-05-13-42.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Solution Explanation:**
+
+The maximum rate limit will result in 60 email alerts per hour. The maximum number of alerts supported through action group configuration settings is up to 100 notifications per hour. Because Alert1 is firing 60 times an hour, each will result in a notification.
+
+Both Voice and SMS notifications are limited to no more than one notification every five minutes. This means that both voice and SMS will be limited to no more than 12 notifications per hour.
+
+<img src='.img/2026-03-14-05-16-19.png' width=600>
+
+**References**
+
+* [Azure Monitor service limits](https://learn.microsoft.com/en-us/azure/azure-monitor/fundamentals/service-limits)
+* [What are Azure Monitor alerts?](https://learn.microsoft.com/azure/azure-monitor/alerts/alerts-overview)
+* [Action groups](https://learn.microsoft.com/azure/azure-monitor/alerts/action-groups)
+
+</details>
+
+---
+
+#### Enable Guest OS Diagnostics
+
+**Domain:** Monitor and Maintain Azure Resources
+**Skill:** Monitor resources in Azure
+**Task:** Configure and interpret monitoring of VMs, storage accounts, and networks by using Azure Monitor Insights
+
+You have an Azure subscription that contains a Windows Server 2019 virtual machine (VM) named VM1.
+
+You need to enable guest operating system (OS) diagnostics for VM1 by using Azure Cloud Shell.
+
+How should you complete the Azure PowerShell command? To answer, select the appropriate options from the drop-down menus.
+
+```powershell
+$vmRg = "prod"
+$vm = "vm1"
+$path = "config.xml"
+Set-AzVMDiagnosticsExtension ___[1]___ -ResourceGroupName $vmRg `
+-VMName $vm -DiagnosticsConfiguration ___[2]___ $path
+```
+
+Drop-Down Options:
+
+| Blank | Options |
+|-------|---------|
+| [1] | -Select- / -DefaultProfile / -DiagnosticsConfigurationPath / -StorageContext |
+| [2] | -Select- / Set-AzDiagnosticSetting / Set-AzVMBootdiagnostic / Set-AzVMDiagnosticsExtension |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-13-03-38-09.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Solution Explanation:**
+
+You should use the `Set-AzVMDiagnosticsExtension` cmdlet with the `-DiagnosticsConfigurationPath` parameter so that the command accepts an Extensible Markup Language (XML) configuration file and enables guest OS diagnostics on the target VM. The correct command is:
+
+```powershell
+Set-AzVMDiagnosticsExtension -ResourceGroupName $vmRg `
+  -VMName $vm -DiagnosticsConfigurationPath $path
+```
+
+`Set-AzVMDiagnosticsExtension` configures the VM extension that enables Azure to collect diagnostics telemetry from Performance Monitor and Event Logs and forward it to destinations such as a storage account or an Azure Log Analytics workspace. The `-DiagnosticsConfigurationPath` parameter expects the path to an XML diagnostics configuration file.
+
+Do not use `Set-AzDiagnosticSetting` for this task because that cmdlet configures platform diagnostic settings (resource-level diagnostic settings) and does not enable guest OS diagnostics inside the VM. Also avoid `Set-AzVMBootDiagnostic` — that cmdlet configures boot diagnostics (screenshot and serial console capture) and does not enable guest-level diagnostics.
+
+**References**
+
+- [Use PowerShell to enable Azure Diagnostics in a virtual machine running Windows](https://learn.microsoft.com/azure/virtual-machines/extensions/diagnostics-windows#enable-the-diagnostics-extension-if-you-use-the-resource-manager-deployment-model)
+- [Set-AzVMDiagnosticsExtension](https://learn.microsoft.com/powershell/module/az.compute/set-azvmdiagnosticsextension?view=azps-15.4.0)
+- [Set-AzDiagnosticSetting](https://learn.microsoft.com/powershell/module/az.monitor/set-azdiagnosticsetting?view=azps-0.10.0)
+- [Set-AzVMBootDiagnostic](https://learn.microsoft.com/powershell/module/az.compute/set-azvmbootdiagnostic?view=azps-15.4.0)
+
+</details>
+
+---
+
+### Implement backup and recovery
+
+#### Recover Configuration File from Azure VM Backup
+
+**Domain:** Monitor and maintain Azure resources
+**Skill:** Implement backup and recovery
+**Task:** Perform backup and restore operations by using Azure Backup
+
+You have two Azure virtual machines (VMs) named VM1 and VM2 running Windows Server 2019. The VMs are backed up by an Azure Recovery Services vault. A configuration file on VM1 was updated, and you need to restore it to a version from six days ago.
+
+You need to perform this action as quickly as possible without affecting other system files.
+
+Which four actions should you perform in sequence? To answer, move the appropriate actions from the list of actions to the answer area and arrange them in the correct order.
+
+**Available options:**
+
+* Start the file recovery process and select the recovery point of six days ago.
+* Download and execute the PowerShell script to mount the recovery volume.
+* Copy the file from the mounted volume to the VM.
+* Unmount the volumes.
+* Restore the disk containing the configuration file.
+* Restore the VM to a previous state.
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-01-30-05-41-40.png' width=700>
 
 </details>
 
@@ -5431,145 +5712,44 @@ For each of the following statements, select Yes if the statement is true. Other
 
 **Why the selected answer is wrong**
 
-The dropdown values shown (Email 60, Voice 4, SMS 60 per hour) don't match Azure Monitor's service-level notification rate limits for action groups. Even if an alert fires every minute, Azure Monitor will throttle notifications per recipient based on those limits—not based on the alert frequency.
+“Restore the disk containing the configuration file” is incorrect because a disk restore is a **full disk–level operation**. It replaces or attaches an entire managed disk from a recovery point. That is slower and risks overwriting or impacting other files on the disk, which directly violates the requirement to restore **only one file** as quickly as possible and **without affecting other system files**.
+On Azure exams, disk restore is a common trap when the scenario clearly calls for **granular recovery**.
 
 **Why the correct answer is right**
 
-Azure Monitor action group notification limits (production) are:
+The scenario is testing **Azure VM File Recovery** from a Recovery Services vault. File Recovery allows you to restore individual files from a specific recovery point **without restoring the VM or disk**.
 
-* **Email:** No more than 100 emails per hour per email address (per region)
-* **SMS:** No more than 1 SMS every 5 minutes per phone number ⇒ 12 per hour
-* **Voice:** No more than 1 voice call every 5 minutes per phone number ⇒ 12 per hour
+The correct sequence is:
 
-So, with Alert1 firing every minute (60 times/hour), the maximum notifications actually sent per hour are:
+1. Start the file recovery process and select the recovery point of six days ago.
+2. Download and execute the PowerShell script to mount the recovery volume.
+3. Copy the required configuration file from the mounted volume to the VM.
+4. Unmount the volumes.
 
-* **Email:** 60 (because the alert only fires 60 times/hour, which is under the 100/hour cap)
-* **SMS:** 12 (throttled by 1 per 5 minutes)
-* **Voice:** 12 (throttled by 1 per 5 minutes)
+This approach is the **fastest**, least disruptive method and is exactly what Azure Backup File Recovery is designed for.
 
 **Key takeaway**
 
-Action group notification "rate limiting" is per recipient, and for SMS/voice it effectively translates to 12/hour (1 per 5 minutes). Email has a higher cap (100/hour), so the alert's firing rate (60/hour) becomes the limiting factor.
+If the requirement is **one or a few files**, always choose **File Recovery**, not disk or VM restore.
+Disk restore = coarse-grained, higher impact.
+File Recovery = granular, fast, exam-preferred.
 
-Related resources:
+**References**
 
-* [Azure Monitor service limits](https://learn.microsoft.com/en-us/azure/azure-monitor/fundamentals/service-limits#action-groups)
-* [Create and manage action groups in Azure Monitor](https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/action-groups)
+Azure VM file recovery
+[https://learn.microsoft.com/azure/backup/backup-azure-restore-files-from-vm](https://learn.microsoft.com/azure/backup/backup-azure-restore-files-from-vm)
+
+Restore Azure VM data using Azure Backup
+link removed
+
+Azure Recovery Services vault overview
+[https://learn.microsoft.com/azure/backup/backup-azure-recovery-services-vault-overview](https://learn.microsoft.com/azure/backup/backup-azure-recovery-services-vault-overview)
 
 </details>
+
+▶ **Related Lab:** [lab-vm-file-recovery](../hands-on-labs/monitoring/lab-vm-file-recovery/README.md)
 
 ---
-
-#### Storage Insights Overview
-
-**Domain:** Monitor and maintain Azure resources
-**Skill:** Monitor resources in Azure
-**Task:** Configure and interpret monitoring of virtual machines, storage accounts, and networks by using Azure Monitor Insights
-
-You are an Azure administrator at a retail organization. Your organization uses 4,500 Azure storage accounts across two Azure subscriptions.
-
-You have been tasked with performing an audit by implementing the following:
-
-1. Identification of storage accounts with no use.  
-2. Enabling of viewing interactive storage metrics for 4,500 Azure storage accounts across both Azure subscriptions.  
-3. Customized dashboard coloring for availability.
-
-You have decided to use the Storage Insights view in Azure Monitor.
-
-You need to implement the solution.
-
-For each of the following statements, select Yes if the statement is true. Otherwise, select No.
-
-| STATEMENT | YES | NO |
-|-----------|-----|----|
-| You can sort your storage accounts in ascending order by using the Transactions column to identify storage accounts with no use. | ☐ | ☐ |
-| The Overview workbook for selected subscriptions will exhibit up to 500 storage accounts. | ☐ | ☐ |
-| You can apply customized coloring in the Availability threshold section. | ☐ | ☐ |
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-04-04-42-35.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-Storage Insights is a dashboard on top of Azure Storage metrics and logs. You can use Storage Insights to examine the transaction volume and used capacity of all your accounts.
-
-You can sort your storage accounts in ascending order by using the Transactions column in the Storage Insights view in Azure Monitor to identify storage accounts with no use.
-
-The Overview workbook for selected subscriptions will not exhibit up to 500 storage accounts. In the Overview workbook, which displays data for a selected subscription, the table displays interactive storage metrics and service availability state. The data is displayed for up to five storage accounts grouped together. If you select all or multiple storage accounts in the scope selector, up to 200 storage accounts will be returned. In this scenario, since you have 4,500 Azure storage accounts across two Azure subscriptions, if you select both Azure subscriptions, only 200 accounts would be displayed at a maximum.
-
-You can apply customized coloring in the Availability threshold section.
-
-<img src='.img/2026-03-04-04-53-05.png' width=600>
-
-<img src='.img/2026-03-04-05-01-25.png' width=600>
-
-<img src='.img/2026-03-04-05-01-35.png' width=600>
-
-<img src='.img/2026-03-04-05-09-02.png' width=800>
-
-References
-
-- [Blob Storage Monitoring Scenarios](https://learn.microsoft.com/en-us/azure/storage/blobs/blob-storage-monitoring-scenarios)
-- [Storage Insights Overview](https://learn.microsoft.com/en-us/azure/storage/common/storage-insights-overview?toc=%2Fazure%2Fazure-monitor%2Ftoc.json)
-
-</details>
-
----
-
-#### Configure Azure Monitor Alert for Database CPU Usage
-
-**Domain:** Monitor and maintain Azure resources
-**Skill:** Monitor resources in Azure
-**Task:** Set up alert rules, action groups, and alert processing rules in Azure Monitor
-
-Your company has a line-of-business (LOB) application that uses Azure SQL Database for storing transactional information. Your company also has System Center Service Manager deployed.
-
-You need to configure an alert when the database reaches 70% of central processing unit (CPU) usage. When this alert rises, you need to notify several users by email and by SMS. You also need to automatically create a ticket in the IT service management (ITSM) system. Your solution should require minimum administrative effort.
-
-Which two actions should you perform? Each correct answer presents part of the solution.
-
-A. Configure System Center Service Manager with Azure Automation.  
-B. Configure one action group with two actions: one for email and SMS notification and one for IT service management (ITSM) ticket creation.  
-C. Configure an IT Service Management Connector (ITSMC).  
-D. Configure two action groups: one for email and SMS notification and one for IT service management (ITSM) ticket creation.  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-01-30-05-26-15.png' width=700>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**The correct answers are B and C.**
-
-**Why B is correct:**
-Azure Monitor action groups are designed to consolidate multiple notification and automation actions into a single reusable unit. One action group can contain email, SMS, voice, webhook, Logic App, Automation Runbook, and ITSM actions together. This design allows you to configure all required notifications and ticket creation in a single action group, which minimizes administrative overhead and is the recommended approach.
-
-**Why C is correct:**
-ITSM ticket creation in Azure Monitor requires an IT Service Management Connector (ITSMC) to bridge Azure Monitor alerts with system-center or third-party ITSM systems. Without the ITSMC, Azure Monitor cannot create incidents or tickets in Service Manager, regardless of how the action group is configured.
-
-**Why A is incorrect:**
-While Azure Automation can integrate with Azure Monitor, it is not a requirement for basic ITSM alerting. The ITSMC provides direct integration without needing custom automation runbooks.
-
-**Why D is incorrect:**
-Creating separate action groups for different notification types adds unnecessary complexity and administrative effort. Azure Monitor is designed to support multiple actions within a single action group, making D an inefficient solution.
-
-**Key takeaway:**
-For Azure Monitor alerts requiring multiple notification methods and ITSM integration, use a **single action group with multiple actions** and configure an **ITSM Connector** for Service Manager integration. This minimizes administrative overhead and follows Azure best practices.
-
-</details>
-
----
-
-### Implement backup and recovery
 
 #### Restore VM from backup (availability set)
 
@@ -6149,181 +6329,3 @@ If you'd like, I can also show the **architecture diagram Microsoft expects you 
 </details>
 
 ---
-
-#### Recover Configuration File from Azure VM Backup
-
-**Domain:** Monitor and maintain Azure resources
-**Skill:** Implement backup and recovery
-**Task:** Perform backup and restore operations by using Azure Backup
-
-You have two Azure virtual machines (VMs) named VM1 and VM2 running Windows Server 2019. The VMs are backed up by an Azure Recovery Services vault. A configuration file on VM1 was updated, and you need to restore it to a version from six days ago.
-
-You need to perform this action as quickly as possible without affecting other system files.
-
-Which four actions should you perform in sequence? To answer, move the appropriate actions from the list of actions to the answer area and arrange them in the correct order.
-
-**Available options:**
-
-* Start the file recovery process and select the recovery point of six days ago.
-* Download and execute the PowerShell script to mount the recovery volume.
-* Copy the file from the mounted volume to the VM.
-* Unmount the volumes.
-* Restore the disk containing the configuration file.
-* Restore the VM to a previous state.
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-01-30-05-41-40.png' width=700>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Why the selected answer is wrong**
-
-“Restore the disk containing the configuration file” is incorrect because a disk restore is a **full disk–level operation**. It replaces or attaches an entire managed disk from a recovery point. That is slower and risks overwriting or impacting other files on the disk, which directly violates the requirement to restore **only one file** as quickly as possible and **without affecting other system files**.
-On Azure exams, disk restore is a common trap when the scenario clearly calls for **granular recovery**.
-
-**Why the correct answer is right**
-
-The scenario is testing **Azure VM File Recovery** from a Recovery Services vault. File Recovery allows you to restore individual files from a specific recovery point **without restoring the VM or disk**.
-
-The correct sequence is:
-
-1. Start the file recovery process and select the recovery point of six days ago.
-2. Download and execute the PowerShell script to mount the recovery volume.
-3. Copy the required configuration file from the mounted volume to the VM.
-4. Unmount the volumes.
-
-This approach is the **fastest**, least disruptive method and is exactly what Azure Backup File Recovery is designed for.
-
-**Key takeaway**
-
-If the requirement is **one or a few files**, always choose **File Recovery**, not disk or VM restore.
-Disk restore = coarse-grained, higher impact.
-File Recovery = granular, fast, exam-preferred.
-
-**References**
-
-Azure VM file recovery
-[https://learn.microsoft.com/azure/backup/backup-azure-restore-files-from-vm](https://learn.microsoft.com/azure/backup/backup-azure-restore-files-from-vm)
-
-Restore Azure VM data using Azure Backup
-link removed
-
-Azure Recovery Services vault overview
-[https://learn.microsoft.com/azure/backup/backup-azure-recovery-services-vault-overview](https://learn.microsoft.com/azure/backup/backup-azure-recovery-services-vault-overview)
-
-</details>
-
-▶ **Related Lab:** [lab-vm-file-recovery](../hands-on-labs/monitoring/lab-vm-file-recovery/README.md)
-
----
-
-#### Connect VNet to Private DNS Zone
-
-**Domain:** Implement and Manage Virtual Networking
-**Skill:** Configure name resolution and load balancing
-**Task:** Configure Azure DNS
-
-You need to connect a virtual network (`VNet`) to a private Domain Name System (`DNS zone`) to support new application namespaces in the new private zone. The `VNet` already has virtual machines (`VMs`) assigned to it and has existing private DNS zones assigned.
-
-What should you do first?
-
-A. Set the existing VMs to support the new DNS zone via the Windows Server IP Configuration DNS settings app.  
-B. Set up a new VNet, assign the private DNS zone to this VNet, and move the existing VMs to it.  
-C. Remove the existing VMs from the VNet.  
-D. Add the new private DNS zone to the existing VNet.  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-16-05-06-48.png' width=600>
-
-</details>
-
-<details open>
-<summary>💡 Click to expand explanation</summary>
-
-To complete this task, you should just add the new private Domain Name System (`DNS`) zone to the existing virtual network (`VNet`). When adding a new private DNS zone to an existing `VNet` that already has private zones assigned, you do not need to complete any other task other than adding the zone.
-
-You do not need to remove the existing `VMs` from the `VNet`. This would have been a requirement if the `VNet` did not already have private DNS zones linked to it.
-
-Setting up a new `VNet`, assigning the private DNS zone to this `VNet`, and moving the existing `VMs` to it would satisfy the connectivity to the new private DNS zone, but the existing linked private zones would be lost.
-
-<img src='.img/2026-03-16-05-11-33.png' width=600>
-
-<img src='.img/2026-03-16-05-12-25.png' width=600>
-
-**More Detail**:  
-
-The gap is in the **specific condition attached to that limitation**.
-
-The documentation line says:
-
-> *A specific virtual network can be linked to only one private zone **if automatic registration of VM DNS records is enabled***.
-
-That condition is easy to miss. The restriction applies **only when the VNet link is configured with auto-registration enabled**.
-
-Azure Private DNS actually supports **two different link types** between a VNet and a private DNS zone:
-
-**1. Registration virtual network**
-
-* Auto-registration **enabled**
-* Azure automatically creates A records for VMs in the zone
-* A VNet **can be linked as a registration network to only one private DNS zone**
-
-**2. Resolution virtual network**
-
-* Auto-registration **disabled**
-* The VNet can **resolve records from the zone**
-* No automatic VM record creation
-* A VNet **can be linked to many zones**
-
-So the rule is really:
-
-| Link Type    | Auto-registration | Max zones per VNet |
-| ------------ | ----------------- | ------------------ |
-| Registration | Enabled           | **1**              |
-| Resolution   | Disabled          | **Many**           |
-
-How this applies to the exam question:
-
-The question simply says the VNet already has private DNS zones assigned. It **does not say auto-registration is enabled**. Therefore Azure allows linking the VNet to **another private DNS zone**.
-
-Operationally, Azure would treat the VNet as:
-
-* **Registration VNet for one zone** (if enabled)
-* **Resolution VNet for additional zones**
-
-Example scenario:
-
-```
-VNet: prod-vnet
-
-Linked zones:
-corp.internal        (auto-registration enabled)
-database.internal    (resolution only)
-apps.internal        (resolution only)
-```
-
-VMs automatically register only in `corp.internal`, but they can resolve records in all three zones.
-
-Why the other answers are wrong:
-
-* **Setting DNS in the VM OS** does not integrate with Azure Private DNS zones.
-* **Creating a new VNet and moving VMs** is unnecessary because VNets can link to multiple zones.
-* **Removing VMs from the VNet** is unrelated to DNS zone linking.
-
-The key takeaway for exams:
-
-**A VNet can link to many private DNS zones, but it can be the auto-registration network for only one zone.**
-
-**References**
-
-* [Tutorial: Host your domain in Azure DNS](https://learn.microsoft.com/azure/dns/dns-delegate-domain-azure-dns)
-* [What is Azure Private DNS?](https://learn.microsoft.com/azure/dns/private-dns-overview)
-
-</details>
