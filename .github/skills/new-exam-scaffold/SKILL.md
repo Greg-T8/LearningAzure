@@ -64,10 +64,10 @@ If not yet available, the learning-paths README will contain placeholder text.
 
 ### 1.1 Directory Tree
 
-Create the following directory structure under the workspace root:
+Create the following directory structure under `certs/`:
 
 ```
-<EXAM>/
+certs/<EXAM>/
 ├── README.md
 ├── StudyLog.md
 ├── hands-on-labs/
@@ -89,7 +89,7 @@ Create the following directory structure under the workspace root:
 
 ### 1.2 File Templates
 
-#### `<EXAM>/README.md` — Main Exam README
+#### `certs/<EXAM>/README.md` — Main Exam README
 
 Follow the established format from existing exams. Include:
 
@@ -97,7 +97,7 @@ Follow the established format from existing exams. Include:
 2. **Objective statement** with credential name
 3. **Links** — Certification page, study guide, study log
 4. **Progress Tracker** — `## 📚 Progress Tracker` section with the table format below, followed by a legend line. All status `🕒` (Not Started) unless a start date is provided.
-5. **Coverage Dashboard** — `## 📊 Exam Coverage` header, a preamble sentence linking to practice questions and labs, then the dashboard between `<!-- BEGIN COVERAGE DASHBOARD -->` and `<!-- END COVERAGE DASHBOARD -->` markers. One row per domain with anchor links (`#domain-1`, etc.), weights, and zero counts.
+5. **Coverage Dashboard** — `## 📊 Exam Coverage` header, a preamble sentence linking to practice questions and labs, then the dashboard between `<!-- BEGIN COVERAGE DASHBOARD -->` and `<!-- END COVERAGE DASHBOARD -->` markers. One row per domain with anchor links (`#domain-1`, etc.), weights, zero counts, a `Tasks Covered` column (`0 / N (0%)`), and status emoji. Followed by a Totals line, Legend, and a Note about practice question criteria.
 6. **Coverage Table** — Between `<!-- BEGIN COVERAGE TABLE -->` and `<!-- END COVERAGE TABLE -->` markers. Full domain → skill → task hierarchy with `| Qs | Labs |` columns initialized to `0 | 0`.
 
 **Progress Tracker format** (must match this exact header for `Update-ProgressTrackerDays.ps1` auto-discovery):
@@ -123,6 +123,29 @@ Follow the established format from existing exams. Include:
 Task-level coverage from [Practice Questions](./practice-questions/README.md) and [Hands-on Labs](./hands-on-labs/README.md).
 ```
 
+**Dashboard table** (between `<!-- BEGIN COVERAGE DASHBOARD -->` and `<!-- END COVERAGE DASHBOARD -->` markers):
+
+```markdown
+<!-- BEGIN COVERAGE DASHBOARD -->
+
+| Domain | Weight | Qs | Labs | Tasks Covered | Status |
+| :----- | :----- | -: | ---: | :------------ | :----: |
+| [1. <Short Name>](#domain-1) | XX–XX% | 0 | 0 | 0 / N (0%) | 🔴 |
+| [2. <Short Name>](#domain-2) | XX–XX% | 0 | 0 | 0 / N (0%) | 🔴 |
+
+**Totals:** 0 practice questions · 0 hands-on labs
+
+**Legend:** 🟢 Strong (≥66%) · 🟡 Partial (33–65%) · 🔴 Low (<33%) — "Covered" = task has ≥1 practice question or ≥1 lab
+
+> **Note:** Practice questions are those missed or not confidently answered correctly.
+
+<!-- END COVERAGE DASHBOARD -->
+```
+
+- `N` = total task count for each domain from the coverage table.
+- `<Short Name>` = abbreviated domain name for the dashboard (e.g., "Identities & Governance").
+- All new exams start with `🔴` status and zero counts.
+
 **Domain sections** use the compact `<details>/<summary>` format (no `###` headings):
 
 ```markdown
@@ -143,18 +166,22 @@ Dashboard status indicators:
 - 🟡 Partial (33–65%)
 - 🔴 Low (<33%)
 
-#### `<EXAM>/StudyLog.md` — Study Time Tracker
+#### `certs/<EXAM>/StudyLog.md` — Study Time Tracker
 
 ```markdown
-# <EXAM> Study Log
+# Study Log — <EXAM>: <Full Title>
 
-Session-by-session study time tracker. Managed by `Invoke-AzStudySession.ps1`.
+This log tracks individual study sessions for the **<EXAM>** exam. Fill in **End**, **Duration**, and **Notes** when the session concludes.
+
+---
+
+## Session History
 
 | # | Date | Start | End | Duration | Notes |
 |:--|:-----|:------|:----|:---------|:------|
 ```
 
-#### `<EXAM>/hands-on-labs/README.md` — Lab Catalog
+#### `certs/<EXAM>/hands-on-labs/README.md` — Lab Catalog
 
 ```markdown
 # <EXAM> Hands-on Labs
@@ -181,10 +208,10 @@ All labs follow the governance policies in [Governance-Lab.md](../../../.assets/
 ## 📋 Governance & Standards
 
 - **Governance Policy:** [Governance-Lab.md](../../../.assets/shared/Governance-Lab.md)
-- **Shared Contract:** [lab-shared-contract](../../.github/skills/lab-shared-contract/SKILL.md)
+- **Shared Contract:** [lab-shared-contract](../../../.github/skills/lab-shared-contract/SKILL.md)
 ```
 
-#### `<EXAM>/practice-questions/README.md` — Practice Questions
+#### `certs/<EXAM>/practice-questions/README.md` — Practice Questions
 
 ```markdown
 # Practice Exam Questions - <EXAM>
@@ -192,11 +219,11 @@ All labs follow the governance policies in [Governance-Lab.md](../../../.assets/
 Accounts for questions missed or unsure about in the practice exams.
 ```
 
-#### `<EXAM>/learning-paths/README.md` — Learning Paths Catalog
+#### `certs/<EXAM>/learning-paths/README.md` — Learning Paths Catalog
 
 Follow the format of existing learning path READMEs. Include a progress table with path names, module counts, and status columns. If paths are not yet available, note that they will be populated when Microsoft publishes the learning paths.
 
-#### `<EXAM>/video-courses/savill/README.md` — Video Notes
+#### `certs/<EXAM>/video-courses/savill/README.md` — Video Notes
 
 ```markdown
 # <EXAM> — John Savill's Training
@@ -212,23 +239,15 @@ Notes from [John Savill's YouTube channel](https://www.youtube.com/@NTFAQGuy).
 
 ### 2.1 Top-Level README.md
 
-Add the new exam to two locations:
-
-**Badge row** (in the `<div align="center">` block):
+Add the new exam to the **Certifications table** (under `## 📚 Certifications`):
 
 ```markdown
-[![<EXAM>](https://img.shields.io/badge/<EXAM-ESCAPED>-Not%20Started-lightgrey)](<EXAM>/)
+| 📕 [**<EXAM>**](certs/<EXAM>/README.md) | <Certification Name> | Not Started | |
 ```
 
-Use `Not%20Started` / `lightgrey` for new exams, or `In%20Progress` / `yellow` if a start date is provided.
-
-**Certifications list** (under `## 📚 Certifications`):
-
-```markdown
-- 📕 [**<EXAM>**](<EXAM>/README.md) — <Certification Name> (*not started*)
-```
-
-Use the appropriate emoji color (📗📙📘📕) and status text based on start date.
+- Use the appropriate emoji color (📗📙📘📕) and status text based on start date.
+- If a start date is provided, use `In Progress` as the status and add the start date in the Duration column.
+- Adding the exam to this table makes it discoverable by `Get-ActiveExam.ps1`, which all maintenance scripts use for dynamic exam discovery.
 
 ### 2.2 Governance-Lab.md
 
@@ -284,68 +303,69 @@ Assign the next available R-0xx ID.
 
 ### 2.4 Scripts
 
-#### `Update-CoverageTable.ps1`
+All maintenance scripts use **dynamic exam discovery** via `Get-ActiveExam.ps1`, which parses the main README's certifications table. Adding the exam to the top-level README (§2.1) automatically makes it visible to these scripts:
 
-Add the exam code to the `ValidateSet`:
+- `Update-CoverageTable.ps1`
+- `Invoke-PracticeExamReorganizer.ps1`
+- `Update-StudyLogGaps.ps1`
+
+No `ValidateSet` updates or hardcoded exam lists are needed in these scripts.
+
+#### `Update-LabReferences.ps1`
+
+Add the exam to the `$DomainConfig` hashtable with domain folder→display-name mappings:
 
 ```powershell
-[ValidateSet('AI-102', 'AZ-104', '<NEW-EXAM>')]
-[string]$ExamName
+$DomainConfig = @{
+    'AZ-104' = [ordered]@{
+        'storage'             = 'Storage'
+        'compute'             = 'Compute'
+        'monitoring'          = 'Monitoring'
+        'identity-governance' = 'Identity & Governance'
+        'networking'          = 'Networking'
+    }
+    '<NEW-EXAM>' = [ordered]@{
+        '<domain-folder>' = '<Display Name>'
+        # ... one entry per lab domain folder
+    }
+}
 ```
 
-#### `Invoke-PracticeExamReorganizer.ps1`
-
-Add the exam code to the `ValidateSet`:
-
-```powershell
-[ValidateSet('AI-102', 'AZ-104', '<NEW-EXAM>')]
-[string]$ExamName
-```
+The domain ordering determines how labs are grouped and sequenced in the catalog.
 
 #### `Invoke-AzStudySession.ps1`
 
-Four updates required:
+Standard exams under `certs/<EXAM>/` using `StudyLog.md` require **no changes** — the script discovers them automatically via `Get-ActiveExam.ps1` and defaults to `certs\<EXAM>` folder and `StudyLog.md`.
 
-1. **`ValidateSet`** on the `$Mode` parameter:
+Only add entries if the exam uses a non-standard folder or log file:
 
-```powershell
-[ValidateSet('AI-102', 'AZ-104', '<NEW-EXAM>', 'WorkflowDevelopment')]
-```
-
-2. **`$AllExams`** array:
-
-```powershell
-$AllExams = @('AI-102', 'AZ-104', '<NEW-EXAM>', 'WorkflowDevelopment')
-```
-
-3. **`$ExamFolderMap`** hashtable:
-
-```powershell
-$ExamFolderMap = @{
-    'AI-102' = 'AI-102'
-    'AZ-104' = 'AZ-104'
-    '<NEW-EXAM>' = '<NEW-EXAM>'
-    'WorkflowDevelopment' = '.assets\workflow-development'
-}
-```
-
-4. **`$ExamLogFileMap`** hashtable — only add an entry if the new exam's log file is **not** `StudyLog.md` (the default). Standard exams using `StudyLog.md` do **not** need an entry here:
-
-```powershell
-$ExamLogFileMap = @{
-    'WorkflowDevelopment' = 'WorkLog.md'
-}
-```
+- **`$ExamFolderMap`** — Add only if the exam folder is not `certs\<EXAM>`.
+- **`$ExamLogFileMap`** — Add only if the log file is not `StudyLog.md`.
 
 #### `Update-ProgressTrackerDays.ps1`
 
-No changes required. This script auto-discovers all exam READMEs by scanning top-level directories (excluding `.`-prefixed) for `README.md` files whose progress tracker table matches this header pattern:
+No changes required. This script auto-discovers all exam READMEs by scanning `certs/*/README.md` for files whose progress tracker table matches this header pattern:
 
 ```
 | Priority | Modality | My Notes | Status | Started | Completed | Days |
 ```
 
-New exams are picked up automatically when their README includes this exact header row. The script updates the `Days` column for `🚧` (in-progress) rows by computing elapsed days from the `Started` date.
+New exams are picked up automatically when their README includes this exact header row.
+
+#### `Invoke-ContentMaintenance.ps1`
+
+No changes required. This orchestrator script runs all maintenance scripts in dependency order:
+
+1. `Invoke-PracticeExamReorganizer` (when `-Reorganize` is specified)
+2. `Update-StudyLogGaps`
+3. `Update-ProgressTrackerDays`
+4. `Update-CoverageTable`
+5. `Update-LabReferences`
+6. `Invoke-CollapseDetailBlock`
+7. `Remove-UnusedImages`
+8. `Update-CommitStats`
+
+Since child scripts use dynamic discovery, the orchestrator automatically processes new exams once they are added to the top-level README.
 
 ### 2.5 Skills
 
@@ -354,7 +374,7 @@ New exams are picked up automatically when their README includes this exact head
 Add the exam to the **Scope** section and define its **domain ordering**:
 
 ```markdown
-- `<NEW-EXAM>/hands-on-labs/README.md`
+- `certs/<NEW-EXAM>/hands-on-labs/README.md`
 ```
 
 Also add a domain ordering entry following the existing pattern:
@@ -370,7 +390,7 @@ The domain ordering determines how labs are grouped and sequenced in the catalog
 Add the exam to the **Target Files** table:
 
 ```markdown
-| <NEW-EXAM> | `<NEW-EXAM>/practice-questions/README.md` | `<NEW-EXAM>/README.md` — Practice Exam Coverage section | `<NEW-EXAM>/README.md` — Practice Exam Coverage section |
+| <NEW-EXAM> | `certs/<NEW-EXAM>/practice-questions/README.md` | `certs/<NEW-EXAM>/README.md` — Practice Exam Coverage section | `certs/<NEW-EXAM>/README.md` — Practice Exam Coverage section |
 ```
 
 ---
@@ -381,12 +401,13 @@ After all files are created and updated, verify:
 
 | Check | How |
 | ----- | --- |
-| Folder structure exists | List `<EXAM>/` directory recursively |
-| README has coverage markers | Confirm `<!-- BEGIN COVERAGE TABLE -->` and `<!-- END COVERAGE DASHBOARD -->` exist |
-| Scripts accept new exam | Run `Update-CoverageTable.ps1 -ExamName <NEW-EXAM> -WhatIf` |
+| Folder structure exists | List `certs/<EXAM>/` directory recursively |
+| README has coverage markers | Confirm `<!-- BEGIN COVERAGE TABLE -->`, `<!-- END COVERAGE TABLE -->`, `<!-- BEGIN COVERAGE DASHBOARD -->`, and `<!-- END COVERAGE DASHBOARD -->` markers exist |
+| Content maintenance passes | Run `Invoke-ContentMaintenance.ps1 -WhatIf` — all steps should complete without errors |
 | Study session works | Run `Invoke-AzStudySession.ps1 -Action Start -Mode <NEW-EXAM>` then `-Action Stop` |
-| Top-level README links resolve | Confirm the exam badge and certification list link to existing files |
+| Top-level README links resolve | Confirm the certifications table links to existing `certs/<EXAM>/README.md` |
 | Governance references exam | Search `Governance-Lab.md` for the exam code |
+| Lab domain config | Confirm `Update-LabReferences.ps1` `$DomainConfig` contains the new exam entry |
 | Domain count matches | Count tasks in coverage table vs. `<summary>` tag totals |
 
 ---
