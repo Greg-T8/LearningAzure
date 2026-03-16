@@ -142,7 +142,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 |  | Implement Azure Bastion | 0 | 0 |
 |  | Configure service endpoints for Azure PaaS | 1 | 0 |
 |  | Configure private endpoints for Azure PaaS | 1 | 1 |
-| Configure name resolution and load balancing | Configure Azure DNS | 2 | 0 |
+| Configure name resolution and load balancing | Configure Azure DNS | 3 | 0 |
 |  | Configure an internal or public load balancer | 1 | 1 |
 |  | Troubleshoot load balancing | 2 | 1 |
 
