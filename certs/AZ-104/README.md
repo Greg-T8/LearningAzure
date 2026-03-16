@@ -166,7 +166,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 |  | Perform backup and restore operations by using Azure Backup | 3 | 1 |
 |  | Configure Azure Site Recovery for Azure resources | 1 | 0 |
 |  | Perform a failover to a secondary region by using Site Recovery | 0 | 0 |
-|  | Configure and interpret reports and alerts for backups | 0 | 0 |
+|  | Configure and interpret reports and alerts for backups | 1 | 0 |
 
 </details>
 
