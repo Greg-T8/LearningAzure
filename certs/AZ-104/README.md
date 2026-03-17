@@ -118,7 +118,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 | Create and configure Azure App Service (8 tasks) | Provision an App Service plan | 7 | 1 |
 |  | Configure scaling for an App Service plan | 4 | 1 |
 |  | Create an App Service | 2 | 0 |
-|  | Configure certificates and TLS for an App Service | 0 | 0 |
+|  | Configure certificates and TLS for an App Service | 1 | 0 |
 |  | Map an existing custom DNS name to an App Service | 0 | 0 |
 |  | Configure backup for an App Service | 1 | 0 |
 |  | Configure networking settings for an App Service | 0 | 0 |
