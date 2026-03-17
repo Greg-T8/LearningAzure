@@ -138,6 +138,9 @@ $Helpers = {
 
                 # Non-empty skill column starts a new skill group
                 if ($skillName) {
+                    # Strip task count suffix added in current README layout (e.g., "(5 tasks)")
+                    $skillName = $skillName -replace '\s*\(\d+\s+tasks?\)\s*$', ''
+
                     $currentSkill = @{
                         Name  = $skillName
                         Tasks = [System.Collections.Generic.List[string]]::new()
@@ -295,26 +298,40 @@ $Helpers = {
             [System.Collections.Generic.List[hashtable]]$QuestionBlocks
         )
 
-        # Build an ordering index: domain name → position, skill name → position
+        # Build case-insensitive ordering indexes and canonical name maps
         $domainOrder = @{}
         $skillOrder = @{}
+        $canonicalDomain = @{}
+        $canonicalSkill = @{}
 
         for ($d = 0; $d -lt $DomainStructure.Count; $d++) {
             $domainName = $DomainStructure[$d].Name
-            $domainOrder[$domainName] = $d
+            $domainOrder[$domainName.ToLower()] = $d
+            $canonicalDomain[$domainName.ToLower()] = $domainName
 
             for ($s = 0; $s -lt $DomainStructure[$d].Skills.Count; $s++) {
                 $skillName = $DomainStructure[$d].Skills[$s].Name
-                $key = "$domainName|$skillName"
+                $key = "$($domainName.ToLower())|$($skillName.ToLower())"
                 $skillOrder[$key] = $s
+                $canonicalSkill[$skillName.ToLower()] = $skillName
             }
         }
 
-        # Assign sort keys to each block
+        # Assign sort keys to each block (case-insensitive lookup, normalize to canonical names)
         $decorated = foreach ($block in $QuestionBlocks) {
-            $dIdx = if ($domainOrder.ContainsKey($block.Domain)) { $domainOrder[$block.Domain] } else { 999 }
-            $sKey = "$($block.Domain)|$($block.Skill)"
+            $dKey = $block.Domain.ToLower()
+            $dIdx = if ($domainOrder.ContainsKey($dKey)) { $domainOrder[$dKey] } else { 999 }
+            $sKey = "$dKey|$($block.Skill.ToLower())"
             $sIdx = if ($skillOrder.ContainsKey($sKey)) { $skillOrder[$sKey] } else { 999 }
+
+            # Normalize block metadata to canonical names from the exam README
+            if ($canonicalDomain.ContainsKey($dKey)) {
+                $block.Domain = $canonicalDomain[$dKey]
+            }
+
+            if ($canonicalSkill.ContainsKey($block.Skill.ToLower())) {
+                $block.Skill = $canonicalSkill[$block.Skill.ToLower()]
+            }
 
             if ($dIdx -eq 999 -or $sIdx -eq 999) {
                 Write-Warning "Unrecognized domain/skill for '$($block.Title)': Domain='$($block.Domain)', Skill='$($block.Skill)'"
