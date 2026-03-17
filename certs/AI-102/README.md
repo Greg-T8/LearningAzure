@@ -12,8 +12,8 @@
 
 | Priority | Modality         | My Notes                                                        | Status | Started | Completed | Days |
 | :------- | :--------------- | :-------------------------------------------------------------- | :----- | :------ | :-------- | :--- |
-| 1        | Hands-on Labs    | [Hands-on Labs](./hands-on-labs/README.md)                      | In Progress | 2/10/26 |           | 34 |
-| 1        | Practice Questions   | [Practice Questions](./practice-questions/README.md)                    | In Progress | 2/10/26 |           | 34 |
+| 1        | Hands-on Labs    | [Hands-on Labs](./hands-on-labs/README.md)                      | In Progress | 2/10/26 |           | 35 |
+| 1        | Practice Questions   | [Practice Questions](./practice-questions/README.md)                    | In Progress | 2/10/26 |           | 35 |
 | 2        | Video            | [Video Courses](./video-courses/savill/README.md)               | Not Started |         |           |      |
 | 3        | Microsoft Learn  | [Microsoft Learning Paths](./learning-paths/README.md)          | Not Started |         |           |      |
 
