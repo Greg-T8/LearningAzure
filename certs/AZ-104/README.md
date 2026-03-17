@@ -122,7 +122,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 |  | Map an existing custom DNS name to an App Service | 0 | 0 |
 |  | Configure backup for an App Service | 1 | 0 |
 |  | Configure networking settings for an App Service | 0 | 0 |
-|  | Configure deployment slots for an App Service | 1 | 1 |
+|  | Configure deployment slots for an App Service | 2 | 1 |
 
 </details>
 
