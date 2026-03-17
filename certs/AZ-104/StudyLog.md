@@ -8,6 +8,7 @@ This log tracks individual study sessions for the **AZ-104** exam. Fill in **End
 
 | # | Date | Start | End | Duration | Notes |
 |:--|:-----|:------|:----|:---------|:------|
+| 15 | 3/17/26 | 3:32 AM |  |  | Create and configure Azure App Service |
 | 14 | 3/16/26 | 4:53 AM | 5:26 AM | 0h 33m | Configure name resolution and load balancing |
 | 13 | 3/16/26 | 3:39 AM | 4:51 AM | 1h 12m | Implement backup and recovery |
 | 12 | 3/15/26 | 4:53 AM | 6:24 AM | 1h 31m | Deploy and Manage Azure Compute Resources |
