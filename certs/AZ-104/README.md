@@ -120,7 +120,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 |  | Create an App Service | 2 | 0 |
 |  | Configure certificates and TLS for an App Service | 0 | 0 |
 |  | Map an existing custom DNS name to an App Service | 0 | 0 |
-|  | Configure backup for an App Service | 0 | 0 |
+|  | Configure backup for an App Service | 1 | 0 |
 |  | Configure networking settings for an App Service | 0 | 0 |
 |  | Configure deployment slots for an App Service | 1 | 1 |
 
