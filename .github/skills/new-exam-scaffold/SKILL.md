@@ -83,7 +83,7 @@ Follow the established format from existing exams. Include:
 1. **Title** — `# <EXAM>: <Full Title> — Study Guide`
 2. **Objective statement** with credential name
 3. **Links** — Certification page, study guide, study log
-4. **Progress Tracker** — `## 📚 Progress Tracker` section with the table format below, followed by a legend line. All status `🕒` (Not Started) unless a start date is provided.
+4. **Progress Tracker** — `## 📚 Progress Tracker` section with the table format below, followed by a legend line. All status `Not Started` unless a start date is provided.
 5. **Coverage Dashboard** — `## 📊 Exam Coverage` header, a preamble sentence linking to practice questions and labs, then the dashboard between `<!-- BEGIN COVERAGE DASHBOARD -->` and `<!-- END COVERAGE DASHBOARD -->` markers. One row per domain with anchor links (`#domain-1`, etc.), weights, skill counts, zero Qs/Labs counts, a `Tasks Covered` column (`0 / N (0%)`), and status emoji. Followed by a Totals line, Legend, and a Note about practice question criteria.
 6. **Coverage Table** — Between `<!-- BEGIN COVERAGE TABLE -->` and `<!-- END COVERAGE TABLE -->` markers. Full domain → skill → task hierarchy with `| Qs | Labs |` columns initialized to `0 | 0`. Each skill name includes a `(T tasks)` suffix showing the number of tasks under that skill.
 
@@ -94,12 +94,12 @@ Follow the established format from existing exams. Include:
 
 | Priority | Modality         | My Notes                                                        | Status | Started | Completed | Days |
 | :------- | :--------------- | :-------------------------------------------------------------- | :----- | :------ | :-------- | :--- |
-| 1        | Hands-on Labs    | [Hands-on Labs](./hands-on-labs/README.md)                      | 🕒     |         |           |      |
-| 1        | Practice Questions   | [Practice Questions](./practice-questions/README.md)        | 🕒     |         |           |      |
-| 2        | Video            | [Video Courses](./video-courses/README.md)                      | 🕒     |         |           |      |
-| 3        | Microsoft Learn  | [Microsoft Learning Paths](./learning-paths/README.md)          | 🕒     |         |           |      |
+| 1        | Hands-on Labs    | [Hands-on Labs](./hands-on-labs/README.md)                      | Not Started |         |           |      |
+| 1        | Practice Questions   | [Practice Questions](./practice-questions/README.md)        | Not Started |         |           |      |
+| 2        | Video            | [Video Courses](./video-courses/README.md)                      | Not Started |         |           |      |
+| 3        | Microsoft Learn  | [Microsoft Learning Paths](./learning-paths/README.md)          | Not Started |         |           |      |
 
-**Legend:** 🕒 Not Started | 🚧 In Progress | ✅ Complete
+**Legend:** Not Started | In Progress | Completed
 ```
 
 **Coverage section preamble:**
@@ -398,6 +398,7 @@ After all files are created and updated, verify:
 | Governance references exam | Search `Governance-Lab.md` for the exam code |
 | Lab domain config | Confirm `Update-LabReferences.ps1` `$DomainConfig` contains the new exam entry |
 | Domain count matches | Count tasks in coverage table vs. `<summary>` tag totals |
+| No raw unicode escapes | Scan all generated files for literal unicode escape sequences (`\uXXXX`, `\u{XXXXX}`, `&#xNNNN;`). If any are found, replace them with the actual rendered character. |
 
 ---
 
