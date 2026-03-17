@@ -28,7 +28,6 @@ Before scaffolding, gather the following from the user. Do **not** guess or infe
 | **Study Guide URL** | Official study guide URL | `https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/ai-103` |
 | **Exam Domains** | Full domain → skill → task hierarchy with weights | See [Domain Structure Format](#domain-structure-format) |
 | **Exam Focus** | `AI` or `Infrastructure` — determines resource naming prefixes | `AI` |
-| **Learning Paths** | Microsoft Learn path names and URLs (if available) | See [Learning Paths Format](#learning-paths-format) |
 | **Lab Domain Folders** | Subdirectory names for hands-on-labs | `generative-ai`, `agentic`, `computer-vision`, `nlp`, `knowledge-mining` |
 | **Start Date** | When study begins (or leave blank for later) | `3/15/26` |
 
@@ -49,15 +48,6 @@ Domain 2: <Name> (<Weight>)
 
 The domain/skill/task hierarchy can be found on the official Microsoft study guide page for the exam.
 
-### Learning Paths Format
-
-```
-01: <Path Title> — <URL> — <Module Count> modules
-02: <Path Title> — <URL> — <Module Count> modules
-```
-
-If not yet available, the learning-paths README will contain placeholder text.
-
 ---
 
 ## Phase 1: Create Exam Folder Structure
@@ -75,16 +65,13 @@ certs/<EXAM>/
 │   └── <domain-folder>/          ← one per lab domain
 │       └── .gitkeep
 ├── learning-paths/
-│   ├── README.md
-│   └── <NN>-<path-slug>/        ← one per learning path (if known)
-│       └── README.md
+│   └── README.md
 ├── practice-questions/
 │   ├── .img/
 │   │   └── .gitkeep
 │   └── README.md
 └── video-courses/
-    └── savill/
-        └── README.md
+    └── README.md
 ```
 
 ### 1.2 File Templates
@@ -97,8 +84,8 @@ Follow the established format from existing exams. Include:
 2. **Objective statement** with credential name
 3. **Links** — Certification page, study guide, study log
 4. **Progress Tracker** — `## 📚 Progress Tracker` section with the table format below, followed by a legend line. All status `🕒` (Not Started) unless a start date is provided.
-5. **Coverage Dashboard** — `## 📊 Exam Coverage` header, a preamble sentence linking to practice questions and labs, then the dashboard between `<!-- BEGIN COVERAGE DASHBOARD -->` and `<!-- END COVERAGE DASHBOARD -->` markers. One row per domain with anchor links (`#domain-1`, etc.), weights, zero counts, a `Tasks Covered` column (`0 / N (0%)`), and status emoji. Followed by a Totals line, Legend, and a Note about practice question criteria.
-6. **Coverage Table** — Between `<!-- BEGIN COVERAGE TABLE -->` and `<!-- END COVERAGE TABLE -->` markers. Full domain → skill → task hierarchy with `| Qs | Labs |` columns initialized to `0 | 0`.
+5. **Coverage Dashboard** — `## 📊 Exam Coverage` header, a preamble sentence linking to practice questions and labs, then the dashboard between `<!-- BEGIN COVERAGE DASHBOARD -->` and `<!-- END COVERAGE DASHBOARD -->` markers. One row per domain with anchor links (`#domain-1`, etc.), weights, skill counts, zero Qs/Labs counts, a `Tasks Covered` column (`0 / N (0%)`), and status emoji. Followed by a Totals line, Legend, and a Note about practice question criteria.
+6. **Coverage Table** — Between `<!-- BEGIN COVERAGE TABLE -->` and `<!-- END COVERAGE TABLE -->` markers. Full domain → skill → task hierarchy with `| Qs | Labs |` columns initialized to `0 | 0`. Each skill name includes a `(T tasks)` suffix showing the number of tasks under that skill.
 
 **Progress Tracker format** (must match this exact header for `Update-ProgressTrackerDays.ps1` auto-discovery):
 
@@ -109,7 +96,7 @@ Follow the established format from existing exams. Include:
 | :------- | :--------------- | :-------------------------------------------------------------- | :----- | :------ | :-------- | :--- |
 | 1        | Hands-on Labs    | [Hands-on Labs](./hands-on-labs/README.md)                      | 🕒     |         |           |      |
 | 1        | Practice Questions   | [Practice Questions](./practice-questions/README.md)        | 🕒     |         |           |      |
-| 2        | Video            | [Video Courses](./video-courses/savill/README.md)               | 🕒     |         |           |      |
+| 2        | Video            | [Video Courses](./video-courses/README.md)                      | 🕒     |         |           |      |
 | 3        | Microsoft Learn  | [Microsoft Learning Paths](./learning-paths/README.md)          | 🕒     |         |           |      |
 
 **Legend:** 🕒 Not Started | 🚧 In Progress | ✅ Complete
@@ -128,10 +115,10 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 ```markdown
 <!-- BEGIN COVERAGE DASHBOARD -->
 
-| Domain | Weight | Qs | Labs | Tasks Covered | Status |
-| :----- | :----- | -: | ---: | :------------ | :----: |
-| [1. <Short Name>](#domain-1) | XX–XX% | 0 | 0 | 0 / N (0%) | 🔴 |
-| [2. <Short Name>](#domain-2) | XX–XX% | 0 | 0 | 0 / N (0%) | 🔴 |
+| Domain | Weight | Skills | Qs | Labs | Tasks Covered | Status |
+| :----- | :----- | -----: | -: | ---: | :------------ | :----: |
+| [1. <Short Name>](#domain-1) | XX–XX% | S | 0 | 0 | 0 / N (0%) | 🔴 |
+| [2. <Short Name>](#domain-2) | XX–XX% | S | 0 | 0 | 0 / N (0%) | 🔴 |
 
 **Totals:** 0 practice questions · 0 hands-on labs
 
@@ -142,6 +129,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 <!-- END COVERAGE DASHBOARD -->
 ```
 
+- `S` = number of skills in each domain (from the exam study guide hierarchy).
 - `N` = total task count for each domain from the coverage table.
 - `<Short Name>` = abbreviated domain name for the dashboard (e.g., "Identities & Governance").
 - All new exams start with `🔴` status and zero counts.
@@ -155,13 +143,14 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 
 | Skill | Task | Qs | Labs |
 | :--- | :--- | -: | -: |
-| <Skill Name> | <Task description> | 0 | 0 |
+| <Skill Name> (T tasks) | <Task description> | 0 | 0 |
 |  | <Task description> | 0 | 0 |
 
 </details>
 ```
 
 Dashboard status indicators:
+
 - 🟢 Strong (≥66% tasks covered)
 - 🟡 Partial (33–65%)
 - 🔴 Low (<33%)
@@ -221,16 +210,16 @@ Accounts for questions missed or unsure about in the practice exams.
 
 #### `certs/<EXAM>/learning-paths/README.md` — Learning Paths Catalog
 
-Follow the format of existing learning path READMEs. Include a progress table with path names, module counts, and status columns. If paths are not yet available, note that they will be populated when Microsoft publishes the learning paths.
+Follow the format of existing learning path READMEs. Include a progress table with path names, module counts, and status columns. If paths are not yet available, note that they will be populated when Microsoft publishes the learning paths. Do **not** create subfolders for individual learning paths — those are added later as study progresses.
 
-#### `certs/<EXAM>/video-courses/savill/README.md` — Video Notes
+#### `certs/<EXAM>/video-courses/README.md` — Video Courses
+
+Create a minimal README placeholder. Do **not** create subfolders (e.g., `savill/`) — those are added later when video notes are taken.
 
 ```markdown
-# <EXAM> — John Savill's Training
+# <EXAM> — Video Courses
 
-Notes from [John Savill's YouTube channel](https://www.youtube.com/@NTFAQGuy).
-
-*No video notes yet.*
+*No video course notes yet.*
 ```
 
 ---
