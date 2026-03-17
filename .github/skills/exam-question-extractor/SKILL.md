@@ -462,6 +462,8 @@ Before submitting the final edit, verify:
 
 ### Related Lab Line
 
+Always emit the Related Lab line **exactly** as shown below — with empty link text and an empty URL. Do **not** guess, infer, or populate the lab name or path. The user will fill this in manually.
+
 ```markdown
 ▶ Related Lab: []()
 ```
