@@ -107,8 +107,8 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 | Create and configure virtual machines (7 tasks) | Create a virtual machine | 0 | 0 |
 |  | Configure Azure Disk Encryption | 3 | 1 |
 |  | Move a VM to another resource group, subscription, or region | 0 | 0 |
-|  | Manage virtual machine sizes | 1 | 0 |
-|  | Manage virtual machine disks | 1 | 0 |
+|  | Manage virtual machine sizes | 2 | 0 |
+|  | Manage virtual machine disks | 2 | 0 |
 |  | Deploy VMs to availability zones and availability sets | 2 | 0 |
 |  | Deploy and configure an Azure Virtual Machine Scale Sets | 1 | 1 |
 | Provision and manage containers in the Azure portal (4 tasks) | Create and manage an Azure container registry | 1 | 0 |
