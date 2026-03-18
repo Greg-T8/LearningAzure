@@ -36,27 +36,6 @@ jobs:
           # Provide token to increase rate limits for external link checks
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # Send email notification only on failure
-      - name: Send email notification on link check failure
-        if: failure()
-        uses: dawidd6/action-send-mail@v3
-        with:
-          server_address: smtp.gmail.com
-          server_port: 587
-          username: ${{ secrets.MAIL_USERNAME }}
-          password: ${{ secrets.MAIL_PASSWORD }}
-          subject: "❌ Broken links detected in ${{ github.repository }}"
-          to: ${{ secrets.MAIL_TO }}
-          from: GitHub Actions
-          body: |
-            Link check failed in repository: ${{ github.repository }}
-            Branch: ${{ github.ref_name }}
-            Commit: ${{ github.sha }}
-
-            View details: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-
-            Please review the failed links and update the documentation.
-
   # PowerShell static analysis job (PSScriptAnalyzer)
   powershell:
     runs-on: ubuntu-latest
