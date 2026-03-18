@@ -66,9 +66,9 @@ $Main = {
                 $sourceLogFileName = Resolve-ExamLogFileName -Exam $sourceExam
                 $sourceLog = Join-Path -Path $RepoRoot -ChildPath "$sourceFolder\$sourceLogFileName"
                 $sourceSession = Get-ActiveSessionNumber -LogFile $sourceLog
-                Close-SessionEntry -SessionNumber $sourceSession -LogFile $sourceLog
+                Close-SessionEntry -SessionNumber $sourceSession -LogFile $sourceLog -UseLastCommit
                 Push-StudyLogChange -SessionNumber $sourceSession -Type 'end' -Exam $sourceExam
-                Show-Confirmation -Message "Study session #$sourceSession ended for $sourceExam"
+                Show-Confirmation -Message "Study session #$sourceSession ended for $sourceExam (auto-closed at last commit)"
             }
 
             Confirm-StudyLogExists
@@ -332,11 +332,15 @@ $Helpers = {
 
             [string]$LogFile = $StudyLogFile,
 
-            [string]$Notes
+            [string]$Notes,
+
+            [switch]$UseLastCommit
         )
 
         $lines = Get-Content -Path $LogFile
-        $now = Get-Date
+
+        # Resolve end time from last git commit when auto-closing a stale session
+        $endTime = if ($UseLastCommit) { Get-LastCommitTime } else { Get-Date }
 
         # Search from the top for the matching session row (latest entries are first)
         for ($i = 0; $i -lt $lines.Count; $i++) {
@@ -353,15 +357,28 @@ $Helpers = {
                 )
 
                 # Calculate session duration
-                $duration    = $now - $startDateTime
+                $duration    = $endTime - $startDateTime
                 $hours       = [math]::Floor($duration.TotalHours)
                 $minutes     = $duration.Minutes
                 $durationStr = '{0}h {1}m' -f $hours, $minutes
 
                 # Update End and Duration columns
-                $endStr      = $now.ToString('h:mm tt')
+                $endStr      = $endTime.ToString('h:mm tt')
                 $columns[4]  = " $endStr "
                 $columns[5]  = " $durationStr "
+
+                # Tag auto-closed sessions so the log shows they were estimated
+                if ($UseLastCommit) {
+                    $autoNote = 'auto-closed at last commit'
+                    $existingNotes = $columns[6].Trim()
+
+                    if ([string]::IsNullOrWhiteSpace($existingNotes)) {
+                        $columns[6] = " $autoNote "
+                    }
+                    else {
+                        $columns[6] = " $existingNotes; $autoNote "
+                    }
+                }
 
                 # Append a user-provided note to the Notes column when supplied
                 $safeNotes = ConvertTo-LogNote -Notes $Notes
@@ -383,6 +400,17 @@ $Helpers = {
         }
 
         Set-Content -Path $LogFile -Value $lines
+    }
+
+    function Get-LastCommitTime {
+        # Retrieve the author date of the last user commit, excluding automated [skip ci] commits
+        $isoDate = git -C $RepoRoot log -1 --format=%aI --grep='\[skip ci\]' --invert-grep
+
+        if ($LASTEXITCODE -ne 0 -or [string]::IsNullOrWhiteSpace($isoDate)) {
+            throw 'Failed to retrieve last commit timestamp.'
+        }
+
+        return [datetimeoffset]::Parse($isoDate).LocalDateTime
     }
 
     function Push-StudyLogChange {
