@@ -46,7 +46,7 @@ Accounts for questions missed or unsure about in the practice exams.
     * [Convert Array to Object](#convert-array-to-object)
     * [Edit ARM Template to Inherit Resource Group Location](#edit-arm-template-to-inherit-resource-group-location)
     * [Export ARM Template](#export-arm-template)
-    * [Case Study — Solution Evaluation](#case-study-solution-evaluation)
+    * [Case Study — Solution Evaluation](#case-study--solution-evaluation)
     * [Deployment Mode Deleted Resources](#deployment-mode-deleted-resources)
   * [Create and configure virtual machines](#create-and-configure-virtual-machines)
     * [VM Resize Failure Cause](#vm-resize-failure-cause)
@@ -72,11 +72,11 @@ Accounts for questions missed or unsure about in the practice exams.
     * [Resolve Azure App Service Pricing Tier for Runtime Requirements](#resolve-azure-app-service-pricing-tier-for-runtime-requirements-2)
 * [Implement and Manage Virtual Networking](#implement-and-manage-virtual-networking)
   * [Configure and manage virtual networks in Azure](#configure-and-manage-virtual-networks-in-azure)
-    * [Case Study — Container Group Placement](#case-study-container-group-placement)
+    * [Case Study — Container Group Placement](#case-study--container-group-placement)
     * [Configure Layered Network Security](#configure-layered-network-security)
     * [VNet Peering with ExpressRoute](#vnet-peering-with-expressroute)
     * [Standard Load Balancer public IPs](#standard-load-balancer-public-ips)
-    * [VNet Peering — Missing Reverse Peering](#vnet-peering-missing-reverse-peering)
+    * [VNet Peering — Missing Reverse Peering](#vnet-peering--missing-reverse-peering)
   * [Configure secure access to virtual networks](#configure-secure-access-to-virtual-networks)
     * [Configure Private Link Service Source IP](#configure-private-link-service-source-ip)
     * [Design NSG to Block RDP from Internet](#design-nsg-to-block-rdp-from-internet)
@@ -105,7 +105,7 @@ Accounts for questions missed or unsure about in the practice exams.
     * [Load Balancer Metrics Batch API](#load-balancer-metrics-batch-api)
   * [Implement backup and recovery](#implement-backup-and-recovery)
     * [Recover Azure VM from Deleted Backup](#recover-azure-vm-from-deleted-backup)
-    * [Site Recovery — Recovery Steps](#site-recovery-recovery-steps)
+    * [Site Recovery — Recovery Steps](#site-recovery--recovery-steps)
     * [Recover Configuration File from Azure VM Backup](#recover-configuration-file-from-azure-vm-backup)
     * [Restore VM from backup (availability set)](#restore-vm-from-backup-availability-set)
     * [Backup Pre-Check Warning Cause](#backup-pre-check-warning-cause)
@@ -602,10 +602,126 @@ The DeployIfNotExists effect is only evaluated if the request executed by the Re
 
 <img src='.img/2026-03-09-04-02-34.png' width=600>
 
+<details>
+<summary>📝 More Detail</summary>
+
+The key to this question is realizing that it is **not really about cost center tags**. It is testing whether you understand **when each Azure Policy effect runs** and **what it is allowed to do**.
+
+Correct answers:
+
+| Statement                                                                                                                      | Correct answer |
+| ------------------------------------------------------------------------------------------------------------------------------ | -------------- |
+| The Deny effect is evaluated first.                                                                                            | **No**         |
+| The Append effect modifies the value of an existing field in a resource.                                                       | **No**         |
+| The Audit effect will create a warning event in the activity log for non-compliant resources.                                  | **Yes**        |
+| The DeployIfNotExists effect is only evaluated if the request executed by the Resource Provider returns a success status code. | **Yes**        |
+
+What usually makes this question tricky is that the effects can sound similar, but they behave at different points in the request flow.
+
+Think of Azure Policy like this:
+
+1. A create or update request comes in.
+2. Policy checks whether the rule is active.
+3. Policy may add something to the request.
+4. Policy may block the request.
+5. Policy may log that the request is non-compliant.
+6. In some cases, after the resource provider succeeds, policy may deploy something extra.
+
+That gives you a practical mental model:
+
+**Disabled → Append → Deny → Audit**
+Then, separately, **DeployIfNotExists** is a post-success check.
+
+Why “Deny” is not first
+If Deny happened first, Azure Policy would never get the chance to **append** fields to the request before deciding whether to block it. So exam-wise, remember that **Append gets a chance to shape the request before Deny evaluates it**.
+
+Why “Append” does not modify an existing value
+Append is best thought of as **“add this if it is not already there”**, not **“change what is already there.”**
+
+For example:
+
+* Policy says every resource must include `CostCenter = Finance`
+* Request comes in with **no CostCenter tag**
+  → Append can add it.
+* Request comes in with `CostCenter = HR`
+  → Append does **not** overwrite `HR` to `Finance`.
+
+If the field already exists and conflicts with the policy’s appended value, the request is effectively rejected. That is why the statement “Append modifies the value of an existing field” is false.
+
+A useful exam contrast:
+
+* **Append** = add only
+* **Modify** = the effect associated with changing or normalizing supported properties/tags during create or update
+
+Why “Audit” is true
+Audit does not block the request. It lets the request proceed but records that the resource is non-compliant. So the practical meaning is:
+
+* Resource can still be created or updated
+* Non-compliance is logged
+* You can review it later
+
+That is why Audit is the “observe and report” effect.
+
+Why “DeployIfNotExists” is true
+This one is easiest to remember if you think of it as:
+
+**“After the main resource succeeds, go see whether something related is missing, and if so, deploy it.”**
+
+It is not part of the initial blocking decision in the same way Deny is. It depends on the resource provider request succeeding first.
+
+Classic example:
+
+* A VM is created successfully
+* Policy checks whether a diagnostic setting, extension, or related configuration exists
+* If not, policy can deploy it
+
+So this effect is tied to a **successful resource creation/update first**, then a follow-up compliance action.
+
+How this maps to your cost center scenario
+Your scenario says every resource must have a valid `CostCenter` tag value.
+
+That means the exam writer is trying to get you thinking about which effects would make sense:
+
+* **Deny**: block resources that do not have a valid CostCenter value
+* **Audit**: allow them but record non-compliance
+* **Append**: add a tag only if missing, but not fix a wrong existing value
+* **DeployIfNotExists**: usually less relevant for validating a tag value, because it is more about deploying related resources/configuration after success
+
+The trap is that once you see “tag,” you may start thinking “Append must fix it.” But Append does not repair an already incorrect tag value.
+
+A compact memory aid:
+
+* **Append** = “add missing”
+* **Deny** = “stop bad”
+* **Audit** = “allow but record”
+* **DeployIfNotExists** = “after success, ensure companion resource/config exists”
+
+Another way to remember the tricky two:
+
+* If the resource should be stopped immediately, think **Deny**
+* If the resource succeeds first and then Azure checks whether something extra should exist, think **DeployIfNotExists**
+
+For this exact question, the fastest exam logic is:
+
+* “Deny first?” → **No**, because Append is earlier
+* “Append changes existing values?” → **No**, it adds, not overwrites
+* “Audit logs non-compliance?” → **Yes**
+* “DeployIfNotExists only after RP success?” → **Yes**
+
+A good way to lock this in is to treat the effects as belonging to one of three buckets:
+
+* **Change the incoming request:** Append
+* **Block or observe the request:** Deny, Audit
+* **React after success:** DeployIfNotExists
+
+That bucket model usually makes these questions much easier.
+
 References
 
 * [Understand Azure Policy effects](https://learn.microsoft.com/en-us/azure/governance/policy/concepts/effect-basics)
 * [Azure Policy Samples](https://learn.microsoft.com/en-us/azure/governance/policy/samples/)
+
+</details>
 
 </details>
 
@@ -4075,7 +4191,7 @@ What settings do and do not move in a swap
 One of the most important slot basics is that not everything swaps. Some settings are **slot-specific** (“sticky”) and stay with the slot, while other configuration moves during the swap. This is a major reason slots are useful: you can keep environment-specific settings tied to the staging or production slot. ([Microsoft Learn][2])
 
 For exam purposes, remember the principle:
-**content swaps, but some configuration can be configured to stay with the slot.** 
+**content swaps, but some configuration can be configured to stay with the slot.**
 
 The cmdlets you should not confuse with this
 
