@@ -499,6 +499,54 @@ You should use notIn for the check condition. If the tag value for Environment i
 
 You should use deny for the effect property. The "then" block specifies the effect to apply if the policy rule block evaluates to false. In this case, you want to deny creation. You should not use audit because that would allow creation and generate a compliance log entry. You should not use append because it would add an empty Environment tag to the resource and not set a value equal to either dev, qa, or prod.
 
+<details>
+<summary>📝 More Detail</summary>
+
+One thing to lock in first: **All and Indexed are policy `mode` values, not `policyType` values**. `policyType` is a different property that tells you whether a definition is built-in, custom, static, and so on. `mode` tells Azure Policy **which resource types the policy evaluates**. ([Microsoft Learn][1])
+
+The easiest way to remember them is:
+
+* **All** = “evaluate basically everything relevant”
+* **Indexed** = “evaluate only resource types that support tags and location”
+
+Microsoft recommends using **`all` in most cases**, and policy definitions created through the Azure portal use `all`. A policy with `null` mode in Azure CLI is treated the same as `indexed` for backward compatibility. ([Microsoft Learn][1])
+
+Why **Indexed** exists
+`indexed` is mainly for **tag** and **location** policies. It helps avoid showing resources as non-compliant when those resource types do not support tags or location. That is why `indexed` is the usual choice when the policy logic is “this resource must have tag X” or “this resource must be in allowed locations.” ([Microsoft Learn][1])
+
+Why **All** exists
+`all` is broader. Use it when you want policy to evaluate resource types beyond just those that support tags/location, including cases like resource groups, subscriptions, or other resources where `indexed` would be too narrow. Microsoft specifically notes that policies targeting **resource groups** or **subscriptions** for location or tag enforcement should use `all` and target the appropriate resource type explicitly. ([Microsoft Learn][1])
+
+A good mental shortcut:
+
+* **Indexed** = “tag/location-focused filtering”
+* **All** = “full governance scope”
+
+That means if the exam stem is about **requiring tags on ordinary resources**, think **Indexed**. If it is about **broader governance**, or the target is **resource groups/subscriptions**, think **All**. ([Microsoft Learn][1])
+
+Here is the practical exam trap: people often think **All** means “check every property on every resource,” but that is not the point. The question is really about **which resource types are brought into evaluation**, not how deeply the JSON is inspected. `indexed` narrows the evaluated set to resources that support tags/location, which is why it is helpful for tag/location policies. ([Microsoft Learn][1])
+
+In your cost center example, if the goal is “resources must have a valid `CostCenter` tag,” then **Indexed** is usually the exam-friendly answer for normal resource tag enforcement, because it avoids flagging resource types that do not support tags/location. But if the scope explicitly includes **resource groups** or **subscriptions**, use **All**. ([Microsoft Learn][1])
+
+A memory device that tends to stick:
+
+* **All** → **A** = **Anything Azure-relevant**
+* **Indexed** → think **index card on a resource with a tag and location written on it**
+
+Or even shorter:
+
+* **All** = broader scope
+* **Indexed** = tags/locations only
+
+A few quick examples:
+
+* “Require a `CostCenter` tag on resources” → usually **Indexed**.
+* “Require a tag on resource groups” → **All**.
+* “Restrict where subscriptions or resource groups can exist” → **All**.
+* “General policy authored in the portal” → likely **All** by default.
+
+</details>
+
 </details>
 
 ---
