@@ -10,8 +10,7 @@ Controller script that invokes content maintenance scripts in dependency order:
   4. Update-LabReferences — regenerate lab catalogs and cross-references.
   5. Invoke-CollapseDetailBlock — normalize markdown detail elements.
   6. Remove-UnusedImages — clean up unreferenced images.
-  7. Resolve-BrokenLink — find and remove 404 external links.
-  8. Update-CommitStats — refresh commit statistics in README.md.
+    7. Update-CommitStats — refresh commit statistics in README.md.
 
 When invoked with the -Reorganize switch, also runs practice exam question
 reorganization before the other steps.
@@ -62,10 +61,7 @@ $Main = {
     # Step 7: Remove unreferenced images
     Invoke-Step -Name 'Remove-UnusedImages' -ScriptPath (Join-Path $ScriptsDir 'Remove-UnusedImages.ps1')
 
-    # Step 8: Resolve broken external links (404s)
-    Invoke-Step -Name 'Resolve-BrokenLink' -ScriptPath (Join-Path $ScriptsDir 'Resolve-BrokenLink.ps1')
-
-    # Step 9: Update commit statistics in README.md
+    # Step 8: Update commit statistics in README.md
     Invoke-Step -Name 'Update-CommitStats' -ScriptPath (Join-Path $ScriptsDir 'Update-CommitStats.ps1')
 
     Write-Host "`nContent maintenance complete." -ForegroundColor Green
