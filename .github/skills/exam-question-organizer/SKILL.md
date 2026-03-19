@@ -27,6 +27,7 @@ If questions are missing metadata, add the metadata manually before running the 
 | ------ | -------------------------------------- | --------------------------------------------------- | --------------------------------------------------- |
 | AZ-104 | `certs/AZ-104/practice-questions/README.md`  | `certs/AZ-104/README.md` — Practice Exam Coverage section | `certs/AZ-104/README.md` — Practice Exam Coverage section |
 | AI-102 | `certs/AI-102/practice-questions/README.md`  | `certs/AI-102/README.md` — Practice Exam Coverage section | `certs/AI-102/README.md` — Practice Exam Coverage section |
+| AZ-305 | `certs/AZ-305/practice-questions/README.md`  | `certs/AZ-305/README.md` — Practice Exam Coverage section | `certs/AZ-305/README.md` — Practice Exam Coverage section |
 
 If no exam is specified, ask which exam to process.
 

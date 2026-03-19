@@ -15,7 +15,7 @@ For the full Azure governance implementation policy, see `Governance-Lab.md` at 
 
 Pattern: `<exam>-<domain>-<topic>-<deployment>`
 
-- `<exam>`: lowercase exam code (`az104`, `ai102`)
+- `<exam>`: lowercase exam code (`az104`, `ai102`, `az305`)
 - `<domain>`: lowercase domain slug (e.g., `networking`, `storage`, `generative-ai`)
 - `<topic>`: lowercase topic slug (e.g., `vnet-peering`, `blob-versioning`)
 - `<deployment>`: `tf` | `bicep` | `scripted`
@@ -82,7 +82,7 @@ No exam code in stack name.
 | Tag              | Rule                                                        |
 | ---------------- | ----------------------------------------------------------- |
 | Environment      | Always `Lab`                                                |
-| Project          | Uppercase: `AI-102` or `AZ-104`                             |
+| Project          | Uppercase: `AI-102` or `AZ-104` or `AZ-305`             |
 | Domain           | e.g., Networking, Storage, Generative AI                    |
 | Purpose          | Descriptive (e.g., VNet Peering)                            |
 | Owner            | `Greg Tate`                                                 |

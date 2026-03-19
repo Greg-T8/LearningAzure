@@ -1,6 +1,6 @@
 # Hands-On Labs Governance Policy
 
-Standards for all Terraform and Bicep labs (AI-102, AZ-104).
+Standards for all Terraform and Bicep labs (AI-102, AZ-104, AZ-305).
 
 `Governance-Lab.md` remains the authoritative implementation standard.
 
@@ -29,7 +29,7 @@ Use `centralus` unless capacity requires fallback.
 | Tag              | Example           |
 | ---------------- | ----------------- |
 | Environment      | Lab               |
-| Project          | AI-102 / AZ-104   |
+| Project          | AI-102 / AZ-104 / AZ-305 |
 | Domain           | Networking        |
 | Purpose          | VNet Peering      |
 | Owner            | Greg Tate         |
