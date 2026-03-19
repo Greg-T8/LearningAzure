@@ -15,7 +15,7 @@ For the full Azure governance implementation policy, see `Governance-Lab.md` at 
 
 Pattern: `<exam>-<domain>-<topic>-<deployment>`
 
-- `<exam>`: lowercase exam code (`az104`, `ai102`, `az305`)
+- `<exam>`: lowercase exam code (`az104`, `az305`)
 - `<domain>`: lowercase domain slug (e.g., `networking`, `storage`, `generative-ai`)
 - `<topic>`: lowercase topic slug (e.g., `vnet-peering`, `blob-versioning`)
 - `<deployment>`: `tf` | `bicep` | `scripted`
@@ -46,7 +46,7 @@ All names are **static by default**. Random suffixes are only added for resource
 
 ---
 
-## R-003: Resource Naming — AI-102 Prefixes
+## R-003 (Legacy): Resource Naming — AI-102 Prefixes
 
 Pattern: `<prefix>-<role>[-instance]`
 
@@ -67,6 +67,8 @@ All names are **static by default**. Random suffixes are only added for resource
 
 Cognitive Services resources (OpenAI, Multi-service, Vision, Language) require random suffix because they enter soft-deleted state on deletion — see R-028.
 
+This requirement is retained for completed/retired AI-102 artifact maintenance only.
+
 ---
 
 ## R-004: Bicep Stack Naming
@@ -82,7 +84,7 @@ No exam code in stack name.
 | Tag              | Rule                                                        |
 | ---------------- | ----------------------------------------------------------- |
 | Environment      | Always `Lab`                                                |
-| Project          | Uppercase: `AI-102` or `AZ-104` or `AZ-305`             |
+| Project          | Uppercase: `AZ-104` or `AZ-305`                          |
 | Domain           | e.g., Networking, Storage, Generative AI                    |
 | Purpose          | Descriptive (e.g., VNet Peering)                            |
 | Owner            | `Greg Tate`                                                 |

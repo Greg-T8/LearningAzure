@@ -1,6 +1,6 @@
 # Hands-On Labs Governance Policy
 
-Standards for all Terraform and Bicep labs (AI-102, AZ-104).
+Standards for all Terraform and Bicep labs (AZ-104, AZ-305).
 
 `Governance-Lab.md` remains the authoritative implementation standard.
 
@@ -27,7 +27,7 @@ Use `eastus` unless capacity requires fallback.
 | Tag              | Example           |
 | ---------------- | ----------------- |
 | Environment      | Lab               |
-| Project          | AI-102 / AZ-104   |
+| Project          | AZ-104 / AZ-305   |
 | Domain           | Networking        |
 | Purpose          | VNet Peering      |
 | Owner            | Greg Tate         |
@@ -77,7 +77,7 @@ Pattern:
 
 ---
 
-#### AI-102 Prefixes
+#### Legacy (Completed/Retired) AI-102 Prefixes
 
 | Resource            | Prefix          |
 | ------------------- | --------------- |
@@ -91,6 +91,8 @@ Pattern:
 | Storage (AI output) | st<exam><topic> |
 
 OpenAI accounts require random suffix for global uniqueness.
+
+Use this table only when maintaining existing AI-102 lab artifacts.
 
 ---
 

@@ -96,7 +96,7 @@ If the user's intent is **not clear** — including cases where the user sends a
 
 > **CRITICAL — Exam-Type Inference First, Ask Later**
 >
-> The exam type (`AI-102`, `AZ-104`, `AI-900`) must **always** be inferred from the question content using the R-041 clue table — **never** asked about preemptively. Do **not** include an exam-type question in any `VSCode/askQuestions` call until **after** the question content has been extracted and analyzed. Only if the extracted content is genuinely ambiguous — meaning the clues match multiple exams equally or match none — may you fall back to asking the user. Asking the user about the exam type before analyzing the question content is a **UX violation**.
+> The exam type (`AZ-104`, `AZ-305`) must **always** be inferred from the question content using the R-041 clue table — **never** asked about preemptively. Do **not** include an exam-type question in any `VSCode/askQuestions` call until **after** the question content has been extracted and analyzed. Only if the extracted content is genuinely ambiguous — meaning the clues match multiple exams equally or match none — may you fall back to asking the user. Asking the user about the exam type before analyzing the question content is a **UX violation**.
 
 #### When to call `VSCode/askQuestions`
 
@@ -127,11 +127,13 @@ Which deployment method should I use?
 ```
 Which exam is this question for?
 
-1. `AI-102`
-2. `AZ-104`
+1. `AZ-104`
+2. `AZ-305`
 ```
 
 The exam-type question is reserved for **post-extraction fallback only** (see R-041). Never include it in an initial `VSCode/askQuestions` call before the question content has been analyzed.
+
+Legacy note: `AI-102` and `AI-900` are completed/retired tracks and should only be used when explicitly maintaining historical exam artifacts.
 
 Once the user responds, capture the values and proceed with extraction.
 
@@ -586,7 +588,7 @@ Extract **all** of the following fields from the exam question:
 
 | Field            | Type     | Description                                                        |
 | ---------------- | -------- | ------------------------------------------------------------------ |
-| `Exam`           | string   | Certification code: `AI-102`, `AZ-104`, or `AI-900`               |
+| `Exam`           | string   | Certification code: `AZ-104` or `AZ-305`                           |
 | `Domain`         | string   | Azure domain (e.g., Networking, Storage, Generative AI)            |
 | `Exam Domain`    | string   | Full domain name from exam README `### Domain N:` heading (omit weight) |
 | `Skill`          | string   | Skill name from exam README `####` sub-heading                     |
@@ -607,8 +609,7 @@ Determine the exam from contextual clues in the question:
 | Clue                                                        | Exam     |
 | ----------------------------------------------------------- | -------- |
 | Networking, VMs, storage accounts, load balancers, RBAC, DNS, subscriptions, monitoring | `AZ-104` |
-| AI services, Cognitive Services, OpenAI, AI Search, Language, Vision, Speech, Document Intelligence | `AI-102` |
-| Foundational AI concepts, responsible AI, machine learning basics, Azure AI Foundry overview | `AI-900` |
+| Architecture recommendations, solution design, governance design, HA/DR strategy, migration planning, integration patterns | `AZ-305` |
 
 If the user explicitly states the exam, use their value.
 
@@ -636,35 +637,15 @@ Map the question's subject to one of the **exact** domain names listed below. Th
 > - NSG rules protecting a VM → **Networking** (the NSG is the primary resource)
 > - RBAC role assignment on a resource group → **Identity**
 
-**AI-102 domains (closed set — use these exact strings):**
+**AZ-305 domains (closed set — use these exact strings):**
 
 | Domain                                | Example Topics                                       |
 | ------------------------------------- | ---------------------------------------------------- |
-| AI Services                           | Multi-service accounts, keys, endpoints, regions, Document Intelligence, Speech, Translator |
-| Generative AI                         | OpenAI, prompt engineering, embeddings, RAG          |
-| NLP                                   | Language Understanding, text analytics, translation, QnA |
-| Computer Vision                       | Image analysis, OCR, Custom Vision, Face, Video Indexer |
-| Knowledge Mining                      | AI Search, indexers, skillsets, knowledge stores      |
-| Agentic                               | AI agents, Azure AI Agent Service, capability host, agent file uploads, agent storage, orchestration, Semantic Kernel |
-
-> **Cross-cutting topics (AI-102):** When a question involves infrastructure configuration (RBAC, storage, connection strings) for a specific AI service, choose the domain of the **primary AI service**, not the supporting resource. Examples:
->
-> - Storage role assignments for Azure AI Agent Service → **Agentic** (the agent service is the primary subject)
-> - Capability host or file upload configuration for agents → **Agentic**
-> - API key rotation for a multi-service AI resource → **AI Services**
-> - Document Intelligence invoice analysis → **AI Services** (Document Intelligence is an AI service, not a domain)
-> - Speech-to-text transcription → **AI Services** (Speech is an AI service, not a domain)
-> - Indexer connectivity to a blob container → **Knowledge Mining** (the search indexer is the primary resource)
-
-**AI-900 domains (closed set — use these exact strings):**
-
-| Domain                                | Example Topics                                       |
-| ------------------------------------- | ---------------------------------------------------- |
-| AI Concepts                           | Responsible AI, AI workloads, ML fundamentals        |
-| Machine Learning                      | Automated ML, regression, classification, clustering |
-| Computer Vision                       | Image classification, object detection, OCR          |
-| NLP                                   | Text analytics, speech, translation, conversational AI |
-| Generative AI                         | Azure OpenAI, prompt engineering, copilots           |
+| Identity, Governance & Monitoring     | Identity design, RBAC strategy, policy and compliance design, logging and monitoring architecture |
+| Data Storage                          | Relational/non-relational storage architecture, durability, scalability, protection |
+| Business Continuity                   | Backup, disaster recovery, availability design, RTO/RPO planning |
+| Compute                               | VM, container, and serverless solution recommendations |
+| Networking                            | Connectivity, segmentation, routing, load balancing, hybrid networking |
 
 #### Topic
 
@@ -746,7 +727,7 @@ Return a structured block. **Field order and capitalization are mandatory** — 
 
 ### Metadata
 
-- Exam: [AI-102 | AZ-104 | AI-900]
+- Exam: [AZ-104 | AZ-305]
 - Domain: [exact domain from R-041 closed-set tables]
 - Exam Domain: [full domain name from exam README — omit weight]
 - Skill: [skill name from exam README]
@@ -804,7 +785,7 @@ After extracting metadata per R-041 and **before** returning output, run this va
 4. **Capitalization check** — Confirm all values use Title Case (except `Topic` which is kebab-case lowercase).
 5. **Completeness check** — Confirm all nine metadata fields are populated (including Deployment Method from user input and Intake Mode).
 6. **Field-level checks:**
-   - [ ] `Exam` matches one of: `AI-102`, `AZ-104`, `AI-900`
+   - [ ] `Exam` matches one of: `AZ-104`, `AZ-305`
    - [ ] `Topic` is kebab-case, ≤25 characters, no special characters
    - [ ] `Topic` is identical to the `<derived-slug>` produced and gate-checked in R-040 (not independently re-derived)
    - [ ] `Topic` does not contain deployment-method terms (`terraform`, `bicep`, `powershell`, etc.)
@@ -825,7 +806,7 @@ If any check fails, **fix the value before returning output**. Do not return out
 >
 > **Common mistake — skipping file write:** The most frequent intake failure is generating metadata in the chat response but never writing it to the file. Check 8 above catches this. If the heading is missing from the file, you **must** append the metadata block before completing intake.
 >
-> **Common mistake — invalid domains:** Agents sometimes produce domain names like "Security", "Encryption", "Key Management", "Document Intelligence", "Speech", or "Bot Service" — these are **not** valid domains for any exam. They are Azure service or technology names, not domains. Re-read the R-041 domain tables and choose the correct domain based on the primary resource. For AI-102, questions about Document Intelligence, Speech, or Translator must map to **AI Services**.
+> **Common mistake — invalid domains:** Agents sometimes produce domain names like "Security", "Encryption", "Key Management", "Storage Account", or "Load Balancer" — these are **not** valid domains for any exam. They are Azure service or technology names, not domains. Re-read the R-041 domain tables and choose the correct domain based on the primary resource.
 >
 > **Common mistake — exam coverage metadata wording:** `Exam Domain`, `Skill`, and `Task` must use the **exact wording** from the exam README. Do not paraphrase, abbreviate, or substitute synonyms. Read the exam README hierarchy and copy the strings verbatim.
 >
@@ -945,10 +926,10 @@ When the user provides a task name, search the exam README files to locate the t
 
 ### Task Search Procedure
 
-1. **Read exam READMEs** — Read the coverage tables from `certs/AZ-104/README.md`, `certs/AI-102/README.md`, and `certs/AI-900/README.md`.
+1. **Read exam READMEs** — Read the coverage tables from `certs/AZ-104/README.md` and `certs/AZ-305/README.md`.
 2. **Match the task** — Search for the user-provided task name across all exam README task tables. Use case-insensitive substring matching. The task name must match a table row under a `####` skill heading.
 3. **Derive metadata from the match:**
-   - **Exam** — The exam code (`AI-102`, `AZ-104`, or `AI-900`) from the README where the task was found.
+   - **Exam** — The exam code (`AZ-104` or `AZ-305`) from the README where the task was found.
    - **Domain** — Map the exam domain heading to the simplified domain from R-041 closed-set tables.
    - **Exam Domain** — The full `### Domain N: …` heading text (omit weight percentage).
    - **Skill** — The `####` sub-heading under which the task appears.

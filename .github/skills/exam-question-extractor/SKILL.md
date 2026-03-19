@@ -74,7 +74,9 @@ Make a **single** edit that replaces the selected `<img>` line(s) with the fully
 
 1. From the attached screenshot image(s), extract all visible text.
 2. **Detect answer state:** Inspect the screenshot for signs that the question has already been submitted and graded — for example, a selected answer highlighted in green or red, a ✓ / ✗ icon, or an "Correct" / "Incorrect" banner. Mark the question as **answered** if any such indicator is present; otherwise mark it as **blank**.
-3. **Identify exam metadata:** Determine the practice-exam file's parent exam (e.g., AZ-104, AI-102, AI-900). Read the corresponding exam README (e.g., `certs/AZ-104/README.md`) to locate the domain/skill/task hierarchy. Match the question to the most specific domain, skill, and task(s) using best-effort reasoning.
+3. **Identify exam metadata:** Determine the practice-exam file's parent exam (e.g., AZ-104, AZ-305). Read the corresponding exam README (e.g., `certs/AZ-104/README.md`) to locate the domain/skill/task hierarchy. Match the question to the most specific domain, skill, and task(s) using best-effort reasoning.
+
+    Legacy note: AI-102 and AI-900 can still be processed when working on completed/retired exam artifacts.
 4. Identify question type:
    - Yes / No
    - Multiple Choice

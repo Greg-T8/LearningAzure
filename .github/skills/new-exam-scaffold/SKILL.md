@@ -243,7 +243,7 @@ Add the new exam to the **Certifications table** (under `## 📚 Certifications`
 Add the exam code to the title scope:
 
 ```markdown
-Standards for all Terraform and Bicep labs (AI-102, AZ-104, <NEW-EXAM>).
+Standards for all Terraform and Bicep labs (AZ-104, AZ-305, <NEW-EXAM>).
 ```
 
 If the exam has a distinct resource focus (e.g., AI services vs. infrastructure), add an exam-specific resource prefix table under `§2.2 Resource Naming` following the format of existing prefix tables:
@@ -259,7 +259,7 @@ If the exam has a distinct resource focus (e.g., AI services vs. infrastructure)
 Add the exam to the `Project` tag examples in `§1.2 Required Tags`:
 
 ```markdown
-| Project | AI-102 / AZ-104 / <NEW-EXAM> |
+| Project | AZ-104 / AZ-305 / <NEW-EXAM> |
 ```
 
 ### 2.3 lab-shared-contract SKILL.md
@@ -273,7 +273,7 @@ Add the exam to the `Project` tag examples in `§1.2 Required Tags`:
 **R-005** — Add the exam code to the `Project` tag examples:
 
 ```markdown
-| Project | Uppercase: `AI-102` or `AZ-104` or `<NEW-EXAM>` |
+| Project | Uppercase: `AZ-104` or `AZ-305` or `<NEW-EXAM>` |
 ```
 
 **New R-0xx** (if exam has distinct resource types) — Add an exam-specific resource naming rule following the pattern of R-002 and R-003:

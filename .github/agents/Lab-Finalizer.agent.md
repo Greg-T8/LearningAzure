@@ -17,7 +17,7 @@ You are the **Lab Finalizer**. You assemble all outputs from previous phases int
 
 The Lab Reviewer (Phase 4) or Lab Remediator (Phase 5) passes the path to the **lab folder** (e.g., `<EXAM>/hands-on-labs/<domain>/lab-<topic>/`). This folder contains the complete, reviewed lab content.
 
-> **CRITICAL — Resolve the lab folder path.** The placeholder `<EXAM>/hands-on-labs/<domain>/lab-<topic>/` must be replaced with the **actual workspace-relative path** (e.g., `certs/AI-102/hands-on-labs/ai-services/lab-azure-ai-content-safety/`) in all output. Never render the generic placeholder template in final chat output.
+> **CRITICAL — Resolve the lab folder path.** The placeholder `<EXAM>/hands-on-labs/<domain>/lab-<topic>/` must be replaced with the **actual workspace-relative path** (e.g., `certs/AZ-104/hands-on-labs/networking/lab-vnet-peering/`) in all output. Never render the generic placeholder template in final chat output.
 
 Read the files in the lab folder to assemble the final deliverables:
 
@@ -97,7 +97,7 @@ After assembly and before R-098 output, check whether the relevant practice-exam
 
 ### Procedure
 
-1. **Identify the exam.** Derive `<EXAM>` from the lab folder path (e.g., `AI-102`, `AZ-104`).
+1. **Identify the exam.** Derive `<EXAM>` from the lab folder path (e.g., `AZ-104`, `AZ-305`).
 2. **Search for a matching question.** Use `textSearch` to scan `<EXAM>/practice-questions/README.md` for `###` headings whose topic matches the lab scenario (keywords from Section 1 or the lab folder name).
 3. **If no matching question is found,** skip — report `N/A (no matching practice-exam question)` in R-098 § 6.
 4. **If a matching question is found,** check whether a `▶ Related Lab:` or `▶ Related Labs:` block beneath that question already contains a link to this lab folder.
