@@ -10,6 +10,7 @@ Storage:
 - (1-10) Configure access to storage
 - (11-20) Configure and manage storage accounts
 - (21-29) Configure Azure Files and Blob storage
+	- 21-29 (Complete)
 
 
 

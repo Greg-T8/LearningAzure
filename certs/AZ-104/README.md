@@ -74,15 +74,15 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 | Skill | Task | Qs | Labs |
 | :--- | :--- | -: | -: |
 | Configure access to storage (5 tasks) | Configure Azure Storage firewalls and virtual networks | 3 | 0 |
-|  | Create and use shared access signature (SAS) tokens | 4 | 0 |
+|  | Create and use shared access signature (SAS) tokens | 3 | 0 |
 |  | Configure stored access policies | 1 | 0 |
-|  | Manage access keys | 3 | 0 |
-|  | Configure identity-based access for Azure Files | 1 | 0 |
+|  | Manage access keys | 2 | 0 |
+|  | Configure identity-based access for Azure Files | 0 | 0 |
 | Configure and manage storage accounts (5 tasks) | Create and configure storage accounts | 0 | 0 |
 |  | Configure Azure Storage redundancy | 1 | 0 |
 |  | Configure object replication | 1 | 1 |
 |  | Configure storage account encryption | 0 | 0 |
-|  | Manage data by using Azure Storage Explorer and AzCopy | 0 | 2 |
+|  | Manage data by using Azure Storage Explorer and AzCopy | 1 | 2 |
 | Configure Azure Files and Azure Blob Storage (7 tasks) | Create and configure a file share in Azure Storage | 2 | 0 |
 |  | Create and configure a container in Blob Storage | 0 | 0 |
 |  | Configure storage tiers | 0 | 0 |
