@@ -20,8 +20,9 @@ Active exam scope for lab placement is strictly limited to:
 
 * `AZ-104`
 * `AZ-305`
+* `AI-103`
 
-`AI-102` and `AI-900` are completed/retired tracks and are not allowed destinations for new labs. If a scenario originates from legacy AI content, map it to the closest valid active exam objective (`AZ-104` or `AZ-305`) and document that mapping in the README scenario analysis.
+`AI-900` is a completed/retired track and is not an allowed destination for new labs. If a scenario originates from legacy AI-900 content, map it to the closest valid active exam objective (`AZ-104`, `AZ-305`, or `AI-103`) and document that mapping in the README scenario analysis.
 
 ---
 
@@ -148,7 +149,7 @@ README must contain:
 9. Cleanup (brief)
 10. Scenario Analysis (correct + incorrect reasoning)
 11. Key Learning Points (5–8)
-12. Related `<EXAM>` Objectives (`AZ-104` or `AZ-305` only)
+12. Related `<EXAM>` Objectives (`AZ-104`, `AZ-305`, or `AI-103`)
 13. Additional Resources
 14. Related Labs (0–2)
 
@@ -177,7 +178,7 @@ Follow the `mermaid-styling` skill (`~/LocalCode/Agent-Toolkit/skills/mermaid-st
 
 - **M-001** — Base theme (neutral canvas)
 - **M-002** — AZ-104 class definitions
-- **M-003** — AI-102 class definitions (legacy-only, for historical artifacts)
+- **M-003** — AI-103 class definitions
 - **M-004** — Container styling (VNet/subnet borders)
 - **M-005** — Usage pattern (`:::` syntax)
 - **M-006** — Design principles
@@ -191,7 +192,7 @@ Load the skill and apply every applicable rule when generating a Mermaid diagram
 Create under:
 
 ```
-certs/<EXAM>/hands-on-labs/<domain>/lab-<topic>/  where `<EXAM>` ∈ {`AZ-104`, `AZ-305`}
+certs/<EXAM>/hands-on-labs/<domain>/lab-<topic>/  where `<EXAM>` ∈ {`AZ-104`, `AZ-305`, `AI-103`}
 ```
 
 ### IaaC

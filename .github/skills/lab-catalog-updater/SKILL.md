@@ -1,6 +1,6 @@
 ---
 name: lab-catalog-updater
-description: 'Scan and update hands-on-labs README.md files with accurate lab catalogs, statistics, and cross-references. Use when asked to update lab README, refresh lab catalog, update lab statistics, or update Related Labs and Related Practice Exam Questions sections for AZ-104 or AZ-305. Legacy support remains for completed/retired tracks (AI-102, AI-900) when explicitly requested.'
+description: 'Scan and update hands-on-labs README.md files with accurate lab catalogs, statistics, and cross-references. Use when asked to update lab README, refresh lab catalog, update lab statistics, or update Related Labs and Related Practice Exam Questions sections for AZ-104, AZ-305, or AI-103. Legacy support remains for completed/retired tracks (AI-900) when explicitly requested.'
 user-invokable: false
 argument-hint: '[exam] [scope]'
 ---
@@ -23,10 +23,10 @@ This skill applies to active exam-specific hands-on-labs directories:
 
 - `certs/AZ-104/hands-on-labs/README.md`
 - `certs/AZ-305/hands-on-labs/README.md`
+- `certs/AI-103/hands-on-labs/README.md`
 
 Legacy/archival support (explicit request only):
 
-- `certs/AI-102/hands-on-labs/README.md`
 - `certs/AI-900/hands-on-labs/README.md` (if present)
 
 ## Filesystem-First Fidelity Rule
@@ -109,8 +109,8 @@ For each individual lab's README.md:
 **Related Practice Exam Questions Guidelines:**
 
 - Keep links tightly aligned to the lab's primary objectives
-- Prefer question links from the same exam track (AZ-104, AZ-305)
-- Use AI-102 or AI-900 question links only when maintaining legacy exam artifacts
+- Prefer question links from the same exam track (AZ-104, AZ-305, AI-103)
+- Use AI-900 question links only when maintaining legacy exam artifacts
 - Limit to 3 question links maximum
 - Use relative paths from the current lab location
 - Maintain the `▶` arrow prefix

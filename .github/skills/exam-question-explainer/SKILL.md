@@ -27,9 +27,9 @@ Explain the reasoning behind the outcome:
 - If the answer was **incorrect**, explain why it was wrong and why the correct answer is correct.
 - If the answer was **correct**, explain why it is correct and why the other options are incorrect or less appropriate.
 
-Assume the context is **Microsoft certification exams** (for example, AZ-104, AZ-305, AZ-500, etc.). Focus on **exam-relevant reasoning**, not real-world overengineering.
+Assume the context is **Microsoft certification exams** (for example, AZ-104, AZ-305, AI-103, AZ-500, etc.). Focus on **exam-relevant reasoning**, not real-world overengineering.
 
-Legacy note: AI-102 and AI-900 are maintained as completed/retired tracks; include them only when the user is working with historical content from those exams.
+AI-103 is an active track. AI-900 is maintained as a completed/retired track; include it only when the user is working with historical content from that exam.
 
 ## Official Exam Explanation & Reference Inheritance
 

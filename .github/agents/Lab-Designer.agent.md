@@ -69,9 +69,9 @@ Follow `lab-readme-authoring` R-140 for per-section content guidelines. Key requ
 
 ### Question Bank Scanning (Task Mode Only)
 
-When `Intake Mode: Task`, **before** generating the README, scan the practice questions folder for the identified exam (e.g., `certs/AZ-104/practice-questions/`, `certs/AZ-305/practice-questions/`) to find questions related to the task. This helps calibrate the lab’s depth and focus:
+When `Intake Mode: Task`, **before** generating the README, scan the practice questions folder for the identified exam (e.g., `certs/AZ-104/practice-questions/`, `certs/AZ-305/practice-questions/`, `certs/AI-103/practice-questions/`) to find questions related to the task. This helps calibrate the lab's depth and focus:
 
-Legacy note: `AI-102` and `AI-900` are completed/retired tracks; scan them only when explicitly maintaining historical content.
+Legacy note: `AI-900` is a completed/retired track; scan it only when explicitly maintaining historical content.
 
 1. Search practice question files for the task name, related keywords, and associated Azure services.
 2. Note the types of questions asked (multiple choice, drag-and-drop, yes/no) and the specific scenarios tested.

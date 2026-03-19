@@ -77,7 +77,7 @@ Pattern:
 
 ---
 
-#### Legacy (Completed/Retired) AI-102 Prefixes
+#### AI-103 Prefixes
 
 | Resource            | Prefix          |
 | ------------------- | --------------- |
@@ -92,7 +92,7 @@ Pattern:
 
 OpenAI accounts require random suffix for global uniqueness.
 
-Use this table only when maintaining existing AI-102 lab artifacts.
+Use this table for AI-103 labs. Legacy AI-102 artifacts also follow these conventions.
 
 ---
 

@@ -129,11 +129,12 @@ Which exam is this question for?
 
 1. `AZ-104`
 2. `AZ-305`
+3. `AI-103`
 ```
 
 The exam-type question is reserved for **post-extraction fallback only** (see R-041). Never include it in an initial `VSCode/askQuestions` call before the question content has been analyzed.
 
-Legacy note: `AI-102` and `AI-900` are completed/retired tracks and should only be used when explicitly maintaining historical exam artifacts.
+Legacy note: `AI-900` is a completed/retired track and should only be used when explicitly maintaining historical exam artifacts.
 
 Once the user responds, capture the values and proceed with extraction.
 
@@ -588,7 +589,7 @@ Extract **all** of the following fields from the exam question:
 
 | Field            | Type     | Description                                                        |
 | ---------------- | -------- | ------------------------------------------------------------------ |
-| `Exam`           | string   | Certification code: `AZ-104` or `AZ-305`                           |
+| `Exam`           | string   | Certification code: `AZ-104`, `AZ-305`, or `AI-103`                |
 | `Domain`         | string   | Azure domain (e.g., Networking, Storage, Generative AI)            |
 | `Exam Domain`    | string   | Full domain name from exam README `### Domain N:` heading (omit weight) |
 | `Skill`          | string   | Skill name from exam README `####` sub-heading                     |
@@ -727,7 +728,7 @@ Return a structured block. **Field order and capitalization are mandatory** — 
 
 ### Metadata
 
-- Exam: [AZ-104 | AZ-305]
+- Exam: [AZ-104 | AZ-305 | AI-103]
 - Domain: [exact domain from R-041 closed-set tables]
 - Exam Domain: [full domain name from exam README — omit weight]
 - Skill: [skill name from exam README]
@@ -785,7 +786,7 @@ After extracting metadata per R-041 and **before** returning output, run this va
 4. **Capitalization check** — Confirm all values use Title Case (except `Topic` which is kebab-case lowercase).
 5. **Completeness check** — Confirm all nine metadata fields are populated (including Deployment Method from user input and Intake Mode).
 6. **Field-level checks:**
-   - [ ] `Exam` matches one of: `AZ-104`, `AZ-305`
+   - [ ] `Exam` matches one of: `AZ-104`, `AZ-305`, `AI-103`
    - [ ] `Topic` is kebab-case, ≤25 characters, no special characters
    - [ ] `Topic` is identical to the `<derived-slug>` produced and gate-checked in R-040 (not independently re-derived)
    - [ ] `Topic` does not contain deployment-method terms (`terraform`, `bicep`, `powershell`, etc.)
@@ -926,10 +927,10 @@ When the user provides a task name, search the exam README files to locate the t
 
 ### Task Search Procedure
 
-1. **Read exam READMEs** — Read the coverage tables from `certs/AZ-104/README.md` and `certs/AZ-305/README.md`.
+1. **Read exam READMEs** — Read the coverage tables from `certs/AZ-104/README.md`, `certs/AZ-305/README.md`, and `certs/AI-103/README.md`.
 2. **Match the task** — Search for the user-provided task name across all exam README task tables. Use case-insensitive substring matching. The task name must match a table row under a `####` skill heading.
 3. **Derive metadata from the match:**
-   - **Exam** — The exam code (`AZ-104` or `AZ-305`) from the README where the task was found.
+   - **Exam** — The exam code (`AZ-104`, `AZ-305`, or `AI-103`) from the README where the task was found.
    - **Domain** — Map the exam domain heading to the simplified domain from R-041 closed-set tables.
    - **Exam Domain** — The full `### Domain N: …` heading text (omit weight percentage).
    - **Skill** — The `####` sub-heading under which the task appears.

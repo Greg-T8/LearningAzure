@@ -46,7 +46,7 @@ All names are **static by default**. Random suffixes are only added for resource
 
 ---
 
-## R-003 (Legacy): Resource Naming — AI-102 Prefixes
+## R-003: Resource Naming — AI-103 Prefixes
 
 Pattern: `<prefix>-<role>[-instance]`
 
@@ -67,7 +67,7 @@ All names are **static by default**. Random suffixes are only added for resource
 
 Cognitive Services resources (OpenAI, Multi-service, Vision, Language) require random suffix because they enter soft-deleted state on deletion — see R-028.
 
-This requirement is retained for completed/retired AI-102 artifact maintenance only.
+These prefixes apply to AI-103 labs. Legacy AI-102 artifacts also follow these conventions.
 
 ---
 
@@ -84,7 +84,7 @@ No exam code in stack name.
 | Tag              | Rule                                                        |
 | ---------------- | ----------------------------------------------------------- |
 | Environment      | Always `Lab`                                                |
-| Project          | Uppercase: `AZ-104` or `AZ-305`                          |
+| Project          | Uppercase: `AZ-104`, `AZ-305`, or `AI-103`               |
 | Domain           | e.g., Networking, Storage, Generative AI                    |
 | Purpose          | Descriptive (e.g., VNet Peering)                            |
 | Owner            | `Greg Tate`                                                 |
