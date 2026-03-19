@@ -6,6 +6,13 @@ Identities & Governance - 1/25
 - (10-25) Manage Azure subscriptions and governance
   - 10-25 (Complete)
 
+Storage:
+- (1-10) Configure access to storage
+- (11-20) Configure and manage storage accounts
+- (21-29) Configure Azure Files and Blob storage
+
+
+
 Compute:
 - (1-15) Automate deployment of resources by using Azure Resource Manager (ARM) templates or Bicep files
 	- 1-15 (Complete)
