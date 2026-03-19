@@ -16,6 +16,7 @@
 
 
 
+
 ## Exam Question Scenario
 
 Your organization is using Azure Blobs for storing data. You enable blob versioning for a storage account.
