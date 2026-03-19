@@ -73,7 +73,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 
 | Skill | Task | Qs | Labs |
 | :--- | :--- | -: | -: |
-| Configure access to storage (5 tasks) | Configure Azure Storage firewalls and virtual networks | 2 | 0 |
+| Configure access to storage (5 tasks) | Configure Azure Storage firewalls and virtual networks | 3 | 0 |
 |  | Create and use shared access signature (SAS) tokens | 4 | 0 |
 |  | Configure stored access policies | 1 | 0 |
 |  | Manage access keys | 3 | 0 |
