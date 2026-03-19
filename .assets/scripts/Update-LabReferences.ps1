@@ -49,6 +49,13 @@ $DomainConfig = @{
     'AI-900'  = [ordered]@{
         'information-extraction' = 'Information Extraction'
     }
+    'AZ-305'  = [ordered]@{
+        'identity-governance-monitoring' = 'Identity, Governance & Monitoring'
+        'data-storage'                   = 'Data Storage'
+        'business-continuity'            = 'Business Continuity'
+        'compute'                        = 'Compute'
+        'networking'                     = 'Networking'
+    }
 }
 
 $Main = {

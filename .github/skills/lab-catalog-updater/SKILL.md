@@ -1,6 +1,6 @@
 ---
 name: lab-catalog-updater
-description: 'Scan and update hands-on-labs README.md files with accurate lab catalogs, statistics, and cross-references. Use when asked to update lab README, refresh lab catalog, update lab statistics, or update Related Labs and Related Practice Exam Questions sections for AI-102, AZ-104, or AI-900.'
+description: 'Scan and update hands-on-labs README.md files with accurate lab catalogs, statistics, and cross-references. Use when asked to update lab README, refresh lab catalog, update lab statistics, or update Related Labs and Related Practice Exam Questions sections for AI-102, AZ-104, AZ-305, or AI-900.'
 user-invokable: false
 argument-hint: '[exam] [scope]'
 ---
@@ -23,6 +23,7 @@ This skill applies to exam-specific hands-on-labs directories:
 
 - `certs/AI-102/hands-on-labs/README.md`
 - `certs/AZ-104/hands-on-labs/README.md`
+- `certs/AZ-305/hands-on-labs/README.md`
 - `certs/AI-900/hands-on-labs/README.md` (if present)
 
 ## Filesystem-First Fidelity Rule
@@ -61,6 +62,7 @@ Sections must appear in this order:
 - List domains in this order:
   - AI-102: Generative AI, Agentic, Computer Vision, Natural Language Processing, Knowledge Mining
   - AZ-104: Storage, Compute, Monitoring, Identity & Governance, Networking
+  - AZ-305: Identity, Governance & Monitoring, Data Storage, Business Continuity, Compute, Networking
 
 **3. Labs Section (`## 🧪 Labs`)**
 
