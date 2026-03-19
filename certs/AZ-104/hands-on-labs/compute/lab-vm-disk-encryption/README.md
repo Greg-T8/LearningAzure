@@ -5,9 +5,10 @@
 **Task:** Configure Azure Disk Encryption
 
 **Practice Exam Questions:**
-- [Enable VM disk encryption](../../../practice-questions/README.md#enable-vm-disk-encryption)
 - [Encrypt VM Disk With Key Vault](../../../practice-questions/README.md#encrypt-vm-disk-with-key-vault)
+- [Enable VM disk encryption](../../../practice-questions/README.md#enable-vm-disk-encryption)
 - [Enable disk encryption on Linux VM](../../../practice-questions/README.md#enable-disk-encryption-on-linux-vm)
+
 
 
 

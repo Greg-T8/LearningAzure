@@ -6,9 +6,10 @@
 
 **Practice Exam Questions:**
 - [Recover Configuration File from Azure VM Backup](../../../practice-questions/README.md#recover-configuration-file-from-azure-vm-backup)
-- [Restore VM from backup (availability set)](../../../practice-questions/README.md#restore-vm-from-backup-availability-set)
-- [Move Recovery Services vault](../../../practice-questions/README.md#move-recovery-services-vault)
 - [Recover Azure VM from Deleted Backup](../../../practice-questions/README.md#recover-azure-vm-from-deleted-backup)
+- [Move Recovery Services vault](../../../practice-questions/README.md#move-recovery-services-vault)
+- [Restore VM from backup (availability set)](../../../practice-questions/README.md#restore-vm-from-backup-availability-set)
+
 
 
 

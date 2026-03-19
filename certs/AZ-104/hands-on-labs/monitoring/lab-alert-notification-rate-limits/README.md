@@ -6,8 +6,9 @@
 
 **Practice Exam Questions:**
 - [Configure Azure Monitor Alert for Database CPU Usage](../../../practice-questions/README.md#configure-azure-monitor-alert-for-database-cpu-usage)
-- [Configure Azure Monitor Alert Notification Rate Limits](../../../practice-questions/README.md#configure-azure-monitor-alert-notification-rate-limits)
 - [Azure Advisor alerts with Bicep](../../../practice-questions/README.md#azure-advisor-alerts-with-bicep)
+- [Configure Azure Monitor Alert Notification Rate Limits](../../../practice-questions/README.md#configure-azure-monitor-alert-notification-rate-limits)
+
 
 
 
