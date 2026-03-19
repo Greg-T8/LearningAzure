@@ -87,7 +87,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 |  | Create and configure a container in Blob Storage | 0 | 0 |
 |  | Configure storage tiers | 0 | 0 |
 |  | Configure soft delete for blobs and containers | 0 | 0 |
-|  | Configure snapshots and soft delete for Azure Files | 1 | 0 |
+|  | Configure snapshots and soft delete for Azure Files | 2 | 0 |
 |  | Configure blob lifecycle management | 2 | 1 |
 |  | Configure blob versioning | 1 | 1 |
 
