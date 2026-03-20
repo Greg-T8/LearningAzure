@@ -7639,9 +7639,12 @@ You need to restore `VMS1` from backup and configure `VMS1` as part of the same 
 
 Which three actions should you perform in sequence? To answer, move the appropriate actions from the list of possible actions to the answer area and arrange them in the correct order.
 
-A. Select Restore Disks as the Restore Type and restore the data.  
+A. Select Create a virtual machine as the Restore Type and restore the data.  
 B. Select Replace existing as the Restore Type and restore the data.  
-C. Manually create a new VM.  
+C. Select Restore Disks as the Restore Type and restore the data.  
+D. Manually create a new VM.  
+E. Fetch and deploy the deployment template from the Azure Recovery Services vault.  
+F. Select a restore point for VMS1 in the Azure Recovery Services vault.  
 
 Select and order 3:
 
