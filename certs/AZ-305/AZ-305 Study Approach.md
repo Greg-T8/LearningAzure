@@ -265,3 +265,42 @@ So the AZ-305 version of your method for this item becomes:
 That is the pattern you want to practice repeatedly for AZ-305.
 
 I can also turn this into a reusable **AZ-305 Copilot prompt template** for identity, networking, storage, and DR questions.
+
+Given the exam skills and tasks are so vague, how would I even know to that CAE is covered in the exam?
+
+You usually would **not** know from the top-level skill line alone that **CAE** is covered.
+
+For AZ-305, the exam page stays broad on purpose. It says the exam measures “design identity, governance, and monitoring solutions,” and Microsoft explicitly tells candidates to use the linked **study guide** for the detailed skills measured. The current exam page also notes that the English version is being updated on **April 17, 2026**, which is another reason to rely on the current guide and aligned training rather than the one-line domain titles alone. ([Microsoft Learn][1])
+
+The way to infer coverage is this:
+
+1. **Start from the exam domain, not the product name.**
+   In this case, the domain is identity/governance/monitoring. AZ-305’s official learning path for that domain includes a module called **“Design authentication and authorization solutions.”** ([Microsoft Learn][2])
+
+2. **Open the module and inspect the named subtopics.**
+   That module explicitly includes **“Design for conditional access,”** along with related identity design topics such as identity protection and access reviews. Once Conditional Access appears as an explicit subtopic in the official AZ-305 learning content, you should treat important Conditional Access design concepts as fair game. ([Microsoft Learn][3])
+
+3. **For each named subtopic, learn the major first-party concepts underneath it.**
+   CAE is not just some obscure add-on. Microsoft’s own CAE documentation describes it as the mechanism for timely response to policy violations and says that this requires a **“conversation”** between Microsoft Entra and the relying party app. That is exactly why the wording in your sample question points to CAE. ([Microsoft Learn][4])
+
+So the practical answer is:
+
+**You don’t infer “CAE” directly from the vague exam bullet. You infer it from the official AZ-305 content chain:**
+**AZ-305 exam domain → official learning path/module → “Design for conditional access” → major Conditional Access concepts like CAE.** ([Microsoft Learn][1])
+
+A good study rule for AZ-305 is:
+
+* If Microsoft names the topic in the official AZ-305 learning path or module, learn the core design concepts under that topic.
+* If a concept is central enough that Microsoft uses it to explain how that feature actually works architecturally, treat it as in scope.
+* Do not try to memorize every Entra feature by name. Instead, build a map of each exam domain and the major concepts under each official subtopic. ([Microsoft Learn][2])
+
+Applied to your example:
+
+* The exam domain is identity/governance/monitoring. ([Microsoft Learn][1])
+* The official AZ-305 learning content includes Conditional Access. ([Microsoft Learn][2])
+* CAE is a core Conditional Access concept, especially for near-real-time enforcement and the issuer/relying-party “conversation.” ([Microsoft Learn][4])
+* Therefore, a CAE question is a reasonable AZ-305 question. ([Microsoft Learn][2])
+
+The most effective way to use your Copilot workflow for AZ-305 is to maintain a **subtopic inventory** for each exam domain. For example, under **Design identity, governance, and monitoring solutions**, you would at least track things like Conditional Access, identity protection, access reviews, service principals, managed identities, Key Vault, logging, and monitoring because those are reflected in the official learning path/module structure. ([Microsoft Learn][2])
+
+I can help you build that AZ-305 subtopic inventory into a Copilot-friendly checklist.
