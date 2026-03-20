@@ -8,7 +8,7 @@ This log tracks individual study sessions for the **AZ-104** exam. Fill in **End
 
 | # | Date | Start | End | Duration | Notes |
 |:--|:-----|:------|:----|:---------|:------|
-| 20 | 3/20/26 | 4:18 AM |  |  | Configure name resolution and load balancing |
+| 20 | 3/20/26 | 4:18 AM | 5:11 AM | 0h 53m | Configure name resolution and load balancing |
 | 19 | 3/20/26 | 3:23 AM | 4:09 AM | 0h 46m | Implement backup and recovery; auto-closed at last commit |
 | 18 | 3/19/26 | 3:35 AM | 5:17 AM | 1h 42m | Implement and Manage Storage |
 | 17 | 3/18/26 | 4:29 AM | 5:13 AM | 0h 44m | Deploy and Manage Azure Compute Resources |
