@@ -87,6 +87,10 @@ $Main = {
     else {
         Write-Warning "Failed to update README.md"
     }
+
+    # Update each active exam README with hours committed
+    $running = Get-RunningTotal
+    Update-ExamHour -RunningTotal $running -ExamNames $ExamFolders
 }
 
 #region HELPER FUNCTIONS
@@ -628,6 +632,52 @@ $Helpers = {
         }
 
         return $table
+    }
+
+    function Update-ExamHour {
+        # Update each active exam README with total hours committed
+        param(
+            [hashtable]$RunningTotal,
+            [string[]]$ExamNames
+        )
+
+        $startMarker = '<!-- HOURS_COMMITTED -->'
+        $endMarker   = '<!-- /HOURS_COMMITTED -->'
+
+        foreach ($exam in $ExamNames) {
+            $examReadme = Join-Path $RepoRoot "certs/$exam/README.md"
+
+            # Skip exams without a README
+            if (-not (Test-Path -Path $examReadme)) {
+                Write-Warning "Exam README not found: $examReadme"
+                continue
+            }
+
+            $content = Get-Content -Path $examReadme -Raw -Encoding utf8
+
+            # Skip READMEs without the hours markers
+            if (-not ($content.Contains($startMarker) -and $content.Contains($endMarker))) {
+                continue
+            }
+
+            # Look up this exam's running total hours
+            $hours = 0.0
+            if ($RunningTotal.ContainsKey($exam)) { $hours = $RunningTotal[$exam] }
+
+            # Format hours value (omit decimal for zero)
+            $hoursStr = if ($hours -eq 0) { '0h' } else { "$($hours.ToString('0.0'))h" }
+
+            # Replace content between markers
+            $pattern  = [regex]::Escape($startMarker) + '.*?' + [regex]::Escape($endMarker)
+            $newValue = "$startMarker**Hours Committed:** $hoursStr$endMarker"
+            $newContent = [regex]::Replace($content, $pattern, $newValue)
+
+            # Write updated content back to file
+            if ($PSCmdlet.ShouldProcess($examReadme, 'Update hours committed')) {
+                Set-Content -Path $examReadme -Value $newContent -NoNewline -Encoding utf8
+                Write-Host "  Updated hours committed for $exam ($hoursStr)" -ForegroundColor Cyan
+            }
+        }
     }
 
     function Update-Readme {

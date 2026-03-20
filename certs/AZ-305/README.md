@@ -19,6 +19,8 @@
 
 **Legend:** Not Started | In Progress | Completed
 
+<!-- HOURS_COMMITTED -->**Hours Committed:** 0h<!-- /HOURS_COMMITTED -->
+
 ---
 
 ## 📊 Exam Coverage

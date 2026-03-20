@@ -100,7 +100,11 @@ Follow the established format from existing exams. Include:
 | 3        | Microsoft Learn  | [Microsoft Learning Paths](./learning-paths/README.md)          | Not Started |         |           |      |
 
 **Legend:** Not Started | In Progress | Completed
+
+<!-- HOURS_COMMITTED -->**Hours Committed:** 0h<!-- /HOURS_COMMITTED -->
 ```
+
+The `<!-- HOURS_COMMITTED -->` markers allow `Update-CommitStats.ps1` to auto-update the hours value from the running total.
 
 **Coverage section preamble:**
 
