@@ -17,6 +17,7 @@
 
 
 
+
 ## Exam Question Scenario
 
 You have an Azure subscription that contains virtual machines. You have the following JSON request body for a REST API call:

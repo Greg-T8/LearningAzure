@@ -17,7 +17,7 @@
 | 3        | Video            | [John Savill's Training](./video-courses/savill/README.md) | Completed | 1/29/26 | 2/1/26          | 4      |
 | 4        | Microsoft Learn | [Microsoft Learning Paths](./learning-paths/README.md)          | Completed | 1/14/26 | 1/25/26   | 11   |
 
-<!-- HOURS_COMMITTED -->**Hours Committed:** 26.0h<!-- /HOURS_COMMITTED -->
+<!-- HOURS_COMMITTED -->**Hours Committed:** 26.5h<!-- /HOURS_COMMITTED -->
 
 ---
 

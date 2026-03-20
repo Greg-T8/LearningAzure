@@ -6,9 +6,10 @@
 
 **Practice Exam Questions:**
 - [Configure Azure App Service Plan for Website Hosting](../../../practice-questions/README.md#configure-azure-app-service-plan-for-website-hosting)
-- [Resolve App Service Plan Selection](../../../practice-questions/README.md#resolve-app-service-plan-selection)
 - [App Service Plan Selection](../../../practice-questions/README.md#app-service-plan-selection)
+- [Resolve App Service Plan Selection](../../../practice-questions/README.md#resolve-app-service-plan-selection)
 - [App Service pricing tier for autoscale](../../../practice-questions/README.md#app-service-pricing-tier-for-autoscale)
+
 
 
 

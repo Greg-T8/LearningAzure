@@ -8,6 +8,7 @@
 - [AzCopy authorization methods](../../../practice-questions/README.md#azcopy-authorization-methods)
 
 
+
 ## Exam Question Scenario
 
 You have storage accounts in your Azure subscription for different purposes. The storage accounts have blob containers and file shares configured.

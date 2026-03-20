@@ -6,6 +6,8 @@
 
 **Practice Exam Questions:**
 - [Configure Standard Load Balancer Outbound Traffic and IP Allocation](../../../practice-questions/README.md#configure-standard-load-balancer-outbound-traffic-and-ip-allocation)
+- [Configure Internal Load Balancer](../../../practice-questions/README.md#configure-internal-load-balancer)
+
 
 
 
