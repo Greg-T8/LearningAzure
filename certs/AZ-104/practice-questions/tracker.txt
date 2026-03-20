@@ -24,7 +24,7 @@ Compute:
 - (27-42) Create and configure Azure App Service
 	- 27-42 (Complete)
 
-Networking - 13/35
+Networking
 - (1-11) Configure and manage virtual networks in Azure
 	- 1-11 (Complete)
 - (12-23) Configure secure access to virtual networks
@@ -32,9 +32,9 @@ Networking - 13/35
 - (24-35) Configure name resolution and load balancing
 	- 24-30 (In Progress)
 
-Monitoring - 16/27
+Monitoring
 - (1-15) Monitor resource in Azure
 	- 1-15 (Complete)
 - (16-27) Implement backup and recovery
-	- 16-22 (In Progress)
+	- 16-27 (Complete)
 	

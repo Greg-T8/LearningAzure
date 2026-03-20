@@ -48,7 +48,7 @@ Accounts for questions missed or unsure about in the practice exams.
     * [Edit ARM Template to Inherit Resource Group Location](#edit-arm-template-to-inherit-resource-group-location)
     * [Convert Array to Object](#convert-array-to-object)
     * [Export resource group template](#export-resource-group-template)
-    * [Case Study — Solution Evaluation](#case-study-solution-evaluation)
+    * [Case Study — Solution Evaluation](#case-study--solution-evaluation)
     * [Deployment Mode Deleted Resources](#deployment-mode-deleted-resources)
     * [Resource dependencies in Bicep](#resource-dependencies-in-bicep)
     * [Complete ARM template deployment command](#complete-arm-template-deployment-command)
@@ -82,11 +82,11 @@ Accounts for questions missed or unsure about in the practice exams.
     * [Swap App Service Deployment Slots with Preview](#swap-app-service-deployment-slots-with-preview)
 * [Implement and Manage Virtual Networking](#implement-and-manage-virtual-networking)
   * [Configure and manage virtual networks in Azure](#configure-and-manage-virtual-networks-in-azure)
-    * [VNet Peering — Missing Reverse Peering](#vnet-peering-missing-reverse-peering)
+    * [VNet Peering — Missing Reverse Peering](#vnet-peering--missing-reverse-peering)
     * [VNet Peering with ExpressRoute](#vnet-peering-with-expressroute)
     * [Configure Layered Network Security](#configure-layered-network-security)
     * [Standard Load Balancer public IPs](#standard-load-balancer-public-ips)
-    * [Case Study — Container Group Placement](#case-study-container-group-placement)
+    * [Case Study — Container Group Placement](#case-study--container-group-placement)
   * [Configure secure access to virtual networks](#configure-secure-access-to-virtual-networks)
     * [Design NSG to Block RDP from Internet](#design-nsg-to-block-rdp-from-internet)
     * [Configure Private Link Service Source IP](#configure-private-link-service-source-ip)
@@ -121,8 +121,9 @@ Accounts for questions missed or unsure about in the practice exams.
     * [Recover Configuration File from Azure VM Backup](#recover-configuration-file-from-azure-vm-backup)
     * [Recover Azure VM from Deleted Backup](#recover-azure-vm-from-deleted-backup)
     * [Move Recovery Services vault](#move-recovery-services-vault)
-    * [Site Recovery — Recovery Steps](#site-recovery-recovery-steps)
+    * [Site Recovery — Recovery Steps](#site-recovery--recovery-steps)
     * [Delete Recovery Services vault](#delete-recovery-services-vault)
+    * [Azure Site Recovery High Churn](#azure-site-recovery-high-churn)
 
 ---
 
@@ -8012,3 +8013,59 @@ To delete a Recovery Services vault you must remove or permanently delete all ba
 </details>
 
 ---
+
+#### Azure Site Recovery High Churn
+
+**Domain:** Monitor and Maintain Azure Resources
+**Skill:** Implement backup and recovery
+**Task:** Configure Azure Site Recovery for Azure resources
+
+You are an Azure administrator for an organization that hosts mission-critical applications in Azure in a multi-region deployment. One of these Azure VMs hosts a critical SQL Server database.
+
+You want to initiate an Azure VM disaster recovery using Azure Site Recovery. You plan to use Azure Site Recovery High Churn support to achieve enhanced recovery point objective (RPO) performance.
+
+You need to implement the solution.
+
+What does Azure Site Recovery High Churn use?
+
+A. Azure Elastic SAN  
+B. Azure Files  
+C. Standard general-purpose v2 storage  
+D. Premium block blob storage  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-20-04-11-47.png' width=600>
+
+</details>
+
+<details open>
+<summary>💡 Click to expand explanation</summary>
+
+**Why the selected answer is correct**
+
+Azure Site Recovery High Churn uses premium block blob storage. In this scenario, since you are performing disaster recovery on a virtual machine (VM) that hosts a database, you have planned to use Azure Site Recovery High Churn support. Azure Site Recovery supports churn (data change rate) up to 100 MB/s per VM leveraging High Churn support. This will allow you to achieve better recovery point objective (RPO) performance for your high-churning workloads. This feature at the time of writing is in Public Preview.
+
+<img src='.img/2026-03-20-04-15-29.png' width=600>
+
+**Why the other options are incorrect**
+
+Azure Site Recovery High Churn does not use standard general-purpose v2 storage. This is the standard storage account type for blobs, file shares, queues, and tables and is recommended for most scenarios using blob storage or one of the other Azure Storage services. Azure Site Recovery High Churn support does not use standard general-purpose v2 storage, but rather uses the premium block blob to achieve high transaction rates.
+
+Azure Site Recovery High Churn does not use Azure Files. Azure Files offers fully managed file shares in the cloud that are accessible via the industry standard Server Message Block (SMB) protocol, Network File System (NFS) protocol, and Azure Files REST API. Azure file shares can be mounted concurrently by cloud or on-premises deployments.
+
+Azure Site Recovery High Churn does not use Azure Elastic SAN. Azure Elastic SAN is a fully integrated solution that simplifies deploying, scaling, managing, and configuring a SAN, while also offering built-in cloud capabilities like high availability. This specific feature at the time of writing is in Preview.
+
+**References**
+
+- [About Site Recovery](https://learn.microsoft.com/azure/site-recovery/site-recovery-overview)
+- [Azure VM Disaster Recovery - High Churn Support (Public Preview)](https://learn.microsoft.com/azure/site-recovery/concepts-azure-to-azure-high-churn-support)
+- [Premium block blob storage accounts](https://learn.microsoft.com/azure/storage/blobs/storage-blob-block-blob-premium)
+- [Storage account overview](https://learn.microsoft.com/azure/storage/common/storage-account-overview)
+- [What is Azure Files?](https://learn.microsoft.com/azure/storage/files/storage-files-introduction)
+- [What is Azure Elastic SAN? Preview](https://learn.microsoft.com/azure/storage/elastic-san/elastic-san-introduction)
+
+</details>
+
+▶ Related Lab: []()
