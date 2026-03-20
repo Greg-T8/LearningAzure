@@ -143,7 +143,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 |  | Configure service endpoints for Azure PaaS | 1 | 0 |
 |  | Configure private endpoints for Azure PaaS | 1 | 1 |
 | Configure name resolution and load balancing (3 tasks) | Configure Azure DNS | 3 | 0 |
-|  | Configure an internal or public load balancer | 1 | 1 |
+|  | Configure an internal or public load balancer | 2 | 1 |
 |  | Troubleshoot load balancing | 2 | 1 |
 
 </details>
@@ -164,7 +164,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 |  | Create an Azure Backup vault | 0 | 0 |
 |  | Create and configure a backup policy | 0 | 0 |
 |  | Perform backup and restore operations by using Azure Backup | 6 | 1 |
-|  | Configure Azure Site Recovery for Azure resources | 1 | 0 |
+|  | Configure Azure Site Recovery for Azure resources | 2 | 0 |
 |  | Perform a failover to a secondary region by using Site Recovery | 0 | 0 |
 |  | Configure and interpret reports and alerts for backups | 2 | 0 |
 
