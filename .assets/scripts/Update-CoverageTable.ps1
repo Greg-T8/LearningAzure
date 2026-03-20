@@ -427,14 +427,18 @@ $Helpers = {
             # Domain heading (supports both markdown heading and details summary formats)
             if ($line -match '^### Domain (\d+):' -or $line -match '^<summary><b>Domain (\d+):') {
                 $domainNum = $Matches[1]
-                $currentDomain = @{ Qs = 0; Labs = 0; Tasks = 0; Covered = 0 }
+                $currentDomain = @{ Qs = 0; Labs = 0; Tasks = 0; Covered = 0; Skills = 0 }
                 $domainStats[$domainNum] = $currentDomain
                 continue
             }
 
             # Task row (4-column format: | skill | task | qs | labs |)
             if ($null -ne $currentDomain -and $line -match '^\|\s*(.*?)\s*\|\s*(?!Task\b|:---)(.+?)\s+\|\s+\d+\s+\|\s+\d+\s+\|') {
+                $skillCell = $Matches[1].Trim()
                 $taskName = $Matches[2].Trim()
+
+                # Count distinct skills (non-empty first cell indicates a new skill)
+                if ($skillCell -ne '') { $currentDomain.Skills++ }
                 $qs = if ($QuestionCounts.ContainsKey($taskName)) { $QuestionCounts[$taskName] } else { 0 }
                 $labs = if ($LabCounts.ContainsKey($taskName)) { $LabCounts[$taskName] } else { 0 }
                 $currentDomain.Tasks++
@@ -484,7 +488,7 @@ $Helpers = {
                     $domainLink = $cells[0].Trim()
                     $weight = $cells[1].Trim()
 
-                    $newLine = "| $domainLink | $weight | $($stats.Qs) | $($stats.Labs) | $($stats.Covered) / $($stats.Tasks) ($pct%) | $indicator |"
+                    $newLine = "| $domainLink | $weight | $($stats.Skills) | $($stats.Qs) | $($stats.Labs) | $($stats.Covered) / $($stats.Tasks) ($pct%) | $indicator |"
                     $output.Add($newLine)
                     $updatedRows++
                 }

@@ -27,11 +27,11 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 
 | Domain | Weight | Skills | Qs | Labs | Tasks Covered | Status |
 | :----- | :----- | -----: | -: | ---: | :------------ | :----: |
-| [1. Identities & Governance](#domain-1) | 20–25% | 14 | 0 | 8 / 15 (53%) | 🟡 |
-| [2. Storage](#domain-2) | 15–20% | 20 | 5 | 11 / 17 (64%) | 🟡 |
-| [3. Compute](#domain-3) | 20–25% | 37 | 6 | 18 / 24 (75%) | 🟢 |
-| [4. Networking](#domain-4) | 15–20% | 15 | 3 | 9 / 13 (69%) | 🟢 |
-| [5. Monitoring & Backup](#domain-5) | 10–15% | 22 | 5 | 9 / 13 (69%) | 🟢 |
+| [1. Identities & Governance](#domain-1) | 20–25% | 3 | 14 | 0 | 8 / 15 (53%) | 🟡 |
+| [2. Storage](#domain-2) | 15–20% | 3 | 20 | 5 | 11 / 17 (64%) | 🟡 |
+| [3. Compute](#domain-3) | 20–25% | 4 | 37 | 6 | 18 / 24 (75%) | 🟢 |
+| [4. Networking](#domain-4) | 15–20% | 3 | 15 | 3 | 9 / 13 (69%) | 🟢 |
+| [5. Monitoring & Backup](#domain-5) | 10–15% | 2 | 22 | 5 | 9 / 13 (69%) | 🟢 |
 
 **Totals:** 215 practice questions · 19 hands-on labs
 
