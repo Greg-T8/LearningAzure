@@ -30,7 +30,7 @@ Networking
 - (12-23) Configure secure access to virtual networks
 	- 13 (In Progress)
 - (24-35) Configure name resolution and load balancing
-	- 24-30 (In Progress)
+	- 24-30 (Complete)
 
 Monitoring
 - (1-15) Monitor resource in Azure
