@@ -20,6 +20,7 @@
 
 
 
+
 ## Exam Question Scenario
 
 You plan to configure object replication between storage accounts in two different regions.
