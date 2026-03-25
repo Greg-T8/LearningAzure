@@ -31,12 +31,12 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 | Domain | Weight | Skills | Qs | Labs | Tasks Covered | Status |
 | :----- | :----- | -----: | -: | ---: | :------------ | :----: |
 | [1. Identities & Governance](#domain-1) | 20–25% | 3 | 14 | 0 | 8 / 15 (53%) | 🟡 |
-| [2. Storage](#domain-2) | 15–20% | 3 | 20 | 5 | 11 / 17 (64%) | 🟡 |
-| [3. Compute](#domain-3) | 20–25% | 4 | 37 | 6 | 18 / 24 (75%) | 🟢 |
-| [4. Networking](#domain-4) | 15–20% | 3 | 15 | 3 | 9 / 13 (69%) | 🟢 |
+| [2. Storage](#domain-2) | 15–20% | 3 | 21 | 5 | 12 / 17 (70%) | 🟢 |
+| [3. Compute](#domain-3) | 20–25% | 4 | 40 | 6 | 18 / 24 (75%) | 🟢 |
+| [4. Networking](#domain-4) | 15–20% | 3 | 19 | 3 | 11 / 13 (84%) | 🟢 |
 | [5. Monitoring & Backup](#domain-5) | 10–15% | 2 | 22 | 5 | 9 / 13 (69%) | 🟢 |
 
-**Totals:** 215 practice questions · 19 hands-on labs
+**Totals:** 226 practice questions · 19 hands-on labs
 
 **Legend:** 🟢 Strong (≥66%) · 🟡 Partial (33–65%) · 🔴 Low (<33%) — "Covered" = task has ≥1 practice question or ≥1 lab
 
@@ -72,7 +72,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 
 <a id="domain-2"></a>
 <details>
-<summary><b>Domain 2: Implement and Manage Storage (15–20%)</b> — 17 tasks · 20 Qs · 5 Labs</summary>
+<summary><b>Domain 2: Implement and Manage Storage (15–20%)</b> — 17 tasks · 21 Qs · 5 Labs</summary>
 
 | Skill | Task | Qs | Labs |
 | :--- | :--- | -: | -: |
@@ -98,7 +98,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 
 <a id="domain-3"></a>
 <details>
-<summary><b>Domain 3: Deploy and Manage Azure Compute Resources (20–25%)</b> — 24 tasks · 37 Qs · 6 Labs</summary>
+<summary><b>Domain 3: Deploy and Manage Azure Compute Resources (20–25%)</b> — 24 tasks · 40 Qs · 6 Labs</summary>
 
 | Skill | Task | Qs | Labs |
 | :--- | :--- | -: | -: |
@@ -131,7 +131,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 
 <a id="domain-4"></a>
 <details>
-<summary><b>Domain 4: Implement and Manage Virtual Networking (15–20%)</b> — 13 tasks · 15 Qs · 3 Labs</summary>
+<summary><b>Domain 4: Implement and Manage Virtual Networking (15–20%)</b> — 13 tasks · 19 Qs · 3 Labs</summary>
 
 | Skill | Task | Qs | Labs |
 | :--- | :--- | -: | -: |
