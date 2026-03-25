@@ -10,8 +10,8 @@ name: Content Maintenance
 # Workflow triggers: daily schedule and manual dispatch
 on:
   schedule:
-    # Run daily at 8:30am Central time (14:30 UTC)
-    - cron: '30 14 * * *'
+    # Run daily at 8:30am Central time (13:00 UTC)
+    - cron: '00 13 * * *'
   workflow_dispatch:
     inputs:
       reorganize:
