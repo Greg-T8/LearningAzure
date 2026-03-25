@@ -8,7 +8,7 @@ This log tracks individual study sessions for the **AZ-104** exam. Fill in **End
 
 | # | Date | Start | End | Duration | Notes |
 |:--|:-----|:------|:----|:---------|:------|
-| 26 | 3/25/26 | 5:26 AM |  |  | Configure secure access to virtual networks |
+| 26 | 3/25/26 | 5:26 AM | 6:22 AM | 0h 56m | Configure secure access to virtual networks |
 | 25 | 3/24/26 | 8:12 PM | 8:31 PM | 0h 19m | Configure secure access to virtual networks |
 | 24 | 3/24/26 | 7:21 PM | 8:10 PM | 0h 49m | Configure access to storage |
 | 23 | 3/23/26 |  | 6:09 AM | 0h 0m | auto-closed at last commit |
