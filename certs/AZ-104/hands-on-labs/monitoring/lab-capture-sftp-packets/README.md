@@ -5,10 +5,11 @@
 **Task:** Use Azure Network Watcher and Connection Monitor
 
 **Practice Exam Questions:**
-- [Capture SFTP Packets with Network Watcher](../../../practice-questions/README.md#capture-sftp-packets-with-network-watcher)
+- [Test TCP Connectivity with Network Watcher](../../../practice-questions/README.md#test-tcp-connectivity-with-network-watcher)
 - [Determine filtering rule with Network Watcher](../../../practice-questions/README.md#determine-filtering-rule-with-network-watcher)
 - [Diagnose Network Watcher Tool for Web Server Packet Flow](../../../practice-questions/README.md#diagnose-network-watcher-tool-for-web-server-packet-flow)
-- [Test TCP Connectivity with Network Watcher](../../../practice-questions/README.md#test-tcp-connectivity-with-network-watcher)
+- [Capture SFTP Packets with Network Watcher](../../../practice-questions/README.md#capture-sftp-packets-with-network-watcher)
+
 
 
 
