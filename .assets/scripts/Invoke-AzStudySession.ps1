@@ -350,11 +350,37 @@ $Helpers = {
                 # Parse start datetime from Date and Start columns
                 $dateStr  = $columns[2].Trim()
                 $startStr = $columns[3].Trim()
-                $startDateTime = [datetime]::ParseExact(
-                    "$dateStr $startStr",
-                    'M/d/yy h:mm tt',
-                    $null
+
+                # Parse the start datetime defensively to handle historical rows with blank Start values
+                $startText = if ([string]::IsNullOrWhiteSpace($startStr)) { $dateStr } else { "$dateStr $startStr" }
+                $formats = if ([string]::IsNullOrWhiteSpace($startStr)) {
+                    @('M/d/yy', 'M/d/yyyy')
+                }
+                else {
+                    @('M/d/yy h:mm tt', 'M/d/yyyy h:mm tt')
+                }
+
+                $startDateTime = [datetime]::MinValue
+                $parsedStart = [datetime]::TryParseExact(
+                    $startText,
+                    $formats,
+                    [System.Globalization.CultureInfo]::InvariantCulture,
+                    [System.Globalization.DateTimeStyles]::AllowWhiteSpaces,
+                    [ref]$startDateTime
                 )
+
+                if (-not $parsedStart) {
+                    if ($UseLastCommit) {
+                        $startDateTime = $endTime
+                    }
+                    else {
+                        throw "Unable to parse session start date/time '$startText' for session #$SessionNumber in '$LogFile'."
+                    }
+                }
+
+                if ($startDateTime -gt $endTime) {
+                    $startDateTime = $endTime
+                }
 
                 # Calculate session duration
                 $duration    = $endTime - $startDateTime
