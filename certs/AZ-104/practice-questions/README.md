@@ -10,15 +10,15 @@ Accounts for questions missed or unsure about in the practice exams.
     * [Interpret Role Assignments](#interpret-role-assignments)
     * [Retrieve the Catalog Identifier for Entitlement Management](#retrieve-the-catalog-identifier-for-entitlement-management)
   * [Manage Azure subscriptions and governance](#manage-azure-subscriptions-and-governance)
-    * [Append Tag Using PowerShell](#append-tag-using-powershell)
+    * [Azure Policy Effects Verification](#azure-policy-effects-verification)
     * [Move Resources Between Resource Groups](#move-resources-between-resource-groups)
     * [Azure Policy Not Functioning](#azure-policy-not-functioning)
-    * [Azure Policy Effects Verification](#azure-policy-effects-verification)
-    * [Configure Azure Cost Center Tags and Cost Analysis](#configure-azure-cost-center-tags-and-cost-analysis)
+    * [Move subscription between management groups](#move-subscription-between-management-groups)
+    * [Append Tag Using PowerShell](#append-tag-using-powershell)
     * [Tagging Policy](#tagging-policy)
     * [Implement resource locks](#implement-resource-locks)
-    * [Move subscription between management groups](#move-subscription-between-management-groups)
     * [Lift resource locks using PowerShell](#lift-resource-locks-using-powershell)
+    * [Configure Azure Cost Center Tags and Cost Analysis](#configure-azure-cost-center-tags-and-cost-analysis)
 * [Implement and Manage Storage](#implement-and-manage-storage)
   * [Configure access to storage](#configure-access-to-storage)
     * [Azure Files Kerberos Authentication](#azure-files-kerberos-authentication)
@@ -31,11 +31,11 @@ Accounts for questions missed or unsure about in the practice exams.
     * [Secure Storage Access from Subnet](#secure-storage-access-from-subnet)
     * [Shared Access Signature (SAS) practices](#shared-access-signature-sas-practices)
   * [Configure and manage storage accounts](#configure-and-manage-storage-accounts)
-    * [Azure Storage Redundancy Recommendation](#azure-storage-redundancy-recommendation)
     * [AzCopy authorization methods](#azcopy-authorization-methods)
-    * [Rotate compromised storage account keys](#rotate-compromised-storage-account-keys)
     * [Configure Object Replication Between Storage Accounts](#configure-object-replication-between-storage-accounts)
+    * [Azure Storage Redundancy Recommendation](#azure-storage-redundancy-recommendation)
     * [Migrate Azure Files Redundancy to ZRS](#migrate-azure-files-redundancy-to-zrs)
+    * [Rotate compromised storage account keys](#rotate-compromised-storage-account-keys)
   * [Configure Azure Files and Azure Blob Storage](#configure-azure-files-and-azure-blob-storage)
     * [Disable Soft Delete Command](#disable-soft-delete-command)
     * [Lifecycle Management Policy Configuration](#lifecycle-management-policy-configuration)
@@ -46,85 +46,86 @@ Accounts for questions missed or unsure about in the practice exams.
     * [Configure Lifecycle Management Policy for Azure Storage](#configure-lifecycle-management-policy-for-azure-storage)
 * [Deploy and Manage Azure Compute Resources](#deploy-and-manage-azure-compute-resources)
   * [Automate deployment of resources by using ARM templates or Bicep files](#automate-deployment-of-resources-by-using-arm-templates-or-bicep-files)
-    * [Case Study — Solution Evaluation](#case-study-solution-evaluation)
+    * [Edit ARM Template to Inherit Resource Group Location](#edit-arm-template-to-inherit-resource-group-location)
+    * [Complete ARM template deployment command](#complete-arm-template-deployment-command)
     * [Convert Array to Object](#convert-array-to-object)
     * [Export resource group template](#export-resource-group-template)
     * [Resource dependencies in Bicep](#resource-dependencies-in-bicep)
-    * [Complete ARM template deployment command](#complete-arm-template-deployment-command)
-    * [Edit ARM Template to Inherit Resource Group Location](#edit-arm-template-to-inherit-resource-group-location)
     * [Deployment Mode Deleted Resources](#deployment-mode-deleted-resources)
     * [Export ARM Template](#export-arm-template)
+    * [Case Study — Solution Evaluation](#case-study-solution-evaluation)
   * [Create and configure virtual machines](#create-and-configure-virtual-machines)
-    * [Apply Change to VMSS OS and Data Disk Profile](#apply-change-to-vmss-os-and-data-disk-profile)
     * [Enable disk encryption on Linux VM](#enable-disk-encryption-on-linux-vm)
+    * [Apply Change to VMSS OS and Data Disk Profile](#apply-change-to-vmss-os-and-data-disk-profile)
     * [Encrypt VM Disk With Key Vault](#encrypt-vm-disk-with-key-vault)
     * [Move a data disk with PowerShell](#move-a-data-disk-with-powershell)
     * [SQL Server VM configuration](#sql-server-vm-configuration)
-    * [Enable VM disk encryption](#enable-vm-disk-encryption)
     * [WebApp1 Availability Case](#webapp1-availability-case)
+    * [Enable VM disk encryption](#enable-vm-disk-encryption)
     * [Change VM Availability Set Assignment](#change-vm-availability-set-assignment)
     * [VM Resize Failure Cause](#vm-resize-failure-cause)
   * [Provision and manage containers in the Azure portal](#provision-and-manage-containers-in-the-azure-portal)
     * [Azure Container Registry roles for pulling images](#azure-container-registry-roles-for-pulling-images)
     * [Configure Scaling Rules in Azure Container Apps](#configure-scaling-rules-in-azure-container-apps)
   * [Create and configure Azure App Service](#create-and-configure-azure-app-service)
+    * [Prepare Azure App Service for Web App Republication](#prepare-azure-app-service-for-web-app-republication)
     * [Resolve Azure App Service Pricing Tier for Runtime Requirements](#resolve-azure-app-service-pricing-tier-for-runtime-requirements)
-    * [Resolve Azure App Service Pricing Tier for Runtime Requirements](#resolve-azure-app-service-pricing-tier-for-runtime-requirements-1)
     * [Swap App Service Deployment Slots with Preview](#swap-app-service-deployment-slots-with-preview)
     * [App Service pricing tier for autoscale](#app-service-pricing-tier-for-autoscale)
     * [Resolve App Service Plan Selection](#resolve-app-service-plan-selection)
-    * [Prepare Azure App Service for Web App Republication](#prepare-azure-app-service-for-web-app-republication)
-    * [Resolve Azure App Service Pricing Tier for Runtime Requirements](#resolve-azure-app-service-pricing-tier-for-runtime-requirements-2)
-    * [App Service Plan Selection](#app-service-plan-selection)
     * [Configure Azure App Service Plan for Website Hosting](#configure-azure-app-service-plan-for-website-hosting)
+    * [Resolve Azure App Service Pricing Tier for Runtime Requirements](#resolve-azure-app-service-pricing-tier-for-runtime-requirements-1)
+    * [App Service Plan Selection](#app-service-plan-selection)
     * [Configure App Service Client Certificates](#configure-app-service-client-certificates)
-    * [WebJobs on multi-instance App Service](#webjobs-on-multi-instance-app-service)
     * [App Service autoscale instance count calculation](#app-service-autoscale-instance-count-calculation)
     * [Azure App Service Backups](#azure-app-service-backups)
+    * [WebJobs on multi-instance App Service](#webjobs-on-multi-instance-app-service)
+    * [Resolve Azure App Service Pricing Tier for Runtime Requirements](#resolve-azure-app-service-pricing-tier-for-runtime-requirements-2)
 * [Implement and Manage Virtual Networking](#implement-and-manage-virtual-networking)
   * [Configure and manage virtual networks in Azure](#configure-and-manage-virtual-networks-in-azure)
-    * [Case Study — Container Group Placement](#case-study-container-group-placement)
-    * [Standard Load Balancer public IPs](#standard-load-balancer-public-ips)
-    * [VNet Peering with ExpressRoute](#vnet-peering-with-expressroute)
     * [VNet Peering — Missing Reverse Peering](#vnet-peering-missing-reverse-peering)
+    * [VNet Peering with ExpressRoute](#vnet-peering-with-expressroute)
+    * [Standard Load Balancer public IPs](#standard-load-balancer-public-ips)
     * [Configure Layered Network Security](#configure-layered-network-security)
+    * [Case Study — Container Group Placement](#case-study-container-group-placement)
   * [Configure secure access to virtual networks](#configure-secure-access-to-virtual-networks)
-    * [Design NSG to Block RDP from Internet](#design-nsg-to-block-rdp-from-internet)
     * [Configure Private Link Service Source IP](#configure-private-link-service-source-ip)
+    * [NSG Rule Processing Order](#nsg-rule-processing-order)
+    * [Design NSG to Block RDP from Internet](#design-nsg-to-block-rdp-from-internet)
   * [Configure name resolution and load balancing](#configure-name-resolution-and-load-balancing)
     * [Diagnose Internal Load Balancer Hairpin Traffic Failure](#diagnose-internal-load-balancer-hairpin-traffic-failure)
-    * [IMDS Load Balancer Metadata Error](#imds-load-balancer-metadata-error)
-    * [Connect VNet to Private DNS Zone](#connect-vnet-to-private-dns-zone)
     * [Azure DNS Alias Record Type](#azure-dns-alias-record-type)
+    * [IMDS Load Balancer Metadata Error](#imds-load-balancer-metadata-error)
     * [Configure DNS Records for App Service](#configure-dns-records-for-app-service)
     * [Configure Internal Load Balancer](#configure-internal-load-balancer)
     * [Configure Standard Load Balancer Outbound Traffic and IP Allocation](#configure-standard-load-balancer-outbound-traffic-and-ip-allocation)
+    * [Connect VNet to Private DNS Zone](#connect-vnet-to-private-dns-zone)
 * [Monitor and Maintain Azure Resources](#monitor-and-maintain-azure-resources)
   * [Monitor resources in Azure](#monitor-resources-in-azure)
+    * [Pinning query results to a dashboard](#pinning-query-results-to-a-dashboard)
     * [Configure App Service Diagnostics](#configure-app-service-diagnostics)
     * [Configure Azure Monitor Alert for Database CPU Usage](#configure-azure-monitor-alert-for-database-cpu-usage)
     * [Enable Boot Diagnostics for Azure Virtual Machines](#enable-boot-diagnostics-for-azure-virtual-machines)
     * [Azure Advisor alerts with Bicep](#azure-advisor-alerts-with-bicep)
     * [Configure Azure Monitor Alert Notification Rate Limits](#configure-azure-monitor-alert-notification-rate-limits)
     * [Capture SFTP Packets with Network Watcher](#capture-sftp-packets-with-network-watcher)
-    * [Pinning query results to a dashboard](#pinning-query-results-to-a-dashboard)
     * [Storage Insights Overview](#storage-insights-overview)
     * [Determine filtering rule with Network Watcher](#determine-filtering-rule-with-network-watcher)
     * [Enable Guest OS Diagnostics](#enable-guest-os-diagnostics)
-    * [Diagnose Network Watcher Tool for Web Server Packet Flow](#diagnose-network-watcher-tool-for-web-server-packet-flow)
     * [Configure Azure Monitor Alert Notification Rate Limits](#configure-azure-monitor-alert-notification-rate-limits-1)
     * [Test TCP Connectivity with Network Watcher](#test-tcp-connectivity-with-network-watcher)
     * [Load Balancer Metrics Batch API](#load-balancer-metrics-batch-api)
+    * [Diagnose Network Watcher Tool for Web Server Packet Flow](#diagnose-network-watcher-tool-for-web-server-packet-flow)
   * [Implement backup and recovery](#implement-backup-and-recovery)
+    * [Recover Configuration File from Azure VM Backup](#recover-configuration-file-from-azure-vm-backup)
     * [Delete Recovery Services vault](#delete-recovery-services-vault)
     * [Site Recovery — Recovery Steps](#site-recovery-recovery-steps)
     * [Move Recovery Services vault](#move-recovery-services-vault)
-    * [Recover Configuration File from Azure VM Backup](#recover-configuration-file-from-azure-vm-backup)
     * [Backup Pre-Check Warning Cause](#backup-pre-check-warning-cause)
-    * [Recovery Services vault diagnostic target](#recovery-services-vault-diagnostic-target)
     * [Azure Site Recovery High Churn](#azure-site-recovery-high-churn)
     * [Recover Azure VM from Deleted Backup](#recover-azure-vm-from-deleted-backup)
     * [Restore VM from backup (availability set)](#restore-vm-from-backup-availability-set)
+    * [Recovery Services vault diagnostic target](#recovery-services-vault-diagnostic-target)
     * [Configure Azure Backup with PowerShell](#configure-azure-backup-with-powershell)
 
 ---
@@ -380,195 +381,6 @@ In Microsoft Entra ID entitlement management, a **catalog** is the container tha
 
 ### Manage Azure subscriptions and governance
 
-#### Append Tag Using PowerShell
-
-**Domain:** Manage Azure Identities and Governance
-**Skill:** Manage Azure subscriptions and governance
-**Task:** Apply and manage tags on resources
-
-You use taxonomic tags to logically organize resources and to make billing reporting easier.
-
-You use Azure PowerShell to append an additional tag on a storage account named corptorage99. The code is as follows:
-
-```powershell
-$r = Get-AzResource -ResourceName "corptorage99" -ResourceGroupName "prod-rg"
-Set-AzResource -Tag @{Dept="IT"} -ResourceId $r.ResourceId -Force
-```
-
-The code returns unexpected results.
-
-You need to append the additional tag as quickly as possible.
-
-What should you do?
-
-A. Edit the script to call the Add() method after getting the resource to append the new tag.  
-B. Assign the Enforce tag and its value Azure Policy to the resource group.  
-C. Deploy the tag by using an Azure Resource Manager (ARM) template.  
-D. Refactor the code by using the Azure Command-Line Interface (CLI).  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-09-04-08-19.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-You should edit the script to call the Add() method after getting the resource to append the new tag as shown in the second line of this refactored Azure PowerShell code:
-
-```powershell
-$r = Get-AzResource -ResourceName "corptorage99" -ResourceGroupName "prod-rg"
-$r.Tags.Add("Dept", "IT")
-Set-AzResource -Tag $r.Tags -ResourceId $r.ResourceId -Force
-```
-
-Unless you call the Add() method, the Set-AzResource cmdlet will overwrite any existing taxonomic tags on the resource. The Add() method preserves existing tags and includes one or more tags to the resource tag list.
-
-You should not deploy the tag by using an Azure Resource Manager (ARM) template. Doing so is unnecessary in this case because the Azure PowerShell is mostly complete as-is. Furthermore, you must find the solution as quickly as possible.
-
-You should not assign the Enforce tag and its value Azure Policy to the resource group. Azure Policy is a governance feature that helps businesses enforce compliance in resource creation. In this case, the solution involves too much administrative overhead to be a viable option. Moreover, the scenario makes no mention of the need for governance policy in specific terms.
-
-You should not refactor the code by using the Azure Command-Line Interface (CLI). Either Azure PowerShell or Azure CLI can be used to institute this solution. It makes no sense to change the development language, since you have already completed most of the code in PowerShell.
-
-<img src='.img/2026-03-09-04-11-46.png' width=600>
-
-</details>
-
----
-
-#### Move Resources Between Resource Groups
-
-**Domain:** Manage Azure Identities and Governance
-**Skill:** Manage Azure subscriptions and governance
-**Task:** Manage resource groups
-
-You deploy an application in a resource group named App-RG01 in your Azure subscription.
-
-App-RG01 contains the following components:
-
-- Two App Services, each with a free App Service managed Secure Sockets Layer (SSL) certificate
-- A peered virtual network (VNet)
-- Redis cache deployed in the VNet
-- A Standard Load Balancer
-
-You need to move all resources in App-RG01 to a new resource group named App-RG02. For each of the following statements, select Yes if the statement is true. Otherwise, select No.
-
-| STATEMENT | YES | NO |
-|-----------|-----|----|
-| You need to delete the SSL certificate from each App Service before moving it to the new resource group. | ☐ | ☐ |
-| You can move the Standard Load Balancer across two Azure subscriptions. | ☐ | ☐ |
-| You need to disable the peer before moving the VNet. | ☐ | ☐ |
-| You can move the VNet within the same subscription. | ☐ | ☐ |
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-09-04-14-38.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-You need to delete the Secure Sockets Layer (SSL) certificate from each App Service before moving it to the new resource group. You cannot move an App Service with an SSL certificate configured since in our use-case scenario, you are using the free App Service managed Secure Sockets Layer (SSL) certificate. You need to delete the certificate first, move the App Service, and then upload the certificate again.
-
-You cannot move the Standard Load Balancer across two Azure subscriptions. Within a single Azure subscription, Resource Group move operations for both Standard Load Balancer and standard Public IP are allowed. But for a Standard Load Balancer, move operations across Azure Subscriptions are not allowed.
-
-You need to disable the peer before moving the VNet. When you want to move a VNet with a peer configured, you need to disable it before moving the VNet. When you move a VNet, you need to move all of its dependent resources.
-
-You can move the VNet within the same subscription. When you want to move a VNet, you also need to move all of its dependent resources. In this case, you also need to move the Redis cache, which can be moved only within the same subscription. Because you want to move the resources from App-RG01 to App-RG02, which is in the same subscription, you can move the VNet with no problem.
-
-<img src='.img/2026-03-09-04-16-58.png' width=600>
-
-<img src='.img/2026-03-09-04-18-10.png' width=600>
-
-<img src='.img/2026-03-09-04-19-07.png' width=600>
-
-<img src='.img/2026-03-09-04-20-30.png' width=600>
-
-References
-
-* [Move resources to a new resource group or subscription](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/move-resource-group-and-subscription?tabs=azure-cli)
-* [Move networking resources to new resource group or subscription](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/move-limitations/networking-move-limitations)
-* [Azure Load Balancer SKUs](https://learn.microsoft.com/en-us/azure/load-balancer/skus)
-
-</details>
-
----
-
-#### Azure Policy Not Functioning
-
-**Domain:** Manage Azure Identities and Governance
-**Skill:** Manage Azure subscriptions and governance
-**Task:** Implement and manage Azure Policy
-
-A company has an existing on-premises environment and a newly created Azure subscription. You need to start testing cloud features and services with a view to eventually migrating the company environment to the Cloud. You have been given Global Administrator rights and the Scheduled Patching Contributor role on the subscription level, and you need to test Azure Policy first.
-
-You have downloaded version 2.62 of the Azure Command-Line-Interface (CLI) to configure new policies, but you find that the Azure Policies you are creating are not working with your subscription.
-
-You need to find the cause of this problem.
-
-What is causing the Azure Policy to not function with your subscription when using the Azure CLI?
-
-A. Your version of the Azure CLI needs updating.  
-B. You do not have the relevant role assignment to manage Azure Policy.  
-C. You do not have the relevant access to the subscription.  
-D. You have not registered the Azure Policy Insights resource provider.  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-03-04-46-56.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-The cause of the issue is that you have not registered the Azure Policy Insights resource provider. Azure Policy requires the Azure Policy Insights resource provider to be registered in your subscription to function properly. If this resource provider is not registered, the policies you create will not work as expected. To resolve this issue, you can register the resource provider using the Azure CLI with the following command:
-
-```powershell
-az provider register --namespace 'Microsoft.PolicyInsights'
-```
-
-Microsoft.PolicyInsights backs the insights and compliance side of Azure Policy, including:
-
-Policy compliance state
-
-Policy evaluation results
-
-Remediation tasks
-
-Policy events and historical data
-
-Policy state queries via REST/CLI
-
-When you run commands such as:
-
-az policy state list
-
-az policy event list
-
-az policy remediation create
-
-those operations rely on this provider.
-
-The cause of the issue is not that you do not have the relevant access to the subscription. You have been given Global Administrator rights, which is sufficient to manage Azure Policy.
-
-The cause of the issue is not that your version of the Azure CLI needs updating. While keeping the Azure CLI updated is important, version 2.62 is recent enough to support Azure Policy commands.
-
-The cause of the issue is not that you do not have the relevant role assignment to manage Azure Policy. The Global Administrator role provides the necessary permissions to manage Azure Policy. By registering the Azure Policy Insights resource provider, you should be able to test and use Azure Policy successfully.
-
-References
-
-[Azure Policy overview - Azure RBAC permissions in Azure Policy](https://learn.microsoft.com/en-us/azure/governance/policy/overview#azure-rbac-permissions-in-azure-policy)
-
-</details>
-
----
-
 #### Azure Policy Effects Verification
 
 **Domain:** Manage Azure Identities and Governance
@@ -743,87 +555,239 @@ References
 
 ---
 
-#### Configure Azure Cost Center Tags and Cost Analysis
+#### Move Resources Between Resource Groups
 
 **Domain:** Manage Azure Identities and Governance
 **Skill:** Manage Azure subscriptions and governance
-**Task:**
+**Task:** Manage resource groups
 
-- Apply and manage tags on resources
-- Manage costs by using alerts, budgets, and Azure Advisor recommendations
+You deploy an application in a resource group named App-RG01 in your Azure subscription.
 
-Your company has an Azure Subscription with several resources deployed. The subscription is managed by a Cloud Service Provider.
+App-RG01 contains the following components:
 
-The accounting department is currently granted the billing reader role, so they are able to see cost-related information. They need to get a better understanding of the costs so they can assign them to the correct cost center.
+- Two App Services, each with a free App Service managed Secure Sockets Layer (SSL) certificate
+- A peered virtual network (VNet)
+- Redis cache deployed in the VNet
+- A Standard Load Balancer
 
-You need to provide cost center information. Your solution should minimize administrative effort.
+You need to move all resources in App-RG01 to a new resource group named App-RG02. For each of the following statements, select Yes if the statement is true. Otherwise, select No.
 
-What two actions should you perform? Each correct answer presents part of the solution.
-
-A. Instruct the accounting department to use the Azure Account Center.  
-B. Create a tag named CostCenter and assign it to each resource group.  
-C. Instruct the accounting department to use the Cost Analysis blade in the subscription panel.  
-D. Create a tag named CostCenter and assign it to each resource.  
+| STATEMENT | YES | NO |
+|-----------|-----|----|
+| You need to delete the SSL certificate from each App Service before moving it to the new resource group. | ☐ | ☐ |
+| You can move the Standard Load Balancer across two Azure subscriptions. | ☐ | ☐ |
+| You need to disable the peer before moving the VNet. | ☐ | ☐ |
+| You can move the VNet within the same subscription. | ☐ | ☐ |
 
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-01-30-06-20-49.png' width=700>
+<img src='.img/2026-03-09-04-14-38.png' width=600>
 
 </details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
 
-Looking at your selected answers, I can help you understand what went wrong.
+You need to delete the Secure Sockets Layer (SSL) certificate from each App Service before moving it to the new resource group. You cannot move an App Service with an SSL certificate configured since in our use-case scenario, you are using the free App Service managed Secure Sockets Layer (SSL) certificate. You need to delete the certificate first, move the App Service, and then upload the certificate again.
 
-**Your Selected Answers:**
+You cannot move the Standard Load Balancer across two Azure subscriptions. Within a single Azure subscription, Resource Group move operations for both Standard Load Balancer and standard Public IP are allowed. But for a Standard Load Balancer, move operations across Azure Subscriptions are not allowed.
 
-1. ✗ Create a tag named CostCenter and assign it to each **resource group**
-2. ✓ Instruct the accounting department to use the Cost Analysis blade in the subscription panel
+You need to disable the peer before moving the VNet. When you want to move a VNet with a peer configured, you need to disable it before moving the VNet. When you move a VNet, you need to move all of its dependent resources.
 
-**The Problem with Your Answer:**
+You can move the VNet within the same subscription. When you want to move a VNet, you also need to move all of its dependent resources. In this case, you also need to move the Redis cache, which can be moved only within the same subscription. Because you want to move the resources from App-RG01 to App-RG02, which is in the same subscription, you can move the VNet with no problem.
 
-You got **one correct** (Cost Analysis), but your tagging strategy is at the **wrong level of granularity**.
+<img src='.img/2026-03-09-04-16-58.png' width=600>
 
-**Why Resource Group Tagging is Insufficient:**
+<img src='.img/2026-03-09-04-18-10.png' width=600>
 
-**Resource group-level tags** can cause issues when:
+<img src='.img/2026-03-09-04-19-07.png' width=600>
 
-- Multiple resources in the same resource group belong to **different cost centers**
-- You need **granular cost allocation** at the resource level
-- Resources are moved between resource groups
+<img src='.img/2026-03-09-04-20-30.png' width=600>
 
-For example, if RG1 contains:
+References
 
-- 5 VMs for Cost Center A
-- 3 VMs for Cost Center B
+* [Move resources to a new resource group or subscription](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/move-resource-group-and-subscription?tabs=azure-cli)
+* [Move networking resources to new resource group or subscription](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/move-limitations/networking-move-limitations)
+* [Azure Load Balancer SKUs](https://learn.microsoft.com/en-us/azure/load-balancer/skus)
 
-Tagging the resource group only gives you one cost center value, preventing accurate cost allocation.
+</details>
 
-**The Correct Answers Should Be:**
+---
 
-1. **Create a tag named CostCenter and assign it to each resource** ✓
-   - Provides granular cost tracking at the resource level
-   - Each resource can be assigned to its specific cost center
-   - More accurate cost allocation
+#### Azure Policy Not Functioning
 
-2. **Instruct the accounting department to use the Cost Analysis blade in the subscription panel** ✓
-   - This is the correct tool for CSP-managed subscriptions
-   - Azure Account Center is NOT available for CSP subscriptions
-   - Cost Analysis can filter and group costs by tags
+**Domain:** Manage Azure Identities and Governance
+**Skill:** Manage Azure subscriptions and governance
+**Task:** Implement and manage Azure Policy
 
-**Why "Azure Account Center" is Wrong:**
+A company has an existing on-premises environment and a newly created Azure subscription. You need to start testing cloud features and services with a view to eventually migrating the company environment to the Cloud. You have been given Global Administrator rights and the Scheduled Patching Contributor role on the subscription level, and you need to test Azure Policy first.
 
-The **Azure Account Center** is not accessible in **Cloud Service Provider (CSP) managed subscriptions**. Only direct Enterprise Agreement (EA) or other subscription types have access to it.
+You have downloaded version 2.62 of the Azure Command-Line-Interface (CLI) to configure new policies, but you find that the Azure Policies you are creating are not working with your subscription.
 
-**Key Takeaway:**
+You need to find the cause of this problem.
 
-For cost center allocation:
+What is causing the Azure Policy to not function with your subscription when using the Azure CLI?
 
-- Tag at the **resource level** (not resource group level) for accurate, granular tracking
-- Use **Cost Analysis** (not Account Center) for CSP subscriptions
-- Cost Analysis allows filtering and grouping by tags to assign costs to cost centers
+A. Your version of the Azure CLI needs updating.  
+B. You do not have the relevant role assignment to manage Azure Policy.  
+C. You do not have the relevant access to the subscription.  
+D. You have not registered the Azure Policy Insights resource provider.  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-03-04-46-56.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+The cause of the issue is that you have not registered the Azure Policy Insights resource provider. Azure Policy requires the Azure Policy Insights resource provider to be registered in your subscription to function properly. If this resource provider is not registered, the policies you create will not work as expected. To resolve this issue, you can register the resource provider using the Azure CLI with the following command:
+
+```powershell
+az provider register --namespace 'Microsoft.PolicyInsights'
+```
+
+Microsoft.PolicyInsights backs the insights and compliance side of Azure Policy, including:
+
+Policy compliance state
+
+Policy evaluation results
+
+Remediation tasks
+
+Policy events and historical data
+
+Policy state queries via REST/CLI
+
+When you run commands such as:
+
+az policy state list
+
+az policy event list
+
+az policy remediation create
+
+those operations rely on this provider.
+
+The cause of the issue is not that you do not have the relevant access to the subscription. You have been given Global Administrator rights, which is sufficient to manage Azure Policy.
+
+The cause of the issue is not that your version of the Azure CLI needs updating. While keeping the Azure CLI updated is important, version 2.62 is recent enough to support Azure Policy commands.
+
+The cause of the issue is not that you do not have the relevant role assignment to manage Azure Policy. The Global Administrator role provides the necessary permissions to manage Azure Policy. By registering the Azure Policy Insights resource provider, you should be able to test and use Azure Policy successfully.
+
+References
+
+[Azure Policy overview - Azure RBAC permissions in Azure Policy](https://learn.microsoft.com/en-us/azure/governance/policy/overview#azure-rbac-permissions-in-azure-policy)
+
+</details>
+
+---
+
+#### Move subscription between management groups
+
+**Domain:** Manage Azure Identities and Governance
+**Skill:** Manage Azure subscriptions and governance
+**Task:** Manage subscriptions
+
+Your company creates multiple management groups under your Root management Group. You are re-organizing the management groups and want to move all resources for the Sales and Marketing management groups under the Marketing management group. Once finished, you plan to delete the Sales management group.
+
+You need to move the subscription named `SalesSub` to the Marketing management group.
+
+Which two PowerShell cmdlets should you use? Each correct answer presents part of the solution.
+
+A. `New-AzManagementGroupSubscription`  
+B. `Update-AzManagementGroup`  
+C. `Remove-AzManagementGroup`  
+D. `Remove-AzManagementGroupSubscription`  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-10-05-02-26.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+Moving an existing subscription to another management Group implicitly means that the subscription already has a management group. To perform this action, you should execute the following two PowerShell cmdlets:
+
+1. `New-AzManagementGroupSubscription`. This cmdlet is used to add a subscription to a specified management group. After removing the subscription from the Sales management group, you will use this cmdlet to add it to the Marketing management group.
+
+2. `Remove-AzManagementGroupSubscription`. This cmdlet is used to remove a subscription from its current management group. Since you need to move the subscription named `SalesSub` from the Sales management group, you first need to remove it from its current group.
+
+You should not use `Update-AzManagementGroup`. This is used to update supported parameters, such as the management group display name or change the management group parent. It is not used for moving subscriptions between management groups.
+
+You should not use `Remove-AzManagementGroup`. This cmdlet is used to delete a management group. While you plan to delete the Sales management group eventually, this cmdlet is not used for moving subscriptions between management groups.
+
+References
+
+- Manage your Azure subscriptions at scale with management groups
+- Remove-AzManagementGroupSubscription
+- New-AzManagementGroupSubscription
+- Remove-AzManagementGroup
+- Update-AzManagementGroup
+
+</details>
+
+---
+
+#### Append Tag Using PowerShell
+
+**Domain:** Manage Azure Identities and Governance
+**Skill:** Manage Azure subscriptions and governance
+**Task:** Apply and manage tags on resources
+
+You use taxonomic tags to logically organize resources and to make billing reporting easier.
+
+You use Azure PowerShell to append an additional tag on a storage account named corptorage99. The code is as follows:
+
+```powershell
+$r = Get-AzResource -ResourceName "corptorage99" -ResourceGroupName "prod-rg"
+Set-AzResource -Tag @{Dept="IT"} -ResourceId $r.ResourceId -Force
+```
+
+The code returns unexpected results.
+
+You need to append the additional tag as quickly as possible.
+
+What should you do?
+
+A. Edit the script to call the Add() method after getting the resource to append the new tag.  
+B. Assign the Enforce tag and its value Azure Policy to the resource group.  
+C. Deploy the tag by using an Azure Resource Manager (ARM) template.  
+D. Refactor the code by using the Azure Command-Line Interface (CLI).  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-09-04-08-19.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+You should edit the script to call the Add() method after getting the resource to append the new tag as shown in the second line of this refactored Azure PowerShell code:
+
+```powershell
+$r = Get-AzResource -ResourceName "corptorage99" -ResourceGroupName "prod-rg"
+$r.Tags.Add("Dept", "IT")
+Set-AzResource -Tag $r.Tags -ResourceId $r.ResourceId -Force
+```
+
+Unless you call the Add() method, the Set-AzResource cmdlet will overwrite any existing taxonomic tags on the resource. The Add() method preserves existing tags and includes one or more tags to the resource tag list.
+
+You should not deploy the tag by using an Azure Resource Manager (ARM) template. Doing so is unnecessary in this case because the Azure PowerShell is mostly complete as-is. Furthermore, you must find the solution as quickly as possible.
+
+You should not assign the Enforce tag and its value Azure Policy to the resource group. Azure Policy is a governance feature that helps businesses enforce compliance in resource creation. In this case, the solution involves too much administrative overhead to be a viable option. Moreover, the scenario makes no mention of the need for governance policy in specific terms.
+
+You should not refactor the code by using the Azure Command-Line Interface (CLI). Either Azure PowerShell or Azure CLI can be used to institute this solution. It makes no sense to change the development language, since you have already completed most of the code in PowerShell.
+
+<img src='.img/2026-03-09-04-11-46.png' width=600>
 
 </details>
 
@@ -1015,55 +979,6 @@ You should not configure a Read-only lock on TST01-RG and TST02-RG. This configu
 
 ---
 
-#### Move subscription between management groups
-
-**Domain:** Manage Azure Identities and Governance
-**Skill:** Manage Azure subscriptions and governance
-**Task:** Manage subscriptions
-
-Your company creates multiple management groups under your Root management Group. You are re-organizing the management groups and want to move all resources for the Sales and Marketing management groups under the Marketing management group. Once finished, you plan to delete the Sales management group.
-
-You need to move the subscription named `SalesSub` to the Marketing management group.
-
-Which two PowerShell cmdlets should you use? Each correct answer presents part of the solution.
-
-A. `New-AzManagementGroupSubscription`  
-B. `Update-AzManagementGroup`  
-C. `Remove-AzManagementGroup`  
-D. `Remove-AzManagementGroupSubscription`  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-10-05-02-26.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-Moving an existing subscription to another management Group implicitly means that the subscription already has a management group. To perform this action, you should execute the following two PowerShell cmdlets:
-
-1. `New-AzManagementGroupSubscription`. This cmdlet is used to add a subscription to a specified management group. After removing the subscription from the Sales management group, you will use this cmdlet to add it to the Marketing management group.
-
-2. `Remove-AzManagementGroupSubscription`. This cmdlet is used to remove a subscription from its current management group. Since you need to move the subscription named `SalesSub` from the Sales management group, you first need to remove it from its current group.
-
-You should not use `Update-AzManagementGroup`. This is used to update supported parameters, such as the management group display name or change the management group parent. It is not used for moving subscriptions between management groups.
-
-You should not use `Remove-AzManagementGroup`. This cmdlet is used to delete a management group. While you plan to delete the Sales management group eventually, this cmdlet is not used for moving subscriptions between management groups.
-
-References
-
-- Manage your Azure subscriptions at scale with management groups
-- Remove-AzManagementGroupSubscription
-- New-AzManagementGroupSubscription
-- Remove-AzManagementGroup
-- Update-AzManagementGroup
-
-</details>
-
----
-
 #### Lift resource locks using PowerShell
 
 **Domain:** Manage Azure Identities and Governance
@@ -1109,6 +1024,92 @@ Next, you can take advantage of the PowerShell pipeline by piping your results t
 You should not use the `Get-AzResource` or `Remove-AzResource` cmdlets because doing so requires far more PowerShell code than is shown in the scenario, and you only need to retrieve the locked resources from a specific resource group.
 
 You should not use the `Select-Object` cmdlet because it filters at the property level, and not the row level, and would therefore not restrict output to locked resources within a single resource group.
+
+</details>
+
+---
+
+#### Configure Azure Cost Center Tags and Cost Analysis
+
+**Domain:** Manage Azure Identities and Governance
+**Skill:** Manage Azure subscriptions and governance
+**Task:**
+
+- Apply and manage tags on resources
+- Manage costs by using alerts, budgets, and Azure Advisor recommendations
+
+Your company has an Azure Subscription with several resources deployed. The subscription is managed by a Cloud Service Provider.
+
+The accounting department is currently granted the billing reader role, so they are able to see cost-related information. They need to get a better understanding of the costs so they can assign them to the correct cost center.
+
+You need to provide cost center information. Your solution should minimize administrative effort.
+
+What two actions should you perform? Each correct answer presents part of the solution.
+
+A. Instruct the accounting department to use the Azure Account Center.  
+B. Create a tag named CostCenter and assign it to each resource group.  
+C. Instruct the accounting department to use the Cost Analysis blade in the subscription panel.  
+D. Create a tag named CostCenter and assign it to each resource.  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-01-30-06-20-49.png' width=700>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+Looking at your selected answers, I can help you understand what went wrong.
+
+**Your Selected Answers:**
+
+1. ✗ Create a tag named CostCenter and assign it to each **resource group**
+2. ✓ Instruct the accounting department to use the Cost Analysis blade in the subscription panel
+
+**The Problem with Your Answer:**
+
+You got **one correct** (Cost Analysis), but your tagging strategy is at the **wrong level of granularity**.
+
+**Why Resource Group Tagging is Insufficient:**
+
+**Resource group-level tags** can cause issues when:
+
+- Multiple resources in the same resource group belong to **different cost centers**
+- You need **granular cost allocation** at the resource level
+- Resources are moved between resource groups
+
+For example, if RG1 contains:
+
+- 5 VMs for Cost Center A
+- 3 VMs for Cost Center B
+
+Tagging the resource group only gives you one cost center value, preventing accurate cost allocation.
+
+**The Correct Answers Should Be:**
+
+1. **Create a tag named CostCenter and assign it to each resource** ✓
+   - Provides granular cost tracking at the resource level
+   - Each resource can be assigned to its specific cost center
+   - More accurate cost allocation
+
+2. **Instruct the accounting department to use the Cost Analysis blade in the subscription panel** ✓
+   - This is the correct tool for CSP-managed subscriptions
+   - Azure Account Center is NOT available for CSP subscriptions
+   - Cost Analysis can filter and group costs by tags
+
+**Why "Azure Account Center" is Wrong:**
+
+The **Azure Account Center** is not accessible in **Cloud Service Provider (CSP) managed subscriptions**. Only direct Enterprise Agreement (EA) or other subscription types have access to it.
+
+**Key Takeaway:**
+
+For cost center allocation:
+
+- Tag at the **resource level** (not resource group level) for accurate, granular tracking
+- Use **Cost Analysis** (not Account Center) for CSP subscriptions
+- Cost Analysis allows filtering and grouping by tags to assign costs to cost centers
 
 </details>
 
@@ -1813,51 +1814,6 @@ References
 
 ### Configure and manage storage accounts
 
-#### Azure Storage Redundancy Recommendation
-
-**Domain:** Implement and Manage Storage
-**Skill:** Configure and manage storage accounts
-**Task:** Configure Azure Storage redundancy
-
-You are a Cloud engineer who works for a global organization with offices all around the world. The organization currently uses Azure to host its infrastructure, including file shares. It uses premium zone-redundant storage (ZRS) accounts for its existing file storage in Azure, as well as Azure Files workloads.
-
-The company is planning to open new offices in the Azure (Europe) UK South region.
-
-You need to decide which option for Azure Storage you should use based on Microsoft's current recommendations.
-
-Which solution should you recommend?
-
-A. Read-access geo-redundant storage (RA-GRS) with six replications.  
-B. Locally redundant storage (LRS) with three replications.  
-C. Zone-redundant storage (ZRS) with three replications.  
-D. Geo-redundant storage (GRS) with six replications.  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-03-03-46-17.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-You should recommend Zone-redundant storage (ZRS) with three replications. Zone-redundant storage (ZRS) with three replications is the correct choice because ZRS replicates your data across multiple availability zones within the same region. This provides high availability and durability, protecting against both local hardware failures and zone-level failures, making it ideal for a global organization with critical Azure Files workloads.
-
-You should not recommend Locally redundant storage (LRS) with three replications. Microsoft does not recommend using LRS as it copies your data synchronously three times within a single physical location in the primary region. LRS provides at least 99.9999999999 (11 nines) durability of objects over a given year. LRS is the lowest-cost redundancy option but offers the least durability compared to other options. This is a poor architectural choice since in case the primary region goes down owing to a region-wide failure, you could possibly face a data loss.
-
-You should not recommend Geo-redundant storage (GRS) with six replications. GRS replicates your data to a secondary region, providing higher durability by ensuring data is available even if the primary region fails. However, GRS does not offer read access to the secondary region unless a failover occurs, which might not meet the needs for high availability and quick access in a multi-office setup.
-
-You should not recommend Read-access geo-redundant storage (RA-GRS) with six replications. RA-GRS provides the same redundancy as GRS but with read access to the secondary region. While this offers better availability than GRS, it might still not be the best choice for performance-sensitive applications that require low-latency access to data across multiple zones within a region.
-
-References
-
-[Azure Storage redundancy](https://learn.microsoft.com/azure/storage/common/storage-redundancy)
-
-</details>
-
----
-
 #### AzCopy authorization methods
 
 **Domain:** Implement and Manage Storage
@@ -1959,69 +1915,6 @@ Correct mapping:
 * [Manage storage account access keys](https://learn.microsoft.com/azure/storage/common/storage-account-keys-manage)
 * [Authorize access for AzCopy with a user identity](https://learn.microsoft.com/azure/storage/common/storage-use-azcopy-authorize-user-identity)
 * [Overview of Azure Files identity-based authentication for SMB access](https://learn.microsoft.com/azure/storage/files/storage-files-active-directory-overview)
-
-</details>
-
----
-
-#### Rotate compromised storage account keys
-
-**Domain:** Implement and Manage Storage
-**Skill:** Configure and manage storage accounts
-**Task:** Manage access keys
-
-You have two storage account keys: `key1` and `key2`. Your apps and services use `key1`, and you maintain `key2` as a backup key.
-
-You are concerned that both keys may have been compromised. You want to use the Azure portal to regenerate them without interrupting access to the storage account.
-
-Which five actions should you perform in sequence? To answer, move the appropriate actions from the list of possible actions to the answer area and arrange them in the correct order.
-
-Available options:
-
-A. Regenerate `key1` using the Azure portal.  
-B. Update connection strings in all relevant apps and services to use `key1`.  
-C. Regenerate `key2` using the Azure portal.  
-D. Update connection strings in all relevant apps and services to use `key2`.  
-E. Verify that all apps and services are running correctly using the new key. Regenerate `key2`.  
-F. Create a new Key using the Azure Portal called key3
-
-Select and order 5:
-
-| Step | Action |
-|------|--------|
-| 1 | |
-| 2 | |
-| 3 | |
-| 4 | |
-| 5 | |
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-11-04-43-07.png' width=700>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-You should perform the following steps in order:
-
-1. Regenerate `key2` using the Azure portal.  
-2. Update connection strings in all relevant apps and services to use `key2`.  
-3. Regenerate `key1` using the Azure portal.  
-4. Update connection strings in all relevant apps and services to use `key1`.  
-5. Verify that all apps and services are running correctly using the new key. Regenerate `key2`.
-
-You should first regenerate `key2` using the Azure portal. This ensures that you are not using any key that has been compromised in the past. This is very important since, in this scenario, you are concerned that both keys may have been compromised. After regenerating the `key2`, you should then proceed to update the connection strings for all the relevant apps to use `key2`, then regenerate `key1` as it is not the primary key now.
-
-Next, you should update the connection strings for all the relevant apps to use newly generated `key1`, then regenerate `key2` as it is not the primary key. This is important because the apps and services will not be able to use the previous primary key after it is regenerated.
-
-Finally, you should check that all apps and services are working correctly. As a final step, as a best practice, you should regenerate `key2` again.
-
-You do not need to create a new key called key3 as you can regenerate both `key1` and `key2`, which will mitigate any security concerns if the keys have been compromised.
-
-<img src='.img/2026-03-11-04-45-26.png' width=600>
 
 </details>
 
@@ -2170,6 +2063,51 @@ You had the logic completely reversed - change feed on the wrong end, and versio
 
 ---
 
+#### Azure Storage Redundancy Recommendation
+
+**Domain:** Implement and Manage Storage
+**Skill:** Configure and manage storage accounts
+**Task:** Configure Azure Storage redundancy
+
+You are a Cloud engineer who works for a global organization with offices all around the world. The organization currently uses Azure to host its infrastructure, including file shares. It uses premium zone-redundant storage (ZRS) accounts for its existing file storage in Azure, as well as Azure Files workloads.
+
+The company is planning to open new offices in the Azure (Europe) UK South region.
+
+You need to decide which option for Azure Storage you should use based on Microsoft's current recommendations.
+
+Which solution should you recommend?
+
+A. Read-access geo-redundant storage (RA-GRS) with six replications.  
+B. Locally redundant storage (LRS) with three replications.  
+C. Zone-redundant storage (ZRS) with three replications.  
+D. Geo-redundant storage (GRS) with six replications.  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-03-03-46-17.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+You should recommend Zone-redundant storage (ZRS) with three replications. Zone-redundant storage (ZRS) with three replications is the correct choice because ZRS replicates your data across multiple availability zones within the same region. This provides high availability and durability, protecting against both local hardware failures and zone-level failures, making it ideal for a global organization with critical Azure Files workloads.
+
+You should not recommend Locally redundant storage (LRS) with three replications. Microsoft does not recommend using LRS as it copies your data synchronously three times within a single physical location in the primary region. LRS provides at least 99.9999999999 (11 nines) durability of objects over a given year. LRS is the lowest-cost redundancy option but offers the least durability compared to other options. This is a poor architectural choice since in case the primary region goes down owing to a region-wide failure, you could possibly face a data loss.
+
+You should not recommend Geo-redundant storage (GRS) with six replications. GRS replicates your data to a secondary region, providing higher durability by ensuring data is available even if the primary region fails. However, GRS does not offer read access to the secondary region unless a failover occurs, which might not meet the needs for high availability and quick access in a multi-office setup.
+
+You should not recommend Read-access geo-redundant storage (RA-GRS) with six replications. RA-GRS provides the same redundancy as GRS but with read access to the secondary region. While this offers better availability than GRS, it might still not be the best choice for performance-sensitive applications that require low-latency access to data across multiple zones within a region.
+
+References
+
+[Azure Storage redundancy](https://learn.microsoft.com/azure/storage/common/storage-redundancy)
+
+</details>
+
+---
+
 #### Migrate Azure Files Redundancy to ZRS
 
 **Domain:** Implement and Manage Storage
@@ -2226,6 +2164,69 @@ When Azure Files NFSv4.1 constraints block customer-initiated conversion from LR
 **References**
 
 * [Change how a storage account is replicated](https://learn.microsoft.com/azure/storage/common/redundancy-migration)
+
+</details>
+
+---
+
+#### Rotate compromised storage account keys
+
+**Domain:** Implement and Manage Storage
+**Skill:** Configure and manage storage accounts
+**Task:** Manage access keys
+
+You have two storage account keys: `key1` and `key2`. Your apps and services use `key1`, and you maintain `key2` as a backup key.
+
+You are concerned that both keys may have been compromised. You want to use the Azure portal to regenerate them without interrupting access to the storage account.
+
+Which five actions should you perform in sequence? To answer, move the appropriate actions from the list of possible actions to the answer area and arrange them in the correct order.
+
+Available options:
+
+A. Regenerate `key1` using the Azure portal.  
+B. Update connection strings in all relevant apps and services to use `key1`.  
+C. Regenerate `key2` using the Azure portal.  
+D. Update connection strings in all relevant apps and services to use `key2`.  
+E. Verify that all apps and services are running correctly using the new key. Regenerate `key2`.  
+F. Create a new Key using the Azure Portal called key3
+
+Select and order 5:
+
+| Step | Action |
+|------|--------|
+| 1 | |
+| 2 | |
+| 3 | |
+| 4 | |
+| 5 | |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-11-04-43-07.png' width=700>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+You should perform the following steps in order:
+
+1. Regenerate `key2` using the Azure portal.  
+2. Update connection strings in all relevant apps and services to use `key2`.  
+3. Regenerate `key1` using the Azure portal.  
+4. Update connection strings in all relevant apps and services to use `key1`.  
+5. Verify that all apps and services are running correctly using the new key. Regenerate `key2`.
+
+You should first regenerate `key2` using the Azure portal. This ensures that you are not using any key that has been compromised in the past. This is very important since, in this scenario, you are concerned that both keys may have been compromised. After regenerating the `key2`, you should then proceed to update the connection strings for all the relevant apps to use `key2`, then regenerate `key1` as it is not the primary key now.
+
+Next, you should update the connection strings for all the relevant apps to use newly generated `key1`, then regenerate `key2` as it is not the primary key. This is important because the apps and services will not be able to use the previous primary key after it is regenerated.
+
+Finally, you should check that all apps and services are working correctly. As a final step, as a best practice, you should regenerate `key2` again.
+
+You do not need to create a new key called key3 as you can regenerate both `key1` and `key2`, which will mitigate any security concerns if the keys have been compromised.
+
+<img src='.img/2026-03-11-04-45-26.png' width=600>
 
 </details>
 
@@ -2839,66 +2840,120 @@ Set-AzStorageBlobInventoryPolicy                # \u2717 Wrong!
 
 ### Automate deployment of resources by using ARM templates or Bicep files
 
-#### Case Study — Solution Evaluation
+#### Edit ARM Template to Inherit Resource Group Location
 
 **Domain:** Deploy and Manage Azure Compute Resources
 **Skill:** Automate deployment of resources by using ARM templates or Bicep files
-**Task:** Deploy resources by using an ARM template or a Bicep file
+**Task:** Modify an existing Azure Resource Manager template
 
-*Case Study — Solution Evaluation*
+You have an Azure Resource Manager (ARM) template for creating a Windows virtual machine. You got this template from an existing resource group with a single virtual machine, using the automation script option.
 
-This case study contains a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.
+You want to reuse this template for other deployments. You need all the resources in the resource group to be in the same location.
 
-You have an Azure resource group named `RG1`. `RG1` contains a Linux virtual machine (VM) named `VM1`.
+What should you do?
 
-You need to automate the deployment of 20 additional Linux VMs. The new VMs should be based upon `VM1`'s configuration.
-
-Does this solution meet the goal?
-
-| Solution | Yes | No |
-|----------|-----|----|
-| 1. From the virtual machine's Export Template settings blade, you click Deploy and edit the parameters. | ☐ | ☐ |
-| 2. You store the Linux VM properties in a template and deploy the additional VMs by editing the template parameter values for each additional VM. | ☐ | ☐ |
-| 3. From the resource group's Policies blade, you click Assign policy. | ☐ | ☐ |
+A. Use the Azure portal and create a resource group in the desired location. Then use the `New-AzResourceGroupDeployment` cmdlet using the newly created resource group.  
+B. Edit the parameters file and add a new parameter named location of type string with the default value of `[resourceGroup().location]`.  
+C. Use the `New-AzResourceGroup` cmdlet with the `-Location` parameter to create a resource group in the desired location. Then use the `New-AzResourceGroupDeployment` cmdlet using the newly created resource group.  
+D. Edit the template file and update each location parameter with the value `[resourceGroup().location]`.  
 
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-03-12-03-58-37.png' width=600>
+<img src='.img/2026-03-12-04-14-06.png' width=600>
 
 </details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
 
-Solution 1 Explanation:
+**Explanation:**
 
-This solution does not meet the goal. Every deployment in Azure is described in a template in JavaScript Object Notation (JSON) format. You can access the underlying template from the Export Template settings blade of the VM resource, and then deploy a single new instance of a resource by modifying the template parameters. However, you would need to do this 20 times in order to create 20 VMs, and therefore it is not an automatic process.
+You should edit the template file and update each location parameter with the value `[resourceGroup().location]`. The `resourceGroup()` function gets the resource group object that will be used to deploy the template. This way, all resources in the template will use the same location as the resource group. You need to ensure that all resources are supported in the location that you are using for the resource group.
 
-Solution 2 Explanation:
+**Why you should not choose B:**
 
-This solution meets the goal. The Templates blade in the Azure portal enables you to store JavaScript Object Notation (JSON) documents that automate Azure resource deployment. In this case, to automate the deployment of 20 additional Linux VMs based on `VM1`'s configuration, you can use an Azure Resource Manager (ARM) template. Steps:
+You should not edit the parameters file and add a new parameter named `location` of type string with the default value of `[resourceGroup().location]`. This is the first step in centralizing the location value in the template, but you also need to update the location parameter in the template file with the value `[parameters('location')]`.
 
-1. Export `VM1`'s configuration by using **Export template** in the portal to get the ARM template for the VM.
-2. Modify the exported ARM template to introduce parameters for items that will vary between VMs (for example, VM name, IP assignment, and any unique identifiers).
-3. Create a parameter file (`parameters.json`) that defines the values for the 20 new VMs (names, sizes, and other settings).
-4. Deploy the template with the parameter file using CLI or PowerShell, for example:
+**Why you should not choose A:**
+
+You should not use the Azure portal and create a resource group in the desired location and then use the `New-AzResourceGroupDeployment` cmdlet using the newly created resource group. If the resource group is deployed in a different location to the location configured in the template file, the resources will be deployed in different locations. You need to modify the location parameter in the template file to the value `[resourceGroup().location]` to inherit the location from the parent resource group.
+
+**Why you should not choose C:**
+
+You should not use the `New-AzResourceGroup` cmdlet with the `-Location` parameter to create a resource group in the desired location and then use the `New-AzResourceGroupDeployment` cmdlet using the newly created resource group. If the resource group is deployed in a different location to the location configured in the template file, the resources will be deployed in different locations. You need to modify the location parameter in the template file to the value `[resourceGroup().location]` to inherit the location from the parent resource group.
+
+<img src='.img/2026-03-12-04-30-49.png' width=600>
+
+**References**
+
+- [Set resource location in ARM template](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/resource-location?tabs=azure-powershell)
+- [Understand the structure and syntax of ARM templates](https://learn.microsoft.com/azure/azure-resource-manager/templates/syntax)
+- [Deploy resources with ARM templates and Azure PowerShell](https://learn.microsoft.com/azure/azure-resource-manager/templates/deploy-powershell)
+
+</details>
+
+---
+
+#### Complete ARM template deployment command
+
+**Domain:** Deploy and Manage Azure Compute Resources
+**Skill:** Automate deployment of resources by using ARM templates or Bicep files
+**Task:** Deploy resources by using an ARM template or a Bicep file
+
+You are adding a resource group deployment from an Azure Resource Manager (ARM) template that already exists. The template is stored in a web-based repository. You have already created the resource group named `ResourceGroup1`.
+
+You need to deploy the resources from the resource group deployment. `$ResourceTemplate` is the location of the source template file.
+
+How should you complete the command string? To answer, complete the commands by selecting the correct parts from the drop-down menus.
 
 ```powershell
-az deployment group create --resource-group MyResourceGroup --template-file ./template.json --parameters @parameters.json
+___[1]___ -ResourceGroupName "ResourceGroup1" ___[2]___ $ResourceTemplate
 ```
 
-5. Automate the process by scripting updates to the parameter file and running the deployment in a loop. For example, a simple shell loop can iterate and deploy multiple parameter sets.
+Drop-Down Options:
 
-Solution 3 Explanation:
+| Blank | Options |
+|-------|---------|
+| [1] | `-Select-` / `New-AzResource` / `New-AzResourceGroup` / `New-AzResourceGroupDeployment` |
+| [2] | `-Select-` / `-TemplateFile` / `-TemplateObject` / `-TemplateUri` |
 
-This solution does not meet the goal. To automate the deployment of the 20 additional VMs, you should access the virtual machine's underlying JSON template and deploy the new resources by using the template and custom deployment parameters. Azure Policy is a governance product that enforces rules (for example, allowed regions or VM types) and helps ensure compliance, but it does not perform bulk VM provisioning based on an existing VM's configuration.
+<details>
+<summary>📸 Click to expand screenshot</summary>
 
-References
+<img src='.img/2026-03-13-05-26-05.png' width=600>
 
-* [Export an Azure Resource Manager template from an existing resource](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/export-template-portal)
-* Deploy resources with ARM templates
-* [Azure Policy overview](https://learn.microsoft.com/en-us/azure/governance/policy/overview)
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Solution Explanation:**
+
+You should complete the command string as follows:
+
+```powershell
+New-AzResourceGroupDeployment -ResourceGroupName "ResourceGroup1" -TemplateUri $ResourceTemplate
+```
+
+The `New-AzResourceGroupDeployment` cmdlet is used to deploy a resource group deployment from a template. The `-TemplateUri` parameter is used to specify the template location (URI) and filename for a remote template.
+
+You should not use the `New-AzResourceGroup` cmdlet. This is used to create a new resource group with a specified name. You would have used this cmdlet to create `ResourceGroup1`.
+
+You should not use the `New-AzResource` cmdlet. This is used to create a specific resource.
+
+You should not use the `-TemplateFile` parameter. This is used to specify the path and filename of a locally stored template file.
+
+You should not use the `-TemplateObject` parameter. This is used to specify a hash table used to represent a template.
+
+<img src='.img/2026-03-13-05-29-46.png' width=600>
+
+**References**
+
+* [Deploy resources with ARM templates and Azure PowerShell](https://learn.microsoft.com/azure/azure-resource-manager/templates/deploy-powershell)
+* [New-AzResourceGroupDeployment](https://learn.microsoft.com/powershell/module/az.resources/new-azresourcegroupdeployment?view=azps-15.4.0)
+* [New-AzResourceGroup](https://learn.microsoft.com/powershell/module/az.resources/new-azresourcegroup?view=azps-15.4.0)
+* [New-AzResource](https://learn.microsoft.com/powershell/module/az.resources/new-azresource?view=azps-15.4.0)
 
 </details>
 
@@ -3090,125 +3145,6 @@ References
 
 ---
 
-#### Complete ARM template deployment command
-
-**Domain:** Deploy and Manage Azure Compute Resources
-**Skill:** Automate deployment of resources by using ARM templates or Bicep files
-**Task:** Deploy resources by using an ARM template or a Bicep file
-
-You are adding a resource group deployment from an Azure Resource Manager (ARM) template that already exists. The template is stored in a web-based repository. You have already created the resource group named `ResourceGroup1`.
-
-You need to deploy the resources from the resource group deployment. `$ResourceTemplate` is the location of the source template file.
-
-How should you complete the command string? To answer, complete the commands by selecting the correct parts from the drop-down menus.
-
-```powershell
-___[1]___ -ResourceGroupName "ResourceGroup1" ___[2]___ $ResourceTemplate
-```
-
-Drop-Down Options:
-
-| Blank | Options |
-|-------|---------|
-| [1] | `-Select-` / `New-AzResource` / `New-AzResourceGroup` / `New-AzResourceGroupDeployment` |
-| [2] | `-Select-` / `-TemplateFile` / `-TemplateObject` / `-TemplateUri` |
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-13-05-26-05.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Solution Explanation:**
-
-You should complete the command string as follows:
-
-```powershell
-New-AzResourceGroupDeployment -ResourceGroupName "ResourceGroup1" -TemplateUri $ResourceTemplate
-```
-
-The `New-AzResourceGroupDeployment` cmdlet is used to deploy a resource group deployment from a template. The `-TemplateUri` parameter is used to specify the template location (URI) and filename for a remote template.
-
-You should not use the `New-AzResourceGroup` cmdlet. This is used to create a new resource group with a specified name. You would have used this cmdlet to create `ResourceGroup1`.
-
-You should not use the `New-AzResource` cmdlet. This is used to create a specific resource.
-
-You should not use the `-TemplateFile` parameter. This is used to specify the path and filename of a locally stored template file.
-
-You should not use the `-TemplateObject` parameter. This is used to specify a hash table used to represent a template.
-
-<img src='.img/2026-03-13-05-29-46.png' width=600>
-
-**References**
-
-* [Deploy resources with ARM templates and Azure PowerShell](https://learn.microsoft.com/azure/azure-resource-manager/templates/deploy-powershell)
-* [New-AzResourceGroupDeployment](https://learn.microsoft.com/powershell/module/az.resources/new-azresourcegroupdeployment?view=azps-15.4.0)
-* [New-AzResourceGroup](https://learn.microsoft.com/powershell/module/az.resources/new-azresourcegroup?view=azps-15.4.0)
-* [New-AzResource](https://learn.microsoft.com/powershell/module/az.resources/new-azresource?view=azps-15.4.0)
-
-</details>
-
----
-
-#### Edit ARM Template to Inherit Resource Group Location
-
-**Domain:** Deploy and Manage Azure Compute Resources
-**Skill:** Automate deployment of resources by using ARM templates or Bicep files
-**Task:** Modify an existing Azure Resource Manager template
-
-You have an Azure Resource Manager (ARM) template for creating a Windows virtual machine. You got this template from an existing resource group with a single virtual machine, using the automation script option.
-
-You want to reuse this template for other deployments. You need all the resources in the resource group to be in the same location.
-
-What should you do?
-
-A. Use the Azure portal and create a resource group in the desired location. Then use the `New-AzResourceGroupDeployment` cmdlet using the newly created resource group.  
-B. Edit the parameters file and add a new parameter named location of type string with the default value of `[resourceGroup().location]`.  
-C. Use the `New-AzResourceGroup` cmdlet with the `-Location` parameter to create a resource group in the desired location. Then use the `New-AzResourceGroupDeployment` cmdlet using the newly created resource group.  
-D. Edit the template file and update each location parameter with the value `[resourceGroup().location]`.  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-12-04-14-06.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Explanation:**
-
-You should edit the template file and update each location parameter with the value `[resourceGroup().location]`. The `resourceGroup()` function gets the resource group object that will be used to deploy the template. This way, all resources in the template will use the same location as the resource group. You need to ensure that all resources are supported in the location that you are using for the resource group.
-
-**Why you should not choose B:**
-
-You should not edit the parameters file and add a new parameter named `location` of type string with the default value of `[resourceGroup().location]`. This is the first step in centralizing the location value in the template, but you also need to update the location parameter in the template file with the value `[parameters('location')]`.
-
-**Why you should not choose A:**
-
-You should not use the Azure portal and create a resource group in the desired location and then use the `New-AzResourceGroupDeployment` cmdlet using the newly created resource group. If the resource group is deployed in a different location to the location configured in the template file, the resources will be deployed in different locations. You need to modify the location parameter in the template file to the value `[resourceGroup().location]` to inherit the location from the parent resource group.
-
-**Why you should not choose C:**
-
-You should not use the `New-AzResourceGroup` cmdlet with the `-Location` parameter to create a resource group in the desired location and then use the `New-AzResourceGroupDeployment` cmdlet using the newly created resource group. If the resource group is deployed in a different location to the location configured in the template file, the resources will be deployed in different locations. You need to modify the location parameter in the template file to the value `[resourceGroup().location]` to inherit the location from the parent resource group.
-
-<img src='.img/2026-03-12-04-30-49.png' width=600>
-
-**References**
-
-- [Set resource location in ARM template](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/resource-location?tabs=azure-powershell)
-- [Understand the structure and syntax of ARM templates](https://learn.microsoft.com/azure/azure-resource-manager/templates/syntax)
-- [Deploy resources with ARM templates and Azure PowerShell](https://learn.microsoft.com/azure/azure-resource-manager/templates/deploy-powershell)
-
-</details>
-
----
-
 #### Deployment Mode Deleted Resources
 
 **Domain:** Deploy and Manage Azure Compute Resources
@@ -3311,66 +3247,72 @@ References
 
 ---
 
-### Create and configure virtual machines
-
-#### Apply Change to VMSS OS and Data Disk Profile
+#### Case Study — Solution Evaluation
 
 **Domain:** Deploy and Manage Azure Compute Resources
-**Skill:** Create and configure virtual machines
-**Task:** Deploy and configure an Azure Virtual Machine Scale Sets
+**Skill:** Automate deployment of resources by using ARM templates or Bicep files
+**Task:** Deploy resources by using an ARM template or a Bicep file
 
-You deploy a virtual machine scale set (VMSS) to support a critical application. The upgrade policy for the VMSS is set to Rolling.
+*Case Study — Solution Evaluation*
 
-You need to apply a change in the scale set OS and Data disk Profile for the VMSS to the existing VM images.
+This case study contains a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.
 
-Which PowerShell cmdlet should you use?
+You have an Azure resource group named `RG1`. `RG1` contains a Linux virtual machine (VM) named `VM1`.
 
-A. Update-AzVmss  
-B. Start-AzVmssRollingOSUpgrade  
-C. Update-AzVmssInstance  
-D. Set-AzVmssVM  
+You need to automate the deployment of 20 additional Linux VMs. The new VMs should be based upon `VM1`'s configuration.
+
+Does this solution meet the goal?
+
+| Solution | Yes | No |
+|----------|-----|----|
+| 1. From the virtual machine's Export Template settings blade, you click Deploy and edit the parameters. | ☐ | ☐ |
+| 2. You store the Linux VM properties in a template and deploy the additional VMs by editing the template parameter values for each additional VM. | ☐ | ☐ |
+| 3. From the resource group's Policies blade, you click Assign policy. | ☐ | ☐ |
 
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-02-23-03-46-35.png' width=700>
+<img src='.img/2026-03-12-03-58-37.png' width=600>
 
 </details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
 
-**Why the selected answer is correct (Set-AzVmssVM)**
+Solution 1 Explanation:
 
-The exam suggests using the `Set-AzVmssVM` cmdlet because it directly applies changes to the scale set OS and Data disk Profile for each existing instance. This cmdlet is used for manual updates to individual instances, bypassing the scale set model and upgrade policy.
+This solution does not meet the goal. Every deployment in Azure is described in a template in JavaScript Object Notation (JSON) format. You can access the underlying template from the Export Template settings blade of the VM resource, and then deploy a single new instance of a resource by modifying the template parameters. However, you would need to do this 20 times in order to create 20 VMs, and therefore it is not an automatic process.
 
-**Why the other options are incorrect**
+Solution 2 Explanation:
 
-**Update-AzVmss**
-This cmdlet updates the VMSS model, which defines the configuration for all instances in the scale set. When the upgrade policy is set to Rolling, changes to the model are automatically propagated to existing instances in batches, ensuring application availability. While this cmdlet works in practice for updating the OS and Data disk Profile, the exam question may be emphasizing direct instance-level updates, which `Set-AzVmssVM` provides.
+This solution meets the goal. The Templates blade in the Azure portal enables you to store JavaScript Object Notation (JSON) documents that automate Azure resource deployment. In this case, to automate the deployment of 20 additional Linux VMs based on `VM1`'s configuration, you can use an Azure Resource Manager (ARM) template. Steps:
 
-**Start-AzVmssRollingOSUpgrade**
-This cmdlet is used to upgrade existing VM instances to the latest available platform image OS version. It does not apply changes to the scale set OS or Data disk Profile.
+1. Export `VM1`'s configuration by using **Export template** in the portal to get the ARM template for the VM.
+2. Modify the exported ARM template to introduce parameters for items that will vary between VMs (for example, VM name, IP assignment, and any unique identifiers).
+3. Create a parameter file (`parameters.json`) that defines the values for the 20 new VMs (names, sizes, and other settings).
+4. Deploy the template with the parameter file using CLI or PowerShell, for example:
 
-**Update-AzVmssInstance**
-This cmdlet is used to update an instance when the VMSS upgrade policy is set to Manual. It does not include changes to the scale set OS and Data disk Profile.
+```powershell
+az deployment group create --resource-group MyResourceGroup --template-file ./template.json --parameters @parameters.json
+```
 
-**Key takeaway**
-For real-world scenarios, `Update-AzVmss` is the preferred cmdlet to update the VMSS model and propagate changes to all instances when using a Rolling upgrade policy. However, the exam question appears to focus on direct instance-level updates, which aligns with the `Set-AzVmssVM` cmdlet.
+5. Automate the process by scripting updates to the parameter file and running the deployment in a loop. For example, a simple shell loop can iterate and deploy multiple parameter sets.
 
-**References**
+Solution 3 Explanation:
 
-* [Modify a Virtual Machine Scale Set](https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-upgrade-scale-set)
-* [Set-AzVmssVM](https://learn.microsoft.com/en-us/powershell/module/az.compute/set-azvmssvm)
-* [Update-AzVmss](https://learn.microsoft.com/en-us/powershell/module/az.compute/update-azvmss)
-* [Update-AzVmssInstance](https://learn.microsoft.com/en-us/powershell/module/az.compute/update-azvmssinstance)
-* [Start-AzVmssRollingOSUpgrade](https://learn.microsoft.com/en-us/powershell/module/az.compute/start-azvmssrollingosupgrade)
+This solution does not meet the goal. To automate the deployment of the 20 additional VMs, you should access the virtual machine's underlying JSON template and deploy the new resources by using the template and custom deployment parameters. Azure Policy is a governance product that enforces rules (for example, allowed regions or VM types) and helps ensure compliance, but it does not perform bulk VM provisioning based on an existing VM's configuration.
+
+References
+
+* [Export an Azure Resource Manager template from an existing resource](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/export-template-portal)
+* Deploy resources with ARM templates
+* [Azure Policy overview](https://learn.microsoft.com/en-us/azure/governance/policy/overview)
 
 </details>
 
-▶ Related Lab: [lab-vmss-rolling-upgrade](../hands-on-labs/compute/lab-vmss-rolling-upgrade/README.md)
-
 ---
+
+### Create and configure virtual machines
 
 #### Enable disk encryption on Linux VM
 
@@ -3435,6 +3377,65 @@ The `-SequenceVersion` parameter must be unique for each encryption operation; i
 * [Set-AzVMDiskEncryptionExtension (Az.Compute) - PowerShell](https://learn.microsoft.com/powershell/module/az.compute/set-azvmdiskencryptionextension)
 
 </details>
+
+---
+
+#### Apply Change to VMSS OS and Data Disk Profile
+
+**Domain:** Deploy and Manage Azure Compute Resources
+**Skill:** Create and configure virtual machines
+**Task:** Deploy and configure an Azure Virtual Machine Scale Sets
+
+You deploy a virtual machine scale set (VMSS) to support a critical application. The upgrade policy for the VMSS is set to Rolling.
+
+You need to apply a change in the scale set OS and Data disk Profile for the VMSS to the existing VM images.
+
+Which PowerShell cmdlet should you use?
+
+A. Update-AzVmss  
+B. Start-AzVmssRollingOSUpgrade  
+C. Update-AzVmssInstance  
+D. Set-AzVmssVM  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-02-23-03-46-35.png' width=700>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Why the selected answer is correct (Set-AzVmssVM)**
+
+The exam suggests using the `Set-AzVmssVM` cmdlet because it directly applies changes to the scale set OS and Data disk Profile for each existing instance. This cmdlet is used for manual updates to individual instances, bypassing the scale set model and upgrade policy.
+
+**Why the other options are incorrect**
+
+**Update-AzVmss**
+This cmdlet updates the VMSS model, which defines the configuration for all instances in the scale set. When the upgrade policy is set to Rolling, changes to the model are automatically propagated to existing instances in batches, ensuring application availability. While this cmdlet works in practice for updating the OS and Data disk Profile, the exam question may be emphasizing direct instance-level updates, which `Set-AzVmssVM` provides.
+
+**Start-AzVmssRollingOSUpgrade**
+This cmdlet is used to upgrade existing VM instances to the latest available platform image OS version. It does not apply changes to the scale set OS or Data disk Profile.
+
+**Update-AzVmssInstance**
+This cmdlet is used to update an instance when the VMSS upgrade policy is set to Manual. It does not include changes to the scale set OS and Data disk Profile.
+
+**Key takeaway**
+For real-world scenarios, `Update-AzVmss` is the preferred cmdlet to update the VMSS model and propagate changes to all instances when using a Rolling upgrade policy. However, the exam question appears to focus on direct instance-level updates, which aligns with the `Set-AzVmssVM` cmdlet.
+
+**References**
+
+* [Modify a Virtual Machine Scale Set](https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-upgrade-scale-set)
+* [Set-AzVmssVM](https://learn.microsoft.com/en-us/powershell/module/az.compute/set-azvmssvm)
+* [Update-AzVmss](https://learn.microsoft.com/en-us/powershell/module/az.compute/update-azvmss)
+* [Update-AzVmssInstance](https://learn.microsoft.com/en-us/powershell/module/az.compute/update-azvmssinstance)
+* [Start-AzVmssRollingOSUpgrade](https://learn.microsoft.com/en-us/powershell/module/az.compute/start-azvmssrollingosupgrade)
+
+</details>
+
+▶ Related Lab: [lab-vmss-rolling-upgrade](../hands-on-labs/compute/lab-vmss-rolling-upgrade/README.md)
 
 ---
 
@@ -3643,6 +3644,57 @@ To meet a 99.9% SLA for a SQL Server VM while minimizing cost, pick a VM size th
 
 ---
 
+#### WebApp1 Availability Case
+
+**Domain:** Deploy and Manage Azure Compute Resources
+**Skill:** Create and configure virtual machines
+**Task:** Deploy VMs to availability zones and availability sets
+
+*Case Study — Solution Evaluation*
+
+This case study contains a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.
+
+You want to install an internet-facing web application named `WebApp1` on multiple Azure virtual machines (VMs). The VMs must run Windows Server 2019. Connections to `WebApp1` must be spread across all the VMs. The VMs must be located in separate datacenters in the same region. The Service Level Agreement (SLA) connectivity percentage must be the highest possible.
+
+Does this solution meet the goal?
+
+| Solution | Yes | No |
+|----------|-----|----|
+| 1. You create three VMs, each in a different availability zone, and configure a standard load balancer. | ☐ | ☐ |
+| 2. You create three VMs in an availability set with three fault domains and configure a standard load balancer. | ☐ | ☐ |
+| 3. You create three VMs in the same virtual network, place each VM in a different availability zone, and use Azure Front Door to route traffic. | ☐ | ☐ |
+| 4. You create three VMs and place them all in availability zone 1, and create a zone-redundant load balancer. | ☐ | ☐ |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-18-04-45-16.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Solution 1 Explanation:** Deploying three VMs across three availability zones and placing them behind a Standard Load Balancer (configured for cross-zone backend pools) provides zonal isolation for the compute hosts and a zone-resilient frontend. This configuration enables the highest achievable single-region connectivity SLA for IaaS VMs because the VMs are in separate datacenters (zones) and the Standard Load Balancer supports zone-redundant frontend/backends.
+
+**Solution 2 Explanation:** An availability set distributes VMs across fault domains within a single datacenter; it does not place VMs in separate datacenters (availability zones). Because the requirement is to locate VMs in separate datacenters in the same region, an availability set alone does not meet the goal.
+
+**Solution 3 Explanation:** Azure Front Door provides global HTTP/HTTPS routing and can improve global availability across regions, but it does not by itself place VMs into separate datacenters within a single region. Front Door is not a substitute for zonal VM placement and local zone-redundant load balancing when the requirement is highest single-region SLA based on separate datacenters.
+
+**Solution 4 Explanation:** Creating all VMs in the same availability zone (zone 1) defeats the purpose of a zone-redundant frontend. A zone-redundant load balancer cannot provide zone-level fault isolation if all backend VMs are located in the same zone; the VMs would still be impacted by a zone outage.
+
+**References**
+
+* [What are availability zones?](https://learn.microsoft.com/azure/reliability/availability-zones-overview)
+* [Create virtual machines in an availability zone using the Azure portal](https://learn.microsoft.com/azure/virtual-machines/create-portal-availability-zone)
+* [Standard load balancer and availability zones](https://learn.microsoft.com/azure/load-balancer/load-balancer-standard-availability-zones)
+* [Tutorial: Load balance VMs within an availability zone by using the Azure portal](https://learn.microsoft.com/azure/load-balancer/tutorial-load-balancer-standard-public-zonal-portal)
+* [Service level agreements (SLAs) for online services](https://aka.ms/CSLA)
+
+</details>
+
+---
+
 #### Enable VM disk encryption
 
 **Domain:** Deploy and Manage Azure Compute Resources
@@ -3715,57 +3767,6 @@ You should not use the `--os-disk-encryption-set` parameter. You can use this pa
 * [Create and configure a key vault for Azure Disk Encryption](https://learn.microsoft.com/azure/virtual-machines/linux/disk-encryption-key-vault#create-a-key-vault)
 * [az vm encryption (CLI reference)](https://learn.microsoft.com/cli/azure/vm/encryption?view=azure-cli-latest)
 * [az vm (CLI reference)](https://learn.microsoft.com/cli/azure/vm?view=azure-cli-latest)
-
-</details>
-
----
-
-#### WebApp1 Availability Case
-
-**Domain:** Deploy and Manage Azure Compute Resources
-**Skill:** Create and configure virtual machines
-**Task:** Deploy VMs to availability zones and availability sets
-
-*Case Study — Solution Evaluation*
-
-This case study contains a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.
-
-You want to install an internet-facing web application named `WebApp1` on multiple Azure virtual machines (VMs). The VMs must run Windows Server 2019. Connections to `WebApp1` must be spread across all the VMs. The VMs must be located in separate datacenters in the same region. The Service Level Agreement (SLA) connectivity percentage must be the highest possible.
-
-Does this solution meet the goal?
-
-| Solution | Yes | No |
-|----------|-----|----|
-| 1. You create three VMs, each in a different availability zone, and configure a standard load balancer. | ☐ | ☐ |
-| 2. You create three VMs in an availability set with three fault domains and configure a standard load balancer. | ☐ | ☐ |
-| 3. You create three VMs in the same virtual network, place each VM in a different availability zone, and use Azure Front Door to route traffic. | ☐ | ☐ |
-| 4. You create three VMs and place them all in availability zone 1, and create a zone-redundant load balancer. | ☐ | ☐ |
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-18-04-45-16.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Solution 1 Explanation:** Deploying three VMs across three availability zones and placing them behind a Standard Load Balancer (configured for cross-zone backend pools) provides zonal isolation for the compute hosts and a zone-resilient frontend. This configuration enables the highest achievable single-region connectivity SLA for IaaS VMs because the VMs are in separate datacenters (zones) and the Standard Load Balancer supports zone-redundant frontend/backends.
-
-**Solution 2 Explanation:** An availability set distributes VMs across fault domains within a single datacenter; it does not place VMs in separate datacenters (availability zones). Because the requirement is to locate VMs in separate datacenters in the same region, an availability set alone does not meet the goal.
-
-**Solution 3 Explanation:** Azure Front Door provides global HTTP/HTTPS routing and can improve global availability across regions, but it does not by itself place VMs into separate datacenters within a single region. Front Door is not a substitute for zonal VM placement and local zone-redundant load balancing when the requirement is highest single-region SLA based on separate datacenters.
-
-**Solution 4 Explanation:** Creating all VMs in the same availability zone (zone 1) defeats the purpose of a zone-redundant frontend. A zone-redundant load balancer cannot provide zone-level fault isolation if all backend VMs are located in the same zone; the VMs would still be impacted by a zone outage.
-
-**References**
-
-* [What are availability zones?](https://learn.microsoft.com/azure/reliability/availability-zones-overview)
-* [Create virtual machines in an availability zone using the Azure portal](https://learn.microsoft.com/azure/virtual-machines/create-portal-availability-zone)
-* [Standard load balancer and availability zones](https://learn.microsoft.com/azure/load-balancer/load-balancer-standard-availability-zones)
-* [Tutorial: Load balance VMs within an availability zone by using the Azure portal](https://learn.microsoft.com/azure/load-balancer/tutorial-load-balancer-standard-public-zonal-portal)
-* [Service level agreements (SLAs) for online services](https://aka.ms/CSLA)
 
 </details>
 
@@ -4030,97 +4031,90 @@ The JSON defines an Azure Service Bus scaler with a `messageCount` threshold and
 
 ### Create and configure Azure App Service
 
-#### Resolve Azure App Service Pricing Tier for Runtime Requirements
+#### Prepare Azure App Service for Web App Republication
 
 **Domain:** Deploy and Manage Azure Compute Resources
 **Skill:** Create and configure Azure App Service
 **Task:**
 
-- Provision an App Service plan
-- Configure scaling for an App Service plan
+- Create an App Service
+- Configure deployment slots for an App Service
 
-You deploy an Azure web app named MyApp. MyApp runs in a Free pricing tier service plan named MyPlan. During testing, you discover that MyApp stops after 60 minutes and that it cannot be restarted until the next day.
+You are developing a new web app. The source code is located in an Azure DevOps Git repository. Before you move the web app into production, its functionality must be reviewed by your test users.
 
-You need to ensure that MyApp can run eight hours each day during the testing period. You want to keep the additional costs incurred to a minimum.
+You need to prepare the target environment to be ready to republish the web app.
 
-Does changing the pricing tier for MyPlan to Standard S1 meet the goal?
+Which four commands should you run in sequence? To answer, move the appropriate commands from the list of possible commands to the answer area and arrange them in the correct order.
 
-A. Yes  
-B. No  
+Available options:
+
+* Publish-AzWebApp  
+* New-AzAppServicePlan  
+* New-AzResourceGroup  
+* New-AzWebAppSlot  
+* Start-AzWebAppSlot  
 
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-01-30-06-18-07.png' width=700>
+<img src='.img/2026-01-30-06-12-43.png' width=700>
 
 </details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
 
-**Correct answer: No**
+**Why the selected answer is wrong**
 
-**Why the selected answer is incorrect**
-Changing the App Service plan from **Free (F1)** to **Standard S1** does remove the 60-minute daily execution limit, so the app can run for eight hours per day. However, the solution also explicitly requires keeping **additional costs to a minimum**. Standard S1 is **not the lowest-cost plan** that satisfies the runtime requirement, so the solution does not fully meet the goal.
+Your sequence prepares Azure infrastructure objects but **never deploys the application code** from the Azure DevOps Git repository.
+The exam question explicitly states that the target environment must be ready to **republish the web app** so test users can review functionality. That implies pushing code into an App Service (or slot), not just provisioning resources.
 
-**Why the correct answer is correct**
-While Standard S1 technically works from a functionality standpoint, it fails the cost-minimization requirement. A **Basic (B1)** plan would also allow the app to run continuously beyond 60 minutes and is **cheaper than Standard S1**, making S1 an unnecessarily expensive choice for testing.
+Specific issues with your sequence:
 
-**Why other options are less appropriate**
+* **New-AzWebAppSlot** is unnecessary unless the question explicitly mentions deployment slots. Slots are optional, not required to republish.
+* **Start-AzWebAppSlot** is redundant in most exam scenarios. Newly created web apps and slots start automatically.
+* **Publish-AzWebApp** (or equivalent deployment command) is missing, which is the key step that actually deploys the application.
+* You created infrastructure only; no deployment occurred.
 
-* Staying on **Free (F1)** is not viable because of the enforced 60-minute daily limit and the inability to restart the app the same day.
-* Moving to **Standard S1** overprovisions features (such as scaling and advanced capabilities) that are not required for this scenario and increases cost unnecessarily.
+This is a common exam trap: confusing *environment preparation* with *application deployment*.
+
+**Why the correct answer is right**
+
+The correct sequence includes the deployment step and follows the required dependency order:
+
+1. **New-AzResourceGroup**
+   A resource group must exist before any App Service resources can be created.
+
+2. **New-AzAppServicePlan**
+   An App Service Plan is required before creating a web app.
+
+3. **New-AzWebApp**
+   Creates the App Service that will host the application.
+
+4. **Publish-AzWebApp**
+   Deploys the application code so testers can access and validate functionality.
+
+This sequence ensures:
+
+* Infrastructure dependencies are respected.
+* The web app actually contains code to test.
+* The environment is truly “ready to republish,” per the wording of the question.
 
 **Key takeaway**
-For App Service questions, always evaluate both **technical capability and cost efficiency**. If multiple plans meet the runtime requirement, the **lowest-cost qualifying tier** is the correct exam choice.
+
+On Azure exams, **“prepare the environment to republish” always includes deploying code**, not just creating resources.
+If a deployment-related command is available (like `Publish-AzWebApp`) and the scenario involves testers or validation, it is almost always required.
 
 **References**
 
-* [https://learn.microsoft.com/azure/app-service/overview-hosting-plans](https://learn.microsoft.com/azure/app-service/overview-hosting-plans)
-* link removed
-* [https://learn.microsoft.com/azure/app-service/operating-system-functionality#app-service-plan-tiers](https://learn.microsoft.com/azure/app-service/operating-system-functionality#app-service-plan-tiers)
-
-<img src='.img/2026-02-05-02-52-17.png' width=600>
-
-**What the ACU/vCPU column represents**
-
-The **ACU/vCPU** column indicates the **relative CPU performance available per virtual CPU** for that App Service plan.
-
-**ACU (Azure Compute Unit)**
-
-* ACU is a **normalized performance score**, not a physical measurement.
-* Microsoft uses it to compare CPU performance **across different underlying hardware generations**.
-* Higher ACU means **more compute power per vCPU**.
-
-**How to read the values**
-
-* **N/A (Free F1 / Shared D1)**
-  These tiers don't provide dedicated vCPUs. They run on shared infrastructure with enforced time quotas, so ACU isn't applicable.
-
-* **100 ACU**
-  Baseline compute performance. This is common for **Basic (B-series)** and **Standard (S-series)** plans and many legacy Premium plans.
-
-* **195 ACU / 210 ACU**
-  Indicates **newer, faster CPU hardware** (for example, Premium v3 or Premium v2).
-  Each vCPU delivers roughly **~2× the compute performance** of a 100 ACU vCPU.
-
-**What this means in practice (exam-relevant)**
-
-* ACU is about **CPU speed per vCPU**, not total compute.
-* Total compute = **ACU × number of vCPUs**.
-* Two plans with the same vCPU count but different ACU values will have **different performance**.
-* ACU does **not** change memory, storage, features, or scaling rules—only relative CPU power.
-
-**Common exam trap**
-
-* Assuming "1 vCPU = same performance everywhere."
-  This is incorrect. A **1-vCPU plan at 195 ACU** is significantly faster than **1 vCPU at 100 ACU**.
-
-**Key takeaway**
-
-ACU/vCPU is a **relative CPU performance indicator**. Higher numbers mean **faster CPUs per core**, typically reflecting newer App Service hardware generations.
+* [https://learn.microsoft.com/azure/app-service/overview](https://learn.microsoft.com/azure/app-service/overview)
+* [https://learn.microsoft.com/powershell/module/az.websites/new-azwebapp](https://learn.microsoft.com/powershell/module/az.websites/new-azwebapp)
+* [https://learn.microsoft.com/powershell/module/az.websites/publish-azwebapp](https://learn.microsoft.com/powershell/module/az.websites/publish-azwebapp)
+* [https://learn.microsoft.com/azure/app-service/deploy-local-git](https://learn.microsoft.com/azure/app-service/deploy-local-git)
 
 </details>
+
+▶ **Related Lab:** [lab-app-service-republication](../hands-on-labs/compute/lab-app-service-republication/README.md)
 
 ---
 
@@ -4577,226 +4571,6 @@ The exam shortcut is:
 
 ---
 
-#### Prepare Azure App Service for Web App Republication
-
-**Domain:** Deploy and Manage Azure Compute Resources
-**Skill:** Create and configure Azure App Service
-**Task:**
-
-- Create an App Service
-- Configure deployment slots for an App Service
-
-You are developing a new web app. The source code is located in an Azure DevOps Git repository. Before you move the web app into production, its functionality must be reviewed by your test users.
-
-You need to prepare the target environment to be ready to republish the web app.
-
-Which four commands should you run in sequence? To answer, move the appropriate commands from the list of possible commands to the answer area and arrange them in the correct order.
-
-Available options:
-
-* Publish-AzWebApp  
-* New-AzAppServicePlan  
-* New-AzResourceGroup  
-* New-AzWebAppSlot  
-* Start-AzWebAppSlot  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-01-30-06-12-43.png' width=700>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Why the selected answer is wrong**
-
-Your sequence prepares Azure infrastructure objects but **never deploys the application code** from the Azure DevOps Git repository.
-The exam question explicitly states that the target environment must be ready to **republish the web app** so test users can review functionality. That implies pushing code into an App Service (or slot), not just provisioning resources.
-
-Specific issues with your sequence:
-
-* **New-AzWebAppSlot** is unnecessary unless the question explicitly mentions deployment slots. Slots are optional, not required to republish.
-* **Start-AzWebAppSlot** is redundant in most exam scenarios. Newly created web apps and slots start automatically.
-* **Publish-AzWebApp** (or equivalent deployment command) is missing, which is the key step that actually deploys the application.
-* You created infrastructure only; no deployment occurred.
-
-This is a common exam trap: confusing *environment preparation* with *application deployment*.
-
-**Why the correct answer is right**
-
-The correct sequence includes the deployment step and follows the required dependency order:
-
-1. **New-AzResourceGroup**
-   A resource group must exist before any App Service resources can be created.
-
-2. **New-AzAppServicePlan**
-   An App Service Plan is required before creating a web app.
-
-3. **New-AzWebApp**
-   Creates the App Service that will host the application.
-
-4. **Publish-AzWebApp**
-   Deploys the application code so testers can access and validate functionality.
-
-This sequence ensures:
-
-* Infrastructure dependencies are respected.
-* The web app actually contains code to test.
-* The environment is truly “ready to republish,” per the wording of the question.
-
-**Key takeaway**
-
-On Azure exams, **“prepare the environment to republish” always includes deploying code**, not just creating resources.
-If a deployment-related command is available (like `Publish-AzWebApp`) and the scenario involves testers or validation, it is almost always required.
-
-**References**
-
-* [https://learn.microsoft.com/azure/app-service/overview](https://learn.microsoft.com/azure/app-service/overview)
-* [https://learn.microsoft.com/powershell/module/az.websites/new-azwebapp](https://learn.microsoft.com/powershell/module/az.websites/new-azwebapp)
-* [https://learn.microsoft.com/powershell/module/az.websites/publish-azwebapp](https://learn.microsoft.com/powershell/module/az.websites/publish-azwebapp)
-* [https://learn.microsoft.com/azure/app-service/deploy-local-git](https://learn.microsoft.com/azure/app-service/deploy-local-git)
-
-</details>
-
-▶ **Related Lab:** [lab-app-service-republication](../hands-on-labs/compute/lab-app-service-republication/README.md)
-
----
-
-#### Resolve Azure App Service Pricing Tier for Runtime Requirements
-
-**Domain:** Deploy and Manage Azure Compute Resources
-**Skill:** Create and configure Azure App Service
-**Task:**
-
-- Provision an App Service plan
-- Configure scaling for an App Service plan
-
-You deploy an Azure web app named MyApp. MyApps runs in a Free pricing tier service plan named MyPlan. During testing, you discover that MyApp stops after 60 minutes and that it cannot be restarted until the next day.
-
-You need to ensure that MyApp can run eight hours each day during the testing period. You want to keep the additional costs incurred to a minimum.
-
-Does changing the pricing tier for MyPlan to Shared D1 meet the goal?
-
-A. Yes  
-B. No  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-01-30-06-17-12.png' width=700>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Why the selected answer is wrong (Yes)**
-Moving from **Free (F1)** to **Shared (D1)** increases the daily CPU quota, but it **does not remove quotas**. Your symptom ("stops after 60 minutes and can't be restarted until the next day") matches hitting the **CPU (Day)** quota, which causes the app to be stopped until the quota resets. In Shared (D1), the app can still hit **CPU (Day)** and be stopped again—just later—so it won't reliably run **8 hours/day**.
-
-**Why the correct answer is correct (No)**
-To meet "run 8 hours each day," you need a plan where you **don't get stopped due to Free/Shared quotas**. That generally means moving to a **Dedicated compute** tier (Basic/Standard/Premium), where the app runs on dedicated VMs and the Free/Shared CPU (Day) quota enforcement doesn't apply in the same way. Shared (D1) remains a shared-compute tier with quota enforcement, so it doesn't meet the requirement.
-
-**Why other options are incorrect or less appropriate**
-
-* **Stay on Free (F1):** guaranteed to stop once the quota is exceeded (as observed).
-* **Shared (D1):** still quota-enforced; may extend runtime but not to the required 8 hours consistently.
-* **Basic (B1) or higher:** costs more than Shared, but it's the minimum tier change that aligns with the requirement to keep the app running during the testing window.
-
-**Key takeaway**
-**Free and Shared tiers have CPU quotas that can stop the app until the daily reset.** If you need predictable multi-hour runtime, move to a **Dedicated compute** tier (Basic or higher).
-
-**References**
-
-* [https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans](https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans)
-* [https://learn.microsoft.com/en-us/azure/app-service/web-sites-monitor](https://learn.microsoft.com/en-us/azure/app-service/web-sites-monitor)
-
-</details>
-
-▶ **Related Lab:** [lab-app-service-plan-quotas](../hands-on-labs/compute/lab-app-service-plan-quotas/README.md)
-
----
-
-#### App Service Plan Selection
-
-**Domain:** Deploy and Manage Azure Compute Resources
-**Skill:** Create and configure Azure App Service
-**Task:** Provision an App Service plan
-
-You are building new web apps in Azure App Service.
-
-You should use the web apps, stacks, and the available App Service plans as shown in the exhibit.
-
-**Exhibit:**
-
-| Web App | Stack |
-|--------:|:-----|
-| App1 | Node.js 21.x |
-| App2 | ASP.NET 4.8 |
-| App3 | .NET 7 |
-| App4 | Python 3.9 |
-
-| App Service Plan | Platform |
-|---|---|
-| Plan1 | Windows |
-| Plan2 | Linux |
-
-You need to publish each web app in an App Service plan that supports its stack runtime.
-
-Which App Service plan can you use for each web app? To answer, select the appropriate options from the drop-down menus.
-
-| App | App Service plan |
-|-----|------------------|
-| App1 | ***[1]*** |
-| App2 | ***[2]*** |
-| App3 | ***[3]*** |
-| App4 | ***[4]*** |
-
-Drop-Down Options:
-
-| Blank | Options |
-|-------|---------|
-| `[1]` | Plan1 and Plan2 / Plan1 only / Plan2 only |
-| `[2]` | Plan1 and Plan2 / Plan1 only / Plan2 only |
-| `[3]` | Plan1 and Plan2 / Plan1 only / Plan2 only |
-| `[4]` | Plan1 and Plan2 / Plan1 only / Plan2 only |
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-17-03-52-58.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Solution Explanation:**
-
-You can use Plan1 and Plan2 for App1. Node.js runtime stack is supported by App Service plan platforms running on Windows and Linux OSes.
-
-You can only use Plan1 for App2. ASP.NET 4.8 runtime stack is supported by App Service plan platform running on Windows only.
-
-You can use Plan1 and Plan2 for App3. The .NET 7 runtime stack is supported by App Service plan platforms running on Windows and Linux OSes.
-
-You can only use Plan2 for App4. The Python runtime stack is supported by App Service plan platforms running on Linux only. Support for Windows has been officially retired.
-
-It is recommended that you monitor the App Service language runtime support policy page regularly for updates and the retiring process for end-of-life stacks supported by the App Service plans.
-
-<img src='.img/2026-03-17-04-07-15.png' width=600>
-
-**References**
-
-* [App Service overview](https://learn.microsoft.com/azure/app-service/overview)
-* [Language runtime support policy for Azure App Service](https://learn.microsoft.com/azure/app-service/language-support-policy#show-and-set-language-versions)
-* [Deploy a Node.js web app in Azure](https://learn.microsoft.com/azure/app-service/quickstart-nodejs#create-your-nodejs-application)
-* [Quickstart: Deploy an ASP.NET web app](https://learn.microsoft.com/azure/app-service/quickstart-dotnetcore)
-
-</details>
-
----
-
 #### Configure Azure App Service Plan for Website Hosting
 
 **Domain:** Deploy and Manage Azure Compute Resources
@@ -4903,6 +4677,179 @@ On Azure exams, when you see:
 
 ---
 
+#### Resolve Azure App Service Pricing Tier for Runtime Requirements
+
+**Domain:** Deploy and Manage Azure Compute Resources
+**Skill:** Create and configure Azure App Service
+**Task:**
+
+- Provision an App Service plan
+- Configure scaling for an App Service plan
+
+You deploy an Azure web app named MyApp. MyApp runs in a Free pricing tier service plan named MyPlan. During testing, you discover that MyApp stops after 60 minutes and that it cannot be restarted until the next day.
+
+You need to ensure that MyApp can run eight hours each day during the testing period. You want to keep the additional costs incurred to a minimum.
+
+Does changing the pricing tier for MyPlan to Standard S1 meet the goal?
+
+A. Yes  
+B. No  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-01-30-06-18-07.png' width=700>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Correct answer: No**
+
+**Why the selected answer is incorrect**
+Changing the App Service plan from **Free (F1)** to **Standard S1** does remove the 60-minute daily execution limit, so the app can run for eight hours per day. However, the solution also explicitly requires keeping **additional costs to a minimum**. Standard S1 is **not the lowest-cost plan** that satisfies the runtime requirement, so the solution does not fully meet the goal.
+
+**Why the correct answer is correct**
+While Standard S1 technically works from a functionality standpoint, it fails the cost-minimization requirement. A **Basic (B1)** plan would also allow the app to run continuously beyond 60 minutes and is **cheaper than Standard S1**, making S1 an unnecessarily expensive choice for testing.
+
+**Why other options are less appropriate**
+
+* Staying on **Free (F1)** is not viable because of the enforced 60-minute daily limit and the inability to restart the app the same day.
+* Moving to **Standard S1** overprovisions features (such as scaling and advanced capabilities) that are not required for this scenario and increases cost unnecessarily.
+
+**Key takeaway**
+For App Service questions, always evaluate both **technical capability and cost efficiency**. If multiple plans meet the runtime requirement, the **lowest-cost qualifying tier** is the correct exam choice.
+
+**References**
+
+* [https://learn.microsoft.com/azure/app-service/overview-hosting-plans](https://learn.microsoft.com/azure/app-service/overview-hosting-plans)
+* link removed
+* [https://learn.microsoft.com/azure/app-service/operating-system-functionality#app-service-plan-tiers](https://learn.microsoft.com/azure/app-service/operating-system-functionality#app-service-plan-tiers)
+
+<img src='.img/2026-02-05-02-52-17.png' width=600>
+
+**What the ACU/vCPU column represents**
+
+The **ACU/vCPU** column indicates the **relative CPU performance available per virtual CPU** for that App Service plan.
+
+**ACU (Azure Compute Unit)**
+
+* ACU is a **normalized performance score**, not a physical measurement.
+* Microsoft uses it to compare CPU performance **across different underlying hardware generations**.
+* Higher ACU means **more compute power per vCPU**.
+
+**How to read the values**
+
+* **N/A (Free F1 / Shared D1)**
+  These tiers don't provide dedicated vCPUs. They run on shared infrastructure with enforced time quotas, so ACU isn't applicable.
+
+* **100 ACU**
+  Baseline compute performance. This is common for **Basic (B-series)** and **Standard (S-series)** plans and many legacy Premium plans.
+
+* **195 ACU / 210 ACU**
+  Indicates **newer, faster CPU hardware** (for example, Premium v3 or Premium v2).
+  Each vCPU delivers roughly **~2× the compute performance** of a 100 ACU vCPU.
+
+**What this means in practice (exam-relevant)**
+
+* ACU is about **CPU speed per vCPU**, not total compute.
+* Total compute = **ACU × number of vCPUs**.
+* Two plans with the same vCPU count but different ACU values will have **different performance**.
+* ACU does **not** change memory, storage, features, or scaling rules—only relative CPU power.
+
+**Common exam trap**
+
+* Assuming "1 vCPU = same performance everywhere."
+  This is incorrect. A **1-vCPU plan at 195 ACU** is significantly faster than **1 vCPU at 100 ACU**.
+
+**Key takeaway**
+
+ACU/vCPU is a **relative CPU performance indicator**. Higher numbers mean **faster CPUs per core**, typically reflecting newer App Service hardware generations.
+
+</details>
+
+---
+
+#### App Service Plan Selection
+
+**Domain:** Deploy and Manage Azure Compute Resources
+**Skill:** Create and configure Azure App Service
+**Task:** Provision an App Service plan
+
+You are building new web apps in Azure App Service.
+
+You should use the web apps, stacks, and the available App Service plans as shown in the exhibit.
+
+**Exhibit:**
+
+| Web App | Stack |
+|--------:|:-----|
+| App1 | Node.js 21.x |
+| App2 | ASP.NET 4.8 |
+| App3 | .NET 7 |
+| App4 | Python 3.9 |
+
+| App Service Plan | Platform |
+|---|---|
+| Plan1 | Windows |
+| Plan2 | Linux |
+
+You need to publish each web app in an App Service plan that supports its stack runtime.
+
+Which App Service plan can you use for each web app? To answer, select the appropriate options from the drop-down menus.
+
+| App | App Service plan |
+|-----|------------------|
+| App1 | ***[1]*** |
+| App2 | ***[2]*** |
+| App3 | ***[3]*** |
+| App4 | ***[4]*** |
+
+Drop-Down Options:
+
+| Blank | Options |
+|-------|---------|
+| `[1]` | Plan1 and Plan2 / Plan1 only / Plan2 only |
+| `[2]` | Plan1 and Plan2 / Plan1 only / Plan2 only |
+| `[3]` | Plan1 and Plan2 / Plan1 only / Plan2 only |
+| `[4]` | Plan1 and Plan2 / Plan1 only / Plan2 only |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-17-03-52-58.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Solution Explanation:**
+
+You can use Plan1 and Plan2 for App1. Node.js runtime stack is supported by App Service plan platforms running on Windows and Linux OSes.
+
+You can only use Plan1 for App2. ASP.NET 4.8 runtime stack is supported by App Service plan platform running on Windows only.
+
+You can use Plan1 and Plan2 for App3. The .NET 7 runtime stack is supported by App Service plan platforms running on Windows and Linux OSes.
+
+You can only use Plan2 for App4. The Python runtime stack is supported by App Service plan platforms running on Linux only. Support for Windows has been officially retired.
+
+It is recommended that you monitor the App Service language runtime support policy page regularly for updates and the retiring process for end-of-life stacks supported by the App Service plans.
+
+<img src='.img/2026-03-17-04-07-15.png' width=600>
+
+**References**
+
+* [App Service overview](https://learn.microsoft.com/azure/app-service/overview)
+* [Language runtime support policy for Azure App Service](https://learn.microsoft.com/azure/app-service/language-support-policy#show-and-set-language-versions)
+* [Deploy a Node.js web app in Azure](https://learn.microsoft.com/azure/app-service/quickstart-nodejs#create-your-nodejs-application)
+* [Quickstart: Deploy an ASP.NET web app](https://learn.microsoft.com/azure/app-service/quickstart-dotnetcore)
+
+</details>
+
+---
+
 #### Configure App Service Client Certificates
 
 **Domain:** Deploy and Manage Azure Compute Resources
@@ -4990,149 +4937,6 @@ You should not use the `clientAffinityEnabled` property for this requirement.  Y
 * [Site:ClientCertMode Property](https://learn.microsoft.com/azure/templates/microsoft.web/sites#siteclientcertmode)
 * [Site:ClientCertExclusionPaths Property](https://learn.microsoft.com/azure/templates/microsoft.web/sites#siteclientcertexclusionpaths)
 * [Site:ClientAffinityEnabled Property](https://learn.microsoft.com/azure/templates/microsoft.web/sites#siteclientaffinityenabled)
-
-</details>
-
----
-
-#### WebJobs on multi-instance App Service
-
-**Domain:** Deploy and Manage Azure Compute Resources
-**Skill:** Create and configure Azure App Service
-**Task:** Create an App Service
-
-You are developing an Azure web app named MyApp1 to run as two instances hosted in a Basic App Service plan named MyPlan. You want to deploy two scripts to run as WebJobs in the context of MyApp1.
-
-You need to ensure that you can support the WebJobs running on both MyApp1 instances.
-
-For each of the following statements, select Yes if the statement is true. Otherwise, select No.
-
-| STATEMENT | YES | NO |
-|-----------|-----|----|
-| You must deploy the scripts as continuous WebJobs. | ☐ | ☐ |
-| You must scale up MyPlan to the Standard S1 tier. | ☐ | ☐ |
-| You must create the WebJobs as linked to a web project. | ☐ | ☐ |
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-15-05-51-44.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-You must deploy the scripts as continuous WebJobs. You can deploy WebJobs as continuous or triggered. A continuous WebJob runs by default on all instances of the linked web app but can be limited to a single instance. A triggered WebJob can run on only one instance.
-
-You are not required to scale up MyPlan to the Standard S1 tier. WebJobs are supported on the Basic pricing tier.
-
-You must create the WebJobs as linked to a web project. This is necessary when you want a WebJob to run in the context of a web app. You can also create a WebJob as an independent WebJob and have it run as a web app by itself.
-
-<img src='.img/2026-03-15-05-57-57.png' width=600>
-
-<details>
-<summary>📝 More Detail</summary>
-
-Azure **WebJobs** are a feature of **Azure App Service** that let you run background code or scripts alongside your web application. They are typically used for tasks that should run behind the scenes rather than as part of an HTTP request, such as batch processing, scheduled jobs, queue processing, or long-running tasks. (learn.microsoft.com)
-
-A WebJob runs **in the same environment as your App Service web app**, meaning it shares the same VM instances, CPU, and memory defined by the App Service plan. If your App Service plan scales to multiple instances, those instances host both the web app and any WebJobs associated with it. (learn.microsoft.com)
-
-Core concept: background processing for App Service
-
-Normally a web app responds to HTTP requests. If you need background processing (for example processing files, sending emails, syncing data, or running scheduled jobs), you attach a WebJob to the app. The job can be written in various languages or scripts and runs as a program inside the web app environment. (learn.microsoft.com)
-
-Typical use cases include:
-
-* Scheduled maintenance tasks
-* Processing items from queues or blobs
-* Data cleanup or synchronization jobs
-* Long-running processing tasks that should not block web requests
-
-Two types of WebJobs
-
-This distinction is critical for exam questions.
-
-Continuous WebJobs
-
-* Start automatically when created.
-* Run continuously (often inside an infinite loop).
-* By default run on every instance of the web app when the app scales out.
-* Can optionally be restricted to one instance. (learn.microsoft.com)
-
-Because they run on all instances, continuous WebJobs are the choice when you want the job to run on every scaled instance of your web app.
-
-Triggered WebJobs
-
-* Run only when triggered.
-* Can run on demand, on a schedule, or when an event occurs.
-* Run on only one instance, selected by Azure. (learn.microsoft.com)
-
-This prevents duplicate execution if multiple instances exist.
-
-How scaling affects WebJobs
-
-WebJobs scale together with the App Service plan. If the plan scales to multiple instances:
-
-* Continuous WebJobs run on each instance.
-* Triggered WebJobs run on only one instance. (learn.microsoft.com)
-
-This behavior is the key to the exam question you showed.
-
-Your app runs on two instances. If you want a job to run on both instances, it must be a continuous WebJob, because triggered jobs run only once on a single instance.
-
-Pricing tier considerations
-
-WebJobs are supported in the Basic tier and above of App Service plans, so upgrading to Standard is not required just to run them. (learn.microsoft.com)
-
-That is why the exam statement saying you must scale to Standard S1 is incorrect.
-
-Relationship to the web app
-
-A WebJob can run:
-
-* In the context of a web app (the common case for exam questions)
-* Independently as a job host
-
-When the job is tied to a web app, it runs inside that app’s environment and uses its configuration and resources.
-
-Operational details worth remembering
-
-Some practical behaviors that often appear in exam questions:
-
-* WebJobs share compute resources with the web app. (learn.microsoft.com)
-* Continuous jobs restart automatically if they fail. (learn.microsoft.com)
-* Continuous jobs should use Always On so the app doesn’t go idle. (learn.microsoft.com)
-
-The key exam takeaway from your question
-
-Your app runs on two instances.
-
-To ensure the scripts run on both instances:
-
-* Use continuous WebJobs → run on all instances.
-* Do not use triggered WebJobs → run on only one instance.
-
-Therefore:
-
-* “Deploy the scripts as continuous WebJobs” → True
-* “Scale to Standard S1 tier” → False (Basic already supports WebJobs)
-* “Create the WebJobs linked to a web project” → True for running inside the app context
-
-A practical example of a **continuous WebJob** is a background service that processes messages from an **Azure Storage Queue**.
-
-Suppose your web application allows users to upload images. When a user uploads a file, the web app places a message in a queue describing the image that needs processing. A **continuous WebJob** runs in the background on each App Service instance and constantly listens to that queue. Whenever a new message appears, the job retrieves the message, processes the image (for example resizing or generating thumbnails), stores the processed image in Blob Storage, and then removes the message from the queue.
-
-Because the job runs continuously, it is always ready to process new items as they arrive. If the App Service plan scales to multiple instances, each instance can run the WebJob and process messages in parallel, increasing throughput for high workloads.
-
-</details>
-
-**References**
-
-* [Run background tasks with WebJobs](https://learn.microsoft.com/azure/app-service/webjobs-create)
-* [Develop and deploy WebJobs using Visual Studio](https://learn.microsoft.com/azure/app-service/webjobs-dotnet-deploy-vs)
-* [App Service WebJobs overview](https://learn.microsoft.com/azure/app-service/overview-webjobs)
-* [App Service pricing](https://azure.microsoft.com/pricing/details/app-service/)
 
 </details>
 
@@ -5309,9 +5113,525 @@ For each of the following statements, select Yes if the statement is true. Other
 
 ---
 
+#### WebJobs on multi-instance App Service
+
+**Domain:** Deploy and Manage Azure Compute Resources
+**Skill:** Create and configure Azure App Service
+**Task:** Create an App Service
+
+You are developing an Azure web app named MyApp1 to run as two instances hosted in a Basic App Service plan named MyPlan. You want to deploy two scripts to run as WebJobs in the context of MyApp1.
+
+You need to ensure that you can support the WebJobs running on both MyApp1 instances.
+
+For each of the following statements, select Yes if the statement is true. Otherwise, select No.
+
+| STATEMENT | YES | NO |
+|-----------|-----|----|
+| You must deploy the scripts as continuous WebJobs. | ☐ | ☐ |
+| You must scale up MyPlan to the Standard S1 tier. | ☐ | ☐ |
+| You must create the WebJobs as linked to a web project. | ☐ | ☐ |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-15-05-51-44.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+You must deploy the scripts as continuous WebJobs. You can deploy WebJobs as continuous or triggered. A continuous WebJob runs by default on all instances of the linked web app but can be limited to a single instance. A triggered WebJob can run on only one instance.
+
+You are not required to scale up MyPlan to the Standard S1 tier. WebJobs are supported on the Basic pricing tier.
+
+You must create the WebJobs as linked to a web project. This is necessary when you want a WebJob to run in the context of a web app. You can also create a WebJob as an independent WebJob and have it run as a web app by itself.
+
+<img src='.img/2026-03-15-05-57-57.png' width=600>
+
+<details>
+<summary>📝 More Detail</summary>
+
+Azure **WebJobs** are a feature of **Azure App Service** that let you run background code or scripts alongside your web application. They are typically used for tasks that should run behind the scenes rather than as part of an HTTP request, such as batch processing, scheduled jobs, queue processing, or long-running tasks. (learn.microsoft.com)
+
+A WebJob runs **in the same environment as your App Service web app**, meaning it shares the same VM instances, CPU, and memory defined by the App Service plan. If your App Service plan scales to multiple instances, those instances host both the web app and any WebJobs associated with it. (learn.microsoft.com)
+
+Core concept: background processing for App Service
+
+Normally a web app responds to HTTP requests. If you need background processing (for example processing files, sending emails, syncing data, or running scheduled jobs), you attach a WebJob to the app. The job can be written in various languages or scripts and runs as a program inside the web app environment. (learn.microsoft.com)
+
+Typical use cases include:
+
+* Scheduled maintenance tasks
+* Processing items from queues or blobs
+* Data cleanup or synchronization jobs
+* Long-running processing tasks that should not block web requests
+
+Two types of WebJobs
+
+This distinction is critical for exam questions.
+
+Continuous WebJobs
+
+* Start automatically when created.
+* Run continuously (often inside an infinite loop).
+* By default run on every instance of the web app when the app scales out.
+* Can optionally be restricted to one instance. (learn.microsoft.com)
+
+Because they run on all instances, continuous WebJobs are the choice when you want the job to run on every scaled instance of your web app.
+
+Triggered WebJobs
+
+* Run only when triggered.
+* Can run on demand, on a schedule, or when an event occurs.
+* Run on only one instance, selected by Azure. (learn.microsoft.com)
+
+This prevents duplicate execution if multiple instances exist.
+
+How scaling affects WebJobs
+
+WebJobs scale together with the App Service plan. If the plan scales to multiple instances:
+
+* Continuous WebJobs run on each instance.
+* Triggered WebJobs run on only one instance. (learn.microsoft.com)
+
+This behavior is the key to the exam question you showed.
+
+Your app runs on two instances. If you want a job to run on both instances, it must be a continuous WebJob, because triggered jobs run only once on a single instance.
+
+Pricing tier considerations
+
+WebJobs are supported in the Basic tier and above of App Service plans, so upgrading to Standard is not required just to run them. (learn.microsoft.com)
+
+That is why the exam statement saying you must scale to Standard S1 is incorrect.
+
+Relationship to the web app
+
+A WebJob can run:
+
+* In the context of a web app (the common case for exam questions)
+* Independently as a job host
+
+When the job is tied to a web app, it runs inside that app’s environment and uses its configuration and resources.
+
+Operational details worth remembering
+
+Some practical behaviors that often appear in exam questions:
+
+* WebJobs share compute resources with the web app. (learn.microsoft.com)
+* Continuous jobs restart automatically if they fail. (learn.microsoft.com)
+* Continuous jobs should use Always On so the app doesn’t go idle. (learn.microsoft.com)
+
+The key exam takeaway from your question
+
+Your app runs on two instances.
+
+To ensure the scripts run on both instances:
+
+* Use continuous WebJobs → run on all instances.
+* Do not use triggered WebJobs → run on only one instance.
+
+Therefore:
+
+* “Deploy the scripts as continuous WebJobs” → True
+* “Scale to Standard S1 tier” → False (Basic already supports WebJobs)
+* “Create the WebJobs linked to a web project” → True for running inside the app context
+
+A practical example of a **continuous WebJob** is a background service that processes messages from an **Azure Storage Queue**.
+
+Suppose your web application allows users to upload images. When a user uploads a file, the web app places a message in a queue describing the image that needs processing. A **continuous WebJob** runs in the background on each App Service instance and constantly listens to that queue. Whenever a new message appears, the job retrieves the message, processes the image (for example resizing or generating thumbnails), stores the processed image in Blob Storage, and then removes the message from the queue.
+
+Because the job runs continuously, it is always ready to process new items as they arrive. If the App Service plan scales to multiple instances, each instance can run the WebJob and process messages in parallel, increasing throughput for high workloads.
+
+</details>
+
+**References**
+
+* [Run background tasks with WebJobs](https://learn.microsoft.com/azure/app-service/webjobs-create)
+* [Develop and deploy WebJobs using Visual Studio](https://learn.microsoft.com/azure/app-service/webjobs-dotnet-deploy-vs)
+* [App Service WebJobs overview](https://learn.microsoft.com/azure/app-service/overview-webjobs)
+* [App Service pricing](https://azure.microsoft.com/pricing/details/app-service/)
+
+</details>
+
+---
+
+#### Resolve Azure App Service Pricing Tier for Runtime Requirements
+
+**Domain:** Deploy and Manage Azure Compute Resources
+**Skill:** Create and configure Azure App Service
+**Task:**
+
+- Provision an App Service plan
+- Configure scaling for an App Service plan
+
+You deploy an Azure web app named MyApp. MyApps runs in a Free pricing tier service plan named MyPlan. During testing, you discover that MyApp stops after 60 minutes and that it cannot be restarted until the next day.
+
+You need to ensure that MyApp can run eight hours each day during the testing period. You want to keep the additional costs incurred to a minimum.
+
+Does changing the pricing tier for MyPlan to Shared D1 meet the goal?
+
+A. Yes  
+B. No  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-01-30-06-17-12.png' width=700>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Why the selected answer is wrong (Yes)**
+Moving from **Free (F1)** to **Shared (D1)** increases the daily CPU quota, but it **does not remove quotas**. Your symptom ("stops after 60 minutes and can't be restarted until the next day") matches hitting the **CPU (Day)** quota, which causes the app to be stopped until the quota resets. In Shared (D1), the app can still hit **CPU (Day)** and be stopped again—just later—so it won't reliably run **8 hours/day**.
+
+**Why the correct answer is correct (No)**
+To meet "run 8 hours each day," you need a plan where you **don't get stopped due to Free/Shared quotas**. That generally means moving to a **Dedicated compute** tier (Basic/Standard/Premium), where the app runs on dedicated VMs and the Free/Shared CPU (Day) quota enforcement doesn't apply in the same way. Shared (D1) remains a shared-compute tier with quota enforcement, so it doesn't meet the requirement.
+
+**Why other options are incorrect or less appropriate**
+
+* **Stay on Free (F1):** guaranteed to stop once the quota is exceeded (as observed).
+* **Shared (D1):** still quota-enforced; may extend runtime but not to the required 8 hours consistently.
+* **Basic (B1) or higher:** costs more than Shared, but it's the minimum tier change that aligns with the requirement to keep the app running during the testing window.
+
+**Key takeaway**
+**Free and Shared tiers have CPU quotas that can stop the app until the daily reset.** If you need predictable multi-hour runtime, move to a **Dedicated compute** tier (Basic or higher).
+
+**References**
+
+* [https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans](https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans)
+* [https://learn.microsoft.com/en-us/azure/app-service/web-sites-monitor](https://learn.microsoft.com/en-us/azure/app-service/web-sites-monitor)
+
+</details>
+
+▶ **Related Lab:** [lab-app-service-plan-quotas](../hands-on-labs/compute/lab-app-service-plan-quotas/README.md)
+
+---
+
 ## Implement and Manage Virtual Networking
 
 ### Configure and manage virtual networks in Azure
+
+#### VNet Peering — Missing Reverse Peering
+
+**Domain:** Implement and Manage Virtual Networking
+**Skill:** Configure and manage virtual networks in Azure
+**Task:** Create and configure virtual network peering
+
+You have two Azure virtual machines (VMs) running Windows as shown in the first exhibit.
+
+<img src='.img/2026-03-14-03-25-04.png' width=400>
+
+<img src='.img/2026-03-14-03-25-16.png' width=300>
+
+You create a virtual network (VNet) peering by executing the following PowerShell commands:
+
+```powershell
+$vnet1 = Get-AzVirtualNetwork -Name 'VNet1' -ResourceGroupName 'RG1'
+$vnet2 = Get-AzVirtualNetwork -Name 'VNet2' -ResourceGroupName 'RG2'
+Add-AzVirtualNetworkPeering `
+  -Name 'VNet1-VNet2' `
+  -VirtualNetwork $vnet1 `
+  -RemoteVirtualNetworkId $vnet2.Id
+```
+
+The peering overview of `VNet1` is shown in the second exhibit.
+
+You open the local Windows firewalls by running the following PowerShell command on both VMs:
+
+```powershell
+New-NetFirewallRule -DisplayName 'Enable ping' -Protocol 'ICMPv4'
+```
+
+A ping from `VM1` to the private IP address of `VM2` fails.
+
+You need to make sure that `VM1` can connect to `VM2`.
+
+What should you do?
+
+A. Use the public IP address to connect.  
+B. Create a network security group (NSG). Associate both subnets to the NSG.  
+C. Move VM2 to the East US region.  
+D. Create a VNet gateway.  
+E. Add a VNet peering from VNet2 to VNet1.  
+F. Modify the subnet Default2 address range.  
+G. Modify the VNet address space of VNet2.  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-14-03-20-28.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Why the selected answer is correct**
+
+A virtual network peering connection is directional and requires a peering relationship in both directions for full connectivity between private IP addresses. The existing peering from `VNet1` to `VNet2` was created, but the reverse peering from `VNet2` to `VNet1` was not. Creating a peering from `VNet2` to `VNet1` establishes the two-way peering so the peering status becomes `Connected` and private IP traffic between `VM1` and `VM2` flows over the Azure backbone.
+
+**Why the selected answer is better than the others**
+
+The issue is that Azure VNet peering requires reciprocal peerings (or a two-way peering) for connectivity as shown in the exhibit. No host-level change (for example, using the public IP) is necessary when the goal is private inter-VNet connectivity. Enabling ping (`ICMPv4`) inside the OS is necessary but not sufficient if peering is only initiated one way.
+
+<img src='.img/2026-03-14-03-26-41.png' width=600>
+
+**Why other options are incorrect**
+
+**Use the public IP address to connect.** Using a public IP bypasses private peering and is unnecessary — VNet peering is designed to use private IP addresses over the Microsoft backbone.  
+
+**Create a network security group (NSG). Associate both subnets to the NSG.** An NSG filters traffic; adding an NSG is not required to enable peered-VNet connectivity and would not fix a missing reverse peering.  
+
+**Move VM2 to the East US region.** VNet peering supports cross-region (global) peering when configured; moving the VM is unnecessary and doesn't address the missing peering relationship.  
+
+**Create a VNet gateway.** A virtual network gateway (VPN gateway) is used for cross-premises or gateway-transit scenarios, not for direct VNet peering connectivity between private IPs.  
+
+**Modify the subnet Default2 address range.** The IP ranges shown do not overlap; changing the subnet is not required and would be disruptive.  
+
+**Modify the VNet address space of VNet2.** VNet peering only fails when address spaces overlap; in this scenario the address spaces are distinct, so modifying them is unnecessary.
+
+**Key takeaway**
+
+VNet peering must be configured in both directions (both peerings created) to enable full private connectivity between two virtual networks; check the peering status for `Connected` after creating the reverse peering.
+
+**References**
+
+- [Azure virtual network peering](https://learn.microsoft.com/azure/virtual-network/virtual-network-peering-overview)
+- [Network Security Groups](https://learn.microsoft.com/azure/virtual-network/network-security-groups-overview)
+- [What is Azure VPN Gateway?](https://learn.microsoft.com/azure/vpn-gateway/vpn-gateway-about-vpngateways)
+
+</details>
+
+---
+
+#### VNet Peering with ExpressRoute
+
+**Domain:** Implement and Manage Virtual Networking
+**Skill:** Configure and manage virtual networks in Azure
+**Task:** Create and configure virtual network peering
+
+You are asked to configure a subnet named SUBNET1 that is part of a virtual network named VNET1. Hosts on SUBNET1 need to be able to reach resources on a virtual network named VNET2 and also reach a proxy server that scans all outbound internet requests being made by resources hosted on SUBNET1.
+
+The proxy server is hosted on your on-premises network. You have an ExpressRoute circuit named EXP-ROUTE1 configured between VNET2 and your on-premises network.
+
+You want VNET1 to use EXP-ROUTE1 to reach the proxy server. To minimize costs, your solution must not require the creation of additional resources.
+
+Which two actions should you perform? Each correct answer presents part of the solution.
+
+A. Create a virtual network (VNet) gateway in VNET1.  
+B. Configure VNET2 peering to use the remote gateway.  
+C. Link the virtual network (VNet) gateway in VNET1 with EXP-ROUTE1.  
+D. Configure VNET1 peering to use the remote gateway.  
+E. Configure virtual network (VNet) peering between VNET1 and VNET2.  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-12-05-10-59.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Solution explanation:**
+
+You should configure virtual network (VNet) peering between VNET1 and VNET2. You should also set VNET1 to use the remote gateway. The peering will provide connectivity between VNET1 and VNET2 by internally sharing routes to the corresponding IP address ranges. For VNET1 to leverage the EXP-ROUTE1 to connect to the on-premises network, you would have to ensure that the peering connection on VNET1 uses the gateway device attached to VNET2. This gateway is what is used by the EXP-ROUTE1 ExpressRoute circuit.
+
+You should not set VNET2 peering to use the remote gateway. Because VNET2 is configured with an ExpressRoute circuit, VNET2 already has a VNet gateway on its gateway subnet. Trying to set VNET2 to use the remote gateway will generate an error message stating that the configuration is not possible.
+
+You should not create a VNet gateway in VNET1 and link that with EXP-ROUTE1. These two steps would provide connectivity to resources hosted on VNET1, enabling them to use EXP-ROUTE1, but it would not provide connectivity between VNET1 and VNET2. It would also increase the cost because you would need to add an additional VNet gateway device in VNET1.
+
+**References**
+
+* [Virtual network peering](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview)
+* [What is Azure ExpressRoute?](https://learn.microsoft.com/en-us/azure/expressroute/expressroute-introduction)
+* [About ExpressRoute virtual network gateways](https://learn.microsoft.com/en-us/azure/expressroute/expressroute-about-virtual-network-gateways)
+* [Tutorial: Connect a virtual network to an ExpressRoute circuit using the Azure portal](https://learn.microsoft.com/en-us/azure/expressroute/expressroute-howto-linkvnet-portal-resource-manager)
+
+</details>
+
+---
+
+#### Standard Load Balancer public IPs
+
+**Domain:** Implement and Manage Virtual Networking
+**Skill:** Configure and manage virtual networks in Azure
+**Task:** Configure public IP addresses
+
+You are deploying a group of new virtual machines (`VMs`) in your Azure Subscription. These new VMs are part of the frontend layer of a new application that your company is publishing.
+
+You plan to configure an Azure Load Balancer for these new VMs. You decide to configure a `Standard Load Balancer`.
+
+You need to configure the public IP address that you will assign to the load balancer.
+
+For each of the following statements, select Yes if the statement is true. Otherwise, select No.
+
+| Statement | Yes | No |
+|----------|-----|----|
+| You can only use a standard Stock-keeping-Unit (SKU) public IP addresses with Standard Load Balancers. | ☐ | ☐ |
+| Standard Stock-keeping-Unit (SKU) public IP addresses allow inbound communication by default. | ☐ | ☐ |
+| Standard Load Balancers support standard Stock-keeping-Unit (SKU) public IP addresses only. | ☐ | ☐ |
+| You can specify the IP address of a public IP resource. | ☐ | ☐ |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-16-04-57-12.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+You can only use a standard Stock-keeping-Unit (SKU) public IP with `Standard Load Balancers`. `Standard Load Balancers` have been designed with security in mind. This means that you need to manually authorize any inbound connection. The `Standard` SKU public IP address is the only SKU that has this configuration by default.
+
+`Standard` SKU public IP addresses do not allow inbound communication by default. You need to manually create and assign a network security group (`NSG`) that allows inbound communication with the `Standard` SKU public IP address. If you need to allow all inbound traffic by default, you need to use a `Basic` SKU public IP address.
+
+`Standard Load Balancers` support `Standard` SKU public IP addresses only. When you configure a public IP address, there are two different allocation methods: static or dynamic. The static allocation method reserves and assigns a public IP address when the public IP resource object is created in Azure.
+
+You cannot specify the IP address of a public IP resource. Even if you use the static allocation method for a public IP, you cannot manually specify the IP address assigned to your public IP resource object. This address is picked from a pool of public addresses and assigned to your resource.
+
+<img src='.img/2026-03-16-04-59-42.png' width=600>
+
+**References**
+
+* [Public IP addresses](https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/public-ip-addresses)
+* [What is Azure Load Balancer?](https://learn.microsoft.com/azure/load-balancer/load-balancer-overview)
+
+</details>
+
+---
+
+#### Configure Layered Network Security
+
+**Domain:** Implement and Manage Virtual Networking
+**Skill:** Configure and manage virtual networks in Azure
+**Task:**
+
+- Create and configure virtual networks and subnets
+- Configure service endpoints for Azure PaaS
+
+Your company is planning to deploy a new application in its Azure subscription. You are asked to configure the required infrastructure for the new application.
+
+The new application must be deployed in a layered infrastructure. This infrastructure consists of the following layers:
+
+- Front-end servers
+- Back-end servers
+- Database
+
+The frontend and backend layers will use Azure virtual machines (VMs). The database layer will be deployed using Azure SQL Database.
+
+You start configuring the networking infrastructure. You need to ensure that you can apply security filtering on each layer independently. Your solution should require the minimum administrative effort.
+
+Which four actions should you perform in sequence? To answer, move the appropriate actions from the list of possible actions to the answer area and arrange them in the correct order.
+
+A. Create a resource group.  
+B. Create a single virtual network (VNet).  
+C. Create two subnets.  
+D. Create three subnets.  
+E. Create a virtual network (VNet) for each layer.  
+F. Configure peering on each virtual network (VNet).  
+G. Enable service endpoints for the subnets.  
+
+Select and order 4:
+
+| Step | Action |
+|------|--------|
+| 1 | |
+| 2 | |
+| 3 | |
+| 4 | |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-12-04-36-53.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**You should perform the following actions in order:**
+
+1. **Create a resource group**
+2. **Create a single virtual network (VNet).**
+3. **Create two subnets.**
+4. **Enable service endpoints for the subnets.**
+
+**First,** you should create a new resource group. Because you are deploying a whole new infrastructure for this application, you should create a new resource group and put all new resources in this new resource group.
+
+**Next,** you should create a single VNet. This VNet will provide connectivity between all the elements of the application.
+
+**Next,** you should create two subnets in the new VNet. You should assign a subnet for the front-end layer, and another for the back-end layer. You should not create a subnet for the Azure SQL Database, because this is deployed in its own internal network that you cannot customize. You can also create a network security group (NSG) for each subnet so that you can manage security on each subnet independently.
+
+**Finally,** you should enable service endpoints for the subnets within the VNet. You should also enable the service endpoint in the Azure SQL Database. This way, your database can directly connect to VMs deployed in the front-end and back-end subnets, and vice versa.
+
+**You should not configure peering on each VNet.** VNet peering allows you to connect different VNets so resources on each VNet can communicate with each other. In this scenario, there is no need to configure peering because creating a single VNet satisfies your communication needs.
+
+**You should not create a VNet for each layer.** Although creating a VNet for each layer could solve your communication requirements, this requires much more effort than using a single VNet. Each VNet still requires at least one subnet. Creating multiple VNets for this scenario would also require the configuration of peering between each VNet. There is no need to configure a VNet for the data layer because you will use Azure SQL Database, which does not require a VNet.
+
+**You should not create three subnets.** You need to configure a subnet for the front-end layer and another for the back-end layer. There is no need to configure an additional subnet for the data layer because Azure SQL Database has all its networking requirements configured internally.
+
+<details>
+<summary><b>More Details:</b></summary>
+
+> Help me understand here, is Microsoft recommending private endpoints over service endpoints? Give me some historical context.
+
+<img src='.img/2026-03-12-05-00-39.png' width=600>
+
+Yes. In that note, Microsoft is signaling a **preference for Private Link/private endpoints over service endpoints** for new designs where the goal is the strongest private access model. The wording is explicit: the current service endpoints article says Microsoft recommends **Azure Private Link and private endpoints** for secure and private access. ([Microsoft Learn][1])
+
+What that means in practice:
+
+* **Service endpoints**: your workload stays in your subnet, but it still connects to the Azure service’s **public endpoint**. The traffic is optimized onto the Microsoft backbone, and the service can recognize the source subnet/VNet. Microsoft’s docs say DNS still resolves to the service’s **public IP** with service endpoints. ([Microsoft Learn][1])
+* **Private endpoints**: the Azure service is exposed to you through a **private IP inside your VNet**. Microsoft describes this as “bringing the service into your virtual network.” This is the more isolated model and is what enables “private-only” patterns when paired with disabling public access. ([Microsoft Learn][2])
+
+So the recommendation is:
+
+* **Use private endpoints when you want true private access, tighter isolation, and the option to shut off public exposure.**
+* **Use service endpoints when you want something simpler and lighter-weight, and public endpoints are still acceptable.** ([Microsoft Learn][3])
+
+Historical context:
+
+**1. Service endpoints came first as the earlier VNet-to-PaaS security model.**
+Microsoft’s own comparison blog describes service endpoints as the **first** approach used to lock down multi-tenant Azure services. They solved an early problem: “How do I let only my VNet reach this PaaS service without opening it broadly to the internet?” But the service still remained outside your VNet, on a public endpoint. ([TECHCOMMUNITY.MICROSOFT.COM][4])
+
+**2. Private Link/private endpoints came later to address stricter isolation requirements.**
+As customers wanted stronger controls, reduced data-exfiltration risk, private-only access from on-premises, and the ability to avoid public endpoints entirely, Microsoft introduced Private Link. The private endpoint model assigns a private IP from your VNet and routes traffic privately over Microsoft’s backbone. ([Microsoft Learn][5])
+
+**3. The modern guidance shifted accordingly.**
+Microsoft still documents and supports service endpoints, but their newer guidance increasingly points customers toward private endpoints when feasible, especially for security-sensitive architectures. That is why the service endpoints doc now carries that recommendation box. ([Microsoft Learn][1])
+
+The easiest mental model is:
+
+* **Service endpoint = private subnet talking to a public service endpoint**
+* **Private endpoint = private subnet talking to a private IP for that service** ([Microsoft Learn][1])
+
+So, your screenshot should be read as:
+
+**“Service endpoints still exist and still work, but Microsoft generally prefers private endpoints for secure private access going forward.”** ([Microsoft Learn][1])
+
+[1]: https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-service-endpoints-overview?utm_source=chatgpt.com "Azure virtual network service endpoints"
+[2]: https://learn.microsoft.com/en-us/azure/private-link/private-endpoint-overview?utm_source=chatgpt.com "What is a private endpoint? - Azure Private Link"
+[3]: https://learn.microsoft.com/en-us/azure/private-link/private-link-faq?utm_source=chatgpt.com "Azure Private Link frequently asked questions (FAQ)"
+[4]: https://techcommunity.microsoft.com/blog/coreinfrastructureandsecurityblog/service-endpoints-vs-private-endpoints/3962134?utm_source=chatgpt.com "Service Endpoints vs Private Endpoints"
+[5]: https://learn.microsoft.com/en-us/azure/private-link/private-link-overview?utm_source=chatgpt.com "What is Azure Private Link?"
+
+</details>
+
+**References**:  
+
+<https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-service-endpoints-overview>
+<https://learn.microsoft.com/en-us/azure/app-service/tutorial-secure-ntier-app>
+
+</details>
+
+---
 
 #### Case Study — Container Group Placement
 
@@ -5447,386 +5767,7 @@ This progression reflects Azure’s broader transition from simple internet-faci
 
 ---
 
-#### Standard Load Balancer public IPs
-
-**Domain:** Implement and Manage Virtual Networking
-**Skill:** Configure and manage virtual networks in Azure
-**Task:** Configure public IP addresses
-
-You are deploying a group of new virtual machines (`VMs`) in your Azure Subscription. These new VMs are part of the frontend layer of a new application that your company is publishing.
-
-You plan to configure an Azure Load Balancer for these new VMs. You decide to configure a `Standard Load Balancer`.
-
-You need to configure the public IP address that you will assign to the load balancer.
-
-For each of the following statements, select Yes if the statement is true. Otherwise, select No.
-
-| Statement | Yes | No |
-|----------|-----|----|
-| You can only use a standard Stock-keeping-Unit (SKU) public IP addresses with Standard Load Balancers. | ☐ | ☐ |
-| Standard Stock-keeping-Unit (SKU) public IP addresses allow inbound communication by default. | ☐ | ☐ |
-| Standard Load Balancers support standard Stock-keeping-Unit (SKU) public IP addresses only. | ☐ | ☐ |
-| You can specify the IP address of a public IP resource. | ☐ | ☐ |
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-16-04-57-12.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-You can only use a standard Stock-keeping-Unit (SKU) public IP with `Standard Load Balancers`. `Standard Load Balancers` have been designed with security in mind. This means that you need to manually authorize any inbound connection. The `Standard` SKU public IP address is the only SKU that has this configuration by default.
-
-`Standard` SKU public IP addresses do not allow inbound communication by default. You need to manually create and assign a network security group (`NSG`) that allows inbound communication with the `Standard` SKU public IP address. If you need to allow all inbound traffic by default, you need to use a `Basic` SKU public IP address.
-
-`Standard Load Balancers` support `Standard` SKU public IP addresses only. When you configure a public IP address, there are two different allocation methods: static or dynamic. The static allocation method reserves and assigns a public IP address when the public IP resource object is created in Azure.
-
-You cannot specify the IP address of a public IP resource. Even if you use the static allocation method for a public IP, you cannot manually specify the IP address assigned to your public IP resource object. This address is picked from a pool of public addresses and assigned to your resource.
-
-<img src='.img/2026-03-16-04-59-42.png' width=600>
-
-**References**
-
-* [Public IP addresses](https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/public-ip-addresses)
-* [What is Azure Load Balancer?](https://learn.microsoft.com/azure/load-balancer/load-balancer-overview)
-
-</details>
-
----
-
-#### VNet Peering with ExpressRoute
-
-**Domain:** Implement and Manage Virtual Networking
-**Skill:** Configure and manage virtual networks in Azure
-**Task:** Create and configure virtual network peering
-
-You are asked to configure a subnet named SUBNET1 that is part of a virtual network named VNET1. Hosts on SUBNET1 need to be able to reach resources on a virtual network named VNET2 and also reach a proxy server that scans all outbound internet requests being made by resources hosted on SUBNET1.
-
-The proxy server is hosted on your on-premises network. You have an ExpressRoute circuit named EXP-ROUTE1 configured between VNET2 and your on-premises network.
-
-You want VNET1 to use EXP-ROUTE1 to reach the proxy server. To minimize costs, your solution must not require the creation of additional resources.
-
-Which two actions should you perform? Each correct answer presents part of the solution.
-
-A. Create a virtual network (VNet) gateway in VNET1.  
-B. Configure VNET2 peering to use the remote gateway.  
-C. Link the virtual network (VNet) gateway in VNET1 with EXP-ROUTE1.  
-D. Configure VNET1 peering to use the remote gateway.  
-E. Configure virtual network (VNet) peering between VNET1 and VNET2.  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-12-05-10-59.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Solution explanation:**
-
-You should configure virtual network (VNet) peering between VNET1 and VNET2. You should also set VNET1 to use the remote gateway. The peering will provide connectivity between VNET1 and VNET2 by internally sharing routes to the corresponding IP address ranges. For VNET1 to leverage the EXP-ROUTE1 to connect to the on-premises network, you would have to ensure that the peering connection on VNET1 uses the gateway device attached to VNET2. This gateway is what is used by the EXP-ROUTE1 ExpressRoute circuit.
-
-You should not set VNET2 peering to use the remote gateway. Because VNET2 is configured with an ExpressRoute circuit, VNET2 already has a VNet gateway on its gateway subnet. Trying to set VNET2 to use the remote gateway will generate an error message stating that the configuration is not possible.
-
-You should not create a VNet gateway in VNET1 and link that with EXP-ROUTE1. These two steps would provide connectivity to resources hosted on VNET1, enabling them to use EXP-ROUTE1, but it would not provide connectivity between VNET1 and VNET2. It would also increase the cost because you would need to add an additional VNet gateway device in VNET1.
-
-**References**
-
-* [Virtual network peering](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview)
-* [What is Azure ExpressRoute?](https://learn.microsoft.com/en-us/azure/expressroute/expressroute-introduction)
-* [About ExpressRoute virtual network gateways](https://learn.microsoft.com/en-us/azure/expressroute/expressroute-about-virtual-network-gateways)
-* [Tutorial: Connect a virtual network to an ExpressRoute circuit using the Azure portal](https://learn.microsoft.com/en-us/azure/expressroute/expressroute-howto-linkvnet-portal-resource-manager)
-
-</details>
-
----
-
-#### VNet Peering — Missing Reverse Peering
-
-**Domain:** Implement and Manage Virtual Networking
-**Skill:** Configure and manage virtual networks in Azure
-**Task:** Create and configure virtual network peering
-
-You have two Azure virtual machines (VMs) running Windows as shown in the first exhibit.
-
-<img src='.img/2026-03-14-03-25-04.png' width=400>
-
-<img src='.img/2026-03-14-03-25-16.png' width=300>
-
-You create a virtual network (VNet) peering by executing the following PowerShell commands:
-
-```powershell
-$vnet1 = Get-AzVirtualNetwork -Name 'VNet1' -ResourceGroupName 'RG1'
-$vnet2 = Get-AzVirtualNetwork -Name 'VNet2' -ResourceGroupName 'RG2'
-Add-AzVirtualNetworkPeering `
-  -Name 'VNet1-VNet2' `
-  -VirtualNetwork $vnet1 `
-  -RemoteVirtualNetworkId $vnet2.Id
-```
-
-The peering overview of `VNet1` is shown in the second exhibit.
-
-You open the local Windows firewalls by running the following PowerShell command on both VMs:
-
-```powershell
-New-NetFirewallRule -DisplayName 'Enable ping' -Protocol 'ICMPv4'
-```
-
-A ping from `VM1` to the private IP address of `VM2` fails.
-
-You need to make sure that `VM1` can connect to `VM2`.
-
-What should you do?
-
-A. Use the public IP address to connect.  
-B. Create a network security group (NSG). Associate both subnets to the NSG.  
-C. Move VM2 to the East US region.  
-D. Create a VNet gateway.  
-E. Add a VNet peering from VNet2 to VNet1.  
-F. Modify the subnet Default2 address range.  
-G. Modify the VNet address space of VNet2.  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-14-03-20-28.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Why the selected answer is correct**
-
-A virtual network peering connection is directional and requires a peering relationship in both directions for full connectivity between private IP addresses. The existing peering from `VNet1` to `VNet2` was created, but the reverse peering from `VNet2` to `VNet1` was not. Creating a peering from `VNet2` to `VNet1` establishes the two-way peering so the peering status becomes `Connected` and private IP traffic between `VM1` and `VM2` flows over the Azure backbone.
-
-**Why the selected answer is better than the others**
-
-The issue is that Azure VNet peering requires reciprocal peerings (or a two-way peering) for connectivity as shown in the exhibit. No host-level change (for example, using the public IP) is necessary when the goal is private inter-VNet connectivity. Enabling ping (`ICMPv4`) inside the OS is necessary but not sufficient if peering is only initiated one way.
-
-<img src='.img/2026-03-14-03-26-41.png' width=600>
-
-**Why other options are incorrect**
-
-**Use the public IP address to connect.** Using a public IP bypasses private peering and is unnecessary — VNet peering is designed to use private IP addresses over the Microsoft backbone.  
-
-**Create a network security group (NSG). Associate both subnets to the NSG.** An NSG filters traffic; adding an NSG is not required to enable peered-VNet connectivity and would not fix a missing reverse peering.  
-
-**Move VM2 to the East US region.** VNet peering supports cross-region (global) peering when configured; moving the VM is unnecessary and doesn't address the missing peering relationship.  
-
-**Create a VNet gateway.** A virtual network gateway (VPN gateway) is used for cross-premises or gateway-transit scenarios, not for direct VNet peering connectivity between private IPs.  
-
-**Modify the subnet Default2 address range.** The IP ranges shown do not overlap; changing the subnet is not required and would be disruptive.  
-
-**Modify the VNet address space of VNet2.** VNet peering only fails when address spaces overlap; in this scenario the address spaces are distinct, so modifying them is unnecessary.
-
-**Key takeaway**
-
-VNet peering must be configured in both directions (both peerings created) to enable full private connectivity between two virtual networks; check the peering status for `Connected` after creating the reverse peering.
-
-**References**
-
-- [Azure virtual network peering](https://learn.microsoft.com/azure/virtual-network/virtual-network-peering-overview)
-- [Network Security Groups](https://learn.microsoft.com/azure/virtual-network/network-security-groups-overview)
-- [What is Azure VPN Gateway?](https://learn.microsoft.com/azure/vpn-gateway/vpn-gateway-about-vpngateways)
-
-</details>
-
----
-
-#### Configure Layered Network Security
-
-**Domain:** Implement and Manage Virtual Networking
-**Skill:** Configure and manage virtual networks in Azure
-**Task:**
-
-- Create and configure virtual networks and subnets
-- Configure service endpoints for Azure PaaS
-
-Your company is planning to deploy a new application in its Azure subscription. You are asked to configure the required infrastructure for the new application.
-
-The new application must be deployed in a layered infrastructure. This infrastructure consists of the following layers:
-
-- Front-end servers
-- Back-end servers
-- Database
-
-The frontend and backend layers will use Azure virtual machines (VMs). The database layer will be deployed using Azure SQL Database.
-
-You start configuring the networking infrastructure. You need to ensure that you can apply security filtering on each layer independently. Your solution should require the minimum administrative effort.
-
-Which four actions should you perform in sequence? To answer, move the appropriate actions from the list of possible actions to the answer area and arrange them in the correct order.
-
-A. Create a resource group.  
-B. Create a single virtual network (VNet).  
-C. Create two subnets.  
-D. Create three subnets.  
-E. Create a virtual network (VNet) for each layer.  
-F. Configure peering on each virtual network (VNet).  
-G. Enable service endpoints for the subnets.  
-
-Select and order 4:
-
-| Step | Action |
-|------|--------|
-| 1 | |
-| 2 | |
-| 3 | |
-| 4 | |
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-12-04-36-53.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**You should perform the following actions in order:**
-
-1. **Create a resource group**
-2. **Create a single virtual network (VNet).**
-3. **Create two subnets.**
-4. **Enable service endpoints for the subnets.**
-
-**First,** you should create a new resource group. Because you are deploying a whole new infrastructure for this application, you should create a new resource group and put all new resources in this new resource group.
-
-**Next,** you should create a single VNet. This VNet will provide connectivity between all the elements of the application.
-
-**Next,** you should create two subnets in the new VNet. You should assign a subnet for the front-end layer, and another for the back-end layer. You should not create a subnet for the Azure SQL Database, because this is deployed in its own internal network that you cannot customize. You can also create a network security group (NSG) for each subnet so that you can manage security on each subnet independently.
-
-**Finally,** you should enable service endpoints for the subnets within the VNet. You should also enable the service endpoint in the Azure SQL Database. This way, your database can directly connect to VMs deployed in the front-end and back-end subnets, and vice versa.
-
-**You should not configure peering on each VNet.** VNet peering allows you to connect different VNets so resources on each VNet can communicate with each other. In this scenario, there is no need to configure peering because creating a single VNet satisfies your communication needs.
-
-**You should not create a VNet for each layer.** Although creating a VNet for each layer could solve your communication requirements, this requires much more effort than using a single VNet. Each VNet still requires at least one subnet. Creating multiple VNets for this scenario would also require the configuration of peering between each VNet. There is no need to configure a VNet for the data layer because you will use Azure SQL Database, which does not require a VNet.
-
-**You should not create three subnets.** You need to configure a subnet for the front-end layer and another for the back-end layer. There is no need to configure an additional subnet for the data layer because Azure SQL Database has all its networking requirements configured internally.
-
-<details>
-<summary><b>More Details:</b></summary>
-
-> Help me understand here, is Microsoft recommending private endpoints over service endpoints? Give me some historical context.
-
-<img src='.img/2026-03-12-05-00-39.png' width=600>
-
-Yes. In that note, Microsoft is signaling a **preference for Private Link/private endpoints over service endpoints** for new designs where the goal is the strongest private access model. The wording is explicit: the current service endpoints article says Microsoft recommends **Azure Private Link and private endpoints** for secure and private access. ([Microsoft Learn][1])
-
-What that means in practice:
-
-* **Service endpoints**: your workload stays in your subnet, but it still connects to the Azure service’s **public endpoint**. The traffic is optimized onto the Microsoft backbone, and the service can recognize the source subnet/VNet. Microsoft’s docs say DNS still resolves to the service’s **public IP** with service endpoints. ([Microsoft Learn][1])
-* **Private endpoints**: the Azure service is exposed to you through a **private IP inside your VNet**. Microsoft describes this as “bringing the service into your virtual network.” This is the more isolated model and is what enables “private-only” patterns when paired with disabling public access. ([Microsoft Learn][2])
-
-So the recommendation is:
-
-* **Use private endpoints when you want true private access, tighter isolation, and the option to shut off public exposure.**
-* **Use service endpoints when you want something simpler and lighter-weight, and public endpoints are still acceptable.** ([Microsoft Learn][3])
-
-Historical context:
-
-**1. Service endpoints came first as the earlier VNet-to-PaaS security model.**
-Microsoft’s own comparison blog describes service endpoints as the **first** approach used to lock down multi-tenant Azure services. They solved an early problem: “How do I let only my VNet reach this PaaS service without opening it broadly to the internet?” But the service still remained outside your VNet, on a public endpoint. ([TECHCOMMUNITY.MICROSOFT.COM][4])
-
-**2. Private Link/private endpoints came later to address stricter isolation requirements.**
-As customers wanted stronger controls, reduced data-exfiltration risk, private-only access from on-premises, and the ability to avoid public endpoints entirely, Microsoft introduced Private Link. The private endpoint model assigns a private IP from your VNet and routes traffic privately over Microsoft’s backbone. ([Microsoft Learn][5])
-
-**3. The modern guidance shifted accordingly.**
-Microsoft still documents and supports service endpoints, but their newer guidance increasingly points customers toward private endpoints when feasible, especially for security-sensitive architectures. That is why the service endpoints doc now carries that recommendation box. ([Microsoft Learn][1])
-
-The easiest mental model is:
-
-* **Service endpoint = private subnet talking to a public service endpoint**
-* **Private endpoint = private subnet talking to a private IP for that service** ([Microsoft Learn][1])
-
-So, your screenshot should be read as:
-
-**“Service endpoints still exist and still work, but Microsoft generally prefers private endpoints for secure private access going forward.”** ([Microsoft Learn][1])
-
-[1]: https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-service-endpoints-overview?utm_source=chatgpt.com "Azure virtual network service endpoints"
-[2]: https://learn.microsoft.com/en-us/azure/private-link/private-endpoint-overview?utm_source=chatgpt.com "What is a private endpoint? - Azure Private Link"
-[3]: https://learn.microsoft.com/en-us/azure/private-link/private-link-faq?utm_source=chatgpt.com "Azure Private Link frequently asked questions (FAQ)"
-[4]: https://techcommunity.microsoft.com/blog/coreinfrastructureandsecurityblog/service-endpoints-vs-private-endpoints/3962134?utm_source=chatgpt.com "Service Endpoints vs Private Endpoints"
-[5]: https://learn.microsoft.com/en-us/azure/private-link/private-link-overview?utm_source=chatgpt.com "What is Azure Private Link?"
-
-</details>
-
-**References**:  
-
-<https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-service-endpoints-overview>
-<https://learn.microsoft.com/en-us/azure/app-service/tutorial-secure-ntier-app>
-
-</details>
-
----
-
 ### Configure secure access to virtual networks
-
-#### Design NSG to Block RDP from Internet
-
-**Domain:** Implement and Manage Virtual Networking
-**Skill:** Configure secure access to virtual networks
-**Task:** Create and configure NSGs and application security groups
-
-You have an Azure virtual network (VNet) named VNet1. VNet1 contains a subnet named Sub1 that hosts three Windows Server 2019 virtual machines (VMs).
-
-You need to design a network security group (NSG) that blocks inbound Remote Desktop Protocol (RDP) traffic from the Internet into Sub1.
-
-How should you configure the NSG? To answer, drag the appropriate NSG configuration value to each NSG configuration property. A configuration value may be used once, more than once, or not at all.
-
-| Description | Answer |
-|-------------|--------|
-| Source | |
-| Destination | |
-| Destination port ranges | |
-
-Available options:
-
-- 3389
-- Any
-- Service Tag
-- Internet
-- AzureCloud
-- App Security Group
-- 5985
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-14-04-17-58.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-You should use the `Any` value for the Source setting when you want to create a rule that affects all external sources without specifying each possible source. Using `Any` simplifies the configuration process and ensures that no external traffic can reach the RDP port when combined with a Deny action for that port.
-
-You should set the destination port range to `3389`. Your NSG should perform a Deny action on inbound Transmission Control Protocol (TCP) 3389 traffic because this is the default port used by the Remote Desktop Protocol (RDP) protocol.
-
-You should not use TCP `5985` in your NSG rule because `5985` is the default port used by the Windows Remote Management (WinRM) service and Windows PowerShell remoting.
-
-`Internet` does not apply as a standalone option because it is not a configuration property by itself. Instead, it should be used as a value for the Source Service Tag property to indicate that the rule applies to traffic originating from the internet.
-
-<img src='.img/2026-03-14-04-22-20.png' width=600>
-
-**References**
-
-* [Network Security Groups](https://learn.microsoft.com/azure/virtual-network/network-security-groups-overview)
-* [Create, change, or delete a network security group](https://learn.microsoft.com/azure/virtual-network/manage-network-security-group)
-* [Tutorial: Filter network traffic with a network security group](https://learn.microsoft.com/azure/virtual-network/tutorial-filter-network-traffic)
-* [Installation and configuration for Windows Remote Management](https://learn.microsoft.com/windows/win32/winrm/installation-and-configuration-for-windows-remote-management)
-* [Troubleshoot Remote Desktop connections to an Azure virtual machine](https://learn.microsoft.com/troubleshoot/azure/virtual-machines/windows/troubleshoot-rdp-connection)
-
-</details>
-
----
 
 #### Configure Private Link Service Source IP
 
@@ -5904,6 +5845,113 @@ Disabling privateLinkServiceNetworkPolicies is a per‑private‑IP (per Private
 </details>
 
 ▶ Related Lab: [lab-private-link-service](../hands-on-labs/networking/lab-private-link-service/README.md)
+
+---
+
+#### NSG Rule Processing Order
+
+**Domain:** Implement and Manage Virtual Networking
+**Skill:** Configure secure access to virtual networks
+**Task:** Evaluate effective security rules in NSGs
+
+Your company has an Azure subscription with one virtual network (VNet) named `VNet1`. `VNet1` includes the subnets and virtual machines (VMs) shown in the Subnets section of the exhibit. You create and associate the network security groups (NSGs) shown in the Security Groups section of the exhibit.
+
+You need to determine how the security rules in the NSGs are processed.
+
+For each of the following statements, select Yes if the statement is true. Otherwise, select No.
+
+| Statement | Yes | No |
+|----------|-----|----|
+| For incoming traffic to `VM1`, `NSG1` applies before `NSG2`. | ☐ | ☐ |
+| For traffic between `VM1` and `VM2`, only `NSG2` applies. | ☐ | ☐ |
+| For traffic between `VM6` and `VM7`, `NSG3` applies. | ☐ | ☐ |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-25-05-42-32.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+For incoming traffic to `VM1`, `NSG1` applies before `NSG2`. Incoming traffic rules in `NSG1` are processed before the incoming traffic rules for `NSG2` because `NSG1` is associated at the subnet level. For inbound traffic, the rules are processed in the network security group (NSG) associated with the subnet first, and then the rules in an NSG associated with the network interface. For outgoing traffic, the rules in NSGs associated with the virtual machine (VM) network interface are processed before the NSGs associated in the subnet level.
+
+For traffic between `VM1` and `VM2`, both `NSG1` and `NSG2` apply. `NSG2` applies for any traffic into or out of `VM1`. `NSG1` applies for any traffic between the VMs in `Subnet1`.
+
+For traffic between `VM6` and `VM7`, `NSG3` applies. NSG rules apply for traffic into or out of a subnet and between VMs in a subnet.
+
+You can define both inbound and outbound rules for NSGs.
+
+**References**
+
+* [How network security groups filter network traffic](https://learn.microsoft.com/azure/virtual-network/network-security-group-how-it-works)
+* [Create, change, or delete a network security group](https://learn.microsoft.com/azure/virtual-network/manage-network-security-group)
+* [Create, change, or delete a network interface](https://learn.microsoft.com/azure/virtual-network/virtual-network-network-interface)
+* [Azure network security groups overview](https://learn.microsoft.com/azure/virtual-network/network-security-groups-overview)
+
+</details>
+
+---
+
+#### Design NSG to Block RDP from Internet
+
+**Domain:** Implement and Manage Virtual Networking
+**Skill:** Configure secure access to virtual networks
+**Task:** Create and configure NSGs and application security groups
+
+You have an Azure virtual network (VNet) named VNet1. VNet1 contains a subnet named Sub1 that hosts three Windows Server 2019 virtual machines (VMs).
+
+You need to design a network security group (NSG) that blocks inbound Remote Desktop Protocol (RDP) traffic from the Internet into Sub1.
+
+How should you configure the NSG? To answer, drag the appropriate NSG configuration value to each NSG configuration property. A configuration value may be used once, more than once, or not at all.
+
+| Description | Answer |
+|-------------|--------|
+| Source | |
+| Destination | |
+| Destination port ranges | |
+
+Available options:
+
+- 3389
+- Any
+- Service Tag
+- Internet
+- AzureCloud
+- App Security Group
+- 5985
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-14-04-17-58.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+You should use the `Any` value for the Source setting when you want to create a rule that affects all external sources without specifying each possible source. Using `Any` simplifies the configuration process and ensures that no external traffic can reach the RDP port when combined with a Deny action for that port.
+
+You should set the destination port range to `3389`. Your NSG should perform a Deny action on inbound Transmission Control Protocol (TCP) 3389 traffic because this is the default port used by the Remote Desktop Protocol (RDP) protocol.
+
+You should not use TCP `5985` in your NSG rule because `5985` is the default port used by the Windows Remote Management (WinRM) service and Windows PowerShell remoting.
+
+`Internet` does not apply as a standalone option because it is not a configuration property by itself. Instead, it should be used as a value for the Source Service Tag property to indicate that the rule applies to traffic originating from the internet.
+
+<img src='.img/2026-03-14-04-22-20.png' width=600>
+
+**References**
+
+* [Network Security Groups](https://learn.microsoft.com/azure/virtual-network/network-security-groups-overview)
+* [Create, change, or delete a network security group](https://learn.microsoft.com/azure/virtual-network/manage-network-security-group)
+* [Tutorial: Filter network traffic with a network security group](https://learn.microsoft.com/azure/virtual-network/tutorial-filter-network-traffic)
+* [Installation and configuration for Windows Remote Management](https://learn.microsoft.com/windows/win32/winrm/installation-and-configuration-for-windows-remote-management)
+* [Troubleshoot Remote Desktop connections to an Azure virtual machine](https://learn.microsoft.com/troubleshoot/azure/virtual-machines/windows/troubleshoot-rdp-connection)
+
+</details>
 
 ---
 
@@ -5997,6 +6045,55 @@ Azure **Internal Load Balancer does not support backend VMs accessing the ILB fr
 
 ---
 
+#### Azure DNS Alias Record Type
+
+**Domain:** Implement and Manage Virtual Networking
+**Skill:** Configure name resolution and load balancing
+**Task:** Configure Azure DNS
+
+You configure the `companycs.com` zone in Azure DNS. You have an A record set named `app` that points to an App Service that hosts a web application.
+
+You need to make this application available by using the `webapp.companycs.com` domain name. This new domain name needs to point to the public IP address of the App Service.
+
+You need to ensure that the Domain Name System (DNS) record for this new domain name is updated or deleted automatically in case the `app.companycs.com` DNS record is modified or deleted.
+
+Which type of record set should you create?
+
+A. A CNAME alias record set  
+B. A CNAME record set  
+C. An A alias record set  
+D. An A record set  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-16-05-20-31.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Explanation**
+
+You should create an address-mapping (A) alias record set. An A alias record set is a special type of record set that allows you to create an alternative name for a record set in your domain zone or for resources in your subscription. This is different from a canonical name (CNAME) record type because the alias record set will be updated or deleted in case the target resource is modified or deleted. You can only create an A alias record set that points to an A, AAAA (IPv6 address), or CNAME record types in an Azure DNS zone.
+
+You should not use a CNAME alias record set. The custom domain name for your web application is represented by an A record set. A CNAME alias record set can only point to another CNAME record set. Moreover, the value returned by a CNAME alias record set is a domain name. You are required to create a Domain Name System (DNS) record that returns an IPv4 address. This means that you need an A alias record set.
+
+You should not use an A record set. This record set type will not be automatically updated or deleted if the `app.companycs.com` record is modified or deleted.
+
+You should not use a CNAME record set. This record set type will not be automatically updated or modified if the `app.companycs.com` record is modified or deleted. You are also required to create a DNS record that returns an IPv4 address. This means that you need an A alias record set.
+
+<img src='.img/2026-03-16-05-22-14.png' width=600>
+
+**References**
+
+* [Azure DNS alias records overview](https://learn.microsoft.com/azure/dns/dns-alias)
+
+</details>
+
+---
+
 #### IMDS Load Balancer Metadata Error
 
 **Domain:** Implement and Manage Virtual Networking
@@ -6054,166 +6151,6 @@ References
 
 - [Instance Metadata Service](https://learn.microsoft.com/en-us/azure/virtual-machines/instance-metadata-service?tabs=windows)
 - [Load Balancer SKUs](https://learn.microsoft.com/en-us/azure/load-balancer/skus)
-
-</details>
-
----
-
-#### Connect VNet to Private DNS Zone
-
-**Domain:** Implement and Manage Virtual Networking
-**Skill:** Configure name resolution and load balancing
-**Task:** Configure Azure DNS
-
-You need to connect a virtual network (`VNet`) to a private Domain Name System (`DNS zone`) to support new application namespaces in the new private zone. The `VNet` already has virtual machines (`VMs`) assigned to it and has existing private DNS zones assigned.
-
-What should you do first?
-
-A. Set the existing VMs to support the new DNS zone via the Windows Server IP Configuration DNS settings app.  
-B. Set up a new VNet, assign the private DNS zone to this VNet, and move the existing VMs to it.  
-C. Remove the existing VMs from the VNet.  
-D. Add the new private DNS zone to the existing VNet.  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-16-05-06-48.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-To complete this task, you should just add the new private Domain Name System (`DNS`) zone to the existing virtual network (`VNet`). When adding a new private DNS zone to an existing `VNet` that already has private zones assigned, you do not need to complete any other task other than adding the zone.
-
-You do not need to remove the existing `VMs` from the `VNet`. This would have been a requirement if the `VNet` did not already have private DNS zones linked to it.
-
-Setting up a new `VNet`, assigning the private DNS zone to this `VNet`, and moving the existing `VMs` to it would satisfy the connectivity to the new private DNS zone, but the existing linked private zones would be lost.
-
-<img src='.img/2026-03-16-05-11-33.png' width=600>
-
-<img src='.img/2026-03-16-05-12-25.png' width=600>
-
-<details>
-<summary>📝 More Detail</summary>
-
-The gap is in the **specific condition attached to that limitation**.
-
-The documentation line says:
-
-> *A specific virtual network can be linked to only one private zone **if automatic registration of VM DNS records is enabled***.
-
-That condition is easy to miss. The restriction applies **only when the VNet link is configured with auto-registration enabled**.
-
-Azure Private DNS actually supports **two different link types** between a VNet and a private DNS zone:
-
-**1. Registration virtual network**
-
-* Auto-registration **enabled**
-* Azure automatically creates A records for VMs in the zone
-* A VNet **can be linked as a registration network to only one private DNS zone**
-
-**2. Resolution virtual network**
-
-* Auto-registration **disabled**
-* The VNet can **resolve records from the zone**
-* No automatic VM record creation
-* A VNet **can be linked to many zones**
-
-So the rule is really:
-
-| Link Type    | Auto-registration | Max zones per VNet |
-| ------------ | ----------------- | ------------------ |
-| Registration | Enabled           | **1**              |
-| Resolution   | Disabled          | **Many**           |
-
-How this applies to the exam question:
-
-The question simply says the VNet already has private DNS zones assigned. It **does not say auto-registration is enabled**. Therefore Azure allows linking the VNet to **another private DNS zone**.
-
-Operationally, Azure would treat the VNet as:
-
-* **Registration VNet for one zone** (if enabled)
-* **Resolution VNet for additional zones**
-
-Example scenario:
-
-```
-VNet: prod-vnet
-
-Linked zones:
-corp.internal        (auto-registration enabled)
-database.internal    (resolution only)
-apps.internal        (resolution only)
-```
-
-VMs automatically register only in `corp.internal`, but they can resolve records in all three zones.
-
-Why the other answers are wrong:
-
-* **Setting DNS in the VM OS** does not integrate with Azure Private DNS zones.
-* **Creating a new VNet and moving VMs** is unnecessary because VNets can link to multiple zones.
-* **Removing VMs from the VNet** is unrelated to DNS zone linking.
-
-The key takeaway for exams:
-
-**A VNet can link to many private DNS zones, but it can be the auto-registration network for only one zone.**
-
-</details>
-
-**References**
-
-* [Tutorial: Host your domain in Azure DNS](https://learn.microsoft.com/azure/dns/dns-delegate-domain-azure-dns)
-* [What is Azure Private DNS?](https://learn.microsoft.com/azure/dns/private-dns-overview)
-
-</details>
-
----
-
-#### Azure DNS Alias Record Type
-
-**Domain:** Implement and Manage Virtual Networking
-**Skill:** Configure name resolution and load balancing
-**Task:** Configure Azure DNS
-
-You configure the `companycs.com` zone in Azure DNS. You have an A record set named `app` that points to an App Service that hosts a web application.
-
-You need to make this application available by using the `webapp.companycs.com` domain name. This new domain name needs to point to the public IP address of the App Service.
-
-You need to ensure that the Domain Name System (DNS) record for this new domain name is updated or deleted automatically in case the `app.companycs.com` DNS record is modified or deleted.
-
-Which type of record set should you create?
-
-A. A CNAME alias record set  
-B. A CNAME record set  
-C. An A alias record set  
-D. An A record set  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-16-05-20-31.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Explanation**
-
-You should create an address-mapping (A) alias record set. An A alias record set is a special type of record set that allows you to create an alternative name for a record set in your domain zone or for resources in your subscription. This is different from a canonical name (CNAME) record type because the alias record set will be updated or deleted in case the target resource is modified or deleted. You can only create an A alias record set that points to an A, AAAA (IPv6 address), or CNAME record types in an Azure DNS zone.
-
-You should not use a CNAME alias record set. The custom domain name for your web application is represented by an A record set. A CNAME alias record set can only point to another CNAME record set. Moreover, the value returned by a CNAME alias record set is a domain name. You are required to create a Domain Name System (DNS) record that returns an IPv4 address. This means that you need an A alias record set.
-
-You should not use an A record set. This record set type will not be automatically updated or deleted if the `app.companycs.com` record is modified or deleted.
-
-You should not use a CNAME record set. This record set type will not be automatically updated or modified if the `app.companycs.com` record is modified or deleted. You are also required to create a DNS record that returns an IPv4 address. This means that you need an A alias record set.
-
-<img src='.img/2026-03-16-05-22-14.png' width=600>
-
-**References**
-
-* [Azure DNS alias records overview](https://learn.microsoft.com/azure/dns/dns-alias)
 
 </details>
 
@@ -6442,9 +6379,175 @@ For each of the following statements, select Yes if the statement is true. Other
 
 ---
 
+#### Connect VNet to Private DNS Zone
+
+**Domain:** Implement and Manage Virtual Networking
+**Skill:** Configure name resolution and load balancing
+**Task:** Configure Azure DNS
+
+You need to connect a virtual network (`VNet`) to a private Domain Name System (`DNS zone`) to support new application namespaces in the new private zone. The `VNet` already has virtual machines (`VMs`) assigned to it and has existing private DNS zones assigned.
+
+What should you do first?
+
+A. Set the existing VMs to support the new DNS zone via the Windows Server IP Configuration DNS settings app.  
+B. Set up a new VNet, assign the private DNS zone to this VNet, and move the existing VMs to it.  
+C. Remove the existing VMs from the VNet.  
+D. Add the new private DNS zone to the existing VNet.  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-16-05-06-48.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+To complete this task, you should just add the new private Domain Name System (`DNS`) zone to the existing virtual network (`VNet`). When adding a new private DNS zone to an existing `VNet` that already has private zones assigned, you do not need to complete any other task other than adding the zone.
+
+You do not need to remove the existing `VMs` from the `VNet`. This would have been a requirement if the `VNet` did not already have private DNS zones linked to it.
+
+Setting up a new `VNet`, assigning the private DNS zone to this `VNet`, and moving the existing `VMs` to it would satisfy the connectivity to the new private DNS zone, but the existing linked private zones would be lost.
+
+<img src='.img/2026-03-16-05-11-33.png' width=600>
+
+<img src='.img/2026-03-16-05-12-25.png' width=600>
+
+<details>
+<summary>📝 More Detail</summary>
+
+The gap is in the **specific condition attached to that limitation**.
+
+The documentation line says:
+
+> *A specific virtual network can be linked to only one private zone **if automatic registration of VM DNS records is enabled***.
+
+That condition is easy to miss. The restriction applies **only when the VNet link is configured with auto-registration enabled**.
+
+Azure Private DNS actually supports **two different link types** between a VNet and a private DNS zone:
+
+**1. Registration virtual network**
+
+* Auto-registration **enabled**
+* Azure automatically creates A records for VMs in the zone
+* A VNet **can be linked as a registration network to only one private DNS zone**
+
+**2. Resolution virtual network**
+
+* Auto-registration **disabled**
+* The VNet can **resolve records from the zone**
+* No automatic VM record creation
+* A VNet **can be linked to many zones**
+
+So the rule is really:
+
+| Link Type    | Auto-registration | Max zones per VNet |
+| ------------ | ----------------- | ------------------ |
+| Registration | Enabled           | **1**              |
+| Resolution   | Disabled          | **Many**           |
+
+How this applies to the exam question:
+
+The question simply says the VNet already has private DNS zones assigned. It **does not say auto-registration is enabled**. Therefore Azure allows linking the VNet to **another private DNS zone**.
+
+Operationally, Azure would treat the VNet as:
+
+* **Registration VNet for one zone** (if enabled)
+* **Resolution VNet for additional zones**
+
+Example scenario:
+
+```
+VNet: prod-vnet
+
+Linked zones:
+corp.internal        (auto-registration enabled)
+database.internal    (resolution only)
+apps.internal        (resolution only)
+```
+
+VMs automatically register only in `corp.internal`, but they can resolve records in all three zones.
+
+Why the other answers are wrong:
+
+* **Setting DNS in the VM OS** does not integrate with Azure Private DNS zones.
+* **Creating a new VNet and moving VMs** is unnecessary because VNets can link to multiple zones.
+* **Removing VMs from the VNet** is unrelated to DNS zone linking.
+
+The key takeaway for exams:
+
+**A VNet can link to many private DNS zones, but it can be the auto-registration network for only one zone.**
+
+</details>
+
+**References**
+
+* [Tutorial: Host your domain in Azure DNS](https://learn.microsoft.com/azure/dns/dns-delegate-domain-azure-dns)
+* [What is Azure Private DNS?](https://learn.microsoft.com/azure/dns/private-dns-overview)
+
+</details>
+
+---
+
 ## Monitor and Maintain Azure Resources
 
 ### Monitor resources in Azure
+
+#### Pinning query results to a dashboard
+
+**Domain:** Monitor and Maintain Azure Resources
+**Skill:** Monitor resources in Azure
+**Task:** Query and analyze logs in Azure Monitor
+
+Your company has an Azure subscription. You create an Azure Log Analytics workspace (Azure Monitor log) and collect data from various data sources. You run an Azure Monitor log query. You want to display the tabular data as a chart pinned to a shared dashboard.
+
+You create an Application Insights Overview dashboard.
+
+You need to identify restrictions when pinning a result chart to a dashboard.
+
+For each of the following statements, select Yes if the statement is true. Otherwise, select No.
+
+| STATEMENT | YES | NO |
+|-----------|-----|-----|
+| Data displayed in the chart is limited to no more than 30 days. | ☐ | ☐ |
+| Data displayed in the chart is limited to up to four columns and the top seven rows. | ☐ | ☐ |
+| Chart types are limited to line and stacked column only. | ☐ | ☐ |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-14-04-53-31.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+Unless the `render` operator is specified in your query, data from an Azure Monitor log is returned as a table. You have the option of formatting the data as a chart with multiple chart formats supported including line, column, stacked column, and pie.
+
+When the result is pinned to a dashboard, the result is limited to no more than 30 days.
+
+Data displayed in the chart is not limited to up to four columns and the top seven rows. This limit applies to tabular data pinned to a dashboard.
+
+Chart types are not limited to line and stacked column only. Other chart formats are also supported, with the pie chart as a popular option for displaying summary data.
+
+<img src='.img/2026-03-14-04-59-56.png' width=600>
+
+<img src='.img/2026-03-14-04-55-03.png' width=600>
+
+**References**
+
+* [Azure Monitor Metrics Overview](https://learn.microsoft.com/en-us/azure/azure-monitor/metrics/data-platform-metrics)
+* [Create and share dashboards that visualize data in Azure Monitor Logs](https://learn.microsoft.com/en-us/azure/azure-monitor/visualize/tutorial-logs-dashboards)
+* [Log Analytics tutorial](https://learn.microsoft.com/azure/azure-monitor/logs/log-analytics-tutorial)
+* [Log queries in Azure Monitor](https://learn.microsoft.com/azure/azure-monitor/logs/log-query-overview)
+* [Chart visualizations](https://learn.microsoft.com/azure/azure-monitor/visualize/workbooks-chart-visualizations)
+* [Application Insights Overview dashboard](https://learn.microsoft.com/azure/azure-monitor/app/overview-dashboard)
+
+</details>
+
+---
 
 #### Configure App Service Diagnostics
 
@@ -6799,61 +6902,6 @@ References
 
 ---
 
-#### Pinning query results to a dashboard
-
-**Domain:** Monitor and Maintain Azure Resources
-**Skill:** Monitor resources in Azure
-**Task:** Query and analyze logs in Azure Monitor
-
-Your company has an Azure subscription. You create an Azure Log Analytics workspace (Azure Monitor log) and collect data from various data sources. You run an Azure Monitor log query. You want to display the tabular data as a chart pinned to a shared dashboard.
-
-You create an Application Insights Overview dashboard.
-
-You need to identify restrictions when pinning a result chart to a dashboard.
-
-For each of the following statements, select Yes if the statement is true. Otherwise, select No.
-
-| STATEMENT | YES | NO |
-|-----------|-----|-----|
-| Data displayed in the chart is limited to no more than 30 days. | ☐ | ☐ |
-| Data displayed in the chart is limited to up to four columns and the top seven rows. | ☐ | ☐ |
-| Chart types are limited to line and stacked column only. | ☐ | ☐ |
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-14-04-53-31.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-Unless the `render` operator is specified in your query, data from an Azure Monitor log is returned as a table. You have the option of formatting the data as a chart with multiple chart formats supported including line, column, stacked column, and pie.
-
-When the result is pinned to a dashboard, the result is limited to no more than 30 days.
-
-Data displayed in the chart is not limited to up to four columns and the top seven rows. This limit applies to tabular data pinned to a dashboard.
-
-Chart types are not limited to line and stacked column only. Other chart formats are also supported, with the pie chart as a popular option for displaying summary data.
-
-<img src='.img/2026-03-14-04-59-56.png' width=600>
-
-<img src='.img/2026-03-14-04-55-03.png' width=600>
-
-**References**
-
-* [Azure Monitor Metrics Overview](https://learn.microsoft.com/en-us/azure/azure-monitor/metrics/data-platform-metrics)
-* [Create and share dashboards that visualize data in Azure Monitor Logs](https://learn.microsoft.com/en-us/azure/azure-monitor/visualize/tutorial-logs-dashboards)
-* [Log Analytics tutorial](https://learn.microsoft.com/azure/azure-monitor/logs/log-analytics-tutorial)
-* [Log queries in Azure Monitor](https://learn.microsoft.com/azure/azure-monitor/logs/log-query-overview)
-* [Chart visualizations](https://learn.microsoft.com/azure/azure-monitor/visualize/workbooks-chart-visualizations)
-* [Application Insights Overview dashboard](https://learn.microsoft.com/azure/azure-monitor/app/overview-dashboard)
-
-</details>
-
----
-
 #### Storage Insights Overview
 
 **Domain:** Monitor and Maintain Azure Resources
@@ -7063,85 +7111,6 @@ Do not use `Set-AzDiagnosticSetting` for this task because that cmdlet configure
 
 ---
 
-#### Diagnose Network Watcher Tool for Web Server Packet Flow
-
-**Domain:** Monitor and Maintain Azure Resources
-**Skill:** Monitor resources in Azure
-**Task:** Use Azure Network Watcher and Connection Monitor
-
-Your company hosts its infrastructure in Azure. The infrastructure consists of virtual machines (VMs), storage (managed disks and Azure file shares) and multiple networks (VNets and subnets). The service desk is seeing an influx of support tickets that have been logged in the last 24 hours regarding intermittent connectivity issues to a web server. After some initial investigation, the support ticket has been escalated to you.
-
-You need to use the relevant Network Watcher diagnostic tool to check if packets are being allowed or denied to the web server.
-
-Which Network Watcher diagnostic tool should you use?
-
-A. IP flow verify  
-B. Next hop  
-C. Effective security rules  
-D. Connection troubleshoot  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-01-30-05-24-16.png' width=700>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Why the selected answer is correct (IP flow verify)**
-IP flow verify is the Network Watcher tool specifically designed to determine whether traffic is **allowed or denied** to or from a VM. You define the 5-tuple (source IP, destination IP, source port, destination port, protocol), and Azure evaluates the effective NSG rules applied to the NIC and subnet to return an **Allow** or **Deny** decision. This directly answers the requirement to check whether packets are being allowed or denied to the web server.
-
-**Why the other options are incorrect**
-
-* **Next hop**: Shows where traffic is routed (e.g., Internet, virtual appliance, VNet peering). It does not evaluate security rules or allow/deny decisions.
-* **Effective security rules**: Lists the merged NSG rules applied to a NIC or subnet, but does not simulate a specific packet flow or return an explicit allow/deny result for given traffic.
-* **Connection troubleshoot**: Tests end-to-end connectivity between a source and destination and identifies potential failures, but it is broader than required and not focused on evaluating packet allow/deny decisions at the NSG level.
-
-**Key takeaway**
-When the question asks whether packets are **allowed or denied**, the correct Network Watcher tool is **IP flow verify**.
-
-**References**
-
-* [https://learn.microsoft.com/azure/network-watcher/network-watcher-ip-flow-verify-overview](https://learn.microsoft.com/azure/network-watcher/network-watcher-ip-flow-verify-overview)
-* [https://learn.microsoft.com/azure/network-watcher/network-watcher-monitoring-overview](https://learn.microsoft.com/azure/network-watcher/network-watcher-monitoring-overview)
-* [https://learn.microsoft.com/azure/virtual-network/security-overview](https://learn.microsoft.com/azure/virtual-network/security-overview)
-
-No. **Windows Firewall rules do not impact IP flow verify results.**
-
-**Why**
-IP flow verify evaluates traffic **only at the Azure networking layer**, specifically:
-
-* Network Security Groups (NSGs) applied to the **subnet** and **NIC**
-* Azure’s effective security rule evaluation (priority-based NSG processing)
-
-It does **not** inspect or consider:
-
-* Guest OS firewalls (Windows Firewall, iptables, etc.)
-* Application-level listeners or services
-* VM-level routing inside the OS
-
-**Common exam trap**
-It is easy to assume that “packet allowed or denied” includes the OS firewall. On Azure exams, **IP flow verify = NSG evaluation only**. If IP flow verify returns **Allow** but connectivity still fails, the next suspects are:
-
-* Windows Firewall rules
-* Application not listening on the port
-* Local OS routing or security software
-
-**Key takeaway**
-IP flow verify answers: *“Would Azure networking allow this packet?”*
-It does **not** answer: *“Can the VM actually accept this connection?”*
-
-**References**
-
-* [https://learn.microsoft.com/azure/network-watcher/network-watcher-ip-flow-verify-overview](https://learn.microsoft.com/azure/network-watcher/network-watcher-ip-flow-verify-overview)
-* [https://learn.microsoft.com/azure/virtual-network/network-security-groups-overview](https://learn.microsoft.com/azure/virtual-network/network-security-groups-overview)
-
-</details>
-
----
-
 #### Configure Azure Monitor Alert Notification Rate Limits
 
 **Domain:** Monitor and Maintain Azure Resources
@@ -7328,7 +7297,158 @@ The metrics:getBatch API reduces throttling risk by batching multi-resource metr
 
 ---
 
+#### Diagnose Network Watcher Tool for Web Server Packet Flow
+
+**Domain:** Monitor and Maintain Azure Resources
+**Skill:** Monitor resources in Azure
+**Task:** Use Azure Network Watcher and Connection Monitor
+
+Your company hosts its infrastructure in Azure. The infrastructure consists of virtual machines (VMs), storage (managed disks and Azure file shares) and multiple networks (VNets and subnets). The service desk is seeing an influx of support tickets that have been logged in the last 24 hours regarding intermittent connectivity issues to a web server. After some initial investigation, the support ticket has been escalated to you.
+
+You need to use the relevant Network Watcher diagnostic tool to check if packets are being allowed or denied to the web server.
+
+Which Network Watcher diagnostic tool should you use?
+
+A. IP flow verify  
+B. Next hop  
+C. Effective security rules  
+D. Connection troubleshoot  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-01-30-05-24-16.png' width=700>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Why the selected answer is correct (IP flow verify)**
+IP flow verify is the Network Watcher tool specifically designed to determine whether traffic is **allowed or denied** to or from a VM. You define the 5-tuple (source IP, destination IP, source port, destination port, protocol), and Azure evaluates the effective NSG rules applied to the NIC and subnet to return an **Allow** or **Deny** decision. This directly answers the requirement to check whether packets are being allowed or denied to the web server.
+
+**Why the other options are incorrect**
+
+* **Next hop**: Shows where traffic is routed (e.g., Internet, virtual appliance, VNet peering). It does not evaluate security rules or allow/deny decisions.
+* **Effective security rules**: Lists the merged NSG rules applied to a NIC or subnet, but does not simulate a specific packet flow or return an explicit allow/deny result for given traffic.
+* **Connection troubleshoot**: Tests end-to-end connectivity between a source and destination and identifies potential failures, but it is broader than required and not focused on evaluating packet allow/deny decisions at the NSG level.
+
+**Key takeaway**
+When the question asks whether packets are **allowed or denied**, the correct Network Watcher tool is **IP flow verify**.
+
+**References**
+
+* [https://learn.microsoft.com/azure/network-watcher/network-watcher-ip-flow-verify-overview](https://learn.microsoft.com/azure/network-watcher/network-watcher-ip-flow-verify-overview)
+* [https://learn.microsoft.com/azure/network-watcher/network-watcher-monitoring-overview](https://learn.microsoft.com/azure/network-watcher/network-watcher-monitoring-overview)
+* [https://learn.microsoft.com/azure/virtual-network/security-overview](https://learn.microsoft.com/azure/virtual-network/security-overview)
+
+No. **Windows Firewall rules do not impact IP flow verify results.**
+
+**Why**
+IP flow verify evaluates traffic **only at the Azure networking layer**, specifically:
+
+* Network Security Groups (NSGs) applied to the **subnet** and **NIC**
+* Azure’s effective security rule evaluation (priority-based NSG processing)
+
+It does **not** inspect or consider:
+
+* Guest OS firewalls (Windows Firewall, iptables, etc.)
+* Application-level listeners or services
+* VM-level routing inside the OS
+
+**Common exam trap**
+It is easy to assume that “packet allowed or denied” includes the OS firewall. On Azure exams, **IP flow verify = NSG evaluation only**. If IP flow verify returns **Allow** but connectivity still fails, the next suspects are:
+
+* Windows Firewall rules
+* Application not listening on the port
+* Local OS routing or security software
+
+**Key takeaway**
+IP flow verify answers: *“Would Azure networking allow this packet?”*
+It does **not** answer: *“Can the VM actually accept this connection?”*
+
+**References**
+
+* [https://learn.microsoft.com/azure/network-watcher/network-watcher-ip-flow-verify-overview](https://learn.microsoft.com/azure/network-watcher/network-watcher-ip-flow-verify-overview)
+* [https://learn.microsoft.com/azure/virtual-network/network-security-groups-overview](https://learn.microsoft.com/azure/virtual-network/network-security-groups-overview)
+
+</details>
+
+---
+
 ### Implement backup and recovery
+
+#### Recover Configuration File from Azure VM Backup
+
+**Domain:** Monitor and Maintain Azure Resources
+**Skill:** Implement backup and recovery
+**Task:** Perform backup and restore operations by using Azure Backup
+
+You have two Azure virtual machines (VMs) named VM1 and VM2 running Windows Server 2019. The VMs are backed up by an Azure Recovery Services vault. A configuration file on VM1 was updated, and you need to restore it to a version from six days ago.
+
+You need to perform this action as quickly as possible without affecting other system files.
+
+Which four actions should you perform in sequence? To answer, move the appropriate actions from the list of actions to the answer area and arrange them in the correct order.
+
+**Available options:**
+
+* Start the file recovery process and select the recovery point of six days ago.
+* Download and execute the PowerShell script to mount the recovery volume.
+* Copy the file from the mounted volume to the VM.
+* Unmount the volumes.
+* Restore the disk containing the configuration file.
+* Restore the VM to a previous state.
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-01-30-05-41-40.png' width=700>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Why the selected answer is wrong**
+
+“Restore the disk containing the configuration file” is incorrect because a disk restore is a **full disk–level operation**. It replaces or attaches an entire managed disk from a recovery point. That is slower and risks overwriting or impacting other files on the disk, which directly violates the requirement to restore **only one file** as quickly as possible and **without affecting other system files**.
+On Azure exams, disk restore is a common trap when the scenario clearly calls for **granular recovery**.
+
+**Why the correct answer is right**
+
+The scenario is testing **Azure VM File Recovery** from a Recovery Services vault. File Recovery allows you to restore individual files from a specific recovery point **without restoring the VM or disk**.
+
+The correct sequence is:
+
+1. Start the file recovery process and select the recovery point of six days ago.
+2. Download and execute the PowerShell script to mount the recovery volume.
+3. Copy the required configuration file from the mounted volume to the VM.
+4. Unmount the volumes.
+
+This approach is the **fastest**, least disruptive method and is exactly what Azure Backup File Recovery is designed for.
+
+**Key takeaway**
+
+If the requirement is **one or a few files**, always choose **File Recovery**, not disk or VM restore.
+Disk restore = coarse-grained, higher impact.
+File Recovery = granular, fast, exam-preferred.
+
+**References**
+
+Azure VM file recovery
+[https://learn.microsoft.com/azure/backup/backup-azure-restore-files-from-vm](https://learn.microsoft.com/azure/backup/backup-azure-restore-files-from-vm)
+
+Restore Azure VM data using Azure Backup
+link removed
+
+Azure Recovery Services vault overview
+[https://learn.microsoft.com/azure/backup/backup-azure-recovery-services-vault-overview](https://learn.microsoft.com/azure/backup/backup-azure-recovery-services-vault-overview)
+
+</details>
+
+▶ **Related Lab:** [lab-vm-file-recovery](../hands-on-labs/monitoring/lab-vm-file-recovery/README.md)
+
+---
 
 #### Delete Recovery Services vault
 
@@ -7727,78 +7847,6 @@ You should not run the `Set-AzResource` cmdlet. This cmdlet is used to configure
 
 ---
 
-#### Recover Configuration File from Azure VM Backup
-
-**Domain:** Monitor and Maintain Azure Resources
-**Skill:** Implement backup and recovery
-**Task:** Perform backup and restore operations by using Azure Backup
-
-You have two Azure virtual machines (VMs) named VM1 and VM2 running Windows Server 2019. The VMs are backed up by an Azure Recovery Services vault. A configuration file on VM1 was updated, and you need to restore it to a version from six days ago.
-
-You need to perform this action as quickly as possible without affecting other system files.
-
-Which four actions should you perform in sequence? To answer, move the appropriate actions from the list of actions to the answer area and arrange them in the correct order.
-
-**Available options:**
-
-* Start the file recovery process and select the recovery point of six days ago.
-* Download and execute the PowerShell script to mount the recovery volume.
-* Copy the file from the mounted volume to the VM.
-* Unmount the volumes.
-* Restore the disk containing the configuration file.
-* Restore the VM to a previous state.
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-01-30-05-41-40.png' width=700>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Why the selected answer is wrong**
-
-“Restore the disk containing the configuration file” is incorrect because a disk restore is a **full disk–level operation**. It replaces or attaches an entire managed disk from a recovery point. That is slower and risks overwriting or impacting other files on the disk, which directly violates the requirement to restore **only one file** as quickly as possible and **without affecting other system files**.
-On Azure exams, disk restore is a common trap when the scenario clearly calls for **granular recovery**.
-
-**Why the correct answer is right**
-
-The scenario is testing **Azure VM File Recovery** from a Recovery Services vault. File Recovery allows you to restore individual files from a specific recovery point **without restoring the VM or disk**.
-
-The correct sequence is:
-
-1. Start the file recovery process and select the recovery point of six days ago.
-2. Download and execute the PowerShell script to mount the recovery volume.
-3. Copy the required configuration file from the mounted volume to the VM.
-4. Unmount the volumes.
-
-This approach is the **fastest**, least disruptive method and is exactly what Azure Backup File Recovery is designed for.
-
-**Key takeaway**
-
-If the requirement is **one or a few files**, always choose **File Recovery**, not disk or VM restore.
-Disk restore = coarse-grained, higher impact.
-File Recovery = granular, fast, exam-preferred.
-
-**References**
-
-Azure VM file recovery
-[https://learn.microsoft.com/azure/backup/backup-azure-restore-files-from-vm](https://learn.microsoft.com/azure/backup/backup-azure-restore-files-from-vm)
-
-Restore Azure VM data using Azure Backup
-link removed
-
-Azure Recovery Services vault overview
-[https://learn.microsoft.com/azure/backup/backup-azure-recovery-services-vault-overview](https://learn.microsoft.com/azure/backup/backup-azure-recovery-services-vault-overview)
-
-</details>
-
-▶ **Related Lab:** [lab-vm-file-recovery](../hands-on-labs/monitoring/lab-vm-file-recovery/README.md)
-
----
-
 #### Backup Pre-Check Warning Cause
 
 **Domain:** Monitor and Maintain Azure Resources
@@ -7936,54 +7984,6 @@ Because of this, **application-consistent backups are preferred for production w
 * [What is the Azure Backup service?](https://learn.microsoft.com/azure/backup/backup-overview)
 * [Introducing Backup Pre-Checks for Backup of Azure VMs](https://learn.microsoft.com/azure/backup/backup-azure-manage-windows-server#monitor-backup-jobs-and-alerts)
 * [An overview of Azure VM backup](https://learn.microsoft.com/azure/backup/backup-azure-vms-introduction)
-
-</details>
-
----
-
-#### Recovery Services vault diagnostic target
-
-**Domain:** Monitor and Maintain Azure Resources
-**Skill:** Implement backup and recovery
-**Task:** Configure and interpret reports and alerts for backups
-
-Your company uses multiple Azure Recovery Services vaults to store backup data. The company plans to start using Azure Backup reports to help to forecast cloud storage requirements and audit backup restores.
-
-You need to configure the Azure Recovery Services vault diagnostic settings and specify the target for each Azure Recovery Services vault's diagnostic data to support reporting.
-
-Where should you target the Azure Recovery Services vault diagnostic data?
-
-A. Archive to a blob storage account.  
-B. Archive to a file storage account.  
-C. Stream to an event hub.  
-D. Send to Log Analytics.  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-20-03-57-00.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Why the selected answer is correct**
-
-You should send the vault diagnostic data to a `Log Analytics workspace`. Azure Backup reporting consumes resource-specific diagnostic events from `Recovery Services vaults` that are ingested into Log Analytics; the Backup Reports solution reads from those `Log Analytics` tables to produce the reports.
-
-**Why other options are incorrect**
-
-Archiving diagnostics to a blob storage account or a file storage account retains raw diagnostic files but does not populate the `Log Analytics` tables required by Azure Backup Reports. Streaming the diagnostics to an event hub merely forwards raw events and likewise does not provide the resource-specific Log Analytics tables and schema that the reporting solution requires.
-
-**Key takeaway**
-
-To enable Azure Backup reporting and auditing at scale, configure each `Recovery Services vault` to send diagnostics to a `Log Analytics workspace` (resource-specific tables) so the Backup Reports can query and visualize the data.
-
-**References**
-
-* [Configure Azure Backup reports](https://learn.microsoft.com/azure/backup/configure-reports)
-* [Use diagnostics settings for Recovery Services vaults](https://learn.microsoft.com/azure/backup/backup-azure-diagnostic-events)
 
 </details>
 
@@ -8148,6 +8148,54 @@ You should not choose `Create a virtual machine` or `Replace existing` as the Re
 * [How to restore Azure VM data in Azure portal](https://learn.microsoft.com/azure/backup/backup-azure-arm-restore-vms)
 * [Availability options for Azure Virtual Machines](https://learn.microsoft.com/azure/virtual-machines/availability)
 * [Tutorial: Restore a VM with Azure CLI](https://learn.microsoft.com/azure/backup/tutorial-restore-disk)
+
+</details>
+
+---
+
+#### Recovery Services vault diagnostic target
+
+**Domain:** Monitor and Maintain Azure Resources
+**Skill:** Implement backup and recovery
+**Task:** Configure and interpret reports and alerts for backups
+
+Your company uses multiple Azure Recovery Services vaults to store backup data. The company plans to start using Azure Backup reports to help to forecast cloud storage requirements and audit backup restores.
+
+You need to configure the Azure Recovery Services vault diagnostic settings and specify the target for each Azure Recovery Services vault's diagnostic data to support reporting.
+
+Where should you target the Azure Recovery Services vault diagnostic data?
+
+A. Archive to a blob storage account.  
+B. Archive to a file storage account.  
+C. Stream to an event hub.  
+D. Send to Log Analytics.  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-20-03-57-00.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Why the selected answer is correct**
+
+You should send the vault diagnostic data to a `Log Analytics workspace`. Azure Backup reporting consumes resource-specific diagnostic events from `Recovery Services vaults` that are ingested into Log Analytics; the Backup Reports solution reads from those `Log Analytics` tables to produce the reports.
+
+**Why other options are incorrect**
+
+Archiving diagnostics to a blob storage account or a file storage account retains raw diagnostic files but does not populate the `Log Analytics` tables required by Azure Backup Reports. Streaming the diagnostics to an event hub merely forwards raw events and likewise does not provide the resource-specific Log Analytics tables and schema that the reporting solution requires.
+
+**Key takeaway**
+
+To enable Azure Backup reporting and auditing at scale, configure each `Recovery Services vault` to send diagnostics to a `Log Analytics workspace` (resource-specific tables) so the Backup Reports can query and visualize the data.
+
+**References**
+
+* [Configure Azure Backup reports](https://learn.microsoft.com/azure/backup/configure-reports)
+* [Use diagnostics settings for Recovery Services vaults](https://learn.microsoft.com/azure/backup/backup-azure-diagnostic-events)
 
 </details>
 

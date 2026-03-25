@@ -140,7 +140,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 |  | Configure user-defined network routes | 0 | 0 |
 |  | Troubleshoot network connectivity | 0 | 0 |
 | Configure secure access to virtual networks (5 tasks) | Create and configure NSGs and application security groups | 1 | 0 |
-|  | Evaluate effective security rules in NSGs | 0 | 0 |
+|  | Evaluate effective security rules in NSGs | 1 | 0 |
 |  | Implement Azure Bastion | 0 | 0 |
 |  | Configure service endpoints for Azure PaaS | 1 | 0 |
 |  | Configure private endpoints for Azure PaaS | 1 | 1 |
