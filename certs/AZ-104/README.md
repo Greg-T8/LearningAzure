@@ -79,7 +79,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 |  | Create and use shared access signature (SAS) tokens | 3 | 0 |
 |  | Configure stored access policies | 1 | 0 |
 |  | Manage access keys | 2 | 0 |
-|  | Configure identity-based access for Azure Files | 0 | 0 |
+|  | Configure identity-based access for Azure Files | 1 | 0 |
 | Configure and manage storage accounts (5 tasks) | Create and configure storage accounts | 0 | 0 |
 |  | Configure Azure Storage redundancy | 2 | 0 |
 |  | Configure object replication | 1 | 1 |
