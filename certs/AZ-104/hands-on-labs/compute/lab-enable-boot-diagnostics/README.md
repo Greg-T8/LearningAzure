@@ -22,6 +22,7 @@
 
 
 
+
 ## Exam Question Scenario
 
 > **Exam**: AZ-104 — Compute
