@@ -8,7 +8,7 @@ Identities & Governance - 1/25
 
 Storage:
 - (1-10) Configure access to storage
-	- (In Progress)
+	- (Complete)
 - (11-20) Configure and manage storage accounts
 	- 11-20 (Complete)
 - (21-29) Configure Azure Files and Blob storage

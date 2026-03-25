@@ -353,21 +353,24 @@ $Helpers = {
 
                 # Parse the start datetime defensively to handle historical rows with blank Start values
                 $startText = if ([string]::IsNullOrWhiteSpace($startStr)) { $dateStr } else { "$dateStr $startStr" }
-                $formats = if ([string]::IsNullOrWhiteSpace($startStr)) {
-                    @('M/d/yy', 'M/d/yyyy')
-                }
-                else {
-                    @('M/d/yy h:mm tt', 'M/d/yyyy h:mm tt')
-                }
-
                 $startDateTime = [datetime]::MinValue
-                $parsedStart = [datetime]::TryParseExact(
+
+                # Prefer current culture, then invariant culture, to tolerate host-specific parsing behavior.
+                $parsedStart = [datetime]::TryParse(
                     $startText,
-                    $formats,
-                    [System.Globalization.CultureInfo]::InvariantCulture,
+                    [System.Globalization.CultureInfo]::CurrentCulture,
                     [System.Globalization.DateTimeStyles]::AllowWhiteSpaces,
                     [ref]$startDateTime
                 )
+
+                if (-not $parsedStart) {
+                    $parsedStart = [datetime]::TryParse(
+                        $startText,
+                        [System.Globalization.CultureInfo]::InvariantCulture,
+                        [System.Globalization.DateTimeStyles]::AllowWhiteSpaces,
+                        [ref]$startDateTime
+                    )
+                }
 
                 if (-not $parsedStart) {
                     if ($UseLastCommit) {
