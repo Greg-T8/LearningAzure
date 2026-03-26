@@ -36,7 +36,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 | [4. Networking](#domain-4) | 15–20% | 3 | 21 | 3 | 11 / 13 (84%) | 🟢 |
 | [5. Monitoring & Backup](#domain-5) | 10–15% | 2 | 27 | 5 | 11 / 13 (84%) | 🟢 |
 
-**Totals:** 247 practice questions · 19 hands-on labs
+**Totals:** 248 practice questions · 19 hands-on labs
 
 **Legend:** 🟢 Strong (≥66%) · 🟡 Partial (33–65%) · 🔴 Low (<33%) — "Covered" = task has ≥1 practice question or ≥1 lab
 
