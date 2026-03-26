@@ -30,13 +30,13 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 
 | Domain | Weight | Skills | Qs | Labs | Tasks Covered | Status |
 | :----- | :----- | -----: | -: | ---: | :------------ | :----: |
-| [1. Identities & Governance](#domain-1) | 20–25% | 3 | 18 | 0 | 8 / 15 (53%) | 🟡 |
+| [1. Identities & Governance](#domain-1) | 20–25% | 3 | 19 | 0 | 8 / 15 (53%) | 🟡 |
 | [2. Storage](#domain-2) | 15–20% | 3 | 22 | 5 | 12 / 17 (70%) | 🟢 |
 | [3. Compute](#domain-3) | 20–25% | 4 | 47 | 6 | 21 / 24 (87%) | 🟢 |
 | [4. Networking](#domain-4) | 15–20% | 3 | 19 | 3 | 11 / 13 (84%) | 🟢 |
-| [5. Monitoring & Backup](#domain-5) | 10–15% | 2 | 26 | 5 | 11 / 13 (84%) | 🟢 |
+| [5. Monitoring & Backup](#domain-5) | 10–15% | 2 | 27 | 5 | 11 / 13 (84%) | 🟢 |
 
-**Totals:** 242 practice questions · 19 hands-on labs
+**Totals:** 244 practice questions · 19 hands-on labs
 
 **Legend:** 🟢 Strong (≥66%) · 🟡 Partial (33–65%) · 🔴 Low (<33%) — "Covered" = task has ≥1 practice question or ≥1 lab
 
@@ -48,7 +48,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 
 <a id="domain-1"></a>
 <details>
-<summary><b>Domain 1: Manage Azure Identities and Governance (20–25%)</b> — 15 tasks · 18 Qs · 0 Labs</summary>
+<summary><b>Domain 1: Manage Azure Identities and Governance (20–25%)</b> — 15 tasks · 19 Qs · 0 Labs</summary>
 
 | Skill | Task | Qs | Labs |
 | :--- | :--- | -: | -: |
@@ -56,7 +56,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 |  | Manage user and group properties | 0 | 0 |
 |  | Manage licenses in Microsoft Entra ID | 0 | 0 |
 |  | Manage external users | 0 | 0 |
-|  | Configure self-service password reset (SSPR) | 1 | 0 |
+|  | Configure self-service password reset (SSPR) | 2 | 0 |
 | Manage access to Azure resources (3 tasks) | Manage built-in Azure roles | 0 | 0 |
 |  | Assign roles at different scopes | 0 | 0 |
 |  | Interpret access assignments | 2 | 0 |
@@ -153,7 +153,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 
 <a id="domain-5"></a>
 <details>
-<summary><b>Domain 5: Monitor and Maintain Azure Resources (10–15%)</b> — 13 tasks · 26 Qs · 5 Labs</summary>
+<summary><b>Domain 5: Monitor and Maintain Azure Resources (10–15%)</b> — 13 tasks · 27 Qs · 5 Labs</summary>
 
 | Skill | Task | Qs | Labs |
 | :--- | :--- | -: | -: |
