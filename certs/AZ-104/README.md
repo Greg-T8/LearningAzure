@@ -112,7 +112,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 |  | Move a VM to another resource group, subscription, or region | 0 | 0 |
 |  | Manage virtual machine sizes | 2 | 0 |
 |  | Manage virtual machine disks | 2 | 0 |
-|  | Deploy VMs to availability zones and availability sets | 3 | 0 |
+|  | Deploy VMs to availability zones and availability sets | 4 | 0 |
 |  | Deploy and configure an Azure Virtual Machine Scale Sets | 2 | 1 |
 | Provision and manage containers in the Azure portal (4 tasks) | Create and manage an Azure container registry | 1 | 0 |
 |  | Provision a container by using Azure Container Instances | 0 | 0 |
