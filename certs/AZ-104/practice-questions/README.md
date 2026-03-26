@@ -59,7 +59,7 @@ Accounts for questions missed or unsure about in the practice exams.
     * [Complete ARM template deployment command](#complete-arm-template-deployment-command)
     * [Export ARM Template](#export-arm-template)
     * [Resource dependencies in Bicep](#resource-dependencies-in-bicep)
-    * [Case Study — Solution Evaluation](#case-study-solution-evaluation)
+    * [Case Study — Solution Evaluation](#case-study--solution-evaluation)
   * [Create and configure virtual machines](#create-and-configure-virtual-machines)
     * [Move a data disk with PowerShell](#move-a-data-disk-with-powershell)
     * [WebApp1 Availability Case](#webapp1-availability-case)
@@ -69,7 +69,7 @@ Accounts for questions missed or unsure about in the practice exams.
     * [Enable disk encryption on Linux VM](#enable-disk-encryption-on-linux-vm)
     * [Azure Spot VM Eviction Factors](#azure-spot-vm-eviction-factors)
     * [Enable VM disk encryption](#enable-vm-disk-encryption)
-    * [Availability set — maximum unavailable VMs](#availability-set-maximum-unavailable-vms)
+    * [Availability set — maximum unavailable VMs](#availability-set--maximum-unavailable-vms)
     * [Encrypt VM Disk With Key Vault](#encrypt-vm-disk-with-key-vault)
     * [VM Resize Failure Cause](#vm-resize-failure-cause)
     * [Apply Change to VMSS OS and Data Disk Profile](#apply-change-to-vmss-os-and-data-disk-profile)
@@ -98,9 +98,9 @@ Accounts for questions missed or unsure about in the practice exams.
   * [Configure and manage virtual networks in Azure](#configure-and-manage-virtual-networks-in-azure)
     * [VNet Peering with ExpressRoute](#vnet-peering-with-expressroute)
     * [Standard Load Balancer public IPs](#standard-load-balancer-public-ips)
-    * [Case Study — Container Group Placement](#case-study-container-group-placement)
+    * [Case Study — Container Group Placement](#case-study--container-group-placement)
     * [Configure Layered Network Security](#configure-layered-network-security)
-    * [VNet Peering — Missing Reverse Peering](#vnet-peering-missing-reverse-peering)
+    * [VNet Peering — Missing Reverse Peering](#vnet-peering--missing-reverse-peering)
   * [Configure secure access to virtual networks](#configure-secure-access-to-virtual-networks)
     * [Design NSG to Block RDP from Internet](#design-nsg-to-block-rdp-from-internet)
     * [Configure Private Link Service Source IP](#configure-private-link-service-source-ip)
@@ -141,7 +141,7 @@ Accounts for questions missed or unsure about in the practice exams.
     * [Azure Site Recovery High Churn](#azure-site-recovery-high-churn)
     * [Restore VM from backup (availability set)](#restore-vm-from-backup-availability-set)
     * [Recover Azure VM from Deleted Backup](#recover-azure-vm-from-deleted-backup)
-    * [Site Recovery — Recovery Steps](#site-recovery-recovery-steps)
+    * [Site Recovery — Recovery Steps](#site-recovery--recovery-steps)
     * [Delete Recovery Services vault](#delete-recovery-services-vault)
     * [Recovery Services vault diagnostic target](#recovery-services-vault-diagnostic-target)
     * [Move Recovery Services vault](#move-recovery-services-vault)
@@ -8199,6 +8199,8 @@ D. Use packet capture.
 Installing `AzureNetworkWatcherExtension` on the source VM enables Network Watcher to run diagnostics that require the guest extension.
 
 Using packet capture is the feature that inspects detailed traffic to and from a VM. It captures packet data that can be filtered and analyzed to investigate the exact communication path and behavior between `VM1` and `VM2`.
+
+<img src='.img/2026-03-26-05-51-51.png' width=600>
 
 **Key takeaway**
 
