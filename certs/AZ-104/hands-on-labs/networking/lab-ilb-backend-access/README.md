@@ -5,8 +5,10 @@
 **Task:** Troubleshoot load balancing
 
 **Practice Exam Questions:**
+- [Resolve Load Balancer Timeout Distribution](../../../practice-questions/README.md#resolve-load-balancer-timeout-distribution)
 - [IMDS Load Balancer Metadata Error](../../../practice-questions/README.md#imds-load-balancer-metadata-error)
 - [Diagnose Internal Load Balancer Hairpin Traffic Failure](../../../practice-questions/README.md#diagnose-internal-load-balancer-hairpin-traffic-failure)
+
 
 
 

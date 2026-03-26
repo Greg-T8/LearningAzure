@@ -25,20 +25,20 @@ Progress trackers, detailed study notes, practice exams, and hands-on labs:
 
 | Date | AZ-104 | Other | Total |
 |------|------|------|-------|
-| Wed, Mar 25 | 🟢 1.5h |  | **1.5h** |
+| Thu, Mar 26 | 🟢 1.2h |  | **1.2h** |
+| Wed, Mar 25 | 🟣 2.7h |  | **2.7h** |
 | Tue, Mar 24 | 🟢 1.1h | 🟡 0.9h | **2.0h** |
 | Mon, Mar 23 |  |  |  |
 | Sun, Mar 22 |  |  |  |
 | Sat, Mar 21 |  |  |  |
 | Fri, Mar 20 | 🟢 1.8h | 🟢 1h | **2.8h** |
-| Thu, Mar 19 | 🟢 1.7h | 🟣 3.1h | **4.8h** |
-| **Weekly Total** | **6.1h** | **5.0h** | **11.1h** |
-| ***Running Total*** | ***28.6h*** | ***152.7h*** | ***181.3h*** |
+| **Weekly Total** | **6.8h** | **1.9h** | **8.7h** |
+| ***Running Total*** | ***31.0h*** | ***152.7h*** | ***183.7h*** |
 
 *Activity Levels: 🟡 Low (< 1hr) | 🟢 Medium (1-2hrs) | 🟣 High (> 2hrs)*
 
 *Other = Lab workflow and automation design, content structure and development*  
 
-*Last updated: March 25, 2026 at 09:52 CDT*
+*Last updated: March 26, 2026 at 08:35 CDT*
 
 <!-- COMMIT_STATS_END -->

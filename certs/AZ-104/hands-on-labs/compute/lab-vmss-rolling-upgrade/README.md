@@ -5,8 +5,9 @@
 **Task:** Deploy and configure an Azure Virtual Machine Scale Sets
 
 **Practice Exam Questions:**
-- [Apply Change to VMSS OS and Data Disk Profile](../../../practice-questions/README.md#apply-change-to-vmss-os-and-data-disk-profile)
 - [Join VM to Scale Set](../../../practice-questions/README.md#join-vm-to-scale-set)
+- [Apply Change to VMSS OS and Data Disk Profile](../../../practice-questions/README.md#apply-change-to-vmss-os-and-data-disk-profile)
+
 
 
 

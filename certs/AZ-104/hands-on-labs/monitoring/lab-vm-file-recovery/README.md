@@ -5,12 +5,13 @@
 **Task:** Perform backup and restore operations by using Azure Backup
 
 **Practice Exam Questions:**
-- [Move Recovery Services vault](../../../practice-questions/README.md#move-recovery-services-vault)
-- [Recover Configuration File from Azure VM Backup](../../../practice-questions/README.md#recover-configuration-file-from-azure-vm-backup)
-- [Delete Recovery Services vault](../../../practice-questions/README.md#delete-recovery-services-vault)
 - [Restore VM from backup (availability set)](../../../practice-questions/README.md#restore-vm-from-backup-availability-set)
 - [Configure Azure Backup with PowerShell](../../../practice-questions/README.md#configure-azure-backup-with-powershell)
 - [Recover Azure VM from Deleted Backup](../../../practice-questions/README.md#recover-azure-vm-from-deleted-backup)
+- [Move Recovery Services vault](../../../practice-questions/README.md#move-recovery-services-vault)
+- [Delete Recovery Services vault](../../../practice-questions/README.md#delete-recovery-services-vault)
+- [Recover Configuration File from Azure VM Backup](../../../practice-questions/README.md#recover-configuration-file-from-azure-vm-backup)
+
 
 
 
