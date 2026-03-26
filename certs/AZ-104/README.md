@@ -60,7 +60,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 | Manage access to Azure resources (3 tasks) | Manage built-in Azure roles | 0 | 0 |
 |  | Assign roles at different scopes | 0 | 0 |
 |  | Interpret access assignments | 2 | 0 |
-| Manage Azure subscriptions and governance (7 tasks) | Implement and manage Azure Policy | 3 | 0 |
+| Manage Azure subscriptions and governance (7 tasks) | Implement and manage Azure Policy | 4 | 0 |
 |  | Configure resource locks | 3 | 0 |
 |  | Apply and manage tags on resources | 3 | 0 |
 |  | Manage resource groups | 1 | 0 |
