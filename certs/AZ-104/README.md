@@ -162,7 +162,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 |  | Query and analyze logs in Azure Monitor | 1 | 0 |
 |  | Set up alert rules, action groups, and alert processing rules in Azure Monitor | 5 | 1 |
 |  | Configure and interpret monitoring of VMs, storage accounts, and networks by using Azure Monitor Insights | 1 | 1 |
-|  | Use Azure Network Watcher and Connection Monitor | 5 | 1 |
+|  | Use Azure Network Watcher and Connection Monitor | 6 | 1 |
 | Implement backup and recovery (7 tasks) | Create a Recovery Services vault | 0 | 0 |
 |  | Create an Azure Backup vault | 0 | 0 |
 |  | Create and configure a backup policy | 1 | 0 |
