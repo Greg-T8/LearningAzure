@@ -30,13 +30,13 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 
 | Domain | Weight | Skills | Qs | Labs | Tasks Covered | Status |
 | :----- | :----- | -----: | -: | ---: | :------------ | :----: |
-| [1. Identities & Governance](#domain-1) | 20–25% | 3 | 14 | 0 | 8 / 15 (53%) | 🟡 |
+| [1. Identities & Governance](#domain-1) | 20–25% | 3 | 18 | 0 | 8 / 15 (53%) | 🟡 |
 | [2. Storage](#domain-2) | 15–20% | 3 | 21 | 5 | 12 / 17 (70%) | 🟢 |
-| [3. Compute](#domain-3) | 20–25% | 4 | 40 | 6 | 18 / 24 (75%) | 🟢 |
+| [3. Compute](#domain-3) | 20–25% | 4 | 43 | 6 | 20 / 24 (83%) | 🟢 |
 | [4. Networking](#domain-4) | 15–20% | 3 | 19 | 3 | 11 / 13 (84%) | 🟢 |
 | [5. Monitoring & Backup](#domain-5) | 10–15% | 2 | 22 | 5 | 9 / 13 (69%) | 🟢 |
 
-**Totals:** 226 practice questions · 19 hands-on labs
+**Totals:** 233 practice questions · 19 hands-on labs
 
 **Legend:** 🟢 Strong (≥66%) · 🟡 Partial (33–65%) · 🔴 Low (<33%) — "Covered" = task has ≥1 practice question or ≥1 lab
 
@@ -48,7 +48,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 
 <a id="domain-1"></a>
 <details>
-<summary><b>Domain 1: Manage Azure Identities and Governance (20–25%)</b> — 15 tasks · 14 Qs · 0 Labs</summary>
+<summary><b>Domain 1: Manage Azure Identities and Governance (20–25%)</b> — 15 tasks · 18 Qs · 0 Labs</summary>
 
 | Skill | Task | Qs | Labs |
 | :--- | :--- | -: | -: |
@@ -98,7 +98,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 
 <a id="domain-3"></a>
 <details>
-<summary><b>Domain 3: Deploy and Manage Azure Compute Resources (20–25%)</b> — 24 tasks · 40 Qs · 6 Labs</summary>
+<summary><b>Domain 3: Deploy and Manage Azure Compute Resources (20–25%)</b> — 24 tasks · 43 Qs · 6 Labs</summary>
 
 | Skill | Task | Qs | Labs |
 | :--- | :--- | -: | -: |
@@ -120,7 +120,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 |  | Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps | 1 | 1 |
 | Create and configure Azure App Service (8 tasks) | Provision an App Service plan | 7 | 1 |
 |  | Configure scaling for an App Service plan | 4 | 1 |
-|  | Create an App Service | 2 | 0 |
+|  | Create an App Service | 3 | 0 |
 |  | Configure certificates and TLS for an App Service | 1 | 0 |
 |  | Map an existing custom DNS name to an App Service | 0 | 0 |
 |  | Configure backup for an App Service | 1 | 0 |
