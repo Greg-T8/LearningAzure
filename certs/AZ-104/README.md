@@ -31,12 +31,12 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 | Domain | Weight | Skills | Qs | Labs | Tasks Covered | Status |
 | :----- | :----- | -----: | -: | ---: | :------------ | :----: |
 | [1. Identities & Governance](#domain-1) | 20–25% | 3 | 18 | 0 | 8 / 15 (53%) | 🟡 |
-| [2. Storage](#domain-2) | 15–20% | 3 | 21 | 5 | 12 / 17 (70%) | 🟢 |
-| [3. Compute](#domain-3) | 20–25% | 4 | 43 | 6 | 20 / 24 (83%) | 🟢 |
+| [2. Storage](#domain-2) | 15–20% | 3 | 22 | 5 | 12 / 17 (70%) | 🟢 |
+| [3. Compute](#domain-3) | 20–25% | 4 | 47 | 6 | 21 / 24 (87%) | 🟢 |
 | [4. Networking](#domain-4) | 15–20% | 3 | 19 | 3 | 11 / 13 (84%) | 🟢 |
-| [5. Monitoring & Backup](#domain-5) | 10–15% | 2 | 22 | 5 | 9 / 13 (69%) | 🟢 |
+| [5. Monitoring & Backup](#domain-5) | 10–15% | 2 | 26 | 5 | 11 / 13 (84%) | 🟢 |
 
-**Totals:** 233 practice questions · 19 hands-on labs
+**Totals:** 242 practice questions · 19 hands-on labs
 
 **Legend:** 🟢 Strong (≥66%) · 🟡 Partial (33–65%) · 🔴 Low (<33%) — "Covered" = task has ≥1 practice question or ≥1 lab
 
@@ -72,12 +72,12 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 
 <a id="domain-2"></a>
 <details>
-<summary><b>Domain 2: Implement and Manage Storage (15–20%)</b> — 17 tasks · 21 Qs · 5 Labs</summary>
+<summary><b>Domain 2: Implement and Manage Storage (15–20%)</b> — 17 tasks · 22 Qs · 5 Labs</summary>
 
 | Skill | Task | Qs | Labs |
 | :--- | :--- | -: | -: |
 | Configure access to storage (5 tasks) | Configure Azure Storage firewalls and virtual networks | 3 | 0 |
-|  | Create and use shared access signature (SAS) tokens | 3 | 0 |
+|  | Create and use shared access signature (SAS) tokens | 4 | 0 |
 |  | Configure stored access policies | 1 | 0 |
 |  | Manage access keys | 2 | 0 |
 |  | Configure identity-based access for Azure Files | 1 | 0 |
@@ -98,7 +98,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 
 <a id="domain-3"></a>
 <details>
-<summary><b>Domain 3: Deploy and Manage Azure Compute Resources (20–25%)</b> — 24 tasks · 43 Qs · 6 Labs</summary>
+<summary><b>Domain 3: Deploy and Manage Azure Compute Resources (20–25%)</b> — 24 tasks · 47 Qs · 6 Labs</summary>
 
 | Skill | Task | Qs | Labs |
 | :--- | :--- | -: | -: |
@@ -153,7 +153,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 
 <a id="domain-5"></a>
 <details>
-<summary><b>Domain 5: Monitor and Maintain Azure Resources (10–15%)</b> — 13 tasks · 22 Qs · 5 Labs</summary>
+<summary><b>Domain 5: Monitor and Maintain Azure Resources (10–15%)</b> — 13 tasks · 26 Qs · 5 Labs</summary>
 
 | Skill | Task | Qs | Labs |
 | :--- | :--- | -: | -: |
