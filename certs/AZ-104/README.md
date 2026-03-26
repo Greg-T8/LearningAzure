@@ -33,10 +33,10 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 | [1. Identities & Governance](#domain-1) | 20–25% | 3 | 20 | 0 | 8 / 15 (53%) | 🟡 |
 | [2. Storage](#domain-2) | 15–20% | 3 | 22 | 5 | 12 / 17 (70%) | 🟢 |
 | [3. Compute](#domain-3) | 20–25% | 4 | 47 | 6 | 21 / 24 (87%) | 🟢 |
-| [4. Networking](#domain-4) | 15–20% | 3 | 20 | 3 | 11 / 13 (84%) | 🟢 |
+| [4. Networking](#domain-4) | 15–20% | 3 | 21 | 3 | 11 / 13 (84%) | 🟢 |
 | [5. Monitoring & Backup](#domain-5) | 10–15% | 2 | 27 | 5 | 11 / 13 (84%) | 🟢 |
 
-**Totals:** 246 practice questions · 19 hands-on labs
+**Totals:** 247 practice questions · 19 hands-on labs
 
 **Legend:** 🟢 Strong (≥66%) · 🟡 Partial (33–65%) · 🔴 Low (<33%) — "Covered" = task has ≥1 practice question or ≥1 lab
 
@@ -131,7 +131,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 
 <a id="domain-4"></a>
 <details>
-<summary><b>Domain 4: Implement and Manage Virtual Networking (15–20%)</b> — 13 tasks · 20 Qs · 3 Labs</summary>
+<summary><b>Domain 4: Implement and Manage Virtual Networking (15–20%)</b> — 13 tasks · 21 Qs · 3 Labs</summary>
 
 | Skill | Task | Qs | Labs |
 | :--- | :--- | -: | -: |
@@ -147,7 +147,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 |  | Configure private endpoints for Azure PaaS | 1 | 1 |
 | Configure name resolution and load balancing (3 tasks) | Configure Azure DNS | 3 | 0 |
 |  | Configure an internal or public load balancer | 2 | 1 |
-|  | Troubleshoot load balancing | 2 | 1 |
+|  | Troubleshoot load balancing | 3 | 1 |
 
 </details>
 
