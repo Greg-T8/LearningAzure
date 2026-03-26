@@ -13,82 +13,84 @@ Accounts for questions missed or unsure about in the practice exams.
     * [Append Tag Using PowerShell](#append-tag-using-powershell)
     * [Configure Azure Cost Center Tags and Cost Analysis](#configure-azure-cost-center-tags-and-cost-analysis)
     * [Add Remediation Info to Policy Definition](#add-remediation-info-to-policy-definition)
-    * [Tagging Policy](#tagging-policy)
     * [Move subscription between management groups](#move-subscription-between-management-groups)
     * [Lift resource locks using PowerShell](#lift-resource-locks-using-powershell)
     * [Tag Virtual Machines with Least Privilege](#tag-virtual-machines-with-least-privilege)
-    * [Configure Resource Delete Locks](#configure-resource-delete-locks)
+    * [Tagging Policy](#tagging-policy)
     * [Azure Policy Not Functioning](#azure-policy-not-functioning)
     * [Azure Policy Effects Verification](#azure-policy-effects-verification)
     * [Azure Advisor Setting for Underutilized VMs](#azure-advisor-setting-for-underutilized-vms)
     * [Move Resources Between Resource Groups](#move-resources-between-resource-groups)
     * [Implement resource locks](#implement-resource-locks)
+    * [Configure Resource Delete Locks](#configure-resource-delete-locks)
 * [Implement and Manage Storage](#implement-and-manage-storage)
   * [Configure access to storage](#configure-access-to-storage)
+    * [Provide least-privilege access to a report](#provide-least-privilege-access-to-a-report)
     * [Secure Storage Access from Subnet](#secure-storage-access-from-subnet)
     * [Azure Files Kerberos Authentication](#azure-files-kerberos-authentication)
     * [Mount Azure file share on-premises](#mount-azure-file-share-on-premises)
-    * [Provide least-privilege access to a report](#provide-least-privilege-access-to-a-report)
-    * [Configure storage account network access](#configure-storage-account-network-access)
     * [Modify Stored Access Policy](#modify-stored-access-policy)
+    * [Configure storage account network access](#configure-storage-account-network-access)
     * [Shared Access Signature (SAS) practices](#shared-access-signature-sas-practices)
     * [SAS key configuration scenarios](#sas-key-configuration-scenarios)
     * [Diagnose Storage Explorer Permission Errors](#diagnose-storage-explorer-permission-errors)
   * [Configure and manage storage accounts](#configure-and-manage-storage-accounts)
+    * [Migrate Azure Files Redundancy to ZRS](#migrate-azure-files-redundancy-to-zrs)
+    * [AzCopy authorization methods](#azcopy-authorization-methods)
     * [Azure Storage Redundancy Recommendation](#azure-storage-redundancy-recommendation)
     * [Rotate compromised storage account keys](#rotate-compromised-storage-account-keys)
     * [Configure Object Replication Between Storage Accounts](#configure-object-replication-between-storage-accounts)
-    * [AzCopy authorization methods](#azcopy-authorization-methods)
-    * [Migrate Azure Files Redundancy to ZRS](#migrate-azure-files-redundancy-to-zrs)
   * [Configure Azure Files and Azure Blob Storage](#configure-azure-files-and-azure-blob-storage)
-    * [Lifecycle Management Policy Configuration](#lifecycle-management-policy-configuration)
-    * [Configure Lifecycle Management Policy for Azure Storage](#configure-lifecycle-management-policy-for-azure-storage)
-    * [SMB Port Blocked (Error 67)](#smb-port-blocked-error-67)
-    * [Delete Soft-Deleted File Share](#delete-soft-deleted-file-share)
-    * [Disable Soft Delete Command](#disable-soft-delete-command)
-    * [Identify Blob Write Operations That Create New Versions](#identify-blob-write-operations-that-create-new-versions)
     * [Create Azure file share sequence](#create-azure-file-share-sequence)
+    * [Disable Soft Delete Command](#disable-soft-delete-command)
+    * [Delete Soft-Deleted File Share](#delete-soft-deleted-file-share)
+    * [Identify Blob Write Operations That Create New Versions](#identify-blob-write-operations-that-create-new-versions)
+    * [Configure Lifecycle Management Policy for Azure Storage](#configure-lifecycle-management-policy-for-azure-storage)
+    * [Lifecycle Management Policy Configuration](#lifecycle-management-policy-configuration)
+    * [SMB Port Blocked (Error 67)](#smb-port-blocked-error-67)
 * [Deploy and Manage Azure Compute Resources](#deploy-and-manage-azure-compute-resources)
   * [Automate deployment of resources by using ARM templates or Bicep files](#automate-deployment-of-resources-by-using-arm-templates-or-bicep-files)
+    * [Export ARM Template](#export-arm-template)
     * [Edit ARM Template to Inherit Resource Group Location](#edit-arm-template-to-inherit-resource-group-location)
     * [Complete ARM template deployment command](#complete-arm-template-deployment-command)
     * [Create VM from Existing VM](#create-vm-from-existing-vm)
-    * [Export ARM Template](#export-arm-template)
-    * [Export resource group template](#export-resource-group-template)
-    * [Deployment Mode Deleted Resources](#deployment-mode-deleted-resources)
     * [Case Study — Solution Evaluation](#case-study-solution-evaluation)
+    * [Export resource group template](#export-resource-group-template)
     * [Convert Array to Object](#convert-array-to-object)
     * [Resource dependencies in Bicep](#resource-dependencies-in-bicep)
+    * [Deployment Mode Deleted Resources](#deployment-mode-deleted-resources)
   * [Create and configure virtual machines](#create-and-configure-virtual-machines)
-    * [VM Resize Failure Cause](#vm-resize-failure-cause)
-    * [WebApp1 Availability Case](#webapp1-availability-case)
-    * [Enable VM disk encryption](#enable-vm-disk-encryption)
-    * [Availability set — maximum unavailable VMs](#availability-set-maximum-unavailable-vms)
-    * [Apply Change to VMSS OS and Data Disk Profile](#apply-change-to-vmss-os-and-data-disk-profile)
     * [Encrypt VM Disk With Key Vault](#encrypt-vm-disk-with-key-vault)
+    * [Availability set — maximum unavailable VMs](#availability-set-maximum-unavailable-vms)
+    * [Enable VM disk encryption](#enable-vm-disk-encryption)
+    * [Azure Spot VM Eviction Factors](#azure-spot-vm-eviction-factors)
+    * [VM Resize Failure Cause](#vm-resize-failure-cause)
+    * [Apply Change to VMSS OS and Data Disk Profile](#apply-change-to-vmss-os-and-data-disk-profile)
+    * [WebApp1 Availability Case](#webapp1-availability-case)
     * [SQL Server VM configuration](#sql-server-vm-configuration)
-    * [Change VM Availability Set Assignment](#change-vm-availability-set-assignment)
     * [Join VM to Scale Set](#join-vm-to-scale-set)
     * [Choose VM Availability Option for Datacenter Failure](#choose-vm-availability-option-for-datacenter-failure)
     * [Enable disk encryption on Linux VM](#enable-disk-encryption-on-linux-vm)
     * [Move a data disk with PowerShell](#move-a-data-disk-with-powershell)
+    * [Change VM Availability Set Assignment](#change-vm-availability-set-assignment)
   * [Provision and manage containers in the Azure portal](#provision-and-manage-containers-in-the-azure-portal)
-    * [Configure Scaling Rules in Azure Container Apps](#configure-scaling-rules-in-azure-container-apps)
     * [Azure Container Registry roles for pulling images](#azure-container-registry-roles-for-pulling-images)
+    * [Configure Persistent Storage for ACI](#configure-persistent-storage-for-aci)
+    * [Configure Scaling Rules in Azure Container Apps](#configure-scaling-rules-in-azure-container-apps)
   * [Create and configure Azure App Service](#create-and-configure-azure-app-service)
-    * [App Service pricing tier for autoscale](#app-service-pricing-tier-for-autoscale)
+    * [Configure Azure App Service Plan for Website Hosting](#configure-azure-app-service-plan-for-website-hosting)
     * [Resolve Azure App Service Pricing Tier for Runtime Requirements](#resolve-azure-app-service-pricing-tier-for-runtime-requirements)
+    * [App Service pricing tier for autoscale](#app-service-pricing-tier-for-autoscale)
     * [Resolve App Service Plan Selection](#resolve-app-service-plan-selection)
     * [WebJobs on multi-instance App Service](#webjobs-on-multi-instance-app-service)
     * [App Service autoscale instance count calculation](#app-service-autoscale-instance-count-calculation)
-    * [Prepare Azure App Service for Web App Republication](#prepare-azure-app-service-for-web-app-republication)
     * [Resolve Azure App Service Pricing Tier for Runtime Requirements](#resolve-azure-app-service-pricing-tier-for-runtime-requirements-1)
-    * [App Service Plan Selection](#app-service-plan-selection)
     * [Swap App Service Deployment Slots with Preview](#swap-app-service-deployment-slots-with-preview)
+    * [App Service Plan Selection](#app-service-plan-selection)
     * [Azure App Service Backups](#azure-app-service-backups)
     * [Resolve Azure App Service Pricing Tier for Runtime Requirements](#resolve-azure-app-service-pricing-tier-for-runtime-requirements-2)
     * [Configure App Service Client Certificates](#configure-app-service-client-certificates)
-    * [Configure Azure App Service Plan for Website Hosting](#configure-azure-app-service-plan-for-website-hosting)
+    * [Prepare Azure App Service for Web App Republication](#prepare-azure-app-service-for-web-app-republication)
 * [Implement and Manage Virtual Networking](#implement-and-manage-virtual-networking)
   * [Configure and manage virtual networks in Azure](#configure-and-manage-virtual-networks-in-azure)
     * [VNet Peering with ExpressRoute](#vnet-peering-with-expressroute)
@@ -101,43 +103,43 @@ Accounts for questions missed or unsure about in the practice exams.
     * [Minimum NSGs Required](#minimum-nsgs-required)
     * [Azure Bastion Subnet Address Selection](#azure-bastion-subnet-address-selection)
     * [Configure Private Link Service Source IP](#configure-private-link-service-source-ip)
-    * [NSG Rule Processing Order](#nsg-rule-processing-order)
     * [Design NSG to Block RDP from Internet](#design-nsg-to-block-rdp-from-internet)
+    * [NSG Rule Processing Order](#nsg-rule-processing-order)
   * [Configure name resolution and load balancing](#configure-name-resolution-and-load-balancing)
     * [Diagnose Internal Load Balancer Hairpin Traffic Failure](#diagnose-internal-load-balancer-hairpin-traffic-failure)
-    * [Azure DNS Alias Record Type](#azure-dns-alias-record-type)
-    * [Configure DNS Records for App Service](#configure-dns-records-for-app-service)
     * [Connect VNet to Private DNS Zone](#connect-vnet-to-private-dns-zone)
-    * [Configure Internal Load Balancer](#configure-internal-load-balancer)
+    * [Configure DNS Records for App Service](#configure-dns-records-for-app-service)
+    * [Azure DNS Alias Record Type](#azure-dns-alias-record-type)
     * [IMDS Load Balancer Metadata Error](#imds-load-balancer-metadata-error)
     * [Configure Standard Load Balancer Outbound Traffic and IP Allocation](#configure-standard-load-balancer-outbound-traffic-and-ip-allocation)
+    * [Configure Internal Load Balancer](#configure-internal-load-balancer)
 * [Monitor and Maintain Azure Resources](#monitor-and-maintain-azure-resources)
   * [Monitor resources in Azure](#monitor-resources-in-azure)
-    * [Determine filtering rule with Network Watcher](#determine-filtering-rule-with-network-watcher)
-    * [Configure Azure Monitor Alert Notification Rate Limits](#configure-azure-monitor-alert-notification-rate-limits)
     * [Test TCP Connectivity with Network Watcher](#test-tcp-connectivity-with-network-watcher)
-    * [Diagnose Network Watcher Tool for Web Server Packet Flow](#diagnose-network-watcher-tool-for-web-server-packet-flow)
     * [Enable Guest OS Diagnostics](#enable-guest-os-diagnostics)
-    * [Load Balancer Metrics Batch API](#load-balancer-metrics-batch-api)
-    * [Storage Insights Overview](#storage-insights-overview)
     * [Azure Advisor alerts with Bicep](#azure-advisor-alerts-with-bicep)
+    * [Configure Azure Monitor Alert Notification Rate Limits](#configure-azure-monitor-alert-notification-rate-limits)
+    * [Determine filtering rule with Network Watcher](#determine-filtering-rule-with-network-watcher)
+    * [Diagnose Network Watcher Tool for Web Server Packet Flow](#diagnose-network-watcher-tool-for-web-server-packet-flow)
+    * [Storage Insights Overview](#storage-insights-overview)
+    * [Pinning query results to a dashboard](#pinning-query-results-to-a-dashboard)
     * [Configure App Service Diagnostics](#configure-app-service-diagnostics)
     * [Enable Boot Diagnostics for Azure Virtual Machines](#enable-boot-diagnostics-for-azure-virtual-machines)
     * [Configure Azure Monitor Alert Notification Rate Limits](#configure-azure-monitor-alert-notification-rate-limits-1)
-    * [Pinning query results to a dashboard](#pinning-query-results-to-a-dashboard)
     * [Capture SFTP Packets with Network Watcher](#capture-sftp-packets-with-network-watcher)
     * [Configure Azure Monitor Alert for Database CPU Usage](#configure-azure-monitor-alert-for-database-cpu-usage)
+    * [Load Balancer Metrics Batch API](#load-balancer-metrics-batch-api)
   * [Implement backup and recovery](#implement-backup-and-recovery)
-    * [Restore VM from backup (availability set)](#restore-vm-from-backup-availability-set)
-    * [Delete Recovery Services vault](#delete-recovery-services-vault)
-    * [Move Recovery Services vault](#move-recovery-services-vault)
-    * [Backup Pre-Check Warning Cause](#backup-pre-check-warning-cause)
-    * [Recover Azure VM from Deleted Backup](#recover-azure-vm-from-deleted-backup)
-    * [Recovery Services vault diagnostic target](#recovery-services-vault-diagnostic-target)
-    * [Site Recovery — Recovery Steps](#site-recovery-recovery-steps)
-    * [Configure Azure Backup with PowerShell](#configure-azure-backup-with-powershell)
     * [Recover Configuration File from Azure VM Backup](#recover-configuration-file-from-azure-vm-backup)
+    * [Configure Azure Backup with PowerShell](#configure-azure-backup-with-powershell)
+    * [Site Recovery — Recovery Steps](#site-recovery-recovery-steps)
+    * [Recovery Services vault diagnostic target](#recovery-services-vault-diagnostic-target)
+    * [Restore VM from backup (availability set)](#restore-vm-from-backup-availability-set)
+    * [Backup Pre-Check Warning Cause](#backup-pre-check-warning-cause)
+    * [Move Recovery Services vault](#move-recovery-services-vault)
     * [Azure Site Recovery High Churn](#azure-site-recovery-high-churn)
+    * [Recover Azure VM from Deleted Backup](#recover-azure-vm-from-deleted-backup)
+    * [Delete Recovery Services vault](#delete-recovery-services-vault)
 
 ---
 
@@ -592,144 +594,6 @@ For this policy-definition scenario, custom remediation text is added in `metada
 
 ---
 
-#### Tagging Policy
-
-**Domain:** Manage Azure Identities and Governance
-**Skill:** Manage Azure subscriptions and governance
-**Task:**
-
-- Implement and manage Azure Policy
-- Apply and manage tags on resources
-
-You are developing a policy that will deny the creation of any resource that does not have an environment tag with a value of either dev, qa, or prod.
-
-You need to ensure that only resources that support tagging are checked by the policy.
-
-How should you configure the policy? To answer, complete the JSON template by selecting the correct options from the drop-down menus.
-
-```json
-{
-  "properties": {
-    "displayName": "Tagging Policy",
-    "policyType": "Custom",
-    "mode": "___[1]___",
-    "policyRule": {
-      "if": {
-        "field": "___[2]___",
-        "___[3]___": ["dev", "qa", "prod"]
-      },
-      "then": {
-        "effect": "___[4]___"
-      }
-    }
-  },
-  "name": "policyDefinition01",
-  "type": "Microsoft.Authorization/policyDefinitions"
-}
-```
-
-Drop-Down Options:
-
-| Blank | Options |
-|-------|---------|
-| [1] | Indexed / All / Supported |
-| [2] | [tags[Environment]] / Environment / tag:Environment |
-| [3] | notIn / eq / notContains |
-| [4] | deny / audit / append |
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-03-04-10-10.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-The should configure the policy as follows:
-
-```json
-{
-  "properties": {
-    "displayName": "Tagging Policy",
-    "policyType": "Custom",
-    "mode": "Indexed",
-    "policyRule": {
-      "if": {
-        "field": "[tags[Environment]]",
-        "notIn": ["dev, qa, prod"]
-      },
-      "then": {
-        "effect": "deny"
-      }
-    }
-  },
-  "name": "policyDefinition01",
-  "type": "Microsoft.Authorization/policyDefinitions"
-}
-```
-
-You should use Indexed for the mode property. Indexed policies check whether a resource supports a feature before it checks for it. Selecting All would try to apply the policy to all resources even if the resource does not support tagging. Supported is not a valid option for the mode property.
-
-You should use [tags[Environment]] as the field value. You should not select Environment because there is no field for Azure resources named Environment. You should not select tag:Environment because tags are an array.
-
-You should use notIn for the check condition. If the tag value for Environment is not in dev, qa, and prod, you want to deny the creation of the resource. You should not select eq or notContains. Neither can be applied to check for an array value. They will check for string values.
-
-You should use deny for the effect property. The "then" block specifies the effect to apply if the policy rule block evaluates to false. In this case, you want to deny creation. You should not use audit because that would allow creation and generate a compliance log entry. You should not use append because it would add an empty Environment tag to the resource and not set a value equal to either dev, qa, or prod.
-
-<details>
-<summary>📝 More Detail</summary>
-
-One thing to lock in first: **All and Indexed are policy `mode` values, not `policyType` values**. `policyType` is a different property that tells you whether a definition is built-in, custom, static, and so on. `mode` tells Azure Policy **which resource types the policy evaluates**. ([Microsoft Learn][1])
-
-The easiest way to remember them is:
-
-* **All** = “evaluate basically everything relevant”
-* **Indexed** = “evaluate only resource types that support tags and location”
-
-Microsoft recommends using **`all` in most cases**, and policy definitions created through the Azure portal use `all`. A policy with `null` mode in Azure CLI is treated the same as `indexed` for backward compatibility. ([Microsoft Learn][1])
-
-Why **Indexed** exists
-`indexed` is mainly for **tag** and **location** policies. It helps avoid showing resources as non-compliant when those resource types do not support tags or location. That is why `indexed` is the usual choice when the policy logic is “this resource must have tag X” or “this resource must be in allowed locations.” ([Microsoft Learn][1])
-
-Why **All** exists
-`all` is broader. Use it when you want policy to evaluate resource types beyond just those that support tags/location, including cases like resource groups, subscriptions, or other resources where `indexed` would be too narrow. Microsoft specifically notes that policies targeting **resource groups** or **subscriptions** for location or tag enforcement should use `all` and target the appropriate resource type explicitly. ([Microsoft Learn][1])
-
-A good mental shortcut:
-
-* **Indexed** = “tag/location-focused filtering”
-* **All** = “full governance scope”
-
-That means if the exam stem is about **requiring tags on ordinary resources**, think **Indexed**. If it is about **broader governance**, or the target is **resource groups/subscriptions**, think **All**. ([Microsoft Learn][1])
-
-Here is the practical exam trap: people often think **All** means “check every property on every resource,” but that is not the point. The question is really about **which resource types are brought into evaluation**, not how deeply the JSON is inspected. `indexed` narrows the evaluated set to resources that support tags/location, which is why it is helpful for tag/location policies. ([Microsoft Learn][1])
-
-In your cost center example, if the goal is “resources must have a valid `CostCenter` tag,” then **Indexed** is usually the exam-friendly answer for normal resource tag enforcement, because it avoids flagging resource types that do not support tags/location. But if the scope explicitly includes **resource groups** or **subscriptions**, use **All**. ([Microsoft Learn][1])
-
-A memory device that tends to stick:
-
-* **All** → **A** = **Anything Azure-relevant**
-* **Indexed** → think **index card on a resource with a tag and location written on it**
-
-Or even shorter:
-
-* **All** = broader scope
-* **Indexed** = tags/locations only
-
-A few quick examples:
-
-* “Require a `CostCenter` tag on resources” → usually **Indexed**.
-* “Require a tag on resource groups” → **All**.
-* “Restrict where subscriptions or resource groups can exist” → **All**.
-* “General policy authored in the portal” → likely **All** by default.
-
-</details>
-
-</details>
-
----
-
 #### Move subscription between management groups
 
 **Domain:** Manage Azure Identities and Governance
@@ -881,55 +745,139 @@ Changing Azure Policy at the subscription level enforces policy behavior but doe
 
 ---
 
-#### Configure Resource Delete Locks
+#### Tagging Policy
 
 **Domain:** Manage Azure Identities and Governance
 **Skill:** Manage Azure subscriptions and governance
-**Task:** Configure resource locks
+**Task:**
 
-You have several management groups and Azure subscriptions.
+- Implement and manage Azure Policy
+- Apply and manage tags on resources
 
-You want to prevent the accidental deletion of resources.
+You are developing a policy that will deny the creation of any resource that does not have an environment tag with a value of either dev, qa, or prod.
 
-To which three resource types can you apply delete locks? Each correct answer presents a complete solution.
+You need to ensure that only resources that support tagging are checked by the policy.
 
-A. management groups  
-B. resource groups  
-C. storage account data  
-D. subscriptions  
-E. virtual machines  
+How should you configure the policy? To answer, complete the JSON template by selecting the correct options from the drop-down menus.
+
+```json
+{
+  "properties": {
+    "displayName": "Tagging Policy",
+    "policyType": "Custom",
+    "mode": "___[1]___",
+    "policyRule": {
+      "if": {
+        "field": "___[2]___",
+        "___[3]___": ["dev", "qa", "prod"]
+      },
+      "then": {
+        "effect": "___[4]___"
+      }
+    }
+  },
+  "name": "policyDefinition01",
+  "type": "Microsoft.Authorization/policyDefinitions"
+}
+```
+
+Drop-Down Options:
+
+| Blank | Options |
+|-------|---------|
+| [1] | Indexed / All / Supported |
+| [2] | [tags[Environment]] / Environment / tag:Environment |
+| [3] | notIn / eq / notContains |
+| [4] | deny / audit / append |
 
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-03-25-19-07-52.png' width=600>
+<img src='.img/2026-03-03-04-10-10.png' width=600>
 
 </details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
 
-**Why the selected answer is incorrect**
+The should configure the policy as follows:
 
-Selecting `management groups` is incorrect because delete locks can't be applied at the management group scope.
+```json
+{
+  "properties": {
+    "displayName": "Tagging Policy",
+    "policyType": "Custom",
+    "mode": "Indexed",
+    "policyRule": {
+      "if": {
+        "field": "[tags[Environment]]",
+        "notIn": ["dev, qa, prod"]
+      },
+      "then": {
+        "effect": "deny"
+      }
+    }
+  },
+  "name": "policyDefinition01",
+  "type": "Microsoft.Authorization/policyDefinitions"
+}
+```
 
-**Why the correct answers are correct**
+You should use Indexed for the mode property. Indexed policies check whether a resource supports a feature before it checks for it. Selecting All would try to apply the policy to all resources even if the resource does not support tagging. Supported is not a valid option for the mode property.
 
-Delete locks can be applied to `resource groups`, `subscriptions`, and `virtual machines` to prevent accidental deletion.
+You should use [tags[Environment]] as the field value. You should not select Environment because there is no field for Azure resources named Environment. You should not select tag:Environment because tags are an array.
 
-<img src='.img/2026-03-25-19-10-05.png' width=600>
+You should use notIn for the check condition. If the tag value for Environment is not in dev, qa, and prod, you want to deny the creation of the resource. You should not select eq or notContains. Neither can be applied to check for an array value. They will check for string values.
 
-**Why other options are incorrect**
+You should use deny for the effect property. The "then" block specifies the effect to apply if the policy rule block evaluates to false. In this case, you want to deny creation. You should not use audit because that would allow creation and generate a compliance log entry. You should not use append because it would add an empty Environment tag to the resource and not set a value equal to either dev, qa, or prod.
 
-`storage account data` is a data-plane concept, and management locks apply to control-plane resource management operations, not data-plane data objects.
+<details>
+<summary>📝 More Detail</summary>
 
-**Key takeaway**
+One thing to lock in first: **All and Indexed are policy `mode` values, not `policyType` values**. `policyType` is a different property that tells you whether a definition is built-in, custom, static, and so on. `mode` tells Azure Policy **which resource types the policy evaluates**. ([Microsoft Learn][1])
 
-For this scenario, delete locks are supported on `virtual machines`, `subscriptions`, and `resource groups`, but not on `management groups` or `storage account data`.
+The easiest way to remember them is:
 
-**References**
+* **All** = “evaluate basically everything relevant”
+* **Indexed** = “evaluate only resource types that support tags and location”
 
-* [Protect your Azure resources with a lock - Azure Resource Manager | Microsoft Learn](https://learn.microsoft.com/azure/azure-resource-manager/management/lock-resources)
+Microsoft recommends using **`all` in most cases**, and policy definitions created through the Azure portal use `all`. A policy with `null` mode in Azure CLI is treated the same as `indexed` for backward compatibility. ([Microsoft Learn][1])
+
+Why **Indexed** exists
+`indexed` is mainly for **tag** and **location** policies. It helps avoid showing resources as non-compliant when those resource types do not support tags or location. That is why `indexed` is the usual choice when the policy logic is “this resource must have tag X” or “this resource must be in allowed locations.” ([Microsoft Learn][1])
+
+Why **All** exists
+`all` is broader. Use it when you want policy to evaluate resource types beyond just those that support tags/location, including cases like resource groups, subscriptions, or other resources where `indexed` would be too narrow. Microsoft specifically notes that policies targeting **resource groups** or **subscriptions** for location or tag enforcement should use `all` and target the appropriate resource type explicitly. ([Microsoft Learn][1])
+
+A good mental shortcut:
+
+* **Indexed** = “tag/location-focused filtering”
+* **All** = “full governance scope”
+
+That means if the exam stem is about **requiring tags on ordinary resources**, think **Indexed**. If it is about **broader governance**, or the target is **resource groups/subscriptions**, think **All**. ([Microsoft Learn][1])
+
+Here is the practical exam trap: people often think **All** means “check every property on every resource,” but that is not the point. The question is really about **which resource types are brought into evaluation**, not how deeply the JSON is inspected. `indexed` narrows the evaluated set to resources that support tags/location, which is why it is helpful for tag/location policies. ([Microsoft Learn][1])
+
+In your cost center example, if the goal is “resources must have a valid `CostCenter` tag,” then **Indexed** is usually the exam-friendly answer for normal resource tag enforcement, because it avoids flagging resource types that do not support tags/location. But if the scope explicitly includes **resource groups** or **subscriptions**, use **All**. ([Microsoft Learn][1])
+
+A memory device that tends to stick:
+
+* **All** → **A** = **Anything Azure-relevant**
+* **Indexed** → think **index card on a resource with a tag and location written on it**
+
+Or even shorter:
+
+* **All** = broader scope
+* **Indexed** = tags/locations only
+
+A few quick examples:
+
+* “Require a `CostCenter` tag on resources” → usually **Indexed**.
+* “Require a tag on resource groups” → **All**.
+* “Restrict where subscriptions or resource groups can exist” → **All**.
+* “General policy authored in the portal” → likely **All** by default.
+
+</details>
 
 </details>
 
@@ -1342,9 +1290,108 @@ You should not configure a Read-only lock on TST01-RG and TST02-RG. This configu
 
 ---
 
+#### Configure Resource Delete Locks
+
+**Domain:** Manage Azure Identities and Governance
+**Skill:** Manage Azure subscriptions and governance
+**Task:** Configure resource locks
+
+You have several management groups and Azure subscriptions.
+
+You want to prevent the accidental deletion of resources.
+
+To which three resource types can you apply delete locks? Each correct answer presents a complete solution.
+
+A. management groups  
+B. resource groups  
+C. storage account data  
+D. subscriptions  
+E. virtual machines  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-25-19-07-52.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Why the selected answer is incorrect**
+
+Selecting `management groups` is incorrect because delete locks can't be applied at the management group scope.
+
+**Why the correct answers are correct**
+
+Delete locks can be applied to `resource groups`, `subscriptions`, and `virtual machines` to prevent accidental deletion.
+
+<img src='.img/2026-03-25-19-10-05.png' width=600>
+
+**Why other options are incorrect**
+
+`storage account data` is a data-plane concept, and management locks apply to control-plane resource management operations, not data-plane data objects.
+
+**Key takeaway**
+
+For this scenario, delete locks are supported on `virtual machines`, `subscriptions`, and `resource groups`, but not on `management groups` or `storage account data`.
+
+**References**
+
+* [Protect your Azure resources with a lock - Azure Resource Manager | Microsoft Learn](https://learn.microsoft.com/azure/azure-resource-manager/management/lock-resources)
+
+</details>
+
+---
+
 ## Implement and Manage Storage
 
 ### Configure access to storage
+
+#### Provide least-privilege access to a report
+
+**Domain:** Implement and Manage Storage
+**Skill:** Configure access to storage
+**Task:** Create and use shared access signature (SAS) tokens
+
+You create a binary large object (blob) storage account named `reportstorage99` that contains archival reports from past corporate board meetings.
+
+A board member requests access to a specific report. The member does not have a Microsoft Entra user account. Moreover, they have access only to a web browser on his Google Chromebook device.
+
+To fulfill the request, you will provide the board member with least-privilege access to the requested report while maintaining security compliance and minimizing administrative overhead.
+
+What should you do?
+
+A. Deploy a point-to-site (P2S) virtual private network (VPN) connection on the board member's Chromebook and grant the board member role-based access control (RBAC) access to the report.  
+B. Generate a shared access signature (SAS) token for the report and share the Uniform Resource Locator (URL) with the board member.  
+C. Copy the report to an Azure File Service share and provide the board member with a PowerShell connection script.  
+D. Create a Microsoft Entra account for the board member and grant him role-based access control (RBAC) access to the storage account.  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-11-04-28-34.png' width=700>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+You should generate a shared access signature (SAS) token for the report and share the Uniform Resource Locator (URL) with the board member. SAS enables you to define time-limited read-only or read-write access to Azure storage account resources. It is important that you set the time restriction properly because the SAS includes no authentication. Any person with access to the URL can access the target resource(s) within the token's lifetime. In this case, you both minimize administrative effort as well as maintain security compliance because the SAS token points only to a single file, not the entire blob container that hosts the requested report.
+
+You should not create a Microsoft Entra account for the board member and grant him role-based access control (RBAC) access to the storage account. First, it requires significant management overhead to create and manage Microsoft Entra accounts, even for external (guest) users. Second, SAS and not RBAC is the way Azure provides screened access to individual storage account resources. You can use RBAC roles only at the storage account scope.
+
+You should not copy the report to an Azure File Service share and provide the board member with a PowerShell connection script. Here you create security and governance problems by creating multiple copies of the source report, as well as producing unnecessary administrative complexity.
+
+You should not deploy a point-to-site (P2S) VPN connection on the board member's Chromebook and grant the board member RBAC access to the report. The scenario stipulates that the board member is limited to using a web browser on his Chromebook. Furthermore, the Azure P2S VPN client is supported only on Windows, macOS, and endorsed Linux distributions. Chrome OS is not supported.
+
+References
+
+* Grant limited access to Azure Storage resources using shared access signatures (SAS)
+
+</details>
+
+---
 
 #### Secure Storage Access from Subnet
 
@@ -1571,46 +1618,43 @@ You should not create an ExpressRoute circuit. An ExpressRoute circuit provides 
 
 ---
 
-#### Provide least-privilege access to a report
+#### Modify Stored Access Policy
 
 **Domain:** Implement and Manage Storage
 **Skill:** Configure access to storage
-**Task:** Create and use shared access signature (SAS) tokens
+**Task:** Configure stored access policies
 
-You create a binary large object (blob) storage account named `reportstorage99` that contains archival reports from past corporate board meetings.
+You are an Azure administrator for a manufacturing organization. You are using shared access signature (SAS) to configure control over storage accounts.
 
-A board member requests access to a specific report. The member does not have a Microsoft Entra user account. Moreover, they have access only to a web browser on his Google Chromebook device.
+You create a stored access policy as an additional level of control over SAS on the server side for file shares.
 
-To fulfill the request, you will provide the board member with least-privilege access to the requested report while maintaining security compliance and minimizing administrative overhead.
+You need to modify a stored access policy.
 
 What should you do?
 
-A. Deploy a point-to-site (P2S) virtual private network (VPN) connection on the board member's Chromebook and grant the board member role-based access control (RBAC) access to the report.  
-B. Generate a shared access signature (SAS) token for the report and share the Uniform Resource Locator (URL) with the board member.  
-C. Copy the report to an Azure File Service share and provide the board member with a PowerShell connection script.  
-D. Create a Microsoft Entra account for the board member and grant him role-based access control (RBAC) access to the storage account.  
+A. Execute a Set Share ACL operation with the SMB protocol.  
+B. Execute a Set Table ACL operation.  
+C. Execute a Set Container ACL operation with public read access for blobs only.  
 
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-03-11-04-28-34.png' width=700>
+<img src='.img/2026-03-03-03-53-49.png' width=600>
 
 </details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
 
-You should generate a shared access signature (SAS) token for the report and share the Uniform Resource Locator (URL) with the board member. SAS enables you to define time-limited read-only or read-write access to Azure storage account resources. It is important that you set the time restriction properly because the SAS includes no authentication. Any person with access to the URL can access the target resource(s) within the token's lifetime. In this case, you both minimize administrative effort as well as maintain security compliance because the SAS token points only to a single file, not the entire blob container that hosts the requested report.
+In this scenario, you are using a stored access policy that acts as an additional level of control over shared access signature (SAS) on the server side for file shares. The access policy for an SAS consists of the start time, expiry time, and permissions for the signature. To create or modify a stored access policy, call the Set ACL operation for the resource (Set Container ACL, Set Queue ACL, Set Table ACL, or Set Share ACL) with a request body that specifies the terms of the access policy. An important point to note here is that, for a file share, you need to execute a Set Share ACL operation, which only supports the Server Message Block (SMB) protocol as the enabled file share protocol.
 
-You should not create a Microsoft Entra account for the board member and grant him role-based access control (RBAC) access to the storage account. First, it requires significant management overhead to create and manage Microsoft Entra accounts, even for external (guest) users. Second, SAS and not RBAC is the way Azure provides screened access to individual storage account resources. You can use RBAC roles only at the storage account scope.
+You should not execute a Set Table ACL operation. The Set Table ACL operation sets the stored access policies for the table that can be used with SAS. In this scenario, since you want to modify stored access policies for an Azure File share, you need to use the Set Share ACL with SMB.
 
-You should not copy the report to an Azure File Service share and provide the board member with a PowerShell connection script. Here you create security and governance problems by creating multiple copies of the source report, as well as producing unnecessary administrative complexity.
-
-You should not deploy a point-to-site (P2S) VPN connection on the board member's Chromebook and grant the board member RBAC access to the report. The scenario stipulates that the board member is limited to using a web browser on his Chromebook. Furthermore, the Azure P2S VPN client is supported only on Windows, macOS, and endorsed Linux distributions. Chrome OS is not supported.
+You should not execute a Set Container ACL operation with public read access for blobs only. The Set Container ACL operation with public read access for blobs only will mean that Blob data within a container could be read via anonymous request, but container data is not available. In this scenario, since you are aiming to modify stored access policies for an Azure File share, you need to use the Set Share ACL with SMB.
 
 References
 
-* Grant limited access to Azure Storage resources using shared access signatures (SAS)
+[Define a stored access policy](https://learn.microsoft.com/en-us/rest/api/storageservices/define-stored-access-policy)
 
 </details>
 
@@ -1702,48 +1746,6 @@ You should not use the `Logging`, `None`, or `Metrics` values. These are valid f
 * [Azure Storage firewall rules](https://learn.microsoft.com/en-us/azure/storage/common/storage-network-security)
 * [Update-AzStorageAccountNetworkRuleSet](https://learn.microsoft.com/en-us/powershell/module/az.storage/update-azstorageaccountnetworkruleset?view=azps-15.4.0&viewFallbackFrom=azps-2.6.0)
 * [Add-AzStorageAccountNetworkRule](https://learn.microsoft.com/en-us/powershell/module/az.storage/add-azstorageaccountnetworkrule?view=azps-15.4.0)
-
-</details>
-
----
-
-#### Modify Stored Access Policy
-
-**Domain:** Implement and Manage Storage
-**Skill:** Configure access to storage
-**Task:** Configure stored access policies
-
-You are an Azure administrator for a manufacturing organization. You are using shared access signature (SAS) to configure control over storage accounts.
-
-You create a stored access policy as an additional level of control over SAS on the server side for file shares.
-
-You need to modify a stored access policy.
-
-What should you do?
-
-A. Execute a Set Share ACL operation with the SMB protocol.  
-B. Execute a Set Table ACL operation.  
-C. Execute a Set Container ACL operation with public read access for blobs only.  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-03-03-53-49.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-In this scenario, you are using a stored access policy that acts as an additional level of control over shared access signature (SAS) on the server side for file shares. The access policy for an SAS consists of the start time, expiry time, and permissions for the signature. To create or modify a stored access policy, call the Set ACL operation for the resource (Set Container ACL, Set Queue ACL, Set Table ACL, or Set Share ACL) with a request body that specifies the terms of the access policy. An important point to note here is that, for a file share, you need to execute a Set Share ACL operation, which only supports the Server Message Block (SMB) protocol as the enabled file share protocol.
-
-You should not execute a Set Table ACL operation. The Set Table ACL operation sets the stored access policies for the table that can be used with SAS. In this scenario, since you want to modify stored access policies for an Azure File share, you need to use the Set Share ACL with SMB.
-
-You should not execute a Set Container ACL operation with public read access for blobs only. The Set Container ACL operation with public read access for blobs only will mean that Blob data within a container could be read via anonymous request, but container data is not available. In this scenario, since you are aiming to modify stored access policies for an Azure File share, you need to use the Set Share ACL with SMB.
-
-References
-
-[Define a stored access policy](https://learn.microsoft.com/en-us/rest/api/storageservices/define-stored-access-policy)
 
 </details>
 
@@ -2041,6 +2043,173 @@ The solution is either:
 
 ### Configure and manage storage accounts
 
+#### Migrate Azure Files Redundancy to ZRS
+
+**Domain:** Implement and Manage Storage
+**Skill:** Configure and manage storage accounts
+**Task:** Configure Azure Storage redundancy
+
+Your organization hosts resources in both Azure Infrastructure as a Service (IaaS) and on-premises architectures. You have existing Azure Files Network File System version 4.1 (NFSv4.1) shares, which currently use local-redundant storage (LRS). The company wants to improve redundancy of the cloud-based file shares, and therefore, you have been asked to migrate the existing file storage from LRS to zone-redundant storage (ZRS).
+
+You need to select a supported method to complete the migrations.
+
+What should you do?
+
+A. Perform the migration via the Azure portal.  
+B. Perform a manual migration.  
+C. Perform the migration using PowerShell.  
+D. Request a live migration.  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-19-04-52-04.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Why the selected answer is correct**
+
+For storage accounts that contain Azure Files NFSv4.1 shares with public endpoint access enabled, customer-initiated conversion methods are not supported for moving from local-redundant storage (LRS) to zone-redundant storage (ZRS). In this scenario, the supported method is to perform a manual migration of data to a destination configured with the desired redundancy.
+
+**Why the other options are incorrect**
+
+* **Perform the migration via the Azure portal:** Portal-based customer-initiated conversion is not supported for this NFSv4.1 scenario.
+* **Perform the migration using PowerShell:** PowerShell-based customer-initiated conversion is not supported for this NFSv4.1 scenario.
+* **Request a live migration:** Live migration is not supported for Azure Files NFSv4.1 shares in this case.
+
+**Key takeaway**
+
+When Azure Files NFSv4.1 constraints block customer-initiated conversion from LRS to ZRS, use manual migration.
+
+<img src='.img/2026-03-19-04-55-18.png' width=600>
+
+<img src='.img/2026-03-19-04-56-01.png' width=600>
+
+<img src='.img/2026-03-19-04-56-17.png' width=600>
+
+<img src='.img/2026-03-19-04-57-06.png' width=600>
+
+<img src='.img/2026-03-19-04-57-21.png' width=600>
+
+<img src='.img/2026-03-19-04-57-44.png' width=600>
+
+**References**
+
+* [Change how a storage account is replicated](https://learn.microsoft.com/azure/storage/common/redundancy-migration)
+
+</details>
+
+---
+
+#### AzCopy authorization methods
+
+**Domain:** Implement and Manage Storage
+**Skill:** Configure and manage storage accounts
+**Task:** Manage data by using Azure Storage Explorer and AzCopy
+
+You create a new storage account named `DevStore` for Azure Blob Storage and Azure File Storage. You plan to use `AzCopy` to copy data from blob storage and file storage in other storage accounts to `DevStore`. You have access to the storage account access keys for the source storage accounts and for `DevStore`. You also have valid Microsoft Entra user accounts and shared access signatures (SAS) with access to the source data.
+
+You need to identify the authorization methods you can use to copy the data to `DevStore`.
+
+Your commands target only the file share or the account.
+
+Which authorization methods can you use to copy each storage type? To answer, select the appropriate options from the drop-down menus.
+
+| Storage type | Authorization |
+|--------------|---------------|
+| Blob storage | ***[1]*** |
+| File storage | ***[2]*** |
+
+Drop-Down Options:
+
+| Blank | Options |
+|-------|---------|
+| `[1]` | Microsoft Entra ID only / Access keys only / SAS only / Microsoft Entra ID and SAS only / Access keys and SAS only / Microsoft Entra ID, access keys, and SAS |
+| `[2]` | Microsoft Entra ID only / Access keys only / SAS only / Microsoft Entra ID and SAS only / Access keys and SAS only / Microsoft Entra ID, access keys, and SAS |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-19-04-33-26.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Explanation**
+
+Only Microsoft Entra ID and Shared Access Signature (SAS) authorizations are supported with blob storage to copy the data to `DevStore`. In this scenario your commands target only the file share or the account. You have to use a SAS token in any command that targets only the file share or the account. Another alternative for you is that you choose to use commands that target files and directories, you can now provide authorization credentials by using Microsoft Entra ID and omit the SAS token from those commands.
+
+You can provide AzCopy with authorization credentials by using Microsoft Entra ID. That way, you will not have to append a shared access signature (SAS) token to each command. In summary, the Microsoft Entra ID and SAS only is the correct option for File storage.
+
+Access keys, which are generated by Azure when you create a storage account, are not used for copy authorization with AzCopy.
+
+<img src='.img/2026-03-19-04-43-45.png' width=600>
+
+<details>
+<summary>📝 More Detail</summary>
+
+Your mistake comes from overgeneralizing how AzCopy authentication works across **Blob storage vs File storage**, and missing a key constraint in the question:
+
+“Your commands target only the file share or the account.”
+
+That constraint is what drives the answer.
+
+Here’s how to reason it out.
+
+For Blob storage:
+
+* When you use AzCopy against **container/account-level URLs**, Microsoft Entra ID **does not work by itself**
+* Entra ID auth requires operations at the **file/directory level**
+* Since the question explicitly says you are targeting only the **account or container**, you must use a **SAS token**
+* Therefore, Blob storage = **SAS only**
+
+For File storage:
+
+* Azure Files supports both:
+
+  * **Microsoft Entra ID (identity-based auth via RBAC)**
+  * **SAS tokens**
+* AzCopy can authenticate using either method when working with file shares
+* So File storage = **Microsoft Entra ID and SAS**
+
+Why your answer was marked wrong:
+
+* You selected **“Microsoft Entra ID and SAS only” for Blob**, but Blob (in this scenario) does **not allow Entra ID** at that scope
+* Blob is restricted to **SAS only** because of how AzCopy scopes authorization
+
+Important mental model to remember for the exam:
+
+* Blob + account/container scope → **SAS required**
+* Blob + file-level operations → **Entra ID possible**
+* File storage → **Entra ID or SAS both valid**
+
+Also note:
+
+* Access keys are a distractor here — AzCopy does not use them directly for this scenario
+
+Correct mapping:
+
+* Blob storage → **SAS only**
+* File storage → **Microsoft Entra ID and SAS**
+
+</details>
+
+**References**
+
+* [Get started with AzCopy](https://learn.microsoft.com/azure/storage/common/storage-use-azcopy-v10)
+* [Manage storage account access keys](https://learn.microsoft.com/azure/storage/common/storage-account-keys-manage)
+* [Authorize access for AzCopy with a user identity](https://learn.microsoft.com/azure/storage/common/storage-use-azcopy-authorize-user-identity)
+* [Overview of Azure Files identity-based authentication for SMB access](https://learn.microsoft.com/azure/storage/files/storage-files-active-directory-overview)
+
+</details>
+
+---
+
 #### Azure Storage Redundancy Recommendation
 
 **Domain:** Implement and Manage Storage
@@ -2292,133 +2461,176 @@ You had the logic completely reversed - change feed on the wrong end, and versio
 
 ---
 
-#### AzCopy authorization methods
+### Configure Azure Files and Azure Blob Storage
+
+#### Create Azure file share sequence
 
 **Domain:** Implement and Manage Storage
-**Skill:** Configure and manage storage accounts
-**Task:** Manage data by using Azure Storage Explorer and AzCopy
+**Skill:** Configure Azure Files and Azure Blob Storage
+**Task:** Create and configure a file share in Azure Storage
 
-You create a new storage account named `DevStore` for Azure Blob Storage and Azure File Storage. You plan to use `AzCopy` to copy data from blob storage and file storage in other storage accounts to `DevStore`. You have access to the storage account access keys for the source storage accounts and for `DevStore`. You also have valid Microsoft Entra user accounts and shared access signatures (SAS) with access to the source data.
+You need to create a new Azure file share in your company Azure subscription. This share contains resource files that the admins of all your Azure IaaS-hosted Microsoft Windows servers will need to perform their daily activities. The share will exist in a new storage account.
 
-You need to identify the authorization methods you can use to copy the data to `DevStore`.
+You need to ensure the file share is mounted on the servers and persistent across reboots.
 
-Your commands target only the file share or the account.
+Which six actions should you perform in sequence? To answer, move the appropriate actions from the list of possible actions to the answer area and arrange them in the correct order.
 
-Which authorization methods can you use to copy each storage type? To answer, select the appropriate options from the drop-down menus.
+A. Execute New-AzStorageAccount.  
+B. Execute Get-AzStorageAccount.  
+C. Execute Get-AzStorageAccountKeys.  
+D. Execute New-AzStorageContext.  
+E. Execute New-AzStorageShare.  
+F. Execute Set-AzStorageAccount.  
+G. Execute CMDKEY on the Windows Servers.  
+H. Execute New-PSDrive on the Windows Servers.  
 
-| Storage type | Authorization |
-|--------------|---------------|
-| Blob storage | ***[1]*** |
-| File storage | ***[2]*** |
+Select and order 6:
 
-Drop-Down Options:
-
-| Blank | Options |
-|-------|---------|
-| `[1]` | Microsoft Entra ID only / Access keys only / SAS only / Microsoft Entra ID and SAS only / Access keys and SAS only / Microsoft Entra ID, access keys, and SAS |
-| `[2]` | Microsoft Entra ID only / Access keys only / SAS only / Microsoft Entra ID and SAS only / Access keys and SAS only / Microsoft Entra ID, access keys, and SAS |
+| Step | Action |
+|------|--------|
+| 1 | |
+| 2 | |
+| 3 | |
+| 4 | |
+| 5 | |
+| 6 | |
 
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-03-19-04-33-26.png' width=600>
+<img src='.img/2026-03-19-03-42-16.png' width=600>
 
 </details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
 
-**Explanation**
+**You should perform the following actions in order:**
 
-Only Microsoft Entra ID and Shared Access Signature (SAS) authorizations are supported with blob storage to copy the data to `DevStore`. In this scenario your commands target only the file share or the account. You have to use a SAS token in any command that targets only the file share or the account. Another alternative for you is that you choose to use commands that target files and directories, you can now provide authorization credentials by using Microsoft Entra ID and omit the SAS token from those commands.
+1. Execute New-AzStorageAccount.
+2. Execute Get-AzStorageAccountKeys.
+3. Execute New-AzStorageContext.
+4. Execute New-AzStorageShare.
+5. Execute CMDKEY on the Windows Servers.
+6. Execute New-PSDrive on the Windows Servers.
 
-You can provide AzCopy with authorization credentials by using Microsoft Entra ID. That way, you will not have to append a shared access signature (SAS) token to each command. In summary, the Microsoft Entra ID and SAS only is the correct option for File storage.
+**Why the selected sequence is correct:**
 
-Access keys, which are generated by Azure when you create a storage account, are not used for copy authorization with AzCopy.
+The process to create a new file share in Azure Files requires an existing Azure Storage account, so the first step is to create the storage account with `New-AzStorageAccount`. After the account exists you must retrieve the access key using `Get-AzStorageAccountKeys`. With the key you build a storage context using `New-AzStorageContext`, and then create the file share with `New-AzStorageShare`. To make the share persistent on Windows servers, store the credentials on the server using `CMDKEY` and then map the share to a persistent drive using `New-PSDrive`.
 
-<img src='.img/2026-03-19-04-43-45.png' width=600>
+**Why other options are incorrect or unnecessary:**
+
+`Get-AzStorageAccount` merely retrieves an existing account object and does not create the account needed here. `Set-AzStorageAccount` configures properties on an existing account; it does not create the account or the share. `Get-PSDrive` only lists drives in the current session and does not create persistent mapped drives.
 
 <details>
 <summary>📝 More Detail</summary>
 
-Your mistake comes from overgeneralizing how AzCopy authentication works across **Blob storage vs File storage**, and missing a key constraint in the question:
+Think of this as a three-phase flow. If you remember the phases, the order becomes intuitive instead of memorized.
 
-“Your commands target only the file share or the account.”
+1. Build the storage (Azure side)
+   You always start by creating the foundation.
 
-That constraint is what drives the answer.
+* New-AzStorageAccount
+  You need somewhere to host the file share.
 
-Here’s how to reason it out.
+* Get-AzStorageAccountKeys
+  You need credentials to access it (Azure Files uses storage keys unless using identity).
 
-For Blob storage:
+2. Prepare access (bridge between Azure + PowerShell)
+   Now you prepare a way to interact with that storage.
 
-* When you use AzCopy against **container/account-level URLs**, Microsoft Entra ID **does not work by itself**
-* Entra ID auth requires operations at the **file/directory level**
-* Since the question explicitly says you are targeting only the **account or container**, you must use a **SAS token**
-* Therefore, Blob storage = **SAS only**
+* New-AzStorageContext
+  This is your authenticated session to the storage account.
 
-For File storage:
+* New-AzStorageShare
+  Actually create the file share inside the storage account.
 
-* Azure Files supports both:
+3. Mount it on Windows (IaaS VM side)
+   Now you make it usable and persistent on servers.
 
-  * **Microsoft Entra ID (identity-based auth via RBAC)**
-  * **SAS tokens**
-* AzCopy can authenticate using either method when working with file shares
-* So File storage = **Microsoft Entra ID and SAS**
+* CMDKEY
+  Stores credentials securely on the Windows machine
+  This is what makes it survive reboots
 
-Why your answer was marked wrong:
+* New-PSDrive
+  Maps the Azure file share as a drive (like Z:)
 
-* You selected **“Microsoft Entra ID and SAS only” for Blob**, but Blob (in this scenario) does **not allow Entra ID** at that scope
-* Blob is restricted to **SAS only** because of how AzCopy scopes authorization
+The mental model (easy to recall)
 
-Important mental model to remember for the exam:
+Azure → Access → Windows
 
-* Blob + account/container scope → **SAS required**
-* Blob + file-level operations → **Entra ID possible**
-* File storage → **Entra ID or SAS both valid**
+1. Create storage
+2. Authenticate to storage
+3. Create share
+4. Persist credentials
+5. Mount drive
 
-Also note:
+Why the order matters (exam traps)
 
-* Access keys are a distractor here — AzCopy does not use them directly for this scenario
+* You can’t create a share without a context
+* You can’t create a context without keys
+* You can’t mount persistently without CMDKEY first
+* You don’t use Get-AzStorageAccount → that’s for existing resources
+* You don’t use Get-PSDrive → that’s read-only, not creation
 
-Correct mapping:
+One-line memory shortcut
 
-* Blob storage → **SAS only**
-* File storage → **Microsoft Entra ID and SAS**
+“Create → Key → Context → Share → Credential → Drive”
+
+Extra insight (helps solidify)
+
+This whole workflow is basically replacing what on-prem SMB does automatically:
+
+* Storage account = file server
+* Share = SMB share
+* Key = username/password
+* CMDKEY = credential manager
+* PSDrive = mapped network drive
 
 </details>
 
 **References**
 
-* [Get started with AzCopy](https://learn.microsoft.com/azure/storage/common/storage-use-azcopy-v10)
-* [Manage storage account access keys](https://learn.microsoft.com/azure/storage/common/storage-account-keys-manage)
-* [Authorize access for AzCopy with a user identity](https://learn.microsoft.com/azure/storage/common/storage-use-azcopy-authorize-user-identity)
-* [Overview of Azure Files identity-based authentication for SMB access](https://learn.microsoft.com/azure/storage/files/storage-files-active-directory-overview)
+* [Create an Azure file share in the Azure portal](https://learn.microsoft.com/azure/storage/files/create-file-share#create-a-file-share-microsoftfileshares)
+* [Mount SMB Azure file share on Windows](https://learn.microsoft.com/azure/storage/files/storage-how-to-use-files-windows)
+* [Get-AzStorageAccount](https://learn.microsoft.com/powershell/module/az.storage/get-azstorageaccount?view=azps-15.4.0)
+* [Set-AzStorageAccount](https://learn.microsoft.com/powershell/module/az.storage/set-azstorageaccount?view=azps-15.4.0)
+* [Get-PSDrive](https://learn.microsoft.com/powershell/module/microsoft.powershell.management/get-psdrive?view=powershell-7.6)
 
 </details>
 
 ---
 
-#### Migrate Azure Files Redundancy to ZRS
+#### Disable Soft Delete Command
 
 **Domain:** Implement and Manage Storage
-**Skill:** Configure and manage storage accounts
-**Task:** Configure Azure Storage redundancy
+**Skill:** Configure Azure Files and Azure Blob Storage
+**Task:** Configure snapshots and soft delete for Azure Files
 
-Your organization hosts resources in both Azure Infrastructure as a Service (IaaS) and on-premises architectures. You have existing Azure Files Network File System version 4.1 (NFSv4.1) shares, which currently use local-redundant storage (LRS). The company wants to improve redundancy of the cloud-based file shares, and therefore, you have been asked to migrate the existing file storage from LRS to zone-redundant storage (ZRS).
+Your company is using Azure Files for storing files. You are the Azure administrator in your company.
 
-You need to select a supported method to complete the migrations.
+You need to permanently delete an Azure file share that has been soft deleted.
 
-What should you do?
+You execute the PowerShell command shown below:
 
-A. Perform the migration via the Azure portal.  
-B. Perform a manual migration.  
-C. Perform the migration using PowerShell.  
-D. Request a live migration.  
+```powershell
+Update-AzStorageFileServiceProperty `
+  -ResourceGroupName $resourceGroupName `
+  -StorageAccountName $storageAccountName `
+  -EnableShareDeleteRetentionPolicy $false
+```
+
+Which statement is correct regarding this command?
+
+A. The PowerShell command disables soft delete on your storage account and permanently deletes an Azure file share that has been soft deleted.  
+B. The PowerShell command undeletes the file share.  
+C. The PowerShell command only disables soft delete on your storage account.  
+D. The PowerShell command does not disable soft delete on your storage account.  
 
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-03-19-04-52-04.png' width=600>
+<img src='.img/2026-03-19-04-10-15.png' width=600>
 
 </details>
 
@@ -2427,112 +2639,141 @@ D. Request a live migration.
 
 **Why the selected answer is correct**
 
-For storage accounts that contain Azure Files NFSv4.1 shares with public endpoint access enabled, customer-initiated conversion methods are not supported for moving from local-redundant storage (LRS) to zone-redundant storage (ZRS). In this scenario, the supported method is to perform a manual migration of data to a destination configured with the desired redundancy.
+The `Update-AzStorageFileServiceProperty` cmdlet with `-EnableShareDeleteRetentionPolicy $false` updates the storage account's file service properties to disable the soft-delete retention policy. Disabling the retention policy alone does not cause already soft-deleted file shares to be permanently removed. To permanently remove a file share that is currently in a soft-deleted state you must first undelete the share, then disable soft delete, and then delete the share again.
+
+<img src='.img/2026-03-19-04-14-47.png' width=600>
 
 **Why the other options are incorrect**
 
-* **Perform the migration via the Azure portal:** Portal-based customer-initiated conversion is not supported for this NFSv4.1 scenario.
-* **Perform the migration using PowerShell:** PowerShell-based customer-initiated conversion is not supported for this NFSv4.1 scenario.
-* **Request a live migration:** Live migration is not supported for Azure Files NFSv4.1 shares in this case.
+**A:** Incorrect — the command does disable soft delete at the storage account level, but it does not permanently delete file shares that are already soft deleted; those must be undeleted and then deleted after soft delete is disabled.  
+**B:** Incorrect — the cmdlet shown does not perform an undelete operation; it only updates the file service properties.  
+**D:** Incorrect — this option is false because the provided command does change the soft-delete setting (`-EnableShareDeleteRetentionPolicy $false`) on the storage account.
 
 **Key takeaway**
 
-When Azure Files NFSv4.1 constraints block customer-initiated conversion from LRS to ZRS, use manual migration.
-
-<img src='.img/2026-03-19-04-55-18.png' width=600>
-
-<img src='.img/2026-03-19-04-56-01.png' width=600>
-
-<img src='.img/2026-03-19-04-56-17.png' width=600>
-
-<img src='.img/2026-03-19-04-57-06.png' width=600>
-
-<img src='.img/2026-03-19-04-57-21.png' width=600>
-
-<img src='.img/2026-03-19-04-57-44.png' width=600>
+Soft delete for file shares is a storage-account level setting; disabling it changes the retention behavior for future deletions but does not by itself permanently remove shares that are already soft deleted — those require undelete → disable → delete to purge.
 
 **References**
 
-* [Change how a storage account is replicated](https://learn.microsoft.com/azure/storage/common/redundancy-migration)
+- [What is Azure Files?](https://learn.microsoft.com/azure/storage/files/storage-files-introduction)
+- [Enable soft delete on Azure file shares](https://learn.microsoft.com/azure/storage/files/storage-files-enable-soft-delete)
 
 </details>
 
 ---
 
-### Configure Azure Files and Azure Blob Storage
-
-#### Lifecycle Management Policy Configuration
+#### Delete Soft-Deleted File Share
 
 **Domain:** Implement and Manage Storage
 **Skill:** Configure Azure Files and Azure Blob Storage
-**Task:** Configure blob lifecycle management
+**Task:** Configure snapshots and soft delete for Azure Files
 
-Your company implements block blob storage in a general-purpose version 2 (GPv2) storage account and uses the following rule to help optimize storage costs:
+Your company is using Azure Files for storing files. You are the Azure administrator in your company.
 
-```json
-{
-  "rules": [
-    {
-      "enabled": true,
-      "name": "myrule",
-      "type": "Lifecycle",
-      "definition": {
-        "actions": {
-          "version": {
-            "delete": {
-              "daysAfterCreationGreaterThan": 90
-            }
-          },
-          "baseBlob": {
-            "enableAutoTierToHotFromCool": true,
-            "tierToCool": {
-              "daysAfterModificationGreaterThan": 30
-            },
-            "tierToArchive": {
-              "daysAfterModificationGreaterThan": 90
-            },
-            "delete": {
-              "daysAfterModificationGreaterThan": 365
-            }
-          }
-        },
-        "filters": {
-          "blobTypes": [
-            "blockBlob"
-          ],
-          "prefixMatch": [
-            "container2/myblob"
-          ]
-        }
-      }
-    }
-  ]
-}
+You need to permanently delete an Azure file share that has been soft deleted.
+
+You execute the PowerShell command shown below:
+
+```powershell
+Update-AzStorageFilesServiceProperty `
+  -ResourceGroupName $resourceGroupName `
+  -StorageAccountName $storageAccountName `
+  -EnableShareDeleteRetentionPolicy $false
 ```
 
-You need to determine how blob storage is configured by this rule.
+Which statement is correct regarding this command?
 
-For each of the following statements, select Yes if the statement is true. Otherwise, select No.
-
-| Statement | Yes | No |
-|-----------|-----|----|
-| Previous blob versions are deleted automatically 90 days after creation. | ☐ | ☐ |
-| Rehydrating a blob from archive with a Copy Blob operation resets the days after modification counter to zero. | ☐ | ☐ |
-| You should transition blobs from cool to hot tier storage to optimize performance. | ☐ | ☐ |
+A. The PowerShell command undeletes the file share.  
+B. The PowerShell command disables soft delete on your storage account and permanently deletes an Azure file share that has been soft deleted.  
+C. The PowerShell command only disables soft delete on your storage account.  
+D. The PowerShell command does not disable soft delete on your storage account.  
 
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-03-02-04-47-23.png' width=600>
+<img src='.img/2026-03-04-04-27-15.png' width=600>
 
 </details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
 
+To permanently delete a file share that has been soft deleted, you must undelete it, disable soft delete, and then delete it again. The provided PowerShell command, which uses the `-EnableShareDeleteRetentionPolicy $false` parameter value, only disables soft delete on your storage account, but this does not permanently delete a file share as is the desired outcome in this scenario. Thus, the option that the PowerShell command only disables soft delete on your storage account is the correct choice.
+
+The PowerShell command does not undelete the file share. To permanently delete a file share that has been soft deleted, you must undelete it, disable soft delete, and then delete it again.
+
+<img src='.img/2026-03-04-04-36-13.png' width=600>
+
+References
+
+- [Prevent File Share Deletion](https://learn.microsoft.com/en-us/azure/storage/files/storage-files-prevent-file-share-deletion?tabs=azure-portal)
+
 </details>
 
-▶ Related Lab: [lab-blob-storage-lifecycle](../hands-on-labs/storage/lab-blob-storage-lifecycle/README.md)
+---
+
+#### Identify Blob Write Operations That Create New Versions
+
+**Domain:** Implement and Manage Storage
+**Skill:** Configure Azure Files and Azure Blob Storage
+**Task:** Configure blob versioning
+
+Your organization is using Azure Blobs for storing data. You enable blob versioning for a storage account.
+
+You need to determine which write operations create a new version.
+
+Which four write operations create a new version? Each correct answer presents a complete solution.
+
+A. Put Blob  
+B. Append Block  
+C. Put Block List  
+D. Copy Blob  
+E. Set Blob Metadata  
+F. Put Blob From URL  
+G. Put Page  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-01-30-06-01-29.png' width=700>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+You're absolutely correct to question this. I made an error in my original response.
+
+**The correct four operations that create new versions are:**
+
+1. **Put Blob** ✓ (You selected this correctly)
+2. **Put Block List** (You did not select this)
+3. **Copy Blob** (You did not select this)
+4. **Set Blob Metadata** (You did not select this)
+
+**Why your selected answers were wrong:**
+
+- **Append Block** – Does NOT create a new version. It appends data to an append blob without overwriting the blob itself.
+- **Put Blob From URL** – I incorrectly stated this creates a version. The documentation does NOT list this as a versioning operation. While it creates or overwrites a blob, it's not explicitly mentioned in Microsoft's versioning documentation as triggering a new version.
+- **Put Page** – Does NOT create a new version. It updates page ranges within a page blob in place.
+
+**Why Set Blob Metadata creates a version:**
+
+I incorrectly stated that metadata changes don't trigger versioning. According to Microsoft's documentation, **Set Blob Metadata** is explicitly listed as a write operation that creates a new version. This is a key exam concept: metadata changes are considered blob modifications that warrant version tracking.
+
+**Key takeaway:**
+
+The four versioning operations are **Put Blob**, **Put Block List**, **Copy Blob**, and **Set Blob Metadata**. These are the operations Microsoft explicitly lists in their documentation. Don't assume operations like "Put Blob From URL" trigger versioning unless explicitly documented.
+
+**References:**
+
+- [Blob versioning - How blob versioning works](https://learn.microsoft.com/en-us/azure/storage/blobs/versioning-overview#how-blob-versioning-works)
+
+<img src='.img/2026-02-02-04-41-46.png' width=600>
+
+</details>
+
+▶ **Related Lab:** [lab-blob-versioning](../hands-on-labs/storage/lab-blob-versioning/README.md)
 
 ---
 
@@ -2697,6 +2938,81 @@ Set-AzStorageBlobInventoryPolicy                # \u2717 Wrong!
 
 ---
 
+#### Lifecycle Management Policy Configuration
+
+**Domain:** Implement and Manage Storage
+**Skill:** Configure Azure Files and Azure Blob Storage
+**Task:** Configure blob lifecycle management
+
+Your company implements block blob storage in a general-purpose version 2 (GPv2) storage account and uses the following rule to help optimize storage costs:
+
+```json
+{
+  "rules": [
+    {
+      "enabled": true,
+      "name": "myrule",
+      "type": "Lifecycle",
+      "definition": {
+        "actions": {
+          "version": {
+            "delete": {
+              "daysAfterCreationGreaterThan": 90
+            }
+          },
+          "baseBlob": {
+            "enableAutoTierToHotFromCool": true,
+            "tierToCool": {
+              "daysAfterModificationGreaterThan": 30
+            },
+            "tierToArchive": {
+              "daysAfterModificationGreaterThan": 90
+            },
+            "delete": {
+              "daysAfterModificationGreaterThan": 365
+            }
+          }
+        },
+        "filters": {
+          "blobTypes": [
+            "blockBlob"
+          ],
+          "prefixMatch": [
+            "container2/myblob"
+          ]
+        }
+      }
+    }
+  ]
+}
+```
+
+You need to determine how blob storage is configured by this rule.
+
+For each of the following statements, select Yes if the statement is true. Otherwise, select No.
+
+| Statement | Yes | No |
+|-----------|-----|----|
+| Previous blob versions are deleted automatically 90 days after creation. | ☐ | ☐ |
+| Rehydrating a blob from archive with a Copy Blob operation resets the days after modification counter to zero. | ☐ | ☐ |
+| You should transition blobs from cool to hot tier storage to optimize performance. | ☐ | ☐ |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-02-04-47-23.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+</details>
+
+▶ Related Lab: [lab-blob-storage-lifecycle](../hands-on-labs/storage/lab-blob-storage-lifecycle/README.md)
+
+---
+
 #### SMB Port Blocked (Error 67)
 
 **Domain:** Implement and Manage Storage
@@ -2749,323 +3065,64 @@ When mapping an Azure SMB file share to a Windows client, ensure the client can 
 
 ---
 
-#### Delete Soft-Deleted File Share
-
-**Domain:** Implement and Manage Storage
-**Skill:** Configure Azure Files and Azure Blob Storage
-**Task:** Configure snapshots and soft delete for Azure Files
-
-Your company is using Azure Files for storing files. You are the Azure administrator in your company.
-
-You need to permanently delete an Azure file share that has been soft deleted.
-
-You execute the PowerShell command shown below:
-
-```powershell
-Update-AzStorageFilesServiceProperty `
-  -ResourceGroupName $resourceGroupName `
-  -StorageAccountName $storageAccountName `
-  -EnableShareDeleteRetentionPolicy $false
-```
-
-Which statement is correct regarding this command?
-
-A. The PowerShell command undeletes the file share.  
-B. The PowerShell command disables soft delete on your storage account and permanently deletes an Azure file share that has been soft deleted.  
-C. The PowerShell command only disables soft delete on your storage account.  
-D. The PowerShell command does not disable soft delete on your storage account.  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-04-04-27-15.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-To permanently delete a file share that has been soft deleted, you must undelete it, disable soft delete, and then delete it again. The provided PowerShell command, which uses the `-EnableShareDeleteRetentionPolicy $false` parameter value, only disables soft delete on your storage account, but this does not permanently delete a file share as is the desired outcome in this scenario. Thus, the option that the PowerShell command only disables soft delete on your storage account is the correct choice.
-
-The PowerShell command does not undelete the file share. To permanently delete a file share that has been soft deleted, you must undelete it, disable soft delete, and then delete it again.
-
-<img src='.img/2026-03-04-04-36-13.png' width=600>
-
-References
-
-- [Prevent File Share Deletion](https://learn.microsoft.com/en-us/azure/storage/files/storage-files-prevent-file-share-deletion?tabs=azure-portal)
-
-</details>
-
----
-
-#### Disable Soft Delete Command
-
-**Domain:** Implement and Manage Storage
-**Skill:** Configure Azure Files and Azure Blob Storage
-**Task:** Configure snapshots and soft delete for Azure Files
-
-Your company is using Azure Files for storing files. You are the Azure administrator in your company.
-
-You need to permanently delete an Azure file share that has been soft deleted.
-
-You execute the PowerShell command shown below:
-
-```powershell
-Update-AzStorageFileServiceProperty `
-  -ResourceGroupName $resourceGroupName `
-  -StorageAccountName $storageAccountName `
-  -EnableShareDeleteRetentionPolicy $false
-```
-
-Which statement is correct regarding this command?
-
-A. The PowerShell command disables soft delete on your storage account and permanently deletes an Azure file share that has been soft deleted.  
-B. The PowerShell command undeletes the file share.  
-C. The PowerShell command only disables soft delete on your storage account.  
-D. The PowerShell command does not disable soft delete on your storage account.  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-19-04-10-15.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Why the selected answer is correct**
-
-The `Update-AzStorageFileServiceProperty` cmdlet with `-EnableShareDeleteRetentionPolicy $false` updates the storage account's file service properties to disable the soft-delete retention policy. Disabling the retention policy alone does not cause already soft-deleted file shares to be permanently removed. To permanently remove a file share that is currently in a soft-deleted state you must first undelete the share, then disable soft delete, and then delete the share again.
-
-<img src='.img/2026-03-19-04-14-47.png' width=600>
-
-**Why the other options are incorrect**
-
-**A:** Incorrect — the command does disable soft delete at the storage account level, but it does not permanently delete file shares that are already soft deleted; those must be undeleted and then deleted after soft delete is disabled.  
-**B:** Incorrect — the cmdlet shown does not perform an undelete operation; it only updates the file service properties.  
-**D:** Incorrect — this option is false because the provided command does change the soft-delete setting (`-EnableShareDeleteRetentionPolicy $false`) on the storage account.
-
-**Key takeaway**
-
-Soft delete for file shares is a storage-account level setting; disabling it changes the retention behavior for future deletions but does not by itself permanently remove shares that are already soft deleted — those require undelete → disable → delete to purge.
-
-**References**
-
-- [What is Azure Files?](https://learn.microsoft.com/azure/storage/files/storage-files-introduction)
-- [Enable soft delete on Azure file shares](https://learn.microsoft.com/azure/storage/files/storage-files-enable-soft-delete)
-
-</details>
-
----
-
-#### Identify Blob Write Operations That Create New Versions
-
-**Domain:** Implement and Manage Storage
-**Skill:** Configure Azure Files and Azure Blob Storage
-**Task:** Configure blob versioning
-
-Your organization is using Azure Blobs for storing data. You enable blob versioning for a storage account.
-
-You need to determine which write operations create a new version.
-
-Which four write operations create a new version? Each correct answer presents a complete solution.
-
-A. Put Blob  
-B. Append Block  
-C. Put Block List  
-D. Copy Blob  
-E. Set Blob Metadata  
-F. Put Blob From URL  
-G. Put Page  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-01-30-06-01-29.png' width=700>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-You're absolutely correct to question this. I made an error in my original response.
-
-**The correct four operations that create new versions are:**
-
-1. **Put Blob** ✓ (You selected this correctly)
-2. **Put Block List** (You did not select this)
-3. **Copy Blob** (You did not select this)
-4. **Set Blob Metadata** (You did not select this)
-
-**Why your selected answers were wrong:**
-
-- **Append Block** – Does NOT create a new version. It appends data to an append blob without overwriting the blob itself.
-- **Put Blob From URL** – I incorrectly stated this creates a version. The documentation does NOT list this as a versioning operation. While it creates or overwrites a blob, it's not explicitly mentioned in Microsoft's versioning documentation as triggering a new version.
-- **Put Page** – Does NOT create a new version. It updates page ranges within a page blob in place.
-
-**Why Set Blob Metadata creates a version:**
-
-I incorrectly stated that metadata changes don't trigger versioning. According to Microsoft's documentation, **Set Blob Metadata** is explicitly listed as a write operation that creates a new version. This is a key exam concept: metadata changes are considered blob modifications that warrant version tracking.
-
-**Key takeaway:**
-
-The four versioning operations are **Put Blob**, **Put Block List**, **Copy Blob**, and **Set Blob Metadata**. These are the operations Microsoft explicitly lists in their documentation. Don't assume operations like "Put Blob From URL" trigger versioning unless explicitly documented.
-
-**References:**
-
-- [Blob versioning - How blob versioning works](https://learn.microsoft.com/en-us/azure/storage/blobs/versioning-overview#how-blob-versioning-works)
-
-<img src='.img/2026-02-02-04-41-46.png' width=600>
-
-</details>
-
-▶ **Related Lab:** [lab-blob-versioning](../hands-on-labs/storage/lab-blob-versioning/README.md)
-
----
-
-#### Create Azure file share sequence
-
-**Domain:** Implement and Manage Storage
-**Skill:** Configure Azure Files and Azure Blob Storage
-**Task:** Create and configure a file share in Azure Storage
-
-You need to create a new Azure file share in your company Azure subscription. This share contains resource files that the admins of all your Azure IaaS-hosted Microsoft Windows servers will need to perform their daily activities. The share will exist in a new storage account.
-
-You need to ensure the file share is mounted on the servers and persistent across reboots.
-
-Which six actions should you perform in sequence? To answer, move the appropriate actions from the list of possible actions to the answer area and arrange them in the correct order.
-
-A. Execute New-AzStorageAccount.  
-B. Execute Get-AzStorageAccount.  
-C. Execute Get-AzStorageAccountKeys.  
-D. Execute New-AzStorageContext.  
-E. Execute New-AzStorageShare.  
-F. Execute Set-AzStorageAccount.  
-G. Execute CMDKEY on the Windows Servers.  
-H. Execute New-PSDrive on the Windows Servers.  
-
-Select and order 6:
-
-| Step | Action |
-|------|--------|
-| 1 | |
-| 2 | |
-| 3 | |
-| 4 | |
-| 5 | |
-| 6 | |
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-19-03-42-16.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**You should perform the following actions in order:**
-
-1. Execute New-AzStorageAccount.
-2. Execute Get-AzStorageAccountKeys.
-3. Execute New-AzStorageContext.
-4. Execute New-AzStorageShare.
-5. Execute CMDKEY on the Windows Servers.
-6. Execute New-PSDrive on the Windows Servers.
-
-**Why the selected sequence is correct:**
-
-The process to create a new file share in Azure Files requires an existing Azure Storage account, so the first step is to create the storage account with `New-AzStorageAccount`. After the account exists you must retrieve the access key using `Get-AzStorageAccountKeys`. With the key you build a storage context using `New-AzStorageContext`, and then create the file share with `New-AzStorageShare`. To make the share persistent on Windows servers, store the credentials on the server using `CMDKEY` and then map the share to a persistent drive using `New-PSDrive`.
-
-**Why other options are incorrect or unnecessary:**
-
-`Get-AzStorageAccount` merely retrieves an existing account object and does not create the account needed here. `Set-AzStorageAccount` configures properties on an existing account; it does not create the account or the share. `Get-PSDrive` only lists drives in the current session and does not create persistent mapped drives.
-
-<details>
-<summary>📝 More Detail</summary>
-
-Think of this as a three-phase flow. If you remember the phases, the order becomes intuitive instead of memorized.
-
-1. Build the storage (Azure side)
-   You always start by creating the foundation.
-
-* New-AzStorageAccount
-  You need somewhere to host the file share.
-
-* Get-AzStorageAccountKeys
-  You need credentials to access it (Azure Files uses storage keys unless using identity).
-
-2. Prepare access (bridge between Azure + PowerShell)
-   Now you prepare a way to interact with that storage.
-
-* New-AzStorageContext
-  This is your authenticated session to the storage account.
-
-* New-AzStorageShare
-  Actually create the file share inside the storage account.
-
-3. Mount it on Windows (IaaS VM side)
-   Now you make it usable and persistent on servers.
-
-* CMDKEY
-  Stores credentials securely on the Windows machine
-  This is what makes it survive reboots
-
-* New-PSDrive
-  Maps the Azure file share as a drive (like Z:)
-
-The mental model (easy to recall)
-
-Azure → Access → Windows
-
-1. Create storage
-2. Authenticate to storage
-3. Create share
-4. Persist credentials
-5. Mount drive
-
-Why the order matters (exam traps)
-
-* You can’t create a share without a context
-* You can’t create a context without keys
-* You can’t mount persistently without CMDKEY first
-* You don’t use Get-AzStorageAccount → that’s for existing resources
-* You don’t use Get-PSDrive → that’s read-only, not creation
-
-One-line memory shortcut
-
-“Create → Key → Context → Share → Credential → Drive”
-
-Extra insight (helps solidify)
-
-This whole workflow is basically replacing what on-prem SMB does automatically:
-
-* Storage account = file server
-* Share = SMB share
-* Key = username/password
-* CMDKEY = credential manager
-* PSDrive = mapped network drive
-
-</details>
-
-**References**
-
-* [Create an Azure file share in the Azure portal](https://learn.microsoft.com/azure/storage/files/create-file-share#create-a-file-share-microsoftfileshares)
-* [Mount SMB Azure file share on Windows](https://learn.microsoft.com/azure/storage/files/storage-how-to-use-files-windows)
-* [Get-AzStorageAccount](https://learn.microsoft.com/powershell/module/az.storage/get-azstorageaccount?view=azps-15.4.0)
-* [Set-AzStorageAccount](https://learn.microsoft.com/powershell/module/az.storage/set-azstorageaccount?view=azps-15.4.0)
-* [Get-PSDrive](https://learn.microsoft.com/powershell/module/microsoft.powershell.management/get-psdrive?view=powershell-7.6)
-
-</details>
-
----
-
 ## Deploy and Manage Azure Compute Resources
 
 ### Automate deployment of resources by using ARM templates or Bicep files
+
+#### Export ARM Template
+
+**Domain:** Deploy and Manage Azure Compute Resources
+**Skill:** Automate deployment of resources by using ARM templates or Bicep files
+**Task:** Export a deployment as an ARM template or convert an ARM template to a Bicep file
+
+You deploy a line of business (LOB) application. All resources that are part of the LOB application are deployed in a single resource group. The resources were added in different phases.
+
+You need to export the current configuration of the LOB application resources to an Azure Resource Manager (ARM) template. You will later use this template for deploying the LOB application infrastructure in different environments for testing or development purposes.
+
+You are using the Complete mode for ARM deployment.
+
+For each of the following statements, select Yes if the statement is true. Otherwise, select No.
+
+| Statement | Yes | No |
+|----------|-----|----|
+| You need to export the Azure Resource Manager (ARM) template from the latest deployment. | ☐ | ☐ |
+| Each deployment contains only the resources that have been added in that deployment. | ☐ | ☐ |
+| The parameters file contains the values used during the deployment. | ☐ | ☐ |
+| The template contains the scripts needed for deploying the template. | ☐ | ☐ |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-12-03-11-57.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+You do not need to export the Azure Resource Manager (ARM) template from the latest deployment. In this scenario, the line of business (LOB) application was deployed in several phases. The latest deployment will export only the latest resources added to the application. If you want to export the ARM template with all the resources needed for the LOB application, you will need to export the ARM template from the resource group.
+
+Each deployment contains only the resources that have been added in that deployment. When deploying your resources, you specify that the deployment is either an Incremental update or a Complete update. The difference between these two modes is how the Resource Manager handles existing resources in the resource group that are not in the template. In this scenario, since you are using the Complete mode, each deployment contains only the resources that have been added in that deployment and the Resource Manager will delete all the resources that exist in the resource group but are not specified in the template. On the other hand, in an Incremental mode, the Resource Manager leaves unchanged resources that exist in the resource group but are not specified in the template. Resources in the template are added to the resource group.
+
+The parameters file contains the values used during the deployment. The parameters file is a JSON file that stores all the parameters used in the ARM template. You can use this file to reuse the template in different deployments, just changing the values of the parameters file. If you use this file in templates created from resource groups, you need to make significant edits to the template before you can effectively use the parameters file.
+
+The template does not contain the scripts needed for deploying the template. When you download an ARM template from a deployment or a resource group, the downloaded package contains only the ARM template and the parameters file. You can reference Azure CLI scripts or a PowerShell script in the Azure docs linked in the export template pane.
+
+<img src='.img/2026-03-12-03-47-36.png' width=600>
+
+<img src='.img/2026-03-12-03-31-11.png' width=600>
+
+References
+
+- [Use Azure portal to export a template](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/export-template-portal)
+- [Understand the structure and syntax of ARM templates](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/syntax)
+- [Azure Resource Manager deployment modes: COMPLETE versus INCREMENTAL](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/deployment-modes)
+- [Azure Resource Manager deployment modes](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/deployment-modes)
+- [Manage Azure resources by using Azure CLI](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resources-cli)
+
+</details>
+
+---
 
 #### Edit ARM Template to Inherit Resource Group Location
 
@@ -3247,163 +3304,6 @@ When you need to create a new Azure VM from an existing VM or resource group, ex
 
 ---
 
-#### Export ARM Template
-
-**Domain:** Deploy and Manage Azure Compute Resources
-**Skill:** Automate deployment of resources by using ARM templates or Bicep files
-**Task:** Export a deployment as an ARM template or convert an ARM template to a Bicep file
-
-You deploy a line of business (LOB) application. All resources that are part of the LOB application are deployed in a single resource group. The resources were added in different phases.
-
-You need to export the current configuration of the LOB application resources to an Azure Resource Manager (ARM) template. You will later use this template for deploying the LOB application infrastructure in different environments for testing or development purposes.
-
-You are using the Complete mode for ARM deployment.
-
-For each of the following statements, select Yes if the statement is true. Otherwise, select No.
-
-| Statement | Yes | No |
-|----------|-----|----|
-| You need to export the Azure Resource Manager (ARM) template from the latest deployment. | ☐ | ☐ |
-| Each deployment contains only the resources that have been added in that deployment. | ☐ | ☐ |
-| The parameters file contains the values used during the deployment. | ☐ | ☐ |
-| The template contains the scripts needed for deploying the template. | ☐ | ☐ |
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-12-03-11-57.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-You do not need to export the Azure Resource Manager (ARM) template from the latest deployment. In this scenario, the line of business (LOB) application was deployed in several phases. The latest deployment will export only the latest resources added to the application. If you want to export the ARM template with all the resources needed for the LOB application, you will need to export the ARM template from the resource group.
-
-Each deployment contains only the resources that have been added in that deployment. When deploying your resources, you specify that the deployment is either an Incremental update or a Complete update. The difference between these two modes is how the Resource Manager handles existing resources in the resource group that are not in the template. In this scenario, since you are using the Complete mode, each deployment contains only the resources that have been added in that deployment and the Resource Manager will delete all the resources that exist in the resource group but are not specified in the template. On the other hand, in an Incremental mode, the Resource Manager leaves unchanged resources that exist in the resource group but are not specified in the template. Resources in the template are added to the resource group.
-
-The parameters file contains the values used during the deployment. The parameters file is a JSON file that stores all the parameters used in the ARM template. You can use this file to reuse the template in different deployments, just changing the values of the parameters file. If you use this file in templates created from resource groups, you need to make significant edits to the template before you can effectively use the parameters file.
-
-The template does not contain the scripts needed for deploying the template. When you download an ARM template from a deployment or a resource group, the downloaded package contains only the ARM template and the parameters file. You can reference Azure CLI scripts or a PowerShell script in the Azure docs linked in the export template pane.
-
-<img src='.img/2026-03-12-03-47-36.png' width=600>
-
-<img src='.img/2026-03-12-03-31-11.png' width=600>
-
-References
-
-- [Use Azure portal to export a template](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/export-template-portal)
-- [Understand the structure and syntax of ARM templates](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/syntax)
-- [Azure Resource Manager deployment modes: COMPLETE versus INCREMENTAL](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/deployment-modes)
-- [Azure Resource Manager deployment modes](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/deployment-modes)
-- [Manage Azure resources by using Azure CLI](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resources-cli)
-
-</details>
-
----
-
-#### Export resource group template
-
-**Domain:** Deploy and Manage Azure Compute Resources
-**Skill:** Automate deployment of resources by using ARM templates or Bicep files
-**Task:** Export a deployment as an ARM template or convert an ARM template to a Bicep file
-
-An Azure resource group was initially deployed from an Azure Resource Manager (ARM) template. Resources have since been added and modified manually through the Azure portal.
-
-You need to create a new template based on the current state of the resource group.
-
-Which PowerShell cmdlet should you use?
-
-A. `New-AzResourceGroupDeployment`  
-B. `Save-AzResourceGroupDeploymentTemplate`  
-C. `Save-AzDeploymentTemplate`  
-D. `Export-AzResourceGroup`  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-13-05-35-52.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Solution Explanation:**
-
-You should use the `Export-AzResourceGroup` cmdlet. This cmdlet captures a specified resource group and saves it as a template to a JSON or Bicep file. This gives you a way to create a template based on the current resources in a resource group. You also have the option of exporting a running resource group as a template from the Azure portal.
-
-You should not use the `Save-AzResourceGroupDeploymentTemplate` cmdlet. This saves a resource group deployment, not the current resource group, to a file — you must specify both the deployment name and the resource group name.
-
-You should not use the `Save-AzDeploymentTemplate` cmdlet. This saves an existing deployment template to a file.
-
-You should not use the `New-AzResourceGroupDeployment` cmdlet. This cmdlet is used to apply a template to an existing resource group, not to create a new template file.
-
-<img src='.img/2026-03-13-05-39-29.png' width=600>
-
-<img src='.img/2026-03-13-05-39-56.png' width=600>
-
-<img src='.img/2026-03-13-05-40-12.png' width=600>
-
-**References**
-
-* [Use Azure portal to export a template](https://learn.microsoft.com/azure/azure-resource-manager/templates/export-template-portal)
-* [Save-AzResourceGroupDeploymentTemplate](https://learn.microsoft.com/powershell/module/az.resources/save-azresourcegroupdeploymenttemplate?view=azps-15.4.0)
-* [Export-AzResourceGroup](https://learn.microsoft.com/powershell/module/az.resources/export-azresourcegroup?view=azps-15.4.0)
-* [New-AzResourceGroupDeployment](https://learn.microsoft.com/powershell/module/az.resources/new-azresourcegroupdeployment?view=azps-15.4.0)
-* [Save-AzDeploymentTemplate](https://learn.microsoft.com/powershell/module/az.resources/save-azdeploymenttemplate?view=azps-15.4.0)
-
-</details>
-
----
-
-#### Deployment Mode Deleted Resources
-
-**Domain:** Deploy and Manage Azure Compute Resources
-**Skill:** Automate deployment of resources by using ARM templates or Bicep files
-**Task:** Deploy resources by using an ARM template or a Bicep file
-
-You have a resource group named `APP-RG` that consists of several resources.
-
-You are asked to add a storage account to the resource group. You decide to deploy the new storage account by using an Azure Resource Manager (ARM) template and the `New-AzResourceGroupDeployment` cmdlet. This template does not contain any linked or nested templates.
-
-After the deployment finishes successfully, you realize that all the resources in the resource group have been deleted except for the newly created storage account.
-
-Why did this happen?
-
-A. The template contains the mode parameter with the value Incremental.  
-B. The template contains the mode parameter with the value Complete.  
-C. You did not use the -mode parameter with the `New-AzResourceGroupDeployment` cmdlet.  
-D. You used the -mode complete parameter with the `New-AzResourceGroupDeployment` cmdlet.  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-13-05-11-11.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Explanation**
-
-Resources in the resource group were deleted except for the newly-created storage account because you used the `-mode complete` parameter with the `New-AzResourceGroupDeployment` cmdlet. The `New-AzResourceGroupDeployment` cmdlet has two deployment modes: incremental and complete. When you use the complete mode, all resources in the resource group that are not included in the template are deleted.
-
-Using the `-mode` parameter with the `New-AzResourceGroupDeployment` cmdlet was not the cause when you did not specify it. When you do not use the `-mode` parameter, you are using the default incremental deployment mode. In this mode, any resource that is not present in the template is maintained in the resource group. If a resource in the resource group is present in the template and any parameters in the template differ from the values in the resource group, those values are updated in the resource present in Azure. You should use this mode when deploying the template.
-
-The cause was not the template containing the mode parameter with the value Complete or Incremental. The template that you are using does not contain any linked or nested templates, so the mode parameter should not be present in the template with either value. This parameter is part of the deployment resource type and is typically used with nested or linked templates. Complete and incremental deployment modes behave the same way as in the `New-AzResourceGroupDeployment` cmdlet.
-
-**References**
-
-* [Deploy resources with ARM templates and Azure PowerShell](https://learn.microsoft.com/azure/azure-resource-manager/templates/deploy-powershell)
-* [Microsoft.Resources deployments](https://learn.microsoft.com/azure/templates/microsoft.resources/deployments)
-* [New-AzResourceGroupDeployment](https://learn.microsoft.com/powershell/module/az.resources/new-azresourcegroupdeployment?view=azps-15.4.0)
-
-</details>
-
----
-
 #### Case Study — Solution Evaluation
 
 **Domain:** Deploy and Manage Azure Compute Resources
@@ -3464,6 +3364,61 @@ References
 * [Export an Azure Resource Manager template from an existing resource](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/export-template-portal)
 * Deploy resources with ARM templates
 * [Azure Policy overview](https://learn.microsoft.com/en-us/azure/governance/policy/overview)
+
+</details>
+
+---
+
+#### Export resource group template
+
+**Domain:** Deploy and Manage Azure Compute Resources
+**Skill:** Automate deployment of resources by using ARM templates or Bicep files
+**Task:** Export a deployment as an ARM template or convert an ARM template to a Bicep file
+
+An Azure resource group was initially deployed from an Azure Resource Manager (ARM) template. Resources have since been added and modified manually through the Azure portal.
+
+You need to create a new template based on the current state of the resource group.
+
+Which PowerShell cmdlet should you use?
+
+A. `New-AzResourceGroupDeployment`  
+B. `Save-AzResourceGroupDeploymentTemplate`  
+C. `Save-AzDeploymentTemplate`  
+D. `Export-AzResourceGroup`  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-13-05-35-52.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Solution Explanation:**
+
+You should use the `Export-AzResourceGroup` cmdlet. This cmdlet captures a specified resource group and saves it as a template to a JSON or Bicep file. This gives you a way to create a template based on the current resources in a resource group. You also have the option of exporting a running resource group as a template from the Azure portal.
+
+You should not use the `Save-AzResourceGroupDeploymentTemplate` cmdlet. This saves a resource group deployment, not the current resource group, to a file — you must specify both the deployment name and the resource group name.
+
+You should not use the `Save-AzDeploymentTemplate` cmdlet. This saves an existing deployment template to a file.
+
+You should not use the `New-AzResourceGroupDeployment` cmdlet. This cmdlet is used to apply a template to an existing resource group, not to create a new template file.
+
+<img src='.img/2026-03-13-05-39-29.png' width=600>
+
+<img src='.img/2026-03-13-05-39-56.png' width=600>
+
+<img src='.img/2026-03-13-05-40-12.png' width=600>
+
+**References**
+
+* [Use Azure portal to export a template](https://learn.microsoft.com/azure/azure-resource-manager/templates/export-template-portal)
+* [Save-AzResourceGroupDeploymentTemplate](https://learn.microsoft.com/powershell/module/az.resources/save-azresourcegroupdeploymenttemplate?view=azps-15.4.0)
+* [Export-AzResourceGroup](https://learn.microsoft.com/powershell/module/az.resources/export-azresourcegroup?view=azps-15.4.0)
+* [New-AzResourceGroupDeployment](https://learn.microsoft.com/powershell/module/az.resources/new-azresourcegroupdeployment?view=azps-15.4.0)
+* [Save-AzDeploymentTemplate](https://learn.microsoft.com/powershell/module/az.resources/save-azdeploymenttemplate?view=azps-15.4.0)
 
 </details>
 
@@ -3600,194 +3555,138 @@ References
 
 ---
 
+#### Deployment Mode Deleted Resources
+
+**Domain:** Deploy and Manage Azure Compute Resources
+**Skill:** Automate deployment of resources by using ARM templates or Bicep files
+**Task:** Deploy resources by using an ARM template or a Bicep file
+
+You have a resource group named `APP-RG` that consists of several resources.
+
+You are asked to add a storage account to the resource group. You decide to deploy the new storage account by using an Azure Resource Manager (ARM) template and the `New-AzResourceGroupDeployment` cmdlet. This template does not contain any linked or nested templates.
+
+After the deployment finishes successfully, you realize that all the resources in the resource group have been deleted except for the newly created storage account.
+
+Why did this happen?
+
+A. The template contains the mode parameter with the value Incremental.  
+B. The template contains the mode parameter with the value Complete.  
+C. You did not use the -mode parameter with the `New-AzResourceGroupDeployment` cmdlet.  
+D. You used the -mode complete parameter with the `New-AzResourceGroupDeployment` cmdlet.  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-13-05-11-11.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Explanation**
+
+Resources in the resource group were deleted except for the newly-created storage account because you used the `-mode complete` parameter with the `New-AzResourceGroupDeployment` cmdlet. The `New-AzResourceGroupDeployment` cmdlet has two deployment modes: incremental and complete. When you use the complete mode, all resources in the resource group that are not included in the template are deleted.
+
+Using the `-mode` parameter with the `New-AzResourceGroupDeployment` cmdlet was not the cause when you did not specify it. When you do not use the `-mode` parameter, you are using the default incremental deployment mode. In this mode, any resource that is not present in the template is maintained in the resource group. If a resource in the resource group is present in the template and any parameters in the template differ from the values in the resource group, those values are updated in the resource present in Azure. You should use this mode when deploying the template.
+
+The cause was not the template containing the mode parameter with the value Complete or Incremental. The template that you are using does not contain any linked or nested templates, so the mode parameter should not be present in the template with either value. This parameter is part of the deployment resource type and is typically used with nested or linked templates. Complete and incremental deployment modes behave the same way as in the `New-AzResourceGroupDeployment` cmdlet.
+
+**References**
+
+* [Deploy resources with ARM templates and Azure PowerShell](https://learn.microsoft.com/azure/azure-resource-manager/templates/deploy-powershell)
+* [Microsoft.Resources deployments](https://learn.microsoft.com/azure/templates/microsoft.resources/deployments)
+* [New-AzResourceGroupDeployment](https://learn.microsoft.com/powershell/module/az.resources/new-azresourcegroupdeployment?view=azps-15.4.0)
+
+</details>
+
+---
+
 ### Create and configure virtual machines
 
-#### VM Resize Failure Cause
-
-**Domain:** Deploy and Manage Azure Compute Resources
-**Skill:** Create and configure virtual machines
-**Task:** Manage virtual machine sizes
-
-You have a Linux virtual machine (VM) named VM1 that runs in Azure. VM1 has the following properties:
-
-- Size: Standard_D4s_v3
-- Number of virtual CPUs: four
-- Storage type: Premium
-- Number of data disks: eight
-- Public IP address: Standard SKU
-
-You attempt to resize the VM to the Standard_D2s_v3 size, but the resize operation fails.
-
-Which VM property is the most likely cause of the failure?
-
-A. Public IP address  
-B. Number of data disks  
-C. Storage type  
-D. Number of virtual CPUs  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-02-21-05-43-55.png' width=700>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Why the selected answer is correct (Number of data disks)**
-
-The Standard_D2s_v3 size supports a maximum of **4 data disks**. VM1 currently has **8 data disks** attached. When Azure attempts to resize the VM, it validates that the target size can accommodate all currently attached resources. Because 8 data disks exceeds the 4-disk limit of Standard_D2s_v3, the resize operation is blocked. This is the most likely cause of the failure.
-
-**Why the other options are incorrect**
-
-**Public IP address — Standard SKU**
-A Standard SKU public IP address is compatible with both Standard_D4s_v3 and Standard_D2s_v3. IP address SKU has no bearing on VM size compatibility and would not cause a resize failure.
-
-**Storage type — Premium**
-Both Standard_D4s_v3 and Standard_D2s_v3 support Premium storage (indicated by the "s" in the size name). Premium storage compatibility is not a constraint that would block this resize.
-
-**Number of virtual CPUs**
-Resizing from 4 vCPUs to 2 vCPUs is a valid downscale operation. Azure does not block a resize based on reducing vCPU count. The operating system and applications may be affected, but Azure will not prevent the operation for this reason alone.
-
-**Key takeaway**
-When resizing a VM, Azure validates that all currently attached resources (data disks, NICs, etc.) fall within the limits of the target size. If the number of attached data disks exceeds the maximum supported by the target VM size, the resize will fail. Always check the target size's data disk limit before attempting to resize down.
-
-**References**
-
-* [Sizes for virtual machines in Azure](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/overview?tabs=breakdownseries%2Cgeneralsizelist%2Ccomputesizelist%2Cmemorysizelist%2Cstoragesizelist%2Cgpusizelist%2Chpcsizelist)
-* [Introduction to Azure managed disks](https://learn.microsoft.com/en-us/azure/virtual-machines/managed-disks-overview)
-* [Public IP addresses](https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/public-ip-addresses)
-
-</details>
-
----
-
-#### WebApp1 Availability Case
-
-**Domain:** Deploy and Manage Azure Compute Resources
-**Skill:** Create and configure virtual machines
-**Task:** Deploy VMs to availability zones and availability sets
-
-*Case Study — Solution Evaluation*
-
-This case study contains a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.
-
-You want to install an internet-facing web application named `WebApp1` on multiple Azure virtual machines (VMs). The VMs must run Windows Server 2019. Connections to `WebApp1` must be spread across all the VMs. The VMs must be located in separate datacenters in the same region. The Service Level Agreement (SLA) connectivity percentage must be the highest possible.
-
-Does this solution meet the goal?
-
-| Solution | Yes | No |
-|----------|-----|----|
-| 1. You create three VMs, each in a different availability zone, and configure a standard load balancer. | ☐ | ☐ |
-| 2. You create three VMs in an availability set with three fault domains and configure a standard load balancer. | ☐ | ☐ |
-| 3. You create three VMs in the same virtual network, place each VM in a different availability zone, and use Azure Front Door to route traffic. | ☐ | ☐ |
-| 4. You create three VMs and place them all in availability zone 1, and create a zone-redundant load balancer. | ☐ | ☐ |
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-18-04-45-16.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Solution 1 Explanation:** Deploying three VMs across three availability zones and placing them behind a Standard Load Balancer (configured for cross-zone backend pools) provides zonal isolation for the compute hosts and a zone-resilient frontend. This configuration enables the highest achievable single-region connectivity SLA for IaaS VMs because the VMs are in separate datacenters (zones) and the Standard Load Balancer supports zone-redundant frontend/backends.
-
-**Solution 2 Explanation:** An availability set distributes VMs across fault domains within a single datacenter; it does not place VMs in separate datacenters (availability zones). Because the requirement is to locate VMs in separate datacenters in the same region, an availability set alone does not meet the goal.
-
-**Solution 3 Explanation:** Azure Front Door provides global HTTP/HTTPS routing and can improve global availability across regions, but it does not by itself place VMs into separate datacenters within a single region. Front Door is not a substitute for zonal VM placement and local zone-redundant load balancing when the requirement is highest single-region SLA based on separate datacenters.
-
-**Solution 4 Explanation:** Creating all VMs in the same availability zone (zone 1) defeats the purpose of a zone-redundant frontend. A zone-redundant load balancer cannot provide zone-level fault isolation if all backend VMs are located in the same zone; the VMs would still be impacted by a zone outage.
-
-**References**
-
-* [What are availability zones?](https://learn.microsoft.com/azure/reliability/availability-zones-overview)
-* [Create virtual machines in an availability zone using the Azure portal](https://learn.microsoft.com/azure/virtual-machines/create-portal-availability-zone)
-* [Standard load balancer and availability zones](https://learn.microsoft.com/azure/load-balancer/load-balancer-standard-availability-zones)
-* [Tutorial: Load balance VMs within an availability zone by using the Azure portal](https://learn.microsoft.com/azure/load-balancer/tutorial-load-balancer-standard-public-zonal-portal)
-* [Service level agreements (SLAs) for online services](https://aka.ms/CSLA)
-
-</details>
-
----
-
-#### Enable VM disk encryption
+#### Encrypt VM Disk With Key Vault
 
 **Domain:** Deploy and Manage Azure Compute Resources
 **Skill:** Create and configure virtual machines
 **Task:** Configure Azure Disk Encryption
 
-You have an Azure virtual machine (Azure VM) named `vm1` and running Ubuntu.
+You have a subscription named SubscriptionA that hosts the following resources:
 
-You need to enable disk encryption for `vm1` and store the encryption keys in a new Azure Key Vault named `vmKeyVault1`. All resources must be provisioned in a resource group named `rg1`.
+- A key vault named mySecureVault in a resource group named myKeyVaultResourceGroup.
+- A virtual machine (VM) named mySecureVM in a resource group named myVirtualMachineResourceGroup.
 
-How should you complete the command script? To answer, drag the appropriate command or parameter to the correct placeholder. Each command or parameter may be used once, more than once, or not at all.
+You need to write a PowerShell script that will encrypt the disk for mySecureVM using the keys stored in the mySecureVault.
 
-```bash
-az keyvault create  --name "vmKeyVault1" \
-  --resource-group "rg1" --location "eastus" \
-  ___[1]___
+How should you complete the script? To answer, select the appropriate options from the drop-down menus.
 
-az vm encryption enable \
-  --resource-group "rg1" --name "vm1" \
-  ___[2]___ "vmKeyVault1"
+```powershell
+$keyVaultRG = 'myKeyVaultResourceGroup';
+$vmRG = 'myVirtualMachineResourceGroup';
+$vmName = 'mySecureVM';
+$keyVaultName = 'mySecureVault';
+
+$keyVault = Get-AzKeyVault [Select 1 ▼] $keyVaultName -ResourceGroupName $keyVaultRG;
+$diskEncryptionKeyVaultUrl = [Select 2 ▼];
+$keyVaultId = [Select 3 ▼];
+
+Set-AzVMDiskEncryptionExtension -ResourceGroupName [Select 4 ▼] `
+  -DiskEncryptionKeyVaultUrl $diskEncryptionKeyVaultUrl `  
+  -DiskEncryptionKeyVaultId $keyVaultId -VMName $vmName;
 ```
 
-| Description | Answer |
-|-------------|--------|
-| Complete the `az keyvault create` command to create the Key Vault for disk encryption. | |
-| Complete the `az vm encryption enable` command to specify the key vault for disk encryption. | |
+**Select 1 options:**  
+○ Name  
+○ VaultName  
 
-Available options:
+**Select 2 options:**  
+○ keyVault.Path  
+○ keyVault.Url  
+○ keyVault.VaultUri  
 
-- az vm encryption enable
-- az keyvault create
-- --enabled-for-disk-encryption
-- --disk-encryption-keyvault
-- --os-disk-encryption-set
-- az vm update
+**Select 3 options:**  
+○ keyVault.Id  
+○ keyVault.ResourceId  
+
+**Select 4 options:**  
+○ keyVaultRG  
+○ vmRG  
 
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-03-18-04-58-51.png' width=600>
+<img src='.img/2026-02-21-15-24-34.png' width=700>
 
 </details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
 
-**You should complete the commands as shown below:**
+**Why the correct answers are correct**
 
-```bash
-az keyvault create --name "vmKeyVault1" \
-  --resource-group "rg1" --location "eastus" \
-  --enabled-for-disk-encryption
+**Select 1 — VaultName**
+The `Get-AzKeyVault` cmdlet uses the `-VaultName` parameter to identify the key vault by name. There is no `-Name` parameter on this cmdlet. Using `-Name` would cause the command to fail entirely, so `-VaultName` is the only valid choice.
 
-az vm encryption enable \
-  --resource-group "rg1" --name "vm1" \
-  --disk-encryption-keyvault "vmKeyVault1"
-```
+**Select 2 — keyVault.VaultUri**
+The `$diskEncryptionKeyVaultUrl` variable must hold the URI of the key vault. The correct property on the object returned by `Get-AzKeyVault` is `.VaultUri`. The `.Path` property does not exist on this object, and `.Url` is not a valid property either. VaultUri is the documented property that returns the vault endpoint URL required by `Set-AzVMDiskEncryptionExtension`.
 
-You should use the `az keyvault create` command with the `--enabled-for-disk-encryption` parameter. This command creates a new Key Vault ready to retrieve secrets from the vault and unwrap keys used by Disk Encryption.
+**Select 3 — keyVault.ResourceId**
+The `-DiskEncryptionKeyVaultId` parameter requires the Azure Resource Manager resource ID of the key vault. The correct property is `.ResourceId`. The `.Id` property is not a valid property on the key vault object returned by `Get-AzKeyVault`. ResourceId returns the full ARM resource identifier in the format `/subscriptions/.../resourceGroups/.../providers/Microsoft.KeyVault/vaults/...`.
 
-You should also use the `az vm encryption enable` command with the `--disk-encryption-keyvault "vmKeyVault1"` parameter. This command enables Disk Encryption on the existing `vm1` that uses `vmKeyVault1`.
+**Select 4 — vmRG**
+The `-ResourceGroupName` parameter on `Set-AzVMDiskEncryptionExtension` must reference the resource group where the **VM** resides, not where the key vault resides. The extension is applied to the VM, so Azure needs the VM's resource group to locate it. Using `$keyVaultRG` would point to the wrong resource group and the cmdlet would fail to find the VM.
 
-You should not use the `az vm update` command. You can use this command to update VM settings like disk caching, network adapters, or tags.
-
-You should not use the `--os-disk-encryption-set` parameter. You can use this parameter to create a new VM that uses a customer-managed encryption key.
+**Key takeaway**
+When encrypting a VM disk with Azure Key Vault, `Get-AzKeyVault` uses `-VaultName` (not `-Name`), the vault URL comes from `.VaultUri`, the vault resource ID comes from `.ResourceId`, and `Set-AzVMDiskEncryptionExtension` requires the **VM's resource group**, not the key vault's resource group.
 
 **References**
 
-* [Quickstart: Create and encrypt a Linux VM with the Azure CLI](https://learn.microsoft.com/azure/virtual-machines/linux/disk-encryption-cli-quickstart)
-* [Create and configure a key vault for Azure Disk Encryption](https://learn.microsoft.com/azure/virtual-machines/linux/disk-encryption-key-vault#create-a-key-vault)
-* [az vm encryption (CLI reference)](https://learn.microsoft.com/cli/azure/vm/encryption?view=azure-cli-latest)
-* [az vm (CLI reference)](https://learn.microsoft.com/cli/azure/vm?view=azure-cli-latest)
+* [Get-AzKeyVault](https://learn.microsoft.com/en-us/powershell/module/az.keyvault/get-azkeyvault)
+* [Set-AzVMDiskEncryptionExtension](https://learn.microsoft.com/en-us/powershell/module/az.compute/set-azvmdiskencryptionextension)
+* [Azure Disk Encryption scenarios on Windows VMs](https://learn.microsoft.com/en-us/azure/virtual-machines/windows/disk-encryption-windows)
 
 </details>
+
+▶ Related Lab: [lab-vm-disk-encryption](../hands-on-labs/compute/lab-vm-disk-encryption/README.md)
 
 ---
 
@@ -3891,6 +3790,200 @@ You applied the right math to the wrong concept.
 
 ---
 
+#### Enable VM disk encryption
+
+**Domain:** Deploy and Manage Azure Compute Resources
+**Skill:** Create and configure virtual machines
+**Task:** Configure Azure Disk Encryption
+
+You have an Azure virtual machine (Azure VM) named `vm1` and running Ubuntu.
+
+You need to enable disk encryption for `vm1` and store the encryption keys in a new Azure Key Vault named `vmKeyVault1`. All resources must be provisioned in a resource group named `rg1`.
+
+How should you complete the command script? To answer, drag the appropriate command or parameter to the correct placeholder. Each command or parameter may be used once, more than once, or not at all.
+
+```bash
+az keyvault create  --name "vmKeyVault1" \
+  --resource-group "rg1" --location "eastus" \
+  ___[1]___
+
+az vm encryption enable \
+  --resource-group "rg1" --name "vm1" \
+  ___[2]___ "vmKeyVault1"
+```
+
+| Description | Answer |
+|-------------|--------|
+| Complete the `az keyvault create` command to create the Key Vault for disk encryption. | |
+| Complete the `az vm encryption enable` command to specify the key vault for disk encryption. | |
+
+Available options:
+
+- az vm encryption enable
+- az keyvault create
+- --enabled-for-disk-encryption
+- --disk-encryption-keyvault
+- --os-disk-encryption-set
+- az vm update
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-18-04-58-51.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**You should complete the commands as shown below:**
+
+```bash
+az keyvault create --name "vmKeyVault1" \
+  --resource-group "rg1" --location "eastus" \
+  --enabled-for-disk-encryption
+
+az vm encryption enable \
+  --resource-group "rg1" --name "vm1" \
+  --disk-encryption-keyvault "vmKeyVault1"
+```
+
+You should use the `az keyvault create` command with the `--enabled-for-disk-encryption` parameter. This command creates a new Key Vault ready to retrieve secrets from the vault and unwrap keys used by Disk Encryption.
+
+You should also use the `az vm encryption enable` command with the `--disk-encryption-keyvault "vmKeyVault1"` parameter. This command enables Disk Encryption on the existing `vm1` that uses `vmKeyVault1`.
+
+You should not use the `az vm update` command. You can use this command to update VM settings like disk caching, network adapters, or tags.
+
+You should not use the `--os-disk-encryption-set` parameter. You can use this parameter to create a new VM that uses a customer-managed encryption key.
+
+**References**
+
+* [Quickstart: Create and encrypt a Linux VM with the Azure CLI](https://learn.microsoft.com/azure/virtual-machines/linux/disk-encryption-cli-quickstart)
+* [Create and configure a key vault for Azure Disk Encryption](https://learn.microsoft.com/azure/virtual-machines/linux/disk-encryption-key-vault#create-a-key-vault)
+* [az vm encryption (CLI reference)](https://learn.microsoft.com/cli/azure/vm/encryption?view=azure-cli-latest)
+* [az vm (CLI reference)](https://learn.microsoft.com/cli/azure/vm?view=azure-cli-latest)
+
+</details>
+
+---
+
+#### Azure Spot VM Eviction Factors
+
+**Domain:** Deploy and Manage Azure Compute Resources
+**Skill:** Create and configure virtual machines
+**Task:** Create a virtual machine
+
+You plan to deploy an Azure virtual machine.
+
+You are evaluating whether to use an Azure Spot instance.
+
+Which two factors can cause an Azure Spot instance to be evicted? Each correct answer presents a complete solution.
+
+A. the average CPU usages of the instance  
+B. the Azure capacity needs  
+C. the current price of the instance  
+D. the time of day  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-25-19-29-28.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Why the selected answer is partially correct**
+
+`the Azure capacity needs` is a valid eviction trigger for Azure Spot VMs. Azure can evict a Spot VM when it needs capacity for pay-as-you-go workloads.
+
+**Why the other selected answer is incorrect**
+
+`the time of day` is not a direct eviction trigger. Time can correlate with demand changes, but Azure does not evict Spot VMs because of clock time itself.
+
+**Why the remaining correct option is correct**
+
+`the current price of the instance` can trigger eviction when Spot price rises above the maximum price you configured for the VM.
+
+**Why the remaining option is incorrect**
+
+`the average CPU usages of the instance` does not control Spot eviction. VM workload utilization does not determine eviction behavior.
+
+**Key takeaway**
+
+Azure Spot VM eviction is based on capacity availability and price thresholds, not instance CPU usage or time-of-day values.
+
+**References**
+
+* [Use Azure Spot Virtual Machines - Azure Virtual Machines | Microsoft Learn](https://learn.microsoft.com/azure/virtual-machines/spot-vms)
+* [Configure virtual machine availability - Training | Microsoft Learn](https://learn.microsoft.com/training/modules/configure-virtual-machine-availability/)
+
+</details>
+
+---
+
+#### VM Resize Failure Cause
+
+**Domain:** Deploy and Manage Azure Compute Resources
+**Skill:** Create and configure virtual machines
+**Task:** Manage virtual machine sizes
+
+You have a Linux virtual machine (VM) named VM1 that runs in Azure. VM1 has the following properties:
+
+- Size: Standard_D4s_v3
+- Number of virtual CPUs: four
+- Storage type: Premium
+- Number of data disks: eight
+- Public IP address: Standard SKU
+
+You attempt to resize the VM to the Standard_D2s_v3 size, but the resize operation fails.
+
+Which VM property is the most likely cause of the failure?
+
+A. Public IP address  
+B. Number of data disks  
+C. Storage type  
+D. Number of virtual CPUs  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-02-21-05-43-55.png' width=700>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Why the selected answer is correct (Number of data disks)**
+
+The Standard_D2s_v3 size supports a maximum of **4 data disks**. VM1 currently has **8 data disks** attached. When Azure attempts to resize the VM, it validates that the target size can accommodate all currently attached resources. Because 8 data disks exceeds the 4-disk limit of Standard_D2s_v3, the resize operation is blocked. This is the most likely cause of the failure.
+
+**Why the other options are incorrect**
+
+**Public IP address — Standard SKU**
+A Standard SKU public IP address is compatible with both Standard_D4s_v3 and Standard_D2s_v3. IP address SKU has no bearing on VM size compatibility and would not cause a resize failure.
+
+**Storage type — Premium**
+Both Standard_D4s_v3 and Standard_D2s_v3 support Premium storage (indicated by the "s" in the size name). Premium storage compatibility is not a constraint that would block this resize.
+
+**Number of virtual CPUs**
+Resizing from 4 vCPUs to 2 vCPUs is a valid downscale operation. Azure does not block a resize based on reducing vCPU count. The operating system and applications may be affected, but Azure will not prevent the operation for this reason alone.
+
+**Key takeaway**
+When resizing a VM, Azure validates that all currently attached resources (data disks, NICs, etc.) fall within the limits of the target size. If the number of attached data disks exceeds the maximum supported by the target VM size, the resize will fail. Always check the target size's data disk limit before attempting to resize down.
+
+**References**
+
+* [Sizes for virtual machines in Azure](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/overview?tabs=breakdownseries%2Cgeneralsizelist%2Ccomputesizelist%2Cmemorysizelist%2Cstoragesizelist%2Cgpusizelist%2Chpcsizelist)
+* [Introduction to Azure managed disks](https://learn.microsoft.com/en-us/azure/virtual-machines/managed-disks-overview)
+* [Public IP addresses](https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/public-ip-addresses)
+
+</details>
+
+---
+
 #### Apply Change to VMSS OS and Data Disk Profile
 
 **Domain:** Deploy and Manage Azure Compute Resources
@@ -3950,89 +4043,54 @@ For real-world scenarios, `Update-AzVmss` is the preferred cmdlet to update the 
 
 ---
 
-#### Encrypt VM Disk With Key Vault
+#### WebApp1 Availability Case
 
 **Domain:** Deploy and Manage Azure Compute Resources
 **Skill:** Create and configure virtual machines
-**Task:** Configure Azure Disk Encryption
+**Task:** Deploy VMs to availability zones and availability sets
 
-You have a subscription named SubscriptionA that hosts the following resources:
+*Case Study — Solution Evaluation*
 
-- A key vault named mySecureVault in a resource group named myKeyVaultResourceGroup.
-- A virtual machine (VM) named mySecureVM in a resource group named myVirtualMachineResourceGroup.
+This case study contains a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.
 
-You need to write a PowerShell script that will encrypt the disk for mySecureVM using the keys stored in the mySecureVault.
+You want to install an internet-facing web application named `WebApp1` on multiple Azure virtual machines (VMs). The VMs must run Windows Server 2019. Connections to `WebApp1` must be spread across all the VMs. The VMs must be located in separate datacenters in the same region. The Service Level Agreement (SLA) connectivity percentage must be the highest possible.
 
-How should you complete the script? To answer, select the appropriate options from the drop-down menus.
+Does this solution meet the goal?
 
-```powershell
-$keyVaultRG = 'myKeyVaultResourceGroup';
-$vmRG = 'myVirtualMachineResourceGroup';
-$vmName = 'mySecureVM';
-$keyVaultName = 'mySecureVault';
-
-$keyVault = Get-AzKeyVault [Select 1 ▼] $keyVaultName -ResourceGroupName $keyVaultRG;
-$diskEncryptionKeyVaultUrl = [Select 2 ▼];
-$keyVaultId = [Select 3 ▼];
-
-Set-AzVMDiskEncryptionExtension -ResourceGroupName [Select 4 ▼] `
-  -DiskEncryptionKeyVaultUrl $diskEncryptionKeyVaultUrl `  
-  -DiskEncryptionKeyVaultId $keyVaultId -VMName $vmName;
-```
-
-**Select 1 options:**  
-○ Name  
-○ VaultName  
-
-**Select 2 options:**  
-○ keyVault.Path  
-○ keyVault.Url  
-○ keyVault.VaultUri  
-
-**Select 3 options:**  
-○ keyVault.Id  
-○ keyVault.ResourceId  
-
-**Select 4 options:**  
-○ keyVaultRG  
-○ vmRG  
+| Solution | Yes | No |
+|----------|-----|----|
+| 1. You create three VMs, each in a different availability zone, and configure a standard load balancer. | ☐ | ☐ |
+| 2. You create three VMs in an availability set with three fault domains and configure a standard load balancer. | ☐ | ☐ |
+| 3. You create three VMs in the same virtual network, place each VM in a different availability zone, and use Azure Front Door to route traffic. | ☐ | ☐ |
+| 4. You create three VMs and place them all in availability zone 1, and create a zone-redundant load balancer. | ☐ | ☐ |
 
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-02-21-15-24-34.png' width=700>
+<img src='.img/2026-03-18-04-45-16.png' width=600>
 
 </details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
 
-**Why the correct answers are correct**
+**Solution 1 Explanation:** Deploying three VMs across three availability zones and placing them behind a Standard Load Balancer (configured for cross-zone backend pools) provides zonal isolation for the compute hosts and a zone-resilient frontend. This configuration enables the highest achievable single-region connectivity SLA for IaaS VMs because the VMs are in separate datacenters (zones) and the Standard Load Balancer supports zone-redundant frontend/backends.
 
-**Select 1 — VaultName**
-The `Get-AzKeyVault` cmdlet uses the `-VaultName` parameter to identify the key vault by name. There is no `-Name` parameter on this cmdlet. Using `-Name` would cause the command to fail entirely, so `-VaultName` is the only valid choice.
+**Solution 2 Explanation:** An availability set distributes VMs across fault domains within a single datacenter; it does not place VMs in separate datacenters (availability zones). Because the requirement is to locate VMs in separate datacenters in the same region, an availability set alone does not meet the goal.
 
-**Select 2 — keyVault.VaultUri**
-The `$diskEncryptionKeyVaultUrl` variable must hold the URI of the key vault. The correct property on the object returned by `Get-AzKeyVault` is `.VaultUri`. The `.Path` property does not exist on this object, and `.Url` is not a valid property either. VaultUri is the documented property that returns the vault endpoint URL required by `Set-AzVMDiskEncryptionExtension`.
+**Solution 3 Explanation:** Azure Front Door provides global HTTP/HTTPS routing and can improve global availability across regions, but it does not by itself place VMs into separate datacenters within a single region. Front Door is not a substitute for zonal VM placement and local zone-redundant load balancing when the requirement is highest single-region SLA based on separate datacenters.
 
-**Select 3 — keyVault.ResourceId**
-The `-DiskEncryptionKeyVaultId` parameter requires the Azure Resource Manager resource ID of the key vault. The correct property is `.ResourceId`. The `.Id` property is not a valid property on the key vault object returned by `Get-AzKeyVault`. ResourceId returns the full ARM resource identifier in the format `/subscriptions/.../resourceGroups/.../providers/Microsoft.KeyVault/vaults/...`.
-
-**Select 4 — vmRG**
-The `-ResourceGroupName` parameter on `Set-AzVMDiskEncryptionExtension` must reference the resource group where the **VM** resides, not where the key vault resides. The extension is applied to the VM, so Azure needs the VM's resource group to locate it. Using `$keyVaultRG` would point to the wrong resource group and the cmdlet would fail to find the VM.
-
-**Key takeaway**
-When encrypting a VM disk with Azure Key Vault, `Get-AzKeyVault` uses `-VaultName` (not `-Name`), the vault URL comes from `.VaultUri`, the vault resource ID comes from `.ResourceId`, and `Set-AzVMDiskEncryptionExtension` requires the **VM's resource group**, not the key vault's resource group.
+**Solution 4 Explanation:** Creating all VMs in the same availability zone (zone 1) defeats the purpose of a zone-redundant frontend. A zone-redundant load balancer cannot provide zone-level fault isolation if all backend VMs are located in the same zone; the VMs would still be impacted by a zone outage.
 
 **References**
 
-* [Get-AzKeyVault](https://learn.microsoft.com/en-us/powershell/module/az.keyvault/get-azkeyvault)
-* [Set-AzVMDiskEncryptionExtension](https://learn.microsoft.com/en-us/powershell/module/az.compute/set-azvmdiskencryptionextension)
-* [Azure Disk Encryption scenarios on Windows VMs](https://learn.microsoft.com/en-us/azure/virtual-machines/windows/disk-encryption-windows)
+* [What are availability zones?](https://learn.microsoft.com/azure/reliability/availability-zones-overview)
+* [Create virtual machines in an availability zone using the Azure portal](https://learn.microsoft.com/azure/virtual-machines/create-portal-availability-zone)
+* [Standard load balancer and availability zones](https://learn.microsoft.com/azure/load-balancer/load-balancer-standard-availability-zones)
+* [Tutorial: Load balance VMs within an availability zone by using the Azure portal](https://learn.microsoft.com/azure/load-balancer/tutorial-load-balancer-standard-public-zonal-portal)
+* [Service level agreements (SLAs) for online services](https://aka.ms/CSLA)
 
 </details>
-
-▶ Related Lab: [lab-vm-disk-encryption](../hands-on-labs/compute/lab-vm-disk-encryption/README.md)
 
 ---
 
@@ -4094,64 +4152,6 @@ To meet a 99.9% SLA for a SQL Server VM while minimizing cost, pick a VM size th
 
 * [Service level agreements (SLAs) for online services](https://aka.ms/CSLA)
 * [Sizes for virtual machines in Azure](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/overview?tabs=breakdownseries%2Cgeneralsizelist%2Ccomputesizelist%2Cmemorysizelist%2Cstoragesizelist%2Cgpusizelist%2Chpcsizelist)
-
-</details>
-
----
-
-#### Change VM Availability Set Assignment
-
-**Domain:** Deploy and Manage Azure Compute Resources
-**Skill:** Create and configure virtual machines
-**Task:** Deploy VMs to availability zones and availability sets
-
-You have a Microsoft Azure subscription named Sub1.
-
-You deploy a Windows Server 2016 virtual machine (VM) named `VM1` to Sub1.
-
-You need to change the availability set assignment for VM1.
-
-What should you do?
-
-A. Migrate VM1 to another Azure region.  
-B. Move VM1 to a different availability zone.  
-C. Assign VM1 to the new availability set.  
-D. Redeploy VM1 from a recovery point.  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-15-06-07-58.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Explanation**
-
-You should redeploy `VM1` from a recovery point. In Azure, you can assign a virtual machine (VM) to an availability set only during initial deployment. Therefore, to reassign the VM to another availability set, you would need to perform the following actions:
-
-1. **Make a backup of the current VM**
-2. **Delete the current VM**
-3. **Deploy a new VM based on the most recent restore point to the correct availability set**
-
-You should not move `VM1` to a different availability zone because availability zones are mutually exclusive from availability sets.
-
-You should not assign `VM1` to the new availability set because, as mentioned previously, this is not a supported action in the Azure service fabric.
-
-You should not migrate `VM1` to another Azure region because by definition members of the same availability set must reside in the same region.
-
-<img src='.img/2026-03-15-06-13-19.png' width=600>
-
-<img src='.img/2026-03-15-06-14-15.png' width=600>
-
-**References**
-
-* Change the availability set for a VM using Azure PowerShell
-* What are Azure regions and availability zones?
-* Availability options for Azure Virtual Machines
-* Move VMs to another Azure region
 
 </details>
 
@@ -4417,7 +4417,170 @@ You must run the `Update-AzVM` cmdlet on both `VM1` and `VM2` after moving `Data
 
 ---
 
+#### Change VM Availability Set Assignment
+
+**Domain:** Deploy and Manage Azure Compute Resources
+**Skill:** Create and configure virtual machines
+**Task:** Deploy VMs to availability zones and availability sets
+
+You have a Microsoft Azure subscription named Sub1.
+
+You deploy a Windows Server 2016 virtual machine (VM) named `VM1` to Sub1.
+
+You need to change the availability set assignment for VM1.
+
+What should you do?
+
+A. Migrate VM1 to another Azure region.  
+B. Move VM1 to a different availability zone.  
+C. Assign VM1 to the new availability set.  
+D. Redeploy VM1 from a recovery point.  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-15-06-07-58.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Explanation**
+
+You should redeploy `VM1` from a recovery point. In Azure, you can assign a virtual machine (VM) to an availability set only during initial deployment. Therefore, to reassign the VM to another availability set, you would need to perform the following actions:
+
+1. **Make a backup of the current VM**
+2. **Delete the current VM**
+3. **Deploy a new VM based on the most recent restore point to the correct availability set**
+
+You should not move `VM1` to a different availability zone because availability zones are mutually exclusive from availability sets.
+
+You should not assign `VM1` to the new availability set because, as mentioned previously, this is not a supported action in the Azure service fabric.
+
+You should not migrate `VM1` to another Azure region because by definition members of the same availability set must reside in the same region.
+
+<img src='.img/2026-03-15-06-13-19.png' width=600>
+
+<img src='.img/2026-03-15-06-14-15.png' width=600>
+
+**References**
+
+* Change the availability set for a VM using Azure PowerShell
+* What are Azure regions and availability zones?
+* Availability options for Azure Virtual Machines
+* Move VMs to another Azure region
+
+</details>
+
+---
+
 ### Provision and manage containers in the Azure portal
+
+#### Azure Container Registry roles for pulling images
+
+**Domain:** Deploy and Manage Azure Compute Resources
+**Skill:** Provision and manage containers in the Azure portal
+**Task:** Create and manage an Azure container registry
+
+Your organization is using Azure Container Registry for storing and managing container images and related artifacts for various DevOps projects. You are an Azure administrator in the organization. You have been tasked with setting up appropriate authentication methods with an Azure container registry.
+
+You assign a Microsoft Entra service principal to your registry.
+
+You need to identify which Azure container registry roles would allow pull of a non-quarantined image from the registry.
+
+Which three roles should you identify? Each correct answer presents part of the solution.
+
+A. AcrPush  
+B. AcrImageSigner  
+C. AcrPull  
+D. AcrDelete  
+E. Owner  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-15-05-21-54.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+There are several ways to authenticate with an Azure Container Registry. In this scenario, you use the Microsoft Entra service principal to authenticate applications and container orchestrators to an Azure container registry. Applications and container orchestrators can perform unattended, or "headless," authentication by using a Microsoft Entra service principal. Service principals allow Azure role-based access control (Azure RBAC) to a registry. There are three roles that can be assigned to a registry that would allow pull of a non-quarantined image from the registry:
+
+1. **AcrPull:** pull. The ability to docker pull a non-quarantined image, or pull another supported artifact such as a Helm chart, from a registry. It requires authentication with the registry using the authorized identity.
+
+2. **AcrPush:** pull and push. Push denotes the ability to docker push an image, or push another supported artifact such as a Helm chart, to a registry. It requires authentication with the registry using the authorized identity.
+
+3. **Owner:** pull, push, and assign roles to other users. An Owner role/permission can access resource manager, create or delete registry, push image, pull image, delete image data and change policies. The only action that an Owner role/permission cannot do is to sign images.
+
+You should not use the **AcrDelete** role. This role provides the ability to delete container images, or delete other supported artifacts such as Helm charts, from a registry.
+
+You should not use the **AcrImageSigner** role. This role provides the ability to sign images, usually assigned to an automated process, which would use a service principal.
+
+<img src='.img/2026-03-15-05-27-30.png' width=600>
+
+**References**
+
+* [Introduction to Container registries in Azure](https://learn.microsoft.com/azure/container-registry/)
+* [Authenticate with an Azure container registry](https://learn.microsoft.com/azure/container-registry/container-registry-authentication)
+* [Azure Container Registry authentication with service principals](https://learn.microsoft.com/azure/container-registry/container-registry-auth-service-principal)
+* [Azure Container Registry roles and permissions](https://learn.microsoft.com/azure/container-registry/container-registry-roles)
+
+</details>
+
+---
+
+#### Configure Persistent Storage for ACI
+
+**Domain:** Deploy and Manage Azure Compute Resources
+**Skill:** Provision and manage containers in the Azure portal
+**Task:** Provision a container by using Azure Container Instances
+
+You have an Azure subscription that contains an Azure Storage account named `vmstorageaccount1`.
+
+You create an Azure container instance named `container1`.
+
+You need to configure persistent storage for `container1`.
+
+What should you create in `vmstorageaccount1`?
+
+A. a blob container  
+B. a file share  
+C. a queue  
+D. a table  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-25-19-31-33.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Why the selected answer is correct**
+
+An Azure container instance can mount Azure Files as a volume for persistent data. Creating a file share in `vmstorageaccount1` provides file-based storage that `container1` can mount and use across container restarts.
+
+**Why other options are incorrect**
+
+`a blob container` stores object data and is not mounted by Azure Container Instances as a filesystem volume. `a queue` stores messages, and `a table` stores NoSQL entities, so neither provides the mounted persistent filesystem required by `container1`.
+
+**Key takeaway**
+
+For persistent storage in Azure Container Instances, create an Azure Files share in the storage account and mount it into the container.
+
+**References**
+
+* [Persistent Docker volumes with Azure File Storage | Azure Blog and Updates | Microsoft Azure](https://learn.microsoft.com/azure/container-instances/container-instances-volume-azure-files)
+* [Configure Azure Container Instances - Training | Microsoft Learn](https://learn.microsoft.com/training/modules/configure-azure-container-instances/)
+
+</details>
+
+---
 
 #### Configure Scaling Rules in Azure Container Apps
 
@@ -4500,62 +4663,207 @@ The JSON defines an Azure Service Bus scaler with a `messageCount` threshold and
 
 ---
 
-#### Azure Container Registry roles for pulling images
+### Create and configure Azure App Service
+
+#### Configure Azure App Service Plan for Website Hosting
 
 **Domain:** Deploy and Manage Azure Compute Resources
-**Skill:** Provision and manage containers in the Azure portal
-**Task:** Create and manage an Azure container registry
+**Skill:** Create and configure Azure App Service
+**Task:** Provision an App Service plan
 
-Your organization is using Azure Container Registry for storing and managing container images and related artifacts for various DevOps projects. You are an Azure administrator in the organization. You have been tasked with setting up appropriate authentication methods with an Azure container registry.
+You have to provide a website hosting environment that meets the following scalability and security requirements:
 
-You assign a Microsoft Entra service principal to your registry.
+* At peak loads, the web application should be able to scale up to 10 host instances.
+* The web application storage requirements are minimal and will not exceed 5 GB.
+* The web application will perform complex calculations and will require enhanced compute capabilities.
+* The virtual machines where the web applications are hosted should be dedicated to your company only.
 
-You need to identify which Azure container registry roles would allow pull of a non-quarantined image from the registry.
+You need to propose an Azure App Service to host the application. The solution must ensure minimal costs.
 
-Which three roles should you identify? Each correct answer presents part of the solution.
+Which Azure App Service plan should you use?
 
-A. AcrPush  
-B. AcrImageSigner  
-C. AcrPull  
-D. AcrDelete  
-E. Owner  
+A. Premium V3  
+B. Isolated  
+C. Standard  
+D. Shared  
 
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-03-15-05-21-54.png' width=600>
+<img src='.img/2026-01-30-05-38-46.png' width=700>
 
 </details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
 
-There are several ways to authenticate with an Azure Container Registry. In this scenario, you use the Microsoft Entra service principal to authenticate applications and container orchestrators to an Azure container registry. Applications and container orchestrators can perform unattended, or "headless," authentication by using a Microsoft Entra service principal. Service principals allow Azure role-based access control (Azure RBAC) to a registry. There are three roles that can be assigned to a registry that would allow pull of a non-quarantined image from the registry:
+**Why the selected answer is wrong (Isolated)**
+You chose **Isolated**, which corresponds to an App Service Environment (ASE). While this does meet the requirement that compute resources are **dedicated to your company**, it is **not a minimal-cost solution**. Isolated plans are designed for scenarios requiring **network isolation, private endpoints, and high compliance**, and they carry **significantly higher fixed costs** (ASE infrastructure + workers), regardless of scale.
+The question did **not** require VNet isolation, internal load balancing, or compliance-driven isolation—only dedicated compute.
 
-1. **AcrPull:** pull. The ability to docker pull a non-quarantined image, or pull another supported artifact such as a Helm chart, from a registry. It requires authentication with the registry using the authorized identity.
+This is a common exam trap: *“dedicated” does not automatically mean “Isolated/ASE.”*
 
-2. **AcrPush:** pull and push. Push denotes the ability to docker push an image, or push another supported artifact such as a Helm chart, to a registry. It requires authentication with the registry using the authorized identity.
+**Why the correct answer is right (Premium V3)**
+**Premium V3** satisfies **all stated requirements at lower cost**:
 
-3. **Owner:** pull, push, and assign roles to other users. An Owner role/permission can access resource manager, create or delete registry, push image, pull image, delete image data and change policies. The only action that an Owner role/permission cannot do is to sign images.
+* **Scales to 10 instances** → Supported by Premium tiers
+* **Minimal storage (< 5 GB)** → Storage is not a differentiator here
+* **Enhanced compute for complex calculations** → Premium V3 provides higher CPU/memory SKUs
+* **Dedicated VMs** → Premium (and Standard) plans run on **dedicated hosts**, not shared multi-tenant compute
+* **Minimal cost** → Premium V3 avoids the large fixed overhead of an App Service Environment
 
-You should not use the **AcrDelete** role. This role provides the ability to delete container images, or delete other supported artifacts such as Helm charts, from a registry.
+Premium V3 is specifically positioned as the **cost-effective choice for high-performance, dedicated App Service workloads** without the complexity of ASE.
 
-You should not use the **AcrImageSigner** role. This role provides the ability to sign images, usually assigned to an automated process, which would use a service principal.
-
-<img src='.img/2026-03-15-05-27-30.png' width=600>
+**Key takeaway**
+On Azure exams, **“dedicated to your company” means “not shared (Free/Shared)”**, not “App Service Environment.”
+Choose **Isolated (ASE)** only when **network isolation or compliance requirements are explicitly stated**. Otherwise, **Premium V3** is the correct balance of performance and cost.
 
 **References**
 
-* [Introduction to Container registries in Azure](https://learn.microsoft.com/azure/container-registry/)
-* [Authenticate with an Azure container registry](https://learn.microsoft.com/azure/container-registry/container-registry-authentication)
-* [Azure Container Registry authentication with service principals](https://learn.microsoft.com/azure/container-registry/container-registry-auth-service-principal)
-* [Azure Container Registry roles and permissions](https://learn.microsoft.com/azure/container-registry/container-registry-roles)
+* [https://learn.microsoft.com/azure/app-service/overview-hosting-plans](https://learn.microsoft.com/azure/app-service/overview-hosting-plans)
+* [https://learn.microsoft.com/azure/app-service/environment/overview](https://learn.microsoft.com/azure/app-service/environment/overview)
+* link removed
+
+**Why Standard is not the correct answer**
+
+Although **Standard** App Service plans do run on **dedicated VMs**, they fail to meet the **enhanced compute** requirement in the question.
+
+Key limitations of Standard in this scenario:
+
+* **Compute performance**: Standard tiers (S1–S3) offer significantly lower CPU and memory compared to Premium V3. They are intended for general-purpose workloads, not applications performing **complex calculations**.
+* **Exam wording matters**: The phrase *“will perform complex calculations and will require enhanced compute capabilities”* is a strong signal on Microsoft exams to choose **Premium**, not Standard.
+* **Scale headroom vs. suitability**: While Standard *can* scale to multiple instances, scaling more **underpowered instances** does not satisfy a requirement for **high-performance compute per instance**.
+
+This is another common exam trap: focusing only on instance count and missing the **compute class** requirement.
+
+**Why Premium V3 is still the best fit**
+
+Premium V3 provides:
+
+* Higher vCPU-to-memory ratios
+* Better performance per instance for CPU-intensive workloads
+* Faster scaling and more modern VM hardware
+* Dedicated compute without ASE-level cost overhead
+
+It is explicitly designed for **compute-heavy and performance-sensitive web applications**, which is exactly what the question describes.
+
+**Key takeaway**
+
+On Azure exams, when you see:
+
+* *complex calculations*
+* *enhanced compute*
+* *minimal cost but not cheapest*
+
+➡️ **Standard is too weak**, **Isolated is too expensive**, **Premium V3 is the correct balance**.
+
+<img src='.img/2026-02-03-03-22-57.png' width=700>
+
+**References**
+
+* [https://learn.microsoft.com/azure/app-service/overview-hosting-plans](https://learn.microsoft.com/azure/app-service/overview-hosting-plans)
+* link removed
+* [https://learn.microsoft.com/azure/app-service/environment/overview](https://learn.microsoft.com/azure/app-service/environment/overview)
+
+</details>
+
+▶ **Related Lab:** [lab-app-service-plan-tiers](../hands-on-labs/compute/lab-app-service-plan-tiers/README.md)
+
+---
+
+#### Resolve Azure App Service Pricing Tier for Runtime Requirements
+
+**Domain:** Deploy and Manage Azure Compute Resources
+**Skill:** Create and configure Azure App Service
+**Task:**
+
+- Provision an App Service plan
+- Configure scaling for an App Service plan
+
+You deploy an Azure web app named MyApp. MyApp runs in a Free pricing tier service plan named MyPlan. During testing, you discover that MyApp stops after 60 minutes and that it cannot be restarted until the next day.
+
+You need to ensure that MyApp can run eight hours each day during the testing period. You want to keep the additional costs incurred to a minimum.
+
+Does changing the pricing tier for MyPlan to Standard S1 meet the goal?
+
+A. Yes  
+B. No  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-01-30-06-18-07.png' width=700>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Correct answer: No**
+
+**Why the selected answer is incorrect**
+Changing the App Service plan from **Free (F1)** to **Standard S1** does remove the 60-minute daily execution limit, so the app can run for eight hours per day. However, the solution also explicitly requires keeping **additional costs to a minimum**. Standard S1 is **not the lowest-cost plan** that satisfies the runtime requirement, so the solution does not fully meet the goal.
+
+**Why the correct answer is correct**
+While Standard S1 technically works from a functionality standpoint, it fails the cost-minimization requirement. A **Basic (B1)** plan would also allow the app to run continuously beyond 60 minutes and is **cheaper than Standard S1**, making S1 an unnecessarily expensive choice for testing.
+
+**Why other options are less appropriate**
+
+* Staying on **Free (F1)** is not viable because of the enforced 60-minute daily limit and the inability to restart the app the same day.
+* Moving to **Standard S1** overprovisions features (such as scaling and advanced capabilities) that are not required for this scenario and increases cost unnecessarily.
+
+**Key takeaway**
+For App Service questions, always evaluate both **technical capability and cost efficiency**. If multiple plans meet the runtime requirement, the **lowest-cost qualifying tier** is the correct exam choice.
+
+**References**
+
+* [https://learn.microsoft.com/azure/app-service/overview-hosting-plans](https://learn.microsoft.com/azure/app-service/overview-hosting-plans)
+* link removed
+* [https://learn.microsoft.com/azure/app-service/operating-system-functionality#app-service-plan-tiers](https://learn.microsoft.com/azure/app-service/operating-system-functionality#app-service-plan-tiers)
+
+<img src='.img/2026-02-05-02-52-17.png' width=600>
+
+**What the ACU/vCPU column represents**
+
+The **ACU/vCPU** column indicates the **relative CPU performance available per virtual CPU** for that App Service plan.
+
+**ACU (Azure Compute Unit)**
+
+* ACU is a **normalized performance score**, not a physical measurement.
+* Microsoft uses it to compare CPU performance **across different underlying hardware generations**.
+* Higher ACU means **more compute power per vCPU**.
+
+**How to read the values**
+
+* **N/A (Free F1 / Shared D1)**
+  These tiers don't provide dedicated vCPUs. They run on shared infrastructure with enforced time quotas, so ACU isn't applicable.
+
+* **100 ACU**
+  Baseline compute performance. This is common for **Basic (B-series)** and **Standard (S-series)** plans and many legacy Premium plans.
+
+* **195 ACU / 210 ACU**
+  Indicates **newer, faster CPU hardware** (for example, Premium v3 or Premium v2).
+  Each vCPU delivers roughly **~2× the compute performance** of a 100 ACU vCPU.
+
+**What this means in practice (exam-relevant)**
+
+* ACU is about **CPU speed per vCPU**, not total compute.
+* Total compute = **ACU × number of vCPUs**.
+* Two plans with the same vCPU count but different ACU values will have **different performance**.
+* ACU does **not** change memory, storage, features, or scaling rules—only relative CPU power.
+
+**Common exam trap**
+
+* Assuming "1 vCPU = same performance everywhere."
+  This is incorrect. A **1-vCPU plan at 195 ACU** is significantly faster than **1 vCPU at 100 ACU**.
+
+**Key takeaway**
+
+ACU/vCPU is a **relative CPU performance indicator**. Higher numbers mean **faster CPUs per core**, typically reflecting newer App Service hardware generations.
 
 </details>
 
 ---
-
-### Create and configure Azure App Service
 
 #### App Service pricing tier for autoscale
 
@@ -4596,57 +4904,6 @@ You should not choose a Basic service plan. This option does not support autosca
 
 * [What are Azure App Service plans?](https://learn.microsoft.com/azure/app-service/overview-hosting-plans)
 * [App Service pricing](https://azure.microsoft.com/pricing/details/app-service/)
-
-</details>
-
----
-
-#### Resolve Azure App Service Pricing Tier for Runtime Requirements
-
-**Domain:** Deploy and Manage Azure Compute Resources
-**Skill:** Create and configure Azure App Service
-**Task:**
-
-- Provision an App Service plan
-- Configure scaling for an App Service plan
-
-You deploy an Azure web app named MyApp. MyApp runs in a Free pricing tier service plan named MyPlan. During testing, you discover that MyApp stops after 60 minutes and that it cannot be restarted until the next day.
-
-You need to ensure that MyApp can run eight hours each day during the testing period. You want to keep the additional costs incurred to a minimum.
-
-Does changing the pricing tier for MyPlan to Basic B1 meet the goal?
-
-A. Yes  
-B. No  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-01-30-06-17-46.png' width=700>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Why "Yes" is correct**
-Changing the App Service plan from **Free (F1)** to **Basic (B1)** removes the **Free/Shared quota enforcement** behavior. In Free/Shared tiers, Azure enforces CPU/Bandwidth quotas; when the app exceeds its quota (for example, CPU (Day)), the app is **stopped until the quota resets** (which matches "stops after 60 minutes" and "can't be restarted until the next day"). Scaling up to a dedicated tier (Basic) avoids those per-app CPU-minute/day quotas, allowing the app to run for the required **8 hours/day**.
-
-**Why "No" would be a trap**
-A common misconception is that "Free just means no SLA" or "it only affects performance." In reality, Free/Shared tiers have **hard quotas** that can stop the app for the rest of the day once exceeded.
-
-**Cost reasoning (exam perspective)**
-Basic **B1** is typically the lowest-cost **dedicated compute** App Service plan tier. Since the requirement is to run several hours daily, moving to the cheapest dedicated tier is the minimal-cost way to meet the runtime goal.
-
-**Key takeaway**
-Free/Shared App Service plans can stop apps when usage quotas are exceeded; moving to a dedicated tier like **Basic B1** eliminates that daily CPU-minute quota enforcement and meets the 8-hours/day requirement.
-
-<img src='.img/2026-02-05-04-17-27.png' width=800>
-
-**References**
-
-* [https://learn.microsoft.com/en-us/azure/app-service/web-sites-monitor](https://learn.microsoft.com/en-us/azure/app-service/web-sites-monitor)
-* [https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans](https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans)
 
 </details>
 
@@ -4997,93 +5254,6 @@ The cooldown **does not reset the 10-minute monitoring window**. Metrics continu
 
 ---
 
-#### Prepare Azure App Service for Web App Republication
-
-**Domain:** Deploy and Manage Azure Compute Resources
-**Skill:** Create and configure Azure App Service
-**Task:**
-
-- Create an App Service
-- Configure deployment slots for an App Service
-
-You are developing a new web app. The source code is located in an Azure DevOps Git repository. Before you move the web app into production, its functionality must be reviewed by your test users.
-
-You need to prepare the target environment to be ready to republish the web app.
-
-Which four commands should you run in sequence? To answer, move the appropriate commands from the list of possible commands to the answer area and arrange them in the correct order.
-
-Available options:
-
-* Publish-AzWebApp  
-* New-AzAppServicePlan  
-* New-AzResourceGroup  
-* New-AzWebAppSlot  
-* Start-AzWebAppSlot  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-01-30-06-12-43.png' width=700>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Why the selected answer is wrong**
-
-Your sequence prepares Azure infrastructure objects but **never deploys the application code** from the Azure DevOps Git repository.
-The exam question explicitly states that the target environment must be ready to **republish the web app** so test users can review functionality. That implies pushing code into an App Service (or slot), not just provisioning resources.
-
-Specific issues with your sequence:
-
-* **New-AzWebAppSlot** is unnecessary unless the question explicitly mentions deployment slots. Slots are optional, not required to republish.
-* **Start-AzWebAppSlot** is redundant in most exam scenarios. Newly created web apps and slots start automatically.
-* **Publish-AzWebApp** (or equivalent deployment command) is missing, which is the key step that actually deploys the application.
-* You created infrastructure only; no deployment occurred.
-
-This is a common exam trap: confusing *environment preparation* with *application deployment*.
-
-**Why the correct answer is right**
-
-The correct sequence includes the deployment step and follows the required dependency order:
-
-1. **New-AzResourceGroup**
-   A resource group must exist before any App Service resources can be created.
-
-2. **New-AzAppServicePlan**
-   An App Service Plan is required before creating a web app.
-
-3. **New-AzWebApp**
-   Creates the App Service that will host the application.
-
-4. **Publish-AzWebApp**
-   Deploys the application code so testers can access and validate functionality.
-
-This sequence ensures:
-
-* Infrastructure dependencies are respected.
-* The web app actually contains code to test.
-* The environment is truly “ready to republish,” per the wording of the question.
-
-**Key takeaway**
-
-On Azure exams, **“prepare the environment to republish” always includes deploying code**, not just creating resources.
-If a deployment-related command is available (like `Publish-AzWebApp`) and the scenario involves testers or validation, it is almost always required.
-
-**References**
-
-* [https://learn.microsoft.com/azure/app-service/overview](https://learn.microsoft.com/azure/app-service/overview)
-* [https://learn.microsoft.com/powershell/module/az.websites/new-azwebapp](https://learn.microsoft.com/powershell/module/az.websites/new-azwebapp)
-* [https://learn.microsoft.com/powershell/module/az.websites/publish-azwebapp](https://learn.microsoft.com/powershell/module/az.websites/publish-azwebapp)
-* [https://learn.microsoft.com/azure/app-service/deploy-local-git](https://learn.microsoft.com/azure/app-service/deploy-local-git)
-
-</details>
-
-▶ **Related Lab:** [lab-app-service-republication](../hands-on-labs/compute/lab-app-service-republication/README.md)
-
----
-
 #### Resolve Azure App Service Pricing Tier for Runtime Requirements
 
 **Domain:** Deploy and Manage Azure Compute Resources
@@ -5097,7 +5267,7 @@ You deploy an Azure web app named MyApp. MyApp runs in a Free pricing tier servi
 
 You need to ensure that MyApp can run eight hours each day during the testing period. You want to keep the additional costs incurred to a minimum.
 
-Does changing the pricing tier for MyPlan to Standard S1 meet the goal?
+Does changing the pricing tier for MyPlan to Basic B1 meet the goal?
 
 A. Yes  
 B. No  
@@ -5105,153 +5275,31 @@ B. No
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-01-30-06-18-07.png' width=700>
+<img src='.img/2026-01-30-06-17-46.png' width=700>
 
 </details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
 
-**Correct answer: No**
+**Why "Yes" is correct**
+Changing the App Service plan from **Free (F1)** to **Basic (B1)** removes the **Free/Shared quota enforcement** behavior. In Free/Shared tiers, Azure enforces CPU/Bandwidth quotas; when the app exceeds its quota (for example, CPU (Day)), the app is **stopped until the quota resets** (which matches "stops after 60 minutes" and "can't be restarted until the next day"). Scaling up to a dedicated tier (Basic) avoids those per-app CPU-minute/day quotas, allowing the app to run for the required **8 hours/day**.
 
-**Why the selected answer is incorrect**
-Changing the App Service plan from **Free (F1)** to **Standard S1** does remove the 60-minute daily execution limit, so the app can run for eight hours per day. However, the solution also explicitly requires keeping **additional costs to a minimum**. Standard S1 is **not the lowest-cost plan** that satisfies the runtime requirement, so the solution does not fully meet the goal.
+**Why "No" would be a trap**
+A common misconception is that "Free just means no SLA" or "it only affects performance." In reality, Free/Shared tiers have **hard quotas** that can stop the app for the rest of the day once exceeded.
 
-**Why the correct answer is correct**
-While Standard S1 technically works from a functionality standpoint, it fails the cost-minimization requirement. A **Basic (B1)** plan would also allow the app to run continuously beyond 60 minutes and is **cheaper than Standard S1**, making S1 an unnecessarily expensive choice for testing.
-
-**Why other options are less appropriate**
-
-* Staying on **Free (F1)** is not viable because of the enforced 60-minute daily limit and the inability to restart the app the same day.
-* Moving to **Standard S1** overprovisions features (such as scaling and advanced capabilities) that are not required for this scenario and increases cost unnecessarily.
+**Cost reasoning (exam perspective)**
+Basic **B1** is typically the lowest-cost **dedicated compute** App Service plan tier. Since the requirement is to run several hours daily, moving to the cheapest dedicated tier is the minimal-cost way to meet the runtime goal.
 
 **Key takeaway**
-For App Service questions, always evaluate both **technical capability and cost efficiency**. If multiple plans meet the runtime requirement, the **lowest-cost qualifying tier** is the correct exam choice.
+Free/Shared App Service plans can stop apps when usage quotas are exceeded; moving to a dedicated tier like **Basic B1** eliminates that daily CPU-minute quota enforcement and meets the 8-hours/day requirement.
+
+<img src='.img/2026-02-05-04-17-27.png' width=800>
 
 **References**
 
-* [https://learn.microsoft.com/azure/app-service/overview-hosting-plans](https://learn.microsoft.com/azure/app-service/overview-hosting-plans)
-* link removed
-* [https://learn.microsoft.com/azure/app-service/operating-system-functionality#app-service-plan-tiers](https://learn.microsoft.com/azure/app-service/operating-system-functionality#app-service-plan-tiers)
-
-<img src='.img/2026-02-05-02-52-17.png' width=600>
-
-**What the ACU/vCPU column represents**
-
-The **ACU/vCPU** column indicates the **relative CPU performance available per virtual CPU** for that App Service plan.
-
-**ACU (Azure Compute Unit)**
-
-* ACU is a **normalized performance score**, not a physical measurement.
-* Microsoft uses it to compare CPU performance **across different underlying hardware generations**.
-* Higher ACU means **more compute power per vCPU**.
-
-**How to read the values**
-
-* **N/A (Free F1 / Shared D1)**
-  These tiers don't provide dedicated vCPUs. They run on shared infrastructure with enforced time quotas, so ACU isn't applicable.
-
-* **100 ACU**
-  Baseline compute performance. This is common for **Basic (B-series)** and **Standard (S-series)** plans and many legacy Premium plans.
-
-* **195 ACU / 210 ACU**
-  Indicates **newer, faster CPU hardware** (for example, Premium v3 or Premium v2).
-  Each vCPU delivers roughly **~2× the compute performance** of a 100 ACU vCPU.
-
-**What this means in practice (exam-relevant)**
-
-* ACU is about **CPU speed per vCPU**, not total compute.
-* Total compute = **ACU × number of vCPUs**.
-* Two plans with the same vCPU count but different ACU values will have **different performance**.
-* ACU does **not** change memory, storage, features, or scaling rules—only relative CPU power.
-
-**Common exam trap**
-
-* Assuming "1 vCPU = same performance everywhere."
-  This is incorrect. A **1-vCPU plan at 195 ACU** is significantly faster than **1 vCPU at 100 ACU**.
-
-**Key takeaway**
-
-ACU/vCPU is a **relative CPU performance indicator**. Higher numbers mean **faster CPUs per core**, typically reflecting newer App Service hardware generations.
-
-</details>
-
----
-
-#### App Service Plan Selection
-
-**Domain:** Deploy and Manage Azure Compute Resources
-**Skill:** Create and configure Azure App Service
-**Task:** Provision an App Service plan
-
-You are building new web apps in Azure App Service.
-
-You should use the web apps, stacks, and the available App Service plans as shown in the exhibit.
-
-**Exhibit:**
-
-| Web App | Stack |
-|--------:|:-----|
-| App1 | Node.js 21.x |
-| App2 | ASP.NET 4.8 |
-| App3 | .NET 7 |
-| App4 | Python 3.9 |
-
-| App Service Plan | Platform |
-|---|---|
-| Plan1 | Windows |
-| Plan2 | Linux |
-
-You need to publish each web app in an App Service plan that supports its stack runtime.
-
-Which App Service plan can you use for each web app? To answer, select the appropriate options from the drop-down menus.
-
-| App | App Service plan |
-|-----|------------------|
-| App1 | ***[1]*** |
-| App2 | ***[2]*** |
-| App3 | ***[3]*** |
-| App4 | ***[4]*** |
-
-Drop-Down Options:
-
-| Blank | Options |
-|-------|---------|
-| `[1]` | Plan1 and Plan2 / Plan1 only / Plan2 only |
-| `[2]` | Plan1 and Plan2 / Plan1 only / Plan2 only |
-| `[3]` | Plan1 and Plan2 / Plan1 only / Plan2 only |
-| `[4]` | Plan1 and Plan2 / Plan1 only / Plan2 only |
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-17-03-52-58.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Solution Explanation:**
-
-You can use Plan1 and Plan2 for App1. Node.js runtime stack is supported by App Service plan platforms running on Windows and Linux OSes.
-
-You can only use Plan1 for App2. ASP.NET 4.8 runtime stack is supported by App Service plan platform running on Windows only.
-
-You can use Plan1 and Plan2 for App3. The .NET 7 runtime stack is supported by App Service plan platforms running on Windows and Linux OSes.
-
-You can only use Plan2 for App4. The Python runtime stack is supported by App Service plan platforms running on Linux only. Support for Windows has been officially retired.
-
-It is recommended that you monitor the App Service language runtime support policy page regularly for updates and the retiring process for end-of-life stacks supported by the App Service plans.
-
-<img src='.img/2026-03-17-04-07-15.png' width=600>
-
-**References**
-
-* [App Service overview](https://learn.microsoft.com/azure/app-service/overview)
-* [Language runtime support policy for Azure App Service](https://learn.microsoft.com/azure/app-service/language-support-policy#show-and-set-language-versions)
-* [Deploy a Node.js web app in Azure](https://learn.microsoft.com/azure/app-service/quickstart-nodejs#create-your-nodejs-application)
-* [Quickstart: Deploy an ASP.NET web app](https://learn.microsoft.com/azure/app-service/quickstart-dotnetcore)
+* [https://learn.microsoft.com/en-us/azure/app-service/web-sites-monitor](https://learn.microsoft.com/en-us/azure/app-service/web-sites-monitor)
+* [https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans](https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans)
 
 </details>
 
@@ -5531,6 +5579,85 @@ ApplySlotConfig = “run staging code with production settings before the swap.�
 
 ---
 
+#### App Service Plan Selection
+
+**Domain:** Deploy and Manage Azure Compute Resources
+**Skill:** Create and configure Azure App Service
+**Task:** Provision an App Service plan
+
+You are building new web apps in Azure App Service.
+
+You should use the web apps, stacks, and the available App Service plans as shown in the exhibit.
+
+**Exhibit:**
+
+| Web App | Stack |
+|--------:|:-----|
+| App1 | Node.js 21.x |
+| App2 | ASP.NET 4.8 |
+| App3 | .NET 7 |
+| App4 | Python 3.9 |
+
+| App Service Plan | Platform |
+|---|---|
+| Plan1 | Windows |
+| Plan2 | Linux |
+
+You need to publish each web app in an App Service plan that supports its stack runtime.
+
+Which App Service plan can you use for each web app? To answer, select the appropriate options from the drop-down menus.
+
+| App | App Service plan |
+|-----|------------------|
+| App1 | ***[1]*** |
+| App2 | ***[2]*** |
+| App3 | ***[3]*** |
+| App4 | ***[4]*** |
+
+Drop-Down Options:
+
+| Blank | Options |
+|-------|---------|
+| `[1]` | Plan1 and Plan2 / Plan1 only / Plan2 only |
+| `[2]` | Plan1 and Plan2 / Plan1 only / Plan2 only |
+| `[3]` | Plan1 and Plan2 / Plan1 only / Plan2 only |
+| `[4]` | Plan1 and Plan2 / Plan1 only / Plan2 only |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-17-03-52-58.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Solution Explanation:**
+
+You can use Plan1 and Plan2 for App1. Node.js runtime stack is supported by App Service plan platforms running on Windows and Linux OSes.
+
+You can only use Plan1 for App2. ASP.NET 4.8 runtime stack is supported by App Service plan platform running on Windows only.
+
+You can use Plan1 and Plan2 for App3. The .NET 7 runtime stack is supported by App Service plan platforms running on Windows and Linux OSes.
+
+You can only use Plan2 for App4. The Python runtime stack is supported by App Service plan platforms running on Linux only. Support for Windows has been officially retired.
+
+It is recommended that you monitor the App Service language runtime support policy page regularly for updates and the retiring process for end-of-life stacks supported by the App Service plans.
+
+<img src='.img/2026-03-17-04-07-15.png' width=600>
+
+**References**
+
+* [App Service overview](https://learn.microsoft.com/azure/app-service/overview)
+* [Language runtime support policy for Azure App Service](https://learn.microsoft.com/azure/app-service/language-support-policy#show-and-set-language-versions)
+* [Deploy a Node.js web app in Azure](https://learn.microsoft.com/azure/app-service/quickstart-nodejs#create-your-nodejs-application)
+* [Quickstart: Deploy an ASP.NET web app](https://learn.microsoft.com/azure/app-service/quickstart-dotnetcore)
+
+</details>
+
+---
+
 #### Azure App Service Backups
 
 **Domain:** Deploy and Manage Azure Compute Resources
@@ -5730,109 +5857,90 @@ You should not use the `clientAffinityEnabled` property for this requirement.  Y
 
 ---
 
-#### Configure Azure App Service Plan for Website Hosting
+#### Prepare Azure App Service for Web App Republication
 
 **Domain:** Deploy and Manage Azure Compute Resources
 **Skill:** Create and configure Azure App Service
-**Task:** Provision an App Service plan
+**Task:**
 
-You have to provide a website hosting environment that meets the following scalability and security requirements:
+- Create an App Service
+- Configure deployment slots for an App Service
 
-* At peak loads, the web application should be able to scale up to 10 host instances.
-* The web application storage requirements are minimal and will not exceed 5 GB.
-* The web application will perform complex calculations and will require enhanced compute capabilities.
-* The virtual machines where the web applications are hosted should be dedicated to your company only.
+You are developing a new web app. The source code is located in an Azure DevOps Git repository. Before you move the web app into production, its functionality must be reviewed by your test users.
 
-You need to propose an Azure App Service to host the application. The solution must ensure minimal costs.
+You need to prepare the target environment to be ready to republish the web app.
 
-Which Azure App Service plan should you use?
+Which four commands should you run in sequence? To answer, move the appropriate commands from the list of possible commands to the answer area and arrange them in the correct order.
 
-A. Premium V3  
-B. Isolated  
-C. Standard  
-D. Shared  
+Available options:
+
+* Publish-AzWebApp  
+* New-AzAppServicePlan  
+* New-AzResourceGroup  
+* New-AzWebAppSlot  
+* Start-AzWebAppSlot  
 
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-01-30-05-38-46.png' width=700>
+<img src='.img/2026-01-30-06-12-43.png' width=700>
 
 </details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
 
-**Why the selected answer is wrong (Isolated)**
-You chose **Isolated**, which corresponds to an App Service Environment (ASE). While this does meet the requirement that compute resources are **dedicated to your company**, it is **not a minimal-cost solution**. Isolated plans are designed for scenarios requiring **network isolation, private endpoints, and high compliance**, and they carry **significantly higher fixed costs** (ASE infrastructure + workers), regardless of scale.
-The question did **not** require VNet isolation, internal load balancing, or compliance-driven isolation—only dedicated compute.
+**Why the selected answer is wrong**
 
-This is a common exam trap: *“dedicated” does not automatically mean “Isolated/ASE.”*
+Your sequence prepares Azure infrastructure objects but **never deploys the application code** from the Azure DevOps Git repository.
+The exam question explicitly states that the target environment must be ready to **republish the web app** so test users can review functionality. That implies pushing code into an App Service (or slot), not just provisioning resources.
 
-**Why the correct answer is right (Premium V3)**
-**Premium V3** satisfies **all stated requirements at lower cost**:
+Specific issues with your sequence:
 
-* **Scales to 10 instances** → Supported by Premium tiers
-* **Minimal storage (< 5 GB)** → Storage is not a differentiator here
-* **Enhanced compute for complex calculations** → Premium V3 provides higher CPU/memory SKUs
-* **Dedicated VMs** → Premium (and Standard) plans run on **dedicated hosts**, not shared multi-tenant compute
-* **Minimal cost** → Premium V3 avoids the large fixed overhead of an App Service Environment
+* **New-AzWebAppSlot** is unnecessary unless the question explicitly mentions deployment slots. Slots are optional, not required to republish.
+* **Start-AzWebAppSlot** is redundant in most exam scenarios. Newly created web apps and slots start automatically.
+* **Publish-AzWebApp** (or equivalent deployment command) is missing, which is the key step that actually deploys the application.
+* You created infrastructure only; no deployment occurred.
 
-Premium V3 is specifically positioned as the **cost-effective choice for high-performance, dedicated App Service workloads** without the complexity of ASE.
+This is a common exam trap: confusing *environment preparation* with *application deployment*.
 
-**Key takeaway**
-On Azure exams, **“dedicated to your company” means “not shared (Free/Shared)”**, not “App Service Environment.”
-Choose **Isolated (ASE)** only when **network isolation or compliance requirements are explicitly stated**. Otherwise, **Premium V3** is the correct balance of performance and cost.
+**Why the correct answer is right**
 
-**References**
+The correct sequence includes the deployment step and follows the required dependency order:
 
-* [https://learn.microsoft.com/azure/app-service/overview-hosting-plans](https://learn.microsoft.com/azure/app-service/overview-hosting-plans)
-* [https://learn.microsoft.com/azure/app-service/environment/overview](https://learn.microsoft.com/azure/app-service/environment/overview)
-* link removed
+1. **New-AzResourceGroup**
+   A resource group must exist before any App Service resources can be created.
 
-**Why Standard is not the correct answer**
+2. **New-AzAppServicePlan**
+   An App Service Plan is required before creating a web app.
 
-Although **Standard** App Service plans do run on **dedicated VMs**, they fail to meet the **enhanced compute** requirement in the question.
+3. **New-AzWebApp**
+   Creates the App Service that will host the application.
 
-Key limitations of Standard in this scenario:
+4. **Publish-AzWebApp**
+   Deploys the application code so testers can access and validate functionality.
 
-* **Compute performance**: Standard tiers (S1–S3) offer significantly lower CPU and memory compared to Premium V3. They are intended for general-purpose workloads, not applications performing **complex calculations**.
-* **Exam wording matters**: The phrase *“will perform complex calculations and will require enhanced compute capabilities”* is a strong signal on Microsoft exams to choose **Premium**, not Standard.
-* **Scale headroom vs. suitability**: While Standard *can* scale to multiple instances, scaling more **underpowered instances** does not satisfy a requirement for **high-performance compute per instance**.
+This sequence ensures:
 
-This is another common exam trap: focusing only on instance count and missing the **compute class** requirement.
-
-**Why Premium V3 is still the best fit**
-
-Premium V3 provides:
-
-* Higher vCPU-to-memory ratios
-* Better performance per instance for CPU-intensive workloads
-* Faster scaling and more modern VM hardware
-* Dedicated compute without ASE-level cost overhead
-
-It is explicitly designed for **compute-heavy and performance-sensitive web applications**, which is exactly what the question describes.
+* Infrastructure dependencies are respected.
+* The web app actually contains code to test.
+* The environment is truly “ready to republish,” per the wording of the question.
 
 **Key takeaway**
 
-On Azure exams, when you see:
-
-* *complex calculations*
-* *enhanced compute*
-* *minimal cost but not cheapest*
-
-➡️ **Standard is too weak**, **Isolated is too expensive**, **Premium V3 is the correct balance**.
-
-<img src='.img/2026-02-03-03-22-57.png' width=700>
+On Azure exams, **“prepare the environment to republish” always includes deploying code**, not just creating resources.
+If a deployment-related command is available (like `Publish-AzWebApp`) and the scenario involves testers or validation, it is almost always required.
 
 **References**
 
-* [https://learn.microsoft.com/azure/app-service/overview-hosting-plans](https://learn.microsoft.com/azure/app-service/overview-hosting-plans)
-* link removed
-* [https://learn.microsoft.com/azure/app-service/environment/overview](https://learn.microsoft.com/azure/app-service/environment/overview)
+* [https://learn.microsoft.com/azure/app-service/overview](https://learn.microsoft.com/azure/app-service/overview)
+* [https://learn.microsoft.com/powershell/module/az.websites/new-azwebapp](https://learn.microsoft.com/powershell/module/az.websites/new-azwebapp)
+* [https://learn.microsoft.com/powershell/module/az.websites/publish-azwebapp](https://learn.microsoft.com/powershell/module/az.websites/publish-azwebapp)
+* [https://learn.microsoft.com/azure/app-service/deploy-local-git](https://learn.microsoft.com/azure/app-service/deploy-local-git)
 
 </details>
 
-▶ **Related Lab:** [lab-app-service-plan-tiers](../hands-on-labs/compute/lab-app-service-plan-tiers/README.md)
+▶ **Related Lab:** [lab-app-service-republication](../hands-on-labs/compute/lab-app-service-republication/README.md)
 
 ---
 
@@ -6641,53 +6749,6 @@ Disabling privateLinkServiceNetworkPolicies is a per‑private‑IP (per Private
 
 ---
 
-#### NSG Rule Processing Order
-
-**Domain:** Implement and Manage Virtual Networking
-**Skill:** Configure secure access to virtual networks
-**Task:** Evaluate effective security rules in NSGs
-
-Your company has an Azure subscription with one virtual network (VNet) named `VNet1`. `VNet1` includes the subnets and virtual machines (VMs) shown in the Subnets section of the exhibit. You create and associate the network security groups (NSGs) shown in the Security Groups section of the exhibit.
-
-You need to determine how the security rules in the NSGs are processed.
-
-For each of the following statements, select Yes if the statement is true. Otherwise, select No.
-
-| Statement | Yes | No |
-|----------|-----|----|
-| For incoming traffic to `VM1`, `NSG1` applies before `NSG2`. | ☐ | ☐ |
-| For traffic between `VM1` and `VM2`, only `NSG2` applies. | ☐ | ☐ |
-| For traffic between `VM6` and `VM7`, `NSG3` applies. | ☐ | ☐ |
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-25-05-42-32.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-For incoming traffic to `VM1`, `NSG1` applies before `NSG2`. Incoming traffic rules in `NSG1` are processed before the incoming traffic rules for `NSG2` because `NSG1` is associated at the subnet level. For inbound traffic, the rules are processed in the network security group (NSG) associated with the subnet first, and then the rules in an NSG associated with the network interface. For outgoing traffic, the rules in NSGs associated with the virtual machine (VM) network interface are processed before the NSGs associated in the subnet level.
-
-For traffic between `VM1` and `VM2`, both `NSG1` and `NSG2` apply. `NSG2` applies for any traffic into or out of `VM1`. `NSG1` applies for any traffic between the VMs in `Subnet1`.
-
-For traffic between `VM6` and `VM7`, `NSG3` applies. NSG rules apply for traffic into or out of a subnet and between VMs in a subnet.
-
-You can define both inbound and outbound rules for NSGs.
-
-**References**
-
-* [How network security groups filter network traffic](https://learn.microsoft.com/azure/virtual-network/network-security-group-how-it-works)
-* [Create, change, or delete a network security group](https://learn.microsoft.com/azure/virtual-network/manage-network-security-group)
-* [Create, change, or delete a network interface](https://learn.microsoft.com/azure/virtual-network/virtual-network-network-interface)
-* [Azure network security groups overview](https://learn.microsoft.com/azure/virtual-network/network-security-groups-overview)
-
-</details>
-
----
-
 #### Design NSG to Block RDP from Internet
 
 **Domain:** Implement and Manage Virtual Networking
@@ -6743,6 +6804,53 @@ You should not use TCP `5985` in your NSG rule because `5985` is the default por
 * [Tutorial: Filter network traffic with a network security group](https://learn.microsoft.com/azure/virtual-network/tutorial-filter-network-traffic)
 * [Installation and configuration for Windows Remote Management](https://learn.microsoft.com/windows/win32/winrm/installation-and-configuration-for-windows-remote-management)
 * [Troubleshoot Remote Desktop connections to an Azure virtual machine](https://learn.microsoft.com/troubleshoot/azure/virtual-machines/windows/troubleshoot-rdp-connection)
+
+</details>
+
+---
+
+#### NSG Rule Processing Order
+
+**Domain:** Implement and Manage Virtual Networking
+**Skill:** Configure secure access to virtual networks
+**Task:** Evaluate effective security rules in NSGs
+
+Your company has an Azure subscription with one virtual network (VNet) named `VNet1`. `VNet1` includes the subnets and virtual machines (VMs) shown in the Subnets section of the exhibit. You create and associate the network security groups (NSGs) shown in the Security Groups section of the exhibit.
+
+You need to determine how the security rules in the NSGs are processed.
+
+For each of the following statements, select Yes if the statement is true. Otherwise, select No.
+
+| Statement | Yes | No |
+|----------|-----|----|
+| For incoming traffic to `VM1`, `NSG1` applies before `NSG2`. | ☐ | ☐ |
+| For traffic between `VM1` and `VM2`, only `NSG2` applies. | ☐ | ☐ |
+| For traffic between `VM6` and `VM7`, `NSG3` applies. | ☐ | ☐ |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-25-05-42-32.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+For incoming traffic to `VM1`, `NSG1` applies before `NSG2`. Incoming traffic rules in `NSG1` are processed before the incoming traffic rules for `NSG2` because `NSG1` is associated at the subnet level. For inbound traffic, the rules are processed in the network security group (NSG) associated with the subnet first, and then the rules in an NSG associated with the network interface. For outgoing traffic, the rules in NSGs associated with the virtual machine (VM) network interface are processed before the NSGs associated in the subnet level.
+
+For traffic between `VM1` and `VM2`, both `NSG1` and `NSG2` apply. `NSG2` applies for any traffic into or out of `VM1`. `NSG1` applies for any traffic between the VMs in `Subnet1`.
+
+For traffic between `VM6` and `VM7`, `NSG3` applies. NSG rules apply for traffic into or out of a subnet and between VMs in a subnet.
+
+You can define both inbound and outbound rules for NSGs.
+
+**References**
+
+* [How network security groups filter network traffic](https://learn.microsoft.com/azure/virtual-network/network-security-group-how-it-works)
+* [Create, change, or delete a network security group](https://learn.microsoft.com/azure/virtual-network/manage-network-security-group)
+* [Create, change, or delete a network interface](https://learn.microsoft.com/azure/virtual-network/virtual-network-network-interface)
+* [Azure network security groups overview](https://learn.microsoft.com/azure/virtual-network/network-security-groups-overview)
 
 </details>
 
@@ -6835,119 +6943,6 @@ Azure **Internal Load Balancer does not support backend VMs accessing the ILB fr
 </details>
 
 ▶ **Related Lab:** [lab-ilb-backend-access](../hands-on-labs/networking/lab-ilb-backend-access/README.md)
-
----
-
-#### Azure DNS Alias Record Type
-
-**Domain:** Implement and Manage Virtual Networking
-**Skill:** Configure name resolution and load balancing
-**Task:** Configure Azure DNS
-
-You configure the `companycs.com` zone in Azure DNS. You have an A record set named `app` that points to an App Service that hosts a web application.
-
-You need to make this application available by using the `webapp.companycs.com` domain name. This new domain name needs to point to the public IP address of the App Service.
-
-You need to ensure that the Domain Name System (DNS) record for this new domain name is updated or deleted automatically in case the `app.companycs.com` DNS record is modified or deleted.
-
-Which type of record set should you create?
-
-A. A CNAME alias record set  
-B. A CNAME record set  
-C. An A alias record set  
-D. An A record set  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-16-05-20-31.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Explanation**
-
-You should create an address-mapping (A) alias record set. An A alias record set is a special type of record set that allows you to create an alternative name for a record set in your domain zone or for resources in your subscription. This is different from a canonical name (CNAME) record type because the alias record set will be updated or deleted in case the target resource is modified or deleted. You can only create an A alias record set that points to an A, AAAA (IPv6 address), or CNAME record types in an Azure DNS zone.
-
-You should not use a CNAME alias record set. The custom domain name for your web application is represented by an A record set. A CNAME alias record set can only point to another CNAME record set. Moreover, the value returned by a CNAME alias record set is a domain name. You are required to create a Domain Name System (DNS) record that returns an IPv4 address. This means that you need an A alias record set.
-
-You should not use an A record set. This record set type will not be automatically updated or deleted if the `app.companycs.com` record is modified or deleted.
-
-You should not use a CNAME record set. This record set type will not be automatically updated or modified if the `app.companycs.com` record is modified or deleted. You are also required to create a DNS record that returns an IPv4 address. This means that you need an A alias record set.
-
-<img src='.img/2026-03-16-05-22-14.png' width=600>
-
-**References**
-
-* [Azure DNS alias records overview](https://learn.microsoft.com/azure/dns/dns-alias)
-
-</details>
-
----
-
-#### Configure DNS Records for App Service
-
-**Domain:** Implement and Manage Virtual Networking
-**Skill:** Configure name resolution and load balancing
-**Task:** Configure Azure DNS
-
-Your company plans to release a new web application called 'appilcations'. This application is deployed by using an App Service in Azure and will be available to users of the company1.com domain. You have already purchased the company1.com domain name.
-
-You configure the company1.com Azure DNS zone and delegate it to Azure DNS.
-
-You need to ensure that web application can be accessed by using the company1.com domain name.
-
-You decide to use PowerShell to accomplish this task.
-
-How should you complete the command? To answer, select the appropriate options from the drop-down menus.
-
-```powershell
-New-AzDnsRecordSet -Name ___[1]___ -RecordType ___[2]___ `
-  -ZoneName "company1.com" -ResourceGroupName "APP-RG" -Ttl 600 `
-  -DnsRecords (New-AzDnsRecordConfig `
-  -IPv4Address "<IP address>")
-
-New-AzDnsRecordSet -ZoneName company1.com -ResourceGroupName APP-RG `
-  -Name ___[3]___ -RecordType ___[4]___ -Ttl 600 `
-  -DnsRecords (New-AzDnsRecordConfig -Value "appilcations.azurewebsites.net")
-```
-
-Drop-Down Options:
-
-<!-- Dropdown options not yet provided. Paste screenshots of each expanded drop-down to populate. -->
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-03-03-06-02.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-**Why the selected answers are correct**  
-Create an A record named "@" with RecordType "A" to map the root of company1.com to the App Service's IPv4 address. Create a TXT record named "@" with RecordType "TXT" and value "appilcations.azurewebsites.net" so App Service can verify domain ownership and configure the custom domain settings.
-
-**Why other options are incorrect**  
-
-- CNAME/CNAME-like approaches are wrong for the root (@"") because a CNAME cannot coexist with other records at the zone apex and cannot point to an IPv4 address.  
-- AAAA is for IPv6 addresses; the App Service verification here requires an IPv4 A record.  
-- Using literal names like "company1.com", "www.company1.com", or "appilcations.azurewebsites.net" as the Name value would either be redundant, create the wrong record target, or prevent apex records from working as intended.
-
-**Key takeaway**  
-Use an A record (Name "@", RecordType "A") for the IPv4 mapping of the root domain and a TXT record (Name "@", RecordType "TXT") for App Service domain verification; avoid CNAME at the zone apex and do not use AAAA unless you have an IPv6 IP.
-
-<img src='.img/2026-03-03-03-19-52.png' width=600>
-
-<img src='.img/2026-03-03-03-20-54.png' width=600>
-
-References
-
-* [DNS Web Sites Custom Domain](https://learn.microsoft.com/en-us/azure/dns/dns-web-sites-custom-domain?tabs=azure-portal)
-
-</details>
 
 ---
 
@@ -7062,92 +7057,114 @@ The key takeaway for exams:
 
 ---
 
-#### Configure Internal Load Balancer
+#### Configure DNS Records for App Service
 
 **Domain:** Implement and Manage Virtual Networking
 **Skill:** Configure name resolution and load balancing
-**Task:** Configure an internal or public load balancer
+**Task:** Configure Azure DNS
 
-You are planning to deploy a line-of-business (LOB) application in Azure. This LOB application needs to be distributed in three different layers: one for the frontend, one for the backend, and the last layer for data persistence. To ensure the high availability of each layer, you deploy two virtual machines (VMs) per layer with an availability set. You also plan to configure an internal load balancer for the backend and persistence layers.
+Your company plans to release a new web application called 'appilcations'. This application is deployed by using an App Service in Azure and will be available to users of the company1.com domain. You have already purchased the company1.com domain name.
 
-The LOB application must have the following minimum required services running on each layer:
+You configure the company1.com Azure DNS zone and delegate it to Azure DNS.
 
-- Frontend layer: Internet Information Services (IIS) listening on Transmission Control Protocol (TCP) port 80, and an internal health endpoint on TCP port 80.
-- Backend layer: IIS listening on TCP port 443, and an internal health endpoint on TCP port 80.
-- Persistence layer: A SQL Server listening on TCP port 1433.
+You need to ensure that web application can be accessed by using the company1.com domain name.
 
-You are configuring the VMs for the backend layer.
+You decide to use PowerShell to accomplish this task.
 
-You need to configure an internal load balancer for the backend layer. You need to ensure that your solution is resilient to hardware and software failures. Your solution needs to be cost effective.
+How should you complete the command? To answer, select the appropriate options from the drop-down menus.
 
-Which four actions should you perform? To answer, move the appropriate actions from the list of possible actions to the answer area and arrange them in any order.
+```powershell
+New-AzDnsRecordSet -Name ___[1]___ -RecordType ___[2]___ `
+  -ZoneName "company1.com" -ResourceGroupName "APP-RG" -Ttl 600 `
+  -DnsRecords (New-AzDnsRecordConfig `
+  -IPv4Address "<IP address>")
 
-A. Create a backend pool using the availability set.  
-B. Create a load balancing rule using port 443.  
-C. Create a load balancing rule using port 80.  
-D. Create a Standard Load Balancer.  
-E. Create an HTTP health probe using port 80.  
-F. Create a Basic Load Balancer.  
-G. Create a backend pool using the VMs.  
+New-AzDnsRecordSet -ZoneName company1.com -ResourceGroupName APP-RG `
+  -Name ___[3]___ -RecordType ___[4]___ -Ttl 600 `
+  -DnsRecords (New-AzDnsRecordConfig -Value "appilcations.azurewebsites.net")
+```
 
-Select and order 4:
+Drop-Down Options:
 
-| Step | Action |
-|------|--------|
-| 1 | |
-| 2 | |
-| 3 | |
-| 4 | |
+<!-- Dropdown options not yet provided. Paste screenshots of each expanded drop-down to populate. -->
 
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-03-20-04-43-23.png' width=600>
+<img src='.img/2026-03-03-03-06-02.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+**Why the selected answers are correct**  
+Create an A record named "@" with RecordType "A" to map the root of company1.com to the App Service's IPv4 address. Create a TXT record named "@" with RecordType "TXT" and value "appilcations.azurewebsites.net" so App Service can verify domain ownership and configure the custom domain settings.
+
+**Why other options are incorrect**  
+
+- CNAME/CNAME-like approaches are wrong for the root (@"") because a CNAME cannot coexist with other records at the zone apex and cannot point to an IPv4 address.  
+- AAAA is for IPv6 addresses; the App Service verification here requires an IPv4 A record.  
+- Using literal names like "company1.com", "www.company1.com", or "appilcations.azurewebsites.net" as the Name value would either be redundant, create the wrong record target, or prevent apex records from working as intended.
+
+**Key takeaway**  
+Use an A record (Name "@", RecordType "A") for the IPv4 mapping of the root domain and a TXT record (Name "@", RecordType "TXT") for App Service domain verification; avoid CNAME at the zone apex and do not use AAAA unless you have an IPv6 IP.
+
+<img src='.img/2026-03-03-03-19-52.png' width=600>
+
+<img src='.img/2026-03-03-03-20-54.png' width=600>
+
+References
+
+* [DNS Web Sites Custom Domain](https://learn.microsoft.com/en-us/azure/dns/dns-web-sites-custom-domain?tabs=azure-portal)
+
+</details>
+
+---
+
+#### Azure DNS Alias Record Type
+
+**Domain:** Implement and Manage Virtual Networking
+**Skill:** Configure name resolution and load balancing
+**Task:** Configure Azure DNS
+
+You configure the `companycs.com` zone in Azure DNS. You have an A record set named `app` that points to an App Service that hosts a web application.
+
+You need to make this application available by using the `webapp.companycs.com` domain name. This new domain name needs to point to the public IP address of the App Service.
+
+You need to ensure that the Domain Name System (DNS) record for this new domain name is updated or deleted automatically in case the `app.companycs.com` DNS record is modified or deleted.
+
+Which type of record set should you create?
+
+A. A CNAME alias record set  
+B. A CNAME record set  
+C. An A alias record set  
+D. An A record set  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-16-05-20-31.png' width=600>
 
 </details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
 
-**Why the selected answer is correct**
+**Explanation**
 
-- The scenario requires an internal, highly available backend with an internal health endpoint on TCP 80 and application traffic on TCP 443. The `Standard Load Balancer` SKU supports internal load balancing and the advanced health-probe and availability features needed for resilience.  
-- Using a `backend pool` that references an `availability set` ensures VMs are spread across fault/power domains so hardware or power failures don't take the entire backend offline.  
-- An `HTTP health probe` on `port 80` targets the internal health endpoint and allows the load balancer to detect and remove unhealthy nodes.  
-- A `load balancing rule` on `port 443` routes client TLS requests to the backend pool while the health probe remains on `port 80`.
+You should create an address-mapping (A) alias record set. An A alias record set is a special type of record set that allows you to create an alternative name for a record set in your domain zone or for resources in your subscription. This is different from a canonical name (CNAME) record type because the alias record set will be updated or deleted in case the target resource is modified or deleted. You can only create an A alias record set that points to an A, AAAA (IPv6 address), or CNAME record types in an Azure DNS zone.
 
-**Why the selected answer is incorrect**
+You should not use a CNAME alias record set. The custom domain name for your web application is represented by an A record set. A CNAME alias record set can only point to another CNAME record set. Moreover, the value returned by a CNAME alias record set is a domain name. You are required to create a Domain Name System (DNS) record that returns an IPv4 address. This means that you need an A alias record set.
 
-- Creating a backend pool using the VMs directly (without an `availability set`) does not provide the required protection against datacenter hardware or power failures; it leaves the service vulnerable to single-host failures.  
-- The `Basic Load Balancer` SKU does not support the required internal/high-availability/health-probe behavior for this scenario.  
-- Creating a load balancing rule on `port 80` would forward the wrong traffic: the application expects client traffic on `port 443` while only the health endpoint is on `port 80`.
+You should not use an A record set. This record set type will not be automatically updated or deleted if the `app.companycs.com` record is modified or deleted.
 
-**Key takeaway**
+You should not use a CNAME record set. This record set type will not be automatically updated or modified if the `app.companycs.com` record is modified or deleted. You are also required to create a DNS record that returns an IPv4 address. This means that you need an A alias record set.
 
-- For internal HA backends: use `Standard Load Balancer`, put VMs in a `backend pool` tied to an `availability set`, use an `HTTP health probe` on the service's health port (`port 80`), and create the load-balancing rule for the client-facing application port (`port 443`).
-
-<details>
-<summary>📝 More Detail</summary>
-
-You’re not finding that exact phrasing in Microsoft documentation because it isn’t a literal Azure configuration step. “Create a backend pool using the availability set” is an exam-oriented abstraction based on how Basic Load Balancer behaves, not an actual portal or API option.
-
-In the documentation, the distinction is described differently. For Basic Load Balancer, backend pool endpoints must be virtual machines that belong to the same availability set or virtual machine scale set. You don’t explicitly select an availability set when creating the backend pool; instead, when you add VMs, they must already be part of the same availability set. This creates an implicit relationship where the backend pool is effectively scoped to that availability set.
-
-For Standard Load Balancer, backend pools are not tied to availability sets at all. You can associate backend members using NICs or IP configurations, and those VMs can span different availability sets, availability zones, or have no availability set.
-
-The exam wording is testing whether you understand that Basic Load Balancer enforces availability set–based grouping for backend pools, while Standard Load Balancer uses a more flexible NIC/IP-based model. So when the question says “create a backend pool using the availability set,” what it really means is “add VMs that are in the same availability set to the backend pool.”
-
-In current Azure practice, this phrasing is somewhat outdated because Basic Load Balancer is deprecated for most production scenarios, and Standard Load Balancer is the recommended approach.
-
-</details>
+<img src='.img/2026-03-16-05-22-14.png' width=600>
 
 **References**
 
-- [Tutorial: Create a load balancer with more than one availability set in the backend pool using the Azure portal](https://learn.microsoft.com/en-us/azure/load-balancer/tutorial-multi-availability-sets-portal)
-- [Azure Load Balancer SKUs](https://learn.microsoft.com/azure/load-balancer/skus)
-- [Quickstart: Create a public load balancer to load balance VMs using the Azure portal](https://learn.microsoft.com/azure/load-balancer/quickstart-load-balancer-standard-public-portal)
-- [What is Azure Load Balancer?](https://learn.microsoft.com/azure/load-balancer/load-balancer-overview)
-- [Availability options for Azure Virtual Machines](https://learn.microsoft.com/azure/virtual-machines/availability)
+* [Azure DNS alias records overview](https://learn.microsoft.com/azure/dns/dns-alias)
 
 </details>
 
@@ -7283,9 +7300,338 @@ For each of the following statements, select Yes if the statement is true. Other
 
 ---
 
+#### Configure Internal Load Balancer
+
+**Domain:** Implement and Manage Virtual Networking
+**Skill:** Configure name resolution and load balancing
+**Task:** Configure an internal or public load balancer
+
+You are planning to deploy a line-of-business (LOB) application in Azure. This LOB application needs to be distributed in three different layers: one for the frontend, one for the backend, and the last layer for data persistence. To ensure the high availability of each layer, you deploy two virtual machines (VMs) per layer with an availability set. You also plan to configure an internal load balancer for the backend and persistence layers.
+
+The LOB application must have the following minimum required services running on each layer:
+
+- Frontend layer: Internet Information Services (IIS) listening on Transmission Control Protocol (TCP) port 80, and an internal health endpoint on TCP port 80.
+- Backend layer: IIS listening on TCP port 443, and an internal health endpoint on TCP port 80.
+- Persistence layer: A SQL Server listening on TCP port 1433.
+
+You are configuring the VMs for the backend layer.
+
+You need to configure an internal load balancer for the backend layer. You need to ensure that your solution is resilient to hardware and software failures. Your solution needs to be cost effective.
+
+Which four actions should you perform? To answer, move the appropriate actions from the list of possible actions to the answer area and arrange them in any order.
+
+A. Create a backend pool using the availability set.  
+B. Create a load balancing rule using port 443.  
+C. Create a load balancing rule using port 80.  
+D. Create a Standard Load Balancer.  
+E. Create an HTTP health probe using port 80.  
+F. Create a Basic Load Balancer.  
+G. Create a backend pool using the VMs.  
+
+Select and order 4:
+
+| Step | Action |
+|------|--------|
+| 1 | |
+| 2 | |
+| 3 | |
+| 4 | |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-20-04-43-23.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Why the selected answer is correct**
+
+- The scenario requires an internal, highly available backend with an internal health endpoint on TCP 80 and application traffic on TCP 443. The `Standard Load Balancer` SKU supports internal load balancing and the advanced health-probe and availability features needed for resilience.  
+- Using a `backend pool` that references an `availability set` ensures VMs are spread across fault/power domains so hardware or power failures don't take the entire backend offline.  
+- An `HTTP health probe` on `port 80` targets the internal health endpoint and allows the load balancer to detect and remove unhealthy nodes.  
+- A `load balancing rule` on `port 443` routes client TLS requests to the backend pool while the health probe remains on `port 80`.
+
+**Why the selected answer is incorrect**
+
+- Creating a backend pool using the VMs directly (without an `availability set`) does not provide the required protection against datacenter hardware or power failures; it leaves the service vulnerable to single-host failures.  
+- The `Basic Load Balancer` SKU does not support the required internal/high-availability/health-probe behavior for this scenario.  
+- Creating a load balancing rule on `port 80` would forward the wrong traffic: the application expects client traffic on `port 443` while only the health endpoint is on `port 80`.
+
+**Key takeaway**
+
+- For internal HA backends: use `Standard Load Balancer`, put VMs in a `backend pool` tied to an `availability set`, use an `HTTP health probe` on the service's health port (`port 80`), and create the load-balancing rule for the client-facing application port (`port 443`).
+
+<details>
+<summary>📝 More Detail</summary>
+
+You’re not finding that exact phrasing in Microsoft documentation because it isn’t a literal Azure configuration step. “Create a backend pool using the availability set” is an exam-oriented abstraction based on how Basic Load Balancer behaves, not an actual portal or API option.
+
+In the documentation, the distinction is described differently. For Basic Load Balancer, backend pool endpoints must be virtual machines that belong to the same availability set or virtual machine scale set. You don’t explicitly select an availability set when creating the backend pool; instead, when you add VMs, they must already be part of the same availability set. This creates an implicit relationship where the backend pool is effectively scoped to that availability set.
+
+For Standard Load Balancer, backend pools are not tied to availability sets at all. You can associate backend members using NICs or IP configurations, and those VMs can span different availability sets, availability zones, or have no availability set.
+
+The exam wording is testing whether you understand that Basic Load Balancer enforces availability set–based grouping for backend pools, while Standard Load Balancer uses a more flexible NIC/IP-based model. So when the question says “create a backend pool using the availability set,” what it really means is “add VMs that are in the same availability set to the backend pool.”
+
+In current Azure practice, this phrasing is somewhat outdated because Basic Load Balancer is deprecated for most production scenarios, and Standard Load Balancer is the recommended approach.
+
+</details>
+
+**References**
+
+- [Tutorial: Create a load balancer with more than one availability set in the backend pool using the Azure portal](https://learn.microsoft.com/en-us/azure/load-balancer/tutorial-multi-availability-sets-portal)
+- [Azure Load Balancer SKUs](https://learn.microsoft.com/azure/load-balancer/skus)
+- [Quickstart: Create a public load balancer to load balance VMs using the Azure portal](https://learn.microsoft.com/azure/load-balancer/quickstart-load-balancer-standard-public-portal)
+- [What is Azure Load Balancer?](https://learn.microsoft.com/azure/load-balancer/load-balancer-overview)
+- [Availability options for Azure Virtual Machines](https://learn.microsoft.com/azure/virtual-machines/availability)
+
+</details>
+
+---
+
 ## Monitor and Maintain Azure Resources
 
 ### Monitor resources in Azure
+
+#### Test TCP Connectivity with Network Watcher
+
+**Domain:** Monitor and Maintain Azure Resources
+**Skill:** Monitor resources in Azure
+**Task:** Use Azure Network Watcher and Connection Monitor
+
+You have an Azure network, as shown in the exhibit. Your network consists of two virtual networks (VNETs) and several servers. `Server 2` has the Network Watcher Agent installed.
+
+You have peered both VNets together, but `Server 1` cannot communicate with `Server 2` over HTTPS.
+
+You need to find the fault that is preventing the servers from communicating.
+
+What should you do first?
+
+A. Use Network Performance Monitor to discover any networking issues.  
+B. Use the Azure Network Watcher service to test the Transmission Control Protocol (TCP) connection between Server 1 and Server 2.  
+C. Use the Test-Connection PowerShell command on each server.  
+D. Install the Network Watcher Agent on Server 1.  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-13-04-36-47.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Solution Explanation:**
+
+You should use the Azure Network Watcher service to test the Transmission Control Protocol (TCP) connection between `Server 1` and `Server 2`. The IP flow verify tool (and related Network Watcher connection tests) can be used to discover network issues, such as misconfigured network security groups (NSGs) that block traffic.
+
+You should not install the Network Watcher Agent on `Server 1`. While Network Watcher does require the installation of the agent on the source server for some diagnostics, the IP flow verify tool does not.
+
+You should not use Network Performance Monitor to discover one-off networking issues between the virtual machines (VMs). Although Network Performance Monitor can be used to discover networking issues, such as blackholing and routing errors, it is better at continuous monitoring and not one-off faultfinding between VMs.
+
+You should not use the Test-Connection PowerShell command. Although this will test the network, unlike IP flow verify it will not provide enough information to resolve most network issues.
+
+<img src='.img/2026-03-13-04-47-23.png' width=600>
+
+**References**
+
+* [What is Azure Network Watcher?](https://learn.microsoft.com/azure/network-watcher/network-watcher-monitoring-overview)
+* [Introduction to Azure Network Watcher IP flow verify](https://learn.microsoft.com/azure/network-watcher/network-watcher-ip-flow-verify-overview)
+* Network Performance Monitor solution in Azure
+
+</details>
+
+---
+
+#### Enable Guest OS Diagnostics
+
+**Domain:** Monitor and Maintain Azure Resources
+**Skill:** Monitor resources in Azure
+**Task:** Configure and interpret monitoring of VMs, storage accounts, and networks by using Azure Monitor Insights
+
+You have an Azure subscription that contains a Windows Server 2019 virtual machine (VM) named VM1.
+
+You need to enable guest operating system (OS) diagnostics for VM1 by using Azure Cloud Shell.
+
+How should you complete the Azure PowerShell command? To answer, select the appropriate options from the drop-down menus.
+
+```powershell
+$vmRg = "prod"
+$vm = "vm1"
+$path = "config.xml"
+Set-AzVMDiagnosticsExtension ___[1]___ -ResourceGroupName $vmRg `
+-VMName $vm -DiagnosticsConfiguration ___[2]___ $path
+```
+
+Drop-Down Options:
+
+| Blank | Options |
+|-------|---------|
+| [1] | -Select- / -DefaultProfile / -DiagnosticsConfigurationPath / -StorageContext |
+| [2] | -Select- / Set-AzDiagnosticSetting / Set-AzVMBootdiagnostic / Set-AzVMDiagnosticsExtension |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-13-03-38-09.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Solution Explanation:**
+
+You should use the `Set-AzVMDiagnosticsExtension` cmdlet with the `-DiagnosticsConfigurationPath` parameter so that the command accepts an Extensible Markup Language (XML) configuration file and enables guest OS diagnostics on the target VM. The correct command is:
+
+```powershell
+Set-AzVMDiagnosticsExtension -ResourceGroupName $vmRg `
+  -VMName $vm -DiagnosticsConfigurationPath $path
+```
+
+`Set-AzVMDiagnosticsExtension` configures the VM extension that enables Azure to collect diagnostics telemetry from Performance Monitor and Event Logs and forward it to destinations such as a storage account or an Azure Log Analytics workspace. The `-DiagnosticsConfigurationPath` parameter expects the path to an XML diagnostics configuration file.
+
+Do not use `Set-AzDiagnosticSetting` for this task because that cmdlet configures platform diagnostic settings (resource-level diagnostic settings) and does not enable guest OS diagnostics inside the VM. Also avoid `Set-AzVMBootDiagnostic` — that cmdlet configures boot diagnostics (screenshot and serial console capture) and does not enable guest-level diagnostics.
+
+**References**
+
+- [Use PowerShell to enable Azure Diagnostics in a virtual machine running Windows](https://learn.microsoft.com/azure/virtual-machines/extensions/diagnostics-windows#enable-the-diagnostics-extension-if-you-use-the-resource-manager-deployment-model)
+- [Set-AzVMDiagnosticsExtension](https://learn.microsoft.com/powershell/module/az.compute/set-azvmdiagnosticsextension?view=azps-15.4.0)
+- [Set-AzDiagnosticSetting](https://learn.microsoft.com/powershell/module/az.monitor/set-azdiagnosticsetting?view=azps-0.10.0)
+- [Set-AzVMBootDiagnostic](https://learn.microsoft.com/powershell/module/az.compute/set-azvmbootdiagnostic?view=azps-15.4.0)
+
+</details>
+
+---
+
+#### Azure Advisor alerts with Bicep
+
+**Domain:** Monitor and Maintain Azure Resources
+**Skill:** Monitor resources in Azure
+**Task:** Set up alert rules, action groups, and alert processing rules in Azure Monitor
+
+Your organization is using Azure Advisor to optimize your Azure deployments.
+
+You want to set up an alert for new recommendations from Azure Advisor using Bicep.
+
+You need to define the Azure resources in the Bicep file named `main.bicep`.
+
+Which two resources should you use? Each correct answer presents part of the solution.
+
+A. `Microsoft.Insights/metricAlerts`  
+B. `Microsoft.Insights/alertrules`  
+C. `Microsoft.Insights/dataCollectionRules`  
+D. `Microsoft.Insights/actionGroups`  
+E. `Microsoft.Insights/activityLogAlerts`  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-13-05-43-29.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Explanation**
+
+In this scenario, you are using Azure Bicep to set up alerts for Azure Advisor. Bicep is a domain-specific language (DSL) that uses declarative syntax to deploy Azure resources. It provides concise syntax, reliable type safety, and support for code reuse. You should use the below Azure resources in the `main.bicep` file.
+
+1. `Microsoft.Insights/actionGroups`: The `actionGroups` resource type is supported in Bicep for Azure Advisor. You need to mention `name`, `location`, `tags` and `properties`.
+2. `Microsoft.Insights/activityLogAlerts`: The `activityLogAlerts` resource type is supported in Bicep for Azure Advisor. You need to mention `name`, `location`, `tags` and `properties`. Since Azure Activity Log Alerts is a global service, the location of the rules should always be `global`.
+
+You should not use `Microsoft.Insights/alertrules`. You should use this resource type when you want to use `Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria` for the `odata.type` property. In this scenario, since you are setting up alerts for Azure Advisor, the `main.bicep` file should have the `actionGroups` and `activityLogAlerts` resource types only.
+
+You should not use `Microsoft.Insights/dataCollectionRules`. You should use this resource type when you want to gather information from different sources including `dataFlows`, `dataSources`, `iisLogs`, `logFiles`, `performanceCounters`, `syslog`, `windowsEventLogs`, etc. In this scenario, since you are setting up alerts for Azure Advisor, the `main.bicep` file should have the `actionGroups` and `activityLogAlerts` resource types only.
+
+You should not use `Microsoft.Insights/metricAlerts`. This field allows for specifying custom properties, which would be appended to the alert payload sent as input to the webhook. You should use this resource type when you want to define custom properties, which would be appended to the alert payload sent as input via webhooks.
+
+**Further explanation**:  
+
+Azure Advisor recommendations are emitted as **events in the Azure Activity Log**, not as metrics. Therefore, the correct alert rule resource is **`Microsoft.Insights/activityLogAlerts`**, which monitors Activity Log events such as the *Recommendation* category generated by Azure Advisor. Azure alerts also require a defined response, which is handled by an **`Microsoft.Insights/actionGroups`** resource. The activity log alert detects the Advisor recommendation event, and the action group specifies what action occurs when the alert fires (for example, email or webhook notification). Thus, both **activityLogAlerts** (the alert rule) and **actionGroups** (the alert action) are required.
+
+<img src='.img/2026-03-13-05-51-06.png' width=400>
+
+`Microsoft.Insights/alertrules` is incorrect because it belongs to an **older, deprecated Azure Monitor alerting model** used before the current alert resource types were introduced. Microsoft replaced this legacy resource with newer alert types such as **`metricAlerts`**, **`scheduledQueryRules`**, and **`activityLogAlerts`**. Since Azure Advisor recommendations appear as **Activity Log events**, the modern and supported resource for this scenario is **`Microsoft.Insights/activityLogAlerts`**, not the legacy `alertrules`.
+
+**References**
+
+* [Introduction to Azure Advisor](https://learn.microsoft.com/en-us/azure/advisor/)
+* [Quickstart: Create Azure Advisor alerts on new recommendations using Bicep](https://learn.microsoft.com/azure/advisor/advisor-alerts-bicep)
+* [Microsoft.Insights actionGroups](https://learn.microsoft.com/azure/azure-monitor/platform/action-groups)
+* [Microsoft.Insights activityLogAlerts](https://learn.microsoft.com/azure/azure-monitor/platform/activity-log-alerts)
+* Microsoft.Insights alertrules
+* Microsoft.Insights dataCollectionRules
+* [Microsoft.Insights metricAlerts](https://learn.microsoft.com/azure/azure-monitor/alerts/alerts-metric-overview)
+
+</details>
+
+---
+
+#### Configure Azure Monitor Alert Notification Rate Limits
+
+**Domain:** Monitor and Maintain Azure Resources
+**Skill:** Monitor resources in Azure
+**Task:** Set up alert rules, action groups, and alert processing rules in Azure Monitor
+
+Your company has an Azure Subscription and an Azure SQL Database. You configure an Azure Monitor alert rule named Alert1 that is triggered when the database CPU usage exceeds 70%. Alert1 fires approximately every minute.
+
+You configure an action group with the following notification methods:
+
+* Email alerts  
+* Voice alerts  
+* SMS alerts  
+
+For each of the following statements, select Yes if the statement is true. Otherwise, select No.
+
+| STATEMENT | YES | NO |
+|-----------|-----|-----|
+| How many alert notifications will be generated for each type of alert per hour? | Email: 60, Voice: 4, SMS: 60 | |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-01-30-06-20-01.png' width=700>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Why the selected answer is wrong**
+
+The dropdown values shown (Email 60, Voice 4, SMS 60 per hour) don't match Azure Monitor's service-level notification rate limits for action groups. Even if an alert fires every minute, Azure Monitor will throttle notifications per recipient based on those limits—not based on the alert frequency.
+
+**Why the correct answer is right**
+
+Azure Monitor action group notification limits (production) are:
+
+* **Email:** No more than 100 emails per hour per email address (per region)
+* **SMS:** No more than 1 SMS every 5 minutes per phone number ⇒ 12 per hour
+* **Voice:** No more than 1 voice call every 5 minutes per phone number ⇒ 12 per hour
+
+So, with Alert1 firing every minute (60 times/hour), the maximum notifications actually sent per hour are:
+
+* **Email:** 60 (because the alert only fires 60 times/hour, which is under the 100/hour cap)
+* **SMS:** 12 (throttled by 1 per 5 minutes)
+* **Voice:** 12 (throttled by 1 per 5 minutes)
+
+**Key takeaway**
+
+Action group notification "rate limiting" is per recipient, and for SMS/voice it effectively translates to 12/hour (1 per 5 minutes). Email has a higher cap (100/hour), so the alert's firing rate (60/hour) becomes the limiting factor.
+
+Related resources:
+
+* [Azure Monitor service limits](https://learn.microsoft.com/en-us/azure/azure-monitor/fundamentals/service-limits#action-groups)
+* [Create and manage action groups in Azure Monitor](https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/action-groups)
+
+</details>
+
+---
 
 #### Determine filtering rule with Network Watcher
 
@@ -7374,118 +7720,6 @@ DefaultRule_AllowVnetOutbound  65000  Allow  Outbound  *
 
 ---
 
-#### Configure Azure Monitor Alert Notification Rate Limits
-
-**Domain:** Monitor and Maintain Azure Resources
-**Skill:** Monitor resources in Azure
-**Task:** Set up alert rules, action groups, and alert processing rules in Azure Monitor
-
-Your company has an Azure Subscription and an Azure SQL Database. You configure an Azure Monitor alert rule named Alert1 that is triggered when the database CPU usage exceeds 70%. Alert1 fires approximately every minute.
-
-You configure an action group with the following notification methods:
-
-* Email alerts  
-* Voice alerts  
-* SMS alerts  
-
-For each of the following statements, select Yes if the statement is true. Otherwise, select No.
-
-| STATEMENT | YES | NO |
-|-----------|-----|-----|
-| How many alert notifications will be generated for each type of alert per hour? | Email: 60, Voice: 4, SMS: 60 | |
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-01-30-06-20-01.png' width=700>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Why the selected answer is wrong**
-
-The dropdown values shown (Email 60, Voice 4, SMS 60 per hour) don't match Azure Monitor's service-level notification rate limits for action groups. Even if an alert fires every minute, Azure Monitor will throttle notifications per recipient based on those limits—not based on the alert frequency.
-
-**Why the correct answer is right**
-
-Azure Monitor action group notification limits (production) are:
-
-* **Email:** No more than 100 emails per hour per email address (per region)
-* **SMS:** No more than 1 SMS every 5 minutes per phone number ⇒ 12 per hour
-* **Voice:** No more than 1 voice call every 5 minutes per phone number ⇒ 12 per hour
-
-So, with Alert1 firing every minute (60 times/hour), the maximum notifications actually sent per hour are:
-
-* **Email:** 60 (because the alert only fires 60 times/hour, which is under the 100/hour cap)
-* **SMS:** 12 (throttled by 1 per 5 minutes)
-* **Voice:** 12 (throttled by 1 per 5 minutes)
-
-**Key takeaway**
-
-Action group notification "rate limiting" is per recipient, and for SMS/voice it effectively translates to 12/hour (1 per 5 minutes). Email has a higher cap (100/hour), so the alert's firing rate (60/hour) becomes the limiting factor.
-
-Related resources:
-
-* [Azure Monitor service limits](https://learn.microsoft.com/en-us/azure/azure-monitor/fundamentals/service-limits#action-groups)
-* [Create and manage action groups in Azure Monitor](https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/action-groups)
-
-</details>
-
----
-
-#### Test TCP Connectivity with Network Watcher
-
-**Domain:** Monitor and Maintain Azure Resources
-**Skill:** Monitor resources in Azure
-**Task:** Use Azure Network Watcher and Connection Monitor
-
-You have an Azure network, as shown in the exhibit. Your network consists of two virtual networks (VNETs) and several servers. `Server 2` has the Network Watcher Agent installed.
-
-You have peered both VNets together, but `Server 1` cannot communicate with `Server 2` over HTTPS.
-
-You need to find the fault that is preventing the servers from communicating.
-
-What should you do first?
-
-A. Use Network Performance Monitor to discover any networking issues.  
-B. Use the Azure Network Watcher service to test the Transmission Control Protocol (TCP) connection between Server 1 and Server 2.  
-C. Use the Test-Connection PowerShell command on each server.  
-D. Install the Network Watcher Agent on Server 1.  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-13-04-36-47.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Solution Explanation:**
-
-You should use the Azure Network Watcher service to test the Transmission Control Protocol (TCP) connection between `Server 1` and `Server 2`. The IP flow verify tool (and related Network Watcher connection tests) can be used to discover network issues, such as misconfigured network security groups (NSGs) that block traffic.
-
-You should not install the Network Watcher Agent on `Server 1`. While Network Watcher does require the installation of the agent on the source server for some diagnostics, the IP flow verify tool does not.
-
-You should not use Network Performance Monitor to discover one-off networking issues between the virtual machines (VMs). Although Network Performance Monitor can be used to discover networking issues, such as blackholing and routing errors, it is better at continuous monitoring and not one-off faultfinding between VMs.
-
-You should not use the Test-Connection PowerShell command. Although this will test the network, unlike IP flow verify it will not provide enough information to resolve most network issues.
-
-<img src='.img/2026-03-13-04-47-23.png' width=600>
-
-**References**
-
-* [What is Azure Network Watcher?](https://learn.microsoft.com/azure/network-watcher/network-watcher-monitoring-overview)
-* [Introduction to Azure Network Watcher IP flow verify](https://learn.microsoft.com/azure/network-watcher/network-watcher-ip-flow-verify-overview)
-* Network Performance Monitor solution in Azure
-
-</details>
-
----
-
 #### Diagnose Network Watcher Tool for Web Server Packet Flow
 
 **Domain:** Monitor and Maintain Azure Resources
@@ -7565,141 +7799,6 @@ It does **not** answer: *“Can the VM actually accept this connection?”*
 
 ---
 
-#### Enable Guest OS Diagnostics
-
-**Domain:** Monitor and Maintain Azure Resources
-**Skill:** Monitor resources in Azure
-**Task:** Configure and interpret monitoring of VMs, storage accounts, and networks by using Azure Monitor Insights
-
-You have an Azure subscription that contains a Windows Server 2019 virtual machine (VM) named VM1.
-
-You need to enable guest operating system (OS) diagnostics for VM1 by using Azure Cloud Shell.
-
-How should you complete the Azure PowerShell command? To answer, select the appropriate options from the drop-down menus.
-
-```powershell
-$vmRg = "prod"
-$vm = "vm1"
-$path = "config.xml"
-Set-AzVMDiagnosticsExtension ___[1]___ -ResourceGroupName $vmRg `
--VMName $vm -DiagnosticsConfiguration ___[2]___ $path
-```
-
-Drop-Down Options:
-
-| Blank | Options |
-|-------|---------|
-| [1] | -Select- / -DefaultProfile / -DiagnosticsConfigurationPath / -StorageContext |
-| [2] | -Select- / Set-AzDiagnosticSetting / Set-AzVMBootdiagnostic / Set-AzVMDiagnosticsExtension |
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-13-03-38-09.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Solution Explanation:**
-
-You should use the `Set-AzVMDiagnosticsExtension` cmdlet with the `-DiagnosticsConfigurationPath` parameter so that the command accepts an Extensible Markup Language (XML) configuration file and enables guest OS diagnostics on the target VM. The correct command is:
-
-```powershell
-Set-AzVMDiagnosticsExtension -ResourceGroupName $vmRg `
-  -VMName $vm -DiagnosticsConfigurationPath $path
-```
-
-`Set-AzVMDiagnosticsExtension` configures the VM extension that enables Azure to collect diagnostics telemetry from Performance Monitor and Event Logs and forward it to destinations such as a storage account or an Azure Log Analytics workspace. The `-DiagnosticsConfigurationPath` parameter expects the path to an XML diagnostics configuration file.
-
-Do not use `Set-AzDiagnosticSetting` for this task because that cmdlet configures platform diagnostic settings (resource-level diagnostic settings) and does not enable guest OS diagnostics inside the VM. Also avoid `Set-AzVMBootDiagnostic` — that cmdlet configures boot diagnostics (screenshot and serial console capture) and does not enable guest-level diagnostics.
-
-**References**
-
-- [Use PowerShell to enable Azure Diagnostics in a virtual machine running Windows](https://learn.microsoft.com/azure/virtual-machines/extensions/diagnostics-windows#enable-the-diagnostics-extension-if-you-use-the-resource-manager-deployment-model)
-- [Set-AzVMDiagnosticsExtension](https://learn.microsoft.com/powershell/module/az.compute/set-azvmdiagnosticsextension?view=azps-15.4.0)
-- [Set-AzDiagnosticSetting](https://learn.microsoft.com/powershell/module/az.monitor/set-azdiagnosticsetting?view=azps-0.10.0)
-- [Set-AzVMBootDiagnostic](https://learn.microsoft.com/powershell/module/az.compute/set-azvmbootdiagnostic?view=azps-15.4.0)
-
-</details>
-
----
-
-#### Load Balancer Metrics Batch API
-
-**Domain:** Monitor and Maintain Azure Resources
-**Skill:** Monitor resources in Azure
-**Task:** Interpret metrics in Azure Monitor
-
-Your company uses an Azure standard public load balancer. You are the Azure administrator at your company.
-
-You have been tasked with troubleshooting common outbound connectivity issues with Azure Load Balancer.
-
-You want to proactively monitor the data path availability and perform health probe status checks on the load balancer.
-
-You create the following metrics:getBatch API request shown below:
-
-```
-POST /subscriptions/87654765-4321-9999-1251-4532243211xfe/metrics:getBatch?metricNamespace=microsoft.compute/virtualMachines&api-version=2023-03-01-preview
-Host: eastus.metrics.monitor.azure.com
-Content-Type: application/json
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJh...XaTddvfcFlgsas
-{
-   "resourceids":[".../virtualMachines/vmss-002_1sdf4cc9",
-   ".../virtualMachines/vmss-003_s1187c3h"]
-}
-```
-
-You need to retrieve multi-dimensional definitions and metrics programmatically via APIs.
-
-For each of the following statements, select Yes if the statement is true. Otherwise, select No.
-
-| Statement | Yes | No |
-|----------|-----|----|
-| The metrics:getBatch API here allows you to prevent throttling and performance issues when querying multiple resources in a single REST request. | ☐ | ☐ |
-| Both VMs vmss-002_1sdf4cc9 and vmss-003_s1187c3h can be spread across multiple Azure regions. | ☐ | ☐ |
-| Both VMs vmss-002_1sdf4cc9 and vmss-003_s1187c3h must be the same resource type. | ☐ | ☐ |
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-02-20-16-52-36.png' width=700>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Why Statement 1 is Yes (correct)**
-
-The metrics:getBatch API was designed to query metrics for multiple resources in a single HTTP request. Rather than issuing one API call per resource — which scales poorly and can trigger throttling — batching all resource IDs into a single POST reduces the total number of requests against Azure Monitor's metrics endpoint. Preventing throttling and improving performance when querying multiple resources is the primary purpose of the batch endpoint.
-
-**Why Statement 2 is No (correct)**
-
-The metrics:getBatch endpoint is a **regional endpoint**. In the example, the host is `eastus.metrics.monitor.azure.com`, which means all resources in the batch must exist in the **East US region**. Resources spread across multiple Azure regions cannot be combined in a single batch call. If you need metrics from resources in different regions, you must issue separate batch calls against each region's respective endpoint.
-
-**Why Statement 3 is Yes (correct)**
-
-Each metrics:getBatch request includes a single `metricNamespace` query parameter. In the example, that value is `microsoft.compute/virtualMachines`. All resource IDs submitted in the request body must belong to that same resource type and namespace. You cannot mix resource types (for example, virtual machines and load balancers) within a single batch request.
-
-**Key takeaway**
-
-The metrics:getBatch API reduces throttling risk by batching multi-resource metric queries into a single request, but it enforces two important constraints: all resources must be in the **same Azure region** (determined by the regional endpoint hostname), and all resources must be the **same resource type** (deterined by the `metricNamespace` parameter).
-
-**References**
-
-* [How to migrate from the metrics API to the getBatch API](https://learn.microsoft.com/en-us/azure/azure-monitor/metrics/migrate-to-batch-api?tabs=individual-response)
-* [Troubleshoot Azure Load Balancer outbound connectivity issues](https://learn.microsoft.com/en-us/azure/load-balancer/troubleshoot-outbound-connection)
-* [Standard load balancer diagnostics with metrics, alerts, and resource health](https://learn.microsoft.com/en-us/azure/load-balancer/load-balancer-standard-diagnostics)
-* [Azure monitoring REST API walkthrough](https://learn.microsoft.com/en-us/azure/azure-monitor/platform/rest-api-walkthrough?tabs=rest%2Cportal)
-
-</details>
-
-▶ Related Lab: [lab-metrics-batch-api](../hands-on-labs/monitoring/lab-metrics-batch-api/README.md)
-
----
-
 #### Storage Insights Overview
 
 **Domain:** Monitor and Maintain Azure Resources
@@ -7761,66 +7860,56 @@ References
 
 ---
 
-#### Azure Advisor alerts with Bicep
+#### Pinning query results to a dashboard
 
 **Domain:** Monitor and Maintain Azure Resources
 **Skill:** Monitor resources in Azure
-**Task:** Set up alert rules, action groups, and alert processing rules in Azure Monitor
+**Task:** Query and analyze logs in Azure Monitor
 
-Your organization is using Azure Advisor to optimize your Azure deployments.
+Your company has an Azure subscription. You create an Azure Log Analytics workspace (Azure Monitor log) and collect data from various data sources. You run an Azure Monitor log query. You want to display the tabular data as a chart pinned to a shared dashboard.
 
-You want to set up an alert for new recommendations from Azure Advisor using Bicep.
+You create an Application Insights Overview dashboard.
 
-You need to define the Azure resources in the Bicep file named `main.bicep`.
+You need to identify restrictions when pinning a result chart to a dashboard.
 
-Which two resources should you use? Each correct answer presents part of the solution.
+For each of the following statements, select Yes if the statement is true. Otherwise, select No.
 
-A. `Microsoft.Insights/metricAlerts`  
-B. `Microsoft.Insights/alertrules`  
-C. `Microsoft.Insights/dataCollectionRules`  
-D. `Microsoft.Insights/actionGroups`  
-E. `Microsoft.Insights/activityLogAlerts`  
+| STATEMENT | YES | NO |
+|-----------|-----|-----|
+| Data displayed in the chart is limited to no more than 30 days. | ☐ | ☐ |
+| Data displayed in the chart is limited to up to four columns and the top seven rows. | ☐ | ☐ |
+| Chart types are limited to line and stacked column only. | ☐ | ☐ |
 
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-03-13-05-43-29.png' width=600>
+<img src='.img/2026-03-14-04-53-31.png' width=600>
 
 </details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
 
-**Explanation**
+Unless the `render` operator is specified in your query, data from an Azure Monitor log is returned as a table. You have the option of formatting the data as a chart with multiple chart formats supported including line, column, stacked column, and pie.
 
-In this scenario, you are using Azure Bicep to set up alerts for Azure Advisor. Bicep is a domain-specific language (DSL) that uses declarative syntax to deploy Azure resources. It provides concise syntax, reliable type safety, and support for code reuse. You should use the below Azure resources in the `main.bicep` file.
+When the result is pinned to a dashboard, the result is limited to no more than 30 days.
 
-1. `Microsoft.Insights/actionGroups`: The `actionGroups` resource type is supported in Bicep for Azure Advisor. You need to mention `name`, `location`, `tags` and `properties`.
-2. `Microsoft.Insights/activityLogAlerts`: The `activityLogAlerts` resource type is supported in Bicep for Azure Advisor. You need to mention `name`, `location`, `tags` and `properties`. Since Azure Activity Log Alerts is a global service, the location of the rules should always be `global`.
+Data displayed in the chart is not limited to up to four columns and the top seven rows. This limit applies to tabular data pinned to a dashboard.
 
-You should not use `Microsoft.Insights/alertrules`. You should use this resource type when you want to use `Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria` for the `odata.type` property. In this scenario, since you are setting up alerts for Azure Advisor, the `main.bicep` file should have the `actionGroups` and `activityLogAlerts` resource types only.
+Chart types are not limited to line and stacked column only. Other chart formats are also supported, with the pie chart as a popular option for displaying summary data.
 
-You should not use `Microsoft.Insights/dataCollectionRules`. You should use this resource type when you want to gather information from different sources including `dataFlows`, `dataSources`, `iisLogs`, `logFiles`, `performanceCounters`, `syslog`, `windowsEventLogs`, etc. In this scenario, since you are setting up alerts for Azure Advisor, the `main.bicep` file should have the `actionGroups` and `activityLogAlerts` resource types only.
+<img src='.img/2026-03-14-04-59-56.png' width=600>
 
-You should not use `Microsoft.Insights/metricAlerts`. This field allows for specifying custom properties, which would be appended to the alert payload sent as input to the webhook. You should use this resource type when you want to define custom properties, which would be appended to the alert payload sent as input via webhooks.
-
-**Further explanation**:  
-
-Azure Advisor recommendations are emitted as **events in the Azure Activity Log**, not as metrics. Therefore, the correct alert rule resource is **`Microsoft.Insights/activityLogAlerts`**, which monitors Activity Log events such as the *Recommendation* category generated by Azure Advisor. Azure alerts also require a defined response, which is handled by an **`Microsoft.Insights/actionGroups`** resource. The activity log alert detects the Advisor recommendation event, and the action group specifies what action occurs when the alert fires (for example, email or webhook notification). Thus, both **activityLogAlerts** (the alert rule) and **actionGroups** (the alert action) are required.
-
-<img src='.img/2026-03-13-05-51-06.png' width=400>
-
-`Microsoft.Insights/alertrules` is incorrect because it belongs to an **older, deprecated Azure Monitor alerting model** used before the current alert resource types were introduced. Microsoft replaced this legacy resource with newer alert types such as **`metricAlerts`**, **`scheduledQueryRules`**, and **`activityLogAlerts`**. Since Azure Advisor recommendations appear as **Activity Log events**, the modern and supported resource for this scenario is **`Microsoft.Insights/activityLogAlerts`**, not the legacy `alertrules`.
+<img src='.img/2026-03-14-04-55-03.png' width=600>
 
 **References**
 
-* [Introduction to Azure Advisor](https://learn.microsoft.com/en-us/azure/advisor/)
-* [Quickstart: Create Azure Advisor alerts on new recommendations using Bicep](https://learn.microsoft.com/azure/advisor/advisor-alerts-bicep)
-* [Microsoft.Insights actionGroups](https://learn.microsoft.com/azure/azure-monitor/platform/action-groups)
-* [Microsoft.Insights activityLogAlerts](https://learn.microsoft.com/azure/azure-monitor/platform/activity-log-alerts)
-* Microsoft.Insights alertrules
-* Microsoft.Insights dataCollectionRules
-* [Microsoft.Insights metricAlerts](https://learn.microsoft.com/azure/azure-monitor/alerts/alerts-metric-overview)
+* [Azure Monitor Metrics Overview](https://learn.microsoft.com/en-us/azure/azure-monitor/metrics/data-platform-metrics)
+* [Create and share dashboards that visualize data in Azure Monitor Logs](https://learn.microsoft.com/en-us/azure/azure-monitor/visualize/tutorial-logs-dashboards)
+* [Log Analytics tutorial](https://learn.microsoft.com/azure/azure-monitor/logs/log-analytics-tutorial)
+* [Log queries in Azure Monitor](https://learn.microsoft.com/azure/azure-monitor/logs/log-query-overview)
+* [Chart visualizations](https://learn.microsoft.com/azure/azure-monitor/visualize/workbooks-chart-visualizations)
+* [Application Insights Overview dashboard](https://learn.microsoft.com/azure/azure-monitor/app/overview-dashboard)
 
 </details>
 
@@ -7991,61 +8080,6 @@ Both Voice and SMS notifications are limited to no more than one notification ev
 
 ---
 
-#### Pinning query results to a dashboard
-
-**Domain:** Monitor and Maintain Azure Resources
-**Skill:** Monitor resources in Azure
-**Task:** Query and analyze logs in Azure Monitor
-
-Your company has an Azure subscription. You create an Azure Log Analytics workspace (Azure Monitor log) and collect data from various data sources. You run an Azure Monitor log query. You want to display the tabular data as a chart pinned to a shared dashboard.
-
-You create an Application Insights Overview dashboard.
-
-You need to identify restrictions when pinning a result chart to a dashboard.
-
-For each of the following statements, select Yes if the statement is true. Otherwise, select No.
-
-| STATEMENT | YES | NO |
-|-----------|-----|-----|
-| Data displayed in the chart is limited to no more than 30 days. | ☐ | ☐ |
-| Data displayed in the chart is limited to up to four columns and the top seven rows. | ☐ | ☐ |
-| Chart types are limited to line and stacked column only. | ☐ | ☐ |
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-14-04-53-31.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-Unless the `render` operator is specified in your query, data from an Azure Monitor log is returned as a table. You have the option of formatting the data as a chart with multiple chart formats supported including line, column, stacked column, and pie.
-
-When the result is pinned to a dashboard, the result is limited to no more than 30 days.
-
-Data displayed in the chart is not limited to up to four columns and the top seven rows. This limit applies to tabular data pinned to a dashboard.
-
-Chart types are not limited to line and stacked column only. Other chart formats are also supported, with the pie chart as a popular option for displaying summary data.
-
-<img src='.img/2026-03-14-04-59-56.png' width=600>
-
-<img src='.img/2026-03-14-04-55-03.png' width=600>
-
-**References**
-
-* [Azure Monitor Metrics Overview](https://learn.microsoft.com/en-us/azure/azure-monitor/metrics/data-platform-metrics)
-* [Create and share dashboards that visualize data in Azure Monitor Logs](https://learn.microsoft.com/en-us/azure/azure-monitor/visualize/tutorial-logs-dashboards)
-* [Log Analytics tutorial](https://learn.microsoft.com/azure/azure-monitor/logs/log-analytics-tutorial)
-* [Log queries in Azure Monitor](https://learn.microsoft.com/azure/azure-monitor/logs/log-query-overview)
-* [Chart visualizations](https://learn.microsoft.com/azure/azure-monitor/visualize/workbooks-chart-visualizations)
-* [Application Insights Overview dashboard](https://learn.microsoft.com/azure/azure-monitor/app/overview-dashboard)
-
-</details>
-
----
-
 #### Capture SFTP Packets with Network Watcher
 
 **Domain:** Monitor and Maintain Azure Resources
@@ -8169,411 +8203,218 @@ For Azure Monitor alerts requiring multiple notification methods and ITSM integr
 
 ---
 
+#### Load Balancer Metrics Batch API
+
+**Domain:** Monitor and Maintain Azure Resources
+**Skill:** Monitor resources in Azure
+**Task:** Interpret metrics in Azure Monitor
+
+Your company uses an Azure standard public load balancer. You are the Azure administrator at your company.
+
+You have been tasked with troubleshooting common outbound connectivity issues with Azure Load Balancer.
+
+You want to proactively monitor the data path availability and perform health probe status checks on the load balancer.
+
+You create the following metrics:getBatch API request shown below:
+
+```
+POST /subscriptions/87654765-4321-9999-1251-4532243211xfe/metrics:getBatch?metricNamespace=microsoft.compute/virtualMachines&api-version=2023-03-01-preview
+Host: eastus.metrics.monitor.azure.com
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJh...XaTddvfcFlgsas
+{
+   "resourceids":[".../virtualMachines/vmss-002_1sdf4cc9",
+   ".../virtualMachines/vmss-003_s1187c3h"]
+}
+```
+
+You need to retrieve multi-dimensional definitions and metrics programmatically via APIs.
+
+For each of the following statements, select Yes if the statement is true. Otherwise, select No.
+
+| Statement | Yes | No |
+|----------|-----|----|
+| The metrics:getBatch API here allows you to prevent throttling and performance issues when querying multiple resources in a single REST request. | ☐ | ☐ |
+| Both VMs vmss-002_1sdf4cc9 and vmss-003_s1187c3h can be spread across multiple Azure regions. | ☐ | ☐ |
+| Both VMs vmss-002_1sdf4cc9 and vmss-003_s1187c3h must be the same resource type. | ☐ | ☐ |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-02-20-16-52-36.png' width=700>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Why Statement 1 is Yes (correct)**
+
+The metrics:getBatch API was designed to query metrics for multiple resources in a single HTTP request. Rather than issuing one API call per resource — which scales poorly and can trigger throttling — batching all resource IDs into a single POST reduces the total number of requests against Azure Monitor's metrics endpoint. Preventing throttling and improving performance when querying multiple resources is the primary purpose of the batch endpoint.
+
+**Why Statement 2 is No (correct)**
+
+The metrics:getBatch endpoint is a **regional endpoint**. In the example, the host is `eastus.metrics.monitor.azure.com`, which means all resources in the batch must exist in the **East US region**. Resources spread across multiple Azure regions cannot be combined in a single batch call. If you need metrics from resources in different regions, you must issue separate batch calls against each region's respective endpoint.
+
+**Why Statement 3 is Yes (correct)**
+
+Each metrics:getBatch request includes a single `metricNamespace` query parameter. In the example, that value is `microsoft.compute/virtualMachines`. All resource IDs submitted in the request body must belong to that same resource type and namespace. You cannot mix resource types (for example, virtual machines and load balancers) within a single batch request.
+
+**Key takeaway**
+
+The metrics:getBatch API reduces throttling risk by batching multi-resource metric queries into a single request, but it enforces two important constraints: all resources must be in the **same Azure region** (determined by the regional endpoint hostname), and all resources must be the **same resource type** (deterined by the `metricNamespace` parameter).
+
+**References**
+
+* [How to migrate from the metrics API to the getBatch API](https://learn.microsoft.com/en-us/azure/azure-monitor/metrics/migrate-to-batch-api?tabs=individual-response)
+* [Troubleshoot Azure Load Balancer outbound connectivity issues](https://learn.microsoft.com/en-us/azure/load-balancer/troubleshoot-outbound-connection)
+* [Standard load balancer diagnostics with metrics, alerts, and resource health](https://learn.microsoft.com/en-us/azure/load-balancer/load-balancer-standard-diagnostics)
+* [Azure monitoring REST API walkthrough](https://learn.microsoft.com/en-us/azure/azure-monitor/platform/rest-api-walkthrough?tabs=rest%2Cportal)
+
+</details>
+
+▶ Related Lab: [lab-metrics-batch-api](../hands-on-labs/monitoring/lab-metrics-batch-api/README.md)
+
+---
+
 ### Implement backup and recovery
 
-#### Restore VM from backup (availability set)
+#### Recover Configuration File from Azure VM Backup
 
 **Domain:** Monitor and Maintain Azure Resources
 **Skill:** Implement backup and recovery
 **Task:** Perform backup and restore operations by using Azure Backup
 
-Your company has an Azure subscription and they use Azure Backup to protect the deployed virtual machines (VMs). Your subscription includes a VM named `VMS1` that runs Windows Server 2019. `VMS1` is configured as a part of an availability set and it is backed up through machine-level backup. `VMS1` is mistakenly deleted.
+You have two Azure virtual machines (VMs) named VM1 and VM2 running Windows Server 2019. The VMs are backed up by an Azure Recovery Services vault. A configuration file on VM1 was updated, and you need to restore it to a version from six days ago.
 
-You need to restore `VMS1` from backup and configure `VMS1` as part of the same availability set.
+You need to perform this action as quickly as possible without affecting other system files.
 
-Which three actions should you perform in sequence? To answer, move the appropriate actions from the list of possible actions to the answer area and arrange them in the correct order.
+Which four actions should you perform in sequence? To answer, move the appropriate actions from the list of actions to the answer area and arrange them in the correct order.
 
-A. Select Create a virtual machine as the Restore Type and restore the data.  
-B. Select Replace existing as the Restore Type and restore the data.  
-C. Select Restore Disks as the Restore Type and restore the data.  
-D. Manually create a new VM.  
-E. Fetch and deploy the deployment template from the Azure Recovery Services vault.  
-F. Select a restore point for VMS1 in the Azure Recovery Services vault.  
+**Available options:**
+
+* Start the file recovery process and select the recovery point of six days ago.
+* Download and execute the PowerShell script to mount the recovery volume.
+* Copy the file from the mounted volume to the VM.
+* Unmount the volumes.
+* Restore the disk containing the configuration file.
+* Restore the VM to a previous state.
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-01-30-05-41-40.png' width=700>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Why the selected answer is wrong**
+
+“Restore the disk containing the configuration file” is incorrect because a disk restore is a **full disk–level operation**. It replaces or attaches an entire managed disk from a recovery point. That is slower and risks overwriting or impacting other files on the disk, which directly violates the requirement to restore **only one file** as quickly as possible and **without affecting other system files**.
+On Azure exams, disk restore is a common trap when the scenario clearly calls for **granular recovery**.
+
+**Why the correct answer is right**
+
+The scenario is testing **Azure VM File Recovery** from a Recovery Services vault. File Recovery allows you to restore individual files from a specific recovery point **without restoring the VM or disk**.
+
+The correct sequence is:
+
+1. Start the file recovery process and select the recovery point of six days ago.
+2. Download and execute the PowerShell script to mount the recovery volume.
+3. Copy the required configuration file from the mounted volume to the VM.
+4. Unmount the volumes.
+
+This approach is the **fastest**, least disruptive method and is exactly what Azure Backup File Recovery is designed for.
+
+**Key takeaway**
+
+If the requirement is **one or a few files**, always choose **File Recovery**, not disk or VM restore.
+Disk restore = coarse-grained, higher impact.
+File Recovery = granular, fast, exam-preferred.
+
+**References**
+
+Azure VM file recovery
+[https://learn.microsoft.com/azure/backup/backup-azure-restore-files-from-vm](https://learn.microsoft.com/azure/backup/backup-azure-restore-files-from-vm)
+
+Restore Azure VM data using Azure Backup
+link removed
+
+Azure Recovery Services vault overview
+[https://learn.microsoft.com/azure/backup/backup-azure-recovery-services-vault-overview](https://learn.microsoft.com/azure/backup/backup-azure-recovery-services-vault-overview)
+
+</details>
+
+▶ **Related Lab:** [lab-vm-file-recovery](../hands-on-labs/monitoring/lab-vm-file-recovery/README.md)
+
+---
+
+#### Configure Azure Backup with PowerShell
+
+**Domain:** Monitor and Maintain Azure Resources
+**Skill:** Implement backup and recovery
+**Task:** Perform backup and restore operations by using Azure Backup
+
+You have an Azure subscription. You are not currently using Azure Backup. You plan to back up a virtual machine (VM) named `VM1` using Azure Backup. The backup should use the default backup policy to run daily backups.
+
+You need to identify the PowerShell cmdlets required to configure recurring backups using the default backup policy.
+
+Which three PowerShell cmdlets should you run in sequence? To answer, move the appropriate cmdlets from the list of possible cmdlets to the answer area and arrange them in the correct order.
+
+Available options
+
+A. `Backup-AzRecoveryServicesBackupItem`  
+B. `Enable-AzRecoveryServicesBackupAutoProtection`  
+C. `Set-AzRecoveryServicesBackupProperty`  
 
 Select and order 3:
 
 | Step | Action |
 |------|--------|
-| 1 | |
-| 2 | |
-| 3 | |
+| 1 | `Register-AzResourceProvider` |
+| 2 | `New-AzRecoveryServicesVault` |
+| 3 | `Enable-AzRecoveryServicesBackupProtection` |
 
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-03-16-04-41-52.png' width=600>
+<img src='.img/2026-03-20-03-41-43.png' width=600>
 
 </details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
 
-**Explanation**
+**Solution Steps:**
 
-You should perform the following actions in order:
+You should run the following cmdlets in order:
 
-1. **Select a restore point for `VMS1` in the Azure Recovery Services vault**
-2. **Select Restore Disks as the Restore Type and restore the data.**
-3. **Fetch and deploy the deployment template from the Azure Recovery Services vault.**
+1. `Register-AzResourceProvider`
+2. `New-AzRecoveryServicesVault`
+3. `Enable-AzRecoveryServicesBackupProtection`
 
-You should run a `Restore Disks` restoration and recreate `VMS1` from the restored disk when restoring a VM that has been configured as a part of an availability set. Begin by choosing the restore point from which you want to restore, and then select `Restore Disks` as your `Restore Type`. You can then restore the data, but you still need to recreate the VM. To do this, fetch and then deploy the deployment template from the Azure Recovery Services vault.
+You should first run the `Register-AzResourceProvider` cmdlet. This is required the first time you use Azure Backup. This registers the Azure Recovery Service provider in your subscription.
 
-After using the `Restore Disks` restore type, you also have the option of attaching the disk to an existing VM.
+You should then run the `New-AzRecoveryServicesVault` cmdlet to create a Recovery Services vault to store the backups.
 
-There is no need to manually create a new VM. You will use the deployment template to create the VM.
+Finally, you should run the `Enable-AzRecoveryServicesBackupProtection` cmdlet to enable backups to run using the default backup policy. Once enabled, backups will run automatically.
 
-You should not choose `Create a virtual machine` or `Replace existing` as the Restore Type. You should use `Create a virtual machine` to create a simple VM based on a VM restore point. You should use `Replace existing` to replace the disk on an existing VM.
+<img src='.img/2026-03-20-03-48-01.png' width=600>
 
-<img src='.img/2026-03-16-04-47-59.png' width=600>
+**Do not run:**
 
-**References**
-
-* [How to restore Azure VM data in Azure portal](https://learn.microsoft.com/azure/backup/backup-azure-arm-restore-vms)
-* [Availability options for Azure Virtual Machines](https://learn.microsoft.com/azure/virtual-machines/availability)
-* [Tutorial: Restore a VM with Azure CLI](https://learn.microsoft.com/azure/backup/tutorial-restore-disk)
-
-</details>
-
----
-
-#### Delete Recovery Services vault
-
-**Domain:** Monitor and Maintain Azure Resources
-**Skill:** Implement backup and recovery
-**Task:** Perform backup and restore operations by using Azure Backup
-
-You are backing up two protected virtual machines (VMs) named `VM1` and `VM2` to an Azure Recovery Services vault named `Vault1`. You use the same backup policy for `VM1` and `VM2`. Your organization supports additional VMs and Azure Recovery Services vaults. You are preparing to reorganize how backups through the Azure Backup service are configured for your organizations.
-
-You need to delete `Vault1`.
-
-Which three actions should you perform? Each correct answer presents part of the solution.
-
-A. Permanently remove any items in the soft delete state.  
-B. Delete `VM1` and `VM2`.  
-C. Delete the backup policy.  
-D. Disable the soft delete feature and delete all data.  
-E. Stop the backup of `VM1` and `VM2`.  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-20-04-01-09.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Why the selected answers are correct**
-
-You should disable the soft delete feature and delete all data. The soft delete feature is enabled by default, so you must explicitly disable the soft delete feature. You can then delete any data in the vault.
-
-You should also permanently remove any items in the soft delete state. To do this, you must undelete the data and then delete the data again. The data is permanently deleted and cannot be recovered.
-
-You should also unregister `VM1` and `VM2` (stop the backup of the VMs) to stop the backup of the VMs. You will not be able to delete the vault while the VMs are registered for backup even if the vault does not contain any data.
-
-<img src='.img/2026-03-20-04-06-37.png' width=600>
-
-<img src='.img/2026-03-20-04-09-00.png' width=600>
-
-**Why other options are incorrect**
-
-You should not delete `VM1` and `VM2`. You should only stop backup to `Vault1`.
-
-You should not delete the backup policy. Before you can delete a backup protection policy, the policy must not have any associated backup items. Before you delete the policy, make sure that each associated item is associated with some other policy.
-
-**Key takeaway**
-
-To delete a Recovery Services vault you must remove or permanently delete all backup data (including items in soft delete), disable soft delete if necessary, and unregister/stop protection for any registered servers or VMs. Do not delete source VMs unless that is explicitly required by your organizational process.
+* `Backup-AzRecoveryServicesBackupItem` — this cmdlet is used to run an on-demand backup based on your backup policy.
+* `Enable-AzRecoveryServicesBackupAutoProtection` — this cmdlet is used to let users automatically protect all unprotected and new databases.
+* `Set-AzRecoveryServicesBackupProperty` — this cmdlet sets backup storage properties for a Backup Services vault and is not required when initially setting up Azure Backup.
 
 **References**
 
-* [Delete an Azure Backup Recovery Services vault](https://learn.microsoft.com/azure/backup/backup-azure-delete-vault)
-* [Recovery Services vaults overview](https://learn.microsoft.com/azure/backup/backup-azure-recovery-services-vault-overview)
-
-</details>
-
----
-
-#### Move Recovery Services vault
-
-**Domain:** Monitor and Maintain Azure Resources
-**Skill:** Implement backup and recovery
-**Task:** Perform backup and restore operations by using Azure Backup
-
-Your company has two Azure subscriptions named `Sub1` and `Sub2`. You create a Recovery Services vault in `Sub1` named `Vault1` in the Central US region.
-
-You configure `Vault1` for Azure Backup.
-
-You need to move `Vault1` to `Sub2`. You want to minimize downtime and data loss during this process.
-
-Which PowerShell cmdlet should you run first?
-
-A. `Set-AzResource`  
-B. `Export-AzResourceGroup`  
-C. `Move-AzResource`  
-D. `New-AzResource`  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-16-04-15-50.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-You should run the `Move-AzResource` cmdlet first. An Azure Recovery Services vault is an Azure resource that is created in a resource group. You would use the `Move-AzResource` cmdlet to move a Recovery Services vault to a different subscription or to a different resource group within the same subscription. This is the only command required to move the vault. Both the source and destination resource groups are locked during the move. Since all data and backup policies are retained during the move and does not require creation or deletion of any resources, this solution compared to the other options minimizes downtime. Some Microsoft references still refer to the older cmdlet name, `Move-AzureResource`.
-
-You should not run the `Export-AzResourceGroup` cmdlet. This cmdlet is used to export a resource group to a template and then save the template. This is often used when creating a new template based on an existing resource group. It is not part of the Recovery Services vault move process.
-
-You should not run the `New-AzResource` cmdlet. It is not necessary to manually create a new resource when moving a Recovery Services vault.
-
-You should not run the `Set-AzResource` cmdlet. This cmdlet is used to configure properties for an existing resource, but it does not let you change the resource group or subscription for the resource.
-
-<img src='.img/2026-03-16-04-22-19.png' width=600>
-
-**References**
-
-* [Move a Recovery Services vault across Azure subscriptions and resource groups](https://learn.microsoft.com/azure/backup/backup-azure-move-recovery-services-vault)
-* [Move-AzResource](https://learn.microsoft.com/powershell/module/az.resources/move-azresource?view=azps-15.4.0)
-* [Export-AzResourceGroup](https://learn.microsoft.com/powershell/module/az.resources/export-azresourcegroup?view=azps-15.4.0)
-* [New-AzResource](https://learn.microsoft.com/powershell/module/az.resources/new-azresource?view=azps-15.4.0)
-* [Set-AzResource](https://learn.microsoft.com/powershell/module/az.resources/set-azresource?view=azps-15.4.0)
-
-</details>
-
----
-
-#### Backup Pre-Check Warning Cause
-
-**Domain:** Monitor and Maintain Azure Resources
-**Skill:** Implement backup and recovery
-**Task:** Configure and interpret reports and alerts for backups
-
-Your company has an Azure subscription. You create an Azure Recovery Services vault named `RSV1`. You have a virtual machine (VM) named `VM1` that is deployed in the East US region. You create a backup policy to back up `VM1` to `RSV1` on a recurring schedule. You are preparing to run your first backup and the Backup Pre-Check status displays a Warning status.
-
-You need to determine the possible cause of this status.
-
-Which condition would result in a Warning status?
-
-A. `VM1` is an unmanaged Azure VM encrypted with BitLocker encryption keys (BEKs).  
-B. The most recent VM agent has not been installed on `VM1`.  
-C. `VM1` is unable to communicate with the Azure Backup service.  
-D. `VM1` has a non-premium storage account.  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-16-04-27-00.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-One possible reason for a Warning status during the Backup Pre-check is that the most recent VM agent has not been installed on `VM1`. A Warning status indicates that the backup process might fail. The report status provides recommended steps to ensure successful backups.
-
-A Critical status would be reported if `VM1` was unable to communicate with the Azure Backup service. A Critical status indicates that the current VM configuration will result in a backup failure.
-
-A situation in which `VM1` has a non-premium storage account would not result in a Warning status. This is a supported configuration.
-
-Having `VM1` as an unmanaged Azure VM encrypted with BEK would not result in a Warning status. Backups of managed and unmanaged VMs encrypted with BEK are supported by Azure Backup.
-
-<img src='.img/2026-03-16-04-34-23.png' width=600>
-
-<img src='.img/2026-03-16-04-35-37.png' width=600>
-
-<details>
-<summary>📝 More Detail</summary>
-
-In Azure VM Backup, the consistency level describes **how clean the data state is when the snapshot of the VM disks is taken**. The three common levels are crash-consistent, file-system consistent, and application-consistent.
-
-**Crash-consistent backup**
-
-A crash-consistent backup captures the VM disks exactly as they exist at the moment the snapshot is taken, **without coordinating with the operating system or applications inside the VM**. Azure simply freezes the disks briefly and takes a snapshot.
-
-Conceptually, it is the same state the system would be in if the VM suddenly lost power.
-
-Characteristics:
-
-* No interaction with the guest OS
-* No flushing of memory buffers to disk
-* No coordination with applications such as SQL Server or Exchange
-* Recovery relies on the OS performing normal crash recovery when the VM boots
-
-When the VM is restored from this backup:
-
-* The operating system performs filesystem recovery (similar to after a power outage)
-* Databases or applications perform their own recovery using logs
-
-Because of this, the restored VM may contain **partially written data or incomplete transactions**, though most modern filesystems and databases are designed to recover from this condition.
-
-Typical scenarios:
-
-* Backing up stateless or low-risk workloads
-* Backup of stopped or deallocated VMs
-* Situations where application-level consistency is not required
-
-**File-system consistent backup**
-
-A file-system consistent backup coordinates with the **guest operating system** so that filesystem buffers are flushed to disk before the snapshot occurs.
-
-This means:
-
-* The OS flushes pending writes from memory to disk
-* Files are in a clean state
-* The filesystem does not require repair on restore
-
-However:
-
-* Applications are **not quiesced**
-* Databases or services may still have in-memory transactions not yet written to disk
-
-The result is that **files are consistent**, but applications may still require recovery.
-
-**Application-consistent backup**
-
-An application-consistent backup coordinates with **both the operating system and supported applications**.
-
-Azure Backup uses mechanisms such as:
-
-* **VSS (Volume Shadow Copy Service)** on Windows
-* Pre/post scripts or filesystem freeze operations on Linux
-
-During this process:
-
-1. Applications are asked to pause writes
-2. In-memory data is flushed to disk
-3. Transactions are committed
-4. The snapshot is taken
-5. Applications resume
-
-This produces the cleanest possible backup.
-
-Benefits:
-
-* Databases are transactionally consistent
-* Applications do not require recovery on restore
-* No data loss beyond the last committed transaction
-
-**Key differences**
-
-Crash-consistent backups simulate an unexpected power loss and require the OS and applications to recover during startup.
-
-File-system consistent backups ensure the filesystem itself is clean, but applications might still need recovery.
-
-Application-consistent backups coordinate with applications so that both the filesystem and application data are fully consistent at the time of backup.
-
-**Practical example**
-
-Suppose a VM runs SQL Server:
-
-* **Crash-consistent backup:** SQL Server detects an unexpected shutdown and replays transaction logs during startup.
-* **File-system consistent backup:** the NTFS filesystem is clean, but SQL Server still performs transaction recovery.
-* **Application-consistent backup:** SQL Server flushes transactions before the snapshot, so the database starts immediately without recovery.
-
-Because of this, **application-consistent backups are preferred for production workloads**, while crash-consistent backups are mainly used when application coordination is not available or the VM is stopped.
-
-</details>
-
-**References**
-
-* [What is the Azure Backup service?](https://learn.microsoft.com/azure/backup/backup-overview)
-* [Introducing Backup Pre-Checks for Backup of Azure VMs](https://learn.microsoft.com/azure/backup/backup-azure-manage-windows-server#monitor-backup-jobs-and-alerts)
-* [An overview of Azure VM backup](https://learn.microsoft.com/azure/backup/backup-azure-vms-introduction)
-
-</details>
-
----
-
-#### Recover Azure VM from Deleted Backup
-
-**Domain:** Monitor and Maintain Azure Resources
-**Skill:** Implement backup and recovery
-**Task:** Perform backup and restore operations by using Azure Backup
-
-An Infrastructure-as-a-Service (IaaS) virtual machine (VM) named VM10 is backed up to an Azure Recovery Services vault. VM10 and all of its restore points are deleted by mistake.
-
-You need to recover VM10.
-
-How many days does VM10's data remain available for recovery?
-
-A. 365 days  
-B. 30 days  
-C. 14 days  
-D. 90 days  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-01-30-05-24-56.png' width=700>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Why the selected answer is right**
-Azure Backup uses **Soft Delete** for Azure IaaS VM backups. When a VM and its backup data are deleted (intentionally or accidentally), the backup data is **retained for 14 days** in a soft-deleted state. During this window, the VM’s backup data can be recovered by undeleting the backup item from the Recovery Services vault. After 14 days, the data is permanently deleted and cannot be recovered.
-
-**Key takeaway**
-For Azure IaaS VMs protected by a Recovery Services vault, **soft delete provides a fixed 14-day recovery window** after deletion—independent of the configured backup retention policy.
-
-<img src='.img/2026-02-04-03-04-12.png' width=500>
-
-**References**
-
-* [Soft delete for virtual machines](https://learn.microsoft.com/en-us/azure/backup/soft-delete-virtual-machines?utm_source=chatgpt.com&tabs=azure-portal)
-
-</details>
-
----
-
-#### Recovery Services vault diagnostic target
-
-**Domain:** Monitor and Maintain Azure Resources
-**Skill:** Implement backup and recovery
-**Task:** Configure and interpret reports and alerts for backups
-
-Your company uses multiple Azure Recovery Services vaults to store backup data. The company plans to start using Azure Backup reports to help to forecast cloud storage requirements and audit backup restores.
-
-You need to configure the Azure Recovery Services vault diagnostic settings and specify the target for each Azure Recovery Services vault's diagnostic data to support reporting.
-
-Where should you target the Azure Recovery Services vault diagnostic data?
-
-A. Archive to a blob storage account.  
-B. Archive to a file storage account.  
-C. Stream to an event hub.  
-D. Send to Log Analytics.  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-20-03-57-00.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Why the selected answer is correct**
-
-You should send the vault diagnostic data to a `Log Analytics workspace`. Azure Backup reporting consumes resource-specific diagnostic events from `Recovery Services vaults` that are ingested into Log Analytics; the Backup Reports solution reads from those `Log Analytics` tables to produce the reports.
-
-**Why other options are incorrect**
-
-Archiving diagnostics to a blob storage account or a file storage account retains raw diagnostic files but does not populate the `Log Analytics` tables required by Azure Backup Reports. Streaming the diagnostics to an event hub merely forwards raw events and likewise does not provide the resource-specific Log Analytics tables and schema that the reporting solution requires.
-
-**Key takeaway**
-
-To enable Azure Backup reporting and auditing at scale, configure each `Recovery Services vault` to send diagnostics to a `Log Analytics workspace` (resource-specific tables) so the Backup Reports can query and visualize the data.
-
-**References**
-
-* [Configure Azure Backup reports](https://learn.microsoft.com/azure/backup/configure-reports)
-* [Use diagnostics settings for Recovery Services vaults](https://learn.microsoft.com/azure/backup/backup-azure-diagnostic-events)
+- [What is the Azure Backup service?](https://learn.microsoft.com/azure/backup/backup-overview)
+- [Back up a virtual machine in Azure with PowerShell](https://learn.microsoft.com/azure/backup/quick-backup-vm-powershell)
+- [Enable-AzRecoveryServicesBackupAutoProtection](https://learn.microsoft.com/powershell/module/az.recoveryservices/enable-azrecoveryservicesbackupautoprotection?view=azps-15.4.0)
+- [Set-AzRecoveryServicesBackupProperty](https://learn.microsoft.com/powershell/module/az.recoveryservices/set-azrecoveryservicesbackupproperty?view=azps-15.4.0)
 
 </details>
 
@@ -8866,144 +8707,309 @@ If you'd like, I can also show the **architecture diagram Microsoft expects you 
 
 ---
 
-#### Configure Azure Backup with PowerShell
+#### Recovery Services vault diagnostic target
 
 **Domain:** Monitor and Maintain Azure Resources
 **Skill:** Implement backup and recovery
-**Task:** Perform backup and restore operations by using Azure Backup
+**Task:** Configure and interpret reports and alerts for backups
 
-You have an Azure subscription. You are not currently using Azure Backup. You plan to back up a virtual machine (VM) named `VM1` using Azure Backup. The backup should use the default backup policy to run daily backups.
+Your company uses multiple Azure Recovery Services vaults to store backup data. The company plans to start using Azure Backup reports to help to forecast cloud storage requirements and audit backup restores.
 
-You need to identify the PowerShell cmdlets required to configure recurring backups using the default backup policy.
+You need to configure the Azure Recovery Services vault diagnostic settings and specify the target for each Azure Recovery Services vault's diagnostic data to support reporting.
 
-Which three PowerShell cmdlets should you run in sequence? To answer, move the appropriate cmdlets from the list of possible cmdlets to the answer area and arrange them in the correct order.
+Where should you target the Azure Recovery Services vault diagnostic data?
 
-Available options
-
-A. `Backup-AzRecoveryServicesBackupItem`  
-B. `Enable-AzRecoveryServicesBackupAutoProtection`  
-C. `Set-AzRecoveryServicesBackupProperty`  
-
-Select and order 3:
-
-| Step | Action |
-|------|--------|
-| 1 | `Register-AzResourceProvider` |
-| 2 | `New-AzRecoveryServicesVault` |
-| 3 | `Enable-AzRecoveryServicesBackupProtection` |
+A. Archive to a blob storage account.  
+B. Archive to a file storage account.  
+C. Stream to an event hub.  
+D. Send to Log Analytics.  
 
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-03-20-03-41-43.png' width=600>
+<img src='.img/2026-03-20-03-57-00.png' width=600>
 
 </details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
 
-**Solution Steps:**
+**Why the selected answer is correct**
 
-You should run the following cmdlets in order:
+You should send the vault diagnostic data to a `Log Analytics workspace`. Azure Backup reporting consumes resource-specific diagnostic events from `Recovery Services vaults` that are ingested into Log Analytics; the Backup Reports solution reads from those `Log Analytics` tables to produce the reports.
 
-1. `Register-AzResourceProvider`
-2. `New-AzRecoveryServicesVault`
-3. `Enable-AzRecoveryServicesBackupProtection`
+**Why other options are incorrect**
 
-You should first run the `Register-AzResourceProvider` cmdlet. This is required the first time you use Azure Backup. This registers the Azure Recovery Service provider in your subscription.
+Archiving diagnostics to a blob storage account or a file storage account retains raw diagnostic files but does not populate the `Log Analytics` tables required by Azure Backup Reports. Streaming the diagnostics to an event hub merely forwards raw events and likewise does not provide the resource-specific Log Analytics tables and schema that the reporting solution requires.
 
-You should then run the `New-AzRecoveryServicesVault` cmdlet to create a Recovery Services vault to store the backups.
+**Key takeaway**
 
-Finally, you should run the `Enable-AzRecoveryServicesBackupProtection` cmdlet to enable backups to run using the default backup policy. Once enabled, backups will run automatically.
-
-<img src='.img/2026-03-20-03-48-01.png' width=600>
-
-**Do not run:**
-
-* `Backup-AzRecoveryServicesBackupItem` — this cmdlet is used to run an on-demand backup based on your backup policy.
-* `Enable-AzRecoveryServicesBackupAutoProtection` — this cmdlet is used to let users automatically protect all unprotected and new databases.
-* `Set-AzRecoveryServicesBackupProperty` — this cmdlet sets backup storage properties for a Backup Services vault and is not required when initially setting up Azure Backup.
+To enable Azure Backup reporting and auditing at scale, configure each `Recovery Services vault` to send diagnostics to a `Log Analytics workspace` (resource-specific tables) so the Backup Reports can query and visualize the data.
 
 **References**
 
-- [What is the Azure Backup service?](https://learn.microsoft.com/azure/backup/backup-overview)
-- [Back up a virtual machine in Azure with PowerShell](https://learn.microsoft.com/azure/backup/quick-backup-vm-powershell)
-- [Enable-AzRecoveryServicesBackupAutoProtection](https://learn.microsoft.com/powershell/module/az.recoveryservices/enable-azrecoveryservicesbackupautoprotection?view=azps-15.4.0)
-- [Set-AzRecoveryServicesBackupProperty](https://learn.microsoft.com/powershell/module/az.recoveryservices/set-azrecoveryservicesbackupproperty?view=azps-15.4.0)
+* [Configure Azure Backup reports](https://learn.microsoft.com/azure/backup/configure-reports)
+* [Use diagnostics settings for Recovery Services vaults](https://learn.microsoft.com/azure/backup/backup-azure-diagnostic-events)
 
 </details>
 
 ---
 
-#### Recover Configuration File from Azure VM Backup
+#### Restore VM from backup (availability set)
 
 **Domain:** Monitor and Maintain Azure Resources
 **Skill:** Implement backup and recovery
 **Task:** Perform backup and restore operations by using Azure Backup
 
-You have two Azure virtual machines (VMs) named VM1 and VM2 running Windows Server 2019. The VMs are backed up by an Azure Recovery Services vault. A configuration file on VM1 was updated, and you need to restore it to a version from six days ago.
+Your company has an Azure subscription and they use Azure Backup to protect the deployed virtual machines (VMs). Your subscription includes a VM named `VMS1` that runs Windows Server 2019. `VMS1` is configured as a part of an availability set and it is backed up through machine-level backup. `VMS1` is mistakenly deleted.
 
-You need to perform this action as quickly as possible without affecting other system files.
+You need to restore `VMS1` from backup and configure `VMS1` as part of the same availability set.
 
-Which four actions should you perform in sequence? To answer, move the appropriate actions from the list of actions to the answer area and arrange them in the correct order.
+Which three actions should you perform in sequence? To answer, move the appropriate actions from the list of possible actions to the answer area and arrange them in the correct order.
 
-**Available options:**
+A. Select Create a virtual machine as the Restore Type and restore the data.  
+B. Select Replace existing as the Restore Type and restore the data.  
+C. Select Restore Disks as the Restore Type and restore the data.  
+D. Manually create a new VM.  
+E. Fetch and deploy the deployment template from the Azure Recovery Services vault.  
+F. Select a restore point for VMS1 in the Azure Recovery Services vault.  
 
-* Start the file recovery process and select the recovery point of six days ago.
-* Download and execute the PowerShell script to mount the recovery volume.
-* Copy the file from the mounted volume to the VM.
-* Unmount the volumes.
-* Restore the disk containing the configuration file.
-* Restore the VM to a previous state.
+Select and order 3:
+
+| Step | Action |
+|------|--------|
+| 1 | |
+| 2 | |
+| 3 | |
 
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-01-30-05-41-40.png' width=700>
+<img src='.img/2026-03-16-04-41-52.png' width=600>
 
 </details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
 
-**Why the selected answer is wrong**
+**Explanation**
 
-“Restore the disk containing the configuration file” is incorrect because a disk restore is a **full disk–level operation**. It replaces or attaches an entire managed disk from a recovery point. That is slower and risks overwriting or impacting other files on the disk, which directly violates the requirement to restore **only one file** as quickly as possible and **without affecting other system files**.
-On Azure exams, disk restore is a common trap when the scenario clearly calls for **granular recovery**.
+You should perform the following actions in order:
 
-**Why the correct answer is right**
+1. **Select a restore point for `VMS1` in the Azure Recovery Services vault**
+2. **Select Restore Disks as the Restore Type and restore the data.**
+3. **Fetch and deploy the deployment template from the Azure Recovery Services vault.**
 
-The scenario is testing **Azure VM File Recovery** from a Recovery Services vault. File Recovery allows you to restore individual files from a specific recovery point **without restoring the VM or disk**.
+You should run a `Restore Disks` restoration and recreate `VMS1` from the restored disk when restoring a VM that has been configured as a part of an availability set. Begin by choosing the restore point from which you want to restore, and then select `Restore Disks` as your `Restore Type`. You can then restore the data, but you still need to recreate the VM. To do this, fetch and then deploy the deployment template from the Azure Recovery Services vault.
 
-The correct sequence is:
+After using the `Restore Disks` restore type, you also have the option of attaching the disk to an existing VM.
 
-1. Start the file recovery process and select the recovery point of six days ago.
-2. Download and execute the PowerShell script to mount the recovery volume.
-3. Copy the required configuration file from the mounted volume to the VM.
-4. Unmount the volumes.
+There is no need to manually create a new VM. You will use the deployment template to create the VM.
 
-This approach is the **fastest**, least disruptive method and is exactly what Azure Backup File Recovery is designed for.
+You should not choose `Create a virtual machine` or `Replace existing` as the Restore Type. You should use `Create a virtual machine` to create a simple VM based on a VM restore point. You should use `Replace existing` to replace the disk on an existing VM.
 
-**Key takeaway**
-
-If the requirement is **one or a few files**, always choose **File Recovery**, not disk or VM restore.
-Disk restore = coarse-grained, higher impact.
-File Recovery = granular, fast, exam-preferred.
+<img src='.img/2026-03-16-04-47-59.png' width=600>
 
 **References**
 
-Azure VM file recovery
-[https://learn.microsoft.com/azure/backup/backup-azure-restore-files-from-vm](https://learn.microsoft.com/azure/backup/backup-azure-restore-files-from-vm)
-
-Restore Azure VM data using Azure Backup
-link removed
-
-Azure Recovery Services vault overview
-[https://learn.microsoft.com/azure/backup/backup-azure-recovery-services-vault-overview](https://learn.microsoft.com/azure/backup/backup-azure-recovery-services-vault-overview)
+* [How to restore Azure VM data in Azure portal](https://learn.microsoft.com/azure/backup/backup-azure-arm-restore-vms)
+* [Availability options for Azure Virtual Machines](https://learn.microsoft.com/azure/virtual-machines/availability)
+* [Tutorial: Restore a VM with Azure CLI](https://learn.microsoft.com/azure/backup/tutorial-restore-disk)
 
 </details>
 
-▶ **Related Lab:** [lab-vm-file-recovery](../hands-on-labs/monitoring/lab-vm-file-recovery/README.md)
+---
+
+#### Backup Pre-Check Warning Cause
+
+**Domain:** Monitor and Maintain Azure Resources
+**Skill:** Implement backup and recovery
+**Task:** Configure and interpret reports and alerts for backups
+
+Your company has an Azure subscription. You create an Azure Recovery Services vault named `RSV1`. You have a virtual machine (VM) named `VM1` that is deployed in the East US region. You create a backup policy to back up `VM1` to `RSV1` on a recurring schedule. You are preparing to run your first backup and the Backup Pre-Check status displays a Warning status.
+
+You need to determine the possible cause of this status.
+
+Which condition would result in a Warning status?
+
+A. `VM1` is an unmanaged Azure VM encrypted with BitLocker encryption keys (BEKs).  
+B. The most recent VM agent has not been installed on `VM1`.  
+C. `VM1` is unable to communicate with the Azure Backup service.  
+D. `VM1` has a non-premium storage account.  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-16-04-27-00.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+One possible reason for a Warning status during the Backup Pre-check is that the most recent VM agent has not been installed on `VM1`. A Warning status indicates that the backup process might fail. The report status provides recommended steps to ensure successful backups.
+
+A Critical status would be reported if `VM1` was unable to communicate with the Azure Backup service. A Critical status indicates that the current VM configuration will result in a backup failure.
+
+A situation in which `VM1` has a non-premium storage account would not result in a Warning status. This is a supported configuration.
+
+Having `VM1` as an unmanaged Azure VM encrypted with BEK would not result in a Warning status. Backups of managed and unmanaged VMs encrypted with BEK are supported by Azure Backup.
+
+<img src='.img/2026-03-16-04-34-23.png' width=600>
+
+<img src='.img/2026-03-16-04-35-37.png' width=600>
+
+<details>
+<summary>📝 More Detail</summary>
+
+In Azure VM Backup, the consistency level describes **how clean the data state is when the snapshot of the VM disks is taken**. The three common levels are crash-consistent, file-system consistent, and application-consistent.
+
+**Crash-consistent backup**
+
+A crash-consistent backup captures the VM disks exactly as they exist at the moment the snapshot is taken, **without coordinating with the operating system or applications inside the VM**. Azure simply freezes the disks briefly and takes a snapshot.
+
+Conceptually, it is the same state the system would be in if the VM suddenly lost power.
+
+Characteristics:
+
+* No interaction with the guest OS
+* No flushing of memory buffers to disk
+* No coordination with applications such as SQL Server or Exchange
+* Recovery relies on the OS performing normal crash recovery when the VM boots
+
+When the VM is restored from this backup:
+
+* The operating system performs filesystem recovery (similar to after a power outage)
+* Databases or applications perform their own recovery using logs
+
+Because of this, the restored VM may contain **partially written data or incomplete transactions**, though most modern filesystems and databases are designed to recover from this condition.
+
+Typical scenarios:
+
+* Backing up stateless or low-risk workloads
+* Backup of stopped or deallocated VMs
+* Situations where application-level consistency is not required
+
+**File-system consistent backup**
+
+A file-system consistent backup coordinates with the **guest operating system** so that filesystem buffers are flushed to disk before the snapshot occurs.
+
+This means:
+
+* The OS flushes pending writes from memory to disk
+* Files are in a clean state
+* The filesystem does not require repair on restore
+
+However:
+
+* Applications are **not quiesced**
+* Databases or services may still have in-memory transactions not yet written to disk
+
+The result is that **files are consistent**, but applications may still require recovery.
+
+**Application-consistent backup**
+
+An application-consistent backup coordinates with **both the operating system and supported applications**.
+
+Azure Backup uses mechanisms such as:
+
+* **VSS (Volume Shadow Copy Service)** on Windows
+* Pre/post scripts or filesystem freeze operations on Linux
+
+During this process:
+
+1. Applications are asked to pause writes
+2. In-memory data is flushed to disk
+3. Transactions are committed
+4. The snapshot is taken
+5. Applications resume
+
+This produces the cleanest possible backup.
+
+Benefits:
+
+* Databases are transactionally consistent
+* Applications do not require recovery on restore
+* No data loss beyond the last committed transaction
+
+**Key differences**
+
+Crash-consistent backups simulate an unexpected power loss and require the OS and applications to recover during startup.
+
+File-system consistent backups ensure the filesystem itself is clean, but applications might still need recovery.
+
+Application-consistent backups coordinate with applications so that both the filesystem and application data are fully consistent at the time of backup.
+
+**Practical example**
+
+Suppose a VM runs SQL Server:
+
+* **Crash-consistent backup:** SQL Server detects an unexpected shutdown and replays transaction logs during startup.
+* **File-system consistent backup:** the NTFS filesystem is clean, but SQL Server still performs transaction recovery.
+* **Application-consistent backup:** SQL Server flushes transactions before the snapshot, so the database starts immediately without recovery.
+
+Because of this, **application-consistent backups are preferred for production workloads**, while crash-consistent backups are mainly used when application coordination is not available or the VM is stopped.
+
+</details>
+
+**References**
+
+* [What is the Azure Backup service?](https://learn.microsoft.com/azure/backup/backup-overview)
+* [Introducing Backup Pre-Checks for Backup of Azure VMs](https://learn.microsoft.com/azure/backup/backup-azure-manage-windows-server#monitor-backup-jobs-and-alerts)
+* [An overview of Azure VM backup](https://learn.microsoft.com/azure/backup/backup-azure-vms-introduction)
+
+</details>
+
+---
+
+#### Move Recovery Services vault
+
+**Domain:** Monitor and Maintain Azure Resources
+**Skill:** Implement backup and recovery
+**Task:** Perform backup and restore operations by using Azure Backup
+
+Your company has two Azure subscriptions named `Sub1` and `Sub2`. You create a Recovery Services vault in `Sub1` named `Vault1` in the Central US region.
+
+You configure `Vault1` for Azure Backup.
+
+You need to move `Vault1` to `Sub2`. You want to minimize downtime and data loss during this process.
+
+Which PowerShell cmdlet should you run first?
+
+A. `Set-AzResource`  
+B. `Export-AzResourceGroup`  
+C. `Move-AzResource`  
+D. `New-AzResource`  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-16-04-15-50.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+You should run the `Move-AzResource` cmdlet first. An Azure Recovery Services vault is an Azure resource that is created in a resource group. You would use the `Move-AzResource` cmdlet to move a Recovery Services vault to a different subscription or to a different resource group within the same subscription. This is the only command required to move the vault. Both the source and destination resource groups are locked during the move. Since all data and backup policies are retained during the move and does not require creation or deletion of any resources, this solution compared to the other options minimizes downtime. Some Microsoft references still refer to the older cmdlet name, `Move-AzureResource`.
+
+You should not run the `Export-AzResourceGroup` cmdlet. This cmdlet is used to export a resource group to a template and then save the template. This is often used when creating a new template based on an existing resource group. It is not part of the Recovery Services vault move process.
+
+You should not run the `New-AzResource` cmdlet. It is not necessary to manually create a new resource when moving a Recovery Services vault.
+
+You should not run the `Set-AzResource` cmdlet. This cmdlet is used to configure properties for an existing resource, but it does not let you change the resource group or subscription for the resource.
+
+<img src='.img/2026-03-16-04-22-19.png' width=600>
+
+**References**
+
+* [Move a Recovery Services vault across Azure subscriptions and resource groups](https://learn.microsoft.com/azure/backup/backup-azure-move-recovery-services-vault)
+* [Move-AzResource](https://learn.microsoft.com/powershell/module/az.resources/move-azresource?view=azps-15.4.0)
+* [Export-AzResourceGroup](https://learn.microsoft.com/powershell/module/az.resources/export-azresourcegroup?view=azps-15.4.0)
+* [New-AzResource](https://learn.microsoft.com/powershell/module/az.resources/new-azresource?view=azps-15.4.0)
+* [Set-AzResource](https://learn.microsoft.com/powershell/module/az.resources/set-azresource?view=azps-15.4.0)
+
+</details>
 
 ---
 
@@ -9058,6 +9064,108 @@ Azure Site Recovery High Churn does not use Azure Elastic SAN. Azure Elastic SAN
 - [Storage account overview](https://learn.microsoft.com/azure/storage/common/storage-account-overview)
 - [What is Azure Files?](https://learn.microsoft.com/azure/storage/files/storage-files-introduction)
 - [What is Azure Elastic SAN? Preview](https://learn.microsoft.com/azure/storage/elastic-san/elastic-san-introduction)
+
+</details>
+
+---
+
+#### Recover Azure VM from Deleted Backup
+
+**Domain:** Monitor and Maintain Azure Resources
+**Skill:** Implement backup and recovery
+**Task:** Perform backup and restore operations by using Azure Backup
+
+An Infrastructure-as-a-Service (IaaS) virtual machine (VM) named VM10 is backed up to an Azure Recovery Services vault. VM10 and all of its restore points are deleted by mistake.
+
+You need to recover VM10.
+
+How many days does VM10's data remain available for recovery?
+
+A. 365 days  
+B. 30 days  
+C. 14 days  
+D. 90 days  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-01-30-05-24-56.png' width=700>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Why the selected answer is right**
+Azure Backup uses **Soft Delete** for Azure IaaS VM backups. When a VM and its backup data are deleted (intentionally or accidentally), the backup data is **retained for 14 days** in a soft-deleted state. During this window, the VM’s backup data can be recovered by undeleting the backup item from the Recovery Services vault. After 14 days, the data is permanently deleted and cannot be recovered.
+
+**Key takeaway**
+For Azure IaaS VMs protected by a Recovery Services vault, **soft delete provides a fixed 14-day recovery window** after deletion—independent of the configured backup retention policy.
+
+<img src='.img/2026-02-04-03-04-12.png' width=500>
+
+**References**
+
+* [Soft delete for virtual machines](https://learn.microsoft.com/en-us/azure/backup/soft-delete-virtual-machines?utm_source=chatgpt.com&tabs=azure-portal)
+
+</details>
+
+---
+
+#### Delete Recovery Services vault
+
+**Domain:** Monitor and Maintain Azure Resources
+**Skill:** Implement backup and recovery
+**Task:** Perform backup and restore operations by using Azure Backup
+
+You are backing up two protected virtual machines (VMs) named `VM1` and `VM2` to an Azure Recovery Services vault named `Vault1`. You use the same backup policy for `VM1` and `VM2`. Your organization supports additional VMs and Azure Recovery Services vaults. You are preparing to reorganize how backups through the Azure Backup service are configured for your organizations.
+
+You need to delete `Vault1`.
+
+Which three actions should you perform? Each correct answer presents part of the solution.
+
+A. Permanently remove any items in the soft delete state.  
+B. Delete `VM1` and `VM2`.  
+C. Delete the backup policy.  
+D. Disable the soft delete feature and delete all data.  
+E. Stop the backup of `VM1` and `VM2`.  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-20-04-01-09.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Why the selected answers are correct**
+
+You should disable the soft delete feature and delete all data. The soft delete feature is enabled by default, so you must explicitly disable the soft delete feature. You can then delete any data in the vault.
+
+You should also permanently remove any items in the soft delete state. To do this, you must undelete the data and then delete the data again. The data is permanently deleted and cannot be recovered.
+
+You should also unregister `VM1` and `VM2` (stop the backup of the VMs) to stop the backup of the VMs. You will not be able to delete the vault while the VMs are registered for backup even if the vault does not contain any data.
+
+<img src='.img/2026-03-20-04-06-37.png' width=600>
+
+<img src='.img/2026-03-20-04-09-00.png' width=600>
+
+**Why other options are incorrect**
+
+You should not delete `VM1` and `VM2`. You should only stop backup to `Vault1`.
+
+You should not delete the backup policy. Before you can delete a backup protection policy, the policy must not have any associated backup items. Before you delete the policy, make sure that each associated item is associated with some other policy.
+
+**Key takeaway**
+
+To delete a Recovery Services vault you must remove or permanently delete all backup data (including items in soft delete), disable soft delete if necessary, and unregister/stop protection for any registered servers or VMs. Do not delete source VMs unless that is explicitly required by your organizational process.
+
+**References**
+
+* [Delete an Azure Backup Recovery Services vault](https://learn.microsoft.com/azure/backup/backup-azure-delete-vault)
+* [Recovery Services vaults overview](https://learn.microsoft.com/azure/backup/backup-azure-recovery-services-vault-overview)
 
 </details>
 

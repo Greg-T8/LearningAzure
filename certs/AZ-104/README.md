@@ -107,7 +107,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 |  | Modify an existing Bicep file | 1 | 0 |
 |  | Deploy resources by using an ARM template or a Bicep file | 3 | 0 |
 |  | Export a deployment as an ARM template or convert an ARM template to a Bicep file | 3 | 0 |
-| Create and configure virtual machines (7 tasks) | Create a virtual machine | 0 | 0 |
+| Create and configure virtual machines (7 tasks) | Create a virtual machine | 1 | 0 |
 |  | Configure Azure Disk Encryption | 3 | 1 |
 |  | Move a VM to another resource group, subscription, or region | 0 | 0 |
 |  | Manage virtual machine sizes | 2 | 0 |
@@ -115,7 +115,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 |  | Deploy VMs to availability zones and availability sets | 4 | 0 |
 |  | Deploy and configure an Azure Virtual Machine Scale Sets | 2 | 1 |
 | Provision and manage containers in the Azure portal (4 tasks) | Create and manage an Azure container registry | 1 | 0 |
-|  | Provision a container by using Azure Container Instances | 0 | 0 |
+|  | Provision a container by using Azure Container Instances | 1 | 0 |
 |  | Provision a container by using Azure Container Apps | 0 | 0 |
 |  | Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps | 1 | 1 |
 | Create and configure Azure App Service (8 tasks) | Provision an App Service plan | 7 | 1 |
