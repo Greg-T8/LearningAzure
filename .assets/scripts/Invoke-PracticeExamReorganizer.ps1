@@ -213,7 +213,7 @@ $Helpers = {
                 }
 
                 if ($line -match '^\*\*Skill:\*\*\s+(.+)$') {
-                    $currentBlock.Skill = $Matches[1].Trim()
+                    $currentBlock.Skill = ($Matches[1].Trim() -replace '\s*\(\d+\s+tasks?\)\s*$', '')
                     continue
                 }
 

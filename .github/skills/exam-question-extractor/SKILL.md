@@ -123,7 +123,7 @@ Rules:
 
 * **Source of truth:** Read the exam's README (e.g., `certs/AZ-104/README.md`) and locate the **Coverage Table** between the `<!-- BEGIN COVERAGE TABLE -->` and `<!-- END COVERAGE TABLE -->` markers. Each domain is a collapsible `<details>` block whose `<summary>` contains the domain name and weight (omit the weight percentage when emitting the domain). Inside each block is a pipe-delimited table with four columns: **Skill | Task | Qs | Labs**. Read the **first column** for the skill name and the **second column** for the task name. Skill names appear only in the first row of each skill group — subsequent rows in the same group leave the Skill cell empty (they inherit the skill from the nearest non-empty Skill cell above).
 * **Skill enumeration (mandatory):** Before writing the `**Skill:**` value, enumerate all distinct non-empty values from the **Skill** column in the coverage table and select only from that set. Never synthesize a skill name from task wording.
-* Use exact wording from the README for domain and skill names.
+* Use exact wording from the README for domain and skill names. The skill column in the README may contain a task-count suffix such as `(5 tasks)` — **omit it**. Write only the bare skill name (e.g., `Manage Azure subscriptions and governance`, not `Manage Azure subscriptions and governance (5 tasks)`).
 * For tasks, use the most specific task wording. Apply best-effort reasoning when the question spans topics — pick the closest match(es).
 * If a question maps to a single task, place it inline on the header line: `**Task:** <task>`.
 * If a question maps to multiple tasks (even across different skills), use a header plus bullets:
