@@ -30,13 +30,13 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 
 | Domain | Weight | Skills | Qs | Labs | Tasks Covered | Status |
 | :----- | :----- | -----: | -: | ---: | :------------ | :----: |
-| [1. Identities & Governance](#domain-1) | 20–25% | 3 | 19 | 0 | 8 / 15 (53%) | 🟡 |
+| [1. Identities & Governance](#domain-1) | 20–25% | 3 | 20 | 0 | 8 / 15 (53%) | 🟡 |
 | [2. Storage](#domain-2) | 15–20% | 3 | 22 | 5 | 12 / 17 (70%) | 🟢 |
 | [3. Compute](#domain-3) | 20–25% | 4 | 47 | 6 | 21 / 24 (87%) | 🟢 |
 | [4. Networking](#domain-4) | 15–20% | 3 | 19 | 3 | 11 / 13 (84%) | 🟢 |
 | [5. Monitoring & Backup](#domain-5) | 10–15% | 2 | 27 | 5 | 11 / 13 (84%) | 🟢 |
 
-**Totals:** 244 practice questions · 19 hands-on labs
+**Totals:** 245 practice questions · 19 hands-on labs
 
 **Legend:** 🟢 Strong (≥66%) · 🟡 Partial (33–65%) · 🔴 Low (<33%) — "Covered" = task has ≥1 practice question or ≥1 lab
 
@@ -48,7 +48,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 
 <a id="domain-1"></a>
 <details>
-<summary><b>Domain 1: Manage Azure Identities and Governance (20–25%)</b> — 15 tasks · 19 Qs · 0 Labs</summary>
+<summary><b>Domain 1: Manage Azure Identities and Governance (20–25%)</b> — 15 tasks · 20 Qs · 0 Labs</summary>
 
 | Skill | Task | Qs | Labs |
 | :--- | :--- | -: | -: |
@@ -65,7 +65,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 |  | Apply and manage tags on resources | 4 | 0 |
 |  | Manage resource groups | 1 | 0 |
 |  | Manage subscriptions | 1 | 0 |
-|  | Manage costs by using alerts, budgets, and Azure Advisor recommendations | 2 | 0 |
+|  | Manage costs by using alerts, budgets, and Azure Advisor recommendations | 3 | 0 |
 |  | Configure management groups | 0 | 0 |
 
 </details>
