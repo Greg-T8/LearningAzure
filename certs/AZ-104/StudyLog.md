@@ -8,7 +8,7 @@ This log tracks individual study sessions for the **AZ-104** exam. Fill in **End
 
 | # | Date | Start | End | Duration | Notes |
 |:--|:-----|:------|:----|:---------|:------|
-| 28 | 3/25/26 | 6:49 PM |  |  | Microsoft AZ-104 Practice Assessment |
+| 28 | 3/25/26 | 6:49 PM | 8:01 PM | 1h 12m | Microsoft AZ-104 Practice Assessment |
 | 27 | 3/25/26 | 6:24 AM | 6:40 AM | 0h 16m | Microsoft AZ-104 Practice Assessment |
 | 26 | 3/25/26 | 5:26 AM | 6:22 AM | 0h 56m | Configure secure access to virtual networks |
 | 25 | 3/24/26 | 8:12 PM | 8:31 PM | 0h 19m | Configure secure access to virtual networks |
