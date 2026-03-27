@@ -88,7 +88,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 |  | Manage data by using Azure Storage Explorer and AzCopy | 1 | 2 |
 | Configure Azure Files and Azure Blob Storage (7 tasks) | Create and configure a file share in Azure Storage | 2 | 0 |
 |  | Create and configure a container in Blob Storage | 1 | 0 |
-|  | Configure storage tiers | 0 | 0 |
+|  | Configure storage tiers | 1 | 0 |
 |  | Configure soft delete for blobs and containers | 0 | 0 |
 |  | Configure snapshots and soft delete for Azure Files | 2 | 0 |
 |  | Configure blob lifecycle management | 2 | 1 |
@@ -146,7 +146,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 |  | Configure service endpoints for Azure PaaS | 1 | 0 |
 |  | Configure private endpoints for Azure PaaS | 1 | 1 |
 | Configure name resolution and load balancing (3 tasks) | Configure Azure DNS | 3 | 0 |
-|  | Configure an internal or public load balancer | 2 | 1 |
+|  | Configure an internal or public load balancer | 3 | 1 |
 |  | Troubleshoot load balancing | 4 | 1 |
 
 </details>
