@@ -87,24 +87,35 @@ Follow the established format from existing exams. Include:
 5. **Coverage Dashboard** — `## 📊 Exam Coverage` header, a preamble sentence linking to practice questions and labs, then the dashboard between `<!-- BEGIN COVERAGE DASHBOARD -->` and `<!-- END COVERAGE DASHBOARD -->` markers. One row per domain with anchor links (`#domain-1`, etc.), weights, skill counts, zero Qs/Labs counts, a `Tasks Covered` column (`0 / N (0%)`), and status emoji. Followed by a Totals line, Legend, and a Note about practice question criteria.
 6. **Coverage Table** — Between `<!-- BEGIN COVERAGE TABLE -->` and `<!-- END COVERAGE TABLE -->` markers. Full domain → skill → task hierarchy with `| Qs | Labs |` columns initialized to `0 | 0`. Each skill name includes a `(T tasks)` suffix showing the number of tasks under that skill.
 
-**Progress Tracker format** (must match this exact header for `Update-ProgressTrackerDays.ps1` auto-discovery):
+**Progress Tracker format** (must match one of the supported header patterns for `Update-ProgressTrackerDays.ps1` auto-discovery):
 
 ```markdown
 ## 📚 Progress Tracker
 
-| Priority | Modality         | My Notes                                                        | Status | Started | Completed | Days |
-| :------- | :--------------- | :-------------------------------------------------------------- | :----- | :------ | :-------- | :--- |
-| 1        | Hands-on Labs    | [Hands-on Labs](./hands-on-labs/README.md)                      | Not Started |         |           |      |
-| 1        | Practice Questions   | [Practice Questions](./practice-questions/README.md)        | Not Started |         |           |      |
-| 2        | Video            | [Video Courses](./video-courses/README.md)                      | Not Started |         |           |      |
-| 3        | Microsoft Learn  | [Microsoft Learning Paths](./learning-paths/README.md)          | Not Started |         |           |      |
+| Priority | Modality | Domain | My Notes | Status | Started | Completed | Days |
+| :------- | :------- | :----- | :------- | :----- | :------ | :-------- | :--- |
+| 1        | Microsoft Learn | <Domain 1 short name> | [Microsoft Learning Paths](./learning-paths/README.md) | Not Started |  |  |  |
+| 2        | Hands-on Labs | <Domain 1 short name> | [Hands-on Labs](./hands-on-labs/README.md) | Not Started |  |  |  |
+| 3        | Practice Questions | <Domain 1 short name> | [Practice Questions](./practice-questions/README.md) | Not Started |  |  |  |
+| 1        | Microsoft Learn | <Domain 2 short name> | [Microsoft Learning Paths](./learning-paths/README.md) | Not Started |  |  |  |
+| 2        | Hands-on Labs | <Domain 2 short name> | [Hands-on Labs](./hands-on-labs/README.md) | Not Started |  |  |  |
+| 3        | Practice Questions | <Domain 2 short name> | [Practice Questions](./practice-questions/README.md) | Not Started |  |  |  |
+| 1        | Microsoft Learn | <Domain N short name> | [Microsoft Learning Paths](./learning-paths/README.md) | Not Started |  |  |  |
+| 2        | Hands-on Labs | <Domain N short name> | [Hands-on Labs](./hands-on-labs/README.md) | Not Started |  |  |  |
+| 3        | Practice Questions | <Domain N short name> | [Practice Questions](./practice-questions/README.md) | Not Started |  |  |  |
+| 4        | Video |  | [Video Courses](./video-courses/README.md) | Not Started |  |  |  |
 
 **Legend:** Not Started | In Progress | Completed
 
 <!-- HOURS_COMMITTED -->**Hours Committed:** 0h<!-- /HOURS_COMMITTED -->
 ```
 
-The `<!-- HOURS_COMMITTED -->` markers allow `Update-CommitStats.ps1` to auto-update the hours value from the running total.
+- **Domain short names** come from the coverage dashboard (e.g., "Identity, Governance & Monitoring", "Data Storage").
+- **Video** is a standalone row with an empty Domain cell — it is not tracked per domain.
+- Emit one row per modality per domain. For an exam with N domains, the table has 3×N + 1 rows (3 modalities × N domains + 1 Video row).
+- The script `Update-ProgressTrackerDays.ps1` supports both the old format (without Domain column) and this new format. It auto-detects which format is in use by checking for a `Domain` column in the header row. Both header patterns are valid for auto-discovery:
+  - Old: `| Priority | Modality | My Notes | Status | Started | Completed | Days |`
+  - New: `| Priority | Modality | Domain | My Notes | Status | Started | Completed | Days |`
 
 **Coverage section preamble:**
 

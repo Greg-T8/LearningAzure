@@ -31,12 +31,12 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 | Domain | Weight | Skills | Qs | Labs | Tasks Covered | Status |
 | :----- | :----- | -----: | -: | ---: | :------------ | :----: |
 | [1. Identities & Governance](#domain-1) | 20–25% | 3 | 20 | 0 | 8 / 15 (53%) | 🟡 |
-| [2. Storage](#domain-2) | 15–20% | 3 | 22 | 5 | 12 / 17 (70%) | 🟢 |
-| [3. Compute](#domain-3) | 20–25% | 4 | 47 | 6 | 21 / 24 (87%) | 🟢 |
-| [4. Networking](#domain-4) | 15–20% | 3 | 21 | 3 | 11 / 13 (84%) | 🟢 |
-| [5. Monitoring & Backup](#domain-5) | 10–15% | 2 | 27 | 5 | 11 / 13 (84%) | 🟢 |
+| [2. Storage](#domain-2) | 15–20% | 3 | 25 | 5 | 15 / 17 (88%) | 🟢 |
+| [3. Compute](#domain-3) | 20–25% | 4 | 48 | 6 | 22 / 24 (91%) | 🟢 |
+| [4. Networking](#domain-4) | 15–20% | 3 | 24 | 3 | 11 / 13 (84%) | 🟢 |
+| [5. Monitoring & Backup](#domain-5) | 10–15% | 2 | 30 | 5 | 11 / 13 (84%) | 🟢 |
 
-**Totals:** 248 practice questions · 19 hands-on labs
+**Totals:** 261 practice questions · 19 hands-on labs
 
 **Legend:** 🟢 Strong (≥66%) · 🟡 Partial (33–65%) · 🔴 Low (<33%) — "Covered" = task has ≥1 practice question or ≥1 lab
 
@@ -72,7 +72,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 
 <a id="domain-2"></a>
 <details>
-<summary><b>Domain 2: Implement and Manage Storage (15–20%)</b> — 17 tasks · 22 Qs · 5 Labs</summary>
+<summary><b>Domain 2: Implement and Manage Storage (15–20%)</b> — 17 tasks · 25 Qs · 5 Labs</summary>
 
 | Skill | Task | Qs | Labs |
 | :--- | :--- | -: | -: |
@@ -98,7 +98,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 
 <a id="domain-3"></a>
 <details>
-<summary><b>Domain 3: Deploy and Manage Azure Compute Resources (20–25%)</b> — 24 tasks · 47 Qs · 6 Labs</summary>
+<summary><b>Domain 3: Deploy and Manage Azure Compute Resources (20–25%)</b> — 24 tasks · 48 Qs · 6 Labs</summary>
 
 | Skill | Task | Qs | Labs |
 | :--- | :--- | -: | -: |
@@ -131,7 +131,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 
 <a id="domain-4"></a>
 <details>
-<summary><b>Domain 4: Implement and Manage Virtual Networking (15–20%)</b> — 13 tasks · 21 Qs · 3 Labs</summary>
+<summary><b>Domain 4: Implement and Manage Virtual Networking (15–20%)</b> — 13 tasks · 24 Qs · 3 Labs</summary>
 
 | Skill | Task | Qs | Labs |
 | :--- | :--- | -: | -: |
@@ -153,7 +153,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 
 <a id="domain-5"></a>
 <details>
-<summary><b>Domain 5: Monitor and Maintain Azure Resources (10–15%)</b> — 13 tasks · 27 Qs · 5 Labs</summary>
+<summary><b>Domain 5: Monitor and Maintain Azure Resources (10–15%)</b> — 13 tasks · 30 Qs · 5 Labs</summary>
 
 | Skill | Task | Qs | Labs |
 | :--- | :--- | -: | -: |

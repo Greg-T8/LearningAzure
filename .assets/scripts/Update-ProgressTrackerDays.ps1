@@ -24,6 +24,7 @@ param()
 # Configuration
 $RepoRoot = Resolve-Path -Path (Join-Path -Path $PSScriptRoot -ChildPath '..\..')
 $TrackerHeaderPattern = '^\|\s*Priority\s*\|.*Status.*Started.*Completed.*Days\s*\|'
+$DomainColumnPattern = '^\|\s*Priority\s*\|.*Domain.*Status.*Started.*Completed.*Days\s*\|'
 
 $Main = {
     . $Helpers
@@ -87,13 +88,15 @@ $Helpers = {
         $updated = 0
         $inTracker = $false
         $modified = $false
+        $hasDomainCol = $false
 
         for ($i = 0; $i -lt $lines.Count; $i++) {
             $line = $lines[$i]
 
-            # Detect the progress tracker header row
+            # Detect the progress tracker header row and whether a Domain column is present
             if ($line -match $TrackerHeaderPattern) {
                 $inTracker = $true
+                $hasDomainCol = $line -match $DomainColumnPattern
                 continue
             }
 
@@ -110,13 +113,17 @@ $Helpers = {
 
             if (-not $inTracker) { continue }
 
-            # Split into cells: [0]='' [1]=Priority [2]=Modality ... [4]=Status [5]=Started [6]=Completed [7]=Days [8]=''
+            # Split into cells — column indices shift when a Domain column is present
+            # Old format: [0]='' [1]=Priority [2]=Modality [3]=MyNotes [4]=Status [5]=Started [6]=Completed [7]=Days [8]=''
+            # New format: [0]='' [1]=Priority [2]=Modality [3]=Domain [4]=MyNotes [5]=Status [6]=Started [7]=Completed [8]=Days [9]=''
             $cells = $line -split '\|'
+            $offset = if ($hasDomainCol) { 1 } else { 0 }
+            $minCells = 9 + $offset
 
-            if ($cells.Count -lt 9) { continue }
+            if ($cells.Count -lt $minCells) { continue }
 
-            $status = $cells[4].Trim()
-            $started = $cells[5].Trim()
+            $status = $cells[4 + $offset].Trim()
+            $started = $cells[5 + $offset].Trim()
             $modality = $cells[2].Trim()
 
             # Skip completed items
@@ -143,21 +150,24 @@ $Helpers = {
             $elapsed = [math]::Floor(($today - $startDate).TotalDays)
 
             # Only update if the value changed
-            $currentDays = $cells[7].Trim()
+            $currentDays = $cells[7 + $offset].Trim()
 
             if ($currentDays -eq "$elapsed") { continue }
 
             # Find the Days cell boundaries by counting pipe characters
+            # Old format: pipes 7–8; new format (with Domain column): pipes 8–9
             $pipeCount = 0
             $daysCellStart = -1
             $daysCellEnd = -1
+            $startPipe = 7 + $offset
+            $endPipe = 8 + $offset
 
             for ($j = 0; $j -lt $line.Length; $j++) {
                 if ($line[$j] -eq '|') {
                     $pipeCount++
 
-                    if ($pipeCount -eq 7) { $daysCellStart = $j + 1 }
-                    if ($pipeCount -eq 8) { $daysCellEnd = $j; break }
+                    if ($pipeCount -eq $startPipe) { $daysCellStart = $j + 1 }
+                    if ($pipeCount -eq $endPipe) { $daysCellEnd = $j; break }
                 }
             }
 

@@ -10,12 +10,21 @@
 
 ## 📚 Progress Tracker
 
-| Priority | Modality         | My Notes                                                        | Status | Started | Completed | Days |
-| :------- | :--------------- | :-------------------------------------------------------------- | :----- | :------ | :-------- | :--- |
-| 1        | Hands-on Labs    | [Hands-on Labs](./hands-on-labs/README.md)                      | Not Started |         |           |      |
-| 1        | Practice Questions   | [Practice Questions](./practice-questions/README.md)        | Not Started |         |           |      |
-| 2        | Video            | [Video Courses](./video-courses/README.md)                      | Not Started |         |           |      |
-| 3        | Microsoft Learn  | [Microsoft Learning Paths](./learning-paths/README.md)          | Not Started |         |           |      |
+| Priority | Modality | Domain | My Notes | Status | Started | Completed | Days |
+| :------- | :------- | :----- | :------- | :----- | :------ | :-------- | :--- |
+| 1        | Microsoft Learn | Identity, Governance & Monitoring | [Microsoft Learning Paths](./learning-paths/README.md) | Not Started |  |  |  |
+| 2        | Hands-on Labs | Identity, Governance & Monitoring | [Hands-on Labs](./hands-on-labs/README.md) | Not Started |  |  |  |
+| 3        | Practice Questions | Identity, Governance & Monitoring | [Practice Questions](./practice-questions/README.md) | Not Started |  |  |  |
+| 1        | Microsoft Learn | Data Storage | [Microsoft Learning Paths](./learning-paths/README.md) | Not Started |  |  |  |
+| 2        | Hands-on Labs | Data Storage | [Hands-on Labs](./hands-on-labs/README.md) | Not Started |  |  |  |
+| 3        | Practice Questions | Data Storage | [Practice Questions](./practice-questions/README.md) | Not Started |  |  |  |
+| 1        | Microsoft Learn | Business Continuity | [Microsoft Learning Paths](./learning-paths/README.md) | Not Started |  |  |  |
+| 2        | Hands-on Labs | Business Continuity | [Hands-on Labs](./hands-on-labs/README.md) | Not Started |  |  |  |
+| 3        | Practice Questions | Business Continuity | [Practice Questions](./practice-questions/README.md) | Not Started |  |  |  |
+| 1        | Microsoft Learn | Infrastructure | [Microsoft Learning Paths](./learning-paths/README.md) | Not Started |  |  |  |
+| 2        | Hands-on Labs | Infrastructure | [Hands-on Labs](./hands-on-labs/README.md) | Not Started |  |  |  |
+| 3        | Practice Questions | Infrastructure | [Practice Questions](./practice-questions/README.md) | Not Started |  |  |  |
+| 4        | Video |  | [Video Courses](./video-courses/README.md) | Not Started |  |  |  |
 
 **Legend:** Not Started | In Progress | Completed
 
