@@ -147,7 +147,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 |  | Configure private endpoints for Azure PaaS | 1 | 1 |
 | Configure name resolution and load balancing (3 tasks) | Configure Azure DNS | 3 | 0 |
 |  | Configure an internal or public load balancer | 3 | 1 |
-|  | Troubleshoot load balancing | 4 | 1 |
+|  | Troubleshoot load balancing | 5 | 1 |
 
 </details>
 
