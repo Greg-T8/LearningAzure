@@ -87,7 +87,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 |  | Configure storage account encryption | 0 | 0 |
 |  | Manage data by using Azure Storage Explorer and AzCopy | 1 | 2 |
 | Configure Azure Files and Azure Blob Storage (7 tasks) | Create and configure a file share in Azure Storage | 2 | 0 |
-|  | Create and configure a container in Blob Storage | 0 | 0 |
+|  | Create and configure a container in Blob Storage | 1 | 0 |
 |  | Configure storage tiers | 0 | 0 |
 |  | Configure soft delete for blobs and containers | 0 | 0 |
 |  | Configure snapshots and soft delete for Azure Files | 2 | 0 |
