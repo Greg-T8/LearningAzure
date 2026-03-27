@@ -81,7 +81,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 |  | Configure stored access policies | 1 | 0 |
 |  | Manage access keys | 2 | 0 |
 |  | Configure identity-based access for Azure Files | 1 | 0 |
-| Configure and manage storage accounts (5 tasks) | Create and configure storage accounts | 0 | 0 |
+| Configure and manage storage accounts (5 tasks) | Create and configure storage accounts | 1 | 0 |
 |  | Configure Azure Storage redundancy | 2 | 0 |
 |  | Configure object replication | 1 | 1 |
 |  | Configure storage account encryption | 0 | 0 |
@@ -160,7 +160,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 | Monitor resources in Azure (6 tasks) | Interpret metrics in Azure Monitor | 1 | 1 |
 |  | Configure log settings in Azure Monitor | 2 | 0 |
 |  | Query and analyze logs in Azure Monitor | 1 | 0 |
-|  | Set up alert rules, action groups, and alert processing rules in Azure Monitor | 6 | 1 |
+|  | Set up alert rules, action groups, and alert processing rules in Azure Monitor | 7 | 1 |
 |  | Configure and interpret monitoring of VMs, storage accounts, and networks by using Azure Monitor Insights | 1 | 1 |
 |  | Use Azure Network Watcher and Connection Monitor | 6 | 1 |
 | Implement backup and recovery (7 tasks) | Create a Recovery Services vault | 0 | 0 |
