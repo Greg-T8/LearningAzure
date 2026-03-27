@@ -11,32 +11,32 @@ Accounts for questions missed or unsure about in the practice exams.
     * [Missing role assignments after migration](#missing-role-assignments-after-migration)
     * [Retrieve the Catalog Identifier for Entitlement Management](#retrieve-the-catalog-identifier-for-entitlement-management)
   * [Manage Azure subscriptions and governance](#manage-azure-subscriptions-and-governance)
+    * [Configure Resource Delete Locks](#configure-resource-delete-locks)
     * [Tagging Policy](#tagging-policy)
     * [Azure Policy Not Functioning](#azure-policy-not-functioning)
-    * [Add Remediation Info to Policy Definition](#add-remediation-info-to-policy-definition)
     * [Configure Azure Cost Center Tags and Cost Analysis](#configure-azure-cost-center-tags-and-cost-analysis)
     * [Move Resources Between Resource Groups](#move-resources-between-resource-groups)
     * [Azure Policy Effects Verification](#azure-policy-effects-verification)
-    * [Configure Resource Delete Locks](#configure-resource-delete-locks)
+    * [Add Remediation Info to Policy Definition](#add-remediation-info-to-policy-definition)
     * [Append Tag Using PowerShell](#append-tag-using-powershell)
     * [Implement resource locks](#implement-resource-locks)
     * [Lift resource locks using PowerShell](#lift-resource-locks-using-powershell)
-    * [Tag Virtual Machines with Least Privilege](#tag-virtual-machines-with-least-privilege)
     * [Stop VM on Budget Threshold](#stop-vm-on-budget-threshold)
     * [Move subscription between management groups](#move-subscription-between-management-groups)
     * [Azure Advisor Setting for Underutilized VMs](#azure-advisor-setting-for-underutilized-vms)
+    * [Tag Virtual Machines with Least Privilege](#tag-virtual-machines-with-least-privilege)
 * [Implement and Manage Storage](#implement-and-manage-storage)
   * [Configure access to storage](#configure-access-to-storage)
+    * [SAS key configuration scenarios](#sas-key-configuration-scenarios)
     * [Grant 30-Day SAS Access](#grant-30-day-sas-access)
     * [Secure Storage Access from Subnet](#secure-storage-access-from-subnet)
-    * [Mount Azure file share on-premises](#mount-azure-file-share-on-premises)
     * [Provide least-privilege access to a report](#provide-least-privilege-access-to-a-report)
-    * [SAS key configuration scenarios](#sas-key-configuration-scenarios)
-    * [Azure Files Kerberos Authentication](#azure-files-kerberos-authentication)
-    * [Modify Stored Access Policy](#modify-stored-access-policy)
+    * [Mount Azure file share on-premises](#mount-azure-file-share-on-premises)
     * [Configure storage account network access](#configure-storage-account-network-access)
+    * [Modify Stored Access Policy](#modify-stored-access-policy)
     * [Diagnose Storage Explorer Permission Errors](#diagnose-storage-explorer-permission-errors)
     * [Shared Access Signature (SAS) practices](#shared-access-signature-sas-practices)
+    * [Azure Files Kerberos Authentication](#azure-files-kerberos-authentication)
   * [Configure and manage storage accounts](#configure-and-manage-storage-accounts)
     * [AzCopy authorization methods](#azcopy-authorization-methods)
     * [Configure Object Replication Between Storage Accounts](#configure-object-replication-between-storage-accounts)
@@ -53,29 +53,29 @@ Accounts for questions missed or unsure about in the practice exams.
     * [Create Azure file share sequence](#create-azure-file-share-sequence)
 * [Deploy and Manage Azure Compute Resources](#deploy-and-manage-azure-compute-resources)
   * [Automate deployment of resources by using ARM templates or Bicep files](#automate-deployment-of-resources-by-using-arm-templates-or-bicep-files)
-    * [Edit ARM Template to Inherit Resource Group Location](#edit-arm-template-to-inherit-resource-group-location)
-    * [Export ARM Template](#export-arm-template)
-    * [Complete ARM template deployment command](#complete-arm-template-deployment-command)
     * [Export resource group template](#export-resource-group-template)
-    * [Create VM from Existing VM](#create-vm-from-existing-vm)
-    * [Deployment Mode Deleted Resources](#deployment-mode-deleted-resources)
+    * [Edit ARM Template to Inherit Resource Group Location](#edit-arm-template-to-inherit-resource-group-location)
+    * [Complete ARM template deployment command](#complete-arm-template-deployment-command)
     * [Convert Array to Object](#convert-array-to-object)
+    * [Export ARM Template](#export-arm-template)
+    * [Deployment Mode Deleted Resources](#deployment-mode-deleted-resources)
     * [Resource dependencies in Bicep](#resource-dependencies-in-bicep)
     * [Case Study — Solution Evaluation](#case-study--solution-evaluation)
+    * [Create VM from Existing VM](#create-vm-from-existing-vm)
   * [Create and configure virtual machines](#create-and-configure-virtual-machines)
+    * [Choose VM Availability Option for Datacenter Failure](#choose-vm-availability-option-for-datacenter-failure)
     * [Move a data disk with PowerShell](#move-a-data-disk-with-powershell)
     * [Join VM to Scale Set](#join-vm-to-scale-set)
     * [Apply Change to VMSS OS and Data Disk Profile](#apply-change-to-vmss-os-and-data-disk-profile)
     * [Encrypt VM Disk With Key Vault](#encrypt-vm-disk-with-key-vault)
     * [Availability set — maximum unavailable VMs](#availability-set--maximum-unavailable-vms)
-    * [Enable VM disk encryption](#enable-vm-disk-encryption)
-    * [Azure Spot VM Eviction Factors](#azure-spot-vm-eviction-factors)
     * [WebApp1 Availability Case](#webapp1-availability-case)
     * [Change VM Availability Set Assignment](#change-vm-availability-set-assignment)
     * [Enable disk encryption on Linux VM](#enable-disk-encryption-on-linux-vm)
     * [VM Resize Failure Cause](#vm-resize-failure-cause)
     * [SQL Server VM configuration](#sql-server-vm-configuration)
-    * [Choose VM Availability Option for Datacenter Failure](#choose-vm-availability-option-for-datacenter-failure)
+    * [Enable VM disk encryption](#enable-vm-disk-encryption)
+    * [Azure Spot VM Eviction Factors](#azure-spot-vm-eviction-factors)
   * [Provision and manage containers in the Azure portal](#provision-and-manage-containers-in-the-azure-portal)
     * [Container App Cache Refresh](#container-app-cache-refresh)
     * [Configure Scaling Rules in Azure Container Apps](#configure-scaling-rules-in-azure-container-apps)
@@ -88,22 +88,22 @@ Accounts for questions missed or unsure about in the practice exams.
     * [Configure App Service Client Certificates](#configure-app-service-client-certificates)
     * [Azure App Service Backups](#azure-app-service-backups)
     * [Resolve Azure App Service Pricing Tier for Runtime Requirements](#resolve-azure-app-service-pricing-tier-for-runtime-requirements)
+    * [App Service pricing tier for autoscale](#app-service-pricing-tier-for-autoscale)
     * [WebJobs on multi-instance App Service](#webjobs-on-multi-instance-app-service)
-    * [App Service Plan Selection](#app-service-plan-selection)
     * [Choose an App Service Plan](#choose-an-app-service-plan)
     * [Resolve Azure App Service Pricing Tier for Runtime Requirements](#resolve-azure-app-service-pricing-tier-for-runtime-requirements-1)
     * [Resolve Azure App Service Pricing Tier for Runtime Requirements](#resolve-azure-app-service-pricing-tier-for-runtime-requirements-2)
     * [App Service autoscale instance count calculation](#app-service-autoscale-instance-count-calculation)
     * [Swap App Service Deployment Slots with Preview](#swap-app-service-deployment-slots-with-preview)
     * [Configure Azure App Service Plan for Website Hosting](#configure-azure-app-service-plan-for-website-hosting)
-    * [App Service pricing tier for autoscale](#app-service-pricing-tier-for-autoscale)
+    * [App Service Plan Selection](#app-service-plan-selection)
 * [Implement and Manage Virtual Networking](#implement-and-manage-virtual-networking)
   * [Configure and manage virtual networks in Azure](#configure-and-manage-virtual-networks-in-azure)
     * [Configure Layered Network Security](#configure-layered-network-security)
-    * [VNet Peering with ExpressRoute](#vnet-peering-with-expressroute)
-    * [VNet Peering — Missing Reverse Peering](#vnet-peering--missing-reverse-peering)
-    * [Standard Load Balancer public IPs](#standard-load-balancer-public-ips)
     * [Case Study — Container Group Placement](#case-study--container-group-placement)
+    * [VNet Peering with ExpressRoute](#vnet-peering-with-expressroute)
+    * [Standard Load Balancer public IPs](#standard-load-balancer-public-ips)
+    * [VNet Peering — Missing Reverse Peering](#vnet-peering--missing-reverse-peering)
   * [Configure secure access to virtual networks](#configure-secure-access-to-virtual-networks)
     * [Minimum NSGs Required](#minimum-nsgs-required)
     * [Azure Bastion Subnet Address Selection](#azure-bastion-subnet-address-selection)
@@ -113,48 +113,49 @@ Accounts for questions missed or unsure about in the practice exams.
     * [Design NSG to Block RDP from Internet](#design-nsg-to-block-rdp-from-internet)
     * [NSG Rule Processing Order](#nsg-rule-processing-order)
   * [Configure name resolution and load balancing](#configure-name-resolution-and-load-balancing)
+    * [Troubleshoot Load Balancer Connectivity Issues](#troubleshoot-load-balancer-connectivity-issues)
     * [Configure Internal Load Balancer](#configure-internal-load-balancer)
     * [Resolve Load Balancer Timeout Distribution](#resolve-load-balancer-timeout-distribution)
-    * [Configure DNS Records for App Service](#configure-dns-records-for-app-service)
-    * [Troubleshoot Load Balancer Connectivity Issues](#troubleshoot-load-balancer-connectivity-issues)
-    * [Azure DNS Alias Record Type](#azure-dns-alias-record-type)
     * [IMDS Load Balancer Metadata Error](#imds-load-balancer-metadata-error)
+    * [Configure DNS Records for App Service](#configure-dns-records-for-app-service)
     * [Configure Standard Load Balancer Outbound Traffic and IP Allocation](#configure-standard-load-balancer-outbound-traffic-and-ip-allocation)
     * [Diagnose Internal Load Balancer Hairpin Traffic Failure](#diagnose-internal-load-balancer-hairpin-traffic-failure)
     * [Connect VNet to Private DNS Zone](#connect-vnet-to-private-dns-zone)
+    * [Azure DNS Alias Record Type](#azure-dns-alias-record-type)
 * [Monitor and Maintain Azure Resources](#monitor-and-maintain-azure-resources)
   * [Monitor resources in Azure](#monitor-resources-in-azure)
+    * [Storage Insights Overview](#storage-insights-overview)
     * [Configure Azure Monitor Alert Notification Rate Limits](#configure-azure-monitor-alert-notification-rate-limits)
     * [Create Azure Monitor Alert Resources](#create-azure-monitor-alert-resources)
     * [Capture SFTP Packets with Network Watcher](#capture-sftp-packets-with-network-watcher)
-    * [Configure Azure Monitor Alert for Database CPU Usage](#configure-azure-monitor-alert-for-database-cpu-usage)
     * [Configure App Service Diagnostics](#configure-app-service-diagnostics)
     * [Load Balancer Metrics Batch API](#load-balancer-metrics-batch-api)
     * [Azure Advisor alerts with Bicep](#azure-advisor-alerts-with-bicep)
     * [Enable Boot Diagnostics for Azure Virtual Machines](#enable-boot-diagnostics-for-azure-virtual-machines)
-    * [Storage Insights Overview](#storage-insights-overview)
+    * [Configure Azure Monitor Alert for Database CPU Usage](#configure-azure-monitor-alert-for-database-cpu-usage)
     * [Test TCP Connectivity with Network Watcher](#test-tcp-connectivity-with-network-watcher)
-    * [Pinning query results to a dashboard](#pinning-query-results-to-a-dashboard)
-    * [Monitor Network Health with Network Watcher](#monitor-network-health-with-network-watcher)
-    * [Determine filtering rule with Network Watcher](#determine-filtering-rule-with-network-watcher)
     * [Configure App Service diagnostic logging](#configure-app-service-diagnostic-logging)
-    * [Enable Guest OS Diagnostics](#enable-guest-os-diagnostics)
-    * [Diagnose Network Watcher Tool for Web Server Packet Flow](#diagnose-network-watcher-tool-for-web-server-packet-flow)
-    * [Configure Azure Monitor Alert Notification Rate Limits](#configure-azure-monitor-alert-notification-rate-limits-1)
     * [Inspect VM-to-VM Network Traffic](#inspect-vm-to-vm-network-traffic)
+    * [Configure Azure Monitor Alert Notification Rate Limits](#configure-azure-monitor-alert-notification-rate-limits-1)
+    * [Diagnose Network Watcher Tool for Web Server Packet Flow](#diagnose-network-watcher-tool-for-web-server-packet-flow)
+    * [App Service Automatic Scaling Requirement](#app-service-automatic-scaling-requirement)
+    * [Determine filtering rule with Network Watcher](#determine-filtering-rule-with-network-watcher)
+    * [Monitor Network Health with Network Watcher](#monitor-network-health-with-network-watcher)
+    * [Pinning query results to a dashboard](#pinning-query-results-to-a-dashboard)
+    * [Enable Guest OS Diagnostics](#enable-guest-os-diagnostics)
   * [Implement backup and recovery](#implement-backup-and-recovery)
-    * [Configure Azure Backup with PowerShell](#configure-azure-backup-with-powershell)
-    * [Restore VM from backup (availability set)](#restore-vm-from-backup-availability-set)
-    * [Default Azure VM Backup Retention](#default-azure-vm-backup-retention)
-    * [Recover Azure VM from Deleted Backup](#recover-azure-vm-from-deleted-backup)
-    * [Move Recovery Services vault](#move-recovery-services-vault)
     * [Delete Recovery Services vault](#delete-recovery-services-vault)
-    * [Recovery Services vault diagnostic target](#recovery-services-vault-diagnostic-target)
-    * [Backup Pre-Check Warning Cause](#backup-pre-check-warning-cause)
-    * [Reprotect VM After Site Recovery Failover](#reprotect-vm-after-site-recovery-failover)
-    * [Azure Site Recovery High Churn](#azure-site-recovery-high-churn)
     * [Recover Configuration File from Azure VM Backup](#recover-configuration-file-from-azure-vm-backup)
+    * [Reprotect VM After Site Recovery Failover](#reprotect-vm-after-site-recovery-failover)
+    * [Backup Pre-Check Warning Cause](#backup-pre-check-warning-cause)
+    * [Recovery Services vault diagnostic target](#recovery-services-vault-diagnostic-target)
+    * [Restore VM from backup (availability set)](#restore-vm-from-backup-availability-set)
+    * [Move Recovery Services vault](#move-recovery-services-vault)
+    * [Recover Azure VM from Deleted Backup](#recover-azure-vm-from-deleted-backup)
+    * [Default Azure VM Backup Retention](#default-azure-vm-backup-retention)
+    * [Configure Azure Backup with PowerShell](#configure-azure-backup-with-powershell)
     * [Site Recovery — Recovery Steps](#site-recovery--recovery-steps)
+    * [Azure Site Recovery High Churn](#azure-site-recovery-high-churn)
 
 ---
 
@@ -472,6 +473,60 @@ In Microsoft Entra ID entitlement management, a **catalog** is the container tha
 
 ### Manage Azure subscriptions and governance
 
+#### Configure Resource Delete Locks
+
+**Domain:** Manage Azure Identities and Governance
+**Skill:** Manage Azure subscriptions and governance
+**Task:** Configure resource locks
+
+You have several management groups and Azure subscriptions.
+
+You want to prevent the accidental deletion of resources.
+
+To which three resource types can you apply delete locks? Each correct answer presents a complete solution.
+
+A. management groups  
+B. resource groups  
+C. storage account data  
+D. subscriptions  
+E. virtual machines  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-25-19-07-52.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Why the selected answer is incorrect**
+
+Selecting `management groups` is incorrect because delete locks can't be applied at the management group scope.
+
+**Why the correct answers are correct**
+
+Delete locks can be applied to `resource groups`, `subscriptions`, and `virtual machines` to prevent accidental deletion.
+
+<img src='.img/2026-03-25-19-10-05.png' width=600>
+
+**Why other options are incorrect**
+
+`storage account data` is a data-plane concept, and management locks apply to control-plane resource management operations, not data-plane data objects.
+
+**Key takeaway**
+
+For this scenario, delete locks are supported on `virtual machines`, `subscriptions`, and `resource groups`, but not on `management groups` or `storage account data`.
+
+**References**
+
+* [Protect your Azure resources with a lock - Azure Resource Manager | Microsoft Learn](https://learn.microsoft.com/azure/azure-resource-manager/management/lock-resources)
+
+</details>
+
+---
+
 #### Tagging Policy
 
 **Domain:** Manage Azure Identities and Governance
@@ -676,62 +731,6 @@ The cause of the issue is not that you do not have the relevant role assignment 
 References
 
 [Azure Policy overview - Azure RBAC permissions in Azure Policy](https://learn.microsoft.com/en-us/azure/governance/policy/overview#azure-rbac-permissions-in-azure-policy)
-
-</details>
-
----
-
-#### Add Remediation Info to Policy Definition
-
-**Domain:** Manage Azure Identities and Governance
-**Skill:** Manage Azure subscriptions and governance
-**Task:** Implement and manage Azure Policy
-
-You have an Azure subscription.
-
-You plan to create an Azure Policy definition named `Policy1`.
-
-You need to include remediation information in `Policy`.
-
-To which definition section should you add remediation information for `Policy1`?
-
-A. metadata  
-B. mode  
-C. parameters  
-D. policyRule  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-25-19-11-45.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Why the selected answer is incorrect**
-
-`policyRule` defines the evaluation logic, but it doesn't store custom remediation guidance for this scenario.
-
-**Why the correct answer is correct**
-
-You use the `RemediationDescription` field in the `metadata` section (within policy definition properties metadata used for this custom recommendation context) to specify custom remediation information.
-
-<img src='.img/2026-03-25-19-15-01.png' width=600>
-
-**Why the other options are incorrect**
-
-`mode` controls policy evaluation scope, and `parameters` provides configurable inputs. Neither section is used to store the custom remediation description required here.
-
-**Key takeaway**
-
-For this policy-definition scenario, custom remediation text is added in `metadata` by using `RemediationDescription`.
-
-**References**
-
-* [Create custom Azure security policies in Microsoft Defender for Cloud | Microsoft Learn](https://learn.microsoft.com/azure/defender-for-cloud/create-custom-recommendations#create-and-enhance-custom-recommendations-with-azure-policy-legacy)
-* [Improve incident response with alerting on Azure - Training | Microsoft Learn](https://learn.microsoft.com/training/modules/incident-response-with-alerting-on-azure/)
 
 </details>
 
@@ -1057,28 +1056,29 @@ References
 
 ---
 
-#### Configure Resource Delete Locks
+#### Add Remediation Info to Policy Definition
 
 **Domain:** Manage Azure Identities and Governance
 **Skill:** Manage Azure subscriptions and governance
-**Task:** Configure resource locks
+**Task:** Implement and manage Azure Policy
 
-You have several management groups and Azure subscriptions.
+You have an Azure subscription.
 
-You want to prevent the accidental deletion of resources.
+You plan to create an Azure Policy definition named `Policy1`.
 
-To which three resource types can you apply delete locks? Each correct answer presents a complete solution.
+You need to include remediation information in `Policy`.
 
-A. management groups  
-B. resource groups  
-C. storage account data  
-D. subscriptions  
-E. virtual machines  
+To which definition section should you add remediation information for `Policy1`?
+
+A. metadata  
+B. mode  
+C. parameters  
+D. policyRule  
 
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-03-25-19-07-52.png' width=600>
+<img src='.img/2026-03-25-19-11-45.png' width=600>
 
 </details>
 
@@ -1087,25 +1087,26 @@ E. virtual machines
 
 **Why the selected answer is incorrect**
 
-Selecting `management groups` is incorrect because delete locks can't be applied at the management group scope.
+`policyRule` defines the evaluation logic, but it doesn't store custom remediation guidance for this scenario.
 
-**Why the correct answers are correct**
+**Why the correct answer is correct**
 
-Delete locks can be applied to `resource groups`, `subscriptions`, and `virtual machines` to prevent accidental deletion.
+You use the `RemediationDescription` field in the `metadata` section (within policy definition properties metadata used for this custom recommendation context) to specify custom remediation information.
 
-<img src='.img/2026-03-25-19-10-05.png' width=600>
+<img src='.img/2026-03-25-19-15-01.png' width=600>
 
-**Why other options are incorrect**
+**Why the other options are incorrect**
 
-`storage account data` is a data-plane concept, and management locks apply to control-plane resource management operations, not data-plane data objects.
+`mode` controls policy evaluation scope, and `parameters` provides configurable inputs. Neither section is used to store the custom remediation description required here.
 
 **Key takeaway**
 
-For this scenario, delete locks are supported on `virtual machines`, `subscriptions`, and `resource groups`, but not on `management groups` or `storage account data`.
+For this policy-definition scenario, custom remediation text is added in `metadata` by using `RemediationDescription`.
 
 **References**
 
-* [Protect your Azure resources with a lock - Azure Resource Manager | Microsoft Learn](https://learn.microsoft.com/azure/azure-resource-manager/management/lock-resources)
+* [Create custom Azure security policies in Microsoft Defender for Cloud | Microsoft Learn](https://learn.microsoft.com/azure/defender-for-cloud/create-custom-recommendations#create-and-enhance-custom-recommendations-with-azure-policy-legacy)
+* [Improve incident response with alerting on Azure - Training | Microsoft Learn](https://learn.microsoft.com/training/modules/incident-response-with-alerting-on-azure/)
 
 </details>
 
@@ -1262,58 +1263,6 @@ Next, you can take advantage of the PowerShell pipeline by piping your results t
 You should not use the `Get-AzResource` or `Remove-AzResource` cmdlets because doing so requires far more PowerShell code than is shown in the scenario, and you only need to retrieve the locked resources from a specific resource group.
 
 You should not use the `Select-Object` cmdlet because it filters at the property level, and not the row level, and would therefore not restrict output to locked resources within a single resource group.
-
-</details>
-
----
-
-#### Tag Virtual Machines with Least Privilege
-
-**Domain:** Manage Azure Identities and Governance
-**Skill:** Manage Azure subscriptions and governance
-**Task:** Apply and manage tags on resources
-
-You have an Azure subscription that contains 10 virtual machines.
-
-You need to ensure that a user named `User1` can tag all the virtual machines by using the Azure portal. The solution must follow the principle of least privilege.
-
-What should you do?
-
-A. From the Azure portal, create a custom role that has the `Microsoft.Compute virtual machines/*/write` permission.  
-B. From the Azure portal, modify the Access control (IAM) settings of the virtual machines.  
-C. From the Azure portal, modify the Policies settings of the Azure subscription.  
-D. From the command line, run the `az role assignment create` command.  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-25-19-17-34.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Why the selected answer is wrong**
-
-Creating a custom role with `Microsoft.Compute virtual machines/*/write` is broader than required for tagging. It grants general write capability on virtual machines instead of narrowly scoped tag management permissions.
-
-**Why the correct answer is right**
-
-The correct approach is to modify Access control (IAM) on the virtual machines in the Azure portal and assign `User1` a role that grants tagging permissions, such as `Tag Contributor`. This follows least privilege because it grants only the permissions needed to apply and manage tags.
-
-**Why the other options are incorrect**
-
-Changing Azure Policy at the subscription level enforces policy behavior but does not directly grant `User1` the required tag operation permissions. Running `az role assignment create` can assign roles, but the scenario specifically asks for a portal-based action and least-privilege role assignment through IAM on the target resources.
-
-**References**
-
-* [Apply tags with Azure portal](https://learn.microsoft.com/azure/azure-resource-manager/management/tag-resources-portal)
-* [Understand Azure Automation](https://learn.microsoft.com/training/modules/manage-azure-paas-resources-using-automated-methods/3-understand-azure-automation)
-* [Apply tags with Azure CLI](https://learn.microsoft.com/azure/azure-resource-manager/management/tag-resources-cli)
-* [Apply tags with Azure PowerShell](https://learn.microsoft.com/azure/azure-resource-manager/management/tag-resources-powershell)
-* [Label mission-critical workloads](https://learn.microsoft.com/azure/azure-resource-manager/management/tag-mission-critical-workload)
-* [Use tagging to organize resources](https://learn.microsoft.com/azure/azure-resource-manager/management/tag-resources)
 
 </details>
 
@@ -1482,9 +1431,113 @@ Use the `Cost` category in Azure Advisor to detect underutilized virtual machine
 
 ---
 
+#### Tag Virtual Machines with Least Privilege
+
+**Domain:** Manage Azure Identities and Governance
+**Skill:** Manage Azure subscriptions and governance
+**Task:** Apply and manage tags on resources
+
+You have an Azure subscription that contains 10 virtual machines.
+
+You need to ensure that a user named `User1` can tag all the virtual machines by using the Azure portal. The solution must follow the principle of least privilege.
+
+What should you do?
+
+A. From the Azure portal, create a custom role that has the `Microsoft.Compute virtual machines/*/write` permission.  
+B. From the Azure portal, modify the Access control (IAM) settings of the virtual machines.  
+C. From the Azure portal, modify the Policies settings of the Azure subscription.  
+D. From the command line, run the `az role assignment create` command.  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-25-19-17-34.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Why the selected answer is wrong**
+
+Creating a custom role with `Microsoft.Compute virtual machines/*/write` is broader than required for tagging. It grants general write capability on virtual machines instead of narrowly scoped tag management permissions.
+
+**Why the correct answer is right**
+
+The correct approach is to modify Access control (IAM) on the virtual machines in the Azure portal and assign `User1` a role that grants tagging permissions, such as `Tag Contributor`. This follows least privilege because it grants only the permissions needed to apply and manage tags.
+
+**Why the other options are incorrect**
+
+Changing Azure Policy at the subscription level enforces policy behavior but does not directly grant `User1` the required tag operation permissions. Running `az role assignment create` can assign roles, but the scenario specifically asks for a portal-based action and least-privilege role assignment through IAM on the target resources.
+
+**References**
+
+* [Apply tags with Azure portal](https://learn.microsoft.com/azure/azure-resource-manager/management/tag-resources-portal)
+* [Understand Azure Automation](https://learn.microsoft.com/training/modules/manage-azure-paas-resources-using-automated-methods/3-understand-azure-automation)
+* [Apply tags with Azure CLI](https://learn.microsoft.com/azure/azure-resource-manager/management/tag-resources-cli)
+* [Apply tags with Azure PowerShell](https://learn.microsoft.com/azure/azure-resource-manager/management/tag-resources-powershell)
+* [Label mission-critical workloads](https://learn.microsoft.com/azure/azure-resource-manager/management/tag-mission-critical-workload)
+* [Use tagging to organize resources](https://learn.microsoft.com/azure/azure-resource-manager/management/tag-resources)
+
+</details>
+
+---
+
 ## Implement and Manage Storage
 
 ### Configure access to storage
+
+#### SAS key configuration scenarios
+
+**Domain:** Implement and Manage Storage
+**Skill:** Configure access to storage
+**Task:** Create and use shared access signature (SAS) tokens
+
+You have a storage account named `salesstorage` in a subscription named `SalesSubscription`. You create a container in a blob storage named `salecontainer`.
+
+You create the shared access signature (SAS) shown in the exhibit.
+
+You try to carry out actions from several computers at different times using the SAS key1 configurations shown in the exhibit.
+
+What level of access would be available in each scenario? To answer, select the appropriate options from the drop-down menus.
+
+| Configuration | Value | Action | Action result |
+|---------------|-------|--------|---------------|
+| 151.112.10.6 | March 4th, 2020 at 11 AM | Connect to Storage Account | ***[1]*** |
+| 151.112.11.6 | March 4th, 2020 at 12 AM | Connect to Storage Account | ***[2]*** |
+| 151.112.10.6 | March 10th, 2020 at 10 AM | Create a Container | ***[3]*** |
+| 151.112.10.6 | March 10th, 2020 at 12 AM | Read a File Share | ***[4]*** |
+
+Drop-Down Options:
+
+| Blank | Options |
+|-------|---------|
+| [1] | Connection success with read, write, and list access / Connection failure with read, write, and list access / Connection failure with read access |
+| [2] | Connection success with read, write, and list access / Connection failure with read, write, and list access / Connection failure with read access |
+| [3] | Connection success with read, write, and list access / Connection failure with read, write, and list access / Connection failure with read access |
+| [4] | Connection success with read, write, and list access / Connection failure with read, write, and list access / Connection failure with read access |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-11-04-35-29.png' width=700>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+In the first scenario, you would have connection success with read, write, and list access, because the IP address and the dates meet the criteria when the shared access signature (SAS) key1 is active.
+
+In the second scenario, you would have connection failure with read, write, and list access, because the IP address does not fall in the allowed IP address range. Additionally, it would also fail because the start time is 12am on March 4th, 2020, for the request, but the SAS token starts at 11am on March 4th, 2020.
+
+In the third scenario, you would have connection failure with read, write, and list access, because the permissions provided for the SAS key1 do not grant permissions to create a new container.
+
+In the fourth scenario, you would have connection failure with read, write, and list access, because the permissions granted are only for blob containers and not file shares.
+
+</details>
+
+---
 
 #### Grant 30-Day SAS Access
 
@@ -1706,56 +1759,6 @@ With `DefaultAction` set to **Deny**, Azure evaluates requests by first checking
 
 ---
 
-#### Mount Azure file share on-premises
-
-**Domain:** Implement and Manage Storage
-**Skill:** Configure access to storage
-**Task:** Configure Azure Storage firewalls and virtual networks
-
-You create a `FileStorage` premium storage account and create a premium tier Azure file share. You plan to mount the file share directly on-premises using the Service Message Block (`SMB`) 3.0 protocol.
-
-You need to ensure that your network is configured to support mounting an Azure file share on-premises. You want to minimize the administrator effort needed to accomplish this.
-
-What should you do?
-
-A. Configure TCP port 445 as open in your on-premises internet firewall.  
-B. Install and configure Azure File Sync.  
-C. Create an ExpressRoute circuit.  
-D. Configure TCP port 443 as open in your on-premises internet firewall.  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-19-03-52-32.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Why the selected answer is right**
-
-You should configure TCP port 445 as open in your on-premises internet firewall. This is the only requirement for mounting an Azure file share as an on-premises Service Message Block (SMB) file share on your on-premises network.
-
-**Why the other options are incorrect**
-
-You should not configure TCP port 443 as open in your on-premises internet firewall. This would be a requirement if you were configuring Azure File Sync and not using ExpressRoute.
-
-You should not install and configure Azure File Sync. This is not a requirement for mounting a file share on-premises. You would use Azure File Sync if you wanted to cache several Azure file shares on-premises or in cloud VMs.
-
-You should not create an ExpressRoute circuit. An ExpressRoute circuit provides a private connection between your on-premises network and the Microsoft cloud. By using ExpressRoute you do not need to configure the on-premises firewall, but this solution requires more administrative effort to implement and maintain.
-
-**References**
-
-- [Planning for an Azure Files deployment](https://learn.microsoft.com/azure/storage/files/storage-files-planning)
-- [Frequently asked questions (FAQ) about Azure Files](https://learn.microsoft.com/azure/storage/files/storage-files-faq)
-- [Planning for an Azure File Sync deployment](https://learn.microsoft.com/azure/storage/file-sync/file-sync-planning)
-- [What is Azure ExpressRoute?](https://learn.microsoft.com/azure/expressroute/expressroute-introduction)
-
-</details>
-
----
-
 #### Provide least-privilege access to a report
 
 **Domain:** Implement and Manage Storage
@@ -1801,154 +1804,51 @@ References
 
 ---
 
-#### SAS key configuration scenarios
+#### Mount Azure file share on-premises
 
 **Domain:** Implement and Manage Storage
 **Skill:** Configure access to storage
-**Task:** Create and use shared access signature (SAS) tokens
+**Task:** Configure Azure Storage firewalls and virtual networks
 
-You have a storage account named `salesstorage` in a subscription named `SalesSubscription`. You create a container in a blob storage named `salecontainer`.
+You create a `FileStorage` premium storage account and create a premium tier Azure file share. You plan to mount the file share directly on-premises using the Service Message Block (`SMB`) 3.0 protocol.
 
-You create the shared access signature (SAS) shown in the exhibit.
-
-You try to carry out actions from several computers at different times using the SAS key1 configurations shown in the exhibit.
-
-What level of access would be available in each scenario? To answer, select the appropriate options from the drop-down menus.
-
-| Configuration | Value | Action | Action result |
-|---------------|-------|--------|---------------|
-| 151.112.10.6 | March 4th, 2020 at 11 AM | Connect to Storage Account | ***[1]*** |
-| 151.112.11.6 | March 4th, 2020 at 12 AM | Connect to Storage Account | ***[2]*** |
-| 151.112.10.6 | March 10th, 2020 at 10 AM | Create a Container | ***[3]*** |
-| 151.112.10.6 | March 10th, 2020 at 12 AM | Read a File Share | ***[4]*** |
-
-Drop-Down Options:
-
-| Blank | Options |
-|-------|---------|
-| [1] | Connection success with read, write, and list access / Connection failure with read, write, and list access / Connection failure with read access |
-| [2] | Connection success with read, write, and list access / Connection failure with read, write, and list access / Connection failure with read access |
-| [3] | Connection success with read, write, and list access / Connection failure with read, write, and list access / Connection failure with read access |
-| [4] | Connection success with read, write, and list access / Connection failure with read, write, and list access / Connection failure with read access |
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-11-04-35-29.png' width=700>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-In the first scenario, you would have connection success with read, write, and list access, because the IP address and the dates meet the criteria when the shared access signature (SAS) key1 is active.
-
-In the second scenario, you would have connection failure with read, write, and list access, because the IP address does not fall in the allowed IP address range. Additionally, it would also fail because the start time is 12am on March 4th, 2020, for the request, but the SAS token starts at 11am on March 4th, 2020.
-
-In the third scenario, you would have connection failure with read, write, and list access, because the permissions provided for the SAS key1 do not grant permissions to create a new container.
-
-In the fourth scenario, you would have connection failure with read, write, and list access, because the permissions granted are only for blob containers and not file shares.
-
-</details>
-
----
-
-#### Azure Files Kerberos Authentication
-
-**Domain:** Implement and Manage Storage
-**Skill:** Configure access to storage
-**Task:** Configure identity-based access for Azure Files
-
-Your company is using Microsoft Entra ID and Azure file shares. You are using the standard file shares (GPv2) with Geo-Zone Redundant Storage (GZRS) configured.
-
-You are tasked with configuring identity-based authentication options for Server Message Block (SMB) access.
-
-The following three conditions must be met:
-
-1. You should be able to use Microsoft Entra ID for authenticating hybrid user identities.
-2. Your end users should be able to access Azure file shares over the internet.
-3. Your end users do not require a line-of-sight to domain controllers.
-
-You need to implement the solution.
+You need to ensure that your network is configured to support mounting an Azure file share on-premises. You want to minimize the administrator effort needed to accomplish this.
 
 What should you do?
 
-A. Use Kerberos authentication for hybrid identities.  
-B. Use Microsoft Entra Domain Services authentication.  
-C. Use on-premises Active Directory Domain Services (AD DS) authentication.  
-D. Use Active Directory (AD) Kerberos authentication for Linux clients using on-premises AD DS or Microsoft Entra DS.  
+A. Configure TCP port 445 as open in your on-premises internet firewall.  
+B. Install and configure Azure File Sync.  
+C. Create an ExpressRoute circuit.  
+D. Configure TCP port 443 as open in your on-premises internet firewall.  
 
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-03-24-19-59-45.png' width=600>
+<img src='.img/2026-03-19-03-52-32.png' width=600>
 
 </details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
 
-**Why the selected answer is correct**  
-Enabling Microsoft Entra Kerberos authentication for hybrid identities lets Azure Files accept Kerberos tickets derived from Microsoft Entra identities that are synchronized from on-premises (hybrid) identity stores. This option provides identity-based SMB access without requiring end users or clients to have line-of-sight to on-premises domain controllers, and it supports access scenarios where clients connect over the internet because authentication is brokered by the Microsoft Entra Kerberos service for Azure Files.
+**Why the selected answer is right**
 
-**Why other options are incorrect**  
+You should configure TCP port 445 as open in your on-premises internet firewall. This is the only requirement for mounting an Azure file share as an on-premises Service Message Block (SMB) file share on your on-premises network.
 
-- **Use Microsoft Entra Domain Services authentication:** Microsoft Entra Domain Services (managed domain) provides LDAP/NTLM/Kerberos for resources joined to that managed domain, but it requires resources or network paths to the managed domain and does not address the hybrid Kerberos-for-cloud scenario described. It does not meet the requirement to authenticate hybrid Entra identities without line-of-sight to on-premises domain controllers in the same way that Microsoft Entra Kerberos for Azure Files does.  
-- (Implicit trap) Authenticating directly against on-premises AD or relying on NTLM would require domain controller connectivity or domain-joined network paths and therefore would fail the "no line-of-sight" requirement.
+**Why the other options are incorrect**
 
-**Key takeaway**  
-When you must authenticate hybrid Microsoft Entra identities to Azure file shares over SMB without line-of-sight to domain controllers (including internet-connected clients), use Microsoft Entra Kerberos authentication for hybrid identities.
+You should not configure TCP port 443 as open in your on-premises internet firewall. This would be a requirement if you were configuring Azure File Sync and not using ExpressRoute.
+
+You should not install and configure Azure File Sync. This is not a requirement for mounting a file share on-premises. You would use Azure File Sync if you wanted to cache several Azure file shares on-premises or in cloud VMs.
+
+You should not create an ExpressRoute circuit. An ExpressRoute circuit provides a private connection between your on-premises network and the Microsoft cloud. By using ExpressRoute you do not need to configure the on-premises firewall, but this solution requires more administrative effort to implement and maintain.
 
 **References**
 
-- [Enable Microsoft Entra Kerberos authentication for hybrid identities on Azure Files](https://learn.microsoft.com/azure/storage/files/storage-files-identity-auth-hybrid-identities-enable)
-- [Overview of Azure Files identity-based authentication options for SMB access](https://learn.microsoft.com/azure/storage/files/storage-files-active-directory-overview)
-- [Active Directory Domain Services Overview](https://learn.microsoft.com/windows-server/identity/ad-ds/get-started/virtual-dc/active-directory-domain-services-overview)
-- [What is Microsoft Entra Domain Services?](https://learn.microsoft.com/entra/identity/domain-services/overview)
-- [Kerberos Authentication Overview](https://learn.microsoft.com/windows-server/security/kerberos/kerberos-authentication-overview)
-- [Microsoft SMB Protocol and CIFS Protocol Overview](https://learn.microsoft.com/windows/win32/fileio/microsoft-smb-protocol-and-cifs-protocol-overview)
-
-</details>
-
----
-
-#### Modify Stored Access Policy
-
-**Domain:** Implement and Manage Storage
-**Skill:** Configure access to storage
-**Task:** Configure stored access policies
-
-You are an Azure administrator for a manufacturing organization. You are using shared access signature (SAS) to configure control over storage accounts.
-
-You create a stored access policy as an additional level of control over SAS on the server side for file shares.
-
-You need to modify a stored access policy.
-
-What should you do?
-
-A. Execute a Set Share ACL operation with the SMB protocol.  
-B. Execute a Set Table ACL operation.  
-C. Execute a Set Container ACL operation with public read access for blobs only.  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-03-03-53-49.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-In this scenario, you are using a stored access policy that acts as an additional level of control over shared access signature (SAS) on the server side for file shares. The access policy for an SAS consists of the start time, expiry time, and permissions for the signature. To create or modify a stored access policy, call the Set ACL operation for the resource (Set Container ACL, Set Queue ACL, Set Table ACL, or Set Share ACL) with a request body that specifies the terms of the access policy. An important point to note here is that, for a file share, you need to execute a Set Share ACL operation, which only supports the Server Message Block (SMB) protocol as the enabled file share protocol.
-
-You should not execute a Set Table ACL operation. The Set Table ACL operation sets the stored access policies for the table that can be used with SAS. In this scenario, since you want to modify stored access policies for an Azure File share, you need to use the Set Share ACL with SMB.
-
-You should not execute a Set Container ACL operation with public read access for blobs only. The Set Container ACL operation with public read access for blobs only will mean that Blob data within a container could be read via anonymous request, but container data is not available. In this scenario, since you are aiming to modify stored access policies for an Azure File share, you need to use the Set Share ACL with SMB.
-
-References
-
-[Define a stored access policy](https://learn.microsoft.com/en-us/rest/api/storageservices/define-stored-access-policy)
+- [Planning for an Azure Files deployment](https://learn.microsoft.com/azure/storage/files/storage-files-planning)
+- [Frequently asked questions (FAQ) about Azure Files](https://learn.microsoft.com/azure/storage/files/storage-files-faq)
+- [Planning for an Azure File Sync deployment](https://learn.microsoft.com/azure/storage/file-sync/file-sync-planning)
+- [What is Azure ExpressRoute?](https://learn.microsoft.com/azure/expressroute/expressroute-introduction)
 
 </details>
 
@@ -2040,6 +1940,48 @@ You should not use the `Logging`, `None`, or `Metrics` values. These are valid f
 * [Azure Storage firewall rules](https://learn.microsoft.com/en-us/azure/storage/common/storage-network-security)
 * [Update-AzStorageAccountNetworkRuleSet](https://learn.microsoft.com/en-us/powershell/module/az.storage/update-azstorageaccountnetworkruleset?view=azps-15.4.0&viewFallbackFrom=azps-2.6.0)
 * [Add-AzStorageAccountNetworkRule](https://learn.microsoft.com/en-us/powershell/module/az.storage/add-azstorageaccountnetworkrule?view=azps-15.4.0)
+
+</details>
+
+---
+
+#### Modify Stored Access Policy
+
+**Domain:** Implement and Manage Storage
+**Skill:** Configure access to storage
+**Task:** Configure stored access policies
+
+You are an Azure administrator for a manufacturing organization. You are using shared access signature (SAS) to configure control over storage accounts.
+
+You create a stored access policy as an additional level of control over SAS on the server side for file shares.
+
+You need to modify a stored access policy.
+
+What should you do?
+
+A. Execute a Set Share ACL operation with the SMB protocol.  
+B. Execute a Set Table ACL operation.  
+C. Execute a Set Container ACL operation with public read access for blobs only.  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-03-03-53-49.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+In this scenario, you are using a stored access policy that acts as an additional level of control over shared access signature (SAS) on the server side for file shares. The access policy for an SAS consists of the start time, expiry time, and permissions for the signature. To create or modify a stored access policy, call the Set ACL operation for the resource (Set Container ACL, Set Queue ACL, Set Table ACL, or Set Share ACL) with a request body that specifies the terms of the access policy. An important point to note here is that, for a file share, you need to execute a Set Share ACL operation, which only supports the Server Message Block (SMB) protocol as the enabled file share protocol.
+
+You should not execute a Set Table ACL operation. The Set Table ACL operation sets the stored access policies for the table that can be used with SAS. In this scenario, since you want to modify stored access policies for an Azure File share, you need to use the Set Share ACL with SMB.
+
+You should not execute a Set Container ACL operation with public read access for blobs only. The Set Container ACL operation with public read access for blobs only will mean that Blob data within a container could be read via anonymous request, but container data is not available. In this scenario, since you are aiming to modify stored access policies for an Azure File share, you need to use the Set Share ACL with SMB.
+
+References
+
+[Define a stored access policy](https://learn.microsoft.com/en-us/rest/api/storageservices/define-stored-access-policy)
 
 </details>
 
@@ -2278,6 +2220,65 @@ References
 
 * [Grant limited access to Azure Storage resources using shared access signatures (SAS)](https://learn.microsoft.com/en-us/azure/storage/common/storage-sas-overview)
 * [Create a stored access policy](https://learn.microsoft.com/en-us/azure/storage/common/storage-stored-access-policy-define-dotnet?toc=%2Fazure%2Fstorage%2Fblobs%2Ftoc.json&bc=%2Fazure%2Fstorage%2Fblobs%2Fbreadcrumb%2Ftoc.json)
+
+</details>
+
+---
+
+#### Azure Files Kerberos Authentication
+
+**Domain:** Implement and Manage Storage
+**Skill:** Configure access to storage
+**Task:** Configure identity-based access for Azure Files
+
+Your company is using Microsoft Entra ID and Azure file shares. You are using the standard file shares (GPv2) with Geo-Zone Redundant Storage (GZRS) configured.
+
+You are tasked with configuring identity-based authentication options for Server Message Block (SMB) access.
+
+The following three conditions must be met:
+
+1. You should be able to use Microsoft Entra ID for authenticating hybrid user identities.
+2. Your end users should be able to access Azure file shares over the internet.
+3. Your end users do not require a line-of-sight to domain controllers.
+
+You need to implement the solution.
+
+What should you do?
+
+A. Use Kerberos authentication for hybrid identities.  
+B. Use Microsoft Entra Domain Services authentication.  
+C. Use on-premises Active Directory Domain Services (AD DS) authentication.  
+D. Use Active Directory (AD) Kerberos authentication for Linux clients using on-premises AD DS or Microsoft Entra DS.  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-24-19-59-45.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Why the selected answer is correct**  
+Enabling Microsoft Entra Kerberos authentication for hybrid identities lets Azure Files accept Kerberos tickets derived from Microsoft Entra identities that are synchronized from on-premises (hybrid) identity stores. This option provides identity-based SMB access without requiring end users or clients to have line-of-sight to on-premises domain controllers, and it supports access scenarios where clients connect over the internet because authentication is brokered by the Microsoft Entra Kerberos service for Azure Files.
+
+**Why other options are incorrect**  
+
+- **Use Microsoft Entra Domain Services authentication:** Microsoft Entra Domain Services (managed domain) provides LDAP/NTLM/Kerberos for resources joined to that managed domain, but it requires resources or network paths to the managed domain and does not address the hybrid Kerberos-for-cloud scenario described. It does not meet the requirement to authenticate hybrid Entra identities without line-of-sight to on-premises domain controllers in the same way that Microsoft Entra Kerberos for Azure Files does.  
+- (Implicit trap) Authenticating directly against on-premises AD or relying on NTLM would require domain controller connectivity or domain-joined network paths and therefore would fail the "no line-of-sight" requirement.
+
+**Key takeaway**  
+When you must authenticate hybrid Microsoft Entra identities to Azure file shares over SMB without line-of-sight to domain controllers (including internet-connected clients), use Microsoft Entra Kerberos authentication for hybrid identities.
+
+**References**
+
+- [Enable Microsoft Entra Kerberos authentication for hybrid identities on Azure Files](https://learn.microsoft.com/azure/storage/files/storage-files-identity-auth-hybrid-identities-enable)
+- [Overview of Azure Files identity-based authentication options for SMB access](https://learn.microsoft.com/azure/storage/files/storage-files-active-directory-overview)
+- [Active Directory Domain Services Overview](https://learn.microsoft.com/windows-server/identity/ad-ds/get-started/virtual-dc/active-directory-domain-services-overview)
+- [What is Microsoft Entra Domain Services?](https://learn.microsoft.com/entra/identity/domain-services/overview)
+- [Kerberos Authentication Overview](https://learn.microsoft.com/windows-server/security/kerberos/kerberos-authentication-overview)
+- [Microsoft SMB Protocol and CIFS Protocol Overview](https://learn.microsoft.com/windows/win32/fileio/microsoft-smb-protocol-and-cifs-protocol-overview)
 
 </details>
 
@@ -3311,6 +3312,61 @@ This whole workflow is basically replacing what on-prem SMB does automatically:
 
 ### Automate deployment of resources by using ARM templates or Bicep files
 
+#### Export resource group template
+
+**Domain:** Deploy and Manage Azure Compute Resources
+**Skill:** Automate deployment of resources by using ARM templates or Bicep files
+**Task:** Export a deployment as an ARM template or convert an ARM template to a Bicep file
+
+An Azure resource group was initially deployed from an Azure Resource Manager (ARM) template. Resources have since been added and modified manually through the Azure portal.
+
+You need to create a new template based on the current state of the resource group.
+
+Which PowerShell cmdlet should you use?
+
+A. `New-AzResourceGroupDeployment`  
+B. `Save-AzResourceGroupDeploymentTemplate`  
+C. `Save-AzDeploymentTemplate`  
+D. `Export-AzResourceGroup`  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-13-05-35-52.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Solution Explanation:**
+
+You should use the `Export-AzResourceGroup` cmdlet. This cmdlet captures a specified resource group and saves it as a template to a JSON or Bicep file. This gives you a way to create a template based on the current resources in a resource group. You also have the option of exporting a running resource group as a template from the Azure portal.
+
+You should not use the `Save-AzResourceGroupDeploymentTemplate` cmdlet. This saves a resource group deployment, not the current resource group, to a file — you must specify both the deployment name and the resource group name.
+
+You should not use the `Save-AzDeploymentTemplate` cmdlet. This saves an existing deployment template to a file.
+
+You should not use the `New-AzResourceGroupDeployment` cmdlet. This cmdlet is used to apply a template to an existing resource group, not to create a new template file.
+
+<img src='.img/2026-03-13-05-39-29.png' width=600>
+
+<img src='.img/2026-03-13-05-39-56.png' width=600>
+
+<img src='.img/2026-03-13-05-40-12.png' width=600>
+
+**References**
+
+* [Use Azure portal to export a template](https://learn.microsoft.com/azure/azure-resource-manager/templates/export-template-portal)
+* [Save-AzResourceGroupDeploymentTemplate](https://learn.microsoft.com/powershell/module/az.resources/save-azresourcegroupdeploymenttemplate?view=azps-15.4.0)
+* [Export-AzResourceGroup](https://learn.microsoft.com/powershell/module/az.resources/export-azresourcegroup?view=azps-15.4.0)
+* [New-AzResourceGroupDeployment](https://learn.microsoft.com/powershell/module/az.resources/new-azresourcegroupdeployment?view=azps-15.4.0)
+* [Save-AzDeploymentTemplate](https://learn.microsoft.com/powershell/module/az.resources/save-azdeploymenttemplate?view=azps-15.4.0)
+
+</details>
+
+---
+
 #### Edit ARM Template to Inherit Resource Group Location
 
 **Domain:** Deploy and Manage Azure Compute Resources
@@ -3361,61 +3417,6 @@ You should not use the `New-AzResourceGroup` cmdlet with the `-Location` paramet
 - [Set resource location in ARM template](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/resource-location?tabs=azure-powershell)
 - [Understand the structure and syntax of ARM templates](https://learn.microsoft.com/azure/azure-resource-manager/templates/syntax)
 - [Deploy resources with ARM templates and Azure PowerShell](https://learn.microsoft.com/azure/azure-resource-manager/templates/deploy-powershell)
-
-</details>
-
----
-
-#### Export ARM Template
-
-**Domain:** Deploy and Manage Azure Compute Resources
-**Skill:** Automate deployment of resources by using ARM templates or Bicep files
-**Task:** Export a deployment as an ARM template or convert an ARM template to a Bicep file
-
-You deploy a line of business (LOB) application. All resources that are part of the LOB application are deployed in a single resource group. The resources were added in different phases.
-
-You need to export the current configuration of the LOB application resources to an Azure Resource Manager (ARM) template. You will later use this template for deploying the LOB application infrastructure in different environments for testing or development purposes.
-
-You are using the Complete mode for ARM deployment.
-
-For each of the following statements, select Yes if the statement is true. Otherwise, select No.
-
-| Statement | Yes | No |
-|----------|-----|----|
-| You need to export the Azure Resource Manager (ARM) template from the latest deployment. | ☐ | ☐ |
-| Each deployment contains only the resources that have been added in that deployment. | ☐ | ☐ |
-| The parameters file contains the values used during the deployment. | ☐ | ☐ |
-| The template contains the scripts needed for deploying the template. | ☐ | ☐ |
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-12-03-11-57.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-You do not need to export the Azure Resource Manager (ARM) template from the latest deployment. In this scenario, the line of business (LOB) application was deployed in several phases. The latest deployment will export only the latest resources added to the application. If you want to export the ARM template with all the resources needed for the LOB application, you will need to export the ARM template from the resource group.
-
-Each deployment contains only the resources that have been added in that deployment. When deploying your resources, you specify that the deployment is either an Incremental update or a Complete update. The difference between these two modes is how the Resource Manager handles existing resources in the resource group that are not in the template. In this scenario, since you are using the Complete mode, each deployment contains only the resources that have been added in that deployment and the Resource Manager will delete all the resources that exist in the resource group but are not specified in the template. On the other hand, in an Incremental mode, the Resource Manager leaves unchanged resources that exist in the resource group but are not specified in the template. Resources in the template are added to the resource group.
-
-The parameters file contains the values used during the deployment. The parameters file is a JSON file that stores all the parameters used in the ARM template. You can use this file to reuse the template in different deployments, just changing the values of the parameters file. If you use this file in templates created from resource groups, you need to make significant edits to the template before you can effectively use the parameters file.
-
-The template does not contain the scripts needed for deploying the template. When you download an ARM template from a deployment or a resource group, the downloaded package contains only the ARM template and the parameters file. You can reference Azure CLI scripts or a PowerShell script in the Azure docs linked in the export template pane.
-
-<img src='.img/2026-03-12-03-47-36.png' width=600>
-
-<img src='.img/2026-03-12-03-31-11.png' width=600>
-
-References
-
-- [Use Azure portal to export a template](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/export-template-portal)
-- [Understand the structure and syntax of ARM templates](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/syntax)
-- [Azure Resource Manager deployment modes: COMPLETE versus INCREMENTAL](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/deployment-modes)
-- [Azure Resource Manager deployment modes](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/deployment-modes)
-- [Manage Azure resources by using Azure CLI](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resources-cli)
 
 </details>
 
@@ -3485,169 +3486,6 @@ You should not use the `-TemplateObject` parameter. This is used to specify a ha
 
 ---
 
-#### Export resource group template
-
-**Domain:** Deploy and Manage Azure Compute Resources
-**Skill:** Automate deployment of resources by using ARM templates or Bicep files
-**Task:** Export a deployment as an ARM template or convert an ARM template to a Bicep file
-
-An Azure resource group was initially deployed from an Azure Resource Manager (ARM) template. Resources have since been added and modified manually through the Azure portal.
-
-You need to create a new template based on the current state of the resource group.
-
-Which PowerShell cmdlet should you use?
-
-A. `New-AzResourceGroupDeployment`  
-B. `Save-AzResourceGroupDeploymentTemplate`  
-C. `Save-AzDeploymentTemplate`  
-D. `Export-AzResourceGroup`  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-13-05-35-52.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Solution Explanation:**
-
-You should use the `Export-AzResourceGroup` cmdlet. This cmdlet captures a specified resource group and saves it as a template to a JSON or Bicep file. This gives you a way to create a template based on the current resources in a resource group. You also have the option of exporting a running resource group as a template from the Azure portal.
-
-You should not use the `Save-AzResourceGroupDeploymentTemplate` cmdlet. This saves a resource group deployment, not the current resource group, to a file — you must specify both the deployment name and the resource group name.
-
-You should not use the `Save-AzDeploymentTemplate` cmdlet. This saves an existing deployment template to a file.
-
-You should not use the `New-AzResourceGroupDeployment` cmdlet. This cmdlet is used to apply a template to an existing resource group, not to create a new template file.
-
-<img src='.img/2026-03-13-05-39-29.png' width=600>
-
-<img src='.img/2026-03-13-05-39-56.png' width=600>
-
-<img src='.img/2026-03-13-05-40-12.png' width=600>
-
-**References**
-
-* [Use Azure portal to export a template](https://learn.microsoft.com/azure/azure-resource-manager/templates/export-template-portal)
-* [Save-AzResourceGroupDeploymentTemplate](https://learn.microsoft.com/powershell/module/az.resources/save-azresourcegroupdeploymenttemplate?view=azps-15.4.0)
-* [Export-AzResourceGroup](https://learn.microsoft.com/powershell/module/az.resources/export-azresourcegroup?view=azps-15.4.0)
-* [New-AzResourceGroupDeployment](https://learn.microsoft.com/powershell/module/az.resources/new-azresourcegroupdeployment?view=azps-15.4.0)
-* [Save-AzDeploymentTemplate](https://learn.microsoft.com/powershell/module/az.resources/save-azdeploymenttemplate?view=azps-15.4.0)
-
-</details>
-
----
-
-#### Create VM from Existing VM
-
-**Domain:** Deploy and Manage Azure Compute Resources
-**Skill:** Automate deployment of resources by using ARM templates or Bicep files
-**Task:** Export a deployment as an ARM template or convert an ARM template to a Bicep file
-
-You have an Azure subscription that contains a resource group named `RG1`. `RG1` contains an Azure virtual machine named `VM1`.
-
-You need to use `VM1` as a template to create a new Azure virtual machine.
-
-Which three methods can you use to complete the task? Each correct answer presents a complete solution.
-
-A. From Azure Cloud Shell, run the `Get-AzVM` and `New-AzVM` cmdlets.  
-B. From Azure Cloud Shell, run the `Save-AzDeploymentScriptLog` and `New-AzResourceGroupDeployment` cmdlets.  
-C. From Azure Cloud Shell, run the `Save-AzDeploymentTemplate` and `New-AzResourceGroupDeployment` cmdlets.  
-D. From `RG1`, select Export template, select Download, and then, from Azure Cloud Shell, run the `New-AzResourceGroupDeployment` cmdlet.  
-E. From `VM1`, select Export template, and then select Deploy.  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-25-06-26-16.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Why the selected answer is wrong**
-
-`Get-AzVM` only retrieves the existing virtual machine object. It does not export a reusable deployment template, so pairing it with `New-AzVM` does not meet the requirement to use `VM1` as a template.
-
-**Why the correct answers are correct**
-
-`Save-AzDeploymentTemplate` saves an ARM template from deployment history. That saved template can then be deployed with `New-AzResourceGroupDeployment`.
-
-From `RG1`, using Export template and then Download produces an ARM template for the resource group, and `New-AzResourceGroupDeployment` can deploy that template.
-
-From `VM1`, using Export template and then Deploy reuses the exported template directly to create the new virtual machine.
-
-**Why the other option is incorrect**
-
-`Save-AzDeploymentScriptLog` captures the log of a deployment script execution. It does not export a reusable resource template.
-
-**Key takeaway**
-
-When you need to create a new Azure VM from an existing VM or resource group, export the template first and then deploy that template. Inventory cmdlets like `Get-AzVM` do not create deployable infrastructure.
-
-<img src='.img/2026-03-25-06-28-36.png' width=600>
-
-<img src='.img/2026-03-25-06-28-47.png' width=600>
-
-**References**
-
-* [Use Azure portal to export a template](https://learn.microsoft.com/azure/azure-resource-manager/templates/export-template-portal)
-* [Use Azure PowerShell to export a template](https://learn.microsoft.com/azure/azure-resource-manager/templates/export-template-powershell)
-
-</details>
-
----
-
-#### Deployment Mode Deleted Resources
-
-**Domain:** Deploy and Manage Azure Compute Resources
-**Skill:** Automate deployment of resources by using ARM templates or Bicep files
-**Task:** Deploy resources by using an ARM template or a Bicep file
-
-You have a resource group named `APP-RG` that consists of several resources.
-
-You are asked to add a storage account to the resource group. You decide to deploy the new storage account by using an Azure Resource Manager (ARM) template and the `New-AzResourceGroupDeployment` cmdlet. This template does not contain any linked or nested templates.
-
-After the deployment finishes successfully, you realize that all the resources in the resource group have been deleted except for the newly created storage account.
-
-Why did this happen?
-
-A. The template contains the mode parameter with the value Incremental.  
-B. The template contains the mode parameter with the value Complete.  
-C. You did not use the -mode parameter with the `New-AzResourceGroupDeployment` cmdlet.  
-D. You used the -mode complete parameter with the `New-AzResourceGroupDeployment` cmdlet.  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-13-05-11-11.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Explanation**
-
-Resources in the resource group were deleted except for the newly-created storage account because you used the `-mode complete` parameter with the `New-AzResourceGroupDeployment` cmdlet. The `New-AzResourceGroupDeployment` cmdlet has two deployment modes: incremental and complete. When you use the complete mode, all resources in the resource group that are not included in the template are deleted.
-
-Using the `-mode` parameter with the `New-AzResourceGroupDeployment` cmdlet was not the cause when you did not specify it. When you do not use the `-mode` parameter, you are using the default incremental deployment mode. In this mode, any resource that is not present in the template is maintained in the resource group. If a resource in the resource group is present in the template and any parameters in the template differ from the values in the resource group, those values are updated in the resource present in Azure. You should use this mode when deploying the template.
-
-The cause was not the template containing the mode parameter with the value Complete or Incremental. The template that you are using does not contain any linked or nested templates, so the mode parameter should not be present in the template with either value. This parameter is part of the deployment resource type and is typically used with nested or linked templates. Complete and incremental deployment modes behave the same way as in the `New-AzResourceGroupDeployment` cmdlet.
-
-**References**
-
-* [Deploy resources with ARM templates and Azure PowerShell](https://learn.microsoft.com/azure/azure-resource-manager/templates/deploy-powershell)
-* [Microsoft.Resources deployments](https://learn.microsoft.com/azure/templates/microsoft.resources/deployments)
-* [New-AzResourceGroupDeployment](https://learn.microsoft.com/powershell/module/az.resources/new-azresourcegroupdeployment?view=azps-15.4.0)
-
-</details>
-
----
-
 #### Convert Array to Object
 
 **Domain:** Deploy and Manage Azure Compute Resources
@@ -3709,6 +3547,108 @@ References
 
 * [Bicep Functions Lambda - ToObject](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-functions-lambda#toobject)
 * [Bicep Functions Lambda - Map](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-functions-lambda#map)p>
+
+</details>
+
+---
+
+#### Export ARM Template
+
+**Domain:** Deploy and Manage Azure Compute Resources
+**Skill:** Automate deployment of resources by using ARM templates or Bicep files
+**Task:** Export a deployment as an ARM template or convert an ARM template to a Bicep file
+
+You deploy a line of business (LOB) application. All resources that are part of the LOB application are deployed in a single resource group. The resources were added in different phases.
+
+You need to export the current configuration of the LOB application resources to an Azure Resource Manager (ARM) template. You will later use this template for deploying the LOB application infrastructure in different environments for testing or development purposes.
+
+You are using the Complete mode for ARM deployment.
+
+For each of the following statements, select Yes if the statement is true. Otherwise, select No.
+
+| Statement | Yes | No |
+|----------|-----|----|
+| You need to export the Azure Resource Manager (ARM) template from the latest deployment. | ☐ | ☐ |
+| Each deployment contains only the resources that have been added in that deployment. | ☐ | ☐ |
+| The parameters file contains the values used during the deployment. | ☐ | ☐ |
+| The template contains the scripts needed for deploying the template. | ☐ | ☐ |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-12-03-11-57.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+You do not need to export the Azure Resource Manager (ARM) template from the latest deployment. In this scenario, the line of business (LOB) application was deployed in several phases. The latest deployment will export only the latest resources added to the application. If you want to export the ARM template with all the resources needed for the LOB application, you will need to export the ARM template from the resource group.
+
+Each deployment contains only the resources that have been added in that deployment. When deploying your resources, you specify that the deployment is either an Incremental update or a Complete update. The difference between these two modes is how the Resource Manager handles existing resources in the resource group that are not in the template. In this scenario, since you are using the Complete mode, each deployment contains only the resources that have been added in that deployment and the Resource Manager will delete all the resources that exist in the resource group but are not specified in the template. On the other hand, in an Incremental mode, the Resource Manager leaves unchanged resources that exist in the resource group but are not specified in the template. Resources in the template are added to the resource group.
+
+The parameters file contains the values used during the deployment. The parameters file is a JSON file that stores all the parameters used in the ARM template. You can use this file to reuse the template in different deployments, just changing the values of the parameters file. If you use this file in templates created from resource groups, you need to make significant edits to the template before you can effectively use the parameters file.
+
+The template does not contain the scripts needed for deploying the template. When you download an ARM template from a deployment or a resource group, the downloaded package contains only the ARM template and the parameters file. You can reference Azure CLI scripts or a PowerShell script in the Azure docs linked in the export template pane.
+
+<img src='.img/2026-03-12-03-47-36.png' width=600>
+
+<img src='.img/2026-03-12-03-31-11.png' width=600>
+
+References
+
+- [Use Azure portal to export a template](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/export-template-portal)
+- [Understand the structure and syntax of ARM templates](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/syntax)
+- [Azure Resource Manager deployment modes: COMPLETE versus INCREMENTAL](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/deployment-modes)
+- [Azure Resource Manager deployment modes](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/deployment-modes)
+- [Manage Azure resources by using Azure CLI](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resources-cli)
+
+</details>
+
+---
+
+#### Deployment Mode Deleted Resources
+
+**Domain:** Deploy and Manage Azure Compute Resources
+**Skill:** Automate deployment of resources by using ARM templates or Bicep files
+**Task:** Deploy resources by using an ARM template or a Bicep file
+
+You have a resource group named `APP-RG` that consists of several resources.
+
+You are asked to add a storage account to the resource group. You decide to deploy the new storage account by using an Azure Resource Manager (ARM) template and the `New-AzResourceGroupDeployment` cmdlet. This template does not contain any linked or nested templates.
+
+After the deployment finishes successfully, you realize that all the resources in the resource group have been deleted except for the newly created storage account.
+
+Why did this happen?
+
+A. The template contains the mode parameter with the value Incremental.  
+B. The template contains the mode parameter with the value Complete.  
+C. You did not use the -mode parameter with the `New-AzResourceGroupDeployment` cmdlet.  
+D. You used the -mode complete parameter with the `New-AzResourceGroupDeployment` cmdlet.  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-13-05-11-11.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Explanation**
+
+Resources in the resource group were deleted except for the newly-created storage account because you used the `-mode complete` parameter with the `New-AzResourceGroupDeployment` cmdlet. The `New-AzResourceGroupDeployment` cmdlet has two deployment modes: incremental and complete. When you use the complete mode, all resources in the resource group that are not included in the template are deleted.
+
+Using the `-mode` parameter with the `New-AzResourceGroupDeployment` cmdlet was not the cause when you did not specify it. When you do not use the `-mode` parameter, you are using the default incremental deployment mode. In this mode, any resource that is not present in the template is maintained in the resource group. If a resource in the resource group is present in the template and any parameters in the template differ from the values in the resource group, those values are updated in the resource present in Azure. You should use this mode when deploying the template.
+
+The cause was not the template containing the mode parameter with the value Complete or Incremental. The template that you are using does not contain any linked or nested templates, so the mode parameter should not be present in the template with either value. This parameter is part of the deployment resource type and is typically used with nested or linked templates. Complete and incremental deployment modes behave the same way as in the `New-AzResourceGroupDeployment` cmdlet.
+
+**References**
+
+* [Deploy resources with ARM templates and Azure PowerShell](https://learn.microsoft.com/azure/azure-resource-manager/templates/deploy-powershell)
+* [Microsoft.Resources deployments](https://learn.microsoft.com/azure/templates/microsoft.resources/deployments)
+* [New-AzResourceGroupDeployment](https://learn.microsoft.com/powershell/module/az.resources/new-azresourcegroupdeployment?view=azps-15.4.0)
 
 </details>
 
@@ -3844,7 +3784,151 @@ References
 
 ---
 
+#### Create VM from Existing VM
+
+**Domain:** Deploy and Manage Azure Compute Resources
+**Skill:** Automate deployment of resources by using ARM templates or Bicep files
+**Task:** Export a deployment as an ARM template or convert an ARM template to a Bicep file
+
+You have an Azure subscription that contains a resource group named `RG1`. `RG1` contains an Azure virtual machine named `VM1`.
+
+You need to use `VM1` as a template to create a new Azure virtual machine.
+
+Which three methods can you use to complete the task? Each correct answer presents a complete solution.
+
+A. From Azure Cloud Shell, run the `Get-AzVM` and `New-AzVM` cmdlets.  
+B. From Azure Cloud Shell, run the `Save-AzDeploymentScriptLog` and `New-AzResourceGroupDeployment` cmdlets.  
+C. From Azure Cloud Shell, run the `Save-AzDeploymentTemplate` and `New-AzResourceGroupDeployment` cmdlets.  
+D. From `RG1`, select Export template, select Download, and then, from Azure Cloud Shell, run the `New-AzResourceGroupDeployment` cmdlet.  
+E. From `VM1`, select Export template, and then select Deploy.  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-25-06-26-16.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Why the selected answer is wrong**
+
+`Get-AzVM` only retrieves the existing virtual machine object. It does not export a reusable deployment template, so pairing it with `New-AzVM` does not meet the requirement to use `VM1` as a template.
+
+**Why the correct answers are correct**
+
+`Save-AzDeploymentTemplate` saves an ARM template from deployment history. That saved template can then be deployed with `New-AzResourceGroupDeployment`.
+
+From `RG1`, using Export template and then Download produces an ARM template for the resource group, and `New-AzResourceGroupDeployment` can deploy that template.
+
+From `VM1`, using Export template and then Deploy reuses the exported template directly to create the new virtual machine.
+
+**Why the other option is incorrect**
+
+`Save-AzDeploymentScriptLog` captures the log of a deployment script execution. It does not export a reusable resource template.
+
+**Key takeaway**
+
+When you need to create a new Azure VM from an existing VM or resource group, export the template first and then deploy that template. Inventory cmdlets like `Get-AzVM` do not create deployable infrastructure.
+
+<img src='.img/2026-03-25-06-28-36.png' width=600>
+
+<img src='.img/2026-03-25-06-28-47.png' width=600>
+
+**References**
+
+* [Use Azure portal to export a template](https://learn.microsoft.com/azure/azure-resource-manager/templates/export-template-portal)
+* [Use Azure PowerShell to export a template](https://learn.microsoft.com/azure/azure-resource-manager/templates/export-template-powershell)
+
+</details>
+
+---
+
 ### Create and configure virtual machines
+
+#### Choose VM Availability Option for Datacenter Failure
+
+**Domain:** Deploy and Manage Azure Compute Resources
+**Skill:** Create and configure virtual machines
+**Task:** Deploy VMs to availability zones and availability sets
+
+Your company plans to host an application on four Azure virtual machines.
+
+You need to ensure that at least two virtual machines are available if a single Azure datacenter fails.
+
+Which availability option should you select for the virtual machine?
+
+A. an availability set  
+B. an availability zone  
+C. scale sets  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-25-19-23-58.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Why the selected answer is incorrect**
+
+An availability set spreads VMs across fault domains and update domains to reduce host and rack-level risk, but it does not provide protection from a full datacenter failure.
+
+**Why the correct answer is correct**
+
+An availability zone places VMs in physically separate datacenters within the same region. Distributing the workload across zones helps keep at least part of the VM fleet available even if one datacenter goes down.
+
+**Why the other option is less appropriate**
+
+`scale sets` are used for scale and lifecycle management. Datacenter-failure resiliency depends on zone-aware placement, not scale sets alone.
+
+**Key takeaway**
+
+For datacenter-level fault isolation, deploy VMs across availability zones.
+
+<details>
+<summary>📝 More Detail</summary>
+
+An **availability set** only protects against **intra-datacenter failures**, not **datacenter-level failures**.
+
+Key distinction:
+
+* **Availability set**
+
+  * Distributes VMs across **fault domains** (different racks/power/network) and **update domains**
+  * All VMs remain within the **same datacenter**
+  * If that entire datacenter goes down → **all VMs go down**
+
+* **Availability zone**
+
+  * Distributes VMs across **physically separate datacenters** within a region
+  * Each zone has independent power, cooling, and networking
+  * If one datacenter (zone) fails → VMs in other zones remain available
+
+Why the question rules out availability sets:
+
+* Requirement: *“at least two virtual machines are available if a single Azure datacenter fails”*
+* Availability sets **cannot survive a datacenter failure**
+* Only **availability zones** meet that requirement
+
+Concise way to remember:
+
+* **Availability Set = rack-level protection**
+* **Availability Zone = datacenter-level protection**
+
+</details>
+
+**References**
+
+* [What are Azure regions and availability zones?](https://learn.microsoft.com/azure/reliability/regions-overview)
+* [Configure virtual machine availability - Training](https://learn.microsoft.com/training/modules/configure-virtual-machine-availability/)
+
+</details>
+
+---
 
 #### Move a data disk with PowerShell
 
@@ -4202,139 +4286,6 @@ You applied the right math to the wrong concept.
 
 ---
 
-#### Enable VM disk encryption
-
-**Domain:** Deploy and Manage Azure Compute Resources
-**Skill:** Create and configure virtual machines
-**Task:** Configure Azure Disk Encryption
-
-You have an Azure virtual machine (Azure VM) named `vm1` and running Ubuntu.
-
-You need to enable disk encryption for `vm1` and store the encryption keys in a new Azure Key Vault named `vmKeyVault1`. All resources must be provisioned in a resource group named `rg1`.
-
-How should you complete the command script? To answer, drag the appropriate command or parameter to the correct placeholder. Each command or parameter may be used once, more than once, or not at all.
-
-```bash
-az keyvault create  --name "vmKeyVault1" \
-  --resource-group "rg1" --location "eastus" \
-  ___[1]___
-
-az vm encryption enable \
-  --resource-group "rg1" --name "vm1" \
-  ___[2]___ "vmKeyVault1"
-```
-
-| Description | Answer |
-|-------------|--------|
-| Complete the `az keyvault create` command to create the Key Vault for disk encryption. | |
-| Complete the `az vm encryption enable` command to specify the key vault for disk encryption. | |
-
-Available options:
-
-- az vm encryption enable
-- az keyvault create
-- --enabled-for-disk-encryption
-- --disk-encryption-keyvault
-- --os-disk-encryption-set
-- az vm update
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-18-04-58-51.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**You should complete the commands as shown below:**
-
-```bash
-az keyvault create --name "vmKeyVault1" \
-  --resource-group "rg1" --location "eastus" \
-  --enabled-for-disk-encryption
-
-az vm encryption enable \
-  --resource-group "rg1" --name "vm1" \
-  --disk-encryption-keyvault "vmKeyVault1"
-```
-
-You should use the `az keyvault create` command with the `--enabled-for-disk-encryption` parameter. This command creates a new Key Vault ready to retrieve secrets from the vault and unwrap keys used by Disk Encryption.
-
-You should also use the `az vm encryption enable` command with the `--disk-encryption-keyvault "vmKeyVault1"` parameter. This command enables Disk Encryption on the existing `vm1` that uses `vmKeyVault1`.
-
-You should not use the `az vm update` command. You can use this command to update VM settings like disk caching, network adapters, or tags.
-
-You should not use the `--os-disk-encryption-set` parameter. You can use this parameter to create a new VM that uses a customer-managed encryption key.
-
-**References**
-
-* [Quickstart: Create and encrypt a Linux VM with the Azure CLI](https://learn.microsoft.com/azure/virtual-machines/linux/disk-encryption-cli-quickstart)
-* [Create and configure a key vault for Azure Disk Encryption](https://learn.microsoft.com/azure/virtual-machines/linux/disk-encryption-key-vault#create-a-key-vault)
-* [az vm encryption (CLI reference)](https://learn.microsoft.com/cli/azure/vm/encryption?view=azure-cli-latest)
-* [az vm (CLI reference)](https://learn.microsoft.com/cli/azure/vm?view=azure-cli-latest)
-
-</details>
-
----
-
-#### Azure Spot VM Eviction Factors
-
-**Domain:** Deploy and Manage Azure Compute Resources
-**Skill:** Create and configure virtual machines
-**Task:** Create a virtual machine
-
-You plan to deploy an Azure virtual machine.
-
-You are evaluating whether to use an Azure Spot instance.
-
-Which two factors can cause an Azure Spot instance to be evicted? Each correct answer presents a complete solution.
-
-A. the average CPU usages of the instance  
-B. the Azure capacity needs  
-C. the current price of the instance  
-D. the time of day  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-25-19-29-28.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Why the selected answer is partially correct**
-
-`the Azure capacity needs` is a valid eviction trigger for Azure Spot VMs. Azure can evict a Spot VM when it needs capacity for pay-as-you-go workloads.
-
-**Why the other selected answer is incorrect**
-
-`the time of day` is not a direct eviction trigger. Time can correlate with demand changes, but Azure does not evict Spot VMs because of clock time itself.
-
-**Why the remaining correct option is correct**
-
-`the current price of the instance` can trigger eviction when Spot price rises above the maximum price you configured for the VM.
-
-**Why the remaining option is incorrect**
-
-`the average CPU usages of the instance` does not control Spot eviction. VM workload utilization does not determine eviction behavior.
-
-**Key takeaway**
-
-Azure Spot VM eviction is based on capacity availability and price thresholds, not instance CPU usage or time-of-day values.
-
-**References**
-
-* [Use Azure Spot Virtual Machines - Azure Virtual Machines | Microsoft Learn](https://learn.microsoft.com/azure/virtual-machines/spot-vms)
-* [Configure virtual machine availability - Training | Microsoft Learn](https://learn.microsoft.com/training/modules/configure-virtual-machine-availability/)
-
-</details>
-
----
-
 #### WebApp1 Availability Case
 
 **Domain:** Deploy and Manage Azure Compute Resources
@@ -4634,84 +4585,134 @@ To meet a 99.9% SLA for a SQL Server VM while minimizing cost, pick a VM size th
 
 ---
 
-#### Choose VM Availability Option for Datacenter Failure
+#### Enable VM disk encryption
 
 **Domain:** Deploy and Manage Azure Compute Resources
 **Skill:** Create and configure virtual machines
-**Task:** Deploy VMs to availability zones and availability sets
+**Task:** Configure Azure Disk Encryption
 
-Your company plans to host an application on four Azure virtual machines.
+You have an Azure virtual machine (Azure VM) named `vm1` and running Ubuntu.
 
-You need to ensure that at least two virtual machines are available if a single Azure datacenter fails.
+You need to enable disk encryption for `vm1` and store the encryption keys in a new Azure Key Vault named `vmKeyVault1`. All resources must be provisioned in a resource group named `rg1`.
 
-Which availability option should you select for the virtual machine?
+How should you complete the command script? To answer, drag the appropriate command or parameter to the correct placeholder. Each command or parameter may be used once, more than once, or not at all.
 
-A. an availability set  
-B. an availability zone  
-C. scale sets  
+```bash
+az keyvault create  --name "vmKeyVault1" \
+  --resource-group "rg1" --location "eastus" \
+  ___[1]___
+
+az vm encryption enable \
+  --resource-group "rg1" --name "vm1" \
+  ___[2]___ "vmKeyVault1"
+```
+
+| Description | Answer |
+|-------------|--------|
+| Complete the `az keyvault create` command to create the Key Vault for disk encryption. | |
+| Complete the `az vm encryption enable` command to specify the key vault for disk encryption. | |
+
+Available options:
+
+- az vm encryption enable
+- az keyvault create
+- --enabled-for-disk-encryption
+- --disk-encryption-keyvault
+- --os-disk-encryption-set
+- az vm update
 
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-03-25-19-23-58.png' width=600>
+<img src='.img/2026-03-18-04-58-51.png' width=600>
 
 </details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
 
-**Why the selected answer is incorrect**
+**You should complete the commands as shown below:**
 
-An availability set spreads VMs across fault domains and update domains to reduce host and rack-level risk, but it does not provide protection from a full datacenter failure.
+```bash
+az keyvault create --name "vmKeyVault1" \
+  --resource-group "rg1" --location "eastus" \
+  --enabled-for-disk-encryption
 
-**Why the correct answer is correct**
+az vm encryption enable \
+  --resource-group "rg1" --name "vm1" \
+  --disk-encryption-keyvault "vmKeyVault1"
+```
 
-An availability zone places VMs in physically separate datacenters within the same region. Distributing the workload across zones helps keep at least part of the VM fleet available even if one datacenter goes down.
+You should use the `az keyvault create` command with the `--enabled-for-disk-encryption` parameter. This command creates a new Key Vault ready to retrieve secrets from the vault and unwrap keys used by Disk Encryption.
 
-**Why the other option is less appropriate**
+You should also use the `az vm encryption enable` command with the `--disk-encryption-keyvault "vmKeyVault1"` parameter. This command enables Disk Encryption on the existing `vm1` that uses `vmKeyVault1`.
 
-`scale sets` are used for scale and lifecycle management. Datacenter-failure resiliency depends on zone-aware placement, not scale sets alone.
+You should not use the `az vm update` command. You can use this command to update VM settings like disk caching, network adapters, or tags.
 
-**Key takeaway**
-
-For datacenter-level fault isolation, deploy VMs across availability zones.
-
-<details>
-<summary>📝 More Detail</summary>
-
-An **availability set** only protects against **intra-datacenter failures**, not **datacenter-level failures**.
-
-Key distinction:
-
-* **Availability set**
-
-  * Distributes VMs across **fault domains** (different racks/power/network) and **update domains**
-  * All VMs remain within the **same datacenter**
-  * If that entire datacenter goes down → **all VMs go down**
-
-* **Availability zone**
-
-  * Distributes VMs across **physically separate datacenters** within a region
-  * Each zone has independent power, cooling, and networking
-  * If one datacenter (zone) fails → VMs in other zones remain available
-
-Why the question rules out availability sets:
-
-* Requirement: *“at least two virtual machines are available if a single Azure datacenter fails”*
-* Availability sets **cannot survive a datacenter failure**
-* Only **availability zones** meet that requirement
-
-Concise way to remember:
-
-* **Availability Set = rack-level protection**
-* **Availability Zone = datacenter-level protection**
-
-</details>
+You should not use the `--os-disk-encryption-set` parameter. You can use this parameter to create a new VM that uses a customer-managed encryption key.
 
 **References**
 
-* [What are Azure regions and availability zones?](https://learn.microsoft.com/azure/reliability/regions-overview)
-* [Configure virtual machine availability - Training](https://learn.microsoft.com/training/modules/configure-virtual-machine-availability/)
+* [Quickstart: Create and encrypt a Linux VM with the Azure CLI](https://learn.microsoft.com/azure/virtual-machines/linux/disk-encryption-cli-quickstart)
+* [Create and configure a key vault for Azure Disk Encryption](https://learn.microsoft.com/azure/virtual-machines/linux/disk-encryption-key-vault#create-a-key-vault)
+* [az vm encryption (CLI reference)](https://learn.microsoft.com/cli/azure/vm/encryption?view=azure-cli-latest)
+* [az vm (CLI reference)](https://learn.microsoft.com/cli/azure/vm?view=azure-cli-latest)
+
+</details>
+
+---
+
+#### Azure Spot VM Eviction Factors
+
+**Domain:** Deploy and Manage Azure Compute Resources
+**Skill:** Create and configure virtual machines
+**Task:** Create a virtual machine
+
+You plan to deploy an Azure virtual machine.
+
+You are evaluating whether to use an Azure Spot instance.
+
+Which two factors can cause an Azure Spot instance to be evicted? Each correct answer presents a complete solution.
+
+A. the average CPU usages of the instance  
+B. the Azure capacity needs  
+C. the current price of the instance  
+D. the time of day  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-25-19-29-28.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Why the selected answer is partially correct**
+
+`the Azure capacity needs` is a valid eviction trigger for Azure Spot VMs. Azure can evict a Spot VM when it needs capacity for pay-as-you-go workloads.
+
+**Why the other selected answer is incorrect**
+
+`the time of day` is not a direct eviction trigger. Time can correlate with demand changes, but Azure does not evict Spot VMs because of clock time itself.
+
+**Why the remaining correct option is correct**
+
+`the current price of the instance` can trigger eviction when Spot price rises above the maximum price you configured for the VM.
+
+**Why the remaining option is incorrect**
+
+`the average CPU usages of the instance` does not control Spot eviction. VM workload utilization does not determine eviction behavior.
+
+**Key takeaway**
+
+Azure Spot VM eviction is based on capacity availability and price thresholds, not instance CPU usage or time-of-day values.
+
+**References**
+
+* [Use Azure Spot Virtual Machines - Azure Virtual Machines | Microsoft Learn](https://learn.microsoft.com/azure/virtual-machines/spot-vms)
+* [Configure virtual machine availability - Training | Microsoft Learn](https://learn.microsoft.com/training/modules/configure-virtual-machine-availability/)
 
 </details>
 
@@ -5415,6 +5416,50 @@ Free/Shared App Service plans can stop apps when usage quotas are exceeded; movi
 
 ---
 
+#### App Service pricing tier for autoscale
+
+**Domain:** Deploy and Manage Azure Compute Resources
+**Skill:** Create and configure Azure App Service
+**Task:** Provision an App Service plan
+
+You plan to deploy a new Azure web app. The deployment must support autoscaling and support up to 20 instances of the web app.
+
+You need to create an App Service Plan that supports the deployment. You want to minimize the cost to deploy and maintain the web app.
+
+Which pricing tier should you choose?
+
+A. Standard  
+B. Premium  
+C. Shared  
+D. Basic  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-15-06-00-33.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+You should choose a Standard pricing tier for the App Service Plan. The Standard (S1, S2, or S3) pricing tier supports autoscale with up to 20 instances, and is more cost-effective compared to higher tiers like Premium or Isolated, making it suitable for minimizing costs while meeting the scenario requirements. The specific size (S1, S2, or S3) within the Standard tier depends on the resource requirements (CPU, memory, etc.) of your web app. Start with S1 and scale up if necessary. If your app requires advanced features like faster scaling, better performance, or isolated environments, you might need to consider the Premium tier, but it would increase costs.
+
+You should not choose a Premium service plan. The Premium pricing tier supports autoscale with up to 30 instances, but it is unnecessary for the scenario requirements since the Standard tier can handle up to 20 instances at a lower cost.
+
+You should not choose a Shared service plan. This pricing option is designed for development and testing. The Shared pricing tier does not support autoscale and only allows one instance.
+
+You should not choose a Basic service plan. This option does not support autoscale and is limited to three instances, which does not meet the scenario requirements.
+
+**References**
+
+* [What are Azure App Service plans?](https://learn.microsoft.com/azure/app-service/overview-hosting-plans)
+* [App Service pricing](https://azure.microsoft.com/pricing/details/app-service/)
+
+</details>
+
+---
+
 #### WebJobs on multi-instance App Service
 
 **Domain:** Deploy and Manage Azure Compute Resources
@@ -5553,85 +5598,6 @@ Because the job runs continuously, it is always ready to process new items as th
 * [Develop and deploy WebJobs using Visual Studio](https://learn.microsoft.com/azure/app-service/webjobs-dotnet-deploy-vs)
 * [App Service WebJobs overview](https://learn.microsoft.com/azure/app-service/overview-webjobs)
 * [App Service pricing](https://azure.microsoft.com/pricing/details/app-service/)
-
-</details>
-
----
-
-#### App Service Plan Selection
-
-**Domain:** Deploy and Manage Azure Compute Resources
-**Skill:** Create and configure Azure App Service
-**Task:** Provision an App Service plan
-
-You are building new web apps in Azure App Service.
-
-You should use the web apps, stacks, and the available App Service plans as shown in the exhibit.
-
-**Exhibit:**
-
-| Web App | Stack |
-|--------:|:-----|
-| App1 | Node.js 21.x |
-| App2 | ASP.NET 4.8 |
-| App3 | .NET 7 |
-| App4 | Python 3.9 |
-
-| App Service Plan | Platform |
-|---|---|
-| Plan1 | Windows |
-| Plan2 | Linux |
-
-You need to publish each web app in an App Service plan that supports its stack runtime.
-
-Which App Service plan can you use for each web app? To answer, select the appropriate options from the drop-down menus.
-
-| App | App Service plan |
-|-----|------------------|
-| App1 | ***[1]*** |
-| App2 | ***[2]*** |
-| App3 | ***[3]*** |
-| App4 | ***[4]*** |
-
-Drop-Down Options:
-
-| Blank | Options |
-|-------|---------|
-| `[1]` | Plan1 and Plan2 / Plan1 only / Plan2 only |
-| `[2]` | Plan1 and Plan2 / Plan1 only / Plan2 only |
-| `[3]` | Plan1 and Plan2 / Plan1 only / Plan2 only |
-| `[4]` | Plan1 and Plan2 / Plan1 only / Plan2 only |
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-17-03-52-58.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Solution Explanation:**
-
-You can use Plan1 and Plan2 for App1. Node.js runtime stack is supported by App Service plan platforms running on Windows and Linux OSes.
-
-You can only use Plan1 for App2. ASP.NET 4.8 runtime stack is supported by App Service plan platform running on Windows only.
-
-You can use Plan1 and Plan2 for App3. The .NET 7 runtime stack is supported by App Service plan platforms running on Windows and Linux OSes.
-
-You can only use Plan2 for App4. The Python runtime stack is supported by App Service plan platforms running on Linux only. Support for Windows has been officially retired.
-
-It is recommended that you monitor the App Service language runtime support policy page regularly for updates and the retiring process for end-of-life stacks supported by the App Service plans.
-
-<img src='.img/2026-03-17-04-07-15.png' width=600>
-
-**References**
-
-* [App Service overview](https://learn.microsoft.com/azure/app-service/overview)
-* [Language runtime support policy for Azure App Service](https://learn.microsoft.com/azure/app-service/language-support-policy#show-and-set-language-versions)
-* [Deploy a Node.js web app in Azure](https://learn.microsoft.com/azure/app-service/quickstart-nodejs#create-your-nodejs-application)
-* [Quickstart: Deploy an ASP.NET web app](https://learn.microsoft.com/azure/app-service/quickstart-dotnetcore)
 
 </details>
 
@@ -6339,45 +6305,80 @@ On Azure exams, when you see:
 
 ---
 
-#### App Service pricing tier for autoscale
+#### App Service Plan Selection
 
 **Domain:** Deploy and Manage Azure Compute Resources
 **Skill:** Create and configure Azure App Service
 **Task:** Provision an App Service plan
 
-You plan to deploy a new Azure web app. The deployment must support autoscaling and support up to 20 instances of the web app.
+You are building new web apps in Azure App Service.
 
-You need to create an App Service Plan that supports the deployment. You want to minimize the cost to deploy and maintain the web app.
+You should use the web apps, stacks, and the available App Service plans as shown in the exhibit.
 
-Which pricing tier should you choose?
+**Exhibit:**
 
-A. Standard  
-B. Premium  
-C. Shared  
-D. Basic  
+| Web App | Stack |
+|--------:|:-----|
+| App1 | Node.js 21.x |
+| App2 | ASP.NET 4.8 |
+| App3 | .NET 7 |
+| App4 | Python 3.9 |
+
+| App Service Plan | Platform |
+|---|---|
+| Plan1 | Windows |
+| Plan2 | Linux |
+
+You need to publish each web app in an App Service plan that supports its stack runtime.
+
+Which App Service plan can you use for each web app? To answer, select the appropriate options from the drop-down menus.
+
+| App | App Service plan |
+|-----|------------------|
+| App1 | ***[1]*** |
+| App2 | ***[2]*** |
+| App3 | ***[3]*** |
+| App4 | ***[4]*** |
+
+Drop-Down Options:
+
+| Blank | Options |
+|-------|---------|
+| `[1]` | Plan1 and Plan2 / Plan1 only / Plan2 only |
+| `[2]` | Plan1 and Plan2 / Plan1 only / Plan2 only |
+| `[3]` | Plan1 and Plan2 / Plan1 only / Plan2 only |
+| `[4]` | Plan1 and Plan2 / Plan1 only / Plan2 only |
 
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-03-15-06-00-33.png' width=600>
+<img src='.img/2026-03-17-03-52-58.png' width=600>
 
 </details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
 
-You should choose a Standard pricing tier for the App Service Plan. The Standard (S1, S2, or S3) pricing tier supports autoscale with up to 20 instances, and is more cost-effective compared to higher tiers like Premium or Isolated, making it suitable for minimizing costs while meeting the scenario requirements. The specific size (S1, S2, or S3) within the Standard tier depends on the resource requirements (CPU, memory, etc.) of your web app. Start with S1 and scale up if necessary. If your app requires advanced features like faster scaling, better performance, or isolated environments, you might need to consider the Premium tier, but it would increase costs.
+**Solution Explanation:**
 
-You should not choose a Premium service plan. The Premium pricing tier supports autoscale with up to 30 instances, but it is unnecessary for the scenario requirements since the Standard tier can handle up to 20 instances at a lower cost.
+You can use Plan1 and Plan2 for App1. Node.js runtime stack is supported by App Service plan platforms running on Windows and Linux OSes.
 
-You should not choose a Shared service plan. This pricing option is designed for development and testing. The Shared pricing tier does not support autoscale and only allows one instance.
+You can only use Plan1 for App2. ASP.NET 4.8 runtime stack is supported by App Service plan platform running on Windows only.
 
-You should not choose a Basic service plan. This option does not support autoscale and is limited to three instances, which does not meet the scenario requirements.
+You can use Plan1 and Plan2 for App3. The .NET 7 runtime stack is supported by App Service plan platforms running on Windows and Linux OSes.
+
+You can only use Plan2 for App4. The Python runtime stack is supported by App Service plan platforms running on Linux only. Support for Windows has been officially retired.
+
+It is recommended that you monitor the App Service language runtime support policy page regularly for updates and the retiring process for end-of-life stacks supported by the App Service plans.
+
+<img src='.img/2026-03-17-04-07-15.png' width=600>
 
 **References**
 
-* [What are Azure App Service plans?](https://learn.microsoft.com/azure/app-service/overview-hosting-plans)
-* [App Service pricing](https://azure.microsoft.com/pricing/details/app-service/)
+* [App Service overview](https://learn.microsoft.com/azure/app-service/overview)
+* [Language runtime support policy for Azure App Service](https://learn.microsoft.com/azure/app-service/language-support-policy#show-and-set-language-versions)
+* [Deploy a Node.js web app in Azure](https://learn.microsoft.com/azure/app-service/quickstart-nodejs#create-your-nodejs-application)
+* [Quickstart: Deploy an ASP.NET web app](https://learn.microsoft.com/azure/app-service/quickstart-dotnetcore)
 
 </details>
 
@@ -6514,198 +6515,6 @@ So, your screenshot should be read as:
 
 ---
 
-#### VNet Peering with ExpressRoute
-
-**Domain:** Implement and Manage Virtual Networking
-**Skill:** Configure and manage virtual networks in Azure
-**Task:** Create and configure virtual network peering
-
-You are asked to configure a subnet named SUBNET1 that is part of a virtual network named VNET1. Hosts on SUBNET1 need to be able to reach resources on a virtual network named VNET2 and also reach a proxy server that scans all outbound internet requests being made by resources hosted on SUBNET1.
-
-The proxy server is hosted on your on-premises network. You have an ExpressRoute circuit named EXP-ROUTE1 configured between VNET2 and your on-premises network.
-
-You want VNET1 to use EXP-ROUTE1 to reach the proxy server. To minimize costs, your solution must not require the creation of additional resources.
-
-Which two actions should you perform? Each correct answer presents part of the solution.
-
-A. Create a virtual network (VNet) gateway in VNET1.  
-B. Configure VNET2 peering to use the remote gateway.  
-C. Link the virtual network (VNet) gateway in VNET1 with EXP-ROUTE1.  
-D. Configure VNET1 peering to use the remote gateway.  
-E. Configure virtual network (VNet) peering between VNET1 and VNET2.  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-12-05-10-59.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Solution explanation:**
-
-You should configure virtual network (VNet) peering between VNET1 and VNET2. You should also set VNET1 to use the remote gateway. The peering will provide connectivity between VNET1 and VNET2 by internally sharing routes to the corresponding IP address ranges. For VNET1 to leverage the EXP-ROUTE1 to connect to the on-premises network, you would have to ensure that the peering connection on VNET1 uses the gateway device attached to VNET2. This gateway is what is used by the EXP-ROUTE1 ExpressRoute circuit.
-
-You should not set VNET2 peering to use the remote gateway. Because VNET2 is configured with an ExpressRoute circuit, VNET2 already has a VNet gateway on its gateway subnet. Trying to set VNET2 to use the remote gateway will generate an error message stating that the configuration is not possible.
-
-You should not create a VNet gateway in VNET1 and link that with EXP-ROUTE1. These two steps would provide connectivity to resources hosted on VNET1, enabling them to use EXP-ROUTE1, but it would not provide connectivity between VNET1 and VNET2. It would also increase the cost because you would need to add an additional VNet gateway device in VNET1.
-
-**References**
-
-* [Virtual network peering](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview)
-* [What is Azure ExpressRoute?](https://learn.microsoft.com/en-us/azure/expressroute/expressroute-introduction)
-* [About ExpressRoute virtual network gateways](https://learn.microsoft.com/en-us/azure/expressroute/expressroute-about-virtual-network-gateways)
-* [Tutorial: Connect a virtual network to an ExpressRoute circuit using the Azure portal](https://learn.microsoft.com/en-us/azure/expressroute/expressroute-howto-linkvnet-portal-resource-manager)
-
-</details>
-
----
-
-#### VNet Peering — Missing Reverse Peering
-
-**Domain:** Implement and Manage Virtual Networking
-**Skill:** Configure and manage virtual networks in Azure
-**Task:** Create and configure virtual network peering
-
-You have two Azure virtual machines (VMs) running Windows as shown in the first exhibit.
-
-<img src='.img/2026-03-14-03-25-04.png' width=400>
-
-<img src='.img/2026-03-14-03-25-16.png' width=300>
-
-You create a virtual network (VNet) peering by executing the following PowerShell commands:
-
-```powershell
-$vnet1 = Get-AzVirtualNetwork -Name 'VNet1' -ResourceGroupName 'RG1'
-$vnet2 = Get-AzVirtualNetwork -Name 'VNet2' -ResourceGroupName 'RG2'
-Add-AzVirtualNetworkPeering `
-  -Name 'VNet1-VNet2' `
-  -VirtualNetwork $vnet1 `
-  -RemoteVirtualNetworkId $vnet2.Id
-```
-
-The peering overview of `VNet1` is shown in the second exhibit.
-
-You open the local Windows firewalls by running the following PowerShell command on both VMs:
-
-```powershell
-New-NetFirewallRule -DisplayName 'Enable ping' -Protocol 'ICMPv4'
-```
-
-A ping from `VM1` to the private IP address of `VM2` fails.
-
-You need to make sure that `VM1` can connect to `VM2`.
-
-What should you do?
-
-A. Use the public IP address to connect.  
-B. Create a network security group (NSG). Associate both subnets to the NSG.  
-C. Move VM2 to the East US region.  
-D. Create a VNet gateway.  
-E. Add a VNet peering from VNet2 to VNet1.  
-F. Modify the subnet Default2 address range.  
-G. Modify the VNet address space of VNet2.  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-14-03-20-28.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Why the selected answer is correct**
-
-A virtual network peering connection is directional and requires a peering relationship in both directions for full connectivity between private IP addresses. The existing peering from `VNet1` to `VNet2` was created, but the reverse peering from `VNet2` to `VNet1` was not. Creating a peering from `VNet2` to `VNet1` establishes the two-way peering so the peering status becomes `Connected` and private IP traffic between `VM1` and `VM2` flows over the Azure backbone.
-
-**Why the selected answer is better than the others**
-
-The issue is that Azure VNet peering requires reciprocal peerings (or a two-way peering) for connectivity as shown in the exhibit. No host-level change (for example, using the public IP) is necessary when the goal is private inter-VNet connectivity. Enabling ping (`ICMPv4`) inside the OS is necessary but not sufficient if peering is only initiated one way.
-
-<img src='.img/2026-03-14-03-26-41.png' width=600>
-
-**Why other options are incorrect**
-
-**Use the public IP address to connect.** Using a public IP bypasses private peering and is unnecessary — VNet peering is designed to use private IP addresses over the Microsoft backbone.  
-
-**Create a network security group (NSG). Associate both subnets to the NSG.** An NSG filters traffic; adding an NSG is not required to enable peered-VNet connectivity and would not fix a missing reverse peering.  
-
-**Move VM2 to the East US region.** VNet peering supports cross-region (global) peering when configured; moving the VM is unnecessary and doesn't address the missing peering relationship.  
-
-**Create a VNet gateway.** A virtual network gateway (VPN gateway) is used for cross-premises or gateway-transit scenarios, not for direct VNet peering connectivity between private IPs.  
-
-**Modify the subnet Default2 address range.** The IP ranges shown do not overlap; changing the subnet is not required and would be disruptive.  
-
-**Modify the VNet address space of VNet2.** VNet peering only fails when address spaces overlap; in this scenario the address spaces are distinct, so modifying them is unnecessary.
-
-**Key takeaway**
-
-VNet peering must be configured in both directions (both peerings created) to enable full private connectivity between two virtual networks; check the peering status for `Connected` after creating the reverse peering.
-
-**References**
-
-- [Azure virtual network peering](https://learn.microsoft.com/azure/virtual-network/virtual-network-peering-overview)
-- [Network Security Groups](https://learn.microsoft.com/azure/virtual-network/network-security-groups-overview)
-- [What is Azure VPN Gateway?](https://learn.microsoft.com/azure/vpn-gateway/vpn-gateway-about-vpngateways)
-
-</details>
-
----
-
-#### Standard Load Balancer public IPs
-
-**Domain:** Implement and Manage Virtual Networking
-**Skill:** Configure and manage virtual networks in Azure
-**Task:** Configure public IP addresses
-
-You are deploying a group of new virtual machines (`VMs`) in your Azure Subscription. These new VMs are part of the frontend layer of a new application that your company is publishing.
-
-You plan to configure an Azure Load Balancer for these new VMs. You decide to configure a `Standard Load Balancer`.
-
-You need to configure the public IP address that you will assign to the load balancer.
-
-For each of the following statements, select Yes if the statement is true. Otherwise, select No.
-
-| Statement | Yes | No |
-|----------|-----|----|
-| You can only use a standard Stock-keeping-Unit (SKU) public IP addresses with Standard Load Balancers. | ☐ | ☐ |
-| Standard Stock-keeping-Unit (SKU) public IP addresses allow inbound communication by default. | ☐ | ☐ |
-| Standard Load Balancers support standard Stock-keeping-Unit (SKU) public IP addresses only. | ☐ | ☐ |
-| You can specify the IP address of a public IP resource. | ☐ | ☐ |
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-16-04-57-12.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-You can only use a standard Stock-keeping-Unit (SKU) public IP with `Standard Load Balancers`. `Standard Load Balancers` have been designed with security in mind. This means that you need to manually authorize any inbound connection. The `Standard` SKU public IP address is the only SKU that has this configuration by default.
-
-`Standard` SKU public IP addresses do not allow inbound communication by default. You need to manually create and assign a network security group (`NSG`) that allows inbound communication with the `Standard` SKU public IP address. If you need to allow all inbound traffic by default, you need to use a `Basic` SKU public IP address.
-
-`Standard Load Balancers` support `Standard` SKU public IP addresses only. When you configure a public IP address, there are two different allocation methods: static or dynamic. The static allocation method reserves and assigns a public IP address when the public IP resource object is created in Azure.
-
-You cannot specify the IP address of a public IP resource. Even if you use the static allocation method for a public IP, you cannot manually specify the IP address assigned to your public IP resource object. This address is picked from a pool of public addresses and assigned to your resource.
-
-<img src='.img/2026-03-16-04-59-42.png' width=600>
-
-**References**
-
-* [Public IP addresses](https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/public-ip-addresses)
-* [What is Azure Load Balancer?](https://learn.microsoft.com/azure/load-balancer/load-balancer-overview)
-
-</details>
-
----
-
 #### Case Study — Container Group Placement
 
 **Domain:** Implement and Manage Virtual Networking
@@ -6835,6 +6644,198 @@ This progression reflects Azure’s broader transition from simple internet-faci
 * [Deploy container instances into an Azure virtual network](https://learn.microsoft.com/azure/container-instances/container-instances-vnet)
 * [Quickstart: Deploy a container instance in Azure using Azure PowerShell](https://learn.microsoft.com/azure/container-instances/container-instances-quickstart-powershell)
 * [Quickstart: Deploy a container instance in Azure using the Azure CLI](https://learn.microsoft.com/azure/container-instances/container-instances-quickstart)
+
+</details>
+
+---
+
+#### VNet Peering with ExpressRoute
+
+**Domain:** Implement and Manage Virtual Networking
+**Skill:** Configure and manage virtual networks in Azure
+**Task:** Create and configure virtual network peering
+
+You are asked to configure a subnet named SUBNET1 that is part of a virtual network named VNET1. Hosts on SUBNET1 need to be able to reach resources on a virtual network named VNET2 and also reach a proxy server that scans all outbound internet requests being made by resources hosted on SUBNET1.
+
+The proxy server is hosted on your on-premises network. You have an ExpressRoute circuit named EXP-ROUTE1 configured between VNET2 and your on-premises network.
+
+You want VNET1 to use EXP-ROUTE1 to reach the proxy server. To minimize costs, your solution must not require the creation of additional resources.
+
+Which two actions should you perform? Each correct answer presents part of the solution.
+
+A. Create a virtual network (VNet) gateway in VNET1.  
+B. Configure VNET2 peering to use the remote gateway.  
+C. Link the virtual network (VNet) gateway in VNET1 with EXP-ROUTE1.  
+D. Configure VNET1 peering to use the remote gateway.  
+E. Configure virtual network (VNet) peering between VNET1 and VNET2.  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-12-05-10-59.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Solution explanation:**
+
+You should configure virtual network (VNet) peering between VNET1 and VNET2. You should also set VNET1 to use the remote gateway. The peering will provide connectivity between VNET1 and VNET2 by internally sharing routes to the corresponding IP address ranges. For VNET1 to leverage the EXP-ROUTE1 to connect to the on-premises network, you would have to ensure that the peering connection on VNET1 uses the gateway device attached to VNET2. This gateway is what is used by the EXP-ROUTE1 ExpressRoute circuit.
+
+You should not set VNET2 peering to use the remote gateway. Because VNET2 is configured with an ExpressRoute circuit, VNET2 already has a VNet gateway on its gateway subnet. Trying to set VNET2 to use the remote gateway will generate an error message stating that the configuration is not possible.
+
+You should not create a VNet gateway in VNET1 and link that with EXP-ROUTE1. These two steps would provide connectivity to resources hosted on VNET1, enabling them to use EXP-ROUTE1, but it would not provide connectivity between VNET1 and VNET2. It would also increase the cost because you would need to add an additional VNet gateway device in VNET1.
+
+**References**
+
+* [Virtual network peering](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview)
+* [What is Azure ExpressRoute?](https://learn.microsoft.com/en-us/azure/expressroute/expressroute-introduction)
+* [About ExpressRoute virtual network gateways](https://learn.microsoft.com/en-us/azure/expressroute/expressroute-about-virtual-network-gateways)
+* [Tutorial: Connect a virtual network to an ExpressRoute circuit using the Azure portal](https://learn.microsoft.com/en-us/azure/expressroute/expressroute-howto-linkvnet-portal-resource-manager)
+
+</details>
+
+---
+
+#### Standard Load Balancer public IPs
+
+**Domain:** Implement and Manage Virtual Networking
+**Skill:** Configure and manage virtual networks in Azure
+**Task:** Configure public IP addresses
+
+You are deploying a group of new virtual machines (`VMs`) in your Azure Subscription. These new VMs are part of the frontend layer of a new application that your company is publishing.
+
+You plan to configure an Azure Load Balancer for these new VMs. You decide to configure a `Standard Load Balancer`.
+
+You need to configure the public IP address that you will assign to the load balancer.
+
+For each of the following statements, select Yes if the statement is true. Otherwise, select No.
+
+| Statement | Yes | No |
+|----------|-----|----|
+| You can only use a standard Stock-keeping-Unit (SKU) public IP addresses with Standard Load Balancers. | ☐ | ☐ |
+| Standard Stock-keeping-Unit (SKU) public IP addresses allow inbound communication by default. | ☐ | ☐ |
+| Standard Load Balancers support standard Stock-keeping-Unit (SKU) public IP addresses only. | ☐ | ☐ |
+| You can specify the IP address of a public IP resource. | ☐ | ☐ |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-16-04-57-12.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+You can only use a standard Stock-keeping-Unit (SKU) public IP with `Standard Load Balancers`. `Standard Load Balancers` have been designed with security in mind. This means that you need to manually authorize any inbound connection. The `Standard` SKU public IP address is the only SKU that has this configuration by default.
+
+`Standard` SKU public IP addresses do not allow inbound communication by default. You need to manually create and assign a network security group (`NSG`) that allows inbound communication with the `Standard` SKU public IP address. If you need to allow all inbound traffic by default, you need to use a `Basic` SKU public IP address.
+
+`Standard Load Balancers` support `Standard` SKU public IP addresses only. When you configure a public IP address, there are two different allocation methods: static or dynamic. The static allocation method reserves and assigns a public IP address when the public IP resource object is created in Azure.
+
+You cannot specify the IP address of a public IP resource. Even if you use the static allocation method for a public IP, you cannot manually specify the IP address assigned to your public IP resource object. This address is picked from a pool of public addresses and assigned to your resource.
+
+<img src='.img/2026-03-16-04-59-42.png' width=600>
+
+**References**
+
+* [Public IP addresses](https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/public-ip-addresses)
+* [What is Azure Load Balancer?](https://learn.microsoft.com/azure/load-balancer/load-balancer-overview)
+
+</details>
+
+---
+
+#### VNet Peering — Missing Reverse Peering
+
+**Domain:** Implement and Manage Virtual Networking
+**Skill:** Configure and manage virtual networks in Azure
+**Task:** Create and configure virtual network peering
+
+You have two Azure virtual machines (VMs) running Windows as shown in the first exhibit.
+
+<img src='.img/2026-03-14-03-25-04.png' width=400>
+
+<img src='.img/2026-03-14-03-25-16.png' width=300>
+
+You create a virtual network (VNet) peering by executing the following PowerShell commands:
+
+```powershell
+$vnet1 = Get-AzVirtualNetwork -Name 'VNet1' -ResourceGroupName 'RG1'
+$vnet2 = Get-AzVirtualNetwork -Name 'VNet2' -ResourceGroupName 'RG2'
+Add-AzVirtualNetworkPeering `
+  -Name 'VNet1-VNet2' `
+  -VirtualNetwork $vnet1 `
+  -RemoteVirtualNetworkId $vnet2.Id
+```
+
+The peering overview of `VNet1` is shown in the second exhibit.
+
+You open the local Windows firewalls by running the following PowerShell command on both VMs:
+
+```powershell
+New-NetFirewallRule -DisplayName 'Enable ping' -Protocol 'ICMPv4'
+```
+
+A ping from `VM1` to the private IP address of `VM2` fails.
+
+You need to make sure that `VM1` can connect to `VM2`.
+
+What should you do?
+
+A. Use the public IP address to connect.  
+B. Create a network security group (NSG). Associate both subnets to the NSG.  
+C. Move VM2 to the East US region.  
+D. Create a VNet gateway.  
+E. Add a VNet peering from VNet2 to VNet1.  
+F. Modify the subnet Default2 address range.  
+G. Modify the VNet address space of VNet2.  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-14-03-20-28.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Why the selected answer is correct**
+
+A virtual network peering connection is directional and requires a peering relationship in both directions for full connectivity between private IP addresses. The existing peering from `VNet1` to `VNet2` was created, but the reverse peering from `VNet2` to `VNet1` was not. Creating a peering from `VNet2` to `VNet1` establishes the two-way peering so the peering status becomes `Connected` and private IP traffic between `VM1` and `VM2` flows over the Azure backbone.
+
+**Why the selected answer is better than the others**
+
+The issue is that Azure VNet peering requires reciprocal peerings (or a two-way peering) for connectivity as shown in the exhibit. No host-level change (for example, using the public IP) is necessary when the goal is private inter-VNet connectivity. Enabling ping (`ICMPv4`) inside the OS is necessary but not sufficient if peering is only initiated one way.
+
+<img src='.img/2026-03-14-03-26-41.png' width=600>
+
+**Why other options are incorrect**
+
+**Use the public IP address to connect.** Using a public IP bypasses private peering and is unnecessary — VNet peering is designed to use private IP addresses over the Microsoft backbone.  
+
+**Create a network security group (NSG). Associate both subnets to the NSG.** An NSG filters traffic; adding an NSG is not required to enable peered-VNet connectivity and would not fix a missing reverse peering.  
+
+**Move VM2 to the East US region.** VNet peering supports cross-region (global) peering when configured; moving the VM is unnecessary and doesn't address the missing peering relationship.  
+
+**Create a VNet gateway.** A virtual network gateway (VPN gateway) is used for cross-premises or gateway-transit scenarios, not for direct VNet peering connectivity between private IPs.  
+
+**Modify the subnet Default2 address range.** The IP ranges shown do not overlap; changing the subnet is not required and would be disruptive.  
+
+**Modify the VNet address space of VNet2.** VNet peering only fails when address spaces overlap; in this scenario the address spaces are distinct, so modifying them is unnecessary.
+
+**Key takeaway**
+
+VNet peering must be configured in both directions (both peerings created) to enable full private connectivity between two virtual networks; check the peering status for `Connected` after creating the reverse peering.
+
+**References**
+
+- [Azure virtual network peering](https://learn.microsoft.com/azure/virtual-network/virtual-network-peering-overview)
+- [Network Security Groups](https://learn.microsoft.com/azure/virtual-network/network-security-groups-overview)
+- [What is Azure VPN Gateway?](https://learn.microsoft.com/azure/vpn-gateway/vpn-gateway-about-vpngateways)
 
 </details>
 
@@ -7361,6 +7362,62 @@ You can define both inbound and outbound rules for NSGs.
 
 ### Configure name resolution and load balancing
 
+#### Troubleshoot Load Balancer Connectivity Issues
+
+**Domain:** Implement and Manage Virtual Networking
+**Skill:** Configure name resolution and load balancing
+**Task:** Troubleshoot load balancing
+
+You have deployed a web application in Microsoft Azure using a public Microsoft Load Balancer to distribute traffic across virtual machines. Users report intermittent connectivity issues.
+
+You need to troubleshoot the connectivity issues for consistent application access.
+
+Each correct answer presents part of the solution. Which two actions should you take?
+
+A. Change the load balancer's distribution mode to Source IP affinity.  
+B. Check the health probe configuration.  
+C. Check the network security group rules for the virtual machines.  
+D. Verify matching SKUs for the load balancer and public IP.  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-26-06-31-32.png' width=700>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Solution explanation:**
+
+Checking the health probe configuration is crucial because an inactive or incorrectly configured probe can lead to traffic being routed to unhealthy instances, causing connectivity issues. Verifying matching SKUs for the load balancer and public IP is also essential, as mismatched SKUs can disrupt proper operation and lead to connectivity problems. Checking the network security group rules might seem relevant but does not address the root cause of the connectivity issues. Changing the load balancer's distribution mode might seem like it could improve session persistence but does not resolve the underlying configuration problems causing the connectivity issues.
+
+<details>
+<summary>📝 More Detail</summary>
+
+Intermittent connectivity behind an Azure Load Balancer typically points to issues with how Azure determines backend health or how the load balancer is configured at the platform level, not how traffic is distributed or filtered. This is the key distinction that drives the correct answer.
+
+Changing the distribution mode to Source IP affinity only affects which backend instance a client is routed to. It is useful for maintaining session persistence in stateful applications, but it does not resolve failed or dropped connections. If a backend VM is unhealthy, enabling affinity can actually worsen the issue by consistently routing a client to the same failing instance.
+
+Checking network security group (NSG) rules is a reasonable instinct, but NSG misconfigurations generally result in consistent blocking of traffic rather than intermittent failures. NSGs are deterministic, and unless rules differ across subnets or NICs (which is not indicated here), they do not produce the kind of sporadic behavior described in the scenario.
+
+Health probe configuration is critical because Azure Load Balancer relies entirely on probes to determine which backend instances should receive traffic. If probes are misconfigured—such as using the wrong port, incorrect path, or inappropriate thresholds—healthy instances may be marked unhealthy or unhealthy instances may still receive traffic. This leads directly to intermittent connectivity as requests are routed unpredictably.
+
+Verifying that the load balancer and public IP use matching SKUs addresses a foundational platform requirement. Azure enforces compatibility between Basic and Standard SKUs, and mismatches can lead to partial or inconsistent functionality. This type of misconfiguration does not always result in a complete outage, making it a common cause of intermittent behavior.
+
+When troubleshooting these scenarios, the correct approach is to first validate how Azure determines backend health and ensure the underlying platform configuration is sound. Only after those are confirmed should traffic distribution settings or security rules be considered.
+
+</details>
+
+**References**
+
+- [Improve application scalability and resiliency by using Azure Load Balancer](https://learn.microsoft.com/training/modules/improve-app-scalability-resiliency-with-load-balancer/)
+
+</details>
+
+---
+
 #### Configure Internal Load Balancer
 
 **Domain:** Implement and Manage Virtual Networking
@@ -7521,6 +7578,68 @@ Reference: [https://learn.microsoft.com/en-us/azure/load-balancer/distribution-m
 
 ---
 
+#### IMDS Load Balancer Metadata Error
+
+**Domain:** Implement and Manage Virtual Networking
+**Skill:** Configure name resolution and load balancing
+**Task:** Troubleshoot load balancing
+
+Your organization is using an Azure Load Balancer service. You are the Azure administrator in your organization.
+
+You are tasked with retrieving Load Balancer information using Azure Instance Metadata Service (IMDS).
+
+You see the following error message:
+
+`Error code: 404; No load balancer metadata is found.`
+
+You need to troubleshoot this issue.
+
+Which two things can you infer from the error message? Each correct answer presents a complete solution.
+
+A. There is a rate limit.  
+B. The path is misconfigured.  
+C. The load balancer has the Basic instead of the Standard SKU.  
+D. The virtual machine is not associated with a load balancer.  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-03-04-57-09.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+The Azure Instance Metadata Service (IMDS) provides information about currently running virtual machine instances. The Instance Metadata Service is only accessible from within a running virtual machine instance on a non-routable IP address.
+
+You can use the SKU, storage, network configurations, and upcoming maintenance events-related information effectively for managing and configuring the virtual machines. In this scenario, since the retrieved data from IMDS displays the No load balancer metadata is found error message, this could be owing to either of the following two reasons:
+
+1. The virtual machine is not associated with a load balancer.
+
+2. The load balancer has the Basic instead of Standard SKU.
+
+The error code does not indicate a misconfiguration of the path. In such a case, you would see Error 404, but with a different error message displayed:
+
+404; API is not found: Path = "<UrlPath>", Method = "<Method>".
+
+The error code does not indicate a rate limit. In this case, you would see Error 429 displayed with the "Too many requests" message.
+
+<img src='.img/2026-03-03-05-00-22.png' width=600>
+
+<img src='.img/2026-03-03-05-03-19.png' width=600>
+
+> Basic Load Balancer SKU was retired in 2025.
+
+References
+
+- [Instance Metadata Service](https://learn.microsoft.com/en-us/azure/virtual-machines/instance-metadata-service?tabs=windows)
+- [Load Balancer SKUs](https://learn.microsoft.com/en-us/azure/load-balancer/skus)
+
+</details>
+
+---
+
 #### Configure DNS Records for App Service
 
 **Domain:** Implement and Manage Virtual Networking
@@ -7580,173 +7699,6 @@ Use an A record (Name "@", RecordType "A") for the IPv4 mapping of the root doma
 References
 
 * [DNS Web Sites Custom Domain](https://learn.microsoft.com/en-us/azure/dns/dns-web-sites-custom-domain?tabs=azure-portal)
-
-</details>
-
----
-
-#### Troubleshoot Load Balancer Connectivity Issues
-
-**Domain:** Implement and Manage Virtual Networking
-**Skill:** Configure name resolution and load balancing
-**Task:** Troubleshoot load balancing
-
-You have deployed a web application in Microsoft Azure using a public Microsoft Load Balancer to distribute traffic across virtual machines. Users report intermittent connectivity issues.
-
-You need to troubleshoot the connectivity issues for consistent application access.
-
-Each correct answer presents part of the solution. Which two actions should you take?
-
-A. Change the load balancer's distribution mode to Source IP affinity.  
-B. Check the health probe configuration.  
-C. Check the network security group rules for the virtual machines.  
-D. Verify matching SKUs for the load balancer and public IP.  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-26-06-31-32.png' width=700>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Solution explanation:**
-
-Checking the health probe configuration is crucial because an inactive or incorrectly configured probe can lead to traffic being routed to unhealthy instances, causing connectivity issues. Verifying matching SKUs for the load balancer and public IP is also essential, as mismatched SKUs can disrupt proper operation and lead to connectivity problems. Checking the network security group rules might seem relevant but does not address the root cause of the connectivity issues. Changing the load balancer's distribution mode might seem like it could improve session persistence but does not resolve the underlying configuration problems causing the connectivity issues.
-
-<details>
-<summary>📝 More Detail</summary>
-
-Intermittent connectivity behind an Azure Load Balancer typically points to issues with how Azure determines backend health or how the load balancer is configured at the platform level, not how traffic is distributed or filtered. This is the key distinction that drives the correct answer.
-
-Changing the distribution mode to Source IP affinity only affects which backend instance a client is routed to. It is useful for maintaining session persistence in stateful applications, but it does not resolve failed or dropped connections. If a backend VM is unhealthy, enabling affinity can actually worsen the issue by consistently routing a client to the same failing instance.
-
-Checking network security group (NSG) rules is a reasonable instinct, but NSG misconfigurations generally result in consistent blocking of traffic rather than intermittent failures. NSGs are deterministic, and unless rules differ across subnets or NICs (which is not indicated here), they do not produce the kind of sporadic behavior described in the scenario.
-
-Health probe configuration is critical because Azure Load Balancer relies entirely on probes to determine which backend instances should receive traffic. If probes are misconfigured—such as using the wrong port, incorrect path, or inappropriate thresholds—healthy instances may be marked unhealthy or unhealthy instances may still receive traffic. This leads directly to intermittent connectivity as requests are routed unpredictably.
-
-Verifying that the load balancer and public IP use matching SKUs addresses a foundational platform requirement. Azure enforces compatibility between Basic and Standard SKUs, and mismatches can lead to partial or inconsistent functionality. This type of misconfiguration does not always result in a complete outage, making it a common cause of intermittent behavior.
-
-When troubleshooting these scenarios, the correct approach is to first validate how Azure determines backend health and ensure the underlying platform configuration is sound. Only after those are confirmed should traffic distribution settings or security rules be considered.
-
-</details>
-
-**References**
-
-- [Improve application scalability and resiliency by using Azure Load Balancer](https://learn.microsoft.com/training/modules/improve-app-scalability-resiliency-with-load-balancer/)
-
-</details>
-
----
-
-#### Azure DNS Alias Record Type
-
-**Domain:** Implement and Manage Virtual Networking
-**Skill:** Configure name resolution and load balancing
-**Task:** Configure Azure DNS
-
-You configure the `companycs.com` zone in Azure DNS. You have an A record set named `app` that points to an App Service that hosts a web application.
-
-You need to make this application available by using the `webapp.companycs.com` domain name. This new domain name needs to point to the public IP address of the App Service.
-
-You need to ensure that the Domain Name System (DNS) record for this new domain name is updated or deleted automatically in case the `app.companycs.com` DNS record is modified or deleted.
-
-Which type of record set should you create?
-
-A. A CNAME alias record set  
-B. A CNAME record set  
-C. An A alias record set  
-D. An A record set  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-16-05-20-31.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Explanation**
-
-You should create an address-mapping (A) alias record set. An A alias record set is a special type of record set that allows you to create an alternative name for a record set in your domain zone or for resources in your subscription. This is different from a canonical name (CNAME) record type because the alias record set will be updated or deleted in case the target resource is modified or deleted. You can only create an A alias record set that points to an A, AAAA (IPv6 address), or CNAME record types in an Azure DNS zone.
-
-You should not use a CNAME alias record set. The custom domain name for your web application is represented by an A record set. A CNAME alias record set can only point to another CNAME record set. Moreover, the value returned by a CNAME alias record set is a domain name. You are required to create a Domain Name System (DNS) record that returns an IPv4 address. This means that you need an A alias record set.
-
-You should not use an A record set. This record set type will not be automatically updated or deleted if the `app.companycs.com` record is modified or deleted.
-
-You should not use a CNAME record set. This record set type will not be automatically updated or modified if the `app.companycs.com` record is modified or deleted. You are also required to create a DNS record that returns an IPv4 address. This means that you need an A alias record set.
-
-<img src='.img/2026-03-16-05-22-14.png' width=600>
-
-**References**
-
-* [Azure DNS alias records overview](https://learn.microsoft.com/azure/dns/dns-alias)
-
-</details>
-
----
-
-#### IMDS Load Balancer Metadata Error
-
-**Domain:** Implement and Manage Virtual Networking
-**Skill:** Configure name resolution and load balancing
-**Task:** Troubleshoot load balancing
-
-Your organization is using an Azure Load Balancer service. You are the Azure administrator in your organization.
-
-You are tasked with retrieving Load Balancer information using Azure Instance Metadata Service (IMDS).
-
-You see the following error message:
-
-`Error code: 404; No load balancer metadata is found.`
-
-You need to troubleshoot this issue.
-
-Which two things can you infer from the error message? Each correct answer presents a complete solution.
-
-A. There is a rate limit.  
-B. The path is misconfigured.  
-C. The load balancer has the Basic instead of the Standard SKU.  
-D. The virtual machine is not associated with a load balancer.  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-03-04-57-09.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-The Azure Instance Metadata Service (IMDS) provides information about currently running virtual machine instances. The Instance Metadata Service is only accessible from within a running virtual machine instance on a non-routable IP address.
-
-You can use the SKU, storage, network configurations, and upcoming maintenance events-related information effectively for managing and configuring the virtual machines. In this scenario, since the retrieved data from IMDS displays the No load balancer metadata is found error message, this could be owing to either of the following two reasons:
-
-1. The virtual machine is not associated with a load balancer.
-
-2. The load balancer has the Basic instead of Standard SKU.
-
-The error code does not indicate a misconfiguration of the path. In such a case, you would see Error 404, but with a different error message displayed:
-
-404; API is not found: Path = "<UrlPath>", Method = "<Method>".
-
-The error code does not indicate a rate limit. In this case, you would see Error 429 displayed with the "Too many requests" message.
-
-<img src='.img/2026-03-03-05-00-22.png' width=600>
-
-<img src='.img/2026-03-03-05-03-19.png' width=600>
-
-> Basic Load Balancer SKU was retired in 2025.
-
-References
-
-- [Instance Metadata Service](https://learn.microsoft.com/en-us/azure/virtual-machines/instance-metadata-service?tabs=windows)
-- [Load Balancer SKUs](https://learn.microsoft.com/en-us/azure/load-balancer/skus)
 
 </details>
 
@@ -8019,9 +7971,119 @@ The key takeaway for exams:
 
 ---
 
+#### Azure DNS Alias Record Type
+
+**Domain:** Implement and Manage Virtual Networking
+**Skill:** Configure name resolution and load balancing
+**Task:** Configure Azure DNS
+
+You configure the `companycs.com` zone in Azure DNS. You have an A record set named `app` that points to an App Service that hosts a web application.
+
+You need to make this application available by using the `webapp.companycs.com` domain name. This new domain name needs to point to the public IP address of the App Service.
+
+You need to ensure that the Domain Name System (DNS) record for this new domain name is updated or deleted automatically in case the `app.companycs.com` DNS record is modified or deleted.
+
+Which type of record set should you create?
+
+A. A CNAME alias record set  
+B. A CNAME record set  
+C. An A alias record set  
+D. An A record set  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-16-05-20-31.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Explanation**
+
+You should create an address-mapping (A) alias record set. An A alias record set is a special type of record set that allows you to create an alternative name for a record set in your domain zone or for resources in your subscription. This is different from a canonical name (CNAME) record type because the alias record set will be updated or deleted in case the target resource is modified or deleted. You can only create an A alias record set that points to an A, AAAA (IPv6 address), or CNAME record types in an Azure DNS zone.
+
+You should not use a CNAME alias record set. The custom domain name for your web application is represented by an A record set. A CNAME alias record set can only point to another CNAME record set. Moreover, the value returned by a CNAME alias record set is a domain name. You are required to create a Domain Name System (DNS) record that returns an IPv4 address. This means that you need an A alias record set.
+
+You should not use an A record set. This record set type will not be automatically updated or deleted if the `app.companycs.com` record is modified or deleted.
+
+You should not use a CNAME record set. This record set type will not be automatically updated or modified if the `app.companycs.com` record is modified or deleted. You are also required to create a DNS record that returns an IPv4 address. This means that you need an A alias record set.
+
+<img src='.img/2026-03-16-05-22-14.png' width=600>
+
+**References**
+
+* [Azure DNS alias records overview](https://learn.microsoft.com/azure/dns/dns-alias)
+
+</details>
+
+---
+
 ## Monitor and Maintain Azure Resources
 
 ### Monitor resources in Azure
+
+#### Storage Insights Overview
+
+**Domain:** Monitor and Maintain Azure Resources
+**Skill:** Monitor resources in Azure
+**Task:** Configure and interpret monitoring of virtual machines, storage accounts, and networks by using Azure Monitor Insights
+
+You are an Azure administrator at a retail organization. Your organization uses 4,500 Azure storage accounts across two Azure subscriptions.
+
+You have been tasked with performing an audit by implementing the following:
+
+1. Identification of storage accounts with no use.  
+2. Enabling of viewing interactive storage metrics for 4,500 Azure storage accounts across both Azure subscriptions.  
+3. Customized dashboard coloring for availability.
+
+You have decided to use the Storage Insights view in Azure Monitor.
+
+You need to implement the solution.
+
+For each of the following statements, select Yes if the statement is true. Otherwise, select No.
+
+| STATEMENT | YES | NO |
+|-----------|-----|----|
+| You can sort your storage accounts in ascending order by using the Transactions column to identify storage accounts with no use. | ☐ | ☐ |
+| The Overview workbook for selected subscriptions will exhibit up to 500 storage accounts. | ☐ | ☐ |
+| You can apply customized coloring in the Availability threshold section. | ☐ | ☐ |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-04-04-42-35.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+Storage Insights is a dashboard on top of Azure Storage metrics and logs. You can use Storage Insights to examine the transaction volume and used capacity of all your accounts.
+
+You can sort your storage accounts in ascending order by using the Transactions column in the Storage Insights view in Azure Monitor to identify storage accounts with no use.
+
+The Overview workbook for selected subscriptions will not exhibit up to 500 storage accounts. In the Overview workbook, which displays data for a selected subscription, the table displays interactive storage metrics and service availability state. The data is displayed for up to five storage accounts grouped together. If you select all or multiple storage accounts in the scope selector, up to 200 storage accounts will be returned. In this scenario, since you have 4,500 Azure storage accounts across two Azure subscriptions, if you select both Azure subscriptions, only 200 accounts would be displayed at a maximum.
+
+You can apply customized coloring in the Availability threshold section.
+
+<img src='.img/2026-03-04-04-53-05.png' width=600>
+
+<img src='.img/2026-03-04-05-01-25.png' width=600>
+
+<img src='.img/2026-03-04-05-01-35.png' width=600>
+
+<img src='.img/2026-03-04-05-09-02.png' width=800>
+
+References
+
+- [Blob Storage Monitoring Scenarios](https://learn.microsoft.com/en-us/azure/storage/blobs/blob-storage-monitoring-scenarios)
+- [Storage Insights Overview](https://learn.microsoft.com/en-us/azure/storage/common/storage-insights-overview?toc=%2Fazure%2Fazure-monitor%2Ftoc.json)
+
+</details>
+
+---
 
 #### Configure Azure Monitor Alert Notification Rate Limits
 
@@ -8186,54 +8248,6 @@ References
 </details>
 
 ▶ Related Lab: [lab-capture-sftp-packets](../hands-on-labs/monitoring/lab-capture-sftp-packets/README.md)
-
----
-
-#### Configure Azure Monitor Alert for Database CPU Usage
-
-**Domain:** Monitor and Maintain Azure Resources
-**Skill:** Monitor resources in Azure
-**Task:** Set up alert rules, action groups, and alert processing rules in Azure Monitor
-
-Your company has a line-of-business (LOB) application that uses Azure SQL Database for storing transactional information. Your company also has System Center Service Manager deployed.
-
-You need to configure an alert when the database reaches 70% of central processing unit (CPU) usage. When this alert rises, you need to notify several users by email and by SMS. You also need to automatically create a ticket in the IT service management (ITSM) system. Your solution should require minimum administrative effort.
-
-Which two actions should you perform? Each correct answer presents part of the solution.
-
-A. Configure System Center Service Manager with Azure Automation.  
-B. Configure one action group with two actions: one for email and SMS notification and one for IT service management (ITSM) ticket creation.  
-C. Configure an IT Service Management Connector (ITSMC).  
-D. Configure two action groups: one for email and SMS notification and one for IT service management (ITSM) ticket creation.  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-01-30-05-26-15.png' width=700>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**The correct answers are B and C.**
-
-**Why B is correct:**
-Azure Monitor action groups are designed to consolidate multiple notification and automation actions into a single reusable unit. One action group can contain email, SMS, voice, webhook, Logic App, Automation Runbook, and ITSM actions together. This design allows you to configure all required notifications and ticket creation in a single action group, which minimizes administrative overhead and is the recommended approach.
-
-**Why C is correct:**
-ITSM ticket creation in Azure Monitor requires an IT Service Management Connector (ITSMC) to bridge Azure Monitor alerts with system-center or third-party ITSM systems. Without the ITSMC, Azure Monitor cannot create incidents or tickets in Service Manager, regardless of how the action group is configured.
-
-**Why A is incorrect:**
-While Azure Automation can integrate with Azure Monitor, it is not a requirement for basic ITSM alerting. The ITSMC provides direct integration without needing custom automation runbooks.
-
-**Why D is incorrect:**
-Creating separate action groups for different notification types adds unnecessary complexity and administrative effort. Azure Monitor is designed to support multiple actions within a single action group, making D an inefficient solution.
-
-**Key takeaway:**
-For Azure Monitor alerts requiring multiple notification methods and ITSM integration, use a **single action group with multiple actions** and configure an **ITSM Connector** for Service Manager integration. This minimizes administrative overhead and follows Azure best practices.
-
-</details>
 
 ---
 
@@ -8501,62 +8515,49 @@ Premium storage accounts and storage account v1 are **not supported**, regardles
 
 ---
 
-#### Storage Insights Overview
+#### Configure Azure Monitor Alert for Database CPU Usage
 
 **Domain:** Monitor and Maintain Azure Resources
 **Skill:** Monitor resources in Azure
-**Task:** Configure and interpret monitoring of virtual machines, storage accounts, and networks by using Azure Monitor Insights
+**Task:** Set up alert rules, action groups, and alert processing rules in Azure Monitor
 
-You are an Azure administrator at a retail organization. Your organization uses 4,500 Azure storage accounts across two Azure subscriptions.
+Your company has a line-of-business (LOB) application that uses Azure SQL Database for storing transactional information. Your company also has System Center Service Manager deployed.
 
-You have been tasked with performing an audit by implementing the following:
+You need to configure an alert when the database reaches 70% of central processing unit (CPU) usage. When this alert rises, you need to notify several users by email and by SMS. You also need to automatically create a ticket in the IT service management (ITSM) system. Your solution should require minimum administrative effort.
 
-1. Identification of storage accounts with no use.  
-2. Enabling of viewing interactive storage metrics for 4,500 Azure storage accounts across both Azure subscriptions.  
-3. Customized dashboard coloring for availability.
+Which two actions should you perform? Each correct answer presents part of the solution.
 
-You have decided to use the Storage Insights view in Azure Monitor.
-
-You need to implement the solution.
-
-For each of the following statements, select Yes if the statement is true. Otherwise, select No.
-
-| STATEMENT | YES | NO |
-|-----------|-----|----|
-| You can sort your storage accounts in ascending order by using the Transactions column to identify storage accounts with no use. | ☐ | ☐ |
-| The Overview workbook for selected subscriptions will exhibit up to 500 storage accounts. | ☐ | ☐ |
-| You can apply customized coloring in the Availability threshold section. | ☐ | ☐ |
+A. Configure System Center Service Manager with Azure Automation.  
+B. Configure one action group with two actions: one for email and SMS notification and one for IT service management (ITSM) ticket creation.  
+C. Configure an IT Service Management Connector (ITSMC).  
+D. Configure two action groups: one for email and SMS notification and one for IT service management (ITSM) ticket creation.  
 
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-03-04-04-42-35.png' width=600>
+<img src='.img/2026-01-30-05-26-15.png' width=700>
 
 </details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
 
-Storage Insights is a dashboard on top of Azure Storage metrics and logs. You can use Storage Insights to examine the transaction volume and used capacity of all your accounts.
+**The correct answers are B and C.**
 
-You can sort your storage accounts in ascending order by using the Transactions column in the Storage Insights view in Azure Monitor to identify storage accounts with no use.
+**Why B is correct:**
+Azure Monitor action groups are designed to consolidate multiple notification and automation actions into a single reusable unit. One action group can contain email, SMS, voice, webhook, Logic App, Automation Runbook, and ITSM actions together. This design allows you to configure all required notifications and ticket creation in a single action group, which minimizes administrative overhead and is the recommended approach.
 
-The Overview workbook for selected subscriptions will not exhibit up to 500 storage accounts. In the Overview workbook, which displays data for a selected subscription, the table displays interactive storage metrics and service availability state. The data is displayed for up to five storage accounts grouped together. If you select all or multiple storage accounts in the scope selector, up to 200 storage accounts will be returned. In this scenario, since you have 4,500 Azure storage accounts across two Azure subscriptions, if you select both Azure subscriptions, only 200 accounts would be displayed at a maximum.
+**Why C is correct:**
+ITSM ticket creation in Azure Monitor requires an IT Service Management Connector (ITSMC) to bridge Azure Monitor alerts with system-center or third-party ITSM systems. Without the ITSMC, Azure Monitor cannot create incidents or tickets in Service Manager, regardless of how the action group is configured.
 
-You can apply customized coloring in the Availability threshold section.
+**Why A is incorrect:**
+While Azure Automation can integrate with Azure Monitor, it is not a requirement for basic ITSM alerting. The ITSMC provides direct integration without needing custom automation runbooks.
 
-<img src='.img/2026-03-04-04-53-05.png' width=600>
+**Why D is incorrect:**
+Creating separate action groups for different notification types adds unnecessary complexity and administrative effort. Azure Monitor is designed to support multiple actions within a single action group, making D an inefficient solution.
 
-<img src='.img/2026-03-04-05-01-25.png' width=600>
-
-<img src='.img/2026-03-04-05-01-35.png' width=600>
-
-<img src='.img/2026-03-04-05-09-02.png' width=800>
-
-References
-
-- [Blob Storage Monitoring Scenarios](https://learn.microsoft.com/en-us/azure/storage/blobs/blob-storage-monitoring-scenarios)
-- [Storage Insights Overview](https://learn.microsoft.com/en-us/azure/storage/common/storage-insights-overview?toc=%2Fazure%2Fazure-monitor%2Ftoc.json)
+**Key takeaway:**
+For Azure Monitor alerts requiring multiple notification methods and ITSM integration, use a **single action group with multiple actions** and configure an **ITSM Connector** for Service Manager integration. This minimizes administrative overhead and follows Azure best practices.
 
 </details>
 
@@ -8613,104 +8614,318 @@ You should not use the Test-Connection PowerShell command. Although this will te
 
 ---
 
-#### Pinning query results to a dashboard
+#### Configure App Service diagnostic logging
 
 **Domain:** Monitor and Maintain Azure Resources
 **Skill:** Monitor resources in Azure
-**Task:** Query and analyze logs in Azure Monitor
+**Task:** Configure log settings in Azure Monitor
 
-Your company has an Azure subscription. You create an Azure Log Analytics workspace (Azure Monitor log) and collect data from various data sources. You run an Azure Monitor log query. You want to display the tabular data as a chart pinned to a shared dashboard.
+You have an Azure subscription that contains an Azure App Service web app named `App1`.
 
-You create an Application Insights Overview dashboard.
+You have the following diagnostic logging configurations:
 
-You need to identify restrictions when pinning a result chart to a dashboard.
+- Application Logging (FileSystem): Error
+- Application Logging (Blob): Information
+- Detailed Error Message: Warning
+- Web Server Logging: Verbose
 
-For each of the following statements, select Yes if the statement is true. Otherwise, select No.
+You need to configure diagnostic logging to store all warnings or higher.
 
-| STATEMENT | YES | NO |
-|-----------|-----|-----|
-| Data displayed in the chart is limited to no more than 30 days. | ☐ | ☐ |
-| Data displayed in the chart is limited to up to four columns and the top seven rows. | ☐ | ☐ |
-| Chart types are limited to line and stacked column only. | ☐ | ☐ |
+Which types of diagnostic logging and severity should you enable?
+
+A. Application Logging (Blob)  
+B. Application Logging (FileSystem)  
+C. Detailed Error Message  
+D. Verbose  
+
+| Severity | |
+|---|---|
+| Warning | selected |
 
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-03-14-04-53-31.png' width=600>
+<img src='.img/2026-03-26-18-55-32.png' width=700>
 
 </details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
 
-Unless the `render` operator is specified in your query, data from an Azure Monitor log is returned as a table. You have the option of formatting the data as a chart with multiple chart formats supported including line, column, stacked column, and pie.
+**Solution:** You must enable the `Application Logging (Blob)` diagnostic target and set the severity level to `Warning` so that warning, error, and critical log messages are stored. Blob storage retains logs longer than the FileSystem option and is suitable for retention beyond a week.
 
-When the result is pinned to a dashboard, the result is limited to no more than 30 days.
+This question requires you to make two separate decisions: where the logs are stored and what severity level is captured.
 
-Data displayed in the chart is not limited to up to four columns and the top seven rows. This limit applies to tabular data pinned to a dashboard.
+The requirement to “store all warnings or higher” means the severity must be set to Warning, which includes warning, error, and critical events. However, selecting the correct severity alone is not sufficient. You must also choose a logging type that supports reliable retention.
 
-Chart types are not limited to line and stacked column only. Other chart formats are also supported, with the pie chart as a popular option for displaying summary data.
+Application Logging (FileSystem) is intended for short-term, live troubleshooting and stores data on the local file system of the app service instance. Because this storage is temporary and can be lost during restarts or scaling events, it does not meet the requirement to store logs in a durable way.
 
-<img src='.img/2026-03-14-04-59-56.png' width=600>
+Detailed Error Messages only capture HTTP error responses and do not function as a general logging mechanism for all warning-level events. Web Server Logging focuses on HTTP request data rather than application-level logs and does not address the requirement to capture warnings from the application itself.
 
-<img src='.img/2026-03-14-04-55-03.png' width=600>
+Application Logging (Blob) is the correct choice because it writes logs to Azure Storage, providing persistence and longer retention. When combined with a severity level of Warning, it ensures that all relevant events—warning, error, and critical—are captured and stored reliably.
+
+The key point is that the question is testing both retention and filtering. Blob storage satisfies the persistence requirement, and the Warning level satisfies the “warnings or higher” requirement.
 
 **References**
 
-* [Azure Monitor Metrics Overview](https://learn.microsoft.com/en-us/azure/azure-monitor/metrics/data-platform-metrics)
-* [Create and share dashboards that visualize data in Azure Monitor Logs](https://learn.microsoft.com/en-us/azure/azure-monitor/visualize/tutorial-logs-dashboards)
-* [Log Analytics tutorial](https://learn.microsoft.com/azure/azure-monitor/logs/log-analytics-tutorial)
-* [Log queries in Azure Monitor](https://learn.microsoft.com/azure/azure-monitor/logs/log-query-overview)
-* [Chart visualizations](https://learn.microsoft.com/azure/azure-monitor/visualize/workbooks-chart-visualizations)
-* [Application Insights Overview dashboard](https://learn.microsoft.com/azure/azure-monitor/app/overview-dashboard)
+- [Enable diagnostic logging for apps in Azure App Service](https://learn.microsoft.com/azure/app-service/troubleshoot-diagnostic-logs)
+- [Configure Azure App Service - Training](https://learn.microsoft.com/training/modules/configure-azure-app-services/)
 
 </details>
 
 ---
 
-#### Monitor Network Health with Network Watcher
+#### Inspect VM-to-VM Network Traffic
 
 **Domain:** Monitor and Maintain Azure Resources
 **Skill:** Monitor resources in Azure
 **Task:** Use Azure Network Watcher and Connection Monitor
 
-You have an Azure subscription that contains virtual machines, virtual networks, application gateways, and load balancers.
+You have an Azure subscription that contains a resource group named `RG1`. `RG1` contains two virtual machines named `VM1` and `VM2`.
 
-You need to monitor the network health of the resources.
+You need to inspect all the network traffic from `VM1` to `VM2`. The solution must use Azure Monitor metrics.
 
-Which Azure service should you use?
+Which two actions should you perform? Each correct answer presents part of the solution.
 
-A. Azure Monitor  
-B. Azure Network Watcher  
-C. Azure Resource Manager  
-D. network security groups (NSGs)  
+A. Configure a log alert.  
+B. Configure Network In and Network Out.  
+C. Install `AzureNetworkWatcherExtension`.  
+D. Use packet capture.  
 
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-03-25-19-46-34.png' width=600>
+<img src='.img/2026-03-26-05-44-40.png' width=600>
 
 </details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
 
-**Why the selected answer is correct**
+**Why the selected answer is incorrect**
 
-`Azure Network Watcher` is the service built to monitor and diagnose Azure network health for IaaS networking resources such as virtual machines, virtual networks, application gateways, and load balancers.
+`Network In` and `Network Out` are VM-level aggregate metrics. They show total ingress and egress traffic for a VM, but they don't isolate all packet-level communication specifically between `VM1` and `VM2`.
 
-**Why the other options are incorrect**
+**Why the correct answers are correct**
 
-`Azure Resource Manager` is used for Azure resource deployment and management, not network health diagnostics. `network security groups (NSGs)` are used to control traffic with security rules and do not provide network monitoring capabilities. `Azure Monitor` is a broader monitoring platform, but this scenario specifically targets network health diagnostics for Azure networking resources, which is the primary role of `Azure Network Watcher`.
+Installing `AzureNetworkWatcherExtension` on the source VM enables Network Watcher to run diagnostics that require the guest extension.
+
+Using packet capture is the feature that inspects detailed traffic to and from a VM. It captures packet data that can be filtered and analyzed to investigate the exact communication path and behavior between `VM1` and `VM2`.
+
+<img src='.img/2026-03-26-05-51-51.png' width=600>
 
 **Key takeaway**
 
-When the requirement is to monitor and diagnose the health of Azure network resources, choose `Azure Network Watcher`.
+For detailed inspection of traffic between two Azure VMs, use Network Watcher packet capture with the required `AzureNetworkWatcherExtension` rather than relying only on aggregate VM metrics.
+
+<details>
+<summary>📝 More Detail</summary>
+
+Packet capture in Azure Network Watcher requires an agent on the virtual machine to access and collect traffic data. This is provided by the AzureNetworkWatcherExtension, which integrates with the VM’s networking stack to enable packet-level inspection.
+
+When a packet capture session is initiated, Azure verifies whether the extension is installed. If it is not present, Azure will install it automatically. Once installed, the extension facilitates the capture of network packets and allows the data to be written either to local storage on the VM or to an Azure Storage account for further analysis.
+
+The extension itself does not perform any monitoring until a packet capture session is started. It simply enables the capability. The actual inspection of traffic occurs only when packet capture is actively configured and running.
+
+</details>
 
 **References**
 
-* [Azure Network Watcher | Microsoft Learn](https://learn.microsoft.com/azure/network-watcher/network-watcher-overview)
+* [Tutorial: Monitor network communication between two virtual machines using the Azure portal](https://learn.microsoft.com/azure/network-watcher/monitor-vm-communication)
+* [Packet capture overview](https://learn.microsoft.com/azure/network-watcher/packet-capture-overview)
 * [Introduction to Azure Network Watcher](https://learn.microsoft.com/training/modules/intro-to-azure-network-watcher/)
+
+</details>
+
+---
+
+#### Configure Azure Monitor Alert Notification Rate Limits
+
+**Domain:** Monitor and Maintain Azure Resources
+**Skill:** Monitor resources in Azure
+**Task:** Set up alert rules, action groups, and alert processing rules in Azure Monitor
+
+Your company has an Azure Subscription and an Azure SQL Database. You configure an Azure Monitor alert rule named Alert1 that is triggered when the database CPU usage exceeds 70%. Alert1 fires approximately every minute.
+
+You configure an action group with the following notification methods:
+
+* Email alerts  
+* Voice alerts  
+* SMS alerts  
+
+For each of the following statements, select Yes if the statement is true. Otherwise, select No.
+
+| STATEMENT | YES | NO |
+|-----------|-----|-----|
+| How many alert notifications will be generated for each type of alert per hour? | Email: 60, Voice: 4, SMS: 60 | |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-01-30-06-20-01.png' width=700>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Why the selected answer is wrong**
+
+The dropdown values shown (Email 60, Voice 4, SMS 60 per hour) don't match Azure Monitor's service-level notification rate limits for action groups. Even if an alert fires every minute, Azure Monitor will throttle notifications per recipient based on those limits—not based on the alert frequency.
+
+**Why the correct answer is right**
+
+Azure Monitor action group notification limits (production) are:
+
+* **Email:** No more than 100 emails per hour per email address (per region)
+* **SMS:** No more than 1 SMS every 5 minutes per phone number ⇒ 12 per hour
+* **Voice:** No more than 1 voice call every 5 minutes per phone number ⇒ 12 per hour
+
+So, with Alert1 firing every minute (60 times/hour), the maximum notifications actually sent per hour are:
+
+* **Email:** 60 (because the alert only fires 60 times/hour, which is under the 100/hour cap)
+* **SMS:** 12 (throttled by 1 per 5 minutes)
+* **Voice:** 12 (throttled by 1 per 5 minutes)
+
+**Key takeaway**
+
+Action group notification "rate limiting" is per recipient, and for SMS/voice it effectively translates to 12/hour (1 per 5 minutes). Email has a higher cap (100/hour), so the alert's firing rate (60/hour) becomes the limiting factor.
+
+Related resources:
+
+* [Azure Monitor service limits](https://learn.microsoft.com/en-us/azure/azure-monitor/fundamentals/service-limits#action-groups)
+* [Create and manage action groups in Azure Monitor](https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/action-groups)
+
+</details>
+
+---
+
+#### Diagnose Network Watcher Tool for Web Server Packet Flow
+
+**Domain:** Monitor and Maintain Azure Resources
+**Skill:** Monitor resources in Azure
+**Task:** Use Azure Network Watcher and Connection Monitor
+
+Your company hosts its infrastructure in Azure. The infrastructure consists of virtual machines (VMs), storage (managed disks and Azure file shares) and multiple networks (VNets and subnets). The service desk is seeing an influx of support tickets that have been logged in the last 24 hours regarding intermittent connectivity issues to a web server. After some initial investigation, the support ticket has been escalated to you.
+
+You need to use the relevant Network Watcher diagnostic tool to check if packets are being allowed or denied to the web server.
+
+Which Network Watcher diagnostic tool should you use?
+
+A. IP flow verify  
+B. Next hop  
+C. Effective security rules  
+D. Connection troubleshoot  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-01-30-05-24-16.png' width=700>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Why the selected answer is correct (IP flow verify)**
+IP flow verify is the Network Watcher tool specifically designed to determine whether traffic is **allowed or denied** to or from a VM. You define the 5-tuple (source IP, destination IP, source port, destination port, protocol), and Azure evaluates the effective NSG rules applied to the NIC and subnet to return an **Allow** or **Deny** decision. This directly answers the requirement to check whether packets are being allowed or denied to the web server.
+
+**Why the other options are incorrect**
+
+* **Next hop**: Shows where traffic is routed (e.g., Internet, virtual appliance, VNet peering). It does not evaluate security rules or allow/deny decisions.
+* **Effective security rules**: Lists the merged NSG rules applied to a NIC or subnet, but does not simulate a specific packet flow or return an explicit allow/deny result for given traffic.
+* **Connection troubleshoot**: Tests end-to-end connectivity between a source and destination and identifies potential failures, but it is broader than required and not focused on evaluating packet allow/deny decisions at the NSG level.
+
+**Key takeaway**
+When the question asks whether packets are **allowed or denied**, the correct Network Watcher tool is **IP flow verify**.
+
+**References**
+
+* [https://learn.microsoft.com/azure/network-watcher/network-watcher-ip-flow-verify-overview](https://learn.microsoft.com/azure/network-watcher/network-watcher-ip-flow-verify-overview)
+* [https://learn.microsoft.com/azure/network-watcher/network-watcher-monitoring-overview](https://learn.microsoft.com/azure/network-watcher/network-watcher-monitoring-overview)
+* [https://learn.microsoft.com/azure/virtual-network/security-overview](https://learn.microsoft.com/azure/virtual-network/security-overview)
+
+No. **Windows Firewall rules do not impact IP flow verify results.**
+
+**Why**
+IP flow verify evaluates traffic **only at the Azure networking layer**, specifically:
+
+* Network Security Groups (NSGs) applied to the **subnet** and **NIC**
+* Azure’s effective security rule evaluation (priority-based NSG processing)
+
+It does **not** inspect or consider:
+
+* Guest OS firewalls (Windows Firewall, iptables, etc.)
+* Application-level listeners or services
+* VM-level routing inside the OS
+
+**Common exam trap**
+It is easy to assume that “packet allowed or denied” includes the OS firewall. On Azure exams, **IP flow verify = NSG evaluation only**. If IP flow verify returns **Allow** but connectivity still fails, the next suspects are:
+
+* Windows Firewall rules
+* Application not listening on the port
+* Local OS routing or security software
+
+**Key takeaway**
+IP flow verify answers: *“Would Azure networking allow this packet?”*
+It does **not** answer: *“Can the VM actually accept this connection?”*
+
+**References**
+
+* [https://learn.microsoft.com/azure/network-watcher/network-watcher-ip-flow-verify-overview](https://learn.microsoft.com/azure/network-watcher/network-watcher-ip-flow-verify-overview)
+* [https://learn.microsoft.com/azure/virtual-network/network-security-groups-overview](https://learn.microsoft.com/azure/virtual-network/network-security-groups-overview)
+
+</details>
+
+---
+
+#### App Service Automatic Scaling Requirement
+
+**Domain:** Monitor and Maintain Azure Resources
+**Skill:** Monitor resources in Azure
+**Task:** Set up alert rules, action groups, and alert processing rules in Azure Monitor
+
+You have a Basic Azure App Service plan that contains a web app.
+
+You need to ensure that the web app can scale automatically when the CPU usage is over 80% for a duration of 15 minutes.
+
+Which two actions should you perform? Each correct answer presents part of the solution.
+
+A. Configure a deployment slot.  
+B. Configure a scaling condition to scale based on a metric, and then add the rules.  
+C. Configure a scaling condition to scale based on an instance count, and then set the instance count.  
+D. Scale out the App Service plan.  
+E. Scale up the App Service plan.  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-26-19-03-13.png' width=700>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Solution Explanation:**
+
+**Why the selected answers are correct:**
+
+* **Scale up the App Service plan:** The Basic App Service plan does not support automatic autoscale. You must scale the App Service plan to a tier that supports autoscale (for example, `Premium` or higher) before you can enable automatic scale based on metrics.
+* **Configure a scaling condition to scale based on a metric, and then add the rules:** After you use a supported App Service plan tier, configure an autoscale condition based on the `CPU` metric (for example, > 80% for 15 minutes) and add scale-out/scale-in rules to automatically adjust instance counts.
+
+<img src='.img/2026-03-26-19-08-24.png' width=600>
+
+**Why the other options are incorrect:**
+
+* **Configure a deployment slot:** Deployment slots are used for staging and swap scenarios, not for enabling automatic scaling.
+* **Configure a scaling condition to scale based on an instance count, and then set the instance count:** Scaling conditions based on instance count are manual adjustments; autoscale requires metric-based rules to trigger automatic scaling.
+* **Scale out the App Service plan:** You cannot enable automatic scaling on the Basic tier; while scaling out increases instances, automatic metric-triggered scaling requires a supported plan tier and autoscale rules.
+
+**References**
+
+* [Scale up features and capacities - Azure App Service](https://learn.microsoft.com/azure/app-service/app-service-plan-manage#scale-up)
+* [Configure Azure App Service - Training | Microsoft Learn](https://learn.microsoft.com/training/modules/configure-azure-app-service)
 
 </details>
 
@@ -8803,62 +9018,104 @@ DefaultRule_AllowVnetOutbound  65000  Allow  Outbound  *
 
 ---
 
-#### Configure App Service diagnostic logging
+#### Monitor Network Health with Network Watcher
 
 **Domain:** Monitor and Maintain Azure Resources
 **Skill:** Monitor resources in Azure
-**Task:** Configure log settings in Azure Monitor
+**Task:** Use Azure Network Watcher and Connection Monitor
 
-You have an Azure subscription that contains an Azure App Service web app named `App1`.
+You have an Azure subscription that contains virtual machines, virtual networks, application gateways, and load balancers.
 
-You have the following diagnostic logging configurations:
+You need to monitor the network health of the resources.
 
-- Application Logging (FileSystem): Error
-- Application Logging (Blob): Information
-- Detailed Error Message: Warning
-- Web Server Logging: Verbose
+Which Azure service should you use?
 
-You need to configure diagnostic logging to store all warnings or higher.
-
-Which types of diagnostic logging and severity should you enable?
-
-A. Application Logging (Blob)  
-B. Application Logging (FileSystem)  
-C. Detailed Error Message  
-D. Verbose  
-
-| Severity | |
-|---|---|
-| Warning | selected |
+A. Azure Monitor  
+B. Azure Network Watcher  
+C. Azure Resource Manager  
+D. network security groups (NSGs)  
 
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-03-26-18-55-32.png' width=700>
+<img src='.img/2026-03-25-19-46-34.png' width=600>
 
 </details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
 
-**Solution:** You must enable the `Application Logging (Blob)` diagnostic target and set the severity level to `Warning` so that warning, error, and critical log messages are stored. Blob storage retains logs longer than the FileSystem option and is suitable for retention beyond a week.
+**Why the selected answer is correct**
 
-This question requires you to make two separate decisions: where the logs are stored and what severity level is captured.
+`Azure Network Watcher` is the service built to monitor and diagnose Azure network health for IaaS networking resources such as virtual machines, virtual networks, application gateways, and load balancers.
 
-The requirement to “store all warnings or higher” means the severity must be set to Warning, which includes warning, error, and critical events. However, selecting the correct severity alone is not sufficient. You must also choose a logging type that supports reliable retention.
+**Why the other options are incorrect**
 
-Application Logging (FileSystem) is intended for short-term, live troubleshooting and stores data on the local file system of the app service instance. Because this storage is temporary and can be lost during restarts or scaling events, it does not meet the requirement to store logs in a durable way.
+`Azure Resource Manager` is used for Azure resource deployment and management, not network health diagnostics. `network security groups (NSGs)` are used to control traffic with security rules and do not provide network monitoring capabilities. `Azure Monitor` is a broader monitoring platform, but this scenario specifically targets network health diagnostics for Azure networking resources, which is the primary role of `Azure Network Watcher`.
 
-Detailed Error Messages only capture HTTP error responses and do not function as a general logging mechanism for all warning-level events. Web Server Logging focuses on HTTP request data rather than application-level logs and does not address the requirement to capture warnings from the application itself.
+**Key takeaway**
 
-Application Logging (Blob) is the correct choice because it writes logs to Azure Storage, providing persistence and longer retention. When combined with a severity level of Warning, it ensures that all relevant events—warning, error, and critical—are captured and stored reliably.
-
-The key point is that the question is testing both retention and filtering. Blob storage satisfies the persistence requirement, and the Warning level satisfies the “warnings or higher” requirement.
+When the requirement is to monitor and diagnose the health of Azure network resources, choose `Azure Network Watcher`.
 
 **References**
 
-- [Enable diagnostic logging for apps in Azure App Service](https://learn.microsoft.com/azure/app-service/troubleshoot-diagnostic-logs)
-- [Configure Azure App Service - Training](https://learn.microsoft.com/training/modules/configure-azure-app-services/)
+* [Azure Network Watcher | Microsoft Learn](https://learn.microsoft.com/azure/network-watcher/network-watcher-overview)
+* [Introduction to Azure Network Watcher](https://learn.microsoft.com/training/modules/intro-to-azure-network-watcher/)
+
+</details>
+
+---
+
+#### Pinning query results to a dashboard
+
+**Domain:** Monitor and Maintain Azure Resources
+**Skill:** Monitor resources in Azure
+**Task:** Query and analyze logs in Azure Monitor
+
+Your company has an Azure subscription. You create an Azure Log Analytics workspace (Azure Monitor log) and collect data from various data sources. You run an Azure Monitor log query. You want to display the tabular data as a chart pinned to a shared dashboard.
+
+You create an Application Insights Overview dashboard.
+
+You need to identify restrictions when pinning a result chart to a dashboard.
+
+For each of the following statements, select Yes if the statement is true. Otherwise, select No.
+
+| STATEMENT | YES | NO |
+|-----------|-----|-----|
+| Data displayed in the chart is limited to no more than 30 days. | ☐ | ☐ |
+| Data displayed in the chart is limited to up to four columns and the top seven rows. | ☐ | ☐ |
+| Chart types are limited to line and stacked column only. | ☐ | ☐ |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-14-04-53-31.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+Unless the `render` operator is specified in your query, data from an Azure Monitor log is returned as a table. You have the option of formatting the data as a chart with multiple chart formats supported including line, column, stacked column, and pie.
+
+When the result is pinned to a dashboard, the result is limited to no more than 30 days.
+
+Data displayed in the chart is not limited to up to four columns and the top seven rows. This limit applies to tabular data pinned to a dashboard.
+
+Chart types are not limited to line and stacked column only. Other chart formats are also supported, with the pie chart as a popular option for displaying summary data.
+
+<img src='.img/2026-03-14-04-59-56.png' width=600>
+
+<img src='.img/2026-03-14-04-55-03.png' width=600>
+
+**References**
+
+* [Azure Monitor Metrics Overview](https://learn.microsoft.com/en-us/azure/azure-monitor/metrics/data-platform-metrics)
+* [Create and share dashboards that visualize data in Azure Monitor Logs](https://learn.microsoft.com/en-us/azure/azure-monitor/visualize/tutorial-logs-dashboards)
+* [Log Analytics tutorial](https://learn.microsoft.com/azure/azure-monitor/logs/log-analytics-tutorial)
+* [Log queries in Azure Monitor](https://learn.microsoft.com/azure/azure-monitor/logs/log-query-overview)
+* [Chart visualizations](https://learn.microsoft.com/azure/azure-monitor/visualize/workbooks-chart-visualizations)
+* [Application Insights Overview dashboard](https://learn.microsoft.com/azure/azure-monitor/app/overview-dashboard)
 
 </details>
 
@@ -8925,488 +9182,7 @@ Do not use `Set-AzDiagnosticSetting` for this task because that cmdlet configure
 
 ---
 
-#### Diagnose Network Watcher Tool for Web Server Packet Flow
-
-**Domain:** Monitor and Maintain Azure Resources
-**Skill:** Monitor resources in Azure
-**Task:** Use Azure Network Watcher and Connection Monitor
-
-Your company hosts its infrastructure in Azure. The infrastructure consists of virtual machines (VMs), storage (managed disks and Azure file shares) and multiple networks (VNets and subnets). The service desk is seeing an influx of support tickets that have been logged in the last 24 hours regarding intermittent connectivity issues to a web server. After some initial investigation, the support ticket has been escalated to you.
-
-You need to use the relevant Network Watcher diagnostic tool to check if packets are being allowed or denied to the web server.
-
-Which Network Watcher diagnostic tool should you use?
-
-A. IP flow verify  
-B. Next hop  
-C. Effective security rules  
-D. Connection troubleshoot  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-01-30-05-24-16.png' width=700>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Why the selected answer is correct (IP flow verify)**
-IP flow verify is the Network Watcher tool specifically designed to determine whether traffic is **allowed or denied** to or from a VM. You define the 5-tuple (source IP, destination IP, source port, destination port, protocol), and Azure evaluates the effective NSG rules applied to the NIC and subnet to return an **Allow** or **Deny** decision. This directly answers the requirement to check whether packets are being allowed or denied to the web server.
-
-**Why the other options are incorrect**
-
-* **Next hop**: Shows where traffic is routed (e.g., Internet, virtual appliance, VNet peering). It does not evaluate security rules or allow/deny decisions.
-* **Effective security rules**: Lists the merged NSG rules applied to a NIC or subnet, but does not simulate a specific packet flow or return an explicit allow/deny result for given traffic.
-* **Connection troubleshoot**: Tests end-to-end connectivity between a source and destination and identifies potential failures, but it is broader than required and not focused on evaluating packet allow/deny decisions at the NSG level.
-
-**Key takeaway**
-When the question asks whether packets are **allowed or denied**, the correct Network Watcher tool is **IP flow verify**.
-
-**References**
-
-* [https://learn.microsoft.com/azure/network-watcher/network-watcher-ip-flow-verify-overview](https://learn.microsoft.com/azure/network-watcher/network-watcher-ip-flow-verify-overview)
-* [https://learn.microsoft.com/azure/network-watcher/network-watcher-monitoring-overview](https://learn.microsoft.com/azure/network-watcher/network-watcher-monitoring-overview)
-* [https://learn.microsoft.com/azure/virtual-network/security-overview](https://learn.microsoft.com/azure/virtual-network/security-overview)
-
-No. **Windows Firewall rules do not impact IP flow verify results.**
-
-**Why**
-IP flow verify evaluates traffic **only at the Azure networking layer**, specifically:
-
-* Network Security Groups (NSGs) applied to the **subnet** and **NIC**
-* Azure’s effective security rule evaluation (priority-based NSG processing)
-
-It does **not** inspect or consider:
-
-* Guest OS firewalls (Windows Firewall, iptables, etc.)
-* Application-level listeners or services
-* VM-level routing inside the OS
-
-**Common exam trap**
-It is easy to assume that “packet allowed or denied” includes the OS firewall. On Azure exams, **IP flow verify = NSG evaluation only**. If IP flow verify returns **Allow** but connectivity still fails, the next suspects are:
-
-* Windows Firewall rules
-* Application not listening on the port
-* Local OS routing or security software
-
-**Key takeaway**
-IP flow verify answers: *“Would Azure networking allow this packet?”*
-It does **not** answer: *“Can the VM actually accept this connection?”*
-
-**References**
-
-* [https://learn.microsoft.com/azure/network-watcher/network-watcher-ip-flow-verify-overview](https://learn.microsoft.com/azure/network-watcher/network-watcher-ip-flow-verify-overview)
-* [https://learn.microsoft.com/azure/virtual-network/network-security-groups-overview](https://learn.microsoft.com/azure/virtual-network/network-security-groups-overview)
-
-</details>
-
----
-
-#### Configure Azure Monitor Alert Notification Rate Limits
-
-**Domain:** Monitor and Maintain Azure Resources
-**Skill:** Monitor resources in Azure
-**Task:** Set up alert rules, action groups, and alert processing rules in Azure Monitor
-
-Your company has an Azure Subscription and an Azure SQL Database. You configure an Azure Monitor alert rule named Alert1 that is triggered when the database CPU usage exceeds 70%. Alert1 fires approximately every minute.
-
-You configure an action group with the following notification methods:
-
-* Email alerts  
-* Voice alerts  
-* SMS alerts  
-
-For each of the following statements, select Yes if the statement is true. Otherwise, select No.
-
-| STATEMENT | YES | NO |
-|-----------|-----|-----|
-| How many alert notifications will be generated for each type of alert per hour? | Email: 60, Voice: 4, SMS: 60 | |
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-01-30-06-20-01.png' width=700>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Why the selected answer is wrong**
-
-The dropdown values shown (Email 60, Voice 4, SMS 60 per hour) don't match Azure Monitor's service-level notification rate limits for action groups. Even if an alert fires every minute, Azure Monitor will throttle notifications per recipient based on those limits—not based on the alert frequency.
-
-**Why the correct answer is right**
-
-Azure Monitor action group notification limits (production) are:
-
-* **Email:** No more than 100 emails per hour per email address (per region)
-* **SMS:** No more than 1 SMS every 5 minutes per phone number ⇒ 12 per hour
-* **Voice:** No more than 1 voice call every 5 minutes per phone number ⇒ 12 per hour
-
-So, with Alert1 firing every minute (60 times/hour), the maximum notifications actually sent per hour are:
-
-* **Email:** 60 (because the alert only fires 60 times/hour, which is under the 100/hour cap)
-* **SMS:** 12 (throttled by 1 per 5 minutes)
-* **Voice:** 12 (throttled by 1 per 5 minutes)
-
-**Key takeaway**
-
-Action group notification "rate limiting" is per recipient, and for SMS/voice it effectively translates to 12/hour (1 per 5 minutes). Email has a higher cap (100/hour), so the alert's firing rate (60/hour) becomes the limiting factor.
-
-Related resources:
-
-* [Azure Monitor service limits](https://learn.microsoft.com/en-us/azure/azure-monitor/fundamentals/service-limits#action-groups)
-* [Create and manage action groups in Azure Monitor](https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/action-groups)
-
-</details>
-
----
-
-#### Inspect VM-to-VM Network Traffic
-
-**Domain:** Monitor and Maintain Azure Resources
-**Skill:** Monitor resources in Azure
-**Task:** Use Azure Network Watcher and Connection Monitor
-
-You have an Azure subscription that contains a resource group named `RG1`. `RG1` contains two virtual machines named `VM1` and `VM2`.
-
-You need to inspect all the network traffic from `VM1` to `VM2`. The solution must use Azure Monitor metrics.
-
-Which two actions should you perform? Each correct answer presents part of the solution.
-
-A. Configure a log alert.  
-B. Configure Network In and Network Out.  
-C. Install `AzureNetworkWatcherExtension`.  
-D. Use packet capture.  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-26-05-44-40.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Why the selected answer is incorrect**
-
-`Network In` and `Network Out` are VM-level aggregate metrics. They show total ingress and egress traffic for a VM, but they don't isolate all packet-level communication specifically between `VM1` and `VM2`.
-
-**Why the correct answers are correct**
-
-Installing `AzureNetworkWatcherExtension` on the source VM enables Network Watcher to run diagnostics that require the guest extension.
-
-Using packet capture is the feature that inspects detailed traffic to and from a VM. It captures packet data that can be filtered and analyzed to investigate the exact communication path and behavior between `VM1` and `VM2`.
-
-<img src='.img/2026-03-26-05-51-51.png' width=600>
-
-**Key takeaway**
-
-For detailed inspection of traffic between two Azure VMs, use Network Watcher packet capture with the required `AzureNetworkWatcherExtension` rather than relying only on aggregate VM metrics.
-
-<details>
-<summary>📝 More Detail</summary>
-
-Packet capture in Azure Network Watcher requires an agent on the virtual machine to access and collect traffic data. This is provided by the AzureNetworkWatcherExtension, which integrates with the VM’s networking stack to enable packet-level inspection.
-
-When a packet capture session is initiated, Azure verifies whether the extension is installed. If it is not present, Azure will install it automatically. Once installed, the extension facilitates the capture of network packets and allows the data to be written either to local storage on the VM or to an Azure Storage account for further analysis.
-
-The extension itself does not perform any monitoring until a packet capture session is started. It simply enables the capability. The actual inspection of traffic occurs only when packet capture is actively configured and running.
-
-</details>
-
-**References**
-
-* [Tutorial: Monitor network communication between two virtual machines using the Azure portal](https://learn.microsoft.com/azure/network-watcher/monitor-vm-communication)
-* [Packet capture overview](https://learn.microsoft.com/azure/network-watcher/packet-capture-overview)
-* [Introduction to Azure Network Watcher](https://learn.microsoft.com/training/modules/intro-to-azure-network-watcher/)
-
-</details>
-
----
-
 ### Implement backup and recovery
-
-#### Configure Azure Backup with PowerShell
-
-**Domain:** Monitor and Maintain Azure Resources
-**Skill:** Implement backup and recovery
-**Task:** Perform backup and restore operations by using Azure Backup
-
-You have an Azure subscription. You are not currently using Azure Backup. You plan to back up a virtual machine (VM) named `VM1` using Azure Backup. The backup should use the default backup policy to run daily backups.
-
-You need to identify the PowerShell cmdlets required to configure recurring backups using the default backup policy.
-
-Which three PowerShell cmdlets should you run in sequence? To answer, move the appropriate cmdlets from the list of possible cmdlets to the answer area and arrange them in the correct order.
-
-Available options
-
-A. `Backup-AzRecoveryServicesBackupItem`  
-B. `Enable-AzRecoveryServicesBackupAutoProtection`  
-C. `Set-AzRecoveryServicesBackupProperty`  
-
-Select and order 3:
-
-| Step | Action |
-|------|--------|
-| 1 | `Register-AzResourceProvider` |
-| 2 | `New-AzRecoveryServicesVault` |
-| 3 | `Enable-AzRecoveryServicesBackupProtection` |
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-20-03-41-43.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Solution Steps:**
-
-You should run the following cmdlets in order:
-
-1. `Register-AzResourceProvider`
-2. `New-AzRecoveryServicesVault`
-3. `Enable-AzRecoveryServicesBackupProtection`
-
-You should first run the `Register-AzResourceProvider` cmdlet. This is required the first time you use Azure Backup. This registers the Azure Recovery Service provider in your subscription.
-
-You should then run the `New-AzRecoveryServicesVault` cmdlet to create a Recovery Services vault to store the backups.
-
-Finally, you should run the `Enable-AzRecoveryServicesBackupProtection` cmdlet to enable backups to run using the default backup policy. Once enabled, backups will run automatically.
-
-<img src='.img/2026-03-20-03-48-01.png' width=600>
-
-**Do not run:**
-
-* `Backup-AzRecoveryServicesBackupItem` — this cmdlet is used to run an on-demand backup based on your backup policy.
-* `Enable-AzRecoveryServicesBackupAutoProtection` — this cmdlet is used to let users automatically protect all unprotected and new databases.
-* `Set-AzRecoveryServicesBackupProperty` — this cmdlet sets backup storage properties for a Backup Services vault and is not required when initially setting up Azure Backup.
-
-**References**
-
-- [What is the Azure Backup service?](https://learn.microsoft.com/azure/backup/backup-overview)
-- [Back up a virtual machine in Azure with PowerShell](https://learn.microsoft.com/azure/backup/quick-backup-vm-powershell)
-- [Enable-AzRecoveryServicesBackupAutoProtection](https://learn.microsoft.com/powershell/module/az.recoveryservices/enable-azrecoveryservicesbackupautoprotection?view=azps-15.4.0)
-- [Set-AzRecoveryServicesBackupProperty](https://learn.microsoft.com/powershell/module/az.recoveryservices/set-azrecoveryservicesbackupproperty?view=azps-15.4.0)
-
-</details>
-
----
-
-#### Restore VM from backup (availability set)
-
-**Domain:** Monitor and Maintain Azure Resources
-**Skill:** Implement backup and recovery
-**Task:** Perform backup and restore operations by using Azure Backup
-
-Your company has an Azure subscription and they use Azure Backup to protect the deployed virtual machines (VMs). Your subscription includes a VM named `VMS1` that runs Windows Server 2019. `VMS1` is configured as a part of an availability set and it is backed up through machine-level backup. `VMS1` is mistakenly deleted.
-
-You need to restore `VMS1` from backup and configure `VMS1` as part of the same availability set.
-
-Which three actions should you perform in sequence? To answer, move the appropriate actions from the list of possible actions to the answer area and arrange them in the correct order.
-
-A. Select Create a virtual machine as the Restore Type and restore the data.  
-B. Select Replace existing as the Restore Type and restore the data.  
-C. Select Restore Disks as the Restore Type and restore the data.  
-D. Manually create a new VM.  
-E. Fetch and deploy the deployment template from the Azure Recovery Services vault.  
-F. Select a restore point for VMS1 in the Azure Recovery Services vault.  
-
-Select and order 3:
-
-| Step | Action |
-|------|--------|
-| 1 | |
-| 2 | |
-| 3 | |
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-16-04-41-52.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Explanation**
-
-You should perform the following actions in order:
-
-1. **Select a restore point for `VMS1` in the Azure Recovery Services vault**
-2. **Select Restore Disks as the Restore Type and restore the data.**
-3. **Fetch and deploy the deployment template from the Azure Recovery Services vault.**
-
-You should run a `Restore Disks` restoration and recreate `VMS1` from the restored disk when restoring a VM that has been configured as a part of an availability set. Begin by choosing the restore point from which you want to restore, and then select `Restore Disks` as your `Restore Type`. You can then restore the data, but you still need to recreate the VM. To do this, fetch and then deploy the deployment template from the Azure Recovery Services vault.
-
-After using the `Restore Disks` restore type, you also have the option of attaching the disk to an existing VM.
-
-There is no need to manually create a new VM. You will use the deployment template to create the VM.
-
-You should not choose `Create a virtual machine` or `Replace existing` as the Restore Type. You should use `Create a virtual machine` to create a simple VM based on a VM restore point. You should use `Replace existing` to replace the disk on an existing VM.
-
-<img src='.img/2026-03-16-04-47-59.png' width=600>
-
-**References**
-
-* [How to restore Azure VM data in Azure portal](https://learn.microsoft.com/azure/backup/backup-azure-arm-restore-vms)
-* [Availability options for Azure Virtual Machines](https://learn.microsoft.com/azure/virtual-machines/availability)
-* [Tutorial: Restore a VM with Azure CLI](https://learn.microsoft.com/azure/backup/tutorial-restore-disk)
-
-</details>
-
----
-
-#### Default Azure VM Backup Retention
-
-**Domain:** Monitor and Maintain Azure Resources
-**Skill:** Implement backup and recovery
-**Task:** Create and configure a backup policy
-
-You have multiple Azure virtual machines and an Azure recovery services vault. Virtual machines are configured with the default backup policy.
-
-What is the retention period of virtual machine backups in the default backup policy?
-
-A. 7 days  
-B. 14 days  
-C. 30 days  
-D. 90 days  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-25-19-50-31.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Why the selected answer is incorrect**
-
-The selected option `14 days` is not the default retention value for Azure VM backups configured with the default policy in a Recovery Services vault.
-
-**Why the correct answer is correct**
-
-The default Azure VM backup policy retains daily recovery points for `30 days`.
-
-**Why the other options are incorrect**
-
-`7 days` and `90 days` are not the default retention value shown for the default VM backup policy.
-
-**Key takeaway**
-
-For Azure VM backup with the default policy, backup retention is `30 days`.
-
-**References**
-
-* [Back up an Azure VM from the VM settings](https://learn.microsoft.com/azure/backup/backup-azure-vms-first-look-arm#back-up-from-azure-vm-settings)
-
-</details>
-
----
-
-#### Recover Azure VM from Deleted Backup
-
-**Domain:** Monitor and Maintain Azure Resources
-**Skill:** Implement backup and recovery
-**Task:** Perform backup and restore operations by using Azure Backup
-
-An Infrastructure-as-a-Service (IaaS) virtual machine (VM) named VM10 is backed up to an Azure Recovery Services vault. VM10 and all of its restore points are deleted by mistake.
-
-You need to recover VM10.
-
-How many days does VM10's data remain available for recovery?
-
-A. 365 days  
-B. 30 days  
-C. 14 days  
-D. 90 days  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-01-30-05-24-56.png' width=700>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Why the selected answer is right**
-Azure Backup uses **Soft Delete** for Azure IaaS VM backups. When a VM and its backup data are deleted (intentionally or accidentally), the backup data is **retained for 14 days** in a soft-deleted state. During this window, the VM’s backup data can be recovered by undeleting the backup item from the Recovery Services vault. After 14 days, the data is permanently deleted and cannot be recovered.
-
-**Key takeaway**
-For Azure IaaS VMs protected by a Recovery Services vault, **soft delete provides a fixed 14-day recovery window** after deletion—independent of the configured backup retention policy.
-
-<img src='.img/2026-02-04-03-04-12.png' width=500>
-
-**References**
-
-* [Soft delete for virtual machines](https://learn.microsoft.com/en-us/azure/backup/soft-delete-virtual-machines?utm_source=chatgpt.com&tabs=azure-portal)
-
-</details>
-
----
-
-#### Move Recovery Services vault
-
-**Domain:** Monitor and Maintain Azure Resources
-**Skill:** Implement backup and recovery
-**Task:** Perform backup and restore operations by using Azure Backup
-
-Your company has two Azure subscriptions named `Sub1` and `Sub2`. You create a Recovery Services vault in `Sub1` named `Vault1` in the Central US region.
-
-You configure `Vault1` for Azure Backup.
-
-You need to move `Vault1` to `Sub2`. You want to minimize downtime and data loss during this process.
-
-Which PowerShell cmdlet should you run first?
-
-A. `Set-AzResource`  
-B. `Export-AzResourceGroup`  
-C. `Move-AzResource`  
-D. `New-AzResource`  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-16-04-15-50.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-You should run the `Move-AzResource` cmdlet first. An Azure Recovery Services vault is an Azure resource that is created in a resource group. You would use the `Move-AzResource` cmdlet to move a Recovery Services vault to a different subscription or to a different resource group within the same subscription. This is the only command required to move the vault. Both the source and destination resource groups are locked during the move. Since all data and backup policies are retained during the move and does not require creation or deletion of any resources, this solution compared to the other options minimizes downtime. Some Microsoft references still refer to the older cmdlet name, `Move-AzureResource`.
-
-You should not run the `Export-AzResourceGroup` cmdlet. This cmdlet is used to export a resource group to a template and then save the template. This is often used when creating a new template based on an existing resource group. It is not part of the Recovery Services vault move process.
-
-You should not run the `New-AzResource` cmdlet. It is not necessary to manually create a new resource when moving a Recovery Services vault.
-
-You should not run the `Set-AzResource` cmdlet. This cmdlet is used to configure properties for an existing resource, but it does not let you change the resource group or subscription for the resource.
-
-<img src='.img/2026-03-16-04-22-19.png' width=600>
-
-**References**
-
-* [Move a Recovery Services vault across Azure subscriptions and resource groups](https://learn.microsoft.com/azure/backup/backup-azure-move-recovery-services-vault)
-* [Move-AzResource](https://learn.microsoft.com/powershell/module/az.resources/move-azresource?view=azps-15.4.0)
-* [Export-AzResourceGroup](https://learn.microsoft.com/powershell/module/az.resources/export-azresourcegroup?view=azps-15.4.0)
-* [New-AzResource](https://learn.microsoft.com/powershell/module/az.resources/new-azresource?view=azps-15.4.0)
-* [Set-AzResource](https://learn.microsoft.com/powershell/module/az.resources/set-azresource?view=azps-15.4.0)
-
-</details>
-
----
 
 #### Delete Recovery Services vault
 
@@ -9467,27 +9243,101 @@ To delete a Recovery Services vault you must remove or permanently delete all ba
 
 ---
 
-#### Recovery Services vault diagnostic target
+#### Recover Configuration File from Azure VM Backup
 
 **Domain:** Monitor and Maintain Azure Resources
 **Skill:** Implement backup and recovery
-**Task:** Configure and interpret reports and alerts for backups
+**Task:** Perform backup and restore operations by using Azure Backup
 
-Your company uses multiple Azure Recovery Services vaults to store backup data. The company plans to start using Azure Backup reports to help to forecast cloud storage requirements and audit backup restores.
+You have two Azure virtual machines (VMs) named VM1 and VM2 running Windows Server 2019. The VMs are backed up by an Azure Recovery Services vault. A configuration file on VM1 was updated, and you need to restore it to a version from six days ago.
 
-You need to configure the Azure Recovery Services vault diagnostic settings and specify the target for each Azure Recovery Services vault's diagnostic data to support reporting.
+You need to perform this action as quickly as possible without affecting other system files.
 
-Where should you target the Azure Recovery Services vault diagnostic data?
+Which four actions should you perform in sequence? To answer, move the appropriate actions from the list of actions to the answer area and arrange them in the correct order.
 
-A. Archive to a blob storage account.  
-B. Archive to a file storage account.  
-C. Stream to an event hub.  
-D. Send to Log Analytics.  
+**Available options:**
+
+* Start the file recovery process and select the recovery point of six days ago.
+* Download and execute the PowerShell script to mount the recovery volume.
+* Copy the file from the mounted volume to the VM.
+* Unmount the volumes.
+* Restore the disk containing the configuration file.
+* Restore the VM to a previous state.
 
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-03-20-03-57-00.png' width=600>
+<img src='.img/2026-01-30-05-41-40.png' width=700>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Why the selected answer is wrong**
+
+“Restore the disk containing the configuration file” is incorrect because a disk restore is a **full disk–level operation**. It replaces or attaches an entire managed disk from a recovery point. That is slower and risks overwriting or impacting other files on the disk, which directly violates the requirement to restore **only one file** as quickly as possible and **without affecting other system files**.
+On Azure exams, disk restore is a common trap when the scenario clearly calls for **granular recovery**.
+
+**Why the correct answer is right**
+
+The scenario is testing **Azure VM File Recovery** from a Recovery Services vault. File Recovery allows you to restore individual files from a specific recovery point **without restoring the VM or disk**.
+
+The correct sequence is:
+
+1. Start the file recovery process and select the recovery point of six days ago.
+2. Download and execute the PowerShell script to mount the recovery volume.
+3. Copy the required configuration file from the mounted volume to the VM.
+4. Unmount the volumes.
+
+This approach is the **fastest**, least disruptive method and is exactly what Azure Backup File Recovery is designed for.
+
+**Key takeaway**
+
+If the requirement is **one or a few files**, always choose **File Recovery**, not disk or VM restore.
+Disk restore = coarse-grained, higher impact.
+File Recovery = granular, fast, exam-preferred.
+
+**References**
+
+Azure VM file recovery
+[https://learn.microsoft.com/azure/backup/backup-azure-restore-files-from-vm](https://learn.microsoft.com/azure/backup/backup-azure-restore-files-from-vm)
+
+Restore Azure VM data using Azure Backup
+link removed
+
+Azure Recovery Services vault overview
+[https://learn.microsoft.com/azure/backup/backup-azure-recovery-services-vault-overview](https://learn.microsoft.com/azure/backup/backup-azure-recovery-services-vault-overview)
+
+</details>
+
+▶ **Related Lab:** [lab-vm-file-recovery](../hands-on-labs/monitoring/lab-vm-file-recovery/README.md)
+
+---
+
+#### Reprotect VM After Site Recovery Failover
+
+**Domain:** Monitor and Maintain Azure Resources
+**Skill:** Implement backup and recovery
+**Task:** Perform a failover to a secondary region by using Site Recovery
+
+You have an Azure virtual machine named `VM1` that is protected by using Azure site recovery.
+
+You fail over `VM1` from the primary region to the secondary region.
+
+You need to reprotect `VM1` after the failover so that `VM1` will replicate back to the primary region.
+
+What is the `VM1` status before the reprotection?
+
+A. Committing failover  
+B. Failover committed  
+C. Failover confirmed  
+D. Starting failover  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-25-19-52-55.png' width=600>
 
 </details>
 
@@ -9496,20 +9346,26 @@ D. Send to Log Analytics.
 
 **Why the selected answer is correct**
 
-You should send the vault diagnostic data to a `Log Analytics workspace`. Azure Backup reporting consumes resource-specific diagnostic events from `Recovery Services vaults` that are ingested into Log Analytics; the Backup Reports solution reads from those `Log Analytics` tables to produce the reports.
+Before you begin reprotection, the VM status must be `Failover committed`. Committing failover finalizes the failover operation and confirms that you will continue from the VM running in the secondary region. After this state is reached, you can start reprotection so replication is reversed back to the primary region.
 
-**Why other options are incorrect**
+<img src='.img/2026-03-25-19-55-21.png' width=600>
 
-Archiving diagnostics to a blob storage account or a file storage account retains raw diagnostic files but does not populate the `Log Analytics` tables required by Azure Backup Reports. Streaming the diagnostics to an event hub merely forwards raw events and likewise does not provide the resource-specific Log Analytics tables and schema that the reporting solution requires.
+**Why the other options are incorrect**
+
+`Committing failover` is an in-progress operation, not the required precondition state.
+
+`Failover confirmed` is not the required Azure Site Recovery VM status used for starting reprotection.
+
+`Starting failover` is an early stage before failover completion and commit.
 
 **Key takeaway**
 
-To enable Azure Backup reporting and auditing at scale, configure each `Recovery Services vault` to send diagnostics to a `Log Analytics workspace` (resource-specific tables) so the Backup Reports can query and visualize the data.
+For Azure Site Recovery failback preparation, ensure the replicated item status is `Failover committed` before selecting reprotection.
 
 **References**
 
-* [Configure Azure Backup reports](https://learn.microsoft.com/azure/backup/configure-reports)
-* [Use diagnostics settings for Recovery Services vaults](https://learn.microsoft.com/azure/backup/backup-azure-diagnostic-events)
+* [Tutorial: Fail over Azure VMs to a secondary region](https://learn.microsoft.com/azure/site-recovery/azure-to-azure-tutorial-failover-failback)
+* [Configure file and folder backups - Training](https://learn.microsoft.com/training/modules/intro-to-azure-backup/)
 
 </details>
 
@@ -9657,29 +9513,27 @@ Because of this, **application-consistent backups are preferred for production w
 
 ---
 
-#### Reprotect VM After Site Recovery Failover
+#### Recovery Services vault diagnostic target
 
 **Domain:** Monitor and Maintain Azure Resources
 **Skill:** Implement backup and recovery
-**Task:** Perform a failover to a secondary region by using Site Recovery
+**Task:** Configure and interpret reports and alerts for backups
 
-You have an Azure virtual machine named `VM1` that is protected by using Azure site recovery.
+Your company uses multiple Azure Recovery Services vaults to store backup data. The company plans to start using Azure Backup reports to help to forecast cloud storage requirements and audit backup restores.
 
-You fail over `VM1` from the primary region to the secondary region.
+You need to configure the Azure Recovery Services vault diagnostic settings and specify the target for each Azure Recovery Services vault's diagnostic data to support reporting.
 
-You need to reprotect `VM1` after the failover so that `VM1` will replicate back to the primary region.
+Where should you target the Azure Recovery Services vault diagnostic data?
 
-What is the `VM1` status before the reprotection?
-
-A. Committing failover  
-B. Failover committed  
-C. Failover confirmed  
-D. Starting failover  
+A. Archive to a blob storage account.  
+B. Archive to a file storage account.  
+C. Stream to an event hub.  
+D. Send to Log Analytics.  
 
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-03-25-19-52-55.png' width=600>
+<img src='.img/2026-03-20-03-57-00.png' width=600>
 
 </details>
 
@@ -9688,156 +9542,299 @@ D. Starting failover
 
 **Why the selected answer is correct**
 
-Before you begin reprotection, the VM status must be `Failover committed`. Committing failover finalizes the failover operation and confirms that you will continue from the VM running in the secondary region. After this state is reached, you can start reprotection so replication is reversed back to the primary region.
+You should send the vault diagnostic data to a `Log Analytics workspace`. Azure Backup reporting consumes resource-specific diagnostic events from `Recovery Services vaults` that are ingested into Log Analytics; the Backup Reports solution reads from those `Log Analytics` tables to produce the reports.
 
-<img src='.img/2026-03-25-19-55-21.png' width=600>
+**Why other options are incorrect**
 
-**Why the other options are incorrect**
-
-`Committing failover` is an in-progress operation, not the required precondition state.
-
-`Failover confirmed` is not the required Azure Site Recovery VM status used for starting reprotection.
-
-`Starting failover` is an early stage before failover completion and commit.
+Archiving diagnostics to a blob storage account or a file storage account retains raw diagnostic files but does not populate the `Log Analytics` tables required by Azure Backup Reports. Streaming the diagnostics to an event hub merely forwards raw events and likewise does not provide the resource-specific Log Analytics tables and schema that the reporting solution requires.
 
 **Key takeaway**
 
-For Azure Site Recovery failback preparation, ensure the replicated item status is `Failover committed` before selecting reprotection.
+To enable Azure Backup reporting and auditing at scale, configure each `Recovery Services vault` to send diagnostics to a `Log Analytics workspace` (resource-specific tables) so the Backup Reports can query and visualize the data.
 
 **References**
 
-* [Tutorial: Fail over Azure VMs to a secondary region](https://learn.microsoft.com/azure/site-recovery/azure-to-azure-tutorial-failover-failback)
-* [Configure file and folder backups - Training](https://learn.microsoft.com/training/modules/intro-to-azure-backup/)
+* [Configure Azure Backup reports](https://learn.microsoft.com/azure/backup/configure-reports)
+* [Use diagnostics settings for Recovery Services vaults](https://learn.microsoft.com/azure/backup/backup-azure-diagnostic-events)
 
 </details>
 
 ---
 
-#### Azure Site Recovery High Churn
-
-**Domain:** Monitor and Maintain Azure Resources
-**Skill:** Implement backup and recovery
-**Task:** Configure Azure Site Recovery for Azure resources
-
-You are an Azure administrator for an organization that hosts mission-critical applications in Azure in a multi-region deployment. One of these Azure VMs hosts a critical SQL Server database.
-
-You want to initiate an Azure VM disaster recovery using Azure Site Recovery. You plan to use Azure Site Recovery High Churn support to achieve enhanced recovery point objective (RPO) performance.
-
-You need to implement the solution.
-
-What does Azure Site Recovery High Churn use?
-
-A. Azure Elastic SAN  
-B. Azure Files  
-C. Standard general-purpose v2 storage  
-D. Premium block blob storage  
-
-<details>
-<summary>📸 Click to expand screenshot</summary>
-
-<img src='.img/2026-03-20-04-11-47.png' width=600>
-
-</details>
-
-<details>
-<summary>💡 Click to expand explanation</summary>
-
-**Why the selected answer is correct**
-
-Azure Site Recovery High Churn uses premium block blob storage. In this scenario, since you are performing disaster recovery on a virtual machine (VM) that hosts a database, you have planned to use Azure Site Recovery High Churn support. Azure Site Recovery supports churn (data change rate) up to 100 MB/s per VM leveraging High Churn support. This will allow you to achieve better recovery point objective (RPO) performance for your high-churning workloads. This feature at the time of writing is in Public Preview.
-
-<img src='.img/2026-03-20-04-15-29.png' width=600>
-
-**Why the other options are incorrect**
-
-Azure Site Recovery High Churn does not use standard general-purpose v2 storage. This is the standard storage account type for blobs, file shares, queues, and tables and is recommended for most scenarios using blob storage or one of the other Azure Storage services. Azure Site Recovery High Churn support does not use standard general-purpose v2 storage, but rather uses the premium block blob to achieve high transaction rates.
-
-Azure Site Recovery High Churn does not use Azure Files. Azure Files offers fully managed file shares in the cloud that are accessible via the industry standard Server Message Block (SMB) protocol, Network File System (NFS) protocol, and Azure Files REST API. Azure file shares can be mounted concurrently by cloud or on-premises deployments.
-
-Azure Site Recovery High Churn does not use Azure Elastic SAN. Azure Elastic SAN is a fully integrated solution that simplifies deploying, scaling, managing, and configuring a SAN, while also offering built-in cloud capabilities like high availability. This specific feature at the time of writing is in Preview.
-
-**References**
-
-- [About Site Recovery](https://learn.microsoft.com/azure/site-recovery/site-recovery-overview)
-- [Azure VM Disaster Recovery - High Churn Support (Public Preview)](https://learn.microsoft.com/azure/site-recovery/concepts-azure-to-azure-high-churn-support)
-- [Premium block blob storage accounts](https://learn.microsoft.com/azure/storage/blobs/storage-blob-block-blob-premium)
-- [Storage account overview](https://learn.microsoft.com/azure/storage/common/storage-account-overview)
-- [What is Azure Files?](https://learn.microsoft.com/azure/storage/files/storage-files-introduction)
-- [What is Azure Elastic SAN? Preview](https://learn.microsoft.com/azure/storage/elastic-san/elastic-san-introduction)
-
-</details>
-
----
-
-#### Recover Configuration File from Azure VM Backup
+#### Restore VM from backup (availability set)
 
 **Domain:** Monitor and Maintain Azure Resources
 **Skill:** Implement backup and recovery
 **Task:** Perform backup and restore operations by using Azure Backup
 
-You have two Azure virtual machines (VMs) named VM1 and VM2 running Windows Server 2019. The VMs are backed up by an Azure Recovery Services vault. A configuration file on VM1 was updated, and you need to restore it to a version from six days ago.
+Your company has an Azure subscription and they use Azure Backup to protect the deployed virtual machines (VMs). Your subscription includes a VM named `VMS1` that runs Windows Server 2019. `VMS1` is configured as a part of an availability set and it is backed up through machine-level backup. `VMS1` is mistakenly deleted.
 
-You need to perform this action as quickly as possible without affecting other system files.
+You need to restore `VMS1` from backup and configure `VMS1` as part of the same availability set.
 
-Which four actions should you perform in sequence? To answer, move the appropriate actions from the list of actions to the answer area and arrange them in the correct order.
+Which three actions should you perform in sequence? To answer, move the appropriate actions from the list of possible actions to the answer area and arrange them in the correct order.
 
-**Available options:**
+A. Select Create a virtual machine as the Restore Type and restore the data.  
+B. Select Replace existing as the Restore Type and restore the data.  
+C. Select Restore Disks as the Restore Type and restore the data.  
+D. Manually create a new VM.  
+E. Fetch and deploy the deployment template from the Azure Recovery Services vault.  
+F. Select a restore point for VMS1 in the Azure Recovery Services vault.  
 
-* Start the file recovery process and select the recovery point of six days ago.
-* Download and execute the PowerShell script to mount the recovery volume.
-* Copy the file from the mounted volume to the VM.
-* Unmount the volumes.
-* Restore the disk containing the configuration file.
-* Restore the VM to a previous state.
+Select and order 3:
+
+| Step | Action |
+|------|--------|
+| 1 | |
+| 2 | |
+| 3 | |
 
 <details>
 <summary>📸 Click to expand screenshot</summary>
 
-<img src='.img/2026-01-30-05-41-40.png' width=700>
+<img src='.img/2026-03-16-04-41-52.png' width=600>
 
 </details>
 
 <details>
 <summary>💡 Click to expand explanation</summary>
 
-**Why the selected answer is wrong**
+**Explanation**
 
-“Restore the disk containing the configuration file” is incorrect because a disk restore is a **full disk–level operation**. It replaces or attaches an entire managed disk from a recovery point. That is slower and risks overwriting or impacting other files on the disk, which directly violates the requirement to restore **only one file** as quickly as possible and **without affecting other system files**.
-On Azure exams, disk restore is a common trap when the scenario clearly calls for **granular recovery**.
+You should perform the following actions in order:
 
-**Why the correct answer is right**
+1. **Select a restore point for `VMS1` in the Azure Recovery Services vault**
+2. **Select Restore Disks as the Restore Type and restore the data.**
+3. **Fetch and deploy the deployment template from the Azure Recovery Services vault.**
 
-The scenario is testing **Azure VM File Recovery** from a Recovery Services vault. File Recovery allows you to restore individual files from a specific recovery point **without restoring the VM or disk**.
+You should run a `Restore Disks` restoration and recreate `VMS1` from the restored disk when restoring a VM that has been configured as a part of an availability set. Begin by choosing the restore point from which you want to restore, and then select `Restore Disks` as your `Restore Type`. You can then restore the data, but you still need to recreate the VM. To do this, fetch and then deploy the deployment template from the Azure Recovery Services vault.
 
-The correct sequence is:
+After using the `Restore Disks` restore type, you also have the option of attaching the disk to an existing VM.
 
-1. Start the file recovery process and select the recovery point of six days ago.
-2. Download and execute the PowerShell script to mount the recovery volume.
-3. Copy the required configuration file from the mounted volume to the VM.
-4. Unmount the volumes.
+There is no need to manually create a new VM. You will use the deployment template to create the VM.
 
-This approach is the **fastest**, least disruptive method and is exactly what Azure Backup File Recovery is designed for.
+You should not choose `Create a virtual machine` or `Replace existing` as the Restore Type. You should use `Create a virtual machine` to create a simple VM based on a VM restore point. You should use `Replace existing` to replace the disk on an existing VM.
 
-**Key takeaway**
-
-If the requirement is **one or a few files**, always choose **File Recovery**, not disk or VM restore.
-Disk restore = coarse-grained, higher impact.
-File Recovery = granular, fast, exam-preferred.
+<img src='.img/2026-03-16-04-47-59.png' width=600>
 
 **References**
 
-Azure VM file recovery
-[https://learn.microsoft.com/azure/backup/backup-azure-restore-files-from-vm](https://learn.microsoft.com/azure/backup/backup-azure-restore-files-from-vm)
-
-Restore Azure VM data using Azure Backup
-link removed
-
-Azure Recovery Services vault overview
-[https://learn.microsoft.com/azure/backup/backup-azure-recovery-services-vault-overview](https://learn.microsoft.com/azure/backup/backup-azure-recovery-services-vault-overview)
+* [How to restore Azure VM data in Azure portal](https://learn.microsoft.com/azure/backup/backup-azure-arm-restore-vms)
+* [Availability options for Azure Virtual Machines](https://learn.microsoft.com/azure/virtual-machines/availability)
+* [Tutorial: Restore a VM with Azure CLI](https://learn.microsoft.com/azure/backup/tutorial-restore-disk)
 
 </details>
 
-▶ **Related Lab:** [lab-vm-file-recovery](../hands-on-labs/monitoring/lab-vm-file-recovery/README.md)
+---
+
+#### Move Recovery Services vault
+
+**Domain:** Monitor and Maintain Azure Resources
+**Skill:** Implement backup and recovery
+**Task:** Perform backup and restore operations by using Azure Backup
+
+Your company has two Azure subscriptions named `Sub1` and `Sub2`. You create a Recovery Services vault in `Sub1` named `Vault1` in the Central US region.
+
+You configure `Vault1` for Azure Backup.
+
+You need to move `Vault1` to `Sub2`. You want to minimize downtime and data loss during this process.
+
+Which PowerShell cmdlet should you run first?
+
+A. `Set-AzResource`  
+B. `Export-AzResourceGroup`  
+C. `Move-AzResource`  
+D. `New-AzResource`  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-16-04-15-50.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+You should run the `Move-AzResource` cmdlet first. An Azure Recovery Services vault is an Azure resource that is created in a resource group. You would use the `Move-AzResource` cmdlet to move a Recovery Services vault to a different subscription or to a different resource group within the same subscription. This is the only command required to move the vault. Both the source and destination resource groups are locked during the move. Since all data and backup policies are retained during the move and does not require creation or deletion of any resources, this solution compared to the other options minimizes downtime. Some Microsoft references still refer to the older cmdlet name, `Move-AzureResource`.
+
+You should not run the `Export-AzResourceGroup` cmdlet. This cmdlet is used to export a resource group to a template and then save the template. This is often used when creating a new template based on an existing resource group. It is not part of the Recovery Services vault move process.
+
+You should not run the `New-AzResource` cmdlet. It is not necessary to manually create a new resource when moving a Recovery Services vault.
+
+You should not run the `Set-AzResource` cmdlet. This cmdlet is used to configure properties for an existing resource, but it does not let you change the resource group or subscription for the resource.
+
+<img src='.img/2026-03-16-04-22-19.png' width=600>
+
+**References**
+
+* [Move a Recovery Services vault across Azure subscriptions and resource groups](https://learn.microsoft.com/azure/backup/backup-azure-move-recovery-services-vault)
+* [Move-AzResource](https://learn.microsoft.com/powershell/module/az.resources/move-azresource?view=azps-15.4.0)
+* [Export-AzResourceGroup](https://learn.microsoft.com/powershell/module/az.resources/export-azresourcegroup?view=azps-15.4.0)
+* [New-AzResource](https://learn.microsoft.com/powershell/module/az.resources/new-azresource?view=azps-15.4.0)
+* [Set-AzResource](https://learn.microsoft.com/powershell/module/az.resources/set-azresource?view=azps-15.4.0)
+
+</details>
+
+---
+
+#### Recover Azure VM from Deleted Backup
+
+**Domain:** Monitor and Maintain Azure Resources
+**Skill:** Implement backup and recovery
+**Task:** Perform backup and restore operations by using Azure Backup
+
+An Infrastructure-as-a-Service (IaaS) virtual machine (VM) named VM10 is backed up to an Azure Recovery Services vault. VM10 and all of its restore points are deleted by mistake.
+
+You need to recover VM10.
+
+How many days does VM10's data remain available for recovery?
+
+A. 365 days  
+B. 30 days  
+C. 14 days  
+D. 90 days  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-01-30-05-24-56.png' width=700>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Why the selected answer is right**
+Azure Backup uses **Soft Delete** for Azure IaaS VM backups. When a VM and its backup data are deleted (intentionally or accidentally), the backup data is **retained for 14 days** in a soft-deleted state. During this window, the VM’s backup data can be recovered by undeleting the backup item from the Recovery Services vault. After 14 days, the data is permanently deleted and cannot be recovered.
+
+**Key takeaway**
+For Azure IaaS VMs protected by a Recovery Services vault, **soft delete provides a fixed 14-day recovery window** after deletion—independent of the configured backup retention policy.
+
+<img src='.img/2026-02-04-03-04-12.png' width=500>
+
+**References**
+
+* [Soft delete for virtual machines](https://learn.microsoft.com/en-us/azure/backup/soft-delete-virtual-machines?utm_source=chatgpt.com&tabs=azure-portal)
+
+</details>
+
+---
+
+#### Default Azure VM Backup Retention
+
+**Domain:** Monitor and Maintain Azure Resources
+**Skill:** Implement backup and recovery
+**Task:** Create and configure a backup policy
+
+You have multiple Azure virtual machines and an Azure recovery services vault. Virtual machines are configured with the default backup policy.
+
+What is the retention period of virtual machine backups in the default backup policy?
+
+A. 7 days  
+B. 14 days  
+C. 30 days  
+D. 90 days  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-25-19-50-31.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Why the selected answer is incorrect**
+
+The selected option `14 days` is not the default retention value for Azure VM backups configured with the default policy in a Recovery Services vault.
+
+**Why the correct answer is correct**
+
+The default Azure VM backup policy retains daily recovery points for `30 days`.
+
+**Why the other options are incorrect**
+
+`7 days` and `90 days` are not the default retention value shown for the default VM backup policy.
+
+**Key takeaway**
+
+For Azure VM backup with the default policy, backup retention is `30 days`.
+
+**References**
+
+* [Back up an Azure VM from the VM settings](https://learn.microsoft.com/azure/backup/backup-azure-vms-first-look-arm#back-up-from-azure-vm-settings)
+
+</details>
+
+---
+
+#### Configure Azure Backup with PowerShell
+
+**Domain:** Monitor and Maintain Azure Resources
+**Skill:** Implement backup and recovery
+**Task:** Perform backup and restore operations by using Azure Backup
+
+You have an Azure subscription. You are not currently using Azure Backup. You plan to back up a virtual machine (VM) named `VM1` using Azure Backup. The backup should use the default backup policy to run daily backups.
+
+You need to identify the PowerShell cmdlets required to configure recurring backups using the default backup policy.
+
+Which three PowerShell cmdlets should you run in sequence? To answer, move the appropriate cmdlets from the list of possible cmdlets to the answer area and arrange them in the correct order.
+
+Available options
+
+A. `Backup-AzRecoveryServicesBackupItem`  
+B. `Enable-AzRecoveryServicesBackupAutoProtection`  
+C. `Set-AzRecoveryServicesBackupProperty`  
+
+Select and order 3:
+
+| Step | Action |
+|------|--------|
+| 1 | `Register-AzResourceProvider` |
+| 2 | `New-AzRecoveryServicesVault` |
+| 3 | `Enable-AzRecoveryServicesBackupProtection` |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-20-03-41-43.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Solution Steps:**
+
+You should run the following cmdlets in order:
+
+1. `Register-AzResourceProvider`
+2. `New-AzRecoveryServicesVault`
+3. `Enable-AzRecoveryServicesBackupProtection`
+
+You should first run the `Register-AzResourceProvider` cmdlet. This is required the first time you use Azure Backup. This registers the Azure Recovery Service provider in your subscription.
+
+You should then run the `New-AzRecoveryServicesVault` cmdlet to create a Recovery Services vault to store the backups.
+
+Finally, you should run the `Enable-AzRecoveryServicesBackupProtection` cmdlet to enable backups to run using the default backup policy. Once enabled, backups will run automatically.
+
+<img src='.img/2026-03-20-03-48-01.png' width=600>
+
+**Do not run:**
+
+* `Backup-AzRecoveryServicesBackupItem` — this cmdlet is used to run an on-demand backup based on your backup policy.
+* `Enable-AzRecoveryServicesBackupAutoProtection` — this cmdlet is used to let users automatically protect all unprotected and new databases.
+* `Set-AzRecoveryServicesBackupProperty` — this cmdlet sets backup storage properties for a Backup Services vault and is not required when initially setting up Azure Backup.
+
+**References**
+
+- [What is the Azure Backup service?](https://learn.microsoft.com/azure/backup/backup-overview)
+- [Back up a virtual machine in Azure with PowerShell](https://learn.microsoft.com/azure/backup/quick-backup-vm-powershell)
+- [Enable-AzRecoveryServicesBackupAutoProtection](https://learn.microsoft.com/powershell/module/az.recoveryservices/enable-azrecoveryservicesbackupautoprotection?view=azps-15.4.0)
+- [Set-AzRecoveryServicesBackupProperty](https://learn.microsoft.com/powershell/module/az.recoveryservices/set-azrecoveryservicesbackupproperty?view=azps-15.4.0)
+
+</details>
 
 ---
 
@@ -10123,6 +10120,62 @@ If you'd like, I can also show the **architecture diagram Microsoft expects you 
 * [Azure Traffic Manager with Azure Site Recovery](https://learn.microsoft.com/azure/site-recovery/concepts-traffic-manager-with-site-recovery)
 * [Azure ExpressRoute with Azure Site Recovery](https://learn.microsoft.com/azure/site-recovery/concepts-expressroute-with-site-recovery)
 * [Network Security Groups with Azure Site Recovery](https://learn.microsoft.com/azure/site-recovery/concepts-network-security-group-with-site-recovery)
+
+</details>
+
+---
+
+#### Azure Site Recovery High Churn
+
+**Domain:** Monitor and Maintain Azure Resources
+**Skill:** Implement backup and recovery
+**Task:** Configure Azure Site Recovery for Azure resources
+
+You are an Azure administrator for an organization that hosts mission-critical applications in Azure in a multi-region deployment. One of these Azure VMs hosts a critical SQL Server database.
+
+You want to initiate an Azure VM disaster recovery using Azure Site Recovery. You plan to use Azure Site Recovery High Churn support to achieve enhanced recovery point objective (RPO) performance.
+
+You need to implement the solution.
+
+What does Azure Site Recovery High Churn use?
+
+A. Azure Elastic SAN  
+B. Azure Files  
+C. Standard general-purpose v2 storage  
+D. Premium block blob storage  
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-03-20-04-11-47.png' width=600>
+
+</details>
+
+<details>
+<summary>💡 Click to expand explanation</summary>
+
+**Why the selected answer is correct**
+
+Azure Site Recovery High Churn uses premium block blob storage. In this scenario, since you are performing disaster recovery on a virtual machine (VM) that hosts a database, you have planned to use Azure Site Recovery High Churn support. Azure Site Recovery supports churn (data change rate) up to 100 MB/s per VM leveraging High Churn support. This will allow you to achieve better recovery point objective (RPO) performance for your high-churning workloads. This feature at the time of writing is in Public Preview.
+
+<img src='.img/2026-03-20-04-15-29.png' width=600>
+
+**Why the other options are incorrect**
+
+Azure Site Recovery High Churn does not use standard general-purpose v2 storage. This is the standard storage account type for blobs, file shares, queues, and tables and is recommended for most scenarios using blob storage or one of the other Azure Storage services. Azure Site Recovery High Churn support does not use standard general-purpose v2 storage, but rather uses the premium block blob to achieve high transaction rates.
+
+Azure Site Recovery High Churn does not use Azure Files. Azure Files offers fully managed file shares in the cloud that are accessible via the industry standard Server Message Block (SMB) protocol, Network File System (NFS) protocol, and Azure Files REST API. Azure file shares can be mounted concurrently by cloud or on-premises deployments.
+
+Azure Site Recovery High Churn does not use Azure Elastic SAN. Azure Elastic SAN is a fully integrated solution that simplifies deploying, scaling, managing, and configuring a SAN, while also offering built-in cloud capabilities like high availability. This specific feature at the time of writing is in Preview.
+
+**References**
+
+- [About Site Recovery](https://learn.microsoft.com/azure/site-recovery/site-recovery-overview)
+- [Azure VM Disaster Recovery - High Churn Support (Public Preview)](https://learn.microsoft.com/azure/site-recovery/concepts-azure-to-azure-high-churn-support)
+- [Premium block blob storage accounts](https://learn.microsoft.com/azure/storage/blobs/storage-blob-block-blob-premium)
+- [Storage account overview](https://learn.microsoft.com/azure/storage/common/storage-account-overview)
+- [What is Azure Files?](https://learn.microsoft.com/azure/storage/files/storage-files-introduction)
+- [What is Azure Elastic SAN? Preview](https://learn.microsoft.com/azure/storage/elastic-san/elastic-san-introduction)
 
 </details>
 
