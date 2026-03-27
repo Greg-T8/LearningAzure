@@ -8,7 +8,7 @@ This log tracks individual study sessions for the **AZ-104** exam. Fill in **End
 
 | # | Date | Start | End | Duration | Notes |
 |:--|:-----|:------|:----|:---------|:------|
-| 30 | 3/26/26 | 6:38 PM |  |  | Microsoft AZ-104 Practice Assessment |
+| 30 | 3/26/26 | 6:38 PM | 8:14 PM | 1h 36m | Microsoft AZ-104 Practice Assessment |
 | 29 | 3/26/26 | 5:36 AM | 6:47 AM | 1h 11m | Microsoft AZ-104 Practice Assessment |
 | 28 | 3/25/26 | 6:49 PM | 8:01 PM | 1h 12m | Microsoft AZ-104 Practice Assessment |
 | 27 | 3/25/26 | 6:24 AM | 6:40 AM | 0h 16m | Microsoft AZ-104 Practice Assessment |
