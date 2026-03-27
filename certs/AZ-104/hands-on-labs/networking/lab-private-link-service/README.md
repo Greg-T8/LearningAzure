@@ -24,6 +24,7 @@
 
 
 
+
 ## Exam Question Scenario
 
 You are an Azure administrator for an e-commerce company. Your organization wants to access Azure SQL Database services and Azure-hosted customer-owned resources over a private endpoint in your virtual network (VNet).

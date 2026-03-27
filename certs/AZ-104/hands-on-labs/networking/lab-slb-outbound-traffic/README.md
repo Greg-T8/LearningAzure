@@ -5,8 +5,10 @@
 **Task:** Configure an internal or public load balancer
 
 **Practice Exam Questions:**
+- [Azure Load Balancer Session Persistence](../../../practice-questions/README.md#azure-load-balancer-session-persistence)
 - [Configure Internal Load Balancer](../../../practice-questions/README.md#configure-internal-load-balancer)
 - [Configure Standard Load Balancer Outbound Traffic and IP Allocation](../../../practice-questions/README.md#configure-standard-load-balancer-outbound-traffic-and-ip-allocation)
+
 
 
 

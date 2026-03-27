@@ -5,12 +5,13 @@
 **Task:** Use Azure Network Watcher and Connection Monitor
 
 **Practice Exam Questions:**
-- [Monitor Network Health with Network Watcher](../../../practice-questions/README.md#monitor-network-health-with-network-watcher)
 - [Capture SFTP Packets with Network Watcher](../../../practice-questions/README.md#capture-sftp-packets-with-network-watcher)
 - [Test TCP Connectivity with Network Watcher](../../../practice-questions/README.md#test-tcp-connectivity-with-network-watcher)
-- [Diagnose Network Watcher Tool for Web Server Packet Flow](../../../practice-questions/README.md#diagnose-network-watcher-tool-for-web-server-packet-flow)
-- [Inspect VM-to-VM Network Traffic](../../../practice-questions/README.md#inspect-vm-to-vm-network-traffic)
 - [Determine filtering rule with Network Watcher](../../../practice-questions/README.md#determine-filtering-rule-with-network-watcher)
+- [Inspect VM-to-VM Network Traffic](../../../practice-questions/README.md#inspect-vm-to-vm-network-traffic)
+- [Monitor Network Health with Network Watcher](../../../practice-questions/README.md#monitor-network-health-with-network-watcher)
+- [Diagnose Network Watcher Tool for Web Server Packet Flow](../../../practice-questions/README.md#diagnose-network-watcher-tool-for-web-server-packet-flow)
+
 
 
 

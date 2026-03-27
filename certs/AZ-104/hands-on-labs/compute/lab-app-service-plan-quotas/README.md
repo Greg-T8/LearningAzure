@@ -27,6 +27,7 @@
 
 
 
+
 ## Exam Question Scenario
 
 You deploy an Azure web app named MyApp. MyApps runs in a Free pricing tier service plan named MyPlan. During testing, you discover that MyApp stops after 60 minutes and that it cannot be restarted until the next day.

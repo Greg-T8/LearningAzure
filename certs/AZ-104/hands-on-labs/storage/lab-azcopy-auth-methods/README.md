@@ -15,6 +15,7 @@
 
 
 
+
 ## Exam Question Scenario
 
 You create a new storage account named DevStore for Azure Blob Storage and Azure File Storage. You plan to use Azure CLI's copy command to copy data from blob storage and file storage in other storage accounts to DevStore. You have access to the storage account access keys for the source storage accounts and for DevStore. You also have valid Microsoft Entra user accounts and shared access signatures (SAS) with access to the source data.
