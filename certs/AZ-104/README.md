@@ -116,7 +116,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 |  | Deploy and configure an Azure Virtual Machine Scale Sets | 2 | 1 |
 | Provision and manage containers in the Azure portal (4 tasks) | Create and manage an Azure container registry | 1 | 0 |
 |  | Provision a container by using Azure Container Instances | 1 | 0 |
-|  | Provision a container by using Azure Container Apps | 0 | 0 |
+|  | Provision a container by using Azure Container Apps | 1 | 0 |
 |  | Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps | 1 | 1 |
 | Create and configure Azure App Service (8 tasks) | Provision an App Service plan | 8 | 1 |
 |  | Configure scaling for an App Service plan | 5 | 1 |
@@ -147,7 +147,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 |  | Configure private endpoints for Azure PaaS | 1 | 1 |
 | Configure name resolution and load balancing (3 tasks) | Configure Azure DNS | 3 | 0 |
 |  | Configure an internal or public load balancer | 2 | 1 |
-|  | Troubleshoot load balancing | 3 | 1 |
+|  | Troubleshoot load balancing | 4 | 1 |
 
 </details>
 
@@ -158,7 +158,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 | Skill | Task | Qs | Labs |
 | :--- | :--- | -: | -: |
 | Monitor resources in Azure (6 tasks) | Interpret metrics in Azure Monitor | 1 | 1 |
-|  | Configure log settings in Azure Monitor | 1 | 0 |
+|  | Configure log settings in Azure Monitor | 2 | 0 |
 |  | Query and analyze logs in Azure Monitor | 1 | 0 |
 |  | Set up alert rules, action groups, and alert processing rules in Azure Monitor | 5 | 1 |
 |  | Configure and interpret monitoring of VMs, storage accounts, and networks by using Azure Monitor Insights | 1 | 1 |
