@@ -24,6 +24,7 @@
 
 
 
+
 ## Exam Question Scenario
 
 You have to provide a website hosting environment that meets the following scalability and security requirements:

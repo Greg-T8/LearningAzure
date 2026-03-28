@@ -30,6 +30,7 @@
 
 
 
+
 ## Scenario
 
 You have an Azure subscription named **Subscription1**. You create an alert rule in Azure Monitor named **Alert1**. Alert1 is configured to generate email, voice, and SMS alerts. You determine that Alert1 fires every minute.
