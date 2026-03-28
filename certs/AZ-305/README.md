@@ -1,6 +1,6 @@
 # AZ-305: Designing Microsoft Azure Infrastructure Solutions — Study Guide
 
-**Objective:** Achieve the **Azure Solutions Architect Expert** certification using a hands-on labs and practice exams approach.
+**Objective:** Achieve the **Azure Solutions Architect Expert** certification using Microsoft Learn, practice exams, and video courses.
 
 - **Certification Page:** [Azure Solutions Architect Expert](https://learn.microsoft.com/en-us/credentials/certifications/azure-solutions-architect/)
 - **Official Study Guide:** [AZ-305 Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-305)
@@ -10,23 +10,54 @@
 
 ## 📚 Progress Tracker
 
-| Priority | Modality | Domain | My Notes | Status | Started | Completed | Days |
-| :------- | :------- | :----- | :------- | :----- | :------ | :-------- | :--- |
-| 1        | Microsoft Learn | Identity, Governance & Monitoring | [Microsoft Learning Paths](./learning-paths/README.md) | Not Started |  |  |  |
-| 2        | Hands-on Labs | Identity, Governance & Monitoring | [Hands-on Labs](./hands-on-labs/README.md) | Not Started |  |  |  |
-| 3        | Practice Questions | Identity, Governance & Monitoring | [Practice Questions](./practice-questions/README.md) | Not Started |  |  |  |
-| 1        | Microsoft Learn | Data Storage | [Microsoft Learning Paths](./learning-paths/README.md) | Not Started |  |  |  |
-| 2        | Hands-on Labs | Data Storage | [Hands-on Labs](./hands-on-labs/README.md) | Not Started |  |  |  |
-| 3        | Practice Questions | Data Storage | [Practice Questions](./practice-questions/README.md) | Not Started |  |  |  |
-| 1        | Microsoft Learn | Business Continuity | [Microsoft Learning Paths](./learning-paths/README.md) | Not Started |  |  |  |
-| 2        | Hands-on Labs | Business Continuity | [Hands-on Labs](./hands-on-labs/README.md) | Not Started |  |  |  |
-| 3        | Practice Questions | Business Continuity | [Practice Questions](./practice-questions/README.md) | Not Started |  |  |  |
-| 1        | Microsoft Learn | Infrastructure | [Microsoft Learning Paths](./learning-paths/README.md) | Not Started |  |  |  |
-| 2        | Hands-on Labs | Infrastructure | [Hands-on Labs](./hands-on-labs/README.md) | Not Started |  |  |  |
-| 3        | Practice Questions | Infrastructure | [Practice Questions](./practice-questions/README.md) | Not Started |  |  |  |
-| 4        | Video |  | [Video Courses](./video-courses/README.md) | Not Started |  |  |  |
+**Goal:** Pass AZ-305 at the 3-month mark (~Jul 1, 2026) · **Pace:** 1.5 hrs/day, 7 days/week
 
-**Legend:** Not Started | In Progress | Completed
+### Per-Skill Workload & Day Allocation
+
+| # | Domain | Skill | ML (min) | PQs | PQ (min) | Total (min) | Days |
+| -: | :----- | :---- | -------: | --: | -------: | ----------: | ---: |
+| 1 | Identity, Governance & Monitoring | Design solutions for logging and monitoring | 26 | 13 | 78 | 104 | 4 |
+| 2 | Identity, Governance & Monitoring | Design authentication and authorization solutions | 70 | 20 | 120 | 190 | 8 |
+| 3 | Identity, Governance & Monitoring | Design governance | 49 | 11 | 66 | 115 | 5 |
+| 4 | Data Storage | Design data storage solutions for relational data | 55 | 11 | 66 | 121 | 5 |
+| 5 | Data Storage | Design data storage solutions for semi-structured and unstructured data | 56 | 19 | 114 | 170 | 7 |
+| 6 | Data Storage | Design data integration | 53 | 9 | 54 | 107 | 5 |
+| 7 | Business Continuity | Design solutions for backup and disaster recovery | 47 | 8 | 48 | 95 | 4 |
+| 8 | Business Continuity | Design for high availability | 59 | 9 | 54 | 113 | 5 |
+| 9 | Infrastructure | Design compute solutions | 61 | 9 | 54 | 115 | 5 |
+| 10 | Infrastructure | Design an application architecture | 59 | 7 | 42 | 101 | 4 |
+| 11 | Infrastructure | Design migrations | 46 | 8 | 48 | 94 | 4 |
+| 12 | Infrastructure | Design network solutions | 53 | 13 | 78 | 131 | 5 |
+| | **Totals** | | **634** | **137** | **822** | **1456** | **61** |
+
+> ML = Microsoft Learn module time · PQs = MeasureUp practice questions · PQ (min) = PQs × ~6 min
+
+### Phase 1 — Learn + Practice per Skill (Apr 1 – May 31)
+
+| # | Domain | Skill | Expected Start | Status | Started | Completed | Days |
+| -: | :----- | :---- | :------------- | :----- | :------ | :-------- | ---: |
+| 1 | Identity, Governance & Monitoring | Design solutions for logging and monitoring | Apr 1 | Not Started | | | |
+| 2 | Identity, Governance & Monitoring | Design authentication and authorization solutions | Apr 5 | Not Started | | | |
+| 3 | Identity, Governance & Monitoring | Design governance | Apr 13 | Not Started | | | |
+| 4 | Data Storage | Design data storage solutions for relational data | Apr 18 | Not Started | | | |
+| 5 | Data Storage | Design data storage solutions for semi-structured and unstructured data | Apr 23 | Not Started | | | |
+| 6 | Data Storage | Design data integration | Apr 30 | Not Started | | | |
+| 7 | Business Continuity | Design solutions for backup and disaster recovery | May 5 | Not Started | | | |
+| 8 | Business Continuity | Design for high availability | May 9 | Not Started | | | |
+| 9 | Infrastructure | Design compute solutions | May 14 | Not Started | | | |
+| 10 | Infrastructure | Design an application architecture | May 19 | Not Started | | | |
+| 11 | Infrastructure | Design migrations | May 23 | Not Started | | | |
+| 12 | Infrastructure | Design network solutions | May 27 | Not Started | | | |
+
+### Phase 2 — Review & Practice Exams (Jun 1 – Jun 26)
+
+| # | Modality | Expected Start | Status | Started | Completed | Days |
+| -: | :------- | :------------- | :----- | :------ | :-------- | ---: |
+| 13 | Video Course | Jun 1 | Not Started | | | |
+| 14 | Practice Exam (Tutorials Dojo) | Jun 6 | Not Started | | | |
+| 15 | Practice Exam (Microsoft Assessment) | Jun 20 | Not Started | | | |
+
+**Legend:** Not Started · In Progress · Completed
 
 <!-- HOURS_COMMITTED -->**Hours Committed:** 0h<!-- /HOURS_COMMITTED -->
 
