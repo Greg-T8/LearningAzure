@@ -12,9 +12,9 @@ Progress trackers, detailed study notes, practice exams, and hands-on labs:
 
 | Exam | Description | Status | Duration |
 |------|-------------|--------|---------|
-| 📗 [**AZ-104**](certs/AZ-104/README.md) | Azure Administrator Associate | In Progress | 1/15/26 – 3/29/26 (73d) |
 | 📕 [**AZ-305**](certs/AZ-305/README.md) | Azure Solutions Architect Expert | Not Started | |
 | 📓 [**AI-103**](certs/AI-103/README.md) | Azure AI App and Developer Associate | Not Started | |
+| 📗 [**AZ-104**](certs/AZ-104/README.md) | Azure Administrator Associate | Completed | 1/15/26 – 3/30/26 (74d) |
 | 📙 [**AI-102**](certs/AI-102/README.md) | Azure AI Engineer Associate | Retired | 2/10/26 – 3/14/26 (32d) |
 | 📘 [**AI-900**](certs/AI-900/README.md) | Azure AI Fundamentals | Completed | 1/14/26 – 2/9/26 (26d) |
 

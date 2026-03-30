@@ -6,6 +6,7 @@
 - **Official Study Guide:** [AZ-104 Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104)
 - **Practice Assessment:** [AZ-104 Practice Assessment](https://learn.microsoft.com/en-us/credentials/certifications/exams/az-104/practice/assessment?assessment-type=practice&assessmentId=21)
 - **Study Log:** [Session-by-session study time tracker](./StudyLog.md)
+- **Exam Experience:** [AZ-104 Exam Experience](./Exam/exam.md)
 
 ---
 
