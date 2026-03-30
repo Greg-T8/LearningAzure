@@ -38,12 +38,6 @@ I ended up with around 7-10 minutes to review. On review, I went back and change
 
 At the end, I watched the timer count down to zero and held my breath. When the results came up, I was relieved to see that I passed (barely).
 
-### Challenging Topics
-
-- Azure Policy
-- Azure Container Services
-- Azure Storage
-
 ### What I Would Do Differently
 
 I spent a lot of time developing hands-on labs, which I found to be very rewarding, but even hands-on labs don't fully prepare you for the level of detail required for the exam.
