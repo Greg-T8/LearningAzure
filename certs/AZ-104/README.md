@@ -18,6 +18,7 @@
 | 2        | Hands-on Labs    | [Hands-on Labs](./hands-on-labs/README.md)                      | Completed | 2/2/26  | 3/4/26          | 30 |
 | 3        | Video            | [John Savill's Training](./video-courses/savill/README.md) | Completed | 1/29/26 | 2/1/26          | 4      |
 | 4        | Microsoft Learn | [Microsoft Learning Paths](./learning-paths/README.md)          | Completed | 1/14/26 | 1/25/26   | 11   |
+| 5        | Exam             | [Exam Experience](./Exam/exam.md)                               | Completed |         | 3/30/26   | 1    |
 
 **Hours Committed:** 36.7h
 
@@ -115,7 +116,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 |  | Manage virtual machine disks | 2 | 0 |
 |  | Deploy VMs to availability zones and availability sets | 4 | 0 |
 |  | Deploy and configure an Azure Virtual Machine Scale Sets | 2 | 1 |
-| Provision and manage containers in the Azure portal (4 tasks) | Create and manage an Azure container registry | 1 | 0 |
+| Provision and manage containes in the Azure portal (4 tasks) | Create and manage an Azure container registry | 0 | 0 |
 |  | Provision a container by using Azure Container Instances | 1 | 0 |
 |  | Provision a container by using Azure Container Apps | 1 | 0 |
 |  | Manage sizing and scaling for containers, including Azure Container Instances and Azure Container Apps | 1 | 1 |

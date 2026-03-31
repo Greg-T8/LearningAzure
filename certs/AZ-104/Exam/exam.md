@@ -20,29 +20,31 @@
 
 ### Overall Difficulty
 
-The exam was tough! I brought a lot of confidence into the exam but quickly realized that I didn't know the material quite as deeply as I thought was necessary.  
+The exam was tough! I brought a lot of confidence into the exam but quickly realized I didn't know the material quite as deeply as I should have.  
 
-I used all of the two-hour time limit and felt rushed at the end. I feel that this exam should've come with a 3-hour time limit, especially considering the amount of reading and analysis required for many of the questions.
+I ended up using the full two-hour time limit and felt rushed at the end. I feel that this exam should've come with a 3-hour time limit, especially considering the amount of reading and analysis required for many of the questions.
 
-The exam started off with a case study of an environment comprising Windows and Linux VMs, App Services, and Azure Storage. The 5 questions from the case study were all fairly straightforward, but I found myself second-guessing most of the answers.
+The exam started off with a case study of an environment comprising Windows and Linux VMs, App Services, and Azure Storage. The 5 questions from the case study were all fairly straightforward, but I was not able to confidently answer any of the five case study questions. For example, which type of certificate is supported for an Azure web app? PEM or PKCS12? 2048-bit or 4096-bit keys? Is VM encryption supported for Azure Ultra Disks?
 
-After spending around 10-15 minutes on the case study, I was then presented with around 40 questions, about half of which presented three tables of information that I had to read through and analyze before answering the question. These questions caused me to slow down significantly and end up chewing a lot of precious time.
+After spending around 10-15 minutes on the case study, I was then presented with around 40 questions, many of which presented three tables of information, forcing me to read through and analyze before answering the question. These questions caused me to slow down significantly and end up chewing a lot of precious time. What made it more difficult is the program limits the amount of text you can see at one time, so I had to scroll up and down a lot to read through the information.
 
-There were many easy questions that I was able to answer with confidence. What I found most challenging though, is that the harder questions used ambiguous language, e.g. referring to a blob as a container.
+There were many easy questions that I was able to answer with confidence. In fact, I hit a roll of 5-6 questions and thought to myself that this exam will be a breeze if the questions continue at this pace. But, almost as if the test was reading my mind, I faced an onslaught of what seemed to be progressively harder and longer questions. Some questions used ambiguous language. For example, one question referred to "containers" when it was really describing "blobs". Another question, I should've picked up from experience, e.g. what storage services does the azcopy command support?
 
-Around question 30, my palms started to get a little sweaty as I looked at the clock thinking I only have 30 minutes left to answer 20 questions. At this time, I began having thoughts in my mind that I may not be passing this exam. But I told myself to maintain concentration and keep pushing.  
+Around question 30, my palms started to get a little sweaty as I looked at the clock thinking I only have 30 minutes left to answer 20 questions. At this time, thoughts came to my mind that I may be able to finish the exam, let alone pass it. But I told myself to maintain concentration and keep pushing forward.
 
-Around the 15 minute mark, I hit question number 45 and began to feel more confident on finishing the exam. The last 5 questions were scenario-based questions which I still found challenging.
+Around the 15 minute mark, I hit question number 45 and began to feel more confident on my ability to finish the exam. The last 5 questions were scenario-based questions which I found just as challenging as the first five case study questions.
 
-I ended up with around 7-10 minutes to review. On review, I went back and changed a number of answers. However, I was not to review all questions I marked for review.
+I ended up finishing the questions with around 7-10 minutes left for review. I had marked over half of the questions for review! On review, I went back and changed answers to 4-5 questions, as I gained more insight after re-reading the question. However, I was not able to review all questions I marked for review.
 
-At the end, I watched the timer count down to zero and held my breath. When the results came up, I was relieved to see that I passed (barely).
+At the end, I watched the timer count down to zero and held my breath. When the results came up, I was relieved to see that I passed--barely.
 
 ### What I Would Do Differently
 
-I spent a lot of time developing hands-on labs, which I found to be very rewarding, but even hands-on labs don't fully prepare you for the level of detail required for the exam.
+In preparing for the exam, I spent over a month developing hands-on labs developing a process to generate hands-on labs from practice test questions. While I found this approach to be very rewarding, there's no small amount of hands-on labs that can fully cover all the minutiae tested in the exam.
 
-Going forward, I will spend more time reading throught the Microsoft documentation referenced from the Microsoft Learning Paths.
+In retrospect, if I had to start studying all over again for the AZ-104, I would spend more time reviewing the official Microsoft documentation in the context of each of the tasks presented from the exam study guide. The exam has over 80 tasks and it brings forth expert-level questions on many of these tasks.
+
+I recently discovered the Google's [NotebookLM](https://notebooklm.google.com/) and will be using it to collect and organize information from the Microsoft documentation for each of the tasks for my next exam preparation.
 
 ### Study Hours Breakdown
 
