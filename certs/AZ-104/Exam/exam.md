@@ -24,7 +24,7 @@ The exam was tough! I brought a lot of confidence into the exam but quickly real
 
 I ended up using the full two-hour time limit and felt rushed at the end. I feel that this exam should've come with a 3-hour time limit, especially considering the amount of reading and analysis required for many of the questions.
 
-The exam started off with a case study of an environment comprising Windows and Linux VMs, App Services, and Azure Storage. The 5 questions from the case study were all fairly straightforward, but I was not able to confidently answer any of the five case study questions. For example, which type of certificate is supported for an Azure web app? PEM or PKCS12? 2048-bit or 4096-bit keys? Is VM encryption supported for Azure Ultra Disks?
+The exam started off with a case study of an environment comprising Windows and Linux VMs, App Services, and Azure Storage. The 5 questions from the case study were all fairly straightforward, but I was not able to confidently answer any of them. For example, which type of certificate is supported for an Azure web app? PEM or PKCS12? 2048-bit or 4096-bit keys? Is VM encryption supported for Azure Ultra Disks?
 
 After spending around 10-15 minutes on the case study, I was then presented with around 40 questions, many of which presented three tables of information, forcing me to read through and analyze before answering the question. These questions caused me to slow down significantly and end up chewing a lot of precious time. What made it more difficult is the program limits the amount of text you can see at one time, so I had to scroll up and down a lot to read through the information.
 
