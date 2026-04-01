@@ -23,7 +23,36 @@ param(
     [ValidateSet('Start', 'Stop', 'End')]
     [string]$Action = 'Start',
 
+    [string]$Exam,
+
+    [ValidateSet('PracticeQuestion', 'MSLearn', 'Lab', 'WorkflowDevelopment')]
     [string]$Mode,
+
+    [ArgumentCompleter({
+        param($commandName, $parameterName, $wordToComplete, $commandAst, $fakeBoundParameters)
+
+        $examValue = $fakeBoundParameters['Exam']
+        if (-not $examValue -or $examValue -eq 'WorkflowDevelopment') { return }
+
+        # Resolve the script directory from the command path
+        $resolved = Resolve-Path -Path $commandName -ErrorAction SilentlyContinue
+        if (-not $resolved) { return }
+
+        $scriptDir  = Split-Path -Parent $resolved.Path
+        $repoRoot   = (Resolve-Path -Path "$scriptDir\..\.."  ).Path
+        $skillsFile = Join-Path -Path $repoRoot -ChildPath "certs\$examValue\Skills.psd1"
+        if (-not (Test-Path -Path $skillsFile)) { return }
+
+        # Return matching skill names from the exam's skills file
+        (Import-PowerShellDataFile -Path $skillsFile).Domains |
+            ForEach-Object { $_.Skills } |
+            ForEach-Object { $_.Name } |
+            Where-Object { $_ -like "$wordToComplete*" } |
+            ForEach-Object {
+                [System.Management.Automation.CompletionResult]::new("'$_'", $_, 'ParameterValue', $_)
+            }
+    })]
+    [string]$Skill,
 
     [string]$Notes
 )
@@ -48,15 +77,26 @@ $Main = {
     # Route to the appropriate action handler
     switch ($Action) {
         'Start' {
-            if (-not $Mode) {
-                throw "Mode is required when Action is 'Start'."
+            if (-not $Exam) {
+                throw "Exam is required when Action is 'Start'."
             }
 
-            # Validate Mode against active exams and WorkflowDevelopment
-            Confirm-ValidMode -Mode $Mode
+            # Validate Exam against active exams and WorkflowDevelopment
+            Confirm-ValidExam -Exam $Exam
 
-            $folder = Resolve-ExamFolder -Exam $Mode
-            $logFileName = Resolve-ExamLogFileName -Exam $Mode
+            # Require Mode and Skill for certification exams (skip for WorkflowDevelopment)
+            if ($Exam -ne 'WorkflowDevelopment') {
+                if (-not $Mode) {
+                    throw "Mode is required when Exam is not 'WorkflowDevelopment'."
+                }
+                if (-not $Skill) {
+                    throw "Skill is required when Exam is not 'WorkflowDevelopment'."
+                }
+                Confirm-ValidSkill -Exam $Exam -Skill $Skill
+            }
+
+            $folder = Resolve-ExamFolder -Exam $Exam
+            $logFileName = Resolve-ExamLogFileName -Exam $Exam
             $script:StudyLogFile = Join-Path -Path $RepoRoot -ChildPath "$folder\$logFileName"
 
             # End any currently active session before starting a new one
@@ -73,9 +113,9 @@ $Main = {
 
             Confirm-StudyLogExists
             $session = Get-NextSessionNumber
-            Add-SessionEntry -SessionNumber $session -Notes $Notes
-            Push-StudyLogChange -SessionNumber $session -Type 'start' -Exam $Mode
-            Show-Confirmation -Message "Study session #$session started for $Mode"
+            Add-SessionEntry -SessionNumber $session -Mode $Mode -Skill $Skill -Notes $Notes
+            Push-StudyLogChange -SessionNumber $session -Type 'start' -Exam $Exam
+            Show-Confirmation -Message "Study session #$session started for $Exam"
         }
         'Stop' {
             $sourceExam = Find-ActiveExam
@@ -255,19 +295,55 @@ $Helpers = {
         return $allExams
     }
 
-    function Confirm-ValidMode {
-        # Validate that the requested mode is an active exam or WorkflowDevelopment
-        param([Parameter(Mandatory)] [string]$Mode)
+    function Confirm-ValidExam {
+        # Validate that the requested exam is an active exam or WorkflowDevelopment
+        param([Parameter(Mandatory)] [string]$Exam)
 
-        if ($Mode -eq 'WorkflowDevelopment') {
+        if ($Exam -eq 'WorkflowDevelopment') {
             return
         }
 
         $activeExams = & $GetActiveExamScript
 
-        if ($Mode -notin $activeExams) {
-            $validModes = @($activeExams) + @('WorkflowDevelopment')
-            throw "Mode '$Mode' is not active. Valid modes: $($validModes -join ', ')"
+        if ($Exam -notin $activeExams) {
+            $validExams = @($activeExams) + @('WorkflowDevelopment')
+            throw "Exam '$Exam' is not active. Valid exams: $($validExams -join ', ')"
+        }
+    }
+
+    function Get-ExamSkill {
+        # Load skill names from the exam's Skills.psd1 file
+        param([Parameter(Mandatory)] [string]$Exam)
+
+        $folder     = Resolve-ExamFolder -Exam $Exam
+        $skillsFile = Join-Path -Path $RepoRoot -ChildPath "$folder\Skills.psd1"
+
+        if (-not (Test-Path -Path $skillsFile)) {
+            return @()
+        }
+
+        $data = Import-PowerShellDataFile -Path $skillsFile
+
+        $data.Domains |
+            ForEach-Object { $_.Skills } |
+            ForEach-Object { $_.Name }
+    }
+
+    function Confirm-ValidSkill {
+        # Validate that the specified skill exists in the exam's skills file
+        param(
+            [Parameter(Mandatory)] [string]$Exam,
+            [Parameter(Mandatory)] [string]$Skill
+        )
+
+        $validSkills = @(Get-ExamSkill -Exam $Exam)
+
+        if ($validSkills.Count -eq 0) {
+            throw "No Skills.psd1 found for exam '$Exam'."
+        }
+
+        if ($Skill -notin $validSkills) {
+            throw "Skill '$Skill' is not valid for $Exam. Valid skills:`n  $($validSkills -join "`n  ")"
         }
     }
 
@@ -277,16 +353,32 @@ $Helpers = {
             [Parameter(Mandatory)]
             [int]$SessionNumber,
 
+            [string]$Mode,
+
+            [string]$Skill,
+
             [string]$Notes
         )
 
-        $now   = Get-Date
-        $date  = $now.ToString('M/d/yy')
-        $start = $now.ToString('h:mm tt')
+        $now       = Get-Date
+        $date      = $now.ToString('M/d/yy')
+        $start     = $now.ToString('h:mm tt')
+        $safeMode  = ConvertTo-LogNote -Notes $Mode
+        $safeSkill = ConvertTo-LogNote -Notes $Skill
         $safeNotes = ConvertTo-LogNote -Notes $Notes
+        $lines     = Get-Content -Path $StudyLogFile
 
-        $row   = "| $SessionNumber | $date | $start |  |  | $safeNotes |"
-        $lines = Get-Content -Path $StudyLogFile
+        # Detect whether the log uses the extended format (Mode + Skill columns)
+        $headerLine = $lines | Where-Object { $_ -match '^\|\s*#\s*\|' } | Select-Object -First 1
+        $hasExtendedColumns = $headerLine -match '\|\s*Mode\s*\|'
+
+        # Build the row to match the log's column format
+        if ($hasExtendedColumns) {
+            $row = "| $SessionNumber | $date | $start |  |  | $safeMode | $safeSkill | $safeNotes |"
+        }
+        else {
+            $row = "| $SessionNumber | $date | $start |  |  | $safeNotes |"
+        }
 
         # Find the separator line and insert the new row right after it
         $insertIndex = $null
@@ -396,29 +488,32 @@ $Helpers = {
                 $columns[4]  = " $endStr "
                 $columns[5]  = " $durationStr "
 
+                # Determine Notes column index (supports both 6-column and 8-column formats)
+                $notesIdx = $columns.Count - 2
+
                 # Tag auto-closed sessions so the log shows they were estimated
                 if ($UseLastCommit) {
                     $autoNote = 'auto-closed at last commit'
-                    $existingNotes = $columns[6].Trim()
+                    $existingNotes = $columns[$notesIdx].Trim()
 
                     if ([string]::IsNullOrWhiteSpace($existingNotes)) {
-                        $columns[6] = " $autoNote "
+                        $columns[$notesIdx] = " $autoNote "
                     }
                     else {
-                        $columns[6] = " $existingNotes; $autoNote "
+                        $columns[$notesIdx] = " $existingNotes; $autoNote "
                     }
                 }
 
                 # Append a user-provided note to the Notes column when supplied
                 $safeNotes = ConvertTo-LogNote -Notes $Notes
                 if (-not [string]::IsNullOrWhiteSpace($safeNotes)) {
-                    $existingNotes = $columns[6].Trim()
+                    $existingNotes = $columns[$notesIdx].Trim()
 
                     if ([string]::IsNullOrWhiteSpace($existingNotes)) {
-                        $columns[6] = " $safeNotes "
+                        $columns[$notesIdx] = " $safeNotes "
                     }
                     else {
-                        $columns[6] = " $existingNotes; $safeNotes "
+                        $columns[$notesIdx] = " $existingNotes; $safeNotes "
                     }
                 }
 
@@ -452,7 +547,7 @@ $Helpers = {
             [ValidateSet('start', 'end')]
             [string]$Type,
 
-            [string]$Exam = $Mode
+            [string]$Exam = $script:Exam
         )
 
         $folder          = Resolve-ExamFolder -Exam $Exam

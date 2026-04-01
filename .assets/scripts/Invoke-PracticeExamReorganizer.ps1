@@ -249,12 +249,11 @@ $Helpers = {
                 }
 
                 $currentBlock = @{
-                    Title        = $Matches[1]
-                    Domain       = ''
-                    Skill        = ''
-                    Task         = [System.Collections.Generic.List[string]]::new()
-                    AnswerResult = ''
-                    Body         = [System.Collections.Generic.List[string]]::new()
+                    Title  = $Matches[1]
+                    Domain = ''
+                    Skill  = ''
+                    Task   = [System.Collections.Generic.List[string]]::new()
+                    Body   = [System.Collections.Generic.List[string]]::new()
                 }
 
                 continue
@@ -280,12 +279,6 @@ $Helpers = {
 
                 # Standalone **Task:** header (multi-task — bullets follow)
                 if ($line -match '^\*\*Task:\*\*\s*$') {
-                    continue
-                }
-
-                # Answer result metadata: **Answer Result:** <wrong|unsure|correct>
-                if ($line -match '^\*\*Answer Result:\*\*\s+(.+)$') {
-                    $currentBlock.AnswerResult = $Matches[1].Trim().ToLower()
                     continue
                 }
 
@@ -385,13 +378,6 @@ $Helpers = {
             $sKey = "$dKey|$($block.Skill.ToLower())"
             $sIdx = if ($skillOrder.ContainsKey($sKey)) { $skillOrder[$sKey] } else { 999 }
 
-            # Answer result priority: wrong → unsure → correct (missing defaults to unsure)
-            $rIdx = switch ($block.AnswerResult) {
-                'wrong'   { 0 }
-                'correct' { 2 }
-                default   { 1 }
-            }
-
             # Normalize block metadata to canonical names from the exam README
             if ($canonicalDomain.ContainsKey($dKey)) {
                 $block.Domain = $canonicalDomain[$dKey]
@@ -408,14 +394,13 @@ $Helpers = {
             [PSCustomObject]@{
                 DomainIndex = $dIdx
                 SkillIndex  = $sIdx
-                ResultIndex = $rIdx
                 Block       = $block
             }
         }
 
-        # Sort by domain index, then skill index, then answer result (wrong first, correct last)
+        # Sort by domain index, then skill index (preserve relative order within skill)
         $sorted = $decorated |
-            Sort-Object -Property DomainIndex, SkillIndex, ResultIndex
+            Sort-Object -Property DomainIndex, SkillIndex
 
         $result = [System.Collections.Generic.List[hashtable]]::new()
 
@@ -503,10 +488,6 @@ $Helpers = {
                             [void]$sb.AppendLine("- $task")
                         }
                     }
-
-                    # Answer result metadata — default to unsure if missing
-                    $resultValue = if ($block.AnswerResult) { $block.AnswerResult } else { 'unsure' }
-                    [void]$sb.AppendLine("**Answer Result:** $resultValue")
 
                     [void]$sb.AppendLine()
 
@@ -650,12 +631,11 @@ $Helpers = {
                     }
 
                     $currentBlock = @{
-                        Title        = $Matches[1]
-                        Domain       = ''
-                        Skill        = ''
-                        Task         = [System.Collections.Generic.List[string]]::new()
-                        AnswerResult = ''
-                        Body         = [System.Collections.Generic.List[string]]::new()
+                        Title  = $Matches[1]
+                        Domain = ''
+                        Skill  = ''
+                        Task   = [System.Collections.Generic.List[string]]::new()
+                        Body   = [System.Collections.Generic.List[string]]::new()
                     }
                     continue
                 }
@@ -680,12 +660,6 @@ $Helpers = {
 
                     # Standalone **Task:** header (multi-task — bullets follow)
                     if ($line -match '^\*\*Task:\*\*\s*$') {
-                        continue
-                    }
-
-                    # Answer result metadata: **Answer Result:** <wrong|unsure|correct>
-                    if ($line -match '^\*\*Answer Result:\*\*\s+(.+)$') {
-                        $currentBlock.AnswerResult = $Matches[1].Trim().ToLower()
                         continue
                     }
 
@@ -795,10 +769,6 @@ $Helpers = {
                         [void]$sb.AppendLine("- $task")
                     }
                 }
-
-                # Answer result metadata — default to unsure if missing
-                $resultValue = if ($block.AnswerResult) { $block.AnswerResult } else { 'unsure' }
-                [void]$sb.AppendLine("**Answer Result:** $resultValue")
 
                 [void]$sb.AppendLine()
 
@@ -1074,13 +1044,6 @@ $Helpers = {
         else {
             Write-Host "  Count verified:     OK" -ForegroundColor Green
         }
-
-        # Count answer result distribution
-        $wrongCount = ($SortedBlocks | Where-Object { $_.AnswerResult -eq 'wrong' }).Count
-        $unsureCount = ($SortedBlocks | Where-Object { $_.AnswerResult -eq 'unsure' -or -not $_.AnswerResult }).Count
-        $correctCount = ($SortedBlocks | Where-Object { $_.AnswerResult -eq 'correct' }).Count
-
-        Write-Host "  Answer results:     $wrongCount wrong, $unsureCount unsure, $correctCount correct"
 
         # Report metadata gaps
         if ($missingDomain -gt 0 -or $missingSkill -gt 0 -or $missingTask -gt 0) {

@@ -130,13 +130,24 @@ $Helpers = {
             return
         }
 
+        # Detect whether the log uses the extended format (Mode + Skill columns)
+        $headerLine = $lines | Where-Object { $_ -match '^\|\s*#\s*\|' } | Select-Object -First 1
+        $hasExtendedColumns = $headerLine -match '\|\s*Mode\s*\|'
+
         # Build zero-hour rows (oldest to newest, then reverse for table insertion)
         $newRows = [System.Collections.Generic.List[string]]::new()
         $sessionNum = $maxSession + 1
 
         foreach ($gapDate in $gapDates) {
             $dateStr = $gapDate.ToString('M/d/yy')
-            $newRows.Add("| $sessionNum | $dateStr |  |  | 0h 0m |  |")
+
+            if ($hasExtendedColumns) {
+                $newRows.Add("| $sessionNum | $dateStr |  |  | 0h 0m |  |  |  |")
+            }
+            else {
+                $newRows.Add("| $sessionNum | $dateStr |  |  | 0h 0m |  |")
+            }
+
             $sessionNum++
         }
 

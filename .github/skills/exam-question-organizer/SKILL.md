@@ -17,9 +17,9 @@ Reorganize a practice exam `README.md` to group questions under their correct ex
 
 ## Prerequisites
 
-Every question block **must** already have `**Domain:**`, `**Skill:**`, and `**Task:**` metadata lines immediately after its question heading (`####` in single-file mode, `###` in per-domain mode). An optional `**Answer Result:**` line (values: `wrong`, `unsure`, `correct`) may appear after the Task metadata. These metadata lines are the single source of truth for classification — the script does not infer classification from question content.
+Every question block **must** already have `**Domain:**`, `**Skill:**`, and `**Task:**` metadata lines immediately after its question heading (`####` in single-file mode, `###` in per-domain mode). These metadata lines are the single source of truth for classification — the script does not infer classification from question content.
 
-If questions are missing metadata, add the metadata manually before running the organizer. Use the exam README's coverage table to find the correct domain, skill, and task values. Missing `**Answer Result:**` defaults to `unsure`.
+If questions are missing metadata, add the metadata manually before running the organizer. Use the exam README's coverage table to find the correct domain, skill, and task values.
 
 ### File Modes
 
@@ -119,7 +119,6 @@ Immediately after each question heading (`####` single-file, `###` per-domain), 
 **Domain:** <domain name>
 **Skill:** <skill name>
 **Task:** <task description>
-**Answer Result:** <wrong|unsure|correct>
 ```
 
 **Multiple tasks:**
@@ -131,17 +130,9 @@ Immediately after each question heading (`####` single-file, `###` per-domain), 
 
 - <task description 1>
 - <task description 2>
-
-**Answer Result:** <wrong|unsure|correct>
 ```
 
 Task descriptions **must match the exact wording** from the exam README's coverage table.
-
-`**Answer Result:**` accepts three values:
-
-- `wrong` — answered incorrectly
-- `unsure` — uncertain or not yet answered (default when omitted)
-- `correct` — answered correctly
 
 ### Table of Contents
 
@@ -157,9 +148,8 @@ After the page title, a nested bullet-point TOC with anchor links:
 
 1. **Domains** appear in exam order (Domain 1 first).
 2. **Skills** appear in the order listed in the exam README.
-3. **Answer result** within each skill group: `wrong` first, then `unsure`, then `correct`.
-4. **Questions** within the same result group preserve their relative order from the source file.
-5. **Omit** skills that have no questions assigned to them.
+3. **Questions** within a skill preserve their relative order from the source file.
+4. **Omit** skills that have no questions assigned to them.
 
 ## Workflow
 
