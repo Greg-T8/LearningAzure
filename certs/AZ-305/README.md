@@ -94,7 +94,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 | :--- | :--- | -: | -: |
 | Design solutions for logging and monitoring (3 tasks) | Recommend a logging solution | 0 | 0 |
 |  | Recommend a solution for routing logs | 0 | 0 |
-|  | Recommend a monitoring solution | 0 | 0 |
+|  | Recommend a monitoring solution | 1 | 0 |
 | Design authentication and authorization solutions (5 tasks) | Recommend an authentication solution | 0 | 0 |
 |  | Recommend an identity management solution | 0 | 0 |
 |  | Recommend a solution for authorizing access to Azure resources | 0 | 0 |

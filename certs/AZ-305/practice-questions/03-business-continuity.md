@@ -1,9 +1,9 @@
-# Practice Questions — Design Business Continuity Solutions
+# Practice Questions — Design business continuity solutions
 
 Accounts for questions missed or unsure about in the practice exams.
 
 ---
 
-## Design Solutions for Backup and Disaster Recovery
+## Design solutions for backup and disaster recovery
 
-## Design for High Availability
+## Design for high availability

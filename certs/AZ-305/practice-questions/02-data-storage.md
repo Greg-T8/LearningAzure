@@ -1,11 +1,11 @@
-# Practice Questions — Design Data Storage Solutions
+# Practice Questions — Design data storage solutions
 
 Accounts for questions missed or unsure about in the practice exams.
 
 ---
 
-## Design Data Storage Solutions for Relational Data
+## Design data storage solutions for relational data
 
-## Design Data Storage Solutions for Semi-Structured and Unstructured Data
+## Design data storage solutions for semi-structured and unstructured data
 
-## Design Data Integration
+## Design data integration

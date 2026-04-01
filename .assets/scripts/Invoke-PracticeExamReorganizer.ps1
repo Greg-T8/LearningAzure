@@ -95,22 +95,6 @@ $Main = {
 
 #region HELPER FUNCTIONS
 $Helpers = {
-
-    function New-DeterministicId {
-        # Compute SHA-256 hash of the normalized title and return the first 7 hex characters
-        param(
-            [Parameter(Mandatory)]
-            [string]$Title
-        )
-
-        $normalized = $Title.Trim().ToLowerInvariant()
-        $bytes = [System.Text.Encoding]::UTF8.GetBytes($normalized)
-        $hash = [System.Security.Cryptography.SHA256]::HashData($bytes)
-        $hex = [System.BitConverter]::ToString($hash).Replace('-', '').ToLowerInvariant()
-
-        return $hex.Substring(0, 7)
-    }
-
     function Get-TargetExam {
         # Return exams from parameter or auto-discover active exams from README
         if ($ExamName) {
@@ -199,7 +183,7 @@ $Helpers = {
         }
 
         Write-Verbose "Loaded $($domains.Count) domains from $skillsFile"
-        return $domains
+        return , $domains
     }
 
     function Get-QuestionBlock {
@@ -261,6 +245,16 @@ $Helpers = {
                     continue
                 }
 
+                if ($line -match '^\*\*ID:\*\*\s+(.+)$') {
+                    $currentBlock.ID = $Matches[1].Trim()
+                    continue
+                }
+
+                # Preserve parser compatibility with extractor metadata; answer result is not rewritten here
+                if ($line -match '^\*\*Answer Result:\*\*\s+(.+)$') {
+                    continue
+                }
+
                 # Single-line task: **Task:** <task>
                 if ($line -match '^\*\*Task:\*\*\s+(.+)$') {
                     $currentBlock.Task.Add($Matches[1].Trim())
@@ -300,7 +294,7 @@ $Helpers = {
         }
 
         Write-Verbose "Parsed $($blocks.Count) question blocks from $PracticeFile"
-        return $blocks
+        return , $blocks
     }
 
     function Trim-BlockBody {
@@ -406,7 +400,7 @@ $Helpers = {
             $result.Add($item.Block)
         }
 
-        return $result
+        return , $result
     }
 
     function Build-PracticeFile {
@@ -487,14 +481,10 @@ $Helpers = {
                         }
                     }
 
-                    # Answer result metadata — default to unsure if missing
-                    $resultValue = if ($block.AnswerResult) { $block.AnswerResult } else { 'unsure' }
-                    [void]$sb.AppendLine("**Answer Result:** $resultValue")
-
-                    # Unique question identifier — generate deterministically from title if missing
-                    $idValue = if ($block.ID) { $block.ID } else { New-DeterministicId -Title $block.Title }
-                    $block.ID = $idValue
-                    [void]$sb.AppendLine("**ID:** $idValue")
+                    # Preserve existing ID metadata only; IDs are assigned by the extractor workflow
+                    if ($block.ID) {
+                        [void]$sb.AppendLine("**ID:** $($block.ID)")
+                    }
 
                     [void]$sb.AppendLine()
 
@@ -547,7 +537,7 @@ $Helpers = {
             $currentSkill.Blocks.Add($block)
         }
 
-        return $result
+        return , $result
     }
 
     function ConvertTo-Anchor {
@@ -659,6 +649,16 @@ $Helpers = {
                         continue
                     }
 
+                    if ($line -match '^\*\*ID:\*\*\s+(.+)$') {
+                        $currentBlock.ID = $Matches[1].Trim()
+                        continue
+                    }
+
+                    # Preserve parser compatibility with extractor metadata; answer result is not rewritten here
+                    if ($line -match '^\*\*Answer Result:\*\*\s+(.+)$') {
+                        continue
+                    }
+
                     # Single-line task
                     if ($line -match '^\*\*Task:\*\*\s+(.+)$') {
                         $currentBlock.Task.Add($Matches[1].Trim())
@@ -699,7 +699,7 @@ $Helpers = {
         }
 
         Write-Verbose "Parsed $($blocks.Count) question blocks from $($domainFiles.Count) domain files"
-        return $blocks
+        return , $blocks
     }
 
     function Build-DomainFile {
@@ -777,14 +777,10 @@ $Helpers = {
                     }
                 }
 
-                # Answer result metadata — default to unsure if missing
-                $resultValue = if ($block.AnswerResult) { $block.AnswerResult } else { 'unsure' }
-                [void]$sb.AppendLine("**Answer Result:** $resultValue")
-
-                # Unique question identifier — generate deterministically from title if missing
-                $idValue = if ($block.ID) { $block.ID } else { New-DeterministicId -Title $block.Title }
-                $block.ID = $idValue
-                [void]$sb.AppendLine("**ID:** $idValue")
+                # Preserve existing ID metadata only; IDs are assigned by the extractor workflow
+                if ($block.ID) {
+                    [void]$sb.AppendLine("**ID:** $($block.ID)")
+                }
 
                 [void]$sb.AppendLine()
 
@@ -823,7 +819,7 @@ $Helpers = {
             $currentSkill.Blocks.Add($block)
         }
 
-        return $result
+        return , $result
     }
 
     function Get-DomainFileName {

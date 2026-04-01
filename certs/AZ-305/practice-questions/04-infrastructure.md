@@ -1,13 +1,13 @@
-# Practice Questions — Design Infrastructure Solutions
+# Practice Questions — Design infrastructure solutions
 
 Accounts for questions missed or unsure about in the practice exams.
 
 ---
 
-## Design Compute Solutions
+## Design compute solutions
 
-## Design an Application Architecture
+## Design an application architecture
 
-## Design Migrations
+## Design migrations
 
-## Design Network Solutions
+## Design network solutions
