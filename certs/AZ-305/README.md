@@ -59,7 +59,7 @@
 
 **Legend:** Not Started · In Progress · Completed
 
-<!-- HOURS_COMMITTED -->**Hours Committed:** 2.3h<!-- /HOURS_COMMITTED -->
+<!-- HOURS_COMMITTED -->**Hours Committed:** 4.9h<!-- /HOURS_COMMITTED -->
 
 ---
 
