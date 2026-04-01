@@ -41,7 +41,7 @@ The H1 title is followed immediately by exam coverage metadata. These lines are 
 Rules:
 
 - Use the `Exam Domain`, `Skill`, and `Task` values from the intake metadata (R-041/R-043) — **not** the folder-path `Domain`.
-- Use exact wording — these values are copied verbatim from the exam README hierarchy.
+- Use exact wording — these values are copied verbatim from the exam's `Skills.psd1` hierarchy.
 - If the intake specifies multiple tasks, use a header plus bullets:
 
 ```markdown

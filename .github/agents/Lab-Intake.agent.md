@@ -18,7 +18,7 @@ handoffs:
 You are the **Lab-Intake Agent**. You operate in one of two intake modes:
 
 1. **Question Mode** — You receive exam question screenshots or text, extract the question with full fidelity, derive structured metadata, and persist everything to a temp file.
-2. **Task Mode** — You receive an exam task name (from an exam README's coverage hierarchy), look up the task to derive metadata automatically, generate a task overview and learning objectives, and persist everything to a temp file.
+2. **Task Mode** — You receive an exam task name (from the exam's `Skills.psd1` hierarchy), look up the task to derive metadata automatically, generate a task overview and learning objectives, and persist everything to a temp file.
 
 In both modes, once intake is complete and the user confirms the output, you hand off to the **Lab-Designer** agent, passing the temp file path so it can proceed with Phase 2 design.
 
@@ -667,17 +667,17 @@ Examples of what this means in practice:
 
 #### Exam Domain, Skill, and Task
 
-Identify the question's exam domain, skill, and task(s) from the exam README's coverage hierarchy. This mirrors the metadata produced by the `exam-question-extractor` skill and is used by `Update-CoverageTable.ps1` to populate the Exam Coverage table.
+Identify the question's exam domain, skill, and task(s) from the exam's `Skills.psd1` hierarchy. This mirrors the metadata produced by the `exam-question-extractor` skill and is used by `Update-CoverageTable.ps1` to populate the Exam Coverage table.
 
-**Source of truth:** Read the exam's README (e.g., `certs/AZ-104/README.md`) and use its domain → skill → task hierarchy.
+**Source of truth:** Read the exam's `Skills.psd1` (e.g., `certs/AZ-104/Skills.psd1`) and use its `Domains → Skills → Tasks` hierarchy. The file is a PowerShell data file with `@{ Domains = @( @{ Name; Skills = @( @{ Name; Tasks = @(…) } ) } ) }` structure.
 
-* **Exam Domain** — The `### Domain N: …` headings (omit the weight percentage). Example: `Implement and Manage Virtual Networking`, not `Implement and Manage Virtual Networking (15–20%)`.
-* **Skill** — The `####` sub-headings under each domain.
-* **Task** — The table rows under each skill.
+* **Exam Domain** — The `.Domains[].Name` values (omit weight percentages). Example: `Implement and Manage Virtual Networking`, not `Implement and Manage Virtual Networking (15–20%)`.
+* **Skill** — The `.Skills[].Name` values under each domain.
+* **Task** — The `.Tasks[]` strings under each skill.
 
 Rules:
 
-* Use **exact wording** from the README for exam domain and skill names.
+* Use **exact wording** from the `Skills.psd1` for exam domain and skill names.
 * For tasks, use the most specific task wording. Apply best-effort reasoning when the question spans topics — pick the closest match(es).
 * If a question maps to a **single task**, the value is a single string.
 * If a question maps to **multiple tasks** (even across different skills), list them as separate bullet items.
@@ -744,7 +744,7 @@ Return a structured block. **Field order and capitalization are mandatory** — 
 2. **Capitalization** — All field labels and values use Title Case (e.g., `Compute`, not `compute`; `Azure Key Vault`, not `azure key vault`). The only exception is `Topic`, which is always kebab-case lowercase.
 3. **Domain values** — Must be an **exact string** from the R-041 closed-set domain tables. Only these values are valid for each exam. Values like `Security`, `Encryption`, `Key Management`, `Document Intelligence`, `Speech`, or `Bot Service` are **never valid** domains — they are service names, not domains. If the question is about one of these services, map it to the correct parent domain (e.g., Document Intelligence → `AI Services`).
 4. **Intake Mode** — Set to `Question` for screenshot/text-based intake (R-039) or `Task` for task-based intake (R-047). This field tells Lab-Designer which README template to use.
-5. **Exam Domain, Skill, and Task values** — Must use **exact wording** from the exam README's `### Domain N:` headings (omit weight), `####` sub-headings, and task table rows respectively. These are distinct from the `Domain` field, which is the simplified folder-path domain.
+5. **Exam Domain, Skill, and Task values** — Must use **exact wording** from the exam's `Skills.psd1` — `.Domains[].Name` (omit weight), `.Skills[].Name`, and `.Tasks[]` strings respectively. These are distinct from the `Domain` field, which is the simplified folder-path domain.
 6. **Task format** — If a question maps to a single task, use a single inline value. If it maps to multiple tasks, use a bulleted list indented with two spaces:
 
    ```
@@ -777,10 +777,10 @@ This makes the input file the **cumulative artifact** for the pipeline. Downstre
 After extracting metadata per R-041 and **before** returning output, run this validation:
 
 1. **Domain check** — Confirm the `Domain` value is an **exact, verbatim string** from the **Domain column** of the R-041 closed-set table for the identified exam. Compare character-by-character. If the value does not appear verbatim in the Domain column, it is invalid — re-derive using the cross-cutting topic guidance and example-topics mapping in R-041. Common violators: `Document Intelligence`, `Speech`, `Bot Service`, `Translator` — these are **service names**, not domains.
-2. **Exam coverage metadata check** — Confirm the `Exam Domain`, `Skill`, and `Task` values use **exact wording** from the exam README's hierarchy:
-   - [ ] `Exam Domain` matches a `### Domain N: …` heading from the exam README (weight percentage omitted)
-   - [ ] `Skill` matches a `####` sub-heading under the identified domain
-   - [ ] `Task` matches one or more table rows under the identified skill
+2. **Exam coverage metadata check** — Confirm the `Exam Domain`, `Skill`, and `Task` values use **exact wording** from the exam's `Skills.psd1` hierarchy:
+   - [ ] `Exam Domain` matches a `.Domains[].Name` value from the exam's `Skills.psd1` (weight percentage omitted)
+   - [ ] `Skill` matches a `.Skills[].Name` value under the identified domain
+   - [ ] `Task` matches one or more `.Tasks[]` strings under the identified skill
    - [ ] All three values are populated
 3. **Field order check** — Confirm the nine metadata fields appear in the order specified by R-043.
 4. **Capitalization check** — Confirm all values use Title Case (except `Topic` which is kebab-case lowercase).
@@ -809,7 +809,7 @@ If any check fails, **fix the value before returning output**. Do not return out
 >
 > **Common mistake — invalid domains:** Agents sometimes produce domain names like "Security", "Encryption", "Key Management", "Storage Account", or "Load Balancer" — these are **not** valid domains for any exam. They are Azure service or technology names, not domains. Re-read the R-041 domain tables and choose the correct domain based on the primary resource.
 >
-> **Common mistake — exam coverage metadata wording:** `Exam Domain`, `Skill`, and `Task` must use the **exact wording** from the exam README. Do not paraphrase, abbreviate, or substitute synonyms. Read the exam README hierarchy and copy the strings verbatim.
+> **Common mistake — exam coverage metadata wording:** `Exam Domain`, `Skill`, and `Task` must use the **exact wording** from the exam's `Skills.psd1`. Do not paraphrase, abbreviate, or substitute synonyms. Read the `Skills.psd1` hierarchy and copy the strings verbatim.
 >
 > **Common mistake — markdownlint failures:** The most frequent markdownlint failures are trailing spaces, extra blank lines, malformed table separators, and heading-level skips. Normalize formatting before returning output.
 
@@ -823,9 +823,9 @@ Intake is complete when **all** of the following are true. The file-write criter
 - [ ] File-write verified: `readFile` confirms the `## Phase 1 — Metadata Output` heading exists in the input file (R-044 check 7)
 - [ ] All metadata fields are populated
 - [ ] Domain is an exact match from R-041 closed-set tables
-- [ ] Exam Domain uses exact wording from exam README `### Domain N:` heading (weight omitted)
-- [ ] Skill uses exact wording from exam README `####` sub-heading
-- [ ] Task uses exact wording from exam README skill table rows
+- [ ] Exam Domain uses exact wording from exam's `Skills.psd1` `.Domains[].Name` (weight omitted)
+- [ ] Skill uses exact wording from exam's `Skills.psd1` `.Skills[].Name`
+- [ ] Task uses exact wording from exam's `Skills.psd1` `.Tasks[]` strings
 - [ ] Field order matches R-043 (Exam, Domain, Exam Domain, Skill, Task, Topic, Key Services, Deployment Method, Intake Mode)
 - [ ] All values use correct capitalization (Title Case, except Topic)
 - [ ] Intake Mode is `Question` or `Task` and matches the actual intake path used
@@ -927,20 +927,20 @@ When the user provides a task name, search the exam README files to locate the t
 
 ### Task Search Procedure
 
-1. **Read exam READMEs** — Read the coverage tables from `certs/AZ-104/README.md`, `certs/AZ-305/README.md`, and `certs/AI-103/README.md`.
-2. **Match the task** — Search for the user-provided task name across all exam README task tables. Use case-insensitive substring matching. The task name must match a table row under a `####` skill heading.
+1. **Read exam Skills.psd1 files** — Read `certs/AZ-104/Skills.psd1`, `certs/AZ-305/Skills.psd1`, and `certs/AI-102/Skills.psd1`. Each file is a PowerShell data file with `@{ Domains = @( @{ Name; Skills = @( @{ Name; Tasks = @(…) } ) } ) }` structure.
+2. **Match the task** — Search for the user-provided task name across all `Skills.psd1` files. Use case-insensitive substring matching. The task name must match a `.Tasks[]` string under a skill.
 3. **Derive metadata from the match:**
-   - **Exam** — The exam code (`AZ-104`, `AZ-305`, or `AI-103`) from the README where the task was found.
-   - **Domain** — Map the exam domain heading to the simplified domain from R-041 closed-set tables.
-   - **Exam Domain** — The full `### Domain N: …` heading text (omit weight percentage).
-   - **Skill** — The `####` sub-heading under which the task appears.
-   - **Task** — The exact task wording from the README table row.
+   - **Exam** — The exam code (`AZ-104`, `AZ-305`, or `AI-102`) from the `Skills.psd1` where the task was found.
+   - **Domain** — Map the exam domain name to the simplified domain from R-041 closed-set tables.
+   - **Exam Domain** — The `.Domains[].Name` value (omit weight percentage).
+   - **Skill** — The `.Skills[].Name` value under which the task appears.
+   - **Task** — The exact task string from the `.Tasks[]` array.
 4. **Handle ambiguity:**
-   - If the task matches **exactly one** row in one exam: proceed with that match.
-   - If the task matches rows in **multiple exams**: call `VSCode/askQuestions` to ask which exam the user intends.
-   - If the task matches **no rows**: inform the user that the task was not found in any exam README and ask them to provide the exact task wording or specify the exam.
+   - If the task matches **exactly one** entry in one exam: proceed with that match.
+   - If the task matches entries in **multiple exams**: call `VSCode/askQuestions` to ask which exam the user intends.
+   - If the task matches **no entries**: inform the user that the task was not found in any exam's `Skills.psd1` and ask them to provide the exact task wording or specify the exam.
 
-> **CRITICAL — Exact wording:** Once the task is found, use the **exact wording** from the README for Exam Domain, Skill, and Task. Do not paraphrase or modify.
+> **CRITICAL — Exact wording:** Once the task is found, use the **exact wording** from the `Skills.psd1` for Exam Domain, Skill, and Task. Do not paraphrase or modify.
 
 ### KeyServices Derivation
 

@@ -74,7 +74,7 @@ Make a **single** edit that replaces the selected `<img>` line(s) with the fully
 
 1. From the attached screenshot image(s), extract all visible text.
 2. **Detect answer state:** Inspect the screenshot for signs that the question has already been submitted and graded — for example, a selected answer highlighted in green or red, a ✓ / ✗ icon, or an "Correct" / "Incorrect" banner. Mark the question as **answered** if any such indicator is present; otherwise mark it as **blank**.
-3. **Identify exam metadata:** Determine the practice-exam file's parent exam (e.g., AZ-104, AZ-305, AI-103). Read the corresponding exam README (e.g., `certs/AZ-104/README.md`) to locate the domain/skill/task hierarchy. Match the question to the most specific domain, skill, and task(s) using best-effort reasoning.
+3. **Identify exam metadata:** Determine the practice-exam file's parent exam (e.g., AZ-104, AZ-305, AI-103). Read the exam's `Skills.psd1` (e.g., `certs/AZ-104/Skills.psd1`) to locate the domain/skill/task hierarchy. The file is a PowerShell data file with `@{ Domains = @( @{ Name; Skills = @( @{ Name; Tasks = @(…) } ) } ) }` structure. Match the question to the most specific domain, skill, and task(s) using best-effort reasoning.
 
     AI-103, AZ-104, and AZ-305 are active tracks. AI-900 can still be processed when working on completed/retired exam artifacts.
 4. Identify question type:
@@ -117,19 +117,21 @@ Create a concise exam-appropriate title (3–10 words).
 
 ### Exam Metadata
 
-Identify the question's domain, skill, and task(s) from the exam's README coverage table. Place this block immediately after the title, before the prompt text.
+Identify the question's domain, skill, and task(s) from the exam's `Skills.psd1`. Place this block immediately after the title, before the prompt text.
 
 ```markdown
 **Domain:** <domain name (omit weight)>
 **Skill:** <skill name>
 **Task:** <task>
+**Answer Result:** <wrong|unsure|correct>
+**ID:** <7-char-hex>
 ```
 
 Rules:
 
-* **Source of truth:** Read the exam's README (e.g., `certs/AZ-104/README.md`) and locate the **Coverage Table** between the `<!-- BEGIN COVERAGE TABLE -->` and `<!-- END COVERAGE TABLE -->` markers. Each domain is a collapsible `<details>` block whose `<summary>` contains the domain name and weight (omit the weight percentage when emitting the domain). Inside each block is a pipe-delimited table with four columns: **Skill | Task | Qs | Labs**. Read the **first column** for the skill name and the **second column** for the task name. Skill names appear only in the first row of each skill group — subsequent rows in the same group leave the Skill cell empty (they inherit the skill from the nearest non-empty Skill cell above).
-* **Skill enumeration (mandatory):** Before writing the `**Skill:**` value, enumerate all distinct non-empty values from the **Skill** column in the coverage table and select only from that set. Never synthesize a skill name from task wording.
-* Use exact wording from the README for domain and skill names. The skill column in the README may contain a task-count suffix such as `(5 tasks)` — **omit it**. Write only the bare skill name (e.g., `Manage Azure subscriptions and governance`, not `Manage Azure subscriptions and governance (5 tasks)`).
+* **Source of truth:** Read the exam's `Skills.psd1` (e.g., `certs/AZ-104/Skills.psd1`). This is a PowerShell data file with the structure `@{ Domains = @( @{ Name = '…'; Skills = @( @{ Name = '…'; Tasks = @('…') } ) } ) }`. Each entry in `Domains` is an exam domain — use `.Name` for the domain name (omit weight percentages). Each domain's `.Skills` array contains skills — use `.Name` for the skill name. Each skill's `.Tasks` array contains task strings.
+* **Skill enumeration (mandatory):** Before writing the `**Skill:**` value, enumerate all `.Skills[].Name` values from the `Skills.psd1` and select only from that set. Never synthesize a skill name from task wording.
+* Use exact wording from the `Skills.psd1` for domain and skill names.
 * For tasks, use the most specific task wording. Apply best-effort reasoning when the question spans topics — pick the closest match(es).
 * If a question maps to a single task, place it inline on the header line: `**Task:** <task>`.
 * If a question maps to multiple tasks (even across different skills), use a header plus bullets:
@@ -139,6 +141,11 @@ Rules:
     `- <task 1>`
 
     `- <task 2>`
+* **Answer Result** — Set based on the detected answer state from Process step 2:
+  - **Blank** question (no answer selected) → `unsure`
+  - **Answered correctly** (green highlight, ✓ icon, "Correct" banner) → `correct`
+  - **Answered incorrectly** (red highlight, ✗ icon, "Incorrect" banner) → `wrong`
+* **ID** — Leave blank (omit the line entirely). The reorganizer script auto-generates IDs when missing.
 * Insert a blank line after the metadata block before the prompt text begins.
 
 Example:
@@ -147,6 +154,7 @@ Example:
 **Domain:** Manage Azure Identities and Governance
 **Skill:** Manage Azure subscriptions and governance
 **Task:** Apply and manage tags on resources
+**Answer Result:** unsure
 ```
 
 ```markdown
@@ -155,6 +163,8 @@ Example:
 **Task:**
 - Apply and manage tags on resources
 - Manage costs by using alerts, budgets, and Azure Advisor recommendations
+
+**Answer Result:** wrong
 ```
 
 ---
@@ -462,9 +472,9 @@ Before submitting the final edit, scan every `*` or `-` bullet under the **Refer
 
 Before submitting the final edit, verify:
 
-1. The `**Skill:**` value appears **verbatim** in the **Skill column** (first column) of the coverage table — not in the Task column.
-2. The `**Task:**` value appears **verbatim** in the **Task column** (second column) of the coverage table.
-3. If the Skill and Task values are **identical**, that is almost certainly an error — re-read the coverage table and correct the Skill value.
+1. The `**Skill:**` value appears **verbatim** as a `.Skills[].Name` value in the exam's `Skills.psd1` — not as a task string.
+2. The `**Task:**` value appears **verbatim** as a `.Skills[].Tasks[]` string in the exam's `Skills.psd1`.
+3. If the Skill and Task values are **identical**, that is almost certainly an error — re-read the `Skills.psd1` and correct the Skill value.
 
 ---
 

@@ -117,9 +117,15 @@ $Helpers = {
     }
 
     function Confirm-InputFile {
-        # Validate that the exam README and practice questions file exist
+        # Validate that the exam README, Skills.psd1, and practice questions file exist
         if (-not (Test-Path -Path $ExamReadme)) {
             throw "Exam README not found: $ExamReadme"
+        }
+
+        $skillsFile = Join-Path -Path $ExamDir -ChildPath 'Skills.psd1'
+
+        if (-not (Test-Path -Path $skillsFile)) {
+            throw "Skills.psd1 not found: $skillsFile"
         }
 
         if (-not $MultiFile -and -not (Test-Path -Path $PracticeFile)) {
@@ -145,70 +151,39 @@ $Helpers = {
     }
 
     function Get-DomainStructure {
-        # Parse the exam README coverage table to extract the canonical domain → skill → task ordering
-        $lines = Get-Content -Path $ExamReadme -Encoding UTF8
-        $inCoverage = $false
-        $domains = [System.Collections.Generic.List[hashtable]]::new()
-        $currentDomain = $null
-        $currentSkill = $null
+        # Load the canonical domain → skill → task ordering from Skills.psd1
+        $skillsFile = Join-Path -Path $ExamDir -ChildPath 'Skills.psd1'
 
-        foreach ($line in $lines) {
-            # Detect coverage table boundaries
-            if ($line -match '<!-- BEGIN COVERAGE TABLE -->') {
-                $inCoverage = $true
-                continue
-            }
-
-            if ($line -match '<!-- END COVERAGE TABLE -->') {
-                break
-            }
-
-            if (-not $inCoverage) {
-                continue
-            }
-
-            # Domain heading (legacy markdown): ### Domain N: <Name> (<Weight>)
-            # Domain heading (current details format): <summary><b>Domain N: <Name> (<Weight>)</b> ...
-            if ($line -match '^### Domain \d+:\s+(.+?)\s+\(' -or $line -match 'Domain \d+:\s+(.+?)\s+\(') {
-                $domainName = $Matches[1].Trim()
-
-                # Avoid adding the same domain twice if both header-like lines appear in one section.
-                if (-not $currentDomain -or $currentDomain.Name -ne $domainName) {
-                    $currentDomain = @{
-                        Name   = $domainName
-                        Skills = [System.Collections.Generic.List[hashtable]]::new()
-                    }
-                    $domains.Add($currentDomain)
-                    $currentSkill = $null
-                }
-
-                continue
-            }
-
-            # Task row (4-column format): | <skill-or-empty> | <task> | <qs> | <labs> |
-            if ($currentDomain -and $line -match '^\|\s*(.*?)\s*\|\s*(?!Task\b|:---)(.+?)\s+\|\s+\d+\s+\|\s+\d+\s+\|') {
-                $skillName = $Matches[1].Trim()
-                $taskName = $Matches[2].Trim()
-
-                # Non-empty skill column starts a new skill group
-                if ($skillName) {
-                    # Strip task count suffix added in current README layout (e.g., "(5 tasks)")
-                    $skillName = $skillName -replace '\s*\(\d+\s+tasks?\)\s*$', ''
-
-                    $currentSkill = @{
-                        Name  = $skillName
-                        Tasks = [System.Collections.Generic.List[string]]::new()
-                    }
-                    $currentDomain.Skills.Add($currentSkill)
-                }
-
-                if ($currentSkill) {
-                    $currentSkill.Tasks.Add($taskName)
-                }
-            }
+        if (-not (Test-Path -Path $skillsFile)) {
+            throw "Skills.psd1 not found at '$skillsFile'. Cannot determine canonical domain ordering."
         }
 
-        Write-Verbose "Parsed $($domains.Count) domains from $ExamReadme"
+        $data = Import-PowerShellDataFile -Path $skillsFile
+        $domains = [System.Collections.Generic.List[hashtable]]::new()
+
+        foreach ($d in $data.Domains) {
+            $domain = @{
+                Name   = $d.Name
+                Skills = [System.Collections.Generic.List[hashtable]]::new()
+            }
+
+            foreach ($s in $d.Skills) {
+                $skill = @{
+                    Name  = $s.Name
+                    Tasks = [System.Collections.Generic.List[string]]::new()
+                }
+
+                foreach ($t in $s.Tasks) {
+                    $skill.Tasks.Add($t)
+                }
+
+                $domain.Skills.Add($skill)
+            }
+
+            $domains.Add($domain)
+        }
+
+        Write-Verbose "Loaded $($domains.Count) domains from $skillsFile"
         return $domains
     }
 
@@ -378,6 +353,13 @@ $Helpers = {
             $sKey = "$dKey|$($block.Skill.ToLower())"
             $sIdx = if ($skillOrder.ContainsKey($sKey)) { $skillOrder[$sKey] } else { 999 }
 
+            # Answer result priority: wrong → unsure → correct (missing defaults to unsure)
+            $rIdx = switch ($block.AnswerResult) {
+                'wrong'   { 0 }
+                'correct' { 2 }
+                default   { 1 }
+            }
+
             # Normalize block metadata to canonical names from the exam README
             if ($canonicalDomain.ContainsKey($dKey)) {
                 $block.Domain = $canonicalDomain[$dKey]
@@ -394,13 +376,14 @@ $Helpers = {
             [PSCustomObject]@{
                 DomainIndex = $dIdx
                 SkillIndex  = $sIdx
+                ResultIndex = $rIdx
                 Block       = $block
             }
         }
 
-        # Sort by domain index, then skill index (preserve relative order within skill)
+        # Sort by domain index, then skill index, then answer result (wrong first, correct last)
         $sorted = $decorated |
-            Sort-Object -Property DomainIndex, SkillIndex
+            Sort-Object -Property DomainIndex, SkillIndex, ResultIndex
 
         $result = [System.Collections.Generic.List[hashtable]]::new()
 
@@ -488,6 +471,15 @@ $Helpers = {
                             [void]$sb.AppendLine("- $task")
                         }
                     }
+
+                    # Answer result metadata — default to unsure if missing
+                    $resultValue = if ($block.AnswerResult) { $block.AnswerResult } else { 'unsure' }
+                    [void]$sb.AppendLine("**Answer Result:** $resultValue")
+
+                    # Unique question identifier — generate if missing
+                    $idValue = if ($block.ID) { $block.ID } else { (New-Guid).Guid.Substring(0, 7) }
+                    $block.ID = $idValue
+                    [void]$sb.AppendLine("**ID:** $idValue")
 
                     [void]$sb.AppendLine()
 
@@ -770,6 +762,15 @@ $Helpers = {
                     }
                 }
 
+                # Answer result metadata — default to unsure if missing
+                $resultValue = if ($block.AnswerResult) { $block.AnswerResult } else { 'unsure' }
+                [void]$sb.AppendLine("**Answer Result:** $resultValue")
+
+                # Unique question identifier — generate if missing
+                $idValue = if ($block.ID) { $block.ID } else { (New-Guid).Guid.Substring(0, 7) }
+                $block.ID = $idValue
+                [void]$sb.AppendLine("**ID:** $idValue")
+
                 [void]$sb.AppendLine()
 
                 # Write body
@@ -1044,6 +1045,13 @@ $Helpers = {
         else {
             Write-Host "  Count verified:     OK" -ForegroundColor Green
         }
+
+        # Count answer result distribution
+        $wrongCount = ($SortedBlocks | Where-Object { $_.AnswerResult -eq 'wrong' }).Count
+        $unsureCount = ($SortedBlocks | Where-Object { $_.AnswerResult -eq 'unsure' -or -not $_.AnswerResult }).Count
+        $correctCount = ($SortedBlocks | Where-Object { $_.AnswerResult -eq 'correct' }).Count
+
+        Write-Host "  Answer results:     $wrongCount wrong, $unsureCount unsure, $correctCount correct"
 
         # Report metadata gaps
         if ($missingDomain -gt 0 -or $missingSkill -gt 0 -or $missingTask -gt 0) {
