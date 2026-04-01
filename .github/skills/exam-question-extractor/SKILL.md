@@ -27,7 +27,7 @@ This is the highest-priority rule. It overrides all other formatting instincts.
 ### How to construct the edit
 
 - **`oldString`** = the exact `<img …>` line(s) currently selected — copy them verbatim, nothing more.
-- **`newString`** = the fully formatted question output (Title → Exam Metadata → Prompt → Answer → Screenshot Block → Explanation Placeholder → Related Lab Line).
+- **`newString`** = the fully formatted question output (Title → Exam Metadata → Prompt → Answer → Screenshot Block → Explanation Placeholder).
 - If the edit tool requires surrounding context lines for uniqueness, include the minimum necessary context but do **not** alter those context lines in `newString`.
 
 > **Self-check before submitting:** Does your edit change anything outside the selected `<img>` line(s)? If yes, discard and redo.
@@ -57,12 +57,11 @@ Your **only** job is to reproduce the question exactly as stated with full fidel
 Include:
 
 - Title  
-- Exam Metadata (Domain / Skill / Task)  
+- Exam Metadata (Domain / Skill / Task / ID)  
 - Prompt  
 - Answer  
 - Screenshot Block  
-- Explanation Placeholder  
-- Related Lab Line
+- Explanation Placeholder
 
 ## Action
 
@@ -87,8 +86,7 @@ Make a **single** edit that replaces the selected `<img>` line(s) with the fully
 5. Format Title, Exam Metadata, Prompt, and Answer.
 6. Append Screenshot Block.
 7. Append Explanation Placeholder (see rule below).
-8. Append Related Lab Line.
-9. Replace **only** the selected `<img>` line(s) with the assembled output. Make exactly one edit. Do not touch any other part of the file.
+8. Replace **only** the selected `<img>` line(s) with the assembled output. Make exactly one edit. Do not touch any other part of the file.
 
 ### Explanation Block Rule
 
@@ -123,7 +121,7 @@ Identify the question's domain, skill, and task(s) from the exam's `Skills.psd1`
 **Domain:** <domain name (omit weight)>
 **Skill:** <skill name>
 **Task:** <task>
-**Answer Result:** <wrong|unsure|correct>
+**Answer Result:** <wrong|unsure|correct|blank>
 **ID:** <7-char-hex>
 ```
 
@@ -141,11 +139,14 @@ Rules:
     `- <task 1>`
 
     `- <task 2>`
-* **Answer Result** — Set based on the detected answer state from Process step 2:
-  - **Blank** question (no answer selected) → `unsure`
-  - **Answered correctly** (green highlight, ✓ icon, "Correct" banner) → `correct`
-  - **Answered incorrectly** (red highlight, ✗ icon, "Incorrect" banner) → `wrong`
-* **ID** — Leave blank (omit the line entirely). The reorganizer script auto-generates IDs when missing.
+* **Answer Result** — Always leave blank. Do not set this based on the answer state visible in the screenshot — the user will fill it in manually.
+* **ID** — Generate a deterministic 7-character hex ID by running the `New-QuestionId.ps1` script in the terminal:
+
+    ```powershell
+    .assets/scripts/New-QuestionId.ps1 -Title "<question title>"
+    ```
+
+    Pass the exact question title text (the heading you created in step 5). The script computes a SHA-256 hash of the lowercased title and returns the first 7 hex characters. Place the returned value on the `**ID:**` line.
 * Insert a blank line after the metadata block before the prompt text begins.
 
 Example:
@@ -154,7 +155,8 @@ Example:
 **Domain:** Manage Azure Identities and Governance
 **Skill:** Manage Azure subscriptions and governance
 **Task:** Apply and manage tags on resources
-**Answer Result:** unsure
+**Answer Result:**
+**ID:** c82c3e3
 ```
 
 ```markdown
@@ -164,7 +166,8 @@ Example:
 - Apply and manage tags on resources
 - Manage costs by using alerts, budgets, and Azure Advisor recommendations
 
-**Answer Result:** wrong
+**Answer Result:**
+**ID:** a1b2c3d
 ```
 
 ---
@@ -475,13 +478,3 @@ Before submitting the final edit, verify:
 1. The `**Skill:**` value appears **verbatim** as a `.Skills[].Name` value in the exam's `Skills.psd1` — not as a task string.
 2. The `**Task:**` value appears **verbatim** as a `.Skills[].Tasks[]` string in the exam's `Skills.psd1`.
 3. If the Skill and Task values are **identical**, that is almost certainly an error — re-read the `Skills.psd1` and correct the Skill value.
-
----
-
-### Related Lab Line
-
-Always emit the Related Lab line **exactly** as shown below — with empty link text and an empty URL. Do **not** guess, infer, or populate the lab name or path. The user will fill this in manually.
-
-```markdown
-▶ Related Lab: []()
-```

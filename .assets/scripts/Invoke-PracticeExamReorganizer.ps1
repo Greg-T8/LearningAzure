@@ -96,6 +96,21 @@ $Main = {
 #region HELPER FUNCTIONS
 $Helpers = {
 
+    function New-DeterministicId {
+        # Compute SHA-256 hash of the normalized title and return the first 7 hex characters
+        param(
+            [Parameter(Mandatory)]
+            [string]$Title
+        )
+
+        $normalized = $Title.Trim().ToLowerInvariant()
+        $bytes = [System.Text.Encoding]::UTF8.GetBytes($normalized)
+        $hash = [System.Security.Cryptography.SHA256]::HashData($bytes)
+        $hex = [System.BitConverter]::ToString($hash).Replace('-', '').ToLowerInvariant()
+
+        return $hex.Substring(0, 7)
+    }
+
     function Get-TargetExam {
         # Return exams from parameter or auto-discover active exams from README
         if ($ExamName) {
@@ -476,8 +491,8 @@ $Helpers = {
                     $resultValue = if ($block.AnswerResult) { $block.AnswerResult } else { 'unsure' }
                     [void]$sb.AppendLine("**Answer Result:** $resultValue")
 
-                    # Unique question identifier — generate if missing
-                    $idValue = if ($block.ID) { $block.ID } else { (New-Guid).Guid.Substring(0, 7) }
+                    # Unique question identifier — generate deterministically from title if missing
+                    $idValue = if ($block.ID) { $block.ID } else { New-DeterministicId -Title $block.Title }
                     $block.ID = $idValue
                     [void]$sb.AppendLine("**ID:** $idValue")
 
@@ -766,8 +781,8 @@ $Helpers = {
                 $resultValue = if ($block.AnswerResult) { $block.AnswerResult } else { 'unsure' }
                 [void]$sb.AppendLine("**Answer Result:** $resultValue")
 
-                # Unique question identifier — generate if missing
-                $idValue = if ($block.ID) { $block.ID } else { (New-Guid).Guid.Substring(0, 7) }
+                # Unique question identifier — generate deterministically from title if missing
+                $idValue = if ($block.ID) { $block.ID } else { New-DeterministicId -Title $block.Title }
                 $block.ID = $idValue
                 [void]$sb.AppendLine("**ID:** $idValue")
 
