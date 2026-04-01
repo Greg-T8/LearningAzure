@@ -121,7 +121,7 @@ Identify the question's domain, skill, and task(s) from the exam's `Skills.psd1`
 **Domain:** <domain name (omit weight)>
 **Skill:** <skill name>
 **Task:** <task>
-**Answer Result:** <wrong|unsure|correct|blank>
+**Answered:** <Incorretly|Unsure|Correctly>
 **ID:** <7-char-hex>
 ```
 
@@ -139,7 +139,7 @@ Rules:
     `- <task 1>`
 
     `- <task 2>`
-* **Answer Result** — Always leave blank. Do not set this based on the answer state visible in the screenshot — the user will fill it in manually.
+* **Answered** — Set to one of `Incorretly`, `Unsure`, or `Correctly`.
 * **ID** — Generate a deterministic 7-character hex ID by running the `New-QuestionId.ps1` script in the terminal:
 
     ```powershell
@@ -155,7 +155,7 @@ Example:
 **Domain:** Manage Azure Identities and Governance
 **Skill:** Manage Azure subscriptions and governance
 **Task:** Apply and manage tags on resources
-**Answer Result:**
+**Answered:** Unsure
 **ID:** c82c3e3
 ```
 
@@ -165,8 +165,7 @@ Example:
 **Task:**
 - Apply and manage tags on resources
 - Manage costs by using alerts, budgets, and Azure Advisor recommendations
-
-**Answer Result:**
+**Answered:** Unsure
 **ID:** a1b2c3d
 ```
 

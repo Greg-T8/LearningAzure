@@ -227,6 +227,7 @@ $Helpers = {
                     Domain = ''
                     Skill  = ''
                     Task   = [System.Collections.Generic.List[string]]::new()
+                    Answered = ''
                     Body   = [System.Collections.Generic.List[string]]::new()
                 }
 
@@ -250,8 +251,20 @@ $Helpers = {
                     continue
                 }
 
+                if ($line -match '^\*\*Answered:\*\*\s+(.+)$') {
+                    $currentBlock.Answered = $Matches[1].Trim()
+                    continue
+                }
+
                 # Preserve parser compatibility with extractor metadata; answer result is not rewritten here
                 if ($line -match '^\*\*Answer Result:\*\*\s+(.+)$') {
+                    $legacyAnswer = $Matches[1].Trim().ToLowerInvariant()
+                    $currentBlock.Answered = switch ($legacyAnswer) {
+                        'wrong' { 'Incorrectly' }
+                        'correct' { 'Correctly' }
+                        'unsure' { 'Unsure' }
+                        default { $Matches[1].Trim() }
+                    }
                     continue
                 }
 
@@ -362,11 +375,14 @@ $Helpers = {
             $sKey = "$dKey|$($block.Skill.ToLower())"
             $sIdx = if ($skillOrder.ContainsKey($sKey)) { $skillOrder[$sKey] } else { 999 }
 
-            # Answer result priority: wrong → unsure → correct (missing defaults to unsure)
-            $rIdx = switch ($block.AnswerResult) {
-                'wrong'   { 0 }
-                'correct' { 2 }
-                default   { 1 }
+            # Answer ordering priority: Incorrectly/wrong → Unsure → Correctly/correct
+            $answerValue = if ($block.Answered) { $block.Answered.ToLowerInvariant() } elseif ($block.AnswerResult) { $block.AnswerResult.ToLowerInvariant() } else { '' }
+            $rIdx = switch ($answerValue) {
+                'incorrectly' { 0 }
+                'wrong'       { 0 }
+                'correctly'   { 2 }
+                'correct'     { 2 }
+                default       { 1 }
             }
 
             # Normalize block metadata to canonical names from the exam README
@@ -479,6 +495,11 @@ $Helpers = {
                         foreach ($task in $block.Task) {
                             [void]$sb.AppendLine("- $task")
                         }
+                    }
+
+                    # Preserve existing answer metadata only; values are assigned by the extractor workflow
+                    if ($block.Answered) {
+                        [void]$sb.AppendLine("**Answered:** $($block.Answered)")
                     }
 
                     # Preserve existing ID metadata only; IDs are assigned by the extractor workflow
@@ -632,6 +653,7 @@ $Helpers = {
                         Domain = ''
                         Skill  = ''
                         Task   = [System.Collections.Generic.List[string]]::new()
+                        Answered = ''
                         Body   = [System.Collections.Generic.List[string]]::new()
                     }
                     continue
@@ -654,8 +676,20 @@ $Helpers = {
                         continue
                     }
 
+                    if ($line -match '^\*\*Answered:\*\*\s+(.+)$') {
+                        $currentBlock.Answered = $Matches[1].Trim()
+                        continue
+                    }
+
                     # Preserve parser compatibility with extractor metadata; answer result is not rewritten here
                     if ($line -match '^\*\*Answer Result:\*\*\s+(.+)$') {
+                        $legacyAnswer = $Matches[1].Trim().ToLowerInvariant()
+                        $currentBlock.Answered = switch ($legacyAnswer) {
+                            'wrong' { 'Incorrectly' }
+                            'correct' { 'Correctly' }
+                            'unsure' { 'Unsure' }
+                            default { $Matches[1].Trim() }
+                        }
                         continue
                     }
 
@@ -775,6 +809,11 @@ $Helpers = {
                     foreach ($task in $block.Task) {
                         [void]$sb.AppendLine("- $task")
                     }
+                }
+
+                # Preserve existing answer metadata only; values are assigned by the extractor workflow
+                if ($block.Answered) {
+                    [void]$sb.AppendLine("**Answered:** $($block.Answered)")
                 }
 
                 # Preserve existing ID metadata only; IDs are assigned by the extractor workflow
@@ -1057,10 +1096,11 @@ $Helpers = {
             Write-Host "  Count verified:     OK" -ForegroundColor Green
         }
 
-        # Count answer result distribution
-        $wrongCount = ($SortedBlocks | Where-Object { $_.AnswerResult -eq 'wrong' }).Count
-        $unsureCount = ($SortedBlocks | Where-Object { $_.AnswerResult -eq 'unsure' -or -not $_.AnswerResult }).Count
-        $correctCount = ($SortedBlocks | Where-Object { $_.AnswerResult -eq 'correct' }).Count
+        # Count answer distribution with support for both Answered and legacy Answer Result values
+        # Use Measure-Object so hashtable-backed blocks are counted as one question, not by key count.
+        $wrongCount = ($SortedBlocks | Where-Object { $_.Answered -eq 'Incorrectly' -or $_.AnswerResult -eq 'wrong' } | Measure-Object).Count
+        $unsureCount = ($SortedBlocks | Where-Object { $_.Answered -eq 'Unsure' -or $_.AnswerResult -eq 'unsure' -or (-not $_.Answered -and -not $_.AnswerResult) } | Measure-Object).Count
+        $correctCount = ($SortedBlocks | Where-Object { $_.Answered -eq 'Correctly' -or $_.AnswerResult -eq 'correct' } | Measure-Object).Count
 
         Write-Host "  Answer results:     $wrongCount wrong, $unsureCount unsure, $correctCount correct"
 

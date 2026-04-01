@@ -4,8 +4,6 @@ Accounts for questions missed or unsure about in the practice exams.
 
 * [Design solutions for logging and monitoring](#design-solutions-for-logging-and-monitoring)
   * [Monitoring Solution for a Gaming App](#monitoring-solution-for-a-gaming-app)
-* [Design authentication and authorization solutions](#design-authentication-and-authorization-solutions)
-* [Design governance](#design-governance)
 
 ---
 
@@ -16,7 +14,7 @@ Accounts for questions missed or unsure about in the practice exams.
 **Domain:** Design identity, governance, and monitoring solutions
 **Skill:** Design solutions for logging and monitoring
 **Task:** Recommend a monitoring solution
-**Answer Result:** Wrong
+**Answered:** Incorrectly
 **ID:** 0ed6591
 
 You are designing a monitoring solution for a gaming website hosted in an Azure Web App.
