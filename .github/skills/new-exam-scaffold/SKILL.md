@@ -215,12 +215,36 @@ All labs follow the governance policies in [Governance-Lab.md](../../../.assets/
 - **Shared Contract:** [lab-shared-contract](../../../.github/skills/lab-shared-contract/SKILL.md)
 ```
 
-#### `certs/<EXAM>/practice-questions/README.md` — Practice Questions
+#### `certs/<EXAM>/practice-questions/README.md` — Practice Questions Index
+
+This file serves as an index page linking to per-domain practice question files.
 
 ```markdown
-# Practice Exam Questions - <EXAM>
+# Practice Exam Questions — <EXAM>
+
+Accounts for questions missed or unsure about in the practice exams. Questions are organized into per-domain files to keep each file small and responsive.
+
+| # | Domain | File | Qs |
+| -: | :----- | :--- | -: |
+| 1 | <Domain 1 name> | [<filename>.md](<filename>.md) | 0 |
+| 2 | <Domain 2 name> | [<filename>.md](<filename>.md) | 0 |
+...
+```
+
+#### `certs/<EXAM>/practice-questions/<NN>-<domain-slug>.md` — Per-Domain Practice Question Files
+
+Create one file per exam domain, using numbered-prefix kebab-case names (e.g., `01-identity-governance-monitoring.md`). Each file uses the heading hierarchy: `#` domain title → `##` skill subheadings → `###` question headings.
+
+```markdown
+# Practice Questions — <Domain Name>
 
 Accounts for questions missed or unsure about in the practice exams.
+
+---
+
+## <Skill 1 Name>
+
+## <Skill 2 Name>
 ```
 
 #### `certs/<EXAM>/learning-paths/README.md` — Learning Paths Catalog
@@ -391,10 +415,10 @@ The domain ordering determines how labs are grouped and sequenced in the catalog
 
 #### `exam-question-organizer/SKILL.md`
 
-Add the exam to the **Target Files** table:
+Add the exam to the **Per-domain exams** target table:
 
 ```markdown
-| <NEW-EXAM> | `certs/<NEW-EXAM>/practice-questions/README.md` | `certs/<NEW-EXAM>/README.md` — Practice Exam Coverage section | `certs/<NEW-EXAM>/README.md` — Practice Exam Coverage section |
+| <NEW-EXAM> | `certs/<NEW-EXAM>/practice-questions/<NN>-<domain-slug>.md` (one row per domain file) | `certs/<NEW-EXAM>/README.md` — Practice Exam Coverage section | `certs/<NEW-EXAM>/README.md` — Practice Exam Coverage section |
 ```
 
 ---

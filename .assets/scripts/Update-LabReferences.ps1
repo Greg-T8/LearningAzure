@@ -68,16 +68,31 @@ $Main = {
         Write-Host "`n=== Processing $exam ===" -ForegroundColor Cyan
 
         $labsDir = Join-Path -Path $RepoRoot -ChildPath "certs\$exam\hands-on-labs"
-        $practiceFile = Join-Path -Path $RepoRoot -ChildPath "certs\$exam\practice-questions\README.md"
+        $practiceDir = Join-Path -Path $RepoRoot -ChildPath "certs\$exam\practice-questions"
+        $practiceFile = Join-Path -Path $practiceDir -ChildPath 'README.md'
 
         if (-not (Test-Path -Path $labsDir)) {
             Write-Warning "Labs directory not found: $labsDir — skipping $exam"
             continue
         }
 
+        # Detect multi-file mode: per-domain .md files exist beyond README.md
+        $multiFile = $false
+        if (Test-Path -Path $practiceDir) {
+            $domainFiles = Get-ChildItem -Path $practiceDir -Filter '*.md' |
+                Where-Object { $_.Name -ne 'README.md' }
+            $multiFile = ($domainFiles.Count -gt 0)
+        }
+
         # Step 1: Scan labs and practice questions
         $labs = Get-LabMetadata -LabsDir $labsDir -Exam $exam
-        $questionIndex = Get-QuestionIndex -PracticeFile $practiceFile
+
+        if ($multiFile) {
+            $questionIndex = Get-QuestionIndexMulti -PracticeDir $practiceDir
+        }
+        else {
+            $questionIndex = Get-QuestionIndex -PracticeFile $practiceFile
+        }
 
         # Step 2: Update each lab README (add question links, remove related sections)
         if ($labs.Count -gt 0) {
@@ -276,6 +291,96 @@ $Helpers = {
         return $index
     }
 
+    function Get-QuestionIndexMulti {
+        # Build a question index from per-domain .md files using ### headings
+        # Returns: hashtable { TaskName → list of { Title, Anchor, File } }
+        param(
+            [Parameter(Mandatory)]
+            [string]$PracticeDir
+        )
+
+        $index = @{}
+
+        $domainFiles = Get-ChildItem -Path $PracticeDir -Filter '*.md' |
+            Where-Object { $_.Name -ne 'README.md' } |
+            Sort-Object Name
+
+        foreach ($file in $domainFiles) {
+            $lines = Get-Content -Path $file.FullName -Encoding UTF8
+            $currentTitle = ''
+            $currentAnchor = ''
+            $currentTasks = [System.Collections.Generic.List[string]]::new()
+            $inQuestion = $false
+
+            foreach ($line in $lines) {
+                # Question heading (H3, not H4) starts a new block
+                if ($line -match '^###\s+(.+)$' -and $line -notmatch '^####') {
+                    # Flush previous question
+                    if ($inQuestion -and $currentTitle -and $currentTasks.Count -gt 0) {
+                        Add-QuestionToIndexMulti -Index $index -Title $currentTitle -Anchor $currentAnchor -Tasks $currentTasks -FileName $file.Name
+                    }
+
+                    $currentTitle = $Matches[1].Trim()
+                    $currentAnchor = ConvertTo-Anchor -Text $currentTitle
+                    $currentTasks = [System.Collections.Generic.List[string]]::new()
+                    $inQuestion = $true
+                    continue
+                }
+
+                if (-not $inQuestion) { continue }
+
+                # Single-line task
+                if ($line -match '^\*\*Task:\*\*\s+(.+)$') {
+                    $currentTasks.Add($Matches[1].Trim())
+                }
+            }
+
+            # Flush the last question from this file
+            if ($inQuestion -and $currentTitle -and $currentTasks.Count -gt 0) {
+                Add-QuestionToIndexMulti -Index $index -Title $currentTitle -Anchor $currentAnchor -Tasks $currentTasks -FileName $file.Name
+            }
+        }
+
+        $totalQuestions = ($index.Values | ForEach-Object { $_.Count } | Measure-Object -Sum).Sum
+        Write-Verbose "Indexed $totalQuestions question-task mappings from $($domainFiles.Count) domain files"
+        return $index
+    }
+
+    function Add-QuestionToIndexMulti {
+        # Add a question to the task-keyed index with per-domain file reference
+        param(
+            [Parameter(Mandatory)]
+            [hashtable]$Index,
+
+            [Parameter(Mandatory)]
+            [string]$Title,
+
+            [Parameter(Mandatory)]
+            [string]$Anchor,
+
+            [Parameter(Mandatory)]
+            [System.Collections.Generic.List[string]]$Tasks,
+
+            [Parameter(Mandatory)]
+            [string]$FileName
+        )
+
+        foreach ($task in $Tasks) {
+            if (-not $Index.ContainsKey($task)) {
+                $Index[$task] = [System.Collections.Generic.List[hashtable]]::new()
+            }
+
+            $exists = $Index[$task] | Where-Object { $_.Anchor -eq $Anchor -and $_.File -eq $FileName }
+            if (-not $exists) {
+                $Index[$task].Add(@{
+                    Title  = $Title
+                    Anchor = $Anchor
+                    File   = $FileName
+                })
+            }
+        }
+    }
+
     function Add-QuestionToIndex {
         # Add a question to the task-keyed index
         param(
@@ -347,8 +452,8 @@ $Helpers = {
             $output = [System.Collections.Generic.List[string]]::new()
             $changes = $false
 
-            # Determine the relative path from this lab to practice-questions/README.md
-            $practiceRelPath = "../../../practice-questions/README.md"
+            # Determine the relative path prefix from this lab to practice-questions/
+            $practiceRelPrefix = "../../../practice-questions"
 
             # Find matching questions for this lab's tasks
             $matchedQuestions = [System.Collections.Generic.List[hashtable]]::new()
@@ -415,7 +520,9 @@ $Helpers = {
                         $output.Add('')
                         $output.Add('**Practice Exam Questions:**')
                         foreach ($q in $matchedQuestions) {
-                            $output.Add("- [$($q.Title)]($practiceRelPath#$($q.Anchor))")
+                            # Use per-domain file if available, otherwise fall back to README.md
+                            $targetFile = if ($q.ContainsKey('File') -and $q.File) { $q.File } else { 'README.md' }
+                            $output.Add("- [$($q.Title)]($practiceRelPrefix/$targetFile#$($q.Anchor))")
                         }
                         $changes = $true
                     }

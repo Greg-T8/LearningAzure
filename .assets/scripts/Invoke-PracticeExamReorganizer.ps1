@@ -40,14 +40,51 @@ $Main = {
         $ExamName = $exam
         $ExamDir = Join-Path -Path $RepoRoot -ChildPath "certs\$exam"
         $ExamReadme = Join-Path -Path $ExamDir -ChildPath 'README.md'
-        $PracticeFile = Join-Path -Path $ExamDir -ChildPath 'practice-questions\README.md'
+        $PracticeDir = Join-Path -Path $ExamDir -ChildPath 'practice-questions'
+        $PracticeFile = Join-Path -Path $PracticeDir -ChildPath 'README.md'
+
+        # Detect multi-file mode: domain .md files exist beyond README.md
+        $MultiFile = Test-MultiFileMode -PracticeDir $PracticeDir
+
+        if ($MultiFile) {
+            Write-Verbose "Multi-file mode detected for $exam"
+        }
+        else {
+            Write-Verbose "Single-file mode for $exam"
+        }
 
         Confirm-InputFile
         $domainStructure = Get-DomainStructure
-        $questionBlocks = Get-QuestionBlock
-        $sortedBlocks = Sort-QuestionBlock -DomainStructure $domainStructure -QuestionBlocks $questionBlocks
-        $output = Build-PracticeFile -DomainStructure $domainStructure -SortedBlocks $sortedBlocks
-        Write-PracticeFile -Content $output
+
+        if ($MultiFile) {
+            $questionBlocks = Get-QuestionBlockMulti -PracticeDir $PracticeDir
+        }
+        else {
+            $questionBlocks = Get-QuestionBlock
+        }
+
+        # Ensure questionBlocks is always a typed List (PowerShell returns $null for empty lists)
+        if (-not $questionBlocks) {
+            $questionBlocks = [System.Collections.Generic.List[hashtable]]::new()
+        }
+
+        # Sort only if there are questions; otherwise use empty list
+        if ($questionBlocks.Count -gt 0) {
+            $sortedBlocks = Sort-QuestionBlock -DomainStructure $domainStructure -QuestionBlocks $questionBlocks
+        }
+        else {
+            $sortedBlocks = [System.Collections.Generic.List[hashtable]]::new()
+        }
+
+        if ($MultiFile) {
+            Write-PracticeFileMulti -DomainStructure $domainStructure -SortedBlocks $sortedBlocks -PracticeDir $PracticeDir
+            Update-PracticeIndex -DomainStructure $domainStructure -SortedBlocks $sortedBlocks -PracticeDir $PracticeDir
+        }
+        else {
+            $output = Build-PracticeFile -DomainStructure $domainStructure -SortedBlocks $sortedBlocks
+            Write-PracticeFile -Content $output
+        }
+
         Update-CoverageTable -DomainStructure $domainStructure -SortedBlocks $sortedBlocks
         Show-Summary -OriginalCount $questionBlocks.Count -SortedBlocks $sortedBlocks
     }
@@ -85,9 +122,26 @@ $Helpers = {
             throw "Exam README not found: $ExamReadme"
         }
 
-        if (-not (Test-Path -Path $PracticeFile)) {
+        if (-not $MultiFile -and -not (Test-Path -Path $PracticeFile)) {
             throw "Practice questions file not found: $PracticeFile"
         }
+    }
+
+    function Test-MultiFileMode {
+        # Check if the practice-questions directory contains per-domain .md files beyond README.md
+        param(
+            [Parameter(Mandatory)]
+            [string]$PracticeDir
+        )
+
+        if (-not (Test-Path -Path $PracticeDir)) {
+            return $false
+        }
+
+        $domainFiles = Get-ChildItem -Path $PracticeDir -Filter '*.md' |
+            Where-Object { $_.Name -ne 'README.md' }
+
+        return ($domainFiles.Count -gt 0)
     }
 
     function Get-DomainStructure {
@@ -195,11 +249,12 @@ $Helpers = {
                 }
 
                 $currentBlock = @{
-                    Title  = $Matches[1]
-                    Domain = ''
-                    Skill  = ''
-                    Task   = [System.Collections.Generic.List[string]]::new()
-                    Body   = [System.Collections.Generic.List[string]]::new()
+                    Title        = $Matches[1]
+                    Domain       = ''
+                    Skill        = ''
+                    Task         = [System.Collections.Generic.List[string]]::new()
+                    AnswerResult = ''
+                    Body         = [System.Collections.Generic.List[string]]::new()
                 }
 
                 continue
@@ -225,6 +280,12 @@ $Helpers = {
 
                 # Standalone **Task:** header (multi-task — bullets follow)
                 if ($line -match '^\*\*Task:\*\*\s*$') {
+                    continue
+                }
+
+                # Answer result metadata: **Answer Result:** <wrong|unsure|correct>
+                if ($line -match '^\*\*Answer Result:\*\*\s+(.+)$') {
+                    $currentBlock.AnswerResult = $Matches[1].Trim().ToLower()
                     continue
                 }
 
@@ -324,6 +385,13 @@ $Helpers = {
             $sKey = "$dKey|$($block.Skill.ToLower())"
             $sIdx = if ($skillOrder.ContainsKey($sKey)) { $skillOrder[$sKey] } else { 999 }
 
+            # Answer result priority: wrong → unsure → correct (missing defaults to unsure)
+            $rIdx = switch ($block.AnswerResult) {
+                'wrong'   { 0 }
+                'correct' { 2 }
+                default   { 1 }
+            }
+
             # Normalize block metadata to canonical names from the exam README
             if ($canonicalDomain.ContainsKey($dKey)) {
                 $block.Domain = $canonicalDomain[$dKey]
@@ -340,13 +408,14 @@ $Helpers = {
             [PSCustomObject]@{
                 DomainIndex = $dIdx
                 SkillIndex  = $sIdx
+                ResultIndex = $rIdx
                 Block       = $block
             }
         }
 
-        # Sort by domain index, then skill index (preserve relative order within skill)
+        # Sort by domain index, then skill index, then answer result (wrong first, correct last)
         $sorted = $decorated |
-            Sort-Object -Property DomainIndex, SkillIndex
+            Sort-Object -Property DomainIndex, SkillIndex, ResultIndex
 
         $result = [System.Collections.Generic.List[hashtable]]::new()
 
@@ -364,6 +433,7 @@ $Helpers = {
             [System.Collections.Generic.List[hashtable]]$DomainStructure,
 
             [Parameter(Mandatory)]
+            [AllowEmptyCollection()]
             [System.Collections.Generic.List[hashtable]]$SortedBlocks
         )
 
@@ -434,6 +504,10 @@ $Helpers = {
                         }
                     }
 
+                    # Answer result metadata — default to unsure if missing
+                    $resultValue = if ($block.AnswerResult) { $block.AnswerResult } else { 'unsure' }
+                    [void]$sb.AppendLine("**Answer Result:** $resultValue")
+
                     [void]$sb.AppendLine()
 
                     # Write body
@@ -454,6 +528,7 @@ $Helpers = {
         # Group sorted blocks into a domain → skill hierarchy for output generation
         param(
             [Parameter(Mandatory)]
+            [AllowEmptyCollection()]
             [System.Collections.Generic.List[hashtable]]$SortedBlocks
         )
 
@@ -531,6 +606,364 @@ $Helpers = {
         }
     }
 
+    function Get-QuestionBlockMulti {
+        # Parse all per-domain .md files in PracticeDir for ### question blocks
+        param(
+            [Parameter(Mandatory)]
+            [string]$PracticeDir
+        )
+
+        $blocks = [System.Collections.Generic.List[hashtable]]::new()
+
+        $domainFiles = Get-ChildItem -Path $PracticeDir -Filter '*.md' |
+            Where-Object { $_.Name -ne 'README.md' } |
+            Sort-Object Name
+
+        foreach ($file in $domainFiles) {
+            Write-Verbose "Parsing multi-file questions from $($file.Name)"
+            $lines = Get-Content -Path $file.FullName -Encoding UTF8
+            $currentBlock = $null
+            $inPreamble = $true
+
+            for ($i = 0; $i -lt $lines.Count; $i++) {
+                $line = $lines[$i]
+
+                # Skip preamble before the first --- separator
+                if ($inPreamble) {
+                    if ($line -match '^---\s*$') {
+                        $inPreamble = $false
+                    }
+                    continue
+                }
+
+                # Skip domain heading (#) and skill headings (##) — they will be regenerated
+                if ($line -match '^##?\s+' -and $line -notmatch '^###') {
+                    continue
+                }
+
+                # Question heading: ### <Title> (not ####)
+                if ($line -match '^###\s+(.+)$' -and $line -notmatch '^####') {
+                    # Save previous block
+                    if ($currentBlock) {
+                        $currentBlock.Body = Trim-BlockBody -Lines $currentBlock.Body
+                        $blocks.Add($currentBlock)
+                    }
+
+                    $currentBlock = @{
+                        Title        = $Matches[1]
+                        Domain       = ''
+                        Skill        = ''
+                        Task         = [System.Collections.Generic.List[string]]::new()
+                        AnswerResult = ''
+                        Body         = [System.Collections.Generic.List[string]]::new()
+                    }
+                    continue
+                }
+
+                # Parse metadata lines within a question block
+                if ($currentBlock) {
+                    if ($line -match '^\*\*Domain:\*\*\s+(.+)$') {
+                        $currentBlock.Domain = $Matches[1].Trim()
+                        continue
+                    }
+
+                    if ($line -match '^\*\*Skill:\*\*\s+(.+)$') {
+                        $currentBlock.Skill = ($Matches[1].Trim() -replace '\s*\(\d+\s+tasks?\)\s*$', '')
+                        continue
+                    }
+
+                    # Single-line task
+                    if ($line -match '^\*\*Task:\*\*\s+(.+)$') {
+                        $currentBlock.Task.Add($Matches[1].Trim())
+                        continue
+                    }
+
+                    # Standalone **Task:** header (multi-task — bullets follow)
+                    if ($line -match '^\*\*Task:\*\*\s*$') {
+                        continue
+                    }
+
+                    # Answer result metadata: **Answer Result:** <wrong|unsure|correct>
+                    if ($line -match '^\*\*Answer Result:\*\*\s+(.+)$') {
+                        $currentBlock.AnswerResult = $Matches[1].Trim().ToLower()
+                        continue
+                    }
+
+                    # Multi-task bullet (only before body content starts)
+                    if ($line -match '^- (.+)$' -and $currentBlock.Body.Count -eq 0) {
+                        $currentBlock.Task.Add($Matches[1].Trim())
+                        continue
+                    }
+
+                    # --- separator between questions
+                    if ($line -match '^---\s*$') {
+                        continue
+                    }
+
+                    # Skip leading blank lines before body content starts
+                    if ($currentBlock.Body.Count -eq 0 -and $line.Trim() -eq '') {
+                        continue
+                    }
+
+                    # Accumulate body lines
+                    $currentBlock.Body.Add($line)
+                }
+            }
+
+            # Save the last block from this file
+            if ($currentBlock) {
+                $currentBlock.Body = Trim-BlockBody -Lines $currentBlock.Body
+                $blocks.Add($currentBlock)
+            }
+        }
+
+        Write-Verbose "Parsed $($blocks.Count) question blocks from $($domainFiles.Count) domain files"
+        return $blocks
+    }
+
+    function Build-DomainFile {
+        # Build the content for a single per-domain practice questions file
+        param(
+            [Parameter(Mandatory)]
+            [string]$DomainName,
+
+            [Parameter(Mandatory)]
+            [AllowEmptyCollection()]
+            [System.Collections.Generic.List[hashtable]]$DomainBlocks,
+
+            [Parameter(Mandatory)]
+            [System.Collections.Generic.List[hashtable]]$DomainStructure
+        )
+
+        $sb = [System.Text.StringBuilder]::new()
+
+        # Page title — domain heading
+        [void]$sb.AppendLine("# Practice Questions $([char]0x2014) $DomainName")
+        [void]$sb.AppendLine()
+        [void]$sb.AppendLine('Accounts for questions missed or unsure about in the practice exams.')
+        [void]$sb.AppendLine()
+
+        # Build TOC — group blocks by skill
+        $groupedBySkill = Group-BlockBySkill -Blocks $DomainBlocks
+
+        if ($groupedBySkill.Count -gt 0) {
+            foreach ($skillGroup in $groupedBySkill) {
+                $skillAnchor = ConvertTo-Anchor -Text $skillGroup.SkillName
+                [void]$sb.AppendLine("* [$($skillGroup.SkillName)](#$skillAnchor)")
+
+                $anchorCounts = @{}
+                foreach ($block in $skillGroup.Blocks) {
+                    $baseAnchor = ConvertTo-Anchor -Text $block.Title
+                    $anchor = Resolve-DuplicateAnchor -BaseAnchor $baseAnchor -AnchorCounts ([ref]$anchorCounts)
+                    [void]$sb.AppendLine("  * [$($block.Title)](#$anchor)")
+                }
+            }
+            [void]$sb.AppendLine()
+        }
+
+        [void]$sb.AppendLine('---')
+
+        # Find the canonical skill list for this domain from DomainStructure
+        $domainDef = $DomainStructure | Where-Object { $_.Name -eq $DomainName }
+        $canonicalSkills = if ($domainDef) { $domainDef.Skills } else { @() }
+
+        # Emit all canonical skill headings (even empty ones)
+        foreach ($skillDef in $canonicalSkills) {
+            [void]$sb.AppendLine()
+            [void]$sb.AppendLine("## $($skillDef.Name)")
+
+            # Find questions for this skill
+            $skillBlocks = $DomainBlocks | Where-Object { $_.Skill -eq $skillDef.Name }
+
+            foreach ($block in $skillBlocks) {
+                [void]$sb.AppendLine()
+                [void]$sb.AppendLine("### $($block.Title)")
+                [void]$sb.AppendLine()
+
+                # Write metadata
+                [void]$sb.AppendLine("**Domain:** $($block.Domain)")
+                [void]$sb.AppendLine("**Skill:** $($block.Skill)")
+
+                # Task metadata
+                if ($block.Task.Count -eq 1) {
+                    [void]$sb.AppendLine("**Task:** $($block.Task[0])")
+                }
+                elseif ($block.Task.Count -gt 1) {
+                    [void]$sb.AppendLine('**Task:**')
+                    [void]$sb.AppendLine()
+                    foreach ($task in $block.Task) {
+                        [void]$sb.AppendLine("- $task")
+                    }
+                }
+
+                # Answer result metadata — default to unsure if missing
+                $resultValue = if ($block.AnswerResult) { $block.AnswerResult } else { 'unsure' }
+                [void]$sb.AppendLine("**Answer Result:** $resultValue")
+
+                [void]$sb.AppendLine()
+
+                # Write body
+                foreach ($bodyLine in $block.Body) {
+                    [void]$sb.AppendLine($bodyLine)
+                }
+
+                [void]$sb.AppendLine()
+                [void]$sb.AppendLine('---')
+            }
+        }
+
+        return $sb.ToString().TrimEnd() + "`n"
+    }
+
+    function Group-BlockBySkill {
+        # Group blocks by Skill into an ordered list
+        param(
+            [Parameter(Mandatory)]
+            [AllowEmptyCollection()]
+            [object[]]$Blocks
+        )
+
+        $result = [System.Collections.Generic.List[hashtable]]::new()
+        $currentSkill = $null
+
+        foreach ($block in $Blocks) {
+            if (-not $currentSkill -or $currentSkill.SkillName -ne $block.Skill) {
+                $currentSkill = @{
+                    SkillName = $block.Skill
+                    Blocks    = [System.Collections.Generic.List[hashtable]]::new()
+                }
+                $result.Add($currentSkill)
+            }
+            $currentSkill.Blocks.Add($block)
+        }
+
+        return $result
+    }
+
+    function Get-DomainFileName {
+        # Map a domain name to its per-domain filename using the DomainStructure index
+        param(
+            [Parameter(Mandatory)]
+            [string]$DomainName,
+
+            [Parameter(Mandatory)]
+            [System.Collections.Generic.List[hashtable]]$DomainStructure,
+
+            [Parameter(Mandatory)]
+            [string]$PracticeDir
+        )
+
+        # Look for existing numbered domain files and match by index
+        $domainFiles = Get-ChildItem -Path $PracticeDir -Filter '*.md' |
+            Where-Object { $_.Name -ne 'README.md' } |
+            Sort-Object Name
+
+        for ($d = 0; $d -lt $DomainStructure.Count; $d++) {
+            if ($DomainStructure[$d].Name -eq $DomainName -and $d -lt $domainFiles.Count) {
+                return $domainFiles[$d].Name
+            }
+        }
+
+        # Fallback: should not happen with correctly scaffolded files
+        Write-Warning "No domain file found for '$DomainName'"
+        return $null
+    }
+
+    function Write-PracticeFileMulti {
+        # Write reorganized questions to per-domain files
+        param(
+            [Parameter(Mandatory)]
+            [System.Collections.Generic.List[hashtable]]$DomainStructure,
+
+            [Parameter(Mandatory)]
+            [AllowEmptyCollection()]
+            [System.Collections.Generic.List[hashtable]]$SortedBlocks,
+
+            [Parameter(Mandatory)]
+            [string]$PracticeDir
+        )
+
+        # Group sorted blocks by domain
+        $blocksByDomain = @{}
+        foreach ($block in $SortedBlocks) {
+            if (-not $blocksByDomain.ContainsKey($block.Domain)) {
+                $blocksByDomain[$block.Domain] = [System.Collections.Generic.List[hashtable]]::new()
+            }
+            $blocksByDomain[$block.Domain].Add($block)
+        }
+
+        # Write each domain file
+        foreach ($domainDef in $DomainStructure) {
+            $fileName = Get-DomainFileName -DomainName $domainDef.Name -DomainStructure $DomainStructure -PracticeDir $PracticeDir
+            if (-not $fileName) { continue }
+
+            $filePath = Join-Path -Path $PracticeDir -ChildPath $fileName
+
+            if ($blocksByDomain.ContainsKey($domainDef.Name)) {
+                $domainBlocks = $blocksByDomain[$domainDef.Name]
+            }
+            else {
+                $domainBlocks = [System.Collections.Generic.List[hashtable]]::new()
+            }
+
+            $content = Build-DomainFile -DomainName $domainDef.Name -DomainBlocks $domainBlocks -DomainStructure $DomainStructure
+
+            if ($PSCmdlet.ShouldProcess($filePath, 'Write reorganized domain questions')) {
+                Set-Content -Path $filePath -Value $content -Encoding UTF8 -NoNewline
+                Write-Host "Wrote $($domainBlocks.Count) questions to $fileName" -ForegroundColor Green
+            }
+        }
+    }
+
+    function Update-PracticeIndex {
+        # Regenerate the practice-questions/README.md index page with per-domain links and counts
+        param(
+            [Parameter(Mandatory)]
+            [System.Collections.Generic.List[hashtable]]$DomainStructure,
+
+            [Parameter(Mandatory)]
+            [AllowEmptyCollection()]
+            [System.Collections.Generic.List[hashtable]]$SortedBlocks,
+
+            [Parameter(Mandatory)]
+            [string]$PracticeDir
+        )
+
+        # Count questions per domain
+        $domainCounts = @{}
+        foreach ($block in $SortedBlocks) {
+            if ($domainCounts.ContainsKey($block.Domain)) {
+                $domainCounts[$block.Domain]++
+            }
+            else {
+                $domainCounts[$block.Domain] = 1
+            }
+        }
+
+        $sb = [System.Text.StringBuilder]::new()
+        [void]$sb.AppendLine("# Practice Exam Questions $([char]0x2014) $ExamName")
+        [void]$sb.AppendLine()
+        [void]$sb.AppendLine('Accounts for questions missed or unsure about in the practice exams. Questions are organized into per-domain files to keep each file small and responsive.')
+        [void]$sb.AppendLine()
+        [void]$sb.AppendLine('| # | Domain | File | Qs |')
+        [void]$sb.AppendLine('| -: | :----- | :--- | -: |')
+
+        for ($d = 0; $d -lt $DomainStructure.Count; $d++) {
+            $domainName = $DomainStructure[$d].Name
+            $fileName = Get-DomainFileName -DomainName $domainName -DomainStructure $DomainStructure -PracticeDir $PracticeDir
+            $count = if ($domainCounts.ContainsKey($domainName)) { $domainCounts[$domainName] } else { 0 }
+            [void]$sb.AppendLine("| $($d + 1) | $domainName | [$fileName]($fileName) | $count |")
+        }
+
+        $indexPath = Join-Path -Path $PracticeDir -ChildPath 'README.md'
+        $content = $sb.ToString().TrimEnd() + "`n"
+
+        if ($PSCmdlet.ShouldProcess($indexPath, 'Update practice questions index')) {
+            Set-Content -Path $indexPath -Value $content -Encoding UTF8 -NoNewline
+            Write-Host "Updated practice questions index at $indexPath" -ForegroundColor Green
+        }
+    }
+
     function Update-CoverageTable {
         # Update the Qs column in the exam README coverage table based on question metadata
         param(
@@ -538,6 +971,7 @@ $Helpers = {
             [System.Collections.Generic.List[hashtable]]$DomainStructure,
 
             [Parameter(Mandatory)]
+            [AllowEmptyCollection()]
             [System.Collections.Generic.List[hashtable]]$SortedBlocks
         )
 
@@ -619,6 +1053,7 @@ $Helpers = {
             [int]$OriginalCount,
 
             [Parameter(Mandatory)]
+            [AllowEmptyCollection()]
             [System.Collections.Generic.List[hashtable]]$SortedBlocks
         )
 
@@ -639,6 +1074,13 @@ $Helpers = {
         else {
             Write-Host "  Count verified:     OK" -ForegroundColor Green
         }
+
+        # Count answer result distribution
+        $wrongCount = ($SortedBlocks | Where-Object { $_.AnswerResult -eq 'wrong' }).Count
+        $unsureCount = ($SortedBlocks | Where-Object { $_.AnswerResult -eq 'unsure' -or -not $_.AnswerResult }).Count
+        $correctCount = ($SortedBlocks | Where-Object { $_.AnswerResult -eq 'correct' }).Count
+
+        Write-Host "  Answer results:     $wrongCount wrong, $unsureCount unsure, $correctCount correct"
 
         # Report metadata gaps
         if ($missingDomain -gt 0 -or $missingSkill -gt 0 -or $missingTask -gt 0) {

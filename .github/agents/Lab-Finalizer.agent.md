@@ -98,7 +98,7 @@ After assembly and before R-098 output, check whether the relevant practice-exam
 ### Procedure
 
 1. **Identify the exam.** Derive `<EXAM>` from the lab folder path (e.g., `AZ-104`, `AZ-305`).
-2. **Search for a matching question.** Use `textSearch` to scan `<EXAM>/practice-questions/README.md` for `###` headings whose topic matches the lab scenario (keywords from Section 1 or the lab folder name).
+2. **Search for a matching question.** Use `textSearch` to scan all `.md` files in `<EXAM>/practice-questions/` for question headings (`###` in per-domain files, `####` in single-file `README.md`) whose topic matches the lab scenario (keywords from Section 1 or the lab folder name).
 3. **If no matching question is found,** skip — report `N/A (no matching practice-exam question)` in R-098 § 6.
 4. **If a matching question is found,** check whether a `▶ Related Lab:` or `▶ Related Labs:` block beneath that question already contains a link to this lab folder.
 5. **If the link already exists,** skip — report `✓ already linked` in R-098 § 6.
