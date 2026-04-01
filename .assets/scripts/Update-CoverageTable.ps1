@@ -135,7 +135,11 @@ $Helpers = {
 
         # Place the study summary directly under Study Log and remove legacy marker locations
         $summary = Get-StudySummary
-        $summaryLine = "<!-- STUDY_SUMMARY -->**Hours Committed:** $($summary.HoursText) · **Days Studied:** $($summary.DaysStudied)<!-- /STUDY_SUMMARY -->"
+        $summaryLines = @(
+            '<!-- STUDY_SUMMARY -->',
+            "**Hours Committed:** $($summary.HoursText) · **Days Studied:** $($summary.DaysStudied)",
+            '<!-- /STUDY_SUMMARY -->'
+        )
         $lines = Get-Content -Path $ExamReadme -Encoding UTF8
         $filtered = [System.Collections.Generic.List[string]]::new()
         $inserted = $false
@@ -145,7 +149,8 @@ $Helpers = {
                 $line -match '<!--\s*HOURS_COMMITTED\s*-->' -or
                 $line -match '<!--\s*/HOURS_COMMITTED\s*-->' -or
                 $line -match '<!--\s*STUDY_SUMMARY\s*-->' -or
-                $line -match '<!--\s*/STUDY_SUMMARY\s*-->'
+                $line -match '<!--\s*/STUDY_SUMMARY\s*-->' -or
+                $line -match '^\*\*Hours Committed:\*\*.*\*\*Days Studied:\*\*'
             ) {
                 continue
             }
@@ -154,7 +159,9 @@ $Helpers = {
 
             if (-not $inserted -and $line -match '^-\s+\*\*Study Log:\*\*') {
                 $filtered.Add('')
-                $filtered.Add($summaryLine)
+                foreach ($summaryLine in $summaryLines) {
+                    $filtered.Add($summaryLine)
+                }
                 $inserted = $true
             }
         }
@@ -165,7 +172,9 @@ $Helpers = {
                     $objectiveIndex = $filtered.IndexOf($line)
                     if ($objectiveIndex -ge 0) {
                         $filtered.Insert($objectiveIndex + 1, '')
-                        $filtered.Insert($objectiveIndex + 2, $summaryLine)
+                        for ($i = 0; $i -lt $summaryLines.Count; $i++) {
+                            $filtered.Insert($objectiveIndex + 2 + $i, $summaryLines[$i])
+                        }
                         $inserted = $true
                     }
                     break
@@ -174,8 +183,10 @@ $Helpers = {
         }
 
         if (-not $inserted) {
-            $filtered.Insert(0, $summaryLine)
-            $filtered.Insert(1, '')
+            for ($i = $summaryLines.Count - 1; $i -ge 0; $i--) {
+                $filtered.Insert(0, $summaryLines[$i])
+            }
+            $filtered.Insert($summaryLines.Count, '')
         }
 
         if ($WhatIfPreference) {

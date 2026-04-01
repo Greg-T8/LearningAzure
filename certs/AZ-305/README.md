@@ -6,10 +6,9 @@
 - **Official Study Guide:** [AZ-305 Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-305)
 - **Study Log:** [Session-by-session study time tracker](./StudyLog.md)
 
-<!-- STUDY_SUMMARY -->**Hours Committed:** 5.0h · **Days Studied:** 3<!-- /STUDY_SUMMARY -->
-
-
-
+<!-- STUDY_SUMMARY -->
+**Hours Committed:** 5.0h · **Days Studied:** 3
+<!-- /STUDY_SUMMARY -->
 
 ---
 
