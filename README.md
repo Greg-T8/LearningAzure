@@ -12,7 +12,7 @@ Progress trackers, detailed study notes, practice exams, and hands-on labs:
 
 | Exam | Description | Status | Duration |
 |------|-------------|--------|---------|
-| 📕 [**AZ-305**](certs/AZ-305/README.md) | Azure Solutions Architect Expert | In Progress | 3/30/26 – 4/1/26 (2d) |
+| 📕 [**AZ-305**](certs/AZ-305/README.md) | Azure Solutions Architect Expert | In Progress | 3/30/26 – 4/2/26 (3d) |
 | 📓 [**AI-103**](certs/AI-103/README.md) | Azure AI App and Developer Associate | Not Started | |
 | 📗 [**AZ-104**](certs/AZ-104/README.md) | Azure Administrator Associate | Completed | 1/15/26 – 3/30/26 (74d) |
 | 📙 [**AI-102**](certs/AI-102/README.md) | Azure AI Engineer Associate | Retired | 2/10/26 – 3/14/26 (32d) |
@@ -25,20 +25,20 @@ Progress trackers, detailed study notes, practice exams, and hands-on labs:
 
 | Date | AZ-305 | Other | Total |
 |------|------|------|-------|
+| Thu, Apr 02 | 🟢 1h | 🟢 1.1h | **2.1h** |
 | Wed, Apr 01 | 🟣 2.2h |  | **2.2h** |
 | Tue, Mar 31 | 🟣 2.1h |  | **2.1h** |
 | Mon, Mar 30 | 🟡 0.6h |  | **0.6h** |
 | Sun, Mar 29 | 🟡 0.5h | 🟢 1.4h | **1.9h** |
 | Sat, Mar 28 |  | 🟡 0.8h | **0.8h** |
 | Fri, Mar 27 |  | 🟢 1.9h | **1.9h** |
-| Thu, Mar 26 |  | 🟣 2.8h | **2.8h** |
-| **Weekly Total** | **5.4h** | **6.9h** | **12.3h** |
-| ***Running Total*** | ***4.9h*** | ***0.0h*** | ***4.9h*** |
+| **Weekly Total** | **6.4h** | **5.2h** | **11.6h** |
+| ***Running Total*** | ***5.9h*** | ***1.1h*** | ***7.0h*** |
 
 *Activity Levels: 🟡 Low (< 1hr) | 🟢 Medium (1-2hrs) | 🟣 High (> 2hrs)*
 
 *Other = Lab workflow and automation design, content structure and development*  
 
-*Last updated: April 01, 2026 at 08:36 CDT*
+*Last updated: April 02, 2026 at 08:36 CDT*
 
 <!-- COMMIT_STATS_END -->

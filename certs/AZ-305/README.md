@@ -7,8 +7,9 @@
 - **Study Log:** [Session-by-session study time tracker](./StudyLog.md)
 
 <!-- STUDY_SUMMARY -->
-**Hours Committed:** 5.0h · **Days Studied:** 3
+**Hours Committed:** 6.0h · **Days Studied:** 4
 <!-- /STUDY_SUMMARY -->
+
 
 ---
 
@@ -20,12 +21,12 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md).
 
 | Domain | Weight | Skills | Qs | Tasks Covered | Status |
 | :----- | :----- | -----: | -: | :------------ | :----: |
-| [1. Identity, Governance & Monitoring](#domain-1) | 25–30% | 3 | 1 | 1 / 11 (9%) | 🔴 |
+| [1. Identity, Governance & Monitoring](#domain-1) | 25–30% | 3 | 2 | 2 / 11 (18%) | 🔴 |
 | [2. Data Storage](#domain-2) | 20–25% | 3 | 0 | 0 / 10 (0%) | 🔴 |
 | [3. Business Continuity](#domain-3) | 15–20% | 2 | 0 | 0 / 7 (0%) | 🔴 |
 | [4. Infrastructure](#domain-4) | 30–35% | 4 | 0 | 0 / 21 (0%) | 🔴 |
 
-**Totals:** 1 practice questions
+**Totals:** 2 practice questions
 
 **Legend:** 🟢 Strong (≥66%) · 🟡 Partial (33–65%) · 🔴 Low (<33%) — "Covered" = task has ≥1 practice question
 
@@ -37,11 +38,11 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md).
 
 <a id="domain-1"></a>
 <details>
-<summary><b>Domain 1: Design identity, governance, and monitoring solutions (25–30%)</b> — 11 tasks · 1 Qs</summary>
+<summary><b>Domain 1: Design identity, governance, and monitoring solutions (25–30%)</b> — 11 tasks · 2 Qs</summary>
 
 | Skill | Task | Qs |
 | :--- | :--- | -: |
-| Design solutions for logging and monitoring (3 tasks) | Recommend a logging solution | 0 |
+| Design solutions for logging and monitoring (3 tasks) | Recommend a logging solution | 1 |
 |  | Recommend a solution for routing logs | 0 |
 |  | Recommend a monitoring solution | 1 |
 | Design authentication and authorization solutions (5 tasks) | Recommend an authentication solution | 0 |
@@ -152,7 +153,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md).
 
 | # | Domain | Skill | Expected Start | Status | Started | Completed | Days |
 | -: | :----- | :---- | :------------- | :----- | :------ | :-------- | ---: |
-| 1 | Identity, Governance & Monitoring | Design solutions for logging and monitoring | Apr 1 | In Progress | 3/30/26 | | 2 |
+| 1 | Identity, Governance & Monitoring | Design solutions for logging and monitoring | Apr 1 | In Progress | 3/30/26 | | 3 |
 | 2 | Identity, Governance & Monitoring | Design authentication and authorization solutions | Apr 5 | Not Started | | | |
 | 3 | Identity, Governance & Monitoring | Design governance | Apr 13 | Not Started | | | |
 | 4 | Data Storage | Design data storage solutions for relational data | Apr 18 | Not Started | | | |
