@@ -4,6 +4,8 @@ Accounts for questions missed or unsure about in the practice exams.
 
 * [Design solutions for logging and monitoring](#design-solutions-for-logging-and-monitoring)
   * [Monitoring Solution for a Gaming App](#monitoring-solution-for-a-gaming-app)
+* [Design authentication and authorization solutions](#design-authentication-and-authorization-solutions)
+* [Design governance](#design-governance)
 
 ---
 
@@ -63,6 +65,12 @@ Time Series Insights is intended for time-series and IoT-style telemetry analysi
 * [What are Azure Monitor alerts?](https://learn.microsoft.com/azure/azure-monitor/alerts/alerts-overview)
 * [Azure Time Series Insights Gen2 data access overview](https://learn.microsoft.com/rest/api/time-series-insights/reference-data-access-overview)
 * [Get started with Azure AI Services - Training](https://learn.microsoft.com/training/paths/get-started-azure-ai/)
+
+* [0ed6591 - Azure Observability Blueprint](https://notebooklm.google.com/notebook/c0407f1f-03f4-45c2-8155-ae155499f7d1?artifactId=f28b9767-e325-43e2-8611-c0bc0b6f2951)
+* [0ed6591 - Monitoring Quiz](https://notebooklm.google.com/notebook/c0407f1f-03f4-45c2-8155-ae155499f7d1?artifactId=f6960d51-1a14-42fb-96a1-59975710a94f)
+* [0ed6591 - Choosing Your Lens: A Student's Guide to Azure Monitoring & Analytics Services](https://docs.google.com/document/d/14CoYV7K63fO4WhOE4MS9PxxS2pLgSjvaB7Ds4dohBog/edit?usp=sharing)
+* [0ed6591 - Azure Monitor and Foundry Observability Services Overview](https://docs.google.com/spreadsheets/d/1DPGV4OPnFFNzqLTNHs-VAI64j9Roz8CJQ88gocw0m0w/edit?usp=sharing)
+* [0ed6591 - Architectural Framework for Full-Stack Observability with Application Insights and OpenTelemetry](https://docs.google.com/document/d/1aeDHEtY4RaXPU7lHH_QNNIenWJyI0CHvCyt8bhOc1QM/edit?usp=sharing)
 
 </details>
 
