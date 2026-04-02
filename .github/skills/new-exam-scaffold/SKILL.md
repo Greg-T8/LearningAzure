@@ -1,17 +1,17 @@
 ---
 name: new-exam-scaffold
-description: 'Scaffold a new certification exam into the LearningAzure workspace. Creates the folder structure, README files, StudyLog, and updates all cross-cutting files (scripts, governance, shared contract, top-level README). Use when asked to add a new exam, create an exam, scaffold an exam, or introduce a new certification.'
+description: 'Scaffold a new certification exam into the LearningAzure workspace. Creates the folder structure, README files, StudyLog, Skills.psd1, and updates all cross-cutting files (scripts, governance, shared contract, top-level README). Use when asked to add a new exam, create an exam, scaffold an exam, or introduce a new certification.'
 user-invokable: true
 argument-hint: '[exam code]'
 ---
 
 # New Exam Scaffold
 
-Creates the complete folder structure and updates all cross-cutting files needed to introduce a new certification exam into the LearningAzure workspace.
+Creates the complete folder structure and updates all cross-cutting files needed to introduce a new certification exam into the LearningAzure workspace. Uses the AZ-305 exam as the reference template.
 
 ## When to Use
 
-- Adding a new Microsoft certification exam (e.g., AI-103, AZ-305, DP-100)
+- Adding a new Microsoft certification exam (e.g., AI-103, DP-100)
 - Replacing a retiring exam with its successor
 - Scaffolding a new exam structure from scratch
 
@@ -27,13 +27,15 @@ Before scaffolding, gather the following from the user. Do **not** guess or infe
 | **Certification URL** | Microsoft credential page URL | `https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-engineer/...` |
 | **Study Guide URL** | Official study guide URL | `https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/ai-103` |
 | **Exam Domains** | Full domain → skill → task hierarchy with weights | See [Domain Structure Format](#domain-structure-format) |
-| **Exam Focus** | `AI` or `Infrastructure` — determines resource naming prefixes | `AI` |
-| **Lab Domain Folders** | Subdirectory names for hands-on-labs | `generative-ai`, `agentic`, `computer-vision`, `nlp`, `knowledge-mining` |
-| **Start Date** | When study begins (or leave blank for later) | `3/15/26` |
+| **Start Date** | When study begins (or leave blank for later) | `4/1/26` |
+| **Expected Exam Date** | Target exam date | `7/1/26` |
+| **Study Pace** | Daily study commitment | `1.5 hrs/day, 7 days/week` |
+| **Include Labs?** | Whether to create hands-on labs structure | `Yes` / `No` |
+| **Lab Domain Folders** | *(Only if labs enabled)* Subdirectory names for hands-on-labs | `compute`, `networking`, `storage` |
 
 ### Domain Structure Format
 
-Provide the official exam domain hierarchy. This populates the coverage table in the exam README:
+Provide the official exam domain hierarchy. This populates the Skills.psd1 and coverage table in the exam README:
 
 ```
 Domain 1: <Name> (<Weight>)
@@ -60,64 +62,103 @@ Create the following directory structure under `certs/`:
 certs/<EXAM>/
 ├── README.md
 ├── StudyLog.md
-├── hands-on-labs/
-│   ├── README.md
-│   └── <domain-folder>/          ← one per lab domain
-│       └── .gitkeep
-├── learning-paths/
-│   └── README.md
-├── practice-questions/
-│   ├── .img/
-│   │   └── .gitkeep
-│   └── README.md
-└── video-courses/
-    └── README.md
+├── Skills.psd1
+└── practice-questions/
+    ├── README.md
+    ├── .img/
+    │   └── .gitkeep
+    └── <NN>-<domain-slug>.md     ← one per domain
 ```
+
+If labs are enabled, also create:
+
+```
+    └── hands-on-labs/
+        ├── README.md
+        └── <domain-folder>/      ← one per lab domain
+            └── .gitkeep
+```
+
+Other folders (`learning-paths/`, `video-courses/`) are **not** created during scaffolding. They are added later when content is available.
 
 ### 1.2 File Templates
 
+#### `certs/<EXAM>/Skills.psd1` — Domain/Skill/Task Hierarchy
+
+This file powers `Invoke-AzStudySession.ps1` skill validation and practice exam organization. Create it **before** the README — it is the authoritative source for the domain/skill/task hierarchy.
+
+```powershell
+# -------------------------------------------------------------------------
+# Data: Skills.psd1
+# Description: Domain, skill, and task hierarchy for the <EXAM> exam
+# Context: <EXAM> — <Full Title>
+# Author: Greg Tate
+# -------------------------------------------------------------------------
+
+@{
+    Domains = @(
+        @{
+            Name   = '<Domain 1 full name>'
+            Skills = @(
+                @{
+                    Name  = '<Skill 1 name>'
+                    Tasks = @(
+                        '<Task description>'
+                        '<Task description>'
+                    )
+                }
+                @{
+                    Name  = '<Skill 2 name>'
+                    Tasks = @(
+                        '<Task description>'
+                    )
+                }
+            )
+        }
+        @{
+            Name   = '<Domain 2 full name>'
+            Skills = @(
+                # ... same structure
+            )
+        }
+    )
+}
+```
+
+Use the exact domain/skill/task wording from the official study guide — this data is the single source of truth for metadata matching.
+
 #### `certs/<EXAM>/README.md` — Main Exam README
 
-Follow the established format from existing exams. Include:
+Sections in order:
 
 1. **Title** — `# <EXAM>: <Full Title> — Study Guide`
 2. **Objective statement** with credential name
 3. **Links** — Certification page, study guide, study log
-4. **Progress Tracker** — `## 📚 Progress Tracker` section with the table format below, followed by a legend line. All status `Not Started` unless a start date is provided.
-5. **Coverage Dashboard** — `## 📊 Exam Coverage` header, a preamble sentence linking to practice questions and labs, then the dashboard between `<!-- BEGIN COVERAGE DASHBOARD -->` and `<!-- END COVERAGE DASHBOARD -->` markers. One row per domain with anchor links (`#domain-1`, etc.), weights, skill counts, zero Qs/Labs counts, a `Tasks Covered` column (`0 / N (0%)`), and status emoji. Followed by a Totals line, Legend, and a Note about practice question criteria.
-6. **Coverage Table** — Between `<!-- BEGIN COVERAGE TABLE -->` and `<!-- END COVERAGE TABLE -->` markers. Full domain → skill → task hierarchy with `| Qs | Labs |` columns initialized to `0 | 0`. Each skill name includes a `(T tasks)` suffix showing the number of tasks under that skill.
+4. **Study Summary** — `<!-- STUDY_SUMMARY -->` marker block
+5. **Coverage Dashboard** — `## 📊 Exam Coverage` with dashboard and coverage table
+6. **Progress Tracker** — `## 📚 Progress Tracker` with per-skill phased format
 
-**Progress Tracker format** (must match one of the supported header patterns for `Update-ProgressTrackerDays.ps1` auto-discovery):
+**Header and links format:**
 
 ```markdown
-## 📚 Progress Tracker
+# <EXAM>: <Full Title> — Study Guide
 
-| Priority | Modality | Domain | My Notes | Status | Started | Completed | Days |
-| :------- | :------- | :----- | :------- | :----- | :------ | :-------- | :--- |
-| 1        | Microsoft Learn | <Domain 1 short name> | [Microsoft Learning Paths](./learning-paths/README.md) | Not Started |  |  |  |
-| 2        | Hands-on Labs | <Domain 1 short name> | [Hands-on Labs](./hands-on-labs/README.md) | Not Started |  |  |  |
-| 3        | Practice Questions | <Domain 1 short name> | [Practice Questions](./practice-questions/README.md) | Not Started |  |  |  |
-| 1        | Microsoft Learn | <Domain 2 short name> | [Microsoft Learning Paths](./learning-paths/README.md) | Not Started |  |  |  |
-| 2        | Hands-on Labs | <Domain 2 short name> | [Hands-on Labs](./hands-on-labs/README.md) | Not Started |  |  |  |
-| 3        | Practice Questions | <Domain 2 short name> | [Practice Questions](./practice-questions/README.md) | Not Started |  |  |  |
-| 1        | Microsoft Learn | <Domain N short name> | [Microsoft Learning Paths](./learning-paths/README.md) | Not Started |  |  |  |
-| 2        | Hands-on Labs | <Domain N short name> | [Hands-on Labs](./hands-on-labs/README.md) | Not Started |  |  |  |
-| 3        | Practice Questions | <Domain N short name> | [Practice Questions](./practice-questions/README.md) | Not Started |  |  |  |
-| 4        | Video |  | [Video Courses](./video-courses/README.md) | Not Started |  |  |  |
+**Objective:** Achieve the **<Certification Name>** certification using Microsoft Learn, practice exams, and video courses.
 
-**Legend:** Not Started | In Progress | Completed
+- **Certification Page:** [<Certification Name>](<certification-url>)
+- **Official Study Guide:** [<EXAM> Study Guide](<study-guide-url>)
+- **Study Log:** [Session-by-session study time tracker](./StudyLog.md)
 
-<!-- HOURS_COMMITTED -->**Hours Committed:** 0h<!-- /HOURS_COMMITTED -->
+<!-- STUDY_SUMMARY -->
+**Hours Committed:** 0h · **Days Studied:** 0
+<!-- /STUDY_SUMMARY -->
 ```
 
-- **Domain short names** come from the coverage dashboard (e.g., "Identity, Governance & Monitoring", "Data Storage").
-- **Video** is a standalone row with an empty Domain cell — it is not tracked per domain.
-- Emit one row per modality per domain. For an exam with N domains, the table has 3×N + 1 rows (3 modalities × N domains + 1 Video row).
-- The script `Update-ProgressTrackerDays.ps1` supports both the old format (without Domain column) and this new format. It auto-detects which format is in use by checking for a `Domain` column in the header row. Both header patterns are valid for auto-discovery:
-  - Old: `| Priority | Modality | My Notes | Status | Started | Completed | Days |`
-  - New: `| Priority | Modality | Domain | My Notes | Status | Started | Completed | Days |`
+The `<!-- STUDY_SUMMARY -->` block is maintained by `Update-CoverageTable.ps1`. It replaces the legacy `<!-- HOURS_COMMITTED -->` marker.
 
-**Coverage section preamble:**
+**Coverage section preamble** (varies by labs):
+
+With labs:
 
 ```markdown
 ## 📊 Exam Coverage
@@ -125,7 +166,36 @@ Follow the established format from existing exams. Include:
 Task-level coverage from [Practice Questions](./practice-questions/README.md) and [Hands-on Labs](./hands-on-labs/README.md).
 ```
 
+Without labs:
+
+```markdown
+## 📊 Exam Coverage
+
+Task-level coverage from [Practice Questions](./practice-questions/README.md).
+```
+
 **Dashboard table** (between `<!-- BEGIN COVERAGE DASHBOARD -->` and `<!-- END COVERAGE DASHBOARD -->` markers):
+
+Without labs (default):
+
+```markdown
+<!-- BEGIN COVERAGE DASHBOARD -->
+
+| Domain | Weight | Skills | Qs | Tasks Covered | Status |
+| :----- | :----- | -----: | -: | :------------ | :----: |
+| [1. <Short Name>](#domain-1) | XX–XX% | S | 0 | 0 / N (0%) | 🔴 |
+| [2. <Short Name>](#domain-2) | XX–XX% | S | 0 | 0 / N (0%) | 🔴 |
+
+**Totals:** 0 practice questions
+
+**Legend:** 🟢 Strong (≥66%) · 🟡 Partial (33–65%) · 🔴 Low (<33%) — "Covered" = task has ≥1 practice question
+
+> **Note:** Practice questions are those missed or not confidently answered correctly.
+
+<!-- END COVERAGE DASHBOARD -->
+```
+
+With labs:
 
 ```markdown
 <!-- BEGIN COVERAGE DASHBOARD -->
@@ -146,10 +216,29 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 
 - `S` = number of skills in each domain (from the exam study guide hierarchy).
 - `N` = total task count for each domain from the coverage table.
-- `<Short Name>` = abbreviated domain name for the dashboard (e.g., "Identities & Governance").
+- `<Short Name>` = abbreviated domain name for the dashboard (e.g., "Identity, Governance & Monitoring").
 - All new exams start with `🔴` status and zero counts.
 
-**Domain sections** use the compact `<details>/<summary>` format (no `###` headings):
+**Coverage table** (between `<!-- BEGIN COVERAGE TABLE -->` and `<!-- END COVERAGE TABLE -->` markers):
+
+Domain sections use the compact `<details>/<summary>` format (no `###` headings):
+
+Without labs (default):
+
+```markdown
+<a id="domain-1"></a>
+<details>
+<summary><b>Domain 1: <Name> (<Weight>)</b> — N tasks · 0 Qs</summary>
+
+| Skill | Task | Qs |
+| :--- | :--- | -: |
+| <Skill Name> (T tasks) | <Task description> | 0 |
+|  | <Task description> | 0 |
+
+</details>
+```
+
+With labs:
 
 ```markdown
 <a id="domain-1"></a>
@@ -170,6 +259,61 @@ Dashboard status indicators:
 - 🟡 Partial (33–65%)
 - 🔴 Low (<33%)
 
+**Progress Tracker** — per-skill phased format:
+
+```markdown
+---
+
+## 📚 Progress Tracker
+
+**Goal:** Pass <EXAM> at the <duration> mark (~<Expected Exam Date>) · **Pace:** <Study Pace>
+
+### Per-Skill Workload & Day Allocation
+
+| # | Domain | Skill | ML (min) | PQs | PQ (min) | Total (min) | Days |
+| -: | :----- | :---- | -------: | --: | -------: | ----------: | ---: |
+| 1 | <Domain 1 short name> | <Skill 1 name> | 0 | 0 | 0 | 0 | 0 |
+| 2 | <Domain 1 short name> | <Skill 2 name> | 0 | 0 | 0 | 0 | 0 |
+| 3 | <Domain 2 short name> | <Skill 3 name> | 0 | 0 | 0 | 0 | 0 |
+| | **Totals** | | **0** | **0** | **0** | **0** | **0** |
+
+> ML = Microsoft Learn module time · PQs = MeasureUp practice questions · PQ (min) = PQs × ~6 min
+
+### Phase 1 — Learn + Practice per Skill (<start date> – <end date>)
+
+| # | Domain | Skill | Expected Start | Status | Started | Completed | Days |
+| -: | :----- | :---- | :------------- | :----- | :------ | :-------- | ---: |
+| 1 | <Domain 1 short name> | <Skill 1 name> | <date> | Not Started | | | |
+| 2 | <Domain 1 short name> | <Skill 2 name> | <date> | Not Started | | | |
+| 3 | <Domain 2 short name> | <Skill 3 name> | <date> | Not Started | | | |
+
+### Phase 2 — Review & Practice Exams (<start date> – <end date>)
+
+| # | Modality | Expected Start | Status | Started | Completed | Days |
+| -: | :------- | :------------- | :----- | :------ | :-------- | ---: |
+| N+1 | Video Course | <date> | Not Started | | | |
+| N+2 | Practice Exam (Tutorials Dojo) | <date> | Not Started | | | |
+| N+3 | Practice Exam (Microsoft Assessment) | <date> | Not Started | | | |
+
+**Legend:** Not Started · In Progress · Completed
+```
+
+Notes on per-skill workload table:
+
+- **ML (min)** — Sum of Microsoft Learn module times for the skill’s modules. Populate from the learning path module lengths.
+- **PQs** — Estimated MeasureUp practice questions. Roughly proportional to domain weight.
+- **PQ (min)** — PQs × ~6 min (estimated time per practice question).
+- **Days** — Total (min) ÷ daily study minutes.
+- Populate values after identifying Microsoft Learn paths and practice question sources. Use zeroes as placeholders if not yet known.
+
+Phase 1 date calculation:
+
+- Start from the study start date
+- Add days allocated per skill sequentially
+- Phase 2 begins after Phase 1 ends
+
+> **Script compatibility:** The per-skill progress tracker format (header `| # | Domain | Skill |`) is **not** auto-detected by `Update-ProgressTrackerDays.ps1`, which only matches the legacy `| Priority | Modality |` header. Days tracking for the per-skill format is done by `Invoke-AzStudySession.ps1` session logging.
+
 #### `certs/<EXAM>/StudyLog.md` — Study Time Tracker
 
 ```markdown
@@ -181,39 +325,11 @@ This log tracks individual study sessions for the **<EXAM>** exam. Fill in **End
 
 ## Session History
 
-| # | Date | Start | End | Duration | Notes |
-|:--|:-----|:------|:----|:---------|:------|
+| # | Date | Start | End | Duration | Mode | Skill | Notes |
+|:--|:-----|:------|:----|:---------|:-----|:------|:------|
 ```
 
-#### `certs/<EXAM>/hands-on-labs/README.md` — Lab Catalog
-
-```markdown
-# <EXAM> Hands-on Labs
-
-Practice labs that reinforce exam objectives through real Azure deployments.
-
-All labs follow the governance policies in [Governance-Lab.md](../../../.assets/shared/Governance-Lab.md).
-
----
-
-## 📈 Lab Statistics
-
-- **Total Labs:** 0
-<domain counts — one line per domain, all 0>
-
----
-
-## 🧪 Labs
-
-*No labs yet. Labs are built as practice exam questions reveal knowledge gaps.*
-
----
-
-## 📋 Governance & Standards
-
-- **Governance Policy:** [Governance-Lab.md](../../../.assets/shared/Governance-Lab.md)
-- **Shared Contract:** [lab-shared-contract](../../../.github/skills/lab-shared-contract/SKILL.md)
-```
+The `Mode` column values correspond to `Invoke-AzStudySession.ps1` modes (e.g., `MSLearn`, `PracticeQuestion`, `Video`, `Lab`). The `Skill` column records which specific skill was studied.
 
 #### `certs/<EXAM>/practice-questions/README.md` — Practice Questions Index
 
@@ -247,18 +363,38 @@ Accounts for questions missed or unsure about in the practice exams.
 ## <Skill 2 Name>
 ```
 
-#### `certs/<EXAM>/learning-paths/README.md` — Learning Paths Catalog
+### 1.3 Optional: Hands-on Labs Structure
 
-Follow the format of existing learning path READMEs. Include a progress table with path names, module counts, and status columns. If paths are not yet available, note that they will be populated when Microsoft publishes the learning paths. Do **not** create subfolders for individual learning paths — those are added later as study progresses.
+Created only when the user confirms labs are planned for this exam.
 
-#### `certs/<EXAM>/video-courses/README.md` — Video Courses
-
-Create a minimal README placeholder. Do **not** create subfolders (e.g., `savill/`) — those are added later when video notes are taken.
+#### `certs/<EXAM>/hands-on-labs/README.md` — Lab Catalog
 
 ```markdown
-# <EXAM> — Video Courses
+# <EXAM> Hands-on Labs
 
-*No video course notes yet.*
+Practice labs that reinforce exam objectives through real Azure deployments.
+
+All labs follow the governance policies in [Governance-Lab.md](../../../.assets/shared/Governance-Lab.md).
+
+---
+
+## 📈 Lab Statistics
+
+- **Total Labs:** 0
+<domain counts — one line per domain, all 0>
+
+---
+
+## 🧪 Labs
+
+*No labs yet. Labs are built as practice exam questions reveal knowledge gaps.*
+
+---
+
+## 📋 Governance & Standards
+
+- **Governance Policy:** [Governance-Lab.md](../../../.assets/shared/Governance-Lab.md)
+- **Shared Contract:** [lab-shared-contract](../../../.github/skills/lab-shared-contract/SKILL.md)
 ```
 
 ---
@@ -279,13 +415,15 @@ Add the new exam to the **Certifications table** (under `## 📚 Certifications`
 
 ### 2.2 Governance-Lab.md
 
+**Only update if the exam includes hands-on labs.**
+
 Add the exam code to the title scope:
 
 ```markdown
 Standards for all Terraform and Bicep labs (AZ-104, AZ-305, <NEW-EXAM>).
 ```
 
-If the exam has a distinct resource focus (e.g., AI services vs. infrastructure), add an exam-specific resource prefix table under `§2.2 Resource Naming` following the format of existing prefix tables:
+If the exam has distinct resource types, add an exam-specific resource prefix table under `§2.2 Resource Naming` following the format of existing prefix tables:
 
 ```markdown
 #### <EXAM> Prefixes
@@ -302,6 +440,8 @@ Add the exam to the `Project` tag examples in `§1.2 Required Tags`:
 ```
 
 ### 2.3 lab-shared-contract SKILL.md
+
+**Only update if the exam includes hands-on labs.**
 
 **R-001** — Add the lowercase exam code to the `<exam>` definition:
 
@@ -341,7 +481,7 @@ No `ValidateSet` updates or hardcoded exam lists are needed in these scripts.
 
 #### `Update-LabReferences.ps1`
 
-Add the exam to the `$DomainConfig` hashtable with domain folder→display-name mappings:
+**Only update if the exam includes hands-on labs.** Add the exam to the `$DomainConfig` hashtable with domain folder→display-name mappings:
 
 ```powershell
 $DomainConfig = @{
@@ -363,7 +503,7 @@ The domain ordering determines how labs are grouped and sequenced in the catalog
 
 #### `Invoke-AzStudySession.ps1`
 
-Standard exams under `certs/<EXAM>/` using `StudyLog.md` require **no changes** — the script discovers them automatically via `Get-ActiveExam.ps1` and defaults to `certs\<EXAM>` folder and `StudyLog.md`.
+Standard exams under `certs/<EXAM>/` using `StudyLog.md` and `Skills.psd1` require **no changes** — the script discovers them automatically via `Get-ActiveExam.ps1` and defaults to `certs\<EXAM>` folder and `StudyLog.md`.
 
 Only add entries if the exam uses a non-standard folder or log file:
 
@@ -372,13 +512,7 @@ Only add entries if the exam uses a non-standard folder or log file:
 
 #### `Update-ProgressTrackerDays.ps1`
 
-No changes required. This script auto-discovers all exam READMEs by scanning `certs/*/README.md` for files whose progress tracker table matches this header pattern:
-
-```
-| Priority | Modality | My Notes | Status | Started | Completed | Days |
-```
-
-New exams are picked up automatically when their README includes this exact header row.
+The per-skill progress tracker format (header `| # | Domain | Skill |`) used by new exams is **not** auto-detected by this script. The script only matches the legacy `| Priority | Modality |` header pattern. No changes are needed — days tracking for the per-skill format is handled by `Invoke-AzStudySession.ps1` session logging instead.
 
 #### `Invoke-ContentMaintenance.ps1`
 
@@ -399,7 +533,7 @@ Since child scripts use dynamic discovery, the orchestrator automatically proces
 
 #### `lab-catalog-updater/SKILL.md`
 
-Add the exam to the **Scope** section and define its **domain ordering**:
+**Only update if the exam includes hands-on labs.** Add the exam to the **Scope** section and define its **domain ordering**:
 
 ```markdown
 - `certs/<NEW-EXAM>/hands-on-labs/README.md`
@@ -430,12 +564,14 @@ After all files are created and updated, verify:
 | Check | How |
 | ----- | --- |
 | Folder structure exists | List `certs/<EXAM>/` directory recursively |
+| Skills.psd1 is valid | Run `Import-PowerShellDataFile certs/<EXAM>/Skills.psd1` — should parse without errors |
 | README has coverage markers | Confirm `<!-- BEGIN COVERAGE TABLE -->`, `<!-- END COVERAGE TABLE -->`, `<!-- BEGIN COVERAGE DASHBOARD -->`, and `<!-- END COVERAGE DASHBOARD -->` markers exist |
+| README has study summary | Confirm `<!-- STUDY_SUMMARY -->` and `<!-- /STUDY_SUMMARY -->` markers exist |
 | Content maintenance passes | Run `Invoke-ContentMaintenance.ps1 -WhatIf` — all steps should complete without errors |
 | Study session works | Run `Invoke-AzStudySession.ps1 -Action Start -Mode <NEW-EXAM>` then `-Action Stop` |
 | Top-level README links resolve | Confirm the certifications table links to existing `certs/<EXAM>/README.md` |
-| Governance references exam | Search `Governance-Lab.md` for the exam code |
-| Lab domain config | Confirm `Update-LabReferences.ps1` `$DomainConfig` contains the new exam entry |
+| Governance references exam | *(Labs only)* Search `Governance-Lab.md` for the exam code |
+| Lab domain config | *(Labs only)* Confirm `Update-LabReferences.ps1` `$DomainConfig` contains the new exam entry |
 | Domain count matches | Count tasks in coverage table vs. `<summary>` tag totals |
 | No raw unicode escapes | Scan all generated files for literal unicode escape sequences (`\uXXXX`, `\u{XXXXX}`, `&#xNNNN;`). If any are found, replace them with the actual rendered character. |
 
@@ -450,6 +586,9 @@ After all files are created and updated, verify:
 - **Do** assign the next available R-0xx ID when adding shared contract rules.
 - **Do** follow existing file formatting conventions exactly (line endings, marker comments, table alignment).
 - **Do not** modify any existing exam's content — only add the new exam and update shared references.
+- **Do** create `Skills.psd1` before the README — it is the authoritative source for the domain/skill/task hierarchy.
+- **Do** use `<!-- STUDY_SUMMARY -->` markers (not the legacy `<!-- HOURS_COMMITTED -->`).
+- **Do** generate per-domain practice question files (not a single combined file).
 
 ## Output
 
@@ -458,4 +597,4 @@ After completing the scaffold, report:
 1. **Files Created** — Full list of new files and directories
 2. **Files Updated** — Each cross-cutting file modified with a one-line description of the change
 3. **Validation Results** — Pass/fail for each check in Phase 3
-4. **Next Steps** — Remind user to populate the exam domains from the official study guide if placeholder was used
+4. **Next Steps** — Remind user to populate the per-skill workload table from Microsoft Learn module times and practice question estimates
