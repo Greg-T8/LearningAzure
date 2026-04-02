@@ -4,6 +4,7 @@ Accounts for questions missed or unsure about in the practice exams.
 
 * [Design solutions for logging and monitoring](#design-solutions-for-logging-and-monitoring)
   * [Monitoring Solution for a Gaming App](#monitoring-solution-for-a-gaming-app)
+  * [Microsoft Entra Activity Logs](#microsoft-entra-activity-logs)
 * [Design authentication and authorization solutions](#design-authentication-and-authorization-solutions)
 * [Design governance](#design-governance)
 
@@ -16,7 +17,7 @@ Accounts for questions missed or unsure about in the practice exams.
 **Domain:** Design identity, governance, and monitoring solutions
 **Skill:** Design solutions for logging and monitoring
 **Task:** Recommend a monitoring solution
-**Answered:** Incorrectly
+**Answered:** Incorretly
 **ID:** 0ed6591
 
 You are designing a monitoring solution for a gaming website hosted in an Azure Web App.
@@ -75,6 +76,63 @@ Time Series Insights is intended for time-series and IoT-style telemetry analysi
 </details>
 
 ---
+
+### Microsoft Entra Activity Logs
+
+**Domain:** Design identity, governance, and monitoring solutions
+**Skill:** Design solutions for logging and monitoring
+**Task:** Recommend a logging solution
+**Answered:** Incorrectly
+**ID:** 6f21747
+
+You are designing a monitoring strategy of user sign-ins for a web application.
+
+You need to evaluate Microsoft Entra activity logs as a possible solution.
+
+For each of the following statements, select Yes if the statement is true. Otherwise, select No.
+
+| Statement | Yes | No |
+|----------|-----|----|
+| You can configure Microsoft Entra sign-in logs to be routed to an Azure Storage account for archiving. | ☐ | ☐ |
+| An Azure Log Analytics workspace is required to enable sending Microsoft Entra activity logs to Azure Monitor. | ☐ | ☐ |
+| Microsoft Entra Password Protection is a prerequisite to enable Microsoft Entra activity logs. | ☐ | ☐ |
+
+<details>
+<summary>📸 Click to expand screenshot</summary>
+
+<img src='.img/2026-04-02-07-01-08.png' width='600'>
+
+</details>
+
+<details open>
+<summary>💡 Click to expand explanation</summary>
+
+**Correct Answer**
+
+1. Yes
+2. Yes
+3. No
+
+Microsoft Entra sign-in logs can be routed to an Azure Storage account for long-term archiving.
+
+Sending Microsoft Entra activity logs to Azure Monitor requires a Log Analytics workspace.
+
+Microsoft Entra Password Protection is a separate feature and is not required to enable Microsoft Entra activity logs.
+
+**Why the other options are incorrect**
+
+The first statement is true because Azure Storage is a supported long-term storage target for Microsoft Entra logs.
+
+The second statement is true because Azure Monitor logs use a Log Analytics workspace as the destination.
+
+The third statement is false because Microsoft Entra Password Protection is unrelated to enabling activity log collection or routing.
+
+**References**
+
+* [What are the Microsoft Entra activity log integration options?](https://learn.microsoft.com/entra/identity/monitoring-health/concept-log-monitoring-integration-options-considerations#integration-options)
+* [Monitor and review logs for on-premises Microsoft Entra Password Protection environments](https://learn.microsoft.com/entra/identity/authentication/howto-password-ban-bad-on-premises-monitor)
+
+</details>
 
 ## Design authentication and authorization solutions
 
