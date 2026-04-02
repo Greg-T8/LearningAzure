@@ -118,28 +118,50 @@ $Main = {
             Show-Confirmation -Message "Study session #$session started for $Exam"
         }
         'Stop' {
-            $sourceExam = Find-ActiveExam
+            # If Exam is provided, stop the active session in that exam log; otherwise detect the active exam.
+            $sourceExam = if ($Exam) { $Exam } else { Find-ActiveExam }
             if (-not $sourceExam) {
                 throw 'No active study session found in any exam study log.'
+            }
+
+            # Validate non-workflow exams when Exam is explicitly provided.
+            if ($Exam) {
+                Confirm-ValidExam -Exam $sourceExam
             }
 
             $sourceFolder = Resolve-ExamFolder -Exam $sourceExam
             $sourceLogFileName = Resolve-ExamLogFileName -Exam $sourceExam
             $sourceLog = Join-Path -Path $RepoRoot -ChildPath "$sourceFolder\$sourceLogFileName"
+
+            if (-not (Test-Path -Path $sourceLog)) {
+                throw "Study log not found at '$sourceLog'."
+            }
+
             $sourceSession = Get-ActiveSessionNumber -LogFile $sourceLog
             Close-SessionEntry -SessionNumber $sourceSession -LogFile $sourceLog -Notes $Notes
             Push-StudyLogChange -SessionNumber $sourceSession -Type 'end' -Exam $sourceExam
             Show-Confirmation -Message "Study session #$sourceSession ended for $sourceExam"
         }
         'End' {
-            $sourceExam = Find-ActiveExam
+            # If Exam is provided, stop the active session in that exam log; otherwise detect the active exam.
+            $sourceExam = if ($Exam) { $Exam } else { Find-ActiveExam }
             if (-not $sourceExam) {
                 throw 'No active study session found in any exam study log.'
+            }
+
+            # Validate non-workflow exams when Exam is explicitly provided.
+            if ($Exam) {
+                Confirm-ValidExam -Exam $sourceExam
             }
 
             $sourceFolder = Resolve-ExamFolder -Exam $sourceExam
             $sourceLogFileName = Resolve-ExamLogFileName -Exam $sourceExam
             $sourceLog = Join-Path -Path $RepoRoot -ChildPath "$sourceFolder\$sourceLogFileName"
+
+            if (-not (Test-Path -Path $sourceLog)) {
+                throw "Study log not found at '$sourceLog'."
+            }
+
             $sourceSession = Get-ActiveSessionNumber -LogFile $sourceLog
             Close-SessionEntry -SessionNumber $sourceSession -LogFile $sourceLog -Notes $Notes
             Push-StudyLogChange -SessionNumber $sourceSession -Type 'end' -Exam $sourceExam
