@@ -10,6 +10,9 @@ Links to official Microsoft Learn documentation, organized by exam domain and sk
 
 ### Design solutions for logging and monitoring
 
+<details>
+<summary>Show references</summary>
+
 - [Microsoft Learn Module: Design a solution to log and monitor Azure resources](https://learn.microsoft.com/en-us/training/modules/design-solution-to-log-monitor-azure-resources/)
   - [Unit 1 - Introduction](https://learn.microsoft.com/en-us/training/modules/design-solution-to-log-monitor-azure-resources/1-introduction)
   - [Unit 2 - Design for Azure Monitor data sources](https://learn.microsoft.com/en-us/training/modules/design-solution-to-log-monitor-azure-resources/2-design-for-azure-monitor-data-sources)
@@ -45,17 +48,54 @@ Links to official Microsoft Learn documentation, organized by exam domain and sk
     - [Azure Well-Architected Framework - Design review checklist for Performance Efficiency](https://learn.microsoft.com/en-us/azure/well-architected/performance-efficiency/checklist)
     - [Azure Data Explorer - What is Azure Data Explorer?](https://learn.microsoft.com/en-us/azure/data-explorer/data-explorer-overview)
 
+</details>
+
 ### Design authentication and authorization solutions
 
+<details>
+<summary>Show references</summary>
+
+- References coming soon.
+
+</details>
+
 ### Design governance
+
+<details>
+<summary>Show references</summary>
+
+- References coming soon.
+
+</details>
 
 ## Domain 2: Design data storage solutions
 
 ### Design data storage solutions for relational data
 
+<details>
+<summary>Show references</summary>
+
+- References coming soon.
+
+</details>
+
 ### Design data storage solutions for semi-structured and unstructured data
 
+<details>
+<summary>Show references</summary>
+
+- References coming soon.
+
+</details>
+
 ### Design data integration
+
+<details>
+<summary>Show references</summary>
+
+- References coming soon.
+
+</details>
 
 ---
 
@@ -63,7 +103,21 @@ Links to official Microsoft Learn documentation, organized by exam domain and sk
 
 ### Design solutions for backup and disaster recovery
 
+<details>
+<summary>Show references</summary>
+
+- References coming soon.
+
+</details>
+
 ### Design for high availability
+
+<details>
+<summary>Show references</summary>
+
+- References coming soon.
+
+</details>
 
 ---
 
@@ -71,8 +125,36 @@ Links to official Microsoft Learn documentation, organized by exam domain and sk
 
 ### Design compute solutions
 
+<details>
+<summary>Show references</summary>
+
+- References coming soon.
+
+</details>
+
 ### Design an application architecture
+
+<details>
+<summary>Show references</summary>
+
+- References coming soon.
+
+</details>
 
 ### Design migrations
 
+<details>
+<summary>Show references</summary>
+
+- References coming soon.
+
+</details>
+
 ### Design network solutions
+
+<details>
+<summary>Show references</summary>
+
+- References coming soon.
+
+</details>
