@@ -8,6 +8,7 @@ This log tracks individual work sessions for backend study-process design, inclu
 
 | # | Date | Start | End | Duration | Notes |
 |:--|:-----|:------|:----|:---------|:------|
+| 14 | 4/3/26 | 5:29 AM |  |  | Building out references process for AZ-305 exam |
 | 13 | 4/2/26 | 6:02 AM | 7:05 AM | 1h 3m | Addressing issue in markdown paste extension and refining Invoke-AzStudySession.ps1 command |
 | 12 | 3/20/26 | 5:11 AM | 8:10 PM | 110h 59m | auto-closed at last commit |
 | 11 | 3/19/26 | 5:22 AM | 6:00 AM | 0h 38m |  |
