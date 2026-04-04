@@ -10,8 +10,6 @@
 **Hours Committed:** 6.0h · **Days Studied:** 4
 <!-- /STUDY_SUMMARY -->
 
-
-
 ---
 
 ## 📊 Exam Coverage
