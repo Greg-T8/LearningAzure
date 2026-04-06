@@ -7,8 +7,9 @@
 - **Study Log:** [Session-by-session study time tracker](./StudyLog.md)
 
 <!-- STUDY_SUMMARY -->
-**Hours Committed:** 8.8h · **Days Studied:** 6
+**Hours Committed:** 10.3h · **Days Studied:** 7
 <!-- /STUDY_SUMMARY -->
+
 
 
 
@@ -154,7 +155,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md).
 
 | # | Domain | Skill | Expected Start | Status | Started | Completed | Days |
 | -: | :----- | :---- | :------------- | :----- | :------ | :-------- | ---: |
-| 1 | Identity, Governance & Monitoring | Design solutions for logging and monitoring | Apr 1 | In Progress | 3/30/26 | | 6 |
+| 1 | Identity, Governance & Monitoring | Design solutions for logging and monitoring | Apr 1 | In Progress | 3/30/26 | | 7 |
 | 2 | Identity, Governance & Monitoring | Design authentication and authorization solutions | Apr 5 | Not Started | | | |
 | 3 | Identity, Governance & Monitoring | Design governance | Apr 13 | Not Started | | | |
 | 4 | Data Storage | Design data storage solutions for relational data | Apr 18 | Not Started | | | |
