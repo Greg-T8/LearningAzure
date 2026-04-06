@@ -44,7 +44,10 @@ In preparing for the exam, I spent over a month developing hands-on labs develop
 
 In retrospect, if I had to start studying all over again for the AZ-104, I would spend more time reviewing the official Microsoft documentation in the context of each of the tasks presented from the exam study guide. The exam has over 80 tasks and it brings forth expert-level questions on many of these tasks.
 
-I recently discovered the Google's [NotebookLM](https://notebooklm.google.com/) and will be using it to collect and organize information from the Microsoft documentation for each of the tasks for my next exam preparation.
+Some of the new approaches I am considering are
+
+- [ChatGPT Deep Research](https://openai.com/index/introducing-deep-research/) - to provid relevant documentation on Exam skills and tasks
+- [Google's NotebookLM](https://notebooklm.google.com/) - to collect and organize information from the Microsoft documentation for each of the tasks for my next exam preparation.
 
 ### Study Hours Breakdown
 
