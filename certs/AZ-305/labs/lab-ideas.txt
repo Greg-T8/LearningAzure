@@ -1,0 +1,3 @@
+1. Collect activity logs from all subscriptions in management group, i.e. resource created event
+2. Use a DCR transformation in an Azure Workspacej
+3. Use Azure Policy to configure logging to a Log Analytics workspace
