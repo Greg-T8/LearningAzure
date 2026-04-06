@@ -20,7 +20,7 @@
 
 ### Overall Difficulty
 
-The exam was tough! I brought a lot of confidence into the exam but quickly realized I didn't know the material quite as deeply as I should have.  
+The exam was tough! I brought a lot of confidence into the exam but quickly realized I didn't know the material quite as deeply as I should have, i.e. I should have spent more time reading through the Microsoft Learn documentation, which admittedly, I did very little.
 
 I ended up using the full two-hour time limit and felt rushed at the end. I feel that this exam should've come with a 3-hour time limit, especially considering the amount of reading and analysis required for many of the questions.
 
