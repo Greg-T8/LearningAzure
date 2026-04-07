@@ -35,19 +35,24 @@ $Main = {
 
     # Update coverage for each exam
     foreach ($exam in $exams) {
-        Write-Host "`n=== Updating coverage for $exam ===" -ForegroundColor Cyan
-        $ExamName = $exam
-        $ExamDir = Join-Path -Path $RepoRoot -ChildPath "certs\$exam"
-        $ExamReadme = Join-Path -Path $ExamDir -ChildPath 'README.md'
-        $StudyLogFile = Join-Path -Path $ExamDir -ChildPath 'StudyLog.md'
-        $PracticeFile = Join-Path -Path $ExamDir -ChildPath 'practice-questions\README.md'
+        try {
+            Write-Host "`n=== Updating coverage for $exam ===" -ForegroundColor Cyan
+            $ExamName = $exam
+            $ExamDir = Join-Path -Path $RepoRoot -ChildPath "certs\$exam"
+            $ExamReadme = Join-Path -Path $ExamDir -ChildPath 'README.md'
+            $StudyLogFile = Join-Path -Path $ExamDir -ChildPath 'StudyLog.md'
+            $PracticeFile = Join-Path -Path $ExamDir -ChildPath 'practice-questions\README.md'
 
-        Confirm-InputFile
-        Update-StudySummary
-        Update-ExamInProgressDays
-        $questionCounts = Get-QuestionCount
-        Update-CoverageTable -QuestionCounts $questionCounts
-        Update-CoverageDashboard -QuestionCounts $questionCounts
+            Confirm-InputFile
+            Update-StudySummary
+            Update-ExamInProgressDays
+            $questionCounts = Get-QuestionCount
+            Update-CoverageTable -QuestionCounts $questionCounts
+            Update-CoverageDashboard -QuestionCounts $questionCounts
+        }
+        catch {
+            Write-Warning "Skipping $exam — $_"
+        }
     }
 
     # Update In Progress duration once for all exams
