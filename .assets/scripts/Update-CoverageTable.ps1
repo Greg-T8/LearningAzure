@@ -46,9 +46,13 @@ $Main = {
             Confirm-InputFile
             Update-StudySummary
             Update-ExamInProgressDays
-            $questionCounts = Get-QuestionCount
-            Update-CoverageTable -QuestionCounts $questionCounts
-            Update-CoverageDashboard -QuestionCounts $questionCounts
+
+            # Coverage updates require practice questions
+            if ($script:HasPracticeFile) {
+                $questionCounts = Get-QuestionCount
+                Update-CoverageTable -QuestionCounts $questionCounts
+                Update-CoverageDashboard -QuestionCounts $questionCounts
+            }
         }
         catch {
             Write-Warning "Skipping $exam — $_"
@@ -92,8 +96,9 @@ $Helpers = {
             throw "Study log not found: $StudyLogFile"
         }
 
-        if (-not (Test-Path -Path $PracticeFile)) {
-            throw "Practice questions file not found: $PracticeFile"
+        $script:HasPracticeFile = Test-Path -Path $PracticeFile
+        if (-not $script:HasPracticeFile) {
+            Write-Warning "Practice questions file not found: $PracticeFile — skipping coverage updates."
         }
 
         if (-not (Test-Path -Path $MainReadme)) {
