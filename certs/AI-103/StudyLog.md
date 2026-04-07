@@ -8,7 +8,7 @@ This log tracks individual study sessions for the **AI-103** exam. Each entry is
 
 | # | Date | Start | End | Duration | Mode | Skill | Notes |
 |:--|:-----|:------|:----|:---------|:-----|:------|:------|
-| 5 | 4/6/26 | 6:12 PM |  |  | MSLearn | Plan and prepare to develop AI solutions on Azure |  |
+| 5 | 4/6/26 | 6:12 PM | 7:49 PM | 1h 37m | MSLearn | Plan and prepare to develop AI solutions on Azure | Stopped at unit 6 of "Select, deploy, and evaluate models" - exercise |
 | 4 | 4/5/26 |  | 6:52 AM | 30h 52m |  |  | auto-closed at last commit |
 | 3 | 4/4/26 | 3:22 PM | 3:34 PM | 0h 12m | MSLearn | Plan and prepare to develop AI solutions on Azure | Continuing module; Stopped at Unit 7 of 9 |
 | 2 | 4/4/26 | 7:40 AM | 7:55 AM | 0h 15m | MSLearn | Plan and prepare to develop AI solutions on Azure | Starting learning module; Stopped at Unit 5 of 9 |
