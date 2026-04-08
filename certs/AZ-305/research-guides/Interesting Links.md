@@ -1,0 +1,1 @@
+- [Azure Monitor Baseline Alerts (AMBA)](https://azure.github.io/azure-monitor-baseline-alerts/welcome/index.html)
