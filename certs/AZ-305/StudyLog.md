@@ -8,7 +8,7 @@ This log tracks individual study sessions for the **AZ-305** exam. Fill in **End
 
 | # | Date | Start | End | Duration | Mode | Skill | Notes |
 |:--|:-----|:------|:----|:---------|:-----|:------|:------|
-| 12 | 4/9/26 | 4:31 AM |  |  | DeepResearch | Design solutions for logging and monitoring |  |
+| 12 | 4/9/26 | 4:31 AM | 5:46 AM | 1h 15m | DeepResearch | Design solutions for logging and monitoring | For next session, pick up at "Overview of Azure Monitor with Prometheus" |
 | 11 | 4/8/26 | 4:28 AM | 5:41 AM | 1h 13m | DeepResearch | Design solutions for logging and monitoring | Next session, pick up at "Create and manage action groups" |
 | 10 | 4/7/26 | 4:45 AM | 5:58 AM | 1h 13m | DeepResearch | Design solutions for logging and monitoring | Finished deep dive on routing logs. Next, start with deep dive on "Recommend a monitoring solution". |
 | 9 | 4/6/26 | 5:25 AM | 6:52 AM | 1h 27m | DeepResearch | Design solutions for logging and monitoring | Stopped at "Adjacent docs - Data collection endpoints (DCEs) over"; move to "Transformations in Azure Monitor" |
