@@ -12,4 +12,6 @@
 6. Create a metrics export using data collection rules (<https://learn.microsoft.com/en-us/azure/azure-monitor/data-collection/metrics-export-create?tabs=portal>)
 7. Set up Azure Monitoring Baseline Alerts (AMBA) system for alerting at scale
 8. Experiment with Azure Monitor Insights
-9. Stand up Grafana dashboard
+9. Stand up Azure Monitor Dashboard with Grafana
+10. Set up Prometheus metrics w/ Windows
+11.
