@@ -8,7 +8,7 @@ This log tracks individual study sessions for the **AI-103** exam. Each entry is
 
 | # | Date | Start | End | Duration | Mode | Skill | Notes |
 |:--|:-----|:------|:----|:---------|:-----|:------|:------|
-| 8 | 4/10/26 | 5:46 AM |  |  | MSLearn | Plan and prepare to develop AI solutions on Azure |  |
+| 8 | 4/10/26 | 5:46 AM | 6:54 AM | 1h 8m | MSLearn | Plan and prepare to develop AI solutions on Azure | Working through "Create a generative AI chat app"; pick up at "Use the asynchronous API" |
 | 7 | 4/9/26 | 5:47 AM | 7:00 AM | 1h 13m | MSLearn | Plan and prepare to develop AI solutions on Azure | Working on "Exercise - Create a generative AI chat app". Stopped at understanding Python SDK reference for OpenAI chat completions model. |
 | 6 | 4/8/26 | 5:45 AM | 7:04 AM | 1h 19m | MSLearn | Plan and prepare to develop AI solutions on Azure | Working on "Exercise - Create a generative AI chat app". Just added pip requirements. Correcting profile prompt before continuing |
 | 5 | 4/7/26 | 5:59 AM | 6:55 AM | 0h 56m | MSLearn | Plan and prepare to develop AI solutions on Azure | Completed Module "Select, deploy, and evaluate Microsoft Foundry models"; ready for module "Develop a generative AI chat app with Microsoft Foundry" |
