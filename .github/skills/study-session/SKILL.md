@@ -25,13 +25,14 @@ The script must be invoked from the workspace root (`c:\Users\gregt\LocalCode\Le
 
 ## Parameters
 
-| Parameter | Type       | Required                                  | Default | Description                              |
-| --------- | ---------- | ----------------------------------------- | ------- | ---------------------------------------- |
-| `Action`  | String     | No                                        | Start   | `Start`, `Stop`, or `End`                |
-| `Exam`    | String     | Yes (Start); optional (Stop/End)          | —       | Exam code (e.g., `AZ-305`, `AI-102`)     |
-| `Mode`    | String     | Yes (Start, non-WorkflowDevelopment)      | —       | Study mode (see table below)             |
-| `Skill`   | String     | Yes (Start, non-WorkflowDevelopment)      | —       | Skill name from the exam's Skills.psd1   |
-| `Notes`   | String     | No                                        | —       | Free-text session notes                  |
+| Parameter        | Type   | Required                                              | Default | Description                                        |
+| ---------------- | ------ | ----------------------------------------------------- | ------- | -------------------------------------------------- |
+| `Action`         | String | No                                                    | Start   | `Start`, `Stop`, `End`, or `Switch`                |
+| `Exam`           | String | Yes (Start, Switch); optional (Stop/End)              | —       | Exam code (e.g., `AZ-305`, `AI-102`)               |
+| `Mode`           | String | Yes (Start/Switch, non-WorkflowDevelopment)           | —       | Study mode (see table below)                       |
+| `Skill`          | String | Yes (Start/Switch, non-WorkflowDevelopment)           | —       | Skill name from the exam's Skills.psd1             |
+| `MinutesElapsed` | Int    | Yes (Switch)                                          | —       | Minutes from session start to the switch point     |
+| `Notes`          | String | No                                                    | —       | Free-text session notes (applies to closing session for Switch) |
 
 ### Mode Values and Natural Language Aliases
 
@@ -45,10 +46,11 @@ The script must be invoked from the workspace root (`c:\Users\gregt\LocalCode\Le
 
 ### Action Aliases
 
-| Action  | Aliases (case-insensitive)                       |
-| ------- | ------------------------------------------------ |
-| `Start` | start, begin, open, new                          |
-| `Stop`  | stop, end, finish, done, close, wrap up          |
+| Action   | Aliases (case-insensitive)                       |
+| -------- | ------------------------------------------------ |
+| `Start`  | start, begin, open, new                          |
+| `Stop`   | stop, end, finish, done, close, wrap up          |
+| `Switch` | switch, split, hand off, handoff                 |
 
 ## Procedure
 
@@ -56,11 +58,12 @@ The script must be invoked from the workspace root (`c:\Users\gregt\LocalCode\Le
 
 Extract as many parameters as possible from the natural language input:
 
-1. **Action**: Look for action keywords. Default to `Start` if no action word is found but study context is clear.
-2. **Exam**: Look for exam codes like `AZ-305`, `AI-102`, `AZ-104`, `AI-103`, `AI-900`. Also accept `WorkflowDevelopment` or aliases.
+1. **Action**: Look for action keywords. Default to `Start` if no action word is found but study context is clear. Look for switch/split/handoff keywords for `Switch`.
+2. **Exam**: Look for exam codes like `AZ-305`, `AI-102`, `AZ-104`, `AI-103`, `AI-900`. Also accept `WorkflowDevelopment` or aliases. For `Switch`, this is the **destination** exam.
 3. **Mode**: Match against the alias table above. Map to the canonical value.
 4. **Skill**: If the user provides a skill name or partial match, capture it. This will be validated in Step 2.
-5. **Notes**: Any remaining descriptive text that doesn't map to other parameters.
+5. **MinutesElapsed**: For `Switch` actions, extract the number of minutes from phrases like "after 10 minutes", "10 minutes in", "spent 10 minutes". Must be a positive integer.
+6. **Notes**: Any remaining descriptive text that doesn't map to other parameters.
 
 ### Step 2 — Prompt for Missing Required Parameters
 
@@ -87,6 +90,8 @@ For a **Start** action on a non-WorkflowDevelopment exam, all of `Exam`, `Mode`,
 3. **Prompt with recommendation** — Use `vscode_askQuestions` to present the skill list as options. Mark the skill from the latest StudyLog entry as `recommended: true`. If the StudyLog is empty or the file does not exist, do not mark any option as recommended.
 
 For a **Stop/End** action, no additional parameters are strictly required (the script auto-detects the active session). However, if `Exam` is provided, pass it through. Optionally ask for `Notes`.
+
+For a **Switch** action, `Exam` (destination) and `MinutesElapsed` are always required. If the destination is not `WorkflowDevelopment`, `Mode` and `Skill` are also required — follow the same prompting logic as `Start`. `Notes` is optional and applies to the closing session only.
 
 Ask all missing parameters in a **single** `vscode_askQuestions` call when possible.
 
@@ -148,3 +153,15 @@ Parsed: Action=Start, Exam=WorkflowDevelopment
 ```
 
 No Mode or Skill required.
+
+### Example 5: Switch mid-session
+
+> "I started an AZ-305 lab session but after 10 minutes I switched to workflow development"
+
+Parsed: Action=Switch, Exam=WorkflowDevelopment, MinutesElapsed=10
+
+```powershell
+& .assets/scripts/Invoke-AzStudySession.ps1 -Action Switch -Exam WorkflowDevelopment -MinutesElapsed 10
+```
+
+Closes the active AZ-305 session at start + 10 min, opens a new WorkflowDevelopment session at the same split time.
