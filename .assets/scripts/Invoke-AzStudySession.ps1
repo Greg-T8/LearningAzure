@@ -3,9 +3,11 @@
 Manage study sessions for certification exam tracking.
 
 .DESCRIPTION
-Manages study session tracking for certification exams. Supports start/stop actions:
+Manages study session tracking for certification exams. Supports start/stop/switch actions:
 Start — inserts a new row at the top of StudyLog.md with session number, date, and start time.
 End/Stop — closes the active session with end time and duration.
+Switch — closes the active session at a split point (start + N minutes) and opens a new
+session in a different exam/context starting at that same split point.
 Start also auto-closes any currently active session before opening a new session.
 
 .CONTEXT
@@ -20,7 +22,7 @@ Program: Invoke-AzStudySession.ps1
 
 [CmdletBinding()]
 param(
-    [ValidateSet('Start', 'Stop', 'End')]
+    [ValidateSet('Start', 'Stop', 'End', 'Switch')]
     [string]$Action = 'Start',
 
     [string]$Exam,
@@ -53,6 +55,8 @@ param(
             }
     })]
     [string]$Skill,
+
+    [int]$MinutesElapsed,
 
     [string]$Notes
 )
@@ -166,6 +170,88 @@ $Main = {
             Close-SessionEntry -SessionNumber $sourceSession -LogFile $sourceLog -Notes $Notes
             Push-StudyLogChange -SessionNumber $sourceSession -Type 'end' -Exam $sourceExam
             Show-Confirmation -Message "Study session #$sourceSession ended for $sourceExam"
+        }
+        'Switch' {
+            if (-not $Exam) {
+                throw "Exam is required when Action is 'Switch' (destination exam)."
+            }
+            if ($MinutesElapsed -le 0) {
+                throw "MinutesElapsed is required and must be greater than 0 when Action is 'Switch'."
+            }
+
+            # Locate the active source session
+            $sourceExam = Find-ActiveExam
+            if (-not $sourceExam) {
+                throw 'No active study session found in any exam study log.'
+            }
+
+            $sourceFolder      = Resolve-ExamFolder -Exam $sourceExam
+            $sourceLogFileName = Resolve-ExamLogFileName -Exam $sourceExam
+            $sourceLog         = Join-Path -Path $RepoRoot -ChildPath "$sourceFolder\$sourceLogFileName"
+            $sourceSession     = Get-ActiveSessionNumber -LogFile $sourceLog
+
+            # Parse the source session start time to compute the split point
+            $sourceLines   = Get-Content -Path $sourceLog
+            $sourceRow     = $sourceLines | Where-Object { $_ -match ('^\|\s*' + $sourceSession + '\s*\|') } | Select-Object -First 1
+            $sourceCols    = $sourceRow -split '\|'
+            $dateStr       = $sourceCols[2].Trim()
+            $startStr      = $sourceCols[3].Trim()
+            $startText     = if ([string]::IsNullOrWhiteSpace($startStr)) { $dateStr } else { "$dateStr $startStr" }
+            $startDateTime = [datetime]::MinValue
+
+            # Prefer current culture, then invariant culture, to tolerate host-specific parsing behavior
+            $parsedStart = [datetime]::TryParse(
+                $startText,
+                [System.Globalization.CultureInfo]::CurrentCulture,
+                [System.Globalization.DateTimeStyles]::AllowWhiteSpaces,
+                [ref]$startDateTime
+            )
+            if (-not $parsedStart) {
+                $parsedStart = [datetime]::TryParse(
+                    $startText,
+                    [System.Globalization.CultureInfo]::InvariantCulture,
+                    [System.Globalization.DateTimeStyles]::AllowWhiteSpaces,
+                    [ref]$startDateTime
+                )
+            }
+            if (-not $parsedStart) {
+                throw "Unable to parse session start date/time '$startText' for session #$sourceSession in '$sourceLog'."
+            }
+
+            # Compute split time and validate it is not in the future
+            $splitTime = $startDateTime.AddMinutes($MinutesElapsed)
+            if ($splitTime -gt (Get-Date)) {
+                throw "Split time ($($splitTime.ToString('h:mm tt'))) is in the future. Reduce MinutesElapsed."
+            }
+
+            # Close the source session at the split point
+            Close-SessionEntry -SessionNumber $sourceSession -LogFile $sourceLog -EndTime $splitTime -Notes $Notes
+            Push-StudyLogChange -SessionNumber $sourceSession -Type 'end' -Exam $sourceExam
+            Show-Confirmation -Message "Study session #$sourceSession ended for $sourceExam (switched after $MinutesElapsed min)"
+
+            # Validate the destination exam
+            Confirm-ValidExam -Exam $Exam
+
+            # Require Mode and Skill for certification exams (skip for WorkflowDevelopment)
+            if ($Exam -ne 'WorkflowDevelopment') {
+                if (-not $Mode) {
+                    throw "Mode is required when destination Exam is not 'WorkflowDevelopment'."
+                }
+                if (-not $Skill) {
+                    throw "Skill is required when destination Exam is not 'WorkflowDevelopment'."
+                }
+                Confirm-ValidSkill -Exam $Exam -Skill $Skill
+            }
+
+            # Open a new session in the destination log starting at the split point
+            $folder = Resolve-ExamFolder -Exam $Exam
+            $logFileName = Resolve-ExamLogFileName -Exam $Exam
+            $script:StudyLogFile = Join-Path -Path $RepoRoot -ChildPath "$folder\$logFileName"
+            Confirm-StudyLogExists
+            $session = Get-NextSessionNumber
+            Add-SessionEntry -SessionNumber $session -StartTime $splitTime -Mode $Mode -Skill $Skill
+            Push-StudyLogChange -SessionNumber $session -Type 'start' -Exam $Exam
+            Show-Confirmation -Message "Study session #$session started for $Exam (switched from $sourceExam)"
         }
     }
 }
@@ -379,10 +465,13 @@ $Helpers = {
 
             [string]$Skill,
 
-            [string]$Notes
+            [string]$Notes,
+
+            [datetime]$StartTime
         )
 
-        $now       = Get-Date
+        # Use explicit start time when provided (e.g., Switch action), otherwise current time
+        $now       = if ($PSBoundParameters.ContainsKey('StartTime')) { $StartTime } else { Get-Date }
         $date      = $now.ToString('M/d/yy')
         $start     = $now.ToString('h:mm tt')
         $safeMode  = ConvertTo-LogNote -Notes $Mode
@@ -448,13 +537,17 @@ $Helpers = {
 
             [string]$Notes,
 
-            [switch]$UseLastCommit
+            [switch]$UseLastCommit,
+
+            [datetime]$EndTime
         )
 
         $lines = Get-Content -Path $LogFile
 
-        # Resolve end time from last git commit when auto-closing a stale session
-        $endTime = if ($UseLastCommit) { Get-LastCommitTime } else { Get-Date }
+        # Resolve end time: explicit parameter, last git commit, or current time
+        $endTime = if ($PSBoundParameters.ContainsKey('EndTime')) { $EndTime }
+                   elseif ($UseLastCommit) { Get-LastCommitTime }
+                   else { Get-Date }
 
         # Search from the top for the matching session row (latest entries are first)
         for ($i = 0; $i -lt $lines.Count; $i++) {
