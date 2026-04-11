@@ -1,4 +1,8 @@
 1. Collect activity logs from all subscriptions in management group, i.e. resource created event
+
+- [Azure Monitor - Create diagnostic settings at scale by using built-in Azure policies](https://learn.microsoft.com/en-us/azure/azure-monitor/platform/diagnostic-settings-policy-built-in?tabs=portal)
+- [Azure Monitor - Azure Policy built-ins](https://learn.microsoft.com/en-us/azure/azure-monitor/fundamentals/policy-reference)
+
 2. Use a DCR transformation in an Azure Monitor Workspace, i.e. with a Windows or Linux VM for guest log data
 3. Use Azure Policy to configure logging to a Log Analytics workspace, using remediation task to apply policy to existing resources
 
