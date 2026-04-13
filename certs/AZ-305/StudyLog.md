@@ -8,6 +8,7 @@ This log tracks individual study sessions for the **AZ-305** exam. Fill in **End
 
 | # | Date | Start | End | Duration | Mode | Skill | Notes |
 |:--|:-----|:------|:----|:---------|:-----|:------|:------|
+| 15 | 4/12/26 |  |  | 0h 0m |  |  |  |
 | 14 | 4/11/26 | 4:48 AM | 4:58 AM | 0h 10m | Lab | Design solutions for logging and monitoring | Designing lab sessions from lab-ideas.md; Transitioned to developing Azure governance process in support of Azure Monitor labs |
 | 13 | 4/10/26 | 4:33 AM | 5:45 AM | 1h 12m | DeepResearch | Design solutions for logging and monitoring | Completed deep research; for next sesssion, plan Azure Monitor labs |
 | 12 | 4/9/26 | 4:31 AM | 5:46 AM | 1h 15m | DeepResearch | Design solutions for logging and monitoring | For next session, pick up at "Overview of Azure Monitor with Prometheus" |
