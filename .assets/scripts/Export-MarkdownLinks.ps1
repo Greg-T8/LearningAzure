@@ -1,12 +1,14 @@
 <#
 .SYNOPSIS
-Export flat URLs from a named markdown section and its subsections.
+Export flat URLs from a markdown file or a named section and its subsections.
 
 .DESCRIPTION
-Parses a markdown file, locates the first heading matching the specified
-section name (case-insensitive), captures all content through its subsections
-(until a heading at the same or higher level), extracts unique URLs from
-markdown links, and writes them one-per-line to a text file.
+Parses a markdown file and extracts unique URLs from markdown links,
+either from the full file or from a named heading and its subsections.
+
+When -Section is provided, the script locates the first heading matching the
+specified section name (case-insensitive), then captures all content through
+its subsections until a heading at the same or higher level.
 
 Output defaults to a .txt file in the same directory as the input markdown
 file, named <input-basename>-links.txt. Use -OutputPath to override.
@@ -16,17 +18,21 @@ Full or relative path to the markdown (.md) file to parse.
 
 .PARAMETER Section
 The heading text to match (without leading # characters).
-Matches the first occurrence, case-insensitive.
+Matches the first occurrence, case-insensitive. If omitted, the script
+processes the entire markdown file.
 
 .PARAMETER OutputPath
 Optional path for the output .txt file. Defaults to the same directory
 as the input file with the name <input-basename>-links.txt.
 
 .EXAMPLE
-.\Export-SectionLink.ps1 -Path "..\..\certs\AZ-305\research-guides\guide.md" -Section "Recommend a logging solution"
+.\Export-MarkdownLinks.ps1 -Path "..\..\certs\AZ-305\research-guides\guide.md" -Section "Recommend a logging solution"
 
 .EXAMPLE
-.\Export-SectionLink.ps1 -Path "guide.md" -Section "Core docs you must read" -OutputPath "C:\temp\core-links.txt"
+.\Export-MarkdownLinks.ps1 -Path "guide.md" -Section "Core docs you must read" -OutputPath "C:\temp\core-links.txt"
+
+.EXAMPLE
+.\Export-MarkdownLinks.ps1 -Path "guide.md"
 
 .CONTEXT
 LearningAzure repository — utility for extracting reference URLs from research guides.
@@ -35,7 +41,7 @@ LearningAzure repository — utility for extracting reference URLs from research
 Greg Tate
 
 .NOTES
-Program: Export-SectionLink.ps1
+Program: Export-MarkdownLinks.ps1
 #>
 
 [CmdletBinding()]
@@ -43,7 +49,6 @@ param(
     [Parameter(Mandatory)]
     [string]$Path,
 
-    [Parameter(Mandatory)]
     [string]$Section,
 
     [string]$OutputPath
@@ -63,8 +68,15 @@ $Main = {
     # Read the markdown content
     $lines = Get-Content -Path $resolvedPath -Encoding UTF8
 
-    # Find the line range for the target section and its subsections
-    $range = Find-SectionRange -Lines $lines
+    # Determine whether to process a specific section or the full file
+    if ([string]::IsNullOrWhiteSpace($Section)) {
+        $range = @{ Start = 0; End = $lines.Count - 1 }
+        Write-Verbose "No section specified. Processing full file (lines 1-$($lines.Count))."
+    }
+    else {
+        # Find the line range for the target section and its subsections
+        $range = Find-SectionRange -Lines $lines
+    }
 
     # Extract unique URLs from markdown links within the section
     $urls = @(Get-MarkdownLink -Lines $lines -Range $range)
@@ -206,7 +218,8 @@ $Helpers = {
         }
 
         if ($Urls.Count -eq 0) {
-            Write-Warning "No links found in section '$Section'. Output file not created."
+            $targetLabel = if ([string]::IsNullOrWhiteSpace($Section)) { 'the file' } else { "section '$Section'" }
+            Write-Warning "No links found in $targetLabel. Output file not created."
             return
         }
 
@@ -221,7 +234,9 @@ $Helpers = {
             [string[]]$Urls
         )
 
-        Write-Host "Section:  $Section" -ForegroundColor Cyan
+        $sectionLabel = if ([string]::IsNullOrWhiteSpace($Section)) { '[FULL FILE]' } else { $Section }
+
+        Write-Host "Section:  $sectionLabel" -ForegroundColor Cyan
         Write-Host "Links:    $($Urls.Count)" -ForegroundColor Cyan
 
         if ($Urls.Count -gt 0) {
