@@ -7,30 +7,22 @@
 
    - [Create transformation query](https://learn.microsoft.com/en-us/azure/azure-monitor/data-collection/data-collection-transformations-create?tabs=portal#create-the-transformation-query)
 
-3. Use Azure Policy to configure logging to a Log Analytics workspace, using remediation task to apply policy to existing resources
+3. Set up and use Azure Monitor Private Link Scope (AMPLS) using Open Access and Private Only modes with Data Collection Endpoint (DCE):
 
-   - <https://learn.microsoft.com/en-us/azure/azure-monitor/platform/diaostic-settings-policy-built-in?tabs=portal>
-   - <https://learn.microsoft.com/en-us/azure/azure-monitor/platform/diagnostic-settings-policy>
+   - [Use Azure Private Link to connect networks to Azure Monitor](https://learn.microsoft.com/en-us/azure/azure-monitor/fundamentals/private-link-security)
+   - [Azure Monitor Private Link networking - Design](https://learn.microsoft.com/en-us/azure/azure-monitor/fundamentals/private-link-design#plan-by-network-topology)
+   - See [When is a DCE required?](https://learn.microsoft.com/en-us/azure/azure-monitor/data-collection/data-collection-endpoint-overview?utm_source=chatgpt.com&tabs=portal#when-is-a-dce-required)
 
-4. Set up and use Azure Monitor Private Link Scope (AMPLS) using Open Access and Private Only modes
+4. Create a metrics export using data collection rules (<https://learn.microsoft.com/en-us/azure/azure-monitor/data-collection/metrics-export-create?tabs=portal>)
 
-   - <https://learn.microsoft.com/en-us/azure/azure-monitor/fundamentals/private-link-security>
-   - <https://learn.microsoft.com/en-us/azure/azure-monitor/fundamentals/private-link-design#plan-by-network-topology>
+5. Set up Azure Monitoring Baseline Alerts (AMBA) system for alerting at scale
 
-5. Scenario with Azure Monitor Private Link Scope (AMPLS) and data collection endpoints, e.g.  (Windows Firewall logs).
+6. Experiment with Azure Monitor Insights
 
-- See [When is a DCE required?](https://learn.microsoft.com/en-us/azure/azure-monitor/data-collection/data-collection-endpoint-overview?utm_source=chatgpt.com&tabs=portal#when-is-a-dce-required)
+7. Stand up Azure Monitor Dashboard with Grafana
 
-6. Create a metrics export using data collection rules (<https://learn.microsoft.com/en-us/azure/azure-monitor/data-collection/metrics-export-create?tabs=portal>)
+8. Set up Prometheus metrics w/ Windows
 
-7. Set up Azure Monitoring Baseline Alerts (AMBA) system for alerting at scale
-
-8. Experiment with Azure Monitor Insights
-
-9. Stand up Azure Monitor Dashboard with Grafana
-
-10. Set up Prometheus metrics w/ Windows
-
-11. Configure OpenTelemtry metrics-based monitoring in Azure workspace
+9. Configure OpenTelemtry metrics-based monitoring in Azure workspace
 
     - [Enable enhanced monitoring of VMs](https://learn.microsoft.com/en-us/azure/azure-monitor/vm/tutorial-enable-monitoring)

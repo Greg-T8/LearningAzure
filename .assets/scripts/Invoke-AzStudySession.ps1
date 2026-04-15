@@ -331,11 +331,13 @@ $Helpers = {
             throw "No sessions found in '$LogFile'."
         }
 
-        # Check the first data row for an empty End column (latest entry is at the top)
+        # Check the first data row for a started-but-not-ended session (latest entry is at the top)
         $firstRow = if ($dataRows -is [array]) { $dataRows[0] } else { $dataRows }
         $columns = $firstRow -split '\|'
 
-        if ([string]::IsNullOrWhiteSpace($columns[4])) {
+        # A session is active only when Start is populated and End is blank;
+        # gap-fill rows have both blank and must not be treated as active.
+        if (-not [string]::IsNullOrWhiteSpace($columns[3]) -and [string]::IsNullOrWhiteSpace($columns[4])) {
             return [int]$columns[1].Trim()
         }
 
@@ -360,11 +362,12 @@ $Helpers = {
 
             if (-not $dataRows) { continue }
 
-            # Return the exam name when its latest session has no End time (top of table)
+            # Return the exam name when its latest session is started but not ended (top of table);
+            # gap-fill rows (blank Start and blank End) are not active sessions.
             $firstRow = if ($dataRows -is [array]) { $dataRows[0] } else { $dataRows }
             $columns = $firstRow -split '\|'
 
-            if ([string]::IsNullOrWhiteSpace($columns[4])) {
+            if (-not [string]::IsNullOrWhiteSpace($columns[3]) -and [string]::IsNullOrWhiteSpace($columns[4])) {
                 return $exam
             }
         }
@@ -557,6 +560,11 @@ $Helpers = {
                 # Parse start datetime from Date and Start columns
                 $dateStr  = $columns[2].Trim()
                 $startStr = $columns[3].Trim()
+
+                # Guard: skip gap-fill rows (blank Start) when auto-closing — they are not real sessions
+                if ([string]::IsNullOrWhiteSpace($startStr) -and $UseLastCommit) {
+                    break
+                }
 
                 # Parse the start datetime defensively to handle historical rows with blank Start values
                 $startText = if ([string]::IsNullOrWhiteSpace($startStr)) { $dateStr } else { "$dateStr $startStr" }

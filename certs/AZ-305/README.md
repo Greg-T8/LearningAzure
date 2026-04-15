@@ -7,41 +7,27 @@
 - **Study Log:** [Session-by-session study time tracker](./StudyLog.md)
 
 <!-- STUDY_SUMMARY -->
-**Hours Committed:** 17.1h · **Days Studied:** 13
+**Hours Committed:** 18.7h · **Days Studied:** 14
 <!-- /STUDY_SUMMARY -->
-
-
-
-
-
-
-
-
-
-
-
-
 
 ---
 
 ## 📊 Exam Coverage
 
-Task-level coverage from [Practice Questions](./practice-questions/README.md).
+Skill-level coverage based on [Per-Skill Progress](#per-skill-progress) completion.
 
 <!-- BEGIN COVERAGE DASHBOARD -->
 
-| Domain | Weight | Skills | Qs | Tasks Covered | Status |
-| :----- | :----- | -----: | -: | :------------ | :----: |
-| [1. Identity, Governance & Monitoring](#domain-1) | 25–30% | 3 | 2 | 2 / 11 (18%) | 🔴 |
-| [2. Data Storage](#domain-2) | 20–25% | 3 | 0 | 0 / 10 (0%) | 🔴 |
-| [3. Business Continuity](#domain-3) | 15–20% | 2 | 0 | 0 / 7 (0%) | 🔴 |
-| [4. Infrastructure](#domain-4) | 30–35% | 4 | 0 | 0 / 21 (0%) | 🔴 |
+| Domain | Weight | Skills | Skills Covered | Status |
+| :----- | :----- | -----: | :------------- | :----: |
+| [1. Identity, Governance & Monitoring](#domain-1) | 25–30% | 3 | 0 / 3 (0%) | 🔴 |
+| [2. Data Storage](#domain-2) | 20–25% | 3 | 0 / 3 (0%) | 🔴 |
+| [3. Business Continuity](#domain-3) | 15–20% | 2 | 0 / 2 (0%) | 🔴 |
+| [4. Infrastructure](#domain-4) | 30–35% | 4 | 0 / 4 (0%) | 🔴 |
 
-**Totals:** 2 practice questions
+**Totals:** 0 / 12 skills completed
 
-**Legend:** 🟢 Strong (≥66%) · 🟡 Partial (33–65%) · 🔴 Low (<33%) — "Covered" = task has ≥1 practice question
-
-> **Note:** Practice questions are those missed or not confidently answered correctly.
+**Legend:** 🟢 Strong (≥66%) · 🟡 Partial (33–65%) · 🔴 Low (<33%) — "Covered" = skill completed in Per-Skill Progress
 
 <!-- END COVERAGE DASHBOARD -->
 
@@ -49,86 +35,86 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md).
 
 <a id="domain-1"></a>
 <details>
-<summary><b>Domain 1: Design identity, governance, and monitoring solutions (25–30%)</b> — 11 tasks · 2 Qs</summary>
+<summary><b>Domain 1: Design identity, governance, and monitoring solutions (25–30%)</b> — 13 tasks</summary>
 
-| Skill | Task | Qs |
-| :--- | :--- | -: |
-| Design solutions for logging and monitoring (3 tasks) | Recommend a logging solution | 1 |
-|  | Recommend a solution for routing logs | 0 |
-|  | Recommend a monitoring solution | 1 |
-| Design authentication and authorization solutions (5 tasks) | Recommend an authentication solution | 0 |
-|  | Recommend an identity management solution | 0 |
-|  | Recommend a solution for authorizing access to Azure resources | 0 |
-|  | Recommend a solution for authorizing access to on-premises resources | 0 |
-|  | Recommend a solution to manage secrets, certificates, and keys | 0 |
-| Design governance (3 tasks) | Recommend a structure for management groups, subscriptions, and resource groups, and a strategy for resource tagging | 0 |
-|  | Recommend a solution for managing compliance | 0 |
-|  | Recommend a solution for identity governance | 0 |
+| Skill | Task |
+| :--- | :--- |
+| Design solutions for logging and monitoring | Recommend a logging solution |
+|  | Recommend a solution for routing logs |
+|  | Recommend a monitoring solution |
+| Design authentication and authorization solutions | Recommend an authentication solution |
+|  | Recommend an identity management solution |
+|  | Recommend a solution for authorizing access to Azure resources |
+|  | Recommend a solution for authorizing access to on-premises resources |
+|  | Recommend a solution to manage secrets, certificates, and keys |
+| Design governance | Recommend a structure for management groups, subscriptions, and resource groups, and a strategy for resource tagging |
+|  | Recommend a solution for managing compliance |
+|  | Recommend a solution for identity governance |
 
 </details>
 
 <a id="domain-2"></a>
 <details>
-<summary><b>Domain 2: Design data storage solutions (20–25%)</b> — 10 tasks · 0 Qs</summary>
+<summary><b>Domain 2: Design data storage solutions (20–25%)</b> — 12 tasks</summary>
 
-| Skill | Task | Qs |
-| :--- | :--- | -: |
-| Design data storage solutions for relational data (4 tasks) | Recommend a solution for storing relational data | 0 |
-|  | Recommend a database service tier and compute tier | 0 |
-|  | Recommend a solution for database scalability | 0 |
-|  | Recommend a solution for data protection | 0 |
-| Design data storage solutions for semi-structured and unstructured data (4 tasks) | Recommend a solution for storing semi-structured data | 0 |
-|  | Recommend a solution for storing unstructured data | 0 |
-|  | Recommend a data storage solution to balance features, performance, and costs | 0 |
-|  | Recommend a data solution for protection and durability | 0 |
-| Design data integration (2 tasks) | Recommend a solution for data integration | 0 |
-|  | Recommend a solution for data analysis | 0 |
+| Skill | Task |
+| :--- | :--- |
+| Design data storage solutions for relational data | Recommend a solution for storing relational data |
+|  | Recommend a database service tier and compute tier |
+|  | Recommend a solution for database scalability |
+|  | Recommend a solution for data protection |
+| Design data storage solutions for semi-structured and unstructured data | Recommend a solution for storing semi-structured data |
+|  | Recommend a solution for storing unstructured data |
+|  | Recommend a data storage solution to balance features, performance, and costs |
+|  | Recommend a data solution for protection and durability |
+| Design data integration | Recommend a solution for data integration |
+|  | Recommend a solution for data analysis |
 
 </details>
 
 <a id="domain-3"></a>
 <details>
-<summary><b>Domain 3: Design business continuity solutions (15–20%)</b> — 7 tasks · 0 Qs</summary>
+<summary><b>Domain 3: Design business continuity solutions (15–20%)</b> — 9 tasks</summary>
 
-| Skill | Task | Qs |
-| :--- | :--- | -: |
-| Design solutions for backup and disaster recovery (4 tasks) | Recommend a recovery solution for Azure and hybrid workloads that meets recovery objectives | 0 |
-|  | Recommend a backup and recovery solution for compute | 0 |
-|  | Recommend a backup and recovery solution for databases | 0 |
-|  | Recommend a backup and recovery solution for unstructured data | 0 |
-| Design for high availability (3 tasks) | Recommend a high availability solution for compute | 0 |
-|  | Recommend a high availability solution for relational data | 0 |
-|  | Recommend a high availability solution for semi-structured and unstructured data | 0 |
+| Skill | Task |
+| :--- | :--- |
+| Design solutions for backup and disaster recovery | Recommend a recovery solution for Azure and hybrid workloads that meets recovery objectives |
+|  | Recommend a backup and recovery solution for compute |
+|  | Recommend a backup and recovery solution for databases |
+|  | Recommend a backup and recovery solution for unstructured data |
+| Design for high availability | Recommend a high availability solution for compute |
+|  | Recommend a high availability solution for relational data |
+|  | Recommend a high availability solution for semi-structured and unstructured data |
 
 </details>
 
 <a id="domain-4"></a>
 <details>
-<summary><b>Domain 4: Design infrastructure solutions (30–35%)</b> — 21 tasks · 0 Qs</summary>
+<summary><b>Domain 4: Design infrastructure solutions (30–35%)</b> — 23 tasks</summary>
 
-| Skill | Task | Qs |
-| :--- | :--- | -: |
-| Design compute solutions (5 tasks) | Specify components of a compute solution based on workload requirements | 0 |
-|  | Recommend a virtual machine-based solution | 0 |
-|  | Recommend a container-based solution | 0 |
-|  | Recommend a serverless-based solution | 0 |
-|  | Recommend a compute solution for batch processing | 0 |
-| Design an application architecture (6 tasks) | Recommend a messaging architecture | 0 |
-|  | Recommend an event-driven architecture | 0 |
-|  | Recommend a solution for API integration | 0 |
-|  | Recommend a caching solution for applications | 0 |
-|  | Recommend an application configuration management solution | 0 |
-|  | Recommend an automated deployment solution for applications | 0 |
-| Design migrations (5 tasks) | Evaluate a migration solution that leverages the Microsoft Cloud Adoption Framework for Azure | 0 |
-|  | Evaluate on-premises servers, data, and applications for migration | 0 |
-|  | Recommend a solution for migrating workloads to infrastructure as a service (IaaS) and platform as a service (PaaS) | 0 |
-|  | Recommend a solution for migrating databases | 0 |
-|  | Recommend a solution for migrating unstructured data | 0 |
-| Design network solutions (5 tasks) | Recommend a connectivity solution that connects Azure resources to the internet | 0 |
-|  | Recommend a connectivity solution that connects Azure resources to on-premises networks | 0 |
-|  | Recommend a solution to optimize network performance | 0 |
-|  | Recommend a solution to optimize network security | 0 |
-|  | Recommend a load-balancing and routing solution | 0 |
+| Skill | Task |
+| :--- | :--- |
+| Design compute solutions | Specify components of a compute solution based on workload requirements |
+|  | Recommend a virtual machine-based solution |
+|  | Recommend a container-based solution |
+|  | Recommend a serverless-based solution |
+|  | Recommend a compute solution for batch processing |
+| Design an application architecture | Recommend a messaging architecture |
+|  | Recommend an event-driven architecture |
+|  | Recommend a solution for API integration |
+|  | Recommend a caching solution for applications |
+|  | Recommend an application configuration management solution |
+|  | Recommend an automated deployment solution for applications |
+| Design migrations | Evaluate a migration solution that leverages the Microsoft Cloud Adoption Framework for Azure |
+|  | Evaluate on-premises servers, data, and applications for migration |
+|  | Recommend a solution for migrating workloads to infrastructure as a service (IaaS) and platform as a service (PaaS) |
+|  | Recommend a solution for migrating databases |
+|  | Recommend a solution for migrating unstructured data |
+| Design network solutions | Recommend a connectivity solution that connects Azure resources to the internet |
+|  | Recommend a connectivity solution that connects Azure resources to on-premises networks |
+|  | Recommend a solution to optimize network performance |
+|  | Recommend a solution to optimize network security |
+|  | Recommend a load-balancing and routing solution |
 
 </details>
 
@@ -138,53 +124,26 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md).
 
 ## 📚 Progress Tracker
 
-**Goal:** Pass AZ-305 at the 3-month mark (~Jul 1, 2026) · **Pace:** 1.5 hrs/day, 7 days/week
+**Goal:** Pass AZ-305 by TBD
 
-### Per-Skill Workload & Day Allocation
+### Per-Skill Progress
 
-| # | Domain | Skill | ML (min) | PQs | PQ (min) | Total (min) | Days |
-| -: | :----- | :---- | -------: | --: | -------: | ----------: | ---: |
-| 1 | Identity, Governance & Monitoring | Design solutions for logging and monitoring | 26 | 13 | 78 | 104 | 4 |
-| 2 | Identity, Governance & Monitoring | Design authentication and authorization solutions | 70 | 20 | 120 | 190 | 8 |
-| 3 | Identity, Governance & Monitoring | Design governance | 49 | 11 | 66 | 115 | 5 |
-| 4 | Data Storage | Design data storage solutions for relational data | 55 | 11 | 66 | 121 | 5 |
-| 5 | Data Storage | Design data storage solutions for semi-structured and unstructured data | 56 | 19 | 114 | 170 | 7 |
-| 6 | Data Storage | Design data integration | 53 | 9 | 54 | 107 | 5 |
-| 7 | Business Continuity | Design solutions for backup and disaster recovery | 47 | 8 | 48 | 95 | 4 |
-| 8 | Business Continuity | Design for high availability | 59 | 9 | 54 | 113 | 5 |
-| 9 | Infrastructure | Design compute solutions | 61 | 9 | 54 | 115 | 5 |
-| 10 | Infrastructure | Design an application architecture | 59 | 7 | 42 | 101 | 4 |
-| 11 | Infrastructure | Design migrations | 46 | 8 | 48 | 94 | 4 |
-| 12 | Infrastructure | Design network solutions | 53 | 13 | 78 | 131 | 5 |
-| | **Totals** | | **634** | **137** | **822** | **1456** | **61** |
+| # | Domain | Skill | ML | DR | NB | Lab | VPQ | Status | Started | Completed | Days |
+| -: | :----- | :---- | :-: | :-: | :-: | :-: | :-: | :----- | :------ | :-------- | ---: |
+| 1 | Identity, Governance & Monitoring | Design solutions for logging and monitoring | ✅ | ✅ | ⏳ | 🔲 | 🔲 | In Progress | 3/30/26 | | 16 |
+| 2 | Identity, Governance & Monitoring | Design authentication and authorization solutions | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | Not Started | | | |
+| 3 | Identity, Governance & Monitoring | Design governance | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | Not Started | | | |
+| 4 | Data Storage | Design data storage solutions for relational data | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | Not Started | | | |
+| 5 | Data Storage | Design data storage solutions for semi-structured and unstructured data | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | Not Started | | | |
+| 6 | Data Storage | Design data integration | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | Not Started | | | |
+| 7 | Business Continuity | Design solutions for backup and disaster recovery | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | Not Started | | | |
+| 8 | Business Continuity | Design for high availability | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | Not Started | | | |
+| 9 | Infrastructure | Design compute solutions | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | Not Started | | | |
+| 10 | Infrastructure | Design an application architecture | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | Not Started | | | |
+| 11 | Infrastructure | Design migrations | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | Not Started | | | |
+| 12 | Infrastructure | Design network solutions | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | Not Started | | | |
 
-> ML = Microsoft Learn module time · PQs = MeasureUp practice questions · PQ (min) = PQs × ~6 min
-
-### Phase 1 — Learn + Practice per Skill (Apr 1 – May 31)
-
-| # | Domain | Skill | Expected Start | Status | Started | Completed | Days |
-| -: | :----- | :---- | :------------- | :----- | :------ | :-------- | ---: |
-| 1 | Identity, Governance & Monitoring | Design solutions for logging and monitoring | Apr 1 | In Progress | 3/30/26 | | 15 |
-| 2 | Identity, Governance & Monitoring | Design authentication and authorization solutions | Apr 5 | Not Started | | | |
-| 3 | Identity, Governance & Monitoring | Design governance | Apr 13 | Not Started | | | |
-| 4 | Data Storage | Design data storage solutions for relational data | Apr 18 | Not Started | | | |
-| 5 | Data Storage | Design data storage solutions for semi-structured and unstructured data | Apr 23 | Not Started | | | |
-| 6 | Data Storage | Design data integration | Apr 30 | Not Started | | | |
-| 7 | Business Continuity | Design solutions for backup and disaster recovery | May 5 | Not Started | | | |
-| 8 | Business Continuity | Design for high availability | May 9 | Not Started | | | |
-| 9 | Infrastructure | Design compute solutions | May 14 | Not Started | | | |
-| 10 | Infrastructure | Design an application architecture | May 19 | Not Started | | | |
-| 11 | Infrastructure | Design migrations | May 23 | Not Started | | | |
-| 12 | Infrastructure | Design network solutions | May 27 | Not Started | | | |
-
-### Phase 2 — Review & Practice Exams (Jun 1 – Jun 26)
-
-| # | Modality | Expected Start | Status | Started | Completed | Days |
-| -: | :------- | :------------- | :----- | :------ | :-------- | ---: |
-| 13 | Video Course | Jun 1 | Not Started | | | |
-| 14 | Practice Exam (Tutorials Dojo) | Jun 6 | Not Started | | | |
-| 15 | Practice Exam (Microsoft Assessment) | Jun 20 | Not Started | | | |
-
-**Legend:** Not Started · In Progress · Completed
+**Modalities:** ML = MSLearn · DR = DeepResearch · NB = NotebookLM PQs · Lab = Hands-on Labs · VPQ = Vendor Practice Questions
+**Legend:** ✅ Complete · ⏳ In Progress · 🔲 Not Started
 
 ---

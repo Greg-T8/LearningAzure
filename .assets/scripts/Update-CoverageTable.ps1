@@ -436,12 +436,23 @@ $Helpers = {
         $inCoverage = $false
         $updatedRows = 0
 
+        # Detect whether this coverage table has a Qs column
+        $hasQsColumn = $false
+        $checkingHeader = $false
+        foreach ($line in $lines) {
+            if ($line -match '<!-- BEGIN COVERAGE TABLE -->') { $checkingHeader = $true; continue }
+            if ($checkingHeader -and $line -match '^\|\s*Skill\s*\|') {
+                $hasQsColumn = $line -match '\bQs\b'
+                break
+            }
+            if ($line -match '<!-- END COVERAGE TABLE -->') { break }
+        }
+
         # Domain-level tracking for <summary> updates
         $domainTaskCount = 0
         $domainQs = 0
         $pendingSummaryIndex = -1
         $summarySuffixPattern = '(?:\\u2014|—).*</summary>$'
-        $summarySuffix = "— $domainTaskCount tasks · $domainQs Qs</summary>"
 
         foreach ($line in $lines) {
             # Detect coverage table boundaries
@@ -454,7 +465,11 @@ $Helpers = {
             if ($line -match '<!-- END COVERAGE TABLE -->') {
                 # Flush pending summary for the last domain
                 if ($pendingSummaryIndex -ge 0) {
-                    $summarySuffix = "— $domainTaskCount tasks · $domainQs Qs</summary>"
+                    if ($hasQsColumn) {
+                        $summarySuffix = "— $domainTaskCount tasks · $domainQs Qs</summary>"
+                    } else {
+                        $summarySuffix = "— $domainTaskCount tasks</summary>"
+                    }
                     $output[$pendingSummaryIndex] = $output[$pendingSummaryIndex] -replace $summarySuffixPattern, $summarySuffix
                 }
                 $inCoverage = $false
@@ -470,7 +485,11 @@ $Helpers = {
             # Domain <summary> line — flush previous domain's summary and record new index
             if ($line -match '^<summary><b>(Domain \d+:.+?)</b>') {
                 if ($pendingSummaryIndex -ge 0) {
-                    $summarySuffix = "— $domainTaskCount tasks · $domainQs Qs</summary>"
+                    if ($hasQsColumn) {
+                        $summarySuffix = "— $domainTaskCount tasks · $domainQs Qs</summary>"
+                    } else {
+                        $summarySuffix = "— $domainTaskCount tasks</summary>"
+                    }
                     $output[$pendingSummaryIndex] = $output[$pendingSummaryIndex] -replace $summarySuffixPattern, $summarySuffix
                 }
                 $domainTaskCount = 0
@@ -480,20 +499,30 @@ $Helpers = {
                 continue
             }
 
-            # Normalize table headers to question-only columns
-            if ($line -match '^\|\s*Skill\s*\|\s*Task\s*\|\s*Qs\s*\|\s*Labs\s*\|$') {
-                $output.Add('| Skill | Task | Qs |')
+            # Skill-only rows (no Qs column): | <skill-or-empty> | <task> |
+            if (-not $hasQsColumn -and $line -match '^\|\s*(.*?)\s*\|\s*(?!Task\b|:---)(.+?)\s*\|$') {
+                $output.Add($line)
+                $domainTaskCount++
                 continue
             }
 
-            if ($line -match '^\|\s*:---\s*\|\s*:---\s*\|\s*-:\s*\|\s*-:\s*\|$') {
-                $output.Add('| :--- | :--- | -: |')
-                continue
-            }
+            # Update task rows, preserving Labs column if present:
+            # | <skill-or-empty> | <task> | <qs> | <labs> |
+            if ($line -match '^\|\s*(.*?)\s*\|\s*(?!Task\b|:---)(.+?)\s+\|\s+\d+\s+\|\s*(\d+)\s+\|$') {
+                $skillCell = $Matches[1].Trim()
+                $taskName = $Matches[2].Trim()
+                $labs = $Matches[3].Trim()
+                $qs = if ($QuestionCounts.ContainsKey($taskName)) { $QuestionCounts[$taskName] } else { 0 }
+                $newLine = "| $skillCell | $taskName | $qs | $labs |"
+                $output.Add($newLine)
+                $updatedRows++
 
-            # Update task rows and write question-only output:
-            # | <skill-or-empty> | <task> | <qs> | [<labs> |]
-            if ($line -match '^\|\s*(.*?)\s*\|\s*(?!Task\b|:---)(.+?)\s+\|\s+\d+\s+\|\s*(?:\d+\s+\|)?$') {
+                # Accumulate for domain summary
+                $domainTaskCount++
+                $domainQs += $qs
+            }
+            # | <skill-or-empty> | <task> | <qs> |
+            elseif ($line -match '^\|\s*(.*?)\s*\|\s*(?!Task\b|:---)(.+?)\s+\|\s+\d+\s+\|$') {
                 $skillCell = $Matches[1].Trim()
                 $taskName = $Matches[2].Trim()
                 $qs = if ($QuestionCounts.ContainsKey($taskName)) { $QuestionCounts[$taskName] } else { 0 }
@@ -528,10 +557,87 @@ $Helpers = {
         }
 
         # Summary
-        $totalQs = ($QuestionCounts.Values | Measure-Object -Sum).Sum
-        Write-Host "`nCoverage Summary for $ExamName" -ForegroundColor Cyan
-        Write-Host "  Practice questions: $totalQs"
-        Write-Host "  Table rows updated: $updatedRows"
+        if ($hasQsColumn) {
+            $totalQs = ($QuestionCounts.Values | Measure-Object -Sum).Sum
+            Write-Host "`nCoverage Summary for $ExamName" -ForegroundColor Cyan
+            Write-Host "  Practice questions: $totalQs"
+            Write-Host "  Table rows updated: $updatedRows"
+        } else {
+            Write-Host "`nCoverage Summary for $ExamName" -ForegroundColor Cyan
+            Write-Host "  Skill-only coverage table (no Qs column)"
+        }
+    }
+
+    function Get-SkillCompletionByDomain {
+        # Parse Per-Skill Progress table and count completed skills per domain
+        # Returns ordered hashtable: domainNum → @{ Total; Completed; Skills }
+        $lines = Get-Content -Path $ExamReadme -Encoding UTF8
+        $domainMap = [ordered]@{}
+
+        # Build domain name → number mapping from dashboard rows
+        $nameToNum = @{}
+        $inDashboard = $false
+        foreach ($line in $lines) {
+            if ($line -match '<!-- BEGIN COVERAGE DASHBOARD -->') { $inDashboard = $true; continue }
+            if ($line -match '<!-- END COVERAGE DASHBOARD -->') { break }
+            if ($inDashboard -and $line -match '^\|\s*\[(\d+)\.\s*(.+?)\]') {
+                $nameToNum[$Matches[2].Trim()] = $Matches[1]
+            }
+        }
+
+        # Parse Per-Skill Progress table for skill completion
+        $inTracker = $false
+        $domainCol = -1
+        $statusCol = -1
+        $skillsCol = -1
+        foreach ($line in $lines) {
+            if ($line -match '### Per-Skill Progress') { $inTracker = $true; continue }
+            if (-not $inTracker) { continue }
+
+            # Header row — find column indices
+            if ($domainCol -lt 0 -and $line -match '^\|.*Domain.*\|') {
+                $headers = ($line.TrimStart('|').TrimEnd('|')) -split '\|'
+                for ($i = 0; $i -lt $headers.Count; $i++) {
+                    $h = $headers[$i].Trim()
+                    if ($h -eq 'Domain') { $domainCol = $i }
+                    elseif ($h -eq 'Skill') { $skillsCol = $i }
+                    elseif ($h -eq 'Status') { $statusCol = $i }
+                }
+                continue
+            }
+
+            # Skip separator row
+            if ($line -match '^\|\s*[-:]+\s*\|') { continue }
+
+            # Data row
+            if ($domainCol -ge 0 -and $line -match '^\|\s*\d+\s*\|') {
+                $cells = ($line.TrimStart('|').TrimEnd('|')) -split '\|'
+                if ($cells.Count -le $statusCol) { continue }
+
+                $domainName = $cells[$domainCol].Trim()
+                $status = $cells[$statusCol].Trim()
+
+                # Map domain name to number
+                $domainNum = $nameToNum[$domainName]
+                if (-not $domainNum) { continue }
+
+                # Initialize domain entry
+                if (-not $domainMap.Contains($domainNum)) {
+                    $domainMap[$domainNum] = @{ Total = 0; Completed = 0; Skills = 0 }
+                }
+
+                $domainMap[$domainNum].Total++
+                $domainMap[$domainNum].Skills++
+                if ($status -eq 'Completed') {
+                    $domainMap[$domainNum].Completed++
+                }
+            }
+
+            # End of table
+            if ($inTracker -and $domainCol -ge 0 -and $line -match '^\s*$') { break }
+        }
+
+        return $domainMap
     }
 
     function Update-CoverageDashboard {
@@ -545,35 +651,50 @@ $Helpers = {
 
         $lines = Get-Content -Path $ExamReadme -Encoding UTF8
 
-        # First pass: compute domain-level aggregates from coverage table
-        $domainStats = [ordered]@{}
-        $currentDomain = $null
-        $inCoverage = $false
-
+        # Detect skills-coverage mode from dashboard header
+        $skillsMode = $false
         foreach ($line in $lines) {
-            if ($line -match '<!-- BEGIN COVERAGE TABLE -->') { $inCoverage = $true; continue }
-            if ($line -match '<!-- END COVERAGE TABLE -->') { break }
-            if (-not $inCoverage) { continue }
+            if ($line -match '<!-- BEGIN COVERAGE DASHBOARD -->') { continue }
+            if ($line -match '^\|.*Skills Covered') { $skillsMode = $true; break }
+            if ($line -match '^\|.*Tasks Covered') { break }
+            if ($line -match '<!-- END COVERAGE DASHBOARD -->') { break }
+        }
 
-            # Domain heading (supports both markdown heading and details summary formats)
-            if ($line -match '^### Domain (\d+):' -or $line -match '^<summary><b>Domain (\d+):') {
-                $domainNum = $Matches[1]
-                $currentDomain = @{ Qs = 0; Tasks = 0; Covered = 0; Skills = 0 }
-                $domainStats[$domainNum] = $currentDomain
-                continue
-            }
+        if ($skillsMode) {
+            # Skills-coverage mode: derive stats from Per-Skill Progress table
+            $domainStats = Get-SkillCompletionByDomain
+        }
+        else {
+            # Task-coverage mode: derive stats from coverage table Qs
+            $domainStats = [ordered]@{}
+            $currentDomain = $null
+            $inCoverage = $false
 
-            # Task row (supports both legacy and question-only formats)
-            if ($null -ne $currentDomain -and $line -match '^\|\s*(.*?)\s*\|\s*(?!Task\b|:---)(.+?)\s+\|\s+\d+\s+\|\s*(?:\d+\s+\|)?$') {
-                $skillCell = $Matches[1].Trim()
-                $taskName = $Matches[2].Trim()
+            foreach ($line in $lines) {
+                if ($line -match '<!-- BEGIN COVERAGE TABLE -->') { $inCoverage = $true; continue }
+                if ($line -match '<!-- END COVERAGE TABLE -->') { break }
+                if (-not $inCoverage) { continue }
 
-                # Count distinct skills (non-empty first cell indicates a new skill)
-                if ($skillCell -ne '') { $currentDomain.Skills++ }
-                $qs = if ($QuestionCounts.ContainsKey($taskName)) { $QuestionCounts[$taskName] } else { 0 }
-                $currentDomain.Tasks++
-                $currentDomain.Qs += $qs
-                if ($qs -gt 0) { $currentDomain.Covered++ }
+                # Domain heading (supports both markdown heading and details summary formats)
+                if ($line -match '^### Domain (\d+):' -or $line -match '^<summary><b>Domain (\d+):') {
+                    $domainNum = $Matches[1]
+                    $currentDomain = @{ Qs = 0; Tasks = 0; Covered = 0; Skills = 0 }
+                    $domainStats[$domainNum] = $currentDomain
+                    continue
+                }
+
+                # Task row (supports both legacy and question-only formats)
+                if ($null -ne $currentDomain -and $line -match '^\|\s*(.*?)\s*\|\s*(?!Task\b|:---)(.+?)\s+\|\s+\d+\s+\|\s*(?:\d+\s+\|)?$') {
+                    $skillCell = $Matches[1].Trim()
+                    $taskName = $Matches[2].Trim()
+
+                    # Count distinct skills (non-empty first cell indicates a new skill)
+                    if ($skillCell -ne '') { $currentDomain.Skills++ }
+                    $qs = if ($QuestionCounts.ContainsKey($taskName)) { $QuestionCounts[$taskName] } else { 0 }
+                    $currentDomain.Tasks++
+                    $currentDomain.Qs += $qs
+                    if ($qs -gt 0) { $currentDomain.Covered++ }
+                }
             }
         }
 
@@ -583,8 +704,8 @@ $Helpers = {
         $updatedRows = 0
 
         foreach ($line in $lines) {
-            # Keep the dashboard description aligned with question-only coverage
-            if ($line -match '^Task-level coverage from ') {
+            # Keep the dashboard description aligned with coverage mode
+            if (-not $skillsMode -and $line -match '^Task-level coverage from ') {
                 $output.Add('Task-level coverage from [Practice Questions](./practice-questions/README.md).')
                 continue
             }
@@ -601,28 +722,33 @@ $Helpers = {
                 continue
             }
 
-            # Normalize dashboard headers to question-only columns
-            if ($inDashboard -and $line -match '^\|\s*Domain\s*\|\s*Weight\s*\|\s*Skills\s*\|\s*Qs\s*\|\s*Labs\s*\|\s*Tasks Covered\s*\|\s*Status\s*\|$') {
-                $output.Add('| Domain | Weight | Skills | Qs | Tasks Covered | Status |')
-                continue
-            }
-
-            if ($inDashboard -and $line -match '^\|\s*:-----\s*\|\s*:-----\s*\|\s*-+:\s*\|\s*-:\s*\|\s*---:\s*\|\s*:------------\s*\|\s*:----:\s*\|$') {
-                $output.Add('| :----- | :----- | -----: | -: | :------------ | :----: |')
-                continue
-            }
-
-            # Totals line — regenerate with current counts
+            # Totals line
             if ($inDashboard -and $line -match '^\*\*Totals:\*\*') {
-                $totalQs = ($QuestionCounts.Values | Measure-Object -Sum).Sum
-                $output.Add("**Totals:** $totalQs practice questions")
+                if ($skillsMode) {
+                    $totalSkills = ($domainStats.Values | ForEach-Object { $_.Total } | Measure-Object -Sum).Sum
+                    $totalCompleted = ($domainStats.Values | ForEach-Object { $_.Completed } | Measure-Object -Sum).Sum
+                    $output.Add("**Totals:** $totalCompleted / $totalSkills skills completed")
+                }
+                else {
+                    $totalQs = ($QuestionCounts.Values | Measure-Object -Sum).Sum
+                    if ($line -match '(\d+)\s+hands-on labs') {
+                        $totalLabs = $Matches[1]
+                        $output.Add("**Totals:** $totalQs practice questions · $totalLabs hands-on labs")
+                    } else {
+                        $output.Add("**Totals:** $totalQs practice questions")
+                    }
+                }
                 $updatedRows++
                 continue
             }
 
-            # Legend line — remove lab references
+            # Legend line
             if ($inDashboard -and $line -match '^\*\*Legend:\*\*') {
-                $output.Add('**Legend:** 🟢 Strong (≥66%) · 🟡 Partial (33–65%) · 🔴 Low (<33%) — "Covered" = task has ≥1 practice question')
+                if ($skillsMode) {
+                    $output.Add('**Legend:** 🟢 Strong (≥66%) · 🟡 Partial (33–65%) · 🔴 Low (<33%) — "Covered" = skill completed in Per-Skill Progress')
+                } else {
+                    $output.Add('**Legend:** 🟢 Strong (≥66%) · 🟡 Partial (33–65%) · 🔴 Low (<33%) — "Covered" = task has ≥1 practice question')
+                }
                 continue
             }
 
@@ -631,15 +757,29 @@ $Helpers = {
                 $domainNum = $Matches[1]
                 if ($domainStats.Contains($domainNum)) {
                     $stats = $domainStats[$domainNum]
-                    $pct = if ($stats.Tasks -gt 0) { [math]::Floor(($stats.Covered / $stats.Tasks) * 100) } else { 0 }
-                    $indicator = if ($pct -ge 66) { '🟢' } elseif ($pct -ge 33) { '🟡' } else { '🔴' }
 
-                    # Preserve domain link and weight columns from existing line
+                    # Preserve domain link and weight from existing line
                     $cells = ($line.TrimStart('|').TrimEnd('|')) -split '\|'
                     $domainLink = $cells[0].Trim()
                     $weight = $cells[1].Trim()
 
-                    $newLine = "| $domainLink | $weight | $($stats.Skills) | $($stats.Qs) | $($stats.Covered) / $($stats.Tasks) ($pct%) | $indicator |"
+                    if ($skillsMode) {
+                        $pct = if ($stats.Total -gt 0) { [math]::Floor(($stats.Completed / $stats.Total) * 100) } else { 0 }
+                        $indicator = if ($pct -ge 66) { '🟢' } elseif ($pct -ge 33) { '🟡' } else { '🔴' }
+                        $newLine = "| $domainLink | $weight | $($stats.Skills) | $($stats.Completed) / $($stats.Total) ($pct%) | $indicator |"
+                    }
+                    else {
+                        $pct = if ($stats.Tasks -gt 0) { [math]::Floor(($stats.Covered / $stats.Tasks) * 100) } else { 0 }
+                        $indicator = if ($pct -ge 66) { '🟢' } elseif ($pct -ge 33) { '🟡' } else { '🔴' }
+
+                        # 7+ cells = Labs column present (domain|weight|skills|qs|labs|covered|status)
+                        if ($cells.Count -ge 7) {
+                            $labsCell = $cells[4].Trim()
+                            $newLine = "| $domainLink | $weight | $($stats.Skills) | $($stats.Qs) | $labsCell | $($stats.Covered) / $($stats.Tasks) ($pct%) | $indicator |"
+                        } else {
+                            $newLine = "| $domainLink | $weight | $($stats.Skills) | $($stats.Qs) | $($stats.Covered) / $($stats.Tasks) ($pct%) | $indicator |"
+                        }
+                    }
                     $output.Add($newLine)
                     $updatedRows++
                 }
