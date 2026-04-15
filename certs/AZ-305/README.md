@@ -128,20 +128,40 @@ Skill-level coverage based on [Per-Skill Progress](#per-skill-progress) completi
 
 ### Per-Skill Progress
 
-| # | Domain | Skill | ML | DR | NB | Lab | VPQ | Status | Started | Completed | Days |
-| -: | :----- | :---- | :-: | :-: | :-: | :-: | :-: | :----- | :------ | :-------- | ---: |
-| 1 | Identity, Governance & Monitoring | Design solutions for logging and monitoring | ✅ | ✅ | ⏳ | 🔲 | 🔲 | In Progress | 3/30/26 | | 16 |
-| 2 | Identity, Governance & Monitoring | Design authentication and authorization solutions | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | Not Started | | | |
-| 3 | Identity, Governance & Monitoring | Design governance | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | Not Started | | | |
-| 4 | Data Storage | Design data storage solutions for relational data | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | Not Started | | | |
-| 5 | Data Storage | Design data storage solutions for semi-structured and unstructured data | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | Not Started | | | |
-| 6 | Data Storage | Design data integration | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | Not Started | | | |
-| 7 | Business Continuity | Design solutions for backup and disaster recovery | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | Not Started | | | |
-| 8 | Business Continuity | Design for high availability | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | Not Started | | | |
-| 9 | Infrastructure | Design compute solutions | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | Not Started | | | |
-| 10 | Infrastructure | Design an application architecture | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | Not Started | | | |
-| 11 | Infrastructure | Design migrations | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | Not Started | | | |
-| 12 | Infrastructure | Design network solutions | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | Not Started | | | |
+| # | Domain | Skill | ML (min) | PQs | PQ (min) | Total (min) | Days |
+| -: | :----- | :---- | -------: | --: | -------: | ----------: | ---: |
+| 1 | Identity, Governance & Monitoring | Design solutions for logging and monitoring | 26 | 13 | 78 | 104 | 4 |
+| 2 | Identity, Governance & Monitoring | Design authentication and authorization solutions | 70 | 20 | 120 | 190 | 8 |
+| 3 | Identity, Governance & Monitoring | Design governance | 49 | 11 | 66 | 115 | 5 |
+| 4 | Data Storage | Design data storage solutions for relational data | 55 | 11 | 66 | 121 | 5 |
+| 5 | Data Storage | Design data storage solutions for semi-structured and unstructured data | 56 | 19 | 114 | 170 | 7 |
+| 6 | Data Storage | Design data integration | 53 | 9 | 54 | 107 | 5 |
+| 7 | Business Continuity | Design solutions for backup and disaster recovery | 47 | 8 | 48 | 95 | 4 |
+| 8 | Business Continuity | Design for high availability | 59 | 9 | 54 | 113 | 5 |
+| 9 | Infrastructure | Design compute solutions | 61 | 9 | 54 | 115 | 5 |
+| 10 | Infrastructure | Design an application architecture | 59 | 7 | 42 | 101 | 4 |
+| 11 | Infrastructure | Design migrations | 46 | 8 | 48 | 94 | 4 |
+| 12 | Infrastructure | Design network solutions | 53 | 13 | 78 | 131 | 5 |
+| | **Totals** | | **634** | **137** | **822** | **1456** | **61** |
+
+> ML = Microsoft Learn module time · PQs = MeasureUp practice questions · PQ (min) = PQs × ~6 min
+
+### Phase 1 — Learn + Practice per Skill (Apr 1 – May 31)
+
+| # | Domain | Skill | Expected Start | Status | Started | Completed | Days |
+| -: | :----- | :---- | :------------- | :----- | :------ | :-------- | ---: |
+| 1 | Identity, Governance & Monitoring | Design solutions for logging and monitoring | Apr 1 | In Progress | 3/30/26 | | 16 |
+| 2 | Identity, Governance & Monitoring | Design authentication and authorization solutions | Apr 5 | Not Started | | | |
+| 3 | Identity, Governance & Monitoring | Design governance | Apr 13 | Not Started | | | |
+| 4 | Data Storage | Design data storage solutions for relational data | Apr 18 | Not Started | | | |
+| 5 | Data Storage | Design data storage solutions for semi-structured and unstructured data | Apr 23 | Not Started | | | |
+| 6 | Data Storage | Design data integration | Apr 30 | Not Started | | | |
+| 7 | Business Continuity | Design solutions for backup and disaster recovery | May 5 | Not Started | | | |
+| 8 | Business Continuity | Design for high availability | May 9 | Not Started | | | |
+| 9 | Infrastructure | Design compute solutions | May 14 | Not Started | | | |
+| 10 | Infrastructure | Design an application architecture | May 19 | Not Started | | | |
+| 11 | Infrastructure | Design migrations | May 23 | Not Started | | | |
+| 12 | Infrastructure | Design network solutions | May 27 | Not Started | | | |
 
 **Modalities:** ML = MSLearn · DR = DeepResearch · NB = NotebookLM PQs · Lab = Hands-on Labs · VPQ = Vendor Practice Questions
 **Legend:** ✅ Complete · ⏳ In Progress · 🔲 Not Started
