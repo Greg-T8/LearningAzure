@@ -46,6 +46,7 @@ $Main = {
             Confirm-InputFile
             Update-StudySummary
             Update-ExamInProgressDays
+            Update-PerSkillProgress
 
             # Coverage updates require practice questions
             if ($script:HasPracticeFile) {
@@ -565,6 +566,216 @@ $Helpers = {
         } else {
             Write-Host "`nCoverage Summary for $ExamName" -ForegroundColor Cyan
             Write-Host "  Skill-only coverage table (no Qs column)"
+        }
+    }
+
+    function Get-StudyLogHoursBySkill {
+        # Aggregate StudyLog durations by Skill and Mode
+        # Returns hashtable: skillName → @{ ML; DR; NB; Lab; VPQ; Total }
+        $result = @{}
+
+        if (-not (Test-Path -Path $StudyLogFile)) { return $result }
+
+        $lines = Get-Content -Path $StudyLogFile -Encoding UTF8
+
+        foreach ($line in $lines) {
+            if ($line -notmatch '^\|\s*\d+\s*\|') { continue }
+
+            $cells = ($line.TrimStart('|').TrimEnd('|')) -split '\|'
+            if ($cells.Count -lt 7) { continue }
+
+            $durationCell = $cells[4].Trim()
+            $modeCell = $cells[5].Trim()
+            $skillCell = $cells[6].Trim()
+            $notesCell = if ($cells.Count -ge 8) { $cells[7].Trim() } else { '' }
+
+            # Parse duration
+            if ($durationCell -notmatch '^(?:(\d+)\s*h)?\s*(?:(\d+)\s*m)?$') { continue }
+            $hours = if ([string]::IsNullOrWhiteSpace($Matches[1])) { 0 } else { [int]$Matches[1] }
+            $minutes = if ([string]::IsNullOrWhiteSpace($Matches[2])) { 0 } else { [int]$Matches[2] }
+            $sessionHours = ($hours * 60 + $minutes) / 60.0
+            if ($sessionHours -eq 0) { continue }
+            if ([string]::IsNullOrWhiteSpace($skillCell)) { continue }
+
+            # Initialize skill entry
+            if (-not $result.ContainsKey($skillCell)) {
+                $result[$skillCell] = @{ ML = 0.0; DR = 0.0; NB = 0.0; Lab = 0.0; VPQ = 0.0; Total = 0.0 }
+            }
+
+            # Map mode to column key
+            $modeKey = switch ($modeCell) {
+                'MSLearn'          { 'ML' }
+                'DeepResearch'     { 'DR' }
+                'Lab'              { 'Lab' }
+                'PracticeQuestion' {
+                    if ($notesCell -match 'NotebookLM') { 'NB' } else { 'VPQ' }
+                }
+                default            { $null }
+            }
+
+            if ($modeKey) {
+                $result[$skillCell][$modeKey] += $sessionHours
+            }
+            $result[$skillCell].Total += $sessionHours
+        }
+
+        # Round all values
+        foreach ($skill in $result.Keys) {
+            foreach ($key in @('ML', 'DR', 'NB', 'Lab', 'VPQ', 'Total')) {
+                $result[$skill][$key] = [math]::Round($result[$skill][$key], 1)
+            }
+        }
+
+        return $result
+    }
+
+    function Get-TaskCountBySkill {
+        # Read Skills.psd1 and return hashtable: skillName → taskCount
+        $skillsFile = Join-Path -Path $ExamDir -ChildPath 'Skills.psd1'
+        $result = @{}
+
+        if (-not (Test-Path -Path $skillsFile)) { return $result }
+
+        $data = Import-PowerShellDataFile -Path $skillsFile
+
+        foreach ($domain in $data.Domains) {
+            foreach ($skill in $domain.Skills) {
+                $result[$skill.Name] = $skill.Tasks.Count
+            }
+        }
+
+        return $result
+    }
+
+    function Update-PerSkillProgress {
+        [CmdletBinding(SupportsShouldProcess)]
+
+        # Update Tasks, per-mode hours, and total Hours in the Per-Skill Progress table
+        $studyHours = Get-StudyLogHoursBySkill
+        $taskCounts = Get-TaskCountBySkill
+
+        $lines = Get-Content -Path $ExamReadme -Encoding UTF8
+        $output = [System.Collections.Generic.List[string]]::new()
+        $inTracker = $false
+        $headerParsed = $false
+        $updatedRows = 0
+
+        # Column indices (set from header)
+        $colIndices = @{}
+
+        foreach ($line in $lines) {
+            if ($line -match '### Per-Skill Progress') {
+                $inTracker = $true
+                $output.Add($line)
+                continue
+            }
+
+            if (-not $inTracker) {
+                $output.Add($line)
+                continue
+            }
+
+            # Parse header row to find column indices
+            if (-not $headerParsed -and $line -match '^\|.*Domain.*\|') {
+                $headers = ($line.TrimStart('|').TrimEnd('|')) -split '\|'
+                for ($i = 0; $i -lt $headers.Count; $i++) {
+                    $h = $headers[$i].Trim()
+                    if ($h -eq 'Skill')  { $colIndices['Skill'] = $i }
+                    if ($h -eq 'Tasks')  { $colIndices['Tasks'] = $i }
+                    if ($h -eq 'ML')     { $colIndices['ML'] = $i }
+                    if ($h -eq 'DR')     { $colIndices['DR'] = $i }
+                    if ($h -eq 'NB')     { $colIndices['NB'] = $i }
+                    if ($h -eq 'Lab')    { $colIndices['Lab'] = $i }
+                    if ($h -eq 'VPQ')    { $colIndices['VPQ'] = $i }
+                    if ($h -eq 'Hours')  { $colIndices['Hours'] = $i }
+                }
+                $headerParsed = $true
+                $output.Add($line)
+                continue
+            }
+
+            # Skip separator row
+            if ($line -match '^\|\s*[-:]+\s*\|') {
+                $output.Add($line)
+                continue
+            }
+
+            # Data row
+            if ($headerParsed -and $line -match '^\|\s*\d+\s*\|') {
+                $cells = ($line.TrimStart('|').TrimEnd('|')) -split '\|'
+
+                $skillIdx = $colIndices['Skill']
+                if ($null -eq $skillIdx -or $cells.Count -le $skillIdx) {
+                    $output.Add($line)
+                    continue
+                }
+
+                $skillName = $cells[$skillIdx].Trim()
+
+                # Update Tasks column
+                if ($colIndices.ContainsKey('Tasks') -and $taskCounts.ContainsKey($skillName)) {
+                    $cells[$colIndices['Tasks']] = " $($taskCounts[$skillName]) "
+                }
+
+                # Update mode columns and Hours column with study log data
+                $skillHours = if ($studyHours.ContainsKey($skillName)) { $studyHours[$skillName] } else { $null }
+                $modeKeys = @('ML', 'DR', 'NB', 'Lab', 'VPQ')
+
+                foreach ($modeKey in $modeKeys) {
+                    if (-not $colIndices.ContainsKey($modeKey)) { continue }
+                    $idx = $colIndices[$modeKey]
+                    if ($idx -ge $cells.Count) { continue }
+
+                    $currentCell = $cells[$idx].Trim()
+                    $modeHours = if ($skillHours) { $skillHours[$modeKey] } else { 0.0 }
+
+                    # Extract existing emoji (first character sequence before any digit or space-digit)
+                    $emoji = $currentCell -replace '\s+[\d].*$', ''
+                    $emoji = $emoji.Trim()
+
+                    # Build new cell: emoji + hours (omit hours text when zero)
+                    if ($modeHours -gt 0) {
+                        $cells[$idx] = " $emoji $($modeHours.ToString('0.0'))h "
+                    }
+                    else {
+                        $cells[$idx] = " $emoji "
+                    }
+                }
+
+                # Update total Hours column
+                if ($colIndices.ContainsKey('Hours')) {
+                    $totalHours = if ($skillHours) { $skillHours.Total } else { 0.0 }
+                    $cells[$colIndices['Hours']] = " $($totalHours.ToString('0.0'))h "
+                }
+
+                $output.Add('|' + ($cells -join '|') + '|')
+                $updatedRows++
+                continue
+            }
+
+            # End of table (blank line or heading)
+            if ($headerParsed -and ($line -match '^\s*$' -or $line -match '^#')) {
+                $inTracker = $false
+            }
+
+            $output.Add($line)
+        }
+
+        if ($updatedRows -gt 0) {
+            $newContent = $output -join "`n"
+            $originalContent = $lines -join "`n"
+            $hasChanges = $newContent -cne $originalContent
+
+            if ($WhatIfPreference) {
+                Write-Host "What if: Performing the operation ""Update $updatedRows per-skill progress rows"" on target ""$ExamReadme""."
+            }
+            elseif ($hasChanges) {
+                Set-Content -Path $ExamReadme -Value $newContent -Encoding UTF8 -NoNewline
+                Write-Host "Updated $updatedRows per-skill progress rows in $ExamReadme" -ForegroundColor Green
+            }
+            else {
+                Write-Host "No per-skill progress changes detected in $ExamReadme"
+            }
         }
     }
 

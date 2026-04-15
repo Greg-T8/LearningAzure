@@ -281,11 +281,11 @@ Dashboard status indicators:
 
 ### Phase 1 — Learn + Practice per Skill (<start date> – <end date>)
 
-| # | Domain | Skill | Expected Start | Status | Started | Completed | Days |
-| -: | :----- | :---- | :------------- | :----- | :------ | :-------- | ---: |
-| 1 | <Domain 1 short name> | <Skill 1 name> | <date> | Not Started | | | |
-| 2 | <Domain 1 short name> | <Skill 2 name> | <date> | Not Started | | | |
-| 3 | <Domain 2 short name> | <Skill 3 name> | <date> | Not Started | | | |
+| # | Domain | Skill | Tasks | Expected Start | Status | Started | Completed | Days |
+| -: | :----- | :---- | ----: | :------------- | :----- | :------ | :-------- | ---: |
+| 1 | <Domain 1 short name> | <Skill 1 name> | 0 | <date> | Not Started | | | |
+| 2 | <Domain 1 short name> | <Skill 2 name> | 0 | <date> | Not Started | | | |
+| 3 | <Domain 2 short name> | <Skill 3 name> | 0 | <date> | Not Started | | | |
 
 ### Phase 2 — Review & Practice Exams (<start date> – <end date>)
 
@@ -312,7 +312,7 @@ Phase 1 date calculation:
 - Add days allocated per skill sequentially
 - Phase 2 begins after Phase 1 ends
 
-> **Script compatibility:** The per-skill progress tracker format (header `| # | Domain | Skill |`) is **not** auto-detected by `Update-ProgressTrackerDays.ps1`, which only matches the legacy `| Priority | Modality |` header. Days tracking for the per-skill format is done by `Invoke-AzStudySession.ps1` session logging.
+> **Script compatibility:** The per-skill progress tracker format (header `| # | Domain | Skill |`) is **not** auto-detected by `Update-ProgressTrackerDays.ps1`, which only matches the legacy `| Priority | Modality |` header. Days tracking for the per-skill format is done by `Invoke-AzStudySession.ps1` session logging. The `Tasks` and `Hours` columns are auto-populated by `Update-CoverageTable.ps1` from `Skills.psd1` and `StudyLog.md`.
 
 #### `certs/<EXAM>/StudyLog.md` — Study Time Tracker
 
@@ -512,7 +512,7 @@ Only add entries if the exam uses a non-standard folder or log file:
 
 #### `Update-ProgressTrackerDays.ps1`
 
-The per-skill progress tracker format (header `| # | Domain | Skill |`) used by new exams is **not** auto-detected by this script. The script only matches the legacy `| Priority | Modality |` header pattern. No changes are needed — days tracking for the per-skill format is handled by `Invoke-AzStudySession.ps1` session logging instead.
+The per-skill progress tracker format (header `| # | Domain | Skill |`) used by new exams is **not** auto-detected by this script. The script only matches the legacy `| Priority | Modality |` header pattern. No changes are needed — days tracking for the per-skill format is handled by `Invoke-AzStudySession.ps1` session logging instead. The `Tasks` and `Hours` columns are auto-populated by `Update-CoverageTable.ps1`.
 
 #### `Invoke-ContentMaintenance.ps1`
 
