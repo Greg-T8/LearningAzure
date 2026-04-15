@@ -521,11 +521,10 @@ No changes required. This orchestrator script runs all maintenance scripts in de
 1. `Invoke-PracticeExamReorganizer` (when `-Reorganize` is specified)
 2. `Update-StudyLogGaps`
 3. `Update-ProgressTrackerDays`
-4. `Update-CoverageTable`
+4. `Update-CoverageTable` (also generates the root README activity table)
 5. `Update-LabReferences`
 6. `Invoke-CollapseDetailBlock`
 7. `Remove-UnusedImages`
-8. `Update-CommitStats`
 
 Since child scripts use dynamic discovery, the orchestrator automatically processes new exams once they are added to the top-level README.
 

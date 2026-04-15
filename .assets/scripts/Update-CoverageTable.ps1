@@ -1,15 +1,22 @@
 <#
 .SYNOPSIS
-Update the exam README coverage table with practice question counts.
+Update exam README coverage tables, study summaries, and root README activity table.
 
 .DESCRIPTION
-Scans practice question metadata (**Domain:**/**Skill:**/**Task:**) to count
-questions per task, then updates the Qs column in the exam README coverage table
-between the BEGIN/END COVERAGE TABLE markers. Also updates domain-level <summary>
-tags and the coverage dashboard between BEGIN/END COVERAGE DASHBOARD markers.
+For each active exam:
+  - Updates the study summary (hours committed, days studied) from StudyLog.md.
+  - Recalculates in-progress day counts in exam progress tables.
+  - Updates per-skill progress (tasks, per-mode hours) from StudyLog and Skills.psd1.
+  - Updates coverage table summary tags (task counts per domain).
+  - Updates the coverage dashboard from Per-Skill Progress completion data.
+
+For the root README:
+  - Updates In Progress duration day counts in the certifications table.
+  - Generates a 7-day rolling activity table from StudyLog and WorkLog entries,
+    replacing the section between COMMIT_STATS_START/END markers.
 
 .CONTEXT
-LearningAzure repository — exam coverage tracking for practice questions.
+LearningAzure repository — exam coverage and activity tracking.
 
 .AUTHOR
 Greg Tate
@@ -41,19 +48,14 @@ $Main = {
             $ExamDir = Join-Path -Path $RepoRoot -ChildPath "certs\$exam"
             $ExamReadme = Join-Path -Path $ExamDir -ChildPath 'README.md'
             $StudyLogFile = Join-Path -Path $ExamDir -ChildPath 'StudyLog.md'
-            $PracticeFile = Join-Path -Path $ExamDir -ChildPath 'practice-questions\README.md'
-
             Confirm-InputFile
             Update-StudySummary
             Update-ExamInProgressDays
             Update-PerSkillProgress
 
-            # Coverage updates require practice questions
-            if ($script:HasPracticeFile) {
-                $questionCounts = Get-QuestionCount
-                Update-CoverageTable -QuestionCounts $questionCounts
-                Update-CoverageDashboard -QuestionCounts $questionCounts
-            }
+            # Update coverage table and dashboard from study log / skills data
+            Update-CoverageTable
+            Update-CoverageDashboard
         }
         catch {
             Write-Warning "Skipping $exam — $_"
@@ -62,6 +64,9 @@ $Main = {
 
     # Update In Progress duration once for all exams
     Update-InProgressDuration
+
+    # Update the 7-day activity table in root README from study log data
+    Update-ActivityTable -ExamNames $exams
 }
 
 #region HELPER FUNCTIONS
@@ -95,11 +100,6 @@ $Helpers = {
 
         if (-not (Test-Path -Path $StudyLogFile)) {
             throw "Study log not found: $StudyLogFile"
-        }
-
-        $script:HasPracticeFile = Test-Path -Path $PracticeFile
-        if (-not $script:HasPracticeFile) {
-            Write-Warning "Practice questions file not found: $PracticeFile — skipping coverage updates."
         }
 
         if (-not (Test-Path -Path $MainReadme)) {
@@ -344,114 +344,16 @@ $Helpers = {
         }
     }
 
-    function Get-QuestionCount {
-        # Parse practice questions markdown to count questions per task
-        $taskCounts = @{}
-        $practiceDir = Split-Path -Path $PracticeFile -Parent
-        $allPracticeFiles = Get-ChildItem -Path $practiceDir -Filter '*.md' -File
-        $questionFiles = @()
-
-        # Use per-domain files when present; otherwise fall back to README-only mode
-        $domainFiles = $allPracticeFiles | Where-Object { $_.Name -ne 'README.md' }
-        if ($domainFiles.Count -gt 0) {
-            $questionFiles = $domainFiles
-        }
-        else {
-            $questionFiles = @($allPracticeFiles | Where-Object { $_.Name -eq 'README.md' })
-        }
-
-        foreach ($questionFile in $questionFiles) {
-            $lines = Get-Content -Path $questionFile.FullName -Encoding UTF8
-            $currentTasks = [System.Collections.Generic.List[string]]::new()
-            $inQuestion = $false
-
-            foreach ($line in $lines) {
-                # Question heading starts a new block (supports ### and ####)
-                if ($line -match '^###\s+') {
-                    # Flush previous question's tasks
-                    if ($inQuestion) {
-                        foreach ($task in $currentTasks) {
-                            if ($taskCounts.ContainsKey($task)) {
-                                $taskCounts[$task]++
-                            }
-                            else {
-                                $taskCounts[$task] = 1
-                            }
-                        }
-                    }
-
-                    $inQuestion = $true
-                    $currentTasks = [System.Collections.Generic.List[string]]::new()
-                    continue
-                }
-
-                if (-not $inQuestion) { continue }
-
-                # Single-line task
-                if ($line -match '^\*\*Task:\*\*\s+(.+)$') {
-                    $currentTasks.Add($Matches[1].Trim())
-                    continue
-                }
-
-                # Multi-task bullet (before body content)
-                if ($line -match '^- (.+)$') {
-                    # Only count as task bullet if we haven't hit body content yet
-                    $candidate = $Matches[1].Trim()
-
-                    # Heuristic: task bullets appear right after **Task:** header
-                    if ($line -match '^- [A-Z]') {
-                        $currentTasks.Add($candidate)
-                    }
-                }
-            }
-
-            # Flush the last question block
-            if ($inQuestion) {
-                foreach ($task in $currentTasks) {
-                    if ($taskCounts.ContainsKey($task)) {
-                        $taskCounts[$task]++
-                    }
-                    else {
-                        $taskCounts[$task] = 1
-                    }
-                }
-            }
-        }
-
-        $total = ($taskCounts.Values | Measure-Object -Sum).Sum
-        Write-Verbose "Counted $total question-task mappings from $($questionFiles.Count) practice question file(s) in $practiceDir"
-        return $taskCounts
-    }
-
     function Update-CoverageTable {
         [CmdletBinding(SupportsShouldProcess)]
 
-        # Replace Qs values and update <summary> tags in the coverage table
-        param(
-            [Parameter(Mandatory)]
-            [hashtable]$QuestionCounts
-        )
-
+        # Update <summary> tags in the coverage table with task counts per domain
         $lines = Get-Content -Path $ExamReadme -Encoding UTF8
         $output = [System.Collections.Generic.List[string]]::new()
         $inCoverage = $false
-        $updatedRows = 0
-
-        # Detect whether this coverage table has a Qs column
-        $hasQsColumn = $false
-        $checkingHeader = $false
-        foreach ($line in $lines) {
-            if ($line -match '<!-- BEGIN COVERAGE TABLE -->') { $checkingHeader = $true; continue }
-            if ($checkingHeader -and $line -match '^\|\s*Skill\s*\|') {
-                $hasQsColumn = $line -match '\bQs\b'
-                break
-            }
-            if ($line -match '<!-- END COVERAGE TABLE -->') { break }
-        }
 
         # Domain-level tracking for <summary> updates
         $domainTaskCount = 0
-        $domainQs = 0
         $pendingSummaryIndex = -1
         $summarySuffixPattern = '(?:\\u2014|—).*</summary>$'
 
@@ -466,11 +368,7 @@ $Helpers = {
             if ($line -match '<!-- END COVERAGE TABLE -->') {
                 # Flush pending summary for the last domain
                 if ($pendingSummaryIndex -ge 0) {
-                    if ($hasQsColumn) {
-                        $summarySuffix = "— $domainTaskCount tasks · $domainQs Qs</summary>"
-                    } else {
-                        $summarySuffix = "— $domainTaskCount tasks</summary>"
-                    }
+                    $summarySuffix = "— $domainTaskCount tasks</summary>"
                     $output[$pendingSummaryIndex] = $output[$pendingSummaryIndex] -replace $summarySuffixPattern, $summarySuffix
                 }
                 $inCoverage = $false
@@ -486,58 +384,21 @@ $Helpers = {
             # Domain <summary> line — flush previous domain's summary and record new index
             if ($line -match '^<summary><b>(Domain \d+:.+?)</b>') {
                 if ($pendingSummaryIndex -ge 0) {
-                    if ($hasQsColumn) {
-                        $summarySuffix = "— $domainTaskCount tasks · $domainQs Qs</summary>"
-                    } else {
-                        $summarySuffix = "— $domainTaskCount tasks</summary>"
-                    }
+                    $summarySuffix = "— $domainTaskCount tasks</summary>"
                     $output[$pendingSummaryIndex] = $output[$pendingSummaryIndex] -replace $summarySuffixPattern, $summarySuffix
                 }
                 $domainTaskCount = 0
-                $domainQs = 0
                 $pendingSummaryIndex = $output.Count
                 $output.Add($line)
                 continue
             }
 
-            # Skill-only rows (no Qs column): | <skill-or-empty> | <task> |
-            if (-not $hasQsColumn -and $line -match '^\|\s*(.*?)\s*\|\s*(?!Task\b|:---)(.+?)\s*\|$') {
-                $output.Add($line)
+            # Count task rows: | <skill-or-empty> | <task> | (with optional extra columns)
+            if ($line -match '^\|\s*(.*?)\s*\|\s*(?!Task\b|:---)(.+?)\s*\|') {
                 $domainTaskCount++
-                continue
             }
 
-            # Update task rows, preserving Labs column if present:
-            # | <skill-or-empty> | <task> | <qs> | <labs> |
-            if ($line -match '^\|\s*(.*?)\s*\|\s*(?!Task\b|:---)(.+?)\s+\|\s+\d+\s+\|\s*(\d+)\s+\|$') {
-                $skillCell = $Matches[1].Trim()
-                $taskName = $Matches[2].Trim()
-                $labs = $Matches[3].Trim()
-                $qs = if ($QuestionCounts.ContainsKey($taskName)) { $QuestionCounts[$taskName] } else { 0 }
-                $newLine = "| $skillCell | $taskName | $qs | $labs |"
-                $output.Add($newLine)
-                $updatedRows++
-
-                # Accumulate for domain summary
-                $domainTaskCount++
-                $domainQs += $qs
-            }
-            # | <skill-or-empty> | <task> | <qs> |
-            elseif ($line -match '^\|\s*(.*?)\s*\|\s*(?!Task\b|:---)(.+?)\s+\|\s+\d+\s+\|$') {
-                $skillCell = $Matches[1].Trim()
-                $taskName = $Matches[2].Trim()
-                $qs = if ($QuestionCounts.ContainsKey($taskName)) { $QuestionCounts[$taskName] } else { 0 }
-                $newLine = "| $skillCell | $taskName | $qs |"
-                $output.Add($newLine)
-                $updatedRows++
-
-                # Accumulate for domain summary
-                $domainTaskCount++
-                $domainQs += $qs
-            }
-            else {
-                $output.Add($line)
-            }
+            $output.Add($line)
         }
 
         $newContent = $output -join "`n"
@@ -545,27 +406,16 @@ $Helpers = {
         $hasChanges = $newContent -cne $originalContent
 
         if ($WhatIfPreference) {
-            Write-Host "What if: Performing the operation \"Update $updatedRows coverage table rows\" on target \"$ExamReadme\"."
+            Write-Host "What if: Performing the operation \"Update coverage table summary tags\" on target \"$ExamReadme\"."
         }
         else {
             if ($hasChanges) {
                 Set-Content -Path $ExamReadme -Value $newContent -Encoding UTF8 -NoNewline
-                Write-Host "Updated $updatedRows coverage rows in $ExamReadme" -ForegroundColor Green
+                Write-Host "Updated coverage table summary tags in $ExamReadme" -ForegroundColor Green
             }
             else {
                 Write-Host "No coverage table changes detected in $ExamReadme"
             }
-        }
-
-        # Summary
-        if ($hasQsColumn) {
-            $totalQs = ($QuestionCounts.Values | Measure-Object -Sum).Sum
-            Write-Host "`nCoverage Summary for $ExamName" -ForegroundColor Cyan
-            Write-Host "  Practice questions: $totalQs"
-            Write-Host "  Table rows updated: $updatedRows"
-        } else {
-            Write-Host "`nCoverage Summary for $ExamName" -ForegroundColor Cyan
-            Write-Host "  Skill-only coverage table (no Qs column)"
         }
     }
 
@@ -854,73 +704,16 @@ $Helpers = {
     function Update-CoverageDashboard {
         [CmdletBinding(SupportsShouldProcess)]
 
-        # Regenerate the coverage dashboard with domain-level aggregates
-        param(
-            [Parameter(Mandatory)]
-            [hashtable]$QuestionCounts
-        )
-
+        # Regenerate the coverage dashboard from Per-Skill Progress completion data
         $lines = Get-Content -Path $ExamReadme -Encoding UTF8
+        $domainStats = Get-SkillCompletionByDomain
 
-        # Detect skills-coverage mode from dashboard header
-        $skillsMode = $false
-        foreach ($line in $lines) {
-            if ($line -match '<!-- BEGIN COVERAGE DASHBOARD -->') { continue }
-            if ($line -match '^\|.*Skills Covered') { $skillsMode = $true; break }
-            if ($line -match '^\|.*Tasks Covered') { break }
-            if ($line -match '<!-- END COVERAGE DASHBOARD -->') { break }
-        }
-
-        if ($skillsMode) {
-            # Skills-coverage mode: derive stats from Per-Skill Progress table
-            $domainStats = Get-SkillCompletionByDomain
-        }
-        else {
-            # Task-coverage mode: derive stats from coverage table Qs
-            $domainStats = [ordered]@{}
-            $currentDomain = $null
-            $inCoverage = $false
-
-            foreach ($line in $lines) {
-                if ($line -match '<!-- BEGIN COVERAGE TABLE -->') { $inCoverage = $true; continue }
-                if ($line -match '<!-- END COVERAGE TABLE -->') { break }
-                if (-not $inCoverage) { continue }
-
-                # Domain heading (supports both markdown heading and details summary formats)
-                if ($line -match '^### Domain (\d+):' -or $line -match '^<summary><b>Domain (\d+):') {
-                    $domainNum = $Matches[1]
-                    $currentDomain = @{ Qs = 0; Tasks = 0; Covered = 0; Skills = 0 }
-                    $domainStats[$domainNum] = $currentDomain
-                    continue
-                }
-
-                # Task row (supports both legacy and question-only formats)
-                if ($null -ne $currentDomain -and $line -match '^\|\s*(.*?)\s*\|\s*(?!Task\b|:---)(.+?)\s+\|\s+\d+\s+\|\s*(?:\d+\s+\|)?$') {
-                    $skillCell = $Matches[1].Trim()
-                    $taskName = $Matches[2].Trim()
-
-                    # Count distinct skills (non-empty first cell indicates a new skill)
-                    if ($skillCell -ne '') { $currentDomain.Skills++ }
-                    $qs = if ($QuestionCounts.ContainsKey($taskName)) { $QuestionCounts[$taskName] } else { 0 }
-                    $currentDomain.Tasks++
-                    $currentDomain.Qs += $qs
-                    if ($qs -gt 0) { $currentDomain.Covered++ }
-                }
-            }
-        }
-
-        # Second pass: update dashboard rows
+        # Update dashboard rows
         $output = [System.Collections.Generic.List[string]]::new()
         $inDashboard = $false
         $updatedRows = 0
 
         foreach ($line in $lines) {
-            # Keep the dashboard description aligned with coverage mode
-            if (-not $skillsMode -and $line -match '^Task-level coverage from ') {
-                $output.Add('Task-level coverage from [Practice Questions](./practice-questions/README.md).')
-                continue
-            }
-
             if ($line -match '<!-- BEGIN COVERAGE DASHBOARD -->') {
                 $inDashboard = $true
                 $output.Add($line)
@@ -935,31 +728,16 @@ $Helpers = {
 
             # Totals line
             if ($inDashboard -and $line -match '^\*\*Totals:\*\*') {
-                if ($skillsMode) {
-                    $totalSkills = ($domainStats.Values | ForEach-Object { $_.Total } | Measure-Object -Sum).Sum
-                    $totalCompleted = ($domainStats.Values | ForEach-Object { $_.Completed } | Measure-Object -Sum).Sum
-                    $output.Add("**Totals:** $totalCompleted / $totalSkills skills completed")
-                }
-                else {
-                    $totalQs = ($QuestionCounts.Values | Measure-Object -Sum).Sum
-                    if ($line -match '(\d+)\s+hands-on labs') {
-                        $totalLabs = $Matches[1]
-                        $output.Add("**Totals:** $totalQs practice questions · $totalLabs hands-on labs")
-                    } else {
-                        $output.Add("**Totals:** $totalQs practice questions")
-                    }
-                }
+                $totalSkills = ($domainStats.Values | ForEach-Object { $_.Total } | Measure-Object -Sum).Sum
+                $totalCompleted = ($domainStats.Values | ForEach-Object { $_.Completed } | Measure-Object -Sum).Sum
+                $output.Add("**Totals:** $totalCompleted / $totalSkills skills completed")
                 $updatedRows++
                 continue
             }
 
             # Legend line
             if ($inDashboard -and $line -match '^\*\*Legend:\*\*') {
-                if ($skillsMode) {
-                    $output.Add('**Legend:** 🟢 Strong (≥66%) · 🟡 Partial (33–65%) · 🔴 Low (<33%) — "Covered" = skill completed in Per-Skill Progress')
-                } else {
-                    $output.Add('**Legend:** 🟢 Strong (≥66%) · 🟡 Partial (33–65%) · 🔴 Low (<33%) — "Covered" = task has ≥1 practice question')
-                }
+                $output.Add('**Legend:** 🟢 Strong (≥66%) · 🟡 Partial (33–65%) · 🔴 Low (<33%) — "Covered" = skill completed in Per-Skill Progress')
                 continue
             }
 
@@ -974,23 +752,9 @@ $Helpers = {
                     $domainLink = $cells[0].Trim()
                     $weight = $cells[1].Trim()
 
-                    if ($skillsMode) {
-                        $pct = if ($stats.Total -gt 0) { [math]::Floor(($stats.Completed / $stats.Total) * 100) } else { 0 }
-                        $indicator = if ($pct -ge 66) { '🟢' } elseif ($pct -ge 33) { '🟡' } else { '🔴' }
-                        $newLine = "| $domainLink | $weight | $($stats.Skills) | $($stats.Completed) / $($stats.Total) ($pct%) | $indicator |"
-                    }
-                    else {
-                        $pct = if ($stats.Tasks -gt 0) { [math]::Floor(($stats.Covered / $stats.Tasks) * 100) } else { 0 }
-                        $indicator = if ($pct -ge 66) { '🟢' } elseif ($pct -ge 33) { '🟡' } else { '🔴' }
-
-                        # 7+ cells = Labs column present (domain|weight|skills|qs|labs|covered|status)
-                        if ($cells.Count -ge 7) {
-                            $labsCell = $cells[4].Trim()
-                            $newLine = "| $domainLink | $weight | $($stats.Skills) | $($stats.Qs) | $labsCell | $($stats.Covered) / $($stats.Tasks) ($pct%) | $indicator |"
-                        } else {
-                            $newLine = "| $domainLink | $weight | $($stats.Skills) | $($stats.Qs) | $($stats.Covered) / $($stats.Tasks) ($pct%) | $indicator |"
-                        }
-                    }
+                    $pct = if ($stats.Total -gt 0) { [math]::Floor(($stats.Completed / $stats.Total) * 100) } else { 0 }
+                    $indicator = if ($pct -ge 66) { '🟢' } elseif ($pct -ge 33) { '🟡' } else { '🔴' }
+                    $newLine = "| $domainLink | $weight | $($stats.Skills) | $($stats.Completed) / $($stats.Total) ($pct%) | $indicator |"
                     $output.Add($newLine)
                     $updatedRows++
                 }
@@ -1011,6 +775,325 @@ $Helpers = {
                 Set-Content -Path $ExamReadme -Value ($output -join "`n") -Encoding UTF8 -NoNewline
                 Write-Host "Updated $updatedRows dashboard rows in $ExamReadme" -ForegroundColor Green
             }
+        }
+    }
+
+    function Get-CertificationStartDateMap {
+        # Parse certification start dates for active exams from the root README certifications table
+        param(
+            [string[]]$ExamNames
+        )
+
+        $lines = Get-Content -Path $MainReadme -Encoding UTF8
+        $lineByExam = @{}
+        $dateFormats = @('M/d/yy', 'M/d/yyyy', 'MM/dd/yy', 'MM/dd/yyyy')
+        $culture = [System.Globalization.CultureInfo]::InvariantCulture
+        $styles = [System.Globalization.DateTimeStyles]::None
+
+        # Find the certifications table row for each exam
+        foreach ($line in $lines) {
+            if ($line -notmatch '^\|') { continue }
+            if ($line -match '^\|\s*Exam\s*\|' -or $line -match '^\|\s*[-:]') { continue }
+
+            if ($line -match '\[\*\*([A-Z]+-\d+)\*\*\]') {
+                $lineByExam[$Matches[1]] = $line
+            }
+        }
+
+        $result = @{}
+        foreach ($exam in $ExamNames) {
+            if (-not $lineByExam.ContainsKey($exam)) {
+                Write-Warning "Certification row not found for exam '$exam' in $MainReadme — skipping from running totals"
+                continue
+            }
+
+            $cells = $lineByExam[$exam] -split '\|'
+            if ($cells.Count -lt 5) { continue }
+
+            $durationCell = $cells[4].Trim()
+            if ($durationCell -notmatch '(\d{1,2}/\d{1,2}/\d{2,4})') { continue }
+
+            # Parse the start date from the duration cell using individual format attempts
+            [datetime]$parsedDate = [datetime]::MinValue
+            $startDateText = $Matches[1]
+            foreach ($fmt in $dateFormats) {
+                if ([datetime]::TryParseExact($startDateText, $fmt, $culture, $styles, [ref]$parsedDate)) {
+                    $result[$exam] = $parsedDate.ToString('yyyy-MM-dd')
+                    break
+                }
+            }
+        }
+
+        return $result
+    }
+
+    function Get-AllStudyLogEntry {
+        # Read study log entries for active exams and WorkLog, returning flat list of date/exam/duration objects
+        param(
+            [string[]]$ExamNames
+        )
+
+        $entries = [System.Collections.Generic.List[object]]::new()
+        $dateFormats = @('M/d/yy', 'M/d/yyyy', 'MM/dd/yy', 'MM/dd/yyyy')
+        $culture = [System.Globalization.CultureInfo]::InvariantCulture
+        $styles = [System.Globalization.DateTimeStyles]::None
+
+        # Collect log files: one per active exam plus the WorkLog for Other
+        $logSources = [System.Collections.Generic.List[object]]::new()
+        foreach ($exam in $ExamNames) {
+            $logPath = Join-Path -Path $RepoRoot -ChildPath "certs\$exam\StudyLog.md"
+            if (Test-Path -Path $logPath) {
+                $logSources.Add([PSCustomObject]@{ Path = $logPath; Exam = $exam })
+            }
+        }
+
+        $workLogPath = Join-Path -Path $RepoRoot -ChildPath '.assets\workflow-development\WorkLog.md'
+        if (Test-Path -Path $workLogPath) {
+            $logSources.Add([PSCustomObject]@{ Path = $workLogPath; Exam = 'Other' })
+        }
+
+        foreach ($source in $logSources) {
+            $lines = Get-Content -Path $source.Path -Encoding UTF8
+
+            foreach ($line in $lines) {
+                # Match data rows starting with a session number
+                if ($line -notmatch '^\|\s*\d+\s*\|') { continue }
+
+                $cells = ($line.TrimStart('|').TrimEnd('|')) -split '\|'
+                if ($cells.Count -lt 5) { continue }
+
+                $dateCell = $cells[1].Trim()
+                $durationCell = $cells[4].Trim()
+
+                # Parse the date using individual format attempts
+                [datetime]$parsedDate = [datetime]::MinValue
+                $dateParsed = $false
+                foreach ($fmt in $dateFormats) {
+                    if ([datetime]::TryParseExact($dateCell, $fmt, $culture, $styles, [ref]$parsedDate)) {
+                        $dateParsed = $true
+                        break
+                    }
+                }
+                if (-not $dateParsed) { continue }
+
+                # Parse the duration
+                if ($durationCell -notmatch '^(?:(\d+)\s*h)?\s*(?:(\d+)\s*m)?$') { continue }
+                $hours = if ([string]::IsNullOrWhiteSpace($Matches[1])) { 0 } else { [int]$Matches[1] }
+                $minutes = if ([string]::IsNullOrWhiteSpace($Matches[2])) { 0 } else { [int]$Matches[2] }
+                $totalMinutes = ($hours * 60) + $minutes
+                if ($totalMinutes -eq 0) { continue }
+
+                # Cap unreasonable durations (e.g., auto-closed sessions) at 12 hours
+                if ($totalMinutes -gt 720) {
+                    Write-Verbose "Capping $($source.Exam) entry on $dateCell from $durationCell to 12h (auto-closed session)"
+                    $totalMinutes = 720
+                }
+
+                $entries.Add([PSCustomObject]@{
+                    Date           = $parsedDate.ToString('yyyy-MM-dd')
+                    DateObj        = $parsedDate
+                    Exam           = $source.Exam
+                    DurationHours  = [math]::Round($totalMinutes / 60.0, 2)
+                })
+            }
+        }
+
+        return $entries.ToArray()
+    }
+
+    function Get-ActivityEmoji {
+        # Return color-coded emoji based on activity hours
+        param(
+            [double]$Hours
+        )
+
+        if ($Hours -eq 0)     { return '' }
+        if ($Hours -lt 1.0)   { return '🟡' }
+        if ($Hours -le 2.0)   { return '🟢' }
+        return '🟣'
+    }
+
+    function Build-ActivityTable {
+        # Generate the 7-day rolling activity markdown table from study log entries
+        param(
+            [array]$Entries,
+            [string[]]$TableColumns,
+            [hashtable]$CertStartDates
+        )
+
+        $today = (Get-Date).Date
+
+        # Build list of dates in reverse chronological order (last 7 days)
+        $dates = @()
+        for ($i = 0; $i -lt 7; $i++) {
+            $dates += $today.AddDays(-$i).ToString('yyyy-MM-dd')
+        }
+
+        # Group entries by date and exam
+        $byDateExam = @{}
+        foreach ($entry in $Entries) {
+            $key = "$($entry.Date)|$($entry.Exam)"
+            if (-not $byDateExam.ContainsKey($key)) { $byDateExam[$key] = 0.0 }
+            $byDateExam[$key] += $entry.DurationHours
+        }
+
+        # Initialize markdown table header
+        $headerCols = $TableColumns -join ' | '
+        $table = "## 📈 Recent Activity (Last 7 Days)`n`n"
+        $table += "| Date | $headerCols | Total |`n"
+
+        # Build separator row
+        $sepCols = ($TableColumns | ForEach-Object { '------' }) -join '|'
+        $table += "|------|$sepCols|-------|`n"
+
+        # Initialize weekly totals
+        $weeklyTotals = @{}
+        foreach ($col in $TableColumns) { $weeklyTotals[$col] = 0.0 }
+        $weeklyGrandTotal = 0.0
+
+        # Build a row for each day in the 7-day window
+        foreach ($date in $dates) {
+            $dateObj = [datetime]::ParseExact($date, 'yyyy-MM-dd', $null)
+            $formattedDate = $dateObj.ToString('ddd, MMM dd')
+            $dailyTotal = 0.0
+            $colValues = @()
+
+            foreach ($col in $TableColumns) {
+                $key = "$date|$col"
+                $rawHours = 0.0
+                if ($byDateExam.ContainsKey($key)) { $rawHours = $byDateExam[$key] }
+                $rounded = [math]::Round($rawHours, 1)
+                $weeklyTotals[$col] += $rounded
+                $dailyTotal += $rounded
+
+                # Format cell with activity emoji
+                $emoji = Get-ActivityEmoji -Hours $rounded
+                if ($rounded -gt 0) {
+                    $colValues += "$emoji $($rounded.ToString('0.0'))h"
+                }
+                else {
+                    $colValues += ''
+                }
+            }
+
+            $dailyTotal = [math]::Round($dailyTotal, 1)
+            $weeklyGrandTotal += $dailyTotal
+
+            $totalStr = ''
+            if ($dailyTotal -gt 0) { $totalStr = "**$($dailyTotal.ToString('0.0'))h**" }
+
+            $colStr = $colValues -join ' | '
+            $table += "| $formattedDate | $colStr | $totalStr |`n"
+        }
+
+        # Add weekly totals row
+        $weeklyCols = ($TableColumns | ForEach-Object {
+            "**$($weeklyTotals[$_].ToString('0.0'))h**"
+        }) -join ' | '
+        $table += "| **Weekly Total** | $weeklyCols | **$($weeklyGrandTotal.ToString('0.0'))h** |`n"
+
+        # Calculate running totals since each certification start date
+        $running = @{}
+        $earliestStart = ($CertStartDates.Values | Sort-Object | Select-Object -First 1)
+
+        foreach ($entry in $Entries) {
+            $exam = $entry.Exam
+
+            if ($CertStartDates.ContainsKey($exam)) {
+                # Only count entries on or after the cert start date
+                if ($entry.Date -ge $CertStartDates[$exam]) {
+                    if (-not $running.ContainsKey($exam)) { $running[$exam] = 0.0 }
+                    $running[$exam] += $entry.DurationHours
+                }
+            }
+            elseif ($exam -eq 'Other') {
+                # Other counts from the earliest cert start date
+                if ($null -ne $earliestStart -and $entry.Date -ge $earliestStart) {
+                    if (-not $running.ContainsKey($exam)) { $running[$exam] = 0.0 }
+                    $running[$exam] += $entry.DurationHours
+                }
+            }
+        }
+
+        # Add running totals row
+        $runningCols = @()
+        $runningGrand = 0.0
+        foreach ($col in $TableColumns) {
+            $val = 0.0
+            if ($running.ContainsKey($col)) { $val = [math]::Round($running[$col], 1) }
+            $runningGrand += $val
+            $runningCols += "***$($val.ToString('0.0'))h***"
+        }
+        $runningStr = $runningCols -join ' | '
+        $table += "| ***Running Total*** | $runningStr | ***$([math]::Round($runningGrand, 1).ToString('0.0'))h*** |`n"
+
+        # Add legend and metadata
+        $table += "`n*Activity Levels: 🟡 Low (< 1hr) | 🟢 Medium (1-2hrs) | 🟣 High (> 2hrs)*`n"
+        $table += "`n*Other = Lab workflow and automation design, content structure and development*  `n"
+
+        # Add timestamp in Central timezone
+        try {
+            $centralTz = [System.TimeZoneInfo]::FindSystemTimeZoneById('Central Standard Time')
+            $centralTime = [System.TimeZoneInfo]::ConvertTime([datetime]::Now, $centralTz)
+            $tzAbbrev = if ($centralTz.IsDaylightSavingTime($centralTime)) { 'CDT' } else { 'CST' }
+            $table += "`n*Last updated: $($centralTime.ToString('MMMM dd, yyyy')) at $($centralTime.ToString('HH:mm')) $tzAbbrev*`n"
+        }
+        catch {
+            $table += "`n*Last updated: $(Get-Date -Format 'MMMM dd, yyyy') at $(Get-Date -Format 'HH:mm')*`n"
+        }
+
+        return $table
+    }
+
+    function Update-ActivityTable {
+        [CmdletBinding(SupportsShouldProcess)]
+
+        # Update the Recent Activity table in the root README from study log data
+        param(
+            [Parameter(Mandatory)]
+            [string[]]$ExamNames
+        )
+
+        [string[]]$tableColumns = @($ExamNames | Sort-Object) + @('Other')
+
+        # Gather all study log entries across active exams and WorkLog
+        $allEntries = Get-AllStudyLogEntry -ExamNames $ExamNames
+
+        # Parse certification start dates for running totals
+        $certStartDates = Get-CertificationStartDateMap -ExamNames $ExamNames
+
+        # Build the activity table markdown
+        $table = Build-ActivityTable -Entries $allEntries -TableColumns $tableColumns -CertStartDates $certStartDates
+
+        Write-Host "`nGenerated activity table:"
+        Write-Host $table
+
+        # Read current README and replace between markers
+        $startMarker = '<!-- COMMIT_STATS_START -->'
+        $endMarker   = '<!-- COMMIT_STATS_END -->'
+
+        if (-not (Test-Path -Path $MainReadme)) {
+            Write-Warning "README.md not found: $MainReadme"
+            return
+        }
+
+        $content = Get-Content -Path $MainReadme -Raw -Encoding UTF8
+
+        if ($content.Contains($startMarker) -and $content.Contains($endMarker)) {
+            $pattern = [regex]::Escape($startMarker) + '[\s\S]*?' + [regex]::Escape($endMarker)
+            $newSection = "$startMarker`n$table`n$endMarker"
+            $newContent = [regex]::Replace($content, $pattern, $newSection)
+
+            if ($WhatIfPreference) {
+                Write-Host "What if: Performing the operation ""Update activity table"" on target ""$MainReadme""."
+            }
+            else {
+                Set-Content -Path $MainReadme -Value $newContent -NoNewline -Encoding UTF8
+                Write-Host "`nActivity table updated in $MainReadme" -ForegroundColor Green
+            }
+        }
+        else {
+            Write-Warning "Activity table markers not found in $MainReadme — skipping."
         }
     }
 }

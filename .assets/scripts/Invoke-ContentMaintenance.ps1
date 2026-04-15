@@ -6,11 +6,10 @@ Orchestrate automated content maintenance across the workspace.
 Controller script that invokes content maintenance scripts in dependency order:
   1. Update-StudyLogGaps — fill date gaps in study logs with zero-hour entries.
   2. Update-ProgressTrackerDays — recalculate in-progress day counts.
-  3. Update-CoverageTable — refresh coverage table and dashboard per exam.
+  3. Update-CoverageTable — refresh coverage table, dashboard, and activity table.
   4. Update-LabReferences — regenerate lab catalogs and cross-references.
   5. Invoke-CollapseDetailBlock — normalize markdown detail elements.
   6. Remove-UnusedImages — clean up unreferenced images.
-    7. Update-CommitStats — refresh commit statistics in README.md.
 
 When invoked with the -Reorganize switch, also runs practice exam question
 reorganization before the other steps.
@@ -60,9 +59,6 @@ $Main = {
 
     # Step 7: Remove unreferenced images
     Invoke-Step -Name 'Remove-UnusedImages' -ScriptPath (Join-Path $ScriptsDir 'Remove-UnusedImages.ps1')
-
-    # Step 8: Update commit statistics in README.md
-    Invoke-Step -Name 'Update-CommitStats' -ScriptPath (Join-Path $ScriptsDir 'Update-CommitStats.ps1')
 
     Write-Host "`nContent maintenance complete." -ForegroundColor Green
 }
