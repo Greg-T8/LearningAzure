@@ -449,17 +449,16 @@ $Helpers = {
 
             # Initialize skill entry
             if (-not $result.ContainsKey($skillCell)) {
-                $result[$skillCell] = @{ ML = 0.0; DR = 0.0; NB = 0.0; Lab = 0.0; VPQ = 0.0; Total = 0.0 }
+                $result[$skillCell] = @{ ML = 0.0; DR = 0.0; NB = 0.0; Lab = 0.0; PQ = 0.0; Total = 0.0 }
             }
 
             # Map mode to column key
             $modeKey = switch ($modeCell) {
                 'MSLearn'          { 'ML' }
                 'DeepResearch'     { 'DR' }
+                'NotebookLM'       { 'NB' }
                 'Lab'              { 'Lab' }
-                'PracticeQuestion' {
-                    if ($notesCell -match 'NotebookLM') { 'NB' } else { 'VPQ' }
-                }
+                'PracticeQuestion' { 'PQ' }
                 default            { $null }
             }
 
@@ -471,7 +470,7 @@ $Helpers = {
 
         # Round all values
         foreach ($skill in $result.Keys) {
-            foreach ($key in @('ML', 'DR', 'NB', 'Lab', 'VPQ', 'Total')) {
+            foreach ($key in @('ML', 'DR', 'NB', 'Lab', 'PQ', 'Total')) {
                 $result[$skill][$key] = [math]::Round($result[$skill][$key], 1)
             }
         }
@@ -536,7 +535,7 @@ $Helpers = {
                     if ($h -eq 'DR')     { $colIndices['DR'] = $i }
                     if ($h -eq 'NB')     { $colIndices['NB'] = $i }
                     if ($h -eq 'Lab')    { $colIndices['Lab'] = $i }
-                    if ($h -eq 'VPQ')    { $colIndices['VPQ'] = $i }
+                    if ($h -eq 'PQ')     { $colIndices['PQ'] = $i }
                     if ($h -eq 'Hours')  { $colIndices['Hours'] = $i }
                 }
                 $headerParsed = $true
@@ -569,7 +568,7 @@ $Helpers = {
 
                 # Update mode columns and Hours column with study log data
                 $skillHours = if ($studyHours.ContainsKey($skillName)) { $studyHours[$skillName] } else { $null }
-                $modeKeys = @('ML', 'DR', 'NB', 'Lab', 'VPQ')
+                $modeKeys = @('ML', 'DR', 'NB', 'Lab', 'PQ')
 
                 foreach ($modeKey in $modeKeys) {
                     if (-not $colIndices.ContainsKey($modeKey)) { continue }

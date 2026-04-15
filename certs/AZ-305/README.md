@@ -128,7 +128,7 @@ Skill-level coverage based on [Per-Skill Progress](#per-skill-progress) completi
 
 ### Per-Skill Progress
 
-| # | Domain | Skill | Tasks | ML | DR | NB | Lab | VPQ | Hours | Status | Started | Completed | Days |
+| # | Domain | Skill | Tasks | ML | DR | NB | Lab | PQ | Hours | Status | Started | Completed | Days |
 | -: | :----- | :---- | ----: | :-: | :-: | :-: | :-: | :-: | ----: | :----- | :------ | :-------- | ---: |
 | 1 | Identity, Governance & Monitoring | Design solutions for logging and monitoring | 3 | ✅ 4.9h | ✅ 9.2h | ⏳ 3.3h | 🔲 0.2h | 🔲 1.0h | 18.7h | In Progress | 3/30/26 | | 16 |
 | 2 | Identity, Governance & Monitoring | Design authentication and authorization solutions | 5 | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | 0.0h | Not Started | | | |
@@ -143,7 +143,14 @@ Skill-level coverage based on [Per-Skill Progress](#per-skill-progress) completi
 | 11 | Infrastructure | Design migrations | 5 | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | 0.0h | Not Started | | | |
 | 12 | Infrastructure | Design network solutions | 5 | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | 0.0h | Not Started | | | |
 
-**Modalities:** ML = MSLearn · DR = DeepResearch · NB = NotebookLM PQs · Lab = Hands-on Labs · PQ = Practice Questions </br>
+**Modalities:**
+
+- **ML** (MSLearn) — Microsoft Learning Paths/Modules
+- **DR** (DeepResearch) — Reading through Microsoft Documentation
+- **NB** (NotebookLM) — Generated practice questions based on Microsoft Documentation sources
+- **Lab** (Lab) — Generated hands-on labs from curated topics
+- **PQ** (PracticeQuestion) — Practice questions from MeasureUp or Microsoft assessment
+
 **Legend:** ✅ Complete · ⏳ In Progress · 🔲 Not Started
 
 ---

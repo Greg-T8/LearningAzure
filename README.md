@@ -23,22 +23,22 @@ Progress trackers, detailed study notes, practice exams, and hands-on labs:
 <!-- COMMIT_STATS_START -->
 ## 📈 Recent Activity (Last 7 Days)
 
-| Date | AI-103 | AZ-305 | Other | Total |
-|------|------|------|------|-------|
-| Wed, Apr 15 | 🟡 0.5h | 🟢 1.6h |  | **2.1h** |
-| Tue, Apr 14 |  | 🟢 1.8h |  | **1.8h** |
-| Mon, Apr 13 |  |  |  |  |
-| Sun, Apr 12 |  |  |  |  |
-| Sat, Apr 11 |  | 🟣 2.2h |  | **2.2h** |
-| Fri, Apr 10 | 🟢 1.1h | 🟢 1.2h |  | **2.3h** |
-| Thu, Apr 09 | 🟢 1.2h | 🟢 1.2h |  | **2.4h** |
-| **Weekly Total** | **2.8h** | **8.0h** | **0.0h** | **10.8h** |
-| ***Running Total*** | ***7.6h*** | ***22.3h*** | ***3.9h*** | ***33.8h*** |
+| Date | AZ-305 | Other | Total |
+|------|------|------|-------|
+| Wed, Apr 15 | 🟢 1.6h |  | **1.6h** |
+| Tue, Apr 14 | 🟢 1.8h |  | **1.8h** |
+| Mon, Apr 13 |  |  |  |
+| Sun, Apr 12 |  |  |  |
+| Sat, Apr 11 | 🟡 0.2h | 🟢 2.0h | **2.2h** |
+| Fri, Apr 10 | 🟢 1.2h |  | **1.2h** |
+| Thu, Apr 09 | 🟢 1.2h |  | **1.2h** |
+| **Weekly Total** | **6.0h** | **2.0h** | **8.0h** |
+| ***Running Total*** | ***18.7h*** | ***4.9h*** | ***23.6h*** |
 
 *Activity Levels: 🟡 Low (< 1hr) | 🟢 Medium (1-2hrs) | 🟣 High (> 2hrs)*
 
 *Other = Lab workflow and automation design, content structure and development*  
 
-*Last updated: April 15, 2026 at 08:54 CDT*
+*Last updated: April 15, 2026 at 14:13 CDT*
 
 <!-- COMMIT_STATS_END -->
