@@ -16,7 +16,7 @@ https://learn.microsoft.com/azure/virtual-machine-scale-sets/tutorial-autoscale-
 https://learn.microsoft.com/azure/virtual-machines/extensions/diagnostics-linux
 https://learn.microsoft.com/azure/virtual-machines/extensions/diagnostics-linux-v3
 https://learn.microsoft.com/azure/virtual-machines/extensions/diagnostics-template
-https://learn.microsoft.com/azure/virtual-machines/extensions/diagnostics-windows
+https://learn.microsoft.com/azure/virtual-machines/extensions/diagnostics-widows
 https://learn.microsoft.com/cli/azure/azure-cli-reference-for-monitor
 https://learn.microsoft.com/cli/azure/monitor/activity-log
 https://learn.microsoft.com/cli/azure/monitor/app-insights
