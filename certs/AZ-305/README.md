@@ -128,20 +128,20 @@ Skill-level coverage based on [Per-Skill Progress](#per-skill-progress) completi
 
 ### Per-Skill Progress
 
-| # | Domain | Skill | Tasks | ML | DR | NB | Lab | PQ | Hours | Status | Started | Completed | Days |
-| -: | :----- | :---- | ----: | :-: | :-: | :-: | :-: | :-: | ----: | :----- | :------ | :-------- | ---: |
-| 1 | Identity, Governance & Monitoring | Design solutions for logging and monitoring | 3 | ✅ 4.9h | ✅ 9.2h | ⏳ 3.3h | 🔲 0.2h | 🔲 1.0h | 18.7h | In Progress | 3/30/26 | | 16 |
-| 2 | Identity, Governance & Monitoring | Design authentication and authorization solutions | 5 | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | 0.0h | Not Started | | | |
-| 3 | Identity, Governance & Monitoring | Design governance | 3 | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | 0.0h | Not Started | | | |
-| 4 | Data Storage | Design data storage solutions for relational data | 4 | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | 0.0h | Not Started | | | |
-| 5 | Data Storage | Design data storage solutions for semi-structured and unstructured data | 4 | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | 0.0h | Not Started | | | |
-| 6 | Data Storage | Design data integration | 2 | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | 0.0h | Not Started | | | |
-| 7 | Business Continuity | Design solutions for backup and disaster recovery | 4 | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | 0.0h | Not Started | | | |
-| 8 | Business Continuity | Design for high availability | 3 | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | 0.0h | Not Started | | | |
-| 9 | Infrastructure | Design compute solutions | 5 | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | 0.0h | Not Started | | | |
-| 10 | Infrastructure | Design an application architecture | 6 | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | 0.0h | Not Started | | | |
-| 11 | Infrastructure | Design migrations | 5 | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | 0.0h | Not Started | | | |
-| 12 | Infrastructure | Design network solutions | 5 | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | 0.0h | Not Started | | | |
+| # | Domain | Skill | Tasks | ML | DR | NB | Lab | PQ | Hours | Progress |
+| -: | :----- | :---- | ----: | :-: | :-: | :-: | :-: | :-: | ----: | :------- |
+| 1 | Identity, Governance & Monitoring | Design solutions for logging and monitoring | 3 | ✅ 4.9h | ✅ 9.2h | ⏳ 3.3h | 🔲 0.2h | 🔲 1.0h | 18.7h | ⏳ 3/30/26 → _ · 16d |
+| 2 | Identity, Governance & Monitoring | Design authentication and authorization solutions | 5 | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | 0.0h | 🔲 |
+| 3 | Identity, Governance & Monitoring | Design governance | 3 | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | 0.0h | 🔲 |
+| 4 | Data Storage | Design data storage solutions for relational data | 4 | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | 0.0h | 🔲 |
+| 5 | Data Storage | Design data storage solutions for semi-structured and unstructured data | 4 | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | 0.0h | 🔲 |
+| 6 | Data Storage | Design data integration | 2 | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | 0.0h | 🔲 |
+| 7 | Business Continuity | Design solutions for backup and disaster recovery | 4 | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | 0.0h | 🔲 |
+| 8 | Business Continuity | Design for high availability | 3 | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | 0.0h | 🔲 |
+| 9 | Infrastructure | Design compute solutions | 5 | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | 0.0h | 🔲 |
+| 10 | Infrastructure | Design an application architecture | 6 | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | 0.0h | 🔲 |
+| 11 | Infrastructure | Design migrations | 5 | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | 0.0h | 🔲 |
+| 12 | Infrastructure | Design network solutions | 5 | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | 0.0h | 🔲 |
 
 **Modalities:**
 
@@ -151,6 +151,6 @@ Skill-level coverage based on [Per-Skill Progress](#per-skill-progress) completi
 - **Lab** (Lab) — Generated hands-on labs from curated topics
 - **PQ** (PracticeQuestion) — Practice questions from MeasureUp or Microsoft assessment
 
-**Legend:** ✅ Complete · ⏳ In Progress · 🔲 Not Started
+**Legend:** ✅ start → end · Nd Complete · ⏳ start → _ · Nd In Progress · 🔲 Not Started
 
 ---

@@ -287,6 +287,9 @@ $Helpers = {
         [CmdletBinding(SupportsShouldProcess)]
 
         # Recalculate Days in exam progress tables for rows marked In Progress
+        # Supports two table formats:
+        #   Legacy (AZ-104/AI-102): separate Status | Started | Completed | Days columns
+        #   Compact (AZ-305):       single Progress column with "⏳ date → _ · Nd" format
         $lines = Get-Content -Path $ExamReadme -Encoding UTF8
         $output = [System.Collections.Generic.List[string]]::new()
         $updatedRows = 0
@@ -299,6 +302,44 @@ $Helpers = {
         )
 
         foreach ($line in $lines) {
+
+            # Compact format: Progress column contains "⏳ <date> → _ · <days>d"
+            if ($line -match '^\|\s*\d+\s*\|' -and $line -match '⏳\s*(\S+)\s*→\s*_\s*·\s*(\d+)d') {
+                $startedText = $Matches[1].Trim()
+                $startDate = $null
+
+                foreach ($format in $dateFormats) {
+                    try {
+                        $startDate = [datetime]::ParseExact(
+                            $startedText,
+                            $format,
+                            [System.Globalization.CultureInfo]::InvariantCulture
+                        )
+                        break
+                    }
+                    catch {
+                        continue
+                    }
+                }
+
+                if ($null -ne $startDate) {
+                    $days = ($today - $startDate.Date).Days
+                    $currentDays = [int]$Matches[2]
+
+                    # Only update if the value changed
+                    if ($days -ne $currentDays) {
+                        $newLine = $line -replace '(⏳\s*\S+\s*→\s*_\s*·\s*)\d+d', "`${1}${days}d"
+                        $output.Add($newLine)
+                        $updatedRows++
+                        continue
+                    }
+                }
+
+                $output.Add($line)
+                continue
+            }
+
+            # Legacy format: separate Status | Started | Completed | Days columns
             if ($line -match '^\|\s*\d+\s*\|.*\|\s*In Progress\s*\|\s*([^|]+?)\s*\|\s*([^|]*)\|\s*([^|]*)\|$') {
                 $rowCells = ($line.TrimStart('|').TrimEnd('|')) -split '\|'
 
@@ -335,7 +376,7 @@ $Helpers = {
 
         if ($updatedRows -gt 0) {
             if ($WhatIfPreference) {
-                Write-Host "What if: Performing the operation \"Update $updatedRows in-progress day values\" on target \"$ExamReadme\"."
+                Write-Host "What if: Performing the operation ""Update $updatedRows in-progress day values"" on target ""$ExamReadme""."
             }
             else {
                 Set-Content -Path $ExamReadme -Value ($output -join "`n") -Encoding UTF8 -NoNewline
@@ -646,9 +687,13 @@ $Helpers = {
         }
 
         # Parse Per-Skill Progress table for skill completion
+        # Supports two formats:
+        #   Legacy: separate Status column (value = 'Completed')
+        #   Compact: Progress column (completed = cell starts with ✅)
         $inTracker = $false
         $domainCol = -1
         $statusCol = -1
+        $progressCol = -1
         $skillsCol = -1
         foreach ($line in $lines) {
             if ($line -match '### Per-Skill Progress') { $inTracker = $true; continue }
@@ -659,9 +704,10 @@ $Helpers = {
                 $headers = ($line.TrimStart('|').TrimEnd('|')) -split '\|'
                 for ($i = 0; $i -lt $headers.Count; $i++) {
                     $h = $headers[$i].Trim()
-                    if ($h -eq 'Domain') { $domainCol = $i }
-                    elseif ($h -eq 'Skill') { $skillsCol = $i }
-                    elseif ($h -eq 'Status') { $statusCol = $i }
+                    if ($h -eq 'Domain')   { $domainCol = $i }
+                    elseif ($h -eq 'Skill')    { $skillsCol = $i }
+                    elseif ($h -eq 'Status')   { $statusCol = $i }
+                    elseif ($h -eq 'Progress') { $progressCol = $i }
                 }
                 continue
             }
@@ -672,10 +718,17 @@ $Helpers = {
             # Data row
             if ($domainCol -ge 0 -and $line -match '^\|\s*\d+\s*\|') {
                 $cells = ($line.TrimStart('|').TrimEnd('|')) -split '\|'
-                if ($cells.Count -le $statusCol) { continue }
+
+                # Determine completion from Status column (legacy) or Progress column (compact)
+                $isCompleted = $false
+                if ($progressCol -ge 0 -and $cells.Count -gt $progressCol) {
+                    $isCompleted = $cells[$progressCol].Trim() -match '^✅'
+                }
+                elseif ($statusCol -ge 0 -and $cells.Count -gt $statusCol) {
+                    $isCompleted = $cells[$statusCol].Trim() -eq 'Completed'
+                }
 
                 $domainName = $cells[$domainCol].Trim()
-                $status = $cells[$statusCol].Trim()
 
                 # Map domain name to number
                 $domainNum = $nameToNum[$domainName]
@@ -688,7 +741,7 @@ $Helpers = {
 
                 $domainMap[$domainNum].Total++
                 $domainMap[$domainNum].Skills++
-                if ($status -eq 'Completed') {
+                if ($isCompleted) {
                     $domainMap[$domainNum].Completed++
                 }
             }
