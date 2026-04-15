@@ -10,7 +10,6 @@
 **Hours Committed:** 18.7h · **Days Studied:** 14
 <!-- /STUDY_SUMMARY -->
 
-
 ---
 
 ## 📊 Exam Coverage
@@ -144,7 +143,7 @@ Skill-level coverage based on [Per-Skill Progress](#per-skill-progress) completi
 | 11 | Infrastructure | Design migrations | 5 | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | 0.0h | Not Started | | | |
 | 12 | Infrastructure | Design network solutions | 5 | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | 0.0h | Not Started | | | |
 
-**Modalities:** ML = MSLearn · DR = DeepResearch · NB = NotebookLM PQs · Lab = Hands-on Labs · VPQ = Vendor Practice Questions · Hours auto-computed from StudyLog
+**Modalities:** ML = MSLearn · DR = DeepResearch · NB = NotebookLM PQs · Lab = Hands-on Labs · PQ = Practice Questions </br>
 **Legend:** ✅ Complete · ⏳ In Progress · 🔲 Not Started
 
 ---
