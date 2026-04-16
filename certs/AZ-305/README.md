@@ -10,7 +10,6 @@
 **Hours Committed:** 18.7h · **Days Studied:** 14
 <!-- /STUDY_SUMMARY -->
 
-
 ---
 
 ## 📊 Exam Coverage
@@ -152,6 +151,10 @@ Skill-level coverage based on [Per-Skill Progress](#per-skill-progress) completi
 - **Lab** (Lab) — Generated hands-on labs from curated topics
 - **PQ** (PracticeQuestion) — Practice questions from MeasureUp or Microsoft assessment
 
-**Legend:** ✅ start → end · Nd Complete · ⏳ start → _ · Nd In Progress · 🔲 Not Started
+**Legend:**
+
+- ✅ Complete — start → end · Xd
+- ⏳ In Progress — start → _ · Xd
+- 🔲 Not Started
 
 ---
