@@ -7,7 +7,7 @@
 - **Study Log:** [Session-by-session study time tracker](./StudyLog.md)
 
 <!-- STUDY_SUMMARY -->
-**Hours Committed:** 18.7h · **Days Studied:** 14
+**Hours Committed:** 20.1h · **Days Studied:** 15
 <!-- /STUDY_SUMMARY -->
 
 ---
@@ -130,7 +130,7 @@ Skill-level coverage based on [Per-Skill Progress](#per-skill-progress) completi
 
 | # | Domain | Skill | Tasks | ML | DR | NB | Lab | PQ | Hours | Progress |
 | -: | :----- | :---- | ----: | :-: | :-: | :-: | :-: | :-: | ----: | :------- |
-| 1 | Identity, Governance & Monitoring | Design solutions for logging and monitoring | 3 | ✅ 4.9h | ✅ 9.2h | ⏳ 3.3h | 🔲 0.2h | 🔲 1.0h | 18.7h | ⏳ 3/30/26 → _ · 16d |
+| 1 | Identity, Governance & Monitoring | Design solutions for logging and monitoring | 3 | ✅ 4.9h | ✅ 9.2h | ⏳ 4.8h | 🔲 0.2h | 🔲 1.0h | 20.1h | ⏳ 3/30/26 → _ · 17d |
 | 2 | Identity, Governance & Monitoring | Design authentication and authorization solutions | 5 | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | 0.0h | 🔲 |
 | 3 | Identity, Governance & Monitoring | Design governance | 3 | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | 0.0h | 🔲 |
 | 4 | Data Storage | Design data storage solutions for relational data | 4 | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | 0.0h | 🔲 |
