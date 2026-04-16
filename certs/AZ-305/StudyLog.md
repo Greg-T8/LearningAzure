@@ -8,6 +8,7 @@ This log tracks individual study sessions for the **AZ-305** exam. Fill in **End
 
 | # | Date | Start | End | Duration | Mode | Skill | Notes |
 |:--|:-----|:------|:----|:---------|:-----|:------|:------|
+| 18 | 4/16/26 | 4:09 AM |  |  | NotebookLM | Design solutions for logging and monitoring | Generated quiz questions on Microsoft Learn docs |
 | 17 | 4/15/26 | 3:58 AM | 5:32 AM | 1h 34m | NotebookLM | Design solutions for logging and monitoring | NotebookLM practice questions on exam topics; Pick up w/ quiz questions on "Table Plan Selection" |
 | 16 | 4/14/26 | 4:42 AM | 6:28 AM | 1h 46m | NotebookLM | Design solutions for logging and monitoring | NotebookLM session on Azure Monitor Documentation; For next session, continue w/ practice questions from NotebookLM |
 | 15 | 4/12/26 |  |  | 0h 0m |  |  |  |
