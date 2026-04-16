@@ -8,6 +8,7 @@ This log tracks individual study sessions for the **AI-103** exam. Each entry is
 
 | # | Date | Start | End | Duration | Mode | Skill | Notes |
 |:--|:-----|:------|:----|:---------|:-----|:------|:------|
+| 13 | 4/16/26 | 5:39 AM |  |  | MSLearn | Plan and prepare to develop AI solutions on Azure | Starting module "Develop generative AI apps that use tools" |
 | 12 | 4/15/26 | 5:41 AM | 6:11 AM | 0h 30m | MSLearn | Plan and prepare to develop AI solutions on Azure | Picking up at "Use the asynchronous API"; Next, pick up at module "Develop generative AI apps that use tools" |
 | 11 | 4/13/26 |  |  | 0h 0m |  |  |  |
 | 10 | 4/12/26 |  |  | 0h 0m |  |  |  |
