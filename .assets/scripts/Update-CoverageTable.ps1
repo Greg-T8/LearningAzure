@@ -65,8 +65,11 @@ $Main = {
     # Update In Progress duration once for all exams
     Update-InProgressDuration
 
+    # Always use full set of active exams for the activity table, regardless of -ExamName scope
+    $allActiveExams = & $GetActiveExamScript
+
     # Update the 7-day activity table in root README from study log data
-    Update-ActivityTable -ExamNames $exams
+    Update-ActivityTable -ExamNames $allActiveExams
 }
 
 #region HELPER FUNCTIONS
