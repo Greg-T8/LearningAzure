@@ -34,6 +34,17 @@ Progress trackers, detailed study notes, practice exams, and hands-on labs:
 | Sat, Apr 11 |  | 🟡 0.2h | 🟢 2.0h | **2.2h** |
 | **Weekly Total** | **3.0h** | **6.4h** | **2.0h** | **11.4h** |
 | ***Running Total*** | ***9.7h*** | ***21.5h*** | ***4.9h*** | ***36.1h*** |
+| Date | AI-103 | AZ-305 | Other | Total |
+|------|------|------|------|-------|
+| Fri, Apr 17 | 🟢 1.2h | 🟢 1.4h |  | **2.6h** |
+| Thu, Apr 16 | 🟢 1.3h | 🟢 1.4h |  | **2.7h** |
+| Wed, Apr 15 | 🟡 0.5h | 🟢 1.6h |  | **2.1h** |
+| Tue, Apr 14 |  | 🟢 1.8h |  | **1.8h** |
+| Mon, Apr 13 |  |  |  |  |
+| Sun, Apr 12 |  |  |  |  |
+| Sat, Apr 11 |  | 🟡 0.2h | 🟢 2.0h | **2.2h** |
+| **Weekly Total** | **3.0h** | **6.4h** | **2.0h** | **11.4h** |
+| ***Running Total*** | ***9.7h*** | ***21.5h*** | ***4.9h*** | ***36.1h*** |
 
 *Activity Levels: 🟡 Low (< 1hr) | 🟢 Medium (1-2hrs) | 🟣 High (> 2hrs)*
 
