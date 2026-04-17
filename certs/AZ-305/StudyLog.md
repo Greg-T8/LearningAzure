@@ -12,7 +12,7 @@ This log tracks individual study sessions for the **AZ-305** exam. Fill in **End
 | 18 | 4/16/26 | 4:09 AM | 5:34 AM | 1h 25m | NotebookLM | Design solutions for logging and monitoring | Generated quiz questions on Microsoft Learn docs; Pick up at "Quiz 5 - Access Control Design - Question 8" |
 | 17 | 4/15/26 | 3:58 AM | 5:32 AM | 1h 34m | NotebookLM | Design solutions for logging and monitoring | NotebookLM practice questions on exam topics; Pick up w/ quiz questions on "Table Plan Selection" |
 | 16 | 4/14/26 | 4:42 AM | 6:28 AM | 1h 46m | NotebookLM | Design solutions for logging and monitoring | NotebookLM session on Azure Monitor Documentation; For next session, continue w/ practice questions from NotebookLM |
-| 15 | 4/12/26 |  |  | 0h 0m |  |  |  |
+| 15 | 4/12/26 |  |  |  |  |  |  |
 | 14 | 4/11/26 | 4:48 AM | 4:58 AM | 0h 10m | Lab | Design solutions for logging and monitoring | Designing lab sessions from lab-ideas.md; Transitioned to developing Azure governance process in support of Azure Monitor labs |
 | 13 | 4/10/26 | 4:33 AM | 5:45 AM | 1h 12m | DeepResearch | Design solutions for logging and monitoring | Completed deep research; for next sesssion, plan Azure Monitor labs |
 | 12 | 4/9/26 | 4:31 AM | 5:46 AM | 1h 15m | DeepResearch | Design solutions for logging and monitoring | For next session, pick up at "Overview of Azure Monitor with Prometheus" |

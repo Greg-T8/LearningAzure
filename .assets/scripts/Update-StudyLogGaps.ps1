@@ -1,11 +1,11 @@
 <#
 .SYNOPSIS
-Insert zero-hour entries for days with no study activity.
+Insert blank entries for days with no study activity.
 
 .DESCRIPTION
 Scans the StudyLog.md for each active exam and identifies date gaps between
 the most recent recorded entry and yesterday. For each missing day, inserts
-a zero-hour session row with blank Start, End, and Notes fields. This ensures
+a blank session row with only the session number and date populated. This ensures
 the study log reflects days off (e.g., travel, breaks) rather than hiding them.
 
 Designed to run as a step in the content-maintenance pipeline or standalone.
@@ -47,7 +47,7 @@ $Main = {
 #region HELPER FUNCTIONS
 $Helpers = {
     function Update-StudyLogGap {
-        # Check for date gaps in an exam's study log and insert zero-hour entries
+        # Check for date gaps in an exam's study log and insert blank entries
         param([Parameter(Mandatory)] [string]$Exam)
 
         $logFile = Join-Path -Path $RepoRoot -ChildPath "certs\$Exam\StudyLog.md"
@@ -134,7 +134,7 @@ $Helpers = {
         $headerLine = $lines | Where-Object { $_ -match '^\|\s*#\s*\|' } | Select-Object -First 1
         $hasExtendedColumns = $headerLine -match '\|\s*Mode\s*\|'
 
-        # Build zero-hour rows (oldest to newest, then reverse for table insertion)
+        # Build blank gap rows (oldest to newest, then reverse for table insertion)
         $newRows = [System.Collections.Generic.List[string]]::new()
         $sessionNum = $maxSession + 1
 
@@ -142,10 +142,10 @@ $Helpers = {
             $dateStr = $gapDate.ToString('M/d/yy')
 
             if ($hasExtendedColumns) {
-                $newRows.Add("| $sessionNum | $dateStr |  |  | 0h 0m |  |  |  |")
+                $newRows.Add("| $sessionNum | $dateStr |  |  |  |  |  |  |")
             }
             else {
-                $newRows.Add("| $sessionNum | $dateStr |  |  | 0h 0m |  |")
+                $newRows.Add("| $sessionNum | $dateStr |  |  |  |  |")
             }
 
             $sessionNum++
@@ -154,7 +154,7 @@ $Helpers = {
         # Reverse so newest gap date appears at the top of the table
         $newRows.Reverse()
 
-        if ($PSCmdlet.ShouldProcess("$Exam StudyLog.md", "Insert $($newRows.Count) zero-hour gap entries")) {
+        if ($PSCmdlet.ShouldProcess("$Exam StudyLog.md", "Insert $($newRows.Count) gap entries")) {
             # Build updated content with gap rows inserted at the top of the data section
             $updated = @()
             $updated += $lines[0..($insertIndex - 1)]
@@ -164,7 +164,7 @@ $Helpers = {
             }
 
             Set-Content -Path $logFile -Value $updated -Encoding UTF8
-            Write-Host "  $Exam`: inserted $($newRows.Count) zero-hour entries for gaps." -ForegroundColor Yellow
+            Write-Host "  $Exam`: inserted $($newRows.Count) gap entries." -ForegroundColor Yellow
         }
     }
 }
