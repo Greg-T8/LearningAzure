@@ -8,6 +8,7 @@ This log tracks individual study sessions for the **AI-103** exam. Each entry is
 
 | # | Date | Start | End | Duration | Mode | Skill | Notes |
 |:--|:-----|:------|:----|:---------|:-----|:------|:------|
+| 14 | 4/17/26 | 5:34 AM |  |  | MSLearn | Plan and prepare to develop AI solutions on Azure |  |
 | 13 | 4/16/26 | 5:39 AM | 6:59 AM | 1h 20m | MSLearn | Plan and prepare to develop AI solutions on Azure | Starting module "Develop generative AI apps that use tools"; Stopped at exercise step 11. Encountered error 429 with file_search tool |
 | 12 | 4/15/26 | 5:41 AM | 6:11 AM | 0h 30m | MSLearn | Plan and prepare to develop AI solutions on Azure | Picking up at "Use the asynchronous API"; Next, pick up at module "Develop generative AI apps that use tools" |
 | 11 | 4/13/26 |  |  |  |  |  |  |
