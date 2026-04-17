@@ -24,7 +24,7 @@
 
 6. Set up Azure Monitoring Baseline Alerts (AMBA) system for alerting at scale
 
-7. Experiment with Azure Monitor Insights
+7. Experiment with Application Insights. Explore how it creates a managed Log Analytics workspace.
 
 8. Stand up Azure Monitor Dashboard with Grafana
 
