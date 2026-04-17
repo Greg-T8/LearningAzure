@@ -1,3 +1,12 @@
+Notebook LM Prompt:
+
+Give me a flat list of topics I can use to have NotebookLM generate quizzes on potential study material pertaining to the following tasks on the AZ-305 exam:
+'Recommend a logging solution'
+'Recommend a solution for routing logs'
+'Recommend a monitoring solution'
+
+---
+
 Here is a flat list of topics from the sources that are suitable for generating quizzes for the identified AZ-305 exam tasks:
 
 ### **Recommend a Logging Solution**
@@ -31,5 +40,3 @@ Here is a flat list of topics from the sources that are suitable for generating 
 * **Visualization Strategies:** Recommending **Azure Workbooks, Dashboards, or Managed Grafana** based on stakeholder reporting needs.
 * **Network Observability:** Using **Network Insights, topology views, and flow logs** to monitor connectivity and traffic flow.
 * **Hybrid and Multicloud Monitoring:** Leveraging **Azure Arc** to provide a consistent monitoring posture across AWS, GCP, and on-premises resources.
-
-Would you like me to create a **quiz** now based on any of these specific topic clusters?
