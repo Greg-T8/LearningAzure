@@ -2,7 +2,7 @@
 name: study-session
 description: "Start, stop, or end a certification study session by invoking Invoke-AzStudySession.ps1. Parses natural language to extract parameters and prompts for any that are missing. Use when asked to begin/start/stop/end a study session, start studying, track study time, or log study activity."
 user-invokable: true
-argument-hint: "[e.g. 'Begin AZ-305 study session, deep research']"
+argument-hint: "[e.g. 'Begin AZ-305 study session, MSDocs']"
 ---
 
 # Study Session
@@ -11,7 +11,7 @@ Invoke `Invoke-AzStudySession.ps1` to start, stop, or end a certification study 
 
 ## When to Use
 
-- Starting a new study session (e.g., "Begin AZ-305 study session, deep research")
+- Starting a new study session (e.g., "Begin AZ-305 study session, MSDocs")
 - Stopping or ending the current study session (e.g., "End study session", "Stop studying")
 - Any request involving study session tracking or logging study time
 
@@ -40,7 +40,7 @@ The script must be invoked from the workspace root (`c:\Users\gregt\LocalCode\Le
 | ----------------------- | ----------------------------------------------------------------- |
 | `PracticeQuestion`      | practice question, practice, quiz, questions                      |
 | `MSLearn`               | ms learn, mslearn, learning path, learn, module                   |
-| `DeepResearch`          | deep research, research, deep learning, deep dive                 |
+| `MSDocs`                | ms docs, msdocs, docs, documentation, deep research, deep dive   |
 | `Lab`                   | lab, hands-on, hands on, hands on lab                             |
 | `WorkflowDevelopment`   | workflow, workflow development, dev, tooling                      |
 
@@ -81,7 +81,7 @@ For a **Start** action on a non-WorkflowDevelopment exam, all of `Exam`, `Mode`,
 
 **If Mode is missing** (and Exam is not `WorkflowDevelopment`), use `vscode_askQuestions` to ask:
 
-- Present the five mode values as options: `PracticeQuestion`, `MSLearn`, `DeepResearch`, `Lab`, `WorkflowDevelopment`.
+- Present the five mode values as options: `PracticeQuestion`, `MSLearn`, `MSDocs`, `Lab`, `WorkflowDevelopment`.
 
 **If Skill is missing** (and Exam is not `WorkflowDevelopment`):
 
@@ -116,12 +116,12 @@ Build and run the PowerShell command:
 
 ### Example 1: Full input
 
-> "Begin AZ-305 study session, deep research, Design governance"
+> "Begin AZ-305 study session, MSDocs, Design governance"
 
-Parsed: Action=Start, Exam=AZ-305, Mode=DeepResearch, Skill=Design governance
+Parsed: Action=Start, Exam=AZ-305, Mode=MSDocs, Skill=Design governance
 
 ```powershell
-& .assets/scripts/Invoke-AzStudySession.ps1 -Action Start -Exam AZ-305 -Mode DeepResearch -Skill 'Design governance'
+& .assets/scripts/Invoke-AzStudySession.ps1 -Action Start -Exam AZ-305 -Mode MSDocs -Skill 'Design governance'
 ```
 
 ### Example 2: Partial input

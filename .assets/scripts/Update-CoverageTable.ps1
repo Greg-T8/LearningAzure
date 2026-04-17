@@ -462,7 +462,7 @@ $Helpers = {
 
     function Get-StudyLogHoursBySkill {
         # Aggregate StudyLog durations by Skill and Mode
-        # Returns hashtable: skillName → @{ ML; DR; NB; Lab; VPQ; Total }
+        # Returns hashtable: skillName → @{ ML; MD; NB; Lab; VPQ; Total }
         $result = @{}
 
         if (-not (Test-Path -Path $StudyLogFile)) { return $result }
@@ -490,13 +490,13 @@ $Helpers = {
 
             # Initialize skill entry
             if (-not $result.ContainsKey($skillCell)) {
-                $result[$skillCell] = @{ ML = 0.0; DR = 0.0; NB = 0.0; Lab = 0.0; PQ = 0.0; Total = 0.0 }
+                $result[$skillCell] = @{ ML = 0.0; MD = 0.0; NB = 0.0; Lab = 0.0; PQ = 0.0; Total = 0.0 }
             }
 
             # Map mode to column key
             $modeKey = switch ($modeCell) {
                 'MSLearn'          { 'ML' }
-                'DeepResearch'     { 'DR' }
+                'MSDocs'           { 'MD' }
                 'NotebookLM'       { 'NB' }
                 'Lab'              { 'Lab' }
                 'PracticeQuestion' { 'PQ' }
@@ -511,7 +511,7 @@ $Helpers = {
 
         # Round all values
         foreach ($skill in $result.Keys) {
-            foreach ($key in @('ML', 'DR', 'NB', 'Lab', 'PQ', 'Total')) {
+            foreach ($key in @('ML', 'MD', 'NB', 'Lab', 'PQ', 'Total')) {
                 $result[$skill][$key] = [math]::Round($result[$skill][$key], 1)
             }
         }
@@ -573,7 +573,7 @@ $Helpers = {
                     if ($h -eq 'Skill')  { $colIndices['Skill'] = $i }
                     if ($h -eq 'Tasks')  { $colIndices['Tasks'] = $i }
                     if ($h -eq 'ML')     { $colIndices['ML'] = $i }
-                    if ($h -eq 'DR')     { $colIndices['DR'] = $i }
+                    if ($h -eq 'MD')     { $colIndices['MD'] = $i }
                     if ($h -eq 'NB')     { $colIndices['NB'] = $i }
                     if ($h -eq 'Lab')    { $colIndices['Lab'] = $i }
                     if ($h -eq 'PQ')     { $colIndices['PQ'] = $i }
@@ -609,7 +609,7 @@ $Helpers = {
 
                 # Update mode columns and Hours column with study log data
                 $skillHours = if ($studyHours.ContainsKey($skillName)) { $studyHours[$skillName] } else { $null }
-                $modeKeys = @('ML', 'DR', 'NB', 'Lab', 'PQ')
+                $modeKeys = @('ML', 'MD', 'NB', 'Lab', 'PQ')
 
                 foreach ($modeKey in $modeKeys) {
                     if (-not $colIndices.ContainsKey($modeKey)) { continue }
