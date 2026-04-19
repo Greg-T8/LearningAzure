@@ -8,7 +8,7 @@ This log tracks individual study sessions for the **AZ-305** exam. Fill in **End
 
 | # | Date | Start | End | Duration | Mode | Skill | Notes |
 |:--|:-----|:------|:----|:---------|:-----|:------|:------|
-| 20 | 4/19/26 | 6:19 AM |  |  | NotebookLM | Design solutions for logging and monitoring |  |
+| 20 | 4/19/26 | 6:19 AM | 8:02 AM | 1h 43m | NotebookLM | Design solutions for logging and monitoring | For next session, pick up at quiz 11 "Ingestion-time transformations" |
 | 19 | 4/17/26 | 4:03 AM | 5:28 AM | 1h 25m | NotebookLM | Design solutions for logging and monitoring | Pick up on Quiz 9 - Azure Monitor Agent (AMA) |
 | 18 | 4/16/26 | 4:09 AM | 5:34 AM | 1h 25m | NotebookLM | Design solutions for logging and monitoring | Generated quiz questions on Microsoft Learn docs; Pick up at "Quiz 5 - Access Control Design - Question 8" |
 | 17 | 4/15/26 | 3:58 AM | 5:32 AM | 1h 34m | NotebookLM | Design solutions for logging and monitoring | NotebookLM practice questions on exam topics; Pick up w/ quiz questions on "Table Plan Selection" |
