@@ -22,6 +22,11 @@
 
    - [Metrics export using data collection rules](https://learn.microsoft.com/en-us/azure/azure-monitor/data-collection/metrics-export-create?tabs=portal)
 
+6. Set up Azure Policy to install and manage the Azure Monitor Agent
+
+    - [Use Azure Policy to install and manage the Azure Monitor Agent](https://learn.microsoft.com/en-us/azure/azure-monitor/agents/azure-monitor-agent-policy)
+    - [Run remediation task for existing machines](https://learn.microsoft.com/en-us/azure/azure-monitor/vm/vminsights-enable-policy?tabs=basics#vm-insights-initiatives)
+
 6. Set up Azure Monitoring Baseline Alerts (AMBA) system for alerting at scale
 
 7. Experiment with Application Insights. Explore how it creates a managed Log Analytics workspace.

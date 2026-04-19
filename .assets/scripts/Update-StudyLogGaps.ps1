@@ -3,10 +3,13 @@
 Insert blank entries for days with no study activity.
 
 .DESCRIPTION
-Scans the StudyLog.md for each active exam and identifies date gaps between
-the most recent recorded entry and yesterday. For each missing day, inserts
-a blank session row with only the session number and date populated. This ensures
-the study log reflects days off (e.g., travel, breaks) rather than hiding them.
+Scans the StudyLog.md for each active exam and identifies date gaps across
+the full range of recorded entries (and through yesterday). For each missing
+day — whether between existing rows or after the latest entry — inserts a
+blank row with only the date populated (no session number). Renumbers actual
+study sessions sequentially so the index tracks real sessions only. This
+ensures the study log reflects days off (e.g., travel, breaks) rather than
+hiding them.
 
 Designed to run as a step in the content-maintenance pipeline or standalone.
 
@@ -47,7 +50,7 @@ $Main = {
 #region HELPER FUNCTIONS
 $Helpers = {
     function Update-StudyLogGap {
-        # Check for date gaps in an exam's study log and insert blank entries
+        # Scan the full date range for interior and trailing gaps, then insert blank entries
         param([Parameter(Mandatory)] [string]$Exam)
 
         $logFile = Join-Path -Path $RepoRoot -ChildPath "certs\$Exam\StudyLog.md"
@@ -59,40 +62,64 @@ $Helpers = {
 
         $lines = Get-Content -Path $logFile -Encoding UTF8
 
-        # Collect all data rows from the table
-        $dataRows = @($lines | Where-Object { $_ -match '^\|\s*\d+\s*\|' })
+        # Find the header separator index (the |:-- row)
+        $separatorIndex = $null
+        for ($i = 0; $i -lt $lines.Count; $i++) {
+            if ($lines[$i] -match '^\|:') {
+                $separatorIndex = $i
+                break
+            }
+        }
 
-        if ($dataRows.Count -eq 0) {
+        if ($null -eq $separatorIndex) {
+            Write-Warning "Table header separator not found in $Exam StudyLog — skipping."
+            return
+        }
+
+        # Collect data rows and their line indices (numbered sessions and blank gap rows)
+        $dataRowIndices = [System.Collections.Generic.List[int]]::new()
+        for ($i = $separatorIndex + 1; $i -lt $lines.Count; $i++) {
+            if ($lines[$i] -match '^\|\s*(\d+)?\s*\|') {
+                $dataRowIndices.Add($i)
+            }
+        }
+
+        if ($dataRowIndices.Count -eq 0) {
             Write-Verbose "No session entries in $Exam StudyLog — skipping."
             return
         }
 
-        # Parse the most recent date from the first data row (newest entry)
-        $latestRow = $dataRows[0]
-        $columns = $latestRow -split '\|'
-        $latestDateStr = $columns[2].Trim()
-        $latestDate = [datetime]::ParseExact($latestDateStr, 'M/d/yy', $null).Date
-
-        # Determine the gap range: day after latest entry through yesterday
-        $yesterday = (Get-Date).Date.AddDays(-1)
-
-        if ($latestDate -ge $yesterday) {
-            Write-Verbose "$Exam study log is current — no gaps to fill."
-            return
-        }
-
-        # Collect all recorded dates for duplicate checking
+        # Parse dates from all data rows, classify each as gap or real session
         $recordedDates = [System.Collections.Generic.HashSet[string]]::new()
-        foreach ($row in $dataRows) {
-            $rowCols = $row -split '\|'
-            $null = $recordedDates.Add($rowCols[2].Trim())
+        $allDates = [System.Collections.Generic.List[datetime]]::new()
+        $existingGapIndices = [System.Collections.Generic.HashSet[int]]::new()
+
+        foreach ($idx in $dataRowIndices) {
+            $cols = $lines[$idx] -split '\|'
+            $dateStr = $cols[2].Trim()
+            $parsed = [datetime]::ParseExact($dateStr, 'M/d/yy', $null).Date
+            $allDates.Add($parsed)
+            $null = $recordedDates.Add($dateStr)
+
+            # Detect existing gap rows: all fields after Date are empty
+            $dataFields = $cols[3..($cols.Count - 2)] | ForEach-Object { $_.Trim() } | Where-Object { $_ -ne '' }
+
+            if ($dataFields.Count -eq 0) {
+                $null = $existingGapIndices.Add($idx)
+            }
         }
 
-        # Build list of missing dates (oldest to newest for sequential numbering)
-        $gapDates = [System.Collections.Generic.List[datetime]]::new()
-        $current = $latestDate.AddDays(1)
+        # Determine the full gap range: earliest recorded date through max(latest, yesterday)
+        $earliest = ($allDates | Measure-Object -Minimum).Minimum
+        $latest   = ($allDates | Measure-Object -Maximum).Maximum
+        $yesterday = (Get-Date).Date.AddDays(-1)
+        $rangeEnd  = @($latest, $yesterday) | Measure-Object -Maximum | Select-Object -ExpandProperty Maximum
 
-        while ($current -le $yesterday) {
+        # Identify all missing dates within the range
+        $gapDates = [System.Collections.Generic.List[datetime]]::new()
+        $current = $earliest.AddDays(1)
+
+        while ($current -le $rangeEnd) {
             $dateStr = $current.ToString('M/d/yy')
 
             if (-not $recordedDates.Contains($dateStr)) {
@@ -102,31 +129,18 @@ $Helpers = {
             $current = $current.AddDays(1)
         }
 
-        if ($gapDates.Count -eq 0) {
-            Write-Verbose "$Exam study log has no date gaps."
-            return
-        }
+        # Check if any existing gap rows still have session numbers that need stripping
+        $needsReformat = $false
 
-        # Get the current max session number across all rows
-        $maxSession = 0
-        foreach ($row in $dataRows) {
-            $rowCols = $row -split '\|'
-            $num = [int]$rowCols[1].Trim()
-
-            if ($num -gt $maxSession) { $maxSession = $num }
-        }
-
-        # Find the insert index (right after the header separator)
-        $insertIndex = $null
-        for ($i = 0; $i -lt $lines.Count; $i++) {
-            if ($lines[$i] -match '^\|:') {
-                $insertIndex = $i + 1
+        foreach ($idx in $existingGapIndices) {
+            if ($lines[$idx] -match '^\|\s*\d+\s*\|') {
+                $needsReformat = $true
                 break
             }
         }
 
-        if ($null -eq $insertIndex) {
-            Write-Warning "Table header separator not found in $Exam StudyLog — skipping."
+        if ($gapDates.Count -eq 0 -and -not $needsReformat) {
+            Write-Verbose "$Exam study log has no date gaps."
             return
         }
 
@@ -134,37 +148,86 @@ $Helpers = {
         $headerLine = $lines | Where-Object { $_ -match '^\|\s*#\s*\|' } | Select-Object -First 1
         $hasExtendedColumns = $headerLine -match '\|\s*Mode\s*\|'
 
-        # Build blank gap rows (oldest to newest, then reverse for table insertion)
-        $newRows = [System.Collections.Generic.List[string]]::new()
-        $sessionNum = $maxSession + 1
+        # Build a merged list of all rows (existing + gap) sorted by date descending
+        $mergedRows = [System.Collections.Generic.List[PSCustomObject]]::new()
 
+        # Add existing data rows, flagging gap rows by their empty data fields
+        foreach ($idx in $dataRowIndices) {
+            $cols = $lines[$idx] -split '\|'
+            $dateStr = $cols[2].Trim()
+            $parsed = [datetime]::ParseExact($dateStr, 'M/d/yy', $null).Date
+
+            $mergedRows.Add([PSCustomObject]@{
+                Date    = $parsed
+                Content = $lines[$idx]
+                IsGap   = $existingGapIndices.Contains($idx)
+            })
+        }
+
+        # Add new gap rows with no session number (date-only placeholder)
         foreach ($gapDate in $gapDates) {
             $dateStr = $gapDate.ToString('M/d/yy')
 
             if ($hasExtendedColumns) {
-                $newRows.Add("| $sessionNum | $dateStr |  |  |  |  |  |  |")
+                $blankRow = "|  | $dateStr |  |  |  |  |  |  |"
             }
             else {
-                $newRows.Add("| $sessionNum | $dateStr |  |  |  |  |")
+                $blankRow = "|  | $dateStr |  |  |  |  |"
             }
 
-            $sessionNum++
+            $mergedRows.Add([PSCustomObject]@{
+                Date    = $gapDate
+                Content = $blankRow
+                IsGap   = $true
+            })
         }
 
-        # Reverse so newest gap date appears at the top of the table
-        $newRows.Reverse()
+        # Sort by date descending (newest at top); existing rows keep original order within same date
+        $sorted = $mergedRows | Sort-Object -Property @{ Expression = { $_.Date }; Descending = $true }, @{ Expression = { $_.IsGap }; Descending = $false }
 
-        if ($PSCmdlet.ShouldProcess("$Exam StudyLog.md", "Insert $($newRows.Count) gap entries")) {
-            # Build updated content with gap rows inserted at the top of the data section
-            $updated = @()
-            $updated += $lines[0..($insertIndex - 1)]
-            $updated += $newRows
-            if ($insertIndex -lt $lines.Count) {
-                $updated += $lines[$insertIndex..($lines.Count - 1)]
+        # Renumber actual sessions sequentially (1 = oldest, N = newest); leave gap rows unnumbered
+        $renumbered = [System.Collections.Generic.List[string]]::new()
+        $sessionCount = @($sorted | Where-Object { -not $_.IsGap }).Count
+        $sessionNum = $sessionCount
+
+        for ($i = 0; $i -lt $sorted.Count; $i++) {
+            $entry = $sorted[$i]
+            $row = $entry.Content
+
+            if ($entry.IsGap) {
+                # Strip any existing session number from gap rows
+                $row = $row -replace '^\|\s*\d*\s*\|', '|  |'
+                $renumbered.Add($row)
             }
+            else {
+                # Replace the session number column for actual study sessions
+                $row = $row -replace '^\|\s*\d*\s*\|', "| $sessionNum |"
+                $renumbered.Add($row)
+                $sessionNum--
+            }
+        }
+
+        # Build the action description for ShouldProcess
+        $actions = [System.Collections.Generic.List[string]]::new()
+
+        if ($gapDates.Count -gt 0) {
+            $actions.Add("insert $($gapDates.Count) gap entries")
+        }
+
+        if ($needsReformat) {
+            $actions.Add("strip session numbers from gap rows")
+        }
+
+        $actionDesc = $actions -join ' and '
+
+        if ($PSCmdlet.ShouldProcess("$Exam StudyLog.md", "$actionDesc and renumber sessions")) {
+            # Rebuild the file: header lines + renumbered data rows
+            $updated = [System.Collections.Generic.List[string]]::new()
+            $updated.AddRange([string[]]$lines[0..$separatorIndex])
+            $updated.AddRange($renumbered)
 
             Set-Content -Path $logFile -Value $updated -Encoding UTF8
-            Write-Host "  $Exam`: inserted $($newRows.Count) gap entries." -ForegroundColor Yellow
+            Write-Host "  $Exam`: $actionDesc." -ForegroundColor Yellow
         }
     }
 }
