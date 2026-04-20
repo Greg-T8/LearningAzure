@@ -12,8 +12,8 @@ Progress trackers, detailed study notes, practice exams, and hands-on labs:
 
 | Exam | Description | Status | Duration |
 |------|-------------|--------|---------|
-| 📕 [**AZ-305**](certs/AZ-305/README.md) | Azure Solutions Architect Expert | In Progress | 3/30/26 – 4/19/26 (20d) |
-| 📓 [**AI-103**](certs/AI-103/README.md) | Azure AI App and Developer Associate | In Progress | 4/2/26 – 4/19/26 (17d) |
+| 📕 [**AZ-305**](certs/AZ-305/README.md) | Azure Solutions Architect Expert | In Progress | 3/30/26 – 4/20/26 (21d) |
+| 📓 [**AI-103**](certs/AI-103/README.md) | Azure AI App and Developer Associate | In Progress | 4/2/26 – 4/20/26 (18d) |
 | 📗 [**AZ-104**](certs/AZ-104/README.md) | Azure Administrator Associate | Completed | 1/15/26 – 3/30/26 (74d) |
 | 📙 [**AI-102**](certs/AI-102/README.md) | Azure AI Engineer Associate | Retired | 2/10/26 – 3/14/26 (32d) |
 | 📘 [**AI-900**](certs/AI-900/README.md) | Azure AI Fundamentals | Completed | 1/14/26 – 2/9/26 (26d) |
@@ -25,20 +25,20 @@ Progress trackers, detailed study notes, practice exams, and hands-on labs:
 
 | Date | AI-103 | AZ-305 | Other | Total |
 |------|------|------|------|-------|
+| Mon, Apr 20 | 🟡 0.7h | 🟢 1.1h |  | **1.8h** |
 | Sun, Apr 19 |  | 🟢 1.7h |  | **1.7h** |
 | Sat, Apr 18 |  |  |  |  |
 | Fri, Apr 17 | 🟢 1.2h | 🟢 1.4h |  | **2.6h** |
 | Thu, Apr 16 | 🟢 1.3h | 🟢 1.4h |  | **2.7h** |
 | Wed, Apr 15 | 🟡 0.5h | 🟢 1.6h |  | **2.1h** |
 | Tue, Apr 14 |  | 🟢 1.8h |  | **1.8h** |
-| Mon, Apr 13 |  |  |  |  |
-| **Weekly Total** | **3.0h** | **7.9h** | **0.0h** | **10.9h** |
-| ***Running Total*** | ***9.7h*** | ***23.2h*** | ***4.9h*** | ***37.8h*** |
+| **Weekly Total** | **3.7h** | **9.0h** | **0.0h** | **12.7h** |
+| ***Running Total*** | ***10.4h*** | ***24.3h*** | ***4.9h*** | ***39.6h*** |
 
 *Activity Levels: 🟡 Low (< 1hr) | 🟢 Medium (1-2hrs) | 🟣 High (> 2hrs)*
 
 *Other = Lab workflow and automation design, content structure and development*  
 
-*Last updated: April 19, 2026 at 08:30 CDT*
+*Last updated: April 20, 2026 at 08:38 CDT*
 
 <!-- COMMIT_STATS_END -->
