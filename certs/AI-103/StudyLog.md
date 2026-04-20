@@ -8,6 +8,7 @@ This log tracks individual study sessions for the **AI-103** exam. Each entry is
 
 | # | Date | Start | End | Duration | Mode | Skill | Notes |
 |:--|:-----|:------|:----|:---------|:-----|:------|:------|
+| 12 | 4/20/26 | 5:37 AM |  |  | MSLearn | Plan and prepare to develop AI solutions on Azure |  |
 |  | 4/18/26 |  |  |  |  |  |  |
 | 11 | 4/17/26 | 5:34 AM | 6:44 AM | 1h 10m | MSLearn | Plan and prepare to develop AI solutions on Azure | Module "Optimize generative AI model performance"; pick up at exercise "Fine-tune a model" |
 | 10 | 4/16/26 | 5:39 AM | 6:59 AM | 1h 20m | MSLearn | Plan and prepare to develop AI solutions on Azure | Starting module "Develop generative AI apps that use tools"; Stopped at exercise step 11. Encountered error 429 with file_search tool |
