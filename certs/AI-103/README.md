@@ -20,7 +20,7 @@ Phase 1 — finish all MSLearn modules before per-skill deep dives.
 
 | # | Learning Path | Modules | Est. Time | Status | Completed |
 |:--|:------------- |--------:|----------:|:-------|:----------|
-| 1 | [Develop generative AI apps in Azure](https://learn.microsoft.com/en-us/training/paths/develop-generative-ai-apps/) | 6 | 6h 52m | In Progress | |
+| 1 | [Develop generative AI apps in Azure](https://learn.microsoft.com/en-us/training/paths/develop-generative-ai-apps/) | 6 | 6h 52m | Completed | 4/21/26 |
 | 2 | [Develop AI agents on Azure](https://learn.microsoft.com/en-us/training/paths/develop-ai-agents-azure/) | 9 | 9h 52m | Not Started | |
 | 3 | [Develop natural language solutions in Azure](https://learn.microsoft.com/en-us/training/paths/develop-language-solutions-azure-ai/) | 7 | 5h 53m | Not Started | |
 | 4 | [Extract insights from visual data on Azure](https://learn.microsoft.com/en-us/training/paths/insight-visual-data/) | 8 | 7h 6m | Not Started | |
