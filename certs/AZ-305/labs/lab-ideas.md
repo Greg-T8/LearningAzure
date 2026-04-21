@@ -27,14 +27,18 @@
     - [Use Azure Policy to install and manage the Azure Monitor Agent](https://learn.microsoft.com/en-us/azure/azure-monitor/agents/azure-monitor-agent-policy)
     - [Run remediation task for existing machines](https://learn.microsoft.com/en-us/azure/azure-monitor/vm/vminsights-enable-policy?tabs=basics#vm-insights-initiatives)
 
-6. Set up Azure Monitoring Baseline Alerts (AMBA) system for alerting at scale
+7. Set up Azure Monitoring Baseline Alerts (AMBA) system for alerting at scale
 
-7. Experiment with Application Insights. Explore how it creates a managed Log Analytics workspace.
+8. Experiment with Application Insights. Explore how it creates a managed Log Analytics workspace.
 
-8. Stand up Azure Monitor Dashboard with Grafana
+9. Configure a health model. Health models are based on Azure service groups.
 
-9. Set up Prometheus metrics w/ Windows
+    - [Health models overview](https://learn.microsoft.com/en-us/azure/azure-monitor/health-models/overview)
 
-10. Configure OpenTelemtry metrics-based monitoring in Azure workspace
+10. Stand up Azure Monitor Dashboard with Grafana
+
+11. Set up Prometheus metrics w/ Windows
+
+12. Configure OpenTelemtry metrics-based monitoring in Azure workspace
 
     - [Enable enhanced monitoring of VMs](https://learn.microsoft.com/en-us/azure/azure-monitor/vm/tutorial-enable-monitoring)
