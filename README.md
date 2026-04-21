@@ -25,20 +25,20 @@ Progress trackers, detailed study notes, practice exams, and hands-on labs:
 
 | Date | AI-103 | AZ-305 | Other | Total |
 |------|------|------|------|-------|
-| Tue, Apr 21 |  | 🟢 1.4h |  | **1.4h** |
+| Tue, Apr 21 | 🟡 0.9h | 🟢 1.4h |  | **2.3h** |
 | Mon, Apr 20 | 🟡 0.7h | 🟢 1.1h |  | **1.8h** |
 | Sun, Apr 19 |  | 🟢 1.7h |  | **1.7h** |
 | Sat, Apr 18 |  |  |  |  |
 | Fri, Apr 17 | 🟢 1.2h | 🟢 1.4h |  | **2.6h** |
 | Thu, Apr 16 | 🟢 1.3h | 🟢 1.4h |  | **2.7h** |
 | Wed, Apr 15 | 🟡 0.5h | 🟢 1.6h |  | **2.1h** |
-| **Weekly Total** | **3.7h** | **8.6h** | **0.0h** | **12.3h** |
-| ***Running Total*** | ***10.4h*** | ***25.8h*** | ***4.9h*** | ***41.1h*** |
+| **Weekly Total** | **4.6h** | **8.6h** | **0.0h** | **13.2h** |
+| ***Running Total*** | ***11.2h*** | ***25.8h*** | ***4.9h*** | ***41.9h*** |
 
 *Activity Levels: 🟡 Low (< 1hr) | 🟢 Medium (1-2hrs) | 🟣 High (> 2hrs)*
 
 *Other = Lab workflow and automation design, content structure and development*  
 
-*Last updated: April 21, 2026 at 06:18 CDT*
+*Last updated: April 21, 2026 at 08:38 CDT*
 
 <!-- COMMIT_STATS_END -->
