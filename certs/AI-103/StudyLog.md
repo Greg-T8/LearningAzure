@@ -8,6 +8,7 @@ This log tracks individual study sessions for the **AI-103** exam. Each entry is
 
 | # | Date | Start | End | Duration | Mode | Skill | Notes |
 |:--|:-----|:------|:----|:---------|:-----|:------|:------|
+| 13 | 4/21/26 | 5:40 AM |  |  | MSLearn | Plan and prepare to develop AI solutions on Azure |  |
 | 12 | 4/20/26 | 5:37 AM | 6:19 AM | 0h 42m | MSLearn | Plan and prepare to develop AI solutions on Azure | Pick up at "Module: Implement a responsible generative AI solution in Microsoft Foundry" |
 |  | 4/19/26 |  |  |  |  |  |  |
 |  | 4/18/26 |  |  |  |  |  |  |
