@@ -244,7 +244,17 @@ The mapping above gives every study-guide task at least one official Learn page,
 
 A useful way to think about the documentation relationships is to treat the study-guide domains as four overlapping documentation stacks:
 
-```mermaid`nflowchart TD`n    A[Study guide tasks]`n    A --> B[Operational admin-center how-to]`n    A --> C[Concept and architecture]`n    A --> D[Adjacent implementation plane]`n`n    B --> B1[Roles, CA, MFA, access reviews, access packages]`n    C --> C1[Zero Trust model, identity platform, product overviews]`n    D --> D1[Graph reference, Windows Server, Azure Monitor, Windows security docs]`n```
+```mermaid
+flowchart TD
+    A[Study guide tasks]
+    A --> B[Operational admin-center how-to]
+    A --> C[Concept and architecture]
+    A --> D[Adjacent implementation plane]
+
+    B --> B1[Roles, CA, MFA, access reviews, access packages]
+    C --> C1[Zero Trust model, identity platform, product overviews]
+    D --> D1[Graph reference, Windows Server, Azure Monitor, Windows security docs]
+```
 
 That pattern explains most of the `Split` and `Gap` rows: SC-300 often tests an **administrative outcome**, while Learn frequently documents the same outcome across an admin workflow page, a conceptual page, and a platform-specific page. The report therefore keeps the mapping faithful to Microsoft’s documentation model rather than forcing a misleading single-link answer. [\[101\]](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/sc-300)
 
@@ -252,5 +262,87 @@ That pattern explains most of the `Split` and `Gap` rows: SC-300 often tests an 
 
 ## Reference Links (Friendly)
 
-
-
+- [SC-300 Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/sc-300) (Refs: [1], [3], [101])
+- [Security Best Practices For App Registration](https://learn.microsoft.com/en-us/entra/identity-platform/security-best-practices-for-app-registration) (Refs: [2], [56], [67], [69])
+- [Permissions Reference](https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/permissions-reference) (Refs: [4], [7], [61])
+- [Administrative Units](https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/administrative-units) (Refs: [5])
+- [Manage Administrative Units](https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/admin-units-manage) (Refs: [6])
+- [Manage Domains](https://learn.microsoft.com/en-us/entra/identity/users/domains-manage) (Refs: [8])
+- [How To Customize Branding](https://learn.microsoft.com/en-us/entra/fundamentals/how-to-customize-branding) (Refs: [9])
+- [Users Default Permissions](https://learn.microsoft.com/en-us/entra/fundamentals/users-default-permissions) (Refs: [10])
+- [Users Bulk Add](https://learn.microsoft.com/en-us/entra/identity/users/users-bulk-add) (Refs: [11], [14])
+- [How To Manage Groups](https://learn.microsoft.com/en-us/entra/fundamentals/how-to-manage-groups) (Refs: [12])
+- [Custom Security Attributes Overview](https://learn.microsoft.com/en-us/entra/fundamentals/custom-security-attributes-overview) (Refs: [13])
+- [Device Identity Overview](https://learn.microsoft.com/en-us/entra/identity/devices/overview) (Refs: [15])
+- [Assign Licenses To Users](https://learn.microsoft.com/en-us/microsoft-365/admin/manage/assign-licenses-to-users?view=o365-worldwide) (Refs: [16])
+- [Cross Tenant Access Overview](https://learn.microsoft.com/en-us/entra/external-id/cross-tenant-access-overview) (Refs: [17])
+- [User Properties](https://learn.microsoft.com/en-us/entra/external-id/user-properties) (Refs: [18], [19])
+- [Cross-tenant Access Settings (B2B Collaboration)](https://learn.microsoft.com/en-us/entra/external-id/cross-tenant-access-settings-b2b-collaboration) (Refs: [20])
+- [Cross Tenant Synchronization Overview](https://learn.microsoft.com/en-us/entra/identity/multi-tenant-organizations/cross-tenant-synchronization-overview) (Refs: [21])
+- [Direct Federation](https://learn.microsoft.com/en-us/entra/external-id/direct-federation) (Refs: [22])
+- [What Is Azure AD Connect](https://learn.microsoft.com/en-us/entra/identity/hybrid/connect/whatis-azure-ad-connect) (Refs: [23], [29])
+- [What Is Cloud Sync](https://learn.microsoft.com/en-us/entra/identity/hybrid/cloud-sync/what-is-cloud-sync) (Refs: [24])
+- [How To Connect Password Hash Synchronization](https://learn.microsoft.com/en-us/entra/identity/hybrid/connect/how-to-connect-password-hash-synchronization) (Refs: [25])
+- [Pass-through Authentication Current Limitations](https://learn.microsoft.com/en-us/entra/identity/hybrid/connect/how-to-connect-pta-current-limitations) (Refs: [26])
+- [Seamless SSO Quick Start](https://learn.microsoft.com/en-us/entra/identity/hybrid/connect/how-to-connect-sso-quick-start) (Refs: [27])
+- [Migrate From Federation To Cloud Authentication](https://learn.microsoft.com/en-us/entra/identity/hybrid/connect/migrate-from-federation-to-cloud-authentication) (Refs: [28])
+- [Authentication Overview](https://learn.microsoft.com/en-us/entra/identity/authentication/overview-authentication) (Refs: [30])
+- [Manage Authentication Methods](https://learn.microsoft.com/en-us/entra/identity/authentication/concept-authentication-methods-manage) (Refs: [31], [49], [100])
+- [Configure MFA Settings](https://learn.microsoft.com/en-us/entra/identity/authentication/howto-mfa-mfasettings) (Refs: [32])
+- [Enable SSPR Tutorial](https://learn.microsoft.com/en-us/entra/identity/authentication/tutorial-enable-sspr) (Refs: [33])
+- [Windows Hello for Business](https://learn.microsoft.com/en-us/windows/security/identity-protection/hello-for-business/) (Refs: [34])
+- [Users Revoke Access](https://learn.microsoft.com/en-us/entra/identity/users/users-revoke-access) (Refs: [35])
+- [Password Protection (Banned Passwords)](https://learn.microsoft.com/en-us/entra/identity/authentication/concept-password-ban-bad) (Refs: [36])
+- [Kerberos](https://learn.microsoft.com/en-us/entra/identity/authentication/kerberos) (Refs: [37])
+- [Plan Conditional Access](https://learn.microsoft.com/en-us/entra/identity/conditional-access/plan-conditional-access) (Refs: [38])
+- [Concept Conditional Access Policies](https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-conditional-access-policies) (Refs: [39], [40])
+- [What If Tool](https://learn.microsoft.com/en-us/entra/identity/conditional-access/what-if-tool) (Refs: [41])
+- [Concept Session Lifetime](https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-session-lifetime) (Refs: [42])
+- [Policy All Users Device Compliance](https://learn.microsoft.com/en-us/entra/identity/conditional-access/policy-all-users-device-compliance) (Refs: [43])
+- [Concept Continuous Access Evaluation](https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-continuous-access-evaluation) (Refs: [44])
+- [Concept Conditional Access Cloud Apps](https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-conditional-access-cloud-apps) (Refs: [45])
+- [Protected Actions Overview](https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/protected-actions-overview) (Refs: [46])
+- [Concept Conditional Access Policy Common](https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-conditional-access-policy-common) (Refs: [47])
+- [Howto Identity Protection Remediate Unblock](https://learn.microsoft.com/en-us/entra/id-protection/howto-identity-protection-remediate-unblock) (Refs: [48], [50])
+- [Windows Hello for Business FAQ](https://learn.microsoft.com/en-us/windows/security/identity-protection/hello-for-business/faq) (Refs: [51])
+- [Concept Clients](https://learn.microsoft.com/en-us/entra/global-secure-access/concept-clients) (Refs: [52])
+- [Quickstart Quick Access](https://learn.microsoft.com/en-us/entra/global-secure-access/quickstart-quick-access) (Refs: [53])
+- [Concept Internet Access](https://learn.microsoft.com/en-us/entra/global-secure-access/concept-internet-access) (Refs: [54])
+- [Overview What Is Global Secure Access](https://learn.microsoft.com/en-us/entra/global-secure-access/overview-what-is-global-secure-access) (Refs: [55])
+- [Managed Identities for Azure Resources Overview](https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/overview) (Refs: [57], [58], [59])
+- [Application Properties](https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/application-properties) (Refs: [60])
+- [Overview What Is App Proxy](https://learn.microsoft.com/en-us/entra/identity/app-proxy/overview-what-is-app-proxy) (Refs: [62])
+- [Overview Application Gallery](https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/overview-application-gallery) (Refs: [63])
+- [Assign User Or Group Access Portal](https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/assign-user-or-group-access-portal) (Refs: [64])
+- [User Admin Consent Overview](https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/user-admin-consent-overview) (Refs: [65])
+- [Access Panel Collections](https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/access-panel-collections) (Refs: [66])
+- [Quickstart Register App](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app) (Refs: [68])
+- [Configure App Access to Web APIs](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-configure-app-access-web-apis) (Refs: [70])
+- [Add App Roles in Apps](https://learn.microsoft.com/en-us/entra/identity-platform/howto-add-app-roles-in-apps) (Refs: [71])
+- [Set Up Cloud Discovery](https://learn.microsoft.com/en-us/defender-cloud-apps/set-up-cloud-discovery) (Refs: [72])
+- [Enable Instant Visibility Protection And Governance Actions For Your Apps](https://learn.microsoft.com/en-us/defender-cloud-apps/enable-instant-visibility-protection-and-governance-actions-for-your-apps) (Refs: [73])
+- [Policy All Users App Enforced Restrictions](https://learn.microsoft.com/en-us/entra/identity/conditional-access/policy-all-users-app-enforced-restrictions) (Refs: [74])
+- [Conditional Access App Control](https://learn.microsoft.com/en-us/defender-cloud-apps/proxy-intro-aad) (Refs: [75])
+- [Control Cloud Apps With Policies](https://learn.microsoft.com/en-us/defender-cloud-apps/control-cloud-apps-with-policies) (Refs: [76])
+- [Manage App Permissions](https://learn.microsoft.com/en-us/defender-cloud-apps/manage-app-permissions) (Refs: [77])
+- [Risk Score](https://learn.microsoft.com/en-us/defender-cloud-apps/risk-score) (Refs: [78])
+- [Entitlement Management Overview](https://learn.microsoft.com/en-us/entra/id-governance/entitlement-management-overview) (Refs: [79], [80])
+- [Entitlement Management Access Package Create](https://learn.microsoft.com/en-us/entra/id-governance/entitlement-management-access-package-create) (Refs: [81])
+- [Entitlement Management Access Package Request Policy](https://learn.microsoft.com/en-us/entra/id-governance/entitlement-management-access-package-request-policy) (Refs: [82])
+- [Terms Of Use](https://learn.microsoft.com/en-us/entra/identity/conditional-access/terms-of-use) (Refs: [83])
+- [Entitlement Management External Users](https://learn.microsoft.com/en-us/entra/id-governance/entitlement-management-external-users) (Refs: [84])
+- [Entitlement Management Organization](https://learn.microsoft.com/en-us/entra/id-governance/entitlement-management-organization) (Refs: [85])
+- [Deploy Access Reviews](https://learn.microsoft.com/en-us/entra/id-governance/deploy-access-reviews) (Refs: [86])
+- [Create Access Review](https://learn.microsoft.com/en-us/entra/id-governance/create-access-review) (Refs: [87])
+- [Complete Access Review](https://learn.microsoft.com/en-us/entra/id-governance/complete-access-review) (Refs: [88])
+- [Perform Access Review](https://learn.microsoft.com/en-us/entra/id-governance/perform-access-review) (Refs: [89])
+- [PIM Configuration](https://learn.microsoft.com/en-us/entra/id-governance/privileged-identity-management/pim-configure) (Refs: [90])
+- [Assign PIM Azure Resource Roles](https://learn.microsoft.com/en-us/entra/id-governance/privileged-identity-management/pim-resource-roles-assign-roles) (Refs: [91])
+- [PIM Deployment Plan](https://learn.microsoft.com/en-us/entra/id-governance/privileged-identity-management/pim-deployment-plan) (Refs: [92])
+- [PIM Azure Resource RBAC](https://learn.microsoft.com/en-us/entra/id-governance/privileged-identity-management/azure-pim-resource-rbac) (Refs: [93])
+- [Secure Best Practices](https://learn.microsoft.com/en-us/entra/architecture/secure-best-practices) (Refs: [94])
+- [Sign-in Logs Concept](https://learn.microsoft.com/en-us/entra/identity/monitoring-health/concept-sign-ins) (Refs: [95])
+- [Configure Diagnostic Settings](https://learn.microsoft.com/en-us/entra/identity/monitoring-health/howto-configure-diagnostic-settings) (Refs: [96])
+- [Tutorial Configure Log Analytics Workspace](https://learn.microsoft.com/en-us/entra/identity/monitoring-health/tutorial-configure-log-analytics-workspace) (Refs: [97])
+- [Overview Workbooks](https://learn.microsoft.com/en-us/entra/identity/monitoring-health/overview-workbooks) (Refs: [98])
+- [Concept Identity Secure Score](https://learn.microsoft.com/en-us/entra/identity/monitoring-health/concept-identity-secure-score) (Refs: [99])
