@@ -4,7 +4,7 @@
 
 - **Certification Page:** [Microsoft Certified: Identity and Access Administrator Associate](https://learn.microsoft.com/en-us/credentials/certifications/identity-and-access-administrator/)
 - **Official Study Guide:** [SC-300 Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/sc-300)
-- **Deep Research Study Guide:** [Deep Research Study Guide](./research/SC-300 Study Guide Task-to-Documentation Map.md)
+- **Deep Research Study Guide:** [Deep Research Study Guide](./research/SC-300-Study-Guide-Task-to-Documentation-Map.md)
 - **Study Log:** [Session-by-session study time tracker](./StudyLog.md)
 
 <!-- STUDY_SUMMARY -->
