@@ -8,8 +8,9 @@
 - **Study Log:** [Session-by-session study time tracker](./StudyLog.md)
 
 <!-- STUDY_SUMMARY -->
-**Hours Committed:** 0h · **Days Studied:** 0
+**Hours Committed:** 0.8h · **Days Studied:** 1
 <!-- /STUDY_SUMMARY -->
+
 
 ---
 
@@ -36,7 +37,7 @@ Skill-level coverage based on [Per-Skill Progress](#per-skill-progress) completi
 
 <a id="domain-1"></a>
 <details>
-<summary><b>Domain 1: Implement and manage user identities (20–25%)</b> — 26 tasks</summary>
+<summary><b>Domain 1: Implement and manage user identities (20–25%)</b> — 28 tasks</summary>
 
 | Skill | Task |
 | :--- | :--- |
@@ -71,7 +72,7 @@ Skill-level coverage based on [Per-Skill Progress](#per-skill-progress) completi
 
 <a id="domain-2"></a>
 <details>
-<summary><b>Domain 2: Implement authentication and access management (25–30%)</b> — 27 tasks</summary>
+<summary><b>Domain 2: Implement authentication and access management (25–30%)</b> — 29 tasks</summary>
 
 | Skill | Task |
 | :--- | :--- |
@@ -107,7 +108,7 @@ Skill-level coverage based on [Per-Skill Progress](#per-skill-progress) completi
 
 <a id="domain-3"></a>
 <details>
-<summary><b>Domain 3: Plan and implement workload identities (20–25%)</b> — 23 tasks</summary>
+<summary><b>Domain 3: Plan and implement workload identities (20–25%)</b> — 25 tasks</summary>
 
 | Skill | Task |
 | :--- | :--- |
@@ -139,7 +140,7 @@ Skill-level coverage based on [Per-Skill Progress](#per-skill-progress) completi
 
 <a id="domain-4"></a>
 <details>
-<summary><b>Domain 4: Plan and automate identity governance (20–25%)</b> — 22 tasks</summary>
+<summary><b>Domain 4: Plan and automate identity governance (20–25%)</b> — 24 tasks</summary>
 
 | Skill | Task |
 | :--- | :--- |
@@ -202,8 +203,6 @@ Priority tasks ranked from [SkillRanking.md](./SkillRanking.md). Lower rank mean
 | 9 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Manage access requests | 1 |
 | 10 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Implement and manage terms of use (ToU) | 1 |
 
-*Run `.assets/scripts/Update-FocusList.ps1 -Exam SC-300` to refresh.*
-
 <!-- END FOCUS LIST -->
 
 ---
@@ -221,9 +220,9 @@ Priority tasks ranked from [SkillRanking.md](./SkillRanking.md). Lower rank mean
 | 3 | User Identities | Implement and manage identities for external users and tenants | 6 | 🔲 | 🔲 | 0.0h | 🔲 |
 | 4 | User Identities | Implement and manage hybrid identity | 7 | 🔲 | 🔲 | 0.0h | 🔲 |
 | 5 | Authentication & Access Management | Plan, implement, and manage Microsoft Entra user authentication | 8 | 🔲 | 🔲 | 0.0h | 🔲 |
-| 6 | Authentication & Access Management | Plan, implement, and manage Microsoft Entra Conditional Access | 10 | 🔲 | 🔲 | 0.0h | 🔲 |
+| 6 | Authentication & Access Management | Plan, implement, and manage Microsoft Entra Conditional Access | 10 | 🔲 0.7h | 🔲 | 0.7h | 🔲 |
 | 7 | Authentication & Access Management | Manage risk by using Microsoft Entra ID Protection | 5 | 🔲 | 🔲 | 0.0h | 🔲 |
-| 8 | Authentication & Access Management | Implement Global Secure Access | 4 | 🔲 | 🔲 | 0.0h | 🔲 |
+| 8 | Authentication & Access Management | Implement Global Secure Access | 4 | 🔲 0.2h | 🔲 | 0.2h | 🔲 |
 | 9 | Workload Identities | Plan and implement identities for applications and Azure workloads | 4 | 🔲 | 🔲 | 0.0h | 🔲 |
 | 10 | Workload Identities | Plan, implement, and monitor the integration of enterprise applications | 7 | 🔲 | 🔲 | 0.0h | 🔲 |
 | 11 | Workload Identities | Plan and implement app registrations | 5 | 🔲 | 🔲 | 0.0h | 🔲 |

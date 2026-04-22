@@ -182,8 +182,6 @@ $Helpers = {
         }
 
         $lines.Add('')
-        $lines.Add("*Run ``.assets/scripts/Update-FocusList.ps1 -Exam $script:Exam`` to refresh.*")
-        $lines.Add('')
 
         return $lines -join "`n"
     }
