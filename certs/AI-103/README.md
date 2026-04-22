@@ -1,5 +1,7 @@
 # AI-103: Develop AI Apps and Agents on Azure — Study Guide
 
+> ⏸ **Paused as of 4/22/26** — study effort redirected to SC-300 (target 6/1/26). Will resume after SC-300.
+
 **Objective:** Achieve the **Azure AI Engineer Associate** certification using Microsoft Learn, practice exams, and video courses.
 
 - **Certification Page:** [Azure AI Engineer Associate](https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-engineer/)

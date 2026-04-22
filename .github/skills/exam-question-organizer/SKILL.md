@@ -46,6 +46,7 @@ Detection: if `practice-questions/` contains `.md` files beyond `README.md`, the
 | Exam   | Practice Exam Files                    | Domain Reference                                    | Coverage Table                                      |
 | ------ | -------------------------------------- | --------------------------------------------------- | --------------------------------------------------- |
 | AZ-305 | `certs/AZ-305/practice-questions/01-identity-governance-monitoring.md`<br>`certs/AZ-305/practice-questions/02-data-storage.md`<br>`certs/AZ-305/practice-questions/03-business-continuity.md`<br>`certs/AZ-305/practice-questions/04-infrastructure.md` | `certs/AZ-305/Skills.psd1` | `certs/AZ-305/README.md` — Practice Exam Coverage section |
+| SC-300 | `certs/SC-300/practice-questions/01-user-identities.md`<br>`certs/SC-300/practice-questions/02-authentication-access-management.md`<br>`certs/SC-300/practice-questions/03-workload-identities.md`<br>`certs/SC-300/practice-questions/04-identity-governance.md` | `certs/SC-300/Skills.psd1` | `certs/SC-300/README.md` — Practice Exam Coverage section |
 
 Legacy support (explicit request only):
 
