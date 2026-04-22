@@ -190,6 +190,8 @@ This table shows how tasks are distributed across my current self-assessed skill
 | 4 | 20 | 20.4% |
 | 5 | 0 | 0.0% |
 
+**Total tasks:** 98
+
 This table lists the next tasks to focus on. Start with rank 1 items, then move down as your coverage improves.
 
 | # | Domain | Skill | Task | Rank |
