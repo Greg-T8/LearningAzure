@@ -207,8 +207,6 @@ This table lists the next tasks to focus on. Start with rank 1 items, then move 
 | 9 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Create and configure catalogs | 1 |
 | 10 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Manage access requests | 1 |
 
-*Run `.assets/scripts/Update-FocusList.ps1 -Exam SC-300` to refresh.*
-
 <!-- END FOCUS LIST -->
 
 ---
