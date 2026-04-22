@@ -540,6 +540,60 @@ $Helpers = {
         return $result
     }
 
+    function Get-CellIcon {
+        # Return the leading status icon from a tracker cell
+        param(
+            [string]$CellText
+        )
+
+        if ([string]::IsNullOrWhiteSpace($CellText)) { return '' }
+        $trimmed = $CellText.Trim()
+
+        if ($trimmed -match '^(✅|⏳|🔲)') {
+            return $Matches[1]
+        }
+
+        return ''
+    }
+
+    function Get-ModeCellIcon {
+        # Resolve mode icon from hours while preserving completed state
+        param(
+            [string]$CurrentCell,
+            [double]$ModeHours
+        )
+
+        $currentIcon = Get-CellIcon -CellText $CurrentCell
+        if ($currentIcon -eq '✅') { return '✅' }
+        if ($ModeHours -gt 0) { return '⏳' }
+        return '🔲'
+    }
+
+    function Get-ProgressCellValue {
+        # Resolve progress cell from total hours while preserving completed and dated in-progress states
+        param(
+            [string]$CurrentCell,
+            [double]$TotalHours
+        )
+
+        $currentTrimmed = $CurrentCell.Trim()
+        $currentIcon = Get-CellIcon -CellText $currentTrimmed
+
+        if ($currentIcon -eq '✅') {
+            return $currentTrimmed
+        }
+
+        if ($TotalHours -gt 0) {
+            if ($currentIcon -eq '⏳') {
+                return $currentTrimmed
+            }
+
+            return '⏳'
+        }
+
+        return '🔲'
+    }
+
     function Update-PerSkillProgress {
         [CmdletBinding(SupportsShouldProcess)]
 
@@ -581,6 +635,7 @@ $Helpers = {
                     if ($h -eq 'Lab')    { $colIndices['Lab'] = $i }
                     if ($h -eq 'PQ')     { $colIndices['PQ'] = $i }
                     if ($h -eq 'Hours')  { $colIndices['Hours'] = $i }
+                    if ($h -eq 'Progress')  { $colIndices['Progress'] = $i }
                 }
                 $headerParsed = $true
                 $output.Add($line)
@@ -621,10 +676,7 @@ $Helpers = {
 
                     $currentCell = $cells[$idx].Trim()
                     $modeHours = if ($skillHours) { $skillHours[$modeKey] } else { 0.0 }
-
-                    # Extract existing emoji (first character sequence before any digit or space-digit)
-                    $emoji = $currentCell -replace '\s+[\d].*$', ''
-                    $emoji = $emoji.Trim()
+                    $emoji = Get-ModeCellIcon -CurrentCell $currentCell -ModeHours $modeHours
 
                     # Build new cell: emoji + hours (omit hours text when zero)
                     if ($modeHours -gt 0) {
@@ -639,6 +691,16 @@ $Helpers = {
                 if ($colIndices.ContainsKey('Hours')) {
                     $totalHours = if ($skillHours) { $skillHours.Total } else { 0.0 }
                     $cells[$colIndices['Hours']] = " $($totalHours.ToString('0.0'))h "
+                }
+
+                # Update Progress column from total hours while preserving completed rows
+                if ($colIndices.ContainsKey('Progress')) {
+                    $progressIdx = $colIndices['Progress']
+                    if ($progressIdx -lt $cells.Count) {
+                        $currentProgress = $cells[$progressIdx]
+                        $progressValue = Get-ProgressCellValue -CurrentCell $currentProgress -TotalHours $totalHours
+                        $cells[$progressIdx] = " $progressValue "
+                    }
                 }
 
                 $output.Add('|' + ($cells -join '|') + '|')
