@@ -180,32 +180,29 @@ Priority tasks ranked from [SkillRanking.md](./SkillRanking.md). Lower rank mean
 
 ### Ranking Breakdown
 
-This table shows how tasks are distributed across my current self-assessed skill ranks.
-
 | Ranking | Tasks | Percentage |
 | :------ | ----: | ---------: |
-| 1 | 11 | 11.2% |
+| Unassessed (blank) | 0 | 0.0% |
+| 1 | 10 | 10.2% |
 | 2 | 29 | 29.6% |
 | 3 | 38 | 38.8% |
-| 4 | 20 | 20.4% |
+| 4 | 21 | 21.4% |
 | 5 | 0 | 0.0% |
-
-**Total tasks:** 98
-
-This table lists the next tasks to focus on. Start with rank 1 items, then move down as your coverage improves.
 
 | # | Domain | Skill | Task | Rank |
 | -: | :----- | :---- | :--- | -: |
-| 1 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Implement protected actions | 1 |
-| 2 | Implement authentication and access management | Implement Global Secure Access | Deploy Global Secure Access clients | 1 |
-| 3 | Implement authentication and access management | Implement Global Secure Access | Deploy and manage Private Access | 1 |
-| 4 | Implement authentication and access management | Implement Global Secure Access | Deploy and manage Internet Access | 1 |
-| 5 | Implement authentication and access management | Implement Global Secure Access | Deploy and manage Internet Access for Microsoft 365 | 1 |
-| 6 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Configure and manage user and admin consent | 1 |
-| 7 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Create and manage application collections | 1 |
-| 8 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Plan entitlements | 1 |
-| 9 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Create and configure catalogs | 1 |
-| 10 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Manage access requests | 1 |
+| 1 | Implement authentication and access management | Implement Global Secure Access | Deploy Global Secure Access clients | 1 |
+| 2 | Implement authentication and access management | Implement Global Secure Access | Deploy and manage Private Access | 1 |
+| 3 | Implement authentication and access management | Implement Global Secure Access | Deploy and manage Internet Access | 1 |
+| 4 | Implement authentication and access management | Implement Global Secure Access | Deploy and manage Internet Access for Microsoft 365 | 1 |
+| 5 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Configure and manage user and admin consent | 1 |
+| 6 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Create and manage application collections | 1 |
+| 7 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Plan entitlements | 1 |
+| 8 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Create and configure catalogs | 1 |
+| 9 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Manage access requests | 1 |
+| 10 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Implement and manage terms of use (ToU) | 1 |
+
+*Run `.assets/scripts/Update-FocusList.ps1 -Exam SC-300` to refresh.*
 
 <!-- END FOCUS LIST -->
 
