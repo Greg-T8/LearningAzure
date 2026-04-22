@@ -12,16 +12,18 @@ The tables below include, for each task, a **link count**, a **coverage note** (
 
 The study guide organizes the exam into four top-level skill domains: user identities, authentication and access management, workload identities, and identity governance. Each mapping below preserves the study-guide task text and then points to the most directly relevant Learn pages for performing or understanding that task. Where possible, the mapping prefers admin-center how-to pages, then conceptual pages, then API/reference or adjacent Windows/Azure documentation when the exam task spans more than one Microsoft surface. [\[1\]](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/sc-300)
 
-    flowchart LR
-        A[SC-300 study guide tasks] --> B[User identities]
-        A --> C[Authentication and access]
-        A --> D[Workload identities and app access]
-        A --> E[Identity governance]
+```mermaid
+flowchart LR
+    A[SC-300 study guide tasks] --> B[User identities]
+    A --> C[Authentication and access]
+    A --> D[Workload identities and app access]
+    A --> E[Identity governance]
 
-        B --> B1[Tenant roles, admin units, domains, users, groups, external identities, hybrid identity]
-        C --> C1[Authentication methods, MFA, SSPR, Conditional Access, ID Protection, Global Secure Access]
-        D --> D1[Managed identities, enterprise apps, app registrations, Defender for Cloud Apps]
-        E --> E1[Entitlement management, access reviews, PIM, logs, workbooks, reports]
+    B --> B1[Tenant roles, admin units, domains, users, groups, external identities, hybrid identity]
+    C --> C1[Authentication methods, MFA, SSPR, Conditional Access, ID Protection, Global Secure Access]
+    D --> D1[Managed identities, enterprise apps, app registrations, Defender for Cloud Apps]
+    E --> E1[Entitlement management, access reviews, PIM, logs, workbooks, reports]
+```
 
 Coverage notes used throughout the report mean the following:
 
@@ -256,338 +258,338 @@ That pattern explains most of the `Split` and `Gap` rows: SC-300 often tests an 
 
 ------------------------------------------------------------------------
 
-[\[1\]](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/sc-300) [\[3\]](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/sc-300) [\[101\]](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/sc-300) https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/sc-300
+[\[1\]](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/sc-300) [\[3\]](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/sc-300) [\[101\]](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/sc-300) <https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/sc-300>
 
 <https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/sc-300>
 
-[\[2\]](https://learn.microsoft.com/en-us/entra/identity-platform/security-best-practices-for-app-registration) [\[56\]](https://learn.microsoft.com/en-us/entra/identity-platform/security-best-practices-for-app-registration) [\[67\]](https://learn.microsoft.com/en-us/entra/identity-platform/security-best-practices-for-app-registration) [\[69\]](https://learn.microsoft.com/en-us/entra/identity-platform/security-best-practices-for-app-registration) https://learn.microsoft.com/en-us/entra/identity-platform/security-best-practices-for-app-registration
+[\[2\]](https://learn.microsoft.com/en-us/entra/identity-platform/security-best-practices-for-app-registration) [\[56\]](https://learn.microsoft.com/en-us/entra/identity-platform/security-best-practices-for-app-registration) [\[67\]](https://learn.microsoft.com/en-us/entra/identity-platform/security-best-practices-for-app-registration) [\[69\]](https://learn.microsoft.com/en-us/entra/identity-platform/security-best-practices-for-app-registration) <https://learn.microsoft.com/en-us/entra/identity-platform/security-best-practices-for-app-registration>
 
 <https://learn.microsoft.com/en-us/entra/identity-platform/security-best-practices-for-app-registration>
 
-[\[4\]](https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/permissions-reference) [\[7\]](https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/permissions-reference) [\[61\]](https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/permissions-reference) https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/permissions-reference
+[\[4\]](https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/permissions-reference) [\[7\]](https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/permissions-reference) [\[61\]](https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/permissions-reference) <https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/permissions-reference>
 
 <https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/permissions-reference>
 
-[\[5\]](https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/administrative-units) https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/administrative-units
+[\[5\]](https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/administrative-units) <https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/administrative-units>
 
 <https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/administrative-units>
 
-[\[6\]](https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/admin-units-manage) https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/admin-units-manage
+[\[6\]](https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/admin-units-manage) <https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/admin-units-manage>
 
 <https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/admin-units-manage>
 
-[\[8\]](https://learn.microsoft.com/en-us/entra/identity/users/domains-manage) https://learn.microsoft.com/en-us/entra/identity/users/domains-manage
+[\[8\]](https://learn.microsoft.com/en-us/entra/identity/users/domains-manage) <https://learn.microsoft.com/en-us/entra/identity/users/domains-manage>
 
 <https://learn.microsoft.com/en-us/entra/identity/users/domains-manage>
 
-[\[9\]](https://learn.microsoft.com/en-us/entra/fundamentals/how-to-customize-branding) https://learn.microsoft.com/en-us/entra/fundamentals/how-to-customize-branding
+[\[9\]](https://learn.microsoft.com/en-us/entra/fundamentals/how-to-customize-branding) <https://learn.microsoft.com/en-us/entra/fundamentals/how-to-customize-branding>
 
 <https://learn.microsoft.com/en-us/entra/fundamentals/how-to-customize-branding>
 
-[\[10\]](https://learn.microsoft.com/en-us/entra/fundamentals/users-default-permissions) https://learn.microsoft.com/en-us/entra/fundamentals/users-default-permissions
+[\[10\]](https://learn.microsoft.com/en-us/entra/fundamentals/users-default-permissions) <https://learn.microsoft.com/en-us/entra/fundamentals/users-default-permissions>
 
 <https://learn.microsoft.com/en-us/entra/fundamentals/users-default-permissions>
 
-[\[11\]](https://learn.microsoft.com/en-us/entra/identity/users/users-bulk-add) [\[14\]](https://learn.microsoft.com/en-us/entra/identity/users/users-bulk-add) https://learn.microsoft.com/en-us/entra/identity/users/users-bulk-add
+[\[11\]](https://learn.microsoft.com/en-us/entra/identity/users/users-bulk-add) [\[14\]](https://learn.microsoft.com/en-us/entra/identity/users/users-bulk-add) <https://learn.microsoft.com/en-us/entra/identity/users/users-bulk-add>
 
 <https://learn.microsoft.com/en-us/entra/identity/users/users-bulk-add>
 
-[\[12\]](https://learn.microsoft.com/en-us/entra/fundamentals/how-to-manage-groups) https://learn.microsoft.com/en-us/entra/fundamentals/how-to-manage-groups
+[\[12\]](https://learn.microsoft.com/en-us/entra/fundamentals/how-to-manage-groups) <https://learn.microsoft.com/en-us/entra/fundamentals/how-to-manage-groups>
 
 <https://learn.microsoft.com/en-us/entra/fundamentals/how-to-manage-groups>
 
-[\[13\]](https://learn.microsoft.com/en-us/entra/fundamentals/custom-security-attributes-overview) https://learn.microsoft.com/en-us/entra/fundamentals/custom-security-attributes-overview
+[\[13\]](https://learn.microsoft.com/en-us/entra/fundamentals/custom-security-attributes-overview) <https://learn.microsoft.com/en-us/entra/fundamentals/custom-security-attributes-overview>
 
 <https://learn.microsoft.com/en-us/entra/fundamentals/custom-security-attributes-overview>
 
-[\[15\]](https://learn.microsoft.com/en-us/entra/identity/devices/overview) https://learn.microsoft.com/en-us/entra/identity/devices/overview
+[\[15\]](https://learn.microsoft.com/en-us/entra/identity/devices/overview) <https://learn.microsoft.com/en-us/entra/identity/devices/overview>
 
 <https://learn.microsoft.com/en-us/entra/identity/devices/overview>
 
-[\[16\]](https://learn.microsoft.com/en-us/microsoft-365/admin/manage/assign-licenses-to-users?view=o365-worldwide) https://learn.microsoft.com/en-us/microsoft-365/admin/manage/assign-licenses-to-users?view=o365-worldwide
+[\[16\]](https://learn.microsoft.com/en-us/microsoft-365/admin/manage/assign-licenses-to-users?view=o365-worldwide) <https://learn.microsoft.com/en-us/microsoft-365/admin/manage/assign-licenses-to-users?view=o365-worldwide>
 
 <https://learn.microsoft.com/en-us/microsoft-365/admin/manage/assign-licenses-to-users?view=o365-worldwide>
 
-[\[17\]](https://learn.microsoft.com/en-us/entra/external-id/cross-tenant-access-overview) https://learn.microsoft.com/en-us/entra/external-id/cross-tenant-access-overview
+[\[17\]](https://learn.microsoft.com/en-us/entra/external-id/cross-tenant-access-overview) <https://learn.microsoft.com/en-us/entra/external-id/cross-tenant-access-overview>
 
 <https://learn.microsoft.com/en-us/entra/external-id/cross-tenant-access-overview>
 
-[\[18\]](https://learn.microsoft.com/en-us/entra/external-id/user-properties) [\[19\]](https://learn.microsoft.com/en-us/entra/external-id/user-properties) https://learn.microsoft.com/en-us/entra/external-id/user-properties
+[\[18\]](https://learn.microsoft.com/en-us/entra/external-id/user-properties) [\[19\]](https://learn.microsoft.com/en-us/entra/external-id/user-properties) <https://learn.microsoft.com/en-us/entra/external-id/user-properties>
 
 <https://learn.microsoft.com/en-us/entra/external-id/user-properties>
 
-[\[20\]](https://learn.microsoft.com/en-us/entra/external-id/cross-tenant-access-settings-b2b-collaboration) https://learn.microsoft.com/en-us/entra/external-id/cross-tenant-access-settings-b2b-collaboration
+[\[20\]](https://learn.microsoft.com/en-us/entra/external-id/cross-tenant-access-settings-b2b-collaboration) <https://learn.microsoft.com/en-us/entra/external-id/cross-tenant-access-settings-b2b-collaboration>
 
 <https://learn.microsoft.com/en-us/entra/external-id/cross-tenant-access-settings-b2b-collaboration>
 
-[\[21\]](https://learn.microsoft.com/en-us/entra/identity/multi-tenant-organizations/cross-tenant-synchronization-overview) https://learn.microsoft.com/en-us/entra/identity/multi-tenant-organizations/cross-tenant-synchronization-overview
+[\[21\]](https://learn.microsoft.com/en-us/entra/identity/multi-tenant-organizations/cross-tenant-synchronization-overview) <https://learn.microsoft.com/en-us/entra/identity/multi-tenant-organizations/cross-tenant-synchronization-overview>
 
 <https://learn.microsoft.com/en-us/entra/identity/multi-tenant-organizations/cross-tenant-synchronization-overview>
 
-[\[22\]](https://learn.microsoft.com/en-us/entra/external-id/direct-federation) https://learn.microsoft.com/en-us/entra/external-id/direct-federation
+[\[22\]](https://learn.microsoft.com/en-us/entra/external-id/direct-federation) <https://learn.microsoft.com/en-us/entra/external-id/direct-federation>
 
 <https://learn.microsoft.com/en-us/entra/external-id/direct-federation>
 
-[\[23\]](https://learn.microsoft.com/en-us/entra/identity/hybrid/connect/whatis-azure-ad-connect) [\[29\]](https://learn.microsoft.com/en-us/entra/identity/hybrid/connect/whatis-azure-ad-connect) https://learn.microsoft.com/en-us/entra/identity/hybrid/connect/whatis-azure-ad-connect
+[\[23\]](https://learn.microsoft.com/en-us/entra/identity/hybrid/connect/whatis-azure-ad-connect) [\[29\]](https://learn.microsoft.com/en-us/entra/identity/hybrid/connect/whatis-azure-ad-connect) <https://learn.microsoft.com/en-us/entra/identity/hybrid/connect/whatis-azure-ad-connect>
 
 <https://learn.microsoft.com/en-us/entra/identity/hybrid/connect/whatis-azure-ad-connect>
 
-[\[24\]](https://learn.microsoft.com/en-us/entra/identity/hybrid/cloud-sync/what-is-cloud-sync) https://learn.microsoft.com/en-us/entra/identity/hybrid/cloud-sync/what-is-cloud-sync
+[\[24\]](https://learn.microsoft.com/en-us/entra/identity/hybrid/cloud-sync/what-is-cloud-sync) <https://learn.microsoft.com/en-us/entra/identity/hybrid/cloud-sync/what-is-cloud-sync>
 
 <https://learn.microsoft.com/en-us/entra/identity/hybrid/cloud-sync/what-is-cloud-sync>
 
-[\[25\]](https://learn.microsoft.com/en-us/entra/identity/hybrid/connect/how-to-connect-password-hash-synchronization) https://learn.microsoft.com/en-us/entra/identity/hybrid/connect/how-to-connect-password-hash-synchronization
+[\[25\]](https://learn.microsoft.com/en-us/entra/identity/hybrid/connect/how-to-connect-password-hash-synchronization) <https://learn.microsoft.com/en-us/entra/identity/hybrid/connect/how-to-connect-password-hash-synchronization>
 
 <https://learn.microsoft.com/en-us/entra/identity/hybrid/connect/how-to-connect-password-hash-synchronization>
 
-[\[26\]](https://learn.microsoft.com/en-us/entra/identity/hybrid/connect/how-to-connect-pta-current-limitations) https://learn.microsoft.com/en-us/entra/identity/hybrid/connect/how-to-connect-pta-current-limitations
+[\[26\]](https://learn.microsoft.com/en-us/entra/identity/hybrid/connect/how-to-connect-pta-current-limitations) <https://learn.microsoft.com/en-us/entra/identity/hybrid/connect/how-to-connect-pta-current-limitations>
 
 <https://learn.microsoft.com/en-us/entra/identity/hybrid/connect/how-to-connect-pta-current-limitations>
 
-[\[27\]](https://learn.microsoft.com/en-us/entra/identity/hybrid/connect/how-to-connect-sso-quick-start) https://learn.microsoft.com/en-us/entra/identity/hybrid/connect/how-to-connect-sso-quick-start
+[\[27\]](https://learn.microsoft.com/en-us/entra/identity/hybrid/connect/how-to-connect-sso-quick-start) <https://learn.microsoft.com/en-us/entra/identity/hybrid/connect/how-to-connect-sso-quick-start>
 
 <https://learn.microsoft.com/en-us/entra/identity/hybrid/connect/how-to-connect-sso-quick-start>
 
-[\[28\]](https://learn.microsoft.com/en-us/entra/identity/hybrid/connect/migrate-from-federation-to-cloud-authentication) https://learn.microsoft.com/en-us/entra/identity/hybrid/connect/migrate-from-federation-to-cloud-authentication
+[\[28\]](https://learn.microsoft.com/en-us/entra/identity/hybrid/connect/migrate-from-federation-to-cloud-authentication) <https://learn.microsoft.com/en-us/entra/identity/hybrid/connect/migrate-from-federation-to-cloud-authentication>
 
 <https://learn.microsoft.com/en-us/entra/identity/hybrid/connect/migrate-from-federation-to-cloud-authentication>
 
-[\[30\]](https://learn.microsoft.com/en-us/entra/identity/authentication/overview-authentication) https://learn.microsoft.com/en-us/entra/identity/authentication/overview-authentication
+[\[30\]](https://learn.microsoft.com/en-us/entra/identity/authentication/overview-authentication) <https://learn.microsoft.com/en-us/entra/identity/authentication/overview-authentication>
 
 <https://learn.microsoft.com/en-us/entra/identity/authentication/overview-authentication>
 
-[\[31\]](https://learn.microsoft.com/en-us/entra/identity/authentication/concept-authentication-methods-manage) [\[49\]](https://learn.microsoft.com/en-us/entra/identity/authentication/concept-authentication-methods-manage) [\[100\]](https://learn.microsoft.com/en-us/entra/identity/authentication/concept-authentication-methods-manage) https://learn.microsoft.com/en-us/entra/identity/authentication/concept-authentication-methods-manage
+[\[31\]](https://learn.microsoft.com/en-us/entra/identity/authentication/concept-authentication-methods-manage) [\[49\]](https://learn.microsoft.com/en-us/entra/identity/authentication/concept-authentication-methods-manage) [\[100\]](https://learn.microsoft.com/en-us/entra/identity/authentication/concept-authentication-methods-manage) <https://learn.microsoft.com/en-us/entra/identity/authentication/concept-authentication-methods-manage>
 
 <https://learn.microsoft.com/en-us/entra/identity/authentication/concept-authentication-methods-manage>
 
-[\[32\]](https://learn.microsoft.com/en-us/entra/identity/authentication/howto-mfa-mfasettings) https://learn.microsoft.com/en-us/entra/identity/authentication/howto-mfa-mfasettings
+[\[32\]](https://learn.microsoft.com/en-us/entra/identity/authentication/howto-mfa-mfasettings) <https://learn.microsoft.com/en-us/entra/identity/authentication/howto-mfa-mfasettings>
 
 <https://learn.microsoft.com/en-us/entra/identity/authentication/howto-mfa-mfasettings>
 
-[\[33\]](https://learn.microsoft.com/en-us/entra/identity/authentication/tutorial-enable-sspr) https://learn.microsoft.com/en-us/entra/identity/authentication/tutorial-enable-sspr
+[\[33\]](https://learn.microsoft.com/en-us/entra/identity/authentication/tutorial-enable-sspr) <https://learn.microsoft.com/en-us/entra/identity/authentication/tutorial-enable-sspr>
 
 <https://learn.microsoft.com/en-us/entra/identity/authentication/tutorial-enable-sspr>
 
-[\[34\]](https://learn.microsoft.com/en-us/windows/security/identity-protection/hello-for-business/) https://learn.microsoft.com/en-us/windows/security/identity-protection/hello-for-business/
+[\[34\]](https://learn.microsoft.com/en-us/windows/security/identity-protection/hello-for-business/) <https://learn.microsoft.com/en-us/windows/security/identity-protection/hello-for-business/>
 
 <https://learn.microsoft.com/en-us/windows/security/identity-protection/hello-for-business/>
 
-[\[35\]](https://learn.microsoft.com/en-us/entra/identity/users/users-revoke-access) https://learn.microsoft.com/en-us/entra/identity/users/users-revoke-access
+[\[35\]](https://learn.microsoft.com/en-us/entra/identity/users/users-revoke-access) <https://learn.microsoft.com/en-us/entra/identity/users/users-revoke-access>
 
 <https://learn.microsoft.com/en-us/entra/identity/users/users-revoke-access>
 
-[\[36\]](https://learn.microsoft.com/en-us/entra/identity/authentication/concept-password-ban-bad) https://learn.microsoft.com/en-us/entra/identity/authentication/concept-password-ban-bad
+[\[36\]](https://learn.microsoft.com/en-us/entra/identity/authentication/concept-password-ban-bad) <https://learn.microsoft.com/en-us/entra/identity/authentication/concept-password-ban-bad>
 
 <https://learn.microsoft.com/en-us/entra/identity/authentication/concept-password-ban-bad>
 
-[\[37\]](https://learn.microsoft.com/en-us/entra/identity/authentication/kerberos) https://learn.microsoft.com/en-us/entra/identity/authentication/kerberos
+[\[37\]](https://learn.microsoft.com/en-us/entra/identity/authentication/kerberos) <https://learn.microsoft.com/en-us/entra/identity/authentication/kerberos>
 
 <https://learn.microsoft.com/en-us/entra/identity/authentication/kerberos>
 
-[\[38\]](https://learn.microsoft.com/en-us/entra/identity/conditional-access/plan-conditional-access) https://learn.microsoft.com/en-us/entra/identity/conditional-access/plan-conditional-access
+[\[38\]](https://learn.microsoft.com/en-us/entra/identity/conditional-access/plan-conditional-access) <https://learn.microsoft.com/en-us/entra/identity/conditional-access/plan-conditional-access>
 
 <https://learn.microsoft.com/en-us/entra/identity/conditional-access/plan-conditional-access>
 
-[\[39\]](https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-conditional-access-policies) [\[40\]](https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-conditional-access-policies) https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-conditional-access-policies
+[\[39\]](https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-conditional-access-policies) [\[40\]](https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-conditional-access-policies) <https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-conditional-access-policies>
 
 <https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-conditional-access-policies>
 
-[\[41\]](https://learn.microsoft.com/en-us/entra/identity/conditional-access/what-if-tool) https://learn.microsoft.com/en-us/entra/identity/conditional-access/what-if-tool
+[\[41\]](https://learn.microsoft.com/en-us/entra/identity/conditional-access/what-if-tool) <https://learn.microsoft.com/en-us/entra/identity/conditional-access/what-if-tool>
 
 <https://learn.microsoft.com/en-us/entra/identity/conditional-access/what-if-tool>
 
-[\[42\]](https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-session-lifetime) https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-session-lifetime
+[\[42\]](https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-session-lifetime) <https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-session-lifetime>
 
 <https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-session-lifetime>
 
-[\[43\]](https://learn.microsoft.com/en-us/entra/identity/conditional-access/policy-all-users-device-compliance) https://learn.microsoft.com/en-us/entra/identity/conditional-access/policy-all-users-device-compliance
+[\[43\]](https://learn.microsoft.com/en-us/entra/identity/conditional-access/policy-all-users-device-compliance) <https://learn.microsoft.com/en-us/entra/identity/conditional-access/policy-all-users-device-compliance>
 
 <https://learn.microsoft.com/en-us/entra/identity/conditional-access/policy-all-users-device-compliance>
 
-[\[44\]](https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-continuous-access-evaluation) https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-continuous-access-evaluation
+[\[44\]](https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-continuous-access-evaluation) <https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-continuous-access-evaluation>
 
 <https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-continuous-access-evaluation>
 
-[\[45\]](https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-conditional-access-cloud-apps) https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-conditional-access-cloud-apps
+[\[45\]](https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-conditional-access-cloud-apps) <https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-conditional-access-cloud-apps>
 
 <https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-conditional-access-cloud-apps>
 
-[\[46\]](https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/protected-actions-overview) https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/protected-actions-overview
+[\[46\]](https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/protected-actions-overview) <https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/protected-actions-overview>
 
 <https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/protected-actions-overview>
 
-[\[47\]](https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-conditional-access-policy-common) https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-conditional-access-policy-common
+[\[47\]](https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-conditional-access-policy-common) <https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-conditional-access-policy-common>
 
 <https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-conditional-access-policy-common>
 
-[\[48\]](https://learn.microsoft.com/en-us/entra/id-protection/howto-identity-protection-remediate-unblock) [\[50\]](https://learn.microsoft.com/en-us/entra/id-protection/howto-identity-protection-remediate-unblock) https://learn.microsoft.com/en-us/entra/id-protection/howto-identity-protection-remediate-unblock
+[\[48\]](https://learn.microsoft.com/en-us/entra/id-protection/howto-identity-protection-remediate-unblock) [\[50\]](https://learn.microsoft.com/en-us/entra/id-protection/howto-identity-protection-remediate-unblock) <https://learn.microsoft.com/en-us/entra/id-protection/howto-identity-protection-remediate-unblock>
 
 <https://learn.microsoft.com/en-us/entra/id-protection/howto-identity-protection-remediate-unblock>
 
-[\[51\]](https://learn.microsoft.com/en-us/windows/security/identity-protection/hello-for-business/faq) https://learn.microsoft.com/en-us/windows/security/identity-protection/hello-for-business/faq
+[\[51\]](https://learn.microsoft.com/en-us/windows/security/identity-protection/hello-for-business/faq) <https://learn.microsoft.com/en-us/windows/security/identity-protection/hello-for-business/faq>
 
 <https://learn.microsoft.com/en-us/windows/security/identity-protection/hello-for-business/faq>
 
-[\[52\]](https://learn.microsoft.com/en-us/entra/global-secure-access/concept-clients) https://learn.microsoft.com/en-us/entra/global-secure-access/concept-clients
+[\[52\]](https://learn.microsoft.com/en-us/entra/global-secure-access/concept-clients) <https://learn.microsoft.com/en-us/entra/global-secure-access/concept-clients>
 
 <https://learn.microsoft.com/en-us/entra/global-secure-access/concept-clients>
 
-[\[53\]](https://learn.microsoft.com/en-us/entra/global-secure-access/quickstart-quick-access) https://learn.microsoft.com/en-us/entra/global-secure-access/quickstart-quick-access
+[\[53\]](https://learn.microsoft.com/en-us/entra/global-secure-access/quickstart-quick-access) <https://learn.microsoft.com/en-us/entra/global-secure-access/quickstart-quick-access>
 
 <https://learn.microsoft.com/en-us/entra/global-secure-access/quickstart-quick-access>
 
-[\[54\]](https://learn.microsoft.com/en-us/entra/global-secure-access/concept-internet-access) https://learn.microsoft.com/en-us/entra/global-secure-access/concept-internet-access
+[\[54\]](https://learn.microsoft.com/en-us/entra/global-secure-access/concept-internet-access) <https://learn.microsoft.com/en-us/entra/global-secure-access/concept-internet-access>
 
 <https://learn.microsoft.com/en-us/entra/global-secure-access/concept-internet-access>
 
-[\[55\]](https://learn.microsoft.com/en-us/entra/global-secure-access/overview-what-is-global-secure-access) https://learn.microsoft.com/en-us/entra/global-secure-access/overview-what-is-global-secure-access
+[\[55\]](https://learn.microsoft.com/en-us/entra/global-secure-access/overview-what-is-global-secure-access) <https://learn.microsoft.com/en-us/entra/global-secure-access/overview-what-is-global-secure-access>
 
 <https://learn.microsoft.com/en-us/entra/global-secure-access/overview-what-is-global-secure-access>
 
-[\[57\]](https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/overview) [\[58\]](https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/overview) [\[59\]](https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/overview) https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/overview
+[\[57\]](https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/overview) [\[58\]](https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/overview) [\[59\]](https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/overview) <https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/overview>
 
 <https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/overview>
 
-[\[60\]](https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/application-properties) https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/application-properties
+[\[60\]](https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/application-properties) <https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/application-properties>
 
 <https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/application-properties>
 
-[\[62\]](https://learn.microsoft.com/en-us/entra/identity/app-proxy/overview-what-is-app-proxy) https://learn.microsoft.com/en-us/entra/identity/app-proxy/overview-what-is-app-proxy
+[\[62\]](https://learn.microsoft.com/en-us/entra/identity/app-proxy/overview-what-is-app-proxy) <https://learn.microsoft.com/en-us/entra/identity/app-proxy/overview-what-is-app-proxy>
 
 <https://learn.microsoft.com/en-us/entra/identity/app-proxy/overview-what-is-app-proxy>
 
-[\[63\]](https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/overview-application-gallery) https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/overview-application-gallery
+[\[63\]](https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/overview-application-gallery) <https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/overview-application-gallery>
 
 <https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/overview-application-gallery>
 
-[\[64\]](https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/assign-user-or-group-access-portal) https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/assign-user-or-group-access-portal
+[\[64\]](https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/assign-user-or-group-access-portal) <https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/assign-user-or-group-access-portal>
 
 <https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/assign-user-or-group-access-portal>
 
-[\[65\]](https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/user-admin-consent-overview) https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/user-admin-consent-overview
+[\[65\]](https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/user-admin-consent-overview) <https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/user-admin-consent-overview>
 
 <https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/user-admin-consent-overview>
 
-[\[66\]](https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/access-panel-collections) https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/access-panel-collections
+[\[66\]](https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/access-panel-collections) <https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/access-panel-collections>
 
 <https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/access-panel-collections>
 
-[\[68\]](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app) https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app
+[\[68\]](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app) <https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app>
 
 <https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app>
 
-[\[70\]](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-configure-app-access-web-apis) https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-configure-app-access-web-apis
+[\[70\]](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-configure-app-access-web-apis) <https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-configure-app-access-web-apis>
 
 <https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-configure-app-access-web-apis>
 
-[\[71\]](https://learn.microsoft.com/en-us/entra/identity-platform/howto-add-app-roles-in-apps) https://learn.microsoft.com/en-us/entra/identity-platform/howto-add-app-roles-in-apps
+[\[71\]](https://learn.microsoft.com/en-us/entra/identity-platform/howto-add-app-roles-in-apps) <https://learn.microsoft.com/en-us/entra/identity-platform/howto-add-app-roles-in-apps>
 
 <https://learn.microsoft.com/en-us/entra/identity-platform/howto-add-app-roles-in-apps>
 
-[\[72\]](https://learn.microsoft.com/en-us/defender-cloud-apps/set-up-cloud-discovery) https://learn.microsoft.com/en-us/defender-cloud-apps/set-up-cloud-discovery
+[\[72\]](https://learn.microsoft.com/en-us/defender-cloud-apps/set-up-cloud-discovery) <https://learn.microsoft.com/en-us/defender-cloud-apps/set-up-cloud-discovery>
 
 <https://learn.microsoft.com/en-us/defender-cloud-apps/set-up-cloud-discovery>
 
-[\[73\]](https://learn.microsoft.com/en-us/defender-cloud-apps/enable-instant-visibility-protection-and-governance-actions-for-your-apps) https://learn.microsoft.com/en-us/defender-cloud-apps/enable-instant-visibility-protection-and-governance-actions-for-your-apps
+[\[73\]](https://learn.microsoft.com/en-us/defender-cloud-apps/enable-instant-visibility-protection-and-governance-actions-for-your-apps) <https://learn.microsoft.com/en-us/defender-cloud-apps/enable-instant-visibility-protection-and-governance-actions-for-your-apps>
 
 <https://learn.microsoft.com/en-us/defender-cloud-apps/enable-instant-visibility-protection-and-governance-actions-for-your-apps>
 
-[\[74\]](https://learn.microsoft.com/en-us/entra/identity/conditional-access/policy-all-users-app-enforced-restrictions) https://learn.microsoft.com/en-us/entra/identity/conditional-access/policy-all-users-app-enforced-restrictions
+[\[74\]](https://learn.microsoft.com/en-us/entra/identity/conditional-access/policy-all-users-app-enforced-restrictions) <https://learn.microsoft.com/en-us/entra/identity/conditional-access/policy-all-users-app-enforced-restrictions>
 
 <https://learn.microsoft.com/en-us/entra/identity/conditional-access/policy-all-users-app-enforced-restrictions>
 
-[\[75\]](https://learn.microsoft.com/en-us/defender-cloud-apps/proxy-intro-aad) https://learn.microsoft.com/en-us/defender-cloud-apps/proxy-intro-aad
+[\[75\]](https://learn.microsoft.com/en-us/defender-cloud-apps/proxy-intro-aad) <https://learn.microsoft.com/en-us/defender-cloud-apps/proxy-intro-aad>
 
 <https://learn.microsoft.com/en-us/defender-cloud-apps/proxy-intro-aad>
 
-[\[76\]](https://learn.microsoft.com/en-us/defender-cloud-apps/control-cloud-apps-with-policies) https://learn.microsoft.com/en-us/defender-cloud-apps/control-cloud-apps-with-policies
+[\[76\]](https://learn.microsoft.com/en-us/defender-cloud-apps/control-cloud-apps-with-policies) <https://learn.microsoft.com/en-us/defender-cloud-apps/control-cloud-apps-with-policies>
 
 <https://learn.microsoft.com/en-us/defender-cloud-apps/control-cloud-apps-with-policies>
 
-[\[77\]](https://learn.microsoft.com/en-us/defender-cloud-apps/manage-app-permissions) https://learn.microsoft.com/en-us/defender-cloud-apps/manage-app-permissions
+[\[77\]](https://learn.microsoft.com/en-us/defender-cloud-apps/manage-app-permissions) <https://learn.microsoft.com/en-us/defender-cloud-apps/manage-app-permissions>
 
 <https://learn.microsoft.com/en-us/defender-cloud-apps/manage-app-permissions>
 
-[\[78\]](https://learn.microsoft.com/en-us/defender-cloud-apps/risk-score) https://learn.microsoft.com/en-us/defender-cloud-apps/risk-score
+[\[78\]](https://learn.microsoft.com/en-us/defender-cloud-apps/risk-score) <https://learn.microsoft.com/en-us/defender-cloud-apps/risk-score>
 
 <https://learn.microsoft.com/en-us/defender-cloud-apps/risk-score>
 
-[\[79\]](https://learn.microsoft.com/en-us/entra/id-governance/entitlement-management-overview) [\[80\]](https://learn.microsoft.com/en-us/entra/id-governance/entitlement-management-overview) https://learn.microsoft.com/en-us/entra/id-governance/entitlement-management-overview
+[\[79\]](https://learn.microsoft.com/en-us/entra/id-governance/entitlement-management-overview) [\[80\]](https://learn.microsoft.com/en-us/entra/id-governance/entitlement-management-overview) <https://learn.microsoft.com/en-us/entra/id-governance/entitlement-management-overview>
 
 <https://learn.microsoft.com/en-us/entra/id-governance/entitlement-management-overview>
 
-[\[81\]](https://learn.microsoft.com/en-us/entra/id-governance/entitlement-management-access-package-create) https://learn.microsoft.com/en-us/entra/id-governance/entitlement-management-access-package-create
+[\[81\]](https://learn.microsoft.com/en-us/entra/id-governance/entitlement-management-access-package-create) <https://learn.microsoft.com/en-us/entra/id-governance/entitlement-management-access-package-create>
 
 <https://learn.microsoft.com/en-us/entra/id-governance/entitlement-management-access-package-create>
 
-[\[82\]](https://learn.microsoft.com/en-us/entra/id-governance/entitlement-management-access-package-request-policy) https://learn.microsoft.com/en-us/entra/id-governance/entitlement-management-access-package-request-policy
+[\[82\]](https://learn.microsoft.com/en-us/entra/id-governance/entitlement-management-access-package-request-policy) <https://learn.microsoft.com/en-us/entra/id-governance/entitlement-management-access-package-request-policy>
 
 <https://learn.microsoft.com/en-us/entra/id-governance/entitlement-management-access-package-request-policy>
 
-[\[83\]](https://learn.microsoft.com/en-us/entra/identity/conditional-access/terms-of-use) https://learn.microsoft.com/en-us/entra/identity/conditional-access/terms-of-use
+[\[83\]](https://learn.microsoft.com/en-us/entra/identity/conditional-access/terms-of-use) <https://learn.microsoft.com/en-us/entra/identity/conditional-access/terms-of-use>
 
 <https://learn.microsoft.com/en-us/entra/identity/conditional-access/terms-of-use>
 
-[\[84\]](https://learn.microsoft.com/en-us/entra/id-governance/entitlement-management-external-users) https://learn.microsoft.com/en-us/entra/id-governance/entitlement-management-external-users
+[\[84\]](https://learn.microsoft.com/en-us/entra/id-governance/entitlement-management-external-users) <https://learn.microsoft.com/en-us/entra/id-governance/entitlement-management-external-users>
 
 <https://learn.microsoft.com/en-us/entra/id-governance/entitlement-management-external-users>
 
-[\[85\]](https://learn.microsoft.com/en-us/entra/id-governance/entitlement-management-organization) https://learn.microsoft.com/en-us/entra/id-governance/entitlement-management-organization
+[\[85\]](https://learn.microsoft.com/en-us/entra/id-governance/entitlement-management-organization) <https://learn.microsoft.com/en-us/entra/id-governance/entitlement-management-organization>
 
 <https://learn.microsoft.com/en-us/entra/id-governance/entitlement-management-organization>
 
-[\[86\]](https://learn.microsoft.com/en-us/entra/id-governance/deploy-access-reviews) https://learn.microsoft.com/en-us/entra/id-governance/deploy-access-reviews
+[\[86\]](https://learn.microsoft.com/en-us/entra/id-governance/deploy-access-reviews) <https://learn.microsoft.com/en-us/entra/id-governance/deploy-access-reviews>
 
 <https://learn.microsoft.com/en-us/entra/id-governance/deploy-access-reviews>
 
-[\[87\]](https://learn.microsoft.com/en-us/entra/id-governance/create-access-review) https://learn.microsoft.com/en-us/entra/id-governance/create-access-review
+[\[87\]](https://learn.microsoft.com/en-us/entra/id-governance/create-access-review) <https://learn.microsoft.com/en-us/entra/id-governance/create-access-review>
 
 <https://learn.microsoft.com/en-us/entra/id-governance/create-access-review>
 
-[\[88\]](https://learn.microsoft.com/en-us/entra/id-governance/complete-access-review) https://learn.microsoft.com/en-us/entra/id-governance/complete-access-review
+[\[88\]](https://learn.microsoft.com/en-us/entra/id-governance/complete-access-review) <https://learn.microsoft.com/en-us/entra/id-governance/complete-access-review>
 
 <https://learn.microsoft.com/en-us/entra/id-governance/complete-access-review>
 
-[\[89\]](https://learn.microsoft.com/en-us/entra/id-governance/perform-access-review) https://learn.microsoft.com/en-us/entra/id-governance/perform-access-review
+[\[89\]](https://learn.microsoft.com/en-us/entra/id-governance/perform-access-review) <https://learn.microsoft.com/en-us/entra/id-governance/perform-access-review>
 
 <https://learn.microsoft.com/en-us/entra/id-governance/perform-access-review>
 
-[\[90\]](https://learn.microsoft.com/en-us/entra/id-governance/privileged-identity-management/pim-configure) https://learn.microsoft.com/en-us/entra/id-governance/privileged-identity-management/pim-configure
+[\[90\]](https://learn.microsoft.com/en-us/entra/id-governance/privileged-identity-management/pim-configure) <https://learn.microsoft.com/en-us/entra/id-governance/privileged-identity-management/pim-configure>
 
 <https://learn.microsoft.com/en-us/entra/id-governance/privileged-identity-management/pim-configure>
 
-[\[91\]](https://learn.microsoft.com/en-us/entra/id-governance/privileged-identity-management/pim-resource-roles-assign-roles) https://learn.microsoft.com/en-us/entra/id-governance/privileged-identity-management/pim-resource-roles-assign-roles
+[\[91\]](https://learn.microsoft.com/en-us/entra/id-governance/privileged-identity-management/pim-resource-roles-assign-roles) <https://learn.microsoft.com/en-us/entra/id-governance/privileged-identity-management/pim-resource-roles-assign-roles>
 
 <https://learn.microsoft.com/en-us/entra/id-governance/privileged-identity-management/pim-resource-roles-assign-roles>
 
-[\[92\]](https://learn.microsoft.com/en-us/entra/id-governance/privileged-identity-management/pim-deployment-plan) https://learn.microsoft.com/en-us/entra/id-governance/privileged-identity-management/pim-deployment-plan
+[\[92\]](https://learn.microsoft.com/en-us/entra/id-governance/privileged-identity-management/pim-deployment-plan) <https://learn.microsoft.com/en-us/entra/id-governance/privileged-identity-management/pim-deployment-plan>
 
 <https://learn.microsoft.com/en-us/entra/id-governance/privileged-identity-management/pim-deployment-plan>
 
-[\[93\]](https://learn.microsoft.com/en-us/entra/id-governance/privileged-identity-management/azure-pim-resource-rbac) https://learn.microsoft.com/en-us/entra/id-governance/privileged-identity-management/azure-pim-resource-rbac
+[\[93\]](https://learn.microsoft.com/en-us/entra/id-governance/privileged-identity-management/azure-pim-resource-rbac) <https://learn.microsoft.com/en-us/entra/id-governance/privileged-identity-management/azure-pim-resource-rbac>
 
 <https://learn.microsoft.com/en-us/entra/id-governance/privileged-identity-management/azure-pim-resource-rbac>
 
-[\[94\]](https://learn.microsoft.com/en-us/entra/architecture/secure-best-practices) https://learn.microsoft.com/en-us/entra/architecture/secure-best-practices
+[\[94\]](https://learn.microsoft.com/en-us/entra/architecture/secure-best-practices) <https://learn.microsoft.com/en-us/entra/architecture/secure-best-practices>
 
 <https://learn.microsoft.com/en-us/entra/architecture/secure-best-practices>
 
-[\[95\]](https://learn.microsoft.com/en-us/entra/identity/monitoring-health/concept-sign-ins) https://learn.microsoft.com/en-us/entra/identity/monitoring-health/concept-sign-ins
+[\[95\]](https://learn.microsoft.com/en-us/entra/identity/monitoring-health/concept-sign-ins) <https://learn.microsoft.com/en-us/entra/identity/monitoring-health/concept-sign-ins>
 
 <https://learn.microsoft.com/en-us/entra/identity/monitoring-health/concept-sign-ins>
 
-[\[96\]](https://learn.microsoft.com/en-us/entra/identity/monitoring-health/howto-configure-diagnostic-settings) https://learn.microsoft.com/en-us/entra/identity/monitoring-health/howto-configure-diagnostic-settings
+[\[96\]](https://learn.microsoft.com/en-us/entra/identity/monitoring-health/howto-configure-diagnostic-settings) <https://learn.microsoft.com/en-us/entra/identity/monitoring-health/howto-configure-diagnostic-settings>
 
 <https://learn.microsoft.com/en-us/entra/identity/monitoring-health/howto-configure-diagnostic-settings>
 
-[\[97\]](https://learn.microsoft.com/en-us/entra/identity/monitoring-health/tutorial-configure-log-analytics-workspace) https://learn.microsoft.com/en-us/entra/identity/monitoring-health/tutorial-configure-log-analytics-workspace
+[\[97\]](https://learn.microsoft.com/en-us/entra/identity/monitoring-health/tutorial-configure-log-analytics-workspace) <https://learn.microsoft.com/en-us/entra/identity/monitoring-health/tutorial-configure-log-analytics-workspace>
 
 <https://learn.microsoft.com/en-us/entra/identity/monitoring-health/tutorial-configure-log-analytics-workspace>
 
-[\[98\]](https://learn.microsoft.com/en-us/entra/identity/monitoring-health/overview-workbooks) https://learn.microsoft.com/en-us/entra/identity/monitoring-health/overview-workbooks
+[\[98\]](https://learn.microsoft.com/en-us/entra/identity/monitoring-health/overview-workbooks) <https://learn.microsoft.com/en-us/entra/identity/monitoring-health/overview-workbooks>
 
 <https://learn.microsoft.com/en-us/entra/identity/monitoring-health/overview-workbooks>
 
-[\[99\]](https://learn.microsoft.com/en-us/entra/identity/monitoring-health/concept-identity-secure-score) https://learn.microsoft.com/en-us/entra/identity/monitoring-health/concept-identity-secure-score
+[\[99\]](https://learn.microsoft.com/en-us/entra/identity/monitoring-health/concept-identity-secure-score) <https://learn.microsoft.com/en-us/entra/identity/monitoring-health/concept-identity-secure-score>
 
 <https://learn.microsoft.com/en-us/entra/identity/monitoring-health/concept-identity-secure-score>
