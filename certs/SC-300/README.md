@@ -4,6 +4,7 @@
 
 - **Certification Page:** [Microsoft Certified: Identity and Access Administrator Associate](https://learn.microsoft.com/en-us/credentials/certifications/identity-and-access-administrator/)
 - **Official Study Guide:** [SC-300 Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/sc-300)
+- **Deep Research Study Guide:** [Deep Research Study Guide](./research/SC-300 Study Guide Task-to-Documentation Map.md)
 - **Study Log:** [Session-by-session study time tracker](./StudyLog.md)
 
 <!-- STUDY_SUMMARY -->
@@ -173,20 +174,23 @@ Skill-level coverage based on [Per-Skill Progress](#per-skill-progress) completi
 
 ## 🎯 Focus List — Lowest-Skill Tasks
 
-Top tasks to prioritize, ranked from [SkillRanking.md](./SkillRanking.md). Lower rank = higher priority. Blank ranks sort first.
+Priority tasks ranked from [SkillRanking.md](./SkillRanking.md). Lower rank means higher skill deficiency and therefore higher priority.
 
 <!-- BEGIN FOCUS LIST -->
 
 ### Ranking Breakdown
 
+This table shows how tasks are distributed across my current self-assessed skill ranks.
+
 | Ranking | Tasks | Percentage |
 | :------ | ----: | ---------: |
-| Unassessed (blank) | 0 | 0.0% |
 | 1 | 11 | 11.2% |
 | 2 | 29 | 29.6% |
 | 3 | 38 | 38.8% |
 | 4 | 20 | 20.4% |
 | 5 | 0 | 0.0% |
+
+This table lists the next tasks to focus on. Start with rank 1 items, then move down as your coverage improves.
 
 | # | Domain | Skill | Task | Rank |
 | -: | :----- | :---- | :--- | -: |
