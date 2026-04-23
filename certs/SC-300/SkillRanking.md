@@ -60,7 +60,7 @@ Self-assessed skill rating for each task. Edit the **Rank** column only.
 | 48 | Implement authentication and access management | Manage risk by using Microsoft Entra ID Protection | Monitor, investigate and remediate risky users and risky sign-ins | 4 |
 | 49 | Implement authentication and access management | Manage risk by using Microsoft Entra ID Protection | Monitor, investigate, and remediate risky workload identities | 2 |
 | 50 | Implement authentication and access management | Implement Global Secure Access | Deploy Global Secure Access clients | 1 |
-| 51 | Implement authentication and access management | Implement Global Secure Access | Deploy and manage Private Access | 1 |
+| 51 | Implement authentication and access management | Implement Global Secure Access | Deploy and manage Private Access | 4 |
 | 52 | Implement authentication and access management | Implement Global Secure Access | Deploy and manage Internet Access | 1 |
 | 53 | Implement authentication and access management | Implement Global Secure Access | Deploy and manage Internet Access for Microsoft 365 | 1 |
 | 54 | Plan and implement workload identities | Plan and implement identities for applications and Azure workloads | Select appropriate identities for applications and Azure workloads, including managed identities, service principals, user accounts, and managed service accounts | 3 |
