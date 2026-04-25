@@ -8,7 +8,7 @@ This log tracks individual study sessions for the **SC-300** exam. Fill in **End
 
 | # | Date | Start | End | Duration | Mode | Skill | Notes |
 |:--|:-----|:------|:----|:---------|:-----|:------|:------|
-| 5 | 4/25/26 | 6:07 AM |  |  | NotebookLM | Implement Global Secure Access |  |
+| 5 | 4/25/26 | 6:07 AM | 7:53 AM | 1h 46m | NotebookLM | Implement Global Secure Access | Covered "Deploy and manage Internet Access for Microsoft 365". Pick up at "Deploy Global Secure Access clients" |
 | 4 | 4/24/26 | 4:13 AM | 7:12 AM | 2h 59m | NotebookLM | Implement Global Secure Access | Covered "Deploy and manage Internet Access"; pick up next at "Deploy and manage Internet Access for Microsoft 365" |
 | 3 | 4/23/26 | 3:51 AM | 6:47 AM | 2h 56m | NotebookLM | Implement Global Secure Access | Covered "Deploy and manage Private Access"; pick up next at "Deploy and manage Internet Access" |
 | 2 | 4/22/26 | 6:15 AM | 6:26 AM | 0h 11m | NotebookLM | Implement Global Secure Access | Pick up at "Deploy and Manage Private Access" |
