@@ -17,6 +17,7 @@
 
 
 
+
 ---
 
 ## 📊 Exam Coverage
@@ -137,7 +138,7 @@ Skill-level coverage based on [Per-Skill Progress](#per-skill-progress) completi
 
 | # | Domain | Skill | Tasks | ML | MD | NB | Lab | PQ | Hours | Progress |
 | -: | :----- | :---- | ----: | :-: | :-: | :-: | :-: | :-: | ----: | :------- |
-| 1 | Identity, Governance & Monitoring | Design solutions for logging and monitoring | 3 | ✅ 4.9h | ✅ 9.2h | ⏳ 10.4h | ⏳ 0.2h | ⏳ 1.0h | 25.7h | ⏳ 3/30/26 → _ · 25d |
+| 1 | Identity, Governance & Monitoring | Design solutions for logging and monitoring | 3 | ✅ 4.9h | ✅ 9.2h | ⏳ 10.4h | ⏳ 0.2h | ⏳ 1.0h | 25.7h | ⏳ 3/30/26 → _ · 26d |
 | 2 | Identity, Governance & Monitoring | Design authentication and authorization solutions | 5 | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | 0.0h | 🔲 |
 | 3 | Identity, Governance & Monitoring | Design governance | 3 | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | 0.0h | 🔲 |
 | 4 | Data Storage | Design data storage solutions for relational data | 4 | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | 0.0h | 🔲 |

@@ -18,6 +18,7 @@
 
 
 
+
 > **Study workflow (two phases).** Phase 1 — work through every Microsoft Learn module in the [Learning Paths](#-learning-paths) table. Phase 2 — tackle each exam skill one-by-one.
 
 ---
@@ -180,12 +181,12 @@ Skill-level coverage based on [Per-Skill Progress](#per-skill-progress) completi
 | # | Domain | Skill | Tasks | ML | MD | NB | Lab | PQ | Hours | Progress |
 | -: | :----- | :---- | ----: | :-: | :-: | :-: | :-: | :-: | ----: | :------- |
 | 1 | Plan & Manage | Choose the appropriate Foundry services for generative AI and agents | 4 | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | 0.0h | 🔲 |
-| 2 | Plan & Manage | Set up AI solutions in Foundry | 4 | ⏳ 3.0h | 🔲 | 🔲 | 🔲 | 🔲 | 3.0h | ⏳ 4/2/26 → _ · 22d |
+| 2 | Plan & Manage | Set up AI solutions in Foundry | 4 | ⏳ 3.0h | 🔲 | 🔲 | 🔲 | 🔲 | 3.0h | ⏳ 4/2/26 → _ · 23d |
 | 3 | Plan & Manage | Manage, monitor, and secure AI systems | 4 | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | 0.0h | 🔲 |
-| 4 | Plan & Manage | Implement responsible AI across generative AI and agentic systems | 4 | ⏳ 0.9h | 🔲 | 🔲 | 🔲 | 🔲 | 0.9h | ⏳ 4/21/26 → _ · 3d |
-| 5 | Generative AI & Agentic | Build generative applications by using Foundry | 6 | ⏳ 5.5h | 🔲 | 🔲 | 🔲 | 🔲 | 5.5h | ⏳ 4/8/26 → _ · 16d |
+| 4 | Plan & Manage | Implement responsible AI across generative AI and agentic systems | 4 | ⏳ 0.9h | 🔲 | 🔲 | 🔲 | 🔲 | 0.9h | ⏳ 4/21/26 → _ · 4d |
+| 5 | Generative AI & Agentic | Build generative applications by using Foundry | 6 | ⏳ 5.5h | 🔲 | 🔲 | 🔲 | 🔲 | 5.5h | ⏳ 4/8/26 → _ · 17d |
 | 6 | Generative AI & Agentic | Build agents by using Foundry | 6 | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | 0.0h | 🔲 |
-| 7 | Generative AI & Agentic | Optimize and operationalize generative AI systems | 4 | ⏳ 1.9h | 🔲 | 🔲 | 🔲 | 🔲 | 1.9h | ⏳ 4/17/26 → _ · 7d |
+| 7 | Generative AI & Agentic | Optimize and operationalize generative AI systems | 4 | ⏳ 1.9h | 🔲 | 🔲 | 🔲 | 🔲 | 1.9h | ⏳ 4/17/26 → _ · 8d |
 | 8 | Computer Vision | Design and implement image- and video-generation solutions | 5 | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | 0.0h | 🔲 |
 | 9 | Computer Vision | Design and implement multimodal understanding workflows | 8 | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | 0.0h | 🔲 |
 | 10 | Computer Vision | Implement responsible AI for multimodal content | 3 | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 | 0.0h | 🔲 |

@@ -62,7 +62,7 @@ Self-assessed skill rating for each task. Edit the **Rank** column only.
 | 50 | Implement authentication and access management | Implement Global Secure Access | Deploy Global Secure Access clients | 1 |
 | 51 | Implement authentication and access management | Implement Global Secure Access | Deploy and manage Private Access | 4 |
 | 52 | Implement authentication and access management | Implement Global Secure Access | Deploy and manage Internet Access | 4 |
-| 53 | Implement authentication and access management | Implement Global Secure Access | Deploy and manage Internet Access for Microsoft 365 | 1 |
+| 53 | Implement authentication and access management | Implement Global Secure Access | Deploy and manage Internet Access for Microsoft 365 | 4 |
 | 54 | Plan and implement workload identities | Plan and implement identities for applications and Azure workloads | Select appropriate identities for applications and Azure workloads, including managed identities, service principals, user accounts, and managed service accounts | 3 |
 | 55 | Plan and implement workload identities | Plan and implement identities for applications and Azure workloads | Create managed identities | 2 |
 | 56 | Plan and implement workload identities | Plan and implement identities for applications and Azure workloads | Assign a managed identity to an Azure resource | 3 |
