@@ -13,6 +13,7 @@
 
 
 
+
 ---
 
 ## 📊 Exam Coverage
@@ -188,8 +189,8 @@ Priority tasks ranked from [SkillRanking.md](./SkillRanking.md). Lower rank mean
 | 1 | 5 | 5.1% |
 | 2 | 29 | 29.6% |
 | 3 | 38 | 38.8% |
-| 4 | 26 | 26.5% |
-| 5 | 0 | 0.0% |
+| 4 | 21 | 21.4% |
+| 5 | 5 | 5.1% |
 
 | # | Domain | Skill | Task | Rank |
 | -: | :----- | :---- | :--- | -: |

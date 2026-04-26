@@ -59,10 +59,10 @@ Self-assessed skill rating for each task. Edit the **Rank** column only.
 | 47 | Implement authentication and access management | Manage risk by using Microsoft Entra ID Protection | Implement and manage multifactor authentication registration by using authentication methods and registration campaigns | 3 |
 | 48 | Implement authentication and access management | Manage risk by using Microsoft Entra ID Protection | Monitor, investigate and remediate risky users and risky sign-ins | 4 |
 | 49 | Implement authentication and access management | Manage risk by using Microsoft Entra ID Protection | Monitor, investigate, and remediate risky workload identities | 2 |
-| 50 | Implement authentication and access management | Implement Global Secure Access | Deploy Global Secure Access clients | 4 |
-| 51 | Implement authentication and access management | Implement Global Secure Access | Deploy and manage Private Access | 4 |
-| 52 | Implement authentication and access management | Implement Global Secure Access | Deploy and manage Internet Access | 4 |
-| 53 | Implement authentication and access management | Implement Global Secure Access | Deploy and manage Internet Access for Microsoft 365 | 4 |
+| 50 | Implement authentication and access management | Implement Global Secure Access | Deploy Global Secure Access clients | 5 |
+| 51 | Implement authentication and access management | Implement Global Secure Access | Deploy and manage Private Access | 5 |
+| 52 | Implement authentication and access management | Implement Global Secure Access | Deploy and manage Internet Access | 5 |
+| 53 | Implement authentication and access management | Implement Global Secure Access | Deploy and manage Internet Access for Microsoft 365 | 5 |
 | 54 | Plan and implement workload identities | Plan and implement identities for applications and Azure workloads | Select appropriate identities for applications and Azure workloads, including managed identities, service principals, user accounts, and managed service accounts | 3 |
 | 55 | Plan and implement workload identities | Plan and implement identities for applications and Azure workloads | Create managed identities | 2 |
 | 56 | Plan and implement workload identities | Plan and implement identities for applications and Azure workloads | Assign a managed identity to an Azure resource | 3 |
@@ -72,7 +72,7 @@ Self-assessed skill rating for each task. Edit the **Rank** column only.
 | 60 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Design and implement integration for on-premises apps by using Microsoft Entra Application Proxy | 4 |
 | 61 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Design and implement integration for software as a service (SaaS) apps | 2 |
 | 62 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Assign, classify, and manage users, groups, and app roles for enterprise applications | 2  |
-| 63 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Configure and manage user and admin consent | 4 |
+| 63 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Configure and manage user and admin consent | 5 |
 | 64 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Create and manage application collections | 1 |
 | 65 | Plan and implement workload identities | Plan and implement app registrations | Plan for app registrations | 3 |
 | 66 | Plan and implement workload identities | Plan and implement app registrations | Create app registrations | 3 |
