@@ -8,8 +8,9 @@
 - **Study Log:** [Session-by-session study time tracker](./StudyLog.md)
 
 <!-- STUDY_SUMMARY -->
-**Hours Committed:** 9.2h · **Days Studied:** 5
+**Hours Committed:** 11.3h · **Days Studied:** 5
 <!-- /STUDY_SUMMARY -->
+
 
 
 ---
@@ -224,7 +225,7 @@ Priority tasks ranked from [SkillRanking.md](./SkillRanking.md). Lower rank mean
 | 7 | Authentication & Access Management | Manage risk by using Microsoft Entra ID Protection | 5 | 🔲 | 🔲 | 0.0h | 🔲 |
 | 8 | Authentication & Access Management | Implement Global Secure Access | 4 | ✅ 8.6h | ✅ | 8.6h | ✅ |
 | 9 | Workload Identities | Plan and implement identities for applications and Azure workloads | 4 | 🔲 | 🔲 | 0.0h | 🔲 |
-| 10 | Workload Identities | Plan, implement, and monitor the integration of enterprise applications | 7 | 🔲 | 🔲 | 0.0h | 🔲 |
+| 10 | Workload Identities | Plan, implement, and monitor the integration of enterprise applications | 7 | ⏳ 2.1h | 🔲 | 2.1h | ⏳ |
 | 11 | Workload Identities | Plan and implement app registrations | 5 | 🔲 | 🔲 | 0.0h | 🔲 |
 | 12 | Workload Identities | Manage and monitor app access by using Microsoft Defender for Cloud Apps | 7 | 🔲 | 🔲 | 0.0h | 🔲 |
 | 13 | Identity Governance | Plan and implement entitlement management in Microsoft Entra | 7 | 🔲 | 🔲 | 0.0h | 🔲 |

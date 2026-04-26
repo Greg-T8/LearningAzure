@@ -26,20 +26,20 @@ Progress trackers, detailed study notes, practice exams, and hands-on labs:
 
 | Date | AI-103 | AZ-305 | SC-300 | Other | Total |
 |------|------|------|------|------|-------|
-| Sun, Apr 26 |  |  | 🟡 0.7h |  | **0.7h** |
+| Sun, Apr 26 |  |  | 🟣 2.8h |  | **2.8h** |
 | Sat, Apr 25 |  |  | 🟢 1.8h |  | **1.8h** |
 | Fri, Apr 24 |  |  | 🟣 3.0h |  | **3.0h** |
 | Thu, Apr 23 |  |  | 🟣 2.9h |  | **2.9h** |
 | Wed, Apr 22 |  |  | 🟡 0.8h |  | **0.8h** |
 | Tue, Apr 21 | 🟡 0.9h | 🟢 1.4h |  |  | **2.3h** |
 | Mon, Apr 20 | 🟡 0.7h | 🟢 1.1h |  |  | **1.8h** |
-| **Weekly Total** | **1.6h** | **2.5h** | **9.2h** | **0.0h** | **13.3h** |
-| ***Running Total*** | ***11.2h*** | ***25.8h*** | ***9.2h*** | ***4.9h*** | ***51.1h*** |
+| **Weekly Total** | **1.6h** | **2.5h** | **11.3h** | **0.0h** | **15.4h** |
+| ***Running Total*** | ***11.2h*** | ***25.8h*** | ***11.3h*** | ***4.9h*** | ***53.2h*** |
 
 *Activity Levels: 🟡 Low (< 1hr) | 🟢 Medium (1-2hrs) | 🟣 High (> 2hrs)*
 
 *Other = Lab workflow and automation design, content structure and development*  
 
-*Last updated: April 26, 2026 at 08:33 CDT*
+*Last updated: April 26, 2026 at 09:46 CDT*
 
 <!-- COMMIT_STATS_END -->
