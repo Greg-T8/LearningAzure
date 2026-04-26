@@ -191,24 +191,24 @@ Priority tasks ranked from [SkillRanking.md](./SkillRanking.md). Lower rank mean
 | Ranking | Tasks | Percentage |
 | :------ | ----: | ---------: |
 | Unassessed (blank) | 0 | 0.0% |
-| 1 | 7 | 7.1% |
+| 1 | 6 | 6.1% |
 | 2 | 29 | 29.6% |
 | 3 | 38 | 38.8% |
-| 4 | 24 | 24.5% |
+| 4 | 25 | 25.5% |
 | 5 | 0 | 0.0% |
 
 | # | Domain | Skill | Task | Rank |
 | -: | :----- | :---- | :--- | -: |
-| 1 | Implement authentication and access management | Implement Global Secure Access | Deploy Global Secure Access clients | 1 |
-| 2 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Configure and manage user and admin consent | 1 |
-| 3 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Create and manage application collections | 1 |
-| 4 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Plan entitlements | 1 |
-| 5 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Create and configure catalogs | 1 |
-| 6 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Manage access requests | 1 |
-| 7 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Implement and manage terms of use (ToU) | 1 |
-| 8 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure and manage built-in and custom Microsoft Entra roles | 2 |
-| 9 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure and manage administrative units | 2 |
-| 10 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Evaluate effective permissions for Microsoft Entra roles | 2 |
+| 1 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Configure and manage user and admin consent | 1 |
+| 2 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Create and manage application collections | 1 |
+| 3 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Plan entitlements | 1 |
+| 4 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Create and configure catalogs | 1 |
+| 5 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Manage access requests | 1 |
+| 6 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Implement and manage terms of use (ToU) | 1 |
+| 7 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure and manage built-in and custom Microsoft Entra roles | 2 |
+| 8 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure and manage administrative units | 2 |
+| 9 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Evaluate effective permissions for Microsoft Entra roles | 2 |
+| 10 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure Company branding settings | 2 |
 
 <!-- END FOCUS LIST -->
 
@@ -229,7 +229,7 @@ Priority tasks ranked from [SkillRanking.md](./SkillRanking.md). Lower rank mean
 | 5 | Authentication & Access Management | Plan, implement, and manage Microsoft Entra user authentication | 8 | 🔲 | 🔲 | 0.0h | 🔲 |
 | 6 | Authentication & Access Management | Plan, implement, and manage Microsoft Entra Conditional Access | 10 | ⏳ 0.7h | 🔲 | 0.7h | ⏳ |
 | 7 | Authentication & Access Management | Manage risk by using Microsoft Entra ID Protection | 5 | 🔲 | 🔲 | 0.0h | 🔲 |
-| 8 | Authentication & Access Management | Implement Global Secure Access | 4 | ⏳ 7.9h | 🔲 | 7.9h | ⏳ |
+| 8 | Authentication & Access Management | Implement Global Secure Access | 4 | ⏳ 7.9h | 🔲 | 7.9h | ✅ |
 | 9 | Workload Identities | Plan and implement identities for applications and Azure workloads | 4 | 🔲 | 🔲 | 0.0h | 🔲 |
 | 10 | Workload Identities | Plan, implement, and monitor the integration of enterprise applications | 7 | 🔲 | 🔲 | 0.0h | 🔲 |
 | 11 | Workload Identities | Plan and implement app registrations | 5 | 🔲 | 🔲 | 0.0h | 🔲 |
