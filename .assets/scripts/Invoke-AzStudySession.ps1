@@ -22,7 +22,7 @@ Program: Invoke-AzStudySession.ps1
 
 [CmdletBinding()]
 param(
-    [ValidateSet('Start', 'Stop', 'End', 'Switch')]
+    [ValidateSet('Start', 'Stop', 'End', 'Switch', 'Complete')]
     [string]$Action = 'Start',
 
     [string]$Exam,
@@ -252,6 +252,39 @@ $Main = {
             Add-SessionEntry -SessionNumber $session -StartTime $splitTime -Mode $Mode -Skill $Skill
             Push-StudyLogChange -SessionNumber $session -Type 'start' -Exam $Exam
             Show-Confirmation -Message "Study session #$session started for $Exam (switched from $sourceExam)"
+        }
+        'Complete' {
+            if (-not $Exam) {
+                throw "Exam is required when Action is 'Complete'."
+            }
+            if (-not $Skill) {
+                throw "Skill is required when Action is 'Complete'."
+            }
+
+            # WorkflowDevelopment does not use a skills list or per-skill progress tracker
+            if ($Exam -eq 'WorkflowDevelopment') {
+                throw "Action 'Complete' is not supported for WorkflowDevelopment."
+            }
+
+            Confirm-ValidExam -Exam $Exam
+            Confirm-ValidSkill -Exam $Exam -Skill $Skill
+
+            $folder = Resolve-ExamFolder -Exam $Exam
+            $readmeFile = Join-Path -Path $RepoRoot -ChildPath "$folder\README.md"
+
+            if (-not (Test-Path -Path $readmeFile)) {
+                throw "README.md not found at '$readmeFile'."
+            }
+
+            $result = Set-SkillComplete -ReadmeFile $readmeFile -Skill $Skill
+
+            if ($result.Changed) {
+                Push-ReadmeChange -Exam $Exam -Skill $Skill
+                Show-Confirmation -Message "Skill marked complete for ${Exam}: $Skill"
+            }
+            else {
+                Show-Confirmation -Message "Skill already marked complete for ${Exam}: $Skill"
+            }
         }
     }
 }
@@ -649,6 +682,111 @@ $Helpers = {
         Set-Content -Path $LogFile -Value $lines
     }
 
+    function Set-SkillComplete {
+        # Mark the matching skill as completed in the Per-Skill Progress table
+        param(
+            [Parameter(Mandatory)]
+            [string]$ReadmeFile,
+
+            [Parameter(Mandatory)]
+            [string]$Skill
+        )
+
+        $lines = Get-Content -Path $ReadmeFile -Encoding UTF8
+        $output = [System.Collections.Generic.List[string]]::new()
+        $inTracker = $false
+        $headerParsed = $false
+        $skillFound = $false
+        $changed = $false
+
+        # Column indices (set from table header)
+        $colIndices = @{}
+
+        foreach ($line in $lines) {
+            if ($line -match '^### Per-Skill Progress') {
+                $inTracker = $true
+                $output.Add($line)
+                continue
+            }
+
+            if (-not $inTracker) {
+                $output.Add($line)
+                continue
+            }
+
+            # Parse header row to find Skill and Progress column positions
+            if (-not $headerParsed -and $line -match '^\|.*Domain.*\|') {
+                $headers = ($line.TrimStart('|').TrimEnd('|')) -split '\|'
+
+                for ($i = 0; $i -lt $headers.Count; $i++) {
+                    $h = $headers[$i].Trim()
+                    if ($h -eq 'Skill') { $colIndices['Skill'] = $i }
+                    if ($h -eq 'Progress') { $colIndices['Progress'] = $i }
+                }
+
+                if (-not $colIndices.ContainsKey('Skill') -or -not $colIndices.ContainsKey('Progress')) {
+                    throw "Per-Skill Progress table in '$ReadmeFile' is missing required Skill/Progress columns."
+                }
+
+                $headerParsed = $true
+                $output.Add($line)
+                continue
+            }
+
+            # Preserve the markdown separator row
+            if ($line -match '^\|\s*[-:]+\s*\|') {
+                $output.Add($line)
+                continue
+            }
+
+            # Update only numbered data rows
+            if ($headerParsed -and $line -match '^\|\s*\d+\s*\|') {
+                $cells = ($line.TrimStart('|').TrimEnd('|')) -split '\|'
+                $skillIdx = $colIndices['Skill']
+                $progressIdx = $colIndices['Progress']
+
+                if ($cells.Count -le $skillIdx -or $cells.Count -le $progressIdx) {
+                    $output.Add($line)
+                    continue
+                }
+
+                $skillName = $cells[$skillIdx].Trim()
+                if ($skillName -eq $Skill) {
+                    $skillFound = $true
+                    $currentProgress = $cells[$progressIdx].Trim()
+
+                    if ($currentProgress -notmatch '^✅') {
+                        $cells[$progressIdx] = ' ✅ '
+                        $changed = $true
+                    }
+                }
+
+                $output.Add('|' + ($cells -join '|') + '|')
+                continue
+            }
+
+            # End parsing once the table section is complete
+            if ($headerParsed -and ($line -match '^\s*$' -or $line -match '^#')) {
+                $inTracker = $false
+            }
+
+            $output.Add($line)
+        }
+
+        if (-not $skillFound) {
+            throw "Skill '$Skill' was not found in the Per-Skill Progress table in '$ReadmeFile'."
+        }
+
+        if ($changed) {
+            $newContent = $output -join "`n"
+            Set-Content -Path $ReadmeFile -Value $newContent -Encoding UTF8 -NoNewline
+        }
+
+        return [pscustomobject]@{
+            Changed = $changed
+        }
+    }
+
     function Get-LastCommitTime {
         # Retrieve the author date of the last user commit, excluding automated [skip ci] commits
         $isoDate = git -C $RepoRoot log -1 --format=%aI --grep='\[skip ci\]' --invert-grep
@@ -678,16 +816,46 @@ $Helpers = {
         $relativeLogPath = "$folder/$logFileName"
         $commitMessage   = "docs($Exam): $Type study session #$SessionNumber"
 
-        # Stage the study log file
-        git -C $RepoRoot add -- $relativeLogPath
+        Push-FileChange -RelativePath $relativeLogPath -CommitMessage $commitMessage
+    }
+
+    function Push-ReadmeChange {
+        # Stage, commit, and push a README completion change
+        param(
+            [Parameter(Mandatory)]
+            [string]$Exam,
+
+            [Parameter(Mandatory)]
+            [string]$Skill
+        )
+
+        $folder = Resolve-ExamFolder -Exam $Exam
+        $relativeReadmePath = "$folder/README.md"
+        $commitMessage = "docs($Exam): mark skill complete - $Skill"
+
+        Push-FileChange -RelativePath $relativeReadmePath -CommitMessage $commitMessage
+    }
+
+    function Push-FileChange {
+        # Stage, commit, and push a single file change
+        param(
+            [Parameter(Mandatory)]
+            [string]$RelativePath,
+
+            [Parameter(Mandatory)]
+            [string]$CommitMessage
+        )
+
+        # Stage the target file
+        git -C $RepoRoot add -- $RelativePath
         if ($LASTEXITCODE -ne 0) {
-            throw "Failed to stage '$relativeLogPath'."
+            throw "Failed to stage '$RelativePath'."
         }
 
         # Commit the change
-        git -C $RepoRoot commit --quiet -m $commitMessage
+        git -C $RepoRoot commit --quiet -m $CommitMessage
         if ($LASTEXITCODE -ne 0) {
-            throw "Failed to commit changes for '$relativeLogPath'."
+            throw "Failed to commit changes for '$RelativePath'."
         }
 
         # Push with retry after sync

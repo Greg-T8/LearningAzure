@@ -11,14 +11,6 @@
 **Hours Committed:** 8.5h · **Days Studied:** 4
 <!-- /STUDY_SUMMARY -->
 
-
-
-
-
-
-
-
-
 ---
 
 ## 📊 Exam Coverage
@@ -229,7 +221,7 @@ Priority tasks ranked from [SkillRanking.md](./SkillRanking.md). Lower rank mean
 | 5 | Authentication & Access Management | Plan, implement, and manage Microsoft Entra user authentication | 8 | 🔲 | 🔲 | 0.0h | 🔲 |
 | 6 | Authentication & Access Management | Plan, implement, and manage Microsoft Entra Conditional Access | 10 | ⏳ 0.7h | 🔲 | 0.7h | ⏳ |
 | 7 | Authentication & Access Management | Manage risk by using Microsoft Entra ID Protection | 5 | 🔲 | 🔲 | 0.0h | 🔲 |
-| 8 | Authentication & Access Management | Implement Global Secure Access | 4 | ⏳ 7.9h | 🔲 | 7.9h | ✅ |
+| 8 | Authentication & Access Management | Implement Global Secure Access | 4 | ✅ 7.9h | 0.5h | 7.9h | ✅ |
 | 9 | Workload Identities | Plan and implement identities for applications and Azure workloads | 4 | 🔲 | 🔲 | 0.0h | 🔲 |
 | 10 | Workload Identities | Plan, implement, and monitor the integration of enterprise applications | 7 | 🔲 | 🔲 | 0.0h | 🔲 |
 | 11 | Workload Identities | Plan and implement app registrations | 5 | 🔲 | 🔲 | 0.0h | 🔲 |
