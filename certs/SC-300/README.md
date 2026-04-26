@@ -8,8 +8,9 @@
 - **Study Log:** [Session-by-session study time tracker](./StudyLog.md)
 
 <!-- STUDY_SUMMARY -->
-**Hours Committed:** 8.5h · **Days Studied:** 4
+**Hours Committed:** 9.2h · **Days Studied:** 5
 <!-- /STUDY_SUMMARY -->
+
 
 ---
 
@@ -22,11 +23,11 @@ Skill-level coverage based on [Per-Skill Progress](#per-skill-progress) completi
 | Domain | Weight | Skills | Skills Covered | Status |
 | :----- | :----- | -----: | :------------- | :----: |
 | [1. User Identities](#domain-1) | 20–25% | 4 | 0 / 4 (0%) | 🔴 |
-| [2. Authentication & Access Management](#domain-2) | 25–30% | 4 | 0 / 4 (0%) | 🔴 |
+| [2. Authentication & Access Management](#domain-2) | 25–30% | 4 | 1 / 4 (25%) | 🔴 |
 | [3. Workload Identities](#domain-3) | 20–25% | 4 | 0 / 4 (0%) | 🔴 |
 | [4. Identity Governance](#domain-4) | 20–25% | 4 | 0 / 4 (0%) | 🔴 |
 
-**Totals:** 0 / 16 skills completed
+**Totals:** 1 / 16 skills completed
 
 **Legend:** 🟢 Strong (≥66%) · 🟡 Partial (33–65%) · 🔴 Low (<33%) — "Covered" = skill completed in Per-Skill Progress
 
@@ -221,7 +222,7 @@ Priority tasks ranked from [SkillRanking.md](./SkillRanking.md). Lower rank mean
 | 5 | Authentication & Access Management | Plan, implement, and manage Microsoft Entra user authentication | 8 | 🔲 | 🔲 | 0.0h | 🔲 |
 | 6 | Authentication & Access Management | Plan, implement, and manage Microsoft Entra Conditional Access | 10 | ⏳ 0.7h | 🔲 | 0.7h | ⏳ |
 | 7 | Authentication & Access Management | Manage risk by using Microsoft Entra ID Protection | 5 | 🔲 | 🔲 | 0.0h | 🔲 |
-| 8 | Authentication & Access Management | Implement Global Secure Access | 4 | ✅ 7.9h | ✅ 0.5h | 8.4h | ✅ |
+| 8 | Authentication & Access Management | Implement Global Secure Access | 4 | ✅ 8.6h | ✅ | 8.6h | ✅ |
 | 9 | Workload Identities | Plan and implement identities for applications and Azure workloads | 4 | 🔲 | 🔲 | 0.0h | 🔲 |
 | 10 | Workload Identities | Plan, implement, and monitor the integration of enterprise applications | 7 | 🔲 | 🔲 | 0.0h | 🔲 |
 | 11 | Workload Identities | Plan and implement app registrations | 5 | 🔲 | 🔲 | 0.0h | 🔲 |
