@@ -183,24 +183,24 @@ Priority tasks ranked from [SkillRanking.md](./SkillRanking.md). Lower rank mean
 | Ranking | Tasks | Percentage |
 | :------ | ----: | ---------: |
 | Unassessed (blank) | 0 | 0.0% |
-| 1 | 6 | 6.1% |
+| 1 | 5 | 5.1% |
 | 2 | 29 | 29.6% |
 | 3 | 38 | 38.8% |
-| 4 | 25 | 25.5% |
+| 4 | 26 | 26.5% |
 | 5 | 0 | 0.0% |
 
 | # | Domain | Skill | Task | Rank |
 | -: | :----- | :---- | :--- | -: |
-| 1 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Configure and manage user and admin consent | 1 |
-| 2 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Create and manage application collections | 1 |
-| 3 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Plan entitlements | 1 |
-| 4 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Create and configure catalogs | 1 |
-| 5 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Manage access requests | 1 |
-| 6 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Implement and manage terms of use (ToU) | 1 |
-| 7 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure and manage built-in and custom Microsoft Entra roles | 2 |
-| 8 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure and manage administrative units | 2 |
-| 9 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Evaluate effective permissions for Microsoft Entra roles | 2 |
-| 10 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure Company branding settings | 2 |
+| 1 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Create and manage application collections | 1 |
+| 2 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Plan entitlements | 1 |
+| 3 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Create and configure catalogs | 1 |
+| 4 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Manage access requests | 1 |
+| 5 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Implement and manage terms of use (ToU) | 1 |
+| 6 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure and manage built-in and custom Microsoft Entra roles | 2 |
+| 7 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure and manage administrative units | 2 |
+| 8 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Evaluate effective permissions for Microsoft Entra roles | 2 |
+| 9 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure Company branding settings | 2 |
+| 10 | Implement and manage user identities | Create, configure, and manage Microsoft Entra identities | Manage custom security attributes | 2 |
 
 <!-- END FOCUS LIST -->
 

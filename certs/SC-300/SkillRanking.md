@@ -72,7 +72,7 @@ Self-assessed skill rating for each task. Edit the **Rank** column only.
 | 60 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Design and implement integration for on-premises apps by using Microsoft Entra Application Proxy | 4 |
 | 61 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Design and implement integration for software as a service (SaaS) apps | 2 |
 | 62 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Assign, classify, and manage users, groups, and app roles for enterprise applications | 2  |
-| 63 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Configure and manage user and admin consent | 1 |
+| 63 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Configure and manage user and admin consent | 4 |
 | 64 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Create and manage application collections | 1 |
 | 65 | Plan and implement workload identities | Plan and implement app registrations | Plan for app registrations | 3 |
 | 66 | Plan and implement workload identities | Plan and implement app registrations | Create app registrations | 3 |
