@@ -24,6 +24,7 @@
 
 
 
+
 > **Study workflow (two phases).** Phase 1 — work through every Microsoft Learn module in the [Learning Paths](#-learning-paths) table. Phase 2 — tackle each exam skill one-by-one.
 
 ---
