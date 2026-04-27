@@ -8,8 +8,9 @@
 - **Study Log:** [Session-by-session study time tracker](./StudyLog.md)
 
 <!-- STUDY_SUMMARY -->
-**Hours Committed:** 11.3h · **Days Studied:** 5
+**Hours Committed:** 13.8h · **Days Studied:** 6
 <!-- /STUDY_SUMMARY -->
+
 
 
 
@@ -186,24 +187,24 @@ Priority tasks ranked from [SkillRanking.md](./SkillRanking.md). Lower rank mean
 | Ranking | Tasks | Percentage |
 | :------ | ----: | ---------: |
 | Unassessed (blank) | 0 | 0.0% |
-| 1 | 5 | 5.1% |
+| 1 | 4 | 4.1% |
 | 2 | 29 | 29.6% |
 | 3 | 38 | 38.8% |
 | 4 | 21 | 21.4% |
-| 5 | 5 | 5.1% |
+| 5 | 6 | 6.1% |
 
 | # | Domain | Skill | Task | Rank |
 | -: | :----- | :---- | :--- | -: |
-| 1 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Create and manage application collections | 1 |
-| 2 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Plan entitlements | 1 |
-| 3 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Create and configure catalogs | 1 |
-| 4 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Manage access requests | 1 |
-| 5 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Implement and manage terms of use (ToU) | 1 |
-| 6 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure and manage built-in and custom Microsoft Entra roles | 2 |
-| 7 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure and manage administrative units | 2 |
-| 8 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Evaluate effective permissions for Microsoft Entra roles | 2 |
-| 9 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure Company branding settings | 2 |
-| 10 | Implement and manage user identities | Create, configure, and manage Microsoft Entra identities | Manage custom security attributes | 2 |
+| 1 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Plan entitlements | 1 |
+| 2 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Create and configure catalogs | 1 |
+| 3 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Manage access requests | 1 |
+| 4 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Implement and manage terms of use (ToU) | 1 |
+| 5 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure and manage built-in and custom Microsoft Entra roles | 2 |
+| 6 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure and manage administrative units | 2 |
+| 7 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Evaluate effective permissions for Microsoft Entra roles | 2 |
+| 8 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure Company branding settings | 2 |
+| 9 | Implement and manage user identities | Create, configure, and manage Microsoft Entra identities | Manage custom security attributes | 2 |
+| 10 | Implement and manage user identities | Create, configure, and manage Microsoft Entra identities | Manage device join and device registration in Microsoft Entra ID | 2 |
 
 <!-- END FOCUS LIST -->
 
@@ -226,10 +227,10 @@ Priority tasks ranked from [SkillRanking.md](./SkillRanking.md). Lower rank mean
 | 7 | Authentication & Access Management | Manage risk by using Microsoft Entra ID Protection | 5 | 🔲 | 🔲 | 0.0h | 🔲 |
 | 8 | Authentication & Access Management | Implement Global Secure Access | 4 | ✅ 8.6h | ✅ | 8.6h | ✅ |
 | 9 | Workload Identities | Plan and implement identities for applications and Azure workloads | 4 | 🔲 | 🔲 | 0.0h | 🔲 |
-| 10 | Workload Identities | Plan, implement, and monitor the integration of enterprise applications | 7 | ⏳ 2.1h | 🔲 | 2.1h | ⏳ |
+| 10 | Workload Identities | Plan, implement, and monitor the integration of enterprise applications | 7 | ⏳ 3.1h | 🔲 | 3.1h | ⏳ |
 | 11 | Workload Identities | Plan and implement app registrations | 5 | 🔲 | 🔲 | 0.0h | 🔲 |
 | 12 | Workload Identities | Manage and monitor app access by using Microsoft Defender for Cloud Apps | 7 | 🔲 | 🔲 | 0.0h | 🔲 |
-| 13 | Identity Governance | Plan and implement entitlement management in Microsoft Entra | 7 | 🔲 | 🔲 | 0.0h | 🔲 |
+| 13 | Identity Governance | Plan and implement entitlement management in Microsoft Entra | 7 | ⏳ 1.5h | 🔲 | 1.5h | ⏳ |
 | 14 | Identity Governance | Plan, implement, and manage access reviews in Microsoft Entra | 4 | 🔲 | 🔲 | 0.0h | 🔲 |
 | 15 | Identity Governance | Plan and implement privileged access | 6 | 🔲 | 🔲 | 0.0h | 🔲 |
 | 16 | Identity Governance | Monitor identity activity by using logs, workbooks, and reports | 5 | 🔲 | 🔲 | 0.0h | 🔲 |
