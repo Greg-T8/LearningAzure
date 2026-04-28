@@ -8,11 +8,7 @@ This log tracks individual study sessions for the **SC-300** exam. Fill in **End
 
 | # | Date | Start | End | Duration | Mode | Skill | Notes |
 |:--|:-----|:------|:----|:---------|:-----|:------|:------|
-| 10 | 4/28/26 | 4:02 AM | 6:36 AM | 2h 34m | NotebookLM | Plan and implement entitlement management in Microsoft Entra | Exam tasks completed:
-  - Plan entitlements
-  - Create and configure catalogs
-
-Next session: Pick up at "Create and configure access packages" |
+| 10 | 4/28/26 | 4:02 AM | 6:36 AM | 2h 34m | NotebookLM | Plan and implement entitlement management in Microsoft Entra | Exam tasks completed: "Plan entitlements" and "Create and configure catalogs"; next session, pick up at "Create and configure access packages" |
 | 9 | 4/27/26 | 5:14 AM | 6:42 AM | 1h 28m | NotebookLM | Plan and implement entitlement management in Microsoft Entra | Continue with "Plan entitlements" |
 | 8 | 4/27/26 | 4:12 AM | 5:13 AM | 1h 1m | NotebookLM | Plan, implement, and monitor the integration of enterprise applications | Completed "Create and manage application collections" |
 | 7 | 4/26/26 | 7:36 AM | 9:43 AM | 2h 7m | NotebookLM | Plan, implement, and monitor the integration of enterprise applications | Finished "Configure and manage user and admin consent"; Pick back up at "Create and manage application collections" |
