@@ -89,7 +89,7 @@ Self-assessed skill rating for each task. Edit the **Rank** column only.
 | 77 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Plan entitlements | 5 |
 | 78 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Create and configure catalogs | 5 |
 | 79 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Create and configure access packages | 5 |
-| 80 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Manage access requests | 1 |
+| 80 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Manage access requests | 5 |
 | 81 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Implement and manage terms of use (ToU) | 1 |
 | 82 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Manage the lifecycle of external users | 4 |
 | 83 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Configure and manage connected organizations | 3 |

@@ -183,24 +183,24 @@ Priority tasks ranked from [SkillRanking.md](./SkillRanking.md). Lower rank mean
 | Ranking | Tasks | Percentage |
 | :------ | ----: | ---------: |
 | Unassessed (blank) | 0 | 0.0% |
-| 1 | 2 | 2.0% |
+| 1 | 1 | 1.0% |
 | 2 | 28 | 28.6% |
 | 3 | 38 | 38.8% |
 | 4 | 21 | 21.4% |
-| 5 | 9 | 9.2% |
+| 5 | 10 | 10.2% |
 
 | # | Domain | Skill | Task | Rank |
 | -: | :----- | :---- | :--- | -: |
-| 1 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Manage access requests | 1 |
-| 2 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Implement and manage terms of use (ToU) | 1 |
-| 3 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure and manage built-in and custom Microsoft Entra roles | 2 |
-| 4 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure and manage administrative units | 2 |
-| 5 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Evaluate effective permissions for Microsoft Entra roles | 2 |
-| 6 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure Company branding settings | 2 |
-| 7 | Implement and manage user identities | Create, configure, and manage Microsoft Entra identities | Manage custom security attributes | 2 |
-| 8 | Implement and manage user identities | Create, configure, and manage Microsoft Entra identities | Manage device join and device registration in Microsoft Entra ID | 2 |
-| 9 | Implement and manage user identities | Implement and manage identities for external users and tenants | Configure external identity providers, including protocols such as SAML and WS-Fed | 2 |
-| 10 | Implement and manage user identities | Implement and manage hybrid identity | Implement and manage Microsoft Entra Cloud Sync | 2 |
+| 1 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Implement and manage terms of use (ToU) | 1 |
+| 2 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure and manage built-in and custom Microsoft Entra roles | 2 |
+| 3 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure and manage administrative units | 2 |
+| 4 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Evaluate effective permissions for Microsoft Entra roles | 2 |
+| 5 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure Company branding settings | 2 |
+| 6 | Implement and manage user identities | Create, configure, and manage Microsoft Entra identities | Manage custom security attributes | 2 |
+| 7 | Implement and manage user identities | Create, configure, and manage Microsoft Entra identities | Manage device join and device registration in Microsoft Entra ID | 2 |
+| 8 | Implement and manage user identities | Implement and manage identities for external users and tenants | Configure external identity providers, including protocols such as SAML and WS-Fed | 2 |
+| 9 | Implement and manage user identities | Implement and manage hybrid identity | Implement and manage Microsoft Entra Cloud Sync | 2 |
+| 10 | Implement and manage user identities | Implement and manage hybrid identity | Migrate from AD FS to other authentication and authorization mechanisms | 2 |
 
 <!-- END FOCUS LIST -->
 
