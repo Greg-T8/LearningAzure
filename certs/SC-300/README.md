@@ -192,10 +192,10 @@ Priority tasks ranked from [SkillRanking.md](./SkillRanking.md). Lower rank mean
 | :------ | ----: | ---------: |
 | Unassessed (blank) | 0 | 0.0% |
 | 1 | 2 | 2.0% |
-| 2 | 29 | 29.6% |
+| 2 | 28 | 28.6% |
 | 3 | 38 | 38.8% |
 | 4 | 21 | 21.4% |
-| 5 | 8 | 8.2% |
+| 5 | 9 | 9.2% |
 
 | # | Domain | Skill | Task | Rank |
 | -: | :----- | :---- | :--- | -: |
