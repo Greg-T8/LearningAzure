@@ -8,8 +8,9 @@
 - **Study Log:** [Session-by-session study time tracker](./StudyLog.md)
 
 <!-- STUDY_SUMMARY -->
-**Hours Committed:** 19.1h · **Days Studied:** 8
+**Hours Committed:** 21.5h · **Days Studied:** 9
 <!-- /STUDY_SUMMARY -->
+
 
 
 ---
@@ -25,9 +26,9 @@ Skill-level coverage based on [Per-Skill Progress](#per-skill-progress) completi
 | [1. User Identities](#domain-1) | 20–25% | 4 | 0 / 4 (0%) | 🔴 |
 | [2. Authentication & Access Management](#domain-2) | 25–30% | 4 | 1 / 4 (25%) | 🔴 |
 | [3. Workload Identities](#domain-3) | 20–25% | 4 | 0 / 4 (0%) | 🔴 |
-| [4. Identity Governance](#domain-4) | 20–25% | 4 | 0 / 4 (0%) | 🔴 |
+| [4. Identity Governance](#domain-4) | 20–25% | 4 | 1 / 4 (25%) | 🔴 |
 
-**Totals:** 1 / 16 skills completed
+**Totals:** 2 / 16 skills completed
 
 **Legend:** 🟢 Strong (≥66%) · 🟡 Partial (33–65%) · 🔴 Low (<33%) — "Covered" = skill completed in Per-Skill Progress
 
@@ -185,23 +186,23 @@ Priority tasks ranked from [SkillRanking.md](./SkillRanking.md). Lower rank mean
 | :------ | ----: | ---------: |
 | Unassessed (blank) | 0 | 0.0% |
 | 1 | 0 | 0.0% |
-| 2 | 28 | 28.6% |
+| 2 | 27 | 27.6% |
 | 3 | 38 | 38.8% |
 | 4 | 21 | 21.4% |
-| 5 | 11 | 11.2% |
+| 5 | 12 | 12.2% |
 
 | # | Domain | Skill | Task | Rank |
 | -: | :----- | :---- | :--- | -: |
-| 1 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure and manage built-in and custom Microsoft Entra roles | 2 |
-| 2 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure and manage administrative units | 2 |
-| 3 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Evaluate effective permissions for Microsoft Entra roles | 2 |
-| 4 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure Company branding settings | 2 |
-| 5 | Implement and manage user identities | Create, configure, and manage Microsoft Entra identities | Manage custom security attributes | 2 |
-| 6 | Implement and manage user identities | Create, configure, and manage Microsoft Entra identities | Manage device join and device registration in Microsoft Entra ID | 2 |
-| 7 | Implement and manage user identities | Implement and manage identities for external users and tenants | Configure external identity providers, including protocols such as SAML and WS-Fed | 2 |
-| 8 | Implement and manage user identities | Implement and manage hybrid identity | Implement and manage Microsoft Entra Cloud Sync | 2 |
-| 9 | Implement and manage user identities | Implement and manage hybrid identity | Migrate from AD FS to other authentication and authorization mechanisms | 2 |
-| 10 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra user authentication | Enable Microsoft Entra Kerberos authentication for hybrid identities | 2 |
+| 1 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure and manage administrative units | 2 |
+| 2 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Evaluate effective permissions for Microsoft Entra roles | 2 |
+| 3 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure Company branding settings | 2 |
+| 4 | Implement and manage user identities | Create, configure, and manage Microsoft Entra identities | Manage custom security attributes | 2 |
+| 5 | Implement and manage user identities | Create, configure, and manage Microsoft Entra identities | Manage device join and device registration in Microsoft Entra ID | 2 |
+| 6 | Implement and manage user identities | Implement and manage identities for external users and tenants | Configure external identity providers, including protocols such as SAML and WS-Fed | 2 |
+| 7 | Implement and manage user identities | Implement and manage hybrid identity | Implement and manage Microsoft Entra Cloud Sync | 2 |
+| 8 | Implement and manage user identities | Implement and manage hybrid identity | Migrate from AD FS to other authentication and authorization mechanisms | 2 |
+| 9 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra user authentication | Enable Microsoft Entra Kerberos authentication for hybrid identities | 2 |
+| 10 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Test and troubleshoot Conditional Access policies | 2 |
 
 <!-- END FOCUS LIST -->
 
@@ -215,7 +216,7 @@ Priority tasks ranked from [SkillRanking.md](./SkillRanking.md). Lower rank mean
 
 | # | Domain | Skill | Tasks | NB | PQ | Hours | Progress |
 | -: | :----- | :---- | ----: | :-: | :-: | ----: | :------- |
-| 1 | User Identities | Configure and manage a Microsoft Entra tenant | 7 | 🔲 | 🔲 | 0.0h | 🔲 |
+| 1 | User Identities | Configure and manage a Microsoft Entra tenant | 7 | ⏳ 1.3h | 🔲 | 1.3h | ⏳ |
 | 2 | User Identities | Create, configure, and manage Microsoft Entra identities | 6 | 🔲 | 🔲 | 0.0h | 🔲 |
 | 3 | User Identities | Implement and manage identities for external users and tenants | 6 | 🔲 | 🔲 | 0.0h | 🔲 |
 | 4 | User Identities | Implement and manage hybrid identity | 7 | 🔲 | 🔲 | 0.0h | 🔲 |
@@ -227,7 +228,7 @@ Priority tasks ranked from [SkillRanking.md](./SkillRanking.md). Lower rank mean
 | 10 | Workload Identities | Plan, implement, and monitor the integration of enterprise applications | 7 | ⏳ 3.1h | 🔲 | 3.1h | ⏳ |
 | 11 | Workload Identities | Plan and implement app registrations | 5 | 🔲 | 🔲 | 0.0h | 🔲 |
 | 12 | Workload Identities | Manage and monitor app access by using Microsoft Defender for Cloud Apps | 7 | 🔲 | 🔲 | 0.0h | 🔲 |
-| 13 | Identity Governance | Plan and implement entitlement management in Microsoft Entra | 7 | ⏳ 6.8h | 🔲 | 6.8h | ✅ |
+| 13 | Identity Governance | Plan and implement entitlement management in Microsoft Entra | 7 | ✅ 7.9h | 🔲 | 7.9h | ✅ |
 | 14 | Identity Governance | Plan, implement, and manage access reviews in Microsoft Entra | 4 | 🔲 | 🔲 | 0.0h | 🔲 |
 | 15 | Identity Governance | Plan and implement privileged access | 6 | 🔲 | 🔲 | 0.0h | 🔲 |
 | 16 | Identity Governance | Monitor identity activity by using logs, workbooks, and reports | 5 | 🔲 | 🔲 | 0.0h | 🔲 |

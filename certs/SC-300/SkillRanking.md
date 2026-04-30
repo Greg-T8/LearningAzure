@@ -10,7 +10,7 @@ Self-assessed skill rating for each task. Edit the **Rank** column only.
 
 | # | Domain | Skill | Task | Rank |
 | -: | :----- | :---- | :--- | :-: |
-| 1 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure and manage built-in and custom Microsoft Entra roles | 2 |
+| 1 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure and manage built-in and custom Microsoft Entra roles | 5 |
 | 2 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Recommend when to use administrative units | 4 |
 | 3 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure and manage administrative units | 2 |
 | 4 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Evaluate effective permissions for Microsoft Entra roles | 2 |
@@ -90,7 +90,7 @@ Self-assessed skill rating for each task. Edit the **Rank** column only.
 | 78 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Create and configure catalogs | 5 |
 | 79 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Create and configure access packages | 5 |
 | 80 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Manage access requests | 5 |
-| 81 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Implement and manage terms of use (ToU) | 1 |
+| 81 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Implement and manage terms of use (ToU) | 5 |
 | 82 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Manage the lifecycle of external users | 4 |
 | 83 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Configure and manage connected organizations | 3 |
 | 84 | Plan and automate identity governance | Plan, implement, and manage access reviews in Microsoft Entra | Plan for access reviews | 3 |
