@@ -12,7 +12,7 @@ Progress trackers, detailed study notes, practice exams, and hands-on labs:
 
 | Exam | Description | Status | Duration |
 |------|-------------|--------|---------|
-| 🔷 [**SC-300**](certs/SC-300/README.md) | Microsoft Identity and Access Administrator | In Progress | 4/22/26 – 4/30/26 (8d) |
+| 🔷 [**SC-300**](certs/SC-300/README.md) | Microsoft Identity and Access Administrator | In Progress | 4/22/26 – 5/1/26 (9d) |
 | 📕 [**AZ-305**](certs/AZ-305/README.md) | Azure Solutions Architect Expert | Paused | 3/30/26 – 4/28/26 (29d) |
 | 📓 [**AI-103**](certs/AI-103/README.md) | Azure AI App and Developer Associate | Paused | 4/2/26 – 4/28/26 (26d) |
 | 📗 [**AZ-104**](certs/AZ-104/README.md) | Azure Administrator Associate | Completed | 1/15/26 – 3/30/26 (74d) |
@@ -26,20 +26,20 @@ Progress trackers, detailed study notes, practice exams, and hands-on labs:
 
 | Date | SC-300 | Other | Total |
 |------|------|------|-------|
+| Fri, May 01 | 🟣 2.6h |  | **2.6h** |
 | Thu, Apr 30 | 🟣 2.4h |  | **2.4h** |
 | Wed, Apr 29 | 🟣 2.8h |  | **2.8h** |
 | Tue, Apr 28 | 🟣 2.6h |  | **2.6h** |
 | Mon, Apr 27 | 🟣 2.5h |  | **2.5h** |
 | Sun, Apr 26 | 🟣 2.8h |  | **2.8h** |
 | Sat, Apr 25 | 🟢 1.8h |  | **1.8h** |
-| Fri, Apr 24 | 🟣 3.0h |  | **3.0h** |
-| **Weekly Total** | **17.9h** | **0.0h** | **17.9h** |
-| ***Running Total*** | ***21.5h*** | ***0.0h*** | ***21.5h*** |
+| **Weekly Total** | **17.5h** | **0.0h** | **17.5h** |
+| ***Running Total*** | ***24.2h*** | ***0.0h*** | ***24.2h*** |
 
 *Activity Levels: 🟡 Low (< 1hr) | 🟢 Medium (1-2hrs) | 🟣 High (> 2hrs)*
 
 *Other = Lab workflow and automation design, content structure and development*  
 
-*Last updated: April 30, 2026 at 08:38 CDT*
+*Last updated: May 01, 2026 at 06:50 CDT*
 
 <!-- COMMIT_STATS_END -->

@@ -11,9 +11,9 @@ Self-assessed skill rating for each task. Edit the **Rank** column only.
 | # | Domain | Skill | Task | Rank |
 | -: | :----- | :---- | :--- | :-: |
 | 1 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure and manage built-in and custom Microsoft Entra roles | 5 |
-| 2 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Recommend when to use administrative units | 4 |
-| 3 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure and manage administrative units | 2 |
-| 4 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Evaluate effective permissions for Microsoft Entra roles | 2 |
+| 2 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Recommend when to use administrative units | 5 |
+| 3 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure and manage administrative units | 5 |
+| 4 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Evaluate effective permissions for Microsoft Entra roles | 5 |
 | 5 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure and manage domains in Microsoft Entra ID and Microsoft 365 | 4 |
 | 6 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure Company branding settings | 2 |
 | 7 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure tenant properties, user settings, group settings, and device settings | 3 |

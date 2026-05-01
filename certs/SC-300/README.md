@@ -8,8 +8,9 @@
 - **Study Log:** [Session-by-session study time tracker](./StudyLog.md)
 
 <!-- STUDY_SUMMARY -->
-**Hours Committed:** 21.5h · **Days Studied:** 9
+**Hours Committed:** 24.2h · **Days Studied:** 10
 <!-- /STUDY_SUMMARY -->
+
 
 
 
@@ -187,23 +188,23 @@ Priority tasks ranked from [SkillRanking.md](./SkillRanking.md). Lower rank mean
 | :------ | ----: | ---------: |
 | Unassessed (blank) | 0 | 0.0% |
 | 1 | 0 | 0.0% |
-| 2 | 27 | 27.6% |
+| 2 | 25 | 25.5% |
 | 3 | 38 | 38.8% |
-| 4 | 21 | 21.4% |
-| 5 | 12 | 12.2% |
+| 4 | 20 | 20.4% |
+| 5 | 15 | 15.3% |
 
 | # | Domain | Skill | Task | Rank |
 | -: | :----- | :---- | :--- | -: |
-| 1 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure and manage administrative units | 2 |
-| 2 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Evaluate effective permissions for Microsoft Entra roles | 2 |
-| 3 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure Company branding settings | 2 |
-| 4 | Implement and manage user identities | Create, configure, and manage Microsoft Entra identities | Manage custom security attributes | 2 |
-| 5 | Implement and manage user identities | Create, configure, and manage Microsoft Entra identities | Manage device join and device registration in Microsoft Entra ID | 2 |
-| 6 | Implement and manage user identities | Implement and manage identities for external users and tenants | Configure external identity providers, including protocols such as SAML and WS-Fed | 2 |
-| 7 | Implement and manage user identities | Implement and manage hybrid identity | Implement and manage Microsoft Entra Cloud Sync | 2 |
-| 8 | Implement and manage user identities | Implement and manage hybrid identity | Migrate from AD FS to other authentication and authorization mechanisms | 2 |
-| 9 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra user authentication | Enable Microsoft Entra Kerberos authentication for hybrid identities | 2 |
-| 10 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Test and troubleshoot Conditional Access policies | 2 |
+| 1 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure Company branding settings | 2 |
+| 2 | Implement and manage user identities | Create, configure, and manage Microsoft Entra identities | Manage custom security attributes | 2 |
+| 3 | Implement and manage user identities | Create, configure, and manage Microsoft Entra identities | Manage device join and device registration in Microsoft Entra ID | 2 |
+| 4 | Implement and manage user identities | Implement and manage identities for external users and tenants | Configure external identity providers, including protocols such as SAML and WS-Fed | 2 |
+| 5 | Implement and manage user identities | Implement and manage hybrid identity | Implement and manage Microsoft Entra Cloud Sync | 2 |
+| 6 | Implement and manage user identities | Implement and manage hybrid identity | Migrate from AD FS to other authentication and authorization mechanisms | 2 |
+| 7 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra user authentication | Enable Microsoft Entra Kerberos authentication for hybrid identities | 2 |
+| 8 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Test and troubleshoot Conditional Access policies | 2 |
+| 9 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Implement session management | 2 |
+| 10 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Implement device-enforced restrictions | 2 |
 
 <!-- END FOCUS LIST -->
 
@@ -217,7 +218,7 @@ Priority tasks ranked from [SkillRanking.md](./SkillRanking.md). Lower rank mean
 
 | # | Domain | Skill | Tasks | NB | PQ | Hours | Progress |
 | -: | :----- | :---- | ----: | :-: | :-: | ----: | :------- |
-| 1 | User Identities | Configure and manage a Microsoft Entra tenant | 7 | ⏳ 1.3h | 🔲 | 1.3h | ⏳ |
+| 1 | User Identities | Configure and manage a Microsoft Entra tenant | 7 | ⏳ 3.9h | 🔲 | 3.9h | ⏳ |
 | 2 | User Identities | Create, configure, and manage Microsoft Entra identities | 6 | 🔲 | 🔲 | 0.0h | 🔲 |
 | 3 | User Identities | Implement and manage identities for external users and tenants | 6 | 🔲 | 🔲 | 0.0h | 🔲 |
 | 4 | User Identities | Implement and manage hybrid identity | 7 | 🔲 | 🔲 | 0.0h | 🔲 |
