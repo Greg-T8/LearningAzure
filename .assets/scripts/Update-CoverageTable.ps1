@@ -12,7 +12,7 @@ For each active exam:
 
 For the root README:
   - Updates In Progress duration day counts in the certifications table.
-  - Generates a 7-day rolling activity table from StudyLog and WorkLog entries,
+  - Generates a 7-day rolling activity table from StudyLog entries,
     replacing the section between COMMIT_STATS_START/END markers.
 
 .CONTEXT
@@ -945,7 +945,7 @@ $Helpers = {
     }
 
     function Get-AllStudyLogEntry {
-        # Read study log entries for active exams and WorkLog, returning flat list of date/exam/duration objects
+        # Read study log entries for active exams, returning flat list of date/exam/duration objects
         param(
             [string[]]$ExamNames
         )
@@ -955,18 +955,13 @@ $Helpers = {
         $culture = [System.Globalization.CultureInfo]::InvariantCulture
         $styles = [System.Globalization.DateTimeStyles]::None
 
-        # Collect log files: one per active exam plus the WorkLog for Other
+        # Collect log files: one StudyLog per active exam
         $logSources = [System.Collections.Generic.List[object]]::new()
         foreach ($exam in $ExamNames) {
             $logPath = Join-Path -Path $RepoRoot -ChildPath "certs\$exam\StudyLog.md"
             if (Test-Path -Path $logPath) {
                 $logSources.Add([PSCustomObject]@{ Path = $logPath; Exam = $exam })
             }
-        }
-
-        $workLogPath = Join-Path -Path $RepoRoot -ChildPath '.assets\workflow-development\WorkLog.md'
-        if (Test-Path -Path $workLogPath) {
-            $logSources.Add([PSCustomObject]@{ Path = $workLogPath; Exam = 'Other' })
         }
 
         foreach ($source in $logSources) {
@@ -1111,21 +1106,12 @@ $Helpers = {
 
         # Calculate running totals since each certification start date
         $running = @{}
-        $earliestStart = ($CertStartDates.Values | Sort-Object | Select-Object -First 1)
-
         foreach ($entry in $Entries) {
             $exam = $entry.Exam
 
             if ($CertStartDates.ContainsKey($exam)) {
                 # Only count entries on or after the cert start date
                 if ($entry.Date -ge $CertStartDates[$exam]) {
-                    if (-not $running.ContainsKey($exam)) { $running[$exam] = 0.0 }
-                    $running[$exam] += $entry.DurationHours
-                }
-            }
-            elseif ($exam -eq 'Other') {
-                # Other counts from the earliest cert start date
-                if ($null -ne $earliestStart -and $entry.Date -ge $earliestStart) {
                     if (-not $running.ContainsKey($exam)) { $running[$exam] = 0.0 }
                     $running[$exam] += $entry.DurationHours
                 }
@@ -1146,7 +1132,6 @@ $Helpers = {
 
         # Add legend and metadata
         $table += "`n*Activity Levels: 🟡 Low (< 1hr) | 🟢 Medium (1-2hrs) | 🟣 High (> 2hrs)*`n"
-        $table += "`n*Other = Lab workflow and automation design, content structure and development*  `n"
 
         # Add timestamp in Central timezone
         try {
@@ -1171,9 +1156,9 @@ $Helpers = {
             [string[]]$ExamNames
         )
 
-        [string[]]$tableColumns = @($ExamNames | Sort-Object) + @('Other')
+        [string[]]$tableColumns = @($ExamNames | Sort-Object)
 
-        # Gather all study log entries across active exams and WorkLog
+        # Gather all study log entries across active exams
         $allEntries = Get-AllStudyLogEntry -ExamNames $ExamNames
 
         # Parse certification start dates for running totals

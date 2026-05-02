@@ -24,22 +24,20 @@ Progress trackers, detailed study notes, practice exams, and hands-on labs:
 <!-- COMMIT_STATS_START -->
 ## 📈 Recent Activity (Last 7 Days)
 
-| Date | SC-300 | Other | Total |
-|------|------|------|-------|
-| Sat, May 02 | 🟣 2.4h |  | **2.4h** |
-| Fri, May 01 | 🟣 2.6h |  | **2.6h** |
-| Thu, Apr 30 | 🟣 2.4h |  | **2.4h** |
-| Wed, Apr 29 | 🟣 2.8h |  | **2.8h** |
-| Tue, Apr 28 | 🟣 2.6h |  | **2.6h** |
-| Mon, Apr 27 | 🟣 2.5h |  | **2.5h** |
-| Sun, Apr 26 | 🟣 2.8h |  | **2.8h** |
-| **Weekly Total** | **18.1h** | **0.0h** | **18.1h** |
-| ***Running Total*** | ***26.6h*** | ***0.0h*** | ***26.6h*** |
+| Date | SC-300 | Total |
+|------|------|-------|
+| Sat, May 02 | 🟣 2.4h | **2.4h** |
+| Fri, May 01 | 🟣 2.6h | **2.6h** |
+| Thu, Apr 30 | 🟣 2.4h | **2.4h** |
+| Wed, Apr 29 | 🟣 2.8h | **2.8h** |
+| Tue, Apr 28 | 🟣 2.6h | **2.6h** |
+| Mon, Apr 27 | 🟣 2.5h | **2.5h** |
+| Sun, Apr 26 | 🟣 2.8h | **2.8h** |
+| **Weekly Total** | **18.1h** | **18.1h** |
+| ***Running Total*** | ***26.6h*** | ***26.6h*** |
 
 *Activity Levels: 🟡 Low (< 1hr) | 🟢 Medium (1-2hrs) | 🟣 High (> 2hrs)*
 
-*Other = Lab workflow and automation design, content structure and development*  
-
-*Last updated: May 02, 2026 at 06:14 CDT*
+*Last updated: May 02, 2026 at 06:22 CDT*
 
 <!-- COMMIT_STATS_END -->
