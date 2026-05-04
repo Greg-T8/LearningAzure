@@ -8,7 +8,7 @@ This log tracks individual study sessions for the **SC-300** exam. Fill in **End
 
 | # | Date | Start | End | Duration | Mode | Skill | Notes |
 |:--|:-----|:------|:----|:---------|:-----|:------|:------|
-| 16 | 5/4/26 | 4:40 AM |  |  | NotebookLM | Create, configure, and manage Microsoft Entra identities |  |
+| 16 | 5/4/26 | 4:40 AM | 6:38 AM | 1h 58m | NotebookLM | Create, configure, and manage Microsoft Entra identities | Completed exam task "Manage custom security attributes"; pick up at "Manage device join and device registration in Microsoft Entra ID" |
 | 15 | 5/2/26 | 3:49 AM | 6:13 AM | 2h 24m | NotebookLM | Configure and manage a Microsoft Entra tenant | Completed exam tasks "Configure Company branding settings"; pick up at "Manage custom security attributes" |
 | 14 | 5/1/26 | 4:03 AM | 6:40 AM | 2h 37m | NotebookLM | Configure and manage a Microsoft Entra tenant | Completed exam tasks "Recommend when to use administrative units", "Configure and manage administrative units", and "Evaluate effective permissions for Microsoft Entra roles"; pick up at "Configure Company branding settings" |
 | 13 | 4/30/26 | 5:12 AM | 6:30 AM | 1h 18m | NotebookLM | Configure and manage a Microsoft Entra tenant | Completed exam task "Configure and manage built-in and custom Microsoft Entra roles"; pick up next at "Recommend when to use administrative units" |
