@@ -187,23 +187,23 @@ Priority tasks ranked from [SkillRanking.md](./SkillRanking.md). Lower rank mean
 | :------ | ----: | ---------: |
 | Unassessed (blank) | 0 | 0.0% |
 | 1 | 0 | 0.0% |
-| 2 | 23 | 23.5% |
+| 2 | 22 | 22.4% |
 | 3 | 38 | 38.8% |
 | 4 | 20 | 20.4% |
-| 5 | 17 | 17.3% |
+| 5 | 18 | 18.4% |
 
 | # | Domain | Skill | Task | Rank |
 | -: | :----- | :---- | :--- | -: |
-| 1 | Implement and manage user identities | Create, configure, and manage Microsoft Entra identities | Manage device join and device registration in Microsoft Entra ID | 2 |
-| 2 | Implement and manage user identities | Implement and manage identities for external users and tenants | Configure external identity providers, including protocols such as SAML and WS-Fed | 2 |
-| 3 | Implement and manage user identities | Implement and manage hybrid identity | Implement and manage Microsoft Entra Cloud Sync | 2 |
-| 4 | Implement and manage user identities | Implement and manage hybrid identity | Migrate from AD FS to other authentication and authorization mechanisms | 2 |
-| 5 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra user authentication | Enable Microsoft Entra Kerberos authentication for hybrid identities | 2 |
-| 6 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Test and troubleshoot Conditional Access policies | 2 |
-| 7 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Implement session management | 2 |
-| 8 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Implement device-enforced restrictions | 2 |
-| 9 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Implement continuous access evaluation | 2 |
-| 10 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Configure authentication context | 2 |
+| 1 | Implement and manage user identities | Implement and manage identities for external users and tenants | Configure external identity providers, including protocols such as SAML and WS-Fed | 2 |
+| 2 | Implement and manage user identities | Implement and manage hybrid identity | Implement and manage Microsoft Entra Cloud Sync | 2 |
+| 3 | Implement and manage user identities | Implement and manage hybrid identity | Migrate from AD FS to other authentication and authorization mechanisms | 2 |
+| 4 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra user authentication | Enable Microsoft Entra Kerberos authentication for hybrid identities | 2 |
+| 5 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Test and troubleshoot Conditional Access policies | 2 |
+| 6 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Implement session management | 2 |
+| 7 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Implement device-enforced restrictions | 2 |
+| 8 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Implement continuous access evaluation | 2 |
+| 9 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Configure authentication context | 2 |
+| 10 | Implement authentication and access management | Manage risk by using Microsoft Entra ID Protection | Monitor, investigate, and remediate risky workload identities | 2 |
 
 <!-- END FOCUS LIST -->
 

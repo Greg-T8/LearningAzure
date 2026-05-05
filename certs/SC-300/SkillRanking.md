@@ -21,7 +21,7 @@ Self-assessed skill rating for each task. Edit the **Rank** column only.
 | 9 | Implement and manage user identities | Create, configure, and manage Microsoft Entra identities | Create, configure, and manage groups | 4 |
 | 10 | Implement and manage user identities | Create, configure, and manage Microsoft Entra identities | Manage custom security attributes | 5 |
 | 11 | Implement and manage user identities | Create, configure, and manage Microsoft Entra identities | Automate bulk operations by using the Microsoft Entra admin center and PowerShell | 3 |
-| 12 | Implement and manage user identities | Create, configure, and manage Microsoft Entra identities | Manage device join and device registration in Microsoft Entra ID | 2 |
+| 12 | Implement and manage user identities | Create, configure, and manage Microsoft Entra identities | Manage device join and device registration in Microsoft Entra ID | 5 |
 | 13 | Implement and manage user identities | Create, configure, and manage Microsoft Entra identities | Assign, modify, and report on licenses | 4 |
 | 14 | Implement and manage user identities | Implement and manage identities for external users and tenants | Manage External collaboration settings in Microsoft Entra ID | 3 |
 | 15 | Implement and manage user identities | Implement and manage identities for external users and tenants | Invite external users, individually or in bulk | 4 |
