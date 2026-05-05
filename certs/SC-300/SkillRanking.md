@@ -28,7 +28,7 @@ Self-assessed skill rating for each task. Edit the **Rank** column only.
 | 16 | Implement and manage user identities | Implement and manage identities for external users and tenants | Manage external user accounts in Microsoft Entra ID | 3 |
 | 17 | Implement and manage user identities | Implement and manage identities for external users and tenants | Implement Cross-tenant access settings | 3 |
 | 18 | Implement and manage user identities | Implement and manage identities for external users and tenants | Implement and manage cross-tenant synchronization | 3 |
-| 19 | Implement and manage user identities | Implement and manage identities for external users and tenants | Configure external identity providers, including protocols such as SAML and WS-Fed | 2 |
+| 19 | Implement and manage user identities | Implement and manage identities for external users and tenants | Configure external identity providers, including protocols such as SAML and WS-Fed | 5 |
 | 20 | Implement and manage user identities | Implement and manage hybrid identity | Implement and manage Microsoft Entra Connect Sync | 3 |
 | 21 | Implement and manage user identities | Implement and manage hybrid identity | Implement and manage Microsoft Entra Cloud Sync | 2 |
 | 22 | Implement and manage user identities | Implement and manage hybrid identity | Implement and manage password hash synchronization | 3 |
