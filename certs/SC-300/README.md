@@ -8,8 +8,9 @@
 - **Study Log:** [Session-by-session study time tracker](./StudyLog.md)
 
 <!-- STUDY_SUMMARY -->
-**Hours Committed:** 28.5h · **Days Studied:** 12
+**Hours Committed:** 31.3h · **Days Studied:** 13
 <!-- /STUDY_SUMMARY -->
+
 
 
 
@@ -218,8 +219,8 @@ Priority tasks ranked from [SkillRanking.md](./SkillRanking.md). Lower rank mean
 | # | Domain | Skill | Tasks | NB | PQ | Hours | Progress |
 | -: | :----- | :---- | ----: | :-: | :-: | ----: | :------- |
 | 1 | User Identities | Configure and manage a Microsoft Entra tenant | 7 | ⏳ 6.3h | 🔲 | 6.3h | ⏳ |
-| 2 | User Identities | Create, configure, and manage Microsoft Entra identities | 6 | ⏳ 2.0h | 🔲 | 2.0h | ⏳ |
-| 3 | User Identities | Implement and manage identities for external users and tenants | 6 | 🔲 | 🔲 | 0.0h | 🔲 |
+| 2 | User Identities | Create, configure, and manage Microsoft Entra identities | 6 | ⏳ 3.4h | 🔲 | 3.4h | ⏳ |
+| 3 | User Identities | Implement and manage identities for external users and tenants | 6 | ⏳ 1.3h | 🔲 | 1.3h | ⏳ |
 | 4 | User Identities | Implement and manage hybrid identity | 7 | 🔲 | 🔲 | 0.0h | 🔲 |
 | 5 | Authentication & Access Management | Plan, implement, and manage Microsoft Entra user authentication | 8 | 🔲 | 🔲 | 0.0h | 🔲 |
 | 6 | Authentication & Access Management | Plan, implement, and manage Microsoft Entra Conditional Access | 10 | ⏳ 0.7h | 🔲 | 0.7h | ⏳ |
