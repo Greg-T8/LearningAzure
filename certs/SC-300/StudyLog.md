@@ -8,6 +8,7 @@ This log tracks individual study sessions for the **SC-300** exam. Fill in **End
 
 | # | Date | Start | End | Duration | Mode | Skill | Notes |
 |:--|:-----|:------|:----|:---------|:-----|:------|:------|
+| 20 | 5/6/26 | 5:34 AM |  |  | NotebookLM | Implement and manage hybrid identity |  |
 | 19 | 5/6/26 | 4:14 AM | 5:33 AM | 1h 19m | NotebookLM | Implement and manage hybrid identity | Completed exam task "Implement and manage Microsoft Entra Cloud Sync" |
 | 18 | 5/5/26 | 5:24 AM | 6:40 AM | 1h 16m | NotebookLM | Implement and manage identities for external users and tenants | Completed exam task "Configure external identity providers, including protocols such as SAML and WS-Fed"; pick up next at "Implement and manage Microsoft Entra Cloud Sync" |
 | 17 | 5/5/26 | 3:54 AM | 5:23 AM | 1h 29m | NotebookLM | Create, configure, and manage Microsoft Entra identities | Completed exam task "Manage device join and device registration in Microsoft Entra ID" |
