@@ -188,23 +188,23 @@ Priority tasks ranked from [SkillRanking.md](./SkillRanking.md). Lower rank mean
 | :------ | ----: | ---------: |
 | Unassessed (blank) | 0 | 0.0% |
 | 1 | 0 | 0.0% |
-| 2 | 21 | 21.4% |
+| 2 | 19 | 19.4% |
 | 3 | 38 | 38.8% |
 | 4 | 20 | 20.4% |
-| 5 | 19 | 19.4% |
+| 5 | 21 | 21.4% |
 
 | # | Domain | Skill | Task | Rank |
 | -: | :----- | :---- | :--- | -: |
-| 1 | Implement and manage user identities | Implement and manage hybrid identity | Implement and manage Microsoft Entra Cloud Sync | 2 |
-| 2 | Implement and manage user identities | Implement and manage hybrid identity | Migrate from AD FS to other authentication and authorization mechanisms | 2 |
-| 3 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra user authentication | Enable Microsoft Entra Kerberos authentication for hybrid identities | 2 |
-| 4 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Test and troubleshoot Conditional Access policies | 2 |
-| 5 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Implement session management | 2 |
-| 6 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Implement device-enforced restrictions | 2 |
-| 7 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Implement continuous access evaluation | 2 |
-| 8 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Configure authentication context | 2 |
-| 9 | Implement authentication and access management | Manage risk by using Microsoft Entra ID Protection | Monitor, investigate, and remediate risky workload identities | 2 |
-| 10 | Plan and implement workload identities | Plan and implement identities for applications and Azure workloads | Create managed identities | 2 |
+| 1 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra user authentication | Enable Microsoft Entra Kerberos authentication for hybrid identities | 2 |
+| 2 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Test and troubleshoot Conditional Access policies | 2 |
+| 3 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Implement session management | 2 |
+| 4 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Implement device-enforced restrictions | 2 |
+| 5 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Implement continuous access evaluation | 2 |
+| 6 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Configure authentication context | 2 |
+| 7 | Implement authentication and access management | Manage risk by using Microsoft Entra ID Protection | Monitor, investigate, and remediate risky workload identities | 2 |
+| 8 | Plan and implement workload identities | Plan and implement identities for applications and Azure workloads | Create managed identities | 2 |
+| 9 | Plan and implement workload identities | Plan and implement identities for applications and Azure workloads | Use a managed identity assigned to an Azure resource to access other Azure resources | 2 |
+| 10 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Design and implement integration for software as a service (SaaS) apps | 2 |
 
 <!-- END FOCUS LIST -->
 

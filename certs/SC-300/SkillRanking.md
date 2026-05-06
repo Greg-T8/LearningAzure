@@ -30,11 +30,11 @@ Self-assessed skill rating for each task. Edit the **Rank** column only.
 | 18 | Implement and manage user identities | Implement and manage identities for external users and tenants | Implement and manage cross-tenant synchronization | 3 |
 | 19 | Implement and manage user identities | Implement and manage identities for external users and tenants | Configure external identity providers, including protocols such as SAML and WS-Fed | 5 |
 | 20 | Implement and manage user identities | Implement and manage hybrid identity | Implement and manage Microsoft Entra Connect Sync | 3 |
-| 21 | Implement and manage user identities | Implement and manage hybrid identity | Implement and manage Microsoft Entra Cloud Sync | 2 |
+| 21 | Implement and manage user identities | Implement and manage hybrid identity | Implement and manage Microsoft Entra Cloud Sync | 5 |
 | 22 | Implement and manage user identities | Implement and manage hybrid identity | Implement and manage password hash synchronization | 3 |
 | 23 | Implement and manage user identities | Implement and manage hybrid identity | Implement and manage pass-through authentication | 3 |
 | 24 | Implement and manage user identities | Implement and manage hybrid identity | Implement and manage seamless single sign-on (SSO) | 3 |
-| 25 | Implement and manage user identities | Implement and manage hybrid identity | Migrate from AD FS to other authentication and authorization mechanisms | 2 |
+| 25 | Implement and manage user identities | Implement and manage hybrid identity | Migrate from AD FS to other authentication and authorization mechanisms | 5 |
 | 26 | Implement and manage user identities | Implement and manage hybrid identity | Implement and manage Microsoft Entra Connect Health | 3 |
 | 27 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra user authentication | Plan for authentication | 3 |
 | 28 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra user authentication | Implement and manage authentication methods, including certificate-based authentication, Temporary Access Pass, OAuth 2.0 tokens, Microsoft Authenticator, and passkeys (FIDO2) | 3 |
