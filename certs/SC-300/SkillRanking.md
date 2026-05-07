@@ -43,7 +43,7 @@ Self-assessed skill rating for each task. Edit the **Rank** column only.
 | 31 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra user authentication | Implement and manage Windows Hello for Business | 3 |
 | 32 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra user authentication | Disable accounts and revoke user sessions | 4 |
 | 33 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra user authentication | Implement and manage Microsoft Entra password protection | 3 |
-| 34 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra user authentication | Enable Microsoft Entra Kerberos authentication for hybrid identities | 2 |
+| 34 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra user authentication | Enable Microsoft Entra Kerberos authentication for hybrid identities | 5 |
 | 35 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Plan Conditional Access policies | 3 |
 | 36 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Implement Conditional Access policy assignments | 3 |
 | 37 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Implement Conditional Access policy controls | 3 |
