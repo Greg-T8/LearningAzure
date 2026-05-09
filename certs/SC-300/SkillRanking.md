@@ -49,7 +49,7 @@ Self-assessed skill rating for each task. Edit the **Rank** column only.
 | 37 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Implement Conditional Access policy controls | 3 |
 | 38 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Test and troubleshoot Conditional Access policies | 5 |
 | 39 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Implement session management | 5 |
-| 40 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Implement device-enforced restrictions | 2 |
+| 40 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Implement device-enforced restrictions | 5 |
 | 41 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Implement continuous access evaluation | 2 |
 | 42 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Configure authentication context | 2 |
 | 43 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Implement protected actions | 4 |

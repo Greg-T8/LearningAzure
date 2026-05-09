@@ -193,23 +193,23 @@ Priority tasks ranked from [SkillRanking.md](./SkillRanking.md). Lower rank mean
 | :------ | ----: | ---------: |
 | Unassessed (blank) | 0 | 0.0% |
 | 1 | 0 | 0.0% |
-| 2 | 16 | 16.3% |
+| 2 | 15 | 15.3% |
 | 3 | 38 | 38.8% |
 | 4 | 20 | 20.4% |
-| 5 | 24 | 24.5% |
+| 5 | 25 | 25.5% |
 
 | # | Domain | Skill | Task | Rank |
 | -: | :----- | :---- | :--- | -: |
-| 1 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Implement device-enforced restrictions | 2 |
-| 2 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Implement continuous access evaluation | 2 |
-| 3 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Configure authentication context | 2 |
-| 4 | Implement authentication and access management | Manage risk by using Microsoft Entra ID Protection | Monitor, investigate, and remediate risky workload identities | 2 |
-| 5 | Plan and implement workload identities | Plan and implement identities for applications and Azure workloads | Create managed identities | 2 |
-| 6 | Plan and implement workload identities | Plan and implement identities for applications and Azure workloads | Use a managed identity assigned to an Azure resource to access other Azure resources | 2 |
-| 7 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Design and implement integration for software as a service (SaaS) apps | 2 |
-| 8 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Assign, classify, and manage users, groups, and app roles for enterprise applications | 2 |
-| 9 | Plan and implement workload identities | Plan and implement app registrations | Create app roles | 2 |
-| 10 | Plan and implement workload identities | Manage and monitor app access by using Microsoft Defender for Cloud Apps | Implement application-enforced restrictions | 2 |
+| 1 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Implement continuous access evaluation | 2 |
+| 2 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Configure authentication context | 2 |
+| 3 | Implement authentication and access management | Manage risk by using Microsoft Entra ID Protection | Monitor, investigate, and remediate risky workload identities | 2 |
+| 4 | Plan and implement workload identities | Plan and implement identities for applications and Azure workloads | Create managed identities | 2 |
+| 5 | Plan and implement workload identities | Plan and implement identities for applications and Azure workloads | Use a managed identity assigned to an Azure resource to access other Azure resources | 2 |
+| 6 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Design and implement integration for software as a service (SaaS) apps | 2 |
+| 7 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Assign, classify, and manage users, groups, and app roles for enterprise applications | 2 |
+| 8 | Plan and implement workload identities | Plan and implement app registrations | Create app roles | 2 |
+| 9 | Plan and implement workload identities | Manage and monitor app access by using Microsoft Defender for Cloud Apps | Implement application-enforced restrictions | 2 |
+| 10 | Plan and implement workload identities | Manage and monitor app access by using Microsoft Defender for Cloud Apps | Configure Conditional Access app control | 2 |
 
 <!-- END FOCUS LIST -->
 
