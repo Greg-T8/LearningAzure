@@ -8,6 +8,7 @@ This log tracks individual study sessions for the **SC-300** exam. Fill in **End
 
 | # | Date | Start | End | Duration | Mode | Skill | Notes |
 |:--|:-----|:------|:----|:---------|:-----|:------|:------|
+| 26 | 5/10/26 | 7:32 AM |  |  | NotebookLM | Manage risk by using Microsoft Entra ID Protection |  |
 | 25 | 5/10/26 | 6:11 AM | 7:31 AM | 1h 20m | NotebookLM | Plan, implement, and manage Microsoft Entra Conditional Access | Completed exam task "Configure authentication context" |
 | 24 | 5/9/26 | 4:30 AM | 7:30 AM | 3h 0m | NotebookLM | Plan, implement, and manage Microsoft Entra Conditional Access | Completed exam tasks "Implement device-enforced restrictions" and "Implement continuous access evaluation"; pick up next at "Configure authentication context" |
 | 23 | 5/8/26 | 4:01 AM | 6:32 AM | 2h 31m | NotebookLM | Plan, implement, and manage Microsoft Entra Conditional Access | Completed exam tasks "Test and troubleshoot Conditional Access policies" and "Implement session management"; pick up at "Implement device-enforced restrictions" |
