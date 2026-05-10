@@ -26,18 +26,18 @@ Progress trackers, detailed study notes, practice exams, and hands-on labs:
 
 | Date | SC-300 | Total |
 |------|------|-------|
-| Sun, May 10 | 🟢 1.3h | **1.3h** |
+| Sun, May 10 | 🟣 2.3h | **2.3h** |
 | Sat, May 09 | 🟣 3.0h | **3.0h** |
 | Fri, May 08 | 🟣 2.5h | **2.5h** |
 | Thu, May 07 | 🟣 2.3h | **2.3h** |
 | Wed, May 06 | 🟣 2.5h | **2.5h** |
 | Tue, May 05 | 🟣 2.8h | **2.8h** |
 | Mon, May 04 | 🟢 2.0h | **2.0h** |
-| **Weekly Total** | **16.4h** | **16.4h** |
-| ***Running Total*** | ***42.9h*** | ***42.9h*** |
+| **Weekly Total** | **17.4h** | **17.4h** |
+| ***Running Total*** | ***43.9h*** | ***43.9h*** |
 
 *Activity Levels: 🟡 Low (< 1hr) | 🟢 Medium (1-2hrs) | 🟣 High (> 2hrs)*
 
-*Last updated: May 10, 2026 at 07:35 CDT*
+*Last updated: May 10, 2026 at 08:34 CDT*
 
 <!-- COMMIT_STATS_END -->
