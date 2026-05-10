@@ -58,7 +58,7 @@ Self-assessed skill rating for each task. Edit the **Rank** column only.
 | 46 | Implement authentication and access management | Manage risk by using Microsoft Entra ID Protection | Implement and manage sign-in risk by using Microsoft Entra ID Protection or Conditional Access policies | 4 |
 | 47 | Implement authentication and access management | Manage risk by using Microsoft Entra ID Protection | Implement and manage multifactor authentication registration by using authentication methods and registration campaigns | 3 |
 | 48 | Implement authentication and access management | Manage risk by using Microsoft Entra ID Protection | Monitor, investigate and remediate risky users and risky sign-ins | 4 |
-| 49 | Implement authentication and access management | Manage risk by using Microsoft Entra ID Protection | Monitor, investigate, and remediate risky workload identities | 2 |
+| 49 | Implement authentication and access management | Manage risk by using Microsoft Entra ID Protection | Monitor, investigate, and remediate risky workload identities | 5 |
 | 50 | Implement authentication and access management | Implement Global Secure Access | Deploy Global Secure Access clients | 5 |
 | 51 | Implement authentication and access management | Implement Global Secure Access | Deploy and manage Private Access | 5 |
 | 52 | Implement authentication and access management | Implement Global Secure Access | Deploy and manage Internet Access | 5 |
