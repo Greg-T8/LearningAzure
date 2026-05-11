@@ -8,8 +8,9 @@
 - **Study Log:** [Session-by-session study time tracker](./StudyLog.md)
 
 <!-- STUDY_SUMMARY -->
-**Hours Committed:** 43.9h · **Days Studied:** 18
+**Hours Committed:** 46.4h · **Days Studied:** 19
 <!-- /STUDY_SUMMARY -->
+
 
 ---
 
@@ -185,9 +186,9 @@ Priority tasks ranked from [SkillRanking.md](./SkillRanking.md). Lower rank mean
 | Unassessed (blank) | 0 | 0.0% |
 | 1 | 7 | 7.1% |
 | 2 | 5 | 5.1% |
-| 3 | 35 | 35.7% |
+| 3 | 36 | 36.7% |
 | 4 | 20 | 20.4% |
-| 5 | 31 | 31.6% |
+| 5 | 30 | 30.6% |
 
 | # | Domain | Skill | Task | Rank |
 | -: | :----- | :---- | :--- | -: |
@@ -222,7 +223,7 @@ Priority tasks ranked from [SkillRanking.md](./SkillRanking.md). Lower rank mean
 | 6 | Authentication & Access Management | Plan, implement, and manage Microsoft Entra Conditional Access | 10 | ⏳ 8.7h | 🔲 | 8.7h | ⏳ |
 | 7 | Authentication & Access Management | Manage risk by using Microsoft Entra ID Protection | 5 | ⏳ 1.0h | 🔲 | 1.0h | ⏳ |
 | 8 | Authentication & Access Management | Implement Global Secure Access | 4 | ✅ 8.6h | ✅ | 8.6h | ✅ |
-| 9 | Workload Identities | Plan and implement identities for applications and Azure workloads | 4 | 🔲 | 🔲 | 0.0h | 🔲 |
+| 9 | Workload Identities | Plan and implement identities for applications and Azure workloads | 4 | ⏳ 2.5h | 🔲 | 2.5h | ⏳ |
 | 10 | Workload Identities | Plan, implement, and monitor the integration of enterprise applications | 7 | ⏳ 3.1h | 🔲 | 3.1h | ⏳ |
 | 11 | Workload Identities | Plan and implement app registrations | 5 | 🔲 | 🔲 | 0.0h | 🔲 |
 | 12 | Workload Identities | Manage and monitor app access by using Microsoft Defender for Cloud Apps | 7 | 🔲 | 🔲 | 0.0h | 🔲 |

@@ -64,9 +64,9 @@ Self-assessed skill rating for each task. Edit the **Rank** column only.
 | 52 | Implement authentication and access management | Implement Global Secure Access | Deploy and manage Internet Access | 5 |
 | 53 | Implement authentication and access management | Implement Global Secure Access | Deploy and manage Internet Access for Microsoft 365 | 5 |
 | 54 | Plan and implement workload identities | Plan and implement identities for applications and Azure workloads | Select appropriate identities for applications and Azure workloads, including managed identities, service principals, user accounts, and managed service accounts | 3 |
-| 55 | Plan and implement workload identities | Plan and implement identities for applications and Azure workloads | Create managed identities | 2 |
+| 55 | Plan and implement workload identities | Plan and implement identities for applications and Azure workloads | Create managed identities | 5 |
 | 56 | Plan and implement workload identities | Plan and implement identities for applications and Azure workloads | Assign a managed identity to an Azure resource | 3 |
-| 57 | Plan and implement workload identities | Plan and implement identities for applications and Azure workloads | Use a managed identity assigned to an Azure resource to access other Azure resources | 2 |
+| 57 | Plan and implement workload identities | Plan and implement identities for applications and Azure workloads | Use a managed identity assigned to an Azure resource to access other Azure resources | 5 |
 | 58 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Plan and implement settings for enterprise applications, including application-level and tenant-level settings | 3 |
 | 59 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Assign appropriate Microsoft Entra roles to users to manage enterprise applications | 3 |
 | 60 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Design and implement integration for on-premises apps by using Microsoft Entra Application Proxy | 4 |
