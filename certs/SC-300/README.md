@@ -11,19 +11,6 @@
 **Hours Committed:** 43.9h · **Days Studied:** 18
 <!-- /STUDY_SUMMARY -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
 
 ## 📊 Exam Coverage
@@ -197,10 +184,10 @@ Priority tasks ranked from [SkillRanking.md](./SkillRanking.md). Lower rank mean
 | :------ | ----: | ---------: |
 | Unassessed (blank) | 0 | 0.0% |
 | 1 | 7 | 7.1% |
-| 2 | 7 | 7.1% |
-| 3 | 36 | 36.7% |
+| 2 | 5 | 5.1% |
+| 3 | 35 | 35.7% |
 | 4 | 20 | 20.4% |
-| 5 | 28 | 28.6% |
+| 5 | 31 | 31.6% |
 
 | # | Domain | Skill | Task | Rank |
 | -: | :----- | :---- | :--- | -: |
@@ -211,9 +198,9 @@ Priority tasks ranked from [SkillRanking.md](./SkillRanking.md). Lower rank mean
 | 5 | Plan and implement workload identities | Manage and monitor app access by using Microsoft Defender for Cloud Apps | Create access and session policies in Defender for Cloud Apps | 1 |
 | 6 | Plan and implement workload identities | Manage and monitor app access by using Microsoft Defender for Cloud Apps | Implement and manage policies for OAuth apps | 1 |
 | 7 | Plan and implement workload identities | Manage and monitor app access by using Microsoft Defender for Cloud Apps | Manage the Cloud app catalog | 1 |
-| 8 | Plan and implement workload identities | Plan and implement identities for applications and Azure workloads | Create managed identities | 2 |
-| 9 | Plan and implement workload identities | Plan and implement identities for applications and Azure workloads | Use a managed identity assigned to an Azure resource to access other Azure resources | 2 |
-| 10 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Design and implement integration for software as a service (SaaS) apps | 2 |
+| 8 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Design and implement integration for software as a service (SaaS) apps | 2 |
+| 9 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Assign, classify, and manage users, groups, and app roles for enterprise applications | 2 |
+| 10 | Plan and implement workload identities | Plan and implement app registrations | Create app roles | 2 |
 
 <!-- END FOCUS LIST -->
 
