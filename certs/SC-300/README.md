@@ -11,8 +11,6 @@
 **Hours Committed:** 46.4h · **Days Studied:** 19
 <!-- /STUDY_SUMMARY -->
 
-
-
 ---
 
 ## 📊 Exam Coverage
@@ -185,24 +183,24 @@ Priority tasks ranked from [SkillRanking.md](./SkillRanking.md). Lower rank mean
 | Ranking | Tasks | Percentage |
 | :------ | ----: | ---------: |
 | Unassessed (blank) | 0 | 0.0% |
-| 1 | 7 | 7.1% |
+| 1 | 6 | 6.1% |
 | 2 | 5 | 5.1% |
 | 3 | 36 | 36.7% |
 | 4 | 20 | 20.4% |
-| 5 | 30 | 30.6% |
+| 5 | 31 | 31.6% |
 
 | # | Domain | Skill | Task | Rank |
 | -: | :----- | :---- | :--- | -: |
-| 1 | Plan and implement workload identities | Manage and monitor app access by using Microsoft Defender for Cloud Apps | Configure and analyze cloud discovery results by using Defender for Cloud Apps | 1 |
-| 2 | Plan and implement workload identities | Manage and monitor app access by using Microsoft Defender for Cloud Apps | Configure connected apps | 1 |
-| 3 | Plan and implement workload identities | Manage and monitor app access by using Microsoft Defender for Cloud Apps | Implement application-enforced restrictions | 1 |
-| 4 | Plan and implement workload identities | Manage and monitor app access by using Microsoft Defender for Cloud Apps | Configure Conditional Access app control | 1 |
-| 5 | Plan and implement workload identities | Manage and monitor app access by using Microsoft Defender for Cloud Apps | Create access and session policies in Defender for Cloud Apps | 1 |
-| 6 | Plan and implement workload identities | Manage and monitor app access by using Microsoft Defender for Cloud Apps | Implement and manage policies for OAuth apps | 1 |
-| 7 | Plan and implement workload identities | Manage and monitor app access by using Microsoft Defender for Cloud Apps | Manage the Cloud app catalog | 1 |
-| 8 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Design and implement integration for software as a service (SaaS) apps | 2 |
-| 9 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Assign, classify, and manage users, groups, and app roles for enterprise applications | 2 |
-| 10 | Plan and implement workload identities | Plan and implement app registrations | Create app roles | 2 |
+| 1 | Plan and implement workload identities | Manage and monitor app access by using Microsoft Defender for Cloud Apps | Configure connected apps | 1 |
+| 2 | Plan and implement workload identities | Manage and monitor app access by using Microsoft Defender for Cloud Apps | Implement application-enforced restrictions | 1 |
+| 3 | Plan and implement workload identities | Manage and monitor app access by using Microsoft Defender for Cloud Apps | Configure Conditional Access app control | 1 |
+| 4 | Plan and implement workload identities | Manage and monitor app access by using Microsoft Defender for Cloud Apps | Create access and session policies in Defender for Cloud Apps | 1 |
+| 5 | Plan and implement workload identities | Manage and monitor app access by using Microsoft Defender for Cloud Apps | Implement and manage policies for OAuth apps | 1 |
+| 6 | Plan and implement workload identities | Manage and monitor app access by using Microsoft Defender for Cloud Apps | Manage the Cloud app catalog | 1 |
+| 7 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Design and implement integration for software as a service (SaaS) apps | 2 |
+| 8 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Assign, classify, and manage users, groups, and app roles for enterprise applications | 2 |
+| 9 | Plan and implement workload identities | Plan and implement app registrations | Create app roles | 2 |
+| 10 | Plan and automate identity governance | Plan, implement, and manage access reviews in Microsoft Entra | Manually respond to access review activity | 2 |
 
 <!-- END FOCUS LIST -->
 
