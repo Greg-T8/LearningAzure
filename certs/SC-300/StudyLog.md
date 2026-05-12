@@ -8,7 +8,7 @@ This log tracks individual study sessions for the **SC-300** exam. Fill in **End
 
 | # | Date | Start | End | Duration | Mode | Skill | Notes |
 |:--|:-----|:------|:----|:---------|:-----|:------|:------|
-| 28 | 5/12/26 | 4:14 AM |  |  | NotebookLM | Manage and monitor app access by using Microsoft Defender for Cloud Apps |  |
+| 28 | 5/12/26 | 4:14 AM | 6:13 AM | 1h 59m | NotebookLM | Manage and monitor app access by using Microsoft Defender for Cloud Apps | Completed exam task "Configure and analyze cloud discovery results by using Defender for Cloud Apps"; pick up at "Configure connected apps" |
 | 27 | 5/11/26 | 4:03 AM | 6:35 AM | 2h 32m | NotebookLM | Plan and implement identities for applications and Azure workloads | Completed exam tasks "Create managed identities" and "Use a managed identity assigned to an Azure resource to access other Azure resources"; pick up next at "Configure and analyze cloud discovery results by using Defender for Cloud Apps" |
 | 26 | 5/10/26 | 7:32 AM | 8:32 AM | 1h 0m | NotebookLM | Manage risk by using Microsoft Entra ID Protection | Completed exam task "Monitor, investigate, and remediate risky workload identities"; pick up at "Create managed identities" |
 | 25 | 5/10/26 | 6:11 AM | 7:31 AM | 1h 20m | NotebookLM | Plan, implement, and manage Microsoft Entra Conditional Access | Completed exam task "Configure authentication context" |
