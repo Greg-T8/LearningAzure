@@ -205,26 +205,6 @@ Priority tasks ranked from [SkillRanking.md](./SkillRanking.md). Lower rank mean
 | 8 | Plan and automate identity governance | Monitor identity activity by using logs, workbooks, and reports | Monitor and improve the security posture by using Identity Secure Score | 2 |
 | 9 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure tenant properties, user settings, group settings, and device settings | 3 |
 | 10 | Implement and manage user identities | Create, configure, and manage Microsoft Entra identities | Automate bulk operations by using the Microsoft Entra admin center and PowerShell | 3 |
-| 11 | Implement and manage user identities | Implement and manage identities for external users and tenants | Manage External collaboration settings in Microsoft Entra ID | 3 |
-| 12 | Implement and manage user identities | Implement and manage identities for external users and tenants | Manage external user accounts in Microsoft Entra ID | 3 |
-| 13 | Implement and manage user identities | Implement and manage identities for external users and tenants | Implement Cross-tenant access settings | 3 |
-| 14 | Implement and manage user identities | Implement and manage identities for external users and tenants | Implement and manage cross-tenant synchronization | 3 |
-| 15 | Implement and manage user identities | Implement and manage hybrid identity | Implement and manage Microsoft Entra Connect Sync | 3 |
-| 16 | Implement and manage user identities | Implement and manage hybrid identity | Implement and manage password hash synchronization | 3 |
-| 17 | Implement and manage user identities | Implement and manage hybrid identity | Implement and manage pass-through authentication | 3 |
-| 18 | Implement and manage user identities | Implement and manage hybrid identity | Implement and manage seamless single sign-on (SSO) | 3 |
-| 19 | Implement and manage user identities | Implement and manage hybrid identity | Implement and manage Microsoft Entra Connect Health | 3 |
-| 20 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra user authentication | Plan for authentication | 3 |
-| 21 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra user authentication | Implement and manage authentication methods, including certificate-based authentication, Temporary Access Pass, OAuth 2.0 tokens, Microsoft Authenticator, and passkeys (FIDO2) | 3 |
-| 22 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra user authentication | Implement and manage Windows Hello for Business | 3 |
-| 23 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra user authentication | Implement and manage Microsoft Entra password protection | 3 |
-| 24 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Plan Conditional Access policies | 3 |
-| 25 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Implement Conditional Access policy assignments | 3 |
-| 26 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Implement Conditional Access policy controls | 3 |
-| 27 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Create a Conditional Access policy from a template | 3 |
-| 28 | Implement authentication and access management | Manage risk by using Microsoft Entra ID Protection | Implement and manage multifactor authentication registration by using authentication methods and registration campaigns | 3 |
-| 29 | Plan and implement workload identities | Plan and implement identities for applications and Azure workloads | Select appropriate identities for applications and Azure workloads, including managed identities, service principals, user accounts, and managed service accounts | 3 |
-| 30 | Plan and implement workload identities | Plan and implement identities for applications and Azure workloads | Assign a managed identity to an Azure resource | 3 |
 
 <!-- END FOCUS LIST -->
 
