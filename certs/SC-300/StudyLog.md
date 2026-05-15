@@ -8,7 +8,7 @@ This log tracks individual study sessions for the **SC-300** exam. Fill in **End
 
 | # | Date | Start | End | Duration | Mode | Skill | Notes |
 |:--|:-----|:------|:----|:---------|:-----|:------|:------|
-| 31 | 5/15/26 | 3:48 AM |  |  | NotebookLM | Manage and monitor app access by using Microsoft Defender for Cloud Apps |  |
+| 31 | 5/15/26 | 3:48 AM | 6:08 AM | 2h 20m | NotebookLM | Manage and monitor app access by using Microsoft Defender for Cloud Apps | Completed exam tasks "Implement and manage policies for OAuth apps" and "Create access and session policies in Defender for Cloud Apps"; pick up next at "Manage the Cloud app catalog" |
 | 30 | 5/14/26 | 4:07 AM | 6:02 AM | 1h 55m | NotebookLM | Manage and monitor app access by using Microsoft Defender for Cloud Apps | Completed exam tasks "Implement application-enforced restrictions" and "Configure Conditional Access app control"; pick up next at "Create access and session policies in Defender for Cloud Apps" |
 | 29 | 5/13/26 | 4:05 AM | 6:33 AM | 2h 28m | NotebookLM | Manage and monitor app access by using Microsoft Defender for Cloud Apps | Completed exam task "Configure connected apps"; pick up next at "Implement application-enforced restrictions" |
 | 28 | 5/12/26 | 4:14 AM | 6:13 AM | 1h 59m | NotebookLM | Manage and monitor app access by using Microsoft Defender for Cloud Apps | Completed exam task "Configure and analyze cloud discovery results by using Defender for Cloud Apps"; pick up at "Configure connected apps" |
