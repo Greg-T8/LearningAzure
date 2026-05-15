@@ -84,7 +84,7 @@ Self-assessed skill rating for each task. Edit the **Rank** column only.
 | 72 | Plan and implement workload identities | Manage and monitor app access by using Microsoft Defender for Cloud Apps | Implement application-enforced restrictions | 5 |
 | 73 | Plan and implement workload identities | Manage and monitor app access by using Microsoft Defender for Cloud Apps | Configure Conditional Access app control | 5 |
 | 74 | Plan and implement workload identities | Manage and monitor app access by using Microsoft Defender for Cloud Apps | Create access and session policies in Defender for Cloud Apps | 5 |
-| 75 | Plan and implement workload identities | Manage and monitor app access by using Microsoft Defender for Cloud Apps | Implement and manage policies for OAuth apps | 1 |
+| 75 | Plan and implement workload identities | Manage and monitor app access by using Microsoft Defender for Cloud Apps | Implement and manage policies for OAuth apps | 5 |
 | 76 | Plan and implement workload identities | Manage and monitor app access by using Microsoft Defender for Cloud Apps | Manage the Cloud app catalog | 1 |
 | 77 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Plan entitlements | 5 |
 | 78 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Create and configure catalogs | 5 |
