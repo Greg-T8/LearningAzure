@@ -13,6 +13,7 @@
 
 
 
+
 ---
 
 ## 📊 Exam Coverage
@@ -25,10 +26,10 @@ Skill-level coverage based on [Per-Skill Progress](#per-skill-progress) completi
 | :----- | :----- | -----: | :------------- | :----: |
 | [1. User Identities](#domain-1) | 20–25% | 4 | 0 / 4 (0%) | 🔴 |
 | [2. Authentication & Access Management](#domain-2) | 25–30% | 4 | 1 / 4 (25%) | 🔴 |
-| [3. Workload Identities](#domain-3) | 20–25% | 4 | 0 / 4 (0%) | 🔴 |
+| [3. Workload Identities](#domain-3) | 20–25% | 4 | 1 / 4 (25%) | 🔴 |
 | [4. Identity Governance](#domain-4) | 20–25% | 4 | 1 / 4 (25%) | 🔴 |
 
-**Totals:** 2 / 16 skills completed
+**Totals:** 3 / 16 skills completed
 
 **Legend:** 🟢 Strong (≥66%) · 🟡 Partial (33–65%) · 🔴 Low (<33%) — "Covered" = skill completed in Per-Skill Progress
 
