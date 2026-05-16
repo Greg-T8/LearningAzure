@@ -227,7 +227,7 @@ Priority tasks ranked from [SkillRanking.md](./SkillRanking.md). Lower rank mean
 | 9 | Workload Identities | Plan and implement identities for applications and Azure workloads | 4 | ⏳ 2.5h | 🔲 | 2.5h | ⏳ |
 | 10 | Workload Identities | Plan, implement, and monitor the integration of enterprise applications | 7 | ⏳ 3.1h | 🔲 | 3.1h | ⏳ |
 | 11 | Workload Identities | Plan and implement app registrations | 5 | 🔲 | 🔲 | 0.0h | 🔲 |
-| 12 | Workload Identities | Manage and monitor app access by using Microsoft Defender for Cloud Apps | 7 | ⏳ 8.7h | 🔲 | 8.7h | ⏳ |
+| 12 | Workload Identities | Manage and monitor app access by using Microsoft Defender for Cloud Apps | 7 | ⏳ 8.7h | 🔲 | 8.7h | ✅ |
 | 13 | Identity Governance | Plan and implement entitlement management in Microsoft Entra | 7 | ✅ 7.9h | 🔲 | 7.9h | ✅ |
 | 14 | Identity Governance | Plan, implement, and manage access reviews in Microsoft Entra | 4 | 🔲 | 🔲 | 0.0h | 🔲 |
 | 15 | Identity Governance | Plan and implement privileged access | 6 | 🔲 | 🔲 | 0.0h | 🔲 |
