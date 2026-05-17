@@ -188,8 +188,8 @@ Priority tasks ranked from [SkillRanking.md](./SkillRanking.md). Lower rank mean
 | Unassessed (blank) | 0 | 0.0% |
 | 1 | 0 | 0.0% |
 | 2 | 5 | 5.1% |
-| 3 | 36 | 36.7% |
-| 4 | 20 | 20.4% |
+| 3 | 35 | 35.7% |
+| 4 | 21 | 21.4% |
 | 5 | 37 | 37.8% |
 
 | # | Domain | Skill | Task | Rank |
@@ -199,81 +199,11 @@ Priority tasks ranked from [SkillRanking.md](./SkillRanking.md). Lower rank mean
 | 3 | Plan and implement workload identities | Plan and implement app registrations | Create app roles | 2 |
 | 4 | Plan and automate identity governance | Plan, implement, and manage access reviews in Microsoft Entra | Manually respond to access review activity | 2 |
 | 5 | Plan and automate identity governance | Monitor identity activity by using logs, workbooks, and reports | Monitor and improve the security posture by using Identity Secure Score | 2 |
-| 6 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure tenant properties, user settings, group settings, and device settings | 3 |
-| 7 | Implement and manage user identities | Create, configure, and manage Microsoft Entra identities | Automate bulk operations by using the Microsoft Entra admin center and PowerShell | 3 |
-| 8 | Implement and manage user identities | Implement and manage identities for external users and tenants | Manage External collaboration settings in Microsoft Entra ID | 3 |
-| 9 | Implement and manage user identities | Implement and manage identities for external users and tenants | Manage external user accounts in Microsoft Entra ID | 3 |
-| 10 | Implement and manage user identities | Implement and manage identities for external users and tenants | Implement Cross-tenant access settings | 3 |
-| 11 | Implement and manage user identities | Implement and manage identities for external users and tenants | Implement and manage cross-tenant synchronization | 3 |
-| 12 | Implement and manage user identities | Implement and manage hybrid identity | Implement and manage Microsoft Entra Connect Sync | 3 |
-| 13 | Implement and manage user identities | Implement and manage hybrid identity | Implement and manage password hash synchronization | 3 |
-| 14 | Implement and manage user identities | Implement and manage hybrid identity | Implement and manage pass-through authentication | 3 |
-| 15 | Implement and manage user identities | Implement and manage hybrid identity | Implement and manage seamless single sign-on (SSO) | 3 |
-| 16 | Implement and manage user identities | Implement and manage hybrid identity | Implement and manage Microsoft Entra Connect Health | 3 |
-| 17 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra user authentication | Plan for authentication | 3 |
-| 18 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra user authentication | Implement and manage authentication methods, including certificate-based authentication, Temporary Access Pass, OAuth 2.0 tokens, Microsoft Authenticator, and passkeys (FIDO2) | 3 |
-| 19 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra user authentication | Implement and manage Windows Hello for Business | 3 |
-| 20 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra user authentication | Implement and manage Microsoft Entra password protection | 3 |
-| 21 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Plan Conditional Access policies | 3 |
-| 22 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Implement Conditional Access policy assignments | 3 |
-| 23 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Implement Conditional Access policy controls | 3 |
-| 24 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Create a Conditional Access policy from a template | 3 |
-| 25 | Implement authentication and access management | Manage risk by using Microsoft Entra ID Protection | Implement and manage multifactor authentication registration by using authentication methods and registration campaigns | 3 |
-| 26 | Plan and implement workload identities | Plan and implement identities for applications and Azure workloads | Select appropriate identities for applications and Azure workloads, including managed identities, service principals, user accounts, and managed service accounts | 3 |
-| 27 | Plan and implement workload identities | Plan and implement identities for applications and Azure workloads | Assign a managed identity to an Azure resource | 3 |
-| 28 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Plan and implement settings for enterprise applications, including application-level and tenant-level settings | 3 |
-| 29 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Assign appropriate Microsoft Entra roles to users to manage enterprise applications | 3 |
-| 30 | Plan and implement workload identities | Plan and implement app registrations | Plan for app registrations | 3 |
-| 31 | Plan and implement workload identities | Plan and implement app registrations | Create app registrations | 3 |
-| 32 | Plan and implement workload identities | Plan and implement app registrations | Configure app authentication | 3 |
-| 33 | Plan and implement workload identities | Plan and implement app registrations | Configure API permissions | 3 |
-| 34 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Configure and manage connected organizations | 3 |
-| 35 | Plan and automate identity governance | Plan, implement, and manage access reviews in Microsoft Entra | Plan for access reviews | 3 |
-| 36 | Plan and automate identity governance | Plan, implement, and manage access reviews in Microsoft Entra | Create and configure access reviews | 3 |
-| 37 | Plan and automate identity governance | Plan, implement, and manage access reviews in Microsoft Entra | Monitor access review activity | 3 |
-| 38 | Plan and automate identity governance | Plan and implement privileged access | Analyze PIM audit history and reports | 3 |
-| 39 | Plan and automate identity governance | Plan and implement privileged access | Create and manage break-glass accounts | 3 |
-| 40 | Plan and automate identity governance | Monitor identity activity by using logs, workbooks, and reports | Review and analyze sign-in, audit, and provisioning logs by using the Microsoft Entra admin center | 3 |
-| 41 | Plan and automate identity governance | Monitor identity activity by using logs, workbooks, and reports | Analyze Microsoft Entra ID by using workbooks and reporting | 3 |
-| 42 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure and manage domains in Microsoft Entra ID and Microsoft 365 | 4 |
-| 43 | Implement and manage user identities | Create, configure, and manage Microsoft Entra identities | Create, configure, and manage users | 4 |
-| 44 | Implement and manage user identities | Create, configure, and manage Microsoft Entra identities | Create, configure, and manage groups | 4 |
-| 45 | Implement and manage user identities | Create, configure, and manage Microsoft Entra identities | Assign, modify, and report on licenses | 4 |
-| 46 | Implement and manage user identities | Implement and manage identities for external users and tenants | Invite external users, individually or in bulk | 4 |
-| 47 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra user authentication | Implement and manage tenant-wide multifactor authentication (MFA) settings | 4 |
-| 48 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra user authentication | Configure and deploy self-service password reset (SSPR) | 4 |
-| 49 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra user authentication | Disable accounts and revoke user sessions | 4 |
-| 50 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Implement protected actions | 4 |
-| 51 | Implement authentication and access management | Manage risk by using Microsoft Entra ID Protection | Implement and manage user risk by using Microsoft Entra ID Protection or Conditional Access policies | 4 |
-| 52 | Implement authentication and access management | Manage risk by using Microsoft Entra ID Protection | Implement and manage sign-in risk by using Microsoft Entra ID Protection or Conditional Access policies | 4 |
-| 53 | Implement authentication and access management | Manage risk by using Microsoft Entra ID Protection | Monitor, investigate and remediate risky users and risky sign-ins | 4 |
-| 54 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Design and implement integration for on-premises apps by using Microsoft Entra Application Proxy | 4 |
-| 55 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Manage the lifecycle of external users | 4 |
-| 56 | Plan and automate identity governance | Plan and implement privileged access | Plan and manage Microsoft Entra roles in Microsoft Entra Privileged Identity Management (PIM), including settings and assignments | 4 |
-| 57 | Plan and automate identity governance | Plan and implement privileged access | Plan and manage Azure resources in PIM, including settings and assignments | 4 |
-| 58 | Plan and automate identity governance | Plan and implement privileged access | Plan and configure PIM for Groups | 4 |
-| 59 | Plan and automate identity governance | Plan and implement privileged access | Manage the PIM request and approval process | 4 |
-| 60 | Plan and automate identity governance | Monitor identity activity by using logs, workbooks, and reports | Configure diagnostic settings, including configuring destinations such as Log Analytics workspaces, storage accounts, and Azure Event Hubs | 4 |
-| 61 | Plan and automate identity governance | Monitor identity activity by using logs, workbooks, and reports | Monitor Microsoft Entra ID by using KQL queries in Log Analytics | 4 |
-| 62 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure and manage built-in and custom Microsoft Entra roles | 5 |
-| 63 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Recommend when to use administrative units | 5 |
-| 64 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure and manage administrative units | 5 |
-| 65 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Evaluate effective permissions for Microsoft Entra roles | 5 |
-| 66 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure Company branding settings | 5 |
-| 67 | Implement and manage user identities | Create, configure, and manage Microsoft Entra identities | Manage custom security attributes | 5 |
-| 68 | Implement and manage user identities | Create, configure, and manage Microsoft Entra identities | Manage device join and device registration in Microsoft Entra ID | 5 |
-| 69 | Implement and manage user identities | Implement and manage identities for external users and tenants | Configure external identity providers, including protocols such as SAML and WS-Fed | 5 |
-| 70 | Implement and manage user identities | Implement and manage hybrid identity | Implement and manage Microsoft Entra Cloud Sync | 5 |
-| 71 | Implement and manage user identities | Implement and manage hybrid identity | Migrate from AD FS to other authentication and authorization mechanisms | 5 |
-| 72 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra user authentication | Enable Microsoft Entra Kerberos authentication for hybrid identities | 5 |
-| 73 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Test and troubleshoot Conditional Access policies | 5 |
-| 74 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Implement session management | 5 |
-| 75 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Implement device-enforced restrictions | 5 |
-| 76 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Implement continuous access evaluation | 5 |
-| 77 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Configure authentication context | 5 |
-| 78 | Implement authentication and access management | Manage risk by using Microsoft Entra ID Protection | Monitor, investigate, and remediate risky workload identities | 5 |
-| 79 | Implement authentication and access management | Implement Global Secure Access | Deploy Global Secure Access clients | 5 |
-| 80 | Implement authentication and access management | Implement Global Secure Access | Deploy and manage Private Access | 5 |
+| 6 | Implement and manage user identities | Create, configure, and manage Microsoft Entra identities | Automate bulk operations by using the Microsoft Entra admin center and PowerShell | 3 |
+| 7 | Implement and manage user identities | Implement and manage identities for external users and tenants | Manage External collaboration settings in Microsoft Entra ID | 3 |
+| 8 | Implement and manage user identities | Implement and manage identities for external users and tenants | Manage external user accounts in Microsoft Entra ID | 3 |
+| 9 | Implement and manage user identities | Implement and manage identities for external users and tenants | Implement Cross-tenant access settings | 3 |
+| 10 | Implement and manage user identities | Implement and manage identities for external users and tenants | Implement and manage cross-tenant synchronization | 3 |
 
 <!-- END FOCUS LIST -->
 
@@ -288,7 +218,7 @@ Priority tasks ranked from [SkillRanking.md](./SkillRanking.md). Lower rank mean
 | # | Domain | Skill | Tasks | NB | PQ | Hours | Progress |
 | -: | :----- | :---- | ----: | :-: | :-: | ----: | :------- |
 | 1 | User Identities | Configure and manage a Microsoft Entra tenant | 7 | ⏳ 6.3h | 🔲 | 6.3h | ⏳ |
-| 2 | User Identities | Create, configure, and manage Microsoft Entra identities | 6 | ⏳ 3.4h | 🔲 | 3.4h | ⏳ |
+| 2 | User Identities | Create, configure, and manage Microsoft Entra identities | 6 | ⏳ 3.4h | 🔲 | 3.4h | ✅ |
 | 3 | User Identities | Implement and manage identities for external users and tenants | 6 | ⏳ 2.4h | 🔲 | 2.4h | ⏳ |
 | 4 | User Identities | Implement and manage hybrid identity | 7 | ⏳ 1.3h | 🔲 | 1.3h | ⏳ |
 | 5 | Authentication & Access Management | Plan, implement, and manage Microsoft Entra user authentication | 8 | ⏳ 1.1h | 🔲 | 1.1h | ⏳ |
