@@ -8,7 +8,7 @@ This log tracks individual study sessions for the **SC-300** exam. Fill in **End
 
 | # | Date | Start | End | Duration | Mode | Skill | Notes |
 |:--|:-----|:------|:----|:---------|:-----|:------|:------|
-| 33 | 5/17/26 | 5:51 AM |  |  | NotebookLM | Create, configure, and manage Microsoft Entra identities |  |
+| 33 | 5/17/26 | 5:51 AM | 6:48 AM | 0h 57m | NotebookLM | Create, configure, and manage Microsoft Entra identities | auto-closed at last commit |
 | 32 | 5/16/26 | 5:05 AM | 7:30 AM | 2h 25m | NotebookLM | Manage and monitor app access by using Microsoft Defender for Cloud Apps | Completed exam task "Manage the Cloud app catalog"; pick up next at penultimate week topics  |
 | 31 | 5/15/26 | 3:48 AM | 6:08 AM | 2h 20m | NotebookLM | Manage and monitor app access by using Microsoft Defender for Cloud Apps | Completed exam tasks "Implement and manage policies for OAuth apps" and "Create access and session policies in Defender for Cloud Apps"; pick up next at "Manage the Cloud app catalog" |
 | 30 | 5/14/26 | 4:07 AM | 6:02 AM | 1h 55m | NotebookLM | Manage and monitor app access by using Microsoft Defender for Cloud Apps | Completed exam tasks "Implement application-enforced restrictions" and "Configure Conditional Access app control"; pick up next at "Create access and session policies in Defender for Cloud Apps" |
