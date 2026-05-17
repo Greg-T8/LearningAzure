@@ -16,18 +16,18 @@ Self-assessed skill rating for each task. Edit the **Rank** column only.
 | 4 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Evaluate effective permissions for Microsoft Entra roles | 5 |
 | 5 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure and manage domains in Microsoft Entra ID and Microsoft 365 | 4 |
 | 6 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure Company branding settings | 5 |
-| 7 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure tenant properties, user settings, group settings, and device settings | 3 |
+| 7 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure tenant properties, user settings, group settings, and device settings | 4 |
 | 8 | Implement and manage user identities | Create, configure, and manage Microsoft Entra identities | Create, configure, and manage users | 4 |
 | 9 | Implement and manage user identities | Create, configure, and manage Microsoft Entra identities | Create, configure, and manage groups | 4 |
 | 10 | Implement and manage user identities | Create, configure, and manage Microsoft Entra identities | Manage custom security attributes | 5 |
 | 11 | Implement and manage user identities | Create, configure, and manage Microsoft Entra identities | Automate bulk operations by using the Microsoft Entra admin center and PowerShell | 3 |
 | 12 | Implement and manage user identities | Create, configure, and manage Microsoft Entra identities | Manage device join and device registration in Microsoft Entra ID | 5 |
 | 13 | Implement and manage user identities | Create, configure, and manage Microsoft Entra identities | Assign, modify, and report on licenses | 4 |
-| 14 | Implement and manage user identities | Implement and manage identities for external users and tenants | Manage External collaboration settings in Microsoft Entra ID | 3 |
+| 14 | Implement and manage user identities | Implement and manage identities for external users and tenants | Manage External collaboration settings in Microsoft Entra ID | 4 |
 | 15 | Implement and manage user identities | Implement and manage identities for external users and tenants | Invite external users, individually or in bulk | 4 |
-| 16 | Implement and manage user identities | Implement and manage identities for external users and tenants | Manage external user accounts in Microsoft Entra ID | 3 |
-| 17 | Implement and manage user identities | Implement and manage identities for external users and tenants | Implement Cross-tenant access settings | 3 |
-| 18 | Implement and manage user identities | Implement and manage identities for external users and tenants | Implement and manage cross-tenant synchronization | 3 |
+| 16 | Implement and manage user identities | Implement and manage identities for external users and tenants | Manage external user accounts in Microsoft Entra ID | 4 |
+| 17 | Implement and manage user identities | Implement and manage identities for external users and tenants | Implement Cross-tenant access settings | 4 |
+| 18 | Implement and manage user identities | Implement and manage identities for external users and tenants | Implement and manage cross-tenant synchronization | 4 |
 | 19 | Implement and manage user identities | Implement and manage identities for external users and tenants | Configure external identity providers, including protocols such as SAML and WS-Fed | 5 |
 | 20 | Implement and manage user identities | Implement and manage hybrid identity | Implement and manage Microsoft Entra Connect Sync | 3 |
 | 21 | Implement and manage user identities | Implement and manage hybrid identity | Implement and manage Microsoft Entra Cloud Sync | 5 |

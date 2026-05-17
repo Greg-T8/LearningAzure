@@ -1,5 +1,6 @@
 
 # Day 1 - Sunday
+
 - Fundamentals
 - Device Identities
 - Enterprise Users
@@ -28,8 +29,17 @@
 * Implement and manage cross-tenant synchronization
 * Invite external users, individually or in bulk
 
-
 # Day 2 - Monday
+
+Documentation
+
+- Hybrid Identity
+- Architecture
+- Authentication
+- Device Identities
+- Windows 11 Security Book
+- Enterprise Users
+- Entra PowerShell
 
 ### Implement and manage hybrid identity
 
@@ -51,7 +61,6 @@
 * Configure and deploy self-service password reset (SSPR)
 * Disable accounts and revoke user sessions
 
-
 # Day 3 - Tuesday
 
 ### Plan, implement, and manage Microsoft Entra Conditional Access
@@ -68,7 +77,6 @@
 * Implement and manage user risk by using Microsoft Entra ID Protection or Conditional Access policies
 * Implement and manage sign-in risk by using Microsoft Entra ID Protection or Conditional Access policies
 * Monitor, investigate and remediate risky users and risky sign-ins
-
 
 # Day 4 - Wednesday
 
@@ -87,7 +95,6 @@
 * Assign appropriate Microsoft Entra roles to users to manage enterprise applications
 * Design and implement integration for on-premises apps by using Microsoft Entra Application Proxy
 
-
 # Day 5 - Thursday
 
 ### Plan and implement app registrations
@@ -104,7 +111,6 @@
 
 * Configure and manage connected organizations
 * Manage the lifecycle of external users
-
 
 # Day 6 - Friday
 
@@ -123,7 +129,6 @@
 * Plan and manage Azure resources in PIM, including settings and assignments
 * Plan and configure PIM for Groups
 * Manage the PIM request and approval process
-
 
 # Day 7 - Saturday
 

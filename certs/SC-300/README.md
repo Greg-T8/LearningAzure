@@ -8,8 +8,10 @@
 - **Study Log:** [Session-by-session study time tracker](./StudyLog.md)
 
 <!-- STUDY_SUMMARY -->
-**Hours Committed:** 58.5h · **Days Studied:** 25
+**Hours Committed:** 59.8h · **Days Studied:** 25
 <!-- /STUDY_SUMMARY -->
+
+
 
 
 
@@ -25,12 +27,12 @@ Skill-level coverage based on [Per-Skill Progress](#per-skill-progress) completi
 
 | Domain | Weight | Skills | Skills Covered | Status |
 | :----- | :----- | -----: | :------------- | :----: |
-| [1. User Identities](#domain-1) | 20–25% | 4 | 1 / 4 (25%) | 🔴 |
+| [1. User Identities](#domain-1) | 20–25% | 4 | 2 / 4 (50%) | 🟡 |
 | [2. Authentication & Access Management](#domain-2) | 25–30% | 4 | 1 / 4 (25%) | 🔴 |
 | [3. Workload Identities](#domain-3) | 20–25% | 4 | 1 / 4 (25%) | 🔴 |
 | [4. Identity Governance](#domain-4) | 20–25% | 4 | 1 / 4 (25%) | 🔴 |
 
-**Totals:** 4 / 16 skills completed
+**Totals:** 5 / 16 skills completed
 
 **Legend:** 🟢 Strong (≥66%) · 🟡 Partial (33–65%) · 🔴 Low (<33%) — "Covered" = skill completed in Per-Skill Progress
 
@@ -220,7 +222,7 @@ Priority tasks ranked from [SkillRanking.md](./SkillRanking.md). Lower rank mean
 | -: | :----- | :---- | ----: | :-: | :-: | ----: | :------- |
 | 1 | User Identities | Configure and manage a Microsoft Entra tenant | 7 | ⏳ 6.3h | 🔲 | 6.3h | ⏳ |
 | 2 | User Identities | Create, configure, and manage Microsoft Entra identities | 6 | ⏳ 4.4h | 🔲 | 4.4h | ✅ |
-| 3 | User Identities | Implement and manage identities for external users and tenants | 6 | ⏳ 2.4h | 🔲 | 2.4h | ✅ |
+| 3 | User Identities | Implement and manage identities for external users and tenants | 6 | ⏳ 3.8h | 🔲 | 3.8h | ✅ |
 | 4 | User Identities | Implement and manage hybrid identity | 7 | ⏳ 1.3h | 🔲 | 1.3h | ⏳ |
 | 5 | Authentication & Access Management | Plan, implement, and manage Microsoft Entra user authentication | 8 | ⏳ 1.1h | 🔲 | 1.1h | ⏳ |
 | 6 | Authentication & Access Management | Plan, implement, and manage Microsoft Entra Conditional Access | 10 | ⏳ 8.7h | 🔲 | 8.7h | ⏳ |
