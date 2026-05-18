@@ -63,6 +63,10 @@ Documentation
 
 # Day 3 - Tuesday
 
+Documentation
+
+- Conditional Access
+
 ### Plan, implement, and manage Microsoft Entra Conditional Access
 
 * Plan Conditional Access policies
@@ -77,6 +81,14 @@ Documentation
 * Implement and manage user risk by using Microsoft Entra ID Protection or Conditional Access policies
 * Implement and manage sign-in risk by using Microsoft Entra ID Protection or Conditional Access policies
 * Monitor, investigate and remediate risky users and risky sign-ins
+
+Documentation
+
+- Entra ID Protection
+- Conditional Access
+- Authentication
+- Monitoring and health
+-
 
 # Day 4 - Wednesday
 
