@@ -20,7 +20,7 @@ Self-assessed skill rating for each task. Edit the **Rank** column only.
 | 8 | Implement and manage user identities | Create, configure, and manage Microsoft Entra identities | Create, configure, and manage users | 4 |
 | 9 | Implement and manage user identities | Create, configure, and manage Microsoft Entra identities | Create, configure, and manage groups | 4 |
 | 10 | Implement and manage user identities | Create, configure, and manage Microsoft Entra identities | Manage custom security attributes | 5 |
-| 11 | Implement and manage user identities | Create, configure, and manage Microsoft Entra identities | Automate bulk operations by using the Microsoft Entra admin center and PowerShell | 3 |
+| 11 | Implement and manage user identities | Create, configure, and manage Microsoft Entra identities | Automate bulk operations by using the Microsoft Entra admin center and PowerShell | 4 |
 | 12 | Implement and manage user identities | Create, configure, and manage Microsoft Entra identities | Manage device join and device registration in Microsoft Entra ID | 5 |
 | 13 | Implement and manage user identities | Create, configure, and manage Microsoft Entra identities | Assign, modify, and report on licenses | 4 |
 | 14 | Implement and manage user identities | Implement and manage identities for external users and tenants | Manage External collaboration settings in Microsoft Entra ID | 4 |
@@ -29,20 +29,20 @@ Self-assessed skill rating for each task. Edit the **Rank** column only.
 | 17 | Implement and manage user identities | Implement and manage identities for external users and tenants | Implement Cross-tenant access settings | 4 |
 | 18 | Implement and manage user identities | Implement and manage identities for external users and tenants | Implement and manage cross-tenant synchronization | 4 |
 | 19 | Implement and manage user identities | Implement and manage identities for external users and tenants | Configure external identity providers, including protocols such as SAML and WS-Fed | 5 |
-| 20 | Implement and manage user identities | Implement and manage hybrid identity | Implement and manage Microsoft Entra Connect Sync | 3 |
+| 20 | Implement and manage user identities | Implement and manage hybrid identity | Implement and manage Microsoft Entra Connect Sync | 4 |
 | 21 | Implement and manage user identities | Implement and manage hybrid identity | Implement and manage Microsoft Entra Cloud Sync | 5 |
-| 22 | Implement and manage user identities | Implement and manage hybrid identity | Implement and manage password hash synchronization | 3 |
-| 23 | Implement and manage user identities | Implement and manage hybrid identity | Implement and manage pass-through authentication | 3 |
-| 24 | Implement and manage user identities | Implement and manage hybrid identity | Implement and manage seamless single sign-on (SSO) | 3 |
+| 22 | Implement and manage user identities | Implement and manage hybrid identity | Implement and manage password hash synchronization | 4 |
+| 23 | Implement and manage user identities | Implement and manage hybrid identity | Implement and manage pass-through authentication | 4 |
+| 24 | Implement and manage user identities | Implement and manage hybrid identity | Implement and manage seamless single sign-on (SSO) | 4 |
 | 25 | Implement and manage user identities | Implement and manage hybrid identity | Migrate from AD FS to other authentication and authorization mechanisms | 5 |
-| 26 | Implement and manage user identities | Implement and manage hybrid identity | Implement and manage Microsoft Entra Connect Health | 3 |
-| 27 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra user authentication | Plan for authentication | 3 |
-| 28 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra user authentication | Implement and manage authentication methods, including certificate-based authentication, Temporary Access Pass, OAuth 2.0 tokens, Microsoft Authenticator, and passkeys (FIDO2) | 3 |
+| 26 | Implement and manage user identities | Implement and manage hybrid identity | Implement and manage Microsoft Entra Connect Health | 4 |
+| 27 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra user authentication | Plan for authentication | 4 |
+| 28 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra user authentication | Implement and manage authentication methods, including certificate-based authentication, Temporary Access Pass, OAuth 2.0 tokens, Microsoft Authenticator, and passkeys (FIDO2) | 4 |
 | 29 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra user authentication | Implement and manage tenant-wide multifactor authentication (MFA) settings | 4 |
 | 30 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra user authentication | Configure and deploy self-service password reset (SSPR) | 4 |
-| 31 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra user authentication | Implement and manage Windows Hello for Business | 3 |
+| 31 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra user authentication | Implement and manage Windows Hello for Business | 4 |
 | 32 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra user authentication | Disable accounts and revoke user sessions | 4 |
-| 33 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra user authentication | Implement and manage Microsoft Entra password protection | 3 |
+| 33 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra user authentication | Implement and manage Microsoft Entra password protection | 4 |
 | 34 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra user authentication | Enable Microsoft Entra Kerberos authentication for hybrid identities | 5 |
 | 35 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Plan Conditional Access policies | 3 |
 | 36 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Implement Conditional Access policy assignments | 3 |

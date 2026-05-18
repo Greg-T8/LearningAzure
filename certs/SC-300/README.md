@@ -192,8 +192,8 @@ Priority tasks ranked from [SkillRanking.md](./SkillRanking.md). Lower rank mean
 | Unassessed (blank) | 0 | 0.0% |
 | 1 | 0 | 0.0% |
 | 2 | 5 | 5.1% |
-| 3 | 31 | 31.6% |
-| 4 | 25 | 25.5% |
+| 3 | 21 | 21.4% |
+| 4 | 35 | 35.7% |
 | 5 | 37 | 37.8% |
 
 | # | Domain | Skill | Task | Rank |
@@ -203,11 +203,11 @@ Priority tasks ranked from [SkillRanking.md](./SkillRanking.md). Lower rank mean
 | 3 | Plan and implement workload identities | Plan and implement app registrations | Create app roles | 2 |
 | 4 | Plan and automate identity governance | Plan, implement, and manage access reviews in Microsoft Entra | Manually respond to access review activity | 2 |
 | 5 | Plan and automate identity governance | Monitor identity activity by using logs, workbooks, and reports | Monitor and improve the security posture by using Identity Secure Score | 2 |
-| 6 | Implement and manage user identities | Create, configure, and manage Microsoft Entra identities | Automate bulk operations by using the Microsoft Entra admin center and PowerShell | 3 |
-| 7 | Implement and manage user identities | Implement and manage hybrid identity | Implement and manage Microsoft Entra Connect Sync | 3 |
-| 8 | Implement and manage user identities | Implement and manage hybrid identity | Implement and manage password hash synchronization | 3 |
-| 9 | Implement and manage user identities | Implement and manage hybrid identity | Implement and manage pass-through authentication | 3 |
-| 10 | Implement and manage user identities | Implement and manage hybrid identity | Implement and manage seamless single sign-on (SSO) | 3 |
+| 6 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Plan Conditional Access policies | 3 |
+| 7 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Implement Conditional Access policy assignments | 3 |
+| 8 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Implement Conditional Access policy controls | 3 |
+| 9 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Create a Conditional Access policy from a template | 3 |
+| 10 | Implement authentication and access management | Manage risk by using Microsoft Entra ID Protection | Implement and manage multifactor authentication registration by using authentication methods and registration campaigns | 3 |
 
 <!-- END FOCUS LIST -->
 
