@@ -99,6 +99,13 @@ Documentation
 * Select appropriate identities for applications and Azure workloads, including managed identities, service principals, user accounts, and managed service accounts
 * Assign a managed identity to an Azure resource
 
+Documentation
+
+- Microsoft Identity Platform
+- Managed Identities for Azure Resources
+- Entra Architecture
+-
+
 ### Plan, implement, and monitor the integration of enterprise applications
 
 * Design and implement integration for software as a service (SaaS) apps
@@ -106,6 +113,13 @@ Documentation
 * Plan and implement settings for enterprise applications, including application-level and tenant-level settings
 * Assign appropriate Microsoft Entra roles to users to manage enterprise applications
 * Design and implement integration for on-premises apps by using Microsoft Entra Application Proxy
+
+Documentation
+
+- Application Management
+- Microsoft Identity Platform
+- Microsoft Entra RBAC
+- Application Proxy
 
 # Day 5 - Friday
 
