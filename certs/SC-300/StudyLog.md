@@ -8,6 +8,7 @@ This log tracks individual study sessions for the **SC-300** exam. Fill in **End
 
 | # | Date | Start | End | Duration | Mode | Skill | Notes |
 |:--|:-----|:------|:----|:---------|:-----|:------|:------|
+| 37 | 5/20/26 | 3:58 AM |  |  | NotebookLM | Plan, implement, and manage Microsoft Entra Conditional Access |  |
 | 36 | 5/18/26 | 4:38 AM | 6:05 AM | 1h 27m | NotebookLM | Plan, implement, and manage Microsoft Entra user authentication | Completed skill "Plan, implement, and manage Microsoft Entra user authentication"; pick up next at conditional access |
 | 35 | 5/18/26 | 3:49 AM | 4:37 AM | 0h 48m | NotebookLM | Implement and manage hybrid identity | Completed exam skill "Implement and manage hybrid identity" |
 | 34 | 5/17/26 | 6:49 AM | 8:09 AM | 1h 20m | NotebookLM | Implement and manage identities for external users and tenants | Completed skill "Implement and manage identities for external users and tenants  |
