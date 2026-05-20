@@ -8,8 +8,9 @@
 - **Study Log:** [Session-by-session study time tracker](./StudyLog.md)
 
 <!-- STUDY_SUMMARY -->
-**Hours Committed:** 62.1h · **Days Studied:** 26
+**Hours Committed:** 64.4h · **Days Studied:** 27
 <!-- /STUDY_SUMMARY -->
+
 
 
 
@@ -229,7 +230,7 @@ Priority tasks ranked from [SkillRanking.md](./SkillRanking.md). Lower rank mean
 | 3 | User Identities | Implement and manage identities for external users and tenants | 6 | ⏳ 3.8h | 🔲 | 3.8h | ✅ |
 | 4 | User Identities | Implement and manage hybrid identity | 7 | ⏳ 2.1h | 🔲 | 2.1h | ⏳ |
 | 5 | Authentication & Access Management | Plan, implement, and manage Microsoft Entra user authentication | 8 | ⏳ 2.6h | 🔲 | 2.6h | ⏳ |
-| 6 | Authentication & Access Management | Plan, implement, and manage Microsoft Entra Conditional Access | 10 | ⏳ 8.7h | 🔲 | 8.7h | ⏳ |
+| 6 | Authentication & Access Management | Plan, implement, and manage Microsoft Entra Conditional Access | 10 | ⏳ 11.0h | 🔲 | 11.0h | ⏳ |
 | 7 | Authentication & Access Management | Manage risk by using Microsoft Entra ID Protection | 5 | ⏳ 1.0h | 🔲 | 1.0h | ⏳ |
 | 8 | Authentication & Access Management | Implement Global Secure Access | 4 | ✅ 8.6h | ✅ | 8.6h | ✅ |
 | 9 | Workload Identities | Plan and implement identities for applications and Azure workloads | 4 | ⏳ 2.5h | 🔲 | 2.5h | ⏳ |

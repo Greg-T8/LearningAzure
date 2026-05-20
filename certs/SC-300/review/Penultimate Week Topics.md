@@ -69,6 +69,8 @@ Documentation
 
 ### Plan, implement, and manage Microsoft Entra Conditional Access
 
+a
+
 * Plan Conditional Access policies
 * Implement Conditional Access policy assignments
 * Implement Conditional Access policy controls
