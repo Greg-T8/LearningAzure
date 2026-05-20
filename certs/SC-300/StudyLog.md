@@ -9,10 +9,11 @@ This log tracks individual study sessions for the **SC-300** exam. Fill in **End
 | # | Date | Start | End | Duration | Mode | Skill | Notes |
 |:--|:-----|:------|:----|:---------|:-----|:------|:------|
 | 37 | 5/20/26 | 3:58 AM | 6:16 AM | 2h 18m | NotebookLM | Plan, implement, and manage Microsoft Entra Conditional Access | Completed skills "Plan, implement, and manage Microsoft Entra Conditional Access" and "Manage risk by using Microsoft Entra ID Protection" |
-| 36 | 5/18/26 | 4:38 AM | 6:05 AM | 1h 27m | NotebookLM | Plan, implement, and manage Microsoft Entra user authentication | Completed skill "Plan, implement, and manage Microsoft Entra user authentication"; pick up next at conditional access |
-| 35 | 5/18/26 | 3:49 AM | 4:37 AM | 0h 48m | NotebookLM | Implement and manage hybrid identity | Completed exam skill "Implement and manage hybrid identity" |
-| 34 | 5/17/26 | 6:49 AM | 8:09 AM | 1h 20m | NotebookLM | Implement and manage identities for external users and tenants | Completed skill "Implement and manage identities for external users and tenants  |
-| 33 | 5/17/26 | 5:51 AM | 6:48 AM | 0h 57m | NotebookLM | Create, configure, and manage Microsoft Entra identities | auto-closed at last commit |
+|  | 5/19/26 |  |  |  |  |  |  |
+| 36 | 5/18/26 | 3:49 AM | 4:37 AM | 0h 48m | NotebookLM | Implement and manage hybrid identity | Completed exam skill "Implement and manage hybrid identity" |
+| 35 | 5/18/26 | 4:38 AM | 6:05 AM | 1h 27m | NotebookLM | Plan, implement, and manage Microsoft Entra user authentication | Completed skill "Plan, implement, and manage Microsoft Entra user authentication"; pick up next at conditional access |
+| 34 | 5/17/26 | 5:51 AM | 6:48 AM | 0h 57m | NotebookLM | Create, configure, and manage Microsoft Entra identities | auto-closed at last commit |
+| 33 | 5/17/26 | 6:49 AM | 8:09 AM | 1h 20m | NotebookLM | Implement and manage identities for external users and tenants | Completed skill "Implement and manage identities for external users and tenants  |
 | 32 | 5/16/26 | 5:05 AM | 7:30 AM | 2h 25m | NotebookLM | Manage and monitor app access by using Microsoft Defender for Cloud Apps | Completed exam task "Manage the Cloud app catalog"; pick up next at penultimate week topics  |
 | 31 | 5/15/26 | 3:48 AM | 6:08 AM | 2h 20m | NotebookLM | Manage and monitor app access by using Microsoft Defender for Cloud Apps | Completed exam tasks "Implement and manage policies for OAuth apps" and "Create access and session policies in Defender for Cloud Apps"; pick up next at "Manage the Cloud app catalog" |
 | 30 | 5/14/26 | 4:07 AM | 6:02 AM | 1h 55m | NotebookLM | Manage and monitor app access by using Microsoft Defender for Cloud Apps | Completed exam tasks "Implement application-enforced restrictions" and "Configure Conditional Access app control"; pick up next at "Create access and session policies in Defender for Cloud Apps" |
@@ -25,10 +26,10 @@ This log tracks individual study sessions for the **SC-300** exam. Fill in **End
 | 23 | 5/8/26 | 4:01 AM | 6:32 AM | 2h 31m | NotebookLM | Plan, implement, and manage Microsoft Entra Conditional Access | Completed exam tasks "Test and troubleshoot Conditional Access policies" and "Implement session management"; pick up at "Implement device-enforced restrictions" |
 | 22 | 5/7/26 | 5:24 AM | 6:34 AM | 1h 10m | NotebookLM | Plan, implement, and manage Microsoft Entra Conditional Access | Pick up at "Test and troubleshoot Conditional Access policies" |
 | 21 | 5/7/26 | 4:16 AM | 5:24 AM | 1h 8m | NotebookLM | Plan, implement, and manage Microsoft Entra user authentication | Completed exam task "Enable Microsoft Entra Kerberos authentication for hybrid identities" |
-| 20 | 5/6/26 | 5:34 AM | 6:45 AM | 1h 11m | NotebookLM | Implement and manage identities for external users and tenants | Completed exam task "Configure external identity providers, including protocols such as SAML and WS-Fed"; pick up at "Enable Microsoft Entra Kerberos authentication for hybrid identities" |
-| 19 | 5/6/26 | 4:14 AM | 5:33 AM | 1h 19m | NotebookLM | Implement and manage hybrid identity | Completed exam task "Implement and manage Microsoft Entra Cloud Sync" |
-| 18 | 5/5/26 | 5:24 AM | 6:40 AM | 1h 16m | NotebookLM | Implement and manage identities for external users and tenants | Completed exam task "Configure external identity providers, including protocols such as SAML and WS-Fed"; pick up next at "Implement and manage Microsoft Entra Cloud Sync" |
-| 17 | 5/5/26 | 3:54 AM | 5:23 AM | 1h 29m | NotebookLM | Create, configure, and manage Microsoft Entra identities | Completed exam task "Manage device join and device registration in Microsoft Entra ID" |
+| 20 | 5/6/26 | 4:14 AM | 5:33 AM | 1h 19m | NotebookLM | Implement and manage hybrid identity | Completed exam task "Implement and manage Microsoft Entra Cloud Sync" |
+| 19 | 5/6/26 | 5:34 AM | 6:45 AM | 1h 11m | NotebookLM | Implement and manage identities for external users and tenants | Completed exam task "Configure external identity providers, including protocols such as SAML and WS-Fed"; pick up at "Enable Microsoft Entra Kerberos authentication for hybrid identities" |
+| 18 | 5/5/26 | 3:54 AM | 5:23 AM | 1h 29m | NotebookLM | Create, configure, and manage Microsoft Entra identities | Completed exam task "Manage device join and device registration in Microsoft Entra ID" |
+| 17 | 5/5/26 | 5:24 AM | 6:40 AM | 1h 16m | NotebookLM | Implement and manage identities for external users and tenants | Completed exam task "Configure external identity providers, including protocols such as SAML and WS-Fed"; pick up next at "Implement and manage Microsoft Entra Cloud Sync" |
 | 16 | 5/4/26 | 4:40 AM | 6:38 AM | 1h 58m | NotebookLM | Create, configure, and manage Microsoft Entra identities | Completed exam task "Manage custom security attributes"; pick up at "Manage device join and device registration in Microsoft Entra ID" |
 |  | 5/3/26 |  |  |  |  |  |  |
 | 15 | 5/2/26 | 3:49 AM | 6:13 AM | 2h 24m | NotebookLM | Configure and manage a Microsoft Entra tenant | Completed exam tasks "Configure Company branding settings"; pick up at "Manage custom security attributes" |
@@ -37,12 +38,12 @@ This log tracks individual study sessions for the **SC-300** exam. Fill in **End
 | 12 | 4/30/26 | 4:04 AM | 5:10 AM | 1h 6m | NotebookLM | Plan and implement entitlement management in Microsoft Entra | Completed "Implement and manage terms of use (ToU)" |
 | 11 | 4/29/26 | 4:00 AM | 6:45 AM | 2h 45m | NotebookLM | Plan and implement entitlement management in Microsoft Entra | Completed these exam tasks: "Create and configure access packages", "Manage access requests"; pick up at "Implement and manage terms of use (ToU)" |
 | 10 | 4/28/26 | 4:02 AM | 6:36 AM | 2h 34m | NotebookLM | Plan and implement entitlement management in Microsoft Entra | Exam tasks completed: "Plan entitlements" and "Create and configure catalogs"; next session, pick up at "Create and configure access packages" |
-| 9 | 4/27/26 | 5:14 AM | 6:42 AM | 1h 28m | NotebookLM | Plan and implement entitlement management in Microsoft Entra | Continue with "Plan entitlements" |
-| 8 | 4/27/26 | 4:12 AM | 5:13 AM | 1h 1m | NotebookLM | Plan, implement, and monitor the integration of enterprise applications | Completed "Create and manage application collections" |
+| 9 | 4/27/26 | 4:12 AM | 5:13 AM | 1h 1m | NotebookLM | Plan, implement, and monitor the integration of enterprise applications | Completed "Create and manage application collections" |
+| 8 | 4/27/26 | 5:14 AM | 6:42 AM | 1h 28m | NotebookLM | Plan and implement entitlement management in Microsoft Entra | Continue with "Plan entitlements" |
 | 7 | 4/26/26 | 7:36 AM | 9:43 AM | 2h 7m | NotebookLM | Plan, implement, and monitor the integration of enterprise applications | Finished "Configure and manage user and admin consent"; Pick back up at "Create and manage application collections" |
 | 6 | 4/26/26 | 6:53 AM | 7:34 AM | 0h 41m | NotebookLM | Implement Global Secure Access | Completed studies for "Implement Global Secure Access" skill |
 | 5 | 4/25/26 | 6:07 AM | 7:53 AM | 1h 46m | NotebookLM | Implement Global Secure Access | Covered "Deploy and manage Internet Access for Microsoft 365". Pick up at "Deploy Global Secure Access clients" |
 | 4 | 4/24/26 | 4:13 AM | 7:12 AM | 2h 59m | NotebookLM | Implement Global Secure Access | Covered "Deploy and manage Internet Access"; pick up next at "Deploy and manage Internet Access for Microsoft 365" |
 | 3 | 4/23/26 | 3:51 AM | 6:47 AM | 2h 56m | NotebookLM | Implement Global Secure Access | Covered "Deploy and manage Private Access"; pick up next at "Deploy and manage Internet Access" |
-| 2 | 4/22/26 | 5:34 AM | 6:14 AM | 0h 40m | NotebookLM | Plan, implement, and manage Microsoft Entra Conditional Access | Covered "Protected Actions" |
-| 1 | 4/22/26 | 6:15 AM | 6:26 AM | 0h 11m | NotebookLM | Implement Global Secure Access | Pick up at "Deploy and Manage Private Access" |
+| 2 | 4/22/26 | 6:15 AM | 6:26 AM | 0h 11m | NotebookLM | Implement Global Secure Access | Pick up at "Deploy and Manage Private Access" |
+| 1 | 4/22/26 | 5:34 AM | 6:14 AM | 0h 40m | NotebookLM | Plan, implement, and manage Microsoft Entra Conditional Access | Covered "Protected Actions" |
