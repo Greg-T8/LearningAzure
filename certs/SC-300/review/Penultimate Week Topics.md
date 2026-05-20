@@ -61,7 +61,7 @@ Documentation
 * Configure and deploy self-service password reset (SSPR)
 * Disable accounts and revoke user sessions
 
-# Day 3 - Tuesday
+# Day 3 - Wednesday
 
 Documentation
 
@@ -90,7 +90,7 @@ Documentation
 - Monitoring and health
 -
 
-# Day 4 - Wednesday
+# Day 4 - Thursday
 
 ## Plan and implement workload identities
 
@@ -107,7 +107,7 @@ Documentation
 * Assign appropriate Microsoft Entra roles to users to manage enterprise applications
 * Design and implement integration for on-premises apps by using Microsoft Entra Application Proxy
 
-# Day 5 - Thursday
+# Day 5 - Friday
 
 ### Plan and implement app registrations
 
@@ -124,7 +124,7 @@ Documentation
 * Configure and manage connected organizations
 * Manage the lifecycle of external users
 
-# Day 6 - Friday
+# Day 6 - Saturday
 
 ### Plan, implement, and manage access reviews in Microsoft Entra
 
@@ -142,7 +142,7 @@ Documentation
 * Plan and configure PIM for Groups
 * Manage the PIM request and approval process
 
-# Day 7 - Saturday
+# Day 7 - Sunday
 
 ### Monitor identity activity by using logs, workbooks, and reports
 
