@@ -12,17 +12,6 @@
 <!-- /STUDY_SUMMARY -->
 
 
-
-
-
-
-
-
-
-
-
-
-
 ---
 
 ## 📊 Exam Coverage
@@ -33,12 +22,12 @@ Skill-level coverage based on [Per-Skill Progress](#per-skill-progress) completi
 
 | Domain | Weight | Skills | Skills Covered | Status |
 | :----- | :----- | -----: | :------------- | :----: |
-| [1. User Identities](#domain-1) | 20–25% | 4 | 2 / 4 (50%) | 🟡 |
-| [2. Authentication & Access Management](#domain-2) | 25–30% | 4 | 1 / 4 (25%) | 🔴 |
+| [1. User Identities](#domain-1) | 20–25% | 4 | 4 / 4 (100%) | 🟢 |
+| [2. Authentication & Access Management](#domain-2) | 25–30% | 4 | 4 / 4 (100%) | 🟢 |
 | [3. Workload Identities](#domain-3) | 20–25% | 4 | 1 / 4 (25%) | 🔴 |
 | [4. Identity Governance](#domain-4) | 20–25% | 4 | 1 / 4 (25%) | 🔴 |
 
-**Totals:** 5 / 16 skills completed
+**Totals:** 10 / 16 skills completed
 
 **Legend:** 🟢 Strong (≥66%) · 🟡 Partial (33–65%) · 🔴 Low (<33%) — "Covered" = skill completed in Per-Skill Progress
 
@@ -226,13 +215,13 @@ Priority tasks ranked from [SkillRanking.md](./SkillRanking.md). Lower rank mean
 
 | # | Domain | Skill | Tasks | NB | PQ | Hours | Progress |
 | -: | :----- | :---- | ----: | :-: | :-: | ----: | :------- |
-| 1 | User Identities | Configure and manage a Microsoft Entra tenant | 7 | ⏳ 6.3h | 🔲 | 6.3h | ⏳ |
-| 2 | User Identities | Create, configure, and manage Microsoft Entra identities | 6 | ⏳ 4.4h | 🔲 | 4.4h | ✅ |
-| 3 | User Identities | Implement and manage identities for external users and tenants | 6 | ⏳ 3.8h | 🔲 | 3.8h | ✅ |
-| 4 | User Identities | Implement and manage hybrid identity | 7 | ⏳ 2.1h | 🔲 | 2.1h | ⏳ |
-| 5 | Authentication & Access Management | Plan, implement, and manage Microsoft Entra user authentication | 8 | ⏳ 2.6h | 🔲 | 2.6h | ⏳ |
-| 6 | Authentication & Access Management | Plan, implement, and manage Microsoft Entra Conditional Access | 10 | ⏳ 11.0h | 🔲 | 11.0h | ⏳ |
-| 7 | Authentication & Access Management | Manage risk by using Microsoft Entra ID Protection | 5 | ⏳ 1.0h | 🔲 | 1.0h | ⏳ |
+| 1 | User Identities | Configure and manage a Microsoft Entra tenant | 7 | ✅ 6.3h | ✅ | 6.3h | ✅ |
+| 2 | User Identities | Create, configure, and manage Microsoft Entra identities | 6 | ✅ 4.4h | ✅ | 4.4h | ✅ |
+| 3 | User Identities | Implement and manage identities for external users and tenants | 6 | ✅ 3.8h | ✅ | 3.8h | ✅ |
+| 4 | User Identities | Implement and manage hybrid identity | 7 | ✅ 2.1h | ✅ | 2.1h | ✅ |
+| 5 | Authentication & Access Management | Plan, implement, and manage Microsoft Entra user authentication | 8 | ✅ 2.6h | ✅ | 2.6h | ✅ |
+| 6 | Authentication & Access Management | Plan, implement, and manage Microsoft Entra Conditional Access | 10 | ✅ 11.0h | ✅ | 11.0h | ✅ |
+| 7 | Authentication & Access Management | Manage risk by using Microsoft Entra ID Protection | 5 | ✅ 1.0h | ✅ | 1.0h | ✅ |
 | 8 | Authentication & Access Management | Implement Global Secure Access | 4 | ✅ 8.6h | ✅ | 8.6h | ✅ |
 | 9 | Workload Identities | Plan and implement identities for applications and Azure workloads | 4 | ⏳ 2.5h | 🔲 | 2.5h | ⏳ |
 | 10 | Workload Identities | Plan, implement, and monitor the integration of enterprise applications | 7 | ⏳ 3.1h | 🔲 | 3.1h | ⏳ |
