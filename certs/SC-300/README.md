@@ -8,8 +8,9 @@
 - **Study Log:** [Session-by-session study time tracker](./StudyLog.md)
 
 <!-- STUDY_SUMMARY -->
-**Hours Committed:** 64.4h · **Days Studied:** 27
+**Hours Committed:** 66.6h · **Days Studied:** 28
 <!-- /STUDY_SUMMARY -->
+
 
 ---
 
@@ -23,10 +24,10 @@ Skill-level coverage based on [Per-Skill Progress](#per-skill-progress) completi
 | :----- | :----- | -----: | :------------- | :----: |
 | [1. User Identities](#domain-1) | 20–25% | 4 | 4 / 4 (100%) | 🟢 |
 | [2. Authentication & Access Management](#domain-2) | 25–30% | 4 | 4 / 4 (100%) | 🟢 |
-| [3. Workload Identities](#domain-3) | 20–25% | 4 | 1 / 4 (25%) | 🔴 |
+| [3. Workload Identities](#domain-3) | 20–25% | 4 | 2 / 4 (50%) | 🟡 |
 | [4. Identity Governance](#domain-4) | 20–25% | 4 | 1 / 4 (25%) | 🔴 |
 
-**Totals:** 10 / 16 skills completed
+**Totals:** 11 / 16 skills completed
 
 **Legend:** 🟢 Strong (≥66%) · 🟡 Partial (33–65%) · 🔴 Low (<33%) — "Covered" = skill completed in Per-Skill Progress
 
@@ -185,8 +186,8 @@ Priority tasks ranked from [SkillRanking.md](./SkillRanking.md). Lower rank mean
 | Unassessed (blank) | 0 | 0.0% |
 | 1 | 0 | 0.0% |
 | 2 | 5 | 5.1% |
-| 3 | 21 | 21.4% |
-| 4 | 35 | 35.7% |
+| 3 | 17 | 17.3% |
+| 4 | 39 | 39.8% |
 | 5 | 37 | 37.8% |
 
 | # | Domain | Skill | Task | Rank |
@@ -196,11 +197,11 @@ Priority tasks ranked from [SkillRanking.md](./SkillRanking.md). Lower rank mean
 | 3 | Plan and implement workload identities | Plan and implement app registrations | Create app roles | 2 |
 | 4 | Plan and automate identity governance | Plan, implement, and manage access reviews in Microsoft Entra | Manually respond to access review activity | 2 |
 | 5 | Plan and automate identity governance | Monitor identity activity by using logs, workbooks, and reports | Monitor and improve the security posture by using Identity Secure Score | 2 |
-| 6 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Plan Conditional Access policies | 3 |
-| 7 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Implement Conditional Access policy assignments | 3 |
-| 8 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Implement Conditional Access policy controls | 3 |
-| 9 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Create a Conditional Access policy from a template | 3 |
-| 10 | Implement authentication and access management | Manage risk by using Microsoft Entra ID Protection | Implement and manage multifactor authentication registration by using authentication methods and registration campaigns | 3 |
+| 6 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Create a Conditional Access policy from a template | 3 |
+| 7 | Plan and implement workload identities | Plan and implement identities for applications and Azure workloads | Select appropriate identities for applications and Azure workloads, including managed identities, service principals, user accounts, and managed service accounts | 3 |
+| 8 | Plan and implement workload identities | Plan and implement identities for applications and Azure workloads | Assign a managed identity to an Azure resource | 3 |
+| 9 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Plan and implement settings for enterprise applications, including application-level and tenant-level settings | 3 |
+| 10 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Assign appropriate Microsoft Entra roles to users to manage enterprise applications | 3 |
 
 <!-- END FOCUS LIST -->
 
@@ -222,7 +223,7 @@ Priority tasks ranked from [SkillRanking.md](./SkillRanking.md). Lower rank mean
 | 6 | Authentication & Access Management | Plan, implement, and manage Microsoft Entra Conditional Access | 10 | ✅ 11.0h | ✅ | 11.0h | ✅ |
 | 7 | Authentication & Access Management | Manage risk by using Microsoft Entra ID Protection | 5 | ✅ 1.0h | ✅ | 1.0h | ✅ |
 | 8 | Authentication & Access Management | Implement Global Secure Access | 4 | ✅ 8.6h | ✅ | 8.6h | ✅ |
-| 9 | Workload Identities | Plan and implement identities for applications and Azure workloads | 4 | ⏳ 2.5h | 🔲 | 2.5h | ⏳ |
+| 9 | Workload Identities | Plan and implement identities for applications and Azure workloads | 4 | ⏳ 4.7h | 🔲 | 4.7h | ⏳ |
 | 10 | Workload Identities | Plan, implement, and monitor the integration of enterprise applications | 7 | ✅ 3.1h | ✅ | 3.1h | ✅ |
 | 11 | Workload Identities | Plan and implement app registrations | 5 | 🔲 | 🔲 | 0.0h | 🔲 |
 | 12 | Workload Identities | Manage and monitor app access by using Microsoft Defender for Cloud Apps | 7 | ⏳ 11.1h | 🔲 | 11.1h | ✅ |

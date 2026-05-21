@@ -133,12 +133,24 @@ Documentation
 * Configure app authentication
 * Configure API permissions
 
+Documentation
+
+- Microsoft Identity Platform
+- Zero Trust Implementation Guidance
+- Overview of Microsoft Graph
+-
+
 ## Plan and automate identity governance
 
 ### Plan and implement entitlement management in Microsoft Entra
 
 * Configure and manage connected organizations
 * Manage the lifecycle of external users
+
+Documentation
+
+- Entra ID Governance
+- Architecture
 
 # Day 6 - Saturday
 
