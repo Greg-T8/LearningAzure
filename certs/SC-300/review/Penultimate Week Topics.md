@@ -170,6 +170,11 @@ Documentation
 * Plan and configure PIM for Groups
 * Manage the PIM request and approval process
 
+Documentation
+
+- Architecture
+- Privileged Identity Management
+
 # Day 7 - Sunday
 
 ### Monitor identity activity by using logs, workbooks, and reports

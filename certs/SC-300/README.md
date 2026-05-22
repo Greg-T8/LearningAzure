@@ -12,9 +12,6 @@
 <!-- /STUDY_SUMMARY -->
 
 
-
-
-
 ---
 
 ## 📊 Exam Coverage
@@ -27,10 +24,10 @@ Skill-level coverage based on [Per-Skill Progress](#per-skill-progress) completi
 | :----- | :----- | -----: | :------------- | :----: |
 | [1. User Identities](#domain-1) | 20–25% | 4 | 4 / 4 (100%) | 🟢 |
 | [2. Authentication & Access Management](#domain-2) | 25–30% | 4 | 4 / 4 (100%) | 🟢 |
-| [3. Workload Identities](#domain-3) | 20–25% | 4 | 2 / 4 (50%) | 🟡 |
+| [3. Workload Identities](#domain-3) | 20–25% | 4 | 4 / 4 (100%) | 🟢 |
 | [4. Identity Governance](#domain-4) | 20–25% | 4 | 1 / 4 (25%) | 🔴 |
 
-**Totals:** 11 / 16 skills completed
+**Totals:** 13 / 16 skills completed
 
 **Legend:** 🟢 Strong (≥66%) · 🟡 Partial (33–65%) · 🔴 Low (<33%) — "Covered" = skill completed in Per-Skill Progress
 
@@ -226,10 +223,10 @@ Priority tasks ranked from [SkillRanking.md](./SkillRanking.md). Lower rank mean
 | 6 | Authentication & Access Management | Plan, implement, and manage Microsoft Entra Conditional Access | 10 | ✅ 11.0h | ✅ | 11.0h | ✅ |
 | 7 | Authentication & Access Management | Manage risk by using Microsoft Entra ID Protection | 5 | ✅ 1.0h | ✅ | 1.0h | ✅ |
 | 8 | Authentication & Access Management | Implement Global Secure Access | 4 | ✅ 8.6h | ✅ | 8.6h | ✅ |
-| 9 | Workload Identities | Plan and implement identities for applications and Azure workloads | 4 | ⏳ 4.7h | 🔲 | 4.7h | ⏳ |
+| 9 | Workload Identities | Plan and implement identities for applications and Azure workloads | 4 | ✅ 4.7h | ✅ | 4.7h | ✅ |
 | 10 | Workload Identities | Plan, implement, and monitor the integration of enterprise applications | 7 | ✅ 3.1h | ✅ | 3.1h | ✅ |
-| 11 | Workload Identities | Plan and implement app registrations | 5 | ⏳ 1.6h | 🔲 | 1.6h | ⏳ |
-| 12 | Workload Identities | Manage and monitor app access by using Microsoft Defender for Cloud Apps | 7 | ⏳ 11.1h | 🔲 | 11.1h | ✅ |
+| 11 | Workload Identities | Plan and implement app registrations | 5 | ⏳ 1.6h | ✅ | 1.6h | ✅ |
+| 12 | Workload Identities | Manage and monitor app access by using Microsoft Defender for Cloud Apps | 7 | ✅ 11.1h | ✅ | 11.1h | ✅ |
 | 13 | Identity Governance | Plan and implement entitlement management in Microsoft Entra | 7 | ✅ 7.9h | 🔲 | 7.9h | ✅ |
 | 14 | Identity Governance | Plan, implement, and manage access reviews in Microsoft Entra | 4 | 🔲 | 🔲 | 0.0h | 🔲 |
 | 15 | Identity Governance | Plan and implement privileged access | 6 | 🔲 | 🔲 | 0.0h | 🔲 |
