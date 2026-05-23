@@ -161,6 +161,10 @@ Documentation
 * Create and configure access reviews
 * Monitor access review activity
 
+Documentation
+
+- Entra ID Governance
+
 ### Plan and implement privileged access
 
 * Analyze PIM audit history and reports

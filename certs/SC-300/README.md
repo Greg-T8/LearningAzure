@@ -11,7 +11,6 @@
 **Hours Committed:** 68.2h · **Days Studied:** 29
 <!-- /STUDY_SUMMARY -->
 
-
 ---
 
 ## 📊 Exam Coverage
@@ -185,23 +184,23 @@ Priority tasks ranked from [SkillRanking.md](./SkillRanking.md). Lower rank mean
 | :------ | ----: | ---------: |
 | Unassessed (blank) | 0 | 0.0% |
 | 1 | 0 | 0.0% |
-| 2 | 5 | 5.1% |
-| 3 | 17 | 17.3% |
-| 4 | 39 | 39.8% |
+| 2 | 2 | 2.0% |
+| 3 | 7 | 7.1% |
+| 4 | 52 | 53.1% |
 | 5 | 37 | 37.8% |
 
 | # | Domain | Skill | Task | Rank |
 | -: | :----- | :---- | :--- | -: |
-| 1 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Design and implement integration for software as a service (SaaS) apps | 2 |
-| 2 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Assign, classify, and manage users, groups, and app roles for enterprise applications | 2 |
-| 3 | Plan and implement workload identities | Plan and implement app registrations | Create app roles | 2 |
-| 4 | Plan and automate identity governance | Plan, implement, and manage access reviews in Microsoft Entra | Manually respond to access review activity | 2 |
-| 5 | Plan and automate identity governance | Monitor identity activity by using logs, workbooks, and reports | Monitor and improve the security posture by using Identity Secure Score | 2 |
-| 6 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Create a Conditional Access policy from a template | 3 |
-| 7 | Plan and implement workload identities | Plan and implement identities for applications and Azure workloads | Select appropriate identities for applications and Azure workloads, including managed identities, service principals, user accounts, and managed service accounts | 3 |
-| 8 | Plan and implement workload identities | Plan and implement identities for applications and Azure workloads | Assign a managed identity to an Azure resource | 3 |
-| 9 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Plan and implement settings for enterprise applications, including application-level and tenant-level settings | 3 |
-| 10 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Assign appropriate Microsoft Entra roles to users to manage enterprise applications | 3 |
+| 1 | Plan and automate identity governance | Plan, implement, and manage access reviews in Microsoft Entra | Manually respond to access review activity | 2 |
+| 2 | Plan and automate identity governance | Monitor identity activity by using logs, workbooks, and reports | Monitor and improve the security posture by using Identity Secure Score | 2 |
+| 3 | Plan and automate identity governance | Plan, implement, and manage access reviews in Microsoft Entra | Plan for access reviews | 3 |
+| 4 | Plan and automate identity governance | Plan, implement, and manage access reviews in Microsoft Entra | Create and configure access reviews | 3 |
+| 5 | Plan and automate identity governance | Plan, implement, and manage access reviews in Microsoft Entra | Monitor access review activity | 3 |
+| 6 | Plan and automate identity governance | Plan and implement privileged access | Analyze PIM audit history and reports | 3 |
+| 7 | Plan and automate identity governance | Plan and implement privileged access | Create and manage break-glass accounts | 3 |
+| 8 | Plan and automate identity governance | Monitor identity activity by using logs, workbooks, and reports | Review and analyze sign-in, audit, and provisioning logs by using the Microsoft Entra admin center | 3 |
+| 9 | Plan and automate identity governance | Monitor identity activity by using logs, workbooks, and reports | Analyze Microsoft Entra ID by using workbooks and reporting | 3 |
+| 10 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure and manage domains in Microsoft Entra ID and Microsoft 365 | 4 |
 
 <!-- END FOCUS LIST -->
 
@@ -227,7 +226,7 @@ Priority tasks ranked from [SkillRanking.md](./SkillRanking.md). Lower rank mean
 | 10 | Workload Identities | Plan, implement, and monitor the integration of enterprise applications | 7 | ✅ 3.1h | ✅ | 3.1h | ✅ |
 | 11 | Workload Identities | Plan and implement app registrations | 5 | ⏳ 1.6h | ✅ | 1.6h | ✅ |
 | 12 | Workload Identities | Manage and monitor app access by using Microsoft Defender for Cloud Apps | 7 | ✅ 11.1h | ✅ | 11.1h | ✅ |
-| 13 | Identity Governance | Plan and implement entitlement management in Microsoft Entra | 7 | ✅ 7.9h | 🔲 | 7.9h | ✅ |
+| 13 | Identity Governance | Plan and implement entitlement management in Microsoft Entra | 7 | ✅ 7.9h | ✅ | 7.9h | ✅ |
 | 14 | Identity Governance | Plan, implement, and manage access reviews in Microsoft Entra | 4 | 🔲 | 🔲 | 0.0h | 🔲 |
 | 15 | Identity Governance | Plan and implement privileged access | 6 | 🔲 | 🔲 | 0.0h | 🔲 |
 | 16 | Identity Governance | Monitor identity activity by using logs, workbooks, and reports | 5 | 🔲 | 🔲 | 0.0h | 🔲 |

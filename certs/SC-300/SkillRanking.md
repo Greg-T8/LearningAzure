@@ -53,7 +53,7 @@ Self-assessed skill rating for each task. Edit the **Rank** column only.
 | 41 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Implement continuous access evaluation | 5 |
 | 42 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Configure authentication context | 5 |
 | 43 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Implement protected actions | 4 |
-| 44 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Create a Conditional Access policy from a template | 3 |
+| 44 | Implement authentication and access management | Plan, implement, and manage Microsoft Entra Conditional Access | Create a Conditional Access policy from a template | 4 |
 | 45 | Implement authentication and access management | Manage risk by using Microsoft Entra ID Protection | Implement and manage user risk by using Microsoft Entra ID Protection or Conditional Access policies | 4 |
 | 46 | Implement authentication and access management | Manage risk by using Microsoft Entra ID Protection | Implement and manage sign-in risk by using Microsoft Entra ID Protection or Conditional Access policies | 4 |
 | 47 | Implement authentication and access management | Manage risk by using Microsoft Entra ID Protection | Implement and manage multifactor authentication registration by using authentication methods and registration campaigns | 4 |
@@ -63,22 +63,22 @@ Self-assessed skill rating for each task. Edit the **Rank** column only.
 | 51 | Implement authentication and access management | Implement Global Secure Access | Deploy and manage Private Access | 5 |
 | 52 | Implement authentication and access management | Implement Global Secure Access | Deploy and manage Internet Access | 5 |
 | 53 | Implement authentication and access management | Implement Global Secure Access | Deploy and manage Internet Access for Microsoft 365 | 5 |
-| 54 | Plan and implement workload identities | Plan and implement identities for applications and Azure workloads | Select appropriate identities for applications and Azure workloads, including managed identities, service principals, user accounts, and managed service accounts | 3 |
+| 54 | Plan and implement workload identities | Plan and implement identities for applications and Azure workloads | Select appropriate identities for applications and Azure workloads, including managed identities, service principals, user accounts, and managed service accounts | 4 |
 | 55 | Plan and implement workload identities | Plan and implement identities for applications and Azure workloads | Create managed identities | 5 |
-| 56 | Plan and implement workload identities | Plan and implement identities for applications and Azure workloads | Assign a managed identity to an Azure resource | 3 |
+| 56 | Plan and implement workload identities | Plan and implement identities for applications and Azure workloads | Assign a managed identity to an Azure resource | 4 |
 | 57 | Plan and implement workload identities | Plan and implement identities for applications and Azure workloads | Use a managed identity assigned to an Azure resource to access other Azure resources | 5 |
-| 58 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Plan and implement settings for enterprise applications, including application-level and tenant-level settings | 3 |
-| 59 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Assign appropriate Microsoft Entra roles to users to manage enterprise applications | 3 |
+| 58 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Plan and implement settings for enterprise applications, including application-level and tenant-level settings | 4 |
+| 59 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Assign appropriate Microsoft Entra roles to users to manage enterprise applications | 4 |
 | 60 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Design and implement integration for on-premises apps by using Microsoft Entra Application Proxy | 4 |
-| 61 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Design and implement integration for software as a service (SaaS) apps | 2 |
-| 62 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Assign, classify, and manage users, groups, and app roles for enterprise applications | 2  |
+| 61 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Design and implement integration for software as a service (SaaS) apps | 4 |
+| 62 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Assign, classify, and manage users, groups, and app roles for enterprise applications | 4  |
 | 63 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Configure and manage user and admin consent | 5 |
 | 64 | Plan and implement workload identities | Plan, implement, and monitor the integration of enterprise applications | Create and manage application collections | 5 |
-| 65 | Plan and implement workload identities | Plan and implement app registrations | Plan for app registrations | 3 |
-| 66 | Plan and implement workload identities | Plan and implement app registrations | Create app registrations | 3 |
-| 67 | Plan and implement workload identities | Plan and implement app registrations | Configure app authentication | 3 |
-| 68 | Plan and implement workload identities | Plan and implement app registrations | Configure API permissions | 3 |
-| 69 | Plan and implement workload identities | Plan and implement app registrations | Create app roles | 2 |
+| 65 | Plan and implement workload identities | Plan and implement app registrations | Plan for app registrations | 4 |
+| 66 | Plan and implement workload identities | Plan and implement app registrations | Create app registrations | 4 |
+| 67 | Plan and implement workload identities | Plan and implement app registrations | Configure app authentication | 4 |
+| 68 | Plan and implement workload identities | Plan and implement app registrations | Configure API permissions | 4 |
+| 69 | Plan and implement workload identities | Plan and implement app registrations | Create app roles | 4 |
 | 70 | Plan and implement workload identities | Manage and monitor app access by using Microsoft Defender for Cloud Apps | Configure and analyze cloud discovery results by using Defender for Cloud Apps | 5 |
 | 71 | Plan and implement workload identities | Manage and monitor app access by using Microsoft Defender for Cloud Apps | Configure connected apps | 5 |
 | 72 | Plan and implement workload identities | Manage and monitor app access by using Microsoft Defender for Cloud Apps | Implement application-enforced restrictions | 5 |
@@ -92,7 +92,7 @@ Self-assessed skill rating for each task. Edit the **Rank** column only.
 | 80 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Manage access requests | 5 |
 | 81 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Implement and manage terms of use (ToU) | 5 |
 | 82 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Manage the lifecycle of external users | 4 |
-| 83 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Configure and manage connected organizations | 3 |
+| 83 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Configure and manage connected organizations | 4 |
 | 84 | Plan and automate identity governance | Plan, implement, and manage access reviews in Microsoft Entra | Plan for access reviews | 3 |
 | 85 | Plan and automate identity governance | Plan, implement, and manage access reviews in Microsoft Entra | Create and configure access reviews | 3 |
 | 86 | Plan and automate identity governance | Plan, implement, and manage access reviews in Microsoft Entra | Monitor access review activity | 3 |
