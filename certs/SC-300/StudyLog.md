@@ -8,7 +8,7 @@ This log tracks individual study sessions for the **SC-300** exam. Fill in **End
 
 | # | Date | Start | End | Duration | Mode | Skill | Notes |
 |:--|:-----|:------|:----|:---------|:-----|:------|:------|
-| 40 | 5/23/26 | 4:24 AM |  |  | NotebookLM | Plan, implement, and manage access reviews in Microsoft Entra |  |
+| 40 | 5/23/26 | 4:24 AM | 6:07 AM | 1h 43m | NotebookLM | Plan, implement, and manage access reviews in Microsoft Entra | Completed exam skill "Plan and implement entitlement management in Microsoft Entra"; pick up at "Plan, implement, and manage access reviews in Microsoft Entra" |
 | 39 | 5/22/26 | 4:14 AM | 5:53 AM | 1h 39m | NotebookLM | Plan and implement app registrations | Completed skill "Plan and implement app registrations"; pick up at "Plan and implement entitlement management in Microsoft Entra" |
 | 38 | 5/21/26 | 4:23 AM | 6:33 AM | 2h 10m | NotebookLM | Plan and implement identities for applications and Azure workloads | Completed skills "Plan and implement identities for applications and Azure workloads" and "Plan, implement, and monitor the integration of enterprise applications" |
 | 37 | 5/20/26 | 3:58 AM | 6:16 AM | 2h 18m | NotebookLM | Plan, implement, and manage Microsoft Entra Conditional Access | Completed skills "Plan, implement, and manage Microsoft Entra Conditional Access" and "Manage risk by using Microsoft Entra ID Protection" |
