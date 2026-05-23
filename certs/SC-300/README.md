@@ -8,8 +8,9 @@
 - **Study Log:** [Session-by-session study time tracker](./StudyLog.md)
 
 <!-- STUDY_SUMMARY -->
-**Hours Committed:** 68.2h · **Days Studied:** 29
+**Hours Committed:** 69.9h · **Days Studied:** 30
 <!-- /STUDY_SUMMARY -->
+
 
 ---
 
@@ -227,7 +228,7 @@ Priority tasks ranked from [SkillRanking.md](./SkillRanking.md). Lower rank mean
 | 11 | Workload Identities | Plan and implement app registrations | 5 | ⏳ 1.6h | ✅ | 1.6h | ✅ |
 | 12 | Workload Identities | Manage and monitor app access by using Microsoft Defender for Cloud Apps | 7 | ✅ 11.1h | ✅ | 11.1h | ✅ |
 | 13 | Identity Governance | Plan and implement entitlement management in Microsoft Entra | 7 | ✅ 7.9h | ✅ | 7.9h | ✅ |
-| 14 | Identity Governance | Plan, implement, and manage access reviews in Microsoft Entra | 4 | 🔲 | 🔲 | 0.0h | 🔲 |
+| 14 | Identity Governance | Plan, implement, and manage access reviews in Microsoft Entra | 4 | ⏳ 1.7h | 🔲 | 1.7h | ⏳ |
 | 15 | Identity Governance | Plan and implement privileged access | 6 | 🔲 | 🔲 | 0.0h | 🔲 |
 | 16 | Identity Governance | Monitor identity activity by using logs, workbooks, and reports | 5 | 🔲 | 🔲 | 0.0h | 🔲 |
 
