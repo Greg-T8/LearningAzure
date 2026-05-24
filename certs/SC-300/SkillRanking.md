@@ -93,10 +93,10 @@ Self-assessed skill rating for each task. Edit the **Rank** column only.
 | 81 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Implement and manage terms of use (ToU) | 5 |
 | 82 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Manage the lifecycle of external users | 4 |
 | 83 | Plan and automate identity governance | Plan and implement entitlement management in Microsoft Entra | Configure and manage connected organizations | 4 |
-| 84 | Plan and automate identity governance | Plan, implement, and manage access reviews in Microsoft Entra | Plan for access reviews | 3 |
-| 85 | Plan and automate identity governance | Plan, implement, and manage access reviews in Microsoft Entra | Create and configure access reviews | 3 |
-| 86 | Plan and automate identity governance | Plan, implement, and manage access reviews in Microsoft Entra | Monitor access review activity | 3 |
-| 87 | Plan and automate identity governance | Plan, implement, and manage access reviews in Microsoft Entra | Manually respond to access review activity | 2 |
+| 84 | Plan and automate identity governance | Plan, implement, and manage access reviews in Microsoft Entra | Plan for access reviews | 4 |
+| 85 | Plan and automate identity governance | Plan, implement, and manage access reviews in Microsoft Entra | Create and configure access reviews | 4 |
+| 86 | Plan and automate identity governance | Plan, implement, and manage access reviews in Microsoft Entra | Monitor access review activity | 4 |
+| 87 | Plan and automate identity governance | Plan, implement, and manage access reviews in Microsoft Entra | Manually respond to access review activity | 4 |
 | 88 | Plan and automate identity governance | Plan and implement privileged access | Plan and manage Microsoft Entra roles in Microsoft Entra Privileged Identity Management (PIM), including settings and assignments | 4 |
 | 89 | Plan and automate identity governance | Plan and implement privileged access | Plan and manage Azure resources in PIM, including settings and assignments | 4 |
 | 90 | Plan and automate identity governance | Plan and implement privileged access | Plan and configure PIM for Groups | 4 |
@@ -106,5 +106,5 @@ Self-assessed skill rating for each task. Edit the **Rank** column only.
 | 94 | Plan and automate identity governance | Monitor identity activity by using logs, workbooks, and reports | Review and analyze sign-in, audit, and provisioning logs by using the Microsoft Entra admin center | 3 |
 | 95 | Plan and automate identity governance | Monitor identity activity by using logs, workbooks, and reports | Configure diagnostic settings, including configuring destinations such as Log Analytics workspaces, storage accounts, and Azure Event Hubs | 4 |
 | 96 | Plan and automate identity governance | Monitor identity activity by using logs, workbooks, and reports | Monitor Microsoft Entra ID by using KQL queries in Log Analytics | 4 |
-| 97 | Plan and automate identity governance | Monitor identity activity by using logs, workbooks, and reports | Analyze Microsoft Entra ID by using workbooks and reporting | 3 |
-| 98 | Plan and automate identity governance | Monitor identity activity by using logs, workbooks, and reports | Monitor and improve the security posture by using Identity Secure Score | 2 |
+| 97 | Plan and automate identity governance | Monitor identity activity by using logs, workbooks, and reports | Analyze Microsoft Entra ID by using workbooks and reporting | 4 |
+| 98 | Plan and automate identity governance | Monitor identity activity by using logs, workbooks, and reports | Monitor and improve the security posture by using Identity Secure Score | 4 |

@@ -11,8 +11,6 @@
 **Hours Committed:** 71.0h · **Days Studied:** 31
 <!-- /STUDY_SUMMARY -->
 
-
-
 ---
 
 ## 📊 Exam Coverage
@@ -186,23 +184,23 @@ Priority tasks ranked from [SkillRanking.md](./SkillRanking.md). Lower rank mean
 | :------ | ----: | ---------: |
 | Unassessed (blank) | 0 | 0.0% |
 | 1 | 0 | 0.0% |
-| 2 | 2 | 2.0% |
-| 3 | 7 | 7.1% |
-| 4 | 52 | 53.1% |
+| 2 | 0 | 0.0% |
+| 3 | 3 | 3.1% |
+| 4 | 58 | 59.2% |
 | 5 | 37 | 37.8% |
 
 | # | Domain | Skill | Task | Rank |
 | -: | :----- | :---- | :--- | -: |
-| 1 | Plan and automate identity governance | Plan, implement, and manage access reviews in Microsoft Entra | Manually respond to access review activity | 2 |
-| 2 | Plan and automate identity governance | Monitor identity activity by using logs, workbooks, and reports | Monitor and improve the security posture by using Identity Secure Score | 2 |
-| 3 | Plan and automate identity governance | Plan, implement, and manage access reviews in Microsoft Entra | Plan for access reviews | 3 |
-| 4 | Plan and automate identity governance | Plan, implement, and manage access reviews in Microsoft Entra | Create and configure access reviews | 3 |
-| 5 | Plan and automate identity governance | Plan, implement, and manage access reviews in Microsoft Entra | Monitor access review activity | 3 |
-| 6 | Plan and automate identity governance | Plan and implement privileged access | Analyze PIM audit history and reports | 3 |
-| 7 | Plan and automate identity governance | Plan and implement privileged access | Create and manage break-glass accounts | 3 |
-| 8 | Plan and automate identity governance | Monitor identity activity by using logs, workbooks, and reports | Review and analyze sign-in, audit, and provisioning logs by using the Microsoft Entra admin center | 3 |
-| 9 | Plan and automate identity governance | Monitor identity activity by using logs, workbooks, and reports | Analyze Microsoft Entra ID by using workbooks and reporting | 3 |
-| 10 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure and manage domains in Microsoft Entra ID and Microsoft 365 | 4 |
+| 1 | Plan and automate identity governance | Plan and implement privileged access | Analyze PIM audit history and reports | 3 |
+| 2 | Plan and automate identity governance | Plan and implement privileged access | Create and manage break-glass accounts | 3 |
+| 3 | Plan and automate identity governance | Monitor identity activity by using logs, workbooks, and reports | Review and analyze sign-in, audit, and provisioning logs by using the Microsoft Entra admin center | 3 |
+| 4 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure and manage domains in Microsoft Entra ID and Microsoft 365 | 4 |
+| 5 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure tenant properties, user settings, group settings, and device settings | 4 |
+| 6 | Implement and manage user identities | Create, configure, and manage Microsoft Entra identities | Create, configure, and manage users | 4 |
+| 7 | Implement and manage user identities | Create, configure, and manage Microsoft Entra identities | Create, configure, and manage groups | 4 |
+| 8 | Implement and manage user identities | Create, configure, and manage Microsoft Entra identities | Automate bulk operations by using the Microsoft Entra admin center and PowerShell | 4 |
+| 9 | Implement and manage user identities | Create, configure, and manage Microsoft Entra identities | Assign, modify, and report on licenses | 4 |
+| 10 | Implement and manage user identities | Implement and manage identities for external users and tenants | Manage External collaboration settings in Microsoft Entra ID | 4 |
 
 <!-- END FOCUS LIST -->
 
@@ -231,7 +229,7 @@ Priority tasks ranked from [SkillRanking.md](./SkillRanking.md). Lower rank mean
 | 13 | Identity Governance | Plan and implement entitlement management in Microsoft Entra | 7 | ✅ 7.9h | ✅ | 7.9h | ✅ |
 | 14 | Identity Governance | Plan, implement, and manage access reviews in Microsoft Entra | 4 | ⏳ 2.7h | 🔲 | 2.7h | ⏳ |
 | 15 | Identity Governance | Plan and implement privileged access | 6 | 🔲 | 🔲 | 0.0h | 🔲 |
-| 16 | Identity Governance | Monitor identity activity by using logs, workbooks, and reports | 5 | 🔲 | 🔲 | 0.0h | 🔲 |
+| 16 | Identity Governance | Monitor identity activity by using logs, workbooks, and reports | 5 | ✅ | ✅ | 0.0h | ✅ |
 
 **Modalities:**
 

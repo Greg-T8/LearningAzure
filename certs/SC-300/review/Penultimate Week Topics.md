@@ -188,3 +188,9 @@ Documentation
 * Analyze Microsoft Entra ID by using workbooks and reporting
 * Configure diagnostic settings, including configuring destinations such as Log Analytics workspaces, storage accounts, and Azure Event Hubs
 * Monitor Microsoft Entra ID by using KQL queries in Log Analytics
+
+Documentation
+
+- Monitoring and health
+- Hybrid Identity
+-
