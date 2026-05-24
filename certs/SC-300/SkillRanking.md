@@ -101,9 +101,9 @@ Self-assessed skill rating for each task. Edit the **Rank** column only.
 | 89 | Plan and automate identity governance | Plan and implement privileged access | Plan and manage Azure resources in PIM, including settings and assignments | 4 |
 | 90 | Plan and automate identity governance | Plan and implement privileged access | Plan and configure PIM for Groups | 4 |
 | 91 | Plan and automate identity governance | Plan and implement privileged access | Manage the PIM request and approval process | 4 |
-| 92 | Plan and automate identity governance | Plan and implement privileged access | Analyze PIM audit history and reports | 3 |
-| 93 | Plan and automate identity governance | Plan and implement privileged access | Create and manage break-glass accounts | 3 |
-| 94 | Plan and automate identity governance | Monitor identity activity by using logs, workbooks, and reports | Review and analyze sign-in, audit, and provisioning logs by using the Microsoft Entra admin center | 3 |
+| 92 | Plan and automate identity governance | Plan and implement privileged access | Analyze PIM audit history and reports | 4 |
+| 93 | Plan and automate identity governance | Plan and implement privileged access | Create and manage break-glass accounts | 4 |
+| 94 | Plan and automate identity governance | Monitor identity activity by using logs, workbooks, and reports | Review and analyze sign-in, audit, and provisioning logs by using the Microsoft Entra admin center | 4 |
 | 95 | Plan and automate identity governance | Monitor identity activity by using logs, workbooks, and reports | Configure diagnostic settings, including configuring destinations such as Log Analytics workspaces, storage accounts, and Azure Event Hubs | 4 |
 | 96 | Plan and automate identity governance | Monitor identity activity by using logs, workbooks, and reports | Monitor Microsoft Entra ID by using KQL queries in Log Analytics | 4 |
 | 97 | Plan and automate identity governance | Monitor identity activity by using logs, workbooks, and reports | Analyze Microsoft Entra ID by using workbooks and reporting | 4 |

@@ -8,8 +8,9 @@
 - **Study Log:** [Session-by-session study time tracker](./StudyLog.md)
 
 <!-- STUDY_SUMMARY -->
-**Hours Committed:** 71.0h · **Days Studied:** 31
+**Hours Committed:** 72.8h · **Days Studied:** 31
 <!-- /STUDY_SUMMARY -->
+
 
 ---
 
@@ -24,9 +25,9 @@ Skill-level coverage based on [Per-Skill Progress](#per-skill-progress) completi
 | [1. User Identities](#domain-1) | 20–25% | 4 | 4 / 4 (100%) | 🟢 |
 | [2. Authentication & Access Management](#domain-2) | 25–30% | 4 | 4 / 4 (100%) | 🟢 |
 | [3. Workload Identities](#domain-3) | 20–25% | 4 | 4 / 4 (100%) | 🟢 |
-| [4. Identity Governance](#domain-4) | 20–25% | 4 | 1 / 4 (25%) | 🔴 |
+| [4. Identity Governance](#domain-4) | 20–25% | 4 | 4 / 4 (100%) | 🟢 |
 
-**Totals:** 13 / 16 skills completed
+**Totals:** 16 / 16 skills completed
 
 **Legend:** 🟢 Strong (≥66%) · 🟡 Partial (33–65%) · 🔴 Low (<33%) — "Covered" = skill completed in Per-Skill Progress
 
@@ -185,22 +186,22 @@ Priority tasks ranked from [SkillRanking.md](./SkillRanking.md). Lower rank mean
 | Unassessed (blank) | 0 | 0.0% |
 | 1 | 0 | 0.0% |
 | 2 | 0 | 0.0% |
-| 3 | 3 | 3.1% |
-| 4 | 58 | 59.2% |
+| 3 | 0 | 0.0% |
+| 4 | 61 | 62.2% |
 | 5 | 37 | 37.8% |
 
 | # | Domain | Skill | Task | Rank |
 | -: | :----- | :---- | :--- | -: |
-| 1 | Plan and automate identity governance | Plan and implement privileged access | Analyze PIM audit history and reports | 3 |
-| 2 | Plan and automate identity governance | Plan and implement privileged access | Create and manage break-glass accounts | 3 |
-| 3 | Plan and automate identity governance | Monitor identity activity by using logs, workbooks, and reports | Review and analyze sign-in, audit, and provisioning logs by using the Microsoft Entra admin center | 3 |
-| 4 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure and manage domains in Microsoft Entra ID and Microsoft 365 | 4 |
-| 5 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure tenant properties, user settings, group settings, and device settings | 4 |
-| 6 | Implement and manage user identities | Create, configure, and manage Microsoft Entra identities | Create, configure, and manage users | 4 |
-| 7 | Implement and manage user identities | Create, configure, and manage Microsoft Entra identities | Create, configure, and manage groups | 4 |
-| 8 | Implement and manage user identities | Create, configure, and manage Microsoft Entra identities | Automate bulk operations by using the Microsoft Entra admin center and PowerShell | 4 |
-| 9 | Implement and manage user identities | Create, configure, and manage Microsoft Entra identities | Assign, modify, and report on licenses | 4 |
-| 10 | Implement and manage user identities | Implement and manage identities for external users and tenants | Manage External collaboration settings in Microsoft Entra ID | 4 |
+| 1 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure and manage domains in Microsoft Entra ID and Microsoft 365 | 4 |
+| 2 | Implement and manage user identities | Configure and manage a Microsoft Entra tenant | Configure tenant properties, user settings, group settings, and device settings | 4 |
+| 3 | Implement and manage user identities | Create, configure, and manage Microsoft Entra identities | Create, configure, and manage users | 4 |
+| 4 | Implement and manage user identities | Create, configure, and manage Microsoft Entra identities | Create, configure, and manage groups | 4 |
+| 5 | Implement and manage user identities | Create, configure, and manage Microsoft Entra identities | Automate bulk operations by using the Microsoft Entra admin center and PowerShell | 4 |
+| 6 | Implement and manage user identities | Create, configure, and manage Microsoft Entra identities | Assign, modify, and report on licenses | 4 |
+| 7 | Implement and manage user identities | Implement and manage identities for external users and tenants | Manage External collaboration settings in Microsoft Entra ID | 4 |
+| 8 | Implement and manage user identities | Implement and manage identities for external users and tenants | Invite external users, individually or in bulk | 4 |
+| 9 | Implement and manage user identities | Implement and manage identities for external users and tenants | Manage external user accounts in Microsoft Entra ID | 4 |
+| 10 | Implement and manage user identities | Implement and manage identities for external users and tenants | Implement Cross-tenant access settings | 4 |
 
 <!-- END FOCUS LIST -->
 
@@ -227,9 +228,9 @@ Priority tasks ranked from [SkillRanking.md](./SkillRanking.md). Lower rank mean
 | 11 | Workload Identities | Plan and implement app registrations | 5 | ⏳ 1.6h | ✅ | 1.6h | ✅ |
 | 12 | Workload Identities | Manage and monitor app access by using Microsoft Defender for Cloud Apps | 7 | ✅ 11.1h | ✅ | 11.1h | ✅ |
 | 13 | Identity Governance | Plan and implement entitlement management in Microsoft Entra | 7 | ✅ 7.9h | ✅ | 7.9h | ✅ |
-| 14 | Identity Governance | Plan, implement, and manage access reviews in Microsoft Entra | 4 | ⏳ 2.7h | 🔲 | 2.7h | ⏳ |
-| 15 | Identity Governance | Plan and implement privileged access | 6 | 🔲 | 🔲 | 0.0h | 🔲 |
-| 16 | Identity Governance | Monitor identity activity by using logs, workbooks, and reports | 5 | ✅ | ✅ | 0.0h | ✅ |
+| 14 | Identity Governance | Plan, implement, and manage access reviews in Microsoft Entra | 4 | ⏳ 2.7h | ✅ | 2.7h | ✅ |
+| 15 | Identity Governance | Plan and implement privileged access | 6 | ✅ 0.8h | ✅ | 0.8h | ✅ |
+| 16 | Identity Governance | Monitor identity activity by using logs, workbooks, and reports | 5 | ✅ 1.1h | ✅ | 1.1h | ✅ |
 
 **Modalities:**
 
