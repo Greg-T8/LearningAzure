@@ -8,6 +8,7 @@ This log tracks individual study sessions for the **SC-300** exam. Fill in **End
 
 | # | Date | Start | End | Duration | Mode | Skill | Notes |
 |:--|:-----|:------|:----|:---------|:-----|:------|:------|
+| 42 | 5/24/26 | 8:33 AM |  |  | NotebookLM | Monitor identity activity by using logs, workbooks, and reports |  |
 | 41 | 5/24/26 | 7:32 AM | 8:33 AM | 1h 1m | NotebookLM | Plan, implement, and manage access reviews in Microsoft Entra | Completed skill "Plan, implement, and manage access reviews in Microsoft Entra"; moving to "Monitor identity activity by using logs, workbooks, and reports" |
 | 40 | 5/23/26 | 4:24 AM | 6:07 AM | 1h 43m | NotebookLM | Plan, implement, and manage access reviews in Microsoft Entra | Completed exam skill "Plan and implement entitlement management in Microsoft Entra"; pick up at "Plan, implement, and manage access reviews in Microsoft Entra" |
 | 39 | 5/22/26 | 4:14 AM | 5:53 AM | 1h 39m | NotebookLM | Plan and implement app registrations | Completed skill "Plan and implement app registrations"; pick up at "Plan and implement entitlement management in Microsoft Entra" |
