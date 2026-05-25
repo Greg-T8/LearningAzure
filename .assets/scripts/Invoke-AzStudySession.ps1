@@ -27,7 +27,7 @@ param(
 
     [string]$Exam,
 
-    [ValidateSet('PracticeQuestion', 'MSLearn', 'MSDocs', 'NotebookLM', 'Lab', 'WorkflowDevelopment')]
+    [ValidateSet('PracticeQuestion', 'MSLearn', 'MSDocs', 'NotebookLM', 'Lab', 'Review', 'WorkflowDevelopment')]
     [string]$Mode,
 
     [ArgumentCompleter({
@@ -88,15 +88,17 @@ $Main = {
             # Validate Exam against active exams and WorkflowDevelopment
             Confirm-ValidExam -Exam $Exam
 
-            # Require Mode and Skill for certification exams (skip for WorkflowDevelopment)
+            # Require Mode and Skill for certification exams (skip for WorkflowDevelopment; Skill is optional for Review mode)
             if ($Exam -ne 'WorkflowDevelopment') {
                 if (-not $Mode) {
                     throw "Mode is required when Exam is not 'WorkflowDevelopment'."
                 }
-                if (-not $Skill) {
-                    throw "Skill is required when Exam is not 'WorkflowDevelopment'."
+                if (-not $Skill -and $Mode -ne 'Review') {
+                    throw "Skill is required when Exam is not 'WorkflowDevelopment' and Mode is not 'Review'."
                 }
-                Confirm-ValidSkill -Exam $Exam -Skill $Skill
+                if ($Skill) {
+                    Confirm-ValidSkill -Exam $Exam -Skill $Skill
+                }
             }
 
             $folder = Resolve-ExamFolder -Exam $Exam
@@ -232,15 +234,17 @@ $Main = {
             # Validate the destination exam
             Confirm-ValidExam -Exam $Exam
 
-            # Require Mode and Skill for certification exams (skip for WorkflowDevelopment)
+            # Require Mode and Skill for certification exams (skip for WorkflowDevelopment; Skill is optional for Review mode)
             if ($Exam -ne 'WorkflowDevelopment') {
                 if (-not $Mode) {
                     throw "Mode is required when destination Exam is not 'WorkflowDevelopment'."
                 }
-                if (-not $Skill) {
-                    throw "Skill is required when destination Exam is not 'WorkflowDevelopment'."
+                if (-not $Skill -and $Mode -ne 'Review') {
+                    throw "Skill is required when destination Exam is not 'WorkflowDevelopment' and Mode is not 'Review'."
                 }
-                Confirm-ValidSkill -Exam $Exam -Skill $Skill
+                if ($Skill) {
+                    Confirm-ValidSkill -Exam $Exam -Skill $Skill
+                }
             }
 
             # Open a new session in the destination log starting at the split point
