@@ -8,7 +8,7 @@ This log tracks individual study sessions for the **SC-300** exam. Fill in **End
 
 | # | Date | Start | End | Duration | Mode | Skill | Notes |
 |:--|:-----|:------|:----|:---------|:-----|:------|:------|
-| 44 | 5/25/26 | 4:58 AM |  |  | Review |  |  |
+| 44 | 5/25/26 | 4:58 AM | 7:56 AM | 2h 58m | Review |  | Reviewed domain 1 notes and completed 25% of MeasureUp practice questions |
 | 43 | 5/24/26 | 9:44 AM | 10:30 AM | 0h 46m | NotebookLM | Plan and implement privileged access | Completed skill |
 | 42 | 5/24/26 | 8:33 AM | 9:41 AM | 1h 8m | NotebookLM | Monitor identity activity by using logs, workbooks, and reports | Completed skill |
 | 41 | 5/24/26 | 7:32 AM | 8:33 AM | 1h 1m | NotebookLM | Plan, implement, and manage access reviews in Microsoft Entra | Completed skill "Plan, implement, and manage access reviews in Microsoft Entra"; moving to "Monitor identity activity by using logs, workbooks, and reports" |
