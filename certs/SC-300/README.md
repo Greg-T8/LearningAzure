@@ -6,6 +6,7 @@
 - **Official Study Guide:** [SC-300 Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/sc-300)
 - **Deep Research Study Guide:** [Deep Research Study Guide](./research/SC-300-Study-Guide-Task-to-Documentation-Map.md)
 - **Study Log:** [Session-by-session study time tracker](./StudyLog.md)
+- **My Exam Experience:** [My SC-300 Exam Experience](./exam.md)
 
 <!-- STUDY_SUMMARY -->
 **Hours Committed:** 83.7h · **Days Studied:** 36
