@@ -8,7 +8,7 @@ This log tracks individual study sessions for the **SC-300** exam. Fill in **End
 
 | # | Date | Start | End | Duration | Mode | Skill | Notes |
 |:--|:-----|:------|:----|:---------|:-----|:------|:------|
-| 48 | 5/29/26 | 4:04 AM |  |  | Review |  |  |
+| 48 | 5/29/26 | 4:04 AM | 5:39 AM | 1h 35m | Review |  | Ready for the exam! |
 | 47 | 5/28/26 | 4:31 AM | 6:10 AM | 1h 39m | Review |  | Completed Measure-Up first round; scored 74% |
 | 46 | 5/27/26 | 3:50 AM | 6:16 AM | 2h 26m | Review |  | Reached 75% completion of MeasureUp questions; reviewed domain 'Plan and automate identity governance' |
 | 45 | 5/26/26 | 3:53 AM | 6:07 AM | 2h 14m | Review |  | Reviewed domain 2 notes and completed 25% of MeasureUp practice questions |
