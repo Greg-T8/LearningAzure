@@ -8,8 +8,9 @@
 - **Study Log:** [Session-by-session study time tracker](./StudyLog.md)
 
 <!-- STUDY_SUMMARY -->
-**Hours Committed:** 82.1h · **Days Studied:** 35
+**Hours Committed:** 83.7h · **Days Studied:** 36
 <!-- /STUDY_SUMMARY -->
+
 
 ---
 
