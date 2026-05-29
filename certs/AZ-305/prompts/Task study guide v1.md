@@ -2,30 +2,26 @@ You are creating an exhaustive AZ-305 study guide for one exam task.
 
 Exam: AZ-305: Designing Microsoft Azure Infrastructure Solutions
 
-Study Guide: <https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-305>
+Study Guide:
+<insert Microsoft Study Guide URL>
 
 Domain:
-Design identity, governance, and monitoring solutions
+<domain>
 
 Skill:
-Design solutions for logging and monitoring
+<skill>
 
 Task:
-Recommend a logging solution
+<task>
 
 Primary Microsoft Learn module(s):
-<https://learn.microsoft.com/en-us/training/modules/design-solution-to-log-monitor-azure-resources/>
+<insert Microsoft Learn module URLs>
 
 Primary Microsoft documentation:
-<https://learn.microsoft.com/en-us/azure/azure-monitor/>
+<insert Microsoft documentation URLs>
 
 Optional related sources:
 <insert optional Azure Architecture Center, Cloud Adoption Framework, Well-Architected Framework, or Exam Readiness Zone URLs>
-
-<https://learn.microsoft.com/en-us/azure/architecture/>
-<https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/>
-<https://learn.microsoft.com/en-us/azure/well-architected/what-is-well-architected-framework>
-<https://learn.microsoft.com/en-us/shows/exam-readiness-zone/>
 
 Research boundaries:
 Use Microsoft Learn and official Microsoft documentation as the authoritative source base. Start with the Microsoft Learn module content I provided, then fan out into supporting Microsoft documentation. Use broader Microsoft sources only when they directly clarify, deepen, or operationalize the specific exam task.
