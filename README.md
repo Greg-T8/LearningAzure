@@ -24,18 +24,18 @@ Progress trackers, detailed study notes, practice exams, and hands-on labs:
 
 | Date | AZ-305 | SC-300 | Total |
 |------|------|------|-------|
-| Sat, May 30 |  |  |  |
+| Sat, May 30 | 🟣 2.2h |  | **2.2h** |
 | Fri, May 29 |  | 🟢 1.6h | **1.6h** |
 | Thu, May 28 |  | 🟢 1.6h | **1.6h** |
 | Wed, May 27 |  | 🟣 2.4h | **2.4h** |
 | Tue, May 26 |  | 🟣 2.2h | **2.2h** |
 | Mon, May 25 |  | 🟣 3.0h | **3.0h** |
 | Sun, May 24 |  | 🟣 2.9h | **2.9h** |
-| **Weekly Total** | **0.0h** | **13.7h** | **13.7h** |
+| **Weekly Total** | **2.2h** | **13.7h** | **15.9h** |
 | ***Running Total*** | ***0.0h*** | ***83.7h*** | ***83.7h*** |
 
 *Activity Levels: 🟡 Low (< 1hr) | 🟢 Medium (1-2hrs) | 🟣 High (> 2hrs)*
 
-*Last updated: May 30, 2026 at 05:52 CDT*
+*Last updated: May 30, 2026 at 06:16 CDT*
 
 <!-- COMMIT_STATS_END -->
