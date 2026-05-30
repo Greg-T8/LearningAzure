@@ -255,6 +255,42 @@ $Helpers = {
         }
     }
 
+    function Get-StudyLogStats {
+        param([string]$Path)
+
+        # Parse a StudyLog.md and return first session date and total study hours
+        $result = [pscustomobject]@{
+            FirstDate  = $null
+            TotalHours = 0
+        }
+
+        if (-not (Test-Path -Path $Path)) { return $result }
+
+        $totalMinutes = 0
+        foreach ($line in Get-Content -Path $Path -Encoding UTF8) {
+            if ($line -notmatch '^\|\s*\d+\s*\|') { continue }
+
+            $cells = ($line.TrimStart('|').TrimEnd('|')) -split '\|'
+            if ($cells.Count -lt 5) { continue }
+
+            $dateCell = $cells[1].Trim()
+            $durationCell = $cells[4].Trim()
+
+            if (-not $result.FirstDate -and $dateCell -match '^\d{1,2}/\d{1,2}/\d{2,4}$') {
+                $result.FirstDate = $dateCell
+            }
+
+            if ($durationCell -match '^(?:(\d+)\s*h)?\s*(?:(\d+)\s*m)?$') {
+                $hours = if ([string]::IsNullOrWhiteSpace($Matches[1])) { 0 } else { [int]$Matches[1] }
+                $minutes = if ([string]::IsNullOrWhiteSpace($Matches[2])) { 0 } else { [int]$Matches[2] }
+                $totalMinutes += ($hours * 60) + $minutes
+            }
+        }
+
+        $result.TotalHours = [int][math]::Round($totalMinutes / 60, 0)
+        return $result
+    }
+
     function Update-InProgressDuration {
         [CmdletBinding(SupportsShouldProcess)]
 
@@ -280,8 +316,28 @@ $Helpers = {
 
                 # Recalculate duration only for active exams
                 if ($statusCell -eq 'In Progress') {
+                    $startDateText = $null
+                    $logStats = $null
+
+                    # Resolve the exam's StudyLog so we can pull total hours (and a fallback start date)
+                    if ($examCell -match 'certs/([A-Za-z0-9_-]+)/README\.md') {
+                        $examSlug = $Matches[1]
+                        $candidateLog = Join-Path -Path $RepoRoot -ChildPath "certs\$examSlug\StudyLog.md"
+                        $logStats = Get-StudyLogStats -Path $candidateLog
+                    }
+
+                    # Prefer an existing start date already present in the Duration cell
                     if ($durationCell -match '(\d{1,2}/\d{1,2}/\d{2,4})') {
                         $startDateText = $Matches[1]
+                    }
+                    elseif ($logStats -and $logStats.FirstDate) {
+                        $startDateText = $logStats.FirstDate
+                    }
+                    else {
+                        Write-Warning "No start date found for In Progress row: $line"
+                    }
+
+                    if ($startDateText) {
                         $startDate = $null
 
                         foreach ($format in $dateFormats) {
@@ -299,18 +355,22 @@ $Helpers = {
                         }
 
                         if ($null -ne $startDate) {
-                            $days = ($today - $startDate.Date).Days
+                            $days = ($today - $startDate.Date).Days + 1
                             $todayText = $today.ToString('M/d/yy')
-                            $newDuration = "$startDateText – $todayText (${days}d)"
+
+                            # Append total study hours when the log has any logged time
+                            $totalsText = "${days}d"
+                            if ($logStats -and $logStats.TotalHours -gt 0) {
+                                $totalsText = "${days}d, $($logStats.TotalHours)h"
+                            }
+
+                            $newDuration = "$startDateText – $todayText ($totalsText)"
                             $output.Add("| $examCell | $descriptionCell | $statusCell | $newDuration |")
                             $updatedRows++
                             continue
                         }
 
                         Write-Warning "Could not parse start date '$startDateText' in row: $line"
-                    }
-                    else {
-                        Write-Warning "No start date found for In Progress row: $line"
                     }
                 }
             }
