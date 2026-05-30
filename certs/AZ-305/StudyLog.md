@@ -8,4 +8,4 @@ This log tracks individual study sessions for the **AZ-305** exam. Fill in **End
 
 | # | Date | Start | End | Duration | Mode | Task | Notes |
 |:--|:-----|:------|:----|:---------|:-----|:------|:------|
-| 1 | 5/30/26 | 4:28 AM |  |  | Prepare |  |  |
+| 1 | 5/30/26 | 4:05 AM |  |  | Prepare |  |  |

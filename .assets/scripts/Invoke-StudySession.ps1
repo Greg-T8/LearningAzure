@@ -3,12 +3,11 @@
 Manage study sessions for certification exam tracking.
 
 .DESCRIPTION
-Manages study session tracking for certification exams. Supports start/stop/switch actions:
+Manages study session tracking for certification exams. Supports Start and Stop actions:
 Start — inserts a new row at the top of StudyLog.md with session number, date, and start time.
-End/Stop — closes the active session with end time and duration.
-Switch — closes the active session at a split point (start + N minutes) and opens a new
-session in a different exam/context starting at that same split point.
-Start also auto-closes any currently active session before opening a new session.
+        Auto-closes any currently active session in another exam before opening the new one.
+Stop  — closes the active session with end time and duration.
+Sessions may optionally be tagged with a Task from the exam's Skills.psd1.
 
 .CONTEXT
 LearningAzure repository — certification study tracking.
@@ -22,7 +21,7 @@ Program: Invoke-AzStudySession.ps1
 
 [CmdletBinding()]
 param(
-    [ValidateSet('Start', 'Stop', 'End', 'Switch', 'Complete')]
+    [ValidateSet('Start', 'Stop')]
     [string]$Action = 'Start',
 
     [string]$Exam,
@@ -34,7 +33,7 @@ param(
         param($commandName, $parameterName, $wordToComplete, $commandAst, $fakeBoundParameters)
 
         $examValue = $fakeBoundParameters['Exam']
-        if (-not $examValue -or $examValue -eq 'WorkflowDevelopment') { return }
+        if (-not $examValue) { return }
 
         # Resolve the script directory from the command path
         $resolved = Resolve-Path -Path $commandName -ErrorAction SilentlyContinue
@@ -45,18 +44,17 @@ param(
         $skillsFile = Join-Path -Path $repoRoot -ChildPath "certs\$examValue\Skills.psd1"
         if (-not (Test-Path -Path $skillsFile)) { return }
 
-        # Return matching skill names from the exam's skills file
+        # Return matching task names from the exam's skills file (deduped across skills)
         (Import-PowerShellDataFile -Path $skillsFile).Domains |
             ForEach-Object { $_.Skills } |
-            ForEach-Object { $_.Name } |
+            ForEach-Object { $_.Tasks } |
+            Sort-Object -Unique |
             Where-Object { $_ -like "$wordToComplete*" } |
             ForEach-Object {
                 [System.Management.Automation.CompletionResult]::new("'$_'", $_, 'ParameterValue', $_)
             }
     })]
-    [string]$Skill,
-
-    [int]$MinutesElapsed,
+    [string]$Task,
 
     [string]$Notes
 )
@@ -65,12 +63,6 @@ param(
 $RepoRoot = Resolve-Path -Path (Join-Path -Path $PSScriptRoot -ChildPath '..\..')
 $StudyLogFile = $null
 $GetActiveExamScript = Join-Path -Path $PSScriptRoot -ChildPath 'Get-ActiveExam.ps1'
-$ExamFolderMap = @{
-    'WorkflowDevelopment' = '.assets\workflow-development'
-}
-$ExamLogFileMap = @{
-    'WorkflowDevelopment' = 'WorkLog.md'
-}
 
 $Main = {
     . $Helpers
@@ -85,20 +77,15 @@ $Main = {
                 throw "Exam is required when Action is 'Start'."
             }
 
-            # Validate Exam against active exams and WorkflowDevelopment
             Confirm-ValidExam -Exam $Exam
 
-            # Require Mode and Skill for certification exams (skip for WorkflowDevelopment; Skill is optional for Review mode)
-            if ($Exam -ne 'WorkflowDevelopment') {
-                if (-not $Mode) {
-                    throw "Mode is required when Exam is not 'WorkflowDevelopment'."
-                }
-                if (-not $Skill -and $Mode -ne 'Review') {
-                    throw "Skill is required when Exam is not 'WorkflowDevelopment' and Mode is not 'Review'."
-                }
-                if ($Skill) {
-                    Confirm-ValidSkill -Exam $Exam -Skill $Skill
-                }
+            if (-not $Mode) {
+                throw "Mode is required when Action is 'Start'."
+            }
+
+            # Task is optional; validate against Skills.psd1 tasks when supplied
+            if ($Task) {
+                Confirm-ValidTask -Exam $Exam -Task $Task
             }
 
             $folder = Resolve-ExamFolder -Exam $Exam
@@ -119,7 +106,7 @@ $Main = {
 
             Confirm-StudyLogExists
             $session = Get-NextSessionNumber
-            Add-SessionEntry -SessionNumber $session -Mode $Mode -Skill $Skill -Notes $Notes
+            Add-SessionEntry -SessionNumber $session -Mode $Mode -Task $Task -Notes $Notes
             Push-StudyLogChange -SessionNumber $session -Type 'start' -Exam $Exam
             Show-Confirmation -Message "Study session #$session started for $Exam"
         }
@@ -130,7 +117,6 @@ $Main = {
                 throw 'No active study session found in any exam study log.'
             }
 
-            # Validate non-workflow exams when Exam is explicitly provided.
             if ($Exam) {
                 Confirm-ValidExam -Exam $sourceExam
             }
@@ -147,171 +133,21 @@ $Main = {
             Close-SessionEntry -SessionNumber $sourceSession -LogFile $sourceLog -Notes $Notes
             Push-StudyLogChange -SessionNumber $sourceSession -Type 'end' -Exam $sourceExam
             Show-Confirmation -Message "Study session #$sourceSession ended for $sourceExam"
-        }
-        'End' {
-            # If Exam is provided, stop the active session in that exam log; otherwise detect the active exam.
-            $sourceExam = if ($Exam) { $Exam } else { Find-ActiveExam }
-            if (-not $sourceExam) {
-                throw 'No active study session found in any exam study log.'
-            }
-
-            # Validate non-workflow exams when Exam is explicitly provided.
-            if ($Exam) {
-                Confirm-ValidExam -Exam $sourceExam
-            }
-
-            $sourceFolder = Resolve-ExamFolder -Exam $sourceExam
-            $sourceLogFileName = Resolve-ExamLogFileName -Exam $sourceExam
-            $sourceLog = Join-Path -Path $RepoRoot -ChildPath "$sourceFolder\$sourceLogFileName"
-
-            if (-not (Test-Path -Path $sourceLog)) {
-                throw "Study log not found at '$sourceLog'."
-            }
-
-            $sourceSession = Get-ActiveSessionNumber -LogFile $sourceLog
-            Close-SessionEntry -SessionNumber $sourceSession -LogFile $sourceLog -Notes $Notes
-            Push-StudyLogChange -SessionNumber $sourceSession -Type 'end' -Exam $sourceExam
-            Show-Confirmation -Message "Study session #$sourceSession ended for $sourceExam"
-        }
-        'Switch' {
-            if (-not $Exam) {
-                throw "Exam is required when Action is 'Switch' (destination exam)."
-            }
-            if ($MinutesElapsed -le 0) {
-                throw "MinutesElapsed is required and must be greater than 0 when Action is 'Switch'."
-            }
-
-            # Locate the active source session
-            $sourceExam = Find-ActiveExam
-            if (-not $sourceExam) {
-                throw 'No active study session found in any exam study log.'
-            }
-
-            $sourceFolder      = Resolve-ExamFolder -Exam $sourceExam
-            $sourceLogFileName = Resolve-ExamLogFileName -Exam $sourceExam
-            $sourceLog         = Join-Path -Path $RepoRoot -ChildPath "$sourceFolder\$sourceLogFileName"
-            $sourceSession     = Get-ActiveSessionNumber -LogFile $sourceLog
-
-            # Parse the source session start time to compute the split point
-            $sourceLines   = Get-Content -Path $sourceLog
-            $sourceRow     = $sourceLines | Where-Object { $_ -match ('^\|\s*' + $sourceSession + '\s*\|') } | Select-Object -First 1
-            $sourceCols    = $sourceRow -split '\|'
-            $dateStr       = $sourceCols[2].Trim()
-            $startStr      = $sourceCols[3].Trim()
-            $startText     = if ([string]::IsNullOrWhiteSpace($startStr)) { $dateStr } else { "$dateStr $startStr" }
-            $startDateTime = [datetime]::MinValue
-
-            # Prefer current culture, then invariant culture, to tolerate host-specific parsing behavior
-            $parsedStart = [datetime]::TryParse(
-                $startText,
-                [System.Globalization.CultureInfo]::CurrentCulture,
-                [System.Globalization.DateTimeStyles]::AllowWhiteSpaces,
-                [ref]$startDateTime
-            )
-            if (-not $parsedStart) {
-                $parsedStart = [datetime]::TryParse(
-                    $startText,
-                    [System.Globalization.CultureInfo]::InvariantCulture,
-                    [System.Globalization.DateTimeStyles]::AllowWhiteSpaces,
-                    [ref]$startDateTime
-                )
-            }
-            if (-not $parsedStart) {
-                throw "Unable to parse session start date/time '$startText' for session #$sourceSession in '$sourceLog'."
-            }
-
-            # Compute split time and validate it is not in the future
-            $splitTime = $startDateTime.AddMinutes($MinutesElapsed)
-            if ($splitTime -gt (Get-Date)) {
-                throw "Split time ($($splitTime.ToString('h:mm tt'))) is in the future. Reduce MinutesElapsed."
-            }
-
-            # Close the source session at the split point
-            Close-SessionEntry -SessionNumber $sourceSession -LogFile $sourceLog -EndTime $splitTime -Notes $Notes
-            Push-StudyLogChange -SessionNumber $sourceSession -Type 'end' -Exam $sourceExam
-            Show-Confirmation -Message "Study session #$sourceSession ended for $sourceExam (switched after $MinutesElapsed min)"
-
-            # Validate the destination exam
-            Confirm-ValidExam -Exam $Exam
-
-            # Require Mode and Skill for certification exams (skip for WorkflowDevelopment; Skill is optional for Review mode)
-            if ($Exam -ne 'WorkflowDevelopment') {
-                if (-not $Mode) {
-                    throw "Mode is required when destination Exam is not 'WorkflowDevelopment'."
-                }
-                if (-not $Skill -and $Mode -ne 'Review') {
-                    throw "Skill is required when destination Exam is not 'WorkflowDevelopment' and Mode is not 'Review'."
-                }
-                if ($Skill) {
-                    Confirm-ValidSkill -Exam $Exam -Skill $Skill
-                }
-            }
-
-            # Open a new session in the destination log starting at the split point
-            $folder = Resolve-ExamFolder -Exam $Exam
-            $logFileName = Resolve-ExamLogFileName -Exam $Exam
-            $script:StudyLogFile = Join-Path -Path $RepoRoot -ChildPath "$folder\$logFileName"
-            Confirm-StudyLogExists
-            $session = Get-NextSessionNumber
-            Add-SessionEntry -SessionNumber $session -StartTime $splitTime -Mode $Mode -Skill $Skill
-            Push-StudyLogChange -SessionNumber $session -Type 'start' -Exam $Exam
-            Show-Confirmation -Message "Study session #$session started for $Exam (switched from $sourceExam)"
-        }
-        'Complete' {
-            if (-not $Exam) {
-                throw "Exam is required when Action is 'Complete'."
-            }
-            if (-not $Skill) {
-                throw "Skill is required when Action is 'Complete'."
-            }
-
-            # WorkflowDevelopment does not use a skills list or per-skill progress tracker
-            if ($Exam -eq 'WorkflowDevelopment') {
-                throw "Action 'Complete' is not supported for WorkflowDevelopment."
-            }
-
-            Confirm-ValidExam -Exam $Exam
-            Confirm-ValidSkill -Exam $Exam -Skill $Skill
-
-            $folder = Resolve-ExamFolder -Exam $Exam
-            $readmeFile = Join-Path -Path $RepoRoot -ChildPath "$folder\README.md"
-
-            if (-not (Test-Path -Path $readmeFile)) {
-                throw "README.md not found at '$readmeFile'."
-            }
-
-            $result = Set-SkillComplete -ReadmeFile $readmeFile -Skill $Skill
-
-            if ($result.Changed) {
-                Push-ReadmeChange -Exam $Exam -Skill $Skill
-                Show-Confirmation -Message "Skill marked complete for ${Exam}: $Skill"
-            }
-            else {
-                Show-Confirmation -Message "Skill already marked complete for ${Exam}: $Skill"
-            }
         }
     }
 }
 
 $Helpers = {
     function Resolve-ExamFolder {
-        # Map an exam name to its workspace folder, defaulting to certs\<exam>
+        # Map an exam name to its workspace folder under certs\<exam>
         param([Parameter(Mandatory)] [string]$Exam)
-
-        if ($ExamFolderMap.ContainsKey($Exam)) {
-            return $ExamFolderMap[$Exam]
-        }
 
         return "certs\$Exam"
     }
 
     function Resolve-ExamLogFileName {
-        # Map an exam name to its log filename and default to StudyLog.md
+        # All exams use a StudyLog.md file in their folder
         param([Parameter(Mandatory)] [string]$Exam)
-
-        if ($ExamLogFileMap.ContainsKey($Exam)) {
-            return $ExamLogFileMap[$Exam]
-        }
 
         return 'StudyLog.md'
     }
@@ -413,10 +249,9 @@ $Helpers = {
     }
 
     function Get-AllExamWithLog {
-        # Discover all exams that have a study or work log file
+        # Discover all exams that have a StudyLog.md file
         $allExams = [System.Collections.Generic.List[string]]::new()
 
-        # Scan certs/ for exams with StudyLog.md
         $certsDir = Join-Path -Path $RepoRoot -ChildPath 'certs'
 
         if (Test-Path -Path $certsDir) {
@@ -431,36 +266,22 @@ $Helpers = {
                 }
         }
 
-        # Check WorkflowDevelopment
-        $wfFolder = Resolve-ExamFolder -Exam 'WorkflowDevelopment'
-        $wfLogName = Resolve-ExamLogFileName -Exam 'WorkflowDevelopment'
-        $wfLog = Join-Path -Path $RepoRoot -ChildPath "$wfFolder\$wfLogName"
-
-        if (Test-Path -Path $wfLog) {
-            $allExams.Add('WorkflowDevelopment')
-        }
-
         return $allExams
     }
 
     function Confirm-ValidExam {
-        # Validate that the requested exam is an active exam or WorkflowDevelopment
+        # Validate that the requested exam is an active exam
         param([Parameter(Mandatory)] [string]$Exam)
-
-        if ($Exam -eq 'WorkflowDevelopment') {
-            return
-        }
 
         $activeExams = & $GetActiveExamScript
 
         if ($Exam -notin $activeExams) {
-            $validExams = @($activeExams) + @('WorkflowDevelopment')
-            throw "Exam '$Exam' is not active. Valid exams: $($validExams -join ', ')"
+            throw "Exam '$Exam' is not active. Valid exams: $($activeExams -join ', ')"
         }
     }
 
-    function Get-ExamSkill {
-        # Load skill names from the exam's Skills.psd1 file
+    function Get-ExamTask {
+        # Load deduplicated task names from the exam's Skills.psd1 file
         param([Parameter(Mandatory)] [string]$Exam)
 
         $folder     = Resolve-ExamFolder -Exam $Exam
@@ -474,24 +295,25 @@ $Helpers = {
 
         $data.Domains |
             ForEach-Object { $_.Skills } |
-            ForEach-Object { $_.Name }
+            ForEach-Object { $_.Tasks } |
+            Sort-Object -Unique
     }
 
-    function Confirm-ValidSkill {
-        # Validate that the specified skill exists in the exam's skills file
+    function Confirm-ValidTask {
+        # Validate that the specified task exists under any skill in the exam's skills file
         param(
             [Parameter(Mandatory)] [string]$Exam,
-            [Parameter(Mandatory)] [string]$Skill
+            [Parameter(Mandatory)] [string]$Task
         )
 
-        $validSkills = @(Get-ExamSkill -Exam $Exam)
+        $validTasks = @(Get-ExamTask -Exam $Exam)
 
-        if ($validSkills.Count -eq 0) {
+        if ($validTasks.Count -eq 0) {
             throw "No Skills.psd1 found for exam '$Exam'."
         }
 
-        if ($Skill -notin $validSkills) {
-            throw "Skill '$Skill' is not valid for $Exam. Valid skills:`n  $($validSkills -join "`n  ")"
+        if ($Task -notin $validTasks) {
+            throw "Task '$Task' is not valid for $Exam. Valid tasks:`n  $($validTasks -join "`n  ")"
         }
     }
 
@@ -503,29 +325,41 @@ $Helpers = {
 
             [string]$Mode,
 
-            [string]$Skill,
+            [string]$Task,
 
             [string]$Notes,
 
             [datetime]$StartTime
         )
 
-        # Use explicit start time when provided (e.g., Switch action), otherwise current time
+        # Use explicit start time when provided, otherwise current time
         $now       = if ($PSBoundParameters.ContainsKey('StartTime')) { $StartTime } else { Get-Date }
         $date      = $now.ToString('M/d/yy')
         $start     = $now.ToString('h:mm tt')
         $safeMode  = ConvertTo-LogNote -Notes $Mode
-        $safeSkill = ConvertTo-LogNote -Notes $Skill
+        $safeTask  = ConvertTo-LogNote -Notes $Task
         $safeNotes = ConvertTo-LogNote -Notes $Notes
         $lines     = Get-Content -Path $StudyLogFile
 
-        # Detect whether the log uses the extended format (Mode + Skill columns)
-        $headerLine = $lines | Where-Object { $_ -match '^\|\s*#\s*\|' } | Select-Object -First 1
+        # Detect whether the log uses the extended format (Mode + Skill/Task columns)
+        $headerIndex = $null
+        for ($h = 0; $h -lt $lines.Count; $h++) {
+            if ($lines[$h] -match '^\|\s*#\s*\|') {
+                $headerIndex = $h
+                break
+            }
+        }
+        $headerLine = if ($null -ne $headerIndex) { $lines[$headerIndex] } else { $null }
         $hasExtendedColumns = $headerLine -match '\|\s*Mode\s*\|'
+
+        # Rename legacy "Skill" header cell to "Task" on first write so new rows align
+        if ($hasExtendedColumns -and $headerLine -match '\|\s*Skill\s*\|') {
+            $lines[$headerIndex] = $headerLine -replace '(\|\s*)Skill(\s*\|)', '$1Task$2'
+        }
 
         # Build the row to match the log's column format
         if ($hasExtendedColumns) {
-            $row = "| $SessionNumber | $date | $start |  |  | $safeMode | $safeSkill | $safeNotes |"
+            $row = "| $SessionNumber | $date | $start |  |  | $safeMode | $safeTask | $safeNotes |"
         }
         else {
             $row = "| $SessionNumber | $date | $start |  |  | $safeNotes |"
@@ -686,111 +520,6 @@ $Helpers = {
         Set-Content -Path $LogFile -Value $lines
     }
 
-    function Set-SkillComplete {
-        # Mark the matching skill as completed in the Per-Skill Progress table
-        param(
-            [Parameter(Mandatory)]
-            [string]$ReadmeFile,
-
-            [Parameter(Mandatory)]
-            [string]$Skill
-        )
-
-        $lines = Get-Content -Path $ReadmeFile -Encoding UTF8
-        $output = [System.Collections.Generic.List[string]]::new()
-        $inTracker = $false
-        $headerParsed = $false
-        $skillFound = $false
-        $changed = $false
-
-        # Column indices (set from table header)
-        $colIndices = @{}
-
-        foreach ($line in $lines) {
-            if ($line -match '^### Per-Skill Progress') {
-                $inTracker = $true
-                $output.Add($line)
-                continue
-            }
-
-            if (-not $inTracker) {
-                $output.Add($line)
-                continue
-            }
-
-            # Parse header row to find Skill and Progress column positions
-            if (-not $headerParsed -and $line -match '^\|.*Domain.*\|') {
-                $headers = ($line.TrimStart('|').TrimEnd('|')) -split '\|'
-
-                for ($i = 0; $i -lt $headers.Count; $i++) {
-                    $h = $headers[$i].Trim()
-                    if ($h -eq 'Skill') { $colIndices['Skill'] = $i }
-                    if ($h -eq 'Progress') { $colIndices['Progress'] = $i }
-                }
-
-                if (-not $colIndices.ContainsKey('Skill') -or -not $colIndices.ContainsKey('Progress')) {
-                    throw "Per-Skill Progress table in '$ReadmeFile' is missing required Skill/Progress columns."
-                }
-
-                $headerParsed = $true
-                $output.Add($line)
-                continue
-            }
-
-            # Preserve the markdown separator row
-            if ($line -match '^\|\s*[-:]+\s*\|') {
-                $output.Add($line)
-                continue
-            }
-
-            # Update only numbered data rows
-            if ($headerParsed -and $line -match '^\|\s*\d+\s*\|') {
-                $cells = ($line.TrimStart('|').TrimEnd('|')) -split '\|'
-                $skillIdx = $colIndices['Skill']
-                $progressIdx = $colIndices['Progress']
-
-                if ($cells.Count -le $skillIdx -or $cells.Count -le $progressIdx) {
-                    $output.Add($line)
-                    continue
-                }
-
-                $skillName = $cells[$skillIdx].Trim()
-                if ($skillName -eq $Skill) {
-                    $skillFound = $true
-                    $currentProgress = $cells[$progressIdx].Trim()
-
-                    if ($currentProgress -notmatch '^✅') {
-                        $cells[$progressIdx] = ' ✅ '
-                        $changed = $true
-                    }
-                }
-
-                $output.Add('|' + ($cells -join '|') + '|')
-                continue
-            }
-
-            # End parsing once the table section is complete
-            if ($headerParsed -and ($line -match '^\s*$' -or $line -match '^#')) {
-                $inTracker = $false
-            }
-
-            $output.Add($line)
-        }
-
-        if (-not $skillFound) {
-            throw "Skill '$Skill' was not found in the Per-Skill Progress table in '$ReadmeFile'."
-        }
-
-        if ($changed) {
-            $newContent = $output -join "`n"
-            Set-Content -Path $ReadmeFile -Value $newContent -Encoding UTF8 -NoNewline
-        }
-
-        return [pscustomobject]@{
-            Changed = $changed
-        }
-    }
-
     function Get-LastCommitTime {
         # Retrieve the author date of the last user commit, excluding automated [skip ci] commits
         $isoDate = git -C $RepoRoot log -1 --format=%aI --grep='\[skip ci\]' --invert-grep
@@ -821,23 +550,6 @@ $Helpers = {
         $commitMessage   = "docs($Exam): $Type study session #$SessionNumber"
 
         Push-FileChange -RelativePath $relativeLogPath -CommitMessage $commitMessage
-    }
-
-    function Push-ReadmeChange {
-        # Stage, commit, and push a README completion change
-        param(
-            [Parameter(Mandatory)]
-            [string]$Exam,
-
-            [Parameter(Mandatory)]
-            [string]$Skill
-        )
-
-        $folder = Resolve-ExamFolder -Exam $Exam
-        $relativeReadmePath = "$folder/README.md"
-        $commitMessage = "docs($Exam): mark skill complete - $Skill"
-
-        Push-FileChange -RelativePath $relativeReadmePath -CommitMessage $commitMessage
     }
 
     function Push-FileChange {

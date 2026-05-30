@@ -1,7 +1,5 @@
 # AZ-305: Designing Microsoft Azure Infrastructure Solutions — Study Guide
 
-> ⏸ **Paused as of 4/22/26** — study effort redirected to SC-300 (target 6/1/26). Will resume after SC-300.
-
 **Objective:** Achieve the **Azure Solutions Architect Expert** certification using Microsoft Learn, practice exams, and video courses.
 
 - **Certification Page:** [Azure Solutions Architect Expert](https://learn.microsoft.com/en-us/credentials/certifications/azure-solutions-architect/)
@@ -9,21 +7,8 @@
 - **Study Log:** [Session-by-session study time tracker](./StudyLog.md)
 
 <!-- STUDY_SUMMARY -->
-**Hours Committed:** 25.7h · **Days Studied:** 19
+**Hours Committed:** 0h · **Days Studied:** 0
 <!-- /STUDY_SUMMARY -->
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ---
 
