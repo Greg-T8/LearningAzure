@@ -68,8 +68,12 @@ $Main = {
     # Always use full set of active exams for the activity table, regardless of -ExamName scope
     $allActiveExams = & $GetActiveExamScript
 
+    # Include any exam with study log activity in the last 7 days, even if not currently In Progress
+    $recentExams = Get-ExamWithRecentActivity
+    $activityExams = @(@($allActiveExams) + @($recentExams) | Where-Object { $_ } | Sort-Object -Unique)
+
     # Update the 7-day activity table in root README from study log data
-    Update-ActivityTable -ExamNames $allActiveExams
+    Update-ActivityTable -ExamNames $activityExams
 }
 
 #region HELPER FUNCTIONS
@@ -1015,6 +1019,59 @@ $Helpers = {
         }
 
         return $result
+    }
+
+    function Get-ExamWithRecentActivity {
+        # Return exam folder names whose StudyLog.md contains an entry within the last 7 days
+        $certsRoot = Join-Path -Path $RepoRoot -ChildPath 'certs'
+        $results = [System.Collections.Generic.List[string]]::new()
+
+        if (-not (Test-Path -Path $certsRoot)) { return @() }
+
+        $cutoff = (Get-Date).Date.AddDays(-6)
+        $dateFormats = @('M/d/yy', 'M/d/yyyy', 'MM/dd/yy', 'MM/dd/yyyy')
+        $culture = [System.Globalization.CultureInfo]::InvariantCulture
+        $styles = [System.Globalization.DateTimeStyles]::None
+
+        # Scan every exam's StudyLog.md for recent session entries
+        $logFiles = Get-ChildItem -Path $certsRoot -Directory | ForEach-Object {
+            $logPath = Join-Path -Path $_.FullName -ChildPath 'StudyLog.md'
+            if (Test-Path -Path $logPath) {
+                [PSCustomObject]@{ Path = $logPath; Exam = $_.Name }
+            }
+        }
+
+        foreach ($source in $logFiles) {
+            $lines = Get-Content -Path $source.Path -Encoding UTF8
+            $found = $false
+
+            foreach ($line in $lines) {
+                if ($line -notmatch '^\|\s*\d+\s*\|') { continue }
+
+                $cells = ($line.TrimStart('|').TrimEnd('|')) -split '\|'
+                if ($cells.Count -lt 5) { continue }
+
+                $dateCell = $cells[1].Trim()
+                [datetime]$parsedDate = [datetime]::MinValue
+
+                foreach ($fmt in $dateFormats) {
+                    if ([datetime]::TryParseExact($dateCell, $fmt, $culture, $styles, [ref]$parsedDate)) {
+                        if ($parsedDate.Date -ge $cutoff) {
+                            $found = $true
+                        }
+                        break
+                    }
+                }
+
+                if ($found) { break }
+            }
+
+            if ($found) {
+                $results.Add($source.Exam)
+            }
+        }
+
+        return $results.ToArray()
     }
 
     function Get-AllStudyLogEntry {

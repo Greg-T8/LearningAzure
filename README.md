@@ -22,20 +22,20 @@ Progress trackers, detailed study notes, practice exams, and hands-on labs:
 <!-- COMMIT_STATS_START -->
 ## 📈 Recent Activity (Last 7 Days)
 
-| Date | SC-300 | Total |
-|------|------|-------|
-| Fri, May 29 | 🟢 1.6h | **1.6h** |
-| Thu, May 28 | 🟢 1.6h | **1.6h** |
-| Wed, May 27 | 🟣 2.4h | **2.4h** |
-| Tue, May 26 | 🟣 2.2h | **2.2h** |
-| Mon, May 25 | 🟣 3.0h | **3.0h** |
-| Sun, May 24 | 🟣 2.9h | **2.9h** |
-| Sat, May 23 | 🟢 1.7h | **1.7h** |
-| **Weekly Total** | **15.4h** | **15.4h** |
-| ***Running Total*** | ***83.7h*** | ***83.7h*** |
+| Date | AZ-305 | SC-300 | Total |
+|------|------|------|-------|
+| Sat, May 30 |  |  |  |
+| Fri, May 29 |  | 🟢 1.6h | **1.6h** |
+| Thu, May 28 |  | 🟢 1.6h | **1.6h** |
+| Wed, May 27 |  | 🟣 2.4h | **2.4h** |
+| Tue, May 26 |  | 🟣 2.2h | **2.2h** |
+| Mon, May 25 |  | 🟣 3.0h | **3.0h** |
+| Sun, May 24 |  | 🟣 2.9h | **2.9h** |
+| **Weekly Total** | **0.0h** | **13.7h** | **13.7h** |
+| ***Running Total*** | ***0.0h*** | ***83.7h*** | ***83.7h*** |
 
 *Activity Levels: 🟡 Low (< 1hr) | 🟢 Medium (1-2hrs) | 🟣 High (> 2hrs)*
 
-*Last updated: May 29, 2026 at 09:07 CDT*
+*Last updated: May 30, 2026 at 05:20 CDT*
 
 <!-- COMMIT_STATS_END -->
