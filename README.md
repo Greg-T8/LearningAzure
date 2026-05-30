@@ -13,7 +13,7 @@ Progress trackers, detailed study notes, practice exams, and hands-on labs:
 | Exam | Description | Status | Duration |
 |------|-------------|--------|---------|
 | 🔷 [**AZ-305**](certs/AZ-305/README.md) | Azure Solutions Architect Expert | In Progress | |
-| 📕 [**SC-300**](certs/SC-300/README.md) | Microsoft Identity and Access Administrator | Completed | 4/22/26 – 5/29/26 (37d) |
+| 📕 [**SC-300**](certs/SC-300/README.md) | Microsoft Identity and Access Administrator | Completed | 4/22/26 – 5/29/26 (37d, 84h) |
 | 📗 [**AZ-104**](certs/AZ-104/README.md) | Azure Administrator Associate | Completed | 1/15/26 – 3/30/26 (74d) |
 | 📘 [**AI-900**](certs/AI-900/README.md) | Azure AI Fundamentals | Completed | 1/14/26 – 2/9/26 (26d) |
 
