@@ -27,7 +27,7 @@ param(
 
     [string]$Exam,
 
-    [ValidateSet('PracticeQuestion', 'MSLearn', 'MSDocs', 'NotebookLM', 'Lab', 'Review', 'WorkflowDevelopment')]
+    [ValidateSet('Prepare', 'Research', 'Practice')]
     [string]$Mode,
 
     [ArgumentCompleter({
