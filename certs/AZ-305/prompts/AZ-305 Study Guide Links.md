@@ -26,18 +26,17 @@ Important requirements:
 
 3. For each documentation link, provide:
    - The official supporting product documentation name as a hyperlink.
-   - The friendly URL shown in plain text.
-   - A suggested PDF filename based on the official documentation name.
+   - The friendly URL.
    - A short reason why the documentation supports the exam task.
 
-4. PDF naming rule:
+4. Official supporting production documentation name rule:
    - Use the official Microsoft documentation name.
    - Remove generic words like “Documentation” from the filename.
    - Keep the product or service name intact.
    - Examples:
-     - “Azure Monitor Documentation” → `Azure Monitor.pdf`
-     - “Azure Cosmos DB Documentation” → `Azure Cosmos DB.pdf`
-     - “Azure Virtual Network Documentation” → `Azure Virtual Network.pdf`
+     - “Azure Monitor Documentation” → `Azure Monitor`
+     - “Azure Cosmos DB Documentation” → `Azure Cosmos DB`
+     - “Azure Virtual Network Documentation” → `Azure Virtual Network`
 
 5. Organize the output by the AZ-305 hierarchy.
    - Domain
@@ -63,8 +62,8 @@ Important requirements:
 
 #### Task: <task name>
 
-| Supporting product documentation | Friendly URL | Suggested PDF filename | Why this supports the task |
-|---|---|---|---|
+| Supporting product documentation | Friendly URL |  Why this supports the task |
+|---|---|---|
 | [Azure Monitor](https://learn.microsoft.com/en-us/azure/azure-monitor/) | <https://learn.microsoft.com/en-us/azure/azure-monitor/> | Azure Monitor.pdf | Supports monitoring, metrics, logs, alerts, and observability design decisions. |
 
 9. At the end of each domain, include a short “Coverage notes” section:

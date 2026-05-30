@@ -569,6 +569,18 @@ $Helpers = {
         return '🔲'
     }
 
+    function Get-TrackerFormat {
+        # Detect progress tracker shape: 'Task' (AZ-305 Per-Task) or 'Skill' (legacy Per-Skill)
+        if (-not (Test-Path -Path $ExamReadme)) { return 'Skill' }
+
+        foreach ($line in Get-Content -Path $ExamReadme -Encoding UTF8) {
+            if ($line -match '^###\s+Per-Task Progress')  { return 'Task' }
+            if ($line -match '^###\s+Per-Skill Progress') { return 'Skill' }
+        }
+
+        return 'Skill'
+    }
+
     function Get-ProgressCellValue {
         # Resolve progress cell from total hours while preserving completed and dated in-progress states
         param(
@@ -597,9 +609,14 @@ $Helpers = {
     function Update-PerSkillProgress {
         [CmdletBinding(SupportsShouldProcess)]
 
-        # Update Tasks, per-mode hours, and total Hours in the Per-Skill Progress table
+        # Update progress tracker (per-skill or per-task) with study log hours
+        $trackerFormat = Get-TrackerFormat
         $studyHours = Get-StudyLogHoursBySkill
         $taskCounts = Get-TaskCountBySkill
+
+        # Heading and lookup-column vary by format
+        $trackerHeading = if ($trackerFormat -eq 'Task') { '### Per-Task Progress' } else { '### Per-Skill Progress' }
+        $lookupColumn   = if ($trackerFormat -eq 'Task') { 'Task' } else { 'Skill' }
 
         $lines = Get-Content -Path $ExamReadme -Encoding UTF8
         $output = [System.Collections.Generic.List[string]]::new()
@@ -611,7 +628,7 @@ $Helpers = {
         $colIndices = @{}
 
         foreach ($line in $lines) {
-            if ($line -match '### Per-Skill Progress') {
+            if ($line -match [regex]::Escape($trackerHeading)) {
                 $inTracker = $true
                 $output.Add($line)
                 continue
@@ -627,15 +644,18 @@ $Helpers = {
                 $headers = ($line.TrimStart('|').TrimEnd('|')) -split '\|'
                 for ($i = 0; $i -lt $headers.Count; $i++) {
                     $h = $headers[$i].Trim()
-                    if ($h -eq 'Skill')  { $colIndices['Skill'] = $i }
-                    if ($h -eq 'Tasks')  { $colIndices['Tasks'] = $i }
-                    if ($h -eq 'ML')     { $colIndices['ML'] = $i }
-                    if ($h -eq 'MD')     { $colIndices['MD'] = $i }
-                    if ($h -eq 'NB')     { $colIndices['NB'] = $i }
-                    if ($h -eq 'Lab')    { $colIndices['Lab'] = $i }
-                    if ($h -eq 'PQ')     { $colIndices['PQ'] = $i }
-                    if ($h -eq 'Hours')  { $colIndices['Hours'] = $i }
-                    if ($h -eq 'Progress')  { $colIndices['Progress'] = $i }
+                    if ($h -eq 'Skill')    { $colIndices['Skill'] = $i }
+                    if ($h -eq 'Task')     { $colIndices['Task'] = $i }
+                    if ($h -eq 'Tasks')    { $colIndices['Tasks'] = $i }
+                    if ($h -eq 'ML')       { $colIndices['ML'] = $i }
+                    if ($h -eq 'MD')       { $colIndices['MD'] = $i }
+                    if ($h -eq 'NB')       { $colIndices['NB'] = $i }
+                    if ($h -eq 'Lab')      { $colIndices['Lab'] = $i }
+                    if ($h -eq 'PQ')       { $colIndices['PQ'] = $i }
+                    if ($h -eq 'Research') { $colIndices['Research'] = $i }
+                    if ($h -eq 'Practice') { $colIndices['Practice'] = $i }
+                    if ($h -eq 'Hours')    { $colIndices['Hours'] = $i }
+                    if ($h -eq 'Progress') { $colIndices['Progress'] = $i }
                 }
                 $headerParsed = $true
                 $output.Add($line)
@@ -652,44 +672,71 @@ $Helpers = {
             if ($headerParsed -and $line -match '^\|\s*\d+\s*\|') {
                 $cells = ($line.TrimStart('|').TrimEnd('|')) -split '\|'
 
-                $skillIdx = $colIndices['Skill']
-                if ($null -eq $skillIdx -or $cells.Count -le $skillIdx) {
+                $lookupIdx = $colIndices[$lookupColumn]
+                if ($null -eq $lookupIdx -or $cells.Count -le $lookupIdx) {
                     $output.Add($line)
                     continue
                 }
 
-                $skillName = $cells[$skillIdx].Trim()
+                $lookupName = $cells[$lookupIdx].Trim()
 
-                # Update Tasks column
-                if ($colIndices.ContainsKey('Tasks') -and $taskCounts.ContainsKey($skillName)) {
-                    $cells[$colIndices['Tasks']] = " $($taskCounts[$skillName]) "
+                # Update Tasks column (skill-format only)
+                if ($colIndices.ContainsKey('Tasks') -and $taskCounts.ContainsKey($lookupName)) {
+                    $cells[$colIndices['Tasks']] = " $($taskCounts[$lookupName]) "
                 }
 
-                # Update mode columns and Hours column with study log data
-                $skillHours = if ($studyHours.ContainsKey($skillName)) { $studyHours[$skillName] } else { $null }
-                $modeKeys = @('ML', 'MD', 'NB', 'Lab', 'PQ')
+                # Look up aggregated hours for this row's entity (skill name or task name)
+                $entityHours = if ($studyHours.ContainsKey($lookupName)) { $studyHours[$lookupName] } else { $null }
 
-                foreach ($modeKey in $modeKeys) {
-                    if (-not $colIndices.ContainsKey($modeKey)) { continue }
-                    $idx = $colIndices[$modeKey]
-                    if ($idx -ge $cells.Count) { continue }
-
-                    $currentCell = $cells[$idx].Trim()
-                    $modeHours = if ($skillHours) { $skillHours[$modeKey] } else { 0.0 }
-                    $emoji = Get-ModeCellIcon -CurrentCell $currentCell -ModeHours $modeHours
-
-                    # Build new cell: emoji + hours (omit hours text when zero)
-                    if ($modeHours -gt 0) {
-                        $cells[$idx] = " $emoji $($modeHours.ToString('0.0'))h "
+                if ($trackerFormat -eq 'Task') {
+                    # Per-Task table collapses 5 modes into Research + Practice icon-only buckets
+                    $researchHours = 0.0
+                    $practiceHours = 0.0
+                    if ($entityHours) {
+                        $researchHours = $entityHours['ML'] + $entityHours['MD']
+                        $practiceHours = $entityHours['NB'] + $entityHours['Lab'] + $entityHours['PQ']
                     }
-                    else {
-                        $cells[$idx] = " $emoji "
+
+                    if ($colIndices.ContainsKey('Research')) {
+                        $idx = $colIndices['Research']
+                        if ($idx -lt $cells.Count) {
+                            $emoji = Get-ModeCellIcon -CurrentCell $cells[$idx].Trim() -ModeHours $researchHours
+                            $cells[$idx] = " $emoji "
+                        }
+                    }
+
+                    if ($colIndices.ContainsKey('Practice')) {
+                        $idx = $colIndices['Practice']
+                        if ($idx -lt $cells.Count) {
+                            $emoji = Get-ModeCellIcon -CurrentCell $cells[$idx].Trim() -ModeHours $practiceHours
+                            $cells[$idx] = " $emoji "
+                        }
+                    }
+                }
+                else {
+                    # Legacy Per-Skill table: per-mode hours cells
+                    foreach ($modeKey in @('ML', 'MD', 'NB', 'Lab', 'PQ')) {
+                        if (-not $colIndices.ContainsKey($modeKey)) { continue }
+                        $idx = $colIndices[$modeKey]
+                        if ($idx -ge $cells.Count) { continue }
+
+                        $currentCell = $cells[$idx].Trim()
+                        $modeHours = if ($entityHours) { $entityHours[$modeKey] } else { 0.0 }
+                        $emoji = Get-ModeCellIcon -CurrentCell $currentCell -ModeHours $modeHours
+
+                        # Build new cell: emoji + hours (omit hours text when zero)
+                        if ($modeHours -gt 0) {
+                            $cells[$idx] = " $emoji $($modeHours.ToString('0.0'))h "
+                        }
+                        else {
+                            $cells[$idx] = " $emoji "
+                        }
                     }
                 }
 
                 # Update total Hours column
+                $totalHours = if ($entityHours) { $entityHours.Total } else { 0.0 }
                 if ($colIndices.ContainsKey('Hours')) {
-                    $totalHours = if ($skillHours) { $skillHours.Total } else { 0.0 }
                     $cells[$colIndices['Hours']] = " $($totalHours.ToString('0.0'))h "
                 }
 
@@ -735,23 +782,32 @@ $Helpers = {
     }
 
     function Get-SkillCompletionByDomain {
-        # Parse Per-Skill Progress table and count completed skills per domain
-        # Returns ordered hashtable: domainNum → @{ Total; Completed; Skills }
+        # Parse progress tracker (per-skill or per-task) and count completed rows per domain
+        # Returns ordered hashtable: domainNum → @{ Total; Completed; Skills; Tasks; Format }
+        $trackerFormat = Get-TrackerFormat
+        $trackerHeading = if ($trackerFormat -eq 'Task') { '### Per-Task Progress' } else { '### Per-Skill Progress' }
+
         $lines = Get-Content -Path $ExamReadme -Encoding UTF8
         $domainMap = [ordered]@{}
 
-        # Build domain name → number mapping from dashboard rows
+        # Build domain name → number mapping from dashboard rows.
+        # Supports linked form: "| [N. Name](#anchor) | ..." and unlinked form: "| N. Name | ..."
         $nameToNum = @{}
         $inDashboard = $false
         foreach ($line in $lines) {
             if ($line -match '<!-- BEGIN COVERAGE DASHBOARD -->') { $inDashboard = $true; continue }
             if ($line -match '<!-- END COVERAGE DASHBOARD -->') { break }
-            if ($inDashboard -and $line -match '^\|\s*\[(\d+)\.\s*(.+?)\]') {
+            if (-not $inDashboard) { continue }
+
+            if ($line -match '^\|\s*\[(\d+)\.\s*(.+?)\]') {
+                $nameToNum[$Matches[2].Trim()] = $Matches[1]
+            }
+            elseif ($line -match '^\|\s*(\d+)\.\s*([^|]+?)\s*\|') {
                 $nameToNum[$Matches[2].Trim()] = $Matches[1]
             }
         }
 
-        # Parse Per-Skill Progress table for skill completion
+        # Parse the progress tracker for row completion
         # Supports two formats:
         #   Legacy: separate Status column (value = 'Completed')
         #   Compact: Progress column (completed = cell starts with ✅)
@@ -761,7 +817,7 @@ $Helpers = {
         $progressCol = -1
         $skillsCol = -1
         foreach ($line in $lines) {
-            if ($line -match '### Per-Skill Progress') { $inTracker = $true; continue }
+            if ($line -match [regex]::Escape($trackerHeading)) { $inTracker = $true; continue }
             if (-not $inTracker) { continue }
 
             # Header row — find column indices
@@ -801,11 +857,16 @@ $Helpers = {
 
                 # Initialize domain entry
                 if (-not $domainMap.Contains($domainNum)) {
-                    $domainMap[$domainNum] = @{ Total = 0; Completed = 0; Skills = 0 }
+                    $domainMap[$domainNum] = @{ Total = 0; Completed = 0; Skills = 0; Tasks = 0; Format = $trackerFormat }
                 }
 
                 $domainMap[$domainNum].Total++
-                $domainMap[$domainNum].Skills++
+                if ($trackerFormat -eq 'Task') {
+                    $domainMap[$domainNum].Tasks++
+                }
+                else {
+                    $domainMap[$domainNum].Skills++
+                }
                 if ($isCompleted) {
                     $domainMap[$domainNum].Completed++
                 }
@@ -821,9 +882,17 @@ $Helpers = {
     function Update-CoverageDashboard {
         [CmdletBinding(SupportsShouldProcess)]
 
-        # Regenerate the coverage dashboard from Per-Skill Progress completion data
+        # Regenerate the coverage dashboard from progress tracker completion data
         $lines = Get-Content -Path $ExamReadme -Encoding UTF8
         $domainStats = Get-SkillCompletionByDomain
+        $trackerFormat = Get-TrackerFormat
+        $entityWord = if ($trackerFormat -eq 'Task') { 'tasks' } else { 'skills' }
+        $entityField = if ($trackerFormat -eq 'Task') { 'Tasks' } else { 'Skills' }
+        $legendSuffix = if ($trackerFormat -eq 'Task') {
+            'task marked complete in Per-Task Progress'
+        } else {
+            'skill completed in Per-Skill Progress'
+        }
 
         # Update dashboard rows
         $output = [System.Collections.Generic.List[string]]::new()
@@ -845,33 +914,37 @@ $Helpers = {
 
             # Totals line
             if ($inDashboard -and $line -match '^\*\*Totals:\*\*') {
-                $totalSkills = ($domainStats.Values | ForEach-Object { $_.Total } | Measure-Object -Sum).Sum
+                $totalEntities = ($domainStats.Values | ForEach-Object { $_.Total } | Measure-Object -Sum).Sum
                 $totalCompleted = ($domainStats.Values | ForEach-Object { $_.Completed } | Measure-Object -Sum).Sum
-                $output.Add("**Totals:** $totalCompleted / $totalSkills skills completed")
+                $output.Add("**Totals:** $totalCompleted / $totalEntities $entityWord completed")
                 $updatedRows++
                 continue
             }
 
             # Legend line
             if ($inDashboard -and $line -match '^\*\*Legend:\*\*') {
-                $output.Add('**Legend:** 🟢 Strong (≥66%) · 🟡 Partial (33–65%) · 🔴 Low (<33%) — "Covered" = skill completed in Per-Skill Progress')
+                $output.Add("**Legend:** 🟢 Strong (≥66%) · 🟡 Partial (33–65%) · 🔴 Low (<33%) — ""Covered"" = $legendSuffix")
                 continue
             }
 
-            # Dashboard data row: | [N. Domain Name](#domain-n) | weight | ... |
-            if ($inDashboard -and $line -match '^\|\s*\[(\d+)\.') {
+            # Dashboard data row: linked "| [N. Name](#domain-n) | ..." or unlinked "| N. Name | ..."
+            $isLinkedRow = $line -match '^\|\s*\[(\d+)\.'
+            $isUnlinkedRow = -not $isLinkedRow -and $line -match '^\|\s*(\d+)\.\s*[^|]+\|'
+
+            if ($inDashboard -and ($isLinkedRow -or $isUnlinkedRow)) {
                 $domainNum = $Matches[1]
                 if ($domainStats.Contains($domainNum)) {
                     $stats = $domainStats[$domainNum]
 
-                    # Preserve domain link and weight from existing line
+                    # Preserve domain link/name and weight from existing line
                     $cells = ($line.TrimStart('|').TrimEnd('|')) -split '\|'
-                    $domainLink = $cells[0].Trim()
+                    $domainLabel = $cells[0].Trim()
                     $weight = $cells[1].Trim()
 
                     $pct = if ($stats.Total -gt 0) { [math]::Floor(($stats.Completed / $stats.Total) * 100) } else { 0 }
                     $indicator = if ($pct -ge 66) { '🟢' } elseif ($pct -ge 33) { '🟡' } else { '🔴' }
-                    $newLine = "| $domainLink | $weight | $($stats.Skills) | $($stats.Completed) / $($stats.Total) ($pct%) | $indicator |"
+                    $entityCount = $stats[$entityField]
+                    $newLine = "| $domainLabel | $weight | $entityCount | $($stats.Completed) / $($stats.Total) ($pct%) | $indicator |"
                     $output.Add($newLine)
                     $updatedRows++
                 }
