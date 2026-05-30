@@ -1,10 +1,9 @@
 You are creating an exhaustive study guide for one Microsoft certification exam task.
 
-Exam:
-<exam_code>: <exam_name>
+Exam: AZ-305
 
 Microsoft exam study guide:
-<Microsoft Learn study guide URL>
+<https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-305>
 
 Domain:
 <domain>

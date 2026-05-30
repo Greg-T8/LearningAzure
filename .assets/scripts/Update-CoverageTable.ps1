@@ -115,10 +115,18 @@ $Helpers = {
     }
 
     function Get-StudySummary {
-        # Parse study sessions to derive total time and unique study days
+        # Parse study sessions to derive total time, unique study days, and per-mode hours
         $lines = Get-Content -Path $StudyLogFile -Encoding UTF8
         $totalMinutes = 0
         $studiedDates = [System.Collections.Generic.HashSet[string]]::new()
+
+        # Track minutes for canonical modes only (matches Invoke-StudySession.ps1 ValidateSet)
+        $modeMinutes = [ordered]@{
+            Prepare  = 0
+            Research = 0
+            Practice = 0
+            Review   = 0
+        }
 
         foreach ($line in $lines) {
             if ($line -notmatch '^\|\s*\d+\s*\|') { continue }
@@ -128,6 +136,7 @@ $Helpers = {
 
             $dateCell = $cells[1].Trim()
             $durationCell = $cells[4].Trim()
+            $modeCell = $cells[5].Trim()
 
             if ($durationCell -match '^(?:(\d+)\s*h)?\s*(?:(\d+)\s*m)?$') {
                 $hours = if ([string]::IsNullOrWhiteSpace($Matches[1])) { 0 } else { [int]$Matches[1] }
@@ -138,6 +147,19 @@ $Helpers = {
                 if ($sessionMinutes -gt 0 -and -not [string]::IsNullOrWhiteSpace($dateCell)) {
                     $studiedDates.Add($dateCell) | Out-Null
                 }
+
+                # Only accumulate against canonical mode names; ignore legacy/free-form values
+                if ($sessionMinutes -gt 0 -and $modeMinutes.Contains($modeCell)) {
+                    $modeMinutes[$modeCell] += $sessionMinutes
+                }
+            }
+        }
+
+        # Build ordered hashtable of modes with logged time, formatted as hours
+        $modeHours = [ordered]@{}
+        foreach ($mode in $modeMinutes.Keys) {
+            if ($modeMinutes[$mode] -gt 0) {
+                $modeHours[$mode] = ('{0:N1}h' -f [math]::Round($modeMinutes[$mode] / 60, 1))
             }
         }
 
@@ -145,6 +167,7 @@ $Helpers = {
         return @{
             HoursText = ('{0:N1}h' -f $totalHours)
             DaysStudied = $studiedDates.Count
+            ModeHours = $modeHours
         }
     }
 
@@ -153,21 +176,37 @@ $Helpers = {
 
         # Place the study summary directly under Study Log and remove legacy marker locations
         $summary = Get-StudySummary
-        $summaryLines = @(
-            '<!-- STUDY_SUMMARY -->',
-            "**Hours Committed:** $($summary.HoursText) · **Days Studied:** $($summary.DaysStudied)",
-            '<!-- /STUDY_SUMMARY -->'
-        )
+
+        # Build summary block with optional per-mode bullets for modes that have logged time
+        $summaryLines = [System.Collections.Generic.List[string]]::new()
+        $summaryLines.Add('<!-- STUDY_SUMMARY -->')
+        $summaryLines.Add("**Hours Committed:** $($summary.HoursText) · **Days Studied:** $($summary.DaysStudied)")
+        foreach ($mode in $summary.ModeHours.Keys) {
+            $summaryLines.Add("- $mode`: $($summary.ModeHours[$mode])")
+        }
+        $summaryLines.Add('<!-- /STUDY_SUMMARY -->')
+
         $lines = Get-Content -Path $ExamReadme -Encoding UTF8
         $filtered = [System.Collections.Generic.List[string]]::new()
         $inserted = $false
+        $inSummary = $false
 
         foreach ($line in $lines) {
+
+            # Skip everything between STUDY_SUMMARY markers so the block is fully regenerated
+            if ($line -match '<!--\s*STUDY_SUMMARY\s*-->') {
+                $inSummary = $true
+                continue
+            }
+            if ($line -match '<!--\s*/STUDY_SUMMARY\s*-->') {
+                $inSummary = $false
+                continue
+            }
+            if ($inSummary) { continue }
+
             if (
                 $line -match '<!--\s*HOURS_COMMITTED\s*-->' -or
                 $line -match '<!--\s*/HOURS_COMMITTED\s*-->' -or
-                $line -match '<!--\s*STUDY_SUMMARY\s*-->' -or
-                $line -match '<!--\s*/STUDY_SUMMARY\s*-->' -or
                 $line -match '^\*\*Hours Committed:\*\*.*\*\*Days Studied:\*\*'
             ) {
                 continue

@@ -6,6 +6,10 @@
 - **Official Study Guide:** [AZ-104 Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104)
 - **Practice Assessment:** [AZ-104 Practice Assessment](https://learn.microsoft.com/en-us/credentials/certifications/exams/az-104/practice/assessment?assessment-type=practice&assessmentId=21)
 - **Study Log:** [Session-by-session study time tracker](./StudyLog.md)
+
+<!-- STUDY_SUMMARY -->
+**Hours Committed:** 0.0h · **Days Studied:** 0
+<!-- /STUDY_SUMMARY -->
 - **Exam Experience:** [AZ-104 Exam Experience](./Exam/exam.md)
 
 ---
@@ -38,9 +42,9 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 | [4. Networking](#domain-4) | 15–20% | 3 | 24 | 3 | 11 / 13 (84%) | 🟢 |
 | [5. Monitoring & Backup](#domain-5) | 10–15% | 2 | 30 | 5 | 11 / 13 (84%) | 🟢 |
 
-**Totals:** 261 practice questions · 19 hands-on labs
+**Totals:** 0 / 0 skills completed
 
-**Legend:** 🟢 Strong (≥66%) · 🟡 Partial (33–65%) · 🔴 Low (<33%) — "Covered" = task has ≥1 practice question or ≥1 lab
+**Legend:** 🟢 Strong (≥66%) · 🟡 Partial (33–65%) · 🔴 Low (<33%) — "Covered" = skill completed in Per-Skill Progress
 
 > **Note:** Practice questions are those missed or not confidently answered correctly.
 
@@ -50,7 +54,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 
 <a id="domain-1"></a>
 <details>
-<summary><b>Domain 1: Manage Azure Identities and Governance (20–25%)</b> — 15 tasks · 20 Qs · 0 Labs</summary>
+<summary><b>Domain 1: Manage Azure Identities and Governance (20–25%)</b> — 17 tasks</summary>
 
 | Skill | Task | Qs | Labs |
 | :--- | :--- | -: | -: |
@@ -74,7 +78,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 
 <a id="domain-2"></a>
 <details>
-<summary><b>Domain 2: Implement and Manage Storage (15–20%)</b> — 17 tasks · 25 Qs · 5 Labs</summary>
+<summary><b>Domain 2: Implement and Manage Storage (15–20%)</b> — 19 tasks</summary>
 
 | Skill | Task | Qs | Labs |
 | :--- | :--- | -: | -: |
@@ -100,7 +104,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 
 <a id="domain-3"></a>
 <details>
-<summary><b>Domain 3: Deploy and Manage Azure Compute Resources (20–25%)</b> — 24 tasks · 48 Qs · 6 Labs</summary>
+<summary><b>Domain 3: Deploy and Manage Azure Compute Resources (20–25%)</b> — 26 tasks</summary>
 
 | Skill | Task | Qs | Labs |
 | :--- | :--- | -: | -: |
@@ -133,7 +137,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 
 <a id="domain-4"></a>
 <details>
-<summary><b>Domain 4: Implement and Manage Virtual Networking (15–20%)</b> — 13 tasks · 24 Qs · 3 Labs</summary>
+<summary><b>Domain 4: Implement and Manage Virtual Networking (15–20%)</b> — 15 tasks</summary>
 
 | Skill | Task | Qs | Labs |
 | :--- | :--- | -: | -: |
@@ -155,7 +159,7 @@ Task-level coverage from [Practice Questions](./practice-questions/README.md) an
 
 <a id="domain-5"></a>
 <details>
-<summary><b>Domain 5: Monitor and Maintain Azure Resources (10–15%)</b> — 13 tasks · 30 Qs · 5 Labs</summary>
+<summary><b>Domain 5: Monitor and Maintain Azure Resources (10–15%)</b> — 15 tasks</summary>
 
 | Skill | Task | Qs | Labs |
 | :--- | :--- | -: | -: |
