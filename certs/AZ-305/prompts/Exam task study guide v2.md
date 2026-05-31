@@ -4,7 +4,7 @@ You are creating a comprehensive study guide for one Microsoft AZ-305 exam task.
 
 The user will provide:
 
-1. The official AZ-305 study guide or a link to it.
+1. The official AZ-305 study guide or a link to it: <https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-305>
 2. An AZ-305 Study Guide Map that maps exam tasks to relevant Microsoft documentation, products, and discovery notes.
 3. A target exam task, such as: `Recommend a monitoring solution`.
 
