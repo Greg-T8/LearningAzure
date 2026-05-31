@@ -6,7 +6,7 @@ Source study guide:
 Goal:
 Analyze the official AZ-305 study guide and produce a documentation map organized by the study guide hierarchy:
 
-<domain> → <skill> → <task>
+\<domain> → \<skill> → \<task>
 
 For each exam task, identify 5–15 relevant links to official Microsoft documentation that would be useful for grounding study tools.
 
