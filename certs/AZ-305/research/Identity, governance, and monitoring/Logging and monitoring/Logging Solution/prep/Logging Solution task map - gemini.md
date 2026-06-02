@@ -1,0 +1,28 @@
+## Domain: Design identity, governance, and monitoring solutions
+
+### Skill: Design a logging and routing solution
+
+#### Task: Recommend a logging solution
+
+| Supporting product documentation | URL | Why this supports the task |
+| --- | --- | --- |
+| [Azure Monitor](https://learn.microsoft.com/en-us/azure/azure-monitor/logs/data-platform-logs) | [https://learn.microsoft.com/en-us/azure/azure-monitor/logs/data-platform-logs](https://learn.microsoft.com/en-us/azure/azure-monitor/logs/data-platform-logs) | Core logging platform for Azure; supports designing Log Analytics workspaces, KQL-based querying, and log retention tiers. |
+| [Azure Monitor](https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/diagnostic-settings) | [https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/diagnostic-settings](https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/diagnostic-settings) | Essential for designing the routing of Azure resource logs and metrics to Storage, Event Hubs, Log Analytics, or partner solutions. |
+| [Azure Monitor](https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/data-collection-rule-overview) | [https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/data-collection-rule-overview](https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/data-collection-rule-overview) | Defines how telemetry is collected, transformed, and routed from compute resources, directly supporting granular logging designs. |
+| [Azure Monitor](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview) | [https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview) | Supports recommendations for application-level logging, distributed tracing, and Application Performance Monitoring (APM). |
+| [Monitoring and health](https://learn.microsoft.com/en-us/entra/identity/monitoring-health/overview-monitoring-health) | [https://learn.microsoft.com/en-us/entra/identity/monitoring-health/overview-monitoring-health](https://learn.microsoft.com/en-us/entra/identity/monitoring-health/overview-monitoring-health) | Crucial for security and governance; covers exporting Microsoft Entra ID audit, sign-in, and provisioning logs for long-term retention or SIEM integration. |
+| [Azure Blob Storage](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction) | [https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction) | Key design choice for low-cost, long-term retention and archival of compliance and audit logs. |
+| [Azure Event Hubs](https://learn.microsoft.com/en-us/azure/event-hubs/event-hubs-about) | [https://learn.microsoft.com/en-us/azure/event-hubs/event-hubs-about](https://learn.microsoft.com/en-us/azure/event-hubs/event-hubs-about) | Recommended architecture component for streaming massive log volumes out of Azure to third-party SIEMs or external analytics tools. |
+| [Microsoft Sentinel](https://learn.microsoft.com/en-us/azure/sentinel/overview) | [https://learn.microsoft.com/en-us/azure/sentinel/overview](https://learn.microsoft.com/en-us/azure/sentinel/overview) | Supports security-focused logging design decisions, acting as the cloud-native SIEM/SOAR destination for aggregated enterprise logs. |
+| [Azure Architecture Center](https://www.google.com/search?q=https://learn.microsoft.com/en-us/azure/architecture/guide/management-and-visualizations/monitoring) | [https://learn.microsoft.com/en-us/azure/architecture/guide/management-and-visualizations/monitoring](https://www.google.com/search?q=https://learn.microsoft.com/en-us/azure/architecture/guide/management-and-visualizations/monitoring) | Provides high-level architecture guidance, decision trees, and best practices for establishing a unified logging and observability strategy. |
+
+Potentially relevant products considered: Azure Monitor, Log Analytics, Application Insights, Data Collection Rules (DCRs), Azure Event Hubs, Azure Blob Storage, Microsoft Sentinel, Microsoft Entra ID, Azure Data Explorer, Azure Resource Graph.
+
+Forum-discovery note: Public candidate discussions frequently highlight the importance of understanding *where* to route logs based on the scenario (e.g., Event Hubs for third-party SIEMs, Storage Accounts for 7-year compliance archival, and Log Analytics for immediate querying). There is also a strong emphasis on identity logging via Microsoft Entra and migrating from legacy agents to Data Collection Rules (DCRs) for precise log filtering. These signals were used for discovery and validated against official Microsoft documentation.
+
+Coverage notes:
+
+* This task is heavily fragmented across multiple aspects of **Azure Monitor**, requiring a strong grasp of how the different components (Diagnostic Settings, DCRs, App Insights, Log Analytics workspaces) interact.
+* Understanding the architectural tradeoffs between destinations (cost vs. querying capabilities vs. third-party integration) is more critical than memorizing deep technical configurations for a single product.
+* Highly recommend downloading the **Azure Monitor** (specifically data platform and diagnostic settings) and **Azure Event Hubs** documentation sets first, as these form the backbone of most routing and storage questions.
+* **Microsoft Sentinel** and **Azure Data Explorer** are frequently part of logging architectures but are generally tested at a higher "when to use this" level rather than deep deployment specifics on this exam.
