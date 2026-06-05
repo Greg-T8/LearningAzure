@@ -8,6 +8,7 @@ This log tracks individual study sessions for the **AZ-305** exam. Fill in **End
 
 | # | Date | Start | End | Duration | Mode | Task | Notes |
 |:--|:-----|:------|:----|:---------|:-----|:------|:------|
+|  | 6/4/26 |  |  |  |  |  |  |
 |  | 6/3/26 |  |  |  |  |  |  |
 | 4 | 6/2/26 | 4:14 AM | 6:18 AM | 2h 4m | Prepare |  | Completed preparation for first exam task; for next session, begin studying at "Recommend a logging solution" |
 | 3 | 6/1/26 | 4:09 AM | 6:12 AM | 2h 3m | Prepare |  | Refined prompts for study guide generation; created prompt for fact sheet and NotebookLM exam task quiz; for next session, continue refining study guide prompt; then set up for first exam task study session |
