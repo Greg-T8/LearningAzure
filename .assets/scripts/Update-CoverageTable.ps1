@@ -35,17 +35,33 @@ $RepoRoot = Resolve-Path -Path (Join-Path -Path $PSScriptRoot -ChildPath '..\..'
 $MainReadme = Join-Path -Path $RepoRoot -ChildPath 'README.md'
 $GetActiveExamScript = Join-Path -Path $PSScriptRoot -ChildPath 'Get-ActiveExam.ps1'
 
+# Applied Skills topics roll up into a single aggregate column in the activity table
+$AppliedSkillsColumn = 'Applied Skills'
+
 $Main = {
     . $Helpers
 
+    # Capture whether the run is scoped to specific exams before Get-TargetExam is consulted
+    $scopedToExam = [bool]$ExamName
     $exams = Get-TargetExam
 
-    # Update coverage for each exam
+    # Build the set of track items to refresh: cert exams, plus (on unscoped runs) applied-skills topics
+    $items = [System.Collections.Generic.List[object]]::new()
     foreach ($exam in $exams) {
+        $items.Add([pscustomobject]@{ Name = $exam; Dir = (Join-Path -Path $RepoRoot -ChildPath "certs\$exam") })
+    }
+    if (-not $scopedToExam) {
+        foreach ($topic in (Get-AppliedSkillFolder)) {
+            $items.Add([pscustomobject]@{ Name = $topic; Dir = (Join-Path -Path $RepoRoot -ChildPath "applied-skills\$topic") })
+        }
+    }
+
+    # Update coverage for each track item (coverage/dashboard/per-skill helpers no-op on marker-less topic READMEs)
+    foreach ($item in $items) {
         try {
-            Write-Host "`n=== Updating coverage for $exam ===" -ForegroundColor Cyan
-            $ExamName = $exam
-            $ExamDir = Join-Path -Path $RepoRoot -ChildPath "certs\$exam"
+            Write-Host "`n=== Updating coverage for $($item.Name) ===" -ForegroundColor Cyan
+            $ExamName = $item.Name
+            $ExamDir = $item.Dir
             $ExamReadme = Join-Path -Path $ExamDir -ChildPath 'README.md'
             $StudyLogFile = Join-Path -Path $ExamDir -ChildPath 'StudyLog.md'
             Confirm-InputFile
@@ -58,11 +74,11 @@ $Main = {
             Update-CoverageDashboard
         }
         catch {
-            Write-Warning "Skipping $exam — $_"
+            Write-Warning "Skipping $($item.Name) — $_"
         }
     }
 
-    # Update In Progress duration once for all exams
+    # Update In Progress duration once for all exams and applied skills
     Update-InProgressDuration
 
     # Always use full set of active exams for the activity table, regardless of -ExamName scope
@@ -70,10 +86,15 @@ $Main = {
 
     # Include any exam with study log activity in the last 7 days, even if not currently In Progress
     $recentExams = Get-ExamWithRecentActivity
-    $activityExams = @(@($allActiveExams) + @($recentExams) | Where-Object { $_ } | Sort-Object -Unique)
+    $activityColumns = @(@($allActiveExams) + @($recentExams) | Where-Object { $_ } | Sort-Object -Unique)
+
+    # Append a single aggregate Applied Skills column when any topic is In Progress or recently studied
+    if (Test-AppliedSkillActivity) {
+        $activityColumns += $AppliedSkillsColumn
+    }
 
     # Update the 7-day activity table in root README from study log data
-    Update-ActivityTable -ExamNames $activityExams
+    Update-ActivityTable -ExamNames $activityColumns
 }
 
 #region HELPER FUNCTIONS
@@ -319,10 +340,11 @@ $Helpers = {
                     $startDateText = $null
                     $logStats = $null
 
-                    # Resolve the exam's StudyLog so we can pull total hours (and a fallback start date)
-                    if ($examCell -match 'certs/([A-Za-z0-9_-]+)/README\.md') {
-                        $examSlug = $Matches[1]
-                        $candidateLog = Join-Path -Path $RepoRoot -ChildPath "certs\$examSlug\StudyLog.md"
+                    # Resolve the item's StudyLog (cert exam or applied skill) to pull total hours (and a fallback start date)
+                    if ($examCell -match '(certs|applied-skills)/([A-Za-z0-9_-]+)/README\.md') {
+                        $trackRoot = $Matches[1]
+                        $examSlug = $Matches[2]
+                        $candidateLog = Join-Path -Path $RepoRoot -ChildPath "$trackRoot\$examSlug\StudyLog.md"
                         $logStats = Get-StudyLogStats -Path $candidateLog
                     }
 
@@ -1095,6 +1117,12 @@ $Helpers = {
 
         $result = @{}
         foreach ($exam in $ExamNames) {
+            # Aggregate Applied Skills column: running total spans all logged applied-skills time
+            if ($exam -eq $AppliedSkillsColumn) {
+                $result[$exam] = '0001-01-01'
+                continue
+            }
+
             if (-not $lineByExam.ContainsKey($exam)) {
                 Write-Warning "Certification row not found for exam '$exam' in $MainReadme — skipping from running totals"
                 continue
@@ -1173,6 +1201,71 @@ $Helpers = {
         return $results.ToArray()
     }
 
+    function Get-AppliedSkillFolder {
+        # Return applied-skills topic folder names that contain a StudyLog.md
+        $root = Join-Path -Path $RepoRoot -ChildPath 'applied-skills'
+        if (-not (Test-Path -Path $root)) { return @() }
+
+        return Get-ChildItem -Path $root -Directory |
+            Where-Object {
+                $_.Name -notmatch '^\.' -and
+                (Test-Path -Path (Join-Path -Path $_.FullName -ChildPath 'StudyLog.md'))
+            } |
+            ForEach-Object { $_.Name }
+    }
+
+    function Get-AppliedSkillInProgress {
+        # Return applied-skills topic names whose Status is 'In Progress' in the root README table
+        $results = [System.Collections.Generic.List[string]]::new()
+        if (-not (Test-Path -Path $MainReadme)) { return @() }
+
+        foreach ($line in Get-Content -Path $MainReadme -Encoding UTF8) {
+            # Only consider table rows linking into applied-skills/<topic>/README.md
+            if ($line -notmatch '\[\*\*([^\]]+)\*\*\]\(applied-skills/') { continue }
+            $topic = $Matches[1].Trim()
+
+            $cells = $line -split '\|'
+            if ($cells.Count -ge 5 -and $cells[3].Trim() -like '*In Progress*') {
+                $results.Add($topic)
+            }
+        }
+
+        return $results.ToArray()
+    }
+
+    function Test-AppliedSkillActivity {
+        # True when any applied-skills topic is In Progress or has a StudyLog entry in the last 7 days
+        if (@(Get-AppliedSkillInProgress).Count -gt 0) { return $true }
+
+        $cutoff = (Get-Date).Date.AddDays(-6)
+        $dateFormats = @('M/d/yy', 'M/d/yyyy', 'MM/dd/yy', 'MM/dd/yyyy')
+        $culture = [System.Globalization.CultureInfo]::InvariantCulture
+        $styles = [System.Globalization.DateTimeStyles]::None
+
+        foreach ($topic in (Get-AppliedSkillFolder)) {
+            $log = Join-Path -Path $RepoRoot -ChildPath "applied-skills\$topic\StudyLog.md"
+            if (-not (Test-Path -Path $log)) { continue }
+
+            foreach ($line in Get-Content -Path $log -Encoding UTF8) {
+                if ($line -notmatch '^\|\s*\d+\s*\|') { continue }
+
+                $cells = ($line.TrimStart('|').TrimEnd('|')) -split '\|'
+                if ($cells.Count -lt 5) { continue }
+
+                $dateCell = $cells[1].Trim()
+                [datetime]$parsed = [datetime]::MinValue
+                foreach ($fmt in $dateFormats) {
+                    if ([datetime]::TryParseExact($dateCell, $fmt, $culture, $styles, [ref]$parsed)) {
+                        if ($parsed.Date -ge $cutoff) { return $true }
+                        break
+                    }
+                }
+            }
+        }
+
+        return $false
+    }
+
     function Get-AllStudyLogEntry {
         # Read study log entries for active exams, returning flat list of date/exam/duration objects
         param(
@@ -1184,9 +1277,19 @@ $Helpers = {
         $culture = [System.Globalization.CultureInfo]::InvariantCulture
         $styles = [System.Globalization.DateTimeStyles]::None
 
-        # Collect log files: one StudyLog per active exam
+        # Collect log files: one StudyLog per cert exam; all applied-skills topics roll into one column
         $logSources = [System.Collections.Generic.List[object]]::new()
         foreach ($exam in $ExamNames) {
+            if ($exam -eq $AppliedSkillsColumn) {
+                foreach ($topic in (Get-AppliedSkillFolder)) {
+                    $logPath = Join-Path -Path $RepoRoot -ChildPath "applied-skills\$topic\StudyLog.md"
+                    if (Test-Path -Path $logPath) {
+                        $logSources.Add([PSCustomObject]@{ Path = $logPath; Exam = $AppliedSkillsColumn })
+                    }
+                }
+                continue
+            }
+
             $logPath = Join-Path -Path $RepoRoot -ChildPath "certs\$exam\StudyLog.md"
             if (Test-Path -Path $logPath) {
                 $logSources.Add([PSCustomObject]@{ Path = $logPath; Exam = $exam })
@@ -1385,9 +1488,14 @@ $Helpers = {
             [string[]]$ExamNames
         )
 
-        [string[]]$tableColumns = @($ExamNames | Sort-Object)
+        # Sort cert exam columns; keep the aggregate Applied Skills column last (before Total)
+        $examCols = @($ExamNames | Where-Object { $_ -ne $AppliedSkillsColumn } | Sort-Object)
+        [string[]]$tableColumns = @($examCols)
+        if ($ExamNames -contains $AppliedSkillsColumn) {
+            $tableColumns += $AppliedSkillsColumn
+        }
 
-        # Gather all study log entries across active exams
+        # Gather all study log entries across active exams and applied skills
         $allEntries = Get-AllStudyLogEntry -ExamNames $ExamNames
 
         # Parse certification start dates for running totals

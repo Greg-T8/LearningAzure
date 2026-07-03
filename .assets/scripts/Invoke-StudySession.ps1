@@ -24,6 +24,7 @@ param(
     [ValidateSet('Start', 'Stop')]
     [string]$Action = 'Start',
 
+    [Alias('Topic')]
     [string]$Exam,
 
     [ValidateSet('Prepare', 'Research', 'Practice', 'Review')]
@@ -139,8 +140,14 @@ $Main = {
 
 $Helpers = {
     function Resolve-ExamFolder {
-        # Map an exam name to its workspace folder under certs\<exam>
+        # Map a track item to its workspace folder.
+        # Applied Skills topics live under applied-skills\<name>; cert exams under certs\<name>.
         param([Parameter(Mandatory)] [string]$Exam)
+
+        $appliedFolder = Join-Path -Path $RepoRoot -ChildPath "applied-skills\$Exam"
+        if (Test-Path -Path $appliedFolder) {
+            return "applied-skills\$Exam"
+        }
 
         return "certs\$Exam"
     }
@@ -249,13 +256,15 @@ $Helpers = {
     }
 
     function Get-AllExamWithLog {
-        # Discover all exams that have a StudyLog.md file
+        # Discover all track items (cert exams and applied skills) that have a StudyLog.md file
         $allExams = [System.Collections.Generic.List[string]]::new()
 
-        $certsDir = Join-Path -Path $RepoRoot -ChildPath 'certs'
+        foreach ($track in @('certs', 'applied-skills')) {
+            $trackDir = Join-Path -Path $RepoRoot -ChildPath $track
 
-        if (Test-Path -Path $certsDir) {
-            Get-ChildItem -Path $certsDir -Directory |
+            if (-not (Test-Path -Path $trackDir)) { continue }
+
+            Get-ChildItem -Path $trackDir -Directory |
                 Where-Object { $_.Name -notmatch '^\.' } |
                 ForEach-Object {
                     $logFile = Join-Path -Path $_.FullName -ChildPath 'StudyLog.md'
@@ -270,14 +279,17 @@ $Helpers = {
     }
 
     function Confirm-ValidExam {
-        # Validate that the requested exam is an active exam
+        # Validate the requested track item: an active cert exam, or an existing applied-skills topic
         param([Parameter(Mandatory)] [string]$Exam)
 
-        $activeExams = & $GetActiveExamScript
+        $activeExams = @(& $GetActiveExamScript)
+        if ($Exam -in $activeExams) { return }
 
-        if ($Exam -notin $activeExams) {
-            throw "Exam '$Exam' is not active. Valid exams: $($activeExams -join ', ')"
-        }
+        # Applied Skills topics are valid when their StudyLog.md exists (no Skills.psd1 required)
+        $appliedLog = Join-Path -Path $RepoRoot -ChildPath "applied-skills\$Exam\StudyLog.md"
+        if (Test-Path -Path $appliedLog) { return }
+
+        throw "'$Exam' is not valid. Active exams: $($activeExams -join ', '). Applied Skills topics require applied-skills\<name>\StudyLog.md."
     }
 
     function Get-ExamTask {
