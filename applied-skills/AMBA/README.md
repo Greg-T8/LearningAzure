@@ -38,7 +38,7 @@ You are done when you can:
 
 | Skill | Tasks | Practice Evidence |
 |:------|:------|:------------------|
-| Understand the ALZ Terraform Accelerator | Identify the accelerator phases: planning, prerequisites, bootstrap, and run. Explain when to use GitHub, Azure DevOps, or local filesystem output. | Notes describing selected path for your lab environment. |
+| [Understand the ALZ Terraform Accelerator](./lessons/01-understand-alz-terraform-accelerator.md) | Identify the accelerator phases: planning, prerequisites, bootstrap, and run. Explain when to use GitHub, Azure DevOps, or local filesystem output. | Notes describing selected path for your lab environment. |
 | Understand the `platform_landing_zone` template | Map the template files, generated variables, examples, and AVM modules. Identify what deploys management groups, policy, role definitions, management resources, connectivity, DDoS, and private DNS. | Annotated file map of the template. |
 | Deploy or dry-run the platform landing zone | Configure subscriptions, starter locations, and either hub-and-spoke or Virtual WAN. Prefer `terraform plan` first; only apply if cost and permissions are acceptable. | Saved plan output and a short architecture summary. |
 | Verify the baseline landing zone | Validate management group hierarchy, policy assignments, Log Analytics workspace, automation account, and connectivity resources. | CLI/portal screenshots or notes with resource IDs. |
@@ -110,3 +110,21 @@ Each session is intended to be 2-3 hours. The core plan is 12 sessions; for a 3-
 | 12 | Capstone | Rebuild the full path from scratch in notes: landing zone Terraform plan, AMBA portal deployment, AMBA Terraform deployment, 10-alert selection design, validation, remediation, cleanup. |
 
 ---
+
+## Primary References
+
+- [AMBA welcome](https://azure.github.io/azure-monitor-baseline-alerts/welcome/)
+- [AMBA alert details](https://azure.github.io/azure-monitor-baseline-alerts/patterns/alz/getting-started/Alerts-Details/index.html)
+- [AMBA policy initiatives](https://azure.github.io/azure-monitor-baseline-alerts/patterns/alz/getting-started/Policy-Initiatives/index.html)
+- [Deploy AMBA via the Azure portal](https://azure.github.io/azure-monitor-baseline-alerts/patterns/alz/HowTo/deploy/Deploy-via-Azure-Portal-UI/index.html)
+- [Deploy AMBA with Terraform](https://azure.github.io/azure-monitor-baseline-alerts/patterns/alz/HowTo/deploy/Deploy-with-Terraform/index.html)
+- [AMBA Terraform module](https://azure.github.io/azure-monitor-baseline-alerts/patterns/alz/Resources/Terraform-Module/index.html)
+- [Customize AMBA policy assignment](https://azure.github.io/azure-monitor-baseline-alerts/patterns/alz/HowTo/deploy/Customize-Policy-Assignment/)
+- [Deploy only Service Health alerts](https://azure.github.io/azure-monitor-baseline-alerts/patterns/alz/HowTo/deploy/Deploy-only-Service-Health-Alerts/index.html)
+- [Disable AMBA policies](https://azure.github.io/azure-monitor-baseline-alerts/patterns/alz/HowTo/Disabling-Policies/index.html)
+- [Override AMBA alert thresholds](https://azure.github.io/azure-monitor-baseline-alerts/patterns/alz/HowTo/Threshold-Override/index.html)
+- [Bring Your Own Notifications](https://azure.github.io/azure-monitor-baseline-alerts/patterns/alz/HowTo/Bring-your-own-Notifications/index.html)
+- [Remediate AMBA policies](https://azure.github.io/azure-monitor-baseline-alerts/patterns/alz/HowTo/deploy/Remediate-Policies/index.html)
+- [ALZ IaC Accelerator](https://azure.github.io/Azure-Landing-Zones/accelerator/)
+- [ALZ Terraform Accelerator: deploy AMBA option](https://azure.github.io/Azure-Landing-Zones/accelerator/starter-terraform/options/amba/)
+- [ALZ Terraform Accelerator `platform_landing_zone` template](https://github.com/Azure/alz-terraform-accelerator/tree/main/templates/platform_landing_zone)
