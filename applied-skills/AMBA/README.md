@@ -5,11 +5,11 @@
 - **Reference:** [Azure Monitor Baseline Alerts](https://azure.github.io/azure-monitor-baseline-alerts/)
 - **ALZ Terraform Accelerator Template:** [platform_landing_zone](https://github.com/Azure/alz-terraform-accelerator/tree/main/templates/platform_landing_zone)
 - **Study Log:** [Session-by-session study time tracker](./StudyLog.md)
-- **Target Pace:** 3 days/week for 3-4 weeks, roughly 9-12 sessions
 
 <!-- STUDY_SUMMARY -->
-**Hours Committed:** 0h · **Days Studied:** 0
+**Hours Committed:** 0.0h · **Days Studied:** 0
 <!-- /STUDY_SUMMARY -->
+- **Target Pace:** 3 days/week for 3-4 weeks, roughly 9-12 sessions
 
 ---
 
