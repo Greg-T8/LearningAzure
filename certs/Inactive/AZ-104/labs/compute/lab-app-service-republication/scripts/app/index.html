@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AZ-104 Lab - App Service Republication</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 700px;
+            margin: 60px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        h1 { color: #0078d4; margin-top: 0; }
+        .badge {
+            display: inline-block;
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            margin-bottom: 16px;
+        }
+        .info { color: #666; font-size: 0.95em; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <span class="badge">Staging Slot</span>
+        <h1>App Service Republication Lab</h1>
+        <p>This sample web app was deployed to a <strong>staging deployment slot</strong>
+           as part of the AZ-104 hands-on lab.</p>
+        <p>The deployment used the following Azure PowerShell command sequence:</p>
+        <ol>
+            <li><code>New-AzResourceGroup</code></li>
+            <li><code>New-AzAppServicePlan</code></li>
+            <li><code>New-AzWebAppSlot</code></li>
+            <li><code>Publish-AzWebApp</code></li>
+        </ol>
+        <p class="info">Test users can review this page before the app is swapped to production.</p>
+    </div>
+</body>
+</html>
