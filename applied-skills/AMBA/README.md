@@ -39,38 +39,38 @@ You are done when you can:
 
 | Skill | Tasks | Practice Evidence |
 |:------|:------|:------------------|
-| [Understand the ALZ Terraform Accelerator](./lessons/01-understand-alz-terraform-accelerator.md) | Identify the accelerator phases: planning, prerequisites, bootstrap, and run. Explain when to use GitHub, Azure DevOps, or local filesystem output. | Notes describing selected path for your lab environment. |
-| Understand the `platform_landing_zone` template | Map the template files, generated variables, examples, and AVM modules. Identify what deploys management groups, policy, role definitions, management resources, connectivity, DDoS, and private DNS. | Annotated file map of the template. |
-| Deploy or dry-run the platform landing zone | Configure subscriptions, starter locations, and either hub-and-spoke or Virtual WAN. Prefer `terraform plan` first; only apply if cost and permissions are acceptable. | Saved plan output and a short architecture summary. |
-| Verify the baseline landing zone | Validate management group hierarchy, policy assignments, Log Analytics workspace, automation account, and connectivity resources. | CLI/portal screenshots or notes with resource IDs. |
+| [Understand the ALZ Terraform Accelerator](./lessons/01-understand-alz-terraform-accelerator.md) | Identify accelerator phases and output strategy. | Notes describing selected path for your lab environment. |
+| Understand the `platform_landing_zone` template | Map template files, AVM modules, and core resources. | Annotated file map of the template. |
+| Deploy or dry-run the platform landing zone | Configure scope and run a safe landing zone plan. | Saved plan output and a short architecture summary. |
+| Verify the baseline landing zone | Validate baseline hierarchy, policies, and management resources. | CLI/portal screenshots or notes with resource IDs. |
 
 ### 2. AMBA Concepts and Alert Catalog
 
 | Skill | Tasks | Practice Evidence |
 |:------|:------|:------------------|
-| Explain AMBA | Summarize the Azure Resources, Patterns/Scenarios, and Visualizations sections of the AMBA docs. | One-page AMBA architecture note. |
-| Classify alerts | Distinguish activity log alerts, metric alerts, log-search alerts, static thresholds, dynamic thresholds, default enabled alerts, and default disabled alerts. | Table with 10 sample alerts and their type/default state. |
-| Understand AMBA-ALZ policy initiatives | Map initiatives such as Resource and Service Health, Connectivity, Identity, Management, VM, Key Management, Load Balancing, Network Changes, Recovery Services, Storage, Web, and Notification Assets. | Initiative-to-management-group mapping. |
-| Understand remediation | Explain why greenfield resources can be handled automatically while existing resources often need policy remediation. | Remediation notes and command/portal path. |
+| Explain AMBA | Summarize AMBA resources, patterns, and visualizations. | One-page AMBA architecture note. |
+| Classify alerts | Classify alert types, thresholds, and default states. | Table with 10 sample alerts and their type/default state. |
+| Understand AMBA-ALZ policy initiatives | Map AMBA-ALZ initiatives to management group scope. | Initiative-to-management-group mapping. |
+| Understand remediation | Explain remediation for greenfield and brownfield resources. | Remediation notes and command/portal path. |
 
 ### 3. AMBA Deployment Methods
 
 | Skill | Tasks | Practice Evidence |
 |:------|:------|:------------------|
-| Deploy via Azure portal | Use the AMBA-ALZ portal accelerator. Practice both management group and subscription deployment paths if you have a safe test scope. | Parameter choices, enabled initiatives, notification settings. |
-| Deploy via Terraform | Use the AMBA Terraform module and/or the ALZ Terraform Accelerator AMBA option. Configure library references, AMBA archetypes, AMBA resource group, managed identity, and policy default values. | `terraform plan` and, if applied, deployed AMBA resources. |
-| Configure notifications | Practice AMBA-created notification assets and Bring Your Own Notifications (BYON). Compare email, ARM role, webhook, Logic App, Event Hub, and Function options. | Action group/APR resource IDs and routing notes. |
-| Validate deployment | Check policy assignments, policy states, remediation tasks, metric alerts, activity log alerts, action groups, and alert processing rules. | Validation checklist with commands and results. |
+| Deploy via Azure portal | Deploy AMBA in portal at management group scope. | Parameter choices, enabled initiatives, notification settings. |
+| Deploy via Terraform | Deploy AMBA with Terraform module and archetypes. | `terraform plan` and, if applied, deployed AMBA resources. |
+| Configure notifications | Configure notification assets and BYON routing options. | Action group/APR resource IDs and routing notes. |
+| Validate deployment | Validate policy states, alerts, action groups, and APRs. | Validation checklist with commands and results. |
 
 ### 4. Alert Selection, Tuning, and Operations
 
 | Skill | Tasks | Practice Evidence |
 |:------|:------|:------------------|
-| Select alert categories | Use portal or parameter toggles such as `enableAMBAStorage`, `enableAMBAVM`, and `enableAMBAServiceHealth` to deploy broad initiatives. | A category-only deployment decision record. |
-| Select individual alerts | Use Terraform/custom policy assignments when the requirement is "only these 10 alerts." Avoid treating the portal accelerator as the precise-alert selection mechanism. | Custom 10-alert design with policy names and assignments. |
-| Disable or suppress alerts | Compare `AlertState`, `PolicyEffect`, `MonitorDisable`, management group/subscription exclusions, and alert processing rules. | Scenario notes for each control. |
-| Tune thresholds | Adjust assignment parameters for global thresholds and use threshold override tags for resource-specific metric/log-search thresholds. | Before/after threshold notes. |
-| Operate AMBA over time | Practice version lookup, update planning, cleanup, and brownfield remediation. | Runbook for update/remediate/cleanup. |
+| Select alert categories | Select AMBA categories with initiative deployment toggles. | A category-only deployment decision record. |
+| Select individual alerts | Select specific alerts with custom policy assignments. | Custom 10-alert design with policy names and assignments. |
+| Disable or suppress alerts | Compare suppression controls and exclusion mechanisms. | Scenario notes for each control. |
+| Tune thresholds | Tune thresholds globally and by resource tags. | Before/after threshold notes. |
+| Operate AMBA over time | Plan AMBA updates, remediation, and cleanup operations. | Runbook for update/remediate/cleanup. |
 
 ---
 

@@ -30,31 +30,6 @@ param(
     [ValidateSet('Prepare', 'Research', 'Practice', 'Review')]
     [string]$Mode,
 
-    [ArgumentCompleter({
-        param($commandName, $parameterName, $wordToComplete, $commandAst, $fakeBoundParameters)
-
-        $examValue = $fakeBoundParameters['Exam']
-        if (-not $examValue) { return }
-
-        # Resolve the script directory from the command path
-        $resolved = Resolve-Path -Path $commandName -ErrorAction SilentlyContinue
-        if (-not $resolved) { return }
-
-        $scriptDir  = Split-Path -Parent $resolved.Path
-        $repoRoot   = (Resolve-Path -Path "$scriptDir\..\.."  ).Path
-        $skillsFile = Join-Path -Path $repoRoot -ChildPath "certs\$examValue\Skills.psd1"
-        if (-not (Test-Path -Path $skillsFile)) { return }
-
-        # Return matching task names from the exam's skills file (deduped across skills)
-        (Import-PowerShellDataFile -Path $skillsFile).Domains |
-            ForEach-Object { $_.Skills } |
-            ForEach-Object { $_.Tasks } |
-            Sort-Object -Unique |
-            Where-Object { $_ -like "$wordToComplete*" } |
-            ForEach-Object {
-                [System.Management.Automation.CompletionResult]::new("'$_'", $_, 'ParameterValue', $_)
-            }
-    })]
     [string]$Task,
 
     [string]$Notes
@@ -65,7 +40,7 @@ $RepoRoot = Resolve-Path -Path (Join-Path -Path $PSScriptRoot -ChildPath '..\..'
 $StudyLogFile = $null
 $GetActiveExamScript = Join-Path -Path $PSScriptRoot -ChildPath 'Get-ActiveExam.ps1'
 
-$Main = {
+ Main = {
     . $Helpers
 
     Confirm-GitRepository
