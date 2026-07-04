@@ -9,6 +9,7 @@
 <!-- STUDY_SUMMARY -->
 **Hours Committed:** 0.0h · **Days Studied:** 0
 <!-- /STUDY_SUMMARY -->
+
 - **Target Pace:** 3 days/week for 3-4 weeks, roughly 9-12 sessions
 
 ---
