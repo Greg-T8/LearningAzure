@@ -8,39 +8,8 @@ This log tracks individual study sessions for the **AZ-305** exam. Fill in **End
 
 | # | Date | Start | End | Duration | Mode | Task | Notes |
 |:--|:-----|:------|:----|:---------|:-----|:------|:------|
-| 5 | 7/6/26 | 4:05 AM |  |  | Research | Recommend a logging solution |  |
-|  | 7/4/26 |  |  |  |  |  |  |
-|  | 7/3/26 |  |  |  |  |  |  |
-|  | 7/2/26 |  |  |  |  |  |  |
-|  | 7/1/26 |  |  |  |  |  |  |
-|  | 6/30/26 |  |  |  |  |  |  |
-|  | 6/29/26 |  |  |  |  |  |  |
-|  | 6/28/26 |  |  |  |  |  |  |
-|  | 6/27/26 |  |  |  |  |  |  |
-|  | 6/26/26 |  |  |  |  |  |  |
-|  | 6/25/26 |  |  |  |  |  |  |
-|  | 6/24/26 |  |  |  |  |  |  |
-|  | 6/23/26 |  |  |  |  |  |  |
-|  | 6/22/26 |  |  |  |  |  |  |
-|  | 6/21/26 |  |  |  |  |  |  |
-|  | 6/20/26 |  |  |  |  |  |  |
-|  | 6/19/26 |  |  |  |  |  |  |
-|  | 6/18/26 |  |  |  |  |  |  |
-|  | 6/17/26 |  |  |  |  |  |  |
-|  | 6/16/26 |  |  |  |  |  |  |
-|  | 6/15/26 |  |  |  |  |  |  |
-|  | 6/14/26 |  |  |  |  |  |  |
-|  | 6/13/26 |  |  |  |  |  |  |
-|  | 6/12/26 |  |  |  |  |  |  |
-|  | 6/11/26 |  |  |  |  |  |  |
-|  | 6/10/26 |  |  |  |  |  |  |
-|  | 6/9/26 |  |  |  |  |  |  |
-|  | 6/8/26 |  |  |  |  |  |  |
-|  | 6/7/26 |  |  |  |  |  |  |
-|  | 6/6/26 |  |  |  |  |  |  |
-|  | 6/5/26 |  |  |  |  |  |  |
-|  | 6/4/26 |  |  |  |  |  |  |
-|  | 6/3/26 |  |  |  |  |  |  |
+| 5 | 7/6/26 | 4:05 AM | 5:59 AM | 1h 54m | Research | Recommend a logging solution | Completed "Logging Solution Study Guide"; pick up at "Logging Solution Fact Sheet" |
+|  | 6/3/26 - 7/5/26 |  |  |  |  |  |  |
 | 4 | 6/2/26 | 4:14 AM | 6:18 AM | 2h 4m | Prepare |  | Completed preparation for first exam task; for next session, begin studying at "Recommend a logging solution" |
 | 3 | 6/1/26 | 4:09 AM | 6:12 AM | 2h 3m | Prepare |  | Refined prompts for study guide generation; created prompt for fact sheet and NotebookLM exam task quiz; for next session, continue refining study guide prompt; then set up for first exam task study session |
 | 2 | 5/31/26 | 5:00 AM | 7:31 AM | 2h 31m | Prepare |  | Iterative development of prompts in support of exam task mapping and task study guide creation |
