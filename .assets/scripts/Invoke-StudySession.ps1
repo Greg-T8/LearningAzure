@@ -19,21 +19,22 @@ Greg Tate
 Program: Invoke-AzStudySession.ps1
 #>
 
-[CmdletBinding()]
-param(
-    [ValidateSet('Start', 'Stop')]
-    [string]$Action = 'Start',
+function Invoke-StudySession {
+    [CmdletBinding()]
+    param(
+        [ValidateSet('Start', 'Stop')]
+        [string]$Action = 'Start',
 
-    [Alias('Topic')]
-    [string]$Exam,
+        [Alias('Topic')]
+        [string]$Exam,
 
-    [ValidateSet('Prepare', 'Research', 'Practice', 'Review')]
-    [string]$Mode,
+        [ValidateSet('Prepare', 'Research', 'Practice', 'Review')]
+        [string]$Mode,
 
-    [string]$Task,
+        [string]$Task,
 
-    [string]$Notes
-)
+        [string]$Notes
+    )
 
 # Configuration
 $RepoRoot = Resolve-Path -Path (Join-Path -Path $PSScriptRoot -ChildPath '..\..')
@@ -590,10 +591,11 @@ $Helpers = {
     }
 }
 
-try {
-    Push-Location -Path $PSScriptRoot
-    & $Main
-}
-finally {
-    Pop-Location
+    try {
+        Push-Location -Path $PSScriptRoot
+        & $Main
+    }
+    finally {
+        Pop-Location
+    }
 }
