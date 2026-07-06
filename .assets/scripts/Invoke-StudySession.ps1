@@ -40,7 +40,7 @@ $RepoRoot = Resolve-Path -Path (Join-Path -Path $PSScriptRoot -ChildPath '..\..'
 $StudyLogFile = $null
 $GetActiveExamScript = Join-Path -Path $PSScriptRoot -ChildPath 'Get-ActiveExam.ps1'
 
- Main = {
+$Main = {
     . $Helpers
 
     Confirm-GitRepository
