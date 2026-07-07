@@ -8,7 +8,7 @@ This log tracks individual study sessions for the **AZ-305** exam. Fill in **End
 
 | # | Date | Start | End | Duration | Mode | Task | Notes |
 |:--|:-----|:------|:----|:---------|:-----|:------|:------|
-| 6 | 7/7/26 | 4:21 AM |  |  | Research | Recommend a logging solution |  |
+| 6 | 7/7/26 | 4:21 AM | 4:21 AM | 0h 0m | Research | Recommend a logging solution | auto-closed at last commit |
 | 5 | 7/6/26 | 4:05 AM | 5:59 AM | 1h 54m | Research | Recommend a logging solution | Completed "Logging Solution Study Guide"; pick up at "Logging Solution Fact Sheet" |
 |  | 6/3/26 - 7/5/26 |  |  |  |  |  |  |
 | 4 | 6/2/26 | 4:14 AM | 6:18 AM | 2h 4m | Prepare |  | Completed preparation for first exam task; for next session, begin studying at "Recommend a logging solution" |
