@@ -38,7 +38,7 @@ function Invoke-StudySession {
 
 # Configuration
 $RepoRoot = Resolve-Path -Path (Join-Path -Path $PSScriptRoot -ChildPath '..\..')
-$StudyLogFile = $null
+$script:StudyLogFile = $null
 $GetActiveExamScript = Join-Path -Path $PSScriptRoot -ChildPath 'Get-ActiveExam.ps1'
 
 $Main = {
@@ -137,8 +137,8 @@ $Helpers = {
 
     function Confirm-StudyLogExists {
         # Verify the StudyLog.md file is present in the exam folder
-        if (-not (Test-Path -Path $StudyLogFile)) {
-            throw "StudyLog.md not found at '$StudyLogFile'. Please create it first."
+        if (-not (Test-Path -Path $script:StudyLogFile)) {
+            throw "StudyLog.md not found at '$script:StudyLogFile'. Please create it first."
         }
     }
 
@@ -162,7 +162,7 @@ $Helpers = {
 
     function Get-NextSessionNumber {
         # Count existing data rows to determine the next session number
-        $lines = Get-Content -Path $StudyLogFile
+        $lines = Get-Content -Path $script:StudyLogFile
 
         $dataRows = $lines |
             Where-Object { $_ -match '^\|\s*\d+\s*\|' }
@@ -176,7 +176,7 @@ $Helpers = {
 
     function Get-ActiveSessionNumber {
         # Find the most recent open session (started but not ended) in a study log
-        param([string]$LogFile = $StudyLogFile)
+        param([string]$LogFile = $script:StudyLogFile)
 
         $lines = Get-Content -Path $LogFile
 
@@ -327,7 +327,7 @@ $Helpers = {
         $safeMode  = ConvertTo-LogNote -Notes $Mode
         $safeTask  = ConvertTo-LogNote -Notes $Task
         $safeNotes = ConvertTo-LogNote -Notes $Notes
-        $lines     = Get-Content -Path $StudyLogFile
+        $lines     = Get-Content -Path $script:StudyLogFile
 
         # Detect whether the log uses the extended format (Mode + Skill/Task columns)
         $headerIndex = $null
@@ -363,7 +363,7 @@ $Helpers = {
         }
 
         if ($null -eq $insertIndex) {
-            throw "Table header separator not found in '$StudyLogFile'."
+            throw "Table header separator not found in '$script:StudyLogFile'."
         }
 
         # Build updated content with the new row inserted at the top of the data rows
@@ -374,7 +374,7 @@ $Helpers = {
             $updated += $lines[$insertIndex..($lines.Count - 1)]
         }
 
-        Set-Content -Path $StudyLogFile -Value $updated
+        Set-Content -Path $script:StudyLogFile -Value $updated
     }
 
     function ConvertTo-LogNote {
@@ -395,7 +395,7 @@ $Helpers = {
             [Parameter(Mandatory)]
             [int]$SessionNumber,
 
-            [string]$LogFile = $StudyLogFile,
+            [string]$LogFile = $script:StudyLogFile,
 
             [string]$Notes,
 
