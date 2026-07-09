@@ -7,11 +7,12 @@
 - **Study Log:** [Session-by-session study time tracker](./StudyLog.md)
 
 <!-- STUDY_SUMMARY -->
-**Hours Committed:** 14.6h · **Days Studied:** 7
+**Hours Committed:** 17.2h · **Days Studied:** 8
 - Prepare: 8.8h
 - Research: 3.7h
-- Practice: 2.1h
+- Practice: 4.7h
 <!-- /STUDY_SUMMARY -->
+
 
 
 
@@ -94,7 +95,7 @@ Task-level coverage based on [Per-Task Progress](#per-task-progress) completion.
 
 | # | Domain | Skill | Task | Research | Practice | Hours | Progress |
 | -: | :----- | :---- | :--- | :------: | :------: | ----: | :------- |
-| 1 | Identity, Governance & Monitoring | Design solutions for logging and monitoring | Recommend a logging solution | 🔲 | 🔲 | 5.7h | ⏳ |
+| 1 | Identity, Governance & Monitoring | Design solutions for logging and monitoring | Recommend a logging solution | 🔲 | 🔲 | 8.4h | ⏳ |
 | 2 | Identity, Governance & Monitoring | Design solutions for logging and monitoring | Recommend a solution for routing logs | 🔲 | 🔲 | 0.0h | 🔲 |
 | 3 | Identity, Governance & Monitoring | Design solutions for logging and monitoring | Recommend a monitoring solution | 🔲 | 🔲 | 0.0h | 🔲 |
 | 4 | Identity, Governance & Monitoring | Design authentication and authorization solutions | Recommend an authentication solution | 🔲 | 🔲 | 0.0h | 🔲 |
