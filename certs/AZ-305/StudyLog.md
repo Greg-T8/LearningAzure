@@ -8,6 +8,7 @@ This log tracks individual study sessions for the **AZ-305** exam. Fill in **End
 
 | # | Date | Start | End | Duration | Mode | Task | Notes |
 |:--|:-----|:------|:----|:---------|:-----|:------|:------|
+| 9 | 7/12/26 | 1:59 PM |  |  | Prepare | Recommend a solution for routing logs |  |
 | 8 | 7/9/26 | 4:15 AM | 6:53 AM | 2h 38m | Practice | Recommend a logging solution | Completed task; next session move to "Routing Logs" task |
 | 7 | 7/8/26 | 4:12 AM | 6:16 AM | 2h 4m | Practice | Recommend a logging solution | Completed two rounds of NotebookLM practice questions; next session, pick up final round and prepare for next topic |
 | 6 | 7/7/26 | 4:23 AM | 6:09 AM | 1h 46m | Research | Recommend a logging solution | Completed review of "Logging Solution fact sheet"; next section pick up at practice questions" |
