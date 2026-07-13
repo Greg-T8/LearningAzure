@@ -6,6 +6,6 @@ This log tracks individual study sessions for the **AMBA** applied skill. Fill i
 
 ## Session History
 
-| # | Date | Start | End | Duration | Mode | Task | Notes |
+| # | Date | Start | End | Duration | Mode | Domain | Notes |
 |:--|:-----|:------|:----|:---------|:-----|:------|:------|
-| 1 | 7/13/26 | 5:25 AM |  |  | Research | Identify accelerator phases and output strategy. |  |
+| 1 | 7/13/26 | 5:25 AM | 5:25 AM | 0h 0m | Research | Landing Zone Foundation with Terraform and AVM | auto-closed at last commit |
