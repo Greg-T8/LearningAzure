@@ -491,4 +491,4 @@ Do not assume that Azure Policy supplies one universal diagnostic-setting defini
 
 ---
 
-_Model used to research and author this fact sheet: Codex (GPT-5; reasoning mode was not supplied in the request)._
+_Model used to research and author this fact sheet: Codex 5.6 Sol Extra High_
