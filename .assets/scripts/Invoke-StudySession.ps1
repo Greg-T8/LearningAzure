@@ -7,7 +7,8 @@ Manages study session tracking for certification exams. Supports Start and Stop 
 Start — inserts a new row at the top of StudyLog.md with session number, date, and start time.
         Auto-closes any currently active session in another exam before opening the new one.
 Stop  — closes the active session with end time and duration.
-Sessions may optionally be tagged with a Task from the exam's Skills.psd1.
+Sessions may optionally be tagged with one scope value from Skills.psd1:
+Domain, Skill, or Task.
 
 .CONTEXT
 LearningAzure repository — certification study tracking.
@@ -16,7 +17,7 @@ LearningAzure repository — certification study tracking.
 Greg Tate
 
 .NOTES
-Program: Invoke-AzStudySession.ps1
+Program: Invoke-StudySession.ps1
 #>
 
 function Invoke-StudySession {
@@ -32,6 +33,10 @@ function Invoke-StudySession {
         [string]$Mode,
 
         [string]$Task,
+
+        [string]$Domain,
+
+        [string]$Skill,
 
         [string]$Notes
     )
@@ -60,10 +65,8 @@ $Main = {
                 throw "Mode is required when Action is 'Start'."
             }
 
-            # Task is optional; validate against Skills.psd1 tasks when supplied
-            if ($Task) {
-                Confirm-ValidTask -Exam $Exam -Task $Task
-            }
+            # Resolve optional scope and enforce mutual exclusivity
+            $scope = Resolve-SessionScope -Task $Task -Domain $Domain -Skill $Skill
 
             $folder = Resolve-ExamFolder -Exam $Exam
             $logFileName = Resolve-ExamLogFileName -Exam $Exam
@@ -82,8 +85,16 @@ $Main = {
             }
 
             Confirm-StudyLogExists
+            $scopeHeader = Get-StudyLogScopeHeader -LogFile $script:StudyLogFile
+            Confirm-ScopeHeaderMatch -ScopeHeader $scopeHeader -ScopeType $scope.Type -LogFile $script:StudyLogFile
+
+            # Validate the selected scope value against Skills.psd1 entries when provided
+            if ($scope.Type) {
+                Confirm-ValidScope -Exam $Exam -ScopeType $scope.Type -ScopeValue $scope.Value
+            }
+
             $session = Get-NextSessionNumber
-            Add-SessionEntry -SessionNumber $session -Mode $Mode -Task $Task -Notes $Notes
+            Add-SessionEntry -SessionNumber $session -Mode $Mode -ScopeValue $scope.Value -Notes $Notes
             Push-StudyLogChange -SessionNumber $session -Type 'start' -Exam $Exam
             Show-Confirmation -Message "Study session #$session started for $Exam"
         }
@@ -268,40 +279,154 @@ $Helpers = {
         throw "'$Exam' is not valid. Active exams: $($activeExams -join ', '). Applied Skills topics require applied-skills\<name>\StudyLog.md."
     }
 
-    function Get-ExamTask {
-        # Load deduplicated task names from the exam's Skills.psd1 file
+    function Get-StudyLogScopeHeaderFromLine {
+        # Parse a study log header row and return Task, Skill, Domain, or $null
+        param([string]$HeaderLine)
+
+        if ([string]::IsNullOrWhiteSpace($HeaderLine)) {
+            return $null
+        }
+
+        $headerCells = ($HeaderLine.TrimStart('|').TrimEnd('|')) -split '\|'
+
+        foreach ($cell in $headerCells) {
+            $name = $cell.Trim()
+
+            if ($name -in @('Task', 'Skill', 'Domain')) {
+                return $name
+            }
+        }
+
+        return $null
+    }
+
+    function Get-StudyLogScopeHeader {
+        # Read the study log header and identify which optional scope column is present
+        param([string]$LogFile = $script:StudyLogFile)
+
+        $lines = Get-Content -Path $LogFile
+
+        $headerLine = $lines |
+            Where-Object { $_ -match '^\|\s*#\s*\|' } |
+            Select-Object -First 1
+
+        return Get-StudyLogScopeHeaderFromLine -HeaderLine $headerLine
+    }
+
+    function Resolve-SessionScope {
+        # Resolve optional scope input while enforcing one-of Task, Domain, or Skill
+        param(
+            [string]$Task,
+            [string]$Domain,
+            [string]$Skill
+        )
+
+        $selected = [System.Collections.Generic.List[object]]::new()
+
+        if (-not [string]::IsNullOrWhiteSpace($Task)) {
+            $selected.Add([pscustomobject]@{ Type = 'Task'; Value = $Task.Trim() })
+        }
+
+        if (-not [string]::IsNullOrWhiteSpace($Domain)) {
+            $selected.Add([pscustomobject]@{ Type = 'Domain'; Value = $Domain.Trim() })
+        }
+
+        if (-not [string]::IsNullOrWhiteSpace($Skill)) {
+            $selected.Add([pscustomobject]@{ Type = 'Skill'; Value = $Skill.Trim() })
+        }
+
+        if ($selected.Count -gt 1) {
+            throw 'Only one of -Task, -Domain, or -Skill can be provided.'
+        }
+
+        if ($selected.Count -eq 0) {
+            return [pscustomobject]@{ Type = ''; Value = '' }
+        }
+
+        return $selected[0]
+    }
+
+    function Confirm-ScopeHeaderMatch {
+        # Enforce that selected scope input matches the scope column in StudyLog.md
+        param(
+            [string]$ScopeHeader,
+            [string]$ScopeType,
+            [string]$LogFile = $script:StudyLogFile
+        )
+
+        if ([string]::IsNullOrWhiteSpace($ScopeType)) {
+            return
+        }
+
+        if ([string]::IsNullOrWhiteSpace($ScopeHeader)) {
+            throw "Study log '$LogFile' does not define a Task, Skill, or Domain column. Remove -$ScopeType or add one of those column headers."
+        }
+
+        if ($ScopeType -ne $ScopeHeader) {
+            throw "The -$ScopeType parameter does not match the '$ScopeHeader' scope column in '$LogFile'. Use -$ScopeHeader for this study log."
+        }
+    }
+
+    function Get-ExamScopeValues {
+        # Load deduplicated domain, skill, and task names from the exam's Skills.psd1 file
         param([Parameter(Mandatory)] [string]$Exam)
 
         $folder     = Resolve-ExamFolder -Exam $Exam
         $skillsFile = Join-Path -Path $RepoRoot -ChildPath "$folder\Skills.psd1"
 
         if (-not (Test-Path -Path $skillsFile)) {
-            return @()
+            return @{
+                Domains = @()
+                Skills  = @()
+                Tasks   = @()
+            }
         }
 
         $data = Import-PowerShellDataFile -Path $skillsFile
 
-        $data.Domains |
+        $domains = $data.Domains |
+            ForEach-Object { $_.Name } |
+            Sort-Object -Unique
+
+        $skills = $data.Domains |
+            ForEach-Object { $_.Skills } |
+            ForEach-Object { $_.Name } |
+            Sort-Object -Unique
+
+        $tasks = $data.Domains |
             ForEach-Object { $_.Skills } |
             ForEach-Object { $_.Tasks } |
             Sort-Object -Unique
+
+        return @{
+            Domains = @($domains)
+            Skills  = @($skills)
+            Tasks   = @($tasks)
+        }
     }
 
-    function Confirm-ValidTask {
-        # Validate that the specified task exists under any skill in the exam's skills file
+    function Confirm-ValidScope {
+        # Validate selected scope value against Skills.psd1 entries for the exam
         param(
             [Parameter(Mandatory)] [string]$Exam,
-            [Parameter(Mandatory)] [string]$Task
+            [Parameter(Mandatory)] [ValidateSet('Task', 'Domain', 'Skill')] [string]$ScopeType,
+            [Parameter(Mandatory)] [string]$ScopeValue
         )
 
-        $validTasks = @(Get-ExamTask -Exam $Exam)
+        $scopeValues = Get-ExamScopeValues -Exam $Exam
 
-        if ($validTasks.Count -eq 0) {
+        $validValues = switch ($ScopeType) {
+            'Task'   { @($scopeValues.Tasks) }
+            'Domain' { @($scopeValues.Domains) }
+            'Skill'  { @($scopeValues.Skills) }
+        }
+
+        if ($validValues.Count -eq 0) {
             throw "No Skills.psd1 found for exam '$Exam'."
         }
 
-        if ($Task -notin $validTasks) {
-            throw "Task '$Task' is not valid for $Exam. Valid tasks:`n  $($validTasks -join "`n  ")"
+        if ($ScopeValue -notin $validValues) {
+            throw "$ScopeType '$ScopeValue' is not valid for $Exam. Valid $($ScopeType.ToLower())s:`n  $($validValues -join "`n  ")"
         }
     }
 
@@ -313,7 +438,7 @@ $Helpers = {
 
             [string]$Mode,
 
-            [string]$Task,
+            [string]$ScopeValue,
 
             [string]$Notes,
 
@@ -325,11 +450,11 @@ $Helpers = {
         $date      = $now.ToString('M/d/yy')
         $start     = $now.ToString('h:mm tt')
         $safeMode  = ConvertTo-LogNote -Notes $Mode
-        $safeTask  = ConvertTo-LogNote -Notes $Task
+        $safeScope = ConvertTo-LogNote -Notes $ScopeValue
         $safeNotes = ConvertTo-LogNote -Notes $Notes
         $lines     = Get-Content -Path $script:StudyLogFile
 
-        # Detect whether the log uses the extended format (Mode + Skill/Task columns)
+        # Detect whether the log uses the extended format (Mode + scope column)
         $headerIndex = $null
         for ($h = 0; $h -lt $lines.Count; $h++) {
             if ($lines[$h] -match '^\|\s*#\s*\|') {
@@ -340,14 +465,9 @@ $Helpers = {
         $headerLine = if ($null -ne $headerIndex) { $lines[$headerIndex] } else { $null }
         $hasExtendedColumns = $headerLine -match '\|\s*Mode\s*\|'
 
-        # Rename legacy "Skill" header cell to "Task" on first write so new rows align
-        if ($hasExtendedColumns -and $headerLine -match '\|\s*Skill\s*\|') {
-            $lines[$headerIndex] = $headerLine -replace '(\|\s*)Skill(\s*\|)', '$1Task$2'
-        }
-
         # Build the row to match the log's column format
         if ($hasExtendedColumns) {
-            $row = "| $SessionNumber | $date | $start |  |  | $safeMode | $safeTask | $safeNotes |"
+            $row = "| $SessionNumber | $date | $start |  |  | $safeMode | $safeScope | $safeNotes |"
         }
         else {
             $row = "| $SessionNumber | $date | $start |  |  | $safeNotes |"
