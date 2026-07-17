@@ -131,11 +131,11 @@ Questions to force the decision for **your** lab:
 2. Will you tear the lab down and re-bootstrap repeatedly? (Local output makes iteration cheaper; VCS bootstrap leaves org-level artifacts to clean up.)
 3. Does your tenant/org policy allow creating repos, service connections, or federated credentials?
 
-> Typical lab guidance: **local filesystem** is the lowest-friction path for a study lab and keeps the focus on Terraform and AMBA rather than pipeline plumbing. **GitHub** is the better choice if you want the realistic end-to-end experience and already have an account — which also gives you the plan/approve/apply gate for free. Pick one, but be able to argue for the other two.
+> Typical lab guidance: **local filesystem** is the lowest-friction path for a study lab and keeps the focus on Terraform and the landing zone rather than pipeline plumbing. **GitHub** is the better choice if you want the realistic end-to-end experience and already have an account — which also gives you the plan/approve/apply gate for free. Pick one, but be able to argue for the other two.
 
 ### Block 4 — Produce the Practice Evidence (20-30 min)
 
-Write the decision record (suggested location: `applied-skills/AMBA/notes/accelerator-path-decision.md`). It should contain:
+Write the decision record (suggested location: `applied-skills/ALZ/notes/accelerator-path-decision.md`). It should contain:
 
 1. **Chosen path** (GitHub / Azure DevOps / local filesystem) and 2-3 sentences of justification referencing your lab constraints.
 2. **Completed planning table** from Block 2 (Phase 0), with real values for your lab.

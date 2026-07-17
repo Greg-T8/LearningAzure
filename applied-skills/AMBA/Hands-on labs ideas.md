@@ -1,31 +1,6 @@
 ## Hands-On Labs Ideas
 
-### Lab 1: ALZ Terraform Accelerator File Map
-
-**Goal:** Know what the platform landing zone template is deploying before you run anything.
-
-Tasks:
-
-- Open the `platform_landing_zone` template and map `terraform.tf`, `main.management.groups.tf`, `main.management.resources.tf`, connectivity files, variable files, and examples.
-- Identify the AVM platform landing zone module responsibilities.
-- Record required subscriptions: management, connectivity, and identity.
-- Decide whether you are using hub-and-spoke, Virtual WAN, or a lower-cost management/policy-only route first.
-
-### Lab 2: Platform Landing Zone Plan
-
-**Goal:** Produce a Terraform plan for a landing zone baseline.
-
-Tasks:
-
-- Create or adapt `terraform.tfvars` with lab subscription IDs and locations.
-- Run `terraform init`.
-- Run `terraform validate`.
-- Run `terraform plan`.
-- Review management group, policy, role, Log Analytics, Automation, networking, DDoS, and private DNS changes.
-
-Apply only when the plan, permissions, and cost profile are acceptable.
-
-### Lab 3: AMBA Portal Deployment
+### Lab 1: AMBA Portal Deployment
 
 **Goal:** Deploy AMBA through the portal path and understand the portal controls.
 
@@ -40,7 +15,7 @@ Tasks:
 
 Expected learning: the portal is excellent for initiative-level deployment, but not the best path for an exact 10-alert custom catalog.
 
-### Lab 4: AMBA Terraform Deployment
+### Lab 2: AMBA Terraform Deployment
 
 **Goal:** Deploy AMBA through Terraform against the landing-zone structure.
 
@@ -53,7 +28,7 @@ Tasks:
 - Run `terraform init`, `terraform validate`, and `terraform plan`.
 - Apply only in a safe test scope.
 
-### Lab 5: 10-Alert Custom Selection
+### Lab 3: 10-Alert Custom Selection
 
 **Goal:** Practice selecting a small alert catalog instead of deploying everything.
 
@@ -84,7 +59,7 @@ Tasks:
 
 Do not treat this candidate list as a production recommendation. It is a study subset designed to exercise common AMBA control points.
 
-### Lab 6: Alert Control Matrix
+### Lab 4: Alert Control Matrix
 
 **Goal:** Understand the difference between not deploying, disabling, excluding, and suppressing.
 

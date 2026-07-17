@@ -25,7 +25,8 @@ Hands-on Azure implementation topics. Studied alongside certifications.
 
 | Topic | Description | Status | Duration |
 |-------|-------------|--------|---------|
-| 🛠️ [**AMBA**](applied-skills/AMBA/README.md) | Azure Monitor Baseline Alerts | In Progress | 7/17/26 – 7/17/26 (1d, 3h) |
+| 🛠️ [**ALZ**](applied-skills/ALZ/README.md) | Azure Landing Zone | In Progress | 7/17/26 – 7/17/26 (1d, 3h) |
+| 🛠️ [**AMBA**](applied-skills/AMBA/README.md) | Azure Monitor Baseline Alerts | In Progress | 7/17/26 – 7/17/26 (1d) |
 
 ---
 
@@ -46,6 +47,6 @@ Hands-on Azure implementation topics. Studied alongside certifications.
 
 *Activity Levels: 🟡 Low (< 1hr) | 🟢 Medium (1-2hrs) | 🟣 High (> 2hrs)*
 
-*Last updated: July 17, 2026 at 05:59 CDT*
+*Last updated: July 17, 2026 at 06:12 CDT*
 
 <!-- COMMIT_STATS_END -->
