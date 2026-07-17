@@ -26,7 +26,7 @@ Hands-on Azure implementation topics. Studied alongside certifications.
 | Topic | Description | Status | Duration |
 |-------|-------------|--------|---------|
 | 🛠️ [**ALZ**](applied-skills/ALZ/README.md) | Azure Landing Zone | In Progress | 7/17/26 – 7/17/26 (1d, 3h) |
-| 🛠️ [**AMBA**](applied-skills/AMBA/README.md) | Azure Monitor Baseline Alerts | In Progress | 7/17/26 – 7/17/26 (1d) |
+| 🛠️ [**AMBA**](applied-skills/AMBA/README.md) | Azure Monitor Baseline Alerts | Not Started |  |
 
 ---
 
