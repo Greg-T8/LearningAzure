@@ -7,10 +7,11 @@
 - **Study Log:** [Session-by-session study time tracker](./StudyLog.md)
 
 <!-- STUDY_SUMMARY -->
-**Hours Committed:** 3.2h · **Days Studied:** 3
-
-- Research: 3.2h
+**Hours Committed:** 3.5h · **Days Studied:** 3
+- Research: 3.5h
 <!-- /STUDY_SUMMARY -->
+
+
 
 - **Target Pace:** 3 days/week for 2-3 weeks, roughly 6-9 sessions
 
