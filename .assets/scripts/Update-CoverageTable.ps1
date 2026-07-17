@@ -589,8 +589,8 @@ $Helpers = {
     }
 
     function Get-StudyLogHoursBySkill {
-        # Aggregate StudyLog durations by Skill and Mode
-        # Returns hashtable: skillName → @{ ML; MD; NB; Lab; VPQ; Total }
+        # Aggregate StudyLog durations by tracker entity (Skill or Task) and mode buckets
+        # Returns hashtable: entityName → @{ Prepare; Research; Practice; Review; ML; MD; NB; Lab; PQ; Total }
         $result = @{}
 
         if (-not (Test-Path -Path $StudyLogFile)) { return $result }
@@ -605,8 +605,7 @@ $Helpers = {
 
             $durationCell = $cells[4].Trim()
             $modeCell = $cells[5].Trim()
-            $skillCell = $cells[6].Trim()
-            $notesCell = if ($cells.Count -ge 8) { $cells[7].Trim() } else { '' }
+            $entityCell = $cells[6].Trim()
 
             # Parse duration
             if ($durationCell -notmatch '^(?:(\d+)\s*h)?\s*(?:(\d+)\s*m)?$') { continue }
@@ -614,33 +613,67 @@ $Helpers = {
             $minutes = if ([string]::IsNullOrWhiteSpace($Matches[2])) { 0 } else { [int]$Matches[2] }
             $sessionHours = ($hours * 60 + $minutes) / 60.0
             if ($sessionHours -eq 0) { continue }
-            if ([string]::IsNullOrWhiteSpace($skillCell)) { continue }
+            if ([string]::IsNullOrWhiteSpace($entityCell)) { continue }
 
-            # Initialize skill entry
-            if (-not $result.ContainsKey($skillCell)) {
-                $result[$skillCell] = @{ ML = 0.0; MD = 0.0; NB = 0.0; Lab = 0.0; PQ = 0.0; Total = 0.0 }
+            # Initialize entity entry
+            if (-not $result.ContainsKey($entityCell)) {
+                $result[$entityCell] = @{
+                    Prepare  = 0.0
+                    Research = 0.0
+                    Practice = 0.0
+                    Review   = 0.0
+                    ML       = 0.0
+                    MD       = 0.0
+                    NB       = 0.0
+                    Lab      = 0.0
+                    PQ       = 0.0
+                    Total    = 0.0
+                }
             }
 
-            # Map mode to column key
-            $modeKey = switch ($modeCell) {
-                'MSLearn'          { 'ML' }
-                'MSDocs'           { 'MD' }
-                'NotebookLM'       { 'NB' }
-                'Lab'              { 'Lab' }
-                'PracticeQuestion' { 'PQ' }
-                default            { $null }
+            # Map canonical and legacy mode names into both legacy and task-level buckets
+            switch ($modeCell) {
+                'Prepare' {
+                    $result[$entityCell].Prepare += $sessionHours
+                }
+                'Research' {
+                    $result[$entityCell].Research += $sessionHours
+                }
+                'Practice' {
+                    $result[$entityCell].Practice += $sessionHours
+                }
+                'Review' {
+                    $result[$entityCell].Review += $sessionHours
+                }
+                'MSLearn' {
+                    $result[$entityCell].ML += $sessionHours
+                    $result[$entityCell].Research += $sessionHours
+                }
+                'MSDocs' {
+                    $result[$entityCell].MD += $sessionHours
+                    $result[$entityCell].Research += $sessionHours
+                }
+                'NotebookLM' {
+                    $result[$entityCell].NB += $sessionHours
+                    $result[$entityCell].Practice += $sessionHours
+                }
+                'Lab' {
+                    $result[$entityCell].Lab += $sessionHours
+                    $result[$entityCell].Practice += $sessionHours
+                }
+                'PracticeQuestion' {
+                    $result[$entityCell].PQ += $sessionHours
+                    $result[$entityCell].Practice += $sessionHours
+                }
             }
 
-            if ($modeKey) {
-                $result[$skillCell][$modeKey] += $sessionHours
-            }
-            $result[$skillCell].Total += $sessionHours
+            $result[$entityCell].Total += $sessionHours
         }
 
         # Round all values
-        foreach ($skill in $result.Keys) {
-            foreach ($key in @('ML', 'MD', 'NB', 'Lab', 'PQ', 'Total')) {
-                $result[$skill][$key] = [math]::Round($result[$skill][$key], 1)
+        foreach ($entity in $result.Keys) {
+            foreach ($key in @('Prepare', 'Research', 'Practice', 'Review', 'ML', 'MD', 'NB', 'Lab', 'PQ', 'Total')) {
+                $result[$entity][$key] = [math]::Round($result[$entity][$key], 1)
             }
         }
 
@@ -751,6 +784,7 @@ $Helpers = {
 
         # Column indices (set from header)
         $colIndices = @{}
+        $headerColumnCount = 0
 
         foreach ($line in $lines) {
             if ($line -match [regex]::Escape($trackerHeading)) {
@@ -767,6 +801,7 @@ $Helpers = {
             # Parse header row to find column indices
             if (-not $headerParsed -and $line -match '^\|.*Domain.*\|') {
                 $headers = ($line.TrimStart('|').TrimEnd('|')) -split '\|'
+                $headerColumnCount = $headers.Count
                 for ($i = 0; $i -lt $headers.Count; $i++) {
                     $h = $headers[$i].Trim()
                     if ($h -eq 'Skill')    { $colIndices['Skill'] = $i }
@@ -777,8 +812,10 @@ $Helpers = {
                     if ($h -eq 'NB')       { $colIndices['NB'] = $i }
                     if ($h -eq 'Lab')      { $colIndices['Lab'] = $i }
                     if ($h -eq 'PQ')       { $colIndices['PQ'] = $i }
+                    if ($h -eq 'Prepare')  { $colIndices['Prepare'] = $i }
                     if ($h -eq 'Research') { $colIndices['Research'] = $i }
                     if ($h -eq 'Practice') { $colIndices['Practice'] = $i }
+                    if ($h -eq 'Total')    { $colIndices['Total'] = $i }
                     if ($h -eq 'Hours')    { $colIndices['Hours'] = $i }
                     if ($h -eq 'Progress') { $colIndices['Progress'] = $i }
                 }
@@ -796,6 +833,12 @@ $Helpers = {
             # Data row
             if ($headerParsed -and $line -match '^\|\s*\d+\s*\|') {
                 $cells = ($line.TrimStart('|').TrimEnd('|')) -split '\|'
+                if ($headerColumnCount -gt 0 -and $cells.Count -lt $headerColumnCount) {
+                    $paddingNeeded = $headerColumnCount - $cells.Count
+                    for ($i = 0; $i -lt $paddingNeeded; $i++) {
+                        $cells += ''
+                    }
+                }
 
                 $lookupIdx = $colIndices[$lookupColumn]
                 if ($null -eq $lookupIdx -or $cells.Count -le $lookupIdx) {
@@ -813,28 +856,79 @@ $Helpers = {
                 # Look up aggregated hours for this row's entity (skill name or task name)
                 $entityHours = if ($studyHours.ContainsKey($lookupName)) { $studyHours[$lookupName] } else { $null }
 
+                # Preserve existing progress cell value during column-layout transitions
+                $currentProgress = ''
+                if ($colIndices.ContainsKey('Progress')) {
+                    $progressIdx = $colIndices['Progress']
+                    if ($progressIdx -lt $cells.Count) {
+                        $currentProgress = $cells[$progressIdx]
+                    }
+
+                    if (
+                        [string]::IsNullOrWhiteSpace($currentProgress) -and
+                        $trackerFormat -eq 'Task' -and
+                        $colIndices.ContainsKey('Total')
+                    ) {
+                        $legacyProgressIdx = $colIndices['Total']
+                        if ($legacyProgressIdx -lt $cells.Count) {
+                            $legacyProgress = $cells[$legacyProgressIdx]
+                            if (-not [string]::IsNullOrWhiteSpace((Get-CellIcon -CellText $legacyProgress))) {
+                                $currentProgress = $legacyProgress
+                            }
+                        }
+                    }
+                }
+
                 if ($trackerFormat -eq 'Task') {
-                    # Per-Task table collapses 5 modes into Research + Practice icon-only buckets
+                    # Per-Task table can be either legacy icon buckets or mode-total hours columns
+                    $prepareHours = 0.0
                     $researchHours = 0.0
                     $practiceHours = 0.0
                     if ($entityHours) {
-                        $researchHours = $entityHours['ML'] + $entityHours['MD']
-                        $practiceHours = $entityHours['NB'] + $entityHours['Lab'] + $entityHours['PQ']
+                        $prepareHours = $entityHours['Prepare']
+                        $researchHours = $entityHours['Research']
+                        $practiceHours = $entityHours['Practice']
                     }
 
-                    if ($colIndices.ContainsKey('Research')) {
-                        $idx = $colIndices['Research']
-                        if ($idx -lt $cells.Count) {
-                            $emoji = Get-ModeCellIcon -CurrentCell $cells[$idx].Trim() -ModeHours $researchHours
-                            $cells[$idx] = " $emoji "
+                    $hasModeTotalsColumns = $colIndices.ContainsKey('Prepare') -or $colIndices.ContainsKey('Total')
+
+                    if ($hasModeTotalsColumns) {
+                        if ($colIndices.ContainsKey('Prepare')) {
+                            $idx = $colIndices['Prepare']
+                            if ($idx -lt $cells.Count) {
+                                $cells[$idx] = " $($prepareHours.ToString('0.0'))h "
+                            }
+                        }
+
+                        if ($colIndices.ContainsKey('Research')) {
+                            $idx = $colIndices['Research']
+                            if ($idx -lt $cells.Count) {
+                                $cells[$idx] = " $($researchHours.ToString('0.0'))h "
+                            }
+                        }
+
+                        if ($colIndices.ContainsKey('Practice')) {
+                            $idx = $colIndices['Practice']
+                            if ($idx -lt $cells.Count) {
+                                $cells[$idx] = " $($practiceHours.ToString('0.0'))h "
+                            }
                         }
                     }
+                    else {
+                        if ($colIndices.ContainsKey('Research')) {
+                            $idx = $colIndices['Research']
+                            if ($idx -lt $cells.Count) {
+                                $emoji = Get-ModeCellIcon -CurrentCell $cells[$idx].Trim() -ModeHours $researchHours
+                                $cells[$idx] = " $emoji "
+                            }
+                        }
 
-                    if ($colIndices.ContainsKey('Practice')) {
-                        $idx = $colIndices['Practice']
-                        if ($idx -lt $cells.Count) {
-                            $emoji = Get-ModeCellIcon -CurrentCell $cells[$idx].Trim() -ModeHours $practiceHours
-                            $cells[$idx] = " $emoji "
+                        if ($colIndices.ContainsKey('Practice')) {
+                            $idx = $colIndices['Practice']
+                            if ($idx -lt $cells.Count) {
+                                $emoji = Get-ModeCellIcon -CurrentCell $cells[$idx].Trim() -ModeHours $practiceHours
+                                $cells[$idx] = " $emoji "
+                            }
                         }
                     }
                 }
@@ -859,17 +953,26 @@ $Helpers = {
                     }
                 }
 
-                # Update total Hours column
+                # Update total-hours column regardless of legacy/new header naming
                 $totalHours = if ($entityHours) { $entityHours.Total } else { 0.0 }
-                if ($colIndices.ContainsKey('Hours')) {
-                    $cells[$colIndices['Hours']] = " $($totalHours.ToString('0.0'))h "
+                $totalColumnKey = if ($colIndices.ContainsKey('Total')) {
+                    'Total'
+                }
+                elseif ($colIndices.ContainsKey('Hours')) {
+                    'Hours'
+                }
+                else {
+                    $null
+                }
+
+                if ($totalColumnKey) {
+                    $cells[$colIndices[$totalColumnKey]] = " $($totalHours.ToString('0.0'))h "
                 }
 
                 # Update Progress column from total hours while preserving completed rows
                 if ($colIndices.ContainsKey('Progress')) {
                     $progressIdx = $colIndices['Progress']
                     if ($progressIdx -lt $cells.Count) {
-                        $currentProgress = $cells[$progressIdx]
                         $progressValue = Get-ProgressCellValue -CurrentCell $currentProgress -TotalHours $totalHours
                         $cells[$progressIdx] = " $progressValue "
                     }
