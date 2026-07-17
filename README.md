@@ -21,11 +21,11 @@ Progress trackers, detailed study notes, practice exams, and hands-on labs:
 
 ## 🛠️ Applied Skills
 
-Hands-on Azure implementation topics — studied ~3 days/week alongside certifications:
+Hands-on Azure implementation topics. Studied alongside certifications.
 
 | Topic | Description | Status | Duration |
 |-------|-------------|--------|---------|
-| 🛠️ [**AMBA**](applied-skills/AMBA/README.md) | Azure Monitor Baseline Alerts | Not Started | |
+| 🛠️ [**AMBA**](applied-skills/AMBA/README.md) | Azure Monitor Baseline Alerts | In Progress | |
 
 ---
 
