@@ -7,13 +7,13 @@
 - **Study Log:** [Session-by-session study time tracker](./StudyLog.md)
 
 <!-- STUDY_SUMMARY -->
-**Hours Committed:** 25.0h · **Days Studied:** 13
-
-- Prepare: 9.4h
+**Hours Committed:** 26.0h · **Days Studied:** 14
+- Prepare: 10.4h
 - Research: 9.4h
 - Practice: 6.2h
-
 <!-- /STUDY_SUMMARY -->
+
+
 
 ---
 
@@ -46,7 +46,7 @@ Task-level coverage based on [Per-Task Progress](#per-task-progress) completion.
 | ---: | :----- | :---- | :--- | ------: | -------: | -------: | ----: | :------- |
 | 1 | Identity, Governance & Monitoring | Design solutions for logging and monitoring | Recommend a logging solution | 0.0h | 3.7h | 4.7h | 8.4h | ✅ |
 | 2 | Identity, Governance & Monitoring | Design solutions for logging and monitoring | Recommend a solution for routing logs | 0.6h | 5.7h | 1.5h | 7.8h | ✅ |
-| 3 | Identity, Governance & Monitoring | Design solutions for logging and monitoring | Recommend a monitoring solution | 0.0h | 0.0h | 0.0h | 0.0h | 🔲 |
+| 3 | Identity, Governance & Monitoring | Design solutions for logging and monitoring | Recommend a monitoring solution | 1.0h | 0.0h | 0.0h | 1.0h | ⏳ |
 | 4 | Identity, Governance & Monitoring | Design authentication and authorization solutions | Recommend an authentication solution | 0.0h | 0.0h | 0.0h | 0.0h | 🔲 |
 | 5 | Identity, Governance & Monitoring | Design authentication and authorization solutions | Recommend an identity management solution | 0.0h | 0.0h | 0.0h | 0.0h | 🔲 |
 | 6 | Identity, Governance & Monitoring | Design authentication and authorization solutions | Recommend a solution for authorizing access to Azure resources | 0.0h | 0.0h | 0.0h | 0.0h | 🔲 |
