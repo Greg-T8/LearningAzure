@@ -12,6 +12,7 @@
 
 
 
+
 - **Target Pace:** 3 days/week for 3 weeks, roughly 9 sessions
 
 ---
