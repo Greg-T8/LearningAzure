@@ -8,6 +8,7 @@ This log tracks individual study sessions for the **AZ-305** exam. Fill in **End
 
 | # | Date | Start | End | Duration | Mode | Task | Notes |
 |:--|:-----|:------|:----|:---------|:-----|:------|:------|
+| 18 | 7/18/26 | 5:44 AM |  |  | Practice | Recommend a monitoring solution |  |
 | 17 | 7/18/26 | 4:23 AM | 5:44 AM | 1h 21m | Research | Recommend a monitoring solution | Completed review of study guide and fact sheet. Moving to practice questions |
 | 16 | 7/17/26 | 4:11 AM | 5:11 AM | 1h 0m | Prepare | Recommend a monitoring solution | Generated task map, study notes, and fact sheet. Next, move to research phase |
 | 15 | 7/16/26 | 4:03 AM | 5:07 AM | 1h 4m | Research | Recommend a solution for routing logs | Completed 'routing logs' task; pick up next at 'monitoring solution' |
