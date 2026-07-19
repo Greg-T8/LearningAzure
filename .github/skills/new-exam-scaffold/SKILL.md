@@ -406,11 +406,12 @@ All labs follow the governance policies in [Governance-Lab.md](../../../.assets/
 Add the new exam to the **Certifications table** (under `## 📚 Certifications`):
 
 ```markdown
-| 📕 [**<EXAM>**](certs/<EXAM>/README.md) | <Certification Name> | Not Started | |
+| 📕 [**<EXAM>**](certs/<EXAM>/README.md) | <Certification Name> | Not Started | | | |
 ```
 
 - Use the appropriate emoji color (📗📙📘📕) and status text based on start date.
 - If a start date is provided, use `In Progress` as the status and add the start date in the Duration column.
+- Leave `Days Studied` and `Hours Committed` blank; maintenance scripts populate them from each exam README study summary.
 - Adding the exam to this table makes it discoverable by `Get-ActiveExam.ps1`, which all maintenance scripts use for dynamic exam discovery.
 
 ### 2.2 Governance-Lab.md

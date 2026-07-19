@@ -11,7 +11,7 @@ For each active exam:
   - Updates the coverage dashboard from Per-Skill Progress completion data.
 
 For the root README:
-  - Updates In Progress duration day counts in the certifications table.
+    - Updates duration day counts and study summary columns in certifications/applied-skills tables.
   - Generates a 7-day rolling activity table from StudyLog entries,
     replacing the section between COMMIT_STATS_START/END markers.
 
@@ -312,10 +312,32 @@ $Helpers = {
         return $result
     }
 
+    function Get-StudySummaryFromReadme {
+        param([string]$Path)
+
+        # Parse STUDY_SUMMARY line in an exam/topic README for hours committed and days studied
+        $result = [pscustomobject]@{
+            DaysStudiedText = ''
+            HoursText = ''
+        }
+
+        if (-not (Test-Path -Path $Path)) { return $result }
+
+        foreach ($line in Get-Content -Path $Path -Encoding UTF8) {
+            if ($line -match '^\*\*Hours Committed:\*\*\s*([^·]+?)\s*·\s*\*\*Days Studied:\*\*\s*(\d+)\s*$') {
+                $result.HoursText = $Matches[1].Trim()
+                $result.DaysStudiedText = $Matches[2].Trim()
+                break
+            }
+        }
+
+        return $result
+    }
+
     function Update-InProgressDuration {
         [CmdletBinding(SupportsShouldProcess)]
 
-        # Update Duration day counts for all In Progress certifications in root README
+        # Update Duration/Days Studied/Hours Committed columns in root README track tables
         $lines = Get-Content -Path $MainReadme -Encoding UTF8
         $output = [System.Collections.Generic.List[string]]::new()
         $updatedRows = 0
@@ -328,72 +350,95 @@ $Helpers = {
         )
 
         foreach ($line in $lines) {
-            # Match any 4-column markdown table row
-            if ($line -match '^\|\s*(.+?)\s*\|\s*(.+?)\s*\|\s*(.+?)\s*\|\s*(.+?)\s*\|$') {
+            # Match any 6-column markdown table row
+            if ($line -match '^\|\s*(.+?)\s*\|\s*(.+?)\s*\|\s*(.+?)\s*\|\s*(.*?)\s*\|\s*(.*?)\s*\|\s*(.*?)\s*\|$') {
                 $examCell = $Matches[1].Trim()
                 $descriptionCell = $Matches[2].Trim()
                 $statusCell = $Matches[3].Trim()
                 $durationCell = $Matches[4].Trim()
+                $daysStudiedCell = $Matches[5].Trim()
+                $hoursCommittedCell = $Matches[6].Trim()
 
-                # Recalculate duration only for active exams
-                if ($statusCell -eq 'In Progress') {
+                # Update only tracked certification/applied-skill rows that link to a track README
+                if ($examCell -match '(certs|applied-skills)/([A-Za-z0-9_-]+)/README\.md') {
+                    $trackRoot = $Matches[1]
+                    $examSlug = $Matches[2]
+
+                    # Resolve StudyLog/README for date and summary metadata
+                    $candidateLog = Join-Path -Path $RepoRoot -ChildPath "$trackRoot\$examSlug\StudyLog.md"
+                    $candidateReadme = Join-Path -Path $RepoRoot -ChildPath "$trackRoot\$examSlug\README.md"
+                    $logStats = Get-StudyLogStats -Path $candidateLog
+                    $studySummary = Get-StudySummaryFromReadme -Path $candidateReadme
+
+                    # Normalize any existing ", Nh" suffix so Duration remains date range + day count only
+                    $normalizedDuration = $durationCell -replace ',\s*\d+(?:\.\d+)?h(?=\))', ''
+
+                    # Recalculate Duration for active rows from start date through today
                     $startDateText = $null
-                    $logStats = $null
+                    $newDuration = $normalizedDuration
 
-                    # Resolve the item's StudyLog (cert exam or applied skill) to pull total hours (and a fallback start date)
-                    if ($examCell -match '(certs|applied-skills)/([A-Za-z0-9_-]+)/README\.md') {
-                        $trackRoot = $Matches[1]
-                        $examSlug = $Matches[2]
-                        $candidateLog = Join-Path -Path $RepoRoot -ChildPath "$trackRoot\$examSlug\StudyLog.md"
-                        $logStats = Get-StudyLogStats -Path $candidateLog
+                    if ($statusCell -eq 'In Progress') {
+                        # Prefer an existing start date already present in the Duration cell
+                        if ($normalizedDuration -match '(\d{1,2}/\d{1,2}/\d{2,4})') {
+                            $startDateText = $Matches[1]
+                        }
+                        elseif ($logStats -and $logStats.FirstDate) {
+                            $startDateText = $logStats.FirstDate
+                        }
+                        else {
+                            Write-Warning "No start date found for In Progress row: $line"
+                        }
+
+                        if ($startDateText) {
+                            $startDate = $null
+
+                            foreach ($format in $dateFormats) {
+                                try {
+                                    $startDate = [datetime]::ParseExact(
+                                        $startDateText,
+                                        $format,
+                                        [System.Globalization.CultureInfo]::InvariantCulture
+                                    )
+                                    break
+                                }
+                                catch {
+                                    continue
+                                }
+                            }
+
+                            if ($null -ne $startDate) {
+                                $days = ($today - $startDate.Date).Days + 1
+                                $todayText = $today.ToString('M/d/yy')
+                                $newDuration = "$startDateText – $todayText (${days}d)"
+                            }
+                            else {
+                                Write-Warning "Could not parse start date '$startDateText' in row: $line"
+                            }
+                        }
                     }
 
-                    # Prefer an existing start date already present in the Duration cell
-                    if ($durationCell -match '(\d{1,2}/\d{1,2}/\d{2,4})') {
-                        $startDateText = $Matches[1]
-                    }
-                    elseif ($logStats -and $logStats.FirstDate) {
-                        $startDateText = $logStats.FirstDate
+                    # Pull summary values directly from each track README
+                    if ($studySummary.DaysStudiedText) {
+                        $daysStudiedCell = $studySummary.DaysStudiedText
                     }
                     else {
-                        Write-Warning "No start date found for In Progress row: $line"
+                        $daysStudiedCell = ''
                     }
 
-                    if ($startDateText) {
-                        $startDate = $null
-
-                        foreach ($format in $dateFormats) {
-                            try {
-                                $startDate = [datetime]::ParseExact(
-                                    $startDateText,
-                                    $format,
-                                    [System.Globalization.CultureInfo]::InvariantCulture
-                                )
-                                break
-                            }
-                            catch {
-                                continue
-                            }
-                        }
-
-                        if ($null -ne $startDate) {
-                            $days = ($today - $startDate.Date).Days + 1
-                            $todayText = $today.ToString('M/d/yy')
-
-                            # Append total study hours when the log has any logged time
-                            $totalsText = "${days}d"
-                            if ($logStats -and $logStats.TotalHours -gt 0) {
-                                $totalsText = "${days}d, $($logStats.TotalHours)h"
-                            }
-
-                            $newDuration = "$startDateText – $todayText ($totalsText)"
-                            $output.Add("| $examCell | $descriptionCell | $statusCell | $newDuration |")
-                            $updatedRows++
-                            continue
-                        }
-
-                        Write-Warning "Could not parse start date '$startDateText' in row: $line"
+                    if ($studySummary.HoursText) {
+                        $hoursCommittedCell = $studySummary.HoursText
                     }
+                    else {
+                        $hoursCommittedCell = ''
+                    }
+
+                    $updatedLine = "| $examCell | $descriptionCell | $statusCell | $newDuration | $daysStudiedCell | $hoursCommittedCell |"
+                    if ($updatedLine -cne $line) {
+                        $updatedRows++
+                    }
+
+                    $output.Add($updatedLine)
+                    continue
                 }
             }
 
@@ -402,11 +447,11 @@ $Helpers = {
 
         if ($updatedRows -gt 0) {
             if ($WhatIfPreference) {
-                Write-Host "What if: Performing the operation \"Update $updatedRows duration values for In Progress exams\" on target \"$MainReadme\"."
+                Write-Host "What if: Performing the operation \"Update $updatedRows duration/study summary values\" on target \"$MainReadme\"."
             }
             else {
                 Set-Content -Path $MainReadme -Value ($output -join "`n") -Encoding UTF8 -NoNewline
-                Write-Host "Updated $updatedRows in-progress duration values in $MainReadme" -ForegroundColor Green
+                Write-Host "Updated $updatedRows duration/study summary values in $MainReadme" -ForegroundColor Green
             }
         }
     }
