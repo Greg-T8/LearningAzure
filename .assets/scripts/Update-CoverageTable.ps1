@@ -45,13 +45,18 @@ $Main = {
     $scopedToExam = [bool]$ExamName
     $exams = Get-TargetExam
 
-    # Build the set of track items to refresh: cert exams, plus (on unscoped runs) applied-skills topics
+    # Build the set of track items to refresh: cert exams, plus (on unscoped runs) in-progress applied-skills topics
     $items = [System.Collections.Generic.List[object]]::new()
     foreach ($exam in $exams) {
         $items.Add([pscustomobject]@{ Name = $exam; Dir = (Join-Path -Path $RepoRoot -ChildPath "certs\$exam") })
     }
     if (-not $scopedToExam) {
-        foreach ($topic in (Get-AppliedSkillFolder)) {
+        $inProgressItems = @(& $GetActiveExamScript -Status 'In Progress' -IncludeAppliedSkills)
+        $inProgressTopics = @($inProgressItems | Where-Object {
+            Test-Path -Path (Join-Path -Path $RepoRoot -ChildPath "applied-skills\$_\StudyLog.md")
+        })
+
+        foreach ($topic in $inProgressTopics) {
             $items.Add([pscustomobject]@{ Name = $topic; Dir = (Join-Path -Path $RepoRoot -ChildPath "applied-skills\$topic") })
         }
     }
@@ -113,7 +118,8 @@ $Helpers = {
         $discovered = & $GetActiveExamScript
 
         if (-not $discovered) {
-            throw 'No active exams found in main README.'
+            Write-Verbose 'No active exams found in main README; continuing with applied-skills and recent activity data.'
+            return @()
         }
 
         Write-Verbose "Auto-discovered exams: $($discovered -join ', ')"
@@ -1258,7 +1264,7 @@ $Helpers = {
             if ($line -notmatch '^\|') { continue }
             if ($line -match '^\|\s*Exam\s*\|' -or $line -match '^\|\s*[-:]') { continue }
 
-            if ($line -match '\[\*\*([A-Z]+-\d+)\*\*\]') {
+            if ($line -match '\[\*\*[^\]]+\*\*\]\(certs/(?:Inactive/)?([^/]+)/README\.md\)') {
                 $lineByExam[$Matches[1]] = $line
             }
         }

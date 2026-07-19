@@ -19,7 +19,9 @@ Program: Get-ActiveExam.ps1
 
 [CmdletBinding()]
 param(
-    [string[]]$Status = @('In Progress')
+    [string[]]$Status = @('In Progress'),
+
+    [switch]$IncludeAppliedSkills
 )
 
 # Configuration
@@ -29,7 +31,7 @@ $MainReadme = Join-Path -Path $RepoRoot -ChildPath 'README.md'
 $Main = {
     . $Helpers
 
-    $exams = Read-CertificationTable
+    $exams = Read-CertificationTable -IncludeAppliedSkills:$IncludeAppliedSkills
     Write-Output $exams
 }
 
@@ -37,6 +39,8 @@ $Main = {
 $Helpers = {
     function Read-CertificationTable {
         # Parse the certifications table and return exam names matching the status filter
+        param([switch]$IncludeAppliedSkills)
+
         if (-not (Test-Path -Path $MainReadme)) {
             Write-Warning "Main README not found: $MainReadme"
             return @()
@@ -50,22 +54,29 @@ $Helpers = {
             if ($line -notmatch '^\|') { continue }
             if ($line -match '^\|\s*Exam\s*\|' -or $line -match '^\|\s*[-:]') { continue }
 
-            # Extract exam name from bold markdown link: [**AZ-104**](...)
-            if ($line -match '\[\*\*([A-Z]+-\d+)\*\*\]') {
-                $examName = $Matches[1]
+            # Extract track item from markdown link path for certs and optionally applied-skills
+            $itemName = $null
+            $isCertRow = $line -match '\[\*\*[^\]]+\*\*\]\(certs/(?:Inactive/)?([^/]+)/README\.md\)'
+            if ($isCertRow) {
+                $itemName = $Matches[1]
+            }
+            elseif ($IncludeAppliedSkills -and $line -match '\[\*\*[^\]]+\*\*\]\(applied-skills/([^/]+)/README\.md\)') {
+                $itemName = $Matches[1]
+            }
 
-                # Split by pipe to isolate the Status column (4th cell, index 3)
-                $cells = $line -split '\|'
+            if (-not $itemName) { continue }
 
-                if ($cells.Count -ge 5) {
-                    $statusCell = $cells[3].Trim()
+            # Split by pipe to isolate the Status column (4th cell, index 3)
+            $cells = $line -split '\|'
 
-                    # Match against any requested status value
-                    foreach ($s in $Status) {
-                        if ($statusCell -like "*$s*") {
-                            $results.Add($examName)
-                            break
-                        }
+            if ($cells.Count -ge 5) {
+                $statusCell = $cells[3].Trim()
+
+                # Match against any requested status value
+                foreach ($s in $Status) {
+                    if ($statusCell -like "*$s*") {
+                        $results.Add($itemName)
+                        break
                     }
                 }
             }

@@ -106,7 +106,7 @@ $Main = {
             }
 
             if ($Exam) {
-                Confirm-ValidExam -Exam $sourceExam
+                Confirm-ValidExam -Exam $sourceExam -AllowExistingCertExam
             }
 
             $sourceFolder = Resolve-ExamFolder -Exam $sourceExam
@@ -267,10 +267,19 @@ $Helpers = {
 
     function Confirm-ValidExam {
         # Validate the requested track item: an active cert exam, or an existing applied-skills topic
-        param([Parameter(Mandatory)] [string]$Exam)
+        param(
+            [Parameter(Mandatory)] [string]$Exam,
+            [switch]$AllowExistingCertExam
+        )
 
         $activeExams = @(& $GetActiveExamScript)
         if ($Exam -in $activeExams) { return }
+
+        # Explicit stop operations may target any existing cert exam that has a StudyLog.md
+        if ($AllowExistingCertExam) {
+            $certLog = Join-Path -Path $RepoRoot -ChildPath "certs\$Exam\StudyLog.md"
+            if (Test-Path -Path $certLog) { return }
+        }
 
         # Applied Skills topics are valid when their StudyLog.md exists (no Skills.psd1 required)
         $appliedLog = Join-Path -Path $RepoRoot -ChildPath "applied-skills\$Exam\StudyLog.md"
