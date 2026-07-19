@@ -6,6 +6,29 @@ This repository documents my Azure learning journey, from certification prep to 
 
 ---
 
+<!-- COMMIT_STATS_START -->
+## 📈 Recent Activity (Last 7 Days)
+
+| Date | AZ-305 | Applied Skills | Total |
+|------|------|------|-------|
+| Sun, Jul 19 | 🟢 1.5h |  | **1.5h** |
+| Sat, Jul 18 | 🟢 1.9h | 🟢 1.5h | **3.4h** |
+| Fri, Jul 17 | 🟢 1.0h | 🟢 1.1h | **2.1h** |
+| Thu, Jul 16 | 🟢 1.1h | 🟢 1.9h | **3.0h** |
+| Wed, Jul 15 | 🟣 2.2h |  | **2.2h** |
+| Tue, Jul 14 | 🟢 1.6h | 🟡 0.5h | **2.1h** |
+| Mon, Jul 13 | 🟢 1.1h |  | **1.1h** |
+| **Weekly Total** | **10.4h** | **5.0h** | **15.4h** |
+| ***Running Total*** | ***29.4h*** | ***5.0h*** | ***34.4h*** |
+
+*Activity Levels: 🟡 Low (< 1hr) | 🟢 Medium (1-2hrs) | 🟣 High (> 2hrs)*
+
+*Last updated: July 19, 2026 at 07:00 CDT*
+
+<!-- COMMIT_STATS_END -->
+
+---
+
 ## 📚 Certifications
 
 Progress trackers, detailed study notes, practice exams, and hands-on labs:
@@ -27,26 +50,3 @@ Hands-on Azure implementation topics. Studied alongside certifications.
 |-------|-------------|--------|---------|-------------|-----------------|
 | [**ALZ**](applied-skills/ALZ/README.md) | Azure Landing Zone | In Progress | 7/17/26 – 7/19/26 (3d) | 4 | 5.0h |
 | [**AMBA**](applied-skills/AMBA/README.md) | Azure Monitor Baseline Alerts | Not Started |  | 0 | 0.0h |
-
----
-
-<!-- COMMIT_STATS_START -->
-## 📈 Recent Activity (Last 7 Days)
-
-| Date | AZ-305 | Applied Skills | Total |
-|------|------|------|-------|
-| Sun, Jul 19 | 🟢 1.5h |  | **1.5h** |
-| Sat, Jul 18 | 🟢 1.9h | 🟢 1.5h | **3.4h** |
-| Fri, Jul 17 | 🟢 1.0h | 🟢 1.1h | **2.1h** |
-| Thu, Jul 16 | 🟢 1.1h | 🟢 1.9h | **3.0h** |
-| Wed, Jul 15 | 🟣 2.2h |  | **2.2h** |
-| Tue, Jul 14 | 🟢 1.6h | 🟡 0.5h | **2.1h** |
-| Mon, Jul 13 | 🟢 1.1h |  | **1.1h** |
-| **Weekly Total** | **10.4h** | **5.0h** | **15.4h** |
-| ***Running Total*** | ***29.4h*** | ***5.0h*** | ***34.4h*** |
-
-*Activity Levels: 🟡 Low (< 1hr) | 🟢 Medium (1-2hrs) | 🟣 High (> 2hrs)*
-
-*Last updated: July 19, 2026 at 07:00 CDT*
-
-<!-- COMMIT_STATS_END -->
