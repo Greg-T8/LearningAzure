@@ -3,12 +3,13 @@
 **Objective:** Build hands-on proficiency with the **Azure Landing Zone (ALZ)** platform, using the ALZ Terraform Accelerator and Azure Verified Modules (AVM) to plan, deploy, and verify a baseline landing zone.
 
 - **Study Log:** [Session-by-session study notes and time](./StudyLog.md)
-- **Exploration Ideas:** [Hands-on labs ideas](./Hands-on%20labs%20ideas.md)
-- **Notes:** [ALZ Terraform Accelerator](./notes/alz-terraform-accelerator.md)
 
 <!-- STUDY_SUMMARY -->
 **Hours Committed:** 5.0h · **Days Studied:** 4
 <!-- /STUDY_SUMMARY -->
+- **Exploration Ideas:** [Hands-on labs ideas](./Hands-on%20labs%20ideas.md)
+- **Notes:** [ALZ Terraform Accelerator](./notes/alz-terraform-accelerator.md)
+
 
 ---
 
