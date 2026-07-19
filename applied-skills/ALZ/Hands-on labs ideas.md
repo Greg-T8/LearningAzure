@@ -4,7 +4,7 @@
 
 **Goal:** Know what the platform landing zone template is deploying before you run anything.
 
-Tasks:
+Things to try:
 
 - Open the `platform_landing_zone` template and map `terraform.tf`, `main.management.groups.tf`, `main.management.resources.tf`, connectivity files, variable files, and examples.
 - Identify the AVM platform landing zone module responsibilities.
@@ -15,7 +15,7 @@ Tasks:
 
 **Goal:** Produce a Terraform plan for a landing zone baseline.
 
-Tasks:
+Things to try:
 
 - Create or adapt `terraform.tfvars` with lab subscription IDs and locations.
 - Run `terraform init`.

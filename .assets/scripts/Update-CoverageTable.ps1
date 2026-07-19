@@ -142,10 +142,28 @@ $Helpers = {
     }
 
     function Get-StudySummary {
-        # Parse study sessions to derive total time, unique study days, and per-mode hours
+        # Parse study sessions by header name so scoped exams and note-only Applied Skills both work.
         $lines = Get-Content -Path $StudyLogFile -Encoding UTF8
         $totalMinutes = 0
         $studiedDates = [System.Collections.Generic.HashSet[string]]::new()
+
+        $headerLine = $lines | Where-Object { $_ -match '^\|\s*#\s*\|' } | Select-Object -First 1
+        if (-not $headerLine) {
+            throw "Study log header not found in '$StudyLogFile'."
+        }
+
+        $headers = ($headerLine.TrimStart('|').TrimEnd('|')) -split '\|' |
+            ForEach-Object { $_.Trim() }
+        $columnIndex = @{}
+        for ($i = 0; $i -lt $headers.Count; $i++) {
+            $columnIndex[$headers[$i]] = $i
+        }
+
+        foreach ($requiredColumn in @('Date', 'Duration')) {
+            if (-not $columnIndex.ContainsKey($requiredColumn)) {
+                throw "Required column '$requiredColumn' not found in '$StudyLogFile'."
+            }
+        }
 
         # Track minutes for canonical modes only (matches Invoke-StudySession.ps1 ValidateSet)
         $modeMinutes = [ordered]@{
@@ -159,11 +177,16 @@ $Helpers = {
             if ($line -notmatch '^\|\s*\d+\s*\|') { continue }
 
             $cells = ($line.TrimStart('|').TrimEnd('|')) -split '\|'
-            if ($cells.Count -lt 8) { continue }
+            if ($cells.Count -lt $headers.Count) { continue }
 
-            $dateCell = $cells[1].Trim()
-            $durationCell = $cells[4].Trim()
-            $modeCell = $cells[5].Trim()
+            $dateCell = $cells[$columnIndex['Date']].Trim()
+            $durationCell = $cells[$columnIndex['Duration']].Trim()
+            $modeCell = if ($columnIndex.ContainsKey('Mode')) {
+                $cells[$columnIndex['Mode']].Trim()
+            }
+            else {
+                ''
+            }
 
             if ($durationCell -match '^(?:(\d+)\s*h)?\s*(?:(\d+)\s*m)?$') {
                 $hours = if ([string]::IsNullOrWhiteSpace($Matches[1])) { 0 } else { [int]$Matches[1] }
@@ -648,15 +671,33 @@ $Helpers = {
 
         $lines = Get-Content -Path $StudyLogFile -Encoding UTF8
 
+        $headerLine = $lines | Where-Object { $_ -match '^\|\s*#\s*\|' } | Select-Object -First 1
+        if (-not $headerLine) { return $result }
+
+        $headers = ($headerLine.TrimStart('|').TrimEnd('|')) -split '\|' |
+            ForEach-Object { $_.Trim() }
+        $columnIndex = @{}
+        for ($i = 0; $i -lt $headers.Count; $i++) {
+            $columnIndex[$headers[$i]] = $i
+        }
+
+        $scopeColumn = @('Task', 'Skill', 'Domain') |
+            Where-Object { $columnIndex.ContainsKey($_) } |
+            Select-Object -First 1
+
+        if (-not $scopeColumn -or -not $columnIndex.ContainsKey('Duration') -or -not $columnIndex.ContainsKey('Mode')) {
+            return $result
+        }
+
         foreach ($line in $lines) {
             if ($line -notmatch '^\|\s*\d+\s*\|') { continue }
 
             $cells = ($line.TrimStart('|').TrimEnd('|')) -split '\|'
-            if ($cells.Count -lt 7) { continue }
+            if ($cells.Count -lt $headers.Count) { continue }
 
-            $durationCell = $cells[4].Trim()
-            $modeCell = $cells[5].Trim()
-            $entityCell = $cells[6].Trim()
+            $durationCell = $cells[$columnIndex['Duration']].Trim()
+            $modeCell = $cells[$columnIndex['Mode']].Trim()
+            $entityCell = $cells[$columnIndex[$scopeColumn]].Trim()
 
             # Parse duration
             if ($durationCell -notmatch '^(?:(\d+)\s*h)?\s*(?:(\d+)\s*m)?$') { continue }
@@ -820,14 +861,17 @@ $Helpers = {
 
         # Update progress tracker (per-skill or per-task) with study log hours
         $trackerFormat = Get-TrackerFormat
-        $studyHours = Get-StudyLogHoursBySkill
-        $taskCounts = Get-TaskCountBySkill
-
         # Heading and lookup-column vary by format
         $trackerHeading = if ($trackerFormat -eq 'Task') { '### Per-Task Progress' } else { '### Per-Skill Progress' }
         $lookupColumn   = if ($trackerFormat -eq 'Task') { 'Task' } else { 'Skill' }
 
         $lines = Get-Content -Path $ExamReadme -Encoding UTF8
+        if (-not ($lines | Where-Object { $_ -match [regex]::Escape($trackerHeading) } | Select-Object -First 1)) {
+            return
+        }
+
+        $studyHours = Get-StudyLogHoursBySkill
+        $taskCounts = Get-TaskCountBySkill
         $output = [System.Collections.Generic.List[string]]::new()
         $inTracker = $false
         $headerParsed = $false

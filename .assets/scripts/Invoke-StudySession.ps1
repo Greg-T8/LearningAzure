@@ -1,14 +1,14 @@
 <#
 .SYNOPSIS
-Manage study sessions for certification exam tracking.
+Manage certification and Applied Skill study sessions.
 
 .DESCRIPTION
-Manages study session tracking for certification exams. Supports Start and Stop actions:
+Manages study session tracking for certification exams and Applied Skills. Supports Start and Stop actions:
 Start — inserts a new row at the top of StudyLog.md with session number, date, and start time.
-        Auto-closes any currently active session in another exam before opening the new one.
+        Auto-closes any currently active session in another track before opening the new one.
 Stop  — closes the active session with end time and duration.
-Sessions may optionally be tagged with one scope value from Skills.psd1:
-Domain, Skill, or Task.
+Certification sessions may optionally be tagged with one scope value from Skills.psd1:
+Domain, Skill, or Task. Applied Skill sessions use free-text notes only.
 
 .CONTEXT
 LearningAzure repository — certification study tracking.
@@ -21,21 +21,28 @@ Program: Invoke-StudySession.ps1
 #>
 
 function Invoke-StudySession {
-    [CmdletBinding()]
+    [CmdletBinding(DefaultParameterSetName = 'Auto')]
     param(
         [ValidateSet('Start', 'Stop')]
         [string]$Action = 'Start',
 
-        [Alias('Topic')]
+        [Parameter(ParameterSetName = 'Exam')]
         [string]$Exam,
 
+        [Parameter(ParameterSetName = 'AppliedSkill')]
+        [string]$AppliedSkill,
+
+        [Parameter(ParameterSetName = 'Exam')]
         [ValidateSet('Prepare', 'Research', 'Practice', 'Review')]
         [string]$Mode,
 
+        [Parameter(ParameterSetName = 'Exam')]
         [string]$Task,
 
+        [Parameter(ParameterSetName = 'Exam')]
         [string]$Domain,
 
+        [Parameter(ParameterSetName = 'Exam')]
         [string]$Skill,
 
         [string]$Notes
@@ -55,33 +62,36 @@ $Main = {
     # Route to the appropriate action handler
     switch ($Action) {
         'Start' {
-            if (-not $Exam) {
-                throw "Exam is required when Action is 'Start'."
+            if (-not $Exam -and -not $AppliedSkill) {
+                throw "Either Exam or AppliedSkill is required when Action is 'Start'."
             }
 
-            Confirm-ValidExam -Exam $Exam
+            $targetTrack = Resolve-Track -Exam $Exam -AppliedSkill $AppliedSkill
 
-            if (-not $Mode) {
+            if ($targetTrack.Type -eq 'Exam') {
+                Confirm-ValidExam -Exam $targetTrack.Name
+            }
+            else {
+                Confirm-ValidAppliedSkill -AppliedSkill $targetTrack.Name
+            }
+
+            if ($targetTrack.Type -eq 'Exam' -and -not $Mode) {
                 throw "Mode is required when Action is 'Start'."
             }
 
             # Resolve optional scope and enforce mutual exclusivity
             $scope = Resolve-SessionScope -Task $Task -Domain $Domain -Skill $Skill
 
-            $folder = Resolve-ExamFolder -Exam $Exam
-            $logFileName = Resolve-ExamLogFileName -Exam $Exam
-            $script:StudyLogFile = Join-Path -Path $RepoRoot -ChildPath "$folder\$logFileName"
+            $script:StudyLogFile = Get-TrackLogPath -Track $targetTrack
 
             # End any currently active session before starting a new one
-            $sourceExam = Find-ActiveExam
-            if ($sourceExam) {
-                $sourceFolder = Resolve-ExamFolder -Exam $sourceExam
-                $sourceLogFileName = Resolve-ExamLogFileName -Exam $sourceExam
-                $sourceLog = Join-Path -Path $RepoRoot -ChildPath "$sourceFolder\$sourceLogFileName"
+            $sourceTrack = Find-ActiveTrack
+            if ($sourceTrack) {
+                $sourceLog = Get-TrackLogPath -Track $sourceTrack
                 $sourceSession = Get-ActiveSessionNumber -LogFile $sourceLog
                 Close-SessionEntry -SessionNumber $sourceSession -LogFile $sourceLog -UseLastCommit
-                Push-StudyLogChange -SessionNumber $sourceSession -Type 'end' -Exam $sourceExam
-                Show-Confirmation -Message "Study session #$sourceSession ended for $sourceExam (auto-closed at last commit)"
+                Push-StudyLogChange -SessionNumber $sourceSession -Type 'end' -Track $sourceTrack
+                Show-Confirmation -Message "Study session #$sourceSession ended for $($sourceTrack.Name) (auto-closed at last commit)"
             }
 
             Confirm-StudyLogExists
@@ -90,28 +100,35 @@ $Main = {
 
             # Validate the selected scope value against Skills.psd1 entries when provided
             if ($scope.Type) {
-                Confirm-ValidScope -Exam $Exam -ScopeType $scope.Type -ScopeValue $scope.Value
+                Confirm-ValidScope -Exam $targetTrack.Name -ScopeType $scope.Type -ScopeValue $scope.Value
             }
 
             $session = Get-NextSessionNumber
             Add-SessionEntry -SessionNumber $session -Mode $Mode -ScopeValue $scope.Value -Notes $Notes
-            Push-StudyLogChange -SessionNumber $session -Type 'start' -Exam $Exam
-            Show-Confirmation -Message "Study session #$session started for $Exam"
+            Push-StudyLogChange -SessionNumber $session -Type 'start' -Track $targetTrack
+            Show-Confirmation -Message "Study session #$session started for $($targetTrack.Name)"
         }
         'Stop' {
-            # If Exam is provided, stop the active session in that exam log; otherwise detect the active exam.
-            $sourceExam = if ($Exam) { $Exam } else { Find-ActiveExam }
-            if (-not $sourceExam) {
-                throw 'No active study session found in any exam study log.'
+            # Stop a specifically identified track, or auto-detect the active session.
+            $sourceTrack = if ($Exam -or $AppliedSkill) {
+                Resolve-Track -Exam $Exam -AppliedSkill $AppliedSkill
+            }
+            else {
+                Find-ActiveTrack
+            }
+
+            if (-not $sourceTrack) {
+                throw 'No active study session found in any study log.'
             }
 
             if ($Exam) {
-                Confirm-ValidExam -Exam $sourceExam -AllowExistingCertExam
+                Confirm-ValidExam -Exam $sourceTrack.Name -AllowExistingCertExam
+            }
+            elseif ($AppliedSkill) {
+                Confirm-ValidAppliedSkill -AppliedSkill $sourceTrack.Name
             }
 
-            $sourceFolder = Resolve-ExamFolder -Exam $sourceExam
-            $sourceLogFileName = Resolve-ExamLogFileName -Exam $sourceExam
-            $sourceLog = Join-Path -Path $RepoRoot -ChildPath "$sourceFolder\$sourceLogFileName"
+            $sourceLog = Get-TrackLogPath -Track $sourceTrack
 
             if (-not (Test-Path -Path $sourceLog)) {
                 throw "Study log not found at '$sourceLog'."
@@ -119,35 +136,46 @@ $Main = {
 
             $sourceSession = Get-ActiveSessionNumber -LogFile $sourceLog
             Close-SessionEntry -SessionNumber $sourceSession -LogFile $sourceLog -Notes $Notes
-            Push-StudyLogChange -SessionNumber $sourceSession -Type 'end' -Exam $sourceExam
-            Show-Confirmation -Message "Study session #$sourceSession ended for $sourceExam"
+            Push-StudyLogChange -SessionNumber $sourceSession -Type 'end' -Track $sourceTrack
+            Show-Confirmation -Message "Study session #$sourceSession ended for $($sourceTrack.Name)"
         }
     }
 }
 
 $Helpers = {
-    function Resolve-ExamFolder {
-        # Map a track item to its workspace folder.
-        # Applied Skills topics live under applied-skills\<name>; cert exams under certs\<name>.
-        param([Parameter(Mandatory)] [string]$Exam)
+    function Resolve-Track {
+        param(
+            [string]$Exam,
+            [string]$AppliedSkill
+        )
 
-        $appliedFolder = Join-Path -Path $RepoRoot -ChildPath "applied-skills\$Exam"
-        if (Test-Path -Path $appliedFolder) {
-            return "applied-skills\$Exam"
+        if ($Exam) {
+            return [pscustomobject]@{
+                Name   = $Exam
+                Type   = 'Exam'
+                Folder = "certs\$Exam"
+            }
         }
 
-        return "certs\$Exam"
+        if ($AppliedSkill) {
+            return [pscustomobject]@{
+                Name   = $AppliedSkill
+                Type   = 'AppliedSkill'
+                Folder = "applied-skills\$AppliedSkill"
+            }
+        }
+
+        return $null
     }
 
-    function Resolve-ExamLogFileName {
-        # All exams use a StudyLog.md file in their folder
-        param([Parameter(Mandatory)] [string]$Exam)
+    function Get-TrackLogPath {
+        param([Parameter(Mandatory)] [psobject]$Track)
 
-        return 'StudyLog.md'
+        return Join-Path -Path $RepoRoot -ChildPath "$($Track.Folder)\StudyLog.md"
     }
 
     function Confirm-StudyLogExists {
-        # Verify the StudyLog.md file is present in the exam folder
+        # Verify the StudyLog.md file is present in the selected track folder.
         if (-not (Test-Path -Path $script:StudyLogFile)) {
             throw "StudyLog.md not found at '$script:StudyLogFile'. Please create it first."
         }
@@ -211,14 +239,12 @@ $Helpers = {
         throw "No active session found in '$LogFile'. The latest session is already closed."
     }
 
-    function Find-ActiveExam {
-        # Search all exam logs for an open session to determine the active exam
-        $allExams = Get-AllExamWithLog
+    function Find-ActiveTrack {
+        # Search all certification and Applied Skill logs for an open session.
+        $allTracks = Get-AllTrackWithLog
 
-        foreach ($exam in $allExams) {
-            $folder = Resolve-ExamFolder -Exam $exam
-            $logFileName = Resolve-ExamLogFileName -Exam $exam
-            $logFile = Join-Path -Path $RepoRoot -ChildPath "$folder\$logFileName"
+        foreach ($track in $allTracks) {
+            $logFile = Get-TrackLogPath -Track $track
 
             if (-not (Test-Path -Path $logFile)) { continue }
 
@@ -229,25 +255,25 @@ $Helpers = {
 
             if (-not $dataRows) { continue }
 
-            # Return the exam name when its latest session is started but not ended (top of table);
+            # Return the typed track when its latest session is started but not ended (top of table);
             # gap-fill rows (blank Start and blank End) are not active sessions.
             $firstRow = if ($dataRows -is [array]) { $dataRows[0] } else { $dataRows }
             $columns = $firstRow -split '\|'
 
             if (-not [string]::IsNullOrWhiteSpace($columns[3]) -and [string]::IsNullOrWhiteSpace($columns[4])) {
-                return $exam
+                return $track
             }
         }
 
         return $null
     }
 
-    function Get-AllExamWithLog {
-        # Discover all track items (cert exams and applied skills) that have a StudyLog.md file
-        $allExams = [System.Collections.Generic.List[string]]::new()
+    function Get-AllTrackWithLog {
+        # Discover typed track items that have a StudyLog.md file.
+        $allTracks = [System.Collections.Generic.List[object]]::new()
 
-        foreach ($track in @('certs', 'applied-skills')) {
-            $trackDir = Join-Path -Path $RepoRoot -ChildPath $track
+        foreach ($trackRoot in @('certs', 'applied-skills')) {
+            $trackDir = Join-Path -Path $RepoRoot -ChildPath $trackRoot
 
             if (-not (Test-Path -Path $trackDir)) { continue }
 
@@ -257,16 +283,21 @@ $Helpers = {
                     $logFile = Join-Path -Path $_.FullName -ChildPath 'StudyLog.md'
 
                     if (Test-Path -Path $logFile) {
-                        $allExams.Add($_.Name)
+                        $type = if ($trackRoot -eq 'certs') { 'Exam' } else { 'AppliedSkill' }
+                        $allTracks.Add([pscustomobject]@{
+                            Name   = $_.Name
+                            Type   = $type
+                            Folder = "$trackRoot\$($_.Name)"
+                        })
                     }
                 }
         }
 
-        return $allExams
+        return $allTracks
     }
 
     function Confirm-ValidExam {
-        # Validate the requested track item: an active cert exam, or an existing applied-skills topic
+        # Validate a certification against the active exam list.
         param(
             [Parameter(Mandatory)] [string]$Exam,
             [switch]$AllowExistingCertExam
@@ -281,11 +312,16 @@ $Helpers = {
             if (Test-Path -Path $certLog) { return }
         }
 
-        # Applied Skills topics are valid when their StudyLog.md exists (no Skills.psd1 required)
-        $appliedLog = Join-Path -Path $RepoRoot -ChildPath "applied-skills\$Exam\StudyLog.md"
+        throw "'$Exam' is not valid. Active exams: $($activeExams -join ', ')."
+    }
+
+    function Confirm-ValidAppliedSkill {
+        param([Parameter(Mandatory)] [string]$AppliedSkill)
+
+        $appliedLog = Join-Path -Path $RepoRoot -ChildPath "applied-skills\$AppliedSkill\StudyLog.md"
         if (Test-Path -Path $appliedLog) { return }
 
-        throw "'$Exam' is not valid. Active exams: $($activeExams -join ', '). Applied Skills topics require applied-skills\<name>\StudyLog.md."
+        throw "'$AppliedSkill' is not a valid Applied Skill. Expected applied-skills\$AppliedSkill\StudyLog.md."
     }
 
     function Get-StudyLogScopeHeaderFromLine {
@@ -380,8 +416,7 @@ $Helpers = {
         # Load deduplicated domain, skill, and task names from the exam's Skills.psd1 file
         param([Parameter(Mandatory)] [string]$Exam)
 
-        $folder     = Resolve-ExamFolder -Exam $Exam
-        $skillsFile = Join-Path -Path $RepoRoot -ChildPath "$folder\Skills.psd1"
+        $skillsFile = Join-Path -Path $RepoRoot -ChildPath "certs\$Exam\Skills.psd1"
 
         if (-not (Test-Path -Path $skillsFile)) {
             return @{
@@ -440,7 +475,7 @@ $Helpers = {
     }
 
     function Add-SessionEntry {
-        # Insert a new session row at the top of the table (after the header separator)
+        # Insert a new session row using the columns declared by the study log header.
         param(
             [Parameter(Mandatory)]
             [int]$SessionNumber,
@@ -463,7 +498,7 @@ $Helpers = {
         $safeNotes = ConvertTo-LogNote -Notes $Notes
         $lines     = Get-Content -Path $script:StudyLogFile
 
-        # Detect whether the log uses the extended format (Mode + scope column)
+        # Read the declared table shape so certification and Applied Skill logs can differ.
         $headerIndex = $null
         for ($h = 0; $h -lt $lines.Count; $h++) {
             if ($lines[$h] -match '^\|\s*#\s*\|') {
@@ -472,15 +507,34 @@ $Helpers = {
             }
         }
         $headerLine = if ($null -ne $headerIndex) { $lines[$headerIndex] } else { $null }
-        $hasExtendedColumns = $headerLine -match '\|\s*Mode\s*\|'
+        if ([string]::IsNullOrWhiteSpace($headerLine)) {
+            throw "Table header not found in '$script:StudyLogFile'."
+        }
 
-        # Build the row to match the log's column format
-        if ($hasExtendedColumns) {
-            $row = "| $SessionNumber | $date | $start |  |  | $safeMode | $safeScope | $safeNotes |"
+        $scopeHeader = Get-StudyLogScopeHeaderFromLine -HeaderLine $headerLine
+        $values = @{
+            '#'        = $SessionNumber
+            'Date'     = $date
+            'Start'    = $start
+            'End'      = ''
+            'Duration' = ''
+            'Mode'     = $safeMode
+            'Notes'    = $safeNotes
         }
-        else {
-            $row = "| $SessionNumber | $date | $start |  |  | $safeNotes |"
+        if ($scopeHeader) {
+            $values[$scopeHeader] = $safeScope
         }
+
+        $headers = ($headerLine.TrimStart('|').TrimEnd('|')) -split '\|' |
+            ForEach-Object { $_.Trim() }
+        $rowValues = foreach ($header in $headers) {
+            if (-not $values.ContainsKey($header)) {
+                throw "Unsupported study log column '$header' in '$script:StudyLogFile'."
+            }
+
+            [string]$values[$header]
+        }
+        $row = '| ' + ($rowValues -join ' | ') + ' |'
 
         # Find the separator line and insert the new row right after it
         $insertIndex = $null
@@ -658,13 +712,12 @@ $Helpers = {
             [ValidateSet('start', 'end')]
             [string]$Type,
 
-            [string]$Exam = $script:Exam
+            [Parameter(Mandatory)]
+            [psobject]$Track
         )
 
-        $folder          = Resolve-ExamFolder -Exam $Exam
-        $logFileName     = Resolve-ExamLogFileName -Exam $Exam
-        $relativeLogPath = "$folder/$logFileName"
-        $commitMessage   = "docs($Exam): $Type study session #$SessionNumber"
+        $relativeLogPath = "$($Track.Folder)/StudyLog.md"
+        $commitMessage   = "docs($($Track.Name)): $Type study session #$SessionNumber"
 
         Push-FileChange -RelativePath $relativeLogPath -CommitMessage $commitMessage
     }

@@ -1,107 +1,26 @@
 # AMBA: Azure Monitor Baseline Alerts — Applied Skill
 
-**Objective:** Build hands-on proficiency with **Azure Monitor Baseline Alerts (AMBA)** — the Microsoft-curated library of alert definitions and its policy-driven, at-scale deployment model for Azure Landing Zones.
+**Objective:** Build hands-on proficiency with **Azure Monitor Baseline Alerts (AMBA)**, including its curated alert definitions and policy-driven deployment model for Azure Landing Zones.
 
-- **Reference:** [Azure Monitor Baseline Alerts](https://azure.github.io/azure-monitor-baseline-alerts/)
-- **Study Log:** [Session-by-session study time tracker](./StudyLog.md)
+- **Study Log:** [Session-by-session study notes and time](./StudyLog.md)
+- **Exploration Ideas:** [Hands-on labs ideas](./Hands-on%20labs%20ideas.md)
 
 <!-- STUDY_SUMMARY -->
 **Hours Committed:** 0.0h · **Days Studied:** 0
 <!-- /STUDY_SUMMARY -->
 
-
-
-
-
-
-
-
-
-
-
-- **Target Pace:** 3 days/week for 3 weeks, roughly 9 sessions
-
 ---
 
-## 📘 Study Guide
+## Explore
 
-This applied skill is not an exam objective list. The goal is to leave with working deployment muscle memory, a practical alert-selection model, and a reusable decision process for AMBA in landing-zone environments.
+Use the study log as the source of truth for each session. Follow questions wherever they lead, and capture useful findings, decisions, blockers, and next steps in Notes.
 
-**Last researched:** 2026-07-03
+Possible areas to explore include:
 
-### Completion Criteria
-
-You are done when you can:
-
-- Explain what AMBA deploys, where it deploys it, and how Azure Policy remediation turns recommendations into alert resources.
-- Deploy AMBA through the Azure portal accelerator.
-- Deploy AMBA through Terraform.
-- Choose AMBA scope at three levels: initiative/category, individual policy/alert, and resource-level exclusion.
-- Prove the result with policy assignment, policy compliance, alert rule, action group, and alert processing rule checks.
-
----
-
-## Study Domains
-
-### 1. AMBA Concepts and Alert Catalog
-
-| Skill | Tasks | Practice Evidence |
-|:------|:------|:------------------|
-| Explain AMBA | Summarize AMBA resources, patterns, and visualizations. | One-page AMBA architecture note. |
-| Classify alerts | Classify alert types, thresholds, and default states. | Table with 10 sample alerts and their type/default state. |
-| Understand AMBA-ALZ policy initiatives | Map AMBA-ALZ initiatives to management group scope. | Initiative-to-management-group mapping. |
-| Understand remediation | Explain remediation for greenfield and brownfield resources. | Remediation notes and command/portal path. |
-
-### 2. AMBA Deployment Methods
-
-| Skill | Tasks | Practice Evidence |
-|:------|:------|:------------------|
-| Deploy via Azure portal | Deploy AMBA in portal at management group scope. | Parameter choices, enabled initiatives, notification settings. |
-| Deploy via Terraform | Deploy AMBA with Terraform module and archetypes. | `terraform plan` and, if applied, deployed AMBA resources. |
-| Configure notifications | Configure notification assets and BYON routing options. | Action group/APR resource IDs and routing notes. |
-| Validate deployment | Validate policy states, alerts, action groups, and APRs. | Validation checklist with commands and results. |
-
-### 3. Alert Selection, Tuning, and Operations
-
-| Skill | Tasks | Practice Evidence |
-|:------|:------|:------------------|
-| Select alert categories | Select AMBA categories with initiative deployment toggles. | A category-only deployment decision record. |
-| Select individual alerts | Select specific alerts with custom policy assignments. | Custom 10-alert design with policy names and assignments. |
-| Disable or suppress alerts | Compare suppression controls and exclusion mechanisms. | Scenario notes for each control. |
-| Tune thresholds | Tune thresholds globally and by resource tags. | Before/after threshold notes. |
-| Operate AMBA over time | Plan AMBA updates, remediation, and cleanup operations. | Runbook for update/remediate/cleanup. |
-
----
-
-## 3 Week Plan
-
-Each session is intended to be 2-3 hours. This plan assumes an Azure landing zone (management group hierarchy and platform subscriptions) is already available to deploy AMBA into.
-
-### Week 1: Deploy AMBA Through the Portal
-
-| Session | Focus | Outcomes |
-|:--------|:------|:---------|
-| 1 | AMBA orientation and catalog review | Read the AMBA welcome, AMBA-ALZ overview, policy initiatives, and alerts detail pages. Sketch the flow: management group scope -> policy assignment -> remediation -> alert/action group/APR. Pick a resource set to care about first: Service Health, Resource Health, Key Vault, Storage, VM, and one network component. Build a 10-alert candidate list. |
-| 2 | Portal deployment | Use the AMBA portal accelerator. Enable only the initiative categories needed for the first lab, configure notification settings, and capture all parameter choices. |
-| 3 | Portal validation and remediation | Validate policy assignments and compliance. Remediate non-compliant existing resources. Confirm expected alert rules, action groups, and alert processing rules exist. |
-
-### Week 2: Deploy AMBA Through Terraform
-
-| Session | Focus | Outcomes |
-|:--------|:------|:---------|
-| 4 | Terraform AMBA default path | Add the AMBA library/archetypes or the AMBA Terraform module to the landing zone Terraform pattern. Configure the AMBA resource group, managed identity, notification defaults, and policy defaults. |
-| 5 | Terraform plan/apply | Run `terraform init`, `terraform validate`, and `terraform plan`. Apply only in a safe test scope. Compare Terraform-managed AMBA deployment with the portal deployment. |
-| 6 | Selective Terraform deployment | Practice a subset deployment. Start with "Service Health only" because the docs provide a clean example, then adapt the pattern toward your 10-alert target list. |
-
-### Week 3: Control, Tune, and Operate
-
-| Session | Focus | Outcomes |
-|:--------|:------|:---------|
-| 7 | Alert controls | Test `PolicyEffect`, `AlertState`, and `MonitorDisable`. Document which control prevents deployment, disables deployed alerts, excludes resources, or only suppresses notifications. |
-| 8 | Thresholds and notifications | Override thresholds globally through parameters and per-resource through tags. Practice BYON with an existing action group and alert processing rule. |
-| 9 | Capstone | Rebuild the full path from scratch in notes: AMBA portal deployment, AMBA Terraform deployment, 10-alert selection design, validation, remediation, cleanup. |
-
----
+- AMBA architecture, alert definitions, policy initiatives, and remediation.
+- Portal and Terraform deployment paths.
+- Alert selection, exclusions, thresholds, notifications, and suppression.
+- Deployment validation, ongoing operations, and cleanup.
 
 ## Primary References
 
@@ -112,9 +31,7 @@ Each session is intended to be 2-3 hours. This plan assumes an Azure landing zon
 - [Deploy AMBA with Terraform](https://azure.github.io/azure-monitor-baseline-alerts/patterns/alz/HowTo/deploy/Deploy-with-Terraform/index.html)
 - [AMBA Terraform module](https://azure.github.io/azure-monitor-baseline-alerts/patterns/alz/Resources/Terraform-Module/index.html)
 - [Customize AMBA policy assignment](https://azure.github.io/azure-monitor-baseline-alerts/patterns/alz/HowTo/deploy/Customize-Policy-Assignment/)
-- [Deploy only Service Health alerts](https://azure.github.io/azure-monitor-baseline-alerts/patterns/alz/HowTo/deploy/Deploy-only-Service-Health-Alerts/index.html)
 - [Disable AMBA policies](https://azure.github.io/azure-monitor-baseline-alerts/patterns/alz/HowTo/Disabling-Policies/index.html)
 - [Override AMBA alert thresholds](https://azure.github.io/azure-monitor-baseline-alerts/patterns/alz/HowTo/Threshold-Override/index.html)
 - [Bring Your Own Notifications](https://azure.github.io/azure-monitor-baseline-alerts/patterns/alz/HowTo/Bring-your-own-Notifications/index.html)
 - [Remediate AMBA policies](https://azure.github.io/azure-monitor-baseline-alerts/patterns/alz/HowTo/deploy/Remediate-Policies/index.html)
-- [ALZ Terraform Accelerator: deploy AMBA option](https://azure.github.io/Azure-Landing-Zones/accelerator/starter-terraform/options/amba/)

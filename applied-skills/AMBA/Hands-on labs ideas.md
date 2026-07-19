@@ -4,7 +4,7 @@
 
 **Goal:** Deploy AMBA through the portal path and understand the portal controls.
 
-Tasks:
+Things to try:
 
 - Launch the management group portal accelerator: `https://aka.ms/amba/alz/portal`.
 - If testing at subscription scope, use: `https://aka.ms/amba/alz/portal4Subs`.
@@ -19,7 +19,7 @@ Expected learning: the portal is excellent for initiative-level deployment, but 
 
 **Goal:** Deploy AMBA through Terraform against the landing-zone structure.
 
-Tasks:
+Things to try:
 
 - Add the AMBA library reference or use the AMBA Terraform module path documented by the ALZ Terraform Accelerator.
 - Add the AMBA archetype(s) that match the management group target.
@@ -47,7 +47,7 @@ Start with this practice subset, then replace items based on resources actually 
 | 9 | `Deploy_VM_CPU_Alert` | Basic VM performance signal. |
 | 10 | `Deploy_AFW_FirewallHealth_Alert` | Platform connectivity health if Azure Firewall is deployed. |
 
-Tasks:
+Things to try:
 
 - Record the alert type, initiative, default enabled state, policy definition name, policy reference ID, threshold, severity, evaluation frequency, and scope for each alert.
 - Start from the AMBA "Service Health only" custom deployment example to understand a minimal custom policy assignment.
