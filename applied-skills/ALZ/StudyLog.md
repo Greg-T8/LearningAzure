@@ -8,7 +8,7 @@ This log tracks individual study sessions for the **ALZ** applied skill. Use **N
 
 | # | Date | Start | End | Duration | Notes |
 |:--|:-----|:------|:----|:---------|:------|
-| 6 | 7/20/26 | 5:31 AM |  |  |  |
+| 6 | 7/20/26 | 5:31 AM | 6:29 AM | 0h 58m | Troubleshooting GitHub Actions pipeline error w/ terraform plan |
 | 5 | 7/19/26 | 7:55 AM | 9:23 AM | 1h 28m | Tested deployment of bootstrap resources for ALZ.  Attempted to deploy platform scenario for management groups by hit an error with federated identity credential |
 | 4 | 7/18/26 | 6:20 AM | 7:51 AM | 1h 31m | Research — Understand the ALZ Terraform Accelerator — Completed prerequisites; move towards deploying bootstrap resources |
 | 3 | 7/17/26 | 5:11 AM | 6:17 AM | 1h 06m | Research — Understand the ALZ Terraform Accelerator — Working through issue provisioning ALZ Azure subscriptions with my personal billing account; submitted Microsoft Support ticket |
