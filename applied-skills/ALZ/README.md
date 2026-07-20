@@ -5,8 +5,9 @@
 - **Study Log:** [Session-by-session study notes and time](./StudyLog.md)
 
 <!-- STUDY_SUMMARY -->
-**Hours Committed:** 5.0h · **Days Studied:** 4
+**Hours Committed:** 7.4h · **Days Studied:** 6
 <!-- /STUDY_SUMMARY -->
+
 - **Exploration Ideas:** [Hands-on labs ideas](./Hands-on%20labs%20ideas.md)
 - **Notes:** [ALZ Terraform Accelerator](./notes/alz-terraform-accelerator.md)
 
