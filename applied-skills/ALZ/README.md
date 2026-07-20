@@ -8,6 +8,7 @@
 **Hours Committed:** 7.4h · **Days Studied:** 6
 <!-- /STUDY_SUMMARY -->
 
+
 - **Exploration Ideas:** [Hands-on labs ideas](./Hands-on%20labs%20ideas.md)
 - **Notes:** [ALZ Terraform Accelerator](./notes/alz-terraform-accelerator.md)
 
