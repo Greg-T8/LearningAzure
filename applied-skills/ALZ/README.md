@@ -5,8 +5,9 @@
 - **Study Log:** [Session-by-session study notes and time](./StudyLog.md)
 
 <!-- STUDY_SUMMARY -->
-**Hours Committed:** 7.4h · **Days Studied:** 6
+**Hours Committed:** 8.5h · **Days Studied:** 7
 <!-- /STUDY_SUMMARY -->
+
 
 
 - **Exploration Ideas:** [Hands-on labs ideas](./Hands-on%20labs%20ideas.md)

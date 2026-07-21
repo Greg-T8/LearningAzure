@@ -7,12 +7,12 @@
 - **Study Log:** [Session-by-session study time tracker](./StudyLog.md)
 
 <!-- STUDY_SUMMARY -->
-**Hours Committed:** 30.8h · **Days Studied:** 17
-
-- Prepare: 11.3h
+**Hours Committed:** 32.2h · **Days Studied:** 18
+- Prepare: 11.7h
 - Research: 10.9h
-- Practice: 8.7h
+- Practice: 9.6h
 <!-- /STUDY_SUMMARY -->
+
 
 ---
 
@@ -24,12 +24,12 @@ Task-level coverage based on [Per-Task Progress](#per-task-progress) completion.
 
 | Domain | Weight | Tasks | Tasks Covered | Status |
 | :----- | :----- | ----: | :------------ | :----: |
-| 1. Identity, Governance & Monitoring | 25–30% | 11 | 3 / 11 (27%) | 🔴 |
+| 1. Identity, Governance & Monitoring | 25–30% | 11 | 4 / 11 (36%) | 🟡 |
 | 2. Data Storage | 20–25% | 10 | 0 / 10 (0%) | 🔴 |
 | 3. Business Continuity | 15–20% | 7 | 0 / 7 (0%) | 🔴 |
 | 4. Infrastructure | 30–35% | 21 | 0 / 21 (0%) | 🔴 |
 
-**Totals:** 3 / 49 tasks completed
+**Totals:** 4 / 49 tasks completed
 
 **Legend:** 🟢 Strong (≥66%) · 🟡 Partial (33–65%) · 🔴 Low (<33%) — "Covered" = task marked complete in Per-Task Progress
 
@@ -46,8 +46,8 @@ Task-level coverage based on [Per-Task Progress](#per-task-progress) completion.
 | 1 | Identity, Governance & Monitoring | Design solutions for logging and monitoring | Recommend a logging solution | 0.0h | 3.7h | 4.7h | 8.4h | ✅ |
 | 2 | Identity, Governance & Monitoring | Design solutions for logging and monitoring | Recommend a solution for routing logs | 0.6h | 5.7h | 1.5h | 7.8h | ✅ |
 | 3 | Identity, Governance & Monitoring | Design solutions for logging and monitoring | Recommend a monitoring solution | 1.0h | 1.4h | 2.1h | 4.4h | ✅ |
-| 4 | Identity, Governance & Monitoring | Design authentication and authorization solutions | Recommend an authentication solution | 0.9h | 0.2h | 0.4h | 1.4h | ✅ |
-| 5 | Identity, Governance & Monitoring | Design authentication and authorization solutions | Recommend an identity management solution | 0.0h | 0.0h | 0.0h | 0.0h | 🔲 |
+| 4 | Identity, Governance & Monitoring | Design authentication and authorization solutions | Recommend an authentication solution | 0.9h | 0.2h | 1.4h | 2.4h | ✅ |
+| 5 | Identity, Governance & Monitoring | Design authentication and authorization solutions | Recommend an identity management solution | 0.4h | 0.0h | 0.0h | 0.4h | ⏳ |
 | 6 | Identity, Governance & Monitoring | Design authentication and authorization solutions | Recommend a solution for authorizing access to Azure resources | 0.0h | 0.0h | 0.0h | 0.0h | 🔲 |
 | 7 | Identity, Governance & Monitoring | Design authentication and authorization solutions | Recommend a solution for authorizing access to on-premises resources | 0.0h | 0.0h | 0.0h | 0.0h | 🔲 |
 | 8 | Identity, Governance & Monitoring | Design authentication and authorization solutions | Recommend a solution to manage secrets, certificates, and keys | 0.0h | 0.0h | 0.0h | 0.0h | 🔲 |
