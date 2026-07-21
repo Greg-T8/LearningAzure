@@ -8,7 +8,7 @@ This log tracks individual study sessions for the **ALZ** applied skill. Use **N
 
 | # | Date | Start | End | Duration | Notes |
 |:--|:-----|:------|:----|:---------|:------|
-| 7 | 7/21/26 | 5:16 AM |  |  |  |
+| 7 | 7/21/26 | 5:16 AM | 6:19 AM | 1h 3m | Resolved pipeline error with OIDC trust mismatch; enountered new error regarding permissions for policy role assignment; pick up here next session |
 | 6 | 7/20/26 | 5:31 AM | 6:29 AM | 0h 58m | Troubleshooting GitHub Actions pipeline error w/ terraform plan |
 | 5 | 7/19/26 | 7:55 AM | 9:23 AM | 1h 28m | Tested deployment of bootstrap resources for ALZ.  Attempted to deploy platform scenario for management groups by hit an error with federated identity credential |
 | 4 | 7/18/26 | 6:20 AM | 7:51 AM | 1h 31m | Research — Understand the ALZ Terraform Accelerator — Completed prerequisites; move towards deploying bootstrap resources |
