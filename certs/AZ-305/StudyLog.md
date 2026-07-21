@@ -8,6 +8,7 @@ This log tracks individual study sessions for the **AZ-305** exam. Fill in **End
 
 | # | Date | Start | End | Duration | Mode | Task | Notes |
 |:--|:-----|:------|:----|:---------|:-----|:------|:------|
+| 23 | 7/21/26 | 3:54 AM |  |  | Practice | Recommend an authentication solution |  |
 | 22 | 7/20/26 | 5:06 AM | 5:30 AM | 0h 24m | Practice | Recommend an authentication solution | Halfway through first set of practice questions |
 | 21 | 7/20/26 | 4:56 AM | 5:06 AM | 0h 10m | Research | Recommend an authentication solution | Carrying knowledge from SC-300 exam, so moving straight to practice questions |
 | 20 | 7/20/26 | 4:04 AM | 4:56 AM | 0h 52m | Prepare | Recommend an authentication solution | Completed artificat creation. Proceed to research |
