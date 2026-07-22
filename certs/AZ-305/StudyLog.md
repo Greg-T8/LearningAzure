@@ -8,6 +8,7 @@ This log tracks individual study sessions for the **AZ-305** exam. Fill in **End
 
 | # | Date | Start | End | Duration | Mode | Task | Notes |
 |:--|:-----|:------|:----|:---------|:-----|:------|:------|
+| 25 | 7/22/26 | 4:11 AM |  |  | Review | Recommend an identity management solution |  |
 | 24 | 7/21/26 | 4:52 AM | 5:16 AM | 0h 24m | Prepare | Recommend an identity management solution | Completed exam task prep; move to review, then practice |
 | 23 | 7/21/26 | 3:54 AM | 4:51 AM | 0h 57m | Practice | Recommend an authentication solution | Completed two sets of practice questions; move to next exam task |
 | 22 | 7/20/26 | 5:06 AM | 5:30 AM | 0h 24m | Practice | Recommend an authentication solution | Halfway through first set of practice questions |
