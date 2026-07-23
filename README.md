@@ -50,3 +50,4 @@ Hands-on Azure implementation topics. Studied alongside certifications.
 |-------|-------------|--------|---------|-------------|-----------------|
 | [**ALZ**](applied-skills/ALZ/README.md) | Azure Landing Zone | In Progress | 7/17/26 – 7/22/26 (6d) | 7 | 8.5h |
 | [**AMBA**](applied-skills/AMBA/README.md) | Azure Monitor Baseline Alerts | Not Started |  | 0 | 0.0h |
+| [**AVS**](applied-skills/AVS/README.md) | Azure VMware Solution | Not Started |  | 0 | 0.0h |
