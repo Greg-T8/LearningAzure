@@ -9,7 +9,7 @@
 **Hours Committed:** 0.0h · **Days Studied:** 0
 <!-- /STUDY_SUMMARY -->
 
-- **Notes:** [Silent Packet Death in Azure VMware Solution](./topics/Networking_-_Silent_Packet_Death_in_Azure_VMware_Solution/archive/Networking_-_Silent_Packet_Death_in_Azure_VMware_Solution_notes.md)
+- **Notes:** [Silent Packet Death in Azure VMware Solution](<./topics/Networking - Silent Packet Death/archive/Networking_-_Silent_Packet_Death_in_Azure_VMware_Solution_notes.md>)
 
 ---
 
