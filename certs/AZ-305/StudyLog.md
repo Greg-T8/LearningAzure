@@ -8,6 +8,7 @@ This log tracks individual study sessions for the **AZ-305** exam. Fill in **End
 
 | # | Date | Start | End | Duration | Mode | Task | Notes |
 |:--|:-----|:------|:----|:---------|:-----|:------|:------|
+| 27 | 7/24/26 | 4:11 AM |  |  | Prepare | Recommend a solution for authorizing access to Azure resources |  |
 | 26 | 7/23/26 | 4:34 AM | 5:45 AM | 1h 11m | Review | Recommend an identity management solution | Completed exam task. Move to next exam task "Recommend a solution for authorizing access to Azure resources" |
 | 25 | 7/22/26 | 4:11 AM | 6:05 AM | 1h 54m | Review | Recommend an identity management solution | Completed review; pick up at practice questions |
 | 24 | 7/21/26 | 4:52 AM | 5:16 AM | 0h 24m | Prepare | Recommend an identity management solution | Completed exam task prep; move to review, then practice |
