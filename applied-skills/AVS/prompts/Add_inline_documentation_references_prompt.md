@@ -62,59 +62,6 @@ Do not:
 
 When a bullet contains several independently verifiable claims, place links beside the individual claims they support.
 
-## Documentation images
-
-When reviewing the supporting Microsoft documentation, identify diagrams or
-screenshots that materially improve the guide's explanation.
-
-Include an image only when it directly supports the surrounding content, such as:
-
-* Reference architecture diagrams
-* Connectivity and routing diagrams
-* Traffic-flow diagrams
-* Component relationship diagrams
-* Configuration screenshots that clarify a complex procedure
-
-Do not add decorative images, product banners, generic service icons, or images
-that merely repeat the surrounding text.
-
-### Image retrieval and packaging
-
-For each selected image:
-
-1. Download the original image asset from the official documentation page.
-2. Store it in an `images` directory accompanying the Markdown document.
-3. Give the image a descriptive lowercase filename using hyphens.
-4. Insert it using a relative Markdown path:
-
-   ![Descriptive alt text](images/descriptive-filename.png)
-
-5. Immediately below the image, include a source caption linked to the
-   documentation article:
-
-   *Source: [Microsoft Learn — Article title](documentation-page-url)*
-
-6. Preserve the image's original aspect ratio.
-7. Do not crop, alter, annotate, or recreate the image.
-8. Do not use an image obtained from search-result previews or third-party sites.
-9. Do not include an image unless its original Microsoft documentation page can
-   be identified.
-10. Avoid duplicate images, including images reused across multiple Microsoft
-    documentation pages.
-
-Place each image immediately after the paragraph, bullet group, or section that
-it supports. Do not place all images in a separate gallery.
-
-### Image manifest
-
-At the end of the document, add an `Image Sources` table containing:
-
-| Local file | Description | Microsoft documentation page | Original image URL |
-|---|---|---|---|
-
-If an image cannot be downloaded reliably, do not fabricate a local path.
-Instead, retain the documentation link and state that the image was not packaged.
-
 ## Documentation validation
 
 Evaluate each material statement as one of the following:
