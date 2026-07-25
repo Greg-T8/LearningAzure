@@ -8,4 +8,4 @@ This log tracks individual study sessions for the **AVS** applied skill. Use **N
 
 | # | Date | Start | End | Duration | Notes |
 |:--|:-----|:------|:----|:---------|:------|
-| 1 | 7/25/26 | 7:03 AM |  |  |  |
+| 1 | 7/25/26 | 4:50 AM | 7:10 AM | 2h 20m | Developed prompts in support of generating technical guides from generated podcast transcripts from Microsoft Learn documentation |
