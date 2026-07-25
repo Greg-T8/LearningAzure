@@ -16,6 +16,7 @@
 
 
 
+
 - **Exploration Ideas:** [Hands-on labs ideas](./Hands-on%20labs%20ideas.md)
 - **Notes:** [ALZ Terraform Accelerator](./notes/alz-terraform-accelerator.md)
 
