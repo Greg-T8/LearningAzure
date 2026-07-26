@@ -1,0 +1,1353 @@
+Speaker 1  
+Imagine this: you are staring at a live monitor, and on the screen is a mission-critical tier one SQL server.
+
+Speaker 2  
+Oh boy, no pressure, right?
+
+Speaker 1  
+Right, exactly.
+
+Speaker 3  
+Yeah.
+
+Speaker 1  
+So this specific virtual machine is actively processing 1000s of credit card transactions a minute. It's for your client's flagship e-commerce platform. I mean, it is the absolute lifeblood of their business.
+
+Speaker 2  
+Yeah, the kind of machine where if it goes down, people are losing their jobs.
+
+Speaker 1  
+Exactly. And right now, it is sitting on this aging hardware in some dusty on-premises data center. And your job as the implementation consultant is to seamlessly live migrate that machine out of the basement, push it across the country over a wide area network, and land it safely inside a massive hyperscale Azure data center,
+
+Speaker 2  
+which is you know the ultimate high wire act. Yeah, because if you stumble, it's not just a technical glitch; it's a front page catastrophe for the client.
+
+Speaker 1  
+And you have to do all this without dropping a single packet, like while the customers are literally still swiping their credit cards,
+
+Speaker 3  
+right?
+
+Speaker 1  
+So when you're moving workloads of that caliber, traditional IT construction blueprints are, well, they're completely useless. You aren't just building a standalone server in the cloud. You are basically tasked with seamlessly docking a massive floating on-premises cruise ship to a high-speed space station in Azure.
+
+Speaker 2  
+I love that analogy. It's exactly like that.
+
+Speaker 1  
+And to do that, you need a flawless, unforgiving roadmap. So if you're listening to this right now, this deep dive is for you. You are the implementation consultant. You might have years of experience architecting native Azure environments, or you know maybe you spent the last decade deep in traditional VMware vSphere data centers,
+
+Speaker 2  
+but bringing those two massive worlds together-that's a distinctly different beast.
+
+Speaker 1  
+Yeah, you are about to tackle your very first Azure VMware solution project, what we call AVS, and the expectations from your client are just sky high. You need to go from zero to hero, and you need to do it fast
+
+Speaker 2  
+because the client's making this move, they're under immense pressure. They want the elasticity and the scale of the public cloud, but they really don't want to refactor 20 years of legacy applications.
+
+Speaker 1  
+Right. Nobody wants to rewrite all that code.
+
+Speaker 2  
+Exactly. They want the familiarity of VMware, but with the power of Azure, and they rely entirely on you to navigate the minefield between those two realities.
+
+Speaker 1  
+So our mission today is to serve as your ultimate playbook. We've taken this massive stack of official Microsoft planning quick starts, complex architecture guides, design review checklists, and FAQs, and we've extracted the exact architectural rules, the hard limits, and the crucial best practices.
+
+Speaker 2  
+These are real nuts and bolts. Yeah, we
+
+Speaker 1  
+are going to unpack the why and the how behind every constraint, so you can confidently lead your client through this deployment. So, let's start at the absolute foundation. Before you can even design network routing or you know plan a complex HCX migration, you have to sit across from the client's CIO and explain what exactly they are renting from Microsoft.
+
+Speaker 2  
+Right, because there's a massive misconception out there about what AVS actually
+
+Speaker 1  
+is. Yeah, I hear people assume it's just VMware running inside some giant Azure virtual machine.
+
+Speaker 2  
+And clearing up that misconception is literally your first duty as a consultant. AVS is absolutely not nested virtualization.
+
+Speaker 1  
+Okay,
+
+Speaker 2  
+you are not stacking hypervisors on top of each other. I mean, that would be a performance nightmare. What Microsoft is providing is VMware vSphere running natively on dedicated bare metal Azure infrastructure.
+
+Speaker 1  
+Wait, so like actual physical servers?
+
+Speaker 2  
+Yes, it is actual physical hardware, real silicon and steel sitting in an Azure data center. When your client provisions AVS, they are the sole tenant of that specific physical hardware. No one else's workloads are running on those CPUs.
+
+Speaker 1  
+Wow. Okay, that changes the performance conversation completely because when you have bare metal, you aren't fighting for resources with noisy neighbors. Yeah. But what exactly is the package deal? Like when the client signs the contract, what actually gets deployed out of the box?
+
+Speaker 2  
+So they are getting the complete hyperconverged infrastructure stack. We call it the Big Four.
+
+Speaker 1  
+The Big Four, okay.
+
+Speaker 2  
+Right. The automation engine automatically deploys VMware vCenter Server, which is your central management brain. Then it deploys VMware vSAN, which pools the local physical hard drives into a massive software-defined storage array. Gotcha. Then it deploys VMware vSphere, specifically the ESXi hypervisors for your compute layer, and critically, it deploys VMware NSX to handle all the software-defined networking and security.
+
+Speaker 1  
+So you don't even have to install the base hypervisor yourself.
+
+Speaker 2  
+No, Microsoft handles the initial integration of all those components for you,
+
+Speaker 1  
+so it's essentially a turnkey data center. Yeah, that's incredible. But you can't just buy a single server to test the waters, right? There had to be strict rules about the minimum buy-in just to get through the door.
+
+Speaker 2  
+Oh, very strict. The absolute minimum footprint to start a private cloud in AVS is a cluster of three hosts.
+
+Speaker 1  
+Three hosts minimum.
+
+Speaker 2  
+Right, and this isn't Microsoft just you know trying to upsell you. It's a hard mathematical limit driven by VSN requirement
+
+Speaker 1  
+because of the storage.
+
+Speaker 2  
+Exactly, VSN requires a minimum of three nodes to establish a quorum for data protection. We'll dive into that deeply when we talk about storage later. But from those initial three hosts, a single cluster can scale up to a maximum of 16 hosts.
+
+Speaker 1  
+Okay, 16 per cluster. But what if the massive enterprise client needs way more than 16 hosts? Say they have, I don't know, 1000s of VMs to migrate.
+
+Speaker 2  
+Then you just scale horizontally by adding more clusters. A single private cloud can actually hold up to 12 clusters.
+
+Speaker 1  
+Oh wow!
+
+Speaker 2  
+Yeah. So if you do the math, 12 clusters times 16 hosts gives you a hard ceiling of 96 hosts per private cloud.
+
+Speaker 1  
+96 hosts-that is a massive environment. It
+
+Speaker 2  
+is. If your client is so huge that they need 100 hosts or more, you are looking at designing a complex multi-private cloud architecture, and honestly, that introduces entirely new routing challenges.
+
+Speaker 1  
+Right. I can only imagine. So let's talk about the actual muscle here, the hardware skus, because part of your job as a consultant is looking at the client's current on-prem servers, analyzing their CPU and memory usage, and then mapping that to what they actually need to buy in Azure.
+
+Speaker 2  
+Where you have to match the horsepower
+
+Speaker 1  
+exactly, and looking at the specs from the sources, they have these different AV tiers. Can you break those down?
+
+Speaker 2  
+Sure. So the SKUs basically dictate your compute density, and they're heavily tied to specific CPU generations. You start with AV36 and the AV36P; those act as your foundational tiers.
+
+Speaker 1  
+Okay, the standard workhorse.
+
+Speaker 2  
+Exactly. The AV36 gives you dual Intel Xeon Gold Skylake processors, so you're getting 36 physical cores and 576 gigabytes of RAM per host.
+
+Speaker 1  
+Not bad.
+
+Speaker 2  
+Then the AV36P steps up the processor generation to Cascade Lake, and that increases the memory to 768 gigabytes of RAM.
+
+Speaker 1  
+Okay, so that's your standard tier. But you know, some databases just eat RAM for breakfast. What if they need heavier lifters?
+
+Speaker 2  
+That is where the AV48 and AV52 come in.
+
+Speaker 1  
+Okay. The
+
+Speaker 2  
+AV48 utilizes the Sapphire Rapids architecture that gives you 48 physical cores and a massive one terabyte of RAM per host?
+
+Speaker 1  
+Terabyte of RAM, wow.
+
+Speaker 2  
+Yeah, and then the AV52 reverts slightly back to the Cascade Lake architecture, but it bumps the core count to 52 physical cores and an incredible 1.5 terabytes of RAM per node.
+
+Speaker 1  
+1.5 terabytes-that is huge. And then there's the absolute monster of the lineup, the AV 64. But there's a massive catch with the AV 64, isn't there? Like it's not just a simple checkbox on the order form.
+
+Speaker 2  
+Oh, it is a massive catch, and this is exactly the kind of detail a consultant needs to catch in the initial design phase to avoid total embarrassment. Right. So the AV 64 boasts dual Intel Xeon Platinum Ice Lake processors. It has 64 physical cores, which means 128 logical cores when you factor in hyper-threading, and it comes with a terabyte of RAM. It's an incredibly powerful machine.
+
+Speaker 1  
+Sounds amazing.
+
+Speaker 2  
+It is, but for Generation One AVS deployments, you cannot just spin up a brand new private cloud starting with three AV-64 hosts.
+
+Speaker 1  
+Wait, why not? If the client has the budget and they just want the best hardware, why won't Microsoft just let them buy it? It
+
+Speaker 2  
+comes down to the underlying backend architecture and how Microsoft rolls out new hardware generations. The strict prerequisite is that you must already have a pre-existing three-node base cluster made of AV36, AV36P, or AV52 hosts. I'm not. The AV64 is strictly considered an expansion S key. Only after that baseline cluster is fully provisioned and running can you actually add the AV64 hosts, essentially deploying them as cluster two through 12 in your environment.
+
+Speaker 1  
+That is a wild prerequisite. So if a client specifically wants those newer Ice Lake processors, you have to tell them they essentially have to pay a toll. They have to spin up and pay for a smaller, older generation cluster first, just to unlock the ability to buy the AV 60 4s.
+
+Speaker 2  
+That's exactly right.
+
+Speaker 1  
+Wow, we are absolutely going to talk about the migration nightmares that creates later on, specifically regarding CPU compatibility. Yeah, but first, I really want to establish the operational boundaries. Sure. When I explain AVS to clients, I like to compare it to leasing a high-end commercial kitchen. Like Microsoft owns a building, they own the industrial ovens, the walk-in freezers, the ventilation systems, and they do all the heavy maintenance.
+
+Speaker 2  
+Right. If an oven breaks, they fix it.
+
+Speaker 1  
+Exactly. If a heating element burns out at 2 a.m. Microsoft is the one who sends a technician to replace it, but you, the consultant and your client, you are the head chef. You control the menu. You hire and manage the kitchen staff. You dictate the recipes. In ADS terms, you control the virtual machine workloads, the resource pools, and the NSX network segments.
+
+Speaker 2  
+That analogy holds up perfectly, especially when we talk about those boundaries. Just like leasing that commercial kitchen, you don't get the master keys to the basement where the main electrical panel is.
+
+Speaker 1  
+Right.
+
+Speaker 2  
+In AVS terms, Microsoft maintains the physical hardware, the ESXE hypervisors, vCenter, VSN, and the NSX management appliances. Because Microsoft is legally on the hook for a 99.9% availability SLA. They severely restrict what you can touch at the root level,
+
+Speaker 1  
+which makes sense.
+
+Speaker 2  
+Yeah, they cannot guarantee uptime if an end user has the ability to accidentally delete a critical system file in the ESXA kernel.
+
+Speaker 1  
+And here is where it gets incredibly tricky for a consultant mapping out a migration. If we do not have root level SSH access to the ESXA hosts, how do third party tools that rely on that access actually work. I mean, I'm thinking about legacy backup agents, deep security packet inspection tools, or performance monitors that require you to install a custom VIB of vSphere installation bundle directly into the ESX kernel.
+
+Speaker 4  
+A
+
+Speaker 1  
+lot of enterprise clients have been running those specific agents on prem for like 10 years.
+
+Speaker 2  
+If we pull back and look at the whole implementation strategy, this is arguably one of the biggest gotcha moments you will face. Admin access to ESXi is strictly restricted.
+
+Speaker 1  
+Period.
+
+Speaker 2  
+Period. If a client relies on a specific legacy third-party tool that absolutely requires ESXi root access to install its agent, it simply will not work out of the box on AVS. The installation will be completely blocked.
+
+Speaker 1  
+Wow!
+
+Speaker 2  
+As the consultant, you must identify these dependencies early in the discovery phase. You cannot wait until week four of the deployment when you are supposedly migrating production data to realize the client's enterprise backup solution is completely incompatible.
+
+Speaker 1  
+Right. That would be a nightmare. So what is the play there? You sit down with the IT director and say, "Hey, your favorite monitoring tool is dead in the water. How do you solve it?
+
+Speaker 2  
+You generally have two packs. First, you try to pivot the tooling to modern standards. Okay. For instance, if they have an old backup agent that injects into the kernel, you transition them to a backup solution that utilizes the VMware vStorage API for data protection, or VADP,
+
+Speaker 1  
+and that fixes the permission issue.
+
+Speaker 2  
+Yeah, because VADP interacts with vCenter at the management layer, completely bypassing the need for root access to the physical host.
+
+Speaker 5  
+Ah, okay.
+
+Speaker 2  
+The second path, if it's an absolutely critical compliance tool that they just can't lose you, engage Microsoft support immediately during the planning phase,
+
+Speaker 1  
+like beg for an exception.
+
+Speaker 2  
+Basically, sometimes there are supported workarounds, or Microsoft might have a process to validate and push specific pre-approved VIBs for you, but you absolutely cannot assume that will happen.
+
+Speaker 1  
+Note to self: Day one of consulting, audit every single third-party agent they run, which naturally leads us to the next massive hurdle. You've mapped the hardware, you've audited the tools. Now you need to order the servers and actually size the environment. This is phase one planning, quotas, and what I like to refer to as the invisible tax.
+
+Speaker 2  
+The invisible tax. I like that
+
+Speaker 1  
+because sizing the compute in AVS is not just simple addition. If you get this wrong, your client runs out of resources on the very first day.
+
+Speaker 2  
+Right, and the first hurdle isn't even technical. Honestly, it's logistical-just getting the hardware.
+
+Speaker 1  
+Right, buying the servers
+
+Speaker 2  
+because hosts in AVS aren't instantly available the way standard Azure VMs are. If you want a standard D series virtual machine in Azure, you run a script and it spins up in a few seconds.
+
+Speaker 1  
+Boom! It's there.
+
+Speaker 2  
+Right, but bare metal AVS servers do not work that way. You must request a host quota via an Azure support ticket early in the planning process. Microsoft explicitly states this can take up to five business days to process and allocate.
+
+Speaker 1  
+Five business days just to get the quota approved. I mean that completely throws a wrench in an agile sprint timeline if you aren't prepared for it. Why does it take so long?
+
+Speaker 2  
+Because you're asking for dedicated physical infrastructure. Microsoft has to ensure that specific contiguous racks of hardware in the exact availability zone you requested are physically allocated, cabled, and dedicated solely to your Azure subscription.
+
+Speaker 1  
+Ah, so it's actual manual data center work.
+
+Speaker 2  
+Exactly, it's a massive orchestration of physical data center resources, not just a software allocation.
+
+Speaker 1  
+Okay, so you put the ticket in early, you wait your week, and Microsoft hands over your shiny new three-node AB 36 cluster. Now we have to talk about the tax, the management overhead. This is where consultants can look incredibly incompetent if they don't do the underlying math for the client. It
+
+Speaker 2  
+is the most critical math you will do in the sizing phase.
+
+Speaker 1  
+Okay, break it down.
+
+Speaker 2  
+When you deploy that first cluster, the AVS automation engine automatically creates a resource pool specifically named MGMT resource pool. This pool is dedicated exclusively to running the infrastructure components, so the vCenter Server appliance, the NSX Manager cluster, the NSX Edge transport nodes, and if you are migrating, the HCX Manager and HCX interconnect appliances.
+
+Speaker 1  
+Okay, so the brains of the operation,
+
+Speaker 2  
+right? But this management pool reaches in and reserves a massive 46 gigahertz of CPU and roughly 172 gigabytes of RAM right off the top.
+
+Speaker 1  
+Just gone.
+
+Speaker 2  
+Just gone. You cannot change this. You cannot shrink it. It is locked.
+
+Speaker 1  
+So let me paint the picture for the listener. The client buys a three-node AV36 cluster. That's about 1,700 gigs of RAM total before they even deploy their very first tiny Linux web server. 172 gigabytes of RAM instantly vanishes into the management tax.
+
+Speaker 2  
+It does, and that is just the management overhead. The tax gets much steeper when we talk about high availability or HA.
+
+Speaker 1  
+Oh, right.
+
+Speaker 2  
+Because AVS enforces strict uptime guarantees, it uses VMware's built-in HA cluster features. In a three-node cluster, the system reserves the equivalent of one entire node's worth of resources to protect against a single physical node failure. We call this N plus one HA.
+
+Speaker 1  
+Okay, let's break down why that is so critical. If physical host A suffers a catastrophic motherboard failure and dies instantly, all the virtual machines running on it obviously crash. But because of N plus one HA, the cluster realizes host A is gone, and automatically reboots those crashed VMs onto host B and host C, but for host B and host C to have enough room to power on those workloads, they must have kept a massive amount of CPU and RAM completely empty.
+
+Speaker 2  
+Exactly, the system enforces that empty space. So if a client buys three AV36 hosts, they usually look at the spec sheet and assume they are getting three hosts worth of workload capacity,
+
+Speaker 1  
+which is a totally logical assumption.
+
+Speaker 2  
+It is, but you have to sit them down and explain the harsh reality. You have to say, actually, because of the 172 gigabyte management tax and the N plus one HA reserve, you are essentially getting just over one host's worth of usable capacity for your actual workloads.
+
+Speaker 1  
+Ouch! That is a tough conversation to have if you didn't prep them for it before they sign the purchase order.
+
+Speaker 6  
+Oh yeah,
+
+Speaker 1  
+and it doesn't stop at compute, does it? The constraints on storage sizing are equally, if not more, rigid. Using VTAN, which pools the local NVMe drives together, and there are strict service level agreements attached to it.
+
+Speaker 2  
+Storage is really where things get truly precarious. A cluster must maintain 25% slack space on the vSAN data store at all times.
+
+Speaker 1  
+25%
+
+Speaker 2  
+Yes, let me repeat that for everyone listening. 25% must remain completely empty. If your storage consumption goes above 75% capacity, you trigger critical warnings, you breach VMware support thresholds, and you potentially violate your overall SLA.
+
+Speaker 1  
+Let's explain why vSAN demands that Slack space, because it isn't just arbitrary padding, right? Like VSAN needs room to breathe.
+
+Speaker 2  
+It's highly mechanical. VSN is a distributed storage system. It takes data blocks and constantly shuffles them across the physical drives to ensure balance and performance. Okay. If a physical drive starts throwing errors, VSN needs empty space to instantly evacuate the data from the dying drive to healthy drives. Furthermore, if you take a virtual machine snapshot, say right before running a Windows update, that snapshot delta file grows rapidly.
+
+Speaker 1  
+Right. If
+
+Speaker 2  
+the data store is already at 95% capacity, those routine operations fail catastrophically. The 25% slack space is your essential operational buffer.
+
+Speaker 1  
+So out of the gate, you really only have 75% of your total physical storage to play with. But how do the storage policies themselves impact that remaining 75% Because I know VSANs uses a concept called failures to tolerate, or FTT.
+
+Speaker 2  
+Yeah, this is where the consultant directly dictates the architectural design. The FTT policy determines how many copies of your data exist across the physical hosts.
+
+Speaker 1  
+Okay.
+
+Speaker 2  
+For a small cluster of three to five hosts, you are mandated to use an FTT one policy, which means the cluster must tolerate one physical host failure without losing any data.
+
+Speaker 1  
+And mechanically, how does FTT1 achieve that?
+
+Speaker 2  
+Typically, it uses RAID one mirroring, meaning if you have 100 gigabyte virtual hard drive, vSAN writes one full copy to host A and an exact replica copy to host B.
+
+Speaker 1  
+So it just doubles it.
+
+Speaker 2  
+Exactly. Therefore, every single gigabyte of data you write consumes two gigabytes of physical capacity. It effectively halves your usable storage right off the bat.
+
+Speaker 1  
+Okay, let me do the math. So I'm losing storage to the 25% slack rule, and now I'm losing half of what's left to mirroring. That's brutal. Does it get better as you scale up?
+
+Speaker 2  
+It does actually. Once you scale to six to 16 hosts, the SLA mandates you move to an FTT2 policy, meaning the cluster must survive two simultaneous host failures.
+
+Speaker 1  
+Which sounds like it would take even more space.
+
+Speaker 2  
+You'd think so, but at that scale, you can shift away from simple mirroring and use RAID six erasure coding.
+
+Speaker 1  
+Ah, erasure coding. That is one of those terms that gets thrown around in storage meetings, but a lot of people don't fully grasp the mechanics of it. Break down how erasure coating saves capacity compared to mirroring.
+
+Speaker 2  
+Okay, think of mirroring like printing two exact copies of 100-page book. Use 200 pages of paper.
+
+Speaker 1  
+Right.
+
+Speaker 2  
+Erasure coding is much smarter. It takes that 100-page book, shreds it into smaller data chunks, and mathematically calculates parity equations for those chunks. It then scatters the chunks in the equations across all the hosts in the cluster.
+
+Speaker 1  
+Okay, so it's spread out
+
+Speaker 2  
+exactly. And if two hosts completely burn down, the remaining hosts take the surviving chunks, run them back through the parity equations, and perfectly recreate the missing data on the fly.
+
+Speaker 1  
+That's genius.
+
+Speaker 2  
+It is. It requires a bit more CPU overhead to do the math, but instead of needing 200 pages of space. It might only need 130 pages to guarantee the same level of protection, so it is far more capacity efficient. But it requires a minimum of six hosts to scatter the chunks effectively.
+
+Speaker 1  
+That makes perfect sense. So scaling out actually unlocks storage efficiency. Now there is a sneaky default setting in the vSphere client that catches people out regarding storage, right? Like a setting that can trigger that 75% alarm on day one if you aren't paying attention.
+
+Speaker 2  
+Oh yes, the default VSAN storage policy often defaults to thick provisioning.
+
+Speaker 1  
+Thick provisioning, right? Let's define the difference for the listener.
+
+Speaker 2  
+So if you create a VM with a 500 gigabyte hard drive and use thick provisioning, vSAN instantly blocks out all 500 gigabytes on the physical drives, even if the VM hasn't installed an operating system yet. It literally reserves the empty space.
+
+Speaker 1  
+Just claims it all up front.
+
+Speaker 2  
+Exactly, and in a heavily constrained environment like AVS, this is a total disaster.
+
+Speaker 1  
+Because if you migrate 100 VMs, and they all have massive empty drives, you hit the 75% wall instantly, even though no actual data is being stored.
+
+Speaker 2  
+Precisely, consultants must actively change the default policy to use thin provisioning.
+
+Speaker 1  
+Thin provisioning,
+
+Speaker 2  
+right? Thin provisioning only consumes physical storage space as data is actually written to the disk. So, if you have a 500 gigabyte drive but only 50 gigs of files, it only takes up 50 gigs on the vSAN. Managing thin provisioning is really the only way to survive the vSAN capacity constraints.
+
+Speaker 1  
+Okay, I have to push back here. Let's put on the consultant hat. The client is looking at a massive bill for these physical servers. They see that storage is incredibly tight. It's highly taxed and it's heavily monitored. The CIO looks at you and asks, why are we paying a premium for vSAN? Why not just bypass it entirely? Let's just attach massive, dirt cheap external Azure storage to the servers and call it a day.
+
+Speaker 2  
+It's a fantastic question, and it's one you will absolutely face when defending the architecture. The short answer is, well, you can attach external storage, but it is not as simple or as cheap as they think. Yeah, you can attach Azure NetApp Files, Azure Elastic SAN, or Pure Cloud Block Store as external NFS data stores to save your expensive vSAN capacity. Okay,
+
+Speaker 1  
+so that is supported.
+
+Speaker 2  
+It is supported. However, these external storage arrays do not sit inside the AVS bare metal physical footprint. They reside out in the native Azure virtual network.
+
+Speaker 1  
+Which means every time a virtual machine wants to read a file, the storage traffic has to physically leave the AVS bare metal environment, travel over a network link, hit the Azure native storage, and come all the way back.
+
+Speaker 2  
+Exactly, and storage I/O is incredibly sensitive to latency. If a database query takes 10 milliseconds instead of one millisecond, the application just grinds to a halt.
+
+Speaker 1  
+Right.
+
+Speaker 2  
+So to make this external storage work without destroying workload performance, you cannot just route it through a standard network gateway. It requires you to deploy a dedicated ExpressRoute virtual network gateway, and you must enable a specific feature called FastPass.
+
+Speaker 1  
+Okay. Explain FastPath. What does it physically do differently?
+
+Speaker 2  
+Normally, network traffic hits a gateway. The gateway unpacks the packets, looks at the routing table, repackages them, and sends them on. That processing takes milliseconds,
+
+Speaker 1  
+which is too slow for storage.
+
+Speaker 2  
+Exactly, FastPath allows the network traffic to completely bypass the gateway processing CPU. It effectively creates a direct hardware-accelerated routing path straight to the storage array, keeping latency as low as humanly possible.
+
+Speaker 1  
+That sounds great. It
+
+Speaker 2  
+is, but here is the catch for the CIO: an ultra-performance ExpressRoute gateway isn't cheap, and architecting that dedicated fast path requires serious complex networking chops. Which
+
+Speaker 1  
+is the perfect bridge to our next major challenge, because sizing the compute and calculating storage slack space is ultimately just math. You can punch those numbers into a spreadsheet, but the actual challenge-the place where AVS implementations truly succeed or catastrophically fail-is networking.
+
+Speaker 2  
+Oh, absolutely! If
+
+Speaker 1  
+the plumbing is broken, the data center is dead.
+
+Speaker 2  
+Networking is the crucible of any AVS deployment, it is where you transition from theory to practice, and honestly, where you interact with the client's most protective and stubborn team-the network engineers.
+
+Speaker 1  
+They guard those IPs with their lives.
+
+Speaker 2  
+They do. So the very first thing you need to demand from the client is an IP address space for the management components. AVS requires a minimum 22 CIDR network block.
+
+Speaker 1  
+Okay, let's break down the CIDR math for anyone rusty on their subnetting. A 22 block gives you exactly 1,024 IP addresses. Why on earth does AVS need over 1000 IP addresses just to turn the lights on?
+
+Speaker 2  
+I know it seems excessive, but it's totally necessary for the hyperconverged architecture.
+
+Speaker 1  
+How so?
+
+Speaker 2  
+When you trigger the deployment, the automation engine takes that 22 block and slices it up into multiple smaller subnets. It carves out a subnet for the vCenter appliance and NSX managers. It carves out dedicated subnets for vMotion traffic so VMs can move between hosts. It needs a subnet for VSN replication traffic. It needs IP space for the HCX mobility meshes. Every single bare metal host you deploy consumes multiple IP addresses across all these different subnets. But there is one crucial, unbreakable rule regarding this 22 block that you must enforce with the client.
+
+Speaker 1  
+Let me guess: it cannot overlap.
+
+Speaker 2  
+It absolutely, positively cannot overlap with any existing network space your client uses on-premises in native Azure or in any other connected cloud environment.
+
+Speaker 1  
+Let's explain why an overlap is so destructive. I like to think of this 22 CIDR block as the foundation footprint of a massive new building.
+
+Speaker 2  
+Okay, I like that.
+
+Speaker 1  
+If you accidentally pour your concrete foundation even one inch over the neighbor's property line, which represents an overlapping IP space, the city inspector just shuts down the entire construction project. In this case, the network router is the inspector. If a router sees two networks claiming to own the exact same 10 two two space, it doesn't know where to send the data. A packet arrives destined for 10 point 1.5, and the router looks at its table and panics. He says, "Wait, does this go to the on-prem SQL Server or the new AVS VCenter?
+
+Speaker 2  
+It gets confused.
+
+Speaker 1  
+Yeah, and it usually just drops the packet or routes it into a black hole. If there is a single IP conflict, the private cloud is effectively isolated.
+
+Speaker 2  
+And the headache doesn't even stop at the 22 block. Consultants must also be hyper aware of reserved NSX ranges.
+
+Speaker 1  
+What are those?
+
+Speaker 2  
+So NSX is running the software-defined network overlay inside AVS, right? And it relies on specific hard-coded internal transit networks to function. You must explicitly tell your network teams they cannot route 169.254.0.024, 169.254.023, or 100.6 4.016 into the AVS environment.
+
+Speaker 1  
+What exactly is NSX doing with those spaces?
+
+Speaker 2  
+It uses them for internal tunnel endpoints or TAYS and for transit links between its software routers. So
+
+Speaker 1  
+it's basically the internal plumbing.
+
+Speaker 2  
+Exactly. If your client accidentally advertises those spaces from their on-prem data center, it will collide with the internal NSX plumbing and the software-defined network will literally tear itself apart trying to resolve the routing loops.
+
+Speaker 1  
+Okay, so we have carved out a pristine, non-overlapping IP space. Now we need to build the pipe that connects the dusty on-premise data center to this shiny new AVS environment. How do we physically bridge them?
+
+Speaker 2  
+The enterprise standard for connecting an on-premises data center to Azure is ExpressRoute, but to connect specifically to AVS, you use a feature called ExpressRoute Global Reach.
+
+Speaker 1  
+Global Reach.
+
+Speaker 2  
+Right. What's fascinating here is how it works at the physical infrastructure level. When you provision AVS, Microsoft actually builds a dedicated hidden ExpressRoute circuit exclusively for your private cloud. Oh, I
+
+Speaker 1  
+didn't know that.
+
+Speaker 2  
+Yeah, and global reach takes your existing on-premises ExpressRoute circuit and cross-connects it directly to the AVS circuit at the Microsoft Enterprise Edge routers.
+
+Speaker 1  
+Wait, so it bypasses the native Azure virtual network entirely?
+
+Speaker 2  
+Exactly. It essentially bridges the two high-speed circuits, so traffic flows directly from the on-prem router over the Microsoft backbone straight into the AVS bare metal hosts without ever having to hairpin through a virtual network gateway. Yeah, it is incredibly fast and low latency.
+
+Speaker 1  
+That is awesome, but there are limits to what you can send over that global reach pipe, right? Like you can't just plug it in and let the routers figure it out.
+
+Speaker 2  
+No, there are very strict routing limits governing that Border Gateway Protocol or BGP session.
+
+Speaker 1  
+BGP route.
+
+Speaker 2  
+BGP is just the language the routers use to tell each other what networks they know about. You must ensure the on-premises routers do not advertise bogon routes over the Express route.
+
+Speaker 1  
+Let's define a Bogon for the audience.
+
+Speaker 2  
+A Bogon route is a bogus or fake IP range that shouldn't be publicly or globally routed. This includes default routes like .0, .0.05, or broad reserved RFC 1918 spaces that aren't actually in use.
+
+Speaker 1  
+Garbage routes, basically.
+
+Speaker 2  
+Right. If you advertise garbage routes, the Microsoft Edge routers will just drop the BGP session to protect the network. Furthermore, if you are utilizing an Azure route server in your broader topology, there is a hard limit of 1000 routes that can be propagated to the ExpressRoute gateway.
+
+Speaker 1  
+Wait, 1000 routes? I mean, I know enterprise networks that have 5000 internal subnets. What happens if the client's core router dumps a massive routing table of 2000 routes across the ExpressRoute?
+
+Speaker 2  
+The BGP session crashes.
+
+Speaker 1  
+Seriously.
+
+Speaker 2  
+Yes, the Microsoft routers will sever the connection because you exceeded the memory buffer for that session. The entire link between on-prem and the cloud will go completely dark.
+
+Speaker 1  
+Wow.
+
+Speaker 2  
+As the consultant, you have to sit down with the client's network engineers and mandate route summarization. You have to tell them do not advertise 500 individual 24 subnets. Summarize them into a single 16 block before sending across the wire. You have to control the floodgates.
+
+Speaker 1  
+Okay, let's explore a very specific routing disaster scenario. Network engineers love simplicity, right? What happens if the client's network team says, "Hey, we don't want to manage 100 different routes." We are just going to advertise a single 0.0.00 default route across the express route to AVS. That way, any traffic AVS doesn't know about will automatically be sent back to our on-prem firewall for security inspection.
+
+Speaker 2  
+It sounds super logical to a security team, but it creates a massive asymmetric routing failure. If they only advertise that default route, you'll break administrative access to the environment.
+
+Speaker 1  
+Walk me through the mechanics of that failure. Why does it break?
+
+Speaker 2  
+Imagine you are sitting at your desk in the on-premises data center. You open your web browser and type in the IP address of the AVS vCenter appliance. Okay. Your request travels over the express route and successfully reaches vCenter, but now vCenter has to send the web page back to your computer. It looks at its internal routing table. If the only route it sees pointing back to on-prem is a generic .0.000 default route, the underlying Azure routing fabric will refuse to send the traffic back over the global reach connection.
+
+Speaker 1  
+Wait, why does Azure refuse it?
+
+Speaker 2  
+Because Azure treats 0.0.0.00 0.0.0.00 as a command to send traffic to the public internet, not back down a private express route, unless it's specifically configured with forced tunneling.
+
+Speaker 1  
+Oh, I see.
+
+Speaker 2  
+But in the default setup, the return traffic just drops into the void. To fix this, the consultant absolutely must ensure the client advertises more specific routes, like the actual 10.5 point 0.024 subnet of the on-premises IT department, so the AVS management appliances know exactly how to route the traffic back through the private pipe. It is
+
+Speaker 1  
+always DNS or routing that breaks everything. Okay, so we fix the routes. Now we have to deal with the firewall admins who you know love to block everything by default. What ports absolutely must be open between on-prem and AVS for this to even work.
+
+Speaker 2  
+You need a specific checklist. You need the standard TCP port 443 for HTTPS, obviously, to access the vCenter and NSX Manager web interfaces. That
+
+Speaker 1  
+makes sense.
+
+Speaker 2  
+You need TCP ports 39 and 636 open to allow Active Directory and secure LD APS authentication to flow back to your on-prem domain controllers, and critically, if you are using VMware HCX to migrate the virtual machines, you need TCC port 9443 for the HCX management traffic, and you absolutely must open UDP port 4500.
+
+Speaker 1  
+Why UDP 4500 specifically? What is HCX doing with that port?
+
+Speaker 2  
+HDX isn't just sending raw data files; it has to take the client's layer two network traffic, the actual raw Ethernet frames from the virtual machines, and encapsulate them inside layer three IP packets so they can survive the trip over the wide area network.
+
+Speaker 1  
+So it's packaging them up
+
+Speaker 2  
+exactly. That encapsulation process utilizes IPsec VPN tunnels. IPsec relies entirely on UDP port 4500 to navigate through firewalls and network address translation, or NAT.
+
+Speaker 1  
+And if they block it,
+
+Speaker 2  
+if the security team blocks UDP 4500, your HCX migration tunnels will just sit there spinning indefinitely, and they will silently fail to establish.
+
+Speaker 1  
+Okay, so let's take a breath and look at where we are. You've sized the compute perfectly, taking the HA tax into account. You've survived the network routing labyrinth without crashing the BGP session. The firewall teams have grudgingly opened UDP 4500. The infrastructure is humming. The pipes are open, and data can flow.
+
+Speaker 2  
+A successful day one,
+
+Speaker 1  
+definitely. Which brings us to a terrifying new problem. If the pipe is open, who is standing at the door?
+
+Speaker 2  
+Ah, security. Right.
+
+Speaker 1  
+How do you prevent a compromised on-prem account from walking right over that express route and taking over the entire Azure environment? Once the network is plumbing data back and forth, you have to build an ironclad identity perimeter. Who holds the keys to the castle?
+
+Speaker 2  
+Identity is the next critical pillar of their architecture, and the very first best practice here often receives massive pushback from traditional IT folks.
+
+Speaker 1  
+Why is that?
+
+Speaker 2  
+Because the official Microsoft Design Architecture strongly advises deploying a dedicated Active Directory Domain Services or AD DS controller natively inside an Azure Identity subscription right next to the AVS environment.
+
+Speaker 1  
+Hold on, I can hear the client's identity architects screaming right now. We already have a massive, highly available Active Directory farm on on-premises. We just spent a fortune building this beautiful, redundant Express route. Why on earth do we need to build yet another domain controller in Azure? I
+
+Speaker 2  
+get that a lot. The answer is resilience in the face of physical infrastructure failure.
+
+Speaker 1  
+What kind of failure?
+
+Speaker 2  
+If you rely solely on your on-premises AD controllers to authenticate your Azure admins. What happens if the ExpressRoute circuit completely drops? Let's say a backhoe accidentally cuts the main fiber optic line running into your on-prem data center.
+
+Speaker 1  
+A literal physical severing of the connection.
+
+Speaker 2  
+Yes, your AVS private cloud is still running perfectly fine in Azure. Your web servers are up. Your customers are still interacting with the applications.
+
+Speaker 7  
+Okay.
+
+Speaker 2  
+But your IT team can no longer authenticate to vCenter or NSX Manager to administer the environment because every single login attempt tries to traverse the dead express route to reach the on-prem directory. It times out, and you are locked out of your own cloud.
+
+Speaker 1  
+Oh wow, that is terrifying.
+
+Speaker 2  
+Right, by placing a replica AD controller natively in Azure and configuring AD sites and services to prefer it, you ensure that local AVS authentication stays local. Even if the WAN link dies, you still have the keys to the kingdom.
+
+Speaker 1  
+That makes perfect architectural sense. Keep the authentication close to the application. Now, how exactly are we connecting the vCenter appliance to this new AD controller?
+
+Speaker 2  
+You must integrate them using Secure LD or LD APS. This ensures that the credential traffic, the actual usernames and passwords traversing the virtual networks, is heavily encrypted.
+
+Speaker 5  
+Essential.
+
+Speaker 2  
+Once connected, you abandon generic shared accounts entirely. You assign named individual AD accounts to your team, and you map them to custom role-based access control or RBAC roles in vCenter and NSX. This provides individual accountability and auditability, which is impossible if five different admins are all logging in as administrator.
+
+Speaker 1  
+Which brings us to the famous cloud admin credential. When Microsoft finishes the initial deployment and hands over the private cloud. They give you a built-in account called Cloud Admin at via Sphere local. Some lazy admins might just bookmark that password and use it as their daily driver.
+
+Speaker 2  
+And that is a critical, potentially career-ending mistake.
+
+Speaker 1  
+Really?
+
+Speaker 2  
+Yes, the Cloud Admin credential must be treated strictly as a break glass emergency account, it should never be used for day to day administration, and it should never be used to integrate third party service accounts.
+
+Speaker 1  
+Why? What is the actual risk?
+
+Speaker 2  
+Because if a rogue script or a compromised service account locks out the cloud admin account or changes the password, you have lost your top tier access to the environment.
+
+Speaker 1  
+You just locked out
+
+Speaker 2  
+exactly. You use Cloud Admin exactly once to set up your AD LD APS integration and grant your named accounts admin rights. Then you lock that password in a secure enterprise vault. If you ever have to pull it out and use it during a massive outage, you rotate the password immediately afterward.
+
+Speaker 1  
+Let's talk about those custom RBAC roles you mentioned. If I'm a consultant and the client wants me to build a custom vCenter role for their Tier One overnight support desk, they want a role that lets the junior admins reboot VMs, access the console, but explicitly denies them the ability to delete a data store or alter network segments. Can I build that granularity in AVS?
+
+Speaker 2  
+You can, but there is a hard constraint enforced by Microsoft that you must be aware of. A custom vCenter role in AVS cannot exceed the privileges of the built-in Cloud Adamant role.
+
+Speaker 1  
+Meaning, I can't grant a right that Microsoft hasn't already granted to Cloud Admin.
+
+Speaker 2  
+Correct. The Cloud Admin itself is actually a restricted role. It doesn't have root-level permissions. If you try to create a custom role from scratch and you accidentally check a privilege box that is higher than what Cloud Admin possesses, vCenter will flat out reject the role creation.
+
+Speaker 1  
+Oh, I see. The
+
+Speaker 2  
+best practice is to clone the existing Cloud Admin role and then subtract the privileges you don't want the junior admins to have.
+
+Speaker 1  
+Okay, so that covers identity inside the VMware software layer, but AVS is fundamentally an Azure resource. It sits inside an Azure resource group. How do we secure the Azure side of the house?
+
+Speaker 2  
+This is why we have to bridge the two distinct worlds. AVS exists in the Azure Resource Manager or ARM control plane, but it runs the VMware vSphere control plane internally. A breach in either side compromises the whole private cloud.
+
+Speaker 1  
+Makes sense.
+
+Speaker 2  
+To secure the Azure side, you must implement Entra ID privileged identity management, commonly known as P.
+
+Speaker 1  
+Explain the philosophy behind P for those who haven't used it. The
+
+Speaker 2  
+philosophy is zero standing privileges. PM restricts Azure RBAC access, like the contributor role that is required to manage the AVS resource, add hosts, or delete clusters.
+
+Speaker 1  
+So nobody is an admin all the time.
+
+Speaker 2  
+Exactly. Instead of an engineer having standing 247 admin rights on their account, they have zero rights by default. When they need to make a change, they must log into the portal, request a time-bound activation, say for two hours and provide a business justification or a ticketing number. That request can even be routed to a manager for approval before the access is granted.
+
+Speaker 1  
+I love that for security. It prevents an attacker from stealing a laptop at midnight and having god mode access to Azure. But I have a massive pushback here-a total consultant what-if scenario.
+
+Speaker 2  
+Let's hear it.
+
+Speaker 1  
+Let's say we implement strict PM. No human has standing access. What happens if an AVS bare metal host suffers a catastrophic memory failure at three bus COAM on a Sunday?
+
+Speaker 2  
+Well, the Azure backend detects the failure. Right.
+
+Speaker 1  
+Azure has an automated host replacement process. It detects the failure, silently evicts the dead host, drops in a fresh bare metal server and sends an automated email notification alerting the IT team of the hardware swap.
+
+Speaker 2  
+Right, standard procedure.
+
+Speaker 1  
+But here's my question: If all the human admins are sleeping and their PIM roles are inactive and stripped away, will anyone actually receive that automated alert, or does it bounce because nobody has the. That is
+
+Speaker 2  
+a brilliant catch, and it highlights why theoretical security sometimes clashes with operational reality. It is explicitly addressed in the Microsoft Design Review Checklist. If an organization relies entirely and solely on Kim for every single account, that critical hardware failure alert might bounce or be ignored by the routing system because no active user is registered to receive alerts for that resource group at that specific moment.
+
+Speaker 1  
+So, what is the fix? Do we compromise the PIM security model?
+
+Speaker 2  
+No, you create a controlled exception. The checklist mandates creating at least one specific Entra ID account or a service principal that retains standing permanent permissions on the AVS resource group.
+
+Speaker 1  
+Just one account.
+
+Speaker 2  
+Yes, this account must have a valid active SMTP email record. This account exists for one purpose only: to ensure that automated break fix alerts generated by the Azure infrastructure are successfully routed to a 247 distribution list, a pager system, or a ticketing system like ServiceNow, you cannot apply PIM to your emergency alert receiver.
+
+Speaker 1  
+That right there is the exact kind of obscure nugget a consultant needs to know to save a client from a silent 3 a.m. disaster. I mean, it justifies your entire consulting fee.
+
+Speaker 4  
+Absolutely.
+
+Speaker 1  
+All right, let's look at the board. The environment is precisely sized. The network routing is flawless. The identity perimeter is locked down with PIM and LDAPs. You have built a beautiful secure fortress, but right now it's completely empty. The client's actual workloads are still sitting in their basement.
+
+Speaker 2  
+Time for the heavy lifting.
+
+Speaker 1  
+Exactly. It is time for the main event. It is time to move the data. We are entering the migration phase, utilizing VMware HCX, and this is where we need to heavily discuss the AV64 heterogeneity trap.
+
+Speaker 2  
+Migrating workloads is where the theoretical architecture meets the harsh reality of moving terabytes of live data. The primary weapon of choice for this is VMware HCX. It is included with your AVS license, and it's a phenomenal platform for simplifying complex, large-scale migrations without requiring you to change IP addresses,
+
+Speaker 1  
+but there is a cardinal rule for operating HCX, isn't there? Like a rule about where you drive the car from.
+
+Speaker 2  
+Yes, the architecture involves an HCX manager appliance running on premises and an HCX manager running in the cloud. The golden rule is, migrations should always be initiated from the on-premises HCX interface.
+
+Speaker 1  
+Always,
+
+Speaker 2  
+always. You should never log into the cloud-side HCX appliance and attempt to pull virtual machines into Azure in a reverse migration.
+
+Speaker 1  
+Why does it matter if the IPsec tunnels are bidirectional and the data can flow both ways? Why does it matter who pushes the button?
+
+Speaker 2  
+It matters deeply because of how HCX interacts with vCenter, which acts as the source of truth for the environment. The on-premises vCenter is actively managing the source workloads. It knows their exact state, their snapshot history, their M&T addresses. By initiating the migration from the on-premises side, you ensure that the state and inventory are correctly and safely handed off to the destination.
+
+Speaker 1  
+And if you pull instead,
+
+Speaker 2  
+initiating reverse migrations from the cloud appliance can lead to synchronization issues, orphan files, and it is generally unsupported by VMware for bulk operations. Always push, never pull.
+
+Speaker 1  
+Got it. Always push from the basement up to the cloud. Now let's talk about limits, because salespeople and consultants love to overpromise. They sit in a boardroom and say, "We can move 5,000 virtual machines over a single weekend. What is the reality of HCX throughput?
+
+Speaker 2  
+Consultants need to aggressively temper those promises by understanding the hard limits of a feature called mobility optimized networking, or MNN.
+
+Speaker 1  
+Explain what MNN does first. Why do we need it?
+
+Speaker 2  
+When you stretch a layer two network, say VLAN 100, from on-prem into Azure using HCX, the default gateway for that network still lives on premises.
+
+Speaker 1  
+Okay, I see where this is going.
+
+Speaker 2  
+Right. So if a VM migrates to Azure and tries to talk to another VM in Azure on that same subnet, the traffic has to travel all the way down the express route to the on-prem gateway, get routed, and travel all the way back up to Azure. We call this traffic tromboning. That sounds horribly inefficient. It kills performance. M O N fixes this. It optimizes the routing, so traffic between VMs in the cloud stays in the cloud, completely eliminating the trombone effect.
+
+Speaker 1  
+Sounds amazing. So we enable M O N on everything. What's the limit? The
+
+Speaker 2  
+limit is processing power. A standard H C X manager appliance can only track and route roughly 400 VMs with MON enabled simultaneously.
+
+Speaker 1  
+Only 400.
+
+Speaker 2  
+Yep. If you upgrade to a large appliance, that ceiling pushes to 1,000 VMs. Furthermore, the HCX architecture restricts you from enabling MON on more than 100 stretch network extensions. Wow. Okay. So if a massive client has 150 different VLANs they want to stretch and route dynamically in the cloud, you cannot do it all at once. You have to break that migration into phases, moving networks and retiring the on-prem gateways sequentially.
+
+Speaker 1  
+And what if the client's network pipe itself is the bottleneck? What if they were a smaller enterprise and they only have a 200 megabit express route, pushing terabytes of VM duck files over a two? If the
+
+Speaker 2  
+client has less than 500 megabits per second of available bandwidth, the architectural best practice is to deploy the HCX-WAN optimization appliance alongside the standard interconnect appliances.
+
+Speaker 1  
+What does the Wan optimizer do?
+
+Speaker 2  
+It acts like an aggressive sponge. It performs deep deduplication and compression on the replication traffic before it hits the network. If it sees it as transmitting a standard Windows Server OS disk, it recognizes the repetitive zero blocks and compresses them, maximizing every single megabit of that constrained network link.
+
+Speaker 1  
+Okay, now for the trap, the AB64 EVC trap. I want to spend a significant amount of time here because this scenario sounds like something that could literally ruin a consultant's career if they don't see it coming during an expansion phase. It is
+
+Speaker 2  
+a massive, highly technical gotcha that catches a lot of people off guard. Let's walk through the scenario. Let's say your client deployed AVS a year ago. They followed the rules and deployed that required three-node base cluster using the standard AV36 hosts,
+
+Speaker 1  
+right? The workhorses.
+
+Speaker 2  
+As we discussed earlier, AV36 hosts use Intel Cascade Lake processors.
+
+Speaker 1  
+Okay, Cascade Lake. A year passes. The client's business booms. They need more compute power, and they have the budget. They call you back and say, "Let's expand the private cloud, add a new cluster, and let's buy the biggest servers Microsoft has the AV64s.
+
+Speaker 2  
+So you provision a new cluster of AV64 hosts. As we established, the AV64 hosts utilize the newer Intel Ice Lake processors. By doing this, you have just created a heterogeneous CPU environment within the exact same private cloud.
+
+Speaker 1  
+Oh, I see.
+
+Speaker 2  
+You have old Cascade Lake chips sitting right next to new Ice Lake chips.
+
+Speaker 1  
+And this is where VMware's live migration technology vMotion runs into a brick wall. Explain the mechanics of why heterogeneous CPUs cause vMotion to panic.
+
+Speaker 2  
+vMotion works by copying the live memory state of a VM from one physical host to another without dropping a ping, but an operating system like Windows or Linux boots up and probes the physical CPU to see what instruction sets it supports.
+
+Speaker 1  
+To see what it can do.
+
+Speaker 2  
+Exactly. The newer Ice Lake CPUs have advanced mathematical instructions for encryption and AI processing that simply do not exist on the older Cascade Lake CPUs.
+
+Speaker 1  
+So if a VM boots on the AV64, it sees those shiny new Ice Lake instructions and starts using them to process data.
+
+Speaker 2  
+Exactly. This behavior is governed by VMware's enhanced vMotion compatibility, or EBC. Here is the operational rule: live vMotioning a virtual machine from the older AV36 cluster up to the newer AV64 cluster works perfectly fine.
+
+Speaker 1  
+Okay, that's
+
+Speaker 2  
+good. The newer Ice Lake CPU is backwards compatible. It understands all the old Cascade Lake instructions. It's a seamless upgrade path.
+
+Speaker 1  
+Okay, so moving workloads onto the shiny new hardware is completely seamless. No downtime. What is the problem?
+
+Speaker 2  
+The problem occurs when you try to go backwards. Let's say six months later, you need to perform emergency maintenance on an AV 64 host, so you try to v motion its workloads back to the older AV 36 cluster to empty it out.
+
+Speaker 1  
+Okay.
+
+Speaker 2  
+If you attempt a live vMotion from the Ice Lake CPU back to the Cascade Lake CPU, the hypervisor will throw a hard EVC compatibility error and block the move.
+
+Speaker 1  
+Why?
+
+Speaker 2  
+Because the virtual machine is actively executing those advanced Ice Lake instructions. If the hypervisor moved that live state to the older Cascade Lake chip, the older chip wouldn't know how to compute those instructions, and the virtual machine's operating system would instantly crash with a blue screen. VMware prevents the move to save the VM.
+
+Speaker 1  
+Wait, think about the implications of this. If a client scales up with new hardware and dynamically balances their workloads, they might permanently trap their tier one virtual machines on the new servers, like they check in, but they can never check out without a maintenance window.
+
+Speaker 2  
+Yes, they are trapped. If you hit this error, the reactive solution is painful. You must perform a cold migration. You have to completely power off the virtual machine, severing its connections, move the powered-off files to the old host, and boot it back up so it rediscovers the older CPU
+
+Speaker 1  
+for a tier one database processing transactions. That level of downtime is completely unacceptable.
+
+Speaker 2  
+Completely.
+
+Speaker 1  
+Okay, so how does a great consultant prevent this? What is the proactive solution?
+
+Speaker 2  
+The proactive solution involves configuring VM level EVC before you ever migrate a workload to the new hardware, you go into the settings of the virtual machine itself, and you hardcode its EVC mode to match the lower base cluster, the Cascade Lake instruction set.
+
+Speaker 1  
+What does that actually do under the hood? It
+
+Speaker 2  
+acts as a mask. By doing this, you prevent the virtual machine from ever seeing or adopting the newer Ice Lake instructions, even when it is physically running on the AV64 hardware. The VM thinks it's still running on an older chip. It masks the newer CPU features entirely. Because the VM never uses the advanced instructions, it guarantees seamless bidirectional live vMotion across the entire heterogeneous private cloud. You can bounce it between clusters all day without a single dropped.
+
+Speaker 1  
+Wow! If you don't configure that up front, you're essentially building a Roach Motel for VMs. That is incredibly valuable insight. It
+
+Speaker 2  
+really is a career saver.
+
+Speaker 1  
+All right, let's shift gears. The workloads are migrated. They are humming along happily on their EVC configured hosts. Everything is green in the dashboard. Now, as the consultant, you have to ensure these workloads can survive a disaster, we are moving into business continuity, backups, and the incredible complexity of stretched clusters.
+
+Speaker 2  
+Let's start with the absolute golden rule of backups in AVS. We touched on this briefly during the storage sizing session, but it bears repeating with extreme prejudice.
+
+Speaker 1  
+Go ready.
+
+Speaker 2  
+Never, under any circumstances, store your backup archives on the VSN data store
+
+Speaker 1  
+because it is a finite, incredibly expensive resource.
+
+Speaker 2  
+Precisely, VSN is composed of high-performance NVMe flash drives designed specifically for running active high I/O workloads. Storing dead archival backup data on those drives is a tremendous waste of money.
+
+Speaker 1  
+It's like renting a Ferrari just to keep it parked in your garage.
+
+Speaker 2  
+Exactly. Furthermore, backup jobs create massive data files. If you dump a two terabyte backup file onto the vSAN, you risk instantly blowing past that 75% capacity threshold, triggering alarms and freezing your environment. You must configure your backup software to push the archives out to Azure native storage, like Azure Blob or an external NFS data store.
+
+Speaker 1  
+Okay, so backups are safe in Blob storage. What about actual disaster recovery? If a hurricane takes out the entire Azure East US data center region, how do we fail over entirely to another site?
+
+Speaker 2  
+You have multiple architectural options depending on the client's budget. You can use Azure Site Recovery, which is great if your DR strategy is failing over the VMware workloads into native Azure IS virtual machines. It essentially transforms them. But if your client wants true VMware to VMware DR, they want to fail over to a secondary AVS private cloud running in a different region, say West US. For that, you use VMware Site Recovery Manager or SRM or third-party replication tools like Zerto or Jetstream.
+
+Speaker 1  
+And from a network design perspective, if I'm setting up that secondary ABS region for DR, let's say primary is in East US and secondary is in West US. What is the golden rule for the IP architecture?
+
+Speaker 2  
+The golden rule is non-overlapping IP spaces across regions. It sounds basic, but you would be amazed how many people get it wrong. Do not use the 10.0 point 0.016 subnet for your primary region, and then build the secondary region using the exact same 10.0 point 0.016 space, assuming you can just use NAT translation later to sort it out.
+
+Speaker 1  
+Because when a disaster hits and you hit the big red failover button, the routers lose their minds.
+
+Speaker 2  
+Exactly, it creates a routing nightmare during a failover because the network fabric doesn't know which region actually owns the IP addresses. Design it cleanly and distinctly upfront. Use 10.0 point 0.016 for the primary region and a completely different block, like 190 2.16 8.016 for the secondary region.
+
+Speaker 1  
+Clean and simple, but what if the client's risk tolerance is incredibly low? What if they demand ultimate high availability within a single region? They want zero data loss if an entire massive Azure data center building loses power, but they don't want the latency of replicating to the other side of the country.
+
+Speaker 2  
+Then you are looking at deploying what VMware calls a stretched cluster. A stretched cluster takes a single AVS private cloud and spans it physically across two different Azure availability zones or EZs within the same region. It is the pinnacle of high availability.
+
+Speaker 1  
+So you literally have half your servers in one building and half in another building miles away, acting as one giant brain. But there are intense constraints on building one of those, right?
+
+Speaker 2  
+Very intense constraints. First, the host requirements double. A standard cluster needs three hosts. A scratched cluster requires a minimum of six hosts and a maximum of 16 hosts. And critically, they must be deployed in perfectly even multiples to maintain balance. You put three hosts in availability zone one and three hosts in availability zone two.
+
+Speaker 1  
+What about the networking? If they're in two different physical buildings, how does the on-prem data center talk to them?
+
+Speaker 2  
+From a networking perspective, you must have express read circuits physically connected from both availability zones back to your hub, and both circuits must be configured with global reach.
+
+Speaker 1  
+Because if availability zone one gets hit by a meteor and goes totally dark, availability zone two still needs a physical path to route traffic back to the on-premises data center.
+
+Speaker 2  
+Exactly.
+
+Speaker 1  
+But wait, if AZ one dies, what happens to the VSN quorum? Because we talked earlier about VSAN needing a majority vote to safely write data. If half the hosts die in the Meteor strike, how does the remaining half know they are allowed to keep running?
+
+Speaker 2  
+They use a tiebreaker. This is a brilliant piece of engineering. When you deploy a stretched cluster, Microsoft automatically deploys a vSAN witness appliance. A witness. Yes, this witness doesn't hold virtual machine data. It just holds metadata and acts as a voting member. And crucially, this witness. Is hosted in a third, completely separate availability zone managed entirely by Microsoft.
+
+Speaker 1  
+Okay, so AZ1 and AZ2 are the data nodes. AZ3 is the witness. If AZ1 fails, AZ2 and the witness in AZ3 communicate. Realize they still have a majority quorum since two out of three zones are alive and your workloads keep running seamlessly.
+
+Speaker 2  
+You've got it.
+
+Speaker 1  
+But let's flip the scenario. What if the data centers are fine, but the third availability zone, the one hosting the witness, suffers a massive outage?
+
+Speaker 2  
+This is a tense operational scenario. The workloads are physically running on the hosts in AZ1 and AZ2. Because those hosts are fine, the virtual machines continue to run and process data. Your SQL Server stays online.
+
+Speaker 1  
+Right.
+
+Speaker 2  
+However, because the witness is dead, ViaSAN loses quorum awareness,
+
+Speaker 1  
+meaning the cluster knows something is broken, but it doesn't have the voting power to make structural decisions.
+
+Speaker 2  
+Correct. In this degraded state, ViaSAN goes into self-preservation mode. It aggressively blocks any automatic auto repairs. It stops rebalancing data blocks, and it prevents safe placement decisions for new virtual machines. Essentially, freezes all structural changes to protect the integrity of the existing data until the witness in AZ3 is restored and quorum is reestablished.
+
+Speaker 1  
+That is a fascinating, highly defensive architecture. Speaking of structural integrity, I'm going to look at one more deeply technical constraint: the AV64 Fault Domain Balancing Act. This is another highly specific piece of knowledge that separates the experts from the amateurs.
+
+Speaker 2  
+Traditional AVS clusters using AV36 hosts handle fault domains automatically behind the scenes. The Azure backend ensures that hosts are spread across different physical server racks, so a single power failure doesn't take down the whole cluster.
+
+Speaker 1  
+Okay,
+
+Speaker 2  
+but AB64 clusters expose this mechanic differently. They explicitly map to either five or seven vSAN fault domains, depending on which Azure region you deploy in.
+
+Speaker 1  
+So a fault domain is essentially a physical rack of servers. When you scale up and buy more hosts, how does the system handle them?
+
+Speaker 2  
+The Azure control plane balances the new hosts evenly across these fault domains. So fault domain one gets the first host, fault domain two gets the second, all the way to seven, and then it loops back around and puts the next host in fault domain one. It forces physical separation.
+
+Speaker 1  
+That sounds perfectly logical. Where is the trap? The
+
+Speaker 2  
+trap is scaling down. Let's say a client just finished their massive holiday sales season. They don't need all these AV64 hosts anymore. The CFO looks at the Azure bill and starts yelling at you to scale down and delete a host to save OpEx.
+
+Speaker 1  
+So you run an automation script to delete a random host, say the one in fault domain two.
+
+Speaker 2  
+If you blindly submit an API call to remove a random host, you might ruin the balance. Let's say your removal leaves the fault domains imbalanced by a difference of more than one host. For example, fault domain one still has three hosts, but you deleted a host from fault domain two, leaving it with only one host.
+
+Speaker 1  
+Okay, what happens?
+
+Speaker 2  
+The Azure control plane will intercept that removal request, analyze the resulting imbalance, and reject the request outright, throwing a hard HTTP 409 conflict error.
+
+Speaker 1  
+So I cannot just delete a host to save money if it ruins the structural integrity of the cluster's fault tolerance. The cloud literally says no. You are making the cluster unsafe.
+
+Speaker 2  
+Exactly. The Azure control plane will not let you intentionally degrade the VSAN resilience. It protects you from yourself.
+
+Speaker 1  
+So what does the consultant do? You have an angry CFO demanding you cut costs, and the cloud is refusing to let you delete a server.
+
+Speaker 2  
+The consultant has to put away their Azure scripts and put on their Deep VMware hat. You must log into the vSphere client directly, navigate to the underlying vSim cluster configuration, and manually inspect the fault domain layout.
+
+Speaker 1  
+Okay.
+
+Speaker 2  
+You have to visually identify which specific physical host currently resides in the most populated fault domain. That specific host is the only host you can safely target for removal without triggering the 409 conflict error.
+
+Speaker 1  
+That is incredible. The automation won't save you. You have to fundamentally understand the underlying vSAN physical architecture to manage the cloud billing.
+
+Speaker 2  
+You really do.
+
+Speaker 1  
+All right, we have survived the migration, the DR planning, and the fault domains. We are entering the final phase of the deployment. The implementation is technically complete. The virtual machines are moved. The DR failovers have been tested. Your final task as the consultant is setting up the day two operations, so the client's IT team can actually manage and maintain this massive beast you just built for them,
+
+Speaker 2  
+and if you talk to any traditional VMware admin, their biggest day two anxiety is patching and lifecycle management. They have PTSD from spending their entire weekends running VMware Update Manager, crossing their fingers that a host reboot doesn't corrupt a data store.
+
+Speaker 1  
+Oh, I've been there. The
+
+Speaker 2  
+fantastic news with AVS is that Microsoft handles all the upgrades to the core infrastructure. Microsoft patches ESXi, they upgrade vCenter, and they update NSX.
+
+Speaker 1  
+But what is the operational impact on the client? Do they suffer downtime during these upgrades?
+
+Speaker 2  
+For the workloads, no. Host upgrades are orchestrated via maintenance mode. Microsoft's backend automatically evacuates the virtual machine. From a target host using live vMotion, moving them to other hosts in the cluster
+
+Speaker 1  
+seamlessly.
+
+Speaker 2  
+Yes. Once empty, Microsoft patches the host, reboots it, verifies it is healthy, and moves to the next host. There is zero downtime for the client's virtual machines.
+
+Speaker 1  
+That's the magic of vMotion at scale. But what about the management plane? Is vCenter always available during this process?
+
+Speaker 2  
+That is the operational catch you must warn the client about during the specific upgrade windows for vCenter and NSX. Those management plans are temporarily locked,
+
+Speaker 1  
+completely locked.
+
+Speaker 2  
+Yes, you cannot log in and create new virtual machines. You cannot change NSX firewall rules, and you absolutely shouldn't initiate any new HCX migrations.
+
+Speaker 1  
+Let me use an analogy here. It's like a landlord updating the main plumbing lines in your apartment building. You don't have to move out of your apartment. Your workload stays perfectly online. You can stay in your living room watching TV, but you cannot use the sink or the shower while the landlord is actively wrenching on the pipes in the basement. No creating or deleting VMs until the landlord says the maintenance window is closed.
+
+Speaker 2  
+That's exactly right. So the consultant must ensure the client has organizational processes in place to pause any automated provisioning scripts during those Microsoft maintenance windows. If a script tries to deploy a VM while a vCenter is locked, the script will just crash.
+
+Speaker 1  
+Speaking of day two operations, let's talk about security governance. The workloads are in Azure, but they are running inside VMware. How do we apply Azure's massive security tools to them?
+
+Speaker 2  
+You implement Azure Arc for servers and Microsoft Defender for Cloud. Azure Arc is a lightweight agent you install inside the guest operating system of the virtual machines. It bridges the gap, extending native Azure governance, policy enforcement, and vulnerability scanning directly into the guest OS, even though it's technically running on a VMware hypervisor.
+
+Speaker 1  
+What about VMware's native security tools like VDefend Advanced Threat Prevention? A lot of enterprise clients pay huge money for those licenses on-prem. Can they just bring them over to AVS?
+
+Speaker 2  
+AVS does support VMRV Defend via Bring Your Own License model, but and this is a crucial difficult consulting caveat. It specifically does not support all of the advanced features. Why
+
+Speaker 1  
+not?
+
+Speaker 2  
+Due to the infrastructure constraints and the lack of root access we discussed in hour one, you cannot utilize features like security intelligence, cloud sandboxing, or network detection and response, or NDR. You only get the baseline distributed IDS apps functionality.
+
+Speaker 1  
+That is a tough pill to swallow. If a client bought a massive, expensive VDefend Enterprise license, specifically expecting NDR capabilities in the cloud, you have to sit down and break the bad news that the platform architecture physically prevents it.
+
+Speaker 2  
+It's an awkward conversation, but it's better to have it early.
+
+Speaker 1  
+Let's touch on automated scaling. Everyone wants cloud elasticity, right? That's the dream. They want their AVS cluster to magically grow and add a new physical host if the CPU hits 90% during Black Friday.
+
+Speaker 2  
+You can achieve that. You can script automated scaling using Azure runbooks, Logic Apps, or native Azure alerts triggering webhooks, but there is a hard serialized constraint enforced by the API.
+
+Speaker 1  
+Explain serialization in this context.
+
+Speaker 2  
+Automation must serialize scale operations, meaning only one physical scale operation can run at a time within an entire private cloud software-defined data center or SDDC, even if you have multiple clusters. If your automation script detects a CPU spike and tries to add a host to cluster one, and simultaneously tries to add a host to cluster two, the API will accept the first request and outright reject the second. You have to build intelligent queuing into your automation,
+
+Speaker 1  
+and you better set hard maximum limits on that automation, because we are talking about bare metal hosts that cost 1000s of dollars a month. You don't want a poorly written script ordering 10 new physical servers because a runaway background process spiked the CPU on a Friday night while everyone was asleep.
+
+Speaker 2  
+Absolutely, hard limits in the automation logic are mandatory, and to feed that automation properly, or just to keep the human admins informed before disaster strikes, you must integrate the environment with Azure Monitor and Log Analytics. Consultants should deploy the Azure Monitor baseline alerts or AMBA framework.
+
+Speaker 1  
+What specific metrics should we be alarming on?
+
+Speaker 2  
+You need critical, unavoidable warnings firing to the team if cluster CPU sustains over 80% And crucially, based on our earlier vSAN discussion, you need massive red alarms firing if VSAN capacity crosses the 70% danger zone.
+
+Speaker 1  
+You want to know you're hitting the wall before you actually smash into it and trigger the 75% SLA breach.
+
+Speaker 2  
+Exactly.
+
+Speaker 1  
+So let's take a step back and recap this incredible journey. You, the implementation consultant, started by managing client expectations, fighting for your hardware quota, and doing the brutal math to account for the management tax NHA reserves. You navigated the terrifying labyrinth of the 22 CIDR network block and made absolutely sure no IP addresses overlapped. You successfully negotiated with the firewall team to pass the BGP routes and UDP 4500. You anchored the identity architecture by putting an AD controller natively in Azure and locking down the cloud admin account behind Glass,
+
+Speaker 2  
+and then the migration.
+
+Speaker 1  
+Right. You expertly orchestrated HCX migrations, dodging the AV64 heterogeneous CPU EVC trap along the way. You designed rock-solid disaster recovery, manually navigated the VSAN fault domains of stretched clusters, and finally establish the day two governance and monitoring baseline. It is
+
+Speaker 2  
+a massive, incredibly complex undertaking, but when executed correctly, utilizing the specific playbook to dodge the traps, it delivers an incredibly resilient, high-performance hybrid cloud that genuinely transforms how a client operates.
+
+Speaker 1  
+It really does. It is a masterpiece of engineering, but I want to leave you, our listener, with a final, slightly provocative thought. Think about the entire evolution we just spent all this time describing. With services like AVS perfectly bridging the gap between traditional on-premise VMware data centers and hyperscale public clouds, the actual physical hardware layer is becoming almost entirely invisible to the engineer,
+
+Speaker 2  
+it really is.
+
+Speaker 1  
+You can't SSH into the host. You can't touch the root kernel. You never see the flashing lights on the server rack.
+
+Speaker 2  
+It is entirely abstracted away. The bare metal, the blinking lights, the physical RAM-it's all fading into a managed utility like electricity or water. You just consume it.
+
+Speaker 1  
+Exactly. So here's the question you need to ask yourself as you map out the next 10 years of your own career, as bare metal infrastructure fades into a managed invisible service, will the traditional role of the infrastructure consultant soon disappear entirely?
+
+Speaker 2  
+That's a scary thought for some.
+
+Speaker 1  
+Are we all transitioning away from being hardware experts and evolving purely into software-defined routing, policy governance, and identity management architects, because if this deep dive has shown us anything, it is that your true value to a client isn't in racking servers, running cables, or installing base hypervisors anymore. Microsoft does that for you.
+
+Speaker 2  
+Right, the value has shifted.
+
+Speaker 1  
+Your real value is in mastering the complex software-defined logic that connects these massive abstract concepts together. You are no longer building the physical house. You are the architect of the invisible. Thank you for joining us on this deep dive into Azure VMware solution. Take this playbook, anticipate the architectural traps before your client ever sees them, and go absolutely crush your upcoming implementation. You got this.
+
