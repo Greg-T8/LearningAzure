@@ -75,17 +75,6 @@ For each selected image:
 
 If an image cannot be downloaded reliably, do not create a nonexistent local path. Retain or add a friendly link to the relevant Microsoft Learn documentation page instead.
 
-### Image manifest
-
-At the end of the guide, add an `Image Sources` section:
-
-| Local file | Description | Microsoft documentation page | Original image URL | Guide section supported | Discovery source |
-| ---------- | ----------- | ---------------------------- | ------------------ | ----------------------- | ---------------- |
-
-For `Discovery source`, record the Microsoft Learn link from the original guide that led to the selected image. If the image came directly from that page, use the same URL for both the documentation page and discovery source.
-
-Include only images actually packaged with the guide.
-
 ### Deliverable format
 
 Return a ZIP archive containing:
@@ -98,5 +87,4 @@ Before completing the deliverable, verify that:
 
 * Every relative image path resolves to an included file.
 * Every image source caption points to the Microsoft Learn page where the image appears.
-* Every manifest entry identifies the original guide link used as the discovery starting point.
 * No selected image is unrelated to the guide section where it is placed.
