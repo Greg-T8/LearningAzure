@@ -1,0 +1,1018 @@
+[Speaker 1]
+Imagine your client's primary data center just goes completely dark, like totally offline.
+
+[Speaker 2]
+Oh, worst nightmare scenario right there.
+
+[Speaker 1]
+Right. You've got, I mean, 300 mission-critical virtual machines down. The CEO is practically breathing down your neck.
+
+And here's the kicker. Your failover target is a cloud environment where you don't even have root access.
+
+[Speaker 2]
+Yeah, that's where the panic really sets in.
+
+[Speaker 1]
+Exactly. You can't SSH into the hosts. You can't run your usual recovery scripts.
+
+You're basically flying blind into a managed service. And, you know, every single second is costing the company tens of thousands of dollars.
+
+[Speaker 2]
+It is. It's the ultimate test for a modern IT consultant, honestly.
+
+[Speaker 1]
+It really is. And today we're doing a deep dive into how you actually survive that exact scenario, how you architect a solution so bulletproof that this nightmare just, well, it never actually happens.
+
+[Speaker 2]
+Because we're really stepping out of the comfortable world of on-premises hardware here, where you can literally point to a blinking light on a Therva rack and know exactly what your storage is doing.
+
+[Speaker 1]
+Yeah, those days are kind of over for a lot of these projects.
+
+[Speaker 2]
+They really are. We are moving into the era of the managed cloud. And specifically, we're talking about integrating disaster recovery into an Azure landing zone.
+
+[Speaker 1]
+And we are speaking directly to you today, the consultant who is actually tasked with building this thing out. Let's set the baseline for your mission right now. You are a vSphere veteran.
+
+[Speaker 2]
+Right. You know VMware inside and out.
+
+[Speaker 1]
+Exactly. But your client just handed you this massive project. They've procured Azure VMware solution, which we're just going to call AVS for this deep dive.
+
+And they want to use a tool called Jetstream to continuously replicate their on-prem data center into Azure.
+
+[Speaker 2]
+Which is a huge undertaking if you've never touched it before.
+
+[Speaker 1]
+Oh, absolutely. The goal is if the on-prem site burns down, they want to fail over into AVS immediately. And you need to know how to build this literally from scratch.
+
+[Speaker 2]
+And, you know, the challenge here isn't just learning a new piece of software. It's really about understanding the strict and, I mean, non-negotiable architectural boundaries that Microsoft places on AVS.
+
+[Speaker 1]
+Yeah. They do not mess around with those boundaries.
+
+[Speaker 2]
+No, they don't. And you have to understand how Jetstream is uniquely engineered to sort of bypass those limitations. Because if you go into this, treating AVS like just another on-prem cluster...
+
+[Speaker 1]
+Oh, it could fail.
+
+[Speaker 2]
+It will completely fail. Your deployment will just crash and burn. And you'll be spending like weeks fighting with Azure support tickets.
+
+[Speaker 1]
+Nobody wants that. So we're going to unpack the exact networking mechanics, the specific data pipeline flow, the failover storage economics, and most importantly, the hidden technical traps that just aren't obvious in the marketing materials.
+
+[Speaker 2]
+The gotchas. You always have to know the gotchas.
+
+[Speaker 1]
+Always. So let's start by looking at the foundation. Because before Jetstream can even begin moving a single byte of data, we have to build the highway.
+
+The destination is the Azure landing zone, right?
+
+[Speaker 2]
+Right.
+
+[Speaker 1]
+Specifically the AVS private cloud. What does that hardware footprint actually look like?
+
+[Speaker 2]
+Yeah, that's a great place to start.
+
+[Speaker 1]
+Because I think a lot of people hear VMware in Azure, and they just assume it's just ESAC nested inside some giant Windows virtual machine or something.
+
+[Speaker 2]
+Right. It's a super common misconception. But AVS is completely bare metal.
+
+[Speaker 1]
+Wait, really? Like physical servers?
+
+[Speaker 2]
+Literally physical boxes. Microsoft provisions dedicated physical servers just for your client. Depending on the Azure region and the client's budget, these are specialized node types like the AV36, the AV52, or the newer Gen2 AV64 nodes.
+
+I saw that. Yeah. So these are physical boxes sitting in an Azure data center running native VMware vSphere hypervisor ESAC.
+
+[Speaker 1]
+Okay. So it's the exact same hypervisor the client runs in their own data center, just physically located in a Microsoft building.
+
+[Speaker 2]
+Yeah.
+
+[Speaker 1]
+It comes bundled with vCenter Server for management, NSX for the networking, and vSN for the storage, right?
+
+[Speaker 2]
+Correct. But here's the thing. An isolated private cloud in Azure is completely useless for disaster recovery.
+
+[Speaker 1]
+Well, yeah, if it can't talk to anything.
+
+[Speaker 2]
+Exactly. You have to connect it back to the client's on-premises environment. And this is where the networking architecture gets incredibly specific.
+
+The documentation dictates that the primary connection must be an ExpressRoute circuit.
+
+[Speaker 1]
+Okay. ExpressRoute, standard stuff.
+
+[Speaker 2]
+But a standard ExpressRoute isn't enough to actually make this work.
+
+[Speaker 1]
+Right. I noticed that in the prerequisites when looking at the sources. A standard ExpressRoute hooks the client's on-prem router into an Azure virtual network.
+
+But AVS has its own dedicated ExpressRoute circuit on the back end, right? Managed entirely by Microsoft.
+
+[Speaker 2]
+You got it. And that connects the AVS physical host to the Azure backbone, which creates this routing gap.
+
+[Speaker 1]
+Oh, okay.
+
+[Speaker 2]
+So to bridge the customer's on-prem ExpressRoute directly to that Microsoft-managed AVS ExpressRoute, you are absolutely required to provision an add-on called ExpressRoute Global Reach.
+
+[Speaker 1]
+Global Reach. Okay, so that essentially ties the two circuits together.
+
+[Speaker 2]
+Exactly. It links the two circuits at the Microsoft Enterprise Edge routers. It lets traffic flow directly from the on-prem ESX high host to the AVS ESXC host without having to, you know, hairpin through a virtual network appliance or some firewall sitting in a hub VNet in Azure.
+
+[Speaker 1]
+Okay, so it's a true direct path, which I imagine is critical for replication latency. But, and this is a big but, the architecture guide throws up a massive warning sign right here regarding routing protocols.
+
+[Speaker 2]
+Oh yeah, the symmetric routing requirement.
+
+[Speaker 1]
+Yes, it explicitly states that traffic routing between on-prem and AVS must be symmetric. Let's break down the mechanics of why asymmetric routing completely destroys continuous data replication, because this trips up a lot of people.
+
+[Speaker 2]
+It really does. It basically comes down to how stateful firewalls handle TCP handshakes. So, let's say your global reach highway is built, but your client has a really complex BGP routing setup back on-prem.
+
+[Speaker 1]
+Right, which most enterprises do.
+
+[Speaker 2]
+Yeah, exactly. So, the JetStream replication appliance sends a TCP-SYN packet out, and because of global reach, it takes that direct optimal path straight to the AVS environment.
+
+[Speaker 1]
+Perfect. The AVS side receives it, and it sends back a SYN-ACK packet to acknowledge the connection. But, because of some misconfigured route advertisement, that return packet doesn't take the global reach highway back.
+
+[Speaker 2]
+Right, it takes a detour.
+
+[Speaker 1]
+Exactly. It gets routed through a public IP, or maybe through an Azure firewall sitting in a hub virtual network, before finally making it back on-prem.
+
+[Speaker 2]
+And that is where it all falls apart, because that Azure firewall sees a SYN-ACK packet for a conversation it never saw start.
+
+[Speaker 1]
+Because it missed the initial SYN packet.
+
+[Speaker 2]
+Exactly. It never processed the SYN. So, from the firewall's perspective, this is an invalid, unsolicited state, and it just immediately drops the packet.
+
+The TCT handshake completely fails.
+
+[Speaker 1]
+Wow.
+
+[Speaker 2]
+And the really insidious part here is that this often fails silently. Your JetStream interface might just show the target site as, like, disconnected or timed out.
+
+[Speaker 1]
+Oh, that's brutal. You'd be pulling your hair out.
+
+[Speaker 2]
+You will spend days looking at the application layer, restarting services, when the problem is fundamentally a Layer 3 routing asymmetry.
+
+[Speaker 1]
+So, if you're the consultant, literally your very first step before touching any JetStream software at all is getting the client's network engineers in a room and validating symmetric BGP routing across that global reach circuit.
+
+[Speaker 2]
+100%. Don't skip that step.
+
+[Speaker 1]
+Okay. So, once that highway is verified, we run into what I think is the biggest culture shock for any traditional VMware administrator moving to AVS, identity and access management.
+
+[Speaker 2]
+Oh, yeah. This is the paradigm shift we kind of hinted at earlier. In a traditional on-prem environment, your client's IT team has the keys to the kingdom.
+
+[Speaker 1]
+The legendary root at localhost account.
+
+[Speaker 2]
+Right. They can SSH directly into any physical host. They can inject kernel modules, modify storage queues, restart management agents, basically do whatever they please.
+
+[Speaker 1]
+But Microsoft operates AVS under a shared responsibility model, right?
+
+[Speaker 2]
+They have to. Because Microsoft is financially on the hook for the hardware health, the hypervisor lifecycle, and those really strict SLA guarantees. They absolutely cannot let customers mess with the ESXE kernel.
+
+[Speaker 1]
+It's too much risk for them.
+
+[Speaker 2]
+Way too much. So, they revoke root access entirely. You don't get it.
+
+Never. Instead, you are granted a role called Cloud Admin.
+
+[Speaker 1]
+The Cloud Admin role. Okay. So, the best way I think for you, the consultant listening to visualize this constraint, is to think of AVS as a luxury, fully furnished penthouse apartment that you were just renting.
+
+[Speaker 2]
+I love that analogy.
+
+[Speaker 1]
+Right. So, you as the Cloud Admin, you can rearrange the furniture, which are the virtual machines, however you see fit. You can bring in a new television.
+
+You can paint the walls.
+
+[Speaker 2]
+But you absolutely do not have the keys to the building's boiler room or the main electrical panel.
+
+[Speaker 1]
+Exactly. It has the ESXI host root access. If the heat stops working in this apartment, you can't go down there with a wrench and fix it yourself.
+
+[Speaker 2]
+Yeah.
+
+[Speaker 1]
+You have to call the landlord.
+
+[Speaker 2]
+And the landlord is Microsoft support.
+
+[Speaker 1]
+Which takes time. And this constraint breaks almost every legacy disaster recovery tool on the market, doesn't it?
+
+[Speaker 2]
+Oh, totally. Because traditional DR solutions operate on the assumption that the administrator does have the keys to the boiler room, they require you to open an SSH session to the host, and install proprietary agents that are deeply embedded into the hypervisor. Furthermore, they often require you to manually install custom VIBs.
+
+[Speaker 1]
+Okay, let's unpack that term for a second, just to be thorough. A VIB is a vSphere installation bundle. It's essentially the software package format for VMware, right?
+
+Kind of like .exe file in Windows or .deb package in Linux.
+
+[Speaker 2]
+Yeah, spot on. It contains the drivers or agents that run directly on the hypervisor.
+
+[Speaker 1]
+And you cannot manually install a third-party VIB in AVS using the standard CLI tools, because your cloud admin account is explicitly denied that privilege level.
+
+[Speaker 2]
+Exactly. If you try to force a legacy tool into this environment, it will just fail right during the initial deployment script. Access denied.
+
+And this strict architectural boundary is exactly why Jetstream is designed the way it is.
+
+[Speaker 1]
+Ah, okay.
+
+[Speaker 2]
+It was engineered specifically to provide that deep hypervisor integration without violating the cloud admin restrictions.
+
+[Speaker 1]
+So how does Jetstream actually pull that off? I mean, to understand the workaround, we first kind of have to deconstruct the Jetstream solution itself, right? Let's look at its anatomy, because it's not just one single application file you install.
+
+[Speaker 2]
+No, not at all. It's a distributed stack of components built around a concept called Continuous Data Protection, or CDP.
+
+[Speaker 1]
+Okay, Continuous Data Protection. Let's break down the stack.
+
+[Speaker 2]
+The Jetstream architecture is elegantly segmented. We can really break it down into four primary components. Let's start with the control plane, which is the DSA, or the Management Server Appliance.
+
+[Speaker 1]
+Okay, the MSA. This is deployed as an OVA file, right? An Open Virtual Appliance, which is just a prepackaged virtual machine template.
+
+[Speaker 2]
+Exactly. You deploy this into your vCenter environment. It handles all the initial configurations, it sets up your replication policies, and it integrates directly into the vCenter UI as a plugin.
+
+[Speaker 1]
+I like to think of the MSA as the air traffic control tower. It dictates the flight paths, it organizes the schedules, monitors the airspace, but the tower itself doesn't carry any passengers, right? It doesn't fly the planes.
+
+[Speaker 2]
+That's a perfect way to look at it. Crucially, the MSA never touches the actual replicated data payload. It only manages the metadata and the orchestration.
+
+[Speaker 1]
+Okay, so if the MSA is just directing traffic, who is the cargo plane? Who is actually doing the heavy lifting of moving terabytes of virtual machine data across the network?
+
+[Speaker 2]
+That responsibility falls to the DRVA, the Disaster Recovery Virtual Appliance.
+
+[Speaker 1]
+DRVA, got it.
+
+[Speaker 2]
+This is a lightweight Linux-based virtual machine deployed on your ESXi hosts. Its sole purpose in life is to receive the data blocks, maintain the replication logs, compress the data, encrypt it, and stream it out over your express route highway to the target destination.
+
+[Speaker 1]
+And that target destination is the third component, the object store, which in the context of AVS is Azure Blob Storage. Yeah. So all of that replicated data lands in a massive, highly durable Azure Blob container and just rests there, completely dormant until a disaster occurs.
+
+[Speaker 2]
+Exactly.
+
+[Speaker 1]
+So we have the MSA directing traffic, the DRVA flying the cargo, and Blob Storage acting the hangar. But wait, there is a massive missing link here.
+
+[Speaker 2]
+Oh, I know where you're going with this.
+
+[Speaker 1]
+Right. How does the data physically get from the client's running virtual machine into the DRVA in the first place?
+
+[Speaker 2]
+Yes. That missing link is the most critical piece of the Jetstream engineering. It's called VAIO.
+
+VAIO. It stands for VMware vSphere API for I-O Filtering.
+
+[Speaker 1]
+VAIO. Okay, this is where we really have to talk about how legacy backup tools capture data versus how Jetstream does it. Because most standard backup platforms, they rely on hypervisor snapshots, don't they?
+
+[Speaker 2]
+Almost all of them do, yeah. They essentially tell VMware, hey, freeze this virtual machine for a second. I need to take a picture of the disk.
+
+[Speaker 1]
+And that freezing process relies on Delta disks. When a snapshot is taken, VMware basically makes the primary virtual disk read-only.
+
+[Speaker 2]
+Right.
+
+[Speaker 1]
+All new data rights from that moment on are redirected into a temporary Delta file. Then the backup software copies the read-only primary disk. But once the copy is finished, VMware has to merge all those new rights from the temporary Delta file back into the primary disk.
+
+[Speaker 2]
+And that is called snapshot consolidation.
+
+[Speaker 1]
+Yes, consolidation. And the problem with consolidation is the dreaded stun time.
+
+[Speaker 2]
+The worst.
+
+[Speaker 1]
+During that merge process, the virtual machine literally pauses for a fraction of a second. Or sometimes, I mean multiple seconds, if the Delta file grew too large during the backup.
+
+[Speaker 2]
+Yeah. And look, if you are protecting a static file server, a two-second stun at 2.8 AM, nobody cares. It doesn't matter.
+
+[Speaker 1]
+Nobody is awake.
+
+[Speaker 2]
+But if you are protecting a highly transactional Microsoft SQL server that's processing, you know, thousands of queries a second, that stun time will cause application timeouts, dropped connections, and database corruption alerts. It's a disaster. You simply cannot run continuous snapshot-based replication on Tier 1 transactional workloads.
+
+It just doesn't work.
+
+[Speaker 1]
+Which brings us back to VAIO. Because Jetstream doesn't use snapshots at all, does it?
+
+[Speaker 2]
+Not a single snapshot. The VAIO framework allows Jetstream to insert an I-O filter directly into the data path between the virtual machine and the physical storage layer. Wow.
+
+[Speaker 1]
+Directly in the data path.
+
+[Speaker 2]
+The mechanism is brilliant. As the operating system inside the VM issues a write command to its disk, the VAIO filter intercepts that block of data in real time. It sends a mirrored copy of that data block directly to the Jetstream DRVA, and then it immediately allows the original write to continue down to the local storage.
+
+[Speaker 1]
+So the virtual machine has absolutely no idea it's being replicated. None at all. There are no snapshots, no delta disks, and absolutely no stun times.
+
+It just streams the blocks as they are written.
+
+[Speaker 2]
+And this is what allows for true continuous data protection. It gives you a recovery point objective, an RPO, that is measured in seconds rather than hours.
+
+[Speaker 1]
+That's incredible. Okay, so now that we understand the internal mechanics, the VAIO, the DRVA, the MSA, let's trace the exact data pipeline for your specific consulting scenario, right? Moving data from the on-premises vSphere environment into AVS.
+
+[Speaker 2]
+Let's do it.
+
+[Speaker 1]
+Because before a single block of data moves, the consultant has to logically group the workloads. You don't just manage disaster recovery for 300 independent virtual machines manually. That would be an administrative nightmare.
+
+[Speaker 2]
+Oh, absolutely. You'd lose your mind. The Jetstream architecture utilizes what they call protected domains.
+
+[Speaker 1]
+Protected domains. So that's a logical boundary.
+
+[Speaker 2]
+Exactly. It groups together related virtual machines that share the exact same SLA policies, the same RPO targets, and the same failover runbooks.
+
+[Speaker 1]
+Okay, so for example, you might create a tier one gold protected domain for the client's critical customer-facing databases, and then maybe a tier three bronze protected domain for internal testing servers.
+
+[Speaker 2]
+Perfect example. And from a back-end storage perspective, all the virtual machines within a single protected domain stream their data into the exact same Azure Blob container instance. Oh, I see.
+
+Furthermore, a single instance of a DRBA appliance is responsible for processing all the data for that specific protected domain.
+
+[Speaker 1]
+Okay, so it's very siloed and organized. Let's watch the pipeline in action then. Say an end-user on-premises clicks save on a database record within that gold protected domain.
+
+Step one.
+
+[Speaker 2]
+The right IO is generated by the virtual machine.
+
+[Speaker 1]
+Step two. The VAIO filter sitting in the hypervisor kernel intercepts that write instantly without pausing the VM and mirrors it.
+
+[Speaker 2]
+Step three. The VAIO filter hands that mirrored block to the on-premises DRBA.
+
+[Speaker 1]
+Step four. The on-premises DRBA compresses it, encrypts it, and pushes it out of the data center straight down the ExpressRoute global reach circuit. And finally, step five.
+
+That block lands in an Azure Blob storage container, continuously appending to the replication log, maintaining that near-zero RPO. The data is safe. It's off-site.
+
+[Speaker 2]
+But, and this is the big, but having the data resting safely in Blob storage is only half the battle.
+
+[Speaker 1]
+Right, because it's useless if you can't turn it back into a server.
+
+[Speaker 2]
+Exactly. The true value of this architecture, and honestly, this is a major selling point you can bring to your client, CFO lies in what happens next. When the on-premises data center floods, how do those dormant blocks in Azure Blob become running virtual machines in AVS?
+
+[Speaker 1]
+Yeah, this brings us to the storage economics of rehydration. We really have to look at how AVS hardware is built, because remember those physical AV36 or AV64 bare metal nodes we talked about at the beginning?
+
+[Speaker 2]
+The really expensive physical boxes?
+
+[Speaker 1]
+Right. They utilize VSAN for their storage layer, and VSAN is incredibly fast. I mean, it uses NVMe cache drives and massive SSD capacity tiers.
+
+[Speaker 2]
+But VSAN is a hyper-converged architecture. The compute and the storage are physically bound together in that node. You cannot just buy more VSAN storage on its own.
+
+If you run out of disk space, you have to buy an entirely new bare metal node.
+
+[Speaker 1]
+Just for the storage.
+
+[Speaker 2]
+Yes, and those nodes are premium, highly expensive resources built on an hourly or monthly basis.
+
+[Speaker 1]
+So if you were forced to replicate your data continuously into the AVS VSAN data store, your client would have to provision and pay for a massive cluster of AVS nodes to run 24-7 doing absolutely nothing but holding dormant disaster recovery data.
+
+[Speaker 2]
+Which completely destroys the ROI of cloud disaster recovery. You'd be spending a fortune for idle hardware.
+
+[Speaker 1]
+This is exactly why JetStream separates the storage from the compute during the replication phase, isn't it?
+
+[Speaker 2]
+Exactly. The continuous data stream is stored in Azure Blob Storage instead. And just a quick note for the consultants, the documentation notes that this blob storage must be configured as standard or premium performance tier, with the access tier set to hot.
+
+[Speaker 1]
+Okay, hot tier, got it. And the cost delta here is just staggering. Azure Blob is object storage.
+
+It is literally pennies on the dollar compared to maintaining live NVMe VSAN capacity.
+
+[Speaker 2]
+It really is.
+
+[Speaker 1]
+The easiest way I can explain this to a client is to think of it like winter clothing. Imagine you have a massive bulky winter wardrobe. You don't keep it taking up space in the closet of your expensive premium downtown apartment all summer long.
+
+[Speaker 2]
+No, you'd have no room for anything else.
+
+[Speaker 1]
+You rent a cheap off-site storage unit. That's your Azure Blob storage. The wardrobe just sits there safely.
+
+You only move it into your expensive apartment closet, which is the AVS VSAN, on the exact day a blizzard hits. And that blizzard is your failover event.
+
+[Speaker 2]
+That is a great way to pitch it. So when that blizzard hits, when the failover event is triggered, the MSA executes the recovery runbook. A JetStream DRVA sitting in the Azure environment wakes up, reaches into the Azure Blob container, and begins the process of rehydration.
+
+[Speaker 1]
+Rehydration. I love that term. It basically pulls the dormant data blocks from Blob, reconstructs the virtual machine disk files natively on the AVS datastore, registers the VM with the AVS vCenter, and issues the power on command.
+
+[Speaker 2]
+And even during this failover phase, you actually still have architectural choices to optimize your costs.
+
+[Speaker 1]
+Really? How so?
+
+[Speaker 2]
+Well, while you can rehydrate these VMs directly onto the AVS VSAN, JetStream's documentation highlights the ability to automate recovery onto external storage attached to the AVS cluster.
+
+[Speaker 1]
+Wait, hold on. Let's think about the math here for a second. If the client has a massive footprint, say like 300 terabytes of data, rehydrating all of that onto VSAN during a crisis would immediately fill up a standard three-node AVS cluster.
+
+[Speaker 2]
+Oh, it would crush it instantly.
+
+[Speaker 1]
+I would have to rapidly provision maybe 10 or 15 new AVS bare metal nodes on the spot just to get the storage capacity to hold the data, even if I didn't need that much CPU or RAM for the workloads. That's going to cost an absolute fortune. Tell me there's a way to attach external, cheaper storage to AVS during a failover.
+
+[Speaker 2]
+There absolutely is, and it's a massive architectural advantage. You can utilize Azure NetApp files, or ANF, as well as Azure Elastic SAM.
+
+[Speaker 1]
+Okay, ANF and Elastic SAM.
+
+[Speaker 2]
+Yeah, these are enterprise-grade managed storage services native to Azure. You can actually mount an ANF volume directly to your AVS hosts as an NFS data store.
+
+[Speaker 1]
+Oh, wow. So instead of buying expensive compute nodes just for their disks, I can rehydrate the Jetstream data directly onto a massive, independently scalable ANF volume.
+
+[Speaker 2]
+Yes.
+
+[Speaker 1]
+The AVS hosts basically just provide the compute and memory to run the VMs, but the storage backend is completely decoupled.
+
+[Speaker 2]
+Exactly. That solves the storage-heavy compute light scaling problem beautifully. It fundamentally changes the cost structure of disaster recovery.
+
+[Speaker 1]
+That is huge. But, you know, natural disasters and hardware failures aren't even the primary threats anymore, are they? As a consultant, the vast majority of your DR conversations these days are going to revolve around ransomware.
+
+[Speaker 2]
+100%. Ransomware is the number one driver for these projects.
+
+[Speaker 1]
+And standard disaster recovery fails miserably against ransomware. Think about it. If a malicious payload executes at midnight and encrypts all your servers, and your DR tool is just blindly replicating data every second, you just replicated the encrypted garbage to your failover site.
+
+[Speaker 2]
+Yep. You perfectly mirrored the disaster. The malware is sitting right there in Azure.
+
+If you trigger a failover, you are just booting up compromised encrypted machines in the cloud. It doesn't help you at all.
+
+[Speaker 1]
+This is where the continuous data protection log becomes your most valuable asset.
+
+[Speaker 2]
+Absolutely. Because Jetstream isn't just taking daily snapshots, it is recording every single IO right as a continuous stream in that blob storage. When you declare a ransomware event, you don't just blindly failover to the latest state.
+
+You look at the log and you find the exact moment before the encryption started.
+
+[Speaker 1]
+You essentially rewind the tape. You say, hey, rehydrate the environment as it looked exactly at 11.58 PM, two minutes before the payload detonated.
+
+[Speaker 2]
+Exactly. But, and this is critical, you still have a problem. Even if you roll back to a point before the actual encryption happened, the initial malware infection, the sleeper agent, so to speak, is probably still present on the system.
+
+[Speaker 1]
+Oh, good point. It could have been sitting there for weeks.
+
+[Speaker 2]
+Right. So if you boot that VM up and attach it directly to the production network, it might just call out to its command and control server and detonate again. You need a safe point of return.
+
+[Speaker 1]
+And the documentation points at a really cool specific integration with VMware NSX-T to solve this. When you configure your Jetstream runbooks, you can dictate that these recovered VMs are rehydrated into isolated, micro-segmented network segments managed by NSX-T within AVS.
+
+[Speaker 2]
+Yes. These isolated segments basically act as a forensic sandbox.
+
+[Speaker 1]
+I love that.
+
+[Speaker 2]
+The virtual machines are powered on. They can communicate with each other on that specific segment, allowing your multi-tier applications to function, but they are completely severed from North-South traffic.
+
+[Speaker 1]
+Meaning they cannot reach the internet and the corporate network cannot reach them.
+
+[Speaker 2]
+Exactly. This gives the client's security operations center a pristine functional environment to run their forensic tools, scrub the remaining malware, and verify the integrity of the data before they change the routing tables and promote that environment back to production status.
+
+[Speaker 1]
+It is a complete lifecycle solution for ransomware recovery.
+
+[Speaker 2]
+It really is.
+
+[Speaker 1]
+Okay, so let's take a breath. We have the network architecture down. We understand the I.O. filtering. We've mapped the data flow. And we've optimized the storage economics with ANF. The theory is sound.
+
+Now we have to transition to the actual execution.
+
+[Speaker 2]
+It's time to actually build it.
+
+[Speaker 1]
+Right. We have to deploy this software into AVS. And this brings us right back to our biggest obstacle that we talked about earlier.
+
+We are only cloud admins.
+
+[Speaker 2]
+Yes, the luxury apartment problem.
+
+[Speaker 1]
+Exactly. The documentation says the on-premises installation is standard procedure. The client's admins have root access in their own data center.
+
+So they just download the JetStream bundle, deploy the MSA OVA via vCenter, and push the VAIO vbuys down to their local hosts using normal ES6 CLI commands. Easy. Piece of cake.
+
+[Speaker 2]
+But on the Azure side, you cannot SSH into the AVS hosts to install the VAIO filter VIBs. Microsoft has a lock on that boiler room door.
+
+[Speaker 1]
+So how do we get the VIBs installed?
+
+[Speaker 2]
+To bridge this privilege gap, Azure provides an automation fabric feature called RunCommand.
+
+[Speaker 1]
+RunCommand. Now, I've used RunCommand in native Azure for regular Windows VMs, where it injects PowerShell scripts through the Azure VM agent. But how does that work for AVS, where there is no Azure agent running inside the hypervisor?
+
+[Speaker 2]
+It's a bit different. In AVS, RunCommand utilizes the Azure Resource Manager backend. Microsoft has basically pre-built a library of highly privileged PowerShell CM bullets.
+
+When you select a command in the Azure portal, the Azure backend infrastructure reaches down into the AVS vCenter and ESX management planes using Microsoft's internal elevated credentials. It executes the configuration and then reports the status back to you.
+
+[Speaker 1]
+So it's an API proxy. You basically ask Azure to perform the privileged task on your behalf. OK, let's walk through the exact sequence a consultant will follow here.
+
+You log into the Azure portal, you navigate to the AVS private cloud resource, and on the left-hand navigation pane under the operations heading, you click on RunCommand.
+
+[Speaker 2]
+Yep. And from there, you select the Packages tab. This is where Microsoft curates all the approved third-party integrations.
+
+You are looking for the package named JSTR Configuration.
+
+[Speaker 1]
+JSTR Configuration. Got it. That's our master toolkit.
+
+Now, the documentation dictates a very specific order of operations. The first script to run is InvokePreflightJetToInstall.
+
+[Speaker 2]
+Yes. And pro tip, never skip the preflight check.
+
+[Speaker 1]
+I assume it checks for basics.
+
+[Speaker 2]
+Yeah. This mdlet queries the AVS cluster to validate that it meets the minimum hardware requirements. It checks for any conflicting virtual machine names that might block the appliance deployments, and it verifies the vSAN capacity.
+
+[Speaker 1]
+Better to fail early than halfway through. So once preflight returns a success message, we have to actually deploy the MSA appliance into the AVS vCenter. And the RunCommand package gives us two choices here.
+
+Install JetDR with DHCP or install JetDR with StatusIP. Right.
+
+[Speaker 2]
+If you choose the DHCP route, the automation is incredibly simple. You just have to have an NSXT network segment pre-configured with a DHCP server active.
+
+[Speaker 1]
+All right. Simple enough.
+
+[Speaker 2]
+You feed the cmdlet the name of the cluster, the target datastore, the network segment, and your administrative credentials. The script deploys the OVA, the DHCP server hands it an IP address, and it boots up.
+
+[Speaker 1]
+But, and this is a bit, but in my experience designing enterprise data centers, infrastructure architects absolutely despise using DHCP for core management appliances.
+
+[Speaker 2]
+Oh, they hate it.
+
+[Speaker 1]
+Right. And MSA is the brain of your disaster recovery. If a DHCP lease expires, or heaven forbid, a rogue DHCP server gets stood up, and the IP address of that appliance changes, the entire vCenter plug-in integration just breaks.
+
+[Speaker 2]
+Instantly.
+
+[Speaker 1]
+They want predictability, they want strict firewall rules, and they demand static IPs for infrastructure.
+
+[Speaker 2]
+Which means 90% of the time you will be using the installJDRwithStatusIP cmdlet. But, you have to know, this requires you to manually define all the networking parameters within the Azure portal UI before executing the script.
+
+[Speaker 1]
+So a lot more data entry.
+
+[Speaker 2]
+Yeah, you have to provide the netmask, the MSE, which is the static IP address for the MSA itself, the gateway IP, and crucially the DNS server IPs.
+
+[Speaker 1]
+Yes, the documentation is explicitly clear on DNS. And honestly, DNS is always the silent killer in hybrid cloud deployments.
+
+[Speaker 2]
+Always. It's always DNS.
+
+[Speaker 1]
+Always. If you configure a static IP, you must ensure that the DNS servers you specify can successfully resolve the fully qualified domain names of the AVS vCenter, all the ESXi hosts, the Azure storage account endpoints, and the Jetstream marketplace service.
+
+[Speaker 2]
+If DNS routing across your global reach circuit is flawed in any way, this script will fail and it won't explicitly tell you why, it'll just fail.
+
+[Speaker 1]
+So test your DNS first. OK, once the MSA is deployed successfully, the script automatically installs the VAIOVIB onto the default AVS cluster. However, if your client has provisioned multiple clusters within their AVS private cloud, you have to run a final cmdlet, right?
+
+EnableJDRforCluster.
+
+[Speaker 2]
+Exactly. You run that targeting each additional cluster by name to push the IO filters down to those specific hosts.
+
+[Speaker 1]
+Now, here is a practical question. Because I'm picturing this. If I am the consultant, I am sitting in a web browser, typing IP addresses into text boxes in the Azure portal and hitting a run button.
+
+The command just disappears into the Azure backend. How do I actually know if the VIB was installed or if the script hit an error and failed silently?
+
+[Speaker 2]
+This is a really crucial workflow for the consultant to understand. When you fill out the parameters for any run command, there is a mandatory text field labeled specify name for execution.
+
+[Speaker 1]
+OK, so I shouldn't just leave it as whatever default it populates. I should type something descriptive, like install JetDR static broad cluster one.
+
+[Speaker 2]
+Precisely. You give it a unique identifiable string. Because once you hit run, you immediately switch away from the packages tab and you click on the run execution statuses tab.
+
+You will see a table listing all historical commands. You look for that exact name you just typed.
+
+[Speaker 1]
+It provides like a live view of the backend process.
+
+[Speaker 2]
+Yeah, you see columns for started time and timestamp and most importantly, status. You are watching that status column. It will say executing and eventually it will either say succeeded or failed.
+
+[Speaker 1]
+And if it fails.
+
+[Speaker 2]
+If it says failed, the portal allows you to actually click on the execution name, which opens a side panel displaying the raw JSON output and the PowerShell error logs returned by the AVS backend.
+
+[Speaker 1]
+OK, so that is where you do your troubleshooting. That's where you find out your DNS is broken.
+
+[Speaker 2]
+Exactly.
+
+[Speaker 1]
+So let's say the script says succeeded. The data is flowing from on-prem to Azure Blob and you're feeling like an absolute hero. But this is exactly when the trap snaps shut on an unwary consultant.
+
+[Speaker 2]
+Oh, here we go. The gotchas.
+
+[Speaker 1]
+Because if you didn't check the architectural constraints before building all of this, you're going to encounter a limitation that fundamentally breaks the client's environment. We need to go through the consultant's survival guide.
+
+[Speaker 2]
+These are the undocumented assumptions that will completely derail a project. Let's start with the biggest architectural trap. AVS stretched clusters.
+
+[Speaker 1]
+Yes, stretched clusters. AVS offers a feature where a single private cloud cluster can span across two physically separate Azure availability zones within the same Azure region, right?
+
+[Speaker 2]
+Right. It uses synchronous vSAN replication across the zones. It's designed to provide 99.99% availability. So if an entire Azure data center building literally loses power, the cluster stays online in the other zone.
+
+[Speaker 1]
+It sounds like the ultimate resilience architecture. I mean, a client CTO will read about stretched clusters in a brochure and demand that you build one and then tell you to put JetStream on top of it to protect the on-prem data.
+
+[Speaker 2]
+And here's where you have to earn your consulting fee because the JetStream documentation explicitly states that JetStream DR is currently not supported on AVS stretched clusters, period.
+
+[Speaker 1]
+Wow. Not supported at all. Why is that?
+
+[Speaker 2]
+Well, the storage mechanics of a stretched vSAN cluster introduce really complex fault domains and latency profiles across the availability zones. The VAIO IO filters are just not designed to navigate those synchronous cross-zone write latencies while simultaneously trying to stream asynchronous data out to an object store. It breaks the replication logic.
+
+[Speaker 1]
+And the worst part is, once an AVS private cloud is deployed as a stretched cluster, you cannot simply flip a switch and convert it back to a standard cluster, can you?
+
+[Speaker 2]
+Nope. The deployment is permanent.
+
+[Speaker 1]
+Oh man. So if you let the client build a stretched cluster, JetStream is dead on arrival and you have to tear down the entire AVS environment and start over.
+
+[Speaker 2]
+Literally start from scratch. You have to force the CTO to choose on day one. Do you want multi-AZ high availability for your cloud workloads or do you JetStream disaster recovery for your on-prem workloads?
+
+You cannot have both in the same cluster.
+
+[Speaker 1]
+That is a critical conversation. Okay, the next gotcha involves the operational budget, specifically regarding host minimums. Now, a standard entry-level AVS cluster requires a minimum of three bare metal nodes, right?
+
+[Speaker 2]
+Right. The math makes sense there. Three nodes allow vSAN to maintain a primary data block on one node, a replica block on the second, and a witness component on the third to prevent split-brain scenarios.
+
+[Speaker 1]
+But the disaster recovery documentation states that while JetStream can operate on a three host cluster, it explicitly requires a minimum of four hosts per cluster to perform a software upgrade.
+
+[Speaker 2]
+Yes, four hosts minimum for upgrades.
+
+[Speaker 1]
+Let's break down the mechanics of why that fourth host is suddenly required just to run an update.
+
+[Speaker 2]
+So when JetStream releases a new software version or Microsoft patches the ESX hypervisor, the cluster has to undergo a rolling upgrade. To update a host, you must place it into maintenance mode.
+
+[Speaker 1]
+Right, and maintenance mode evacuates all the running virtual machines off the host. But it also has to deal with the vSAN storage components sitting on that physical server's local disk.
+
+[Speaker 2]
+Exactly. To maintain compliance with the vSAN storage policy, ensuring that your data is still protected against a hardware failure during the upgrade process, vSAN actually has to migrate and rebuild those data components onto the remaining active hosts in the cluster.
+
+[Speaker 1]
+So if you only have a three host cluster and you put one host into maintenance mode, you are suddenly down to two hosts.
+
+[Speaker 2]
+Yep, and two hosts cannot maintain the necessary quorum and capacity to safely reprotect the data. You are intentionally violating the AVS SLA.
+
+[Speaker 1]
+Wow. So you need that fourth host sitting there to provide the spare capacity and fault domain separation, so that when host number one goes offline, the data can rebuild onto host number four, maintaining full redundancy.
+
+[Speaker 2]
+Precisely.
+
+[Speaker 1]
+So imagine you deploy the three host minimum to save the client money. Six months later, Jetstream releases a critical security patch for the VAIO filter. You literally cannot install it.
+
+You have to go to the client and say, hey, I need you to request quota from Microsoft for a fourth bare metal node, pay thousands of dollars to deploy it, add it to the cluster, perform the upgrade, and then decommission it.
+
+[Speaker 2]
+It makes you look incredibly unprofessional.
+
+[Speaker 1]
+As a consultant, you must factor a permanent four node minimum into the initial architecture if they want seamless lifecycle management. Don't let them cheap out on three nodes if they want DR. Exactly.
+
+[Speaker 2]
+Moving down the checklist, we have to look at storage exclusions. What workloads can Jetstream not protect?
+
+[Speaker 1]
+The prerequisites specifically call out shared disks. The primary example given is Windows Failover Clustering or WFC.
+
+[Speaker 2]
+Right. A lot of legacy enterprise applications, particularly older Microsoft SQL Server deployments, rely on clustering architectures where two or more virtual machines show access to the exact same virtual disk, either via shared VMDKs or raw device mappings.
+
+[Speaker 1]
+And they use complex SCSI reservation locks to manage who can write to the disk at any given millisecond, right?
+
+[Speaker 2]
+Yes. But remember how Jetstream works. It replicates at the individual virtual machine level, intercepting IO through the VAIO filter on that specific VM's compute node.
+
+It is not designed to negotiate shared SCSI locking mechanisms across multiple clustered nodes simultaneously.
+
+[Speaker 1]
+So if you attempt to place a Windows Failover Cluster into a Jetstream protected domain, what happens?
+
+[Speaker 2]
+The replication will either corrupt the target disk or just fail entirely.
+
+[Speaker 1]
+Yikes. So during your initial environmental assessment, you must identify any VMs using shared disks. You have to explain to the client that these specific workloads require an application-level disaster recovery strategy like SQL always on availability groups, replicating natively over the network rather than hypervisor-level block replication.
+
+[Speaker 2]
+Right. You adapt the architecture around the limitation.
+
+[Speaker 1]
+Okay. This next gotcha is my absolute favorite because it proves how dangerous a single tiny checkbox can be in cloud architecture.
+
+[Speaker 2]
+Oh, I know the one you're talking about.
+
+[Speaker 1]
+We discussed earlier that the destination target for all this replication data is an Azure storage account configured as standard or premium blob storage.
+
+[Speaker 2]
+Right. And when you create a storage account in the Azure portal, you navigate through several tabs of configuration. On the Advanced tab, there's a small, seemingly innocuous checkbox labeled Enable Hierarchical Namespace.
+
+[Speaker 1]
+And the documentation emphatically screams, the Enable Hierarchical Namespace option on the blob isn't supported. Why does checking that one box destroy the entire deployment?
+
+[Speaker 2]
+Because that checkbox fundamentally alters the core API architecture of the storage account. Standard Azure blob is flat object storage. There are no real folders.
+
+A directory is just a prefix attached to the file name.
+
+[Speaker 1]
+Right.
+
+[Speaker 2]
+But when you enable a hierarchical namespace, you upgrade that storage account into Azure Data Lake Storage Gen 2.
+
+[Speaker 1]
+Data Lake Storage. That adds real physical directory structures and Pios X compliant access control lists.
+
+[Speaker 2]
+Right.
+
+[Speaker 1]
+Which are required for big data analytics tools like Hadoop to run efficiently.
+
+[Speaker 2]
+Exactly. And implementing those PSX features completely changes the API endpoints that the storage account uses to process read and write requests. Jetstream DR was engineered to communicate exclusively using the standard Azure blob REST API.
+
+[Speaker 1]
+So an ambitious cloud engineer on the client's team is setting up the prerequisites. They see the checkbox and think, hey, a hierarchical namespace sounds organized. I like folders.
+
+I'll turn that on.
+
+[Speaker 2]
+And boom, the Jetstream DRVA boots up, attempts to write the replication logs, hits an unrecognized API endpoint, and the connection drops.
+
+[Speaker 1]
+And you will spend days analyzing firewall logs and DNS resolutions, totally unaware that the entire integration is broken because of one checkbox that altered the storage protocol.
+
+[Speaker 2]
+In cloud architectures, you really have to read the fine print.
+
+[Speaker 1]
+You really do. OK, the final entry in the survival guide involves the most critical human element of disaster recovery, support boundaries. When the system breaks at 3.00 AM on a Sunday and the CEO is demanding answers, who do you actually call?
+
+[Speaker 2]
+This is a complex dynamic because you have Microsoft infrastructure running VMware software executing Jetstream code. The support boundary is fiercely delineated here. Microsoft only owns the automation execution within the Azure portal.
+
+[Speaker 1]
+Meaning, if you click the run command for invoke preflight JetDrink install and the script immediately throws an Azure Resource Manager timeout error before it even touches the AVS cluster, that is a Microsoft problem. You open a ticket through the standard Azure portal support plate.
+
+[Speaker 2]
+But Microsoft will not support the third-party software itself. If the VAIO filter isn't capturing IO correctly, if the MSA interface crashes, if the DRVA is failing to authenticate to the blob storage, or if a failover runbook halts at 80% during a drill.
+
+[Speaker 1]
+The Microsoft documentation is brutally clear on this point. It literally states customers aren't permitted to open Microsoft support tickets for partner product-related issues.
+
+[Speaker 2]
+So for all core software configuration, replication integrity, or runbook failures, you must bypass Microsoft entirely and contact Jetstream support directly via their specific AVS support channel.
+
+[Speaker 1]
+If you panic during an outage and open a SeveA ticket with Microsoft complaining that Jetstream isn't replicating, you will wait four hours for an engineer to get on a bridge, look at the logs, realize it's a Jetstream issue, and close the ticket.
+
+[Speaker 2]
+Yep, and you will have wasted irreplaceable time during a crisis. As a consultant, you must document these escalation paths and drill them into the client's operations team before you hand over the keys to the environment.
+
+[Speaker 1]
+Knowing exactly who owns which piece of the stack is just as important as knowing the PowerShell syntax to install it.
+
+[Speaker 2]
+Absolutely.
+
+[Speaker 1]
+Well, we have covered an immense amount of ground today. We started by mapping the Azure landing zone, understanding that ExpressRoute global reach is the mandatory bridge, and symmetric BGP routing is the absolute law to keep the stateful firewalls happy.
+
+[Speaker 2]
+We analyzed the restrictions of the AVS shared responsibility model. We explored how the cloud admin role prevents you from accessing the ESXi boiler room and why that breaks traditional agent-based DR tools.
+
+[Speaker 1]
+We deconstructed the Jetstream architecture to see how it overcomes those limits. MSA acts as air traffic control, the DRVA handles the heavy lifting, and the VAIO filters seamlessly intercept IO at the hypervisor level.
+
+[Speaker 2]
+We broke down the mechanics of snapshots and delta disks to understand exactly why VAIO's inline interception prevents application stunt times and enables near-zero RPOs.
+
+[Speaker 1]
+We traced the exact data pipeline from an on-premises protected domain into the highly durable, low-cost vault of Azure Blob Storage. We explored the storage economics of rehydration and how mounting external Azure NetApp files to your AVS hosts can prevent a massive compute node billing shock during a failover.
+
+[Speaker 2]
+We mapped out a modern ransomware recovery strategy, utilizing NSX-T isolated sandboxes to perform secure forensics and find that clean point of return before attaching the workloads back to the production network.
+
+[Speaker 1]
+We walked through the installation mechanics, leveraging the Azure Run Command API proxy to execute privileged PowerShell CMDlets, overcoming the cloud admin restrictions to deploy the software via automated trackable executions.
+
+[Speaker 2]
+And finally, we navigated the minefield of architectural gotchas. We learned to veto stretched clusters, to budget for the permanent four-host upgrade minimum, to rely on SQL Alwayson for shared disks, to run far away from the hierarchical namespace checkbox, and to clearly define the boundaries.
+
+[Speaker 1]
+You are now equipped with the architectural depth and the practical foresight necessary to execute this integration. You don't just know what the components are. You know the underlying mechanics of how they interact within the strict boundaries of a managed cloud.
+
+[Speaker 2]
+It's a completely different level of consulting.
+
+[Speaker 1]
+Thank you so much for joining us on this deep dive. We know your time is valuable, and we hope this analysis has given you the insight you need to lead your client's project with absolute confidence.
+
+[Speaker 2]
+But before we wrap up, I want to leave you with a broader architectural concept to consider as you build these environments. We discussed the traditional comfort of physical hardware at the very beginning, the desire to own the server rack, and the storage arrays. But look at what this Jetstream and AVS architecture actually achieves.
+
+It completely decouples the compute layer from the disaster recovery storage layer.
+
+[Speaker 1]
+Right, the winter wardrobe analogy. Storing the data in a cheap unit and only renting the expensive apartment when it snows.
+
+[Speaker 2]
+Exactly. If an enterprise can continually stream the exact real-time state of their entire data center into a dormant, incredibly low-cost object bucket, and that data is just waiting, ready to be rehydrated onto any bare metal hardware in any Azure region in the world, strictly on demand, it begs a massive question for the future of IT consulting.
+
+[Speaker 1]
+What's that?
+
+[Speaker 2]
+Does the traditional concept of an enterprise building, powering, cooling, and maintaining a massive active standby secondary data center become entirely obsolete?
+
+[Speaker 1]
+Wow. Why buy this second building if you can just materialize it out of the cloud the moment you need it?
+
+[Speaker 2]
+It changes the entire financial model of resilience.
+
+[Speaker 1]
+Something to think about as you design your client's next infrastructure. Until next time.
