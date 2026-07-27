@@ -132,8 +132,8 @@ desktop.ini
 
 .assets/temp/
 *.code-workspace
-.ini
-.zip
+*.ini
+*.zip
 
 # -------------------------------------------------------------------
 # End of file
