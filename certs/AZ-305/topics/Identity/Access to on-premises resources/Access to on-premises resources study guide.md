@@ -291,17 +291,24 @@ flowchart TD
 - If an unchanged on-premises app authorizes only through AD membership, use [group provisioning to AD DS](https://learn.microsoft.com/en-us/entra/identity/hybrid/cloud-sync/govern-on-premises-groups); if it maintains accounts in SQL, LDAP, or another repository, use [application provisioning](https://learn.microsoft.com/en-us/entra/identity/app-provisioning/on-premises-application-provisioning-architecture).
 - If administrators need time-bound access to a critical private app, combine per-app Private Access with [PIM-managed group membership](https://learn.microsoft.com/en-us/entra/global-secure-access/how-to-configure-global-access-with-pim).
 
+> **Test yourself**
+>
+> - A requirement includes an HTTPS app, an SMB share, and an RDP endpoint. Can one Application Proxy design satisfy it?
+> - A legacy app needs schema extensions after migration to Azure. Is Domain Services sufficient?
+>
+> **Answer guidance:** No: Application Proxy covers the web app, while [Private Access](https://learn.microsoft.com/en-us/entra/global-secure-access/concept-private-access) or another private path is needed for nonweb resources. No: schema extension requires [self-managed AD DS rather than Domain Services](https://learn.microsoft.com/en-us/entra/identity/domain-services/compare-identity-solutions).
+
 ## 6. Service and feature comparison tables
 
 ### 6.1 Choose the access front door
 
 | Option | Best fit | Authorization control point | Strengths | Important limits |
 |---|---|---|---|---|
-| Microsoft Entra Application Proxy | Remotely publish an on-premises web application | Enterprise-app assignment and Conditional Access before the connector; the app still enforces its own permissions | No inbound firewall opening, Entra preauthentication, SSO options, connector groups | Not a general TCP/UDP tunnel; passthrough removes cloud preauthentication benefits |
-| Microsoft Entra Private Access | Give users least-privilege access to private apps and resources over arbitrary supported ports/protocols | Enterprise-app assignment, Conditional Access, and app segments | Identity-centric replacement for broad VPN access; Quick Access aids migration; per-app access supports segmentation | Requires Global Secure Access client-based traffic acquisition for private traffic today; review DNS, routing, and platform limitations |
-| Traditional VPN or private network | Broad network reachability, device-to-site access, or protocols/topologies outside Private Access support | VPN policy plus downstream AD/application ACLs | Mature network compatibility and broad protocol support | Network admission does not itself provide per-application authorization; broad reach increases lateral-movement exposure |
-| Secure hybrid access partner | Existing ADC, VPN, ZTNA, or network appliance integrated with Entra | Entra policy plus partner enforcement | Preserves required partner capabilities while adding Entra controls | Architecture, support, licensing, and policy behavior vary by partner |
-| Azure Arc-enabled servers SSH | Administrative SSH or PowerShell remoting to an Arc-enabled server | Azure control-plane permission to connect; OS authorization remains separate | No public IP or inbound SSH port; auditable Azure-mediated connection | Entra OS login is Linux-only; it is an administration path, not an end-user application publishing service |
+| [Microsoft Entra Application Proxy](https://learn.microsoft.com/en-us/entra/identity/app-proxy/overview-what-is-app-proxy) | Remotely publish an on-premises web application | Enterprise-app assignment and Conditional Access before the connector; the app still enforces its own permissions | No inbound firewall opening, Entra preauthentication, SSO options, connector groups | Not a general TCP/UDP tunnel; passthrough removes cloud preauthentication benefits |
+| [Microsoft Entra Private Access](https://learn.microsoft.com/en-us/entra/global-secure-access/concept-private-access) | Give users least-privilege access to private apps and resources over arbitrary supported ports/protocols | Enterprise-app assignment, Conditional Access, and app segments | Identity-centric replacement for broad VPN access; Quick Access aids migration; per-app access supports segmentation | Requires Global Secure Access client-based traffic acquisition for private traffic today; review DNS, routing, and platform limitations |
+| [Traditional VPN or private network](https://learn.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-about-vpngateways) | Broad network reachability, device-to-site access, or protocols/topologies outside Private Access support | VPN policy plus downstream AD/application ACLs | Mature network compatibility and broad protocol support | Network admission does not itself provide per-application authorization; broad reach increases lateral-movement exposure |
+| [Secure hybrid access partner](https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/secure-hybrid-access) | Existing ADC, VPN, ZTNA, or network appliance integrated with Entra | Entra policy plus partner enforcement | Preserves required partner capabilities while adding Entra controls | Architecture, support, licensing, and policy behavior vary by partner |
+| [Azure Arc-enabled servers SSH](https://learn.microsoft.com/en-us/azure/azure-arc/servers/ssh-arc-overview) | Administrative SSH or PowerShell remoting to an Arc-enabled server | Azure control-plane permission to connect; OS authorization remains separate | No public IP or inbound SSH port; auditable Azure-mediated connection | Entra OS login is Linux-only; it is an administration path, not an end-user application publishing service |
 
 [Application Proxy](https://learn.microsoft.com/en-us/entra/identity/app-proxy/overview-what-is-app-proxy) and [Private Access](https://learn.microsoft.com/en-us/entra/global-secure-access/concept-private-access) both use outbound connectors, but they solve different scopes: the former publishes web applications and the latter provides identity-aware private network access. A [VPN](https://learn.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-about-vpngateways) establishes private connectivity; authorization must still be designed at the app, server, share, database, or directory layer. [Secure hybrid access](https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/secure-hybrid-access) is the integration path when partner infrastructure is a requirement.
 
@@ -309,10 +316,10 @@ flowchart TD
 
 | Directory option | Select when | Do not select when |
 |---|---|---|
-| Existing on-premises AD DS | The resource remains on-premises and already depends on Kerberos, NTLM, LDAP, GPO, machine accounts, or AD security groups | The goal is to eliminate the on-premises directory dependency without changing the application |
-| Microsoft Entra Domain Services | A legacy workload is moving into Azure and needs managed domain join, LDAP, Kerberos/NTLM, or GPO without customer-managed domain controllers | The workload needs Domain Admin/Enterprise Admin, schema extensions, account-based KCD, or an unrestricted extension of the on-premises forest |
-| Self-managed AD DS on Azure VMs | Full domain control, schema extension, broader trust design, or unsupported managed-domain features are mandatory | The operational burden of domain-controller patching, backup, security, and recovery is unjustified |
-| Microsoft Entra ID directly | The application can use modern federation/OIDC/SAML and app roles or claims | The unchanged application only understands AD DS protocols or local authorization repositories |
+| [Existing on-premises AD DS](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/plan/understanding-the-active-directory-logical-model) | The resource remains on-premises and already depends on Kerberos, NTLM, LDAP, GPO, machine accounts, or AD security groups | The goal is to eliminate the on-premises directory dependency without changing the application |
+| [Microsoft Entra Domain Services](https://learn.microsoft.com/en-us/entra/identity/domain-services/overview) | A legacy workload is moving into Azure and needs managed domain join, LDAP, Kerberos/NTLM, or GPO without customer-managed domain controllers | The workload needs Domain Admin/Enterprise Admin, schema extensions, account-based KCD, or an unrestricted extension of the on-premises forest |
+| [Self-managed AD DS on Azure VMs](https://learn.microsoft.com/en-us/entra/identity/domain-services/compare-identity-solutions) | Full domain control, schema extension, broader trust design, or unsupported managed-domain features are mandatory | The operational burden of domain-controller patching, backup, security, and recovery is unjustified |
+| [Microsoft Entra ID directly](https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/plan-sso-deployment) | The application can use modern federation/OIDC/SAML and app roles or claims | The unchanged application only understands AD DS protocols or local authorization repositories |
 
 The [Microsoft identity solution comparison](https://learn.microsoft.com/en-us/entra/identity/domain-services/compare-identity-solutions) is the decisive source. Domain Services is a standalone managed domain with one-way synchronization from Entra ID; it is not a replica of the on-premises forest. Only identities and selected credential material synchronize, while on-premises OUs, GPOs, computer objects, and other domain configuration do not. ([Domain Services synchronization](https://learn.microsoft.com/en-us/entra/identity/domain-services/synchronization))
 
@@ -320,13 +327,13 @@ The [Microsoft identity solution comparison](https://learn.microsoft.com/en-us/e
 
 | Pattern | Use it for | Key design concern |
 |---|---|---|
-| Enterprise-app assignment | Who may cross the Entra access gate | Set “assignment required,” prefer groups, and remember assignment is not the same as the app’s internal authorization |
-| Token claims or app roles | Modern apps that consume Entra tokens | Keep role semantics stable; avoid token bloat from excessive group claims |
-| Cloud Sync group provisioning to AD DS | An on-premises app authorizes through AD security-group membership | Direct membership and scale limits; group scope/type; agent resilience; removal behavior |
-| Provisioning agent plus ECMA/SCIM connector | An on-premises app has its own LDAP, SQL, REST, SOAP, or other user store | Attribute mapping, matching rules, connector credentials, reconciliation, and high availability |
-| Entitlement management/access packages | Request, approval, expiration, external-user, and multi-resource lifecycle | Licensing, sponsor/reviewer design, separation of duties, and removal validation |
-| Access reviews | Periodic proof that continuing access is justified | Reviewer independence, fallback reviewers, auto-apply decisions, and treatment of nonresponse |
-| AD security groups and resource ACLs | File shares, Windows resources, and legacy apps that use Windows authorization | Use role-based groups and least privilege; protect privileged tiers and avoid direct-user ACLs |
+| [Enterprise-app assignment](https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/ways-users-get-assigned-to-applications) | Who may cross the Entra access gate | Set “assignment required,” prefer groups, and remember assignment is not the same as the app’s internal authorization |
+| [Token claims or app roles](https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/plan-sso-deployment) | Modern apps that consume Entra tokens | Keep role semantics stable; avoid token bloat from excessive group claims |
+| [Cloud Sync group provisioning to AD DS](https://learn.microsoft.com/en-us/entra/identity/hybrid/cloud-sync/govern-on-premises-groups) | An on-premises app authorizes through AD security-group membership | Direct membership and scale limits; group scope/type; agent resilience; removal behavior |
+| [Provisioning agent plus ECMA/SCIM connector](https://learn.microsoft.com/en-us/entra/identity/app-provisioning/on-premises-application-provisioning-architecture) | An on-premises app has its own LDAP, SQL, REST, SOAP, or other user store | Attribute mapping, matching rules, connector credentials, reconciliation, and high availability |
+| [Entitlement management/access packages](https://learn.microsoft.com/en-us/entra/id-governance/entitlement-management-access-package-create) | Request, approval, expiration, external-user, and multi-resource lifecycle | Licensing, sponsor/reviewer design, separation of duties, and removal validation |
+| [Access reviews](https://learn.microsoft.com/en-us/entra/id-governance/access-reviews-overview) | Periodic proof that continuing access is justified | Reviewer independence, fallback reviewers, auto-apply decisions, and treatment of nonresponse |
+| [AD security groups and resource ACLs](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/understand-security-groups) | File shares, Windows resources, and legacy apps that use Windows authorization | Use role-based groups and least privilege; protect privileged tiers and avoid direct-user ACLs |
 
 An enterprise application is normally available to authenticated tenant users unless assignment is required; enabling the requirement makes assignment the cloud admission gate for supported applications. ([Restrict an app to assigned users](https://learn.microsoft.com/en-us/entra/identity-platform/howto-restrict-your-app-to-a-set-of-users)) The back-end resource must still evaluate a token role, AD group, local role, share/NTFS ACL, or application permission. For lifecycle automation, [Cloud Sync group provisioning](https://learn.microsoft.com/en-us/entra/identity/hybrid/cloud-sync/govern-on-premises-groups) targets AD DS groups, while the [on-premises provisioning architecture](https://learn.microsoft.com/en-us/entra/identity/app-provisioning/on-premises-application-provisioning-architecture) reaches application-specific repositories.
 
@@ -334,19 +341,19 @@ An enterprise application is normally available to authenticated tenant users un
 
 | Requirement phrase | Likely answer family |
 |---|---|
-| “Publish an internal web application without inbound firewall ports” | Application Proxy |
-| “Access private TCP/UDP resources by FQDN/IP and port with per-app Conditional Access” | Private Access |
-| “The migrated application needs LDAP/Kerberos but no domain-controller management” | Domain Services |
-| “The application checks membership in an on-premises AD group” | Cloud Sync group provisioning plus AD ACLs/app roles |
-| “Users need accounts created in an on-premises SQL/LDAP application” | Entra provisioning agent and appropriate connector |
-| “Request, approve, expire, and review access” | Entitlement management plus access reviews |
-| “Connect to an on-premises server without exposing SSH/RDP inbound” | Arc SSH, subject to OS and authentication requirements |
+| “Publish an internal web application without inbound firewall ports” | [Application Proxy](https://learn.microsoft.com/en-us/entra/identity/app-proxy/overview-what-is-app-proxy) |
+| “Access private TCP/UDP resources by FQDN/IP and port with per-app Conditional Access” | [Private Access](https://learn.microsoft.com/en-us/entra/global-secure-access/concept-private-access) |
+| “The migrated application needs LDAP/Kerberos but no domain-controller management” | [Domain Services](https://learn.microsoft.com/en-us/entra/identity/domain-services/overview) |
+| “The application checks membership in an on-premises AD group” | [Cloud Sync group provisioning](https://learn.microsoft.com/en-us/entra/identity/hybrid/cloud-sync/govern-on-premises-groups) plus AD ACLs/app roles |
+| “Users need accounts created in an on-premises SQL/LDAP application” | [Entra provisioning agent and appropriate connector](https://learn.microsoft.com/en-us/entra/identity/app-provisioning/on-premises-application-provisioning-architecture) |
+| “Request, approve, expire, and review access” | [Entitlement management](https://learn.microsoft.com/en-us/entra/id-governance/entitlement-management-access-package-create) plus access reviews |
+| “Connect to an on-premises server without exposing SSH/RDP inbound” | [Arc SSH](https://learn.microsoft.com/en-us/azure/azure-arc/servers/ssh-arc-overview), subject to OS and authentication requirements |
 
 ## 7. Architecture patterns
 
 ### 7.1 Pattern A — Publish a legacy web application securely
 
-\`\`\`mermaid
+```mermaid
 flowchart LR
     U[Remote user] --> E[Microsoft Entra ID]
     E --> CA[Conditional Access]
@@ -357,7 +364,7 @@ flowchart LR
     C2 --> W
     W --> AD[AD DS / app authorization]
     G[Entra group assignment] --> E
-\`\`\`
+```
 
 Use this when the resource is a web app and the requirement emphasizes Entra preauthentication, Conditional Access, no inbound connection, and optional SSO. Connectors establish outbound connections, and a connector group routes the published app to an appropriate network location. ([Application Proxy security](https://learn.microsoft.com/en-us/entra/identity/app-proxy/application-proxy-security), [connector groups](https://learn.microsoft.com/en-us/entra/global-secure-access/concept-connector-groups))
 
@@ -370,9 +377,11 @@ Authorization is layered:
 
 For an Integrated Windows Authentication app, configure [Kerberos constrained delegation](https://learn.microsoft.com/en-us/entra/identity/app-proxy/how-to-configure-sso-with-kcd) only after validating SPNs, delegation, identity mapping, and domain trust. Do not choose passthrough merely to avoid fixing SSO: with passthrough, the app—not Entra—authenticates the initial request.
 
+**Pattern assessment:** Required services are Entra ID, Application Proxy, connectors, and the existing web app/directory. Its strengths are preauthentication, no inbound listener, and flexible SSO; its weaknesses and failure modes include web-only scope, unsupported URL/CORS behavior, connector/DNS/KCD failure, and back-end outage. Cost includes P1/P2 entitlement, connector hosts, certificates, and logging. Operations must own connector patching, certificate renewal, and synthetic tests. Secure it with assignment, Conditional Access, isolated connector reachability, and back-end least privilege; monitor Entra sign-ins, audit changes, connector events, and application authorization logs.
+
 ### 7.2 Pattern B — Replace broad VPN access with per-app private access
 
-\`\`\`mermaid
+```mermaid
 flowchart LR
     U[User on managed device] --> GC[Global Secure Access client]
     GC --> EDGE[Global Secure Access]
@@ -383,15 +392,17 @@ flowchart LR
     CG --> S2[Private app segment: FQDN:port]
     S1 --> ACL[AD/app/resource authorization]
     S2 --> ACL
-\`\`\`
+```
 
 Use [Quick Access](https://learn.microsoft.com/en-us/entra/global-secure-access/how-to-configure-quick-access) to migrate a known broad network scope or validate connectivity, then create [per-app access](https://learn.microsoft.com/en-us/entra/global-secure-access/how-to-configure-per-app-access) segments for least privilege. A segment describes destination, port, and protocol; assigning the associated enterprise app governs who receives that route. The destination itself still requires an authorization mechanism such as an AD group, database role, or application ACL.
 
 Before selecting this pattern, check [current known limitations](https://learn.microsoft.com/en-us/entra/global-secure-access/reference-current-known-limitations), especially client acquisition, DNS over HTTPS/secure DNS, NRPT, overlapping segments, local subnet behavior, and unsupported remote-network acquisition for private traffic. A technically correct service choice can still fail if the client or name-resolution assumptions conflict with the environment.
 
+**Pattern assessment:** Required services are Private Access, Global Secure Access clients, connectors, enterprise apps, and the existing resource identity system. Its strength is per-app segmentation across supported private protocols; its weaknesses and failure modes are endpoint/platform dependency, route or DNS conflict, overlap, connector loss, and target-side denial. Cost includes Private Access/Suite licensing, client deployment, connector hosts, coexistence, and telemetry. Operations must inventory segments, manage client versions, and test route acquisition. Secure with direct group assignment, Conditional Access, narrow segments, and resource ACLs; monitor traffic, audit, client, connector, and target logs.
+
 ### 7.3 Pattern C — Govern a legacy app that authorizes by AD group
 
-\`\`\`mermaid
+```mermaid
 flowchart LR
     R[User requests access package] --> AP[Approval and expiration]
     AP --> EG[Entra security group]
@@ -399,9 +410,11 @@ flowchart LR
     CS --> AG[On-premises AD security group]
     AG --> APP[Legacy app / file ACL]
     AR[Access review] --> EG
-\`\`\`
+```
 
 This pattern separates governance from enforcement. [Entitlement management](https://learn.microsoft.com/en-us/entra/id-governance/entitlement-management-access-package-create) controls request, approval, assignment duration, and policy. [Cloud Sync](https://learn.microsoft.com/en-us/entra/identity/hybrid/cloud-sync/govern-on-premises-groups) provisions the membership that the unchanged application understands. AD DS or the application then enforces access. Validate deprovisioning end to end: removal from the access package must ultimately remove effective access, not merely the cloud group membership.
+
+**Pattern assessment:** Required services are ID Governance, an Entra security group, Cloud Sync agents, AD DS, and the target app/ACL. Its strength is governed lifecycle without rewriting the legacy authorization model; weaknesses and failure modes include license dependency, unsupported nesting/scale, provisioning delay, agent failure, and stale sessions. Cost covers governance entitlement, agent hosts, and review operations. Operations own mappings, approvals, reconciliation, and removal tests. Secure through separation of requester/approver/reviewer and role-based groups; monitor access-package audits, review results, provisioning logs, AD changes, and target access.
 
 ### 7.4 Pattern D — Provide a legacy directory to an Azure-migrated workload
 
@@ -409,11 +422,15 @@ Deploy [Microsoft Entra Domain Services](https://learn.microsoft.com/en-us/entra
 
 For cross-forest resource access, validate whether a resource forest and outbound trust meet the need. Forest trust capabilities require Enterprise or Premium and have explicit direction and count constraints. ([Forest trust concepts](https://learn.microsoft.com/en-us/entra/identity/domain-services/concepts-forest-trust)) If the app requires unsupported trust behavior, schema changes, or Domain Admin, select self-managed AD DS instead.
 
+**Pattern assessment:** Required services are Domain Services, VNet/DNS, synchronized Entra identities, and the Azure-hosted legacy workload. Its strength is managed LDAP/Kerberos/NTLM/GPO; its weakness is restricted administration and one-way identity/configuration behavior. Failure modes include missing credential hashes, DNS errors, trust limitations, and a nonredundant workload. Cost is hourly by SKU plus replicas, network, and workload resources. Operations own app joins, DNS, secure LDAP certificates, group policy, and recovery exercises. Secure network access and privileged groups; monitor managed-domain health plus workload authentication and authorization.
+
 ### 7.5 Pattern E — Administer a server through Azure Arc
 
 Onboard the server to Azure Arc, authorize the operator to initiate the connection at the Azure resource scope, and separately grant the required operating-system login privilege. [Arc SSH](https://learn.microsoft.com/en-us/azure/azure-arc/servers/ssh-arc-overview) avoids a public IP and inbound SSH port. For Linux Entra login, Azure VM Administrator Login or Azure VM User Login roles govern OS login; Owner or Contributor permits the connection operation but does not automatically grant Entra OS login.
 
 This pattern is for administrative access, not for publishing a business app. Windows supports Arc SSH with local accounts; Entra user login through Arc SSH is currently Linux-only.
+
+**Pattern assessment:** Required services are Azure Arc-enabled Servers, a healthy Connected Machine agent, SSH daemon, Azure RBAC, and—on Linux—the Entra SSH login capability. Its strength is Azure-mediated administration without public IP or inbound SSH; its weaknesses and failure modes are agent/Azure egress dependency, Linux-only Entra login, and separate OS permission requirements. Cost includes Arc-related services and monitoring ingestion. Operations own onboarding, agent/extension maintenance, local recovery, and role reviews. Secure with least-scope RBAC and OS roles; monitor Azure activity, Arc connection state, SSH/auth logs, and privileged actions.
 
 ## 8. Implementation awareness for architects
 
@@ -462,6 +479,13 @@ Create policies in report-only mode, exclude emergency-access identities, analyz
 
 Do not use Conditional Access as the only authorization layer. It decides whether an authentication session may reach a resource under current conditions; it does not replace an application's business roles, AD ACLs, database grants, or OS permissions.
 
+> **Test yourself**
+>
+> - During implementation, which should be tested separately: cloud assignment or target authorization?
+> - Why should a Private Access proof of concept include DNS and secure-DNS behavior?
+>
+> **Answer guidance:** Test both gates separately because [application assignment](https://learn.microsoft.com/en-us/entra/identity-platform/howto-restrict-your-app-to-a-set-of-users) does not prove target permission. DNS and acquisition behavior are explicit [Private Access limitations](https://learn.microsoft.com/en-us/entra/global-secure-access/reference-current-known-limitations) that can invalidate the design.
+
 ## 9. Security, governance, and compliance considerations
 
 ### Apply Zero Trust at every gate
@@ -499,19 +523,21 @@ Connector and agent hosts bridge the cloud control plane to private resources. T
 
 Do not assume every access technology supports guests identically. Validate tenant, client, device, licensing, and resource-side identity behavior using the current [Private Access external-user guidance](https://learn.microsoft.com/en-us/entra/global-secure-access/concept-external-user-access). For Application Proxy, external users can be assigned to enterprise applications, but back-end IWA/KCD may still require an identity the on-premises domain can resolve; guest or consumer identities do not automatically become AD accounts. ([Application Proxy troubleshooting](https://learn.microsoft.com/en-us/entra/identity/app-proxy/application-proxy-troubleshoot))
 
+> **Exam tip:** Conditional Access and enterprise-app assignment protect the cloud admission point, but compliance is incomplete unless the private resource also enforces least privilege and the complete access trail is auditable. ([Conditional Access](https://learn.microsoft.com/en-us/entra/identity/conditional-access/overview), [Windows access control](https://learn.microsoft.com/en-us/windows/security/identity-protection/access-control/access-control))
+
 ## 10. Resiliency, availability, and disaster recovery considerations
 
 Authorization designs fail both closed and open. A connector outage may block legitimate work; an emergency bypass may unintentionally create excessive access. Document the desired behavior for each dependency.
 
 | Dependency | Resilient design | Failure question to test |
 |---|---|---|
-| Application Proxy/Private Access connector | At least two connectors per production group; separate hosts; network reachability to the same required apps | Does traffic fail over, and does an unhealthy connector leave the serving pool? |
-| DNS and certificates | Redundant resolvers, monitored certificate expiry, documented internal/external names | Can clients and connectors resolve the same intended target after failover? |
-| AD DS/Kerberos | Multiple domain controllers/sites, correct SPNs, time sync, tested trust paths | Does authorization and KCD continue when a DC/site is unavailable? |
-| Domain Services | Built-in managed replicas; additional replica sets for supported higher-SKU regional needs; application redundancy | Does the application survive loss of an instance, zone, or region? |
-| Cloud Sync/provisioning agent | Supported multi-agent topology and documented active/passive or active/active behavior for the chosen connector | Does provisioning resume without duplication, and how are removals reconciled? |
-| Arc-enabled server | Healthy Connected Machine agent and outbound Azure connectivity; local emergency procedure | What happens when the server is disconnected from Azure for an extended period? |
-| Governance | Alternate approvers/reviewers, emergency process, audit trail | Can urgent access be granted without permanently bypassing policy? |
+| [Application Proxy/Private Access connector](https://learn.microsoft.com/en-us/entra/global-secure-access/concept-connector-groups) | At least two connectors per production group; separate hosts; network reachability to the same required apps | Does traffic fail over, and does an unhealthy connector leave the serving pool? |
+| [DNS and certificates](https://learn.microsoft.com/en-us/entra/identity/app-proxy/application-proxy-network-topology) | Redundant resolvers, monitored certificate expiry, documented internal/external names | Can clients and connectors resolve the same intended target after failover? |
+| [AD DS/Kerberos](https://learn.microsoft.com/en-us/entra/identity/app-proxy/how-to-configure-sso-with-kcd) | Multiple domain controllers/sites, correct SPNs, time sync, tested trust paths | Does authorization and KCD continue when a DC/site is unavailable? |
+| [Domain Services](https://learn.microsoft.com/en-us/entra/identity/domain-services/concepts-replica-sets) | Built-in managed replicas; additional replica sets for supported higher-SKU regional needs; application redundancy | Does the application survive loss of an instance, zone, or region? |
+| [Cloud Sync/provisioning agent](https://learn.microsoft.com/en-us/entra/identity/app-provisioning/on-premises-application-provisioning-architecture) | Supported multi-agent topology and documented active/passive or active/active behavior for the chosen connector | Does provisioning resume without duplication, and how are removals reconciled? |
+| [Arc-enabled server](https://learn.microsoft.com/en-us/azure/azure-arc/servers/troubleshoot-connectivity) | Healthy Connected Machine agent and outbound Azure connectivity; local emergency procedure | What happens when the server is disconnected from Azure for an extended period? |
+| [Governance](https://learn.microsoft.com/en-us/entra/id-governance/access-reviews-overview) | Alternate approvers/reviewers, emergency process, audit trail | Can urgent access be granted without permanently bypassing policy? |
 
 Microsoft recommends multiple Application Proxy connectors and describes resilient on-premises access patterns in the [Entra resilience guidance](https://learn.microsoft.com/en-us/entra/architecture/resilience-on-premises-access). Connector groups provide service-side load distribution and isolation, but the back-end application, domain, DNS, and network must also be redundant. ([Connector groups](https://learn.microsoft.com/en-us/entra/global-secure-access/concept-connector-groups))
 
@@ -525,17 +551,19 @@ Do not answer licensing questions from memory alone in a real design; verify the
 
 | Component | Cost/licensing driver | Often-overlooked cost |
 |---|---|---|
-| Application Proxy | Microsoft Entra ID P1 or P2 licensing for users | Connector Windows Server hosts, operations, certificates, and log retention |
-| Conditional Access | P1 for common policies; P2 for risk-based capabilities | Pilot/support effort and stronger-authentication deployment |
-| Private Access | Eligible P1/P2 prerequisite plus Microsoft Entra Private Access or Microsoft Entra Suite entitlement | Client deployment, connectors, network egress, migration coexistence, and monitoring |
-| Entitlement management/access reviews | P2, ID Governance, or Suite capabilities depending on feature and user population | Reviewer/approver operations and workflow ownership |
-| Domain Services | Hourly charge by SKU; replica sets add charges | Network, secure LDAP certificates, migrated workload redundancy, and backup/restore constraints |
-| Self-managed AD DS | VM, disk, backup, network, and operations | Patching, monitoring, security hardening, recovery testing, and specialist labor |
-| Cloud Sync/app provisioning | Entra licensing and agent hosts vary by scenario | Connector development/support, reconciliation, and target-system administration |
-| Azure Arc SSH | Arc-enabled server and related Azure services | Log Analytics/monitoring ingestion and retention |
-| VPN/partner ZTNA | Gateway/appliance, throughput, user or site licensing | Public IP, egress, support contracts, redundant appliances, and broad-network risk |
+| [Application Proxy](https://learn.microsoft.com/en-us/entra/identity/domain-services/deploy-azure-app-proxy) | Microsoft Entra ID P1 or P2 licensing for users | Connector Windows Server hosts, operations, certificates, and log retention |
+| [Conditional Access](https://learn.microsoft.com/en-us/entra/identity/conditional-access/overview) | P1 for common policies; P2 for risk-based capabilities | Pilot/support effort and stronger-authentication deployment |
+| [Private Access](https://learn.microsoft.com/en-us/entra/fundamentals/licensing) | Eligible P1/P2 prerequisite plus Microsoft Entra Private Access or Microsoft Entra Suite entitlement | Client deployment, connectors, network egress, migration coexistence, and monitoring |
+| [Entitlement management/access reviews](https://learn.microsoft.com/en-us/entra/id-governance/licensing-fundamentals) | P2, ID Governance, or Suite capabilities depending on feature and user population | Reviewer/approver operations and workflow ownership |
+| [Domain Services](https://learn.microsoft.com/en-us/entra/fundamentals/licensing) | Hourly charge by SKU; replica sets add charges | Network, secure LDAP certificates, migrated workload redundancy, and backup/restore constraints |
+| [Self-managed AD DS](https://learn.microsoft.com/en-us/entra/identity/domain-services/compare-identity-solutions) | VM, disk, backup, network, and operations | Patching, monitoring, security hardening, recovery testing, and specialist labor |
+| [Cloud Sync/app provisioning](https://learn.microsoft.com/en-us/entra/identity/app-provisioning/on-premises-application-provisioning-architecture) | Entra licensing and agent hosts vary by scenario | Connector development/support, reconciliation, and target-system administration |
+| [Azure Arc SSH](https://learn.microsoft.com/en-us/azure/azure-arc/servers/ssh-arc-overview) | Arc-enabled server and related Azure services | Log Analytics/monitoring ingestion and retention |
+| [VPN/partner ZTNA](https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/secure-hybrid-access) | Gateway/appliance, throughput, user or site licensing | Public IP, egress, support contracts, redundant appliances, and broad-network risk |
 
 The cheapest license is not necessarily the lowest-cost architecture. A managed service can eliminate inbound appliances and operational toil, while a seemingly free AD-based pattern may preserve domain-controller, VPN, patching, and incident-response costs. Conversely, do not buy Private Access for a single web app if Application Proxy already satisfies the requirements and licensing.
+
+> **Exam tip:** Match the license to the required control: Application Proxy and common Conditional Access scenarios use P1 capabilities, risk-based policy uses P2, and Private Access needs its own eligible entitlement in addition to the prerequisite identity license. Always verify the current [Microsoft Entra licensing terms](https://learn.microsoft.com/en-us/entra/fundamentals/licensing).
 
 ## 12. Monitoring and operational considerations
 
@@ -543,18 +571,20 @@ The cheapest license is not necessarily the lowest-cost architecture. A managed 
 
 | Signal | What it proves | Typical response |
 |---|---|---|
-| Entra interactive and noninteractive sign-in logs | Authentication and Conditional Access result | Investigate failed controls, unfamiliar context, or excluded users |
-| Entra audit logs | Changes to apps, assignments, groups, policies, and Global Secure Access configuration | Correlate change actor/time with access impact |
-| Provisioning logs | Create/update/disable operations and attribute or connector failures | Fix mapping, credentials, connectivity, or target conflicts; retry safely |
-| Application Proxy connector Admin/Session logs | Connector registration, health, service communication, and session failures | Isolate server, DNS, TLS, port, KCD, or back-end reachability issue |
-| Private Access traffic and connector signals | Acquired traffic, destination, policy path, connector availability | Validate segment, client forwarding, DNS, connector, and destination ACL |
-| AD DS security/Kerberos events and application audit | Back-end authentication and resource authorization | Distinguish SPN/delegation failure from an ACL/role denial |
-| Arc connection and activity logs | Azure control-plane action and agent connectivity | Restore agent egress, extension health, or RBAC configuration |
-| Resource-native audit | Actual files, rows, transactions, or admin actions performed | Detect excessive permissions and support forensic reconstruction |
+| [Entra interactive and noninteractive sign-in logs](https://learn.microsoft.com/en-us/entra/identity/monitoring-health/overview-monitoring-health) | Authentication and Conditional Access result | Investigate failed controls, unfamiliar context, or excluded users |
+| [Entra audit logs](https://learn.microsoft.com/en-us/entra/global-secure-access/how-to-access-audit-logs) | Changes to apps, assignments, groups, policies, and Global Secure Access configuration | Correlate change actor/time with access impact |
+| [Provisioning logs](https://learn.microsoft.com/en-us/entra/identity/monitoring-health/overview-monitoring-health) | Create/update/disable operations and attribute or connector failures | Fix mapping, credentials, connectivity, or target conflicts; retry safely |
+| [Application Proxy connector Admin/Session logs](https://learn.microsoft.com/en-us/entra/identity/app-proxy/application-proxy-troubleshoot) | Connector registration, health, service communication, and session failures | Isolate server, DNS, TLS, port, KCD, or back-end reachability issue |
+| [Private Access traffic and connector signals](https://learn.microsoft.com/en-us/entra/global-secure-access/how-to-operate-private-access) | Acquired traffic, destination, policy path, connector availability | Validate segment, client forwarding, DNS, connector, and destination ACL |
+| [AD DS security/Kerberos events and application audit](https://learn.microsoft.com/en-us/windows/security/identity-protection/access-control/access-control) | Back-end authentication and resource authorization | Distinguish SPN/delegation failure from an ACL/role denial |
+| [Arc connection and activity logs](https://learn.microsoft.com/en-us/azure/azure-arc/servers/troubleshoot-connectivity) | Azure control-plane action and agent connectivity | Restore agent egress, extension health, or RBAC configuration |
+| [Resource-native audit](https://learn.microsoft.com/en-us/azure/well-architected/security/identity-access) | Actual files, rows, transactions, or admin actions performed | Detect excessive permissions and support forensic reconstruction |
 
 The [Entra monitoring and health overview](https://learn.microsoft.com/en-us/entra/identity/monitoring-health/overview-monitoring-health) covers sign-in, audit, and provisioning logs. Route important logs to durable destinations with retention aligned to investigation and compliance requirements. Global Secure Access [audit-log guidance](https://learn.microsoft.com/en-us/entra/global-secure-access/how-to-access-audit-logs) describes access and routing options; its default interactive retention should not be mistaken for a long-term archive.
 
 The [Private Access operations guide](https://learn.microsoft.com/en-us/entra/global-secure-access/how-to-operate-private-access) recommends monitoring connector state and traffic failures. Connector online state is not by itself an end-to-end test, so use synthetic access checks and, when appropriate, install Azure Monitor Agent to collect host heartbeat and Windows events. [Azure Monitor Agent on Arc-enabled servers](https://learn.microsoft.com/en-us/azure/azure-arc/servers/azure-monitor-agent-deployment) can extend host observability to on-premises servers.
+
+This is the minimum operational monitoring needed to run the access design. Selecting the organization-wide Azure Monitor, Log Analytics workspace, diagnostic-settings, retention, SIEM, workbook, and service-health architecture belongs primarily to the adjacent AZ-305 task **Recommend a monitoring solution**.
 
 ### Troubleshooting order
 
@@ -568,22 +598,29 @@ The [Private Access operations guide](https://learn.microsoft.com/en-us/entra/gl
 
 This order prevents the classic error of treating an HTTP 403 from the back end as a connector outage or treating successful network reachability as proof of authorization.
 
+> **Test yourself**
+>
+> - Which logs separate a Conditional Access denial from an on-premises ACL denial?
+> - Does a connector showing “active” prove that the application is usable?
+>
+> **Answer guidance:** Use [Entra sign-in logs](https://learn.microsoft.com/en-us/entra/identity/monitoring-health/overview-monitoring-health) for Conditional Access and target/AD audit logs for the resource decision. No: connector state must be combined with traffic telemetry and an end-to-end test as described in [Private Access operations](https://learn.microsoft.com/en-us/entra/global-secure-access/how-to-operate-private-access).
+
 ## 13. Common exam traps
 
-| Trap or distractor | Why it is tempting | Why it is wrong or incomplete | Better decision |
-|---|---|---|---|
-| “Use a VPN to authorize users” | VPNs authenticate and connect users | A VPN mainly establishes network reachability; the target still needs resource authorization | Pair scoped connectivity with AD/app/database permissions, or use per-app Private Access |
-| “Application Proxy works for every private protocol” | It exposes internal apps through Entra | It is designed for web application publishing, not arbitrary TCP/UDP | Use Private Access for private nonweb resources |
-| “Enterprise-app assignment grants the app’s internal role” | Both are described as app access | Assignment passes the cloud gate but may not create an account or role in the target | Provision or map the identity and enforce back-end roles |
-| “Passthrough is as secure as preauthentication” | Both can publish the same URL | Passthrough lets unauthenticated traffic reach the application tier | Prefer Entra preauthentication unless a hard dependency prevents it |
-| “Domain Services extends the on-premises forest” | Users and groups appear in a managed domain | Synchronization is one way and domain configuration does not replicate | Treat it as a standalone managed domain and validate trust requirements |
-| “Domain Services provides full AD admin control” | It supports LDAP, Kerberos, NTLM, and GPO | It withholds Domain/Enterprise Admin and schema extension; KCD/trust capabilities differ | Use self-managed AD DS when full control is mandatory |
-| “Conditional Access replaces authorization” | It can block or allow application access | It evaluates session conditions, not business permissions to data/actions | Layer CA with assignment and resource-side least privilege |
-| “Nested groups always work” | AD commonly uses nested groups | Private Access assignment and Cloud Sync scoping/membership have documented nesting limits | Use direct membership where required and test effective membership |
-| “Two connectors make the app highly available” | Connectors are redundant | DNS, AD DS, the network, and the app may remain single points of failure | Design and test every dependency |
-| “Arc Owner means Linux login is authorized” | Owner can initiate an Arc SSH connection | OS login through Entra requires the appropriate login role; connection and login are separate | Assign the narrow connection and OS login permissions needed |
-| **Edge case: remote-network users can access Private Access apps without the client** | Global Secure Access also has remote-network connectivity | Current Private Access traffic acquisition is client-based; remote-network acquisition has documented limits | Confirm the current limitation, deploy supported clients, or retain another access path |
-| “Removing a group membership ends access immediately” | The entitlement is gone in the directory | Sync, tokens, app sessions, caches, and resource ACL evaluation can delay effective revocation | Define the revocation SLA and test every layer |
+| Trap | Tempting wrong answer | Why it seems reasonable | Why it is wrong or incomplete | Better design choice | Microsoft source |
+|---|---|---|---|---|---|
+| Service selection | Use a VPN to authorize users | A VPN authenticates a connection and reaches private addresses | Network admission does not grant the target file, app, or database permission | Use the narrowest connectivity path and retain AD/app/database authorization | [Private Access](https://learn.microsoft.com/en-us/entra/global-secure-access/concept-private-access) |
+| Feature overlap | Use Application Proxy for every private protocol | It exposes an internal app through Entra and outbound connectors | Application Proxy is for web application publishing, not arbitrary private TCP/UDP | Use Application Proxy for web apps and Private Access for supported nonweb private resources | [Application Proxy overview](https://learn.microsoft.com/en-us/entra/identity/app-proxy/overview-what-is-app-proxy) |
+| Scope boundary | Enterprise-app assignment grants the app’s internal role | Both are described as application access | Assignment crosses the cloud gate but might not create an account, AD membership, or app role | Map or provision the identity and enforce back-end roles separately | [Application assignment](https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/ways-users-get-assigned-to-applications) |
+| Security misunderstanding | Passthrough is equivalent to preauthentication | Both can publish the same URL | Passthrough allows unauthenticated requests to reach the application tier | Prefer Entra preauthentication unless a hard dependency prevents it | [Application Proxy security](https://learn.microsoft.com/en-us/entra/identity/app-proxy/application-proxy-security) |
+| SKU/tier confusion | Domain Services supplies full AD control on any tier | It supports LDAP, Kerberos, NTLM, domain join, and GPO | It withholds Domain/Enterprise Admin and schema extension; forest trusts require Enterprise or higher | Use the appropriate Domain Services SKU only when its managed limits fit; otherwise use self-managed AD DS | [Directory-service comparison](https://learn.microsoft.com/en-us/entra/identity/domain-services/compare-identity-solutions) |
+| Identity-model confusion | Nested groups work everywhere | AD commonly relies on nested security groups | Private Access assignment and Cloud Sync scoping/membership have explicit direct-membership constraints | Assign supported groups directly and test effective membership | [Per-app Private Access](https://learn.microsoft.com/en-us/entra/global-secure-access/how-to-configure-per-app-access) |
+| Resiliency misunderstanding | Two connectors make the solution highly available | Connectors are stateless and service traffic can fail over | DNS, AD DS, certificates, network paths, and the application may remain single points of failure | Design and test every dependency and failure domain | [Entra resilience guidance](https://learn.microsoft.com/en-us/entra/architecture/resilience-on-premises-access) |
+| Operational ownership | Microsoft operates the entire connector path | The cloud access service is Microsoft-managed | The customer owns connector hosts, patching, private DNS/reachability, and the back-end | Define cloud/customer ownership and monitor end to end | [Connector concepts](https://learn.microsoft.com/en-us/entra/global-secure-access/concept-connectors) |
+| Cost misunderstanding | Domain Services is cheaper because it eliminates domain-controller VMs | Managed operations reduce customer effort | It is billed hourly by SKU and extra replica sets add cost; the workload still needs redundancy | Compare total license, compute, replica, network, logging, and operations cost | [Entra licensing](https://learn.microsoft.com/en-us/entra/fundamentals/licensing) |
+| Privilege confusion | Arc Owner automatically grants Linux login | Owner can authorize the connection action | Entra OS login requires the applicable VM Login role; connection and login are separate | Grant narrow connection scope and the correct OS login role | [Arc SSH authorization](https://learn.microsoft.com/en-us/azure/azure-arc/servers/ssh-arc-overview) |
+| **Edge case** | Route Private Access through remote-network connectivity without endpoint clients | Global Secure Access also supports remote-network connectivity | Current private-traffic acquisition is client-based and remote-network acquisition is not supported for this case | Deploy supported clients or retain a different private-connectivity path | [Current known limitations](https://learn.microsoft.com/en-us/entra/global-secure-access/reference-current-known-limitations) |
+| Revocation timing | Removing a group membership ends access immediately | The entitlement disappears from the source directory | Synchronization, tokens, sessions, caches, and target ACL evaluation can delay effective removal | Define a revocation SLA and test removal through every layer | [Cloud Sync FAQ](https://learn.microsoft.com/en-us/entra/identity/hybrid/cloud-sync/reference-cloud-sync-faq) |
 
 ## 14. Scenario-based design examples
 
@@ -591,79 +628,113 @@ This order prevents the classic error of treating an HTTP 403 from the back end 
 
 **Requirement:** Remote employees need an on-premises HR web application. The company wants MFA, compliant-device enforcement, no inbound firewall rule, and seamless Windows SSO. The app uses IWA and AD groups.
 
+**Constraints:** The app remains on-premises, uses HTTP/HTTPS plus IWA, and must not accept an inbound Internet connection.
+
 **Recommendation:** Publish it with Application Proxy using Entra preauthentication, apply group assignment and Conditional Access, deploy at least two connectors, and configure KCD for IWA. Retain AD group-based roles in the app.
 
 **Why:** The workload is web-based, the cloud front door supplies the requested identity controls, and outbound connectors avoid inbound exposure. KCD bridges the Entra sign-in to the IWA back end. ([Application Proxy overview](https://learn.microsoft.com/en-us/entra/identity/app-proxy/overview-what-is-app-proxy), [KCD](https://learn.microsoft.com/en-us/entra/identity/app-proxy/how-to-configure-sso-with-kcd))
 
-**Reject:** Private Access is unnecessary unless the app has nonweb dependencies that cannot traverse Application Proxy. A VPN gives broader network access than the requirement calls for.
+**Alternatives considered and rejected:** Private Access is unnecessary unless the app has nonweb dependencies that cannot traverse Application Proxy. A VPN gives broader network access than the requirement calls for.
+
+**Exam interpretation:** “Web,” “IWA,” “Conditional Access,” and “no inbound ports” strongly signal Application Proxy with KCD; still name the AD/app authorization layer.
 
 ### Scenario 2 — Cost-conscious single web application
 
 **Requirement:** One internal web app must be available to licensed Entra ID P1 users. No TCP/UDP resources need remote access, and the organization wants minimal new infrastructure.
 
+**Constraints:** Reuse existing P1 licensing, support only one web app, and avoid a new broad network-access service.
+
 **Recommendation:** Use Application Proxy with the existing P1 entitlement and two modest connector hosts. Require assignment and apply the existing Conditional Access baseline.
 
 **Why:** Application Proxy directly fits the protocol and avoids adding a VPN gateway or Private Access entitlement solely for this app. Infrastructure and operational costs still include connector hosts and monitoring, but the design reuses the current license. Verify current entitlements in the [Entra licensing reference](https://learn.microsoft.com/en-us/entra/fundamentals/licensing).
 
-**Reject:** Domain Services does not publish the app and would add an unrelated managed directory charge.
+**Alternatives considered and rejected:** Domain Services does not publish the app and would add an unrelated managed directory charge; Private Access adds capability and licensing the requirement does not need.
+
+**Exam interpretation:** When two services work, choose the narrowest one that meets protocol and policy requirements at the lower total cost.
 
 ### Scenario 3 — Security-first VPN reduction
 
 **Requirement:** Engineers currently receive a VPN route to an entire data-center subnet but need only Git over SSH, an internal database port, and one HTTPS management endpoint. Access must require managed devices and be reviewable.
 
+**Constraints:** Multiple nonweb protocols are required, subnet-wide reach is prohibited, and access needs device and lifecycle controls.
+
 **Recommendation:** Deploy Private Access, initially validate with a narrowly scoped Quick Access configuration, then create separate per-app segments and group assignments. Apply Conditional Access for compliant devices and strong authentication. Govern group membership with access packages and recurring reviews.
 
 **Why:** The key requirement is arbitrary private protocols with application-level segmentation rather than broad network admission. Private Access supplies the scoped route; the servers and database must continue to enforce their own accounts and permissions. ([Private Access](https://learn.microsoft.com/en-us/entra/global-secure-access/concept-private-access), [app segmentation](https://learn.microsoft.com/en-us/entra/global-secure-access/tutorial-private-access-app-segmentation))
 
-**Reject:** Application Proxy cannot publish Git SSH or the database protocol. Keeping the full-subnet VPN route violates least privilege.
+**Alternatives considered and rejected:** Application Proxy cannot publish Git SSH or the database protocol. Keeping the full-subnet VPN route violates least privilege.
+
+**Exam interpretation:** “Arbitrary ports” plus “per-resource access” selects Private Access; Conditional Access and entitlement governance complete the policy, while target permissions remain necessary.
 
 ### Scenario 4 — Resilient publication across two sites
 
 **Requirement:** A business-critical web application has active instances in two on-premises sites. Remote access must survive loss of a connector host and should be isolated from lower-trust apps.
 
+**Constraints:** The design must tolerate connector-host and site dependencies without mixing trust zones or implying that connector redundancy protects the application tier.
+
 **Recommendation:** Use Application Proxy with dedicated connector groups aligned to application network reachability, at least two connectors per serving group, redundant DNS and AD dependencies, and a tested application failover design. Monitor connector and synthetic application health.
 
 **Why:** Connector redundancy protects only the access bridge. Dedicated groups limit lateral reach and let the service select healthy connectors, while the application and supporting services require their own resilience. ([Connector groups](https://learn.microsoft.com/en-us/entra/global-secure-access/concept-connector-groups), [resilience guidance](https://learn.microsoft.com/en-us/entra/architecture/resilience-on-premises-access))
 
-**Reject:** Placing two connectors on the same failure-prone host or network does not meet the site-loss requirement.
+**Alternatives considered and rejected:** Placing two connectors on the same failure-prone host or network does not meet the site-loss requirement; a single shared connector group may also expand unnecessary network reach.
+
+**Exam interpretation:** Resiliency requirements change topology, not the core product choice. Name every dependent tier and failure domain.
 
 ### Scenario 5 — Edge case: users behind a branch router without clients
 
 **Requirement:** Branch users need a private TCP application. The security team proposes Private Access through Global Secure Access remote-network connectivity and forbids endpoint software.
 
+**Constraints:** The application is nonweb, endpoint clients are forbidden, and the proposed traffic-acquisition method must be supported now.
+
 **Recommendation:** Do not select that design without a supported acquisition path. The current [known-limitations reference](https://learn.microsoft.com/en-us/entra/global-secure-access/reference-current-known-limitations) states that private traffic is acquired through the Global Secure Access client rather than remote networks. Either permit supported clients, use another private-connectivity technology, or revisit the application architecture.
 
 **Why:** This is a hard product constraint, not a preference. A good exam answer rejects a nominally attractive service when a stated limitation conflicts with the requirement.
+
+**Alternatives considered and rejected:** Application Proxy cannot carry the TCP application; client-based Private Access violates the no-client constraint. A supported VPN/partner path or requirement change remains viable.
+
+**Exam interpretation:** Current product limits override the default least-privilege recommendation.
 
 ### Scenario 6 — Legacy authorization synchronized from the cloud
 
 **Requirement:** Access to an on-premises document system is controlled exclusively by an AD security group. Managers must approve requests, access must expire after 90 days, and reviewers must recertify access quarterly.
 
+**Constraints:** The application cannot consume Entra assignment directly; AD group membership is its only authorization source, and lifecycle enforcement must be automated.
+
 **Recommendation:** Create an access package that grants membership in an Entra security group, use Cloud Sync group provisioning to represent that entitlement in the required on-premises AD security group, and run quarterly access reviews with decision application. Validate the full removal path.
 
 **Why:** Entitlement management governs the lifecycle; Cloud Sync translates the cloud entitlement into the authorization primitive the unchanged app understands. ([Govern on-premises groups](https://learn.microsoft.com/en-us/entra/identity/hybrid/cloud-sync/govern-on-premises-groups), [access reviews](https://learn.microsoft.com/en-us/entra/id-governance/access-reviews-overview))
 
-**Reject:** Enterprise-app assignment alone cannot update an AD group consumed by the document system.
+**Alternatives considered and rejected:** Enterprise-app assignment alone cannot update an AD group consumed by the document system. Manual group administration cannot reliably enforce approval, expiration, and recurring review.
+
+**Exam interpretation:** Trace the entitlement all the way from governance policy to the exact group the legacy resource evaluates.
 
 ### Scenario 7 — Adjacent but not the same task
 
 **Requirement:** A legacy application is being moved from on-premises to Azure VMs. It requires LDAP, domain join, Kerberos, and GPO but no schema extension or Domain Admin. The team does not want to operate domain controllers.
 
+**Constraints:** Legacy protocols are mandatory, full AD administrative control is not, and the destination is Azure rather than the existing data center.
+
 **Recommendation:** Use Microsoft Entra Domain Services and domain-join the Azure VMs, subject to credential synchronization, network, DNS, and SKU validation.
 
 **Why:** This is a directory-dependency decision adjacent to authorizing access. The app’s resource permissions still need groups and ACLs, but Domain Services supplies the managed legacy protocols. ([Domain Services overview](https://learn.microsoft.com/en-us/entra/identity/domain-services/overview))
 
-**Reject:** Application Proxy might publish the web tier but cannot replace the required LDAP/domain-join dependency. Self-managed AD DS adds unnecessary operations when no unsupported managed-domain capability is required.
+**Alternatives considered and rejected:** Application Proxy might publish the web tier but cannot replace the required LDAP/domain-join dependency. Self-managed AD DS adds unnecessary operations when no unsupported managed-domain capability is required.
+
+**Exam interpretation:** This is primarily the adjacent identity-management/directory decision; authorization still requires groups and ACLs afterward.
 
 ### Scenario 8 — Administrative access to an isolated Linux server
 
 **Requirement:** Operators must administer an on-premises Linux server without a public IP or open inbound SSH port. Connections must be controlled through Azure, and users should sign in with Entra accounts.
 
+**Constraints:** The target is Linux, the workflow is administrative SSH, public/inbound exposure is prohibited, and Entra OS login is required.
+
 **Recommendation:** Onboard the server to Azure Arc, use SSH access through Arc, grant narrowly scoped connection permission, and assign Azure VM User Login or Administrator Login according to duties.
 
 **Why:** Arc SSH provides the required Azure-mediated administrative path, and Linux supports Entra login. Connection authorization and OS login authorization are deliberately separate. ([Arc SSH](https://learn.microsoft.com/en-us/azure/azure-arc/servers/ssh-arc-overview))
 
-**Reject:** Application Proxy is an end-user web publishing service; it is not an SSH administration channel.
+**Alternatives considered and rejected:** Application Proxy is an end-user web publishing service; it is not an SSH administration channel. A conventional public SSH endpoint violates the exposure constraint.
+
+**Exam interpretation:** Separate permission to initiate the Azure-mediated connection from permission to sign in to the operating system.
 
 ## 15. Test yourself
 
@@ -736,19 +807,19 @@ Contoso has these requirements:
 
 Use Application Proxy with preauthentication for the web app and evaluate guest-to-back-end identity constraints before selecting KCD. Use Private Access per-app segmentation for the SQL endpoint, with the Global Secure Access client on supported managed endpoints. Put assignments into access packages with expiration and reviews. Deploy redundant outbound connectors and preserve database/application authorization. The lifecycle mechanism grants group or app assignment; it does not itself create the correct vendor identity in AD or database roles.
 
-## 16. Adjacent-task context
+## 16. Adjacent task context
 
 The exam blueprint places this task under **Design authentication and authorization solutions**. Distinguish it from its siblings so that a broad identity question does not pull you into the wrong design.
 
-| Adjacent task | Its primary question | Boundary with this guide |
-|---|---|---|
-| Recommend an authentication solution | How does an identity prove who it is—federation, passwordless, MFA, authentication strength, managed identity? | This guide consumes that authenticated identity and decides whether/how it reaches an on-premises resource |
-| Recommend an identity management solution | How are users, groups, devices, directories, and hybrid identities created and synchronized? | Synchronization supplies principals; authorization assigns their effective permissions |
-| Recommend a solution for authorizing access to Azure resources | Which Azure RBAC role, scope, custom role, ABAC condition, managed identity, or PIM design controls Azure resources? | Application Proxy enterprise-app assignment and Arc connection permission use Entra/Azure controls, but on-premises resource ACLs remain separate |
-| Recommend a solution to manage secrets, certificates, and keys | Where and how are credentials and cryptographic material stored, rotated, and protected? | Connector certificates and service credentials depend on this discipline, but secret management is not the authorization model |
-| Design governance | How are policy, compliance, subscriptions, management groups, and organizational controls structured? | Entitlement governance and access reviews intersect, but resource access still needs an enforcement plane |
-| Design logging and monitoring | Where are signals collected, queried, retained, and alerted on? | This guide identifies the access signals; the monitoring task designs the broader platform |
-| Recommend a network connectivity solution | Which VPN, ExpressRoute, Virtual WAN, routing, DNS, firewall, or topology connects locations? | Connectivity enables packets to arrive; identity and resource controls authorize the action |
+| Adjacent task or topic | Why it overlaps | What belongs in this task | What belongs elsewhere |
+|---|---|---|---|
+| [Recommend an authentication solution](https://learn.microsoft.com/en-us/training/modules/design-authentication-authorization-solutions/) | Authentication establishes the identity used for authorization | App access gate, SSO bridge, and the identity ultimately checked by the on-premises resource | Federation, passwordless, MFA method, and tenant-wide authentication design |
+| [Recommend an identity management solution](https://learn.microsoft.com/en-us/entra/architecture/sync-directory) | Users, groups, and synchronization supply security principals | How those principals receive effective app, AD, OS, or data permissions | Full directory topology, source of authority, identity creation, and broad synchronization architecture |
+| [Authorize access to Azure resources](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-305) | Arc connection and some control-plane actions use Azure RBAC | Arc connection scope and its boundary from OS login; enterprise-app assignment | General Azure RBAC roles/scopes, custom roles, ABAC, and managed-identity authorization |
+| [Manage secrets, certificates, and keys](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-305) | Connectors and apps depend on credentials and certificates | The authorization impact of credential or certificate availability | Vault architecture, rotation platform, HSM, cryptographic key lifecycle |
+| [Identity governance](https://learn.microsoft.com/en-us/entra/id-governance/entitlement-management-access-package-create) | Requests, approvals, expiration, PIM, and reviews control entitlement lifecycle | Governance that grants/removes the groups or app assignments used for private access | Organization-wide governance program and unrelated Azure policy/compliance structure |
+| [Logging and monitoring](https://learn.microsoft.com/en-us/entra/identity/monitoring-health/overview-monitoring-health) | Evidence is required to operate and audit access | Minimum identity, connector, provisioning, and resource signals | Enterprise workspace, collection, retention, SIEM, workbook, and service-health architecture |
+| [Network connectivity](https://learn.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-about-vpngateways) | A route is required before a resource can evaluate permissions | Selecting an identity-aware publishing/private-access path and separating it from authorization | Full VPN, ExpressRoute, Virtual WAN, routing, DNS, firewall, and hybrid topology design |
 
 Use the current [AZ-305 study guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-305) as the authoritative skill outline. The relevant learning module is [Design authentication and authorization solutions](https://learn.microsoft.com/en-us/training/modules/design-authentication-authorization-solutions/); the [Global Secure Access module](https://learn.microsoft.com/en-us/training/modules/deploy-configure-microsoft-entra-global-secure-access/) provides focused coverage for Private Access.
 
@@ -781,25 +852,53 @@ Remember these distinctions:
 
 When two answers look plausible, identify the hard constraint: web versus arbitrary protocol, cloud versus on-premises location, client availability, directory administrative control, identity type, assignment behavior, or current product limitation. Then compare lifecycle, security, resilience, and total cost.
 
+### Must-know decisions and services
+
+- Choose [Application Proxy](https://learn.microsoft.com/en-us/entra/identity/app-proxy/overview-what-is-app-proxy) for an on-premises web app and [Private Access](https://learn.microsoft.com/en-us/entra/global-secure-access/concept-private-access) for supported private nonweb protocols or identity-based VPN reduction.
+- Choose [Domain Services](https://learn.microsoft.com/en-us/entra/identity/domain-services/overview) only for Azure-hosted workloads whose legacy directory needs fit its managed limits; choose self-managed AD DS when full control is mandatory.
+- Choose [Cloud Sync group provisioning](https://learn.microsoft.com/en-us/entra/identity/hybrid/cloud-sync/govern-on-premises-groups) when the target evaluates AD membership, and application provisioning when it evaluates another user repository.
+- Choose [Arc SSH](https://learn.microsoft.com/en-us/azure/azure-arc/servers/ssh-arc-overview) for Azure-mediated server administration, not business-application publication.
+
+### Must-know limitations and tradeoffs
+
+- App assignment is not the back-end role, network access is not resource authorization, and successful SSO is not proof of permission.
+- Preauthentication improves security; passthrough preserves difficult compatibility at the cost of the cloud authentication barrier.
+- Per-app segmentation improves least privilege; broad Quick Access or VPN scope can simplify migration at the cost of exposure.
+- Managed services reduce infrastructure operations but introduce licensing, feature, client, synchronization, and control-plane dependencies.
+- Revocation and failover are only as fast and reliable as the slowest assignment, sync, token, session, DNS, connector, directory, and application layer.
+
+### Common requirement clues
+
+“Internal web app” points to Application Proxy; “FQDN/IP plus port” points to Private Access; “IWA” points to KCD prerequisites; “LDAP/Kerberos after Azure migration” points to Domain Services evaluation; “approve, expire, review” points to entitlement governance; and “no inbound SSH” points to Arc SSH.
+
+### Before the exam, make sure you can
+
+- [ ] Draw the four gates and name the owner of each.
+- [ ] Explain Application Proxy versus Private Access versus VPN in one sentence each.
+- [ ] Explain Entra assignment versus AD/app/database authorization.
+- [ ] Select Domain Services versus self-managed AD DS from a hard requirement.
+- [ ] Trace access-package removal to effective resource revocation.
+- [ ] Identify connector, DNS, directory, app, licensing, monitoring, and current-limit dependencies.
+
 ## 18. Quick-reference tables
 
 ### One-minute selection matrix
 
 | Need | First candidate | Add these controls |
 |---|---|---|
-| Publish an on-premises web app | Application Proxy | Assignment required, CA, supported SSO, redundant connectors, back-end roles |
-| Reach a private nonweb app from users | Private Access | Client acquisition, per-app segment, CA, connector group, target authorization |
-| Retain broad site/device networking | VPN/ExpressRoute/partner access | Network segmentation plus resource identity and ACLs |
-| Modernize authentication for an app behind an existing appliance | Secure hybrid access integration | Entra CA/SSO plus partner policy and app authorization |
-| Give an Azure-migrated legacy app LDAP/Kerberos | Domain Services | VNet/DNS, credential synchronization, SKU/replicas, app ACLs |
-| Require full AD control in Azure | Self-managed AD DS | Secure DC operations, backup, monitoring, trusts, tiering |
-| Drive legacy AD authorization from cloud governance | Access package → Entra group → Cloud Sync → AD group | Approval, expiration, review, removal testing |
-| Provision accounts into a private app repository | Entra provisioning service + agent + connector | Mappings, matching, credentials, HA, reconciliation |
-| Administer an on-premises Linux server through Azure | Arc SSH | Azure connection scope, Entra OS login role, agent health, audit |
+| Publish an on-premises web app | [Application Proxy](https://learn.microsoft.com/en-us/entra/identity/app-proxy/overview-what-is-app-proxy) | Assignment required, CA, supported SSO, redundant connectors, back-end roles |
+| Reach a private nonweb app from users | [Private Access](https://learn.microsoft.com/en-us/entra/global-secure-access/concept-private-access) | Client acquisition, per-app segment, CA, connector group, target authorization |
+| Retain broad site/device networking | [VPN/ExpressRoute/partner access](https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/secure-hybrid-access) | Network segmentation plus resource identity and ACLs |
+| Modernize authentication for an app behind an existing appliance | [Secure hybrid access integration](https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/secure-hybrid-access) | Entra CA/SSO plus partner policy and app authorization |
+| Give an Azure-migrated legacy app LDAP/Kerberos | [Domain Services](https://learn.microsoft.com/en-us/entra/identity/domain-services/overview) | VNet/DNS, credential synchronization, SKU/replicas, app ACLs |
+| Require full AD control in Azure | [Self-managed AD DS](https://learn.microsoft.com/en-us/entra/identity/domain-services/compare-identity-solutions) | Secure DC operations, backup, monitoring, trusts, tiering |
+| Drive legacy AD authorization from cloud governance | [Access package → Entra group → Cloud Sync → AD group](https://learn.microsoft.com/en-us/entra/identity/hybrid/cloud-sync/govern-on-premises-groups) | Approval, expiration, review, removal testing |
+| Provision accounts into a private app repository | [Entra provisioning service + agent + connector](https://learn.microsoft.com/en-us/entra/identity/app-provisioning/on-premises-application-provisioning-architecture) | Mappings, matching, credentials, HA, reconciliation |
+| Administer an on-premises Linux server through Azure | [Arc SSH](https://learn.microsoft.com/en-us/azure/azure-arc/servers/ssh-arc-overview) | Azure connection scope, Entra OS login role, agent health, audit |
 
 ### Capability check
 
-| Capability | Application Proxy | Private Access | Domain Services | Arc SSH |
+| Capability | [Application Proxy](https://learn.microsoft.com/en-us/entra/identity/app-proxy/overview-what-is-app-proxy) | [Private Access](https://learn.microsoft.com/en-us/entra/global-secure-access/concept-private-access) | [Domain Services](https://learn.microsoft.com/en-us/entra/identity/domain-services/compare-identity-solutions) | [Arc SSH](https://learn.microsoft.com/en-us/azure/azure-arc/servers/ssh-arc-overview) |
 |---|:---:|:---:|:---:|:---:|
 | Publishes web app | Yes | Provides network path | No | No |
 | Arbitrary private TCP/UDP path | No | Yes, within current support | No | SSH-based admin only |
