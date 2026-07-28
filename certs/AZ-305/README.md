@@ -7,13 +7,13 @@
 - **Study Log:** [Session-by-session study time tracker](./StudyLog.md)
 
 <!-- STUDY_SUMMARY -->
-**Hours Committed:** 40.4h · **Days Studied:** 23
-
+**Hours Committed:** 41.8h · **Days Studied:** 24
 - Prepare: 13.8h
 - Research: 10.9h
-- Practice: 12.7h
+- Practice: 14.1h
 - Review: 3.1h
 <!-- /STUDY_SUMMARY -->
+
 
 ---
 
@@ -25,12 +25,12 @@ Task-level coverage based on [Per-Task Progress](#per-task-progress) completion.
 
 | Domain | Weight | Tasks | Tasks Covered | Status |
 | :----- | :----- | ----: | :------------ | :----: |
-| 1. Identity, Governance & Monitoring | 25–30% | 11 | 4 / 11 (36%) | 🟡 |
+| 1. Identity, Governance & Monitoring | 25–30% | 11 | 6 / 11 (54%) | 🟡 |
 | 2. Data Storage | 20–25% | 10 | 0 / 10 (0%) | 🔴 |
 | 3. Business Continuity | 15–20% | 7 | 0 / 7 (0%) | 🔴 |
 | 4. Infrastructure | 30–35% | 21 | 0 / 21 (0%) | 🔴 |
 
-**Totals:** 4 / 49 tasks completed
+**Totals:** 6 / 49 tasks completed
 
 **Legend:** 🟢 Strong (≥66%) · 🟡 Partial (33–65%) · 🔴 Low (<33%) — "Covered" = task marked complete in Per-Task Progress
 
@@ -50,7 +50,7 @@ Task-level coverage based on [Per-Task Progress](#per-task-progress) completion.
 | 4 | Identity, Governance & Monitoring | Design authentication and authorization solutions | Recommend an authentication solution | 0.9h | 0.2h | 1.4h | 2.4h | ✅ |
 | 5 | Identity, Governance & Monitoring | Design authentication and authorization solutions | Recommend an identity management solution | 0.4h | 0.0h | 0.0h | 3.5h | ✅ |
 | 6 | Identity, Governance & Monitoring | Design authentication and authorization solutions | Recommend a solution for authorizing access to Azure resources | 0.8h | 0.0h | 3.1h | 3.8h | ✅ |
-| 7 | Identity, Governance & Monitoring | Design authentication and authorization solutions | Recommend a solution for authorizing access to on-premises resources | 1.3h | 0.0h | 0.0h | 1.3h | ⏳ |
+| 7 | Identity, Governance & Monitoring | Design authentication and authorization solutions | Recommend a solution for authorizing access to on-premises resources | 1.3h | 0.0h | 1.4h | 2.7h | ⏳ |
 | 8 | Identity, Governance & Monitoring | Design authentication and authorization solutions | Recommend a solution to manage secrets, certificates, and keys | 0.0h | 0.0h | 0.0h | 0.0h | 🔲 |
 | 9 | Identity, Governance & Monitoring | Design governance | Recommend a structure for management groups, subscriptions, and resource groups, and a strategy for resource tagging | 0.0h | 0.0h | 0.0h | 0.0h | 🔲 |
 | 10 | Identity, Governance & Monitoring | Design governance | Recommend a solution for managing compliance | 0.0h | 0.0h | 0.0h | 0.0h | 🔲 |
