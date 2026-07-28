@@ -8,7 +8,7 @@ This log tracks individual study sessions for the **ALZ** applied skill. Use **N
 
 | # | Date | Start | End | Duration | Notes |
 |:--|:-----|:------|:----|:---------|:------|
-| 11 | 7/28/26 | 5:18 AM |  |  |  |
+| 11 | 7/28/26 | 5:18 AM | 6:43 AM | 1h 25m | Continue investigation failure of ALZ management group scenario |
 | 10 | 7/27/26 | 5:35 AM | 7:01 AM | 1h 26m | Troubleshooting deployment of management group landing zone |
 | 9 | 7/24/26 | 5:12 AM | 6:12 AM | 1h 0m | Troubleshoot failed bootstratp deployments for ALZ solution due to regional constraints and capacity issues |
 | 8 | 7/23/26 | 5:45 AM | 6:30 AM | 0h 45m | Investigated and found root cause of error--related to single subscription usage; redeploy w/ revised config and switch from private to public to save cost |
