@@ -8,22 +8,12 @@
 
 <!-- STUDY_SUMMARY -->
 **Hours Committed:** 40.4h · **Days Studied:** 23
+
 - Prepare: 13.8h
 - Research: 10.9h
 - Practice: 12.7h
 - Review: 3.1h
 <!-- /STUDY_SUMMARY -->
-
-
-
-
-
-
-
-
-
-
-
 
 ---
 
@@ -58,8 +48,8 @@ Task-level coverage based on [Per-Task Progress](#per-task-progress) completion.
 | 2 | Identity, Governance & Monitoring | Design solutions for logging and monitoring | Recommend a solution for routing logs | 0.6h | 5.7h | 1.5h | 7.8h | ✅ |
 | 3 | Identity, Governance & Monitoring | Design solutions for logging and monitoring | Recommend a monitoring solution | 1.0h | 1.4h | 2.1h | 4.4h | ✅ |
 | 4 | Identity, Governance & Monitoring | Design authentication and authorization solutions | Recommend an authentication solution | 0.9h | 0.2h | 1.4h | 2.4h | ✅ |
-| 5 | Identity, Governance & Monitoring | Design authentication and authorization solutions | Recommend an identity management solution | 0.4h | 0.0h | 0.0h | 3.5h | ⏳ |
-| 6 | Identity, Governance & Monitoring | Design authentication and authorization solutions | Recommend a solution for authorizing access to Azure resources | 0.8h | 0.0h | 3.1h | 3.8h | ⏳ |
+| 5 | Identity, Governance & Monitoring | Design authentication and authorization solutions | Recommend an identity management solution | 0.4h | 0.0h | 0.0h | 3.5h | ✅ |
+| 6 | Identity, Governance & Monitoring | Design authentication and authorization solutions | Recommend a solution for authorizing access to Azure resources | 0.8h | 0.0h | 3.1h | 3.8h | ✅ |
 | 7 | Identity, Governance & Monitoring | Design authentication and authorization solutions | Recommend a solution for authorizing access to on-premises resources | 1.3h | 0.0h | 0.0h | 1.3h | ⏳ |
 | 8 | Identity, Governance & Monitoring | Design authentication and authorization solutions | Recommend a solution to manage secrets, certificates, and keys | 0.0h | 0.0h | 0.0h | 0.0h | 🔲 |
 | 9 | Identity, Governance & Monitoring | Design governance | Recommend a structure for management groups, subscriptions, and resource groups, and a strategy for resource tagging | 0.0h | 0.0h | 0.0h | 0.0h | 🔲 |
