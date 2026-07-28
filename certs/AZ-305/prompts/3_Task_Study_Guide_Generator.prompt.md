@@ -169,6 +169,13 @@ The guide should take approximately 45 minutes to read unless the user requests 
 
 Write for someone with Azure administration experience who wants architect-level decision depth.
 
+Target the following content mix across the finished guide:
+
+- **25–35 percent explanatory prose**
+- **65–75 percent structured content**, including hierarchical bullets, numbered steps, tables, callouts, checklists, decision trees, and diagrams
+
+Use brief prose to frame and connect ideas, but present most technical detail in structured form. Do not produce either a terse fragment-based outline or a continuous essay dominated by long prose blocks.
+
 Prioritize:
 
 - Design reasoning
@@ -674,6 +681,7 @@ Before producing the final Markdown output, verify:
 - Mermaid diagrams are included where they improve architectural understanding.
 - Common exam traps include an edge-cases line item.
 - Adjacent exam tasks are clearly separated from the main task.
+- The document is approximately 25–35 percent explanatory prose and 65–75 percent structured content.
 - Links point to Microsoft Learn or other official Microsoft sources unless explicitly labeled supplemental.
 - The final output is clean Markdown that can be pasted into another tool without hidden citation artifacts.
 

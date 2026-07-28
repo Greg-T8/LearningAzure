@@ -300,4 +300,13 @@ _Model used to research and author this fact sheet: GPT 5.6 Sol High._
 
 ## Length and scope guidance
 
+Target the following content mix across the finished fact sheet:
+
+- **25–35 percent explanatory prose**
+- **65–75 percent structured content**, including hierarchical bullets, numbered facts, tables, callouts, checklists, decision frameworks, and diagrams
+
+Use brief prose to frame and connect ideas, but present most technical detail in structured form. Do not produce either a terse fragment-based outline or a continuous essay dominated by long prose blocks.
+
 Deeper taxonomy coverage per product produces longer output. If the total output becomes unwieldy, reduce the number of products covered per run rather than reducing depth. It is better to produce one complete, deep product section than five shallow ones. Prioritize Core products and reduce or defer Supporting and Adjacent products to a follow-up run if needed.
+
+Before returning the fact sheet, verify that the document is approximately 25–35 percent explanatory prose and 65–75 percent structured content.
