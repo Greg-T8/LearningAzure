@@ -8,7 +8,7 @@ This log tracks individual study sessions for the **AZ-305** exam. Fill in **End
 
 | # | Date | Start | End | Duration | Mode | Task | Notes |
 |:--|:-----|:------|:----|:---------|:-----|:------|:------|
-| 34 | 7/29/26 | 5:22 AM |  |  | Practice | Recommend a solution to manage secrets, certificates, and keys |  |
+| 34 | 7/29/26 | 5:22 AM | 5:49 AM | 0h 27m | Practice | Recommend a solution to manage secrets, certificates, and keys | Deep dive into Azure Key Vault. Continue w/ first set of practice questions |
 | 33 | 7/29/26 | 4:57 AM | 5:22 AM | 0h 25m | Prepare | Recommend a solution to manage secrets, certificates, and keys | Completed task map, imported sources into Gemini Notebook, generated first practice question set; still need to complete study guide and fact sheet |
 | 32 | 7/29/26 | 4:16 AM | 4:56 AM | 0h 40m | Practice | Recommend a solution for authorizing access to on-premises resources | Completed exam task; moving to prepare stage for next exam task |
 | 31 | 7/28/26 | 3:56 AM | 5:18 AM | 1h 22m | Practice | Recommend a solution for authorizing access to on-premises resources | Completed first practice question set; generated fact sheet |
