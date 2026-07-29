@@ -27,7 +27,7 @@
 ## Azure Key Vault Managed HSM
 
 **Classification:** Core  
-**Why it matters:** Managed HSM is the managed, Azure-integrated answer when keys require single-tenant isolation, customer-controlled recovery material, and strong key sovereignty without customer administration of an HSM cluster.  
+**Why it matters:** Managed HSM is the managed, Azure-integrated answer when keys require single-tenant isolation, customer-controlled recovery material, and strong key sovereignty without customer administration of an HSM cluster. [Managed HSM overview](https://learn.microsoft.com/en-us/azure/key-vault/managed-hsm/overview)  
 **Primary Microsoft source:** [Managed HSM overview](https://learn.microsoft.com/en-us/azure/key-vault/managed-hsm/overview)  
 **Limits and quotas source:** [Managed HSM service limits](https://learn.microsoft.com/en-us/azure/key-vault/managed-hsm/service-limits)
 
@@ -74,7 +74,7 @@ The words “fully managed” do not transfer recovery custody to Microsoft: the
 ## Azure Cloud HSM
 
 **Classification:** Core  
-**Why it matters:** Cloud HSM is the customer-administered, native-interface option for VM and lift-and-shift applications that cannot use the Key Vault REST model.  
+**Why it matters:** Cloud HSM is the customer-administered, native-interface option for VM and lift-and-shift applications that cannot use the Key Vault REST model. [Cloud HSM suitability](https://learn.microsoft.com/en-us/azure/cloud-hsm/overview#azure-cloud-hsm-suitability)  
 **Primary Microsoft source:** [Azure Cloud HSM overview](https://learn.microsoft.com/en-us/azure/cloud-hsm/overview)  
 **Limits and quotas source:** [Azure Cloud HSM service limits](https://learn.microsoft.com/en-us/azure/cloud-hsm/service-limits)
 
@@ -121,7 +121,7 @@ Cloud HSM's single tenancy and FIPS level do not make it a stronger universal CM
 ## Azure Key Vault Standard and Premium
 
 **Classification:** Core  
-**Why it matters:** Standard and Premium are the default managed-vault choices when a solution needs secrets, certificates, software keys, or Azure-native cryptographic operations. Premium is a key-protection upgrade, not a different secret or certificate store.  
+**Why it matters:** Standard and Premium are the default managed-vault choices when a solution needs secrets, certificates, software keys, or Azure-native cryptographic operations. Premium is a key-protection upgrade, not a different secret or certificate store. [Key Vault object support](https://learn.microsoft.com/en-us/azure/key-vault/general/about-keys-secrets-certificates#object-types)  
 **Primary Microsoft source:** [Azure Key Vault overview](https://learn.microsoft.com/en-us/azure/key-vault/general/overview)  
 **Limits and quotas source:** [Azure Key Vault service limits](https://learn.microsoft.com/en-us/azure/key-vault/general/service-limits)
 
@@ -169,7 +169,7 @@ Choose Standard for mixed software keys, secrets, and certificates; choose Premi
 ## Azure Payment HSM
 
 **Classification:** Core  
-**Why it matters:** Payment HSM is the industry-specific answer for real-time payment cryptography whose command set, certification, accessories, networking, and availability model differ from general-purpose HSM services.  
+**Why it matters:** Payment HSM is the industry-specific answer for real-time payment cryptography whose command set, certification, accessories, networking, and availability model differ from general-purpose HSM services. [Payment HSM overview](https://learn.microsoft.com/en-us/azure/payment-hsm/overview)  
 **Primary Microsoft source:** [Azure Payment HSM overview](https://learn.microsoft.com/en-us/azure/payment-hsm/overview)  
 **Limits and quotas source:** [Azure Payment HSM service support guide](https://learn.microsoft.com/en-us/azure/payment-hsm/support-guide)
 
@@ -215,7 +215,7 @@ Choose Payment HSM when the requirement names PIN generation/validation, EMV cry
 ## Managed identities and workload identity federation
 
 **Classification:** Core  
-**Why it matters:** The architect should eliminate a credential before designing its storage and rotation whenever a supported workload can exchange a trusted identity for a Microsoft Entra access token.  
+**Why it matters:** The architect should eliminate a credential before designing its storage and rotation whenever a supported workload can exchange a trusted identity for a Microsoft Entra access token. [Secretless authentication patterns](https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/secretless-authentication)  
 **Primary Microsoft source:** [Secretless authentication for Azure resources](https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/secretless-authentication)  
 **Limits and quotas source:** [Workload identity federation considerations](https://learn.microsoft.com/en-us/entra/workload-id/workload-identity-federation-considerations)
 
@@ -257,3 +257,215 @@ When both source and target support Microsoft Entra authentication, managed iden
 A managed identity authenticates the caller but grants no access by itself. The target still requires RBAC, database permissions, an application role, or another authorization grant. [Secretless same-tenant authorization pattern](https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/secretless-authentication#accesses-microsoft-entra-protected-resources-same-tenant).
 
 ---
+
+## Key, secret, and certificate lifecycle
+
+**Classification:** Core  
+**Why it matters:** Rotation is not one feature: keys generate new key material, secrets usually require coordinated mutation of an external credential, and certificates require issuance, validation, deployment, and renewal. [Key Vault autorotation models](https://learn.microsoft.com/en-us/azure/key-vault/general/autorotation#autorotation-for-different-asset-types)  
+**Primary Microsoft source:** [Understanding autorotation in Azure Key Vault](https://learn.microsoft.com/en-us/azure/key-vault/general/autorotation)  
+**Limits and quotas source:** [Azure Key Vault service limits](https://learn.microsoft.com/en-us/azure/key-vault/general/service-limits)
+
+### Deep technical facts / requirements
+
+1. **[Key rotation behavior]** A Key Vault rotation policy creates a new version of the same key with new key material; it does not replace the object identifier or automatically delete prior versions. The minimum scheduled rotation interval is `7` days after creation or `7` days before expiration. [Key rotation policy settings](https://learn.microsoft.com/en-us/azure/key-vault/keys/how-to-configure-key-rotation#key-rotation-policy).
+2. **[Key consumer requirement]** Target services should use a versionless key URI to discover the newest version, but encrypted data must retain the versioned key reference needed to unwrap its DEK. Rotation rewraps DEKs rather than reencrypting all underlying data, so old key versions must remain enabled until rewrap completes. [Key rotation versioning guidance](https://learn.microsoft.com/en-us/azure/key-vault/keys/how-to-configure-key-rotation#key-rotation-policy).
+3. **[Service-integration delay]** Azure services that support end-to-end CMK rotation can take from `1` hour to `24` hours or more to detect and apply a new key version; the service-specific documentation determines when the old key can safely be disabled. [Key rotation Azure-service integration](https://learn.microsoft.com/en-us/azure/key-vault/keys/how-to-configure-key-rotation#integration-with-azure-services).
+4. **[Key permissions and cost]** Managing or invoking rotation requires key-management permissions such as Key Vault Crypto Officer; each scheduled key rotation incurs an additional operation charge. [Key rotation permissions and pricing](https://learn.microsoft.com/en-us/azure/key-vault/keys/how-to-configure-key-rotation#permissions-required).
+5. **[Secret rotation architecture]** A Key Vault secret is an opaque stored value, so Key Vault cannot generally rotate the credential in the external target by itself. Microsoft's reference pattern uses an Event Grid near-expiry event and an Azure Function to update the target system and then write a new secret version. [Secret autorotation architecture](https://learn.microsoft.com/en-us/azure/key-vault/general/autorotation#secret-autorotation).
+6. **[Single-credential failure window]** A one-credential rotation workflow changes the target credential and then updates Key Vault; a failure between those writes can leave callers with an invalid old value. The function must be idempotent, observable, and retry-safe. [Single-credential rotation tutorial](https://learn.microsoft.com/en-us/azure/key-vault/secrets/tutorial-rotation).
+7. **[Dual-credential availability]** When a target exposes `2` independently valid credentials, dual-credential rotation alternates them so one remains valid while the other changes. This removes the invalid-between-writes window but requires consumers to refresh and the target to support overlapping credentials. [Dual-credential secret rotation](https://learn.microsoft.com/en-us/azure/key-vault/secrets/tutorial-rotation-dual).
+8. **[Certificate composition]** Creating a Key Vault certificate creates a certificate object, key object, and secret object with the same name. The certificate endpoint exposes public X.509 metadata, while the secret can expose the certificate plus private key as PFX or PEM if export is allowed. [Key Vault certificate composition](https://learn.microsoft.com/en-us/azure/key-vault/certificates/about-certificates#composition-of-a-certificate).
+9. **[Certificate import formats]** Certificate import accepts PFX or PEM only and requires a private key; expired PFX certificates cannot be imported. The import password is used once and is not retained with the certificate. [Key Vault certificate import FAQ](https://learn.microsoft.com/en-us/azure/key-vault/certificates/faq#importing-azure-key-vault-certificates).
+10. **[Automatic-renewal gating]** Key Vault can automatically renew certificates issued through supported partner/integrated issuers. Certificates imported from arbitrary or nonpartner CAs can be stored and monitored but cannot be automatically renewed by Key Vault. [Key Vault certificate issuer behavior](https://learn.microsoft.com/en-us/azure/key-vault/certificates/about-certificates) [Certificate import FAQ](https://learn.microsoft.com/en-us/azure/key-vault/certificates/faq#can-i-import-certificates-from-non-partner-cas).
+11. **[Policy and issuer scope]** A certificate policy governs creation and later versions, and an issuer object can be reused only by certificate policies in the same vault. Certificate contacts are vault-wide: all configured contacts receive lifecycle notifications for any certificate in that vault. [Certificate policy, issuers, and contacts](https://learn.microsoft.com/en-us/azure/key-vault/certificates/about-certificates#certificate-policy).
+12. **[Public-certificate data handling]** Publicly trusted certificate enrollment sends request data to the CA and certificate-transparency logs outside the Azure boundary; Key Vault does not expose a switch to suppress CT submission for publicly trusted certificates. [Key Vault certificate transparency](https://learn.microsoft.com/en-us/azure/key-vault/certificates/about-certificates#certificate-transparency).
+13. **[Expired-object behavior]** An expired Key Vault certificate object can still be retrieved, but TLS and other consumers that validate expiration can reject it; successful renewal in the vault does not prove the new certificate reached or was bound by the consumer. [Key Vault expired-certificate behavior](https://learn.microsoft.com/en-us/azure/key-vault/certificates/about-certificates#composition-of-a-certificate) [Certificate rotation tutorial](https://learn.microsoft.com/en-us/azure/key-vault/certificates/tutorial-rotate-certificates).
+14. **[Governance timing]** Azure Policy can audit keys without a rotation policy and certificates without lifetime actions, but policy evaluation is not a rotation engine; the documented initial compliance scan can take up to `24` hours. [Key rotation policy governance](https://learn.microsoft.com/en-us/azure/key-vault/keys/how-to-configure-key-rotation#configure-key-rotation-policy-governance).
+
+### Incompatibilities and mutual exclusions
+
+If a certificate comes from a nonpartner CA and automated Key Vault-managed renewal is mandatory, the combination is invalid: use a supported integrated issuer or build an external CSR/issuance/import workflow. [Key Vault certificate issuer limitation](https://learn.microsoft.com/en-us/azure/key-vault/certificates/about-certificates).
+
+If the target supports only one active credential and uninterrupted access is mandatory, a simple overwrite cannot guarantee zero interruption across the target-update and vault-update steps; the target must support overlapping credentials or the workload needs a tested coordination/fallback design. [Single-credential rotation architecture](https://learn.microsoft.com/en-us/azure/key-vault/secrets/tutorial-rotation) [Dual-credential rotation architecture](https://learn.microsoft.com/en-us/azure/key-vault/secrets/tutorial-rotation-dual).
+
+### Edge cases and gotchas
+
+- Key rotation configured “before expiry” requires both an expiry interval in the rotation policy and an expiration date on the key; without them the trigger cannot be evaluated. [Key rotation policy prerequisites](https://learn.microsoft.com/en-us/azure/key-vault/keys/how-to-configure-key-rotation#key-rotation-policy).
+- A certificate's tags replicate on automatic renewal, but an imported partner-issued certificate must have autorotation configured in its issuance policy and key reuse disabled for new key material. [Key Vault certificate autorenewal FAQ](https://learn.microsoft.com/en-us/azure/key-vault/certificates/faq#if-i-import-a-certificate-from-a-partner-ca-will-the-autorenewal-feature-still-work).
+- Event publication is not proof of completed rotation; alert on function failures, target-update failures, new-version absence, and consumer adoption. [Key Vault autorotation architecture](https://learn.microsoft.com/en-us/azure/key-vault/general/autorotation).
+- Rotation can create more than `500` versions over time and eventually break individual-object backup, so retention and version cleanup must be designed separately from rotation frequency. [Key Vault version and backup limits](https://learn.microsoft.com/en-us/azure/key-vault/general/service-limits).
+
+### AZ-305 exam discriminator
+
+Use native key rotation for vault keys, issuer-driven renewal for supported certificates, and Event Grid plus Functions for secrets whose source credential lives in another service. “Enable autorotation” is incomplete unless the object type and consumer refresh path are named. [Key Vault autorotation comparison](https://learn.microsoft.com/en-us/azure/key-vault/general/autorotation#autorotation-for-different-asset-types).
+
+### Common trap
+
+Creating a new object version does not complete rotation: the consumer must discover and adopt that version, and old key material cannot be disabled until every dependent DEK or workload has moved safely. [Key rotation consumer guidance](https://learn.microsoft.com/en-us/azure/key-vault/keys/how-to-configure-key-rotation#key-rotation-policy).
+
+---
+
+## Key Vault authorization and networking
+
+**Classification:** Supporting  
+**Why it matters:** A design is valid only when the correct identity has both data-plane permission and an allowed network path, while administrators retain only the control-plane permissions they need. [Secure Key Vault guidance](https://learn.microsoft.com/en-us/azure/key-vault/general/secure-key-vault)  
+**Primary Microsoft source:** [Key Vault Azure RBAC guide](https://learn.microsoft.com/en-us/azure/key-vault/general/rbac-guide)  
+**Limits and quotas source:** [Key Vault networking limits](https://learn.microsoft.com/en-us/azure/key-vault/general/network-security)
+
+### Deep technical facts / requirements
+
+1. **[Plane separation]** Control-plane operations use Azure Resource Manager and Azure RBAC; data-plane key, secret, and certificate operations use the vault endpoint and either Azure RBAC or legacy access policies. Permission in one plane does not imply permission in the other. [Key Vault access-model overview](https://learn.microsoft.com/en-us/azure/key-vault/general/rbac-guide#key-vault-access-model-overview).
+2. **[Default change]** API version `2026-02-01` changed the default for new vaults to Azure RBAC in February 2026. Templates that omit the authorization model can therefore produce different behavior when moved from an older API version. [Prepare for Key Vault API 2026-02-01](https://learn.microsoft.com/en-us/azure/key-vault/general/access-control-default).
+3. **[Role boundary]** Key Vault Contributor manages the resource but cannot read object data. Key Vault Secrets User reads secret values, including the secret portion of an exportable certificate; Key Vault Reader reads metadata but not sensitive values; cryptographic roles grant specific key operations. [Key Vault built-in data roles](https://learn.microsoft.com/en-us/azure/key-vault/general/rbac-guide#azure-built-in-roles-for-key-vault-data-plane-operations).
+4. **[Assignment governance]** Managing vault data-role assignments requires `Microsoft.Authorization/roleAssignments/write/delete`, such as Owner, User Access Administrator, or constrained Key Vault Data Access Administrator. Key Vault Data Access Administrator uses an ABAC condition to limit which Key Vault roles it can assign. [Key Vault role-assignment prerequisites](https://learn.microsoft.com/en-us/azure/key-vault/general/rbac-guide#prerequisites).
+5. **[Scope recommendation]** Microsoft recommends a vault per application per environment with assignments at vault scope. Individual-object role assignments are exceptions for genuinely shared or per-user objects, not a replacement for a security boundary. [Key Vault RBAC scope best practices](https://learn.microsoft.com/en-us/azure/key-vault/general/rbac-guide#best-practices-for-individual-keys-secrets-and-certificates-role-assignments).
+6. **[Preview ABAC]** **[Preview]** Key Vault ABAC conditions can further constrain supported role assignments, but current Key Vault ABAC applies only to secret data actions; it is not a GA general condition model for keys and certificates. [Key Vault ABAC preview](https://learn.microsoft.com/en-us/azure/key-vault/general/rbac-guide#azure-built-in-roles-for-key-vault-data-plane-operations).
+7. **[Network rule scope]** Key Vault firewall and perimeter rules govern data-plane traffic only; control-plane ARM operations are not subject to those vault firewall rules. A deployment through ARM can therefore succeed while a portal or application data-plane read fails. [Key Vault network restrictions](https://learn.microsoft.com/en-us/azure/key-vault/general/network-security#restrictions-and-limitations).
+8. **[Firewall defaults and limits]** The firewall is disabled by default. When enabled, it supports `200` VNet rules and `1,000` public IPv4 CIDR rules; private RFC 1918 ranges and IPv6 cannot be entered as IP rules. [Key Vault firewall behavior and limits](https://learn.microsoft.com/en-us/azure/key-vault/general/network-security).
+9. **[Service endpoint behavior]** VNet rules use the `Microsoft.KeyVault` service endpoint on selected subnets and can take up to `15` minutes to become effective; service endpoints retain the vault's public endpoint while restricting allowed source subnets. [Key Vault VNet firewall configuration](https://learn.microsoft.com/en-us/azure/key-vault/general/network-security#key-vault-firewall-enabled-virtual-networks---dynamic-ips).
+10. **[Private endpoint DNS]** A Key Vault private endpoint uses a VNet private IP, but clients must resolve `<vault>.vault.azure.net` through the exact private zone `privatelink.vaultcore.azure.net`; otherwise they resolve the shared public ingress and fail when public access is disabled. [Key Vault Private Link DNS requirements](https://learn.microsoft.com/en-us/azure/key-vault/general/private-link-service).
+11. **[Private endpoint placement]** The private endpoint and its VNet must be in the same region, but the vault can be in another region. Private connectivity does not require NAT, a gateway, or a public IP because traffic traverses the Microsoft backbone. [Key Vault Private Link prerequisites](https://learn.microsoft.com/en-us/azure/key-vault/general/private-link-service#prerequisites).
+12. **[Trusted-services exception]** “Allow trusted Microsoft services” covers only documented service scenarios and still requires object authorization. Under normal disabled-public-access mode the bypass can remain effective; under Network Security Perimeter mode it is overridden unless perimeter rules admit the traffic. [Key Vault trusted-services and perimeter behavior](https://learn.microsoft.com/en-us/azure/key-vault/general/network-security#restrictions-and-limitations).
+13. **[Perimeter status]** Network Security Perimeter is generally available for supported resources and governs public inbound/outbound paths among associated PaaS resources; private endpoint traffic is exempt from perimeter rules. [Key Vault Network Security Perimeter](https://learn.microsoft.com/en-us/azure/key-vault/general/network-security#network-security-perimeter).
+14. **[Control-plane API retirement]** All Key Vault control-plane API versions earlier than `2026-02-01` retire on **February 27, 2027**; vault resources remain, but management SDKs, templates, Terraform providers, and REST calls must use `2026-02-01` or later. Key Vault data-plane APIs are not affected by this retirement. [Key Vault control-plane API retirement](https://learn.microsoft.com/en-us/azure/key-vault/general/access-control-default).
+
+### Incompatibilities and mutual exclusions
+
+If a client must reach a private-only vault but cannot resolve `privatelink.vaultcore.azure.net` or route to the private endpoint, an RBAC assignment cannot make the call succeed; identity and network gates are independent. [Key Vault Private Link diagnostics](https://learn.microsoft.com/en-us/azure/key-vault/general/private-link-diagnostics).
+
+If an existing access-policy vault is switched to Azure RBAC without equivalent role assignments, the access policies stop authorizing immediately and the migration causes a data-plane outage. [Enable Key Vault Azure RBAC warning](https://learn.microsoft.com/en-us/azure/key-vault/general/rbac-guide#enable-azure-rbac-permissions-on-key-vault).
+
+### Edge cases and gotchas
+
+- Azure portal object browsing is a data-plane operation from the administrator's client network; the resource blade can open while key/secret/certificate lists fail because the client is outside the firewall boundary. [Key Vault firewall portal behavior](https://learn.microsoft.com/en-us/azure/key-vault/general/network-security#key-vault-firewall-enabled-virtual-networks---dynamic-ips).
+- A Contributor on an access-policy-model vault can potentially grant themselves data access by changing policies, so control-plane Contributor is security-sensitive even though it does not directly read objects. [Key Vault administrative-access warning](https://learn.microsoft.com/en-us/azure/key-vault/general/rbac-guide#managing-administrative-access-to-key-vault).
+- Public DNS intentionally reveals that a guessed vault name exists but does not reveal the private IP or allow data access when the public endpoint is disabled. [Private Key Vault public-DNS behavior](https://learn.microsoft.com/en-us/azure/key-vault/general/private-link-service#public-dns-visibility-of-a-private-key-vault).
+
+### AZ-305 exam discriminator
+
+Private Link answers “which network path reaches the vault,” Azure RBAC answers “which principal may perform which object operation,” and managed identity answers “how the workload authenticates.” A private design normally needs all three decisions. [Secure Key Vault guidance](https://learn.microsoft.com/en-us/azure/key-vault/general/secure-key-vault).
+
+### Common trap
+
+Disabling public access does not eliminate the trusted-services bypass in the ordinary firewall model, and it never replaces data-plane authorization; check the exact network mode and consumer integration. [Key Vault network restrictions](https://learn.microsoft.com/en-us/azure/key-vault/general/network-security#restrictions-and-limitations).
+
+---
+
+## Reliability, recovery, monitoring, and governance
+
+**Classification:** Supporting  
+**Why it matters:** A vault that is securely configured but unrecoverable, regionally misaligned, unmonitored, or free to drift can still cause a workload outage or compliance failure. [Key Vault reliability](https://learn.microsoft.com/en-us/azure/reliability/reliability-key-vault) [Key Vault monitoring](https://learn.microsoft.com/en-us/azure/key-vault/general/monitor-key-vault)  
+**Primary Microsoft source:** [Reliability in Azure Key Vault](https://learn.microsoft.com/en-us/azure/reliability/reliability-key-vault)  
+**Limits and quotas source:** [Azure Key Vault service limits](https://learn.microsoft.com/en-us/azure/key-vault/general/service-limits)
+
+### Deep technical facts / requirements
+
+1. **[Zone resiliency]** Standard and Premium vaults are automatically zone redundant in every supported availability-zone region, synchronously replicate data across zones, and require no customer configuration or extra zone charge. An in-flight request can still fail during zone redirection, so clients need transient retry. [Key Vault zone-resilience behavior](https://learn.microsoft.com/en-us/azure/reliability/reliability-key-vault#resilience-to-availability-zone-failures).
+2. **[Regional resiliency]** Built-in paired-region replication is asynchronous and failover is Microsoft-initiated, best effort, and potentially delayed; it can occur at a different time than the workload's other Azure services. An application with explicit regional RTO/RPO therefore needs its own multi-region dependency design. [Key Vault Microsoft-managed regional failover](https://learn.microsoft.com/en-us/azure/reliability/reliability-key-vault#microsoft-managed-failover-to-a-paired-region).
+3. **[Backup limits]** Vault backup operates on one key, secret, or certificate at a time, produces an Azure-encrypted blob that cannot be decrypted outside Azure, supports at most `500` versions, and restores only to the same subscription and Azure geography. It is a point-in-time copy, not continuous replication. [Key Vault backup and restore constraints](https://learn.microsoft.com/en-us/azure/reliability/reliability-key-vault#backup-and-restore).
+4. **[Soft-delete default]** Deleted vaults and objects remain recoverable for `7–90` days, default `90`; recovery of a vault does not necessarily recreate integrated resources such as Azure RBAC assignments and Event Grid subscriptions. [Key Vault soft-delete overview](https://learn.microsoft.com/en-us/azure/key-vault/general/soft-delete-overview).
+5. **[Purge-protection behavior]** Purge protection prevents anyone—including the customer and Microsoft—from permanently purging protected material before the retention interval expires; once enabled, it cannot be disabled. [Key Vault purge protection](https://learn.microsoft.com/en-us/azure/key-vault/general/soft-delete-overview#purge-protection).
+6. **[Metrics versus logs]** Azure Monitor collects Key Vault platform metrics automatically with no configuration; resource logs are generated but are not collected or stored until a diagnostic setting routes them to Log Analytics, Storage, Event Hubs, or a supported partner. [Monitor Key Vault collection behavior](https://learn.microsoft.com/en-us/azure/key-vault/general/monitor-key-vault#azure-monitor-platform-metrics).
+7. **[Audit scope]** Key Vault logging records authenticated REST requests, including authorization failures, system errors, and bad requests, as well as vault management operations; when routed to Storage, records can take up to `10` minutes to appear. [Key Vault logging behavior](https://learn.microsoft.com/en-us/azure/key-vault/general/howto-logging) [Key Vault storage-log latency](https://learn.microsoft.com/en-us/azure/key-vault/general/logging).
+8. **[Signal separation]** Activity Log records subscription-level control-plane events and is collected automatically, while `AuditEvent` resource logs record data-plane operations only after routing. Monitoring only one source leaves either management changes or object access invisible. [Key Vault monitoring data sources](https://learn.microsoft.com/en-us/azure/key-vault/general/monitor-key-vault).
+9. **[Operational alerting]** Microsoft documents Key Vault availability, latency, saturation, request, and result-code metrics and suggests example thresholds such as availability below `100%`, latency above `1,000 ms`, and saturation above `75%`; production thresholds still require workload testing. [Key Vault alert guidance](https://learn.microsoft.com/en-us/azure/key-vault/general/monitor-key-vault#key-vault-alert-rules).
+10. **[Policy effects]** Key Vault built-in policies can audit or deny non-RBAC vaults, missing purge protection, disallowed networks, weak/expired objects, or missing lifetime actions, and can deploy diagnostic settings through `DeployIfNotExists`; Audit is commonly the default effect and must be changed deliberately for enforcement. [Key Vault Azure Policy built-ins](https://learn.microsoft.com/en-us/azure/key-vault/general/azure-policy#available-built-in-policy-definitions).
+11. **[Preview policy status]** **[Preview]** The built-in certificate maximum-validity and certificate-near-expiry policies are labeled preview in current documentation, while certificate lifetime-action policy is not; policy status must be checked before treating a control as an enforceable baseline. [Key Vault certificate policy definitions](https://learn.microsoft.com/en-us/azure/key-vault/general/azure-policy#certificates).
+12. **[Managed HSM recovery distinction]** Managed HSM disaster recovery additionally requires the customer-held security domain, quorum private keys, and a full backup; vault soft delete and Azure-managed redundancy do not substitute for those artifacts. [Managed HSM disaster recovery](https://learn.microsoft.com/en-us/azure/key-vault/managed-hsm/disaster-recovery-guide).
+
+### Incompatibilities and mutual exclusions
+
+If the RTO requires immediate customer-controlled failover to a chosen second region, relying only on Key Vault's Microsoft-managed paired-region failover is invalid because Microsoft controls the decision and timing; deploy and operate an application-aligned multi-region vault strategy. [Key Vault regional-failover limitations](https://learn.microsoft.com/en-us/azure/reliability/reliability-key-vault#microsoft-managed-failover-to-a-paired-region).
+
+If a backup must restore to another subscription or Azure geography, Key Vault individual-object backup cannot meet the requirement because restore is constrained to the original subscription and geography. [Key Vault backup restrictions](https://learn.microsoft.com/en-us/azure/reliability/reliability-key-vault#backup-and-restore).
+
+### Edge cases and gotchas
+
+- Soft delete preserves the resource or object, not every external dependency; recovered vaults can require recreation of role assignments, Event Grid subscriptions, private endpoints, or consuming-service bindings. [Key Vault soft-delete integration behavior](https://learn.microsoft.com/en-us/azure/key-vault/general/soft-delete-overview).
+- A multi-region vault-per-region design has no automatic application-secret synchronization; the rotation workflow must update every intended vault and preserve a safe overlap window. [Key Vault regional vault guidance](https://learn.microsoft.com/en-us/azure/key-vault/general/overview-throttling#how-does-key-vault-handle-its-limits) [Dual-credential rotation](https://learn.microsoft.com/en-us/azure/key-vault/secrets/tutorial-rotation-dual).
+- Enabling diagnostics after an incident does not reconstruct earlier resource logs; diagnostic settings must exist before the data-plane event. [Monitor Key Vault resource logs](https://learn.microsoft.com/en-us/azure/key-vault/general/monitor-key-vault#azure-monitor-resource-logs).
+- A compliance policy that audits expiry does not rotate an object or prove consumer adoption; lifecycle automation and runtime validation remain separate controls. [Key Vault policy integration](https://learn.microsoft.com/en-us/azure/key-vault/general/azure-policy) [Key Vault autorotation](https://learn.microsoft.com/en-us/azure/key-vault/general/autorotation).
+
+### AZ-305 exam discriminator
+
+Use soft delete for recovery during a retention window, purge protection against premature permanent deletion, backup for an offline point-in-time copy, zone redundancy for zone failure, and a deliberate multi-region topology for customer-controlled regional continuity; none is a synonym for another. [Key Vault reliability](https://learn.microsoft.com/en-us/azure/reliability/reliability-key-vault).
+
+### Common trap
+
+“Geo-replicated” does not mean “active-active”: normal traffic goes to the primary region, replication is asynchronous, and Microsoft—not the customer—initiates built-in failover. [Key Vault regional behavior](https://learn.microsoft.com/en-us/azure/reliability/reliability-key-vault#microsoft-managed-failover-to-a-paired-region).
+
+---
+
+## App Configuration, App Service, AKS, and customer-managed-key integrations
+
+**Classification:** Adjacent  
+**Why it matters:** These integrations determine whether a stored value is referenced, cached, refreshed, mounted, or consumed as a KEK, and they commonly expose the last-mile failure that a store-only answer misses. [App Configuration Key Vault references](https://learn.microsoft.com/en-us/azure/azure-app-configuration/use-key-vault-references-dotnet-core) [Azure encryption-at-rest hierarchy](https://learn.microsoft.com/en-us/azure/security/fundamentals/encryption-atrest)  
+**Primary Microsoft source:** [Azure key-management selection guide](https://learn.microsoft.com/en-us/azure/security/fundamentals/key-management-choose)  
+**Limits and quotas source:** [Azure Key Vault service limits](https://learn.microsoft.com/en-us/azure/key-vault/general/service-limits)
+
+### Deep technical facts / requirements
+
+1. **[App Configuration boundary]** An App Configuration Key Vault reference stores a URI, not the secret value. App Configuration and Key Vault do not communicate directly; the application authenticates separately to App Configuration and then Key Vault. [App Configuration Key Vault reference behavior](https://learn.microsoft.com/en-us/azure/azure-app-configuration/use-key-vault-references-dotnet-core).
+2. **[App Configuration refresh]** The .NET provider can refresh Key Vault secrets on an interval independent of ordinary configuration refresh; the minimum secret-refresh interval is `1` minute, which prevents a design from polling Key Vault continuously. [App Configuration .NET secret refresh](https://learn.microsoft.com/en-us/azure/azure-app-configuration/reference-dotnet-provider#key-vault-secret-refresh).
+3. **[Multi-vault credentials]** App Configuration's .NET provider can use one credential for all referenced vaults or register per-vault credentials/custom resolvers; one reference does not cause App Configuration to inherit permission to the secret. [App Configuration Key Vault credential behavior](https://learn.microsoft.com/en-us/azure/azure-app-configuration/use-key-vault-references-dotnet-core#update-your-code-to-use-a-key-vault-reference).
+4. **[App Service caching]** App Service Key Vault references cache resolved values and normally refetch them every `24` hours. Any app configuration change triggers an immediate refetch, and an authenticated configuration-references refresh API can force resolution without waiting. [App Service Key Vault reference refresh](https://learn.microsoft.com/en-us/azure/app-service/app-service-key-vault-references).
+5. **[App Service identity]** App Service resolves references with the app's system-assigned identity by default; a user-assigned identity can be selected through `keyVaultReferenceIdentity`, including for deployment-time references before the system identity exists. The selected identity still needs vault data permission. [App Service Key Vault reference identity](https://learn.microsoft.com/en-us/azure/app-service/app-service-key-vault-references#access-vaults-with-a-user-assigned-identity).
+6. **[App Service private networking]** A private-endpoint vault requires the app's outbound path and DNS to reach the VNet. Linux App Service normally requires `vnetRouteAllEnabled=true` for this path, except Flex Consumption Functions, which route through the VNet automatically. [App Service Key Vault private-network access](https://learn.microsoft.com/en-us/azure/app-service/app-service-key-vault-references#access-network-restricted-vaults).
+7. **[AKS mounting model]** The Azure Key Vault provider for Secrets Store CSI Driver mounts secrets, keys, and certificates as files into a pod volume through a `SecretProviderClass`; it does not require copying every object into a Kubernetes Secret. [AKS Key Vault CSI provider](https://learn.microsoft.com/en-us/azure/aks/csi-secrets-store-driver).
+8. **[AKS rotation timing]** The AKS add-on's autorotation polling interval defaults to `2` minutes and is configurable. Mounted files and optionally synchronized Kubernetes Secrets update, but applications that read the value only at process start still require restart or reload logic. [AKS CSI rotation options](https://learn.microsoft.com/en-us/azure/aks/csi-secrets-store-configuration-options#enable-and-disable-autorotation).
+9. **[AKS identity roles]** A workload that reads secret objects through the provider needs Key Vault Secrets User; a workload that reads key or certificate objects needs Key Vault Certificate User according to the AKS integration guidance. The add-on identity's infrastructure role does not automatically authorize every pod. [AKS Key Vault CSI roles](https://learn.microsoft.com/en-us/azure/aks/csi-secrets-store-driver#roles).
+10. **[CMK hierarchy]** Azure services normally encrypt data with service-local DEKs and use the customer's Key Vault or Managed HSM key as a KEK to wrap those DEKs; the service does not call the vault for every block of application data. [Azure encryption-at-rest key hierarchy](https://learn.microsoft.com/en-us/azure/security/fundamentals/encryption-atrest#envelope-encryption-with-a-key-hierarchy).
+11. **[Platform-managed default]** Platform-managed keys are the default for Azure encryption at rest and require no customer configuration; CMKs add lifecycle, authorization, availability, and recovery responsibility and should be selected for a control/compliance requirement rather than assumed to be universally stronger architecture. [Azure encryption-at-rest key-management options](https://learn.microsoft.com/en-us/azure/security/fundamentals/encryption-atrest#key-management-options).
+12. **[CMK compatibility]** Azure CMK integration is service-specific: the consuming service documentation determines supported vault/HSM type, key algorithm, region/tenant relationship, identity role, versioned or versionless URI, and rotation behavior. Cloud HSM is not a generic PaaS CMK source. [Azure key-management scenario guide](https://learn.microsoft.com/en-us/azure/security/fundamentals/key-management-choose).
+
+### Incompatibilities and mutual exclusions
+
+If configuration operators must manage feature flags and endpoints but must not read secrets, storing all settings as Key Vault secrets cannot provide the clean service and permission boundary; keep ordinary settings in App Configuration and only the protected value in Key Vault. [App Configuration Key Vault reference architecture](https://learn.microsoft.com/en-us/azure/azure-app-configuration/use-key-vault-references-dotnet-core).
+
+If an application reads a CSI-mounted value or App Service setting only once at startup, rotating the backing Key Vault object cannot provide live adoption by itself; add application reload/restart behavior or choose an integration that refreshes within the required window. [AKS CSI rotation behavior](https://learn.microsoft.com/en-us/azure/aks/csi-secrets-store-configuration-options#enable-and-disable-autorotation) [App Service Key Vault reference refresh](https://learn.microsoft.com/en-us/azure/app-service/app-service-key-vault-references).
+
+### Edge cases and gotchas
+
+- A versioned Key Vault reference intentionally pins one version and does not move when a new version appears; use a versionless reference only when automatic adoption is desired and safe. [App Service Key Vault reference syntax](https://learn.microsoft.com/en-us/azure/app-service/app-service-key-vault-references).
+- App Configuration reference resolution can fail even when App Configuration access succeeds because the application—not App Configuration—must also authenticate and reach Key Vault. [App Configuration reference authentication](https://learn.microsoft.com/en-us/azure/azure-app-configuration/use-key-vault-references-dotnet-core#grant-your-app-access-to-key-vault).
+- Successful CMK rotation does not prove that an Azure service has adopted the new version; service detection can take `1–24` hours or more and must be verified before the old key version is disabled. [Key Vault CMK rotation integration](https://learn.microsoft.com/en-us/azure/key-vault/keys/how-to-configure-key-rotation#integration-with-azure-services).
+- A Key Vault reference reduces secret duplication but still places the resolved value in the consumer process, file mount, or application setting cache; downstream memory, logs, crash dumps, and file permissions remain part of the threat model. [Well-Architected application-secrets guidance](https://learn.microsoft.com/en-us/azure/well-architected/security/application-secrets).
+
+### AZ-305 exam discriminator
+
+App Configuration is the configuration plane, Key Vault is the protected-material plane, and the workload identity plus client/provider is the resolution plane. A Key Vault reference does not transfer the secret into App Configuration or eliminate the workload's Key Vault permission. [App Configuration Key Vault reference behavior](https://learn.microsoft.com/en-us/azure/azure-app-configuration/use-key-vault-references-dotnet-core).
+
+### Common trap
+
+“Automatic rotation” at the vault does not mean “automatic application refresh.” App Service can cache for `24` hours, the App Configuration provider uses a configured interval, and CSI-updated files still require application reload behavior. [App Service reference caching](https://learn.microsoft.com/en-us/azure/app-service/app-service-key-vault-references) [App Configuration secret refresh](https://learn.microsoft.com/en-us/azure/azure-app-configuration/reference-dotnet-provider#key-vault-secret-refresh) [AKS CSI autorotation](https://learn.microsoft.com/en-us/azure/aks/csi-secrets-store-configuration-options#enable-and-disable-autorotation).
+
+---
+
+## Highest-yield exam discriminators
+
+| Scenario clue | Best answer | Why |
+|---|---|---|
+| Azure-hosted workload and target both support Microsoft Entra authentication | Managed identity plus target authorization | The credential can be eliminated; managed identity supplies the token while RBAC/database/application permissions remain a separate requirement. [Secretless same-tenant pattern](https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/secretless-authentication#accesses-microsoft-entra-protected-resources-same-tenant). |
+| GitHub, Kubernetes, multicloud, or on-premises OIDC workload needs Azure access without an Entra client secret | Workload identity federation | The external token is exchanged for an Entra access token; each app or user-assigned identity supports at most `20` explicit federated identity credentials. [Workload identity federation considerations](https://learn.microsoft.com/en-us/entra/workload-id/workload-identity-federation-considerations). |
+| Password, API key, connection string, software key, and TLS certificate in one managed store | Key Vault Standard | Standard stores software keys, secrets, and certificates; none of these clues independently requires an HSM-protected key. [Key Vault object types](https://learn.microsoft.com/en-us/azure/key-vault/general/about-keys-secrets-certificates#object-types). |
+| Mixed secrets/certificates plus a vault-compatible HSM-protected signing or CMK key | Key Vault Premium | Premium retains mixed-object support and adds HSM-protected keys; Managed HSM cannot store the secrets or certificate objects. [Azure key-management selection guide](https://learn.microsoft.com/en-us/azure/security/fundamentals/key-management-choose). |
+| HSM-protected Azure PaaS CMKs, single tenancy, key sovereignty, and keys only | Managed HSM | Managed HSM is single tenant and FIPS 140-3 Level 3, supports only HSM keys, and makes the customer responsible for the security domain/quorum. [Managed HSM key model](https://learn.microsoft.com/en-us/azure/key-vault/managed-hsm/about-keys) [Managed HSM recovery responsibility](https://learn.microsoft.com/en-us/azure/azure-sovereign-clouds/public/key-recovery-management). |
+| Unchanged VM application requires PKCS#11, JCA/JCE, CNG/KSP, AD CS, or Oracle/SQL Server TDE | Cloud HSM | Cloud HSM provides full native interfaces and a `3`-node customer-administered IaaS cluster; Key Vault's REST model and Managed HSM's limited native integration do not fit. [Cloud HSM best fit](https://learn.microsoft.com/en-us/azure/cloud-hsm/overview#best-fit). |
+| Azure Storage, Data Lake, Purview, or another PaaS service requires a Key Vault-style CMK | Key Vault Premium or Managed HSM, not Cloud HSM | Cloud HSM is IaaS-only and cannot serve Azure PaaS/SaaS customer-managed-key integrations. [Cloud HSM not-a-fit scenarios](https://learn.microsoft.com/en-us/azure/cloud-hsm/overview#not-a-fit). |
+| PIN generation/validation, EMV cryptograms, 3-D Secure, issuing, or payment tokenization | Payment HSM | Only Payment HSM supplies the payShield payment command and PCI ecosystem; performance SKUs are `60`, `250`, and `2,500 CPS`. [Payment HSM use cases](https://learn.microsoft.com/en-us/azure/payment-hsm/overview#typical-use-cases) [Payment HSM licensing FAQ](https://learn.microsoft.com/en-us/azure/payment-hsm/faq#what-default-license-comes-with-azure-payment-hsm). |
+| Production Payment HSM requires high availability | Two devices in one region on `stamp1` and `stamp2` | The two stamps span two availability zones; same-stamp devices do not satisfy the documented HA design, and no HA design means reduced support eligibility. [Payment HSM HA deployment](https://learn.microsoft.com/en-us/azure/payment-hsm/deployment-scenarios#high-availability-deployment). |
+| Key rotation must occur automatically every `30` days | Key Vault key rotation policy | `30` days is above the `7`-day minimum; rotation creates a new key version, and the consumer should use versionless discovery while retaining versioned references for old DEK unwrap. [Key Vault key rotation policy](https://learn.microsoft.com/en-us/azure/key-vault/keys/how-to-configure-key-rotation#key-rotation-policy). |
+| Third-party target supports two simultaneous API credentials and rotation must not interrupt service | Dual-credential Event Grid/Functions rotation | Alternating the two credentials leaves one valid during target and Key Vault updates, avoiding the single-credential invalid-between-writes window. [Dual-credential secret rotation](https://learn.microsoft.com/en-us/azure/key-vault/secrets/tutorial-rotation-dual). |
+| Certificate from an arbitrary nonpartner CA must renew automatically in Key Vault | Change issuer or build external renewal workflow | Key Vault can import the certificate but automatic renewal is limited to supported partner/integrated issuers. [Key Vault certificate issuer behavior](https://learn.microsoft.com/en-us/azure/key-vault/certificates/about-certificates). |
+| New vault deployment asks for current authorization default | Azure RBAC | API version `2026-02-01+` makes Azure RBAC the new-vault default; access policies are the legacy model. [Key Vault RBAC migration and default](https://learn.microsoft.com/en-us/azure/key-vault/general/rbac-migration). |
+| Operator has Key Vault Contributor but cannot read a secret | Assign a least-privilege data-plane role | Key Vault Contributor is control-plane only; Key Vault Secrets User reads secret contents without granting broad object administration. [Key Vault data-plane built-in roles](https://learn.microsoft.com/en-us/azure/key-vault/general/rbac-guide#azure-built-in-roles-for-key-vault-data-plane-operations). |
+| Vault must be private and has `1,200` office CIDR ranges | Use private endpoints/perimeter or redesign the allow-list | A vault accepts at most `1,000` public IPv4 CIDR rules and `200` VNet rules; IPv6 and RFC 1918 entries are invalid IP rules. [Key Vault firewall limits](https://learn.microsoft.com/en-us/azure/key-vault/general/network-security). |
+| Regional RTO must be customer-controlled and cannot wait for Microsoft | Regional application stacks with deliberate regional vault/lifecycle topology | Built-in failover is asynchronous, Microsoft-initiated, best effort, and can occur after a significant delay; it is not customer-controlled active-active. [Key Vault regional failover](https://learn.microsoft.com/en-us/azure/reliability/reliability-key-vault#microsoft-managed-failover-to-a-paired-region). |
+| Restore a Key Vault object backup to another subscription or geography | Not supported; redesign export/recovery strategy | An individual-object backup restores only within the same subscription and Azure geography and supports at most `500` versions. [Key Vault backup constraints](https://learn.microsoft.com/en-us/azure/reliability/reliability-key-vault#backup-and-restore). |
+| Feature flags and endpoints plus one vendor API secret with separate operator permissions | App Configuration references a Key Vault secret | App Configuration stores only the Key Vault URI, and the application authenticates independently to both services; it does not copy the secret value into configuration. [App Configuration Key Vault references](https://learn.microsoft.com/en-us/azure/azure-app-configuration/use-key-vault-references-dotnet-core). |
+| App Service secret changed but the application still sees the old value | Force reference refresh or wait for the cache cycle | App Service normally refetches Key Vault references every `24` hours; an app configuration change or authenticated refresh endpoint triggers immediate resolution. [App Service Key Vault reference refresh](https://learn.microsoft.com/en-us/azure/app-service/app-service-key-vault-references). |
+| Managed HSM must be recovered after catastrophic regional loss | Security domain + quorum private keys + latest full backup | All three artifacts are required; the security domain is not a key backup, and Microsoft cannot reconstruct lost customer recovery material. [Managed HSM disaster recovery](https://learn.microsoft.com/en-us/azure/key-vault/managed-hsm/disaster-recovery-guide) [Managed HSM key-recovery responsibilities](https://learn.microsoft.com/en-us/azure/azure-sovereign-clouds/public/key-recovery-management). |
+
+---
+
+_Model used to research and author this fact sheet: not supplied by the user._
