@@ -8,6 +8,7 @@ This log tracks individual study sessions for the **AZ-305** exam. Fill in **End
 
 | # | Date | Start | End | Duration | Mode | Task | Notes |
 |:--|:-----|:------|:----|:---------|:-----|:------|:------|
+| 32 | 7/29/26 | 4:16 AM |  |  | Practice | Recommend a solution for authorizing access to on-premises resources |  |
 | 31 | 7/28/26 | 3:56 AM | 5:18 AM | 1h 22m | Practice | Recommend a solution for authorizing access to on-premises resources | Completed first practice question set; generated fact sheet |
 | 30 | 7/27/26 | 4:16 AM | 5:35 AM | 1h 19m | Prepare | Recommend a solution for authorizing access to on-premises resources | Pick up at quiz; finish generating fact sheet |
 | 29 | 7/26/26 | 1:13 PM | 4:04 PM | 2h 51m | Practice | Recommend a solution for authorizing access to Azure resources | Completed exam task. Move to next exam task "Recommend a solution for authorizing access to on-premises resources" |
