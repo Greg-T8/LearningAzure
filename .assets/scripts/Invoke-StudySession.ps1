@@ -33,7 +33,7 @@ function Invoke-StudySession {
         [string]$AppliedSkill,
 
         [Parameter(ParameterSetName = 'Exam')]
-        [ValidateSet('Prepare', 'Research', 'Practice', 'Review')]
+        [ValidateSet('Prepare', 'Practice', 'Review')]
         [string]$Mode,
 
         [Parameter(ParameterSetName = 'Exam')]

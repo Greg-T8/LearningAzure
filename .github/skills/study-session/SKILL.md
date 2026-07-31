@@ -2,7 +2,7 @@
 name: study-session
 description: "Start or stop a certification or Applied Skill study session by invoking Invoke-StudySession from .assets/scripts/Invoke-StudySession.ps1. Parses natural language, distinguishes exams from Applied Skills, and prompts for required values. Use when asked to begin/start/stop a study session, start studying, track study time, or log study activity."
 user-invokable: true
-argument-hint: "[e.g. 'Begin AZ-305 research' or 'Start studying ALZ']"
+argument-hint: "[e.g. 'Begin AZ-305 practice' or 'Start studying ALZ']"
 ---
 
 # Study Session
@@ -24,7 +24,7 @@ Run from the workspace root.
 | `Action` | All parameter sets | No; defaults to `Start` | `Start` or `Stop` |
 | `Exam` | Exam only | Exam Start | Active certification code such as `AZ-305` |
 | `AppliedSkill` | Applied Skill only | Applied Skill Start | Topic folder such as `ALZ` or `AMBA` |
-| `Mode` | Exam only | Exam Start | `Prepare`, `Research`, `Practice`, or `Review` |
+| `Mode` | Exam only | Exam Start | `Prepare`, `Practice`, or `Review` |
 | `Task` | Exam only | No | Task from the certification `Skills.psd1` |
 | `Domain` | Exam only | No | Domain from the certification `Skills.psd1` |
 | `Skill` | Exam only | No | Skill from the certification `Skills.psd1` |
@@ -37,7 +37,6 @@ Run from the workspace root.
 | Mode | Aliases |
 |:-----|:--------|
 | `Prepare` | prepare, prep, setup, planning |
-| `Research` | research, study, docs, reading |
 | `Practice` | practice, hands-on, lab, drill |
 | `Review` | review, recap, revise |
 
@@ -95,7 +94,7 @@ if (-not (Get-Command -Name 'Invoke-StudySession' -ErrorAction SilentlyContinue)
 Exam example:
 
 ```powershell
-Invoke-StudySession -Action Start -Exam AZ-305 -Mode Research -Task 'Recommend a logging solution' -Notes 'Compare workspace designs'
+Invoke-StudySession -Action Start -Exam AZ-305 -Mode Practice -Task 'Recommend a logging solution' -Notes 'Compare workspace designs'
 ```
 
 Applied Skill example:
@@ -119,7 +118,7 @@ Confirm the action and session number briefly. If execution fails, show the erro
 
 ## Behavioral Examples
 
-- “Begin AZ-305 research on Recommend a logging solution” → Exam Start; parse Mode and Task.
+- “Begin AZ-305 practice on Recommend a logging solution” → Exam Start; parse Mode and Task.
 - “Start studying ALZ and explore bootstrap permissions” → Applied Skill Start; put the exploration text in Notes and do not ask for Mode.
 - “End study session” → Stop with automatic active-session detection.
 - An identifier that exists as both an exam and an Applied Skill → ask which track type the user means.

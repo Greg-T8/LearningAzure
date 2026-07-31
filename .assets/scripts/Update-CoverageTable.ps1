@@ -168,7 +168,6 @@ $Helpers = {
         # Track minutes for canonical modes only (matches Invoke-StudySession.ps1 ValidateSet)
         $modeMinutes = [ordered]@{
             Prepare  = 0
-            Research = 0
             Practice = 0
             Review   = 0
         }
@@ -196,6 +195,11 @@ $Helpers = {
 
                 if ($sessionMinutes -gt 0 -and -not [string]::IsNullOrWhiteSpace($dateCell)) {
                     $studiedDates.Add($dateCell) | Out-Null
+                }
+
+                # Fold retired Research mode into Practice for historical rows
+                if ($modeCell -eq 'Research') {
+                    $modeCell = 'Practice'
                 }
 
                 # Only accumulate against canonical mode names; ignore legacy/free-form values
@@ -664,7 +668,7 @@ $Helpers = {
 
     function Get-StudyLogHoursBySkill {
         # Aggregate StudyLog durations by tracker entity (Skill or Task) and mode buckets
-        # Returns hashtable: entityName → @{ Prepare; Research; Practice; Review; ML; MD; NB; Lab; PQ; Total }
+        # Returns hashtable: entityName → @{ Prepare; Practice; Review; ML; MD; NB; Lab; PQ; Total }
         $result = @{}
 
         if (-not (Test-Path -Path $StudyLogFile)) { return $result }
@@ -711,7 +715,6 @@ $Helpers = {
             if (-not $result.ContainsKey($entityCell)) {
                 $result[$entityCell] = @{
                     Prepare  = 0.0
-                    Research = 0.0
                     Practice = 0.0
                     Review   = 0.0
                     ML       = 0.0
@@ -729,7 +732,7 @@ $Helpers = {
                     $result[$entityCell].Prepare += $sessionHours
                 }
                 'Research' {
-                    $result[$entityCell].Research += $sessionHours
+                    $result[$entityCell].Practice += $sessionHours
                 }
                 'Practice' {
                     $result[$entityCell].Practice += $sessionHours
@@ -739,11 +742,11 @@ $Helpers = {
                 }
                 'MSLearn' {
                     $result[$entityCell].ML += $sessionHours
-                    $result[$entityCell].Research += $sessionHours
+                    $result[$entityCell].Practice += $sessionHours
                 }
                 'MSDocs' {
                     $result[$entityCell].MD += $sessionHours
-                    $result[$entityCell].Research += $sessionHours
+                    $result[$entityCell].Practice += $sessionHours
                 }
                 'NotebookLM' {
                     $result[$entityCell].NB += $sessionHours
@@ -764,7 +767,7 @@ $Helpers = {
 
         # Round all values
         foreach ($entity in $result.Keys) {
-            foreach ($key in @('Prepare', 'Research', 'Practice', 'Review', 'ML', 'MD', 'NB', 'Lab', 'PQ', 'Total')) {
+            foreach ($key in @('Prepare', 'Practice', 'Review', 'ML', 'MD', 'NB', 'Lab', 'PQ', 'Total')) {
                 $result[$entity][$key] = [math]::Round($result[$entity][$key], 1)
             }
         }
@@ -908,7 +911,6 @@ $Helpers = {
                     if ($h -eq 'Lab')      { $colIndices['Lab'] = $i }
                     if ($h -eq 'PQ')       { $colIndices['PQ'] = $i }
                     if ($h -eq 'Prepare')  { $colIndices['Prepare'] = $i }
-                    if ($h -eq 'Research') { $colIndices['Research'] = $i }
                     if ($h -eq 'Practice') { $colIndices['Practice'] = $i }
                     if ($h -eq 'Total')    { $colIndices['Total'] = $i }
                     if ($h -eq 'Hours')    { $colIndices['Hours'] = $i }
@@ -977,11 +979,9 @@ $Helpers = {
                 if ($trackerFormat -eq 'Task') {
                     # Per-Task table can be either legacy icon buckets or mode-total hours columns
                     $prepareHours = 0.0
-                    $researchHours = 0.0
                     $practiceHours = 0.0
                     if ($entityHours) {
                         $prepareHours = $entityHours['Prepare']
-                        $researchHours = $entityHours['Research']
                         $practiceHours = $entityHours['Practice']
                     }
 
@@ -995,13 +995,6 @@ $Helpers = {
                             }
                         }
 
-                        if ($colIndices.ContainsKey('Research')) {
-                            $idx = $colIndices['Research']
-                            if ($idx -lt $cells.Count) {
-                                $cells[$idx] = " $($researchHours.ToString('0.0'))h "
-                            }
-                        }
-
                         if ($colIndices.ContainsKey('Practice')) {
                             $idx = $colIndices['Practice']
                             if ($idx -lt $cells.Count) {
@@ -1010,14 +1003,6 @@ $Helpers = {
                         }
                     }
                     else {
-                        if ($colIndices.ContainsKey('Research')) {
-                            $idx = $colIndices['Research']
-                            if ($idx -lt $cells.Count) {
-                                $emoji = Get-ModeCellIcon -CurrentCell $cells[$idx].Trim() -ModeHours $researchHours
-                                $cells[$idx] = " $emoji "
-                            }
-                        }
-
                         if ($colIndices.ContainsKey('Practice')) {
                             $idx = $colIndices['Practice']
                             if ($idx -lt $cells.Count) {
