@@ -912,6 +912,7 @@ $Helpers = {
                     if ($h -eq 'PQ')       { $colIndices['PQ'] = $i }
                     if ($h -eq 'Prepare')  { $colIndices['Prepare'] = $i }
                     if ($h -eq 'Practice') { $colIndices['Practice'] = $i }
+                    if ($h -eq 'Review')   { $colIndices['Review'] = $i }
                     if ($h -eq 'Total')    { $colIndices['Total'] = $i }
                     if ($h -eq 'Hours')    { $colIndices['Hours'] = $i }
                     if ($h -eq 'Progress') { $colIndices['Progress'] = $i }
@@ -980,9 +981,11 @@ $Helpers = {
                     # Per-Task table can be either legacy icon buckets or mode-total hours columns
                     $prepareHours = 0.0
                     $practiceHours = 0.0
+                    $reviewHours = 0.0
                     if ($entityHours) {
                         $prepareHours = $entityHours['Prepare']
                         $practiceHours = $entityHours['Practice']
+                        $reviewHours = $entityHours['Review']
                     }
 
                     $hasModeTotalsColumns = $colIndices.ContainsKey('Prepare') -or $colIndices.ContainsKey('Total')
@@ -999,6 +1002,13 @@ $Helpers = {
                             $idx = $colIndices['Practice']
                             if ($idx -lt $cells.Count) {
                                 $cells[$idx] = " $($practiceHours.ToString('0.0'))h "
+                            }
+                        }
+
+                        if ($colIndices.ContainsKey('Review')) {
+                            $idx = $colIndices['Review']
+                            if ($idx -lt $cells.Count) {
+                                $cells[$idx] = " $($reviewHours.ToString('0.0'))h "
                             }
                         }
                     }
