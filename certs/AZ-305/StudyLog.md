@@ -8,7 +8,7 @@ This log tracks individual study sessions for the **AZ-305** exam. Fill in **End
 
 | # | Date | Start | End | Duration | Mode | Task | Notes |
 |:--|:-----|:------|:----|:---------|:-----|:------|:------|
-| 38 | 8/2/26 | 4:39 AM |  |  | Practice | Recommend a solution to manage secrets, certificates, and keys |  |
+| 38 | 8/2/26 | 4:39 AM | 5:45 AM | 1h 6m | Practice | Recommend a solution to manage secrets, certificates, and keys | Completed second round of practice questions. Scored 55%. Pick up w/ third round |
 | 37 | 8/1/26 | 4:33 AM | 5:53 AM | 1h 20m | Practice | Recommend a solution to manage secrets, certificates, and keys | Deep dive into Azure App Configuration and Key Vault scenarios. Continue next session w/ second practice question set |
 | 36 | 7/31/26 | 3:29 AM | 5:33 AM | 2h 4m | Practice | Recommend a solution to manage secrets, certificates, and keys | Continue w/ first set of practice questions on Key Vault and App Configuration |
 | 35 | 7/30/26 | 3:46 AM | 5:27 AM | 1h 41m | Practice | Recommend a solution to manage secrets, certificates, and keys | For next session, continue w/ first practice question set |
