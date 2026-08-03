@@ -71,7 +71,7 @@ Use the inline links to verify current limits and behavior. The [official AZ-305
 - [Subscription vending](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/subscription-vending)
 - [Deploy Azure landing zones](https://learn.microsoft.com/en-us/azure/architecture/landing-zones/landing-zone-deploy)
 - [Management and governance architecture design](https://learn.microsoft.com/en-us/azure/architecture/guide/management-governance/management-governance-get-started)
-- [Resource naming and tagging decision guide](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-naming-and-tagging-decision-guide)
+- [Define your naming convention](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-naming)
 - [Azure resource locks](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources)
 - [Azure subscription and service limits](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
 
@@ -123,7 +123,7 @@ This task asks an Azure solutions architect to recommend a durable **resource-or
 
 > **Adjacent task context:** “Recommend a solution for identity governance” owns access reviews, entitlement management, lifecycle workflows, and privileged access. This guide uses [Azure RBAC inheritance](https://learn.microsoft.com/en-us/azure/role-based-access-control/scope-overview) and PIM only to prevent a hierarchy from creating excessive administrative scope.
 
-> **Adjacent task context:** Naming supports human readability but does not replace mutable metadata. The [naming and tagging decision guide](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-naming-and-tagging-decision-guide) is supporting context, not a separate naming-convention tutorial.
+> **Adjacent task context:** Naming supports human readability but does not replace mutable metadata. The [Azure naming guidance](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-naming) is supporting context, not a separate naming-convention tutorial.
 
 The exam mental boundary is: **hierarchy determines inherited governance and administrative blast radius; subscriptions determine workload/platform isolation and scale; resource groups determine lifecycle; tags determine searchable business context**.
 
@@ -152,7 +152,7 @@ The exam mental boundary is: **hierarchy determines inherited governance and adm
 | Resource locks | Protect control-plane updates or deletion and inherit from parent scopes, but are not authorization or compliance controls. | [Resource locks](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources) | Supporting protection |
 | Cost Management | Groups cost by scope/tags and can add inherited tags to usage records without modifying resources. | [Cost tag inheritance](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/enable-tag-inheritance) | Supporting financial view |
 | Azure Resource Graph | Queries inventory and tag compliance at scale across selected subscriptions and management groups. | [Resource Graph](https://learn.microsoft.com/en-us/azure/governance/resource-graph/overview) | Supporting inventory |
-| Naming conventions | Encode stable, human-readable identity while tags hold mutable or multi-dimensional metadata. | [Naming and tagging guide](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-naming-and-tagging-decision-guide) | Supporting |
+| Naming conventions | Encode stable, human-readable identity while tags hold mutable or multi-dimensional metadata. | [Naming guidance](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-naming) | Supporting |
 | Bicep and Terraform | Express landing-zone hierarchy, Policy, RBAC, resource groups, and tags as repeatable infrastructure as code. | [Landing-zone deployment options](https://learn.microsoft.com/en-us/azure/architecture/landing-zones/landing-zone-deploy#standard-deployment-options) | Implementation awareness |
 | Deployment stacks | Manage collections of Azure resources with lifecycle behavior, but do not replace the four Resource Manager governance scopes. | [Deployment stacks](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deployment-stacks) | Adjacent implementation |
 
@@ -304,6 +304,7 @@ Tag keys need a data owner, definition, allowed values, applicable scopes/types,
 
 ### Scenario decision tree
 
+<!-- This diagram maps scenario requirements to the narrowest appropriate Azure scope. -->
 ```mermaid
 flowchart TD
     A[New organization requirement] --> B{Must Policy or RBAC inherit<br/>to several subscriptions?}
@@ -381,3 +382,643 @@ The tree forces hard boundaries before metadata. A requirement that only changes
 >
 > **Answer guidance:** Use a built-in [`modify` inheritance policy and remediation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-policies) to repair existing resource state. If the requirement is strictly billing data, [Cost Management tag inheritance](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/enable-tag-inheritance) is the narrower fit because it modifies usage records, not resources.
 
+---
+
+## 7. Architecture patterns
+
+### Pattern 1: Standard enterprise landing-zone hierarchy
+
+**When it applies:** An organization expects multiple workloads and wants centralized platform services with consistent, scalable workload governance. The [Azure landing-zone reference architecture](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/) is Microsoft's standardized starting point for that environment.
+
+<!-- This diagram shows the standard platform and application landing-zone hierarchy. -->
+```mermaid
+flowchart TD
+    TR[Tenant root<br/>must-have global assignments] --> IR[Organization intermediate root]
+    IR --> PF[Platform]
+    IR --> LZ[Landing zones]
+    IR --> SB[Sandboxes]
+    IR --> DC[Decommissioned]
+    PF --> SEC[Security subscription]
+    PF --> MGT[Management subscription]
+    PF --> CON[Connectivity subscription]
+    PF --> ID[Identity subscription]
+    LZ --> CORP[Corp]
+    LZ --> ONLINE[Online]
+    LZ --> LOCAL[Local]
+    CORP --> APP1[Workload subscriptions]
+    ONLINE --> APP2[Workload subscriptions]
+    LOCAL --> APP3[Azure Local subscriptions]
+```
+
+The hierarchy places shared platform subscriptions under a platform branch and application subscriptions under policy archetypes such as Corp, Online, or Local. [CAF hierarchy definitions](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-management-groups#management-groups-in-the-azure-landing-zone-architecture)
+
+| Dimension | Assessment |
+|---|---|
+| Why it works | Platform and workload teams receive distinct scopes, while subscriptions inherit policy appropriate to their [workload type](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-management-groups#management-groups-in-the-azure-landing-zone-architecture). |
+| Strengths | Stable, scalable, supports policy-driven governance, separates platform cost/ownership, and enables [subscription democratization](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-principles#subscription-democratization). |
+| Weaknesses | Requires platform engineering, Policy lifecycle management, subscription vending, and careful inherited-role review. [Subscription-vending teams and process](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/subscription-vending#how-to-implement-subscription-vending) |
+| Failure modes | Too many root assignments, an organization-chart tree, broad application-team RBAC, or a subscription left at the tenant root/default location. [CAF management-group recommendations](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-management-groups#management-group-recommendations) |
+| Cost | Dedicated platform subscriptions improve accountability but do not by themselves reduce service charges; actual platform services and duplicated regional components drive cost. [Subscription cost considerations](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-subscriptions#cost-management-design-considerations) |
+| Security | Management-group RBAC should be limited to controlled platform roles and elevated through PIM where appropriate. [CAF security recommendation](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-management-groups#management-group-recommendations) |
+| Operations | Vending should establish owner, budget, quotas, networking, Policy, tags, and Service Health before handoff. [Subscription-vending process](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/subscription-vending) |
+| Monitoring | Every subscription should receive [Azure Service Health alerts](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-subscriptions#operational-excellence-recommendations), while full telemetry architecture remains an adjacent monitoring task. |
+
+### Pattern 2: Workload-per-subscription with prod/nonprod isolation
+
+**When it applies:** A workload has distinct production risk, access, budget, deployment, and operational ownership from its development/test environments. [Application-environment guidance](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/management-application-environments) supports selecting the management model per workload while platform Policy supplies guardrails.
+
+<!-- This diagram shows environment isolation with subscriptions under one policy archetype. -->
+```mermaid
+flowchart LR
+    MG[Corp or Online management group] --> NP[Payroll nonprod subscription]
+    MG --> PR[Payroll prod subscription]
+    NP --> NPRG[Nonprod resource groups]
+    PR --> PRRG[Production resource groups]
+    NP -. same archetype policies .-> MG
+    PR -. same archetype policies .-> MG
+```
+
+This design separates the hard subscription boundaries without adding `Dev` and `Prod` management groups when both environments require the same policy archetype. [CAF says not to create environment management groups by default](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-management-groups#management-group-recommendations).
+
+| Dimension | Assessment |
+|---|---|
+| Strengths | Separates quota, cost, access, incidents, and lifecycle while preserving common inherited guardrails. [Subscription boundaries](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-subscriptions#organization-and-governance-design-considerations) |
+| Weaknesses | More subscriptions increase onboarding, RBAC, budget, quota, and inventory operations, making [automated vending](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/subscription-vending) important. |
+| Failure modes | Putting dev and prod in one resource group, or creating environment management groups only for visual organization. [Resource-group lifecycle](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/overview#what-is-a-resource-group) |
+| Cost | Separation improves cost visibility but may reduce economies of density for shared services; define a [chargeback model](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-subscriptions#cost-management-design-considerations) where workloads consume common platforms. |
+| Security | Give workload teams subscription-level roles only in their environment and retain platform controls through inherited [Policy and limited RBAC](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/management-application-environments). |
+
+### Pattern 3: Sovereignty or regulatory branch
+
+**When it applies:** Several subscriptions require location-specific allowed-region, security, residency, sovereignty, or regulatory controls that differ materially from the normal archetype. CAF allows [location-based management-group structures](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-management-groups#management-group-recommendations) when those requirements exist.
+
+<!-- This diagram shows a regulated management-group branch for shared inherited controls. -->
+```mermaid
+flowchart TD
+    LZ[Landing zones] --> STD[Standard Corp/Online]
+    LZ --> REG[Regulated location archetype]
+    REG --> R1[Regulated workload subscription A]
+    REG --> R2[Regulated workload subscription B]
+    REG -. inherited allowed locations,<br/>security baseline, audit controls .-> R1
+    REG -. inherited allowed locations,<br/>security baseline, audit controls .-> R2
+```
+
+| Dimension | Assessment |
+|---|---|
+| Why it works | A stable compliance distinction is expressed once as inherited Policy across several subscriptions. [Management-group design considerations](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-management-groups#management-group-design-considerations) |
+| Strengths | Reduces repeated assignments and makes regulated placement explicit. [Policy assignment scope](https://learn.microsoft.com/en-us/azure/governance/policy/overview#overview) |
+| Weaknesses | Moving a subscription into or out of the branch changes inherited Policy/RBAC and can expose noncompliance or broken custom-role paths. [Management-group move issues](https://learn.microsoft.com/en-us/azure/governance/management-groups/overview#issues-with-breaking-the-role-definition-and-assignment-hierarchy-path) |
+| Failure modes | Creating a branch merely for a preferred deployment region with no governance difference. [CAF multiregion recommendation](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-management-groups#management-group-recommendations) |
+| Security/compliance | Start new initiatives in audit where practical, assess impact, then enforce through a governed [Policy-as-code process](https://learn.microsoft.com/en-us/azure/governance/policy/overview#recommendations-for-managing-policies). |
+| Resiliency | A sovereignty branch can limit eligible secondary regions, so disaster-recovery design must choose compliant locations; the hierarchy itself provides no replication. [Azure region selection guidance](https://learn.microsoft.com/en-us/azure/reliability/regions-overview) |
+
+### Pattern 4: Lifecycle- and region-aligned resource groups
+
+**When it applies:** A multiregion workload has shared global components, independent regional stamps, and operational resources with distinct lifecycles.
+
+<!-- This diagram separates global, regional, and operational resource-group lifecycles. -->
+```mermaid
+flowchart TD
+    SUB[Application subscription] --> G[rg-app-global]
+    SUB --> P[rg-app-centralus]
+    SUB --> S[rg-app-eastus2]
+    SUB --> O[rg-app-operations]
+    G --> GDNS[Global routing/configuration]
+    P --> PAPP[Primary regional stamp]
+    S --> SAPP[Secondary regional stamp]
+    O --> OPS[Workload operational resources]
+```
+
+The pattern respects the recommendation that one resource group not span regions while allowing all regions to remain in one global subscription when quotas and governance align. [Subscription multiregion guidance](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-subscriptions#multiple-regions-recommendations)
+
+| Dimension | Assessment |
+|---|---|
+| Strengths | Supports independent regional deployment/deletion, targeted locks/RBAC, and clearer disaster-recovery operations. [Resource-group scope capabilities](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/overview#what-is-a-resource-group) |
+| Weaknesses | Cross-resource-group dependencies require explicit IaC references and careful deletion sequencing. [Resource-group dependencies](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/overview#what-is-a-resource-group) |
+| Failure modes | Mixing shared global components into a regional group that may be redeployed or deleted, or assuming the resource-group location controls every resource's region. [Resource-group location](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/overview#what-location-should-i-use-for-my-resource-group) |
+| Cost | No inherent charge for extra resource groups; regional duplication, network transfer, and service SKUs create workload cost. [Well-Architected data-cost guidance](https://learn.microsoft.com/en-us/azure/well-architected/cost-optimization/optimize-data-costs) |
+| Monitoring | Use tags such as `WorkloadName`, `Environment`, and `RegionRole` for cross-group inventory, but design full monitoring under the adjacent AZ-305 monitoring task. [Resource Graph](https://learn.microsoft.com/en-us/azure/governance/resource-graph/overview) |
+
+### Pattern 5: Governed tag pipeline
+
+**When it applies:** Metadata must remain trustworthy across self-service deployments and existing resources.
+
+<!-- This diagram traces authoritative metadata through vending, Policy, inventory, and cost views. -->
+```mermaid
+flowchart LR
+    C[Authoritative catalog<br/>owner, cost center, classification] --> V[Subscription vending]
+    V --> S[Subscription and RG tags]
+    S --> P[Azure Policy initiative]
+    P --> N[New resource evaluation]
+    P --> R[Remediation of existing resources]
+    N --> G[Resource Graph compliance queries]
+    R --> G
+    S --> CM[Cost Management tag inheritance]
+    CM --> U[Enriched usage records only]
+```
+
+| Dimension | Assessment |
+|---|---|
+| Strengths | Captures metadata once, enforces it automatically, remediates drift, and supports inventory and financial reporting. [Subscription vending](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/subscription-vending) |
+| Weaknesses | Requires taxonomy ownership, authoritative-value integration, Policy assignment identity, remediation permissions, and exception handling. [Policy remediation access](https://learn.microsoft.com/en-us/azure/governance/policy/how-to/remediate-resources#how-remediation-access-control-works) |
+| Failure modes | Free-form values, duplicate keys with inconsistent case, sensitive data in tags, blind `deny`, or confusion between resource and usage-record inheritance. [Tag behavior](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources) |
+| Security | Tags are plaintext; the source catalog should supply identifiers rather than secrets or confidential narrative. [Tag warning](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources#tag-usage-and-recommendations) |
+| Operations | Resource Graph can filter and group at scale, but inventory consumers must account for unsupported resource types and tag limits. [Resource Graph capabilities](https://learn.microsoft.com/en-us/azure/governance/resource-graph/overview) |
+| Cost | Cost inheritance is useful where services do not emit tags consistently, but it changes billing usage records only. [Cost inheritance behavior](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/enable-tag-inheritance) |
+
+> **Test yourself**
+>
+> - A new EU branch exists only because resources deploy in Europe, but its Policy and RBAC are identical to the Corp branch. Keep or remove it?
+> - A cost-center value changes in the service catalog. Which parts of a governed tag pipeline may need updates?
+>
+> **Answer guidance:** Remove a location-only branch unless location changes inherited governance; CAF says not to model regions in management groups by default. [Management-group recommendations](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-management-groups#management-group-recommendations) A tag-value change can require subscription/resource-group updates, [Policy remediation](https://learn.microsoft.com/en-us/azure/governance/policy/how-to/remediate-resources), and later Cost Management usage-record updates depending on the chosen inheritance settings.
+
+---
+
+## 8. Implementation awareness for architects
+
+AZ-305 tests recommendations rather than command memorization, but architects must understand which decisions become difficult or risky after deployment.
+
+### Decisions to settle before implementation
+
+| Decision | Why it should be explicit before deployment |
+|---|---|
+| Management-group ID and purpose | A management group's ID is used in resource paths and differs from its display name; custom-role and assignment relationships can affect later moves. [Management-group custom-role guidance](https://learn.microsoft.com/en-us/azure/governance/management-groups/overview#custom-role-definitions-and-management-groups) |
+| Root versus child assignments | Root assignments affect all current and future descendants, so only universal requirements belong there. [Root management-group warning](https://learn.microsoft.com/en-us/azure/governance/management-groups/overview#root-management-group-for-each-directory) |
+| Default management group | Configure a dedicated default so new or transferred subscriptions do not sit unmanaged under the tenant root. [Default management-group recommendation](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-management-groups#management-group-recommendations) |
+| Subscription product line | Decide archetype, owner, environment model, network connectivity, budget, quota, and Policy/RBAC profile for [subscription vending](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/subscription-vending). |
+| Resource-group decomposition | Moving resources later is not supported uniformly by every resource type and can affect IDs/dependencies, so design lifecycle boundaries early. [Move support guidance](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/move-support-resources) |
+| Tag contract | Define keys, meanings, allowed values, casing, source, scope, conflict precedence, and remediation before enforcement. [CAF tagging requirements](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-tagging#define-your-tagging-requirements) |
+| Policy rollout | Begin with audit where practical, test in a nonproduction hierarchy, then move to enforcement through [Policy as code](https://learn.microsoft.com/en-us/azure/governance/policy/overview#recommendations-for-managing-policies). |
+
+### Subscription-vending input contract
+
+A vending request should capture enough information to select and configure the landing zone without manual interpretation:
+
+- Workload/application identifier and business/technical owners for [ownership and lifecycle](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/subscription-vending).
+- Environment and criticality to choose isolation, budget, operations, and access under the [application-environment model](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/management-application-environments).
+- Connectivity archetype (`Corp`, `Online`, `Local`, isolated, or approved variant) for correct [management-group placement](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-management-groups#management-groups-in-the-azure-landing-zone-architecture).
+- Data classification, regulatory scope, sovereignty, and allowed regions to select applicable [Policy assignments](https://learn.microsoft.com/en-us/azure/governance/policy/overview).
+- Cost center, budget, alert recipients, and chargeback model for [cost transparency](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-subscriptions#cost-management-design-considerations).
+- Required providers, regional SKUs, quotas, capacity, and quota increase lead time under [subscription quota guidance](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-subscriptions#quota-and-capacity-recommendations).
+- Workload-team groups and approved roles at the narrowest practical [RBAC scope](https://learn.microsoft.com/en-us/azure/role-based-access-control/scope-overview).
+
+### Sequencing that affects the design
+
+1. Create/protect the hierarchy and establish the default management group before high-volume subscription onboarding. [Protect hierarchy](https://learn.microsoft.com/en-us/azure/governance/management-groups/how-to/protect-resource-hierarchy)
+2. Define initiatives and role definitions at stable parent scopes, then assign them to the intended child archetypes. [Policy hierarchy recommendation](https://learn.microsoft.com/en-us/azure/governance/policy/overview#recommendations-for-managing-policies)
+3. Test audit results and exemption needs before enabling `deny` or large-scale `modify`. [Policy rollout recommendation](https://learn.microsoft.com/en-us/azure/governance/policy/overview#recommendations-for-managing-policies)
+4. Vend the subscription with management-group placement, RBAC, budgets, network integration, tags, provider registration, quota, and Service Health. [Vending implementation](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/subscription-vending#how-to-implement-subscription-vending)
+5. Create lifecycle-aligned resource groups and deploy resources with IaC; use the same tag contract in deployment templates and Policy. [Landing-zone deployment options](https://learn.microsoft.com/en-us/azure/architecture/landing-zones/landing-zone-deploy#standard-deployment-options)
+6. Run remediation for existing tag drift with an assignment identity that has the minimum required roles. [Remediation access](https://learn.microsoft.com/en-us/azure/governance/policy/how-to/remediate-resources#how-remediation-access-control-works)
+7. Validate inventory, tag coverage, inherited Policy/RBAC, cost allocation, and alert ownership before handoff. [Resource Graph](https://learn.microsoft.com/en-us/azure/governance/resource-graph/overview)
+
+### Current limits and mechanics to know
+
+- One directory can support [10,000 management groups](https://learn.microsoft.com/en-us/azure/governance/management-groups/overview#important-facts-about-management-groups), but good design targets simplicity rather than the maximum.
+- A management-group tree supports [six levels below tenant root](https://learn.microsoft.com/en-us/azure/governance/management-groups/overview#important-facts-about-management-groups); subscription level is not counted.
+- Each management group and subscription has [one parent](https://learn.microsoft.com/en-us/azure/governance/management-groups/overview#important-facts-about-management-groups).
+- A resource group normally supports up to [800 instances of a resource type](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/overview#what-is-a-resource-group), with documented exemptions.
+- Each taggable resource, resource group, or subscription normally supports [50 tag pairs](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources#limitations), while some types support fewer and not all types support tags.
+- Tag names are case-insensitive for operations, providers may preserve casing, and tag values are case-sensitive. [Tag casing behavior](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources#tag-usage-and-recommendations)
+
+### What implementation teams can decide later
+
+- Exact IaC module decomposition, pipeline runner, and repository layout, as long as the chosen approach preserves the approved hierarchy and Policy-as-code operating model. [Landing-zone deployment options](https://learn.microsoft.com/en-us/azure/architecture/landing-zones/landing-zone-deploy#standard-deployment-options)
+- Resource-specific naming abbreviations and instance formatting within an approved enterprise naming standard. [Azure naming guidance](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-naming)
+- Portal versus CLI versus API mechanics for individual tag updates, because the architecture is defined by taxonomy, permissions, Policy, and source of truth. [Tag implementation options](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources#next-steps)
+
+> **Exam tip:** `modify` and `deployIfNotExists` remediation is not magic administrative authority. The [Policy assignment's managed identity needs RBAC permissions](https://learn.microsoft.com/en-us/azure/governance/policy/how-to/remediate-resources#how-remediation-access-control-works) to change the target resources.
+
+---
+
+## 9. Security, governance, and compliance considerations
+
+### Control matrix
+
+| Requirement | Correct control | Why hierarchy/tagging still matters |
+|---|---|---|
+| Define allowed resource state | [Azure Policy](https://learn.microsoft.com/en-us/azure/governance/policy/overview) | Management-group placement determines which assignments inherit; tags can be evaluated as resource properties. |
+| Define who can perform actions | [Azure RBAC](https://learn.microsoft.com/en-us/azure/role-based-access-control/scope-overview) | Scope determines blast radius and inherited permissions. |
+| Make broad privileges eligible/time-bound | [Microsoft Entra PIM for Azure roles](https://learn.microsoft.com/en-us/entra/id-governance/privileged-identity-management/pim-resource-roles-overview) | Particularly important for platform roles at management-group scope. |
+| Prevent control-plane deletion/update | [Resource locks](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources) | Locks inherit from subscription/resource-group/resource scopes but do not replace RBAC or Policy. |
+| Describe classification/ownership | [Resource tags](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-tagging) | Metadata can drive reporting or Policy conditions, but the tag itself has no enforcement power. |
+| Assess security posture/regulatory controls | [Defender for Cloud regulatory compliance](https://learn.microsoft.com/en-us/azure/defender-for-cloud/regulatory-compliance-dashboard) and Azure Policy | This is primarily the adjacent compliance task; hierarchy provides assignment scope. |
+
+### Security design rules
+
+- Treat the tenant root as a high-impact scope and limit assignments there to universal requirements. [Root scope warning](https://learn.microsoft.com/en-us/azure/governance/management-groups/overview#root-management-group-for-each-directory)
+- Do not grant workload teams application roles at management-group scope; assign at subscription or resource-group scope during vending. [CAF least-privilege recommendation](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-management-groups#management-group-recommendations)
+- Use PIM for justified broad platform access so standing privilege is minimized. [CAF PIM recommendation](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-management-groups#management-group-recommendations)
+- Review inherited RBAC and Policy before moving a subscription because moves can change effective controls and can fail when they break a custom-role definition/assignment path. [Move-path issue](https://learn.microsoft.com/en-us/azure/governance/management-groups/overview#issues-with-breaking-the-role-definition-and-assignment-hierarchy-path)
+- Protect the hierarchy so ordinary tenant principals cannot freely create management groups, and configure a safe [default management group](https://learn.microsoft.com/en-us/azure/governance/management-groups/how-to/protect-resource-hierarchy).
+- Never put passwords, keys, personal information, or sensitive classification detail in tags because Azure stores tags as plaintext and exposes them through multiple management/reporting paths. [Tag security warning](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources#tag-usage-and-recommendations)
+- Use Policy exemptions deliberately rather than proliferating custom management groups for isolated exceptions; full exemption governance belongs to the adjacent compliance task. [Azure Policy exemption structure](https://learn.microsoft.com/en-us/azure/governance/policy/concepts/exemption-structure)
+
+### Locks are narrower than they look
+
+`CanNotDelete` allows authorized updates but blocks control-plane deletion; `ReadOnly` permits control-plane reads but blocks updates and can also block operations that use POST, such as starting a VM or scaling an App Service plan. [Lock behavior and considerations](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources) The most restrictive inherited lock wins, and a lock on one resource can prevent deletion of the containing resource group. [Lock inheritance](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources#lock-inheritance)
+
+> **Exam tip:** Owner does not bypass an inherited lock or a Policy deny merely because Owner is the broadest common RBAC role. [RBAC answers who may act](https://learn.microsoft.com/en-us/azure/role-based-access-control/scope-overview); [Policy](https://learn.microsoft.com/en-us/azure/governance/policy/overview#azure-policy-and-azure-rbac) and [locks](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources) independently constrain the resulting operation.
+
+---
+
+## 10. Resiliency, availability, and disaster recovery considerations
+
+Resource organization is not a backup or failover service, but poor organization can increase the failure or recovery blast radius.
+
+| Consideration | Design implication |
+|---|---|
+| Hierarchy availability | Management groups and subscriptions are global logical governance constructs; they do not make regional workload resources highly available. [Subscription multiregion considerations](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-subscriptions#multiple-region-considerations) |
+| Resource-group metadata | A resource group's location stores its metadata; a temporary metadata-region issue can prevent management operations even if resources elsewhere continue operating. [Resource-group location](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/overview#what-location-should-i-use-for-my-resource-group) |
+| Regional stamps | Use separate resource groups for primary and secondary regional stamps to support independent deployment, failover operations, and deletion under [regional resource-group guidance](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-subscriptions#multiple-regions-recommendations). |
+| Subscription choice | Keep primary/secondary resources in one subscription when governance, quota, lifecycle, and BCDR tooling align; use separate subscriptions for independently managed active-active stamps or region-specific governance/scale. [CAF multiregion recommendations](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-subscriptions#multiple-regions-recommendations) |
+| Deletion blast radius | A resource-group deletion removes contained resources, so shared recovery dependencies should not sit in an application group that can be retired as a unit. [Resource-group deletion](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/overview#what-is-a-resource-group) |
+| Locks during recovery | Locks can prevent legitimate recovery, scale, backup cleanup, or resource-move operations; review lock behavior in runbooks. [Lock considerations](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources#considerations-before-applying-your-locks) |
+| Sovereignty | A location-based regulated branch can restrict valid failover regions; choose a secondary region that satisfies the same policy and data-residency constraints. [CAF location-based hierarchy exception](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-management-groups#management-group-recommendations) |
+
+RTO, RPO, backup, replication, availability zones, regional pairs, and workload SLA selection belong to the AZ-305 business-continuity and high-availability tasks. Here the architect ensures that the hierarchy and lifecycle scopes do not prevent the chosen recovery design.
+
+> **Exam tip:** Do not answer a requirement for zone or regional resilience with “put the resources in separate resource groups.” Resource groups improve management isolation but provide no data replication or SLA; use the relevant [Azure reliability design](https://learn.microsoft.com/en-us/azure/reliability/) for the workload service.
+
+---
+
+## 11. Cost and licensing considerations
+
+Management-group, subscription, resource-group, and tag structure determines how costs can be owned and analyzed, but actual charges come from deployed services, usage, support, transfer, and purchased commitments.
+
+### Cost design choices
+
+- Use subscriptions where a workload or platform function needs a strong budget, ownership, invoice, or quota-accountability boundary. [CAF cost considerations](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-subscriptions#cost-management-design-considerations)
+- Use tags for dimensions such as `CostCenter`, `BusinessUnit`, `WorkloadName`, and `Environment` when showback or chargeback must cross the hierarchy. [CAF accounting tags](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-tagging#define-your-tagging-strategy)
+- Enable [Cost Management tag inheritance](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/enable-tag-inheritance) only after deciding precedence between resource tags and inherited subscription/resource-group/billing tags.
+- Remember that inherited tags are placed on usage records, not resources, and updates apply according to documented current-month processing behavior. [Usage-record updates](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/enable-tag-inheritance#usage-record-updates)
+- Cost inheritance availability depends on billing-account type and supported scope; the documented account types include EA, MCA, and MPA with Azure plan subscriptions. [Cost inheritance availability](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/enable-tag-inheritance)
+- A management group is not always a usable cost scope; Azure management-group documentation notes that management groups are not currently supported for Cost Management features with MCA subscriptions. [Management-group cost note](https://learn.microsoft.com/en-us/azure/governance/management-groups/overview#hierarchy-of-management-groups-and-subscriptions)
+- Shared platform services improve efficiency but need an explicit allocation model; CAF calls out [chargeback for shared services](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-subscriptions#cost-management-design-considerations).
+- Duplicating subscriptions does not inherently duplicate costs, but designs that duplicate firewalls, gateways, monitoring workspaces, private endpoints, or regional services can. Analyze the actual service topology, not the number of containers.
+
+### Hidden cost traps
+
+| Trap | Why it matters |
+|---|---|
+| Assuming every service emits usable resource tags into billing | Cost inheritance exists partly so child usage records can receive subscription/RG metadata when direct resource tags are inconsistent. [Cost inheritance purpose](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/enable-tag-inheritance) |
+| Using resource-level tags with uncontrolled values | `Prod`, `Production`, and `production` fragment reports because tag values are case-sensitive. [Tag casing](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources#tag-usage-and-recommendations) |
+| Overriding resource tags in Cost Management | The chosen precedence can make the usage record show an inherited value instead of the resource's own value. [Tag precedence](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/enable-tag-inheritance#choose-between-resource-and-inherited-tags) |
+| Treating a budget as a hard spending cap | Azure budgets provide tracking and alerts/actions but do not generally stop resources automatically. [Cost Management budgets](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-acm-create-budgets) |
+| Applying `ReadOnly` locks broadly | Locks can block scale operations and lead to overprovisioning or failed automation. [Lock considerations](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources#considerations-before-applying-your-locks) |
+
+> **Exam tip:** If the requirement says “make inherited cost tags appear in charge records without changing resources,” choose [Cost Management tag inheritance](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/enable-tag-inheritance), not Azure Policy. If operations queries must see the tag on the resource, use [Policy `modify` and remediation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-policies).
+
+---
+
+## 12. Monitoring and operational considerations
+
+This task requires enough operations design to keep the hierarchy and metadata trustworthy; it does not replace the adjacent task **Recommend a monitoring solution**.
+
+### Operational ownership model
+
+| Team | Typical responsibility | Scope |
+|---|---|---|
+| Cloud governance/CCoE | Approves hierarchy principles, tag taxonomy, policy intent, and vending product lines. | Organization/intermediate-root design under [subscription vending roles](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/subscription-vending#how-to-implement-subscription-vending). |
+| Platform team | Implements management groups, assignments, platform subscriptions, default placement, and vending automation. | Platform and landing-zone parent scopes under [CAF hierarchy guidance](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-management-groups). |
+| Workload team | Maintains workload resource groups, resource tags not centrally derived, budgets, and application resources. | Vended application subscription under the [application-team management model](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/management-application-environments). |
+| Finance/FinOps | Owns cost-center mapping, showback/chargeback, cost-tag precedence, and allocation review. | Subscription, billing, and usage-record views using [Cost Management](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/enable-tag-inheritance). |
+| Security/compliance | Owns baseline/control intent, regulated archetypes, exceptions, and evidence requirements. | Policy initiatives and compliance views; full design belongs to the adjacent compliance task. [Azure Policy](https://learn.microsoft.com/en-us/azure/governance/policy/overview) |
+
+### What to monitor and review
+
+- Audit management-group changes, Policy assignments, and role assignments through the [management-group activity log](https://learn.microsoft.com/en-us/azure/governance/management-groups/manage#audit-management-groups-by-using-activity-logs).
+- Alert on Azure platform incidents for every subscription through [Azure Service Health](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-subscriptions#operational-excellence-recommendations).
+- Query subscriptions in the wrong/default management group and resources with missing or invalid tags through [Azure Resource Graph](https://learn.microsoft.com/en-us/azure/governance/resource-graph/overview).
+- Review effective inherited [Policy compliance](https://learn.microsoft.com/en-us/azure/governance/policy/overview), exemptions, remediation failures, and assignment-identity permissions.
+- Review broad [RBAC assignments](https://learn.microsoft.com/en-us/azure/role-based-access-control/scope-overview), orphaned owners, excessive direct resource assignments, and PIM activation patterns.
+- Review quota consumption and request increases before demand reaches platform limits. [CAF quota recommendations](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-subscriptions#quota-and-capacity-recommendations)
+- Review tag cardinality, stale owners, expired temporary resources, and mismatches between the authoritative catalog and resource state under the [CAF tagging lifecycle](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-tagging).
+- Review costs by subscription and controlled tags, including unallocated or untagged spend and the effect of [tag inheritance precedence](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/enable-tag-inheritance#choose-between-resource-and-inherited-tags).
+
+### Useful Resource Graph reasoning patterns
+
+Resource Graph is designed for performant inventory queries across a selected set of subscriptions and can filter, group, sort, and inspect resource properties at scale. [Resource Graph overview](https://learn.microsoft.com/en-us/azure/governance/resource-graph/overview) Architecturally useful questions include:
+
+- Which subscriptions are not under an approved management-group archetype?
+- Which production resources lack an owner, cost center, workload ID, or approved environment value?
+- Which resources use regions forbidden for their regulated archetype?
+- Which resource groups mix regional resources or contain stale temporary assets?
+- Which critical resources lack expected locks or appear in decommissioned subscriptions?
+
+Those queries detect organization drift; detailed workload health, SLOs, logs, alerts, dashboards, and tracing remain in the [monitoring task's service set](https://learn.microsoft.com/en-us/azure/azure-monitor/fundamentals/overview).
+
+> **Test yourself**
+>
+> - A platform team wants a daily list of resources missing `Owner` across 200 subscriptions. Should it deploy a new management group or use an inventory query?
+> - A subscription is correctly placed but has no Service Health alert recipient. Is that a hierarchy defect?
+>
+> **Answer guidance:** Use [Resource Graph](https://learn.microsoft.com/en-us/azure/governance/resource-graph/overview) and Policy compliance for horizontal inventory; a new hierarchy branch is unnecessary. Missing [Service Health configuration](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-subscriptions#operational-excellence-recommendations) is an onboarding/operations defect, which the vending product should correct.
+
+---
+
+## 13. Common exam traps
+
+| Trap | Tempting wrong answer | Why it seems reasonable | Why it is wrong or incomplete | Better design choice | Microsoft source |
+|---|---|---|---|---|---|
+| Mirror the organization chart | Create a management group for every business unit and department. | The tree looks familiar and supports department reports. | Organization charts change and do not necessarily represent shared Policy/access needs; deep trees increase inherited-assignment complexity. | Group subscriptions by stable policy, security, compliance, connectivity, and access archetypes; use tags for organizational reporting. | [CAF management-group recommendations](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-management-groups#management-group-recommendations) |
+| Environment management groups by default | Create root children named Dev, Test, and Prod. | Environment is a common governance dimension. | CAF explicitly recommends not creating environment management groups by default; workloads can use separate subscriptions under the same archetype. | Separate environments by subscription when risk/access/cost/lifecycle justify it, and add hierarchy only for materially different inherited controls. | [Environment recommendation](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-management-groups#management-group-recommendations) |
+| Region management groups by default | Create East US, Central US, and West Europe branches. | Resources are regional and operations teams think regionally. | Subscriptions are global and the hierarchy should not model regions without a governance requirement. | Keep the standard archetype; use regional resource groups/tags, adding regional hierarchy only for sovereignty or distinct Policy. | [Multiregion management-group guidance](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-management-groups#management-group-recommendations) |
+| One subscription per region always | Put primary and DR regions in different subscriptions. | It appears to improve isolation and resiliency. | A subscription can contain resources from multiple regions, and some BCDR designs benefit from the same subscription. | Use one subscription when governance, quota, ownership, and lifecycle align; split for independent active-active management, sovereignty, or quota. | [Subscription multiregion recommendations](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-subscriptions#multiple-regions-recommendations) |
+| One enterprise subscription | Put all workloads into separate resource groups in one subscription. | Resource groups can scope RBAC, Policy, locks, and cost views. | Resource groups do not isolate subscription quota, broad subscription access, billing ownership, or some governance blast-radius concerns. | Use application landing-zone subscriptions as units of management and scale. | [Subscription democratization](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-principles#subscription-democratization) |
+| A subscription for every small component | Create a subscription per microservice regardless of risk or ownership. | Maximum isolation seems safest. | Subscription sprawl adds operational overhead when components share ownership, quota, risk, and governance. | Use flexible criteria; some applications can coexist when the boundaries align. | [Flexible subscription model](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-subscriptions#recommendations) |
+| Group resource groups by resource type | Put all VNets together, all databases together, and all VMs together. | Technology teams can browse familiar inventories. | Unrelated resources then share deletion and administration scope despite different workload lifecycles. | Group by shared lifecycle, region, and administration; use Resource Graph for technology inventory. | [Resource-group lifecycle](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/overview#what-is-a-resource-group) |
+| Dependency means same resource group | Put the web app and shared database in one resource group because they communicate. | The resources form one technical solution. | Resources can connect across groups; a shared database may have a different owner and lifecycle. | Separate groups when lifecycle or administration differs and manage dependencies explicitly. | [Cross-resource-group connectivity](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/overview#what-is-a-resource-group) |
+| Resource-group location controls all resources | Select a resource-group region to force every contained resource there. | Resource groups require a location. | The location stores resource-group metadata; Resource Manager permits contained resources elsewhere. | Use Policy to restrict locations and align groups/resources by region for operations and reliability. | [Resource-group location](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/overview#what-location-should-i-use-for-my-resource-group) |
+| Resource-group tags automatically inherit | Tag the resource group and assume all resource tags appear. | Parent-child inheritance exists for Policy and RBAC. | Resources do not natively inherit subscription or resource-group tags. | Use built-in Policy `modify` inheritance and remediation when the resource must have the tag. | [Tag inheritance](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources#inherit-tags) |
+| Cost inheritance fixes resources | Enable Cost Management inheritance to make operations queries see tags. | The feature is named “tag inheritance.” | It adds tags to child usage records, not to Azure resources. | Use Policy for resource state; use Cost Management only for cost records. | [Cost inheritance behavior](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/enable-tag-inheritance) |
+| `append` repairs historical drift | Assign an append policy and expect every existing resource to be fixed. | Append can add tags on create/update. | Existing resources remain unchanged until a qualifying update, and append is not the preferred bulk-remediation path. | Use `modify` with a remediation task and correctly permissioned assignment identity. | [Tag policies](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-policies) |
+| `deny` is always strongest and best | Deny every deployment missing every enterprise tag immediately. | Strict admission control prevents noncompliance. | Some tags are unknown at deployment time, unsupported types exist, and untested deny can break automation. | Start with audit; use modify for derived/default tags and deny only for required caller-supplied metadata. | [Policy rollout recommendation](https://learn.microsoft.com/en-us/azure/governance/policy/overview#recommendations-for-managing-policies) |
+| Tags are security controls | Apply `DataClassification=Restricted` and assume the resource is protected. | Classification drives security processes. | Tags only describe resource state; they do not authorize, encrypt, or isolate. | Use the tag as a Policy condition, then enforce actual RBAC, network, encryption, and service controls. | [Azure Policy purpose](https://learn.microsoft.com/en-us/azure/governance/policy/overview) |
+| Store rich sensitive metadata in tags | Put owner email, incident detail, or secret values in tags. | Tags are easy to query and export. | Tags are plaintext and visible through cost, deployment, command, and monitoring paths. | Store only nonsecret identifiers and resolve them through controlled systems of record. | [Tag plaintext warning](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources#tag-usage-and-recommendations) |
+| Management-group Owner for workload teams | Assign Owner at the landing-zones management group to simplify onboarding. | One inherited assignment is operationally easy. | It overprivileges application teams across every descendant subscription. | Assign workload groups at the vended subscription/resource-group scope; reserve broad access for controlled platform roles. | [CAF RBAC recommendation](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-management-groups#management-group-recommendations) |
+| Put every Policy at tenant root | Centralize all initiatives at the highest possible scope. | One assignment reaches the whole tenant. | Root assignments are difficult to exclude/debug and affect all future descendants. | Put only universal must-haves at root; assign archetype-specific initiatives at child management groups. | [Root warning and CAF recommendation](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-management-groups#management-group-recommendations) |
+| Lock equals backup or authorization | Add `CanNotDelete` and conclude that data is recoverable and unauthorized users cannot read it. | Locks prevent some destructive operations. | Locks apply to control-plane operations, do not create backup, and do not govern data-plane access. | Combine locks with RBAC, Policy, soft delete, backup, and service-specific data protection as required. | [Resource lock scope](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources) |
+| Edge case: sovereignty never changes hierarchy | Keep all regulated regional subscriptions under the ordinary Corp branch because region branches are discouraged. | Standard guidance says not to model regions. | The guidance contains an explicit exception for location-based regulatory, residency, security, and sovereignty requirements. | Add a stable regulated/location archetype when several subscriptions need distinct inherited controls. | [Location-based exception](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-management-groups#management-group-recommendations) |
+
+> **Exam tip:** Beware absolute answers. “Never separate by environment or region” is too strong; the real rule is **do not add hierarchy without a governance difference**. A stated sovereignty, quota, ownership, or access requirement can change the default. [CAF management-group guidance](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-management-groups)
+
+---
+
+## 14. Scenario-based design examples
+
+### Scenario 1: Straightforward enterprise default
+
+**Customer requirement:** A manufacturing company has 30 application teams, hybrid connectivity, centralized security monitoring, and a growing mix of internal and internet-facing workloads.
+
+**Constraints:** Platform teams own connectivity and monitoring; workload teams need autonomy; the company wants common security and location guardrails without broad workload-team access.
+
+**Recommended design:**
+
+- Establish an intermediate root below the tenant root, with **Platform**, **Landing zones**, **Sandboxes**, and **Decommissioned** branches based on the [CAF management-group hierarchy](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-management-groups#management-groups-in-the-azure-landing-zone-architecture).
+- Under Platform, create dedicated **Security**, **Management**, **Connectivity**, and **Identity** subscriptions when those functions are required. [Platform subscription recommendations](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-subscriptions#organization-and-governance-design-considerations)
+- Under Landing zones, use **Corp** for hybrid-connected workloads and **Online** for workloads with direct internet-facing or no-VNet patterns. [CAF workload archetypes](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-management-groups#management-groups-in-the-azure-landing-zone-architecture)
+- Vend application subscriptions into the correct archetype with owner, budget, quota, connectivity, Policy, RBAC, tags, and Service Health preconfigured. [Subscription vending](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/subscription-vending)
+- Use resource groups per workload lifecycle and region, and a controlled tag set for workload, environment, owner, cost center, criticality, and management source. [Resource-group lifecycle](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/overview#what-is-a-resource-group)
+
+**Why appropriate:** The hierarchy carries stable enterprise and archetype guardrails, subscriptions provide team/scale boundaries, and tags provide horizontal reporting without mirroring 30 teams as management groups. [CAF hierarchy recommendations](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-management-groups#management-group-recommendations)
+
+**Alternatives rejected:** One enterprise subscription fails to provide workload-level quota and management isolation; a department management group per team overfits a mutable organization chart. [Subscription boundary guidance](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-subscriptions)
+
+**Exam interpretation:** “Hybrid-connected” points to Corp; “internet-facing/no VNet” points to Online; “central shared networking” points to a connectivity subscription; “team autonomy within guardrails” points to subscription democratization.
+
+### Scenario 2: Cost-constrained small organization
+
+**Customer requirement:** A startup has four small internal applications, one cloud team, modest growth, and needs simple production/nonproduction cost visibility.
+
+**Constraints:** Low operational overhead matters more than maximum isolation; all apps share policy, connectivity, and owners; no workload approaches subscription quotas.
+
+**Recommended design:**
+
+- Begin with a small set of subscriptions rather than reproducing a large enterprise hierarchy, consistent with [CAF guidance for a new cloud environment](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org).
+- Use separate production and nonproduction subscriptions if their access, budget, and operational risk differ; place both under the same appropriate landing-zone archetype rather than create Dev/Prod management groups. [Environment guidance](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-management-groups#management-group-recommendations)
+- Create per-application, per-environment resource groups only where resources share lifecycle; keep shared networking/operations resources in separate longer-lived groups. [Resource-group guidance](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/overview#what-is-a-resource-group)
+- Use `WorkloadName`, `Environment`, `Owner`, and `CostCenter` tags for showback, with Policy audit/modify and Cost Management inheritance only where needed. [CAF tagging requirements](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-tagging#define-your-tagging-requirements)
+
+**Why appropriate:** CAF says subscription models should remain flexible and acknowledges that some applications can coexist when boundaries align. [Flexible subscription recommendation](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-subscriptions#recommendations)
+
+**Alternatives rejected:** A subscription per application per environment creates unnecessary operational overhead today; one resource group for everything creates deletion and lifecycle coupling.
+
+**Exam interpretation:** “Cost-constrained” does not mean “one resource group.” It means choose the minimum set of hard boundaries that satisfies risk and ownership, then use tags for reporting.
+
+### Scenario 3: Security and compliance-driven healthcare design
+
+**Customer requirement:** A healthcare provider has several regulated workloads that must deploy only to approved US regions, use stricter security controls, and be administered by a small regulated-platform team.
+
+**Constraints:** The normal Corp workloads do not require the full regulated initiative; the company wants fewer exceptions and consistent evidence.
+
+**Recommended design:**
+
+- Add a **Regulated** child archetype under Landing zones because multiple subscriptions need the same distinct location, security, and compliance Policy. [Management-group compliance design](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-management-groups#management-group-design-considerations)
+- Assign regulated initiatives at that management group, initially evaluate their impact with audit, then enforce after remediation and exception review. [Policy management recommendations](https://learn.microsoft.com/en-us/azure/governance/policy/overview#recommendations-for-managing-policies)
+- Vend one or more workload subscriptions into the branch according to workload ownership, production isolation, and quota needs. [Subscription boundaries](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-subscriptions)
+- Grant the regulated platform team least-privilege, PIM-controlled access at the narrowest branch scope that covers its duties; keep application teams at their subscription/resource-group scope. [CAF RBAC/PIM recommendation](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-management-groups#management-group-recommendations)
+- Use nonsecret tags such as `RegulatoryScope` and `DataClassification` for inventory, then let Policy enforce the actual controls. [Tag security warning](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources#tag-usage-and-recommendations)
+
+**Why appropriate:** The stable regulatory distinction is a valid hierarchy branch because it changes inherited Policy and access for multiple subscriptions.
+
+**Alternatives rejected:** Tags alone cannot enforce regions, encryption, or network isolation; applying the full regulated initiative at root would burden unrelated workloads and increase exemptions.
+
+**Exam interpretation:** “Several subscriptions,” “same stricter controls,” and “small specialized administrators” are management-group clues; “classification tag” is only metadata, not protection.
+
+### Scenario 4: Multiregion resilient retail workload
+
+**Customer requirement:** A retail API runs active-passive in Central US and East US 2. One workload team owns both regions, both use identical policy, and quotas have ample headroom.
+
+**Constraints:** The team wants independent regional deployments and clear failover operations, but not unnecessary subscriptions.
+
+**Recommended design:**
+
+- Keep both regions in one application subscription because subscriptions are global and the governance, owner, quota, and lifecycle align. [CAF multiregion considerations](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-subscriptions#multiple-region-considerations)
+- Use separate primary and secondary regional resource groups, plus separate global/shared and operations groups, following the recommendation that a resource group should not contain resources from different regions. [CAF multiregion resource-group recommendation](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-subscriptions#multiple-regions-recommendations)
+- Apply consistent workload/environment/criticality tags and an explicit `RegionRole` value for inventory; keep actual failover and replication in the workload's reliability design. [Azure reliability guidance](https://learn.microsoft.com/en-us/azure/reliability/)
+
+**Why appropriate:** Resource groups provide independent regional lifecycle without inventing a subscription boundary unsupported by the requirements.
+
+**Alternatives rejected:** Separate management groups per region are unnecessary; separate subscriptions add operational overhead without a sovereignty, quota, ownership, or independent active-active lifecycle requirement.
+
+**Exam interpretation:** “Same owner/policy/quota” points to one subscription; “independent regional deployment” points to separate resource groups; “RTO/RPO” would move the center of the question to the adjacent business-continuity domain.
+
+### Scenario 5: Edge case—regional sovereignty changes the default
+
+**Customer requirement:** A multinational has Canadian workloads across six subscriptions. Policy must deny all non-Canadian locations, administrative access is assigned to a Canadian operations group, and data cannot fail over outside Canada.
+
+**Constraints:** The ordinary Online branch permits several global regions and is operated by a global team.
+
+**Recommended design:**
+
+- Create a **Canada-regulated** management-group archetype because region now changes inherited Policy, administration, and disaster-recovery choices for several subscriptions. [CAF location-based exception](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-management-groups#management-group-recommendations)
+- Assign the allowed-locations and regulatory initiatives at that branch and give the Canadian platform group controlled branch access; keep workload teams at subscription scope. [Policy and RBAC inheritance](https://learn.microsoft.com/en-us/azure/governance/management-groups/overview)
+- Vend Canadian application subscriptions into the branch and restrict secondary-region choices to compliant locations as part of the workload reliability design. [Azure region selection](https://learn.microsoft.com/en-us/azure/reliability/regions-overview)
+
+**Why appropriate:** This is the explicit exception to “do not make regional management groups”: location is now a stable governance and access archetype.
+
+**Alternatives rejected:** Tags cannot enforce region or administrator scope; leaving subscriptions in Online would require repeated assignments/exclusions and would increase the risk of noncompliant placement.
+
+**Exam interpretation:** The normal recommendation changes because the requirement says **sovereignty**, **distinct operators**, and **shared inherited location Policy**, not merely “resources are in Canada.”
+
+### Scenario 6: Easy to confuse with the adjacent compliance task
+
+**Customer requirement:** An enterprise already has a sound landing-zone hierarchy. Auditors now require evidence mapped to a regulatory standard, periodic compliance assessment, approved exemptions, and remediation tracking.
+
+**Constraints:** No change in workload ownership, quota, connectivity, lifecycle, or subscription placement is requested.
+
+**Recommended design:** Keep the hierarchy unless assessment reveals a stable group of subscriptions needing distinct inherited controls. Design the compliance solution with [Azure Policy compliance](https://learn.microsoft.com/en-us/azure/governance/policy/overview), initiatives, exemptions, remediation, and potentially [Defender for Cloud regulatory compliance](https://learn.microsoft.com/en-us/azure/defender-for-cloud/regulatory-compliance-dashboard).
+
+**Why appropriate:** The requirement is about evidence, assessment, exemptions, and remediation rather than resource organization.
+
+**Alternatives rejected:** A new “Audit” management group does not itself create compliance evidence and could disrupt effective Policy/RBAC if subscriptions are moved.
+
+**Exam interpretation:** Recognize the scope boundary. This task defines where controls inherit; **Recommend a solution for managing compliance** defines the control/evidence operating model.
+
+> **Test yourself**
+>
+> - A workload needs a second subscription only because finance wants a new report column. What should you challenge first?
+> - A region-specific management group is proposed. Which facts would make it valid?
+>
+> **Answer guidance:** Challenge whether controlled [cost tags and Cost Management](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/enable-tag-inheritance) meet the reporting need before creating a hard subscription boundary. A regional branch becomes valid when location changes shared inherited [regulatory, sovereignty, security, access, or management requirements](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-management-groups#management-group-recommendations), not merely deployment geography.
+
+---
+
+## 15. Test yourself
+
+> **Test yourself**
+>
+> - Three subscriptions require identical network and security Policy but belong to different business units. Should business-unit ownership or shared governance drive their management-group placement?
+> - A resource tag exists with a different value from the resource-group tag. The requirement says the resource-group value is authoritative. Which built-in Policy behavior is needed?
+> - A team wants to move a subscription from Sandbox to Corp. What must be reviewed before the move?
+> - A resource group contains the primary and secondary regional stamps. Both must be deployed and failed over independently. What should change?
+> - Finance sees `production`, `Production`, and `Prod` in cost reports. Is the problem a missing hierarchy level?
+>
+> **Answer guidance:**
+>
+> - Shared Policy/access archetype should drive [management-group placement](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-management-groups), while business unit can remain a tag and subscription ownership attribute.
+> - Use a built-in [“inherit a tag from the resource group” `modify` policy](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-policies) that replaces the resource value, then remediate existing resources.
+> - Review effective inherited Policy/RBAC, compliance, custom-role definition paths, networking, budgets, and workload readiness because [management-group moves change the ancestry](https://learn.microsoft.com/en-us/azure/governance/management-groups/overview#issues-with-breaking-the-role-definition-and-assignment-hierarchy-path).
+> - Split the regional stamps into lifecycle-aligned regional resource groups under [CAF multiregion guidance](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-subscriptions#multiple-regions-recommendations).
+> - Standardize allowed tag values and casing through the taxonomy and Policy; [tag values are case-sensitive](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources#tag-usage-and-recommendations).
+
+---
+
+## 16. Adjacent task context
+
+| Adjacent task or topic | Why it overlaps | What belongs in this task | What belongs elsewhere |
+|---|---|---|---|
+| Recommend a solution for managing compliance | Policy assignments inherit through the hierarchy and can use tags. | Choose durable scopes/archetypes and describe tag enforcement touchpoints. | Regulatory initiatives, posture tools, evidence, detailed exemptions, assessment, and remediation operating model. [Azure Policy](https://learn.microsoft.com/en-us/azure/governance/policy/overview) |
+| Recommend a solution for identity governance | Broad Azure roles and PIM affect hierarchy security. | Avoid overbroad management-group RBAC and choose least-privilege scope. | Access reviews, entitlement management, lifecycle workflows, privileged access governance. [Entra ID Governance](https://learn.microsoft.com/en-us/entra/id-governance/identity-governance-overview) |
+| Recommend a solution for authorizing access to Azure resources | RBAC inherits down the same four scopes. | Show how scope structure affects authorization blast radius. | Select built-in/custom roles, conditions, delegation, managed identity, and authorization design. [Azure RBAC](https://learn.microsoft.com/en-us/azure/role-based-access-control/overview) |
+| Recommend a monitoring solution | Operations teams need hierarchy/tag inventory and Service Health ownership. | Monitor organization drift, tag compliance, quota, activity, and subscription onboarding. | Workload telemetry, alert rules, SLOs, visualization, Application Insights, VM/container/network monitoring. [Azure Monitor](https://learn.microsoft.com/en-us/azure/azure-monitor/fundamentals/overview) |
+| Recommend a logging/routing solution | Governance changes and Policy compliance need logs; platform subscriptions can host central logging. | Decide which platform branch owns shared management/security subscriptions. | Workspace topology, diagnostic settings, DCRs, retention, Event Hubs, Storage, and routing. [Azure Monitor logs](https://learn.microsoft.com/en-us/azure/azure-monitor/logs/data-platform-logs) |
+| Design migrations with CAF | Migrated workloads need landing zones and subscriptions before waves move. | Define target management-group/subscription/RG/tag placement. | Discovery, assessment, dependency mapping, migration method, cutover, and modernization. [CAF migrate methodology](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/migrate/) |
+| Naming conventions | Names and tags jointly support organization. | Distinguish stable identity from mutable metadata. | Full abbreviation dictionary and resource-specific name constraints. [Naming guidance](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-naming) |
+| Billing hierarchy | Cost ownership can influence subscription design. | Use cost/accountability requirements as subscription/tag criteria. | EA/MCA billing accounts, profiles, invoice sections, enrollment accounts, and invoice administration. [Cost Management scopes](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/understand-work-scopes) |
+
+---
+
+## 17. Final exam-focused summary
+
+### Key takeaways
+
+1. **Management groups organize subscriptions for inherited governance.** Keep them stable and reasonably flat, group by shared Policy/access archetype, and avoid mirroring organization, environment, or region without a real governance difference. [CAF management-group recommendations](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-management-groups#management-group-recommendations)
+2. **Subscriptions are hard workload/platform boundaries.** Use them for management, billing, quota, security, policy, ownership, and scale isolation. [Subscription design](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-subscriptions)
+3. **Resource groups express lifecycle.** Resources that deploy, update, and delete together belong together; dependencies may cross groups. [Resource-group design](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/overview#what-is-a-resource-group)
+4. **Tags express horizontal metadata.** They support cost, owner, purpose, operations, classification, automation, and inventory but do not create a security boundary. [CAF tagging strategy](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-tagging)
+5. **Inheritance terms are not interchangeable.** Policy/RBAC inherit through scope; resource tags do not; Policy can copy/repair resource tags; Cost Management can enrich usage records only. [Tag inheritance distinctions](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources#inherit-tags)
+6. **The requirement justifies the boundary.** Sovereignty, materially different access/Policy, independent quota, or independent lifecycle can override the ordinary default. [CAF design considerations](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-management-groups#management-group-design-considerations)
+
+### Must-know services and constructs
+
+- [Azure management groups](https://learn.microsoft.com/en-us/azure/governance/management-groups/overview)
+- [Azure subscriptions and application landing zones](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-subscriptions)
+- [Azure Resource Manager resource groups](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/overview#what-is-a-resource-group)
+- [Azure resource tags](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources)
+- [Azure Policy tag definitions and remediation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-policies)
+- [Azure RBAC scope](https://learn.microsoft.com/en-us/azure/role-based-access-control/scope-overview)
+- [Subscription vending](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/subscription-vending)
+- [Cost Management tag inheritance](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/enable-tag-inheritance)
+- [Azure Resource Graph](https://learn.microsoft.com/en-us/azure/governance/resource-graph/overview)
+
+### Must-know limitations
+
+- A management-group tree has [six levels below root](https://learn.microsoft.com/en-us/azure/governance/management-groups/overview#important-facts-about-management-groups), and a directory supports 10,000 management groups.
+- Every management group/subscription has one parent, and all children roll up to one [tenant root](https://learn.microsoft.com/en-us/azure/governance/management-groups/overview#root-management-group-for-each-directory).
+- Management groups cannot be tagged; taggable resources, groups, and subscriptions normally support [50 pairs](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources#limitations), with resource-specific exceptions.
+- Tags are plaintext, values are case-sensitive, not all types support tags, and resources do not [inherit tags natively](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources).
+- Resource groups normally permit [800 instances of a resource type](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/overview#what-is-a-resource-group), with exemptions.
+
+### Common requirement clues
+
+| Clue | Think |
+|---|---|
+| Same Policy/access across subscriptions | Management-group archetype and inherited assignments. [Management groups](https://learn.microsoft.com/en-us/azure/governance/management-groups/overview) |
+| Separate quota, budget, owner, or security boundary | Subscription. [Subscription boundaries](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-subscriptions) |
+| Deploy/update/delete together | Resource group. [Resource-group lifecycle](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/overview#what-is-a-resource-group) |
+| Find, report, classify, automate across hierarchy | Tags plus Resource Graph. [Resource Graph](https://learn.microsoft.com/en-us/azure/governance/resource-graph/overview) |
+| Existing resources need inherited tags | Policy `modify` plus remediation. [Tag policies](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-policies) |
+| Only billing usage needs inherited tags | Cost Management tag inheritance. [Cost inheritance](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/enable-tag-inheritance) |
+| Region mentioned without sovereignty/policy difference | Usually regional resource groups/tags, not a new management group or subscription. [Multiregion guidance](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-subscriptions#multiple-regions-recommendations) |
+| Region plus sovereignty/distinct operators | Regulated/location archetype may be justified. [Location exception](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-management-groups#management-group-recommendations) |
+
+### Before the exam, make sure you can…
+
+- [ ] Draw the tenant-root, intermediate-root, Platform, Landing zones, Sandbox, and Decommissioned hierarchy and explain each branch using the [CAF reference](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-management-groups#management-groups-in-the-azure-landing-zone-architecture).
+- [ ] Explain why Corp, Online, and Local are policy/connectivity archetypes rather than business-unit labels. [CAF hierarchy](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-management-groups#management-groups-in-the-azure-landing-zone-architecture)
+- [ ] Decide subscription versus resource group from quota, ownership, billing, policy, access, region, and lifecycle clues. [Subscription considerations](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-subscriptions)
+- [ ] Explain why management groups should not normally model dev/test/prod or regions. [CAF recommendations](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-management-groups#management-group-recommendations)
+- [ ] Recognize the sovereignty and independent active-active exceptions to the normal multiregion recommendation. [CAF multiregion recommendations](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-subscriptions#multiple-regions-recommendations)
+- [ ] Design a tag dictionary with owner, allowed values, scope, source, consumer, and enforcement. [CAF tagging strategy](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-tagging)
+- [ ] Distinguish audit, deny, append, modify, and remediation for tag governance. [Tag policies](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-policies)
+- [ ] Explain resource-tag inheritance versus billing-record inheritance in one sentence. [Cost inheritance](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/enable-tag-inheritance)
+- [ ] Separate Policy, RBAC, locks, tags, and Defender for Cloud by purpose. [Azure Policy and RBAC](https://learn.microsoft.com/en-us/azure/governance/policy/overview#azure-policy-and-azure-rbac)
+
+---
+
+## 18. Quick-reference tables
+
+### Requirement-to-structure map
+
+| Requirement | Default recommendation | Exception that changes the answer |
+|---|---|---|
+| Apply one baseline to every tenant subscription | Put only universal assignments at tenant/intermediate root. [Root scope](https://learn.microsoft.com/en-us/azure/governance/management-groups/overview#root-management-group-for-each-directory) | Place nonuniversal controls at a child archetype to avoid excessive exclusions. |
+| Apply common controls to several subscriptions | Use a management group. [Management groups](https://learn.microsoft.com/en-us/azure/governance/management-groups/overview) | If the need is only reporting, use tags/Resource Graph. |
+| Isolate one workload/team | Use an application landing-zone subscription. [Application landing zones](https://learn.microsoft.com/en-us/azure/architecture/landing-zones/landing-zone-deploy#application-landing-zone-architectures) | Small workloads may coexist when policy, risk, owner, quota, and lifecycle align. |
+| Separate production and nonproduction | Use separate subscriptions when access/risk/cost/lifecycle require it. [Environment guidance](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/management-application-environments) | Do not automatically add Dev/Prod management groups. |
+| Separate regions | Use regional resource groups in the same global subscription. [Multiregion guidance](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-subscriptions#multiple-regions-recommendations) | Split subscriptions/management groups for sovereignty, distinct governance, independent active-active lifecycle, or quota. |
+| Separate deployment/deletion lifecycle | Use separate resource groups. [Resource groups](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/overview#what-is-a-resource-group) | Cross-group dependencies are allowed and should not force co-location. |
+| Organize by owner/cost center across subscriptions | Use tags and Resource Graph/Cost Management. [Tagging strategy](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-tagging) | A distinct subscription is justified if ownership also requires independent hard boundaries. |
+
+### Tag strategy quick map
+
+| Need | Mechanism | Remember |
+|---|---|---|
+| Prevent missing caller-supplied tag | Policy `deny`. [Deny effect](https://learn.microsoft.com/en-us/azure/governance/policy/concepts/effect-deny) | Test first; unsupported types and deployment sequencing matter. |
+| Observe rollout impact | Policy `audit`. [Audit effect](https://learn.microsoft.com/en-us/azure/governance/policy/concepts/effect-audit) | Recommended starting mode for new Policy. |
+| Copy authoritative parent tag to resources | Policy `modify` inheritance. [Built-in tag policies](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-policies) | Choose replace versus “if missing” behavior deliberately. |
+| Repair existing resources | Remediation task. [Policy remediation](https://learn.microsoft.com/en-us/azure/governance/policy/how-to/remediate-resources) | Assignment identity needs required RBAC. |
+| Enrich cost records only | Cost Management tag inheritance. [Cost inheritance](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/enable-tag-inheritance) | Resource remains unchanged. |
+| Query across subscriptions | Azure Resource Graph. [Resource Graph](https://learn.microsoft.com/en-us/azure/governance/resource-graph/overview) | Account for tag support and eventual inventory update. |
+| Delegate tag maintenance | Tag Contributor or resource write access. [Tag permissions](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources#required-access) | Tag Contributor behavior differs by interface and does not grant resource management. |
+
+### Trap-to-correct-answer map
+
+| If an answer says… | Ask… | Usually prefer… |
+|---|---|---|
+| “Create another management-group level.” | Do multiple subscriptions need different inherited Policy/RBAC? | Tags/Resource Graph if the need is only navigation. [CAF hierarchy](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-management-groups) |
+| “Put it in another resource group.” | Does the requirement need a new quota/billing/security boundary? | Subscription if a hard boundary is required. [Subscription design](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-subscriptions) |
+| “Resource-group tags inherit.” | Which mechanism performs the copy? | Policy `modify`, not native behavior. [Tag inheritance](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources#inherit-tags) |
+| “Enable tag inheritance.” | On resources or on cost usage records? | Policy for resources; Cost Management for usage records. [Cost inheritance](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/enable-tag-inheritance) |
+| “Use a lock for security.” | Is the goal authorization, compliance, deletion prevention, or recovery? | RBAC, Policy, lock, or backup according to the actual requirement. [Locks](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources) |
+| “Use one subscription per region.” | Is there sovereignty, quota, independent ownership, or active-active lifecycle? | One global subscription plus regional resource groups when those differences are absent. [Multiregion subscriptions](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-subscriptions#multiple-regions-recommendations) |
+
+### Edge-case-to-design-change map
+
+| Normal default | Edge-case clue | Design change |
+|---|---|---|
+| No region management groups | Shared sovereignty/residency Policy and regional administrators across subscriptions | Add a location/regulated archetype. [CAF exception](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-management-groups#management-group-recommendations) |
+| One subscription for primary/DR regions | Independent active-active lifecycle, region-specific governance, or quota exhaustion | Use separate regional subscriptions. [CAF multiregion recommendations](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-subscriptions#multiple-regions-recommendations) |
+| One application per subscription | Several small apps share owner, policy, risk, lifecycle, and quota | Coexistence can be acceptable under a flexible subscription model. [CAF flexibility](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org-subscriptions#recommendations) |
+| `modify` parent tags onto resources | A resource-specific value is intentionally authoritative | Use “inherit if missing” rather than replace, or exempt the justified scope. [Built-in tag policies](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-policies) |
+| Resource tags drive cost reports | Resource type does not emit tag data consistently | Enable Cost Management tag inheritance for usage records if billing type/scope supports it. [Cost inheritance](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/enable-tag-inheritance) |
+
+---
+
+## 19. Final validation
+
+- [x] The guide remains anchored to the exact task: resource hierarchy and resource-tagging strategy.
+- [x] The domain, skill, and task were resolved from the supplied map/skills file and the [official AZ-305 study guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-305).
+- [x] Product discovery begins with the supplied Study Guide Map and current Microsoft documentation.
+- [x] Potentially relevant products were considered, while compliance, identity governance, detailed monitoring, migration execution, and BCDR remain clearly adjacent.
+- [x] Forum-discovery material is identified as nonauthoritative and used only as a discovery signal.
+- [x] The document uses normal Markdown links and no internal citation markers.
+- [x] The primary source set appears near the top, and factual design claims use inline Microsoft links.
+- [x] Exam tips, decision logic, Mermaid diagrams, comparison tables, operational constraints, and edge cases are included.
+- [x] Six scenario-based examples cover the default, cost, compliance/security, multiregion, exception, and adjacent-task boundary.
+- [x] Common traps include the required edge-case row.
+- [x] Structured content dominates while explanatory prose connects the decisions.
+- [x] The final review should verify link availability again near the exam date because Microsoft Learn content, limits, and exam objectives can change. [Official AZ-305 study guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-305)
