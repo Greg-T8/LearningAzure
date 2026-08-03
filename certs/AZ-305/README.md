@@ -7,17 +7,11 @@
 - **Study Log:** [Session-by-session study time tracker](./StudyLog.md)
 
 <!-- STUDY_SUMMARY -->
-**Hours Committed:** 49.5h · **Days Studied:** 29
+**Hours Committed:** 51.2h · **Days Studied:** 30
 - Prepare: 14.2h
-- Practice: 32.2h
+- Practice: 33.9h
 - Review: 3.1h
 <!-- /STUDY_SUMMARY -->
-
-
-
-
-
-
 
 
 ---
@@ -30,12 +24,12 @@ Task-level coverage based on [Per-Task Progress](#per-task-progress) completion.
 
 | Domain | Weight | Tasks | Tasks Covered | Status |
 | :----- | :----- | ----: | :------------ | :----: |
-| 1. Identity, Governance & Monitoring | 25–30% | 11 | 7 / 11 (63%) | 🟡 |
+| 1. Identity, Governance & Monitoring | 25–30% | 11 | 8 / 11 (72%) | 🟢 |
 | 2. Data Storage | 20–25% | 10 | 0 / 10 (0%) | 🔴 |
 | 3. Business Continuity | 15–20% | 7 | 0 / 7 (0%) | 🔴 |
 | 4. Infrastructure | 30–35% | 21 | 0 / 21 (0%) | 🔴 |
 
-**Totals:** 7 / 49 tasks completed
+**Totals:** 8 / 49 tasks completed
 
 **Legend:** 🟢 Strong (≥66%) · 🟡 Partial (33–65%) · 🔴 Low (<33%) — "Covered" = task marked complete in Per-Task Progress
 
@@ -56,7 +50,7 @@ Task-level coverage based on [Per-Task Progress](#per-task-progress) completion.
 | 5 | Identity, Governance & Monitoring | Design authentication and authorization solutions | Recommend an identity management solution | 0.4h | 0.0h | 3.1h | 3.5h | ✅ |
 | 6 | Identity, Governance & Monitoring | Design authentication and authorization solutions | Recommend a solution for authorizing access to Azure resources | 0.8h | 3.1h | 0.0h | 3.8h | ✅ |
 | 7 | Identity, Governance & Monitoring | Design authentication and authorization solutions | Recommend a solution for authorizing access to on-premises resources | 1.3h | 2.0h | 0.0h | 3.4h | ✅ |
-| 8 | Identity, Governance & Monitoring | Design authentication and authorization solutions | Recommend a solution to manage secrets, certificates, and keys | 0.4h | 6.6h | 0.0h | 7.0h | ⏳ |
+| 8 | Identity, Governance & Monitoring | Design authentication and authorization solutions | Recommend a solution to manage secrets, certificates, and keys | 0.4h | 8.2h | 0.0h | 8.7h | ✅ |
 | 9 | Identity, Governance & Monitoring | Design governance | Recommend a structure for management groups, subscriptions, and resource groups, and a strategy for resource tagging | 0.0h | 0.0h | 0.0h | 0.0h | 🔲 |
 | 10 | Identity, Governance & Monitoring | Design governance | Recommend a solution for managing compliance | 0.0h | 0.0h | 0.0h | 0.0h | 🔲 |
 | 11 | Identity, Governance & Monitoring | Design governance | Recommend a solution for identity governance | 0.0h | 0.0h | 0.0h | 0.0h | 🔲 |
