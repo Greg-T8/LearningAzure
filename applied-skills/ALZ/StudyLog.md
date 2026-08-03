@@ -8,6 +8,7 @@ This log tracks individual study sessions for the **ALZ** applied skill. Use **N
 
 | # | Date | Start | End | Duration | Notes |
 |:--|:-----|:------|:----|:---------|:------|
+| 16 | 8/3/26 | 5:23 AM |  |  |  |
 | 15 | 8/2/26 | 5:48 AM | 7:30 AM | 1h 42m | Deep dive into terraform code used by ALZ. For next session, (1) store PATs in Key Vault and (2) pick up with using the CI GitHub action flow to bring in changes via pull request |
 | 14 | 7/31/26 | 5:34 AM | 6:25 AM | 0h 51m | Pick up at understanding built-in replacements in platform-landing-zone.auto.tfvars |
 | 13 | 7/30/26 | 5:27 AM | 6:30 AM | 1h 3m | Pick up at understanding the bootstrap process. Continue with exploring pull requests instead of pushing to main branch |
