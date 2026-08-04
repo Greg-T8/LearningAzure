@@ -7,11 +7,12 @@
 - **Study Log:** [Session-by-session study time tracker](./StudyLog.md)
 
 <!-- STUDY_SUMMARY -->
-**Hours Committed:** 51.2h · **Days Studied:** 30
+**Hours Committed:** 53.9h · **Days Studied:** 31
 - Prepare: 14.2h
-- Practice: 33.9h
+- Practice: 36.6h
 - Review: 3.1h
 <!-- /STUDY_SUMMARY -->
+
 
 
 
@@ -52,7 +53,7 @@ Task-level coverage based on [Per-Task Progress](#per-task-progress) completion.
 | 6 | Identity, Governance & Monitoring | Design authentication and authorization solutions | Recommend a solution for authorizing access to Azure resources | 0.8h | 3.1h | 0.0h | 3.8h | ✅ |
 | 7 | Identity, Governance & Monitoring | Design authentication and authorization solutions | Recommend a solution for authorizing access to on-premises resources | 1.3h | 2.0h | 0.0h | 3.4h | ✅ |
 | 8 | Identity, Governance & Monitoring | Design authentication and authorization solutions | Recommend a solution to manage secrets, certificates, and keys | 0.4h | 8.2h | 0.0h | 8.7h | ✅ |
-| 9 | Identity, Governance & Monitoring | Design governance | Recommend a structure for management groups, subscriptions, and resource groups, and a strategy for resource tagging | 0.0h | 0.0h | 0.0h | 0.0h | 🔲 |
+| 9 | Identity, Governance & Monitoring | Design governance | Recommend a structure for management groups, subscriptions, and resource groups, and a strategy for resource tagging | 0.0h | 2.8h | 0.0h | 2.8h | ⏳ |
 | 10 | Identity, Governance & Monitoring | Design governance | Recommend a solution for managing compliance | 0.0h | 0.0h | 0.0h | 0.0h | 🔲 |
 | 11 | Identity, Governance & Monitoring | Design governance | Recommend a solution for identity governance | 0.0h | 0.0h | 0.0h | 0.0h | 🔲 |
 | 12 | Data Storage | Design data storage solutions for relational data | Recommend a solution for storing relational data | 0.0h | 0.0h | 0.0h | 0.0h | 🔲 |
