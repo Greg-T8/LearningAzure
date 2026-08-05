@@ -8,7 +8,7 @@ This log tracks individual study sessions for the **AZ-305** exam. Fill in **End
 
 | # | Date | Start | End | Duration | Mode | Task | Notes |
 |:--|:-----|:------|:----|:---------|:-----|:------|:------|
-| 41 | 8/5/26 | 3:16 AM |  |  | Practice | Recommend a structure for management groups, subscriptions, and resource groups, and a strategy for resource tagging |  |
+| 41 | 8/5/26 | 3:16 AM | 5:29 AM | 2h 13m | Practice | Recommend a structure for management groups, subscriptions, and resource groups, and a strategy for resource tagging | Investigated use of Azure Policy to deploy anomalous spending alerts |
 | 40 | 8/4/26 | 3:08 AM | 5:55 AM | 2h 47m | Practice | Recommend a structure for management groups, subscriptions, and resource groups, and a strategy for resource tagging | Studied cost management and Azure policy. For next session, pick up at Azure Policy enrollment |
 | 39 | 8/3/26 | 3:46 AM | 5:23 AM | 1h 37m | Practice | Recommend a solution to manage secrets, certificates, and keys | Completed exam task for secrets and app configuration; move to next exam task |
 | 38 | 8/2/26 | 4:39 AM | 5:45 AM | 1h 6m | Practice | Recommend a solution to manage secrets, certificates, and keys | Completed second round of practice questions. Scored 55%. Pick up w/ third round |
