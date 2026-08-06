@@ -8,7 +8,7 @@ This log tracks individual study sessions for the **ALZ** applied skill. Use **N
 
 | # | Date | Start | End | Duration | Notes |
 |:--|:-----|:------|:----|:---------|:------|
-| 19 | 8/6/26 | 5:14 AM |  |  |  |
+| 19 | 8/6/26 | 5:14 AM | 6:58 AM | 1h 44m | Successfully used the IaC Accelerator to deploy a hub and spoke setup; next pick up at troubleshooting lingering issues, e.g. long time to create management groups |
 | 18 | 8/5/26 | 5:30 AM | 6:50 AM | 1h 20m | For next session, pick up on concurrency issue w/ Terraform destroy operation for ALZ deployment |
 | 17 | 8/4/26 | 5:57 AM | 6:27 AM | 0h 30m | Deployed patched ALZ bootstrap environment. For next session, pick up at understanding ci vs cd workflows |
 | 16 | 8/3/26 | 5:23 AM | 6:47 AM | 1h 24m | Created bootstrap script. Next session pick up at making changes using pull request |
