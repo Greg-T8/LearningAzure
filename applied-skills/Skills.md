@@ -8,3 +8,9 @@ Terraform Community Module for Cost Alert
 FinOps Toolkit
 - <https://learn.microsoft.com/en-us/cloud-computing/finops/toolkit/finops-toolkit-overviw>
 - <https://github.com/microsoft/finops-toolkit/tree/dev/src/bicep-registry/scheduled-action>
+
+Azure Governance Visualizer
+<https://github.com/JulianHayward/Azure-MG-Sub-Governance-Reporting>
+
+Azure landing zone Documentation
+<https://azure.github.io/Azure-Landing-Zones/policy/policyupdate2latest/>
