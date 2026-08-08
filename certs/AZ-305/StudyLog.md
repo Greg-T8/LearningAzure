@@ -8,7 +8,7 @@ This log tracks individual study sessions for the **AZ-305** exam. Fill in **End
 
 | # | Date | Start | End | Duration | Mode | Task | Notes |
 |:--|:-----|:------|:----|:---------|:-----|:------|:------|
-| 44 | 8/8/26 | 2:44 AM |  |  | Practice | Recommend a structure for management groups, subscriptions, and resource groups, and a strategy for resource tagging |  |
+| 44 | 8/8/26 | 2:44 AM | 7:02 AM | 4h 18m | Practice | Recommend a structure for management groups, subscriptions, and resource groups, and a strategy for resource tagging |  |
 | 43 | 8/7/26 | 2:57 AM | 5:09 AM | 2h 12m | Practice | Recommend a structure for management groups, subscriptions, and resource groups, and a strategy for resource tagging | Explored cost allocation, resource tagging, and management group structure in support of CAF recommendations; continue exploring.  On 2 of 3 practice question sessions |
 | 42 | 8/6/26 | 3:05 AM | 5:14 AM | 2h 9m | Practice | Recommend a structure for management groups, subscriptions, and resource groups, and a strategy for resource tagging | Completed practice session 1, deployed Azure Naming Tool; for next session pick up w/ practice session 2 |
 | 41 | 8/5/26 | 3:16 AM | 5:29 AM | 2h 13m | Practice | Recommend a structure for management groups, subscriptions, and resource groups, and a strategy for resource tagging | Investigated use of Azure Policy to deploy anomalous spending alerts |
