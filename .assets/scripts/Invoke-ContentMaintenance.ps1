@@ -49,7 +49,7 @@ $Main = {
     Invoke-Step -Name 'Update-ProgressTrackerDays' -ScriptPath (Join-Path $ScriptsDir 'Update-ProgressTrackerDays.ps1')
 
     # Step 4: Update coverage tables for active exams
-    Invoke-Step -Name 'Update-CoverageTable' -ScriptPath (Join-Path $ScriptsDir 'Update-CoverageTable.ps1')
+    Invoke-Step -Name 'Update-CoverageTable' -ScriptPath (Join-Path $ScriptsDir 'Update-CoverageTable.ps1') -CommandName 'Update-CoverageTable'
 
     # Step 5: Update lab references and catalogs
     Invoke-Step -Name 'Update-LabReferences' -ScriptPath (Join-Path $ScriptsDir 'Update-LabReferences.ps1')
@@ -72,7 +72,9 @@ $Helpers = {
             [string]$Name,
 
             [Parameter(Mandatory)]
-            [string]$ScriptPath
+            [string]$ScriptPath,
+
+            [string]$CommandName
         )
 
         Write-Host "`n=== $Name ===" -ForegroundColor Cyan
@@ -88,7 +90,15 @@ $Helpers = {
         if ($VerbosePreference -eq 'Continue') { $invokeParams['Verbose'] = $true }
 
         try {
-            & $ScriptPath @invokeParams
+            if ($CommandName) {
+                # Import function-based maintenance commands before invoking them.
+                . $ScriptPath
+                & $CommandName @invokeParams
+            }
+            else {
+                # Execute legacy maintenance scripts directly.
+                & $ScriptPath @invokeParams
+            }
         }
         catch {
             Write-Warning "$Name failed: $_"

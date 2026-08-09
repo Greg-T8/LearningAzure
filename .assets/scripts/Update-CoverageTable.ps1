@@ -25,10 +25,11 @@ Greg Tate
 Program: Update-CoverageTable.ps1
 #>
 
-[CmdletBinding(SupportsShouldProcess)]
-param(
-    [string[]]$ExamName
-)
+function Update-CoverageTable {
+    [CmdletBinding(SupportsShouldProcess)]
+    param(
+        [string[]]$ExamName
+    )
 
 # Configuration
 $RepoRoot = Resolve-Path -Path (Join-Path -Path $PSScriptRoot -ChildPath '..\..')
@@ -75,7 +76,7 @@ $Main = {
             Update-PerSkillProgress
 
             # Update coverage table and dashboard from study log / skills data
-            Update-CoverageTable
+            Update-CoverageTableSummary
             Update-CoverageDashboard
         }
         catch {
@@ -591,7 +592,7 @@ $Helpers = {
         }
     }
 
-    function Update-CoverageTable {
+    function Update-CoverageTableSummary {
         [CmdletBinding(SupportsShouldProcess)]
 
         # Update <summary> tags in the coverage table with task counts per domain
@@ -1737,4 +1738,5 @@ try {
 }
 finally {
     Pop-Location
+}
 }
