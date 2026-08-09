@@ -8,6 +8,7 @@ This log tracks individual study sessions for the **ALZ** applied skill. Use **N
 
 | # | Date | Start | End | Duration | Notes |
 |:--|:-----|:------|:----|:---------|:------|
+| 22 | 8/9/26 | 3:03 AM | 8:27 AM | 5h 24m | Refine techniques in using the ALZ accelerator to deploy a two-virtual hub vWAN landing zone; develop scripts for configuring cost anomaly and budget alerts |
 | 21 | 8/8/26 | 2:44 AM | 7:02 AM | 4h 18m | Refine techniques in using the ALZ accelerator to deploy a two-virtual hub vWAN landing zone |
 | 20 | 8/7/26 | 5:09 AM | 6:28 AM | 1h 19m | Troubleshooting ALZ deployment; investigated use of cost management API to create cost allocation rules. For next session, pick up on the API cost management setup |
 | 19 | 8/6/26 | 5:14 AM | 6:58 AM | 1h 44m | Successfully used the IaC Accelerator to deploy a hub and spoke setup; next pick up at troubleshooting lingering issues, e.g. long time to create management groups |

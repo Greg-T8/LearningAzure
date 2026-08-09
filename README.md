@@ -11,19 +11,19 @@ This repository documents my Azure learning journey, from certification prep to 
 
 | Date | AZ-305 | Applied Skills | Total |
 |------|------|------|-------|
-| Sun, Aug 09 |  |  |  |
+| Sun, Aug 09 |  | 🟣 5.4h | **5.4h** |
 | Sat, Aug 08 |  | 🟣 4.3h | **4.3h** |
 | Fri, Aug 07 | 🟣 2.2h | 🟢 1.3h | **3.5h** |
 | Thu, Aug 06 | 🟣 2.2h | 🟢 1.7h | **3.9h** |
 | Wed, Aug 05 | 🟣 2.2h | 🟢 1.3h | **3.5h** |
 | Tue, Aug 04 | 🟣 2.8h | 🟡 0.5h | **3.3h** |
 | Mon, Aug 03 | 🟢 1.6h | 🟢 1.4h | **3.0h** |
-| **Weekly Total** | **11.0h** | **10.5h** | **21.5h** |
-| ***Running Total*** | ***60.5h*** | ***30.5h*** | ***91.0h*** |
+| **Weekly Total** | **11.0h** | **15.9h** | **26.9h** |
+| ***Running Total*** | ***60.5h*** | ***35.9h*** | ***96.4h*** |
 
 *Activity Levels: 🟡 Low (< 1hr) | 🟢 Medium (1-2hrs) | 🟣 High (> 2hrs)*
 
-*Last updated: August 09, 2026 at 08:22 CDT*
+*Last updated: August 09, 2026 at 08:29 CDT*
 
 <!-- COMMIT_STATS_END -->
 
@@ -48,5 +48,5 @@ Hands-on Azure implementation topics. Studied alongside certifications.
 
 | Topic | Description | Status | Duration | Days Studied | Hours Committed |
 |-------|-------------|--------|---------|-------------|-----------------|
-| [**ALZ**](applied-skills/ALZ/README.md) | Azure Landing Zone | In Progress | 7/17/26 – 8/9/26 (24d) | 21 | 28.2h |
+| [**ALZ**](applied-skills/ALZ/README.md) | Azure Landing Zone | In Progress | 7/17/26 – 8/9/26 (24d) | 22 | 33.6h |
 | [**AMBA**](applied-skills/AMBA/README.md) | Azure Monitor Baseline Alerts | Not Started |  | 0 | 0.0h |
