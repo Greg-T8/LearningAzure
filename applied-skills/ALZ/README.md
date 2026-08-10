@@ -5,8 +5,9 @@
 - **Study Log:** [Session-by-session study notes and time](./StudyLog.md)
 
 <!-- STUDY_SUMMARY -->
-**Hours Committed:** 33.6h · **Days Studied:** 22
+**Hours Committed:** 35.8h · **Days Studied:** 23
 <!-- /STUDY_SUMMARY -->
+
 
 
 
