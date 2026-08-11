@@ -8,7 +8,7 @@ This log tracks individual study sessions for the **ALZ** applied skill. Use **N
 
 | # | Date | Start | End | Duration | Notes |
 |:--|:-----|:------|:----|:---------|:------|
-| 24 | 8/11/26 | 2:54 AM | 6:58 AM | 4h 4m | Refined finops PowerShell commands; refined deployment templates in support of ALZ pipeline stages |
+| 24 | 8/11/26 | 2:54 AM | 5:30 AM | 2h 36m | Refined finops PowerShell commands; refined deployment templates in support of ALZ pipeline stages |
 | 23 | 8/10/26 | 2:56 AM | 5:13 AM | 2h 17m | Refined finops PowerShell commands; refined deployment templates in support of ALZ pipeline stages |
 | 22 | 8/9/26 | 3:03 AM | 8:27 AM | 5h 24m | Refine techniques in using the ALZ accelerator to deploy a two-virtual hub vWAN landing zone; develop scripts for configuring cost anomaly and budget alerts |
 | 21 | 8/8/26 | 2:44 AM | 7:02 AM | 4h 18m | Refine techniques in using the ALZ accelerator to deploy a two-virtual hub vWAN landing zone |
