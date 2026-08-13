@@ -11,3 +11,5 @@
 - [Azure Governance Visualizer](https://github.com/JulianHayward/Azure-MG-Sub-Governance-Reporting)
 
 - [Azure landing zone Documentation](https://azure.github.io/Azure-Landing-Zones/policy/policyupdate2latest/)
+
+- [Power BI Cost Management Connector](https://learn.microsoft.com/en-us/power-bi/connect-data/desktop-connect-azure-cost-management)
