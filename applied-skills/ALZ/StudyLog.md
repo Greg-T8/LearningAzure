@@ -8,7 +8,7 @@ This log tracks individual study sessions for the **ALZ** applied skill. Use **N
 
 | # | Date | Start | End | Duration | Notes |
 |:--|:-----|:------|:----|:---------|:------|
-| 26 | 8/13/26 | 2:30 AM |  |  |  |
+| 26 | 8/13/26 | 2:30 AM | 5:08 AM | 2h 38m | Refined techniques in deploying Azure vWAN using ALZ |
 | 25 | 8/12/26 | 2:53 AM | 7:00 AM | 4h 7m | Refined ALZ pipeline; developed new pipeline support of custom deployments; created CostManagement PowerShell module |
 | 24 | 8/11/26 | 2:54 AM | 5:30 AM | 2h 36m | Refined finops PowerShell commands; refined deployment templates in support of ALZ pipeline stages |
 | 23 | 8/10/26 | 2:56 AM | 5:13 AM | 2h 17m | Refined finops PowerShell commands; refined deployment templates in support of ALZ pipeline stages |
