@@ -8,7 +8,7 @@ This log tracks individual study sessions for the **ALZ** applied skill. Use **N
 
 | # | Date | Start | End | Duration | Notes |
 |:--|:-----|:------|:----|:---------|:------|
-| 28 | 8/15/26 | 3:39 AM |  |  |  |
+| 28 | 8/15/26 | 3:39 AM | 5:55 PM | 14h 16m | Developed techniques for Azure cost management; set up Lab and Test tenants for deploying ALZ, configured scripts to handle automation of tasks; published work to GitHub repo |
 | 27 | 8/14/26 | 4:39 AM | 8:21 AM | 3h 42m | Optimizing ALZ bootstrap and deployment process |
 | 26 | 8/13/26 | 2:30 AM | 5:08 AM | 2h 38m | Refined techniques in deploying Azure vWAN using ALZ |
 | 25 | 8/12/26 | 2:53 AM | 7:00 AM | 4h 7m | Refined ALZ pipeline; developed new pipeline support of custom deployments; created CostManagement PowerShell module |
