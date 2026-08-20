@@ -8,7 +8,7 @@ This log tracks individual study sessions for the **ALZ** applied skill. Use **N
 
 | # | Date | Start | End | Duration | Notes |
 |:--|:-----|:------|:----|:---------|:------|
-| 31 | 8/20/26 | 3:22 AM | 7:05 AM | 3h 43m | Troubleshooting ALZ bootstrap configurations |
+| 31 | 8/20/26 | 3:22 AM | 6:05 AM | 2h 43m | Troubleshooting ALZ bootstrap configurations |
 | 30 | 8/18/26 | 2:36 AM | 4:58 AM | 2h 22m | First deployment of Azure Monitor Baseline Alert (AMBA) config in test tenant |
 | 29 | 8/17/26 | 2:43 AM | 5:10 AM | 2h 27m | Introduced Automation Account and script to automatically stop containers on schedule |
 | 28 | 8/15/26 | 3:39 AM | 9:55 PM | 6h 16m | Developed techniques for Azure cost management; set up Lab and Test tenants for deploying ALZ, configured scripts to handle automation of tasks; published work to GitHub repo |
