@@ -21,7 +21,7 @@ Run from the workspace root.
 
 | Parameter | Availability | Required | Description |
 |:----------|:-------------|:---------|:------------|
-| `Action` | All parameter sets | No; defaults to `Start` | `Start` or `Stop` |
+| `Action` | All parameter sets | No; defaults to `Start` | `Start`, `Stop`, or `Log` |
 | `Exam` | Exam only | Exam Start | Active certification code such as `AZ-305` |
 | `AppliedSkill` | Applied Skill only | Applied Skill Start | Topic folder such as `ALZ` or `AMBA` |
 | `Mode` | Exam only | Exam Start | `Prepare`, `Practice`, or `Review` |
@@ -29,6 +29,8 @@ Run from the workspace root.
 | `Domain` | Exam only | No | Domain from the certification `Skills.psd1` |
 | `Skill` | Exam only | No | Skill from the certification `Skills.psd1` |
 | `Notes` | Both track types | No | Free-text session notes |
+| `StartTime` | `Log` only | Yes for `Log` | Full start date and time, such as `'8/22/26 2:30 PM'` |
+| `EndTime` | `Log` only | Yes for `Log` | Full end date and time; must be later than `StartTime` and not future |
 
 `Exam` and `AppliedSkill` are mutually exclusive. For exams, `Task`, `Domain`, and `Skill` are also mutually exclusive. `Mode` and all scope parameters are invalid with `AppliedSkill`.
 
@@ -46,12 +48,13 @@ Run from the workspace root.
 |:-------|:--------|
 | `Start` | start, begin, open, new |
 | `Stop` | stop, end, finish, done, close, wrap up |
+| `Log` | log, record, add historical, retroactive |
 
 ## Procedure
 
 ### 1. Parse the Request
 
-1. Detect `Start` or `Stop`; default to `Start` when study intent is clear.
+1. Detect `Start`, `Stop`, or `Log`; default to `Start` when study intent is clear.
 2. Determine whether the target is an Exam or Applied Skill.
 3. Capture the matching identifier in `Exam` or `AppliedSkill`, never both.
 4. For exams only, map a mode alias and capture at most one optional scope value.
@@ -80,6 +83,8 @@ Get-ChildItem applied-skills -Directory |
 An Applied Skill Start requires only `AppliedSkill`. Do not prompt for Mode or structured scope. Notes are optional and may be provided at Start, Stop, or both.
 
 A Stop requires no identifier because the script can detect the active session. If the user names a target, pass it through using the correct parameter.
+
+A Log requires the track and full `StartTime` and `EndTime` values. It records one completed historical session without closing an active session in another track.
 
 ### 3. Execute
 
@@ -110,6 +115,18 @@ Invoke-StudySession -Action Stop
 Invoke-StudySession -Action Stop -AppliedSkill ALZ -Notes 'Continue with Terraform bootstrap next time'
 ```
 
+Historical exam session example:
+
+```powershell
+Invoke-StudySession -Action Log -Exam AZ-305 -Mode Practice -Task 'Recommend a logging solution' -StartTime '8/22/26 2:30 PM' -EndTime '8/22/26 4:00 PM' -Notes 'Completed missed session entry'
+```
+
+Historical Applied Skill session example:
+
+```powershell
+Invoke-StudySession -Action Log -AppliedSkill ALZ -StartTime '8/21/26 10:30 PM' -EndTime '8/22/26 12:15 AM' -Notes 'Recorded overnight AMBA research'
+```
+
 Quote scope and Notes values when they contain spaces. Run commands from the workspace root.
 
 ### 4. Report the Result
@@ -121,4 +138,5 @@ Confirm the action and session number briefly. If execution fails, show the erro
 - “Begin AZ-305 practice on Recommend a logging solution” → Exam Start; parse Mode and Task.
 - “Start studying ALZ and explore bootstrap permissions” → Applied Skill Start; put the exploration text in Notes and do not ask for Mode.
 - “End study session” → Stop with automatic active-session detection.
+- “Log ALZ work from 8/21 at 10:30 PM through 8/22 at 12:15 AM” → Log a completed historical Applied Skill session.
 - An identifier that exists as both an exam and an Applied Skill → ask which track type the user means.
