@@ -3,10 +3,11 @@
 Manage certification and Applied Skill study sessions.
 
 .DESCRIPTION
-Manages study session tracking for certification exams and Applied Skills. Supports Start and Stop actions:
+Manages study session tracking for certification exams and Applied Skills. Supports Start, Stop, and Log actions:
 Start — inserts a new row at the top of StudyLog.md with session number, date, and start time.
         Auto-closes any currently active session in another track before opening the new one.
 Stop  — closes the active session with end time and duration.
+Log   — records a completed historical session from supplied start and end timestamps.
 Certification sessions may optionally be tagged with one scope value from Skills.psd1:
 Domain, Skill, or Task. Applied Skill sessions use free-text notes only.
 
@@ -23,7 +24,7 @@ Program: Invoke-StudySession.ps1
 function Invoke-StudySession {
     [CmdletBinding(DefaultParameterSetName = 'Auto')]
     param(
-        [ValidateSet('Start', 'Stop')]
+        [ValidateSet('Start', 'Stop', 'Log')]
         [string]$Action = 'Start',
 
         [Parameter(ParameterSetName = 'Exam')]
@@ -45,17 +46,24 @@ function Invoke-StudySession {
         [Parameter(ParameterSetName = 'Exam')]
         [string]$Skill,
 
-        [string]$Notes
+        [string]$Notes,
+
+        [datetime]$StartTime,
+
+        [datetime]$EndTime
     )
 
 # Configuration
 $RepoRoot = Resolve-Path -Path (Join-Path -Path $PSScriptRoot -ChildPath '..\..')
 $script:StudyLogFile = $null
 $GetActiveExamScript = Join-Path -Path $PSScriptRoot -ChildPath 'Get-ActiveExam.ps1'
+$HasStartTime = $PSBoundParameters.ContainsKey('StartTime')
+$HasEndTime = $PSBoundParameters.ContainsKey('EndTime')
 
 $Main = {
     . $Helpers
 
+    Confirm-ActionTimestampUsage -Action $Action -HasStartTime $HasStartTime -HasEndTime $HasEndTime -StartTime $StartTime -EndTime $EndTime
     Confirm-GitRepository
     Sync-Repository
 
@@ -139,6 +147,44 @@ $Main = {
             Push-StudyLogChange -SessionNumber $sourceSession -Type 'end' -Track $sourceTrack
             Show-Confirmation -Message "Study session #$sourceSession ended for $($sourceTrack.Name)"
         }
+        'Log' {
+            if (-not $Exam -and -not $AppliedSkill) {
+                throw "Either Exam or AppliedSkill is required when Action is 'Log'."
+            }
+
+            $targetTrack = Resolve-Track -Exam $Exam -AppliedSkill $AppliedSkill
+
+            if ($targetTrack.Type -eq 'Exam') {
+                Confirm-ValidExam -Exam $targetTrack.Name
+            }
+            else {
+                Confirm-ValidAppliedSkill -AppliedSkill $targetTrack.Name
+            }
+
+            if ($targetTrack.Type -eq 'Exam' -and -not $Mode) {
+                throw "Mode is required when Action is 'Log'."
+            }
+
+            # Resolve optional scope and enforce mutual exclusivity.
+            $scope = Resolve-SessionScope -Task $Task -Domain $Domain -Skill $Skill
+
+            $logFile = Get-TrackLogPath -Track $targetTrack
+            $script:StudyLogFile = $logFile
+            Confirm-StudyLogExists
+            $scopeHeader = Get-StudyLogScopeHeader -LogFile $logFile
+            Confirm-ScopeHeaderMatch -ScopeHeader $scopeHeader -ScopeType $scope.Type -LogFile $logFile
+
+            # Validate the selected scope value against Skills.psd1 entries when provided.
+            if ($scope.Type) {
+                Confirm-ValidScope -Exam $targetTrack.Name -ScopeType $scope.Type -ScopeValue $scope.Value
+            }
+
+            $session = Get-NextSessionNumber
+            Add-SessionEntry -SessionNumber $session -Mode $Mode -ScopeValue $scope.Value -Notes $Notes -StartTime $StartTime -LogFile $logFile -InsertChronologically
+            Close-SessionEntry -SessionNumber $session -LogFile $logFile -EndTime $EndTime
+            Push-StudyLogChange -SessionNumber $session -Type 'log' -Track $targetTrack
+            Show-LogConfirmation -SessionNumber $session -Track $targetTrack -StartTime $StartTime -EndTime $EndTime
+        }
     }
 }
 
@@ -178,6 +224,46 @@ $Helpers = {
         # Verify the StudyLog.md file is present in the selected track folder.
         if (-not (Test-Path -Path $script:StudyLogFile)) {
             throw "StudyLog.md not found at '$script:StudyLogFile'. Please create it first."
+        }
+    }
+
+    function Confirm-ActionTimestampUsage {
+        # Enforce timestamp requirements for completed historical session logging.
+        param(
+            [Parameter(Mandatory)]
+            [ValidateSet('Start', 'Stop', 'Log')]
+            [string]$Action,
+
+            [Parameter(Mandatory)]
+            [bool]$HasStartTime,
+
+            [Parameter(Mandatory)]
+            [bool]$HasEndTime,
+
+            [Nullable[datetime]]$StartTime,
+
+            [Nullable[datetime]]$EndTime
+        )
+
+        if ($Action -ne 'Log') {
+            if ($HasStartTime -or $HasEndTime) {
+                throw '-StartTime and -EndTime can only be used when Action is Log.'
+            }
+
+            return
+        }
+
+        if (-not $HasStartTime -or -not $HasEndTime) {
+            throw 'Both -StartTime and -EndTime are required when Action is Log.'
+        }
+
+        if ($EndTime -le $StartTime) {
+            throw '-EndTime must be later than -StartTime.'
+        }
+
+        $now = Get-Date
+        if ($StartTime -gt $now -or $EndTime -gt $now) {
+            throw '-StartTime and -EndTime must not be in the future when Action is Log.'
         }
     }
 
@@ -474,6 +560,118 @@ $Helpers = {
         }
     }
 
+    function Get-SessionStartDateTime {
+        # Parse a populated study-log Date and Start value into a sortable timestamp.
+        param(
+            [string]$Date,
+
+            [string]$Start
+        )
+
+        if ([string]::IsNullOrWhiteSpace($Date) -or [string]::IsNullOrWhiteSpace($Start)) {
+            return $null
+        }
+
+        $startDateTime = [datetime]::MinValue
+        $startText = "$Date $Start"
+        $parsedStart = [datetime]::TryParse(
+            $startText,
+            [System.Globalization.CultureInfo]::CurrentCulture,
+            [System.Globalization.DateTimeStyles]::AllowWhiteSpaces,
+            [ref]$startDateTime
+        )
+
+        if (-not $parsedStart) {
+            $parsedStart = [datetime]::TryParse(
+                $startText,
+                [System.Globalization.CultureInfo]::InvariantCulture,
+                [System.Globalization.DateTimeStyles]::AllowWhiteSpaces,
+                [ref]$startDateTime
+            )
+        }
+
+        if (-not $parsedStart) {
+            return $null
+        }
+
+        return $startDateTime
+    }
+
+    function Get-HistoricalSessionInsertIndex {
+        # Find the descending start-time position while keeping a current active row first.
+        param(
+            [Parameter(Mandatory)]
+            [AllowEmptyString()]
+            [string[]]$Lines,
+
+            [Parameter(Mandatory)]
+            [int]$DefaultIndex,
+
+            [Parameter(Mandatory)]
+            [datetime]$StartTime
+        )
+
+        $insertIndex = $DefaultIndex
+        $scanStartIndex = $DefaultIndex
+        $firstDataIndex = $null
+
+        for ($i = $DefaultIndex; $i -lt $Lines.Count; $i++) {
+            if ($Lines[$i] -match '^\|\s*\d+\s*\|') {
+                $firstDataIndex = $i
+                break
+            }
+        }
+
+        if ($null -ne $firstDataIndex) {
+            $firstColumns = $Lines[$firstDataIndex] -split '\|'
+            $firstStart = $firstColumns[3].Trim()
+            $firstEnd = $firstColumns[4].Trim()
+
+            if (-not [string]::IsNullOrWhiteSpace($firstStart) -and [string]::IsNullOrWhiteSpace($firstEnd)) {
+                $scanStartIndex = $firstDataIndex + 1
+                $insertIndex = $scanStartIndex
+            }
+        }
+
+        for ($i = $scanStartIndex; $i -lt $Lines.Count; $i++) {
+            if ($Lines[$i] -notmatch '^\|\s*\d+\s*\|') {
+                continue
+            }
+
+            $columns = $Lines[$i] -split '\|'
+            $existingStartTime = Get-SessionStartDateTime -Date $columns[2].Trim() -Start $columns[3].Trim()
+
+            if ($null -eq $existingStartTime) {
+                continue
+            }
+
+            if ($existingStartTime -lt $StartTime) {
+                return $i
+            }
+
+            $insertIndex = $i + 1
+        }
+
+        return $insertIndex
+    }
+
+    function Format-SessionDuration {
+        # Format the elapsed time between two session timestamps for the study log.
+        param(
+            [Parameter(Mandatory)]
+            [datetime]$StartTime,
+
+            [Parameter(Mandatory)]
+            [datetime]$EndTime
+        )
+
+        $duration = $EndTime - $StartTime
+        $hours = [math]::Floor($duration.TotalHours)
+        $minutes = $duration.Minutes
+
+        return '{0}h {1}m' -f $hours, $minutes
+    }
+
     function Add-SessionEntry {
         # Insert a new session row using the columns declared by the study log header.
         param(
@@ -486,7 +684,11 @@ $Helpers = {
 
             [string]$Notes,
 
-            [datetime]$StartTime
+            [datetime]$StartTime,
+
+            [string]$LogFile = $script:StudyLogFile,
+
+            [switch]$InsertChronologically
         )
 
         # Use explicit start time when provided, otherwise current time
@@ -496,7 +698,7 @@ $Helpers = {
         $safeMode  = ConvertTo-LogNote -Notes $Mode
         $safeScope = ConvertTo-LogNote -Notes $ScopeValue
         $safeNotes = ConvertTo-LogNote -Notes $Notes
-        $lines     = Get-Content -Path $script:StudyLogFile
+        $lines     = Get-Content -Path $LogFile
 
         # Read the declared table shape so certification and Applied Skill logs can differ.
         $headerIndex = $null
@@ -508,7 +710,7 @@ $Helpers = {
         }
         $headerLine = if ($null -ne $headerIndex) { $lines[$headerIndex] } else { $null }
         if ([string]::IsNullOrWhiteSpace($headerLine)) {
-            throw "Table header not found in '$script:StudyLogFile'."
+            throw "Table header not found in '$LogFile'."
         }
 
         $scopeHeader = Get-StudyLogScopeHeaderFromLine -HeaderLine $headerLine
@@ -529,14 +731,14 @@ $Helpers = {
             ForEach-Object { $_.Trim() }
         $rowValues = foreach ($header in $headers) {
             if (-not $values.ContainsKey($header)) {
-                throw "Unsupported study log column '$header' in '$script:StudyLogFile'."
+                throw "Unsupported study log column '$header' in '$LogFile'."
             }
 
             [string]$values[$header]
         }
         $row = '| ' + ($rowValues -join ' | ') + ' |'
 
-        # Find the separator line and insert the new row right after it
+        # Find the separator line and insert the new row at the requested position.
         $insertIndex = $null
         for ($i = 0; $i -lt $lines.Count; $i++) {
             if ($lines[$i] -match '^\|:') {
@@ -546,10 +748,14 @@ $Helpers = {
         }
 
         if ($null -eq $insertIndex) {
-            throw "Table header separator not found in '$script:StudyLogFile'."
+            throw "Table header separator not found in '$LogFile'."
         }
 
-        # Build updated content with the new row inserted at the top of the data rows
+        if ($InsertChronologically) {
+            $insertIndex = Get-HistoricalSessionInsertIndex -Lines ([string[]]@($lines)) -DefaultIndex $insertIndex -StartTime $now
+        }
+
+        # Build updated content with the new row inserted into the data rows.
         $updated = @()
         $updated += $lines[0..($insertIndex - 1)]
         $updated += $row
@@ -557,7 +763,7 @@ $Helpers = {
             $updated += $lines[$insertIndex..($lines.Count - 1)]
         }
 
-        Set-Content -Path $script:StudyLogFile -Value $updated
+        Set-Content -Path $LogFile -Value $updated
     }
 
     function ConvertTo-LogNote {
@@ -642,11 +848,8 @@ $Helpers = {
                     $startDateTime = $endTime
                 }
 
-                # Calculate session duration
-                $duration    = $endTime - $startDateTime
-                $hours       = [math]::Floor($duration.TotalHours)
-                $minutes     = $duration.Minutes
-                $durationStr = '{0}h {1}m' -f $hours, $minutes
+                # Calculate the session duration using the standard study-log format.
+                $durationStr = Format-SessionDuration -StartTime $startDateTime -EndTime $endTime
 
                 # Update End and Duration columns
                 $endStr      = $endTime.ToString('h:mm tt')
@@ -709,7 +912,7 @@ $Helpers = {
             [int]$SessionNumber,
 
             [Parameter(Mandatory)]
-            [ValidateSet('start', 'end')]
+            [ValidateSet('start', 'end', 'log')]
             [string]$Type,
 
             [Parameter(Mandatory)]
@@ -769,6 +972,33 @@ $Helpers = {
         Write-Output "  Date : $date"
         Write-Output "  Time : $time"
         Write-Output '  Git  : committed and pushed'
+        Write-Output ''
+    }
+
+    function Show-LogConfirmation {
+        # Display the recorded historical session details after the single Git commit.
+        param(
+            [Parameter(Mandatory)]
+            [int]$SessionNumber,
+
+            [Parameter(Mandatory)]
+            [psobject]$Track,
+
+            [Parameter(Mandatory)]
+            [datetime]$StartTime,
+
+            [Parameter(Mandatory)]
+            [datetime]$EndTime
+        )
+
+        $duration = Format-SessionDuration -StartTime $StartTime -EndTime $EndTime
+
+        Write-Output ''
+        Write-Output "  Study session #$SessionNumber logged for $($Track.Name)"
+        Write-Output "  Start : $($StartTime.ToString('M/d/yy h:mm tt'))"
+        Write-Output "  End   : $($EndTime.ToString('M/d/yy h:mm tt'))"
+        Write-Output "  Duration : $duration"
+        Write-Output '  Git   : committed and pushed'
         Write-Output ''
     }
 }
