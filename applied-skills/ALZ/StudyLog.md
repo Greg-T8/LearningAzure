@@ -8,6 +8,7 @@ This log tracks individual study sessions for the **ALZ** applied skill. Use **N
 
 | # | Date | Start | End | Duration | Notes |
 |:--|:-----|:------|:----|:---------|:------|
+| 33 | 8/23/26 | 3:37 AM | 7:45 AM | 4h 8m | Develped Azure Landing Zone techniques for incorporating brownfield enviornments, consolidating ALZ structure, and incorporating Azure Monitor Baseline Alerts |
 | 32 | 8/21/26 | 3:12 AM | 5:01 AM | 1h 49m | Deep dive into AMBA documentation; refine ALZ-AMBA deployment configuration in test environment |
 | 31 | 8/20/26 | 3:22 AM | 6:05 AM | 2h 43m | Troubleshooting ALZ bootstrap configurations |
 | 30 | 8/18/26 | 2:36 AM | 4:58 AM | 2h 22m | First deployment of Azure Monitor Baseline Alert (AMBA) config in test tenant |
