@@ -7,11 +7,12 @@
 - **Study Log:** [Session-by-session study time tracker](./StudyLog.md)
 
 <!-- STUDY_SUMMARY -->
-**Hours Committed:** 60.5h · **Days Studied:** 34
+**Hours Committed:** 61.8h · **Days Studied:** 35
 - Prepare: 14.2h
-- Practice: 43.2h
+- Practice: 44.6h
 - Review: 3.1h
 <!-- /STUDY_SUMMARY -->
+
 
 
 

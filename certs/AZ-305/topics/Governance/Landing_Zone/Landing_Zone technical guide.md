@@ -22,7 +22,7 @@ The following concepts came from notes that explicitly identified an incorrect a
 
 ## Landing-zone hierarchy and core concepts
 
-An Azure landing zone provides a repeatable foundation for governing, securing, and scaling workloads across subscriptions. The hierarchy exists to deliver inherited Azure Policy and RBAC where subscriptions genuinely share a workload archetype; it should remain deliberately shallow. [What is an Azure landing zone?](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/) 
+An Azure landing zone provides a repeatable foundation for governing, securing, and scaling workloads across subscriptions. The hierarchy exists to deliver inherited Azure Policy and RBAC where subscriptions genuinely share a workload archetype; it should remain deliberately shallow. [What is an Azure landing zone?](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/)
 
 ```text
 Tenant root group (must-have global assignments only)
@@ -142,7 +142,7 @@ Policy effects have different enforcement and remediation behavior. Treat `Audit
 
 ### Naming policy
 
-Naming is a preventive design concern because most Azure resources cannot be renamed in place. Use a custom, service-specific policy with `Deny` after an audit phase when a naming standard must be enforced at deployment. Azure Policy's name matching operators are pattern matching, not full regular expressions. [Policy rule structure](https://learn.microsoft.com/en-us/azure/governance/policy/concepts/definition-structure-policy-rule) 
+Naming is a preventive design concern because most Azure resources cannot be renamed in place. Use a custom, service-specific policy with `Deny` after an audit phase when a naming standard must be enforced at deployment. Azure Policy's name matching operators are pattern matching, not full regular expressions. [Policy rule structure](https://learn.microsoft.com/en-us/azure/governance/policy/concepts/definition-structure-policy-rule)
 
 * **Use a separate pattern per resource type or category.** Storage accounts, virtual networks, resource groups, and Key Vaults have different length, character, uniqueness, and DNS constraints. [Naming rules and restrictions](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/resource-name-rules)
 * **Do not expect Modify or Append to rename a resource.** A noncompliant physical name normally requires redeployment under a compliant name.
