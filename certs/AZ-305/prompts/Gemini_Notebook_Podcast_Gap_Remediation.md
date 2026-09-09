@@ -4,14 +4,14 @@ The goal is exhaustive coverage and deep understanding, not a concise summary. P
 
 Use the selected sources according to these roles:
 
-1. TECHNICAL GUIDE
-Treat the source identified as the Technical Guide as the REQUIRED COVERAGE CHECKLIST.
+1. GAP REMEDIATION
+Treat the source identified as the Gap Remediation as the REQUIRED COVERAGE CHECKLIST.
 
-This guide contains concepts, distinctions, limitations, edge cases, exam traps, and topics that have previously been missed or misunderstood.
+This source contains concepts, distinctions, limitations, edge cases, exam traps, and topics that have previously been missed or misunderstood.
 
-Systematically work through every substantive topic in the Technical Guide. Do not omit a topic because it appears minor, receives less coverage elsewhere, or seems familiar.
+Systematically work through every substantive topic in the Gap Remediation. Do not omit a topic because it appears minor, receives less coverage elsewhere, or seems familiar.
 
-Give extra attention to anything the Technical Guide identifies as:
+Give extra attention to anything the Gap Remediation identifies as:
 
 - previously missed or misunderstood
 - an important distinction
@@ -21,8 +21,8 @@ Give extra attention to anything the Technical Guide identifies as:
 - a design decision
 - a platform behavior that is easy to remember incorrectly
 
-2. STUDY GUIDE
-Treat the source identified as the Study Guide as the BROADER CONCEPTUAL FRAMEWORK.
+2. TASK BRIEF
+Treat the source identified as the Task Brief as the BROADER CONCEPTUAL FRAMEWORK.
 
 Use it to:
 
@@ -33,7 +33,7 @@ Use it to:
 - identify relationships between concepts
 - reinforce the overall AZ-305 decision-making model
 
-Do not simply summarize the Study Guide. Expand its concepts into detailed architectural explanations.
+Do not simply summarize the Task Brief. Expand its concepts into detailed architectural explanations.
 
 3. MICROSOFT DOCUMENTATION
 Treat any selected Microsoft documentation as the authoritative technical grounding.
@@ -95,11 +95,11 @@ When multiple sources discuss the same subject, synthesize them rather than repe
 
 Use:
 
-- the Study Guide for structure and broader context
-- the Technical Guide to guarantee complete coverage of difficult or previously missed material
+- the Task Brief for structure and broader context
+- the Gap Remediation to guarantee complete coverage of difficult or previously missed material
 - Microsoft documentation for authoritative technical depth
 
-Do not allow the broader Study Guide to overshadow specialized topics in the Technical Guide.
+Do not allow the broader Task Brief to overshadow specialized topics in the Gap Remediation.
 
 DEPTH AND LENGTH
 
@@ -107,7 +107,7 @@ Maintain substantial technical depth throughout the entire podcast.
 
 Do not rush later topics because earlier topics consumed more time.
 
-Before concluding, verify that every substantive section, concept, distinction, limitation, and missed-topic item from the Technical Guide has been addressed.
+Before concluding, verify that every substantive section, concept, distinction, limitation, and missed-topic item from the Gap Remediation has been addressed.
 
 If the main material has been covered but additional discussion is needed, continue with:
 

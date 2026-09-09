@@ -19,7 +19,7 @@ Use the current chat message and conversation context to identify:
 
 1. **Topic or question** — the concept to explain.
 2. **Target folder** — normally a topic-level `notes/` folder referenced in chat.
-3. **Source context** — any attached or referenced study guide, fact sheet, selected text, existing explanation, Microsoft Learn link, or current editor selection.
+3. **Source context** — any attached or referenced task brief, fact sheet, selected text, existing explanation, Microsoft Learn link, or current editor selection.
 4. **Preferred filename** — use one supplied by the user; otherwise derive a short, descriptive title from the concept.
 
 The user might invoke this prompt like:

@@ -4,7 +4,7 @@
 
 - Exam: AZ-305: Designing Microsoft Azure Infrastructure Solutions
 - Task: Recommend a solution for authorizing access to on-premises resources
-- Source guide: `Access to on-premises resources study guide.md` and its companion task map
+- Source guide: `Access to on-premises resources task brief.md` and its companion task map
 - Research date: July 2026
 - Product selection method: Products and major topics were extracted from the provided guide, then validated against current official Microsoft documentation.
 

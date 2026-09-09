@@ -1,5 +1,4 @@
-# Authentication Solution Technical Guide
-
+# Authentication Solution Gap Remediation
 ## Scope and study objectives
 
 This guide supports the AZ-305 domain **Design identity, governance, and monitoring solutions**, skill **Design authentication and authorization solutions**, and task **Recommend an authentication solution**. It consolidates the 20 source notes into an architecture-focused reference covering workforce authentication, customer identity, B2B automation, hybrid and legacy authentication, application sign-in, and workload identity.

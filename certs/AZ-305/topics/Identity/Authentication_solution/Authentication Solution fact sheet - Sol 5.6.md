@@ -4,7 +4,7 @@
 
 - Exam: AZ-305: Designing Microsoft Azure Infrastructure Solutions
 - Task: Recommend an authentication solution
-- Source guide: *Authentication Solution study guide - Sol 5.6.md*, validated against the task map and the AZ-305 skill hierarchy
+- Source guide: *Authentication Solution task brief - Sol 5.6.md*, validated against the task map and the AZ-305 skill hierarchy
 - Research date: July 2026
 - Product selection method: Products and major topics were extracted from the provided guide, then validated against current official Microsoft documentation.
 

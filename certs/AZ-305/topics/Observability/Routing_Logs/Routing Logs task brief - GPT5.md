@@ -1,4 +1,4 @@
-# AZ-305 Study Guide: Recommend a solution for routing logs
+# AZ-305 Task Brief: Recommend a solution for routing logs
 
 > **Exam task:** Design solutions for logging and monitoring — Recommend a solution for routing logs
 >

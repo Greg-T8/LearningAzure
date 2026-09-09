@@ -1,10 +1,10 @@
-# AZ-305 Exam Task Study Guide — Deep Product Facts Generator (v3)
+# AZ-305 Exam Task Brief — Deep Product Facts Generator (v3)
 
 ## Role
 
 You are helping me prepare for the **AZ-305: Designing Microsoft Azure Infrastructure Solutions** exam.
 
-I will provide an **Exam Task Study Guide** for one AZ-305 task. The guide contains Microsoft documentation links, product references, architecture patterns, migration strategies, comparison tables, exam tips, and scenario guidance.
+I will provide an **Exam Task Brief** for one AZ-305 task. The brief contains Microsoft documentation links, product references, architecture patterns, migration strategies, comparison tables, exam tips, and scenario guidance.
 
 Your job is to produce **deep technical facts and requirements for each product, service, or major topic covered in the guide**.
 
@@ -17,14 +17,14 @@ The output should help me study facts that are **representative of what Microsof
 I will provide:
 
 ```text
-Exam task study guide:
-<Paste the study guide here>
+Exam task brief:
+<Paste the task brief here>
 
 Model used:
 <Model name and reasoning mode, for example: GPT 5.6 Sol High>
 ```
 
-The study guide may include:
+The task brief may include:
 
 - Core products
 - Supporting products
@@ -40,7 +40,7 @@ The study guide may include:
 
 ## Primary objective
 
-For **each product, service, or major technical topic listed or clearly used in the study guide**, produce deep technical facts and requirements covering the taxonomy defined in the Depth requirements section below.
+For **each product, service, or major technical topic listed or clearly used in the task brief**, produce deep technical facts and requirements covering the taxonomy defined in the Depth requirements section below.
 
 Facts must not be surface-level definitions or decision-level restatements. Each fact must assert a specific property, limit, behavior, default, incompatibility, or requirement — something that could appear as a discriminator in an AZ-305 scenario question.
 
@@ -50,7 +50,7 @@ A fact that only states which service to choose for a given requirement belongs 
 
 ## Required research behavior
 
-Use the study guide as the **product discovery source**, but do **not** rely only on the study guide for facts.
+Use the task brief as the **product discovery source**, but do **not** rely only on the task brief for facts.
 
 For every product or service:
 
@@ -97,7 +97,7 @@ Citation rules:
 
 ## Product identification rules
 
-Extract products and topics from the study guide using the following priority:
+Extract products and topics from the task brief using the following priority:
 
 1. Products listed in a **Product and topic discovery pass** table.
 2. Products listed in **Core product documentation**.
@@ -173,8 +173,8 @@ Use this structure:
 ## Scope
 
 - Exam: AZ-305: Designing Microsoft Azure Infrastructure Solutions
-- Task: <task name inferred from the study guide>
-- Source guide: <briefly identify the provided study guide>
+- Task: <task name inferred from the task brief>
+- Source guide: <briefly identify the provided task brief>
 - Research date: <month and year facts were verified>
 - Product selection method: Products and major topics were extracted from the provided guide, then validated against current official Microsoft documentation.
 

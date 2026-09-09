@@ -4,7 +4,7 @@
 
 - Exam: AZ-305: Designing Microsoft Azure Infrastructure Solutions
 - Task: Recommend a monitoring solution
-- Source guide: `Monitoring Solution study guide - GPT5.md`, `Monitoring Solution task map.md`, and the task hierarchy in `Skills.psd1`
+- Source guide: `Monitoring Solution task brief - GPT5.md`, `Monitoring Solution task map.md`, and the task hierarchy in `Skills.psd1`
 - Research date: July 2026
 - Product selection method: Products and major topics were extracted from the provided guide, then validated against current official Microsoft documentation.
 

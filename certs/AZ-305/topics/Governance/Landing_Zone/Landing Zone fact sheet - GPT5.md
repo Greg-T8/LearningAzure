@@ -4,7 +4,7 @@
 
 - Exam: AZ-305: Designing Microsoft Azure Infrastructure Solutions
 - Task: Recommend a structure for management groups, subscriptions, and resource groups, and a strategy for resource tagging.
-- Source guide: *Landing_Zone_study_guide.md*, resolved through *Landing_Zone_task_map.md* and *Skills.psd1*.
+- Source guide: *Landing_Zone_task_brief.md*, resolved through *Landing_Zone_task_map.md* and *Skills.psd1*.
 - Research date: September 2026.
 - Product selection method: Products and major topics were extracted from the supplied study guide, then checked against current official Microsoft documentation.
 

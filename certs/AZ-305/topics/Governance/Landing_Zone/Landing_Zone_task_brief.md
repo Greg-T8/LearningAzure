@@ -7,7 +7,7 @@ Author: Greg Tate
 -------------------------------------------------------------------------
 -->
 
-# AZ-305 Study Guide: Recommend a structure for management groups, subscriptions, and resource groups, and a strategy for resource tagging
+# AZ-305 Task Brief: Recommend a structure for management groups, subscriptions, and resource groups, and a strategy for resource tagging
 
 > **Exam task:** Design governance — Recommend a structure for management groups, subscriptions, and resource groups, and a strategy for resource tagging
 >

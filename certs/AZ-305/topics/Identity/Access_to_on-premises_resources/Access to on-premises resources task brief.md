@@ -1,4 +1,4 @@
-# AZ-305 Study Guide: Recommend a solution for authorizing access to on-premises resources
+# AZ-305 Task Brief: Recommend a solution for authorizing access to on-premises resources
 
 > **Exam task:** Design authentication and authorization solutions — Recommend a solution for authorizing access to on-premises resources
 >

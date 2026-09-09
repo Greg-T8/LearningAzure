@@ -1,5 +1,4 @@
-# Access to on-premises resources Technical Guide
-
+# Access to on-premises resources Gap Remediation
 ## Scope and study objectives
 
 This guide covers the AZ-305 task **Recommend a solution for authorizing access to on-premises resources** in the **Design identity, governance, and monitoring solutions** domain and the **Design authentication and authorization solutions** skill. It consolidates all 20 notes for this topic and focuses on choosing an access path, bridging the user's identity to a legacy protocol, preserving target-resource authorization, governing the entitlement lifecycle, and operating the resulting architecture.

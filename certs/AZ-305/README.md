@@ -6,67 +6,19 @@
 - **Official Study Guide:** [AZ-305 Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-305)
 - **Study Log:** [Session-by-session study time tracker](./StudyLog.md)
 
+## Artifact Naming Standard
+
+- **Task Brief**: The broad task-level architecture artifact generated from the task brief prompt. Default file pattern: `<Topic Name> task brief.md`.
+- **Gap Remediation**: The notes-consolidated artifact with emphasis on missed-question concepts and misconceptions. Default file pattern: `<Topic Name> gap remediation.md`.
+- **NotebookLM grounding rule**: Use both files together, with Task Brief as the structural framework and Gap Remediation as the required missed-topic coverage checklist.
+
 <!-- STUDY_SUMMARY -->
 **Hours Committed:** 61.8h · **Days Studied:** 35
+
 - Prepare: 14.2h
 - Practice: 44.6h
 - Review: 3.1h
 <!-- /STUDY_SUMMARY -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ---
 

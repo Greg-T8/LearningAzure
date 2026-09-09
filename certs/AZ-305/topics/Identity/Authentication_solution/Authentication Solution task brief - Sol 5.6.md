@@ -1,4 +1,4 @@
-# AZ-305 Study Guide: Recommend an authentication solution
+# AZ-305 Task Brief: Recommend an authentication solution
 
 > **Exam task:** Design authentication and authorization solutions — Recommend an authentication solution
 >

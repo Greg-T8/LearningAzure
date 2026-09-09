@@ -1,4 +1,4 @@
-# AZ-305 Study Guide: Recommend a solution for migrating workloads to infrastructure as a service (IaaS) and platform as a service (PaaS)
+# AZ-305 Task Brief: Recommend a solution for migrating workloads to infrastructure as a service (IaaS) and platform as a service (PaaS)
 
 > **Exam task:** Design migrations — Recommend a solution for migrating workloads to infrastructure as a service (IaaS) and platform as a service (PaaS)
 >

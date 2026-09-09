@@ -4,7 +4,7 @@
 
 - Exam: AZ-305: Designing Microsoft Azure Infrastructure Solutions
 - Task: Design solutions for logging and monitoring — Recommend a logging solution
-- Source guide: "AZ-305 Study Guide: Recommend a logging solution" plus the matching Study Guide Map ("Logging Solution task map")
+- Source guide: "AZ-305 task brief: Recommend a logging solution" plus the matching task brief Map ("Logging Solution task map")
 - Product selection method: Products and major topics were extracted from the provided guide and map, then validated against current official Microsoft documentation. Fast-changing facts (agent retirements, NSG flow log retirement, table plans and retention, classic Application Insights retirement, Sentinel platform changes) were re-verified against Microsoft Learn as of June 2026 and discrepancies with the guide are flagged where relevant.
 
 ## Product coverage summary

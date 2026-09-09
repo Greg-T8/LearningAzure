@@ -1,5 +1,4 @@
-# Managing Secrets Technical Guide
-
+# Managing Secrets Gap Remediation
 ## Scope and study objectives
 
 This guide supports the AZ-305 domain **Design identity, governance, and monitoring solutions**, skill **Design authentication and authorization solutions**, task **Recommend a solution to manage secrets, certificates, and keys**. It consolidates all 51 source notes and covers secretless workload identity, Azure Key Vault, the Azure HSM portfolio, cryptographic lifecycle and recovery, and the App Configuration patterns that commonly surround secrets and key references.

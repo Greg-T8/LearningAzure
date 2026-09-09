@@ -1,4 +1,4 @@
-# AZ-305 Study Guide: Recommend a monitoring solution
+# AZ-305 Task Brief: Recommend a monitoring solution
 
 > **Exam task:** Design solutions for logging and monitoring — Recommend a monitoring solution
 >

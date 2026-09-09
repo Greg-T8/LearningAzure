@@ -1,4 +1,4 @@
-# AZ-305 Study Guide: Recommend a solution to manage secrets, certificates, and keys
+# AZ-305 Task Brief: Recommend a solution to manage secrets, certificates, and keys
 
 > **Exam task:** Design authentication and authorization solutions — Recommend a solution to manage secrets, certificates, and keys
 >

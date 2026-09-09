@@ -4,7 +4,7 @@
 
 - Exam: AZ-305: Designing Microsoft Azure Infrastructure Solutions
 - Task: Design migrations. Recommend a solution for migrating workloads to infrastructure as a service (IaaS) and platform as a service (PaaS).
-- Source guide: "AZ-305 Study Guide: Recommend a solution for migrating workloads to IaaS and PaaS" (chatGPT v1).
+- Source guide: "AZ-305 task brief: Recommend a solution for migrating workloads to IaaS and PaaS" (chatGPT v1).
 - Product selection method: Products and major topics were extracted from the guide's discovery pass, core product list, architecture patterns, and quick-reference tables, then validated against current Microsoft documentation (Microsoft Learn, Azure product docs, Cloud Adoption Framework, Azure Architecture Center). Where the guide or older docs differed from current Microsoft documentation, the current documentation is used and the discrepancy is noted.
 
 ## Product coverage summary

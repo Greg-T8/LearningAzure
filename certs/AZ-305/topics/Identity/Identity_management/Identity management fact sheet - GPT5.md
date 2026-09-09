@@ -4,7 +4,7 @@
 
 - Exam: AZ-305: Designing Microsoft Azure Infrastructure Solutions
 - Task: Recommend an identity management solution
-- Source guide: *Identity management study guide - GPT5.md*, validated against *Identity management task map.md* and the AZ-305 skill hierarchy
+- Source guide: *Identity management task brief - GPT5.md*, validated against *Identity management task map.md* and the AZ-305 skill hierarchy
 - Research date: July 2026
 - Product selection method: Products and major topics were extracted from the provided guide, then validated against current official Microsoft documentation.
 

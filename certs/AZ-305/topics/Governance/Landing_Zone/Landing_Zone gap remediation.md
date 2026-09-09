@@ -1,5 +1,4 @@
-# Landing Zone Technical Guide
-
+# Landing Zone Gap Remediation
 ## Scope and study objectives
 
 This guide consolidates the governance notes for AZ-305 Domain **Design identity, governance, and monitoring solutions**, Skill **Design governance**, and the task of recommending management-group, subscription, resource-group, and tagging strategies. It treats the Azure landing zone as a policy and access model for a multi-subscription estate—not as an organizational chart or a collection of individual resource deployments. The source notes covered management-group design, hierarchy operations, Azure Policy, RBAC, naming, limits, and cost allocation.

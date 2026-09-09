@@ -4,7 +4,7 @@
 
 - Exam: AZ-305: Designing Microsoft Azure Infrastructure Solutions
 - Task: Recommend a solution for routing logs
-- Source guide: "AZ-305 Study Guide: Recommend a solution for routing logs" and "Routing Logs task map"
+- Source guide: "AZ-305 task brief: Recommend a solution for routing logs" and "Routing Logs task map"
 - Research date: July 2026
 - Product selection method: Products and major topics were extracted from the provided guide, then validated against current official Microsoft documentation.
 

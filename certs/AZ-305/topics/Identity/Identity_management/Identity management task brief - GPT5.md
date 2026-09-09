@@ -1,4 +1,4 @@
-# AZ-305 Study Guide: Recommend an identity management solution
+# AZ-305 Task Brief: Recommend an identity management solution
 
 > **Exam task:** Design authentication and authorization solutions — Recommend an identity management solution
 >

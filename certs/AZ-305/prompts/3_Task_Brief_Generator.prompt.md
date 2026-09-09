@@ -1,6 +1,6 @@
-# AZ-305 Exam Task Study Guide Generator
+# AZ-305 Exam Task Brief Generator
 
-You are creating a comprehensive study guide for one Microsoft AZ-305 exam task.
+You are creating a comprehensive task brief for one Microsoft AZ-305 exam task.
 
 The user will provide:
 
@@ -8,7 +8,7 @@ The user will provide:
 2. An AZ-305 Study Guide Map that maps exam tasks to relevant Microsoft documentation, products, and discovery notes.
 3. A target exam task, such as: `Recommend a monitoring solution`.
 
-Your job is to generate a long-form, architect-level study guide for the target task.
+Your job is to generate a long-form, architect-level task brief for the target task.
 
 ---
 
@@ -44,7 +44,7 @@ If optional inputs are not provided, use these defaults:
 
 ## 2. Task resolution process
 
-Before writing the study guide, perform a task-resolution pass.
+Before writing the task brief, perform a task-resolution pass.
 
 Using the official AZ-305 study guide and the provided Study Guide Map:
 
@@ -64,9 +64,9 @@ Using the official AZ-305 study guide and the provided Study Guide Map:
 
 Do not require the user to manually provide the domain, skill, task hierarchy, modules, product list, or adjacent task list if these can be derived from the official study guide and Study Guide Map.
 
-If the target task wording is not an exact match, use the closest matching task from the Study Guide Map and clearly state the matched task near the top of the guide.
+If the target task wording is not an exact match, use the closest matching task from the Study Guide Map and clearly state the matched task near the top of the task brief.
 
-If multiple tasks are plausible matches, list the candidates and proceed with the most likely match unless the ambiguity would materially change the study guide.
+If multiple tasks are plausible matches, list the candidates and proceed with the most likely match unless the ambiguity would materially change the task brief.
 
 ---
 
@@ -88,7 +88,7 @@ Prioritize sources in this order:
 
 Use the Study Guide Map as the primary discovery aid for relevant products and documentation.
 
-Do not limit the guide only to product names explicitly stated in the official exam task. The official study guide often uses broad task wording, so use the Study Guide Map to infer relevant Azure services, Microsoft Entra features, architecture patterns, and design topics.
+Do not limit the task brief only to product names explicitly stated in the official exam task. The official study guide often uses broad task wording, so use the Study Guide Map to infer relevant Azure services, Microsoft Entra features, architecture patterns, and design topics.
 
 Do not use third-party sources unless Microsoft documentation does not explain a necessary concept. If a third-party source is used, label it as supplemental and explain why it was needed.
 
@@ -100,7 +100,7 @@ Use current Microsoft documentation. Call out version-specific behavior, preview
 
 ## 4. Scope control
 
-Keep the guide anchored to this task:
+Keep the task brief anchored to this task:
 
 `<target_task>`
 
@@ -157,13 +157,13 @@ When possible, link to the most specific Microsoft Learn section anchor rather t
 
 Do not create a bibliography as a substitute for inline links.
 
-A “Primary source set” section is required near the top, but inline links are still required throughout the guide.
+A “Primary source set” section is required near the top, but inline links are still required throughout the task brief.
 
 ---
 
 ## 6. Output requirements
 
-Create a long-form Markdown study guide.
+Create a long-form Markdown task brief.
 
 The guide should take approximately 45 minutes to read unless the user requests a different length.
 
@@ -201,7 +201,7 @@ Avoid:
 
 # Required output structure
 
-# AZ-305 Study Guide: <target_task>
+# AZ-305 Task Brief: <target_task>
 
 > **Exam task:** <skill> — <exact_task>
 >
@@ -217,7 +217,7 @@ Avoid:
 
 ## How to use this guide
 
-Explain how the reader should work through the guide.
+Explain how the reader should work through the task brief.
 
 Include:
 
@@ -299,7 +299,7 @@ Include:
 - Supporting services
 - Architecture patterns
 - Governance/security/resiliency/cost topics
-- Related but adjacent products that should not dominate the guide
+- Related but adjacent products that should not dominate the task brief
 
 Do not include a product simply because it is broadly Azure-related. Explain why it matters for this task.
 
@@ -676,7 +676,7 @@ Before producing the final Markdown output, verify:
 - Important phrases are directly hyperlinked inline.
 - Citations are not grouped only at the end of paragraphs.
 - Primary sources are listed near the top.
-- Exam tips are included throughout the guide.
+- Exam tips are included throughout the task brief.
 - Scenario-based design examples are included.
 - Mermaid diagrams are included where they improve architectural understanding.
 - Common exam traps include an edge-cases line item.
@@ -685,6 +685,6 @@ Before producing the final Markdown output, verify:
 - Links point to Microsoft Learn or other official Microsoft sources unless explicitly labeled supplemental.
 - The final output is clean Markdown that can be pasted into another tool without hidden citation artifacts.
 
-Now create the Markdown study guide for this target task:
+Now create the Markdown task brief for this target task:
 
 `<target_task>`

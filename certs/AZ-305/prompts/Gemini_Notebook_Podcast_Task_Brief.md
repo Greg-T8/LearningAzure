@@ -6,12 +6,12 @@ The priority is understanding WHY one design choice is correct and why another p
 
 Use the selected sources according to these roles:
 
-1. TECHNICAL GUIDE
-Treat the Technical Guide as the mandatory checklist.
+1. GAP REMEDIATION
+Treat the Gap Remediation as the mandatory checklist.
 
-Every substantive concept, missed topic, misconception, limitation, edge case, distinction, design rule, and exam discriminator in the Technical Guide must be addressed.
+Every substantive concept, missed topic, misconception, limitation, edge case, distinction, design rule, and exam discriminator in the Gap Remediation must be addressed.
 
-Anything identified in the Technical Guide because it was previously missed or misunderstood deserves additional attention.
+Anything identified in the Gap Remediation because it was previously missed or misunderstood deserves additional attention.
 
 Explain:
 
@@ -20,8 +20,8 @@ Explain:
 - what requirement would change the answer
 - how Microsoft documentation supports the correct interpretation
 
-2. STUDY GUIDE
-Use the Study Guide as the broader architecture and exam-objective framework.
+2. TASK BRIEF
+Use the Task Brief as the broader architecture and exam-objective framework.
 
 Use it to identify:
 
@@ -98,7 +98,7 @@ Do not assume that similar Azure concepts are interchangeable.
 
 MISCONCEPTIONS AND MISSED CONCEPTS
 
-Give disproportionate attention to the material in the Technical Guide.
+Give disproportionate attention to the material in the Gap Remediation.
 
 When a topic exists because it was previously missed, misunderstood, or answered incorrectly:
 
@@ -116,7 +116,7 @@ Each important scenario should include enough technical reasoning to teach the u
 
 Maintain approximately the same depth throughout the podcast. Do not rush the final portion.
 
-Before concluding, verify that the complete Technical Guide checklist has been exhausted.
+Before concluding, verify that the complete Gap Remediation checklist has been exhausted.
 
 If all checklist items have been addressed, continue with additional:
 

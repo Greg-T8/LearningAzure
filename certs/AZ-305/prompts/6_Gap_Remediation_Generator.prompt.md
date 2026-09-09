@@ -22,7 +22,7 @@ Resolve the following from the user's message, referenced paths, and workspace c
 1. **Notes folder** — required. Read every Markdown file in the referenced topic-level `notes/` folder.
 2. **Topic folder** — default to the parent of the `notes/` folder.
 3. **Topic name** — default to the topic folder name.
-4. **Exam metadata** — infer the AZ-305 domain, skill, and task from the folder path, nearby task map, fact sheet, study guide, and note content when available.
+4. **Exam metadata** — infer the AZ-305 domain, skill, and task from the folder path, nearby task map, fact sheet, task brief, and note content when available.
 5. **Output file** — use a user-supplied path; otherwise use `<topic folder>/<Topic Name> gap remediation.md`.
 6. **Image folder** — use `<topic folder>/images/` for downloaded documentation figures.
 
