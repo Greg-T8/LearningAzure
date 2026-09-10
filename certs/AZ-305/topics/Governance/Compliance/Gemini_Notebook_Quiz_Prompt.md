@@ -3,8 +3,8 @@
 Restrict coverage to only the task(s) listed below.
 
 Exam: AZ-305  
-Skill: <skill>  
-Task(s): <task>
+Skill: Design governance
+Task(s): Recommend a solution for managing compliance
 
 Using only the provided source material, create scenario-based practice questions for the listed task(s). Do not cover other AZ-305 tasks, skills, domains, or objectives, even if present in the source.
 
