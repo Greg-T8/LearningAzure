@@ -1,8 +1,8 @@
 Restrict coverage to only the task(s) listed below.
 
-Exam: AZ-305
-Skill: <skill>
-Task(s): <task>
+Exam: AZ-305  
+Skill: Design governance
+Task(s): Recommend a solution for managing compliance
 
 Create a long-form, advanced AZ-305 technical review podcast focused on architectural decision-making, scenarios, misconceptions, edge cases, and exam reasoning for the listed task(s). Do not cover other AZ-305 tasks, skills, domains, or objectives, even if present in the source material.
 
