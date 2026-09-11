@@ -8,6 +8,7 @@ This log tracks individual study sessions for the **AZ-305** exam. Fill in **End
 
 | # | Date | Start | End | Duration | Mode | Task | Notes |
 |:--|:-----|:------|:----|:---------|:-----|:------|:------|
+| 46 | 9/11/26 | 3:54 AM |  |  | Practice | Recommend a solution for managing compliance |  |
 | 45 | 9/10/26 | 3:51 AM | 5:02 AM | 1h 11m | Prepare | Recommend a solution for managing compliance | Completed prep for exam task, including documentation PDFs, study brief, and fact sheet; move to practice phase. |
 | 44 | 9/9/26 | 5:49 AM | 7:10 AM | 1h 21m | Practice | Recommend a structure for management groups, subscriptions, and resource groups, and a strategy for resource tagging | Completed second set of study questions and captured notes; move to next exam task |
 | 43 | 8/7/26 | 2:57 AM | 5:09 AM | 2h 12m | Practice | Recommend a structure for management groups, subscriptions, and resource groups, and a strategy for resource tagging | Explored cost allocation, resource tagging, and management group structure in support of CAF recommendations; continue exploring.  On 2 of 3 practice question sessions |
