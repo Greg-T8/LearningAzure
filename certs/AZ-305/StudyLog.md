@@ -8,7 +8,7 @@ This log tracks individual study sessions for the **AZ-305** exam. Fill in **End
 
 | # | Date | Start | End | Duration | Mode | Task | Notes |
 |:--|:-----|:------|:----|:---------|:-----|:------|:------|
-| 47 | 9/12/26 | 4:00 AM |  |  | Practice | Recommend a solution for managing compliance |  |
+| 47 | 9/12/26 | 4:00 AM | 6:07 AM | 2h 7m | Practice | Recommend a solution for managing compliance | Investigated use of Defender for Cloud regulatory compliance and Purview Compliance Manager regulations/assessments; completed first round of practice questions. For next session start w/ second round of practice questions. |
 | 46 | 9/11/26 | 3:54 AM | 5:00 AM | 1h 6m | Practice | Recommend a solution for managing compliance | Studied Azure Arc and Defender for Cloud Compliance in first set of practice questions. For next session, pick up at round 1, question 26. |
 | 45 | 9/10/26 | 3:51 AM | 5:02 AM | 1h 11m | Prepare | Recommend a solution for managing compliance | Completed prep for exam task, including documentation PDFs, study brief, and fact sheet; move to practice phase. |
 | 44 | 9/9/26 | 5:49 AM | 7:10 AM | 1h 21m | Practice | Recommend a structure for management groups, subscriptions, and resource groups, and a strategy for resource tagging | Completed second set of study questions and captured notes; move to next exam task |
