@@ -8,7 +8,7 @@ This log tracks individual study sessions for the **ALZ** applied skill. Use **N
 
 | # | Date | Start | End | Duration | Notes |
 |:--|:-----|:------|:----|:---------|:------|
-| 36 | 9/12/26 | 6:08 AM |  |  |  |
+| 36 | 9/12/26 | 6:08 AM | 9:40 AM | 3h 32m | Developed techniques for using Brownfield landing zone |
 | 35 | 9/11/26 | 5:00 AM | 6:07 AM | 1h 7m | Proved out update procedure for ALZ components. For next session, pick up at incorporating brownfield archetype structure in Sandbox environment |
 | 34 | 9/10/26 | 5:03 AM | 6:00 AM | 0h 57m | Procedure development on Azure Landing Zone platform library updates |
 | 33 | 8/22/26 | 3:37 AM | 7:45 AM | 4h 8m | Develped Azure Landing Zone techniques for incorporating brownfield enviornments, consolidating ALZ structure, and incorporating Azure Monitor Baseline Alerts |
