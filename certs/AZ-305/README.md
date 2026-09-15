@@ -20,6 +20,7 @@
 
 
 
+
 ## Artifact Naming Standard
 
 - **Task Brief**: The broad task-level architecture artifact generated from the task brief prompt. Default file pattern: `<Topic Name> task brief.md`.
