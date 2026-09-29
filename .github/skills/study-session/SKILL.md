@@ -7,7 +7,7 @@ argument-hint: "[e.g. 'Begin AZ-305 practice' or 'Start studying ALZ']"
 
 # Study Session
 
-Invoke `Invoke-StudySession` to track a certification exam or Applied Skill session. Exams use structured modes and optional scope. Applied Skills use free-text notes without modes or scope.
+Invoke `Invoke-StudySession` to track a certification exam or Applied Skill session. Exams use structured modes and optional scope. Applied Skills use free-text notes without modes or scope and share `applied-skills/StudyLog.md`.
 
 ## Script Location
 
@@ -23,7 +23,7 @@ Run from the workspace root.
 |:----------|:-------------|:---------|:------------|
 | `Action` | All parameter sets | No; defaults to `Start` | `Start`, `Stop`, or `Log` |
 | `Exam` | Exam only | Exam Start | Active certification code such as `AZ-305` |
-| `AppliedSkill` | Applied Skill only | Applied Skill Start | Topic folder such as `ALZ` or `AMBA` |
+| `AppliedSkill` | Applied Skill only | Applied Skill Start | Catalog ID such as `ALZ`, `AMBA`, or `SQL-AOAG` |
 | `Mode` | Exam only | Exam Start | `Prepare`, `Practice`, or `Review` |
 | `Task` | Exam only | No | Task from the certification `Skills.psd1` |
 | `Domain` | Exam only | No | Domain from the certification `Skills.psd1` |
@@ -72,15 +72,19 @@ For exams, discover active options with:
 
 An Exam Start requires `Exam` and `Mode`. Ask for all missing required values together. Scope is optional; detect the log's `Task`, `Skill`, or `Domain` column and, when useful, offer values from `certs/<Exam>/Skills.psd1` plus a Skip option. Validate supplied scope values exactly, case-insensitively.
 
-For Applied Skills, discover folders containing a study log:
+For Applied Skills, discover IDs from the canonical catalog:
 
 ```powershell
-Get-ChildItem applied-skills -Directory |
-    Where-Object { Test-Path (Join-Path $_.FullName 'StudyLog.md') } |
-    Select-Object -ExpandProperty Name
+Get-Content applied-skills/README.md |
+    ForEach-Object {
+        if ($_ -match '^\|\s*([A-Z0-9]+(?:-[A-Z0-9]+)*)\s*\|') {
+            $Matches[1]
+        }
+    } |
+    Where-Object { $_ -ne 'ID' }
 ```
 
-An Applied Skill Start requires only `AppliedSkill`. Do not prompt for Mode or structured scope. Notes are optional and may be provided at Start, Stop, or both.
+An Applied Skill Start requires only `AppliedSkill`. Do not prompt for Mode or structured scope. Notes are optional and may be provided at Start, Stop, or both. All Applied Skills write to the shared log, whose `Applied Skill` column identifies the track.
 
 A Stop requires no identifier because the script can detect the active session. If the user names a target, pass it through using the correct parameter.
 
@@ -137,6 +141,7 @@ Confirm the action and session number briefly. If execution fails, show the erro
 
 - “Begin AZ-305 practice on Recommend a logging solution” → Exam Start; parse Mode and Task.
 - “Start studying ALZ and explore bootstrap permissions” → Applied Skill Start; put the exploration text in Notes and do not ask for Mode.
+- “Start studying SQL-AOAG” → Applied Skill Start using the catalog ID; a dedicated repository is not required.
 - “End study session” → Stop with automatic active-session detection.
 - “Log ALZ work from 8/21 at 10:30 PM through 8/22 at 12:15 AM” → Log a completed historical Applied Skill session.
 - An identifier that exists as both an exam and an Applied Skill → ask which track type the user means.

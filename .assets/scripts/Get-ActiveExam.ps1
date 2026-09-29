@@ -4,8 +4,8 @@ Parse exam names from the main README certifications table.
 
 .DESCRIPTION
 Reads the certifications table in README.md and returns exam names matching the
-specified status filter. Defaults to returning 'In Progress' exams. Used by
-sibling scripts for dynamic exam discovery instead of hardcoded ValidateSet lists.
+specified status filter. When IncludeAppliedSkills is supplied, also reads IDs
+from the central Applied Skills catalog. Defaults to returning In Progress items.
 
 .CONTEXT
 LearningAzure repository — shared utility for dynamic exam discovery.
@@ -27,6 +27,7 @@ param(
 # Configuration
 $RepoRoot = Resolve-Path -Path (Join-Path -Path $PSScriptRoot -ChildPath '..\..')
 $MainReadme = Join-Path -Path $RepoRoot -ChildPath 'README.md'
+$AppliedSkillsReadme = Join-Path -Path $RepoRoot -ChildPath 'applied-skills\README.md'
 
 $Main = {
     . $Helpers
@@ -75,6 +76,33 @@ $Helpers = {
                 # Match against any requested status value
                 foreach ($s in $Status) {
                     if ($statusCell -like "*$s*") {
+                        $results.Add($itemName)
+                        break
+                    }
+                }
+            }
+        }
+
+        # Preserve IncludeAppliedSkills compatibility by reading the canonical catalog.
+        if ($IncludeAppliedSkills -and (Test-Path -Path $AppliedSkillsReadme)) {
+            foreach ($line in Get-Content -Path $AppliedSkillsReadme -Encoding UTF8) {
+                if ($line -notmatch '^\|\s*([A-Z0-9]+(?:-[A-Z0-9]+)*)\s*\|') {
+                    continue
+                }
+
+                $itemName = $Matches[1]
+                if ($itemName -eq 'ID') {
+                    continue
+                }
+
+                $cells = ($line.TrimStart('|').TrimEnd('|')) -split '\|' |
+                    ForEach-Object { $_.Trim() }
+                if ($cells.Count -lt 4) {
+                    continue
+                }
+
+                foreach ($s in $Status) {
+                    if ($cells[3] -eq $s) {
                         $results.Add($itemName)
                         break
                     }

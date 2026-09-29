@@ -10,9 +10,10 @@ For each active exam:
   - Updates coverage table summary tags (task counts per domain).
   - Updates the coverage dashboard from Per-Skill Progress completion data.
 
-For the root README:
-    - Updates duration day counts and study summary columns in certifications/applied-skills tables.
-  - Generates a 7-day rolling activity table from StudyLog entries,
+For Applied Skills and the root README:
+  - Updates central catalog metrics from the shared Applied Skills study log.
+  - Updates certification duration values and the aggregate Applied Skills summary.
+  - Generates a 7-day rolling activity table from study-log entries,
     replacing the section between COMMIT_STATS_START/END markers.
 
 .CONTEXT
@@ -35,6 +36,8 @@ function Update-CoverageTable {
 $RepoRoot = Resolve-Path -Path (Join-Path -Path $PSScriptRoot -ChildPath '..\..')
 $MainReadme = Join-Path -Path $RepoRoot -ChildPath 'README.md'
 $GetActiveExamScript = Join-Path -Path $PSScriptRoot -ChildPath 'Get-ActiveExam.ps1'
+$AppliedSkillsReadme = Join-Path -Path $RepoRoot -ChildPath 'applied-skills\README.md'
+$AppliedSkillsLog = Join-Path -Path $RepoRoot -ChildPath 'applied-skills\StudyLog.md'
 
 # Applied Skills topics roll up into a single aggregate column in the activity table
 $AppliedSkillsColumn = 'Applied Skills'
@@ -42,27 +45,15 @@ $AppliedSkillsColumn = 'Applied Skills'
 $Main = {
     . $Helpers
 
-    # Capture whether the run is scoped to specific exams before Get-TargetExam is consulted
-    $scopedToExam = [bool]$ExamName
     $exams = Get-TargetExam
 
-    # Build the set of track items to refresh: cert exams, plus (on unscoped runs) in-progress applied-skills topics
+    # Build the set of certification exams to refresh.
     $items = [System.Collections.Generic.List[object]]::new()
     foreach ($exam in $exams) {
         $items.Add([pscustomobject]@{ Name = $exam; Dir = (Join-Path -Path $RepoRoot -ChildPath "certs\$exam") })
     }
-    if (-not $scopedToExam) {
-        $inProgressItems = @(& $GetActiveExamScript -Status 'In Progress' -IncludeAppliedSkills)
-        $inProgressTopics = @($inProgressItems | Where-Object {
-            Test-Path -Path (Join-Path -Path $RepoRoot -ChildPath "applied-skills\$_\StudyLog.md")
-        })
 
-        foreach ($topic in $inProgressTopics) {
-            $items.Add([pscustomobject]@{ Name = $topic; Dir = (Join-Path -Path $RepoRoot -ChildPath "applied-skills\$topic") })
-        }
-    }
-
-    # Update coverage for each track item (coverage/dashboard/per-skill helpers no-op on marker-less topic READMEs)
+    # Update coverage for each certification exam.
     foreach ($item in $items) {
         try {
             Write-Host "`n=== Updating coverage for $($item.Name) ===" -ForegroundColor Cyan
@@ -84,7 +75,11 @@ $Main = {
         }
     }
 
-    # Update In Progress duration once for all exams and applied skills
+    # Refresh the central Applied Skills catalog and root aggregate summary.
+    Update-AppliedSkillCatalog
+    Update-RootAppliedSkillSummary
+
+    # Update In Progress duration once for all certification exams.
     Update-InProgressDuration
 
     # Always use full set of active exams for the activity table, regardless of -ExamName scope
@@ -245,8 +240,16 @@ $Helpers = {
         $filtered = [System.Collections.Generic.List[string]]::new()
         $inserted = $false
         $inSummary = $false
+        $skipBlankBeforeOldSummary = $false
 
         foreach ($line in $lines) {
+
+            # Discard the original spacer because a replacement spacer is inserted with the summary.
+            if ($skipBlankBeforeOldSummary -and [string]::IsNullOrWhiteSpace($line)) {
+                $skipBlankBeforeOldSummary = $false
+                continue
+            }
+            $skipBlankBeforeOldSummary = $false
 
             # Skip everything between STUDY_SUMMARY markers so the block is fully regenerated
             if ($line -match '<!--\s*STUDY_SUMMARY\s*-->') {
@@ -275,6 +278,7 @@ $Helpers = {
                     $filtered.Add($summaryLine)
                 }
                 $inserted = $true
+                $skipBlankBeforeOldSummary = $true
             }
         }
 
@@ -1395,65 +1399,201 @@ $Helpers = {
         return $results.ToArray()
     }
 
-    function Get-AppliedSkillFolder {
-        # Return applied-skills topic folder names that contain a StudyLog.md
-        $root = Join-Path -Path $RepoRoot -ChildPath 'applied-skills'
-        if (-not (Test-Path -Path $root)) { return @() }
+    function Get-AppliedSkillCatalogEntry {
+        # Parse metadata rows from the canonical Applied Skills catalog.
+        $results = [System.Collections.Generic.List[object]]::new()
+        if (-not (Test-Path -Path $AppliedSkillsReadme)) { return @() }
 
-        return Get-ChildItem -Path $root -Directory |
-            Where-Object {
-                $_.Name -notmatch '^\.' -and
-                (Test-Path -Path (Join-Path -Path $_.FullName -ChildPath 'StudyLog.md'))
-            } |
-            ForEach-Object { $_.Name }
-    }
+        foreach ($line in Get-Content -Path $AppliedSkillsReadme -Encoding UTF8) {
+            if ($line -notmatch '^\|\s*([A-Z0-9]+(?:-[A-Z0-9]+)*)\s*\|') { continue }
 
-    function Get-AppliedSkillInProgress {
-        # Return applied-skills topic names whose Status is 'In Progress' in the root README table
-        $results = [System.Collections.Generic.List[string]]::new()
-        if (-not (Test-Path -Path $MainReadme)) { return @() }
+            $id = $Matches[1]
+            if ($id -eq 'ID') { continue }
 
-        foreach ($line in Get-Content -Path $MainReadme -Encoding UTF8) {
-            # Only consider table rows linking into applied-skills/<topic>/README.md
-            if ($line -notmatch '\[\*\*([^\]]+)\*\*\]\(applied-skills/') { continue }
-            $topic = $Matches[1].Trim()
+            $cells = ($line.TrimStart('|').TrimEnd('|')) -split '\|' |
+                ForEach-Object { $_.Trim() }
+            if ($cells.Count -lt 9) { continue }
 
-            $cells = $line -split '\|'
-            if ($cells.Count -ge 5 -and $cells[3].Trim() -like '*In Progress*') {
-                $results.Add($topic)
-            }
+            $results.Add([pscustomobject]@{
+                Id          = $cells[0]
+                Name        = $cells[1]
+                Description = $cells[2]
+                Status      = $cells[3]
+                Repository  = $cells[4]
+            })
         }
 
         return $results.ToArray()
     }
 
-    function Test-AppliedSkillActivity {
-        # True when any applied-skills topic is In Progress or has a StudyLog entry in the last 7 days
-        if (@(Get-AppliedSkillInProgress).Count -gt 0) { return $true }
+    function Get-AppliedSkillLogMetric {
+        # Calculate study metrics from the shared log for one skill or all skills.
+        param([string]$AppliedSkill)
 
-        $cutoff = (Get-Date).Date.AddDays(-6)
+        $result = [pscustomobject]@{
+            FirstDate    = $null
+            LastDate     = $null
+            DaysStudied  = 0
+            TotalMinutes = 0
+        }
+
+        if (-not (Test-Path -Path $AppliedSkillsLog)) { return $result }
+
+        $lines = @(Get-Content -Path $AppliedSkillsLog -Encoding UTF8)
+        $headerLine = $lines |
+            Where-Object { $_ -match '^\|\s*#\s*\|' } |
+            Select-Object -First 1
+        if (-not $headerLine) { return $result }
+
+        $headers = ($headerLine.TrimStart('|').TrimEnd('|')) -split '\|' |
+            ForEach-Object { $_.Trim() }
+        $dateIndex = [array]::IndexOf([string[]]$headers, 'Date')
+        $durationIndex = [array]::IndexOf([string[]]$headers, 'Duration')
+        $skillIndex = [array]::IndexOf([string[]]$headers, 'Applied Skill')
+        if ($dateIndex -lt 0 -or $durationIndex -lt 0 -or $skillIndex -lt 0) { return $result }
+
+        $studiedDates = [System.Collections.Generic.HashSet[string]]::new()
+        $parsedDates = [System.Collections.Generic.List[datetime]]::new()
         $dateFormats = @('M/d/yy', 'M/d/yyyy', 'MM/dd/yy', 'MM/dd/yyyy')
         $culture = [System.Globalization.CultureInfo]::InvariantCulture
         $styles = [System.Globalization.DateTimeStyles]::None
 
-        foreach ($topic in (Get-AppliedSkillFolder)) {
-            $log = Join-Path -Path $RepoRoot -ChildPath "applied-skills\$topic\StudyLog.md"
-            if (-not (Test-Path -Path $log)) { continue }
+        foreach ($line in $lines) {
+            if ($line -notmatch '^\|\s*\d+\s*\|') { continue }
 
-            foreach ($line in Get-Content -Path $log -Encoding UTF8) {
-                if ($line -notmatch '^\|\s*\d+\s*\|') { continue }
+            $cells = ($line.TrimStart('|').TrimEnd('|')) -split '\|'
+            if ($cells.Count -lt $headers.Count) { continue }
 
-                $cells = ($line.TrimStart('|').TrimEnd('|')) -split '\|'
-                if ($cells.Count -lt 5) { continue }
+            $skillCell = $cells[$skillIndex].Trim()
+            if ($AppliedSkill -and $skillCell -ine $AppliedSkill) { continue }
 
-                $dateCell = $cells[1].Trim()
-                [datetime]$parsed = [datetime]::MinValue
-                foreach ($fmt in $dateFormats) {
-                    if ([datetime]::TryParseExact($dateCell, $fmt, $culture, $styles, [ref]$parsed)) {
-                        if ($parsed.Date -ge $cutoff) { return $true }
-                        break
-                    }
+            $durationCell = $cells[$durationIndex].Trim()
+            if ($durationCell -notmatch '^(?:(\d+)\s*h)?\s*(?:(\d+)\s*m)?$') { continue }
+
+            $hours = if ([string]::IsNullOrWhiteSpace($Matches[1])) { 0 } else { [int]$Matches[1] }
+            $minutes = if ([string]::IsNullOrWhiteSpace($Matches[2])) { 0 } else { [int]$Matches[2] }
+            $sessionMinutes = ($hours * 60) + $minutes
+            if ($sessionMinutes -le 0) { continue }
+
+            $dateCell = $cells[$dateIndex].Trim()
+            [datetime]$parsedDate = [datetime]::MinValue
+            foreach ($format in $dateFormats) {
+                if ([datetime]::TryParseExact($dateCell, $format, $culture, $styles, [ref]$parsedDate)) {
+                    $studiedDates.Add($parsedDate.ToString('yyyy-MM-dd')) | Out-Null
+                    $parsedDates.Add($parsedDate)
+                    break
                 }
+            }
+
+            $result.TotalMinutes += $sessionMinutes
+        }
+
+        if ($parsedDates.Count -gt 0) {
+            $result.FirstDate = ($parsedDates | Sort-Object | Select-Object -First 1).ToString('M/d/yy')
+            $result.LastDate = ($parsedDates | Sort-Object -Descending | Select-Object -First 1).ToString('M/d/yy')
+        }
+
+        $result.DaysStudied = $studiedDates.Count
+        return $result
+    }
+
+    function Update-AppliedSkillCatalog {
+        # Regenerate calculated metrics while preserving catalog metadata.
+        [CmdletBinding(SupportsShouldProcess)]
+        param()
+
+        if (-not (Test-Path -Path $AppliedSkillsReadme)) {
+            Write-Warning "Applied Skills README not found: $AppliedSkillsReadme"
+            return
+        }
+
+        $lines = @(Get-Content -Path $AppliedSkillsReadme -Encoding UTF8)
+        $updated = [System.Collections.Generic.List[string]]::new()
+
+        foreach ($line in $lines) {
+            if ($line -notmatch '^\|\s*([A-Z0-9]+(?:-[A-Z0-9]+)*)\s*\|') {
+                $updated.Add($line)
+                continue
+            }
+
+            $id = $Matches[1]
+            if ($id -eq 'ID') {
+                $updated.Add($line)
+                continue
+            }
+
+            $cells = ($line.TrimStart('|').TrimEnd('|')) -split '\|' |
+                ForEach-Object { $_.Trim() }
+            if ($cells.Count -lt 9) {
+                $updated.Add($line)
+                continue
+            }
+
+            $metric = Get-AppliedSkillLogMetric -AppliedSkill $id
+            $cells[5] = if ($metric.FirstDate) { $metric.FirstDate } else { '—' }
+            $cells[6] = if ($metric.LastDate) { $metric.LastDate } else { '—' }
+            $cells[7] = [string]$metric.DaysStudied
+            $cells[8] = ('{0:N1}h' -f [math]::Round($metric.TotalMinutes / 60, 1))
+            $updated.Add('| ' + ($cells -join ' | ') + ' |')
+        }
+
+        if ($WhatIfPreference) {
+            Write-Host "What if: Performing the operation `"Update Applied Skills catalog metrics`" on target `"$AppliedSkillsReadme`"."
+        }
+        else {
+            Set-Content -Path $AppliedSkillsReadme -Value ($updated -join "`n") -Encoding UTF8 -NoNewline
+            Write-Host "Updated Applied Skills catalog metrics in $AppliedSkillsReadme" -ForegroundColor Green
+        }
+    }
+
+    function Update-RootAppliedSkillSummary {
+        # Refresh the aggregate Applied Skills summary in the root README.
+        [CmdletBinding(SupportsShouldProcess)]
+        param()
+
+        $catalogEntries = @(Get-AppliedSkillCatalogEntry)
+        $metric = Get-AppliedSkillLogMetric
+        $inProgressCount = @($catalogEntries | Where-Object { $_.Status -eq 'In Progress' }).Count
+        $hoursText = '{0:N1}h' -f [math]::Round($metric.TotalMinutes / 60, 1)
+        $summary = "**Tracks:** $($catalogEntries.Count) · **In Progress:** $inProgressCount · **Hours Committed:** $hoursText · **Days Studied:** $($metric.DaysStudied)"
+
+        $content = Get-Content -Path $MainReadme -Raw -Encoding UTF8
+        $startMarker = '<!-- APPLIED_SKILLS_SUMMARY -->'
+        $endMarker = '<!-- /APPLIED_SKILLS_SUMMARY -->'
+        if (-not $content.Contains($startMarker) -or -not $content.Contains($endMarker)) {
+            Write-Warning 'Applied Skills summary markers not found in root README.'
+            return
+        }
+
+        $pattern = [regex]::Escape($startMarker) + '[\s\S]*?' + [regex]::Escape($endMarker)
+        $replacement = "$startMarker`n$summary`n$endMarker"
+        $updated = [regex]::Replace($content, $pattern, $replacement)
+
+        if ($WhatIfPreference) {
+            Write-Host "What if: Performing the operation `"Update Applied Skills summary`" on target `"$MainReadme`"."
+        }
+        else {
+            Set-Content -Path $MainReadme -Value $updated -Encoding UTF8 -NoNewline
+            Write-Host "Updated Applied Skills summary in $MainReadme" -ForegroundColor Green
+        }
+    }
+
+    function Test-AppliedSkillActivity {
+        # Return true when a catalog track is active or the shared log has recent activity.
+        if (@(Get-AppliedSkillCatalogEntry | Where-Object { $_.Status -eq 'In Progress' }).Count -gt 0) {
+            return $true
+        }
+
+        if (-not (Test-Path -Path $AppliedSkillsLog)) { return $false }
+
+        $cutoff = (Get-Date).Date.AddDays(-6)
+        foreach ($line in Get-Content -Path $AppliedSkillsLog -Encoding UTF8) {
+            if ($line -notmatch '^\|\s*\d+\s*\|') { continue }
+
+            $cells = ($line.TrimStart('|').TrimEnd('|')) -split '\|'
+            [datetime]$parsed = [datetime]::MinValue
+            if ([datetime]::TryParse($cells[1].Trim(), [ref]$parsed) -and $parsed.Date -ge $cutoff) {
+                return $true
             }
         }
 
@@ -1471,15 +1611,12 @@ $Helpers = {
         $culture = [System.Globalization.CultureInfo]::InvariantCulture
         $styles = [System.Globalization.DateTimeStyles]::None
 
-        # Collect log files: one StudyLog per cert exam; all applied-skills topics roll into one column
+        # Collect one StudyLog per certification plus the shared Applied Skills log.
         $logSources = [System.Collections.Generic.List[object]]::new()
         foreach ($exam in $ExamNames) {
             if ($exam -eq $AppliedSkillsColumn) {
-                foreach ($topic in (Get-AppliedSkillFolder)) {
-                    $logPath = Join-Path -Path $RepoRoot -ChildPath "applied-skills\$topic\StudyLog.md"
-                    if (Test-Path -Path $logPath) {
-                        $logSources.Add([PSCustomObject]@{ Path = $logPath; Exam = $AppliedSkillsColumn })
-                    }
+                if (Test-Path -Path $AppliedSkillsLog) {
+                    $logSources.Add([PSCustomObject]@{ Path = $AppliedSkillsLog; Exam = $AppliedSkillsColumn })
                 }
                 continue
             }

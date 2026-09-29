@@ -3,13 +3,13 @@
 Manage certification and Applied Skill study sessions.
 
 .DESCRIPTION
-Manages study session tracking for certification exams and Applied Skills. Supports Start, Stop, and Log actions:
-Start — inserts a new row at the top of StudyLog.md with session number, date, and start time.
+Manages study session tracking for certification exams and Applied Skills. Applied Skills share one central log. Supports Start, Stop, and Log actions:
+Start — inserts a new row at the top of the appropriate study log with session number, date, and start time.
         Auto-closes any currently active session in another track before opening the new one.
 Stop  — closes the active session with end time and duration.
 Log   — records a completed historical session from supplied start and end timestamps.
 Certification sessions may optionally be tagged with one scope value from Skills.psd1:
-Domain, Skill, or Task. Applied Skill sessions use free-text notes only.
+Domain, Skill, or Task. Applied Skill sessions use a catalog ID and free-text notes only.
 
 .CONTEXT
 LearningAzure repository — certification study tracking.
@@ -57,6 +57,8 @@ function Invoke-StudySession {
 $RepoRoot = Resolve-Path -Path (Join-Path -Path $PSScriptRoot -ChildPath '..\..')
 $script:StudyLogFile = $null
 $GetActiveExamScript = Join-Path -Path $PSScriptRoot -ChildPath 'Get-ActiveExam.ps1'
+$AppliedSkillsReadme = Join-Path -Path $RepoRoot -ChildPath 'applied-skills\README.md'
+$AppliedSkillsLog = Join-Path -Path $RepoRoot -ChildPath 'applied-skills\StudyLog.md'
 $HasStartTime = $PSBoundParameters.ContainsKey('StartTime')
 $HasEndTime = $PSBoundParameters.ContainsKey('EndTime')
 
@@ -112,7 +114,7 @@ $Main = {
             }
 
             $session = Get-NextSessionNumber
-            Add-SessionEntry -SessionNumber $session -Mode $Mode -ScopeValue $scope.Value -Notes $Notes
+            Add-SessionEntry -SessionNumber $session -AppliedSkill $targetTrack.Name -Mode $Mode -ScopeValue $scope.Value -Notes $Notes
             Push-StudyLogChange -SessionNumber $session -Type 'start' -Track $targetTrack
             Show-Confirmation -Message "Study session #$session started for $($targetTrack.Name)"
         }
@@ -140,6 +142,11 @@ $Main = {
 
             if (-not (Test-Path -Path $sourceLog)) {
                 throw "Study log not found at '$sourceLog'."
+            }
+
+            # Prevent a named stop from closing a different active Applied Skill.
+            if ($AppliedSkill) {
+                Confirm-ActiveAppliedSkill -AppliedSkill $sourceTrack.Name
             }
 
             $sourceSession = Get-ActiveSessionNumber -LogFile $sourceLog
@@ -180,7 +187,7 @@ $Main = {
             }
 
             $session = Get-NextSessionNumber
-            Add-SessionEntry -SessionNumber $session -Mode $Mode -ScopeValue $scope.Value -Notes $Notes -StartTime $StartTime -LogFile $logFile -InsertChronologically
+            Add-SessionEntry -SessionNumber $session -AppliedSkill $targetTrack.Name -Mode $Mode -ScopeValue $scope.Value -Notes $Notes -StartTime $StartTime -LogFile $logFile -InsertChronologically
             Close-SessionEntry -SessionNumber $session -LogFile $logFile -EndTime $EndTime
             Push-StudyLogChange -SessionNumber $session -Type 'log' -Track $targetTrack
             Show-LogConfirmation -SessionNumber $session -Track $targetTrack -StartTime $StartTime -EndTime $EndTime
@@ -204,10 +211,12 @@ $Helpers = {
         }
 
         if ($AppliedSkill) {
+            $canonicalId = Resolve-AppliedSkillId -AppliedSkill $AppliedSkill
+
             return [pscustomobject]@{
-                Name   = $AppliedSkill
+                Name   = $canonicalId
                 Type   = 'AppliedSkill'
-                Folder = "applied-skills\$AppliedSkill"
+                Folder = 'applied-skills'
             }
         }
 
@@ -216,6 +225,10 @@ $Helpers = {
 
     function Get-TrackLogPath {
         param([Parameter(Mandatory)] [psobject]$Track)
+
+        if ($Track.Type -eq 'AppliedSkill') {
+            return $AppliedSkillsLog
+        }
 
         return Join-Path -Path $RepoRoot -ChildPath "$($Track.Folder)\StudyLog.md"
     }
@@ -347,6 +360,19 @@ $Helpers = {
             $columns = $firstRow -split '\|'
 
             if (-not [string]::IsNullOrWhiteSpace($columns[3]) -and [string]::IsNullOrWhiteSpace($columns[4])) {
+                if ($track.Type -eq 'AppliedSkill') {
+                    $appliedSkill = Get-StudyLogCellValue -Lines $lines -Row $firstRow -ColumnName 'Applied Skill'
+                    if ([string]::IsNullOrWhiteSpace($appliedSkill)) {
+                        throw "The active Applied Skills session does not identify an Applied Skill in '$logFile'."
+                    }
+
+                    return [pscustomobject]@{
+                        Name   = $appliedSkill
+                        Type   = 'AppliedSkill'
+                        Folder = 'applied-skills'
+                    }
+                }
+
                 return $track
             }
         }
@@ -355,31 +381,69 @@ $Helpers = {
     }
 
     function Get-AllTrackWithLog {
-        # Discover typed track items that have a StudyLog.md file.
+        # Discover certification logs and the single shared Applied Skills log.
         $allTracks = [System.Collections.Generic.List[object]]::new()
+        $certsRoot = Join-Path -Path $RepoRoot -ChildPath 'certs'
 
-        foreach ($trackRoot in @('certs', 'applied-skills')) {
-            $trackDir = Join-Path -Path $RepoRoot -ChildPath $trackRoot
-
-            if (-not (Test-Path -Path $trackDir)) { continue }
-
-            Get-ChildItem -Path $trackDir -Directory |
+        if (Test-Path -Path $certsRoot) {
+            Get-ChildItem -Path $certsRoot -Directory |
                 Where-Object { $_.Name -notmatch '^\.' } |
                 ForEach-Object {
                     $logFile = Join-Path -Path $_.FullName -ChildPath 'StudyLog.md'
 
                     if (Test-Path -Path $logFile) {
-                        $type = if ($trackRoot -eq 'certs') { 'Exam' } else { 'AppliedSkill' }
                         $allTracks.Add([pscustomobject]@{
                             Name   = $_.Name
-                            Type   = $type
-                            Folder = "$trackRoot\$($_.Name)"
+                            Type   = 'Exam'
+                            Folder = "certs\$($_.Name)"
                         })
                     }
                 }
         }
 
+        if (Test-Path -Path $AppliedSkillsLog) {
+            $allTracks.Add([pscustomobject]@{
+                Name   = 'Applied Skills'
+                Type   = 'AppliedSkill'
+                Folder = 'applied-skills'
+            })
+        }
+
         return $allTracks
+    }
+
+    function Get-StudyLogCellValue {
+        # Return a named cell value from a Markdown study-log row.
+        param(
+            [Parameter(Mandatory)]
+            [AllowEmptyString()]
+            [string[]]$Lines,
+
+            [Parameter(Mandatory)]
+            [string]$Row,
+
+            [Parameter(Mandatory)]
+            [string]$ColumnName
+        )
+
+        $headerLine = $Lines |
+            Where-Object { $_ -match '^\|\s*#\s*\|' } |
+            Select-Object -First 1
+
+        if (-not $headerLine) {
+            return $null
+        }
+
+        $headers = ($headerLine.TrimStart('|').TrimEnd('|')) -split '\|' |
+            ForEach-Object { $_.Trim() }
+        $cells = ($Row.TrimStart('|').TrimEnd('|')) -split '\|'
+        $columnIndex = [array]::IndexOf([string[]]$headers, $ColumnName)
+
+        if ($columnIndex -lt 0 -or $columnIndex -ge $cells.Count) {
+            return $null
+        }
+
+        return $cells[$columnIndex].Trim()
     }
 
     function Confirm-ValidExam {
@@ -402,12 +466,51 @@ $Helpers = {
     }
 
     function Confirm-ValidAppliedSkill {
+        # Validate an Applied Skill against the central catalog.
         param([Parameter(Mandatory)] [string]$AppliedSkill)
 
-        $appliedLog = Join-Path -Path $RepoRoot -ChildPath "applied-skills\$AppliedSkill\StudyLog.md"
-        if (Test-Path -Path $appliedLog) { return }
+        Resolve-AppliedSkillId -AppliedSkill $AppliedSkill | Out-Null
+    }
 
-        throw "'$AppliedSkill' is not a valid Applied Skill. Expected applied-skills\$AppliedSkill\StudyLog.md."
+    function Resolve-AppliedSkillId {
+        # Resolve a case-insensitive catalog ID to its canonical spelling.
+        param([Parameter(Mandatory)] [string]$AppliedSkill)
+
+        if (-not (Test-Path -Path $AppliedSkillsReadme)) {
+            throw "Applied Skills catalog not found at '$AppliedSkillsReadme'."
+        }
+
+        $catalogIds = Get-Content -Path $AppliedSkillsReadme -Encoding UTF8 |
+            ForEach-Object {
+                if ($_ -match '^\|\s*([A-Z0-9]+(?:-[A-Z0-9]+)*)\s*\|') {
+                    $Matches[1]
+                }
+            } |
+            Where-Object { $_ -ne 'ID' }
+
+        $canonicalId = $catalogIds |
+            Where-Object { $_ -ieq $AppliedSkill } |
+            Select-Object -First 1
+
+        if ($canonicalId) {
+            return $canonicalId
+        }
+
+        throw "'$AppliedSkill' is not a valid Applied Skill. Catalog IDs: $($catalogIds -join ', ')."
+    }
+
+    function Confirm-ActiveAppliedSkill {
+        # Ensure a named stop matches the Applied Skill recorded on the active row.
+        param([Parameter(Mandatory)] [string]$AppliedSkill)
+
+        $activeTrack = Find-ActiveTrack
+        if (-not $activeTrack -or $activeTrack.Type -ne 'AppliedSkill') {
+            throw 'No active Applied Skill session found.'
+        }
+
+        if ($activeTrack.Name -ine $AppliedSkill) {
+            throw "The active Applied Skill is '$($activeTrack.Name)', not '$AppliedSkill'."
+        }
     }
 
     function Get-StudyLogScopeHeaderFromLine {
@@ -678,6 +781,8 @@ $Helpers = {
             [Parameter(Mandatory)]
             [int]$SessionNumber,
 
+            [string]$AppliedSkill,
+
             [string]$Mode,
 
             [string]$ScopeValue,
@@ -698,6 +803,7 @@ $Helpers = {
         $safeMode  = ConvertTo-LogNote -Notes $Mode
         $safeScope = ConvertTo-LogNote -Notes $ScopeValue
         $safeNotes = ConvertTo-LogNote -Notes $Notes
+        $safeAppliedSkill = ConvertTo-LogNote -Notes $AppliedSkill
         $lines     = Get-Content -Path $LogFile
 
         # Read the declared table shape so certification and Applied Skill logs can differ.
@@ -715,13 +821,14 @@ $Helpers = {
 
         $scopeHeader = Get-StudyLogScopeHeaderFromLine -HeaderLine $headerLine
         $values = @{
-            '#'        = $SessionNumber
-            'Date'     = $date
-            'Start'    = $start
-            'End'      = ''
-            'Duration' = ''
-            'Mode'     = $safeMode
-            'Notes'    = $safeNotes
+            '#'             = $SessionNumber
+            'Date'          = $date
+            'Start'         = $start
+            'End'           = ''
+            'Duration'      = ''
+            'Applied Skill' = $safeAppliedSkill
+            'Mode'          = $safeMode
+            'Notes'         = $safeNotes
         }
         if ($scopeHeader) {
             $values[$scopeHeader] = $safeScope
