@@ -11,19 +11,19 @@ This repository documents my Azure learning journey, from certification prep to 
 
 | Date | AZ-305 | Applied Skills | Total |
 |------|------|------|-------|
+| Tue, Nov 17 |  |  |  |
 | Mon, Nov 16 |  |  |  |
 | Sun, Nov 15 |  |  |  |
 | Sat, Nov 14 |  |  |  |
 | Fri, Nov 13 |  |  |  |
 | Thu, Nov 12 |  |  |  |
 | Wed, Nov 11 |  |  |  |
-| Tue, Nov 10 |  |  |  |
 | **Weekly Total** | **0.0h** | **0.0h** | **0.0h** |
 | ***Running Total*** | ***66.3h*** | ***76.6h*** | ***142.9h*** |
 
 *Activity Levels: 🟡 Low (< 1hr) | 🟢 Medium (1-2hrs) | 🟣 High (> 2hrs)*
 
-*Last updated: November 16, 2026 at 07:21 CST*
+*Last updated: November 17, 2026 at 07:09 CST*
 
 <!-- COMMIT_STATS_END -->
 
@@ -35,7 +35,7 @@ Progress trackers, detailed study notes, practice exams, and hands-on labs:
 
 | Exam | Description | Status | Duration | Days Studied | Hours Committed |
 |------|-------------|--------|---------|-------------|-----------------|
-| [**AZ‑305**](certs/AZ-305/README.md) | Azure Solutions Architect Expert | In Progress | 5/30/26 – 11/16/26 (171d) | 38 | 66.2h |
+| [**AZ‑305**](certs/AZ-305/README.md) | Azure Solutions Architect Expert | In Progress | 5/30/26 – 11/17/26 (172d) | 38 | 66.2h |
 | [**SC‑300**](certs/Inactive/SC-300/README.md) | Microsoft Identity and Access Administrator | Completed | 4/22/26 – 5/29/26 (37d) | 36 | 83.7h |
 | [**AZ‑104**](certs/Inactive/AZ-104/README.md) | Azure Administrator Associate | Completed | 1/15/26 – 3/30/26 (74d) |  | |
 | [**AI‑900**](certs/Inactive/AI-900/README.md) | Azure AI Fundamentals | Completed | 1/14/26 – 2/9/26 (26d) |  |  |
